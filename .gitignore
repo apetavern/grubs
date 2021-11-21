@@ -1,0 +1,6 @@
+Properties
+.csproj
+.intermediate
+.vs
+obj/
+sbox-terryform.csproj
