@@ -11,20 +11,20 @@ on:
     branches: [master]
 
 jobs:
-  build:
-    name: Lint Code Base
-    runs-on: ubuntu-latest
+  check-format:
+    runs-on: windows-latest
 
     steps:
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1.8.2
+        with:
+          dotnet-version: '5.0.x'
+
+      - name: Install dotnet-format tool
+        run: dotnet tool install -g dotnet-format
+
       - name: Checkout Code
         uses: actions/checkout@v2
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
 
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run dotnet format
+        run: dotnet format '.\' --folder --check --verbosity diagnostic
