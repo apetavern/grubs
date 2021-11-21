@@ -6,6 +6,9 @@ namespace TerryForm
 	{
 		public override void Respawn()
 		{
+			Controller = new NoclipController();
+			Camera = new FirstPersonCamera();
+
 			base.Respawn();
 		}
 
