@@ -11,8 +11,7 @@ namespace TerryForm
 		{
 			SetModel( "models/maya_testcube_100.vmdl" );
 
-			// Need a custom controller!!
-			Controller = new WalkController();
+			Controller = new WormController();
 			Camera = new Camera();
 
 			EquipWeapon( new Weapon() );
