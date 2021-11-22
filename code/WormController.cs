@@ -10,7 +10,7 @@ namespace TerryForm
 		public float AirAcceleration => 1200f;
 		public float Acceleration => 4800f;
 		public float Step => 16f;
-		public float Jump => 1024f;
+		public float Jump => 320f;
 		public bool IsGrounded => GroundEntity != null;
 
 		public override void Simulate()
@@ -24,7 +24,7 @@ namespace TerryForm
 		private BBox BBox { get; set; }
 		public BBox CalcBbox()
 		{
-			var bbox = new BBox( new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 72 ) );
+			var bbox = new BBox( new Vector3( -50, -50, 0 ), new Vector3( 50, 50, 100 ) );
 			return bbox;
 		}
 
@@ -65,13 +65,13 @@ namespace TerryForm
 			wishVelocity = wishVelocity.Normal * accel * Time.Delta;
 			mover.Velocity += wishVelocity;
 
+			CheckGroundEntity( ref mover ); // Gravity end
+
 			//
 			// Jumping
 			//
 			if ( Input.Down( InputButton.Jump ) && IsGrounded )
 				DoJump( ref mover );
-
-			CheckGroundEntity( ref mover ); // Gravity end
 
 			float initialZ = mover.Velocity.z;
 
@@ -118,7 +118,8 @@ namespace TerryForm
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
-			mover.Velocity += Vector3.Up * Jump;
+			float initialZ = Velocity.z;
+			mover.Velocity = mover.Velocity.WithZ( initialZ + Jump );
 		}
 
 		/// <summary>
