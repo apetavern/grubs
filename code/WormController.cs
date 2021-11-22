@@ -4,9 +4,10 @@ namespace TerryForm
 {
 	public class WormController : BasePlayerController
 	{
-		public float Drag => 1.25f;
+		public float Drag => 2.0f;
+		public float AirDrag => 1.5f;
 		public float Gravity => 800;
-		public float Speed => 300;
+		public float Acceleration => 1200;
 		public float Step => 16;
 		public bool IsGrounded => GroundEntity != null;
 
@@ -47,7 +48,7 @@ namespace TerryForm
 			Vector3 vel = -Input.Left * Rotation.Forward;
 			vel.z = 0;
 
-			vel = vel.Normal * Speed * Time.Delta;
+			vel = vel.Normal * Acceleration * Time.Delta;
 			mover.Velocity += vel;
 
 			if ( Input.Down( InputButton.Jump ) && IsGrounded )
@@ -57,7 +58,7 @@ namespace TerryForm
 
 			mover.TryMoveWithStep( Time.Delta, Step );
 			mover.TryUnstuck();
-			mover.ApplyFriction( Drag, Time.Delta );
+			mover.ApplyFriction( IsGrounded ? Drag : AirDrag, Time.Delta );
 
 			Position = mover.Position;
 			Velocity = mover.Velocity;
