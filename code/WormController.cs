@@ -111,7 +111,7 @@ namespace TerryForm
 			else
 			{
 				GroundEntity = null;
-				mover.Velocity += Vector3.Down * Gravity * 0.5f * Time.Delta;
+				mover.Velocity += Vector3.Down * Gravity * Time.Delta;
 			}
 		}
 	}
