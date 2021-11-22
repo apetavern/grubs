@@ -32,7 +32,7 @@ namespace TerryForm
 			var targetPosition = pawn.EyePos + Vector3.Right * Distance;
 			Position = Position.LerpTo( targetPosition, 5 * Time.Delta );
 
-			var lookDir = (pawn.EyePos - targetPosition).Normal;
+			var lookDir = (pawn.EyePos - Position).Normal;
 			Rotation = Rotation.LookAt( lookDir, Vector3.Up );
 
 			Viewer = pawn;
