@@ -2,6 +2,7 @@ Properties
 *.csproj
 .intermediate
 .vs
+*.los
 obj/
 tools_asset_info.bin
 code/Properties/launchSettings.json
