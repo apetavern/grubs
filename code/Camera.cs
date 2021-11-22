@@ -24,7 +24,8 @@ namespace TerryForm
 		public override void Update()
 		{
 			var pawn = Local.Pawn;
-			if ( pawn == null ) return;
+			if ( pawn == null )
+				return;
 
 			Distance += -Input.MouseWheel * DistanceScrollRate;
 			Distance = DistanceRange.Clamp( Distance );
