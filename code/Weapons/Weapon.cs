@@ -36,12 +36,10 @@ namespace TerryForm.Weapons
 
 		public override bool CanPrimaryAttack()
 		{
-			var baseResult = base.CanPrimaryAttack();
-
 			//TODO: Check if it's my turn, if it isn't my turn don't allow me to shoot.
 			var myTurn = true;
 
-			if ( baseResult && myTurn )
+			if ( base.CanPrimaryAttack() && myTurn )
 				return true;
 
 			return false;
