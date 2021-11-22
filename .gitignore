@@ -1,9 +1,8 @@
 Properties
-.csproj
+*.csproj
 .intermediate
 .vs
 obj/
-*terryform.csproj
 tools_asset_info.bin
 code/Properties/launchSettings.json
 Properties/launchSettings.json
