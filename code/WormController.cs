@@ -36,11 +36,10 @@ namespace TerryForm
 			EyePosLocal = new Vector3( 0, 0, 64 );
 			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
 
-			var cursorRay = new Ray( Input.Cursor.Origin, Input.Cursor.Direction );
-			var projectedCursorPosition = cursorRay.Project( 512f );
+			var plane = new Plane( Position, Vector3.Right );
+			var projectedCursorPosition = plane.Trace( new Ray( Input.Cursor.Origin, Input.Cursor.Direction ) ) ?? default;
 
 			var eyeDirection = projectedCursorPosition - eyePos;
-			eyeDirection = eyeDirection.WithY( 0 );
 			eyeDirection = eyeDirection.Normal;
 
 			EyeRot = Rotation.LookAt( eyeDirection );
