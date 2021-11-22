@@ -7,8 +7,7 @@ namespace TerryForm.Weapons
 	{
 		public override void Spawn()
 		{
-			CollisionGroup = CollisionGroup.Prop;
-			AddCollisionLayer( CollisionLayer.PhysicsProp );
+			SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 
 			base.Spawn();
 		}
@@ -27,9 +26,9 @@ namespace TerryForm.Weapons
 			return this;
 		}
 
-		public Projectile AddVelocity( Vector3 velocity )
+		public Projectile AddVelocity( Vector3 directionNormal, float velocity )
 		{
-			PhysicsBody.ApplyForce( velocity );
+			PhysicsBody.ApplyForce( directionNormal * PhysicsBody.Mass * velocity );
 			return this;
 		}
 
@@ -39,10 +38,10 @@ namespace TerryForm.Weapons
 			return this;
 		}
 
-		public Projectile FireFrom( Vector3 position, Vector3 velocity )
+		public Projectile FireFrom( Vector3 position, Vector3 directionNormal, float velocity )
 		{
 			var projectile = SpawnAt( position );
-			projectile.AddVelocity( velocity );
+			projectile.AddVelocity( directionNormal, velocity );
 
 			return this;
 		}
