@@ -52,10 +52,10 @@ namespace TerryForm.Weapons
 			if ( !IsServer )
 				return;
 
-			Log.Info( "Shoot something" );
-
-			var tr = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 500 ).Ignore( this ).Run();
-			DebugOverlay.Line( tr.StartPos, tr.EndPos, Color.Yellow, 5f );
+			new ExplodingProjectile()
+				.WithRadius( 60 )
+				.WithModel( "models/rust_props/barrels/fuel_barrel.vmdl" )
+				.FireFrom( Owner.EyePos + Owner.EyeRot.Forward * 70, Owner.EyeRot.Forward.Normal, 40000 );
 		}
 
 		public override bool CanSecondaryAttack() => false;
