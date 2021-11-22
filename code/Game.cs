@@ -1,4 +1,5 @@
 using Sandbox;
+using TerryForm.States;
 using TerryForm.UI;
 
 namespace TerryForm
@@ -6,10 +7,13 @@ namespace TerryForm
 	public partial class Game : Sandbox.Game
 	{
 		public static Game Instance => Current as Game;
+		public static StateHandler StateHandler { get; private set; }
 
 		public Game()
 		{
 			_ = new HudEntity();
+			StateHandler = new();
+			Event.Register( StateHandler );
 		}
 
 		public override void ClientJoined( Client cl )
@@ -18,6 +22,8 @@ namespace TerryForm
 
 			var pawn = new Player();
 			cl.Pawn = pawn;
+
+			StateHandler.State.OnPlayerJoin( pawn );
 
 			pawn.Respawn();
 		}
