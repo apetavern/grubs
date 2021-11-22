@@ -36,7 +36,15 @@ namespace TerryForm
 		/// </summary>
 		private void SetEyePos()
 		{
-			// EyeRot = Input.Rotation; // TODO
+			var cursorRay = new Ray( Input.Cursor.Origin, Input.Cursor.Direction );
+			var projectedCursorPosition = cursorRay.Project( 512f );
+
+			var eyeDirection = projectedCursorPosition - Position;
+			eyeDirection = eyeDirection.WithY( 0 );
+			eyeDirection = eyeDirection.Normal;
+
+			EyeRot = Rotation.LookAt( eyeDirection );
+			DebugOverlay.Line( Position, Position + EyeRot.Forward * 128, 0, false );
 			EyePosLocal = new Vector3( 0, 0, 64 );
 		}
 
