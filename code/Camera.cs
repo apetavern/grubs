@@ -36,7 +36,7 @@ namespace TerryForm
 			var lookDir = (Center - targetPosition).Normal;
 			Rotation = Rotation.LookAt( lookDir, Vector3.Up );
 
-			if ( Input.Down( InputButton.Attack2 ))
+			if ( Input.Down( InputButton.Attack2 ) )
 			{
 				Center += new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y );
 			}
