@@ -1,12 +1,12 @@
 Properties
-.csproj
+*.csproj
 .intermediate
 .vs
 obj/
-*terryform.csproj
 tools_asset_info.bin
 code/Properties/launchSettings.json
 Properties/launchSettings.json
 tools_thumbnail_cache.bin
 maps/_bakeresourcecache/
 *_bakeresourcecache.vpk
+/code/sbox-terryform-master.csproj
