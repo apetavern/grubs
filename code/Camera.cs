@@ -14,7 +14,7 @@ namespace TerryForm
 			Rotation = default;
 		}
 
-		private Range DistanceRange { get; } = new Range( 1024, 4096 );
+		private Range DistanceRange { get; } = new Range( 1024f, 4096f );
 
 		private float Distance { get; set; } = 1024f;
 		private float DistanceScrollRate => 128f;
@@ -41,6 +41,9 @@ namespace TerryForm
 				Center += new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y );
 			}
 
+			FieldOfView = 65;
+			ZNear = 8;
+			ZFar = 25000;
 			Viewer = pawn;
 		}
 	}
