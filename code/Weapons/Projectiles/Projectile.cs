@@ -47,31 +47,12 @@ namespace TerryForm.Weapons
 			return this;
 		}
 
-		public async void ExplodeAfterSecondsAsync( float seconds )
-		{
-			await GameTask.DelaySeconds( seconds );
-
-			Explode();
-		}
-
 		protected override void OnPhysicsCollision( CollisionEventData eventData )
 		{
 			base.OnPhysicsCollision( eventData );
 
-			// Do some fun stuff.
+			if ( eventData.Entity is Player player )
+				Log.Info( $"Deal damage to {player.Name}" );
 		}
-
-		public virtual void Explode()
-		{
-			ExplodeEffects();
-
-			/*
-			 * Deal damage etc here, for example you could find ents within a radius, check the line of sight
-			 * from the projectile and damage them if visible.
-			 */
-		}
-
-		[ClientRpc]
-		public virtual void ExplodeEffects() { }
 	}
 }
