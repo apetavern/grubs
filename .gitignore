@@ -9,3 +9,4 @@ Properties/launchSettings.json
 tools_thumbnail_cache.bin
 maps/_bakeresourcecache/
 *_bakeresourcecache.vpk
+/code/sbox-terryform-master.csproj
