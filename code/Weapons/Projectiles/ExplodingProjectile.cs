@@ -5,11 +5,19 @@ namespace TerryForm.Weapons
 {
 	public partial class ExplodingProjectile : Projectile
 	{
-		private float damageRadius { get; set; } = 5;
+		private float DamageRadius { get; set; } = 20;
+		private int TimesBounced { get; set; }
+		private int MaxBounces { get; set; }
 
 		public ExplodingProjectile WithRadius( float radius )
 		{
-			damageRadius = radius;
+			DamageRadius = radius;
+			return this;
+		}
+
+		public ExplodingProjectile SetMaxBounces( int maxBounces )
+		{
+			MaxBounces = maxBounces;
 			return this;
 		}
 
@@ -22,21 +30,24 @@ namespace TerryForm.Weapons
 
 		protected override void OnPhysicsCollision( CollisionEventData eventData )
 		{
-			Explode();
+			if ( TimesBounced > MaxBounces || MaxBounces == 0 )
+				Explode();
 		}
 
 		private void Explode()
 		{
 			ExplodeEffects();
 
-			var playersWithinRadius = Physics.GetEntitiesInSphere( Position, damageRadius ).OfType<Player>();
+			var playersWithinRadius = Physics.GetEntitiesInSphere( Position, DamageRadius ).OfType<Player>();
 
 			foreach ( var player in playersWithinRadius )
 			{
 				Log.Info( $"Deal damage to {player.Name}" );
 			}
 
-			DebugOverlay.Sphere( Position, damageRadius, Color.Red, false, 2 );
+			DebugOverlay.Sphere( Position, DamageRadius, Color.Red, false, 2 );
+
+			DeleteAsync( 1 );
 		}
 
 		[ClientRpc]
