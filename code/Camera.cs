@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using TerryForm.Utils;
 
 namespace TerryForm
 {
@@ -13,7 +14,10 @@ namespace TerryForm
 			Rotation = default;
 		}
 
-		private float Distance => 1024f;
+		private Range DistanceRange { get; } = new Range( 1024, 4096 );
+
+		private float Distance { get; set; } = 1024f;
+		private float DistanceScrollRate => 128f;
 
 		public override void Update()
 		{
@@ -22,7 +26,9 @@ namespace TerryForm
 
 			// TODO: Check if the pawn is outside the camera's bounds (w/ a 'safe area') and recenter
 
-			// Basic camera
+			Distance += -Input.MouseWheel * DistanceScrollRate;
+			Distance = DistanceRange.Clamp( Distance );
+
 			var targetPosition = pawn.EyePos + Vector3.Right * Distance;
 			Position = Position.LerpTo( targetPosition, 5 * Time.Delta );
 
