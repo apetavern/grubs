@@ -19,9 +19,6 @@ namespace TerryForm
 
 			SetEyePos();
 			Move();
-
-			DebugOverlay.Line( Position, Position + Rotation.Forward * 32, 0, false );
-			DebugOverlay.Sphere( Position + EyePosLocal, 0.5f, Color.Red, false, 0 );
 		}
 
 		private BBox BBox { get; set; }
@@ -36,16 +33,18 @@ namespace TerryForm
 		/// </summary>
 		private void SetEyePos()
 		{
+			EyePosLocal = new Vector3( 0, 0, 64 );
+			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
+
 			var cursorRay = new Ray( Input.Cursor.Origin, Input.Cursor.Direction );
 			var projectedCursorPosition = cursorRay.Project( 512f );
 
-			var eyeDirection = projectedCursorPosition - Position;
+			var eyeDirection = projectedCursorPosition - eyePos;
 			eyeDirection = eyeDirection.WithY( 0 );
 			eyeDirection = eyeDirection.Normal;
 
 			EyeRot = Rotation.LookAt( eyeDirection );
-			DebugOverlay.Line( Position, Position + EyeRot.Forward * 128, 0, false );
-			EyePosLocal = new Vector3( 0, 0, 64 );
+			DebugOverlay.Line( eyePos, eyePos + EyeRot.Forward * 128, 0, false );
 		}
 
 		private void Move()
