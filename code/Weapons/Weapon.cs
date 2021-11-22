@@ -54,8 +54,8 @@ namespace TerryForm.Weapons
 
 			Log.Info( "Shoot something" );
 
-			var tr = Trace.Ray( Owner.EyePos, Owner.EyeRot.Forward * 500 ).Ignore( this ).Run();
-			DebugOverlay.Line( tr.StartPos, tr.EndPos, Color.Yellow );
+			var tr = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 500 ).Ignore( this ).Run();
+			DebugOverlay.Line( tr.StartPos, tr.EndPos, Color.Yellow, 5f );
 		}
 
 		public override bool CanSecondaryAttack() => false;
