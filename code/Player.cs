@@ -30,9 +30,8 @@ namespace TerryForm
 
 		public override void Simulate( Client cl )
 		{
-			DebugOverlay.Sphere( EyePos, 32f, Color.Yellow, false ); // Visualise the pawn since we don't have a model for it yet
-
-			SimulateActiveChild( cl, EquippedWeapon ); //Simulate our currently equipped weapon.
+			//Simulate our currently equipped weapon.
+			SimulateActiveChild( cl, EquippedWeapon );
 
 			base.Simulate( cl );
 		}
