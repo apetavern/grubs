@@ -51,7 +51,9 @@ namespace TerryForm.Weapons
 		{
 			OnFireEffects();
 
-			if ( !IsServer ) return;
+			if ( !IsServer )
+				return;
+
 			Log.Info( "Shoot something" );
 
 			var tr = Trace.Ray( Owner.EyePos, Owner.EyeRot.Forward * 500 ).Ignore( this ).Run();
