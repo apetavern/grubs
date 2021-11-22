@@ -9,13 +9,15 @@ namespace TerryForm
 
 		public override void Respawn()
 		{
-			base.Respawn();
+			SetModel( "models/maya_testcube_100.vmdl" );
 
 			// Need a custom controller!!
 			Controller = new WalkController();
 			Camera = new Camera();
 
 			EquipWeapon( new Weapon() );
+
+			base.Respawn();
 		}
 
 		protected void EquipWeapon( Weapon weapon )
