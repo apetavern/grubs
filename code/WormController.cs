@@ -4,11 +4,13 @@ namespace TerryForm
 {
 	public class WormController : BasePlayerController
 	{
-		public float Drag => 2.0f;
-		public float AirDrag => 1.5f;
-		public float Gravity => 800;
-		public float Acceleration => 1200;
-		public float Step => 16;
+		public float Drag => 8.0f;
+		public float AirDrag => 2.0f;
+		public float Gravity => 800f;
+		public float AirAcceleration => 1200f;
+		public float Acceleration => 4800f;
+		public float Step => 16f;
+		public float Jump => 1024f;
 		public bool IsGrounded => GroundEntity != null;
 
 		public override void Simulate()
@@ -45,21 +47,38 @@ namespace TerryForm
 
 			CheckGroundEntity( ref mover ); // Gravity start
 
-			Vector3 vel = -Input.Left * Rotation.Forward;
-			vel.z = 0;
+			// Accelerate in whatever direction the player is pressing...
+			Vector3 wishVelocity = -Input.Left * Rotation.Forward;
+			// ...but not upwards
+			wishVelocity.z = 0;
 
-			vel = vel.Normal * Acceleration * Time.Delta;
-			mover.Velocity += vel;
+			//
+			// Acceleration
+			//
+			float accel = IsGrounded ? Acceleration : AirAcceleration;
+			wishVelocity = wishVelocity.Normal * accel * Time.Delta;
+			mover.Velocity += wishVelocity;
 
+			//
+			// Jumping
+			//
 			if ( Input.Down( InputButton.Jump ) && IsGrounded )
 				DoJump( ref mover );
 
 			CheckGroundEntity( ref mover ); // Gravity end
 
+			float initialZ = mover.Velocity.z;
+
+			//
+			// Drag / friction
+			//
+			float drag = IsGrounded ? Drag : AirDrag;
+			mover.ApplyFriction( drag, Time.Delta );
+			// Ignore z friction because it makes no sense
+			mover.Velocity.z = initialZ;
+
 			mover.TryMoveWithStep( Time.Delta, Step );
 			mover.TryUnstuck();
-			mover.ApplyFriction( IsGrounded ? Drag : AirDrag, Time.Delta );
-
 			Position = mover.Position;
 			Velocity = mover.Velocity;
 			StayOnGround( mover );
@@ -93,7 +112,7 @@ namespace TerryForm
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
-			mover.Velocity += Vector3.Up * 512;
+			mover.Velocity += Vector3.Up * Jump;
 		}
 
 		/// <summary>
