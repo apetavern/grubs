@@ -13,6 +13,11 @@ namespace TerryForm.Pawn
 		public float Jump => 650f;
 		public bool IsGrounded => GroundEntity != null;
 
+		private TimeSince timeSinceLanding = 1.5f;
+
+		// Cooldown for movement after jumping (seconds)
+		public float MovementCooldown => 1.5f;
+
 		public override void Simulate()
 		{
 			BBox = CalcBbox();
@@ -61,9 +66,12 @@ namespace TerryForm.Pawn
 			//
 			// Acceleration
 			//
-			float accel = IsGrounded ? Acceleration : AirAcceleration;
-			wishVelocity = wishVelocity.Normal * accel * Time.Delta;
-			mover.Velocity += wishVelocity;
+			if ( timeSinceLanding > MovementCooldown )
+			{
+				float accel = IsGrounded ? Acceleration : AirAcceleration;
+				wishVelocity = wishVelocity.Normal * accel * Time.Delta;
+				mover.Velocity += wishVelocity;
+			}
 
 			CheckGroundEntity( ref mover ); // Gravity end
 
@@ -135,8 +143,15 @@ namespace TerryForm.Pawn
 			var targetPos = Position + Vector3.Down;
 			var tr = Trace.Ray( Position, targetPos ).WorldOnly().Size( BBox ).Run();
 
+
 			if ( tr.Hit )
 			{
+				// Have we just landed
+				if ( GroundEntity == null )
+				{
+					timeSinceLanding = 0;
+				}
+
 				GroundEntity = tr.Entity;
 			}
 			else
