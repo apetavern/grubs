@@ -18,7 +18,5 @@ namespace TerryForm.Weapons
 				.WithModel( "models/weapons/shell/shell.vmdl" )
 				.FireFrom( Owner.EyePos + Owner.EyeRot.Forward * 70, Owner.EyeRot.Forward.Normal, 50000 );
 		}
-
-
 	}
 }
