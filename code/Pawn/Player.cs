@@ -1,56 +1,50 @@
-﻿using System;
-using System.Linq;
 using Sandbox;
-using TerryForm.Weapons;
+using System.Collections.Generic;
+using TerryForm.Utils;
 
 namespace TerryForm.Pawn
 {
-	public partial class Player : Sandbox.Player
+	public partial class Player : Entity
 	{
-		[Net] public Weapon EquippedWeapon { get; set; }
+		public List<Worm> Worms { get; set; }
+		public Worm ActiveWorm { get; set; }
 
-		public override void Respawn()
+		public Player()
 		{
-			SetModel( "models/citizenworm.vmdl" );
+			Worms = new();
 
-			Controller = new WormController();
-			Animator = new WormAnimator();
-			Camera = new Camera();
+			for ( int i = 0; i < GameConfig.WormCount; i++ )
+			{
+				var worm = new Worm();
+				worm.Respawn();
+				Worms.Add( worm );
+			}
 
-			// Temporarily select a weapon from all weapons.
-			var randWeapons = Library.GetAll<Weapon>()
-				.Where( weapon => !weapon.IsAbstract )
-				.ToList();
-
-			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
-
-			base.Respawn();
+			ActiveWorm = Worms[0];
 		}
 
-		protected void EquipWeapon( Weapon weapon )
+		public void OnTurnStart()
 		{
-			EquippedWeapon?.Delete();
-
-			EquippedWeapon = weapon;
-			EquippedWeapon?.OnCarryStart( this );
+			ActiveWorm = Worms[0];
 		}
 
-		public override void Simulate( Client cl )
+		public void OnTurnEnd()
 		{
-			//Simulate our currently equipped weapon.
-			SimulateActiveChild( cl, EquippedWeapon );
+			if ( ActiveWorm.Health < 0 )
+			{
+				ActiveWorm.OnKilled();
+			}
 
-			base.Simulate( cl );
+			RotateWorms();
 		}
 
-		public override void OnKilled()
+		public void RotateWorms()
 		{
-			base.OnKilled();
+			var current = Worms[0];
+			Worms.RemoveAt( 0 );
+			Worms.Add( current );
 
-			EnableDrawing = false;
-			EnableAllCollisions = false;
-
-			EquippedWeapon?.OnOwnerKilled();
+			ActiveWorm = Worms[0];
 		}
 	}
 }

@@ -39,7 +39,7 @@ namespace TerryForm.Pawn
 
 			// Hold pose (can we get away with setting this in the weapon itself?)
 			{
-				if ( Pawn is Player { EquippedWeapon: Weapon weapon } )
+				if ( Pawn is Worm { EquippedWeapon: Weapon weapon } )
 				{
 					SetParam( "holdpose", (int)weapon.HoldPose );
 				}

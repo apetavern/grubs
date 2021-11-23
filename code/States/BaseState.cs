@@ -1,15 +1,16 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using TerryForm.Pawn;
 
 namespace TerryForm.States
 {
 	public abstract partial class BaseState : BaseNetworkable
 	{
 		public virtual string StateName => "";
-		public virtual int StateDuration => 0;
+		public virtual int StateDurationSeconds => 0;
 		public float StateEndTime { get; set; }
 
-		public List<Player> PlayerList = new();
+		public List<Pawn.Player> PlayerList = new();
 
 		public float TimeLeft
 		{
@@ -21,9 +22,9 @@ namespace TerryForm.States
 
 		public void Start()
 		{
-			if ( Host.IsServer && StateDuration > 0 )
+			if ( Host.IsServer && StateDurationSeconds > 0 )
 			{
-				StateEndTime = Time.Now + StateDuration;
+				StateEndTime = Time.Now + StateDurationSeconds;
 			}
 
 			OnStart();
@@ -40,18 +41,27 @@ namespace TerryForm.States
 			OnFinish();
 		}
 
-		public void AddPlayer( Player player )
+		public void AddPlayer( Pawn.Player player )
 		{
 			Host.AssertServer();
 
 			if ( !PlayerList.Contains( player ) ) PlayerList.Add( player );
 		}
 
-		public virtual void OnPlayerSpawn( Player player ) { }
+		public void RotatePlayers()
+		{
+			Host.AssertServer();
 
-		public virtual void OnPlayerJoin( Player player ) { }
+			var current = Game.StateHandler.Players[0];
+			Game.StateHandler.Players.RemoveAt( 0 );
+			Game.StateHandler.Players.Add( current );
+		}
 
-		public virtual void OnPlayerLeave( Player player ) { }
+		public virtual void OnPlayerSpawn( Pawn.Player player ) { }
+
+		public virtual void OnPlayerJoin( Pawn.Player player ) { }
+
+		public virtual void OnPlayerLeave( Pawn.Player player ) { }
 
 		public virtual void OnTick()
 		{

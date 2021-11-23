@@ -1,4 +1,4 @@
-﻿using Sandbox;
+﻿using TerryForm.Utils;
 
 namespace TerryForm.States
 {
@@ -8,21 +8,22 @@ namespace TerryForm.States
 
 		protected override void OnStart()
 		{
-			Log.Info( $"Starting {StateName} State" );
 			base.OnStart();
 		}
 
 		protected override void OnFinish()
 		{
-			Log.Info( $"Ending {StateName} State" );
 			base.OnFinish();
 		}
 
-		public override void OnPlayerJoin( Player player )
+		public override void OnPlayerJoin( Pawn.Player player )
 		{
 			AddPlayer( player );
 
-			base.OnPlayerJoin( player );
+			if ( PlayerList.Count >= GameConfig.MinimumPlayersToStart )
+			{
+				Game.StateHandler.ChangeState( new PlayingState() );
+			}
 		}
 	}
 }

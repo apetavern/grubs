@@ -1,5 +1,4 @@
 using Sandbox;
-using TerryForm.Pawn;
 using TerryForm.States;
 using TerryForm.UI;
 
@@ -21,12 +20,19 @@ namespace TerryForm
 		{
 			base.ClientJoined( cl );
 
-			var pawn = new Pawn.Player();
-			cl.Pawn = pawn;
+			var player = new Pawn.Player();
+			cl.Pawn = player.ActiveWorm;
 
-			StateHandler.State.OnPlayerJoin( pawn );
+			StateHandler.OnPlayerJoin( player );
+		}
 
-			pawn.Respawn();
+		/// <summary>
+		/// Temporary ServerCmd to discern what State is currently active.
+		/// </summary>
+		[ServerCmd]
+		public static void CheckState()
+		{
+			Log.Trace( StateHandler.State.StateName );
 		}
 	}
 }
