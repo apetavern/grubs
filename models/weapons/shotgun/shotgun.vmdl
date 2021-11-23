@@ -27,12 +27,8 @@
 						remaps = 
 						[
 							{
-								from = "phong2.vmat"
-								to = "models/weapons/bazooka.vmat"
-							},
-							{
 								from = "phong1.vmat"
-								to = "models/weapons/bazooka_translucency.vmat"
+								to = "models/weapons/shotgun/materials/shotgun_colors.vmat"
 							},
 						]
 						use_global_default = false
@@ -48,7 +44,7 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = "hold_L"
-						relative_origin = [ 19.4487, 0.485087, 9.937422 ]
+						relative_origin = [ 25.370922, 0.0, 2.450957 ]
 						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
@@ -61,7 +57,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/weapons/bazooka.fbx"
+						filename = "models/weapons/shotgun/shotgun.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -74,14 +70,14 @@
 							exclude_by_default = true
 							exception_list = 
 							[
-								"polySurface1",
+								"pCube5",
 							]
 						}
 					},
 				]
 			},
 		]
-		model_archetype = ""
+		model_archetype = "default"
 		primary_associated_entity = ""
 		anim_graph_name = ""
 	}
