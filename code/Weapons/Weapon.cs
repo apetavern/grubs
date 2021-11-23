@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using TerryForm.Pawn;
 
 namespace TerryForm.Weapons
 {
@@ -7,6 +8,7 @@ namespace TerryForm.Weapons
 		public virtual string WeaponName => "";
 		public virtual string ModelPath => "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl";
 		public override float PrimaryRate => 2f;
+		public virtual HoldPose HoldPose => HoldPose.Shotgun;
 
 		public override void Spawn()
 		{

@@ -1,16 +1,16 @@
 ﻿using Sandbox;
 
-namespace TerryForm
+namespace TerryForm.Pawn
 {
 	public class WormController : BasePlayerController
 	{
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
-		public float AirAcceleration => 1200f;
-		public float Acceleration => 2800f;
+		public float AirAcceleration => 600f;
+		public float Acceleration => 1000f;
 		public float Step => 16f;
-		public float Jump => 600f;
+		public float Jump => 650f;
 		public bool IsGrounded => GroundEntity != null;
 
 		public override void Simulate()
@@ -54,7 +54,7 @@ namespace TerryForm
 			CheckGroundEntity( ref mover ); // Gravity start
 
 			// Accelerate in whatever direction the player is pressing...
-			Vector3 wishVelocity = -Input.Left * Rotation.Forward;
+			Vector3 wishVelocity = -Input.Left * Vector3.Forward;
 			// ...but not upwards
 			wishVelocity.z = 0;
 
@@ -71,13 +71,15 @@ namespace TerryForm
 			// Jumping
 			//
 			if ( Input.Pressed( InputButton.Jump ) && IsGrounded )
+			{
 				DoJump( ref mover );
-
-			float initialZ = mover.Velocity.z;
+				AddEvent( "jump" );
+			}
 
 			//
 			// Drag / friction
 			//
+			float initialZ = mover.Velocity.z;
 			float drag = IsGrounded ? Drag : AirDrag;
 			mover.ApplyFriction( drag, Time.Delta );
 			// Ignore z friction because it makes no sense
@@ -120,9 +122,9 @@ namespace TerryForm
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
-			float initialZ = Velocity.z;
-			mover.Velocity = mover.Velocity.WithZ( initialZ + Jump );
+			mover.Velocity = mover.Velocity.WithZ( Jump );
 			GroundEntity = null;
+			Pawn.GroundEntity = null;
 		}
 
 		/// <summary>

@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using TerryForm.Weapons;
 
-namespace TerryForm
+namespace TerryForm.Pawn
 {
 	public partial class Player : Sandbox.Player
 	{
@@ -12,6 +12,7 @@ namespace TerryForm
 			SetModel( "models/citizenworm.vmdl" );
 
 			Controller = new WormController();
+			Animator = new WormAnimator();
 			Camera = new Camera();
 
 			EquipWeapon( new Weapon() );
