@@ -38,7 +38,7 @@ namespace TerryForm.Weapons
 
 		public override bool CanPrimaryAttack()
 		{
-			//TODO: Check if it's my turn, if it isn't my turn don't allow me to shoot.
+			// TODO: Check if it's my turn, if it isn't my turn don't allow me to shoot.
 			var myTurn = true;
 
 			if ( base.CanPrimaryAttack() && myTurn )
@@ -54,10 +54,11 @@ namespace TerryForm.Weapons
 			if ( !IsServer )
 				return;
 
-			Log.Info( "Shoot something" );
-
-			var tr = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 500 ).Ignore( this ).Run();
-			DebugOverlay.Line( tr.StartPos, tr.EndPos, Color.Yellow, 5f );
+			new ExplodingProjectile()
+				.WithRadius( 60 )
+				.SetMaxBounces( 1 )
+				.WithModel( "models/rust_props/barrels/fuel_barrel.vmdl" )
+				.FireFrom( Owner.EyePos + Owner.EyeRot.Forward * 70, Owner.EyeRot.Forward.Normal, 50000 );
 		}
 
 		public override bool CanSecondaryAttack() => false;
