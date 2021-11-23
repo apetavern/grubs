@@ -39,7 +39,6 @@ namespace TerryForm.Weapons
 		private void Bounce()
 		{
 			TimesBounced++;
-
 			// Add some more velocity per bounce?
 		}
 
@@ -50,9 +49,7 @@ namespace TerryForm.Weapons
 			var playersWithinRadius = Physics.GetEntitiesInSphere( Position, DamageRadius ).OfType<Player>();
 
 			foreach ( var player in playersWithinRadius )
-			{
 				Log.Info( $"Deal damage to {player.Name}" );
-			}
 
 			DebugOverlay.Sphere( Position, DamageRadius, Color.Red, false, 2 );
 
