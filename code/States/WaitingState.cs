@@ -8,17 +8,15 @@ namespace TerryForm.States
 
 		protected override void OnStart()
 		{
-			Log.Info( $"Starting {StateName} State" );
 			base.OnStart();
 		}
 
 		protected override void OnFinish()
 		{
-			Log.Info( $"Ending {StateName} State" );
 			base.OnFinish();
 		}
 
-		public override void OnPlayerJoin( Player player )
+		public override void OnPlayerJoin( Pawn.Player player )
 		{
 			AddPlayer( player );
 

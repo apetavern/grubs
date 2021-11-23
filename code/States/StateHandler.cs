@@ -24,6 +24,16 @@ namespace TerryForm.States
 		private void Tick()
 		{
 			State?.OnTick();
+
+			if ( State is WaitingState ) CheckMinimumPlayers();
+		}
+
+		private void CheckMinimumPlayers()
+		{
+			if ( Client.All.Count >= 2 && State is WaitingState )
+			{
+				ChangeState( new PlayingState() );
+			}
 		}
 	}
 }

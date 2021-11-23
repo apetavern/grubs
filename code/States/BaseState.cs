@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using TerryForm.Pawn;
 
 namespace TerryForm.States
 {
@@ -9,7 +10,7 @@ namespace TerryForm.States
 		public virtual int StateDuration => 0;
 		public float StateEndTime { get; set; }
 
-		public List<Player> PlayerList = new();
+		public List<Pawn.Player> PlayerList = new();
 
 		public float TimeLeft
 		{
@@ -40,18 +41,27 @@ namespace TerryForm.States
 			OnFinish();
 		}
 
-		public void AddPlayer( Player player )
+		public void AddPlayer( Pawn.Player player )
 		{
 			Host.AssertServer();
 
 			if ( !PlayerList.Contains( player ) ) PlayerList.Add( player );
 		}
 
-		public virtual void OnPlayerSpawn( Player player ) { }
+		public void RotatePlayers()
+		{
+			Host.AssertServer();
 
-		public virtual void OnPlayerJoin( Player player ) { }
+			var current = PlayerList[0];
+			PlayerList.RemoveAt( 0 );
+			PlayerList.Add( current );
+		}
 
-		public virtual void OnPlayerLeave( Player player ) { }
+		public virtual void OnPlayerSpawn( Pawn.Player player ) { }
+
+		public virtual void OnPlayerJoin( Pawn.Player player ) { }
+
+		public virtual void OnPlayerLeave( Pawn.Player player ) { }
 
 		public virtual void OnTick()
 		{

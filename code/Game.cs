@@ -22,11 +22,9 @@ namespace TerryForm
 			base.ClientJoined( cl );
 
 			var pawn = new Pawn.Player();
-			cl.Pawn = pawn;
+			cl.Pawn = pawn.ActiveWorm;
 
 			StateHandler.State.OnPlayerJoin( pawn );
-
-			pawn.Respawn();
 		}
 	}
 }
