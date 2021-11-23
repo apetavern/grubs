@@ -12,6 +12,7 @@ namespace TerryForm
 			SetModel( "models/citizenworm.vmdl" );
 
 			Controller = new WormController();
+			Animator = new WormAnimator();
 			Camera = new Camera();
 
 			EquipWeapon( new Weapon() );
