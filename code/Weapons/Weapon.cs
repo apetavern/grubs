@@ -3,12 +3,12 @@ using TerryForm.Pawn;
 
 namespace TerryForm.Weapons
 {
-	public partial class Weapon : BaseWeapon
+	public abstract partial class Weapon : BaseWeapon
 	{
 		public virtual string WeaponName => "";
-		public virtual string ModelPath => "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl";
+		public virtual string ModelPath => "";
 		public override float PrimaryRate => 2f;
-		public virtual HoldPose HoldPose => HoldPose.Shotgun;
+		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 
 		public override void Spawn()
 		{
@@ -56,12 +56,10 @@ namespace TerryForm.Weapons
 			if ( !IsServer )
 				return;
 
-			new ExplodingProjectile()
-				.WithRadius( 60 )
-				.SetMaxBounces( 1 )
-				.WithModel( "models/rust_props/barrels/fuel_barrel.vmdl" )
-				.FireFrom( Owner.EyePos + Owner.EyeRot.Forward * 70, Owner.EyeRot.Forward.Normal, 50000 );
+			Fire();
 		}
+
+		public virtual void Fire() { }
 
 		public override bool CanSecondaryAttack() => false;
 
