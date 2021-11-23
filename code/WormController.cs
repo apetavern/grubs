@@ -5,12 +5,12 @@ namespace TerryForm
 	public class WormController : BasePlayerController
 	{
 		public float Drag => 8.0f;
-		public float AirDrag => 2.0f;
+		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
 		public float AirAcceleration => 1200f;
-		public float Acceleration => 4800f;
+		public float Acceleration => 2800f;
 		public float Step => 16f;
-		public float Jump => 320f;
+		public float Jump => 600f;
 		public bool IsGrounded => GroundEntity != null;
 
 		public override void Simulate()
@@ -70,7 +70,7 @@ namespace TerryForm
 			//
 			// Jumping
 			//
-			if ( Input.Down( InputButton.Jump ) && IsGrounded )
+			if ( Input.Pressed( InputButton.Jump ) && IsGrounded )
 				DoJump( ref mover );
 
 			float initialZ = mover.Velocity.z;
@@ -87,7 +87,9 @@ namespace TerryForm
 			mover.TryUnstuck();
 			Position = mover.Position;
 			Velocity = mover.Velocity;
-			StayOnGround( mover );
+
+			if ( IsGrounded )
+				StayOnGround( mover );
 		}
 
 		/// <summary>
@@ -120,6 +122,7 @@ namespace TerryForm
 		{
 			float initialZ = Velocity.z;
 			mover.Velocity = mover.Velocity.WithZ( initialZ + Jump );
+			GroundEntity = null;
 		}
 
 		/// <summary>
