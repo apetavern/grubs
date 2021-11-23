@@ -1,4 +1,5 @@
 using Sandbox;
+using TerryForm.Pawn;
 using TerryForm.States;
 using TerryForm.UI;
 
@@ -20,7 +21,7 @@ namespace TerryForm
 		{
 			base.ClientJoined( cl );
 
-			var pawn = new Player();
+			var pawn = new Pawn.Player();
 			cl.Pawn = pawn;
 
 			StateHandler.State.OnPlayerJoin( pawn );
