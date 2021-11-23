@@ -24,7 +24,7 @@ namespace TerryForm
 		private BBox BBox { get; set; }
 		public BBox CalcBbox()
 		{
-			var bbox = new BBox( new Vector3( -50, -50, 0 ), new Vector3( 50, 50, 100 ) );
+			var bbox = new BBox( new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 32 ) );
 			return bbox;
 		}
 
@@ -33,7 +33,7 @@ namespace TerryForm
 		/// </summary>
 		private void SetEyePos()
 		{
-			EyePosLocal = new Vector3( 0, 0, 64 );
+			EyePosLocal = new Vector3( 0, 0, 24 );
 			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
 
 			var plane = new Plane( Position, Vector3.Right );

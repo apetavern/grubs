@@ -9,7 +9,7 @@ namespace TerryForm
 
 		public override void Respawn()
 		{
-			SetModel( "models/maya_testcube_100.vmdl" );
+			SetModel( "models/citizenworm.vmdl" );
 
 			Controller = new WormController();
 			Camera = new Camera();
