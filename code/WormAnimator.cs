@@ -17,13 +17,12 @@ namespace TerryForm
 			}
 
 			{
-				// TODO:
-				// - How do we handle offsetting the player's model from their bbox?
-				// - How do we actually calculate incline properly?
+				// Trace down to ground, then work out the angle based on where the player's facing
 				var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).WorldOnly().Ignore( Pawn ).Run();
-				float incline = (1.0f - tr.Normal.z) * 360f;
+				float incline = Pawn.Rotation.Forward.Angle( tr.Normal ) - 90f;
 
-				SetParam( "incline", -incline );
+				// TODO: How do we handle offsetting the player's model from their bbox?
+				SetParam( "incline", incline );
 			}
 
 			// Velocity
