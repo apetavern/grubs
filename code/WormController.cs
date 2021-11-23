@@ -8,7 +8,7 @@ namespace TerryForm
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
 		public float AirAcceleration => 1200f;
-		public float Acceleration => 2800f;
+		public float Acceleration => 1000f;
 		public float Step => 16f;
 		public float Jump => 600f;
 		public bool IsGrounded => GroundEntity != null;
@@ -54,7 +54,7 @@ namespace TerryForm
 			CheckGroundEntity( ref mover ); // Gravity start
 
 			// Accelerate in whatever direction the player is pressing...
-			Vector3 wishVelocity = -Input.Left * Rotation.Forward;
+			Vector3 wishVelocity = -Input.Left * Vector3.Forward;
 			// ...but not upwards
 			wishVelocity.z = 0;
 
