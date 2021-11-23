@@ -7,6 +7,9 @@ Layer0
 	//---- PBR ----
 	F_SPECULAR 1
 
+	//---- Translucent ----
+	F_TRANSLUCENT 1
+
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
@@ -15,7 +18,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/weapons/shotgun_colors.psd"
+	TextureColor "models/weapons/bazooka/materials/bazooka_color.psd"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -28,13 +31,13 @@ Layer0
 	g_flDirectionalLightmapStrength "1.000"
 
 	//---- Metalness ----
-	g_flMetalness "0.881"
+	g_flMetalness "0.000"
 
 	//---- Normal ----
 	TextureNormal "materials/default/default_normal.tga"
 
 	//---- Roughness ----
-	TextureRoughness "models/weapons/shotgun_roughness.psd"
+	TextureRoughness "materials/default/default_rough.tga"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
@@ -42,4 +45,8 @@ Layer0
 	g_vTexCoordOffset "[0.000 0.000]"
 	g_vTexCoordScale "[1.000 1.000]"
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
+	TextureTranslucency "models/weapons/bazooka/materials/bazooka_translucency.psd"
 }

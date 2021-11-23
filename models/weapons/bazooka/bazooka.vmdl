@@ -6,6 +6,19 @@
 		children = 
 		[
 			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "hold_L"
+						origin = [ 0.0, 0.0, 0.0 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						do_not_discard = true
+					},
+				]
+			},
+			{
 				_class = "MaterialGroupList"
 				children = 
 				[
@@ -14,16 +27,31 @@
 						remaps = 
 						[
 							{
-								from = "phong1.vmat"
-								to = "models/weapons/shell_colors.vmat"
+								from = "phong2.vmat"
+								to = "models/weapons/bazooka/materials/bazooka.vmat"
 							},
 							{
-								from = "phong2.vmat"
-								to = "models/weapons/shell_flame.vmat"
+								from = "phong1.vmat"
+								to = "models/weapons/bazooka/materials/bazooka_translucency.vmat"
 							},
 						]
 						use_global_default = false
 						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "muzzle"
+						parent_bone = "hold_L"
+						relative_origin = [ 19.4487, 0.485087, 9.937422 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
 					},
 				]
 			},
@@ -33,43 +61,27 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/weapons/shell.fbx"
+						filename = "models/weapons/bazooka/bazooka.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
 							exception_list = 
 							[
-								"shell",
-								"flames",
+								"polySurface1",
 							]
 						}
 					},
 				]
 			},
-			{
-				_class = "PhysicsShapeList"
-				children = 
-				[
-					{
-						_class = "PhysicsShapeCapsule"
-						parent_bone = ""
-						surface_prop = "default"
-						collision_prop = "default"
-						radius = 3.8
-						point0 = [ -2.16293, 0.0, 0.0 ]
-						point1 = [ 1.819, 0.0, 0.0 ]
-					},
-				]
-			},
 		]
-		model_archetype = ""
+		model_archetype = "default"
 		primary_associated_entity = ""
 		anim_graph_name = ""
 	}
