@@ -15,7 +15,7 @@ namespace TerryForm.Pawn
 			Animator = new WormAnimator();
 			Camera = new Camera();
 
-			EquipWeapon( new Weapon() );
+			EquipWeapon( new Bazooka() );
 
 			base.Respawn();
 		}
