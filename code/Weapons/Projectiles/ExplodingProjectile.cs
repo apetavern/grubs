@@ -30,8 +30,17 @@ namespace TerryForm.Weapons
 
 		protected override void OnPhysicsCollision( CollisionEventData eventData )
 		{
-			if ( TimesBounced > MaxBounces || MaxBounces == 0 )
+			if ( TimesBounced >= MaxBounces || MaxBounces == 0 )
 				Explode();
+			else
+				Bounce();
+		}
+
+		private void Bounce()
+		{
+			TimesBounced++;
+
+			// Add some more velocity per bounce?
 		}
 
 		private void Explode()
@@ -47,10 +56,13 @@ namespace TerryForm.Weapons
 
 			DebugOverlay.Sphere( Position, DamageRadius, Color.Red, false, 2 );
 
-			DeleteAsync( 1 );
+			Delete();
 		}
 
 		[ClientRpc]
-		public virtual void ExplodeEffects() { }
+		public virtual void ExplodeEffects()
+		{
+			Particles.Create( "particles/explosion_fireball.vpcf", Position );
+		}
 	}
 }
