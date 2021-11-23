@@ -157,7 +157,6 @@ namespace TerryForm.Pawn
 				{
 					float jumpDelta = jumpStartZ - mover.Position.z;
 					timeUntilCanMove = jumpDelta * MovementCooldownMultiplier;
-					Log.Trace( jumpDelta );
 				}
 
 				GroundEntity = tr.Entity;

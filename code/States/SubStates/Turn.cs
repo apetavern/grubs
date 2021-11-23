@@ -17,7 +17,7 @@ namespace TerryForm.States.SubStates
 		protected override void OnStart()
 		{
 			base.OnStart();
-
+			AssignPawn();
 			ActivePlayer.OnTurnStart();
 		}
 
@@ -27,6 +27,18 @@ namespace TerryForm.States.SubStates
 
 			ActivePlayer.OnTurnEnd();
 			RotatePlayers();
+		}
+
+		[ClientRpc]
+		public static void AssignPawn()
+		{
+			var stateHandler = Game.StateHandler;
+			if ( stateHandler == null ) return;
+
+			if ( stateHandler.State is PlayingState )
+			{
+				Local.Client.Pawn = (stateHandler.State as PlayingState).Turn.ActivePlayer.ActiveWorm;
+			}
 		}
 	}
 }

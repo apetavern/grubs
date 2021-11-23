@@ -45,6 +45,5 @@ namespace TerryForm.Pawn
 
 			ActiveWorm = Worms[0];
 		}
-
 	}
 }

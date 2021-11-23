@@ -52,9 +52,9 @@ namespace TerryForm.States
 		{
 			Host.AssertServer();
 
-			var current = PlayerList[0];
-			PlayerList.RemoveAt( 0 );
-			PlayerList.Add( current );
+			var current = Game.StateHandler.Players[0];
+			Game.StateHandler.Players.RemoveAt( 0 );
+			Game.StateHandler.Players.Add( current );
 		}
 
 		public virtual void OnPlayerSpawn( Pawn.Player player ) { }

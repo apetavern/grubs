@@ -14,7 +14,9 @@ namespace TerryForm.States
 		{
 			if ( Host.IsServer )
 			{
-				Turn = new Turn( new Pawn.Player() );
+				var stateHandler = Game.StateHandler;
+
+				Turn = new Turn( stateHandler.Players[0] );
 				Turn?.Start();
 
 				base.OnStart();
@@ -30,7 +32,7 @@ namespace TerryForm.States
 		public void ChangeTurn()
 		{
 			Turn?.Finish();
-			Turn = new Turn( PlayerList[0] );
+			Turn = new Turn( Game.StateHandler.Players[0] );
 			Turn?.Start();
 
 			Log.Info( Turn.ActivePlayer.Name );
