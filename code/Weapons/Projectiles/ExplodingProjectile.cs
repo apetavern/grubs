@@ -5,9 +5,9 @@ namespace TerryForm.Weapons
 {
 	public partial class ExplodingProjectile : Projectile
 	{
-		private float DamageRadius { get; set; } = 20;
-		private int TimesBounced { get; set; }
-		private int MaxBounces { get; set; }
+		protected float DamageRadius { get; set; } = 20;
+		protected int TimesBounced { get; set; }
+		protected int MaxBounces { get; set; }
 
 		public ExplodingProjectile WithRadius( float radius )
 		{
