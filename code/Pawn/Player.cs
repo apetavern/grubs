@@ -1,4 +1,6 @@
-﻿using Sandbox;
+﻿using System;
+using System.Linq;
+using Sandbox;
 using TerryForm.Weapons;
 
 namespace TerryForm.Pawn
@@ -15,7 +17,12 @@ namespace TerryForm.Pawn
 			Animator = new WormAnimator();
 			Camera = new Camera();
 
-			EquipWeapon( new Bazooka() );
+			// Temporarily select a weapon from all weapons.
+			var randWeapons = Library.GetAll<Weapon>()
+				.Where( weapon => !weapon.IsAbstract )
+				.ToList();
+
+			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
 
 			base.Respawn();
 		}
