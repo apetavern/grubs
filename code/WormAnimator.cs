@@ -19,7 +19,7 @@ namespace TerryForm
 				// TODO:
 				// - How do we handle offsetting the player's model from their bbox?
 				// - How do we actually calculate incline properly?
-				var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down*128 ).WorldOnly().Ignore( Pawn ).Run();
+				var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).WorldOnly().Ignore( Pawn ).Run();
 				float incline = (1.0f - tr.Normal.z) * 360f;
 				DebugOverlay.ScreenText( incline.ToString() );
 
