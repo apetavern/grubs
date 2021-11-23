@@ -16,6 +16,7 @@ namespace TerryForm
 				SetParam( "aimangle", aimAngle );
 			}
 
+			// Calculate incline
 			{
 				// Trace down to ground, then work out the angle based on where the player's facing
 				var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).WorldOnly().Ignore( Pawn ).Run();
@@ -23,6 +24,11 @@ namespace TerryForm
 
 				// TODO: How do we handle offsetting the player's model from their bbox?
 				SetParam( "incline", incline );
+			}
+
+			// Grounded check
+			{
+				SetParam( "grounded", Pawn.GroundEntity != null );
 			}
 
 			// Velocity
@@ -44,17 +50,23 @@ namespace TerryForm
 			}
 		}
 
+		/// <summary>
+		/// Rotate the player when they try to look backwards
+		/// </summary>
 		private void DoRotation()
 		{
-			//
-			// Rotate the player when we try to look backwards
-			//
 			float playerFacing = Pawn.EyeRot.Forward.Dot( Pawn.Rotation.Forward );
 			if ( playerFacing < 0 )
 			{
 				Rotation *= Rotation.From( 0, 180, 0 ); // Super janky
 				Pawn.ResetInterpolation();
 			}
+		}
+
+		public override void OnEvent( string name )
+		{
+			base.OnEvent( name );
+			Trigger( name );
 		}
 	}
 }

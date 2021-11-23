@@ -10,7 +10,7 @@ namespace TerryForm
 		public float AirAcceleration => 1200f;
 		public float Acceleration => 1000f;
 		public float Step => 16f;
-		public float Jump => 600f;
+		public float Jump => 650f;
 		public bool IsGrounded => GroundEntity != null;
 
 		public override void Simulate()
@@ -66,12 +66,14 @@ namespace TerryForm
 			mover.Velocity += wishVelocity;
 
 			CheckGroundEntity( ref mover ); // Gravity end
-
 			//
 			// Jumping
 			//
 			if ( Input.Pressed( InputButton.Jump ) && IsGrounded )
+			{
 				DoJump( ref mover );
+				AddEvent( "jump" );
+			}
 
 			float initialZ = mover.Velocity.z;
 
