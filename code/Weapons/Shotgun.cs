@@ -16,5 +16,10 @@ namespace TerryForm.Weapons
 
 			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
 		}
+
+		public override void OnFireEffects()
+		{
+			Particles.Create( "particles/pistol_muzzleflash.vpcf", this, "muzzle" );
+		}
 	}
 }
