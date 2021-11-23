@@ -1,17 +1,23 @@
 ﻿using Sandbox;
 
-namespace TerryForm
+namespace TerryForm.Pawn
 {
 	public class WormController : BasePlayerController
 	{
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
-		public float AirAcceleration => 1200f;
-		public float Acceleration => 2800f;
+		public float AirAcceleration => 600f;
+		public float Acceleration => 1000f;
 		public float Step => 16f;
-		public float Jump => 600f;
+		public float Jump => 650f;
 		public bool IsGrounded => GroundEntity != null;
+
+		private RealTimeUntil timeUntilCanMove = -1f;
+		private float jumpStartZ;
+
+		// Cooldown multiplier for jumping; how many seconds should we wait for each unit we fell
+		public float MovementCooldownMultiplier => 0.01f;
 
 		public override void Simulate()
 		{
@@ -54,30 +60,39 @@ namespace TerryForm
 			CheckGroundEntity( ref mover ); // Gravity start
 
 			// Accelerate in whatever direction the player is pressing...
-			Vector3 wishVelocity = -Input.Left * Rotation.Forward;
+			Vector3 wishVelocity = -Input.Left * Vector3.Forward;
 			// ...but not upwards
 			wishVelocity.z = 0;
 
 			//
 			// Acceleration
 			//
-			float accel = IsGrounded ? Acceleration : AirAcceleration;
-			wishVelocity = wishVelocity.Normal * accel * Time.Delta;
-			mover.Velocity += wishVelocity;
+			if ( timeUntilCanMove <= 0 )
+			{
+				float accel = IsGrounded ? Acceleration : AirAcceleration;
+				wishVelocity = wishVelocity.Normal * accel * Time.Delta;
+				mover.Velocity += wishVelocity;
+			}
 
 			CheckGroundEntity( ref mover ); // Gravity end
+
 
 			//
 			// Jumping
 			//
-			if ( Input.Pressed( InputButton.Jump ) && IsGrounded )
-				DoJump( ref mover );
-
-			float initialZ = mover.Velocity.z;
+			if ( timeUntilCanMove <= 0 )
+			{
+				if ( Input.Pressed( InputButton.Jump ) && IsGrounded )
+				{
+					DoJump( ref mover );
+					AddEvent( "jump" );
+				}
+			}
 
 			//
 			// Drag / friction
 			//
+			float initialZ = mover.Velocity.z;
 			float drag = IsGrounded ? Drag : AirDrag;
 			mover.ApplyFriction( drag, Time.Delta );
 			// Ignore z friction because it makes no sense
@@ -120,9 +135,11 @@ namespace TerryForm
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
-			float initialZ = Velocity.z;
-			mover.Velocity = mover.Velocity.WithZ( initialZ + Jump );
+			mover.Velocity = mover.Velocity.WithZ( Jump );
 			GroundEntity = null;
+			Pawn.GroundEntity = null;
+
+			jumpStartZ = mover.Position.z;
 		}
 
 		/// <summary>
@@ -135,6 +152,14 @@ namespace TerryForm
 
 			if ( tr.Hit )
 			{
+				// Have we just landed?
+				if ( GroundEntity == null )
+				{
+					float jumpDelta = jumpStartZ - mover.Position.z;
+					timeUntilCanMove = jumpDelta * MovementCooldownMultiplier;
+					Log.Trace( jumpDelta );
+				}
+
 				GroundEntity = tr.Entity;
 			}
 			else
