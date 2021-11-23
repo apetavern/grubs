@@ -36,13 +36,13 @@ namespace TerryForm.Weapons
 				Bounce();
 		}
 
-		private void Bounce()
+		protected void Bounce()
 		{
 			TimesBounced++;
 			// Add some more velocity per bounce?
 		}
 
-		private void Explode()
+		protected void Explode()
 		{
 			ExplodeEffects();
 
