@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using System;
+using TerryForm.Weapons;
 
 namespace TerryForm
 {
@@ -11,7 +12,7 @@ namespace TerryForm
 
 			// Aim angle
 			{
-				float aimAngle = -Pawn.EyeRot.Pitch().Clamp( -65f, 35f );
+				float aimAngle = -Pawn.EyeRot.Pitch().Clamp( -80f, 35f );
 				SetParam( "aimangle", aimAngle );
 			}
 
@@ -21,7 +22,6 @@ namespace TerryForm
 				// - How do we actually calculate incline properly?
 				var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).WorldOnly().Ignore( Pawn ).Run();
 				float incline = (1.0f - tr.Normal.z) * 360f;
-				DebugOverlay.ScreenText( incline.ToString() );
 
 				SetParam( "incline", -incline );
 			}
@@ -32,9 +32,16 @@ namespace TerryForm
 				SetParam( "velocity", velocity );
 			}
 
-			// TODO: Link this to current weapon (can we get away with setting this in the weapon itself?)
+			// Hold pose (can we get away with setting this in the weapon itself?)
 			{
-				SetParam( "holdpose", (int)HoldPose.Bazooka );
+				if ( Pawn is Player { EquippedWeapon: Weapon weapon } )
+				{
+					SetParam( "holdpose", (int)weapon.HoldPose );
+				}
+				else
+				{
+					SetParam( "holdpose", (int)HoldPose.None );
+				}
 			}
 		}
 
