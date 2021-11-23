@@ -7,7 +7,7 @@ namespace TerryForm
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
-		public float AirAcceleration => 1200f;
+		public float AirAcceleration => 600f;
 		public float Acceleration => 1000f;
 		public float Step => 16f;
 		public float Jump => 650f;
@@ -76,11 +76,10 @@ namespace TerryForm
 				AddEvent( "jump" );
 			}
 
-			float initialZ = mover.Velocity.z;
-
 			//
 			// Drag / friction
 			//
+			float initialZ = mover.Velocity.z;
 			float drag = IsGrounded ? Drag : AirDrag;
 			mover.ApplyFriction( drag, Time.Delta );
 			// Ignore z friction because it makes no sense
@@ -123,9 +122,9 @@ namespace TerryForm
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
-			float initialZ = Velocity.z;
-			mover.Velocity = mover.Velocity.WithZ( initialZ + Jump );
+			mover.Velocity = mover.Velocity.WithZ( Jump );
 			GroundEntity = null;
+			Pawn.GroundEntity = null;
 		}
 
 		/// <summary>
