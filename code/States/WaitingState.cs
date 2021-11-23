@@ -1,4 +1,4 @@
-﻿using Sandbox;
+﻿using TerryForm.Utils;
 
 namespace TerryForm.States
 {
@@ -20,7 +20,10 @@ namespace TerryForm.States
 		{
 			AddPlayer( player );
 
-			base.OnPlayerJoin( player );
+			if ( PlayerList.Count >= GameConfig.MinimumPlayersToStart )
+			{
+				Game.StateHandler.ChangeState( new PlayingState() );
+			}
 		}
 	}
 }

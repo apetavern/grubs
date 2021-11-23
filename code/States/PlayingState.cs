@@ -7,7 +7,7 @@ namespace TerryForm.States
 	public partial class PlayingState : BaseState
 	{
 		public override string StateName => "PLAYING";
-		public override int StateDuration => 1200;
+		public override int StateDurationSeconds => 1200;
 		public Turn Turn { get; set; }
 
 		protected override void OnStart()

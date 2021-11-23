@@ -33,19 +33,6 @@ namespace TerryForm.States
 		private void Tick()
 		{
 			State?.OnTick();
-
-			if ( State is WaitingState )
-			{
-				CheckMinimumPlayers();
-			}
-		}
-
-		private void CheckMinimumPlayers()
-		{
-			if ( Players.Count >= 2 && State is WaitingState )
-			{
-				ChangeState( new PlayingState() );
-			}
 		}
 
 		public void OnStateChanged( BaseState oldState, BaseState newState )

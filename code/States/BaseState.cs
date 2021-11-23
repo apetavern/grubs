@@ -7,7 +7,7 @@ namespace TerryForm.States
 	public abstract partial class BaseState : BaseNetworkable
 	{
 		public virtual string StateName => "";
-		public virtual int StateDuration => 0;
+		public virtual int StateDurationSeconds => 0;
 		public float StateEndTime { get; set; }
 
 		public List<Pawn.Player> PlayerList = new();
@@ -22,9 +22,9 @@ namespace TerryForm.States
 
 		public void Start()
 		{
-			if ( Host.IsServer && StateDuration > 0 )
+			if ( Host.IsServer && StateDurationSeconds > 0 )
 			{
-				StateEndTime = Time.Now + StateDuration;
+				StateEndTime = Time.Now + StateDurationSeconds;
 			}
 
 			OnStart();

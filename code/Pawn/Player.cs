@@ -1,5 +1,6 @@
 using Sandbox;
 using System.Collections.Generic;
+using TerryForm.Utils;
 
 namespace TerryForm.Pawn
 {
@@ -12,7 +13,7 @@ namespace TerryForm.Pawn
 		{
 			Worms = new();
 
-			for ( int i = 0; i < 1; i++ )
+			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
 				var worm = new Worm();
 				worm.Respawn();
