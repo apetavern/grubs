@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-namespace TerryForm
+namespace TerryForm.Pawn
 {
 	public class WormController : BasePlayerController
 	{

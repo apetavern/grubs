@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using TerryForm.Weapons;
 
-namespace TerryForm
+namespace TerryForm.Pawn
 {
 	public partial class Player : Sandbox.Player
 	{

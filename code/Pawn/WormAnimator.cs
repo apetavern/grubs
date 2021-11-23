@@ -2,7 +2,7 @@
 using System;
 using TerryForm.Weapons;
 
-namespace TerryForm
+namespace TerryForm.Pawn
 {
 	public class WormAnimator : PawnAnimator
 	{
