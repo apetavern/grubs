@@ -66,6 +66,7 @@ namespace TerryForm
 			mover.Velocity += wishVelocity;
 
 			CheckGroundEntity( ref mover ); // Gravity end
+
 			//
 			// Jumping
 			//
