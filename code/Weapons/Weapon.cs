@@ -13,6 +13,8 @@ namespace TerryForm.Weapons
 			base.Spawn();
 
 			SetModel( ModelPath );
+
+			EnableHideInFirstPerson = false;
 		}
 
 		public override void ActiveStart( Entity ent )
