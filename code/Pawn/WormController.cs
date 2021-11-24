@@ -49,7 +49,6 @@ namespace TerryForm.Pawn
 			eyeDirection = eyeDirection.Normal;
 
 			EyeRot = Rotation.LookAt( eyeDirection );
-			DebugOverlay.Line( eyePos, eyePos + EyeRot.Forward * 128, 0, false );
 		}
 
 		private void Move()
