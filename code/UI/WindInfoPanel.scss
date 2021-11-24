@@ -8,11 +8,9 @@ WindInfoPanel {
     flex-direction: row;
     width: 256px;
     color: white;
-
-    background-image: url( /textures/ui/ui-mask.png );
+    background-image: url( /textures/ui/background-wind.png );
     background-size: -100% 100%;
     background-position: center;
-
     padding: 8px 20px;
 
     > div {

@@ -15,7 +15,7 @@ GameInfoPanel {
 }
 
 .turn-container {
-    background-image: url( /textures/ui/ui-mask.png );
+    background-image: url( /textures/ui/background-turn.png );
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -24,7 +24,7 @@ GameInfoPanel {
 }
 
 .state-container {
-    background-image: url( /textures/ui/ui-mask.png );
+    background-image: url( /textures/ui/background-state.png );
     background-size: -100%;
     background-position: center;
     background-repeat: no-repeat;
