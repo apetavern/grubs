@@ -14,10 +14,12 @@ namespace TerryForm.UI.World
 		public WormNametag()
 		{
 			StyleSheet.Load( "/UI/World/WormNametag.scss" );
-			Add.Label( "Froggy", "worm-name" );
 
-			float width = 350;
-			float height = 125;
+			Add.Label( "Froggy", "worm-name" );
+			Add.Label( "100", "worm-health" );
+
+			float width = 500;
+			float height = 250;
 
 			float halfWidth = width / 2;
 			float halfHeight = height / 2;
@@ -25,6 +27,7 @@ namespace TerryForm.UI.World
 			PanelBounds = new Rect( -halfWidth, -halfHeight, width, height );
 
 			SceneObject.ZBufferMode = ZBufferMode.None;
+			SceneObject.Flags.BloomLayer = false;
 			WorldScale = 5f;
 		}
 
