@@ -21,7 +21,9 @@ namespace TerryForm.States
 
 		public void Start()
 		{
-			if ( Host.IsServer && StateDurationSeconds > 0 )
+			Log.Info( $"🟢 {StateName} state started" );
+
+			if ( StateDurationSeconds > 0 )
 			{
 				StateEndTime = Time.Now + StateDurationSeconds;
 			}
@@ -31,11 +33,10 @@ namespace TerryForm.States
 
 		public void Finish()
 		{
-			if ( Host.IsServer )
-			{
-				StateEndTime = 0f;
-				PlayerList.Clear();
-			}
+			Log.Info( $"🔴 {StateName} state ended." );
+
+			StateEndTime = 0f;
+			PlayerList.Clear();
 
 			OnFinish();
 		}
@@ -72,13 +73,10 @@ namespace TerryForm.States
 
 		public virtual void OnTick()
 		{
-			if ( Host.IsServer )
+			if ( StateEndTime > 0f && Time.Now >= StateEndTime )
 			{
-				if ( StateEndTime > 0f && Time.Now >= StateEndTime )
-				{
-					StateEndTime = 0f;
-					OnTimeUp();
-				}
+				StateEndTime = 0f;
+				OnTimeUp();
 			}
 		}
 

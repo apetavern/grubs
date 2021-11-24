@@ -43,12 +43,7 @@ namespace TerryForm.Weapons
 
 		public override bool CanPrimaryAttack()
 		{
-			var isMyTurn = (Owner as Worm)?.IsMyTurn ?? false;
-
-			if ( base.CanPrimaryAttack() && isMyTurn )
-				return true;
-
-			return false;
+			return base.CanPrimaryAttack();
 		}
 
 		public override void AttackPrimary()

@@ -12,6 +12,10 @@ namespace TerryForm
 		public Game()
 		{
 			_ = new HudEntity();
+
+			if ( IsClient )
+				return;
+
 			StateHandler = new();
 			Event.Register( StateHandler );
 		}
@@ -21,7 +25,7 @@ namespace TerryForm
 			base.ClientJoined( cl );
 
 			var player = new Pawn.Player();
-			cl.Pawn = player.ActiveWorm;
+			player.InitializeFromClient( cl );
 
 			StateHandler.OnPlayerJoin( player );
 		}
