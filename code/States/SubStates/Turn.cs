@@ -28,12 +28,17 @@ namespace TerryForm.States.SubStates
 			ActivePlayer?.OnTurnStart();
 		}
 
+		protected override void OnTimeUp()
+		{
+			OnFinish();
+		}
+
 		protected override void OnFinish()
 		{
 			base.OnFinish();
 
 			// Let the player know that their turn has ended, useful to kill their ActiveWorm.
-			//ActivePlayer?.OnTurnEnd();
+			ActivePlayer?.OnTurnEnd();
 
 			// Let the playing state know this turn has ended so that it can start another.
 			PlayingState?.OnTurnFinished();

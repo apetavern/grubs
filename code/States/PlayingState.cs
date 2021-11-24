@@ -31,6 +31,13 @@ namespace TerryForm.States
 			Turn?.Start();
 		}
 
+		public override void OnTick()
+		{
+			base.OnTick();
+
+			Turn?.OnTick();
+		}
+
 		// Debug method for changing current state to PlayingState.
 		[ServerCmd]
 		public static void PlayState()

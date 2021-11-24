@@ -36,12 +36,14 @@ namespace TerryForm.Pawn
 			PickNextWorm();
 			ActiveWorm?.OnTurnStarted();
 
-			Log.Info( $"🐛 {ClientOwner.Name}'s turn has started using Worm {ActiveWorm}." );
+			Log.Info( $"🐛 {ClientOwner.Name}'s turn has started using worm {ActiveWorm}." );
 		}
 
 		public void OnTurnEnd()
 		{
 			ActiveWorm?.OnTurnEnded();
+
+			Log.Info( $"🐛 {ClientOwner.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
 
 		private void RotateWorms()
