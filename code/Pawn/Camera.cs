@@ -14,7 +14,7 @@ namespace TerryForm.Pawn
 			Rotation = default;
 		}
 
-		private Range DistanceRange { get; } = new Range( 1024f, 2048f );
+		private Range DistanceRange { get; } = new Range( 512f, 2048f );
 
 		private float Distance { get; set; } = 1024f;
 		private float DistanceScrollRate => 32f;

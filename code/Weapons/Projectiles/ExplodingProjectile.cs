@@ -56,10 +56,20 @@ namespace TerryForm.Weapons
 			Delete();
 		}
 
+		public override void OnTick()
+		{
+			if ( IsServer || IsAuthority )
+			{
+				var direction = Velocity.Normal;
+				Rotation = Rotation.LookAt( direction );
+			}
+		}
+
 		[ClientRpc]
 		public virtual void ExplodeEffects()
 		{
 			Particles.Create( "particles/explosion_fireball.vpcf", Position );
+			_ = new Sandbox.ScreenShake.Perlin( 1f, 1f, 1f, 1f );
 		}
 	}
 }
