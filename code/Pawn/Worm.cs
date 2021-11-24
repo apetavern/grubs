@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using System.Linq;
+using TerryForm.Utils;
 using TerryForm.Weapons;
 
 namespace TerryForm.Pawn
@@ -22,6 +23,9 @@ namespace TerryForm.Pawn
 				.ToList();
 
 			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
+
+			// Random worm name
+			Name = Rand.FromArray( GameConfig.WormNames );
 
 			base.Respawn();
 		}

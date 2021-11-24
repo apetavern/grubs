@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
 using TerryForm.Pawn;
 
 namespace TerryForm.UI.World
@@ -11,12 +12,15 @@ namespace TerryForm.UI.World
 
 		private Vector3 Offset => Vector3.Up * 48;
 
+		private Label name;
+		private Label health;
+
 		public WormNametag()
 		{
 			StyleSheet.Load( "/UI/World/WormNametag.scss" );
 
-			Add.Label( "Froggy", "worm-name" );
-			Add.Label( "100", "worm-health" );
+			name = Add.Label( "Froggy", "worm-name" );
+			health = Add.Label( "100", "worm-health" );
 
 			float width = 500;
 			float height = 250;
@@ -28,7 +32,6 @@ namespace TerryForm.UI.World
 
 			SceneObject.ZBufferMode = ZBufferMode.None;
 			SceneObject.Flags.BloomLayer = false;
-			WorldScale = 5f;
 		}
 
 		private void Update()
@@ -36,6 +39,9 @@ namespace TerryForm.UI.World
 			//
 			// Update data...
 			//
+
+			name.Text = Worm.Name.ToString();
+			health.Text = Worm.Health.ToString();
 		}
 
 		public override void Tick()
@@ -44,6 +50,14 @@ namespace TerryForm.UI.World
 
 			Position = Worm.EyePos + Offset;
 			Rotation = Rotation.LookAt( Vector3.Right );
+
+			if ( Local.Pawn.Camera is TerryForm.Pawn.Camera camera )
+			{
+				WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y ) ) * 5f;
+			}
+
+
+			Update();
 		}
 	}
 }
