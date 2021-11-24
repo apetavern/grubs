@@ -57,6 +57,14 @@ namespace TerryForm.States
 			Game.StateHandler.Players.Add( current );
 		}
 
+		public void SetTimeRemaining( int newDuration )
+		{
+			Host.AssertServer();
+
+			StateDurationSeconds = newDuration;
+			StateEndTime = Time.Now + StateDurationSeconds;
+		}
+
 		public virtual void OnPlayerSpawn( Pawn.Player player ) { }
 
 		public virtual void OnPlayerJoin( Pawn.Player player ) { }
