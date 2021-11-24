@@ -11,7 +11,7 @@ namespace TerryForm.Pawn
 
 			// Aim angle
 			{
-				float aimAngle = -Pawn.EyeRot.Pitch().Clamp( -80f, 35f );
+				float aimAngle = -Pawn.EyeRot.Pitch().Clamp( -80f, 75f );
 				SetParam( "aimangle", aimAngle );
 			}
 
