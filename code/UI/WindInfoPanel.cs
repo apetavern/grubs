@@ -10,7 +10,15 @@ namespace TerryForm.UI
 		{
 			StyleSheet.Load( "/Code/UI/WindInfoPanel.scss" );
 
-			Add.Panel( "wind-inner" );
+			int segmentCount = 9;
+			for ( int i = 0; i < segmentCount; ++i )
+			{
+				Add.Icon( "arrow_left" );
+			}
+			for ( int i = 0; i < segmentCount; ++i )
+			{
+				Add.Icon( "arrow_right" );
+			}
 		}
 	}
 }
