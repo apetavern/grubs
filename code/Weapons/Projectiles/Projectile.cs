@@ -1,5 +1,4 @@
 ﻿using Sandbox;
-using System.Threading;
 
 namespace TerryForm.Weapons
 {
@@ -53,5 +52,8 @@ namespace TerryForm.Weapons
 			if ( eventData.Entity is Player player )
 				Log.Info( $"Deal damage to {player.Name}" );
 		}
+
+		[Event.Tick]
+		public virtual void OnTick() { }
 	}
 }
