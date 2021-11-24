@@ -53,7 +53,7 @@ namespace TerryForm.UI.World
 
 			if ( Local.Pawn.Camera is TerryForm.Pawn.Camera camera )
 			{
-				WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y ) ) * 5f;
+				WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 5f;
 			}
 
 
