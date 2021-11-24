@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using TerryForm.Pawn;
+using TerryForm.States.SubStates;
+using TerryForm.Utils;
 
 namespace TerryForm.Weapons
 {
@@ -9,6 +11,7 @@ namespace TerryForm.Weapons
 		public virtual string ModelPath => "";
 		public override float PrimaryRate => 2f;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
+		public virtual bool IsFiredTurnEnding => false;
 
 		public override void Spawn()
 		{
@@ -33,20 +36,9 @@ namespace TerryForm.Weapons
 			OnActiveEndEffects();
 		}
 
-		public override void Simulate( Client player )
-		{
-			base.Simulate( player );
-		}
-
 		public override bool CanPrimaryAttack()
 		{
-			// TODO: Check if it's my turn, if it isn't my turn don't allow me to shoot.
-			var myTurn = true;
-
-			if ( base.CanPrimaryAttack() && myTurn )
-				return true;
-
-			return false;
+			return base.CanPrimaryAttack();
 		}
 
 		public override void AttackPrimary()
@@ -59,7 +51,24 @@ namespace TerryForm.Weapons
 			Fire();
 		}
 
-		public virtual void Fire() { }
+		public async virtual void Fire()
+		{
+			if ( !IsFiredTurnEnding )
+				return;
+
+			/* 
+			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
+			 * Temporary delay to simulate this.
+			 */
+			await GameTask.DelaySeconds( 1 );
+
+			Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+		}
+
+		public override void SimulateAnimator( PawnAnimator anim )
+		{
+			anim.SetParam( "holdpose", (int)HoldPose );
+		}
 
 		public override bool CanSecondaryAttack() => false;
 

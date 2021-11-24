@@ -1,4 +1,4 @@
-using Sandbox;
+﻿using Sandbox;
 using System.Collections.Generic;
 using TerryForm.UI.World;
 using TerryForm.Utils;
@@ -8,7 +8,9 @@ namespace TerryForm.Pawn
 	public partial class Player : Entity
 	{
 		public List<Worm> Worms { get; set; }
-		public Worm ActiveWorm { get; set; }
+		[Net] public Worm ActiveWorm { get; set; }
+		public Client ClientOwner { get; set; }
+		[Net] public long ClientId { get; set; }
 
 		public Player()
 		{
@@ -20,32 +22,45 @@ namespace TerryForm.Pawn
 				worm.Respawn();
 				Worms.Add( worm );
 			}
+		}
 
-			ActiveWorm = Worms[0];
+		public void InitializeFromClient( Client cl )
+		{
+			ClientOwner = cl;
+			ClientId = cl.PlayerId;
+
+			PickNextWorm();
 		}
 
 		public void OnTurnStart()
 		{
-			ActiveWorm = Worms[0];
+			PickNextWorm();
+			ActiveWorm?.OnTurnStarted();
+
+			Log.Info( $"🐛 {ClientOwner.Name}'s turn has started using worm {ActiveWorm}." );
 		}
 
 		public void OnTurnEnd()
 		{
-			if ( ActiveWorm.Health < 0 )
-			{
-				ActiveWorm.OnKilled();
-			}
+			ActiveWorm?.OnTurnEnded();
 
-			RotateWorms();
+			Log.Info( $"🐛 {ClientOwner.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
 
-		public void RotateWorms()
+		private void RotateWorms()
 		{
 			var current = Worms[0];
+
 			Worms.RemoveAt( 0 );
 			Worms.Add( current );
+		}
 
+		public void PickNextWorm()
+		{
+			RotateWorms();
 			ActiveWorm = Worms[0];
+
+			ClientOwner.Pawn = ActiveWorm;
 		}
 	}
 }

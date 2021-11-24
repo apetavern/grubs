@@ -6,7 +6,7 @@ namespace TerryForm.States
 	public abstract partial class BaseState : BaseNetworkable
 	{
 		public virtual string StateName => "";
-		public virtual int StateDurationSeconds => 0;
+		public virtual int StateDurationSeconds { get; protected set; } = 0;
 		public float StateEndTime { get; set; }
 
 		public List<Pawn.Player> PlayerList = new();
@@ -21,7 +21,9 @@ namespace TerryForm.States
 
 		public void Start()
 		{
-			if ( Host.IsServer && StateDurationSeconds > 0 )
+			Log.Info( $"🟢 {StateName} state started" );
+
+			if ( StateDurationSeconds > 0 )
 			{
 				StateEndTime = Time.Now + StateDurationSeconds;
 			}
@@ -31,11 +33,10 @@ namespace TerryForm.States
 
 		public void Finish()
 		{
-			if ( Host.IsServer )
-			{
-				StateEndTime = 0f;
-				PlayerList.Clear();
-			}
+			Log.Info( $"🔴 {StateName} state ended." );
+
+			StateEndTime = 0f;
+			PlayerList.Clear();
 
 			OnFinish();
 		}
@@ -56,6 +57,14 @@ namespace TerryForm.States
 			Game.StateHandler.Players.Add( current );
 		}
 
+		public void SetTimeRemaining( int newDuration )
+		{
+			Host.AssertServer();
+
+			StateDurationSeconds = newDuration;
+			StateEndTime = Time.Now + StateDurationSeconds;
+		}
+
 		public virtual void OnPlayerSpawn( Pawn.Player player ) { }
 
 		public virtual void OnPlayerJoin( Pawn.Player player ) { }
@@ -64,13 +73,10 @@ namespace TerryForm.States
 
 		public virtual void OnTick()
 		{
-			if ( Host.IsServer )
+			if ( StateEndTime > 0f && Time.Now >= StateEndTime )
 			{
-				if ( StateEndTime > 0f && Time.Now >= StateEndTime )
-				{
-					StateEndTime = 0f;
-					OnTimeUp();
-				}
+				StateEndTime = 0f;
+				OnTimeUp();
 			}
 		}
 

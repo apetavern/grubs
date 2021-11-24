@@ -2,12 +2,17 @@
 using System.Linq;
 using TerryForm.Utils;
 using TerryForm.Weapons;
+using TerryForm.States.SubStates;
 
 namespace TerryForm.Pawn
 {
 	public partial class Worm : Sandbox.Player
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
+		[Net] public bool IsCurrentTurn { get; set; }
+
+		// Temporary to allow respawning, we don't want respawning later so we can remove this.
+		private TimeSince TimeSinceDied { get; set; }
 
 		public override void Respawn()
 		{
@@ -40,10 +45,38 @@ namespace TerryForm.Pawn
 
 		public override void Simulate( Client cl )
 		{
-			// Simulate our currently equipped weapon.
-			SimulateActiveChild( cl, EquippedWeapon );
+			/*
+			 * This is the base implementation, base simulates the controllers by default and offers respawning.
+			 * We don't want that so remove the respawning part later.
+			 */
+			if ( LifeState == LifeState.Dead )
+			{
+				if ( TimeSinceDied > 3 && IsServer )
+				{
+					Respawn();
+				}
 
-			base.Simulate( cl );
+				return;
+			}
+
+			var controller = GetActiveController();
+			controller?.Simulate( cl, this, GetActiveAnimator() );
+
+			if ( IsCurrentTurn )
+				SimulateActiveChild( cl, EquippedWeapon );
+		}
+
+		public void OnTurnStarted()
+		{
+			IsCurrentTurn = true;
+		}
+
+		public void OnTurnEnded()
+		{
+			IsCurrentTurn = false;
+
+			if ( Health < 0 )
+				OnKilled();
 		}
 
 		public override void OnKilled()

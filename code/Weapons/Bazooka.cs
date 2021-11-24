@@ -16,6 +16,8 @@ namespace TerryForm.Weapons
 				.SetMaxBounces( 1 )
 				.WithModel( "models/weapons/shell/shell.vmdl" )
 				.FireFrom( Owner.EyePos + Owner.EyeRot.Forward * 70, Owner.EyeRot.Forward.Normal, 50000 );
+
+			base.Fire();
 		}
 	}
 }
