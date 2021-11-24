@@ -7,7 +7,7 @@ namespace TerryForm.UI
 	public class GameInfoPanel : Panel
 	{
 		public Label StateTime { get; set; }
-		public Label TurnTime { get; set;}
+		public Label TurnTime { get; set; }
 
 		public GameInfoPanel()
 		{
