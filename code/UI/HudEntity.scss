@@ -1,9 +1,11 @@
-﻿rootpanel {
+﻿@import "/Code/UI/_Globals.scss";
+
+rootpanel {
     pointer-events: visible;
 }
 
 text.demo {
-    font-family: Londrina Solid;
+    font-family: $font;
     font-size: 32px;
     font-weight: bold;
     position: absolute;
