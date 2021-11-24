@@ -25,5 +25,12 @@ namespace TerryForm.States
 				Game.StateHandler.ChangeState( new PlayingState() );
 			}
 		}
+
+		// Debug method for changing current state to WaitingState.
+		[ServerCmd]
+		public static void WaitState()
+		{
+			Game.StateHandler.ChangeState( new WaitingState() );
+		}
 	}
 }

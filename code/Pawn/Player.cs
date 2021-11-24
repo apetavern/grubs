@@ -8,6 +8,7 @@ namespace TerryForm.Pawn
 	{
 		public List<Worm> Worms { get; set; }
 		public Worm ActiveWorm { get; set; }
+		public Client ClientOwner { get; set; }
 
 		public Player()
 		{
@@ -19,32 +20,41 @@ namespace TerryForm.Pawn
 				worm.Respawn();
 				Worms.Add( worm );
 			}
+		}
 
-			ActiveWorm = Worms[0];
+		public void InitializeFromClient( Client cl )
+		{
+			ClientOwner = cl;
+
+			PickNextWorm();
 		}
 
 		public void OnTurnStart()
 		{
-			ActiveWorm = Worms[0];
+			PickNextWorm();
 		}
 
 		public void OnTurnEnd()
 		{
 			if ( ActiveWorm.Health < 0 )
-			{
 				ActiveWorm.OnKilled();
-			}
-
-			RotateWorms();
 		}
 
-		public void RotateWorms()
+		private void RotateWorms()
 		{
 			var current = Worms[0];
 			Worms.RemoveAt( 0 );
 			Worms.Add( current );
+		}
 
+		public void PickNextWorm()
+		{
+			Log.Info( $"Picking new worm for player {ClientOwner.Name}" );
+
+			RotateWorms();
 			ActiveWorm = Worms[0];
+
+			ClientOwner.Pawn = ActiveWorm;
 		}
 	}
 }

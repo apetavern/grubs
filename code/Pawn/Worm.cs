@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using System.Linq;
 using TerryForm.Weapons;
-using TerryForm.States;
+using TerryForm.States.SubStates;
 
 namespace TerryForm.Pawn
 {
@@ -10,7 +10,7 @@ namespace TerryForm.Pawn
 		[Net] public Weapon EquippedWeapon { get; set; }
 
 		// We should probably compare PlayerID's or something like that rather than comparing the entities directly.
-		public bool IsMyTurn => (Game.StateHandler?.State as PlayingState)?.Turn?.ActivePlayer?.ActiveWorm?.Equals( this ) ?? false;
+		public bool IsMyTurn => Turn.Instance?.ActivePlayer.ActiveWorm.Equals( this ) ?? false;
 
 		public override void Respawn()
 		{

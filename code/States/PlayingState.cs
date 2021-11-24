@@ -11,29 +11,29 @@ namespace TerryForm.States
 
 		protected override void OnStart()
 		{
-			if ( Host.IsServer )
-			{
-				var stateHandler = Game.StateHandler;
-
-				Turn = new Turn( stateHandler.Players[0] );
-				Turn?.Start();
-
-				base.OnStart();
-			}
+			PickNextPlayer();
 		}
 
-		public override void OnPlayerJoin( Pawn.Player player )
+		public void OnTurnFinished()
 		{
-			base.OnPlayerJoin( player );
+			PickNextPlayer();
 		}
 
-		public void ChangeTurn()
+		protected void PickNextPlayer()
 		{
-			Turn?.Finish();
-			Turn = new Turn( Game.StateHandler.Players[0] );
+			RotatePlayers();
+
+			Turn = new Turn( Game.StateHandler?.Players[0], this );
 			Turn?.Start();
 
-			Log.Info( Turn.ActivePlayer.Name );
+			Log.Info( $"Next player is {Game.StateHandler.Players[0].ClientOwner.Name}" );
+		}
+
+		// Debug method for changing current state to PlayingState.
+		[ServerCmd]
+		public static void PlayState()
+		{
+			Game.StateHandler.ChangeState( new PlayingState() );
 		}
 	}
 }
