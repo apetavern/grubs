@@ -19,10 +19,13 @@ namespace TerryForm.UI
 		{
 			base.Tick();
 
-			if ( Game.StateHandler == null )
-				return;
+			var game = Game.Instance;
+			if ( game == null ) return;
 
-			if ( Game.StateHandler.State is PlayingState playingState )
+			var state = game.State;
+			if ( state == null ) return;
+
+			if ( state is PlayingState playingState )
 			{
 				TimeSpan stateTimeSpan = TimeSpan.FromSeconds( playingState.TimeLeft );
 				StateTime.Text = string.Format( "{0:D2}:{1:D2}",

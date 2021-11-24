@@ -32,6 +32,7 @@ namespace TerryForm.States
 		[Event.Tick]
 		private void Tick()
 		{
+			Game.Instance.State = State;
 			State?.OnTick();
 		}
 

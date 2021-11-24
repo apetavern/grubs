@@ -9,6 +9,8 @@ namespace TerryForm
 		public static Game Instance => Current as Game;
 		public static StateHandler StateHandler { get; private set; }
 
+		[Net] public BaseState State { get; set; }
+
 		public Game()
 		{
 			_ = new HudEntity();
