@@ -8,10 +8,12 @@ namespace TerryForm.States.SubStates
 		public override string StateName => "TURN";
 		public override int StateDurationSeconds => GameConfig.TurnDurationSeconds;
 		public Pawn.Player ActivePlayer { get; set; }
+		public static Turn Instance { get; set; }
 
 		public Turn( Pawn.Player player )
 		{
 			ActivePlayer = player;
+			Instance = this;
 		}
 
 		protected override void OnStart()

@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 using TerryForm.Pawn;
-using TerryForm.States;
+using TerryForm.States.SubStates;
 using TerryForm.Utils;
 
 namespace TerryForm.Weapons
@@ -72,7 +72,7 @@ namespace TerryForm.Weapons
 			 */
 			await GameTask.DelaySeconds( 1 );
 
-			(Game.StateHandler?.State as PlayingState)?.Turn?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+			Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
 		}
 
 		public override bool CanSecondaryAttack() => false;
