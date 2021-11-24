@@ -1,12 +1,14 @@
 ﻿using Sandbox;
 using System.Linq;
 using TerryForm.Weapons;
+using TerryForm.States;
 
 namespace TerryForm.Pawn
 {
 	public partial class Worm : Sandbox.Player
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
+		public bool IsMyTurn => (Game.StateHandler?.State as PlayingState).Turn?.ActivePlayer?.ActiveWorm.Equals( Owner ) ?? false;
 
 		public override void Respawn()
 		{
