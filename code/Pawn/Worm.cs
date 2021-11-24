@@ -8,6 +8,7 @@ namespace TerryForm.Pawn
 	public partial class Worm : Sandbox.Player
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
+		[Net] public bool IsCurrentTurn { get; set; }
 
 		// Temporary to allow respawning, we don't want respawning later so we can remove this.
 		private TimeSince TimeSinceDied { get; set; }
@@ -57,16 +58,19 @@ namespace TerryForm.Pawn
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );
 
-			SimulateActiveChild( cl, EquippedWeapon );
+			if ( IsCurrentTurn )
+				SimulateActiveChild( cl, EquippedWeapon );
 		}
 
 		public void OnTurnStarted()
 		{
-
+			IsCurrentTurn = true;
 		}
 
 		public void OnTurnEnded()
 		{
+			IsCurrentTurn = false;
+
 			if ( Health < 0 )
 				OnKilled();
 		}
