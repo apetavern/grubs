@@ -19,6 +19,9 @@ namespace TerryForm.UI
 		{
 			base.Tick();
 
+			if ( Game.StateHandler == null )
+				return;
+
 			if ( Game.StateHandler.State is PlayingState playingState )
 			{
 				TimeSpan stateTimeSpan = TimeSpan.FromSeconds( playingState.TimeLeft );
