@@ -16,7 +16,6 @@ namespace TerryForm.Pawn
 		{
 			Worms = new();
 
-
 			clothes = new();
 
 			clothes.LoadFromClient( cl );
@@ -35,8 +34,6 @@ namespace TerryForm.Pawn
 			{
 				clothes.Clothing.Remove( item );
 			}
-
-			
 
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
