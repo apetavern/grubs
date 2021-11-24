@@ -36,11 +36,6 @@ namespace TerryForm.Weapons
 			OnActiveEndEffects();
 		}
 
-		public override void Simulate( Client player )
-		{
-			base.Simulate( player );
-		}
-
 		public override bool CanPrimaryAttack()
 		{
 			return base.CanPrimaryAttack();

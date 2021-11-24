@@ -57,10 +57,6 @@ namespace TerryForm.Pawn
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );
 
-			// Don't allow weapon firing if it isn't this worms turn.
-			if ( Turn.Instance?.ActivePlayer.ClientId != Client.PlayerId )
-				return;
-
 			SimulateActiveChild( cl, EquippedWeapon );
 		}
 
