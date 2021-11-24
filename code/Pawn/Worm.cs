@@ -8,7 +8,9 @@ namespace TerryForm.Pawn
 	public partial class Worm : Sandbox.Player
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
-		public bool IsMyTurn => (Game.StateHandler?.State as PlayingState).Turn?.ActivePlayer?.ActiveWorm.Equals( Owner ) ?? false;
+
+		// We should probably compare PlayerID's or something like that rather than comparing the entities directly.
+		public bool IsMyTurn => (Game.StateHandler?.State as PlayingState)?.Turn?.ActivePlayer?.ActiveWorm?.Equals( this ) ?? false;
 
 		public override void Respawn()
 		{
