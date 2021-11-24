@@ -35,18 +35,6 @@ namespace TerryForm.Pawn
 				float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length.LerpInverse( 0f, 100f );
 				SetParam( "velocity", velocity );
 			}
-
-			// Hold pose (can we get away with setting this in the weapon itself?)
-			{
-				if ( Pawn is Worm { EquippedWeapon: Weapon weapon } )
-				{
-					SetParam( "holdpose", (int)weapon.HoldPose );
-				}
-				else
-				{
-					SetParam( "holdpose", (int)HoldPose.None );
-				}
-			}
 		}
 
 		/// <summary>

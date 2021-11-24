@@ -15,6 +15,8 @@ namespace TerryForm.Weapons
 			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * 200 ).Ignore( this ).Run();
 
 			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
+
+			base.Fire();
 		}
 
 		public override void OnFireEffects()
