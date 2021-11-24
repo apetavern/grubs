@@ -7,14 +7,13 @@ WindInfoPanel {
     justify-content: center;
     flex-direction: row;
     width: 256px;
-    height: 25px;
     color: white;
 
     background-image: url( /textures/ui/ui-mask.png );
-    background-size: -100%;
+    background-size: -100% 100%;
     background-position: center;
 
-    padding: 4px 10px;
+    padding: 8px 20px;
 
     > div {
         flex-direction: column;
