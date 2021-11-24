@@ -20,7 +20,7 @@ namespace TerryForm
 		{
 			base.ClientJoined( cl );
 
-			var player = new Pawn.Player(cl);
+			var player = new Pawn.Player( cl );
 			cl.Pawn = player.ActiveWorm;
 
 			StateHandler.OnPlayerJoin( player );

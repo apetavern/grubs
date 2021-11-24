@@ -12,7 +12,7 @@ namespace TerryForm.Pawn
 
 		public Clothing.Container clothes { get; set; }
 
-		public Player(Client cl)
+		public Player( Client cl )
 		{
 			Worms = new();
 
