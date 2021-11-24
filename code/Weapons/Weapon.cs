@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using TerryForm.Pawn;
+using TerryForm.States;
+using TerryForm.Utils;
 
 namespace TerryForm.Weapons
 {
@@ -59,7 +61,16 @@ namespace TerryForm.Weapons
 			Fire();
 		}
 
-		public virtual void Fire() { }
+		public async virtual void Fire()
+		{
+			/* 
+			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
+			 * Temporary delay to simulate this.
+			 */
+			await GameTask.DelaySeconds( 5 );
+
+			(Game.StateHandler?.State as PlayingState)?.Turn?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+		}
 
 		public override bool CanSecondaryAttack() => false;
 
