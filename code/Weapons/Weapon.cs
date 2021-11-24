@@ -42,7 +42,7 @@ namespace TerryForm.Weapons
 
 		public override bool CanPrimaryAttack()
 		{
-			var isMyTurn = (Game.StateHandler?.State as PlayingState).Turn?.ActivePlayer?.ActiveWorm.Equals( Owner ) ?? false;
+			var isMyTurn = (Owner as Worm)?.IsMyTurn ?? false;
 
 			if ( base.CanPrimaryAttack() && isMyTurn )
 				return true;
@@ -66,7 +66,7 @@ namespace TerryForm.Weapons
 			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
 			 * Temporary delay to simulate this.
 			 */
-			await GameTask.DelaySeconds( 5 );
+			await GameTask.DelaySeconds( 1 );
 
 			(Game.StateHandler?.State as PlayingState)?.Turn?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
 		}
