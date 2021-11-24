@@ -1,0 +1,30 @@
+﻿@import "/Code/UI/_Globals.scss";
+
+WindInfoPanel {
+    position: absolute;
+    right: $safe-area-x;
+    bottom: $safe-area-y;
+    justify-content: center;
+    flex-direction: row;
+    width: 250px;
+    height: 25px;
+    color: white;
+    background-color: $background;
+    padding: 4px;
+
+    border-radius: 10px;
+
+    > div {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.wind-inner {
+    width: 100%;
+    height: 100%;
+
+    // TODO
+    background: linear-gradient( 25%, $team-a 0%, $team-a 49%, white 50%, $team-b 51%, $team-b 100% );
+    border-radius: 10px;
+}
