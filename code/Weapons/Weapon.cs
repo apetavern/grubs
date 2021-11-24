@@ -11,6 +11,7 @@ namespace TerryForm.Weapons
 		public virtual string ModelPath => "";
 		public override float PrimaryRate => 2f;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
+		public virtual bool IsFiredTurnEnding => false;
 
 		public override void Spawn()
 		{
@@ -62,6 +63,9 @@ namespace TerryForm.Weapons
 
 		public async virtual void Fire()
 		{
+			if ( !IsFiredTurnEnding )
+				return;
+
 			/* 
 			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
 			 * Temporary delay to simulate this.
