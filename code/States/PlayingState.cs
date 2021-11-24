@@ -21,7 +21,6 @@ namespace TerryForm.States
 
 				base.OnStart();
 			}
-
 		}
 
 		public override void OnPlayerJoin( Pawn.Player player )
