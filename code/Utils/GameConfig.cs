@@ -16,7 +16,8 @@
 			"Pinky",
 			"Perky",
 			"Gumby",
-			"Dick"
+			"Dick",
+			"Panini"
 		};
 	}
 }
