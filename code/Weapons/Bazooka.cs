@@ -1,5 +1,4 @@
-﻿using Sandbox;
-using TerryForm.Pawn;
+﻿using TerryForm.Pawn;
 
 namespace TerryForm.Weapons
 {
