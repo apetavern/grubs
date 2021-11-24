@@ -42,10 +42,9 @@ namespace TerryForm.Weapons
 
 		public override bool CanPrimaryAttack()
 		{
-			// TODO: Check if it's my turn, if it isn't my turn don't allow me to shoot.
-			var myTurn = true;
+			var isMyTurn = (Game.StateHandler?.State as PlayingState).Turn?.ActivePlayer?.ActiveWorm.Equals( Owner ) ?? false;
 
-			if ( base.CanPrimaryAttack() && myTurn )
+			if ( base.CanPrimaryAttack() && isMyTurn )
 				return true;
 
 			return false;
