@@ -70,6 +70,11 @@ namespace TerryForm.Weapons
 			Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
 		}
 
+		public override void SimulateAnimator( PawnAnimator anim )
+		{
+			anim.SetParam( "holdpose", (int)HoldPose );
+		}
+
 		public override bool CanSecondaryAttack() => false;
 
 		public override void AttackSecondary() { }
