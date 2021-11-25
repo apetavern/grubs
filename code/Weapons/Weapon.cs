@@ -12,7 +12,7 @@ namespace TerryForm.Weapons
 		public override float PrimaryRate => 2f;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		public virtual bool IsFiredTurnEnding => false;
-		[Net] public bool WeaponEnabled { get; private set; }
+		[Net] public bool WeaponEnabled { get; set; }
 		private WormAnimator Animator { get; set; }
 
 		public override void Spawn()
@@ -26,18 +26,15 @@ namespace TerryForm.Weapons
 		{
 			base.Simulate( cl );
 
-			SetWeaponVisible( cl.Pawn.Velocity.IsNearlyZero() );
+			SetWeaponEnabled( cl.Pawn.Velocity.IsNearlyZero( 30 ) && cl.Pawn.GroundEntity is not null );
 		}
 
 		public void SetWeaponEnabled( bool shouldEnable )
 		{
 			WeaponEnabled = shouldEnable;
-		}
 
-		public void SetWeaponVisible( bool shouldShow )
-		{
-			Animator?.SetParam( "holdpose", shouldShow ? (int)HoldPose : (int)HoldPose.None );
-			SetVisible( shouldShow );
+			Animator?.SetParam( "holdpose", shouldEnable ? (int)HoldPose : (int)HoldPose.None );
+			SetVisible( shouldEnable );
 		}
 
 		public override void ActiveStart( Entity ent )
