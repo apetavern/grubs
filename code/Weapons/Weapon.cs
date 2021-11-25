@@ -29,13 +29,6 @@ namespace TerryForm.Weapons
 			OnActiveEffects();
 		}
 
-		public override void ActiveEnd( Entity ent, bool dropped )
-		{
-			base.ActiveEnd( ent, dropped );
-
-			OnActiveEndEffects();
-		}
-
 		public override bool CanPrimaryAttack()
 		{
 			return base.CanPrimaryAttack();
