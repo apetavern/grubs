@@ -1,11 +1,10 @@
 ﻿@import "/Code/UI/_Globals.scss";
 
 HealthBar {
-    background-color: $background-darker;
+    background-color: rgba( black, 0.25 );
     width: 200px;
     height: 16px;
-    /*border: 2px solid black;
-    border-radius: 2px;*/
+    border-radius: 2px;
 }
 
 .health-bar-inner {
@@ -16,4 +15,14 @@ HealthBar {
     bottom: 0;
     width: 50%;
     background-color: $team-a;
+    border-radius: 2px;
+}
+
+.health-label {
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate( -50% -50% );
 }
