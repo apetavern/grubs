@@ -7,8 +7,7 @@ namespace TerryForm.States
 	{
 		public override string StateName => "PLAYING";
 		public override int StateDurationSeconds => 1200;
-		public Turn Turn { get; set; }
-		public static Pawn.Player ActivePlayer { get; set; }
+		[Net] public Turn Turn { get; set; }
 
 		protected override void OnStart()
 		{
@@ -17,8 +16,6 @@ namespace TerryForm.States
 
 		public void OnTurnFinished()
 		{
-			Log.Info( $"{ActivePlayer.Name} turn has finished." );
-
 			if ( CheckWinCondition() )
 			{
 				StateHandler.Instance?.ChangeState( new EndState() );
@@ -31,9 +28,10 @@ namespace TerryForm.States
 		protected void PickNextPlayer()
 		{
 			RotatePlayers();
-			ActivePlayer = StateHandler.Instance?.Players[0];
 
-			Turn = new Turn( ActivePlayer, this );
+			Turn = new Turn();
+			Turn?.InitFrom( StateHandler.Instance?.Players[0], this );
+
 			Turn?.Start();
 		}
 
