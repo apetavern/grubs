@@ -81,9 +81,6 @@ namespace TerryForm.Weapons
 		[ClientRpc]
 		public virtual void OnActiveEffects() { }
 
-		[ClientRpc]
-		public virtual void OnActiveEndEffects() { }
-
 		public virtual void OnFireEffects() { }
 	}
 }
