@@ -1,0 +1,118 @@
+﻿@import "/Code/UI/_Globals.scss";
+
+text,label,textentry {
+    font-family: $font; // TODO: Reconsider this font for readability reasons
+}
+
+chatbox {
+    position: absolute;
+    bottom: $safe-area-y;
+    left: 450px;
+    z-index: 100;
+    flex-direction: column;
+    width: 500px;
+    font-family: Poppins;
+    font-size: 13px;
+    pointer-events: none;
+    border: 2px solid transparent;
+
+    textentry {
+        opacity: 0;
+        color: white;
+        padding: 10px 20px;
+        backdrop-filter: brightness( 0.5 );
+        font-size: 14px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .canvas {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 400px;
+        overflow: scroll;
+        margin-bottom: 50px;
+    }
+
+    &.open {
+        background-color: $background;
+        border: 2px solid black;
+        border-radius: 2px;
+        pointer-events: all;
+
+        textentry {
+            opacity: 1;
+        }
+    }
+}
+
+chatentry {
+    margin-bottom: 5px;
+    color: white;
+    transition: all 0.1s ease-out;
+    opacity: 1;
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 10px 20px;
+    max-width: 100%;
+    transform: scale( 1 );
+    width: 100%;
+    align-items: center;
+
+    &:intro {
+        opacity: 0;
+    }
+
+    &.hide {
+        opacity: 0;
+        transition: all 1s ease-out;
+    }
+
+    &.expired {
+        opacity: 0;
+        transition: all 0.2s ease-out;
+    }
+
+    &.show {
+        opacity: 1;
+        transition: all 0.2s ease-out;
+    }
+
+    &:outro {
+        opacity: 0;
+        transition: all 2s ease-out;
+    }
+
+    image {
+        width: 24px;
+        height: 24px;
+        min-height: 24px;
+        border-radius: 100px;
+        margin-right: 4px;
+    }
+
+    .name {
+        padding-right: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #c0fb2e;
+        flex-shrink: 0;
+    }
+
+    .message {
+        color: white;
+        font-size: 14px;
+        flex-grow: 1;
+    }
+
+    &.noname .name {
+        display: none;
+    }
+
+    &.noavatar image {
+        display: none;
+    }
+}
