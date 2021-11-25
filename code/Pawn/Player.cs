@@ -10,9 +10,12 @@ namespace TerryForm.Pawn
 		[Net] public Worm ActiveWorm { get; set; }
 		public Client ClientOwner { get; set; }
 		[Net] public long ClientId { get; set; }
+		[Net] public bool IsAlive { get; set; }
 
 		public Player( Client cl )
 		{
+			IsAlive = true;
+
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
 				var worm = new Worm();
@@ -44,6 +47,17 @@ namespace TerryForm.Pawn
 		public void OnTurnEnd()
 		{
 			ActiveWorm?.OnTurnEnded();
+
+			// Iterate through Worms to check if any are alive.
+			var anyWormAlive = false;
+			foreach ( var worm in Worms )
+			{
+				if ( worm.IsAlive ) anyWormAlive = true;
+			}
+
+			// If all are dead, Player is also dead.
+			if ( !anyWormAlive )
+				IsAlive = false;
 
 			Log.Info( $"🐛 {ClientOwner.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
