@@ -5,18 +5,21 @@ namespace TerryForm.States
 {
 	public partial class StateHandler : BaseNetworkable
 	{
-		[Net, Change] public BaseState State { get; set; } = new WaitingState();
+		[Net] public BaseState State { get; set; } = new WaitingState();
 		public List<Pawn.Player> Players { get; set; } = new();
+		public static StateHandler Instance { get; set; }
 
 		public StateHandler()
 		{
-			State.Start();
+			Instance = this;
+
+			if ( Host.IsServer )
+				State.Start();
 		}
 
 		public void OnPlayerJoin( Pawn.Player player )
 		{
 			Players.Add( player );
-
 			State?.OnPlayerJoin( player );
 		}
 
@@ -29,18 +32,11 @@ namespace TerryForm.States
 			State?.Start();
 		}
 
-		[Event.Tick]
+		[Event.Tick.Server]
 		private void Tick()
 		{
 			Game.Instance.State = State;
 			State?.OnTick();
-		}
-
-		public void OnStateChanged( BaseState oldState, BaseState newState )
-		{
-			oldState?.Finish();
-			oldState = newState;
-			oldState.Start();
 		}
 	}
 }

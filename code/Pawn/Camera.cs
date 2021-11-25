@@ -14,17 +14,27 @@ namespace TerryForm.Pawn
 			Rotation = default;
 		}
 
-		public Range DistanceRange { get; } = new Range( 512f, 2048f );
-		public float Distance { get; private set; } = 1024f;
+		private Range DistanceRange { get; } = new Range( 512f, 2048f );
+		private TimeSince TimeSinceMousePan { get; set; }
+
+		private float Distance { get; set; } = 1024f;
 		private float DistanceScrollRate => 32f;
 
 		private bool CenterOnPawn { get; set; } = true;
 
 		public Vector3 Center { get; set; }
 
+		protected Entity LookTarget { get; private set; } = Local.Pawn;
+
+		public void SetLookTarget( Entity target )
+		{
+			LookTarget = target;
+		}
+
 		public override void Update()
 		{
-			var pawn = Local.Pawn;
+			var pawn = LookTarget;
+
 			if ( pawn == null )
 				return;
 
@@ -46,6 +56,10 @@ namespace TerryForm.Pawn
 			if ( Input.Down( InputButton.Attack2 ) )
 				MoveCamera( pawn );
 
+			// Check the last time we panned the camera, update CenterOnPawn if greater than N.
+			if ( !Input.Down( InputButton.Attack2 ) && TimeSinceMousePan > 1 )
+				CenterOnPawn = true;
+
 			//
 			// Camera properties
 			//
@@ -61,6 +75,7 @@ namespace TerryForm.Pawn
 		private void MoveCamera( Entity pawn )
 		{
 			var delta = new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y );
+			TimeSinceMousePan = 0;
 
 			if ( CenterOnPawn )
 			{

@@ -13,7 +13,9 @@ namespace TerryForm.Pawn
 		[Net] public long ClientId { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
-		public Player( Client cl )
+		public Player() { }
+
+		public Player( Client cl ) : this()
 		{
 			IsAlive = true;
 
@@ -27,6 +29,9 @@ namespace TerryForm.Pawn
 			}
 
 			InitializeFromClient( cl );
+
+			// Network this entity.
+			Transmit = TransmitType.Always;
 		}
 
 		protected void InitializeFromClient( Client cl )

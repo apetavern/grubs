@@ -22,7 +22,7 @@ namespace TerryForm.States
 
 			if ( PlayerList.Count >= GameConfig.MinimumPlayersToStart )
 			{
-				Game.StateHandler.ChangeState( new PlayingState() );
+				StateHandler.Instance?.ChangeState( new PlayingState() );
 			}
 		}
 
@@ -30,7 +30,7 @@ namespace TerryForm.States
 		[ServerCmd]
 		public static void WaitState()
 		{
-			Game.StateHandler.ChangeState( new WaitingState() );
+			StateHandler.Instance?.ChangeState( new WaitingState() );
 		}
 	}
 }
