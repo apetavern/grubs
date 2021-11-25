@@ -1,0 +1,19 @@
+﻿@import "/Code/UI/_Globals.scss";
+
+HealthBar {
+    background-color: $background-darker;
+    width: 200px;
+    height: 16px;
+    /*border: 2px solid black;
+    border-radius: 2px;*/
+}
+
+.health-bar-inner {
+    position: absolute;
+    margin: 2px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: $team-a;
+}
