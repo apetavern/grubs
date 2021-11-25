@@ -14,11 +14,11 @@ namespace TerryForm.Pawn
 			Rotation = default;
 		}
 
-		private Range DistanceRange { get; } = new Range( 512f, 2048f );
-		private TimeSince TimeSinceMousePan { get; set; }
-
-		private float Distance { get; set; } = 1024f;
+		public Range DistanceRange { get; } = new Range( 512f, 2048f );
+		public float Distance { get; set; } = 1024f;
 		private float DistanceScrollRate => 32f;
+
+		private TimeSince TimeSinceMousePan { get; set; }
 
 		private bool CenterOnPawn { get; set; } = true;
 
