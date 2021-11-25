@@ -1,4 +1,5 @@
-﻿using TerryForm.Utils;
+﻿using Sandbox;
+using TerryForm.Utils;
 
 namespace TerryForm.States.SubStates
 {
@@ -8,14 +9,19 @@ namespace TerryForm.States.SubStates
 		public override int StateDurationSeconds => GameConfig.TurnDurationSeconds;
 		public static Turn Instance { get; set; }
 		private PlayingState PlayingState { get; set; }
-		public Pawn.Player ActivePlayer { get; set; }
+		[Net] public Pawn.Player ActivePlayer { get; set; }
 
-		public Turn( Pawn.Player player, PlayingState playState )
+		public Turn()
 		{
 			Instance = this;
+		}
 
+		public Turn InitFrom( Pawn.Player player, PlayingState playState )
+		{
 			ActivePlayer = player;
 			PlayingState = playState;
+
+			return this;
 		}
 
 		protected override void OnStart()
