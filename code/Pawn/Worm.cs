@@ -2,7 +2,6 @@
 using System.Linq;
 using TerryForm.Utils;
 using TerryForm.Weapons;
-using TerryForm.States.SubStates;
 
 namespace TerryForm.Pawn
 {
@@ -10,6 +9,7 @@ namespace TerryForm.Pawn
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
 		[Net] public bool IsCurrentTurn { get; set; }
+		[Net] public bool IsAlive { get; set; }
 
 		// Temporary to allow respawning, we don't want respawning later so we can remove this.
 		private TimeSince TimeSinceDied { get; set; }
@@ -18,20 +18,14 @@ namespace TerryForm.Pawn
 		{
 			SetModel( "models/citizenworm.vmdl" );
 
+			IsAlive = true;
+
 			Controller = new WormController();
 			Animator = new WormAnimator();
 			Camera = new Camera();
 
-			// Temporarily select a weapon from all weapons.
-			var randWeapons = Library.GetAll<Weapon>()
-				.Where( weapon => !weapon.IsAbstract )
-				.ToList();
-
-			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
-
 			// Random worm name
 			Name = Rand.FromArray( GameConfig.WormNames );
-
 			base.Respawn();
 		}
 
@@ -41,6 +35,27 @@ namespace TerryForm.Pawn
 
 			EquippedWeapon = weapon;
 			EquippedWeapon?.OnCarryStart( this );
+		}
+
+		public void DressFromClient( Client cl )
+		{
+			var clothes = new Clothing.Container();
+			clothes.LoadFromClient( cl );
+
+			// Skin tone
+			var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizen/citizen.vmdl" );
+			SetMaterialGroup( skinTone?.MaterialGroup );
+
+			// We only want the hair so we won't use the logic built into Clothing
+			var hair = clothes.Clothing.FirstOrDefault( item => item.Category == Clothing.ClothingCategory.Hair );
+
+			if ( hair is null )
+				return;
+
+			var ent = new AnimEntity( hair.Model, this );
+
+			if ( !string.IsNullOrEmpty( hair.MaterialGroup ) )
+				ent.SetMaterialGroup( hair.MaterialGroup );
 		}
 
 		public override void Simulate( Client cl )
@@ -69,6 +84,13 @@ namespace TerryForm.Pawn
 		public void OnTurnStarted()
 		{
 			IsCurrentTurn = true;
+
+			// Temporarily select a weapon from all weapons.
+			var randWeapons = Library.GetAll<Weapon>()
+				.Where( weapon => !weapon.IsAbstract )
+				.ToList();
+
+			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
 		}
 
 		public void OnTurnEnded()
@@ -82,6 +104,8 @@ namespace TerryForm.Pawn
 		public override void OnKilled()
 		{
 			base.OnKilled();
+
+			IsAlive = false;
 
 			EnableDrawing = false;
 			EnableAllCollisions = false;

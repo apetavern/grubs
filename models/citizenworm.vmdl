@@ -33,6 +33,71 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "Skin01"
+						remaps = [  ]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "Skin02"
+						remaps = 
+						[
+							{
+								from = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin02.vmat"
+							},
+							{
+								from = "models/citizen/skin/citizen_eyes_advanced.vmat"
+								to = "models/citizen/skin/citizen_eyes_advanced02.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "Skin03"
+						remaps = 
+						[
+							{
+								from = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin03.vmat"
+							},
+							{
+								from = "models/citizen/skin/citizen_eyes_advanced.vmat"
+								to = "models/citizen/skin/citizen_eyes_advanced03.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "Skin04"
+						remaps = 
+						[
+							{
+								from = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin04.vmat"
+							},
+							{
+								from = "models/citizen/skin/citizen_eyes_advanced.vmat"
+								to = "models/citizen/skin/citizen_eyes_advanced.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "Skin05"
+						remaps = 
+						[
+							{
+								from = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin05.vmat"
+							},
+							{
+								from = "models/citizen/skin/citizen_eyes_advanced.vmat"
+								to = "models/citizen/skin/citizen_eyes_advanced.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
@@ -296,6 +361,69 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "throwable_aim"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizenworm.fbx"
+						start_frame = 59
+						end_frame = 61
+						framerate = 3.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "throwable_fire"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_throw.fbx"
+						start_frame = 0
+						end_frame = 29
+						framerate = 90.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "shotgun_fire"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_fire_shotgun.fbx"
+						start_frame = 0
+						end_frame = 50
+						framerate = 60.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -311,6 +439,14 @@
 						[
 							{
 								bone = "Handsroot"
+								weight = 0.0
+							},
+							{
+								bone = "hand_L"
+								weight = 1.0
+							},
+							{
+								bone = "hand_R"
 								weight = 1.0
 							},
 						]

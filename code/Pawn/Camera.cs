@@ -52,7 +52,7 @@ namespace TerryForm.Pawn
 			FieldOfView = 65;
 			ZNear = 8;
 			ZFar = 25000;
-			Viewer = pawn;
+			Viewer = null;
 		}
 
 		/// <summary>
