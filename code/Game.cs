@@ -13,11 +13,10 @@ namespace TerryForm
 
 		public Game()
 		{
-			_ = new HudEntity();
-
 			if ( IsClient )
 				return;
 
+			_ = new HudEntity();
 			StateHandler = new();
 			Event.Register( StateHandler );
 		}
