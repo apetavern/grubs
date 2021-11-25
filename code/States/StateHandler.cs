@@ -5,14 +5,16 @@ namespace TerryForm.States
 {
 	public partial class StateHandler : BaseNetworkable
 	{
-		[Net, Change] public BaseState State { get; set; } = new WaitingState();
+		[Net] public BaseState State { get; set; } = new WaitingState();
 		public List<Pawn.Player> Players { get; set; } = new();
 		public static StateHandler Instance { get; set; }
 
 		public StateHandler()
 		{
-			Instance = this;
+			if ( !Host.IsServer )
+				return;
 
+			Instance = this;
 			State.Start();
 		}
 
@@ -35,13 +37,6 @@ namespace TerryForm.States
 		private void Tick()
 		{
 			State?.OnTick();
-		}
-
-		public void OnStateChanged( BaseState oldState, BaseState newState )
-		{
-			oldState?.Finish();
-			oldState = newState;
-			oldState.Start();
 		}
 	}
 }
