@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Sandbox;
+using Sandbox.UI;
 using System;
 using TerryForm.States;
 
@@ -22,11 +23,17 @@ namespace TerryForm.UI
 			var game = Game.Instance;
 			if ( game == null ) return;
 
-			var state = game.State;
+			var state = game.StateHandler.State;
 			if ( state == null ) return;
+
+			DebugOverlay.ScreenText( 0, state.StateName );
+			DebugOverlay.ScreenText( 1, state.TimeLeft.ToString() );
 
 			if ( state is PlayingState playingState )
 			{
+				DebugOverlay.ScreenText( 2, playingState.Turn.StateName );
+				DebugOverlay.ScreenText( 3, playingState.Turn.TimeLeft.ToString() );
+
 				TimeSpan stateTimeSpan = TimeSpan.FromSeconds( playingState.TimeLeft );
 				StateTime.Text = string.Format( "{0:D2}:{1:D2}",
 								stateTimeSpan.Minutes,
@@ -38,8 +45,8 @@ namespace TerryForm.UI
 				}
 				else
 				{
-					TimeSpan turnTimeSpan = TimeSpan.FromSeconds( playingState.Turn.TimeLeft );
-					TurnTime.Text = turnTimeSpan.Seconds.ToString();
+					int timeLeftSeconds = playingState.Turn.TimeLeft.CeilToInt();
+					TurnTime.Text = timeLeftSeconds.ToString();
 				}
 			}
 			else
