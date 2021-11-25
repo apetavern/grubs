@@ -26,7 +26,7 @@ namespace TerryForm.States
 		[ServerCmd]
 		public static void FinishGame()
 		{
-			Game.StateHandler.ChangeState( new EndState() );
+			StateHandler.Instance?.ChangeState( new EndState() );
 		}
 	}
 }

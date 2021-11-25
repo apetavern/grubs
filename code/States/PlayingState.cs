@@ -21,7 +21,7 @@ namespace TerryForm.States
 
 			if ( CheckWinCondition() )
 			{
-				Game.StateHandler.ChangeState( new EndState() );
+				StateHandler.Instance?.ChangeState( new EndState() );
 				return;
 			}
 
@@ -31,7 +31,7 @@ namespace TerryForm.States
 		protected void PickNextPlayer()
 		{
 			RotatePlayers();
-			ActivePlayer = Game.StateHandler?.Players[0];
+			ActivePlayer = StateHandler.Instance?.Players[0];
 
 			Turn = new Turn( ActivePlayer, this );
 			Turn?.Start();
@@ -46,7 +46,7 @@ namespace TerryForm.States
 
 		private bool CheckWinCondition()
 		{
-			var players = Game.StateHandler.Players;
+			var players = StateHandler.Instance?.Players;
 
 			var anyPlayerAlive = false;
 			foreach ( var player in players )
@@ -66,7 +66,7 @@ namespace TerryForm.States
 		[ServerCmd]
 		public static void PlayState()
 		{
-			Game.StateHandler.ChangeState( new PlayingState() );
+			StateHandler.Instance?.ChangeState( new PlayingState() );
 		}
 	}
 }

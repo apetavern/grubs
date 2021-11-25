@@ -46,7 +46,7 @@ namespace TerryForm.States.SubStates
 		[ServerCmd]
 		public static void EndTurn()
 		{
-			(Game.StateHandler.State as PlayingState)?.Turn?.OnFinish();
+			(StateHandler.Instance?.State as PlayingState)?.Turn?.OnFinish();
 		}
 	}
 }

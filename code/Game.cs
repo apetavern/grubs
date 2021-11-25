@@ -34,7 +34,7 @@ namespace TerryForm
 		[ServerCmd]
 		public static void CheckState()
 		{
-			Log.Trace( Instance.StateHandler.State.StateName );
+			Log.Trace( StateHandler.Instance?.State.StateName );
 		}
 	}
 }
