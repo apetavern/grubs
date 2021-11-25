@@ -7,7 +7,7 @@ namespace TerryForm.States
 	{
 		public virtual string StateName => "";
 		public virtual int StateDurationSeconds { get; protected set; } = 0;
-		public float StateEndTime { get; set; }
+		[Net] public float StateEndTime { get; set; }
 
 		public List<Pawn.Player> PlayerList = new();
 
@@ -52,16 +52,16 @@ namespace TerryForm.States
 		{
 			Host.AssertServer();
 
-			var current = Game.StateHandler.Players[0];
-			Game.StateHandler.Players.RemoveAt( 0 );
-			Game.StateHandler.Players.Add( current );
+			var current = StateHandler.Instance?.Players[0];
+			StateHandler.Instance?.Players.RemoveAt( 0 );
+			StateHandler.Instance?.Players.Add( current );
 
 			SkipDeadPlayer();
 		}
 
 		private void SkipDeadPlayer()
 		{
-			var current = Game.StateHandler.Players[0];
+			var current = StateHandler.Instance?.Players[0];
 			if ( !current.IsAlive )
 				RotatePlayers();
 		}

@@ -7,17 +7,14 @@ namespace TerryForm
 	public partial class Game : Sandbox.Game
 	{
 		public static Game Instance => Current as Game;
-		public static StateHandler StateHandler { get; private set; }
+		[Net] public StateHandler StateHandler { get; private set; }
 
 		public Game()
 		{
 			_ = new HudEntity();
 
-			if ( IsClient )
-				return;
-
-			StateHandler = new();
-			Event.Register( StateHandler );
+			if ( IsServer )
+				StateHandler = new();
 		}
 
 		public override void ClientJoined( Client cl )
@@ -34,7 +31,7 @@ namespace TerryForm
 		[ServerCmd]
 		public static void CheckState()
 		{
-			Log.Trace( StateHandler.State.StateName );
+			Log.Trace( StateHandler.Instance?.State.StateName );
 		}
 	}
 }
