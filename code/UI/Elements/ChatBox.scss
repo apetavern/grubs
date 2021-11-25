@@ -1,16 +1,16 @@
 ﻿@import "/Code/UI/_Globals.scss";
 
-text,label,textentry {
+text, label, textentry {
     font-family: $font; // TODO: Reconsider this font for readability reasons
 }
 
 chatbox {
     position: absolute;
-    bottom: $safe-area-y;
-    left: 450px;
+    bottom: 150px;
+    right: $safe-area-x;
     z-index: 100;
     flex-direction: column;
-    width: 500px;
+    width: 400px;
     font-family: Poppins;
     font-size: 13px;
     pointer-events: none;
@@ -32,14 +32,14 @@ chatbox {
     .canvas {
         flex-direction: column;
         align-items: flex-start;
-        height: 400px;
+        height: 200px;
         overflow: scroll;
         margin-bottom: 50px;
     }
 
     &.open {
-        background-color: $background;
-        border: 2px solid black;
+        background-color: rgba( $background, 0.8 );
+        border: 2px solid rgba( black, 0.8 )s;
         border-radius: 2px;
         pointer-events: all;
 
