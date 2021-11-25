@@ -7,7 +7,7 @@ namespace TerryForm
 	public partial class Game : Sandbox.Game
 	{
 		public static Game Instance => Current as Game;
-		public static StateHandler StateHandler { get; private set; }
+		[Net] public StateHandler StateHandler { get; private set; }
 
 		public Game()
 		{
@@ -34,7 +34,7 @@ namespace TerryForm
 		[ServerCmd]
 		public static void CheckState()
 		{
-			Log.Trace( StateHandler.State.StateName );
+			Log.Trace( Instance.StateHandler.State.StateName );
 		}
 	}
 }
