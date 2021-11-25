@@ -77,6 +77,7 @@
 					"Shotgun",
 					"Uzi",
 					"Throwable",
+					"Rifle",
 				]
 			},
 			{
@@ -1011,9 +1012,15 @@
 					{
 						m_id = 830760250
 					},
+					{
+						m_id = 1027476563
+					},
 				]
 				m_tags = 
 				[
+					{
+						m_id = 4294967295
+					},
 					{
 						m_id = 4294967295
 					},
@@ -1937,9 +1944,15 @@
 					{
 						m_id = 599787470
 					},
+					{
+						m_id = 1407188095
+					},
 				]
 				m_tags = 
 				[
+					{
+						m_id = 4294967295
+					},
 					{
 						m_id = 4294967295
 					},
@@ -1974,6 +1987,27 @@
 					m_vControlPoint1 = [ 0.5, 0.0 ]
 					m_vControlPoint2 = [ 0.5, 1.0 ]
 				}
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 930988568
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -800.0, 784.0 ]
+				m_nNodeID = 
+				{
+					m_id = 930988568
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "rifle_aim"
+				m_nFrameIndex = 1
+				m_tagSpans = [  ]
 			}
 		},
 		{
@@ -2036,6 +2070,69 @@
 				m_footMotionTiming = "Child1"
 				m_bResetChild1 = true
 				m_bResetChild2 = true
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1027476563
+			}
+			value = 
+			{
+				_class = "CBlendAnimNode"
+				m_sName = "AimBlend_Rifle"
+				m_vecPosition = [ -576.0, 816.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1027476563
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_children = 
+				[
+					{
+						m_nodeID = 
+						{
+							m_id = 930988568
+						}
+						m_name = "AimUp"
+						m_blendValue = 90.0
+					},
+					{
+						m_nodeID = 
+						{
+							m_id = 1906025930
+						}
+						m_name = "AimStraight"
+						m_blendValue = 0.0
+					},
+					{
+						m_nodeID = 
+						{
+							m_id = 1444610223
+						}
+						m_name = "AimDown"
+						m_blendValue = -90.0
+					},
+				]
+				m_blendValueSource = "Parameter"
+				m_param = 
+				{
+					m_id = 2085939065
+				}
+				m_blendKeyType = "BlendKey_UserValue"
+				m_bLockBlendOnReset = false
+				m_bSyncCycles = true
+				m_bLoop = true
+				m_bLockWhenWaning = true
+				m_damping = 
+				{
+					_class = "CAnimInputDamping"
+					m_speedFunction = "NoDamping"
+					m_fSpeedScale = 1.0
+					m_fMinSpeed = 10.0
+					m_fMaxTension = 1000.0
+				}
 			}
 		},
 		{
@@ -2275,6 +2372,27 @@
 		{
 			key = 
 			{
+				m_id = 1384964533
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -384.0, 720.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1384964533
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "rifle_aim"
+				m_nFrameIndex = 0
+				m_tagSpans = [  ]
+			}
+		},
+		{
+			key = 
+			{
 				m_id = 1399491902
 			}
 			value = 
@@ -2290,6 +2408,157 @@
 				m_sNote = ""
 				m_sequenceName = "walk_down"
 				m_nFrameIndex = 0
+				m_tagSpans = [  ]
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1407188095
+			}
+			value = 
+			{
+				_class = "CStateMachineAnimNode"
+				m_sName = "FireStatemachine"
+				m_vecPosition = [ -176.0, 720.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1407188095
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_states = 
+				[
+					{
+						_class = "CAnimState"
+						m_transitions = 
+						[
+							{
+								_class = "CAnimStateTransition"
+								m_conditions = 
+								[
+									{
+										_class = "CParameterAnimCondition"
+										m_comparisonOp = 0
+										m_paramID = 
+										{
+											m_id = 1584813805
+										}
+										m_comparisonValue = 
+										{
+											m_nType = 1
+											m_data = true
+										}
+									},
+								]
+								m_blendDuration = 0.01
+								m_destState = 
+								{
+									m_id = 1810273507
+								}
+								m_bReset = true
+								m_resetCycleOption = "Beginning"
+								m_flFixedCycleValue = 0.0
+								m_blendCurve = 
+								{
+									m_vControlPoint1 = [ 0.5, 0.0 ]
+									m_vControlPoint2 = [ 0.5, 1.0 ]
+								}
+								m_bForceFootPlant = false
+								m_bDisabled = false
+							},
+						]
+						m_tags = [  ]
+						m_tagBehaviors = [  ]
+						m_name = "idle"
+						m_childNodeID = 
+						{
+							m_id = 1384964533
+						}
+						m_stateID = 
+						{
+							m_id = 2032537662
+						}
+						m_position = [ -512.0, -160.0 ]
+						m_bIsStartState = true
+						m_bIsEndtState = false
+						m_bIsPassthrough = false
+						m_bIsRootMotionExclusive = false
+						m_bAlwaysEvaluate = false
+					},
+					{
+						_class = "CAnimState"
+						m_transitions = 
+						[
+							{
+								_class = "CAnimStateTransition"
+								m_conditions = 
+								[
+									{
+										_class = "CFinishedCondition"
+										m_comparisonOp = 0
+										m_option = "FinishedConditionOption_OnFinished"
+										m_bIsFinished = true
+									},
+								]
+								m_blendDuration = 0.2
+								m_destState = 
+								{
+									m_id = 2032537662
+								}
+								m_bReset = true
+								m_resetCycleOption = "Beginning"
+								m_flFixedCycleValue = 0.0
+								m_blendCurve = 
+								{
+									m_vControlPoint1 = [ 0.5, 0.0 ]
+									m_vControlPoint2 = [ 0.5, 1.0 ]
+								}
+								m_bForceFootPlant = false
+								m_bDisabled = false
+							},
+						]
+						m_tags = [  ]
+						m_tagBehaviors = [  ]
+						m_name = "fire"
+						m_childNodeID = 
+						{
+							m_id = 1384964533
+						}
+						m_stateID = 
+						{
+							m_id = 1810273507
+						}
+						m_position = [ -384.0, -160.0 ]
+						m_bIsStartState = false
+						m_bIsEndtState = false
+						m_bIsPassthrough = false
+						m_bIsRootMotionExclusive = false
+						m_bAlwaysEvaluate = false
+					},
+				]
+				m_bBlockWaningTags = false
+				m_bLockStateWhenWaning = false
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1444610223
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -800.0, 880.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1444610223
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "rifle_aim"
+				m_nFrameIndex = 2
 				m_tagSpans = [  ]
 			}
 		},
@@ -2487,6 +2756,27 @@
 				m_sequenceName = "walk_forward"
 				m_playbackSpeed = 1.0
 				m_bLoop = true
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1906025930
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -800.0, 832.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1906025930
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "rifle_aim"
+				m_nFrameIndex = 0
+				m_tagSpans = [  ]
 			}
 		},
 		{
