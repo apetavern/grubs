@@ -2,17 +2,17 @@
 
 PlayerInfoPanel {
     justify-content: center;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     color: white;
     background-image: url( /textures/ui/background-state.png );
     background-position: center;
     background-repeat: no-repeat;
     padding: 25px 10px;
-    padding-left: 72px;
+    padding-left: 106px;
 
     > div {
-        align-items: center;
+        align-items: flex-start;
     }
 
     &.background-0 {
@@ -33,9 +33,9 @@ PlayerInfoPanel {
 }
 
 .player-avatar {
-    width: 72px;
+    width: 96px;
     position: absolute;
-    left: 0;
+    left: 0px;
     z-index: 1;
     aspect-ratio: 1;
     background-size: cover;
@@ -47,12 +47,14 @@ PlayerInfoPanel {
 label {
     font-size: 32px;
     font-family: $font;
-    padding: 0px 20px;
     text-shadow: 2px 2px 0px rgba( black, 0.75 );
-    text-align: center;
     align-items: center;
 
     &.player-name {
         font-size: 20px;
     }
+}
+
+HealthBar {
+    margin: 5px 10px 5px 0;
 }

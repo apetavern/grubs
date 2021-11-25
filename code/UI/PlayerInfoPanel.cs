@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using TerryForm.UI.Elements;
 
 namespace TerryForm.UI
 {
@@ -15,6 +16,8 @@ namespace TerryForm.UI
 
 			Add.Image( "avatar:76561198128972602", "player-avatar" );
 			Add.Label( "Player Name", "player-name" );
+
+			AddChild<HealthBar>();
 		}
 	}
 }
