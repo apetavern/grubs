@@ -13,11 +13,8 @@ namespace TerryForm
 		{
 			_ = new HudEntity();
 
-			if ( IsClient )
-				return;
-
-			StateHandler = new();
-			Event.Register( StateHandler );
+			if ( IsServer )
+				StateHandler = new();
 		}
 
 		public override void ClientJoined( Client cl )
