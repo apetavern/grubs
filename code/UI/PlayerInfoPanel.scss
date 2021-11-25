@@ -8,8 +8,26 @@ PlayerInfoPanel {
     background-image: url( /textures/ui/background-player.png );
     background-position: center;
     background-repeat: no-repeat;
-    padding: 25px 10px;
-    padding-left: 106px;
+    padding: 15px 20px;
+
+
+    > .my-turn {
+        font-family: MaterialIcons-regular;
+        font-size: 64px;
+        color: $background-dark;
+        position: absolute;
+        top: 50%;
+        right: -64px;
+        transform: translate( 0 -25% ); // ????
+        text-stroke: 4px black;
+        opacity: 0;
+    }
+
+    &.my-turn {
+        > .my-turn {
+            opacity: 1;
+        }
+    }
 
     > div {
         align-items: flex-start;
@@ -20,22 +38,41 @@ PlayerInfoPanel {
     }
 
     &.background-1 {
-        background-size: 100% -100%;
+        background-size: -100% 100%;
     }
 
     &.background-2 {
-        background-size: -100% 100%;
+        background-size: 100% -100%;
     }
 
     &.background-3 {
         background-size: -100% -100%;
     }
+
+    &.team-a HealthBar .health-bar-inner {
+        background-color: $team-a;
+    }
+
+    &.team-b HealthBar .health-bar-inner {
+        background-color: $team-b;
+    }
+
+    &.team-c HealthBar .health-bar-inner {
+        background-color: $team-c;
+    }
+
+    &.team-d HealthBar .health-bar-inner {
+        background-color: $team-d;
+    }
+}
+
+.player-info {
+    align-items: center;
 }
 
 .player-avatar {
-    width: 96px;
-    position: absolute;
-    left: 0px;
+    margin-right: 8px;
+    width: 24px;
     z-index: 1;
     aspect-ratio: 1;
     background-size: cover;
@@ -44,7 +81,7 @@ PlayerInfoPanel {
     border-radius: 2px;
 }
 
-label {
+text {
     font-size: 32px;
     font-family: $font;
     text-shadow: 2px 2px 0px rgba( black, 0.75 );
@@ -56,5 +93,5 @@ label {
 }
 
 HealthBar {
-    margin: 5px 10px 5px 0;
+    margin: 5px 0;
 }
