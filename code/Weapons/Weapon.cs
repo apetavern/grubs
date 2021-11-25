@@ -70,6 +70,11 @@ namespace TerryForm.Weapons
 			anim.SetParam( "holdpose", (int)HoldPose );
 		}
 
+		public void SetVisible( bool visible )
+		{
+			EnableDrawing = visible;
+		}
+
 		public override bool CanSecondaryAttack() => false;
 
 		public override void AttackSecondary() { }

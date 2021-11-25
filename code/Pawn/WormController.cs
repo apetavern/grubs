@@ -138,7 +138,6 @@ namespace TerryForm.Pawn
 			mover.Velocity = mover.Velocity.WithZ( Jump );
 			GroundEntity = null;
 			Pawn.GroundEntity = null;
-			(Pawn as Worm).EquippedWeapon.EnableDrawing = false;
 
 			jumpStartZ = mover.Position.z;
 		}
@@ -158,7 +157,6 @@ namespace TerryForm.Pawn
 				{
 					float jumpDelta = jumpStartZ - mover.Position.z;
 					timeUntilCanMove = jumpDelta * MovementCooldownMultiplier;
-					(Pawn as Worm).EquippedWeapon.EnableDrawing = true;
 				}
 
 				GroundEntity = tr.Entity;
@@ -168,6 +166,9 @@ namespace TerryForm.Pawn
 				GroundEntity = null;
 				mover.Velocity += Vector3.Down * Gravity * Time.Delta;
 			}
+
+			// Hide the worms weapon if we aren't grounded.
+			(Pawn as Worm).EquippedWeapon?.SetVisible( tr.Hit );
 		}
 	}
 }

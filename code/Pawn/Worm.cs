@@ -23,13 +23,6 @@ namespace TerryForm.Pawn
 			Animator = new WormAnimator();
 			Camera = new Camera();
 
-			// Temporarily select a weapon from all weapons.
-			var randWeapons = Library.GetAll<Weapon>()
-				.Where( weapon => !weapon.IsAbstract )
-				.ToList();
-
-			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
-
 			base.Respawn();
 		}
 
@@ -88,6 +81,13 @@ namespace TerryForm.Pawn
 		public void OnTurnStarted()
 		{
 			IsCurrentTurn = true;
+
+			// Temporarily select a weapon from all weapons.
+			var randWeapons = Library.GetAll<Weapon>()
+				.Where( weapon => !weapon.IsAbstract )
+				.ToList();
+
+			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
 		}
 
 		public void OnTurnEnded()
