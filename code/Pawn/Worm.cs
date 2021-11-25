@@ -39,6 +39,27 @@ namespace TerryForm.Pawn
 			EquippedWeapon?.OnCarryStart( this );
 		}
 
+		public void DressFromClient( Client cl )
+		{
+			var clothes = new Clothing.Container();
+			clothes.LoadFromClient( cl );
+
+			// Skin tone
+			var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizen/citizen.vmdl" );
+			SetMaterialGroup( skinTone?.MaterialGroup );
+
+			// We only want the hair so we won't use the logic built into Clothing
+			var hair = clothes.Clothing.FirstOrDefault( item => item.Category == Clothing.ClothingCategory.Hair );
+
+			if ( hair is null )
+				return;
+
+			var ent = new AnimEntity( hair.Model, this );
+
+			if ( !string.IsNullOrEmpty( hair.MaterialGroup ) )
+				ent.SetMaterialGroup( hair.MaterialGroup );
+		}
+
 		public override void Simulate( Client cl )
 		{
 			/*
