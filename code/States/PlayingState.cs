@@ -19,6 +19,12 @@ namespace TerryForm.States
 		{
 			Log.Info( $"{ActivePlayer.Name} turn has finished." );
 
+			if ( CheckWinCondition() )
+			{
+				Game.StateHandler.ChangeState( new EndState() );
+				return;
+			}
+
 			PickNextPlayer();
 		}
 
@@ -36,6 +42,24 @@ namespace TerryForm.States
 			base.OnTick();
 
 			Turn?.OnTick();
+		}
+
+		private bool CheckWinCondition()
+		{
+			var players = Game.StateHandler.Players;
+
+			var anyPlayerAlive = false;
+			foreach ( var player in players )
+			{
+				if ( player.IsAlive ) anyPlayerAlive = true;
+			}
+
+			if ( !anyPlayerAlive )
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		// Debug method for changing current state to PlayingState.
