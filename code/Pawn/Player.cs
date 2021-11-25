@@ -6,26 +6,29 @@ namespace TerryForm.Pawn
 {
 	public partial class Player : Entity
 	{
-		public List<Worm> Worms { get; set; }
+		public List<Worm> Worms { get; set; } = new();
 		[Net] public Worm ActiveWorm { get; set; }
 		public Client ClientOwner { get; set; }
 		[Net] public long ClientId { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
-		public Player()
+		public Player( Client cl )
 		{
 			IsAlive = true;
-			Worms = new();
 
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
 				var worm = new Worm();
 				worm.Respawn();
+				worm.DressFromClient( cl );
+
 				Worms.Add( worm );
 			}
+
+			InitializeFromClient( cl );
 		}
 
-		public void InitializeFromClient( Client cl )
+		protected void InitializeFromClient( Client cl )
 		{
 			ClientOwner = cl;
 			ClientId = cl.PlayerId;
