@@ -11,11 +11,10 @@ namespace TerryForm.States
 
 		public StateHandler()
 		{
-			if ( !Host.IsServer )
-				return;
-
 			Instance = this;
-			State.Start();
+
+			if ( Host.IsServer )
+				State.Start();
 		}
 
 		public void OnPlayerJoin( Pawn.Player player )
