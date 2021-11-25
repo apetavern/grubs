@@ -81,10 +81,8 @@ namespace TerryForm.Pawn
 				Center = pawn.Position;
 
 				// Check if we've moved the camera, don't center on the pawn if we have
-				if ( delta.LengthSquared.AlmostEqual( 0, 0.1f ) )
-					return;
-
-				CenterOnPawn = false;
+				if ( !delta.LengthSquared.AlmostEqual( 0, 0.1f ) )
+					CenterOnPawn = false;
 			}
 
 			Center += delta;
