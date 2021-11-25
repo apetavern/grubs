@@ -7,9 +7,12 @@ namespace TerryForm.States
 	{
 		[Net, Change] public BaseState State { get; set; } = new WaitingState();
 		public List<Pawn.Player> Players { get; set; } = new();
+		public static StateHandler Instance { get; set; }
 
 		public StateHandler()
 		{
+			Instance = this;
+
 			State.Start();
 		}
 
