@@ -16,7 +16,6 @@ namespace TerryForm.States
 		public void OnPlayerJoin( Pawn.Player player )
 		{
 			Players.Add( player );
-
 			State?.OnPlayerJoin( player );
 		}
 
@@ -29,7 +28,7 @@ namespace TerryForm.States
 			State?.Start();
 		}
 
-		[Event.Tick]
+		[Event.Tick.Server]
 		private void Tick()
 		{
 			State?.OnTick();
