@@ -1,0 +1,58 @@
+﻿@import "/Code/UI/_Globals.scss";
+
+PlayerInfoPanel {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    background-image: url( /textures/ui/background-state.png );
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 25px 10px;
+    padding-left: 72px;
+
+    > div {
+        align-items: center;
+    }
+
+    &.background-0 {
+        background-size: 100%;
+    }
+
+    &.background-1 {
+        background-size: 100% -100%;
+    }
+
+    &.background-2 {
+        background-size: -100% 100%;
+    }
+
+    &.background-3 {
+        background-size: -100% -100%;
+    }
+}
+
+.player-avatar {
+    width: 72px;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+label {
+    font-size: 32px;
+    font-family: $font;
+    padding: 0px 20px;
+    text-shadow: 2px 2px 0px rgba( black, 0.75 );
+    text-align: center;
+    align-items: center;
+
+    &.player-name {
+        font-size: 20px;
+    }
+}
