@@ -21,7 +21,6 @@ namespace TerryForm.Pawn
 
 			Controller = new WormController();
 			Animator = new WormAnimator();
-			Camera = new Camera();
 
 			base.Respawn();
 		}
