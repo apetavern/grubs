@@ -9,8 +9,6 @@ namespace TerryForm.Pawn
 	{
 		public List<Worm> Worms { get; set; } = new();
 		[Net] public Worm ActiveWorm { get; set; }
-		public Client ClientOwner { get; set; }
-		[Net] public long ClientId { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
 		public Player() { }
@@ -51,9 +49,6 @@ namespace TerryForm.Pawn
 
 		protected void InitializeFromClient( Client cl )
 		{
-			ClientOwner = cl;
-			ClientId = cl.PlayerId;
-
 			PickNextWorm();
 
 			// Set the initial target of this players camera. This will be overriden later when the turn changes.
@@ -65,7 +60,7 @@ namespace TerryForm.Pawn
 			PickNextWorm();
 			ActiveWorm?.OnTurnStarted();
 
-			Log.Info( $"🐛 {ClientOwner.Name}'s turn has started using worm {ActiveWorm}." );
+			Log.Info( $"🐛 {Client.Name}'s turn has started using worm {ActiveWorm}." );
 		}
 
 		public void OnTurnEnd()
@@ -84,7 +79,7 @@ namespace TerryForm.Pawn
 			if ( !anyWormAlive )
 				IsAlive = false;
 
-			Log.Info( $"🐛 {ClientOwner.Name}'s turn for worm {ActiveWorm} has ended." );
+			Log.Info( $"🐛 {Client.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
 
 		private void RotateWorms()
