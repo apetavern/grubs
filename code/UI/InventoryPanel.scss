@@ -1,9 +1,8 @@
-﻿
-@import "/Code/UI/_Globals.scss";
+﻿@import "/Code/UI/_Globals.scss";
 
 InventoryPanel {
     position: absolute;
-    bottom: 150px;
+    bottom: 125px;
     right: $safe-area-x;
     justify-content: center;
     flex-direction: row;
@@ -12,29 +11,55 @@ InventoryPanel {
     background-color: $background;
     padding: 25px;
     width: 320px;
+    border: 2px solid black;
+    border-radius: 5px;
+    flex-direction: column;
+    transition: all 150ms ease;
+    opacity: 0;
+    transform: translateY( 50px );
+
+    &.open {
+        transform: translateY( 0px );
+        opacity: 1;
+    }
 
     > div {
         align-items: center;
     }
+}
 
+text, label {
+    font-size: 20px;
+    font-family: $font;
+    padding: 0px 20px;
+    text-shadow: 2px 2px 0px rgba( black, 0.75 );
+    text-align: center;
+    align-items: center;
+    text-transform: uppercase;
+
+    &.title {
+        margin-bottom: 8px;
+        margin-top: -8px;
+    }
+}
+
+.inventory-items {
     flex-direction: row;
     flex-wrap: wrap;
     flex-basis: 128px;
     align-items: center;
     justify-content: space-evenly;
-    border: 2px solid black;
-    border-radius: 5px;
 }
 
 InventoryItem {
     aspect-ratio: 1;
     flex-grow: 0;
     flex-shrink: 0;
-    width: 62px;
+    width: 49px;
     margin: 2px;
-    border: 2px solid black;
     border-radius: 5px;
     background-color: rgba( black, 0.25 );
+    transition: all 150ms ease;
 
     &:hover {
         background-color: rgba( $background-darker, 0.75 );

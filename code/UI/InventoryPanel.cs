@@ -10,10 +10,19 @@ namespace TerryForm.UI
 		{
 			StyleSheet.Load( "/Code/UI/InventoryPanel.scss" );
 
-			for ( int i = 0; i < 24; ++i )
+			Add.Label( "Inventory", "title" );
+
+			var itemsPanel = Add.Panel( "inventory-items" );
+
+			const int rows = 6;
+			const int cols = 5;
+
+			for ( int i = 0; i < rows * cols; ++i )
 			{
-				AddChild<InventoryItem>();
+				itemsPanel.AddChild<InventoryItem>();
 			}
+
+			BindClass( "open", () => Input.Down( InputButton.Menu ) );
 		}
 	}
 }
