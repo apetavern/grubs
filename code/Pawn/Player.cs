@@ -45,6 +45,7 @@ namespace TerryForm.Pawn
 		{
 			base.Simulate( cl );
 
+			// Simulate all worms, this might seem odd but without this the worm never grounds because it's controller isn't simulated.
 			Worms.ForEach( worm => worm.Simulate( cl ) );
 		}
 
