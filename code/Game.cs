@@ -11,10 +11,11 @@ namespace TerryForm
 
 		public Game()
 		{
-			_ = new HudEntity();
-
 			if ( IsServer )
+			{
 				StateHandler = new();
+				_ = new HudEntity();
+			}
 		}
 
 		public override void ClientJoined( Client cl )
