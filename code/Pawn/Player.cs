@@ -54,6 +54,9 @@ namespace TerryForm.Pawn
 			ClientId = cl.PlayerId;
 
 			PickNextWorm();
+
+			// Set the initial target of this players camera. This will be overriden later when the turn changes.
+			UpdateCameraTarget( ActiveWorm );
 		}
 
 		public void OnTurnStart()
