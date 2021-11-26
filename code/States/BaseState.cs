@@ -45,7 +45,10 @@ namespace TerryForm.States
 		{
 			Host.AssertServer();
 
-			if ( !PlayerList.Contains( player ) ) PlayerList.Add( player );
+			Log.Info( "Adding player" );
+
+			if ( !PlayerList.Contains( player ) )
+				PlayerList.Add( player );
 		}
 
 		public void RotatePlayers()
@@ -76,7 +79,10 @@ namespace TerryForm.States
 
 		public virtual void OnPlayerSpawn( Pawn.Player player ) { }
 
-		public virtual void OnPlayerJoin( Pawn.Player player ) { }
+		public virtual void OnPlayerJoin( Pawn.Player player )
+		{
+			AddPlayer( player );
+		}
 
 		public virtual void OnPlayerLeave( Pawn.Player player ) { }
 
