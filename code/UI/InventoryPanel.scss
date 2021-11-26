@@ -1,0 +1,19 @@
+﻿
+@import "/Code/UI/_Globals.scss";
+
+InventoryPanel {
+    position: absolute;
+    bottom: 150px;
+    right: $safe-area-x;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    width: 300px;
+    height: 400px;
+    background-color: red;
+
+    > div {
+        align-items: center;
+    }
+}
