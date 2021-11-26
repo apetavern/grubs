@@ -12,14 +12,29 @@ namespace TerryForm.Weapons
 		public override float PrimaryRate => 2f;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		public virtual bool IsFiredTurnEnding => false;
+		[Net] public bool WeaponEnabled { get; set; }
+		private WormAnimator Animator { get; set; }
 
 		public override void Spawn()
 		{
 			base.Spawn();
 
 			SetModel( ModelPath );
+		}
 
-			EnableHideInFirstPerson = false;
+		public override void Simulate( Client cl )
+		{
+			base.Simulate( cl );
+
+			SetWeaponEnabled( cl.Pawn.Velocity.IsNearlyZero( 30 ) && cl.Pawn.GroundEntity is not null );
+		}
+
+		public void SetWeaponEnabled( bool shouldEnable )
+		{
+			WeaponEnabled = shouldEnable;
+
+			Animator?.SetParam( "holdpose", shouldEnable ? (int)HoldPose : (int)HoldPose.None );
+			SetVisible( shouldEnable );
 		}
 
 		public override void ActiveStart( Entity ent )
@@ -29,15 +44,11 @@ namespace TerryForm.Weapons
 			OnActiveEffects();
 		}
 
-		public override void ActiveEnd( Entity ent, bool dropped )
-		{
-			base.ActiveEnd( ent, dropped );
-
-			OnActiveEndEffects();
-		}
-
 		public override bool CanPrimaryAttack()
 		{
+			if ( !WeaponEnabled )
+				return false;
+
 			return base.CanPrimaryAttack();
 		}
 
@@ -67,6 +78,7 @@ namespace TerryForm.Weapons
 
 		public override void SimulateAnimator( PawnAnimator anim )
 		{
+			Animator = anim as WormAnimator;
 			anim.SetParam( "holdpose", (int)HoldPose );
 		}
 
@@ -87,9 +99,6 @@ namespace TerryForm.Weapons
 
 		[ClientRpc]
 		public virtual void OnActiveEffects() { }
-
-		[ClientRpc]
-		public virtual void OnActiveEndEffects() { }
 
 		public virtual void OnFireEffects() { }
 	}

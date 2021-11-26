@@ -19,6 +19,7 @@ namespace TerryForm.Pawn
 		private float DistanceScrollRate => 32f;
 
 		private TimeSince TimeSinceMousePan { get; set; }
+		private int SecondsBeforeReturnFromPan => 3;
 
 		private bool CenterOnPawn { get; set; } = true;
 
@@ -57,7 +58,7 @@ namespace TerryForm.Pawn
 				MoveCamera( pawn );
 
 			// Check the last time we panned the camera, update CenterOnPawn if greater than N.
-			if ( !Input.Down( InputButton.Attack2 ) && TimeSinceMousePan > 1 )
+			if ( !Input.Down( InputButton.Attack2 ) && TimeSinceMousePan > SecondsBeforeReturnFromPan )
 				CenterOnPawn = true;
 
 			//

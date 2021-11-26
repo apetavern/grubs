@@ -77,8 +77,7 @@ namespace TerryForm.Pawn
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );
 
-			if ( IsCurrentTurn )
-				SimulateActiveChild( cl, EquippedWeapon );
+			SimulateActiveChild( cl, EquippedWeapon );
 		}
 
 		public void OnTurnStarted()
@@ -91,6 +90,7 @@ namespace TerryForm.Pawn
 				.ToList();
 
 			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
+			EquippedWeapon?.SetWeaponEnabled( true );
 		}
 
 		public void OnTurnEnded()
@@ -99,6 +99,17 @@ namespace TerryForm.Pawn
 
 			if ( Health < 0 )
 				OnKilled();
+
+			EquippedWeapon?.SetWeaponEnabled( false );
+		}
+
+		public override void CreateHull()
+		{
+			CollisionGroup = CollisionGroup.Player;
+			AddCollisionLayer( CollisionLayer.Player );
+			SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 32 ) );
+			MoveType = MoveType.MOVETYPE_WALK;
+			EnableHitboxes = true;
 		}
 
 		public override void OnKilled()
