@@ -78,7 +78,7 @@
 					"Uzi",
 					"Throwable",
 					"Rifle",
-					"BaseballBat",
+					"Swing",
 				]
 			},
 			{
@@ -946,7 +946,7 @@
 			{
 				_class = "CStateMachineAnimNode"
 				m_sName = "FireStatemachine"
-				m_vecPosition = [ -176.0, 832.0 ]
+				m_vecPosition = [ -176.0, 848.0 ]
 				m_nNodeID = 
 				{
 					m_id = 339156577
@@ -3036,7 +3036,7 @@
 			{
 				_class = "CSingleFrameAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -384.0, 832.0 ]
+				m_vecPosition = [ -384.0, 848.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1897445146
@@ -3099,7 +3099,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -384.0, 896.0 ]
+				m_vecPosition = [ -384.0, 912.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1932366709
