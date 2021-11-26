@@ -59,8 +59,6 @@ namespace TerryForm.Pawn
 		public void OnTurnStart()
 		{
 			PickNextWorm();
-
-			UpdateCameraTarget( ActiveWorm );
 			ActiveWorm?.OnTurnStarted();
 
 			Log.Info( $"🐛 {ClientOwner.Name}'s turn has started using worm {ActiveWorm}." );
