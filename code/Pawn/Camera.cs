@@ -28,7 +28,6 @@ namespace TerryForm.Pawn
 
 		public void SetLookTarget( Entity target )
 		{
-			Log.Info( "Updating camera target to: " + target );
 			LookTarget = target;
 		}
 
