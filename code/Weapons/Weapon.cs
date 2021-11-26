@@ -22,13 +22,6 @@ namespace TerryForm.Weapons
 			SetModel( ModelPath );
 		}
 
-		public override void Simulate( Client cl )
-		{
-			base.Simulate( cl );
-
-			SetWeaponEnabled( cl.Pawn.Velocity.IsNearlyZero( 30 ) && cl.Pawn.GroundEntity is not null );
-		}
-
 		public void SetWeaponEnabled( bool shouldEnable )
 		{
 			WeaponEnabled = shouldEnable;
