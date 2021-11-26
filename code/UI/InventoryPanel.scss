@@ -9,11 +9,34 @@ InventoryPanel {
     flex-direction: row;
     align-items: center;
     color: white;
-    width: 300px;
-    height: 400px;
-    background-color: red;
+    background-color: $background;
+    padding: 25px;
+    width: 320px;
 
     > div {
         align-items: center;
+    }
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 128px;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+InventoryItem {
+    aspect-ratio: 1;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 62px;
+    margin: 2px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: rgba( black, 0.25 );
+
+    &:hover {
+        background-color: rgba( $background-darker, 0.75 );
     }
 }
