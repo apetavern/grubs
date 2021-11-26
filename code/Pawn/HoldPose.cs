@@ -7,6 +7,7 @@
 		Shotgun,
 		Uzi,
 		Throwable,
-		Rifle
+		Rifle,
+		Swing
 	}
 }
