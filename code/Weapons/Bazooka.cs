@@ -2,7 +2,7 @@
 
 namespace TerryForm.Weapons
 {
-	public class Bazooka : Weapon
+	public class Bazooka : ArcWeapon
 	{
 		public override string WeaponName => "Bazooka";
 		public override string ModelPath => "models/weapons/bazooka/bazooka.vmdl";
@@ -11,11 +11,7 @@ namespace TerryForm.Weapons
 
 		public override void Fire()
 		{
-			new ExplodingProjectile()
-				.WithRadius( 60 )
-				.SetMaxBounces( 1 )
-				.WithModel( "models/weapons/shell/shell.vmdl" )
-				.FireFrom( Owner.EyePos + Owner.EyeRot.Forward * 70, Owner.EyeRot.Forward.Normal, 50000 );
+
 
 			base.Fire();
 		}
