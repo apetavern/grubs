@@ -77,6 +77,13 @@ namespace TerryForm.Pawn
 			SimulateActiveChild( cl, EquippedWeapon );
 		}
 
+		public override void SimulateActiveChild( Client cl, Entity child )
+		{
+			base.SimulateActiveChild( cl, child );
+
+			(child as Weapon)?.SetWeaponEnabled( Velocity.WithZ( 0 ).IsNearZeroLength && GroundEntity is not null );
+		}
+
 		public void OnTurnStarted()
 		{
 			IsCurrentTurn = true;
