@@ -1,10 +1,11 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using TerryForm.Utils;
+using System.Linq;
 
 namespace TerryForm.Pawn
 {
-	public partial class Player : Entity
+	public partial class Player : Sandbox.Player
 	{
 		public List<Worm> Worms { get; set; } = new();
 		[Net] public Worm ActiveWorm { get; set; }
@@ -33,6 +34,20 @@ namespace TerryForm.Pawn
 			Transmit = TransmitType.Always;
 		}
 
+		public override void Respawn()
+		{
+			Camera = new Camera();
+
+			base.Respawn();
+		}
+
+		public override void Simulate( Client cl )
+		{
+			base.Simulate( cl );
+
+			Worms.ForEach( worm => worm.Simulate( cl ) );
+		}
+
 		protected void InitializeFromClient( Client cl )
 		{
 			ClientOwner = cl;
@@ -44,6 +59,8 @@ namespace TerryForm.Pawn
 		public void OnTurnStart()
 		{
 			PickNextWorm();
+
+			UpdateCameraTarget( ActiveWorm );
 			ActiveWorm?.OnTurnStarted();
 
 			Log.Info( $"🐛 {ClientOwner.Name}'s turn has started using worm {ActiveWorm}." );
@@ -57,7 +74,8 @@ namespace TerryForm.Pawn
 			var anyWormAlive = false;
 			foreach ( var worm in Worms )
 			{
-				if ( worm.IsAlive ) anyWormAlive = true;
+				if ( worm.IsAlive )
+					anyWormAlive = true;
 			}
 
 			// If all are dead, Player is also dead.
@@ -79,8 +97,12 @@ namespace TerryForm.Pawn
 		{
 			RotateWorms();
 			ActiveWorm = Worms[0];
+		}
 
-			ClientOwner.Pawn = ActiveWorm;
+		[ClientRpc]
+		public void UpdateCameraTarget( Entity target )
+		{
+			(Camera as Pawn.Camera).SetLookTarget( target );
 		}
 	}
 }
