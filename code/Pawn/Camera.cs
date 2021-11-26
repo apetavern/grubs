@@ -24,7 +24,7 @@ namespace TerryForm.Pawn
 
 		public Vector3 Center { get; set; }
 
-		protected Entity LookTarget { get; private set; } = Local.Pawn;
+		protected Entity LookTarget { get; private set; }
 
 		public void SetLookTarget( Entity target )
 		{
@@ -34,6 +34,7 @@ namespace TerryForm.Pawn
 		public override void Update()
 		{
 			var pawn = LookTarget;
+			//Log.Info( pawn );
 
 			if ( pawn == null )
 				return;

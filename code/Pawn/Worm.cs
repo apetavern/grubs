@@ -21,7 +21,6 @@ namespace TerryForm.Pawn
 
 			Controller = new WormController();
 			Animator = new WormAnimator();
-			Camera = new Camera();
 
 			base.Respawn();
 		}
@@ -43,16 +42,22 @@ namespace TerryForm.Pawn
 			var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizen/citizen.vmdl" );
 			SetMaterialGroup( skinTone?.MaterialGroup );
 
-			// We only want the hair so we won't use the logic built into Clothing
-			var hair = clothes.Clothing.FirstOrDefault( item => item.Category == Clothing.ClothingCategory.Hair );
+			// We only want the hair/hats so we won't use the logic built into Clothing
+			var items = clothes.Clothing.Where( item =>
+				item.Category == Clothing.ClothingCategory.Hair ||
+				item.Category == Clothing.ClothingCategory.Hat
+			);
 
-			if ( hair is null )
+			if ( !items.Any() )
 				return;
 
-			var ent = new AnimEntity( hair.Model, this );
+			foreach ( var item in items )
+			{
+				var ent = new AnimEntity( item.Model, this );
 
-			if ( !string.IsNullOrEmpty( hair.MaterialGroup ) )
-				ent.SetMaterialGroup( hair.MaterialGroup );
+				if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
+					ent.SetMaterialGroup( item.MaterialGroup );
+			}
 		}
 
 		public override void Simulate( Client cl )
@@ -81,7 +86,7 @@ namespace TerryForm.Pawn
 		{
 			base.SimulateActiveChild( cl, child );
 
-			(child as Weapon)?.SetWeaponEnabled( Velocity.WithZ( 0 ).IsNearZeroLength && GroundEntity is not null );
+			(child as Weapon)?.SetWeaponEnabled( Velocity.WithZ( 0 ).IsNearZeroLength && GroundEntity is not null && IsCurrentTurn );
 		}
 
 		public void OnTurnStarted()
