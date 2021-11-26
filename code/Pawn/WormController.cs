@@ -166,9 +166,6 @@ namespace TerryForm.Pawn
 				GroundEntity = null;
 				mover.Velocity += Vector3.Down * Gravity * Time.Delta;
 			}
-
-			// Hide the worms weapon if we aren't grounded.
-			(Pawn as Worm).EquippedWeapon?.SetVisible( tr.Hit );
 		}
 	}
 }
