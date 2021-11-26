@@ -1,5 +1,7 @@
 ﻿rootpanel {
-    pointer-events: visible;
+    &:not(.devcamera) {
+        pointer-events: visible;
+    }
 }
 
 text.demo {
