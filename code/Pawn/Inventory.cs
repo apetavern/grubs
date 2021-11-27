@@ -28,7 +28,6 @@ namespace TerryForm.Pawn
 
 			return base.Add( ent, makeActive );
 		}
-
 		public bool IsCarryingType( Type t )
 		{
 			return List.Any( x => x.GetType() == t );
