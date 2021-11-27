@@ -25,6 +25,7 @@ namespace TerryForm.UI.World
 					{
 						var nametag = new WormNametag();
 						nametag.Worm = worm as Worm;
+						nametag.AddClass( $"{(worm as Worm).GetTeamClass()} my-turn" );
 
 						Nametags.Add( worm, nametag );
 					}

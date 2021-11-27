@@ -55,8 +55,6 @@ namespace TerryForm.UI.World
 			{
 				WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 5f;
 			}
-
-
 			Update();
 		}
 	}

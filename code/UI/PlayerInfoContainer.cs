@@ -2,6 +2,7 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
+using TerryForm.Pawn;
 
 namespace TerryForm.UI
 {
@@ -20,9 +21,8 @@ namespace TerryForm.UI
 
 				var playerInfoPanel = new PlayerInfoPanel( client );
 				var index = playerInfoPanels.Count % 4;
-				var team = "abcd"[index];
 
-				playerInfoPanel.AddClass( $"background-{index} team-{team} my-turn" );
+				playerInfoPanel.AddClass( $"background-{index} {(client.Pawn as Worm).GetTeamClass()} my-turn" );
 				playerInfoPanel.Parent = this;
 				playerInfoPanels.Add( client, playerInfoPanel );
 			}

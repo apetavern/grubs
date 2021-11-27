@@ -1,10 +1,25 @@
 ﻿@import "/Code/UI/_Globals.scss";
 
 WormNametag {
-    color: $team-a;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    &.team-a {
+        color: $team-a;
+    }
+
+    &.team-b {
+        color: $team-b;
+    }
+
+    &.team-c {
+        color: $team-c;
+    }
+
+    &.team-d {
+        color: $team-d;
+    }
 }
 
 label {

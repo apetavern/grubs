@@ -123,5 +123,13 @@ namespace TerryForm.Pawn
 
 			EquippedWeapon?.OnOwnerKilled();
 		}
+
+		public string GetTeamClass()
+		{
+			int index = Client.All.ToList().IndexOf( this.Client );
+			var team = "abcd"[index]; // TODO: We need a proper way of getting team colors
+
+			return $"team-{team}";
+		}
 	}
 }
