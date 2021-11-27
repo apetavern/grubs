@@ -33,9 +33,9 @@ namespace TerryForm.States
 		}
 
 		[Event.Tick.Server]
-		private void Tick()
+		public static void Tick()
 		{
-			State?.OnTick();
+			Instance?.State?.OnTick();
 		}
 	}
 }

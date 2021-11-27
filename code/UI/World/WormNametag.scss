@@ -1,0 +1,36 @@
+﻿@import "/Code/UI/_Globals.scss";
+
+WormNametag {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &.team-a {
+        color: $team-a;
+    }
+
+    &.team-b {
+        color: $team-b;
+    }
+
+    &.team-c {
+        color: $team-c;
+    }
+
+    &.team-d {
+        color: $team-d;
+    }
+}
+
+label {
+    font-size: 32px;
+    font-family: $font;
+    background-color: rgba( black, 0.1 );
+    border: 2px solid rgba( black, 0.1 );
+    border-radius: 5px;
+    padding: 0px 20px;
+    text-shadow: 2px 2px 0px rgba( black, 0.75 );
+    text-align: center;
+    align-items: center;
+    margin: 2px 0;
+}
