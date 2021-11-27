@@ -59,10 +59,23 @@ InventoryItem {
     width: 49px;
     margin: 2px;
     border-radius: 5px;
-    background-color: rgba( black, 0.25 );
+    background-color: rgba( black, 0.35 );
     transition: all 150ms ease;
+    opacity: 0.4;
+    padding: 4px;
 
-    &:hover {
-        background-color: rgba( $background-darker, 0.75 );
+    &.Occupied {
+        opacity: 1;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgba( $background-darker, 0.75 );
+        }
+    }
+
+    Image {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
     }
 }
