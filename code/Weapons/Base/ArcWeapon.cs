@@ -9,49 +9,44 @@ namespace TerryForm.Weapons
 	{
 		public override string WeaponName => "";
 		public override string ModelPath => "";
-		public override float PrimaryRate => 2f;
+		public virtual string ProjectileModel => "";
 		public override HoldPose HoldPose => HoldPose.Bazooka;
 		public override bool IsFiredTurnEnding => false;
 
-		private float InitialTraceForce { get; set; } = 10;
-		private float ComputedTraceForce { get; set; }
+		[Net, Predicted] private float ComputedTraceForce { get; set; }
+
 		private Projectile FiredProjectile { get; set; }
 
-		public override bool CanPrimaryAttack()
-		{
-			if ( !WeaponEnabled )
-				return false;
-
-			return base.CanPrimaryAttack();
-		}
-
-		public async override void Fire()
-		{
-			base.Fire();
-
-
-		}
-
-		private Vector3 randWind;
+		public override bool CanPrimaryAttack() => WeaponEnabled;
 
 		public override void Simulate( Client player )
 		{
+			if ( !CanPrimaryAttack() )
+				return;
+
+			var windForce = Turn.Instance?.WindForce ?? Vector3.Zero;
+
 			if ( Input.Down( InputButton.Attack1 ) )
 			{
 				ComputedTraceForce += 0.4f;
-				new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, InitialTraceForce + ComputedTraceForce, randWind ).Run();
+				new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, 10 + ComputedTraceForce, windForce ).Run();
+
+				return;
 			}
 
 			if ( Input.Released( InputButton.Attack1 ) )
 			{
-				var trace = new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, InitialTraceForce + ComputedTraceForce, randWind ).Run();
-				ComputedTraceForce = 0;
+				var trace = new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, 10 + ComputedTraceForce, windForce ).Run();
 
-				FiredProjectile = new Projectile().WithModel( "models/weapons/shell/shell.vmdl" ).MoveAlongTrace( trace );
-				randWind = Vector3.Random.WithY( 0 ).Normal / 2;
+				if ( IsServer )
+					FiredProjectile = new Projectile().WithModel( ProjectileModel ).MoveAlongTrace( trace );
 			}
 
-			FiredProjectile?.Simulate( player );
+			// Remove this later, it's just so that I can fire a few in a row.
+			ComputedTraceForce = 0;
+
+			if ( IsServer )
+				FiredProjectile?.Simulate( player );
 		}
 
 		public override void OnOwnerKilled() { }
