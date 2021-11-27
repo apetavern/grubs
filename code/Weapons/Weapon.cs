@@ -21,6 +21,7 @@ namespace TerryForm.Weapons
 			base.Spawn();
 
 			SetModel( ModelPath );
+			Ammo = GameConfig.LoadoutDefaults[ClassInfo.Name];
 		}
 
 		public void SetWeaponEnabled( bool shouldEnable )
@@ -60,6 +61,8 @@ namespace TerryForm.Weapons
 		{
 			if ( !IsFiredTurnEnding )
 				return;
+
+			Ammo--;
 
 			/* 
 			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
