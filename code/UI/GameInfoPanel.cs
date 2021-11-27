@@ -26,14 +26,8 @@ namespace TerryForm.UI
 			var state = game.StateHandler.State;
 			if ( state == null ) return;
 
-			DebugOverlay.ScreenText( 0, state.StateName );
-			DebugOverlay.ScreenText( 1, state.TimeLeft.ToString() );
-
 			if ( state is PlayingState playingState )
 			{
-				DebugOverlay.ScreenText( 2, playingState.Turn.StateName );
-				DebugOverlay.ScreenText( 3, playingState.Turn.TimeLeft.ToString() );
-
 				TimeSpan stateTimeSpan = TimeSpan.FromSeconds( playingState.TimeLeft );
 				StateTime.Text = string.Format( "{0:D2}:{1:D2}",
 								stateTimeSpan.Minutes,
