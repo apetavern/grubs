@@ -30,6 +30,9 @@ namespace TerryForm.States.SubStates
 
 			// Let the player know that their turn has started.
 			ActivePlayer?.OnTurnStart();
+
+			// Update camera target for all players.
+			StateHandler.Instance?.Players?.ForEach( player => player.UpdateCameraTarget( ActivePlayer.ActiveWorm ) );
 		}
 
 		protected override void OnTimeUp()

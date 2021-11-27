@@ -3,15 +3,15 @@ using System.Linq;
 using System.Collections.Generic;
 using TerryForm.UI.World;
 using TerryForm.Utils;
+using TerryForm.Weapons;
+using System.Linq;
 
 namespace TerryForm.Pawn
 {
-	public partial class Player : Entity
+	public partial class Player : Sandbox.Player
 	{
 		public List<Worm> Worms { get; set; } = new();
 		[Net] public Worm ActiveWorm { get; set; }
-		public Client ClientOwner { get; set; }
-		[Net] public long ClientId { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
 		public Player() { }
@@ -19,6 +19,15 @@ namespace TerryForm.Pawn
 		public Player( Client cl ) : this()
 		{
 			IsAlive = true;
+
+			// Initialize the Inventory with all weapons.
+			Inventory = new Inventory( this );
+			var weapons = Library.GetAll<Weapon>()
+				.Where( weapon => !weapon.IsAbstract );
+			foreach ( var weapon in weapons )
+			{
+				Inventory.Add( Library.Create<Weapon>( weapon ) );
+			}
 
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
@@ -35,12 +44,27 @@ namespace TerryForm.Pawn
 			Transmit = TransmitType.Always;
 		}
 
+		public override void Respawn()
+		{
+			Camera = new Camera();
+
+			base.Respawn();
+		}
+
+		public override void Simulate( Client cl )
+		{
+			base.Simulate( cl );
+
+			// Simulate all worms, this might seem odd but without this the worm never grounds because it's controller isn't simulated.
+			Worms.ForEach( worm => worm.Simulate( cl ) );
+		}
+
 		protected void InitializeFromClient( Client cl )
 		{
-			ClientOwner = cl;
-			ClientId = cl.PlayerId;
-
 			PickNextWorm();
+
+			// Set the initial target of this players camera. This will be overriden later when the turn changes.
+			UpdateCameraTarget( ActiveWorm );
 		}
 
 		public void OnTurnStart()
@@ -48,7 +72,7 @@ namespace TerryForm.Pawn
 			PickNextWorm();
 			ActiveWorm?.OnTurnStarted();
 
-			Log.Info( $"🐛 {ClientOwner.Name}'s turn has started using worm {ActiveWorm}." );
+			Log.Info( $"🐛 {Client.Name}'s turn has started using worm {ActiveWorm}." );
 		}
 
 		public void OnTurnEnd()
@@ -59,14 +83,15 @@ namespace TerryForm.Pawn
 			var anyWormAlive = false;
 			foreach ( var worm in Worms )
 			{
-				if ( worm.IsAlive ) anyWormAlive = true;
+				if ( worm.IsAlive )
+					anyWormAlive = true;
 			}
 
 			// If all are dead, Player is also dead.
 			if ( !anyWormAlive )
 				IsAlive = false;
 
-			Log.Info( $"🐛 {ClientOwner.Name}'s turn for worm {ActiveWorm} has ended." );
+			Log.Info( $"🐛 {Client.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
 
 		private void RotateWorms()
@@ -81,8 +106,12 @@ namespace TerryForm.Pawn
 		{
 			RotateWorms();
 			ActiveWorm = Worms[0];
+		}
 
-			ClientOwner.Pawn = ActiveWorm;
+		[ClientRpc]
+		public void UpdateCameraTarget( Entity target )
+		{
+			(Camera as Pawn.Camera).SetLookTarget( target );
 		}
 	}
 }
