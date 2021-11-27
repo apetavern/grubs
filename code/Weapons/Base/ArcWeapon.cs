@@ -13,7 +13,7 @@ namespace TerryForm.Weapons
 		public override HoldPose HoldPose => HoldPose.Bazooka;
 		public override bool IsFiredTurnEnding => false;
 
-		private float InitialTraceForce { get; set; } = 20;
+		private float InitialTraceForce { get; set; } = 10;
 		private float ComputedTraceForce { get; set; }
 		private Projectile FiredProjectile { get; set; }
 
@@ -32,20 +32,23 @@ namespace TerryForm.Weapons
 
 		}
 
+		private Vector3 randWind;
+
 		public override void Simulate( Client player )
 		{
 			if ( Input.Down( InputButton.Attack1 ) )
 			{
 				ComputedTraceForce += 0.4f;
-				new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, InitialTraceForce + ComputedTraceForce ).Run();
+				new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, InitialTraceForce + ComputedTraceForce, randWind ).Run();
 			}
 
 			if ( Input.Released( InputButton.Attack1 ) )
 			{
-				var trace = new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, InitialTraceForce + ComputedTraceForce ).Run();
+				var trace = new ArcTrace( Owner.EyePos, (Owner.EyeRot.Forward).Normal, InitialTraceForce + ComputedTraceForce, randWind ).Run();
 				ComputedTraceForce = 0;
 
-				FiredProjectile = new Projectile().MoveAlongTrace( trace );
+				FiredProjectile = new Projectile().WithModel( "models/weapons/shell/shell.vmdl" ).MoveAlongTrace( trace );
+				randWind = Vector3.Random.WithY( 0 ).Normal / 2;
 			}
 
 			FiredProjectile?.Simulate( player );
