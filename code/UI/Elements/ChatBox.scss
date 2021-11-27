@@ -6,8 +6,8 @@ text, label, textentry {
 
 chatbox {
     position: absolute;
-    bottom: 150px;
-    right: $safe-area-x;
+    top: $safe-area-y;
+    left: $safe-area-x;
     z-index: 100;
     flex-direction: column;
     width: 400px;
