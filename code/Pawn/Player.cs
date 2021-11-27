@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using TerryForm.Utils;
+using TerryForm.Weapons;
 using System.Linq;
 
 namespace TerryForm.Pawn
@@ -16,6 +17,12 @@ namespace TerryForm.Pawn
 		public Player( Client cl ) : this()
 		{
 			IsAlive = true;
+
+			Inventory = new Inventory( this );
+			foreach ( var weapon in Library.GetAll<Weapon>().Where( weapon => !weapon.IsAbstract ) )
+			{
+
+			}
 
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{

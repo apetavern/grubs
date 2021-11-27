@@ -14,6 +14,7 @@ namespace TerryForm.Weapons
 		public virtual bool IsFiredTurnEnding => false;
 		[Net] public bool WeaponEnabled { get; set; }
 		private WormAnimator Animator { get; set; }
+		public virtual int Ammo { get; set; } = 0;
 
 		public override void Spawn()
 		{
