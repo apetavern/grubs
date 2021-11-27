@@ -1,4 +1,5 @@
 ﻿using Sandbox.UI;
+using TerryForm.UI.World;
 
 namespace TerryForm.UI
 {
@@ -9,6 +10,8 @@ namespace TerryForm.UI
 			if ( IsClient )
 			{
 				RootPanel.SetTemplate( "/Code/UI/HudEntity.html" );
+
+				_ = new WormNametags();
 			}
 		}
 	}

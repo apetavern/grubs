@@ -1,11 +1,13 @@
-﻿rootpanel {
+@import "/Code/UI/_Globals.scss";
+
+rootpanel {
     &:not(.devcamera) {
         pointer-events: visible;
     }
 }
 
 text.demo {
-    font-family: Roboto;
+    font-family: $font;
     font-size: 32px;
     font-weight: bold;
     position: absolute;
@@ -14,4 +16,12 @@ text.demo {
     transform: translateX(-50%);
     text-shadow: 0 0 3px rgba( black, 0.2 );
     color: white;
+}
+
+PlayerInfoContainer {
+    bottom: 200px;
+    left: $safe-area-x;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
 }

@@ -31,11 +31,5 @@ namespace TerryForm.States
 			State = state;
 			State?.Start();
 		}
-
-		[Event.Tick.Server]
-		private void Tick()
-		{
-			State?.OnTick();
-		}
 	}
 }
