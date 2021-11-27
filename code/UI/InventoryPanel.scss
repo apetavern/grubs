@@ -8,11 +8,12 @@ InventoryPanel {
     flex-direction: row;
     align-items: center;
     color: white;
-    background-color: $background;
-    padding: 25px;
+    background-image: url( /textures/ui/background-inventory.png );
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 25px;
     width: 320px;
-    border: 2px solid black;
-    border-radius: 5px;
     flex-direction: column;
     transition: all 150ms ease;
     opacity: 0;
@@ -38,8 +39,8 @@ text, label {
     text-transform: uppercase;
 
     &.title {
-        margin-bottom: 8px;
-        margin-top: -8px;
+        margin-bottom: 16px;
+        margin-top: -16px;
     }
 }
 
