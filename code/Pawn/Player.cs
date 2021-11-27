@@ -18,10 +18,13 @@ namespace TerryForm.Pawn
 		{
 			IsAlive = true;
 
+			// Initialize the Inventory with all weapons.
 			Inventory = new Inventory( this );
-			foreach ( var weapon in Library.GetAll<Weapon>().Where( weapon => !weapon.IsAbstract ) )
+			var weapons = Library.GetAll<Weapon>()
+				.Where( weapon => !weapon.IsAbstract );
+			foreach ( var weapon in weapons )
 			{
-
+				Inventory.Add( Library.Create<Weapon>( weapon ) );
 			}
 
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
