@@ -78,6 +78,7 @@
 					"Uzi",
 					"Throwable",
 					"Rifle",
+					"Swing",
 				]
 			},
 			{
@@ -939,6 +940,136 @@
 		{
 			key = 
 			{
+				m_id = 339156577
+			}
+			value = 
+			{
+				_class = "CStateMachineAnimNode"
+				m_sName = "FireStatemachine"
+				m_vecPosition = [ -176.0, 848.0 ]
+				m_nNodeID = 
+				{
+					m_id = 339156577
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_states = 
+				[
+					{
+						_class = "CAnimState"
+						m_transitions = 
+						[
+							{
+								_class = "CAnimStateTransition"
+								m_conditions = 
+								[
+									{
+										_class = "CParameterAnimCondition"
+										m_comparisonOp = 0
+										m_paramID = 
+										{
+											m_id = 1584813805
+										}
+										m_comparisonValue = 
+										{
+											m_nType = 1
+											m_data = true
+										}
+									},
+								]
+								m_blendDuration = 0.01
+								m_destState = 
+								{
+									m_id = 1810273507
+								}
+								m_bReset = true
+								m_resetCycleOption = "Beginning"
+								m_flFixedCycleValue = 0.0
+								m_blendCurve = 
+								{
+									m_vControlPoint1 = [ 0.5, 0.0 ]
+									m_vControlPoint2 = [ 0.5, 1.0 ]
+								}
+								m_bForceFootPlant = false
+								m_bDisabled = false
+							},
+						]
+						m_tags = [  ]
+						m_tagBehaviors = [  ]
+						m_name = "idle"
+						m_childNodeID = 
+						{
+							m_id = 1897445146
+						}
+						m_stateID = 
+						{
+							m_id = 2032537662
+						}
+						m_position = [ -512.0, -160.0 ]
+						m_bIsStartState = true
+						m_bIsEndtState = false
+						m_bIsPassthrough = false
+						m_bIsRootMotionExclusive = false
+						m_bAlwaysEvaluate = false
+					},
+					{
+						_class = "CAnimState"
+						m_transitions = 
+						[
+							{
+								_class = "CAnimStateTransition"
+								m_conditions = 
+								[
+									{
+										_class = "CFinishedCondition"
+										m_comparisonOp = 0
+										m_option = "FinishedConditionOption_OnFinished"
+										m_bIsFinished = true
+									},
+								]
+								m_blendDuration = 0.2
+								m_destState = 
+								{
+									m_id = 2032537662
+								}
+								m_bReset = true
+								m_resetCycleOption = "Beginning"
+								m_flFixedCycleValue = 0.0
+								m_blendCurve = 
+								{
+									m_vControlPoint1 = [ 0.5, 0.0 ]
+									m_vControlPoint2 = [ 0.5, 1.0 ]
+								}
+								m_bForceFootPlant = false
+								m_bDisabled = false
+							},
+						]
+						m_tags = [  ]
+						m_tagBehaviors = [  ]
+						m_name = "fire"
+						m_childNodeID = 
+						{
+							m_id = 1932366709
+						}
+						m_stateID = 
+						{
+							m_id = 1810273507
+						}
+						m_position = [ -384.0, -160.0 ]
+						m_bIsStartState = false
+						m_bIsEndtState = false
+						m_bIsPassthrough = false
+						m_bIsRootMotionExclusive = false
+						m_bAlwaysEvaluate = false
+					},
+				]
+				m_bBlockWaningTags = false
+				m_bLockStateWhenWaning = false
+			}
+		},
+		{
+			key = 
+			{
 				m_id = 388980171
 			}
 			value = 
@@ -1015,9 +1146,15 @@
 					{
 						m_id = 1027476563
 					},
+					{
+						m_id = 1746102896
+					},
 				]
 				m_tags = 
 				[
+					{
+						m_id = 4294967295
+					},
 					{
 						m_id = 4294967295
 					},
@@ -1947,9 +2084,15 @@
 					{
 						m_id = 1407188095
 					},
+					{
+						m_id = 339156577
+					},
 				]
 				m_tags = 
 				[
+					{
+						m_id = 4294967295
+					},
 					{
 						m_id = 4294967295
 					},
@@ -2070,6 +2213,27 @@
 				m_footMotionTiming = "Child1"
 				m_bResetChild1 = true
 				m_bResetChild2 = true
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 980659614
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -800.0, 960.0 ]
+				m_nNodeID = 
+				{
+					m_id = 980659614
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "bat_aim"
+				m_nFrameIndex = 1
+				m_tagSpans = [  ]
 			}
 		},
 		{
@@ -2304,6 +2468,27 @@
 				m_sNote = ""
 				m_sequenceName = "bazooka_aim"
 				m_nFrameIndex = 1
+				m_tagSpans = [  ]
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1163665948
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -800.0, 1056.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1163665948
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "bat_aim"
+				m_nFrameIndex = 2
 				m_tagSpans = [  ]
 			}
 		},
@@ -2739,6 +2924,69 @@
 		{
 			key = 
 			{
+				m_id = 1746102896
+			}
+			value = 
+			{
+				_class = "CBlendAnimNode"
+				m_sName = "AimBlend_Bat"
+				m_vecPosition = [ -576.0, 992.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1746102896
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_children = 
+				[
+					{
+						m_nodeID = 
+						{
+							m_id = 980659614
+						}
+						m_name = "AimUp"
+						m_blendValue = 90.0
+					},
+					{
+						m_nodeID = 
+						{
+							m_id = 1812150914
+						}
+						m_name = "AimStraight"
+						m_blendValue = 0.0
+					},
+					{
+						m_nodeID = 
+						{
+							m_id = 1163665948
+						}
+						m_name = "AimDown"
+						m_blendValue = -90.0
+					},
+				]
+				m_blendValueSource = "Parameter"
+				m_param = 
+				{
+					m_id = 2085939065
+				}
+				m_blendKeyType = "BlendKey_UserValue"
+				m_bLockBlendOnReset = false
+				m_bSyncCycles = true
+				m_bLoop = true
+				m_bLockWhenWaning = true
+				m_damping = 
+				{
+					_class = "CAnimInputDamping"
+					m_speedFunction = "NoDamping"
+					m_fSpeedScale = 1.0
+					m_fMinSpeed = 10.0
+					m_fMaxTension = 1000.0
+				}
+			}
+		},
+		{
+			key = 
+			{
 				m_id = 1756824905
 			}
 			value = 
@@ -2756,6 +3004,48 @@
 				m_sequenceName = "walk_forward"
 				m_playbackSpeed = 1.0
 				m_bLoop = true
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1812150914
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -800.0, 1008.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1812150914
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "bat_aim"
+				m_nFrameIndex = 0
+				m_tagSpans = [  ]
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1897445146
+			}
+			value = 
+			{
+				_class = "CSingleFrameAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -384.0, 848.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1897445146
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_sequenceName = "bat_aim"
+				m_nFrameIndex = 0
+				m_tagSpans = [  ]
 			}
 		},
 		{
@@ -2798,6 +3088,28 @@
 				m_sequenceName = "stancepose"
 				m_nFrameIndex = 0
 				m_tagSpans = [  ]
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1932366709
+			}
+			value = 
+			{
+				_class = "CSequenceAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -384.0, 912.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1932366709
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_tagSpans = [  ]
+				m_sequenceName = "bat_fire"
+				m_playbackSpeed = 1.5
+				m_bLoop = false
 			}
 		},
 		{

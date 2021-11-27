@@ -1,7 +1,9 @@
-﻿@import "/Code/UI/_Globals.scss";
+@import "/Code/UI/_Globals.scss";
 
 rootpanel {
-    pointer-events: visible;
+    &:not(.devcamera) {
+        pointer-events: visible;
+    }
 }
 
 text.demo {

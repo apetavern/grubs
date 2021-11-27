@@ -18,7 +18,7 @@ namespace TerryForm.States
 
 		public override void OnPlayerJoin( Pawn.Player player )
 		{
-			AddPlayer( player );
+			base.OnPlayerJoin( player );
 
 			if ( PlayerList.Count >= GameConfig.MinimumPlayersToStart )
 			{

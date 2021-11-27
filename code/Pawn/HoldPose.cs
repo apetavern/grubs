@@ -4,6 +4,10 @@
 	{
 		None,
 		Bazooka,
-		Shotgun
+		Shotgun,
+		Uzi,
+		Throwable,
+		Rifle,
+		Swing
 	}
 }

@@ -23,8 +23,12 @@ namespace TerryForm.Pawn
 		{
 			BBox = CalcBbox();
 
-			SetEyePos();
-			Move();
+			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
+
+			Move( inputEnabled );
+
+			if ( inputEnabled )
+				SetEyePos();
 		}
 
 		private BBox BBox { get; set; }
@@ -51,7 +55,7 @@ namespace TerryForm.Pawn
 			EyeRot = Rotation.LookAt( eyeDirection );
 		}
 
-		private void Move()
+		private void Move( bool inputAllowed )
 		{
 			MoveHelper mover = new( Position, Velocity );
 			mover.Trace = mover.Trace.Size( BBox ).Ignore( Pawn );
@@ -59,9 +63,10 @@ namespace TerryForm.Pawn
 			CheckGroundEntity( ref mover ); // Gravity start
 
 			// Accelerate in whatever direction the player is pressing...
-			Vector3 wishVelocity = -Input.Left * Vector3.Forward;
-			// ...but not upwards
-			wishVelocity.z = 0;
+			Vector3 wishVelocity = Vector3.Zero;
+
+			if ( inputAllowed )
+				wishVelocity = (-Input.Left * Vector3.Forward).WithZ( 0 );
 
 			//
 			// Acceleration
@@ -75,13 +80,12 @@ namespace TerryForm.Pawn
 
 			CheckGroundEntity( ref mover ); // Gravity end
 
-
 			//
 			// Jumping
 			//
 			if ( timeUntilCanMove <= 0 )
 			{
-				if ( Input.Pressed( InputButton.Jump ) && IsGrounded )
+				if ( Input.Pressed( InputButton.Jump ) && IsGrounded && inputAllowed )
 				{
 					DoJump( ref mover );
 					AddEvent( "jump" );
@@ -165,9 +169,6 @@ namespace TerryForm.Pawn
 				GroundEntity = null;
 				mover.Velocity += Vector3.Down * Gravity * Time.Delta;
 			}
-
-			// Hide the worms weapon if we aren't grounded.
-			(Pawn as Worm).EquippedWeapon?.SetVisible( tr.Hit );
 		}
 	}
 }

@@ -13,11 +13,11 @@ namespace TerryForm
 
 		public Game()
 		{
-			if ( IsClient )
-				return;
-
-			_ = new HudEntity();
-			StateHandler = new();
+			if ( IsServer )
+			{
+				StateHandler = new();
+				_ = new HudEntity();
+			}
 		}
 
 		public override void ClientJoined( Client cl )
@@ -25,6 +25,9 @@ namespace TerryForm
 			base.ClientJoined( cl );
 
 			var player = new Pawn.Player( cl );
+			player.Respawn();
+			cl.Pawn = player;
+
 			StateHandler.OnPlayerJoin( player );
 		}
 
