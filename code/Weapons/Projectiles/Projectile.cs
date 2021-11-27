@@ -7,16 +7,8 @@ namespace TerryForm.Weapons
 	public partial class Projectile : ModelEntity
 	{
 		private List<ArcSegment> Segments { get; set; }
-		private float MoveSpeed { get; set; }
-		private Vector3 LastPos { get; set; }
 		public bool IsCompleted { get; set; }
-
-		public override void Spawn()
-		{
-			//SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
-
-			base.Spawn();
-		}
+		private TimeSince TimeSinceSegmentStarted { get; set; }
 
 		public Projectile WithModel( string modelPath )
 		{
@@ -30,7 +22,6 @@ namespace TerryForm.Weapons
 
 			// Set the initial position
 			Position = Segments[0].StartPos;
-			LastPos = Position;
 
 			return this;
 		}
@@ -41,9 +32,7 @@ namespace TerryForm.Weapons
 			if ( Segments is null ) return;
 			if ( IsCompleted == true ) return;
 
-			DebugOverlay.Sphere( Segments[1].StartPos, 2f, Color.Red );
-
-			if ( Position.IsNearlyEqual( Segments[1].StartPos, 1f ) )
+			if ( Position.IsNearlyEqual( Segments[0].EndPos, 0.1f ) )
 			{
 				Segments.RemoveAt( 0 );
 
@@ -52,18 +41,18 @@ namespace TerryForm.Weapons
 					Log.Info( "KABOOM" );
 					IsCompleted = true;
 
+					Delete();
+
 					return;
 				}
 
-				Log.Info( "Arrived at destination" );
+				TimeSinceSegmentStarted = 0;
 			}
 			else
 			{
-				Position = Vector3.Lerp( LastPos, Segments[0].EndPos, 60f * Time.Delta );
+				Rotation = Rotation.LookAt( Segments[1].StartPos - Segments[0].StartPos );
+				Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, (TimeSinceSegmentStarted * Time.Delta) * 3000f );
 			}
-
-			LastPos = Position;
-			DebugOverlay.Sphere( Position, 2f, Color.Green );
 		}
 	}
 }
