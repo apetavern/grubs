@@ -7,7 +7,7 @@ namespace TerryForm.Pawn
 {
 	public partial class Player : Sandbox.Player
 	{
-		public List<Worm> Worms { get; set; } = new();
+		[Net] public List<Worm> Worms { get; set; } = new();
 		[Net] public Worm ActiveWorm { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
@@ -20,16 +20,14 @@ namespace TerryForm.Pawn
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
 				var worm = new Worm();
+				worm.Owner = this;
 				worm.Respawn();
 				worm.DressFromClient( cl );
 
 				Worms.Add( worm );
 			}
 
-			InitializeFromClient( cl );
-
-			// Network this entity.
-			Transmit = TransmitType.Always;
+			Initialize();
 		}
 
 		public override void Respawn()
@@ -43,11 +41,11 @@ namespace TerryForm.Pawn
 		{
 			base.Simulate( cl );
 
-			// Simulate all worms, this might seem odd but without this the worm never grounds because it's controller isn't simulated.
-			Worms.ForEach( worm => worm.Simulate( cl ) );
+			foreach ( var worm in Worms )
+				worm.Simulate( cl );
 		}
 
-		protected void InitializeFromClient( Client cl )
+		protected void Initialize()
 		{
 			PickNextWorm();
 
