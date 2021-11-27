@@ -10,6 +10,7 @@ namespace TerryForm.States.SubStates
 		public static Turn Instance { get; set; }
 		private PlayingState PlayingState { get; set; }
 		[Net] public Pawn.Player ActivePlayer { get; set; }
+		[Net] public Vector3 WindForce { get; set; }
 
 		public Turn()
 		{
@@ -27,6 +28,8 @@ namespace TerryForm.States.SubStates
 		protected override void OnStart()
 		{
 			base.OnStart();
+
+			WindForce = Vector3.Random.WithY( 0 ) / 4;
 
 			// Let the player know that their turn has started.
 			ActivePlayer?.OnTurnStart();
