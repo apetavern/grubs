@@ -12,15 +12,16 @@ namespace TerryForm.Pawn
 		[Net] public Worm ActiveWorm { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
-		public Player() { }
+		public Player()
+		{
+			Inventory = new Inventory( this );
+		}
 
 		public Player( Client cl ) : this()
 		{
 			IsAlive = true;
 
 			// Initialize the Inventory with all weapons.
-			Inventory = new Inventory( this );
-
 			var weapons = Library.GetAll<Weapon>()
 				.Where( weapon => !weapon.IsAbstract );
 			foreach ( var weapon in weapons )
