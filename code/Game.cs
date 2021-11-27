@@ -9,8 +9,6 @@ namespace TerryForm
 		public static Game Instance => Current as Game;
 		[Net] public StateHandler StateHandler { get; private set; }
 
-		[Net] public BaseState State { get; set; }
-
 		public Game()
 		{
 			if ( IsClient )
