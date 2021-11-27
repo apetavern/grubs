@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using System.Linq;
+using TerryForm.Utils;
 using TerryForm.Weapons;
 
 namespace TerryForm.Pawn
@@ -22,6 +23,8 @@ namespace TerryForm.Pawn
 			Controller = new WormController();
 			Animator = new WormAnimator();
 
+			// Random worm name
+			Name = Rand.FromArray( GameConfig.WormNames );
 			base.Respawn();
 		}
 
@@ -131,6 +134,14 @@ namespace TerryForm.Pawn
 			EnableAllCollisions = false;
 
 			EquippedWeapon?.OnOwnerKilled();
+		}
+
+		public string GetTeamClass()
+		{
+			int index = Client.All.ToList().IndexOf( this.Client );
+			var team = "abcd"[index]; // TODO: We need a proper way of getting team colors
+
+			return $"team-{team}";
 		}
 	}
 }
