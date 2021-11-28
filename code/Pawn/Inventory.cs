@@ -29,6 +29,23 @@ namespace TerryForm.Pawn
 			return base.Add( ent, makeActive );
 		}
 
+		[ServerCmd]
+		public static void EquipItemFromIndex( int itemIndex )
+		{
+			var player = ConsoleSystem.Caller.Pawn as Pawn.Player;
+			var inventory = player.Inventory;
+
+			if ( inventory.GetSlot( itemIndex ) is null )
+				return;
+
+			var activeWorm = player.ActiveWorm;
+
+			if ( activeWorm is null )
+				return;
+
+			activeWorm.EquipWeapon( inventory.GetSlot( itemIndex ) as Weapon );
+		}
+
 		public bool IsCarryingType( Type t )
 		{
 			return List.Any( x => x.GetType() == t );
