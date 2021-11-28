@@ -29,7 +29,7 @@ namespace TerryForm.States.SubStates
 		{
 			base.OnStart();
 
-			WindForce = Vector3.Random.WithY( 0 ) / 4;
+			WindForce = Vector3.Random.WithY( 0 ).WithZ( 0 ) / 4;
 
 			// Let the player know that their turn has started.
 			ActivePlayer?.OnTurnStart();
