@@ -86,7 +86,7 @@ namespace TerryForm.Pawn
 			var anyWormAlive = false;
 			foreach ( var worm in Worms )
 			{
-				if ( worm.IsAlive )
+				if ( worm.LifeState == LifeState.Alive )
 					anyWormAlive = true;
 			}
 

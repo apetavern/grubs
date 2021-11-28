@@ -9,7 +9,6 @@ namespace TerryForm.Pawn
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
 		[Net] public bool IsCurrentTurn { get; set; }
-		[Net] public bool IsAlive { get; set; }
 
 		// Temporary to allow respawning, we don't want respawning later so we can remove this.
 		private TimeSince TimeSinceDied { get; set; }
@@ -17,8 +16,6 @@ namespace TerryForm.Pawn
 		public override void Respawn()
 		{
 			SetModel( "models/citizenworm.vmdl" );
-
-			IsAlive = true;
 
 			Controller = new WormController();
 			Animator = new WormAnimator();
@@ -146,9 +143,7 @@ namespace TerryForm.Pawn
 
 		public override void OnKilled()
 		{
-			base.OnKilled();
-
-			IsAlive = false;
+			LifeState = LifeState.Dead;
 
 			EnableDrawing = false;
 			EnableAllCollisions = false;
