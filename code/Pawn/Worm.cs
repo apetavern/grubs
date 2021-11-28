@@ -96,14 +96,6 @@ namespace TerryForm.Pawn
 		public void OnTurnStarted()
 		{
 			IsCurrentTurn = true;
-
-			// Temporarily select a weapon from all weapons.
-			var randWeapons = Library.GetAll<Weapon>()
-				.Where( weapon => !weapon.IsAbstract )
-				.ToList();
-
-			EquipWeapon( Library.Create<Weapon>( Rand.FromList( randWeapons ) ) );
-			EquippedWeapon?.SetWeaponEnabled( true );
 		}
 
 		public void OnTurnEnded()
