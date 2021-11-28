@@ -33,14 +33,15 @@ namespace TerryForm.Pawn
 		public static void EquipItemFromIndex( int itemIndex )
 		{
 			var player = ConsoleSystem.Caller.Pawn as Pawn.Player;
-			var inventory = player.Inventory;
-
-			if ( inventory.GetSlot( itemIndex ) is null )
-				return;
 
 			var activeWorm = player.ActiveWorm;
 
-			if ( activeWorm is null )
+			if ( activeWorm is null || !activeWorm.IsCurrentTurn )
+				return;
+
+			var inventory = player.Inventory;
+
+			if ( inventory.GetSlot( itemIndex ) is null )
 				return;
 
 			activeWorm.EquipWeapon( inventory.GetSlot( itemIndex ) as Weapon );
