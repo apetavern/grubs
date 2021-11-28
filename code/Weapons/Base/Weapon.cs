@@ -45,6 +45,9 @@ namespace TerryForm.Weapons
 			if ( !WeaponEnabled )
 				return false;
 
+			if ( Ammo == 0 )
+				return false;
+
 			return base.CanPrimaryAttack();
 		}
 
