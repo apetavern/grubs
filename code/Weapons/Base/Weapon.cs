@@ -10,11 +10,12 @@ namespace TerryForm.Weapons
 		public virtual string WeaponName => "";
 		public virtual string ModelPath => "";
 		public override float PrimaryRate => 2f;
-		public virtual HoldPose HoldPose => HoldPose.Bazooka;
-		public virtual bool IsFiredTurnEnding => false;
-		[Net] public bool WeaponEnabled { get; set; }
-		private WormAnimator Animator { get; set; }
 		public virtual int Ammo { get; set; } = 0;
+		public virtual int WeaponReach { get; set; } = 100;
+		public virtual bool IsFiredTurnEnding => false;
+		public virtual HoldPose HoldPose => HoldPose.Bazooka;
+		private WormAnimator Animator { get; set; }
+		[Net] public bool WeaponEnabled { get; set; }
 
 		public override void Spawn()
 		{
@@ -64,13 +65,17 @@ namespace TerryForm.Weapons
 
 			Ammo--;
 
+			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
+			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
+
+			Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
 			/* 
 			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
 			 * Temporary delay to simulate this.
 			 */
 			await GameTask.DelaySeconds( 1 );
 
-			Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+			Log.Info( "End turn after fired" );
 		}
 
 		public override void SimulateAnimator( PawnAnimator anim )
