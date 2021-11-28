@@ -50,7 +50,7 @@ namespace TerryForm.Weapons
 			}
 			else
 			{
-				Rotation = Rotation.LookAt( Segments[1].StartPos - Segments[0].StartPos );
+				Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
 				Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, (TimeSinceSegmentStarted * Time.Delta) * 3000f );
 			}
 		}
