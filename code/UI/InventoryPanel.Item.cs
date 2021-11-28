@@ -15,7 +15,7 @@ namespace TerryForm.UI
 			public InventoryItem()
 			{
 				StyleSheet.Load( "/Code/UI/InventoryPanel.scss" );
-				AddEventListener( "onclick", () => EquipItem( SlotIndex ) );
+				AddEventListener( "onclick", () => EquipItem() );
 			}
 
 			public InventoryItem UpdateFrom( int weaponIndex )
@@ -33,11 +33,11 @@ namespace TerryForm.UI
 				return this;
 			}
 
-			public void EquipItem( int weaponIndex )
+			public void EquipItem()
 			{
 				if ( SlotIndex == -1 ) return;
 
-				Inventory.EquipItemFromIndex( weaponIndex );
+				Inventory.EquipItemFromIndex( SlotIndex );
 			}
 
 			private void Reset()
