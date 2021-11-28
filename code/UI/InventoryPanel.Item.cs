@@ -15,9 +15,12 @@ namespace TerryForm.UI
 				AddEventListener( "onclick", () => Log.Info( "clicked" ) );
 			}
 
-			public InventoryItem UpdateFrom( Weapon weapon )
+			public InventoryItem UpdateFrom( int weaponIndex )
 			{
 				DeleteChildren();
+
+				if ( Local.Pawn.Inventory.GetSlot( weaponIndex ) is not Weapon weapon )
+					return this;
 
 				SetClass( "Occupied", true );
 

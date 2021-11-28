@@ -36,8 +36,7 @@ namespace TerryForm.UI
 		{
 			for ( int i = 0; i < Local.Pawn.Inventory.Count(); i++ )
 			{
-				var entity = Local.Pawn.Inventory.GetSlot( i );
-				Items[i].UpdateFrom( entity as Weapon );
+				Items[i].UpdateFrom( i );
 			}
 
 			HasBuilt = true;
