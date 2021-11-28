@@ -25,15 +25,19 @@ namespace TerryForm.Pawn
 
 			// Random worm name
 			Name = Rand.FromArray( GameConfig.WormNames );
+
 			base.Respawn();
 		}
 
 		public void EquipWeapon( Weapon weapon )
 		{
-			EquippedWeapon?.Delete();
+			// Disable old weapon.
+			EquippedWeapon?.SetWeaponEnabled( false );
 
+			// Enable new weapon.
 			EquippedWeapon = weapon;
 			EquippedWeapon?.OnCarryStart( this );
+			EquippedWeapon?.SetWeaponEnabled( true );
 		}
 
 		public void DressFromClient( Client cl )
