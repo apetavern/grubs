@@ -29,6 +29,32 @@ namespace TerryForm.Pawn
 			return base.Add( ent, makeActive );
 		}
 
+		public override void OnChildRemoved( Entity child )
+		{
+			/* 
+			 * Do nothing, the default behaviour will remove an item from the inventory list 
+			 * if the Parent of the item changes, which it does because we give it a worm.
+			 */
+		}
+
+		[ServerCmd]
+		public static void EquipItemFromIndex( int itemIndex )
+		{
+			var player = ConsoleSystem.Caller.Pawn as Pawn.Player;
+
+			var activeWorm = player.ActiveWorm;
+
+			if ( activeWorm is null || !activeWorm.IsCurrentTurn )
+				return;
+
+			var inventory = player.Inventory;
+
+			if ( inventory.GetSlot( itemIndex ) is null )
+				return;
+
+			activeWorm.EquipWeapon( inventory.GetSlot( itemIndex ) as Weapon );
+		}
+
 		public bool IsCarryingType( Type t )
 		{
 			return List.Any( x => x.GetType() == t );

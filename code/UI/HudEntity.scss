@@ -1,9 +1,16 @@
 @import "/Code/UI/_Globals.scss";
 
 rootpanel {
-    &:not(.devcamera) {
-        pointer-events: visible;
+    pointer-events: visible;
+
+    &.devcamera {
+        pointer-events: none;
     }
+}
+
+.ReceiveInput {
+    pointer-events: all;
+    backdrop-filter: blur(2);
 }
 
 text.demo {

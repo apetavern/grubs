@@ -1,23 +1,14 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TerryForm.Weapons
 {
 	public partial class Projectile : ModelEntity
 	{
-		public override void Spawn()
-		{
-			SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
-
-			base.Spawn();
-		}
-
-		public Projectile SpawnAt( Vector3 position )
-		{
-			Position = position;
-			ResetInterpolation();
-
-			return this;
-		}
+		private List<ArcSegment> Segments { get; set; }
+		public bool IsCompleted { get; set; }
+		private TimeSince TimeSinceSegmentStarted { get; set; }
 
 		public Projectile WithModel( string modelPath )
 		{
@@ -25,35 +16,43 @@ namespace TerryForm.Weapons
 			return this;
 		}
 
-		public Projectile AddVelocity( Vector3 directionNormal, float velocity )
+		public Projectile MoveAlongTrace( List<ArcSegment> points, float speed = 20 )
 		{
-			PhysicsBody.ApplyForce( directionNormal * PhysicsBody.Mass * velocity );
-			return this;
-		}
+			Segments = points;
 
-		public Projectile AddVelocityAt( Vector3 position, Vector3 velocity )
-		{
-			PhysicsBody.ApplyForceAt( position, velocity );
-			return this;
-		}
-
-		public Projectile FireFrom( Vector3 position, Vector3 directionNormal, float velocity )
-		{
-			var projectile = SpawnAt( position );
-			projectile.AddVelocity( directionNormal, velocity );
+			// Set the initial position
+			Position = Segments[0].StartPos;
 
 			return this;
 		}
 
-		protected override void OnPhysicsCollision( CollisionEventData eventData )
+		public override void Simulate( Client cl )
 		{
-			base.OnPhysicsCollision( eventData );
+			// This might be shite
+			if ( Segments is null || !Segments.Any() ) return;
+			if ( IsCompleted == true ) return;
 
-			if ( eventData.Entity is Player player )
-				Log.Info( $"Deal damage to {player.Name}" );
+			if ( Position.IsNearlyEqual( Segments[0].EndPos, 0.1f ) )
+			{
+				Segments.RemoveAt( 0 );
+
+				if ( Segments.Count == 1 )
+				{
+					Log.Info( "KABOOM" );
+					IsCompleted = true;
+
+					Delete();
+
+					return;
+				}
+
+				TimeSinceSegmentStarted = 0;
+			}
+			else
+			{
+				Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
+				Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, (TimeSinceSegmentStarted * Time.Delta) * 3000f );
+			}
 		}
-
-		[Event.Tick]
-		public virtual void OnTick() { }
 	}
 }

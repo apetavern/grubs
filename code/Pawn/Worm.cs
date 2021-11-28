@@ -9,7 +9,6 @@ namespace TerryForm.Pawn
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
 		[Net] public bool IsCurrentTurn { get; set; }
-		[Net] public bool IsAlive { get; set; }
 
 		// Temporary to allow respawning, we don't want respawning later so we can remove this.
 		private TimeSince TimeSinceDied { get; set; }
@@ -18,22 +17,24 @@ namespace TerryForm.Pawn
 		{
 			SetModel( "models/citizenworm.vmdl" );
 
-			IsAlive = true;
-
 			Controller = new WormController();
 			Animator = new WormAnimator();
 
 			// Random worm name
 			Name = Rand.FromArray( GameConfig.WormNames );
+
 			base.Respawn();
 		}
 
-		protected void EquipWeapon( Weapon weapon )
+		public void EquipWeapon( Weapon weapon )
 		{
-			EquippedWeapon?.Delete();
+			// Disable old weapon.
+			EquippedWeapon?.SetWeaponEnabled( false );
 
+			// Enable new weapon.
 			EquippedWeapon = weapon;
 			EquippedWeapon?.OnCarryStart( this );
+			EquippedWeapon?.SetWeaponEnabled( true );
 		}
 
 		public void DressFromClient( Client cl )
@@ -124,16 +125,31 @@ namespace TerryForm.Pawn
 			EnableHitboxes = true;
 		}
 
+		public void GiveHealth( int amount )
+		{
+			Log.Info( "Worm received health" );
+			Health += amount;
+		}
+
+		public override void TakeDamage( DamageInfo info )
+		{
+			Log.Info( "Worm take damage" );
+
+			Health -= info.Damage;
+
+			if ( Health < 0 )
+				OnKilled();
+		}
+
 		public override void OnKilled()
 		{
-			base.OnKilled();
-
-			IsAlive = false;
+			LifeState = LifeState.Dead;
 
 			EnableDrawing = false;
 			EnableAllCollisions = false;
 
 			EquippedWeapon?.OnOwnerKilled();
+			(Owner as Pawn.Player)?.OnWormKilled( this );
 		}
 
 		public string GetTeamClass()

@@ -1,10 +1,8 @@
 ﻿using Sandbox;
 using System.Linq;
 using System.Collections.Generic;
-using TerryForm.UI.World;
 using TerryForm.Utils;
 using TerryForm.Weapons;
-using System.Linq;
 
 namespace TerryForm.Pawn
 {
@@ -14,21 +12,16 @@ namespace TerryForm.Pawn
 		[Net] public Worm ActiveWorm { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
-		public Player() { }
+		public Player()
+		{
+			Inventory = new Inventory( this );
+		}
 
 		public Player( Client cl ) : this()
 		{
 			IsAlive = true;
 
-			// Initialize the Inventory with all weapons.
-			Inventory = new Inventory( this );
-			var weapons = Library.GetAll<Weapon>()
-				.Where( weapon => !weapon.IsAbstract );
-			foreach ( var weapon in weapons )
-			{
-				Inventory.Add( Library.Create<Weapon>( weapon ) );
-			}
-
+			// Create worms
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
 				var worm = new Worm();
@@ -39,7 +32,19 @@ namespace TerryForm.Pawn
 				Worms.Add( worm );
 			}
 
+			ReceiveLoadout();
 			Initialize();
+		}
+
+		private void ReceiveLoadout()
+		{
+			var weapons = Library.GetAll<Weapon>()
+				.Where( weapon => !weapon.IsAbstract );
+
+			foreach ( var weapon in weapons )
+			{
+				Inventory.Add( Library.Create<Weapon>( weapon ) );
+			}
 		}
 
 		public override void Respawn()
@@ -81,7 +86,7 @@ namespace TerryForm.Pawn
 			var anyWormAlive = false;
 			foreach ( var worm in Worms )
 			{
-				if ( worm.IsAlive )
+				if ( worm.LifeState == LifeState.Alive )
 					anyWormAlive = true;
 			}
 
@@ -104,6 +109,24 @@ namespace TerryForm.Pawn
 		{
 			RotateWorms();
 			ActiveWorm = Worms[0];
+		}
+
+		public float GetHealth()
+		{
+			float health = 0;
+
+			foreach ( var worm in Worms )
+				health += worm.Health;
+
+			return health;
+		}
+
+		public void OnWormKilled( Worm worm )
+		{
+			Worms.Remove( worm );
+
+			// Replace this with a dead worm later.
+			worm.Delete();
 		}
 
 		[ClientRpc]
