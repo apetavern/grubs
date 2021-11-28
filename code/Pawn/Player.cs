@@ -21,14 +21,6 @@ namespace TerryForm.Pawn
 		{
 			IsAlive = true;
 
-			// Initialize the Inventory with all weapons.
-			var weapons = Library.GetAll<Weapon>()
-				.Where( weapon => !weapon.IsAbstract );
-			foreach ( var weapon in weapons )
-			{
-				Inventory.Add( Library.Create<Weapon>( weapon ) );
-			}
-
 			// Create worms
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
@@ -40,7 +32,19 @@ namespace TerryForm.Pawn
 				Worms.Add( worm );
 			}
 
+			ReceiveLoadout();
 			Initialize();
+		}
+
+		private void ReceiveLoadout()
+		{
+			var weapons = Library.GetAll<Weapon>()
+				.Where( weapon => !weapon.IsAbstract );
+
+			foreach ( var weapon in weapons )
+			{
+				Inventory.Add( Library.Create<Weapon>( weapon ) );
+			}
 		}
 
 		public override void Respawn()
