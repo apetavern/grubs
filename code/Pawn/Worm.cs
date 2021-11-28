@@ -28,7 +28,7 @@ namespace TerryForm.Pawn
 			base.Respawn();
 		}
 
-		protected void EquipWeapon( Weapon weapon )
+		public void EquipWeapon( Weapon weapon )
 		{
 			EquippedWeapon?.Delete();
 
