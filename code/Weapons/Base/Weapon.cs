@@ -63,15 +63,14 @@ namespace TerryForm.Weapons
 
 		public async virtual void Fire()
 		{
-			if ( !IsFiredTurnEnding )
-				return;
-
 			Ammo--;
 
 			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
 			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
 
-			Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+			if ( IsFiredTurnEnding )
+				Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+
 			/* 
 			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
 			 * Temporary delay to simulate this.
