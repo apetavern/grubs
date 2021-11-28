@@ -29,6 +29,14 @@ namespace TerryForm.Pawn
 			return base.Add( ent, makeActive );
 		}
 
+		public override void OnChildRemoved( Entity child )
+		{
+			/* 
+			 * Do nothing, the default behaviour will remove an item from the inventory list 
+			 * if the Parent of the item changes, which it does because we give it a worm.
+			 */
+		}
+
 		[ServerCmd]
 		public static void EquipItemFromIndex( int itemIndex )
 		{
