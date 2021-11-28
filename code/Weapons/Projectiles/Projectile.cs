@@ -29,7 +29,7 @@ namespace TerryForm.Weapons
 		public override void Simulate( Client cl )
 		{
 			// This might be shite
-			if ( Segments is null ) return;
+			if ( Segments is null || !Segments.Any() ) return;
 			if ( IsCompleted == true ) return;
 
 			if ( Position.IsNearlyEqual( Segments[0].EndPos, 0.1f ) )
