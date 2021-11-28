@@ -26,8 +26,6 @@ namespace TerryForm.UI
 			for ( int i = 0; i < rows * cols; ++i )
 			{
 				var icon = ItemsPanel.AddChild<InventoryItem>();
-				icon.AddEventListener( "onclick", _ => Log.Info( "clicked" ) );
-
 				Items.Add( i, icon );
 			}
 
@@ -50,10 +48,16 @@ namespace TerryForm.UI
 			base.Tick();
 
 			if ( Input.Down( InputButton.Menu ) && !HasBuilt )
+			{
 				RebuildItems();
+				HudEntity.Instance?.ReceiveInput( true );
+			}
 
 			if ( Input.Released( InputButton.Menu ) )
+			{
 				HasBuilt = false;
+				HudEntity.Instance?.ReceiveInput( false );
+			}
 		}
 	}
 }
