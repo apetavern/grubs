@@ -154,6 +154,7 @@ namespace TerryForm.Pawn
 			EnableAllCollisions = false;
 
 			EquippedWeapon?.OnOwnerKilled();
+			(Owner as Pawn.Player)?.OnWormKilled( this );
 		}
 
 		public string GetTeamClass()

@@ -17,16 +17,6 @@ namespace TerryForm.Pawn
 			Inventory = new Inventory( this );
 		}
 
-		public float GetHealth()
-		{
-			float health = 0;
-
-			foreach ( var worm in Worms )
-				health += worm.Health;
-
-			return health;
-		}
-
 		public Player( Client cl ) : this()
 		{
 			IsAlive = true;
@@ -119,6 +109,24 @@ namespace TerryForm.Pawn
 		{
 			RotateWorms();
 			ActiveWorm = Worms[0];
+		}
+
+		public float GetHealth()
+		{
+			float health = 0;
+
+			foreach ( var worm in Worms )
+				health += worm.Health;
+
+			return health;
+		}
+
+		public void OnWormKilled( Worm worm )
+		{
+			Worms.Remove( worm );
+
+			// Replace this with a dead worm later.
+			worm.Delete();
 		}
 
 		[ClientRpc]
