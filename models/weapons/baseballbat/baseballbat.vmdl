@@ -73,6 +73,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "baseballhelmet"
+						disabled = true
 						filename = "models/weapons/baseballbat/baseballhelmet.fbx"
 						import_translation = [ -2.0, -1.0, 0.0 ]
 						import_rotation = [ 0.0, 90.0, 90.0 ]

@@ -17,6 +17,16 @@ namespace TerryForm.Pawn
 			Inventory = new Inventory( this );
 		}
 
+		public float GetHealth()
+		{
+			float health = 0;
+
+			foreach ( var worm in Worms )
+				health += worm.Health;
+
+			return health;
+		}
+
 		public Player( Client cl ) : this()
 		{
 			IsAlive = true;
