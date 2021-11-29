@@ -28,19 +28,21 @@ namespace TerryForm.Weapons
 		{
 			base.Simulate( player );
 
-			if ( !IsServer )
-				return;
-
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled )
 				Fire();
 		}
 
 		protected virtual void Fire()
 		{
-			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
-			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
+			(Parent as Worm).SetAnimBool( "fire", true );
+
+			if ( !IsServer )
+				return;
 
 			OnFireEffects();
+
+			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
+			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
 
 			if ( IsFiredTurnEnding )
 				Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
@@ -88,10 +90,6 @@ namespace TerryForm.Weapons
 		[ClientRpc]
 		public virtual void OnFireEffects()
 		{
-			Log.Info( "Before: " + (Parent as Worm).GetAnimBool( "fire" ) );
-			(Parent as Worm)?.SetAnimBool( "fire", true );
-			Log.Info( "After: " + (Parent as Worm).GetAnimBool( "fire" ) );
-
 			Particles.Create( "particles/pistol_muzzleflash.vpcf", this, "muzzle" );
 		}
 	}
