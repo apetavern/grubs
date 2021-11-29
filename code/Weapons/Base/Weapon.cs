@@ -105,5 +105,13 @@ namespace TerryForm.Weapons
 		public virtual void OnActiveEffects() { }
 
 		public virtual void OnFireEffects() { }
+
+		public void OnCarryStop()
+		{
+			if ( IsClient ) return;
+
+			Owner = Owner.Owner;
+			Log.Info( Owner );
+		}
 	}
 }

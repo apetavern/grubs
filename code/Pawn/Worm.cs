@@ -28,13 +28,19 @@ namespace TerryForm.Pawn
 
 		public void EquipWeapon( Weapon weapon )
 		{
-			// Disable old weapon.
-			EquippedWeapon?.SetWeaponEnabled( false );
+			UnequipWeapon();
 
 			// Enable new weapon.
 			EquippedWeapon = weapon;
 			EquippedWeapon?.OnCarryStart( this );
 			EquippedWeapon?.SetWeaponEnabled( true );
+		}
+
+		public void UnequipWeapon()
+		{
+			// Disable old weapon.
+			EquippedWeapon?.OnCarryStop();
+			EquippedWeapon?.SetWeaponEnabled( false );
 		}
 
 		public void DressFromClient( Client cl )
@@ -102,10 +108,10 @@ namespace TerryForm.Pawn
 		{
 			IsCurrentTurn = false;
 
+			UnequipWeapon();
+
 			if ( Health < 0 )
 				OnKilled();
-
-			EquippedWeapon?.SetWeaponEnabled( false );
 		}
 
 		public override void CreateHull()
