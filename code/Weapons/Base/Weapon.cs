@@ -14,7 +14,7 @@ namespace TerryForm.Weapons
 		public virtual bool IsFiredTurnEnding => true;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		[Net] public bool WeaponEnabled { get; set; }
-		private PawnAnimator Animator { get; set; }
+		protected PawnAnimator Animator { get; set; }
 
 		public override void Spawn()
 		{
@@ -29,10 +29,13 @@ namespace TerryForm.Weapons
 			base.Simulate( player );
 
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled )
-				Fire();
+				OnFire();
 		}
 
-		protected virtual void Fire()
+		/// <summary>
+		/// The surrounding processes of Fire();
+		/// </summary>
+		protected virtual void OnFire()
 		{
 			// Trigger the fire animation.
 			(Parent as Worm).SetAnimBool( "fire", true );
@@ -43,9 +46,7 @@ namespace TerryForm.Weapons
 			// Create particles / screen effects.
 			OnFireEffects();
 
-			// Fire
-			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
-			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
+			Fire();
 
 			// End the turn if this weapon is turn ending.
 			if ( IsFiredTurnEnding )
@@ -53,6 +54,16 @@ namespace TerryForm.Weapons
 
 			// Disable the weapon.
 			WeaponEnabled = false;
+		}
+
+		/// <summary>
+		/// What happens when you actually fire the weapon.
+		/// </summary>
+		protected virtual void Fire()
+		{
+			// Fire
+			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
+			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
 		}
 
 		public override void ActiveStart( Entity ent )
