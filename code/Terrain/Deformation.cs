@@ -9,8 +9,8 @@ public struct Deformation
 	public bool Boolean { get; private set; }
 	public float Radius { get; private set; }
 
-	public Deformation( Vector3 position, bool boolean, float radius)
-    {
+	public Deformation( Vector3 position, bool boolean, float radius )
+	{
 		Position = position;
 		Boolean = boolean;
 		Radius = radius;

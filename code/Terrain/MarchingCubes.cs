@@ -12,7 +12,7 @@ public struct MarchingCubes
 
 	public static Material Material = Material.Load( "materials/default/vertex_color.vmat" );
 
-	public static readonly int[,] PointOffsets = new int[8,3]
+	public static readonly int[,] PointOffsets = new int[8, 3]
 	{
 		{ 1, 1, 0 },
 		{ 1, 0, 0 },

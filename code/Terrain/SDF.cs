@@ -8,7 +8,7 @@ public struct SDF
 {
 	public static float Sphere( Vector3 center, float radius, Vector3 point )
 	{
-		return center.Distance(point) - radius;
+		return center.Distance( point ) - radius;
 	}
 
 	public static float Lerp( float a, float b, float t )

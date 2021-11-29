@@ -8,7 +8,7 @@ public partial class TerrainChunk : ModelEntity
 {
 	private static int resolution => Terrain.ChunkResolution;
 	private static int width => Terrain.ChunkWidth;
-	private static int extents => width/2;
+	private static int extents => width / 2;
 
 	public static Vector3 ToWorld( int x, int y )
 	{
@@ -19,11 +19,11 @@ public partial class TerrainChunk : ModelEntity
 
 	[Net] public int X { get; private set; }
 	[Net] public int Y { get; private set; }
-	public Mesh Mesh { get; private set; } 
-	public static TerrainChunk Create(int x, int y)
+	public Mesh Mesh { get; private set; }
+	public static TerrainChunk Create( int x, int y )
 	{
 		TerrainChunk chunk = new TerrainChunk() { X = x, Y = y };
-		chunk.Position = ToWorld( x,y );
+		chunk.Position = ToWorld( x, y );
 
 		return chunk;
 	}
@@ -60,7 +60,7 @@ public partial class TerrainChunk : ModelEntity
 	[Event.Frame]
 	public void Frame()
 	{
-		DebugOverlay.Box( Position, -extents, extents, Color.White.WithAlpha(0.1f) );
+		DebugOverlay.Box( Position, -extents, extents, Color.White.WithAlpha( 0.1f ) );
 	}
 
 	public void Generate()
@@ -96,9 +96,9 @@ public partial class TerrainChunk : ModelEntity
 		Generate();
 	}
 
-	private static void Rebuild( Span<EdgeVertex> vertices ){}
+	private static void Rebuild( Span<EdgeVertex> vertices ) { }
 
-	public void UpdateMesh( out Vector3[] vertArray, out int[] indexArray)
+	public void UpdateMesh( out Vector3[] vertArray, out int[] indexArray )
 	{
 		List<Vector3> vertList = new List<Vector3>();
 		List<int> indexList = new List<int>();
@@ -117,14 +117,14 @@ public partial class TerrainChunk : ModelEntity
 		int cY = (Terrain.ChunksHigh - (Y + 1)) * resolution;
 
 		Vector3 center = Vector3.Zero;
-		for ( int x = 0; x < resolution; x ++ )
+		for ( int x = 0; x < resolution; x++ )
 		{
 			center.x = x * sizeStep;
-			for ( int y = 0; y < 2; y ++ )
+			for ( int y = 0; y < 2; y++ )
 			{
 				//timeOffset = Sinterp.GetRaw( Time.Now + (y+x) * 0.125f ) * 16f;
 				center.y = y * sizeStep;
-				for ( int z = 0; z < resolution; z ++ )
+				for ( int z = 0; z < resolution; z++ )
 				{
 					center.z = z * sizeStep;
 
@@ -187,7 +187,7 @@ public partial class TerrainChunk : ModelEntity
 
 						for ( int i = 0; i < 3; i++ )
 						{
-							Vector3 pos = verts[i]-extents;
+							Vector3 pos = verts[i] - extents;
 
 							if ( y == 2 )
 							{
@@ -202,7 +202,7 @@ public partial class TerrainChunk : ModelEntity
 
 							float cT = 1f - (32f - verts[i].y) * 0.1f;
 
-							vertices.Add( new EdgeVertex( pos, normal, dirtColor.ToColor().Darken( cT.Clamp(0f,0.35f) ) ) );
+							vertices.Add( new EdgeVertex( pos, normal, dirtColor.ToColor().Darken( cT.Clamp( 0f, 0.35f ) ) ) );
 							vertList.Add( pos );
 							indexList.Add( indices );
 							indices++;

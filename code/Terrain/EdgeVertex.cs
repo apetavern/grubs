@@ -8,7 +8,7 @@ namespace Sandbox
 {
 	[StructLayout( LayoutKind.Sequential )]
 	public struct EdgeVertex
-    {
+	{
 		public Vector3 position;
 		public Vector3 normal;
 		public Color32 color;
@@ -25,5 +25,5 @@ namespace Sandbox
 			this.normal = normal;
 			this.color = color;
 		}
-    }
+	}
 }

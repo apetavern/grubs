@@ -85,7 +85,7 @@ namespace TerryForm.Pawn
 				return;
 			}
 
-			if ( IsServer  )
+			if ( IsServer )
 			{
 				using ( Prediction.Off() )
 				{
@@ -100,7 +100,7 @@ namespace TerryForm.Pawn
 					}
 				}
 			}
-				
+
 
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );

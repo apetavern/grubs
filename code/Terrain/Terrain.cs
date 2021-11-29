@@ -64,7 +64,7 @@ public static partial class Terrain
 		return NoiseMap;
 	}
 
-	public static void UpdateNoiseMap(Deformation deform)
+	public static void UpdateNoiseMap( Deformation deform )
 	{
 		float sizeStep = ChunkWidth / ChunkResolution;
 		Vector3 mins = -new Vector3( (ChunksWide - 1) * 0.5f * ChunkWidth, 0, (ChunksHigh - 1) * 0.5f * ChunkWidth );
@@ -81,7 +81,7 @@ public static partial class Terrain
 					level = level * 0.05f + deform.Radius * 0.025f;
 					noise = MathF.Min( noise, level );
 
-					if (noise < 0f)
+					if ( noise < 0f )
 					{
 						NoiseMap[x, 1, z] = noise;
 						NoiseMap[x, 2, z] = noise;
@@ -106,7 +106,7 @@ public static partial class Terrain
 			{
 				Vector3 worldPos = mins + new Vector3( x * sizeStep, 0, z * sizeStep );
 				if ( NoiseMap[x, 1, z] > MarchingCubes.GroundLevel )
-					DebugOverlay.Circle( worldPos, Rotation.FromYaw(90f), sizeStep*0.5f, Color.White );
+					DebugOverlay.Circle( worldPos, Rotation.FromYaw( 90f ), sizeStep * 0.5f, Color.White );
 			}
 		}
 	}
@@ -117,13 +117,13 @@ public static partial class Terrain
 		DrawNoiseMap();
 	}
 
-	public static void Deform(Vector3 origin, bool boolean, float radius)
+	public static void Deform( Vector3 origin, bool boolean, float radius )
 	{
 		Deformation deform = new Deformation( origin, boolean, radius );
 		Deformations.Add( deform );
 		UpdateNoiseMap( deform );
 
-		foreach ( TerrainChunk chunk in Entity.All.Where(e => e is TerrainChunk) )
+		foreach ( TerrainChunk chunk in Entity.All.Where( e => e is TerrainChunk ) )
 		{
 			//Chunks.TryGetValue( key, out var chunk );
 
@@ -142,7 +142,7 @@ public static partial class Terrain
 
 		}
 
-		if (Host.IsServer)
+		if ( Host.IsServer )
 			ClientDeform( origin, boolean, radius );
 	}
 
@@ -174,7 +174,7 @@ public static partial class Terrain
 		ClearDeforms();
 	}
 
-	[ServerCmd("terrain_gen")]
+	[ServerCmd( "terrain_gen" )]
 	public static void Generate()
 	{
 		for ( int x = 0; x < ChunksWide; x++ )
@@ -182,7 +182,7 @@ public static partial class Terrain
 			for ( int y = 0; y < ChunksHigh; y++ )
 			{
 				var key = new Tuple<int, int>( x, y );
-				if ( Chunks.TryGetValue( key, out TerrainChunk existingChunk ) ) 
+				if ( Chunks.TryGetValue( key, out TerrainChunk existingChunk ) )
 				{
 					existingChunk.Generate();
 				}
