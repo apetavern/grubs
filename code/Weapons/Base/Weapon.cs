@@ -50,10 +50,7 @@ namespace TerryForm.Weapons
 				return;
 
 			WeaponEnabled = true;
-
-			var anim = worm.GetActiveAnimator();
-			anim.SetParam( "holdpose", (int)HoldPose );
-
+			ShowHoldPose( worm, true );
 			SetParent( worm, true );
 			EnableDrawing = true;
 
@@ -66,14 +63,17 @@ namespace TerryForm.Weapons
 				return;
 
 			WeaponEnabled = false;
-
-			var anim = worm.GetActiveAnimator();
-			anim.SetParam( "holdpose", (int)HoldPose.None );
-
+			ShowHoldPose( worm, false );
 			SetParent( Owner );
 			EnableDrawing = false;
 
 			base.ActiveEnd( worm, dropped );
+		}
+
+		private void ShowHoldPose( Worm worm, bool show )
+		{
+			var anim = worm.GetActiveAnimator();
+			anim.SetParam( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
 		}
 
 		[ClientRpc]
