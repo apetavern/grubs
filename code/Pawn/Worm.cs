@@ -28,8 +28,6 @@ namespace TerryForm.Pawn
 
 		public void EquipWeapon( Weapon weapon )
 		{
-			UnequipWeapon();
-
 			// Enable new weapon.
 			EquippedWeapon = weapon;
 			EquippedWeapon?.OnCarryStart( this );
@@ -40,7 +38,8 @@ namespace TerryForm.Pawn
 		{
 			// Disable old weapon.
 			EquippedWeapon?.OnCarryStop();
-			EquippedWeapon?.SetWeaponEnabled( false );
+
+			EquippedWeapon = null;
 		}
 
 		public void DressFromClient( Client cl )
@@ -95,8 +94,6 @@ namespace TerryForm.Pawn
 		public override void SimulateActiveChild( Client cl, Entity child )
 		{
 			base.SimulateActiveChild( cl, child );
-
-			(child as Weapon)?.SetWeaponEnabled( Velocity.WithZ( 0 ).IsNearZeroLength && GroundEntity is not null && IsCurrentTurn );
 		}
 
 		public void OnTurnStarted()
@@ -106,9 +103,8 @@ namespace TerryForm.Pawn
 
 		public void OnTurnEnded()
 		{
-			IsCurrentTurn = false;
-
 			UnequipWeapon();
+			IsCurrentTurn = false;
 
 			if ( Health < 0 )
 				OnKilled();

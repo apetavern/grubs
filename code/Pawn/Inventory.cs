@@ -29,6 +29,14 @@ namespace TerryForm.Pawn
 			return base.Add( ent, makeActive );
 		}
 
+		public override void OnChildAdded( Entity child )
+		{
+			if ( List.Contains( child ) )
+				return;
+
+			List.Add( child );
+		}
+
 		public override void OnChildRemoved( Entity child )
 		{
 			/* 
