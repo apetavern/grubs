@@ -34,19 +34,24 @@ namespace TerryForm.Weapons
 
 		protected virtual void Fire()
 		{
+			// Trigger the fire animation.
 			(Parent as Worm).SetAnimBool( "fire", true );
 
 			if ( !IsServer )
 				return;
 
+			// Create particles / screen effects.
 			OnFireEffects();
 
+			// Fire
 			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
 			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
 
+			// End the turn if this weapon is turn ending.
 			if ( IsFiredTurnEnding )
 				Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
 
+			// Disable the weapon.
 			WeaponEnabled = false;
 		}
 
