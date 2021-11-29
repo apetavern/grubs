@@ -11,6 +11,5 @@ namespace TerryForm.Weapons
 		public override string ModelPath => "models/weapons/dynamite/dynamite.vmdl";
 		public override string ProjectileModel => ModelPath;
 		public override HoldPose HoldPose => HoldPose.Throwable;
-		public override bool IsFiredTurnEnding => true;
 	}
 }

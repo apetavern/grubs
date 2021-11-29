@@ -11,7 +11,7 @@ namespace TerryForm.Weapons
 		public virtual string ModelPath => "";
 		[Net] public int Ammo { get; set; } = 0;
 		public virtual int WeaponReach { get; set; } = 100;
-		public virtual bool IsFiredTurnEnding => false;
+		public virtual bool IsFiredTurnEnding => true;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		[Net] public bool WeaponEnabled { get; set; }
 		private PawnAnimator Animator { get; set; }
@@ -85,6 +85,12 @@ namespace TerryForm.Weapons
 			EnableDrawing = false;
 
 			base.ActiveEnd( worm, dropped );
+		}
+
+		public void HideWeapon( bool hide )
+		{
+			EnableDrawing = hide;
+			ShowHoldPose( hide );
 		}
 
 		private void ShowHoldPose( bool show )

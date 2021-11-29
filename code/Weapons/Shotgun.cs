@@ -8,6 +8,5 @@ namespace TerryForm.Weapons
 		public override string WeaponName => "Shotgun";
 		public override string ModelPath => "models/weapons/shotgun/shotgun.vmdl";
 		public override HoldPose HoldPose => HoldPose.Shotgun;
-		public override bool IsFiredTurnEnding => true;
 	}
 }
