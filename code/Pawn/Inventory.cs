@@ -59,5 +59,10 @@ namespace TerryForm.Pawn
 		{
 			return List.Any( x => x.GetType() == t );
 		}
+
+		public bool HasAmmo( int itemIndex )
+		{
+			return (List[itemIndex] as Weapon).Ammo != 0;
+		}
 	}
 }

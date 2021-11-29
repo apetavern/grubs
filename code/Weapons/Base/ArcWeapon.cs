@@ -1,7 +1,6 @@
 ﻿using Sandbox;
 using TerryForm.Pawn;
 using TerryForm.States.SubStates;
-using TerryForm.Utils;
 
 namespace TerryForm.Weapons
 {

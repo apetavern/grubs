@@ -73,6 +73,10 @@ InventoryItem {
         }
     }
 
+    &.Empty {
+        opacity: 0.4;
+    }
+
     Image {
         width: 100%;
         height: 100%;

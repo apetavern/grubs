@@ -9,6 +9,7 @@ namespace TerryForm.Weapons
 		public override string ModelPath => "models/weapons/shotgun/shotgun.vmdl";
 		public override HoldPose HoldPose => HoldPose.Shotgun;
 		public override float PrimaryRate => 2f;
+		public override bool IsFiredTurnEnding => true;
 
 		public override void Fire()
 		{

@@ -30,6 +30,7 @@ namespace TerryForm.Utils
 			{ "Grenade", -1 },
 			{ "Railgun", 0 },
 			{ "Shotgun", 2 },
+			{ "Dynamite", 1 }
 		};
 	}
 }

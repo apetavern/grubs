@@ -10,7 +10,7 @@ namespace TerryForm.Weapons
 		public virtual string WeaponName => "";
 		public virtual string ModelPath => "";
 		public override float PrimaryRate => 2f;
-		public virtual int Ammo { get; set; } = 0;
+		[Net] public int Ammo { get; set; } = 0;
 		public virtual int WeaponReach { get; set; } = 100;
 		public virtual bool IsFiredTurnEnding => false;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;

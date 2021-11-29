@@ -22,11 +22,17 @@ namespace TerryForm.UI
 			{
 				Reset();
 
-				if ( Local.Pawn.Inventory.GetSlot( weaponIndex ) is not Weapon weapon )
+				var inventory = Local.Pawn.Inventory as Inventory;
+				if ( inventory == null ) return this;
+
+				if ( inventory.GetSlot( weaponIndex ) is not Weapon weapon )
 					return this;
+
+				var hasAmmo = inventory.HasAmmo( weaponIndex );
 
 				SlotIndex = weaponIndex;
 				SetClass( "Occupied", true );
+				SetClass( "Empty", !hasAmmo );
 
 				Add.Image( $"/materials/icons/{weapon.ClassInfo.Name}.png", "Icon" );
 

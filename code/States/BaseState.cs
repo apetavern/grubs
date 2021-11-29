@@ -72,9 +72,7 @@ namespace TerryForm.States
 		public void SetTimeRemaining( int newDuration )
 		{
 			Host.AssertServer();
-
-			StateDurationSeconds = newDuration;
-			StateEndTime = Time.Now + StateDurationSeconds;
+			StateEndTime = Time.Now + newDuration;
 		}
 
 		public virtual void OnPlayerSpawn( Pawn.Player player ) { }
