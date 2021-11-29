@@ -26,20 +26,19 @@ namespace TerryForm.Pawn
 			base.Respawn();
 		}
 
+		public override void CreateHull()
+		{
+			CollisionGroup = CollisionGroup.Player;
+			AddCollisionLayer( CollisionLayer.Player );
+			SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 32 ) );
+			MoveType = MoveType.MOVETYPE_WALK;
+			EnableHitboxes = true;
+		}
+
 		public void EquipWeapon( Weapon weapon )
 		{
 			// Enable new weapon.
 			EquippedWeapon = weapon;
-			EquippedWeapon?.OnCarryStart( this );
-			EquippedWeapon?.SetWeaponEnabled( true );
-		}
-
-		public void UnequipWeapon()
-		{
-			// Disable old weapon.
-			EquippedWeapon?.OnCarryStop();
-
-			EquippedWeapon = null;
 		}
 
 		public void DressFromClient( Client cl )
@@ -88,12 +87,8 @@ namespace TerryForm.Pawn
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );
 
-			SimulateActiveChild( cl, EquippedWeapon );
-		}
-
-		public override void SimulateActiveChild( Client cl, Entity child )
-		{
-			base.SimulateActiveChild( cl, child );
+			if ( IsCurrentTurn )
+				SimulateActiveChild( cl, EquippedWeapon );
 		}
 
 		public void OnTurnStarted()
@@ -103,20 +98,15 @@ namespace TerryForm.Pawn
 
 		public void OnTurnEnded()
 		{
-			UnequipWeapon();
+			// Return this weapon to the inventory.
+			EquippedWeapon?.ActiveEnd( this, false );
+			EquippedWeapon = null;
+
+			// It's no longer our turn.
 			IsCurrentTurn = false;
 
 			if ( Health < 0 )
 				OnKilled();
-		}
-
-		public override void CreateHull()
-		{
-			CollisionGroup = CollisionGroup.Player;
-			AddCollisionLayer( CollisionLayer.Player );
-			SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 32 ) );
-			MoveType = MoveType.MOVETYPE_WALK;
-			EnableHitboxes = true;
 		}
 
 		public void GiveHealth( int amount )
@@ -130,9 +120,6 @@ namespace TerryForm.Pawn
 			Log.Info( "Worm take damage" );
 
 			Health -= info.Damage;
-
-			if ( Health < 0 )
-				OnKilled();
 		}
 
 		public override void OnKilled()
@@ -142,7 +129,6 @@ namespace TerryForm.Pawn
 			EnableDrawing = false;
 			EnableAllCollisions = false;
 
-			EquippedWeapon?.OnOwnerKilled();
 			(Owner as Pawn.Player)?.OnWormKilled( this );
 		}
 

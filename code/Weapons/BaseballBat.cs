@@ -7,10 +7,9 @@ namespace TerryForm.Weapons
 		public override string WeaponName => "Baseball Bat";
 		public override string ModelPath => "models/weapons/baseballbat/baseballbat.vmdl";
 		public override HoldPose HoldPose => HoldPose.Swing;
-		public override float PrimaryRate => 2f;
 		public override bool IsFiredTurnEnding => true;
 
-		public override void Fire()
+		protected override void Fire()
 		{
 			base.Fire();
 		}

@@ -16,13 +16,8 @@ namespace TerryForm.Weapons
 
 		private Projectile FiredProjectile { get; set; }
 
-		public override bool CanPrimaryAttack() => WeaponEnabled;
-
 		public override void Simulate( Client player )
 		{
-			if ( !CanPrimaryAttack() )
-				return;
-
 			var windForce = Turn.Instance?.WindForce ?? Vector3.Zero;
 
 			if ( Input.Down( InputButton.Attack1 ) )
@@ -47,12 +42,5 @@ namespace TerryForm.Weapons
 			if ( IsServer )
 				FiredProjectile?.Simulate( player );
 		}
-
-		public override void OnOwnerKilled() { }
-
-		[ClientRpc]
-		public override void OnActiveEffects() { }
-
-		public override void OnFireEffects() { }
 	}
 }
