@@ -88,7 +88,10 @@ namespace TerryForm.Weapons
 		[ClientRpc]
 		public virtual void OnFireEffects()
 		{
+			Log.Info( "Before: " + (Parent as Worm).GetAnimBool( "fire" ) );
 			(Parent as Worm)?.SetAnimBool( "fire", true );
+			Log.Info( "After: " + (Parent as Worm).GetAnimBool( "fire" ) );
+
 			Particles.Create( "particles/pistol_muzzleflash.vpcf", this, "muzzle" );
 		}
 	}
