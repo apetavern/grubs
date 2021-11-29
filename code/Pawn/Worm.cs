@@ -35,12 +35,6 @@ namespace TerryForm.Pawn
 			EnableHitboxes = true;
 		}
 
-		public void EquipWeapon( Weapon weapon )
-		{
-			// Enable new weapon.
-			EquippedWeapon = weapon;
-		}
-
 		public void DressFromClient( Client cl )
 		{
 			var clothes = new Clothing.Container();
@@ -91,6 +85,11 @@ namespace TerryForm.Pawn
 				SimulateActiveChild( cl, EquippedWeapon );
 		}
 
+		public void EquipWeapon( Weapon weapon )
+		{
+			EquippedWeapon = weapon;
+		}
+
 		public void OnTurnStarted()
 		{
 			IsCurrentTurn = true;
@@ -98,7 +97,7 @@ namespace TerryForm.Pawn
 
 		public void OnTurnEnded()
 		{
-			// Return this weapon to the inventory.
+			// Disable the weapon
 			EquippedWeapon?.ActiveEnd( this, false );
 			EquippedWeapon = null;
 
@@ -125,7 +124,6 @@ namespace TerryForm.Pawn
 		public override void OnKilled()
 		{
 			LifeState = LifeState.Dead;
-
 			EnableDrawing = false;
 			EnableAllCollisions = false;
 

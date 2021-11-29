@@ -14,6 +14,7 @@ namespace TerryForm.Weapons
 		public virtual bool IsFiredTurnEnding => false;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		[Net] public bool WeaponEnabled { get; set; }
+		private PawnAnimator Animator { get; set; }
 
 		public override void Spawn()
 		{
@@ -25,20 +26,26 @@ namespace TerryForm.Weapons
 
 		public override void Simulate( Client player )
 		{
+			base.Simulate( player );
+
+			if ( !IsServer )
+				return;
+
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled )
 				Fire();
-
-			base.Simulate( player );
 		}
 
 		protected virtual void Fire()
 		{
-			Log.Info( "Fired" );
 			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
 			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
 
+			OnFireEffects();
+
 			if ( IsFiredTurnEnding )
 				Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+
+			WeaponEnabled = false;
 		}
 
 		public override void ActiveStart( Entity ent )
@@ -49,8 +56,11 @@ namespace TerryForm.Weapons
 			if ( ent is not Worm worm )
 				return;
 
+			// Get the holding worm's animator & store it for later use.
+			Animator = worm.GetActiveAnimator();
+
 			WeaponEnabled = true;
-			ShowHoldPose( worm, true );
+			ShowHoldPose( true );
 			SetParent( worm, true );
 			EnableDrawing = true;
 
@@ -63,22 +73,22 @@ namespace TerryForm.Weapons
 				return;
 
 			WeaponEnabled = false;
-			ShowHoldPose( worm, false );
+			ShowHoldPose( false );
 			SetParent( Owner );
 			EnableDrawing = false;
 
 			base.ActiveEnd( worm, dropped );
 		}
 
-		private void ShowHoldPose( Worm worm, bool show )
+		private void ShowHoldPose( bool show )
 		{
-			var anim = worm.GetActiveAnimator();
-			anim.SetParam( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
+			Animator?.SetParam( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
 		}
 
 		[ClientRpc]
 		public virtual void OnFireEffects()
 		{
+			(Parent as Worm)?.SetAnimBool( "fire", true );
 			Particles.Create( "particles/pistol_muzzleflash.vpcf", this, "muzzle" );
 		}
 	}
