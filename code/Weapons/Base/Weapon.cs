@@ -111,7 +111,8 @@ namespace TerryForm.Weapons
 			if ( IsClient ) return;
 
 			Owner = Owner.Owner;
-			Log.Info( Owner );
+			// This doens't work, but we need it to.
+			Parent = Owner.Parent;
 		}
 	}
 }
