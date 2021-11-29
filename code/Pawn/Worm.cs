@@ -85,23 +85,6 @@ namespace TerryForm.Pawn
 				return;
 			}
 
-			if ( IsServer )
-			{
-				using ( Prediction.Off() )
-				{
-					int bonker = Input.Pressed( InputButton.Attack1 ) ? 1 : (Input.Pressed( InputButton.Attack2 ) ? 0 : -1);
-					if ( bonker != -1 )
-					{
-						Vector3 position = Trace.Ray( EyePos, EyePos + EyeRot.Forward * 10000f ).Ignore( this ).Run().EndPos;
-
-						Color color = bonker == 1 ? Color.Red : Color.Green;
-						DebugOverlay.Circle( position, Rotation.FromYaw( 90f ), 64f, color.WithAlpha( 0.15f ), true, 5f );
-						Terrain.Deform( position, bonker == 1, 128f );
-					}
-				}
-			}
-
-
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );
 

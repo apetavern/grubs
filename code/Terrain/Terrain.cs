@@ -21,7 +21,7 @@ public static partial class Terrain
 
 	public static float[,,] NoiseMap { get; private set; } = GenerateNoiseMap();
 
-	[Event.Hotload]
+	// [Event.Hotload]
 	public static void Hotload()
 	{
 		NoiseMap = GenerateNoiseMap();
@@ -114,7 +114,7 @@ public static partial class Terrain
 	[Event.Frame]
 	public static void Frame()
 	{
-		DrawNoiseMap();
+		// DrawNoiseMap();
 	}
 
 	public static void Deform( Vector3 origin, bool boolean, float radius )

@@ -60,7 +60,7 @@ public partial class TerrainChunk : ModelEntity
 	[Event.Frame]
 	public void Frame()
 	{
-		DebugOverlay.Box( Position, -extents, extents, Color.White.WithAlpha( 0.1f ) );
+		// DebugOverlay.Box( Position, -extents, extents, Color.White.WithAlpha( 0.1f ) );
 	}
 
 	public void Generate()
