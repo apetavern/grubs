@@ -65,6 +65,8 @@ namespace TerryForm.Weapons
 			if ( ent is not Worm worm )
 				return;
 
+			WeaponEnabled = false;
+
 			var anim = worm.GetActiveAnimator();
 			anim.SetParam( "holdpose", (int)HoldPose.None );
 
