@@ -34,6 +34,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "lightoff"
+						remaps = 
+						[
+							{
+								from = "models/weapons/landmine/materials/landmine.vmat"
+								to = "models/weapons/landmine/materials/landmine_lightoff.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
