@@ -18,8 +18,8 @@ namespace TerryForm.UI.World
 		{
 			StyleSheet.Load( "/UI/World/WormNametag.scss" );
 
-			name = Add.Label( "Froggy", "worm-name" );
-			health = Add.Label( "100", "worm-health" );
+			name = Add.Label( "Worm Name", "worm-name" );
+			health = Add.Label( "0", "worm-health" );
 
 			float width = 500;
 			float height = 250;
@@ -33,20 +33,14 @@ namespace TerryForm.UI.World
 			SceneObject.Flags.BloomLayer = false;
 		}
 
-		private void Update()
+		private void UpdateLabels()
 		{
-			//
-			// Update data...
-			//
-
 			name.Text = Worm.Name.ToString();
 			health.Text = Worm.Health.ToString();
 		}
 
-		public override void Tick()
+		private void Move()
 		{
-			base.Tick();
-
 			Position = Worm.EyePos + Offset;
 			Rotation = Rotation.LookAt( Vector3.Right );
 
@@ -54,7 +48,14 @@ namespace TerryForm.UI.World
 			{
 				WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 5f;
 			}
-			Update();
+		}
+
+		public override void Tick()
+		{
+			base.Tick();
+
+			Move();
+			UpdateLabels();
 		}
 	}
 }
