@@ -23,8 +23,8 @@ namespace TerryForm.States
 		}
 
 		// Debug method for changing current state to EndState.
-		[ServerCmd]
-		public static void FinishGame()
+		[ServerCmd( "tf_state_end" )]
+		public static void EndGame()
 		{
 			StateHandler.Instance?.ChangeState( new EndState() );
 		}
