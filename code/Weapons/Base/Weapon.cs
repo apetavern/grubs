@@ -21,7 +21,7 @@ namespace TerryForm.Weapons
 		[Net] public bool WeaponEnabled { get; set; }
 		[Net, Predicted] public int QuantityFired { get; set; }
 		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
-		private bool WeaponHasHat { get; set; }
+		[Net] public bool WeaponHasHat { get; set; }
 		protected PawnAnimator Animator { get; set; }
 
 		public override void Spawn()
