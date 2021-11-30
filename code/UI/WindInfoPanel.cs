@@ -9,12 +9,16 @@ namespace TerryForm.UI
 		{
 			StyleSheet.Load( "/Code/UI/WindInfoPanel.scss" );
 
-			int segmentCount = 9;
-			for ( int i = 0; i < segmentCount; ++i )
+			int sideSegmentCount = 9;
+
+			// Left segments
+			for ( int i = 0; i < sideSegmentCount; ++i )
 			{
 				Add.Icon( "arrow_left" );
 			}
-			for ( int i = 0; i < segmentCount; ++i )
+
+			// Right segments
+			for ( int i = 0; i < sideSegmentCount; ++i )
 			{
 				Add.Icon( "arrow_right" );
 			}
