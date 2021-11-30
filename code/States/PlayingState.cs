@@ -61,7 +61,7 @@ namespace TerryForm.States
 		}
 
 		// Debug method for changing current state to PlayingState.
-		[ServerCmd]
+		[ServerCmd( "tf_state_play" )]
 		public static void PlayState()
 		{
 			StateHandler.Instance?.ChangeState( new PlayingState() );

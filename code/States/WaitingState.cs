@@ -27,7 +27,7 @@ namespace TerryForm.States
 		}
 
 		// Debug method for changing current state to WaitingState.
-		[ServerCmd]
+		[ServerCmd( "tf_state_wait" )]
 		public static void WaitState()
 		{
 			StateHandler.Instance?.ChangeState( new WaitingState() );
