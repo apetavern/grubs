@@ -8,7 +8,7 @@ namespace TerryForm.Pawn
 {
 	public partial class Player : Sandbox.Player
 	{
-		[Net] public List<Worm> Worms { get; set; } = new();
+		[Net] public IList<Worm> Worms { get; set; } = new List<Worm>();
 		[Net] public Worm ActiveWorm { get; set; }
 		[Net] public bool IsAlive { get; set; }
 
