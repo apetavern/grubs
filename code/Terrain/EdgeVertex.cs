@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
+using Sandbox;
 
-namespace Sandbox
+namespace TerryForm.Terrain
 {
 	[StructLayout( LayoutKind.Sequential )]
 	public struct EdgeVertex
