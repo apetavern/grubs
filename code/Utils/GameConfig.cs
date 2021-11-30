@@ -21,7 +21,7 @@ namespace TerryForm.Utils
 			"Gumby",
 			"Dick",
 			"Panini"
-	};
+		};
 
 		public static Dictionary<string, int> LoadoutDefaults = new()
 		{
