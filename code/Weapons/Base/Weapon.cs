@@ -118,8 +118,8 @@ namespace TerryForm.Weapons
 			// Get the holding worm's animator & store it for later use.
 			Animator = worm.GetActiveAnimator();
 
-			SetParent( worm, true );
 			WeaponEnabled = true;
+			SetParent( worm, true );
 			ShowWeapon( worm, true );
 
 			base.OnActive();
@@ -130,8 +130,8 @@ namespace TerryForm.Weapons
 			if ( ent is not Worm worm )
 				return;
 
-			SetParent( Owner );
 			WeaponEnabled = false;
+			SetParent( Owner );
 			ShowWeapon( worm, false );
 
 			// Weapon has been put back into the inventory, reset QuantityFired. 
