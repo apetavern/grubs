@@ -9,7 +9,7 @@ namespace TerryForm.Weapons
 	{
 		public virtual string WeaponName => "";
 		public virtual string ModelPath => "";
-		[Net] public int Ammo { get; set; } = 0;
+		[Net] public int Ammo { get; set; }
 		public virtual int WeaponReach { get; set; } = 100;
 		public virtual bool IsFiredTurnEnding => true;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
@@ -61,7 +61,6 @@ namespace TerryForm.Weapons
 		/// </summary>
 		protected virtual void Fire()
 		{
-			// Fire
 			var firedTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach )
 				.Ignore( this )
 				.Ignore( Parent )
@@ -116,8 +115,11 @@ namespace TerryForm.Weapons
 
 		private void ShowHoldPose( bool show )
 		{
-			if ( Parent is not Worm worm ) return;
-			if ( !worm.IsCurrentTurn ) return;
+			if ( Parent is not Worm worm )
+				return;
+
+			if ( !worm.IsCurrentTurn )
+				return;
 
 			Animator?.SetParam( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
 		}
