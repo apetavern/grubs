@@ -29,11 +29,11 @@ namespace TerryForm.Weapons
 			base.Spawn();
 
 			SetModel( ModelPath );
-			WeaponHasHat = CheckWeaponForHats();
+			WeaponHasHat = CheckWeaponForHat();
 			Ammo = GameConfig.LoadoutDefaults[ClassInfo.Name];
 		}
 
-		private bool CheckWeaponForHats()
+		private bool CheckWeaponForHat()
 		{
 			for ( int i = 0; i < BoneCount; i++ )
 			{
