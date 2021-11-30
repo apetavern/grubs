@@ -62,8 +62,18 @@ namespace TerryForm.Weapons
 		protected virtual void Fire()
 		{
 			// Fire
-			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
-			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
+			var firedTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach )
+				.Ignore( this )
+				.Ignore( Parent )
+				.Run();
+
+			DebugOverlay.Line( firedTrace.StartPos, firedTrace.EndPos, Color.Yellow );
+
+			if ( firedTrace.Entity is null )
+				return;
+
+			var damage = DamageInfo.FromBullet( firedTrace.EndPos, (firedTrace.StartPos - firedTrace.EndPos).Normal, 50 );
+			firedTrace.Entity.TakeDamage( damage );
 		}
 
 		public override void ActiveStart( Entity ent )
