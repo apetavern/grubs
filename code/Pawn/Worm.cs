@@ -58,6 +58,10 @@ namespace TerryForm.Pawn
 			{
 				var ent = new AnimEntity( item.Model, this );
 
+				// Add a tag to the hat so we can reference it later.
+				if ( item.Category == Clothing.ClothingCategory.Hat )
+					ent.Tags.Add( "hat" );
+
 				if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 					ent.SetMaterialGroup( item.MaterialGroup );
 			}
