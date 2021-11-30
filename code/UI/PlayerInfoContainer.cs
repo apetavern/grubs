@@ -19,8 +19,9 @@ namespace TerryForm.UI
 
 				var playerInfoPanel = new PlayerInfoPanel( client );
 				var index = playerInfoPanels.Count % 4;
+				var teamClass = (client.Pawn as Pawn.Player).ActiveWorm.GetTeamClass();
 
-				playerInfoPanel.AddClass( $"background-{index} {(client.Pawn as Pawn.Player).ActiveWorm.GetTeamClass()} my-turn" );
+				playerInfoPanel.AddClass( $"background-{index} {teamClass} my-turn" );
 				playerInfoPanel.Parent = this;
 				playerInfoPanels.Add( client, playerInfoPanel );
 			}
