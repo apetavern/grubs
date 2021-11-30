@@ -21,10 +21,12 @@ namespace TerryForm.UI
 			base.Tick();
 
 			var game = Game.Instance;
-			if ( game == null ) return;
+			if ( game == null )
+				return;
 
 			var state = game.StateHandler.State;
-			if ( state == null ) return;
+			if ( state == null )
+				return;
 
 			if ( state is PlayingState playingState )
 			{

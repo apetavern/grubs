@@ -78,9 +78,7 @@ namespace TerryForm.Pawn
 			if ( LifeState == LifeState.Dead )
 			{
 				if ( TimeSinceDied > 3 && IsServer )
-				{
 					Respawn();
-				}
 
 				return;
 			}

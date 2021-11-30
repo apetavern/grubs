@@ -49,13 +49,12 @@ namespace TerryForm.States
 			var anyPlayerAlive = false;
 			foreach ( var player in players )
 			{
-				if ( player.IsAlive ) anyPlayerAlive = true;
+				if ( player.IsAlive )
+					anyPlayerAlive = true;
 			}
 
 			if ( !anyPlayerAlive )
-			{
 				return true;
-			}
 
 			return false;
 		}

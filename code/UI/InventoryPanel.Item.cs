@@ -23,7 +23,8 @@ namespace TerryForm.UI
 				Reset();
 
 				var inventory = Local.Pawn.Inventory as Inventory;
-				if ( inventory == null ) return this;
+				if ( inventory == null )
+					return this;
 
 				if ( inventory.GetSlot( weaponIndex ) is not Weapon weapon )
 					return this;
@@ -41,7 +42,8 @@ namespace TerryForm.UI
 
 			public void EquipItem()
 			{
-				if ( SlotIndex == -1 ) return;
+				if ( SlotIndex == -1 )
+					return;
 
 				Inventory.EquipItemFromIndex( SlotIndex );
 			}
