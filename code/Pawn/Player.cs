@@ -1,6 +1,6 @@
 ﻿using Sandbox;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using TerryForm.Utils;
 using TerryForm.Weapons;
 
@@ -132,7 +132,7 @@ namespace TerryForm.Pawn
 		[ClientRpc]
 		public void UpdateCameraTarget( Entity target )
 		{
-			(Camera as Pawn.Camera).SetLookTarget( target );
+			(Camera as Camera).SetLookTarget( target );
 		}
 	}
 }

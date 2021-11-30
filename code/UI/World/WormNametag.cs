@@ -1,7 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System;
 using TerryForm.Pawn;
 
 namespace TerryForm.UI.World

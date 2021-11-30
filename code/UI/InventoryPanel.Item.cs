@@ -1,8 +1,8 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using TerryForm.Weapons;
 using TerryForm.Pawn;
+using TerryForm.Weapons;
 
 namespace TerryForm.UI
 {
