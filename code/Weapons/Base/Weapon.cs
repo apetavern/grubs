@@ -117,10 +117,9 @@ namespace TerryForm.Weapons
 			// Get the holding worm's animator & store it for later use.
 			Animator = worm.GetActiveAnimator();
 
-			WeaponEnabled = true;
-			ShowHoldPose( true );
 			SetParent( worm, true );
-			EnableDrawing = true;
+			WeaponEnabled = true;
+			ShowWeapon( worm, true );
 
 			base.OnActive();
 		}
@@ -130,10 +129,9 @@ namespace TerryForm.Weapons
 			if ( ent is not Worm worm )
 				return;
 
-			WeaponEnabled = false;
-			ShowHoldPose( false );
 			SetParent( Owner );
-			EnableDrawing = false;
+			WeaponEnabled = false;
+			ShowWeapon( worm, false );
 
 			// Weapon has been put back into the inventory, reset QuantityFired. 
 			// This creates an exploit that will allow the player to switch guns to 
@@ -144,17 +142,16 @@ namespace TerryForm.Weapons
 			base.ActiveEnd( worm, dropped );
 		}
 
-		public void HideWeapon( bool hide )
+		public void ShowWeapon( Worm worm, bool show )
 		{
-			EnableDrawing = hide;
-			ShowHoldPose( hide );
+			EnableDrawing = show;
+			ShowHoldPose( worm, show );
+
+			worm.SetHatVisible( !show );
 		}
 
-		private void ShowHoldPose( bool show )
+		private void ShowHoldPose( Worm worm, bool show )
 		{
-			if ( Parent is not Worm worm )
-				return;
-
 			if ( !worm.IsCurrentTurn )
 				return;
 
