@@ -147,7 +147,8 @@ namespace TerryForm.Weapons
 			EnableDrawing = show;
 			ShowHoldPose( worm, show );
 
-			worm.SetHatVisible( !show );
+			if ( WeaponHasHat )
+				worm.SetHatVisible( !show );
 		}
 
 		private void ShowHoldPose( Worm worm, bool show )
