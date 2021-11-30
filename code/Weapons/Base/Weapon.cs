@@ -7,13 +7,20 @@ namespace TerryForm.Weapons
 {
 	public abstract partial class Weapon : BaseCarriable
 	{
+		// Weapon settings
 		public virtual string WeaponName => "";
 		public virtual string ModelPath => "";
-		[Net] public int Ammo { get; set; }
 		public virtual int WeaponReach { get; set; } = 100;
 		public virtual bool IsFiredTurnEnding => true;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
-		[Net] public bool WeaponEnabled { get; set; }
+		public virtual int MaxQuantityFired { get; set; } = 1;
+		public virtual float SecondsBetweenFired => 5.0f;
+
+		// Weapon properties
+		[Net, Predicted] public int Ammo { get; set; }
+		[Net, Predicted] public bool WeaponEnabled { get; set; }
+		[Net, Predicted] public int QuantityFired { get; set; }
+		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
 		protected PawnAnimator Animator { get; set; }
 
 		public override void Spawn()
@@ -28,7 +35,7 @@ namespace TerryForm.Weapons
 		{
 			base.Simulate( player );
 
-			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled )
+			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 				OnFire();
 		}
 
@@ -37,6 +44,12 @@ namespace TerryForm.Weapons
 		/// </summary>
 		protected virtual void OnFire()
 		{
+			// Don't allow the worm to shoot this weapon if they've exceeded this turns MaxQuantityFired
+			if ( QuantityFired >= MaxQuantityFired )
+				return;
+
+			TimeSinceFired = 0;
+
 			// Trigger the fire animation.
 			(Parent as Worm).SetAnimBool( "fire", true );
 
@@ -48,12 +61,17 @@ namespace TerryForm.Weapons
 
 			Fire();
 
-			// End the turn if this weapon is turn ending.
-			if ( IsFiredTurnEnding )
-				Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+			if ( QuantityFired < MaxQuantityFired )
+			{
+				// End the turn if this weapon is turn ending.
+				if ( IsFiredTurnEnding )
+					Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
 
-			// Disable the weapon.
-			WeaponEnabled = false;
+				// Disable the weapon.
+				WeaponEnabled = false;
+			}
+
+			QuantityFired++;
 		}
 
 		/// <summary>
@@ -103,6 +121,12 @@ namespace TerryForm.Weapons
 			ShowHoldPose( false );
 			SetParent( Owner );
 			EnableDrawing = false;
+
+			// Weapon has been put back into the inventory, reset QuantityFired. 
+			// This creates an exploit that will allow the player to switch guns to 
+			// reset the quantity fired. This will be fixed when we disallow weapon selection
+			// after having shot a bullet.
+			QuantityFired = 0;
 
 			base.ActiveEnd( worm, dropped );
 		}
