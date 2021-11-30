@@ -55,7 +55,7 @@ namespace TerryForm.States.SubStates
 		}
 
 		// Debug method for ending a turn immediately.
-		[ServerCmd]
+		[ServerCmd( "tf_turn_end" )]
 		public static void EndTurn()
 		{
 			(StateHandler.Instance?.State as PlayingState)?.Turn?.OnFinish();
