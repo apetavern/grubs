@@ -15,7 +15,7 @@ namespace TerryForm.UI
 			public InventoryItem()
 			{
 				StyleSheet.Load( "/Code/UI/InventoryPanel.scss" );
-				AddEventListener( "onclick", () => EquipItem() );
+				AddEventListener( "onclick", EquipItem );
 			}
 
 			public InventoryItem UpdateFrom( int weaponIndex )
