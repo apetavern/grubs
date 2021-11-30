@@ -28,13 +28,17 @@ namespace TerryForm.UI
 				if ( inventory.GetSlot( weaponIndex ) is not Weapon weapon )
 					return this;
 
-				var hasAmmo = inventory.HasAmmo( weaponIndex );
+				var ammoCount = (inventory.GetSlot( weaponIndex ) as Weapon).Ammo;
 
 				SlotIndex = weaponIndex;
 				SetClass( "Occupied", true );
-				SetClass( "Empty", !hasAmmo );
+				SetClass( "Empty", ammoCount == 0 );
+
 
 				Add.Image( $"/materials/icons/{weapon.ClassInfo.Name}.png", "Icon" );
+
+				if ( ammoCount >= 0 )
+					Add.Label( $"{ammoCount}", "Ammo" );
 
 				return this;
 			}

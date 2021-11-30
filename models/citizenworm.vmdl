@@ -249,9 +249,9 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/citizenworm.fbx"
-						start_frame = 69
-						end_frame = 71
+						source_filename = "models/character_animations/citizenworm_uzi_aim.fbx"
+						start_frame = 0
+						end_frame = 2
 						framerate = 3.0
 						take = 0
 						reverse = false
