@@ -38,7 +38,6 @@ namespace TerryForm.Weapons
 
 				if ( Segments.Count == 1 )
 				{
-					Log.Info( "KABOOM" );
 					IsCompleted = true;
 
 					Delete();

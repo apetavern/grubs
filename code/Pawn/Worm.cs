@@ -121,14 +121,11 @@ namespace TerryForm.Pawn
 
 		public void GiveHealth( int amount )
 		{
-			Log.Info( "Worm received health" );
 			Health += amount;
 		}
 
 		public override void TakeDamage( DamageInfo info )
 		{
-			Log.Info( "Worm take damage" );
-
 			Health -= info.Damage;
 
 			if ( Health < 0 )
