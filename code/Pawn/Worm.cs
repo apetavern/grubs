@@ -2,6 +2,7 @@
 using System.Linq;
 using TerryForm.Utils;
 using TerryForm.Weapons;
+using TerryForm.States.SubStates;
 
 namespace TerryForm.Pawn
 {
@@ -116,6 +117,11 @@ namespace TerryForm.Pawn
 
 		public override void TakeDamage( DamageInfo info )
 		{
+			// End this worms turn immediately if it takes damage.
+			if ( IsCurrentTurn )
+				Turn.Instance?.ForceEnd();
+
+
 			Log.Info( "Worm take damage" );
 
 			Health -= info.Damage;

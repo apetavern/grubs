@@ -54,6 +54,11 @@ namespace TerryForm.States.SubStates
 			PlayingState?.OnTurnFinished();
 		}
 
+		public void ForceEnd()
+		{
+			OnFinish();
+		}
+
 		// Debug method for ending a turn immediately.
 		[ServerCmd]
 		public static void EndTurn()
