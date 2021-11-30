@@ -21,6 +21,7 @@ namespace TerryForm.Weapons
 		[Net, Predicted] public bool WeaponEnabled { get; set; }
 		[Net, Predicted] public int QuantityFired { get; set; }
 		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
+		private bool WeaponHasHat { get; set; }
 		protected PawnAnimator Animator { get; set; }
 
 		public override void Spawn()
@@ -28,7 +29,19 @@ namespace TerryForm.Weapons
 			base.Spawn();
 
 			SetModel( ModelPath );
+			WeaponHasHat = CheckWeaponForHats();
 			Ammo = GameConfig.LoadoutDefaults[ClassInfo.Name];
+		}
+
+		private bool CheckWeaponForHats()
+		{
+			for ( int i = 0; i < BoneCount; i++ )
+			{
+				if ( GetBoneName( i ) == "head" )
+					return true;
+			}
+
+			return false;
 		}
 
 		public override void Simulate( Client player )
