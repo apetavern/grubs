@@ -116,6 +116,9 @@ namespace TerryForm.Weapons
 
 		private void ShowHoldPose( bool show )
 		{
+			if ( Parent is not Worm worm ) return;
+			if ( !worm.IsCurrentTurn ) return;
+
 			Animator?.SetParam( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
 		}
 
