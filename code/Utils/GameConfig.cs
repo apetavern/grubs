@@ -21,8 +21,9 @@ namespace TerryForm.Utils
 			"Gumby",
 			"Dick",
 			"Panini"
-	};
+		};
 
+		// Classname, weapon quantity.
 		public static Dictionary<string, int> LoadoutDefaults = new()
 		{
 			{ "BaseballBat", 2 },
