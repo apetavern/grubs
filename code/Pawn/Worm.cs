@@ -67,6 +67,16 @@ namespace TerryForm.Pawn
 			}
 		}
 
+		public void SetHatVisible( bool visible )
+		{
+			var hat = Children.OfType<AnimEntity>().FirstOrDefault( child => child.Tags.Has( "hat" ) );
+
+			if ( hat is null )
+				return;
+
+			hat.EnableDrawing = visible;
+		}
+
 		public override void Simulate( Client cl )
 		{
 			/*
