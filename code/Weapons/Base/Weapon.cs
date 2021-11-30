@@ -18,7 +18,7 @@ namespace TerryForm.Weapons
 
 		// Weapon properties
 		[Net, Predicted] public int Ammo { get; set; }
-		[Net, Predicted] public bool WeaponEnabled { get; set; }
+		[Net] public bool WeaponEnabled { get; set; }
 		[Net, Predicted] public int QuantityFired { get; set; }
 		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
 		private bool WeaponHasHat { get; set; }
@@ -49,7 +49,10 @@ namespace TerryForm.Weapons
 			base.Simulate( player );
 
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
+			{
 				OnFire();
+				QuantityFired++;
+			}
 		}
 
 		/// <summary>
@@ -83,8 +86,6 @@ namespace TerryForm.Weapons
 				// Disable the weapon.
 				WeaponEnabled = false;
 			}
-
-			QuantityFired++;
 		}
 
 		/// <summary>
