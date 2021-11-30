@@ -168,13 +168,13 @@ public static partial class Terrain
 			ClearDeformsClient();
 	}
 
-	[ServerCmd( "terrain_clear" )]
+	[ServerCmd( "tf_terrain_clear" )]
 	public static void ClearDeformsCmd()
 	{
 		ClearDeforms();
 	}
 
-	[ServerCmd( "terrain_gen" )]
+	[ServerCmd( "tf_terrain_gen" )]
 	public static void Generate()
 	{
 		for ( int x = 0; x < ChunksWide; x++ )
