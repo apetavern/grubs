@@ -2,33 +2,36 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-public partial class ChatEntry : Panel
+namespace TerryForm.UI.Elements
 {
-	public Label NameLabel { get; internal set; }
-	public Label Message { get; internal set; }
-	public Image Avatar { get; internal set; }
-
-	private RealTimeSince TimeSinceBorn = 0;
-
-	public ChatEntry()
+	public partial class ChatEntry : Panel
 	{
-		Avatar = Add.Image();
-		NameLabel = Add.Label( "Name", "name" );
-		Message = Add.Label( "Message", "message" );
-	}
+		public Label NameLabel { get; internal set; }
+		public Label Message { get; internal set; }
+		public Image Avatar { get; internal set; }
 
-	public override void Tick()
-	{
-		base.Tick();
+		private RealTimeSince TimeSinceBorn = 0;
 
-		if ( TimeSinceBorn > 3 && !ChatBox.Current.HasClass( "open" ) )
+		public ChatEntry()
 		{
-			Hide();
+			Avatar = Add.Image();
+			NameLabel = Add.Label( "Name", "name" );
+			Message = Add.Label( "Message", "message" );
 		}
-	}
 
-	public void Hide()
-	{
-		AddClass( "hide" );
+		public override void Tick()
+		{
+			base.Tick();
+
+			if ( TimeSinceBorn > 3 && !ChatBox.Current.HasClass( "open" ) )
+			{
+				Hide();
+			}
+		}
+
+		public void Hide()
+		{
+			AddClass( "hide" );
+		}
 	}
 }
