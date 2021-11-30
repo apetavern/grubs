@@ -61,7 +61,7 @@ namespace TerryForm.Weapons
 		protected virtual void OnFire()
 		{
 			// Don't allow the worm to shoot this weapon if they've exceeded this turns MaxQuantityFired
-			if ( QuantityFired >= MaxQuantityFired )
+			if ( QuantityFired > MaxQuantityFired )
 				return;
 
 			TimeSinceFired = 0;
@@ -77,7 +77,7 @@ namespace TerryForm.Weapons
 
 			Fire();
 
-			if ( QuantityFired < MaxQuantityFired )
+			if ( QuantityFired >= MaxQuantityFired )
 			{
 				// End the turn if this weapon is turn ending.
 				if ( IsFiredTurnEnding )
