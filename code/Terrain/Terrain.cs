@@ -87,10 +87,6 @@ public static partial class Terrain
 						NoiseMap[x, 2, z] = noise;
 					}
 				}
-				else
-				{
-					// no building allowed in my christian worms server
-				}
 			}
 		}
 	}

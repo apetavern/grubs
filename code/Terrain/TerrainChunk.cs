@@ -9,26 +9,34 @@ public partial class TerrainChunk : ModelEntity
 	private static int resolution => Terrain.ChunkResolution;
 	private static int width => Terrain.ChunkWidth;
 	private static int extents => width / 2;
-
-	public static Vector3 ToWorld( int x, int y )
-	{
-		return new Vector3( width * (Terrain.ChunksWide / 2 - x), 0, width * (Terrain.ChunksHigh / 2 - y) );
-	}
-
+	public static Entity Chunks { get; set; }
+	private Color32 grassColor = new Color32( 56, 115, 56 );
+	private Color32 dirtColor = new Color32( 115, 62, 57 );
 	private static Vector3[] pointOffsets = GeneratePointOffsets();
-
 	[Net] public int X { get; private set; }
 	[Net] public int Y { get; private set; }
 	public Mesh Mesh { get; private set; }
-	public static TerrainChunk Create( int x, int y )
-	{
-		TerrainChunk chunk = new TerrainChunk() { X = x, Y = y };
-		chunk.Position = ToWorld( x, y );
 
-		return chunk;
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		if ( Chunks is null )
+		{
+			Chunks = new();
+			Chunks.Name = "Chunks";
+		}
+
+		Transmit = TransmitType.Always;
+		Initalize();
 	}
 
-	public TerrainChunk() { }
+	public override void ClientSpawn()
+	{
+		base.ClientSpawn();
+
+		Initalize();
+	}
 
 	private void Initalize()
 	{
@@ -41,20 +49,17 @@ public partial class TerrainChunk : ModelEntity
 		Generate();
 	}
 
-	public override void Spawn()
+	public static TerrainChunk Create( int x, int y )
 	{
-		base.Spawn();
+		TerrainChunk chunk = new TerrainChunk() { X = x, Y = y };
+		chunk.Position = ToWorld( x, y );
 
-		Transmit = TransmitType.Always;
-
-		Initalize();
+		return chunk;
 	}
 
-	public override void ClientSpawn()
+	public static Vector3 ToWorld( int x, int y )
 	{
-		base.ClientSpawn();
-
-		Initalize();
+		return new Vector3( width * (Terrain.ChunksWide / 2 - x), 0, width * (Terrain.ChunksHigh / 2 - y) );
 	}
 
 	[Event.Frame]
@@ -75,6 +80,7 @@ public partial class TerrainChunk : ModelEntity
 		}
 
 		ModelBuilder modelBuilder = new ModelBuilder();
+
 		if ( Host.IsClient )
 			modelBuilder.AddMesh( Mesh );
 
@@ -85,6 +91,8 @@ public partial class TerrainChunk : ModelEntity
 
 		EnableDrawing = true;
 		EnableAllCollisions = true;
+		Owner = Chunks;
+		Parent = Chunks;
 
 		if ( IsServer )
 			ClientGenerate();
@@ -222,9 +230,6 @@ public partial class TerrainChunk : ModelEntity
 		Mesh.SetVertexRange( 0, vertices.Count );
 		Mesh.SetVertexBufferData<EdgeVertex>( vertices.ToArray() );
 	}
-
-	private Color32 grassColor = new Color32( 56, 115, 56 );
-	private Color32 dirtColor = new Color32( 115, 62, 57 );
 
 	static Vector3[] GeneratePointOffsets()
 	{
