@@ -145,23 +145,39 @@ namespace TerryForm.Pawn
 		public void DoKnockback( DamageInfo info )
 		{
 			var hitPos = Position.WithZ( info.Position.z );
-
-			// Will probably need to tweak this later. Knockback is scaled by damage amount.
-			var hitDir = Position - info.Force * info.Damage;
+			var hitDir = Position - info.Force;
 
 			// Clear ground entity so that this worm won't stick to the floor.
-			GroundEntity = null;
+			if ( hitDir.z > 5 )
+				GroundEntity = null;
 
+			// Will probably need to tweak this later. Knockback is scaled by damage amount.
 			ApplyAbsoluteImpulse( (hitDir - hitPos) * info.Damage );
 		}
 
 		public override void OnKilled()
 		{
+			// Disable collcetions and drawing.
 			LifeState = LifeState.Dead;
 			EnableDrawing = false;
 			EnableAllCollisions = false;
 
+			// Explode this worm
+			// Explode here.
+
+			// Create a tombstone in this worms place.
+			CreateTombstone();
+
+			// Let the player know one of their worms has died.
 			(Owner as Pawn.Player)?.OnWormKilled( this );
+		}
+
+		public void CreateTombstone()
+		{
+			// Create a tombstone at this worms position.
+			// This will need to become it's own explodable damage dealing entity later on. 
+			var tombstone = new ModelEntity( "models/rust_props/barrels/fuel_barrel.vmdl" );
+			tombstone.Position = Position;
 		}
 
 		public string GetTeamClass()
