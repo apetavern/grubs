@@ -38,6 +38,10 @@ namespace TerryForm.States
 
 			if ( Players.Count < 2 )
 				ChangeState( new EndState() );
+
+			// Temporarily announce winner. We'll handle this better through EndState later.
+			var winner = Players[0];
+			Log.Info( $"🎉 {winner.Name} has won." );
 		}
 
 		[Event.Tick.Server]
