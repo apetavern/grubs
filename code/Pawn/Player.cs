@@ -50,8 +50,6 @@ namespace TerryForm.Pawn
 		public override void Respawn()
 		{
 			Camera = new Camera();
-
-			base.Respawn();
 		}
 
 		public override void Simulate( Client cl )
