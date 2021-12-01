@@ -1,19 +1,16 @@
 ﻿using Sandbox;
-using System.Linq;
-using Sandbox.UI;
-using System;
-using System.Collections.Generic;
 
-public struct MarchingCubes
+namespace TerryForm.Terrain
 {
-	// any noise surpassing this value will be considered solid
-	public const float GroundLevel = 0f;
-
-
-	public static Material Material = Material.Load( "materials/default/vertex_color.vmat" );
-
-	public static readonly int[,] PointOffsets = new int[8, 3]
+	public struct MarchingCubes
 	{
+		// any noise surpassing this value will be considered solid
+		public const float GroundLevel = 0f;
+
+		public static Material Material = Material.Load( "materials/default/vertex_color.vmat" );
+
+		public static readonly int[,] PointOffsets = new int[8, 3]
+		{
 		{ 1, 1, 0 },
 		{ 1, 0, 0 },
 		{ 0, 0, 0 },
@@ -22,10 +19,10 @@ public struct MarchingCubes
 		{ 1, 0, 1 },
 		{ 0, 0, 1 },
 		{ 0, 1, 1 },
-	};
+		};
 
-	public static readonly int[,] IndexFromEdge = new int[12, 2]
-	{
+		public static readonly int[,] IndexFromEdge = new int[12, 2]
+		{
 		{ 0, 1 },
 		{ 2, 1 },
 		{ 3, 2 },
@@ -38,10 +35,10 @@ public struct MarchingCubes
 		{ 5, 1 },
 		{ 6, 2 },
 		{ 7, 3 },
-	};
+		};
 
-	public static readonly int[] EdgeFlags = new int[]
-	{
+		public static readonly int[] EdgeFlags = new int[]
+		{
 		0x000, 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c, 0x80c, 0x905, 0xa0f, 0xb06, 0xc0a, 0xd03, 0xe09, 0xf00,
 		0x190, 0x099, 0x393, 0x29a, 0x596, 0x49f, 0x795, 0x69c, 0x99c, 0x895, 0xb9f, 0xa96, 0xd9a, 0xc93, 0xf99, 0xe90,
 		0x230, 0x339, 0x033, 0x13a, 0x636, 0x73f, 0x435, 0x53c, 0xa3c, 0xb35, 0x83f, 0x936, 0xe3a, 0xf33, 0xc39, 0xd30,
@@ -58,9 +55,9 @@ public struct MarchingCubes
 		0xd30, 0xc39, 0xf33, 0xe3a, 0x936, 0x83f, 0xb35, 0xa3c, 0x53c, 0x435, 0x73f, 0x636, 0x13a, 0x033, 0x339, 0x230,
 		0xe90, 0xf99, 0xc93, 0xd9a, 0xa96, 0xb9f, 0x895, 0x99c, 0x69c, 0x795, 0x49f, 0x596, 0x29a, 0x393, 0x099, 0x190,
 		0xf00, 0xe09, 0xd03, 0xc0a, 0xb06, 0xa0f, 0x905, 0x80c, 0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x000
-	};
+		};
 
-	public static readonly int[,] Triangles = new int[256, 16]{
+		public static readonly int[,] Triangles = new int[256, 16]{
 	{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 	{0, 8, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 	{0, 1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
@@ -319,24 +316,25 @@ public struct MarchingCubes
 	{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 	};
 
-	public static readonly int[] TriangleCount = GetTriangleCount();
+		public static readonly int[] TriangleCount = GetTriangleCount();
 
-	private static int[] GetTriangleCount()
-	{
-		int[] triCount = new int[256];
-		for ( int i = 0; i < 256; i++ )
-			triCount[i] = GetTriangles( i );
-
-		return triCount;
-	}
-
-	private static int GetTriangles( int i )
-	{
-		for ( int j = 0; j < 16; j++ )
+		private static int[] GetTriangleCount()
 		{
-			if ( Triangles[i, j] == -1 )
-				return j;
+			int[] triCount = new int[256];
+			for ( int i = 0; i < 256; i++ )
+				triCount[i] = GetTriangles( i );
+
+			return triCount;
 		}
-		return 0;
+
+		private static int GetTriangles( int i )
+		{
+			for ( int j = 0; j < 16; j++ )
+			{
+				if ( Triangles[i, j] == -1 )
+					return j;
+			}
+			return 0;
+		}
 	}
 }

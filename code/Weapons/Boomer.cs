@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using TerryForm.Pawn;
+using TerryForm.Terrain;
 
 namespace TerryForm.Weapons
 {
@@ -29,7 +30,7 @@ namespace TerryForm.Weapons
 
 						Color color = input == 1 ? Color.Red : Color.Green;
 						DebugOverlay.Circle( position, Rotation.FromYaw( 90f ), 64f, color.WithAlpha( 0.15f ), true, 5f );
-						Terrain.Deform( position, input == 1, 128f );
+						Terrain.Terrain.Deform( position, input == 1, 128f );
 					}
 				}
 			}
