@@ -138,6 +138,7 @@ namespace TerryForm.Pawn
 
 			DoKnockback( info );
 
+			// TODO: Come back to this later. Worms should only die / apply damage once the attacking worms turn has ended.
 			if ( Health <= 0 )
 				OnKilled();
 		}
