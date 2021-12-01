@@ -9,8 +9,6 @@ namespace TerryForm.States
 		public virtual int StateDurationSeconds { get; protected set; } = 0;
 		[Net] public float StateEndTime { get; set; }
 
-		public List<Pawn.Player> PlayerList = new();
-
 		public float TimeLeft
 		{
 			get
@@ -36,7 +34,6 @@ namespace TerryForm.States
 			Log.Info( $"🔴 {StateName} state ended." );
 
 			StateEndTime = 0f;
-			PlayerList.Clear();
 
 			OnFinish();
 		}
@@ -45,10 +42,8 @@ namespace TerryForm.States
 		{
 			Host.AssertServer();
 
-			Log.Info( "Adding player" );
-
-			if ( !PlayerList.Contains( player ) )
-				PlayerList.Add( player );
+			if ( !StateHandler.Instance.Players.Contains( player ) )
+				StateHandler.Instance.Players.Add( player );
 		}
 
 		public void RotatePlayers()
