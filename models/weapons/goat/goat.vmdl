@@ -130,6 +130,69 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "hop_start"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/goat/goat.fbx"
+						start_frame = 59
+						end_frame = 79
+						framerate = 60.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "midair"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/goat/goat.fbx"
+						start_frame = 79
+						end_frame = 80
+						framerate = 3.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "land"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/goat/goat.fbx"
+						start_frame = 80
+						end_frame = 99
+						framerate = 60.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
