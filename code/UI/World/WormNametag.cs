@@ -48,7 +48,7 @@ namespace TerryForm.UI.World
 		{
 			base.Tick();
 
-			if ( !Worm.IsValid )
+			if ( !Worm.IsValid || Worm is null )
 				Delete( true );
 
 			Position = Worm.EyePos + Offset;
