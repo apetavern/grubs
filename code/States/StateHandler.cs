@@ -32,6 +32,11 @@ namespace TerryForm.States
 			State?.Start();
 		}
 
+		public void RemovePlayer( Pawn.Player player )
+		{
+			Players.Remove( player );
+		}
+
 		[Event.Tick.Server]
 		public static void Tick()
 		{
