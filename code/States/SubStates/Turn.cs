@@ -34,6 +34,8 @@ namespace TerryForm.States.SubStates
 			// Let the player know that their turn has started.
 			ActivePlayer?.OnTurnStart();
 
+			ChatBox.AddInformation( To.Everyone, $"{ActivePlayer.ActiveWorm.Name}'s turn has started.", $"avatar:{ActivePlayer.Client.PlayerId}" );
+
 			// Update camera target for all players.
 			StateHandler.Instance?.Players?.ForEach( player => player.UpdateCameraTarget( ActivePlayer.ActiveWorm ) );
 		}
