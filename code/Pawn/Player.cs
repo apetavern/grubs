@@ -11,7 +11,6 @@ namespace TerryForm.Pawn
 	{
 		[Net] public List<Worm> Worms { get; set; } = new();
 		[Net] public Worm ActiveWorm { get; set; }
-		[Net] public bool IsAlive { get; set; }
 
 		public Player()
 		{
@@ -20,8 +19,6 @@ namespace TerryForm.Pawn
 
 		public Player( Client cl ) : this()
 		{
-			IsAlive = true;
-
 			// Create worms
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
@@ -88,10 +85,6 @@ namespace TerryForm.Pawn
 				if ( worm.LifeState == LifeState.Alive )
 					anyWormAlive = true;
 			}
-
-			// If all are dead, Player is also dead.
-			if ( !anyWormAlive )
-				IsAlive = false;
 
 			Log.Info( $"🐛 {Client.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
