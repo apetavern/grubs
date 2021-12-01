@@ -107,10 +107,10 @@ namespace TerryForm.Pawn
 
 		public void OnWormKilled( Worm worm )
 		{
-			Worms.Remove( worm );
-
 			// Replace this with a dead worm later.
 			worm.Delete();
+
+			Worms.Remove( worm );
 
 			// Check how many worms this player has left, if it's 0 then remove this player from the StateHandler list.
 			if ( Worms.Count <= 0 )
