@@ -119,8 +119,8 @@ namespace TerryForm.Weapons
 			Animator = worm.GetActiveAnimator();
 
 			WeaponEnabled = true;
-			SetParent( worm, true );
 			ShowWeapon( worm, true );
+			SetParent( worm, true );
 
 			base.OnActive();
 		}
@@ -131,8 +131,8 @@ namespace TerryForm.Weapons
 				return;
 
 			WeaponEnabled = false;
-			SetParent( Owner );
 			ShowWeapon( worm, false );
+			SetParent( Owner );
 
 			// Weapon has been put back into the inventory, reset QuantityFired. 
 			// This creates an exploit that will allow the player to switch guns to 
@@ -146,14 +146,17 @@ namespace TerryForm.Weapons
 		public void ShowWeapon( Worm worm, bool show )
 		{
 			EnableDrawing = show;
-			ShowHoldPose( worm, show );
+			ShowHoldPose( show );
 
 			if ( WeaponHasHat )
 				worm.SetHatVisible( !show );
 		}
 
-		private void ShowHoldPose( Worm worm, bool show )
+		private void ShowHoldPose( bool show )
 		{
+			if ( Parent is not Worm worm )
+				return;
+
 			if ( !worm.IsCurrentTurn )
 				return;
 
