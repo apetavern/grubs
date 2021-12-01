@@ -48,7 +48,28 @@
 				[
 					{
 						_class = "AnimFile"
-						name = "goatscream"
+						name = "in_hand"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/goat/goat.fbx"
+						start_frame = 19
+						end_frame = 48
+						framerate = 60.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "eyes_closed"
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -62,17 +83,99 @@
 						disable_compression = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = -1
-						end_frame = 20
+						end_frame = 0
 						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "eyes_open"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/goat/goat.fbx"
+						start_frame = 1
+						end_frame = 1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "hopping"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/goat/goat.fbx"
+						start_frame = 59
+						end_frame = 99
+						framerate = 60.0
 						take = 0
 						reverse = false
 					},
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "eyes"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "eye_L"
+								weight = 1.0
+							},
+							{
+								bone = "eye_R"
+								weight = 1.0
+							},
+							{
+								bone = "lowerlid_L"
+								weight = 1.0
+							},
+							{
+								bone = "lowerlid_R"
+								weight = 1.0
+							},
+							{
+								bone = "upperlid_L"
+								weight = 1.0
+							},
+							{
+								bone = "upperlid_R"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "models/weapons/goat/goat.vanmgrph"
 	}
 }
