@@ -78,14 +78,6 @@ namespace TerryForm.Pawn
 		{
 			ActiveWorm?.OnTurnEnded();
 
-			// Iterate through Worms to check if any are alive.
-			var anyWormAlive = false;
-			foreach ( var worm in Worms )
-			{
-				if ( worm.LifeState == LifeState.Alive )
-					anyWormAlive = true;
-			}
-
 			Log.Info( $"🐛 {Client.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
 
