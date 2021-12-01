@@ -35,6 +35,9 @@ namespace TerryForm.States
 		public void RemovePlayer( Pawn.Player player )
 		{
 			Players.Remove( player );
+
+			if ( Players.Count < 2 )
+				ChangeState( new EndState() );
 		}
 
 		[Event.Tick.Server]
