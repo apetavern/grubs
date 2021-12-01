@@ -53,15 +53,6 @@ namespace TerryForm.States
 			var current = StateHandler.Instance?.Players[0];
 			StateHandler.Instance?.Players.RemoveAt( 0 );
 			StateHandler.Instance?.Players.Add( current );
-
-			SkipDeadPlayer();
-		}
-
-		private void SkipDeadPlayer()
-		{
-			var current = StateHandler.Instance?.Players[0];
-			if ( !current.IsAlive )
-				RotatePlayers();
 		}
 
 		public void SetTimeRemaining( int newDuration )
