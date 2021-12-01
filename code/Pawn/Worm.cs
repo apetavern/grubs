@@ -125,7 +125,6 @@ namespace TerryForm.Pawn
 
 		public void GiveHealth( int amount )
 		{
-			Log.Info( "Worm received health" );
 			Health += amount;
 		}
 
@@ -135,10 +134,10 @@ namespace TerryForm.Pawn
 			if ( IsCurrentTurn )
 				Turn.Instance?.ForceEnd();
 
-
-			Log.Info( "Worm take damage" );
-
 			Health -= info.Damage;
+
+			if ( Health <= 0 )
+				OnKilled();
 		}
 
 		public override void OnKilled()
