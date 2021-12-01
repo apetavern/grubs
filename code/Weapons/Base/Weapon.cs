@@ -2,6 +2,7 @@
 using TerryForm.Pawn;
 using TerryForm.States.SubStates;
 using TerryForm.Utils;
+using TerryForm.Terrain;
 
 namespace TerryForm.Weapons
 {
@@ -51,7 +52,8 @@ namespace TerryForm.Weapons
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
 				OnFire();
-				QuantityFired++;
+				// Commented out for testing purposes.
+				//QuantityFired++;
 			}
 		}
 
@@ -85,6 +87,10 @@ namespace TerryForm.Weapons
 
 				// Disable the weapon.
 				WeaponEnabled = false;
+
+				// Reduce weapon ammo count.
+				// Commented out for testing purposes.
+				// Ammo--;
 			}
 		}
 
@@ -93,18 +99,30 @@ namespace TerryForm.Weapons
 		/// </summary>
 		protected virtual void Fire()
 		{
-			var firedTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach )
+			var firedTrace = Trace.Ray( Parent.EyePos, Parent.EyePos + Parent.EyeRot.Forward.Normal * WeaponReach )
 				.Ignore( this )
 				.Ignore( Parent )
 				.Run();
 
-			DebugOverlay.Line( firedTrace.StartPos, firedTrace.EndPos, Color.Yellow );
+			if ( Host.IsServer )
+				DebugOverlay.Line( firedTrace.StartPos, firedTrace.EndPos, Color.Yellow );
 
-			if ( firedTrace.Entity is null )
-				return;
+			Log.Info( firedTrace.Entity );
 
-			var damage = DamageInfo.FromBullet( firedTrace.EndPos, (firedTrace.StartPos - firedTrace.EndPos).Normal, 50 );
-			firedTrace.Entity.TakeDamage( damage );
+			switch ( firedTrace.Entity )
+			{
+				case Worm:
+					Log.Info( $"Dealing damage to {firedTrace.Entity}" );
+
+					var damage = DamageInfo.FromBullet( firedTrace.EndPos, (firedTrace.StartPos - firedTrace.EndPos).Normal, 50 );
+					firedTrace.Entity.TakeDamage( damage );
+					break;
+
+				case TerrainChunk:
+					Log.Info( "Do deformation" );
+					break;
+			}
+
 		}
 
 		public override void ActiveStart( Entity ent )
