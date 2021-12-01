@@ -16,9 +16,10 @@ namespace TerryForm.Weapons
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		public virtual int MaxQuantityFired { get; set; } = 1;
 		public virtual float SecondsBetweenFired => 2.0f;
+		public virtual float DamagePerShot => 25f;
 
 		// Weapon properties
-		[Net, Predicted] public int Ammo { get; set; }
+		[Net] public int Ammo { get; set; }
 		[Net] public bool WeaponEnabled { get; set; }
 		[Net, Predicted] public int QuantityFired { get; set; }
 		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
@@ -52,8 +53,7 @@ namespace TerryForm.Weapons
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
 				OnFire();
-				// Commented out for testing purposes.
-				//QuantityFired++;
+				QuantityFired++;
 			}
 		}
 
@@ -89,8 +89,7 @@ namespace TerryForm.Weapons
 				WeaponEnabled = false;
 
 				// Reduce weapon ammo count.
-				// Commented out for testing purposes.
-				// Ammo--;
+				Ammo--;
 			}
 		}
 
@@ -104,17 +103,12 @@ namespace TerryForm.Weapons
 				.Ignore( Parent )
 				.Run();
 
-			if ( Host.IsServer )
-				DebugOverlay.Line( firedTrace.StartPos, firedTrace.EndPos, Color.Yellow );
-
-			Log.Info( firedTrace.Entity );
+			DebugOverlay.Line( firedTrace.StartPos, firedTrace.EndPos, Color.Yellow );
 
 			switch ( firedTrace.Entity )
 			{
 				case Worm:
-					Log.Info( $"Dealing damage to {firedTrace.Entity}" );
-
-					var damage = DamageInfo.FromBullet( firedTrace.EndPos, (firedTrace.StartPos - firedTrace.EndPos).Normal, 50 );
+					var damage = DamageInfo.FromBullet( firedTrace.EndPos, (firedTrace.StartPos - firedTrace.EndPos).Normal, DamagePerShot );
 					firedTrace.Entity.TakeDamage( damage );
 					break;
 
