@@ -49,7 +49,10 @@ namespace TerryForm.UI.World
 			base.Tick();
 
 			if ( !Worm.IsValid || Worm is null )
+			{
 				Delete( true );
+				return;
+			}
 
 			Position = Worm.EyePos + Offset;
 			Rotation = Rotation.LookAt( Vector3.Right );
