@@ -14,7 +14,7 @@ namespace TerryForm.Weapons
 		public virtual bool IsFiredTurnEnding => true;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		public virtual int MaxQuantityFired { get; set; } = 1;
-		public virtual float SecondsBetweenFired => 5.0f;
+		public virtual float SecondsBetweenFired => 2.0f;
 
 		// Weapon properties
 		[Net, Predicted] public int Ammo { get; set; }
