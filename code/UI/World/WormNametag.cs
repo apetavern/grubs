@@ -48,6 +48,9 @@ namespace TerryForm.UI.World
 		{
 			base.Tick();
 
+			if ( !Worm.IsValid )
+				Delete( true );
+
 			Position = Worm.EyePos + Offset;
 			Rotation = Rotation.LookAt( Vector3.Right );
 
@@ -55,6 +58,7 @@ namespace TerryForm.UI.World
 			{
 				WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 5f;
 			}
+
 			Update();
 		}
 	}
