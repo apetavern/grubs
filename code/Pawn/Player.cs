@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using TerryForm.Utils;
 using TerryForm.Weapons;
+using TerryForm.States;
 
 namespace TerryForm.Pawn
 {
@@ -125,6 +126,10 @@ namespace TerryForm.Pawn
 
 			// Replace this with a dead worm later.
 			worm.Delete();
+
+			// Check how many worms this player has left, if it's 0 then remove this player from the StateHandler list.
+			if ( Worms.Count <= 0 )
+				StateHandler.Instance?.RemovePlayer( this );
 		}
 
 		[ClientRpc]
