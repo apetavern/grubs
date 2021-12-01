@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using TerryForm.Utils;
 using TerryForm.Weapons;
+using TerryForm.States;
 
 namespace TerryForm.Pawn
 {
@@ -10,7 +11,6 @@ namespace TerryForm.Pawn
 	{
 		[Net] public List<Worm> Worms { get; set; } = new();
 		[Net] public Worm ActiveWorm { get; set; }
-		[Net] public bool IsAlive { get; set; }
 
 		public Player()
 		{
@@ -19,8 +19,6 @@ namespace TerryForm.Pawn
 
 		public Player( Client cl ) : this()
 		{
-			IsAlive = true;
-
 			// Create worms
 			for ( int i = 0; i < GameConfig.WormCount; i++ )
 			{
@@ -50,8 +48,6 @@ namespace TerryForm.Pawn
 		public override void Respawn()
 		{
 			Camera = new Camera();
-
-			base.Respawn();
 		}
 
 		public override void Simulate( Client cl )
@@ -82,18 +78,6 @@ namespace TerryForm.Pawn
 		{
 			ActiveWorm?.OnTurnEnded();
 
-			// Iterate through Worms to check if any are alive.
-			var anyWormAlive = false;
-			foreach ( var worm in Worms )
-			{
-				if ( worm.LifeState == LifeState.Alive )
-					anyWormAlive = true;
-			}
-
-			// If all are dead, Player is also dead.
-			if ( !anyWormAlive )
-				IsAlive = false;
-
 			Log.Info( $"🐛 {Client.Name}'s turn for worm {ActiveWorm} has ended." );
 		}
 
@@ -123,10 +107,14 @@ namespace TerryForm.Pawn
 
 		public void OnWormKilled( Worm worm )
 		{
-			Worms.Remove( worm );
-
 			// Replace this with a dead worm later.
 			worm.Delete();
+
+			Worms.Remove( worm );
+
+			// Check how many worms this player has left, if it's 0 then remove this player from the StateHandler list.
+			if ( Worms.Count <= 0 )
+				StateHandler.Instance?.RemovePlayer( this );
 		}
 
 		[ClientRpc]

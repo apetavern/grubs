@@ -8,6 +8,7 @@
 		Uzi,
 		Throwable,
 		Rifle,
-		Swing
+		Swing,
+		Droppable
 	}
 }

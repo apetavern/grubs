@@ -2,124 +2,183 @@
 using TerryForm.Pawn;
 using TerryForm.States.SubStates;
 using TerryForm.Utils;
+using TerryForm.Terrain;
 
 namespace TerryForm.Weapons
 {
-	public abstract partial class Weapon : BaseWeapon
+	public abstract partial class Weapon : BaseCarriable
 	{
+		// Weapon settings
 		public virtual string WeaponName => "";
 		public virtual string ModelPath => "";
-		public override float PrimaryRate => 2f;
-		[Net] public int Ammo { get; set; } = 0;
-		public virtual int WeaponReach { get; set; } = 100;
-		public virtual bool IsFiredTurnEnding => false;
+		public virtual int WeaponReach { get; set; } = 300;
+		public virtual bool IsFiredTurnEnding => true;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
+		public virtual int MaxQuantityFired { get; set; } = 1;
+		public virtual float SecondsBetweenFired => 2.0f;
+		public virtual float DamagePerShot => 25f;
+
+		// Weapon properties
+		[Net] public int Ammo { get; set; }
 		[Net] public bool WeaponEnabled { get; set; }
-		private PawnAnimator WormAnimator { get; set; }
+		[Net] public int QuantityFired { get; set; }
+		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
+		[Net] public bool WeaponHasHat { get; set; }
+		protected PawnAnimator Animator { get; set; }
 
 		public override void Spawn()
 		{
 			base.Spawn();
 
 			SetModel( ModelPath );
+			WeaponHasHat = CheckWeaponForHat();
 			Ammo = GameConfig.LoadoutDefaults[ClassInfo.Name];
 		}
 
-		public void SetWeaponEnabled( bool shouldEnable )
+		private bool CheckWeaponForHat()
 		{
-			WeaponEnabled = shouldEnable;
-			WormAnimator?.SetParam( "holdpose", WeaponEnabled ? (int)HoldPose : (int)HoldPose.None );
+			for ( int i = 0; i < BoneCount; i++ )
+			{
+				if ( GetBoneName( i ) == "head" )
+					return true;
+			}
 
-			SetVisible( shouldEnable );
+			return false;
 		}
 
 		public override void Simulate( Client player )
 		{
-			var activeWorm = (player.Pawn as Pawn.Player).ActiveWorm;
+			base.Simulate( player );
 
-			if ( activeWorm == null )
+			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
+			{
+				OnFire();
+				QuantityFired++;
+			}
+		}
+
+		/// <summary>
+		/// The surrounding processes of Fire();
+		/// </summary>
+		protected virtual void OnFire()
+		{
+			// Don't allow the worm to shoot this weapon if they've exceeded this turns MaxQuantityFired
+			if ( QuantityFired > MaxQuantityFired )
 				return;
 
-			SetWeaponEnabled( Velocity.WithZ( 0 ).IsNearZeroLength && GroundEntity is not null );
-			SimulateAnimator( activeWorm.GetActiveAnimator() );
+			TimeSinceFired = 0;
 
-			base.Simulate( player );
-		}
-
-		public override void SimulateAnimator( PawnAnimator anim )
-		{
-			WormAnimator = anim;
-
-			anim.SetParam( "holdpose", WeaponEnabled ? (int)HoldPose : (int)HoldPose.None );
-		}
-
-		public override bool CanPrimaryAttack()
-		{
-			if ( !WeaponEnabled )
-				return false;
-
-			if ( Ammo == 0 )
-				return false;
-
-			return base.CanPrimaryAttack();
-		}
-
-		public override void AttackPrimary()
-		{
-			OnFireEffects();
+			// Trigger the fire animation.
+			(Parent as Worm).SetAnimBool( "fire", true );
 
 			if ( !IsServer )
 				return;
 
+			// Create particles / screen effects.
+			OnFireEffects();
+
 			Fire();
+
+			if ( QuantityFired >= MaxQuantityFired )
+			{
+				// End the turn if this weapon is turn ending.
+				if ( IsFiredTurnEnding )
+					Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+
+				// Disable the weapon.
+				WeaponEnabled = false;
+
+				// Reduce weapon ammo count.
+				Ammo--;
+			}
 		}
 
-		public async virtual void Fire()
+		/// <summary>
+		/// What happens when you actually fire the weapon.
+		/// </summary>
+		protected virtual void Fire()
 		{
-			Ammo--;
+			var firedTrace = Trace.Ray( Parent.EyePos, Parent.EyePos + Parent.EyeRot.Forward.Normal * WeaponReach )
+				.Ignore( this )
+				.Ignore( Parent )
+				.Run();
 
-			var tempTrace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward.Normal * WeaponReach ).Ignore( this ).Run();
-			DebugOverlay.Line( tempTrace.StartPos, tempTrace.EndPos );
+			DebugOverlay.Line( firedTrace.StartPos, firedTrace.EndPos, Color.Yellow );
 
-			if ( IsFiredTurnEnding )
-				Turn.Instance?.SetTimeRemaining( GameConfig.TurnTimeRemainingAfterFired );
+			switch ( firedTrace.Entity )
+			{
+				case Worm:
+					var damage = DamageInfo.FromBullet( firedTrace.EndPos, (firedTrace.StartPos - firedTrace.EndPos).Normal, DamagePerShot );
+					firedTrace.Entity.TakeDamage( damage );
+					break;
 
-			/* 
-			 * TODO: Let physics resolve and weapon to finish firing before ending the players turn.
-			 * Temporary delay to simulate this.
-			 */
-			await GameTask.DelaySeconds( 1 );
+				case TerrainChunk:
+					Log.Info( "Do deformation" );
+					break;
+			}
 
-			Log.Info( "End turn after fired" );
 		}
 
-		public void SetVisible( bool visible )
+		public override void ActiveStart( Entity ent )
 		{
-			EnableDrawing = visible;
+			if ( Ammo == 0 )
+				return;
+
+			if ( ent is not Worm worm )
+				return;
+
+			// Get the holding worm's animator & store it for later use.
+			Animator = worm.GetActiveAnimator();
+
+			WeaponEnabled = true;
+			ShowWeapon( worm, true );
+			SetParent( worm, true );
+
+			base.OnActive();
 		}
 
-		public override bool CanSecondaryAttack() => false;
+		public override void ActiveEnd( Entity ent, bool dropped )
+		{
+			if ( ent is not Worm worm )
+				return;
 
-		public override void AttackSecondary() { }
+			WeaponEnabled = false;
+			ShowWeapon( worm, false );
+			SetParent( Owner );
 
-		public override bool CanReload() => false;
+			// Weapon has been put back into the inventory, reset QuantityFired. 
+			// This creates an exploit that will allow the player to switch guns to 
+			// reset the quantity fired. This will be fixed when we disallow weapon selection
+			// after having shot a bullet.
+			QuantityFired = 0;
 
-		public override void Reload() { }
+			base.ActiveEnd( worm, dropped );
+		}
 
-		public virtual void OnOwnerKilled() { }
+		public void ShowWeapon( Worm worm, bool show )
+		{
+			EnableDrawing = show;
+			ShowHoldPose( show );
+
+			if ( WeaponHasHat )
+				worm.SetHatVisible( !show );
+		}
+
+		private void ShowHoldPose( bool show )
+		{
+			if ( Parent is not Worm worm )
+				return;
+
+			if ( !worm.IsCurrentTurn )
+				return;
+
+			Animator?.SetParam( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
+		}
 
 		[ClientRpc]
-		public virtual void OnActiveEffects() { }
-
-		public virtual void OnFireEffects() { }
-
-		public void OnCarryStop()
+		public virtual void OnFireEffects()
 		{
-			SetWeaponEnabled( false );
-			var playerPawn = Owner.Owner;
-
-			SetParent( playerPawn, false );
-			Owner = playerPawn;
+			Particles.Create( "particles/pistol_muzzleflash.vpcf", this, "muzzle" );
 		}
 	}
 }

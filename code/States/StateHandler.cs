@@ -32,6 +32,18 @@ namespace TerryForm.States
 			State?.Start();
 		}
 
+		public void RemovePlayer( Pawn.Player player )
+		{
+			Players.Remove( player );
+
+			if ( Players.Count < 2 )
+				ChangeState( new EndState() );
+
+			// Temporarily announce winner. We'll handle this better through EndState later.
+			var winner = Players[0];
+			Log.Info( $"🎉 {winner.Client.Name} has won." );
+		}
+
 		[Event.Tick.Server]
 		public static void Tick()
 		{

@@ -1,4 +1,5 @@
 ﻿using TerryForm.Utils;
+using TerryForm.Terrain;
 
 namespace TerryForm.States
 {
@@ -8,6 +9,8 @@ namespace TerryForm.States
 
 		protected override void OnStart()
 		{
+			Log.Info( "Generate terrain here" );
+
 			base.OnStart();
 		}
 
@@ -20,7 +23,7 @@ namespace TerryForm.States
 		{
 			base.OnPlayerJoin( player );
 
-			if ( PlayerList.Count >= GameConfig.MinimumPlayersToStart )
+			if ( StateHandler.Instance?.Players?.Count >= GameConfig.MinimumPlayersToStart )
 			{
 				StateHandler.Instance?.ChangeState( new PlayingState() );
 			}
