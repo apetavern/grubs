@@ -148,11 +148,11 @@ namespace TerryForm.Pawn
 			var hitDir = Position - info.Force;
 
 			// Clear ground entity so that this worm won't stick to the floor.
-			if ( hitDir.z > 5 )
+			if ( hitDir.z > 2 )
 				GroundEntity = null;
 
 			// Will probably need to tweak this later. Knockback is scaled by damage amount.
-			ApplyAbsoluteImpulse( (hitDir - hitPos) * info.Damage );
+			ApplyAbsoluteImpulse( (hitDir - hitPos) * info.Damage * 4 );
 		}
 
 		public override void OnKilled()
@@ -176,7 +176,7 @@ namespace TerryForm.Pawn
 		{
 			// Create a tombstone at this worms position.
 			// This will need to become it's own explodable damage dealing entity later on. 
-			var tombstone = new ModelEntity( "models/rust_props/barrels/fuel_barrel.vmdl" );
+			var tombstone = new ModelEntity( "models/gravestones/basic_gravestone/gravestone_basic.vmdl" );
 			tombstone.Position = Position;
 		}
 
