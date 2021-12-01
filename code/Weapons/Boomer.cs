@@ -8,7 +8,6 @@ namespace TerryForm.Weapons
 		public override string WeaponName => "Boomer";
 		public override string ModelPath => "models/weapons/shotgun/shotgun.vmdl";
 		public override HoldPose HoldPose => HoldPose.Shotgun;
-		public override float PrimaryRate => 1f;
 		public override bool IsFiredTurnEnding => true;
 
 		public override void Simulate( Client player )
