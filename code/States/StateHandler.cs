@@ -41,7 +41,7 @@ namespace TerryForm.States
 
 			// Temporarily announce winner. We'll handle this better through EndState later.
 			var winner = Players[0];
-			Log.Info( $"🎉 {winner.Name} has won." );
+			Log.Info( $"🎉 {winner.Client.Name} has won." );
 		}
 
 		[Event.Tick.Server]
