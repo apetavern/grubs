@@ -136,8 +136,23 @@ namespace TerryForm.Pawn
 
 			Health -= info.Damage;
 
+			DoKnockback( info );
+
 			if ( Health <= 0 )
 				OnKilled();
+		}
+
+		public void DoKnockback( DamageInfo info )
+		{
+			var hitPos = Position.WithZ( info.Position.z );
+
+			// Will probably need to tweak this later. Knockback is scaled by damage amount.
+			var hitDir = Position - info.Force * info.Damage;
+
+			// Clear ground entity so that this worm won't stick to the floor.
+			GroundEntity = null;
+
+			ApplyAbsoluteImpulse( (hitDir - hitPos) * info.Damage );
 		}
 
 		public override void OnKilled()
