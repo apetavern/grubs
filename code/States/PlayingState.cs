@@ -44,7 +44,7 @@ namespace TerryForm.States
 
 		private bool CheckWinCondition()
 		{
-			return StateHandler.Instance?.Players?.Count > 1;
+			return StateHandler.Instance?.Players?.Count < 2;
 		}
 
 		// Debug method for changing current state to PlayingState.
