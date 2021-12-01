@@ -11,7 +11,7 @@ namespace TerryForm.Weapons
 		// Weapon settings
 		public virtual string WeaponName => "";
 		public virtual string ModelPath => "";
-		public virtual int WeaponReach { get; set; } = 100;
+		public virtual int WeaponReach { get; set; } = 300;
 		public virtual bool IsFiredTurnEnding => true;
 		public virtual HoldPose HoldPose => HoldPose.Bazooka;
 		public virtual int MaxQuantityFired { get; set; } = 1;
@@ -21,7 +21,7 @@ namespace TerryForm.Weapons
 		// Weapon properties
 		[Net] public int Ammo { get; set; }
 		[Net] public bool WeaponEnabled { get; set; }
-		[Net, Predicted] public int QuantityFired { get; set; }
+		[Net] public int QuantityFired { get; set; }
 		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
 		[Net] public bool WeaponHasHat { get; set; }
 		protected PawnAnimator Animator { get; set; }
