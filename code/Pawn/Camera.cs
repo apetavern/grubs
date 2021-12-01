@@ -35,7 +35,6 @@ namespace TerryForm.Pawn
 		public override void Update()
 		{
 			var pawn = LookTarget;
-			//Log.Info( pawn );
 
 			if ( pawn == null )
 				return;

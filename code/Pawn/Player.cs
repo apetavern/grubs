@@ -17,7 +17,7 @@ namespace TerryForm.Pawn
 			Inventory = new Inventory( this );
 		}
 
-		public Player( Client cl ) : this()
+		public void CreateWorms( Client cl )
 		{
 			// Create worms
 			for ( int i = 0; i < GameConfig.WormCount; i++ )

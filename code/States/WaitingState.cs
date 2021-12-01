@@ -16,6 +16,9 @@ namespace TerryForm.States
 
 		protected override void OnFinish()
 		{
+			foreach ( var player in StateHandler.Instance?.Players )
+				player.CreateWorms( player.Client );
+
 			base.OnFinish();
 		}
 
