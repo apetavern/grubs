@@ -6,10 +6,11 @@ using TerryForm.States.SubStates;
 
 namespace TerryForm.Pawn
 {
-	public partial class Worm : Sandbox.Player
+	public partial class Worm : Sandbox.Player, IAwaitResolution
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
 		[Net] public bool IsCurrentTurn { get; set; }
+		public bool IsResolved { get; set; }
 
 		// Temporary to allow respawning, we don't want respawning later so we can remove this.
 		private TimeSince TimeSinceDied { get; set; }
