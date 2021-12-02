@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using TerryForm.Utils;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace TerryForm.States.SubStates
 {
@@ -8,6 +10,7 @@ namespace TerryForm.States.SubStates
 		public override string StateName => "TURN";
 		public override int StateDurationSeconds => GameConfig.TurnDurationSeconds;
 		public static Turn Instance { get; set; }
+		private TimeSince TimeSincePhysicsResolutionStarted { get; set; }
 		private PlayingState PlayingState { get; set; }
 		[Net] public Pawn.Player ActivePlayer { get; set; }
 		[Net] public Vector3 WindForce { get; set; }
@@ -45,15 +48,35 @@ namespace TerryForm.States.SubStates
 			OnFinish();
 		}
 
-		protected override void OnFinish()
+		protected override async void OnFinish()
 		{
 			base.OnFinish();
 
 			// Let the player know that their turn has ended, useful to kill their ActiveWorm.
 			ActivePlayer?.OnTurnEnd();
 
+			// Wait for all entities with a velocity to stop moving.
+			await CheckResolvedAsync();
+
 			// Let the playing state know this turn has ended so that it can start another.
 			PlayingState?.OnTurnFinished();
+		}
+
+		private async Task<bool> CheckResolvedAsync()
+		{
+			TimeSincePhysicsResolutionStarted = 0;
+			var allResolved = false;
+
+			while ( allResolved == false && TimeSincePhysicsResolutionStarted < 30 )
+			{
+				Log.Info( $"❤️ Waiting for physics to resolve for {TimeSincePhysicsResolutionStarted} seconds." );
+				await GameTask.DelaySeconds( 1 );
+
+				allResolved = !Entity.All.OfType<IAwaitResolution>().Any( ent => !ent.IsResolved );
+			}
+
+			Log.Info( "❤️ Physics resolved." );
+			return true;
 		}
 
 		public void ForceEnd()
