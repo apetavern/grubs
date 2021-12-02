@@ -168,6 +168,7 @@ namespace TerryForm.Pawn
 				}
 
 				GroundEntity = tr.Entity;
+				mover.Velocity = mover.Velocity.WithZ( 0 );
 			}
 			else
 			{

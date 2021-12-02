@@ -17,7 +17,6 @@ namespace TerryForm.Weapons
 		public Vector3 WindForce { get; set; }
 		private float Force { get; set; }
 		private int SegmentCount { get; set; } = 80;
-
 		public List<ArcSegment> Segments { get; set; } = new();
 
 		public ArcTrace( Vector3 startPos, Vector3 direction, float force, Vector3 wind )

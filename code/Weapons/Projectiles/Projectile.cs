@@ -1,13 +1,14 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
+using TerryForm.Utils;
 
 namespace TerryForm.Weapons
 {
-	public partial class Projectile : ModelEntity
+	public partial class Projectile : ModelEntity, IAwaitResolution
 	{
 		private List<ArcSegment> Segments { get; set; }
-		public bool IsCompleted { get; set; }
+		public bool IsResolved { get; set; }
 		private TimeSince TimeSinceSegmentStarted { get; set; }
 
 		public Projectile WithModel( string modelPath )
@@ -30,7 +31,7 @@ namespace TerryForm.Weapons
 		{
 			// This might be shite
 			if ( Segments is null || !Segments.Any() ) return;
-			if ( IsCompleted == true ) return;
+			if ( IsResolved == true ) return;
 
 			if ( Position.IsNearlyEqual( Segments[0].EndPos, 0.1f ) )
 			{
@@ -39,9 +40,9 @@ namespace TerryForm.Weapons
 				if ( Segments.Count == 1 )
 				{
 					Log.Info( "KABOOM" );
-					IsCompleted = true;
+					IsResolved = true;
 
-					Delete();
+					// Delete();
 
 					return;
 				}
