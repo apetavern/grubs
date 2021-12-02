@@ -10,7 +10,7 @@ namespace TerryForm.States.SubStates
 		public override string StateName => "TURN";
 		public override int StateDurationSeconds => GameConfig.TurnDurationSeconds;
 		public static Turn Instance { get; set; }
-		private TimeSince TimeSincePhysicsResolutionStarted { get; set; }
+		private TimeSince TimeSinceResolutionStageStarted { get; set; }
 		private PlayingState PlayingState { get; set; }
 		[Net] public Pawn.Player ActivePlayer { get; set; }
 		[Net] public Vector3 WindForce { get; set; }
@@ -64,18 +64,18 @@ namespace TerryForm.States.SubStates
 
 		private async Task<bool> CheckResolvedAsync()
 		{
-			TimeSincePhysicsResolutionStarted = 0;
+			TimeSinceResolutionStageStarted = 0;
 			var allResolved = false;
 
-			while ( allResolved == false && TimeSincePhysicsResolutionStarted < 30 )
+			while ( allResolved == false && TimeSinceResolutionStageStarted < 30 )
 			{
-				Log.Info( $"❤️ Waiting for physics to resolve for {TimeSincePhysicsResolutionStarted} seconds." );
+				Log.Info( $"❤️ Waiting entities to resolve for {TimeSinceResolutionStageStarted} seconds." );
 				await GameTask.DelaySeconds( 1 );
 
 				allResolved = !Entity.All.OfType<IAwaitResolution>().Any( ent => !ent.IsResolved );
 			}
 
-			Log.Info( "❤️ Physics resolved." );
+			Log.Info( "❤️ All entities are resolved." );
 			return true;
 		}
 
