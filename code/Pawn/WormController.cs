@@ -109,6 +109,7 @@ namespace TerryForm.Pawn
 			// Show / hide weapon based on velocity
 			var worm = Pawn as Worm;
 			worm.EquippedWeapon?.ShowWeapon( worm, Velocity.WithZ( 0 ).IsNearZeroLength && IsGrounded );
+			worm.IsResolved = Velocity.IsNearZeroLength;
 
 			if ( IsGrounded )
 				StayOnGround( mover );
