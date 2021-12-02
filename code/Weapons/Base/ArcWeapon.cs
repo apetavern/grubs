@@ -25,6 +25,7 @@ namespace TerryForm.Weapons
 
 				return;
 			}
+
 			if ( Input.Released( InputButton.Attack1 ) )
 			{
 				QuantityFired++;
@@ -38,7 +39,7 @@ namespace TerryForm.Weapons
 
 		protected override void Fire()
 		{
-			var trace = new ArcTrace( Parent.EyePos, Parent.EyePos + Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? Vector3.Zero );
+			var trace = new ArcTrace( Parent.EyePos, Parent.EyePos + Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? Vector3.Zero ).Run();
 		}
 	}
 }
