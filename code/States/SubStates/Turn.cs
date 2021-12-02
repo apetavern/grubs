@@ -34,6 +34,8 @@ namespace TerryForm.States.SubStates
 			// Let the player know that their turn has started.
 			ActivePlayer?.OnTurnStart();
 
+			ChatBox.AddInformation( To.Everyone, $"{ActivePlayer.ActiveWorm.Name}'s turn has started.", $"avatar:{ActivePlayer.Client.PlayerId}" );
+
 			// Update camera target for all players.
 			StateHandler.Instance?.Players?.ForEach( player => player.UpdateCameraTarget( ActivePlayer.ActiveWorm ) );
 		}
@@ -54,8 +56,13 @@ namespace TerryForm.States.SubStates
 			PlayingState?.OnTurnFinished();
 		}
 
+		public void ForceEnd()
+		{
+			OnFinish();
+		}
+
 		// Debug method for ending a turn immediately.
-		[ServerCmd]
+		[ServerCmd( "tf_turn_end" )]
 		public static void EndTurn()
 		{
 			(StateHandler.Instance?.State as PlayingState)?.Turn?.OnFinish();

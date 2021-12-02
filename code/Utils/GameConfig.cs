@@ -23,14 +23,17 @@ namespace TerryForm.Utils
 			"Panini"
 		};
 
+		// Classname, weapon quantity.
 		public static Dictionary<string, int> LoadoutDefaults = new()
 		{
-			{ "BaseballBat", 2 },
+			{ "BaseballBat", -1 },
 			{ "Bazooka", -1 },
 			{ "Grenade", -1 },
-			{ "Railgun", 0 },
-			{ "Shotgun", 2 },
-			{ "Dynamite", 1 }
+			{ "Railgun", -1 },
+			{ "Shotgun", -1 },
+			{ "Dynamite", 1 },
+			{ "Uzi", -1 },
+			{ "Boomer", -1 },
 		};
 	}
 }

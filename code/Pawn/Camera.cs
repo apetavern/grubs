@@ -8,12 +8,6 @@ namespace TerryForm.Pawn
 	/// </summary>
 	public class Camera : Sandbox.Camera
 	{
-		public override void Activated()
-		{
-			Position = default;
-			Rotation = default;
-		}
-
 		public Range DistanceRange { get; } = new Range( 512f, 2048f );
 		public float Distance { get; set; } = 1024f;
 		private float DistanceScrollRate => 32f;
@@ -26,6 +20,12 @@ namespace TerryForm.Pawn
 		public Vector3 Center { get; set; }
 
 		protected Entity LookTarget { get; private set; }
+
+		public override void Activated()
+		{
+			Position = Vector3.Right * Distance;
+			Rotation = Rotation.FromYaw( 90 );
+		}
 
 		public void SetLookTarget( Entity target )
 		{

@@ -1,4 +1,5 @@
 ﻿using TerryForm.Utils;
+using TerryForm.Terrain;
 
 namespace TerryForm.States
 {
@@ -8,11 +9,16 @@ namespace TerryForm.States
 
 		protected override void OnStart()
 		{
+			Log.Info( "Generate terrain here" );
+
 			base.OnStart();
 		}
 
 		protected override void OnFinish()
 		{
+			foreach ( var player in StateHandler.Instance?.Players )
+				player.CreateWorms( player.Client );
+
 			base.OnFinish();
 		}
 
@@ -20,14 +26,14 @@ namespace TerryForm.States
 		{
 			base.OnPlayerJoin( player );
 
-			if ( PlayerList.Count >= GameConfig.MinimumPlayersToStart )
+			if ( StateHandler.Instance?.Players?.Count >= GameConfig.MinimumPlayersToStart )
 			{
 				StateHandler.Instance?.ChangeState( new PlayingState() );
 			}
 		}
 
 		// Debug method for changing current state to WaitingState.
-		[ServerCmd]
+		[ServerCmd( "tf_state_wait" )]
 		public static void WaitState()
 		{
 			StateHandler.Instance?.ChangeState( new WaitingState() );

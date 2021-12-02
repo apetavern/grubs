@@ -44,23 +44,11 @@ namespace TerryForm.States
 
 		private bool CheckWinCondition()
 		{
-			var players = StateHandler.Instance?.Players;
-
-			var anyPlayerAlive = false;
-			foreach ( var player in players )
-			{
-				if ( player.IsAlive )
-					anyPlayerAlive = true;
-			}
-
-			if ( !anyPlayerAlive )
-				return true;
-
-			return false;
+			return StateHandler.Instance?.Players?.Count < 2;
 		}
 
 		// Debug method for changing current state to PlayingState.
-		[ServerCmd]
+		[ServerCmd( "tf_state_play" )]
 		public static void PlayState()
 		{
 			StateHandler.Instance?.ChangeState( new PlayingState() );

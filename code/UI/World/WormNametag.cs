@@ -41,6 +41,11 @@ namespace TerryForm.UI.World
 
 		private void Move()
 		{
+			if ( !Worm.IsValid || Worm is null )
+			{
+				Delete( true );
+				return;
+			}
 			Position = Worm.EyePos + Offset;
 			Rotation = Rotation.LookAt( Vector3.Right );
 

@@ -22,7 +22,7 @@ namespace TerryForm
 		{
 			base.ClientJoined( cl );
 
-			var player = new Pawn.Player( cl );
+			var player = new Pawn.Player();
 			player.Respawn();
 			cl.Pawn = player;
 
