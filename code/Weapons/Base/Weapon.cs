@@ -52,8 +52,8 @@ namespace TerryForm.Weapons
 
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
-				OnFire();
 				QuantityFired++;
+				OnFire();
 			}
 		}
 
