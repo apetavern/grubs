@@ -42,7 +42,7 @@ namespace TerryForm.UI
 				else
 				{
 					int timeLeftSeconds = playingState.Turn.TimeLeft.CeilToInt();
-					TurnTime.Text = timeLeftSeconds.ToString();
+					TurnTime.Text = timeLeftSeconds <= 0 ? "-" : timeLeftSeconds.ToString();
 				}
 			}
 			else
