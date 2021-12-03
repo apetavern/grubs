@@ -2,6 +2,7 @@
 using TerryForm.Utils;
 using System.Linq;
 using System.Threading.Tasks;
+using TerryForm.UI;
 
 namespace TerryForm.States.SubStates
 {
@@ -32,7 +33,7 @@ namespace TerryForm.States.SubStates
 		{
 			base.OnStart();
 
-			WindForce = Rand.Float( -1, 1 );
+			UpdateWind();
 
 			// Let the player know that their turn has started.
 			ActivePlayer?.OnTurnStart();
@@ -41,6 +42,14 @@ namespace TerryForm.States.SubStates
 
 			// Update camera target for all players.
 			StateHandler.Instance?.Players?.ForEach( player => player.UpdateCameraTarget( ActivePlayer.ActiveWorm ) );
+		}
+
+		private void UpdateWind()
+		{
+			WindForce = Rand.Float( -1, 1 );
+
+			// Let the HUD know that the wind has changed.
+			HudEntity.UpdateWind( WindForce );
 		}
 
 		protected override void OnTimeUp()
