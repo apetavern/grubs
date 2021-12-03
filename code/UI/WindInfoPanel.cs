@@ -18,10 +18,10 @@ namespace TerryForm.UI
 		{
 			DeleteChildren( true );
 
-			var direction = wind <= 0 ? "left" : "right";
-			var segmentQuantity = Math.Abs( wind );
+			var direction = wind < 0 ? "left" : "right";
+			var segmentQuantity = Math.Abs( wind ) * 10;
 
-			for ( int i = 0; i < segmentQuantity; ++i )
+			for ( int i = 1; i < segmentQuantity; i++ )
 			{
 				Add.Icon( $"arrow_{direction}" );
 			}

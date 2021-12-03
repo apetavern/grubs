@@ -39,7 +39,7 @@ namespace TerryForm.Weapons
 
 		protected override void Fire()
 		{
-			var trace = new ArcTrace( Parent.EyePos, Parent.EyePos + Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ).Run();
+			var trace = new ArcTrace( Parent.EyePos, Parent.EyePos + Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? 0 ).Run();
 		}
 	}
 }
