@@ -1,6 +1,6 @@
 ﻿using Sandbox;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using TerryForm.Utils;
 using TerryForm.Weapons;
 using TerryForm.States;
@@ -9,7 +9,7 @@ namespace TerryForm.Pawn
 {
 	public partial class Player : Sandbox.Player
 	{
-		[Net] public List<Worm> Worms { get; set; } = new();
+		[Net] public IList<Worm> Worms { get; set; } = new List<Worm>();
 		[Net] public Worm ActiveWorm { get; set; }
 
 		public Player()
@@ -120,7 +120,7 @@ namespace TerryForm.Pawn
 		[ClientRpc]
 		public void UpdateCameraTarget( Entity target )
 		{
-			(Camera as Pawn.Camera).SetLookTarget( target );
+			(Camera as Camera).SetLookTarget( target );
 		}
 	}
 }

@@ -28,14 +28,5 @@ namespace TerryForm
 
 			StateHandler.OnPlayerJoin( player );
 		}
-
-		/// <summary>
-		/// Temporary ServerCmd to discern what State is currently active.
-		/// </summary>
-		[ServerCmd]
-		public static void CheckState()
-		{
-			Log.Trace( StateHandler.Instance?.State.StateName );
-		}
 	}
 }

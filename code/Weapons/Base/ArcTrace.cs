@@ -34,8 +34,6 @@ namespace TerryForm.Weapons
 			Vector3 velocity = Force * -Direction;
 			Vector3 position = StartPos;
 
-			TraceResult tr = new();
-
 			for ( int i = 0; i < SegmentCount; i++ )
 			{
 				ArcSegment segment = new();
@@ -47,7 +45,7 @@ namespace TerryForm.Weapons
 
 				segment.EndPos = position;
 
-				tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).WorldOnly().Run();
+				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).WorldOnly().Run();
 
 				if ( tr.Hit )
 				{

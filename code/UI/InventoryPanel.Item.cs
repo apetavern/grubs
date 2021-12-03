@@ -1,8 +1,8 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using TerryForm.Weapons;
 using TerryForm.Pawn;
+using TerryForm.Weapons;
 
 namespace TerryForm.UI
 {
@@ -15,7 +15,7 @@ namespace TerryForm.UI
 			public InventoryItem()
 			{
 				StyleSheet.Load( "/Code/UI/InventoryPanel.scss" );
-				AddEventListener( "onclick", () => EquipItem() );
+				AddEventListener( "onclick", EquipItem );
 			}
 
 			public InventoryItem UpdateFrom( int weaponIndex )
@@ -23,7 +23,8 @@ namespace TerryForm.UI
 				Reset();
 
 				var inventory = Local.Pawn.Inventory as Inventory;
-				if ( inventory == null ) return this;
+				if ( inventory == null )
+					return this;
 
 				if ( inventory.GetSlot( weaponIndex ) is not Weapon weapon )
 					return this;
@@ -45,7 +46,8 @@ namespace TerryForm.UI
 
 			public void EquipItem()
 			{
-				if ( SlotIndex == -1 ) return;
+				if ( SlotIndex == -1 )
+					return;
 
 				Inventory.EquipItemFromIndex( SlotIndex );
 			}

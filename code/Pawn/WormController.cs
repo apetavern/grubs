@@ -39,7 +39,7 @@ namespace TerryForm.Pawn
 		}
 
 		/// <summary>
-		/// Set our eye position & rotation
+		/// Set our eye position and rotation
 		/// </summary>
 		private void SetEyePos()
 		{

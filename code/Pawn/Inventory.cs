@@ -7,10 +7,7 @@ namespace TerryForm.Pawn
 {
 	public class Inventory : BaseInventory
 	{
-		public Inventory( Player player ) : base( player )
-		{
-
-		}
+		public Inventory( Player player ) : base( player ) { }
 
 		public override bool Add( Entity ent, bool makeActive = false )
 		{

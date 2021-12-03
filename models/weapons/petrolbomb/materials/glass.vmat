@@ -1,0 +1,77 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "simple_liquid.vfx"
+
+	//---- Bubbles ----
+	g_flBubbleDepthFalloff "6.023"
+	g_flBubbleOpacity "5.278"
+	g_flBubbleScale "0.487"
+	g_flBubblesMaximum "7.222"
+	g_flBubblesMinimum "0.150"
+	g_flBubbleSpaceScale "0.650"
+	g_flBubbleSpeed "0.444"
+	g_flBubbleStrength "20.000"
+	g_vBubbleColorInner "[0.000000 0.000000 0.000000 0.000000]"
+	g_vBubbleColorOuter "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Lighting ----
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
+
+	//---- Liquid ----
+	g_flBrightenEmptyArea "3.000"
+	g_flFresnelGlassThickness "0.222"
+	g_flLiquidBackFade "0.000"
+	g_flLiquidBackOffset "6.000"
+	g_flLiquidBrightness "1.000"
+	g_flLiquidEmissiveStrength "0.000"
+	g_flLiquidInnerGlow "0.100"
+	g_flLiquidLevelHeight "0.650"
+	g_flLiquidLevelHeightDelta "0.000"
+	g_flLiquidRoughness "0.130"
+	g_flLiquidSharpness "30.000"
+	g_flLiquidSpecularStrength "1.000"
+	g_flLiquidSurfaceSpecularStrength "1.000"
+	g_flLiquidWobbleScale "0.100"
+	g_flLiquidWobbleSpeed "1.000"
+	g_flLiquidWobbleWavelength "10.648"
+	g_flMaskMaximum "1.000"
+	g_flMaskMinimum "0.000"
+	g_flSurfaceTension "0.500"
+	g_flTransmissiveStrength "16.667"
+	g_flWaterLineStrength "0.500"
+	g_vLiquidColor "[0.309804 0.239216 0.145098 0.000000]"
+	g_vLiquidLevelDownwardsMinMidMax "[-20.000 0.000 20.000]"
+	g_vLiquidLevelSidewardsMinMidMax "[-20.000 0.000 20.000]"
+	g_vLiquidLevelUpwardsMinMidMax "[-20.000 0.000 20.000]"
+	TextureLiquidMask "models/weapons/petrolbomb/materials/glassliquid_mask.psd"
+
+	//---- Refraction ----
+	g_flChromaticDispersion "0.500"
+	g_flCubeRefractBrightness "4.167"
+	g_flCubeRefractLiquidTransparency "0.176"
+	g_flCubeRefractTransparency "0.130"
+	g_flRefractRoughnessMultiplier "0.858"
+
+	//---- Simple Material ----
+	TextureColorA "models/weapons/petrolbomb/materials/glass_color.psd"
+	TextureMetalnessA "materials/default/default_metal.tga"
+	TextureNormalA "materials/default/default_normal.tga"
+	TextureRoughnessA "materials/default/default_rough.tga"
+
+	//---- Test Values ----
+	g_flTestAgitation "0.120"
+	g_vTestGravityDir "[0.000 0.000 -1.000]"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+}
