@@ -4,7 +4,7 @@ using TerryForm.UI.World;
 
 namespace TerryForm.UI
 {
-	public class HudEntity : Sandbox.HudEntity<RootPanel>
+	public partial class HudEntity : Sandbox.HudEntity<RootPanel>
 	{
 		public static HudEntity Instance { get; set; }
 		private bool ShouldReceiveInput { get; set; } = false;
