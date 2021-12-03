@@ -50,20 +50,24 @@ namespace TerryForm.Weapons
 				if ( tr.Hit )
 				{
 					EndPos = tr.EndPos;
+
+					segment.EndPos = EndPos;
+					Segments.Add( segment );
+
 					break;
 				}
 
 				Segments.Add( segment );
 			}
 
-			DrawSegments();
+			Draw( Segments );
 
 			return Segments;
 		}
 
-		public void DrawSegments()
+		public static void Draw( List<ArcSegment> segments )
 		{
-			foreach ( var segment in Segments )
+			foreach ( var segment in segments )
 			{
 				DebugOverlay.Line( segment.StartPos, segment.EndPos );
 			}

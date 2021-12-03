@@ -10,6 +10,7 @@ namespace TerryForm.Weapons
 		public override string WeaponName => "";
 		public override string ModelPath => "";
 		public virtual string ProjectileModel => "";
+		public override int MaxQuantityFired { get; set; } = 100;
 		public override HoldPose HoldPose => HoldPose.Bazooka;
 
 		// Weapon properties
@@ -21,7 +22,8 @@ namespace TerryForm.Weapons
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
 				ComputedForce += 0.4f;
-				Fire();
+
+				ArcTrace.Draw( new ArcTrace( Parent.EyePos, Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? 0 ).Run() );
 
 				return;
 			}
@@ -30,8 +32,6 @@ namespace TerryForm.Weapons
 			{
 				QuantityFired++;
 				OnFire();
-
-				Log.Info( "Fired" );
 			}
 
 			ComputedForce = 0;
@@ -39,7 +39,9 @@ namespace TerryForm.Weapons
 
 		protected override void Fire()
 		{
-			var trace = new ArcTrace( Parent.EyePos, Parent.EyePos + Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? 0 ).Run();
+			var trace = new ArcTrace( Parent.EyePos, Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? 0 ).Run();
+
+			new Projectile().MoveAlongTrace( trace ).WithModel( "models/weapons/shell/shell.vmdl" );
 		}
 	}
 }
