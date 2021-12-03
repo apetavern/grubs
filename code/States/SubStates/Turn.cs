@@ -13,7 +13,7 @@ namespace TerryForm.States.SubStates
 		private TimeSince TimeSinceResolutionStageStarted { get; set; }
 		private PlayingState PlayingState { get; set; }
 		[Net] public Pawn.Player ActivePlayer { get; set; }
-		[Net] public Vector3 WindForce { get; set; }
+		[Net] public float WindForce { get; set; }
 
 		public Turn()
 		{
@@ -32,7 +32,7 @@ namespace TerryForm.States.SubStates
 		{
 			base.OnStart();
 
-			WindForce = Vector3.Random.WithY( 0 ).WithZ( 0 ) / 4;
+			WindForce = Rand.Float( -1, 1 );
 
 			// Let the player know that their turn has started.
 			ActivePlayer?.OnTurnStart();

@@ -14,12 +14,12 @@ namespace TerryForm.Weapons
 		public Vector3 StartPos { get; set; }
 		public Vector3 Direction { get; set; }
 		public Vector3 EndPos { get; set; }
-		public Vector3 WindForce { get; set; }
+		public float WindForce { get; set; }
 		private float Force { get; set; }
 		private int SegmentCount { get; set; } = 80;
 		public List<ArcSegment> Segments { get; set; } = new();
 
-		public ArcTrace( Vector3 startPos, Vector3 direction, float force, Vector3 wind )
+		public ArcTrace( Vector3 startPos, Vector3 direction, float force, float wind )
 		{
 			StartPos = startPos;
 			Direction = direction;
@@ -41,7 +41,7 @@ namespace TerryForm.Weapons
 				ArcSegment segment = new();
 				segment.StartPos = position;
 
-				velocity -= WindForce;
+				velocity -= new Vector3( WindForce, 0, 0 );
 				velocity -= PhysicsWorld.Gravity * epsilon;
 				position -= velocity;
 
