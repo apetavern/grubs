@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Sandbox;
+using Sandbox.UI;
 using TerryForm.UI.World;
 
 namespace TerryForm.UI
@@ -23,6 +24,12 @@ namespace TerryForm.UI
 		{
 			ShouldReceiveInput = receiveInput;
 			RootPanel.SetClass( "ReceiveInput", ShouldReceiveInput );
+		}
+
+		[ClientRpc]
+		public static void UpdateWind( float wind )
+		{
+			WindInfoPanel.Instance?.UpdateWind( wind );
 		}
 	}
 }
