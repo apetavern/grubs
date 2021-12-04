@@ -5,10 +5,11 @@ Layer0
 	shader "complex.vfx"
 
 	//---- PBR ----
+	F_SELF_ILLUM 1
 	F_SPECULAR 1
 
 	//---- Translucent ----
-	F_ALPHA_TEST 1
+	F_TRANSLUCENT 1
 
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
@@ -18,7 +19,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/weapons/oildrum/materials/flame_emoji.psd"
+	TextureColor "particles/flame_noglasses.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -39,6 +40,14 @@ Layer0
 	//---- Roughness ----
 	TextureRoughness "materials/default/default_rough.tga"
 
+	//---- Self Illum ----
+	g_flSelfIllumAlbedoFactor "1.000"
+	g_flSelfIllumBrightness "0.000"
+	g_flSelfIllumScale "1.000"
+	g_vSelfIllumScrollSpeed "[0.000 0.000]"
+	g_vSelfIllumTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureSelfIllumMask "particles/flame_noglasses.png"
+
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
 	g_nScaleTexCoordVByModelScaleAxis "0"
@@ -47,7 +56,6 @@ Layer0
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
 
 	//---- Translucent ----
-	g_flAlphaTestReference "0.500"
-	g_flAntiAliasedEdgeStrength "1.000"
-	TextureTranslucency "models/weapons/oildrum/materials/flame_emoji_trans.psd"
+	g_flOpacityScale "0.694"
+	TextureTranslucency "particles/flame_noglasses_trans.psd"
 }
