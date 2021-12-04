@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
+using TerryForm.Pawn;
 using TerryForm.Utils;
 
 namespace TerryForm.Weapons
@@ -82,11 +83,18 @@ namespace TerryForm.Weapons
 			if ( !IsServer )
 				return;
 
-			EnableDrawing = false;
-
+			DoBlastWithRadius();
 			OnCollisionEffects();
 
 			Delete();
+		}
+
+		public void DoBlastWithRadius( float radius = 100f )
+		{
+			var effectedEntities = Physics.GetEntitiesInSphere( Position, radius ).OfType<Worm>();
+
+			foreach ( var entity in effectedEntities )
+				entity.TakeDamage( new DamageInfo() { Position = Position, Flags = DamageFlags.Blast, Damage = 0 } );
 		}
 
 		[ClientRpc]
@@ -101,7 +109,7 @@ namespace TerryForm.Weapons
 		{
 			Particles.Create( "particles/explosion/barrel_explosion/explosion_fire_ring.vpcf", Position );
 
-			TrailParticles.Destroy();
+			TrailParticles?.Destroy();
 		}
 	}
 }

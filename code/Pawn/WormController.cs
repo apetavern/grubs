@@ -98,6 +98,7 @@ namespace TerryForm.Pawn
 			float initialZ = mover.Velocity.z;
 			float drag = IsGrounded ? Drag : AirDrag;
 			mover.ApplyFriction( drag, Time.Delta );
+
 			// Ignore z friction because it makes no sense
 			mover.Velocity.z = initialZ;
 
@@ -171,7 +172,7 @@ namespace TerryForm.Pawn
 
 				GroundEntity = tr.Entity;
 
-				mover.Velocity = mover.Velocity.Approach( 0, 1 );
+				mover.Velocity = mover.Velocity.WithZ( 0 );
 			}
 			else
 			{
