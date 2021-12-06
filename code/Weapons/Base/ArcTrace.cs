@@ -26,38 +26,6 @@ namespace TerryForm.Weapons
 		/// </summary>
 		public List<ArcSegment> RunTo( Vector3 EndPos )
 		{
-			//float epsilon = 0.001f;
-			float force = 1;
-			Vector3 direction = EndPos - StartPos;
-			Vector3 velocity = force * -direction;
-			Vector3 position = StartPos;
-
-			for ( int i = 0; i < SegmentCount; i++ )
-			{
-				ArcSegment segment = new();
-				segment.StartPos = position;
-
-				//velocity -= PhysicsWorld.Gravity * epsilon;
-				position -= velocity;
-
-				segment.EndPos = position;
-
-				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).WorldOnly().Run();
-
-				if ( tr.Hit )
-				{
-					EndPos = tr.EndPos;
-
-					segment.EndPos = EndPos;
-					Segments.Add( segment );
-
-					break;
-				}
-
-				Segments.Add( segment );
-			}
-
-			Draw( Segments );
 			DebugOverlay.Line( EndPos, EndPos + Vector3.Up * 100f, Color.Red, 0, false );
 
 			return new List<ArcSegment>();
