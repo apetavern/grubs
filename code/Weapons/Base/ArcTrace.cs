@@ -1,5 +1,8 @@
-﻿using Sandbox;
+﻿using System;
+using Sandbox;
 using System.Collections.Generic;
+using System.Linq;
+using TerryForm.Pawn;
 
 namespace TerryForm.Weapons
 {
@@ -26,7 +29,28 @@ namespace TerryForm.Weapons
 		/// </summary>
 		public List<ArcSegment> RunTo( Vector3 EndPos )
 		{
-			DebugOverlay.Line( EndPos, EndPos + Vector3.Up * 100f, Color.Red, 0, false );
+			EndPos = Entity.All.OfType<Worm>().Where( x => x.Name == "Froggy" ).FirstOrDefault().Position;
+
+			var from = StartPos;
+			var to = EndPos;
+			var controlPoint = EndPos.WithZ( from.z );
+
+			float distance = (Vector3.DistanceBetween( StartPos, EndPos ) / SegmentCount);
+
+			for ( int i = 1; i <= SegmentCount; i++ )
+			{
+				ArcSegment segment = new();
+
+				segment.StartPos = from;
+
+				var offset = (float)i / SegmentCount;
+
+				var position = (float)Math.Pow( 1 - offset, 2 ) * StartPos + 1 * (1 - offset) * offset * controlPoint + (float)Math.Pow( offset, 2 ) * EndPos;
+
+				DebugOverlay.Sphere( position, 10f, Color.Red );
+			}
+
+			DebugOverlay.Line( EndPos, EndPos + Vector3.Up * 100f, Color.Blue, 0, false );
 
 			return new List<ArcSegment>();
 		}
