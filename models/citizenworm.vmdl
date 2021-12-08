@@ -592,6 +592,69 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "lowhp"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizenworm.fbx"
+						start_frame = 159
+						end_frame = 169
+						framerate = 7.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "lowhp_down"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizenworm.fbx"
+						start_frame = 170
+						end_frame = 180
+						framerate = 7.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "lowhp_up"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizenworm.fbx"
+						start_frame = 181
+						end_frame = 191
+						framerate = 7.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
