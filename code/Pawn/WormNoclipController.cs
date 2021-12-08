@@ -3,24 +3,21 @@
 namespace TerryForm.Pawn
 {
 	[Library]
-	public class WormNoclipController : BasePlayerController
+	public class WormNoclipController : NoclipController
 	{
 		public override void Simulate()
 		{
-			var vel = (Vector3.Forward * -Input.Left);
+			var vel = (Vector3.Up * Input.Forward) + (Vector3.Forward * -Input.Left);
 
 			if ( Input.Down( InputButton.Jump ) )
 			{
 				vel += Vector3.Up * 1;
 			}
 
-			vel = vel.Normal * 2000;
-
 			if ( Input.Down( InputButton.Run ) )
-				vel *= 5.0f;
+				vel = Vector3.Down;
 
-			if ( Input.Down( InputButton.Duck ) )
-				vel *= 0.2f;
+			vel = vel.Normal * 2000;
 
 			Velocity += vel * Time.Delta;
 
