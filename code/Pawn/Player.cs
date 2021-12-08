@@ -57,7 +57,6 @@ namespace TerryForm.Pawn
 			foreach ( var worm in Worms )
 				worm.Simulate( cl );
 
-
 			// Temporarily allow worms to noclip.
 			if ( Input.Released( InputButton.Reload ) )
 				Game.Current?.DoPlayerNoclip( cl );
