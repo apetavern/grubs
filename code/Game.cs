@@ -28,5 +28,28 @@ namespace TerryForm
 
 			StateHandler.OnPlayerJoin( player );
 		}
+
+		/// <summary>
+		/// Temporarily allow worms to noclip.
+		/// </summary>
+		public override void DoPlayerNoclip( Client player )
+		{
+			if ( !player.HasPermission( "noclip" ) )
+				return;
+
+			if ( player.Pawn is Pawn.Player basePlayer )
+			{
+				if ( basePlayer.ActiveWorm?.DevController is NoclipController )
+				{
+					Log.Info( "Noclip Mode Off" );
+					basePlayer.ActiveWorm.DevController = null;
+				}
+				else
+				{
+					Log.Info( "Noclip Mode On" );
+					basePlayer.ActiveWorm.DevController = new NoclipController();
+				}
+			}
+		}
 	}
 }
