@@ -31,8 +31,6 @@ namespace TerryForm.Weapons
 			if ( IsServer )
 				CreateTrailEffects();
 
-			//DebugOverlay.Sphere( Segments[Segments.Count - 1].EndPos, 2, Color.Red, false, 30 );
-
 			return this;
 		}
 
@@ -56,14 +54,13 @@ namespace TerryForm.Weapons
 
 			DrawSegments();
 
-			if ( Position.IsNearlyEqual( Segments[0].EndPos ) )
+			if ( Position.IsNearlyEqual( Segments[0].EndPos, 2.5f ) )
 			{
 				Segments.RemoveAt( 0 );
 
 				if ( Segments.Count < 1 )
 				{
 					OnCollision();
-
 					return;
 				}
 
