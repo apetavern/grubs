@@ -1,6 +1,7 @@
 using Sandbox;
 using TerryForm.States;
 using TerryForm.UI;
+using TerryForm.Pawn;
 
 namespace TerryForm
 {
@@ -39,7 +40,7 @@ namespace TerryForm
 
 			if ( player.Pawn is Pawn.Player basePlayer )
 			{
-				if ( basePlayer.ActiveWorm?.DevController is NoclipController )
+				if ( basePlayer.ActiveWorm?.DevController is WormNoclipController )
 				{
 					Log.Info( "Noclip Mode Off" );
 					basePlayer.ActiveWorm.DevController = null;
@@ -47,7 +48,7 @@ namespace TerryForm
 				else
 				{
 					Log.Info( "Noclip Mode On" );
-					basePlayer.ActiveWorm.DevController = new NoclipController();
+					basePlayer.ActiveWorm.DevController = new WormNoclipController();
 				}
 			}
 		}
