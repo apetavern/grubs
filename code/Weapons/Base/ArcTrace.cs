@@ -25,34 +25,39 @@ namespace TerryForm.Weapons
 		}
 
 		/// <summary>
-		/// Run a trace with a specific pre-determined end position.
+		/// Run a bezier trace with a specific pre-determined end position.
 		/// </summary>
 		public List<ArcSegment> RunTo( Vector3 EndPos )
 		{
-			EndPos = Entity.All.OfType<Worm>().Where( x => x.Name == "Froggy" ).FirstOrDefault().Position;
-
 			var from = StartPos;
-			var to = EndPos;
-			var controlPoint = EndPos.WithZ( from.z );
-
-			float distance = (Vector3.DistanceBetween( StartPos, EndPos ) / SegmentCount);
+			var controlPoint = EndPos.WithZ( from.z * 3 );
 
 			for ( int i = 1; i <= SegmentCount; i++ )
 			{
+				var offset = (float)i / (SegmentCount / 2);
+				var position = (float)Math.Pow( 1 - offset, 3 ) * StartPos + 1 * (1 - offset) * offset * controlPoint + (float)Math.Pow( offset, 3 ) * EndPos;
+
 				ArcSegment segment = new();
-
 				segment.StartPos = from;
+				from = position;
+				segment.EndPos = from;
 
-				var offset = (float)i / SegmentCount;
+				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).WorldOnly().Run();
 
-				var position = (float)Math.Pow( 1 - offset, 2 ) * StartPos + 1 * (1 - offset) * offset * controlPoint + (float)Math.Pow( offset, 2 ) * EndPos;
+				if ( tr.Hit )
+				{
+					EndPos = tr.EndPos;
 
-				DebugOverlay.Sphere( position, 10f, Color.Red );
+					segment.EndPos = EndPos;
+					Segments.Add( segment );
+
+					break;
+				}
+
+				Segments.Add( segment );
 			}
 
-			DebugOverlay.Line( EndPos, EndPos + Vector3.Up * 100f, Color.Blue, 0, false );
-
-			return new List<ArcSegment>();
+			return Segments;
 		}
 
 		/// <summary>
@@ -90,8 +95,6 @@ namespace TerryForm.Weapons
 
 				Segments.Add( segment );
 			}
-
-			Draw( Segments );
 
 			return Segments;
 		}
