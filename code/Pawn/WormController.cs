@@ -93,8 +93,6 @@ namespace TerryForm.Pawn
 			// Recalculate the worms rotation if we're moving.
 			if ( !Velocity.IsNearZeroLength )
 				UpdateWormRotation();
-
-			DebugOverlay.Line( eyePos, eyePos + LookPos * 200 );
 		}
 
 		private void UpdateWormRotation()
