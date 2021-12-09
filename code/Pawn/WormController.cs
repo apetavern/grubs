@@ -83,7 +83,7 @@ namespace TerryForm.Pawn
 			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
 
 			// Set EyeRot to face the way we're walking.
-			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal;
+			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal.WithZ( LookPos.z );
 
 			// Aim with W & S keys
 			LookPos += Input.Forward * Vector3.Up * 0.025f;
