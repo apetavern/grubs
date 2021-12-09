@@ -8,6 +8,7 @@ namespace TerryForm.UI
 	public class WindInfoPanel : Panel
 	{
 		public static WindInfoPanel Instance { get; set; }
+
 		public WindInfoPanel()
 		{
 			StyleSheet.Load( "/Code/UI/WindInfoPanel.scss" );
