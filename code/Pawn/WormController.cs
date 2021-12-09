@@ -5,6 +5,7 @@ namespace TerryForm.Pawn
 {
 	public class WormController : BasePlayerController
 	{
+		// Controller settings
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
@@ -13,14 +14,22 @@ namespace TerryForm.Pawn
 		public float Step => 8f;
 		public float Jump => 350f;
 		public bool IsGrounded => GroundEntity != null;
+
+		// Jump properties
+		private TimeSince TimeSinceJumpReleased { get; set; }
 		private TimeSince TimeSinceJumped { get; set; }
+		private bool HasJumpPending { get; set; }
+
+		// Aim properties
 		private Vector3 LookPos { get; set; }
 
 		public override void Simulate()
 		{
 			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
 
-			SetEyePos( inputEnabled );
+			if ( inputEnabled )
+				SetEyePos();
+
 			Move( inputEnabled );
 		}
 
@@ -43,8 +52,28 @@ namespace TerryForm.Pawn
 			if ( groundTrace.Hit && groundTrace.Normal.Angle( Vector3.Up ) < mover.MaxStandableAngle )
 				mover.Velocity = ProjectOntoPlane( mover.Velocity, groundTrace.Normal );
 
-			if ( Input.Released( InputButton.Jump ) && inputEnabled )
-				DoJump( ref mover );
+			// Handle delayed jumping
+			{
+				// Schedule a jump.
+				if ( Input.Released( InputButton.Jump ) && TimeSinceJumped < GameConfig.SecondsBetweenWormJumps )
+				{
+					if ( !inputEnabled )
+						return;
+
+					TimeSinceJumpReleased = 0;
+					HasJumpPending = true;
+				}
+
+				// Automatically jump after X seconds.
+				if ( TimeSinceJumpReleased > 0.1f && HasJumpPending )
+				{
+					if ( !inputEnabled )
+						return;
+
+					DoJump( ref mover );
+					HasJumpPending = false;
+				}
+			}
 
 			mover.TryMoveWithStep( Time.Delta, Step );
 			mover.TryUnstuck();
@@ -73,11 +102,8 @@ namespace TerryForm.Pawn
 		/// <summary>
 		/// Set our eye position and rotation
 		/// </summary>
-		private void SetEyePos( bool inputEnabled )
+		private void SetEyePos()
 		{
-			if ( !inputEnabled )
-				return;
-
 			// Calculate eye position in world.
 			EyePosLocal = new Vector3( 0, 0, 24 );
 			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
@@ -132,7 +158,7 @@ namespace TerryForm.Pawn
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
-			if ( !IsGrounded || TimeSinceJumped < GameConfig.SecondsBetweenWormJumps )
+			if ( !IsGrounded )
 				return;
 
 			mover.Velocity = mover.Velocity.WithZ( Jump );
