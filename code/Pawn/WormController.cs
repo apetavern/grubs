@@ -29,17 +29,18 @@ namespace TerryForm.Pawn
 			mover.Trace = mover.Trace.WorldOnly();
 			mover.MaxStandableAngle = 45.0f;
 
-			// Apply wish velocity
+			// Calculate movement speed
+			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
+
+			// Calculate/add wish velocity
 			Vector3 wishVelocity = (-Input.Left * Vector3.Forward);
-			wishVelocity = wishVelocity.Normal * Acceleration * Time.Delta;
+			wishVelocity = wishVelocity.Normal * acceleration * Time.Delta;
 			mover.Velocity += wishVelocity.WithZ( 0 );
 
 			// Project our velocity onto the current surface we're stood on.
 			var groundTrace = mover.TraceDirection( Vector3.Down );
 			if ( groundTrace.Hit && groundTrace.Normal.Angle( Vector3.Up ) < mover.MaxStandableAngle )
-			{
 				mover.Velocity = ProjectOntoPlane( mover.Velocity, groundTrace.Normal );
-			}
 
 			DoJump( ref mover );
 
@@ -82,6 +83,18 @@ namespace TerryForm.Pawn
 			eyeDirection = eyeDirection.Normal;
 
 			EyeRot = Rotation.LookAt( eyeDirection );
+
+			UpdateWormRotation();
+		}
+
+		private void UpdateWormRotation()
+		{
+			float wormFacing = Pawn.EyeRot.Forward.Dot( Pawn.Rotation.Forward );
+			if ( wormFacing < 0 )
+			{
+				Rotation *= Rotation.From( 0, 180, 0 ); // Super janky
+				Pawn.ResetInterpolation();
+			}
 		}
 
 		/// <summary>

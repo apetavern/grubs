@@ -6,8 +6,6 @@ namespace TerryForm.Pawn
 	{
 		public override void Simulate()
 		{
-			DoRotation();
-
 			// Aim angle
 			{
 				float aimAngle = -Pawn.EyeRot.Pitch().Clamp( -80f, 75f );
@@ -33,19 +31,6 @@ namespace TerryForm.Pawn
 			{
 				float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length.LerpInverse( 0f, 100f );
 				SetParam( "velocity", velocity );
-			}
-		}
-
-		/// <summary>
-		/// Rotate the player when they try to look backwards
-		/// </summary>
-		private void DoRotation()
-		{
-			float playerFacing = Pawn.EyeRot.Forward.Dot( Pawn.Rotation.Forward );
-			if ( playerFacing < 0 )
-			{
-				Rotation *= Rotation.From( 0, 180, 0 ); // Super janky
-				Pawn.ResetInterpolation();
 			}
 		}
 
