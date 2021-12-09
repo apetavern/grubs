@@ -9,9 +9,9 @@ namespace TerryForm.Pawn
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
-		public float AirAcceleration => 600f;
+		public float AirAcceleration => 500f;
 		public float Acceleration => 1000f;
-		public float Step => 8f;
+		public float Step => 10f;
 		public float Jump => 350f;
 		public bool IsGrounded => GroundEntity != null;
 
@@ -36,7 +36,7 @@ namespace TerryForm.Pawn
 		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.WorldOnly();
+			mover.Trace = mover.Trace.WorldOnly().Radius( 1.2f );
 			mover.MaxStandableAngle = 45.0f;
 
 			// Calculate movement speed
@@ -173,7 +173,7 @@ namespace TerryForm.Pawn
 		/// </summary>
 		private void CheckGroundEntity( ref MoveHelper mover )
 		{
-			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down ).WorldOnly().Run();
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).Radius( 0.5f ).WorldOnly().Run();
 
 			if ( groundTrace.Entity is not null )
 			{
