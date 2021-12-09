@@ -12,7 +12,7 @@ namespace TerryForm.UI
 
 		public PlayerInfoPanel( Client client )
 		{
-			StyleSheet.Load( "/Code/UI/PlayerInfoPanel.scss" );
+			StyleSheet.Load( "/UI/PlayerInfoPanel.scss" );
 
 			PlayerNameLabel.Text = client.Name;
 			PlayerAvatarImage.SetTexture( $"avatar:{client.PlayerId}" );

@@ -13,7 +13,7 @@ namespace TerryForm.UI
 
 		public InventoryPanel()
 		{
-			StyleSheet.Load( "/Code/UI/InventoryPanel.scss" );
+			StyleSheet.Load( "/UI/InventoryPanel.scss" );
 
 			Add.Label( "Inventory", "title" );
 

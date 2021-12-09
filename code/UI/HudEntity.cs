@@ -14,7 +14,7 @@ namespace TerryForm.UI
 			if ( IsClient )
 			{
 				Instance = this;
-				RootPanel.SetTemplate( "/Code/UI/HudEntity.html" );
+				RootPanel.SetTemplate( "/UI/HudEntity.html" );
 
 				_ = new WormNametags();
 			}

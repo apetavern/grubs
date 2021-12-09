@@ -11,7 +11,7 @@ namespace TerryForm.UI
 
 		public WindInfoPanel()
 		{
-			StyleSheet.Load( "/Code/UI/WindInfoPanel.scss" );
+			StyleSheet.Load( "/UI/WindInfoPanel.scss" );
 			Instance = this;
 		}
 

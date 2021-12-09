@@ -13,7 +13,7 @@ namespace TerryForm.UI
 
 		public GameInfoPanel()
 		{
-			StyleSheet.Load( "/Code/UI/GameInfoPanel.scss" );
+			StyleSheet.Load( "/UI/GameInfoPanel.scss" );
 		}
 
 		public override void Tick()
