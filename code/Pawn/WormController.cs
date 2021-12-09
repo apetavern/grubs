@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using TerryForm.Utils;
 
 namespace TerryForm.Pawn
 {
@@ -12,18 +13,18 @@ namespace TerryForm.Pawn
 		public float Step => 8f;
 		public float Jump => 650f;
 		public bool IsGrounded => GroundEntity != null;
+		private TimeSince TimeSinceJumped { get; set; }
 
 		public override void Simulate()
 		{
-			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
+			//var inputEnabled = (Pawn as Worm).IsCurrentTurn;
+			var inputEnabled = true;
 
 			Move( inputEnabled );
-
-			if ( inputEnabled )
-				SetEyePos();
+			SetEyePos( inputEnabled );
 		}
 
-		private void Move( bool inputAllowed )
+		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
 			mover.Trace = mover.Trace.WorldOnly();
@@ -33,7 +34,7 @@ namespace TerryForm.Pawn
 			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
 
 			// Calculate/add wish velocity
-			Vector3 wishVelocity = (-Input.Left * Vector3.Forward);
+			Vector3 wishVelocity = inputEnabled ? (-Input.Left * Vector3.Forward) : Vector3.Zero;
 			wishVelocity = wishVelocity.Normal * acceleration * Time.Delta;
 			mover.Velocity += wishVelocity.WithZ( 0 );
 
@@ -42,7 +43,8 @@ namespace TerryForm.Pawn
 			if ( groundTrace.Hit && groundTrace.Normal.Angle( Vector3.Up ) < mover.MaxStandableAngle )
 				mover.Velocity = ProjectOntoPlane( mover.Velocity, groundTrace.Normal );
 
-			DoJump( ref mover );
+			if ( Input.Released( InputButton.Jump ) && inputEnabled )
+				DoJump( ref mover );
 
 			mover.TryMoveWithStep( Time.Delta, Step );
 			mover.TryUnstuck();
@@ -71,20 +73,24 @@ namespace TerryForm.Pawn
 		/// <summary>
 		/// Set our eye position and rotation
 		/// </summary>
-		private void SetEyePos()
+		private void SetEyePos( bool inputEnabled )
 		{
+			if ( !inputEnabled )
+				return;
+
+			// Calculate eye position in world.
 			EyePosLocal = new Vector3( 0, 0, 24 );
 			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
 
-			var plane = new Plane( Position, Vector3.Right );
-			var projectedCursorPosition = plane.Trace( new Ray( Input.Cursor.Origin, Input.Cursor.Direction ) ) ?? default;
+			// Set EyeRot to face the way we're walking.
+			var moveDirection = Velocity.Normal;
+			EyeRot = Rotation.LookAt( moveDirection );
 
-			var eyeDirection = projectedCursorPosition - eyePos;
-			eyeDirection = eyeDirection.Normal;
+			// Recalculate the worms rotation if we're moving.
+			if ( Velocity != Vector3.Zero )
+				UpdateWormRotation();
 
-			EyeRot = Rotation.LookAt( eyeDirection );
-
-			UpdateWormRotation();
+			DebugOverlay.Line( eyePos, eyePos + (moveDirection * 200) );
 		}
 
 		private void UpdateWormRotation()
@@ -124,7 +130,14 @@ namespace TerryForm.Pawn
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
+			if ( !IsGrounded || TimeSinceJumped < GameConfig.SecondsBetweenWormJumps )
+				return;
 
+			mover.Velocity = mover.Velocity.WithZ( Jump );
+			GroundEntity = null;
+
+			AddEvent( "jump" );
+			TimeSinceJumped = 0;
 		}
 
 		/// <summary>
