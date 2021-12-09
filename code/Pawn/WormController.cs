@@ -11,17 +11,17 @@ namespace TerryForm.Pawn
 		public float AirAcceleration => 600f;
 		public float Acceleration => 1000f;
 		public float Step => 8f;
-		public float Jump => 650f;
+		public float Jump => 350f;
 		public bool IsGrounded => GroundEntity != null;
 		private TimeSince TimeSinceJumped { get; set; }
+		private Vector3 LookPos { get; set; }
 
 		public override void Simulate()
 		{
-			//var inputEnabled = (Pawn as Worm).IsCurrentTurn;
-			var inputEnabled = true;
+			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
 
-			Move( inputEnabled );
 			SetEyePos( inputEnabled );
+			Move( inputEnabled );
 		}
 
 		private void Move( bool inputEnabled )
@@ -83,14 +83,18 @@ namespace TerryForm.Pawn
 			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
 
 			// Set EyeRot to face the way we're walking.
-			var moveDirection = Velocity.Normal;
-			EyeRot = Rotation.LookAt( moveDirection );
+			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal;
+
+			// Aim with W & S keys
+			LookPos += Input.Forward * Vector3.Up * 0.025f;
+
+			EyeRot = Rotation.LookAt( LookPos );
 
 			// Recalculate the worms rotation if we're moving.
-			if ( Velocity != Vector3.Zero )
+			if ( !Velocity.IsNearZeroLength )
 				UpdateWormRotation();
 
-			DebugOverlay.Line( eyePos, eyePos + (moveDirection * 200) );
+			DebugOverlay.Line( eyePos, eyePos + LookPos * 200 );
 		}
 
 		private void UpdateWormRotation()
@@ -145,14 +149,16 @@ namespace TerryForm.Pawn
 		/// </summary>
 		private void CheckGroundEntity( ref MoveHelper mover )
 		{
-			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WorldOnly().Run();
-
-			DebugOverlay.Line( groundTrace.StartPos, groundTrace.EndPos );
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down ).WorldOnly().Run();
 
 			if ( groundTrace.Entity is not null )
 			{
 				GroundEntity = groundTrace.Entity;
 				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
+
+				var worm = Pawn as Worm;
+				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
+				worm.IsResolved = true;
 			}
 			else
 			{

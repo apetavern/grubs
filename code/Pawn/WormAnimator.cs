@@ -6,6 +6,11 @@ namespace TerryForm.Pawn
 	{
 		public override void Simulate()
 		{
+			// Grounded check
+			{
+				SetParam( "grounded", Pawn.GroundEntity != null );
+			}
+
 			// Aim angle
 			{
 				float aimAngle = -Pawn.EyeRot.Pitch().Clamp( -80f, 75f );
@@ -20,11 +25,6 @@ namespace TerryForm.Pawn
 
 				// TODO: How do we handle offsetting the player's model from their bbox?
 				SetParam( "incline", incline );
-			}
-
-			// Grounded check
-			{
-				SetParam( "grounded", Pawn.GroundEntity != null );
 			}
 
 			// Velocity
