@@ -28,7 +28,7 @@ namespace TerryForm.Pawn
 			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
 
 			if ( inputEnabled )
-				SetEyePos();
+				SetEyeTransform();
 
 			Move( inputEnabled );
 		}
@@ -102,7 +102,7 @@ namespace TerryForm.Pawn
 		/// <summary>
 		/// Set our eye position and rotation
 		/// </summary>
-		private void SetEyePos()
+		private void SetEyeTransform()
 		{
 			// Calculate eye position in world.
 			EyePosLocal = new Vector3( 0, 0, 24 );
