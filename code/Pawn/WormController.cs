@@ -9,20 +9,12 @@ namespace TerryForm.Pawn
 		public float Gravity => 800f;
 		public float AirAcceleration => 600f;
 		public float Acceleration => 1000f;
-		public float Step => 16f;
+		public float Step => 8f;
 		public float Jump => 650f;
 		public bool IsGrounded => GroundEntity != null;
 
-		private RealTimeUntil timeUntilCanMove = -1f;
-		private float jumpStartZ;
-
-		// Cooldown multiplier for jumping; how many seconds should we wait for each unit we fell
-		public float MovementCooldownMultiplier => 0.01f;
-
 		public override void Simulate()
 		{
-			BBox = CalcBbox();
-
 			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
 
 			Move( inputEnabled );
@@ -31,11 +23,48 @@ namespace TerryForm.Pawn
 				SetEyePos();
 		}
 
-		private BBox BBox { get; set; }
-		public BBox CalcBbox()
+		private void Move( bool inputAllowed )
 		{
-			var bbox = new BBox( new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 32 ) );
-			return bbox;
+			var mover = new MoveHelper( Position, Velocity );
+			mover.Trace = mover.Trace.WorldOnly();
+			mover.MaxStandableAngle = 45.0f;
+
+			// Apply wish velocity
+			Vector3 wishVelocity = (-Input.Left * Vector3.Forward);
+			wishVelocity = wishVelocity.Normal * Acceleration * Time.Delta;
+			mover.Velocity += wishVelocity.WithZ( 0 );
+
+			// Project our velocity onto the current surface we're stood on.
+			var groundTrace = mover.TraceDirection( Vector3.Down );
+			if ( groundTrace.Hit && groundTrace.Normal.Angle( Vector3.Up ) < mover.MaxStandableAngle )
+			{
+				mover.Velocity = ProjectOntoPlane( mover.Velocity, groundTrace.Normal );
+			}
+
+			DoJump( ref mover );
+
+			mover.TryMoveWithStep( Time.Delta, Step );
+			mover.TryUnstuck();
+
+			DoFriction( ref mover );
+
+			// Gravity / set our ground entity
+			CheckGroundEntity( ref mover );
+
+			// Update our final position and velocity
+			Position = mover.Position;
+			Velocity = mover.Velocity;
+		}
+
+		private void DoFriction( ref MoveHelper mover )
+		{
+			// Drag / friction
+			float initialZ = mover.Velocity.z;
+			float drag = IsGrounded ? Drag : AirDrag;
+			mover.ApplyFriction( drag, Time.Delta );
+
+			// Ignore z friction because it makes no sense
+			mover.Velocity.z = initialZ;
 		}
 
 		/// <summary>
@@ -55,90 +84,26 @@ namespace TerryForm.Pawn
 			EyeRot = Rotation.LookAt( eyeDirection );
 		}
 
-		private void Move( bool inputAllowed )
+		/// <summary>
+		/// Reproject velocity onto plane
+		/// </summary>
+		static Vector3 ProjectOntoPlane( Vector3 v, Vector3 normal, float overBounce = 1.0f )
 		{
-			MoveHelper mover = new( Position, Velocity );
-			mover.Trace = mover.Trace.Size( BBox ).Ignore( Pawn );
+			float backoff = v.Dot( normal );
 
-			CheckGroundEntity( ref mover ); // Gravity start
-
-			// Accelerate in whatever direction the player is pressing...
-			Vector3 wishVelocity = Vector3.Zero;
-
-			if ( inputAllowed )
-				wishVelocity = (-Input.Left * Vector3.Forward).WithZ( 0 );
-
-			//
-			// Acceleration
-			//
-			if ( timeUntilCanMove <= 0 )
+			if ( overBounce != 1.0 )
 			{
-				float accel = IsGrounded ? Acceleration : AirAcceleration;
-				wishVelocity = wishVelocity.Normal * accel * Time.Delta;
-				mover.Velocity += wishVelocity;
-			}
-
-			CheckGroundEntity( ref mover ); // Gravity end
-
-			//
-			// Jumping
-			//
-			if ( timeUntilCanMove <= 0 )
-			{
-				if ( Input.Pressed( InputButton.Jump ) && IsGrounded && inputAllowed )
+				if ( backoff < 0 )
 				{
-					DoJump( ref mover );
-					AddEvent( "jump" );
+					backoff *= overBounce;
+				}
+				else
+				{
+					backoff /= overBounce;
 				}
 			}
 
-			//
-			// Drag / friction
-			//
-			float initialZ = mover.Velocity.z;
-			float drag = IsGrounded ? Drag : AirDrag;
-			mover.ApplyFriction( drag, Time.Delta );
-
-			// Ignore z friction because it makes no sense
-			mover.Velocity.z = initialZ;
-
-			mover.TryMoveWithStep( Time.Delta, Step );
-			mover.TryUnstuck();
-			Position = mover.Position;
-			Velocity = mover.Velocity;
-
-			// Show / hide weapon based on velocity
-			var worm = Pawn as Worm;
-			worm.EquippedWeapon?.ShowWeapon( worm, Velocity.WithZ( 0 ).IsNearZeroLength && IsGrounded );
-
-			// Set resolution
-			worm.IsResolved = Velocity.IsNearlyZero( 10 );
-
-			if ( IsGrounded )
-				StayOnGround( mover );
-		}
-
-		/// <summary>
-		/// Try to stick to the ground if we can
-		/// </summary>
-		private void StayOnGround( MoveHelper mover )
-		{
-			var start = Position + Vector3.Up * 2;
-			var end = Position + Vector3.Down * Step;
-
-			// See how far up we can go without getting stuck
-			var trace = mover.TraceFromTo( Position, start );
-			start = trace.EndPos;
-
-			// Now trace down from a known safe position
-			trace = mover.TraceFromTo( start, end );
-
-			if ( trace.Fraction <= 0 ) return;
-			if ( trace.Fraction >= 1 ) return;
-			if ( trace.StartedSolid ) return;
-			if ( Vector3.GetAngle( Vector3.Up, trace.Normal ) > 45f ) return;
-
-			Position = trace.EndPos;
+			return v - backoff * normal;
 		}
 
 		/// <summary>
@@ -146,38 +111,27 @@ namespace TerryForm.Pawn
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
-			mover.Velocity = mover.Velocity.WithZ( Jump );
-			GroundEntity = null;
-			Pawn.GroundEntity = null;
 
-			jumpStartZ = mover.Position.z;
 		}
 
 		/// <summary>
-		/// Check if we're grounded
+		/// Check if we're grounded, set ground entity.
 		/// </summary>
 		private void CheckGroundEntity( ref MoveHelper mover )
 		{
-			var targetPos = Position + Vector3.Down;
-			var tr = Trace.Ray( Position, targetPos ).WorldOnly().Size( BBox ).Run();
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WorldOnly().Run();
 
-			if ( tr.Hit )
+			DebugOverlay.Line( groundTrace.StartPos, groundTrace.EndPos );
+
+			if ( groundTrace.Entity is not null )
 			{
-				// Have we just landed?
-				if ( GroundEntity == null )
-				{
-					float jumpDelta = jumpStartZ - mover.Position.z;
-					timeUntilCanMove = jumpDelta * MovementCooldownMultiplier;
-				}
-
-				GroundEntity = tr.Entity;
-
-				mover.Velocity = mover.Velocity.WithZ( 0 );
+				GroundEntity = groundTrace.Entity;
+				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 			}
 			else
 			{
 				GroundEntity = null;
-				mover.Velocity += Vector3.Down * Gravity * Time.Delta;
+				mover.Velocity += Vector3.Down * 800 * Time.Delta;
 			}
 		}
 	}
