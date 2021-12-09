@@ -12,7 +12,7 @@ namespace TerryForm.Pawn
 		public float AirAcceleration => 500f;
 		public float Acceleration => 1000f;
 		public float Step => 10f;
-		public float Jump => 350f;
+		public float Jump => 450f;
 		public bool IsGrounded => GroundEntity != null;
 
 		// Jump properties
@@ -55,7 +55,7 @@ namespace TerryForm.Pawn
 			// Handle delayed jumping
 			{
 				// Schedule a jump.
-				if ( Input.Released( InputButton.Jump ) && TimeSinceJumped < GameConfig.SecondsBetweenWormJumps )
+				if ( Input.Released( InputButton.Jump ) && TimeSinceJumped > GameConfig.SecondsBetweenWormJumps )
 				{
 					if ( !inputEnabled )
 						return;
