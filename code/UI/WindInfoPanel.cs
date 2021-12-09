@@ -1,26 +1,30 @@
 ﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
+using TerryForm.States.SubStates;
 
 namespace TerryForm.UI
 {
 	public class WindInfoPanel : Panel
 	{
+		public static WindInfoPanel Instance { get; set; }
+
 		public WindInfoPanel()
 		{
-			StyleSheet.Load( "/Code/UI/WindInfoPanel.scss" );
+			StyleSheet.Load( "/UI/WindInfoPanel.scss" );
+			Instance = this;
+		}
 
-			int sideSegmentCount = 9;
+		public void UpdateWind( float wind )
+		{
+			DeleteChildren( true );
 
-			// Left segments
-			for ( int i = 0; i < sideSegmentCount; ++i )
+			var direction = wind < 0 ? "left" : "right";
+			var segmentQuantity = Math.Abs( wind ) * 10;
+
+			for ( int i = 1; i < segmentQuantity; i++ )
 			{
-				Add.Icon( "arrow_left" );
-			}
-
-			// Right segments
-			for ( int i = 0; i < sideSegmentCount; ++i )
-			{
-				Add.Icon( "arrow_right" );
+				Add.Icon( $"arrow_{direction}" );
 			}
 		}
 	}

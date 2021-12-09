@@ -108,7 +108,7 @@ namespace TerryForm.Weapons
 			switch ( firedTrace.Entity )
 			{
 				case Worm:
-					var damage = DamageInfo.FromBullet( firedTrace.EndPos, (firedTrace.StartPos - firedTrace.EndPos).Normal, DamagePerShot );
+					var damage = new DamageInfo() { Damage = DamagePerShot, Position = firedTrace.StartPos, Flags = DamageFlags.Bullet };
 					firedTrace.Entity.TakeDamage( damage );
 					break;
 

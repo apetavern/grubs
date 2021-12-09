@@ -7,7 +7,7 @@ namespace TerryForm.UI.Elements
 	{
 		public HealthBar()
 		{
-			StyleSheet.Load( "/Code/UI/Elements/HealthBar.scss" );
+			StyleSheet.Load( "/UI/Elements/HealthBar.scss" );
 
 			Add.Panel( "health-bar-inner" );
 			Add.Label( "50%", "health-label" );

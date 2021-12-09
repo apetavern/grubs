@@ -1,4 +1,4 @@
-﻿@import "/Code/UI/_Globals.scss";
+﻿@import "/UI/_Globals.scss";
 
 WindInfoPanel {
     position: absolute;
@@ -7,6 +7,7 @@ WindInfoPanel {
     justify-content: center;
     flex-direction: row;
     width: 256px;
+    min-height: 45px;
     color: white;
     background-image: url( /textures/ui/background-wind.png );
     background-size: -100% 100%;

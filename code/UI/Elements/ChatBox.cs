@@ -16,7 +16,7 @@ namespace TerryForm.UI.Elements
 		{
 			Current = this;
 
-			StyleSheet.Load( "/Code/UI/Elements/ChatBox.scss" );
+			StyleSheet.Load( "/UI/Elements/ChatBox.scss" );
 
 			Canvas = Add.Panel( "canvas" );
 			Canvas.PreferScrollToBottom = true;

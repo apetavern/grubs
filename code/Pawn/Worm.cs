@@ -6,10 +6,11 @@ using TerryForm.States.SubStates;
 
 namespace TerryForm.Pawn
 {
-	public partial class Worm : Sandbox.Player
+	public partial class Worm : Sandbox.Player, IAwaitResolution
 	{
 		[Net] public Weapon EquippedWeapon { get; set; }
 		[Net] public bool IsCurrentTurn { get; set; }
+		public bool IsResolved { get; set; }
 
 		// Temporary to allow respawning, we don't want respawning later so we can remove this.
 		private TimeSince TimeSinceDied { get; set; }
@@ -134,7 +135,7 @@ namespace TerryForm.Pawn
 			if ( IsCurrentTurn )
 				Turn.Instance?.ForceEnd();
 
-			Health -= info.Damage;
+			//Health -= info.Damage;
 
 			DoKnockback( info );
 
@@ -145,15 +146,18 @@ namespace TerryForm.Pawn
 
 		public void DoKnockback( DamageInfo info )
 		{
-			var hitPos = Position.WithZ( info.Position.z );
-			var hitDir = Position - info.Force;
+			var direction = (Position - info.Position).Normal;
+			var distanceFromOrigin = Vector3.DistanceBetween( Position, info.Position );
 
-			// Clear ground entity so that this worm won't stick to the floor.
-			if ( hitDir.z > 2 )
-				GroundEntity = null;
-
-			// Will probably need to tweak this later. Knockback is scaled by damage amount.
-			ApplyAbsoluteImpulse( (hitDir - hitPos) * info.Damage * 4 );
+			switch ( info.Flags )
+			{
+				case DamageFlags.Blast:
+					ApplyAbsoluteImpulse( direction * (distanceFromOrigin * 40) + (Vector3.Up * 1000) );
+					break;
+				case DamageFlags.Bullet:
+					ApplyAbsoluteImpulse( (Vector3.Up * 600) );
+					break;
+			}
 		}
 
 		public override void OnKilled()

@@ -1,4 +1,4 @@
-﻿@import "/Code/UI/_Globals.scss";
+﻿@import "/UI/_Globals.scss";
 
 PlayerInfoPanel {
     justify-content: center;
@@ -6,9 +6,11 @@ PlayerInfoPanel {
     align-items: flex-start;
     color: white;
     background-image: url( /textures/ui/background-player.png );
+    background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
     padding: 20px 30px;
+
 
     > .my-turn {
         font-family: MaterialIcons-regular;
@@ -33,19 +35,19 @@ PlayerInfoPanel {
     }
 
     &.background-0 {
-        background-size: 100%;
+        background-size: 100% 97%;
     }
 
     &.background-1 {
-        background-size: -100% 100%;
+        background-size: -99% 95%;
     }
 
     &.background-2 {
-        background-size: 100% -100%;
+        background-size: 100% -95%;
     }
 
     &.background-3 {
-        background-size: -100% -100%;
+        background-size: -99% -98%;
     }
 
     &.team-a HealthBar .health-bar-inner {

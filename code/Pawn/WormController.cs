@@ -98,6 +98,7 @@ namespace TerryForm.Pawn
 			float initialZ = mover.Velocity.z;
 			float drag = IsGrounded ? Drag : AirDrag;
 			mover.ApplyFriction( drag, Time.Delta );
+
 			// Ignore z friction because it makes no sense
 			mover.Velocity.z = initialZ;
 
@@ -109,6 +110,9 @@ namespace TerryForm.Pawn
 			// Show / hide weapon based on velocity
 			var worm = Pawn as Worm;
 			worm.EquippedWeapon?.ShowWeapon( worm, Velocity.WithZ( 0 ).IsNearZeroLength && IsGrounded );
+
+			// Set resolution
+			worm.IsResolved = Velocity.IsNearlyZero( 10 );
 
 			if ( IsGrounded )
 				StayOnGround( mover );
@@ -167,6 +171,8 @@ namespace TerryForm.Pawn
 				}
 
 				GroundEntity = tr.Entity;
+
+				mover.Velocity = mover.Velocity.WithZ( 0 );
 			}
 			else
 			{

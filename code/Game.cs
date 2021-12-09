@@ -1,6 +1,7 @@
 using Sandbox;
 using TerryForm.States;
 using TerryForm.UI;
+using TerryForm.Pawn;
 
 namespace TerryForm
 {
@@ -27,6 +28,29 @@ namespace TerryForm
 			cl.Pawn = player;
 
 			StateHandler.OnPlayerJoin( player );
+		}
+
+		/// <summary>
+		/// Temporarily allow worms to noclip.
+		/// </summary>
+		public override void DoPlayerNoclip( Client player )
+		{
+			if ( !player.HasPermission( "noclip" ) )
+				return;
+
+			if ( player.Pawn is Pawn.Player basePlayer )
+			{
+				if ( basePlayer.ActiveWorm?.DevController is WormNoclipController )
+				{
+					Log.Info( "Noclip Mode Off" );
+					basePlayer.ActiveWorm.DevController = null;
+				}
+				else
+				{
+					Log.Info( "Noclip Mode On" );
+					basePlayer.ActiveWorm.DevController = new WormNoclipController();
+				}
+			}
 		}
 	}
 }

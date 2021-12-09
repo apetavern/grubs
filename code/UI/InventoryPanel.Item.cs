@@ -14,7 +14,7 @@ namespace TerryForm.UI
 
 			public InventoryItem()
 			{
-				StyleSheet.Load( "/Code/UI/InventoryPanel.scss" );
+				StyleSheet.Load( "/UI/InventoryPanel.scss" );
 				AddEventListener( "onclick", EquipItem );
 			}
 
