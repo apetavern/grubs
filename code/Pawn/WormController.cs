@@ -10,8 +10,9 @@ namespace TerryForm.Pawn
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
-		public float AirAcceleration => 500f;
-		public float Acceleration => 1000f;
+		public float MaxSpeed = 60f;
+		public float AirAcceleration => 600f;
+		public float Acceleration => 810f;
 		public float Step => 10f;
 		public float Jump => 450f;
 		public bool IsGrounded => GroundEntity != null;
@@ -41,13 +42,21 @@ namespace TerryForm.Pawn
 			mover.Trace = mover.Trace.WorldOnly().Radius( 1.2f );
 			mover.MaxStandableAngle = 45.0f;
 
+			DoFriction( ref mover );
+
+			// Gravity / set our ground entity
+			CheckGroundEntity( ref mover );
+
 			// Calculate movement speed
 			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
 
 			// Calculate/add wish velocity
 			Vector3 wishVelocity = inputEnabled ? (-Input.Left * Vector3.Forward) : Vector3.Zero;
 			wishVelocity = wishVelocity.Normal * acceleration * Time.Delta;
-			mover.Velocity += wishVelocity.WithZ( 0 );
+
+			// Limit the worms max speed.
+			if ( Math.Abs( mover.Velocity.x ) < MaxSpeed )
+				mover.Velocity += wishVelocity.WithZ( 0 );
 
 			// Project our velocity onto the current surface we're stood on.
 			var groundTrace = mover.TraceDirection( Vector3.Down );
@@ -80,11 +89,6 @@ namespace TerryForm.Pawn
 			mover.TryMoveWithStep( Time.Delta, Step );
 			mover.TryUnstuck();
 
-			DoFriction( ref mover );
-
-			// Gravity / set our ground entity
-			CheckGroundEntity( ref mover );
-
 			// Update our final position and velocity
 			Position = mover.Position;
 			Velocity = mover.Velocity;
@@ -111,12 +115,15 @@ namespace TerryForm.Pawn
 			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
 
 			// Set EyeRot to face the way we're walking.
-			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal.WithZ( LookPos.z );
+			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal;
 
 			// Aim with W & S keys
 			EyeRot = Rotation.LookAt( LookPos );
 			LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
-			EyeRot = EyeRot.RotateAroundAxis( EyeRot.Left, LookRotOffset );
+
+			// Rotate EyeRot by our offset
+			var targetAxis = LookPos.Normal.x < 0 ? EyeRot.Left : EyeRot.Right;
+			EyeRot = EyeRot.RotateAroundAxis( targetAxis, LookRotOffset );
 
 			DebugOverlay.Line( eyePos, eyePos + EyeRot.Forward * 100 );
 
