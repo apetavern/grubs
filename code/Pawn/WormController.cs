@@ -119,7 +119,10 @@ namespace TerryForm.Pawn
 
 			// Aim with W & S keys
 			EyeRot = Rotation.LookAt( LookPos );
-			LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
+
+			// Only allow aiming changes if the worm isn't moving.
+			if ( Velocity.Normal.IsNearZeroLength )
+				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
 
 			// Rotate EyeRot by our offset
 			var targetAxis = LookPos.Normal.x < 0 ? EyeRot.Left : EyeRot.Right;
