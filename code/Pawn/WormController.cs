@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 using TerryForm.Utils;
 
 namespace TerryForm.Pawn
@@ -22,6 +23,7 @@ namespace TerryForm.Pawn
 
 		// Aim properties
 		private Vector3 LookPos { get; set; }
+		private float LookRotOffset { get; set; }
 
 		public override void Simulate()
 		{
@@ -112,9 +114,11 @@ namespace TerryForm.Pawn
 			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal.WithZ( LookPos.z );
 
 			// Aim with W & S keys
-			LookPos += Input.Forward * Vector3.Up * 0.025f;
-
 			EyeRot = Rotation.LookAt( LookPos );
+			LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
+			EyeRot = EyeRot.RotateAroundAxis( EyeRot.Left, LookRotOffset );
+
+			DebugOverlay.Line( eyePos, eyePos + EyeRot.Forward * 100 );
 
 			// Recalculate the worms rotation if we're moving.
 			if ( !Velocity.IsNearZeroLength )
