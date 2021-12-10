@@ -128,8 +128,6 @@ namespace TerryForm.Pawn
 			var targetAxis = LookPos.Normal.x < 0 ? EyeRot.Left : EyeRot.Right;
 			EyeRot = EyeRot.RotateAroundAxis( targetAxis, LookRotOffset );
 
-			DebugOverlay.Line( eyePos, eyePos + EyeRot.Forward * 100 );
-
 			// Recalculate the worms rotation if we're moving.
 			if ( !Velocity.IsNearZeroLength )
 				UpdateWormRotation();
