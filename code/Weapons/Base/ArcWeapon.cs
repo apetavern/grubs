@@ -12,6 +12,7 @@ namespace TerryForm.Weapons
 		public virtual string ProjectileModel => "";
 		public override int MaxQuantityFired { get; set; } = 100;
 		public override HoldPose HoldPose => HoldPose.Bazooka;
+		public PowerArrow PowerArrow { get; set; }
 
 		// Weapon properties
 		public Entity Projectile { get; set; }
@@ -19,6 +20,9 @@ namespace TerryForm.Weapons
 
 		public override void Simulate( Client player )
 		{
+			if ( IsClient )
+				AdjustArrow();
+
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
 				ComputedForce += 0.4f;
@@ -38,6 +42,20 @@ namespace TerryForm.Weapons
 
 			ComputedForce = 0;
 		}
+
+		private void AdjustArrow()
+		{
+			if ( !PowerArrow.IsValid() )
+				PowerArrow = new();
+
+			var direction = Owner.EyeRot.Forward.Normal;
+
+			//var ballRadius = CollisionBounds.Size.z / 2;
+			PowerArrow.Position = Owner.EyePos + (direction * 5.0f);
+			PowerArrow.Direction = direction;
+			PowerArrow.Power = 0.5f;
+		}
+
 
 		protected override void Fire()
 		{
