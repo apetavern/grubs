@@ -20,9 +20,6 @@ namespace TerryForm.Weapons
 
 		public override void Simulate( Client player )
 		{
-			if ( IsClient )
-				AdjustArrow();
-
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
 				ComputedForce += 0.4f;
@@ -30,17 +27,19 @@ namespace TerryForm.Weapons
 
 				// Specific target notes, will remove later once we have a proper usage for it.
 				// ArcTrace.Draw( new ArcTrace( Parent.EyePos + Parent.EyeRot.Forward.Normal ).RunTo( Vector3.Zero ) );
-
-				return;
 			}
 
 			if ( Input.Released( InputButton.Attack1 ) )
 			{
 				QuantityFired++;
 				OnFire();
+
+				// Reset force for the next time we fire.
+				ComputedForce = 0;
 			}
 
-			ComputedForce = 0;
+			if ( IsClient )
+				AdjustArrow();
 		}
 
 		private void AdjustArrow()
