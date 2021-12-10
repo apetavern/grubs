@@ -29,7 +29,7 @@ namespace TerryForm.Pawn
 
 			// Velocity
 			{
-				float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length.LerpInverse( 0f, 100f );
+				float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length;
 				SetParam( "velocity", velocity );
 			}
 		}
