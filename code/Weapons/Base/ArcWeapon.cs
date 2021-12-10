@@ -12,11 +12,11 @@ namespace TerryForm.Weapons
 		public virtual string ProjectileModel => "";
 		public override int MaxQuantityFired { get; set; } = 100;
 		public override HoldPose HoldPose => HoldPose.Bazooka;
-		public PowerArrow PowerArrow { get; set; }
 
 		// Weapon properties
 		public Entity Projectile { get; set; }
 		private float ComputedForce { get; set; } = 10;
+		public static PowerArrow PowerArrow { get; set; }
 
 		public override void Simulate( Client player )
 		{
