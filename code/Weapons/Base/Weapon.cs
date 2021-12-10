@@ -17,6 +17,7 @@ namespace TerryForm.Weapons
 		public virtual int MaxQuantityFired { get; set; } = 1;
 		public virtual float SecondsBetweenFired => 2.0f;
 		public virtual float DamagePerShot => 25f;
+		public PowerArrow PowerArrow { get; set; }
 
 		// Weapon properties
 		[Net] public int Ammo { get; set; }
@@ -35,6 +36,19 @@ namespace TerryForm.Weapons
 			Ammo = GameConfig.LoadoutDefaults[ClassInfo.Name];
 		}
 
+		private void AdjustArrow()
+		{
+			if ( !PowerArrow.IsValid() )
+				PowerArrow = new();
+
+			var direction = Angles.AngleVector( new Angles( 0, 0, 0 ) );
+
+			//var ballRadius = CollisionBounds.Size.z / 2;
+			PowerArrow.Position = Position + Vector3.Up * 10 + direction * 5.0f;
+			PowerArrow.Direction = direction;
+			PowerArrow.Power = 0.5f;
+		}
+
 		private bool CheckWeaponForHat()
 		{
 			for ( int i = 0; i < BoneCount; i++ )
@@ -49,6 +63,9 @@ namespace TerryForm.Weapons
 		public override void Simulate( Client player )
 		{
 			base.Simulate( player );
+
+			if ( IsClient )
+				AdjustArrow();
 
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
