@@ -190,6 +190,11 @@ namespace TerryForm.Pawn
 
 			if ( groundTrace.Entity is not null )
 			{
+				if ( GroundEntity is null )
+				{
+					mover.Velocity = Vector3.Zero;
+				}
+
 				GroundEntity = groundTrace.Entity;
 				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 
