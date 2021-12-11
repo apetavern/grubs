@@ -20,8 +20,8 @@ namespace TerryForm.Weapons
 			// Line
 			Vertex a = new( startPos - size, -Vector3.Forward, Vector3.Right, new Vector4( 0, 1, 0, 0 ) );
 			Vertex b = new( startPos + size, -Vector3.Forward, Vector3.Right, new Vector4( 1, 1, 0, 0 ) );
-			Vertex c = new( endPos + size, -Vector3.Forward, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
-			Vertex d = new( endPos - size, -Vector3.Forward, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
+			Vertex c = new( endPos + size * 3.35f, -Vector3.Forward, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
+			Vertex d = new( endPos - size * 3.35f, -Vector3.Forward, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
 
 			vertexBuffer.Add( a );
 			vertexBuffer.Add( b );
@@ -30,16 +30,6 @@ namespace TerryForm.Weapons
 
 			vertexBuffer.AddTriangleIndex( 4, 3, 2 );
 			vertexBuffer.AddTriangleIndex( 2, 1, 4 );
-
-			// Add the arrow tip
-			Vertex e = new( endPos + size * 1.75f, -Vector3.Forward, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
-			Vertex f = new( endPos - size * 1.75f, -Vector3.Forward, Vector3.Right, new Vector4( 0, 0, 0, 0 ) );
-			Vertex g = new( endPos + direction * 8, -Vector3.Forward, Vector3.Right, new Vector4( 1, 0, 0, 0 ) );
-
-			vertexBuffer.Add( e );
-			vertexBuffer.Add( f );
-			vertexBuffer.Add( g );
-			vertexBuffer.AddTriangleIndex( 1, 2, 3 );
 
 			Render.Set( "color", color );
 
@@ -54,10 +44,9 @@ namespace TerryForm.Weapons
 			Render.SetLighting( obj );
 
 			var startPos = Position;
-			var endPos = Position + Direction * Power * 100;
-			var size = Vector3.Cross( Direction, Vector3.Up ) * 3f;
+			var endPos = Position + (Direction * Power);
+			var size = Vector3.Cross( Direction, Vector3.Right ) * 2f;
 
-			//var color = ColorConvert.HSLToRGB( 120 - (int)(Power * Power * 120), 1.0f, 0.5f );
 			DrawArrow( obj, startPos, endPos, Direction, size, Color.Red );
 		}
 	}

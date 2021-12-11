@@ -47,12 +47,10 @@ namespace TerryForm.Weapons
 			if ( !PowerArrow.IsValid() )
 				PowerArrow = new();
 
-			var direction = Owner.EyeRot.Forward.Normal;
-
-			//var ballRadius = CollisionBounds.Size.z / 2;
-			PowerArrow.Position = Owner.EyePos + (direction * 5.0f);
-			PowerArrow.Direction = direction;
-			PowerArrow.Power = 0.5f;
+			PowerArrow.Position = Parent.EyePos;
+			PowerArrow.Direction = Parent.EyeRot.Forward.Normal;
+			PowerArrow.Power = ComputedForce * 10;
+			Log.Info( PowerArrow.Power );
 		}
 
 
