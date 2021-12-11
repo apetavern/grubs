@@ -39,7 +39,8 @@ namespace TerryForm.Pawn
 		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.WorldOnly().Radius( 1.2f );
+			//mover.Trace = mover.Trace.WorldOnly().Radius( 1.2f );
+			mover.Trace = mover.Trace.WorldAndEntities().Ignore( Pawn ).Size( 1.2f );
 			mover.MaxStandableAngle = 45.0f;
 
 			DoFriction( ref mover );
@@ -185,7 +186,7 @@ namespace TerryForm.Pawn
 		/// </summary>
 		private void CheckGroundEntity( ref MoveHelper mover )
 		{
-			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).Radius( 0.5f ).WorldOnly().Run();
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WorldAndEntities().Ignore( Pawn ).Run();
 
 			if ( groundTrace.Entity is not null )
 			{
