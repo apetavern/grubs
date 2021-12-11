@@ -26,6 +26,10 @@ namespace TerryForm.Pawn
 		private Vector3 LookPos { get; set; }
 		private float LookRotOffset { get; set; }
 
+		// Movement properties
+		private RealTimeUntil TimeUntilMovementAllowed { get; set; }
+		private float FallStartPosZ { get; set; }
+
 		public override void Simulate()
 		{
 			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
@@ -52,7 +56,9 @@ namespace TerryForm.Pawn
 			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
 
 			// Calculate/add wish velocity
-			Vector3 wishVelocity = inputEnabled ? (-Input.Left * Vector3.Forward) : Vector3.Zero;
+			Vector3 wishVelocity = default;
+			if ( TimeUntilMovementAllowed <= 0 && inputEnabled )
+				wishVelocity = -Input.Left * Vector3.Forward;
 			wishVelocity = wishVelocity.Normal * acceleration * Time.Delta;
 
 			// Limit the worms max speed.
@@ -193,6 +199,9 @@ namespace TerryForm.Pawn
 				if ( GroundEntity is null )
 				{
 					mover.Velocity = Vector3.Zero;
+
+					TimeUntilMovementAllowed = Math.Abs( FallStartPosZ - mover.Position.z ) * 0.01f;
+					FallStartPosZ = -1;
 				}
 
 				GroundEntity = groundTrace.Entity;
@@ -206,6 +215,9 @@ namespace TerryForm.Pawn
 			{
 				GroundEntity = null;
 				mover.Velocity += Vector3.Down * 800 * Time.Delta;
+
+				if ( FallStartPosZ == -1 )
+					FallStartPosZ = mover.Position.z;
 			}
 		}
 	}
