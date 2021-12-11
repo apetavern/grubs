@@ -15,7 +15,6 @@ namespace TerryForm.Pawn
 		public float Acceleration => 810f;
 		public float Step => 10f;
 		public float Jump => 450f;
-		public bool IsGrounded => GroundEntity != null;
 
 		// Jump properties
 		private TimeSince TimeSinceJumpReleased { get; set; }
@@ -29,6 +28,7 @@ namespace TerryForm.Pawn
 		// Movement properties
 		private RealTimeUntil TimeUntilMovementAllowed { get; set; }
 		private float FallStartPosZ { get; set; }
+		public bool IsGrounded => GroundEntity != null;
 
 		public override void Simulate()
 		{
@@ -57,8 +57,10 @@ namespace TerryForm.Pawn
 
 			// Calculate/add wish velocity
 			Vector3 wishVelocity = default;
+
 			if ( TimeUntilMovementAllowed <= 0 && inputEnabled )
 				wishVelocity = -Input.Left * Vector3.Forward;
+
 			wishVelocity = wishVelocity.Normal * acceleration * Time.Delta;
 
 			// Limit the worms max speed.
@@ -119,7 +121,6 @@ namespace TerryForm.Pawn
 		{
 			// Calculate eye position in world.
 			EyePosLocal = new Vector3( 0, 0, 24 );
-			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
 
 			// Set EyeRot to face the way we're walking.
 			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal;
@@ -143,6 +144,7 @@ namespace TerryForm.Pawn
 		private void UpdateWormRotation()
 		{
 			float wormFacing = Pawn.EyeRot.Forward.Dot( Pawn.Rotation.Forward );
+
 			if ( wormFacing < 0 )
 			{
 				Rotation *= Rotation.From( 0, 180, 0 ); // Super janky
