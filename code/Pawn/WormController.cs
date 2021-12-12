@@ -123,13 +123,13 @@ namespace TerryForm.Pawn
 			EyePosLocal = new Vector3( 0, 0, 24 );
 
 			// Set EyeRot to face the way we're walking.
-			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal;
+			LookPos = Velocity.Normal.IsNearlyZero( 2.5f ) ? LookPos : Velocity.Normal;
 
 			// Aim with W & S keys
 			EyeRot = Rotation.LookAt( LookPos );
 
 			// Only allow aiming changes if the worm isn't moving.
-			if ( Velocity.Normal.IsNearZeroLength )
+			if ( Velocity.Normal.IsNearlyZero( 2.5f ) )
 				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
 
 			// Rotate EyeRot by our offset
@@ -137,7 +137,7 @@ namespace TerryForm.Pawn
 			EyeRot = EyeRot.RotateAroundAxis( targetAxis, LookRotOffset );
 
 			// Recalculate the worms rotation if we're moving.
-			if ( !Velocity.IsNearZeroLength )
+			if ( !Velocity.IsNearlyZero( 2.5f ) )
 				UpdateWormRotation();
 		}
 
