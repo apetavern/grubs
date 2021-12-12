@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using System;
+using Sandbox;
 using TerryForm.Pawn;
 using TerryForm.States.SubStates;
 
@@ -15,14 +16,14 @@ namespace TerryForm.Weapons
 
 		// Weapon properties
 		public Entity Projectile { get; set; }
-		private float ComputedForce { get; set; } = 10;
+		private float ComputedForce { get; set; } = 0;
 		public static PowerArrow PowerArrow { get; set; }
 
 		public override void Simulate( Client player )
 		{
 			if ( Input.Down( InputButton.Attack1 ) && WeaponEnabled && TimeSinceFired > SecondsBetweenFired )
 			{
-				ComputedForce += 0.4f;
+				ComputedForce = (float)Math.Clamp( ComputedForce + 0.4, 0, 20 );
 				ArcTrace.Draw( new ArcTrace( Parent.EyePos ).RunTowards( Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? 0 ) );
 
 				// Specific target notes, will remove later once we have a proper usage for it.
@@ -49,8 +50,7 @@ namespace TerryForm.Weapons
 
 			PowerArrow.Position = Parent.EyePos;
 			PowerArrow.Direction = Parent.EyeRot.Forward.Normal;
-			PowerArrow.Power = ComputedForce * 10;
-			Log.Info( PowerArrow.Power );
+			PowerArrow.Power = ComputedForce * 5;
 		}
 
 
