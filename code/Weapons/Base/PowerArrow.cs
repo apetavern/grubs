@@ -58,7 +58,7 @@ namespace TerryForm.Weapons
 			var endPos = Position + (Direction * Power);
 			var size = Vector3.Cross( Direction, Vector3.Right ) * 2f;
 
-			var color = new ColorHsv( Math.Clamp( 180 - Power * 2, 0, 180 ), 0.8f, 0.4f, 0.5f );
+			var color = new ColorHsv( Math.Clamp( 60 - Power + 50, 0, 60 ), 0.8f, 0.6f, 1f );
 			DrawArrow( obj, startPos, endPos, Direction, size, color );
 		}
 	}
