@@ -218,6 +218,9 @@ namespace TerryForm.Pawn
 				GroundEntity = null;
 				mover.Velocity += Vector3.Down * 800 * Time.Delta;
 
+				var worm = Pawn as Worm;
+				worm.IsResolved = false;
+
 				if ( FallStartPosZ == -1 )
 					FallStartPosZ = mover.Position.z;
 			}
