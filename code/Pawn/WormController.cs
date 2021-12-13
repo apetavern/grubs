@@ -10,7 +10,7 @@ namespace TerryForm.Pawn
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
-		public float MaxSpeed = 60f;
+		public float MaxSpeed => 60f;
 		public float AirAcceleration => 600f;
 		public float Acceleration => 810f;
 		public float Step => 10f;
