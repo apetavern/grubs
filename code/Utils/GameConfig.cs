@@ -4,6 +4,7 @@ namespace TerryForm.Utils
 {
 	public static class GameConfig
 	{
+		// Gameplay configuration.
 		public static int WormCount { get; set; } = 2;
 		public static int TurnDurationSeconds { get; set; } = 45;
 		public static int TurnTimeRemainingAfterFired { get; set; } = 5;
@@ -17,6 +18,9 @@ namespace TerryForm.Utils
 			{ "crate_weapons", 0.1f },
 			{ "crate_health", 0.3f },
 		};
+    
+		// Worm configuration.
+		public static float SecondsBetweenWormJumps { get; set; } = 2;
 
 		public static string[] WormNames => new[]
 		{
