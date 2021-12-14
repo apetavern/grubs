@@ -127,6 +127,7 @@ namespace TerryForm.Pawn
 		public void GiveHealth( int amount )
 		{
 			Health += amount;
+			Health = Health.Clamp( 0, 100 );
 		}
 
 		public override void TakeDamage( DamageInfo info )
