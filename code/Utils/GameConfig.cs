@@ -10,11 +10,12 @@ namespace TerryForm.Utils
 		public static int MinimumPlayersToStart { get; set; } = 2;
 
 		// Used to spawn a random crate using the library system
-		public static string[] CrateTypes => new[]
+		// Library name, chance of spawning (0-1)
+		public static Dictionary<string, float> CrateTypes => new()
 		{
-			"crate_tools",
-			"crate_weapons",
-			"crate_health",
+			{ "crate_tools", 0.2f },
+			{ "crate_weapons", 0.1f },
+			{ "crate_health", 0.3f },
 		};
 
 		public static string[] WormNames => new[]
