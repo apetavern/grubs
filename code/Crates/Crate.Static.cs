@@ -35,6 +35,10 @@ namespace TerryForm.Crates
 			}
 
 			var crate = Library.Create<Crate>( crateType );
+
+			// TODO: sample from terrain to find a viable spot to plonk a crate down
+			crate.Position = new Vector3( Rand.Float( -512, 512 ), 0, 512 );
+
 			return crate;
 		}
 
@@ -46,8 +50,6 @@ namespace TerryForm.Crates
 
 			if ( crate.IsValid() )
 			{
-				// TODO: sample from terrain to find a viable spot to plonk a crate down
-				crate.Position = new Vector3( Rand.Float( -512, 512 ), 0, 512 );
 				Log.Trace( $"Spawned crate" );
 			}
 		}
