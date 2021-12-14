@@ -3,7 +3,7 @@
 namespace TerryForm.Crates
 {
 	[Library( "crate_tools" )]
-	public class ToolsCrate : BaseCrate
+	public class ToolsCrate : Crate
 	{
 		public override void Spawn()
 		{

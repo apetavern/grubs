@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using TerryForm.Crates;
 using TerryForm.States.SubStates;
 
 namespace TerryForm.States
@@ -21,6 +22,8 @@ namespace TerryForm.States
 				StateHandler.Instance?.ChangeState( new EndState() );
 				return;
 			}
+
+			Crate.SpawnCrate();
 
 			PickNextPlayer();
 		}

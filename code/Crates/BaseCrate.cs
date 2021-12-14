@@ -6,7 +6,7 @@ namespace TerryForm.Crates
 	/// <summary>
 	/// Basic crate logic
 	/// </summary>
-	public partial class BaseCrate : ModelEntity
+	public partial class Crate : ModelEntity
 	{
 		private BBox BBox;
 

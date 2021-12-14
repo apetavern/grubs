@@ -3,14 +3,14 @@ using TerryForm.Utils;
 
 namespace TerryForm.Crates
 {
-	public partial class BaseCrate
+	public partial class Crate
 	{
-		public static BaseCrate SpawnCrate()
+		public static Crate SpawnCrate()
 		{
 			Host.AssertServer();
 
 			var crateType = Rand.FromArray( GameConfig.CrateTypes );
-			var crate = Library.Create<BaseCrate>( crateType );
+			var crate = Library.Create<Crate>( crateType );
 
 			return crate;
 		}

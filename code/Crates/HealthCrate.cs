@@ -3,7 +3,7 @@
 namespace TerryForm.Crates
 {
 	[Library( "crate_health" )]
-	public class HealthCrate : BaseCrate
+	public class HealthCrate : Crate
 	{
 		public override void Spawn()
 		{
