@@ -1,5 +1,5 @@
-﻿using Sandbox;
-using System.Collections.Generic;
+﻿using ModelDoc;
+using Sandbox;
 using TerryForm.Utils;
 
 namespace TerryForm.Crates
@@ -48,7 +48,8 @@ namespace TerryForm.Crates
 
 			if ( crate.IsValid() )
 			{
-				crate.Position = new Vector3( 0, 0, 128 );
+				// TODO: sample from terrain to find a viable spot to plonk a crate down
+				crate.Position = new Vector3( Rand.Float( -512, 512 ), 0, 512 );
 				Log.Trace( $"Spawned crate" );
 			}
 		}

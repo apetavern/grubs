@@ -41,12 +41,13 @@ namespace TerryForm.Crates
 			mover.Trace = mover.Trace.Size( BBox ).Ignore( this ).WorldOnly();
 			GroundEntity = mover.TraceDirection( Vector3.Down ).Entity;
 
-			const float airResistance = 0.5f;
 			if ( GroundEntity == null )
-				mover.Velocity += (PhysicsWorld.Gravity * airResistance) * Time.Delta;
+				mover.Velocity += PhysicsWorld.Gravity * Time.Delta;
 			else
 				mover.Velocity = 0;
 
+			const float airResistance = 2.0f;
+			mover.ApplyFriction( airResistance, Time.Delta );
 			mover.TryMove( Time.Delta );
 
 			this.Position = mover.Position;
