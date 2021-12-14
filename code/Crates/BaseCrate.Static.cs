@@ -1,5 +1,4 @@
-﻿using ModelDoc;
-using Sandbox;
+﻿using Sandbox;
 using TerryForm.Utils;
 
 namespace TerryForm.Crates
@@ -9,13 +8,12 @@ namespace TerryForm.Crates
 		private static string GetRandomCrate()
 		{
 			float val = Rand.Float();
-			float cumVal = 0;
+			float cumulativeValue = 0;
 			foreach ( var crateType in GameConfig.CrateTypes )
 			{
-				cumVal += crateType.Value;
+				cumulativeValue += crateType.Value;
 
-				Log.Trace( $"{val} lt {cumVal}" );
-				if ( val < cumVal )
+				if ( val < cumulativeValue )
 				{
 					return crateType.Key;
 				}

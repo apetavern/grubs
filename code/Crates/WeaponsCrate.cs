@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using TerryForm.Pawn;
 
 namespace TerryForm.Crates
 {
@@ -9,6 +10,13 @@ namespace TerryForm.Crates
 		{
 			base.Spawn();
 			SetModel( "models/crates/weapons_crate/weapons_crate.vmdl" );
+		}
+
+		protected override void OnPickup( Worm worm )
+		{
+			base.OnPickup( worm );
+
+			// TODO
 		}
 	}
 }
