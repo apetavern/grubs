@@ -4,10 +4,14 @@ namespace TerryForm.Utils
 {
 	public static class GameConfig
 	{
+		// Gameplay configuration.
 		public static int WormCount { get; set; } = 2;
 		public static int TurnDurationSeconds { get; set; } = 45;
 		public static int TurnTimeRemainingAfterFired { get; set; } = 5;
 		public static int MinimumPlayersToStart { get; set; } = 2;
+
+		// Worm configuration.
+		public static float SecondsBetweenWormJumps { get; set; } = 2;
 
 		public static string[] WormNames => new[]
 		{

@@ -34,7 +34,6 @@ namespace TerryForm.Weapons
 			WeaponHasHat = CheckWeaponForHat();
 			Ammo = GameConfig.LoadoutDefaults[ClassInfo.Name];
 		}
-
 		private bool CheckWeaponForHat()
 		{
 			for ( int i = 0; i < BoneCount; i++ )

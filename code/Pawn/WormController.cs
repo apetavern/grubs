@@ -1,144 +1,179 @@
 ﻿using Sandbox;
+using System;
+using TerryForm.Utils;
 
 namespace TerryForm.Pawn
 {
 	public class WormController : BasePlayerController
 	{
+		// Controller settings
 		public float Drag => 8.0f;
 		public float AirDrag => 4.0f;
 		public float Gravity => 800f;
+		public float MaxSpeed => 60f;
 		public float AirAcceleration => 600f;
-		public float Acceleration => 1000f;
-		public float Step => 16f;
-		public float Jump => 650f;
+		public float Acceleration => 810f;
+		public float Step => 10f;
+		public float Jump => 450f;
+
+		// Jump properties
+		private TimeSince TimeSinceJumpReleased { get; set; }
+		private TimeSince TimeSinceJumped { get; set; }
+		private bool HasJumpPending { get; set; }
+
+		// Aim properties
+		private Vector3 LookPos { get; set; }
+		private float LookRotOffset { get; set; }
+
+		// Movement properties
+		private RealTimeUntil TimeUntilMovementAllowed { get; set; }
+		private float FallStartPosZ { get; set; }
 		public bool IsGrounded => GroundEntity != null;
-
-		private RealTimeUntil timeUntilCanMove = -1f;
-		private float jumpStartZ;
-
-		// Cooldown multiplier for jumping; how many seconds should we wait for each unit we fell
-		public float MovementCooldownMultiplier => 0.01f;
 
 		public override void Simulate()
 		{
-			BBox = CalcBbox();
-
 			var inputEnabled = (Pawn as Worm).IsCurrentTurn;
 
-			Move( inputEnabled );
-
 			if ( inputEnabled )
-				SetEyePos();
+				SetEyeTransform();
+
+			Move( inputEnabled );
 		}
 
-		private BBox BBox { get; set; }
-		public BBox CalcBbox()
+		private void Move( bool inputEnabled )
 		{
-			var bbox = new BBox( new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 32 ) );
-			return bbox;
-		}
+			var mover = new MoveHelper( Position, Velocity );
+			//mover.Trace = mover.Trace.WorldOnly().Radius( 1.2f );
+			mover.Trace = mover.Trace.WorldAndEntities().Ignore( Pawn ).Size( 1.2f );
+			mover.MaxStandableAngle = 45.0f;
 
-		/// <summary>
-		/// Set our eye position and rotation
-		/// </summary>
-		private void SetEyePos()
-		{
-			EyePosLocal = new Vector3( 0, 0, 24 );
-			var eyePos = Pawn.Transform.PointToWorld( EyePosLocal );
+			DoFriction( ref mover );
 
-			var plane = new Plane( Position, Vector3.Right );
-			var projectedCursorPosition = plane.Trace( new Ray( Input.Cursor.Origin, Input.Cursor.Direction ) ) ?? default;
+			// Gravity / set our ground entity
+			CheckGroundEntity( ref mover );
 
-			var eyeDirection = projectedCursorPosition - eyePos;
-			eyeDirection = eyeDirection.Normal;
+			// Calculate movement speed
+			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
 
-			EyeRot = Rotation.LookAt( eyeDirection );
-		}
+			// Calculate/add wish velocity
+			Vector3 wishVelocity = default;
 
-		private void Move( bool inputAllowed )
-		{
-			MoveHelper mover = new( Position, Velocity );
-			mover.Trace = mover.Trace.Size( BBox ).Ignore( Pawn );
+			if ( TimeUntilMovementAllowed <= 0 && inputEnabled )
+				wishVelocity = -Input.Left * Vector3.Forward;
 
-			CheckGroundEntity( ref mover ); // Gravity start
+			wishVelocity = wishVelocity.Normal * acceleration * Time.Delta;
 
-			// Accelerate in whatever direction the player is pressing...
-			Vector3 wishVelocity = Vector3.Zero;
+			// Limit the worms max speed.
+			if ( Math.Abs( mover.Velocity.x ) < MaxSpeed )
+				mover.Velocity += wishVelocity.WithZ( 0 );
 
-			if ( inputAllowed )
-				wishVelocity = (-Input.Left * Vector3.Forward).WithZ( 0 );
+			// Project our velocity onto the current surface we're stood on.
+			var groundTrace = mover.TraceDirection( Vector3.Down );
+			if ( groundTrace.Hit && groundTrace.Normal.Angle( Vector3.Up ) < mover.MaxStandableAngle )
+				mover.Velocity = ProjectOntoPlane( mover.Velocity, groundTrace.Normal );
 
-			//
-			// Acceleration
-			//
-			if ( timeUntilCanMove <= 0 )
+			// Handle delayed jumping
 			{
-				float accel = IsGrounded ? Acceleration : AirAcceleration;
-				wishVelocity = wishVelocity.Normal * accel * Time.Delta;
-				mover.Velocity += wishVelocity;
-			}
-
-			CheckGroundEntity( ref mover ); // Gravity end
-
-			//
-			// Jumping
-			//
-			if ( timeUntilCanMove <= 0 )
-			{
-				if ( Input.Pressed( InputButton.Jump ) && IsGrounded && inputAllowed )
+				// Schedule a jump.
+				if ( Input.Released( InputButton.Jump ) && TimeSinceJumped > GameConfig.SecondsBetweenWormJumps )
 				{
+					if ( !inputEnabled )
+						return;
+
+					TimeSinceJumpReleased = 0;
+					HasJumpPending = true;
+				}
+
+				// Automatically jump after X seconds.
+				if ( TimeSinceJumpReleased > 0.1f && HasJumpPending )
+				{
+					if ( !inputEnabled )
+						return;
+
 					DoJump( ref mover );
-					AddEvent( "jump" );
+					HasJumpPending = false;
 				}
 			}
 
-			//
+			mover.TryMoveWithStep( Time.Delta, Step );
+			mover.TryUnstuck();
+
+			// Update our final position and velocity
+			Position = mover.Position;
+			Velocity = mover.Velocity;
+		}
+
+		private void DoFriction( ref MoveHelper mover )
+		{
 			// Drag / friction
-			//
 			float initialZ = mover.Velocity.z;
 			float drag = IsGrounded ? Drag : AirDrag;
 			mover.ApplyFriction( drag, Time.Delta );
 
 			// Ignore z friction because it makes no sense
 			mover.Velocity.z = initialZ;
-
-			mover.TryMoveWithStep( Time.Delta, Step );
-			mover.TryUnstuck();
-			Position = mover.Position;
-			Velocity = mover.Velocity;
-
-			// Show / hide weapon based on velocity
-			var worm = Pawn as Worm;
-			worm.EquippedWeapon?.ShowWeapon( worm, Velocity.WithZ( 0 ).IsNearZeroLength && IsGrounded );
-
-			// Set resolution
-			worm.IsResolved = Velocity.IsNearlyZero( 10 );
-
-			if ( IsGrounded )
-				StayOnGround( mover );
 		}
 
 		/// <summary>
-		/// Try to stick to the ground if we can
+		/// Set our eye position and rotation
 		/// </summary>
-		private void StayOnGround( MoveHelper mover )
+		private void SetEyeTransform()
 		{
-			var start = Position + Vector3.Up * 2;
-			var end = Position + Vector3.Down * Step;
+			// Calculate eye position in world.
+			EyePosLocal = new Vector3( 0, 0, 24 );
 
-			// See how far up we can go without getting stuck
-			var trace = mover.TraceFromTo( Position, start );
-			start = trace.EndPos;
+			// Set EyeRot to face the way we're walking.
+			LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
-			// Now trace down from a known safe position
-			trace = mover.TraceFromTo( start, end );
+			// Only allow aiming changes if the worm isn't moving.
+			if ( Velocity.Normal.IsNearlyZero( 2.5f ) && TimeUntilMovementAllowed <= 0 )
+			{
+				// Aim with W & S keys
+				EyeRot = Rotation.LookAt( LookPos );
 
-			if ( trace.Fraction <= 0 ) return;
-			if ( trace.Fraction >= 1 ) return;
-			if ( trace.StartedSolid ) return;
-			if ( Vector3.GetAngle( Vector3.Up, trace.Normal ) > 45f ) return;
+				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
 
-			Position = trace.EndPos;
+				// Rotate EyeRot by our offset
+				var targetAxis = LookPos.Normal.x < 0 ? EyeRot.Left : EyeRot.Right;
+				EyeRot = EyeRot.RotateAroundAxis( targetAxis, LookRotOffset );
+			}
+
+			// Recalculate the worms rotation if we're moving.
+			if ( !Velocity.Normal.IsNearZeroLength )
+				UpdateWormRotation();
+		}
+
+		private void UpdateWormRotation()
+		{
+			float wormFacing = Pawn.EyeRot.Forward.Dot( Pawn.Rotation.Forward );
+
+			if ( wormFacing < 0 )
+			{
+				Rotation *= Rotation.From( 0, 180, 0 ); // Super janky
+				Pawn.ResetInterpolation();
+			}
+		}
+
+		/// <summary>
+		/// Reproject velocity onto plane
+		/// </summary>
+		static Vector3 ProjectOntoPlane( Vector3 v, Vector3 normal, float overBounce = 1.0f )
+		{
+			float backoff = v.Dot( normal );
+
+			if ( overBounce != 1.0 )
+			{
+				if ( backoff < 0 )
+				{
+					backoff *= overBounce;
+				}
+				else
+				{
+					backoff /= overBounce;
+				}
+			}
+
+			return v - backoff * normal;
 		}
 
 		/// <summary>
@@ -146,38 +181,51 @@ namespace TerryForm.Pawn
 		/// </summary>
 		private void DoJump( ref MoveHelper mover )
 		{
+			if ( !IsGrounded )
+				return;
+
 			mover.Velocity = mover.Velocity.WithZ( Jump );
 			GroundEntity = null;
-			Pawn.GroundEntity = null;
 
-			jumpStartZ = mover.Position.z;
+			AddEvent( "jump" );
+			TimeSinceJumped = 0;
 		}
 
 		/// <summary>
-		/// Check if we're grounded
+		/// Check if we're grounded, set ground entity.
 		/// </summary>
 		private void CheckGroundEntity( ref MoveHelper mover )
 		{
-			var targetPos = Position + Vector3.Down;
-			var tr = Trace.Ray( Position, targetPos ).WorldOnly().Size( BBox ).Run();
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WorldAndEntities().Ignore( Pawn ).Run();
 
-			if ( tr.Hit )
+			if ( groundTrace.Entity is not null )
 			{
-				// Have we just landed?
-				if ( GroundEntity == null )
+				if ( GroundEntity is null )
 				{
-					float jumpDelta = jumpStartZ - mover.Position.z;
-					timeUntilCanMove = jumpDelta * MovementCooldownMultiplier;
+					mover.Velocity = Vector3.Zero;
+
+					TimeUntilMovementAllowed = Math.Abs( FallStartPosZ - mover.Position.z ) * 0.01f;
+					FallStartPosZ = -1;
 				}
 
-				GroundEntity = tr.Entity;
+				GroundEntity = groundTrace.Entity;
+				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 
-				mover.Velocity = mover.Velocity.WithZ( 0 );
+				var worm = Pawn as Worm;
+				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
+				worm.IsResolved = true;
 			}
 			else
 			{
 				GroundEntity = null;
-				mover.Velocity += Vector3.Down * Gravity * Time.Delta;
+				mover.Velocity += Vector3.Down * 800 * Time.Delta;
+
+				var worm = Pawn as Worm;
+				worm.IsResolved = false;
+				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
+
+				if ( FallStartPosZ == -1 )
+					FallStartPosZ = mover.Position.z;
 			}
 		}
 	}
