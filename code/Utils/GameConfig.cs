@@ -18,7 +18,7 @@ namespace TerryForm.Utils
 			{ "crate_weapons", 0.1f },
 			{ "crate_health", 0.3f },
 		};
-    
+
 		// Worm configuration.
 		public static float SecondsBetweenWormJumps { get; set; } = 2;
 
