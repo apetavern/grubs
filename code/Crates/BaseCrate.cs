@@ -7,7 +7,7 @@ namespace TerryForm.Crates
 	/// Basic crate logic
 	/// </summary>
 	[Library( "crate_test" )]
-	public class BaseCrate : ModelEntity
+	public partial class BaseCrate : ModelEntity
 	{
 		private BBox BBox;
 
@@ -41,10 +41,9 @@ namespace TerryForm.Crates
 			mover.Trace = mover.Trace.Size( BBox ).Ignore( this ).WorldOnly();
 			GroundEntity = mover.TraceDirection( Vector3.Down ).Entity;
 
-
 			const float airResistance = 0.5f;
 			if ( GroundEntity == null )
-				mover.Velocity += Vector3.Down * PhysicsWorld.Gravity * airResistance * Time.Delta;
+				mover.Velocity += (PhysicsWorld.Gravity * airResistance) * Time.Delta;
 			else
 				mover.Velocity = 0;
 
@@ -52,16 +51,6 @@ namespace TerryForm.Crates
 
 			this.Position = mover.Position;
 			this.Velocity = mover.Velocity;
-		}
-
-		[ServerCmd]
-		public static void SpawnTestCrate()
-		{
-			_ = new BaseCrate()
-			{
-				Position = new Vector3( 0, 0, 128 )
-			};
-			Log.Trace( $"Spawned basic test crate" );
 		}
 	}
 }

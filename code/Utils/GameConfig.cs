@@ -9,6 +9,12 @@ namespace TerryForm.Utils
 		public static int TurnTimeRemainingAfterFired { get; set; } = 5;
 		public static int MinimumPlayersToStart { get; set; } = 2;
 
+		// Used to spawn a random crate using the library system
+		public static string[] CrateTypes => new[]
+		{
+			"crate_test"
+		};
+
 		public static string[] WormNames => new[]
 		{
 			"Froggy",
