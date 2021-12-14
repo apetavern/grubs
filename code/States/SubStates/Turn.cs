@@ -47,7 +47,7 @@ namespace TerryForm.States.SubStates
 
 		private void UpdateWind()
 		{
-			WindForce = Rand.Float( -1, 1 );
+			WindForce = Rand.Float( -0.5f, 0.5f );
 
 			// Let the HUD know that the wind has changed.
 			HudEntity.UpdateWind( WindForce );
