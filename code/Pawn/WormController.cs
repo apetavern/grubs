@@ -123,21 +123,23 @@ namespace TerryForm.Pawn
 			EyePosLocal = new Vector3( 0, 0, 24 );
 
 			// Set EyeRot to face the way we're walking.
-			LookPos = Velocity.Normal.IsNearZeroLength ? LookPos : Velocity.Normal;
+			LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.Normal;
 
 			// Aim with W & S keys
 			EyeRot = Rotation.LookAt( LookPos );
 
 			// Only allow aiming changes if the worm isn't moving.
 			if ( Velocity.Normal.IsNearlyZero( 2.5f ) )
+			{
 				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
 
-			// Rotate EyeRot by our offset
-			var targetAxis = LookPos.Normal.x < 0 ? EyeRot.Left : EyeRot.Right;
-			EyeRot = EyeRot.RotateAroundAxis( targetAxis, LookRotOffset );
+				// Rotate EyeRot by our offset
+				var targetAxis = LookPos.Normal.x < 0 ? EyeRot.Left : EyeRot.Right;
+				EyeRot = EyeRot.RotateAroundAxis( targetAxis, LookRotOffset );
+			}
 
 			// Recalculate the worms rotation if we're moving.
-			if ( !Velocity.IsNearZeroLength )
+			if ( !Velocity.Normal.IsNearZeroLength )
 				UpdateWormRotation();
 		}
 
@@ -145,6 +147,7 @@ namespace TerryForm.Pawn
 		{
 			float wormFacing = Pawn.EyeRot.Forward.Dot( Pawn.Rotation.Forward );
 
+			Log.Info( wormFacing );
 			if ( wormFacing < 0 )
 			{
 				Rotation *= Rotation.From( 0, 180, 0 ); // Super janky
@@ -220,6 +223,7 @@ namespace TerryForm.Pawn
 
 				var worm = Pawn as Worm;
 				worm.IsResolved = false;
+				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
 
 				if ( FallStartPosZ == -1 )
 					FallStartPosZ = mover.Position.z;
