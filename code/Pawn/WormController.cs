@@ -126,7 +126,7 @@ namespace TerryForm.Pawn
 			LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
 			// Only allow aiming changes if the worm isn't moving.
-			if ( Velocity.Normal.IsNearlyZero( 2.5f ) && IsGrounded )
+			if ( Velocity.Normal.IsNearlyZero( 2.5f ) && TimeUntilMovementAllowed <= 0 )
 			{
 				// Aim with W & S keys
 				EyeRot = Rotation.LookAt( LookPos );
