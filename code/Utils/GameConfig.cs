@@ -12,7 +12,9 @@ namespace TerryForm.Utils
 		// Used to spawn a random crate using the library system
 		public static string[] CrateTypes => new[]
 		{
-			"crate_test"
+			"crate_tools",
+			"crate_weapons",
+			"crate_health",
 		};
 
 		public static string[] WormNames => new[]

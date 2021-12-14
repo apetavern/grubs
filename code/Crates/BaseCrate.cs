@@ -6,7 +6,6 @@ namespace TerryForm.Crates
 	/// <summary>
 	/// Basic crate logic
 	/// </summary>
-	[Library( "crate_test" )]
 	public partial class BaseCrate : ModelEntity
 	{
 		private BBox BBox;
@@ -14,8 +13,9 @@ namespace TerryForm.Crates
 		public override void Spawn()
 		{
 			base.Spawn();
-			SetModel( "models/crates/tools_crate/tools_crate.vmdl" );
 
+			// Show a big fat question mark if someone forgot to set crate model
+			SetModel( "models/editor/proxy_helper.vmdl" );
 			BBox = new( new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 0 ) );
 		}
 
