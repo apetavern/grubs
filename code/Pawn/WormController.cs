@@ -99,7 +99,7 @@ namespace TerryForm.Pawn
 			mover.TryUnstuck();
 
 			// Update our final position and velocity
-			Position = mover.Position;
+			Position = mover.Position.WithY( 0 );
 			Velocity = mover.Velocity;
 		}
 
