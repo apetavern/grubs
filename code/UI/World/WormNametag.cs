@@ -9,7 +9,7 @@ namespace TerryForm.UI.World
 	{
 		public Worm Worm { get; set; }
 
-		private Vector3 Offset => Vector3.Up * 48;
+		private Vector3 Offset => Vector3.Up * 72;
 
 		private Label name;
 		private Label health;
@@ -46,7 +46,11 @@ namespace TerryForm.UI.World
 				Delete( true );
 				return;
 			}
-			Position = Worm.EyePos + Offset;
+
+			// We can't use eye pos here, because it doesn't get set until
+			// the worm has been simulated - which means they'll be inconsistent
+			// until everyone's had at least 1 turn
+			Position = Worm.Position + Offset;
 			Rotation = Rotation.LookAt( Vector3.Right );
 
 			if ( Local.Pawn.Camera is TerryForm.Pawn.Camera camera )
