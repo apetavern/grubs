@@ -11,6 +11,11 @@ namespace TerryForm.Pawn
 				SetParam( "grounded", Pawn.GroundEntity != null );
 			}
 
+			// Sliding animation
+			{
+				SetParam( "sliding", ((Pawn as Worm).Controller as WormController).IsSliding );
+			}
+
 			// Aim angle
 			{
 				float aimAngle = -Pawn.EyeRot.Pitch().Clamp( -80f, 75f );

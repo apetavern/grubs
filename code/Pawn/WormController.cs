@@ -29,6 +29,7 @@ namespace TerryForm.Pawn
 		private RealTimeUntil TimeUntilMovementAllowed { get; set; }
 		private float FallStartPosZ { get; set; }
 		public bool IsGrounded => GroundEntity != null;
+		public bool IsSliding { get; set; }
 
 		public override void Simulate()
 		{
@@ -43,9 +44,8 @@ namespace TerryForm.Pawn
 		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			//mover.Trace = mover.Trace.WorldOnly().Radius( 1.2f );
 			mover.Trace = mover.Trace.WorldAndEntities().Ignore( Pawn ).Size( 1.2f );
-			mover.MaxStandableAngle = 45.0f;
+			mover.MaxStandableAngle = 35.0f;
 
 			DoFriction( ref mover );
 
@@ -69,8 +69,11 @@ namespace TerryForm.Pawn
 
 			// Project our velocity onto the current surface we're stood on.
 			var groundTrace = mover.TraceDirection( Vector3.Down );
-			if ( groundTrace.Hit && groundTrace.Normal.Angle( Vector3.Up ) < mover.MaxStandableAngle )
+			if ( groundTrace.Hit && groundTrace.Normal.Angle( Vector3.Up ) < mover.MaxStandableAngle && !IsSliding )
 				mover.Velocity = ProjectOntoPlane( mover.Velocity, groundTrace.Normal );
+
+			// Slide if surface normal exceeds max standable angle.
+			DoSlide( ref mover, groundTrace );
 
 			// Handle delayed jumping
 			{
@@ -189,6 +192,19 @@ namespace TerryForm.Pawn
 
 			AddEvent( "jump" );
 			TimeSinceJumped = 0;
+		}
+
+		private void DoSlide( ref MoveHelper mover, TraceResult trace )
+		{
+			if ( trace.Normal.Angle( Vector3.Up ) >= mover.MaxStandableAngle && IsGrounded )
+			{
+				IsSliding = true;
+				mover.Velocity = (EyeRot.Forward.Normal + Vector3.Down) * 60;
+			}
+			else
+			{
+				IsSliding = false;
+			}
 		}
 
 		/// <summary>
