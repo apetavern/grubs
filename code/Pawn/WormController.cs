@@ -45,7 +45,7 @@ namespace TerryForm.Pawn
 		{
 			var mover = new MoveHelper( Position, Velocity );
 			mover.Trace = mover.Trace.WorldAndEntities().Ignore( Pawn ).Size( 1.2f );
-			mover.MaxStandableAngle = 35.0f;
+			mover.MaxStandableAngle = 45.0f;
 
 			DoFriction( ref mover );
 
@@ -199,7 +199,7 @@ namespace TerryForm.Pawn
 			if ( trace.Normal.Angle( Vector3.Up ) >= mover.MaxStandableAngle && IsGrounded )
 			{
 				// Don't slide uphill.
-				if ( mover.Velocity.Normal.z > 0 )
+				if ( Velocity.Normal.z > 0 )
 					return;
 
 				IsSliding = true;
