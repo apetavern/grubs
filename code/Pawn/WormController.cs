@@ -13,7 +13,7 @@ namespace TerryForm.Pawn
 		public float MaxSpeed => 60f;
 		public float AirAcceleration => 600f;
 		public float Acceleration => 810f;
-		public float Step => 10f;
+		public float Step => 12f;
 		public float Jump => 450f;
 
 		// Jump properties
@@ -229,7 +229,7 @@ namespace TerryForm.Pawn
 
 				var worm = Pawn as Worm;
 				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
-				worm.IsResolved = true;
+				worm.IsResolved = !IsSliding;
 			}
 			else
 			{
