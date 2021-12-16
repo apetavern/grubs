@@ -198,6 +198,10 @@ namespace TerryForm.Pawn
 		{
 			if ( trace.Normal.Angle( Vector3.Up ) >= mover.MaxStandableAngle && IsGrounded )
 			{
+				// Don't slide uphill.
+				if ( mover.Velocity.Normal.z > 0 )
+					return;
+
 				IsSliding = true;
 				mover.Velocity = (EyeRot.Forward.Normal + Vector3.Down) * 60;
 			}
