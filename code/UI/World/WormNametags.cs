@@ -1,9 +1,9 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
-using TerryForm.Pawn;
+using Grubs.Pawn;
 
-namespace TerryForm.UI.World
+namespace Grubs.UI.World
 {
 	public class WormNametags
 	{

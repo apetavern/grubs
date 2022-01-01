@@ -1,7 +1,7 @@
 ﻿using Sandbox;
-using TerryForm.Utils;
+using Grubs.Utils;
 
-namespace TerryForm.Pawn
+namespace Grubs.Pawn
 {
 	/// <summary>
 	/// Basic 2.5D camera

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Sandbox;
 
-namespace TerryForm.Terrain
+namespace Grubs.Terrain
 {
 	[StructLayout( LayoutKind.Sequential )]
 	public struct EdgeVertex

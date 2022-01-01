@@ -1,8 +1,8 @@
 ﻿using Sandbox;
 using Sandbox.UI;
-using TerryForm.UI.World;
+using Grubs.UI.World;
 
-namespace TerryForm.UI
+namespace Grubs.UI
 {
 	public partial class HudEntity : Sandbox.HudEntity<RootPanel>
 	{

@@ -1,4 +1,4 @@
-﻿namespace TerryForm.Pawn
+﻿namespace Grubs.Pawn
 {
 	public enum HoldPose
 	{

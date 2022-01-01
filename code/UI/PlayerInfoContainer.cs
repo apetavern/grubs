@@ -2,7 +2,7 @@
 using Sandbox.UI;
 using System.Collections.Generic;
 
-namespace TerryForm.UI
+namespace Grubs.UI
 {
 	public class PlayerInfoContainer : Panel
 	{

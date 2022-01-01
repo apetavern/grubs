@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-namespace TerryForm.Utils
+namespace Grubs.Utils
 {
 	public struct Range
 	{

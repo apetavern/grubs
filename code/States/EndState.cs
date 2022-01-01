@@ -1,6 +1,6 @@
-﻿using TerryForm.Pawn;
+﻿using Grubs.Pawn;
 
-namespace TerryForm.States
+namespace Grubs.States
 {
 	public partial class EndState : BaseState
 	{

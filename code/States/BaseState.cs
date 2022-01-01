@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 
-namespace TerryForm.States
+namespace Grubs.States
 {
 	public abstract partial class BaseState : BaseNetworkable
 	{

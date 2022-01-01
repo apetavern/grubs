@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TerryForm.Utils
+namespace Grubs.Utils
 {
 	public static class GameConfig
 	{

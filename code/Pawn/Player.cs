@@ -1,11 +1,11 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
-using TerryForm.Utils;
-using TerryForm.Weapons;
-using TerryForm.States;
+using Grubs.Utils;
+using Grubs.Weapons;
+using Grubs.States;
 
-namespace TerryForm.Pawn
+namespace Grubs.Pawn
 {
 	public partial class Player : Sandbox.Player
 	{

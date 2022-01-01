@@ -1,6 +1,6 @@
-﻿using TerryForm.Pawn;
+﻿using Grubs.Pawn;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	// ArcWeapon doesn't seem to fit the purpose of weapons with projectiles that aren't thrown.
 	// This should be changed to something like PlacedWeapon.

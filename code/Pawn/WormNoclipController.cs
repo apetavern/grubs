@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-namespace TerryForm.Pawn
+namespace Grubs.Pawn
 {
 	[Library]
 	public class WormNoclipController : NoclipController
