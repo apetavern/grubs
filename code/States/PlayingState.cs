@@ -1,8 +1,8 @@
 ﻿using Sandbox;
-using TerryForm.Crates;
-using TerryForm.States.SubStates;
+using Grubs.Crates;
+using Grubs.States.SubStates;
 
-namespace TerryForm.States
+namespace Grubs.States
 {
 	public partial class PlayingState : BaseState
 	{

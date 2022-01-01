@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-namespace TerryForm.Pawn
+namespace Grubs.Pawn
 {
 	public class WormAnimator : PawnAnimator
 	{

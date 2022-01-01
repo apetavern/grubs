@@ -1,9 +1,9 @@
 ﻿using System;
 using Sandbox;
-using TerryForm.Pawn;
-using TerryForm.States.SubStates;
+using Grubs.Pawn;
+using Grubs.States.SubStates;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public abstract partial class ArcWeapon : Weapon
 	{

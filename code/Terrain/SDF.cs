@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TerryForm.Terrain
+namespace Grubs.Terrain
 {
 
 	public struct SDF

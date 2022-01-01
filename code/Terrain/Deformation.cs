@@ -1,4 +1,4 @@
-﻿namespace TerryForm.Terrain
+﻿namespace Grubs.Terrain
 {
 	public struct Deformation
 	{

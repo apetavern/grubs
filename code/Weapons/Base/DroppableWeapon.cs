@@ -1,9 +1,9 @@
 ﻿using Sandbox;
-using TerryForm.Pawn;
-using TerryForm.States.SubStates;
-using TerryForm.Utils;
+using Grubs.Pawn;
+using Grubs.States.SubStates;
+using Grubs.Utils;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public abstract partial class DroppableWeapon : Weapon
 	{

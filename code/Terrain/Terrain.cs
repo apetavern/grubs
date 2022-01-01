@@ -3,7 +3,7 @@ using Sandbox;
 using System;
 using System.Linq;
 
-namespace TerryForm.Terrain
+namespace Grubs.Terrain
 {
 	public static partial class Terrain
 	{

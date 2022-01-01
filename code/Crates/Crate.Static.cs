@@ -1,7 +1,7 @@
 ﻿using Sandbox;
-using TerryForm.Utils;
+using Grubs.Utils;
 
-namespace TerryForm.Crates
+namespace Grubs.Crates
 {
 	public partial class Crate
 	{

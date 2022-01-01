@@ -3,7 +3,7 @@ using Sandbox.Hooks;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace TerryForm.UI.Elements
+namespace Grubs.UI.Elements
 {
 	public partial class ChatBox : Panel
 	{

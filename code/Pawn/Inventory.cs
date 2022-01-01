@@ -1,9 +1,9 @@
 ﻿using Sandbox;
 using System;
 using System.Linq;
-using TerryForm.Weapons;
+using Grubs.Weapons;
 
-namespace TerryForm.Pawn
+namespace Grubs.Pawn
 {
 	public class Inventory : BaseInventory
 	{

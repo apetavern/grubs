@@ -1,9 +1,9 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using System;
-using TerryForm.States;
+using Grubs.States;
 
-namespace TerryForm.UI
+namespace Grubs.UI
 {
 	[UseTemplate]
 	public class GameInfoPanel : Panel

@@ -1,7 +1,7 @@
 ﻿using Sandbox;
-using TerryForm.Pawn;
+using Grubs.Pawn;
 
-namespace TerryForm.Crates
+namespace Grubs.Crates
 {
 	[Library( "crate_health" )]
 	public class HealthCrate : Crate

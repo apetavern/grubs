@@ -1,10 +1,10 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
-using TerryForm.Pawn;
-using TerryForm.Utils;
+using Grubs.Pawn;
+using Grubs.Utils;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public partial class Projectile : ModelEntity, IAwaitResolution
 	{

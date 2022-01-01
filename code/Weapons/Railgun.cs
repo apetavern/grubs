@@ -1,6 +1,6 @@
-﻿using TerryForm.Pawn;
+﻿using Grubs.Pawn;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public class Railgun : Weapon
 	{
