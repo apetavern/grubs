@@ -1,8 +1,8 @@
 ﻿using Sandbox;
 using System;
-using TerryForm.Utils;
+using Grubs.Utils;
 
-namespace TerryForm.Pawn
+namespace Grubs.Pawn
 {
 	public class WormController : BasePlayerController
 	{

@@ -1,7 +1,7 @@
-﻿using TerryForm.Utils;
-using TerryForm.Terrain;
+﻿using Grubs.Utils;
+using Grubs.Terrain;
 
-namespace TerryForm.States
+namespace Grubs.States
 {
 	public partial class WaitingState : BaseState
 	{

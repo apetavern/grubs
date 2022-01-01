@@ -1,8 +1,8 @@
 ﻿using Sandbox;
-using TerryForm.Pawn;
-using TerryForm.Terrain;
+using Grubs.Pawn;
+using Grubs.Terrain;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public class Boomer : Weapon
 	{

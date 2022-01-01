@@ -1,7 +1,7 @@
 ﻿using Sandbox;
-using TerryForm.Pawn;
+using Grubs.Pawn;
 
-namespace TerryForm.Crates
+namespace Grubs.Crates
 {
 	/// <summary>
 	/// Basic crate logic

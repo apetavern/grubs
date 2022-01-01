@@ -1,9 +1,9 @@
 using Sandbox;
-using TerryForm.States;
-using TerryForm.UI;
-using TerryForm.Pawn;
+using Grubs.States;
+using Grubs.UI;
+using Grubs.Pawn;
 
-namespace TerryForm
+namespace Grubs
 {
 	public partial class Game : Sandbox.Game
 	{

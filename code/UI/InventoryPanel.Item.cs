@@ -1,10 +1,10 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using TerryForm.Pawn;
-using TerryForm.Weapons;
+using Grubs.Pawn;
+using Grubs.Weapons;
 
-namespace TerryForm.UI
+namespace Grubs.UI
 {
 	public partial class InventoryPanel
 	{

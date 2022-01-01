@@ -3,7 +3,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
 
-namespace TerryForm.UI
+namespace Grubs.UI
 {
 	public partial class InventoryPanel : Panel
 	{

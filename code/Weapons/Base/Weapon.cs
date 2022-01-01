@@ -1,10 +1,10 @@
 ﻿using Sandbox;
-using TerryForm.Pawn;
-using TerryForm.States.SubStates;
-using TerryForm.Utils;
-using TerryForm.Terrain;
+using Grubs.Pawn;
+using Grubs.States.SubStates;
+using Grubs.Utils;
+using Grubs.Terrain;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public abstract partial class Weapon : BaseCarriable
 	{

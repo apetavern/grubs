@@ -1,9 +1,9 @@
 ﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
-using TerryForm.States.SubStates;
+using Grubs.States.SubStates;
 
-namespace TerryForm.UI
+namespace Grubs.UI
 {
 	public class WindInfoPanel : Panel
 	{

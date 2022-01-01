@@ -2,9 +2,9 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
-using TerryForm.Pawn;
+using Grubs.Pawn;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public struct ArcSegment
 	{

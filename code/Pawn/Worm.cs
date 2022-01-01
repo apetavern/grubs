@@ -1,10 +1,10 @@
 ﻿using Sandbox;
 using System.Linq;
-using TerryForm.Utils;
-using TerryForm.Weapons;
-using TerryForm.States.SubStates;
+using Grubs.Utils;
+using Grubs.Weapons;
+using Grubs.States.SubStates;
 
-namespace TerryForm.Pawn
+namespace Grubs.Pawn
 {
 	public partial class Worm : Sandbox.Player, IAwaitResolution
 	{

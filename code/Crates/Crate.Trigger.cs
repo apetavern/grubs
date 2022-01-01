@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-namespace TerryForm.Crates
+namespace Grubs.Crates
 {
 	public partial class Crate
 	{

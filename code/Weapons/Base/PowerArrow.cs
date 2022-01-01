@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using System;
 
-namespace TerryForm.Weapons
+namespace Grubs.Weapons
 {
 	public partial class PowerArrow : RenderEntity
 	{

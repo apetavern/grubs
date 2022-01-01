@@ -2,7 +2,7 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace TerryForm.UI.Elements
+namespace Grubs.UI.Elements
 {
 	public partial class ChatEntry : Panel
 	{

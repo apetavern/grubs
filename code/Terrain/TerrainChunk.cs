@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TerryForm.Terrain
+namespace Grubs.Terrain
 {
 	public partial class TerrainChunk : ModelEntity
 	{

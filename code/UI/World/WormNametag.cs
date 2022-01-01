@@ -1,9 +1,9 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using TerryForm.Pawn;
+using Grubs.Pawn;
 
-namespace TerryForm.UI.World
+namespace Grubs.UI.World
 {
 	public class WormNametag : WorldPanel
 	{
@@ -53,7 +53,7 @@ namespace TerryForm.UI.World
 			Position = Worm.Position + Offset;
 			Rotation = Rotation.LookAt( Vector3.Right );
 
-			if ( Local.Pawn.Camera is TerryForm.Pawn.Camera camera )
+			if ( Local.Pawn.Camera is Grubs.Pawn.Camera camera )
 			{
 				WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 5f;
 			}
