@@ -11,6 +11,8 @@ namespace Grubs.States
 		{
 			Log.Info( "Generate terrain here" );
 
+			Terrain.Terrain.Generate();
+
 			base.OnStart();
 		}
 
