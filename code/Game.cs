@@ -2,6 +2,7 @@ using Sandbox;
 using Grubs.States;
 using Grubs.UI;
 using Grubs.Pawn;
+using Grubs.Terrain;
 
 namespace Grubs
 {
@@ -12,6 +13,9 @@ namespace Grubs
 
 		public Game()
 		{
+			Terrain.Terrain.Initialize();
+			Quadtree.Initialize();
+
 			if ( IsServer )
 			{
 				StateHandler = new();
@@ -51,6 +55,13 @@ namespace Grubs
 					basePlayer.ActiveWorm.DevController = new WormNoclipController();
 				}
 			}
+		}
+
+		public override void Simulate( Client cl )
+		{
+			base.Simulate( cl );
+
+			Quadtree.Simulate( cl );
 		}
 	}
 }

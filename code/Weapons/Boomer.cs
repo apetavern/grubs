@@ -30,7 +30,9 @@ namespace Grubs.Weapons
 
 						Color color = input == 1 ? Color.Red : Color.Green;
 						DebugOverlay.Circle( position, Rotation.FromYaw( 90f ), 64f, color.WithAlpha( 0.15f ), true, 5f );
-						Terrain.Terrain.Deform( position, input == 1, 128f );
+
+						SDF circle = new Circle( position, 128f, input == 0 ? SDF.MergeType.Add : SDF.MergeType.Subtract );
+						Terrain.Terrain.Update( circle );
 					}
 				}
 			}

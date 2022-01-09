@@ -110,11 +110,10 @@ namespace Grubs.Weapons
 					var damage = new DamageInfo() { Damage = DamagePerShot, Position = firedTrace.StartPos, Flags = DamageFlags.Bullet };
 					firedTrace.Entity.TakeDamage( damage );
 					break;
-
-				case TerrainChunk:
-					Log.Info( "Do deformation" );
-					break;
 			}
+
+			if ( firedTrace.Hit )
+				Terrain.Terrain.Update( new Circle( firedTrace.EndPos, 32f, SDF.MergeType.Subtract ) );
 
 		}
 

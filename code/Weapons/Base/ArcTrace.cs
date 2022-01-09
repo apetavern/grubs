@@ -42,7 +42,7 @@ namespace Grubs.Weapons
 				from = position;
 				segment.EndPos = from;
 
-				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).WorldOnly().Run();
+				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).Run();
 
 				if ( tr.Hit )
 				{
@@ -81,7 +81,7 @@ namespace Grubs.Weapons
 
 				segment.EndPos = position;
 
-				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).WorldOnly().Run();
+				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).Run();
 
 				if ( tr.Hit )
 				{
