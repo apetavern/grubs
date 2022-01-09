@@ -71,6 +71,13 @@ namespace Grubs.Weapons
 				Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
 				Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, Time.Delta / Speed );
 			}
+
+			TraceResult result = Trace.Ray( new Ray( this.Position + (this.Rotation.Forward * 10), this.Rotation.Forward ), 25.0f ).Run();
+			if ( result.Hit == true )
+			{
+				this.Position = result.EndPos;
+				OnCollision();
+			}
 		}
 
 		public void OnCollision()
@@ -89,6 +96,8 @@ namespace Grubs.Weapons
 		public void DoBlastWithRadius( float radius = 100f )
 		{
 			var effectedEntities = Physics.GetEntitiesInSphere( Position, radius ).OfType<Worm>();
+
+			(Game.Current as Game).Terrain.ModifyCircle( new Vector2( Position.x, Position.z ), radius, true );
 
 			foreach ( var entity in effectedEntities )
 				entity.TakeDamage( new DamageInfo() { Position = Position, Flags = DamageFlags.Blast, Damage = 0 } );

@@ -109,13 +109,8 @@ namespace Grubs.Weapons
 					firedTrace.Entity.TakeDamage( damage );
 					break;
 				default:
+					(Game.Current as Game).Terrain.ModifyCircle( new Vector2( firedTrace.EndPos.x, firedTrace.EndPos.z ), 16, true );
 					break;
-				//TODO: Implement chunk destruction on weapons
-				/*
-				case TerrainChunk:
-					Log.Info( "Do deformation" );
-					break;
-				*/
 			}
 
 		}

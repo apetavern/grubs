@@ -29,8 +29,7 @@ namespace Grubs.Weapons
 
 						Color color = input == 1 ? Color.Red : Color.Green;
 						DebugOverlay.Circle( position, Rotation.FromYaw( 90f ), 64f, color.WithAlpha( 0.15f ), true, 5f );
-						//TODO: IMPLEMENT DEFORMATION
-						//Terrain.Terrain.Deform( position, input == 1, 128f );
+						(Game.Current as Game).Terrain.ModifyCircle( new Vector3( position.x, position.z ), 128f, true );
 					}
 				}
 			}
