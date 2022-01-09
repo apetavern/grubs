@@ -2,8 +2,6 @@
 using Grubs.Pawn;
 using Grubs.States.SubStates;
 using Grubs.Utils;
-using Grubs.Terrain;
-
 namespace Grubs.Weapons
 {
 	public abstract partial class Weapon : BaseCarriable
@@ -110,10 +108,14 @@ namespace Grubs.Weapons
 					var damage = new DamageInfo() { Damage = DamagePerShot, Position = firedTrace.StartPos, Flags = DamageFlags.Bullet };
 					firedTrace.Entity.TakeDamage( damage );
 					break;
-
+				default:
+					break;
+				//TODO: Implement chunk destruction on weapons
+				/*
 				case TerrainChunk:
 					Log.Info( "Do deformation" );
 					break;
+				*/
 			}
 
 		}
