@@ -13,6 +13,7 @@ namespace Grubs.States
 		protected override void OnStart()
 		{
 			PickNextPlayer();
+			(Game.Current as Game).newTerrain();
 		}
 
 		public void OnTurnFinished()
