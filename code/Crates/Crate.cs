@@ -48,7 +48,7 @@ namespace Grubs.Crates
 		private void Move()
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.Size( BBox ).Ignore( this ).WorldOnly();
+			mover.Trace = mover.Trace.Size( BBox ).Ignore( this ).WorldAndEntities();
 			GroundEntity = mover.TraceDirection( Vector3.Down ).Entity;
 
 			if ( GroundEntity == null )
