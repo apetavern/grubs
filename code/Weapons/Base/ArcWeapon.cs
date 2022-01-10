@@ -52,7 +52,7 @@ namespace Grubs.Weapons
 
 		protected override void Fire()
 		{
-			var trace = new ArcTrace( Parent.EyePos ).RunTowards( Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? 0 );
+			var trace = new ArcTrace( Parent.EyePos ).RunTowards( Parent as Worm, Parent.EyeRot.Forward.Normal, ComputedForce, Turn.Instance?.WindForce ?? 0 );
 
 			// Specific target notes, will remove later once we have a proper usage for it.
 			// var trace = new ArcTrace( Parent.EyePos + Parent.EyeRot.Forward.Normal ).RunTo( Vector3.Zero );

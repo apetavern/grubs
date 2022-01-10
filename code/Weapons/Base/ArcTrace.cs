@@ -63,7 +63,7 @@ namespace Grubs.Weapons
 		/// <summary>
 		/// Run a trace specifying the direction, force and wind force.
 		/// </summary>
-		public List<ArcSegment> RunTowards( Vector3 direction, float force, float windForceX )
+		public List<ArcSegment> RunTowards( Worm fromWorm, Vector3 direction, float force, float windForceX )
 		{
 			float epsilon = 0.001f;
 
@@ -81,7 +81,7 @@ namespace Grubs.Weapons
 
 				segment.EndPos = position;
 
-				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).Run();
+				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Ignore( fromWorm ).Radius( 2f ).Run();
 
 				if ( tr.Hit )
 				{
