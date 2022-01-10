@@ -45,7 +45,7 @@ namespace Grubs.Pawn
 		{
 			var mover = new MoveHelper( Position, Velocity );
 			mover.Trace = mover.Trace.WorldAndEntities().Ignore( Pawn ).Size( 1.2f );
-			mover.MaxStandableAngle = 45.0f;
+			mover.MaxStandableAngle = 35.0f;
 
 			DoFriction( ref mover );
 
@@ -188,6 +188,7 @@ namespace Grubs.Pawn
 				return;
 
 			mover.Velocity = mover.Velocity.WithZ( Jump );
+			Pawn.GroundEntity = null;
 			GroundEntity = null;
 
 			AddEvent( "jump" );
@@ -229,6 +230,8 @@ namespace Grubs.Pawn
 				}
 
 				GroundEntity = groundTrace.Entity;
+				Pawn.GroundEntity = GroundEntity;
+
 				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 
 				var worm = Pawn as Worm;
@@ -238,6 +241,7 @@ namespace Grubs.Pawn
 			else
 			{
 				GroundEntity = null;
+				Pawn.GroundEntity = null;
 				mover.Velocity += Vector3.Down * 800 * Time.Delta;
 
 				var worm = Pawn as Worm;
