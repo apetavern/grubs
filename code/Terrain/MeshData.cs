@@ -48,7 +48,6 @@ namespace Grubs.Terrain
 				return;
 
 			float dot = MathF.Cos( normalDegrees * MathF.PI / 180f );
-			//Stopwatch watch = new Stopwatch();
 
 			List<TerrainVertex> newVertices = new List<TerrainVertex>();
 			List<Vector3> newPositions = new List<Vector3>();
@@ -104,13 +103,14 @@ namespace Grubs.Terrain
 				Vertices[i] = vert;
 			}
 
-			//Log.Info( $"Took {watch.Stop()}ms to remove {VertexCount - newCount} duplicate vertices" );
-
 			VertexCount = newCount;
 			Vertices = newVertices;
 			VertexPositions = newPositions;
 		}
 
+		/// <summary>
+		/// Only used in debug methods.
+		/// </summary>
 		public void DrawDebug( float time = 0f, Color? color = null )
 		{
 			if ( IndexCount == 0 || VertexCount == 0 )
@@ -128,9 +128,6 @@ namespace Grubs.Terrain
 					Vector3 nextPos = VertexPositions[nextIndex];
 
 					DebugOverlay.Line( pos, nextPos, drawColor, time );
-
-					//Vector3 normal = Vertices[index].normal;
-					//DebugOverlay.Line( pos, pos + normal * 16f, Color.Red, time );
 				}
 			}
 		}

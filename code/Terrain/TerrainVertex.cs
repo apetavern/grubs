@@ -1,7 +1,4 @@
-﻿#region Assembly Sandbox.Game, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null
-// C:\Program Files (x86)\Steam\steamapps\common\sbox\bin\managed\Sandbox.Game.dll
-#endregion
-using Sandbox;
+﻿using Sandbox;
 using System.Runtime.InteropServices;
 
 namespace Grubs.Terrain

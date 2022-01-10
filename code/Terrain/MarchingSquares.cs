@@ -1,7 +1,4 @@
 ﻿using Sandbox;
-using System.Linq;
-using Sandbox.UI;
-using System;
 using System.Collections.Generic;
 
 namespace Grubs.Terrain
@@ -23,10 +20,10 @@ namespace Grubs.Terrain
 		public const float TextureScale = 0.01f;
 		public const bool Smoothing = true;
 
-		// removes dupe vertices, might crash tho idk
+		// Removes duplicate vertices - experimental.
 		public const bool MeshSimplification = true;
 
-		public static Material Material = Material.Load( "materials/peterburroughs/dirt.vmat" );// Material.Load( "materials/default/vertex_color.vmat" );
+		public static Material Material = Material.Load( "materials/peterburroughs/dirt.vmat" );
 
 		public static readonly int[,] CornersFromEdge = new int[8, 2]
 		{
@@ -148,71 +145,5 @@ namespace Grubs.Terrain
 			}
 			return uniqueIndices;
 		}
-
-		/*
-		[Event.Tick]
-		public static void Tick()
-		{
-			DebugOverlay.Line( Vector2.Zero, E * 100, Color.Red );
-			DebugOverlay.Line( Vector2.Zero, N * 100, Color.Green );
-
-			for ( int m = 0; m < 18; m++ )
-			{
-				float xOffset = (m % 4) * 50 - 75;
-				float yOffset = (m / 4) * 50 - 75;
-				Vector2 offset = new Vector2( xOffset, yOffset );
-
-				DebugOverlay.Line( offset + NW * 16, offset + NE * 16, Color.Black );
-				DebugOverlay.Line( offset + NE * 16, offset + SE * 16, Color.Black );
-				DebugOverlay.Line( offset + SE * 16, offset + SW * 16, Color.Black );
-				DebugOverlay.Line( offset + SW * 16, offset + NW * 16, Color.Black );
-
-				for ( int i = 0; i < 8; i++ )
-				{
-					DebugOverlay.Text( offset + VertexOffsets[i] * 16, i.ToString(), Color.Red );
-				}
-
-				int triCount = TriangleCount[m];
-
-				for ( int i = 0; i < triCount; i += 3 )
-				{
-					Vector2[] verts = new Vector2[3];
-
-					Vector2 pos;
-					for ( int j = 0; j < 3; j++ )
-					{
-						int index = Triangles[m, i + j];
-						bool edgeVertex = index % 2 == 1;
-
-						if ( edgeVertex )
-						{
-							int a = CornersFromEdge[index, 0];
-							int b = CornersFromEdge[index, 1];
-
-							float t = 0.5f + MathF.Sin( Time.Now * 2f ) * 0.35f;
-
-							Vector2 aPos = VertexOffsets[a];
-							Vector2 bPos = VertexOffsets[b];
-
-							Vector2 vertexOffset = aPos * t + (1f - t) * bPos;
-
-							pos = offset + vertexOffset * 15;
-						}
-						else pos = offset + VertexOffsets[Triangles[m, i + j]] * 15;
-
-						verts[j] = pos;
-					}
-
-					Vector2 v0 = verts[0];
-					Vector2 v1 = verts[1];
-					Vector2 v2 = verts[2];
-
-					DebugOverlay.Line( v0, v1, Color.White );
-					DebugOverlay.Line( v1, v2, Color.White );
-					DebugOverlay.Line( v2, v0, Color.White );
-				}
-			}
-		}
-		*/
 	}
 }

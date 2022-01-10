@@ -7,15 +7,15 @@ namespace Grubs.Terrain
 	public static partial class Quadtree
 	{
 		public static Vector2[] CellOffsets = new Vector2[4] {
-		new Vector2( -1f, 1f ),
-		new Vector2( 1f, 1f ),
-		new Vector2( 1f, -1f ),
-		new Vector2( -1f, -1f )
-	};
+			new Vector2( -1f, 1f ),
+			new Vector2( 1f, 1f ),
+			new Vector2( 1f, -1f ),
+			new Vector2( -1f, -1f )
+		};
 
-		public const int Levels = 8; // goes from 0 to n-1
+		public const int Levels = 8; // Algorithm runs from 0 to n-1.
 		public const int MaxResolution = 1 << (Levels - 1);
-		public const int ExtentShifts = 10; // make sure this is at LEAST Levels+1
+		public const int ExtentShifts = 10; // ExtentShifts should be a minimum of Levels + 1.
 		public const int Extents = 1 << ExtentShifts;
 
 		public static float[,] GridValues = CreateGrid();
@@ -38,7 +38,7 @@ namespace Grubs.Terrain
 					step.y = stepSize * y;
 					Vector2 pos = start + step;
 
-					GridValues[x, y] = 1000000f;// pos.Length;
+					GridValues[x, y] = 1000000f;
 				}
 			}
 
@@ -60,7 +60,7 @@ namespace Grubs.Terrain
 			BuildModels( true );
 		}
 
-		// the level the models will be at, model count is equal to 4^n. (restart after change!!)
+		// Model Count is equal to 4^n.
 		public const int ModelLevel = 3;
 		private const int modelsPerAxis = 1 << ModelLevel;
 		private const int modelCount = modelsPerAxis * modelsPerAxis;
@@ -144,8 +144,6 @@ namespace Grubs.Terrain
 							surfaceMesh.Bounds = bounds;
 							modelBuilder.AddMesh( surfaceMesh );
 						}
-
-						//modelBuilder.AddCollisionMesh( surfaceData.VertexPositions.ToArray(), surfaceData.Indices.ToArray() );
 					}
 
 					int edgeCount = edgeData.IndexCount;
@@ -171,10 +169,6 @@ namespace Grubs.Terrain
 
 				index++;
 			}
-
-			//Log.Info( $"Took {vertTime}ms to build {totalVertices} vertices!" );
-			//if ( updates > 0 )
-			//Log.Info( $"Took {buildwatch.Stop()}ms to update {updates}/{modelCount} models!" );
 		}
 
 
@@ -186,33 +180,12 @@ namespace Grubs.Terrain
 			mesh.SetVertexBufferData( meshData.Vertices );
 		}
 
-		/*
-		public static void FrameSimulate( Client cl )
-		{
-			Vector2 circlePos = PlaneIntersection( cl.Pawn.EyePos, cl.Pawn.EyeRot.Forward );
-			DebugOverlay.Circle( circlePos, Rotation.FromPitch( 90f ), 64f, Color.White.WithAlpha( 0.1f ) );
-
-			if ( RootCell != null )
-				RootCell.DrawLeaves();
-
-			//DrawGrid();
-		}
-		*/
-
 		public static void Simulate( Client cl )
 		{
 			if ( RootCell == null )
 				return;
 
 			BuildModels();
-		}
-
-		private static Vector3 PlaneIntersection( Vector3 pos, Vector3 direction )
-		{
-			var prod1 = pos.Dot( Vector3.Up );
-			var prod2 = direction.Dot( Vector3.Up );
-			var prod3 = prod1 / prod2;
-			return pos - direction * prod3;
 		}
 
 		public static void Update( SDF sdf )
@@ -223,22 +196,23 @@ namespace Grubs.Terrain
 			RootCell.Update( sdf );
 		}
 
+		/// <summary>
+		/// Debug method for testing meshes.
+		/// </summary>
 		[ClientCmd( "meshtest" )]
 		public static void MeshTest()
 		{
 			List<TreeNode> nodes = RootCell.CellsAtLevel( ModelLevel );
 			foreach ( TreeNode node in nodes )
 			{
-				Log.Info( "new node!!" );
+				Log.Info( "New Node" );
 				node.GetMeshData( out MeshData surfaceData, out MeshData edgeData );
 				surfaceData.RemoveDuplicateVertices();
 				edgeData.RemoveDuplicateVertices();
 
 				surfaceData.DrawDebug( 5f, Color.White );
-				//edgeData.DrawDebug( 5f, Color.Green );
 
 				Log.Info( $"surfaceData ({surfaceData.VertexCount}, {surfaceData.IndexCount})" );
-				//Log.Info( $"edgeData ({edgeData.VertexCount}, {edgeData.IndexCount})" );
 			}
 		}
 
@@ -275,6 +249,9 @@ namespace Grubs.Terrain
 			}
 		}
 
+		/// <summary>
+		/// Debug method for cleaning the quadtree.
+		/// </summary>
 		[ClientCmd( "cleantree" )]
 		public static void CleanTree()
 		{

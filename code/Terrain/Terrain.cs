@@ -24,12 +24,13 @@ namespace Grubs.Terrain
 			if ( Host.IsClient )
 				return;
 
-			// if you encounter lag it's most likely because of this as adding entries
-			// to lists makes it network the entire list, bound to cause some stutters.
 			SDFs.Add( sdf );
 		}
 
-		public static void Generate() // method for generating base terrain
+		/// <summary>
+		/// Method for generating our base terrain.
+		/// </summary>
+		public static void Generate()
 		{
 			if ( Host.IsClient )
 				return;

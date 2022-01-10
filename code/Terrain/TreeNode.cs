@@ -1,5 +1,4 @@
-﻿using Sandbox;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Grubs.Terrain
@@ -38,8 +37,8 @@ namespace Grubs.Terrain
 				Range = new DataRange( 0, Quadtree.MaxResolution, 0, Quadtree.MaxResolution );
 			else
 			{
-				// newly split nodes have no idea what their center value should be.
-				// should probably set an approximation through their parents split method
+				// Newly split nodes have no idea what their center value should be.
+				// Should probably set an approximation through their parents split method.
 				Range = Parent.Range.ClampedToQuadrant( childIndex );
 			}
 
@@ -136,7 +135,7 @@ namespace Grubs.Terrain
 			else if ( !shouldSplit && Level > Quadtree.ModelLevel - 1 )
 				Unsplit();
 
-			// update children
+			// Update Children
 			if ( !IsLeaf && possibleEffect )
 				foreach ( TreeNode node in Children )
 					node.Update( sdf );
@@ -157,12 +156,12 @@ namespace Grubs.Terrain
 					foreach ( TreeNode node in Children )
 						node.Clean();
 				}
-				else // hit a bottom leaf
+				else // We hit a bottom leaf.
 				{
 					Parent.Clean( false );
 				}
 			}
-			else if ( !IsLeaf && Level > Quadtree.ModelLevel - 1 )  // going up
+			else if ( !IsLeaf && Level > Quadtree.ModelLevel - 1 )
 			{
 				if ( ShouldClean( out bool full ) )
 				{
@@ -253,15 +252,15 @@ namespace Grubs.Terrain
 
 		public void GetMeshData( MeshData surfaceData, MeshData edgeData )
 		{
-			if ( State == SolidState.Empty ) // no mesh data to get
+			if ( State == SolidState.Empty )
 				return;
 
-			if ( !IsLeaf ) // recurse on children
+			if ( !IsLeaf )
 			{
 				foreach ( TreeNode node in Children )
 					node.GetMeshData( surfaceData, edgeData );
 			}
-			else // add to data unless node is empty
+			else
 			{
 				int marchCase = State == SolidState.Full ? 15 : 0;
 				if ( State == SolidState.Partial )
@@ -270,31 +269,8 @@ namespace Grubs.Terrain
 						marchCase = (marchCase << 1) + (CornerValues[i] < 0f ? 1 : 0);
 				}
 
-				/*
-				// fix for ambiguous cases (this is kinda broken still lol)
-				if ( marchCase == 5 || marchCase == 10 )
-				{
-					int score = 0;
-
-					for ( int i = 0; i < 4; i++ )
-					{
-						int next = (i + 1) % 4;
-						float aNoise = CornerValues[i];
-						float bNoise = CornerValues[next];
-						float t = (0 - aNoise) / (bNoise - aNoise);
-						if ( (i % 2 == 1 && marchCase == 5) || (i % 2 == 0 && marchCase == 10) )
-							t = 1f - t;
-						score += t > 0.5f ? 1 : -1;
-					}
-
-					if ( score < 0 )
-						marchCase = marchCase == 5 ? 16 : 17;
-				}
-				*/
-
 				Vector3 edgeOffset = Vector3.Up * MarchingSquares.EdgeWidth * 0.5f;
 
-				// generate all vertices used in the case
 				int uniqueCount = MarchingSquares.UniqueCount[marchCase];
 				TerrainVertex[] surfaceVertices = new TerrainVertex[uniqueCount];
 				int[] vertexOrder = new int[8];
@@ -327,7 +303,6 @@ namespace Grubs.Terrain
 					Vector3 vertexPos = (Vector3)pos + edgeOffset;
 					Vector2 uv = MarchingSquares.TextureScale * (Vector2)vertexPos;
 					surfaceVertices[i] = new TerrainVertex( vertexPos, Vector3.Up, Vector3.Right, uv );
-					//new EdgeVertex( (Vector3)pos + edgeOffset, Vector3.Up, vertColor );
 					vertexOrder[index] = i;
 				}
 

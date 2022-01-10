@@ -67,14 +67,14 @@ namespace Grubs.Terrain
 
 		public static float RoundCone( Vector2 from, Vector2 to, float r1, float r2, Vector2 point )
 		{
-			// sampling independent computations (only depend on shape)
+			// Sampling independent computations.
 			Vector2 ba = to - from;
 			float l2 = (float)Vector2.GetDot( ba, ba );
 			float rr = r1 - r2;
 			float a2 = l2 - rr * rr;
 			float il2 = 1f / l2;
 
-			// sampling dependant computations
+			// Sampling dependent computations.
 			Vector2 pa = point - from;
 			float y = (float)Vector2.GetDot( pa, ba );
 			float z = y - l2;
@@ -82,7 +82,7 @@ namespace Grubs.Terrain
 			float y2 = y * y * l2;
 			float z2 = z * z * l2;
 
-			// single square root!
+			// Single Square Root.
 			float k = MathF.Sign( rr ) * rr * rr * x2;
 			if ( MathF.Sign( z ) * a2 * z2 > k ) return MathF.Sqrt( x2 + z2 ) * il2 - r2;
 			if ( MathF.Sign( y ) * a2 * y2 < k ) return MathF.Sqrt( x2 + y2 ) * il2 - r1;
