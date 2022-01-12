@@ -80,6 +80,7 @@ namespace Grubs.Terrain
 				ModelEntity modelEnt = new ModelEntity();
 				modelEnt.Rotation = Rotation.FromRoll( 90f );
 				modelEnt.Transmit = TransmitType.Never;
+				modelEnt.Tags.Add( "Terrain" );
 				models[i] = modelEnt;
 			}
 

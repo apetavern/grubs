@@ -44,7 +44,7 @@ namespace Grubs.Pawn
 		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.WorldAndEntities().Ignore( Pawn ).Size( 1.2f );
+			mover.Trace = mover.Trace.WorldAndEntities().WithTag( "Terrain" ).Size( 1.2f );
 			mover.MaxStandableAngle = 35.0f;
 
 			DoFriction( ref mover );
