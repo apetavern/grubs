@@ -14,7 +14,7 @@ namespace Grubs.Pawn
 		public float AirAcceleration => 600f;
 		public float Acceleration => 810f;
 		public float Step => 12f;
-		public float Jump => 450f;
+		public float Jump => 950f;
 
 		// Jump properties
 		private TimeSince TimeSinceJumpReleased { get; set; }
@@ -28,7 +28,7 @@ namespace Grubs.Pawn
 		// Movement properties
 		private RealTimeUntil TimeUntilMovementAllowed { get; set; }
 		private float FallStartPosZ { get; set; }
-		[Net] public bool IsGrounded { get; set; }
+		[Net, Predicted] public bool IsGrounded { get; set; }
 		public bool IsSliding { get; set; }
 
 		public override void Simulate()
@@ -44,14 +44,13 @@ namespace Grubs.Pawn
 		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.WorldAndEntities().WithTag( "Terrain" ).Size( 1.2f );
+			mover.Trace = mover.Trace.WithTag( "Terrain" ).Size( 1.2f );
 			mover.MaxStandableAngle = 35.0f;
 
 			DoFriction( ref mover );
 
 			// Gravity / set our ground entity
-			if ( Host.IsServer )
-				CheckGrounded( ref mover );
+			CheckGrounded( ref mover );
 
 			// Calculate movement speed
 			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
@@ -189,6 +188,7 @@ namespace Grubs.Pawn
 				return;
 
 			mover.Velocity = mover.Velocity.WithZ( Jump );
+			IsGrounded = false;
 
 			AddEvent( "jump" );
 			TimeSinceJumped = 0;
@@ -222,7 +222,7 @@ namespace Grubs.Pawn
 		/// </summary>
 		private void CheckGrounded( ref MoveHelper mover )
 		{
-			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WorldAndEntities().Ignore( Pawn ).Run();
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WithTag( "Terrain" ).Run();
 
 			if ( groundTrace.Entity is not null )
 			{
@@ -232,10 +232,12 @@ namespace Grubs.Pawn
 
 					TimeUntilMovementAllowed = Math.Abs( FallStartPosZ - mover.Position.z ) * 0.01f;
 					FallStartPosZ = -1;
+
+					Log.Info( "hard fall?" );
+					// AddEvent( "hardfall" );
 				}
 
 				IsGrounded = true;
-
 				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 
 				var worm = Pawn as Worm;
