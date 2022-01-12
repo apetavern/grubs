@@ -8,7 +8,7 @@ namespace Grubs.Pawn
 		{
 			// Grounded check
 			{
-				SetParam( "grounded", Pawn.GroundEntity != null );
+				SetParam( "grounded", ((Pawn as Worm).Controller as WormController).IsGrounded );
 			}
 
 			// Sliding animation

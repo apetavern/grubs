@@ -4,7 +4,7 @@ using Grubs.Utils;
 
 namespace Grubs.Pawn
 {
-	public class WormController : BasePlayerController
+	public partial class WormController : BasePlayerController
 	{
 		// Controller settings
 		public float Drag => 8.0f;
@@ -28,7 +28,7 @@ namespace Grubs.Pawn
 		// Movement properties
 		private RealTimeUntil TimeUntilMovementAllowed { get; set; }
 		private float FallStartPosZ { get; set; }
-		public bool IsGrounded => GroundEntity != null;
+		[Net] public bool IsGrounded { get; set; }
 		public bool IsSliding { get; set; }
 
 		public override void Simulate()
@@ -50,7 +50,8 @@ namespace Grubs.Pawn
 			DoFriction( ref mover );
 
 			// Gravity / set our ground entity
-			CheckGroundEntity( ref mover );
+			if ( Host.IsServer )
+				CheckGroundEntity( ref mover );
 
 			// Calculate movement speed
 			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
@@ -221,7 +222,7 @@ namespace Grubs.Pawn
 
 			if ( groundTrace.Entity is not null )
 			{
-				if ( GroundEntity is null )
+				if ( IsGrounded == false )
 				{
 					mover.Velocity = Vector3.Zero;
 
@@ -229,8 +230,7 @@ namespace Grubs.Pawn
 					FallStartPosZ = -1;
 				}
 
-				GroundEntity = groundTrace.Entity;
-				Pawn.GroundEntity = GroundEntity;
+				IsGrounded = true;
 
 				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 
@@ -240,8 +240,7 @@ namespace Grubs.Pawn
 			}
 			else
 			{
-				GroundEntity = null;
-				Pawn.GroundEntity = null;
+				IsGrounded = false;
 				mover.Velocity += Vector3.Down * 800 * Time.Delta;
 
 				var worm = Pawn as Worm;
