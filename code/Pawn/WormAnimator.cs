@@ -6,14 +6,16 @@ namespace Grubs.Pawn
 	{
 		public override void Simulate()
 		{
+			var controller = (Pawn as Worm).Controller as WormController;
+
 			// Grounded check
 			{
-				SetParam( "grounded", ((Pawn as Worm).Controller as WormController).IsGrounded );
+				SetParam( "grounded", controller.IsGrounded );
 			}
 
 			// Sliding animation
 			{
-				SetParam( "sliding", ((Pawn as Worm).Controller as WormController).IsSliding );
+				SetParam( "sliding", controller.IsSliding );
 			}
 
 			// Aim angle
