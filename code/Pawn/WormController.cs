@@ -51,7 +51,7 @@ namespace Grubs.Pawn
 
 			// Gravity / set our ground entity
 			if ( Host.IsServer )
-				CheckGroundEntity( ref mover );
+				CheckGrounded( ref mover );
 
 			// Calculate movement speed
 			var acceleration = IsGrounded ? Acceleration : AirAcceleration;
@@ -189,8 +189,6 @@ namespace Grubs.Pawn
 				return;
 
 			mover.Velocity = mover.Velocity.WithZ( Jump );
-			Pawn.GroundEntity = null;
-			GroundEntity = null;
 
 			AddEvent( "jump" );
 			TimeSinceJumped = 0;
@@ -198,11 +196,16 @@ namespace Grubs.Pawn
 
 		private void DoSlide( ref MoveHelper mover, TraceResult trace )
 		{
+			if ( !IsGrounded )
+				return;
+
 			if ( trace.Normal.Angle( Vector3.Up ) >= mover.MaxStandableAngle && IsGrounded )
 			{
-				// Don't slide uphill.
+				// Change our direction if we're trying to climb something and need to fall.
 				if ( Velocity.Normal.z > 0 )
-					return;
+				{
+					Rotation *= Rotation.From( 0, -180, 0 );
+				}
 
 				IsSliding = true;
 				mover.Velocity = (EyeRot.Forward.Normal + Vector3.Down) * 60;
@@ -216,7 +219,7 @@ namespace Grubs.Pawn
 		/// <summary>
 		/// Check if we're grounded, set ground entity.
 		/// </summary>
-		private void CheckGroundEntity( ref MoveHelper mover )
+		private void CheckGrounded( ref MoveHelper mover )
 		{
 			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WorldAndEntities().Ignore( Pawn ).Run();
 
