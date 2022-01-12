@@ -199,12 +199,13 @@ namespace Grubs.Pawn
 			if ( !IsGrounded )
 				return;
 
-			if ( trace.Normal.Angle( Vector3.Up ) >= mover.MaxStandableAngle && IsGrounded )
+			if ( trace.Normal.Angle( Vector3.Up ) >= mover.MaxStandableAngle )
 			{
 				// Change our direction if we're trying to climb something and need to fall.
 				if ( Velocity.Normal.z > 0 )
 				{
-					Rotation *= Rotation.From( 0, -180, 0 );
+					mover.Velocity = Vector3.Zero;
+					return;
 				}
 
 				IsSliding = true;
