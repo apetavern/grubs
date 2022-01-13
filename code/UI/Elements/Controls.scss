@@ -1,0 +1,38 @@
+﻿@import "/UI/_Globals.scss";
+
+controls {
+    position: absolute;
+    bottom: $safe-area-y;
+    padding: 16px 0;
+    left: 50%;
+    display: flex;
+    transform: translate( -50% );
+    opacity: 1;
+    transition: all 150ms ease;
+
+    &.hidden {
+        opacity: 0;
+        transform: translate( -50% 100px );
+    }
+}
+
+.control {
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+
+    image {
+        margin: 0 1px;
+    }
+}
+
+
+label {
+    font-size: 24px;
+    font-family: $font;
+    padding: 0px 20px;
+    text-shadow: 2px 2px 0px rgba( black, 0.75 );
+    text-align: center;
+    align-items: center;
+    color: white;
+}
