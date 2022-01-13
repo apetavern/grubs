@@ -237,7 +237,7 @@ namespace Grubs.Pawn
 				}
 
 				IsGrounded = true;
-				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
+				mover.Position = mover.Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 				FallStartPosZ = Position.z;
 
 				var worm = Pawn as Worm;
