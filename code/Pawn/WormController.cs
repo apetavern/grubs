@@ -255,9 +255,6 @@ namespace Grubs.Pawn
 				var worm = Pawn as Worm;
 				worm.IsResolved = false;
 				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
-
-				//if ( FallStartPosZ == -1 )
-				//FallStartPosZ = mover.Position.z;
 			}
 		}
 	}
