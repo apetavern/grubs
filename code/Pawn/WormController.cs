@@ -44,7 +44,7 @@ namespace Grubs.Pawn
 		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.WithTag( "Terrain" ).Size( 1.2f );
+			mover.Trace = mover.Trace.EntitiesOnly().Ignore( Pawn ).Size( 1.2f );
 			mover.MaxStandableAngle = 45.0f;
 
 			DoFriction( ref mover );
@@ -222,7 +222,7 @@ namespace Grubs.Pawn
 		/// </summary>
 		private void CheckGrounded( ref MoveHelper mover )
 		{
-			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WithTag( "Terrain" ).Run();
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).EntitiesOnly().Ignore( Pawn ).Run();
 
 			if ( groundTrace.Entity is not null )
 			{
