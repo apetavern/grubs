@@ -14,7 +14,7 @@ namespace Grubs.Pawn
 		public float AirAcceleration => 600f;
 		public float Acceleration => 810f;
 		public float Step => 12f;
-		public float Jump => 950f;
+		public float Jump => 450f;
 
 		// Jump properties
 		private TimeSince TimeSinceJumpReleased { get; set; }
@@ -29,7 +29,7 @@ namespace Grubs.Pawn
 		private RealTimeUntil TimeUntilMovementAllowed { get; set; }
 		private float FallStartPosZ { get; set; }
 		[Net, Predicted] public bool IsGrounded { get; set; }
-		public bool IsSliding { get; set; }
+		[Net, Predicted] public bool IsSliding { get; set; }
 
 		public override void Simulate()
 		{
@@ -231,14 +231,14 @@ namespace Grubs.Pawn
 					mover.Velocity = Vector3.Zero;
 
 					TimeUntilMovementAllowed = Math.Abs( FallStartPosZ - mover.Position.z ) * 0.01f;
-					FallStartPosZ = -1;
 
-					Log.Info( "hard fall?" );
-					// AddEvent( "hardfall" );
+					// Grounded overrides this before it can fire.
+					AddEvent( "hardfall" );
 				}
 
 				IsGrounded = true;
 				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
+				FallStartPosZ = Position.z;
 
 				var worm = Pawn as Worm;
 				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
@@ -246,6 +246,9 @@ namespace Grubs.Pawn
 			}
 			else
 			{
+				if ( Position.z > FallStartPosZ )
+					FallStartPosZ = Position.z;
+
 				IsGrounded = false;
 				mover.Velocity += Vector3.Down * 800 * Time.Delta;
 
@@ -253,8 +256,8 @@ namespace Grubs.Pawn
 				worm.IsResolved = false;
 				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
 
-				if ( FallStartPosZ == -1 )
-					FallStartPosZ = mover.Position.z;
+				//if ( FallStartPosZ == -1 )
+				//FallStartPosZ = mover.Position.z;
 			}
 		}
 	}
