@@ -232,7 +232,7 @@ namespace Grubs.Pawn
 
 					TimeUntilMovementAllowed = Math.Abs( FallStartPosZ - mover.Position.z ) * 0.01f;
 
-					if ( FallStartPosZ - mover.Position.z > 140 )
+					if ( FallStartPosZ - mover.Position.z > 280 )
 						AddEvent( "hardfall" );
 				}
 
