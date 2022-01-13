@@ -32,7 +32,7 @@ namespace Grubs.Pawn
 		{
 			CollisionGroup = CollisionGroup.Player;
 			AddCollisionLayer( CollisionLayer.Player );
-			SetupPhysicsFromCapsule( PhysicsMotionType.Keyframed, new Capsule() { CenterA = new Vector3( 0, 0, 6 ), CenterB = new Vector3( 0, 0, 20 ), Radius = 12f } );
+			SetupPhysicsFromCapsule( PhysicsMotionType.Keyframed, new Capsule() { CenterA = new Vector3( 0, 0, 0 ), CenterB = new Vector3( 0, 0, 20 ), Radius = 12f } );
 			MoveType = MoveType.MOVETYPE_WALK;
 			EnableHitboxes = true;
 		}
