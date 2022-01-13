@@ -30,12 +30,12 @@ namespace Grubs.States
 
 		protected void PickNextPlayer()
 		{
-			RotatePlayers();
-
 			Turn = new Turn();
 			Turn?.InitFrom( StateHandler.Instance?.Players[0], this );
 
 			Turn?.Start();
+
+			RotatePlayers();
 		}
 
 		public override void OnTick()
