@@ -45,7 +45,7 @@ namespace Grubs.Pawn
 		{
 			var mover = new MoveHelper( Position, Velocity );
 			mover.Trace = mover.Trace.WithTag( "Terrain" ).Size( 1.2f );
-			mover.MaxStandableAngle = 35.0f;
+			mover.MaxStandableAngle = 45.0f;
 
 			DoFriction( ref mover );
 
@@ -232,8 +232,8 @@ namespace Grubs.Pawn
 
 					TimeUntilMovementAllowed = Math.Abs( FallStartPosZ - mover.Position.z ) * 0.01f;
 
-					// Grounded overrides this before it can fire.
-					AddEvent( "hardfall" );
+					if ( FallStartPosZ - mover.Position.z > 140 )
+						AddEvent( "hardfall" );
 				}
 
 				IsGrounded = true;
