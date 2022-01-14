@@ -1,6 +1,15 @@
 {
-	"sharedassets": "*.*",
-	"type": "game",
-	"ident": "apetavern.grubs",
-	"rootnamespace": "Grubs"
+  "SharedAssets": "*.*",
+  "Title": "Grubs",
+  "Type": "game",
+  "Org": "apetavern",
+  "Ident": "grubs",
+  "FullIdent": "apetavern.grubs",
+  "Schema": 1,
+  "NeedsUpgrade": false,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "HasCode": true,
+  "CodePath": "code",
+  "RootNamespace": "Grubs"
 }

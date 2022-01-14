@@ -11,13 +11,14 @@ namespace Grubs.States
 		{
 			Log.Info( "Generate terrain here" );
 
-			Terrain.Terrain.Generate();
 
 			base.OnStart();
 		}
 
 		protected override void OnFinish()
 		{
+			Terrain.Terrain.Generate();
+
 			foreach ( var player in StateHandler.Instance?.Players )
 				player.CreateWorms( player.Client );
 
