@@ -27,7 +27,7 @@ namespace Grubs.Pawn
 			// Calculate incline
 			{
 				// Trace down to ground, then work out the angle based on where the player's facing
-				var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).WithTag( "Terrain" ).Ignore( Pawn ).Run();
+				var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).Ignore( Pawn ).Run();
 				float incline = Pawn.Rotation.Forward.Angle( tr.Normal ) - 90f;
 
 				// TODO: How do we handle offsetting the player's model from their bbox?

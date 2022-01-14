@@ -44,8 +44,8 @@ namespace Grubs.Pawn
 		private void Move( bool inputEnabled )
 		{
 			var mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.WithTag( "Terrain" ).Size( 1.2f );
-			mover.MaxStandableAngle = 35.0f;
+			mover.Trace = mover.Trace.EntitiesOnly().Ignore( Pawn ).Size( 1.2f );
+			mover.MaxStandableAngle = 45.0f;
 
 			DoFriction( ref mover );
 
@@ -222,7 +222,7 @@ namespace Grubs.Pawn
 		/// </summary>
 		private void CheckGrounded( ref MoveHelper mover )
 		{
-			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).WithTag( "Terrain" ).Run();
+			var groundTrace = Trace.Ray( mover.Position, mover.Position + Vector3.Down * 2 ).EntitiesOnly().Ignore( Pawn ).Run();
 
 			if ( groundTrace.Entity is not null )
 			{
@@ -232,12 +232,12 @@ namespace Grubs.Pawn
 
 					TimeUntilMovementAllowed = Math.Abs( FallStartPosZ - mover.Position.z ) * 0.01f;
 
-					// Grounded overrides this before it can fire.
-					AddEvent( "hardfall" );
+					if ( FallStartPosZ - mover.Position.z > 280 )
+						AddEvent( "hardfall" );
 				}
 
 				IsGrounded = true;
-				Position = Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
+				mover.Position = mover.Position.WithZ( mover.Position.z.Approach( groundTrace.EndPos.z, Time.Delta ) );
 				FallStartPosZ = Position.z;
 
 				var worm = Pawn as Worm;
@@ -255,9 +255,6 @@ namespace Grubs.Pawn
 				var worm = Pawn as Worm;
 				worm.IsResolved = false;
 				worm.EquippedWeapon?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
-
-				//if ( FallStartPosZ == -1 )
-				//FallStartPosZ = mover.Position.z;
 			}
 		}
 	}

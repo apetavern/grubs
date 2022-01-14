@@ -1,8 +1,9 @@
 using Sandbox;
-using Grubs.States;
-using Grubs.UI;
 using Grubs.Pawn;
+using Grubs.States;
 using Grubs.Terrain;
+using Grubs.UI;
+using Grubs.Utils;
 
 namespace Grubs
 {
@@ -15,6 +16,7 @@ namespace Grubs
 		{
 			Terrain.Terrain.Initialize();
 			Quadtree.Initialize();
+			AssetPrecache.DoPrecache();
 
 			if ( IsServer )
 			{
