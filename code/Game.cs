@@ -19,10 +19,7 @@ namespace Grubs
 			AssetPrecache.DoPrecache();
 
 			if ( IsServer )
-			{
 				StateHandler = new();
-				_ = new HudEntity();
-			}
 		}
 
 		public override void ClientJoined( Client cl )

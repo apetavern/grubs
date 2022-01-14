@@ -4,17 +4,17 @@ using Grubs.UI.World;
 
 namespace Grubs.UI
 {
-	public partial class HudEntity : Sandbox.HudEntity<RootPanel>
+	public partial class PlayingHudEntity : Sandbox.HudEntity<RootPanel>
 	{
-		public static HudEntity Instance { get; set; }
+		public static PlayingHudEntity Instance { get; set; }
 		private bool ShouldReceiveInput { get; set; } = false;
 
-		public HudEntity()
+		public PlayingHudEntity()
 		{
 			if ( IsClient )
 			{
 				Instance = this;
-				RootPanel.SetTemplate( "/UI/HudEntity.html" );
+				RootPanel.SetTemplate( "/UI/PlayingHudEntity.html" );
 
 				_ = new WormNametags();
 			}
