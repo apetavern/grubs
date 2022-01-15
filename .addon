@@ -4,11 +4,9 @@
   "Type": "game",
   "Org": "apetavern",
   "Ident": "grubs",
-  "FullIdent": "apetavern.grubs",
-  "Schema": 1,
-  "NeedsUpgrade": false,
+  "Schema": 0,
   "HasAssets": true,
-  "AssetsPath": "",
+  "AssetsPath": null,
   "HasCode": true,
   "CodePath": "code",
   "RootNamespace": "Grubs"
