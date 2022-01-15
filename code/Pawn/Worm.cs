@@ -153,7 +153,7 @@ namespace Grubs.Pawn
 			switch ( info.Flags )
 			{
 				case DamageFlags.Blast:
-					ApplyAbsoluteImpulse( direction * (distanceFromOrigin * 40) + (Vector3.Up * 1000) );
+					ApplyAbsoluteImpulse( direction * (distanceFromOrigin * 10) + (Vector3.Up * 10) );
 					break;
 				case DamageFlags.Bullet:
 					ApplyAbsoluteImpulse( (Vector3.Up * 600) );

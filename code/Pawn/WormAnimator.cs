@@ -15,7 +15,7 @@ namespace Grubs.Pawn
 
 			// Sliding animation
 			{
-				SetParam( "sliding", controller.IsSliding );
+				//SetParam( "sliding", controller.IsSliding );
 			}
 
 			// Aim angle
