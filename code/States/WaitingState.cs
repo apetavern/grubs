@@ -1,5 +1,4 @@
 ﻿using Grubs.Utils;
-using Grubs.Terrain;
 
 namespace Grubs.States
 {
@@ -9,14 +8,12 @@ namespace Grubs.States
 
 		protected override void OnStart()
 		{
-			Log.Info( "Generate terrain here" );
-
-
 			base.OnStart();
 		}
 
 		protected override void OnFinish()
 		{
+			// For now, generate terrain when we are ending WaitingState.
 			Terrain.Terrain.Generate();
 
 			foreach ( var player in StateHandler.Instance?.Players )
