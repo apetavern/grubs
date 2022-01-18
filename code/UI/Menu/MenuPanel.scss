@@ -1,0 +1,75 @@
+﻿@import "/UI/_Globals.scss";
+
+MenuPanel {
+    width: 70%;
+    max-height: 80%;
+    font-family: $font;
+    background-color: #4594f5;
+    padding-left: $safe-area-x;
+    border-radius: 1%;
+    padding: 25px 50px 25px 50px;
+    flex-direction: column;
+}
+
+.title {
+    color: white;
+    font-size: 72px;
+    text-shadow: 5px 5px 5px 5px black;
+    padding-bottom: 18px;
+}
+
+.menu-holder {
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    > panel {
+        border-width: 3px;
+        border-color: #81b7f9;
+        border-radius: 2%;
+        width: 48%;
+        margin: 1%;
+        height: 46%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    > .player-list {
+        height: 95.7%;
+    }
+
+    label {
+        font-size: 24px;
+    }
+}
+
+
+/*
+.player-list {
+    width: 45%;
+    height: 50%;
+    border-width: 3px;
+    border-color: #81b7f9;
+    border-radius: 2%;
+    margin-bottom: 18px;
+    margin-right: 25px;
+}
+
+.menu-chatbox {
+    width: 45%;
+    height: 35%;
+    border-width: 3px;
+    border-color: #81b7f9;
+    border-radius: 2%;
+}
+
+.map-scene {
+    width: 55%;
+    height: 87%;
+    border-width: 3px;
+    border-color: #81b7f9;
+    border-radius: 2%;
+    margin-top: 100px;
+}
+*/
