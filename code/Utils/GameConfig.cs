@@ -10,7 +10,7 @@ namespace Grubs.Utils
 		public static int WormCount { get; set; } = 2;
 		public static int TurnDurationSeconds { get; set; } = 45;
 		public static int TurnTimeRemainingAfterFired { get; set; } = 5;
-		public static int MinimumPlayersToStart { get; set; } = 2;
+		public static int MinimumPlayersToStart { get; set; } = 10;
 
 		// Used to spawn a random crate using the library system
 		// Library name, chance of spawning (0-1)

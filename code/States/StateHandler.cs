@@ -8,6 +8,7 @@ namespace Grubs.States
 	public partial class StateHandler : BaseNetworkable
 	{
 		[Net] public BaseState State { get; set; } = new WaitingState();
+		[Net] public int LobbyCount { get; set; }
 		public List<Pawn.Player> Players { get; set; } = new();
 		public static StateHandler Instance { get; set; }
 		public HudEntity<RootPanel> Hud { get; set; }
@@ -70,6 +71,8 @@ namespace Grubs.States
 		public static void Tick()
 		{
 			Instance?.State?.OnTick();
+
+			Instance.LobbyCount = Global.Lobby.MemberCount;
 		}
 	}
 }
