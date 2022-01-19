@@ -18,25 +18,32 @@ MenuPanel {
     padding-bottom: 18px;
 }
 
-.menu-holder {
+.menu-holder-holder {
     width: 100%;
     height: 100%;
+    flex-direction: row;
+}
+
+.menu-holder {
+    width: 50%;
+    flex-grow: 1;
     flex-wrap: wrap;
     flex-direction: column;
+    margin: 24px;
 
     > panel {
         border-width: 3px;
         border-color: #81b7f9;
         border-radius: 2%;
-        width: 48%;
-        margin: 1%;
-        height: 46%;
+        width: 100%;
+        margin: 12px;
+        flex-grow: 1;
         justify-content: center;
         align-items: center;
     }
 
     > .player-list {
-        height: 95.7%;
+        height: 100%;
     }
 
     label {
