@@ -6,18 +6,19 @@ NavBar {
     background-image: linear-gradient(to right, $menu-dark, $menu-light);
     font-family: $font;
     align-items: center;
-    padding-left: 32px;
+    padding-right: $safe-area-x;
 }
 
 .title {
     font-size: 72px;
     font-color: white;
     text-shadow: 5px 5px 10px black;
+    margin-left: $safe-area-x;
 }
 
 .menu-buttons {
     margin-left: auto;
-    padding-right: 64px;
+    padding-left: 64px;
 }
 
 .menu-button {
