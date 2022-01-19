@@ -1,0 +1,26 @@
+﻿@import "/UI/_Globals.scss";
+
+StartButton {
+    width: 500px;
+    height: 150px;
+    margin-top: 25px;
+    margin-left: $safe-area-x;
+    background-color: $menu-accent;
+    box-shadow: 0 0 50px 7px rgba(#000, 0.8);
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    cursor: pointer;
+    border-width: 10px;
+    border-color: $menu-dark;
+
+    > label {
+        font-size: 92px;
+        color: $menu-dark;
+        font-family: $font;
+        text-shadow: 2px 2px 4px $menu-dark;
+        margin: 8px;
+        margin-left: 16px;
+        opacity: 1;
+    }
+}
