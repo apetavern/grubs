@@ -12,7 +12,6 @@ NavBar {
 .title {
     font-size: 72px;
     font-color: white;
-    text-shadow: 5px 5px 10px black;
     margin-left: $safe-area-x;
 }
 
@@ -24,7 +23,6 @@ NavBar {
 .menu-button {
     font-size: 72px;
     font-color: white;
-    text-shadow: 5px 5px 10px black;
     margin-left: 48px;
 
     &:hover {

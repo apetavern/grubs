@@ -11,16 +11,15 @@ StartButton {
     align-items: center;
     border-radius: 3px;
     cursor: pointer;
-    border-width: 10px;
-    border-color: $menu-dark;
+    transform: skewX(-5%);
 
     > label {
         font-size: 92px;
-        color: $menu-dark;
+        color: black;
         font-family: $font;
-        text-shadow: 2px 2px 4px $menu-dark;
         margin: 8px;
         margin-left: 16px;
         opacity: 1;
+        transform: skewX(5%);
     }
 }
