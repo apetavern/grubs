@@ -1,0 +1,10 @@
+﻿PlayerList {
+    flex-direction: column;
+    overflow: scroll;
+    width: 100%;
+    margin: 12px;
+
+    > label {
+        font-size: 12px;
+    }
+}

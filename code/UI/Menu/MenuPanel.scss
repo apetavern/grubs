@@ -5,7 +5,6 @@ MenuPanel {
     max-height: 80%;
     font-family: $font;
     background-color: #4594f5;
-    padding-left: $safe-area-x;
     border-radius: 1%;
     padding: 25px 50px 25px 50px;
     flex-direction: column;
@@ -16,6 +15,7 @@ MenuPanel {
     font-size: 72px;
     text-shadow: 5px 5px 5px 5px black;
     padding-bottom: 18px;
+    margin-left: 18px;
 }
 
 .menu-holder-holder {
@@ -25,21 +25,18 @@ MenuPanel {
 }
 
 .menu-holder {
-    width: 50%;
     flex-grow: 1;
     flex-wrap: wrap;
     flex-direction: column;
-    margin: 24px;
+    margin: 12px;
 
     > panel {
         border-width: 3px;
         border-color: #81b7f9;
         border-radius: 2%;
         width: 100%;
-        margin: 12px;
         flex-grow: 1;
-        justify-content: center;
-        align-items: center;
+        margin: 10px 0px 10px 0px;
     }
 
     > .player-list {
