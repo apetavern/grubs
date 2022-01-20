@@ -11,9 +11,22 @@ MenuPanel {
 
 .menu-holder {
     flex-direction: column;
+    min-width: 400px;
 
     &:outro {
         transform: translateX(-900px);
         transition: all 0.2s ease-out;
+    }
+
+    .worm {
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+
+        ScenePanel {
+            border-radius: 20px;
+        }
     }
 }

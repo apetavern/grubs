@@ -8,6 +8,7 @@ namespace Grubs.UI.Menu
 	{
 		public NavBar NavBar { get; set; }
 		public Panel WindowPanel { get; set; }
+		public WormPreviewScene WormPreviewScene { get; set; }
 		private Windows ActiveWindow { get; set; } = Windows.PLAY;
 
 		private enum Windows
@@ -22,6 +23,18 @@ namespace Grubs.UI.Menu
 			DefineMenuButtonListeners();
 		}
 
+		public override void OnHotloaded()
+		{
+			base.OnHotloaded();
+
+			WormPreviewScene.Build();
+		}
+
+		protected override void PostTemplateApplied()
+		{
+			WormPreviewScene.Build();
+		}
+
 		private void DefineMenuButtonListeners()
 		{
 			NavBar.PlayButton.AddEventListener( "onclick", () =>
@@ -34,6 +47,9 @@ namespace Grubs.UI.Menu
 				Panel menuHolder = WindowPanel.Add.Panel( "menu-holder" );
 				menuHolder.AddChild( new PlayerList() );
 				menuHolder.AddChild( new StartButton() );
+				Panel sceneHolder = WindowPanel.Add.Panel( "menu-holder" );
+				sceneHolder.AddChild( WormPreviewScene );
+				WormPreviewScene.Build();
 
 			} );
 
