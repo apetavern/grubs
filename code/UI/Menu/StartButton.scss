@@ -13,6 +13,11 @@ StartButton {
     cursor: pointer;
     transform: skewX(-5%);
 
+    &.disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
     > label {
         font-size: 92px;
         color: black;
