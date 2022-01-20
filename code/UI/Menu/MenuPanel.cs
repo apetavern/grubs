@@ -2,13 +2,65 @@
 
 namespace Grubs.UI.Menu
 {
+
 	[UseTemplate]
 	public partial class MenuPanel : Panel
 	{
+		public NavBar NavBar { get; set; }
+		public Panel WindowPanel { get; set; }
+		private Windows ActiveWindow { get; set; } = Windows.PLAY;
+
+		private enum Windows
+		{
+			PLAY,
+			CUSTOMIZE,
+			OPTIONS
+		};
 
 		public MenuPanel()
 		{
-			StyleSheet.Load( "/UI/Menu/MenuPanel.scss" );
+			DefineMenuButtonListeners();
+		}
+
+		private void DefineMenuButtonListeners()
+		{
+			NavBar.PlayButton.AddEventListener( "onclick", () =>
+			{
+				if ( ActiveWindow == Windows.PLAY ) return;
+
+				ActiveWindow = Windows.PLAY;
+				ClearWindowPanel();
+
+				Panel menuHolder = WindowPanel.Add.Panel( "menu-holder" );
+				menuHolder.AddChild( new PlayerList() );
+				menuHolder.AddChild( new StartButton() );
+
+			} );
+
+			NavBar.CustomizeButton.AddEventListener( "onclick", () =>
+			{
+				if ( ActiveWindow == Windows.CUSTOMIZE ) return;
+
+				ActiveWindow = Windows.CUSTOMIZE;
+				ClearWindowPanel();
+
+			} );
+
+			NavBar.OptionsButton.AddEventListener( "onclick", () =>
+			{
+				if ( ActiveWindow == Windows.OPTIONS ) return;
+
+				ActiveWindow = Windows.OPTIONS;
+				ClearWindowPanel();
+			} );
+		}
+
+		private void ClearWindowPanel()
+		{
+			foreach ( var panel in WindowPanel.Children )
+			{
+				panel.Delete();
+			}
 		}
 	}
 }

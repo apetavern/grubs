@@ -5,3 +5,15 @@ MenuPanel {
     width: 100%;
     background-image: url( /textures/ui/cityscape.png );
 }
+
+.menu-window {
+}
+
+.menu-holder {
+    flex-direction: column;
+
+    &:outro {
+        transform: translateX(-900px);
+        transition: all 0.2s ease-out;
+    }
+}

@@ -1,8 +1,8 @@
 ﻿<link href="/UI/Menu/MenuPanel.scss" rel="stylesheet">
 
 <div>
-    <navbar></navbar>
-    <div class="menu-window">
+    <navbar @ref="NavBar"></navbar>
+    <div @ref="WindowPanel" class="menu-window">
         <div class="menu-holder">
             <playerlist></playerlist>
             <startbutton></startbutton>

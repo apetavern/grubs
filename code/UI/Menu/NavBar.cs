@@ -11,8 +11,6 @@ namespace Grubs.UI.Menu
 
 		public NavBar()
 		{
-			StyleSheet.Load( "/UI/Menu/Navbar.scss" );
-
 			// Somebody tell me how to do this better.
 			PlayButton.AddEventListener( "onclick", () =>
 			{
