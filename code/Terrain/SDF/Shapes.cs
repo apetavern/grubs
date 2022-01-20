@@ -83,4 +83,27 @@ namespace Grubs.Terrain
 		}
 
 	}
+
+	public partial class Perlin : SDF
+	{
+		[Net] public float Scale { get; set; }
+		[Net] public float Seed { get; set; }
+
+		public Perlin() { }
+
+		public Perlin( float scale, float seed, MergeType type = MergeType.Add )
+		{
+			Scale = scale;
+			Seed = seed;
+			Type = type;
+		}
+
+		private const float minSize = Quadtree.Extents >> (Quadtree.Levels - 2);
+
+		public override float GetDistance( Vector2 point )
+		{
+			float noise = Noise.Perlin( point.x * Scale, point.y * Scale, Seed ) * minSize;
+			return noise;
+		}
+	}
 }

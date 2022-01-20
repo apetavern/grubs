@@ -82,7 +82,7 @@ namespace Grubs.Terrain
 					step.y = stepSize * y;
 					Vector2 pos = start + step;
 
-					float value = MathSDF.Operate( Quadtree.GridValues[x, y], sdf.GetDistance( pos ), sdf.Type );
+					float value = MathSDF.Operate( Quadtree.GridValues[x, y], sdf.FullDistance( pos ), sdf.Type );
 
 					Quadtree.GridValues[x, y] = value;
 				}
@@ -94,7 +94,7 @@ namespace Grubs.Terrain
 			if ( IsRoot )
 				UpdateGrid( sdf );
 
-			float centerSDF = sdf.GetDistance( Center );
+			float centerSDF = sdf.FullDistance( Center );
 
 			CenterValue = MathSDF.Operate( CenterValue, centerSDF, sdf.Type );
 
@@ -108,7 +108,7 @@ namespace Grubs.Terrain
 			{
 				for ( int i = 0; i < 4; i++ )
 				{
-					float cornerSDF = sdf.GetDistance( Center + Quadtree.CellOffsets[i] * Extents );
+					float cornerSDF = sdf.FullDistance( Center + Quadtree.CellOffsets[i] * Extents );
 					float newValue = MathSDF.Operate( CornerValues[i], cornerSDF, sdf.Type );
 
 					if ( !newValues && newValue != CornerValues[i] )
