@@ -13,7 +13,7 @@ MenuPanel {
     min-width: 400px;
 
     &:outro {
-        transform: translateX(-900px);
+        transform: translateX(-2000px);
         transition: all 0.2s ease-out;
     }
 
@@ -28,4 +28,10 @@ MenuPanel {
             border-radius: 20px;
         }
     }
+}
+
+WorldPreviewScene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
