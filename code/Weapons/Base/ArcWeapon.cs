@@ -10,8 +10,8 @@ namespace Grubs.Weapons
 		// Weapon settings
 		public override string WeaponName => "";
 		public override string ModelPath => "";
-		public virtual string ProjectileModel => "";
-		public override int MaxQuantityFired { get; set; } = 100;
+		public virtual string ProjectileModel => "models/weapons/shell/shell.vmdl";
+		public override int MaxQuantityFired { get; set; } = 1;
 		public override HoldPose HoldPose => HoldPose.Bazooka;
 
 		// Weapon properties
@@ -69,7 +69,7 @@ namespace Grubs.Weapons
 			// Specific target notes, will remove later once we have a proper usage for it.
 			// var trace = new ArcTrace( Parent.EyePos + Parent.EyeRot.Forward.Normal ).RunTo( Vector3.Zero );
 
-			new Projectile().MoveAlongTrace( trace ).WithModel( "models/weapons/shell/shell.vmdl" );
+			new Projectile().MoveAlongTrace( trace ).WithModel( ProjectileModel );
 		}
 	}
 }
