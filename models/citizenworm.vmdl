@@ -312,7 +312,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/citizenworm.fbx"
+						source_filename = "models/character_animations/citizenworm_eyesclosed.fbx"
 						start_frame = -1
 						end_frame = 1
 						framerate = 10.0
@@ -760,6 +760,126 @@
 						]
 						master_morph_weight = -1.0
 						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "head_light"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "eye_L"
+								weight = 0.0
+							},
+							{
+								bone = "eye_R"
+								weight = 0.0
+							},
+							{
+								bone = "face_lid_lower_L"
+								weight = 0.0
+							},
+							{
+								bone = "face_lid_lower_R"
+								weight = 0.0
+							},
+							{
+								bone = "face_lid_upper_L"
+								weight = 0.0
+							},
+							{
+								bone = "face_lid_upper_R"
+								weight = 0.0
+							},
+							{
+								bone = "head"
+								weight = 0.146739
+							},
+							{
+								bone = "neck_0"
+								weight = 0.23913
+							},
+							{
+								bone = "spine_0"
+								weight = 0.0
+							},
+							{
+								bone = "spine_1"
+								weight = 0.0
+							},
+							{
+								bone = "spine_2"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "LookAtChain"
+						name = "head"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "head"
+									weight = 0.803
+								},
+							]
+						}
+					},
+					{
+						_class = "LookAtChain"
+						name = "L_eye"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "eye_L"
+									weight = 1.0
+								},
+							]
+						}
+					},
+					{
+						_class = "LookAtChain"
+						name = "R_eye"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "eye_R"
+									weight = 1.0
+								},
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "lookaim"
+						parent_bone = "head"
+						relative_origin = [ 7.0, 6.0, 0.0 ]
+						relative_angles = [ 0.0, 90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
 					},
 				]
 			},
