@@ -167,8 +167,7 @@ namespace Grubs.Pawn
 				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
 
 				// Rotate EyeRot by our offset
-				var targetAxis = LookPos.Normal.x < 0 ? EyeRot.Left : EyeRot.Right;
-				EyeRot = EyeRot.RotateAroundAxis( targetAxis, LookRotOffset );
+				EyeRot = EyeRot.RotateAroundAxis( EyeRot.Left, LookRotOffset );
 			}
 
 			// Recalculate the grubs rotation if we're moving.
