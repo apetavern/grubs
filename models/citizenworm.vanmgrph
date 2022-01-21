@@ -3410,7 +3410,7 @@
 			{
 				_class = "CLookAtAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 1885.309204, -37.841751 ]
+				m_vecPosition = [ 1904.0, -16.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1516773827
