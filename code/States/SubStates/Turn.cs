@@ -55,8 +55,7 @@ namespace Grubs.States.SubStates
 
 		protected override void OnTimeUp()
 		{
-			if ( !GameConfig.IsDevMode )
-				OnFinish();
+			OnFinish();
 		}
 
 		protected override async void OnFinish()
