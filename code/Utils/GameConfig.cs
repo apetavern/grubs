@@ -42,7 +42,7 @@ namespace Grubs.Utils
 		public static Dictionary<string, int> LoadoutDefaults = new()
 		{
 			{ "BaseballBat", -1 },
-			{ "Bazooka", -1 },
+			{ "Bazooka", 3 },
 			{ "Grenade", -1 },
 			{ "Railgun", -1 },
 			{ "Shotgun", -1 },
