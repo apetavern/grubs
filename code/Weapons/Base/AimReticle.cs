@@ -41,8 +41,8 @@ namespace Grubs.Weapons
 		{
 			Render.SetLighting( obj );
 
-			var startPos = Position.WithY( -32 );
-			var endPos = (Position + (Direction * 30)).WithY( -32 );
+			var startPos = Position.WithY( -35 );
+			var endPos = (Position + (Direction * 30)).WithY( -35 );
 			var size = Vector3.Cross( Direction, Vector3.Right ) * 15f;
 
 			var color = Color.White;
