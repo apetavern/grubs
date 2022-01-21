@@ -39,7 +39,7 @@ namespace Grubs.UI.Menu
 
 			if ( HasMouseCapture )
 			{
-				/*renderSceneAngles.pitch += Mouse.Delta.y;*/
+				renderSceneAngles.pitch += Mouse.Delta.y;
 				renderSceneAngles.yaw -= Mouse.Delta.x;
 				renderSceneAngles.pitch = 0;
 			}

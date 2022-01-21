@@ -1,0 +1,41 @@
+﻿@import "/UI/_Globals.scss";
+
+CosmeticPicker {
+    width: 50%;
+    height: 40%;
+    margin-top: $safe-area-y;
+    margin-left: $safe-area-x;
+    background-color: rgba($menu-dark, 0.6);
+    box-shadow: 0 0 50px 7px rgba(#000, 0.8);
+    flex-direction: column;
+    align-self: baseline;
+    justify-content: space-around;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+CosmeticCategory {
+    height: 20%;
+    width: 100%;
+    padding-left: 24px;
+    margin-left: 12px;
+
+    .type-label {
+        font-family: $font;
+        font-size: 64px;
+        color: white;
+        text-transform: uppercase;
+
+        &.Active {
+            color: black;
+        }
+    }
+
+    &.Active {
+        background-color: rgba($menu-accent, 0.8);
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

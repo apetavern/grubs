@@ -11,11 +11,10 @@ MenuPanel {
 .menu-holder {
     flex-direction: column;
     min-width: 400px;
-
-    &:outro {
+    /*&:outro {
         transform: translateX(-2000px);
         transition: all 0.2s ease-out;
-    }
+    }*/
 
     .worm {
         flex-grow: 1;

@@ -60,6 +60,8 @@ namespace Grubs.UI.Menu
 				ActiveWindow = Windows.CUSTOMIZE;
 				ClearWindowPanel();
 
+				WindowPanel.AddChild( new CustomizePanel() );
+
 			} );
 
 			NavBar.OptionsButton.AddEventListener( "onclick", () =>
