@@ -5,7 +5,7 @@ namespace Grubs.Weapons
 {
 	public partial class PowerArrow : RenderEntity
 	{
-		public Material Material = Material.Load( "materials/minigolf.arrow.vmat" );
+		public Material Material = Material.Load( "materials/arrow.vmat" );
 
 		public Vector3 Direction = Vector3.Zero;
 		public float Power = 0.0f;
