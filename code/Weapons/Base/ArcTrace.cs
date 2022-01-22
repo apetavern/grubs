@@ -18,10 +18,12 @@ namespace Grubs.Weapons
 		public Vector3 EndPos { get; set; }
 		private int SegmentCount { get; set; } = 80;
 		public List<ArcSegment> Segments { get; set; } = new();
+		private Entity Owner { get; set; }
 
-		public ArcTrace( Vector3 startPos )
+		public ArcTrace( Entity fromGrub, Vector3 startPos )
 		{
 			StartPos = startPos;
+			Owner = fromGrub;
 		}
 
 		/// <summary>
@@ -42,7 +44,7 @@ namespace Grubs.Weapons
 				from = position;
 				segment.EndPos = from;
 
-				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Radius( 2f ).Run();
+				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Ignore( Owner ).Radius( 2f ).Run();
 
 				if ( tr.Hit )
 				{
@@ -63,7 +65,7 @@ namespace Grubs.Weapons
 		/// <summary>
 		/// Run a trace specifying the direction, force and wind force.
 		/// </summary>
-		public List<ArcSegment> RunTowards( Worm fromWorm, Vector3 direction, float force, float windForceX )
+		public List<ArcSegment> RunTowards( Vector3 direction, float force, float windForceX )
 		{
 			float epsilon = 0.001f;
 
@@ -81,7 +83,7 @@ namespace Grubs.Weapons
 
 				segment.EndPos = position;
 
-				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Ignore( fromWorm ).Radius( 2f ).Run();
+				var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Ignore( Owner ).Radius( 2f ).Run();
 
 				if ( tr.Hit )
 				{

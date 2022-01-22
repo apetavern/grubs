@@ -20,10 +20,14 @@ namespace Grubs.Weapons
 		protected override void Fire()
 		{
 			Log.Info( "Placed" );
+
+			var trace = new ArcTrace( Parent, Parent.EyePos + Parent.EyeRot.Forward.Normal ).RunTowards( Parent.EyeRot.Forward.Normal, 3, 0 );
+			ArcTrace.Draw( trace );
+			new Projectile().WithModel( ModelPath ).WithCollisionExplosionDelay( 5 ).MoveAlongTrace( trace );
 		}
 
 		[ClientRpc]
-		public virtual void OnFireEffects()
+		public override void OnFireEffects()
 		{
 			// Do something?
 		}

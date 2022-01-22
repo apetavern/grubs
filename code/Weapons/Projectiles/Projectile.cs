@@ -14,10 +14,17 @@ namespace Grubs.Weapons
 		private float Speed { get; set; }
 		private List<ArcSegment> Segments { get; set; }
 		private Particles TrailParticles { get; set; }
+		private int CollisionExplosionDelaySeconds { get; set; }
 
 		public Projectile WithModel( string modelPath )
 		{
 			SetModel( modelPath );
+			return this;
+		}
+
+		public Projectile WithCollisionExplosionDelay( int secondsDelay )
+		{
+			CollisionExplosionDelaySeconds = secondsDelay;
 			return this;
 		}
 
@@ -81,13 +88,29 @@ namespace Grubs.Weapons
 			if ( !IsServer )
 				return;
 
+			if ( CollisionExplosionDelaySeconds > 0 )
+			{
+				ExplodeAfterSeconds( CollisionExplosionDelaySeconds );
+				return;
+			}
+
+			Explode();
+		}
+
+		private async void ExplodeAfterSeconds( int seconds )
+		{
+			await GameTask.DelaySeconds( seconds );
+			Explode();
+		}
+
+		private void Explode()
+		{
 			DoBlastWithRadius();
 			OnCollisionEffects();
-
 			Delete();
 		}
 
-		public void DoBlastWithRadius( float radius = 100f )
+		private void DoBlastWithRadius( float radius = 100f )
 		{
 			var effectedEntities = Physics.GetEntitiesInSphere( Position, radius ).OfType<Worm>();
 

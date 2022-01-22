@@ -46,7 +46,7 @@ namespace Grubs.Utils
 			{ "Grenade", -1 },
 			{ "Railgun", -1 },
 			{ "Shotgun", -1 },
-			{ "Dynamite", 1 },
+			{ "Dynamite", -1 },
 			{ "Uzi", -1 },
 			{ "Boomer", -1 },
 		};
