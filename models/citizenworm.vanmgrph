@@ -1257,7 +1257,7 @@
 							m_id = 235163556
 						}
 						m_name = "scratch"
-						m_weight = 0.1
+						m_weight = 0.15
 						m_blendTime = 0.2
 					},
 				]
