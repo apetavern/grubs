@@ -28,11 +28,11 @@
 						[
 							{
 								from = "phong1.vmat"
-								to = "models/weapons/sixshooter/materials/sixshooter.vmat"
+								to = "models/weapons/revolver/materials/sixshooter.vmat"
 							},
 							{
 								from = "phong3.vmat"
-								to = "models/weapons/sixshooter/materials/sixshooter.vmat"
+								to = "models/weapons/revolver/materials/sixshooter.vmat"
 							},
 						]
 						use_global_default = false
@@ -61,7 +61,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/weapons/sixshooter/sixshooter.fbx"
+						filename = "models/weapons/revolver/revolver.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0

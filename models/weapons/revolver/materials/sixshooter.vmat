@@ -15,7 +15,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/weapons/sixshooter/materials/sixshooter_color.psd"
+	TextureColor "models/weapons/revolver/materials/sixshooter_color.psd"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -34,7 +34,7 @@ Layer0
 	TextureNormal "materials/default/default_normal.tga"
 
 	//---- Roughness ----
-	TextureRoughness "models/weapons/sixshooter/materials/sixshooter_rough.psd"
+	TextureRoughness "models/weapons/revolver/materials/sixshooter_rough.psd"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
