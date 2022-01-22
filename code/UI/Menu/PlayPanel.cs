@@ -3,10 +3,9 @@
 namespace Grubs.UI.Menu
 {
 	[UseTemplate]
-	public partial class CustomizePanel : Panel
+	public partial class PlayPanel : Panel
 	{
-
-		public CustomizePanel()
+		public PlayPanel()
 		{
 
 		}
