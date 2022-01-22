@@ -68,5 +68,19 @@ namespace Grubs.Weapons
 
 			new Projectile().MoveAlongTrace( trace ).WithModel( ProjectileModel );
 		}
+
+		public override void ActiveEnd( Entity ent, bool dropped )
+		{
+			ActiveEndClient( To.Single( Parent ) );
+
+			base.ActiveEnd( ent, dropped );
+		}
+
+		[ClientRpc]
+		public void ActiveEndClient()
+		{
+			PowerArrow.Delete();
+			AimReticle.Delete();
+		}
 	}
 }
