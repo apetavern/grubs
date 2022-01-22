@@ -22,14 +22,15 @@ namespace Grubs.UI
 			{
 				Reset();
 
-				var inventory = Local.Pawn.Inventory as Inventory;
+				var inventory = (Local.Pawn as Pawn.Player).PlayerInventory;
+
 				if ( inventory == null )
 					return this;
 
-				if ( inventory.GetSlot( weaponIndex ) is not Weapon weapon )
+				if ( inventory.Items[weaponIndex] is not Weapon weapon )
 					return this;
 
-				var ammoCount = (inventory.GetSlot( weaponIndex ) as Weapon).Ammo;
+				var ammoCount = weapon.Ammo;
 
 				SlotIndex = weaponIndex;
 				SetClass( "Occupied", true );
@@ -49,7 +50,7 @@ namespace Grubs.UI
 				if ( SlotIndex == -1 )
 					return;
 
-				Inventory.EquipItemFromIndex( SlotIndex );
+				PlayerInventory.EquipItemFromIndex( SlotIndex );
 			}
 
 			private void Reset()

@@ -22,7 +22,7 @@ namespace Grubs.UI
 			const int rows = 6;
 			const int cols = 5;
 
-			for ( int i = 0; i < rows * cols; ++i )
+			for ( int i = 0; i < rows * cols; i++ )
 			{
 				var icon = ItemsPanel.AddChild<InventoryItem>();
 				Items.Add( i, icon );
@@ -33,7 +33,7 @@ namespace Grubs.UI
 
 		public void RebuildItems()
 		{
-			for ( int i = 0; i < Local.Pawn.Inventory.Count(); i++ )
+			for ( int i = 0; i < (Local.Pawn as Pawn.Player).PlayerInventory.Items.Count; i++ )
 			{
 				Items[i].UpdateFrom( i );
 			}

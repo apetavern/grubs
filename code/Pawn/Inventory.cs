@@ -2,44 +2,34 @@
 using System;
 using System.Linq;
 using Grubs.Weapons;
+using System.Collections.Generic;
 
 namespace Grubs.Pawn
 {
-	public class Inventory : BaseInventory
+	public partial class PlayerInventory : BaseNetworkable
 	{
-		public Inventory( Player player ) : base( player ) { }
+		public Entity Owner { get; set; }
+		[Net] public List<Weapon> Items { get; set; } = new();
 
-		public override bool Add( Entity ent, bool makeActive = false )
+		public void Add( Entity ent, bool makeActive = false )
 		{
-			var player = Owner as Player;
 			var weapon = ent as Weapon;
 
 			// If this weapon is a pick-up, add ammo to player's existing weapon of the same type.
 			if ( weapon != null && IsCarryingType( ent.GetType() ) )
 			{
-				var existingWeapon = (Weapon)List.Where( x => x.GetType() == weapon.GetType() ).FirstOrDefault();
+				var existingWeapon = Items.Where( x => x.GetType() == weapon.GetType() ).FirstOrDefault();
 				if ( existingWeapon.Ammo != -1 ) existingWeapon.Ammo++;
 
 				ent.Delete();
+
+				return;
 			}
 
-			return base.Add( ent, makeActive );
-		}
+			Items.Add( ent as Weapon );
 
-		public override void OnChildAdded( Entity child )
-		{
-			if ( List.Contains( child ) )
-				return;
-
-			List.Add( child );
-		}
-
-		public override void OnChildRemoved( Entity child )
-		{
-			/* 
-			 * Do nothing, the default behaviour will remove an item from the inventory list 
-			 * if the Parent of the item changes, which it does because we give it a worm.
-			 */
+			ent.Parent = Owner;
+			ent.OnCarryStart( Owner );
 		}
 
 		[ServerCmd]
@@ -52,22 +42,22 @@ namespace Grubs.Pawn
 			if ( activeWorm is null || !activeWorm.IsCurrentTurn )
 				return;
 
-			var inventory = player.Inventory;
+			var inventory = player.PlayerInventory;
 
-			if ( inventory.GetSlot( itemIndex ) is null )
+			if ( inventory.Items[itemIndex] is null )
 				return;
 
-			activeWorm.EquipWeapon( inventory.GetSlot( itemIndex ) as Weapon );
+			activeWorm.EquipWeapon( inventory.Items[itemIndex] );
 		}
 
 		public bool IsCarryingType( Type t )
 		{
-			return List.Any( x => x.GetType() == t );
+			return Items.Any( x => x.GetType() == t );
 		}
 
 		public bool HasAmmo( int itemIndex )
 		{
-			return (List[itemIndex] as Weapon).Ammo != 0;
+			return Items[itemIndex].Ammo != 0;
 		}
 	}
 }

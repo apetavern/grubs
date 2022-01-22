@@ -11,10 +11,11 @@ namespace Grubs.Pawn
 	{
 		[Net] public IList<Worm> Worms { get; set; } = new List<Worm>();
 		[Net] public Worm ActiveWorm { get; set; }
+		[Net] public PlayerInventory PlayerInventory { get; set; }
 
 		public Player()
 		{
-			Inventory = new Inventory( this );
+			PlayerInventory = new PlayerInventory() { Owner = this };
 		}
 
 		public void CreateWorms( Client cl )
@@ -41,7 +42,7 @@ namespace Grubs.Pawn
 
 			foreach ( var weapon in weapons )
 			{
-				Inventory.Add( Library.Create<Weapon>( weapon ) );
+				PlayerInventory.Add( Library.Create<Weapon>( weapon ) );
 			}
 		}
 
