@@ -56,7 +56,7 @@ namespace Grubs.UI.Menu
 			{
 				// Dress Worm Here
 
-				wormModel = new AnimSceneObject( Model.Load( "models/citizenworm.vmdl" ), Transform.Zero.WithScale( 1 ).WithPosition( Vector3.Down * 4 ) );
+				wormModel = new AnimSceneObject( Model.Load( "models/citizenworm.vmdl" ), Transform.Zero.WithScale( 1f ).WithPosition( Vector3.Down * 4 ) );
 
 				var skycolor = Color.Orange;
 
@@ -66,12 +66,12 @@ namespace Grubs.UI.Menu
 					skycolor = sceneLight.SkyColor;
 				}
 
-				Light.Point( Vector3.Up * 150.0f, 200.0f, Color.White * 5.0f );
-				Light.Point( Vector3.Up * 75.0f + Vector3.Forward * 100.0f, 200, Color.White * 15.0f );
-				Light.Point( Vector3.Up * 75.0f + Vector3.Backward * 100.0f, 200, Color.White * 15f );
-				Light.Point( Vector3.Up * 75.0f + Vector3.Left * 100.0f, 200, skycolor * 20.0f );
-				Light.Point( Vector3.Up * 75.0f + Vector3.Right * 100.0f, 200, Color.White * 15.0f );
-				Light.Point( Vector3.Up * 100.0f + Vector3.Up, 200, Color.Yellow * 15.0f );
+				Light.Point( Vector3.Up * 150.0f, 512, Color.White * 20.0f );
+				Light.Point( Vector3.Up * 75.0f + Vector3.Forward * 256, 512, Color.White * 15.0f );
+				Light.Point( Vector3.Up * 75.0f + Vector3.Backward * 256, 512, Color.White * 15f );
+				Light.Point( Vector3.Up * 75.0f + Vector3.Left * 256, 512, skycolor * 20.0f );
+				Light.Point( Vector3.Up * 75.0f + Vector3.Right * 256, 512, Color.White * 15.0f );
+				Light.Point( Vector3.Up * 100.0f, 512, skycolor * 20.0f );
 
 				renderScene = Add.ScenePanel( SceneWorld.Current, renderScenePos, Rotation.From( renderSceneAngles ), 75 );
 				renderScene.Style.Width = Length.Percent( 100 );
@@ -79,6 +79,8 @@ namespace Grubs.UI.Menu
 				renderScene.CameraPosition = new Vector3( 0, 0, 0 );
 				renderScene.CameraRotation = Rotation.From( 0, 210, 0 );
 				renderSceneAngles = renderScene.CameraRotation.Angles();
+				renderScene.AmbientColor = new Color( .25f, .15f, .15f );
+				renderScene.ZFar = 5000f;
 			}
 		}
 

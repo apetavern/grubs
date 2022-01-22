@@ -53,6 +53,7 @@ namespace Grubs.UI.Menu
 				renderScene.CameraPosition = new Vector3( -100, -50, 25 );
 				renderScene.CameraRotation = Rotation.From( 0, 75, 0 );
 				renderSceneAngles = renderScene.CameraRotation.Angles();
+				renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 0.25f;
 			}
 		}
 	}
