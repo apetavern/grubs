@@ -19,6 +19,7 @@ namespace Grubs.Terrain
 		{
 			listIndex = 0;
 
+			Quadtree.RootCell = new TreeNode();
 			Quadtree.CreateGrid();
 			Quadtree.BuildModels( true );
 

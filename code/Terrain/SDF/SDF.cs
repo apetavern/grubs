@@ -6,53 +6,80 @@ using System.Collections.Generic;
 
 namespace Grubs.Terrain
 {
-	public abstract partial class SDF : BaseNetworkable
+	public abstract partial class SDF : Entity
 	{
 		public enum MergeType
 		{
 			Add,
 			Subtract,
+			Intersect,
 			SmoothAdd,
-			SmoothSubtract
+			SmoothSubtract,
+			SmoothIntersect,
 		}
+
+		public SDF() { Transmit = TransmitType.Always; }
+
 		[Net] public MergeType Type { get; set; }
+		[Net] public new IList<SDF> Children { get; set; } = new List<SDF>();
 		public abstract float GetDistance( Vector2 point );
+		public float FullDistance( Vector2 point )
+		{
+			float value = GetDistance( point );
+			foreach ( SDF sdf in Children )
+			{
+				float childValue = sdf.GetDistance( point );
+				value = MathSDF.Operate( value, childValue, sdf.Type );
+			}
+			return value;
+		}
+		public void Add( SDF otherSDF )
+		{
+			Children.Add( otherSDF );
+		}
 	}
 
 	public struct MathSDF
 	{
-		public static float Add( float a, float b ) => MathF.Min( a, b );
-		public static float Subtract( float a, float b ) => MathF.Max( a, -b );
-		public static float Operate( float a, float b, bool boolean ) => boolean ? Add( a, b ) : Subtract( a, b );
-		public static float SmoothOperate( float a, float b, bool boolean, float k ) => boolean ? SmoothAdd( a, b, k ) : SmoothSubtract( a, b, k );
-
-		public const float Smoothing = (1 << Quadtree.ExtentShifts >> Quadtree.Levels) * 0.5f;
-
 		public static float Operate( float a, float b, SDF.MergeType type )
 		{
 			switch ( type )
 			{
-				case SDF.MergeType.Subtract:
-					return Subtract( a, b );
 				case SDF.MergeType.SmoothAdd:
-					return SmoothAdd( a, b, 25f );
+					return SmoothAdd( a, b );
+				case SDF.MergeType.SmoothIntersect:
+					return SmoothIntersect( a, b );
 				case SDF.MergeType.SmoothSubtract:
-					return SmoothSubtract( a, b, 25f );
-				default:
+					return SmoothSubtract( a, b );
+				case SDF.MergeType.Add:
 					return Add( a, b );
+				case SDF.MergeType.Intersect:
+					return Intersect( a, b );
+				default:
+					return Subtract( a, b );
 			}
 		}
 
-		public static float SmoothAdd( float a, float b, float k )
+		public static float Add( float a, float b ) => MathF.Min( a, b );
+		public static float Subtract( float a, float b ) => MathF.Max( a, -b );
+		public static float Intersect( float a, float b ) => MathF.Max( a, b );
+
+		public const float Smoothing = 1 << Quadtree.ExtentShifts >> (Quadtree.Levels - 2);
+		public static float SmoothAdd( float a, float b, float k = Smoothing )
 		{
 			float h = Clamp( 0.5f + 0.5f * (b - a) / k, 0f, 1f );
 			return Blend( b, a, h ) - k * h * (1f - h);
 		}
 
-		public static float SmoothSubtract( float a, float b, float k )
+		public static float SmoothSubtract( float a, float b, float k = Smoothing )
 		{
 			float h = Clamp( 0.5f - 0.5f * -(b + a) / k, 0f, 1f );
 			return Blend( -b, a, h ) + k * h * (1f - h);
+		}
+		public static float SmoothIntersect( float a, float b, float k = Smoothing )
+		{
+			float h = Clamp( 0.5f - 0.5f * (b - a) / k, 0f, 1f );
+			return Blend( b, a, h ) + k * h * (1f - h);
 		}
 
 		public static float Blend( float a, float b, float t ) => a * (1f - t) + b * t;
