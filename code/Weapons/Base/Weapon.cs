@@ -176,7 +176,7 @@ namespace Grubs.Weapons
 		[ClientRpc]
 		public virtual void OnFireEffects()
 		{
-			Particles.Create( "particles/pistol_muzzleflash.vpcf", this, "muzzle" );
+			Particles.Create( "particles/muzzleflash/grubs_muzzleflash.vpcf", this, "muzzle" );
 		}
 	}
 }
