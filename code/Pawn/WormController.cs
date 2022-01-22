@@ -58,7 +58,7 @@ namespace Grubs.Pawn
 		{
 			var girth = 32 * 0.5f;
 
-			var mins = new Vector3( -girth, -girth, 0 ) * Pawn.Scale;
+			var mins = new Vector3( -girth, -girth, 2 ) * Pawn.Scale;
 			var maxs = new Vector3( +girth, +girth, 32 ) * Pawn.Scale;
 
 			SetBBox( mins, maxs );
@@ -85,7 +85,7 @@ namespace Grubs.Pawn
 
 			BaseVelocity = BaseVelocity.WithZ( 0 );
 
-			if ( Input.Pressed( InputButton.Jump ) )
+			if ( Input.Pressed( InputButton.Jump ) && worm.IsCurrentTurn )
 			{
 				CheckJumpButton();
 			}
@@ -103,7 +103,7 @@ namespace Grubs.Pawn
 			}
 
 			// Work out wish velocity.. just take input, rotate it to view, clamp to -1, 1
-			WishVelocity = -Input.Left * Vector3.Forward;
+			WishVelocity = worm.IsCurrentTurn ? -Input.Left * Vector3.Forward : Vector3.Zero;
 			var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
 
 			WishVelocity = WishVelocity.WithZ( 0 );
@@ -159,7 +159,7 @@ namespace Grubs.Pawn
 			LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
 			// Only allow aiming changes if the grub isn't moving.
-			if ( Velocity.Normal.IsNearlyZero( 2.5f ) )
+			if ( Velocity.Normal.IsNearlyZero( 2.5f ) && (Pawn as Worm).IsCurrentTurn )
 			{
 				// Aim with W & S keys
 				EyeRot = Rotation.LookAt( LookPos );
