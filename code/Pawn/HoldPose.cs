@@ -9,6 +9,9 @@
 		Throwable,
 		Rifle,
 		Swing,
-		Droppable
+		Droppable,
+		Holdable,
+		Minigun,
+		Revolver
 	}
 }
