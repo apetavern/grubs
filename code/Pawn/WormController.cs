@@ -30,7 +30,7 @@ namespace Grubs.Pawn
 		public WormController()
 		{
 			Unstuck = new Unstuck( this );
-			Debug = true;
+			Debug = false;
 		}
 
 		/// <summary>
