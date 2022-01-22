@@ -676,6 +676,69 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "cough"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_idles.fbx"
+						start_frame = 9
+						end_frame = 39
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "scratch"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_idles.fbx"
+						start_frame = 39
+						end_frame = 79
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "lookaround"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_idles.fbx"
+						start_frame = 79
+						end_frame = 119
+						framerate = 15.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -806,6 +869,32 @@
 							{
 								bone = "spine_1"
 								weight = 0.0
+							},
+							{
+								bone = "spine_2"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "idlemask"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Handsroot"
+								weight = 1.0
+							},
+							{
+								bone = "head"
+								weight = 1.0
+							},
+							{
+								bone = "neck_0"
+								weight = 1.0
 							},
 							{
 								bone = "spine_2"
