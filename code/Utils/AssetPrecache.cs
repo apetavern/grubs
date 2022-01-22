@@ -47,7 +47,8 @@ namespace Grubs.Utils
 			"particles/flamemodel.vmdl",
 
 			// Materials
-			"materials/minigolf.arrow.vmat",
+			"materials/arrow.vmat",
+			"materials/reticle/reticle.vmat",
 			"materials/peterburroughs/dirt.vmat",
 
 			// Particles
