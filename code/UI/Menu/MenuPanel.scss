@@ -4,21 +4,3 @@ MenuPanel {
     flex-direction: column;
     width: 100%;
 }
-
-.menu-window {
-}
-
-.menu-holder {
-    flex-direction: column;
-    min-width: 400px;
-    /*&:outro {
-        transform: translateX(-2000px);
-        transition: all 0.2s ease-out;
-    }*/
-}
-
-WorldPreviewScene {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}

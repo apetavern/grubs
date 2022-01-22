@@ -31,9 +31,7 @@ namespace Grubs.UI.Menu
 				ActiveWindow = Windows.PLAY;
 				ClearWindowPanel();
 
-				Panel menuHolder = WindowPanel.Add.Panel( "menu-holder" );
-				menuHolder.AddChild( new PlayerList() );
-				menuHolder.AddChild( new StartButton() );
+				WindowPanel.AddChild( new PlayPanel() );
 
 			} );
 
