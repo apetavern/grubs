@@ -45,16 +45,22 @@ namespace Grubs.Utils
 			"models/weapons/revolver/revolver.vmdl",
 			"models/weapons/uzi/uzi.vmdl",
 			"particles/flamemodel.vmdl",
+			"particles/muzzleflash/grubs_muzzleflash.vmdl",
 
 			// Materials
 			"materials/arrow.vmat",
 			"materials/reticle/reticle.vmat",
 			"materials/peterburroughs/dirt.vmat",
+			"particles/muzzleflash/grubs_muzzleflash_gradient.vmat",
+			"particles/muzzleflash/grubs_muzzleflash_flash.vmat",
 
 			// Particles
 			"particles/fire.vpcf",
 			"particles/fire_loop.vpcf",
-			"particles/smoke_trail.vpcf"
+			"particles/smoke_trail.vpcf",
+			"particles/muzzleflash/grubs_muzzleflash.vpcf",
+			"particles/muzzleflash/grubs_muzzleflash_sparks.vpcf",
+			"particles/muzzleflash/grubs_muzzleflash_sparks_impact.vpcf"
 		};
 	}
 }
