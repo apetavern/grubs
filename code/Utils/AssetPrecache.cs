@@ -42,7 +42,7 @@ namespace Grubs.Utils
 			"models/weapons/railgun/railgun.vmdl",
 			"models/weapons/shell/shell.vmdl",
 			"models/weapons/shotgun/shotgun.vmdl",
-			"models/weapons/sixshooter/sixshooter.vmdl",
+			"models/weapons/revolver/revolver.vmdl",
 			"models/weapons/uzi/uzi.vmdl",
 			"particles/flamemodel.vmdl",
 
