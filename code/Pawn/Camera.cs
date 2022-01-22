@@ -8,7 +8,7 @@ namespace Grubs.Pawn
 	/// </summary>
 	public class Camera : Sandbox.Camera
 	{
-		public Range DistanceRange { get; } = new Range( 512f, 2048f );
+		public Range DistanceRange { get; } = new Range( 128f, 2048f );
 		public float Distance { get; set; } = 1024f;
 		private float DistanceScrollRate => 32f;
 
