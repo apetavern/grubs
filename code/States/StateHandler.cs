@@ -1,4 +1,6 @@
-﻿using Sandbox;
+﻿using Grubs.UI;
+using Sandbox;
+using Sandbox.UI;
 using System.Collections.Generic;
 
 namespace Grubs.States
@@ -6,15 +8,20 @@ namespace Grubs.States
 	public partial class StateHandler : BaseNetworkable
 	{
 		[Net] public BaseState State { get; set; } = new WaitingState();
+		[Net] public int LobbyCount { get; set; }
 		public List<Pawn.Player> Players { get; set; } = new();
 		public static StateHandler Instance { get; set; }
+		public HudEntity<RootPanel> Hud { get; set; }
 
 		public StateHandler()
 		{
 			Instance = this;
 
 			if ( Host.IsServer )
+			{
+				Hud = new MenuHudEntity();
 				State.Start();
+			}
 		}
 
 		public void OnPlayerJoin( Pawn.Player player )
@@ -30,6 +37,22 @@ namespace Grubs.States
 			State?.Finish();
 			State = state;
 			State?.Start();
+
+			if ( Host.IsServer )
+				UpdateHud();
+		}
+
+		private void UpdateHud()
+		{
+			if ( Hud is not PlayingHudEntity && State is PlayingState )
+			{
+				Hud.Delete();
+				Hud = new PlayingHudEntity();
+			}
+			else
+			{
+				Hud = new MenuHudEntity();
+			}
 		}
 
 		public void RemovePlayer( Pawn.Player player )
@@ -48,6 +71,8 @@ namespace Grubs.States
 		public static void Tick()
 		{
 			Instance?.State?.OnTick();
+
+			Instance.LobbyCount = Global.Lobby.MemberCount;
 		}
 	}
 }

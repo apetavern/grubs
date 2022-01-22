@@ -25,11 +25,6 @@ namespace Grubs.States
 		public override void OnPlayerJoin( Pawn.Player player )
 		{
 			base.OnPlayerJoin( player );
-
-			if ( StateHandler.Instance?.Players?.Count >= GameConfig.MinimumPlayersToStart )
-			{
-				StateHandler.Instance?.ChangeState( new PlayingState() );
-			}
 		}
 
 		// Debug method for changing current state to WaitingState.

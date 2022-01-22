@@ -48,13 +48,13 @@ namespace Grubs.UI
 			if ( Input.Down( InputButton.Menu ) && !HasBuilt )
 			{
 				RebuildItems();
-				HudEntity.Instance?.ReceiveInput( true );
+				PlayingHudEntity.Instance?.ReceiveInput( true );
 			}
 
 			if ( Input.Released( InputButton.Menu ) )
 			{
 				HasBuilt = false;
-				HudEntity.Instance?.ReceiveInput( false );
+				PlayingHudEntity.Instance?.ReceiveInput( false );
 			}
 		}
 	}

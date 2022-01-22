@@ -50,7 +50,7 @@ namespace Grubs.States.SubStates
 			WindForce = Rand.Float( -0.5f, 0.5f );
 
 			// Let the HUD know that the wind has changed.
-			HudEntity.UpdateWind( WindForce );
+			PlayingHudEntity.UpdateWind( WindForce );
 		}
 
 		protected override void OnTimeUp()
