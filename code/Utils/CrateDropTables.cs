@@ -1,8 +1,6 @@
 ﻿using Sandbox;
 using System;
 
-using Grubs.Weapons;
-
 namespace Grubs.Utils
 {
 	public static class CrateDropTables
