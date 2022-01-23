@@ -54,6 +54,7 @@ namespace Grubs.Crates
 				var trace = new ArcTrace( this, Position ).RunTowards( Vector3.Down, 1000f, 0f );
 				new Projectile().MoveAlongTrace( trace, 1000 ).ExplodeImmediatelyWithRadius( 75f );
 
+				ActiveCrateCount--;
 				Delete();
 			}
 		}
