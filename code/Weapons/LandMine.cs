@@ -20,7 +20,7 @@ namespace Grubs.Weapons
 		{
 			base.Simulate( player );
 
-			var trace = new ArcTrace( Parent, Parent.EyePos ).RunTowardsWithBounces( Parent.EyeRot.Forward.Normal, 10, 0, 3 );
+			var trace = new ArcTrace( Parent, Parent.EyePos ).RunTowardsWithBounces( Parent.EyeRot.Forward.Normal, 10, 0 );
 			ArcTrace.Draw( trace );
 		}
 	}

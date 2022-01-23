@@ -110,14 +110,14 @@ namespace Grubs.Weapons
 			return segments;
 		}
 
-		public List<ArcSegment> RunTowardsWithBounces( Vector3 direction, float force, float windForceX, int bounceQty )
+		public List<ArcSegment> RunTowardsWithBounces( Vector3 direction, float force, float windForceX, int maxBounceQty = 0 )
 		{
 			List<ArcSegment> segments = new();
 
 			var trace = RunTowards( StartPos, direction, force, windForceX );
 			var activeForce = force;
 
-			for ( int i = 0; i < bounceQty; i++ )
+			for ( int i = 0; i < 100; i++ )
 			{
 				segments.AddRange( trace );
 
@@ -126,7 +126,15 @@ namespace Grubs.Weapons
 
 				DebugOverlay.Line( traceEnd.EndPos, traceEnd.EndPos + traceEnd.HitNormal * 10, Color.Red, 0, true );
 
-				trace = RunTowards( traceEnd.EndPos, traceEnd.HitNormal, activeForce, windForceX );
+				var traceDirection = Vector3.GetAngle( traceEnd.HitNormal, Vector3.Up ) < 45 ? traceEnd.EndPos.Normal + traceEnd.HitNormal : traceEnd.HitNormal;
+
+				trace = RunTowards( traceEnd.EndPos, traceDirection, activeForce, windForceX );
+
+				if ( maxBounceQty > 0 && i >= maxBounceQty )
+					break;
+
+				else if ( Vector3.GetAngle( traceEnd.HitNormal, Vector3.Up ) < 45 )
+					break;
 			}
 
 			return segments;
