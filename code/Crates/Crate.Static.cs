@@ -5,6 +5,8 @@ namespace Grubs.Crates
 {
 	public partial class Crate
 	{
+		public static int ActiveCrateCount { get; set; }
+
 		private static string GetRandomCrate()
 		{
 			float val = Rand.Float();
@@ -34,10 +36,18 @@ namespace Grubs.Crates
 				return null;
 			}
 
+			if ( ActiveCrateCount >= GameConfig.MaxActiveCrates )
+			{
+				Log.Trace( "Skipped spawning crate, too many are active." );
+				return null;
+			}
+
 			var crate = Library.Create<Crate>( crateType );
 
 			// TODO: sample from terrain to find a viable spot to plonk a crate down
 			crate.Position = new Vector3( Rand.Float( -512, 512 ), 0, 512 );
+
+			ActiveCrateCount++;
 
 			return crate;
 		}

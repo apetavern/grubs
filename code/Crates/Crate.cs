@@ -33,6 +33,7 @@ namespace Grubs.Crates
 			Log.Trace( $"Touched {other}" );
 			if ( other is Worm worm )
 			{
+				ActiveCrateCount--;
 				OnPickup( worm );
 
 				Delete();

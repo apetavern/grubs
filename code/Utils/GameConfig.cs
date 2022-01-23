@@ -20,6 +20,7 @@ namespace Grubs.Utils
 			{ "crate_weapons", 0.1f },
 			{ "crate_health", 0.3f },
 		};
+		public static int MaxActiveCrates { get; set; } = 5;
 
 		// Worm configuration.
 		public static float SecondsBetweenWormJumps { get; set; } = 2;
