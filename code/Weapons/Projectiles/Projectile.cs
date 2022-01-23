@@ -14,7 +14,7 @@ namespace Grubs.Weapons
 		private float Speed { get; set; }
 		private List<ArcSegment> Segments { get; set; }
 		private Particles TrailParticles { get; set; }
-		private int CollisionExplosionDelaySeconds { get; set; }
+		private float CollisionExplosionDelaySeconds { get; set; }
 
 		public Projectile WithModel( string modelPath )
 		{
@@ -22,7 +22,12 @@ namespace Grubs.Weapons
 			return this;
 		}
 
-		public Projectile WithCollisionExplosionDelay( int secondsDelay )
+		/// <summary>
+		/// How many seconds after collision should this explode.
+		/// </summary>
+		/// <param name="secondsDelay"></param>
+		/// <returns></returns>
+		public Projectile WithCollisionExplosionDelay( float secondsDelay )
 		{
 			CollisionExplosionDelaySeconds = secondsDelay;
 			return this;
@@ -97,7 +102,11 @@ namespace Grubs.Weapons
 			Explode();
 		}
 
-		private async void ExplodeAfterSeconds( int seconds )
+		/// <summary>
+		/// How many seconds after firing should this explode.
+		/// </summary>
+		/// <param name="seconds"></param>
+		public async void ExplodeAfterSeconds( float seconds )
 		{
 			await GameTask.DelaySeconds( seconds );
 			Explode();
