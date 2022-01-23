@@ -122,11 +122,11 @@ namespace Grubs.Weapons
 				segments.AddRange( trace );
 
 				var traceEnd = trace.Last();
-				activeForce *= 0.9f;
+				activeForce *= 0.66f;
 
 				DebugOverlay.Line( traceEnd.EndPos, traceEnd.EndPos + traceEnd.HitNormal * 10, Color.Red, 0, true );
 
-				trace = RunTowards( traceEnd.EndPos, traceEnd.EndPos.Normal + traceEnd.HitNormal, force, windForceX );
+				trace = RunTowards( traceEnd.EndPos, traceEnd.HitNormal, activeForce, windForceX );
 			}
 
 			return segments;
