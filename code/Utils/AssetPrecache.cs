@@ -60,7 +60,10 @@ namespace Grubs.Utils
 			"particles/smoke_trail.vpcf",
 			"particles/muzzleflash/grubs_muzzleflash.vpcf",
 			"particles/muzzleflash/grubs_muzzleflash_sparks.vpcf",
-			"particles/muzzleflash/grubs_muzzleflash_sparks_impact.vpcf"
+			"particles/muzzleflash/grubs_muzzleflash_sparks_impact.vpcf",
+			"particles/fire/grubs_fire.vpcf",
+			"particles/fire/grubs_fire_smoke.vpcf",
+			"particles/fire/grubs_fire_sparks.vpcf"
 		};
 	}
 }
