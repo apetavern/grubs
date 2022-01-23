@@ -103,6 +103,33 @@ namespace Grubs.Terrain
 		public override float GetDistance( Vector2 point )
 		{
 			float noise = Noise.Perlin( point.x * Scale, point.y * Scale, Seed ) * minSize;
+
+			return noise;
+		}
+	}
+
+	public partial class IslandPerlin : SDF
+	{
+		[Net] public float Scale { get; set; }
+		[Net] public float Seed { get; set; }
+
+		public IslandPerlin() { }
+
+		public IslandPerlin( float scale, float seed, MergeType type = MergeType.Add )
+		{
+			Scale = scale;
+			Seed = seed;
+			Type = type;
+		}
+
+		private const float minSize = Quadtree.Extents >> (Quadtree.Levels - 2);
+
+		public override float GetDistance( Vector2 point )
+		{
+			float noise = Noise.Perlin( point.x * Scale, point.y * Scale, Seed ) * minSize;
+
+			//some kind of checks here to make sure it doesn't make a bunch of floaty blobs
+
 			return noise;
 		}
 	}
