@@ -52,11 +52,11 @@ namespace Grubs.Terrain
 			SDF perlin = new IslandPerlin( .005f, Rand.Float( 10000f ), SDF.MergeType.SmoothIntersect );
 			circle.Add( perlin );
 
-			Vector2 center2 = new Vector2( -Quadtree.Extents*1.5f, -Quadtree.Extents*0.5f );
-			SDF circle2 = new Circle( center2, Quadtree.Extents*0.75f, SDF.MergeType.SmoothSubtract );
+			Vector2 center2 = new Vector2( -Quadtree.Extents * 1.5f, -Quadtree.Extents * 0.5f );
+			SDF circle2 = new Circle( center2, Quadtree.Extents * 0.75f, SDF.MergeType.SmoothSubtract );
 			circle.Add( circle2 );
 
-			center2 = new Vector2( Quadtree.Extents*1.5f, -Quadtree.Extents * 0.5f );
+			center2 = new Vector2( Quadtree.Extents * 1.5f, -Quadtree.Extents * 0.5f );
 			circle2 = new Circle( center2, Quadtree.Extents * 0.75f, SDF.MergeType.SmoothSubtract );
 			circle.Add( circle2 );
 
