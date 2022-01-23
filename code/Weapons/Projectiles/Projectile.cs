@@ -112,6 +112,13 @@ namespace Grubs.Weapons
 			Explode();
 		}
 
+		public void ExplodeImmediatelyWithRadius( float radius )
+		{
+			DoBlastWithRadius( radius );
+			OnCollisionEffects();
+			Delete();
+		}
+
 		private void Explode()
 		{
 			DoBlastWithRadius();
