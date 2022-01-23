@@ -14,6 +14,7 @@ namespace Grubs.Weapons
 		private float Speed { get; set; }
 		private List<ArcSegment> Segments { get; set; }
 		private Particles TrailParticles { get; set; }
+
 		private float CollisionExplosionDelaySeconds { get; set; }
 
 		public Projectile WithModel( string modelPath )

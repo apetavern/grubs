@@ -3,6 +3,7 @@ using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 using Grubs.Pawn;
+using System.Runtime.InteropServices;
 
 namespace Grubs.Weapons
 {
@@ -10,6 +11,8 @@ namespace Grubs.Weapons
 	{
 		public Vector3 StartPos { get; set; }
 		public Vector3 EndPos { get; set; }
+
+		public Vector3 HitNormal { get; set; }
 	}
 
 	public class ArcTrace
@@ -17,7 +20,6 @@ namespace Grubs.Weapons
 		public Vector3 StartPos { get; set; }
 		public Vector3 EndPos { get; set; }
 		private int SegmentCount { get; set; } = 80;
-		public List<ArcSegment> Segments { get; set; } = new();
 		private Entity Owner { get; set; }
 
 		public ArcTrace( Entity fromGrub, Vector3 startPos )
@@ -31,6 +33,7 @@ namespace Grubs.Weapons
 		/// </summary>
 		public List<ArcSegment> RunTo( Vector3 EndPos )
 		{
+			var segments = new List<ArcSegment>();
 			var from = StartPos;
 			var controlPoint = EndPos.WithZ( from.z * 3 );
 
@@ -51,26 +54,32 @@ namespace Grubs.Weapons
 					EndPos = tr.EndPos;
 
 					segment.EndPos = EndPos;
-					Segments.Add( segment );
+					segments.Add( segment );
 
 					break;
 				}
 
-				Segments.Add( segment );
+				segments.Add( segment );
 			}
 
-			return Segments;
+			return segments;
+		}
+
+		public List<ArcSegment> RunTowards( Vector3 direction, float force, float windForceX )
+		{
+			return RunTowards( StartPos, direction, force, windForceX );
 		}
 
 		/// <summary>
-		/// Run a trace specifying the direction, force and wind force.
+		/// Run a trace specifying the origin, direction, force and wind force.
 		/// </summary>
-		public List<ArcSegment> RunTowards( Vector3 direction, float force, float windForceX )
+		public List<ArcSegment> RunTowards( Vector3 startPos, Vector3 direction, float force, float windForceX )
 		{
+			var segments = new List<ArcSegment>();
 			float epsilon = 0.001f;
 
 			Vector3 velocity = force * -direction;
-			Vector3 position = StartPos;
+			Vector3 position = startPos;
 
 			for ( int i = 0; i < SegmentCount; i++ )
 			{
@@ -87,18 +96,40 @@ namespace Grubs.Weapons
 
 				if ( tr.Hit )
 				{
-					EndPos = tr.EndPos;
+					var travelDir = (tr.StartPos - tr.EndPos).Normal;
+					segment.EndPos = tr.EndPos + travelDir;
+					segment.HitNormal = tr.Normal;
+					segments.Add( segment );
 
-					segment.EndPos = EndPos;
-					Segments.Add( segment );
-
-					break;
+					return segments;
 				}
 
-				Segments.Add( segment );
+				segments.Add( segment );
 			}
 
-			return Segments;
+			return segments;
+		}
+
+		public List<ArcSegment> RunTowardsWithBounces( Vector3 direction, float force, float windForceX, int bounceQty )
+		{
+			List<ArcSegment> segments = new();
+
+			var trace = RunTowards( StartPos, direction, force, windForceX );
+			var activeForce = force;
+
+			for ( int i = 0; i < bounceQty; i++ )
+			{
+				segments.AddRange( trace );
+
+				var traceEnd = trace.Last();
+				activeForce *= 0.9f;
+
+				DebugOverlay.Line( traceEnd.EndPos, traceEnd.EndPos + traceEnd.HitNormal * 10, Color.Red, 0, true );
+
+				trace = RunTowards( traceEnd.EndPos, traceEnd.EndPos.Normal + traceEnd.HitNormal, force, windForceX );
+			}
+
+			return segments;
 		}
 
 		public static void Draw( List<ArcSegment> segments )
