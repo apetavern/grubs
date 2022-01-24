@@ -18,13 +18,19 @@ StartButton {
         opacity: 0.6;
     }
 
-    > label {
+    &:not(.disabled) {
+        border: 8px solid rgba( white, 0.2 );
+    }
+
+    > label, icon {
+        opacity: 1;
         font-size: 72px;
         color: black;
-        font-family: $font;
-        margin: 8px;
-        margin-left: 16px;
-        opacity: 1;
         transform: skewX(5%);
+        margin: 8px;
+    }
+
+    > label {
+        font-family: $font;
     }
 }
