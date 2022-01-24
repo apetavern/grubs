@@ -2,7 +2,7 @@
 
 NavBar {
     width: 100%;
-    height: 150px;
+    padding: 25px 0;
     background-image: linear-gradient(to right, $menu-dark, $menu-light);
     font-family: $font;
     align-items: center;
@@ -10,7 +10,7 @@ NavBar {
 }
 
 .title {
-    font-size: 72px;
+    font-size: 64px;
     font-color: white;
     margin-left: $safe-area-x;
 }
@@ -21,12 +21,18 @@ NavBar {
 }
 
 .menu-button {
-    font-size: 72px;
+    font-size: 48px;
     font-color: white;
     margin-left: 48px;
+    transition: all 150ms ease;
+
+    iconpanel {
+        margin-right: 16px;
+    }
 
     &:hover {
         cursor: pointer;
+        color: rgba( $menu-accent, 0.75 );
     }
 
     &.Active {
