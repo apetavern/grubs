@@ -2,17 +2,24 @@
 
 NavBar {
     width: 100%;
-    padding: 25px 0;
     background-image: linear-gradient(to right, $menu-dark, $menu-light);
     font-family: $font;
     align-items: center;
-    padding-right: $safe-area-x;
+    padding: 25px $safe-area-x;
+}
+
+.logo {
+    width: 72px;
+    height: 128px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 16px;
 }
 
 .title {
     font-size: 64px;
     font-color: white;
-    margin-left: $safe-area-x;
 }
 
 .menu-buttons {
