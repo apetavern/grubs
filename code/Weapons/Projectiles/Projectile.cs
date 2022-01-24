@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Grubs.Pawn;
 using Grubs.Utils;
-using Grubs.Terrain;
+using Grubs.Weapons.Helpers;
 
 namespace Grubs.Weapons
 {
@@ -121,19 +121,9 @@ namespace Grubs.Weapons
 
 		private void Explode()
 		{
-			DoBlastWithRadius();
-			OnCollisionEffects();
+			ExplosionHelper.DoBlastWithRadius( Position );
+			OnDelete();
 			Delete();
-		}
-
-		private void DoBlastWithRadius( float radius = 100f )
-		{
-			var effectedEntities = Physics.GetEntitiesInSphere( Position, radius ).OfType<Worm>();
-
-			Terrain.Terrain.Update( new Circle( Position, radius, SDF.MergeType.Subtract ) );
-
-			foreach ( var entity in effectedEntities )
-				entity.TakeDamage( new DamageInfo() { Position = Position, Flags = DamageFlags.Blast, Damage = 0 } );
 		}
 
 		[ClientRpc]
@@ -144,10 +134,8 @@ namespace Grubs.Weapons
 		}
 
 		[ClientRpc]
-		public void OnCollisionEffects()
+		public void OnDelete()
 		{
-			Particles.Create( "particles/explosion/barrel_explosion/explosion_fire_ring.vpcf", Position );
-
 			TrailParticles?.Destroy();
 		}
 	}
