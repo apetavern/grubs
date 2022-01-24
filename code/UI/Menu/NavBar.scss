@@ -5,12 +5,12 @@ NavBar {
     background-image: linear-gradient(to right, $menu-dark, $menu-light);
     font-family: $font;
     align-items: center;
-    padding: 25px $safe-area-x;
+    padding: 10px $safe-area-x;
 }
 
 .logo {
-    width: 72px;
-    height: 128px;
+    width: 64px;
+    aspect-ratio: 1;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -28,18 +28,20 @@ NavBar {
 }
 
 .menu-button {
-    font-size: 48px;
+    font-size: 32px;
     font-color: white;
-    margin-left: 48px;
+    margin-left: 32px;
     transition: all 150ms ease;
+    border-radius: 100%;
+    padding: 5px 20px;
 
     iconpanel {
         margin-right: 16px;
     }
 
     &:hover {
+        background-color: rgba( black, 0.2 );
         cursor: pointer;
-        color: rgba( $menu-accent, 0.75 );
     }
 
     &.Active {
