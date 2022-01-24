@@ -6,6 +6,7 @@ NavBar {
     font-family: $font;
     align-items: center;
     padding: 10px $safe-area-x;
+    box-shadow: 0 0 25px black;
 }
 
 .logo {
@@ -34,13 +35,14 @@ NavBar {
     transition: all 150ms ease;
     border-radius: 100%;
     padding: 5px 20px;
+    background-color: rgba( $menu-accent, 0 );
 
     iconpanel {
         margin-right: 16px;
     }
 
     &:hover {
-        background-color: rgba( black, 0.2 );
+        background-color: rgba( $menu-accent, 0.2 );
         cursor: pointer;
     }
 
