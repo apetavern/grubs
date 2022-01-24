@@ -2,6 +2,7 @@
 using Grubs.Pawn;
 using Grubs.Weapons;
 using System.Linq;
+using Grubs.Weapons.Helpers;
 
 namespace Grubs.Crates
 {
@@ -51,8 +52,7 @@ namespace Grubs.Crates
 
 			if ( Health <= 0 )
 			{
-				var trace = new ArcTrace( this, Position ).RunTowards( Vector3.Down, 1000f, 0f );
-				new Projectile().MoveAlongTrace( trace, 1000 ).ExplodeImmediatelyWithRadius( 75f );
+				ExplosionHelper.DoBlastWithRadius( Position, 75 );
 
 				ActiveCrateCount--;
 				Delete();
