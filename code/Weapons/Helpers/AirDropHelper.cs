@@ -9,7 +9,7 @@ namespace Grubs.Weapons.Helpers
 	{
 		static AirDropHelper Instance { get; set; }
 
-		public static void SummonDrop<T>( Entity droppedEntity, AirDropTravelDirection travelDirection = AirDropTravelDirection.Right )
+		public static void SummonDrop( Entity droppedEntity, AirDropTravelDirection travelDirection = AirDropTravelDirection.Right )
 		{
 			if ( Instance is null )
 				Instance = new();
