@@ -16,7 +16,7 @@ namespace Grubs.Weapons.Helpers
 			if ( !Host.IsServer )
 				return;
 
-			if ( Instance is null )
+			if ( Instance is null || !Instance.IsValid )
 				Instance = new();
 
 			var effectedEntities = Physics.GetEntitiesInSphere( origin, radius ).OfType<Worm>();
