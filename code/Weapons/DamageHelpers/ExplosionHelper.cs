@@ -2,7 +2,6 @@
 using Sandbox;
 using Grubs.Pawn;
 using Grubs.Terrain;
-using System.ComponentModel;
 
 namespace Grubs.Weapons.Helpers
 {
@@ -35,6 +34,8 @@ namespace Grubs.Weapons.Helpers
 		{
 			var explosion = Particles.Create( "particles/explosion/grubs_explosion_base.vpcf", position );
 			explosion.SetPosition( 1, new Vector3( radius, 0, 0 ) );
+
+			new Sandbox.ScreenShake.Random();
 		}
 	}
 }
