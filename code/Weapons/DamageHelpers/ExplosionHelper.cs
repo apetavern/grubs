@@ -27,14 +27,13 @@ namespace Grubs.Weapons.Helpers
 			foreach ( var entity in effectedEntities )
 				entity.TakeDamage( new DamageInfo() { Position = origin, Flags = DamageFlags.Blast, Damage = 0 } );
 
-			DoExplosionEffectsAt( origin, radius );
+			DoExplosionEffectsAt( origin );
 		}
 
 		[ClientRpc]
-		public static void DoExplosionEffectsAt( Vector3 position, float radius )
+		public static void DoExplosionEffectsAt( Vector3 Position )
 		{
-			var explosion = Particles.Create( "particles/explosion/grubs_explosion_base.vpcf", position );
-			explosion.SetPosition( 1, new Vector3( radius, 0, 0 ) );
+			Particles.Create( "particles/explosion/grubs_explosion_base.vpcf", Position );
 		}
 	}
 }
