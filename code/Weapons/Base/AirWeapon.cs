@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Grubs.Pawn;
+using Grubs.Weapons.Helpers;
 
 namespace Grubs.Weapons
 {
@@ -17,6 +18,8 @@ namespace Grubs.Weapons
 		protected override void Fire()
 		{
 			ShowWeapon( Parent as Worm, false );
+
+			AirDropHelper.SummonDrop( new Entity(), AirDropTravelDirection.Right );
 		}
 
 		[ClientRpc]
