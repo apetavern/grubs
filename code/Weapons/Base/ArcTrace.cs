@@ -51,12 +51,12 @@ namespace Grubs.Weapons
 
 				if ( tr.Hit )
 				{
-					EndPos = tr.EndPos;
-
-					segment.EndPos = EndPos;
+					var travelDir = (tr.StartPos - tr.EndPos).Normal;
+					segment.EndPos = tr.EndPos + travelDir;
+					segment.HitNormal = tr.Normal;
 					segments.Add( segment );
 
-					break;
+					return segments;
 				}
 
 				segments.Add( segment );

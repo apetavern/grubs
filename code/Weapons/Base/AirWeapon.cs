@@ -19,7 +19,7 @@ namespace Grubs.Weapons
 		{
 			ShowWeapon( Parent as Worm, false );
 
-			AirDropHelper.SummonDropWithTarget( new Entity(), Owner.Position );
+			AirDropHelper.SummonDropWithTarget( new Projectile().WithModel( "models/weapons/airstrikes/bomb.vmdl" ), Parent.Position );
 		}
 
 		[ClientRpc]
