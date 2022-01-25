@@ -18,7 +18,7 @@
 								to = "models/weapons/concretegarry/materials/newman.vmat"
 							},
 							{
-								from = "phong2.vmat"
+								from = "newmanface:phong2.vmat"
 								to = "models/weapons/concretegarry/materials/concretebase.vmat"
 							},
 						]
