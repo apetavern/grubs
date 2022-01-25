@@ -52,7 +52,8 @@ namespace Grubs.Utils
 			{ "LandMine", -1 },
 			{ "Minigun", -1 },
 			{ "PetrolBomb", -1 },
-			{ "Revolver", -1 }
+			{ "Revolver", -1 },
+			{ "AirStrike", -1 }
 		};
 	}
 }
