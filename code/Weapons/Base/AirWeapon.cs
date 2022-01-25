@@ -19,7 +19,7 @@ namespace Grubs.Weapons
 		{
 			ShowWeapon( Parent as Worm, false );
 
-			AirDropHelper.SummonDrop( new Entity(), AirDropTravelDirection.Right );
+			AirDropHelper.DoDrop( new Entity() );
 		}
 
 		[ClientRpc]
