@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using Grubs.Pawn;
+using Grubs.Utils;
+using Grubs.Weapons;
 
 namespace Grubs.Crates
 {
@@ -16,7 +18,10 @@ namespace Grubs.Crates
 		{
 			base.OnPickup( worm );
 
-			// TODO
+			CrateDropTables.WeaponDropTypes weapon = CrateDropTables.GetRandomWeaponFromCrate();
+
+			var player = (worm.Owner as Pawn.Player);
+			player.PlayerInventory.Add( Library.Create<Weapon>( weapon.ToString() ) );
 		}
 	}
 }

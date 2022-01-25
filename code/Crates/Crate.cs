@@ -1,5 +1,8 @@
 ﻿using Sandbox;
 using Grubs.Pawn;
+using Grubs.Weapons;
+using System.Linq;
+using Grubs.Weapons.Helpers;
 
 namespace Grubs.Crates
 {
@@ -20,6 +23,8 @@ namespace Grubs.Crates
 			SetModel( "models/editor/proxy_helper.vmdl" );
 
 			BBox = new( new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 16 ) );
+
+			Health = 25;
 
 			trigger = new CrateTrigger();
 			trigger.Position = Position;
@@ -44,6 +49,14 @@ namespace Grubs.Crates
 		public void OnServerTick()
 		{
 			Move();
+
+			if ( Health <= 0 )
+			{
+				ExplosionHelper.DoBlastWithRadius( Position, 75 );
+
+				ActiveCrateCount--;
+				Delete();
+			}
 		}
 
 		private void Move()
@@ -68,6 +81,15 @@ namespace Grubs.Crates
 		protected virtual void OnPickup( Worm worm )
 		{
 			Log.Trace( $"Worm {worm.Name} picked up crate ({worm.Client.Name})" );
+		}
+
+		[ServerCmd]
+		public static void SetCrateHealthToZero()
+		{
+			foreach ( var crate in Entity.All.OfType<Crate>() )
+			{
+				crate.Health = 0;
+			}
 		}
 	}
 }
