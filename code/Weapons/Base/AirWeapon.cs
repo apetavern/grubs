@@ -16,7 +16,7 @@ namespace Grubs.Weapons
 		/// </summary>
 		protected override void Fire()
 		{
-			Log.Info( "Summon something" );
+			ShowWeapon( Parent as Worm, false );
 		}
 
 		[ClientRpc]
