@@ -64,7 +64,7 @@
 			{
 				_class = "CRootAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -64.0, -48.0 ]
+				m_vecPosition = [ 96.0, -144.0 ]
 				m_nNodeID = 
 				{
 					m_id = 679599022
@@ -86,7 +86,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -400.0, -16.0 ]
+				m_vecPosition = [ -480.0, -80.0 ]
 				m_nNodeID = 
 				{
 					m_id = 891523728
@@ -95,7 +95,7 @@
 				m_sNote = ""
 				m_tagSpans = [  ]
 				m_sequenceName = "deploy"
-				m_playbackSpeed = 1.0
+				m_playbackSpeed = 2.0
 				m_bLoop = false
 			}
 		},
@@ -108,7 +108,7 @@
 			{
 				_class = "CStateMachineAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -240.0, -48.0 ]
+				m_vecPosition = [ -272.0, -128.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1323731772
@@ -149,7 +149,7 @@
 									{
 										_class = "CFinishedCondition"
 										m_comparisonOp = 0
-										m_option = "FinishedConditionOption_OnFinished"
+										m_option = "FinishedConditionOption_OnAlmostFinished"
 										m_bIsFinished = true
 									},
 								]
@@ -163,8 +163,8 @@
 								m_flFixedCycleValue = 0.0
 								m_blendCurve = 
 								{
-									m_vControlPoint1 = [ 0.5, 0.0 ]
-									m_vControlPoint2 = [ 0.5, 1.0 ]
+									m_vControlPoint1 = [ 0.0, 0.0 ]
+									m_vControlPoint2 = [ 1.0, 1.0 ]
 								}
 								m_bForceFootPlant = false
 								m_bDisabled = false
@@ -202,7 +202,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -400.0, -64.0 ]
+				m_vecPosition = [ -480.0, -144.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1709196479
@@ -211,7 +211,7 @@
 				m_sNote = ""
 				m_tagSpans = [  ]
 				m_sequenceName = "flutter"
-				m_playbackSpeed = 1.0
+				m_playbackSpeed = 1.5
 				m_bLoop = true
 			}
 		},

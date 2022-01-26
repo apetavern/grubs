@@ -97,6 +97,20 @@
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "morphonly"
+						default_weight = 0.0
+						weights = [  ]
+						master_morph_weight = 1.0
+						morph_weights = [  ]
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""

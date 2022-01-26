@@ -4,6 +4,9 @@ Layer0
 {
 	shader "complex.vfx"
 
+	//---- Animation ----
+	F_MORPH_SUPPORTED 1
+
 	//---- PBR ----
 	F_SPECULAR 1
 
