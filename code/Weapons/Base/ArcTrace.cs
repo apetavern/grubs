@@ -142,9 +142,13 @@ namespace Grubs.Weapons
 
 		public static void Draw( List<ArcSegment> segments )
 		{
+			int index = 0;
 			foreach ( var segment in segments )
 			{
+				DebugOverlay.Text( segment.StartPos, index.ToString() );
 				DebugOverlay.Line( segment.StartPos, segment.EndPos );
+
+				index++;
 			}
 		}
 	}

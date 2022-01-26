@@ -1,6 +1,7 @@
 ﻿using System;
 using Sandbox;
 using Grubs.Utils;
+using Grubs.States.SubStates;
 
 namespace Grubs.Weapons.Helpers
 {
@@ -54,12 +55,12 @@ namespace Grubs.Weapons.Helpers
 				Delete();
 			}
 
-			if ( Position.x < TargetPosition.x * 2 && !HasDropped )
+			if ( Position.x - TargetPosition.x < -10 && !HasDropped )
 			{
 				EntityToDrop.EnableDrawing = true;
 				EntityToDrop.Parent = null;
 
-				var trace = new ArcTrace( this, Position ).RunTo( TargetPosition );
+				var trace = new ArcTrace( this, Position ).RunTowards( (TargetPosition - Position).Normal, 10, Turn.Instance?.WindForce ?? 0 );
 				(EntityToDrop as Projectile).MoveAlongTrace( trace );
 
 				HasDropped = true;
