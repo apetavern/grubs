@@ -1,6 +1,5 @@
 ﻿using Sandbox;
 using Grubs.Pawn;
-using Grubs.Weapons;
 using System.Linq;
 using Grubs.Weapons.Helpers;
 
@@ -61,6 +60,10 @@ namespace Grubs.Crates
 
 		private void Move()
 		{
+			// If this crate is parented, don't move it.
+			if ( Parent is not null )
+				return;
+
 			var mover = new MoveHelper( Position, Velocity );
 			mover.Trace = mover.Trace.Size( BBox ).Ignore( this ).WorldAndEntities();
 			GroundEntity = mover.TraceDirection( Vector3.Down ).Entity;
@@ -83,7 +86,7 @@ namespace Grubs.Crates
 			Log.Trace( $"Worm {worm.Name} picked up crate ({worm.Client.Name})" );
 		}
 
-		[ServerCmd]
+		[ServerCmd( "tf_destroy_crates" )]
 		public static void SetCrateHealthToZero()
 		{
 			foreach ( var crate in Entity.All.OfType<Crate>() )
