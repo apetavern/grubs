@@ -4,23 +4,7 @@
 	m_pParameterList = 
 	{
 		_class = "CAnimParameterList"
-		m_Parameters = 
-		[
-			{
-				_class = "CBoolAnimParameter"
-				m_name = "open"
-				m_id = 
-				{
-					m_id = 1602121948
-				}
-				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
-				m_bUseMostRecentValue = false
-				m_bAutoReset = false
-				m_bPredicted = false
-				m_bDefaultValue = false
-			},
-		]
+		m_Parameters = [  ]
 	}
 	m_pTagManager = 
 	{
@@ -63,32 +47,54 @@
 	}
 	m_rootNodeID = 
 	{
-		m_id = 198684252
+		m_id = 679599022
 	}
 	m_previewModels = 
 	[
-		"models/weapons/airstrikes/plane.vmdl",
+		"models/crates/crate_parachute/crate_parachute.vmdl",
 	]
 	m_nodes = 
 	[
 		{
 			key = 
 			{
-				m_id = 150051435
+				m_id = 679599022
+			}
+			value = 
+			{
+				_class = "CRootAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -64.0, -48.0 ]
+				m_nNodeID = 
+				{
+					m_id = 679599022
+				}
+				m_networkMode = "ClientPredicted"
+				m_sNote = ""
+				m_childID = 
+				{
+					m_id = 1323731772
+				}
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 891523728
 			}
 			value = 
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -336.0, 64.0 ]
+				m_vecPosition = [ -400.0, -16.0 ]
 				m_nNodeID = 
 				{
-					m_id = 150051435
+					m_id = 891523728
 				}
 				m_networkMode = "ClientPredicted"
 				m_sNote = ""
 				m_tagSpans = [  ]
-				m_sequenceName = "plane"
+				m_sequenceName = "deploy"
 				m_playbackSpeed = 1.0
 				m_bLoop = false
 			}
@@ -96,38 +102,16 @@
 		{
 			key = 
 			{
-				m_id = 198684252
-			}
-			value = 
-			{
-				_class = "CRootAnimNode"
-				m_sName = "Unnamed"
-				m_vecPosition = [ 112.0, 16.0 ]
-				m_nNodeID = 
-				{
-					m_id = 198684252
-				}
-				m_networkMode = "ClientPredicted"
-				m_sNote = ""
-				m_childID = 
-				{
-					m_id = 596834744
-				}
-			}
-		},
-		{
-			key = 
-			{
-				m_id = 596834744
+				m_id = 1323731772
 			}
 			value = 
 			{
 				_class = "CStateMachineAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -125.0, 13.0 ]
+				m_vecPosition = [ -240.0, -48.0 ]
 				m_nNodeID = 
 				{
-					m_id = 596834744
+					m_id = 1323731772
 				}
 				m_networkMode = "ClientPredicted"
 				m_sNote = ""
@@ -135,56 +119,20 @@
 				[
 					{
 						_class = "CAnimState"
-						m_transitions = 
-						[
-							{
-								_class = "CAnimStateTransition"
-								m_conditions = 
-								[
-									{
-										_class = "CParameterAnimCondition"
-										m_comparisonOp = 0
-										m_paramID = 
-										{
-											m_id = 1602121948
-										}
-										m_comparisonValue = 
-										{
-											m_nType = 1
-											m_data = true
-										}
-									},
-								]
-								m_blendDuration = 0.2
-								m_destState = 
-								{
-									m_id = 544825661
-								}
-								m_bReset = true
-								m_resetCycleOption = "Beginning"
-								m_flFixedCycleValue = 0.0
-								m_blendCurve = 
-								{
-									m_vControlPoint1 = [ 0.5, 0.0 ]
-									m_vControlPoint2 = [ 0.5, 1.0 ]
-								}
-								m_bForceFootPlant = false
-								m_bDisabled = false
-							},
-						]
+						m_transitions = [  ]
 						m_tags = [  ]
 						m_tagBehaviors = [  ]
-						m_name = "closed"
+						m_name = "flutter"
 						m_childNodeID = 
 						{
-							m_id = 1725444762
+							m_id = 1709196479
 						}
 						m_stateID = 
 						{
-							m_id = 2046867901
+							m_id = 1029707225
 						}
-						m_position = [ -256.0, -160.0 ]
-						m_bIsStartState = true
+						m_position = [ -64.0, -48.0 ]
+						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
 						m_bIsRootMotionExclusive = false
@@ -199,23 +147,16 @@
 								m_conditions = 
 								[
 									{
-										_class = "CParameterAnimCondition"
+										_class = "CFinishedCondition"
 										m_comparisonOp = 0
-										m_paramID = 
-										{
-											m_id = 1602121948
-										}
-										m_comparisonValue = 
-										{
-											m_nType = 1
-											m_data = false
-										}
+										m_option = "FinishedConditionOption_OnFinished"
+										m_bIsFinished = true
 									},
 								]
 								m_blendDuration = 0.2
 								m_destState = 
 								{
-									m_id = 2046867901
+									m_id = 1029707225
 								}
 								m_bReset = true
 								m_resetCycleOption = "Beginning"
@@ -231,17 +172,17 @@
 						]
 						m_tags = [  ]
 						m_tagBehaviors = [  ]
-						m_name = "open"
+						m_name = "deploy"
 						m_childNodeID = 
 						{
-							m_id = 150051435
+							m_id = 891523728
 						}
 						m_stateID = 
 						{
-							m_id = 544825661
+							m_id = 1233289472
 						}
-						m_position = [ -128.0, -160.0 ]
-						m_bIsStartState = false
+						m_position = [ -240.0, -48.0 ]
+						m_bIsStartState = true
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
 						m_bIsRootMotionExclusive = false
@@ -255,22 +196,23 @@
 		{
 			key = 
 			{
-				m_id = 1725444762
+				m_id = 1709196479
 			}
 			value = 
 			{
-				_class = "CSingleFrameAnimNode"
+				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -336.0, 16.0 ]
+				m_vecPosition = [ -400.0, -64.0 ]
 				m_nNodeID = 
 				{
-					m_id = 1725444762
+					m_id = 1709196479
 				}
 				m_networkMode = "ClientPredicted"
 				m_sNote = ""
-				m_sequenceName = "plane"
-				m_nFrameIndex = 0
 				m_tagSpans = [  ]
+				m_sequenceName = "flutter"
+				m_playbackSpeed = 1.0
+				m_bLoop = true
 			}
 		},
 	]
