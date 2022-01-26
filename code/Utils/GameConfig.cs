@@ -43,7 +43,7 @@ namespace Grubs.Utils
 		public static Dictionary<string, int> LoadoutDefaults = new()
 		{
 			{ "BaseballBat", -1 },
-			{ "Bazooka", 3 },
+			{ "Bazooka", -1 },
 			{ "Grenade", -1 },
 			{ "Railgun", -1 },
 			{ "Shotgun", -1 },
@@ -55,5 +55,22 @@ namespace Grubs.Utils
 			{ "Revolver", -1 },
 			{ "AirStrike", -1 }
 		};
+
+		// Weapon Crate Drop Chances
+		public static Dictionary<string, float> WeaponCrateDropChances = new()
+		{
+			{ "BaseballBat", 5f },
+			{ "Railgun", 1f },
+			{ "Shotgun", 5f },
+			{ "Dynamite", 2f },
+			{ "Uzi", 4f },
+			{ "LandMine", 3f },
+			{ "Minigun", 1f },
+			{ "PetrolBomb", 2f },
+			{ "Revolver", 3f }
+		};
+
+		// Tool Crate Drop Chances
+		public static Dictionary<string, float> ToolCrateDropChances = new();
 	}
 }
