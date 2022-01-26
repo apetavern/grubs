@@ -65,13 +65,15 @@ namespace Grubs.Weapons.Helpers
 
 				HasDropped = true;
 
+				SetAnimBool( "open", true );
+
+				if ( EntityToDrop is Projectile projectile )
+				{
+					var trace = new ArcTrace( this, Position ).RunTowards( (TargetPosition - Position).Normal, 10, Turn.Instance?.WindForce ?? 0 );
+					projectile.MoveAlongTrace( trace );
+				}
+
 				EntityToDrop = null;
-
-				if ( EntityToDrop is not Projectile projectile )
-					return;
-
-				var trace = new ArcTrace( this, Position ).RunTowards( (TargetPosition - Position).Normal, 10, Turn.Instance?.WindForce ?? 0 );
-				projectile.MoveAlongTrace( trace );
 			}
 		}
 	}
