@@ -55,15 +55,23 @@ namespace Grubs.Weapons.Helpers
 				Delete();
 			}
 
+			if ( EntityToDrop is null )
+				return;
+
 			if ( Position.x - TargetPosition.x < -10 && !HasDropped )
 			{
 				EntityToDrop.EnableDrawing = true;
 				EntityToDrop.Parent = null;
 
-				var trace = new ArcTrace( this, Position ).RunTowards( (TargetPosition - Position).Normal, 10, Turn.Instance?.WindForce ?? 0 );
-				(EntityToDrop as Projectile).MoveAlongTrace( trace );
-
 				HasDropped = true;
+
+				EntityToDrop = null;
+
+				if ( EntityToDrop is not Projectile projectile )
+					return;
+
+				var trace = new ArcTrace( this, Position ).RunTowards( (TargetPosition - Position).Normal, 10, Turn.Instance?.WindForce ?? 0 );
+				projectile.MoveAlongTrace( trace );
 			}
 		}
 	}
