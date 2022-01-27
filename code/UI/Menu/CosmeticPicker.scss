@@ -2,7 +2,7 @@
 
 CosmeticPicker {
     width: 500px;
-    height: 40%;
+    height: 300px;
     margin-top: $safe-area-y;
     margin-left: $safe-area-x;
     background-color: rgba($menu-dark, 0.6);
@@ -14,16 +14,26 @@ CosmeticPicker {
 }
 
 CosmeticCategory {
-    height: 20%;
     width: 100%;
+    padding: 12px 24px;
     padding-left: 24px;
     margin-left: 12px;
+    transition: all 150ms ease;
+    background-color: rgba( $menu-accent, 0 );
+    align-items: center;
 
     .type-label {
         font-family: $font;
-        font-size: 64px;
+    }
+
+    .type-icon {
+        margin-right: 8px;
+    }
+
+    .type-label, .type-icon {
+        font-size: 32px;
         color: white;
-        text-transform: uppercase;
+        transition: all 150ms ease;
 
         &.Active {
             color: black;
@@ -31,10 +41,17 @@ CosmeticCategory {
     }
 
     &.Active {
-        background-color: rgba($menu-accent, 0.8);
+        background-color: $menu-accent;
     }
 
     &:hover {
         cursor: pointer;
+        background-color: rgba( $menu-accent, 0.75 );
+    }
+
+    &.active, &:hover {
+        .type-label, .type-icon {
+            color: black;
+        }
     }
 }

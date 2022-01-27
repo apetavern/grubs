@@ -2,7 +2,6 @@
 
 namespace Grubs.UI.Menu
 {
-
 	[UseTemplate]
 	public partial class MenuPanel : Panel
 	{
@@ -31,8 +30,8 @@ namespace Grubs.UI.Menu
 				ActiveWindow = Windows.PLAY;
 				ClearWindowPanel();
 
-				WindowPanel.AddChild( new PlayPanel() );
-
+				Panel menuHolder = WindowPanel.Add.Panel( "menu-holder" );
+				menuHolder.AddChild( new PlayPanel() );
 			} );
 
 			NavBar.CustomizeButton.AddEventListener( "onclick", () =>
@@ -57,10 +56,7 @@ namespace Grubs.UI.Menu
 
 		private void ClearWindowPanel()
 		{
-			foreach ( var panel in WindowPanel.Children )
-			{
-				panel.Delete();
-			}
+			WindowPanel.DeleteChildren();
 		}
 	}
 }

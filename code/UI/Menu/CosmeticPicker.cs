@@ -7,21 +7,24 @@ namespace Grubs.UI.Menu
 	public partial class CosmeticCategory : Panel
 	{
 		public Label Type { get; set; }
+		public IconPanel Icon { get; set; }
 
-		public CosmeticCategory( string type )
+		public CosmeticCategory( string icon, string type )
 		{
+			Icon = Add.Icon( icon, "type-icon" );
 			Type = Add.Label( type, "type-label" );
 		}
 	}
 
 	public partial class CosmeticPicker : Panel
 	{
-		public List<string> CosmeticTypes = new()
+		// Icon, name
+		public List<(string, string)> CosmeticTypes = new()
 		{
-			"head",
-			"body",
-			"dance",
-			"voice"
+			("face", "Head"),
+			("emoji_people", "Body"),
+			("music_note", "Dance"),
+			("chat_bubble", "Voice")
 		};
 
 		public List<CosmeticCategory> CosmeticCategories = new();
@@ -32,9 +35,12 @@ namespace Grubs.UI.Menu
 		{
 			StyleSheet.Load( "/UI/Menu/CosmeticPicker.scss" );
 
-			foreach ( var type in CosmeticTypes )
+			foreach ( var typePair in CosmeticTypes )
 			{
-				var category = new CosmeticCategory( type );
+				var icon = typePair.Item1;
+				var type = typePair.Item2;
+
+				var category = new CosmeticCategory( icon, type );
 				CosmeticCategories.Add( category );
 				AddChild( category );
 			}

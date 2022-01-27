@@ -33,3 +33,11 @@ $safe-area-y: 50px;
 $menu-dark: #462255;
 $menu-light: #AA4465;
 $menu-accent: #FDE74C;
+
+icon, iconpanel {
+    font-family: MaterialIcons;
+}
+
+button {
+    align-items: center;
+}
