@@ -31,8 +31,8 @@ namespace Grubs.UI.Menu
 				ActiveWindow = Windows.PLAY;
 				ClearWindowPanel();
 
-				WindowPanel.AddChild( new PlayPanel() );
-
+				Panel menuHolder = WindowPanel.Add.Panel( "menu-holder" );
+				menuHolder.AddChild( new PlayPanel() );
 			} );
 
 			NavBar.CustomizeButton.AddEventListener( "onclick", () =>
