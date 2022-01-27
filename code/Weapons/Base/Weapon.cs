@@ -162,7 +162,7 @@ namespace Grubs.Weapons
 				worm.SetHatVisible( !show );
 		}
 
-		private void ShowHoldPose( bool show )
+		protected void ShowHoldPose( bool show )
 		{
 			if ( Parent is not Worm worm )
 				return;

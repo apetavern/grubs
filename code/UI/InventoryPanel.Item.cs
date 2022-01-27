@@ -37,7 +37,7 @@ namespace Grubs.UI
 				SetClass( "Empty", ammoCount == 0 );
 
 				var weaponName = weapon.ClassInfo.Name;
-				Add.Image( $"/models/weapons/{weaponName}/{weaponName}.vmdl_c.png", "Icon" );
+				Add.Image( $"{weapon.ModelPath}_c.png", "Icon" );
 
 				if ( ammoCount >= 0 )
 					Add.Label( $"{ammoCount}", "Ammo" );

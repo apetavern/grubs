@@ -105,8 +105,8 @@
 				default_root_bone_name = ""
 			},
 		]
-		model_archetype = ""
-		primary_associated_entity = ""
+		model_archetype = "animated_model"
+		primary_associated_entity = "prop_dynamic"
 		anim_graph_name = "models/weapons/airstrikes/plane.vanmgrph"
 	}
 }

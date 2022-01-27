@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Grubs.Utils;
+using Grubs.Weapons.Helpers;
 
 namespace Grubs.Crates
 {
@@ -43,9 +44,7 @@ namespace Grubs.Crates
 			}
 
 			var crate = Library.Create<Crate>( crateType );
-
-			// TODO: sample from terrain to find a viable spot to plonk a crate down
-			crate.Position = new Vector3( Rand.Float( -512, 512 ), 0, 512 );
+			AirDropHelper.SummonDropWithTarget( crate, new Vector3( Rand.Float( -1000, 1000 ), 0, 0 ) );
 
 			ActiveCrateCount++;
 

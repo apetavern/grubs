@@ -51,12 +51,12 @@ namespace Grubs.Weapons
 
 				if ( tr.Hit )
 				{
-					EndPos = tr.EndPos;
-
-					segment.EndPos = EndPos;
+					var travelDir = (tr.StartPos - tr.EndPos).Normal;
+					segment.EndPos = tr.EndPos + travelDir;
+					segment.HitNormal = tr.Normal;
 					segments.Add( segment );
 
-					break;
+					return segments;
 				}
 
 				segments.Add( segment );
@@ -142,9 +142,13 @@ namespace Grubs.Weapons
 
 		public static void Draw( List<ArcSegment> segments )
 		{
+			int index = 0;
 			foreach ( var segment in segments )
 			{
+				DebugOverlay.Text( segment.StartPos, index.ToString() );
 				DebugOverlay.Line( segment.StartPos, segment.EndPos );
+
+				index++;
 			}
 		}
 	}

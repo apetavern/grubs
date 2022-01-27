@@ -58,6 +58,10 @@ namespace Grubs.Weapons
 		[Event.Tick]
 		public void Tick()
 		{
+			// Don't move if the projectile is parented.
+			if ( Parent.IsValid() )
+				return;
+
 			// This might be shite
 			if ( Segments is null || !Segments.Any() )
 				return;
