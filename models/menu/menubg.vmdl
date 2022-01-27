@@ -27,6 +27,24 @@
 					},
 				]
 			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "models/weapons/sixshooter/materials/sixshooter.vmat"
+								to = "models/weapons/revolver/materials/sixshooter.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
