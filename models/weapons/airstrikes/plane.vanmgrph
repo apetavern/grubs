@@ -14,7 +14,7 @@
 					m_id = 1602121948
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
+				m_bNetwork = false
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
 				m_bPredicted = false
@@ -85,7 +85,7 @@
 				{
 					m_id = 150051435
 				}
-				m_networkMode = "ClientPredicted"
+				m_networkMode = "ClientSimulate"
 				m_sNote = ""
 				m_tagSpans = [  ]
 				m_sequenceName = "plane"
@@ -107,7 +107,7 @@
 				{
 					m_id = 198684252
 				}
-				m_networkMode = "ClientPredicted"
+				m_networkMode = "ClientSimulate"
 				m_sNote = ""
 				m_childID = 
 				{
@@ -129,7 +129,7 @@
 				{
 					m_id = 596834744
 				}
-				m_networkMode = "ClientPredicted"
+				m_networkMode = "ClientSimulate"
 				m_sNote = ""
 				m_states = 
 				[
@@ -266,7 +266,7 @@
 				{
 					m_id = 1725444762
 				}
-				m_networkMode = "ClientPredicted"
+				m_networkMode = "ClientSimulate"
 				m_sNote = ""
 				m_sequenceName = "plane"
 				m_nFrameIndex = 0

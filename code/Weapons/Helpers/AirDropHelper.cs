@@ -12,9 +12,15 @@ namespace Grubs.Weapons.Helpers
 		private static Vector3 Destination => new Vector3( -1500, 0, 400 );
 		private static float MovementSpeed = 450f;
 		public bool IsResolved { get; set; }
-		private Vector3 TargetPosition { get; set; }
+		[Net] public Vector3 TargetPosition { get; set; }
 		private Entity EntityToDrop { get; set; }
 		private bool HasDropped { get; set; }
+		[Net] private bool DoorsOpen { get; set; }
+
+		public AirDropHelper()
+		{
+			Transmit = TransmitType.Always;
+		}
 
 		public static void SummonDropWithTarget( Entity droppedEntity, Vector3 target )
 		{
@@ -43,17 +49,24 @@ namespace Grubs.Weapons.Helpers
 			Instance.EntityToDrop = droppedEntity;
 		}
 
-		[Event.Tick.Server]
+		[Event.Tick]
 		public void Move()
 		{
+			if ( Host.IsClient )
+			{
+				SetAnimBool( "open", DoorsOpen );
+				return;
+			}
+
 			Position -= Vector3.Forward * MovementSpeed * Time.Delta;
 
 			if ( Math.Abs( Position.x - Destination.x ) < 50 )
 			{
 				IsResolved = true;
-
 				Delete();
 			}
+
+			DoorsOpen = Math.Abs( Position.x - TargetPosition.x ) < 200;
 
 			if ( EntityToDrop is null )
 				return;
@@ -64,8 +77,6 @@ namespace Grubs.Weapons.Helpers
 				EntityToDrop.Parent = null;
 
 				HasDropped = true;
-
-				SetAnimBool( "open", true );
 
 				if ( EntityToDrop is Projectile projectile )
 				{
