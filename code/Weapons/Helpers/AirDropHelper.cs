@@ -10,7 +10,7 @@ namespace Grubs.Weapons.Helpers
 		public static AirDropHelper Instance { get; set; }
 		private static Vector3 Origin => new Vector3( 1500, 0, 400 );
 		private static Vector3 Destination => new Vector3( -1500, 0, 400 );
-		private static float MovementSpeed = 450f;
+		private static float MovementSpeed = 650f;
 		public bool IsResolved { get; set; }
 		[Net] public Vector3 TargetPosition { get; set; }
 		private Entity EntityToDrop { get; set; }
@@ -42,7 +42,7 @@ namespace Grubs.Weapons.Helpers
 			Instance.Position = Origin;
 			Instance.Rotation = Rotation.FromYaw( 180 );
 
-			droppedEntity.Position = Instance.Position;
+			droppedEntity.Position = Instance.Position + Vector3.Down * 50f;
 			droppedEntity.Parent = Instance;
 			droppedEntity.EnableDrawing = false;
 
