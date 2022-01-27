@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
 using System.Linq;
 
 namespace Grubs.UI.Menu
@@ -10,9 +11,56 @@ namespace Grubs.UI.Menu
 		private ScenePanel renderScene;
 		private Angles renderSceneAngles = new( 25.0f, 0.0f, 0.0f );
 		private float renderSceneDistance = 50;
-		private Vector3 renderScenePos => Vector3.Up * 18 + renderSceneAngles.Direction * -renderSceneDistance;
+		private Vector3 renderScenePos => new Vector3( -100, -50, 25 );
+
+		float yaw;
 
 		AnimSceneObject worm;
+
+		bool hasMouse = false;
+
+		public override void OnButtonEvent( ButtonEvent e )
+		{
+			// CaptureMouseInput doesn't work wtf scam?
+			if ( e.Button == "mouseleft" )
+			{
+				hasMouse = e.Pressed;
+			}
+			base.OnButtonEvent( e );
+		}
+		public override void OnMouseWheel( float value )
+		{
+			renderSceneDistance += value * 3;
+			renderSceneDistance = renderSceneDistance.Clamp( 10, 200 );
+			base.OnMouseWheel( value );
+		}
+		public override void Tick()
+		{
+			base.Tick();
+			if ( renderScene == null ) return;
+			if ( hasMouse )
+			{
+				yaw -= Mouse.Delta.x;
+				renderSceneAngles.pitch = 0;
+			}
+
+			yaw = yaw.Clamp( -155, -115 );
+
+			float yawRad = MathX.DegreeToRadian( yaw );
+			float height = 16;
+
+			renderScene.CameraPosition = worm.Position + new Vector3(
+				MathF.Sin( yawRad ) * renderSceneDistance,
+				MathF.Cos( yawRad ) * renderSceneDistance,
+				height
+			);
+
+			var wormEyePos = worm.Position + worm.Rotation.Up * 24;
+			wormEyePos += worm.Rotation.Right * 4;
+			renderScene.CameraRotation = Rotation.LookAt( (wormEyePos - renderScene.CameraPosition).Normal );
+
+			Animate();
+		}
 
 		public WorldPreviewScene()
 		{
@@ -26,9 +74,8 @@ namespace Grubs.UI.Menu
 			Build();
 		}
 
-		public override void Tick()
+		public void Animate()
 		{
-			base.Tick();
 			worm.Update( Time.Delta );
 			worm.SetAnimBool( "grounded", true );
 			worm.SetAnimFloat( "incline", 0f );
@@ -63,10 +110,9 @@ namespace Grubs.UI.Menu
 				renderScene = Add.ScenePanel( SceneWorld.Current, renderScenePos, Rotation.From( renderSceneAngles ), 75 );
 				renderScene.Style.Width = Length.Percent( 100 );
 				renderScene.Style.Height = Length.Percent( 100 );
-				renderScene.CameraPosition = new Vector3( -100, -50, 25 );
 				renderScene.CameraRotation = Rotation.From( 0, 75, 0 );
 				renderSceneAngles = renderScene.CameraRotation.Angles();
-				renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 0.25f;
+				renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 0.5f;
 			}
 		}
 	}
