@@ -6,6 +6,15 @@ MenuPanel {
 }
 
 .menu-window {
+    customizepanel, playpanel {
+        transition: all 150ms ease;
+        opacity: 1;
+
+        &:intro {
+            opacity: 0;
+            transform: translateX( 50px );
+        }
+    }
 }
 
 .menu-holder {

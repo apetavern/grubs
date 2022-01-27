@@ -2,7 +2,6 @@
 
 namespace Grubs.UI.Menu
 {
-
 	[UseTemplate]
 	public partial class MenuPanel : Panel
 	{
@@ -57,10 +56,7 @@ namespace Grubs.UI.Menu
 
 		private void ClearWindowPanel()
 		{
-			foreach ( var panel in WindowPanel.Children )
-			{
-				panel.Delete();
-			}
+			WindowPanel.DeleteChildren();
 		}
 	}
 }
