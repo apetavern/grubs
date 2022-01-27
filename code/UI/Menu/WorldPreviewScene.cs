@@ -17,14 +17,12 @@ namespace Grubs.UI.Menu
 
 		AnimSceneObject worm;
 
-		bool hasMouse = false;
-
 		public override void OnButtonEvent( ButtonEvent e )
 		{
 			// CaptureMouseInput doesn't work wtf scam?
 			if ( e.Button == "mouseleft" )
 			{
-				hasMouse = e.Pressed;
+				SetMouseCapture( e.Pressed );
 			}
 			base.OnButtonEvent( e );
 		}
@@ -38,7 +36,7 @@ namespace Grubs.UI.Menu
 		{
 			base.Tick();
 			if ( renderScene == null ) return;
-			if ( hasMouse )
+			if ( HasMouseCapture )
 			{
 				yaw -= Mouse.Delta.x;
 				renderSceneAngles.pitch = 0;
