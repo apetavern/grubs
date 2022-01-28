@@ -13,6 +13,7 @@ namespace Grubs.Crates
 		private BBox BBox;
 
 		private CrateTrigger trigger;
+		private AnimEntity parachute { get; set; }
 
 		public override void Spawn()
 		{
@@ -28,6 +29,8 @@ namespace Grubs.Crates
 			trigger = new CrateTrigger();
 			trigger.Position = Position;
 			trigger.SetParent( this );
+
+			parachute = new AnimEntity( "models/crates/crate_parachute/crate_parachute.vmdl", this );
 		}
 
 		public override void Touch( Entity other )
@@ -71,7 +74,10 @@ namespace Grubs.Crates
 			if ( GroundEntity == null )
 				mover.Velocity += PhysicsWorld.Gravity * Time.Delta;
 			else
+			{
+				parachute?.Delete();
 				mover.Velocity = 0;
+			}
 
 			const float airResistance = 2.0f;
 			mover.ApplyFriction( airResistance, Time.Delta );
