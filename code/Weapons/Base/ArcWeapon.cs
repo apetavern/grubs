@@ -13,12 +13,12 @@ namespace Grubs.Weapons
 		public virtual string ProjectileModel => "models/weapons/shell/shell.vmdl";
 		public override int MaxQuantityFired { get; set; } = 1;
 		public override HoldPose HoldPose => HoldPose.Bazooka;
+		public override bool HasReticle => true;
 
 		// Weapon properties
 		public Entity Projectile { get; set; }
 		private float ComputedForce { get; set; } = 0;
 		public static PowerArrow PowerArrow { get; set; }
-		public static AimReticle AimReticle { get; set; }
 
 		public override void Simulate( Client player )
 		{
@@ -38,18 +38,11 @@ namespace Grubs.Weapons
 
 			if ( IsClient )
 			{
-				AdjustReticle();
 				AdjustArrow();
+
+				if ( HasReticle )
+					AdjustReticle();
 			}
-		}
-
-		private void AdjustReticle()
-		{
-			if ( !AimReticle.IsValid() )
-				AimReticle = new();
-
-			AimReticle.Position = Position + Parent.EyeRot.Forward.Normal * 80;
-			AimReticle.Direction = Parent.EyeRot.Forward.Normal;
 		}
 
 		private void AdjustArrow()

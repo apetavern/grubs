@@ -17,6 +17,7 @@ namespace Grubs.Weapons
 		public virtual int MaxQuantityFired { get; set; } = 1;
 		public virtual float SecondsBetweenFired => 2.0f;
 		public virtual float DamagePerShot => 25f;
+		public virtual bool HasReticle { get; set; }
 
 		// Weapon properties
 		[Net] public int Ammo { get; set; }
@@ -25,6 +26,7 @@ namespace Grubs.Weapons
 		[Net, Predicted] public TimeSince TimeSinceFired { get; set; }
 		[Net] public bool WeaponHasHat { get; set; }
 		protected PawnAnimator Animator { get; set; }
+		public static AimReticle AimReticle { get; set; }
 
 		public override void Spawn()
 		{
@@ -34,6 +36,7 @@ namespace Grubs.Weapons
 			WeaponHasHat = CheckWeaponForHat();
 			Ammo = GameConfig.LoadoutDefaults[ClassInfo.Name];
 		}
+
 		private bool CheckWeaponForHat()
 		{
 			for ( int i = 0; i < BoneCount; i++ )
@@ -54,6 +57,18 @@ namespace Grubs.Weapons
 				QuantityFired++;
 				OnFire();
 			}
+
+			if ( IsClient && HasReticle )
+				AdjustReticle();
+		}
+
+		protected void AdjustReticle()
+		{
+			if ( !AimReticle.IsValid() )
+				AimReticle = new();
+
+			AimReticle.Position = Position + Parent.EyeRot.Forward.Normal * 80;
+			AimReticle.Direction = Parent.EyeRot.Forward.Normal;
 		}
 
 		/// <summary>
