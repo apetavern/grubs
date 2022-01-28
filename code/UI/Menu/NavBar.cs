@@ -11,7 +11,6 @@ namespace Grubs.UI.Menu
 
 		public NavBar()
 		{
-			// Somebody tell me how to do this better.
 			PlayButton.AddEventListener( "onclick", () =>
 			{
 				DeactivateButtons();

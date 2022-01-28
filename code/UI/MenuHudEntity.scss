@@ -1,9 +1,3 @@
 rootpanel {
     pointer-events: all;
-
-    .menu-button {
-        &:hover {
-            sound-in: ui_button_hover;
-        }
-    }
 }

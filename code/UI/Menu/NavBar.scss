@@ -44,6 +44,7 @@ NavBar {
     &:hover {
         background-color: rgba( $menu-accent, 0.2 );
         cursor: pointer;
+        sound-in: ui_button_hover;
     }
 
     &.Active {

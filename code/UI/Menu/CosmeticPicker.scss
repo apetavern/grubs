@@ -2,56 +2,10 @@
 
 CosmeticPicker {
     width: 500px;
-    height: 300px;
+    height: 500px;
     margin-top: $safe-area-y;
     margin-left: $safe-area-x;
     background-color: rgba($menu-dark, 0.6);
     box-shadow: 0 0 50px 7px rgba(#000, 0.8);
-    flex-direction: column;
-    justify-content: space-around;
-    padding-top: 12px;
-    padding-bottom: 12px;
-}
-
-CosmeticCategory {
-    width: 100%;
-    padding: 12px 24px;
-    padding-left: 24px;
-    margin-left: 12px;
-    transition: all 150ms ease;
-    background-color: rgba( $menu-accent, 0 );
-    align-items: center;
-
-    .type-label {
-        font-family: $font;
-    }
-
-    .type-icon {
-        margin-right: 8px;
-    }
-
-    .type-label, .type-icon {
-        font-size: 32px;
-        color: white;
-        transition: all 150ms ease;
-
-        &.Active {
-            color: black;
-        }
-    }
-
-    &.Active {
-        background-color: $menu-accent;
-    }
-
-    &:hover {
-        cursor: pointer;
-        background-color: rgba( $menu-accent, 0.75 );
-    }
-
-    &.active, &:hover {
-        .type-label, .type-icon {
-            color: black;
-        }
-    }
+    padding: 18px;
 }
