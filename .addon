@@ -7,6 +7,10 @@
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
+  "ResourcePaths": [
+    "/fonts/*",
+    "/textures/ui/*"
+  ],
   "HasCode": true,
   "CodePath": "code",
   "RootNamespace": "Grubs"
