@@ -17,7 +17,7 @@ namespace Grubs.Weapons
 
 		// Weapon properties
 		public Entity Projectile { get; set; }
-		private float ComputedForce { get; set; } = 0;
+		protected float ComputedForce { get; set; } = 0;
 		public static PowerArrow PowerArrow { get; set; }
 
 		public override void Simulate( Client player )
