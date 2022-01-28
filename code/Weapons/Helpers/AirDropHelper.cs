@@ -12,10 +12,9 @@ namespace Grubs.Weapons.Helpers
 		private static Vector3 Destination => new Vector3( -1500, 0, 400 );
 		private static float MovementSpeed = 650f;
 		public bool IsResolved { get; set; }
-		[Net] public Vector3 TargetPosition { get; set; }
+		public Vector3 TargetPosition { get; set; }
 		private Entity EntityToDrop { get; set; }
 		private bool HasDropped { get; set; }
-		[Net] private bool DoorsOpen { get; set; }
 
 		public AirDropHelper()
 		{
@@ -49,15 +48,9 @@ namespace Grubs.Weapons.Helpers
 			Instance.EntityToDrop = droppedEntity;
 		}
 
-		[Event.Tick]
+		[Event.Tick.Server]
 		public void Move()
 		{
-			if ( Host.IsClient )
-			{
-				SetAnimBool( "open", DoorsOpen );
-				return;
-			}
-
 			Position -= Vector3.Forward * MovementSpeed * Time.Delta;
 
 			if ( Math.Abs( Position.x - Destination.x ) < 50 )
@@ -66,7 +59,7 @@ namespace Grubs.Weapons.Helpers
 				Delete();
 			}
 
-			DoorsOpen = Math.Abs( Position.x - TargetPosition.x ) < 200;
+			UpdateDoorState( Math.Abs( Position.x - TargetPosition.x ) < 200 );
 
 			if ( EntityToDrop is null )
 				return;
@@ -86,6 +79,13 @@ namespace Grubs.Weapons.Helpers
 
 				EntityToDrop = null;
 			}
+		}
+
+		[ClientRpc]
+		public void UpdateDoorState( bool doorsOpen )
+		{
+			SetAnimBool( "open", doorsOpen );
+			return;
 		}
 	}
 }
