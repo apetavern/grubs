@@ -17,7 +17,7 @@ namespace Grubs.Weapons
 		public virtual int MaxQuantityFired { get; set; } = 1;
 		public virtual float SecondsBetweenFired => 2.0f;
 		public virtual float DamagePerShot => 25f;
-		public virtual bool HasReticle { get; set; }
+		public virtual bool HasReticle { get; set; } = true;
 
 		// Weapon properties
 		[Net] public int Ammo { get; set; }
