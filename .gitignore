@@ -1,5 +1,4 @@
 Properties
-*.csproj
 .intermediate
 .vs
 *.los
