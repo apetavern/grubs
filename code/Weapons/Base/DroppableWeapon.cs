@@ -12,6 +12,7 @@ namespace Grubs.Weapons
 		public override int WeaponReach { get; set; } = 100;
 		public override bool IsFiredTurnEnding => false;
 		public override HoldPose HoldPose => HoldPose.Droppable;
+		public override bool HasReticle => false;
 
 		protected override void Fire()
 		{

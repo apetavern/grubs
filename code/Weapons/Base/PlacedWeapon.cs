@@ -13,6 +13,7 @@ namespace Grubs.Weapons
 		public override string ModelPath => "";
 		public override bool IsFiredTurnEnding => true;
 		public override HoldPose HoldPose => HoldPose.Throwable;
+		public override bool HasReticle => false;
 
 		/// <summary>
 		/// What happens when you actually fire the weapon.
