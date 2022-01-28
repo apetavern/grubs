@@ -44,7 +44,7 @@ namespace Grubs.Crates
 			}
 
 			var crate = Library.Create<Crate>( crateType );
-			AirDropHelper.SummonDropWithTarget( crate, new Vector3( Rand.Float( -1000, 1000 ), 0, 0 ) );
+			AirDropHelper.SummonDropWithTarget( crate, new Vector3( Rand.Float( -900, 900 ), 0, 0 ) );
 
 			ActiveCrateCount++;
 
