@@ -7,6 +7,12 @@ using Grubs.Weapons.Helpers;
 
 namespace Grubs.Weapons
 {
+	public enum ProjectileCollisionReaction
+	{
+		Explosive,
+		Incendiary
+	}
+
 	public partial class Projectile : ModelEntity, IAwaitResolution
 	{
 		public bool IsResolved { get; set; }
@@ -15,10 +21,22 @@ namespace Grubs.Weapons
 		private List<ArcSegment> Segments { get; set; }
 		private Particles TrailParticles { get; set; }
 		private float CollisionExplosionDelaySeconds { get; set; }
+		private ProjectileCollisionReaction CollisionReaction { get; set; }
 
 		public Projectile WithModel( string modelPath )
 		{
 			SetModel( modelPath );
+			return this;
+		}
+
+		/// <summary>
+		/// What happens when the projectile "collides".
+		/// </summary>
+		/// <param name="reaction"></param>
+		/// <returns></returns>
+		public Projectile SetCollisionReaction( ProjectileCollisionReaction reaction )
+		{
+			CollisionReaction = reaction;
 			return this;
 		}
 
@@ -73,9 +91,9 @@ namespace Grubs.Weapons
 
 			if ( Position.IsNearlyEqual( Segments[0].EndPos, 2.5f ) )
 			{
-				Segments.RemoveAt( 0 );
-
-				if ( Segments.Count < 1 )
+				if ( Segments.Count > 1 )
+					Segments.RemoveAt( 0 );
+				else
 				{
 					OnCollision();
 					return;
@@ -118,7 +136,17 @@ namespace Grubs.Weapons
 
 		private void Explode()
 		{
-			ExplosionHelper.DoBlastWithRadius( Position );
+			switch ( CollisionReaction )
+			{
+				case ProjectileCollisionReaction.Explosive:
+					ExplosionHelper.DoBlastWithRadius( Position );
+					break;
+				case ProjectileCollisionReaction.Incendiary:
+					FireHelper.StartFiresAt( Position, (Segments[Segments.Count - 1].EndPos - Segments[Segments.Count - 1].StartPos), 1 );
+					Log.Info( Segments.Count );
+					break;
+			}
+
 			OnDelete();
 			Delete();
 		}
