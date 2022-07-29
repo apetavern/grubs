@@ -1,6 +1,16 @@
 # Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
+# scss files
+[*.scss]
+indent_style = space
+indent_size = 4
+
+# html files
+[*.html]
+indent_style = space
+indent_size = 4
+
 # C# files
 [*.cs]
 indent_style = tab
@@ -98,3 +108,25 @@ csharp_space_between_square_brackets = false
 # Wrapping preferences
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
+
+# Namespace preferences
+csharp_style_namespace_declarations = file_scoped:suggestion
+
+# New line preferences
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false:suggestion
+csharp_style_allow_blank_lines_between_consecutive_braces_experimental = false:suggestion
+csharp_style_allow_embedded_statements_on_same_line_experimental = false:suggestion
+
+dotnet_style_allow_multiple_blank_lines_experimental = false:suggestion
+dotnet_style_allow_statement_immediately_after_block_experimental = false:suggestion
+
+# Naming preferences
+dotnet_naming_style._pp.capitalization = pascal_case
+dotnet_naming_style._pp.required_prefix = _
+
+dotnet_naming_symbols.pp.applicable_kinds  = property
+dotnet_naming_symbols.pp.applicable_accessibilities = private
+
+dotnet_naming_rule.privatePropertiesUnderscore.symbols = pp
+dotnet_naming_rule.privatePropertiesUnderscore.style = _pp
+dotnet_naming_rule.privatePropertiesUnderscore.severity = none

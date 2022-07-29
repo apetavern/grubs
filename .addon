@@ -1,5 +1,4 @@
 {
-  "SharedAssets": "*.*",
   "Title": "Grubs",
   "Type": "game",
   "Org": "apetavern",
@@ -13,5 +12,23 @@
   ],
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "Grubs"
+  "RootNamespace": "Grubs",
+  "Metadata": {
+    "MapList": [
+      "facepunch.construct"
+    ],
+    "MaxPlayers": 0,
+    "MinPlayers": 0,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Unrestricted",
+    "RankType": "None",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "GameCategory": "None",
+    "Compiler": {
+      "RootNamespace": "Grubs",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;"
+    }
+  }
 }
