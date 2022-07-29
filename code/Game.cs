@@ -6,6 +6,8 @@ global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 
+using Grubs.Player;
+
 namespace Grubs;
 
 public partial class GrubsGame : Game
@@ -17,8 +19,13 @@ public partial class GrubsGame : Game
 
 	}
 
-	public override void ClientJoined( Client cl )
+	public override void ClientJoined( Client client )
 	{
-		base.ClientJoined( cl );
+		base.ClientJoined( client );
+
+		var player = new GrubsPlayer();
+		client.Pawn = player;
+
+		player.Spawn();
 	}
 }
