@@ -4,6 +4,8 @@ public class WormAnimator : PawnAnimator
 {
 	public override void Simulate()
 	{
-		base.Simulate();
+		var controller = (Pawn as Worm).Controller;
+
+		SetAnimParameter( "grounded", controller.IsGrounded );
 	}
 }

@@ -33,13 +33,19 @@ public partial class GrubsPlayer : Entity
 		var camera = Camera as GrubsCamera;
 		if ( camera.Target == null )
 		{
-			camera.Target = ActiveWorm;
+			camera.Target = Worms.First();
 		}
+
+		// Temporarily simulate the first (and only) worm.
+		Worms.First().Simulate( cl );
 	}
 
 	public void CreateWorms()
 	{
-		for ( int i = 0; i < 4; i++ )
+		if ( !IsServer )
+			return;
+
+		for ( int i = 0; i < 1; i++ )
 		{
 			var worm = new Worm();
 			worm.Owner = this;
