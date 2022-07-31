@@ -17,8 +17,6 @@ public partial class WormController : BasePlayerController
 
 		GetInput();
 
-		Velocity = WishVelocity;
-
 		if ( IsGrounded )
 			Move();
 		else
@@ -40,6 +38,8 @@ public partial class WormController : BasePlayerController
 			WishVelocity = WishVelocity.WithZ( 0f );
 			WishVelocity = WishVelocity.Normal * speed;
 			WishVelocity *= DefaultSpeed;
+
+			Velocity = WishVelocity;
 		}
 	}
 
