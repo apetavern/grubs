@@ -17,6 +17,8 @@ public partial class Worm : AnimatedEntity
 
 		Controller = new WormController();
 		Animator = new WormAnimator();
+
+		Position = new Vector3( 0, 0, 1024 );
 	}
 
 	public override void Simulate( Client cl )

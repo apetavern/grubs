@@ -10,6 +10,7 @@ public class GrubsCamera : CameraMode
 	private float LerpSpeed { get; set; } = 5f;
 	private bool FocusTarget { get; set; } = true;
 	private Vector3 Center { get; set; }
+	private float CameraUpOffset { get; set; } = 32f;
 
 	public Entity Target { get; set; }
 
@@ -21,7 +22,9 @@ public class GrubsCamera : CameraMode
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = Distance.Clamp( MinDistance, MaxDistance );
 
+		// Get the center position, plus move the camera up a little bit.
 		var cameraCenter = (FocusTarget) ? Target.Position : Center;
+		cameraCenter += Vector3.Up * CameraUpOffset;
 
 		var targetPosition = cameraCenter + Vector3.Right * Distance;
 		Position = Position.LerpTo( targetPosition, Time.Delta * LerpSpeed );
