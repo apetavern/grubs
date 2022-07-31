@@ -2,9 +2,11 @@
 
 public partial class WormController : BasePlayerController
 {
-	[Net] public float Gravity { get; set; } = 800.0f;
+	[Net] public float DefaultSpeed { get; set; } = 80f;
+	[Net] public float Gravity { get; set; } = 800f;
 	[Net] public float MaxStandableAngle { get; set; } = 60f;
 	[Net] public bool IsGrounded { get; private set; } = false;
+	[Net] public float Radius { get; set; } = 16f;
 
 	protected Vector3 mins, maxs;
 	private Vector3 lookPosition;
@@ -13,12 +15,16 @@ public partial class WormController : BasePlayerController
 	{
 		UpdateBBox();
 
+		// DebugOverlay.ScreenText( Position.ToString() );
+		// DebugOverlay.Box( Position, mins, maxs, Color.Yellow );
+		// DebugOverlay.Sphere( sphere.Center, sphere.Radius, Color.Yellow );
+
 		WishVelocity = -Input.Left * Vector3.Forward;
 		var speed = WishVelocity.Length.Clamp( 0, 1 );
 
 		WishVelocity = WishVelocity.WithZ( 0f );
 		WishVelocity = WishVelocity.Normal * speed;
-		WishVelocity *= 80f;
+		WishVelocity *= DefaultSpeed;
 
 		Velocity = WishVelocity;
 
@@ -33,7 +39,7 @@ public partial class WormController : BasePlayerController
 
 	public override BBox GetHull()
 	{
-		var girth = 32 * 0.5f;
+		var girth = 24 * 0.5f;
 		var mins = new Vector3( -girth, -girth, 0 );
 		var maxs = new Vector3( +girth, +girth, 32 );
 
@@ -51,7 +57,7 @@ public partial class WormController : BasePlayerController
 
 	public void UpdateBBox()
 	{
-		var girth = 32 * 0.5f;
+		var girth = 24 * 0.5f;
 
 		var mins = new Vector3( -girth, -girth, 0 );
 		var maxs = new Vector3( +girth, +girth, 32 );
@@ -72,7 +78,7 @@ public partial class WormController : BasePlayerController
 		move.TryUnstuck();
 		move.TryMoveWithStep( Time.Delta, 32f );
 
-		Position = move.Position;
+		Position = move.Position.WithY( 0f );
 		Velocity = move.Velocity;
 	}
 
@@ -90,7 +96,7 @@ public partial class WormController : BasePlayerController
 
 	private void CheckGround()
 	{
-		var tr = Trace.Ray( Position, Position + (Vector3.Down * 0.1f) )
+		var tr = Trace.Ray( Position, Position + (Vector3.Down * 0.2f) )
 			.WorldOnly()
 			.Run();
 

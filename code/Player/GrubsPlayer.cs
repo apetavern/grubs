@@ -37,7 +37,10 @@ public partial class GrubsPlayer : Entity
 		}
 
 		// Temporarily simulate the first (and only) worm.
-		Worms.First().Simulate( cl );
+		foreach ( var worm in Worms )
+		{
+			worm.Simulate( cl );
+		}
 	}
 
 	public void CreateWorms()
@@ -45,13 +48,33 @@ public partial class GrubsPlayer : Entity
 		if ( !IsServer )
 			return;
 
-		for ( int i = 0; i < 1; i++ )
+		int wormsToSpawn = 2;
+		List<Vector3> spawnPoints = GetSpawnLocations( wormsToSpawn );
+
+		for ( int i = 0; i < wormsToSpawn; i++ )
 		{
 			var worm = new Worm();
 			worm.Owner = this;
 			worm.Spawn();
+			worm.Position = spawnPoints[i];
 
 			Worms.Add( worm );
 		}
+	}
+
+	private static List<Vector3> GetSpawnLocations( int num )
+	{
+		var spawnLocations = new List<Vector3>();
+		var worldBounds = Map.Physics.Body.GetBounds();
+		while ( spawnLocations.Count < num )
+		{
+			var location = worldBounds.RandomPointInside.WithZ( 1000 );
+			var tr = Trace.Ray( location, location + Vector3.Down * 1000 ).WorldOnly().Run();
+			if ( tr.Hit )
+			{
+				spawnLocations.Add( location.WithY( 0f ).WithZ( tr.EndPosition.z ) );
+			}
+		}
+		return spawnLocations;
 	}
 }
