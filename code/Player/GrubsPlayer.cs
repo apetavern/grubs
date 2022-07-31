@@ -60,6 +60,8 @@ public partial class GrubsPlayer : Entity
 
 			Worms.Add( worm );
 		}
+
+		Worms.First().IsTurn = true;
 	}
 
 	private static List<Vector3> GetSpawnLocations( int num )

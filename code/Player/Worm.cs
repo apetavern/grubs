@@ -9,6 +9,9 @@ public partial class Worm : AnimatedEntity
 	[Net, Predicted]
 	public WormAnimator Animator { get; set; }
 
+	[Net]
+	public bool IsTurn { get; set; } = false;
+
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -17,8 +20,6 @@ public partial class Worm : AnimatedEntity
 
 		Controller = new WormController();
 		Animator = new WormAnimator();
-
-		Position = new Vector3( 0, 0, 1024 );
 	}
 
 	public override void Simulate( Client cl )

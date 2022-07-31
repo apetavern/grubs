@@ -15,16 +15,7 @@ public partial class WormController : BasePlayerController
 	{
 		UpdateBBox();
 
-		// DebugOverlay.ScreenText( Position.ToString() );
-		// DebugOverlay.Box( Position, mins, maxs, Color.Yellow );
-		// DebugOverlay.Sphere( sphere.Center, sphere.Radius, Color.Yellow );
-
-		WishVelocity = -Input.Left * Vector3.Forward;
-		var speed = WishVelocity.Length.Clamp( 0, 1 );
-
-		WishVelocity = WishVelocity.WithZ( 0f );
-		WishVelocity = WishVelocity.Normal * speed;
-		WishVelocity *= DefaultSpeed;
+		GetInput();
 
 		Velocity = WishVelocity;
 
@@ -35,6 +26,21 @@ public partial class WormController : BasePlayerController
 
 		CheckGround();
 		SetWormModelDirection();
+	}
+
+	private void GetInput()
+	{
+		var worm = Pawn as Worm;
+
+		if ( worm.IsTurn )
+		{
+			WishVelocity = -Input.Left * Vector3.Forward;
+			var speed = WishVelocity.Length.Clamp( 0, 1 );
+
+			WishVelocity = WishVelocity.WithZ( 0f );
+			WishVelocity = WishVelocity.Normal * speed;
+			WishVelocity *= DefaultSpeed;
+		}
 	}
 
 	public override BBox GetHull()
