@@ -33,6 +33,8 @@ public partial class Worm : AnimatedEntity
 
 		SetModel( "models/citizenworm.vmdl" );
 
+		Name = Rand.FromArray( GameConfig.WormNames );
+
 		Controller = new WormController();
 		Animator = new WormAnimator();
 	}

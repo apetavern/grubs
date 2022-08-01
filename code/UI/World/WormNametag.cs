@@ -49,7 +49,7 @@ public class WormNametag : WorldPanel
 		var player = Local.Pawn as GrubsPlayer;
 		if ( player.Camera is GrubsCamera camera )
 		{
-			WorldScale = 1.5f + camera.Distance / camera.MaxDistance;
+			WorldScale = 1.5f + (camera.Distance / camera.MaxDistance * 2);
 		}
 	}
 

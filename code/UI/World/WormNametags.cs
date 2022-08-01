@@ -36,8 +36,6 @@ public class WormNametags
 
 		foreach ( var nametag in Nametags.Values )
 		{
-			nametag.RemoveClass( "team-?" );
-
 			var teamClass = nametag.Worm.GetTeamName();
 			nametag.AddClass( $"team-{teamClass}" );
 		}
