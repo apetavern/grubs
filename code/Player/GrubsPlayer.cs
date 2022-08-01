@@ -31,12 +31,9 @@ public partial class GrubsPlayer : Entity
 		base.Simulate( cl );
 
 		var camera = Camera as GrubsCamera;
-		if ( camera.Target == null )
-		{
-			camera.Target = Worms.First();
-		}
+		camera.Target = Worms.First();
 
-		// Temporarily simulate the first (and only) worm.
+		// Simulate each worm.
 		foreach ( var worm in Worms )
 		{
 			worm.Simulate( cl );
