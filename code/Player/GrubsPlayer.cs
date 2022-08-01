@@ -1,4 +1,6 @@
-﻿namespace Grubs.Player;
+﻿using Grubs.Utils;
+
+namespace Grubs.Player;
 
 public partial class GrubsPlayer : Entity
 {
@@ -8,6 +10,9 @@ public partial class GrubsPlayer : Entity
 	[Net]
 	public Worm ActiveWorm { get; set; }
 
+	[Net]
+	public int TeamNumber { get; set; }
+
 	public CameraMode Camera
 	{
 		get => Components.Get<CameraMode>();
@@ -16,6 +21,8 @@ public partial class GrubsPlayer : Entity
 
 	public GrubsPlayer()
 	{
+		TeamNumber = GameConfig.TeamIndex++;
+
 		CreateWorms();
 	}
 
@@ -50,7 +57,7 @@ public partial class GrubsPlayer : Entity
 
 		for ( int i = 0; i < wormsToSpawn; i++ )
 		{
-			var worm = new Worm();
+			var worm = new Worm( TeamNumber );
 			worm.Owner = this;
 			worm.Spawn();
 			worm.Position = spawnPoints[i];

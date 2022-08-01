@@ -7,6 +7,7 @@ global using System.Collections.Generic;
 global using System.Linq;
 
 using Grubs.Player;
+using Grubs.UI;
 
 namespace Grubs;
 
@@ -16,7 +17,10 @@ public partial class GrubsGame : Game
 
 	public GrubsGame()
 	{
-
+		if ( IsClient )
+		{
+			_ = new Hud();
+		}
 	}
 
 	public override void ClientJoined( Client client )

@@ -2,10 +2,10 @@
 
 public class GrubsCamera : CameraMode
 {
-	private float Distance { get; set; } = 1024;
-	private float DistanceScrollRate { get; set; } = 32f;
-	private float MinDistance { get; set; } = 128f;
-	private float MaxDistance { get; set; } = 2048f;
+	public float Distance { get; set; } = 1024;
+	public float DistanceScrollRate { get; set; } = 32f;
+	public float MinDistance { get; set; } = 128f;
+	public float MaxDistance { get; set; } = 2048f;
 
 	private float LerpSpeed { get; set; } = 5f;
 	private bool FocusTarget { get; set; } = true;

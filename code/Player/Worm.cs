@@ -1,4 +1,6 @@
-﻿namespace Grubs.Player;
+﻿using Grubs.Utils;
+
+namespace Grubs.Player;
 
 [Category( "Grubs" )]
 public partial class Worm : AnimatedEntity
@@ -10,7 +12,20 @@ public partial class Worm : AnimatedEntity
 	public WormAnimator Animator { get; set; }
 
 	[Net]
+	public int TeamNumber { get; set; }
+
+	[Net]
 	public bool IsTurn { get; set; } = false;
+
+	public Worm()
+	{
+
+	}
+
+	public Worm( int teamNumber )
+	{
+		TeamNumber = teamNumber;
+	}
 
 	public override void Spawn()
 	{
@@ -27,5 +42,12 @@ public partial class Worm : AnimatedEntity
 		base.Simulate( cl );
 
 		Controller?.Simulate( cl, this, Animator );
+	}
+
+	public char GetTeamName()
+	{
+		var index = TeamNumber - 1;
+
+		return GameConfig.TeamNames[index];
 	}
 }
