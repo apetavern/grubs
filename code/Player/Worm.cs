@@ -1,4 +1,5 @@
 ﻿using Grubs.Utils;
+using Grubs.Weapons;
 
 namespace Grubs.Player;
 
@@ -10,6 +11,12 @@ public partial class Worm : AnimatedEntity
 
 	[Net, Predicted]
 	public WormAnimator Animator { get; set; }
+
+	[Net, Predicted]
+	public GrubsWeapon ActiveChild { get; set; }
+
+	[Net, Predicted]
+	public GrubsWeapon LastActiveChild { get; set; }
 
 	[Net]
 	public int TeamNumber { get; set; }
@@ -45,6 +52,34 @@ public partial class Worm : AnimatedEntity
 		base.Simulate( cl );
 
 		Controller?.Simulate( cl, this, Animator );
+
+		if ( IsTurn )
+			SimulateActiveChild( cl, ActiveChild );
+	}
+
+	public virtual void SimulateActiveChild( Client client, GrubsWeapon child )
+	{
+		if ( LastActiveChild != child )
+		{
+			OnActiveChildChanged( LastActiveChild, child );
+			LastActiveChild = child;
+		}
+
+		if ( !LastActiveChild.IsValid() )
+			return;
+
+		LastActiveChild.Simulate( client );
+	}
+
+	public virtual void OnActiveChildChanged( GrubsWeapon previous, GrubsWeapon next )
+	{
+		previous?.ActiveEnd( this, previous.Owner != this );
+		next?.ActiveStart( this );
+	}
+
+	public void EquipWeapon( GrubsWeapon weapon )
+	{
+		ActiveChild = weapon;
 	}
 
 	public char GetTeamName()

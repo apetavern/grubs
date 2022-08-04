@@ -17,7 +17,12 @@ public static class GameConfig
 		"Perky",
 		"Gumby",
 		"Dick",
-		"Panini"
+		"Panini",
+		"Wilson",
+		"Winky",
+		"Cammy",
+		"Bakky",
+		"Avoofo"
 	};
 
 	public static char[] TeamNames => new[]

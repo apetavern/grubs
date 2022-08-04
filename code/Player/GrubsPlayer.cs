@@ -1,4 +1,5 @@
 ﻿using Grubs.Utils;
+using Grubs.Weapons;
 
 namespace Grubs.Player;
 
@@ -9,6 +10,9 @@ public partial class GrubsPlayer : Entity
 
 	[Net]
 	public Worm ActiveWorm { get; set; }
+
+	[Net, Local]
+	public GrubsInventory Inventory { get; set; }
 
 	[Net]
 	public int TeamNumber { get; set; }
@@ -31,6 +35,13 @@ public partial class GrubsPlayer : Entity
 		base.Spawn();
 
 		Camera = new GrubsCamera();
+
+		Inventory = new GrubsInventory()
+		{
+			Owner = this
+		};
+
+		InitializeInventory();
 	}
 
 	public override void Simulate( Client cl )
@@ -65,7 +76,19 @@ public partial class GrubsPlayer : Entity
 			Worms.Add( worm );
 		}
 
-		Worms.First().IsTurn = true;
+		ActiveWorm = Worms.First();
+		ActiveWorm.IsTurn = true;
+	}
+
+	public void InitializeInventory()
+	{
+		var weapons = TypeLibrary.GetTypes<GrubsWeapon>()
+			.Where( weapon => !weapon.IsAbstract );
+
+		foreach ( var weapon in weapons )
+		{
+			Inventory.Add( TypeLibrary.Create<GrubsWeapon>( weapon ) );
+		}
 	}
 
 	private static List<Vector3> GetSpawnLocations( int num )
