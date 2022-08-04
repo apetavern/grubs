@@ -30,7 +30,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 		EnableDrawing = true;
 		Animator?.SetAnimParameter( "holdpose", (int)HoldPose );
-		SetParent( worm );
+		SetParent( worm, true );
 
 		base.OnActive();
 	}
