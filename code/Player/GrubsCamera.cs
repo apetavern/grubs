@@ -8,9 +8,12 @@ public class GrubsCamera : CameraMode
 	public float MaxDistance { get; set; } = 2048f;
 
 	private float LerpSpeed { get; set; } = 5f;
-	private bool FocusTarget { get; set; } = true;
+	private bool CenterOnPawn { get; set; } = true;
 	private Vector3 Center { get; set; }
 	private float CameraUpOffset { get; set; } = 32f;
+
+	private TimeSince TimeSinceMousePan { get; set; }
+	private static int SecondsBeforeReturnFromPan => 3;
 
 	public Entity Target { get; set; }
 
@@ -23,7 +26,7 @@ public class GrubsCamera : CameraMode
 		Distance = Distance.Clamp( MinDistance, MaxDistance );
 
 		// Get the center position, plus move the camera up a little bit.
-		var cameraCenter = (FocusTarget) ? Target.Position : Center;
+		var cameraCenter = (CenterOnPawn) ? Target.Position : Center;
 		cameraCenter += Vector3.Up * CameraUpOffset;
 
 		var targetPosition = cameraCenter + Vector3.Right * Distance;
@@ -31,5 +34,30 @@ public class GrubsCamera : CameraMode
 
 		var lookDir = (cameraCenter - targetPosition).Normal;
 		Rotation = Rotation.LookAt( lookDir, Vector3.Up );
+
+		// Handle camera panning
+		if ( Input.Down( InputButton.SecondaryAttack ) )
+			MoveCamera();
+
+		// Check the last time we panned the camera, update CenterOnPawn if greater than N.
+		if ( !Input.Down( InputButton.SecondaryAttack ) && TimeSinceMousePan > SecondsBeforeReturnFromPan )
+			CenterOnPawn = true;
+	}
+
+	private void MoveCamera()
+	{
+		var delta = new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
+		TimeSinceMousePan = 0;
+
+		if ( CenterOnPawn )
+		{
+			Center = Target.Position;
+
+			// Check if we've moved the camera, don't center on the pawn if we have
+			if ( !delta.LengthSquared.AlmostEqual( 0, 0.1f ) )
+				CenterOnPawn = false;
+		}
+
+		Center += delta;
 	}
 }

@@ -52,7 +52,7 @@ public partial class GrubsPlayer : Entity
 		if ( !IsServer )
 			return;
 
-		int wormsToSpawn = 2;
+		int wormsToSpawn = GameConfig.WormCount;
 		List<Vector3> spawnPoints = GetSpawnLocations( wormsToSpawn );
 
 		for ( int i = 0; i < wormsToSpawn; i++ )
