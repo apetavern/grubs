@@ -27,7 +27,7 @@ public partial class GrubsGame : Game
 	{
 		base.ClientJoined( client );
 
-		var player = new GrubsPlayer();
+		var player = new GrubsPlayer( client );
 		client.Pawn = player;
 
 		player.Spawn();

@@ -23,11 +23,16 @@ public partial class GrubsPlayer : Entity
 		set => Components.Add( value );
 	}
 
-	public GrubsPlayer()
+	public GrubsPlayer( Client cl )
 	{
 		TeamNumber = GameConfig.TeamIndex++;
 
-		CreateWorms();
+		CreateWorms( cl );
+	}
+
+	public GrubsPlayer()
+	{
+		
 	}
 
 	public override void Spawn()
@@ -58,7 +63,7 @@ public partial class GrubsPlayer : Entity
 		}
 	}
 
-	public void CreateWorms()
+	public void CreateWorms(Client cl)
 	{
 		if ( !IsServer )
 			return;
@@ -70,7 +75,7 @@ public partial class GrubsPlayer : Entity
 		{
 			var worm = new Worm( TeamNumber );
 			worm.Owner = this;
-			worm.Spawn();
+			worm.Spawn(cl);
 			worm.Position = spawnPoints[i];
 
 			Worms.Add( worm );

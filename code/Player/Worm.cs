@@ -24,6 +24,8 @@ public partial class Worm : AnimatedEntity
 	[Net]
 	public bool IsTurn { get; set; } = false;
 
+	private bool IsDressed { get; set; } = false;
+
 	public Worm()
 	{
 
@@ -34,7 +36,7 @@ public partial class Worm : AnimatedEntity
 		TeamNumber = teamNumber;
 	}
 
-	public override void Spawn()
+	public void Spawn( Client cl )
 	{
 		base.Spawn();
 
@@ -45,6 +47,10 @@ public partial class Worm : AnimatedEntity
 
 		Controller = new WormController();
 		Animator = new WormAnimator();
+
+		DressFromClient( cl );
+		SetHatVisible( true );
+
 	}
 
 	public override void Simulate( Client cl )
@@ -55,6 +61,7 @@ public partial class Worm : AnimatedEntity
 
 		if ( IsTurn )
 			SimulateActiveChild( cl, ActiveChild );
+
 	}
 
 	public virtual void SimulateActiveChild( Client client, GrubsWeapon child )
@@ -87,5 +94,49 @@ public partial class Worm : AnimatedEntity
 		var index = TeamNumber - 1;
 
 		return GameConfig.TeamNames[index];
+	}
+
+	public void DressFromClient( Client cl )
+	{
+		var clothes = new ClothingContainer();
+		clothes.LoadFromClient( cl );
+		IsDressed = true;
+
+
+		// Skin tone
+		var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizenworm.vmdl" );
+		SetMaterialGroup( skinTone?.MaterialGroup );
+
+		// We only want the hair/hats so we won't use the logic built into Clothing
+		var items = clothes.Clothing.Where( item =>
+			item.Category == Clothing.ClothingCategory.Hair ||
+			item.Category == Clothing.ClothingCategory.Hat
+		);
+
+		if ( !items.Any() )
+			return;
+
+		foreach ( var item in items )
+		{
+			var ent = new AnimatedEntity( item.Model, this );
+
+			// Add a tag to the hat so we can reference it later.
+			if ( item.Category == Clothing.ClothingCategory.Hat )
+				ent.Tags.Add( "hat" );
+
+			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
+				ent.SetMaterialGroup( item.MaterialGroup );
+		}
+
+	}
+
+	public void SetHatVisible( bool visible )
+	{
+		var hat = Children.OfType<AnimatedEntity>().FirstOrDefault( child => child.Tags.Has( "hat" ) );
+
+		if ( hat is null )
+			return;
+
+		hat.EnableDrawing = visible;
 	}
 }
