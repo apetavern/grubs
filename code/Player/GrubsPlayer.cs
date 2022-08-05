@@ -32,7 +32,7 @@ public partial class GrubsPlayer : Entity
 
 	public GrubsPlayer()
 	{
-		
+
 	}
 
 	public override void Spawn()
@@ -63,7 +63,7 @@ public partial class GrubsPlayer : Entity
 		}
 	}
 
-	public void CreateWorms(Client cl)
+	public void CreateWorms( Client cl )
 	{
 		if ( !IsServer )
 			return;
@@ -75,7 +75,7 @@ public partial class GrubsPlayer : Entity
 		{
 			var worm = new Worm( TeamNumber );
 			worm.Owner = this;
-			worm.Spawn(cl);
+			worm.Spawn( cl );
 			worm.Position = spawnPoints[i];
 
 			Worms.Add( worm );
