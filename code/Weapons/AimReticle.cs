@@ -8,6 +8,8 @@ public partial class AimReticle : RenderEntity
 	public Vector3 Direction = Vector3.Zero;
 	public float Power = 0.0f;
 
+	public bool ShowReticle { get; set; } = false;
+
 	protected void DrawReticle( SceneObject obj, Vector3 startPos, Vector3 endPos, Vector3 direction, Vector3 size, Color color )
 	{
 		// vbos are drawn relative to world position
@@ -37,6 +39,9 @@ public partial class AimReticle : RenderEntity
 
 	public override void DoRender( SceneObject obj )
 	{
+		if ( !ShowReticle )
+			return;
+
 		Render.SetupLighting( obj );
 
 		// Previously we were rendering in front of terrain.

@@ -83,10 +83,11 @@ public abstract partial class GrubsWeapon : BaseCarriable
 		EnableDrawing = show;
 		ShowHoldPose( show );
 
-		// TODO: How should we hide the AimReticle?
-
 		if ( WeaponHasHat )
 			worm.SetHatVisible( !show );
+
+		if ( IsClient && HasReticle && AimReticle is not null )
+			AimReticle.ShowReticle = show;
 	}
 
 	protected void ShowHoldPose( bool show )
