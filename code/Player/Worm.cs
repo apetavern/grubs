@@ -24,8 +24,6 @@ public partial class Worm : AnimatedEntity
 	[Net]
 	public bool IsTurn { get; set; } = false;
 
-	private bool IsDressed { get; set; } = false;
-
 	public Worm()
 	{
 
@@ -100,8 +98,6 @@ public partial class Worm : AnimatedEntity
 	{
 		var clothes = new ClothingContainer();
 		clothes.LoadFromClient( cl );
-		IsDressed = true;
-
 
 		// Skin tone
 		var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizenworm.vmdl" );
