@@ -123,6 +123,8 @@ public partial class WormController : BasePlayerController
 		{
 			Velocity = Velocity.WithZ( 0 );
 		}
+
+		worm.ActiveChild?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
 	}
 
 	private void SetEyeTransform()

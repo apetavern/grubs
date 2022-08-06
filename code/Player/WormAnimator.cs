@@ -11,6 +11,9 @@ public class WormAnimator : PawnAnimator
 		float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length;
 		SetAnimParameter( "velocity", velocity );
 
+		float aimAngle = -Pawn.EyeRotation.Pitch().Clamp( -80f, 75f );
+		SetAnimParameter( "aimangle", aimAngle );
+
 		var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).Ignore( Pawn ).Run();
 		float incline = Pawn.Rotation.Forward.Angle( tr.Normal ) - 90f;
 		SetAnimParameter( "incline", incline );

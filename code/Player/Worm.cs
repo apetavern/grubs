@@ -121,8 +121,9 @@ public partial class Worm : AnimatedEntity
 			var ent = new AnimatedEntity( item.Model, this );
 
 			// Add a tag to the hat so we can reference it later.
-			if ( item.Category == Clothing.ClothingCategory.Hat )
-				ent.Tags.Add( "hat" );
+			if ( item.Category == Clothing.ClothingCategory.Hat
+				|| item.Category == Clothing.ClothingCategory.Hair )
+				ent.Tags.Add( "head" );
 
 			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 				ent.SetMaterialGroup( item.MaterialGroup );
@@ -132,11 +133,11 @@ public partial class Worm : AnimatedEntity
 
 	public void SetHatVisible( bool visible )
 	{
-		var hat = Children.OfType<AnimatedEntity>().FirstOrDefault( child => child.Tags.Has( "hat" ) );
+		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( "head" ) );
 
-		if ( hat is null )
-			return;
-
-		hat.EnableDrawing = visible;
+		foreach ( var hat in hats )
+		{
+			hat.EnableDrawing = visible;
+		}
 	}
 }
