@@ -39,14 +39,17 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 	public override void ActiveEnd( Entity ent, bool dropped )
 	{
-		base.ActiveEnd( ent, dropped );
+		if ( ent is not Worm worm )
+			return;
+
+		EnableDrawing = false;
+		ShowWeapon( worm, false );
+		SetParent( Owner );
 	}
 
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
-
-		Log.Info( WeaponHasHat );
 	}
 
 	public void ShowWeapon( Worm worm, bool show )
