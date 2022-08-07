@@ -8,7 +8,6 @@ public class WormNametag : WorldPanel
 
 	private static Vector3 Offset => Vector3.Up * 48;
 
-
 	private Label name;
 	private Label health;
 

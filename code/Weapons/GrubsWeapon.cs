@@ -11,7 +11,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	public virtual HoldPose HoldPose => HoldPose.None;
 	public virtual bool HasReticle => true;
 
-	public static AimReticle AimReticle;
+	public AimReticle AimReticle;
 
 	[Net, Local] public int Ammo { get; set; }
 	[Net] public bool WeaponHasHat { get; set; }
@@ -78,6 +78,12 @@ public abstract partial class GrubsWeapon : BaseCarriable
 		AimReticle.Direction = dir;
 	}
 
+	/// <summary>
+	/// Method to set whether the weapon should currently be visible.
+	/// Used to hide the weapon while jumping, moving, etc.
+	/// </summary>
+	/// <param name="worm">The worm to update weapon visiblity on.</param>
+	/// <param name="show">Whether the weapon should be shown.</param>
 	public void ShowWeapon( Worm worm, bool show )
 	{
 		EnableDrawing = show;

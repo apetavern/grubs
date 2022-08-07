@@ -3,7 +3,7 @@
 public static class GameConfig
 {
 	// Gameplay Configuration
-	public static int WormCount = 1;
+	public static int WormCount = 2;
 
 	// Worm Configuration
 	public static string[] WormNames => new[]
@@ -22,7 +22,8 @@ public static class GameConfig
 		"Winky",
 		"Cammy",
 		"Bakky",
-		"Avoofo"
+		"Avoofo",
+		"Gibby"
 	};
 
 	public static char[] TeamNames => new[]

@@ -23,16 +23,16 @@ public partial class GrubsPlayer : Entity
 		set => Components.Add( value );
 	}
 
+	public GrubsPlayer()
+	{
+
+	}
+
 	public GrubsPlayer( Client cl )
 	{
 		TeamNumber = GameConfig.TeamIndex++;
 
 		CreateWorms( cl );
-	}
-
-	public GrubsPlayer()
-	{
-
 	}
 
 	public override void Spawn()
@@ -63,6 +63,11 @@ public partial class GrubsPlayer : Entity
 		}
 	}
 
+	/// <summary>
+	/// Create and spawn the worms for this player. Number of worms spawned
+	/// is defined by WormCount from GameConfig.
+	/// </summary>
+	/// <param name="cl">The client associated with this player.</param>
 	public void CreateWorms( Client cl )
 	{
 		if ( !IsServer )
@@ -85,7 +90,7 @@ public partial class GrubsPlayer : Entity
 		ActiveWorm.IsTurn = true;
 	}
 
-	public void InitializeInventory()
+	private void InitializeInventory()
 	{
 		var weapons = TypeLibrary.GetTypes<GrubsWeapon>()
 			.Where( weapon => !weapon.IsAbstract );
@@ -110,5 +115,24 @@ public partial class GrubsPlayer : Entity
 			}
 		}
 		return spawnLocations;
+	}
+
+	/// <summary>
+	/// Set a new ActiveWorm from the worms list.
+	/// </summary>
+	public void PickNextWorm()
+	{
+		RotateWorms();
+		ActiveWorm = Worms[0];
+	}
+
+	/// <summary>
+	/// Rotate the worms list.
+	/// </summary>
+	private void RotateWorms()
+	{
+		var current = Worms[0];
+		Worms.RemoveAt( 0 );
+		Worms.Add( current );
 	}
 }
