@@ -7,12 +7,12 @@ Layer0
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "textures/environment/dirt_rocks_ambientOcclusion.png"
+	TextureAmbientOcclusion "textures/environment/dirt_rocks_ao.png"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "textures/environment/dirt_rocks_basecolor.png"
+	TextureColor "textures/environment/dirt_rocks_color.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -31,7 +31,7 @@ Layer0
 	TextureNormal "textures/environment/dirt_rocks_normal.png"
 
 	//---- Roughness ----
-	TextureRoughness "textures/environment/dirt_rocks_roughness.png"
+	TextureRoughness "textures/environment/dirt_rocks_rough.png"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
