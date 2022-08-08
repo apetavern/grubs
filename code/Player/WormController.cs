@@ -66,8 +66,12 @@ public partial class WormController : BasePlayerController
 	{
 		var worm = Pawn as Worm;
 
+		var isFiring = false;
+		if ( worm.ActiveChild is not null && worm.ActiveChild.IsValid() )
+			isFiring = worm.ActiveChild.IsFiring;
+
 		UpdateBBox();
-		SetEyeTransform();
+		SetEyeTransform( isFiring );
 
 		if ( Unstuck.TestAndFix() )
 			return;
@@ -78,7 +82,7 @@ public partial class WormController : BasePlayerController
 
 		BaseVelocity = BaseVelocity.WithZ( 0 );
 
-		if ( Input.Pressed( InputButton.Jump ) && worm.IsTurn )
+		if ( Input.Pressed( InputButton.Jump ) && worm.IsTurn && !isFiring )
 		{
 			CheckJumpButton();
 		}
@@ -96,7 +100,7 @@ public partial class WormController : BasePlayerController
 		}
 
 		// Take Input if it is currently the worms turn. Don't allow movement while jumping.
-		WishVelocity = worm.IsTurn && IsGrounded ? -Input.Left * Vector3.Forward : Vector3.Zero;
+		WishVelocity = worm.IsTurn && !isFiring && IsGrounded ? -Input.Left * Vector3.Forward : Vector3.Zero;
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
 
 		WishVelocity = WishVelocity.WithZ( 0 );
@@ -127,16 +131,17 @@ public partial class WormController : BasePlayerController
 		worm.ActiveChild?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
 	}
 
-	private void SetEyeTransform()
+	private void SetEyeTransform( bool isFiring )
 	{
+
 		// Calculate eye position in world.
 		EyeLocalPosition = new Vector3( 0, 0, 24 );
 
 		// Set EyeRot to face the way we're walking.
 		LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
-		// Only allow aiming changes if the grub isn't moving.
-		if ( Velocity.Normal.IsNearlyZero( 2.5f ) && (Pawn as Worm).IsTurn )
+		// Only allow aiming changes if the grub isn't moving and not currently charing a weapon shot.
+		if ( Velocity.Normal.IsNearlyZero( 2.5f ) && (Pawn as Worm).IsTurn && !isFiring )
 		{
 			// Aim with W & S keys
 			EyeRotation = Rotation.LookAt( LookPos );

@@ -1,4 +1,5 @@
 ﻿using Grubs.Player;
+using Grubs.Weapons.Projectiles;
 
 namespace Grubs.Weapons;
 
@@ -7,6 +8,8 @@ public abstract partial class GrubsWeapon : BaseCarriable
 {
 	public virtual string WeaponName => "";
 	public virtual string ModelPath => "";
+	public virtual string ProjectileModelPath => "";
+	public virtual FiringType FiringType => FiringType.Instant;
 	public virtual int MaxFireCount => 1;
 	public virtual HoldPose HoldPose => HoldPose.None;
 	public virtual bool HasReticle => true;
@@ -15,8 +18,12 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 	[Net, Local] public int Ammo { get; set; }
 	[Net] public bool WeaponHasHat { get; set; }
+	[Net] public int Charge { get; set; }
+	[Net] public bool IsFiring { get; set; } = false;
 
 	protected WormAnimator Animator;
+
+	private readonly int maxCharge = 100;
 
 	public override void Spawn()
 	{
@@ -24,6 +31,11 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 		SetModel( ModelPath );
 		WeaponHasHat = CheckWeaponForHat();
+	}
+
+	public void Fire()
+	{
+		new Projectile().WithModel( ProjectileModelPath ).SetPosition( Position );
 	}
 
 	public override void ActiveStart( Entity ent )
@@ -53,6 +65,33 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
+
+		if ( FiringType is FiringType.Charged )
+		{
+			if ( Input.Down( InputButton.PrimaryAttack ) )
+			{
+				IsFiring = true;
+				Charge++;
+				Charge = Charge.Clamp( 0, maxCharge );
+			}
+
+			if ( Input.Released( InputButton.PrimaryAttack ) )
+			{
+				IsFiring = false;
+				Log.Info( $"Fired {this} weapon charged. Final Charge: {Charge}" );
+				Charge = 0;
+				Fire();
+			}
+		}
+		else
+		{
+			if ( Input.Pressed( InputButton.PrimaryAttack ) )
+			{
+				Log.Info( $"Fired {this} weapon instantly." );
+				Fire();
+			}
+		}
+
 
 		if ( IsClient && HasReticle )
 			AdjustReticle();
