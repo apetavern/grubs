@@ -33,9 +33,21 @@ public abstract partial class GrubsWeapon : BaseCarriable
 		WeaponHasHat = CheckWeaponForHat();
 	}
 
+	/// <summary>
+	/// Server-side method to implement that controls what happens 
+	/// when the Fire button is pressed.
+	/// </summary>
+	protected virtual void OnFire() { }
+
+	/// <summary>
+	/// Method which acts as the entry point for firing a weapon.
+	/// </summary>
 	public void Fire()
 	{
-		new Projectile().WithModel( ProjectileModelPath ).SetPosition( Position );
+		if ( !IsServer )
+			return;
+
+		OnFire();
 	}
 
 	public override void ActiveStart( Entity ent )
