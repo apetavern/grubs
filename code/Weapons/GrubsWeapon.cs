@@ -78,6 +78,19 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	{
 		base.Simulate( cl );
 
+		CheckFireInput();
+
+		if ( IsClient && HasReticle )
+			AdjustReticle();
+	}
+
+	protected void CheckFireInput()
+	{
+		// Only fire is our worm is grounded.
+		var controller = (Owner as GrubsPlayer).ActiveWorm.Controller;
+		if ( !controller.IsGrounded )
+			return;
+
 		if ( FiringType is FiringType.Charged )
 		{
 			if ( Input.Down( InputButton.PrimaryAttack ) )
@@ -103,10 +116,6 @@ public abstract partial class GrubsWeapon : BaseCarriable
 				Fire();
 			}
 		}
-
-
-		if ( IsClient && HasReticle )
-			AdjustReticle();
 	}
 
 	protected void AdjustReticle()

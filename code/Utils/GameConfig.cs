@@ -3,7 +3,7 @@
 public static class GameConfig
 {
 	// Gameplay Configuration
-	public static int WormCount = 1;
+	public static int WormCount { get; set; } = 1;
 
 	// Worm Configuration
 	public static string[] WormNames => new[]
