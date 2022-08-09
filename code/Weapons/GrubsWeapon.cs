@@ -44,6 +44,8 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	/// </summary>
 	public void Fire()
 	{
+		(Parent as Worm).SetAnimParameter( "fire", true );
+
 		if ( !IsServer )
 			return;
 
