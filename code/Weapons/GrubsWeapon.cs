@@ -1,5 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.Weapons.Projectiles;
+using Grubs.UI.World;
 
 namespace Grubs.Weapons;
 
@@ -12,10 +13,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	public virtual FiringType FiringType => FiringType.Instant;
 	public virtual int MaxFireCount => 1;
 	public virtual HoldPose HoldPose => HoldPose.None;
-	public virtual bool HasReticle => true;
-
-	public AimReticle AimReticle;
-
+	public virtual bool HasReticle { get; set; }
 	[Net, Local] public int Ammo { get; set; }
 	[Net] public bool WeaponHasHat { get; set; }
 	[Net] public int Charge { get; set; }
@@ -28,9 +26,9 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	public override void Spawn()
 	{
 		base.Spawn();
-
 		SetModel( ModelPath );
 		WeaponHasHat = CheckWeaponForHat();
+
 	}
 
 	/// <summary>
@@ -81,9 +79,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 		base.Simulate( cl );
 
 		CheckFireInput();
-
-		if ( IsClient && HasReticle )
-			AdjustReticle();
+		CheckReticle();
 	}
 
 	protected void CheckFireInput()
@@ -120,26 +116,6 @@ public abstract partial class GrubsWeapon : BaseCarriable
 		}
 	}
 
-	protected void AdjustReticle()
-	{
-		if ( !AimReticle.IsValid() )
-			AimReticle = new();
-
-		var upOffset = Vector3.Up * 5f;
-
-		var pos = Position + Parent.EyeRotation.Forward.Normal * 50;
-		var dir = Parent.EyeRotation.Forward.Normal;
-
-		var tr = Trace.Ray( Position, pos ).Size( AimReticle.RenderBounds ).WorldOnly().Run();
-
-		if ( tr.Hit )
-			pos = tr.EndPosition;
-
-		pos += upOffset;
-		AimReticle.Position = pos;
-		AimReticle.Direction = dir;
-	}
-
 	/// <summary>
 	/// Method to set whether the weapon should currently be visible.
 	/// Used to hide the weapon while jumping, moving, etc.
@@ -154,8 +130,9 @@ public abstract partial class GrubsWeapon : BaseCarriable
 		if ( WeaponHasHat )
 			worm.SetHatVisible( !show );
 
-		if ( IsClient && HasReticle && AimReticle is not null )
-			AimReticle.ShowReticle = show;
+		// if ( IsClient && HasReticle && AimReticle is not null )
+		// AimReticle.ShowReticle = show;
+		// AimReticle.ShowReticle = show;
 	}
 
 	protected void ShowHoldPose( bool show )
@@ -176,5 +153,15 @@ public abstract partial class GrubsWeapon : BaseCarriable
 				return true;
 
 		return false;
+	}
+
+	private void CheckReticle()
+	{
+
+		if ( !HasReticle && IsClient )
+		{
+			new AimReticle( (Local.Pawn as GrubsPlayer).ActiveWorm );
+			HasReticle = true;
+		}
 	}
 }
