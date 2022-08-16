@@ -18,20 +18,17 @@ public partial class Worm : AnimatedEntity
 	[Net, Predicted]
 	public GrubsWeapon LastActiveChild { get; set; }
 
-	[Net]
-	public int TeamNumber { get; set; }
+	public int TeamNumber => Owner is GrubsPlayer player ? player.TeamNumber : 1;
 
-	[Net]
-	public bool IsTurn { get; set; } = false;
-
-	public Worm()
+	public bool IsTurn
 	{
-
-	}
-
-	public Worm( int teamNumber )
-	{
-		TeamNumber = teamNumber;
+		get
+		{
+			if ( Owner is not GrubsPlayer player )
+				return false;
+			
+			return player.ActiveWorm == this && player.IsTurn;
+		}
 	}
 
 	public void Spawn( Client cl )

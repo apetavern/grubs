@@ -1,4 +1,5 @@
-﻿using Grubs.Utils;
+﻿using Grubs.States;
+using Grubs.Utils;
 using Grubs.Weapons;
 
 namespace Grubs.Player;
@@ -17,11 +18,24 @@ public partial class GrubsPlayer : Entity
 	[Net]
 	public int TeamNumber { get; set; }
 
+	public bool IsTurn
+	{
+		get
+		{
+			if ( GrubsGame.Current.CurrentState is not PlayState playState )
+				return false;
+			
+			return playState.TeamsTurn == TeamNumber;
+		}
+	}
+
 	public CameraMode Camera
 	{
 		get => Components.Get<CameraMode>();
 		set => Components.Add( value );
 	}
+
+	public bool TeamDead => Worms.Count == 0;
 
 	public GrubsPlayer()
 	{
@@ -78,16 +92,13 @@ public partial class GrubsPlayer : Entity
 
 		for ( int i = 0; i < wormsToSpawn; i++ )
 		{
-			var worm = new Worm( TeamNumber );
-			worm.Owner = this;
+			var worm = new Worm {Owner = this, Position = spawnPoints[i]};
 			worm.Spawn( cl );
-			worm.Position = spawnPoints[i];
 
 			Worms.Add( worm );
 		}
 
 		ActiveWorm = Worms.First();
-		ActiveWorm.IsTurn = true;
 	}
 
 	private void InitializeInventory()
