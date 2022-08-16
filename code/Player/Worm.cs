@@ -26,7 +26,7 @@ public partial class Worm : AnimatedEntity
 		{
 			if ( Owner is not GrubsPlayer player )
 				return false;
-			
+
 			return player.ActiveWorm == this && player.IsTurn;
 		}
 	}

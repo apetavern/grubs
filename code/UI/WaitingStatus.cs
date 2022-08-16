@@ -9,11 +9,11 @@ public class WaitingStatus : Panel
 	private static WaitingState State => GrubsGame.Current.CurrentState as WaitingState;
 
 	private readonly Label _message;
-	
+
 	public WaitingStatus()
 	{
 		StyleSheet.Load( "/UI/Stylesheets/WaitingStatus.scss" );
-		
+
 		_message = Add.Label( "???", "message" );
 	}
 

@@ -27,11 +27,11 @@ public abstract partial class BaseState : Entity
 	{
 		if ( _entered )
 			return;
-		
+
 		_entered = true;
 		_forced = forced;
 		RunEnterEvents();
-		
+
 		if ( IsServer )
 			EnterGameRpc( To.Everyone, forced );
 	}
@@ -43,11 +43,11 @@ public abstract partial class BaseState : Entity
 	protected virtual void Leave()
 	{
 		RunLeaveEvents();
-		
+
 		if ( IsServer )
 			LeaveGameRpc( To.Everyone );
 	}
-	
+
 	/// <summary>
 	/// Called when a new client has joined the game.
 	/// </summary>
@@ -55,7 +55,7 @@ public abstract partial class BaseState : Entity
 	public virtual void ClientJoined( Client cl )
 	{
 		Host.AssertServer();
-		
+
 		EnterGameRpc( To.Single( cl ), _forced );
 	}
 
@@ -107,7 +107,7 @@ public abstract partial class BaseState : Entity
 	{
 		Leave();
 	}
-	
+
 	/// <summary>
 	/// Changes the game state.
 	/// </summary>
@@ -115,8 +115,8 @@ public abstract partial class BaseState : Entity
 	protected static void SwitchStateTo<T>( params object[] parameters ) where T : BaseState
 	{
 		Host.AssertServer();
-		
-		SwitchStateTo( TypeLibrary.Create<T>( typeof(T) ), false, parameters );
+
+		SwitchStateTo( TypeLibrary.Create<T>( typeof( T ) ), false, parameters );
 	}
 
 	/// <summary>
@@ -133,10 +133,10 @@ public abstract partial class BaseState : Entity
 		currentState?.Leave();
 		GrubsGame.Current.CurrentState = state;
 		state?.Enter( force, parameters );
-		
+
 		currentState?.Delete();
 	}
-	
+
 	[ConCmd.Admin( "state" )]
 	public static void ForceStateCmd( string stateName )
 	{

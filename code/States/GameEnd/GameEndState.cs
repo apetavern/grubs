@@ -14,7 +14,7 @@ public class GameEndState : BaseState
 			case GameResultType.Abandoned:
 				break;
 			default:
-				throw new ArgumentOutOfRangeException( nameof(parameters) );
+				throw new ArgumentOutOfRangeException( nameof( parameters ) );
 		}
 	}
 }

@@ -23,7 +23,7 @@ public partial class GrubsGame : Game
 		{
 			CurrentState = new WaitingState();
 		}
-		
+
 		if ( IsClient )
 		{
 			_ = new Hud();
@@ -33,14 +33,14 @@ public partial class GrubsGame : Game
 	public override void ClientJoined( Client client )
 	{
 		base.ClientJoined( client );
-		
+
 		CurrentState?.ClientJoined( client );
 	}
 
 	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnect( cl, reason );
-		
+
 		CurrentState?.ClientDisconnected( cl, reason );
 	}
 
@@ -49,11 +49,11 @@ public partial class GrubsGame : Game
 	{
 		CurrentState?.Tick();
 	}
-	
+
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
-		
+
 		CurrentState?.Simulate( cl );
 	}
 

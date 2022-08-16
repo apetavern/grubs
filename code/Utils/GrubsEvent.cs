@@ -6,7 +6,7 @@ public static class GrubsEvent
 {
 	#region EnterState
 	public const string EnterStateEvent = "grubs_enter-state";
-	
+
 	[AttributeUsage( AttributeTargets.Method )]
 	public class EnterStateAttribute : EventAttribute
 	{
@@ -23,7 +23,7 @@ public static class GrubsEvent
 	{
 		public const string ClientEvent = EnterStateEvent + ".client";
 		public const string ServerEvent = EnterStateEvent + ".server";
-		
+
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute
 		{
@@ -35,7 +35,7 @@ public static class GrubsEvent
 				AssertValidState( state );
 			}
 		}
-		
+
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ServerAttribute : EventAttribute
 		{
@@ -49,10 +49,10 @@ public static class GrubsEvent
 		}
 	}
 	#endregion
-	
+
 	#region LeaveState
 	public const string LeaveStateEvent = "grubs_leave-state";
-	
+
 	[AttributeUsage( AttributeTargets.Method )]
 	public class LeaveStateAttribute : EventAttribute
 	{
@@ -69,7 +69,7 @@ public static class GrubsEvent
 	{
 		public const string ClientEvent = LeaveStateEvent + ".client";
 		public const string ServerEvent = LeaveStateEvent + ".server";
-		
+
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute
 		{
@@ -81,7 +81,7 @@ public static class GrubsEvent
 				AssertValidState( state );
 			}
 		}
-		
+
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ServerAttribute : EventAttribute
 		{
@@ -95,7 +95,7 @@ public static class GrubsEvent
 		}
 	}
 	#endregion
-	
+
 	private static void AssertValidState( string state )
 	{
 		//var type = TypeLibrary.GetTypeByName( state );

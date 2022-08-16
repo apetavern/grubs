@@ -34,7 +34,7 @@ public partial class WaitingState : BaseState
 		var participants = new List<Client>();
 		for ( var i = 0; i < Math.Min( Client.All.Count, GameConfig.MaximumPlayers ); i++ )
 			participants.Add( Client.All[i] );
-			
+
 		SwitchStateTo<PlayState>( participants );
 	}
 }

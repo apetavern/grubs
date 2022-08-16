@@ -25,9 +25,9 @@ public class TurnTime : Panel
 			return;
 
 		_timeLeft.Text = Math.Floor( State.TimeUntilTurnEnd ).ToString( CultureInfo.CurrentCulture );
-		
+
 		// TODO: Event for when turn changes and update there
 		foreach ( var teamName in GameConfig.TeamNames )
-			SetClass( $"team-{teamName}", GameConfig.TeamNames[State.TeamsTurn-1] == teamName );
+			SetClass( $"team-{teamName}", GameConfig.TeamNames[State.TeamsTurn - 1] == teamName );
 	}
 }

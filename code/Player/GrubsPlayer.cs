@@ -24,7 +24,7 @@ public partial class GrubsPlayer : Entity
 		{
 			if ( GrubsGame.Current.CurrentState is not PlayState playState )
 				return false;
-			
+
 			return playState.TeamsTurn == TeamNumber;
 		}
 	}
@@ -92,7 +92,7 @@ public partial class GrubsPlayer : Entity
 
 		for ( int i = 0; i < wormsToSpawn; i++ )
 		{
-			var worm = new Worm {Owner = this, Position = spawnPoints[i]};
+			var worm = new Worm { Owner = this, Position = spawnPoints[i] };
 			worm.Spawn( cl );
 
 			Worms.Add( worm );

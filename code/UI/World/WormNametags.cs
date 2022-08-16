@@ -18,8 +18,8 @@ public class WormNametags
 		{
 			if ( Nametags.ContainsKey( worm ) )
 				continue;
-			
-			Nametags.Add( worm, new WormNametag {Worm = worm as Worm} );
+
+			Nametags.Add( worm, new WormNametag { Worm = worm as Worm } );
 		}
 	}
 

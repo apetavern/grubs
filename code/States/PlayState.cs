@@ -49,7 +49,7 @@ public partial class PlayState : BaseState
 		// Start the game.
 		Participants = participants;
 		NextTurn();
-		
+
 		base.Enter( forced, parameters );
 	}
 
@@ -60,10 +60,10 @@ public partial class PlayState : BaseState
 			base.Leave();
 			return;
 		}
-		
+
 		foreach ( var client in Client.All )
 			client.Pawn?.Delete();
-		
+
 		base.Leave();
 	}
 
@@ -82,7 +82,7 @@ public partial class PlayState : BaseState
 	public override void Tick()
 	{
 		base.Tick();
-		
+
 		if ( TimeUntilTurnEnd <= 0 )
 			NextTurn();
 	}
@@ -92,7 +92,7 @@ public partial class PlayState : BaseState
 		var participant = Participants[TeamsTurn++ - 1];
 		if ( TeamsTurn > Participants.Count )
 			TeamsTurn = 1;
-		
+
 		(participant.Pawn as GrubsPlayer)!.PickNextWorm();
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
 	}
