@@ -4,6 +4,9 @@ public static class GameConfig
 {
 	// Gameplay Configuration
 	public static int WormCount { get; set; } = 1;
+	public static int MinimumPlayers { get; } = 2;
+	public static int MaximumPlayers { get; } = 4;
+	public static int TurnDuration { get; } = 60;
 
 	// Worm Configuration
 	public static string[] WormNames => new[]
