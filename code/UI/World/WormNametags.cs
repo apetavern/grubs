@@ -4,7 +4,7 @@ namespace Grubs.UI.World;
 
 public class WormNametags
 {
-	private Dictionary<Entity, WormNametag> Nametags { get; set; } = new();
+	private Dictionary<Entity, WormNametag> Nametags { get; } = new();
 
 	public WormNametags()
 	{
@@ -12,25 +12,19 @@ public class WormNametags
 		Update();
 	}
 
-	public void Update()
+	private void Update()
 	{
-		if ( Host.IsClient )
+		foreach ( var worm in Entity.All.Where( e => e is Worm ) )
 		{
-			foreach ( var worm in Entity.All.Where( e => e is Worm ) )
-			{
-				if ( !Nametags.ContainsKey( worm ) )
-				{
-					var nametag = new WormNametag();
-					nametag.Worm = worm as Worm;
-
-					Nametags.Add( worm, nametag );
-				}
-			}
+			if ( Nametags.ContainsKey( worm ) )
+				continue;
+			
+			Nametags.Add( worm, new WormNametag {Worm = worm as Worm} );
 		}
 	}
 
-	[Event.Tick]
-	public void OnTick()
+	[Event.Tick.Client]
+	public void Frame()
 	{
 		Update();
 
