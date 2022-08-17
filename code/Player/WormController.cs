@@ -1,4 +1,6 @@
-﻿namespace Grubs.Player;
+﻿using Grubs.States;
+
+namespace Grubs.Player;
 
 public partial class WormController : BasePlayerController
 {
@@ -100,7 +102,9 @@ public partial class WormController : BasePlayerController
 		}
 
 		// Take Input if it is currently the worms turn. Don't allow movement while jumping.
-		WishVelocity = worm.IsTurn && !isFiring && IsGrounded ? -Input.Left * Vector3.Forward : Vector3.Zero;
+		WishVelocity = worm.IsTurn && !isFiring && IsGrounded && !(GrubsGame.Current.CurrentState as PlayState).UsedTurn
+			? -Input.Left * Vector3.Forward
+			: Vector3.Zero;
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
 
 		WishVelocity = WishVelocity.WithZ( 0 );

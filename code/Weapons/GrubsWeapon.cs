@@ -1,4 +1,5 @@
 ﻿using Grubs.Player;
+using Grubs.States;
 using Grubs.Weapons.Projectiles;
 using Grubs.UI.World;
 
@@ -35,7 +36,10 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	/// Server-side method to implement that controls what happens 
 	/// when the Fire button is pressed.
 	/// </summary>
-	protected virtual void OnFire() { }
+	protected virtual void OnFire()
+	{
+		(GrubsGame.Current.CurrentState as PlayState).UseTurn();
+	}
 
 	/// <summary>
 	/// Method which acts as the entry point for firing a weapon.

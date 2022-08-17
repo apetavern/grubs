@@ -1,12 +1,14 @@
 ﻿using Grubs.Player;
 using Grubs.Utils;
+using Grubs.Weapons.Projectiles;
 
 namespace Grubs.States;
 
 public partial class PlayState : BaseState
 {
 	[Net] public IList<Client> Participants { get; private set; } = new List<Client>();
-	[Net] public int TeamsTurn { get; set; } = 1;
+	[Net] public int TeamsTurn { get; private set; } = 1;
+	[Net] public bool UsedTurn { get; private set; }
 	[Net] public TimeUntil TimeUntilTurnEnd { get; private set; }
 
 	protected override void Enter( bool forced, params object[] parameters )
@@ -83,8 +85,28 @@ public partial class PlayState : BaseState
 	{
 		base.Tick();
 
-		if ( TimeUntilTurnEnd <= 0 )
-			NextTurn();
+		if ( !UsedTurn )
+		{
+			if ( TimeUntilTurnEnd <= 0 )
+				NextTurn();
+			
+			return;
+		}
+
+		// No worms should be moving around to end the turn
+		if ( All.OfType<Worm>().Any( worm => !worm.Velocity.IsNearlyZero( 0.1f ) ) )
+			return;
+
+		// All projectiles should've exploded before ending the turn
+		if ( All.OfType<Projectile>().Any() )
+			return;
+			
+		NextTurn();
+	}
+
+	public void UseTurn()
+	{
+		UsedTurn = true;
 	}
 
 	private void NextTurn()
@@ -94,6 +116,7 @@ public partial class PlayState : BaseState
 			TeamsTurn = 1;
 
 		(participant.Pawn as GrubsPlayer)!.PickNextWorm();
+		UsedTurn = false;
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
 	}
 
