@@ -11,7 +11,7 @@ public partial class WaitingState : BaseState
 	{
 		base.ClientJoined( cl );
 
-		if ( Client.All.Count >= GameConfig.MinimumPlayers )
+		if ( Client.All.Count >= GameConfig.MinimumPlayers && Client.All.Count <= GameConfig.MaximumPlayers )
 			TimeUntilStart = 10;
 	}
 
