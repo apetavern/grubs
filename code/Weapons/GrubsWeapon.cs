@@ -88,35 +88,37 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 	protected void CheckFireInput()
 	{
-		// Only fire is our worm is grounded.
+		// Only fire if our worm is grounded and we haven't used our turn.
 		var controller = (Owner as GrubsPlayer).ActiveWorm.Controller;
-		if ( !controller.IsGrounded )
+		if ( !controller.IsGrounded && (GrubsGame.Current.CurrentState as PlayState).UsedTurn )
 			return;
 
-		if ( FiringType is FiringType.Charged )
+		switch ( FiringType )
 		{
-			if ( Input.Down( InputButton.PrimaryAttack ) )
-			{
-				IsFiring = true;
-				Charge++;
-				Charge = Charge.Clamp( 0, maxCharge );
-			}
+			case FiringType.Charged:
+				if ( Input.Down( InputButton.PrimaryAttack ) )
+				{
+					IsFiring = true;
+					Charge++;
+					Charge = Charge.Clamp( 0, maxCharge );
+				}
 
-			if ( Input.Released( InputButton.PrimaryAttack ) )
-			{
-				IsFiring = false;
-				Log.Info( $"Fired {this} weapon charged. Final Charge: {Charge}" );
-				Charge = 0;
-				Fire();
-			}
-		}
-		else
-		{
-			if ( Input.Pressed( InputButton.PrimaryAttack ) )
-			{
-				Log.Info( $"Fired {this} weapon instantly." );
-				Fire();
-			}
+				if ( Input.Released( InputButton.PrimaryAttack ) )
+				{
+					IsFiring = false;
+					Fire();
+					Charge = 0;
+				}
+				
+				break;
+			case FiringType.Instant:
+				if ( Input.Pressed( InputButton.PrimaryAttack ) )
+					Fire();
+				
+				break;
+			default:
+				Log.Error( $"Got invalid firing type: {FiringType}" );
+				break;
 		}
 	}
 
