@@ -5,7 +5,7 @@ namespace Grubs.Weapons.Projectiles;
 public class Projectile : ModelEntity
 {
 	private bool IsResolved { get; set; }
-	
+
 	private TimeSince TimeSinceSegmentStarted { get; set; }
 	private float CollisionExplosionDelaySeconds { get; set; }
 	private float Speed { get; set; } = 0.001f;
@@ -41,7 +41,7 @@ public class Projectile : ModelEntity
 		Speed = 1 / speed;
 		return this;
 	}
-	
+
 	public Projectile MoveAlongTrace( List<ArcSegment> points )
 	{
 		Segments = points;
@@ -51,7 +51,7 @@ public class Projectile : ModelEntity
 
 		return this;
 	}
-	
+
 	[Event.Tick]
 	public void Tick()
 	{
@@ -107,7 +107,7 @@ public class Projectile : ModelEntity
 
 		if ( !IsValid )
 			return;
-		
+
 		Explode();
 	}
 
@@ -116,7 +116,7 @@ public class Projectile : ModelEntity
 		ExplosionHelper.DoBlastWithRadius( Position, ExplosionRadius );
 		Delete();
 	}
-	
+
 	private void DrawSegments()
 	{
 		foreach ( var segment in Segments )

@@ -109,12 +109,12 @@ public abstract partial class GrubsWeapon : BaseCarriable
 					Fire();
 					Charge = 0;
 				}
-				
+
 				break;
 			case FiringType.Instant:
 				if ( Input.Pressed( InputButton.PrimaryAttack ) )
 					Fire();
-				
+
 				break;
 			default:
 				Log.Error( $"Got invalid firing type: {FiringType}" );

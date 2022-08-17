@@ -89,7 +89,7 @@ public partial class PlayState : BaseState
 		{
 			if ( TimeUntilTurnEnd <= 0 )
 				NextTurn();
-			
+
 			return;
 		}
 
@@ -100,7 +100,7 @@ public partial class PlayState : BaseState
 		// All projectiles should've exploded before ending the turn
 		if ( All.OfType<Projectile>().Any() )
 			return;
-			
+
 		NextTurn();
 	}
 
@@ -125,7 +125,7 @@ public partial class PlayState : BaseState
 	{
 		if ( GrubsGame.Current.CurrentState is not PlayState state )
 			return;
-		
+
 		state.NextTurn();
 	}
 }

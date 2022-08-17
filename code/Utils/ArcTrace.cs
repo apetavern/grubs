@@ -27,7 +27,7 @@ public class ArcTrace
 			var offset = (float)i / (SegmentCount / 2);
 			var position = (float)Math.Pow( 1 - offset, 3 ) * StartPos + 1 * (1 - offset) * offset * controlPoint + (float)Math.Pow( offset, 3 ) * endPos;
 
-			ArcSegment segment = new() {StartPos = from};
+			ArcSegment segment = new() { StartPos = from };
 			from = position;
 			segment.EndPos = from;
 
@@ -67,7 +67,7 @@ public class ArcTrace
 
 		for ( var i = 0; i < SegmentCount; i++ )
 		{
-			ArcSegment segment = new() {StartPos = position};
+			ArcSegment segment = new() { StartPos = position };
 
 			velocity -= new Vector3( windForceX, 0, 0 );
 			velocity -= Map.Physics.Gravity * epsilon;
@@ -110,7 +110,7 @@ public class ArcTrace
 			var traceEnd = trace.Last();
 			if ( Vector3.GetAngle( traceEnd.HitNormal, Vector3.Up ) < 45 )
 				break;
-			
+
 			activeForce *= 0.66f;
 
 			DebugOverlay.Line( traceEnd.EndPos, traceEnd.EndPos + traceEnd.HitNormal * 10, Color.Red );

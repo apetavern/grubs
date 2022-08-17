@@ -19,8 +19,8 @@ public class ExplosionHelper : Entity
 		var effectedEntities = FindInSphere( origin, radius ).OfType<Worm>();
 
 		foreach ( var entity in effectedEntities )
-			entity.TakeDamage( new DamageInfo {Position = origin, Flags = DamageFlags.Blast, Damage = 0} );
-		
+			entity.TakeDamage( new DamageInfo { Position = origin, Flags = DamageFlags.Blast, Damage = 0 } );
+
 		DebugOverlay.Sphere( origin, radius, Color.Red, 1 );
 	}
 }

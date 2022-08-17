@@ -14,12 +14,12 @@ public class Bazooka : GrubsWeapon
 	protected override void OnFire()
 	{
 		base.OnFire();
-		
+
 		// Projectile with bazooka shell, starts at bazooka location, and explodes after
 		// 5 seconds if collision does not occur first.
 		var segments = new ArcTrace( Parent, Parent.EyePosition )
 			.RunTowards( Parent.EyeRotation.Forward.Normal, 0.5f * Charge, 0 );
-		
+
 		new Projectile()
 			.WithModel( ProjectileModelPath )
 			.SetPosition( Position )
