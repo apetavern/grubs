@@ -96,4 +96,13 @@ public partial class PlayState : BaseState
 		(participant.Pawn as GrubsPlayer)!.PickNextWorm();
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
 	}
+
+	[ConCmd.Admin]
+	public static void SkipTurn()
+	{
+		if ( GrubsGame.Current.CurrentState is not PlayState state )
+			return;
+		
+		state.NextTurn();
+	}
 }
