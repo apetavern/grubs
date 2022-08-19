@@ -1,4 +1,6 @@
-﻿namespace Grubs.Player;
+﻿using Grubs.States;
+
+namespace Grubs.Player;
 
 public class GrubsCamera : CameraMode
 {
@@ -19,8 +21,16 @@ public class GrubsCamera : CameraMode
 
 	public override void Update()
 	{
-		if ( Target == null )
-			return;
+		// For some reason clients take 5-10 seconds to receive network information properly.
+		var player = Entity.All.OfType<GrubsPlayer>().Where( player => player.ActiveWorm.IsTurn ).FirstOrDefault();
+		if ( player == null )
+		{
+			Target = Local.Pawn;
+		}
+		else
+		{
+			Target = player.ActiveWorm;
+		}
 
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = Distance.Clamp( MinDistance, MaxDistance );
