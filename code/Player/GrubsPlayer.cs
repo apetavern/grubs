@@ -39,10 +39,10 @@ public partial class GrubsPlayer : Entity
 
 	public GrubsPlayer()
 	{
-
+		Transmit = TransmitType.Always;
 	}
 
-	public GrubsPlayer( Client cl )
+	public GrubsPlayer( Client cl ) : this()
 	{
 		TeamNumber = GameConfig.TeamIndex++;
 

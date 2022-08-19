@@ -31,6 +31,11 @@ public partial class Worm : AnimatedEntity
 		}
 	}
 
+	public Worm()
+	{
+		Transmit = TransmitType.Always;
+	}
+
 	public void Spawn( Client cl )
 	{
 		base.Spawn();
