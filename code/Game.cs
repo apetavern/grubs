@@ -8,6 +8,7 @@ global using System.Linq;
 
 using Grubs.Player;
 using Grubs.States;
+using Grubs.Terrain;
 using Grubs.UI;
 
 namespace Grubs;
@@ -15,10 +16,17 @@ namespace Grubs;
 public partial class GrubsGame : Game
 {
 	public static new GrubsGame Current => Game.Current as GrubsGame;
-	[Net] public BaseState CurrentState { get; set; }
+
+	[Net]
+	public BaseState CurrentState { get; set; }
+
+	public TerrainMap TerrainMap { get; set; }
 
 	public GrubsGame()
 	{
+		// Uncomment below to use WIP Terrain!
+		// InitializeTerrainMap();
+
 		if ( IsServer )
 		{
 			CurrentState = new WaitingState();
@@ -62,5 +70,12 @@ public partial class GrubsGame : Game
 		base.FrameSimulate( cl );
 
 		CurrentState?.FrameSimulate( cl );
+	}
+
+	public void InitializeTerrainMap()
+	{
+		TerrainMap = new TerrainMap( 100, 100 );
+
+		var model = new TerrainModel();
 	}
 }
