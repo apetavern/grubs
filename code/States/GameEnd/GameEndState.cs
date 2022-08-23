@@ -19,6 +19,7 @@ public class GameEndState : BaseState
 			case GameResultType.Draw:
 				break;
 			case GameResultType.Abandoned:
+				var reason = (string)parameters[1];
 				break;
 			default:
 				throw new ArgumentOutOfRangeException( nameof( parameters ) );

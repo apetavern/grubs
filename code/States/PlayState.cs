@@ -79,7 +79,7 @@ public partial class PlayState : BaseState
 		foreach ( var participant in Participants )
 		{
 			if ( participant == cl )
-				SwitchStateTo<GameEndState>( GameResultType.Abandoned );
+				SwitchStateTo<GameEndState>( GameResultType.Abandoned, reason.ToString() );
 		}
 	}
 
