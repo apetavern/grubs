@@ -1,4 +1,5 @@
-﻿using Grubs.Utils;
+﻿using Grubs.Player;
+using Grubs.Utils;
 using Grubs.Weapons.Projectiles;
 
 namespace Grubs.Weapons;
@@ -21,6 +22,7 @@ public class Bazooka : GrubsWeapon
 			.RunTowards( Parent.EyeRotation.Forward.Normal, 0.5f * Charge, 0 );
 
 		new Projectile()
+			.WithWorm( Parent as Worm )
 			.WithModel( ProjectileModelPath )
 			.SetPosition( Position )
 			.MoveAlongTrace( segments )

@@ -1,26 +1,36 @@
 ﻿using Grubs.Player;
+using Grubs.Utils.Extensions;
 
 namespace Grubs.Utils;
 
-public class ExplosionHelper : Entity
+public static class ExplosionHelper
 {
-	private static ExplosionHelper Instance { get; set; }
-
-	public static void DoBlastWithRadius( Vector3 origin, float radius = 100f )
+	public static void Explode( Vector3 position, Worm source, float radius = 100, float maxDamage = 100 )
 	{
 		Host.AssertServer();
 
-		if ( !Host.IsServer )
-			return;
+		var sourcePos = position;
+		foreach ( var worm in Entity.All.OfType<Worm>().Where( x => Vector3.DistanceBetween( sourcePos, x.Position ) <= radius ) )
+		{
+			if ( !worm.IsValid() || worm.LifeState != LifeState.Alive )
+				continue;
 
-		if ( Instance is null || !Instance.IsValid )
-			Instance = new ExplosionHelper();
+			var dist = Vector3.DistanceBetween( position, worm.Position );
+			if ( dist > radius )
+				continue;
 
-		var effectedEntities = FindInSphere( origin, radius ).OfType<Worm>();
+			var distanceFactor = 1.0f - Math.Clamp( dist / radius, 0, 1 );
+			var force = distanceFactor * 1000; // TODO: PhysicsGroup/Body is invalid on worms
 
-		foreach ( var entity in effectedEntities )
-			entity.TakeDamage( new DamageInfo { Position = origin, Flags = DamageFlags.Blast, Damage = 0 } );
+			var dir = (worm.Position - position).Normal;
+			worm.ApplyAbsoluteImpulse( dir * force );
 
-		DebugOverlay.Sphere( origin, radius, Color.Red, 1 );
+			if ( !GameConfig.FriendlyFire && worm != source && worm.TeamNumber == source.TeamNumber )
+				continue;
+
+			worm.TakeDamage( DamageInfoExtension.FromProjectile( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
+		}
+
+		DebugOverlay.Sphere( position, radius, Color.Red, 1 );
 	}
 }

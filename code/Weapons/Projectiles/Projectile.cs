@@ -1,4 +1,5 @@
-﻿using Grubs.Utils;
+﻿using Grubs.Player;
+using Grubs.Utils;
 
 namespace Grubs.Weapons.Projectiles;
 
@@ -11,6 +12,13 @@ public class Projectile : ModelEntity
 	private float Speed { get; set; } = 0.001f;
 	private float ExplosionRadius { get; set; } = 100;
 	private List<ArcSegment> Segments { get; set; }
+	private Worm Worm { get; set; }
+
+	public Projectile WithWorm( Worm worm )
+	{
+		Worm = worm;
+		return this;
+	}
 
 	public Projectile WithModel( string modelPath )
 	{
@@ -113,7 +121,7 @@ public class Projectile : ModelEntity
 
 	private void Explode()
 	{
-		ExplosionHelper.DoBlastWithRadius( Position, ExplosionRadius );
+		ExplosionHelper.Explode( Position, Worm, ExplosionRadius );
 		Delete();
 	}
 
