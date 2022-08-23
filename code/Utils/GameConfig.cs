@@ -3,10 +3,16 @@
 public static class GameConfig
 {
 	// Gameplay Configuration
-	public static int WormCount { get; set; } = 1;
-	public static int MinimumPlayers { get; } = 2;
-	public static int MaximumPlayers { get; } = 4;
-	public static int TurnDuration { get; } = 60;
+	[ConVar.Replicated( "worm_count" )]
+	public static int WormCount { get; set; } = 10;
+	[ConVar.Replicated( "turn_duration" )]
+	public static int TurnDuration { get; set; } = 60;
+	[ConVar.Replicated( "minimum_players" )]
+	public static int MinimumPlayers { get; set; } = 2;
+	[ConVar.Replicated( "maximum_players" )]
+	public static int MaximumPlayers { get; set; } = 4;
+	[ConVar.Replicated( "friendly_fire" )]
+	public static bool FriendlyFire { get; set; } = true;
 
 	// Worm Configuration
 	public static string[] WormNames => new[]

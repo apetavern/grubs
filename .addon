@@ -29,6 +29,51 @@
       "RootNamespace": "Grubs",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
       "NoWarn": "1701;1702;1591;"
+    },
+    "GameSettings": {
+      "worm_count": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "worm_count",
+        "DisplayName": "Worm Count",
+        "DefaultValue": "10",
+        "Minimum": 1,
+        "Maximum": 100
+      },
+      "turn_duration": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "turn_duration",
+        "DisplayName": "Turn Duration",
+        "DefaultValue": "60",
+        "Minimum": 1,
+        "Maximum": 60
+      },
+      "minimum_players": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "minimum_players",
+        "DisplayName": "Minimum Players",
+        "DefaultValue": "0",
+        "Minimum": 2,
+        "Maximum": 99
+      },
+      "maximum_players": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "maximum_players",
+        "DisplayName": "Maximum Players",
+        "DefaultValue": "4",
+        "Minimum": 3,
+        "Maximum": 100
+      },
+      "friendly_fire": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "friendly_fire",
+        "DisplayName": "Friendly Fire",
+        "DefaultValue": "true"
+      }
     }
   }
 }
