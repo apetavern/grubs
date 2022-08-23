@@ -3,5 +3,6 @@
 public enum GameResultType
 {
 	TeamWon,
+	Draw,
 	Abandoned
 }

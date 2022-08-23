@@ -6,10 +6,15 @@ public class GameEndState : BaseState
 	{
 		base.Enter( forced, parameters );
 
+		if ( !IsServer )
+			return;
+
 		switch ( (GameResultType)parameters[0] )
 		{
 			case GameResultType.TeamWon:
 				var teamWon = (int)parameters[1];
+				break;
+			case GameResultType.Draw:
 				break;
 			case GameResultType.Abandoned:
 				break;
