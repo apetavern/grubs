@@ -99,6 +99,52 @@ public static class GrubsEvent
 	}
 	#endregion
 
+	#region WormHurt
+	public const string WormHurtEvent = "grubs_worm-hurt";
+
+	[AttributeUsage( AttributeTargets.Method )]
+	public class WormHurtAttribute : EventAttribute
+	{
+		public WormHurtAttribute( string state = null ) : base( WormHurtEvent + state ?? string.Empty )
+		{
+			if ( state is null )
+				return;
+
+			AssertValidState( state );
+		}
+	}
+
+	public static class WormHurt
+	{
+		public const string ClientEvent = ClientPrefix + WormHurtEvent;
+		public const string ServerEvent = ServerPrefix + WormHurtEvent;
+
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ClientAttribute : EventAttribute
+		{
+			public ClientAttribute( string state = null ) : base( ClientEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ServerAttribute : EventAttribute
+		{
+			public ServerAttribute( string state = null ) : base( ServerEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+	}
+	#endregion
+
 	private static void AssertValidState( string state )
 	{
 		//var type = TypeLibrary.GetTypeByName( state );

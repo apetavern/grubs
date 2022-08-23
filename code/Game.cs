@@ -16,7 +16,7 @@ namespace Grubs;
 
 public partial class GrubsGame : Game
 {
-	public static new GrubsGame Current => Game.Current as GrubsGame;
+	public new static GrubsGame Current => Game.Current as GrubsGame;
 
 	[Net]
 	public BaseState CurrentState { get; set; }
