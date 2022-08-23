@@ -28,7 +28,7 @@ public class AimReticle : WorldPanel
 		Rotation = Rotation.RotateAroundAxis( Vector3.Forward, 0.25f );
 
 		WormChecks();
-		if ( Worm.ActiveChild.GetType() != grubsWeapon )
+		if ( Worm.ActiveChild is null || Worm.ActiveChild.GetType() != grubsWeapon )
 		{
 			DestroyReticle();
 		}

@@ -132,6 +132,7 @@ public partial class Worm : AnimatedEntity
 
 	public void EquipWeapon( GrubsWeapon weapon )
 	{
+		ActiveChild?.ShowWeapon( this, false );
 		ActiveChild = weapon;
 	}
 

@@ -113,6 +113,8 @@ public partial class PlayState : BaseState
 
 	private void NextTurn()
 	{
+		(Participants[TeamsTurn - 1].Pawn as GrubsPlayer).ActiveWorm.EquipWeapon( null );
+
 		if ( CheckState() )
 			return;
 
@@ -150,7 +152,7 @@ public partial class PlayState : BaseState
 
 		if ( teamsDead == Participants.Count - 1 )
 		{
-			SwitchStateTo<GameEndState>( GameResultType.TeamWon, new GrubsPlayer[] {lastTeamAlive} );
+			SwitchStateTo<GameEndState>( GameResultType.TeamWon, new GrubsPlayer[] { lastTeamAlive } );
 			return true;
 		}
 
