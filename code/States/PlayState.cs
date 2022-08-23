@@ -150,7 +150,7 @@ public partial class PlayState : BaseState
 
 		if ( teamsDead == Participants.Count - 1 )
 		{
-			SwitchStateTo<GameEndState>( GameResultType.TeamWon, lastTeamAlive.TeamNumber );
+			SwitchStateTo<GameEndState>( GameResultType.TeamWon, new GrubsPlayer[] {lastTeamAlive} );
 			return true;
 		}
 
