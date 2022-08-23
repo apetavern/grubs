@@ -9,6 +9,9 @@ public class WormNametag : WorldPanel
 
 	private static Vector3 Offset => Vector3.Up * 48;
 
+	public string WormName => Worm.Name;
+	public string WormHealth => Math.Ceiling( Worm.Health ).ToString( CultureInfo.CurrentCulture );
+
 	public WormNametag( Worm worm )
 	{
 		Worm = worm;
@@ -16,9 +19,9 @@ public class WormNametag : WorldPanel
 		StyleSheet.Load( "/UI/Stylesheets/WormNametag.scss" );
 
 		var name = Add.Label( "Name", "worm-name" );
-		name.Bind( "text", () => Worm.Name );
+		name.Bind( "text", this, nameof( WormName ) );
 		var health = Add.Label( "0", "worm-health" );
-		health.Bind( "text", () => Math.Ceiling( Worm.Health ).ToString( CultureInfo.CurrentCulture ) );
+		health.Bind( "text", this, nameof( WormHealth ) );
 
 		const float width = 600;
 		const float height = 300;
