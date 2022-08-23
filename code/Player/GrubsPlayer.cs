@@ -74,6 +74,17 @@ public partial class GrubsPlayer : Entity
 		}
 	}
 
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		if ( !IsServer )
+			return;
+
+		foreach ( var worm in Worms )
+			worm.Delete();
+	}
+
 	/// <summary>
 	/// Create and spawn the worms for this player. Number of worms spawned
 	/// is defined by WormCount from GameConfig.
