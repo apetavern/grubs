@@ -1,4 +1,5 @@
 ﻿using Grubs.States;
+using Grubs.Utils.Extensions;
 
 namespace Grubs.Player;
 
@@ -15,6 +16,7 @@ public partial class WormController : BasePlayerController
 	[Net] public float Gravity { get; set; } = 800.0f;
 	[Net] public float AirControl { get; set; } = 120.0f;
 	public bool IsGrounded { get; set; }
+	public float FallVelocity { get; private set; }
 
 	// Aim properties
 	private Vector3 LookPos { get; set; }
@@ -67,6 +69,7 @@ public partial class WormController : BasePlayerController
 	public override void Simulate()
 	{
 		var worm = Pawn as Worm;
+		FallVelocity = -worm.Velocity.z;
 
 		var isFiring = false;
 		if ( worm.ActiveChild is not null && worm.ActiveChild.IsValid() )
@@ -132,7 +135,55 @@ public partial class WormController : BasePlayerController
 			Velocity = Velocity.WithZ( 0 );
 		}
 
+		CheckFalling();
+
 		worm.ActiveChild?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
+	}
+
+	public float FallPunchThreshold => 350f; // won't make player's screen / make scrape noise unless player falling at least this fast.
+	public float PlayerLandOnFloatingObject => 173; // Can fall another 173 in/sec without getting hurt
+	public float PlayerMaxSafeFallSpeed => MathF.Sqrt( 2 * Gravity * 20 * 12 ); // approx 20 feet
+	public float PlayerFatalFallSpeed => MathF.Sqrt( 2 * Gravity * 60 * 12 ); // approx 60 feet
+	public float DamageForFallSpeed => 100.0f / (PlayerFatalFallSpeed - PlayerMaxSafeFallSpeed);
+
+	private void CheckFalling()
+	{
+		if ( GroundEntity == null || FallVelocity <= 0 )
+		{
+			return;
+		}
+
+		if ( Pawn.LifeState == LifeState.Dead || FallVelocity < FallPunchThreshold || Pawn.WaterLevel >= 1f )
+		{
+			return;
+		}
+
+		if ( GroundEntity.WaterLevel >= 1f )
+		{
+			FallVelocity -= PlayerLandOnFloatingObject;
+		}
+
+		if ( GroundEntity.Velocity.z < 0.0f )
+		{
+			FallVelocity += GroundEntity.Velocity.z;
+			FallVelocity = MathF.Max( 0.1f, FallVelocity );
+		}
+
+		if ( FallVelocity > PlayerMaxSafeFallSpeed )
+		{
+			TakeFallDamage();
+		}
+	}
+
+	private void TakeFallDamage()
+	{
+		var playState = GrubsGame.Current.CurrentState as PlayState;
+		var activePlayer = playState.Participants[playState.TeamsTurn - 1].Pawn as GrubsPlayer;
+		if ( activePlayer.ActiveWorm == Pawn )
+			playState.UseTurn();
+
+		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
+		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );
 	}
 
 	private void SetEyeTransform( bool isFiring )
@@ -387,6 +438,7 @@ public partial class WormController : BasePlayerController
 		SurfaceFriction = tr.Surface.Friction * 1.25f;
 		if ( SurfaceFriction > 1 ) SurfaceFriction = 1;
 
+		GroundEntity = tr.Entity;
 		if ( tr.Entity != null )
 			IsGrounded = true;
 	}

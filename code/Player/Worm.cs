@@ -1,4 +1,5 @@
 ﻿using Grubs.Utils;
+using Grubs.Utils.Event;
 using Grubs.Weapons;
 
 namespace Grubs.Player;
@@ -19,6 +20,8 @@ public partial class Worm : AnimatedEntity
 	public GrubsWeapon LastActiveChild { get; set; }
 
 	public int TeamNumber => Owner is GrubsPlayer player ? player.TeamNumber : 1;
+
+	private readonly Queue<DamageInfo> _damageQueue = new();
 
 	public bool IsTurn
 	{
@@ -41,7 +44,6 @@ public partial class Worm : AnimatedEntity
 		base.Spawn();
 
 		SetModel( "models/citizenworm.vmdl" );
-
 		Name = Rand.FromArray( GameConfig.WormNames );
 		Health = 100;
 
@@ -50,7 +52,49 @@ public partial class Worm : AnimatedEntity
 
 		DressFromClient( cl );
 		SetHatVisible( true );
+	}
 
+	public override void TakeDamage( DamageInfo info )
+	{
+		if ( !IsServer )
+			return;
+
+		if ( !Velocity.IsNearlyZero( 0.1f ) )
+		{
+			_damageQueue.Enqueue( info );
+			return;
+		}
+
+		LastAttacker = info.Attacker;
+		LastAttackerWeapon = info.Weapon;
+
+		if ( Health <= 0 || LifeState != LifeState.Alive )
+			return;
+
+		Health -= info.Damage;
+		EventRunner.RunLocal( GrubsEvent.WormHurtEvent, this, info.Damage );
+		HurtRpc( To.Everyone, info.Damage );
+
+		if ( Health > 0 )
+			return;
+
+		Health = 0;
+		OnKilled();
+	}
+
+	public override void OnKilled()
+	{
+		if ( LifeState is LifeState.Dying or LifeState.Dead )
+			return;
+
+		LifeState = LifeState.Dying;
+
+		// TODO: Animate death?
+
+		ExplosionHelper.Explode( Position, this, 50 );
+		LifeState = LifeState.Dead;
+		// TODO: Hide the worm instead of deleting it. Possible revive mechanic?
+		EnableDrawing = false;
 	}
 
 	public override void Simulate( Client cl )
@@ -62,6 +106,8 @@ public partial class Worm : AnimatedEntity
 		if ( IsTurn )
 			SimulateActiveChild( cl, ActiveChild );
 
+		if ( IsServer && _damageQueue.Count != 0 && Velocity.IsNearlyZero( 0.1f ) )
+			TakeDamage( _damageQueue.Dequeue() );
 	}
 
 	public virtual void SimulateActiveChild( Client client, GrubsWeapon child )
@@ -126,7 +172,6 @@ public partial class Worm : AnimatedEntity
 			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 				ent.SetMaterialGroup( item.MaterialGroup );
 		}
-
 	}
 
 	public void SetHatVisible( bool visible )
@@ -137,5 +182,11 @@ public partial class Worm : AnimatedEntity
 		{
 			hat.EnableDrawing = visible;
 		}
+	}
+
+	[ClientRpc]
+	private void HurtRpc( float damage )
+	{
+		EventRunner.RunLocal( GrubsEvent.WormHurtEvent, this, damage );
 	}
 }
