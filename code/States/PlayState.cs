@@ -19,6 +19,8 @@ public partial class PlayState : BaseState
 			return;
 		}
 
+		GameConfig.TeamIndex = 1;
+
 		List<Client> participants;
 		if ( forced )
 		{
