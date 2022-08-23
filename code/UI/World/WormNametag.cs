@@ -1,25 +1,27 @@
-﻿using Grubs.Player;
+﻿using System.Globalization;
+using Grubs.Player;
 
 namespace Grubs.UI.World;
 
 public class WormNametag : WorldPanel
 {
-	public Worm Worm { get; set; }
+	public Worm Worm { get; }
 
 	private static Vector3 Offset => Vector3.Up * 48;
 
-	private Label name;
-	private Label health;
-
-	public WormNametag()
+	public WormNametag( Worm worm )
 	{
+		Worm = worm;
+
 		StyleSheet.Load( "/UI/Stylesheets/WormNametag.scss" );
 
-		name = Add.Label( "Name", "worm-name" );
-		health = Add.Label( "0", "worm-health" );
+		var name = Add.Label( "Name", "worm-name" );
+		name.Bind( "text", () => Worm.Name );
+		var health = Add.Label( "0", "worm-health" );
+		health.Bind( "text", () => Math.Ceiling( Worm.Health ).ToString( CultureInfo.CurrentCulture ) );
 
-		float width = 600;
-		float height = 300;
+		const float width = 600;
+		const float height = 300;
 
 		PanelBounds = new Rect( -width / 2, -height / 2, width, height );
 
@@ -30,31 +32,18 @@ public class WormNametag : WorldPanel
 	{
 		base.Tick();
 
-		Move();
-		UpdateLabels();
-	}
-
-	private void Move()
-	{
-		if ( !Worm.IsValid || Worm is null )
+		if ( Worm is null || !Worm.IsValid )
 		{
 			Delete();
 			return;
 		}
 
+		SetClass( "hidden", Worm.LifeState == LifeState.Dead );
+
 		Position = Worm.Position + Offset;
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		var player = Local.Pawn as GrubsPlayer;
-		if ( player.Camera is GrubsCamera camera )
-		{
+		if ( Local.Pawn is GrubsPlayer { Camera: GrubsCamera camera } )
 			WorldScale = 1.5f + (camera.Distance / camera.MaxDistance * 2);
-		}
-	}
-
-	private void UpdateLabels()
-	{
-		name.Text = Worm.Name.ToString();
-		health.Text = Worm.Health.ToString();
 	}
 }

@@ -20,6 +20,10 @@ WormNametag {
     &.team-d {
         color: $team-d;
     }
+    
+    &.hidden {
+        display: none;
+    }
 }
 
 label {

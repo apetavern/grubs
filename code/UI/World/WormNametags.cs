@@ -14,12 +14,12 @@ public class WormNametags
 
 	private void Update()
 	{
-		foreach ( var worm in Entity.All.Where( e => e is Worm ) )
+		foreach ( var worm in Entity.All.OfType<Worm>() )
 		{
 			if ( Nametags.ContainsKey( worm ) )
 				continue;
 
-			Nametags.Add( worm, new WormNametag { Worm = worm as Worm } );
+			Nametags.Add( worm, new WormNametag( worm ) );
 		}
 	}
 
