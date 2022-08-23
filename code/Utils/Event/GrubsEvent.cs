@@ -1,9 +1,12 @@
 ﻿using Grubs.States;
 
-namespace Grubs.Utils;
+namespace Grubs.Utils.Event;
 
 public static class GrubsEvent
 {
+	public const string ClientPrefix = "Client.";
+	public const string ServerPrefix = "Server.";
+
 	#region EnterState
 	public const string EnterStateEvent = "grubs_enter-state";
 
@@ -21,8 +24,8 @@ public static class GrubsEvent
 
 	public static class EnterState
 	{
-		public const string ClientEvent = EnterStateEvent + ".client";
-		public const string ServerEvent = EnterStateEvent + ".server";
+		public const string ClientEvent = ClientPrefix + EnterStateEvent;
+		public const string ServerEvent = ServerPrefix + EnterStateEvent;
 
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute
@@ -67,8 +70,8 @@ public static class GrubsEvent
 
 	public static class LeaveState
 	{
-		public const string ClientEvent = LeaveStateEvent + ".client";
-		public const string ServerEvent = LeaveStateEvent + ".server";
+		public const string ClientEvent = ClientPrefix + LeaveStateEvent;
+		public const string ServerEvent = ServerPrefix + LeaveStateEvent;
 
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute

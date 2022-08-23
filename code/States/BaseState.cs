@@ -1,4 +1,5 @@
 ﻿using Grubs.Utils;
+using Grubs.Utils.Event;
 
 namespace Grubs.States;
 
@@ -79,20 +80,14 @@ public abstract partial class BaseState : Entity
 	// TODO: Somehow receivers of the events get called twice?
 	private void RunEnterEvents()
 	{
-		var realmEvent = IsServer ? GrubsEvent.EnterState.ServerEvent : GrubsEvent.EnterState.ClientEvent;
-		Event.Run( realmEvent + GetType().Name );
-		Event.Run( GrubsEvent.EnterStateEvent + GetType().Name );
-		Event.Run( realmEvent );
-		Event.Run( GrubsEvent.EnterStateEvent );
+		EventRunner.RunLocal( GrubsEvent.EnterStateEvent + GetType().Name );
+		EventRunner.RunLocal( GrubsEvent.EnterStateEvent );
 	}
 
 	private void RunLeaveEvents()
 	{
-		var realmEvent = IsServer ? GrubsEvent.LeaveState.ServerEvent : GrubsEvent.LeaveState.ClientEvent;
-		Event.Run( realmEvent + GetType().Name );
-		Event.Run( GrubsEvent.LeaveStateEvent + GetType().Name );
-		Event.Run( realmEvent );
-		Event.Run( GrubsEvent.LeaveStateEvent );
+		EventRunner.RunLocal( GrubsEvent.LeaveStateEvent + GetType().Name );
+		EventRunner.RunLocal( GrubsEvent.LeaveStateEvent );
 	}
 
 	[ClientRpc]

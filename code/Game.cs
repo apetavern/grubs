@@ -10,6 +10,7 @@ using Grubs.Player;
 using Grubs.States;
 using Grubs.Terrain;
 using Grubs.UI;
+using Grubs.Utils.Event;
 
 namespace Grubs;
 
@@ -30,6 +31,7 @@ public partial class GrubsGame : Game
 		if ( IsServer )
 		{
 			CurrentState = new WaitingState();
+			_ = new EventRunner();
 		}
 
 		if ( IsClient )
