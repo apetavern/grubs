@@ -111,6 +111,9 @@ public partial class PlayState : BaseState
 
 	private void NextTurn()
 	{
+		if ( CheckState() )
+			return;
+
 		var participant = Participants[TeamsTurn++ - 1];
 		if ( TeamsTurn > Participants.Count )
 			TeamsTurn = 1;
@@ -118,6 +121,38 @@ public partial class PlayState : BaseState
 		(participant.Pawn as GrubsPlayer)!.PickNextWorm();
 		UsedTurn = false;
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
+	}
+
+	private bool CheckState()
+	{
+		var teamsDead = 0;
+		GrubsPlayer lastTeamAlive = null;
+
+		foreach ( var participant in Participants )
+		{
+			var pawn = participant.Pawn as GrubsPlayer;
+			if ( pawn.Worms.Any( worm => worm.LifeState != LifeState.Dead ) )
+			{
+				lastTeamAlive = pawn;
+				continue;
+			}
+
+			teamsDead++;
+		}
+
+		if ( teamsDead == Participants.Count )
+		{
+			SwitchStateTo<GameEndState>( GameResultType.Draw );
+			return true;
+		}
+
+		if ( teamsDead == Participants.Count - 1 )
+		{
+			SwitchStateTo<GameEndState>( GameResultType.TeamWon, lastTeamAlive.TeamNumber );
+			return true;
+		}
+
+		return false;
 	}
 
 	[ConCmd.Admin]
