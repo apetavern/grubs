@@ -11,7 +11,7 @@ public class MarchingSquares
 	public List<List<int>> Outlines = new();
 	public HashSet<int> CheckedVertices = new();
 
-	private readonly float localY = 0f;
+	private readonly float localY = -32f;
 	private readonly float resolution = 5f;
 
 	public ModelBuilder Builder = new();
@@ -37,7 +37,7 @@ public class MarchingSquares
 
 		var mesh = new Mesh( Material.Load( "materials/dev/dev_measuregeneric01.vmat" ) )
 		{
-			Bounds = new BBox( 0, new Vector3( Width * resolution, 0, Height * resolution ) )
+			Bounds = new BBox( new Vector3( 0, localY, 0 ), new Vector3( Width * resolution, localY + 64, Height * resolution ) )
 		};
 		mesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
 		mesh.CreateIndexBuffer( Triangles.Count, Triangles );
@@ -57,7 +57,7 @@ public class MarchingSquares
 		List<Vector3> wallVertices = new();
 		List<int> wallTriangles = new();
 
-		float wallHeight = 50f;
+		float wallHeight = 64f;
 
 		var wallMesh = new Mesh( Material.Load( "materials/dev/dev_measuregeneric01.vmat" ) )
 		{

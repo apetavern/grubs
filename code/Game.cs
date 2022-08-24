@@ -23,10 +23,12 @@ public partial class GrubsGame : Game
 
 	public TerrainMap TerrainMap { get; set; }
 
+	public TerrainModel TerrainModel { get; set; }
+
 	public GrubsGame()
 	{
 		// Uncomment below to use WIP Terrain!
-		// InitializeTerrainMap();
+		InitializeTerrainMap();
 
 		if ( IsServer )
 		{
@@ -78,6 +80,42 @@ public partial class GrubsGame : Game
 	{
 		TerrainMap = new TerrainMap( 100, 100 );
 
-		var model = new TerrainModel();
+		TerrainModel = new TerrainModel();
+	}
+
+	public void RegenerateMap()
+	{
+		TerrainModel.GenerateMeshAndWalls();
+	}
+
+
+	/// <summary>
+	/// Test command for flipping a bit in the terrain grid.
+	/// </summary>
+	/// <param name="x">The x position of the bit to flip.</param>
+	/// <param name="z">The z position of the bit to flip.</param>
+	[ConCmd.Server( name: "FlipGridBit" )]
+	public static void FlipGridBit( int x, int z )
+	{
+		var grid = Current.TerrainMap.TerrainGrid;
+		Log.Info( $"{Host.Name} PRE: " + grid[x, z] );
+		grid[x, z] = !grid[x, z];
+		Log.Info( $"{Host.Name} POST: " + grid[x, z] );
+
+		Current.RegenerateMap();
+		FlipGridBitClient( To.Everyone, x, z );
+	}
+
+
+
+	[ClientRpc]
+	public static void FlipGridBitClient( int x, int z )
+	{
+		var grid = Current.TerrainMap.TerrainGrid;
+		Log.Info( $"{Host.Name} PRE: " + grid[x, z] );
+		grid[x, z] = !grid[x, z];
+		Log.Info( $"{Host.Name} POST: " + grid[x, z] );
+
+		Current.RegenerateMap();
 	}
 }

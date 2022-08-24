@@ -18,7 +18,7 @@ public class TerrainModel : ModelEntity
 		GenerateMeshAndWalls();
 	}
 
-	private void GenerateMeshAndWalls()
+	public void GenerateMeshAndWalls()
 	{
 		Model = marchingSquares.GenerateModel();
 		SetupPhysicsFromModel( PhysicsMotionType.Static );

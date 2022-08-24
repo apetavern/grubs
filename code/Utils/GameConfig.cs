@@ -7,7 +7,7 @@ public static class GameConfig
 	/// The amount of worms that will be spawned per player.
 	/// </summary>
 	[ConVar.Replicated( "worm_count" )]
-	public static int WormCount { get; set; } = 10;
+	public static int WormCount { get; set; } = 4;
 	/// <summary>
 	/// The max time in seconds that a player has to make their turn.
 	/// </summary>
