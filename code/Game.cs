@@ -85,6 +85,7 @@ public partial class GrubsGame : Game
 
 	public void RegenerateMap()
 	{
+		Log.Info( Host.Name + " // Regenerating Map" );
 		TerrainModel.GenerateMeshAndWalls();
 	}
 
@@ -116,6 +117,13 @@ public partial class GrubsGame : Game
 		grid[x, z] = !grid[x, z];
 		Log.Info( $"{Host.Name} POST: " + grid[x, z] );
 
+		Current.RegenerateMap();
+	}
+
+	[ClientRpc]
+	public static void ExplodeClient( Vector2 midpoint, int size )
+	{
+		Current.TerrainMap.DestructSphere( midpoint, size );
 		Current.RegenerateMap();
 	}
 }

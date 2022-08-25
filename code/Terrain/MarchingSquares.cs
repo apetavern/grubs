@@ -12,7 +12,7 @@ public class MarchingSquares
 	public HashSet<int> CheckedVertices = new();
 
 	private readonly float localY = -32f;
-	private readonly float resolution = 5f;
+	private readonly float resolution = 15f;
 
 	public ModelBuilder Builder = new();
 
@@ -47,7 +47,7 @@ public class MarchingSquares
 			Builder.AddMesh( mesh );
 		}
 
-		Builder.AddCollisionMesh( Vertices.ToArray(), Triangles.ToArray() );
+		// Builder.AddCollisionMesh( Vertices.ToArray(), Triangles.ToArray() );
 		return Builder.Create();
 	}
 

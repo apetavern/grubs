@@ -3,6 +3,7 @@
 public class TerrainModel : ModelEntity
 {
 	public MarchingSquares marchingSquares = new();
+	public ModelEntity WallModel;
 
 	public override void Spawn()
 	{
@@ -11,22 +12,17 @@ public class TerrainModel : ModelEntity
 		GenerateMeshAndWalls();
 	}
 
-	public override void ClientSpawn()
-	{
-		base.ClientSpawn();
-
-		GenerateMeshAndWalls();
-	}
-
 	public void GenerateMeshAndWalls()
 	{
+		marchingSquares = new();
 		Model = marchingSquares.GenerateModel();
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-		var wallModel = new ModelEntity
+		WallModel?.Delete();
+		WallModel = new ModelEntity
 		{
 			Model = marchingSquares.CreateWallModel()
 		};
-		wallModel.SetupPhysicsFromModel( PhysicsMotionType.Static );
+		WallModel.SetupPhysicsFromModel( PhysicsMotionType.Static );
 	}
 }

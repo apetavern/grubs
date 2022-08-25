@@ -1,6 +1,8 @@
-﻿namespace Grubs.Terrain;
+﻿using System.Diagnostics;
 
-public class TerrainMap
+namespace Grubs.Terrain;
+
+public partial class TerrainMap
 {
 	public bool[,] TerrainGrid { get; set; }
 
@@ -27,7 +29,6 @@ public class TerrainMap
 	private void GenerateTerrainGrid()
 	{
 		TerrainGrid = new bool[Width, Height];
-
 		for ( int x = 0; x < Width; x++ )
 			for ( int z = 0; z < Height; z++ )
 				TerrainGrid[x, z] = Noise.Simplex( x, z ) > surfaceLevel;
@@ -50,5 +51,27 @@ public class TerrainMap
 			}
 
 		TerrainGrid = borderedMap;
+	}
+
+	public void DestructSphere( Vector2 midpoint, int size )
+	{
+		Log.Info( $"{Host.Name} {midpoint.x} {midpoint.y}" );
+		float x = midpoint.x / 15f;
+		float y = midpoint.y / 15f;
+
+		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
+		{
+			for ( int j = 0; j < TerrainGrid.GetLength( 1 ); j++ )
+			{
+				var xDiff = Math.Abs( x - i );
+				var yDiff = Math.Abs( y - j );
+				var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
+				if ( d < size )
+				{
+					// Log.Info( Host.Name + " // deleting " + i + "," + j );
+					TerrainGrid[i, j] = false;
+				}
+			}
+		}
 	}
 }

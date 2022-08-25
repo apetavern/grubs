@@ -31,6 +31,12 @@ public static class ExplosionHelper
 			worm.TakeDamage( DamageInfoExtension.FromProjectile( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
 		}
 
-		DebugOverlay.Sphere( position, radius, Color.Red, 1 );
+		var midpoint = new Vector3( position.x, position.z );
+		var size = MathX.FloorToInt( (float)Math.Sqrt( radius ) );
+		GrubsGame.Current.TerrainMap.DestructSphere( midpoint, size );
+		GrubsGame.ExplodeClient( To.Everyone, midpoint, size );
+
+		GrubsGame.Current.RegenerateMap();
+		DebugOverlay.Sphere( position, radius, Color.Red, 5 );
 	}
 }
