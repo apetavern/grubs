@@ -9,6 +9,7 @@ public class TerrainModel : ModelEntity
 	{
 		base.Spawn();
 
+		Tags.Add( "solid" );
 		GenerateMeshAndWalls();
 	}
 
@@ -24,5 +25,6 @@ public class TerrainModel : ModelEntity
 			Model = marchingSquares.CreateWallModel()
 		};
 		WallModel.SetupPhysicsFromModel( PhysicsMotionType.Static );
+		WallModel.Tags.Add( "solid" );
 	}
 }
