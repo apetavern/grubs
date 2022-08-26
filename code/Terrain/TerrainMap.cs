@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Grubs.Terrain;
+﻿namespace Grubs.Terrain;
 
 public partial class TerrainMap
 {
@@ -12,7 +10,7 @@ public partial class TerrainMap
 
 	public int Seed { get; set; } = 0;
 
-	public bool HasBorder { get; set; } = true;
+	public bool HasBorder { get; set; } = false;
 
 	private readonly float surfaceLevel = 0.40f;
 	private readonly int borderWidth = 5;
@@ -74,6 +72,25 @@ public partial class TerrainMap
 					// Log.Info( Host.Name + " // deleting " + i + "," + j );
 					TerrainGrid[i, j] = false;
 				}
+			}
+		}
+	}
+
+	public Vector3 GetSpawnLocation()
+	{
+		while ( true )
+		{
+			int x = Rand.Int( Width );
+			int z = Rand.Int( Height );
+
+			if ( !TerrainGrid[x, z] )
+			{
+				// TODO: Check the angle of the terrain we are hitting to ensure the worm won't fall off immediately.
+				// Also, 25f is the resolution from MarchingSquares, we should be passing it :)
+				var startPos = new Vector3( x * 25f, 0, z * 25f );
+				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * 25f ).WithTag( "solid" ).Run();
+				if ( tr.Hit )
+					return tr.EndPosition;
 			}
 		}
 	}

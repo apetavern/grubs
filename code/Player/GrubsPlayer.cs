@@ -123,15 +123,16 @@ public partial class GrubsPlayer : Entity
 	private static List<Vector3> GetSpawnLocations( int num )
 	{
 		var spawnLocations = new List<Vector3>();
-		var worldBounds = Map.Physics.Body.GetBounds();
+		// var worldBounds = Map.Physics.Body.GetBounds();
 		while ( spawnLocations.Count < num )
 		{
-			var location = worldBounds.RandomPointInside.WithZ( 1000 );
+			spawnLocations.Add( GrubsGame.Current.TerrainMap.GetSpawnLocation() );
+			/*var location = worldBounds.RandomPointInside.WithZ( 1000 );
 			var tr = Trace.Ray( location, location + Vector3.Down * 1000 ).WorldOnly().Run();
 			if ( tr.Hit )
 			{
 				spawnLocations.Add( location.WithY( 0f ).WithZ( tr.EndPosition.z ) );
-			}
+			}*/
 		}
 		return spawnLocations;
 	}
