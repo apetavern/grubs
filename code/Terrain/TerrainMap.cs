@@ -10,9 +10,11 @@ public partial class TerrainMap
 
 	public int Height { get; set; } = 100;
 
+	public int Seed { get; set; } = 0;
+
 	public bool HasBorder { get; set; } = true;
 
-	private readonly float surfaceLevel = 0.55f;
+	private readonly float surfaceLevel = 0.40f;
 	private readonly int borderWidth = 5;
 
 	public TerrainMap()
@@ -26,12 +28,13 @@ public partial class TerrainMap
 		Height = height;
 	}
 
-	private void GenerateTerrainGrid()
+	public void GenerateTerrainGrid()
 	{
+		Log.Info( Host.Name + " " + Seed );
 		TerrainGrid = new bool[Width, Height];
 		for ( int x = 0; x < Width; x++ )
 			for ( int z = 0; z < Height; z++ )
-				TerrainGrid[x, z] = Noise.Simplex( x, z ) > surfaceLevel;
+				TerrainGrid[x, z] = Noise.Simplex( x + Seed, z + Seed ) > surfaceLevel;
 
 		if ( !HasBorder )
 			return;
@@ -56,8 +59,8 @@ public partial class TerrainMap
 	public void DestructSphere( Vector2 midpoint, int size )
 	{
 		Log.Info( $"{Host.Name} {midpoint.x} {midpoint.y}" );
-		float x = midpoint.x / 15f;
-		float y = midpoint.y / 15f;
+		float x = midpoint.x / 25f;
+		float y = midpoint.y / 25f;
 
 		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
 		{

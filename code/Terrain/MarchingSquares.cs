@@ -12,7 +12,7 @@ public class MarchingSquares
 	public HashSet<int> CheckedVertices = new();
 
 	private readonly float localY = -32f;
-	private readonly float resolution = 15f;
+	private readonly float resolution = 25f;
 
 	public ModelBuilder Builder = new();
 
@@ -32,10 +32,11 @@ public class MarchingSquares
 		var vertList = new List<Vert>();
 		foreach ( var vert in Vertices )
 		{
-			vertList.Add( new Vert( vert ) );
+			vertList.Add( new Vert( vert, Vector3.Left, Vector3.Forward ) );
 		}
 
-		var mesh = new Mesh( Material.Load( "materials/dev/dev_measuregeneric01.vmat" ) )
+		// TODO: Calculate normal/tangent.
+		var mesh = new Mesh( Material.Load( "materials/environment/dirt_rocks.vmat" ) )
 		{
 			Bounds = new BBox( new Vector3( 0, localY, 0 ), new Vector3( Width * resolution, localY + 64, Height * resolution ) )
 		};
@@ -59,7 +60,7 @@ public class MarchingSquares
 
 		float wallHeight = 64f;
 
-		var wallMesh = new Mesh( Material.Load( "materials/dev/dev_measuregeneric01.vmat" ) )
+		var wallMesh = new Mesh( Material.Load( "materials/environment/dirt_rocks.vmat" ) )
 		{
 			Bounds = new BBox( 0, new Vector3( Width * resolution, wallHeight, Height * resolution ) )
 		};
@@ -87,7 +88,7 @@ public class MarchingSquares
 		var vertList = new List<Vert>();
 		foreach ( var vert in wallVertices )
 		{
-			vertList.Add( new Vert( vert ) );
+			vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left ) );
 		}
 
 		wallMesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
@@ -180,6 +181,9 @@ public class MarchingSquares
 					// 4 point:
 					case 15:
 						MeshFromPoints( topLeft, topRight, bottomRight, bottomLeft );
+						// We still want to create walls for the map border, but skip over all other filled squares.
+						if ( x == 0 || z == 0 || x == TerrainGrid.GetLength( 0 ) - 2 || z == TerrainGrid.GetLength( 1 ) - 2 )
+							break;
 						CheckedVertices.Add( topLeft.VertexIndex );
 						CheckedVertices.Add( topRight.VertexIndex );
 						CheckedVertices.Add( bottomRight.VertexIndex );
@@ -271,7 +275,7 @@ public class MarchingSquares
 					newOutline.Add( vertexIndex );
 					Outlines.Add( newOutline );
 					FollowOutline( newOutlineVertex, Outlines.Count - 1 );
-					Outlines[Outlines.Count - 1].Add( vertexIndex );
+					Outlines[^1].Add( vertexIndex );
 				}
 			}
 		}
@@ -387,15 +391,21 @@ public class MarchingSquares
 	public struct Vert
 	{
 		public Vector3 position;
+		public Vector3 normal;
+		public Vector3 tangent;
 
-		public Vert( Vector3 position )
+		public Vert( Vector3 position, Vector3 normal, Vector3 tangent )
 		{
 			this.position = position;
+			this.normal = normal;
+			this.tangent = tangent;
 		}
 
-		public static readonly VertexAttribute[] Layout = new VertexAttribute[1]
+		public static readonly VertexAttribute[] Layout = new VertexAttribute[3]
 		{
-		new VertexAttribute(VertexAttributeType.Position, VertexAttributeFormat.Float32),
+			new VertexAttribute(VertexAttributeType.Position, VertexAttributeFormat.Float32),
+			new VertexAttribute(VertexAttributeType.Normal, VertexAttributeFormat.Float32),
+			new VertexAttribute(VertexAttributeType.Tangent, VertexAttributeFormat.Float32),
 		};
 	}
 }

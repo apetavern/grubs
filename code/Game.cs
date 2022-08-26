@@ -25,6 +25,9 @@ public partial class GrubsGame : Game
 
 	public TerrainModel TerrainModel { get; set; }
 
+	[Net]
+	public int Seed { get; set; }
+
 	public GrubsGame()
 	{
 		// Uncomment below to use WIP Terrain!
@@ -83,12 +86,37 @@ public partial class GrubsGame : Game
 		TerrainModel = new TerrainModel();
 	}
 
-	public void RegenerateMap()
+	[ConCmd.Server( name: "ScrambleMap" )]
+	public static void ScrambleMap()
 	{
-		Log.Info( Host.Name + " // Regenerating Map" );
-		TerrainModel.GenerateMeshAndWalls();
+		if ( Host.IsClient )
+			return;
+
+		Current.Seed = Rand.Int( 99999 );
+		// Log.Info( Current.Seed );
+		Current.TerrainMap.Seed = Current.Seed;
+		SetSeedClient( To.Everyone, Current.Seed );
+		Current.RegenerateGrid();
+		Current.RegenerateMap();
 	}
 
+	[ClientRpc]
+	public static void SetSeedClient( int seed )
+	{
+		Current.TerrainMap.Seed = seed;
+		Current.RegenerateGrid();
+		Current.RegenerateMap();
+	}
+
+	public void RegenerateGrid()
+	{
+		TerrainMap.GenerateTerrainGrid();
+	}
+
+	public void RegenerateMap()
+	{
+		TerrainModel.GenerateMeshAndWalls();
+	}
 
 	/// <summary>
 	/// Test command for flipping a bit in the terrain grid.
@@ -106,8 +134,6 @@ public partial class GrubsGame : Game
 		Current.RegenerateMap();
 		FlipGridBitClient( To.Everyone, x, z );
 	}
-
-
 
 	[ClientRpc]
 	public static void FlipGridBitClient( int x, int z )
