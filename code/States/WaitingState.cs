@@ -35,6 +35,14 @@ public partial class WaitingState : BaseState
 		for ( var i = 0; i < Math.Min( Client.All.Count, GameConfig.MaximumPlayers ); i++ )
 			participants.Add( Client.All[i] );
 
-		SwitchStateTo<PlayState>( participants );
+		switch ( GameConfig.Gamemode )
+		{
+			case "ffa":
+				SwitchStateTo<FreeForAll>( participants );
+				break;
+			default:
+				Log.Error( $"Got unknown gamemode \"{GameConfig.Gamemode}\"" );
+				break;
+		}
 	}
 }

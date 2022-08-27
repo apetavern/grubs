@@ -6,7 +6,7 @@ namespace Grubs.UI;
 
 public class TurnTime : Panel
 {
-	private static PlayState State => GrubsGame.Current.CurrentState as PlayState;
+	private static IGamemode Gamemode => GrubsGame.Current.CurrentState as IGamemode;
 
 	private readonly Label _timeLeft;
 
@@ -21,13 +21,13 @@ public class TurnTime : Panel
 	{
 		base.Tick();
 
-		if ( State is null )
+		if ( Gamemode is null )
 			return;
 
-		_timeLeft.Text = Math.Floor( State.TimeUntilTurnEnd ).ToString( CultureInfo.CurrentCulture );
+		_timeLeft.Text = Math.Floor( Gamemode.TimeUntilTurnEnd ).ToString( CultureInfo.CurrentCulture );
 
 		// TODO: Event for when turn changes and update there
 		foreach ( var teamName in GameConfig.TeamNames )
-			SetClass( $"team-{teamName}", GameConfig.TeamNames[State.TeamsTurn - 1] == teamName );
+			SetClass( $"team-{teamName}", GameConfig.TeamNames[Gamemode.TeamsTurn - 1] == teamName );
 	}
 }

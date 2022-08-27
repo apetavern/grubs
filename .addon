@@ -73,6 +73,18 @@
         "ConVarName": "friendly_fire",
         "DisplayName": "Friendly Fire",
         "DefaultValue": "true"
+      },
+      "grubs_game": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "ffa",
+            "Name": "Free For All"
+          }
+        ],
+        "ConVarName": "grubs_game",
+        "DisplayName": "Gamemode",
+        "DefaultValue": "ffa"
       }
     }
   }

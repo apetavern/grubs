@@ -36,14 +36,14 @@ public class Hud : RootPanel
 		_waitingStatus?.Delete();
 	}
 
-	[GrubsEvent.EnterState.Client( nameof( PlayState ) )]
+	[GrubsEvent.EnterState.Client( nameof( FreeForAll ) )]
 	private void OnEnterPlay()
 	{
 		_turnTime?.Delete();
 		_turnTime = AddChild<TurnTime>();
 	}
 
-	[GrubsEvent.LeaveState.Client( nameof( PlayState ) )]
+	[GrubsEvent.LeaveState.Client( nameof( FreeForAll ) )]
 	private void OnLeavePlay()
 	{
 		_turnTime?.Delete();

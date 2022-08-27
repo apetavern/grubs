@@ -22,10 +22,10 @@ public partial class GrubsPlayer : Entity
 	{
 		get
 		{
-			if ( GrubsGame.Current.CurrentState is not PlayState playState )
+			if ( GrubsGame.Current.CurrentState is not IGamemode gamemode )
 				return false;
 
-			return playState.TeamsTurn == TeamNumber;
+			return gamemode.TeamsTurn == TeamNumber;
 		}
 	}
 

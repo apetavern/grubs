@@ -4,12 +4,16 @@ using Grubs.Weapons.Projectiles;
 
 namespace Grubs.States;
 
-public partial class PlayState : BaseState
+public partial class FreeForAll : BaseState, IGamemode
 {
-	[Net] public IList<Client> Participants { get; private set; } = new List<Client>();
-	[Net] public int TeamsTurn { get; private set; } = 1;
-	[Net] public bool UsedTurn { get; private set; }
-	[Net] public TimeUntil TimeUntilTurnEnd { get; private set; }
+	[Net]
+	public IList<Client> Participants { get; private set; } = new List<Client>();
+	[Net]
+	public int TeamsTurn { get; private set; } = 1;
+	[Net]
+	public bool UsedTurn { get; private set; }
+	[Net]
+	public TimeUntil TimeUntilTurnEnd { get; private set; }
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
@@ -111,7 +115,7 @@ public partial class PlayState : BaseState
 		UsedTurn = true;
 	}
 
-	private void NextTurn()
+	public void NextTurn()
 	{
 		(Participants[TeamsTurn - 1].Pawn as GrubsPlayer).ActiveWorm.EquipWeapon( null );
 
@@ -157,14 +161,5 @@ public partial class PlayState : BaseState
 		}
 
 		return false;
-	}
-
-	[ConCmd.Admin]
-	public static void SkipTurn()
-	{
-		if ( GrubsGame.Current.CurrentState is not PlayState state )
-			return;
-
-		state.NextTurn();
 	}
 }

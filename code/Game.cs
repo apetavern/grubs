@@ -118,6 +118,15 @@ public partial class GrubsGame : Game
 		TerrainModel.GenerateMeshAndWalls();
 	}
 
+	[ConCmd.Admin]
+	public static void SkipTurn()
+	{
+		if ( Current.CurrentState is not IGamemode gamemode )
+			return;
+
+		gamemode.NextTurn();
+	}
+
 	/// <summary>
 	/// Test command for flipping a bit in the terrain grid.
 	/// </summary>

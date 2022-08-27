@@ -29,6 +29,11 @@ public static class GameConfig
 	/// </summary>
 	[ConVar.Replicated( "friendly_fire" )]
 	public static bool FriendlyFire { get; set; } = true;
+	/// <summary>
+	/// The grubs gamemode to play.
+	/// </summary>
+	[ConVar.Replicated( "grubs_game" )]
+	public static string Gamemode { get; set; } = "ffa";
 
 	// Worm Configuration
 	public static string[] WormNames => new[]
