@@ -27,7 +27,7 @@ public partial class WaitingState : BaseState
 	{
 		base.Tick();
 
-		if ( Client.All.Count < GameConfig.MinimumPlayers || TimeUntilStart > 0 )
+		if ( !IsServer || Client.All.Count < GameConfig.MinimumPlayers || TimeUntilStart > 0 )
 			return;
 
 		// TODO: UI for getting participants?

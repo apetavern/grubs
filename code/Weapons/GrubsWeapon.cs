@@ -163,7 +163,6 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 	private void CheckReticle()
 	{
-
 		if ( !HasReticle && IsClient )
 		{
 			new AimReticle( (Local.Pawn as Team).ActiveWorm );

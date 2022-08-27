@@ -9,16 +9,16 @@ namespace Grubs.Player;
 public partial class Worm : AnimatedEntity
 {
 	[Net, Predicted]
-	public WormController Controller { get; set; }
+	public WormController Controller { get; private set; }
 
 	[Net, Predicted]
-	public WormAnimator Animator { get; set; }
+	public WormAnimator Animator { get; private set; }
 
 	[Net, Predicted]
-	public GrubsWeapon ActiveChild { get; set; }
+	public GrubsWeapon ActiveChild { get; private set; }
 
 	[Net, Predicted]
-	public GrubsWeapon LastActiveChild { get; set; }
+	public GrubsWeapon LastActiveChild { get; private set; }
 
 	public Team Team => Owner as Team;
 
@@ -40,7 +40,7 @@ public partial class Worm : AnimatedEntity
 		Transmit = TransmitType.Always;
 	}
 
-	public void Spawn( Client cl )
+	public void Spawn( Client cl = null )
 	{
 		base.Spawn();
 
@@ -51,7 +51,8 @@ public partial class Worm : AnimatedEntity
 		Controller = new WormController();
 		Animator = new WormAnimator();
 
-		DressFromClient( cl );
+		if ( cl is not null )
+			DressFromClient( cl );
 		SetHatVisible( true );
 	}
 

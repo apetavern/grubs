@@ -15,7 +15,7 @@ public partial class WormController : BasePlayerController
 	[Net] public float MaxNonJumpVelocity { get; set; } = 140.0f;
 	[Net] public float Gravity { get; set; } = 800.0f;
 	[Net] public float AirControl { get; set; } = 120.0f;
-	public bool IsGrounded { get; set; }
+	public bool IsGrounded { get; private set; }
 	public float FallVelocity { get; private set; }
 
 	// Aim properties
@@ -59,11 +59,6 @@ public partial class WormController : BasePlayerController
 		var maxs = new Vector3( +girth, +girth, 32 ) * Pawn.Scale;
 
 		SetBBox( mins, maxs );
-	}
-
-	public override void FrameSimulate()
-	{
-		base.FrameSimulate();
 	}
 
 	public override void Simulate()

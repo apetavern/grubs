@@ -79,6 +79,9 @@ public partial class FreeForAll : BaseState, IGamemode
 	{
 		base.Tick();
 
+		if ( !IsServer )
+			return;
+
 		if ( !UsedTurn )
 		{
 			if ( TimeUntilTurnEnd <= 0 )
@@ -100,11 +103,15 @@ public partial class FreeForAll : BaseState, IGamemode
 
 	public void UseTurn()
 	{
+		Host.AssertServer();
+
 		UsedTurn = true;
 	}
 
 	public void NextTurn()
 	{
+		Host.AssertServer();
+
 		TeamManager.CurrentTeam.ActiveWorm.EquipWeapon( null );
 
 		if ( CheckState() )
@@ -117,6 +124,8 @@ public partial class FreeForAll : BaseState, IGamemode
 
 	private bool CheckState()
 	{
+		Host.AssertServer();
+
 		var teamsDead = 0;
 		Team lastTeamAlive = null;
 
