@@ -21,8 +21,8 @@ public class GrubsCamera : CameraMode
 
 	public override void Update()
 	{
-		var player = Entity.All.OfType<GrubsPlayer>().Where( player => player.ActiveWorm.IsTurn ).FirstOrDefault();
-		Target = player == null ? Local.Pawn : player.ActiveWorm;
+		var team = Entity.All.OfType<Team>().FirstOrDefault( team => team.ActiveWorm.IsTurn );
+		Target = team is null ? Local.Pawn : team.ActiveWorm;
 
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = Distance.Clamp( MinDistance, MaxDistance );

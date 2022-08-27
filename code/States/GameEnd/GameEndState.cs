@@ -1,6 +1,4 @@
-﻿using Grubs.Player;
-
-namespace Grubs.States;
+﻿namespace Grubs.States;
 
 public class GameEndState : BaseState
 {
@@ -14,7 +12,7 @@ public class GameEndState : BaseState
 		switch ( (GameResultType)parameters[0] )
 		{
 			case GameResultType.TeamWon:
-				var playersWon = (GrubsPlayer[])parameters[1];
+				var playersWon = (IList<Client>)parameters[1];
 				break;
 			case GameResultType.Draw:
 				break;

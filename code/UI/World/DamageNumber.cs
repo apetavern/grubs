@@ -43,7 +43,7 @@ public class DamageNumber : WorldPanel
 		Position += Vector3.Up * RiseSpeed * Time.Delta;
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		if ( Local.Pawn is GrubsPlayer { Camera: GrubsCamera camera } )
+		if ( Local.Pawn is Team { Camera: GrubsCamera camera } )
 			WorldScale = 1.5f + (camera.Distance / camera.MaxDistance * 2);
 	}
 

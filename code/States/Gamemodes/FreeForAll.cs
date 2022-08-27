@@ -7,9 +7,7 @@ namespace Grubs.States;
 public partial class FreeForAll : BaseState, IGamemode
 {
 	[Net]
-	public IList<Client> Participants { get; private set; } = new List<Client>();
-	[Net]
-	public int TeamsTurn { get; private set; } = 1;
+	public TeamManager TeamManager { get; private set; }
 	[Net]
 	public bool UsedTurn { get; private set; }
 	[Net]
@@ -23,7 +21,7 @@ public partial class FreeForAll : BaseState, IGamemode
 			return;
 		}
 
-		GameConfig.TeamIndex = 1;
+		TeamManager = new TeamManager();
 
 		List<Client> participants;
 		if ( forced )
@@ -38,12 +36,7 @@ public partial class FreeForAll : BaseState, IGamemode
 
 		// Setup participants.
 		foreach ( var participant in participants )
-		{
-			var player = new GrubsPlayer( participant );
-			participant.Pawn = player;
-
-			player.Spawn();
-		}
+			TeamManager.AddTeam( new List<Client> { participant } );
 
 		// Setup spectators.
 		foreach ( var client in Client.All )
@@ -55,7 +48,6 @@ public partial class FreeForAll : BaseState, IGamemode
 		}
 
 		// Start the game.
-		Participants = participants;
 		NextTurn();
 
 		base.Enter( forced, parameters );
@@ -69,8 +61,7 @@ public partial class FreeForAll : BaseState, IGamemode
 			return;
 		}
 
-		foreach ( var client in Client.All )
-			client.Pawn?.Delete();
+		TeamManager.Delete();
 
 		base.Leave();
 	}
@@ -80,11 +71,8 @@ public partial class FreeForAll : BaseState, IGamemode
 		base.ClientDisconnected( cl, reason );
 
 		// Bail from the game if one of the participants leaves.
-		foreach ( var participant in Participants )
-		{
-			if ( participant == cl )
-				SwitchStateTo<GameEndState>( GameResultType.Abandoned, reason.ToString() );
-		}
+		if ( TeamManager.Teams.SelectMany( team => team.Clients ).Any( player => player.Client == cl ) )
+			SwitchStateTo<GameEndState>( GameResultType.Abandoned, reason.ToString() );
 	}
 
 	public override void Tick()
@@ -117,16 +105,12 @@ public partial class FreeForAll : BaseState, IGamemode
 
 	public void NextTurn()
 	{
-		(Participants[TeamsTurn - 1].Pawn as GrubsPlayer).ActiveWorm.EquipWeapon( null );
+		TeamManager.CurrentTeam.ActiveWorm.EquipWeapon( null );
 
 		if ( CheckState() )
 			return;
 
-		var participant = Participants[TeamsTurn++ - 1];
-		if ( TeamsTurn > Participants.Count )
-			TeamsTurn = 1;
-
-		(participant.Pawn as GrubsPlayer)!.PickNextWorm();
+		TeamManager.Cycle();
 		UsedTurn = false;
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
 	}
@@ -134,29 +118,28 @@ public partial class FreeForAll : BaseState, IGamemode
 	private bool CheckState()
 	{
 		var teamsDead = 0;
-		GrubsPlayer lastTeamAlive = null;
+		Team lastTeamAlive = null;
 
-		foreach ( var participant in Participants )
+		foreach ( var team in TeamManager.Teams )
 		{
-			var pawn = participant.Pawn as GrubsPlayer;
-			if ( pawn.Worms.Any( worm => worm.LifeState != LifeState.Dead ) )
+			if ( team.TeamDead )
 			{
-				lastTeamAlive = pawn;
+				teamsDead++;
 				continue;
 			}
 
-			teamsDead++;
+			lastTeamAlive = team;
 		}
 
-		if ( teamsDead == Participants.Count )
+		if ( teamsDead == TeamManager.Teams.Count )
 		{
 			SwitchStateTo<GameEndState>( GameResultType.Draw );
 			return true;
 		}
 
-		if ( teamsDead == Participants.Count - 1 )
+		if ( teamsDead == TeamManager.Teams.Count - 1 )
 		{
-			SwitchStateTo<GameEndState>( GameResultType.TeamWon, new GrubsPlayer[] { lastTeamAlive } );
+			SwitchStateTo<GameEndState>( GameResultType.TeamWon, lastTeamAlive.Clients );
 			return true;
 		}
 

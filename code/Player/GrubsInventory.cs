@@ -33,13 +33,13 @@ public partial class GrubsInventory : BaseNetworkable
 	[ConCmd.Server]
 	public static void EquipItemByIndex( int index )
 	{
-		var player = ConsoleSystem.Caller.Pawn as GrubsPlayer;
-		var worm = player.ActiveWorm;
+		var team = ConsoleSystem.Caller.Pawn as Team;
+		var worm = team.ActiveWorm;
 
 		if ( worm is null || !worm.IsTurn )
 			return;
 
-		var inventory = player.Inventory;
+		var inventory = team.Inventory;
 
 		if ( inventory.Items[index] is null )
 			return;

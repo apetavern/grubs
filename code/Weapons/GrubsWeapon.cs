@@ -89,7 +89,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	protected void CheckFireInput()
 	{
 		// Only fire if our worm is grounded and we haven't used our turn.
-		var controller = (Owner as GrubsPlayer).ActiveWorm.Controller;
+		var controller = (Owner as Team).ActiveWorm.Controller;
 		if ( !controller.IsGrounded && (GrubsGame.Current.CurrentState as IGamemode).UsedTurn )
 			return;
 
@@ -166,7 +166,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 		if ( !HasReticle && IsClient )
 		{
-			new AimReticle( (Local.Pawn as GrubsPlayer).ActiveWorm );
+			new AimReticle( (Local.Pawn as Team).ActiveWorm );
 			HasReticle = true;
 		}
 	}

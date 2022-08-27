@@ -29,9 +29,6 @@ public class WormNametags
 		Update();
 
 		foreach ( var nametag in Nametags.Values )
-		{
-			var teamClass = nametag.Worm.GetTeamName();
-			nametag.AddClass( $"team-{teamClass}" );
-		}
+			nametag.AddClass( $"team-{nametag.Worm.Team.TeamName}" );
 	}
 }

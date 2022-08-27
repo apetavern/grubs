@@ -177,10 +177,8 @@ public partial class WormController : BasePlayerController
 
 	private void TakeFallDamage()
 	{
-		var playState = GrubsGame.Current.CurrentState as IGamemode;
-		var activePlayer = playState.Participants[playState.TeamsTurn - 1].Pawn as GrubsPlayer;
-		if ( activePlayer.ActiveWorm == Pawn )
-			playState.UseTurn();
+		if ( Host.IsServer && TeamManager.Instance.CurrentTeam.ActiveWorm == Pawn )
+			(GrubsGame.Current.CurrentState as IGamemode).UseTurn();
 
 		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
 		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );

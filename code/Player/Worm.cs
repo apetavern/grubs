@@ -20,7 +20,7 @@ public partial class Worm : AnimatedEntity
 	[Net, Predicted]
 	public GrubsWeapon LastActiveChild { get; set; }
 
-	public int TeamNumber => Owner is GrubsPlayer player ? player.TeamNumber : 1;
+	public Team Team => Owner as Team;
 
 	private readonly Queue<DamageInfo> _damageQueue = new();
 
@@ -28,10 +28,10 @@ public partial class Worm : AnimatedEntity
 	{
 		get
 		{
-			if ( Owner is not GrubsPlayer player )
+			if ( Owner is not Team team )
 				return false;
 
-			return player.ActiveWorm == this && player.IsTurn;
+			return team.ActiveWorm == this && team.IsTurn;
 		}
 	}
 
@@ -135,13 +135,6 @@ public partial class Worm : AnimatedEntity
 	{
 		ActiveChild?.ShowWeapon( this, false );
 		ActiveChild = weapon;
-	}
-
-	public char GetTeamName()
-	{
-		var index = TeamNumber - 1;
-
-		return GameConfig.TeamNames[index];
 	}
 
 	public void DressFromClient( Client cl )

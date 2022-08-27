@@ -25,7 +25,7 @@ public static class ExplosionHelper
 			var dir = (worm.Position - position).Normal;
 			worm.ApplyAbsoluteImpulse( dir * force );
 
-			if ( !GameConfig.FriendlyFire && worm != source && worm.TeamNumber == source.TeamNumber )
+			if ( !GameConfig.FriendlyFire && worm != source && worm.Team.TeamNumber == source.Team.TeamNumber )
 				continue;
 
 			worm.TakeDamage( DamageInfoExtension.FromProjectile( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );

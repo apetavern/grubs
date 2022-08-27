@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Grubs.Player;
 using Grubs.States;
 using Grubs.Utils;
 
@@ -28,6 +29,6 @@ public class TurnTime : Panel
 
 		// TODO: Event for when turn changes and update there
 		foreach ( var teamName in GameConfig.TeamNames )
-			SetClass( $"team-{teamName}", GameConfig.TeamNames[Gamemode.TeamsTurn - 1] == teamName );
+			SetClass( $"team-{teamName}", TeamManager.Instance.CurrentTeam.TeamName == teamName.ToString() );
 	}
 }

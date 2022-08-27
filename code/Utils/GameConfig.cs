@@ -63,7 +63,4 @@ public static class GameConfig
 		'c',
 		'd'
 	};
-
-	[Net]
-	public static int TeamIndex { get; set; } = 1;
 }
