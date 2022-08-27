@@ -459,7 +459,24 @@ public partial class WormController : BasePlayerController
 	/// </summary>
 	public override TraceResult TraceBBox( Vector3 start, Vector3 end, float liftFeet = 0.0f )
 	{
-		return TraceBBox( start, end, mins, maxs, liftFeet );
+		// TODO: If/when terrain is networked revert this
+		if ( liftFeet > 0 )
+		{
+			start += Vector3.Up * liftFeet;
+			maxs = maxs.WithZ( maxs.z - liftFeet );
+		}
+
+		var tr = Trace.Ray( start + TraceOffset, end + TraceOffset )
+			.Size( mins, maxs )
+			.WithAnyTags( "solid", "playerclip", "passbullets", "player" )
+			.Ignore( Pawn )
+			.IncludeClientside()
+			.Run();
+
+		tr.EndPosition -= TraceOffset;
+		return tr;
+
+		//return TraceBBox( start, end, mins, maxs, liftFeet );
 	}
 
 	/// <summary>
