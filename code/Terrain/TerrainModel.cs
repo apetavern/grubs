@@ -5,6 +5,11 @@ public class TerrainModel : ModelEntity
 	public MarchingSquares marchingSquares = new();
 	public ModelEntity WallModel;
 
+	public TerrainModel()
+	{
+		Transmit = TransmitType.Never;
+	}
+
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -22,7 +27,8 @@ public class TerrainModel : ModelEntity
 		WallModel?.Delete();
 		WallModel = new ModelEntity
 		{
-			Model = marchingSquares.CreateWallModel()
+			Model = marchingSquares.CreateWallModel(),
+			Transmit = TransmitType.Never
 		};
 		WallModel.SetupPhysicsFromModel( PhysicsMotionType.Static );
 		WallModel.Tags.Add( "solid" );
