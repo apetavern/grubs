@@ -80,8 +80,8 @@ public partial class TerrainMap
 	{
 		while ( true )
 		{
-			int x = Rand.Int( Width );
-			int z = Rand.Int( Height );
+			int x = Rand.Int( Width - 1 );
+			int z = Rand.Int( Height - 1 );
 
 			if ( !TerrainGrid[x, z] )
 			{
