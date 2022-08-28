@@ -3,6 +3,7 @@ using Grubs.Weapons;
 
 namespace Grubs.Player;
 
+[Category( "Setup" )]
 public partial class Team : Entity
 {
 	/// <summary>

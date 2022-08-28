@@ -2,6 +2,7 @@
 
 namespace Grubs.Player;
 
+[Category( "Setup" )]
 public partial class TeamManager : Entity
 {
 	/// <summary>

@@ -5,6 +5,7 @@ namespace Grubs.States;
 /// <summary>
 /// Base class for any state the game is in.
 /// </summary>
+[Category( "Setup" )]
 public abstract partial class BaseState : Entity
 {
 	private bool _entered;

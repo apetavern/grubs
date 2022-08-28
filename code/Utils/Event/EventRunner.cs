@@ -3,6 +3,7 @@
 /// <summary>
 /// Utility entity to run events across both realms and simplify event execution.
 /// </summary>
+[Category( "Setup" )]
 public partial class EventRunner : Entity
 {
 	private static EventRunner _instance;

@@ -1,36 +1,26 @@
 ﻿namespace Grubs.Terrain;
 
+[Category( "Terrain" )]
 public class TerrainModel : ModelEntity
 {
-	public MarchingSquares marchingSquares = new();
-	public ModelEntity WallModel;
+	public MarchingSquares MarchingSquares;
+	public TerrainWallModel WallModel;
 
 	public TerrainModel()
 	{
 		Transmit = TransmitType.Never;
-	}
-
-	public override void Spawn()
-	{
-		base.Spawn();
-
 		Tags.Add( "solid" );
+
 		GenerateMeshAndWalls();
 	}
 
 	public void GenerateMeshAndWalls()
 	{
-		marchingSquares = new();
-		Model = marchingSquares.GenerateModel();
+		MarchingSquares = new MarchingSquares();
+		Model = MarchingSquares.GenerateModel();
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
 		WallModel?.Delete();
-		WallModel = new ModelEntity
-		{
-			Model = marchingSquares.CreateWallModel(),
-			Transmit = TransmitType.Never
-		};
-		WallModel.SetupPhysicsFromModel( PhysicsMotionType.Static );
-		WallModel.Tags.Add( "solid" );
+		WallModel = new TerrainWallModel( MarchingSquares );
 	}
 }
