@@ -206,8 +206,11 @@ public partial class Team : Entity, ISpectator
 	{
 		Host.AssertServer();
 
-		RotateWorms();
-		ActiveWorm = Worms[0];
+		do
+		{
+			RotateWorms();
+			ActiveWorm = Worms[0];
+		} while ( ActiveWorm.LifeState == LifeState.Dead );
 	}
 
 	/// <summary>
