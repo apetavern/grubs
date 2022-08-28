@@ -80,6 +80,10 @@
           {
             "Value": "ffa",
             "Name": "Free For All"
+          },
+          {
+            "Value": "tdm",
+            "Name": "Team Deathmatch"
           }
         ],
         "ConVarName": "grubs_game",

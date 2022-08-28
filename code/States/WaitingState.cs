@@ -40,6 +40,9 @@ public partial class WaitingState : BaseState
 			case "ffa":
 				SwitchStateTo<FreeForAll>( participants );
 				break;
+			case "tdm":
+				SwitchStateTo<TeamDeathmatch>( participants );
+				break;
 			default:
 				Log.Error( $"Got unknown gamemode \"{GameConfig.Gamemode}\"" );
 				break;
