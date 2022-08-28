@@ -2,17 +2,11 @@
 
 public static class GameConfig
 {
-	// Gameplay Configuration
 	/// <summary>
-	/// The amount of worms that will be spawned per player.
+	/// The grubs gamemode to play.
 	/// </summary>
-	[ConVar.Replicated( "worm_count" )]
-	public static int WormCount { get; set; } = 4;
-	/// <summary>
-	/// The max time in seconds that a player has to make their turn.
-	/// </summary>
-	[ConVar.Replicated( "turn_duration" )]
-	public static int TurnDuration { get; set; } = 60;
+	[ConVar.Replicated( "grubs_game" )]
+	public static string Gamemode { get; set; } = "ffa";
 	/// <summary>
 	/// The minimum amount of players needed to start the game.
 	/// </summary>
@@ -24,16 +18,21 @@ public static class GameConfig
 	[ConVar.Replicated( "maximum_players" )]
 	public static int MaximumPlayers { get; set; } = 4;
 	/// <summary>
+	/// The amount of worms that will be spawned per player.
+	/// </summary>
+	[ConVar.Replicated( "worm_count" )]
+	public static int WormCount { get; set; } = 4;
+	/// <summary>
+	/// The max time in seconds that a player has to make their turn.
+	/// </summary>
+	[ConVar.Replicated( "turn_duration" )]
+	public static int TurnDuration { get; set; } = 60;
+	/// <summary>
 	/// Whether or not worms can damage their teammates.
 	/// <remarks>This does not protect a worm from hurting itself.</remarks>
 	/// </summary>
 	[ConVar.Replicated( "friendly_fire" )]
 	public static bool FriendlyFire { get; set; } = true;
-	/// <summary>
-	/// The grubs gamemode to play.
-	/// </summary>
-	[ConVar.Replicated( "grubs_game" )]
-	public static string Gamemode { get; set; } = "ffa";
 
 	// Worm Configuration
 	public static string[] WormNames => new[]

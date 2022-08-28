@@ -31,23 +31,21 @@
       "NoWarn": "1701;1702;1591;"
     },
     "GameSettings": {
-      "worm_count": {
-        "DisplayType": "Integer",
-        "Choices": [],
-        "ConVarName": "worm_count",
-        "DisplayName": "Worm Count",
-        "DefaultValue": "10",
-        "Minimum": 1,
-        "Maximum": 100
-      },
-      "turn_duration": {
-        "DisplayType": "Float",
-        "Choices": [],
-        "ConVarName": "turn_duration",
-        "DisplayName": "Turn Duration",
-        "DefaultValue": "60",
-        "Minimum": 1,
-        "Maximum": 60
+      "grubs_game": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "ffa",
+            "Name": "Free For All"
+          },
+          {
+            "Value": "tdm",
+            "Name": "Team Deathmatch"
+          }
+        ],
+        "ConVarName": "grubs_game",
+        "DisplayName": "Gamemode",
+        "DefaultValue": "ffa"
       },
       "minimum_players": {
         "DisplayType": "Integer",
@@ -67,28 +65,30 @@
         "Minimum": 3,
         "Maximum": 100
       },
+      "worm_count": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "worm_count",
+        "DisplayName": "Worm Count",
+        "DefaultValue": "10",
+        "Minimum": 1,
+        "Maximum": 100
+      },
+      "turn_duration": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "turn_duration",
+        "DisplayName": "Turn Duration",
+        "DefaultValue": "60",
+        "Minimum": 1,
+        "Maximum": 60
+      },
       "friendly_fire": {
         "DisplayType": "Boolean",
         "Choices": [],
         "ConVarName": "friendly_fire",
         "DisplayName": "Friendly Fire",
         "DefaultValue": "true"
-      },
-      "grubs_game": {
-        "DisplayType": "Choice",
-        "Choices": [
-          {
-            "Value": "ffa",
-            "Name": "Free For All"
-          },
-          {
-            "Value": "tdm",
-            "Name": "Team Deathmatch"
-          }
-        ],
-        "ConVarName": "grubs_game",
-        "DisplayName": "Gamemode",
-        "DefaultValue": "ffa"
       }
     }
   }
