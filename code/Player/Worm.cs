@@ -37,7 +37,7 @@ public partial class Worm : AnimatedEntity, IResolvable
 		}
 	}
 
-	public bool Resolved => Velocity.IsNearlyZero( 0.1f );
+	public bool Resolved => Velocity.IsNearlyZero( 0.1f ) || LifeState == LifeState.Dead;
 
 	public Worm()
 	{
