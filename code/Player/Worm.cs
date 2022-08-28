@@ -21,6 +21,9 @@ public partial class Worm : AnimatedEntity, IResolvable
 	[Net, Predicted]
 	public GrubsWeapon LastActiveChild { get; private set; }
 
+	[Net]
+	public ModelEntity Gravestone { get; private set; }
+
 	public Team Team => Owner as Team;
 
 	private readonly Queue<DamageInfo> _damageQueue = new();
@@ -101,12 +104,22 @@ public partial class Worm : AnimatedEntity, IResolvable
 		LifeState = LifeState.Dead;
 		// TODO: Hide the worm instead of deleting it. Possible revive mechanic?
 		EnableDrawing = false;
+		Gravestone = new Gravestone( this ) { Owner = this };
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		if ( IsServer )
+			Gravestone?.Delete();
 	}
 
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
 
+		Gravestone?.Simulate( cl );
 		Controller?.Simulate( cl, this, Animator );
 
 		if ( IsTurn )
