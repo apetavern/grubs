@@ -16,6 +16,7 @@ public class TurnTime : Panel
 		StyleSheet.Load( "/UI/Stylesheets/TurnTime.scss" );
 
 		_timeLeft = Add.Label( GameConfig.TurnDuration.ToString(), "time-left" );
+		BindClass( "hidden", () => Gamemode.UsedTurn );
 	}
 
 	public override void Tick()

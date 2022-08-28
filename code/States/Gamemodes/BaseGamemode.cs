@@ -93,13 +93,6 @@ public abstract partial class BaseGamemode : BaseState
 		if ( !IsServer )
 			return;
 
-		if ( !UsedTurn )
-		{
-			if ( TimeUntilTurnEnd <= 0 )
-				NextTurn();
-
-			return;
-		}
 
 		// No worms should be moving around to end the turn
 		if ( All.OfType<Worm>().Any( worm => !worm.Velocity.IsNearlyZero( 0.1f ) ) )
@@ -108,6 +101,8 @@ public abstract partial class BaseGamemode : BaseState
 		// All projectiles should've exploded before ending the turn
 		if ( All.OfType<Projectile>().Any() )
 			return;
+		if ( !UsedTurn && TimeUntilTurnEnd <= 0 )
+			UseTurn();
 
 		NextTurn();
 	}
