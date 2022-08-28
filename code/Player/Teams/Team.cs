@@ -145,12 +145,12 @@ public partial class Team : Entity, ISpectator
 
 		if ( Clients[0].Pawn is not Spectator )
 			Clients[0].Pawn = new Spectator();
-		
+
 		RotateClients();
-		
+
 		if ( Clients[0].Pawn is Spectator )
 			Clients[0].Pawn.Delete();
-		
+
 		Clients[0].Pawn = this;
 	}
 
