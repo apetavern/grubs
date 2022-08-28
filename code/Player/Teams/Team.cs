@@ -47,6 +47,12 @@ public partial class Team : Entity, ISpectator
 	public int TeamNumber { get; private set; }
 
 	/// <summary>
+	/// The index of the currently equipped weapon in the <see cref="Inventory"/>.
+	/// </summary>
+	[Net, Predicted]
+	public int EquippedWeapon { get; private set; }
+
+	/// <summary>
 	/// The camera all team clients will see the game through.
 	/// </summary>
 	public CameraMode Camera
@@ -94,6 +100,30 @@ public partial class Team : Entity, ISpectator
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
+
+		if ( IsTurn )
+		{
+			var lastWeapon = EquippedWeapon;
+
+			if ( Input.Pressed( InputButton.Menu ) )
+			{
+				if ( EquippedWeapon == 0 )
+					EquippedWeapon = Inventory.Items.Count - 1;
+				else
+					EquippedWeapon--;
+			}
+
+			if ( Input.Pressed( InputButton.Use ) )
+			{
+				if ( EquippedWeapon == Inventory.Items.Count - 1 )
+					EquippedWeapon = 0;
+				else
+					EquippedWeapon++;
+			}
+
+			if ( EquippedWeapon != lastWeapon )
+				ActiveWorm.EquipWeapon( Inventory.Items[EquippedWeapon] );
+		}
 
 		foreach ( var worm in Worms )
 			worm.Simulate( cl );
