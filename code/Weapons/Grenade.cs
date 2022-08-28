@@ -17,7 +17,7 @@ public class Grenade : GrubsWeapon
 		base.OnFire();
 
 		var segments = new ArcTrace( Parent, Parent.EyePosition )
-			.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, 0.4f * Charge, 0 );
+			.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, 0.4f * Charge, 0, maxBounceQty: 3 );
 
 		new Projectile()
 			.WithWorm( Parent as Worm )
@@ -26,6 +26,6 @@ public class Grenade : GrubsWeapon
 			.MoveAlongTrace( segments )
 			.WithSpeed( 1000 )
 			.WithExplosionRadius( 100 )
-			.WithCollisionExplosionDelay( 5f );
+			.WithCollisionExplosionDelay( 3f );
 	}
 }

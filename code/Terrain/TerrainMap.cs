@@ -59,6 +59,7 @@ public partial class TerrainMap
 		Log.Info( $"{Host.Name} {midpoint.x} {midpoint.y}" );
 		float x = midpoint.x / 25f;
 		float y = midpoint.y / 25f;
+		size /= 2;
 
 		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
 		{
