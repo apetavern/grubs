@@ -118,7 +118,7 @@ public partial class GrubsGame : Game
 	[ConCmd.Admin]
 	public static void SkipTurn()
 	{
-		if ( Current.CurrentState is not IGamemode gamemode )
+		if ( Current.CurrentState is not BaseGamemode gamemode )
 			return;
 
 		gamemode.NextTurn();

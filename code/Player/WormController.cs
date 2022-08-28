@@ -100,7 +100,7 @@ public partial class WormController : BasePlayerController
 		}
 
 		// Take Input if it is currently the worms turn. Don't allow movement while jumping.
-		WishVelocity = worm.IsTurn && !isFiring && IsGrounded && !(GrubsGame.Current.CurrentState as IGamemode).UsedTurn
+		WishVelocity = worm.IsTurn && !isFiring && IsGrounded && !(GrubsGame.Current.CurrentState as BaseGamemode).UsedTurn
 			? -Input.Left * Vector3.Forward
 			: Vector3.Zero;
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
@@ -173,7 +173,7 @@ public partial class WormController : BasePlayerController
 	private void TakeFallDamage()
 	{
 		if ( Host.IsServer && TeamManager.Instance.CurrentTeam.ActiveWorm == Pawn )
-			(GrubsGame.Current.CurrentState as IGamemode).UseTurn();
+			(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
 
 		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
 		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );

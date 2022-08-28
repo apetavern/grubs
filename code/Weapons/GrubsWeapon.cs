@@ -38,7 +38,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	/// </summary>
 	protected virtual void OnFire()
 	{
-		(GrubsGame.Current.CurrentState as IGamemode).UseTurn();
+		(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
 	}
 
 	/// <summary>
@@ -90,7 +90,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	{
 		// Only fire if our worm is grounded and we haven't used our turn.
 		var controller = (Owner as Team).ActiveWorm.Controller;
-		if ( !controller.IsGrounded && (GrubsGame.Current.CurrentState as IGamemode).UsedTurn )
+		if ( !controller.IsGrounded && (GrubsGame.Current.CurrentState as BaseGamemode).UsedTurn )
 			return;
 
 		switch ( FiringType )

@@ -7,7 +7,7 @@ namespace Grubs.UI;
 
 public class TurnTime : Panel
 {
-	private static IGamemode Gamemode => GrubsGame.Current.CurrentState as IGamemode;
+	private static BaseGamemode Gamemode => GrubsGame.Current.CurrentState as BaseGamemode;
 
 	private readonly Label _timeLeft;
 
