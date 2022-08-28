@@ -28,14 +28,11 @@ public class AimReticle : WorldPanel
 
 		WormChecks();
 		if ( Worm.ActiveChild is null || Worm.ActiveChild.GetType() != grubsWeapon )
-		{
-			DestroyReticle();
-		}
+			Delete( true );
 	}
 
 	private void WormChecks()
 	{
-
 		if ( !Worm.Controller.IsGrounded || !Worm.Controller.Velocity.IsNearlyZero( 2.5f ) )
 		{
 			AddClass( "Disabled" );
@@ -44,12 +41,5 @@ public class AimReticle : WorldPanel
 		{
 			RemoveClass( "Disabled" );
 		}
-
-	}
-
-	public void DestroyReticle()
-	{
-		Worm.LastActiveChild.HasReticle = false;
-		Delete( true );
 	}
 }

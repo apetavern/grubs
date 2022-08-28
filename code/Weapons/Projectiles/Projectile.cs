@@ -1,10 +1,13 @@
 ﻿using Grubs.Player;
+using Grubs.States;
 using Grubs.Utils;
 
 namespace Grubs.Weapons.Projectiles;
 
-public class Projectile : ModelEntity
+public class Projectile : ModelEntity, IResolvable
 {
+	public bool Resolved => false;
+
 	private bool IsResolved { get; set; }
 
 	private TimeSince TimeSinceSegmentStarted { get; set; }

@@ -121,7 +121,7 @@ public partial class GrubsGame : Game
 		if ( Current.CurrentState is not BaseGamemode gamemode )
 			return;
 
-		gamemode.NextTurn();
+		gamemode.NextTurnTask = gamemode.NextTurn();
 	}
 
 	/// <summary>

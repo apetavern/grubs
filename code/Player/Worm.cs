@@ -1,11 +1,13 @@
-﻿using Grubs.Utils;
+﻿using System.Threading.Tasks;
+using Grubs.States;
+using Grubs.Utils;
 using Grubs.Utils.Event;
 using Grubs.Weapons;
 
 namespace Grubs.Player;
 
 [Category( "Grubs" )]
-public partial class Worm : AnimatedEntity
+public partial class Worm : AnimatedEntity, IResolvable
 {
 	[Net, Predicted]
 	public WormController Controller { get; private set; }
@@ -22,6 +24,7 @@ public partial class Worm : AnimatedEntity
 	public Team Team => Owner as Team;
 
 	private readonly Queue<DamageInfo> _damageQueue = new();
+	private bool _takeDamage;
 
 	public bool IsTurn
 	{
@@ -33,6 +36,8 @@ public partial class Worm : AnimatedEntity
 			return team.ActiveWorm == this && team.IsTurn;
 		}
 	}
+
+	public bool Resolved => Velocity.IsNearlyZero( 0.1f );
 
 	public Worm()
 	{
@@ -60,7 +65,7 @@ public partial class Worm : AnimatedEntity
 		if ( !IsServer )
 			return;
 
-		if ( !Velocity.IsNearlyZero( 0.1f ) )
+		if ( !_takeDamage )
 		{
 			_damageQueue.Enqueue( info );
 			return;
@@ -106,9 +111,6 @@ public partial class Worm : AnimatedEntity
 
 		if ( IsTurn )
 			SimulateActiveChild( cl, ActiveChild );
-
-		if ( IsServer && _damageQueue.Count != 0 && Velocity.IsNearlyZero( 0.1f ) )
-			TakeDamage( _damageQueue.Dequeue() );
 	}
 
 	public virtual void SimulateActiveChild( Client client, GrubsWeapon child )
@@ -129,6 +131,19 @@ public partial class Worm : AnimatedEntity
 	{
 		previous?.ActiveEnd( this, previous.Owner != this );
 		next?.ActiveStart( this );
+	}
+
+	public virtual async Task ApplyDamage()
+	{
+		_takeDamage = true;
+
+		while ( _damageQueue.TryDequeue( out var damageInfo ) )
+		{
+			TakeDamage( damageInfo );
+			await GameTask.Delay( 100 );
+		}
+
+		_takeDamage = false;
 	}
 
 	public void EquipWeapon( GrubsWeapon weapon )

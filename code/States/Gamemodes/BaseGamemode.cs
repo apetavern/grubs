@@ -1,6 +1,6 @@
-﻿using Grubs.Player;
+﻿using System.Threading.Tasks;
+using Grubs.Player;
 using Grubs.Utils;
-using Grubs.Weapons.Projectiles;
 
 namespace Grubs.States;
 
@@ -12,6 +12,8 @@ public abstract partial class BaseGamemode : BaseState
 	public bool UsedTurn { get; private set; }
 	[Net]
 	public TimeUntil TimeUntilTurnEnd { get; private set; }
+
+	public Task NextTurnTask;
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
@@ -49,7 +51,7 @@ public abstract partial class BaseGamemode : BaseState
 		SetupSpectators( spectators );
 
 		// Start the game.
-		NextTurn();
+		NextTurnTask = NextTurn();
 
 		base.Enter( forced, parameters );
 	}
@@ -93,18 +95,11 @@ public abstract partial class BaseGamemode : BaseState
 		if ( !IsServer )
 			return;
 
-
-		// No worms should be moving around to end the turn
-		if ( All.OfType<Worm>().Any( worm => !worm.Velocity.IsNearlyZero( 0.1f ) ) )
-			return;
-
-		// All projectiles should've exploded before ending the turn
-		if ( All.OfType<Projectile>().Any() )
-			return;
 		if ( !UsedTurn && TimeUntilTurnEnd <= 0 )
 			UseTurn();
 
-		NextTurn();
+		if ( UsedTurn && IsWorldResolved() && (NextTurnTask is null || NextTurnTask.IsCompleted) )
+			NextTurnTask = NextTurn();
 	}
 
 	public virtual void UseTurn()
@@ -114,18 +109,48 @@ public abstract partial class BaseGamemode : BaseState
 		UsedTurn = true;
 	}
 
-	public virtual void NextTurn()
+	public virtual async Task NextTurn()
 	{
 		Host.AssertServer();
 
-		TeamManager.CurrentTeam.ActiveWorm.EquipWeapon( null );
-
-		if ( CheckState() )
+		if ( await PreTurnChange() )
 			return;
 
 		TeamManager.Cycle();
 		UsedTurn = false;
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
+
+		await PostTurnChange();
+	}
+
+	protected virtual async ValueTask<bool> PreTurnChange()
+	{
+		Host.AssertServer();
+
+		UsedTurn = true;
+
+		TeamManager.CurrentTeam.ActiveWorm.EquipWeapon( null );
+		foreach ( var team in TeamManager.Teams )
+		{
+			foreach ( var grub in team.Worms )
+				await grub.ApplyDamage();
+		}
+
+		while ( !IsWorldResolved() )
+			await GameTask.Delay( 500 );
+
+		await GameTask.DelaySeconds( 3 );
+		return CheckState();
+	}
+
+	protected virtual async Task PostTurnChange()
+	{
+		Host.AssertServer();
+	}
+
+	protected virtual bool IsWorldResolved()
+	{
+		return All.OfType<IResolvable>().All( entity => entity.Resolved );
 	}
 
 	protected virtual bool CheckState()
