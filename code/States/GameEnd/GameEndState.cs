@@ -1,5 +1,8 @@
 ﻿namespace Grubs.States;
 
+/// <summary>
+/// The end state to games. This will display the result of the completed gamemode.
+/// </summary>
 public class GameEndState : BaseState
 {
 	protected override void Enter( bool forced, params object[] parameters )

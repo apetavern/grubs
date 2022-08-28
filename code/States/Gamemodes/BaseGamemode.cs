@@ -4,15 +4,30 @@ using Grubs.Utils;
 
 namespace Grubs.States;
 
+/// <summary>
+/// Base state for any gameplay loop.
+/// </summary>
 public abstract partial class BaseGamemode : BaseState
 {
+	/// <summary>
+	/// The manager entity for teams of grubs.
+	/// </summary>
 	[Net]
-	public TeamManager TeamManager { get; private set; }
+	protected TeamManager TeamManager { get; private set; }
+	/// <summary>
+	/// Whether or not the current team has used their turn.
+	/// </summary>
 	[Net]
 	public bool UsedTurn { get; private set; }
+	/// <summary>
+	/// The time until the current teams turn is automatically ended.
+	/// </summary>
 	[Net]
 	public TimeUntil TimeUntilTurnEnd { get; private set; }
 
+	/// <summary>
+	/// The async task for switching to the next turn.
+	/// </summary>
 	public Task NextTurnTask;
 
 	protected override void Enter( bool forced, params object[] parameters )
@@ -56,8 +71,16 @@ public abstract partial class BaseGamemode : BaseState
 		base.Enter( forced, parameters );
 	}
 
+	/// <summary>
+	/// Sets up all participants to play the game.
+	/// </summary>
+	/// <param name="participants"></param>
 	protected abstract void SetupParticipants( List<Client> participants );
 
+	/// <summary>
+	/// Sets upp all spectators to watch the game.
+	/// </summary>
+	/// <param name="spectators"></param>
 	protected virtual void SetupSpectators( List<Client> spectators )
 	{
 		foreach ( var spectator in spectators )
@@ -102,6 +125,9 @@ public abstract partial class BaseGamemode : BaseState
 			NextTurnTask = NextTurn();
 	}
 
+	/// <summary>
+	/// Uses the current teams turn.
+	/// </summary>
 	public virtual void UseTurn()
 	{
 		Host.AssertServer();
@@ -109,6 +135,9 @@ public abstract partial class BaseGamemode : BaseState
 		UsedTurn = true;
 	}
 
+	/// <summary>
+	/// Moves the game to the next turn.
+	/// </summary>
 	public virtual async Task NextTurn()
 	{
 		Host.AssertServer();
@@ -123,6 +152,10 @@ public abstract partial class BaseGamemode : BaseState
 		await PostTurnChange();
 	}
 
+	/// <summary>
+	/// Called before the turn change occurs. Handle cleanup and check game state here.
+	/// </summary>
+	/// <returns>Whether or not to bail from changing to the next turn.</returns>
 	protected virtual async ValueTask<bool> PreTurnChange()
 	{
 		Host.AssertServer();
@@ -143,16 +176,27 @@ public abstract partial class BaseGamemode : BaseState
 		return CheckState();
 	}
 
+	/// <summary>
+	/// Called after the turn change occurs.
+	/// </summary>
 	protected virtual async Task PostTurnChange()
 	{
 		Host.AssertServer();
 	}
 
+	/// <summary>
+	/// Checks whether or not the world is ready to move to the next turn.
+	/// </summary>
+	/// <returns>Whether or not the world is ready to move to the next turn.</returns>
 	protected virtual bool IsWorldResolved()
 	{
 		return All.OfType<IResolvable>().All( entity => entity.Resolved );
 	}
 
+	/// <summary>
+	/// Checks the state of the game. Check your win conditions here.
+	/// </summary>
+	/// <returns>Whether or not the game has concluded.</returns>
 	protected virtual bool CheckState()
 	{
 		Host.AssertServer();

@@ -3,6 +3,9 @@ using Grubs.Weapons;
 
 namespace Grubs.Player;
 
+/// <summary>
+/// A team of grubs.
+/// </summary>
 [Category( "Setup" )]
 public partial class Team : Entity, ISpectator
 {
@@ -13,13 +16,13 @@ public partial class Team : Entity, ISpectator
 	public IList<Client> Clients { get; private set; }
 
 	/// <summary>
-	/// The list of worms that are a part of this team.
+	/// The list of grubs that are a part of this team.
 	/// </summary>
 	[Net]
 	public IList<Worm> Worms { get; private set; }
 
 	/// <summary>
-	/// The teams current worm.
+	/// The teams current grub.
 	/// <remarks>This will stay populated even after their turn has passed.</remarks>
 	/// </summary>
 	[Net, Predicted]
@@ -53,7 +56,7 @@ public partial class Team : Entity, ISpectator
 	}
 
 	/// <summary>
-	/// Returns whether all worms in this team are dead or not.
+	/// Returns whether all grubs in this team are dead or not.
 	/// </summary>
 	public bool TeamDead => Worms.All( worm => worm.LifeState == LifeState.Dead );
 
@@ -108,7 +111,7 @@ public partial class Team : Entity, ISpectator
 	}
 
 	/// <summary>
-	/// Create and spawn the worms for this team. Number of worms spawned is defined by <see cref="GameConfig"/>.<see cref="GameConfig.WormCount"/>.
+	/// Create and spawn the grubs for this team. Number of grubs spawned is defined by <see cref="GameConfig"/>.<see cref="GameConfig.WormCount"/>.
 	/// </summary>
 	private void CreateWorms()
 	{
@@ -167,7 +170,7 @@ public partial class Team : Entity, ISpectator
 	}
 
 	/// <summary>
-	/// Sets the new worm for this team.
+	/// Sets the new grub for this team.
 	/// </summary>
 	public void PickNextWorm()
 	{
@@ -178,7 +181,7 @@ public partial class Team : Entity, ISpectator
 	}
 
 	/// <summary>
-	/// Rotate the worms list.
+	/// Rotate the grubs list.
 	/// </summary>
 	private void RotateWorms()
 	{

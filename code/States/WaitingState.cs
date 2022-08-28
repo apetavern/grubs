@@ -2,9 +2,19 @@
 
 namespace Grubs.States;
 
+/// <summary>
+/// A simple state to sit in while preparing for the next gamemode.
+/// </summary>
 public partial class WaitingState : BaseState
 {
-	[Net] public TimeUntil TimeUntilStart { get; private set; }
+	/// <summary>
+	/// The time until the state will be switched to the gamemode.
+	/// </summary>
+	[Net]
+	public TimeUntil TimeUntilStart { get; private set; }
+	/// <summary>
+	/// Whether or not the countdown in <see cref="TimeUntilStart"/> has been started.
+	/// </summary>
 	public bool IsStarting => Client.All.Count >= GameConfig.MinimumPlayers && TimeUntilStart > 0;
 
 	public override void ClientJoined( Client cl )

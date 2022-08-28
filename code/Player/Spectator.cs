@@ -1,5 +1,8 @@
 ﻿namespace Grubs.Player;
 
+/// <summary>
+/// A simple pawn for spectators to control.
+/// </summary>
 [Category( "Spectators" )]
 public class Spectator : Entity, ISpectator
 {

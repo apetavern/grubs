@@ -2,6 +2,9 @@
 
 namespace Grubs.Player;
 
+/// <summary>
+/// Manages a list of teams of grubs.
+/// </summary>
 [Category( "Setup" )]
 public partial class TeamManager : Entity
 {
