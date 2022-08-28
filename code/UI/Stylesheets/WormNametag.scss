@@ -20,10 +20,6 @@ WormNametag {
     &.team-d {
         color: $team-d;
     }
-    
-    &.hidden {
-        display: none;
-    }
 }
 
 label {
@@ -37,4 +33,8 @@ label {
     text-align: center;
     align-items: center;
     margin: 2px 0;
+
+    &.hidden {
+        display: none;
+    }
 }

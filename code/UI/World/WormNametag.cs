@@ -12,6 +12,8 @@ public class WormNametag : WorldPanel
 	public string WormName => Worm.Name;
 	public string WormHealth => Math.Ceiling( Worm.Health ).ToString( CultureInfo.CurrentCulture );
 
+	private Label _healthLabel;
+
 	public WormNametag( Worm worm )
 	{
 		Worm = worm;
@@ -20,8 +22,8 @@ public class WormNametag : WorldPanel
 
 		var name = Add.Label( "Name", "worm-name" );
 		name.Bind( "text", this, nameof( WormName ) );
-		var health = Add.Label( "0", "worm-health" );
-		health.Bind( "text", this, nameof( WormHealth ) );
+		_healthLabel = Add.Label( "0", "worm-health" );
+		_healthLabel.Bind( "text", this, nameof( WormHealth ) );
 
 		const float width = 600;
 		const float height = 300;
@@ -41,7 +43,7 @@ public class WormNametag : WorldPanel
 			return;
 		}
 
-		SetClass( "hidden", Worm.LifeState == LifeState.Dead );
+		_healthLabel.SetClass( "hidden", Worm.LifeState == LifeState.Dead );
 
 		Position = Worm.Position + Offset;
 		Rotation = Rotation.LookAt( Vector3.Right );
