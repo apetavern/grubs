@@ -44,7 +44,7 @@ public partial class FreeForAll : BaseState, IGamemode
 			if ( participants.Contains( client ) )
 				continue;
 
-			// TODO: Spectator pawn?
+			client.Pawn = new Spectator();
 		}
 
 		// Start the game.

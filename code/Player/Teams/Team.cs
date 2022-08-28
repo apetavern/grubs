@@ -4,7 +4,7 @@ using Grubs.Weapons;
 namespace Grubs.Player;
 
 [Category( "Setup" )]
-public partial class Team : Entity
+public partial class Team : Entity, ISpectator
 {
 	/// <summary>
 	/// The list of clients that are a part of this team.
@@ -73,7 +73,10 @@ public partial class Team : Entity
 		TeamNumber = teamNumber;
 
 		foreach ( var client in clients )
+		{
 			Clients.Add( client );
+			client.Pawn = new Spectator();
+		}
 
 		Camera = new GrubsCamera();
 		Inventory = new GrubsInventory
@@ -140,7 +143,14 @@ public partial class Team : Entity
 	{
 		Host.AssertServer();
 
+		if ( Clients[0].Pawn is not Spectator )
+			Clients[0].Pawn = new Spectator();
+		
 		RotateClients();
+		
+		if ( Clients[0].Pawn is Spectator )
+			Clients[0].Pawn.Delete();
+		
 		Clients[0].Pawn = this;
 	}
 

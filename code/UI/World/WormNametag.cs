@@ -46,7 +46,7 @@ public class WormNametag : WorldPanel
 		Position = Worm.Position + Offset;
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		if ( Local.Pawn is Team { Camera: GrubsCamera camera } )
+		if ( Local.Pawn is ISpectator { Camera: GrubsCamera camera } )
 			WorldScale = 1.5f + (camera.Distance / camera.MaxDistance * 2);
 	}
 }
