@@ -1,6 +1,4 @@
-﻿using Grubs.States;
-
-namespace Grubs.Player;
+﻿namespace Grubs.Player;
 
 public class GrubsCamera : CameraMode
 {

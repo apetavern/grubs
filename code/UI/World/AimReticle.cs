@@ -1,5 +1,4 @@
 ﻿using Grubs.Player;
-using Grubs.Weapons;
 
 namespace Grubs.UI.World;
 public class AimReticle : WorldPanel

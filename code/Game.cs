@@ -5,8 +5,6 @@ global using Sandbox.UI.Construct;
 global using System;
 global using System.Collections.Generic;
 global using System.Linq;
-
-using Grubs.Player;
 using Grubs.States;
 using Grubs.Terrain;
 using Grubs.UI;
@@ -30,7 +28,6 @@ public partial class GrubsGame : Game
 
 	public GrubsGame()
 	{
-		// Uncomment below to use WIP Terrain!
 		InitializeTerrainMap();
 
 		if ( IsServer )

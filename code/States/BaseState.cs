@@ -1,5 +1,4 @@
-﻿using Grubs.Utils;
-using Grubs.Utils.Event;
+﻿using Grubs.Utils.Event;
 
 namespace Grubs.States;
 

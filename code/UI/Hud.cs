@@ -1,7 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.States;
 using Grubs.UI.World;
-using Grubs.Utils;
 using Grubs.Utils.Event;
 
 namespace Grubs.UI;
