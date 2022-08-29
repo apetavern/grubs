@@ -78,13 +78,19 @@ public abstract partial class BaseState : Entity
 	}
 
 	// TODO: Somehow receivers of the events get called twice?
-	private void RunEnterEvents()
+	/// <summary>
+	/// 
+	/// </summary>
+	protected virtual void RunEnterEvents()
 	{
 		EventRunner.RunLocal( GrubsEvent.EnterStateEvent + GetType().Name );
 		EventRunner.RunLocal( GrubsEvent.EnterStateEvent );
 	}
 
-	private void RunLeaveEvents()
+	/// <summary>
+	/// 
+	/// </summary>
+	protected virtual void RunLeaveEvents()
 	{
 		EventRunner.RunLocal( GrubsEvent.LeaveStateEvent + GetType().Name );
 		EventRunner.RunLocal( GrubsEvent.LeaveStateEvent );

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Grubs.Player;
 using Grubs.Utils;
+using Grubs.Utils.Event;
 
 namespace Grubs.States;
 
@@ -123,6 +124,22 @@ public abstract partial class BaseGamemode : BaseState
 
 		if ( UsedTurn && IsWorldResolved() && (NextTurnTask is null || NextTurnTask.IsCompleted) )
 			NextTurnTask = NextTurn();
+	}
+
+	protected override void RunEnterEvents()
+	{
+		EventRunner.RunLocal( GrubsEvent.EnterGamemodeEvent + GetType().Name );
+		EventRunner.RunLocal( GrubsEvent.EnterGamemodeEvent );
+
+		base.RunEnterEvents();
+	}
+
+	protected override void RunLeaveEvents()
+	{
+		EventRunner.RunLocal( GrubsEvent.LeaveGamemodeEvent + GetType().Name );
+		EventRunner.RunLocal( GrubsEvent.LeaveGamemodeEvent );
+
+		base.RunLeaveEvents();
 	}
 
 	/// <summary>

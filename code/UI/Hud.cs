@@ -36,7 +36,7 @@ public class Hud : RootPanel
 		_waitingStatus?.Delete();
 	}
 
-	[GrubsEvent.EnterState.Client( nameof( FreeForAll ) )]
+	[GrubsEvent.EnterGamemode.Client]
 	private void OnEnterPlay()
 	{
 		_turnTime?.Delete();
@@ -46,7 +46,7 @@ public class Hud : RootPanel
 		_aimReticle = new AimReticle();
 	}
 
-	[GrubsEvent.LeaveState.Client( nameof( FreeForAll ) )]
+	[GrubsEvent.LeaveGamemode.Client]
 	private void OnLeavePlay()
 	{
 		_turnTime?.Delete();

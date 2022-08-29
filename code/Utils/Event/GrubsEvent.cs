@@ -150,6 +150,140 @@ public static class GrubsEvent
 	}
 	#endregion
 
+	#region EnterGamemode
+	/// <summary>
+	/// Called when the game enters a gamemode.
+	/// </summary>
+	public const string EnterGamemodeEvent = "grubs_enter-gamemode";
+
+	/// <summary>
+	/// Called when the game enters a gamemode.
+	/// </summary>
+	[AttributeUsage( AttributeTargets.Method )]
+	public class EnterGamemodeAttribute : EventAttribute
+	{
+		public EnterGamemodeAttribute( string? state = null ) : base( EnterGamemodeEvent + state ?? string.Empty )
+		{
+			if ( state is null )
+				return;
+
+			AssertValidState( state );
+		}
+	}
+
+	/// <summary>
+	/// Called when the game enters a gamemode.
+	/// </summary>
+	public static class EnterGamemode
+	{
+		/// <summary>
+		/// <see cref="EnterGamemode"/> event but only called on the client realm.
+		/// </summary>
+		public const string ClientEvent = ClientPrefix + EnterGamemodeEvent;
+		/// <summary>
+		/// <see cref="EnterGamemode"/> event but only called on the server realm.
+		/// </summary>
+		public const string ServerEvent = ServerPrefix + EnterGamemodeEvent;
+
+		/// <summary>
+		/// <see cref="EnterGamemode"/> event but only called on the client realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ClientAttribute : EventAttribute
+		{
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+
+		/// <summary>
+		/// <see cref="EnterGamemode"/> event but only called on the server realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ServerAttribute : EventAttribute
+		{
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+	}
+	#endregion
+
+	#region LeaveGamemode
+	/// <summary>
+	/// Called when the game leaves a gamemode.
+	/// </summary>
+	public const string LeaveGamemodeEvent = "grubs_leave-gamemode";
+
+	/// <summary>
+	/// Called when the game leaves a gamemode.
+	/// </summary>
+	[AttributeUsage( AttributeTargets.Method )]
+	public class LeaveGamemodeAttribute : EventAttribute
+	{
+		public LeaveGamemodeAttribute( string? state = null ) : base( LeaveGamemodeEvent + state ?? string.Empty )
+		{
+			if ( state is null )
+				return;
+
+			AssertValidState( state );
+		}
+	}
+
+	/// <summary>
+	/// Called when the game leaves a gamemode.
+	/// </summary>
+	public static class LeaveGamemode
+	{
+		/// <summary>
+		/// <see cref="LeaveGamemode"/> event but only called on the client realm.
+		/// </summary>
+		public const string ClientEvent = ClientPrefix + LeaveGamemodeEvent;
+		/// <summary>
+		/// <see cref="LeaveGamemode"/> event but only called on the server realm.
+		/// </summary>
+		public const string ServerEvent = ServerPrefix + LeaveGamemodeEvent;
+
+		/// <summary>
+		/// <see cref="LeaveGamemode"/> event but only called on the client realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ClientAttribute : EventAttribute
+		{
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+
+		/// <summary>
+		/// <see cref="LeaveGamemode"/> event but only called on the server realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ServerAttribute : EventAttribute
+		{
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+	}
+	#endregion
+
 	#region GrubHurt
 	/// <summary>
 	/// Called when a grub gets hurt.
@@ -202,6 +336,73 @@ public static class GrubsEvent
 
 		/// <summary>
 		/// <see cref="GrubHurt"/> event but only called on the server realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ServerAttribute : EventAttribute
+		{
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+	}
+	#endregion
+
+	#region GrubDied
+	/// <summary>
+	/// Called when a grub has died.
+	/// </summary>
+	public const string GrubDiedEvent = "grubs_grub-died";
+
+	/// <summary>
+	/// Called when a grub has died.
+	/// </summary>
+	[AttributeUsage( AttributeTargets.Method )]
+	public class GrubDiedAttribute : EventAttribute
+	{
+		public GrubDiedAttribute( string? state = null ) : base( GrubDiedEvent + state ?? string.Empty )
+		{
+			if ( state is null )
+				return;
+
+			AssertValidState( state );
+		}
+	}
+
+	/// <summary>
+	/// Called when a grub has died.
+	/// </summary>
+	public static class GrubDied
+	{
+		/// <summary>
+		/// <see cref="GrubDied"/> event but only called on the client realm.
+		/// </summary>
+		public const string ClientEvent = ClientPrefix + GrubDiedEvent;
+		/// <summary>
+		/// <see cref="GrubDied"/> event but only called on the server realm.
+		/// </summary>
+		public const string ServerEvent = ServerPrefix + GrubDiedEvent;
+
+		/// <summary>
+		/// <see cref="GrubDied"/> event but only called on the client realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ClientAttribute : EventAttribute
+		{
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+
+		/// <summary>
+		/// <see cref="GrubDied"/> event but only called on the server realm.
 		/// </summary>
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ServerAttribute : EventAttribute

@@ -137,6 +137,9 @@ public partial class Grub : AnimatedEntity, IResolvable
 		// TODO: Hide the grub instead of deleting it. Possible revive mechanic?
 		EnableDrawing = false;
 		Gravestone = new Gravestone( this ) { Owner = this };
+
+		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );
+		DeadRpc( To.Everyone );
 	}
 
 	protected override void OnDestroy()
@@ -271,5 +274,11 @@ public partial class Grub : AnimatedEntity, IResolvable
 	private void HurtRpc( float damage )
 	{
 		EventRunner.RunLocal( GrubsEvent.GrubHurtEvent, this, damage );
+	}
+
+	[ClientRpc]
+	private void DeadRpc()
+	{
+		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );
 	}
 }
