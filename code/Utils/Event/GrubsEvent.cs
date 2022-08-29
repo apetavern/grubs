@@ -28,7 +28,7 @@ public static class GrubsEvent
 	[AttributeUsage( AttributeTargets.Method )]
 	public class EnterStateAttribute : EventAttribute
 	{
-		public EnterStateAttribute( string state = null ) : base( EnterStateEvent + state ?? string.Empty )
+		public EnterStateAttribute( string? state = null ) : base( EnterStateEvent + state ?? string.Empty )
 		{
 			if ( state is null )
 				return;
@@ -57,7 +57,7 @@ public static class GrubsEvent
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute
 		{
-			public ClientAttribute( string state = null ) : base( ClientEvent + state ?? string.Empty )
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
 			{
 				if ( state is null )
 					return;
@@ -72,7 +72,7 @@ public static class GrubsEvent
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ServerAttribute : EventAttribute
 		{
-			public ServerAttribute( string state = null ) : base( ServerEvent + state ?? string.Empty )
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
 			{
 				if ( state is null )
 					return;
@@ -95,7 +95,7 @@ public static class GrubsEvent
 	[AttributeUsage( AttributeTargets.Method )]
 	public class LeaveStateAttribute : EventAttribute
 	{
-		public LeaveStateAttribute( string state = null ) : base( LeaveStateEvent + state ?? string.Empty )
+		public LeaveStateAttribute( string? state = null ) : base( LeaveStateEvent + state ?? string.Empty )
 		{
 			if ( state is null )
 				return;
@@ -124,7 +124,7 @@ public static class GrubsEvent
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute
 		{
-			public ClientAttribute( string state = null ) : base( ClientEvent + state ?? string.Empty )
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
 			{
 				if ( state is null )
 					return;
@@ -139,7 +139,7 @@ public static class GrubsEvent
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ServerAttribute : EventAttribute
 		{
-			public ServerAttribute( string state = null ) : base( ServerEvent + state ?? string.Empty )
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
 			{
 				if ( state is null )
 					return;
@@ -162,7 +162,7 @@ public static class GrubsEvent
 	[AttributeUsage( AttributeTargets.Method )]
 	public class GrubHurtAttribute : EventAttribute
 	{
-		public GrubHurtAttribute( string state = null ) : base( GrubHurtEvent + state ?? string.Empty )
+		public GrubHurtAttribute( string? state = null ) : base( GrubHurtEvent + state ?? string.Empty )
 		{
 			if ( state is null )
 				return;
@@ -191,7 +191,7 @@ public static class GrubsEvent
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute
 		{
-			public ClientAttribute( string state = null ) : base( ClientEvent + state ?? string.Empty )
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
 			{
 				if ( state is null )
 					return;
@@ -206,7 +206,7 @@ public static class GrubsEvent
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ServerAttribute : EventAttribute
 		{
-			public ServerAttribute( string state = null ) : base( ServerEvent + state ?? string.Empty )
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
 			{
 				if ( state is null )
 					return;

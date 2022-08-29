@@ -14,8 +14,8 @@ public class Projectile : ModelEntity, IResolvable
 	private float CollisionExplosionDelaySeconds { get; set; }
 	private float Speed { get; set; } = 0.001f;
 	private float ExplosionRadius { get; set; } = 100;
-	private List<ArcSegment> Segments { get; set; }
-	private Grub _Grub { get; set; }
+	private List<ArcSegment>? Segments { get; set; }
+	private Grub? _Grub { get; set; }
 
 	public Projectile WithGrub( Grub grub )
 	{
@@ -130,6 +130,9 @@ public class Projectile : ModelEntity, IResolvable
 
 	private void DrawSegments()
 	{
+		if ( Segments is null )
+			return;
+
 		foreach ( var segment in Segments )
 		{
 			DebugOverlay.Line( segment.StartPos, segment.EndPos );

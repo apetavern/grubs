@@ -9,7 +9,7 @@ public partial class GrubsInventory : BaseNetworkable
 
 	public void Add( GrubWeapon weapon, bool makeActive = false )
 	{
-		if ( weapon is null || !weapon.IsValid() )
+		if ( !weapon.IsValid() )
 			return;
 
 		// Handle picking up a weapon we already have.
@@ -33,17 +33,14 @@ public partial class GrubsInventory : BaseNetworkable
 	[ConCmd.Server]
 	public static void EquipItemByIndex( int index )
 	{
-		var team = ConsoleSystem.Caller.Pawn as Team;
-		var grub = team.ActiveGrub;
+		if ( ConsoleSystem.Caller.Pawn is not Team team )
+			return;
 
-		if ( grub is null || !grub.IsTurn )
+		var grub = team.ActiveGrub;
+		if ( !grub.IsTurn )
 			return;
 
 		var inventory = team.Inventory;
-
-		if ( inventory.Items[index] is null )
-			return;
-
 		grub.EquipWeapon( inventory.Items[index] );
 	}
 

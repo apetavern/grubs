@@ -22,9 +22,9 @@ public partial class Grub : AnimatedEntity, IResolvable
 	public GrubWeapon LastActiveChild { get; private set; }
 
 	[Net]
-	public ModelEntity Gravestone { get; private set; }
+	public Gravestone? Gravestone { get; private set; }
 
-	public Team Team => Owner as Team;
+	public Team Team => (Owner as Team)!;
 
 	private readonly Queue<DamageInfo> _damageQueue = new();
 	private bool _takeDamage;
@@ -47,7 +47,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		Transmit = TransmitType.Always;
 	}
 
-	public void Spawn( Client cl = null )
+	public void Spawn( Client? cl = null )
 	{
 		base.Spawn();
 

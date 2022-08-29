@@ -8,8 +8,8 @@ namespace Grubs.UI;
 [UseTemplate]
 public class Hud : RootPanel
 {
-	private WaitingStatus _waitingStatus;
-	private TurnTime _turnTime;
+	private WaitingStatus? _waitingStatus;
+	private TurnTime? _turnTime;
 	private List<DamageNumber> _damageNumbers = new();
 
 	public Hud()

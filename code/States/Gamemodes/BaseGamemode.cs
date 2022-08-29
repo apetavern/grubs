@@ -28,7 +28,7 @@ public abstract partial class BaseGamemode : BaseState
 	/// <summary>
 	/// The async task for switching to the next turn.
 	/// </summary>
-	public Task NextTurnTask;
+	public Task? NextTurnTask;
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
@@ -202,7 +202,7 @@ public abstract partial class BaseGamemode : BaseState
 		Host.AssertServer();
 
 		var teamsDead = 0;
-		Team lastTeamAlive = null;
+		Team? lastTeamAlive = null;
 
 		foreach ( var team in TeamManager.Teams )
 		{
@@ -223,7 +223,7 @@ public abstract partial class BaseGamemode : BaseState
 
 		if ( teamsDead == TeamManager.Teams.Count - 1 )
 		{
-			SwitchStateTo<GameEndState>( GameResultType.TeamWon, lastTeamAlive.Clients );
+			SwitchStateTo<GameEndState>( GameResultType.TeamWon, lastTeamAlive!.Clients );
 			return true;
 		}
 

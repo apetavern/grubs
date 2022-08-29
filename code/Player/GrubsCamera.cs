@@ -15,7 +15,7 @@ public class GrubsCamera : CameraMode
 	private TimeSince TimeSinceMousePan { get; set; }
 	private static int SecondsBeforeReturnFromPan => 3;
 
-	public Entity Target { get; set; }
+	public Entity? Target { get; set; }
 
 	public override void Update()
 	{

@@ -33,7 +33,7 @@ public class DamageNumber : WorldPanel
 	{
 		base.Tick();
 
-		if ( Grub is null || !Grub.IsValid )
+		if ( !Grub.IsValid )
 		{
 			Delete();
 			return;

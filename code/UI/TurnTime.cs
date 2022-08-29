@@ -7,7 +7,7 @@ namespace Grubs.UI;
 
 public class TurnTime : Panel
 {
-	private static BaseGamemode Gamemode => GrubsGame.Current.CurrentState as BaseGamemode;
+	private static BaseGamemode Gamemode => (GrubsGame.Current.CurrentState as BaseGamemode)!;
 
 	private readonly Label _timeLeft;
 
@@ -22,9 +22,6 @@ public class TurnTime : Panel
 	public override void Tick()
 	{
 		base.Tick();
-
-		if ( Gamemode is null )
-			return;
 
 		_timeLeft.Text = Math.Floor( Gamemode.TimeUntilTurnEnd ).ToString( CultureInfo.CurrentCulture );
 

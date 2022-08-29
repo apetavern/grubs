@@ -31,7 +31,7 @@ public class GrubNametags
 		var invalidNametags = new List<Grub>();
 		foreach ( var (grub, nametag) in Nametags )
 		{
-			if ( grub is null || !grub.IsValid )
+			if ( !grub.IsValid )
 			{
 				nametag.Delete();
 				invalidNametags.Add( grub );
