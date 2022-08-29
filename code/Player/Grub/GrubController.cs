@@ -188,8 +188,8 @@ public partial class GrubController : BasePlayerController
 		// Set EyeRot to face the way we're walking.
 		LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
-		// Only allow aiming changes if the grub isn't moving and not currently charing a weapon shot.
-		if ( Velocity.Normal.IsNearlyZero( 2.5f ) && (Pawn as Grub).IsTurn && !isFiring )
+		// Only allow aiming changes if the grub isn't moving and not currently charging a weapon shot.
+		if ( (Pawn as Grub).IsTurn && !isFiring )
 		{
 			// Aim with W & S keys
 			EyeRotation = Rotation.LookAt( LookPos );
