@@ -10,6 +10,7 @@ public class Hud : RootPanel
 {
 	private WaitingStatus? _waitingStatus;
 	private TurnTime? _turnTime;
+	private AimReticle? _aimReticle;
 	private List<DamageNumber> _damageNumbers = new();
 
 	public Hud()
@@ -40,12 +41,16 @@ public class Hud : RootPanel
 	{
 		_turnTime?.Delete();
 		_turnTime = AddChild<TurnTime>();
+
+		_aimReticle?.Delete();
+		_aimReticle = new AimReticle();
 	}
 
 	[GrubsEvent.LeaveState.Client( nameof( FreeForAll ) )]
 	private void OnLeavePlay()
 	{
 		_turnTime?.Delete();
+		_aimReticle?.Delete();
 		foreach ( var damageNumber in _damageNumbers )
 			damageNumber.Delete();
 	}

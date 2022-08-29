@@ -11,6 +11,7 @@ public class Bazooka : GrubWeapon
 	public override string ProjectileModelPath => "models/weapons/shell/shell.vmdl";
 	public override FiringType FiringType => FiringType.Charged;
 	public override HoldPose HoldPose => HoldPose.Bazooka;
+	public override bool HasReticle => true;
 
 	protected override void OnFire()
 	{

@@ -14,7 +14,7 @@ public abstract partial class GrubWeapon : BaseCarriable
 	public virtual FiringType FiringType => FiringType.Instant;
 	public virtual int MaxFireCount => 1;
 	public virtual HoldPose HoldPose => HoldPose.None;
-	public virtual bool HasReticle { get; set; }
+	public virtual bool HasReticle => false;
 	[Net, Local] public int Ammo { get; set; }
 	[Net] public bool WeaponHasHat { get; set; }
 	[Net] public int Charge { get; set; }
@@ -83,7 +83,6 @@ public abstract partial class GrubWeapon : BaseCarriable
 		base.Simulate( cl );
 
 		CheckFireInput();
-		CheckReticle();
 	}
 
 	protected void CheckFireInput()
@@ -135,10 +134,6 @@ public abstract partial class GrubWeapon : BaseCarriable
 
 		if ( WeaponHasHat )
 			grub.SetHatVisible( !show );
-
-		// if ( IsClient && HasReticle && AimReticle is not null )
-		// AimReticle.ShowReticle = show;
-		// AimReticle.ShowReticle = show;
 	}
 
 	protected void ShowHoldPose( bool show )
@@ -159,14 +154,5 @@ public abstract partial class GrubWeapon : BaseCarriable
 				return true;
 
 		return false;
-	}
-
-	private void CheckReticle()
-	{
-		if ( !HasReticle && IsClient )
-		{
-			new AimReticle( (Local.Pawn as Team).ActiveGrub );
-			HasReticle = true;
-		}
 	}
 }

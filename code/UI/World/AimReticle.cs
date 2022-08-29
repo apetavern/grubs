@@ -1,45 +1,45 @@
 ﻿using Grubs.Player;
+using Grubs.Utils.Extensions;
 
 namespace Grubs.UI.World;
+
 public class AimReticle : WorldPanel
 {
-	public Grub Grub { get; set; }
-	public Type grubsWeapon { get; set; }
-
-	public AimReticle( Grub grub )
+	public AimReticle()
 	{
 		// This line should make it visible and not clip into the ground, some issues with it currently (s&box issue) 
 		SceneObject.Flags.ViewModelLayer = true;
 
-		Grub = grub;
-		StyleSheet.Load( "UI/Stylesheets/Common.scss" );
+		StyleSheet.Load( "UI/Stylesheets/AimReticle.scss" );
 		Add.Image( "materials/reticle/reticle.png" );
 		Rotation = Rotation.RotateAroundAxis( Vector3.Up, 90f );
-		grubsWeapon = Grub.ActiveChild.GetType();
 	}
-
 
 	public override void Tick()
 	{
 		base.Tick();
 
-		Position = Grub.EyePosition + Grub.EyeRotation.Forward * 80f;
+		if ( Local.Client.GetTeam() != TeamManager.Instance.CurrentTeam )
+		{
+			SetClass( "hidden", true );
+			return;
+		}
+
+		var activeGrub = TeamManager.Instance.CurrentTeam.ActiveGrub;
+		if ( activeGrub.ActiveChild is null || !activeGrub.ActiveChild.HasReticle )
+		{
+			SetClass( "hidden", true );
+			return;
+		}
+
+		if ( !activeGrub.Controller.IsGrounded || !activeGrub.Controller.Velocity.IsNearlyZero( 2.5f ) )
+		{
+			SetClass( "hidden", true );
+			return;
+		}
+
+		SetClass( "hidden", false );
+		Position = activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f;
 		Rotation = Rotation.RotateAroundAxis( Vector3.Forward, 0.25f );
-
-		GrubChecks();
-		if ( Grub.ActiveChild is null || Grub.ActiveChild.GetType() != grubsWeapon )
-			Delete( true );
-	}
-
-	private void GrubChecks()
-	{
-		if ( !Grub.Controller.IsGrounded || !Grub.Controller.Velocity.IsNearlyZero( 2.5f ) )
-		{
-			AddClass( "Disabled" );
-		}
-		else if ( HasClass( "Disabled" ) )
-		{
-			RemoveClass( "Disabled" );
-		}
 	}
 }

@@ -11,6 +11,7 @@ public class Grenade : GrubWeapon
 	public override string ProjectileModelPath => "models/weapons/grenade/grenade.vmdl";
 	public override FiringType FiringType => FiringType.Charged;
 	public override HoldPose HoldPose => HoldPose.Throwable;
+	public override bool HasReticle => true;
 
 	protected override void OnFire()
 	{
