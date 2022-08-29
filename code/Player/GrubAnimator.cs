@@ -1,10 +1,10 @@
 ﻿namespace Grubs.Player;
 
-public class WormAnimator : PawnAnimator
+public class GrubAnimator : PawnAnimator
 {
 	public override void Simulate()
 	{
-		var controller = (Pawn as Worm).Controller;
+		var controller = (Pawn as Grub).Controller;
 
 		SetAnimParameter( "grounded", controller.IsGrounded );
 

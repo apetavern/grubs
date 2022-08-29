@@ -4,7 +4,7 @@ using Grubs.Weapons.Projectiles;
 
 namespace Grubs.Weapons;
 
-public class Bazooka : GrubsWeapon
+public class Bazooka : GrubWeapon
 {
 	public override string WeaponName => "Bazooka";
 	public override string ModelPath => "models/weapons/bazooka/bazooka.vmdl";
@@ -22,7 +22,7 @@ public class Bazooka : GrubsWeapon
 			.RunTowards( Parent.EyeRotation.Forward.Normal, 0.5f * Charge, 0 );
 
 		new Projectile()
-			.WithWorm( Parent as Worm )
+			.WithGrub( Parent as Grub )
 			.WithModel( ProjectileModelPath )
 			.SetPosition( Position )
 			.MoveAlongTrace( segments )

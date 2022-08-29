@@ -8,15 +8,15 @@ public class DamageNumber : WorldPanel
 	private const float RiseSpeed = 5;
 	private static Vector3 Offset => Vector3.Up * 64;
 
-	public Worm Worm { get; }
+	public Grub Grub { get; }
 
-	public DamageNumber( Worm worm, float damage )
+	public DamageNumber( Grub grub, float damage )
 	{
-		Worm = worm;
+		Grub = grub;
 
 		StyleSheet.Load( "/UI/Stylesheets/DamageNumber.scss" );
 
-		Add.Label( $"-{Math.Floor( damage )}", "worm-damage" );
+		Add.Label( $"-{Math.Floor( damage )}", "grub-damage" );
 
 		const float width = 600;
 		const float height = 300;
@@ -25,7 +25,7 @@ public class DamageNumber : WorldPanel
 
 		SceneObject.Flags.BloomLayer = false;
 
-		Position = worm.Position + Offset;
+		Position = grub.Position + Offset;
 		_ = DelayDelete();
 	}
 
@@ -33,7 +33,7 @@ public class DamageNumber : WorldPanel
 	{
 		base.Tick();
 
-		if ( Worm is null || !Worm.IsValid )
+		if ( Grub is null || !Grub.IsValid )
 		{
 			Delete();
 			return;

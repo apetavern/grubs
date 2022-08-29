@@ -4,7 +4,7 @@ using Grubs.Weapons.Projectiles;
 
 namespace Grubs.Weapons;
 
-public class Grenade : GrubsWeapon
+public class Grenade : GrubWeapon
 {
 	public override string WeaponName => "Grenade";
 	public override string ModelPath => "models/weapons/grenade/grenade.vmdl";
@@ -20,7 +20,7 @@ public class Grenade : GrubsWeapon
 			.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, 0.4f * Charge, 0, maxBounceQty: 3 );
 
 		new Projectile()
-			.WithWorm( Parent as Worm )
+			.WithGrub( Parent as Grub )
 			.WithModel( ProjectileModelPath )
 			.SetPosition( Position )
 			.MoveAlongTrace( segments )

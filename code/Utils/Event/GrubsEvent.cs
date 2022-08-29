@@ -150,19 +150,19 @@ public static class GrubsEvent
 	}
 	#endregion
 
-	#region WormHurt
+	#region GrubHurt
 	/// <summary>
-	/// Called when a worm gets hurt.
+	/// Called when a grub gets hurt.
 	/// </summary>
-	public const string WormHurtEvent = "grubs_worm-hurt";
+	public const string GrubHurtEvent = "grubs_grub-hurt";
 
 	/// <summary>
-	/// Called when a worm gets hurt.
+	/// Called when a grub gets hurt.
 	/// </summary>
 	[AttributeUsage( AttributeTargets.Method )]
-	public class WormHurtAttribute : EventAttribute
+	public class GrubHurtAttribute : EventAttribute
 	{
-		public WormHurtAttribute( string state = null ) : base( WormHurtEvent + state ?? string.Empty )
+		public GrubHurtAttribute( string state = null ) : base( GrubHurtEvent + state ?? string.Empty )
 		{
 			if ( state is null )
 				return;
@@ -172,21 +172,21 @@ public static class GrubsEvent
 	}
 
 	/// <summary>
-	/// Called when a worm gets hurt.
+	/// Called when a grub gets hurt.
 	/// </summary>
-	public static class WormHurt
+	public static class GrubHurt
 	{
 		/// <summary>
-		/// <see cref="WormHurt"/> event but only called on the client realm.
+		/// <see cref="GrubHurt"/> event but only called on the client realm.
 		/// </summary>
-		public const string ClientEvent = ClientPrefix + WormHurtEvent;
+		public const string ClientEvent = ClientPrefix + GrubHurtEvent;
 		/// <summary>
-		/// <see cref="WormHurt"/> event but only called on the server realm.
+		/// <see cref="GrubHurt"/> event but only called on the server realm.
 		/// </summary>
-		public const string ServerEvent = ServerPrefix + WormHurtEvent;
+		public const string ServerEvent = ServerPrefix + GrubHurtEvent;
 
 		/// <summary>
-		/// <see cref="WormHurt"/> event but only called on the client realm.
+		/// <see cref="GrubHurt"/> event but only called on the client realm.
 		/// </summary>
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ClientAttribute : EventAttribute
@@ -201,7 +201,7 @@ public static class GrubsEvent
 		}
 
 		/// <summary>
-		/// <see cref="WormHurt"/> event but only called on the server realm.
+		/// <see cref="GrubHurt"/> event but only called on the server realm.
 		/// </summary>
 		[AttributeUsage( AttributeTargets.Method )]
 		public class ServerAttribute : EventAttribute

@@ -3,19 +3,19 @@
 namespace Grubs.UI.World;
 public class AimReticle : WorldPanel
 {
-	public Worm Worm { get; set; }
+	public Grub Grub { get; set; }
 	public Type grubsWeapon { get; set; }
 
-	public AimReticle( Worm worm )
+	public AimReticle( Grub grub )
 	{
 		// This line should make it visible and not clip into the ground, some issues with it currently (s&box issue) 
 		SceneObject.Flags.ViewModelLayer = true;
 
-		Worm = worm;
+		Grub = grub;
 		StyleSheet.Load( "UI/Stylesheets/Common.scss" );
 		Add.Image( "materials/reticle/reticle.png" );
 		Rotation = Rotation.RotateAroundAxis( Vector3.Up, 90f );
-		grubsWeapon = Worm.ActiveChild.GetType();
+		grubsWeapon = Grub.ActiveChild.GetType();
 	}
 
 
@@ -23,17 +23,17 @@ public class AimReticle : WorldPanel
 	{
 		base.Tick();
 
-		Position = Worm.EyePosition + Worm.EyeRotation.Forward * 80f;
+		Position = Grub.EyePosition + Grub.EyeRotation.Forward * 80f;
 		Rotation = Rotation.RotateAroundAxis( Vector3.Forward, 0.25f );
 
-		WormChecks();
-		if ( Worm.ActiveChild is null || Worm.ActiveChild.GetType() != grubsWeapon )
+		GrubChecks();
+		if ( Grub.ActiveChild is null || Grub.ActiveChild.GetType() != grubsWeapon )
 			Delete( true );
 	}
 
-	private void WormChecks()
+	private void GrubChecks()
 	{
-		if ( !Worm.Controller.IsGrounded || !Worm.Controller.Velocity.IsNearlyZero( 2.5f ) )
+		if ( !Grub.Controller.IsGrounded || !Grub.Controller.Velocity.IsNearlyZero( 2.5f ) )
 		{
 			AddClass( "Disabled" );
 		}

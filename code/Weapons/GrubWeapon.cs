@@ -6,7 +6,7 @@ using Grubs.UI.World;
 namespace Grubs.Weapons;
 
 [Category( "Weapons" )]
-public abstract partial class GrubsWeapon : BaseCarriable
+public abstract partial class GrubWeapon : BaseCarriable
 {
 	public virtual string WeaponName => "";
 	public virtual string ModelPath => "";
@@ -20,7 +20,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	[Net] public int Charge { get; set; }
 	[Net] public bool IsFiring { get; set; } = false;
 
-	protected WormAnimator Animator;
+	protected GrubAnimator Animator;
 
 	private readonly int maxCharge = 100;
 
@@ -46,7 +46,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	/// </summary>
 	public void Fire()
 	{
-		(Parent as Worm).SetAnimParameter( "fire", true );
+		(Parent as Grub).SetAnimParameter( "fire", true );
 
 		if ( !IsServer )
 			return;
@@ -56,25 +56,25 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 	public override void ActiveStart( Entity ent )
 	{
-		if ( ent is not Worm worm )
+		if ( ent is not Grub grub )
 			return;
 
-		Animator = worm.Animator;
+		Animator = grub.Animator;
 
 		EnableDrawing = true;
 		Animator?.SetAnimParameter( "holdpose", (int)HoldPose );
-		SetParent( worm, true );
+		SetParent( grub, true );
 
 		base.OnActive();
 	}
 
 	public override void ActiveEnd( Entity ent, bool dropped )
 	{
-		if ( ent is not Worm worm )
+		if ( ent is not Grub grub )
 			return;
 
 		EnableDrawing = false;
-		ShowWeapon( worm, false );
+		ShowWeapon( grub, false );
 		SetParent( Owner );
 	}
 
@@ -88,8 +88,8 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 	protected void CheckFireInput()
 	{
-		// Only fire if our worm is grounded and we haven't used our turn.
-		var controller = (Owner as Team).ActiveWorm.Controller;
+		// Only fire if our grub is grounded and we haven't used our turn.
+		var controller = (Owner as Team).ActiveGrub.Controller;
 		if ( !controller.IsGrounded && (GrubsGame.Current.CurrentState as BaseGamemode).UsedTurn )
 			return;
 
@@ -126,15 +126,15 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	/// Method to set whether the weapon should currently be visible.
 	/// Used to hide the weapon while jumping, moving, etc.
 	/// </summary>
-	/// <param name="worm">The worm to update weapon visiblity on.</param>
+	/// <param name="grub">The grub to update weapon visiblity on.</param>
 	/// <param name="show">Whether the weapon should be shown.</param>
-	public void ShowWeapon( Worm worm, bool show )
+	public void ShowWeapon( Grub grub, bool show )
 	{
 		EnableDrawing = show;
 		ShowHoldPose( show );
 
 		if ( WeaponHasHat )
-			worm.SetHatVisible( !show );
+			grub.SetHatVisible( !show );
 
 		// if ( IsClient && HasReticle && AimReticle is not null )
 		// AimReticle.ShowReticle = show;
@@ -143,10 +143,10 @@ public abstract partial class GrubsWeapon : BaseCarriable
 
 	protected void ShowHoldPose( bool show )
 	{
-		if ( Parent is not Worm worm )
+		if ( Parent is not Grub grub )
 			return;
 
-		if ( !worm.IsTurn )
+		if ( !grub.IsTurn )
 			return;
 
 		Animator?.SetAnimParameter( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
@@ -165,7 +165,7 @@ public abstract partial class GrubsWeapon : BaseCarriable
 	{
 		if ( !HasReticle && IsClient )
 		{
-			new AimReticle( (Local.Pawn as Team).ActiveWorm );
+			new AimReticle( (Local.Pawn as Team).ActiveGrub );
 			HasReticle = true;
 		}
 	}

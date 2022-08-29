@@ -15,11 +15,11 @@ public class Projectile : ModelEntity, IResolvable
 	private float Speed { get; set; } = 0.001f;
 	private float ExplosionRadius { get; set; } = 100;
 	private List<ArcSegment> Segments { get; set; }
-	private Worm Worm { get; set; }
+	private Grub _Grub { get; set; }
 
-	public Projectile WithWorm( Worm worm )
+	public Projectile WithGrub( Grub grub )
 	{
-		Worm = worm;
+		_Grub = grub;
 		return this;
 	}
 
@@ -124,7 +124,7 @@ public class Projectile : ModelEntity, IResolvable
 
 	private void Explode()
 	{
-		ExplosionHelper.Explode( Position, Worm, ExplosionRadius );
+		ExplosionHelper.Explode( Position, _Grub, ExplosionRadius );
 		Delete();
 	}
 

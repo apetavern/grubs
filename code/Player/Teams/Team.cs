@@ -19,14 +19,14 @@ public partial class Team : Entity, ISpectator
 	/// The list of grubs that are a part of this team.
 	/// </summary>
 	[Net]
-	public IList<Worm> Worms { get; private set; }
+	public IList<Grub> Grubs { get; private set; }
 
 	/// <summary>
 	/// The teams current grub.
 	/// <remarks>This will stay populated even after their turn has passed.</remarks>
 	/// </summary>
 	[Net, Predicted]
-	public Worm ActiveWorm { get; private set; }
+	public Grub ActiveGrub { get; private set; }
 
 	/// <summary>
 	/// The teams weapon inventory.
@@ -64,7 +64,7 @@ public partial class Team : Entity, ISpectator
 	/// <summary>
 	/// Returns whether all grubs in this team are dead or not.
 	/// </summary>
-	public bool TeamDead => Worms.All( worm => worm.LifeState == LifeState.Dead );
+	public bool TeamDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
 
 	/// <summary>
 	/// Returns whether it is this teams turn.
@@ -94,7 +94,7 @@ public partial class Team : Entity, ISpectator
 		};
 
 		InitializeInventory();
-		CreateWorms();
+		CreateGrubs();
 	}
 
 	public override void Simulate( Client cl )
@@ -122,11 +122,11 @@ public partial class Team : Entity, ISpectator
 			}
 
 			if ( EquippedWeapon != lastWeapon )
-				ActiveWorm.EquipWeapon( Inventory.Items[EquippedWeapon] );
+				ActiveGrub.EquipWeapon( Inventory.Items[EquippedWeapon] );
 		}
 
-		foreach ( var worm in Worms )
-			worm.Simulate( cl );
+		foreach ( var grub in Grubs )
+			grub.Simulate( cl );
 	}
 
 	protected override void OnDestroy()
@@ -136,37 +136,37 @@ public partial class Team : Entity, ISpectator
 		if ( !IsServer )
 			return;
 
-		foreach ( var worm in Worms )
-			worm.Delete();
+		foreach ( var grub in Grubs )
+			grub.Delete();
 	}
 
 	/// <summary>
-	/// Create and spawn the grubs for this team. Number of grubs spawned is defined by <see cref="GameConfig"/>.<see cref="GameConfig.WormCount"/>.
+	/// Create and spawn the grubs for this team. Number of grubs spawned is defined by <see cref="GameConfig"/>.<see cref="GameConfig.GrubCount"/>.
 	/// </summary>
-	private void CreateWorms()
+	private void CreateGrubs()
 	{
 		Host.AssertServer();
 
-		var wormsToSpawn = GameConfig.WormCount;
-		var spawnPoints = GetSpawnLocations( wormsToSpawn );
+		var grubsToSpawn = GameConfig.GrubCount;
+		var spawnPoints = GetSpawnLocations( grubsToSpawn );
 
-		for ( var i = 0; i < wormsToSpawn; i++ )
+		for ( var i = 0; i < grubsToSpawn; i++ )
 		{
-			var worm = new Worm { Owner = this, Position = spawnPoints[i] };
-			worm.Spawn( Clients.Count == 1 ? Clients[0] : null );
+			var grub = new Grub { Owner = this, Position = spawnPoints[i] };
+			grub.Spawn( Clients.Count == 1 ? Clients[0] : null );
 
-			Worms.Add( worm );
+			Grubs.Add( grub );
 		}
 
-		ActiveWorm = Worms.First();
+		ActiveGrub = Grubs.First();
 	}
 
 	private void InitializeInventory()
 	{
 		Host.AssertServer();
 
-		foreach ( var weapon in TypeLibrary.GetTypes<GrubsWeapon>().Where( weapon => !weapon.IsAbstract ) )
-			Inventory.Add( TypeLibrary.Create<GrubsWeapon>( weapon ) );
+		foreach ( var weapon in TypeLibrary.GetTypes<GrubWeapon>().Where( weapon => !weapon.IsAbstract ) )
+			Inventory.Add( TypeLibrary.Create<GrubWeapon>( weapon ) );
 	}
 
 	/// <summary>
@@ -202,27 +202,27 @@ public partial class Team : Entity, ISpectator
 	/// <summary>
 	/// Sets the new grub for this team.
 	/// </summary>
-	public void PickNextWorm()
+	public void PickNextGrub()
 	{
 		Host.AssertServer();
 
 		do
 		{
-			RotateWorms();
-			ActiveWorm = Worms[0];
-		} while ( ActiveWorm.LifeState == LifeState.Dead );
+			RotateGrubs();
+			ActiveGrub = Grubs[0];
+		} while ( ActiveGrub.LifeState == LifeState.Dead );
 	}
 
 	/// <summary>
 	/// Rotate the grubs list.
 	/// </summary>
-	private void RotateWorms()
+	private void RotateGrubs()
 	{
 		Host.AssertServer();
 
-		var current = Worms[0];
-		Worms.RemoveAt( 0 );
-		Worms.Add( current );
+		var current = Grubs[0];
+		Grubs.RemoveAt( 0 );
+		Grubs.Add( current );
 	}
 
 	private static List<Vector3> GetSpawnLocations( int num )

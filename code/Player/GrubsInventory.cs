@@ -5,9 +5,9 @@ namespace Grubs.Player;
 public partial class GrubsInventory : BaseNetworkable
 {
 	public Entity Owner { get; set; }
-	[Net] public List<GrubsWeapon> Items { get; set; } = new();
+	[Net] public List<GrubWeapon> Items { get; set; } = new();
 
-	public void Add( GrubsWeapon weapon, bool makeActive = false )
+	public void Add( GrubWeapon weapon, bool makeActive = false )
 	{
 		if ( weapon is null || !weapon.IsValid() )
 			return;
@@ -34,9 +34,9 @@ public partial class GrubsInventory : BaseNetworkable
 	public static void EquipItemByIndex( int index )
 	{
 		var team = ConsoleSystem.Caller.Pawn as Team;
-		var worm = team.ActiveWorm;
+		var grub = team.ActiveGrub;
 
-		if ( worm is null || !worm.IsTurn )
+		if ( grub is null || !grub.IsTurn )
 			return;
 
 		var inventory = team.Inventory;
@@ -44,7 +44,7 @@ public partial class GrubsInventory : BaseNetworkable
 		if ( inventory.Items[index] is null )
 			return;
 
-		worm.EquipWeapon( inventory.Items[index] );
+		grub.EquipWeapon( inventory.Items[index] );
 	}
 
 	public bool IsCarryingType( Type type )

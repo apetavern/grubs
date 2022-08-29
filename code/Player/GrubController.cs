@@ -3,7 +3,7 @@ using Grubs.Utils.Extensions;
 
 namespace Grubs.Player;
 
-public partial class WormController : BasePlayerController
+public partial class GrubController : BasePlayerController
 {
 	[Net] public float DefaultSpeed { get; set; } = 80.0f;
 	[Net] public float Acceleration { get; set; } = 10.0f;
@@ -27,7 +27,7 @@ public partial class WormController : BasePlayerController
 	protected Vector3 mins;
 	protected Vector3 maxs;
 
-	public WormController()
+	public GrubController()
 	{
 		Unstuck = new Unstuck( this );
 		Debug = false;
@@ -63,12 +63,12 @@ public partial class WormController : BasePlayerController
 
 	public override void Simulate()
 	{
-		var worm = Pawn as Worm;
-		FallVelocity = -worm.Velocity.z;
+		var grub = Pawn as Grub;
+		FallVelocity = -grub.Velocity.z;
 
 		var isFiring = false;
-		if ( worm.ActiveChild is not null && worm.ActiveChild.IsValid() )
-			isFiring = worm.ActiveChild.IsFiring;
+		if ( grub.ActiveChild is not null && grub.ActiveChild.IsValid() )
+			isFiring = grub.ActiveChild.IsFiring;
 
 		UpdateBBox();
 		SetEyeTransform( isFiring );
@@ -82,7 +82,7 @@ public partial class WormController : BasePlayerController
 
 		BaseVelocity = BaseVelocity.WithZ( 0 );
 
-		if ( Input.Pressed( InputButton.Jump ) && worm.IsTurn && !isFiring )
+		if ( Input.Pressed( InputButton.Jump ) && grub.IsTurn && !isFiring )
 		{
 			CheckJumpButton();
 		}
@@ -99,8 +99,8 @@ public partial class WormController : BasePlayerController
 			}
 		}
 
-		// Take Input if it is currently the worms turn. Don't allow movement while jumping.
-		WishVelocity = worm.IsTurn && !isFiring && IsGrounded && !(GrubsGame.Current.CurrentState as BaseGamemode).UsedTurn
+		// Take Input if it is currently the grubs turn. Don't allow movement while jumping.
+		WishVelocity = grub.IsTurn && !isFiring && IsGrounded && !(GrubsGame.Current.CurrentState as BaseGamemode).UsedTurn
 			? -Input.Left * Vector3.Forward
 			: Vector3.Zero;
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
@@ -132,7 +132,7 @@ public partial class WormController : BasePlayerController
 
 		CheckFalling();
 
-		worm.ActiveChild?.ShowWeapon( worm, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
+		grub.ActiveChild?.ShowWeapon( grub, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
 	}
 
 	public float FallPunchThreshold => 350f; // won't make player's screen / make scrape noise unless player falling at least this fast.
@@ -172,7 +172,7 @@ public partial class WormController : BasePlayerController
 
 	private void TakeFallDamage()
 	{
-		if ( Host.IsServer && TeamManager.Instance.CurrentTeam.ActiveWorm == Pawn )
+		if ( Host.IsServer && TeamManager.Instance.CurrentTeam.ActiveGrub == Pawn )
 			(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
 
 		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
@@ -189,7 +189,7 @@ public partial class WormController : BasePlayerController
 		LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
 		// Only allow aiming changes if the grub isn't moving and not currently charing a weapon shot.
-		if ( Velocity.Normal.IsNearlyZero( 2.5f ) && (Pawn as Worm).IsTurn && !isFiring )
+		if ( Velocity.Normal.IsNearlyZero( 2.5f ) && (Pawn as Grub).IsTurn && !isFiring )
 		{
 			// Aim with W & S keys
 			EyeRotation = Rotation.LookAt( LookPos );
@@ -207,9 +207,9 @@ public partial class WormController : BasePlayerController
 
 	private void UpdateRotation()
 	{
-		float wormFacing = Pawn.EyeRotation.Forward.Dot( Pawn.Rotation.Forward );
+		float grubFacing = Pawn.EyeRotation.Forward.Dot( Pawn.Rotation.Forward );
 
-		if ( wormFacing < 0 )
+		if ( grubFacing < 0 )
 		{
 			Rotation *= Rotation.From( 0, 180, 0 );
 			Pawn.ResetInterpolation();

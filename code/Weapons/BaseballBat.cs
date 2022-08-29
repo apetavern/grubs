@@ -1,6 +1,6 @@
 ﻿namespace Grubs.Weapons;
 
-public class BaseballBat : GrubsWeapon
+public class BaseballBat : GrubWeapon
 {
 	public override string WeaponName => "Baseball Bat";
 	public override string ModelPath => "models/weapons/baseballbat/baseballbat.vmdl";

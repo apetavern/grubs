@@ -4,16 +4,16 @@
 public partial class Gravestone : ModelEntity
 {
 	[Net]
-	private Worm Worm { get; set; }
+	private Grub _Grub { get; set; }
 
 	public Gravestone()
 	{
 		Transmit = TransmitType.Always;
 	}
 
-	public Gravestone( Worm worm ) : this()
+	public Gravestone( Grub grub ) : this()
 	{
-		Worm = worm;
+		_Grub = grub;
 		SetModel( "models/gravestones/basic_gravestone/gravestone_basic.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 	}
@@ -22,6 +22,6 @@ public partial class Gravestone : ModelEntity
 	{
 		base.Simulate( cl );
 
-		Position = Worm.Position;
+		Position = _Grub.Position;
 	}
 }

@@ -86,7 +86,7 @@ public partial class TerrainMap
 
 			if ( !TerrainGrid[x, z] )
 			{
-				// TODO: Check the angle of the terrain we are hitting to ensure the worm won't fall off immediately.
+				// TODO: Check the angle of the terrain we are hitting to ensure the grub won't fall off immediately.
 				// Also, 25f is the resolution from MarchingSquares, we should be passing it :)
 				var startPos = new Vector3( x * 25f, 0, z * 25f );
 				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * 25f ).WithTag( "solid" ).Run();

@@ -162,10 +162,10 @@ public abstract partial class BaseGamemode : BaseState
 
 		UsedTurn = true;
 
-		TeamManager.CurrentTeam.ActiveWorm.EquipWeapon( null );
+		TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( null );
 		foreach ( var team in TeamManager.Teams )
 		{
-			foreach ( var grub in team.Worms )
+			foreach ( var grub in team.Grubs )
 				await grub.ApplyDamage();
 		}
 

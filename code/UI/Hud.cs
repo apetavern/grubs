@@ -18,7 +18,7 @@ public class Hud : RootPanel
 
 		if ( Host.IsClient )
 		{
-			_ = new WormNametags();
+			_ = new GrubNametags();
 		}
 	}
 
@@ -50,9 +50,9 @@ public class Hud : RootPanel
 			damageNumber.Delete();
 	}
 
-	[GrubsEvent.WormHurt.Client]
-	private void OnWormHurt( Worm worm, float damage )
+	[GrubsEvent.GrubHurt.Client]
+	private void OnGrubHurt( Grub grub, float damage )
 	{
-		_damageNumbers.Add( new DamageNumber( worm, damage ) );
+		_damageNumbers.Add( new DamageNumber( grub, damage ) );
 	}
 }

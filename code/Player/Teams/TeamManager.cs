@@ -61,7 +61,7 @@ public partial class TeamManager : Entity
 
 		CurrentTeamNumber = teamIndex;
 		CurrentTeam.PickNextClient();
-		CurrentTeam.PickNextWorm();
+		CurrentTeam.PickNextGrub();
 	}
 
 	/// <summary>

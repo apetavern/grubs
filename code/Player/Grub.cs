@@ -7,19 +7,19 @@ using Grubs.Weapons;
 namespace Grubs.Player;
 
 [Category( "Grubs" )]
-public partial class Worm : AnimatedEntity, IResolvable
+public partial class Grub : AnimatedEntity, IResolvable
 {
 	[Net, Predicted]
-	public WormController Controller { get; private set; }
+	public GrubController Controller { get; private set; }
 
 	[Net, Predicted]
-	public WormAnimator Animator { get; private set; }
+	public GrubAnimator Animator { get; private set; }
 
 	[Net, Predicted]
-	public GrubsWeapon ActiveChild { get; private set; }
+	public GrubWeapon ActiveChild { get; private set; }
 
 	[Net, Predicted]
-	public GrubsWeapon LastActiveChild { get; private set; }
+	public GrubWeapon LastActiveChild { get; private set; }
 
 	[Net]
 	public ModelEntity Gravestone { get; private set; }
@@ -36,13 +36,13 @@ public partial class Worm : AnimatedEntity, IResolvable
 			if ( Owner is not Team team )
 				return false;
 
-			return team.ActiveWorm == this && team.IsTurn;
+			return team.ActiveGrub == this && team.IsTurn;
 		}
 	}
 
 	public bool Resolved => Velocity.IsNearlyZero( 0.1f ) || LifeState == LifeState.Dead;
 
-	public Worm()
+	public Grub()
 	{
 		Transmit = TransmitType.Always;
 	}
@@ -52,11 +52,11 @@ public partial class Worm : AnimatedEntity, IResolvable
 		base.Spawn();
 
 		SetModel( "models/citizenworm.vmdl" );
-		Name = Rand.FromArray( GameConfig.WormNames );
+		Name = Rand.FromArray( GameConfig.GrubNames );
 		Health = 100;
 
-		Controller = new WormController();
-		Animator = new WormAnimator();
+		Controller = new GrubController();
+		Animator = new GrubAnimator();
 
 		if ( cl is not null )
 			DressFromClient( cl );
@@ -81,7 +81,7 @@ public partial class Worm : AnimatedEntity, IResolvable
 			return;
 
 		Health -= info.Damage;
-		EventRunner.RunLocal( GrubsEvent.WormHurtEvent, this, info.Damage );
+		EventRunner.RunLocal( GrubsEvent.GrubHurtEvent, this, info.Damage );
 		HurtRpc( To.Everyone, info.Damage );
 
 		if ( Health > 0 )
@@ -102,7 +102,7 @@ public partial class Worm : AnimatedEntity, IResolvable
 
 		ExplosionHelper.Explode( Position, this, 50 );
 		LifeState = LifeState.Dead;
-		// TODO: Hide the worm instead of deleting it. Possible revive mechanic?
+		// TODO: Hide the grub instead of deleting it. Possible revive mechanic?
 		EnableDrawing = false;
 		Gravestone = new Gravestone( this ) { Owner = this };
 	}
@@ -126,7 +126,7 @@ public partial class Worm : AnimatedEntity, IResolvable
 			SimulateActiveChild( cl, ActiveChild );
 	}
 
-	public virtual void SimulateActiveChild( Client client, GrubsWeapon child )
+	public virtual void SimulateActiveChild( Client client, GrubWeapon child )
 	{
 		if ( LastActiveChild != child )
 		{
@@ -140,7 +140,7 @@ public partial class Worm : AnimatedEntity, IResolvable
 		LastActiveChild.Simulate( client );
 	}
 
-	public virtual void OnActiveChildChanged( GrubsWeapon previous, GrubsWeapon next )
+	public virtual void OnActiveChildChanged( GrubWeapon previous, GrubWeapon next )
 	{
 		previous?.ActiveEnd( this, previous.Owner != this );
 		next?.ActiveStart( this );
@@ -159,7 +159,7 @@ public partial class Worm : AnimatedEntity, IResolvable
 		_takeDamage = false;
 	}
 
-	public void EquipWeapon( GrubsWeapon weapon )
+	public void EquipWeapon( GrubWeapon weapon )
 	{
 		ActiveChild?.ShowWeapon( this, false );
 		ActiveChild = weapon;
@@ -210,6 +210,6 @@ public partial class Worm : AnimatedEntity, IResolvable
 	[ClientRpc]
 	private void HurtRpc( float damage )
 	{
-		EventRunner.RunLocal( GrubsEvent.WormHurtEvent, this, damage );
+		EventRunner.RunLocal( GrubsEvent.GrubHurtEvent, this, damage );
 	}
 }
