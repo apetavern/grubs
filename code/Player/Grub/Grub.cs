@@ -191,7 +191,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// <summary>
 	/// Applies any damage that this grub has received.
 	/// </summary>
-	public virtual async Task ApplyDamage()
+	public virtual void ApplyDamage()
 	{
 		if ( !HasBeenDamaged )
 			return;
@@ -199,11 +199,10 @@ public partial class Grub : AnimatedEntity, IResolvable
 		_takeDamage = true;
 		GrubsCamera.SetTarget( this );
 
+		var totalDamage = 0f;
 		while ( _damageQueue.TryDequeue( out var damageInfo ) )
-		{
-			TakeDamage( damageInfo );
-			await GameTask.Delay( 100 );
-		}
+			totalDamage += damageInfo.Damage;
+		TakeDamage( DamageInfo.Generic( totalDamage ) );
 
 		_takeDamage = false;
 	}

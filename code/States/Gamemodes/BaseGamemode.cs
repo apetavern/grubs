@@ -167,8 +167,11 @@ public abstract partial class BaseGamemode : BaseState
 		{
 			foreach ( var grub in team.Grubs )
 			{
-				if ( grub.HasBeenDamaged )
-					await grub.ApplyDamage();
+				if ( !grub.HasBeenDamaged )
+					continue;
+
+				grub.ApplyDamage();
+				await GameTask.Delay( 300 );
 			}
 		}
 
