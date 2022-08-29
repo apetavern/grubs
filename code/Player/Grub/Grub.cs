@@ -16,15 +16,17 @@ public partial class Grub : AnimatedEntity, IResolvable
 	public GrubAnimator Animator { get; private set; }
 
 	[Net, Predicted]
-	public GrubWeapon ActiveChild { get; private set; }
+	public GrubWeapon? ActiveChild { get; private set; }
 
 	[Net, Predicted]
-	public GrubWeapon LastActiveChild { get; private set; }
+	public GrubWeapon? LastActiveChild { get; private set; }
 
 	[Net]
 	public Gravestone? Gravestone { get; private set; }
 
 	public Team Team => (Owner as Team)!;
+
+	public bool HasBeenDamaged => _damageQueue.Count != 0;
 
 	private readonly Queue<DamageInfo> _damageQueue = new();
 	private bool _takeDamage;
@@ -148,7 +150,11 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 	public virtual async Task ApplyDamage()
 	{
+		if ( !HasBeenDamaged )
+			return;
+
 		_takeDamage = true;
+		GrubsCamera.SetTarget( this );
 
 		while ( _damageQueue.TryDequeue( out var damageInfo ) )
 		{
@@ -159,7 +165,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		_takeDamage = false;
 	}
 
-	public void EquipWeapon( GrubWeapon weapon )
+	public void EquipWeapon( GrubWeapon? weapon )
 	{
 		ActiveChild?.ShowWeapon( this, false );
 		ActiveChild = weapon;

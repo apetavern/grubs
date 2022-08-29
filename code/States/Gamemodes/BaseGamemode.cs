@@ -166,7 +166,10 @@ public abstract partial class BaseGamemode : BaseState
 		foreach ( var team in TeamManager.Teams )
 		{
 			foreach ( var grub in team.Grubs )
-				await grub.ApplyDamage();
+			{
+				if ( grub.HasBeenDamaged )
+					await grub.ApplyDamage();
+			}
 		}
 
 		while ( !IsWorldResolved() )
@@ -182,6 +185,8 @@ public abstract partial class BaseGamemode : BaseState
 	protected virtual async Task PostTurnChange()
 	{
 		Host.AssertServer();
+
+		GrubsCamera.SetTarget( TeamManager.CurrentTeam.ActiveGrub );
 	}
 
 	/// <summary>

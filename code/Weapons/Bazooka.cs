@@ -21,13 +21,14 @@ public class Bazooka : GrubWeapon
 		var segments = new ArcTrace( Parent, Parent.EyePosition )
 			.RunTowards( Parent.EyeRotation.Forward.Normal, 0.5f * Charge, 0 );
 
-		new Projectile()
+		var projectile = new Projectile()
 			.WithGrub( Parent as Grub )
 			.WithModel( ProjectileModelPath )
 			.SetPosition( Position )
 			.MoveAlongTrace( segments )
 			.WithSpeed( 1000 )
-			.WithExplosionRadius( 100 )
-			.ExplodeAfterSeconds( 5f );
+			.WithExplosionRadius( 100 );
+		projectile.ExplodeAfterSeconds( 5f );
+		GrubsCamera.SetTarget( projectile );
 	}
 }

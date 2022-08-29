@@ -1,6 +1,6 @@
 ﻿namespace Grubs.Player;
 
-public class GrubsCamera : CameraMode
+public partial class GrubsCamera : CameraMode
 {
 	public float Distance { get; set; } = 1024;
 	public float DistanceScrollRate { get; set; } = 32f;
@@ -15,15 +15,16 @@ public class GrubsCamera : CameraMode
 	private TimeSince TimeSinceMousePan { get; set; }
 	private static int SecondsBeforeReturnFromPan => 3;
 
+	[Net]
 	public Entity? Target { get; set; }
 
 	public override void Update()
 	{
-		var team = Entity.All.OfType<Team>().FirstOrDefault( team => team.ActiveGrub.IsTurn );
-		Target = team is null ? Local.Pawn : team.ActiveGrub;
-
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = Distance.Clamp( MinDistance, MaxDistance );
+
+		if ( Target is null )
+			return;
 
 		// Get the center position, plus move the camera up a little bit.
 		var cameraCenter = (CenterOnPawn) ? Target.Position : Center;
@@ -51,7 +52,7 @@ public class GrubsCamera : CameraMode
 
 		if ( CenterOnPawn )
 		{
-			Center = Target.Position;
+			Center = Target!.Position;
 
 			// Check if we've moved the camera, don't center on the pawn if we have
 			if ( !delta.LengthSquared.AlmostEqual( 0, 0.1f ) )
@@ -59,5 +60,11 @@ public class GrubsCamera : CameraMode
 		}
 
 		Center += delta;
+	}
+
+	public static void SetTarget( Entity newTarget )
+	{
+		foreach ( var spectator in Entity.All.OfType<ISpectator>() )
+			(spectator.Camera as GrubsCamera)!.Target = newTarget;
 	}
 }

@@ -19,13 +19,14 @@ public class Grenade : GrubWeapon
 		var segments = new ArcTrace( Parent, Parent.EyePosition )
 			.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, 0.4f * Charge, 0, maxBounceQty: 3 );
 
-		new Projectile()
-			.WithGrub( Parent as Grub )
-			.WithModel( ProjectileModelPath )
-			.SetPosition( Position )
-			.MoveAlongTrace( segments )
-			.WithSpeed( 1000 )
-			.WithExplosionRadius( 100 )
-			.WithCollisionExplosionDelay( 3f );
+		var projectile = new Projectile()
+		   .WithGrub( Parent as Grub )
+		   .WithModel( ProjectileModelPath )
+		   .SetPosition( Position )
+		   .MoveAlongTrace( segments )
+		   .WithSpeed( 1000 )
+		   .WithExplosionRadius( 100 )
+		   .WithCollisionExplosionDelay( 3f );
+		GrubsCamera.SetTarget( projectile );
 	}
 }
