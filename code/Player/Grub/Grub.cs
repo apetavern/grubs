@@ -6,31 +6,58 @@ using Grubs.Weapons;
 
 namespace Grubs.Player;
 
+/// <summary>
+/// A playable grub.
+/// </summary>
 [Category( "Grubs" )]
 public partial class Grub : AnimatedEntity, IResolvable
 {
+	/// <summary>
+	/// The grubs movement controller.
+	/// </summary>
 	[Net, Predicted]
 	public GrubController Controller { get; private set; }
 
+	/// <summary>
+	/// The grubs animator.
+	/// </summary>
 	[Net, Predicted]
 	public GrubAnimator Animator { get; private set; }
 
+	/// <summary>
+	/// The currently active weapon the grub is using.
+	/// </summary>
 	[Net, Predicted]
 	public GrubWeapon? ActiveChild { get; private set; }
 
+	/// <summary>
+	/// The last weapon the grub was using.
+	/// </summary>
 	[Net, Predicted]
 	public GrubWeapon? LastActiveChild { get; private set; }
 
+	/// <summary>
+	/// The grubs gravestone.
+	/// </summary>
 	[Net]
 	public Gravestone? Gravestone { get; private set; }
 
+	/// <summary>
+	/// Helper property to get a grubs team.
+	/// </summary>
 	public Team Team => (Owner as Team)!;
 
+	/// <summary>
+	/// Returns whether or not this grub has been damaged.
+	/// </summary>
 	public bool HasBeenDamaged => _damageQueue.Count != 0;
 
 	private readonly Queue<DamageInfo> _damageQueue = new();
 	private bool _takeDamage;
 
+	/// <summary>
+	/// Returns whether it is this grubs turn.
+	/// </summary>
 	public bool IsTurn
 	{
 		get
@@ -42,6 +69,9 @@ public partial class Grub : AnimatedEntity, IResolvable
 		}
 	}
 
+	/// <summary>
+	/// Returns whether or not this grub is resolved and ready to move to the next turn.
+	/// </summary>
 	public bool Resolved => Velocity.IsNearlyZero( 0.1f ) || LifeState == LifeState.Dead;
 
 	public Grub()
@@ -128,7 +158,12 @@ public partial class Grub : AnimatedEntity, IResolvable
 			SimulateActiveChild( cl, ActiveChild );
 	}
 
-	public virtual void SimulateActiveChild( Client client, GrubWeapon child )
+	/// <summary>
+	/// Simulates the active weapon.
+	/// </summary>
+	/// <param name="client">The client that is predicting.</param>
+	/// <param name="child">The weapon to simulate.</param>
+	public virtual void SimulateActiveChild( Client client, GrubWeapon? child )
 	{
 		if ( LastActiveChild != child )
 		{
@@ -142,12 +177,20 @@ public partial class Grub : AnimatedEntity, IResolvable
 		LastActiveChild.Simulate( client );
 	}
 
-	public virtual void OnActiveChildChanged( GrubWeapon previous, GrubWeapon next )
+	/// <summary>
+	/// Called when the active weapon has changed.
+	/// </summary>
+	/// <param name="previous">The old weapon that was being used.</param>
+	/// <param name="next">The new weapon being used.</param>
+	public virtual void OnActiveChildChanged( GrubWeapon? previous, GrubWeapon? next )
 	{
 		previous?.ActiveEnd( this, previous.Owner != this );
 		next?.ActiveStart( this );
 	}
 
+	/// <summary>
+	/// Applies any damage that this grub has received.
+	/// </summary>
 	public virtual async Task ApplyDamage()
 	{
 		if ( !HasBeenDamaged )
@@ -165,12 +208,20 @@ public partial class Grub : AnimatedEntity, IResolvable
 		_takeDamage = false;
 	}
 
+	/// <summary>
+	/// Equips a new weapon for this grub.
+	/// </summary>
+	/// <param name="weapon">The weapon to equip.</param>
 	public void EquipWeapon( GrubWeapon? weapon )
 	{
 		ActiveChild?.ShowWeapon( this, false );
 		ActiveChild = weapon;
 	}
 
+	/// <summary>
+	/// Dresses the grub based on the provided clients avatar.
+	/// </summary>
+	/// <param name="cl">The client to get the clothes of.</param>
 	public void DressFromClient( Client cl )
 	{
 		var clothes = new ClothingContainer();
@@ -203,6 +254,10 @@ public partial class Grub : AnimatedEntity, IResolvable
 		}
 	}
 
+	/// <summary>
+	/// Sets whether the hat should be visible on the grub.
+	/// </summary>
+	/// <param name="visible"></param>
 	public void SetHatVisible( bool visible )
 	{
 		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( "head" ) );
