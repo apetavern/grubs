@@ -22,6 +22,13 @@ public partial class Team : Entity, ISpectator
 	public IList<Grub> Grubs { get; private set; }
 
 	/// <summary>
+	/// The teams current client.
+	/// <remarks>This will stay populated even after their turn has passed.</remarks>
+	/// </summary>
+	[Net]
+	public Client ActiveClient { get; private set; }
+
+	/// <summary>
 	/// The teams current grub.
 	/// <remarks>This will stay populated even after their turn has passed.</remarks>
 	/// </summary>
@@ -184,7 +191,8 @@ public partial class Team : Entity, ISpectator
 		if ( Clients[0].Pawn is Spectator )
 			Clients[0].Pawn.Delete();
 
-		Clients[0].Pawn = this;
+		ActiveClient = Clients[0];
+		ActiveClient.Pawn = this;
 	}
 
 	/// <summary>
