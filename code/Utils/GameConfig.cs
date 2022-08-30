@@ -1,76 +1,65 @@
-﻿using System.Collections.Generic;
+﻿namespace Grubs.Utils;
 
-namespace Grubs.Utils
+public static class GameConfig
 {
-	public static class GameConfig
+	/// <summary>
+	/// The grubs gamemode to play.
+	/// </summary>
+	[ConVar.Replicated( "grubs_game" )]
+	public static string Gamemode { get; set; } = "ffa";
+	/// <summary>
+	/// The minimum amount of players needed to start the game.
+	/// </summary>
+	[ConVar.Replicated( "minimum_players" )]
+	public static int MinimumPlayers { get; set; } = 2;
+	/// <summary>
+	/// The maximum amount of players that can be in the game.
+	/// </summary>
+	[ConVar.Replicated( "maximum_players" )]
+	public static int MaximumPlayers { get; set; } = 4;
+	/// <summary>
+	/// The amount of grubs that will be spawned per player.
+	/// </summary>
+	[ConVar.Replicated( "grub_count" )]
+	public static int GrubCount { get; set; } = 4;
+	/// <summary>
+	/// The max time in seconds that a player has to make their turn.
+	/// </summary>
+	[ConVar.Replicated( "turn_duration" )]
+	public static int TurnDuration { get; set; } = 60;
+	/// <summary>
+	/// Whether or not grubs can damage their teammates.
+	/// <remarks>This does not protect a grub from hurting itself.</remarks>
+	/// </summary>
+	[ConVar.Replicated( "friendly_fire" )]
+	public static bool FriendlyFire { get; set; } = true;
+
+	// Grub Configuration
+	public static string[] GrubNames => new[]
 	{
-		public static bool IsDevMode { get; set; } = true;
+		"Froggy",
+		"Balls",
+		"Boggy",
+		"Spicy",
+		"Hot",
+		"Pinky",
+		"Perky",
+		"Gumby",
+		"Dick",
+		"Panini",
+		"Wilson",
+		"Winky",
+		"Cammy",
+		"Bakky",
+		"Avoofo",
+		"Gibby"
+	};
 
-		// Gameplay configuration.
-		public static int WormCount { get; set; } = 2;
-		public static int TurnDurationSeconds { get; set; } = 45;
-		public static int TurnTimeRemainingAfterFired { get; set; } = 5;
-		public static int MinimumPlayersToStart { get; set; } = 2;
-
-		// Used to spawn a random crate using the library system
-		// Library name, chance of spawning (0-1)
-		public static Dictionary<string, float> CrateTypes => new()
-		{
-			{ "crate_tools", 0.2f },
-			{ "crate_weapons", 0.1f },
-			{ "crate_health", 0.3f },
-		};
-		public static int MaxActiveCrates { get; set; } = 5;
-
-		// Worm configuration.
-		public static float SecondsBetweenWormJumps { get; set; } = 2;
-
-		public static string[] WormNames => new[]
-		{
-			"Froggy",
-			"Balls",
-			"Boggy",
-			"Spicy",
-			"Hot",
-			"Pinky",
-			"Perky",
-			"Gumby",
-			"Dick",
-			"Panini"
-		};
-
-		// Classname, weapon quantity.
-		public static Dictionary<string, int> LoadoutDefaults = new()
-		{
-			{ "BaseballBat", -1 },
-			{ "Bazooka", -1 },
-			{ "Grenade", -1 },
-			{ "Railgun", -1 },
-			{ "Shotgun", -1 },
-			{ "Dynamite", -1 },
-			{ "Uzi", -1 },
-			{ "LandMine", -1 },
-			{ "Minigun", -1 },
-			{ "PetrolBomb", -1 },
-			{ "Revolver", -1 },
-			{ "AirStrike", -1 }
-		};
-
-		// Weapon Crate Drop Chances
-		public static Dictionary<string, float> WeaponCrateDropChances = new()
-		{
-			{ "BaseballBat", 5f },
-			{ "Railgun", 1f },
-			{ "Shotgun", 5f },
-			{ "Dynamite", 2f },
-			{ "Uzi", 4f },
-			{ "LandMine", 3f },
-			{ "Minigun", 1f },
-			{ "PetrolBomb", 2f },
-			{ "Revolver", 3f }
-		};
-
-		// Tool Crate Drop Chances
-		public static Dictionary<string, float> ToolCrateDropChances = new();
-	}
+	public static char[] TeamNames => new[]
+	{
+		'a',
+		'b',
+		'c',
+		'd'
+	};
 }

@@ -1,149 +1,411 @@
-﻿using Sandbox;
-using System.Collections.Generic;
+﻿namespace Grubs.Terrain;
 
-namespace Grubs.Terrain
+public class MarchingSquares
 {
-	public struct MarchingSquares
+	// Face
+	public List<Vector3> Vertices { get; set; } = new();
+	public List<int> Triangles { get; set; } = new();
+
+	// Extrusion
+	public Dictionary<int, List<Triangle>> TriangleDictionary = new();
+	public List<List<int>> Outlines = new();
+	public HashSet<int> CheckedVertices = new();
+
+	private readonly float localY = -32f;
+	private readonly float resolution = 25f;
+
+	public ModelBuilder Builder = new();
+
+	private int Width { get; set; }
+	private int Height { get; set; }
+
+	public Model GenerateModel()
 	{
-		public static readonly Vector2 NW = new Vector2( -1f, 1f );
-		public static readonly Vector2 N = new Vector2( 0, 1f );
-		public static readonly Vector2 NE = new Vector2( 1f, 1f );
-		public static readonly Vector2 E = new Vector2( 1f, 0 );
-		public static readonly Vector2 SE = new Vector2( 1f, -1f );
-		public static readonly Vector2 S = new Vector2( 0, -1f );
-		public static readonly Vector2 SW = new Vector2( -1f, -1f );
-		public static readonly Vector2 W = new Vector2( -1f, 0 );
+		TerrainMap map = GrubsGame.Current.TerrainMap;
+		Width = map.Width;
+		Height = map.Height;
 
-		public static Vector2[] VertexOffsets = new Vector2[8] { NW, N, NE, E, SE, S, SW, W };
+		var TerrainGrid = map.TerrainGrid;
+		March( TerrainGrid );
 
-		public const float EdgeWidth = 64f;
-		public const float TextureScale = 0.01f;
-		public const bool Smoothing = true;
-
-		// Removes duplicate vertices - experimental.
-		public const bool MeshSimplification = true;
-
-		public static Material Material = Material.Load( "materials/peterburroughs/dirt.vmat" );
-
-		public static readonly int[,] CornersFromEdge = new int[8, 2]
+		// Convert Vector3 Vertices to Vert List
+		var vertList = new List<Vert>();
+		foreach ( var vert in Vertices )
 		{
-		{ -1, -1 },
-		{ 0, 2 },
-		{ -1, -1 },
-		{ 2, 4 },
-		{ -1, -1 },
-		{ 4, 6 },
-		{ -1, -1 },
-		{ 6, 0 },
+			vertList.Add( new Vert( vert, Vector3.Left, Vector3.Forward ) );
+		}
+
+		// TODO: Calculate normal/tangent.
+		var mesh = new Mesh( Material.Load( "materials/environment/dirt_rocks.vmat" ) )
+		{
+			Bounds = new BBox( new Vector3( 0, localY, 0 ), new Vector3( Width * resolution, localY + 64, Height * resolution ) )
+		};
+		mesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
+		mesh.CreateIndexBuffer( Triangles.Count, Triangles );
+
+		if ( Host.IsClient )
+		{
+			Builder.AddMesh( mesh );
+		}
+
+		// Builder.AddCollisionMesh( Vertices.ToArray(), Triangles.ToArray() );
+		return Builder.Create();
+	}
+
+	public Model CreateWallModel()
+	{
+		CalculateMeshOutlines();
+		List<Vector3> wallVertices = new();
+		List<int> wallTriangles = new();
+
+		float wallHeight = 64f;
+
+		var wallMesh = new Mesh( Material.Load( "materials/environment/dirt_rocks.vmat" ) )
+		{
+			Bounds = new BBox( 0, new Vector3( Width * resolution, wallHeight, Height * resolution ) )
 		};
 
-		public static int[,] Triangles = new int[18, 12]{
-		{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-		{ 7, 6, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-		{ 5, 4, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-		{ 6, 4, 3, 7, 6, 3, -1, -1, -1, -1, -1, -1 },
-		{ 3, 2, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
-		{ 7, 6, 5, 5, 3, 1, 3, 2, 1, 7, 5, 1 }, // ambiguous
-		{ 4, 2, 1, 5, 4, 1, -1, -1, -1, -1, -1, -1 },
-		{ 4, 2, 1, 7, 4, 1, 7, 6, 4 , -1, -1, -1 },
-		{ 7, 1, 0, -1, -1, -1, -1, -1, -1 , -1, -1, -1 },
-		{ 6, 5, 0, 5, 1, 0, -1, -1, -1, -1, -1, -1 },
-		{ 5, 4, 3, 5, 3, 1, 1, 0, 7, 1, 7, 5 }, // ambiguous
-		{ 6, 1, 0, 6, 3, 1, 6, 4, 3, -1, -1, -1 },
-		{ 7, 2, 0, 7, 3, 2, -1, -1, -1, -1, -1, -1 },
-		{ 3, 2, 0, 5, 3, 0, 6, 5, 0, -1, -1, -1 },
-		{ 7, 2, 0, 5, 4, 2, 7, 5, 2, -1, -1, -1 },
-		{ 6, 2, 0, 6, 4, 2, -1, -1, -1, -1, -1, -1 },
-		{ 7, 6, 5, 3, 2, 1, -1, -1, -1, -1, -1, -1 }, // ambiguous
-		{ 5, 4, 3, 1, 0, 7, -1, -1, -1, -1, -1, -1 }, // ambiguous
-	};
-
-		public static int[,] EdgeOrder = new int[18, 4]{
-		{ -1, -1, -1, -1 },
-		{ 7, 5, -1, -1 },
-		{ 5, 3, -1, -1 },
-		{ 7, 3, -1, -1 },
-		{ 3, 1, -1, -1 },
-		{ 7, 1, 3, 5 },
-		{ 5, 1, -1, -1 },
-		{ 7, 1, -1, -1 },
-		{ 1, 7, -1, -1 },
-		{ 1, 5, -1, -1 },
-		{ 1, 3, 5, 7 },
-		{ 1, 3, -1, -1 },
-		{ 3, 7, -1, -1 },
-		{ 3, 5, -1, -1 },
-		{ 5, 7, -1, -1 },
-		{ -1, -1, -1, -1 },
-		{ 3, 1, 7, 5 },
-		{ 1, 7, 5, 3},
-	};
-
-		public static int[] TriangleCount = GetTriangleCount();
-		#region TriangleCount calculations
-		private static int[] GetTriangleCount()
+		foreach ( List<int> outline in Outlines )
 		{
-			int[] triCount = new int[18];
-			for ( int i = 0; i < 18; i++ )
-				triCount[i] = GetTriangles( i );
-
-			return triCount;
-		}
-
-		private static int GetTriangles( int i )
-		{
-			for ( int j = 0; j < 12; j++ )
+			for ( int i = 0; i < outline.Count - 1; i++ )
 			{
-				if ( Triangles[i, j] == -1 )
-					return j;
+				int startIndex = wallVertices.Count;
+				wallVertices.Add( Vertices[outline[i]] );
+				wallVertices.Add( Vertices[outline[i + 1]] );
+				wallVertices.Add( Vertices[outline[i]] - Vector3.Right * wallHeight );
+				wallVertices.Add( Vertices[outline[i + 1]] - Vector3.Right * wallHeight );
+
+				wallTriangles.Add( startIndex + 0 );
+				wallTriangles.Add( startIndex + 2 );
+				wallTriangles.Add( startIndex + 3 );
+
+				wallTriangles.Add( startIndex + 3 );
+				wallTriangles.Add( startIndex + 1 );
+				wallTriangles.Add( startIndex + 0 );
 			}
-			return 12;
-		}
-		#endregion
-
-		public static int[] EdgeCount = GetEdgeCount();
-		#region EdgeCount calculations
-
-		private static int[] GetEdgeCount()
-		{
-			int[] triCount = new int[18];
-			for ( int i = 0; i < 18; i++ )
-				triCount[i] = GetEdges( i );
-
-			return triCount;
 		}
 
-		private static int GetEdges( int i )
+		var vertList = new List<Vert>();
+		foreach ( var vert in wallVertices )
 		{
-			for ( int j = 0; j < 4; j++ )
+			vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left ) );
+		}
+
+		wallMesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
+		wallMesh.CreateIndexBuffer( wallTriangles.Count, wallTriangles );
+
+		if ( Host.IsClient )
+		{
+			Builder.AddMesh( wallMesh );
+		}
+
+		Builder.AddCollisionMesh( wallVertices.ToArray(), wallTriangles.ToArray() );
+
+		return Builder.Create();
+	}
+
+	private void March( bool[,] TerrainGrid )
+	{
+		for ( int x = 0; x < TerrainGrid.GetLength( 0 ) - 1; x++ )
+			for ( int z = 0; z < TerrainGrid.GetLength( 1 ) - 1; z++ )
 			{
-				if ( EdgeOrder[i, j] == -1 )
-					return j;
-			}
-			return 4;
-		}
-		#endregion
+				float xRes = x * resolution;
+				float zRes = z * resolution;
 
-		public static int[] UniqueCount = new int[18];
-		public static int[][] UniqueIndices = GetIndices();
-		private static int[][] GetIndices()
-		{
-			int[][] uniqueIndices = new int[18][];
+				var middleTop = new Node( new Vector3( xRes + resolution * 0.5f, localY, zRes ) );
+				var middleRight = new Node( new Vector3( xRes + resolution, localY, zRes + resolution * 0.5f ) );
+				var middleBottom = new Node( new Vector3( xRes + resolution * 0.5f, localY, zRes + resolution ) );
+				var middleLeft = new Node( new Vector3( xRes, localY, zRes + resolution * 0.5f ) );
 
-			for ( int i = 0; i < 18; i++ )
-			{
-				List<int> uniques = new List<int>();
-				for ( int j = 0; j < TriangleCount[i]; j++ )
+				var topLeft = new Node( new Vector3( xRes, localY, zRes ) );
+				var topRight = new Node( new Vector3( xRes + resolution, localY, zRes ) );
+				var bottomRight = new Node( new Vector3( xRes + resolution, localY, zRes + resolution ) );
+				var bottomLeft = new Node( new Vector3( xRes, localY, zRes + resolution ) );
+
+				bool c1 = TerrainGrid[x, z];
+				bool c2 = TerrainGrid[x + 1, z];
+				bool c3 = TerrainGrid[x + 1, z + 1];
+				bool c4 = TerrainGrid[x, z + 1];
+
+				int marchCase = GetCase( c1, c2, c3, c4 );
+
+				switch ( marchCase )
 				{
-					int index = Triangles[i, j];
-					if ( !uniques.Contains( index ) )
-						uniques.Add( index );
+					case 1:
+						MeshFromPoints( middleLeft, middleBottom, bottomLeft );
+						break;
+					case 2:
+						MeshFromPoints( bottomRight, middleBottom, middleRight );
+						break;
+					case 4:
+						MeshFromPoints( topRight, middleRight, middleTop );
+						break;
+					case 8:
+						MeshFromPoints( topLeft, middleTop, middleLeft );
+						break;
+
+					// 2 points:
+					case 3:
+						MeshFromPoints( middleRight, bottomRight, bottomLeft, middleLeft );
+						break;
+					case 6:
+						MeshFromPoints( middleTop, topRight, bottomRight, middleBottom );
+						break;
+					case 9:
+						MeshFromPoints( topLeft, middleTop, middleBottom, bottomLeft );
+						break;
+					case 12:
+						MeshFromPoints( topLeft, topRight, middleRight, middleLeft );
+						break;
+					case 5:
+						MeshFromPoints( middleTop, topRight, middleRight, middleBottom, bottomLeft, middleLeft );
+						break;
+					case 10:
+						MeshFromPoints( topLeft, middleTop, middleRight, bottomRight, middleBottom, middleLeft );
+						break;
+
+					// 3 point:
+					case 7:
+						MeshFromPoints( middleTop, topRight, bottomRight, bottomLeft, middleLeft );
+						break;
+					case 11:
+						MeshFromPoints( topLeft, middleTop, middleRight, bottomRight, bottomLeft );
+						break;
+					case 13:
+						MeshFromPoints( topLeft, topRight, middleRight, middleBottom, bottomLeft );
+						break;
+					case 14:
+						MeshFromPoints( topLeft, topRight, bottomRight, middleBottom, middleLeft );
+						break;
+
+					// 4 point:
+					case 15:
+						MeshFromPoints( topLeft, topRight, bottomRight, bottomLeft );
+						// We still want to create walls for the map border, but skip over all other filled squares.
+						if ( x == 0 || z == 0 || x == TerrainGrid.GetLength( 0 ) - 2 || z == TerrainGrid.GetLength( 1 ) - 2 )
+							break;
+						CheckedVertices.Add( topLeft.VertexIndex );
+						CheckedVertices.Add( topRight.VertexIndex );
+						CheckedVertices.Add( bottomRight.VertexIndex );
+						CheckedVertices.Add( bottomLeft.VertexIndex );
+						break;
 				}
-				var uniqueArray = uniques.ToArray();
-				uniqueIndices[i] = uniqueArray;
-				UniqueCount[i] = uniqueArray.Length;
 			}
-			return uniqueIndices;
+	}
+
+	private static int GetCase( bool a, bool b, bool c, bool d )
+	{
+		var num = 0;
+		if ( a )
+			num += 8;
+		if ( b )
+			num += 4;
+		if ( c )
+			num += 2;
+		if ( d )
+			num += 1;
+
+		return num;
+	}
+
+	private void MeshFromPoints( params Node[] points )
+	{
+		AssignVertices( points );
+
+		if ( points.Length >= 3 )
+			CreateTriangle( points[0], points[1], points[2] );
+		if ( points.Length >= 4 )
+			CreateTriangle( points[0], points[2], points[3] );
+		if ( points.Length >= 5 )
+			CreateTriangle( points[0], points[3], points[4] );
+		if ( points.Length >= 6 )
+			CreateTriangle( points[0], points[4], points[5] );
+	}
+
+	private void AssignVertices( Node[] points )
+	{
+		for ( int i = 0; i < points.Length; i++ )
+		{
+			if ( points[i].VertexIndex == -1 )
+			{
+				points[i].VertexIndex = Vertices.Count;
+				Vertices.Add( points[i].Position );
+			}
 		}
+	}
+
+	private void CreateTriangle( Node a, Node b, Node c )
+	{
+		Triangles.Add( a.VertexIndex );
+		Triangles.Add( b.VertexIndex );
+		Triangles.Add( c.VertexIndex );
+
+		Triangle triangle = new Triangle( a.VertexIndex, b.VertexIndex, c.VertexIndex );
+		AddTriangleToDictionary( triangle.VertexIndexA, triangle );
+		AddTriangleToDictionary( triangle.VertexIndexB, triangle );
+		AddTriangleToDictionary( triangle.VertexIndexC, triangle );
+	}
+
+	private void AddTriangleToDictionary( int vertexIndexKey, Triangle triangle )
+	{
+		if ( TriangleDictionary.ContainsKey( vertexIndexKey ) )
+		{
+			TriangleDictionary[vertexIndexKey].Add( triangle );
+		}
+		else
+		{
+			List<Triangle> triangleList = new();
+			triangleList.Add( triangle );
+			TriangleDictionary.Add( vertexIndexKey, triangleList );
+		}
+	}
+
+	private void CalculateMeshOutlines()
+	{
+		for ( int vertexIndex = 0; vertexIndex < Vertices.Count; vertexIndex++ )
+		{
+			if ( !CheckedVertices.Contains( vertexIndex ) )
+			{
+				int newOutlineVertex = GetConnectedOutlineVertex( vertexIndex );
+				if ( newOutlineVertex != -1 )
+				{
+					CheckedVertices.Add( vertexIndex );
+
+					List<int> newOutline = new();
+					newOutline.Add( vertexIndex );
+					Outlines.Add( newOutline );
+					FollowOutline( newOutlineVertex, Outlines.Count - 1 );
+					Outlines[^1].Add( vertexIndex );
+				}
+			}
+		}
+	}
+
+	private void FollowOutline( int vertexIndex, int outlineIndex )
+	{
+		Outlines[outlineIndex].Add( vertexIndex );
+		CheckedVertices.Add( vertexIndex );
+
+		int nextVertexIndex = GetConnectedOutlineVertex( vertexIndex );
+		if ( nextVertexIndex != -1 )
+		{
+			FollowOutline( nextVertexIndex, outlineIndex );
+		}
+	}
+
+	private int GetConnectedOutlineVertex( int vertexIndex )
+	{
+		List<Triangle> trianglesContainingVertex = TriangleDictionary[vertexIndex];
+		for ( int i = 0; i < trianglesContainingVertex.Count; i++ )
+		{
+			Triangle triangle = trianglesContainingVertex[i];
+
+			for ( int j = 0; j < 3; j++ )
+			{
+				int vertexB = triangle[j];
+
+				if ( vertexB != vertexIndex && !CheckedVertices.Contains( vertexB ) )
+				{
+					if ( IsOutlineEdge( vertexIndex, vertexB ) )
+					{
+						return vertexB;
+					}
+				}
+			}
+		}
+
+		return -1;
+	}
+
+	private bool IsOutlineEdge( int vertexA, int vertexB )
+	{
+		List<Triangle> trianglesContainingVertexA = TriangleDictionary[vertexA];
+		int sharedTriangleCount = 0;
+
+		for ( int i = 0; i < trianglesContainingVertexA.Count; i++ )
+		{
+			if ( trianglesContainingVertexA[i].Contains( vertexB ) )
+			{
+				sharedTriangleCount++;
+				if ( sharedTriangleCount > 1 )
+				{
+					break;
+				}
+			}
+		}
+
+		return sharedTriangleCount == 1;
+	}
+
+	/// <summary>
+	/// Helper class representing a Node in-world and its vertex index.
+	/// </summary>
+	public class Node
+	{
+		public Vector3 Position { get; set; }
+		public int VertexIndex { get; set; } = -1;
+
+		public Node( Vector3 position )
+		{
+			Position = position;
+		}
+	}
+
+	/// <summary>
+	/// Helper class representing a triangle by its vertex indices.
+	/// </summary>
+	public struct Triangle
+	{
+		public int VertexIndexA;
+		public int VertexIndexB;
+		public int VertexIndexC;
+
+		public int[] Vertices;
+
+		public Triangle( int a, int b, int c )
+		{
+			VertexIndexA = a;
+			VertexIndexB = b;
+			VertexIndexC = c;
+
+			Vertices = new int[3];
+			Vertices[0] = a;
+			Vertices[1] = b;
+			Vertices[2] = c;
+		}
+
+		public bool Contains( int vertexIndex )
+		{
+			return vertexIndex == VertexIndexA || vertexIndex == VertexIndexB || vertexIndex == VertexIndexC;
+		}
+
+		public int this[int i]
+		{
+			get
+			{
+				return Vertices[i];
+			}
+		}
+	}
+
+	public struct Vert
+	{
+		public Vector3 position;
+		public Vector3 normal;
+		public Vector3 tangent;
+
+		public Vert( Vector3 position, Vector3 normal, Vector3 tangent )
+		{
+			this.position = position;
+			this.normal = normal;
+			this.tangent = tangent;
+		}
+
+		public static readonly VertexAttribute[] Layout = new VertexAttribute[3]
+		{
+			new VertexAttribute(VertexAttributeType.Position, VertexAttributeFormat.Float32),
+			new VertexAttribute(VertexAttributeType.Normal, VertexAttributeFormat.Float32),
+			new VertexAttribute(VertexAttributeType.Tangent, VertexAttributeFormat.Float32),
+		};
 	}
 }
