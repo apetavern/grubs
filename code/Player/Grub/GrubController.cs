@@ -469,7 +469,7 @@ public partial class GrubController : BasePlayerController
 		tr.EndPosition -= TraceOffset;
 		return tr;
 
-		//return TraceBBox( start, end, mins, maxs, liftFeet );
+		// return TraceBBox( start, end, mins, maxs, liftFeet );
 	}
 
 	/// <summary>

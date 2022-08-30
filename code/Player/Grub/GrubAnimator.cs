@@ -14,7 +14,7 @@ public class GrubAnimator : PawnAnimator
 		float aimAngle = -Pawn.EyeRotation.Pitch().Clamp( -80f, 75f );
 		SetAnimParameter( "aimangle", aimAngle );
 
-		var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).Ignore( Pawn ).Run();
+		var tr = Trace.Ray( Pawn.Position, Pawn.Position + Pawn.Rotation.Down * 128 ).Ignore( Pawn ).IncludeClientside().Run();
 		float incline = Pawn.Rotation.Forward.Angle( tr.Normal ) - 90f;
 		SetAnimParameter( "incline", incline );
 	}

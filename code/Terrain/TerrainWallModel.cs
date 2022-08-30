@@ -3,9 +3,13 @@
 [Category( "Terrain" )]
 public class TerrainWallModel : ModelEntity
 {
+	public TerrainWallModel()
+	{
+
+	}
+
 	public TerrainWallModel( MarchingSquares marchingSquares )
 	{
-		Transmit = TransmitType.Never;
 		Model = marchingSquares.CreateWallModel();
 		Tags.Add( "solid" );
 

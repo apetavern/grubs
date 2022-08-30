@@ -8,8 +8,12 @@ public class TerrainModel : ModelEntity
 
 	public TerrainModel()
 	{
-		Transmit = TransmitType.Never;
 		Tags.Add( "solid" );
+	}
+
+	public override void Spawn()
+	{
+		base.Spawn();
 
 		GenerateMeshAndWalls();
 	}
