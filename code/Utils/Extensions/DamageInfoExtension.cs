@@ -9,7 +9,7 @@ public class DamageInfoExtension
 		return new DamageInfo
 		{
 			Flags = zone.DamageFlags,
-			Damage = zone.DamagePerTurn
+			Damage = zone.DamagePerTrigger
 		};
 	}
 

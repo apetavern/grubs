@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Grubs.Player;
 using Grubs.Terrain;
+using Grubs.Terrain.Shapes;
 using Grubs.Utils;
 using Grubs.Utils.Event;
-using Grubs.Utils.Extensions;
 
 namespace Grubs.States;
 
@@ -42,11 +42,13 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		TeamManager = new TeamManager();
-		DamageZone.All.Add( new DamageZone
-		{
-			Position = new Vector3( -750, 0, -200 ),
-			Size = new Vector3( 5000, 32, 32 )
-		} );
+		new DamageZone()
+			.WithDamageFlags( DamageFlags.Generic )
+			.WithInstantKill( true )
+			.WithDamage( 9999 )
+			.WithPosition( new Vector3( -750, 0, -200 ) )
+			.WithShape( BoxShape.WithSize( new Vector3( 5000, 32, 32 ) ) )
+			.Finish();
 
 		List<Client> participants;
 		if ( forced )
@@ -104,7 +106,7 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		TeamManager.Delete();
-		DamageZone.All.Clear();
+		TerrainZone.All.Clear();
 		foreach ( var client in Client.All )
 			client.Pawn?.Delete();
 
@@ -192,14 +194,12 @@ public abstract partial class BaseGamemode : BaseState
 		{
 			foreach ( var grub in team.Grubs )
 			{
-				foreach ( var zone in DamageZone.All )
+				foreach ( var zone in TerrainZone.All )
 				{
 					if ( !zone.InZone( grub ) )
 						continue;
 
-					var damageInfo = DamageInfoExtension.FromZone( zone );
-					damageInfo.Position = grub.Position;
-					grub.TakeDamage( damageInfo );
+					zone.Trigger( grub );
 				}
 
 				if ( !grub.HasBeenDamaged )
@@ -212,6 +212,9 @@ public abstract partial class BaseGamemode : BaseState
 
 		while ( !IsWorldResolved() )
 			await GameTask.Delay( 100 );
+
+		foreach ( var zone in TerrainZone.All )
+			zone.ExpireAfterTurns--;
 
 		await GameTask.DelaySeconds( 3 );
 		return CheckState();
