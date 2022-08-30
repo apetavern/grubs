@@ -20,6 +20,7 @@ public class Hud : RootPanel
 		if ( Host.IsClient )
 		{
 			_ = new GrubNametags();
+			AddChild<ChatBox>();
 		}
 	}
 
