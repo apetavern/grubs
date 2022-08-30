@@ -1,7 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.States;
 using Grubs.Weapons.Projectiles;
-using Grubs.UI.World;
 
 namespace Grubs.Weapons;
 

@@ -193,7 +193,7 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		while ( !IsWorldResolved() )
-			await GameTask.Delay( 500 );
+			await GameTask.Delay( 100 );
 
 		await GameTask.DelaySeconds( 3 );
 		return CheckState();
