@@ -194,7 +194,8 @@ public partial class GrubController : BasePlayerController
 			// Aim with W & S keys
 			EyeRotation = Rotation.LookAt( LookPos );
 
-			LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
+			if ( Velocity.IsNearlyZero( 1f ) )
+				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
 
 			// Rotate EyeRot by our offset
 			EyeRotation = EyeRotation.RotateAroundAxis( EyeRotation.Left, LookRotOffset );
