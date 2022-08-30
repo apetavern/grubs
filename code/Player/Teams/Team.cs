@@ -32,7 +32,7 @@ public partial class Team : Entity, ISpectator
 	/// The teams current grub.
 	/// <remarks>This will stay populated even after their turn has passed.</remarks>
 	/// </summary>
-	[Net, Predicted]
+	[Net]
 	public Grub ActiveGrub { get; private set; }
 
 	/// <summary>
