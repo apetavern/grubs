@@ -1,7 +1,18 @@
-﻿namespace Grubs.Utils.Extensions;
+﻿using Grubs.Terrain;
+
+namespace Grubs.Utils.Extensions;
 
 public class DamageInfoExtension
 {
+	public static DamageInfo FromZone( DamageZone zone )
+	{
+		return new DamageInfo
+		{
+			Flags = zone.DamageFlags,
+			Damage = zone.DamagePerTurn
+		};
+	}
+
 	public static DamageInfo FromFall( float damage, Entity attacker )
 	{
 		return new DamageInfo

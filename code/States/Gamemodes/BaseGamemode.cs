@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Grubs.Player;
+using Grubs.Terrain;
 using Grubs.Utils;
 using Grubs.Utils.Event;
+using Grubs.Utils.Extensions;
 
 namespace Grubs.States;
 
@@ -40,6 +42,11 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		TeamManager = new TeamManager();
+		DamageZone.All.Add( new DamageZone
+		{
+			Position = new Vector3( -750, 0, -200 ),
+			Size = new Vector3( 5000, 32, 32 )
+		} );
 
 		List<Client> participants;
 		if ( forced )
@@ -97,6 +104,7 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		TeamManager.Delete();
+		DamageZone.All.Clear();
 		foreach ( var client in Client.All )
 			client.Pawn?.Delete();
 
@@ -184,6 +192,16 @@ public abstract partial class BaseGamemode : BaseState
 		{
 			foreach ( var grub in team.Grubs )
 			{
+				foreach ( var zone in DamageZone.All )
+				{
+					if ( !zone.InZone( grub ) )
+						continue;
+
+					var damageInfo = DamageInfoExtension.FromZone( zone );
+					damageInfo.Position = grub.Position;
+					grub.TakeDamage( damageInfo );
+				}
+
 				if ( !grub.HasBeenDamaged )
 					continue;
 

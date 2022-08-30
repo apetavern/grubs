@@ -1,4 +1,5 @@
-using Grubs.States;
+﻿using Grubs.States;
+using Grubs.Terrain;
 using Grubs.Utils;
 using Grubs.Utils.Event;
 using Grubs.Weapons;
@@ -155,6 +156,15 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 		Gravestone?.Simulate( cl );
 		Controller?.Simulate( cl, this, Animator );
+
+		foreach ( var zone in DamageZone.All )
+		{
+			if ( !zone.InstantKill || !zone.InZone( this ) )
+				continue;
+
+			(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
+			zone.DealDamage( this, true );
+		}
 
 		if ( IsTurn )
 			SimulateActiveChild( cl, ActiveChild );
