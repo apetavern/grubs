@@ -194,6 +194,9 @@ public abstract partial class BaseGamemode : BaseState
 		{
 			foreach ( var grub in team.Grubs )
 			{
+				if ( grub.LifeState == LifeState.Dead )
+					continue;
+
 				foreach ( var zone in TerrainZone.All )
 				{
 					if ( !zone.InZone( grub ) )

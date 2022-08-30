@@ -157,14 +157,17 @@ public partial class Grub : AnimatedEntity, IResolvable
 		Gravestone?.Simulate( cl );
 		Controller?.Simulate( cl, this, Animator );
 
-		foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+		if ( LifeState != LifeState.Dead )
 		{
-			if ( !zone.InstantKill || !zone.InZone( this ) )
-				continue;
+			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+			{
+				if ( !zone.InstantKill || !zone.InZone( this ) )
+					continue;
 
-			(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
-			zone.Trigger( this );
-			ApplyDamage();
+				(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
+				zone.Trigger( this );
+				ApplyDamage();
+			}
 		}
 
 		if ( IsTurn )
