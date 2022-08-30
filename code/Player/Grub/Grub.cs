@@ -216,8 +216,19 @@ public partial class Grub : AnimatedEntity, IResolvable
 		GrubsCamera.SetTarget( this );
 
 		var totalDamage = 0f;
+		var damageInfos = new List<DamageInfo>();
 		while ( _damageQueue.TryDequeue( out var damageInfo ) )
+		{
+			damageInfos.Add( damageInfo );
 			totalDamage += damageInfo.Damage;
+		}
+
+		if ( totalDamage >= Health )
+		{
+			var deathReason = GrubDeathReason.FindReason( this, damageInfos );
+			ChatBox.AddInformation( To.Everyone, deathReason.ToString(), $"avatar:{Team.ActiveClient.PlayerId}" );
+		}
+
 		TakeDamage( DamageInfo.Generic( totalDamage ) );
 
 		_takeDamage = false;
