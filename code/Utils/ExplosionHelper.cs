@@ -28,7 +28,7 @@ public static class ExplosionHelper
 			if ( !GameConfig.FriendlyFire && grub != source && grub.Team.TeamNumber == source.Team.TeamNumber )
 				continue;
 
-			grub.TakeDamage( DamageInfoExtension.FromProjectile( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
+			grub.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
