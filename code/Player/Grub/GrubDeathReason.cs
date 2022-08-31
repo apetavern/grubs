@@ -66,12 +66,14 @@ public readonly struct GrubDeathReason
 						return $"{Grub.Name} attracted too many explosives";
 					// Killed by a fall from being displaced by an explosion.
 					case GrubDamageType.Fall:
-						return $"{Grub.Name} had their leg broken thanks to {FirstInfo!.Value.Attacker.Name}s explosive";
+						return FirstInfo!.Value.Attacker == Grub
+							? $"{Grub.Name} had their leg broken thanks to their own explosives"
+							: $"{Grub.Name} had their leg broken thanks to {FirstInfo!.Value.Attacker.Name}s explosive";
 					// Killed by hitting a kill zone from being displaced by an explosion.
 					case GrubDamageType.KillTrigger:
-						return SecondInfo!.Value.Attacker == Grub
+						return FirstInfo!.Value.Attacker == Grub
 							? $"{Grub.Name} sent themself to the shadow realm"
-							: $"{Grub.Name} got sent to the shadow realm by {SecondInfo.Value.Attacker.Name}";
+							: $"{Grub.Name} got sent to the shadow realm by {FirstInfo.Value.Attacker.Name}";
 				}
 				break;
 			// Assisted by a fall.
