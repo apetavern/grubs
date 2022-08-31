@@ -13,19 +13,40 @@ using Grubs.Utils.Event;
 
 namespace Grubs;
 
+/// <summary>
+/// The official Sbox GOTY 2022, Grubs!
+/// </summary>
 public partial class GrubsGame : Game
 {
+	/// <summary>
+	/// This game.
+	/// </summary>
 	public new static GrubsGame Current => (Game.Current as GrubsGame)!;
 
+	/// <summary>
+	/// The current state that the game is in.
+	/// </summary>
 	[Net]
 	public BaseState CurrentState { get; set; }
 
+	/// <summary>
+	/// The current gamemode the game is in.
+	/// </summary>
 	public BaseGamemode CurrentGamemode => CurrentState as BaseGamemode;
 
+	/// <summary>
+	/// The terrain map in the world.
+	/// </summary>
 	public TerrainMap TerrainMap { get; set; }
 
+	/// <summary>
+	/// The model of the terrain map.
+	/// </summary>
 	public TerrainModel TerrainModel { get; set; }
 
+	/// <summary>
+	/// The seed used to create the terrain map.
+	/// </summary>
 	[Net]
 	public int Seed { get; set; }
 
@@ -60,12 +81,6 @@ public partial class GrubsGame : Game
 		CurrentState.ClientDisconnected( cl, reason );
 	}
 
-	[Event.Tick]
-	private void Tick()
-	{
-		CurrentState.Tick();
-	}
-
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
@@ -80,38 +95,31 @@ public partial class GrubsGame : Game
 		CurrentState.FrameSimulate( cl );
 	}
 
-	[ConCmd.Server( name: "ScrambleMap" )]
-	public static void ScrambleMap()
-	{
-		if ( Host.IsClient )
-			return;
-
-		Current.Seed = Rand.Int( 99999 );
-		// Log.Info( Current.Seed );
-		Current.TerrainMap.Seed = Current.Seed;
-		SetSeedClient( To.Everyone, Current.Seed );
-		Current.RegenerateGrid();
-		Current.RegenerateMap();
-	}
-
-	[ClientRpc]
-	public static void SetSeedClient( int seed )
-	{
-		Current.TerrainMap.Seed = seed;
-		Current.RegenerateGrid();
-		Current.RegenerateMap();
-	}
-
+	/// <summary>
+	/// Regenerates the terrain map grid.
+	/// </summary>
 	public void RegenerateGrid()
 	{
 		TerrainMap.GenerateTerrainGrid();
 	}
 
+	/// <summary>
+	/// Regenerates the terrain models.
+	/// </summary>
 	public void RegenerateMap()
 	{
 		TerrainModel.GenerateMeshAndWalls();
 	}
 
+	[Event.Tick]
+	private void Tick()
+	{
+		CurrentState.Tick();
+	}
+
+	/// <summary>
+	/// Admin command to skip a teams turn.
+	/// </summary>
 	[ConCmd.Admin]
 	public static void SkipTurn()
 	{
@@ -122,33 +130,67 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
+	/// Test command to change the seed on the terrain map and regenerate it.
+	/// </summary>
+	[ConCmd.Server]
+	public static void ScrambleMap()
+	{
+		if ( Host.IsClient )
+			return;
+
+		Current.Seed = Rand.Int( 99999 );
+		Current.TerrainMap.Seed = Current.Seed;
+		SetSeedClient( To.Everyone, Current.Seed );
+		Current.RegenerateGrid();
+		Current.RegenerateMap();
+	}
+
+	/// <summary>
 	/// Test command for flipping a bit in the terrain grid.
 	/// </summary>
 	/// <param name="x">The x position of the bit to flip.</param>
 	/// <param name="z">The z position of the bit to flip.</param>
-	[ConCmd.Server( name: "FlipGridBit" )]
+	[ConCmd.Admin]
 	public static void FlipGridBit( int x, int z )
 	{
 		var grid = Current.TerrainMap.TerrainGrid;
-		Log.Info( $"{Host.Name} PRE: " + grid[x, z] );
 		grid[x, z] = !grid[x, z];
-		Log.Info( $"{Host.Name} POST: " + grid[x, z] );
 
 		Current.RegenerateMap();
 		FlipGridBitClient( To.Everyone, x, z );
 	}
 
+	/// <summary>
+	/// The client receiver to set the seed for the terrain.
+	/// </summary>
+	/// <param name="seed">The new seed for the terrain.</param>
+	[ClientRpc]
+	public static void SetSeedClient( int seed )
+	{
+		Current.TerrainMap.Seed = seed;
+		Current.RegenerateGrid();
+		Current.RegenerateMap();
+	}
+
+	/// <summary>
+	/// The client receiver to flip a bit in the terrain grid.
+	/// </summary>
+	/// <param name="x">The x position of the bit to flip.</param>
+	/// <param name="z">The y position of the bit to flip.</param>
 	[ClientRpc]
 	public static void FlipGridBitClient( int x, int z )
 	{
 		var grid = Current.TerrainMap.TerrainGrid;
-		Log.Info( $"{Host.Name} PRE: " + grid[x, z] );
 		grid[x, z] = !grid[x, z];
-		Log.Info( $"{Host.Name} POST: " + grid[x, z] );
 
 		Current.RegenerateMap();
 	}
 
+	/// <summary>
+	/// The client receiver to explode a portion of the terrain map.
+	/// </summary>
+	/// <param name="midpoint">The center point of the explosion.</param>
+	/// <param name="size">How big the explosion was.</param>
 	[ClientRpc]
 	public static void ExplodeClient( Vector2 midpoint, int size )
 	{
