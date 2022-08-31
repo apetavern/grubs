@@ -141,13 +141,13 @@ public abstract partial class BaseState : Entity
 	[ConCmd.Admin( "state" )]
 	public static void ForceStateCmd( string stateName )
 	{
-		var stateType = TypeLibrary.GetTypeByName( stateName );
+		var stateType = TypeLibrary.GetDescription( stateName );
 		if ( stateType is null )
 		{
 			Log.Error( $"No state exists with the type name \"{stateName}\"" );
 			return;
 		}
 
-		SwitchStateTo( TypeLibrary.Create<BaseState>( stateType ), true );
+		SwitchStateTo( stateType.Create<BaseState>(), true );
 	}
 }

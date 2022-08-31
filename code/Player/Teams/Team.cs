@@ -172,8 +172,8 @@ public partial class Team : Entity, ISpectator
 	{
 		Host.AssertServer();
 
-		foreach ( var weapon in TypeLibrary.GetTypes<GrubWeapon>().Where( weapon => !weapon.IsAbstract ) )
-			Inventory.Add( TypeLibrary.Create<GrubWeapon>( weapon ) );
+		foreach ( var weapon in TypeLibrary.GetDescriptions<GrubWeapon>().Where( weapon => !weapon.IsAbstract ) )
+			Inventory.Add( weapon.Create<GrubWeapon>() );
 	}
 
 	/// <summary>
