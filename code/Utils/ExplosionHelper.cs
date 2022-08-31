@@ -35,9 +35,6 @@ public static partial class ExplosionHelper
 			var dir = (grub.Position - position).Normal;
 			grub.ApplyAbsoluteImpulse( dir * force );
 
-			if ( !GameConfig.FriendlyFire && grub != source && grub.Team.TeamNumber == source.Team.TeamNumber )
-				continue;
-
 			grub.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
 		}
 

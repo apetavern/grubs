@@ -30,12 +30,6 @@ public static class GameConfig
 	[ConVar.Replicated( "turn_duration" )]
 	public static int TurnDuration { get; set; } = 60;
 	/// <summary>
-	/// Whether or not grubs can damage their teammates.
-	/// <remarks>This does not protect a grub from hurting itself.</remarks>
-	/// </summary>
-	[ConVar.Replicated( "friendly_fire" )]
-	public static bool FriendlyFire { get; set; } = true;
-	/// <summary>
 	/// The type of material to be used for the terrain.
 	/// </summary>
 	[ConVar.Replicated( "terrain_type" )]
