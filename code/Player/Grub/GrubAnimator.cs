@@ -1,4 +1,6 @@
-﻿namespace Grubs.Player;
+﻿using Grubs.Utils;
+
+namespace Grubs.Player;
 
 public class GrubAnimator : PawnAnimator
 {
@@ -9,8 +11,7 @@ public class GrubAnimator : PawnAnimator
 
 		SetAnimParameter( "grounded", controller.IsGrounded );
 		SetAnimParameter( "hardfall", controller.IsHardFalling );
-		// TODO: Make this not hard coded
-		SetAnimParameter( "lowhp", grub.Health < 30 );
+		SetAnimParameter( "lowhp", grub.Health < GameConfig.LowHealthThreshold );
 		SetAnimParameter( "explode", grub.LifeState == LifeState.Dying );
 
 		float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length;

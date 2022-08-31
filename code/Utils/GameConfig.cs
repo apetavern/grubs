@@ -42,6 +42,8 @@ public static class GameConfig
 	public static string TerrainType { get; set; } = "sand";
 
 	// Grub Configuration
+	public const float LowHealthThreshold = 30;
+
 	public static string[] GrubNames => new[]
 	{
 		"Froggy",
