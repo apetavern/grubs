@@ -216,7 +216,9 @@ public abstract partial class BaseGamemode : BaseState
 				if ( !grub.HasBeenDamaged )
 					continue;
 
-				grub.ApplyDamage();
+				if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+					await grub.DeathTask;
+
 				await GameTask.Delay( 300 );
 			}
 		}

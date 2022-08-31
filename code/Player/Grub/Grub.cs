@@ -1,4 +1,5 @@
-﻿using Grubs.States;
+﻿using System.Threading.Tasks;
+using Grubs.States;
 using Grubs.Terrain;
 using Grubs.Utils;
 using Grubs.Utils.Event;
@@ -82,6 +83,18 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// Whether or not this grub is facing right.
 	/// </summary>
 	public bool FacingRight => !FacingLeft;
+
+	/// <summary>
+	/// The reason for this grubs death.
+	/// <remarks>This will only be available on the server.</remarks>
+	/// </summary>
+	public GrubDeathReason? DeathReason;
+	/// <summary>
+	/// The running task to kill the grub.
+	/// <remarks>This will only be available on the server.</remarks>
+	/// </summary>
+	public Task? DeathTask;
+
 	public Grub()
 	{
 		Transmit = TransmitType.Always;
@@ -136,16 +149,38 @@ public partial class Grub : AnimatedEntity, IResolvable
 		if ( LifeState is LifeState.Dying or LifeState.Dead )
 			return;
 
-		LifeState = LifeState.Dying;
+		DeathTask = Die();
+	}
 
-		// TODO: Animate death?
+	private async Task Die()
+	{
+		if ( DeathReason!.Value.FromKillTrigger )
+		{
+			FinishDie();
+			return;
+		}
+
+		await GameTask.Delay( 200 );
+		LifeState = LifeState.Dying;
+		var plunger = new ModelEntity( "models/tools/dynamiteplunger/dynamiteplunger.vmdl" )
+		{
+			Position = FacingLeft ? Position - new Vector3( 30, 0, 0 ) : Position
+		};
+		await GameTask.Delay( 1025 );
 
 		ExplosionHelper.Explode( Position, this, 50 );
+		plunger.Delete();
+		FinishDie();
+	}
+
+	private void FinishDie()
+	{
 		LifeState = LifeState.Dead;
 		// TODO: Hide the grub instead of deleting it. Possible revive mechanic?
 		EnableDrawing = false;
 		Gravestone = new Gravestone( this ) { Owner = this };
 
+		ChatBox.AddInformation( To.Everyone, DeathReason.ToString(), $"avatar:{Team.ActiveClient.PlayerId}" );
 		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );
 		DeadRpc( To.Everyone );
 
@@ -218,10 +253,11 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// <summary>
 	/// Applies any damage that this grub has received.
 	/// </summary>
-	public virtual void ApplyDamage()
+	/// <returns>Whether or not the grub has died.</returns>
+	public virtual bool ApplyDamage()
 	{
 		if ( !HasBeenDamaged )
-			return;
+			return false;
 
 		_takeDamage = true;
 		GrubsCamera.SetTarget( this );
@@ -234,15 +270,17 @@ public partial class Grub : AnimatedEntity, IResolvable
 			totalDamage += damageInfo.Damage;
 		}
 
+		var dead = false;
 		if ( totalDamage >= Health )
 		{
-			var deathReason = GrubDeathReason.FindReason( this, damageInfos );
-			ChatBox.AddInformation( To.Everyone, deathReason.ToString(), $"avatar:{Team.ActiveClient.PlayerId}" );
+			dead = true;
+			DeathReason = GrubDeathReason.FindReason( this, damageInfos );
 		}
 
 		TakeDamage( DamageInfo.Generic( totalDamage ) );
 
 		_takeDamage = false;
+		return dead;
 	}
 
 	/// <summary>
