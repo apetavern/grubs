@@ -90,6 +90,30 @@
         "ConVarName": "friendly_fire",
         "DisplayName": "Friendly Fire",
         "DefaultValue": "true"
+      },
+      "terrain_type": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "none",
+            "Name": "None"
+          },
+          {
+            "Value": "dirt",
+            "Name": "Dirt"
+          },
+          {
+            "Value": "sand",
+            "Name": "Sand"
+          },
+          {
+            "Value": "lava",
+            "Name": "Lava"
+          }
+        ],
+        "ConVarName": "terrain_type",
+        "DisplayName": "Terrain Type",
+        "DefaultValue": "sand"
       }
     }
   }

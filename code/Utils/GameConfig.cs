@@ -1,4 +1,6 @@
-﻿namespace Grubs.Utils;
+﻿using Grubs.Terrain;
+
+namespace Grubs.Utils;
 
 public static class GameConfig
 {
@@ -33,6 +35,11 @@ public static class GameConfig
 	/// </summary>
 	[ConVar.Replicated( "friendly_fire" )]
 	public static bool FriendlyFire { get; set; } = true;
+	/// <summary>
+	/// The type of material to be used for the terrain.
+	/// </summary>
+	[ConVar.Replicated( "terrain_type" )]
+	public static string TerrainType { get; set; } = "sand";
 
 	// Grub Configuration
 	public static string[] GrubNames => new[]

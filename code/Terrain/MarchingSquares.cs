@@ -1,4 +1,6 @@
-﻿namespace Grubs.Terrain;
+﻿using Grubs.Utils;
+
+namespace Grubs.Terrain;
 
 public class MarchingSquares
 {
@@ -19,6 +21,14 @@ public class MarchingSquares
 	private int Width { get; set; }
 	private int Height { get; set; }
 
+	private Dictionary<TerrainTypes, string> TerrainMaterials = new()
+	{
+		{ TerrainTypes.NONE, "materials/dev/dev_measuregeneric01b.vmat" },
+		{ TerrainTypes.DIRT, "materials/environment/dirt_rocks.vmat" },
+		{ TerrainTypes.SAND, "materials/environment/sand_shells.vmat" },
+		{ TerrainTypes.LAVA, "materials/environment/lava_rocks.vmat" },
+	};
+
 	public Model GenerateModel()
 	{
 		TerrainMap map = GrubsGame.Current.TerrainMap;
@@ -28,18 +38,54 @@ public class MarchingSquares
 		var TerrainGrid = map.TerrainGrid;
 		March( TerrainGrid );
 
-		// Convert Vector3 Vertices to Vert List
-		var vertList = new List<Vert>();
-		foreach ( var vert in Vertices )
+		var vertexNormals = new List<Vector3>();
+		for ( int i = 0; i < Triangles.Count; i += 3 )
 		{
-			vertList.Add( new Vert( vert, Vector3.Left, Vector3.Forward ) );
+			int vertexA = Triangles[i];
+			int vertexB = Triangles[i + 1];
+			int vertexC = Triangles[i + 2];
+
+			var edgeAB = Vertices[vertexB] - Vertices[vertexA];
+			var edgeAC = Vertices[vertexC] - Vertices[vertexA];
+
+			var areaWeightedNormal = Vector3.Cross( edgeAB, edgeAC );
+
+			vertexNormals.Add( areaWeightedNormal );
+			vertexNormals.Add( areaWeightedNormal );
+			vertexNormals.Add( areaWeightedNormal );
 		}
 
+		var vertexTangents = new List<Vector3>();
+		for ( int i = 0; i < Triangles.Count; i++ )
+		{
+			var t1 = Vector3.Cross( vertexNormals[i], Vector3.Forward );
+			var t2 = Vector3.Cross( vertexNormals[i], Vector3.Up );
+
+			if ( t1.Length > t2.Length )
+			{
+				vertexTangents.Add( t1 );
+			}
+			else
+			{
+				vertexTangents.Add( t2 );
+			}
+		}
+
+		// Convert Vector3 Vertices to Vert List
+		var vertList = new List<Vert>();
+		for ( int i = 0; i < Vertices.Count; i++ )
+		{
+			var texCoord = new Vector2( (float)(Vertices[i].x / 512), (float)(Vertices[i].z / 512) );
+			vertList.Add( new Vert( Vertices[i], vertexNormals[i], vertexTangents[i], texCoord ) );
+		}
+
+		Enum.TryParse( GameConfig.TerrainType.ToUpper(), out TerrainTypes matType );
 		// TODO: Calculate normal/tangent.
-		var mesh = new Mesh( Material.Load( "materials/environment/dirt_rocks.vmat" ) )
+		var mesh = new Mesh( Material.Load( TerrainMaterials[matType] ) )
 		{
 			Bounds = new BBox( new Vector3( 0, localY, 0 ), new Vector3( Width * resolution, localY + 64, Height * resolution ) )
 		};
+
 		mesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
 		mesh.CreateIndexBuffer( Triangles.Count, Triangles );
 
@@ -60,7 +106,8 @@ public class MarchingSquares
 
 		float wallHeight = 64f;
 
-		var wallMesh = new Mesh( Material.Load( "materials/environment/dirt_rocks.vmat" ) )
+		Enum.TryParse( GameConfig.TerrainType.ToUpper(), out TerrainTypes matType );
+		var wallMesh = new Mesh( Material.Load( TerrainMaterials[matType] ) )
 		{
 			Bounds = new BBox( 0, new Vector3( Width * resolution, wallHeight, Height * resolution ) )
 		};
@@ -88,7 +135,7 @@ public class MarchingSquares
 		var vertList = new List<Vert>();
 		foreach ( var vert in wallVertices )
 		{
-			vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left ) );
+			vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left, new Vector2( 0, 0 ) ) );
 		}
 
 		wallMesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
@@ -393,19 +440,22 @@ public class MarchingSquares
 		public Vector3 position;
 		public Vector3 normal;
 		public Vector3 tangent;
+		public Vector2 texCoord;
 
-		public Vert( Vector3 position, Vector3 normal, Vector3 tangent )
+		public Vert( Vector3 position, Vector3 normal, Vector3 tangent, Vector2 texCoord )
 		{
 			this.position = position;
 			this.normal = normal;
 			this.tangent = tangent;
+			this.texCoord = texCoord;
 		}
 
-		public static readonly VertexAttribute[] Layout = new VertexAttribute[3]
+		public static readonly VertexAttribute[] Layout = new VertexAttribute[4]
 		{
 			new VertexAttribute(VertexAttributeType.Position, VertexAttributeFormat.Float32),
 			new VertexAttribute(VertexAttributeType.Normal, VertexAttributeFormat.Float32),
 			new VertexAttribute(VertexAttributeType.Tangent, VertexAttributeFormat.Float32),
+			new VertexAttribute(VertexAttributeType.TexCoord, VertexAttributeFormat.Float32, 2)
 		};
 	}
 }
