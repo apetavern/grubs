@@ -42,12 +42,20 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		TeamManager = new TeamManager();
+
+		var killBoundry = new MultiShape()
+			// Bottom bar
+			.AddShape( BoxShape.WithSize( new Vector3( 7400, 32, 10000 ) ).WithOffset( new Vector3( -2500, 0, -10200 ) ) )
+			// Left bar
+			.AddShape( BoxShape.WithSize( new Vector3( 2300, 32, 10000 ) ).WithOffset( new Vector3( -2500, 0, -200 ) ) )
+			// Right bar
+			.AddShape( BoxShape.WithSize( new Vector3( 2300, 32, 10000 ) ).WithOffset( new Vector3( 2600, 0, -200 ) ) );
 		new DamageZone()
 			.WithDamageFlags( DamageFlags.Generic )
 			.WithInstantKill( true )
 			.WithDamage( 9999 )
-			.WithPosition( new Vector3( -750, 0, -200 ) )
-			.WithShape( BoxShape.WithSize( new Vector3( 5000, 32, 32 ) ) )
+			.WithPosition( Vector3.Zero )
+			.WithShape( killBoundry )
 			.Finish();
 
 		List<Client> participants;
