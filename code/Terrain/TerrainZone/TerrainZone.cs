@@ -62,7 +62,6 @@ public partial class TerrainZone : BaseNetworkable
 	/// <returns>The terrain zone instance.</returns>
 	public TerrainZone WithShape( ZoneShape shape )
 	{
-		shape.Zone = this;
 		Shape = shape;
 		return this;
 	}
@@ -85,6 +84,8 @@ public partial class TerrainZone : BaseNetworkable
 	public virtual void Finish()
 	{
 		Host.AssertServer();
+
+		Shape.Finish( this );
 		QueueToAdd.Enqueue( this );
 	}
 

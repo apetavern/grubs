@@ -15,7 +15,6 @@ public partial class MultiShape : ZoneShape
 	/// <returns>The multi shape instance.</returns>
 	public MultiShape AddShape( ZoneShape shape )
 	{
-		shape.Zone = Zone;
 		Shapes.Add( shape );
 		return this;
 	}
@@ -23,6 +22,14 @@ public partial class MultiShape : ZoneShape
 	public override bool InZone( Entity entity )
 	{
 		return Shapes.Any( shape => shape.InZone( entity ) );
+	}
+
+	public override void Finish( TerrainZone zone )
+	{
+		base.Finish( zone );
+
+		foreach ( var shape in Shapes )
+			shape.Finish( zone );
 	}
 
 	public override void DebugDraw()

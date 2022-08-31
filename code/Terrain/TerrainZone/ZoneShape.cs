@@ -41,6 +41,14 @@ public abstract partial class ZoneShape : BaseNetworkable
 	public abstract bool InZone( Entity entity );
 
 	/// <summary>
+	/// Called when the zone this shape is a part of has finished configuring.
+	/// </summary>
+	public virtual void Finish( TerrainZone zone )
+	{
+		Zone = zone;
+	}
+
+	/// <summary>
 	/// Debug method to show the zone.
 	/// </summary>
 	public virtual void DebugDraw()
