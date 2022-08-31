@@ -33,6 +33,8 @@ public partial class SphereShape : ZoneShape
 	/// <returns>The new sphere shape.</returns>
 	public static SphereShape WithRadius( float radius )
 	{
+		Assert.True( radius > 0, $"{nameof( radius )} must have a value greater than 0" );
+
 		return new SphereShape { Radius = radius };
 	}
 }

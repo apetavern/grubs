@@ -34,6 +34,10 @@ public partial class BoxShape : ZoneShape
 	/// <returns>The new box shape.</returns>
 	public static BoxShape WithSize( Vector3 size )
 	{
+		Assert.True( size.x > 0, $"{nameof( size )} must have an X value greater than 0" );
+		Assert.True( size.y > 0, $"{nameof( size )} must have an Y value greater than 0" );
+		Assert.True( size.z > 0, $"{nameof( size )} must have an Z value greater than 0" );
+
 		return new BoxShape { Size = size };
 	}
 }
