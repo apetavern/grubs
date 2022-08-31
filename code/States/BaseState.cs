@@ -79,7 +79,7 @@ public abstract partial class BaseState : Entity
 
 	// TODO: Somehow receivers of the events get called twice?
 	/// <summary>
-	/// 
+	/// Runs the Sbox events related to entering this state.
 	/// </summary>
 	protected virtual void RunEnterEvents()
 	{
@@ -88,7 +88,7 @@ public abstract partial class BaseState : Entity
 	}
 
 	/// <summary>
-	/// 
+	/// Runs the Sbox events related to leaving this state.
 	/// </summary>
 	protected virtual void RunLeaveEvents()
 	{
