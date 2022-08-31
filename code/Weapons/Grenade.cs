@@ -21,7 +21,7 @@ public class Grenade : GrubWeapon
 			.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, 0.4f * Charge, 0, maxBounceQty: 5 );
 
 		var projectile = new Projectile()
-		   .WithGrub( Parent as Grub )
+		   .WithGrub( (Parent as Grub)! )
 		   .WithModel( ProjectileModelPath )
 		   .SetPosition( Position )
 		   .MoveAlongTrace( segments )

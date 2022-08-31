@@ -32,7 +32,19 @@ public partial class GrubsGame : Game
 	/// <summary>
 	/// The current gamemode the game is in.
 	/// </summary>
-	public BaseGamemode CurrentGamemode => CurrentState as BaseGamemode;
+	public BaseGamemode CurrentGamemode
+	{
+		get
+		{
+			if ( CurrentState is not BaseGamemode gamemode )
+			{
+				Log.Error( "Attempted to get gamemode when there is none running" );
+				return default!;
+			}
+
+			return gamemode;
+		}
+	}
 
 	/// <summary>
 	/// The terrain map in the world.

@@ -5,7 +5,7 @@ namespace Grubs.Utils;
 
 public static class ExplosionHelper
 {
-	public static void Explode( Vector3 position, Grub? source, float radius = 100, float maxDamage = 100 )
+	public static void Explode( Vector3 position, Grub source, float radius = 100, float maxDamage = 100 )
 	{
 		Host.AssertServer();
 

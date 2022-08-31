@@ -15,9 +15,9 @@ public partial class GrubsInventory : BaseNetworkable
 		// Handle picking up a weapon we already have.
 		if ( IsCarryingType( weapon.GetType() ) )
 		{
-			var existingWeapon = Items.Where( item => item.GetType() == weapon.GetType() ).FirstOrDefault();
+			var existingWeapon = Items.FirstOrDefault( item => item.GetType() == weapon.GetType() );
 			// -1 represents unlimited ammo, so don't add ammo in this case.
-			if ( existingWeapon.Ammo != -1 )
+			if ( existingWeapon is not null && existingWeapon.Ammo != -1 )
 				existingWeapon.Ammo++;
 
 			weapon.Delete();

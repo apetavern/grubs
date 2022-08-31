@@ -19,9 +19,9 @@ public abstract partial class GrubWeapon : BaseCarriable
 	[Net] public int Charge { get; set; }
 	[Net] public bool IsFiring { get; set; } = false;
 
-	protected GrubAnimator Animator;
+	protected GrubAnimator? Animator;
 
-	private readonly int maxCharge = 100;
+	private readonly int _maxCharge = 100;
 
 	public override void Spawn()
 	{
@@ -45,7 +45,7 @@ public abstract partial class GrubWeapon : BaseCarriable
 	/// </summary>
 	public void Fire()
 	{
-		(Parent as Grub).SetAnimParameter( "fire", true );
+		(Parent as Grub)!.SetAnimParameter( "fire", true );
 
 		if ( !IsServer )
 			return;
@@ -87,7 +87,7 @@ public abstract partial class GrubWeapon : BaseCarriable
 	protected void CheckFireInput()
 	{
 		// Only fire if our grub is grounded and we haven't used our turn.
-		var controller = (Owner as Team).ActiveGrub.Controller;
+		var controller = (Owner as Team)!.ActiveGrub.Controller;
 		if ( !controller.IsGrounded || GrubsGame.Current.CurrentGamemode.UsedTurn )
 			return;
 
@@ -98,7 +98,7 @@ public abstract partial class GrubWeapon : BaseCarriable
 				{
 					IsFiring = true;
 					Charge++;
-					Charge = Charge.Clamp( 0, maxCharge );
+					Charge = Charge.Clamp( 0, _maxCharge );
 				}
 
 				if ( Input.Released( InputButton.PrimaryAttack ) )

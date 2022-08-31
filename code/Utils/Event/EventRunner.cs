@@ -6,7 +6,7 @@
 [Category( "Setup" )]
 public partial class EventRunner : Entity
 {
-	private static EventRunner _instance;
+	private static EventRunner _instance = null!;
 
 	public EventRunner()
 	{

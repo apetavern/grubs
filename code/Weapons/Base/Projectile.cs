@@ -124,7 +124,10 @@ public class Projectile : ModelEntity, IResolvable
 
 	private void Explode()
 	{
-		ExplosionHelper.Explode( Position, _Grub, ExplosionRadius );
+		if ( _Grub is null )
+			Log.Warning( $"{this} is missing the {nameof( _Grub )} value. Fix this!" );
+
+		ExplosionHelper.Explode( Position, _Grub!, ExplosionRadius );
 		Delete();
 	}
 

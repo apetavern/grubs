@@ -4,7 +4,7 @@ public class GrubAnimator : PawnAnimator
 {
 	public override void Simulate()
 	{
-		var controller = (Pawn as Grub).Controller;
+		var controller = (Pawn as Grub)!.Controller;
 
 		SetAnimParameter( "grounded", controller.IsGrounded );
 

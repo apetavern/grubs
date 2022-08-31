@@ -70,6 +70,12 @@ public partial class GrubsCamera : CameraMode
 
 	public static Entity? GetTarget()
 	{
-		return (Entity.All.OfType<ISpectator>().First().Camera as GrubsCamera).Target;
+		if ( Entity.All.OfType<ISpectator>().FirstOrDefault()?.Camera is not GrubsCamera camera )
+		{
+			Log.Error( "Attempted to get camera target on an invalid camera" );
+			return null;
+		}
+
+		return camera.Target;
 	}
 }

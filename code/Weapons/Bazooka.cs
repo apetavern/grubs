@@ -23,7 +23,7 @@ public class Bazooka : GrubWeapon
 			.RunTowards( Parent.EyeRotation.Forward.Normal, 0.5f * Charge, 0 );
 
 		var projectile = new Projectile()
-			.WithGrub( Parent as Grub )
+			.WithGrub( (Parent as Grub)! )
 			.WithModel( ProjectileModelPath )
 			.SetPosition( Position )
 			.MoveAlongTrace( segments )

@@ -64,7 +64,7 @@ public partial class GrubController : BasePlayerController
 	public override void Simulate()
 	{
 		var grub = Pawn as Grub;
-		FallVelocity = -grub.Velocity.z;
+		FallVelocity = -grub!.Velocity.z;
 
 		var isFiring = false;
 		if ( grub.ActiveChild is not null && grub.ActiveChild.IsValid() )
@@ -189,7 +189,7 @@ public partial class GrubController : BasePlayerController
 		LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
 		// Only allow aiming changes if the grub isn't moving and not currently charging a weapon shot.
-		if ( (Pawn as Grub).IsTurn && !isFiring )
+		if ( (Pawn as Grub)!.IsTurn && !isFiring )
 		{
 			// Aim with W & S keys
 			EyeRotation = Rotation.LookAt( LookPos );
