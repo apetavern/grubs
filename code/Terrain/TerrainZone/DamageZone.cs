@@ -1,6 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.Utils.Extensions;
-using Grubs.Weapons.Projectiles;
+using Grubs.Weapons.Base;
 
 namespace Grubs.Terrain;
 

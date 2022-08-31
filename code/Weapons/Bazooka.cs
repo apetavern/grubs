@@ -1,14 +1,16 @@
 ﻿using Grubs.Player;
 using Grubs.Utils;
-using Grubs.Weapons.Projectiles;
+﻿using Grubs.Weapons.Base;
 
 namespace Grubs.Weapons;
 
 public class Bazooka : GrubWeapon
+/// <summary>
+/// The classic Bazooka.
+/// </summary>
 {
 	public override string WeaponName => "Bazooka";
 	public override string ModelPath => "models/weapons/bazooka/bazooka.vmdl";
-	public override string ProjectileModelPath => "models/weapons/shell/shell.vmdl";
 	public override FiringType FiringType => FiringType.Charged;
 	public override HoldPose HoldPose => HoldPose.Bazooka;
 	public override bool HasReticle => true;

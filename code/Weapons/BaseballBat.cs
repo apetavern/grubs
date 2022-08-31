@@ -1,8 +1,13 @@
-﻿namespace Grubs.Weapons;
+﻿using Grubs.Weapons.Base;
 
+namespace Grubs.Weapons;
+
+/// <summary>
+/// A simple baseball bat.
+/// </summary>
 public class BaseballBat : GrubWeapon
 {
-	public override string WeaponName => "Baseball Bat";
-	public override string ModelPath => "models/weapons/baseballbat/baseballbat.vmdl";
-	public override HoldPose HoldPose => HoldPose.Swing;
+	protected override string WeaponName => "Baseball Bat";
+	protected override string ModelPath => "models/weapons/baseballbat/baseballbat.vmdl";
+	protected override HoldPose HoldPose => HoldPose.Swing;
 }

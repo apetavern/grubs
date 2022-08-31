@@ -2,57 +2,89 @@
 using Grubs.States;
 using Grubs.Utils;
 
-namespace Grubs.Weapons.Projectiles;
+namespace Grubs.Weapons.Base;
 
 public class Projectile : ModelEntity, IResolvable
 {
 	public bool Resolved => false;
 
-	private bool IsResolved { get; set; }
-
-	private TimeSince TimeSinceSegmentStarted { get; set; }
-	private float CollisionExplosionDelaySeconds { get; set; }
+	private Grub Grub { get; set; } = null!;
 	private float Speed { get; set; } = 0.001f;
 	private float ExplosionRadius { get; set; } = 100;
-	private List<ArcSegment>? Segments { get; set; }
-	private Grub? _Grub { get; set; }
+	private float CollisionExplosionDelaySeconds { get; set; }
+	private List<ArcSegment> Segments { get; set; } = null!;
 
+	/// <summary>
+	/// Sets the grub that is the reason for this projectile existing.
+	/// </summary>
+	/// <param name="grub">The grub that created this projectile.</param>
+	/// <returns>The projectile instance.</returns>
 	public Projectile WithGrub( Grub grub )
 	{
-		_Grub = grub;
+		Grub = grub;
 		return this;
 	}
 
+	/// <summary>
+	/// Sets the model of this projectile.
+	/// </summary>
+	/// <param name="modelPath">The path to the model to set.</param>
+	/// <returns>The projectile instance.</returns>
 	public Projectile WithModel( string modelPath )
 	{
 		SetModel( modelPath );
 		return this;
 	}
 
-	public Projectile SetPosition( Vector3 position )
+	/// <summary>
+	/// Sets the position of this projectile.
+	/// </summary>
+	/// <param name="position">The position of the projectile.</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithPosition( Vector3 position )
 	{
 		Position = position.WithY( 0f );
 		return this;
 	}
 
-	public Projectile WithCollisionExplosionDelay( float delaySeconds )
-	{
-		CollisionExplosionDelaySeconds = delaySeconds;
-		return this;
-	}
-
-	public Projectile WithExplosionRadius( float explosionRadius )
-	{
-		ExplosionRadius = explosionRadius;
-		return this;
-	}
-
+	/// <summary>
+	/// Sets the speed the projectile will move at.
+	/// </summary>
+	/// <param name="speed">The speed to move at.</param>
+	/// <returns>The projectile instance.</returns>
 	public Projectile WithSpeed( float speed )
 	{
 		Speed = 1 / speed;
 		return this;
 	}
 
+	/// <summary>
+	/// Sets the radius of the explosion it creates when it explodes.
+	/// </summary>
+	/// <param name="explosionRadius">The radius of the explosion.</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithExplosionRadius( float explosionRadius )
+	{
+		ExplosionRadius = explosionRadius;
+		return this;
+	}
+
+	/// <summary>
+	/// Sets the delay to which the projectile will explode after colliding.
+	/// </summary>
+	/// <param name="delaySeconds">The seconds to delay for.</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithCollisionExplosionDelay( float delaySeconds )
+	{
+		CollisionExplosionDelaySeconds = delaySeconds;
+		return this;
+	}
+
+	/// <summary>
+	/// Sets a path for the projectile to follow.
+	/// </summary>
+	/// <param name="points">The arc trace segments to follow.</param>
+	/// <returns>The projectile instance.</returns>
 	public Projectile MoveAlongTrace( List<ArcSegment> points )
 	{
 		Segments = points;
@@ -63,42 +95,53 @@ public class Projectile : ModelEntity, IResolvable
 		return this;
 	}
 
-	[Event.Tick]
-	public void Tick()
+	/// <summary>
+	/// Verifies that the projectile has its basic information set.
+	/// </summary>
+	/// <returns>The projectile instance.</returns>
+	public Projectile Finish()
 	{
-		// Don't move if the projectile is parented.
-		if ( Parent.IsValid() )
+		Assert.True( Grub is not null );
+		Assert.True( Segments is not null );
+
+		return this;
+	}
+
+	/// <summary>
+	/// Explodes the projectile after an amount of seconds.
+	/// </summary>
+	/// <param name="seconds">The amount of seconds to wait before exploding.</param>
+	public async void ExplodeAfterSeconds( float seconds )
+	{
+		await GameTask.DelaySeconds( seconds );
+
+		if ( !IsValid )
 			return;
 
-		// This might be shite
-		if ( Segments is null || !Segments.Any() )
-			return;
+		Explode();
+	}
 
-		if ( IsResolved )
-			return;
-
-		DrawSegments();
+	[Event.Tick.Server]
+	private void Tick()
+	{
+		if ( ProjectileDebug )
+			DrawSegments();
 
 		if ( (Segments[0].EndPos - Position).IsNearlyZero( 2.5f ) )
 		{
 			if ( Segments.Count > 1 )
 				Segments.RemoveAt( 0 );
 			else
-			{
 				OnCollision();
-				return;
-			}
 
-			TimeSinceSegmentStarted = 0;
+			return;
 		}
-		else
-		{
-			Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
-			Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, Time.Delta / Speed );
-		}
+
+		Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
+		Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, Time.Delta / Speed );
 	}
 
-	public void OnCollision()
+	private void OnCollision()
 	{
 		if ( !IsServer )
 			return;
@@ -112,33 +155,21 @@ public class Projectile : ModelEntity, IResolvable
 		Explode();
 	}
 
-	public async void ExplodeAfterSeconds( float seconds )
-	{
-		await GameTask.DelaySeconds( seconds );
-
-		if ( !IsValid )
-			return;
-
-		Explode();
-	}
-
 	private void Explode()
 	{
-		if ( _Grub is null )
-			Log.Warning( $"{this} is missing the {nameof( _Grub )} value. Fix this!" );
-
-		ExplosionHelper.Explode( Position, _Grub!, ExplosionRadius );
+		ExplosionHelper.Explode( Position, Grub, ExplosionRadius );
 		Delete();
 	}
 
+	/// <summary>
+	/// Debug console variable to see the projectiles path.
+	/// </summary>
+	[ConVar.Replicated( "projectile_debug" )]
+	public static bool ProjectileDebug { get; set; }
+
 	private void DrawSegments()
 	{
-		if ( Segments is null )
-			return;
-
 		foreach ( var segment in Segments )
-		{
 			DebugOverlay.Line( segment.StartPos, segment.EndPos );
-		}
 	}
 }

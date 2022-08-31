@@ -1,56 +1,80 @@
 ﻿using Grubs.Player;
-using Grubs.States;
-using Grubs.Weapons.Projectiles;
 
-namespace Grubs.Weapons;
+namespace Grubs.Weapons.Base;
 
+/// <summary>
+/// A weapon the grubs can use.
+/// </summary>
 [Category( "Weapons" )]
 public abstract partial class GrubWeapon : BaseCarriable
 {
-	public virtual string WeaponName => "";
-	public virtual string ModelPath => "";
-	public virtual string ProjectileModelPath => "";
-	public virtual FiringType FiringType => FiringType.Instant;
-	public virtual int MaxFireCount => 1;
-	public virtual HoldPose HoldPose => HoldPose.None;
+	/// <summary>
+	/// The name of the weapon.
+	/// </summary>
+	protected virtual string WeaponName => "";
+	/// <summary>
+	/// The path to the weapon model.
+	/// </summary>
+	protected virtual string ModelPath => "";
+	/// <summary>
+	/// The way that this weapon fires.
+	/// </summary>
+	protected virtual FiringType FiringType => FiringType.Instant;
+	/// <summary>
+	/// The way that this weapon is held by the grub.
+	/// </summary>
+	protected virtual HoldPose HoldPose => HoldPose.None;
+	/// <summary>
+	/// Whether or not this weapon should have an aim reticle.
+	/// </summary>
 	public virtual bool HasReticle => false;
-	[Net, Local] public int Ammo { get; set; }
-	[Net] public bool WeaponHasHat { get; set; }
-	[Net] public int Charge { get; set; }
-	[Net] public bool IsFiring { get; set; } = false;
 
+	/// <summary>
+	/// The amount of times this gun can be used before being removed.
+	/// </summary>
+	[Net, Local]
+	public int Ammo { get; set; }
+	/// <summary>
+	/// The current charge the weapon has.
+	/// </summary>
+	[Net]
+	protected int Charge { get; private set; }
+	/// <summary>
+	/// Whether or not the weapon is currently being charged.
+	/// </summary>
+	[Net]
+	public bool IsCharging { get; private set; }
+	/// <summary>
+	/// Whether or not this weapon has a special hat associated with it.
+	/// </summary>
+	[Net]
+	private bool WeaponHasHat { get; set; }
+
+	/// <summary>
+	/// The animator of the grub that is holding the weapon.
+	/// </summary>
 	protected GrubAnimator? Animator;
 
-	private readonly int _maxCharge = 100;
+	private const int MaxCharge = 100;
 
 	public override void Spawn()
 	{
 		base.Spawn();
+
+		Name = WeaponName;
 		SetModel( ModelPath );
 		WeaponHasHat = CheckWeaponForHat();
-
 	}
 
-	/// <summary>
-	/// Server-side method to implement that controls what happens 
-	/// when the Fire button is pressed.
-	/// </summary>
-	protected virtual void OnFire()
+	private bool CheckWeaponForHat()
 	{
-		GrubsGame.Current.CurrentGamemode.UseTurn();
-	}
+		for ( var i = 0; i < BoneCount; i++ )
+		{
+			if ( GetBoneName( i ) == "head" )
+				return true;
+		}
 
-	/// <summary>
-	/// Method which acts as the entry point for firing a weapon.
-	/// </summary>
-	public void Fire()
-	{
-		(Parent as Grub)!.SetAnimParameter( "fire", true );
-
-		if ( !IsServer )
-			return;
-
-		OnFire();
+		return false;
 	}
 
 	public override void ActiveStart( Entity ent )
@@ -84,7 +108,7 @@ public abstract partial class GrubWeapon : BaseCarriable
 		CheckFireInput();
 	}
 
-	protected void CheckFireInput()
+	private void CheckFireInput()
 	{
 		// Only fire if our grub is grounded and we haven't used our turn.
 		var controller = (Owner as Team)!.ActiveGrub.Controller;
@@ -96,14 +120,14 @@ public abstract partial class GrubWeapon : BaseCarriable
 			case FiringType.Charged:
 				if ( Input.Down( InputButton.PrimaryAttack ) )
 				{
-					IsFiring = true;
+					IsCharging = true;
 					Charge++;
-					Charge = Charge.Clamp( 0, _maxCharge );
+					Charge = Charge.Clamp( 0, MaxCharge );
 				}
 
 				if ( Input.Released( InputButton.PrimaryAttack ) )
 				{
-					IsFiring = false;
+					IsCharging = false;
 					Fire();
 					Charge = 0;
 				}
@@ -120,38 +144,35 @@ public abstract partial class GrubWeapon : BaseCarriable
 		}
 	}
 
+	private void Fire()
+	{
+		(Parent as Grub)!.SetAnimParameter( "fire", true );
+
+		if ( IsServer )
+			OnFire();
+	}
+
 	/// <summary>
-	/// Method to set whether the weapon should currently be visible.
-	/// Used to hide the weapon while jumping, moving, etc.
+	/// Called when the weapon has been fired.
 	/// </summary>
-	/// <param name="grub">The grub to update weapon visiblity on.</param>
-	/// <param name="show">Whether the weapon should be shown.</param>
+	protected virtual void OnFire()
+	{
+		Host.AssertServer();
+
+		GrubsGame.Current.CurrentGamemode.UseTurn();
+	}
+
+	/// <summary>
+	/// Sets whether the weapon should be visible.
+	/// </summary>
+	/// <param name="grub">The grub to update weapon visibility on.</param>
+	/// <param name="show">Whether or not the weapon should be shown.</param>
 	public void ShowWeapon( Grub grub, bool show )
 	{
 		EnableDrawing = show;
-		ShowHoldPose( show );
+		Animator?.SetAnimParameter( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
 
 		if ( WeaponHasHat )
 			grub.SetHatVisible( !show );
-	}
-
-	protected void ShowHoldPose( bool show )
-	{
-		if ( Parent is not Grub grub )
-			return;
-
-		if ( !grub.IsTurn )
-			return;
-
-		Animator?.SetAnimParameter( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
-	}
-
-	private bool CheckWeaponForHat()
-	{
-		for ( int i = 0; i < BoneCount; i++ )
-			if ( GetBoneName( i ) == "head" )
-				return true;
-
-		return false;
 	}
 }

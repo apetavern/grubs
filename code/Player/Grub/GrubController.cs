@@ -1,5 +1,4 @@
-﻿using Grubs.States;
-using Grubs.Utils.Extensions;
+﻿using Grubs.Utils.Extensions;
 
 namespace Grubs.Player;
 
@@ -69,7 +68,7 @@ public partial class GrubController : BasePlayerController
 
 		var isFiring = false;
 		if ( grub.ActiveChild is not null && grub.ActiveChild.IsValid() )
-			isFiring = grub.ActiveChild.IsFiring;
+			isFiring = grub.ActiveChild.IsCharging;
 
 		UpdateBBox();
 		SetEyeTransform( isFiring );
@@ -133,7 +132,7 @@ public partial class GrubController : BasePlayerController
 
 		CheckFalling();
 
-		grub.ActiveChild?.ShowWeapon( grub, Velocity.IsNearlyZero( 2.5f ) && IsGrounded );
+		grub.ActiveChild?.ShowWeapon( grub, grub.IsTurn && IsGrounded && Velocity.IsNearlyZero( 2.5f ) );
 	}
 
 	public float FallPunchThreshold => 350f; // won't make player's screen / make scrape noise unless player falling at least this fast.

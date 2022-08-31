@@ -3,7 +3,7 @@ using Grubs.States;
 using Grubs.Terrain;
 using Grubs.Utils;
 using Grubs.Utils.Event;
-using Grubs.Weapons;
+using Grubs.Weapons.Base;
 
 namespace Grubs.Player;
 

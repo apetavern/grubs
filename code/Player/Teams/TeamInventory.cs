@@ -1,4 +1,4 @@
-﻿using Grubs.Weapons;
+﻿using Grubs.Weapons.Base;
 
 namespace Grubs.Player;
 

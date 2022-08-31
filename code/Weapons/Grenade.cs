@@ -1,14 +1,16 @@
 ﻿using Grubs.Player;
 using Grubs.Utils;
-using Grubs.Weapons.Projectiles;
+﻿using Grubs.Weapons.Base;
 
 namespace Grubs.Weapons;
 
 public class Grenade : GrubWeapon
+/// <summary>
+/// A throwable grenade.
+/// </summary>
 {
 	public override string WeaponName => "Grenade";
 	public override string ModelPath => "models/weapons/grenade/grenade.vmdl";
-	public override string ProjectileModelPath => "models/weapons/grenade/grenade.vmdl";
 	public override FiringType FiringType => FiringType.Charged;
 	public override HoldPose HoldPose => HoldPose.Throwable;
 	public override bool HasReticle => true;

@@ -1,6 +1,4 @@
-﻿using Grubs.Terrain;
-
-namespace Grubs.Utils;
+﻿namespace Grubs.Utils;
 
 public static class GameConfig
 {
