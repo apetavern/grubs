@@ -5,19 +5,14 @@ namespace Grubs.Terrain;
 /// <summary>
 /// Handles a zone in the terrain that can trigger on entities.
 /// </summary>
-public partial class TerrainZone : BaseNetworkable
+[Category( "Terrain" )]
+public partial class TerrainZone : Entity
 {
 	/// <summary>
 	/// Networked list of all damage zones in the terrain.
 	/// </summary>
 	[Net]
-	public static IList<TerrainZone> All { get; private set; } = new List<TerrainZone>();
-
-	/// <summary>
-	/// The position of the zone.
-	/// </summary>
-	[Net]
-	public Vector3 Position { get; set; }
+	public new static IList<TerrainZone> All { get; private set; } = new List<TerrainZone>();
 
 	/// <summary>
 	/// The shape that this zone is taking.
