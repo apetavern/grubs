@@ -1,35 +1,23 @@
-﻿using Grubs.Player;
-using Grubs.Utils;
 ﻿using Grubs.Weapons.Base;
 
 namespace Grubs.Weapons;
 
-public class Grenade : GrubWeapon
 /// <summary>
 /// A throwable grenade.
 /// </summary>
+public class Grenade : ProjectileWeapon
 {
-	public override string WeaponName => "Grenade";
-	public override string ModelPath => "models/weapons/grenade/grenade.vmdl";
-	public override FiringType FiringType => FiringType.Charged;
-	public override HoldPose HoldPose => HoldPose.Throwable;
+	protected override string WeaponName => "Grenade";
+	protected override string ModelPath => "models/weapons/grenade/grenade.vmdl";
+	protected override FiringType FiringType => FiringType.Charged;
+	protected override HoldPose HoldPose => HoldPose.Throwable;
 	public override bool HasReticle => true;
 
-	protected override void OnFire()
-	{
-		base.OnFire();
-
-		var segments = new ArcTrace( Parent, Parent.EyePosition )
-			.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, 0.4f * Charge, 0, maxBounceQty: 5 );
-
-		var projectile = new Projectile()
-		   .WithGrub( (Parent as Grub)! )
-		   .WithModel( ProjectileModelPath )
-		   .SetPosition( Position )
-		   .MoveAlongTrace( segments )
-		   .WithSpeed( 1000 )
-		   .WithExplosionRadius( 100 )
-		   .WithCollisionExplosionDelay( 3f );
-		GrubsCamera.SetTarget( projectile );
-	}
+	protected override float ProjectileForceMultiplier => 0.4f;
+	protected override bool ProjectileShouldBounce => true;
+	protected override int ProjectileMaxBounces => 5;
+	protected override string ProjectileModel => "models/weapons/grenade/grenade.vmdl";
+	protected override float ProjectileSpeed => 1000;
+	protected override float ProjectileExplosionRadius => 100;
+	protected override float ProjectileCollisionExplosionDelay => 3;
 }
