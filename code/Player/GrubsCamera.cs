@@ -62,9 +62,14 @@ public partial class GrubsCamera : CameraMode
 		Center += delta;
 	}
 
-	public static void SetTarget( Entity newTarget )
+	public static void SetTarget( Entity? newTarget )
 	{
 		foreach ( var spectator in Entity.All.OfType<ISpectator>() )
 			(spectator.Camera as GrubsCamera)!.Target = newTarget;
+	}
+
+	public static Entity? GetTarget()
+	{
+		return (Entity.All.OfType<ISpectator>().First().Camera as GrubsCamera).Target;
 	}
 }

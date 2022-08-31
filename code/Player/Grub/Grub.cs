@@ -140,6 +140,9 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );
 		DeadRpc( To.Everyone );
+
+		if ( GrubsCamera.GetTarget() == this )
+			GrubsCamera.SetTarget( null );
 	}
 
 	protected override void OnDestroy()
