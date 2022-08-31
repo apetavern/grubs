@@ -49,6 +49,9 @@ public readonly struct GrubDeathReason
 			case GrubDamageType.None:
 				switch ( SecondReason )
 				{
+					// Died from an admin.
+					case GrubDamageType.Admin:
+						return $"{Grub.Name} was RDMed by an admin";
 					// Died from an explosion.
 					case GrubDamageType.Explosion:
 						return SecondInfo!.Value.Attacker == Grub
@@ -66,6 +69,9 @@ public readonly struct GrubDeathReason
 			case GrubDamageType.Explosion:
 				switch ( SecondReason )
 				{
+					// Died from an admin.
+					case GrubDamageType.Admin:
+						return $"{Grub.Name} was RDMed by an admin";
 					// Killed by a different explosion.
 					case GrubDamageType.Explosion:
 						return $"{Grub.Name} attracted too many explosives";
@@ -119,6 +125,13 @@ public readonly struct GrubDeathReason
 		{
 			switch ( damageInfo.Flags )
 			{
+				// An admin has abused the grub, move as normal.
+				case DamageFlags.Crush:
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = GrubDamageType.Admin;
+					break;
 				// An explosion, just move the reasons around as normal.
 				case DamageFlags.Blast:
 					lastReasonInfo = reasonInfo;

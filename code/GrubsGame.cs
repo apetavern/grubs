@@ -141,6 +141,23 @@ public partial class GrubsGame : Game
 		gamemode.NextTurnTask = gamemode.NextTurn();
 	}
 
+	[ConCmd.Admin]
+	public static void KillActiveGrub()
+	{
+		if ( Current.CurrentState is not BaseGamemode gamemode )
+			return;
+
+		var activeGrub = gamemode.TeamManager.CurrentTeam.ActiveGrub;
+		gamemode.UseTurn();
+		activeGrub.TakeDamage( new DamageInfo
+		{
+			Attacker = ConsoleSystem.Caller.Pawn,
+			Damage = 9999,
+			Flags = DamageFlags.Crush
+		} );
+		activeGrub.ApplyDamage();
+	}
+
 	/// <summary>
 	/// Test command to change the seed on the terrain map and regenerate it.
 	/// </summary>

@@ -20,5 +20,9 @@ public enum GrubDamageType
 	/// <summary>
 	/// Touching an instance kill zone.
 	/// </summary>
-	KillTrigger
+	KillTrigger,
+	/// <summary>
+	/// Admin abuse.
+	/// </summary>
+	Admin
 }
