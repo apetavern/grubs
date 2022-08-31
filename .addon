@@ -15,12 +15,12 @@
   "RootNamespace": "Grubs",
   "Metadata": {
     "MapList": [
-      "facepunch.construct"
+      "apetavern.grubs_test_map"
     ],
     "MaxPlayers": 8,
     "MinPlayers": 0,
     "GameNetworkType": "Multiplayer",
-    "MapSelect": "Unrestricted",
+    "MapSelect": "Hidden",
     "RankType": "None",
     "PerMapRanking": false,
     "LeaderboardType": "None",
