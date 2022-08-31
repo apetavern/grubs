@@ -198,33 +198,41 @@ public abstract partial class BaseGamemode : BaseState
 		UsedTurn = true;
 
 		TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( null );
-		foreach ( var team in TeamManager.Teams )
-		{
-			foreach ( var grub in team.Grubs )
-			{
-				if ( grub.LifeState == LifeState.Dead )
-					continue;
 
-				foreach ( var zone in TerrainZone.All )
+		bool rerun;
+		do
+		{
+			rerun = false;
+
+			foreach ( var team in TeamManager.Teams )
+			{
+				foreach ( var grub in team.Grubs )
 				{
-					if ( !zone.InZone( grub ) )
+					if ( grub.LifeState == LifeState.Dead )
 						continue;
 
-					zone.Trigger( grub );
+					foreach ( var zone in TerrainZone.All )
+					{
+						if ( !zone.InZone( grub ) )
+							continue;
+
+						zone.Trigger( grub );
+					}
+
+					if ( !grub.HasBeenDamaged )
+						continue;
+
+					rerun = true;
+					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+						await grub.DeathTask;
+
+					await GameTask.Delay( 300 );
 				}
-
-				if ( !grub.HasBeenDamaged )
-					continue;
-
-				if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
-					await grub.DeathTask;
-
-				await GameTask.Delay( 300 );
 			}
-		}
 
-		while ( !IsWorldResolved() )
-			await GameTask.Delay( 100 );
+			while ( !IsWorldResolved() )
+				await GameTask.Delay( 100 );
+		} while ( rerun );
 
 		foreach ( var zone in TerrainZone.All )
 			zone.ExpireAfterTurns--;
