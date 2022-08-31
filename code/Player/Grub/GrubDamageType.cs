@@ -18,7 +18,7 @@ public enum GrubDamageType
 	/// </summary>
 	Fall,
 	/// <summary>
-	/// Touching an instance kill zone.
+	/// Touching an instant kill zone.
 	/// </summary>
 	KillTrigger,
 	/// <summary>

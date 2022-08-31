@@ -105,7 +105,7 @@ public readonly struct GrubDeathReason
 		}
 
 		// Failed to find the right death reason.
-		return "Who knows what the fuck happened";
+		return $"Who knows what the fuck happened to {Grub.Name}";
 	}
 
 	/// <summary>
