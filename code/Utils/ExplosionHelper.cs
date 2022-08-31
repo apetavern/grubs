@@ -3,7 +3,7 @@ using Grubs.Utils.Extensions;
 
 namespace Grubs.Utils;
 
-public static class ExplosionHelper
+public static partial class ExplosionHelper
 {
 	public static void Explode( Vector3 position, Grub source, float radius = 100, float maxDamage = 100 )
 	{
@@ -32,11 +32,19 @@ public static class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		var size = MathX.FloorToInt( (float)Math.Sqrt( radius ) );
+		var size = ((float)Math.Sqrt( radius )).FloorToInt();
 		GrubsGame.Current.TerrainMap.DestructSphere( midpoint, size );
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, size );
 
 		GrubsGame.Current.RegenerateMap();
 		DebugOverlay.Sphere( position, radius, Color.Red, 5 );
+		DoExplosionEffectsAt( To.Everyone, position, radius );
+	}
+	
+	[ClientRpc]
+	public static void DoExplosionEffectsAt( Vector3 position, float radius )
+	{
+		var explosion = Particles.Create( "particles/explosion/grubs_explosion_base.vpcf", position );
+		explosion.SetPosition( 1, new Vector3( radius * 1.2f, 0, 0 ) );
 	}
 }
