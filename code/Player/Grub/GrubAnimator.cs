@@ -4,9 +4,14 @@ public class GrubAnimator : PawnAnimator
 {
 	public override void Simulate()
 	{
-		var controller = (Pawn as Grub)!.Controller;
+		var grub = Pawn as Grub;
+		var controller = grub!.Controller;
 
 		SetAnimParameter( "grounded", controller.IsGrounded );
+		SetAnimParameter( "hardfall", controller.IsHardFalling );
+		// TODO: Make this not hard coded
+		SetAnimParameter( "lowhp", grub.Health < 30 );
+		SetAnimParameter( "explode", grub.LifeState == LifeState.Dying );
 
 		float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length;
 		SetAnimParameter( "velocity", velocity );

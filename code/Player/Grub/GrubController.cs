@@ -16,6 +16,7 @@ public partial class GrubController : BasePlayerController
 	[Net] public float Gravity { get; set; } = 800.0f;
 	[Net] public float AirControl { get; set; } = 120.0f;
 	public bool IsGrounded { get; private set; }
+	public bool IsHardFalling { get; private set; }
 	public float FallVelocity { get; private set; }
 
 	// Aim properties
@@ -166,6 +167,7 @@ public partial class GrubController : BasePlayerController
 
 		if ( FallVelocity > PlayerMaxSafeFallSpeed )
 		{
+			IsHardFalling = true;
 			TakeFallDamage();
 		}
 	}
