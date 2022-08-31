@@ -40,7 +40,7 @@ public static partial class ExplosionHelper
 		DebugOverlay.Sphere( position, radius, Color.Red, 5 );
 		DoExplosionEffectsAt( To.Everyone, position, radius );
 	}
-	
+
 	[ClientRpc]
 	public static void DoExplosionEffectsAt( Vector3 position, float radius )
 	{
