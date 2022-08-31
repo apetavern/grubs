@@ -74,6 +74,14 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// </summary>
 	public bool Resolved => Velocity.IsNearlyZero( 0.1f ) || LifeState == LifeState.Dead;
 
+	/// <summary>
+	/// Whether or not this grub is facing left.
+	/// </summary>
+	public bool FacingLeft => Rotation.z < 0;
+	/// <summary>
+	/// Whether or not this grub is facing right.
+	/// </summary>
+	public bool FacingRight => !FacingLeft;
 	public Grub()
 	{
 		Transmit = TransmitType.Always;
