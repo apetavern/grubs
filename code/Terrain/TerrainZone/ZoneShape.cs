@@ -9,18 +9,18 @@ public abstract partial class ZoneShape : BaseNetworkable
 	/// The zone that this shape is a part of.
 	/// </summary>
 	[Net]
-	public TerrainZone Zone { get; set; }
+	protected TerrainZone Zone { get; set; } = null!;
 
 	/// <summary>
 	/// The offset this shape has from the position of the zone.
 	/// </summary>
 	[Net]
-	public Vector3 Offset { get; set; }
+	protected Vector3 Offset { get; set; }
 
 	/// <summary>
 	/// The position of the zone shape.
 	/// </summary>
-	public Vector3 Position => Zone.Position + Offset;
+	protected Vector3 Position => Zone.Position + Offset;
 
 	/// <summary>
 	/// Sets the offset the shape has from the zone.

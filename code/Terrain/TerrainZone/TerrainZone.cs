@@ -23,7 +23,7 @@ public partial class TerrainZone : BaseNetworkable
 	/// The shape that this zone is taking.
 	/// </summary>
 	[Net]
-	public ZoneShape Shape { get; set; } = BoxShape.WithSize( Vector3.One );
+	protected ZoneShape Shape { get; set; } = BoxShape.WithSize( Vector3.One );
 
 	/// <summary>
 	/// The amount of turns until the zone is removed.

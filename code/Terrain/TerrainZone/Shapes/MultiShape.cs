@@ -6,7 +6,7 @@
 public partial class MultiShape : ZoneShape
 {
 	[Net]
-	private IList<ZoneShape> Shapes { get; set; }
+	public IList<ZoneShape> Shapes { get; set; } = new List<ZoneShape>();
 
 	/// <summary>
 	/// Adds a new shape.

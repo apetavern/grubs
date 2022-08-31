@@ -9,7 +9,7 @@ public partial class BoxShape : ZoneShape
 	/// The size of the box.
 	/// </summary>
 	[Net]
-	public Vector3 Size { get; set; }
+	private Vector3 Size { get; set; } = Vector3.One;
 
 	public override bool InZone( Entity entity )
 	{
