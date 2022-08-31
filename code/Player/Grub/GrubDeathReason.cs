@@ -26,6 +26,11 @@ public readonly struct GrubDeathReason
 	/// </summary>
 	public readonly GrubDamageType SecondReason;
 
+	/// <summary>
+	/// Returns whether or not the grub was killed by hitting a kill trigger.
+	/// </summary>
+	public bool FromKillTrigger => FirstReason == GrubDamageType.KillTrigger || SecondReason == GrubDamageType.KillTrigger;
+
 	public GrubDeathReason( Grub grub, DamageInfo? firstInfo, GrubDamageType firstReason, DamageInfo? secondInfo,
 		GrubDamageType secondReason )
 	{
