@@ -3,8 +3,18 @@ using Grubs.Utils.Extensions;
 
 namespace Grubs.Utils;
 
+/// <summary>
+/// A utility class to use explosions.
+/// </summary>
 public static partial class ExplosionHelper
 {
+	/// <summary>
+	/// Creates an explosion at a given point where a Grub is responsible for it.
+	/// </summary>
+	/// <param name="position">The center point of the explosion.</param>
+	/// <param name="source">The grub responsible for creating this explosion.</param>
+	/// <param name="radius">The radius of the explosion.</param>
+	/// <param name="maxDamage">The max amount of damage the explosion can do to a grub.</param>
 	public static void Explode( Vector3 position, Grub source, float radius = 100, float maxDamage = 100 )
 	{
 		Host.AssertServer();
@@ -37,14 +47,26 @@ public static partial class ExplosionHelper
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, size );
 
 		GrubsGame.Current.RegenerateMap();
-		DebugOverlay.Sphere( position, radius, Color.Red, 5 );
+		if ( ExplosionDebug )
+			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
 		DoExplosionEffectsAt( To.Everyone, position, radius );
 	}
 
+	/// <summary>
+	/// Client receiver to do effects of the explosion/
+	/// </summary>
+	/// <param name="position">The center point of the explosion.</param>
+	/// <param name="radius">The radius of the explosion.</param>
 	[ClientRpc]
 	public static void DoExplosionEffectsAt( Vector3 position, float radius )
 	{
 		var explosion = Particles.Create( "particles/explosion/grubs_explosion_base.vpcf", position );
 		explosion.SetPosition( 1, new Vector3( radius * 1.2f, 0, 0 ) );
 	}
+
+	/// <summary>
+	/// Debug console variable to show the explosions radius.
+	/// </summary>
+	[ConVar.Replicated( "explosion_debug" )]
+	public static bool ExplosionDebug { get; set; }
 }
