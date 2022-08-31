@@ -20,6 +20,8 @@ public partial class GrubsGame : Game
 	[Net]
 	public BaseState CurrentState { get; set; }
 
+	public BaseGamemode CurrentGamemode => CurrentState as BaseGamemode;
+
 	public TerrainMap TerrainMap { get; set; }
 
 	public TerrainModel TerrainModel { get; set; }

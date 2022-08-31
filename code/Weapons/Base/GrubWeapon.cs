@@ -37,7 +37,7 @@ public abstract partial class GrubWeapon : BaseCarriable
 	/// </summary>
 	protected virtual void OnFire()
 	{
-		(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
+		GrubsGame.Current.CurrentGamemode.UseTurn();
 	}
 
 	/// <summary>
@@ -88,7 +88,7 @@ public abstract partial class GrubWeapon : BaseCarriable
 	{
 		// Only fire if our grub is grounded and we haven't used our turn.
 		var controller = (Owner as Team).ActiveGrub.Controller;
-		if ( !controller.IsGrounded || (GrubsGame.Current.CurrentState as BaseGamemode).UsedTurn )
+		if ( !controller.IsGrounded || GrubsGame.Current.CurrentGamemode.UsedTurn )
 			return;
 
 		switch ( FiringType )

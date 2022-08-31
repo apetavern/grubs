@@ -164,7 +164,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 				if ( !zone.InstantKill || !zone.InZone( this ) )
 					continue;
 
-				(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
+				GrubsGame.Current.CurrentGamemode.UseTurn();
 				zone.Trigger( this );
 				ApplyDamage();
 			}

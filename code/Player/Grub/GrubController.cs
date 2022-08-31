@@ -100,7 +100,7 @@ public partial class GrubController : BasePlayerController
 		}
 
 		// Take Input if it is currently the grubs turn. Don't allow movement while jumping.
-		WishVelocity = grub.IsTurn && !isFiring && IsGrounded && !(GrubsGame.Current.CurrentState as BaseGamemode).UsedTurn
+		WishVelocity = grub.IsTurn && !isFiring && IsGrounded && !GrubsGame.Current.CurrentGamemode.UsedTurn
 			? -Input.Left * Vector3.Forward
 			: Vector3.Zero;
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
@@ -173,7 +173,7 @@ public partial class GrubController : BasePlayerController
 	private void TakeFallDamage()
 	{
 		if ( Host.IsServer && TeamManager.Instance.CurrentTeam.ActiveGrub == Pawn )
-			(GrubsGame.Current.CurrentState as BaseGamemode).UseTurn();
+			GrubsGame.Current.CurrentGamemode.UseTurn();
 
 		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
 		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );
