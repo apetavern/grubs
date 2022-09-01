@@ -99,6 +99,8 @@ public abstract partial class GrubWeapon : BaseCarriable
 		EnableDrawing = false;
 		ShowWeapon( grub, false );
 		SetParent( Owner );
+
+		Animator = null;
 	}
 
 	public override void Simulate( Client cl )

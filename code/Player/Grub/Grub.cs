@@ -218,8 +218,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 			}
 		}
 
-		if ( IsTurn )
-			SimulateActiveChild( cl, ActiveChild );
+		SimulateActiveChild( cl, ActiveChild );
 	}
 
 	/// <summary>
@@ -291,7 +290,6 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// <param name="weapon">The weapon to equip.</param>
 	public void EquipWeapon( GrubWeapon? weapon )
 	{
-		ActiveChild?.ShowWeapon( this, false );
 		ActiveChild = weapon;
 	}
 
