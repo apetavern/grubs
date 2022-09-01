@@ -13,6 +13,7 @@ public class GrubAnimator : PawnAnimator
 		SetAnimParameter( "hardfall", controller.IsHardFalling );
 		SetAnimParameter( "lowhp", grub.Health < GameConfig.LowHealthThreshold );
 		SetAnimParameter( "explode", grub.LifeState == LifeState.Dying );
+		SetAnimParameter( "sliding", grub.HasBeenDamaged && !controller.IsHardFalling && !controller.Velocity.IsNearlyZero( 2.5f ) );
 
 		float velocity = Pawn.Velocity.Cross( Vector3.Up ).Length;
 		SetAnimParameter( "velocity", velocity );
