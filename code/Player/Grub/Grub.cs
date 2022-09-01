@@ -105,8 +105,10 @@ public partial class Grub : AnimatedEntity, IResolvable
 		base.Spawn();
 
 		SetModel( "models/citizenworm.vmdl" );
+		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		Name = Rand.FromArray( GameConfig.GrubNames );
 		Health = 100;
+		EnableHitboxes = true;
 
 		Controller = new GrubController();
 		Animator = new GrubAnimator();
