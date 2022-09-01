@@ -108,7 +108,7 @@ public partial class Team : Entity, ISpectator
 	{
 		base.Simulate( cl );
 
-		if ( IsTurn )
+		if ( IsTurn && !GrubsGame.Current.CurrentGamemode.UsedTurn )
 		{
 			var lastWeapon = EquippedWeapon;
 
