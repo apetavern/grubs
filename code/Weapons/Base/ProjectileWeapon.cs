@@ -3,6 +3,9 @@ using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
 
+/// <summary>
+/// A weapon capable of firing projectiles.
+/// </summary>
 public class ProjectileWeapon : GrubWeapon
 {
 	public override bool HasReticle => true;
