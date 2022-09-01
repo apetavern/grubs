@@ -164,11 +164,9 @@ public partial class GrubController : BasePlayerController
 			FallVelocity = MathF.Max( 0.1f, FallVelocity );
 		}
 
-		if ( FallVelocity > PlayerMaxSafeFallSpeed )
-		{
-			IsHardFalling = true;
+		IsHardFalling = FallVelocity > PlayerMaxSafeFallSpeed;
+		if ( IsHardFalling )
 			TakeFallDamage();
-		}
 	}
 
 	private void TakeFallDamage()
