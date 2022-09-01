@@ -30,6 +30,16 @@ public partial class GrubsInventory : BaseNetworkable
 		weapon.OnCarryStart( Owner );
 	}
 
+	public bool IsCarryingType( Type type )
+	{
+		return Items.Any( item => item.GetType() == type );
+	}
+
+	public bool HasAmmo( int index )
+	{
+		return Items[index].Ammo != 0;
+	}
+
 	[ConCmd.Server]
 	public static void EquipItemByIndex( int index )
 	{
@@ -42,15 +52,5 @@ public partial class GrubsInventory : BaseNetworkable
 
 		var inventory = team.Inventory;
 		grub.EquipWeapon( inventory.Items[index] );
-	}
-
-	public bool IsCarryingType( Type type )
-	{
-		return Items.Any( item => item.GetType() == type );
-	}
-
-	public bool HasAmmo( int index )
-	{
-		return Items[index].Ammo != 0;
 	}
 }

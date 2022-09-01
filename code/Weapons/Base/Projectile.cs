@@ -4,6 +4,9 @@ using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
 
+/// <summary>
+/// An arc trace based projectile.
+/// </summary>
 public class Projectile : ModelEntity, IResolvable
 {
 	public bool Resolved => false;

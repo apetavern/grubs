@@ -5,7 +5,7 @@ namespace Grubs.Weapons.Base;
 /// <summary>
 /// A weapon capable of smacking a grub.
 /// </summary>
-public class MeleeWeapon : GrubWeapon
+public abstract class MeleeWeapon : GrubWeapon
 {
 	/// <summary>
 	/// Where the hit zone starts.
