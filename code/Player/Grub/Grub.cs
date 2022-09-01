@@ -279,7 +279,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 			DeathReason = GrubDeathReason.FindReason( this, damageInfos );
 		}
 
-		TakeDamage( DamageInfo.Generic( totalDamage ) );
+		TakeDamage( DamageInfo.Generic( Math.Min( totalDamage, Health ) ) );
 
 		_takeDamage = false;
 		return dead;
