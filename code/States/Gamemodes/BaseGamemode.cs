@@ -197,8 +197,6 @@ public abstract partial class BaseGamemode : BaseState
 
 		UsedTurn = true;
 
-		TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( null );
-
 		bool rerun;
 		do
 		{
@@ -238,6 +236,7 @@ public abstract partial class BaseGamemode : BaseState
 			zone.ExpireAfterTurns--;
 
 		await GameTask.DelaySeconds( 3 );
+		TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( null );
 		return CheckState();
 	}
 
