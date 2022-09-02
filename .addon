@@ -114,6 +114,38 @@
         "ConVarName": "terrain_type",
         "DisplayName": "Terrain Type",
         "DefaultValue": "sand"
+      },
+      "terrain_border": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_border",
+        "DisplayName": "Terrain Border",
+        "DefaultValue": "false"
+      },
+      "terrain_altered": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_altered",
+        "DisplayName": "Use Altered Terrain",
+        "DefaultValue": "true"
+      },
+      "terrain_dilation": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_dilation",
+        "DisplayName": "Terrain Dilation Amount",
+        "DefaultValue": "1",
+        "Minimum": 1,
+        "Maximum": 10
+      },
+      "terrain_resolution": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_resolution",
+        "DisplayName": "Terrain Resolution",
+        "DefaultValue": "25",
+        "Minimum": 1,
+        "Maximum": 50
       }
     }
   }

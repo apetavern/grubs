@@ -64,9 +64,6 @@ public partial class GrubsGame : Game
 
 	public GrubsGame()
 	{
-		TerrainMap = new TerrainMap( 100, 100 );
-		TerrainModel = new TerrainModel();
-
 		if ( IsServer )
 		{
 			CurrentState = new WaitingState();
@@ -77,6 +74,9 @@ public partial class GrubsGame : Game
 		{
 			_ = new Hud();
 		}
+
+		TerrainMap = new TerrainMap( 100, 100 );
+		TerrainModel = new TerrainModel();
 	}
 
 	public override void ClientJoined( Client client )
@@ -175,21 +175,6 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Test command for flipping a bit in the terrain grid.
-	/// </summary>
-	/// <param name="x">The x position of the bit to flip.</param>
-	/// <param name="z">The z position of the bit to flip.</param>
-	[ConCmd.Admin]
-	public static void FlipGridBit( int x, int z )
-	{
-		var grid = Current.TerrainMap.TerrainGrid;
-		grid[x, z] = !grid[x, z];
-
-		Current.RegenerateMap();
-		FlipGridBitClient( To.Everyone, x, z );
-	}
-
-	/// <summary>
 	/// The client receiver to set the seed for the terrain.
 	/// </summary>
 	/// <param name="seed">The new seed for the terrain.</param>
@@ -198,20 +183,6 @@ public partial class GrubsGame : Game
 	{
 		Current.TerrainMap.Seed = seed;
 		Current.RegenerateGrid();
-		Current.RegenerateMap();
-	}
-
-	/// <summary>
-	/// The client receiver to flip a bit in the terrain grid.
-	/// </summary>
-	/// <param name="x">The x position of the bit to flip.</param>
-	/// <param name="z">The y position of the bit to flip.</param>
-	[ClientRpc]
-	public static void FlipGridBitClient( int x, int z )
-	{
-		var grid = Current.TerrainMap.TerrainGrid;
-		grid[x, z] = !grid[x, z];
-
 		Current.RegenerateMap();
 	}
 

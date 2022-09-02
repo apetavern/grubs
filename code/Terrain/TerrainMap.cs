@@ -1,4 +1,6 @@
-﻿namespace Grubs.Terrain;
+﻿using Grubs.Utils;
+
+namespace Grubs.Terrain;
 
 public partial class TerrainMap
 {
@@ -10,9 +12,8 @@ public partial class TerrainMap
 
 	public int Seed { get; set; } = 0;
 
-	public bool HasBorder { get; set; } = false;
-
-	private readonly float surfaceLevel = 0.40f;
+	private readonly float surfaceLevel = 0.50f;
+	private readonly float noiseThreshold = 0.25f;
 	private readonly int borderWidth = 5;
 
 	public TerrainMap()
@@ -26,17 +27,34 @@ public partial class TerrainMap
 		Height = height;
 	}
 
+	/// <summary>
+	/// Generate a terrain grid based on various game configuration options.
+	/// </summary>
 	public void GenerateTerrainGrid()
 	{
-		Log.Info( Host.Name + " " + Seed );
 		TerrainGrid = new bool[Width, Height];
+
+		if ( GameConfig.AlteredTerrain )
+			AlteredGrid();
+		else
+			DefaultGrid();
+
+		if ( GameConfig.TerrainBorder )
+			AddBorder();
+	}
+
+	/// <summary>
+	/// Generate a default terrain grid, using Simplex Noise above a certain surface level.
+	/// </summary>
+	private void DefaultGrid()
+	{
 		for ( int x = 0; x < Width; x++ )
 			for ( int z = 0; z < Height; z++ )
 				TerrainGrid[x, z] = Noise.Simplex( x + Seed, z + Seed ) > surfaceLevel;
+	}
 
-		if ( !HasBorder )
-			return;
-
+	private void AddBorder()
+	{
 		bool[,] borderedMap = new bool[Width + borderWidth * 2, Height + borderWidth * 2];
 		for ( int x = 0; x < borderedMap.GetLength( 0 ); x++ )
 			for ( int z = 0; z < borderedMap.GetLength( 1 ); z++ )
@@ -54,11 +72,190 @@ public partial class TerrainMap
 		TerrainGrid = borderedMap;
 	}
 
+	private void AlteredGrid()
+	{
+		GenerateTurbulentNoise();
+		FindRegions();
+		DiscardRegions();
+		for ( int i = 0; i < GameConfig.DilationAmount; i++ )
+			DilateRegions();
+	}
+
+	/// <summary>
+	/// Generates a turbulent variation of Simplex noise.
+	/// Standard turbulent noise is the absolute value of [-1, 1] noise,
+	/// but since Noise.Simplex returns floats between [0, 1], we multiply it by 2,
+	/// subtract 1, and then take the absolute value. Then, we apply a threshold
+	/// to get our "blobby" terrain.
+	/// </summary>
+	private void GenerateTurbulentNoise()
+	{
+		for ( int x = 0; x < Width; x++ )
+			for ( int z = 0; z < Height; z++ )
+			{
+				var n = Noise.Simplex( x + Seed, z + Seed );
+				n = Math.Abs( (n * 2) - 1 );
+				TerrainGrid[x, z] = n > noiseThreshold;
+			}
+	}
+
+	public int[,] regionGrid { get; set; }
+
+	struct IntVector3
+	{
+		public int x { get; set; }
+		public int y { get; set; }
+		public int z { get; set; }
+
+		public IntVector3( int x, int y, int z )
+		{
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+	}
+
+	/// <summary>
+	/// A region extraction algorithm to determine each unique region of the terrain.
+	/// See: https://en.wikipedia.org/wiki/Connected-component_labeling
+	/// </summary>
+	private void FindRegions()
+	{
+		int label = 2;
+		var queue = new Queue<IntVector3>();
+		regionGrid = new int[Width, Height];
+
+		for ( int x = 0; x < Width; x++ )
+			for ( int z = 0; z < Height; z++ )
+				regionGrid[x, z] = TerrainGrid[x, z] ? 1 : 0;
+
+		for ( int x = 0; x < Width; x++ )
+			for ( int z = 0; z < Height; z++ )
+			{
+				// Terrain exists in this location.
+				if ( regionGrid[x, z] == 1 )
+				{
+					queue.Enqueue( new IntVector3( x, z, label ) );
+					regionGrid[x, z] = label;
+
+					while ( queue.Count > 0 )
+					{
+						var current = queue.Dequeue();
+						if ( current.x - 1 >= 0 )
+						{
+							if ( regionGrid[current.x - 1, current.y] == 1 )
+							{
+								regionGrid[current.x - 1, current.y] = label;
+								queue.Enqueue( new IntVector3( current.x - 1, current.y, label ) );
+							}
+						}
+
+						if ( current.x + 1 < Width )
+						{
+							if ( regionGrid[current.x + 1, current.y] == 1 )
+							{
+								regionGrid[current.x + 1, current.y] = label;
+								queue.Enqueue( new IntVector3( current.x + 1, current.y, label ) );
+							}
+						}
+
+						if ( current.y - 1 >= 0 )
+						{
+							if ( regionGrid[current.x, current.y - 1] == 1 )
+							{
+								regionGrid[current.x, current.y - 1] = label;
+								queue.Enqueue( new IntVector3( current.x, current.y - 1, label ) );
+							}
+						}
+
+						if ( current.y + 1 < Height )
+						{
+							if ( regionGrid[current.x, current.y + 1] == 1 )
+							{
+								regionGrid[current.x, current.y + 1] = label;
+								queue.Enqueue( new IntVector3( current.x, current.y + 1, label ) );
+							}
+						}
+					}
+				}
+
+				label++;
+			}
+	}
+
+	/// <summary>
+	/// Discard regions that do not have members under the set threshold.
+	/// </summary>
+	private void DiscardRegions()
+	{
+		var regionIdsToKeep = new HashSet<int>();
+		int threshold = MathX.FloorToInt( Height * 0.4f );
+
+		for ( int x = 0; x < Width; x++ )
+			for ( int z = 0; z < threshold; z++ )
+				if ( regionGrid[x, z] != 0 )
+					regionIdsToKeep.Add( regionGrid[x, z] );
+
+		for ( int x = 0; x < Width; x++ )
+			for ( int z = 0; z < Height; z++ )
+				if ( !regionIdsToKeep.Contains( regionGrid[x, z] ) )
+					TerrainGrid[x, z] = false;
+	}
+
+	public List<Vector2> PositionsToDilate;
+
+	/// <summary>
+	/// Morphologically dilate the regions to reduce the amount of space in between them.
+	/// </summary>
+	private void DilateRegions()
+	{
+		PositionsToDilate = new List<Vector2>();
+
+		for ( int x = 0; x < Width; x++ )
+			for ( int z = 0; z < Height; z++ )
+				if ( TerrainGrid[x, z] )
+				{
+					CheckForDilationPosition( x, z );
+				}
+
+		foreach ( var position in PositionsToDilate )
+		{
+			TerrainGrid[(int)position.x, (int)position.y] = true;
+		}
+	}
+
+	/// <summary>
+	/// Check neighbours for dilation.
+	/// </summary>
+	/// <param name="x">The x position we are dilating on.</param>
+	/// <param name="z">The y position we are dilating on.</param>
+	private void CheckForDilationPosition( int x, int z )
+	{
+		if ( x - 1 > 0 )
+			PositionsToDilate.Add( new Vector2( x - 1, z ) );
+		if ( z - 1 > 0 )
+			PositionsToDilate.Add( new Vector2( x, z - 1 ) );
+		if ( x - 1 > 0 && z - 1 > 0 )
+			PositionsToDilate.Add( new Vector2( x - 1, z - 1 ) );
+		if ( x + 1 < Width )
+			PositionsToDilate.Add( new Vector2( x + 1, z ) );
+		if ( z + 1 < Height )
+			PositionsToDilate.Add( new Vector2( x, z + 1 ) );
+		if ( x + 1 < Width && z + 1 < Height )
+			PositionsToDilate.Add( new Vector2( x + 1, z + 1 ) );
+	}
+
+	/// <summary>
+	/// Destruct a sphere in the terrain grid.
+	/// </summary>
+	/// <param name="midpoint">The Vector2 midpoint of the sphere to be destructed.</param>
+	/// <param name="size">The size (radius) of the sphere to be destructed.</param>
 	public void DestructSphere( Vector2 midpoint, int size )
 	{
-		Log.Info( $"{Host.Name} {midpoint.x} {midpoint.y}" );
-		float x = midpoint.x / 25f;
-		float y = midpoint.y / 25f;
+		var resolution = GameConfig.TerrainResolution;
+
+		float x = midpoint.x / resolution;
+		float y = midpoint.y / resolution;
 		size /= 2;
 
 		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
@@ -70,15 +267,21 @@ public partial class TerrainMap
 				var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
 				if ( d < size )
 				{
-					// Log.Info( Host.Name + " // deleting " + i + "," + j );
 					TerrainGrid[i, j] = false;
 				}
 			}
 		}
 	}
 
+	/// <summary>
+	/// Get a random spawn location using Sandbox.Rand.
+	/// Traces down to the ground to ensure Grubs do not take damage when spawned.
+	/// </summary>
+	/// <returns>A Vector3 position a Grub can be spawned at.</returns>
 	public Vector3 GetSpawnLocation()
 	{
+		var resolution = GameConfig.TerrainResolution;
+
 		while ( true )
 		{
 			int x = Rand.Int( Width - 1 );
@@ -88,8 +291,8 @@ public partial class TerrainMap
 			{
 				// TODO: Check the angle of the terrain we are hitting to ensure the grub won't fall off immediately.
 				// Also, 25f is the resolution from MarchingSquares, we should be passing it :)
-				var startPos = new Vector3( x * 25f, 0, z * 25f );
-				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * 25f ).WithTag( "solid" ).Run();
+				var startPos = new Vector3( x * resolution, 0, z * resolution );
+				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * resolution ).WithTag( "solid" ).Run();
 				if ( tr.Hit )
 					return tr.EndPosition;
 			}

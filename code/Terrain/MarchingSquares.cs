@@ -14,7 +14,6 @@ public class MarchingSquares
 	public HashSet<int> CheckedVertices = new();
 
 	private readonly float localY = -32f;
-	private readonly float resolution = 25f;
 
 	public ModelBuilder Builder = new();
 
@@ -23,7 +22,7 @@ public class MarchingSquares
 
 	private Dictionary<TerrainTypes, string> TerrainMaterials = new()
 	{
-		{ TerrainTypes.NONE, "materials/dev/dev_measuregeneric01b.vmat" },
+		{ TerrainTypes.NONE, "materials/environment/cereal.vmat" },
 		{ TerrainTypes.DIRT, "materials/environment/dirt_rocks.vmat" },
 		{ TerrainTypes.SAND, "materials/environment/sand_shells.vmat" },
 		{ TerrainTypes.LAVA, "materials/environment/lava_rocks.vmat" },
@@ -34,6 +33,8 @@ public class MarchingSquares
 		TerrainMap map = GrubsGame.Current.TerrainMap;
 		Width = map.Width;
 		Height = map.Height;
+
+		var resolution = GameConfig.TerrainResolution;
 
 		var TerrainGrid = map.TerrainGrid;
 		March( TerrainGrid );
@@ -104,6 +105,8 @@ public class MarchingSquares
 		List<Vector3> wallVertices = new();
 		List<int> wallTriangles = new();
 
+		var resolution = GameConfig.TerrainResolution;
+
 		float wallHeight = 64f;
 
 		Enum.TryParse( GameConfig.TerrainType.ToUpper(), out TerrainTypes matType );
@@ -153,6 +156,8 @@ public class MarchingSquares
 
 	private void March( bool[,] TerrainGrid )
 	{
+		var resolution = GameConfig.TerrainResolution;
+
 		for ( int x = 0; x < TerrainGrid.GetLength( 0 ) - 1; x++ )
 			for ( int z = 0; z < TerrainGrid.GetLength( 1 ) - 1; z++ )
 			{
