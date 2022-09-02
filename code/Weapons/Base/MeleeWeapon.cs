@@ -24,6 +24,10 @@ public abstract class MeleeWeapon : GrubWeapon
 	/// </summary>
 	protected virtual bool HitMulti => true;
 	/// <summary>
+	/// The time in seconds to delay before applying hits. This is to simulate the swing animation and hit when the weapon should collide.
+	/// </summary>
+	protected virtual float HitDelay => 1;
+	/// <summary>
 	/// The damage flags to attach to the damage info.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
@@ -38,6 +42,7 @@ public abstract class MeleeWeapon : GrubWeapon
 	protected override async Task OnFire()
 	{
 		await base.OnFire();
+		await GameTask.DelaySeconds( HitDelay );
 
 		var grubsHit = GetGrubsInSwing();
 		if ( !HitMulti )
