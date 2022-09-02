@@ -1,4 +1,5 @@
-﻿using Grubs.Player;
+﻿using System.Threading.Tasks;
+using Grubs.Player;
 using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
@@ -46,9 +47,9 @@ public abstract class ProjectileWeapon : GrubWeapon
 	/// </summary>
 	protected virtual float ProjectileCollisionExplosionDelay => 0;
 
-	protected override void OnFire()
+	protected override async Task OnFire()
 	{
-		base.OnFire();
+		await base.OnFire();
 
 		var arcTrace = new ArcTrace( Parent, Parent.EyePosition );
 		var segments = ProjectileShouldBounce

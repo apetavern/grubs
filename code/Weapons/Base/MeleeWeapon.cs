@@ -1,4 +1,6 @@
-﻿using Grubs.Player;
+﻿using System.Threading.Tasks;
+using Grubs.Player;
+using Grubs.States;
 
 namespace Grubs.Weapons.Base;
 
@@ -33,9 +35,9 @@ public abstract class MeleeWeapon : GrubWeapon
 	// TODO: Damage falloff based on range?
 	protected virtual float Damage => 1;
 
-	protected override void OnFire()
+	protected override async Task OnFire()
 	{
-		base.OnFire();
+		await base.OnFire();
 
 		var grubsHit = GetGrubsInSwing();
 		if ( !HitMulti )

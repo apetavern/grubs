@@ -1,4 +1,6 @@
-﻿using Grubs.Player;
+﻿using System.Threading.Tasks;
+using Grubs.Player;
+using Grubs.States;
 
 namespace Grubs.Weapons.Base;
 
@@ -6,8 +8,10 @@ namespace Grubs.Weapons.Base;
 /// A weapon the grubs can use.
 /// </summary>
 [Category( "Weapons" )]
-public abstract partial class GrubWeapon : BaseCarriable
+public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 {
+	public bool Resolved => FireTask is null || FireTask.IsCompleted;
+	
 	/// <summary>
 	/// The name of the weapon.
 	/// </summary>
@@ -54,6 +58,8 @@ public abstract partial class GrubWeapon : BaseCarriable
 	/// The animator of the grub that is holding the weapon.
 	/// </summary>
 	protected GrubAnimator? Animator;
+
+	protected Task? FireTask;
 
 	private const int MaxCharge = 100;
 
@@ -130,14 +136,14 @@ public abstract partial class GrubWeapon : BaseCarriable
 				if ( Input.Released( InputButton.PrimaryAttack ) )
 				{
 					IsCharging = false;
-					Fire();
+					FireTask = Fire();
 					Charge = 0;
 				}
 
 				break;
 			case FiringType.Instant:
 				if ( Input.Pressed( InputButton.PrimaryAttack ) )
-					Fire();
+					FireTask = Fire();
 
 				break;
 			default:
@@ -146,18 +152,18 @@ public abstract partial class GrubWeapon : BaseCarriable
 		}
 	}
 
-	private void Fire()
+	private async Task Fire()
 	{
 		(Parent as Grub)!.SetAnimParameter( "fire", true );
 
 		if ( IsServer )
-			OnFire();
+			await OnFire();
 	}
 
 	/// <summary>
 	/// Called when the weapon has been fired.
 	/// </summary>
-	protected virtual void OnFire()
+	protected virtual async Task OnFire()
 	{
 		Host.AssertServer();
 
