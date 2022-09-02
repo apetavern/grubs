@@ -33,6 +33,11 @@ public abstract class MeleeWeapon : GrubWeapon
 	/// </summary>
 	protected virtual DamageFlags DamageFlags => DamageFlags.Blunt;
 	/// <summary>
+	/// The amount of force that will be applied to the grub upon being hit.
+	/// </summary>
+	// TODO: Force falloff based on range?
+	protected virtual float HitForce => 100;
+	/// <summary>
 	/// The amount of damage being hit by the weapon will do.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
@@ -103,7 +108,7 @@ public abstract class MeleeWeapon : GrubWeapon
 	protected virtual void HitGrub( Grub grub )
 	{
 		var dir = (grub.Position - Position).Normal;
-		grub.ApplyAbsoluteImpulse( dir * 100 );
+		grub.ApplyAbsoluteImpulse( dir * HitForce );
 
 		grub.TakeDamage( new DamageInfo
 		{
