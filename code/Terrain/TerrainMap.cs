@@ -257,25 +257,20 @@ public partial class TerrainMap
 	/// </summary>
 	/// <param name="midpoint">The Vector2 midpoint of the sphere to be destructed.</param>
 	/// <param name="size">The size (radius) of the sphere to be destructed.</param>
-	public void DestructSphere( Vector2 midpoint, int size )
+	public void DestructSphere( Vector2 midpoint, float size )
 	{
 		var scale = GameConfig.TerrainScale;
-
-		float x = midpoint.x / scale;
-		float y = midpoint.y / scale;
-		size /= 2;
 
 		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
 		{
 			for ( int j = 0; j < TerrainGrid.GetLength( 1 ); j++ )
 			{
-				var xDiff = Math.Abs( x - i );
-				var yDiff = Math.Abs( y - j );
+				var xDiff = midpoint.x - (i * scale);
+				var yDiff = midpoint.y - (j * scale);
 				var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
+
 				if ( d < size )
-				{
 					TerrainGrid[i, j] = false;
-				}
 			}
 		}
 	}

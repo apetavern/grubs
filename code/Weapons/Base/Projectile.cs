@@ -13,7 +13,7 @@ public class Projectile : ModelEntity, IResolvable
 
 	private Grub Grub { get; set; } = null!;
 	private float Speed { get; set; } = 0.001f;
-	private float ExplosionRadius { get; set; } = 100;
+	private float ExplosionRadius { get; set; } = 1000;
 	private float CollisionExplosionDelaySeconds { get; set; }
 	private List<ArcSegment> Segments { get; set; } = null!;
 

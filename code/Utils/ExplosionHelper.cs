@@ -39,9 +39,8 @@ public static partial class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		var size = ((float)Math.Sqrt( radius )).FloorToInt();
-		GrubsGame.Current.TerrainMap.DestructSphere( midpoint, size );
-		GrubsGame.ExplodeClient( To.Everyone, midpoint, size );
+		GrubsGame.Current.TerrainMap.DestructSphere( midpoint, radius );
+		GrubsGame.ExplodeClient( To.Everyone, midpoint, radius );
 
 		GrubsGame.Current.RegenerateMap();
 		if ( ExplosionDebug )

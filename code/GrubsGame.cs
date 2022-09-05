@@ -197,7 +197,7 @@ public partial class GrubsGame : Game
 	/// <param name="midpoint">The center point of the explosion.</param>
 	/// <param name="size">How big the explosion was.</param>
 	[ClientRpc]
-	public static void ExplodeClient( Vector2 midpoint, int size )
+	public static void ExplodeClient( Vector2 midpoint, float size )
 	{
 		Current.TerrainMap.DestructSphere( midpoint, size );
 		Current.RegenerateMap();

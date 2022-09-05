@@ -18,7 +18,7 @@ public class Grenade : ProjectileWeapon
 	protected override int ProjectileMaxBounces => 5;
 	protected override string ProjectileModel => "models/weapons/grenade/grenade.vmdl";
 	protected override float ProjectileSpeed => 1000;
-	protected override float ProjectileExplosionRadius => 100;
+	protected override float ProjectileExplosionRadius => 75;
 	protected override float ProjectileCollisionExplosionDelay => 3;
 	protected override float ProjectileExplodeAfter => 5;
 }

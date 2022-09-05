@@ -15,6 +15,6 @@ public class Bazooka : ProjectileWeapon
 	protected override float ProjectileForceMultiplier => 0.5f;
 	protected override string ProjectileModel => "models/weapons/shell/shell.vmdl";
 	protected override float ProjectileSpeed => 1000;
-	protected override float ProjectileExplosionRadius => 100;
+	protected override float ProjectileExplosionRadius => 50;
 	protected override float ProjectileExplodeAfter => 5;
 }
