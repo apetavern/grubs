@@ -172,6 +172,24 @@ public partial class Team : Entity, ISpectator
 	{
 		Host.AssertServer();
 
+		foreach ( var assetDefinition in WeaponAsset.All )
+		{
+			var weapon = assetDefinition switch
+			{
+				MeleeWeaponAsset mWep => TypeLibrary.Create<GrubWeapon>( typeof( MeleeWeapon ), new object[] { mWep } ),
+				ProjectileWeaponAsset pWep => TypeLibrary.Create<GrubWeapon>( typeof( ProjectileWeapon ), new object[] { pWep } ),
+				_ => null
+			};
+
+			if ( weapon is null )
+			{
+				Log.Error( $"{assetDefinition.GetType()} is not a recognized {nameof( WeaponAsset )}" );
+				continue;
+			}
+
+			Inventory.Add( weapon );
+		}
+
 		foreach ( var weapon in TypeLibrary.GetDescriptions<GrubWeapon>().Where( weapon => !weapon.IsAbstract ) )
 			Inventory.Add( weapon.Create<GrubWeapon>() );
 	}

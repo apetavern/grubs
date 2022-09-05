@@ -1,0 +1,18 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		HitSize = "50,32,50"
+		HitMulti = true
+		HitDelay = 0.1
+		DamageFlags = "Blunt"
+		HitForce = 1500
+		Damage = 50
+		WeaponName = "Baseball Bat"
+		Model = resource:"models/weapons/baseballbat/baseballbat.vmdl"
+		Icon = null
+		FiringType = "Instant"
+		HoldPose = "Swing"
+		HasReticle = false
+	}
+}

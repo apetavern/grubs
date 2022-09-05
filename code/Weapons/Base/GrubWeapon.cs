@@ -11,27 +11,27 @@ namespace Grubs.Weapons.Base;
 public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 {
 	public bool Resolved => FireTask is null || FireTask.IsCompleted;
-	
+
 	/// <summary>
 	/// The name of the weapon.
 	/// </summary>
-	protected virtual string WeaponName => "";
+	protected virtual string WeaponName => AssetDefinition.WeaponName;
 	/// <summary>
 	/// The path to the weapon model.
 	/// </summary>
-	protected virtual string ModelPath => "";
+	protected virtual string ModelPath => AssetDefinition.Model;
 	/// <summary>
 	/// The way that this weapon fires.
 	/// </summary>
-	protected virtual FiringType FiringType => FiringType.Instant;
+	protected virtual FiringType FiringType => AssetDefinition.FiringType;
 	/// <summary>
 	/// The way that this weapon is held by the grub.
 	/// </summary>
-	protected virtual HoldPose HoldPose => HoldPose.None;
+	protected virtual HoldPose HoldPose => AssetDefinition.HoldPose;
 	/// <summary>
 	/// Whether or not this weapon should have an aim reticle.
 	/// </summary>
-	public virtual bool HasReticle => false;
+	public virtual bool HasReticle => AssetDefinition.HasReticle;
 
 	/// <summary>
 	/// The amount of times this gun can be used before being removed.
@@ -55,21 +55,43 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	private bool WeaponHasHat { get; set; }
 
 	/// <summary>
+	/// The asset definition this weapon is implementing.
+	/// </summary>
+	// TODO: This is cancer https://github.com/Facepunch/sbox-issues/issues/2282
+	protected WeaponAsset AssetDefinition
+	{
+		get => _assetDefinition;
+		init
+		{
+			_assetDefinition = value;
+
+			Name = value.WeaponName;
+			SetModel( value.Model );
+			WeaponHasHat = CheckWeaponForHat();
+		}
+	}
+	[Net]
+	private WeaponAsset _assetDefinition { get; set; }
+
+	/// <summary>
 	/// The animator of the grub that is holding the weapon.
 	/// </summary>
 	protected GrubAnimator? Animator;
 
+	/// <summary>
+	/// The task for firing the weapon
+	/// </summary>
 	protected Task? FireTask;
 
 	private const int MaxCharge = 100;
 
-	public override void Spawn()
+	public GrubWeapon()
 	{
-		base.Spawn();
+	}
 
-		Name = WeaponName;
-		SetModel( ModelPath );
-		WeaponHasHat = CheckWeaponForHat();
+	public GrubWeapon( WeaponAsset assetDefinition )
+	{
+		AssetDefinition = assetDefinition;
 	}
 
 	private bool CheckWeaponForHat()

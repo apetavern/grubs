@@ -7,7 +7,7 @@ namespace Grubs.Weapons.Base;
 /// <summary>
 /// A weapon capable of smacking a grub.
 /// </summary>
-public abstract class MeleeWeapon : GrubWeapon
+public class MeleeWeapon : GrubWeapon
 {
 	/// <summary>
 	/// Where the hit zone starts.
@@ -18,31 +18,41 @@ public abstract class MeleeWeapon : GrubWeapon
 	/// The size of the hit zone.
 	/// <remarks>This may be unused if <see cref="GetGrubsInSwing"/> is overridden.</remarks>
 	/// </summary>
-	protected virtual Vector3 HitSize => Vector3.One;
+	protected virtual Vector3 HitSize => AssetDefinition.HitSize;
 	/// <summary>
 	/// Whether or not the weapon can hit multiple people at once.
 	/// </summary>
-	protected virtual bool HitMulti => true;
+	protected virtual bool HitMulti => AssetDefinition.HitMulti;
 	/// <summary>
 	/// The time in seconds to delay before applying hits. This is to simulate the swing animation and hit when the weapon should collide.
 	/// </summary>
-	protected virtual float HitDelay => 1;
+	protected virtual float HitDelay => AssetDefinition.HitDelay;
 	/// <summary>
 	/// The damage flags to attach to the damage info.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
-	protected virtual DamageFlags DamageFlags => DamageFlags.Blunt;
+	protected virtual DamageFlags DamageFlags => AssetDefinition.DamageFlags;
 	/// <summary>
 	/// The amount of force that will be applied to the grub upon being hit.
 	/// </summary>
 	// TODO: Force falloff based on range?
-	protected virtual float HitForce => 100;
+	protected virtual float HitForce => AssetDefinition.HitForce;
 	/// <summary>
 	/// The amount of damage being hit by the weapon will do.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
 	// TODO: Damage falloff based on range?
-	protected virtual float Damage => 1;
+	protected virtual float Damage => AssetDefinition.Damage;
+
+	protected new MeleeWeaponAsset AssetDefinition => (base.AssetDefinition as MeleeWeaponAsset)!;
+
+	public MeleeWeapon()
+	{
+	}
+
+	public MeleeWeapon( MeleeWeaponAsset assetDefinition ) : base( assetDefinition )
+	{
+	}
 
 	protected override async Task OnFire()
 	{

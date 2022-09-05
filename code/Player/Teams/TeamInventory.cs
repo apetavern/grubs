@@ -13,7 +13,7 @@ public partial class GrubsInventory : BaseNetworkable
 			return;
 
 		// Handle picking up a weapon we already have.
-		if ( IsCarryingType( weapon.GetType() ) )
+		if ( IsCarrying( weapon ) )
 		{
 			var existingWeapon = Items.FirstOrDefault( item => item.GetType() == weapon.GetType() );
 			// -1 represents unlimited ammo, so don't add ammo in this case.
@@ -30,9 +30,9 @@ public partial class GrubsInventory : BaseNetworkable
 		weapon.OnCarryStart( Owner );
 	}
 
-	public bool IsCarryingType( Type type )
+	public bool IsCarrying( GrubWeapon weapon )
 	{
-		return Items.Any( item => item.GetType() == type );
+		return Items.Any( item => item.Name == weapon.Name );
 	}
 
 	public bool HasAmmo( int index )
