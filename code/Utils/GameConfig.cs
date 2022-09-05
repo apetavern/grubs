@@ -39,10 +39,16 @@ public static class GameConfig
 	public static string TerrainType { get; set; } = "sand";
 
 	/// <summary>
-	/// The resolution of the terrain.
+	/// The scale of the terrain.
+	/// </summary>
+	[ConVar.Replicated( "terrain_scale" )]
+	public static int TerrainScale { get; set; } = 25;
+
+	/// <summary>
+	/// The resolution of the noise for the terrain.
 	/// </summary>
 	[ConVar.Replicated( "terrain_resolution" )]
-	public static float TerrainResolution { get; set; } = 25f;
+	public static float TerrainResolution { get; set; } = 0.5f;
 
 	/// <summary>
 	/// Whether the terrain has a bordered wall surrounding it.

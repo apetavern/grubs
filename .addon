@@ -135,7 +135,6 @@
         "ConVarName": "terrain_dilation",
         "DisplayName": "Terrain Dilation Amount",
         "DefaultValue": "1",
-        "Minimum": 1,
         "Maximum": 10
       },
       "terrain_resolution": {
@@ -143,6 +142,14 @@
         "Choices": [],
         "ConVarName": "terrain_resolution",
         "DisplayName": "Terrain Resolution",
+        "DefaultValue": "0.5",
+        "Maximum": 1
+      },
+      "terrain_scale": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_scale",
+        "DisplayName": "Terrain Scale",
         "DefaultValue": "25",
         "Minimum": 1,
         "Maximum": 50

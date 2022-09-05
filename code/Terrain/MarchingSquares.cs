@@ -34,7 +34,7 @@ public class MarchingSquares
 		Width = map.Width;
 		Height = map.Height;
 
-		var resolution = GameConfig.TerrainResolution;
+		var scale = GameConfig.TerrainScale;
 
 		var TerrainGrid = map.TerrainGrid;
 		March( TerrainGrid );
@@ -84,7 +84,7 @@ public class MarchingSquares
 		// TODO: Calculate normal/tangent.
 		var mesh = new Mesh( Material.Load( TerrainMaterials[matType] ) )
 		{
-			Bounds = new BBox( new Vector3( 0, localY, 0 ), new Vector3( Width * resolution, localY + 64, Height * resolution ) )
+			Bounds = new BBox( new Vector3( 0, localY, 0 ), new Vector3( Width * scale, localY + 64, Height * scale ) )
 		};
 
 		mesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
@@ -105,14 +105,14 @@ public class MarchingSquares
 		List<Vector3> wallVertices = new();
 		List<int> wallTriangles = new();
 
-		var resolution = GameConfig.TerrainResolution;
+		var scale = GameConfig.TerrainScale;
 
 		float wallHeight = 64f;
 
 		Enum.TryParse( GameConfig.TerrainType.ToUpper(), out TerrainTypes matType );
 		var wallMesh = new Mesh( Material.Load( TerrainMaterials[matType] ) )
 		{
-			Bounds = new BBox( 0, new Vector3( Width * resolution, wallHeight, Height * resolution ) )
+			Bounds = new BBox( 0, new Vector3( Width * scale, wallHeight, Height * scale ) )
 		};
 
 		foreach ( List<int> outline in Outlines )
@@ -156,23 +156,23 @@ public class MarchingSquares
 
 	private void March( bool[,] TerrainGrid )
 	{
-		var resolution = GameConfig.TerrainResolution;
+		var scale = GameConfig.TerrainScale;
 
 		for ( int x = 0; x < TerrainGrid.GetLength( 0 ) - 1; x++ )
 			for ( int z = 0; z < TerrainGrid.GetLength( 1 ) - 1; z++ )
 			{
-				float xRes = x * resolution;
-				float zRes = z * resolution;
+				float xRes = x * scale;
+				float zRes = z * scale;
 
-				var middleTop = new Node( new Vector3( xRes + resolution * 0.5f, localY, zRes ) );
-				var middleRight = new Node( new Vector3( xRes + resolution, localY, zRes + resolution * 0.5f ) );
-				var middleBottom = new Node( new Vector3( xRes + resolution * 0.5f, localY, zRes + resolution ) );
-				var middleLeft = new Node( new Vector3( xRes, localY, zRes + resolution * 0.5f ) );
+				var middleTop = new Node( new Vector3( xRes + scale * 0.5f, localY, zRes ) );
+				var middleRight = new Node( new Vector3( xRes + scale, localY, zRes + scale * 0.5f ) );
+				var middleBottom = new Node( new Vector3( xRes + scale * 0.5f, localY, zRes + scale ) );
+				var middleLeft = new Node( new Vector3( xRes, localY, zRes + scale * 0.5f ) );
 
 				var topLeft = new Node( new Vector3( xRes, localY, zRes ) );
-				var topRight = new Node( new Vector3( xRes + resolution, localY, zRes ) );
-				var bottomRight = new Node( new Vector3( xRes + resolution, localY, zRes + resolution ) );
-				var bottomLeft = new Node( new Vector3( xRes, localY, zRes + resolution ) );
+				var topRight = new Node( new Vector3( xRes + scale, localY, zRes ) );
+				var bottomRight = new Node( new Vector3( xRes + scale, localY, zRes + scale ) );
+				var bottomLeft = new Node( new Vector3( xRes, localY, zRes + scale ) );
 
 				bool c1 = TerrainGrid[x, z];
 				bool c2 = TerrainGrid[x + 1, z];

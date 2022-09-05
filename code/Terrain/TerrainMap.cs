@@ -48,9 +48,11 @@ public partial class TerrainMap
 	/// </summary>
 	private void DefaultGrid()
 	{
+		var res = GameConfig.TerrainResolution;
+
 		for ( int x = 0; x < Width; x++ )
 			for ( int z = 0; z < Height; z++ )
-				TerrainGrid[x, z] = Noise.Simplex( x + Seed, z + Seed ) > surfaceLevel;
+				TerrainGrid[x, z] = Noise.Simplex( (x + Seed) * res, (z + Seed) * res ) > surfaceLevel;
 	}
 
 	private void AddBorder()
@@ -90,10 +92,12 @@ public partial class TerrainMap
 	/// </summary>
 	private void GenerateTurbulentNoise()
 	{
+		var res = GameConfig.TerrainResolution;
+
 		for ( int x = 0; x < Width; x++ )
 			for ( int z = 0; z < Height; z++ )
 			{
-				var n = Noise.Simplex( x + Seed, z + Seed );
+				var n = Noise.Simplex( (x + Seed) * res, (z + Seed) * res );
 				n = Math.Abs( (n * 2) - 1 );
 				TerrainGrid[x, z] = n > noiseThreshold;
 			}
@@ -252,10 +256,10 @@ public partial class TerrainMap
 	/// <param name="size">The size (radius) of the sphere to be destructed.</param>
 	public void DestructSphere( Vector2 midpoint, int size )
 	{
-		var resolution = GameConfig.TerrainResolution;
+		var scale = GameConfig.TerrainScale;
 
-		float x = midpoint.x / resolution;
-		float y = midpoint.y / resolution;
+		float x = midpoint.x / scale;
+		float y = midpoint.y / scale;
 		size /= 2;
 
 		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
@@ -280,7 +284,7 @@ public partial class TerrainMap
 	/// <returns>A Vector3 position a Grub can be spawned at.</returns>
 	public Vector3 GetSpawnLocation()
 	{
-		var resolution = GameConfig.TerrainResolution;
+		var scale = GameConfig.TerrainScale;
 
 		while ( true )
 		{
@@ -291,8 +295,8 @@ public partial class TerrainMap
 			{
 				// TODO: Check the angle of the terrain we are hitting to ensure the grub won't fall off immediately.
 				// Also, 25f is the resolution from MarchingSquares, we should be passing it :)
-				var startPos = new Vector3( x * resolution, 0, z * resolution );
-				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * resolution ).WithTag( "solid" ).Run();
+				var startPos = new Vector3( x * scale, 0, z * scale );
+				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * scale ).WithTag( "solid" ).Run();
 				if ( tr.Hit )
 					return tr.EndPosition;
 			}
