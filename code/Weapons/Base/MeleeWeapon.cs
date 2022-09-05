@@ -47,7 +47,8 @@ public abstract class MeleeWeapon : GrubWeapon
 	protected override async Task OnFire()
 	{
 		await base.OnFire();
-		await GameTask.DelaySeconds( HitDelay );
+		if ( HitDelay > 0 )
+			await GameTask.DelaySeconds( HitDelay );
 
 		var grubsHit = GetGrubsInSwing();
 		if ( !HitMulti )
