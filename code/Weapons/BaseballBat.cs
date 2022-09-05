@@ -12,6 +12,6 @@ public class BaseballBat : MeleeWeapon
 	protected override HoldPose HoldPose => HoldPose.Swing;
 
 	protected override Vector3 HitSize => new( 50, 32, 50 );
-	protected override float HitForce => 500;
-	protected override float Damage => 25;
+	protected override float HitForce => 1500;
+	protected override float Damage => 50;
 }

@@ -270,7 +270,7 @@ public partial class GrubController : BasePlayerController
 
 		mover.TryMoveWithStep( Time.Delta, StepSize );
 
-		Position = mover.Position;
+		Position = mover.Position.WithY( 0f );
 		Velocity = mover.Velocity;
 	}
 
@@ -282,7 +282,7 @@ public partial class GrubController : BasePlayerController
 
 		mover.TryMove( Time.Delta );
 
-		Position = mover.Position;
+		Position = mover.Position.WithY( 0f );
 		Velocity = mover.Velocity;
 	}
 
