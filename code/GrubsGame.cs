@@ -167,6 +167,7 @@ public partial class GrubsGame : Game
 		if ( Host.IsClient )
 			return;
 
+		Rand.SetSeed( (int)Time.Now );
 		Current.Seed = Rand.Int( 99999 );
 		Current.TerrainMap.Seed = Current.Seed;
 		SetSeedClient( To.Everyone, Current.Seed );
