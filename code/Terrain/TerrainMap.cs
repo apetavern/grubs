@@ -18,6 +18,9 @@ public partial class TerrainMap
 
 	public TerrainMap()
 	{
+		Rand.SetSeed( (int)Time.Now );
+		Seed = Rand.Int( 100000 );
+
 		GenerateTerrainGrid();
 	}
 

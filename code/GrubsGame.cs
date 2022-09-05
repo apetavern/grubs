@@ -74,9 +74,6 @@ public partial class GrubsGame : Game
 		{
 			_ = new Hud();
 		}
-
-		TerrainMap = new TerrainMap( 100, 100 );
-		TerrainModel = new TerrainModel();
 	}
 
 	public override void ClientJoined( Client client )
@@ -173,6 +170,13 @@ public partial class GrubsGame : Game
 		SetSeedClient( To.Everyone, Current.Seed );
 		Current.RegenerateGrid();
 		Current.RegenerateMap();
+	}
+
+	[ClientRpc]
+	public static void InitializeTerrainClient()
+	{
+		Current.TerrainMap = new TerrainMap( 100, 100 );
+		Current.TerrainModel = new TerrainModel();
 	}
 
 	/// <summary>

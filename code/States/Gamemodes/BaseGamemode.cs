@@ -41,6 +41,10 @@ public abstract partial class BaseGamemode : BaseState
 			return;
 		}
 
+		GrubsGame.Current.TerrainMap = new TerrainMap( 100, 100 );
+		GrubsGame.Current.TerrainModel = new TerrainModel();
+		GrubsGame.InitializeTerrainClient( To.Everyone );
+
 		TeamManager = new TeamManager();
 
 		var killBoundry = new MultiShape()
