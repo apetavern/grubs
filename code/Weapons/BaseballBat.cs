@@ -14,4 +14,5 @@ public class BaseballBat : MeleeWeapon
 	protected override Vector3 HitSize => new( 50, 32, 50 );
 	protected override float HitForce => 1500;
 	protected override float Damage => 50;
+	protected override float HitDelay => 0.1f;
 }
