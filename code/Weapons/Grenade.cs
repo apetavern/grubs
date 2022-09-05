@@ -20,4 +20,5 @@ public class Grenade : ProjectileWeapon
 	protected override float ProjectileSpeed => 1000;
 	protected override float ProjectileExplosionRadius => 100;
 	protected override float ProjectileCollisionExplosionDelay => 3;
+	protected override float ProjectileExplodeAfter => 5;
 }
