@@ -5,13 +5,13 @@ using Grubs.Utils.Event;
 
 namespace Grubs.UI;
 
-[UseTemplate]
 public class Hud : RootPanel
 {
 	private WaitingStatus? _waitingStatus;
 	private TurnTime? _turnTime;
 	private AimReticle? _aimReticle;
-	private List<DamageNumber> _damageNumbers = new();
+	private readonly List<DamageNumber> _damageNumbers = new();
+	private EndScreen? _endScreen;
 
 	public Hud()
 	{
@@ -37,6 +37,19 @@ public class Hud : RootPanel
 		_waitingStatus?.Delete();
 	}
 
+	[GrubsEvent.EnterState.Client( nameof( GameEndState ) )]
+	private void OnEnterGameEnd()
+	{
+		_endScreen?.Delete();
+		_endScreen = AddChild<EndScreen>();
+	}
+
+	[GrubsEvent.LeaveState.Client( nameof( GameEndState ) )]
+	private void OnLeaveGameEnd()
+	{
+		_endScreen?.Delete();
+	}
+
 	[GrubsEvent.EnterGamemode.Client]
 	private void OnEnterPlay()
 	{
@@ -51,9 +64,12 @@ public class Hud : RootPanel
 	private void OnLeavePlay()
 	{
 		_turnTime?.Delete();
+		_turnTime = null;
 		_aimReticle?.Delete();
+		_aimReticle = null;
 		foreach ( var damageNumber in _damageNumbers )
 			damageNumber.Delete();
+		_damageNumbers.Clear();
 	}
 
 	[GrubsEvent.GrubHurt.Client]

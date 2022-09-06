@@ -294,7 +294,7 @@ public abstract partial class BaseGamemode : BaseState
 
 		if ( teamsDead == TeamManager.Teams.Count - 1 )
 		{
-			SwitchStateTo<GameEndState>( GameResultType.TeamWon, lastTeamAlive!.Clients );
+			SwitchStateTo<GameEndState>( GameResultType.TeamWon, lastTeamAlive!.TeamName, lastTeamAlive.Clients );
 			return true;
 		}
 
