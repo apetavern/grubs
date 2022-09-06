@@ -17,6 +17,14 @@ public partial class WaitingState : BaseState
 	/// </summary>
 	public bool IsStarting => Client.All.Count >= GameConfig.MinimumPlayers && TimeUntilStart > 0;
 
+	protected override void Enter( bool forced, params object[] parameters )
+	{
+		base.Enter( forced, parameters );
+
+		if ( Client.All.Count >= GameConfig.MinimumPlayers )
+			TimeUntilStart = 10;
+	}
+
 	public override void ClientJoined( Client cl )
 	{
 		base.ClientJoined( cl );
