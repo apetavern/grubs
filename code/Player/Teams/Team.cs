@@ -1,4 +1,5 @@
-﻿using Grubs.Utils;
+﻿using Grubs.States;
+using Grubs.Utils;
 using Grubs.Weapons.Base;
 
 namespace Grubs.Player;
@@ -107,6 +108,9 @@ public partial class Team : Entity, ISpectator
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
+
+		if ( GrubsGame.Current.CurrentState is not BaseGamemode )
+			return;
 
 		if ( IsTurn && !GrubsGame.Current.CurrentGamemode.UsedTurn )
 		{
