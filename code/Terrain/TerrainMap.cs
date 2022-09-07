@@ -6,9 +6,9 @@ public partial class TerrainMap
 {
 	public bool[,] TerrainGrid { get; set; }
 
-	public int Width { get; set; } = 100;
+	public int Width => GameConfig.TerrainWidth;
 
-	public int Height { get; set; } = 100;
+	public int Height => GameConfig.TerrainHeight;
 
 	public int Seed { get; set; } = 0;
 
@@ -22,12 +22,6 @@ public partial class TerrainMap
 		Seed = Rand.Int( 100000 );
 
 		GenerateTerrainGrid();
-	}
-
-	public TerrainMap( int width, int height ) : this()
-	{
-		Width = width;
-		Height = height;
 	}
 
 	/// <summary>
@@ -288,7 +282,6 @@ public partial class TerrainMap
 		{
 			int x = Rand.Int( Width - 1 );
 			int z = Rand.Int( Height - 1 );
-
 			if ( !TerrainGrid[x, z] )
 			{
 				// TODO: Check the angle of the terrain we are hitting to ensure the grub won't fall off immediately.

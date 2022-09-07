@@ -175,7 +175,7 @@ public partial class GrubsGame : Game
 	[ClientRpc]
 	public static void InitializeTerrainClient()
 	{
-		Current.TerrainMap = new TerrainMap( 100, 100 );
+		Current.TerrainMap = new TerrainMap();
 		Current.TerrainModel = new TerrainModel();
 	}
 

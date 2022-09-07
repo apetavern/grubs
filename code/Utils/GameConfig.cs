@@ -39,6 +39,18 @@ public static class GameConfig
 	public static string TerrainType { get; set; } = "sand";
 
 	/// <summary>
+	/// The width of the terrain grid.
+	/// </summary>
+	[ConVar.Replicated( "terrain_width" )]
+	public static int TerrainWidth { get; set; } = 150;
+
+	/// <summary>
+	/// The height of the terrain grid.
+	/// </summary>
+	[ConVar.Replicated( "terrain_height" )]
+	public static int TerrainHeight { get; set; } = 100;
+
+	/// <summary>
 	/// The scale of the terrain.
 	/// </summary>
 	[ConVar.Replicated( "terrain_scale" )]
