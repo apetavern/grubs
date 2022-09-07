@@ -138,7 +138,7 @@ public class Projectile : ModelEntity, IResolvable
 		if ( ProjectileDebug )
 			DrawSegments();
 
-		if (Segments is not null && Segments.Count > 0)
+		if ( Segments is not null && Segments.Count > 0 )
 		{
 			HandleSegmentTick();
 		}
@@ -146,7 +146,7 @@ public class Projectile : ModelEntity, IResolvable
 		{
 			HandlePhysicsTick();
 		}
-		
+
 	}
 
 	private void HandleSegmentTick()

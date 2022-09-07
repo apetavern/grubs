@@ -16,17 +16,17 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// The name of the weapon.
 	/// </summary>
 	protected virtual string WeaponName => AssetDefinition.WeaponName;
-	
+
 	/// <summary>
 	/// The path to the weapon model.
 	/// </summary>
 	protected virtual string ModelPath => AssetDefinition.Model;
-	
+
 	/// <summary>
 	/// The way that this weapon fires.
 	/// </summary>
 	protected virtual FiringType FiringType => AssetDefinition.FiringType;
-	
+
 	/// <summary>
 	/// The way that this weapon is held by the grub.
 	/// </summary>
@@ -36,7 +36,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// The time in seconds to delay before un-equipping the weapon after use.
 	/// </summary>
 	protected virtual float UnequipAfter => AssetDefinition.UnequipAfter;
-	
+
 	/// <summary>
 	/// Whether or not this weapon should have an aim reticle.
 	/// </summary>
@@ -193,7 +193,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 
 			if ( !GrubsGame.Current.CurrentGamemode.UsedTurn )
 				return;
-			
+
 			if ( UnequipAfter > 0 )
 				await GameTask.DelaySeconds( UnequipAfter );
 			(Parent as Grub)!.EquipWeapon( null );

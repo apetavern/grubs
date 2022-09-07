@@ -37,7 +37,7 @@ public class WeaponAsset : GameResource
 	//
 	[Property, Category( "Weapon" )]
 	public float UnequipAfter { get; set; } = 0;
-	
+
 	protected override void PostLoad()
 	{
 		base.PostLoad();
