@@ -100,7 +100,7 @@ public abstract partial class BaseGamemode : BaseState
 	protected abstract void SetupParticipants( List<Client> participants );
 
 	/// <summary>
-	/// Sets upp all spectators to watch the game.
+	/// Sets up all spectators to watch the game.
 	/// </summary>
 	/// <param name="spectators"></param>
 	protected virtual void SetupSpectators( List<Client> spectators )

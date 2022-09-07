@@ -35,7 +35,7 @@ public class EndScreen : Panel
 				break;
 			case GameResultType.TeamWon:
 				TitleLabel.Text = "Game Over";
-				SubtitleLabel.Text = $"Team {GameEndState.WinningTeamName} have won!";
+				SubtitleLabel.Text = $"Team {GameEndState.WinningTeamName} has won!";
 
 				TitleLabel.SetClass( $"team-{GameEndState.WinningTeamName}", true );
 				SubtitleLabel.SetClass( $"team-{GameEndState.WinningTeamName}", true );
