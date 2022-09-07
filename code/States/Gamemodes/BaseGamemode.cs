@@ -47,7 +47,7 @@ public abstract partial class BaseGamemode : BaseState
 
 		TeamManager = new TeamManager();
 
-		var killBoundry = new MultiShape()
+		var killBoundary = new MultiShape()
 			// Bottom bar
 			.AddShape( BoxShape.WithSize( new Vector3( 7400, 32, 10000 ) ).WithOffset( new Vector3( -2500, 0, -10200 ) ) )
 			// Left bar
@@ -59,7 +59,7 @@ public abstract partial class BaseGamemode : BaseState
 			.WithInstantKill( true )
 			.WithDamage( 9999 )
 			.WithPosition( Vector3.Zero )
-			.WithShape( killBoundry )
+			.WithShape( killBoundary )
 			.Finish();
 
 		List<Client> participants;
