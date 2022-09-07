@@ -284,8 +284,6 @@ public partial class TerrainMap
 			int z = Rand.Int( Height - 1 );
 			if ( !TerrainGrid[x, z] )
 			{
-				// TODO: Check the angle of the terrain we are hitting to ensure the grub won't fall off immediately.
-				// Also, 25f is the resolution from MarchingSquares, we should be passing it :)
 				var startPos = new Vector3( x * scale, 0, z * scale );
 				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * scale ).WithTag( "solid" ).Run();
 				if ( tr.Hit )
