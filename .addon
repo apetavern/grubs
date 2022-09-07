@@ -66,12 +66,12 @@
         "Minimum": 3,
         "Maximum": 100
       },
-      "worm_count": {
+      "grub_count": {
         "DisplayType": "Integer",
         "Choices": [],
-        "ConVarName": "worm_count",
-        "DisplayName": "Worm Count",
-        "DefaultValue": "10",
+        "ConVarName": "grub_count",
+        "DisplayName": "Grub Count",
+        "DefaultValue": "4",
         "Minimum": 1,
         "Maximum": 100
       },
