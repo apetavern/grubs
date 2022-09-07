@@ -201,8 +201,6 @@ public abstract partial class BaseGamemode : BaseState
 
 		UsedTurn = true;
 
-		TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( null );
-
 		bool rerun;
 		do
 		{

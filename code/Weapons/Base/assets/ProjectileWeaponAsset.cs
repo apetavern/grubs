@@ -9,30 +9,30 @@ public class ProjectileWeaponAsset : WeaponAsset
 	//
 	// Projectile weapon specific
 	//
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public float ProjectileForceMultiplier { get; set; } = 1;
 
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public bool ProjectileShouldBounce { get; set; } = false;
 
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public bool ProjectileShouldUseTrace { get; set; } = true;
 
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public int ProjectileMaxBounces { get; set; } = 0;
 
-	[Property, Category( "Projectile" ), ResourceType( "vmdl" )]
+	[Property, Category( "Weapon" ), ResourceType( "vmdl" )]
 	public string ProjectileModel { get; set; }
 
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public float ProjectileSpeed { get; set; } = 1000;
 
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public float ProjectileExplosionRadius { get; set; } = 100;
 
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public float ProjectileExplodeAfter { get; set; } = 0;
 
-	[Property, Category( "Projectile" )]
+	[Property, Category( "Weapon" )]
 	public float ProjectileCollisionExplosionDelay { get; set; } = 0;
 }

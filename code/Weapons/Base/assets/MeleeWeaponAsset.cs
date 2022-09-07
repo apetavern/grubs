@@ -9,21 +9,21 @@ public class MeleeWeaponAsset : WeaponAsset
 	//
 	// Melee weapon specific
 	//
-	[Property, Category( "Melee" )]
+	[Property, Category( "Weapon" )]
 	public Vector3 HitSize { get; set; } = Vector3.One;
 
-	[Property, Category( "Melee" )]
+	[Property, Category( "Weapon" )]
 	public bool HitMulti { get; set; } = true;
 
-	[Property, Category( "Melee" )]
+	[Property, Category( "Weapon" )]
 	public float HitDelay { get; set; } = 1;
 
-	[Property, Category( "Melee" )]
+	[Property, Category( "Weapon" )]
 	public DamageFlags DamageFlags { get; set; } = DamageFlags.Blunt;
 
-	[Property, Category( "Melee" )]
+	[Property, Category( "Weapon" )]
 	public float HitForce { get; set; } = 100;
 
-	[Property, Category( "Melee" )]
+	[Property, Category( "Weapon" )]
 	public float Damage { get; set; } = 1;
 }

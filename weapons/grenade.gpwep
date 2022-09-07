@@ -17,5 +17,6 @@
 		FiringType = "Charged"
 		HoldPose = "Throwable"
 		HasReticle = true
+		UnequipAfter = 0.5
 	}
 }

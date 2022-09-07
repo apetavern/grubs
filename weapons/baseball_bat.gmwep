@@ -14,5 +14,6 @@
 		FiringType = "Instant"
 		HoldPose = "Swing"
 		HasReticle = false
+		UnequipAfter = 0.5
 	}
 }

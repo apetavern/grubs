@@ -32,6 +32,12 @@ public class WeaponAsset : GameResource
 	[Property, Category( "Aim" )]
 	public bool HasReticle { get; set; } = false;
 
+	//
+	// Weapon related
+	//
+	[Property, Category( "Weapon" )]
+	public float UnequipAfter { get; set; } = 0;
+	
 	protected override void PostLoad()
 	{
 		base.PostLoad();

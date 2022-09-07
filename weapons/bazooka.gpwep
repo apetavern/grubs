@@ -4,6 +4,7 @@
 	{
 		ProjectileForceMultiplier = 0.5
 		ProjectileShouldBounce = false
+		ProjectileShouldUseTrace = true
 		ProjectileMaxBounces = 0
 		ProjectileModel = resource:"models/weapons/shell/shell.vmdl"
 		ProjectileSpeed = 1000
@@ -16,5 +17,6 @@
 		FiringType = "Charged"
 		HoldPose = "Bazooka"
 		HasReticle = true
+		UnequipAfter = 0.5
 	}
 }
