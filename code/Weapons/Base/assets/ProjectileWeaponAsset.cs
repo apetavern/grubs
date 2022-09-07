@@ -16,6 +16,9 @@ public class ProjectileWeaponAsset : WeaponAsset
 	public bool ProjectileShouldBounce { get; set; } = false;
 
 	[Property, Category( "Projectile" )]
+	public bool ProjectileShouldUseTrace { get; set; } = true;
+
+	[Property, Category( "Projectile" )]
 	public int ProjectileMaxBounces { get; set; } = 0;
 
 	[Property, Category( "Projectile" ), ResourceType( "vmdl" )]

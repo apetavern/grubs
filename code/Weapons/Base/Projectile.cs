@@ -16,6 +16,7 @@ public class Projectile : ModelEntity, IResolvable
 	private float ExplosionRadius { get; set; } = 1000;
 	private float CollisionExplosionDelaySeconds { get; set; }
 	private List<ArcSegment> Segments { get; set; } = null!;
+	private Vector3 PhysicsImpulse { get; set; }
 
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
@@ -98,6 +99,13 @@ public class Projectile : ModelEntity, IResolvable
 		return this;
 	}
 
+	public Projectile UsePhysicsImpulse( Vector3 force )
+	{
+		// TODO: Implement physics impulse.
+
+		return this;
+	}
+
 	/// <summary>
 	/// Verifies that the projectile has its basic information set.
 	/// </summary>
@@ -130,6 +138,19 @@ public class Projectile : ModelEntity, IResolvable
 		if ( ProjectileDebug )
 			DrawSegments();
 
+		if (Segments is not null && Segments.Count > 0)
+		{
+			HandleSegmentTick();
+		}
+		else
+		{
+			HandlePhysicsTick();
+		}
+		
+	}
+
+	private void HandleSegmentTick()
+	{
 		if ( (Segments[0].EndPos - Position).IsNearlyZero( 2.5f ) )
 		{
 			if ( Segments.Count > 1 )
@@ -142,6 +163,11 @@ public class Projectile : ModelEntity, IResolvable
 
 		Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
 		Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, Time.Delta / Speed );
+	}
+
+	private void HandlePhysicsTick()
+	{
+		// TODO: Handle physics on tick.
 	}
 
 	private void OnCollision()

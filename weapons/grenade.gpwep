@@ -4,6 +4,7 @@
 	{
 		ProjectileForceMultiplier = 0.4
 		ProjectileShouldBounce = true
+		ProjectileShouldUseTrace = false
 		ProjectileMaxBounces = 5
 		ProjectileModel = resource:"models/weapons/grenade/grenade.vmdl"
 		ProjectileSpeed = 1000
