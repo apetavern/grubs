@@ -2,8 +2,7 @@
 {
 	_class = "CParticleSystemDefinition"
 	m_nBehaviorVersion = 10
-	m_flConstantLifespan = 0.25
-	m_nMaxParticles = 3
+	m_nMaxParticles = 25
 	m_controlPointConfigurations = 
 	[
 		{
@@ -231,7 +230,6 @@
 					m_vDomainMaxs = [ 1.0, 1.0 ]
 				}
 			}
-			m_bDisableOperator = true
 		},
 	]
 	m_Operators = 
@@ -575,7 +573,6 @@
 					]
 				}
 			}
-			m_bDisableOperator = true
 		},
 	]
 	m_Renderers = 
@@ -1129,9 +1126,11 @@
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_smoke.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_sparks.vpcf"
+			m_bDisableChild = true
 		},
 	]
 }

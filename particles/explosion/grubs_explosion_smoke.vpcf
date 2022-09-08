@@ -551,7 +551,6 @@
 					m_Stops = [  ]
 				}
 			}
-			m_bDisableOperator = true
 		},
 	]
 	m_Constraints = 
@@ -951,7 +950,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
-			m_hTexture = resource:"materials/particle/bleedout_01.vtex"
+			m_hTexture = resource:"materials/particles/smoke/smoke.vtex"
 		},
 	]
 }

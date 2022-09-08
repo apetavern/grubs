@@ -2,14 +2,6 @@
 {
 	_class = "CParticleSystemDefinition"
 	m_nBehaviorVersion = 10
-	m_nMaxParticles = 25
-	m_flConstantLifespan = 2.0
-	m_controlPointConfigurations = 
-	[
-		{
-			m_name = "preview"
-		},
-	]
 	m_Emitters = 
 	[
 		{
@@ -86,6 +78,14 @@
 			m_nOutlineAlpha = 198
 			m_flOutlineStart1 = 0.55
 			m_flOutlineEnd1 = 0.75
+		},
+	]
+	m_nMaxParticles = 25
+	m_flConstantLifespan = 2.0
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
 		},
 	]
 }
