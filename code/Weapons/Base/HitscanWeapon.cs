@@ -129,6 +129,8 @@ public class HitscanWeapon : GrubWeapon
 			Transform muzzle = GetAttachment( "muzzle" ).Value;
 			for ( int i = 0; i < TraceCount; i++ )
 			{
+				var system = Particles.Create( "particles/guntrace.vpcf" );
+				
 				Vector3 OffsetSpread = Vector3.Random * TraceSpread;
 
 				if ( debugtraceweap )
@@ -175,6 +177,8 @@ public class HitscanWeapon : GrubWeapon
 				{
 					ExplosionHelper.Explode( result.EndPosition, Parent as Grub, ExplosionRadius, 0 );
 				}
+				system?.SetPosition( 0, muzzle.Position );
+				system?.SetPosition( 1, result.EndPosition );
 			}
 
 		}
@@ -191,6 +195,8 @@ public class HitscanWeapon : GrubWeapon
 			Transform muzzle = GetAttachment( "muzzle" ).Value;
 			for ( int i = 0; i < TraceCount; i++ )
 			{
+				var system = Particles.Create( "particles/guntrace.vpcf" );
+				muzzle = GetAttachment( "muzzle" ).Value;
 				Vector3 OffsetSpread = Vector3.Random * TraceSpread;
 
 				if ( debugtraceweap )
@@ -243,6 +249,9 @@ public class HitscanWeapon : GrubWeapon
 				}
 
 				PlaySound( FireSound );
+
+				system?.SetPosition( 0, muzzle.Position );
+				system?.SetPosition( 1, result.EndPosition );
 
 				await Task.DelaySeconds( TraceDelay );
 			}
