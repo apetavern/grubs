@@ -1,0 +1,21 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		HitForce = 500
+		TraceCount = 1
+		TraceSpread = 0
+		ExplosionRadius = 25
+		Damage = 50
+		DamageFlags = "Bullet, Burn"
+		PenetrateTargets = true
+		PenetrateTerrain = true
+		WeaponName = "gibgun"
+		Model = resource:"models/weapons/railgun/railgun.vmdl"
+		Icon = null
+		FiringType = "Instant"
+		HoldPose = "Rifle"
+		HasReticle = false
+		UnequipAfter = 0
+	}
+}

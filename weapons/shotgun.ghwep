@@ -1,0 +1,22 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		HitForce = 500
+		TraceCount = 5
+		TraceSpread = 100
+		TraceDelay = 0
+		ExplosionRadius = 15
+		Damage = 25
+		DamageFlags = "Bullet"
+		PenetrateTargets = true
+		PenetrateTerrain = false
+		WeaponName = "Shotgun"
+		Model = resource:"models/weapons/shotgun/shotgun.vmdl"
+		Icon = null
+		FiringType = "Instant"
+		HoldPose = "Shotgun"
+		HasReticle = true
+		UnequipAfter = 0
+	}
+}
