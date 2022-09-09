@@ -182,6 +182,7 @@ public partial class Team : Entity, ISpectator
 			{
 				MeleeWeaponAsset mWep => TypeLibrary.Create<GrubWeapon>( typeof( MeleeWeapon ), new object[] { mWep } ),
 				ProjectileWeaponAsset pWep => TypeLibrary.Create<GrubWeapon>( typeof( ProjectileWeapon ), new object[] { pWep } ),
+				HitscanWeaponAsset hWep => TypeLibrary.Create<GrubWeapon>( typeof( HitscanWeapon ), new object[] { hWep } ),
 				_ => null
 			};
 
