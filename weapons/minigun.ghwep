@@ -4,7 +4,7 @@
 	{
 		HitForce = 20
 		TraceCount = 25
-		TraceSpread = 400
+		TraceSpread = 600
 		TraceDelay = 0.2
 		ExplosionRadius = 25
 		Damage = 5
