@@ -624,7 +624,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
-			m_hTexture = resource:"particles/explosion/grubs_explosion_base_png_6a277992.vtex"
+			m_hTexture = resource:"particles/explosion/grubs_explosion_base.vtex"
 			m_flAlphaScale = 
 			{
 				m_nType = "PF_TYPE_LITERAL"
@@ -764,7 +764,7 @@
 				}
 			}
 			m_bOnlyRenderInEffectsBloomPass = true
-			m_hTexture = resource:"particles/explosion/grubs_explosion_base_png_6a277992.vtex"
+			m_hTexture = resource:"particles/explosion/grubs_explosion_base.vtex"
 			m_flRadiusScale = 
 			{
 				m_nType = "PF_TYPE_LITERAL"
@@ -1119,18 +1119,18 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/explosion/grubs_explosion_shockwave.vpcf"
-		},
-		{
-			m_ChildRef = resource:"particles/explosion/grubs_explosion_fire.vpcf"
-		},
-		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_smoke.vpcf"
 			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_sparks.vpcf"
 			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/explosion/grubs_explosion_shockwave.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/explosion/grubs_explosion_fire.vpcf"
 		},
 	]
 }
