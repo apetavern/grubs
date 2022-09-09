@@ -48,6 +48,17 @@ public static partial class ExplosionHelper
 		DoExplosionEffectsAt( To.Everyone, position, radius );
 	}
 
+	public static void DrawLine(Vector3 startpos, Vector3 endpos, float width )
+	{
+		Host.AssertServer();
+
+		GrubsGame.Current.TerrainMap.DestructLine( startpos, endpos, width );
+
+		GrubsGame.LineClient( To.Everyone, startpos, endpos, width );
+
+		GrubsGame.Current.RegenerateMap();
+	}
+
 	/// <summary>
 	/// Client receiver to do effects of the explosion/
 	/// </summary>

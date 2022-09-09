@@ -148,6 +148,10 @@ public class HitscanWeapon : GrubWeapon
 								hitgrubs.Add( grub );
 							result = Trace.Ray( result.EndPosition.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).UseHitboxes().Ignore( grub ).Ignore( Parent ).Run();
 
+							if ( result.Hit && result.Entity is not Grub )
+							{
+								ExplosionHelper.Explode( result.EndPosition, Parent as Grub, ExplosionRadius, 0 );
+							}
 
 							if ( debugtraceweap )
 							{
@@ -164,11 +168,8 @@ public class HitscanWeapon : GrubWeapon
 
 				if ( PenetrateTerrain )
 				{
-					GrubsGame.Current.TerrainMap.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread, ExplosionRadius );
+					ExplosionHelper.DrawLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread, ExplosionRadius );
 
-					GrubsGame.LineClient( To.Everyone, muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread, ExplosionRadius );
-
-					GrubsGame.Current.RegenerateMap();
 				}
 				else if ( result.Hit )
 				{
