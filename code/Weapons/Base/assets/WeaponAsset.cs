@@ -26,6 +26,7 @@ public class WeaponAsset : GameResource
 	[Property, Category( "Meta" )]
 	public HoldPose HoldPose { get; set; } = HoldPose.None;
 
+
 	//
 	// Aim related
 	//
@@ -37,6 +38,12 @@ public class WeaponAsset : GameResource
 	//
 	[Property, Category( "Weapon" )]
 	public float UnequipAfter { get; set; } = 0;
+
+	[Property, Category( "Weapon" ), ResourceType( "sound" )]
+	public string firesound { get; set; }
+
+	[Property, Category( "Weapon" ), ResourceType( "sound" )]
+	public string deploysound { get; set; }
 
 	protected override void PostLoad()
 	{

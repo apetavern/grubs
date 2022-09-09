@@ -35,4 +35,10 @@ public class ProjectileWeaponAsset : WeaponAsset
 
 	[Property, Category( "Weapon" )]
 	public float ProjectileCollisionExplosionDelay { get; set; } = 0;
+
+	[Property, Category( "Weapon" ), ResourceType( "sound" )]
+	public string ProjectileLoopSound { get; set; }
+
+	[Property, Category( "Weapon" ), ResourceType( "sound" )]
+	public string ProjectileExplodeSound { get; set; }
 }

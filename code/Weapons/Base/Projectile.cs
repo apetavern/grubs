@@ -11,12 +11,16 @@ public class Projectile : ModelEntity, IResolvable
 {
 	public bool Resolved => false;
 
+	public string ExplosionSound { get; set; }
+
 	private Grub Grub { get; set; } = null!;
 	private float Speed { get; set; } = 0.001f;
 	private float ExplosionRadius { get; set; } = 1000;
 	private float CollisionExplosionDelaySeconds { get; set; }
 	private List<ArcSegment> Segments { get; set; } = null!;
 	private Vector3 PhysicsImpulse { get; set; }
+
+	
 
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
@@ -187,6 +191,9 @@ public class Projectile : ModelEntity, IResolvable
 	private void Explode()
 	{
 		ExplosionHelper.Explode( Position, Grub, ExplosionRadius );
+
+		PlaySound( ExplosionSound );
+
 		Delete();
 	}
 

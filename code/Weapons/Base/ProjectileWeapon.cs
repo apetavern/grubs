@@ -57,6 +57,16 @@ public class ProjectileWeapon : GrubWeapon
 	/// </summary>
 	protected virtual bool ProjectileShouldUseTrace => AssetDefinition.ProjectileShouldUseTrace;
 
+	/// <summary>
+	/// The idle loop sound for the projectile.
+	/// </summary>
+	protected virtual string ProjectileLoopSound => AssetDefinition.ProjectileLoopSound;
+
+	/// <summary>
+	/// The explosion sound for the projectile.
+	/// </summary>
+	protected virtual string ProjectileExplosionSound => AssetDefinition.ProjectileExplodeSound;
+
 	protected new ProjectileWeaponAsset AssetDefinition => (base.AssetDefinition as ProjectileWeaponAsset)!;
 
 	public ProjectileWeapon()
@@ -106,5 +116,7 @@ public class ProjectileWeapon : GrubWeapon
 	/// <param name="projectile">The projectile to edit.</param>
 	protected virtual void SetupProjectile( Projectile projectile )
 	{
+		projectile.ExplosionSound = ProjectileExplosionSound;
+		projectile.PlaySound( ProjectileLoopSound );
 	}
 }

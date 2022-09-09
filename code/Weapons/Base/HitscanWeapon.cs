@@ -46,6 +46,11 @@ public class HitscanWeapon : GrubWeapon
 	protected virtual bool PenetrateTerrain => AssetDefinition.PenetrateTerrain;
 
 	/// <summary>
+	/// Penetrate terrain? (Leaves trail in the terrain until end of trace)
+	/// </summary>
+	protected virtual string FireSound => AssetDefinition.firesound;
+
+	/// <summary>
 	/// The amount of damage being hit by the weapon will do.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
@@ -224,6 +229,8 @@ public class HitscanWeapon : GrubWeapon
 
 					GrubsCamera.SetTarget( grub );
 				}
+
+				PlaySound( FireSound );
 
 				await Task.DelaySeconds( TraceDelay );
 			}

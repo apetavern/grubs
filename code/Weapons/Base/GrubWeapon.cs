@@ -208,6 +208,8 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 		Host.AssertServer();
 
 		GrubsGame.Current.CurrentGamemode.UseTurn();
+
+		PlaySound( AssetDefinition.firesound );
 	}
 
 	/// <summary>
@@ -217,6 +219,10 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// <param name="show">Whether or not the weapon should be shown.</param>
 	public void ShowWeapon( Grub grub, bool show )
 	{
+		if ( show )
+		{
+			PlaySound( AssetDefinition.deploysound );
+		}
 		EnableDrawing = show;
 		Animator?.SetAnimParameter( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
 
