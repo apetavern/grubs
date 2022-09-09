@@ -202,4 +202,17 @@ public partial class GrubsGame : Game
 		Current.TerrainMap.DestructSphere( midpoint, size );
 		Current.RegenerateMap();
 	}
+
+	/// <summary>
+	/// Destruct a sphere in the terrain grid.
+	/// </summary>
+	/// <param name="Startpoint">The Vector3 startpoint of the line to be destructed.</param>
+	/// <param name="EndPoint">The Vector3 endpoint of the line to be destructed.</param>
+	/// <param name="Width">The size (radius) of the sphere to be destructed.</param>
+	[ClientRpc]
+	public static void LineClient( Vector3 Startpoint, Vector3 EndPoint, float Width )
+	{
+		Current.TerrainMap.DestructLine( Startpoint, EndPoint, Width );
+		Current.RegenerateMap();
+	}
 }

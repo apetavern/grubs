@@ -270,6 +270,30 @@ public partial class TerrainMap
 	}
 
 	/// <summary>
+	/// Destruct a sphere in the terrain grid.
+	/// </summary>
+	/// <param name="Startpoint">The Vector3 startpoint of the line to be destructed.</param>
+	/// <param name="EndPoint">The Vector3 endpoint of the line to be destructed.</param>
+	/// <param name="Width">The size (radius) of the sphere to be destructed.</param>
+	public void DestructLine( Vector3 Startpoint, Vector3 EndPoint, float Width )
+	{
+		Vector3 TotalLength = (Startpoint - EndPoint);
+
+		int StepCount = (int)MathF.Round( TotalLength.Length / (Width) );
+
+		Vector3 CurrentPoint = Startpoint;
+
+		for ( int i = 0; i < StepCount; i++ )
+		{
+			CurrentPoint = Vector3.Lerp( Startpoint, EndPoint, (float)i / StepCount );
+
+			var pos = new Vector3( CurrentPoint.x, CurrentPoint.z );
+
+			DestructSphere( pos, Width );
+		}
+	}
+
+	/// <summary>
 	/// Get a random spawn location using Sandbox.Rand.
 	/// Traces down to the ground to ensure Grubs do not take damage when spawned.
 	/// </summary>
