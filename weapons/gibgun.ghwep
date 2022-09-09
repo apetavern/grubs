@@ -5,6 +5,7 @@
 		HitForce = 500
 		TraceCount = 1
 		TraceSpread = 0
+		TraceDelay = 0
 		ExplosionRadius = 25
 		Damage = 50
 		DamageFlags = "Bullet, Burn"
@@ -17,5 +18,7 @@
 		HoldPose = "Rifle"
 		HasReticle = false
 		UnequipAfter = 0
+		firesound = resource:"sounds/physics/breaking/break_wood_plank.sound"
+		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

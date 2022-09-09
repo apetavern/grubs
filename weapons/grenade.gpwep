@@ -11,6 +11,8 @@
 		ProjectileExplosionRadius = 75
 		ProjectileExplodeAfter = 5
 		ProjectileCollisionExplosionDelay = 3
+		ProjectileLoopSound = null
+		ProjectileExplodeSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
 		WeaponName = "Grenade"
 		Model = resource:"models/weapons/grenade/grenade.vmdl"
 		Icon = null
@@ -18,5 +20,7 @@
 		HoldPose = "Throwable"
 		HasReticle = true
 		UnequipAfter = 0.5
+		firesound = resource:"weapons/rust_flashlight/sounds/rust_flashlight.attack.sound"
+		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

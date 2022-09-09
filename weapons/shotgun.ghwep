@@ -18,5 +18,7 @@
 		HoldPose = "Shotgun"
 		HasReticle = true
 		UnequipAfter = 0
+		firesound = resource:"weapons/rust_pumpshotgun/sounds/rust_pumpshotgun.shoot.sound"
+		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

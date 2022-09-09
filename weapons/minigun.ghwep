@@ -18,5 +18,7 @@
 		HoldPose = "Minigun"
 		HasReticle = false
 		UnequipAfter = 0
+		firesound = resource:"weapons/rust_smg/sounds/rust_smg.shoot.sound"
+		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

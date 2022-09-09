@@ -11,6 +11,8 @@
 		ProjectileExplosionRadius = 50
 		ProjectileExplodeAfter = 5
 		ProjectileCollisionExplosionDelay = 0
+		ProjectileLoopSound = null
+		ProjectileExplodeSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
 		WeaponName = "Bazooka"
 		Model = resource:"models/weapons/bazooka/bazooka.vmdl"
 		Icon = null
@@ -18,5 +20,7 @@
 		HoldPose = "Bazooka"
 		HasReticle = true
 		UnequipAfter = 0.5
+		firesound = resource:"weapons/rust_smg/sounds/rust_smg.dryfire.sound"
+		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }
