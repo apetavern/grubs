@@ -127,6 +127,7 @@ public class HitscanWeapon : GrubWeapon
 		if ( GetAttachment( "muzzle" ).HasValue )
 		{
 			Transform muzzle = GetAttachment( "muzzle" ).Value;
+			Particles.Create( "particles/muzzleflash/grubs_muzzleflash.vpcf", muzzle.Position);
 			for ( int i = 0; i < TraceCount; i++ )
 			{
 				var system = Particles.Create( "particles/guntrace.vpcf" );
@@ -196,7 +197,11 @@ public class HitscanWeapon : GrubWeapon
 			for ( int i = 0; i < TraceCount; i++ )
 			{
 				var system = Particles.Create( "particles/guntrace.vpcf" );
+
 				muzzle = GetAttachment( "muzzle" ).Value;
+
+				Particles.Create( "particles/muzzleflash/grubs_muzzleflash.vpcf", muzzle.Position );
+
 				Vector3 OffsetSpread = Vector3.Random * TraceSpread;
 
 				if ( debugtraceweap )
