@@ -76,10 +76,15 @@ public class HitscanWeapon : GrubWeapon
 
 	protected override async Task OnFire()
 	{
-		await base.OnFire();
+		Host.AssertServer();
 
 		if ( TraceDelay == 0 )
 		{
+
+			GrubsGame.Current.CurrentGamemode.UseTurn();
+
+			PlaySound( FireSound );
+
 			var grubsHit = GetGrubsInShot();
 
 			/*if ( !PenetrateTargets )
@@ -109,7 +114,7 @@ public class HitscanWeapon : GrubWeapon
 		}
 		else
 		{
-			ShootGrubsAsync();
+			await ShootGrubsAsync();
 		}
 	}
 
@@ -126,25 +131,28 @@ public class HitscanWeapon : GrubWeapon
 			{
 				Vector3 OffsetSpread = Vector3.Random * TraceSpread;
 
-				if( debugtraceweap )
+				if ( debugtraceweap )
 				{
 					DebugOverlay.Line( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread, 2.5f );
 				}
 
-				TraceResult result = Trace.Ray( muzzle.Position.WithY(0), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).UseHitboxes().Run();
+				TraceResult result = Trace.Ray( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).Ignore( Parent ).UseHitboxes().Run();
 
 				if ( PenetrateTargets )
 				{
-					while ( result.Entity is Grub grub )
+					for ( int g = 0; g < All.OfType<Grub>().Count(); g++ )
 					{
-						if ( !hitgrubs.Contains( grub ) )
-							hitgrubs.Add( grub );
-						result = Trace.Ray( result.EndPosition.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).UseHitboxes().Ignore( grub ).Run();
-
-
-						if ( debugtraceweap )
+						if ( result.Entity is Grub grub )
 						{
-							DebugOverlay.Sphere( result.EndPosition, 10f, Color.Red, 2.5f );
+							if ( !hitgrubs.Contains( grub ) )
+								hitgrubs.Add( grub );
+							result = Trace.Ray( result.EndPosition.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).UseHitboxes().Ignore( grub ).Ignore( Parent ).Run();
+
+
+							if ( debugtraceweap )
+							{
+								DebugOverlay.Sphere( result.EndPosition, 10f, Color.Red, 2.5f );
+							}
 						}
 					}
 				}
@@ -157,11 +165,12 @@ public class HitscanWeapon : GrubWeapon
 				if ( PenetrateTerrain )
 				{
 					GrubsGame.Current.TerrainMap.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread, ExplosionRadius );
+
 					GrubsGame.LineClient( To.Everyone, muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread, ExplosionRadius );
 
 					GrubsGame.Current.RegenerateMap();
 				}
-				else
+				else if ( result.Hit )
 				{
 					ExplosionHelper.Explode( result.EndPosition, Parent as Grub, ExplosionRadius, 0 );
 				}
@@ -172,7 +181,7 @@ public class HitscanWeapon : GrubWeapon
 		return hitgrubs;
 	}
 
-	public async void ShootGrubsAsync()
+	public async Task ShootGrubsAsync()
 	{
 		var hitgrubs = new List<Grub>();
 
@@ -188,20 +197,22 @@ public class HitscanWeapon : GrubWeapon
 					DebugOverlay.Line( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread, 2.5f );
 				}
 
-				TraceResult result = Trace.Ray( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).UseHitboxes().Run();
+				TraceResult result = Trace.Ray( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).Ignore(Parent).UseHitboxes().Run();
 
 				if ( PenetrateTargets )
 				{
-					while ( result.Entity is Grub grub )
+					for ( int g = 0; g < All.OfType<Grub>().Count(); g++ )
 					{
-						if ( !hitgrubs.Contains( grub ) )
-							hitgrubs.Add( grub );
-						result = Trace.Ray( result.EndPosition.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).UseHitboxes().Ignore( grub ).Run();
-
-
-						if ( debugtraceweap )
+						if ( result.Entity is Grub grub )
 						{
-							DebugOverlay.Sphere( result.EndPosition, 10f, Color.Red, 2.5f );
+							if ( !hitgrubs.Contains( grub ) )
+								hitgrubs.Add( grub );
+							result = Trace.Ray( result.EndPosition.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + OffsetSpread ).UseHitboxes().Ignore( grub ).Ignore( Parent ).Run();
+
+							if ( debugtraceweap )
+							{
+								DebugOverlay.Sphere( result.EndPosition, 10f, Color.Red, 2.5f );
+							}
 						}
 					}
 				}
@@ -218,7 +229,7 @@ public class HitscanWeapon : GrubWeapon
 
 					GrubsGame.Current.RegenerateMap();
 				}
-				else
+				else if(result.Hit)
 				{
 					ExplosionHelper.Explode( result.EndPosition, Parent as Grub, ExplosionRadius, 0 );
 				}
@@ -234,7 +245,7 @@ public class HitscanWeapon : GrubWeapon
 
 				await Task.DelaySeconds( TraceDelay );
 			}
-
+			GrubsGame.Current.CurrentGamemode.UseTurn();
 		}
 	}
 
