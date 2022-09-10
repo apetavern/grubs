@@ -14,7 +14,12 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// <summary>
 	/// The name of the weapon.
 	/// </summary>
-	protected virtual string WeaponName => AssetDefinition.WeaponName;
+	public virtual string WeaponName => AssetDefinition.WeaponName;
+
+	/// <summary>
+	/// The path to the weapon model.
+	/// </summary>
+	public virtual string Icon => AssetDefinition.Icon;
 
 	/// <summary>
 	/// The path to the weapon model.
