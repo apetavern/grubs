@@ -174,7 +174,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 					Charge = Charge.Clamp( 0, MaxCharge );
 					if ( Charge != MaxCharge )
 						break;
-					
+
 					IsCharging = false;
 					Fire();
 					Charge = 0;
@@ -211,7 +211,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 
 		if ( continueFiring )
 			return;
-		
+
 		IsFiring = false;
 		OnFireFinish();
 	}
@@ -234,7 +234,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// </summary>
 	protected virtual void OnFireFinish()
 	{
-		
+
 	}
 
 	/// <summary>

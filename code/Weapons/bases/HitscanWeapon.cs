@@ -161,7 +161,7 @@ public partial class HitscanWeapon : GrubWeapon
 				if ( !hitgrubs.Contains( grub ) )
 					hitgrubs.Add( grub );
 			}
-			
+
 			if ( PenetrateTerrain )
 			{
 				GrubsGame.Current.TerrainMap.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius );
@@ -205,7 +205,7 @@ public partial class HitscanWeapon : GrubWeapon
 	protected virtual void HitGrub( Grub grub )
 	{
 		Host.AssertServer();
-		
+
 		var dir = (grub.Position - Position).Normal;
 		grub.ApplyAbsoluteImpulse( dir * HitForce );
 
