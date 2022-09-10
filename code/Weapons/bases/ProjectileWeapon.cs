@@ -86,11 +86,6 @@ public class ProjectileWeapon : GrubWeapon
 		if ( !IsServer )
 			return false;
 
-		var arcTrace = new ArcTrace( Parent, Parent.EyePosition );
-		var segments = ProjectileShouldBounce
-			? arcTrace.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0, ProjectileMaxBounces )
-			: arcTrace.RunTowards( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0 );
-
 		var projectile = new Projectile()
 			.WithGrub( (Parent as Grub)! )
 			.WithModel( ProjectileModel )
@@ -100,7 +95,14 @@ public class ProjectileWeapon : GrubWeapon
 			.WithExplosionSound( ProjectileExplosionSound );
 
 		if ( ProjectileShouldUseTrace )
+		{
+			var arcTrace = new ArcTrace( Parent, Parent.EyePosition );
+			var segments = ProjectileShouldBounce
+				? arcTrace.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0, ProjectileMaxBounces )
+				: arcTrace.RunTowards( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0 );
+			
 			projectile.MoveAlongTrace( segments );
+		}
 		else
 			projectile.UsePhysicsImpulse( Vector3.Up * 10f );
 
