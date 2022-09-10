@@ -134,49 +134,52 @@ public partial class HitscanWeapon : GrubWeapon
 		if ( HitscanDebug )
 			DebugOverlay.TraceResult( result, 5 );
 
-		var hitgrubs = new List<Grub>();
-		if ( PenetrateTargets )
+		if ( IsServer )
 		{
-			for ( var i = 0; i < All.OfType<Grub>().Count(); i++ )
+			var hitgrubs = new List<Grub>();
+			if ( PenetrateTargets )
 			{
-				if ( result.Entity is not Grub grub )
-					continue;
+				for ( var i = 0; i < All.OfType<Grub>().Count(); i++ )
+				{
+					if ( result.Entity is not Grub grub )
+						continue;
 
+					if ( !hitgrubs.Contains( grub ) )
+						hitgrubs.Add( grub );
+					result = Trace.Ray( result.EndPosition.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread )
+						.Ignore( grub )
+						.Ignore( Parent )
+						.UseHitboxes()
+						.Run();
+
+					if ( HitscanDebug )
+						DebugOverlay.Sphere( result.EndPosition, 10f, Color.Red, 5 );
+				}
+			}
+			else if ( result.Entity is Grub grub )
+			{
 				if ( !hitgrubs.Contains( grub ) )
 					hitgrubs.Add( grub );
-				result = Trace.Ray( result.EndPosition.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread )
-					.Ignore( grub )
-					.Ignore( Parent )
-					.UseHitboxes()
-					.Run();
-
-				if ( HitscanDebug )
-					DebugOverlay.Sphere( result.EndPosition, 10f, Color.Red, 5 );
 			}
-		}
-		else if ( result.Entity is Grub grub )
-		{
-			if ( !hitgrubs.Contains( grub ) )
-				hitgrubs.Add( grub );
-		}
+			
+			if ( PenetrateTerrain )
+			{
+				GrubsGame.Current.TerrainMap.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius );
+				GrubsGame.LineClient( To.Everyone, muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius );
 
-		if ( PenetrateTerrain )
-		{
-			GrubsGame.Current.TerrainMap.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius );
-			GrubsGame.LineClient( To.Everyone, muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius );
+				GrubsGame.Current.RegenerateMap();
+			}
+			else if ( result.Hit )
+			{
+				ExplosionHelper.Explode( result.EndPosition, Parent as Grub, ExplosionRadius, 0 );
+			}
 
-			GrubsGame.Current.RegenerateMap();
-		}
-		else if ( result.Hit )
-		{
-			ExplosionHelper.Explode( result.EndPosition, Parent as Grub, ExplosionRadius, 0 );
-		}
+			foreach ( var grub in hitgrubs )
+			{
+				HitGrub( grub );
 
-		foreach ( var grub in hitgrubs )
-		{
-			HitGrub( grub );
-
-			GrubsCamera.SetTarget( grub );
+				GrubsCamera.SetTarget( grub );
+			}
 		}
 
 		PlaySound( FireSound );
@@ -200,6 +203,8 @@ public partial class HitscanWeapon : GrubWeapon
 	/// <param name="grub">The grub that was hit.</param>
 	protected virtual void HitGrub( Grub grub )
 	{
+		Host.AssertServer();
+		
 		var dir = (grub.Position - Position).Normal;
 		grub.ApplyAbsoluteImpulse( dir * HitForce );
 
