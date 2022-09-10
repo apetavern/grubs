@@ -116,7 +116,7 @@ public partial class Team : Entity, ISpectator
 		{
 			var lastWeapon = EquippedWeapon;
 
-			if ( Input.Pressed( InputButton.Menu ) )
+			/*if ( Input.Pressed( InputButton.Menu ) )
 			{
 				do
 				{
@@ -136,7 +136,7 @@ public partial class Team : Entity, ISpectator
 					else
 						EquippedWeapon++;
 				} while ( Inventory.Items[EquippedWeapon].Ammo == 0 );
-			}
+			}*/
 
 			if ( EquippedWeapon != lastWeapon )
 				ActiveGrub.EquipWeapon( Inventory.Items[EquippedWeapon] );
