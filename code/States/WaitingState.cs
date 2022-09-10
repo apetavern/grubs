@@ -31,6 +31,9 @@ public partial class WaitingState : BaseState
 
 		if ( Client.All.Count >= GameConfig.MinimumPlayers && Client.All.Count <= GameConfig.MaximumPlayers )
 			TimeUntilStart = 10;
+
+		if ( cl.IsBot )
+			TimeUntilStart = 0f;
 	}
 
 	public override void ClientDisconnected( Client cl, NetworkDisconnectionReason reason )
