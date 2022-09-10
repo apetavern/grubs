@@ -20,7 +20,7 @@ public class Projectile : ModelEntity, IResolvable
 	private List<ArcSegment> Segments { get; set; } = null!;
 	private Vector3 PhysicsImpulse { get; set; }
 
-	
+
 
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.

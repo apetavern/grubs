@@ -48,7 +48,7 @@ public static partial class ExplosionHelper
 		DoExplosionEffectsAt( To.Everyone, position, radius );
 	}
 
-	public static void DrawLine(Vector3 startpos, Vector3 endpos, float width )
+	public static void DrawLine( Vector3 startpos, Vector3 endpos, float width )
 	{
 		Host.AssertServer();
 

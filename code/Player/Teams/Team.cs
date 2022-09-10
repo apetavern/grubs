@@ -194,10 +194,6 @@ public partial class Team : Entity, ISpectator
 
 			Inventory.Add( weapon );
 		}
-
-		// TODO: Re-introduce this initialization loop in a more effective way once we have non-asset weapons to initialize.
-/*		foreach ( var weapon in TypeLibrary.GetDescriptions<GrubWeapon>().Where( weapon => !weapon.IsAbstract ) )
-			Inventory.Add( weapon.Create<GrubWeapon>() );*/
 	}
 
 	/// <summary>

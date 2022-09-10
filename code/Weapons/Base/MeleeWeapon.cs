@@ -14,29 +14,35 @@ public class MeleeWeapon : GrubWeapon
 	/// <remarks>This may be unused if <see cref="GetGrubsInSwing"/> is overridden.</remarks>
 	/// </summary>
 	protected virtual Vector3 HitStart => Parent.Position - HitSize.WithX( 0 ).WithZ( 0 ) / 2;
+
 	/// <summary>
 	/// The size of the hit zone.
 	/// <remarks>This may be unused if <see cref="GetGrubsInSwing"/> is overridden.</remarks>
 	/// </summary>
 	protected virtual Vector3 HitSize => AssetDefinition.HitSize;
+
 	/// <summary>
 	/// Whether or not the weapon can hit multiple people at once.
 	/// </summary>
 	protected virtual bool HitMulti => AssetDefinition.HitMulti;
+
 	/// <summary>
 	/// The time in seconds to delay before applying hits. This is to simulate the swing animation and hit when the weapon should collide.
 	/// </summary>
 	protected virtual float HitDelay => AssetDefinition.HitDelay;
+
 	/// <summary>
 	/// The damage flags to attach to the damage info.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
 	protected virtual DamageFlags DamageFlags => AssetDefinition.DamageFlags;
+
 	/// <summary>
 	/// The amount of force that will be applied to the grub upon being hit.
 	/// </summary>
 	// TODO: Force falloff based on range?
 	protected virtual float HitForce => AssetDefinition.HitForce;
+
 	/// <summary>
 	/// The amount of damage being hit by the weapon will do.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>

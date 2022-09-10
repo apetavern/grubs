@@ -47,16 +47,19 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// </summary>
 	[Net, Local]
 	public int Ammo { get; set; }
+
 	/// <summary>
 	/// The current charge the weapon has.
 	/// </summary>
 	[Net]
 	protected int Charge { get; private set; }
+
 	/// <summary>
 	/// Whether or not the weapon is currently being charged.
 	/// </summary>
 	[Net]
 	public bool IsCharging { get; private set; }
+
 	/// <summary>
 	/// Whether or not this weapon has a special hat associated with it.
 	/// </summary>
