@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Grubs.Player;
+﻿using Grubs.Player;
 using Grubs.States;
 
 namespace Grubs.Weapons.Base;
@@ -10,7 +9,7 @@ namespace Grubs.Weapons.Base;
 [Category( "Weapons" )]
 public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 {
-	public bool Resolved => FireTask is null || FireTask.IsCompleted;
+	public bool Resolved => !IsFiring && !IsCharging;
 
 	/// <summary>
 	/// The name of the weapon.
@@ -45,20 +44,32 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// <summary>
 	/// The amount of times this gun can be used before being removed.
 	/// </summary>
-	[Net, Local]
+	[Net, Predicted, Local]
 	public int Ammo { get; set; }
 
 	/// <summary>
 	/// The current charge the weapon has.
 	/// </summary>
-	[Net]
+	[Net, Predicted]
 	protected int Charge { get; private set; }
 
 	/// <summary>
 	/// Whether or not the weapon is currently being charged.
 	/// </summary>
-	[Net]
+	[Net, Predicted]
 	public bool IsCharging { get; private set; }
+
+	/// <summary>
+	/// Whether or not the weapon is currently being fired.
+	/// </summary>
+	[Net, Predicted]
+	public bool IsFiring { get; protected set; }
+
+	/// <summary>
+	/// The time since the last attack started.
+	/// </summary>
+	[Net, Predicted]
+	public TimeSince TimeSinceFire { get; private set; }
 
 	/// <summary>
 	/// Whether or not this weapon has a special hat associated with it.
@@ -89,11 +100,6 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// The animator of the grub that is holding the weapon.
 	/// </summary>
 	protected GrubAnimator? Animator;
-
-	/// <summary>
-	/// The task for firing the weapon
-	/// </summary>
-	protected Task? FireTask;
 
 	private const int MaxCharge = 100;
 
@@ -147,7 +153,8 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		base.Simulate( cl );
 
-		CheckFireInput();
+		if ( !IsFiring )
+			CheckFireInput();
 	}
 
 	private void CheckFireInput()
@@ -170,14 +177,14 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 				if ( Input.Released( InputButton.PrimaryAttack ) )
 				{
 					IsCharging = false;
-					FireTask = Fire();
+					Fire();
 					Charge = 0;
 				}
 
 				break;
 			case FiringType.Instant:
 				if ( Input.Pressed( InputButton.PrimaryAttack ) )
-					FireTask = Fire();
+					Fire();
 
 				break;
 			default:
@@ -186,33 +193,31 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 		}
 	}
 
-	private async Task Fire()
-	{
-		(Parent as Grub)!.SetAnimParameter( "fire", true );
-
-		if ( IsServer )
-		{
-			await OnFire();
-
-			if ( !GrubsGame.Current.CurrentGamemode.UsedTurn )
-				return;
-
-			if ( UnequipAfter > 0 )
-				await GameTask.DelaySeconds( UnequipAfter );
-			(Parent as Grub)!.EquipWeapon( null );
-		}
-	}
-
 	/// <summary>
 	/// Called when the weapon has been fired.
 	/// </summary>
-	protected virtual async Task OnFire()
+	protected virtual void Fire()
 	{
-		Host.AssertServer();
+		IsFiring = true;
+		TimeSinceFire = 0;
 
+		var continueFiring = OnFire();
+
+		if ( !continueFiring )
+			IsFiring = false;
+	}
+
+	/// <summary>
+	/// Called to do your main firing logic.
+	/// </summary>
+	/// <returns>Whether or not the weapon is going to continue firing.</returns>
+	protected virtual bool OnFire()
+	{
+		(Parent as Grub)!.SetAnimParameter( "fire", true );
 		GrubsGame.Current.CurrentGamemode.UseTurn();
 
 		PlaySound( AssetDefinition.firesound );
+		return false;
 	}
 
 	/// <summary>

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using Grubs.Player;
-using Grubs.States;
+﻿using Grubs.Player;
 
 namespace Grubs.Weapons.Base;
 
@@ -50,6 +48,9 @@ public class MeleeWeapon : GrubWeapon
 	// TODO: Damage falloff based on range?
 	protected virtual float Damage => AssetDefinition.Damage;
 
+	/// <summary>
+	/// The melee asset definition this weapon is implementing.
+	/// </summary>
 	protected new MeleeWeaponAsset AssetDefinition => (base.AssetDefinition as MeleeWeaponAsset)!;
 
 	public MeleeWeapon()
@@ -60,11 +61,29 @@ public class MeleeWeapon : GrubWeapon
 	{
 	}
 
-	protected override async Task OnFire()
+	public override void Simulate( Client cl )
 	{
-		await base.OnFire();
+		base.Simulate( cl );
+
+		if ( IsServer && IsFiring && TimeSinceFire > HitDelay )
+			Hit();
+	}
+
+	protected override bool OnFire()
+	{
+		base.OnFire();
+
 		if ( HitDelay > 0 )
-			await GameTask.DelaySeconds( HitDelay );
+			return true;
+
+		if ( IsServer )
+			Hit();
+		return false;
+	}
+
+	protected virtual void Hit()
+	{
+		Host.AssertServer();
 
 		var grubsHit = GetGrubsInSwing();
 		if ( !HitMulti )
@@ -87,6 +106,8 @@ public class MeleeWeapon : GrubWeapon
 
 		foreach ( var grub in grubsHit )
 			HitGrub( grub );
+
+		IsFiring = false;
 	}
 
 	/// <summary>
@@ -95,6 +116,8 @@ public class MeleeWeapon : GrubWeapon
 	/// <returns>The list of grubs that were hit.</returns>
 	protected virtual List<Grub> GetGrubsInSwing()
 	{
+		Host.AssertServer();
+
 		var holder = Parent as Grub;
 		var mins = Vector3.Min( HitStart, HitStart + (holder!.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
 		var maxs = Vector3.Max( HitStart, HitStart + (holder.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
@@ -124,6 +147,8 @@ public class MeleeWeapon : GrubWeapon
 	/// <param name="grub">The grub that was hit.</param>
 	protected virtual void HitGrub( Grub grub )
 	{
+		Host.AssertServer();
+
 		var dir = (grub.Position - Position).Normal;
 		grub.ApplyAbsoluteImpulse( dir * HitForce );
 

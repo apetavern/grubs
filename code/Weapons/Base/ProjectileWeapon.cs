@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Grubs.Player;
+﻿using Grubs.Player;
 using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
@@ -67,6 +66,9 @@ public class ProjectileWeapon : GrubWeapon
 	/// </summary>
 	protected virtual string ProjectileExplosionSound => AssetDefinition.ProjectileExplodeSound;
 
+	/// <summary>
+	/// The projectile asset definition this weapon is implementing.
+	/// </summary>
 	protected new ProjectileWeaponAsset AssetDefinition => (base.AssetDefinition as ProjectileWeaponAsset)!;
 
 	public ProjectileWeapon()
@@ -77,9 +79,12 @@ public class ProjectileWeapon : GrubWeapon
 	{
 	}
 
-	protected override async Task OnFire()
+	protected override bool OnFire()
 	{
-		await base.OnFire();
+		base.OnFire();
+
+		if ( !IsServer )
+			return false;
 
 		var arcTrace = new ArcTrace( Parent, Parent.EyePosition );
 		var segments = ProjectileShouldBounce
@@ -108,6 +113,8 @@ public class ProjectileWeapon : GrubWeapon
 
 		SetupProjectile( projectile );
 		GrubsCamera.SetTarget( projectile );
+
+		return false;
 	}
 
 	/// <summary>
