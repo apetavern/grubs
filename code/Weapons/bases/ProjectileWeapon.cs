@@ -100,7 +100,7 @@ public class ProjectileWeapon : GrubWeapon
 			var segments = ProjectileShouldBounce
 				? arcTrace.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0, ProjectileMaxBounces )
 				: arcTrace.RunTowards( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0 );
-			
+
 			projectile.MoveAlongTrace( segments );
 		}
 		else

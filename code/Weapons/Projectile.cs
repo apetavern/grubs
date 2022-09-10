@@ -125,11 +125,11 @@ public class Projectile : ModelEntity, IResolvable
 	/// <returns>The projectile instance.</returns>
 	public Projectile Finish()
 	{
-		Assert.True( Grub is not null, $"{nameof(Projectile)} is missing {nameof(Grub)}" );
+		Assert.True( Grub is not null, $"{nameof( Projectile )} is missing {nameof( Grub )}" );
 		if ( PhysicsImpulse == Vector3.Zero )
-			Assert.True( Segments is not null, $"{nameof(Projectile)} is missing {nameof(Segments)}" );
+			Assert.True( Segments is not null, $"{nameof( Projectile )} is missing {nameof( Segments )}" );
 		if ( Segments is null )
-			Assert.True( PhysicsImpulse != Vector3.Zero, $"{nameof(Projectile)} is missing {nameof(PhysicsImpulse)}" );
+			Assert.True( PhysicsImpulse != Vector3.Zero, $"{nameof( Projectile )} is missing {nameof( PhysicsImpulse )}" );
 
 		return this;
 	}
