@@ -40,7 +40,7 @@ namespace Grubs.UI
 				Add.Image( $"{weapon.Icon}", "Icon" );
 
 				if ( ammoCount >= 0 )
-					Add.Label( $"{ammoCount}".Truncate(1), "Ammo" );
+					Add.Label( $"{ammoCount}".Truncate( 1 ), "Ammo" );
 
 				return this;
 			}
@@ -50,7 +50,7 @@ namespace Grubs.UI
 				if ( SlotIndex == -1 )
 					return;
 
-				GrubsInventory.EquipItemByIndex(SlotIndex);
+				GrubsInventory.EquipItemByIndex( SlotIndex );
 			}
 
 			private void Reset()
