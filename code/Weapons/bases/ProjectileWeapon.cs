@@ -87,7 +87,7 @@ public class ProjectileWeapon : GrubWeapon
 			return false;
 
 		var projectile = new Projectile()
-			.WithGrub( (Parent as Grub)! )
+			.WithGrub( Holder )
 			.WithModel( ProjectileModel )
 			.WithPosition( Position )
 			.WithSpeed( ProjectileSpeed )

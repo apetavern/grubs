@@ -119,9 +119,8 @@ public class MeleeWeapon : GrubWeapon
 	{
 		Host.AssertServer();
 
-		var holder = Parent as Grub;
-		var mins = Vector3.Min( HitStart, HitStart + (holder!.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
-		var maxs = Vector3.Max( HitStart, HitStart + (holder.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
+		var mins = Vector3.Min( HitStart, HitStart + (Holder.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
+		var maxs = Vector3.Max( HitStart, HitStart + (Holder.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
 
 		var grubsHit = new List<Grub>();
 		foreach ( var grub in All.OfType<Grub>() )
