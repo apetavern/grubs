@@ -101,6 +101,8 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 
 			Name = value.WeaponName;
 			SetModel( value.Model );
+			// TODO: Setup start ammo
+			Ammo = value.InfiniteAmmo ? -1 : int.MaxValue;
 			WeaponHasHat = CheckWeaponForHat();
 		}
 	}
@@ -152,6 +154,9 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		if ( ent is not Grub grub )
 			return;
+
+		if ( CurrentUses > 0 )
+			TakeAmmo();
 
 		EnableDrawing = false;
 		ShowWeapon( grub, false );
@@ -249,6 +254,12 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 			GrubsGame.Current.CurrentGamemode.UseTurn();
 	}
 
+	/// <summary>
+	/// Takes ammo from the weapon.
+	/// </summary>
+	public void TakeAmmo()
+	{
+		Ammo--;
 	}
 
 	/// <summary>
