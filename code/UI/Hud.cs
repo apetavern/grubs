@@ -12,6 +12,7 @@ public class Hud : RootPanel
 	private AimReticle? _aimReticle;
 	private readonly List<DamageNumber> _damageNumbers = new();
 	private EndScreen? _endScreen;
+	private InventoryPanel? _inventoryPanel;
 
 	public Hud()
 	{
@@ -55,6 +56,7 @@ public class Hud : RootPanel
 	{
 		_turnTime?.Delete();
 		_turnTime = AddChild<TurnTime>();
+		_inventoryPanel = AddChild<InventoryPanel>();
 
 		_aimReticle?.Delete();
 		_aimReticle = new AimReticle();
@@ -67,6 +69,7 @@ public class Hud : RootPanel
 		_turnTime = null;
 		_aimReticle?.Delete();
 		_aimReticle = null;
+		_inventoryPanel?.Delete();
 		foreach ( var damageNumber in _damageNumbers )
 			damageNumber.Delete();
 		_damageNumbers.Clear();
