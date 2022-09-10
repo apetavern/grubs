@@ -73,7 +73,13 @@ public partial class HitscanWeapon : GrubWeapon
 	public TimeSince TimeSinceLastHitscan { get; private set; }
 
 	/// <summary>
-	/// The amount of shots that have been fired in this burst.
+	/// The amount of traces that have been fired in this burst.
+	/// </summary>
+	[Net, Predicted]
+	public int TracesFired { get; private set; }
+
+	/// <summary>
+	/// The amount of shots that have been fired in total.
 	/// </summary>
 	[Net, Predicted]
 	public int ShotsFired { get; private set; }
@@ -90,13 +96,21 @@ public partial class HitscanWeapon : GrubWeapon
 	{
 		base.Simulate( cl );
 
-		if ( IsFiring && TimeSinceLastHitscan >= TraceDelay )
+		if ( IsFiring && TimeSinceLastHitscan >= TraceDelay && Uses == 1)
 			Shoot();
 	}
 
 	protected override bool OnFire()
 	{
-		base.OnFire();
+		if ( Uses == 1 )
+		{
+			base.OnFire();
+		}
+		else
+		{
+			(Parent as Grub)!.SetAnimParameter( "fire", true );
+			PlaySound( AssetDefinition.FireSound );
+		}
 
 		if ( TraceDelay == 0 && TraceCount > 1 )
 		{
@@ -106,7 +120,7 @@ public partial class HitscanWeapon : GrubWeapon
 		else
 			Shoot();
 
-		return TraceDelay > 0;
+		return TraceDelay > 0 || Uses > 1;
 	}
 
 	/// <summary>
@@ -188,14 +202,29 @@ public partial class HitscanWeapon : GrubWeapon
 		system?.SetPosition( 1, result.EndPosition );
 
 		TimeSinceLastHitscan = 0;
-		ShotsFired++;
+		TracesFired++;
 
-		if ( ShotsFired < TraceCount )
+		if ( TracesFired < TraceCount )
 			return;
 
+		ShotsFired++;
+
+		if ( ShotsFired < Uses )
+		{
+			IsFiring = false;
+			TracesFired = 0;//Fired one "shot" which can be multiple traces, so reset the trace counter and stop firing.
+			return;
+		}
+
+
 		IsFiring = false;
+		TracesFired = 0;
 		ShotsFired = 0;
 		OnFireFinish();
+		if ( Uses > 1 )
+		{
+			GrubsGame.Current.CurrentGamemode.UseTurn();
+		}
 	}
 
 	/// <summary>
