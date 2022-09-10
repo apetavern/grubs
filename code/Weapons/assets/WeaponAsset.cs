@@ -26,6 +26,8 @@ public class WeaponAsset : GameResource
 	[Property, Category( "Meta" )]
 	public HoldPose HoldPose { get; set; } = HoldPose.None;
 
+	[Property, Category( "Meta" )]
+	public int Uses { get; set; } = 1;
 
 	//
 	// Aim related
