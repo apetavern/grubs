@@ -3,23 +3,23 @@
 	data = 
 	{
 		HitForce = 500
-		TraceCount = 5
-		TraceSpread = 200
+		TraceCount = 1
+		TraceSpread = 25
 		TraceDelay = 0
-		ExplosionRadius = 15
-		Damage = 25
+		ExplosionRadius = 20
+		Damage = 20
 		DamageFlags = "Bullet"
 		PenetrateTargets = true
 		PenetrateTerrain = false
-		WeaponName = "Shotgun"
-		Model = resource:"models/weapons/shotgun/shotgun.vmdl"
-		Icon = null
+		WeaponName = "Revolver"
+		Model = resource:"models/weapons/revolver/revolver.vmdl"
+		Icon = ""
 		FiringType = "Instant"
-		HoldPose = "Shotgun"
-		Uses = 2
+		HoldPose = "Revolver"
+		Uses = 6
 		HasReticle = true
 		UnequipAfter = 0
-		FireSound = resource:"weapons/rust_pumpshotgun/sounds/rust_pumpshotgun.shoot.sound"
+		FireSound = resource:"weapons/rust_pistol/sound/rust_pistol.shoot.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }
