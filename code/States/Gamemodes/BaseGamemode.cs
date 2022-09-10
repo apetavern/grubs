@@ -198,6 +198,7 @@ public abstract partial class BaseGamemode : BaseState
 		Host.AssertServer();
 
 		UsedTurn = true;
+		TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( null );
 
 		bool rerun;
 		do
