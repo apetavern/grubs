@@ -61,6 +61,8 @@ public partial class GrubController : BasePlayerController
 		SetBBox( mins, maxs );
 	}
 
+	[Net, Predicted] TimeSince TimeSinceJumpPressed { get; set; }
+
 	public override void Simulate()
 	{
 		var grub = Pawn as Grub;
@@ -84,7 +86,15 @@ public partial class GrubController : BasePlayerController
 
 		if ( Input.Pressed( InputButton.Jump ) && grub.IsTurn && !isFiring )
 		{
-			CheckJumpButton();
+			if ( TimeSinceJumpPressed < 0.2f )
+			{
+				CheckDoubleJumpButton();
+			}
+			else if ( TimeSinceJumpPressed > 0.2f )
+			{
+				TimeSinceJumpPressed = 0f;
+				CheckJumpButton();
+			}
 		}
 
 		// Friction is handled before we add in any base velocity. That way, if we are on a conveyor,
@@ -194,7 +204,7 @@ public partial class GrubController : BasePlayerController
 			// Aim with W & S keys
 			EyeRotation = Rotation.LookAt( LookPos );
 
-			if ( Velocity.IsNearlyZero( 1f ) )
+			if ( Velocity.IsNearlyZero( 0.1f ) )
 				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
 
 			// Rotate EyeRot by our offset
@@ -217,10 +227,24 @@ public partial class GrubController : BasePlayerController
 		}
 	}
 
+	TimeSince TimeSinceWalkStart;
+	bool WalkStarted;
+
 	public virtual void WalkMove()
 	{
+		if(!WalkStarted && WishVelocity.Length > 0 )
+		{
+			TimeSinceWalkStart = 0f;//Need to use a separate timesince to sync up the walk with the animation
+			WalkStarted = true;
+		}
+
+		if(WishVelocity.Length == 0 )
+		{
+			WalkStarted = false;
+		}
+
 		var wishdir = WishVelocity.Normal;
-		var wishspeed = WishVelocity.Length;
+		var wishspeed = WishVelocity.Length * (MathF.Abs( MathF.Sin( (TimeSinceWalkStart + 0.5f) * 4.75f ) ) + 0.1f);//Magic numbers vaguely tweaked to match the animation speed- Ideally we handle this with root motion instead...
 
 		WishVelocity = WishVelocity.WithZ( 0 );
 		WishVelocity = WishVelocity.Normal * wishspeed;
@@ -234,7 +258,7 @@ public partial class GrubController : BasePlayerController
 
 		try
 		{
-			if ( Velocity.Length < 1.0f )
+			if ( Velocity.Length < 0.1f )
 			{
 				Velocity = Vector3.Zero;
 				return;
@@ -355,7 +379,27 @@ public partial class GrubController : BasePlayerController
 
 		float startz = Velocity.z;
 
-		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor );
+		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor ).WithX( WishVelocity.x * 2f );
+
+		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
+
+		AddEvent( "jump" );
+	}
+
+	public virtual void CheckDoubleJumpButton()
+	{
+		if ( TimeSinceJumpPressed > 0.2f )
+			return;
+
+		ClearGroundEntity();
+
+		float flGroundFactor = 1.0f;
+
+		float flMul = 268.3281572999747f * 1.5f;
+
+		float startz = Velocity.z;
+
+		Velocity = Velocity.WithZ( startz * 1.5f ).WithX( Pawn.Rotation.Forward.x * -100f );
 
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 
