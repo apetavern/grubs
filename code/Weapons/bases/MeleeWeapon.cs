@@ -65,7 +65,7 @@ public class MeleeWeapon : GrubWeapon
 	{
 		base.Simulate( cl );
 
-		if ( IsServer && IsFiring && TimeSinceFire > HitDelay )
+		if ( IsFiring && TimeSinceFire > HitDelay )
 			Hit();
 	}
 
@@ -76,36 +76,36 @@ public class MeleeWeapon : GrubWeapon
 		if ( HitDelay > 0 )
 			return true;
 
-		if ( IsServer )
-			Hit();
+		Hit();
 		return false;
 	}
 
 	protected virtual void Hit()
 	{
-		Host.AssertServer();
-
-		var grubsHit = GetGrubsInSwing();
-		if ( !HitMulti )
+		if ( IsServer )
 		{
-			Grub closestGrub = null!;
-			var closestGrubDistance = float.MaxValue;
-
-			foreach ( var grub in grubsHit )
+			var grubsHit = GetGrubsInSwing();
+			if ( !HitMulti )
 			{
-				var distance = Position.Distance( grub.Position );
-				if ( distance > closestGrubDistance )
-					continue;
+				Grub closestGrub = null!;
+				var closestGrubDistance = float.MaxValue;
 
-				closestGrub = grub;
-				closestGrubDistance = distance;
+				foreach ( var grub in grubsHit )
+				{
+					var distance = Position.Distance( grub.Position );
+					if ( distance > closestGrubDistance )
+						continue;
+
+					closestGrub = grub;
+					closestGrubDistance = distance;
+				}
+
+				grubsHit = new List<Grub> { closestGrub };
 			}
 
-			grubsHit = new List<Grub> { closestGrub };
+			foreach ( var grub in grubsHit )
+				HitGrub( grub );
 		}
-
-		foreach ( var grub in grubsHit )
-			HitGrub( grub );
 
 		IsFiring = false;
 		OnFireFinish();
