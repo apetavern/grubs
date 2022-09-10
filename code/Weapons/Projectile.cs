@@ -11,16 +11,13 @@ public class Projectile : ModelEntity, IResolvable
 {
 	public bool Resolved => false;
 
-	public string ExplosionSound { get; set; }
-
 	private Grub Grub { get; set; } = null!;
 	private float Speed { get; set; } = 0.001f;
 	private float ExplosionRadius { get; set; } = 1000;
 	private float CollisionExplosionDelaySeconds { get; set; }
 	private List<ArcSegment> Segments { get; set; } = null!;
 	private Vector3 PhysicsImpulse { get; set; }
-
-
+	private string ExplosionSound { get; set; } = string.Empty;
 
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
@@ -89,6 +86,17 @@ public class Projectile : ModelEntity, IResolvable
 	}
 
 	/// <summary>
+	/// Sets the sound that plays when the projectile explodes.
+	/// </summary>
+	/// <param name="explosionSound">The explosion sound path.</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithExplosionSound( string explosionSound )
+	{
+		ExplosionSound = explosionSound;
+		return this;
+	}
+
+	/// <summary>
 	/// Sets a path for the projectile to follow.
 	/// </summary>
 	/// <param name="points">The arc trace segments to follow.</param>
@@ -150,7 +158,6 @@ public class Projectile : ModelEntity, IResolvable
 		{
 			HandlePhysicsTick();
 		}
-
 	}
 
 	private void HandleSegmentTick()
@@ -191,7 +198,6 @@ public class Projectile : ModelEntity, IResolvable
 	private void Explode()
 	{
 		ExplosionHelper.Explode( Position, Grub, ExplosionRadius );
-
 		PlaySound( ExplosionSound );
 
 		Delete();

@@ -96,7 +96,8 @@ public class ProjectileWeapon : GrubWeapon
 			.WithModel( ProjectileModel )
 			.WithPosition( Position )
 			.WithSpeed( ProjectileSpeed )
-			.WithExplosionRadius( ProjectileExplosionRadius );
+			.WithExplosionRadius( ProjectileExplosionRadius )
+			.WithExplosionSound( ProjectileExplosionSound );
 
 		if ( ProjectileShouldUseTrace )
 			projectile.MoveAlongTrace( segments );
@@ -113,6 +114,7 @@ public class ProjectileWeapon : GrubWeapon
 
 		SetupProjectile( projectile );
 		GrubsCamera.SetTarget( projectile );
+		projectile.PlaySound( ProjectileLoopSound );
 
 		return false;
 	}
@@ -123,7 +125,6 @@ public class ProjectileWeapon : GrubWeapon
 	/// <param name="projectile">The projectile to edit.</param>
 	protected virtual void SetupProjectile( Projectile projectile )
 	{
-		projectile.ExplosionSound = ProjectileExplosionSound;
-		projectile.PlaySound( ProjectileLoopSound );
+
 	}
 }
