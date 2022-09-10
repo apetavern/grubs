@@ -112,7 +112,7 @@ public partial class Team : Entity, ISpectator
 		if ( GrubsGame.Current.CurrentState is not BaseGamemode )
 			return;
 
-		if ( IsTurn && !GrubsGame.Current.CurrentGamemode.UsedTurn )
+		if ( IsTurn && !GrubsGame.Current.CurrentGamemode.UsedTurn && !Inventory.Items[EquippedWeapon].IsFiring )
 		{
 			var lastWeapon = EquippedWeapon;
 
