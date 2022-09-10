@@ -172,6 +172,12 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 					IsCharging = true;
 					Charge++;
 					Charge = Charge.Clamp( 0, MaxCharge );
+					if ( Charge != MaxCharge )
+						break;
+					
+					IsCharging = false;
+					Fire();
+					Charge = 0;
 				}
 
 				if ( Input.Released( InputButton.PrimaryAttack ) )
