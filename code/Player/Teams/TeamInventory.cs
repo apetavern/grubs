@@ -45,7 +45,11 @@ public partial class GrubsInventory : BaseNetworkable
 	[ConCmd.Server]
 	public static void EquipItemByIndex( int index )
 	{
-		if ( ConsoleSystem.Caller.Pawn is not Team team )
+		var team = ConsoleSystem.Caller.Pawn as Team;
+		if ( ConsoleSystem.Caller.IsListenServerHost && TeamManager.Instance.CurrentTeam.ActiveClient.IsBot )
+			team = TeamManager.Instance.CurrentTeam;
+
+		if ( team is null )
 			return;
 
 		var grub = team.ActiveGrub;

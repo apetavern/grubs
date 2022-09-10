@@ -115,6 +115,11 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	private WeaponAsset _assetDefinition { get; set; } = null!;
 
 	/// <summary>
+	/// Helper property to grab the Grub that is holding this weapon.
+	/// </summary>
+	protected Grub Holder => (Parent as Grub)!;
+
+	/// <summary>
 	/// The animator of the grub that is holding the weapon.
 	/// </summary>
 	protected GrubAnimator? Animator;
@@ -244,7 +249,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// <returns>Whether or not the weapon is going to continue firing.</returns>
 	protected virtual bool OnFire()
 	{
-		(Parent as Grub)!.SetAnimParameter( "fire", true );
+		Animator?.SetAnimParameter( "fire", true );
 		PlaySound( AssetDefinition.FireSound );
 
 		return false;
