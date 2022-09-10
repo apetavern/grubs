@@ -16,7 +16,7 @@
 		Icon = null
 		FiringType = "Instant"
 		HoldPose = "Minigun"
-		HasReticle = false
+		HasReticle = true
 		UnequipAfter = 0
 		firesound = resource:"weapons/rust_smg/sounds/rust_smg.shoot.sound"
 		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"

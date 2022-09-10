@@ -16,7 +16,7 @@
 		Icon = null
 		FiringType = "Instant"
 		HoldPose = "Rifle"
-		HasReticle = false
+		HasReticle = true
 		UnequipAfter = 0
 		firesound = resource:"sounds/physics/breaking/break_wood_plank.sound"
 		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
