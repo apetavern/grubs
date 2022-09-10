@@ -15,7 +15,7 @@
 		ProjectileExplodeSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
 		WeaponName = "Bazooka"
 		Model = resource:"models/weapons/bazooka/bazooka.vmdl"
-		Icon = null
+		Icon = resource:"models/weapons/bazooka/bazooka.vmdl_c.png"
 		FiringType = "Charged"
 		HoldPose = "Bazooka"
 		Uses = 1

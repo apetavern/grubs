@@ -13,12 +13,14 @@
 		PenetrateTerrain = false
 		WeaponName = "Uzi"
 		Model = resource:"models/weapons/uzi/uzi.vmdl"
-		Icon = null
+		Icon = resource:"models/weapons/uzi/uzi.vmdl_c.png"
 		FiringType = "Instant"
 		HoldPose = "Uzi"
+		Uses = 1
 		HasReticle = true
 		UnequipAfter = 0
-		firesound = resource:"weapons/rust_smg/sounds/rust_smg.shoot.sound"
-		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
+		InfiniteAmmo = false
+		FireSound = resource:"weapons/rust_smg/sounds/rust_smg.shoot.sound"
+		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

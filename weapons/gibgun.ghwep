@@ -13,12 +13,14 @@
 		PenetrateTerrain = true
 		WeaponName = "gibgun"
 		Model = resource:"models/weapons/railgun/railgun.vmdl"
-		Icon = null
+		Icon = resource:"models/weapons/railgun/railgun.vmdl_c.png"
 		FiringType = "Instant"
 		HoldPose = "Rifle"
+		Uses = 1
 		HasReticle = true
 		UnequipAfter = 0
-		firesound = resource:"sounds/physics/breaking/break_wood_plank.sound"
-		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
+		InfiniteAmmo = false
+		FireSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
+		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

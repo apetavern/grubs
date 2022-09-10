@@ -15,7 +15,7 @@
 		ProjectileExplodeSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
 		WeaponName = "Grenade"
 		Model = resource:"models/weapons/grenade/grenade.vmdl"
-		Icon = null
+		Icon = resource:"models/weapons/grenade/grenade.vmdl_c.png"
 		FiringType = "Charged"
 		HoldPose = "Throwable"
 		Uses = 1

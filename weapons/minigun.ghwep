@@ -13,12 +13,14 @@
 		PenetrateTerrain = false
 		WeaponName = "Minigun"
 		Model = resource:"models/weapons/minigun/minigun.vmdl"
-		Icon = null
+		Icon = resource:"models/weapons/minigun/minigun.vmdl_c.png"
 		FiringType = "Instant"
 		HoldPose = "Minigun"
+		Uses = 1
 		HasReticle = true
 		UnequipAfter = 0
-		firesound = resource:"weapons/rust_smg/sounds/rust_smg.shoot.sound"
-		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
+		InfiniteAmmo = false
+		FireSound = resource:"weapons/rust_smg/sounds/rust_smg.shoot.sound"
+		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

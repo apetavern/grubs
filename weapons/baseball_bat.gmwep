@@ -10,7 +10,7 @@
 		Damage = 50
 		WeaponName = "Baseball Bat"
 		Model = resource:"models/weapons/baseballbat/baseballbat.vmdl"
-		Icon = null
+		Icon = resource:"models/weapons/baseballbat/baseballbat.vmdl_c.png"
 		FiringType = "Instant"
 		HoldPose = "Swing"
 		Uses = 1
