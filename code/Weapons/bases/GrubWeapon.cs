@@ -105,7 +105,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 		}
 	}
 	[Net]
-	private WeaponAsset _assetDefinition { get; set; }
+	private WeaponAsset _assetDefinition { get; set; } = null!;
 
 	/// <summary>
 	/// The animator of the grub that is holding the weapon.
