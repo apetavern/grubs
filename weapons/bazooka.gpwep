@@ -18,9 +18,10 @@
 		Icon = null
 		FiringType = "Charged"
 		HoldPose = "Bazooka"
+		Uses = 1
 		HasReticle = true
 		UnequipAfter = 0.5
-		firesound = resource:"weapons/rust_smg/sounds/rust_smg.dryfire.sound"
-		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
+		FireSound = resource:"weapons/rust_smg/sounds/rust_smg.dryfire.sound"
+		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }
