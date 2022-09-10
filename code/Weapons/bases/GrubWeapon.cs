@@ -77,6 +77,12 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	public TimeSince TimeSinceFire { get; private set; }
 
 	/// <summary>
+	/// The amount of times this weapon has been used this turn.
+	/// </summary>
+	[Net, Predicted]
+	public int CurrentUses { get; protected set; }
+
+	/// <summary>
 	/// Whether or not this weapon has a special hat associated with it.
 	/// </summary>
 	[Net]
@@ -152,13 +158,14 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 		SetParent( Owner );
 
 		Animator = null;
+		CurrentUses = 0;
 	}
 
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
 
-		if ( !IsFiring || Uses > 1)
+		if ( !IsFiring || Uses > 1 )
 			CheckFireInput();
 	}
 
@@ -211,9 +218,9 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		IsFiring = true;
 		TimeSinceFire = 0;
+		CurrentUses++;
 
 		var continueFiring = OnFire();
-
 		if ( continueFiring )
 			return;
 
@@ -228,9 +235,8 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	protected virtual bool OnFire()
 	{
 		(Parent as Grub)!.SetAnimParameter( "fire", true );
-		GrubsGame.Current.CurrentGamemode.UseTurn();
-
 		PlaySound( AssetDefinition.FireSound );
+
 		return false;
 	}
 
@@ -239,6 +245,9 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// </summary>
 	protected virtual void OnFireFinish()
 	{
+		if ( CurrentUses >= Uses )
+			GrubsGame.Current.CurrentGamemode.UseTurn();
+	}
 
 	}
 
