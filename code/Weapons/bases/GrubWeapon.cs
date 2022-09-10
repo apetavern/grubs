@@ -42,6 +42,11 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	public virtual bool HasReticle => AssetDefinition.HasReticle;
 
 	/// <summary>
+	/// Whether or not this weapon should have an aim reticle.
+	/// </summary>
+	public virtual int Uses => AssetDefinition.Uses;
+
+	/// <summary>
 	/// The amount of times this gun can be used before being removed.
 	/// </summary>
 	[Net, Predicted, Local]
@@ -153,7 +158,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		base.Simulate( cl );
 
-		if ( !IsFiring )
+		if ( !IsFiring || Uses > 1)
 			CheckFireInput();
 	}
 
