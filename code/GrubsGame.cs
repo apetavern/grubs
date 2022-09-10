@@ -27,7 +27,7 @@ public partial class GrubsGame : Game
 	/// The current state that the game is in.
 	/// </summary>
 	[Net]
-	public BaseState CurrentState { get; set; }
+	public BaseState CurrentState { get; set; } = null!;
 
 	/// <summary>
 	/// The current gamemode the game is in.
@@ -49,12 +49,12 @@ public partial class GrubsGame : Game
 	/// <summary>
 	/// The terrain map in the world.
 	/// </summary>
-	public TerrainMap TerrainMap { get; set; }
+	public TerrainMap TerrainMap { get; set; } = null!;
 
 	/// <summary>
 	/// The model of the terrain map.
 	/// </summary>
-	public TerrainModel TerrainModel { get; set; }
+	public TerrainModel TerrainModel { get; set; } = null!;
 
 	/// <summary>
 	/// The seed used to create the terrain map.

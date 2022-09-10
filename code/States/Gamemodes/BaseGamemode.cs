@@ -16,7 +16,8 @@ public abstract partial class BaseGamemode : BaseState
 	/// The manager entity for teams of grubs.
 	/// </summary>
 	[Net]
-	public TeamManager TeamManager { get; private set; }
+	public TeamManager TeamManager { get; private set; } = null!;
+
 	/// <summary>
 	/// Whether or not the current team has used their turn.
 	/// </summary>

@@ -22,7 +22,7 @@ public class ProjectileWeaponAsset : WeaponAsset
 	public int ProjectileMaxBounces { get; set; } = 0;
 
 	[Property, Category( "Weapon" ), ResourceType( "vmdl" )]
-	public string ProjectileModel { get; set; }
+	public string ProjectileModel { get; set; } = "";
 
 	[Property, Category( "Weapon" )]
 	public float ProjectileSpeed { get; set; } = 1000;
@@ -37,8 +37,8 @@ public class ProjectileWeaponAsset : WeaponAsset
 	public float ProjectileCollisionExplosionDelay { get; set; } = 0;
 
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
-	public string ProjectileLoopSound { get; set; }
+	public string ProjectileLoopSound { get; set; } = "";
 
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
-	public string ProjectileExplodeSound { get; set; }
+	public string ProjectileExplodeSound { get; set; } = "";
 }

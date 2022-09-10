@@ -3,8 +3,8 @@
 [Category( "Terrain" )]
 public class TerrainModel : ModelEntity
 {
-	public MarchingSquares MarchingSquares;
-	public TerrainWallModel WallModel;
+	public MarchingSquares MarchingSquares = null!;
+	public TerrainWallModel WallModel = null!;
 
 	public TerrainModel()
 	{

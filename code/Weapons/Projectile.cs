@@ -17,7 +17,7 @@ public class Projectile : ModelEntity, IResolvable
 	private float CollisionExplosionDelaySeconds { get; set; }
 	private List<ArcSegment> Segments { get; set; } = null!;
 	private Vector3 PhysicsImpulse { get; set; }
-	private string ExplosionSound { get; set; }
+	private string ExplosionSound { get; set; } = "";
 
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.

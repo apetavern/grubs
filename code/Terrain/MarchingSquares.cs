@@ -31,8 +31,8 @@ public class MarchingSquares
 	public Model GenerateModel()
 	{
 		TerrainMap map = GrubsGame.Current.TerrainMap;
-		Width = map.Width;
-		Height = map.Height;
+		Width = TerrainMap.Width;
+		Height = TerrainMap.Height;
 
 		var scale = GameConfig.TerrainScale;
 

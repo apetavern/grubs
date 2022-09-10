@@ -7,9 +7,9 @@ public class EndScreen : Panel
 {
 	private static GameEndState? GameEndState => GrubsGame.Current.CurrentState as GameEndState;
 
-	public Label TitleLabel { get; set; }
-	public Label SubtitleLabel { get; set; }
-	public Label ReplayLabel { get; set; }
+	public Label TitleLabel { get; set; } = null!;
+	public Label SubtitleLabel { get; set; } = null!;
+	public Label ReplayLabel { get; set; } = null!;
 
 	public override void Tick()
 	{

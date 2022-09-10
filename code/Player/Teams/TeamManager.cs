@@ -10,10 +10,10 @@ public partial class TeamManager : Entity
 {
 	/// <summary>
 	/// The single instance of this manager.
-	/// <remarks>All <see cref="Grubs.States.IGamemode"/>s should be including a <see cref="TeamManager"/>.</remarks>
+	/// <remarks>All <see cref="Grubs.States.BaseGamemode"/>s should be including a <see cref="TeamManager"/>.</remarks>
 	/// </summary>
 	[Net]
-	public static TeamManager Instance { get; private set; }
+	public static TeamManager Instance { get; private set; } = null!;
 
 	/// <summary>
 	/// The list of all teams in this manager.

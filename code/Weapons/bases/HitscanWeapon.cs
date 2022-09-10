@@ -171,7 +171,7 @@ public partial class HitscanWeapon : GrubWeapon
 			}
 			else if ( result.Hit )
 			{
-				ExplosionHelper.Explode( result.EndPosition, Parent as Grub, ExplosionRadius, 0 );
+				ExplosionHelper.Explode( result.EndPosition, (Parent as Grub)!, ExplosionRadius, 0 );
 			}
 
 			foreach ( var grub in hitgrubs )

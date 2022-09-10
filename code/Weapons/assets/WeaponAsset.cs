@@ -15,10 +15,10 @@ public class WeaponAsset : GameResource
 	public string WeaponName { get; set; } = "Weapon";
 
 	[Property, Category( "Meta" ), ResourceType( "vmdl" )]
-	public string Model { get; set; }
+	public string Model { get; set; } = "";
 
 	[Property, Category( "Meta" ), ResourceType( "png" )]
-	public string Icon { get; set; }
+	public string Icon { get; set; } = "";
 
 	[Property, Category( "Meta" )]
 	public FiringType FiringType { get; set; } = FiringType.Instant;
@@ -40,10 +40,10 @@ public class WeaponAsset : GameResource
 	public float UnequipAfter { get; set; } = 0;
 
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
-	public string FireSound { get; set; }
+	public string FireSound { get; set; } = "";
 
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
-	public string DeploySound { get; set; }
+	public string DeploySound { get; set; } = "";
 
 	protected override void PostLoad()
 	{
