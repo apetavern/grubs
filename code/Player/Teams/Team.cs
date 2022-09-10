@@ -118,18 +118,24 @@ public partial class Team : Entity, ISpectator
 
 			if ( Input.Pressed( InputButton.Menu ) )
 			{
-				if ( EquippedWeapon == 0 )
-					EquippedWeapon = Inventory.Items.Count - 1;
-				else
-					EquippedWeapon--;
+				do
+				{
+					if ( EquippedWeapon == 0 )
+						EquippedWeapon = Inventory.Items.Count - 1;
+					else
+						EquippedWeapon--;
+				} while ( Inventory.Items[EquippedWeapon].Ammo == 0 );
 			}
 
 			if ( Input.Pressed( InputButton.Use ) )
 			{
-				if ( EquippedWeapon == Inventory.Items.Count - 1 )
-					EquippedWeapon = 0;
-				else
-					EquippedWeapon++;
+				do
+				{
+					if ( EquippedWeapon == Inventory.Items.Count - 1 )
+						EquippedWeapon = 0;
+					else
+						EquippedWeapon++;
+				} while ( Inventory.Items[EquippedWeapon].Ammo == 0 );
 			}
 
 			if ( EquippedWeapon != lastWeapon )
