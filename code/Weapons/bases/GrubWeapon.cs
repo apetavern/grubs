@@ -216,7 +216,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 		(Parent as Grub)!.SetAnimParameter( "fire", true );
 		GrubsGame.Current.CurrentGamemode.UseTurn();
 
-		PlaySound( AssetDefinition.firesound );
+		PlaySound( AssetDefinition.FireSound );
 		return false;
 	}
 
@@ -229,7 +229,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		if ( show )
 		{
-			PlaySound( AssetDefinition.deploysound );
+			PlaySound( AssetDefinition.DeploySound );
 		}
 		EnableDrawing = show;
 		Animator?.SetAnimParameter( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );

@@ -40,10 +40,10 @@ public class WeaponAsset : GameResource
 	public float UnequipAfter { get; set; } = 0;
 
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
-	public string firesound { get; set; }
+	public string FireSound { get; set; }
 
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
-	public string deploysound { get; set; }
+	public string DeploySound { get; set; }
 
 	protected override void PostLoad()
 	{

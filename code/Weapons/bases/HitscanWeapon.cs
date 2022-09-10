@@ -46,7 +46,7 @@ public partial class HitscanWeapon : GrubWeapon
 	/// <summary>
 	/// Penetrate terrain? (Leaves trail in the terrain until end of trace)
 	/// </summary>
-	protected virtual string FireSound => AssetDefinition.firesound;
+	protected virtual string FireSound => AssetDefinition.FireSound;
 
 	/// <summary>
 	/// The amount of damage being hit by the weapon will do.
