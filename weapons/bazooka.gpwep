@@ -21,6 +21,7 @@
 		Uses = 1
 		HasReticle = true
 		UnequipAfter = 0.5
+		InfiniteAmmo = true
 		FireSound = resource:"weapons/rust_smg/sounds/rust_smg.dryfire.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}

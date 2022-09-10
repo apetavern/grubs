@@ -13,9 +13,11 @@
 		Icon = null
 		FiringType = "Instant"
 		HoldPose = "Swing"
+		Uses = 1
 		HasReticle = false
 		UnequipAfter = 0.5
-		firesound = resource:"weapons/rust_flashlight/sounds/rust_flashlight.attack.sound"
-		deploysound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
+		InfiniteAmmo = true
+		FireSound = resource:"weapons/rust_flashlight/sounds/rust_flashlight.attack.sound"
+		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
 	}
 }

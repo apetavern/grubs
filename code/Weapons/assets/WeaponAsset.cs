@@ -41,6 +41,9 @@ public class WeaponAsset : GameResource
 	[Property, Category( "Weapon" )]
 	public float UnequipAfter { get; set; } = 0;
 
+	[Property, Category( "Weapon" )]
+	public bool InfiniteAmmo { get; set; } = false;
+
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
 	public string FireSound { get; set; } = "";
 
