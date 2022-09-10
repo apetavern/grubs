@@ -174,7 +174,7 @@ public partial class GrubController : BasePlayerController
 		if ( Host.IsServer && TeamManager.Instance.CurrentTeam.ActiveGrub == Pawn )
 			GrubsGame.Current.CurrentGamemode.UseTurn();
 
-		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
+		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed * 0.25f;
 		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );
 	}
 
