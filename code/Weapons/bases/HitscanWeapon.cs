@@ -195,6 +195,7 @@ public partial class HitscanWeapon : GrubWeapon
 
 		IsFiring = false;
 		ShotsFired = 0;
+		OnFireFinish();
 	}
 
 	/// <summary>

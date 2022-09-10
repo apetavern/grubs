@@ -108,6 +108,7 @@ public class MeleeWeapon : GrubWeapon
 			HitGrub( grub );
 
 		IsFiring = false;
+		OnFireFinish();
 	}
 
 	/// <summary>

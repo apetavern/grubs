@@ -209,8 +209,11 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 
 		var continueFiring = OnFire();
 
-		if ( !continueFiring )
-			IsFiring = false;
+		if ( continueFiring )
+			return;
+		
+		IsFiring = false;
+		OnFireFinish();
 	}
 
 	/// <summary>
@@ -224,6 +227,14 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 
 		PlaySound( AssetDefinition.FireSound );
 		return false;
+	}
+
+	/// <summary>
+	/// Called when firing has finished.
+	/// </summary>
+	protected virtual void OnFireFinish()
+	{
+		
 	}
 
 	/// <summary>
