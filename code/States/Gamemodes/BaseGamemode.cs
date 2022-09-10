@@ -20,7 +20,7 @@ public abstract partial class BaseGamemode : BaseState
 	/// <summary>
 	/// Whether or not the current team has used their turn.
 	/// </summary>
-	[Net]
+	[Net, Predicted]
 	public bool UsedTurn { get; private set; }
 	/// <summary>
 	/// The time until the current teams turn is automatically ended.
@@ -169,8 +169,6 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	public virtual void UseTurn()
 	{
-		Host.AssertServer();
-
 		UsedTurn = true;
 	}
 
