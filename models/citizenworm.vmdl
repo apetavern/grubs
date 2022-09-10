@@ -739,6 +739,64 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "incline_correct_top_add"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "stancepose"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_incline_correct.fbx"
+						start_frame = 10
+						end_frame = 10
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "incline_correct_bottom_add"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "stancepose"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_incline_correct.fbx"
+						start_frame = 20
+						end_frame = 20
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
