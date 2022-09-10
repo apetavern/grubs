@@ -145,6 +145,7 @@ public partial class GrubController : BasePlayerController
 	{
 		if ( GroundEntity == null || FallVelocity <= 0 )
 		{
+			IsHardFalling = false;
 			return;
 		}
 
@@ -174,7 +175,7 @@ public partial class GrubController : BasePlayerController
 		if ( Host.IsServer && TeamManager.Instance.CurrentTeam.ActiveGrub == Pawn )
 			GrubsGame.Current.CurrentGamemode.UseTurn();
 
-		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed * 0.25f;
+		float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed * 0.15f;
 		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );
 	}
 
