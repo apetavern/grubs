@@ -4,6 +4,12 @@ using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
 
+public enum ProjectileCollisionReaction
+{
+	Explosive,
+	Incendiary
+}
+
 /// <summary>
 /// An arc trace based projectile.
 /// </summary>
@@ -19,6 +25,8 @@ public class Projectile : ModelEntity, IResolvable
 	private Vector3 PhysicsImpulse { get; set; }
 	private string ExplosionSound { get; set; } = "";
 	private string TrailParticle { get; set; } = "";
+
+	private ProjectileCollisionReaction CollisionReaction { get; set; }
 
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
@@ -94,6 +102,17 @@ public class Projectile : ModelEntity, IResolvable
 	public Projectile WithExplosionSound( string explosionSound )
 	{
 		ExplosionSound = explosionSound;
+		return this;
+	}
+
+	/// <summary>
+	/// What happens when the projectile "collides".
+	/// </summary>
+	/// <param name="reaction"></param>
+	/// <returns></returns>
+	public Projectile SetCollisionReaction( ProjectileCollisionReaction reaction )
+	{
+		CollisionReaction = reaction;
 		return this;
 	}
 
@@ -217,7 +236,16 @@ public class Projectile : ModelEntity, IResolvable
 
 	private void Explode()
 	{
-		ExplosionHelper.Explode( Position, Grub, ExplosionRadius );
+		switch ( CollisionReaction )
+		{
+			case ProjectileCollisionReaction.Explosive:
+				ExplosionHelper.Explode( Position, Grub, ExplosionRadius );
+				break;
+			case ProjectileCollisionReaction.Incendiary:
+				FireHelper.StartFiresAt( Position, Segments[Segments.Count - 1].EndPos - Segments[Segments.Count - 1].StartPos, 10 );
+				break;
+		}
+
 		PlaySound( ExplosionSound );
 
 		Delete();
