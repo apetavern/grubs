@@ -50,5 +50,9 @@ public class InventoryPanel : Panel
 			HasBuilt = false;
 	}
 
+	[GrubsEvent.GainedAmmo.Client]
+	private void GainedAmmo( WeaponAsset weaponAsset, int amount )
+	{
+		HasBuilt = false;
 	}
 }

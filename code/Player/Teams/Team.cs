@@ -1,5 +1,6 @@
 ﻿using Grubs.States;
 using Grubs.Utils;
+using Grubs.Utils.Event;
 using Grubs.Weapons.Base;
 
 namespace Grubs.Player;
@@ -140,6 +141,8 @@ public partial class Team : Entity, ISpectator
 				continue;
 
 			weapon.Ammo += amount;
+			EventRunner.RunLocal( GrubsEvent.GainedAmmoEvent, weaponAsset, amount );
+			GainedAmmoRpc( To.Multiple( Clients ), weaponAsset, amount );
 			return;
 		}
 
@@ -254,5 +257,11 @@ public partial class Team : Entity, ISpectator
 		while ( spawnLocations.Count < num )
 			spawnLocations.Add( GrubsGame.Current.TerrainMap.GetSpawnLocation() );
 		return spawnLocations;
+	}
+
+	[ClientRpc]
+	private void GainedAmmoRpc( WeaponAsset weaponAsset, int amount )
+	{
+		EventRunner.RunLocal( GrubsEvent.GainedAmmoEvent, weaponAsset, amount );
 	}
 }

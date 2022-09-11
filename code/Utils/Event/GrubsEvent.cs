@@ -284,6 +284,73 @@ public static class GrubsEvent
 	}
 	#endregion
 
+	#region GainedAmmo
+	/// <summary>
+	/// Called when a team has gained ammo for a weapon.
+	/// </summary>
+	public const string GainedAmmoEvent = "grubs_gained-ammo";
+
+	/// <summary>
+	/// Called when a team has gained ammo for a weapon.
+	/// </summary>
+	[AttributeUsage( AttributeTargets.Method )]
+	public class GainedAmmoAttribute : EventAttribute
+	{
+		public GainedAmmoAttribute( string? state = null ) : base( GainedAmmoEvent + state ?? string.Empty )
+		{
+			if ( state is null )
+				return;
+
+			AssertValidState( state );
+		}
+	}
+
+	/// <summary>
+	/// Called when a team has gained ammo for a weapon.
+	/// </summary>
+	public static class GainedAmmo
+	{
+		/// <summary>
+		/// <see cref="GainedAmmo"/> event but only called on the client realm.
+		/// </summary>
+		public const string ClientEvent = ClientPrefix + GainedAmmoEvent;
+		/// <summary>
+		/// <see cref="GainedAmmo"/> event but only called on the server realm.
+		/// </summary>
+		public const string ServerEvent = ServerPrefix + GainedAmmoEvent;
+
+		/// <summary>
+		/// <see cref="GainedAmmo"/> event but only called on the client realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ClientAttribute : EventAttribute
+		{
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+
+		/// <summary>
+		/// <see cref="GainedAmmo"/> event but only called on the server realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ServerAttribute : EventAttribute
+		{
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+	}
+	#endregion
+
 	#region GrubHealed
 	/// <summary>
 	/// Called when a grub gets healed.
