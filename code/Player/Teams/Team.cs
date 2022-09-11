@@ -128,6 +128,25 @@ public partial class Team : Entity, ISpectator
 	}
 
 	/// <summary>
+	/// Gives the team ammo for the provided weapon type.
+	/// </summary>
+	/// <param name="weaponAsset">The weapon type to give ammo to.</param>
+	/// <param name="amount">The amount of ammo to give.</param>
+	public void GiveAmmo( WeaponAsset weaponAsset, int amount )
+	{
+		foreach ( var weapon in Inventory.Items )
+		{
+			if ( weapon.AssetDefinition != weaponAsset )
+				continue;
+
+			weapon.Ammo += amount;
+			return;
+		}
+
+		Log.Error( $"Failed to give {amount} ammo to {this} for {weaponAsset}" );
+	}
+
+	/// <summary>
 	/// Create and spawn the grubs for this team. Number of grubs spawned is defined by <see cref="GameConfig"/>.<see cref="GameConfig.GrubCount"/>.
 	/// </summary>
 	private void CreateGrubs()

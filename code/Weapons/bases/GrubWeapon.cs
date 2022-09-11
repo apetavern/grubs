@@ -106,8 +106,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 
 			Name = value.WeaponName;
 			SetModel( value.Model );
-			// TODO: Setup start ammo
-			Ammo = value.InfiniteAmmo ? -1 : int.MaxValue;
+			Ammo = value.InfiniteAmmo ? -1 : 0;
 			WeaponHasHat = CheckWeaponForHat();
 		}
 	}

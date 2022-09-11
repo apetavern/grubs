@@ -10,6 +10,7 @@ using Grubs.States;
 using Grubs.Terrain;
 using Grubs.UI;
 using Grubs.Utils.Event;
+using Grubs.Weapons.Base;
 
 namespace Grubs;
 
@@ -153,6 +154,21 @@ public partial class GrubsGame : Game
 			Flags = DamageFlags.Crush
 		} );
 		activeGrub.ApplyDamage();
+	}
+
+	/// <summary>
+	/// Admin command to give ammo the active team.
+	/// </summary>
+	/// <param name="weaponName">The name of the weapon to give ammo to.</param>
+	/// <param name="amount">The amount of ammo to give.</param>
+	[ConCmd.Admin]
+	public static void GiveAmmo( string weaponName, int amount )
+	{
+		if ( Current.CurrentState is not BaseGamemode gamemode )
+			return;
+
+		var activeTeam = gamemode.TeamManager.CurrentTeam;
+		activeTeam.GiveAmmo( WeaponAsset.All.First( weaponAsset => weaponAsset.WeaponName == weaponName ), amount );
 	}
 
 	/// <summary>
