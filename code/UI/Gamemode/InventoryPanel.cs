@@ -13,7 +13,7 @@ public class InventoryPanel : Panel
 
 	public InventoryPanel()
 	{
-		StyleSheet.Load( "/UI/InventoryPanel.scss" );
+		StyleSheet.Load( "/UI/Stylesheets/InventoryPanel.scss" );
 
 		Add.Label( "Inventory", "title" );
 
