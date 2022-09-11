@@ -263,7 +263,7 @@ public class TerrainMap
 
 				if ( d < size )
 				{
-					if ( TerrainGrid[i, j] != false )
+					if ( TerrainGrid[i, j] )
 					{
 						TerrainGrid[i, j] = false;
 						modifiedTerrain = true;
