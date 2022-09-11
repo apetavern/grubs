@@ -248,8 +248,9 @@ public partial class GrubsGame : Game
 	[ClientRpc]
 	public static void ExplodeClient( Vector2 midpoint, float size )
 	{
-		Current.TerrainMap.DestructSphere( midpoint, size );
-		Current.RegenerateMap();
+		bool DidDamage = Current.TerrainMap.DestructSphere( midpoint, size );
+		if ( DidDamage )
+			Current.RegenerateMap();
 	}
 
 	/// <summary>
@@ -261,7 +262,8 @@ public partial class GrubsGame : Game
 	[ClientRpc]
 	public static void LineClient( Vector3 Startpoint, Vector3 EndPoint, float Width )
 	{
-		Current.TerrainMap.DestructLine( Startpoint, EndPoint, Width );
-		Current.RegenerateMap();
+		bool DidDamage = Current.TerrainMap.DestructLine( Startpoint, EndPoint, Width );
+		if ( DidDamage )
+			Current.RegenerateMap();
 	}
 }
