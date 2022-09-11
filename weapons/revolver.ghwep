@@ -17,6 +17,7 @@
 		FiringType = "Instant"
 		HoldPose = "Revolver"
 		Uses = 6
+		DropChance = 3
 		HasReticle = true
 		UnequipAfter = 0
 		InfiniteAmmo = false

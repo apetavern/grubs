@@ -17,6 +17,7 @@
 		FiringType = "Instant"
 		HoldPose = "Uzi"
 		Uses = 1
+		DropChance = 4
 		HasReticle = true
 		UnequipAfter = 0
 		InfiniteAmmo = false

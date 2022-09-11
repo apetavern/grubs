@@ -17,6 +17,7 @@
 		FiringType = "Instant"
 		HoldPose = "Minigun"
 		Uses = 1
+		DropChance = 3
 		HasReticle = true
 		UnequipAfter = 0
 		InfiniteAmmo = false

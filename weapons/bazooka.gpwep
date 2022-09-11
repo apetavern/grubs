@@ -19,6 +19,7 @@
 		FiringType = "Charged"
 		HoldPose = "Bazooka"
 		Uses = 1
+		DropChance = 0
 		HasReticle = true
 		UnequipAfter = 0.5
 		InfiniteAmmo = true

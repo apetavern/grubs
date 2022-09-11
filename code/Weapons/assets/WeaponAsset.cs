@@ -29,6 +29,9 @@ public class WeaponAsset : GameResource
 	[Property, Category( "Meta" )]
 	public int Uses { get; set; } = 1;
 
+	[Property, Category( "Meta" )]
+	public float DropChance { get; set; } = 1;
+
 	//
 	// Aim related
 	//

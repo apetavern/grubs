@@ -14,6 +14,7 @@
 		FiringType = "Instant"
 		HoldPose = "Swing"
 		Uses = 1
+		DropChance = 0
 		HasReticle = false
 		UnequipAfter = 0.5
 		InfiniteAmmo = true

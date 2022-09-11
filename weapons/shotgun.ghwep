@@ -17,6 +17,7 @@
 		FiringType = "Instant"
 		HoldPose = "Shotgun"
 		Uses = 2
+		DropChance = 5
 		HasReticle = true
 		UnequipAfter = 0
 		InfiniteAmmo = false
