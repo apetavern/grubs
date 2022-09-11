@@ -316,6 +316,8 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// <param name="weapon">The weapon to equip.</param>
 	public void EquipWeapon( GrubWeapon? weapon )
 	{
+		Host.AssertServer();
+
 		ActiveChild = weapon;
 	}
 
