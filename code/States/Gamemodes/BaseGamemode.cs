@@ -249,7 +249,10 @@ public abstract partial class BaseGamemode : BaseState
 		var num = rand.Next( 0, 100 );
 		if ( num <= GameConfig.WeaponCrateChancePerTurn )
 		{
-			var weaponCrate = new WeaponCrate { Position = new Vector3( Rand.Float( 1000 ), 0, 3000 ) };
+			var x = Rand.Float( GameConfig.TerrainWidth * GameConfig.TerrainScale );
+			var startZ = GameConfig.TerrainHeight * GameConfig.TerrainScale;
+			var z = Rand.Float( startZ, startZ + 100 );
+			var weaponCrate = new WeaponCrate { Position = new Vector3( x, 0, z ) };
 			GrubsCamera.SetTarget( weaponCrate );
 			await GameTask.DelaySeconds( 1 );
 		}
@@ -257,7 +260,10 @@ public abstract partial class BaseGamemode : BaseState
 		num = rand.Next( 0, 100 );
 		if ( num <= GameConfig.HealthCrateChancePerTurn )
 		{
-			var healthCrate = new HealthCrate { Position = new Vector3( Rand.Float( 1000 ), 0, 3000 ) };
+			var x = Rand.Float( GameConfig.TerrainWidth * GameConfig.TerrainScale );
+			var startZ = GameConfig.TerrainHeight * GameConfig.TerrainScale;
+			var z = Rand.Float( startZ, startZ + 100 );
+			var healthCrate = new HealthCrate { Position = new Vector3( x, 0, z ) };
 			GrubsCamera.SetTarget( healthCrate );
 			await GameTask.DelaySeconds( 1 );
 		}
