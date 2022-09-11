@@ -344,7 +344,8 @@ public partial class Grub : AnimatedEntity, IResolvable
 		// We only want the hair/hats so we won't use the logic built into Clothing
 		var items = clothes.Clothing.Where( item =>
 			item.Category == Clothing.ClothingCategory.Hair ||
-			item.Category == Clothing.ClothingCategory.Hat
+			item.Category == Clothing.ClothingCategory.Hat ||
+			item.Category == Clothing.ClothingCategory.Facial
 		);
 
 		if ( !items.Any() )
