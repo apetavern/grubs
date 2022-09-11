@@ -3,8 +3,8 @@
 [Category( "Terrain" )]
 public class TerrainModel : ModelEntity
 {
-	public MarchingSquares MarchingSquares = null!;
-	public TerrainWallModel WallModel = null!;
+	private MarchingSquares _marchingSquares = null!;
+	private TerrainWallModel _wallModel = null!;
 
 	public TerrainModel()
 	{
@@ -20,11 +20,11 @@ public class TerrainModel : ModelEntity
 
 	public void GenerateMeshAndWalls()
 	{
-		MarchingSquares = new MarchingSquares();
-		Model = MarchingSquares.GenerateModel();
+		_marchingSquares = new MarchingSquares();
+		Model = _marchingSquares.GenerateModel();
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-		WallModel?.Delete();
-		WallModel = new TerrainWallModel( MarchingSquares );
+		_wallModel?.Delete();
+		_wallModel = new TerrainWallModel( _marchingSquares );
 	}
 }
