@@ -18,6 +18,7 @@ public class Projectile : ModelEntity, IResolvable
 	private List<ArcSegment> Segments { get; set; } = null!;
 	private Vector3 PhysicsImpulse { get; set; }
 	private string ExplosionSound { get; set; } = "";
+	private string TrailParticle { get; set; } = "";
 
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
@@ -93,6 +94,21 @@ public class Projectile : ModelEntity, IResolvable
 	public Projectile WithExplosionSound( string explosionSound )
 	{
 		ExplosionSound = explosionSound;
+		return this;
+	}
+
+	/// <summary>
+	/// Sets the particle used for the trail of the projectile.
+	/// </summary>
+	/// <param name="particlePath">The particle path.</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithTrailParticle( string particlePath )
+	{
+		TrailParticle = particlePath;
+
+		if ( TrailParticle is not "" )
+			Particles.Create( TrailParticle, this, "trail", true );
+
 		return this;
 	}
 

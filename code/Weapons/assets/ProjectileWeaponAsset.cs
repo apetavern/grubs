@@ -41,4 +41,7 @@ public class ProjectileWeaponAsset : WeaponAsset
 
 	[Property, Category( "Weapon" ), ResourceType( "sound" )]
 	public string ProjectileExplodeSound { get; set; } = "";
+
+	[Property, Category( "Weapon" ), ResourceType( "vpcf" )]
+	public string ProjectileParticleTrail { get; set; } = "";
 }
