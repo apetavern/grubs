@@ -263,8 +263,11 @@ public class TerrainMap
 
 				if ( d < size )
 				{
-					TerrainGrid[i, j] = false;
-					modifiedTerrain = true;
+					if ( TerrainGrid[i, j] != false )
+					{
+						TerrainGrid[i, j] = false;
+						modifiedTerrain = true;
+					}
 				}
 			}
 		}
