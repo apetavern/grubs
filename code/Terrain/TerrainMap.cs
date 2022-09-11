@@ -12,7 +12,7 @@ public class TerrainMap
 
 	public static int Height => GameConfig.TerrainHeight;
 
-	public int Seed { get; set; } = 0;
+	public int Seed { get; set; }
 
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
@@ -49,25 +49,21 @@ public class TerrainMap
 	{
 		var res = GameConfig.TerrainResolution;
 
-		for ( int x = 0; x < Width; x++ )
-			for ( int z = 0; z < Height; z++ )
+		for ( var x = 0; x < Width; x++ )
+			for ( var z = 0; z < Height; z++ )
 				TerrainGrid[x, z] = Noise.Simplex( (x + Seed) * res, (z + Seed) * res ) > SurfaceLevel;
 	}
 
 	private void AddBorder()
 	{
-		bool[,] borderedMap = new bool[Width + BorderWidth * 2, Height + BorderWidth * 2];
-		for ( int x = 0; x < borderedMap.GetLength( 0 ); x++ )
-			for ( int z = 0; z < borderedMap.GetLength( 1 ); z++ )
+		var borderedMap = new bool[Width + BorderWidth * 2, Height + BorderWidth * 2];
+		for ( var x = 0; x < borderedMap.GetLength( 0 ); x++ )
+			for ( var z = 0; z < borderedMap.GetLength( 1 ); z++ )
 			{
 				if ( x >= BorderWidth && x < Width + BorderWidth && z >= BorderWidth && z < Height + BorderWidth )
-				{
 					borderedMap[x, z] = TerrainGrid[x - BorderWidth, z - BorderWidth];
-				}
 				else
-				{
 					borderedMap[x, z] = true;
-				}
 			}
 
 		TerrainGrid = borderedMap;
@@ -78,7 +74,7 @@ public class TerrainMap
 		GenerateTurbulentNoise();
 		FindRegions();
 		DiscardRegions();
-		for ( int i = 0; i < GameConfig.DilationAmount; i++ )
+		for ( var i = 0; i < GameConfig.DilationAmount; i++ )
 			DilateRegions();
 	}
 
@@ -93,27 +89,13 @@ public class TerrainMap
 	{
 		var res = GameConfig.TerrainResolution;
 
-		for ( int x = 0; x < Width; x++ )
-			for ( int z = 0; z < Height; z++ )
+		for ( var x = 0; x < Width; x++ )
+			for ( var z = 0; z < Height; z++ )
 			{
 				var n = Noise.Simplex( (x + Seed) * res, (z + Seed) * res );
 				n = Math.Abs( (n * 2) - 1 );
 				TerrainGrid[x, z] = n > NoiseThreshold;
 			}
-	}
-
-	struct IntVector3
-	{
-		public int X { get; set; }
-		public int Y { get; set; }
-		public int Z { get; set; }
-
-		public IntVector3( int x, int y, int z )
-		{
-			this.X = x;
-			this.Y = y;
-			this.Z = z;
-		}
 	}
 
 	/// <summary>
@@ -122,16 +104,16 @@ public class TerrainMap
 	/// </summary>
 	private void FindRegions()
 	{
-		int label = 2;
+		var label = 2;
 		var queue = new Queue<IntVector3>();
 		RegionGrid = new int[Width, Height];
 
-		for ( int x = 0; x < Width; x++ )
-			for ( int z = 0; z < Height; z++ )
+		for ( var x = 0; x < Width; x++ )
+			for ( var z = 0; z < Height; z++ )
 				RegionGrid[x, z] = TerrainGrid[x, z] ? 1 : 0;
 
-		for ( int x = 0; x < Width; x++ )
-			for ( int z = 0; z < Height; z++ )
+		for ( var x = 0; x < Width; x++ )
+			for ( var z = 0; z < Height; z++ )
 			{
 				// Terrain exists in this location.
 				if ( RegionGrid[x, z] == 1 )
@@ -190,15 +172,15 @@ public class TerrainMap
 	private void DiscardRegions()
 	{
 		var regionIdsToKeep = new HashSet<int>();
-		int threshold = (Height * 0.4f).FloorToInt();
+		var threshold = (Height * 0.4f).FloorToInt();
 
-		for ( int x = 0; x < Width; x++ )
-			for ( int z = 0; z < threshold; z++ )
+		for ( var x = 0; x < Width; x++ )
+			for ( var z = 0; z < threshold; z++ )
 				if ( RegionGrid[x, z] != 0 )
 					regionIdsToKeep.Add( RegionGrid[x, z] );
 
-		for ( int x = 0; x < Width; x++ )
-			for ( int z = 0; z < Height; z++ )
+		for ( var x = 0; x < Width; x++ )
+			for ( var z = 0; z < Height; z++ )
 				if ( !regionIdsToKeep.Contains( RegionGrid[x, z] ) )
 					TerrainGrid[x, z] = false;
 	}
@@ -210,17 +192,13 @@ public class TerrainMap
 	{
 		PositionsToDilate = new List<Vector2>();
 
-		for ( int x = 0; x < Width; x++ )
-			for ( int z = 0; z < Height; z++ )
+		for ( var x = 0; x < Width; x++ )
+			for ( var z = 0; z < Height; z++ )
 				if ( TerrainGrid[x, z] )
-				{
 					CheckForDilationPosition( x, z );
-				}
 
 		foreach ( var position in PositionsToDilate )
-		{
 			TerrainGrid[(int)position.x, (int)position.y] = true;
-		}
 	}
 
 	/// <summary>
@@ -249,26 +227,25 @@ public class TerrainMap
 	/// </summary>
 	/// <param name="midpoint">The Vector2 midpoint of the sphere to be destructed.</param>
 	/// <param name="size">The size (radius) of the sphere to be destructed.</param>
+	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructSphere( Vector2 midpoint, float size )
 	{
 		var scale = GameConfig.TerrainScale;
-		bool modifiedTerrain = false;
-		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
+		var modifiedTerrain = false;
+
+		for ( var i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
 		{
-			for ( int j = 0; j < TerrainGrid.GetLength( 1 ); j++ )
+			for ( var j = 0; j < TerrainGrid.GetLength( 1 ); j++ )
 			{
 				var xDiff = midpoint.x - (i * scale);
 				var yDiff = midpoint.y - (j * scale);
 				var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
 
-				if ( d < size )
-				{
-					if ( TerrainGrid[i, j] )
-					{
-						TerrainGrid[i, j] = false;
-						modifiedTerrain = true;
-					}
-				}
+				if ( d >= size || !TerrainGrid[i, j] )
+					continue;
+
+				TerrainGrid[i, j] = false;
+				modifiedTerrain = true;
 			}
 		}
 
@@ -281,22 +258,18 @@ public class TerrainMap
 	/// <param name="startPoint">The Vector3 startpoint of the line to be destructed.</param>
 	/// <param name="endPoint">The Vector3 endpoint of the line to be destructed.</param>
 	/// <param name="width">The size (radius) of the sphere to be destructed.</param>
+	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructLine( Vector3 startPoint, Vector3 endPoint, float width )
 	{
-		Vector3 totalLength = (startPoint - endPoint);
+		var totalLength = (startPoint - endPoint);
+		var stepCount = (int)MathF.Round( totalLength.Length / width );
+		var currentPoint = startPoint;
+		var modifiedTerrain = false;
 
-		int stepCount = (int)MathF.Round( totalLength.Length / (width) );
-
-		Vector3 currentPoint = startPoint;
-
-		bool modifiedTerrain = false;
-
-		for ( int i = 0; i < stepCount; i++ )
+		for ( var i = 0; i < stepCount; i++ )
 		{
 			currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
-
 			var pos = new Vector3( currentPoint.x, currentPoint.z );
-
 			modifiedTerrain = DestructSphere( pos, width );
 		}
 
@@ -314,15 +287,29 @@ public class TerrainMap
 
 		while ( true )
 		{
-			int x = Rand.Int( Width - 1 );
-			int z = Rand.Int( Height - 1 );
-			if ( !TerrainGrid[x, z] )
-			{
-				var startPos = new Vector3( x * scale, 0, z * scale );
-				var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * scale ).WithTag( "solid" ).Run();
-				if ( tr.Hit )
-					return tr.EndPosition;
-			}
+			var x = Rand.Int( Width - 1 );
+			var z = Rand.Int( Height - 1 );
+			if ( TerrainGrid[x, z] )
+				continue;
+
+			var startPos = new Vector3( x * scale, 0, z * scale );
+			var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * scale ).WithTag( "solid" ).Run();
+			if ( tr.Hit )
+				return tr.EndPosition;
+		}
+	}
+
+	private struct IntVector3
+	{
+		public int X { get; set; }
+		public int Y { get; set; }
+		public int Z { get; set; }
+
+		public IntVector3( int x, int y, int z )
+		{
+			X = x;
+			Y = y;
+			Z = z;
 		}
 	}
 }
