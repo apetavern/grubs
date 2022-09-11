@@ -158,7 +158,7 @@ public partial class GrubsGame : Game
 	/// <summary>
 	/// Test command to change the seed on the terrain map and regenerate it.
 	/// </summary>
-	[ConCmd.Server]
+	[ConCmd.Admin]
 	public static void ScrambleMap()
 	{
 		if ( Host.IsClient )

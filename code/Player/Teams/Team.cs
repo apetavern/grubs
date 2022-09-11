@@ -112,36 +112,6 @@ public partial class Team : Entity, ISpectator
 		if ( GrubsGame.Current.CurrentState is not BaseGamemode )
 			return;
 
-		if ( IsTurn && !GrubsGame.Current.CurrentGamemode.UsedTurn && !Inventory.Items[EquippedWeapon].IsFiring )
-		{
-			var lastWeapon = EquippedWeapon;
-
-			/*if ( Input.Pressed( InputButton.Menu ) )
-			{
-				do
-				{
-					if ( EquippedWeapon == 0 )
-						EquippedWeapon = Inventory.Items.Count - 1;
-					else
-						EquippedWeapon--;
-				} while ( Inventory.Items[EquippedWeapon].Ammo == 0 );
-			}
-
-			if ( Input.Pressed( InputButton.Use ) )
-			{
-				do
-				{
-					if ( EquippedWeapon == Inventory.Items.Count - 1 )
-						EquippedWeapon = 0;
-					else
-						EquippedWeapon++;
-				} while ( Inventory.Items[EquippedWeapon].Ammo == 0 );
-			}*/
-
-			if ( EquippedWeapon != lastWeapon )
-				ActiveGrub.EquipWeapon( Inventory.Items[EquippedWeapon] );
-		}
-
 		foreach ( var grub in Grubs )
 			grub.Simulate( cl );
 	}

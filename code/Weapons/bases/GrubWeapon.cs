@@ -97,10 +97,10 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// The asset definition this weapon is implementing.
 	/// </summary>
 	// TODO: This is cancer https://github.com/Facepunch/sbox-issues/issues/2282
-	protected WeaponAsset AssetDefinition
+	public WeaponAsset AssetDefinition
 	{
 		get => _assetDefinition;
-		init
+		private init
 		{
 			_assetDefinition = value;
 
