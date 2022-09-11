@@ -11,6 +11,7 @@ using Grubs.Terrain;
 using Grubs.UI;
 using Grubs.Utils.Event;
 using Grubs.Weapons.Base;
+using Precache = Grubs.Utils.Precache;
 
 namespace Grubs;
 
@@ -65,6 +66,8 @@ public partial class GrubsGame : Game
 
 	public GrubsGame()
 	{
+		Precache.Run();
+
 		if ( IsServer )
 		{
 			CurrentState = new WaitingState();
