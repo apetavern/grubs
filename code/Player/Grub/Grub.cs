@@ -98,6 +98,8 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 	private const float MaxHealth = 100;
 
+	private const float MaxOverhealHealth = 250;
+
 	public Grub()
 	{
 		Transmit = TransmitType.Always;
@@ -272,7 +274,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 	{
 		Host.AssertServer();
 
-		var healthToGive = Math.Min( health, MaxHealth - Health );
+		var healthToGive = Math.Min( health, MaxOverhealHealth - Health );
 		if ( healthToGive <= 0 )
 			return false;
 
