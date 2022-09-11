@@ -84,12 +84,24 @@ public partial class TerrainZone : Entity
 	/// <summary>
 	/// Queues the zone to be added to the zone list.
 	/// </summary>
-	public virtual void Finish()
+	/// <returns>The terrain zone as the provided type.</returns>
+	public virtual T Finish<T>() where T : TerrainZone
 	{
 		Host.AssertServer();
 
 		Shape.Finish( this );
 		QueueToAdd.Enqueue( this );
+
+		return (this as T)!;
+	}
+
+	/// <summary>
+	/// Queues the zone to be added to the zone list.
+	/// </summary>
+	/// <returns>The terrain zone in the base type.</returns>
+	public TerrainZone Finish()
+	{
+		return Finish<TerrainZone>();
 	}
 
 	/// <summary>
