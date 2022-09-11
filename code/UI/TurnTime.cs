@@ -2,6 +2,7 @@
 using Grubs.Player;
 using Grubs.States;
 using Grubs.Utils;
+using Grubs.Utils.Event;
 
 namespace Grubs.UI;
 
@@ -28,8 +29,11 @@ public class TurnTime : Panel
 			return;
 
 		_timeLeft.Text = Math.Floor( GrubsGame.Current.CurrentGamemode.TimeUntilTurnEnd ).ToString( CultureInfo.CurrentCulture );
+	}
 
-		// TODO: Event for when turn changes and update there
+	[GrubsEvent.TurnChanged.Client]
+	private void TurnChanged( Team newTeam )
+	{
 		foreach ( var teamName in GameConfig.TeamNames )
 			SetClass( $"team-{teamName}", TeamManager.Instance.CurrentTeam.TeamName == teamName.ToString() );
 	}

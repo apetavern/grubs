@@ -284,6 +284,73 @@ public static class GrubsEvent
 	}
 	#endregion
 
+	#region TurnChanged
+	/// <summary>
+	/// Called when the game turn has changed.
+	/// </summary>
+	public const string TurnChangedEvent = "grubs_turn-changed";
+
+	/// <summary>
+	/// Called when the game turn has changed.
+	/// </summary>
+	[AttributeUsage( AttributeTargets.Method )]
+	public class TurnChangedAttribute : EventAttribute
+	{
+		public TurnChangedAttribute( string? state = null ) : base( TurnChangedEvent + state ?? string.Empty )
+		{
+			if ( state is null )
+				return;
+
+			AssertValidState( state );
+		}
+	}
+
+	/// <summary>
+	/// Called when the game turn has changed.
+	/// </summary>
+	public static class TurnChanged
+	{
+		/// <summary>
+		/// <see cref="TurnChanged"/> event but only called on the client realm.
+		/// </summary>
+		public const string ClientEvent = ClientPrefix + TurnChangedEvent;
+		/// <summary>
+		/// <see cref="TurnChanged"/> event but only called on the server realm.
+		/// </summary>
+		public const string ServerEvent = ServerPrefix + TurnChangedEvent;
+
+		/// <summary>
+		/// <see cref="TurnChanged"/> event but only called on the client realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ClientAttribute : EventAttribute
+		{
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+
+		/// <summary>
+		/// <see cref="TurnChanged"/> event but only called on the server realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ServerAttribute : EventAttribute
+		{
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+	}
+	#endregion
+
 	#region GainedAmmo
 	/// <summary>
 	/// Called when a team has gained ammo for a weapon.

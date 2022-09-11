@@ -270,6 +270,8 @@ public abstract partial class BaseGamemode : BaseState
 		Host.AssertServer();
 
 		GrubsCamera.SetTarget( TeamManager.CurrentTeam.ActiveGrub );
+		EventRunner.RunLocal( GrubsEvent.TurnChangedEvent, TeamManager.CurrentTeam );
+		TurnChangedRpc( To.Everyone, TeamManager.CurrentTeam );
 	}
 
 	/// <summary>
@@ -316,5 +318,11 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		return false;
+	}
+
+	[ClientRpc]
+	private void TurnChangedRpc( Team newTeam )
+	{
+		EventRunner.RunLocal( GrubsEvent.TurnChangedEvent, newTeam );
 	}
 }
