@@ -5,7 +5,6 @@ public class TerrainWallModel : ModelEntity
 {
 	public TerrainWallModel()
 	{
-
 	}
 
 	public TerrainWallModel( MarchingSquares marchingSquares )
