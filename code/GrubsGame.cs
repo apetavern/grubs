@@ -5,7 +5,7 @@ global using Sandbox.UI.Construct;
 global using System;
 global using System.Collections.Generic;
 global using System.Linq;
-
+using Grubs.Crates;
 using Grubs.States;
 using Grubs.Terrain;
 using Grubs.UI;
@@ -172,6 +172,36 @@ public partial class GrubsGame : Game
 
 		var activeTeam = gamemode.TeamManager.CurrentTeam;
 		activeTeam.GiveAmmo( WeaponAsset.All.First( weaponAsset => weaponAsset.WeaponName == weaponName ), amount );
+	}
+
+	/// <summary>
+	/// Admin command to spawn a health crate above the active Grubs head.
+	/// </summary>
+	[ConCmd.Admin]
+	public static void SpawnHealthCrate()
+	{
+		if ( Current.CurrentState is not BaseGamemode gamemode )
+			return;
+
+		_ = new HealthCrate
+		{
+			Position = gamemode.TeamManager.CurrentTeam.ActiveGrub.Position + Vector3.Up * 100
+		};
+	}
+
+	/// <summary>
+	/// Admin command to spawn a weapon crate above the active Grubs head.
+	/// </summary>
+	[ConCmd.Admin]
+	public static void SpawnWeaponCrate()
+	{
+		if ( Current.CurrentState is not BaseGamemode gamemode )
+			return;
+
+		_ = new WeaponCrate
+		{
+			Position = gamemode.TeamManager.CurrentTeam.ActiveGrub.Position + Vector3.Up * 100
+		};
 	}
 
 	/// <summary>

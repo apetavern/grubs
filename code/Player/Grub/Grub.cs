@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Grubs.Crates;
 using Grubs.States;
 using Grubs.Terrain;
 using Grubs.Utils;
@@ -217,6 +218,15 @@ public partial class Grub : AnimatedEntity, IResolvable
 				GrubsGame.Current.CurrentGamemode.UseTurn();
 				zone.Trigger( this );
 				ApplyDamage();
+			}
+
+			foreach ( var zone in TerrainZone.All.OfType<PickupZone>() )
+			{
+				if ( !zone.IsValid )
+					continue;
+
+				if ( zone.InZone( this ) )
+					zone.Trigger( this );
 			}
 		}
 
