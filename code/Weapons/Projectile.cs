@@ -21,13 +21,6 @@ public class Projectile : ModelEntity, IDamageable, IResolvable
 	private string TrailParticle { get; set; } = "";
 	private ProjectileCollisionReaction CollisionReaction { get; set; }
 
-	public override void TakeDamage( DamageInfo info )
-	{
-		base.TakeDamage( info );
-
-		Log.Info( Health );
-	}
-
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
 	/// </summary>
