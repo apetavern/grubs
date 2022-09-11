@@ -300,6 +300,15 @@ public abstract partial class BaseGamemode : BaseState
 	{
 		Host.AssertServer();
 
+		var lastUsedWeapon = TeamManager.CurrentTeam.Inventory.LastUsedWeapon;
+		if ( lastUsedWeapon is not null )
+		{
+			if ( lastUsedWeapon.Ammo != 0 )
+				TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( lastUsedWeapon );
+			else
+				TeamManager.CurrentTeam.Inventory.LastUsedWeapon = null;
+		}
+
 		GrubsCamera.SetTarget( TeamManager.CurrentTeam.ActiveGrub );
 		EventRunner.RunLocal( GrubsEvent.TurnChangedEvent, TeamManager.CurrentTeam );
 		TurnChangedRpc( To.Everyone, TeamManager.CurrentTeam );

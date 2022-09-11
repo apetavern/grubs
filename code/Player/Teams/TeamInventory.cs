@@ -5,6 +5,7 @@ namespace Grubs.Player;
 public partial class GrubsInventory : BaseNetworkable
 {
 	public Entity Owner { get; init; } = null!;
+	public GrubWeapon? LastUsedWeapon { get; set; } = null;
 
 	[Net]
 	public List<GrubWeapon> Items { get; set; } = new();
@@ -57,6 +58,8 @@ public partial class GrubsInventory : BaseNetworkable
 			return;
 
 		var inventory = team.Inventory;
-		grub.EquipWeapon( inventory.Items[index] );
+		var weapon = inventory.Items[index];
+		inventory.LastUsedWeapon = weapon;
+		grub.EquipWeapon( weapon );
 	}
 }
