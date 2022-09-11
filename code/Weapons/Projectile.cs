@@ -25,7 +25,6 @@ public class Projectile : ModelEntity, IResolvable
 	private Vector3 PhysicsImpulse { get; set; }
 	private string ExplosionSound { get; set; } = "";
 	private string TrailParticle { get; set; } = "";
-
 	private ProjectileCollisionReaction CollisionReaction { get; set; }
 
 	/// <summary>
@@ -109,7 +108,7 @@ public class Projectile : ModelEntity, IResolvable
 	/// What happens when the projectile "collides".
 	/// </summary>
 	/// <param name="reaction"></param>
-	/// <returns></returns>
+	/// <returns>The projectile instance.</returns>
 	public Projectile SetCollisionReaction( ProjectileCollisionReaction reaction )
 	{
 		CollisionReaction = reaction;
@@ -125,8 +124,8 @@ public class Projectile : ModelEntity, IResolvable
 	{
 		TrailParticle = particlePath;
 
-		if ( TrailParticle is not "" )
-			Particles.Create( TrailParticle, this, "trail", true );
+		if ( !string.IsNullOrEmpty( TrailParticle ) )
+			Particles.Create( TrailParticle, this, "trail" );
 
 		return this;
 	}
@@ -189,14 +188,10 @@ public class Projectile : ModelEntity, IResolvable
 		if ( ProjectileDebug )
 			DrawSegments();
 
-		if ( Segments is not null && Segments.Count > 0 )
-		{
+		if ( Segments.Count > 0 )
 			HandleSegmentTick();
-		}
 		else
-		{
 			HandlePhysicsTick();
-		}
 	}
 
 	private void HandleSegmentTick()

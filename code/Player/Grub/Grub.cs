@@ -365,7 +365,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 				ent.SetMaterialGroup( item.MaterialGroup );
 
-			if(item.Category == Clothing.ClothingCategory.Skin )
+			if ( item.Category == Clothing.ClothingCategory.Skin )
 			{
 				var SkinMaterial = Material.Load( item.SkinMaterial );
 				SetMaterialOverride( SkinMaterial, "skin" );

@@ -1,63 +1,54 @@
 ﻿using Grubs.Player;
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System.Collections.Generic;
+using Grubs.Utils.Event;
+using Grubs.Weapons.Base;
 
-namespace Grubs.UI
+namespace Grubs.UI;
+
+public class InventoryPanel : Panel
 {
-	public partial class InventoryPanel : Panel
+	private Panel ItemsPanel { get; set; }
+	private bool HasBuilt { get; set; }
+
+	private readonly Dictionary<int, InventoryItem> _items = new();
+
+	public InventoryPanel()
 	{
-		private Panel ItemsPanel { get; set; }
-		private bool HasBuilt { get; set; }
-		private Dictionary<int, InventoryItem> Items = new();
+		StyleSheet.Load( "/UI/InventoryPanel.scss" );
 
-		public InventoryPanel()
+		Add.Label( "Inventory", "title" );
+
+		ItemsPanel = Add.Panel( "inventory-items" );
+
+		const int rows = 6;
+		const int cols = 5;
+
+		for ( var i = 0; i < rows * cols; i++ )
 		{
-			StyleSheet.Load( "/UI/InventoryPanel.scss" );
-
-			Add.Label( "Inventory", "title" );
-
-			ItemsPanel = Add.Panel( "inventory-items" );
-
-			const int rows = 6;
-			const int cols = 5;
-
-			for ( int i = 0; i < rows * cols; i++ )
-			{
-				var icon = ItemsPanel.AddChild<InventoryItem>();
-				Items.Add( i, icon );
-			}
-
-			BindClass( "open", () => Input.Down( InputButton.Menu ) );
+			var icon = ItemsPanel.AddChild<InventoryItem>();
+			_items.Add( i, icon );
 		}
 
-		public void RebuildItems()
-		{
-			for ( int i = 0; i < (Local.Pawn as Team)!.Inventory.Items.Count; i++ )
-			{
-				Items[i].UpdateFrom( i );
-			}
+		BindClass( "open", () => Input.Down( InputButton.Menu ) );
+	}
 
-			HasBuilt = true;
-		}
+	private void RebuildItems()
+	{
+		for ( var i = 0; i < (Local.Pawn as Team)!.Inventory.Items.Count; i++ )
+			_items[i].UpdateFrom( i );
 
-		public override void Tick()
-		{
-			base.Tick();
+		HasBuilt = true;
+	}
 
-			if ( Input.Down( InputButton.Menu ) && !HasBuilt )
-			{
-				RebuildItems();
+	public override void Tick()
+	{
+		base.Tick();
 
-				//PlayingHudEntity.Instance?.ReceiveInput( true );
-			}
+		if ( Input.Down( InputButton.Menu ) && !HasBuilt )
+			RebuildItems();
 
-			if ( Input.Released( InputButton.Menu ) )
-			{
-				HasBuilt = false;
-				//PlayingHudEntity.Instance?.ReceiveInput( false );
-			}
-		}
+		if ( Input.Released( InputButton.Menu ) )
+			HasBuilt = false;
+	}
+
 	}
 }

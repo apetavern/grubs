@@ -251,7 +251,6 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		num = rand.Next( 0, 100 );
-		Log.Info( $"{num} {GameConfig.HealthCrateChancePerTurn}" );
 		if ( num <= GameConfig.HealthCrateChancePerTurn )
 		{
 			var healthCrate = new HealthCrate { Position = new Vector3( Rand.Float( 1000 ), 0, 3000 ) };
