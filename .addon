@@ -104,25 +104,25 @@
         "DisplayType": "Choice",
         "Choices": [
           {
-            "Value": "none",
+            "Value": "None",
             "Name": "None"
           },
           {
-            "Value": "dirt",
+            "Value": "Dirt",
             "Name": "Dirt"
           },
           {
-            "Value": "sand",
+            "Value": "Sand",
             "Name": "Sand"
           },
           {
-            "Value": "lava",
+            "Value": "Lava",
             "Name": "Lava"
           }
         ],
         "ConVarName": "terrain_type",
         "DisplayName": "Terrain Type",
-        "DefaultValue": "sand"
+        "DefaultValue": "None"
       },
       "terrain_border": {
         "DisplayType": "Boolean",

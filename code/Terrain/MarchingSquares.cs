@@ -69,10 +69,10 @@ public class MarchingSquares
 		if ( !Host.IsClient )
 			return _builder.Create();
 
-		if ( !Enum.TryParse( GameConfig.TerrainType.ToUpper(), out TerrainType matType ) )
+		if ( !Enum.TryParse( GameConfig.TerrainType, out TerrainType matType ) )
 		{
-			Log.Error( $"Got invalid terrain type {GameConfig.TerrainType}, reverting to {TerrainType.NONE}" );
-			matType = TerrainType.NONE;
+			Log.Error( $"Got invalid terrain type \"{GameConfig.TerrainType}\", reverting to {TerrainType.None}" );
+			matType = TerrainType.None;
 		}
 
 		// TODO: Calculate normal/tangent.
@@ -98,10 +98,10 @@ public class MarchingSquares
 		var scale = GameConfig.TerrainScale;
 		const float wallHeight = 64f;
 
-		if ( !Enum.TryParse( GameConfig.TerrainType.ToUpper(), out TerrainType matType ) )
+		if ( !Enum.TryParse( GameConfig.TerrainType, out TerrainType matType ) )
 		{
-			Log.Error( $"Got invalid terrain type {GameConfig.TerrainType}, reverting to {TerrainType.NONE}" );
-			matType = TerrainType.NONE;
+			Log.Error( $"Got invalid terrain type \"{GameConfig.TerrainType}\", reverting to {TerrainType.None}" );
+			matType = TerrainType.None;
 		}
 
 		foreach ( var outline in _outlines )

@@ -17,10 +17,10 @@ public static class TerrainTypeExtension
 	{
 		return terrainType switch
 		{
-			TerrainType.NONE => "materials/environment/cereal.vmat",
-			TerrainType.DIRT => "materials/environment/dirt_rocks.vmat",
-			TerrainType.LAVA => "materials/environment/lava_rocks.vmat",
-			TerrainType.SAND => "materials/environment/sand_shells.vmat",
+			TerrainType.None => "materials/environment/cereal.vmat",
+			TerrainType.Dirt => "materials/environment/dirt_rocks.vmat",
+			TerrainType.Lava => "materials/environment/lava_rocks.vmat",
+			TerrainType.Sand => "materials/environment/sand_shells.vmat",
 			_ => throw new ArgumentException( $"Invalid {nameof( TerrainType )}", nameof( terrainType ) )
 		};
 	}

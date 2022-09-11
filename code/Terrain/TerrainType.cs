@@ -5,8 +5,8 @@
 /// </summary>
 public enum TerrainType
 {
-	NONE,
-	DIRT,
-	SAND,
-	LAVA
+	None,
+	Dirt,
+	Sand,
+	Lava
 }
