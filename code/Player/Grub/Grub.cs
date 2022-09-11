@@ -30,13 +30,13 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// <summary>
 	/// The currently active weapon the grub is using.
 	/// </summary>
-	[Net, Predicted]
+	[Net]
 	public GrubWeapon? ActiveChild { get; private set; }
 
 	/// <summary>
 	/// The last weapon the grub was using.
 	/// </summary>
-	[Net, Predicted]
+	[Net]
 	public GrubWeapon? LastActiveChild { get; private set; }
 
 	/// <summary>
