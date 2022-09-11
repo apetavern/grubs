@@ -232,13 +232,13 @@ public partial class GrubController : BasePlayerController
 
 	public virtual void WalkMove()
 	{
-		if(!WalkStarted && WishVelocity.Length > 0 )
+		if ( !WalkStarted && WishVelocity.Length > 0 )
 		{
 			TimeSinceWalkStart = 0f;//Need to use a separate timesince to sync up the walk with the animation
 			WalkStarted = true;
 		}
 
-		if(WishVelocity.Length == 0 )
+		if ( WishVelocity.Length == 0 )
 		{
 			WalkStarted = false;
 		}

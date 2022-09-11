@@ -17,13 +17,13 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// The grubs movement controller.
 	/// </summary>
 	[Net, Predicted]
-	public GrubController Controller { get; private set; }
+	public GrubController Controller { get; private set; } = null!;
 
 	/// <summary>
 	/// The grubs animator.
 	/// </summary>
 	[Net, Predicted]
-	public GrubAnimator Animator { get; private set; }
+	public GrubAnimator Animator { get; private set; } = null!;
 
 	/// <summary>
 	/// The currently active weapon the grub is using.
@@ -257,6 +257,8 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// <returns>Whether or not the grub has died.</returns>
 	public virtual bool ApplyDamage()
 	{
+		Host.AssertServer();
+
 		if ( !HasBeenDamaged )
 			return false;
 
