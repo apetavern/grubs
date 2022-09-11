@@ -39,6 +39,14 @@ public partial class TerrainZone : Entity
 	private static readonly Queue<TerrainZone> QueueToAdd = new();
 	private static readonly Queue<TerrainZone> QueueToRemove = new();
 
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		if ( All.Contains( this ) )
+			QueueToRemove.Enqueue( this );
+	}
+
 	/// <summary>
 	/// Sets the position this zone sits at.
 	/// </summary>
@@ -116,7 +124,10 @@ public partial class TerrainZone : Entity
 			All.Add( zone );
 
 		while ( QueueToRemove.TryDequeue( out var zone ) )
+		{
 			All.Remove( zone );
+			zone.Delete();
+		}
 
 		if ( !ZoneDebug )
 			return;
