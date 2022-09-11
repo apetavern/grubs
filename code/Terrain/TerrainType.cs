@@ -1,6 +1,6 @@
 ﻿namespace Grubs.Terrain;
 
-public enum TerrainTypes
+public enum TerrainType
 {
 	NONE,
 	DIRT,
