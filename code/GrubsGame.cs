@@ -139,6 +139,9 @@ public partial class GrubsGame : Game
 		gamemode.NextTurnTask = gamemode.NextTurn();
 	}
 
+	/// <summary>
+	/// Admin command to kill the currently active Grub.
+	/// </summary>
 	[ConCmd.Admin]
 	public static void KillActiveGrub()
 	{
