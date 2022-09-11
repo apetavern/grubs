@@ -211,7 +211,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		{
 			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
 			{
-				if ( !zone.InstantKill || !zone.InZone( this ) )
+				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( this ) )
 					continue;
 
 				GrubsGame.Current.CurrentGamemode.UseTurn();
