@@ -200,6 +200,8 @@ public abstract partial class BaseGamemode : BaseState
 		Host.AssertServer();
 
 		UsedTurn = true;
+
+		await GameTask.DelaySeconds( 1 );
 		TeamManager.CurrentTeam.ActiveGrub.EquipWeapon( null );
 
 		bool rerun;
@@ -240,6 +242,8 @@ public abstract partial class BaseGamemode : BaseState
 		foreach ( var zone in TerrainZone.All )
 			zone.ExpireAfterTurns--;
 
+		await GameTask.DelaySeconds( 3 );
+
 		// TODO: Better way of deciding where the crate should appear.
 		var rand = new Random( Time.Now.CeilToInt() );
 		var num = rand.Next( 0, 100 );
@@ -258,7 +262,6 @@ public abstract partial class BaseGamemode : BaseState
 			await GameTask.DelaySeconds( 1 );
 		}
 
-		await GameTask.DelaySeconds( 3 );
 		return CheckState();
 	}
 
