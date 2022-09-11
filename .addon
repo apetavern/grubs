@@ -84,12 +84,21 @@
         "Minimum": 1,
         "Maximum": 60
       },
-      "friendly_fire": {
-        "DisplayType": "Boolean",
+      "crate_weapon_chance": {
+        "DisplayType": "Integer",
         "Choices": [],
-        "ConVarName": "friendly_fire",
-        "DisplayName": "Friendly Fire",
-        "DefaultValue": "true"
+        "ConVarName": "crate_weapon_chance",
+        "DisplayName": "Weapon Crate Chance",
+        "DefaultValue": "10",
+        "Maximum": 100
+      },
+      "crate_health_chance": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_health_chance",
+        "DisplayName": "Health Crate Chance",
+        "DefaultValue": "5",
+        "Maximum": 100
       },
       "terrain_type": {
         "DisplayType": "Choice",

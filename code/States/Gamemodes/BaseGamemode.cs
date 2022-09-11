@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Grubs.Crates;
 using Grubs.Player;
 using Grubs.Terrain;
 using Grubs.Terrain.Shapes;
@@ -238,6 +239,25 @@ public abstract partial class BaseGamemode : BaseState
 
 		foreach ( var zone in TerrainZone.All )
 			zone.ExpireAfterTurns--;
+
+		// TODO: Better way of deciding where the crate should appear.
+		var rand = new Random( Time.Now.CeilToInt() );
+		var num = rand.Next( 0, 100 );
+		if ( num <= GameConfig.WeaponCrateChancePerTurn )
+		{
+			var weaponCrate = new WeaponCrate { Position = new Vector3( Rand.Float( 1000 ), 0, 3000 ) };
+			GrubsCamera.SetTarget( weaponCrate );
+			await GameTask.DelaySeconds( 1 );
+		}
+
+		num = rand.Next( 0, 100 );
+		Log.Info( $"{num} {GameConfig.HealthCrateChancePerTurn}" );
+		if ( num <= GameConfig.HealthCrateChancePerTurn )
+		{
+			var healthCrate = new HealthCrate { Position = new Vector3( Rand.Float( 1000 ), 0, 3000 ) };
+			GrubsCamera.SetTarget( healthCrate );
+			await GameTask.DelaySeconds( 1 );
+		}
 
 		await GameTask.DelaySeconds( 3 );
 		return CheckState();

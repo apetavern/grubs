@@ -33,6 +33,18 @@ public static class GameConfig
 	public static int TurnDuration { get; set; } = 60;
 
 	/// <summary>
+	/// The percent chance that a weapon crate will spawn every turn.
+	/// </summary>
+	[ConVar.Replicated( "crate_weapon_chance" )]
+	public static int WeaponCrateChancePerTurn { get; set; } = 10;
+
+	/// <summary>
+	/// The percent chance that a health crate will spawn every turn.
+	/// </summary>
+	[ConVar.Replicated( "crate_health_chance" )]
+	public static int HealthCrateChancePerTurn { get; set; } = 5;
+
+	/// <summary>
 	/// The type of material to be used for the terrain.
 	/// </summary>
 	[ConVar.Replicated( "terrain_type" )]
