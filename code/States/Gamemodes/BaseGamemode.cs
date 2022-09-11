@@ -20,6 +20,11 @@ public abstract partial class BaseGamemode : BaseState
 	public TeamManager TeamManager { get; private set; } = null!;
 
 	/// <summary>
+	/// Whether or not the active Grub can only use movement.
+	/// </summary>
+	[Net, Predicted]
+	public bool MovementOnly { get; private set; }
+	/// <summary>
 	/// Whether or not the current team has used their turn.
 	/// </summary>
 	[Net, Predicted]
@@ -155,7 +160,7 @@ public abstract partial class BaseGamemode : BaseState
 					continue;
 
 				if ( entity is Grub { IsTurn: true } )
-					GrubsGame.Current.CurrentGamemode.UseTurn();
+					GrubsGame.Current.CurrentGamemode.UseTurn( false );
 
 				zone.Trigger( entity );
 				damageable.ApplyDamage();
@@ -163,7 +168,7 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		if ( !UsedTurn && TimeUntilTurnEnd <= 0 )
-			UseTurn();
+			UseTurn( false );
 
 		if ( UsedTurn && IsWorldResolved() && (NextTurnTask is null || NextTurnTask.IsCompleted) )
 			NextTurnTask = NextTurn();
@@ -188,9 +193,16 @@ public abstract partial class BaseGamemode : BaseState
 	/// <summary>
 	/// Uses the current teams turn.
 	/// </summary>
-	public virtual void UseTurn()
+	/// <param name="giveMovementGrace">Whether or not to give the Grub a movement grace period.</param>
+	public virtual void UseTurn( bool giveMovementGrace )
 	{
-		UsedTurn = true;
+		if ( giveMovementGrace )
+		{
+			TimeUntilTurnEnd = GameConfig.MovementGracePeriod;
+			MovementOnly = true;
+		}
+		else
+			UsedTurn = true;
 	}
 
 	/// <summary>
@@ -218,6 +230,7 @@ public abstract partial class BaseGamemode : BaseState
 	{
 		Host.AssertServer();
 
+		MovementOnly = false;
 		UsedTurn = true;
 
 		await GameTask.DelaySeconds( 1 );

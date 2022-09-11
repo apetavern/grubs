@@ -179,7 +179,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		base.Simulate( cl );
 
-		if ( !IsFiring || Uses > 1 )
+		if ( !GrubsGame.Current.CurrentGamemode.MovementOnly && (!IsFiring || Uses > 1) )
 			CheckFireInput();
 	}
 
@@ -260,7 +260,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	protected virtual void OnFireFinish()
 	{
 		if ( CurrentUses >= Uses )
-			GrubsGame.Current.CurrentGamemode.UseTurn();
+			GrubsGame.Current.CurrentGamemode.UseTurn( true );
 	}
 
 	/// <summary>

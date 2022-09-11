@@ -45,6 +45,12 @@ public static class GameConfig
 	public static int HealthCrateChancePerTurn { get; set; } = 5;
 
 	/// <summary>
+	/// The time in seconds to give Grubs after using their turn.
+	/// </summary>
+	[ConVar.Replicated( "movement_grace" )]
+	public static float MovementGracePeriod { get; set; } = 5;
+
+	/// <summary>
 	/// The type of material to be used for the terrain.
 	/// </summary>
 	[ConVar.Replicated( "terrain_type" )]

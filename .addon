@@ -100,6 +100,14 @@
         "DefaultValue": "5",
         "Maximum": 100
       },
+      "movement_grace": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "movement_grace",
+        "DisplayName": "Movement Grace Period",
+        "DefaultValue": "5",
+        "Maximum": 60
+      },
       "terrain_type": {
         "DisplayType": "Choice",
         "Choices": [

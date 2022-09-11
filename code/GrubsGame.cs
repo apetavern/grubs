@@ -149,7 +149,7 @@ public partial class GrubsGame : Game
 			return;
 
 		var activeGrub = gamemode.TeamManager.CurrentTeam.ActiveGrub;
-		gamemode.UseTurn();
+		gamemode.UseTurn( false );
 		activeGrub.TakeDamage( new DamageInfo
 		{
 			Attacker = ConsoleSystem.Caller.Pawn,
