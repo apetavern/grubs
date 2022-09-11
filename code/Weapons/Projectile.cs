@@ -139,6 +139,11 @@ public class Projectile : ModelEntity, IDamageable, IResolvable
 		return this;
 	}
 
+	/// <summary>
+	/// Sets a starting impulse for the projectile to apply.
+	/// </summary>
+	/// <param name="force">The starting force.</param>
+	/// <returns>The projectile instance.</returns>
 	public Projectile UsePhysicsImpulse( Vector3 force )
 	{
 		// TODO: Implement physics impulse.
