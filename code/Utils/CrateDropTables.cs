@@ -2,6 +2,9 @@
 
 namespace Grubs.Utils;
 
+/// <summary>
+/// A utility class to handle drop chance of weapons.
+/// </summary>
 public static class CrateDropTables
 {
 	private static bool _init;
@@ -44,6 +47,10 @@ public static class CrateDropTables
 		_init = true;
 	}
 
+	/// <summary>
+	/// Gets a random weapon for a weapon crate.
+	/// </summary>
+	/// <returns>The randomly chosen weapon.</returns>
 	public static WeaponAsset GetRandomWeaponFromCrate()
 	{
 		if ( !_init )
