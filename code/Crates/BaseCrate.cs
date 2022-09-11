@@ -96,8 +96,10 @@ public partial class BaseCrate : ModelEntity, IResolvable
 		mover.TryMove( Time.Delta );
 
 		Position = mover.Position;
-		Velocity = mover.Velocity + new Vector3( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 4f : 0f, 0, 0 );//Add swap to velocity to make the rotation sway look less weird
-		Rotation = Rotation.Slerp( Rotation, Rotation.Identity * new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(), 0.75f );//Rotation to add some sway, slerped to smooth it
+		// Add swap to velocity to make the rotation sway look less weird
+		Velocity = mover.Velocity + new Vector3( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 4f : 0f, 0, 0 );
+		// Rotation to add some sway, slerped to smooth it
+		Rotation = Rotation.Slerp( Rotation, Rotation.Identity * new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(), 0.75f );
 		PickupZone.Position = Position;
 	}
 }
