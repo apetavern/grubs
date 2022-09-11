@@ -116,7 +116,7 @@ public class ProjectileWeapon : GrubWeapon
 			projectile.WithCollisionExplosionDelay( ProjectileCollisionExplosionDelay );
 
 		if ( ProjectileExplodeAfter > 0 )
-			projectile.ExplodeAfterSeconds( 5f );
+			projectile.ExplodeAfterSeconds( ProjectileExplodeAfter );
 
 		projectile.Finish();
 
