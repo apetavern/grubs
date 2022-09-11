@@ -1,4 +1,5 @@
 ﻿using Grubs.Player;
+using Grubs.States;
 using Grubs.Terrain.Shapes;
 using Grubs.Utils;
 
@@ -7,8 +8,11 @@ namespace Grubs.Crates;
 /// <summary>
 /// The base class for all crates.
 /// </summary>
-public partial class BaseCrate : ModelEntity
+[Category( "Crates" )]
+public partial class BaseCrate : ModelEntity, IResolvable
 {
+	public bool Resolved => Velocity.IsNearlyZero( 2.5f );
+
 	/// <summary>
 	/// The zone that will check for Grubs picking the crate up.
 	/// </summary>
