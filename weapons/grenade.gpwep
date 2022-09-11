@@ -4,15 +4,17 @@
 	{
 		ProjectileForceMultiplier = 0.4
 		ProjectileShouldBounce = true
-		ProjectileShouldUseTrace = false
+		ProjectileShouldUseTrace = true
 		ProjectileMaxBounces = 5
 		ProjectileModel = resource:"models/weapons/grenade/grenade.vmdl"
 		ProjectileSpeed = 1000
 		ProjectileExplosionRadius = 75
 		ProjectileExplodeAfter = 5
 		ProjectileCollisionExplosionDelay = 3
-		ProjectileLoopSound = null
+		ProjectileLoopSound = resource:"weapons/rust_smg/sounds/rust_smg.dryfire.sound"
 		ProjectileExplodeSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
+		ProjectileParticleTrail = ""
+		ProjectileCollisionReaction = "Explosive"
 		WeaponName = "Grenade"
 		Model = resource:"models/weapons/grenade/grenade.vmdl"
 		Icon = resource:"models/weapons/grenade/grenade.vmdl_c.png"
