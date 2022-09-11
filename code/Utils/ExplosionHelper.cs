@@ -39,10 +39,13 @@ public static partial class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		GrubsGame.Current.TerrainMap.DestructSphere( midpoint, radius );
+		bool DidDamage = GrubsGame.Current.TerrainMap.DestructSphere( midpoint, radius );
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, radius );
 
-		GrubsGame.Current.RegenerateMap();
+		if ( DidDamage )
+			GrubsGame.Current.RegenerateMap();
+
+
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
 		DoExplosionEffectsAt( To.Everyone, position, radius );
@@ -52,11 +55,12 @@ public static partial class ExplosionHelper
 	{
 		Host.AssertServer();
 
-		GrubsGame.Current.TerrainMap.DestructLine( startpos, endpos, width );
+		bool DidDamage = GrubsGame.Current.TerrainMap.DestructLine( startpos, endpos, width );
 
 		GrubsGame.LineClient( To.Everyone, startpos, endpos, width );
 
-		GrubsGame.Current.RegenerateMap();
+		if ( DidDamage )
+			GrubsGame.Current.RegenerateMap();
 	}
 
 	/// <summary>

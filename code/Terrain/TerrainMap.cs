@@ -249,10 +249,10 @@ public class TerrainMap
 	/// </summary>
 	/// <param name="midpoint">The Vector2 midpoint of the sphere to be destructed.</param>
 	/// <param name="size">The size (radius) of the sphere to be destructed.</param>
-	public void DestructSphere( Vector2 midpoint, float size )
+	public bool DestructSphere( Vector2 midpoint, float size )
 	{
 		var scale = GameConfig.TerrainScale;
-
+		bool modifiedTerrain = false;
 		for ( int i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
 		{
 			for ( int j = 0; j < TerrainGrid.GetLength( 1 ); j++ )
@@ -262,9 +262,14 @@ public class TerrainMap
 				var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
 
 				if ( d < size )
+				{
 					TerrainGrid[i, j] = false;
+					modifiedTerrain = true;
+				}
 			}
 		}
+
+		return modifiedTerrain;
 	}
 
 	/// <summary>
@@ -273,7 +278,7 @@ public class TerrainMap
 	/// <param name="startPoint">The Vector3 startpoint of the line to be destructed.</param>
 	/// <param name="endPoint">The Vector3 endpoint of the line to be destructed.</param>
 	/// <param name="width">The size (radius) of the sphere to be destructed.</param>
-	public void DestructLine( Vector3 startPoint, Vector3 endPoint, float width )
+	public bool DestructLine( Vector3 startPoint, Vector3 endPoint, float width )
 	{
 		Vector3 totalLength = (startPoint - endPoint);
 
@@ -281,14 +286,18 @@ public class TerrainMap
 
 		Vector3 currentPoint = startPoint;
 
+		bool modifiedTerrain = false;
+
 		for ( int i = 0; i < stepCount; i++ )
 		{
 			currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
 
 			var pos = new Vector3( currentPoint.x, currentPoint.z );
 
-			DestructSphere( pos, width );
+			modifiedTerrain = DestructSphere( pos, width );
 		}
+
+		return modifiedTerrain;
 	}
 
 	/// <summary>
