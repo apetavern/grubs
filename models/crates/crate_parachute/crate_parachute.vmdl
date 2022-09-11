@@ -115,5 +115,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/crates/crate_parachute/crate_parachute.vanmgrph"
+		base_model_name = ""
 	}
 }

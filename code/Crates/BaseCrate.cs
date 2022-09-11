@@ -36,6 +36,12 @@ public partial class BaseCrate : ModelEntity, IResolvable
 			.Finish<PickupZone>();
 		PickupZone.SetParent( this );
 
+		SpawnParachuteDelayed();
+	}
+
+	public async void SpawnParachuteDelayed()
+	{
+		await Task.DelaySeconds( 1f );
 		_parachute = new AnimatedEntity( "models/crates/crate_parachute/crate_parachute.vmdl", this );
 	}
 
@@ -79,17 +85,19 @@ public partial class BaseCrate : ModelEntity, IResolvable
 			mover.Velocity += Map.Physics.Gravity * Time.Delta;
 		else
 		{
-			_parachute?.Delete();
+			_parachute?.DeleteAsync(0.3f);
+			_parachute?.SetAnimParameter( "landed", true );
 			_parachute = null;
 			mover.Velocity = 0;
 		}
 
 		const float airResistance = 2.0f;
-		mover.ApplyFriction( airResistance, Time.Delta );
+		mover.ApplyFriction( airResistance * (_parachute is not null ? 1.5f : 0.5f), Time.Delta );
 		mover.TryMove( Time.Delta );
 
 		Position = mover.Position;
-		Velocity = mover.Velocity;
+		Velocity = mover.Velocity + new Vector3(_parachute is not null ? MathF.Sin( Time.Now * 2f ) * 4f : 0f,0,0);//Add swap to velocity to make the rotation sway look less weird
+		Rotation = Rotation.Slerp( Rotation, Rotation.Identity * new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(),0.75f);//Rotation to add some sway, slerped to smooth it
 		PickupZone.Position = Position;
 	}
 }
