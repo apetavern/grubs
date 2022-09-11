@@ -21,6 +21,13 @@ public class Projectile : ModelEntity, IDamageable, IResolvable
 	private string TrailParticle { get; set; } = "";
 	private ProjectileCollisionReaction CollisionReaction { get; set; }
 
+	public override void TakeDamage( DamageInfo info )
+	{
+		base.TakeDamage( info );
+		
+		Log.Info( Health );
+	}
+
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
 	/// </summary>
@@ -164,6 +171,7 @@ public class Projectile : ModelEntity, IDamageable, IResolvable
 		if ( Segments is null )
 			Assert.True( PhysicsImpulse != Vector3.Zero, $"{nameof( Projectile )} is missing {nameof( PhysicsImpulse )}" );
 
+		Health = 1;
 		return this;
 	}
 

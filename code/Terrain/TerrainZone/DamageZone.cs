@@ -1,6 +1,5 @@
-﻿using Grubs.Player;
+﻿using Grubs.States;
 using Grubs.Utils.Extensions;
-using Grubs.Weapons.Base;
 
 namespace Grubs.Terrain;
 
@@ -74,20 +73,11 @@ public partial class DamageZone : TerrainZone
 	{
 		base.Trigger( entity );
 
-		if ( !InZone( entity ) )
-			return;
-
-		if ( entity is Projectile projectile )
-		{
-			projectile.Delete();
-			return;
-		}
-
-		if ( entity is not Grub grub )
+		if ( entity is not IDamageable || !InZone( entity ) )
 			return;
 
 		var damageInfo = DamageInfoExtension.FromZone( this );
-		damageInfo.Position = grub.Position;
-		grub.TakeDamage( damageInfo );
+		damageInfo.Position = entity.Position;
+		entity.TakeDamage( damageInfo );
 	}
 }
