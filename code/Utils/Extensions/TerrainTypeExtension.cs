@@ -21,7 +21,7 @@ public static class TerrainTypeExtension
 			TerrainType.DIRT => "materials/environment/dirt_rocks.vmat",
 			TerrainType.LAVA => "materials/environment/lava_rocks.vmat",
 			TerrainType.SAND => "materials/environment/sand_shells.vmat",
-			_ => throw new ArgumentException( $"Invalid {nameof(TerrainType)}", nameof(terrainType) )
+			_ => throw new ArgumentException( $"Invalid {nameof( TerrainType )}", nameof( terrainType ) )
 		};
 	}
 }

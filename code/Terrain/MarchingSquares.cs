@@ -7,7 +7,7 @@ public class MarchingSquares
 {
 	private int Width { get; set; }
 	private int Height { get; set; }
-	
+
 	// Face
 	private readonly List<Vector3> _vertices = new();
 	private readonly List<int> _triangles = new();
@@ -18,7 +18,7 @@ public class MarchingSquares
 	private readonly HashSet<int> _checkedVertices = new();
 
 	private readonly ModelBuilder _builder = new();
-	
+
 	private const float LocalY = -32f;
 
 	public Model GenerateModel()
@@ -74,7 +74,7 @@ public class MarchingSquares
 			Log.Error( $"Got invalid terrain type {GameConfig.TerrainType}, reverting to {TerrainType.NONE}" );
 			matType = TerrainType.NONE;
 		}
-			
+
 		// TODO: Calculate normal/tangent.
 		var mesh = new Mesh( Material.Load( matType.GetMaterial() ) )
 		{
@@ -83,7 +83,7 @@ public class MarchingSquares
 
 		mesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
 		mesh.CreateIndexBuffer( _triangles.Count, _triangles );
-			
+
 		_builder.AddMesh( mesh );
 
 		return _builder.Create();
@@ -97,7 +97,7 @@ public class MarchingSquares
 
 		var scale = GameConfig.TerrainScale;
 		const float wallHeight = 64f;
-		
+
 		if ( !Enum.TryParse( GameConfig.TerrainType.ToUpper(), out TerrainType matType ) )
 		{
 			Log.Error( $"Got invalid terrain type {GameConfig.TerrainType}, reverting to {TerrainType.NONE}" );
@@ -131,7 +131,7 @@ public class MarchingSquares
 			{
 				vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left, new Vector2( 0, 0 ) ) );
 			}
-			
+
 			var wallMesh = new Mesh( Material.Load( matType.GetMaterial() ) )
 			{
 				Bounds = new BBox( 0, new Vector3( Width * scale, wallHeight, Height * scale ) )
@@ -139,7 +139,7 @@ public class MarchingSquares
 
 			wallMesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
 			wallMesh.CreateIndexBuffer( wallTriangles.Count, wallTriangles );
-			
+
 			_builder.AddMesh( wallMesh );
 		}
 
@@ -299,7 +299,7 @@ public class MarchingSquares
 		}
 		else
 		{
-			List<Triangle> triangleList = new() {triangle};
+			List<Triangle> triangleList = new() { triangle };
 			_triangleDictionary.Add( vertexIndexKey, triangleList );
 		}
 	}
@@ -317,7 +317,7 @@ public class MarchingSquares
 
 			_checkedVertices.Add( vertexIndex );
 
-			List<int> newOutline = new() {vertexIndex};
+			List<int> newOutline = new() { vertexIndex };
 			_outlines.Add( newOutline );
 			FollowOutline( newOutlineVertex, _outlines.Count - 1 );
 			_outlines[^1].Add( vertexIndex );
@@ -414,7 +414,7 @@ public class MarchingSquares
 			return vertexIndex == VertexIndexA || vertexIndex == VertexIndexB || vertexIndex == VertexIndexC;
 		}
 
-		public int this[ int i ] => _vertices[i];
+		public int this[int i] => _vertices[i];
 	}
 
 	private struct Vert
