@@ -15,5 +15,12 @@ label {
     text-align: center;
     align-items: center;
     margin: 2px 0;
-    color: red;
+    
+    &.grub-heal {
+        color: green;
+    }
+    
+    &.grub-damage {
+        color: red;
+    }
 }

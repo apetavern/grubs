@@ -75,6 +75,12 @@ public class Hud : RootPanel
 		_damageNumbers.Clear();
 	}
 
+	[GrubsEvent.GrubHealed.Client]
+	private void OnGrubHealed( Grub grub, float damage )
+	{
+		_damageNumbers.Add( new DamageNumber( grub, -damage ) );
+	}
+
 	[GrubsEvent.GrubHurt.Client]
 	private void OnGrubHurt( Grub grub, float damage )
 	{

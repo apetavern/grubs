@@ -284,6 +284,73 @@ public static class GrubsEvent
 	}
 	#endregion
 
+	#region GrubHealed
+	/// <summary>
+	/// Called when a grub gets healed.
+	/// </summary>
+	public const string GrubHealedEvent = "grubs_grub-healed";
+
+	/// <summary>
+	/// Called when a grub gets healed.
+	/// </summary>
+	[AttributeUsage( AttributeTargets.Method )]
+	public class GrubHealedAttribute : EventAttribute
+	{
+		public GrubHealedAttribute( string? state = null ) : base( GrubHealedEvent + state ?? string.Empty )
+		{
+			if ( state is null )
+				return;
+
+			AssertValidState( state );
+		}
+	}
+
+	/// <summary>
+	/// Called when a grub gets healed.
+	/// </summary>
+	public static class GrubHealed
+	{
+		/// <summary>
+		/// <see cref="GrubHealed"/> event but only called on the client realm.
+		/// </summary>
+		public const string ClientEvent = ClientPrefix + GrubHealedEvent;
+		/// <summary>
+		/// <see cref="GrubHealed"/> event but only called on the server realm.
+		/// </summary>
+		public const string ServerEvent = ServerPrefix + GrubHealedEvent;
+
+		/// <summary>
+		/// <see cref="GrubHealed"/> event but only called on the client realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ClientAttribute : EventAttribute
+		{
+			public ClientAttribute( string? state = null ) : base( ClientEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+
+		/// <summary>
+		/// <see cref="GrubHurt"/> event but only called on the server realm.
+		/// </summary>
+		[AttributeUsage( AttributeTargets.Method )]
+		public class ServerAttribute : EventAttribute
+		{
+			public ServerAttribute( string? state = null ) : base( ServerEvent + state ?? string.Empty )
+			{
+				if ( state is null )
+					return;
+
+				AssertValidState( state );
+			}
+		}
+	}
+	#endregion
+
 	#region GrubHurt
 	/// <summary>
 	/// Called when a grub gets hurt.

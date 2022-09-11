@@ -95,6 +95,8 @@ public partial class Grub : AnimatedEntity, IResolvable
 	/// </summary>
 	public Task? DeathTask;
 
+	private const float MaxHealth = 100;
+
 	public Grub()
 	{
 		Transmit = TransmitType.Always;
@@ -107,7 +109,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		SetModel( "models/citizenworm.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		Name = Rand.FromArray( GameConfig.GrubNames );
-		Health = 100;
+		Health = MaxHealth;
 		EnableHitboxes = true;
 
 		Controller = new GrubController();
@@ -251,6 +253,20 @@ public partial class Grub : AnimatedEntity, IResolvable
 		next?.ActiveStart( this );
 	}
 
+	public virtual bool GiveHealth( float health )
+	{
+		Host.AssertServer();
+
+		var healthToGive = Math.Min( health, MaxHealth - Health );
+		if ( healthToGive <= 0 )
+			return false;
+
+		Health += healthToGive;
+		EventRunner.RunLocal( GrubsEvent.GrubHealedEvent, this, health );
+		HealRpc( To.Everyone, healthToGive );
+		return true;
+	}
+
 	/// <summary>
 	/// Applies any damage that this grub has received.
 	/// </summary>
@@ -343,6 +359,12 @@ public partial class Grub : AnimatedEntity, IResolvable
 		{
 			hat.EnableDrawing = visible;
 		}
+	}
+
+	[ClientRpc]
+	private void HealRpc( float health )
+	{
+		EventRunner.RunLocal( GrubsEvent.GrubHealedEvent, this, health );
 	}
 
 	[ClientRpc]

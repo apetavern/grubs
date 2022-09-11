@@ -16,7 +16,10 @@ public class DamageNumber : WorldPanel
 
 		StyleSheet.Load( "/UI/Stylesheets/DamageNumber.scss" );
 
-		Add.Label( $"-{Math.Floor( damage )}", "grub-damage" );
+		if ( damage < 0 )
+			Add.Label( $"+{Math.Floor( Math.Abs( damage ) )}", "grub-heal" );
+		else
+			Add.Label( $"-{Math.Floor( damage )}", "grub-damage" );
 
 		const float width = 600;
 		const float height = 300;
