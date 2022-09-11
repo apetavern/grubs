@@ -253,6 +253,11 @@ public partial class Grub : AnimatedEntity, IResolvable
 		next?.ActiveStart( this );
 	}
 
+	/// <summary>
+	/// Attempts to heal the Grub by the given amount.
+	/// </summary>
+	/// <param name="health">The amount of health to try giving to the Grub.</param>
+	/// <returns>Whether or not any healing was applied.</returns>
 	public virtual bool GiveHealth( float health )
 	{
 		Host.AssertServer();
