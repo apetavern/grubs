@@ -1,4 +1,5 @@
-﻿using Grubs.Player;
+﻿using System.Threading.Tasks;
+using Grubs.Player;
 using Grubs.States;
 using Grubs.Terrain.Shapes;
 using Grubs.Utils;
@@ -9,7 +10,7 @@ namespace Grubs.Crates;
 /// The base class for all crates.
 /// </summary>
 [Category( "Crates" )]
-public partial class BaseCrate : ModelEntity, IResolvable
+public partial class BaseCrate : ModelEntity, IDamageable, IResolvable
 {
 	public bool Resolved => Velocity.IsNearlyZero( 2.5f );
 
@@ -36,13 +37,16 @@ public partial class BaseCrate : ModelEntity, IResolvable
 			.Finish<PickupZone>();
 		PickupZone.SetParent( this );
 
-		SpawnParachuteDelayed();
+		_ = SpawnParachuteDelayed();
 	}
 
-	public async void SpawnParachuteDelayed()
+	public override void OnKilled()
 	{
-		await Task.DelaySeconds( 1f );
-		_parachute = new AnimatedEntity( "models/crates/crate_parachute/crate_parachute.vmdl", this );
+		base.OnKilled();
+
+		// TODO: A Grub should've interacted with this to blow it up in some way.
+		ExplosionHelper.Explode( Position, null! );
+		Delete();
 	}
 
 	/// <summary>
@@ -55,20 +59,25 @@ public partial class BaseCrate : ModelEntity, IResolvable
 		PickupZone.Delete();
 	}
 
-	[Event.Tick.Server]
-	private void Tick()
+	public bool GiveHealth( float health )
 	{
-		Move();
-
-		if ( Health > 0 )
-			return;
-
-		// TODO: A Grub should've interacted with this to blow it up in some way.
-		ExplosionHelper.Explode( Position, null! );
-		Delete();
+		Health += health;
+		return true;
 	}
 
-	private void Move()
+	public bool ApplyDamage()
+	{
+		return Health <= 0;
+	}
+
+	private async Task SpawnParachuteDelayed()
+	{
+		await Task.DelaySeconds( 1 );
+		_parachute = new AnimatedEntity( "models/crates/crate_parachute/crate_parachute.vmdl", this );
+	}
+
+	[Event.Tick.Server]
+	private void Tick()
 	{
 		// If this crate is parented, don't move it.
 		if ( Parent is not null )
