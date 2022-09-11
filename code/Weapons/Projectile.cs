@@ -24,7 +24,7 @@ public class Projectile : ModelEntity, IDamageable, IResolvable
 	public override void TakeDamage( DamageInfo info )
 	{
 		base.TakeDamage( info );
-		
+
 		Log.Info( Health );
 	}
 
