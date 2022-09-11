@@ -8,7 +8,7 @@ public class InventoryItem : Panel
 
 	public InventoryItem()
 	{
-		StyleSheet.Load( "/UI/InventoryPanel.scss" );
+		StyleSheet.Load( "/UI/Stylesheets/InventoryPanel.scss" );
 		AddEventListener( "onclick", EquipItem );
 	}
 
