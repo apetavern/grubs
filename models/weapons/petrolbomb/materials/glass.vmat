@@ -2,71 +2,49 @@
 
 Layer0
 {
-	shader "simple_liquid.vfx"
+	shader "glass.vfx"
 
-	//---- Bubbles ----
-	g_flBubbleDepthFalloff "6.023"
-	g_flBubbleOpacity "5.278"
-	g_flBubbleScale "0.487"
-	g_flBubblesMaximum "7.222"
-	g_flBubblesMinimum "0.150"
-	g_flBubbleSpaceScale "0.650"
-	g_flBubbleSpeed "0.444"
-	g_flBubbleStrength "20.000"
-	g_vBubbleColorInner "[0.000000 0.000000 0.000000 0.000000]"
-	g_vBubbleColorOuter "[1.000000 1.000000 1.000000 0.000000]"
+	//---- Ambient Occlusion ----
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "models/weapons/petrolbomb/materials/glass_color.psd"
+
+	//---- Emissive ----
+	g_flEmissiveEdgeColorFalloff "2.676"
+	g_flEmissiveEdgeColorThickness "0.341"
+	g_flEmissiveStrength "0.882"
+	g_vEmissiveColor "[0.286275 0.000000 0.000000 0.000000]"
+	g_vEmissiveEdgeColor "[1.000000 0.482353 0.000000 0.000000]"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
 
 	//---- Fog ----
-	g_bFogEnabled "1"
+	g_bAvoidDoubleFogging "1"
+	g_flGlassFogExtinctionAmount "0.000"
+
+	//---- Glass Color ----
+	g_flEdgeColorFalloff "4.941"
+	g_flEdgeColorMaxOpacity "0.376"
+	g_flEdgeColorThickness "0.288"
+	g_vEdgeColor "[0.000000 0.000000 0.000000 0.000000]"
+	GlassTintColor "models/weapons/petrolbomb/materials/glass_color.psd"
 
 	//---- Lighting ----
 	g_flDirectionalLightmapMinZ "0.050"
 	g_flDirectionalLightmapStrength "1.000"
 
-	//---- Liquid ----
-	g_flBrightenEmptyArea "3.000"
-	g_flFresnelGlassThickness "0.222"
-	g_flLiquidBackFade "0.000"
-	g_flLiquidBackOffset "6.000"
-	g_flLiquidBrightness "1.000"
-	g_flLiquidEmissiveStrength "0.000"
-	g_flLiquidInnerGlow "0.100"
-	g_flLiquidLevelHeight "0.650"
-	g_flLiquidLevelHeightDelta "0.000"
-	g_flLiquidRoughness "0.130"
-	g_flLiquidSharpness "30.000"
-	g_flLiquidSpecularStrength "1.000"
-	g_flLiquidSurfaceSpecularStrength "1.000"
-	g_flLiquidWobbleScale "0.100"
-	g_flLiquidWobbleSpeed "1.000"
-	g_flLiquidWobbleWavelength "10.648"
-	g_flMaskMaximum "1.000"
-	g_flMaskMinimum "0.000"
-	g_flSurfaceTension "0.500"
-	g_flTransmissiveStrength "16.667"
-	g_flWaterLineStrength "0.500"
-	g_vLiquidColor "[0.309804 0.239216 0.145098 0.000000]"
-	g_vLiquidLevelDownwardsMinMidMax "[-20.000 0.000 20.000]"
-	g_vLiquidLevelSidewardsMinMidMax "[-20.000 0.000 20.000]"
-	g_vLiquidLevelUpwardsMinMidMax "[-20.000 0.000 20.000]"
-	TextureLiquidMask "models/weapons/petrolbomb/materials/glassliquid_mask.psd"
+	//---- Metalness ----
+	g_flMetalness "0.000"
 
-	//---- Refraction ----
-	g_flChromaticDispersion "0.500"
-	g_flCubeRefractBrightness "4.167"
-	g_flCubeRefractLiquidTransparency "0.176"
-	g_flCubeRefractTransparency "0.130"
-	g_flRefractRoughnessMultiplier "0.858"
+	//---- Normal ----
+	TextureNormal "materials/default/default_normal.tga"
 
-	//---- Simple Material ----
-	TextureColorA "models/weapons/petrolbomb/materials/glass_color.psd"
-	TextureMetalnessA "materials/default/default_metal.tga"
-	TextureNormalA "materials/default/default_normal.tga"
-	TextureRoughnessA "materials/default/default_rough.tga"
-
-	//---- Test Values ----
-	g_flTestAgitation "0.120"
-	g_vTestGravityDir "[0.000 0.000 -1.000]"
+	//---- Roughness ----
+	TextureRoughness "materials/default/default_rough.tga"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
@@ -74,4 +52,8 @@ Layer0
 	g_vTexCoordOffset "[0.000 0.000]"
 	g_vTexCoordScale "[1.000 1.000]"
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	//---- Translucent ----
+	g_flOpacityScale "0.313"
+	TextureTranslucency "materials/default/default_trans.tga"
 }
