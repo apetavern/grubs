@@ -5,6 +5,7 @@ using Grubs.Terrain;
 using Grubs.Utils;
 using Grubs.Utils.Event;
 using Grubs.Weapons.Base;
+using Sandbox;
 
 namespace Grubs.Player;
 
@@ -345,7 +346,8 @@ public partial class Grub : AnimatedEntity, IResolvable
 		var items = clothes.Clothing.Where( item =>
 			item.Category == Clothing.ClothingCategory.Hair ||
 			item.Category == Clothing.ClothingCategory.Hat ||
-			item.Category == Clothing.ClothingCategory.Facial
+			item.Category == Clothing.ClothingCategory.Facial ||
+			item.Category == Clothing.ClothingCategory.Skin
 		);
 
 		if ( !items.Any() )
@@ -362,6 +364,12 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 				ent.SetMaterialGroup( item.MaterialGroup );
+
+			if(item.Category == Clothing.ClothingCategory.Skin )
+			{
+				var SkinMaterial = Material.Load( item.SkinMaterial );
+				SetMaterialOverride( SkinMaterial, "skin" );
+			}
 		}
 	}
 

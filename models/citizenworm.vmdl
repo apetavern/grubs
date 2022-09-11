@@ -14,12 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "citizen_skin.vmat"
-								to = "models/citizen/skin/citizen_skin.vmat"
-							},
-							{
 								from = "phong1.vmat"
-								to = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
 							},
 							{
 								from = "citizen_eyes.vmat"
@@ -36,7 +32,13 @@
 					{
 						_class = "MaterialGroup"
 						name = "Skin01"
-						remaps = [  ]
+						remaps = 
+						[
+							{
+								from = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
+							},
+						]
 					},
 					{
 						_class = "MaterialGroup"
