@@ -7,7 +7,7 @@ namespace Grubs.Weapons.Base;
 /// <summary>
 /// An arc trace based projectile.
 /// </summary>
-public class Projectile : ModelEntity, IResolvable
+public class Projectile : ModelEntity, IDamageable, IResolvable
 {
 	public bool Resolved => false;
 
@@ -174,6 +174,17 @@ public class Projectile : ModelEntity, IResolvable
 			return;
 
 		Explode();
+	}
+
+	public bool GiveHealth( float health )
+	{
+		Health += health;
+		return true;
+	}
+
+	public bool ApplyDamage()
+	{
+		return Health <= 0;
 	}
 
 	[Event.Tick.Server]

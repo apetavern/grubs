@@ -143,6 +143,25 @@ public abstract partial class BaseGamemode : BaseState
 		if ( !IsServer )
 			return;
 
+		var damageables = All.OfType<IDamageable>().ToArray();
+		foreach ( var damageable in damageables )
+		{
+			if ( damageable is not Entity { IsValid: true } entity )
+				continue;
+
+			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+			{
+				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( entity ) )
+					continue;
+
+				if ( entity is Grub { IsTurn: true } )
+					GrubsGame.Current.CurrentGamemode.UseTurn();
+
+				zone.Trigger( entity );
+				damageable.ApplyDamage();
+			}
+		}
+
 		if ( !UsedTurn && TimeUntilTurnEnd <= 0 )
 			UseTurn();
 

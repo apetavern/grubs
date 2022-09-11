@@ -13,7 +13,7 @@ namespace Grubs.Player;
 /// A playable grub.
 /// </summary>
 [Category( "Grubs" )]
-public partial class Grub : AnimatedEntity, IResolvable
+public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 {
 	/// <summary>
 	/// The grubs movement controller.
@@ -213,16 +213,6 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 		if ( LifeState != LifeState.Dead )
 		{
-			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
-			{
-				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( this ) )
-					continue;
-
-				GrubsGame.Current.CurrentGamemode.UseTurn();
-				zone.Trigger( this );
-				ApplyDamage();
-			}
-
 			foreach ( var zone in TerrainZone.All.OfType<PickupZone>() )
 			{
 				if ( !zone.IsValid )
