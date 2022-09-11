@@ -13,6 +13,7 @@
 		ProjectileCollisionExplosionDelay = 0
 		ProjectileLoopSound = null
 		ProjectileExplodeSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
+		ProjectileParticleTrail = resource:"particles/smoke_trail.vpcf"
 		WeaponName = "Bazooka"
 		Model = resource:"models/weapons/bazooka/bazooka.vmdl"
 		Icon = resource:"models/weapons/bazooka/bazooka.vmdl_c.png"
