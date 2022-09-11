@@ -4,12 +4,6 @@ using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
 
-public enum ProjectileCollisionReaction
-{
-	Explosive,
-	Incendiary
-}
-
 /// <summary>
 /// An arc trace based projectile.
 /// </summary>
