@@ -19,7 +19,7 @@ namespace Grubs;
 /// <summary>
 /// The official Sbox GOTY 2022, Grubs!
 /// </summary>
-public partial class GrubsGame : Game
+public sealed partial class GrubsGame : Game
 {
 	/// <summary>
 	/// This game.

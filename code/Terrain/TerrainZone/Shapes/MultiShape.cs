@@ -3,7 +3,7 @@
 /// <summary>
 /// Handles multiple zone shapes.
 /// </summary>
-public partial class MultiShape : ZoneShape
+public sealed partial class MultiShape : ZoneShape
 {
 	[Net]
 	public IList<ZoneShape> Shapes { get; set; } = new List<ZoneShape>();

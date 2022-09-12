@@ -4,7 +4,7 @@ using Grubs.Utils;
 
 namespace Grubs.UI;
 
-public class WaitingStatus : Panel
+public sealed class WaitingStatus : Panel
 {
 	private static WaitingState State => (GrubsGame.Current.CurrentState as WaitingState)!;
 

@@ -4,7 +4,7 @@
 /// Represents a weapon that is based upon <see cref="MeleeWeapon"/>.
 /// </summary>
 [GameResource( "Grub Melee Weapon Definition", "gmwep", "Describes a Grubs melee weapon", Icon = "💀", IconBgColor = "#fe71dc", IconFgColor = "black" )]
-public class MeleeWeaponAsset : WeaponAsset
+public sealed class MeleeWeaponAsset : WeaponAsset
 {
 	//
 	// Melee weapon specific

@@ -6,7 +6,7 @@ namespace Grubs.Terrain;
 /// <summary>
 /// Handles a zone that can deal damage to entities.
 /// </summary>
-public partial class DamageZone : TerrainZone
+public sealed partial class DamageZone : TerrainZone
 {
 	/// <summary>
 	/// The flags to pass to the damage info when a grub is damaged.

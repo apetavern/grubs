@@ -3,7 +3,7 @@ using Grubs.Player;
 
 namespace Grubs.UI.World;
 
-public class GrubNametag : WorldPanel
+public sealed class GrubNametag : WorldPanel
 {
 	public Grub Grub { get; }
 

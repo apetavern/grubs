@@ -6,7 +6,7 @@ namespace Grubs.Crates;
 /// <summary>
 /// A crate capable of carrying weapons for Grubs to use.
 /// </summary>
-public class WeaponCrate : BaseCrate
+public sealed class WeaponCrate : BaseCrate
 {
 	public override void Spawn()
 	{

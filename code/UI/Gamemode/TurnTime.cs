@@ -6,7 +6,7 @@ using Grubs.Utils.Event;
 
 namespace Grubs.UI;
 
-public class TurnTime : Panel
+public sealed class TurnTime : Panel
 {
 	private readonly Label _timeLeft;
 

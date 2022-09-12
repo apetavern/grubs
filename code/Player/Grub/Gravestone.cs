@@ -1,7 +1,7 @@
 ﻿namespace Grubs.Player;
 
 [Category( "Grubs" )]
-public partial class Gravestone : ModelEntity
+public sealed partial class Gravestone : ModelEntity
 {
 	[Net]
 	private Grub _Grub { get; set; }

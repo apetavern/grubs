@@ -9,7 +9,7 @@ namespace Grubs.Player;
 /// A team of grubs.
 /// </summary>
 [Category( "Setup" )]
-public partial class Team : Entity, ISpectator
+public sealed partial class Team : Entity, ISpectator
 {
 	/// <summary>
 	/// The list of clients that are a part of this team.

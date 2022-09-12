@@ -6,12 +6,12 @@ namespace Grubs.Crates;
 /// <summary>
 /// The terrain zone for picking up crates.
 /// </summary>
-public class PickupZone : TerrainZone
+public sealed class PickupZone : TerrainZone
 {
 	/// <summary>
 	/// The crate that owns this zone.
 	/// </summary>
-	protected BaseCrate Crate
+	private BaseCrate Crate
 	{
 		get
 		{

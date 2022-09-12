@@ -2,7 +2,7 @@
 
 namespace Grubs.UI;
 
-public class InventoryItem : Panel
+public sealed class InventoryItem : Panel
 {
 	private int SlotIndex { get; set; } = -1;
 

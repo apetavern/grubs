@@ -3,7 +3,7 @@ using Grubs.Utils.Extensions;
 
 namespace Grubs.UI.World;
 
-public class AimReticle : WorldPanel
+public sealed class AimReticle : WorldPanel
 {
 	public AimReticle()
 	{

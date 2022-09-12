@@ -5,7 +5,6 @@ using Grubs.Terrain;
 using Grubs.Utils;
 using Grubs.Utils.Event;
 using Grubs.Weapons.Base;
-using Sandbox;
 
 namespace Grubs.Player;
 

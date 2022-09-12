@@ -3,7 +3,7 @@ using Grubs.Utils.Extensions;
 
 namespace Grubs.Terrain;
 
-public class MarchingSquares
+public sealed class MarchingSquares
 {
 	private int Width { get; set; }
 	private int Height { get; set; }

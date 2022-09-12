@@ -4,7 +4,7 @@ using Grubs.Weapons.Base;
 
 namespace Grubs.UI;
 
-public class InventoryPanel : Panel
+public sealed class InventoryPanel : Panel
 {
 	private Panel ItemsPanel { get; set; }
 	private bool HasBuilt { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Grubs.Terrain;
 
-public class TerrainMap
+public sealed class TerrainMap
 {
 	public bool[,] TerrainGrid { get; private set; } = null!;
 	private int[,] RegionGrid { get; set; } = null!;

@@ -3,7 +3,7 @@
 /// <summary>
 /// The end state to games. This will display the result of the completed gamemode.
 /// </summary>
-public partial class GameEndState : BaseState
+public sealed partial class GameEndState : BaseState
 {
 	/// <summary>
 	/// The end result of the game.

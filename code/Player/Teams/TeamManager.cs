@@ -6,7 +6,7 @@ namespace Grubs.Player;
 /// Manages a list of teams of grubs.
 /// </summary>
 [Category( "Setup" )]
-public partial class TeamManager : Entity
+public sealed partial class TeamManager : Entity
 {
 	/// <summary>
 	/// The single instance of this manager.

@@ -2,7 +2,7 @@
 
 namespace Grubs.UI.World;
 
-public class GrubNametags
+public sealed class GrubNametags
 {
 	private Dictionary<Grub, GrubNametag> Nametags { get; } = new();
 

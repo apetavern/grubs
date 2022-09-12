@@ -1,6 +1,6 @@
 ﻿namespace Grubs.Utils;
 
-public class ArcTrace
+public sealed class ArcTrace
 {
 	public Vector3 StartPos { get; set; }
 	public Vector3 EndPos { get; set; }

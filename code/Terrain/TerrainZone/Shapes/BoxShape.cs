@@ -3,7 +3,7 @@
 /// <summary>
 /// A box shape.
 /// </summary>
-public partial class BoxShape : ZoneShape
+public sealed partial class BoxShape : ZoneShape
 {
 	/// <summary>
 	/// The size of the box.

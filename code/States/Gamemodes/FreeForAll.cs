@@ -1,6 +1,6 @@
 ﻿namespace Grubs.States;
 
-public class FreeForAll : BaseGamemode
+public sealed class FreeForAll : BaseGamemode
 {
 	protected override void SetupParticipants( List<Client> participants )
 	{

@@ -5,7 +5,7 @@ namespace Grubs.Crates;
 /// <summary>
 /// A crate that heals Grubs on touch.
 /// </summary>
-public class HealthCrate : BaseCrate
+public sealed class HealthCrate : BaseCrate
 {
 	public override void Spawn()
 	{

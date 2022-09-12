@@ -4,7 +4,7 @@
 /// Utility <see cref="Entity"/> to run events across both realms and simplify event execution.
 /// </summary>
 [Category( "Setup" )]
-public partial class EventRunner : Entity
+public sealed partial class EventRunner : Entity
 {
 	private static EventRunner _instance = null!;
 

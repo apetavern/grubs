@@ -3,7 +3,7 @@
 namespace Grubs.UI;
 
 [UseTemplate]
-public class EndScreen : Panel
+public sealed class EndScreen : Panel
 {
 	private static GameEndState? GameEndState => GrubsGame.Current.CurrentState as GameEndState;
 

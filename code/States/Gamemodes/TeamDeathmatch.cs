@@ -1,6 +1,6 @@
 ﻿namespace Grubs.States;
 
-public class TeamDeathmatch : BaseGamemode
+public sealed class TeamDeathmatch : BaseGamemode
 {
 	protected override void SetupParticipants( List<Client> participants )
 	{

@@ -3,7 +3,7 @@
 /// <summary>
 /// A sphere shape.
 /// </summary>
-public partial class SphereShape : ZoneShape
+public sealed partial class SphereShape : ZoneShape
 {
 	/// <summary>
 	/// The radius of the sphere.

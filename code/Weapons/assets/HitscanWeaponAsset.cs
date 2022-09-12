@@ -4,7 +4,7 @@
 /// Represents a weapon that is based upon <see cref="HitscanWeapon"/>.
 /// </summary>
 [GameResource( "Grub Hitscan Weapon Definition", "ghwep", "Describes a Grubs hitscan weapon", Icon = "💀", IconBgColor = "#fe71dc", IconFgColor = "black" )]
-public class HitscanWeaponAsset : WeaponAsset
+public sealed class HitscanWeaponAsset : WeaponAsset
 {
 	//
 	// Hitscan weapon specific

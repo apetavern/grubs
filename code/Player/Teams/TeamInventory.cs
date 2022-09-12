@@ -2,7 +2,7 @@
 
 namespace Grubs.Player;
 
-public partial class GrubsInventory : BaseNetworkable
+public sealed partial class GrubsInventory : BaseNetworkable
 {
 	public Entity Owner { get; init; } = null!;
 	public GrubWeapon? LastUsedWeapon { get; set; } = null;

@@ -4,7 +4,7 @@
 /// A simple pawn for spectators to control.
 /// </summary>
 [Category( "Spectators" )]
-public class Spectator : Entity, ISpectator
+public sealed class Spectator : Entity, ISpectator
 {
 	/// <summary>
 	/// The camera that the team client will see the game through.

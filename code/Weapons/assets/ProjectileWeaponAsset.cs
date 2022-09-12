@@ -4,7 +4,7 @@
 /// Represents a weapon that is based upon <see cref="ProjectileWeapon"/>.
 /// </summary>
 [GameResource( "Grub Projectile Weapon Definition", "gpwep", "Describes a Grubs projectile weapon", Icon = "💀", IconBgColor = "#fe71dc", IconFgColor = "black" )]
-public class ProjectileWeaponAsset : WeaponAsset
+public sealed class ProjectileWeaponAsset : WeaponAsset
 {
 	//
 	// Projectile weapon specific

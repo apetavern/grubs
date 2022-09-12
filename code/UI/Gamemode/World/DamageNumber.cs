@@ -3,7 +3,7 @@ using Grubs.Player;
 
 namespace Grubs.UI;
 
-public class DamageNumber : WorldPanel
+public sealed class DamageNumber : WorldPanel
 {
 	private const float RiseSpeed = 5;
 	private static Vector3 Offset => Vector3.Up * 64;

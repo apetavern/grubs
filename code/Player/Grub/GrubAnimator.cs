@@ -2,7 +2,7 @@
 
 namespace Grubs.Player;
 
-public class GrubAnimator : PawnAnimator
+public sealed class GrubAnimator : PawnAnimator
 {
 	private float _incline;
 

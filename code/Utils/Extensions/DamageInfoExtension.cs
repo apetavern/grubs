@@ -5,7 +5,7 @@ namespace Grubs.Utils.Extensions;
 /// <summary>
 /// Extension methods for <see cref="DamageInfo"/>.
 /// </summary>
-public class DamageInfoExtension
+public static class DamageInfoExtension
 {
 	/// <summary>
 	/// Creates a <see cref="DamageInfo"/> from an explosion.

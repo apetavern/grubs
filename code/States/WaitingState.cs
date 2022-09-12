@@ -5,7 +5,7 @@ namespace Grubs.States;
 /// <summary>
 /// A simple state to sit in while preparing for the next gamemode.
 /// </summary>
-public partial class WaitingState : BaseState
+public sealed partial class WaitingState : BaseState
 {
 	/// <summary>
 	/// The time until the state will be switched to the gamemode.

@@ -1,7 +1,7 @@
 ﻿namespace Grubs.Terrain;
 
 [Category( "Terrain" )]
-public class TerrainModel : ModelEntity
+public sealed class TerrainModel : ModelEntity
 {
 	private MarchingSquares _marchingSquares = null!;
 	private TerrainWallModel _wallModel = null!;

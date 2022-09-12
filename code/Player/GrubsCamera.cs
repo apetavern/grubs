@@ -1,6 +1,6 @@
 ﻿namespace Grubs.Player;
 
-public partial class GrubsCamera : CameraMode
+public sealed partial class GrubsCamera : CameraMode
 {
 	public float Distance { get; set; } = 1024;
 	public float DistanceScrollRate { get; set; } = 32f;

@@ -5,7 +5,7 @@ using Grubs.Utils.Event;
 
 namespace Grubs.UI;
 
-public class Hud : RootPanel
+public sealed class Hud : RootPanel
 {
 	private WaitingStatus? _waitingStatus;
 	private TurnTime? _turnTime;
