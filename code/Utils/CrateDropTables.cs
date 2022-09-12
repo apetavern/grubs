@@ -48,7 +48,7 @@ public static class CrateDropTables
 	}
 
 	/// <summary>
-	/// Gets a random weapon for a weapon crate.
+	/// Gets a random <see cref="WeaponAsset"/> for a weapon crate.
 	/// </summary>
 	/// <returns>The randomly chosen weapon.</returns>
 	public static WeaponAsset GetRandomWeaponFromCrate()

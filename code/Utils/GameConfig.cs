@@ -1,9 +1,12 @@
-﻿namespace Grubs.Utils;
+﻿using Grubs.Crates;
+using Grubs.Player;
+
+namespace Grubs.Utils;
 
 public static class GameConfig
 {
 	/// <summary>
-	/// The grubs gamemode to play.
+	/// The Grubs gamemode to play.
 	/// </summary>
 	[ConVar.Replicated( "grubs_game" )]
 	public static string Gamemode { get; set; } = "ffa";
@@ -21,7 +24,7 @@ public static class GameConfig
 	public static int MaximumPlayers { get; set; } = 4;
 
 	/// <summary>
-	/// The amount of grubs that will be spawned per player.
+	/// The amount of <see cref="Grub"/>s that will be spawned per team.
 	/// </summary>
 	[ConVar.Replicated( "grub_count" )]
 	public static int GrubCount { get; set; } = 4;
@@ -33,19 +36,19 @@ public static class GameConfig
 	public static int TurnDuration { get; set; } = 60;
 
 	/// <summary>
-	/// The percent chance that a weapon crate will spawn every turn.
+	/// The percent chance that a <see cref="WeaponCrate"/> will spawn every turn.
 	/// </summary>
 	[ConVar.Replicated( "crate_weapon_chance" )]
 	public static int WeaponCrateChancePerTurn { get; set; } = 10;
 
 	/// <summary>
-	/// The percent chance that a health crate will spawn every turn.
+	/// The percent chance that a <see cref="HealthCrate"/> will spawn every turn.
 	/// </summary>
 	[ConVar.Replicated( "crate_health_chance" )]
 	public static int HealthCrateChancePerTurn { get; set; } = 5;
 
 	/// <summary>
-	/// The time in seconds to give Grubs after using their turn.
+	/// The time in seconds to give <see cref="Grub"/>s after using their turn.
 	/// </summary>
 	[ConVar.Replicated( "movement_grace" )]
 	public static float MovementGracePeriod { get; set; } = 5;

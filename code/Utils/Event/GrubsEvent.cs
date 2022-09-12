@@ -620,7 +620,7 @@ public static class GrubsEvent
 	#endregion
 
 	/// <summary>
-	/// Verifies that if a state was passed to the <see cref="EnterState"/> or <see cref="LeaveState"/> event that it is an existing <see cref="BaseState"/>.
+	/// Verifies that if a <see cref="state"/> was passed to the <see cref="EnterState"/> or <see cref="LeaveState"/> event that it is an existing <see cref="BaseState"/>.
 	/// </summary>
 	/// <param name="state">The state that is being verified.</param>
 	private static void AssertValidState( string state )

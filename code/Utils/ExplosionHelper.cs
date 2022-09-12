@@ -9,7 +9,7 @@ namespace Grubs.Utils;
 public static partial class ExplosionHelper
 {
 	/// <summary>
-	/// Creates an explosion at a given point where a Grub is responsible for it.
+	/// Creates an explosion at a given point where a <see cref="Grub"/> is responsible for it.
 	/// </summary>
 	/// <param name="position">The center point of the explosion.</param>
 	/// <param name="source">The grub responsible for creating this explosion.</param>

@@ -6,6 +6,7 @@ global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 using Grubs.Crates;
+using Grubs.Player;
 using Grubs.States;
 using Grubs.Terrain;
 using Grubs.UI;
@@ -26,13 +27,13 @@ public partial class GrubsGame : Game
 	public new static GrubsGame Current => (Game.Current as GrubsGame)!;
 
 	/// <summary>
-	/// The current state that the game is in.
+	/// The current <see cref="BaseState"/> that the game is in.
 	/// </summary>
 	[Net]
 	public BaseState CurrentState { get; set; } = null!;
 
 	/// <summary>
-	/// The current gamemode the game is in.
+	/// The current <see cref="BaseGamemode"/> the game is in.
 	/// </summary>
 	public BaseGamemode CurrentGamemode
 	{
@@ -49,7 +50,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// The terrain map in the world.
+	/// The <see cref="TerrainMap"/> in the world.
 	/// </summary>
 	public TerrainMap TerrainMap { get; set; } = null!;
 
@@ -109,7 +110,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Regenerates the terrain map grid.
+	/// Regenerates the <see cref="TerrainMap"/> grid.
 	/// </summary>
 	public void RegenerateGrid()
 	{
@@ -117,7 +118,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Regenerates the terrain models.
+	/// Regenerates the <see cref="TerrainModel"/>.
 	/// </summary>
 	public void RegenerateMap()
 	{
@@ -131,7 +132,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Admin command to skip a teams turn.
+	/// Admin command to skip a <see cref="Team"/>s turn.
 	/// </summary>
 	[ConCmd.Admin]
 	public static void SkipTurn()
@@ -143,7 +144,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Admin command to kill the currently active Grub.
+	/// Admin command to kill the currently active <see cref="Grub"/>.
 	/// </summary>
 	[ConCmd.Admin]
 	public static void KillActiveGrub()
@@ -163,7 +164,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Admin command to give ammo the active team.
+	/// Admin command to give ammo the active <see cref="Team"/>.
 	/// </summary>
 	/// <param name="weaponName">The name of the weapon to give ammo to.</param>
 	/// <param name="amount">The amount of ammo to give.</param>
@@ -178,7 +179,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Admin command to spawn a health crate above the active Grubs head.
+	/// Admin command to spawn a <see cref="HealthCrate"/> above the active <see cref="Grub"/>s head.
 	/// </summary>
 	[ConCmd.Admin]
 	public static void SpawnHealthCrate()
@@ -193,7 +194,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Admin command to spawn a weapon crate above the active Grubs head.
+	/// Admin command to spawn a <see cref="WeaponCrate"/> above the active <see cref="Grub"/>s head.
 	/// </summary>
 	[ConCmd.Admin]
 	public static void SpawnWeaponCrate()
@@ -208,7 +209,7 @@ public partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Test command to change the seed on the terrain map and regenerate it.
+	/// Test command to change the seed on the <see cref="TerrainMap"/> and regenerate it.
 	/// </summary>
 	[ConCmd.Admin]
 	public static void ScrambleMap()
@@ -251,22 +252,20 @@ public partial class GrubsGame : Game
 	[ClientRpc]
 	public static void ExplodeClient( Vector2 midpoint, float size )
 	{
-		bool DidDamage = Current.TerrainMap.DestructSphere( midpoint, size );
-		if ( DidDamage )
+		if ( Current.TerrainMap.DestructSphere( midpoint, size ) )
 			Current.RegenerateMap();
 	}
 
 	/// <summary>
-	/// Destruct a sphere in the terrain grid.
+	/// Destruct a sphere in the <see cref="TerrainMap"/>.
 	/// </summary>
-	/// <param name="Startpoint">The Vector3 startpoint of the line to be destructed.</param>
-	/// <param name="EndPoint">The Vector3 endpoint of the line to be destructed.</param>
-	/// <param name="Width">The size (radius) of the sphere to be destructed.</param>
+	/// <param name="startpoint">The start point of the line to be destructed.</param>
+	/// <param name="endPoint">The endpoint of the line to be destructed.</param>
+	/// <param name="width">The size (radius) of the sphere to be destructed.</param>
 	[ClientRpc]
-	public static void LineClient( Vector3 Startpoint, Vector3 EndPoint, float Width )
+	public static void LineClient( Vector3 startpoint, Vector3 endPoint, float width )
 	{
-		bool DidDamage = Current.TerrainMap.DestructLine( Startpoint, EndPoint, Width );
-		if ( DidDamage )
+		if ( Current.TerrainMap.DestructLine( startpoint, endPoint, width ) )
 			Current.RegenerateMap();
 	}
 }

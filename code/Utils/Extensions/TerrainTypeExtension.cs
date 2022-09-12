@@ -12,7 +12,7 @@ public static class TerrainTypeExtension
 	/// </summary>
 	/// <param name="terrainType">The <see cref="TerrainType"/> to get the material for.</param>
 	/// <returns>The material associated with the <see cref="TerrainType"/>.</returns>
-	/// <exception cref="ArgumentException">Thrown when the terrain type does not have an associated material.</exception>
+	/// <exception cref="ArgumentException">Thrown when the <see cref="TerrainType"/> does not have an associated material.</exception>
 	public static string GetMaterial( this TerrainType terrainType )
 	{
 		return terrainType switch

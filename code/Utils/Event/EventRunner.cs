@@ -1,7 +1,7 @@
 ﻿namespace Grubs.Utils.Event;
 
 /// <summary>
-/// Utility entity to run events across both realms and simplify event execution.
+/// Utility <see cref="Entity"/> to run events across both realms and simplify event execution.
 /// </summary>
 [Category( "Setup" )]
 public partial class EventRunner : Entity
@@ -17,7 +17,7 @@ public partial class EventRunner : Entity
 	/// Runs a basic event on both server and client.
 	/// </summary>
 	/// <param name="name">The name of the event to run.</param>
-	/// <param name="to">The clients to send this event to.</param>
+	/// <param name="to">The <see cref="Client"/>s to send this event to.</param>
 	public static void Run( string name, To? to = null )
 	{
 		RunLocal( name );
