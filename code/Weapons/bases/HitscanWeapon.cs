@@ -120,7 +120,7 @@ public partial class HitscanWeapon : GrubWeapon
 		}
 
 		var muzzle = attachment.Value;
-		var system = Particles.Create( "particles/guntrace.vpcf" );
+		var system = Particles.Create( "particles/guntrace/guntrace.vpcf" );
 		var offsetSpread = Vector3.Random * TraceSpread;
 
 		Particles.Create( "particles/muzzleflash/grubs_muzzleflash.vpcf", muzzle.Position );

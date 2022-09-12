@@ -36,7 +36,7 @@ public static class Precache
 		// Particles
 		//
 		// Gun/Projectile
-		Sandbox.Precache.Add( "particles/guntrace.vpcf" );
+		Sandbox.Precache.Add( "particles/guntrace/guntrace.vpcf" );
 		Sandbox.Precache.Add( "particles/muzzleflash/grubs_muzzleflash.vpcf" );
 		Sandbox.Precache.Add( "particles/muzzleflash/grubs_muzzleflash_sparks.vpcf" );
 		Sandbox.Precache.Add( "particles/muzzleflash/grubs_muzzleflash_sparks_impact.vpcf" );
