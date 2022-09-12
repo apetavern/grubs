@@ -1,0 +1,14 @@
+﻿namespace Grubs.Terrain;
+
+[Category( "Terrain" )]
+public class TerrainChunk
+{
+	public bool[,] TerrainGrid { get; set; } = null!;
+	public Vector3 Position { get; set; }
+	public bool IsDirty { get; set; } = false;
+
+	public TerrainChunk( Vector3 position )
+	{
+		Position = position;
+	}
+}

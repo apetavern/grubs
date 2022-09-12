@@ -5,6 +5,7 @@ namespace Grubs.Terrain;
 public sealed class TerrainMap
 {
 	public bool[,] TerrainGrid { get; private set; } = null!;
+	public List<TerrainChunk> TerrainGridChunks { get; private set; } = null!;
 	private int[,] RegionGrid { get; set; } = null!;
 	private List<Vector2> PositionsToDilate { get; set; } = null!;
 
@@ -23,6 +24,7 @@ public sealed class TerrainMap
 		Seed = seed;
 
 		GenerateTerrainGrid();
+		AssignGridToChunks();
 	}
 
 	/// <summary>
@@ -39,6 +41,43 @@ public sealed class TerrainMap
 
 		if ( GameConfig.TerrainBorder )
 			AddBorder();
+	}
+
+	private void AssignGridToChunks()
+	{
+		TerrainGridChunks = new List<TerrainChunk>();
+
+		const int chunkSize = 10;
+		var chunkCount = (Width * Height) / (chunkSize * chunkSize);
+
+		var xOffset = 0;
+		var yOffset = 0;
+		for ( var i = 0; i < chunkCount; i++ )
+		{
+			var scale = GameConfig.TerrainScale;
+			var chunkPos = new Vector3( xOffset * scale, 0, yOffset * scale );
+			var chunk = new TerrainChunk( chunkPos )
+			{
+				TerrainGrid = new bool[chunkSize, chunkSize]
+			};
+
+			for ( int x = xOffset; x < xOffset + chunkSize; x++ )
+			{
+				for ( int y = yOffset; y < yOffset + chunkSize; y++ )
+				{
+					chunk.TerrainGrid[x % chunkSize, y % chunkSize] = TerrainGrid[x, y];
+				}
+			}
+
+			TerrainGridChunks.Add( chunk );
+
+			xOffset += chunkSize;
+			if ( xOffset == Width )
+			{
+				xOffset = 0;
+				yOffset += chunkSize;
+			}
+		}
 	}
 
 	/// <summary>
@@ -262,12 +301,11 @@ public sealed class TerrainMap
 	{
 		var totalLength = (startPoint - endPoint);
 		var stepCount = (int)MathF.Round( totalLength.Length / width );
-		var currentPoint = startPoint;
 		var modifiedTerrain = false;
 
 		for ( var i = 0; i < stepCount; i++ )
 		{
-			currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
+			var currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
 			var pos = new Vector3( currentPoint.x, currentPoint.z );
 			modifiedTerrain = DestructSphere( pos, width );
 		}
@@ -283,7 +321,6 @@ public sealed class TerrainMap
 	public Vector3 GetSpawnLocation()
 	{
 		var scale = GameConfig.TerrainScale;
-
 		while ( true )
 		{
 			var x = Rand.Int( Width - 1 );

@@ -32,11 +32,6 @@ public sealed partial class GrubsGame : Game
 	public TerrainMap TerrainMap { get; set; } = null!;
 
 	/// <summary>
-	/// The model of the terrain map.
-	/// </summary>
-	public TerrainModel TerrainModel { get; set; } = null!;
-
-	/// <summary>
 	/// The seed used to create the terrain map.
 	/// </summary>
 	[Net]
@@ -103,7 +98,7 @@ public sealed partial class GrubsGame : Game
 	/// </summary>
 	public void RegenerateMap()
 	{
-		TerrainModel.GenerateMeshAndWalls();
+		Terrain.Terrain.Initialize();
 	}
 
 	[Event.Tick]
@@ -207,7 +202,7 @@ public sealed partial class GrubsGame : Game
 	public static void InitializeTerrainClient()
 	{
 		Current.TerrainMap = new TerrainMap( Current.Seed );
-		Current.TerrainModel = new TerrainModel();
+		Terrain.Terrain.Initialize();
 	}
 
 	/// <summary>

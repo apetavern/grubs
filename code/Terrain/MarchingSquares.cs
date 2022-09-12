@@ -1,5 +1,6 @@
 ﻿using Grubs.Utils;
 using Grubs.Utils.Extensions;
+using Sandbox.UI.Tests;
 
 namespace Grubs.Terrain;
 
@@ -21,16 +22,13 @@ public sealed class MarchingSquares
 
 	private const float LocalY = -32f;
 
-	public Model GenerateModel()
+	public Model GenerateModel( bool[,] grid )
 	{
-		var map = GrubsGame.Current.TerrainMap;
-		Width = TerrainMap.Width;
-		Height = TerrainMap.Height;
+		Width = grid.GetLength( 0 );
+		Height = grid.GetLength( 1 );
 
 		var scale = GameConfig.TerrainScale;
-
-		var terrainGrid = map.TerrainGrid;
-		March( terrainGrid );
+		March( grid, scale );
 
 		var vertexNormals = new List<Vector3>();
 		for ( var i = 0; i < _triangles.Count; i += 3 )
@@ -147,10 +145,8 @@ public sealed class MarchingSquares
 		return _builder.Create();
 	}
 
-	private void March( bool[,] terrainGrid )
+	private void March( bool[,] terrainGrid, int scale )
 	{
-		var scale = GameConfig.TerrainScale;
-
 		for ( var x = 0; x < terrainGrid.GetLength( 0 ) - 1; x++ )
 			for ( var z = 0; z < terrainGrid.GetLength( 1 ) - 1; z++ )
 			{
