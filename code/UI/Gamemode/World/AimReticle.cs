@@ -19,12 +19,6 @@ public sealed class AimReticle : WorldPanel
 	{
 		base.Tick();
 
-		if ( Local.Client.GetTeam() != TeamManager.Instance.CurrentTeam )
-		{
-			SetClass( "hidden", true );
-			return;
-		}
-
 		var activeGrub = TeamManager.Instance.CurrentTeam.ActiveGrub;
 		if ( activeGrub.ActiveChild is null || !activeGrub.ActiveChild.HasReticle )
 		{
@@ -32,7 +26,7 @@ public sealed class AimReticle : WorldPanel
 			return;
 		}
 
-		if ( !activeGrub.Controller.IsGrounded || !activeGrub.Controller.Velocity.IsNearlyZero( 2.5f ) )
+		if ( !activeGrub.Controller.IsGrounded || !activeGrub.Velocity.IsNearlyZero( 2.5f ) )
 		{
 			SetClass( "hidden", true );
 			return;
