@@ -6,6 +6,11 @@
 public interface IDamageable
 {
 	/// <summary>
+	/// Whether or not the instance has been damaged.
+	/// </summary>
+	bool HasBeenDamaged { get; }
+
+	/// <summary>
 	/// Makes the instance take damage.
 	/// </summary>
 	/// <param name="info">The damage to deal to the instance.</param>

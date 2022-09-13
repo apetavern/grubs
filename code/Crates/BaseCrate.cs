@@ -12,6 +12,8 @@ namespace Grubs.Crates;
 [Category( "Crates" )]
 public partial class BaseCrate : ModelEntity, IDamageable, IResolvable
 {
+	public bool HasBeenDamaged => false;
+
 	public bool Resolved => Velocity.IsNearlyZero( 2.5f );
 
 	/// <summary>

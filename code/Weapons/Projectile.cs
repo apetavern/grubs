@@ -9,6 +9,8 @@ namespace Grubs.Weapons.Base;
 /// </summary>
 public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 {
+	public bool HasBeenDamaged => false;
+
 	public bool Resolved => false;
 
 	private Grub Grub { get; set; } = null!;
