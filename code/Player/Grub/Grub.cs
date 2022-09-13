@@ -52,7 +52,8 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// <summary>
 	/// Returns whether or not this grub has been damaged.
 	/// </summary>
-	public bool HasBeenDamaged => _damageQueue.Count != 0;
+	[Net]
+	public bool HasBeenDamaged { get; private set; }
 
 	private readonly Queue<DamageInfo> _damageQueue = new();
 	private bool _takeDamage;
@@ -131,6 +132,7 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		if ( !_takeDamage )
 		{
 			_damageQueue.Enqueue( info );
+			HasBeenDamaged = true;
 			return;
 		}
 
@@ -306,6 +308,7 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		TakeDamage( DamageInfo.Generic( Math.Min( totalDamage, Health ) ) );
 
 		_takeDamage = false;
+		HasBeenDamaged = false;
 		return dead;
 	}
 
