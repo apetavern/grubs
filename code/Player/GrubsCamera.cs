@@ -20,6 +20,7 @@ public sealed partial class GrubsCamera : CameraMode
 	private static int SecondsBeforeReturnFromPan => 3;
 
 	private Entity? Target { get; set; }
+	private Entity? LastTarget { get; set; }
 	private TimeSince TimeSinceTargetChanged { get; set; }
 
 	public override void Update()
@@ -97,7 +98,7 @@ public sealed partial class GrubsCamera : CameraMode
 			return;
 		}
 
-		ChangeTarget( default );
+		ChangeTarget( LastTarget is null ? GrubsGame.Current.TerrainModel.Center : null );
 	}
 
 	private void ChangeTarget( Entity? target )
@@ -105,6 +106,7 @@ public sealed partial class GrubsCamera : CameraMode
 		if ( Target == target )
 			return;
 
+		LastTarget = Target;
 		Target = target;
 		TimeSinceTargetChanged = 0;
 	}
