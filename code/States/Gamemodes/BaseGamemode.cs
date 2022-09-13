@@ -292,7 +292,6 @@ public abstract partial class BaseGamemode : BaseState
 			var startZ = GameConfig.TerrainHeight * GameConfig.TerrainScale;
 			var z = Rand.Float( startZ, startZ + 100 );
 			var weaponCrate = new WeaponCrate { Position = new Vector3( x, 0, z ) };
-			GrubsCamera.SetTarget( weaponCrate );
 			await GameTask.DelaySeconds( 1 );
 		}
 
@@ -303,7 +302,6 @@ public abstract partial class BaseGamemode : BaseState
 			var startZ = GameConfig.TerrainHeight * GameConfig.TerrainScale;
 			var z = Rand.Float( startZ, startZ + 100 );
 			var healthCrate = new HealthCrate { Position = new Vector3( x, 0, z ) };
-			GrubsCamera.SetTarget( healthCrate );
 			await GameTask.DelaySeconds( 1 );
 		}
 
@@ -329,7 +327,6 @@ public abstract partial class BaseGamemode : BaseState
 				TeamManager.CurrentTeam.Inventory.LastUsedWeapon = null;
 		}
 
-		GrubsCamera.SetTarget( TeamManager.CurrentTeam.ActiveGrub );
 		EventRunner.RunLocal( GrubsEvent.TurnChangedEvent, TeamManager.CurrentTeam );
 		TurnChangedRpc( To.Everyone, TeamManager.CurrentTeam );
 	}

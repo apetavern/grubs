@@ -168,16 +168,10 @@ public partial class HitscanWeapon : GrubWeapon
 				GrubsGame.Current.RegenerateMap();
 			}
 			else if ( result.Hit )
-			{
 				ExplosionHelper.Explode( result.EndPosition, Holder, ExplosionRadius, 0 );
-			}
 
 			foreach ( var grub in hitgrubs )
-			{
 				HitGrub( grub );
-
-				GrubsCamera.SetTarget( grub );
-			}
 		}
 
 		PlaySound( FireSound );

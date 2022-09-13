@@ -192,9 +192,6 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		ChatBox.AddInformation( To.Everyone, DeathReason.ToString(), $"avatar:{Team.ActiveClient.PlayerId}" );
 		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );
 		DeadRpc( To.Everyone );
-
-		if ( GrubsCamera.GetTarget() == this )
-			GrubsCamera.SetTarget( null );
 	}
 
 	protected override void OnDestroy()
@@ -288,7 +285,6 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 			return false;
 
 		_takeDamage = true;
-		GrubsCamera.SetTarget( this );
 
 		var totalDamage = 0f;
 		var damageInfos = new List<DamageInfo>();

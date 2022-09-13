@@ -15,8 +15,6 @@ public sealed partial class GrubsCamera : CameraMode
 	private TimeSince TimeSinceMousePan { get; set; }
 	private static int SecondsBeforeReturnFromPan => 3;
 
-	[Net]
-	public Entity? Target { get; set; }
 
 	public override void Update()
 	{
@@ -60,22 +58,5 @@ public sealed partial class GrubsCamera : CameraMode
 		}
 
 		Center += delta;
-	}
-
-	public static void SetTarget( Entity? newTarget )
-	{
-		foreach ( var spectator in Entity.All.OfType<ISpectator>() )
-			(spectator.Camera as GrubsCamera)!.Target = newTarget;
-	}
-
-	public static Entity? GetTarget()
-	{
-		if ( Entity.All.OfType<ISpectator>().FirstOrDefault()?.Camera is not GrubsCamera camera )
-		{
-			Log.Error( "Attempted to get camera target on an invalid camera" );
-			return null;
-		}
-
-		return camera.Target;
 	}
 }
