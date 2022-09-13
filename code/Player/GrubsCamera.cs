@@ -86,7 +86,6 @@ public sealed partial class GrubsCamera : CameraMode
 
 			foreach ( var grub in Entity.All.OfType<Grub>() )
 			{
-				Log.Info( $"{grub} {grub.HasBeenDamaged} {grub.Resolved}" );
 				if ( !grub.HasBeenDamaged || grub.Resolved )
 					continue;
 
