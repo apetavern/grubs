@@ -56,11 +56,8 @@ public abstract partial class BaseGamemode : BaseState
 
 		var killBoundary = new MultiShape()
 			// Bottom bar
-			.AddShape( BoxShape.WithSize( new Vector3( 7400, 100, 10000 ) ).WithOffset( new Vector3( -2500, -50, -10200 ) ) )
-			// Left bar
-			.AddShape( BoxShape.WithSize( new Vector3( 2300, 100, 10000 ) ).WithOffset( new Vector3( -2500, -50, -200 ) ) )
-			// Right bar
-			.AddShape( BoxShape.WithSize( new Vector3( 2300, 100, 10000 ) ).WithOffset( new Vector3( 2600, -50, -200 ) ) );
+			.AddShape( BoxShape.WithSize( new Vector3( int.MaxValue, 100, 100 ) ).WithOffset( new Vector3( (-int.MaxValue / 2), -50, -100 ) ) );
+
 		new DamageZone()
 			.WithDamageFlags( DamageFlags.Generic )
 			.WithInstantKill( true )
