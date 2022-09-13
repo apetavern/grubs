@@ -179,7 +179,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		base.Simulate( cl );
 
-		if ( !GrubsGame.Current.CurrentGamemode.MovementOnly && (!IsFiring || Uses > 1) )
+		if ( !BaseGamemode.Instance!.MovementOnly && (!IsFiring || Uses > 1) )
 			CheckFireInput();
 	}
 
@@ -187,7 +187,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		// Only fire if our grub is grounded and we haven't used our turn.
 		var controller = (Owner as Team)!.ActiveGrub.Controller;
-		if ( !controller.IsGrounded || GrubsGame.Current.CurrentGamemode.UsedTurn )
+		if ( !controller.IsGrounded || BaseGamemode.Instance!.UsedTurn )
 			return;
 
 		switch ( FiringType )
@@ -260,7 +260,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	protected virtual void OnFireFinish()
 	{
 		if ( CurrentUses >= Uses )
-			GrubsGame.Current.CurrentGamemode.UseTurn( true );
+			BaseGamemode.Instance!.UseTurn( true );
 	}
 
 	/// <summary>

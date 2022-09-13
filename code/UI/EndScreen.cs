@@ -5,7 +5,7 @@ namespace Grubs.UI;
 [UseTemplate]
 public sealed class EndScreen : Panel
 {
-	private static GameEndState? GameEndState => GrubsGame.Current.CurrentState as GameEndState;
+	private static GameEndState? GameEndState => BaseState.Instance as GameEndState;
 
 	public Label TitleLabel { get; set; } = null!;
 	public Label SubtitleLabel { get; set; } = null!;

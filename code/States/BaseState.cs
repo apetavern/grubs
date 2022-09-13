@@ -8,6 +8,12 @@ namespace Grubs.States;
 [Category( "Setup" )]
 public abstract partial class BaseState : Entity
 {
+	/// <summary>
+	/// The current state the game is in.
+	/// </summary>
+	[Net]
+	public static BaseState Instance { get; private set; } = null!;
+
 	private bool _entered;
 	private bool _forced;
 
@@ -97,7 +103,7 @@ public abstract partial class BaseState : Entity
 	[ClientRpc]
 	private void EnterGameRpc( bool force )
 	{
-		GrubsGame.Current.CurrentState = this;
+		Instance = this;
 		Enter( force );
 	}
 
@@ -105,6 +111,14 @@ public abstract partial class BaseState : Entity
 	private void LeaveGameRpc()
 	{
 		Leave();
+	}
+
+	/// <summary>
+	/// Initializes the state system.
+	/// </summary>
+	public static void Init()
+	{
+		SwitchStateTo( new WaitingState(), true );
 	}
 
 	/// <summary>
@@ -128,12 +142,11 @@ public abstract partial class BaseState : Entity
 	{
 		Host.AssertServer();
 
-		var currentState = GrubsGame.Current.CurrentState;
-		currentState?.Leave();
-		GrubsGame.Current.CurrentState = state;
-		state?.Enter( force, parameters );
+		Instance?.Leave();
+		Instance?.Delete();
 
-		currentState?.Delete();
+		Instance = state;
+		Instance?.Enter( force, parameters );
 	}
 
 	[ConCmd.Admin( "state" )]

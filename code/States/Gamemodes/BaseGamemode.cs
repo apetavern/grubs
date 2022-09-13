@@ -14,6 +14,11 @@ namespace Grubs.States;
 public abstract partial class BaseGamemode : BaseState
 {
 	/// <summary>
+	/// The current gamemode the game is in.
+	/// </summary>
+	public new static BaseGamemode? Instance => BaseState.Instance as BaseGamemode;
+
+	/// <summary>
 	/// The manager entity for teams of grubs.
 	/// </summary>
 	[Net]

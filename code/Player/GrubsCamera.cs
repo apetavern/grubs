@@ -54,7 +54,7 @@ public sealed partial class GrubsCamera : CameraMode
 
 	private void FindTarget()
 	{
-		if ( GrubsGame.Current.CurrentState is not BaseGamemode gamemode )
+		if ( BaseState.Instance is not BaseGamemode gamemode )
 			return;
 
 		if ( gamemode.IsTurnChanging )

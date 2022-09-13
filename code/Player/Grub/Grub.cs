@@ -112,8 +112,8 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 
 		if ( !_takeDamage )
 		{
-			if ( IsTurn )
-				GrubsGame.Current.CurrentGamemode.UseTurn( false );
+			if ( IsTurn && BaseState.Instance is BaseGamemode gamemode )
+				gamemode.UseTurn( false );
 
 			_damageQueue.Enqueue( info );
 			HasBeenDamaged = true;

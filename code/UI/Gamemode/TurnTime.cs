@@ -8,6 +8,8 @@ namespace Grubs.UI;
 
 public sealed class TurnTime : Panel
 {
+	private static BaseGamemode? Gamemode => BaseGamemode.Instance;
+	
 	private readonly Label _timeLeft;
 
 	public TurnTime()
@@ -21,14 +23,14 @@ public sealed class TurnTime : Panel
 	{
 		base.Tick();
 
-		if ( GrubsGame.Current.CurrentState is not BaseGamemode )
+		if ( Gamemode is null )
 			return;
 
-		SetClass( "hidden", GrubsGame.Current.CurrentGamemode.UsedTurn );
+		SetClass( "hidden", Gamemode.UsedTurn );
 		if ( HasClass( "hidden" ) )
 			return;
 
-		_timeLeft.Text = Math.Floor( GrubsGame.Current.CurrentGamemode.TimeUntilTurnEnd ).ToString( CultureInfo.CurrentCulture );
+		_timeLeft.Text = Math.Floor( Gamemode.TimeUntilTurnEnd ).ToString( CultureInfo.CurrentCulture );
 	}
 
 	[GrubsEvent.TurnChanged.Client]

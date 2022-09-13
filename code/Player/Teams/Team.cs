@@ -110,7 +110,7 @@ public sealed partial class Team : Entity, ISpectator
 	{
 		base.Simulate( cl );
 
-		if ( GrubsGame.Current.CurrentState is not BaseGamemode )
+		if ( BaseState.Instance is not BaseGamemode )
 			return;
 
 		foreach ( var grub in Grubs )

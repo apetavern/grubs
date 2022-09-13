@@ -27,29 +27,6 @@ public sealed partial class GrubsGame : Game
 	public new static GrubsGame Current => (Game.Current as GrubsGame)!;
 
 	/// <summary>
-	/// The current <see cref="BaseState"/> that the game is in.
-	/// </summary>
-	[Net]
-	public BaseState CurrentState { get; set; } = null!;
-
-	/// <summary>
-	/// The current <see cref="BaseGamemode"/> the game is in.
-	/// </summary>
-	public BaseGamemode CurrentGamemode
-	{
-		get
-		{
-			if ( CurrentState is not BaseGamemode gamemode )
-			{
-				Log.Error( "Attempted to get gamemode when there is none running" );
-				return default!;
-			}
-
-			return gamemode;
-		}
-	}
-
-	/// <summary>
 	/// The <see cref="TerrainMap"/> in the world.
 	/// </summary>
 	public TerrainMap TerrainMap { get; set; } = null!;
@@ -71,7 +48,7 @@ public sealed partial class GrubsGame : Game
 
 		if ( IsServer )
 		{
-			CurrentState = new WaitingState();
+			BaseState.Init();
 			_ = new EventRunner();
 		}
 
@@ -85,28 +62,28 @@ public sealed partial class GrubsGame : Game
 	{
 		base.ClientJoined( client );
 
-		CurrentState.ClientJoined( client );
+		BaseState.Instance.ClientJoined( client );
 	}
 
 	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnect( cl, reason );
 
-		CurrentState.ClientDisconnected( cl, reason );
+		BaseState.Instance.ClientDisconnected( cl, reason );
 	}
 
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
 
-		CurrentState.Simulate( cl );
+		BaseState.Instance.Simulate( cl );
 	}
 
 	public override void FrameSimulate( Client cl )
 	{
 		base.FrameSimulate( cl );
 
-		CurrentState.FrameSimulate( cl );
+		BaseState.Instance.FrameSimulate( cl );
 	}
 
 	/// <summary>
@@ -128,7 +105,7 @@ public sealed partial class GrubsGame : Game
 	[Event.Tick]
 	private void Tick()
 	{
-		CurrentState.Tick();
+		BaseState.Instance.Tick();
 	}
 
 	/// <summary>
@@ -137,7 +114,7 @@ public sealed partial class GrubsGame : Game
 	[ConCmd.Admin]
 	public static void SkipTurn()
 	{
-		if ( Current.CurrentState is not BaseGamemode gamemode )
+		if ( BaseState.Instance is not BaseGamemode gamemode )
 			return;
 
 		gamemode.NextTurnTask = gamemode.NextTurn();
@@ -149,7 +126,7 @@ public sealed partial class GrubsGame : Game
 	[ConCmd.Admin]
 	public static void KillActiveGrub()
 	{
-		if ( Current.CurrentState is not BaseGamemode gamemode )
+		if ( BaseState.Instance is not BaseGamemode gamemode )
 			return;
 
 		var activeGrub = gamemode.TeamManager.CurrentTeam.ActiveGrub;
@@ -171,7 +148,7 @@ public sealed partial class GrubsGame : Game
 	[ConCmd.Admin]
 	public static void GiveAmmo( string weaponName, int amount )
 	{
-		if ( Current.CurrentState is not BaseGamemode gamemode )
+		if ( BaseState.Instance is not BaseGamemode gamemode )
 			return;
 
 		var activeTeam = gamemode.TeamManager.CurrentTeam;
@@ -184,7 +161,7 @@ public sealed partial class GrubsGame : Game
 	[ConCmd.Admin]
 	public static void SpawnHealthCrate()
 	{
-		if ( Current.CurrentState is not BaseGamemode gamemode )
+		if ( BaseState.Instance is not BaseGamemode gamemode )
 			return;
 
 		_ = new HealthCrate
@@ -199,7 +176,7 @@ public sealed partial class GrubsGame : Game
 	[ConCmd.Admin]
 	public static void SpawnWeaponCrate()
 	{
-		if ( Current.CurrentState is not BaseGamemode gamemode )
+		if ( BaseState.Instance is not BaseGamemode gamemode )
 			return;
 
 		_ = new WeaponCrate
