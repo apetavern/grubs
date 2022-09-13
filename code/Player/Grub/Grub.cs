@@ -12,7 +12,7 @@ namespace Grubs.Player;
 /// A playable grub.
 /// </summary>
 [Category( "Grubs" )]
-public partial class Grub : AnimatedEntity, IDamageable, IResolvable
+public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 {
 	/// <summary>
 	/// The grubs movement controller.
@@ -229,7 +229,7 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// </summary>
 	/// <param name="client">The client that is predicting.</param>
 	/// <param name="child">The weapon to simulate.</param>
-	public virtual void SimulateActiveChild( Client client, GrubWeapon? child )
+	private void SimulateActiveChild( Client client, GrubWeapon? child )
 	{
 		if ( LastActiveChild != child )
 		{
@@ -248,7 +248,7 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// </summary>
 	/// <param name="previous">The old weapon that was being used.</param>
 	/// <param name="next">The new weapon being used.</param>
-	public virtual void OnActiveChildChanged( GrubWeapon? previous, GrubWeapon? next )
+	private void OnActiveChildChanged( GrubWeapon? previous, GrubWeapon? next )
 	{
 		previous?.ActiveEnd( this, previous.Owner != this );
 		next?.ActiveStart( this );
@@ -259,7 +259,7 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// </summary>
 	/// <param name="health">The amount of health to try giving to the Grub.</param>
 	/// <returns>Whether or not any healing was applied.</returns>
-	public virtual bool GiveHealth( float health )
+	public bool GiveHealth( float health )
 	{
 		Host.AssertServer();
 
@@ -277,7 +277,7 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// Applies any damage that this grub has received.
 	/// </summary>
 	/// <returns>Whether or not the grub has died.</returns>
-	public virtual bool ApplyDamage()
+	public bool ApplyDamage()
 	{
 		Host.AssertServer();
 
