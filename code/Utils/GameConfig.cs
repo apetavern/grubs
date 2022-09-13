@@ -36,6 +36,18 @@ public static class GameConfig
 	public static int TurnDuration { get; set; } = 60;
 
 	/// <summary>
+	/// Whether or not wind is enabled.
+	/// </summary>
+	[ConVar.Replicated( "wind_enabled" )]
+	public static bool WindEnabled { get; set; } = true;
+
+	/// <summary>
+	/// The step force of wind.
+	/// </summary>
+	[ConVar.Replicated( "wind_force" )]
+	public static float WindForce { get; set; } = 0.1f;
+
+	/// <summary>
 	/// The percent chance that a <see cref="WeaponCrate"/> will spawn every turn.
 	/// </summary>
 	[ConVar.Replicated( "crate_weapon_chance" )]
@@ -100,6 +112,8 @@ public static class GameConfig
 	/// </summary>
 	[ConVar.Replicated( "terrain_dilation" )]
 	public static int DilationAmount { get; set; } = 1;
+
+	public const int WindSteps = 3;
 
 	// Grub Configuration
 	public const float LowHealthThreshold = 30;

@@ -84,6 +84,22 @@
         "Minimum": 1,
         "Maximum": 60
       },
+      "wind_enabled": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "wind_enabled",
+        "DisplayName": "Wind Enabled",
+        "DefaultValue": "true"
+      },
+      "wind_force": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "wind_force",
+        "DisplayName": "Wind Force",
+        "DefaultValue": "0.1",
+        "Minimum": 0.1,
+        "Maximum": 1
+      },
       "crate_weapon_chance": {
         "DisplayType": "Integer",
         "Choices": [],

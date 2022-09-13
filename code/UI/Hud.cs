@@ -10,6 +10,7 @@ public sealed class Hud : RootPanel
 	private WaitingStatus? _waitingStatus;
 	private TurnTime? _turnTime;
 	private InventoryPanel? _inventoryPanel;
+	private WindInfo? _windInfo;
 	private AimReticle? _aimReticle;
 	private readonly List<DamageNumber> _damageNumbers = new();
 	private EndScreen? _endScreen;
@@ -60,6 +61,9 @@ public sealed class Hud : RootPanel
 		_inventoryPanel?.Delete();
 		_inventoryPanel = AddChild<InventoryPanel>();
 
+		_windInfo?.Delete();
+		_windInfo = AddChild<WindInfo>();
+
 		_aimReticle?.Delete();
 		_aimReticle = new AimReticle();
 	}
@@ -69,6 +73,8 @@ public sealed class Hud : RootPanel
 	{
 		_turnTime?.Delete();
 		_turnTime = null;
+		_windInfo?.Delete();
+		_windInfo = null;
 		_inventoryPanel?.Delete();
 		_inventoryPanel = null;
 		_aimReticle?.Delete();

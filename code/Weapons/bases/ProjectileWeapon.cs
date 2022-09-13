@@ -1,4 +1,5 @@
 ﻿using Grubs.Player;
+using Grubs.States;
 using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
@@ -110,8 +111,8 @@ public class ProjectileWeapon : GrubWeapon
 		{
 			var arcTrace = new ArcTrace( Parent, Parent.EyePosition );
 			var segments = ProjectileShouldBounce
-				? arcTrace.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0, ProjectileMaxBounces )
-				: arcTrace.RunTowards( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, 0 );
+				? arcTrace.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, BaseGamemode.Instance!.Wind, ProjectileMaxBounces )
+				: arcTrace.RunTowards( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, BaseGamemode.Instance!.Wind );
 
 			projectile.MoveAlongTrace( segments );
 		}

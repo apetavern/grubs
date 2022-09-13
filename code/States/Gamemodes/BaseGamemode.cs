@@ -44,6 +44,15 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	[Net]
 	public bool IsTurnChanging { get; private set; }
+	/// <summary>
+	/// The current amount of wind steps.
+	/// </summary>
+	[Net]
+	public int WindSteps { get; set; }
+	/// <summary>
+	/// The current wind force.
+	/// </summary>
+	public float Wind => WindSteps * GameConfig.WindForce;
 
 	/// <summary>
 	/// The async task for switching to the next turn.
@@ -228,6 +237,12 @@ public abstract partial class BaseGamemode : BaseState
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
 		IsTurnChanging = false;
 
+		if ( GameConfig.WindEnabled )
+			WindSteps = Rand.Int( -GameConfig.WindSteps, GameConfig.WindSteps );
+
+		EventRunner.RunLocal( GrubsEvent.TurnChangedEvent, TeamManager.CurrentTeam );
+		TurnChangedRpc( To.Everyone, TeamManager.CurrentTeam );
+
 		await PostTurnChange();
 	}
 
@@ -328,9 +343,6 @@ public abstract partial class BaseGamemode : BaseState
 			else
 				TeamManager.CurrentTeam.Inventory.LastUsedWeapon = null;
 		}
-
-		EventRunner.RunLocal( GrubsEvent.TurnChangedEvent, TeamManager.CurrentTeam );
-		TurnChangedRpc( To.Everyone, TeamManager.CurrentTeam );
 	}
 
 	/// <summary>

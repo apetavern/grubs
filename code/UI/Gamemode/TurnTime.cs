@@ -9,7 +9,7 @@ namespace Grubs.UI;
 public sealed class TurnTime : Panel
 {
 	private static BaseGamemode? Gamemode => BaseGamemode.Instance;
-	
+
 	private readonly Label _timeLeft;
 
 	public TurnTime()
