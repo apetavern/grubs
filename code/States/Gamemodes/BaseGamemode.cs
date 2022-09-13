@@ -34,6 +34,11 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	[Net]
 	public TimeUntil TimeUntilTurnEnd { get; private set; }
+	/// <summary>
+	/// 
+	/// </summary>
+	[Net]
+	public bool IsTurnChanging { get; private set; }
 
 	/// <summary>
 	/// The async task for switching to the next turn.
@@ -212,12 +217,14 @@ public abstract partial class BaseGamemode : BaseState
 	{
 		Host.AssertServer();
 
+		IsTurnChanging = true;
 		if ( await PreTurnChange() )
 			return;
 
 		TeamManager.Cycle();
 		UsedTurn = false;
 		TimeUntilTurnEnd = GameConfig.TurnDuration;
+		IsTurnChanging = false;
 
 		await PostTurnChange();
 	}
