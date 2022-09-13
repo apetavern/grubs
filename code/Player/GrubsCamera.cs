@@ -1,4 +1,8 @@
-﻿namespace Grubs.Player;
+﻿using Grubs.Crates;
+using Grubs.States;
+using Grubs.Weapons.Base;
+
+namespace Grubs.Player;
 
 public sealed partial class GrubsCamera : CameraMode
 {
@@ -15,13 +19,17 @@ public sealed partial class GrubsCamera : CameraMode
 	private TimeSince TimeSinceMousePan { get; set; }
 	private static int SecondsBeforeReturnFromPan => 3;
 
+	private Entity? Target { get; set; }
+	private TimeSince TimeSinceTargetChanged { get; set; }
 
 	public override void Update()
 	{
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = Distance.Clamp( MinDistance, MaxDistance );
 
-		if ( Target is null )
+		FindTarget();
+
+		if ( Target is null || !Target.IsValid )
 			return;
 
 		// Get the center position, plus move the camera up a little bit.
@@ -41,6 +49,65 @@ public sealed partial class GrubsCamera : CameraMode
 		// Check the last time we panned the camera, update CenterOnPawn if greater than N.
 		if ( !Input.Down( InputButton.SecondaryAttack ) && TimeSinceMousePan > SecondsBeforeReturnFromPan )
 			CenterOnPawn = true;
+	}
+
+	private void FindTarget()
+	{
+		if ( GrubsGame.Current.CurrentState is not BaseGamemode gamemode )
+			return;
+
+		if ( gamemode.IsTurnChanging )
+		{
+			foreach ( var grub in Entity.All.OfType<Grub>() )
+			{
+				if ( grub.LifeState != LifeState.Dying )
+					continue;
+
+				ChangeTarget( grub );
+				return;
+			}
+
+			foreach ( var crate in Entity.All.OfType<BaseCrate>() )
+			{
+				if ( crate.Resolved )
+					continue;
+
+				ChangeTarget( crate );
+				return;
+			}
+		}
+		else
+		{
+			foreach ( var projectile in Entity.All.OfType<Projectile>() )
+			{
+				ChangeTarget( projectile );
+				return;
+			}
+
+			foreach ( var grub in Entity.All.OfType<Grub>() )
+			{
+				Log.Info( $"{grub} {grub.HasBeenDamaged} {grub.Resolved}" );
+				if ( !grub.HasBeenDamaged || grub.Resolved )
+					continue;
+
+				ChangeTarget( grub );
+				return;
+			}
+
+			ChangeTarget( TeamManager.Instance.CurrentTeam.ActiveGrub );
+			return;
+		}
+
+		ChangeTarget( default );
+	}
+
+	private void ChangeTarget( Entity? target )
+	{
+		if ( Target == target )
+			return;
+
+		Target = target;
+		TimeSinceTargetChanged = 0;
 	}
 
 	private void MoveCamera()
