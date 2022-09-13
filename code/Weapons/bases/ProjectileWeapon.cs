@@ -127,7 +127,6 @@ public class ProjectileWeapon : GrubWeapon
 		projectile.Finish();
 
 		SetupProjectile( projectile );
-		GrubsCamera.SetTarget( projectile );
 		projectile.PlaySound( ProjectileLoopSound );
 
 		return false;
