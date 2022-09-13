@@ -9,10 +9,10 @@ public sealed class Hud : RootPanel
 {
 	private WaitingStatus? _waitingStatus;
 	private TurnTime? _turnTime;
+	private InventoryPanel? _inventoryPanel;
 	private AimReticle? _aimReticle;
 	private readonly List<DamageNumber> _damageNumbers = new();
 	private EndScreen? _endScreen;
-	private InventoryPanel? _inventoryPanel;
 
 	public Hud()
 	{
@@ -56,6 +56,8 @@ public sealed class Hud : RootPanel
 	{
 		_turnTime?.Delete();
 		_turnTime = AddChild<TurnTime>();
+
+		_inventoryPanel?.Delete();
 		_inventoryPanel = AddChild<InventoryPanel>();
 
 		_aimReticle?.Delete();
@@ -67,9 +69,11 @@ public sealed class Hud : RootPanel
 	{
 		_turnTime?.Delete();
 		_turnTime = null;
+		_inventoryPanel?.Delete();
+		_inventoryPanel = null;
 		_aimReticle?.Delete();
 		_aimReticle = null;
-		_inventoryPanel?.Delete();
+
 		foreach ( var damageNumber in _damageNumbers )
 			damageNumber.Delete();
 		_damageNumbers.Clear();
