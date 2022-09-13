@@ -11,10 +11,8 @@ public abstract partial class BaseState : Entity
 	private bool _entered;
 	private bool _forced;
 
-	public override void Spawn()
+	public BaseState()
 	{
-		base.Spawn();
-
 		Transmit = TransmitType.Always;
 	}
 

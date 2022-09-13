@@ -35,7 +35,7 @@ public abstract partial class BaseGamemode : BaseState
 	[Net]
 	public TimeUntil TimeUntilTurnEnd { get; private set; }
 	/// <summary>
-	/// 
+	/// Whether or not a turn change is currently happening.
 	/// </summary>
 	[Net]
 	public bool IsTurnChanging { get; private set; }
@@ -162,7 +162,7 @@ public abstract partial class BaseGamemode : BaseState
 					continue;
 
 				if ( entity is Grub { IsTurn: true } )
-					GrubsGame.Current.CurrentGamemode.UseTurn( false );
+					UseTurn( false );
 
 				zone.Trigger( entity );
 				damageable.ApplyDamage();

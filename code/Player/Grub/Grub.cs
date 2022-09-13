@@ -98,30 +98,11 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	public Task? DeathTask;
 
 	private const float MaxHealth = 100;
-
 	private const float MaxOverhealHealth = 250;
 
 	public Grub()
 	{
 		Transmit = TransmitType.Always;
-	}
-
-	public void Spawn( Client? cl = null )
-	{
-		base.Spawn();
-
-		SetModel( "models/citizenworm.vmdl" );
-		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
-		Name = Rand.FromArray( GameConfig.GrubNames );
-		Health = MaxHealth;
-		EnableHitboxes = true;
-
-		Controller = new GrubController();
-		Animator = new GrubAnimator();
-
-		if ( cl is not null )
-			DressFromClient( cl );
-		SetHatVisible( true );
 	}
 
 	public override void TakeDamage( DamageInfo info )
@@ -164,6 +145,32 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		DeathTask = Die();
 	}
 
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		if ( IsServer )
+			Gravestone?.Delete();
+	}
+
+	public void Spawn( Client? cl = null )
+	{
+		base.Spawn();
+
+		SetModel( "models/citizenworm.vmdl" );
+		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		Name = Rand.FromArray( GameConfig.GrubNames );
+		Health = MaxHealth;
+		EnableHitboxes = true;
+
+		Controller = new GrubController();
+		Animator = new GrubAnimator();
+
+		if ( cl is not null )
+			DressFromClient( cl );
+		SetHatVisible( true );
+	}
+
 	private async Task Die()
 	{
 		if ( DeathReason!.Value.FromKillTrigger )
@@ -195,14 +202,6 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		ChatBox.AddInformation( To.Everyone, DeathReason.ToString(), $"avatar:{Team.ActiveClient.PlayerId}" );
 		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );
 		DeadRpc( To.Everyone );
-	}
-
-	protected override void OnDestroy()
-	{
-		base.OnDestroy();
-
-		if ( IsServer )
-			Gravestone?.Delete();
 	}
 
 	public override void Simulate( Client cl )
@@ -326,7 +325,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// Dresses the grub based on the provided clients avatar.
 	/// </summary>
 	/// <param name="cl">The client to get the clothes of.</param>
-	public void DressFromClient( Client cl )
+	private void DressFromClient( Client cl )
 	{
 		var clothes = new ClothingContainer();
 		clothes.LoadFromClient( cl );
@@ -337,32 +336,26 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 
 		// We only want the hair/hats so we won't use the logic built into Clothing
 		var items = clothes.Clothing.Where( item =>
-			item.Category == Clothing.ClothingCategory.Hair ||
-			item.Category == Clothing.ClothingCategory.Hat ||
-			item.Category == Clothing.ClothingCategory.Facial ||
-			item.Category == Clothing.ClothingCategory.Skin
+			item.Category is Clothing.ClothingCategory.Hair or Clothing.ClothingCategory.Hat
+				or Clothing.ClothingCategory.Facial or Clothing.ClothingCategory.Skin
 		);
-
-		if ( !items.Any() )
-			return;
 
 		foreach ( var item in items )
 		{
 			var ent = new AnimatedEntity( item.Model, this );
 
 			// Add a tag to the hat so we can reference it later.
-			if ( item.Category == Clothing.ClothingCategory.Hat
-				|| item.Category == Clothing.ClothingCategory.Hair )
+			if ( item.Category is Clothing.ClothingCategory.Hat or Clothing.ClothingCategory.Hair )
 				ent.Tags.Add( "head" );
 
 			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 				ent.SetMaterialGroup( item.MaterialGroup );
 
-			if ( item.Category == Clothing.ClothingCategory.Skin )
-			{
-				var SkinMaterial = Material.Load( item.SkinMaterial );
-				SetMaterialOverride( SkinMaterial, "skin" );
-			}
+			if ( item.Category != Clothing.ClothingCategory.Skin )
+				continue;
+
+			var skinMaterial = Material.Load( item.SkinMaterial );
+			SetMaterialOverride( skinMaterial, "skin" );
 		}
 	}
 
@@ -375,9 +368,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( "head" ) );
 
 		foreach ( var hat in hats )
-		{
 			hat.EnableDrawing = visible;
-		}
 	}
 
 	[ClientRpc]
