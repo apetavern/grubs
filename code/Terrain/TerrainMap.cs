@@ -18,10 +18,9 @@ public sealed class TerrainMap
 	private const float NoiseThreshold = 0.25f;
 	private const int BorderWidth = 5;
 
-	public TerrainMap()
+	public TerrainMap( int seed )
 	{
-		Rand.SetSeed( (int)Time.Now );
-		Seed = Rand.Int( 100000 );
+		Seed = seed;
 
 		GenerateTerrainGrid();
 	}
@@ -172,7 +171,7 @@ public sealed class TerrainMap
 	private void DiscardRegions()
 	{
 		var regionIdsToKeep = new HashSet<int>();
-		var threshold = (Height * 0.4f).FloorToInt();
+		var threshold = (Height * 0.35f).FloorToInt();
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < threshold; z++ )

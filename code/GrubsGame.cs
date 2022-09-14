@@ -50,6 +50,10 @@ public sealed partial class GrubsGame : Game
 		{
 			BaseState.Init();
 			_ = new EventRunner();
+
+			// Set the Rand seed and Seed property so the terrain generation seed is synced between server and client.
+			Rand.SetSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
+			Seed = Rand.Int( 99999 );
 		}
 
 		if ( IsClient )
@@ -194,9 +198,6 @@ public sealed partial class GrubsGame : Game
 		if ( Host.IsClient )
 			return;
 
-		Rand.SetSeed( (int)Time.Now );
-		Current.Seed = Rand.Int( 99999 );
-		Current.TerrainMap.Seed = Current.Seed;
 		SetSeedClient( To.Everyone, Current.Seed );
 		Current.RegenerateGrid();
 		Current.RegenerateMap();
@@ -205,7 +206,7 @@ public sealed partial class GrubsGame : Game
 	[ClientRpc]
 	public static void InitializeTerrainClient()
 	{
-		Current.TerrainMap = new TerrainMap();
+		Current.TerrainMap = new TerrainMap( Current.Seed );
 		Current.TerrainModel = new TerrainModel();
 	}
 

@@ -67,8 +67,9 @@ public abstract partial class BaseGamemode : BaseState
 			return;
 		}
 
-		GrubsGame.Current.TerrainMap = new TerrainMap();
-		GrubsGame.Current.TerrainModel = new TerrainModel();
+		var game = GrubsGame.Current;
+		game.TerrainMap = new TerrainMap( game.Seed );
+		game.TerrainModel = new TerrainModel();
 		GrubsGame.InitializeTerrainClient( To.Everyone );
 
 		TeamManager = new TeamManager();
