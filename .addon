@@ -46,7 +46,8 @@
         ],
         "ConVarName": "grubs_game",
         "DisplayName": "Gamemode",
-        "DefaultValue": "ffa"
+        "DefaultValue": "ffa",
+        "Description": ""
       },
       "minimum_players": {
         "DisplayType": "Integer",
@@ -54,6 +55,7 @@
         "ConVarName": "minimum_players",
         "DisplayName": "Minimum Players",
         "DefaultValue": "0",
+        "Description": "The minimum amount of players you need to play the game.",
         "Minimum": 2,
         "Maximum": 99
       },
@@ -63,7 +65,8 @@
         "ConVarName": "maximum_players",
         "DisplayName": "Maximum Players",
         "DefaultValue": "4",
-        "Minimum": 3,
+        "Description": "The maximum amount of players that can play the game.",
+        "Minimum": 2,
         "Maximum": 100
       },
       "grub_count": {
@@ -72,6 +75,7 @@
         "ConVarName": "grub_count",
         "DisplayName": "Grub Count",
         "DefaultValue": "4",
+        "Description": "The amount of Grubs each team will have.",
         "Minimum": 1,
         "Maximum": 100
       },
@@ -81,6 +85,7 @@
         "ConVarName": "turn_duration",
         "DisplayName": "Turn Duration",
         "DefaultValue": "60",
+        "Description": "The max time in seconds that a turn will last.",
         "Minimum": 1,
         "Maximum": 60
       },
@@ -89,7 +94,8 @@
         "Choices": [],
         "ConVarName": "wind_enabled",
         "DisplayName": "Wind Enabled",
-        "DefaultValue": "true"
+        "DefaultValue": "true",
+        "Description": "Whether or not the wind system is enabled."
       },
       "wind_force": {
         "DisplayType": "Float",
@@ -97,6 +103,7 @@
         "ConVarName": "wind_force",
         "DisplayName": "Wind Force",
         "DefaultValue": "0.1",
+        "Description": "The amount of force a single step of wind will have.",
         "Minimum": 0.1,
         "Maximum": 1
       },
@@ -106,6 +113,7 @@
         "ConVarName": "crate_weapon_chance",
         "DisplayName": "Weapon Crate Chance",
         "DefaultValue": "10",
+        "Description": "The percent chance that a weapon crate will spawn at the end of every turn.",
         "Maximum": 100
       },
       "crate_health_chance": {
@@ -114,6 +122,7 @@
         "ConVarName": "crate_health_chance",
         "DisplayName": "Health Crate Chance",
         "DefaultValue": "5",
+        "Description": "The percent chance that a health crate will spawn at the end of every turn.",
         "Maximum": 100
       },
       "movement_grace": {
@@ -122,6 +131,7 @@
         "ConVarName": "movement_grace",
         "DisplayName": "Movement Grace Period",
         "DefaultValue": "5",
+        "Description": "The amount of seconds a Grub will get to move after using their weapon.",
         "Maximum": 60
       },
       "terrain_type": {
@@ -146,21 +156,24 @@
         ],
         "ConVarName": "terrain_type",
         "DisplayName": "Terrain Type",
-        "DefaultValue": "None"
+        "DefaultValue": "None",
+        "Description": ""
       },
       "terrain_border": {
         "DisplayType": "Boolean",
         "Choices": [],
         "ConVarName": "terrain_border",
         "DisplayName": "Terrain Border",
-        "DefaultValue": "false"
+        "DefaultValue": "false",
+        "Description": ""
       },
       "terrain_altered": {
         "DisplayType": "Boolean",
         "Choices": [],
         "ConVarName": "terrain_altered",
         "DisplayName": "Use Altered Terrain",
-        "DefaultValue": "true"
+        "DefaultValue": "true",
+        "Description": ""
       },
       "terrain_dilation": {
         "DisplayType": "Integer",
@@ -168,6 +181,7 @@
         "ConVarName": "terrain_dilation",
         "DisplayName": "Terrain Dilation Amount",
         "DefaultValue": "1",
+        "Description": "",
         "Maximum": 10
       },
       "terrain_resolution": {
@@ -176,6 +190,7 @@
         "ConVarName": "terrain_resolution",
         "DisplayName": "Terrain Resolution",
         "DefaultValue": "0.5",
+        "Description": "",
         "Maximum": 1
       },
       "terrain_scale": {
@@ -184,6 +199,7 @@
         "ConVarName": "terrain_scale",
         "DisplayName": "Terrain Scale",
         "DefaultValue": "25",
+        "Description": "",
         "Minimum": 1,
         "Maximum": 50
       },
@@ -193,6 +209,7 @@
         "ConVarName": "terrain_width",
         "DisplayName": "Terrain Width",
         "DefaultValue": "150",
+        "Description": "",
         "Minimum": 50,
         "Maximum": 250
       },
@@ -202,6 +219,7 @@
         "ConVarName": "terrain_height",
         "DisplayName": "Terrain Height",
         "DefaultValue": "100",
+        "Description": "",
         "Minimum": 50,
         "Maximum": 200
       }
