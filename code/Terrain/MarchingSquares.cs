@@ -22,13 +22,15 @@ public sealed class MarchingSquares
 
 	private const float LocalY = -32f;
 
-	public Model GenerateModel( bool[,] grid )
+	public Model GenerateModel( TerrainChunk chunk )
 	{
+		var grid = chunk.TerrainGrid;
+
 		Width = grid.GetLength( 0 );
 		Height = grid.GetLength( 1 );
 
 		var scale = GameConfig.TerrainScale;
-		March( grid, scale );
+		March( grid, scale, chunk );
 
 		var vertexNormals = new List<Vector3>();
 		for ( var i = 0; i < _triangles.Count; i += 3 )
@@ -60,7 +62,7 @@ public sealed class MarchingSquares
 		var vertList = new List<Vert>();
 		for ( var i = 0; i < _vertices.Count; i++ )
 		{
-			var texCoord = new Vector2( _vertices[i].x / 512, _vertices[i].z / 512 );
+			var texCoord = new Vector2( (_vertices[i].x + chunk.Position.x) / 512, (_vertices[i].z + chunk.Position.z) / 512 );
 			vertList.Add( new Vert( _vertices[i], vertexNormals[i], vertexTangents[i], texCoord ) );
 		}
 
@@ -145,10 +147,10 @@ public sealed class MarchingSquares
 		return _builder.Create();
 	}
 
-	private void March( bool[,] terrainGrid, int scale )
+	private void March( bool[,] terrainGrid, int scale, TerrainChunk chunk )
 	{
-		for ( var x = 0; x < terrainGrid.GetLength( 0 ) - 1; x++ )
-			for ( var z = 0; z < terrainGrid.GetLength( 1 ) - 1; z++ )
+		for ( var x = 0; x < terrainGrid.GetLength( 0 ); x++ )
+			for ( var z = 0; z < terrainGrid.GetLength( 1 ); z++ )
 			{
 				float xRes = x * scale;
 				float zRes = z * scale;
@@ -163,10 +165,51 @@ public sealed class MarchingSquares
 				var bottomRight = new Node( new Vector3( xRes + scale, LocalY, zRes + scale ) );
 				var bottomLeft = new Node( new Vector3( xRes, LocalY, zRes + scale ) );
 
-				var c1 = terrainGrid[x, z];
-				var c2 = terrainGrid[x + 1, z];
-				var c3 = terrainGrid[x + 1, z + 1];
-				var c4 = terrainGrid[x, z + 1];
+				bool c1 = false;
+				bool c2 = false;
+				bool c3 = false;
+				bool c4 = false;
+
+				// Cover neighbour cases for triangulating across chunks.
+				if ( x == terrainGrid.GetLength( 0 ) - 1 && z == terrainGrid.GetLength( 1 ) - 1 )
+				{
+					if ( chunk.xyNeighbour is not null )
+					{
+						c1 = terrainGrid[x, z];
+						c2 = chunk.xyNeighbour.TerrainGrid[1, 0];
+						c3 = chunk.xyNeighbour.TerrainGrid[0, 0];
+						c4 = chunk.xyNeighbour.TerrainGrid[0, 1];
+					}
+				}
+				else if ( x == terrainGrid.GetLength( 0 ) - 1 )
+				{
+					if ( chunk.xNeighbour is not null )
+					{
+						c1 = terrainGrid[x, z];
+						c2 = chunk.xNeighbour.TerrainGrid[0, z];
+						c3 = chunk.xNeighbour.TerrainGrid[0, z + 1];
+						c4 = terrainGrid[x, z + 1];
+					}
+				}
+				else if ( z == terrainGrid.GetLength( 1 ) - 1 )
+				{
+					if ( chunk.yNeighbour is not null )
+					{
+						c1 = terrainGrid[x, z];
+						c2 = terrainGrid[x + 1, z];
+						c3 = chunk.yNeighbour.TerrainGrid[x + 1, 0];
+						c4 = chunk.yNeighbour.TerrainGrid[x, 0];
+					}
+				}
+				else
+				{
+					c1 = terrainGrid[x, z];
+					c2 = terrainGrid[x + 1, z];
+					c3 = terrainGrid[x + 1, z + 1];
+					c4 = terrainGrid[x, z + 1];
+				}
+
+
 
 				var marchCase = GetCase( c1, c2, c3, c4 );
 

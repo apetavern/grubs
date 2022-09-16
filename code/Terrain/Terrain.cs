@@ -14,4 +14,20 @@ public class Terrain
 			TerrainModels.Add( terrainModel );
 		}
 	}
+
+	public static void RefreshDirtyChunks()
+	{
+		var chunks = GrubsGame.Current.TerrainMap.TerrainGridChunks;
+		for ( var i = 0; i < chunks.Count; i++ )
+		{
+			var chunk = chunks[i];
+			if (chunk.IsDirty)
+			{
+				TerrainModels[i].DestroyMeshAndCollision();
+				TerrainModels[i].Delete();
+				TerrainModels[i] = new TerrainModel( chunk );
+				chunk.IsDirty = false;
+			}
+		}
+	}
 }

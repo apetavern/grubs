@@ -98,7 +98,7 @@ public sealed partial class GrubsGame : Game
 	/// </summary>
 	public void RegenerateMap()
 	{
-		Terrain.Terrain.Initialize();
+		Terrain.Terrain.RefreshDirtyChunks();
 	}
 
 	[Event.Tick]

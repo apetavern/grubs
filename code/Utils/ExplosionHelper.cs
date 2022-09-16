@@ -39,12 +39,11 @@ public static partial class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		bool DidDamage = GrubsGame.Current.TerrainMap.DestructSphere( midpoint, radius );
+		bool didDamage = GrubsGame.Current.TerrainMap.DestructSphere( midpoint, radius );
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, radius );
-
-		if ( DidDamage )
-			GrubsGame.Current.RegenerateMap();
-
+		GrubsGame.Current.RegenerateMap();
+		// if ( didDamage )
+			
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );

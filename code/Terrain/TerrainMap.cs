@@ -19,6 +19,8 @@ public sealed class TerrainMap
 	private const float NoiseThreshold = 0.25f;
 	private const int BorderWidth = 5;
 
+	const int chunkSize = 10;
+
 	public TerrainMap( int seed )
 	{
 		Seed = seed;
@@ -46,8 +48,6 @@ public sealed class TerrainMap
 	private void AssignGridToChunks()
 	{
 		TerrainGridChunks = new List<TerrainChunk>();
-
-		const int chunkSize = 10;
 		var chunkCount = (Width * Height) / (chunkSize * chunkSize);
 
 		var xOffset = 0;
@@ -60,6 +60,23 @@ public sealed class TerrainMap
 			{
 				TerrainGrid = new bool[chunkSize, chunkSize]
 			};
+
+			var chunksArr = TerrainGridChunks.ToArray();
+
+			// Set chunk neighbours for the purpose of connecting chunks.
+			if ( xOffset > 0 )
+			{
+				chunksArr[i - 1].xNeighbour = chunk;
+			}
+
+			if ( yOffset > 0 )
+			{
+				chunksArr[i - (Width / chunkSize)].yNeighbour = chunk;
+				if ( xOffset > 0 )
+				{
+					chunksArr[i - (Width / chunkSize) - 1].xyNeighbour = chunk;
+				}
+			}
 
 			for ( int x = xOffset; x < xOffset + chunkSize; x++ )
 			{
@@ -282,12 +299,29 @@ public sealed class TerrainMap
 				if ( d >= size || !TerrainGrid[i, j] )
 					continue;
 
-				TerrainGrid[i, j] = false;
-				modifiedTerrain = true;
+				modifiedTerrain |= TogglePointInChunks( i, j );
+					
 			}
 		}
 
 		return modifiedTerrain;
+	}
+
+	private bool TogglePointInChunks( int x, int z )
+	{
+		var n = (x / chunkSize) + (z / chunkSize * (Width / chunkSize) );
+		var xR = x % chunkSize;
+		var zR = z % chunkSize;
+
+		var chunk = TerrainGridChunks[n];
+		if ( chunk.TerrainGrid[xR, zR] )
+		{
+			chunk.TerrainGrid[xR, zR] = false;
+			chunk.IsDirty = true;
+			return true;
+		}
+
+		return false;
 	}
 
 	/// <summary>
@@ -307,7 +341,7 @@ public sealed class TerrainMap
 		{
 			var currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
 			var pos = new Vector3( currentPoint.x, currentPoint.z );
-			modifiedTerrain = DestructSphere( pos, width );
+			modifiedTerrain |= DestructSphere( pos, width );
 		}
 
 		return modifiedTerrain;

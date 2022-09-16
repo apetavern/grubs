@@ -8,7 +8,7 @@ public sealed class TerrainModel : ModelEntity
 	public Entity Center = null!;
 
 	private TerrainWallModel _wallModel = null!;
-	private TerrainChunk _chunk;
+	private TerrainChunk _chunk = null!;
 
 	public TerrainModel()
 	{
@@ -27,12 +27,20 @@ public sealed class TerrainModel : ModelEntity
 	public void BuildMeshAndCollision()
 	{
 		_marchingSquares = new MarchingSquares();
-		Model = _marchingSquares.GenerateModel( _chunk.TerrainGrid );
+		Model = _marchingSquares.GenerateModel( _chunk );
 		Position = _chunk.Position;
 
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
 		_wallModel = new TerrainWallModel( _marchingSquares );
 		_wallModel.Position = _chunk.Position;
+	}
+
+	// Weird hack since the old models don't delete properly?
+	public void DestroyMeshAndCollision()
+	{
+		Model = null;
+		_wallModel?.Delete();
+		Position = new Vector3( -1000, -1000, -1000 );
 	}
 }
