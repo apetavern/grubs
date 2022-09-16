@@ -300,7 +300,7 @@ public sealed class TerrainMap
 					continue;
 
 				modifiedTerrain |= TogglePointInChunks( i, j );
-					
+
 			}
 		}
 
@@ -309,7 +309,7 @@ public sealed class TerrainMap
 
 	private bool TogglePointInChunks( int x, int z )
 	{
-		var n = (x / chunkSize) + (z / chunkSize * (Width / chunkSize) );
+		var n = (x / chunkSize) + (z / chunkSize * (Width / chunkSize));
 		var xR = x % chunkSize;
 		var zR = z % chunkSize;
 

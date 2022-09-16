@@ -21,7 +21,7 @@ public class Terrain
 		for ( var i = 0; i < chunks.Count; i++ )
 		{
 			var chunk = chunks[i];
-			if (chunk.IsDirty)
+			if ( chunk.IsDirty )
 			{
 				TerrainModels[i].DestroyMeshAndCollision();
 				TerrainModels[i].Delete();
