@@ -98,7 +98,8 @@ public sealed partial class GrubsCamera : CameraMode
 			return;
 		}
 
-		ChangeTarget( LastTarget is null ? GrubsGame.Current.TerrainModel.Center : null );
+		// TODO: We don't have a unified terrain model anymore.
+		// ChangeTarget( LastTarget is null ? GrubsGame.Current.TerrainModel.Center : null );
 	}
 
 	private void ChangeTarget( Entity? target )

@@ -1,29 +1,21 @@
-﻿using Grubs.Utils;
-
-namespace Grubs.Terrain;
+﻿namespace Grubs.Terrain;
 
 [Category( "Terrain" )]
 public sealed class TerrainModel : ModelEntity
 {
-	public Entity Center = null!;
-
+	private MarchingSquares _marchingSquares = null!;
 	private TerrainWallModel _wallModel = null!;
 	private TerrainChunk _chunk = null!;
 
 	public TerrainModel()
 	{
-
 	}
-
 	public TerrainModel( TerrainChunk chunk ) : this()
 	{
 		Tags.Add( "solid" );
-
 		_chunk = chunk;
-
 		BuildMeshAndCollision();
 	}
-
 	public void BuildMeshAndCollision()
 	{
 		_marchingSquares = new MarchingSquares();

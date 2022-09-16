@@ -156,8 +156,8 @@
         ],
         "ConVarName": "terrain_type",
         "DisplayName": "Terrain Type",
-        "DefaultValue": "None",
-        "Description": ""
+        "DefaultValue": "Sand",
+        "Description": "The type of material to be applied to the terrain."
       },
       "terrain_border": {
         "DisplayType": "Boolean",
@@ -165,7 +165,7 @@
         "ConVarName": "terrain_border",
         "DisplayName": "Terrain Border",
         "DefaultValue": "false",
-        "Description": ""
+        "Description": "Whether the terrain should have a border or not."
       },
       "terrain_altered": {
         "DisplayType": "Boolean",
@@ -173,7 +173,7 @@
         "ConVarName": "terrain_altered",
         "DisplayName": "Use Altered Terrain",
         "DefaultValue": "true",
-        "Description": ""
+        "Description": "Altered terrain is curated to look more like little islands with a height threshold so the terrain does not fill up the entire grid. We recommend using it."
       },
       "terrain_dilation": {
         "DisplayType": "Integer",
@@ -181,7 +181,7 @@
         "ConVarName": "terrain_dilation",
         "DisplayName": "Terrain Dilation Amount",
         "DefaultValue": "1",
-        "Description": "",
+        "Description": "The amount the terrain is dilated. The blobs in the terrain are extruded a certain number of times. Only applicable when Altered Terrain is enabled.",
         "Maximum": 10
       },
       "terrain_resolution": {
@@ -190,7 +190,7 @@
         "ConVarName": "terrain_resolution",
         "DisplayName": "Terrain Resolution",
         "DefaultValue": "0.5",
-        "Description": "",
+        "Description": "The resolution of the noise for the terrain. Lower means less blobs, and higher means more blobs.",
         "Maximum": 1
       },
       "terrain_scale": {
@@ -198,9 +198,9 @@
         "Choices": [],
         "ConVarName": "terrain_scale",
         "DisplayName": "Terrain Scale",
-        "DefaultValue": "25",
-        "Description": "",
-        "Minimum": 1,
+        "DefaultValue": "15",
+        "Description": "Represents the size of a single point of terrain. A higher scale means the terrain is larger in the world.",
+        "Minimum": 5,
         "Maximum": 50
       },
       "terrain_width": {
@@ -208,20 +208,20 @@
         "Choices": [],
         "ConVarName": "terrain_width",
         "DisplayName": "Terrain Width",
-        "DefaultValue": "150",
-        "Description": "",
+        "DefaultValue": "320",
+        "Description": "The width of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
         "Minimum": 50,
-        "Maximum": 250
+        "Maximum": 500
       },
       "terrain_height": {
         "DisplayType": "Integer",
         "Choices": [],
         "ConVarName": "terrain_height",
         "DisplayName": "Terrain Height",
-        "DefaultValue": "100",
-        "Description": "",
+        "DefaultValue": "180",
+        "Description": "The height of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
         "Minimum": 50,
-        "Maximum": 200
+        "Maximum": 500
       }
     }
   }
