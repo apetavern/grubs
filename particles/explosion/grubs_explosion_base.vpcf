@@ -1125,13 +1125,17 @@
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_smoke.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/explosion/grubs_explosion_sparks.vpcf"
-		},
-		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_shockwave.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_fire.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/explosion/grubs_explosion_fireball.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/explosion/grubs_explosion_sparks.vpcf"
 		},
 	]
 }

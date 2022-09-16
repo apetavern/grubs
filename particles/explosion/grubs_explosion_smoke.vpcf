@@ -615,7 +615,7 @@
 			{
 				m_nType = "PVEC_TYPE_LITERAL_COLOR"
 				m_vLiteralValue = [ 0.0, 0.0, 0.0 ]
-				m_LiteralColor = [ 68, 68, 68, 255 ]
+				m_LiteralColor = [ 35, 35, 35, 255 ]
 				m_nVectorAttribute = 6
 				m_vVectorAttributeScale = [ 1.0, 1.0, 1.0 ]
 				m_nControlPoint = 0
@@ -906,6 +906,7 @@
 				}
 			}
 			m_hTexture = resource:"materials/particles/smoke/smoke.vtex"
+			m_nColorBlendType = "PARTICLE_COLOR_BLEND_MIN"
 		},
 	]
 }

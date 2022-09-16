@@ -119,7 +119,7 @@
 			m_InputValue = 
 			{
 				m_nType = "PF_TYPE_CONTROL_POINT_COMPONENT"
-				m_nMapType = "PF_MAP_TYPE_DIRECT"
+				m_nMapType = "PF_MAP_TYPE_MULT"
 				m_flLiteralValue = 0.0
 				m_nControlPoint = 1
 				m_nScalarAttribute = 3
@@ -146,7 +146,7 @@
 				m_flNoiseImgPreviewScale = 1.0
 				m_bNoiseImgPreviewLive = true
 				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
-				m_flMultFactor = 1.0
+				m_flMultFactor = 2.0
 				m_flInput0 = 0.0
 				m_flInput1 = 1.0
 				m_flOutput0 = 0.0
@@ -175,6 +175,7 @@
 			m_flEndTime = 0.25
 			m_flStartScale = 0.0
 			m_flEndScale = 25.0
+			m_bDisableOperator = true
 		},
 	]
 	m_Renderers = 
