@@ -8,7 +8,13 @@
   "AssetsPath": "",
   "ResourcePaths": [
     "/fonts/*",
-    "/textures/ui/*"
+    "/materials/*",
+    "/models/*",
+    "/particles/*",
+    "/postprocess/*",
+    "/sounds/*",
+    "/textures/*",
+    "/weapons/*"
   ],
   "HasCode": true,
   "CodePath": "code",
