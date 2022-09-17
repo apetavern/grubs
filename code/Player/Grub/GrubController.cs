@@ -380,7 +380,7 @@ public partial class GrubController : BasePlayerController
 
 		float startz = Velocity.z;
 
-		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor ).WithX( WishVelocity.x * 2f );
+		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor ).WithX( -Input.Left * 100f );
 
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 
