@@ -27,7 +27,17 @@ public sealed class FireEntity : ModelEntity, IResolvable
 	{
 		Position = startPos + new Vector3().WithX( Rand.Int( 30 ) );
 		DesiredPosition = Position;
-		MoveDirection = movementDirection;
+
+		TraceResult tr = Trace.Ray( startPos, startPos + movementDirection ).Run();
+
+		if ( tr.Hit )
+		{
+			MoveDirection = Vector3.Reflect( MoveDirection, tr.Normal );
+		}
+		else
+		{
+			MoveDirection = -movementDirection / 2f;
+		}
 		_expiryTime = Time.Now + 3f;
 		TimeSinceLastTick = Rand.Float( 0.25f );
 	}
@@ -80,20 +90,25 @@ public sealed class FireEntity : ModelEntity, IResolvable
 			grub.TakeDamage( DamageInfoExtension.FromExplosion( 6, DesiredPosition, Vector3.Up * 32, this ) );
 		}
 
-		DesiredPosition += MoveDirection / 1.5f;
-
-		bool Grounded = Trace.Sphere( fireSize * 1.5f, Position, DesiredPosition ).Run().Hit;
+		DesiredPosition += MoveDirection * 1.5f;
+		TraceResult hitresult = Trace.Sphere( fireSize * 1.5f, Position, DesiredPosition ).Run();
+		bool Grounded = hitresult.Hit;
 
 		if ( Grounded )
 		{
-			MoveDirection += Vector3.Random.WithY( 0 );
+			MoveDirection += Vector3.Random.WithY( 0 ) * 2.5f;
+
+			MoveDirection += hitresult.Normal * 0.5f;
+
+			MoveDirection = MoveDirection.Normal * 5f;
 		}
 		else
 		{
 			MoveDirection += Vector3.Down * 2.5f;
+			MoveDirection = MoveDirection.Normal * 10f;
 		}
 
-		MoveDirection = MoveDirection.Normal * 10f;
+
 
 		if ( didDamage )
 			GrubsGame.Current.RegenerateMap();
