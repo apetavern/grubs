@@ -15,7 +15,9 @@ public sealed class FireEntity : ModelEntity, IResolvable
 	private Vector3 MoveDirection { get; set; }
 
 	private readonly float _expiryTime;
-	private const float FireTickRate = 0.25f;
+	private const float FireTickRate = 0.15f;
+
+	Vector3 DesiredPosition;
 
 	public FireEntity()
 	{
@@ -24,8 +26,9 @@ public sealed class FireEntity : ModelEntity, IResolvable
 	public FireEntity( Vector3 startPos, Vector3 movementDirection )
 	{
 		Position = startPos + new Vector3().WithX( Rand.Int( 30 ) );
+		DesiredPosition = Position;
 		MoveDirection = movementDirection;
-		_expiryTime = Time.Now + 2.5f;
+		_expiryTime = Time.Now + 3f;
 		TimeSinceLastTick = Rand.Float( 0.25f );
 	}
 
@@ -38,6 +41,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 	[Sandbox.Event.Tick.Server]
 	private void Tick()
 	{
+		Position = Vector3.Lerp( Position, DesiredPosition, Time.Delta * 10f );
 		if ( Time.Now > _expiryTime )
 			Delete();
 
@@ -52,32 +56,43 @@ public sealed class FireEntity : ModelEntity, IResolvable
 	{
 		const float fireSize = 20f;
 
-		var midpoint = new Vector3( Position.x, Position.z );
+		var midpoint = new Vector3( DesiredPosition.x, DesiredPosition.z );
 
 		var didDamage = GrubsGame.Current.TerrainMap.DestructSphere( midpoint, fireSize );
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, fireSize );
 
-		var sourcePos = Position;
+		var sourcePos = DesiredPosition;
 		foreach ( var grub in All.OfType<Grub>().Where( x => Vector3.DistanceBetween( sourcePos, x.Position ) <= fireSize ) )
 		{
 			if ( !grub.IsValid() || grub.LifeState != LifeState.Alive )
 				continue;
 
-			var dist = Vector3.DistanceBetween( Position, grub.Position );
+			var dist = Vector3.DistanceBetween( DesiredPosition, grub.Position );
 			if ( dist > fireSize )
 				continue;
 
 			var distanceFactor = 1.0f - Math.Clamp( dist / fireSize, 0, 1 );
 			var force = distanceFactor * 1000; // TODO: PhysicsGroup/Body is invalid on grubs
 
-			var dir = (grub.Position - Position).Normal;
+			var dir = (grub.Position - DesiredPosition).Normal;
 			grub.ApplyAbsoluteImpulse( dir * force );
 
-			grub.TakeDamage( DamageInfoExtension.FromExplosion( 6, Position, Vector3.Up * 32, this ) );
+			grub.TakeDamage( DamageInfoExtension.FromExplosion( 6, DesiredPosition, Vector3.Up * 32, this ) );
 		}
 
-		Position += MoveDirection;
-		MoveDirection += Vector3.Down * 2.5f;
+		DesiredPosition += MoveDirection / 1.5f;
+
+		bool Grounded = Trace.Sphere( fireSize * 1.5f, Position, DesiredPosition ).Run().Hit;
+
+		if ( Grounded )
+		{
+			MoveDirection += Vector3.Random.WithY( 0 );
+		}
+		else
+		{
+			MoveDirection += Vector3.Down * 2.5f;
+		}
+
 		MoveDirection = MoveDirection.Normal * 10f;
 
 		if ( didDamage )
