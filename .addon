@@ -223,6 +223,9 @@
         "Minimum": 50,
         "Maximum": 500
       }
+    },
+    "ControlModes": {
+      "Keyboard": true
     }
   }
 }
