@@ -37,11 +37,6 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	protected virtual HoldPose HoldPose => AssetDefinition.HoldPose;
 
 	/// <summary>
-	/// The time in seconds to delay before un-equipping the weapon after use.
-	/// </summary>
-	protected virtual float UnequipAfter => AssetDefinition.UnequipAfter;
-
-	/// <summary>
 	/// Whether or not this weapon should have an aim reticle.
 	/// </summary>
 	public virtual bool HasReticle => AssetDefinition.HasReticle;

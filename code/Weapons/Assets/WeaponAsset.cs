@@ -41,8 +41,6 @@ public class WeaponAsset : GameResource
 	//
 	// Weapon related
 	//
-	[Property, Category( "Weapon" )]
-	public float UnequipAfter { get; set; } = 0;
 
 	[Property, Category( "Weapon" )]
 	public bool InfiniteAmmo { get; set; } = false;
