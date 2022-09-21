@@ -55,7 +55,7 @@ public sealed class TerrainMap
 		{
 			var scale = GameConfig.TerrainScale;
 			var chunkPos = new Vector3( xOffset * scale, 0, yOffset * scale );
-			var chunk = new TerrainChunk( chunkPos )
+			var chunk = new TerrainChunk( chunkPos, this )
 			{
 				TerrainGrid = new bool[ChunkSize, ChunkSize]
 			};
