@@ -1,5 +1,6 @@
 ﻿using Grubs.Crates;
 using Grubs.Player;
+using Grubs.Terrain;
 
 namespace Grubs.Utils;
 
@@ -75,7 +76,18 @@ public static class GameConfig
 	/// The type of material to be used for the terrain.
 	/// </summary>
 	[ConVar.Replicated( "terrain_type" )]
-	public static string TerrainType { get; set; } = "sand";
+	public static string TerrainTypeStr { get; set; } = "Sand";
+	public static TerrainType TerrainType
+	{
+		get
+		{
+			if ( Enum.TryParse( TerrainTypeStr, out TerrainType matType ) )
+				return matType;
+
+			Log.Error( $"Got invalid terrain type \"{TerrainTypeStr}\", reverting to {TerrainType.None}" );
+			return TerrainType.None;
+		}
+	}
 
 	/// <summary>
 	/// The width of the terrain grid.

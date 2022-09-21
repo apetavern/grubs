@@ -69,14 +69,8 @@ public sealed class MarchingSquares
 		if ( !Host.IsClient )
 			return _builder.Create();
 
-		if ( !Enum.TryParse( GameConfig.TerrainType, out TerrainType matType ) )
-		{
-			Log.Error( $"Got invalid terrain type \"{GameConfig.TerrainType}\", reverting to {TerrainType.None}" );
-			matType = TerrainType.None;
-		}
-
 		// TODO: Calculate normal/tangent.
-		var mesh = new Mesh( Material.Load( matType.GetMaterial() ) )
+		var mesh = new Mesh( Material.Load( TerrainMain.Current.TerrainType.GetMaterial() ) )
 		{
 			Bounds = new BBox( new Vector3( 0, LocalY, 0 ), new Vector3( Width * scale, LocalY + 64, Height * scale ) )
 		};
@@ -97,12 +91,6 @@ public sealed class MarchingSquares
 
 		var scale = GameConfig.TerrainScale;
 		const float wallHeight = 64f;
-
-		if ( !Enum.TryParse( GameConfig.TerrainType, out TerrainType matType ) )
-		{
-			Log.Error( $"Got invalid terrain type \"{GameConfig.TerrainType}\", reverting to {TerrainType.None}" );
-			matType = TerrainType.None;
-		}
 
 		foreach ( var outline in _outlines )
 		{
@@ -132,7 +120,7 @@ public sealed class MarchingSquares
 				vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left, new Vector2( 0, 0 ) ) );
 			}
 
-			var wallMesh = new Mesh( Material.Load( matType.GetMaterial() ) )
+			var wallMesh = new Mesh( Material.Load( TerrainMain.Current.TerrainType.GetMaterial() ) )
 			{
 				Bounds = new BBox( 0, new Vector3( Width * scale, wallHeight, Height * scale ) )
 			};
