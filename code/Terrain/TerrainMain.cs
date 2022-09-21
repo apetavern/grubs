@@ -44,7 +44,7 @@ public static partial class TerrainMain
 			chunk.IsDirty = false;
 		}
 	}
-	
+
 	/// <summary>
 	/// The client receiver to explode a portion of the terrain map.
 	/// </summary>

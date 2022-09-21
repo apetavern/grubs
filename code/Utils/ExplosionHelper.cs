@@ -53,7 +53,7 @@ public static partial class ExplosionHelper
 	public static void DrawLine( Vector3 startpos, Vector3 endpos, float width )
 	{
 		Host.AssertServer();
-		
+
 		TerrainMain.LineClient( To.Everyone, startpos, endpos, width );
 		if ( TerrainMain.Current.DestructLine( startpos, endpos, width ) )
 			TerrainMain.RefreshDirtyChunks();

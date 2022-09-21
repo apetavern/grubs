@@ -34,7 +34,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 			MoveDirection = Vector3.Reflect( MoveDirection, tr.Normal );
 		else
 			MoveDirection = -movementDirection / 2f;
-		
+
 		_expiryTime = Time.Now + 3f;
 		TimeSinceLastTick = Rand.Float( 0.25f );
 	}
@@ -102,7 +102,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 			MoveDirection += Vector3.Down * 2.5f;
 			MoveDirection = MoveDirection.Normal * 10f;
 		}
-		
+
 		if ( didDamage )
 			TerrainMain.RefreshDirtyChunks();
 	}
