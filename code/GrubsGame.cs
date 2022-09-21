@@ -81,22 +81,6 @@ public sealed partial class GrubsGame : Game
 		BaseState.Instance.FrameSimulate( cl );
 	}
 
-	/// <summary>
-	/// Regenerates the <see cref="TerrainMap"/> grid.
-	/// </summary>
-	public static void RegenerateGrid()
-	{
-		TerrainMain.Current.GenerateTerrainGrid();
-	}
-
-	/// <summary>
-	/// Regenerates the <see cref="TerrainModel"/>.
-	/// </summary>
-	public static void RegenerateMap()
-	{
-		TerrainMain.RefreshDirtyChunks();
-	}
-
 	[Event.Tick]
 	private static void Tick()
 	{

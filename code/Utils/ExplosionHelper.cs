@@ -43,7 +43,7 @@ public static partial class ExplosionHelper
 		bool didDamage = TerrainMain.Current.DestructSphere( midpoint, radius );
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, radius );
 		if ( didDamage )
-			GrubsGame.RegenerateMap();
+			TerrainMain.RefreshDirtyChunks();
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
@@ -59,7 +59,7 @@ public static partial class ExplosionHelper
 		GrubsGame.LineClient( To.Everyone, startpos, endpos, width );
 
 		if ( DidDamage )
-			GrubsGame.RegenerateMap();
+			TerrainMain.RefreshDirtyChunks();
 	}
 
 	/// <summary>

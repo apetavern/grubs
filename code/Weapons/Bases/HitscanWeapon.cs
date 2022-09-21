@@ -166,7 +166,7 @@ public partial class HitscanWeapon : GrubWeapon
 				TerrainMain.Current.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius );
 				GrubsGame.LineClient( To.Everyone, muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius );
 
-				GrubsGame.RegenerateMap();
+					TerrainMain.RefreshDirtyChunks();
 			}
 			else if ( result.Hit )
 				ExplosionHelper.Explode( result.EndPosition, Holder, ExplosionRadius, 0 );
