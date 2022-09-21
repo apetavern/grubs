@@ -7,7 +7,7 @@
 		HitDelay = 0.1
 		DamageFlags = "Blunt"
 		HitForce = 1500
-		Damage = 50
+		Damage = 25
 		WeaponName = "Baseball Bat"
 		Model = resource:"models/weapons/baseballbat/baseballbat.vmdl"
 		Icon = resource:"models/weapons/baseballbat/baseballbat.vmdl_c.png"
