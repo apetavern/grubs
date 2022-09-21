@@ -61,16 +61,14 @@ public abstract partial class BaseGamemode : BaseState
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
+			TerrainMain.Current = new TerrainMap( GrubsGame.Current.Seed );
+		TerrainMain.Initialize();
+
 		if ( !IsServer )
 		{
 			base.Enter( forced, parameters );
 			return;
 		}
-
-		var game = GrubsGame.Current;
-		game.TerrainMap = new TerrainMap( game.Seed );
-		Terrain.Terrain.Initialize();
-		GrubsGame.InitializeTerrainClient( To.Everyone );
 
 		TeamManager = new TeamManager();
 

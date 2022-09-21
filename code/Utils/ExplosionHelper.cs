@@ -1,4 +1,5 @@
 ﻿using Grubs.Player;
+using Grubs.Terrain;
 using Grubs.Utils.Extensions;
 
 namespace Grubs.Utils;
@@ -39,10 +40,10 @@ public static partial class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		bool didDamage = GrubsGame.Current.TerrainMap.DestructSphere( midpoint, radius );
+		bool didDamage = TerrainMain.Current.DestructSphere( midpoint, radius );
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, radius );
 		if ( didDamage )
-			GrubsGame.Current.RegenerateMap();
+			GrubsGame.RegenerateMap();
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
@@ -53,12 +54,12 @@ public static partial class ExplosionHelper
 	{
 		Host.AssertServer();
 
-		bool DidDamage = GrubsGame.Current.TerrainMap.DestructLine( startpos, endpos, width );
+		bool DidDamage = TerrainMain.Current.DestructLine( startpos, endpos, width );
 
 		GrubsGame.LineClient( To.Everyone, startpos, endpos, width );
 
 		if ( DidDamage )
-			GrubsGame.Current.RegenerateMap();
+			GrubsGame.RegenerateMap();
 	}
 
 	/// <summary>

@@ -27,11 +27,6 @@ public sealed partial class GrubsGame : Game
 	public new static GrubsGame Current => (Game.Current as GrubsGame)!;
 
 	/// <summary>
-	/// The <see cref="TerrainMap"/> in the world.
-	/// </summary>
-	public TerrainMap TerrainMap { get; set; } = null!;
-
-	/// <summary>
 	/// The seed used to create the terrain map.
 	/// </summary>
 	[Net]
@@ -88,17 +83,17 @@ public sealed partial class GrubsGame : Game
 	/// <summary>
 	/// Regenerates the <see cref="TerrainMap"/> grid.
 	/// </summary>
-	public void RegenerateGrid()
+	public static void RegenerateGrid()
 	{
-		TerrainMap.GenerateTerrainGrid();
+		TerrainMain.Current.GenerateTerrainGrid();
 	}
 
 	/// <summary>
 	/// Regenerates the <see cref="TerrainModel"/>.
 	/// </summary>
-	public void RegenerateMap()
+	public static void RegenerateMap()
 	{
-		Terrain.Terrain.RefreshDirtyChunks();
+		TerrainMain.RefreshDirtyChunks();
 	}
 
 	[Event.Tick]

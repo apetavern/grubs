@@ -1,5 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.States;
+using Grubs.Terrain;
 using Grubs.Utils.Extensions;
 
 namespace Grubs.Utils;
@@ -68,7 +69,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 
 		var midpoint = new Vector3( DesiredPosition.x, DesiredPosition.z );
 
-		var didDamage = GrubsGame.Current.TerrainMap.DestructSphere( midpoint, fireSize );
+		var didDamage = TerrainMain.Current.DestructSphere( midpoint, fireSize );
 		GrubsGame.ExplodeClient( To.Everyone, midpoint, fireSize );
 
 		var sourcePos = DesiredPosition;
@@ -111,6 +112,6 @@ public sealed class FireEntity : ModelEntity, IResolvable
 
 
 		if ( didDamage )
-			GrubsGame.Current.RegenerateMap();
+			GrubsGame.RegenerateMap();
 	}
 }
