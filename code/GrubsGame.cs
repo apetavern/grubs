@@ -180,7 +180,6 @@ public sealed partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// <summary>
 	/// The client receiver to explode a portion of the terrain map.
 	/// </summary>
 	/// <param name="midpoint">The center point of the explosion.</param>
