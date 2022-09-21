@@ -1,5 +1,4 @@
 ﻿using Grubs.Player;
-using Grubs.Utils.Extensions;
 
 namespace Grubs.UI.World;
 

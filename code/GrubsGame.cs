@@ -97,7 +97,7 @@ public sealed partial class GrubsGame : Game
 	}
 
 	[Event.Tick]
-	private void Tick()
+	private static void Tick()
 	{
 		BaseState.Instance.Tick();
 	}
@@ -180,38 +180,6 @@ public sealed partial class GrubsGame : Game
 	}
 
 	/// <summary>
-	/// Test command to change the seed on the <see cref="TerrainMap"/> and regenerate it.
-	/// </summary>
-	[ConCmd.Admin]
-	public static void ScrambleMap()
-	{
-		if ( Host.IsClient )
-			return;
-
-		SetSeedClient( To.Everyone, Current.Seed );
-		Current.RegenerateGrid();
-		Current.RegenerateMap();
-	}
-
-	[ClientRpc]
-	public static void InitializeTerrainClient()
-	{
-		Current.TerrainMap = new TerrainMap( Current.Seed );
-		Terrain.Terrain.Initialize();
-	}
-
-	/// <summary>
-	/// The client receiver to set the seed for the terrain.
-	/// </summary>
-	/// <param name="seed">The new seed for the terrain.</param>
-	[ClientRpc]
-	public static void SetSeedClient( int seed )
-	{
-		Current.TerrainMap.Seed = seed;
-		Current.RegenerateGrid();
-		Current.RegenerateMap();
-	}
-
 	/// <summary>
 	/// The client receiver to explode a portion of the terrain map.
 	/// </summary>
@@ -220,8 +188,8 @@ public sealed partial class GrubsGame : Game
 	[ClientRpc]
 	public static void ExplodeClient( Vector2 midpoint, float size )
 	{
-		if ( Current.TerrainMap.DestructSphere( midpoint, size ) )
-			Current.RegenerateMap();
+		if ( TerrainMain.Current.DestructSphere( midpoint, size ) )
+			RegenerateMap();
 	}
 
 	/// <summary>
@@ -233,7 +201,7 @@ public sealed partial class GrubsGame : Game
 	[ClientRpc]
 	public static void LineClient( Vector3 startpoint, Vector3 endPoint, float width )
 	{
-		if ( Current.TerrainMap.DestructLine( startpoint, endPoint, width ) )
-			Current.RegenerateMap();
+		if ( TerrainMain.Current.DestructLine( startpoint, endPoint, width ) )
+			RegenerateMap();
 	}
 }

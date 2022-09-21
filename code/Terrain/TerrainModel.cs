@@ -5,7 +5,7 @@ public sealed class TerrainModel : ModelEntity
 {
 	private MarchingSquares _marchingSquares = null!;
 	private TerrainWallModel _wallModel = null!;
-	private TerrainChunk _chunk = null!;
+	private readonly TerrainChunk _chunk = null!;
 
 	public TerrainModel()
 	{

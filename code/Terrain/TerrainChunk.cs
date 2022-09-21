@@ -1,7 +1,7 @@
 ﻿namespace Grubs.Terrain;
 
 [Category( "Terrain" )]
-public class TerrainChunk
+public sealed class TerrainChunk
 {
 	public bool[,] TerrainGrid { get; set; } = null!;
 	public Vector3 Position { get; set; }

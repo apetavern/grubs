@@ -18,8 +18,7 @@ public sealed class TerrainMap
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
 	private const int BorderWidth = 5;
-
-	const int chunkSize = 10;
+	private const int ChunkSize = 10;
 
 	public TerrainMap( int seed )
 	{
@@ -48,7 +47,7 @@ public sealed class TerrainMap
 	private void AssignGridToChunks()
 	{
 		TerrainGridChunks = new List<TerrainChunk>();
-		var chunkCount = (Width * Height) / (chunkSize * chunkSize);
+		var chunkCount = (Width * Height) / (ChunkSize * ChunkSize);
 
 		var xOffset = 0;
 		var yOffset = 0;
@@ -58,7 +57,7 @@ public sealed class TerrainMap
 			var chunkPos = new Vector3( xOffset * scale, 0, yOffset * scale );
 			var chunk = new TerrainChunk( chunkPos )
 			{
-				TerrainGrid = new bool[chunkSize, chunkSize]
+				TerrainGrid = new bool[ChunkSize, ChunkSize]
 			};
 
 			var chunksArr = TerrainGridChunks.ToArray();
@@ -71,30 +70,39 @@ public sealed class TerrainMap
 
 			if ( yOffset > 0 )
 			{
-				chunksArr[i - (Width / chunkSize)].yNeighbour = chunk;
+				chunksArr[i - (Width / ChunkSize)].yNeighbour = chunk;
 				if ( xOffset > 0 )
 				{
-					chunksArr[i - (Width / chunkSize) - 1].xyNeighbour = chunk;
+					chunksArr[i - (Width / ChunkSize) - 1].xyNeighbour = chunk;
 				}
 			}
 
-			for ( int x = xOffset; x < xOffset + chunkSize; x++ )
+			for ( var x = xOffset; x < xOffset + ChunkSize; x++ )
 			{
-				for ( int y = yOffset; y < yOffset + chunkSize; y++ )
+				for ( var y = yOffset; y < yOffset + ChunkSize; y++ )
 				{
-					chunk.TerrainGrid[x % chunkSize, y % chunkSize] = TerrainGrid[x, y];
+					chunk.TerrainGrid[x % ChunkSize, y % ChunkSize] = TerrainGrid[x, y];
 				}
 			}
 
 			TerrainGridChunks.Add( chunk );
 
-			xOffset += chunkSize;
+			xOffset += ChunkSize;
 			if ( xOffset == Width )
 			{
 				xOffset = 0;
-				yOffset += chunkSize;
+				yOffset += ChunkSize;
 			}
 		}
+	}
+
+	private void AlteredGrid()
+	{
+		GenerateTurbulentNoise();
+		FindRegions();
+		DiscardRegions();
+		for ( var i = 0; i < GameConfig.DilationAmount; i++ )
+			DilateRegions();
 	}
 
 	/// <summary>
@@ -122,15 +130,6 @@ public sealed class TerrainMap
 			}
 
 		TerrainGrid = borderedMap;
-	}
-
-	private void AlteredGrid()
-	{
-		GenerateTurbulentNoise();
-		FindRegions();
-		DiscardRegions();
-		for ( var i = 0; i < GameConfig.DilationAmount; i++ )
-			DilateRegions();
 	}
 
 	/// <summary>
@@ -309,9 +308,9 @@ public sealed class TerrainMap
 
 	private bool TogglePointInChunks( int x, int z )
 	{
-		var n = (x / chunkSize) + (z / chunkSize * (Width / chunkSize));
-		var xR = x % chunkSize;
-		var zR = z % chunkSize;
+		var n = (x / ChunkSize) + (z / ChunkSize * (Width / ChunkSize));
+		var xR = x % ChunkSize;
+		var zR = z % ChunkSize;
 
 		var chunk = TerrainGridChunks[n];
 		if ( chunk.TerrainGrid[xR, zR] )
@@ -369,11 +368,11 @@ public sealed class TerrainMap
 		}
 	}
 
-	private struct IntVector3
+	private readonly struct IntVector3
 	{
-		public int X { get; set; }
-		public int Y { get; set; }
-		public int Z { get; set; }
+		public readonly int X;
+		public readonly int Y;
+		public readonly int Z;
 
 		public IntVector3( int x, int y, int z )
 		{
