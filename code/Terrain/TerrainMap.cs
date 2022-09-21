@@ -298,8 +298,8 @@ public sealed class TerrainMap
 				if ( d >= size || !TerrainGrid[i, j] )
 					continue;
 
+				TerrainGrid[i, j] = false;
 				modifiedTerrain |= TogglePointInChunks( i, j );
-
 			}
 		}
 
