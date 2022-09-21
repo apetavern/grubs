@@ -11,6 +11,8 @@ public sealed class TerrainMap
 
 	public readonly int Seed;
 
+	public readonly bool Premade;
+	public readonly PremadeTerrain? PremadeMap;
 
 	public readonly int Width;
 	public readonly int Height;
@@ -25,6 +27,9 @@ public sealed class TerrainMap
 
 	public TerrainMap( int seed )
 	{
+		Premade = false;
+		PremadeMap = null;
+
 		Width = GameConfig.TerrainWidth;
 		Height = GameConfig.TerrainHeight;
 		Scale = GameConfig.TerrainScale;
@@ -36,6 +41,18 @@ public sealed class TerrainMap
 		AssignGridToChunks();
 	}
 
+	public TerrainMap( PremadeTerrain terrain )
+	{
+		Premade = true;
+		PremadeMap = terrain;
+
+		Width = terrain.Width;
+		Height = terrain.Height;
+		Scale = terrain.Scale;
+		HasBorder = terrain.HasBorder;
+		TerrainType = terrain.TerrainType;
+
+		TerrainGrid = terrain.TerrainGrid;
 		GenerateTerrainGrid();
 		AssignGridToChunks();
 	}
@@ -45,12 +62,15 @@ public sealed class TerrainMap
 	/// </summary>
 	public void GenerateTerrainGrid()
 	{
-		TerrainGrid = new bool[Width, Height];
+		if ( !Premade )
+		{
+			TerrainGrid = new bool[Width, Height];
 
-		if ( GameConfig.AlteredTerrain )
-			AlteredGrid();
-		else
-			DefaultGrid();
+			if ( GameConfig.AlteredTerrain )
+				AlteredGrid();
+			else
+				DefaultGrid();
+		}
 
 		if ( HasBorder )
 			AddBorder();

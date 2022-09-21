@@ -5,6 +5,7 @@ global using Sandbox.UI.Construct;
 global using System;
 global using System.Collections.Generic;
 global using System.Linq;
+using System.IO;
 using Grubs.Crates;
 using Grubs.Player;
 using Grubs.States;
@@ -100,6 +101,20 @@ public sealed partial class GrubsGame : Game
 	private static void Tick()
 	{
 		BaseState.Instance.Tick();
+	}
+
+	[ConCmd.Admin( "save_gmap" )]
+	public static void SaveMap( string fileName, bool preserveSettings = true )
+	{
+		var writer = new BinaryWriter( FileSystem.Data.OpenWrite( fileName ) );
+		try
+		{
+			PremadeTerrain.Serialize( writer, TerrainMain.Current, preserveSettings );
+		}
+		finally
+		{
+			writer.Close();
+		}
 	}
 
 	/// <summary>

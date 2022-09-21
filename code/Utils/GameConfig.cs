@@ -67,6 +67,13 @@ public static class GameConfig
 	public static float MovementGracePeriod { get; set; } = 5;
 
 	/// <summary>
+	/// The path to the custom map file to use.
+	/// <remarks>This is only needed on the server host.</remarks>
+	/// </summary>
+	[ConVar.Replicated( "terrain_file" )]
+	public static string TerrainFile { get; set; } = "";
+
+	/// <summary>
 	/// Whether the terrain has a bordered wall surrounding it.
 	/// </summary>
 	[ConVar.Replicated( "terrain_border" )]

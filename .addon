@@ -140,6 +140,13 @@
         "Description": "The amount of seconds a Grub will get to move after using their weapon.",
         "Maximum": 60
       },
+      "terrain_file": {
+        "Choices": [],
+        "ConVarName": "terrain_file",
+        "DisplayName": "Terrain File",
+        "DefaultValue": "",
+        "Description": "The path to a custom Grubs map to use instead of random generation. This file is only needed on the server host."
+      },
       "terrain_type": {
         "DisplayType": "Choice",
         "Choices": [
