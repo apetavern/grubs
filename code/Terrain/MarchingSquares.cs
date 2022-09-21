@@ -1,6 +1,4 @@
-﻿using Grubs.Utils;
-using Grubs.Utils.Extensions;
-using Sandbox.UI.Tests;
+﻿using Grubs.Utils.Extensions;
 
 namespace Grubs.Terrain;
 
@@ -29,7 +27,7 @@ public sealed class MarchingSquares
 		Width = grid.GetLength( 0 );
 		Height = grid.GetLength( 1 );
 
-		var scale = GameConfig.TerrainScale;
+		var scale = chunk.Map.Scale;
 		March( grid, scale, chunk );
 
 		var vertexNormals = new List<Vector3>();
@@ -89,7 +87,6 @@ public sealed class MarchingSquares
 		var wallVertices = new List<Vector3>();
 		var wallTriangles = new List<int>();
 
-		var scale = GameConfig.TerrainScale;
 		const float wallHeight = 64f;
 
 		foreach ( var outline in _outlines )
@@ -122,7 +119,7 @@ public sealed class MarchingSquares
 
 			var wallMesh = new Mesh( Material.Load( TerrainMain.Current.TerrainType.GetMaterial() ) )
 			{
-				Bounds = new BBox( 0, new Vector3( Width * scale, wallHeight, Height * scale ) )
+				Bounds = new BBox( 0, new Vector3( Width * TerrainMain.Current.Scale, wallHeight, Height * TerrainMain.Current.Scale ) )
 			};
 
 			wallMesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );

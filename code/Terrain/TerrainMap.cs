@@ -9,11 +9,14 @@ public sealed class TerrainMap
 	private int[,] RegionGrid { get; set; } = null!;
 	private List<Vector2> PositionsToDilate { get; set; } = null!;
 
-	public static int Width => GameConfig.TerrainWidth;
+	public readonly int Seed;
 
-	public static int Height => GameConfig.TerrainHeight;
 
-	public int Seed { get; set; }
+	public readonly int Width;
+	public readonly int Height;
+	public readonly int Scale;
+	public readonly bool HasBorder;
+	public readonly TerrainType TerrainType;
 
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
@@ -22,7 +25,16 @@ public sealed class TerrainMap
 
 	public TerrainMap( int seed )
 	{
+		Width = GameConfig.TerrainWidth;
+		Height = GameConfig.TerrainHeight;
+		Scale = GameConfig.TerrainScale;
+		HasBorder = GameConfig.TerrainBorder;
+		TerrainType = GameConfig.TerrainType;
+
 		Seed = seed;
+		GenerateTerrainGrid();
+		AssignGridToChunks();
+	}
 
 		GenerateTerrainGrid();
 		AssignGridToChunks();
@@ -40,7 +52,7 @@ public sealed class TerrainMap
 		else
 			DefaultGrid();
 
-		if ( GameConfig.TerrainBorder )
+		if ( HasBorder )
 			AddBorder();
 	}
 
@@ -53,8 +65,7 @@ public sealed class TerrainMap
 		var yOffset = 0;
 		for ( var i = 0; i < chunkCount; i++ )
 		{
-			var scale = GameConfig.TerrainScale;
-			var chunkPos = new Vector3( xOffset * scale, 0, yOffset * scale );
+			var chunkPos = new Vector3( xOffset * Scale, 0, yOffset * Scale );
 			var chunk = new TerrainChunk( chunkPos, this )
 			{
 				TerrainGrid = new bool[ChunkSize, ChunkSize]
@@ -284,15 +295,14 @@ public sealed class TerrainMap
 	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructSphere( Vector2 midpoint, float size )
 	{
-		var scale = GameConfig.TerrainScale;
 		var modifiedTerrain = false;
 
 		for ( var i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
 		{
 			for ( var j = 0; j < TerrainGrid.GetLength( 1 ); j++ )
 			{
-				var xDiff = midpoint.x - (i * scale);
-				var yDiff = midpoint.y - (j * scale);
+				var xDiff = midpoint.x - (i * Scale);
+				var yDiff = midpoint.y - (j * Scale);
 				var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
 
 				if ( d >= size || !TerrainGrid[i, j] )
@@ -353,7 +363,6 @@ public sealed class TerrainMap
 	/// <returns>A Vector3 position a Grub can be spawned at.</returns>
 	public Vector3 GetSpawnLocation()
 	{
-		var scale = GameConfig.TerrainScale;
 		while ( true )
 		{
 			var x = Rand.Int( Width - 1 );
@@ -361,8 +370,8 @@ public sealed class TerrainMap
 			if ( TerrainGrid[x, z] )
 				continue;
 
-			var startPos = new Vector3( x * scale, 0, z * scale );
-			var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * scale ).WithTag( "solid" ).Run();
+			var startPos = new Vector3( x * Scale, 0, z * Scale );
+			var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * Scale ).WithTag( "solid" ).Run();
 			if ( tr.Hit )
 				return tr.EndPosition;
 		}
