@@ -27,12 +27,6 @@ public sealed partial class GrubsGame : Game
 	/// </summary>
 	public new static GrubsGame Current => (Game.Current as GrubsGame)!;
 
-	/// <summary>
-	/// The seed used to create the terrain map.
-	/// </summary>
-	[Net]
-	public int Seed { get; set; }
-
 	public GrubsGame()
 	{
 		Precache.Run();
@@ -44,7 +38,7 @@ public sealed partial class GrubsGame : Game
 
 			// Set the Rand seed and Seed property so the terrain generation seed is synced between server and client.
 			Rand.SetSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
-			Seed = Rand.Int( 99999 );
+			TerrainMain.Seed = Rand.Int( 99999 );
 		}
 
 		if ( IsClient )
@@ -57,6 +51,7 @@ public sealed partial class GrubsGame : Game
 	{
 		base.ClientJoined( client );
 
+		TerrainMain.SetSeedRpc( To.Single( client ), TerrainMain.Seed );
 		BaseState.Instance.ClientJoined( client );
 	}
 

@@ -81,7 +81,7 @@ public abstract partial class BaseGamemode : BaseState
 				else
 				{
 					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
-					TerrainMain.Current = new TerrainMap( GrubsGame.Current.Seed );
+					TerrainMain.Current = new TerrainMap( TerrainMain.Seed );
 				}
 			}
 			finally
@@ -90,7 +90,7 @@ public abstract partial class BaseGamemode : BaseState
 			}
 		}
 		else
-			TerrainMain.Current = new TerrainMap( GrubsGame.Current.Seed );
+			TerrainMain.Current = new TerrainMap( TerrainMain.Seed );
 		TerrainMain.Initialize();
 
 		if ( !IsServer )
