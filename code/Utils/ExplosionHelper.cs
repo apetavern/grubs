@@ -31,7 +31,8 @@ public static partial class ExplosionHelper
 				continue;
 
 			var distanceFactor = 1.0f - Math.Clamp( dist / radius, 0, 1 );
-			var force = distanceFactor * 1000; // TODO: PhysicsGroup/Body is invalid on grubs
+			// TODO: PhysicsGroup/Body is invalid on grubs
+			var force = distanceFactor * 1000;
 
 			var dir = (grub.Position - position).Normal;
 			grub.ApplyAbsoluteImpulse( dir * force );
@@ -40,9 +41,8 @@ public static partial class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		bool didDamage = TerrainMain.Current.DestructSphere( midpoint, radius );
-		GrubsGame.ExplodeClient( To.Everyone, midpoint, radius );
-		if ( didDamage )
+		TerrainMain.ExplodeClient( To.Everyone, midpoint, radius );
+		if ( TerrainMain.Current.DestructSphere( midpoint, radius ) )
 			TerrainMain.RefreshDirtyChunks();
 
 		if ( ExplosionDebug )
@@ -53,12 +53,9 @@ public static partial class ExplosionHelper
 	public static void DrawLine( Vector3 startpos, Vector3 endpos, float width )
 	{
 		Host.AssertServer();
-
-		bool DidDamage = TerrainMain.Current.DestructLine( startpos, endpos, width );
-
-		GrubsGame.LineClient( To.Everyone, startpos, endpos, width );
-
-		if ( DidDamage )
+		
+		TerrainMain.LineClient( To.Everyone, startpos, endpos, width );
+		if ( TerrainMain.Current.DestructLine( startpos, endpos, width ) )
 			TerrainMain.RefreshDirtyChunks();
 	}
 

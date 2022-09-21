@@ -177,29 +177,4 @@ public sealed partial class GrubsGame : Game
 			Position = gamemode.TeamManager.CurrentTeam.ActiveGrub.Position + Vector3.Up * 100
 		};
 	}
-
-	/// <summary>
-	/// The client receiver to explode a portion of the terrain map.
-	/// </summary>
-	/// <param name="midpoint">The center point of the explosion.</param>
-	/// <param name="size">How big the explosion was.</param>
-	[ClientRpc]
-	public static void ExplodeClient( Vector2 midpoint, float size )
-	{
-		if ( TerrainMain.Current.DestructSphere( midpoint, size ) )
-			RegenerateMap();
-	}
-
-	/// <summary>
-	/// Destruct a sphere in the <see cref="TerrainMap"/>.
-	/// </summary>
-	/// <param name="startpoint">The start point of the line to be destructed.</param>
-	/// <param name="endPoint">The endpoint of the line to be destructed.</param>
-	/// <param name="width">The size (radius) of the sphere to be destructed.</param>
-	[ClientRpc]
-	public static void LineClient( Vector3 startpoint, Vector3 endPoint, float width )
-	{
-		if ( TerrainMain.Current.DestructLine( startpoint, endPoint, width ) )
-			RegenerateMap();
-	}
 }
