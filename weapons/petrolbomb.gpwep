@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		ProjectileForceMultiplier = 1
+		ProjectileForceMultiplier = 0.4
 		ProjectileShouldBounce = false
 		ProjectileShouldUseTrace = true
 		ProjectileMaxBounces = 0
@@ -11,7 +11,7 @@
 		ProjectileExplosionRadius = 100
 		ProjectileExplodeAfter = 0
 		ProjectileCollisionExplosionDelay = 0
-		ProjectileLoopSound = resource:"audio/sfx/gun/revolver_fire.sound"
+		ProjectileLoopSound = "audio/sfx/gun/revolver_fire.sound"
 		ProjectileExplodeSound = resource:"sounds/physics/physics.glass.shard.impact.sound"
 		ProjectileParticleTrail = ""
 		ProjectileCollisionReaction = "Incendiary"
