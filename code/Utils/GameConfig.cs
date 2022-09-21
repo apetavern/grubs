@@ -66,6 +66,12 @@ public static class GameConfig
 	public static float MovementGracePeriod { get; set; } = 5;
 
 	/// <summary>
+	/// Whether the terrain has a bordered wall surrounding it.
+	/// </summary>
+	[ConVar.Replicated( "terrain_border" )]
+	public static bool TerrainBorder { get; set; } = false;
+
+	/// <summary>
 	/// The type of material to be used for the terrain.
 	/// </summary>
 	[ConVar.Replicated( "terrain_type" )]
@@ -94,12 +100,6 @@ public static class GameConfig
 	/// </summary>
 	[ConVar.Replicated( "terrain_resolution" )]
 	public static float TerrainResolution { get; set; } = 0.5f;
-
-	/// <summary>
-	/// Whether the terrain has a bordered wall surrounding it.
-	/// </summary>
-	[ConVar.Replicated( "terrain_border" )]
-	public static bool TerrainBorder { get; set; } = false;
 
 	/// <summary>
 	/// Whether the terrain uses the altered noise generation.
