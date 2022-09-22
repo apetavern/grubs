@@ -6,6 +6,7 @@ namespace Grubs.Terrain;
 /// <summary>
 /// The main class for terrains.
 /// </summary>
+[Category( "Setup" )]
 public sealed partial class TerrainMain : Entity
 {
 	public static TerrainMain Instance = null!;

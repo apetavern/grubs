@@ -3,6 +3,7 @@
 namespace Grubs.Terrain;
 
 public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
+[Category( "Terrain" )]
 {
 	public readonly int Seed;
 
