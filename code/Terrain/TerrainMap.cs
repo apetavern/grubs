@@ -192,7 +192,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 	private void FindRegions( int[,] regionGrid )
 	{
 		var label = 2;
-		var queue = new Queue<IntVector3>();
+		var queue = new Queue<IntVector2>();
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < Height; z++ )
@@ -204,7 +204,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 				// Terrain exists in this location.
 				if ( regionGrid[x, z] == 1 )
 				{
-					queue.Enqueue( new IntVector3( x, z, label ) );
+					queue.Enqueue( new IntVector2( x, z ) );
 					regionGrid[x, z] = label;
 
 					while ( queue.Count > 0 )
@@ -215,7 +215,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 							if ( regionGrid[current.X - 1, current.Y] == 1 )
 							{
 								regionGrid[current.X - 1, current.Y] = label;
-								queue.Enqueue( new IntVector3( current.X - 1, current.Y, label ) );
+								queue.Enqueue( new IntVector2( current.X - 1, current.Y ) );
 							}
 						}
 
@@ -224,7 +224,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 							if ( regionGrid[current.X + 1, current.Y] == 1 )
 							{
 								regionGrid[current.X + 1, current.Y] = label;
-								queue.Enqueue( new IntVector3( current.X + 1, current.Y, label ) );
+								queue.Enqueue( new IntVector2( current.X + 1, current.Y ) );
 							}
 						}
 
@@ -233,7 +233,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 							if ( regionGrid[current.X, current.Y - 1] == 1 )
 							{
 								regionGrid[current.X, current.Y - 1] = label;
-								queue.Enqueue( new IntVector3( current.X, current.Y - 1, label ) );
+								queue.Enqueue( new IntVector2( current.X, current.Y - 1 ) );
 							}
 						}
 
@@ -242,7 +242,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 							if ( regionGrid[current.X, current.Y + 1] == 1 )
 							{
 								regionGrid[current.X, current.Y + 1] = label;
-								queue.Enqueue( new IntVector3( current.X, current.Y + 1, label ) );
+								queue.Enqueue( new IntVector2( current.X, current.Y + 1 ) );
 							}
 						}
 					}
@@ -432,17 +432,15 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 				write.Write( TerrainGrid[x, y] );
 	}
 
-	private readonly struct IntVector3
+	private readonly struct IntVector2
 	{
 		public readonly int X;
 		public readonly int Y;
-		public readonly int Z;
 
-		public IntVector3( int x, int y, int z )
+		public IntVector2( int x, int y )
 		{
 			X = x;
 			Y = y;
-			Z = z;
 		}
 	}
 }
