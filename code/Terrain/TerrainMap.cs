@@ -398,7 +398,6 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>A Vector3 position a Grub can be spawned at.</returns>
 	public Vector3 GetSpawnLocation()
 	{
-		return Vector3.Zero;
 		while ( true )
 		{
 			var x = Rand.Int( Width - 1 );
