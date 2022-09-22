@@ -276,7 +276,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 	/// </summary>
 	private void DilateRegions()
 	{
-		var positionsToDilate = new List<Vector2>();
+		var positionsToDilate = new List<IntVector2>();
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < Height; z++ )
@@ -284,7 +284,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 					CheckForDilationPosition( positionsToDilate, x, z );
 
 		foreach ( var position in positionsToDilate )
-			TerrainGrid[(int)position.x, (int)position.y] = true;
+			TerrainGrid[position.X, position.Y] = true;
 	}
 
 	/// <summary>
@@ -293,20 +293,20 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 	/// <param name="positionsToDilate">The list of positions to check and dilate.</param>
 	/// <param name="x">The x position we are dilating on.</param>
 	/// <param name="z">The y position we are dilating on.</param>
-	private void CheckForDilationPosition( ICollection<Vector2> positionsToDilate, int x, int z )
+	private void CheckForDilationPosition( ICollection<IntVector2> positionsToDilate, int x, int z )
 	{
 		if ( x - 1 > 0 )
-			positionsToDilate.Add( new Vector2( x - 1, z ) );
+			positionsToDilate.Add( new IntVector2( x - 1, z ) );
 		if ( z - 1 > 0 )
-			positionsToDilate.Add( new Vector2( x, z - 1 ) );
+			positionsToDilate.Add( new IntVector2( x, z - 1 ) );
 		if ( x - 1 > 0 && z - 1 > 0 )
-			positionsToDilate.Add( new Vector2( x - 1, z - 1 ) );
+			positionsToDilate.Add( new IntVector2( x - 1, z - 1 ) );
 		if ( x + 1 < Width )
-			positionsToDilate.Add( new Vector2( x + 1, z ) );
+			positionsToDilate.Add( new IntVector2( x + 1, z ) );
 		if ( z + 1 < Height )
-			positionsToDilate.Add( new Vector2( x, z + 1 ) );
+			positionsToDilate.Add( new IntVector2( x, z + 1 ) );
 		if ( x + 1 < Width && z + 1 < Height )
-			positionsToDilate.Add( new Vector2( x + 1, z + 1 ) );
+			positionsToDilate.Add( new IntVector2( x + 1, z + 1 ) );
 	}
 
 	/// <summary>
