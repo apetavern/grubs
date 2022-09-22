@@ -24,6 +24,11 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	[Net]
 	public TeamManager TeamManager { get; private set; } = null!;
+	/// <summary>
+	/// 
+	/// </summary>
+	[Net]
+	public TerrainMain TerrainMain { get; private set; } = null!;
 
 	/// <summary>
 	/// Whether or not the active Grub can only use movement.
@@ -62,37 +67,6 @@ public abstract partial class BaseGamemode : BaseState
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
-		if ( GameConfig.TerrainFile != string.Empty )
-		{
-			var terrainFile = GameConfig.TerrainFile;
-			BinaryReader? reader = null;
-			try
-			{
-				if ( FileSystem.Mounted.FileExists( terrainFile ) )
-				{
-					reader = new BinaryReader( FileSystem.Mounted.OpenRead( terrainFile ) );
-					TerrainMain.Current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
-				}
-				else if ( FileSystem.Data.FileExists( terrainFile ) )
-				{
-					reader = new BinaryReader( FileSystem.Data.OpenRead( terrainFile ) );
-					TerrainMain.Current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
-				}
-				else
-				{
-					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
-					TerrainMain.Current = new TerrainMap( TerrainMain.Seed );
-				}
-			}
-			finally
-			{
-				reader?.Close();
-			}
-		}
-		else
-			TerrainMain.Current = new TerrainMap( TerrainMain.Seed );
-		TerrainMain.Initialize();
-
 		if ( !IsServer )
 		{
 			base.Enter( forced, parameters );
@@ -100,6 +74,7 @@ public abstract partial class BaseGamemode : BaseState
 		}
 
 		TeamManager = new TeamManager();
+		TerrainMain = new TerrainMain();
 
 		var killBoundary = new MultiShape()
 			// Bottom bar
