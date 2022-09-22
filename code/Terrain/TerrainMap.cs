@@ -6,9 +6,6 @@ public sealed class TerrainMap
 {
 	public bool[,] TerrainGrid { get; private set; } = null!;
 	public List<TerrainChunk> TerrainGridChunks { get; private set; } = null!;
-	private int[,] RegionGrid { get; set; } = null!;
-	private List<Vector2> PositionsToDilate { get; set; } = null!;
-
 	public readonly int Seed;
 
 	public readonly bool Premade;
@@ -129,9 +126,11 @@ public sealed class TerrainMap
 
 	private void AlteredGrid()
 	{
+		var regionGrid = new int[Width, Height];
+		
 		GenerateTurbulentNoise();
-		FindRegions();
-		DiscardRegions();
+		FindRegions( regionGrid );
+		DiscardRegions( regionGrid );
 		for ( var i = 0; i < GameConfig.DilationAmount; i++ )
 			DilateRegions();
 	}
@@ -187,60 +186,59 @@ public sealed class TerrainMap
 	/// A region extraction algorithm to determine each unique region of the terrain.
 	/// See: https://en.wikipedia.org/wiki/Connected-component_labeling
 	/// </summary>
-	private void FindRegions()
+	private void FindRegions( int[,] regionGrid )
 	{
 		var label = 2;
 		var queue = new Queue<IntVector3>();
-		RegionGrid = new int[Width, Height];
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < Height; z++ )
-				RegionGrid[x, z] = TerrainGrid[x, z] ? 1 : 0;
+				regionGrid[x, z] = TerrainGrid[x, z] ? 1 : 0;
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < Height; z++ )
 			{
 				// Terrain exists in this location.
-				if ( RegionGrid[x, z] == 1 )
+				if ( regionGrid[x, z] == 1 )
 				{
 					queue.Enqueue( new IntVector3( x, z, label ) );
-					RegionGrid[x, z] = label;
+					regionGrid[x, z] = label;
 
 					while ( queue.Count > 0 )
 					{
 						var current = queue.Dequeue();
 						if ( current.X - 1 >= 0 )
 						{
-							if ( RegionGrid[current.X - 1, current.Y] == 1 )
+							if ( regionGrid[current.X - 1, current.Y] == 1 )
 							{
-								RegionGrid[current.X - 1, current.Y] = label;
+								regionGrid[current.X - 1, current.Y] = label;
 								queue.Enqueue( new IntVector3( current.X - 1, current.Y, label ) );
 							}
 						}
 
 						if ( current.X + 1 < Width )
 						{
-							if ( RegionGrid[current.X + 1, current.Y] == 1 )
+							if ( regionGrid[current.X + 1, current.Y] == 1 )
 							{
-								RegionGrid[current.X + 1, current.Y] = label;
+								regionGrid[current.X + 1, current.Y] = label;
 								queue.Enqueue( new IntVector3( current.X + 1, current.Y, label ) );
 							}
 						}
 
 						if ( current.Y - 1 >= 0 )
 						{
-							if ( RegionGrid[current.X, current.Y - 1] == 1 )
+							if ( regionGrid[current.X, current.Y - 1] == 1 )
 							{
-								RegionGrid[current.X, current.Y - 1] = label;
+								regionGrid[current.X, current.Y - 1] = label;
 								queue.Enqueue( new IntVector3( current.X, current.Y - 1, label ) );
 							}
 						}
 
 						if ( current.Y + 1 < Height )
 						{
-							if ( RegionGrid[current.X, current.Y + 1] == 1 )
+							if ( regionGrid[current.X, current.Y + 1] == 1 )
 							{
-								RegionGrid[current.X, current.Y + 1] = label;
+								regionGrid[current.X, current.Y + 1] = label;
 								queue.Enqueue( new IntVector3( current.X, current.Y + 1, label ) );
 							}
 						}
@@ -254,19 +252,19 @@ public sealed class TerrainMap
 	/// <summary>
 	/// Discard regions that do not have members under the set threshold.
 	/// </summary>
-	private void DiscardRegions()
+	private void DiscardRegions( int[,] regionGrid )
 	{
 		var regionIdsToKeep = new HashSet<int>();
 		var threshold = (Height * 0.35f).FloorToInt();
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < threshold; z++ )
-				if ( RegionGrid[x, z] != 0 )
-					regionIdsToKeep.Add( RegionGrid[x, z] );
+				if ( regionGrid[x, z] != 0 )
+					regionIdsToKeep.Add( regionGrid[x, z] );
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < Height; z++ )
-				if ( !regionIdsToKeep.Contains( RegionGrid[x, z] ) )
+				if ( !regionIdsToKeep.Contains( regionGrid[x, z] ) )
 					TerrainGrid[x, z] = false;
 	}
 
@@ -275,36 +273,37 @@ public sealed class TerrainMap
 	/// </summary>
 	private void DilateRegions()
 	{
-		PositionsToDilate = new List<Vector2>();
+		var positionsToDilate = new List<Vector2>();
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < Height; z++ )
 				if ( TerrainGrid[x, z] )
-					CheckForDilationPosition( x, z );
+					CheckForDilationPosition( positionsToDilate, x, z );
 
-		foreach ( var position in PositionsToDilate )
+		foreach ( var position in positionsToDilate )
 			TerrainGrid[(int)position.x, (int)position.y] = true;
 	}
 
 	/// <summary>
 	/// Check neighbours for dilation.
 	/// </summary>
+	/// <param name="positionsToDilate">The list of positions to check and dilate.</param>
 	/// <param name="x">The x position we are dilating on.</param>
 	/// <param name="z">The y position we are dilating on.</param>
-	private void CheckForDilationPosition( int x, int z )
+	private void CheckForDilationPosition( ICollection<Vector2> positionsToDilate, int x, int z )
 	{
 		if ( x - 1 > 0 )
-			PositionsToDilate.Add( new Vector2( x - 1, z ) );
+			positionsToDilate.Add( new Vector2( x - 1, z ) );
 		if ( z - 1 > 0 )
-			PositionsToDilate.Add( new Vector2( x, z - 1 ) );
+			positionsToDilate.Add( new Vector2( x, z - 1 ) );
 		if ( x - 1 > 0 && z - 1 > 0 )
-			PositionsToDilate.Add( new Vector2( x - 1, z - 1 ) );
+			positionsToDilate.Add( new Vector2( x - 1, z - 1 ) );
 		if ( x + 1 < Width )
-			PositionsToDilate.Add( new Vector2( x + 1, z ) );
+			positionsToDilate.Add( new Vector2( x + 1, z ) );
 		if ( z + 1 < Height )
-			PositionsToDilate.Add( new Vector2( x, z + 1 ) );
+			positionsToDilate.Add( new Vector2( x, z + 1 ) );
 		if ( x + 1 < Width && z + 1 < Height )
-			PositionsToDilate.Add( new Vector2( x + 1, z + 1 ) );
+			positionsToDilate.Add( new Vector2( x + 1, z + 1 ) );
 	}
 
 	/// <summary>
