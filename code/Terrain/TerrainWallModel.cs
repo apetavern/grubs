@@ -5,9 +5,10 @@ public sealed class TerrainWallModel : ModelEntity
 {
 	public TerrainWallModel()
 	{
+		Transmit = TransmitType.Never;
 	}
 
-	public TerrainWallModel( MarchingSquares marchingSquares )
+	public TerrainWallModel( MarchingSquares marchingSquares ) : this()
 	{
 		Model = marchingSquares.CreateWallModel();
 		Tags.Add( "solid" );

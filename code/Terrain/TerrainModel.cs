@@ -9,7 +9,9 @@ public sealed class TerrainModel : ModelEntity
 
 	public TerrainModel()
 	{
+		Transmit = TransmitType.Never;
 	}
+
 	public TerrainModel( TerrainChunk chunk ) : this()
 	{
 		Tags.Add( "solid" );
