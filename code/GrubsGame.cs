@@ -38,7 +38,6 @@ public sealed partial class GrubsGame : Game
 
 			// Set the Rand seed and Seed property so the terrain generation seed is synced between server and client.
 			Rand.SetSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
-			TerrainMain.Seed = Rand.Int( 99999 );
 		}
 
 		if ( IsClient )
@@ -51,7 +50,6 @@ public sealed partial class GrubsGame : Game
 	{
 		base.ClientJoined( client );
 
-		TerrainMain.SetSeedRpc( To.Single( client ), TerrainMain.Seed );
 		BaseState.Instance.ClientJoined( client );
 	}
 
