@@ -88,6 +88,10 @@ public sealed partial class GrubsGame : Game
 		{
 			PremadeTerrain.Serialize( writer, TerrainMain.Current, preserveSettings );
 		}
+		catch( Exception e )
+		{
+			Log.Error( e );
+		}
 		finally
 		{
 			writer.Close();
