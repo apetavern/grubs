@@ -88,20 +88,18 @@ public sealed class TerrainMap
 				TerrainGrid = new bool[ChunkSize, ChunkSize]
 			};
 
-			var chunksArr = TerrainGridChunks.ToArray();
-
 			// Set chunk neighbours for the purpose of connecting chunks.
 			if ( xOffset > 0 )
 			{
-				chunksArr[i - 1].xNeighbour = chunk;
+				TerrainGridChunks[i - 1].xNeighbour = chunk;
 			}
 
 			if ( yOffset > 0 )
 			{
-				chunksArr[i - (Width / ChunkSize)].yNeighbour = chunk;
+				TerrainGridChunks[i - (Width / ChunkSize)].yNeighbour = chunk;
 				if ( xOffset > 0 )
 				{
-					chunksArr[i - (Width / ChunkSize) - 1].xyNeighbour = chunk;
+					TerrainGridChunks[i - (Width / ChunkSize) - 1].xyNeighbour = chunk;
 				}
 			}
 
