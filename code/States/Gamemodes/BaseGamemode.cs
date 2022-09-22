@@ -150,6 +150,13 @@ public abstract partial class BaseGamemode : BaseState
 		base.Leave();
 	}
 
+	public override void ClientJoined( Client cl )
+	{
+		base.ClientJoined( cl );
+
+		TerrainMain.Current.UpdateGridRpc( TerrainMain.Current.TerrainGrid );
+	}
+
 	public override void ClientDisconnected( Client cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnected( cl, reason );
