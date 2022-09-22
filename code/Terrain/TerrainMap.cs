@@ -2,25 +2,30 @@
 
 namespace Grubs.Terrain;
 
-public sealed class TerrainMap
+public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 {
-	public bool[,] TerrainGrid { get; private set; } = null!;
-	public List<TerrainChunk> TerrainGridChunks { get; private set; } = null!;
 	public readonly int Seed;
 
 	public readonly bool Premade;
 	public readonly PremadeTerrain? PremadeMap;
 
-	public readonly int Width;
-	public readonly int Height;
-	public readonly int Scale;
-	public readonly bool HasBorder;
-	public readonly TerrainType TerrainType;
+	public bool[,] TerrainGrid { get; private set; } = null!;
+	public List<TerrainChunk> TerrainGridChunks { get; private set; } = null!;
+
+	public int Width { get; private set; }
+	public int Height { get; private set; }
+	public int Scale { get; private set; }
+	public bool HasBorder { get; private set; }
+	public TerrainType TerrainType { get; private set; }
 
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
 	private const int BorderWidth = 5;
 	private const int ChunkSize = 10;
+
+	public TerrainMap()
+	{
+	}
 
 	public TerrainMap( int seed )
 	{
@@ -330,6 +335,8 @@ public sealed class TerrainMap
 			}
 		}
 
+		if ( modifiedTerrain )
+			WriteNetworkData();
 		return modifiedTerrain;
 	}
 
@@ -370,6 +377,8 @@ public sealed class TerrainMap
 			modifiedTerrain |= DestructSphere( pos, width );
 		}
 
+		if ( modifiedTerrain )
+			WriteNetworkData();
 		return modifiedTerrain;
 	}
 
@@ -392,6 +401,36 @@ public sealed class TerrainMap
 			if ( tr.Hit )
 				return tr.EndPosition;
 		}
+	}
+
+	public void Read( ref NetRead read )
+	{
+		Log.Info( "Updating" );
+		HasBorder = read.Read<bool>();
+		Scale = read.Read<int>();
+		TerrainType = (TerrainType)read.Read<int>();
+		Width = read.Read<int>();
+		Height = read.Read<int>();
+
+		TerrainGrid = new bool[Width, Height];
+		for ( var x = 0; x < Width; x++ )
+			for ( var y = 0; y < Height; y++ )
+				TerrainGrid[x, y] = read.Read<bool>();
+		AssignGridToChunks();
+		TerrainMain.Initialize();
+	}
+
+	public void Write( NetWrite write )
+	{
+		write.Write( HasBorder );
+		write.Write( Scale );
+		write.Write( (int)TerrainType );
+		write.Write( Width );
+		write.Write( Height );
+
+		for ( var x = 0; x < Width; x++ )
+			for ( var y = 0; y < Height; y++ )
+				write.Write( TerrainGrid[x, y] );
 	}
 
 	private readonly struct IntVector3
