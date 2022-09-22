@@ -74,7 +74,9 @@ public sealed partial class TerrainMain : Entity
 	/// </summary>
 	public static void Initialize()
 	{
-		TerrainModels = new List<TerrainModel>();
+		foreach ( var model in TerrainModels )
+			model.Delete();
+		TerrainModels.Clear();
 
 		foreach ( var chunk in Current.TerrainGridChunks )
 		{
