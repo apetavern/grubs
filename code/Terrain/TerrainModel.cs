@@ -17,6 +17,14 @@ public sealed class TerrainModel : ModelEntity
 		_chunk = chunk;
 		BuildMeshAndCollision();
 	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		_wallModel?.Delete();
+	}
+
 	public void BuildMeshAndCollision()
 	{
 		var marchingSquares = new MarchingSquares();
