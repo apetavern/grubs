@@ -54,7 +54,7 @@ public sealed partial class TerrainMain : Entity
 					_current = new TerrainMap( Rand.Int( 99999 ) );
 				}
 			}
-			catch( Exception e )
+			catch ( Exception e )
 			{
 				Log.Error( e );
 			}

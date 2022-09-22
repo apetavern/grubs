@@ -35,7 +35,7 @@ public sealed class GrubsGame : Game
 		{
 			BaseState.Init();
 			_ = new EventRunner();
-			
+
 			Rand.SetSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
 		}
 
@@ -87,7 +87,7 @@ public sealed class GrubsGame : Game
 		{
 			PremadeTerrain.Serialize( writer, TerrainMain.Current, preserveSettings );
 		}
-		catch( Exception e )
+		catch ( Exception e )
 		{
 			Log.Error( e );
 		}

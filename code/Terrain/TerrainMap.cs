@@ -130,7 +130,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 	private void AlteredGrid()
 	{
 		var regionGrid = new int[Width, Height];
-		
+
 		GenerateTurbulentNoise();
 		FindRegions( regionGrid );
 		DiscardRegions( regionGrid );
