@@ -405,7 +405,6 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 
 	public void Read( ref NetRead read )
 	{
-		Log.Info( "Updating" );
 		HasBorder = read.Read<bool>();
 		Scale = read.Read<int>();
 		TerrainType = (TerrainType)read.Read<int>();
