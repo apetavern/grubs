@@ -20,7 +20,7 @@ namespace Grubs;
 /// <summary>
 /// The official Sbox GOTY 2022, Grubs!
 /// </summary>
-public sealed partial class GrubsGame : Game
+public sealed class GrubsGame : Game
 {
 	/// <summary>
 	/// This game.
@@ -35,8 +35,7 @@ public sealed partial class GrubsGame : Game
 		{
 			BaseState.Init();
 			_ = new EventRunner();
-
-			// Set the Rand seed and Seed property so the terrain generation seed is synced between server and client.
+			
 			Rand.SetSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
 		}
 
