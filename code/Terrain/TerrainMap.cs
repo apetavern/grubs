@@ -2,22 +2,31 @@
 
 namespace Grubs.Terrain;
 
-public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 [Category( "Terrain" )]
+public sealed partial class TerrainMap : Entity
 {
-	public readonly int Seed;
+	[Net]
+	public int Seed { get; private set; }
 
-	public readonly bool Premade;
+	[Net]
+	public bool Premade { get; private set; }
 	public readonly PremadeTerrain? PremadeMap;
 
-	public bool[,] TerrainGrid { get; private set; } = null!;
+	public bool[] TerrainGrid { get; private set; } = null!;
 	public List<TerrainChunk> TerrainGridChunks { get; private set; } = null!;
 
+	[Net]
 	public int Width { get; private set; }
+	[Net]
 	public int Height { get; private set; }
-	public int Scale { get; private set; }
+	[Net]
+	public new int Scale { get; private set; }
+	[Net]
 	public bool HasBorder { get; private set; }
+	[Net]
 	public TerrainType TerrainType { get; private set; }
+
+	private readonly List<int> _pendingDestroyedIndexes = new();
 
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
@@ -26,9 +35,10 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 
 	public TerrainMap()
 	{
+		Transmit = TransmitType.Always;
 	}
 
-	public TerrainMap( int seed )
+	public TerrainMap( int seed ) : this()
 	{
 		Premade = false;
 		PremadeMap = null;
@@ -42,9 +52,11 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 		Seed = seed;
 		GenerateTerrainGrid();
 		AssignGridToChunks();
+
+		UpdateGridRpc( To.Everyone, TerrainGrid );
 	}
 
-	public TerrainMap( PremadeTerrain terrain )
+	public TerrainMap( PremadeTerrain terrain ) : this()
 	{
 		Premade = true;
 		PremadeMap = terrain;
@@ -58,6 +70,8 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 		TerrainGrid = terrain.TerrainGrid;
 		GenerateTerrainGrid();
 		AssignGridToChunks();
+
+		UpdateGridRpc( To.Everyone, TerrainGrid );
 	}
 
 	/// <summary>
@@ -67,7 +81,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 	{
 		if ( !Premade )
 		{
-			TerrainGrid = new bool[Width, Height];
+			TerrainGrid = new bool[Width * Height];
 
 			if ( GameConfig.AlteredTerrain )
 				AlteredGrid();
@@ -113,7 +127,7 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 			{
 				for ( var y = yOffset; y < yOffset + ChunkSize; y++ )
 				{
-					chunk.TerrainGrid[x % ChunkSize, y % ChunkSize] = TerrainGrid[x, y];
+					chunk.TerrainGrid[x % ChunkSize, y % ChunkSize] = TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )];
 				}
 			}
 
@@ -147,21 +161,21 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 		var res = GameConfig.TerrainResolution;
 
 		for ( var x = 0; x < Width; x++ )
-			for ( var z = 0; z < Height; z++ )
-				TerrainGrid[x, z] = Noise.Simplex( (x + Seed) * res, (z + Seed) * res ) > SurfaceLevel;
+			for ( var y = 0; y < Height; y++ )
+				TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] = Noise.Simplex( (x + Seed) * res, (y + Seed) * res ) > SurfaceLevel;
 	}
 
 	private void AddBorder()
 	{
-		var borderedMap = new bool[Width + BorderWidth * 2, Height + BorderWidth * 2];
-		for ( var x = 0; x < borderedMap.GetLength( 0 ); x++ )
-			for ( var z = 0; z < borderedMap.GetLength( 1 ); z++ )
-			{
-				if ( x >= BorderWidth && x < Width + BorderWidth && z >= BorderWidth && z < Height + BorderWidth )
-					borderedMap[x, z] = TerrainGrid[x - BorderWidth, z - BorderWidth];
-				else
-					borderedMap[x, z] = true;
-			}
+		var borderedMap = new bool[(Width + BorderWidth * 2) * (Height + BorderWidth * 2)];
+		for ( var i = 0; i < borderedMap.Length; i++ )
+		{
+			var (x, y) = Dimensions.Convert1dTo2d( i, Width );
+			if ( x >= BorderWidth && x < Width + BorderWidth && y >= BorderWidth && y < Height + BorderWidth )
+				borderedMap[i] = TerrainGrid[Dimensions.Convert2dTo1d( x - BorderWidth, y - BorderWidth, Width )];
+			else
+				borderedMap[i] = true;
+		}
 
 		TerrainGrid = borderedMap;
 	}
@@ -178,11 +192,11 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 		var res = GameConfig.TerrainResolution;
 
 		for ( var x = 0; x < Width; x++ )
-			for ( var z = 0; z < Height; z++ )
+			for ( var y = 0; y < Height; y++ )
 			{
-				var n = Noise.Simplex( (x + Seed) * res, (z + Seed) * res );
+				var n = Noise.Simplex( (x + Seed) * res, (y + Seed) * res );
 				n = Math.Abs( (n * 2) - 1 );
-				TerrainGrid[x, z] = n > NoiseThreshold;
+				TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] = n > NoiseThreshold;
 			}
 	}
 
@@ -196,8 +210,8 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 		var queue = new Queue<IntVector2>();
 
 		for ( var x = 0; x < Width; x++ )
-			for ( var z = 0; z < Height; z++ )
-				regionGrid[x, z] = TerrainGrid[x, z] ? 1 : 0;
+			for ( var y = 0; y < Height; y++ )
+				regionGrid[x, y] = TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] ? 1 : 0;
 
 		for ( var x = 0; x < Width; x++ )
 			for ( var z = 0; z < Height; z++ )
@@ -267,9 +281,9 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 					regionIdsToKeep.Add( regionGrid[x, z] );
 
 		for ( var x = 0; x < Width; x++ )
-			for ( var z = 0; z < Height; z++ )
-				if ( !regionIdsToKeep.Contains( regionGrid[x, z] ) )
-					TerrainGrid[x, z] = false;
+			for ( var y = 0; y < Height; y++ )
+				if ( !regionIdsToKeep.Contains( regionGrid[x, y] ) )
+					TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] = false;
 	}
 
 	/// <summary>
@@ -280,12 +294,12 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 		var positionsToDilate = new List<IntVector2>();
 
 		for ( var x = 0; x < Width; x++ )
-			for ( var z = 0; z < Height; z++ )
-				if ( TerrainGrid[x, z] )
-					CheckForDilationPosition( positionsToDilate, x, z );
+			for ( var y = 0; y < Height; y++ )
+				if ( TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] )
+					CheckForDilationPosition( positionsToDilate, x, y );
 
 		foreach ( var position in positionsToDilate )
-			TerrainGrid[position.X, position.Y] = true;
+			TerrainGrid[Dimensions.Convert2dTo1d( position.X, position.Y, Width )] = true;
 	}
 
 	/// <summary>
@@ -320,24 +334,21 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 	{
 		var modifiedTerrain = false;
 
-		for ( var i = 0; i < TerrainGrid.GetLength( 0 ); i++ )
+		for ( var i = 0; i < TerrainGrid.Length; i++ )
 		{
-			for ( var j = 0; j < TerrainGrid.GetLength( 1 ); j++ )
-			{
-				var xDiff = midpoint.x - (i * Scale);
-				var yDiff = midpoint.y - (j * Scale);
-				var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
+			var (x, y) = Dimensions.Convert1dTo2d( i, Width );
+			var xDiff = midpoint.x - (x * Scale);
+			var yDiff = midpoint.y - (y * Scale);
+			var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
 
-				if ( d >= size || !TerrainGrid[i, j] )
-					continue;
+			if ( d >= size || !TerrainGrid[i] )
+				continue;
 
-				TerrainGrid[i, j] = false;
-				modifiedTerrain |= TogglePointInChunks( i, j );
-			}
+			_pendingDestroyedIndexes.Add( i );
+			TerrainGrid[i] = false;
+			modifiedTerrain |= TogglePointInChunks( x, y );
 		}
 
-		if ( modifiedTerrain )
-			WriteNetworkData();
 		return modifiedTerrain;
 	}
 
@@ -348,14 +359,13 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 		var zR = z % ChunkSize;
 
 		var chunk = TerrainGridChunks[n];
-		if ( chunk.TerrainGrid[xR, zR] )
-		{
-			chunk.TerrainGrid[xR, zR] = false;
-			chunk.IsDirty = true;
-			return true;
-		}
+		if ( !chunk.TerrainGrid[xR, zR] )
+			return false;
 
-		return false;
+		chunk.TerrainGrid[xR, zR] = false;
+		chunk.IsDirty = true;
+		return true;
+
 	}
 
 	/// <summary>
@@ -378,8 +388,6 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 			modifiedTerrain |= DestructSphere( pos, width );
 		}
 
-		if ( modifiedTerrain )
-			WriteNetworkData();
 		return modifiedTerrain;
 	}
 
@@ -390,47 +398,50 @@ public sealed class TerrainMap : BaseNetworkable, INetworkSerializer
 	/// <returns>A Vector3 position a Grub can be spawned at.</returns>
 	public Vector3 GetSpawnLocation()
 	{
+		return Vector3.Zero;
 		while ( true )
 		{
 			var x = Rand.Int( Width - 1 );
-			var z = Rand.Int( Height - 1 );
-			if ( TerrainGrid[x, z] )
+			var y = Rand.Int( Height - 1 );
+			if ( TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] )
 				continue;
 
-			var startPos = new Vector3( x * Scale, 0, z * Scale );
+			var startPos = new Vector3( x * Scale, 0, y * Scale );
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * Height * Scale ).WithTag( "solid" ).Run();
 			if ( tr.Hit )
 				return tr.EndPosition;
 		}
 	}
 
-	public void Read( ref NetRead read )
+	[Event.Tick.Server]
+	private void ServerTick()
 	{
-		HasBorder = read.Read<bool>();
-		Scale = read.Read<int>();
-		TerrainType = (TerrainType)read.Read<int>();
-		Width = read.Read<int>();
-		Height = read.Read<int>();
+		if ( _pendingDestroyedIndexes.Count == 0 )
+			return;
 
-		TerrainGrid = new bool[Width, Height];
-		for ( var x = 0; x < Width; x++ )
-			for ( var y = 0; y < Height; y++ )
-				TerrainGrid[x, y] = read.Read<bool>();
+		UpdateDestroyedIndexesRpc( To.Everyone, _pendingDestroyedIndexes.ToArray() );
+		_pendingDestroyedIndexes.Clear();
+	}
+
+	[ClientRpc]
+	public void UpdateGridRpc( bool[] terrainGrid )
+	{
+		TerrainGrid = terrainGrid;
 		AssignGridToChunks();
 		TerrainMain.Initialize();
 	}
 
-	public void Write( NetWrite write )
+	[ClientRpc]
+	private void UpdateDestroyedIndexesRpc( int[] destroyedIndexes )
 	{
-		write.Write( HasBorder );
-		write.Write( Scale );
-		write.Write( (int)TerrainType );
-		write.Write( Width );
-		write.Write( Height );
+		foreach ( var index in destroyedIndexes )
+		{
+			TerrainGrid[index] = false;
+			var (x, y) = Dimensions.Convert1dTo2d( index, Width );
+			TogglePointInChunks( x, y );
+		}
 
-		for ( var x = 0; x < Width; x++ )
-			for ( var y = 0; y < Height; y++ )
-				write.Write( TerrainGrid[x, y] );
+		TerrainMain.RefreshDirtyChunks();
 	}
 
 	private readonly struct IntVector2
