@@ -41,22 +41,12 @@ public static partial class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		TerrainMain.ExplodeClient( To.Everyone, midpoint, radius );
 		if ( TerrainMain.Current.DestructSphere( midpoint, radius ) )
 			TerrainMain.RefreshDirtyChunks();
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
 		DoExplosionEffectsAt( To.Everyone, position, radius );
-	}
-
-	public static void DrawLine( Vector3 startpos, Vector3 endpos, float width )
-	{
-		Host.AssertServer();
-
-		TerrainMain.LineClient( To.Everyone, startpos, endpos, width );
-		if ( TerrainMain.Current.DestructLine( startpos, endpos, width ) )
-			TerrainMain.RefreshDirtyChunks();
 	}
 
 	/// <summary>

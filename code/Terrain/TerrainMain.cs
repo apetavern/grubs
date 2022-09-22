@@ -10,19 +10,9 @@ public static partial class TerrainMain
 	/// </summary>
 	public static TerrainMap Current { get; set; } = null!;
 
-	/// <summary>
-	/// The seed used to create the terrain map.
-	/// </summary>
-	public static int Seed
 	{
-		get => _seed;
-		set
 		{
-			SetSeedRpc( To.Everyone, value );
-			_seed = value;
 		}
-	}
-	private static int _seed;
 
 	private static List<TerrainModel> TerrainModels { get; set; } = null!;
 
@@ -57,40 +47,5 @@ public static partial class TerrainMain
 			TerrainModels[i] = new TerrainModel( chunk );
 			chunk.IsDirty = false;
 		}
-	}
-
-	/// <summary>
-	/// The client receiver to seed the terrain generation seed.
-	/// </summary>
-	/// <param name="seed">The new seed for the terrain generation.</param>
-	[ClientRpc]
-	public static void SetSeedRpc( int seed )
-	{
-		_seed = seed;
-	}
-
-	/// <summary>
-	/// The client receiver to explode a portion of the terrain map.
-	/// </summary>
-	/// <param name="midpoint">The center point of the explosion.</param>
-	/// <param name="size">How big the explosion was.</param>
-	[ClientRpc]
-	public static void ExplodeClient( Vector2 midpoint, float size )
-	{
-		if ( Current.DestructSphere( midpoint, size ) )
-			RefreshDirtyChunks();
-	}
-
-	/// <summary>
-	/// Destruct a sphere in the <see cref="TerrainMap"/>.
-	/// </summary>
-	/// <param name="startpoint">The start point of the line to be destructed.</param>
-	/// <param name="endPoint">The endpoint of the line to be destructed.</param>
-	/// <param name="width">The size (radius) of the sphere to be destructed.</param>
-	[ClientRpc]
-	public static void LineClient( Vector3 startpoint, Vector3 endPoint, float width )
-	{
-		if ( Current.DestructLine( startpoint, endPoint, width ) )
-			RefreshDirtyChunks();
 	}
 }
