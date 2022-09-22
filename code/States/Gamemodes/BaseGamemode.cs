@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Grubs.Crates;
 using Grubs.Player;
 using Grubs.Terrain;
