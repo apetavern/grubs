@@ -5,11 +5,13 @@ public sealed class TerrainChunk
 {
 	public readonly TerrainMap Map;
 
-	public bool[,] TerrainGrid { get; set; } = null!;
-	public Vector3 Position { get; set; }
+	public Vector3 Position { get; }
+	public bool[,] TerrainGrid { get; init; } = null!;
 
-	public TerrainChunk xNeighbour = null!, yNeighbour = null!, xyNeighbour = null!;
-	public bool IsDirty { get; set; } = false;
+	public TerrainChunk XNeighbour = null!;
+	public TerrainChunk YNeighbour = null!;
+	public TerrainChunk XyNeighbour = null!;
+	public bool IsDirty { get; set; }
 
 	public TerrainChunk( Vector3 position, TerrainMap map )
 	{

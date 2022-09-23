@@ -159,32 +159,32 @@ public sealed class MarchingSquares
 				// Cover neighbour cases for triangulating across chunks.
 				if ( x == terrainGrid.GetLength( 0 ) - 1 && z == terrainGrid.GetLength( 1 ) - 1 )
 				{
-					if ( chunk.xyNeighbour is not null )
+					if ( chunk.XyNeighbour is not null )
 					{
 						c1 = terrainGrid[x, z];
-						c2 = chunk.xyNeighbour.TerrainGrid[1, 0];
-						c3 = chunk.xyNeighbour.TerrainGrid[0, 0];
-						c4 = chunk.xyNeighbour.TerrainGrid[0, 1];
+						c2 = chunk.XyNeighbour.TerrainGrid[1, 0];
+						c3 = chunk.XyNeighbour.TerrainGrid[0, 0];
+						c4 = chunk.XyNeighbour.TerrainGrid[0, 1];
 					}
 				}
 				else if ( x == terrainGrid.GetLength( 0 ) - 1 )
 				{
-					if ( chunk.xNeighbour is not null )
+					if ( chunk.XNeighbour is not null )
 					{
 						c1 = terrainGrid[x, z];
-						c2 = chunk.xNeighbour.TerrainGrid[0, z];
-						c3 = chunk.xNeighbour.TerrainGrid[0, z + 1];
+						c2 = chunk.XNeighbour.TerrainGrid[0, z];
+						c3 = chunk.XNeighbour.TerrainGrid[0, z + 1];
 						c4 = terrainGrid[x, z + 1];
 					}
 				}
 				else if ( z == terrainGrid.GetLength( 1 ) - 1 )
 				{
-					if ( chunk.yNeighbour is not null )
+					if ( chunk.YNeighbour is not null )
 					{
 						c1 = terrainGrid[x, z];
 						c2 = terrainGrid[x + 1, z];
-						c3 = chunk.yNeighbour.TerrainGrid[x + 1, 0];
-						c4 = chunk.yNeighbour.TerrainGrid[x, 0];
+						c3 = chunk.YNeighbour.TerrainGrid[x + 1, 0];
+						c4 = chunk.YNeighbour.TerrainGrid[x, 0];
 					}
 				}
 				else

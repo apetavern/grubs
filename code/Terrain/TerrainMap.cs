@@ -77,7 +77,7 @@ public sealed partial class TerrainMap : Entity
 	/// <summary>
 	/// Generate a terrain grid based on various game configuration options.
 	/// </summary>
-	public void GenerateTerrainGrid()
+	private void GenerateTerrainGrid()
 	{
 		if ( !Premade )
 		{
@@ -111,15 +111,15 @@ public sealed partial class TerrainMap : Entity
 			// Set chunk neighbours for the purpose of connecting chunks.
 			if ( xOffset > 0 )
 			{
-				TerrainGridChunks[i - 1].xNeighbour = chunk;
+				TerrainGridChunks[i - 1].XNeighbour = chunk;
 			}
 
 			if ( yOffset > 0 )
 			{
-				TerrainGridChunks[i - (Width / ChunkSize)].yNeighbour = chunk;
+				TerrainGridChunks[i - (Width / ChunkSize)].YNeighbour = chunk;
 				if ( xOffset > 0 )
 				{
-					TerrainGridChunks[i - (Width / ChunkSize) - 1].xyNeighbour = chunk;
+					TerrainGridChunks[i - (Width / ChunkSize) - 1].XyNeighbour = chunk;
 				}
 			}
 
@@ -356,21 +356,6 @@ public sealed partial class TerrainMap : Entity
 		return modifiedTerrain;
 	}
 
-	private bool TogglePointInChunks( int x, int z )
-	{
-		var n = (x / ChunkSize) + (z / ChunkSize * (Width / ChunkSize));
-		var xR = x % ChunkSize;
-		var zR = z % ChunkSize;
-
-		var chunk = TerrainGridChunks[n];
-		if ( !chunk.TerrainGrid[xR, zR] )
-			return false;
-
-		chunk.TerrainGrid[xR, zR] = false;
-		chunk.IsDirty = true;
-		return true;
-	}
-
 	/// <summary>
 	/// Destruct a sphere in the terrain grid.
 	/// </summary>
@@ -388,7 +373,7 @@ public sealed partial class TerrainMap : Entity
 		{
 			var currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
 			var pos = new Vector2( currentPoint.x, currentPoint.z );
-			modifiedTerrain |= DestructSphere( pos, width );
+			modifiedTerrain |= DestructCircle( pos, width );
 		}
 
 		return modifiedTerrain;
@@ -451,6 +436,21 @@ public sealed partial class TerrainMap : Entity
 			if ( tr.Hit )
 				return tr.EndPosition;
 		}
+	}
+
+	private bool TogglePointInChunks( int x, int z )
+	{
+		var n = (x / ChunkSize) + (z / ChunkSize * (Width / ChunkSize));
+		var xR = x % ChunkSize;
+		var zR = z % ChunkSize;
+
+		var chunk = TerrainGridChunks[n];
+		if ( !chunk.TerrainGrid[xR, zR] )
+			return false;
+
+		chunk.TerrainGrid[xR, zR] = false;
+		chunk.IsDirty = true;
+		return true;
 	}
 
 	[Event.Tick.Server]
