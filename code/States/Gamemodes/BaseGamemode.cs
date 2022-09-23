@@ -72,7 +72,7 @@ public abstract partial class BaseGamemode : BaseState
 			base.Enter( forced, parameters );
 			return;
 		}
-		
+
 		if ( GameConfig.TerrainFile != string.Empty )
 		{
 			var terrainFile = GameConfig.TerrainFile;
