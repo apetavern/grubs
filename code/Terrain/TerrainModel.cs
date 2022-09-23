@@ -1,24 +1,34 @@
-﻿namespace Grubs.Terrain;
+﻿using Grubs.States;
+
+namespace Grubs.Terrain;
 
 /// <summary>
 /// 
 /// </summary>
 [Category( "Terrain" )]
-public sealed class TerrainModel : ModelEntity
+public sealed partial class TerrainModel : ModelEntity
 {
-	private readonly TerrainChunk _chunk = null!;
-	private readonly TerrainWallModel _wallModel = null!;
+	[Net]
+	private TerrainMap Map { get; set; } = null!;
+	[Net]
+	private int ChunkIndex { get; set; }
+	[Net]
+	private TerrainWallModel _wallModel { get; set; } = null!;
+
+	private TerrainChunk Chunk => Map.TerrainGridChunks[ChunkIndex];
 
 	public TerrainModel()
 	{
-		Transmit = TransmitType.Never;
+		Transmit = TransmitType.Always;
 	}
 
-	public TerrainModel( TerrainChunk chunk ) : this()
+	public TerrainModel( TerrainMap map, int chunkIndex ) : this()
 	{
+		Map = map;
+		ChunkIndex = chunkIndex;
+
 		Tags.Add( "solid" );
-		_chunk = chunk;
-		_wallModel = new TerrainWallModel { Position = chunk.Position };
+		_wallModel = new TerrainWallModel { Position = Chunk.Position };
 
 		RefreshModel();
 	}
@@ -27,7 +37,8 @@ public sealed class TerrainModel : ModelEntity
 	{
 		base.OnDestroy();
 
-		_wallModel.Delete();
+		if ( IsServer )
+			_wallModel.Delete();
 	}
 
 	/// <summary>
@@ -35,12 +46,22 @@ public sealed class TerrainModel : ModelEntity
 	/// </summary>
 	public void RefreshModel()
 	{
-		Position = _chunk.Position;
+		if ( IsServer )
+		{
+			RefreshModelRpc( To.Everyone );
+			Position = Chunk.Position;
+		}
 
 		var marchingSquares = new MarchingSquares();
-		Model = marchingSquares.GenerateModel( _chunk );
+		Model = marchingSquares.GenerateModel( Chunk );
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-		_wallModel.RefreshModel( _chunk, marchingSquares );
+		_wallModel.RefreshModel( Chunk, marchingSquares );
+	}
+
+	[ClientRpc]
+	private void RefreshModelRpc()
+	{
+		RefreshModel();
 	}
 }

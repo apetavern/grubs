@@ -8,7 +8,13 @@ public sealed class TerrainWallModel : ModelEntity
 {
 	public TerrainWallModel()
 	{
-		Transmit = TransmitType.Never;
+		Transmit = TransmitType.Always;
+	}
+
+	public override void Spawn()
+	{
+		base.Spawn();
+
 		Tags.Add( "solid" );
 	}
 
