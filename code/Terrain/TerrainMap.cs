@@ -61,6 +61,7 @@ public sealed partial class TerrainMap : Entity
 	[Net]
 	public TerrainType TerrainType { get; private set; }
 
+	private readonly List<TerrainModel> _terrainModels = new();
 	private readonly List<int> _pendingDestroyedIndices = new();
 
 	private const float SurfaceLevel = 0.50f;
@@ -89,6 +90,7 @@ public sealed partial class TerrainMap : Entity
 		AssignGridToChunks();
 
 		UpdateGridRpc( To.Everyone, TerrainGrid );
+		InitializeModels();
 	}
 
 	public TerrainMap( PremadeTerrain terrain ) : this()
@@ -107,6 +109,7 @@ public sealed partial class TerrainMap : Entity
 		AssignGridToChunks();
 
 		UpdateGridRpc( To.Everyone, TerrainGrid );
+		InitializeModels();
 	}
 
 	/// <summary>
@@ -493,6 +496,34 @@ public sealed partial class TerrainMap : Entity
 		return true;
 	}
 
+	private void InitializeModels()
+	{
+		foreach ( var model in _terrainModels )
+			model.Delete();
+		_terrainModels.Clear();
+
+		foreach ( var chunk in TerrainGridChunks )
+		{
+			var terrainModel = new TerrainModel( chunk );
+			_terrainModels.Add( terrainModel );
+		}
+	}
+
+	private void RefreshDirtyChunks()
+	{
+		for ( var i = 0; i < TerrainGridChunks.Count; i++ )
+		{
+			var chunk = TerrainGridChunks[i];
+			if ( !chunk.IsDirty )
+				continue;
+
+			_terrainModels[i].DestroyMeshAndCollision();
+			_terrainModels[i].Delete();
+			_terrainModels[i] = new TerrainModel( chunk );
+			chunk.IsDirty = false;
+		}
+	}
+
 	[Event.Tick.Server]
 	private void ServerTick()
 	{
@@ -501,6 +532,7 @@ public sealed partial class TerrainMap : Entity
 
 		UpdateDestroyedIndexesRpc( To.Everyone, _pendingDestroyedIndices.ToArray() );
 		_pendingDestroyedIndices.Clear();
+		RefreshDirtyChunks();
 	}
 
 	/// <summary>
@@ -512,7 +544,7 @@ public sealed partial class TerrainMap : Entity
 	{
 		TerrainGrid = terrainGrid;
 		AssignGridToChunks();
-		TerrainMain.Initialize();
+		InitializeModels();
 	}
 
 	[ClientRpc]
@@ -525,6 +557,6 @@ public sealed partial class TerrainMap : Entity
 			TogglePointInChunks( x, y );
 		}
 
-		TerrainMain.RefreshDirtyChunks();
+		RefreshDirtyChunks();
 	}
 }

@@ -68,41 +68,4 @@ public sealed partial class TerrainMain : Entity
 		else
 			Current = new TerrainMap( Rand.Int( 99999 ) );
 
-		Initialize();
 	}
-
-	/// <summary>
-	/// Initializes the terrain models.
-	/// </summary>
-	public static void Initialize()
-	{
-		foreach ( var model in TerrainModels )
-			model.Delete();
-		TerrainModels.Clear();
-
-		foreach ( var chunk in Instance.Current.TerrainGridChunks )
-		{
-			var terrainModel = new TerrainModel( chunk );
-			TerrainModels.Add( terrainModel );
-		}
-	}
-
-	/// <summary>
-	/// Refreshes any chunks that have changed and need re-making.
-	/// </summary>
-	public static void RefreshDirtyChunks()
-	{
-		var chunks = Instance.Current.TerrainGridChunks;
-		for ( var i = 0; i < chunks.Count; i++ )
-		{
-			var chunk = chunks[i];
-			if ( !chunk.IsDirty )
-				continue;
-
-			TerrainModels[i].DestroyMeshAndCollision();
-			TerrainModels[i].Delete();
-			TerrainModels[i] = new TerrainModel( chunk );
-			chunk.IsDirty = false;
-		}
-	}
-}

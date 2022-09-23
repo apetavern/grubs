@@ -42,7 +42,6 @@ public static partial class ExplosionHelper
 
 		var midpoint = new Vector3( position.x, position.z );
 		if ( TerrainMain.Instance.Current.DestructCircle( midpoint, radius ) )
-			TerrainMain.RefreshDirtyChunks();
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );

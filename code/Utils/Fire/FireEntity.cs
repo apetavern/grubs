@@ -101,8 +101,5 @@ public sealed class FireEntity : ModelEntity, IResolvable
 			MoveDirection += Vector3.Down * 2.5f;
 			MoveDirection = MoveDirection.Normal * 10f;
 		}
-
-		if ( didDamage )
-			TerrainMain.RefreshDirtyChunks();
 	}
 }
