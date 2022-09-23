@@ -26,7 +26,7 @@ public sealed partial class TerrainMap : Entity
 	[Net]
 	public TerrainType TerrainType { get; private set; }
 
-	private readonly List<int> _pendingDestroyedIndexes = new();
+	private readonly List<int> _pendingDestroyedIndices = new();
 
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
@@ -342,7 +342,7 @@ public sealed partial class TerrainMap : Entity
 		var modifiedTerrain = false;
 		var scaledSize = (int)Math.Round( size / Scale );
 
-		foreach ( var index in GetIndexesInCircle( centerIndex, scaledSize ) )
+		foreach ( var index in GetIndicesInCircle( centerIndex, scaledSize ) )
 		{
 			if ( !TerrainGrid[index] )
 				continue;
@@ -385,7 +385,7 @@ public sealed partial class TerrainMap : Entity
 	/// <param name="centerIndex"></param>
 	/// <param name="radius"></param>
 	/// <returns></returns>
-	public IEnumerable<int> GetIndexesInCircle( int centerIndex, int radius )
+	public IEnumerable<int> GetIndicesInCircle( int centerIndex, int radius )
 	{
 		var (xCenter, yCenter) = Dimensions.Convert1dTo2d( centerIndex, Width );
 		for ( var x = xCenter - radius; x <= xCenter; x++ )
@@ -456,11 +456,11 @@ public sealed partial class TerrainMap : Entity
 	[Event.Tick.Server]
 	private void ServerTick()
 	{
-		if ( _pendingDestroyedIndexes.Count == 0 )
+		if ( _pendingDestroyedIndices.Count == 0 )
 			return;
 
-		UpdateDestroyedIndexesRpc( To.Everyone, _pendingDestroyedIndexes.ToArray() );
-		_pendingDestroyedIndexes.Clear();
+		UpdateDestroyedIndexesRpc( To.Everyone, _pendingDestroyedIndices.ToArray() );
+		_pendingDestroyedIndices.Clear();
 	}
 
 	[ClientRpc]
@@ -483,5 +483,4 @@ public sealed partial class TerrainMap : Entity
 
 		TerrainMain.RefreshDirtyChunks();
 	}
-
 }
