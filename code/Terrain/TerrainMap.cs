@@ -341,12 +341,12 @@ public sealed partial class TerrainMap : Entity
 
 		var modifiedTerrain = false;
 		var scaledSize = (int)Math.Round( size / Scale );
-		
+
 		foreach ( var index in GetIndexesInCircle( centerIndex, scaledSize ) )
 		{
 			if ( !TerrainGrid[index] )
 				continue;
-			
+
 			_pendingDestroyedIndexes.Add( index );
 			TerrainGrid[index] = false;
 			var (x, y) = Dimensions.Convert1dTo2d( index, Width );
@@ -393,7 +393,7 @@ public sealed partial class TerrainMap : Entity
 
 		return modifiedTerrain;
 	}
-	
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -409,10 +409,10 @@ public sealed partial class TerrainMap : Entity
 			{
 				if ( (x - xCenter) * (x - xCenter) + (y - yCenter) * (y - yCenter) > radius * radius )
 					continue;
-				
+
 				var xSym = xCenter - (x - xCenter);
 				var ySym = yCenter - (y - yCenter);
-				
+
 				var first = Dimensions.Convert2dTo1d( x, y, Width );
 				if ( first >= 0 && first < TerrainGrid.Length )
 					yield return first;
