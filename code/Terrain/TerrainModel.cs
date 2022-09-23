@@ -28,12 +28,12 @@ public sealed class TerrainModel : ModelEntity
 	public void BuildMeshAndCollision()
 	{
 		var marchingSquares = new MarchingSquares();
-		Model = marchingSquares.GenerateModel( _chunk.Map, _chunk );
+		Model = marchingSquares.GenerateModel( _chunk );
 		Position = _chunk.Position;
 
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-		_wallModel = new TerrainWallModel( _chunk.Map, marchingSquares ) { Position = _chunk.Position };
+		_wallModel = new TerrainWallModel( _chunk, marchingSquares ) { Position = _chunk.Position };
 	}
 
 	// Weird hack since the old models don't delete properly?

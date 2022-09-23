@@ -8,9 +8,9 @@ public sealed class TerrainWallModel : ModelEntity
 		Transmit = TransmitType.Never;
 	}
 
-	public TerrainWallModel( TerrainMap map, MarchingSquares marchingSquares ) : this()
+	public TerrainWallModel( TerrainChunk chunk, MarchingSquares marchingSquares ) : this()
 	{
-		Model = marchingSquares.CreateWallModel( map );
+		Model = marchingSquares.CreateWallModel( chunk );
 		Tags.Add( "solid" );
 
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
