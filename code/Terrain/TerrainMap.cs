@@ -475,9 +475,23 @@ public sealed partial class TerrainMap : Entity
 
 	{
 
-		var chunk = _terrainGridChunks[n];
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="index"></param>
+	/// <returns></returns>
+	public bool DestructPoint( int index )
+	{
+		if ( !TerrainGrid[index] )
 			return false;
 
+		if ( IsServer )
+			_pendingDestroyedIndices.Add( index );
+
+		TerrainGrid[index] = false;
+		var (x, y) = Dimensions.Convert1dTo2d( index, Width );
+		var n = (x / ChunkSize) + (y / ChunkSize * (Width / ChunkSize));
+		_dirtyChunks.Add( n );
 		return true;
 	}
 
