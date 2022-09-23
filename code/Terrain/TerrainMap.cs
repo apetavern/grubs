@@ -330,7 +330,7 @@ public sealed partial class TerrainMap : Entity
 	/// <param name="midpoint">The Vector2 midpoint of the sphere to be destructed.</param>
 	/// <param name="size">The size (radius) of the sphere to be destructed.</param>
 	/// <returns>Whether or not the terrain has been modified.</returns>
-	public bool DestructSphere( Vector2 midpoint, float size )
+	public bool DestructCircle( Vector2 midpoint, float size )
 	{
 		var scaledMidpoint = midpoint / Scale;
 		var centerIndex = Dimensions.Convert2dTo1d( (int)MathF.Round( scaledMidpoint.x, 0 ), (int)MathF.Round( scaledMidpoint.y, 0 ), Width );
