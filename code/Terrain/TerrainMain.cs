@@ -10,13 +10,9 @@ namespace Grubs.Terrain;
 public sealed partial class TerrainMain : Entity
 {
 	public static TerrainMain Instance = null!;
-	public static TerrainMap Current => Instance._current;
-
-	/// <summary>
-	/// The <see cref="TerrainMap"/> in the world.
-	/// </summary>
+	
 	[Net]
-	private TerrainMap _current { get; set; } = null!;
+	public TerrainMap Current { get; set; } = null!;
 
 	private static List<TerrainModel> TerrainModels { get; set; } = new();
 
@@ -41,17 +37,17 @@ public sealed partial class TerrainMain : Entity
 				if ( FileSystem.Mounted.FileExists( terrainFile ) )
 				{
 					reader = new BinaryReader( FileSystem.Mounted.OpenRead( terrainFile ) );
-					_current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
+					Current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
 				}
 				else if ( FileSystem.Data.FileExists( terrainFile ) )
 				{
 					reader = new BinaryReader( FileSystem.Data.OpenRead( terrainFile ) );
-					_current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
+					Current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
 				}
 				else
 				{
 					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
-					_current = new TerrainMap( Rand.Int( 99999 ) );
+					Current = new TerrainMap( Rand.Int( 99999 ) );
 				}
 			}
 			catch ( Exception e )
@@ -64,7 +60,7 @@ public sealed partial class TerrainMain : Entity
 			}
 		}
 		else
-			_current = new TerrainMap( Rand.Int( 99999 ) );
+			Current = new TerrainMap( Rand.Int( 99999 ) );
 
 		Initialize();
 	}
@@ -78,7 +74,7 @@ public sealed partial class TerrainMain : Entity
 			model.Delete();
 		TerrainModels.Clear();
 
-		foreach ( var chunk in Current.TerrainGridChunks )
+		foreach ( var chunk in Instance.Current.TerrainGridChunks )
 		{
 			var terrainModel = new TerrainModel( chunk );
 			TerrainModels.Add( terrainModel );
@@ -90,7 +86,7 @@ public sealed partial class TerrainMain : Entity
 	/// </summary>
 	public static void RefreshDirtyChunks()
 	{
-		var chunks = Current.TerrainGridChunks;
+		var chunks = Instance.Current.TerrainGridChunks;
 		for ( var i = 0; i < chunks.Count; i++ )
 		{
 			var chunk = chunks[i];

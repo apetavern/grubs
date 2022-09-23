@@ -256,7 +256,7 @@ public sealed partial class Team : Entity, ISpectator
 	{
 		var spawnLocations = new List<Vector3>();
 		while ( spawnLocations.Count < num )
-			spawnLocations.Add( TerrainMain.Current.GetSpawnLocation() );
+			spawnLocations.Add( TerrainMain.Instance.Current.GetSpawnLocation() );
 		return spawnLocations;
 	}
 

@@ -163,7 +163,7 @@ public partial class HitscanWeapon : GrubWeapon
 
 			if ( PenetrateTerrain )
 			{
-				if ( TerrainMain.Current.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius ) )
+				if ( TerrainMain.Instance.Current.DestructLine( muzzle.Position.WithY( 0 ), muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread, ExplosionRadius ) )
 					TerrainMain.RefreshDirtyChunks();
 			}
 			else if ( result.Hit )

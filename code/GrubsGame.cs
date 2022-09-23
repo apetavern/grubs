@@ -88,7 +88,7 @@ public sealed class GrubsGame : Game
 		var writer = new BinaryWriter( FileSystem.Data.OpenWrite( fileName ) );
 		try
 		{
-			PremadeTerrain.Serialize( writer, TerrainMain.Current, preserveSettings );
+			PremadeTerrain.Serialize( writer, TerrainMain.Instance.Current, preserveSettings );
 		}
 		catch ( Exception e )
 		{

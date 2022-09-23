@@ -68,7 +68,7 @@ public sealed class MarchingSquares
 			return _builder.Create();
 
 		// TODO: Calculate normal/tangent.
-		var mesh = new Mesh( Material.Load( TerrainMain.Current.TerrainType.GetMaterial() ) )
+		var mesh = new Mesh( Material.Load( TerrainMain.Instance.Current.TerrainType.GetMaterial() ) )
 		{
 			Bounds = new BBox( new Vector3( 0, LocalY, 0 ), new Vector3( Width * scale, LocalY + 64, Height * scale ) )
 		};
@@ -117,9 +117,10 @@ public sealed class MarchingSquares
 				vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left, new Vector2( 0, 0 ) ) );
 			}
 
-			var wallMesh = new Mesh( Material.Load( TerrainMain.Current.TerrainType.GetMaterial() ) )
+			var terrainScale = TerrainMain.Instance.Current.Scale;
+			var wallMesh = new Mesh( Material.Load( TerrainMain.Instance.Current.TerrainType.GetMaterial() ) )
 			{
-				Bounds = new BBox( 0, new Vector3( Width * TerrainMain.Current.Scale, wallHeight, Height * TerrainMain.Current.Scale ) )
+				Bounds = new BBox( 0, new Vector3( Width * terrainScale, wallHeight, Height * terrainScale ) )
 			};
 
 			wallMesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
