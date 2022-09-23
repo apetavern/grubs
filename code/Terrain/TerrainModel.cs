@@ -1,6 +1,4 @@
-﻿using Grubs.States;
-
-namespace Grubs.Terrain;
+﻿namespace Grubs.Terrain;
 
 /// <summary>
 /// 

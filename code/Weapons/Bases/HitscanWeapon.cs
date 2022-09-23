@@ -1,6 +1,5 @@
 ﻿using Grubs.Player;
 using Grubs.States;
-using Grubs.Terrain;
 using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
