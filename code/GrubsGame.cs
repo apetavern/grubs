@@ -84,7 +84,7 @@ public sealed class GrubsGame : Game
 	{
 		if ( BaseGamemode.Instance is null )
 			return;
-		
+
 		var writer = new BinaryWriter( FileSystem.Data.OpenWrite( fileName ) );
 		try
 		{

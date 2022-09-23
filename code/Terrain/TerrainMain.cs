@@ -10,7 +10,7 @@ namespace Grubs.Terrain;
 public sealed partial class TerrainMain : Entity
 {
 	public static TerrainMain Instance = null!;
-	
+
 	[Net]
 	public TerrainMap Current { get; set; } = null!;
 
