@@ -22,8 +22,7 @@
 		HoldPose = "Throwable"
 		Uses = 1
 		DropChance = 0
-		HasReticle = false
-		UnequipAfter = 0.3
+		HasReticle = true
 		InfiniteAmmo = true
 		FireSound = resource:"weapons/rust_flashlight/sounds/rust_flashlight.attack.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
