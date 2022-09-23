@@ -65,7 +65,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 
 		var midpoint = new Vector3( _desiredPosition.x, _desiredPosition.z );
 
-		var didDamage = TerrainMain.Instance.Current.DestructCircle( midpoint, fireSize );
+		BaseGamemode.Instance!.TerrainMap.DestructCircle( midpoint, fireSize );
 
 		var sourcePos = _desiredPosition;
 		foreach ( var grub in All.OfType<Grub>().Where( x => Vector3.DistanceBetween( sourcePos, x.Position ) <= fireSize ) )

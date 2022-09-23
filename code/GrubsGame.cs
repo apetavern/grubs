@@ -82,13 +82,13 @@ public sealed class GrubsGame : Game
 	[ConCmd.Admin( "save_gmap" )]
 	public static void SaveMap( string fileName, bool preserveSettings = true )
 	{
-		if ( BaseGamemode.Instance is null )
+		if ( BaseState.Instance is not BaseGamemode gamemode )
 			return;
 
 		var writer = new BinaryWriter( FileSystem.Data.OpenWrite( fileName ) );
 		try
 		{
-			PremadeTerrain.Serialize( writer, TerrainMain.Instance.Current, preserveSettings );
+			PremadeTerrain.Serialize( writer, gamemode.TerrainMap, preserveSettings );
 		}
 		catch ( Exception e )
 		{
