@@ -365,7 +365,6 @@ public sealed partial class TerrainMap : Entity
 		chunk.TerrainGrid[xR, zR] = false;
 		chunk.IsDirty = true;
 		return true;
-
 	}
 
 	/// <summary>
@@ -389,6 +388,32 @@ public sealed partial class TerrainMap : Entity
 		}
 
 		return modifiedTerrain;
+	}
+	
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="centerIndex"></param>
+	/// <param name="radius"></param>
+	/// <returns></returns>
+	public IEnumerable<int> GetIndexesInCircle( int centerIndex, int radius )
+	{
+		var (xCenter, yCenter) = Dimensions.Convert1dTo2d( centerIndex, Width );
+		for ( var x = xCenter - radius; x <= xCenter; x++ )
+		{
+			for ( var y = yCenter - radius; y <= yCenter; y++ )
+			{
+				if ( (x - xCenter) * (x - xCenter) + (y - yCenter) * (y - yCenter) > radius * radius )
+					continue;
+
+				var xSym = xCenter - (x - xCenter);
+				var ySym = yCenter - (y - yCenter);
+				yield return Dimensions.Convert2dTo1d( x, y, Width );
+				yield return Dimensions.Convert2dTo1d( x, ySym, Width );
+				yield return Dimensions.Convert2dTo1d( xSym, y, Width );
+				yield return Dimensions.Convert2dTo1d( xSym, ySym, Width );
+			}
+		}
 	}
 
 	/// <summary>
