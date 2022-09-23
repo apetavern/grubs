@@ -383,7 +383,7 @@ public sealed partial class TerrainMap : Entity
 		for ( var i = 0; i < stepCount; i++ )
 		{
 			var currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
-			var pos = new Vector3( currentPoint.x, currentPoint.z );
+			var pos = new Vector2( currentPoint.x, currentPoint.z );
 			modifiedTerrain |= DestructSphere( pos, width );
 		}
 
