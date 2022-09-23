@@ -524,7 +524,7 @@ public sealed partial class TerrainMap : Entity
 		if ( _pendingDestroyedIndices.Count == 0 )
 			return;
 
-		UpdateDestroyedIndexesRpc( To.Everyone, _pendingDestroyedIndices.ToArray() );
+		UpdateDestroyedIndicesRpc( To.Everyone, _pendingDestroyedIndices.ToArray() );
 		_pendingDestroyedIndices.Clear();
 		RefreshDirtyChunks();
 	}
@@ -541,9 +541,9 @@ public sealed partial class TerrainMap : Entity
 	}
 
 	[ClientRpc]
-	private void UpdateDestroyedIndexesRpc( int[] destroyedIndexes )
+	private void UpdateDestroyedIndicesRpc( int[] destroyedIndices )
 	{
-		foreach ( var index in destroyedIndexes )
-			DestructPoint( index );
+		foreach ( var index in destroyedIndices )
+			TerrainGrid[index] = false;
 	}
 }
