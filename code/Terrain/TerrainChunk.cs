@@ -1,4 +1,7 @@
-﻿namespace Grubs.Terrain;
+﻿using System.Collections.Immutable;
+using Grubs.Utils;
+
+namespace Grubs.Terrain;
 
 /// <summary>
 /// Represents a portion of a <see cref="TerrainMap"/>.
@@ -15,10 +18,15 @@ public sealed class TerrainChunk
 	/// The world position of the chunk.
 	/// </summary>
 	public readonly Vector3 Position;
+
 	/// <summary>
-	/// The internal terrain grid this chunk represents.
+	/// 
 	/// </summary>
-	public bool[,] TerrainGrid { get; init; } = null!;
+	public readonly int Width;
+	/// <summary>
+	/// 
+	/// </summary>
+	public readonly int Height;
 
 	/// <summary>
 	/// The x neighbour of the chunk.
@@ -37,10 +45,29 @@ public sealed class TerrainChunk
 	/// Whether or not this chunk has been changed.
 	/// </summary>
 	public bool IsDirty { get; set; }
+	private readonly ImmutableArray<int> _containedIndices;
 
-	public TerrainChunk( Vector3 position, TerrainMap map )
+	public bool this[int x, int y, bool relative = true]
+	{
+		get
+		{
+			var index = Dimensions.Convert2dTo1d( x, y, Map.Width );
+			if ( relative )
+				index += _containedIndices[0];
+
+			if ( !_containedIndices.Contains( index ) )
+				throw new ArgumentException( "Got invalid x, y to chunk accessor", $"{nameof( x )}, {nameof( y )}" );
+
+			return Map.TerrainGrid[index];
+		}
+	}
+
+	public TerrainChunk( TerrainMap map, Vector3 position, int width, int height, ImmutableArray<int> containedIndices )
 	{
 		Map = map;
 		Position = position;
+		Width = width;
+		Height = height;
+		_containedIndices = containedIndices;
 	}
 }

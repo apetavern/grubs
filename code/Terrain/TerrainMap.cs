@@ -1,4 +1,5 @@
-﻿using Grubs.Utils;
+﻿using System.Collections.Immutable;
+using Grubs.Utils;
 
 namespace Grubs.Terrain;
 
@@ -140,10 +141,13 @@ public sealed partial class TerrainMap : Entity
 		for ( var i = 0; i < chunkCount; i++ )
 		{
 			var chunkPos = new Vector3( xOffset * Scale, 0, yOffset * Scale );
-			var chunk = new TerrainChunk( chunkPos, this )
-			{
-				TerrainGrid = new bool[ChunkSize, ChunkSize]
-			};
+
+			var containedIndices = ImmutableArray.CreateBuilder<int>();
+			for ( var x = xOffset; x < xOffset + ChunkSize; x++ )
+				for ( var y = yOffset; y < yOffset + ChunkSize; y++ )
+					containedIndices.Add( Dimensions.Convert2dTo1d( x, y, Width ) );
+
+			var chunk = new TerrainChunk( this, chunkPos, ChunkSize, ChunkSize, containedIndices.ToImmutable() );
 
 			// Set chunk neighbours for the purpose of connecting chunks.
 			if ( xOffset > 0 )
@@ -157,14 +161,6 @@ public sealed partial class TerrainMap : Entity
 				if ( xOffset > 0 )
 				{
 					_terrainGridChunks[i - (Width / ChunkSize) - 1].XyNeighbour = chunk;
-				}
-			}
-
-			for ( var x = xOffset; x < xOffset + ChunkSize; x++ )
-			{
-				for ( var y = yOffset; y < yOffset + ChunkSize; y++ )
-				{
-					chunk.TerrainGrid[x % ChunkSize, y % ChunkSize] = TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )];
 				}
 			}
 
@@ -477,18 +473,11 @@ public sealed partial class TerrainMap : Entity
 		}
 	}
 
-	private bool TogglePointInChunks( int x, int z )
 	{
-		var n = (x / ChunkSize) + (z / ChunkSize * (Width / ChunkSize));
-		var xR = x % ChunkSize;
-		var zR = z % ChunkSize;
 
 		var chunk = _terrainGridChunks[n];
-		if ( !chunk.TerrainGrid[xR, zR] )
 			return false;
 
-		chunk.TerrainGrid[xR, zR] = false;
-		chunk.IsDirty = true;
 		return true;
 	}
 
