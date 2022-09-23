@@ -20,11 +20,11 @@ public sealed class TerrainChunk
 	public readonly Vector3 Position;
 
 	/// <summary>
-	/// 
+	/// The width of the chunk.
 	/// </summary>
 	public readonly int Width;
 	/// <summary>
-	/// 
+	/// The height of the chunk.
 	/// </summary>
 	public readonly int Height;
 
@@ -41,8 +41,18 @@ public sealed class TerrainChunk
 	/// </summary>
 	public TerrainChunk XyNeighbour = null!;
 
+	/// <summary>
+	/// An array of all the indices that this chunk represents.
+	/// </summary>
 	private readonly ImmutableArray<int> _containedIndices;
 
+	/// <summary>
+	/// Gets the state of a position the chunk is holding.
+	/// </summary>
+	/// <param name="x">The x component to access.</param>
+	/// <param name="y">The y component to access.</param>
+	/// <param name="relative">Whether or not the <see cref="x"/> and <see cref="y"/> are relative to the chunks location.</param>
+	/// <exception cref="ArgumentException"></exception>
 	public bool this[int x, int y, bool relative = true]
 	{
 		get

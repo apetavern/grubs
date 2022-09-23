@@ -199,6 +199,9 @@ public sealed partial class TerrainMap : Entity
 				TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] = Noise.Simplex( (x + Seed) * res, (y + Seed) * res ) > SurfaceLevel;
 	}
 
+	/// <summary>
+	/// Adds a border around the edge of the terrain.
+	/// </summary>
 	private void AddBorder()
 	{
 		var borderedMap = new bool[(Width + BorderWidth * 2) * (Height + BorderWidth * 2)];
@@ -236,7 +239,7 @@ public sealed partial class TerrainMap : Entity
 
 	/// <summary>
 	/// A region extraction algorithm to determine each unique region of the terrain.
-	/// See: https://en.wikipedia.org/wiki/Connected-component_labeling
+	/// <remarks>https://en.wikipedia.org/wiki/Connected-component_labeling</remarks>
 	/// </summary>
 	private void FindRegions( int[,] regionGrid )
 	{
@@ -410,6 +413,12 @@ public sealed partial class TerrainMap : Entity
 		return modifiedTerrain;
 	}
 
+	/// <summary>
+	/// Destruct a single point in the terrain grid.
+	/// </summary>
+	/// <param name="x">The x component of the point.</param>
+	/// <param name="y">The y component of the point.</param>
+	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructPoint( int x, int y )
 	{
 		Host.AssertServer();
@@ -417,6 +426,11 @@ public sealed partial class TerrainMap : Entity
 		return DestructPoint( Dimensions.Convert2dTo1d( x, y, Width ) );
 	}
 
+	/// <summary>
+	/// Destruct a single point in the terrain grid.
+	/// </summary>
+	/// <param name="index">The index to destroy</param>
+	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructPoint( int index )
 	{
 		Host.AssertServer();
@@ -495,6 +509,7 @@ public sealed partial class TerrainMap : Entity
 	}
 
 	/// <summary>
+	/// Initializes the terrain physics and models.
 	/// </summary>
 	private void InitializeModels()
 	{
@@ -508,6 +523,9 @@ public sealed partial class TerrainMap : Entity
 			_terrainModels.Add( new TerrainModel( this, i ) );
 	}
 
+	/// <summary>
+	/// Refreshes any chunks that have been edited.
+	/// </summary>
 	private void RefreshDirtyChunks()
 	{
 		Host.AssertServer();
@@ -518,6 +536,9 @@ public sealed partial class TerrainMap : Entity
 		_dirtyChunks.Clear();
 	}
 
+	/// <summary>
+	/// Checks if any indices have been destroyed and update if there are.
+	/// </summary>
 	[Event.Tick.Server]
 	private void ServerTick()
 	{
@@ -540,6 +561,10 @@ public sealed partial class TerrainMap : Entity
 		AssignGridToChunks();
 	}
 
+	/// <summary>
+	/// Sends any indices that have been edited to a client.
+	/// </summary>
+	/// <param name="destroyedIndices">The indices to send.</param>
 	[ClientRpc]
 	private void UpdateDestroyedIndicesRpc( int[] destroyedIndices )
 	{
