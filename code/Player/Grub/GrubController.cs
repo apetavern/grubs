@@ -85,7 +85,7 @@ public partial class GrubController : BasePlayerController
 
 		BaseVelocity = BaseVelocity.WithZ( 0 );
 
-		if ( Input.Pressed( InputButton.Jump ) && grub.IsTurn && !isFiring )
+		if ( Input.Pressed( InputButton.Jump ) && grub.IsTurn && !isFiring && !BaseGamemode.Instance!.UsedTurn )
 		{
 			if ( TimeSinceJumpPressed < 0.2f )
 			{
