@@ -41,10 +41,6 @@ public sealed class TerrainChunk
 	/// </summary>
 	public TerrainChunk XyNeighbour = null!;
 
-	/// <summary>
-	/// Whether or not this chunk has been changed.
-	/// </summary>
-	public bool IsDirty { get; set; }
 	private readonly ImmutableArray<int> _containedIndices;
 
 	public bool this[int x, int y, bool relative = true]

@@ -61,6 +61,7 @@ public sealed partial class TerrainMap : Entity
 	private readonly List<TerrainChunk> _terrainGridChunks = new();
 	private readonly List<TerrainModel> _terrainModels = new();
 	private readonly List<int> _pendingDestroyedIndices = new();
+	private readonly HashSet<int> _dirtyChunks = new();
 
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
@@ -508,17 +509,14 @@ public sealed partial class TerrainMap : Entity
 
 	private void RefreshDirtyChunks()
 	{
-		for ( var i = 0; i < _terrainGridChunks.Count; i++ )
+		foreach ( var index in _dirtyChunks )
 		{
-			var chunk = _terrainGridChunks[i];
-			if ( !chunk.IsDirty )
-				continue;
-
-			_terrainModels[i].DestroyMeshAndCollision();
-			_terrainModels[i].Delete();
-			_terrainModels[i] = new TerrainModel( chunk );
-			chunk.IsDirty = false;
+			_terrainModels[index].DestroyMeshAndCollision();
+			_terrainModels[index].Delete();
+			_terrainModels[index] = new TerrainModel( _terrainGridChunks[index] );
 		}
+
+		_dirtyChunks.Clear();
 	}
 
 	[Event.Tick.Server]
