@@ -1,18 +1,25 @@
 ﻿namespace Grubs.Terrain;
 
+/// <summary>
+/// 
+/// </summary>
 [Category( "Terrain" )]
 public sealed class TerrainWallModel : ModelEntity
 {
 	public TerrainWallModel()
 	{
 		Transmit = TransmitType.Never;
+		Tags.Add( "solid" );
 	}
 
-	public TerrainWallModel( TerrainChunk chunk, MarchingSquares marchingSquares ) : this()
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="chunk"></param>
+	/// <param name="marchingSquares"></param>
+	public void RefreshModel( TerrainChunk chunk, MarchingSquares marchingSquares )
 	{
 		Model = marchingSquares.CreateWallModel( chunk );
-		Tags.Add( "solid" );
-
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 	}
 }

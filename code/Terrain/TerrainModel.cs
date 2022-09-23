@@ -1,10 +1,13 @@
 ﻿namespace Grubs.Terrain;
 
+/// <summary>
+/// 
+/// </summary>
 [Category( "Terrain" )]
 public sealed class TerrainModel : ModelEntity
 {
 	private readonly TerrainChunk _chunk = null!;
-	private TerrainWallModel? _wallModel;
+	private readonly TerrainWallModel _wallModel = null!;
 
 	public TerrainModel()
 	{
@@ -15,32 +18,29 @@ public sealed class TerrainModel : ModelEntity
 	{
 		Tags.Add( "solid" );
 		_chunk = chunk;
-		BuildMeshAndCollision();
+		_wallModel = new TerrainWallModel { Position = chunk.Position };
+
+		RefreshModel();
 	}
 
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
 
-		_wallModel?.Delete();
+		_wallModel.Delete();
 	}
 
-	public void BuildMeshAndCollision()
+	/// <summary>
+	/// 
+	/// </summary>
+	public void RefreshModel()
 	{
-		var marchingSquares = new MarchingSquares();
-		Model = marchingSquares.GenerateModel( _chunk );
 		Position = _chunk.Position;
 
+		var marchingSquares = new MarchingSquares();
+		Model = marchingSquares.GenerateModel( _chunk );
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 
-		_wallModel = new TerrainWallModel( _chunk, marchingSquares ) { Position = _chunk.Position };
-	}
-
-	// Weird hack since the old models don't delete properly?
-	public void DestroyMeshAndCollision()
-	{
-		Model = null;
-		_wallModel?.Delete();
-		Position = new Vector3( -1000, -1000, -1000 );
+		_wallModel.RefreshModel( _chunk, marchingSquares );
 	}
 }

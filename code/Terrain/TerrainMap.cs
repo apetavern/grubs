@@ -510,11 +510,7 @@ public sealed partial class TerrainMap : Entity
 	private void RefreshDirtyChunks()
 	{
 		foreach ( var index in _dirtyChunks )
-		{
-			_terrainModels[index].DestroyMeshAndCollision();
-			_terrainModels[index].Delete();
-			_terrainModels[index] = new TerrainModel( _terrainGridChunks[index] );
-		}
+			_terrainModels[index].RefreshModel();
 
 		_dirtyChunks.Clear();
 	}
