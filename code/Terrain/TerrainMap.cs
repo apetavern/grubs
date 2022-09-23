@@ -473,7 +473,16 @@ public sealed partial class TerrainMap : Entity
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
+	public bool DestructPoint( int x, int y )
 	{
+		return DestructPoint( Dimensions.Convert2dTo1d( x, y, Width ) );
+	}
 
 	/// <summary>
 	/// 
