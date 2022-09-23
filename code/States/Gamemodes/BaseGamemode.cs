@@ -24,7 +24,7 @@ public abstract partial class BaseGamemode : BaseState
 	[Net]
 	public TeamManager TeamManager { get; private set; } = null!;
 	/// <summary>
-	/// 
+	/// The manager for the terrain system.
 	/// </summary>
 	[Net]
 	public TerrainMain TerrainMain { get; private set; } = null!;

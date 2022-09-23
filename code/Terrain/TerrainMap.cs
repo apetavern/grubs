@@ -2,27 +2,62 @@
 
 namespace Grubs.Terrain;
 
+/// <summary>
+/// A destructible terrain for Grubs to battle on.
+/// </summary>
 [Category( "Terrain" )]
 public sealed partial class TerrainMap : Entity
 {
+	/// <summary>
+	/// The seed that was used to generate the random terrain.
+	/// <remarks>This will only be populated if the terrain was randomly generated.</remarks>
+	/// </summary>
 	[Net]
 	public int Seed { get; private set; }
 
+	/// <summary>
+	/// Whether or not this terrain was pre-made
+	/// </summary>
 	[Net]
 	public bool Premade { get; private set; }
+	/// <summary>
+	/// The pre-made map definition this terrain was created from.
+	/// <remarks>This will only be populated on the server-side and when <see cref="Premade"/> is true.</remarks>
+	/// </summary>
 	public readonly PremadeTerrain? PremadeMap;
 
+	/// <summary>
+	/// The current grid state.
+	/// </summary>
 	public bool[] TerrainGrid { get; private set; } = null!;
+	/// <summary>
+	/// Container for all terrain chunks.
+	/// </summary>
 	public List<TerrainChunk> TerrainGridChunks { get; private set; } = null!;
 
+	/// <summary>
+	/// The width of the terrain grid.
+	/// </summary>
 	[Net]
 	public int Width { get; private set; }
+	/// <summary>
+	/// The height of the terrain grid.
+	/// </summary>
 	[Net]
 	public int Height { get; private set; }
+	/// <summary>
+	/// The world scale for the terrain.
+	/// </summary>
 	[Net]
 	public new int Scale { get; private set; }
+	/// <summary>
+	/// Whether or not the terrain has a border on it.
+	/// </summary>
 	[Net]
 	public bool HasBorder { get; private set; }
+	/// <summary>
+	/// The type of terrain this terrain is.
+	/// </summary>
 	[Net]
 	public TerrainType TerrainType { get; private set; }
 
@@ -93,6 +128,9 @@ public sealed partial class TerrainMap : Entity
 			AddBorder();
 	}
 
+	/// <summary>
+	/// Assigns portions of the terrain grid to chunks.
+	/// </summary>
 	private void AssignGridToChunks()
 	{
 		TerrainGridChunks = new List<TerrainChunk>();
@@ -327,13 +365,14 @@ public sealed partial class TerrainMap : Entity
 	/// <summary>
 	/// Destruct a sphere in the terrain grid.
 	/// </summary>
-	/// <param name="midpoint">The Vector2 midpoint of the sphere to be destructed.</param>
-	/// <param name="size">The size (radius) of the sphere to be destructed.</param>
+	/// <param name="midpoint">The center of the sphere to be destructed.</param>
+	/// <param name="size">The radius of the sphere to be destructed.</param>
 	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructCircle( Vector2 midpoint, float size )
 	{
 		var scaledMidpoint = midpoint / Scale;
 		var centerIndex = Dimensions.Convert2dTo1d( (int)MathF.Round( scaledMidpoint.x, 0 ), (int)MathF.Round( scaledMidpoint.y, 0 ), Width );
+		// Reconstruct the midpoint to check if converting it wrapped to an invalid value.
 		var (centerX, centerY) = Dimensions.Convert1dTo2d( centerIndex, Width );
 		var distanceSquared = new Vector2( centerX, centerY ).DistanceSquared( scaledMidpoint );
 		if ( distanceSquared > 1 )
@@ -347,7 +386,7 @@ public sealed partial class TerrainMap : Entity
 			if ( !TerrainGrid[index] )
 				continue;
 
-			_pendingDestroyedIndexes.Add( index );
+			_pendingDestroyedIndices.Add( index );
 			TerrainGrid[index] = false;
 			var (x, y) = Dimensions.Convert1dTo2d( index, Width );
 			modifiedTerrain |= TogglePointInChunks( x, y );
@@ -359,9 +398,9 @@ public sealed partial class TerrainMap : Entity
 	/// <summary>
 	/// Destruct a sphere in the terrain grid.
 	/// </summary>
-	/// <param name="startPoint">The Vector3 startpoint of the line to be destructed.</param>
-	/// <param name="endPoint">The Vector3 endpoint of the line to be destructed.</param>
-	/// <param name="width">The size (radius) of the sphere to be destructed.</param>
+	/// <param name="startPoint">The start point of the line to be destructed.</param>
+	/// <param name="endPoint">The end point of the line to be destructed.</param>
+	/// <param name="width">The radius of the line spheres to be destructed.</param>
 	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructLine( Vector3 startPoint, Vector3 endPoint, float width )
 	{
@@ -380,11 +419,12 @@ public sealed partial class TerrainMap : Entity
 	}
 
 	/// <summary>
-	/// 
+	/// Gets all indices that are enveloped by a circle.
+	/// <remarks>https://stackoverflow.com/questions/15856411/finding-all-the-points-within-a-circle-in-2d-space</remarks>
 	/// </summary>
-	/// <param name="centerIndex"></param>
-	/// <param name="radius"></param>
-	/// <returns></returns>
+	/// <param name="centerIndex">The center point of the circle.</param>
+	/// <param name="radius">The radius of the circle in grid points.</param>
+	/// <returns>All the indices that are inside the circle.</returns>
 	public IEnumerable<int> GetIndicesInCircle( int centerIndex, int radius )
 	{
 		var (xCenter, yCenter) = Dimensions.Convert1dTo2d( centerIndex, Width );
@@ -463,6 +503,10 @@ public sealed partial class TerrainMap : Entity
 		_pendingDestroyedIndices.Clear();
 	}
 
+	/// <summary>
+	/// Sends the current terrain grid state to a client.
+	/// </summary>
+	/// <param name="terrainGrid">The terrain grid state.</param>
 	[ClientRpc]
 	public void UpdateGridRpc( bool[] terrainGrid )
 	{

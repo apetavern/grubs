@@ -9,8 +9,14 @@ namespace Grubs.Terrain;
 [Category( "Setup" )]
 public sealed partial class TerrainMain : Entity
 {
+	/// <summary>
+	/// The singleton instance of <see cref="TerrainMain"/>.
+	/// </summary>
 	public static TerrainMain Instance = null!;
 
+	/// <summary>
+	/// The current terrain in the world.
+	/// </summary>
 	[Net]
 	public TerrainMap Current { get; set; } = null!;
 
