@@ -377,15 +377,7 @@ public sealed partial class TerrainMap : Entity
 		var scaledSize = (int)Math.Round( size / Scale );
 
 		foreach ( var index in GetIndicesInCircle( centerIndex, scaledSize ) )
-		{
-			if ( !TerrainGrid[index] )
-				continue;
-
-			_pendingDestroyedIndices.Add( index );
-			TerrainGrid[index] = false;
-			var (x, y) = Dimensions.Convert1dTo2d( index, Width );
-			modifiedTerrain |= TogglePointInChunks( x, y );
-		}
+			modifiedTerrain |= DestructPoint( index );
 
 		return modifiedTerrain;
 	}
@@ -556,11 +548,7 @@ public sealed partial class TerrainMap : Entity
 	private void UpdateDestroyedIndexesRpc( int[] destroyedIndexes )
 	{
 		foreach ( var index in destroyedIndexes )
-		{
-			TerrainGrid[index] = false;
-			var (x, y) = Dimensions.Convert1dTo2d( index, Width );
-			TogglePointInChunks( x, y );
-		}
+			DestructPoint( index );
 
 		RefreshDirtyChunks();
 	}
