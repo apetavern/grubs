@@ -14,7 +14,7 @@ public sealed class TerrainChunk
 	/// <summary>
 	/// The world position of the chunk.
 	/// </summary>
-	public Vector3 Position { get; }
+	public readonly Vector3 Position;
 	/// <summary>
 	/// The internal terrain grid this chunk represents.
 	/// </summary>
