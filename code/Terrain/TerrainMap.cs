@@ -405,13 +405,25 @@ public sealed partial class TerrainMap : Entity
 			{
 				if ( (x - xCenter) * (x - xCenter) + (y - yCenter) * (y - yCenter) > radius * radius )
 					continue;
-
+				
 				var xSym = xCenter - (x - xCenter);
 				var ySym = yCenter - (y - yCenter);
-				yield return Dimensions.Convert2dTo1d( x, y, Width );
-				yield return Dimensions.Convert2dTo1d( x, ySym, Width );
-				yield return Dimensions.Convert2dTo1d( xSym, y, Width );
-				yield return Dimensions.Convert2dTo1d( xSym, ySym, Width );
+				
+				var first = Dimensions.Convert2dTo1d( x, y, Width );
+				if ( first >= 0 && first < TerrainGrid.Length )
+					yield return first;
+
+				var second = Dimensions.Convert2dTo1d( x, ySym, Width );
+				if ( second >= 0 && second < TerrainGrid.Length )
+					yield return second;
+
+				var third = Dimensions.Convert2dTo1d( xSym, y, Width );
+				if ( third >= 0 && third < TerrainGrid.Length )
+					yield return third;
+
+				var fourth = Dimensions.Convert2dTo1d( xSym, ySym, Width );
+				if ( fourth >= 0 && fourth < TerrainGrid.Length )
+					yield return fourth;
 			}
 		}
 	}
