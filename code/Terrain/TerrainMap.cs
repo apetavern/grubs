@@ -332,12 +332,16 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructSphere( Vector2 midpoint, float size )
 	{
-		var modifiedTerrain = false;
-		
 		var scaledMidpoint = midpoint / Scale;
-		var centerIndex = Dimensions.Convert2dTo1d( (int)Math.Round( scaledMidpoint.x, 0 ), (int)Math.Round( scaledMidpoint.y, 0 ), Width );
-		var scaledSize = (int)Math.Round( size / Scale );
+		var centerIndex = Dimensions.Convert2dTo1d( (int)MathF.Round( scaledMidpoint.x, 0 ), (int)MathF.Round( scaledMidpoint.y, 0 ), Width );
+		var (centerX, centerY) = Dimensions.Convert1dTo2d( centerIndex, Width );
+		var distanceSquared = new Vector2( centerX, centerY ).DistanceSquared( scaledMidpoint );
+		if ( distanceSquared > 1 )
+			return false;
 
+		var modifiedTerrain = false;
+		var scaledSize = (int)Math.Round( size / Scale );
+		
 		foreach ( var index in GetIndexesInCircle( centerIndex, scaledSize ) )
 		{
 			if ( !TerrainGrid[index] )
