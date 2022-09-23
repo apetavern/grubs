@@ -10,8 +10,6 @@ public sealed partial class TerrainModel : ModelEntity
 	private TerrainMap Map { get; set; } = null!;
 	[Net]
 	private int ChunkIndex { get; set; }
-	[Net]
-	private TerrainWallModel _wallModel { get; set; } = null!;
 
 	private TerrainChunk Chunk => Map.TerrainGridChunks[ChunkIndex];
 
@@ -26,17 +24,8 @@ public sealed partial class TerrainModel : ModelEntity
 		ChunkIndex = chunkIndex;
 
 		Tags.Add( "solid" );
-		_wallModel = new TerrainWallModel { Position = Chunk.Position };
 
 		RefreshModel();
-	}
-
-	protected override void OnDestroy()
-	{
-		base.OnDestroy();
-
-		if ( IsServer )
-			_wallModel.Delete();
 	}
 
 	/// <summary>
@@ -50,11 +39,8 @@ public sealed partial class TerrainModel : ModelEntity
 			Position = Chunk.Position;
 		}
 
-		var marchingSquares = new MarchingSquares();
-		Model = marchingSquares.GenerateModel( Chunk );
+		Model = new MarchingSquares().CreateModel( Chunk );
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
-
-		_wallModel.RefreshModel( Chunk, marchingSquares );
 	}
 
 	[ClientRpc]
