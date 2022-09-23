@@ -366,6 +366,8 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructCircle( Vector2 midpoint, float size )
 	{
+		Host.AssertServer();
+
 		var scaledMidpoint = midpoint / Scale;
 		var centerIndex = Dimensions.Convert2dTo1d( (int)MathF.Round( scaledMidpoint.x, 0 ), (int)MathF.Round( scaledMidpoint.y, 0 ), Width );
 		// Reconstruct the midpoint to check if converting it wrapped to an invalid value.
@@ -392,6 +394,8 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>Whether or not the terrain has been modified.</returns>
 	public bool DestructLine( Vector3 startPoint, Vector3 endPoint, float width )
 	{
+		Host.AssertServer();
+
 		var totalLength = (startPoint - endPoint);
 		var stepCount = (int)MathF.Round( totalLength.Length / width );
 		var modifiedTerrain = false;
@@ -404,6 +408,30 @@ public sealed partial class TerrainMap : Entity
 		}
 
 		return modifiedTerrain;
+	}
+
+	public bool DestructPoint( int x, int y )
+	{
+		Host.AssertServer();
+
+		return DestructPoint( Dimensions.Convert2dTo1d( x, y, Width ) );
+	}
+
+	public bool DestructPoint( int index )
+	{
+		Host.AssertServer();
+
+		if ( !TerrainGrid[index] )
+			return false;
+
+		if ( IsServer )
+			_pendingDestroyedIndices.Add( index );
+
+		TerrainGrid[index] = false;
+		var (x, y) = Dimensions.Convert1dTo2d( index, Width );
+		var n = (x / ChunkSize) + (y / ChunkSize * (Width / ChunkSize));
+		_dirtyChunks.Add( n );
+		return true;
 	}
 
 	/// <summary>
@@ -467,38 +495,11 @@ public sealed partial class TerrainMap : Entity
 	}
 
 	/// <summary>
-	/// 
 	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
-	public bool DestructPoint( int x, int y )
-	{
-		return DestructPoint( Dimensions.Convert2dTo1d( x, y, Width ) );
-	}
-
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="index"></param>
-	/// <returns></returns>
-	public bool DestructPoint( int index )
-	{
-		if ( !TerrainGrid[index] )
-			return false;
-
-		if ( IsServer )
-			_pendingDestroyedIndices.Add( index );
-
-		TerrainGrid[index] = false;
-		var (x, y) = Dimensions.Convert1dTo2d( index, Width );
-		var n = (x / ChunkSize) + (y / ChunkSize * (Width / ChunkSize));
-		_dirtyChunks.Add( n );
-		return true;
-	}
-
 	private void InitializeModels()
 	{
+		Host.AssertServer();
+
 		foreach ( var model in _terrainModels )
 			model.Delete();
 		_terrainModels.Clear();
@@ -509,6 +510,8 @@ public sealed partial class TerrainMap : Entity
 
 	private void RefreshDirtyChunks()
 	{
+		Host.AssertServer();
+
 		foreach ( var index in _dirtyChunks )
 			_terrainModels[index].RefreshModel();
 
