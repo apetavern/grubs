@@ -333,19 +333,19 @@ public sealed partial class TerrainMap : Entity
 	public bool DestructSphere( Vector2 midpoint, float size )
 	{
 		var modifiedTerrain = false;
+		
+		var scaledMidpoint = midpoint / Scale;
+		var centerIndex = Dimensions.Convert2dTo1d( (int)Math.Round( scaledMidpoint.x, 0 ), (int)Math.Round( scaledMidpoint.y, 0 ), Width );
+		var scaledSize = (int)Math.Round( size / Scale );
 
-		for ( var i = 0; i < TerrainGrid.Length; i++ )
+		foreach ( var index in GetIndexesInCircle( centerIndex, scaledSize ) )
 		{
-			var (x, y) = Dimensions.Convert1dTo2d( i, Width );
-			var xDiff = midpoint.x - (x * Scale);
-			var yDiff = midpoint.y - (y * Scale);
-			var d = Math.Sqrt( Math.Pow( xDiff, 2 ) + Math.Pow( yDiff, 2 ) );
-
-			if ( d >= size || !TerrainGrid[i] )
+			if ( !TerrainGrid[index] )
 				continue;
-
-			_pendingDestroyedIndexes.Add( i );
-			TerrainGrid[i] = false;
+			
+			_pendingDestroyedIndexes.Add( index );
+			TerrainGrid[index] = false;
+			var (x, y) = Dimensions.Convert1dTo2d( index, Width );
 			modifiedTerrain |= TogglePointInChunks( x, y );
 		}
 
