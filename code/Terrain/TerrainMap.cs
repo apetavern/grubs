@@ -466,6 +466,18 @@ public sealed partial class TerrainMap : Entity
 
 	/// <summary>
 	/// Gets all indices that are enveloped by a circle.
+	/// </summary>
+	/// <param name="x">The x component of the center point.</param>
+	/// <param name="y">The y component of the center point.</param>
+	/// <param name="radius">The radius of the circle in grid points.</param>
+	/// <returns>All the indices that are inside the circle.</returns>
+	public IEnumerable<int> GetIndicesInCircle( int x, int y, int radius )
+	{
+		return GetIndicesInCircle( Dimensions.Convert2dTo1d( x, y, Width ), radius );
+	}
+
+	/// <summary>
+	/// Gets all indices that are enveloped by a circle.
 	/// <remarks>https://stackoverflow.com/questions/15856411/finding-all-the-points-within-a-circle-in-2d-space</remarks>
 	/// </summary>
 	/// <param name="centerIndex">The center point of the circle.</param>
@@ -501,6 +513,18 @@ public sealed partial class TerrainMap : Entity
 					yield return fourth;
 			}
 		}
+	}
+
+	/// <summary>
+	/// Gets all indices that are within a rectangle.
+	/// </summary>
+	/// <param name="x">The x component of the center point.</param>
+	/// <param name="y">The y component of the center point.</param>
+	/// <param name="rectSize">The size of the rectangle to check.</param>
+	/// <returns>All the indices that are inside the rectangle.</returns>
+	public IEnumerable<int> GetIndicesInRect( int x, int y, IntVector2 rectSize )
+	{
+		return GetIndicesInRect( Dimensions.Convert2dTo1d( x, y, Width ), rectSize );
 	}
 
 	/// <summary>
