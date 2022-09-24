@@ -162,16 +162,12 @@ public sealed class MarchingSquares
 				// Cover neighbour cases for triangulating across chunks.
 				if ( x == chunk.Width - 1 && z == chunk.Height - 1 )
 				{
-					if ( chunk.XyNeighbour is not null )
+					if ( chunk.XyNeighbour is not null && chunk.XNeighbour is not null && chunk.YNeighbour is not null )
 					{
-						if ( chunk[x,z] )
-						{
-							c1 = chunk[x, z];
-							c2 = chunk.XyNeighbour[1, 0];
-							c3 = chunk.XyNeighbour[0, 0];
-							c4 = chunk.XyNeighbour[0, 1];
-						}
-						
+						c1 = chunk[x, z];
+						c2 = chunk.XNeighbour[0, z];
+						c3 = chunk.XyNeighbour[0, 0];
+						c4 = chunk.YNeighbour[x, 0];
 					}
 				}
 				else if ( x == chunk.Width - 1 )
