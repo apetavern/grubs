@@ -218,7 +218,7 @@ public sealed partial class TerrainMap : Entity
 		for ( var i = 0; i < borderedMap.Length; i++ )
 		{
 			var (x, y) = Dimensions.Convert1dTo2d( i, Width );
-			if ( x >= BorderWidth && x < Width + BorderWidth && y >= BorderWidth && y < Height + BorderWidth )
+			if ( x >= BorderWidth && x < Width - BorderWidth && y >= BorderWidth && y < Height - BorderWidth )
 				borderedMap[i] = TerrainGrid[Dimensions.Convert2dTo1d( x - BorderWidth, y - BorderWidth, Width )];
 			else
 				borderedMap[i] = true;
