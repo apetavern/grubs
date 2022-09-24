@@ -21,6 +21,7 @@ public sealed partial class TerrainMap : Entity
 	/// </summary>
 	[Net]
 	public bool Premade { get; private set; }
+
 	/// <summary>
 	/// The pre-made map definition this terrain was created from.
 	/// <remarks>This will only be populated on the server-side and when <see cref="Premade"/> is true.</remarks>
@@ -37,21 +38,25 @@ public sealed partial class TerrainMap : Entity
 	/// </summary>
 	[Net]
 	public int Width { get; private set; }
+
 	/// <summary>
 	/// The height of the terrain grid.
 	/// </summary>
 	[Net]
 	public int Height { get; private set; }
+
 	/// <summary>
 	/// The world scale for the terrain.
 	/// </summary>
 	[Net]
 	public new int Scale { get; private set; }
+
 	/// <summary>
 	/// Whether or not the terrain has a border on it.
 	/// </summary>
 	[Net]
 	public bool HasBorder { get; private set; }
+
 	/// <summary>
 	/// The type of terrain this terrain is.
 	/// </summary>

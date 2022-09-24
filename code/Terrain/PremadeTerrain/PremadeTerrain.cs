@@ -18,18 +18,22 @@ public sealed class PremadeTerrain
 	/// The version of the terrain that was loaded.
 	/// </summary>
 	public readonly int MapVersion;
+
 	/// <summary>
 	/// The width of the terrain.
 	/// </summary>
 	public readonly int Width;
+
 	/// <summary>
 	/// The height of the terrain.
 	/// </summary>
 	public readonly int Height;
+
 	/// <summary>
 	/// The grid array of the terrain.
 	/// </summary>
 	public readonly bool[] TerrainGrid;
+
 	/// <summary>
 	/// The settings that came with the terrain.
 	/// </summary>

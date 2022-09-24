@@ -12,6 +12,7 @@ public sealed partial class WaitingState : BaseState
 	/// </summary>
 	[Net]
 	public TimeUntil TimeUntilStart { get; private set; }
+
 	/// <summary>
 	/// Whether or not the countdown in <see cref="TimeUntilStart"/> has been started.
 	/// </summary>

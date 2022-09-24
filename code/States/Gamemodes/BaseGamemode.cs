@@ -24,6 +24,7 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	[Net]
 	public TeamManager TeamManager { get; private set; } = null!;
+
 	/// <summary>
 	/// The terrain map for the game.
 	/// </summary>
@@ -35,26 +36,31 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	[Net, Predicted]
 	public bool MovementOnly { get; private set; }
+
 	/// <summary>
 	/// Whether or not the current team has used their turn.
 	/// </summary>
 	[Net, Predicted]
 	public bool UsedTurn { get; private set; }
+
 	/// <summary>
 	/// The time until the current teams turn is automatically ended.
 	/// </summary>
 	[Net]
 	public TimeUntil TimeUntilTurnEnd { get; private set; }
+
 	/// <summary>
 	/// Whether or not a turn change is currently happening.
 	/// </summary>
 	[Net]
 	public bool IsTurnChanging { get; private set; }
+
 	/// <summary>
 	/// The current amount of wind steps.
 	/// </summary>
 	[Net]
 	public int WindSteps { get; set; }
+
 	/// <summary>
 	/// The current wind force.
 	/// </summary>

@@ -81,6 +81,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// Whether or not this grub is facing left.
 	/// </summary>
 	public bool FacingLeft => Rotation.z < 0;
+
 	/// <summary>
 	/// Whether or not this grub is facing right.
 	/// </summary>
@@ -91,6 +92,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// <remarks>This will only be available on the server.</remarks>
 	/// </summary>
 	public GrubDeathReason? DeathReason;
+
 	/// <summary>
 	/// The running task to kill the grub.
 	/// <remarks>This will only be available on the server.</remarks>

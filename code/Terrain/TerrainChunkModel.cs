@@ -11,6 +11,7 @@ public sealed partial class TerrainModel : ModelEntity
 	/// </summary>
 	[Net]
 	private TerrainMap Map { get; set; } = null!;
+
 	/// <summary>
 	/// The index of the chunk that this model is representing.
 	/// </summary>

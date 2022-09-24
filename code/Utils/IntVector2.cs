@@ -9,6 +9,7 @@ public readonly struct IntVector2
 	/// The x component
 	/// </summary>
 	public readonly int X;
+
 	/// <summary>
 	/// The y component
 	/// </summary>

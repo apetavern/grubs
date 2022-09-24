@@ -23,6 +23,7 @@ public sealed class TerrainChunk
 	/// The width of the chunk.
 	/// </summary>
 	public readonly int Width;
+
 	/// <summary>
 	/// The height of the chunk.
 	/// </summary>
@@ -32,10 +33,12 @@ public sealed class TerrainChunk
 	/// The x neighbour of the chunk.
 	/// </summary>
 	public TerrainChunk XNeighbour = null!;
+
 	/// <summary>
 	/// The y neighbour of the chunk.
 	/// </summary>
 	public TerrainChunk YNeighbour = null!;
+
 	/// <summary>
 	/// The XY neighbour of the chunk.
 	/// </summary>
