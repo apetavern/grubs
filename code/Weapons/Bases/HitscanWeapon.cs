@@ -1,5 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.States;
+using Grubs.Terrain;
 using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
@@ -163,10 +164,10 @@ public partial class HitscanWeapon : GrubWeapon
 
 			if ( PenetrateTerrain )
 			{
-				BaseGamemode.Instance!.TerrainMap.DestructLine(
+				BaseGamemode.Instance!.TerrainMap.EditLine(
 					muzzle.Position.WithY( 0 ),
 					muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread,
-					ExplosionRadius );
+					ExplosionRadius, TerrainModifyMode.Remove );
 			}
 			else if ( result.Hit )
 				ExplosionHelper.Explode( result.EndPosition, Holder, ExplosionRadius, 0 );

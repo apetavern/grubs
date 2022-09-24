@@ -65,7 +65,8 @@ public sealed partial class TerrainMap : Entity
 
 	public readonly List<TerrainChunk> TerrainGridChunks = new();
 	private readonly List<TerrainModel> _terrainModels = new();
-	private readonly List<int> _pendingDestroyedIndices = new();
+	private readonly List<int> _pendingIndices = new();
+	private readonly List<bool> _pendingIndexValues = new();
 	private readonly HashSet<int> _dirtyChunks = new();
 
 	private const float SurfaceLevel = 0.50f;
@@ -367,12 +368,13 @@ public sealed partial class TerrainMap : Entity
 	}
 
 	/// <summary>
-	/// Destruct a sphere in the terrain grid.
+	/// Edits a sphere in the terrain grid.
 	/// </summary>
-	/// <param name="midpoint">The center of the sphere to be destructed.</param>
-	/// <param name="size">The radius of the sphere to be destructed.</param>
-	/// <returns>Whether or not the terrain has been modified.</returns>
-	public bool DestructCircle( Vector2 midpoint, float size )
+	/// <param name="midpoint">The center of the sphere to be edited.</param>
+	/// <param name="size">The radius of the sphere to be edited.</param>
+	/// <param name="mode">The way the circle should be edited.</param>
+	/// <returns>Whether or not the terrain has been edited.</returns>
+	public bool EditCircle( Vector2 midpoint, float size, TerrainModifyMode mode )
 	{
 		Host.AssertServer();
 
@@ -388,19 +390,20 @@ public sealed partial class TerrainMap : Entity
 		var scaledSize = (int)Math.Round( size / Scale );
 
 		foreach ( var index in GetIndicesInCircle( centerIndex, scaledSize ) )
-			modifiedTerrain |= DestructPoint( index );
+			modifiedTerrain |= EditPoint( index, mode );
 
 		return modifiedTerrain;
 	}
 
 	/// <summary>
-	/// Destruct a sphere in the terrain grid.
+	/// Edits a line in the terrain grid.
 	/// </summary>
-	/// <param name="startPoint">The start point of the line to be destructed.</param>
-	/// <param name="endPoint">The end point of the line to be destructed.</param>
-	/// <param name="width">The radius of the line spheres to be destructed.</param>
-	/// <returns>Whether or not the terrain has been modified.</returns>
-	public bool DestructLine( Vector3 startPoint, Vector3 endPoint, float width )
+	/// <param name="startPoint">The start point of the line to be edited.</param>
+	/// <param name="endPoint">The end point of the line to be edited.</param>
+	/// <param name="width">The radius of the line spheres to be edited.</param>
+	/// <param name="mode">The way the line should be edited.</param>
+	/// <returns>Whether or not the terrain has been edited.</returns>
+	public bool EditLine( Vector3 startPoint, Vector3 endPoint, float width, TerrainModifyMode mode )
 	{
 		Host.AssertServer();
 
@@ -412,41 +415,49 @@ public sealed partial class TerrainMap : Entity
 		{
 			var currentPoint = Vector3.Lerp( startPoint, endPoint, (float)i / stepCount );
 			var pos = new Vector2( currentPoint.x, currentPoint.z );
-			modifiedTerrain |= DestructCircle( pos, width );
+			modifiedTerrain |= EditCircle( pos, width, mode );
 		}
 
 		return modifiedTerrain;
 	}
 
 	/// <summary>
-	/// Destruct a single point in the terrain grid.
+	/// Edits a single point in the terrain grid.
 	/// </summary>
 	/// <param name="x">The x component of the point.</param>
 	/// <param name="y">The y component of the point.</param>
-	/// <returns>Whether or not the terrain has been modified.</returns>
-	public bool DestructPoint( int x, int y )
+	/// <param name="mode">The way the point should be edited.</param>
+	/// <returns>Whether or not the terrain has been edited.</returns>
+	public bool EditPoint( int x, int y, TerrainModifyMode mode )
 	{
 		Host.AssertServer();
 
-		return DestructPoint( Dimensions.Convert2dTo1d( x, y, Width ) );
+		return EditPoint( Dimensions.Convert2dTo1d( x, y, Width ), mode );
 	}
 
 	/// <summary>
-	/// Destruct a single point in the terrain grid.
+	/// Edits a single point in the terrain grid.
 	/// </summary>
-	/// <param name="index">The index to destroy</param>
-	/// <returns>Whether or not the terrain has been modified.</returns>
-	public bool DestructPoint( int index )
+	/// <param name="index">The index to edit.</param>
+	/// <param name="mode">The way the point should be edited.</param>
+	/// <returns>Whether or not the terrain has been edited.</returns>
+	public bool EditPoint( int index, TerrainModifyMode mode )
 	{
 		Host.AssertServer();
 
-		if ( !TerrainGrid[index] )
+		if ( TerrainGrid[index] && mode == TerrainModifyMode.Add )
+			return false;
+
+		if ( !TerrainGrid[index] && mode == TerrainModifyMode.Remove )
 			return false;
 
 		if ( IsServer )
-			_pendingDestroyedIndices.Add( index );
+		{
+			_pendingIndices.Add( index );
+			_pendingIndexValues.Add( !TerrainGrid[index] );
+		}
 
-		TerrainGrid[index] = false;
+		TerrainGrid[index] = !TerrainGrid[index];
 		var (x, y) = Dimensions.Convert1dTo2d( index, Width );
 		var n = (x / ChunkSize) + (y / ChunkSize * (Width / ChunkSize));
 		_dirtyChunks.Add( n );
@@ -547,11 +558,12 @@ public sealed partial class TerrainMap : Entity
 	[Event.Tick.Server]
 	private void ServerTick()
 	{
-		if ( _pendingDestroyedIndices.Count == 0 )
+		if ( _pendingIndices.Count == 0 )
 			return;
 
-		UpdateDestroyedIndicesRpc( To.Everyone, _pendingDestroyedIndices.ToArray() );
-		_pendingDestroyedIndices.Clear();
+		UpdateDestroyedIndicesRpc( To.Everyone, _pendingIndices.ToArray(), _pendingIndexValues.ToArray() );
+		_pendingIndices.Clear();
+		_pendingIndexValues.Clear();
 		RefreshDirtyChunks();
 	}
 
@@ -569,11 +581,12 @@ public sealed partial class TerrainMap : Entity
 	/// <summary>
 	/// Sends any indices that have been edited to a client.
 	/// </summary>
-	/// <param name="destroyedIndices">The indices to send.</param>
+	/// <param name="editedIndices">The indices that have been edited.</param>
+	/// <param name="indexValues">The values of the indices that were edited.</param>
 	[ClientRpc]
-	private void UpdateDestroyedIndicesRpc( int[] destroyedIndices )
+	private void UpdateDestroyedIndicesRpc( int[] editedIndices, bool[] indexValues )
 	{
-		foreach ( var index in destroyedIndices )
-			TerrainGrid[index] = false;
+		for ( var i = 0; i < editedIndices.Length; i++ )
+			TerrainGrid[editedIndices[i]] = indexValues[i];
 	}
 }

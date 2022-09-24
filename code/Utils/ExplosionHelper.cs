@@ -1,5 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.States;
+using Grubs.Terrain;
 using Grubs.Utils.Extensions;
 
 namespace Grubs.Utils;
@@ -41,7 +42,7 @@ public static partial class ExplosionHelper
 		}
 
 		var midpoint = new Vector3( position.x, position.z );
-		BaseGamemode.Instance!.TerrainMap.DestructCircle( midpoint, radius );
+		BaseGamemode.Instance!.TerrainMap.EditCircle( midpoint, radius, TerrainModifyMode.Remove );
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );

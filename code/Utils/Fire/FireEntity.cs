@@ -1,5 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.States;
+using Grubs.Terrain;
 using Grubs.Utils.Extensions;
 
 namespace Grubs.Utils;
@@ -65,7 +66,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 
 		var midpoint = new Vector3( _desiredPosition.x, _desiredPosition.z );
 
-		BaseGamemode.Instance!.TerrainMap.DestructCircle( midpoint, fireSize );
+		BaseGamemode.Instance!.TerrainMap.EditCircle( midpoint, fireSize, TerrainModifyMode.Remove );
 
 		var sourcePos = _desiredPosition;
 		foreach ( var grub in All.OfType<Grub>().Where( x => Vector3.DistanceBetween( sourcePos, x.Position ) <= fireSize ) )
