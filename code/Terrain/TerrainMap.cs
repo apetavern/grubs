@@ -403,7 +403,7 @@ public sealed partial class TerrainMap : Entity
 	/// <param name="width">The radius of the line spheres to be edited.</param>
 	/// <param name="mode">The way the line should be edited.</param>
 	/// <returns>Whether or not the terrain has been edited.</returns>
-	public bool EditLine( Vector3 startPoint, Vector3 endPoint, float width, TerrainModifyMode mode )
+	public bool EditLine( Vector2 startPoint, Vector2 endPoint, float width, TerrainModifyMode mode )
 	{
 		Host.AssertServer();
 
