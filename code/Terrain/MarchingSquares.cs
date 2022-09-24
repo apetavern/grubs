@@ -19,7 +19,7 @@ public sealed class MarchingSquares
 
 	public Model CreateModel( TerrainChunk chunk )
 	{
-		// GenerateModel
+		// Start shared GenerateModel
 		var scale = chunk.Map.Scale;
 		March( chunk, scale );
 
@@ -56,9 +56,9 @@ public sealed class MarchingSquares
 			var texCoord = new Vector2( (_vertices[i].x + chunk.Position.x) / 512, (_vertices[i].z + chunk.Position.z) / 512 );
 			vertList.Add( new Vert( _vertices[i], vertexNormals[i], vertexTangents[i], texCoord ) );
 		}
-		// GenerateModel
+		// End shared GenerateModel
 
-		// CreateWallModel
+		// Start shared CreateWallModel
 		CalculateMeshOutlines();
 		var wallVertices = new List<Vector3>();
 		var wallTriangles = new List<int>();
@@ -86,12 +86,12 @@ public sealed class MarchingSquares
 		}
 
 		_builder.AddCollisionMesh( wallVertices.ToArray(), wallTriangles.ToArray() );
-		// CreateWallModel
+		// End shared CreateWallModel
 
 		if ( !Host.IsClient )
 			return _builder.Create();
 
-		// GenerateModel
+		// Start client-side GenerateModel
 		// TODO: Calculate normal/tangent.
 		var mesh = new Mesh( Material.Load( chunk.Map.TerrainType.GetMaterial() ) )
 		{
@@ -102,9 +102,9 @@ public sealed class MarchingSquares
 		mesh.CreateIndexBuffer( _triangles.Count, _triangles );
 
 		_builder.AddMesh( mesh );
-		// GenerateModel
+		// End client-side GenerateModel
 
-		// CreateWallModel
+		// Start client-side CreateWallModel
 		var secondVertList = new List<Vert>();
 		foreach ( var vert in wallVertices )
 			secondVertList.Add( new Vert( vert, Vector3.Up, Vector3.Left, new Vector2( 0, 0 ) ) );
@@ -119,7 +119,7 @@ public sealed class MarchingSquares
 		wallMesh.CreateIndexBuffer( wallTriangles.Count, wallTriangles );
 
 		_builder.AddMesh( wallMesh );
-		// CreateWallModel
+		// End client-side CreateWallModel
 
 		return _builder.Create();
 	}
