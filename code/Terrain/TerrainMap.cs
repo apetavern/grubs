@@ -504,6 +504,27 @@ public sealed partial class TerrainMap : Entity
 	}
 
 	/// <summary>
+	/// Gets all indices that are within a rectangle.
+	/// <remarks>This will fail if <see cref="rectSize"/>.<see cref="IntVector2.X"/> is even.</remarks>
+	/// </summary>
+	/// <param name="centerIndex">The center point of the rectangle.</param>
+	/// <param name="rectSize">The size of the rectangle to check.</param>
+	/// <returns>All the indices that are inside the rectangle.</returns>
+	public IEnumerable<int> GetIndicesInRect( int centerIndex, IntVector2 rectSize )
+	{
+		Assert.True( rectSize.X % 2 == 0, $"{nameof(rectSize.X)} must be odd" );
+		
+		var bottomLeftIndex = centerIndex - Dimensions.Convert2dTo1d( rectSize.X, rectSize.Y, Width ) / 2;
+		for ( var i = 0; i < rectSize.X * rectSize.Y; i++ )
+		{
+			var (x, y) = Dimensions.Convert1dTo2d( i, rectSize.X );
+			var index = bottomLeftIndex + Dimensions.Convert2dTo1d( x, y, Width );
+			if ( index >= 0 && index < TerrainGrid.Length )
+				yield return index;
+		}
+	}
+
+	/// <summary>
 	/// Get a random spawn location using Sandbox.Rand.
 	/// Traces down to the ground to ensure Grubs do not take damage when spawned.
 	/// </summary>
