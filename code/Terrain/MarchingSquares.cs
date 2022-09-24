@@ -23,31 +23,8 @@ public sealed class MarchingSquares
 		var scale = chunk.Map.Scale;
 		March( chunk, scale );
 
-		var vertexNormals = new List<Vector3>();
-		for ( var i = 0; i < _triangles.Count; i += 3 )
-		{
-			var vertexA = _triangles[i];
-			var vertexB = _triangles[i + 1];
-			var vertexC = _triangles[i + 2];
-
-			var edgeAb = _vertices[vertexB] - _vertices[vertexA];
-			var edgeAc = _vertices[vertexC] - _vertices[vertexA];
-
-			var areaWeightedNormal = Vector3.Cross( edgeAb, edgeAc );
-
-			vertexNormals.Add( areaWeightedNormal );
-			vertexNormals.Add( areaWeightedNormal );
-			vertexNormals.Add( areaWeightedNormal );
-		}
-
-		var vertexTangents = new List<Vector3>();
-		for ( var i = 0; i < _triangles.Count; i++ )
-		{
-			var t1 = Vector3.Cross( vertexNormals[i], Vector3.Forward );
-			var t2 = Vector3.Cross( vertexNormals[i], Vector3.Up );
-
-			vertexTangents.Add( t1.Length > t2.Length ? t1 : t2 );
-		}
+		var vertexNormals = CalculateNormals();
+		var vertexTangents = CalculateTangents(vertexNormals);
 
 		// Convert Vector3 Vertices to Vert List
 		var vertList = new List<Vert>();
@@ -92,7 +69,6 @@ public sealed class MarchingSquares
 			return _builder.Create();
 
 		// Start client-side GenerateModel
-		// TODO: Calculate normal/tangent.
 		var mesh = new Mesh( Material.Load( chunk.Map.TerrainType.GetMaterial() ) )
 		{
 			Bounds = new BBox( new Vector3( 0, LocalY, 0 ), new Vector3( chunk.Width * scale, LocalY + 64, chunk.Height * scale ) )
@@ -122,6 +98,42 @@ public sealed class MarchingSquares
 		// End client-side CreateWallModel
 
 		return _builder.Create();
+	}
+
+	private List<Vector3> CalculateNormals()
+	{
+		var normals = new List<Vector3>();
+		for ( var i = 0; i < _triangles.Count; i += 3 )
+		{
+			var vertexA = _triangles[i];
+			var vertexB = _triangles[i + 1];
+			var vertexC = _triangles[i + 2];
+
+			var edgeAb = _vertices[vertexB] - _vertices[vertexA];
+			var edgeAc = _vertices[vertexC] - _vertices[vertexA];
+
+			var areaWeightedNormal = Vector3.Cross( edgeAb, edgeAc );
+
+			normals.Add( areaWeightedNormal );
+			normals.Add( areaWeightedNormal );
+			normals.Add( areaWeightedNormal );
+		}
+
+		return normals;
+	}
+
+	private List<Vector3> CalculateTangents(List<Vector3> normals)
+	{
+		var tangents = new List<Vector3>();
+		for ( var i = 0; i < _triangles.Count; i++ )
+		{
+			var t1 = Vector3.Cross( normals[i], Vector3.Forward );
+			var t2 = Vector3.Cross( normals[i], Vector3.Up );
+
+			tangents.Add( t1.Length > t2.Length ? t1 : t2 );
+		}
+
+		return tangents;
 	}
 
 	private void March( TerrainChunk chunk, int scale )
