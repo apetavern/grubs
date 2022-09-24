@@ -73,40 +73,7 @@ public abstract partial class BaseGamemode : BaseState
 			return;
 		}
 
-		if ( GameConfig.TerrainFile != string.Empty )
-		{
-			var terrainFile = GameConfig.TerrainFile;
-			BinaryReader? reader = null;
-			try
-			{
-				if ( FileSystem.Mounted.FileExists( terrainFile ) )
-				{
-					reader = new BinaryReader( FileSystem.Mounted.OpenRead( terrainFile ) );
-					TerrainMap = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
-				}
-				else if ( FileSystem.Data.FileExists( terrainFile ) )
-				{
-					reader = new BinaryReader( FileSystem.Data.OpenRead( terrainFile ) );
-					TerrainMap = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
-				}
-				else
-				{
-					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
-					TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
-				}
-			}
-			catch ( Exception e )
-			{
-				Log.Error( e );
-			}
-			finally
-			{
-				reader?.Close();
-			}
-		}
-		else
-			TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
-
+		SetupTerrain();
 		TeamManager = new TeamManager();
 
 		var killBoundary = new MultiShape()
@@ -150,6 +117,46 @@ public abstract partial class BaseGamemode : BaseState
 		NextTurnTask = NextTurn();
 
 		base.Enter( forced, parameters );
+	}
+
+	/// <summary>
+	/// Sets up the terrain the teams will play in.
+	/// </summary>
+	protected virtual void SetupTerrain()
+	{
+		if ( GameConfig.TerrainFile != string.Empty )
+		{
+			var terrainFile = GameConfig.TerrainFile;
+			BinaryReader? reader = null;
+			try
+			{
+				if ( FileSystem.Mounted.FileExists( terrainFile ) )
+				{
+					reader = new BinaryReader( FileSystem.Mounted.OpenRead( terrainFile ) );
+					TerrainMap = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
+				}
+				else if ( FileSystem.Data.FileExists( terrainFile ) )
+				{
+					reader = new BinaryReader( FileSystem.Data.OpenRead( terrainFile ) );
+					TerrainMap = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
+				}
+				else
+				{
+					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
+					TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
+				}
+			}
+			catch ( Exception e )
+			{
+				Log.Error( e );
+			}
+			finally
+			{
+				reader?.Close();
+			}
+		}
+		else
+			TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
 	}
 
 	/// <summary>
