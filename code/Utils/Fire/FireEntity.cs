@@ -7,6 +7,7 @@ namespace Grubs.Utils;
 /// <summary>
 /// A utility class to use fire.
 /// </summary>
+[Category( "Weapons" )]
 public sealed class FireEntity : ModelEntity, IResolvable
 {
 	public bool Resolved => Time.Now > _expiryTime;

@@ -7,6 +7,7 @@ namespace Grubs.Weapons.Base;
 /// <summary>
 /// An arc trace based projectile.
 /// </summary>
+[Category( "Weapons" )]
 public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 {
 	public bool HasBeenDamaged => false;
