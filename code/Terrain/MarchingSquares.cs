@@ -164,10 +164,14 @@ public sealed class MarchingSquares
 				{
 					if ( chunk.XyNeighbour is not null )
 					{
-						c1 = chunk[x, z];
-						c2 = chunk.XyNeighbour[1, 0];
-						c3 = chunk.XyNeighbour[0, 0];
-						c4 = chunk.XyNeighbour[0, 1];
+						if ( chunk[x,z] )
+						{
+							c1 = chunk[x, z];
+							c2 = chunk.XyNeighbour[1, 0];
+							c3 = chunk.XyNeighbour[0, 0];
+							c4 = chunk.XyNeighbour[0, 1];
+						}
+						
 					}
 				}
 				else if ( x == chunk.Width - 1 )
