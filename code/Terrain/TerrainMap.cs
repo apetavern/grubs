@@ -463,8 +463,20 @@ public sealed partial class TerrainMap : Entity
 
 		TerrainGrid[index] = !TerrainGrid[index];
 		var (x, y) = Dimensions.Convert1dTo2d( index, Width );
-		var n = (x / ChunkSize) + (y / ChunkSize * (Width / ChunkSize));
+		var chunksX = x / ChunkSize;
+		var n = chunksX + (y / ChunkSize * (Width / ChunkSize));
 		_dirtyChunks.Add( n );
+
+		// Refresh all neighbours as well
+		_dirtyChunks.Add( n + 1 );
+		_dirtyChunks.Add( n - 1 );
+		_dirtyChunks.Add( n + chunksX );
+		_dirtyChunks.Add( n - chunksX );
+		_dirtyChunks.Add( n + chunksX + 1 );
+		_dirtyChunks.Add( n + chunksX - 1 );
+		_dirtyChunks.Add( n - chunksX + 1 );
+		_dirtyChunks.Add( n - chunksX - 1 );
+
 		return true;
 	}
 
@@ -581,7 +593,8 @@ public sealed partial class TerrainMap : Entity
 		Host.AssertServer();
 
 		foreach ( var index in _dirtyChunks )
-			_terrainGridChunks[index].RefreshModel();
+			if ( index >= 0 && index < _terrainGridChunks.Count )
+				_terrainGridChunks[index].RefreshModel();
 
 		_dirtyChunks.Clear();
 	}
