@@ -165,7 +165,7 @@ public partial class HitscanWeapon : GrubWeapon
 			if ( PenetrateTerrain )
 			{
 				var endpoint = muzzle.Position.WithY( 0 ) + muzzle.Rotation.Forward.WithY( 0 ) * 5000f + offsetSpread;
-				BaseGamemode.Instance!.TerrainMap.EditLine( 
+				BaseGamemode.Instance!.TerrainMap.EditLine(
 					new Vector2( muzzle.Position.x, muzzle.Position.z ),
 					new Vector2( endpoint.x, endpoint.z ),
 					ExplosionRadius, TerrainModifyMode.Remove );

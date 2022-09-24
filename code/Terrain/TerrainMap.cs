@@ -512,8 +512,8 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>All the indices that are inside the rectangle.</returns>
 	public IEnumerable<int> GetIndicesInRect( int centerIndex, IntVector2 rectSize )
 	{
-		Assert.True( rectSize.X % 2 == 0, $"{nameof(rectSize.X)} must be odd" );
-		
+		Assert.True( rectSize.X % 2 == 0, $"{nameof( rectSize.X )} must be odd" );
+
 		var bottomLeftIndex = centerIndex - Dimensions.Convert2dTo1d( rectSize.X, rectSize.Y, Width ) / 2;
 		for ( var i = 0; i < rectSize.X * rectSize.Y; i++ )
 		{
