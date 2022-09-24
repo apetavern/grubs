@@ -24,6 +24,11 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	[Net]
 	public TeamManager TeamManager { get; private set; } = null!;
+	/// <summary>
+	/// The terrain map for the game.
+	/// </summary>
+	[Net]
+	public TerrainMap TerrainMap { get; private set; } = null!;
 
 	/// <summary>
 	/// Whether or not the active Grub can only use movement.
@@ -62,43 +67,13 @@ public abstract partial class BaseGamemode : BaseState
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
-		if ( GameConfig.TerrainFile != string.Empty )
-		{
-			var terrainFile = GameConfig.TerrainFile;
-			BinaryReader? reader = null;
-			try
-			{
-				if ( FileSystem.Mounted.FileExists( terrainFile ) )
-				{
-					reader = new BinaryReader( FileSystem.Mounted.OpenRead( terrainFile ) );
-					TerrainMain.Current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
-				}
-				else if ( FileSystem.Data.FileExists( terrainFile ) )
-				{
-					reader = new BinaryReader( FileSystem.Data.OpenRead( terrainFile ) );
-					TerrainMain.Current = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
-				}
-				else
-				{
-					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
-					TerrainMain.Current = new TerrainMap( TerrainMain.Seed );
-				}
-			}
-			finally
-			{
-				reader?.Close();
-			}
-		}
-		else
-			TerrainMain.Current = new TerrainMap( TerrainMain.Seed );
-		TerrainMain.Initialize();
-
 		if ( !IsServer )
 		{
 			base.Enter( forced, parameters );
 			return;
 		}
 
+		SetupTerrain();
 		TeamManager = new TeamManager();
 
 		var killBoundary = new MultiShape()
@@ -145,6 +120,46 @@ public abstract partial class BaseGamemode : BaseState
 	}
 
 	/// <summary>
+	/// Sets up the terrain the teams will play in.
+	/// </summary>
+	protected virtual void SetupTerrain()
+	{
+		if ( GameConfig.TerrainFile != string.Empty )
+		{
+			var terrainFile = GameConfig.TerrainFile;
+			BinaryReader? reader = null;
+			try
+			{
+				if ( FileSystem.Mounted.FileExists( terrainFile ) )
+				{
+					reader = new BinaryReader( FileSystem.Mounted.OpenRead( terrainFile ) );
+					TerrainMap = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
+				}
+				else if ( FileSystem.Data.FileExists( terrainFile ) )
+				{
+					reader = new BinaryReader( FileSystem.Data.OpenRead( terrainFile ) );
+					TerrainMap = new TerrainMap( PremadeTerrain.Deserialize( reader ) );
+				}
+				else
+				{
+					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
+					TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
+				}
+			}
+			catch ( Exception e )
+			{
+				Log.Error( e );
+			}
+			finally
+			{
+				reader?.Close();
+			}
+		}
+		else
+			TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
+	}
+
+	/// <summary>
 	/// Sets up all participants to play the game.
 	/// </summary>
 	/// <param name="participants"></param>
@@ -174,6 +189,13 @@ public abstract partial class BaseGamemode : BaseState
 			client.Pawn?.Delete();
 
 		base.Leave();
+	}
+
+	public override void ClientJoined( Client cl )
+	{
+		base.ClientJoined( cl );
+
+		TerrainMap.UpdateGridRpc( TerrainMap.TerrainGrid );
 	}
 
 	public override void ClientDisconnected( Client cl, NetworkDisconnectionReason reason )
@@ -333,8 +355,8 @@ public abstract partial class BaseGamemode : BaseState
 		var num = rand.Next( 0, 100 );
 		if ( num <= GameConfig.WeaponCrateChancePerTurn )
 		{
-			var x = Rand.Float( TerrainMain.Current.Width * TerrainMain.Current.Scale );
-			var startZ = TerrainMain.Current.Height * TerrainMain.Current.Scale;
+			var x = Rand.Float( TerrainMap.Width * TerrainMap.Scale );
+			var startZ = TerrainMap.Height * TerrainMap.Scale;
 			var z = Rand.Float( startZ, startZ + 100 );
 			var weaponCrate = new WeaponCrate { Position = new Vector3( x, 0, z ) };
 			await GameTask.DelaySeconds( 1 );
@@ -343,8 +365,8 @@ public abstract partial class BaseGamemode : BaseState
 		num = rand.Next( 0, 100 );
 		if ( num <= GameConfig.HealthCrateChancePerTurn )
 		{
-			var x = Rand.Float( TerrainMain.Current.Width * TerrainMain.Current.Scale );
-			var startZ = TerrainMain.Current.Height * TerrainMain.Current.Scale;
+			var x = Rand.Float( TerrainMap.Width * TerrainMap.Scale );
+			var startZ = TerrainMap.Height * TerrainMap.Scale;
 			var z = Rand.Float( startZ, startZ + 100 );
 			var healthCrate = new HealthCrate { Position = new Vector3( x, 0, z ) };
 			await GameTask.DelaySeconds( 1 );

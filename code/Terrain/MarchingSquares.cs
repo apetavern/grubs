@@ -4,9 +4,6 @@ namespace Grubs.Terrain;
 
 public sealed class MarchingSquares
 {
-	private int Width { get; set; }
-	private int Height { get; set; }
-
 	// Face
 	private readonly List<Vector3> _vertices = new();
 	private readonly List<int> _triangles = new();
@@ -20,15 +17,11 @@ public sealed class MarchingSquares
 
 	private const float LocalY = -32f;
 
-	public Model GenerateModel( TerrainChunk chunk )
+	public Model CreateModel( TerrainChunk chunk )
 	{
-		var grid = chunk.TerrainGrid;
-
-		Width = grid.GetLength( 0 );
-		Height = grid.GetLength( 1 );
-
+		// Start shared GenerateModel
 		var scale = chunk.Map.Scale;
-		March( grid, scale, chunk );
+		March( chunk, scale );
 
 		var vertexNormals = new List<Vector3>();
 		for ( var i = 0; i < _triangles.Count; i += 3 )
@@ -63,26 +56,9 @@ public sealed class MarchingSquares
 			var texCoord = new Vector2( (_vertices[i].x + chunk.Position.x) / 512, (_vertices[i].z + chunk.Position.z) / 512 );
 			vertList.Add( new Vert( _vertices[i], vertexNormals[i], vertexTangents[i], texCoord ) );
 		}
+		// End shared GenerateModel
 
-		if ( !Host.IsClient )
-			return _builder.Create();
-
-		// TODO: Calculate normal/tangent.
-		var mesh = new Mesh( Material.Load( TerrainMain.Current.TerrainType.GetMaterial() ) )
-		{
-			Bounds = new BBox( new Vector3( 0, LocalY, 0 ), new Vector3( Width * scale, LocalY + 64, Height * scale ) )
-		};
-
-		mesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
-		mesh.CreateIndexBuffer( _triangles.Count, _triangles );
-
-		_builder.AddMesh( mesh );
-
-		return _builder.Create();
-	}
-
-	public Model CreateWallModel()
-	{
+		// Start shared CreateWallModel
 		CalculateMeshOutlines();
 		var wallVertices = new List<Vector3>();
 		var wallTriangles = new List<int>();
@@ -109,33 +85,49 @@ public sealed class MarchingSquares
 			}
 		}
 
-		if ( Host.IsClient )
-		{
-			var vertList = new List<Vert>();
-			foreach ( var vert in wallVertices )
-			{
-				vertList.Add( new Vert( vert, Vector3.Up, Vector3.Left, new Vector2( 0, 0 ) ) );
-			}
-
-			var wallMesh = new Mesh( Material.Load( TerrainMain.Current.TerrainType.GetMaterial() ) )
-			{
-				Bounds = new BBox( 0, new Vector3( Width * TerrainMain.Current.Scale, wallHeight, Height * TerrainMain.Current.Scale ) )
-			};
-
-			wallMesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
-			wallMesh.CreateIndexBuffer( wallTriangles.Count, wallTriangles );
-
-			_builder.AddMesh( wallMesh );
-		}
-
 		_builder.AddCollisionMesh( wallVertices.ToArray(), wallTriangles.ToArray() );
+		// End shared CreateWallModel
+
+		if ( !Host.IsClient )
+			return _builder.Create();
+
+		// Start client-side GenerateModel
+		// TODO: Calculate normal/tangent.
+		var mesh = new Mesh( Material.Load( chunk.Map.TerrainType.GetMaterial() ) )
+		{
+			Bounds = new BBox( new Vector3( 0, LocalY, 0 ), new Vector3( chunk.Width * scale, LocalY + 64, chunk.Height * scale ) )
+		};
+
+		mesh.CreateVertexBuffer( vertList.Count, Vert.Layout, vertList );
+		mesh.CreateIndexBuffer( _triangles.Count, _triangles );
+
+		_builder.AddMesh( mesh );
+		// End client-side GenerateModel
+
+		// Start client-side CreateWallModel
+		var secondVertList = new List<Vert>();
+		foreach ( var vert in wallVertices )
+			secondVertList.Add( new Vert( vert, Vector3.Up, Vector3.Left, new Vector2( 0, 0 ) ) );
+
+		var terrainScale = chunk.Map.Scale;
+		var wallMesh = new Mesh( Material.Load( chunk.Map.TerrainType.GetMaterial() ) )
+		{
+			Bounds = new BBox( 0, new Vector3( chunk.Width * terrainScale, wallHeight, chunk.Height * terrainScale ) )
+		};
+
+		wallMesh.CreateVertexBuffer( secondVertList.Count, Vert.Layout, secondVertList );
+		wallMesh.CreateIndexBuffer( wallTriangles.Count, wallTriangles );
+
+		_builder.AddMesh( wallMesh );
+		// End client-side CreateWallModel
+
 		return _builder.Create();
 	}
 
-	private void March( bool[,] terrainGrid, int scale, TerrainChunk chunk )
+	private void March( TerrainChunk chunk, int scale )
 	{
-		for ( var x = 0; x < terrainGrid.GetLength( 0 ); x++ )
-			for ( var z = 0; z < terrainGrid.GetLength( 1 ); z++ )
+		for ( var x = 0; x < chunk.Width; x++ )
+			for ( var z = 0; z < chunk.Height; z++ )
 			{
 				float xRes = x * scale;
 				float zRes = z * scale;
@@ -156,42 +148,42 @@ public sealed class MarchingSquares
 				bool c4 = false;
 
 				// Cover neighbour cases for triangulating across chunks.
-				if ( x == terrainGrid.GetLength( 0 ) - 1 && z == terrainGrid.GetLength( 1 ) - 1 )
+				if ( x == chunk.Width - 1 && z == chunk.Height - 1 )
 				{
-					if ( chunk.xyNeighbour is not null )
+					if ( chunk.XyNeighbour is not null )
 					{
-						c1 = terrainGrid[x, z];
-						c2 = chunk.xyNeighbour.TerrainGrid[1, 0];
-						c3 = chunk.xyNeighbour.TerrainGrid[0, 0];
-						c4 = chunk.xyNeighbour.TerrainGrid[0, 1];
+						c1 = chunk[x, z];
+						c2 = chunk.XyNeighbour[1, 0];
+						c3 = chunk.XyNeighbour[0, 0];
+						c4 = chunk.XyNeighbour[0, 1];
 					}
 				}
-				else if ( x == terrainGrid.GetLength( 0 ) - 1 )
+				else if ( x == chunk.Width - 1 )
 				{
-					if ( chunk.xNeighbour is not null )
+					if ( chunk.XNeighbour is not null )
 					{
-						c1 = terrainGrid[x, z];
-						c2 = chunk.xNeighbour.TerrainGrid[0, z];
-						c3 = chunk.xNeighbour.TerrainGrid[0, z + 1];
-						c4 = terrainGrid[x, z + 1];
+						c1 = chunk[x, z];
+						c2 = chunk.XNeighbour[0, z];
+						c3 = chunk.XNeighbour[0, z + 1];
+						c4 = chunk[x, z + 1];
 					}
 				}
-				else if ( z == terrainGrid.GetLength( 1 ) - 1 )
+				else if ( z == chunk.Height - 1 )
 				{
-					if ( chunk.yNeighbour is not null )
+					if ( chunk.YNeighbour is not null )
 					{
-						c1 = terrainGrid[x, z];
-						c2 = terrainGrid[x + 1, z];
-						c3 = chunk.yNeighbour.TerrainGrid[x + 1, 0];
-						c4 = chunk.yNeighbour.TerrainGrid[x, 0];
+						c1 = chunk[x, z];
+						c2 = chunk[x + 1, z];
+						c3 = chunk.YNeighbour[x + 1, 0];
+						c4 = chunk.YNeighbour[x, 0];
 					}
 				}
 				else
 				{
-					c1 = terrainGrid[x, z];
-					c2 = terrainGrid[x + 1, z];
-					c3 = terrainGrid[x + 1, z + 1];
-					c4 = terrainGrid[x, z + 1];
+					c1 = chunk[x, z];
+					c2 = chunk[x + 1, z];
+					c3 = chunk[x + 1, z + 1];
+					c4 = chunk[x, z + 1];
 				}
 
 
@@ -251,7 +243,7 @@ public sealed class MarchingSquares
 					case 15:
 						MeshFromPoints( topLeft, topRight, bottomRight, bottomLeft );
 						// We still want to create walls for the map border, but skip over all other filled squares.
-						if ( x == 0 || z == 0 || x == terrainGrid.GetLength( 0 ) - 2 || z == terrainGrid.GetLength( 1 ) - 2 )
+						if ( x == 0 || z == 0 || x == chunk.Width - 2 || z == chunk.Height - 2 )
 							break;
 						_checkedVertices.Add( topLeft.VertexIndex );
 						_checkedVertices.Add( topRight.VertexIndex );

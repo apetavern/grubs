@@ -1,5 +1,4 @@
 ﻿using Grubs.States;
-using Grubs.Terrain;
 using Grubs.Utils;
 using Grubs.Utils.Event;
 using Grubs.Weapons.Base;
@@ -256,7 +255,7 @@ public sealed partial class Team : Entity, ISpectator
 	{
 		var spawnLocations = new List<Vector3>();
 		while ( spawnLocations.Count < num )
-			spawnLocations.Add( TerrainMain.Current.GetSpawnLocation() );
+			spawnLocations.Add( BaseGamemode.Instance!.TerrainMap.GetSpawnLocation() );
 		return spawnLocations;
 	}
 

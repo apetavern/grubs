@@ -20,7 +20,7 @@ namespace Grubs;
 /// <summary>
 /// The official Sbox GOTY 2022, Grubs!
 /// </summary>
-public sealed partial class GrubsGame : Game
+public sealed class GrubsGame : Game
 {
 	/// <summary>
 	/// This game.
@@ -36,9 +36,7 @@ public sealed partial class GrubsGame : Game
 			BaseState.Init();
 			_ = new EventRunner();
 
-			// Set the Rand seed and Seed property so the terrain generation seed is synced between server and client.
 			Rand.SetSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
-			TerrainMain.Seed = Rand.Int( 99999 );
 		}
 
 		if ( IsClient )
@@ -51,7 +49,6 @@ public sealed partial class GrubsGame : Game
 	{
 		base.ClientJoined( client );
 
-		TerrainMain.SetSeedRpc( To.Single( client ), TerrainMain.Seed );
 		BaseState.Instance.ClientJoined( client );
 	}
 
@@ -85,10 +82,17 @@ public sealed partial class GrubsGame : Game
 	[ConCmd.Admin( "save_gmap" )]
 	public static void SaveMap( string fileName, bool preserveSettings = true )
 	{
+		if ( BaseState.Instance is not BaseGamemode gamemode )
+			return;
+
 		var writer = new BinaryWriter( FileSystem.Data.OpenWrite( fileName ) );
 		try
 		{
-			PremadeTerrain.Serialize( writer, TerrainMain.Current, preserveSettings );
+			PremadeTerrain.Serialize( writer, gamemode.TerrainMap, preserveSettings );
+		}
+		catch ( Exception e )
+		{
+			Log.Error( e );
 		}
 		finally
 		{

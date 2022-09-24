@@ -27,7 +27,7 @@ public static class BinaryWriterExtension
 				writer.Write( value is null ? (int)setting.GetDefaultValue() : (int)value );
 				break;
 			case TerrainSetting.TerrainType:
-				writer.Write( (value is null ? setting.GetDefaultValue().ToString() : (string)value)! );
+				writer.Write( (value is null ? setting.GetDefaultValue().ToString() : value.ToString())! );
 				break;
 			default:
 				throw new ArgumentOutOfRangeException( nameof( setting ), setting, null );
