@@ -181,6 +181,9 @@ public sealed partial class TerrainMap : Entity
 				yOffset += ChunkSize;
 			}
 		}
+
+		foreach ( var chunk in _terrainGridChunks )
+			chunk.RefreshModel();
 	}
 
 	private void AlteredGrid()

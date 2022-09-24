@@ -90,7 +90,6 @@ public sealed partial class TerrainChunk : ModelEntity
 			_containedIndices.Add( index );
 
 		Tags.Add( "solid" );
-		RefreshModel();
 	}
 
 	/// <summary>
