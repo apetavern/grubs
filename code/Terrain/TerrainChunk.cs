@@ -7,47 +7,49 @@ namespace Grubs.Terrain;
 /// Represents a portion of a <see cref="TerrainMap"/>.
 /// </summary>
 [Category( "Terrain" )]
-public sealed class TerrainChunk
+public sealed partial class TerrainChunk : ModelEntity
 {
 	/// <summary>
 	/// The terrain that this chunk is a part of.
 	/// </summary>
-	public readonly TerrainMap Map;
-
-	/// <summary>
-	/// The world position of the chunk.
-	/// </summary>
-	public readonly Vector3 Position;
+	[Net]
+	public TerrainMap Map { get; private set; } = null!;
 
 	/// <summary>
 	/// The width of the chunk.
 	/// </summary>
-	public readonly int Width;
+	[Net]
+	public int Width { get; private set; }
 
 	/// <summary>
 	/// The height of the chunk.
 	/// </summary>
-	public readonly int Height;
+	[Net]
+	public int Height { get; private set; }
 
 	/// <summary>
 	/// The x neighbour of the chunk.
 	/// </summary>
-	public TerrainChunk XNeighbour = null!;
+	[Net]
+	public TerrainChunk XNeighbour { get; set; } = null!;
 
 	/// <summary>
 	/// The y neighbour of the chunk.
 	/// </summary>
-	public TerrainChunk YNeighbour = null!;
+	[Net]
+	public TerrainChunk YNeighbour { get; set; } = null!;
 
 	/// <summary>
 	/// The XY neighbour of the chunk.
 	/// </summary>
-	public TerrainChunk XyNeighbour = null!;
+	[Net]
+	public TerrainChunk XyNeighbour { get; set; } = null!;
 
 	/// <summary>
-	/// An array of all the indices that this chunk represents.
+	/// A list of all the indices that this chunk represents.
 	/// </summary>
-	private readonly ImmutableArray<int> _containedIndices;
+	[Net]
+	private IList<int> _containedIndices { get; set; } = null!;
 
 	/// <summary>
 	/// Gets the state of a position the chunk is holding.
@@ -71,12 +73,44 @@ public sealed class TerrainChunk
 		}
 	}
 
-	public TerrainChunk( TerrainMap map, Vector3 position, int width, int height, ImmutableArray<int> containedIndices )
+	public TerrainChunk()
+	{
+		Transmit = TransmitType.Always;
+	}
+
+	public TerrainChunk( TerrainMap map, Vector3 position, int width, int height,
+		IEnumerable<int> containedIndices ) : this()
 	{
 		Map = map;
 		Position = position;
 		Width = width;
 		Height = height;
-		_containedIndices = containedIndices;
+
+		foreach ( var index in containedIndices )
+			_containedIndices.Add( index );
+
+		Tags.Add( "solid" );
+		RefreshModel();
+	}
+
+	/// <summary>
+	/// Refreshes the terrain chunks model
+	/// </summary>
+	public void RefreshModel()
+	{
+		if ( IsServer )
+			RefreshModelRpc( To.Everyone );
+
+		Model = new MarchingSquares().CreateModel( this );
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
+	}
+
+	/// <summary>
+	/// Refreshes the model on the client-side.
+	/// </summary>
+	[ClientRpc]
+	private void RefreshModelRpc()
+	{
+		RefreshModel();
 	}
 }

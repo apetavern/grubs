@@ -65,8 +65,8 @@ public sealed partial class TerrainMap : Entity
 	[Net]
 	public TerrainType TerrainType { get; private set; }
 
-	public readonly List<TerrainChunk> TerrainGridChunks = new();
-	private readonly List<TerrainModel> _terrainModels = new();
+	[Net]
+	private IList<TerrainChunk> _terrainGridChunks { get; set; } = null!;
 	private readonly List<int> _pendingIndices = new();
 	private readonly List<bool> _pendingIndexValues = new();
 	private readonly HashSet<int> _dirtyChunks = new();
@@ -95,10 +95,9 @@ public sealed partial class TerrainMap : Entity
 
 		Seed = seed;
 		GenerateTerrainGrid();
-		AssignGridToChunks();
-
 		UpdateGridRpc( To.Everyone, TerrainGrid );
-		InitializeModels();
+
+		AssignGridToChunks();
 	}
 
 	public TerrainMap( PremadeTerrain terrain ) : this()
@@ -114,10 +113,9 @@ public sealed partial class TerrainMap : Entity
 
 		TerrainGrid = terrain.TerrainGrid;
 		GenerateTerrainGrid();
-		AssignGridToChunks();
-
 		UpdateGridRpc( To.Everyone, TerrainGrid );
-		InitializeModels();
+
+		AssignGridToChunks();
 	}
 
 	/// <summary>
@@ -152,29 +150,29 @@ public sealed partial class TerrainMap : Entity
 		{
 			var chunkPos = new Vector3( xOffset * Scale, 0, yOffset * Scale );
 
-			var containedIndices = ImmutableArray.CreateBuilder<int>();
+			var containedIndices = new List<int>();
 			for ( var x = xOffset; x < xOffset + ChunkSize; x++ )
 				for ( var y = yOffset; y < yOffset + ChunkSize; y++ )
 					containedIndices.Add( Dimensions.Convert2dTo1d( x, y, Width ) );
 
-			var chunk = new TerrainChunk( this, chunkPos, ChunkSize, ChunkSize, containedIndices.ToImmutable() );
+			var chunk = new TerrainChunk( this, chunkPos, ChunkSize, ChunkSize, containedIndices );
 
 			// Set chunk neighbours for the purpose of connecting chunks.
 			if ( xOffset > 0 )
 			{
-				TerrainGridChunks[i - 1].XNeighbour = chunk;
+				_terrainGridChunks[i - 1].XNeighbour = chunk;
 			}
 
 			if ( yOffset > 0 )
 			{
-				TerrainGridChunks[i - (Width / ChunkSize)].YNeighbour = chunk;
+				_terrainGridChunks[i - (Width / ChunkSize)].YNeighbour = chunk;
 				if ( xOffset > 0 )
 				{
-					TerrainGridChunks[i - (Width / ChunkSize) - 1].XyNeighbour = chunk;
+					_terrainGridChunks[i - (Width / ChunkSize) - 1].XyNeighbour = chunk;
 				}
 			}
 
-			TerrainGridChunks.Add( chunk );
+			_terrainGridChunks.Add( chunk );
 
 			xOffset += ChunkSize;
 			if ( xOffset == Width )
@@ -573,21 +571,6 @@ public sealed partial class TerrainMap : Entity
 	}
 
 	/// <summary>
-	/// Initializes the terrain physics and models.
-	/// </summary>
-	private void InitializeModels()
-	{
-		Host.AssertServer();
-
-		foreach ( var model in _terrainModels )
-			model.Delete();
-		_terrainModels.Clear();
-
-		for ( var i = 0; i < TerrainGridChunks.Count; i++ )
-			_terrainModels.Add( new TerrainModel( this, i ) );
-	}
-
-	/// <summary>
 	/// Refreshes any chunks that have been edited.
 	/// </summary>
 	private void RefreshDirtyChunks()
@@ -595,7 +578,7 @@ public sealed partial class TerrainMap : Entity
 		Host.AssertServer();
 
 		foreach ( var index in _dirtyChunks )
-			_terrainModels[index].RefreshModel();
+			_terrainGridChunks[index].RefreshModel();
 
 		_dirtyChunks.Clear();
 	}
@@ -652,7 +635,7 @@ public sealed partial class TerrainMap : Entity
 	/// </summary>
 	private void DrawChunkDebug()
 	{
-		foreach ( var chunk in TerrainGridChunks )
+		foreach ( var chunk in _terrainGridChunks )
 		{
 			var mins = chunk.Position.WithY( -29 );
 			DebugOverlay.Box( mins, new Vector3( mins.x + chunk.Width * Scale, -30, mins.z + chunk.Height * Scale ), Color.Yellow, 0.6f );
@@ -667,7 +650,6 @@ public sealed partial class TerrainMap : Entity
 	public void UpdateGridRpc( bool[] terrainGrid )
 	{
 		TerrainGrid = terrainGrid;
-		AssignGridToChunks();
 	}
 
 	/// <summary>

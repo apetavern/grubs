@@ -24,7 +24,7 @@ public sealed class MarchingSquares
 		March( chunk, scale );
 
 		var vertexNormals = CalculateNormals();
-		var vertexTangents = CalculateTangents(vertexNormals);
+		var vertexTangents = CalculateTangents( vertexNormals );
 
 		// Convert Vector3 Vertices to Vert List
 		var vertList = new List<Vert>();
@@ -122,7 +122,7 @@ public sealed class MarchingSquares
 		return normals;
 	}
 
-	private List<Vector3> CalculateTangents(List<Vector3> normals)
+	private List<Vector3> CalculateTangents( List<Vector3> normals )
 	{
 		var tangents = new List<Vector3>();
 		for ( var i = 0; i < _triangles.Count; i++ )
