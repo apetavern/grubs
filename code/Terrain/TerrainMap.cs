@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics;
 using Grubs.Utils;
+using Trace = Sandbox.Trace;
 
 namespace Grubs.Terrain;
 
@@ -68,6 +70,7 @@ public sealed partial class TerrainMap : Entity
 	private readonly List<int> _pendingIndices = new();
 	private readonly List<bool> _pendingIndexValues = new();
 	private readonly HashSet<int> _dirtyChunks = new();
+	private TimeSince _timeSinceLastDebug;
 
 	private const float SurfaceLevel = 0.50f;
 	private const float NoiseThreshold = 0.25f;
@@ -603,6 +606,21 @@ public sealed partial class TerrainMap : Entity
 	[Event.Tick.Server]
 	private void ServerTick()
 	{
+		if ( TerrainDebugLevel != 0 && _timeSinceLastDebug > 0.5 )
+		{
+			switch ( TerrainDebugLevel )
+			{
+				case 2:
+					DrawGridDebug();
+					DrawChunkDebug();
+					break;
+				case 1:
+					DrawChunkDebug();
+					break;
+			}
+			_timeSinceLastDebug = 0;
+		}
+
 		if ( _pendingIndices.Count == 0 )
 			return;
 
@@ -610,6 +628,35 @@ public sealed partial class TerrainMap : Entity
 		_pendingIndices.Clear();
 		_pendingIndexValues.Clear();
 		RefreshDirtyChunks();
+	}
+
+	/// <summary>
+	/// Draws the grid array. If <see cref="TerrainDebugLevel"/> is 3 then empty positions will also be shown.
+	/// </summary>
+	private void DrawGridDebug()
+	{
+		for ( var i = 0; i < TerrainGrid.Length; i++ )
+		{
+			var (x, y) = Dimensions.Convert1dTo2d( i, Width );
+			var mins = new Vector3( x * Scale, -31, y * Scale );
+			var maxs = new Vector3( mins.x + Scale, -32, mins.z + Scale );
+			if ( TerrainGrid[i] )
+				DebugOverlay.Box( mins, maxs.WithY( -33 ), Color.Green, 0.6f );
+			else if ( TerrainDebugLevel == 3 )
+				DebugOverlay.Box( mins, maxs, Color.Red, 0.6f );
+		}
+	}
+
+	/// <summary>
+	/// Draws outlines on all chunks.
+	/// </summary>
+	private void DrawChunkDebug()
+	{
+		foreach ( var chunk in TerrainGridChunks )
+		{
+			var mins = chunk.Position.WithY( -29 );
+			DebugOverlay.Box( mins, new Vector3( mins.x + chunk.Width * Scale, -30, mins.z + chunk.Height * Scale ), Color.Yellow, 0.6f );
+		}
 	}
 
 	/// <summary>
@@ -634,4 +681,10 @@ public sealed partial class TerrainMap : Entity
 		for ( var i = 0; i < editedIndices.Length; i++ )
 			TerrainGrid[editedIndices[i]] = indexValues[i];
 	}
+
+	/// <summary>
+	/// Debug console variable to see debug information relating to terrain.
+	/// </summary>
+	[ConVar.Server( "terrain_debug_level", Min = 0, Max = 3 )]
+	public static int TerrainDebugLevel { get; set; } = 0;
 }
