@@ -1,5 +1,6 @@
 ﻿using Grubs.Crates;
 using Grubs.States;
+using Grubs.Utils;
 using Grubs.Weapons.Base;
 
 namespace Grubs.Player;
@@ -8,8 +9,7 @@ public sealed partial class GrubsCamera : CameraMode
 {
 	public float Distance { get; set; } = 1024;
 	public float DistanceScrollRate { get; set; } = 32f;
-	public float MinDistance { get; set; } = 128f;
-	public float MaxDistance { get; set; } = 2048f;
+	public FloatRange DistanceRange { get; } = new FloatRange( 128f, 2048f );
 
 	private float LerpSpeed { get; set; } = 5f;
 	private bool CenterOnPawn { get; set; } = true;
@@ -26,7 +26,7 @@ public sealed partial class GrubsCamera : CameraMode
 	public override void Update()
 	{
 		Distance -= Input.MouseWheel * DistanceScrollRate;
-		Distance = Distance.Clamp( MinDistance, MaxDistance );
+		Distance = DistanceRange.Clamp( Distance );
 
 		FindTarget();
 

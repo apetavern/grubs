@@ -49,6 +49,6 @@ public sealed class GrubNametag : WorldPanel
 		Rotation = Rotation.LookAt( Vector3.Right );
 
 		if ( Local.Pawn is ISpectator { Camera: GrubsCamera camera } )
-			WorldScale = 1.5f + (camera.Distance / camera.MaxDistance * 2);
+			WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 3f;
 	}
 }
