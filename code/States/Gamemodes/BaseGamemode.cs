@@ -6,6 +6,7 @@ using Grubs.Terrain;
 using Grubs.Terrain.Shapes;
 using Grubs.Utils;
 using Grubs.Utils.Event;
+using Grubs.Weapons.Base;
 
 namespace Grubs.States;
 
@@ -30,6 +31,12 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	[Net]
 	public TerrainMap TerrainMap { get; private set; } = null!;
+
+	/// <summary>
+	/// The kill barrier at the bottom of the world.
+	/// </summary>
+	[Net]
+	public DamageZone KillZone { get; private set; } = null!;
 
 	/// <summary>
 	/// Whether or not the active Grub can only use movement.
@@ -86,13 +93,13 @@ public abstract partial class BaseGamemode : BaseState
 			// Bottom bar
 			.AddShape( BoxShape.WithSize( new Vector3( int.MaxValue, 100, 100 ) ).WithOffset( new Vector3( (-int.MaxValue / 2), -50, -100 ) ) );
 
-		new DamageZone()
+		KillZone = new DamageZone()
 			.WithDamageFlags( DamageFlags.Generic )
 			.WithInstantKill( true )
 			.WithDamage( 9999 )
 			.WithPosition( Vector3.Zero )
 			.WithShape( killBoundary )
-			.Finish();
+			.Finish<DamageZone>();
 
 		List<Client> participants;
 		if ( forced )
@@ -189,10 +196,18 @@ public abstract partial class BaseGamemode : BaseState
 			return;
 		}
 
+		TerrainMap.Delete();
 		TeamManager.Delete();
+		KillZone.Delete();
 		TerrainZone.All.Clear();
 		foreach ( var client in Client.All )
 			client.Pawn?.Delete();
+		foreach ( var spectator in All.OfType<Spectator>() )
+			spectator.Delete();
+		foreach ( var crate in All.OfType<BaseCrate>() )
+			crate.Delete();
+		foreach ( var weapon in All.OfType<GrubWeapon>() )
+			weapon.Delete();
 
 		base.Leave();
 	}

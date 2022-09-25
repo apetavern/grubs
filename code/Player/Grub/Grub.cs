@@ -147,14 +147,6 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		DeathTask = Die();
 	}
 
-	protected override void OnDestroy()
-	{
-		base.OnDestroy();
-
-		if ( IsServer )
-			Gravestone?.Delete();
-	}
-
 	public void Spawn( Client? cl = null )
 	{
 		base.Spawn();
@@ -199,7 +191,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		LifeState = LifeState.Dead;
 		// TODO: Hide the grub instead of deleting it. Possible revive mechanic?
 		EnableDrawing = false;
-		Gravestone = new Gravestone( this ) { Owner = this };
+		Gravestone = new Gravestone( this ) { Owner = this, Parent = this };
 
 		ChatBox.AddInformation( To.Everyone, DeathReason.ToString(), $"avatar:{Team.ActiveClient.PlayerId}" );
 		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );

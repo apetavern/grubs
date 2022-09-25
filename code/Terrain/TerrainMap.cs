@@ -155,7 +155,7 @@ public sealed partial class TerrainMap : Entity
 				for ( var y = yOffset; y < yOffset + ChunkSize; y++ )
 					containedIndices.Add( Dimensions.Convert2dTo1d( x, y, Width ) );
 
-			var chunk = new TerrainChunk( this, chunkPos, ChunkSize, ChunkSize, containedIndices );
+			var chunk = new TerrainChunk( this, chunkPos, ChunkSize, ChunkSize, containedIndices ) { Parent = this };
 
 			// Set chunk neighbours for the purpose of connecting chunks.
 			if ( xOffset > 0 )
