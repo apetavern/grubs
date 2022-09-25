@@ -4,11 +4,13 @@ namespace Grubs.Player;
 
 public sealed partial class GrubsInventory : BaseNetworkable
 {
+	[Net]
 	public Entity Owner { get; init; } = null!;
-	public GrubWeapon? LastUsedWeapon { get; set; } = null;
+	[Net]
+	public GrubWeapon? LastUsedWeapon { get; set; }
 
 	[Net]
-	public List<GrubWeapon> Items { get; set; } = new();
+	public IList<GrubWeapon> Items { get; private set; } = null!;
 
 	public void Add( GrubWeapon weapon, bool makeActive = false )
 	{
