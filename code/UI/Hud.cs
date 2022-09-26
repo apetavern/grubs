@@ -1,5 +1,6 @@
 ﻿using Grubs.Player;
 using Grubs.States;
+using Grubs.UI.Menu;
 using Grubs.UI.World;
 using Grubs.Utils.Event;
 
@@ -7,7 +8,7 @@ namespace Grubs.UI;
 
 public sealed class Hud : RootPanel
 {
-	private WaitingStatus? _waitingStatus;
+	private MainMenu? _mainMenu;
 	private TurnTime? _turnTime;
 	private InventoryPanel? _inventoryPanel;
 	private WindInfo? _windInfo;
@@ -29,14 +30,14 @@ public sealed class Hud : RootPanel
 	[GrubsEvent.EnterState.Client( nameof( WaitingState ) )]
 	private void OnEnterWaiting()
 	{
-		_waitingStatus?.Delete();
-		_waitingStatus = AddChild<WaitingStatus>();
+		_mainMenu?.Delete();
+		_mainMenu = AddChild<MainMenu>();
 	}
 
 	[GrubsEvent.LeaveState.Client( nameof( WaitingState ) )]
 	private void OnLeaveWaiting()
 	{
-		_waitingStatus?.Delete();
+		_mainMenu?.Delete();
 	}
 
 	[GrubsEvent.EnterState.Client( nameof( GameEndState ) )]

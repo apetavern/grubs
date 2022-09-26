@@ -1,0 +1,9 @@
+﻿@import "/UI/Stylesheets/Common.scss";
+
+MainMenu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-family: $font;
+    pointer-events: all;
+}
