@@ -49,7 +49,7 @@ NavBar {
         }
 
         &.Active {
-            font-color: $menu-accent;
+            color: $menu-accent;
         }
     }
 }
