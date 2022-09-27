@@ -52,6 +52,23 @@ public class WormPreviewScene : Panel
 		renderScene.Camera.AmbientLightColor = new Color( .25f, .15f, .15f ) * 0.5f;
 	}
 
+	public override void OnButtonEvent( ButtonEvent e )
+	{
+		// CaptureMouseInput doesn't work wtf scam?
+		if ( e.Button == "mouseleft" )
+		{
+			SetMouseCapture( e.Pressed );
+		}
+		base.OnButtonEvent( e );
+	}
+
+	public override void OnMouseWheel( float value )
+	{
+		renderSceneDistance += value * 3;
+		renderSceneDistance = renderSceneDistance.Clamp( 10, 200 );
+		base.OnMouseWheel( value );
+	}
+
 	public override void Tick()
 	{
 		if ( renderScene == null ) 

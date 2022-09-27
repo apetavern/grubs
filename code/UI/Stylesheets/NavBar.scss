@@ -9,6 +9,7 @@ NavBar {
     padding: 10px $safe-area-x;
     box-shadow: 0 0 25px black;
     background-image: linear-gradient(to right, $menu-dark, $menu-light);
+    pointer-events: all;
 
     .logo {
         width: 64px;

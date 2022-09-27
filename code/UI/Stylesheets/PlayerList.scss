@@ -10,6 +10,7 @@ PlayerList {
     flex-direction: column;
     border-radius: 3px;
     padding-bottom: 8px;
+    pointer-events: all;
 }
 
 .title {

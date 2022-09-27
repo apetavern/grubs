@@ -10,6 +10,7 @@ StartButton {
     border-radius: 3px;
     cursor: pointer;
     padding: 15px;
+    pointer-events: all;
 
     .inner {
         width: 100%;

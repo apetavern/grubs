@@ -6,7 +6,7 @@ MainMenu {
     height: 100%;
     flex-direction: column;
     font-family: $font;
-    pointer-events: all;
+    pointer-events: none;
 }
 
 .menu-holder {
@@ -34,4 +34,5 @@ WormPreviewScene {
     position: absolute;
     width: 100%;
     height: 100%;
+    pointer-events: all;
 }
