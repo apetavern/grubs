@@ -37,12 +37,18 @@ public class WormPreviewScene : Panel
 			skycolor = sceneLight.SkyColor;
 		}
 
-		new SceneLight( sceneWorld, Vector3.Up * 150.0f, 200.0f, Color.White * 5.0f );
-		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Forward * 100.0f, 200, Color.White * 15.0f );
-		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Backward * 100.0f, 200, Color.White * 15f );
-		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Left * 100.0f, 200, skycolor * 20.0f );
-		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Right * 100.0f, 200, Color.White * 15.0f );
-		new SceneLight( sceneWorld, Vector3.Up * 100.0f + Vector3.Up, 200, Color.Yellow * 15.0f );
+		// Right side light
+		// new SceneLight( sceneWorld, Vector3.Up * 150.0f, 200.0f, Color.White * 5.0f );
+		// Background light
+		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Forward * 150.0f, 200, Color.White * 2.0f );
+		// Foreground light
+		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Backward * 80.0f, 200, Color.White * 5.0f );
+		// Back/rim light
+		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Left * 100.0f, 200, skycolor * 3.0f );
+		// Soft right side fill light
+		new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Right * 100.0f, 200, skycolor * 3.0f );
+		// Right side yellow light
+		new SceneLight( sceneWorld, Vector3.Up * 100.0f + Vector3.Up, 200, Color.Yellow * 2.0f );
 
 		renderScene = Add.ScenePanel( sceneWorld, renderScenePosition, Rotation.From( renderSceneAngles ), 75 );
 		renderScene.Style.Width = Length.Percent( 100 );
@@ -80,7 +86,7 @@ public class WormPreviewScene : Panel
 			renderSceneAngles.pitch = 0;
 		}
 
-		yaw = yaw.Clamp( -155, -115 );
+		yaw = yaw.Clamp( -200, -130 );
 
 		float yawRad = MathX.DegreeToRadian( yaw );
 		float height = 16;
