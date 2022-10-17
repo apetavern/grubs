@@ -51,6 +51,11 @@ public partial class HitscanWeapon : GrubWeapon
 	protected virtual string FireSound => AssetDefinition.FireSound;
 
 	/// <summary>
+	/// The type of particle effect that this weapon uses.
+	/// </summary>
+	protected virtual string ParticleType => AssetDefinition.ParticleType;
+
+	/// <summary>
 	/// The amount of damage being hit by the weapon will do.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
@@ -122,7 +127,7 @@ public partial class HitscanWeapon : GrubWeapon
 		}
 
 		var muzzle = attachment.Value;
-		var system = Particles.Create( "particles/guntrace/guntrace.vpcf" );
+		var system = Particles.Create( ParticleType );
 		var offsetSpread = Vector3.Random * TraceSpread;
 
 		Particles.Create( "particles/muzzleflash/grubs_muzzleflash.vpcf", muzzle.Position );

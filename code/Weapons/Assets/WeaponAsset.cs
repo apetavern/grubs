@@ -20,6 +20,9 @@ public class WeaponAsset : GameResource
 	[Property, Category( "Meta" ), ResourceType( "png" )]
 	public string Icon { get; set; } = "";
 
+	[Property, Category( "Meta" ), ResourceType( "vpcf" )]
+	public string ParticleType { get; set; } = "";
+
 	[Property, Category( "Meta" )]
 	public FiringType FiringType { get; set; } = FiringType.Instant;
 

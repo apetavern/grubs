@@ -67,9 +67,9 @@ public class ProjectileWeapon : GrubWeapon
 	protected virtual string ProjectileExplosionSound => AssetDefinition.ProjectileExplodeSound;
 
 	/// <summary>
-	/// The particle trail for the projectile.
+	/// The type of particle effect that this weapon uses.
 	/// </summary>
-	protected virtual string ProjectileParticleTrail => AssetDefinition.ProjectileParticleTrail;
+	protected virtual string ParticleType => AssetDefinition.ParticleType;
 
 	/// <summary>
 	/// The particle trail for the projectile.
@@ -103,7 +103,7 @@ public class ProjectileWeapon : GrubWeapon
 			.WithSpeed( ProjectileSpeed )
 			.WithExplosionRadius( ProjectileExplosionRadius )
 			.WithExplosionSound( ProjectileExplosionSound )
-			.WithTrailParticle( ProjectileParticleTrail )
+			.WithTrailParticle( ParticleType )
 			.SetCollisionReaction( ProjectileCollisionReaction );
 
 		if ( ProjectileShouldUseTrace )

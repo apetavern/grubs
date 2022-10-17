@@ -18,12 +18,12 @@
 		WeaponName = "Grenade"
 		Model = resource:"models/weapons/grenade/grenade.vmdl"
 		Icon = resource:"models/weapons/grenade/grenade.vmdl_c.png"
+		ParticleType = ""
 		FiringType = "Charged"
 		HoldPose = "Throwable"
 		Uses = 1
 		DropChance = 0
 		HasReticle = true
-		UnequipAfter = 0.5
 		InfiniteAmmo = true
 		FireSound = resource:"weapons/rust_flashlight/sounds/rust_flashlight.attack.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"

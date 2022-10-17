@@ -18,6 +18,7 @@
 		WeaponName = "Petrol Bomb"
 		Model = resource:"models/weapons/petrolbomb/petrolbomb.vmdl"
 		Icon = resource:"models/weapons/petrolbomb/petrolbomb.vmdl_c.png"
+		ParticleType = ""
 		FiringType = "Charged"
 		HoldPose = "Throwable"
 		Uses = 1
