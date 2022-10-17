@@ -14,12 +14,12 @@
 		WeaponName = "Shotgun"
 		Model = resource:"models/weapons/shotgun/shotgun.vmdl"
 		Icon = resource:"models/weapons/shotgun/shotgun.vmdl_c.png"
+		ParticleType = resource:"particles/guntrace/guntrace.vpcf"
 		FiringType = "Instant"
 		HoldPose = "Shotgun"
 		Uses = 2
 		DropChance = 5
 		HasReticle = true
-		UnequipAfter = 0
 		InfiniteAmmo = false
 		FireSound = resource:"weapons/rust_pumpshotgun/sounds/rust_pumpshotgun.shoot.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"

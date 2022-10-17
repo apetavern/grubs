@@ -14,11 +14,12 @@
 		WeaponName = "gibgun"
 		Model = resource:"models/weapons/railgun/railgun.vmdl"
 		Icon = resource:"models/weapons/railgun/railgun.vmdl_c.png"
+		ParticleType = resource:"particles/guntrace/railgun.vpcf"
 		FiringType = "Instant"
 		HoldPose = "Rifle"
 		Uses = 1
+		DropChance = 1
 		HasReticle = true
-		UnequipAfter = 0
 		InfiniteAmmo = false
 		FireSound = resource:"sounds/physics/breaking/break_wood_plank.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"

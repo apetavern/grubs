@@ -14,12 +14,12 @@
 		WeaponName = "Minigun"
 		Model = resource:"models/weapons/minigun/minigun.vmdl"
 		Icon = resource:"models/weapons/minigun/minigun.vmdl_c.png"
+		ParticleType = resource:"particles/guntrace/guntrace.vpcf"
 		FiringType = "Instant"
 		HoldPose = "Minigun"
 		Uses = 1
 		DropChance = 3
 		HasReticle = true
-		UnequipAfter = 0
 		InfiniteAmmo = false
 		FireSound = resource:"weapons/rust_smg/sounds/rust_smg.shoot.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"

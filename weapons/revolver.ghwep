@@ -14,12 +14,12 @@
 		WeaponName = "Revolver"
 		Model = resource:"models/weapons/revolver/revolver.vmdl"
 		Icon = resource:"models/weapons/revolver/revolver.vmdl_c.png"
+		ParticleType = resource:"particles/guntrace/guntrace.vpcf"
 		FiringType = "Instant"
 		HoldPose = "Revolver"
 		Uses = 6
 		DropChance = 3
 		HasReticle = true
-		UnequipAfter = 0
 		InfiniteAmmo = false
 		FireSound = resource:"weapons/rust_pistol/sound/rust_pistol.shoot.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
