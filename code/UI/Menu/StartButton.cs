@@ -14,8 +14,8 @@ public class StartButton : Panel
 	{
 		base.OnClick( e );
 
-/*		if ( Client.All.Count < Game.Instance.StateHandler.LobbyCount ||
-			Client.All.Count < GameConfig.MinimumPlayersToStart ) return;*/
+		/*		if ( Client.All.Count < Game.Instance.StateHandler.LobbyCount ||
+					Client.All.Count < GameConfig.MinimumPlayersToStart ) return;*/
 
 		StartGame();
 

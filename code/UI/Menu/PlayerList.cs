@@ -18,7 +18,7 @@ public class PlayerEntry : Panel
 	{
 		base.Tick();
 
-		if ( !Client.IsValid() ) 
+		if ( !Client.IsValid() )
 			return;
 
 		SetClass( "loaded", Loaded );
@@ -37,14 +37,14 @@ public partial class PlayerList : Panel
 	{
 		foreach ( var panel in PlayersContainer.Children.OfType<PlayerEntry>() )
 		{
-			if ( panel.Client.IsValid() ) 
+			if ( panel.Client.IsValid() )
 				continue;
 			panel.Delete();
 		}
 
 		foreach ( var client in Client.All )
 		{
-			if ( PlayersContainer.Children.OfType<PlayerEntry>().Any( panel => panel.Client == client ) ) 
+			if ( PlayersContainer.Children.OfType<PlayerEntry>().Any( panel => panel.Client == client ) )
 				continue;
 			PlayersContainer.AddChild( new PlayerEntry( client ) );
 		}
