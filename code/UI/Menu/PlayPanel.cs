@@ -3,5 +3,5 @@
 [UseTemplate]
 public class PlayPanel : Panel
 {
-	
+
 }
