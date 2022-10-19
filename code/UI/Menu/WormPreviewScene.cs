@@ -25,7 +25,7 @@ public class WormPreviewScene : Panel
 		Style.Width = Length.Percent( 100 );
 		Style.Height = Length.Percent( 100 );
 
-		stage = new SceneModel( sceneWorld, Model.Load( "models/menu/menubg.vmdl" ), 
+		stage = new SceneModel( sceneWorld, Model.Load( "models/menu/menubg.vmdl" ),
 			Transform.Zero.WithScale( 1f ).WithPosition( Vector3.Down * 4 ) );
 		worm = new SceneModel( sceneWorld, Model.Load( "models/citizenworm.vmdl" ),
 			Transform.Zero.WithScale( 1f ).WithPosition( new Vector3( -64, 32, 4 ) ).WithRotation( Rotation.From( 0, -135, 0 ) ) );
@@ -77,7 +77,7 @@ public class WormPreviewScene : Panel
 
 	public override void Tick()
 	{
-		if ( renderScene == null ) 
+		if ( renderScene == null )
 			return;
 
 		if ( HasMouseCapture )
