@@ -23,6 +23,7 @@ NavBar {
     .title {
         font-size: 64px;
         color: white;
+        text-shadow: 2px 6px 2px $menu-dark;
     }
 
     .menu-buttons {
@@ -38,6 +39,7 @@ NavBar {
         border-radius: 100%;
         padding: 5px 20px;
         background-color: rgba( $menu-accent, 0 );
+        text-shadow: 2px 6px 2px $menu-dark;
 
         iconpanel {
             margin-right: 16px;
