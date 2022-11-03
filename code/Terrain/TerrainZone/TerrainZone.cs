@@ -18,7 +18,7 @@ public partial class TerrainZone : Entity
 	/// The shape that this zone is taking.
 	/// </summary>
 	[Net]
-	protected ZoneShape Shape { get; set; } = BoxShape.WithSize( Vector3.One );
+	protected ZoneShape Shape { get; set; } = Grubs.Terrain.Shapes.BoxShape.WithSize( Vector3.One );
 
 	/// <summary>
 	/// The amount of turns until the zone is removed.
