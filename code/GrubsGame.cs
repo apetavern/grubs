@@ -20,12 +20,12 @@ namespace Grubs;
 /// <summary>
 /// The official Sbox GOTY 2022, Grubs!
 /// </summary>
-public sealed class GrubsGame : Game
+public sealed class GrubsGame : GameManager
 {
 	/// <summary>
 	/// This game.
 	/// </summary>
-	public new static GrubsGame Current => (Game.Current as GrubsGame)!;
+	public new static GrubsGame Current => (GameManager.Current as GrubsGame)!;
 
 	public GrubsGame()
 	{
@@ -125,7 +125,7 @@ public sealed class GrubsGame : Game
 		gamemode.UseTurn( false );
 		activeGrub.TakeDamage( new DamageInfo
 		{
-			Attacker = ConsoleSystem.Caller.Pawn,
+			Attacker = (Entity)ConsoleSystem.Caller.Pawn,
 			Damage = 9999,
 			Flags = DamageFlags.Crush
 		} );
