@@ -11,19 +11,17 @@ public partial class TerrainZone : Entity
 	/// <summary>
 	/// Networked list of all damage zones in the terrain.
 	/// </summary>
-	[Net]
 	public new static IList<TerrainZone> All { get; private set; } = new List<TerrainZone>();
 
 	/// <summary>
 	/// The shape that this zone is taking.
 	/// </summary>
 	[Net]
-	protected ZoneShape Shape { get; set; } = Grubs.Terrain.Shapes.BoxShape.WithSize( Vector3.One );
+	protected ZoneShape Shape { get; set; } = BoxShape.WithSize( Vector3.One );
 
 	/// <summary>
 	/// The amount of turns until the zone is removed.
 	/// </summary>
-	[Net]
 	public int ExpireAfterTurns
 	{
 		get => _expireAfterTurns;
@@ -34,10 +32,28 @@ public partial class TerrainZone : Entity
 				QueueToRemove.Enqueue( this );
 		}
 	}
-	private int _expireAfterTurns = -1;
+	[Net]
+	private int _expireAfterTurns { get; set; } = -1;
 
 	private static readonly Queue<TerrainZone> QueueToAdd = new();
 	private static readonly Queue<TerrainZone> QueueToRemove = new();
+
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		if ( IsClient )
+			return;
+
+		All.Add( this );
+	}
+
+	public override void ClientSpawn()
+	{
+		base.ClientSpawn();
+
+		All.Add( this );
+	}
 
 	protected override void OnDestroy()
 	{

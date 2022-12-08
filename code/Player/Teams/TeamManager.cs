@@ -12,7 +12,6 @@ public sealed partial class TeamManager : Entity
 	/// The single instance of this manager.
 	/// <remarks>All <see cref="Grubs.States.BaseGamemode"/>s should be including a <see cref="TeamManager"/>.</remarks>
 	/// </summary>
-	[Net]
 	public static TeamManager Instance { get; private set; } = null!;
 
 	/// <summary>
@@ -35,6 +34,23 @@ public sealed partial class TeamManager : Entity
 	public TeamManager()
 	{
 		Transmit = TransmitType.Always;
+		Instance = this;
+	}
+
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		if ( IsClient )
+			return;
+
+		Instance = this;
+	}
+
+	public override void ClientSpawn()
+	{
+		base.ClientSpawn();
+
 		Instance = this;
 	}
 

@@ -11,7 +11,6 @@ public abstract partial class BaseState : Entity
 	/// <summary>
 	/// The current state the game is in.
 	/// </summary>
-	[Net]
 	public static BaseState Instance { get; private set; } = null!;
 
 	private bool _entered;
@@ -20,6 +19,23 @@ public abstract partial class BaseState : Entity
 	public BaseState()
 	{
 		Transmit = TransmitType.Always;
+	}
+
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		if ( IsClient )
+			return;
+
+		Instance = this;
+	}
+
+	public override void ClientSpawn()
+	{
+		base.ClientSpawn();
+
+		Instance = this;
 	}
 
 	/// <summary>
