@@ -19,7 +19,6 @@
   ],
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "Grubs",
   "Metadata": {
     "MapList": [
       "apetavern.grubs_test_map"

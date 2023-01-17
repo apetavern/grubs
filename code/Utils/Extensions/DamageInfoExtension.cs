@@ -19,7 +19,7 @@ public static class DamageInfoExtension
 	{
 		return new DamageInfo
 		{
-			Flags = DamageFlags.Blast,
+			Tags = { "explosive" },
 			Position = position,
 			Damage = damage,
 			Attacker = attacker,
@@ -37,7 +37,7 @@ public static class DamageInfoExtension
 	{
 		return new DamageInfo
 		{
-			Flags = DamageFlags.Fall,
+			Tags = { "fall" },
 			Damage = damage,
 			Attacker = attacker
 		};
@@ -52,7 +52,7 @@ public static class DamageInfoExtension
 	{
 		return new DamageInfo
 		{
-			Flags = zone.DamageFlags,
+			Tags = zone.DamageTags,
 			Damage = zone.DamagePerTrigger
 		};
 	}

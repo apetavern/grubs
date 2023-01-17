@@ -30,10 +30,10 @@ public class MeleeWeapon : GrubWeapon
 	protected virtual float HitDelay => AssetDefinition.HitDelay;
 
 	/// <summary>
-	/// The damage flags to attach to the damage info.
+	/// The damage tags to attach to the damage info.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
-	protected virtual DamageFlags DamageFlags => AssetDefinition.DamageFlags;
+	protected virtual HashSet<string> DamageTags => AssetDefinition.DamageTags;
 
 	/// <summary>
 	/// The amount of force that will be applied to the grub upon being hit.
@@ -61,7 +61,7 @@ public class MeleeWeapon : GrubWeapon
 	{
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
@@ -82,7 +82,7 @@ public class MeleeWeapon : GrubWeapon
 
 	protected virtual void Hit()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			var grubsHit = GetGrubsInSwing();
 			if ( !HitMulti )
@@ -117,7 +117,7 @@ public class MeleeWeapon : GrubWeapon
 	/// <returns>The list of grubs that were hit.</returns>
 	protected virtual List<Grub> GetGrubsInSwing()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var mins = Vector3.Min( HitStart, HitStart + (Holder.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
 		var maxs = Vector3.Max( HitStart, HitStart + (Holder.FacingLeft ? HitSize.WithX( -HitSize.x ) : HitSize) );
@@ -147,7 +147,7 @@ public class MeleeWeapon : GrubWeapon
 	/// <param name="grub">The grub that was hit.</param>
 	protected virtual void HitGrub( Grub grub )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var dir = (grub.Position - Position).Normal;
 		grub.ApplyAbsoluteImpulse( dir * HitForce );
@@ -156,7 +156,7 @@ public class MeleeWeapon : GrubWeapon
 		{
 			Attacker = Parent,
 			Damage = Damage,
-			Flags = DamageFlags,
+			Tags = DamageTags,
 			Position = Position
 		} );
 	}

@@ -113,11 +113,6 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// </summary>
 	protected Grub Holder => (Parent as Grub)!;
 
-	/// <summary>
-	/// The animator of the grub that is holding the weapon.
-	/// </summary>
-	protected GrubAnimator? Animator;
-
 	private const int MaxCharge = 100;
 
 	public GrubWeapon()
@@ -145,10 +140,8 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 		if ( ent is not Grub grub )
 			return;
 
-		Animator = grub.Animator;
-
 		EnableDrawing = true;
-		Animator?.SetAnimParameter( "holdpose", (int)HoldPose );
+		grub.SetAnimParameter( "holdpose", (int)HoldPose );
 		SetParent( grub, true );
 
 		base.OnActive();
@@ -166,11 +159,10 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 		ShowWeapon( grub, false );
 		SetParent( Owner );
 
-		Animator = null;
 		CurrentUses = 0;
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
@@ -243,7 +235,10 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	/// <returns>Whether or not the weapon is going to continue firing.</returns>
 	protected virtual bool OnFire()
 	{
-		Animator?.SetAnimParameter( "fire", true );
+		if ( Owner is not Grub grub )
+			return false;
+
+		grub.SetAnimParameter( "fire", true );
 		PlaySound( AssetDefinition.FireSound );
 
 		return false;
@@ -278,7 +273,7 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 			PlaySound( AssetDefinition.DeploySound );
 		}
 		EnableDrawing = show;
-		Animator?.SetAnimParameter( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
+		grub.SetAnimParameter( "holdpose", show ? (int)HoldPose : (int)HoldPose.None );
 
 		if ( WeaponHasHat )
 			grub.SetHatVisible( !show );

@@ -47,6 +47,6 @@ public sealed class EndScreen : Panel
 
 	public void Quit()
 	{
-		Local.Client.Kick();
+		Game.LocalClient.Kick();
 	}
 }

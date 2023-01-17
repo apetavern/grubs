@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics;
 using Grubs.Utils;
+using Sandbox.Diagnostics;
+using Sandbox.Utility;
 using Trace = Sandbox.Trace;
 
 namespace Grubs.Terrain;
@@ -380,7 +382,7 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>Whether or not the terrain has been edited.</returns>
 	public bool EditCircle( Vector2 midpoint, float size, TerrainModifyMode mode )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var scaledMidpoint = midpoint / Scale;
 		var centerIndex = Dimensions.Convert2dTo1d( (int)MathF.Round( scaledMidpoint.x, 0 ), (int)MathF.Round( scaledMidpoint.y, 0 ), Width );
@@ -409,7 +411,7 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>Whether or not the terrain has been edited.</returns>
 	public bool EditLine( Vector2 startPoint, Vector2 endPoint, float width, TerrainModifyMode mode )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var totalLength = (startPoint - endPoint);
 		var stepCount = (int)MathF.Round( totalLength.Length / width );
@@ -434,7 +436,7 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>Whether or not the terrain has been edited.</returns>
 	public bool EditPoint( int x, int y, TerrainModifyMode mode )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		return EditPoint( Dimensions.Convert2dTo1d( x, y, Width ), mode );
 	}
@@ -447,7 +449,7 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>Whether or not the terrain has been edited.</returns>
 	public bool EditPoint( int index, TerrainModifyMode mode )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( TerrainGrid[index] && mode == TerrainModifyMode.Add )
 			return false;
@@ -455,7 +457,7 @@ public sealed partial class TerrainMap : Entity
 		if ( !TerrainGrid[index] && mode == TerrainModifyMode.Remove )
 			return false;
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			_pendingIndices.Add( index );
 			_pendingIndexValues.Add( !TerrainGrid[index] );
@@ -573,8 +575,8 @@ public sealed partial class TerrainMap : Entity
 	{
 		while ( true )
 		{
-			var x = Rand.Int( Width - 1 );
-			var y = Rand.Int( Height - 1 );
+			var x = Game.Random.Int( Width - 1 );
+			var y = Game.Random.Int( Height - 1 );
 			if ( TerrainGrid[Dimensions.Convert2dTo1d( x, y, Width )] )
 				continue;
 
@@ -590,7 +592,7 @@ public sealed partial class TerrainMap : Entity
 	/// </summary>
 	private void RefreshDirtyChunks()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		foreach ( var index in _dirtyChunks )
 			if ( index >= 0 && index < _terrainGridChunks.Count )

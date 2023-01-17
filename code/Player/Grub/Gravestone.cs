@@ -18,7 +18,7 @@ public sealed partial class Gravestone : ModelEntity
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 

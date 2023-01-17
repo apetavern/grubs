@@ -26,7 +26,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 
 	public FireEntity( Vector3 startPos, Vector3 movementDirection )
 	{
-		Position = startPos + new Vector3().WithX( Rand.Int( 30 ) );
+		Position = startPos + new Vector3().WithX( Game.Random.Int( 30 ) );
 		_desiredPosition = Position;
 
 		var tr = Trace.Ray( startPos, startPos + movementDirection ).Run();
@@ -37,7 +37,7 @@ public sealed class FireEntity : ModelEntity, IResolvable
 			MoveDirection = -movementDirection / 2f;
 
 		_expiryTime = Time.Now + 3f;
-		TimeSinceLastTick = Rand.Float( 0.25f );
+		TimeSinceLastTick = Game.Random.Float( 0.25f );
 	}
 
 	public override void Spawn()

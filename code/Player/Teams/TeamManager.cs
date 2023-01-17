@@ -41,7 +41,7 @@ public sealed partial class TeamManager : Entity
 	{
 		base.Spawn();
 
-		if ( IsClient )
+		if ( Game.IsClient )
 			return;
 
 		Instance = this;
@@ -58,9 +58,9 @@ public sealed partial class TeamManager : Entity
 	/// Adds a new team
 	/// </summary>
 	/// <param name="clients">The clients that are a part of this team.</param>
-	public void AddTeam( List<Client> clients )
+	public void AddTeam( List<IClient> clients )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var team = new Team( clients, GameConfig.TeamNames[Teams.Count].ToString(), Teams.Count );
 		clients.First().Pawn = team;
@@ -73,7 +73,7 @@ public sealed partial class TeamManager : Entity
 	/// <param name="teamIndex">The index of the team that is now playing.</param>
 	public void SetActiveTeam( int teamIndex )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		CurrentTeamNumber = teamIndex;
 		CurrentTeam.PickNextClient();
@@ -85,7 +85,7 @@ public sealed partial class TeamManager : Entity
 	/// </summary>
 	public void Cycle()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( CurrentTeamNumber == Teams.Count - 1 )
 			SetActiveTeam( 0 );

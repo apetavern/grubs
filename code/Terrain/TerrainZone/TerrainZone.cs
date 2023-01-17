@@ -42,7 +42,7 @@ public partial class TerrainZone : Entity
 	{
 		base.Spawn();
 
-		if ( IsClient )
+		if ( Game.IsClient )
 			return;
 
 		All.Add( this );
@@ -87,7 +87,7 @@ public partial class TerrainZone : Entity
 
 	/// <summary>
 	/// Sets the amount of turns it will take before this zone expires.
-	/// <remarks><see cref="turns"/> beings less than zero (0) will result in the zone never expiring.</remarks>
+	/// <remarks><see ref="turns"/> beings less than zero (0) will result in the zone never expiring.</remarks>
 	/// </summary>
 	/// <param name="turns">The amount of turns until the zone expires.</param>
 	/// <returns>The terrain zone instance.</returns>
@@ -103,7 +103,7 @@ public partial class TerrainZone : Entity
 	/// <returns>The terrain zone as the provided type.</returns>
 	public virtual T Finish<T>() where T : TerrainZone
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		Shape.Finish( this );
 		QueueToAdd.Enqueue( this );
@@ -133,7 +133,7 @@ public partial class TerrainZone : Entity
 	/// <param name="entity">The entity that is inside the zone.</param>
 	public virtual void Trigger( Entity entity )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 	}
 
 	/// <summary>

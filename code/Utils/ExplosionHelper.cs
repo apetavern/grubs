@@ -19,7 +19,7 @@ public static partial class ExplosionHelper
 	/// <param name="maxDamage">The max amount of damage the explosion can do to a grub.</param>
 	public static void Explode( Vector3 position, Grub source, float radius = 100, float maxDamage = 100 )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var sourcePos = position;
 		foreach ( var grub in Entity.All.OfType<Grub>().Where( x => Vector3.DistanceBetween( sourcePos, x.Position ) <= radius ) )

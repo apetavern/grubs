@@ -17,12 +17,12 @@ public sealed partial class EventRunner : Entity
 	/// Runs a basic event on both server and client.
 	/// </summary>
 	/// <param name="name">The name of the event to run.</param>
-	/// <param name="to">The <see cref="Client"/>s to send this event to.</param>
+	/// <param name="to">The <see cref="IClient"/>s to send this event to.</param>
 	public static void Run( string name, To? to = null )
 	{
 		RunLocal( name );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 			_instance.RunRpc( to ?? To.Everyone, name );
 	}
 
@@ -74,6 +74,6 @@ public sealed partial class EventRunner : Entity
 	/// <returns>The prefix of the current realm.</returns>
 	private static string GetRealmPrefix()
 	{
-		return Host.IsServer ? GrubsEvent.ServerPrefix : GrubsEvent.ClientPrefix;
+		return Game.IsServer ? GrubsEvent.ServerPrefix : GrubsEvent.ClientPrefix;
 	}
 }

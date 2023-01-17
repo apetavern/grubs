@@ -31,42 +31,42 @@ public sealed class GrubsGame : GameManager
 	{
 		Precache.Run();
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			BaseState.Init();
 			_ = new EventRunner();
 
-			Rand.SetSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
+			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
 		}
 
-		if ( IsClient )
+		if ( Game.IsClient )
 		{
 			_ = new Hud();
 		}
 	}
 
-	public override void ClientJoined( Client client )
+	public override void ClientJoined( IClient client )
 	{
 		base.ClientJoined( client );
 
 		BaseState.Instance.ClientJoined( client );
 	}
 
-	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnect( cl, reason );
 
 		BaseState.Instance.ClientDisconnected( cl, reason );
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
 		BaseState.Instance.Simulate( cl );
 	}
 
-	public override void FrameSimulate( Client cl )
+	public override void FrameSimulate( IClient cl )
 	{
 		base.FrameSimulate( cl );
 
@@ -127,7 +127,7 @@ public sealed class GrubsGame : GameManager
 		{
 			Attacker = (Entity)ConsoleSystem.Caller.Pawn,
 			Damage = 9999,
-			Flags = DamageFlags.Crush
+			Tags = { "admin" }
 		} );
 		activeGrub.ApplyDamage();
 	}

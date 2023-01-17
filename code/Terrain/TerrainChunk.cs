@@ -97,7 +97,7 @@ public sealed partial class TerrainChunk : ModelEntity
 	/// </summary>
 	public void RefreshModel()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 			RefreshModelRpc( To.Everyone );
 
 		Model = new MarchingSquares().CreateModel( this );

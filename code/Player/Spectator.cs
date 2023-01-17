@@ -4,19 +4,16 @@
 /// A simple pawn for spectators to control.
 /// </summary>
 [Category( "Spectators" )]
-public sealed class Spectator : Entity, ISpectator
+public sealed partial class Spectator : Entity, ISpectator
 {
-	/// <summary>
-	/// The camera that the team client will see the game through.
-	/// </summary>
-	public CameraMode Camera
-	{
-		get => Components.Get<CameraMode>();
-		private set => Components.Add( value );
-	}
+	[Net]
+	public Entity Camera { get; private set; }
 
 	public Spectator()
 	{
-		Camera = new GrubsCamera();
+		Camera = new GrubsCamera()
+		{
+			Owner = this
+		};
 	}
 }

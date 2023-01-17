@@ -45,7 +45,7 @@ public sealed class DamageNumber : WorldPanel
 		Position += Vector3.Up * RiseSpeed * Time.Delta;
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		if ( Local.Pawn is ISpectator { Camera: GrubsCamera camera } )
+		if ( Game.LocalPawn is ISpectator { Camera: GrubsCamera camera } )
 			WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 3f;
 	}
 

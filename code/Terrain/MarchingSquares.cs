@@ -65,7 +65,7 @@ public sealed class MarchingSquares
 		_builder.AddCollisionMesh( wallVertices.ToArray(), wallTriangles.ToArray() );
 		// End shared CreateWallModel
 
-		if ( !Host.IsClient )
+		if ( !Game.IsClient )
 			return _builder.Create();
 
 		// Start client-side GenerateModel

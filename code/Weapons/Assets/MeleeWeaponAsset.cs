@@ -19,7 +19,7 @@ public sealed class MeleeWeaponAsset : WeaponAsset
 	public float HitDelay { get; set; } = 1;
 
 	[Property, Category( "Weapon" )]
-	public DamageFlags DamageFlags { get; set; } = DamageFlags.Blunt;
+	public HashSet<string> DamageTags { get; set; } = new();
 
 	[Property, Category( "Weapon" )]
 	public float HitForce { get; set; } = 100;

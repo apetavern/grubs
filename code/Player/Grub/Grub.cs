@@ -21,12 +21,6 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	public GrubController Controller { get; private set; } = null!;
 
 	/// <summary>
-	/// The grubs animator.
-	/// </summary>
-	[Net, Predicted]
-	public GrubAnimator Animator { get; private set; } = null!;
-
-	/// <summary>
 	/// The currently active weapon the grub is using.
 	/// </summary>
 	[Net]
@@ -109,7 +103,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 
 	public override void TakeDamage( DamageInfo info )
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		if ( !_takeDamage )
@@ -147,13 +141,13 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		DeathTask = Die();
 	}
 
-	public void Spawn( Client? cl = null )
+	public void Spawn( IClient? cl = null )
 	{
 		base.Spawn();
 
 		SetModel( "models/citizenworm.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
-		Name = Rand.FromArray( GameConfig.GrubNames );
+		Name = Game.Random.FromArray( GameConfig.GrubNames );
 		Health = MaxHealth;
 		EnableHitboxes = true;
 
@@ -193,12 +187,12 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		EnableDrawing = false;
 		Gravestone = new Gravestone( this ) { Owner = this, Parent = this };
 
-		ChatBox.AddInformation( To.Everyone, DeathReason.ToString(), $"avatar:{Team.ActiveClient.PlayerId}" );
+		ChatBox.AddInformation( To.Everyone, DeathReason.ToString(), $"avatar:{Team.ActiveClient.SteamId}" );
 		EventRunner.RunLocal( GrubsEvent.GrubDiedEvent, this );
 		DeadRpc( To.Everyone );
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
@@ -225,7 +219,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// </summary>
 	/// <param name="client">The client that is predicting.</param>
 	/// <param name="child">The weapon to simulate.</param>
-	private void SimulateActiveChild( Client client, GrubWeapon? child )
+	private void SimulateActiveChild( IClient client, GrubWeapon? child )
 	{
 		if ( LastActiveChild != child )
 		{
@@ -257,7 +251,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// <returns>Whether or not any healing was applied.</returns>
 	public bool GiveHealth( float health )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var healthToGive = Math.Min( health, MaxOverhealHealth - Health );
 		if ( healthToGive <= 0 )
@@ -275,7 +269,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// <returns>Whether or not the grub has died.</returns>
 	public bool ApplyDamage()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( !HasBeenDamaged )
 			return false;
@@ -310,7 +304,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// <param name="weapon">The weapon to equip.</param>
 	public void EquipWeapon( GrubWeapon? weapon )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		ActiveChild = weapon;
 	}
@@ -319,7 +313,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// Dresses the grub based on the provided clients avatar.
 	/// </summary>
 	/// <param name="cl">The client to get the clothes of.</param>
-	private void DressFromClient( Client cl )
+	private void DressFromClient( IClient cl )
 	{
 		var clothes = new ClothingContainer();
 		clothes.LoadFromClient( cl );

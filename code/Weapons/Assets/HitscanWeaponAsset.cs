@@ -28,7 +28,7 @@ public sealed class HitscanWeaponAsset : WeaponAsset
 	public float Damage { get; set; } = 25f;
 
 	[Property, Category( "Weapon" )]
-	public DamageFlags DamageFlags { get; set; }
+	public HashSet<string> DamageTags { get; set; } = new();
 
 	[Property, Category( "Weapon" )]
 	public bool PenetrateTargets { get; set; } = false;

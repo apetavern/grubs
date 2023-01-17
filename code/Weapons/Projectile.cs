@@ -1,6 +1,7 @@
 ﻿using Grubs.Player;
 using Grubs.States;
 using Grubs.Utils;
+using Sandbox.Diagnostics;
 
 namespace Grubs.Weapons.Base;
 
@@ -231,7 +232,7 @@ public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 
 	private void OnCollision()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		if ( CollisionExplosionDelaySeconds > 0 )

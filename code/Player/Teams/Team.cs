@@ -15,7 +15,7 @@ public sealed partial class Team : Entity, ISpectator
 	/// The list of clients that are a part of this team.
 	/// </summary>
 	[Net]
-	public IList<Client> Clients { get; private set; }
+	public IList<IClient> Clients { get; private set; }
 
 	/// <summary>
 	/// The list of grubs that are a part of this team.
@@ -28,7 +28,7 @@ public sealed partial class Team : Entity, ISpectator
 	/// <remarks>This will stay populated even after their turn has passed.</remarks>
 	/// </summary>
 	[Net]
-	public Client ActiveClient { get; private set; }
+	public IClient ActiveClient { get; private set; }
 
 	/// <summary>
 	/// The teams current grub.
@@ -64,11 +64,8 @@ public sealed partial class Team : Entity, ISpectator
 	/// <summary>
 	/// The camera all team clients will see the game through.
 	/// </summary>
-	public CameraMode Camera
-	{
-		get => Components.Get<CameraMode>();
-		private set => Components.Add( value );
-	}
+	[Net]
+	public Entity Camera { get; private set; }
 
 	/// <summary>
 	/// Returns whether all grubs in this team are dead or not.
@@ -85,7 +82,7 @@ public sealed partial class Team : Entity, ISpectator
 		Transmit = TransmitType.Always;
 	}
 
-	public Team( List<Client> clients, string teamName, int teamNumber ) : this()
+	public Team( List<IClient> clients, string teamName, int teamNumber ) : this()
 	{
 		TeamName = teamName;
 		TeamNumber = teamNumber;
@@ -96,7 +93,10 @@ public sealed partial class Team : Entity, ISpectator
 			client.Pawn = new Spectator();
 		}
 
-		Camera = new GrubsCamera();
+		Camera = new GrubsCamera()
+		{
+			Owner = this
+		};
 		Inventory = new GrubsInventory
 		{
 			Owner = this
@@ -106,7 +106,7 @@ public sealed partial class Team : Entity, ISpectator
 		CreateGrubs();
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
@@ -121,7 +121,7 @@ public sealed partial class Team : Entity, ISpectator
 	{
 		base.OnDestroy();
 
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		foreach ( var grub in Grubs )
@@ -154,7 +154,7 @@ public sealed partial class Team : Entity, ISpectator
 	/// </summary>
 	private void CreateGrubs()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var grubsToSpawn = GameConfig.GrubCount;
 		var spawnPoints = GetSpawnLocations( grubsToSpawn );
@@ -172,7 +172,7 @@ public sealed partial class Team : Entity, ISpectator
 
 	private void InitializeInventory()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		foreach ( var assetDefinition in WeaponAsset.All )
 		{
@@ -199,7 +199,7 @@ public sealed partial class Team : Entity, ISpectator
 	/// </summary>
 	public void PickNextClient()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( Clients[0].Pawn is not Spectator )
 			Clients[0].Pawn = new Spectator();
@@ -218,7 +218,7 @@ public sealed partial class Team : Entity, ISpectator
 	/// </summary>
 	private void RotateClients()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var current = Clients[0];
 		Clients.RemoveAt( 0 );
@@ -230,7 +230,7 @@ public sealed partial class Team : Entity, ISpectator
 	/// </summary>
 	public void PickNextGrub()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		do
 		{
@@ -244,7 +244,7 @@ public sealed partial class Team : Entity, ISpectator
 	/// </summary>
 	private void RotateGrubs()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var current = Grubs[0];
 		Grubs.RemoveAt( 0 );

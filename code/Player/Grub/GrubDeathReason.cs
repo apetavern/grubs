@@ -123,48 +123,51 @@ public readonly struct GrubDeathReason
 
 		foreach ( var damageInfo in damageInfos )
 		{
-			switch ( damageInfo.Flags )
+			foreach ( var tag in damageInfo.Tags )
 			{
-				// An admin has abused the grub, move as normal.
-				case DamageFlags.Crush:
-					lastReasonInfo = reasonInfo;
-					lastReason = reason;
-					reasonInfo = damageInfo;
-					reason = GrubDamageType.Admin;
-					break;
-				// An explosion, just move the reasons around as normal.
-				case DamageFlags.Blast:
-					lastReasonInfo = reasonInfo;
-					lastReason = reason;
-					reasonInfo = damageInfo;
-					reason = GrubDamageType.Explosion;
-					break;
-				// Fell from a great height. Only move the reasons around if we weren't already falling.
-				case DamageFlags.Fall:
-					if ( reason == GrubDamageType.Fall )
+				switch ( tag )
+				{
+					// An admin has abused the grub, move as normal.
+					case "admin":
+						lastReasonInfo = reasonInfo;
+						lastReason = reason;
+						reasonInfo = damageInfo;
+						reason = GrubDamageType.Admin;
 						break;
+					// An explosion, just move the reasons around as normal.
+					case "explosive":
+						lastReasonInfo = reasonInfo;
+						lastReason = reason;
+						reasonInfo = damageInfo;
+						reason = GrubDamageType.Explosion;
+						break;
+					// Fell from a great height. Only move the reasons around if we weren't already falling.
+					case "fall":
+						if ( reason == GrubDamageType.Fall )
+							break;
 
-					lastReasonInfo = reasonInfo;
-					lastReason = reason;
-					reasonInfo = damageInfo;
-					reason = GrubDamageType.Fall;
-					break;
-				// Hit a kill trigger.
-				case DamageFlags.Generic:
-					// If we got to the kill trigger from falling from a great height then just overwrite it.
-					if ( reason == GrubDamageType.Fall )
-					{
+						lastReasonInfo = reasonInfo;
+						lastReason = reason;
+						reasonInfo = damageInfo;
+						reason = GrubDamageType.Fall;
+						break;
+					// Hit a kill trigger.
+					case "outofarea":
+						// If we got to the kill trigger from falling from a great height then just overwrite it.
+						if ( reason == GrubDamageType.Fall )
+						{
+							reasonInfo = damageInfo;
+							reason = GrubDamageType.KillTrigger;
+							break;
+						}
+
+						// Move as normal.
+						lastReasonInfo = reasonInfo;
+						lastReason = reason;
 						reasonInfo = damageInfo;
 						reason = GrubDamageType.KillTrigger;
 						break;
-					}
-
-					// Move as normal.
-					lastReasonInfo = reasonInfo;
-					lastReason = reason;
-					reasonInfo = damageInfo;
-					reason = GrubDamageType.KillTrigger;
-					break;
+				}
 			}
 		}
 

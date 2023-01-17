@@ -63,10 +63,10 @@ public partial class HitscanWeapon : GrubWeapon
 	protected virtual float Damage => AssetDefinition.Damage;
 
 	/// <summary>
-	/// The damage flags to attach to the damage info.
+	/// The damage tags to attach to the damage info.
 	/// <remarks>This may be unused if <see cref="HitGrub"/> is overridden.</remarks>
 	/// </summary>
-	protected virtual DamageFlags DamageFlags => AssetDefinition.DamageFlags;
+	protected virtual HashSet<string> DamageTags => AssetDefinition.DamageTags;
 
 	/// <summary>
 	/// The hitscan asset definition this weapon is implementing.
@@ -93,7 +93,7 @@ public partial class HitscanWeapon : GrubWeapon
 	{
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
@@ -139,7 +139,7 @@ public partial class HitscanWeapon : GrubWeapon
 		if ( HitscanDebug )
 			DebugOverlay.TraceResult( result, 5 );
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			var hitgrubs = new List<Grub>();
 			if ( PenetrateTargets )
@@ -204,7 +204,7 @@ public partial class HitscanWeapon : GrubWeapon
 	/// <param name="grub">The grub that was hit.</param>
 	protected virtual void HitGrub( Grub grub )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var dir = (grub.Position - Position).Normal;
 		grub.ApplyAbsoluteImpulse( dir * HitForce );
@@ -213,7 +213,7 @@ public partial class HitscanWeapon : GrubWeapon
 		{
 			Attacker = Parent,
 			Damage = Damage,
-			Flags = DamageFlags,
+			Tags = DamageTags,
 			Position = Position
 		} );
 	}

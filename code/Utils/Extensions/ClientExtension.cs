@@ -13,7 +13,7 @@ public static class ClientExtension
 	/// </summary>
 	/// <param name="client">The <see cref="Client"/> to get the team of.</param>
 	/// <returns>The team the <see cref="Client"/> is a part of. Null if not in a <see cref="Team"/> or not in a <see cref="BaseGamemode"/>.</returns>
-	public static Team? GetTeam( this Client client )
+	public static Team? GetTeam( this IClient client )
 	{
 		return TeamManager.Instance is null
 			? null

@@ -1,4 +1,5 @@
 ﻿using Grubs.Utils;
+using Grubs.Utils.Extensions;
 
 namespace Grubs.States;
 
@@ -16,32 +17,32 @@ public sealed partial class WaitingState : BaseState
 	/// <summary>
 	/// Whether or not the countdown in <see cref="TimeUntilStart"/> has been started.
 	/// </summary>
-	public bool IsStarting => Client.All.Count >= GameConfig.MinimumPlayers && TimeUntilStart > 0;
+	public bool IsStarting => Game.Clients.Count >= GameConfig.MinimumPlayers && TimeUntilStart > 0;
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
 		base.Enter( forced, parameters );
 
-		if ( Client.All.Count >= GameConfig.MinimumPlayers )
+		if ( Game.Clients.Count >= GameConfig.MinimumPlayers )
 			TimeUntilStart = 10;
 	}
 
-	public override void ClientJoined( Client cl )
+	public override void ClientJoined( IClient cl )
 	{
 		base.ClientJoined( cl );
 
-		if ( Client.All.Count >= GameConfig.MinimumPlayers && Client.All.Count <= GameConfig.MaximumPlayers )
+		if ( Game.Clients.Count >= GameConfig.MinimumPlayers && Game.Clients.Count <= GameConfig.MaximumPlayers )
 			TimeUntilStart = 10;
 
 		if ( cl.IsBot )
 			TimeUntilStart = 0f;
 	}
 
-	public override void ClientDisconnected( Client cl, NetworkDisconnectionReason reason )
+	public override void ClientDisconnected( IClient cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnected( cl, reason );
 
-		if ( Client.All.Count < GameConfig.MinimumPlayers )
+		if ( Game.Clients.Count < GameConfig.MinimumPlayers )
 			TimeUntilStart = -1;
 	}
 
@@ -49,13 +50,13 @@ public sealed partial class WaitingState : BaseState
 	{
 		base.Tick();
 
-		if ( !IsServer || Client.All.Count < GameConfig.MinimumPlayers || TimeUntilStart > 0 )
+		if ( !Game.IsServer || Game.Clients.Count < GameConfig.MinimumPlayers || TimeUntilStart > 0 )
 			return;
 
 		// TODO: UI for getting participants?
-		var participants = new List<Client>();
-		for ( var i = 0; i < Math.Min( Client.All.Count, GameConfig.MaximumPlayers ); i++ )
-			participants.Add( Client.All[i] );
+		var participants = new List<IClient>();
+		for ( var i = 0; i < Math.Min( Game.Clients.Count, GameConfig.MaximumPlayers ); i++ )
+			participants.Add( Game.Clients.GetByIndex( i ) );
 
 		switch ( GameConfig.Gamemode )
 		{

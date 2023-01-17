@@ -5,5 +5,5 @@
 /// </summary>
 public interface ISpectator
 {
-	CameraMode Camera { get; }
+	Entity Camera { get; }
 }

@@ -5,7 +5,8 @@ using Grubs.Weapons.Base;
 
 namespace Grubs.Player;
 
-public sealed partial class GrubsCamera : CameraMode
+// TODO: May not need the entity anymore?
+public sealed partial class GrubsCamera : Entity
 {
 	public float Distance { get; set; } = 1024;
 	public float DistanceScrollRate { get; set; } = 32f;
@@ -23,8 +24,10 @@ public sealed partial class GrubsCamera : CameraMode
 	private Entity? LastTarget { get; set; }
 	private TimeSince TimeSinceTargetChanged { get; set; }
 
-	public override void Update()
+	public override void Simulate( IClient cl )
 	{
+		base.Simulate( cl );
+
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
 

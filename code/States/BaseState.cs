@@ -25,7 +25,7 @@ public abstract partial class BaseState : Entity
 	{
 		base.Spawn();
 
-		if ( IsClient )
+		if ( Game.IsClient )
 			return;
 
 		Instance = this;
@@ -53,7 +53,7 @@ public abstract partial class BaseState : Entity
 		_forced = forced;
 		RunEnterEvents();
 
-		if ( IsServer )
+		if ( Game.IsServer )
 			EnterGameRpc( To.Everyone, forced );
 	}
 
@@ -65,7 +65,7 @@ public abstract partial class BaseState : Entity
 	{
 		RunLeaveEvents();
 
-		if ( IsServer )
+		if ( Game.IsServer )
 			LeaveGameRpc( To.Everyone );
 	}
 
@@ -73,9 +73,9 @@ public abstract partial class BaseState : Entity
 	/// Called when a new client has joined the game.
 	/// </summary>
 	/// <param name="cl">The client that has joined.</param>
-	public virtual void ClientJoined( Client cl )
+	public virtual void ClientJoined( IClient cl )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		EnterGameRpc( To.Single( cl ), _forced );
 	}
@@ -85,9 +85,9 @@ public abstract partial class BaseState : Entity
 	/// </summary>
 	/// <param name="cl">The client that has disconnected.</param>
 	/// <param name="reason">The reason for the client disconnecting.</param>
-	public virtual void ClientDisconnected( Client cl, NetworkDisconnectionReason reason )
+	public virtual void ClientDisconnected( IClient cl, NetworkDisconnectionReason reason )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 	}
 
 	/// <summary>
@@ -143,7 +143,7 @@ public abstract partial class BaseState : Entity
 	/// <typeparam name="T">The new state to switch to.</typeparam>
 	protected static void SwitchStateTo<T>( params object[] parameters ) where T : BaseState
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		SwitchStateTo( TypeLibrary.Create<T>( typeof( T ) ), false, parameters );
 	}
@@ -156,7 +156,7 @@ public abstract partial class BaseState : Entity
 	/// <param name="parameters">An array of parameters to send to the next game state being entered.</param>
 	private static void SwitchStateTo( BaseState state, bool force, params object[] parameters )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		Instance?.Leave();
 		Instance?.Delete();
@@ -168,7 +168,7 @@ public abstract partial class BaseState : Entity
 	[ConCmd.Admin( "state" )]
 	public static void ForceStateCmd( string stateName )
 	{
-		var stateType = TypeLibrary.GetDescription( stateName );
+		var stateType = TypeLibrary.GetType( stateName );
 		if ( stateType is null )
 		{
 			Log.Error( $"No state exists with the type name \"{stateName}\"" );

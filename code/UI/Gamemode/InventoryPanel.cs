@@ -33,7 +33,7 @@ public sealed class InventoryPanel : Panel
 
 	private void RebuildItems()
 	{
-		for ( var i = 0; i < (Local.Pawn as Team)!.Inventory.Items.Count; i++ )
+		for ( var i = 0; i < (Game.LocalPawn as Team)!.Inventory.Items.Count; i++ )
 			_items[i].UpdateFrom( i );
 
 		HasBuilt = true;

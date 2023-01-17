@@ -20,7 +20,7 @@ public sealed class Hud : RootPanel
 	{
 		Event.Register( this );
 
-		if ( Host.IsClient )
+		if ( Game.IsClient )
 		{
 			_ = new GrubNametags();
 			AddChild<ChatBox>();

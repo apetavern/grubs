@@ -16,7 +16,7 @@ public sealed class InventoryItem : Panel
 	{
 		Reset();
 
-		if ( Local.Pawn is not Team team )
+		if ( Game.LocalPawn is not Team team )
 			return this;
 
 		var inventory = team.Inventory;

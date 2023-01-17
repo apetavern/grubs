@@ -13,7 +13,7 @@ public static class FireHelper
 	/// <param name="quantity">The amount of fire to spawn.</param>
 	public static void StartFiresAt( Vector3 origin, Vector3 moveDirection, int quantity )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		for ( var i = 0; i < quantity; i++ )
 			_ = new FireEntity( origin + Vector3.Random.WithY( 0 ) * 30, moveDirection + Vector3.Random.WithY( 0 ) * 30 );

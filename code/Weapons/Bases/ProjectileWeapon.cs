@@ -93,7 +93,7 @@ public class ProjectileWeapon : GrubWeapon
 	{
 		base.OnFire();
 
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return false;
 
 		var projectile = new Projectile()

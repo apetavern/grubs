@@ -7,7 +7,7 @@ public class StartButton : Panel
 {
 	public override void Tick()
 	{
-		SetClass( "disabled", Client.All.Count < GameConfig.MinimumPlayers );
+		SetClass( "disabled", Game.Clients.Count < GameConfig.MinimumPlayers );
 	}
 
 	protected override void OnClick( MousePanelEvent e )

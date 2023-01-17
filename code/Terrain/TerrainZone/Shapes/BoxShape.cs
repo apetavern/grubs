@@ -1,4 +1,6 @@
-﻿namespace Grubs.Terrain.Shapes;
+﻿using Sandbox.Diagnostics;
+
+namespace Grubs.Terrain.Shapes;
 
 /// <summary>
 /// A box shape.

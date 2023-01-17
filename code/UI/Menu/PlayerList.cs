@@ -2,15 +2,15 @@
 
 public class PlayerEntry : Panel
 {
-	public Client Client { get; set; }
+	public IClient Client { get; set; }
 	public Image Avatar { get; set; }
 	public Label PlayerName { get; set; }
 	public bool Loaded { get; set; }
 
-	public PlayerEntry( Client client )
+	public PlayerEntry( IClient client )
 	{
 		Client = client;
-		Avatar = Add.Image( $"avatar:{client.PlayerId}", "avatar" );
+		Avatar = Add.Image( $"avatar:{client.SteamId}", "avatar" );
 		PlayerName = Add.Label( client.Name, "name" );
 	}
 
@@ -30,7 +30,7 @@ public partial class PlayerList : Panel
 {
 	public Panel PlayersContainer { get; set; } = null!;
 
-	public static string PlayerCount => $"{Client.All.Count}";
+	public static string PlayerCount => $"{Game.Clients.Count}";
 	// public string LobbyCount => $"{Game.Instance?.StateHandler.LobbyCount}";
 
 	public override void Tick()
@@ -42,7 +42,7 @@ public partial class PlayerList : Panel
 			panel.Delete();
 		}
 
-		foreach ( var client in Client.All )
+		foreach ( var client in Game.Clients )
 		{
 			if ( PlayersContainer.Children.OfType<PlayerEntry>().Any( panel => panel.Client == client ) )
 				continue;

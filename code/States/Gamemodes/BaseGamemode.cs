@@ -6,6 +6,7 @@ using Grubs.Terrain;
 using Grubs.Terrain.Shapes;
 using Grubs.Utils;
 using Grubs.Utils.Event;
+using Grubs.Utils.Extensions;
 using Grubs.Weapons.Base;
 
 namespace Grubs.States;
@@ -80,7 +81,7 @@ public abstract partial class BaseGamemode : BaseState
 
 	protected override void Enter( bool forced, params object[] parameters )
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 		{
 			base.Enter( forced, parameters );
 			return;
@@ -94,30 +95,30 @@ public abstract partial class BaseGamemode : BaseState
 			.AddShape( BoxShape.WithSize( new Vector3( int.MaxValue, 100, 100 ) ).WithOffset( new Vector3( (-int.MaxValue / 2), -50, -100 ) ) );
 
 		KillZone = new DamageZone()
-			.WithDamageFlags( DamageFlags.Generic )
+			.WithDamageTags( "outofarea" )
 			.WithInstantKill( true )
 			.WithDamage( 9999 )
 			.WithPosition( Vector3.Zero )
 			.WithShape( killBoundary )
 			.Finish<DamageZone>();
 
-		List<Client> participants;
+		List<IClient> participants;
 		if ( forced )
 		{
 			// Just grab some participants.
-			participants = new List<Client>();
-			for ( var i = 0; i < Math.Min( Client.All.Count, GameConfig.MaximumPlayers ); i++ )
-				participants.Add( Client.All[i] );
+			participants = new List<IClient>();
+			for ( var i = 0; i < Math.Min( Game.Clients.Count, GameConfig.MaximumPlayers ); i++ )
+				participants.Add( Game.Clients.GetByIndex( i ) );
 		}
 		else
-			participants = (List<Client>)parameters[0];
+			participants = (List<IClient>)parameters[0];
 
 		// Setup participants.
 		SetupParticipants( participants );
 
 		// Setup spectators.
-		var spectators = new List<Client>();
-		foreach ( var client in Client.All )
+		var spectators = new List<IClient>();
+		foreach ( var client in Game.Clients )
 		{
 			if ( participants.Contains( client ) )
 				continue;
@@ -156,7 +157,7 @@ public abstract partial class BaseGamemode : BaseState
 				else
 				{
 					Log.Error( $"Map \"{terrainFile}\" does not exist. Reverting to random gen" );
-					TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
+					TerrainMap = new TerrainMap( Game.Random.Int( 99999 ) );
 				}
 			}
 			catch ( Exception e )
@@ -169,20 +170,20 @@ public abstract partial class BaseGamemode : BaseState
 			}
 		}
 		else
-			TerrainMap = new TerrainMap( Rand.Int( 99999 ) );
+			TerrainMap = new TerrainMap( Game.Random.Int( 99999 ) );
 	}
 
 	/// <summary>
 	/// Sets up all participants to play the game.
 	/// </summary>
 	/// <param name="participants"></param>
-	protected abstract void SetupParticipants( List<Client> participants );
+	protected abstract void SetupParticipants( List<IClient> participants );
 
 	/// <summary>
 	/// Sets up all spectators to watch the game.
 	/// </summary>
 	/// <param name="spectators"></param>
-	protected virtual void SetupSpectators( List<Client> spectators )
+	protected virtual void SetupSpectators( List<IClient> spectators )
 	{
 		foreach ( var spectator in spectators )
 			spectator.Pawn = new Spectator();
@@ -190,7 +191,7 @@ public abstract partial class BaseGamemode : BaseState
 
 	protected override void Leave()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 		{
 			base.Leave();
 			return;
@@ -200,7 +201,7 @@ public abstract partial class BaseGamemode : BaseState
 		TeamManager.Delete();
 		KillZone.Delete();
 		TerrainZone.All.Clear();
-		foreach ( var client in Client.All )
+		foreach ( var client in Game.Clients )
 			client.Pawn?.Delete();
 		foreach ( var spectator in All.OfType<Spectator>() )
 			spectator.Delete();
@@ -212,14 +213,14 @@ public abstract partial class BaseGamemode : BaseState
 		base.Leave();
 	}
 
-	public override void ClientJoined( Client cl )
+	public override void ClientJoined( IClient cl )
 	{
 		base.ClientJoined( cl );
 
 		TerrainMap.UpdateGridRpc( TerrainMap.TerrainGrid );
 	}
 
-	public override void ClientDisconnected( Client cl, NetworkDisconnectionReason reason )
+	public override void ClientDisconnected( IClient cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnected( cl, reason );
 
@@ -232,7 +233,7 @@ public abstract partial class BaseGamemode : BaseState
 	{
 		base.Tick();
 
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		var damageables = All.OfType<IDamageable>().ToArray();
@@ -297,7 +298,7 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	public virtual async Task NextTurn()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		IsTurnChanging = true;
 		if ( await PreTurnChange() )
@@ -309,7 +310,7 @@ public abstract partial class BaseGamemode : BaseState
 		IsTurnChanging = false;
 
 		if ( GameConfig.WindEnabled )
-			WindSteps = Rand.Int( -GameConfig.WindSteps, GameConfig.WindSteps );
+			WindSteps = Game.Random.Int( -GameConfig.WindSteps, GameConfig.WindSteps );
 
 		EventRunner.RunLocal( GrubsEvent.TurnChangedEvent, TeamManager.CurrentTeam );
 		TurnChangedRpc( To.Everyone, TeamManager.CurrentTeam );
@@ -323,7 +324,7 @@ public abstract partial class BaseGamemode : BaseState
 	/// <returns>Whether or not to bail from changing to the next turn.</returns>
 	protected virtual async ValueTask<bool> PreTurnChange()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		MovementOnly = false;
 		UsedTurn = true;
@@ -376,9 +377,9 @@ public abstract partial class BaseGamemode : BaseState
 		var num = rand.Next( 0, 100 );
 		if ( num <= GameConfig.WeaponCrateChancePerTurn )
 		{
-			var x = Rand.Float( TerrainMap.Width * TerrainMap.Scale );
+			var x = Game.Random.Float( TerrainMap.Width * TerrainMap.Scale );
 			var startZ = TerrainMap.Height * TerrainMap.Scale;
-			var z = Rand.Float( startZ, startZ + 100 );
+			var z = Game.Random.Float( startZ, startZ + 100 );
 			var weaponCrate = new WeaponCrate { Position = new Vector3( x, 0, z ) };
 			await GameTask.DelaySeconds( 1 );
 		}
@@ -386,9 +387,9 @@ public abstract partial class BaseGamemode : BaseState
 		num = rand.Next( 0, 100 );
 		if ( num <= GameConfig.HealthCrateChancePerTurn )
 		{
-			var x = Rand.Float( TerrainMap.Width * TerrainMap.Scale );
+			var x = Game.Random.Float( TerrainMap.Width * TerrainMap.Scale );
 			var startZ = TerrainMap.Height * TerrainMap.Scale;
-			var z = Rand.Float( startZ, startZ + 100 );
+			var z = Game.Random.Float( startZ, startZ + 100 );
 			var healthCrate = new HealthCrate { Position = new Vector3( x, 0, z ) };
 			await GameTask.DelaySeconds( 1 );
 		}
@@ -404,7 +405,7 @@ public abstract partial class BaseGamemode : BaseState
 	/// </summary>
 	protected virtual async Task PostTurnChange()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var lastUsedWeapon = TeamManager.CurrentTeam.Inventory.LastUsedWeapon;
 		if ( lastUsedWeapon is not null )
@@ -431,7 +432,7 @@ public abstract partial class BaseGamemode : BaseState
 	/// <returns>Whether or not the game has concluded.</returns>
 	protected virtual bool CheckState()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var teamsDead = 0;
 		Team? lastTeamAlive = null;

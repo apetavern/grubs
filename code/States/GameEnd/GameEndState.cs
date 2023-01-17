@@ -16,7 +16,7 @@ public sealed partial class GameEndState : BaseState
 	/// <remarks>This will only be populated when <see cref="EndResult"/> is <see cref="GameResultType.TeamWon"/>.</remarks>
 	/// </summary>
 	[Net]
-	public IList<Client> WinningClients { get; private set; }
+	public IList<IClient> WinningClients { get; private set; }
 
 	/// <summary>
 	/// The name of the team that won.
@@ -41,7 +41,7 @@ public sealed partial class GameEndState : BaseState
 	{
 		base.Enter( forced, parameters );
 
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		if ( forced )
@@ -52,7 +52,7 @@ public sealed partial class GameEndState : BaseState
 		{
 			case GameResultType.TeamWon:
 				WinningTeamName = (string)parameters[1];
-				var winningClients = (IList<Client>)parameters[2];
+				var winningClients = (IList<IClient>)parameters[2];
 				foreach ( var winningClient in winningClients )
 					WinningClients.Add( winningClient );
 
@@ -73,7 +73,7 @@ public sealed partial class GameEndState : BaseState
 	{
 		base.Tick();
 
-		if ( !IsServer || TimeUntilRestart > 0 )
+		if ( !Game.IsServer || TimeUntilRestart > 0 )
 			return;
 
 		SwitchStateTo<WaitingState>();
