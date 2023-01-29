@@ -39,7 +39,7 @@ partial class BaseGamemode
 		cameraCenter += Vector3.Up * CameraUpOffset;
 
 		var targetPosition = cameraCenter + Vector3.Right * Distance;
-		Camera.Position = Position.LerpTo( targetPosition, Time.Delta * LerpSpeed );
+		Camera.Position = Camera.Position.LerpTo( targetPosition, Time.Delta * LerpSpeed );
 
 		var lookDir = (cameraCenter - targetPosition).Normal;
 		Camera.Rotation = Rotation.LookAt( lookDir, Vector3.Up );
