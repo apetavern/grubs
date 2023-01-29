@@ -23,6 +23,7 @@ public sealed partial class WaitingState : BaseState
 	{
 		base.Enter( forced, parameters );
 
+		Log.Info( "Enter WaitingState" );
 		if ( Game.Clients.Count >= GameConfig.MinimumPlayers )
 			TimeUntilStart = 10;
 	}

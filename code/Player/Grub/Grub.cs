@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using Grubs.Crates;
 using Grubs.States;
 using Grubs.Terrain;
@@ -42,6 +43,26 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// Helper property to get a grubs team.
 	/// </summary>
 	public Team Team => (Owner as Team)!;
+
+	[Browsable( false )]
+	public Vector3 EyePosition
+	{
+		get => Transform.PointToWorld( EyeLocalPosition );
+		set => EyeLocalPosition = Transform.PointToLocal( value );
+	}
+
+	[Net, Predicted, Browsable( false )]
+	public Vector3 EyeLocalPosition { get; set; }
+
+	[Browsable( false )]
+	public Rotation EyeRotation
+	{
+		get => Transform.RotationToWorld( EyeLocalRotation );
+		set => EyeLocalRotation = Transform.RotationToLocal( value );
+	}
+
+	[Net, Predicted, Browsable( false )]
+	public Rotation EyeLocalRotation { get; set; }
 
 	/// <summary>
 	/// Returns whether or not this grub has been damaged.
@@ -152,7 +173,6 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		EnableHitboxes = true;
 
 		Controller = new GrubController();
-		Animator = new GrubAnimator();
 
 		if ( cl is not null )
 			DressFromClient( cl );
@@ -197,7 +217,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		base.Simulate( cl );
 
 		Gravestone?.Simulate( cl );
-		Controller?.Simulate( cl, this, Animator );
+		Controller?.Simulate( cl, this );
 
 		if ( LifeState != LifeState.Dead )
 		{

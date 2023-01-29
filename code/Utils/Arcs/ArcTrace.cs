@@ -70,7 +70,7 @@ public sealed class ArcTrace
 			ArcSegment segment = new() { StartPos = position };
 
 			velocity -= new Vector3( windForceX, 0, 0 );
-			velocity -= Map.Physics.Gravity * epsilon;
+			velocity -= Game.PhysicsWorld.Gravity * epsilon;
 			position -= velocity;
 
 			segment.EndPos = position;

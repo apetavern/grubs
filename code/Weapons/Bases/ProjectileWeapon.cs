@@ -1,4 +1,5 @@
-﻿using Grubs.States;
+﻿using Grubs.Player;
+using Grubs.States;
 using Grubs.Utils;
 
 namespace Grubs.Weapons.Base;
@@ -106,12 +107,15 @@ public class ProjectileWeapon : GrubWeapon
 			.WithTrailParticle( ParticleType )
 			.SetCollisionReaction( ProjectileCollisionReaction );
 
+		if ( Parent is not Grub grub )
+			return false;
+
 		if ( ProjectileShouldUseTrace )
 		{
-			var arcTrace = new ArcTrace( Parent, Parent.EyePosition );
+			var arcTrace = new ArcTrace( grub, grub.EyePosition );
 			var segments = ProjectileShouldBounce
-				? arcTrace.RunTowardsWithBounces( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, BaseGamemode.Instance!.Wind, ProjectileMaxBounces )
-				: arcTrace.RunTowards( Parent.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, BaseGamemode.Instance!.Wind );
+				? arcTrace.RunTowardsWithBounces( grub.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, BaseGamemode.Instance!.Wind, ProjectileMaxBounces )
+				: arcTrace.RunTowards( grub.EyeRotation.Forward.Normal, ProjectileForceMultiplier * Charge, BaseGamemode.Instance!.Wind );
 
 			projectile.MoveAlongTrace( segments );
 		}

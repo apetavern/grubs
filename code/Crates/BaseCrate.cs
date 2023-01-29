@@ -93,7 +93,7 @@ public partial class BaseCrate : ModelEntity, IDamageable, IResolvable
 		GroundEntity = mover.TraceDirection( Vector3.Down ).Entity;
 
 		if ( GroundEntity == null )
-			mover.Velocity += Map.Physics.Gravity * Time.Delta;
+			mover.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
 		else
 		{
 			_parachute?.DeleteAsync( 0.3f );

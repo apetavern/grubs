@@ -8,19 +8,21 @@ partial class Grub
 
 	private void SimulateAnimation( IClient cl )
 	{
+		var ctrl = Controller;
+
 		SetAnimParameter( "grounded", Controller.IsGrounded );
 		SetAnimParameter( "hardfall", Controller.IsHardFalling );
 		SetAnimParameter( "lowhp", Health < GameConfig.LowHealthThreshold );
 		SetAnimParameter( "explode", LifeState == LifeState.Dying );
 		SetAnimParameter( "sliding", HasBeenDamaged && !Controller.IsHardFalling && !Controller.Velocity.IsNearlyZero( 2.5f ) );
 
-		var velocity = WishVelocity.Length;// Pawn.Velocity.Cross( Vector3.Up ).Length;
+		var velocity = ctrl.WishVelocity.Length;// Pawn.Velocity.Cross( Vector3.Up ).Length;
 		SetAnimParameter( "velocity", velocity );
 
 		var aimAngle = -EyeRotation.Pitch().Clamp( -80f, 75f );
 		SetAnimParameter( "aimangle", aimAngle );
 
-		var tr = Trace.Ray( Position + Rotation.Up * 10f, Position +Rotation.Down * 128 )
+		var tr = Trace.Ray( Position + Rotation.Up * 10f, Position + Rotation.Down * 128 )
 			.Ignore( this )
 			.IncludeClientside()
 			.Run();

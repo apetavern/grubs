@@ -134,6 +134,7 @@ public abstract partial class BaseState : Entity
 	/// </summary>
 	public static void Init()
 	{
+		Log.Info( "BaseState Init" );
 		SwitchStateTo( new WaitingState(), true );
 	}
 

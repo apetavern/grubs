@@ -112,7 +112,7 @@ public partial class GrubController : BasePlayerController
 
 		// Take Input if it is currently the grubs turn. Don't allow movement while jumping.
 		WishVelocity = grub.IsTurn && !isFiring && IsGrounded && !BaseGamemode.Instance!.UsedTurn
-			? -Input.Left * Vector3.Forward
+			? -Input.AnalogMove.y * Vector3.Forward
 			: Vector3.Zero;
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
 
@@ -160,12 +160,12 @@ public partial class GrubController : BasePlayerController
 			return;
 		}
 
-		if ( Pawn.LifeState == LifeState.Dead || FallVelocity < FallPunchThreshold || Pawn.WaterLevel >= 1f )
+		if ( Pawn.LifeState == LifeState.Dead || FallVelocity < FallPunchThreshold || Pawn.GetWaterLevel() >= 1f )
 		{
 			return;
 		}
 
-		if ( GroundEntity.WaterLevel >= 1f )
+		if ( GroundEntity.GetWaterLevel() >= 1f )
 		{
 			FallVelocity -= PlayerLandOnFloatingObject;
 		}
@@ -206,7 +206,7 @@ public partial class GrubController : BasePlayerController
 			EyeRotation = Rotation.LookAt( LookPos );
 
 			if ( Velocity.IsNearlyZero( 0.1f ) )
-				LookRotOffset = Math.Clamp( LookRotOffset + Input.Forward * 2, -45, 75 );
+				LookRotOffset = Math.Clamp( LookRotOffset + Input.AnalogMove.x * 2, -45, 75 );
 
 			// Rotate EyeRot by our offset
 			EyeRotation = EyeRotation.RotateAroundAxis( EyeRotation.Left, LookRotOffset );
@@ -219,7 +219,10 @@ public partial class GrubController : BasePlayerController
 
 	private void UpdateRotation()
 	{
-		float grubFacing = Pawn.EyeRotation.Forward.Dot( Pawn.Rotation.Forward );
+		if ( Pawn is not Grub grub )
+			return;
+
+		float grubFacing = grub.EyeRotation.Forward.Dot( Pawn.Rotation.Forward );
 
 		if ( grubFacing < 0 )
 		{
@@ -380,7 +383,7 @@ public partial class GrubController : BasePlayerController
 
 		float startz = Velocity.z;
 
-		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor ).WithX( -Input.Left * 100f );
+		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor ).WithX( -Input.AnalogMove.y * 100f );
 
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 

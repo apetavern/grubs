@@ -197,10 +197,10 @@ public abstract partial class BaseGamemode : BaseState
 			return;
 		}
 
-		TerrainMap.Delete();
-		TeamManager.Delete();
-		KillZone.Delete();
-		TerrainZone.All.Clear();
+		TerrainMap?.Delete();
+		TeamManager?.Delete();
+		KillZone?.Delete();
+		TerrainZone.All?.Clear();
 		foreach ( var client in Game.Clients )
 			client.Pawn?.Delete();
 		foreach ( var spectator in All.OfType<Spectator>() )
