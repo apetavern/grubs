@@ -1,10 +1,36 @@
-# Sandbox
-code/*.csproj
-code/obj
-code/Properties
+﻿# Sandbox
+code/accesslist.txt
+Properties
 .intermediate
-_bakeresourcecache
-tools_asset_info.bin
-tools_thumbnail_cache.bin
-*.los
+*.csproj
+*.bat
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Oo]bj/
 .vs/
+
+# VRAD artifacts
+_bakeresourcecache/
+*_bakeresourcecache.vpk
+
+# Compiled files
+*.vanmgrph_c
+*.vmat_c
+*.vmdl_c
+*.vsnd_c
+*.vtex_c
+*.zip
+*.vpcf_c
+*.vpost_c
+*.sound_c
+
+# Allowlist
+!*_dev.vpk
+!models/citizen_clothes/*/*
