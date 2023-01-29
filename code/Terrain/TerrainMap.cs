@@ -573,7 +573,7 @@ public sealed partial class TerrainMap : Entity
 	/// <returns>A Vector3 position a Grub can be spawned at.</returns>
 	public Vector3 GetSpawnLocation()
 	{
-		while ( true )
+		for ( var i = 0; i < 9999; i++ )
 		{
 			var x = Game.Random.Int( Width - 1 );
 			var y = Game.Random.Int( Height - 1 );
@@ -585,6 +585,9 @@ public sealed partial class TerrainMap : Entity
 			if ( tr.Hit )
 				return tr.EndPosition;
 		}
+
+		Log.Error( "Failed to get spawn location in 9999 tries" );
+		return Vector3.Zero;
 	}
 
 	/// <summary>
