@@ -231,6 +231,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 			}
 		}
 
+		SimulateAnimation( cl );
 		SimulateActiveChild( cl, ActiveChild );
 	}
 
