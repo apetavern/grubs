@@ -28,12 +28,10 @@ public static class DamageInfoExtension
 	/// <returns>The constructed <see cref="DamageInfo"/>.</returns>
 	public static DamageInfo FromFall( float damage, Entity attacker )
 	{
-		return new DamageInfo
-		{
-			Tags = { "fall" },
-			Damage = damage,
-			Attacker = attacker
-		};
+		return new DamageInfo()
+			.WithTag( "fall" )
+			.WithDamage( damage )
+			.WithAttacker( attacker );
 	}
 
 	/// <summary>
@@ -43,10 +41,8 @@ public static class DamageInfoExtension
 	/// <returns>The constructed <see cref="DamageInfo"/>.</returns>
 	public static DamageInfo FromZone( DamageZone zone )
 	{
-		return new DamageInfo
-		{
-			Tags = zone.DamageTags.ToHashSet(),
-			Damage = zone.DamagePerTrigger
-		};
+		return new DamageInfo()
+			.WithTags( zone.DamageTags.ToArray() )
+			.WithDamage( zone.DamagePerTrigger );
 	}
 }
