@@ -49,28 +49,28 @@ public sealed class GrubsGame : GameManager
 	{
 		base.ClientJoined( client );
 
-		// BaseState.Instance.ClientJoined( client );
+		BaseState.Instance.ClientJoined( client );
 	}
 
 	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnect( cl, reason );
 
-		// BaseState.Instance.ClientDisconnected( cl, reason );
+		BaseState.Instance.ClientDisconnected( cl, reason );
 	}
 
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
-		// BaseState.Instance.Simulate( cl );
+		BaseState.Instance.Simulate( cl );
 	}
 
 	public override void FrameSimulate( IClient cl )
 	{
 		base.FrameSimulate( cl );
 
-		// BaseState.Instance?.FrameSimulate( cl );
+		BaseState.Instance.FrameSimulate( cl );
 	}
 
 	[Event.Tick]

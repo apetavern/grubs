@@ -21,23 +21,6 @@ public abstract partial class BaseState : Entity
 		Transmit = TransmitType.Always;
 	}
 
-	public override void Spawn()
-	{
-		base.Spawn();
-
-		if ( Game.IsClient )
-			return;
-
-		Instance = this;
-	}
-
-	public override void ClientSpawn()
-	{
-		base.ClientSpawn();
-
-		Instance = this;
-	}
-
 	/// <summary>
 	/// Called when we've just switched to this state.
 	/// <remarks>If overriding, you should call the base at the end of your method.</remarks>
@@ -163,7 +146,7 @@ public abstract partial class BaseState : Entity
 		Instance?.Delete();
 
 		Instance = state;
-		Instance?.Enter( force, parameters );
+		state?.Enter( force, parameters );
 	}
 
 	[ConCmd.Admin( "state" )]
