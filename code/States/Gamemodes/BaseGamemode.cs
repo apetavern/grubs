@@ -185,8 +185,6 @@ public abstract partial class BaseGamemode : BaseState
 	/// <param name="spectators"></param>
 	protected virtual void SetupSpectators( List<IClient> spectators )
 	{
-		foreach ( var spectator in spectators )
-			spectator.Pawn = new Spectator();
 	}
 
 	protected override void Leave()
@@ -203,8 +201,6 @@ public abstract partial class BaseGamemode : BaseState
 		TerrainZone.All?.Clear();
 		foreach ( var client in Game.Clients )
 			client.Pawn?.Delete();
-		foreach ( var spectator in All.OfType<Spectator>() )
-			spectator.Delete();
 		foreach ( var crate in All.OfType<BaseCrate>() )
 			crate.Delete();
 		foreach ( var weapon in All.OfType<GrubWeapon>() )

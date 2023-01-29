@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Grubs.Player;
+using Grubs.States;
 
 namespace Grubs.UI;
 
@@ -45,8 +46,8 @@ public sealed class DamageNumber : WorldPanel
 		Position += Vector3.Up * RiseSpeed * Time.Delta;
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		if ( Game.LocalPawn is ISpectator { Camera: GrubsCamera camera } )
-			WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 3f;
+		if ( BaseGamemode.Instance is not null )
+			WorldScale = (1.0f + BaseGamemode.Instance.DistanceRange.LerpInverse( -Camera.Position.y )) * 3f;
 	}
 
 	private async Task DelayDelete()

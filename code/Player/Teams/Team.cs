@@ -9,7 +9,7 @@ namespace Grubs.Player;
 /// A team of grubs.
 /// </summary>
 [Category( "Setup" )]
-public sealed partial class Team : Entity, ISpectator
+public sealed partial class Team : Entity
 {
 	/// <summary>
 	/// The list of clients that are a part of this team.
@@ -88,15 +88,8 @@ public sealed partial class Team : Entity, ISpectator
 		TeamNumber = teamNumber;
 
 		foreach ( var client in clients )
-		{
 			Clients.Add( client );
-			client.Pawn = new Spectator();
-		}
 
-		Camera = new GrubsCamera()
-		{
-			Owner = this
-		};
 		Inventory = new GrubsInventory
 		{
 			Owner = this
@@ -201,13 +194,7 @@ public sealed partial class Team : Entity, ISpectator
 	{
 		Game.AssertServer();
 
-		if ( Clients[0].Pawn is not Spectator )
-			Clients[0].Pawn = new Spectator();
-
 		RotateClients();
-
-		if ( Clients[0].Pawn is Spectator )
-			Clients[0].Pawn.Delete();
 
 		ActiveClient = Clients[0];
 		ActiveClient.Pawn = this;

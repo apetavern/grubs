@@ -1,12 +1,11 @@
 ﻿using Grubs.Crates;
-using Grubs.States;
+using Grubs.Player;
 using Grubs.Utils;
 using Grubs.Weapons.Base;
 
-namespace Grubs.Player;
+namespace Grubs.States;
 
-// TODO: May not need the entity anymore?
-public sealed partial class GrubsCamera : Entity
+partial class BaseGamemode
 {
 	public float Distance { get; set; } = 1024;
 	public float DistanceScrollRate { get; set; } = 32f;
@@ -24,10 +23,9 @@ public sealed partial class GrubsCamera : Entity
 	private Entity? LastTarget { get; set; }
 	private TimeSince TimeSinceTargetChanged { get; set; }
 
-	public override void Simulate( IClient cl )
+	[Event.Client.Frame]
+	protected virtual void ClientFrame()
 	{
-		base.Simulate( cl );
-
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
 
@@ -41,10 +39,10 @@ public sealed partial class GrubsCamera : Entity
 		cameraCenter += Vector3.Up * CameraUpOffset;
 
 		var targetPosition = cameraCenter + Vector3.Right * Distance;
-		Position = Position.LerpTo( targetPosition, Time.Delta * LerpSpeed );
+		Camera.Position = Position.LerpTo( targetPosition, Time.Delta * LerpSpeed );
 
 		var lookDir = (cameraCenter - targetPosition).Normal;
-		Rotation = Rotation.LookAt( lookDir, Vector3.Up );
+		Camera.Rotation = Rotation.LookAt( lookDir, Vector3.Up );
 
 		// Handle camera panning
 		if ( Input.Down( InputButton.SecondaryAttack ) )

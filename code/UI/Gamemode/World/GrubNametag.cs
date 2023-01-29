@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Grubs.Player;
+using Grubs.States;
 
 namespace Grubs.UI.World;
 
@@ -48,7 +49,7 @@ public sealed class GrubNametag : WorldPanel
 		Position = Grub.Position + Offset;
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		if ( Game.LocalPawn is ISpectator { Camera: GrubsCamera camera } )
-			WorldScale = (1.0f + camera.DistanceRange.LerpInverse( -camera.Position.y )) * 3f;
+		if ( BaseGamemode.Instance is not null )
+			WorldScale = (1.0f + BaseGamemode.Instance.DistanceRange.LerpInverse( -Camera.Position.y )) * 3f;
 	}
 }
