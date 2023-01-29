@@ -12,7 +12,7 @@ public sealed partial class DamageZone : TerrainZone
 	/// The flags to pass to the damage info when a grub is damaged.
 	/// </summary>
 	[Net]
-	public HashSet<string> DamageTags { get; private set; } = new();
+	public IList<string> DamageTags { get; private set; } = null!;
 
 	/// <summary>
 	/// Whether or not this zone is a kill barrier.
@@ -34,7 +34,8 @@ public sealed partial class DamageZone : TerrainZone
 	/// <returns>The damage zone instance.</returns>
 	public DamageZone WithDamageTags( params string[] tags )
 	{
-		DamageTags = tags.ToHashSet();
+		foreach ( var tag in tags )
+			DamageTags.Add( tag );
 		return this;
 	}
 

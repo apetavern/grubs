@@ -52,7 +52,7 @@ public static class DamageInfoExtension
 	{
 		return new DamageInfo
 		{
-			Tags = zone.DamageTags,
+			Tags = zone.DamageTags.ToHashSet(),
 			Damage = zone.DamagePerTrigger
 		};
 	}
