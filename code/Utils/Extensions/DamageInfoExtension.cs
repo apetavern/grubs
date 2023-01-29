@@ -17,14 +17,7 @@ public static class DamageInfoExtension
 	/// <returns>The constructed <see cref="DamageInfo"/>.</returns>
 	public static DamageInfo FromExplosion( float damage, Vector3 position, Vector3 force, Entity attacker )
 	{
-		return new DamageInfo
-		{
-			Tags = { "explosive" },
-			Position = position,
-			Damage = damage,
-			Attacker = attacker,
-			Force = force,
-		};
+		return DamageInfo.FromExplosion( position, force, damage ).WithAttacker( attacker );
 	}
 
 	/// <summary>

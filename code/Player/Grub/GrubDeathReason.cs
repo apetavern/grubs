@@ -135,7 +135,7 @@ public readonly struct GrubDeathReason
 						reason = GrubDamageType.Admin;
 						break;
 					// An explosion, just move the reasons around as normal.
-					case "explosive":
+					case "explosion":
 						lastReasonInfo = reasonInfo;
 						lastReason = reason;
 						reasonInfo = damageInfo;
