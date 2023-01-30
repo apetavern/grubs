@@ -8,7 +8,10 @@
 		TraceDelay = 0
 		ExplosionRadius = 20
 		Damage = 20
-		DamageFlags = "Bullet"
+		DamageTags = 
+		[
+			"bullet",
+		]
 		PenetrateTargets = true
 		PenetrateTerrain = false
 		WeaponName = "Revolver"

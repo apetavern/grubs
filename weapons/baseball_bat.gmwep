@@ -5,18 +5,21 @@
 		HitSize = "50,32,50"
 		HitMulti = true
 		HitDelay = 0.1
-		DamageFlags = "Blunt"
+		DamageTags = 
+		[
+			"blunt",
+		]
 		HitForce = 1500
 		Damage = 25
 		WeaponName = "Baseball Bat"
 		Model = resource:"models/weapons/baseballbat/baseballbat.vmdl"
 		Icon = resource:"models/weapons/baseballbat/baseballbat.vmdl_c.png"
+		ParticleType = ""
 		FiringType = "Instant"
 		HoldPose = "Swing"
 		Uses = 1
 		DropChance = 0
 		HasReticle = false
-		UnequipAfter = 0.5
 		InfiniteAmmo = true
 		FireSound = resource:"weapons/rust_flashlight/sounds/rust_flashlight.attack.sound"
 		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"

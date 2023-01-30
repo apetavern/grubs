@@ -8,7 +8,10 @@
 		TraceDelay = 0.2
 		ExplosionRadius = 15
 		Damage = 10
-		DamageFlags = "Bullet"
+		DamageTags = 
+		[
+			"bullet",
+		]
 		PenetrateTargets = false
 		PenetrateTerrain = false
 		WeaponName = "Uzi"

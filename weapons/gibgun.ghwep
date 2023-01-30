@@ -8,7 +8,11 @@
 		TraceDelay = 0
 		ExplosionRadius = 25
 		Damage = 50
-		DamageFlags = "Bullet, Burn"
+		DamageTags = 
+		[
+			"bullet",
+			"burn",
+		]
 		PenetrateTargets = true
 		PenetrateTerrain = true
 		WeaponName = "gibgun"

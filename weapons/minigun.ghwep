@@ -8,7 +8,10 @@
 		TraceDelay = 0.2
 		ExplosionRadius = 25
 		Damage = 5
-		DamageFlags = "Bullet"
+		DamageTags = 
+		[
+			"bullet",
+		]
 		PenetrateTargets = false
 		PenetrateTerrain = false
 		WeaponName = "Minigun"
