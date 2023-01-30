@@ -171,6 +171,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		Name = Game.Random.FromArray( GameConfig.GrubNames );
 		Health = MaxHealth;
 		EnableHitboxes = true;
+		EyePosition = Position + new Vector3( 0, 0, 30 );
 
 		Controller = new GrubController();
 
