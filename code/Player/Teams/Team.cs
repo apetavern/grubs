@@ -38,12 +38,6 @@ public sealed partial class Team : Entity
 	public Grub ActiveGrub { get; private set; }
 
 	/// <summary>
-	/// The teams weapon inventory.
-	/// </summary>
-	[Net]
-	public GrubsInventory Inventory { get; private set; }
-
-	/// <summary>
 	/// The name of this team.
 	/// </summary>
 	[Net]
@@ -68,6 +62,11 @@ public sealed partial class Team : Entity
 	public Entity Camera { get; private set; }
 
 	/// <summary>
+	/// The teams weapon inventory.
+	/// </summary>
+	public GrubsInventory Inventory => Components.Get<GrubsInventory>();
+
+	/// <summary>
 	/// Returns whether all grubs in this team are dead or not.
 	/// </summary>
 	public bool TeamDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
@@ -90,10 +89,10 @@ public sealed partial class Team : Entity
 		foreach ( var client in clients )
 			Clients.Add( client );
 
-		Inventory = new GrubsInventory
+		Components.Add( new GrubsInventory()
 		{
 			Owner = this
-		};
+		} );
 
 		InitializeInventory();
 		CreateGrubs();

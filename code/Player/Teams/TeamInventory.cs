@@ -2,7 +2,7 @@
 
 namespace Grubs.Player;
 
-public sealed partial class GrubsInventory : BaseNetworkable
+public sealed partial class GrubsInventory : EntityComponent
 {
 	[Net]
 	public Entity Owner { get; set; } = null!;
