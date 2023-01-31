@@ -14,4 +14,11 @@ public sealed class FreeForAll : BaseGamemode
 
 		TeamManager.Simulate( cl );
 	}
+
+	public override void FrameSimulate( IClient cl )
+	{
+		base.FrameSimulate( cl );
+
+		TeamManager.FrameSimulate( cl );
+	}
 }

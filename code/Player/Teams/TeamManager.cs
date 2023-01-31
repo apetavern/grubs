@@ -60,6 +60,12 @@ public sealed partial class TeamManager : Entity
 			team.Simulate( cl );
 	}
 
+	public override void FrameSimulate( IClient cl )
+	{
+		foreach ( var team in Teams )
+			team.FrameSimulate( cl );
+	}
+
 	/// <summary>
 	/// Adds a new team
 	/// </summary>

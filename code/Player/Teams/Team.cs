@@ -112,6 +112,12 @@ public sealed partial class Team : Entity
 		ActiveGrub?.UpdateFromClient( pawn.MoveInput, pawn.LookInput );
 	}
 
+	public override void FrameSimulate( IClient cl )
+	{
+		foreach ( var grub in Grubs )
+			grub.FrameSimulate( cl );
+	}
+
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
