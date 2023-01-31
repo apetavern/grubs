@@ -7,4 +7,11 @@ public sealed class FreeForAll : BaseGamemode
 		foreach ( var participant in participants )
 			TeamManager.AddTeam( new List<IClient> { participant } );
 	}
+
+	public override void Simulate( IClient cl )
+	{
+		base.Simulate( cl );
+
+		TeamManager.Simulate( cl );
+	}
 }

@@ -54,6 +54,12 @@ public sealed partial class TeamManager : Entity
 		Instance = this;
 	}
 
+	public override void Simulate( IClient cl )
+	{
+		foreach ( var team in Teams )
+			team.Simulate( cl );
+	}
+
 	/// <summary>
 	/// Adds a new team
 	/// </summary>
@@ -63,7 +69,6 @@ public sealed partial class TeamManager : Entity
 		Game.AssertServer();
 
 		var team = new Team( clients, GameConfig.TeamNames[Teams.Count].ToString(), Teams.Count );
-		clients.First().Pawn = team;
 		Teams.Add( team );
 	}
 

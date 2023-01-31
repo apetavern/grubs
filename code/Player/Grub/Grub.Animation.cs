@@ -9,7 +9,10 @@ partial class Grub
 	private void SimulateAnimation( IClient cl )
 	{
 		var ctrl = Controller;
+		SetAnimParameter( "grounded", true );
 
+		var aimAngle = -EyeRotation.Pitch().Clamp( -80f, 75f );
+		SetAnimParameter( "aimangle", aimAngle );
 		/*		SetAnimParameter( "grounded", Controller.IsGrounded );
 				SetAnimParameter( "hardfall", Controller.IsHardFalling );
 				SetAnimParameter( "lowhp", Health < GameConfig.LowHealthThreshold );

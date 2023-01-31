@@ -53,6 +53,7 @@ public sealed class GrubsGame : GameManager
 	{
 		base.ClientJoined( client );
 
+		client.Pawn = new DummyPawn();
 		BaseState.Instance.ClientJoined( client );
 	}
 

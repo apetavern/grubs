@@ -193,10 +193,8 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 
 	public override void Simulate( IClient cl )
 	{
-		base.Simulate( cl );
-
 		Gravestone?.Simulate( cl );
-		// Controller?.Simulate( cl, this );
+		Controller?.Simulate( cl );
 
 		if ( LifeState != LifeState.Dead )
 		{
@@ -212,6 +210,11 @@ public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 
 		SimulateAnimation( cl );
 		SimulateActiveChild( cl, ActiveChild );
+	}
+
+	public override void FrameSimulate( IClient cl )
+	{
+		Controller?.Simulate( cl );
 	}
 
 	/// <summary>

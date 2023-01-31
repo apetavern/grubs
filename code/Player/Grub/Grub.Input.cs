@@ -2,14 +2,9 @@
 
 public partial class Grub
 {
-	[ClientInput]
 	public Vector2 MoveInput { get; protected set; }
 
-	[ClientInput]
 	public Angles LookInput { get; protected set; }
-
-	[ClientInput]
-	public Entity ActiveWeaponInput { get; set; } = null!;
 
 	public Vector3 EyePosition
 	{
@@ -31,17 +26,20 @@ public partial class Grub
 
 	public override Ray AimRay => new Ray( EyePosition, EyeRotation.Forward );
 
-	public override void BuildInput()
+	public void UpdateFromClient( Vector2 moveInput, Angles lookInput )
 	{
-		if ( Input.StopProcessing )
-			return;
+		MoveInput = moveInput;
+		LookInput = lookInput;
 
-		if ( !IsTurn )
-			return;
+		if ( Debug && IsTurn )
+		{
+			var lineOffset = 10;
 
-		MoveInput = Input.AnalogMove.y;
-
-		var lookInput = (LookInput + Input.AnalogMove.x).Normal;
-		LookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -90f, 90f ) );
+			DebugOverlay.ScreenText( $"MoveInput {MoveInput}", ++lineOffset );
+			DebugOverlay.ScreenText( $"LookInput {LookInput}", ++lineOffset );
+		}
 	}
+
+	[ConVar.Replicated( "gr_debug_input" )]
+	public static bool Debug { get; set; } = false;
 }

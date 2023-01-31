@@ -105,12 +105,11 @@ public sealed partial class Team : Entity
 
 		foreach ( var grub in Grubs )
 			grub.Simulate( cl );
-	}
 
-	public override void BuildInput()
-	{
-		foreach ( var grub in Grubs )
-			grub.BuildInput();
+		if ( ActiveClient.Pawn is not DummyPawn pawn )
+			return;
+
+		ActiveGrub?.UpdateFromClient( pawn.MoveInput, pawn.LookInput );
 	}
 
 	protected override void OnDestroy()
@@ -198,9 +197,7 @@ public sealed partial class Team : Entity
 		Game.AssertServer();
 
 		RotateClients();
-
 		ActiveClient = Clients[0];
-		ActiveClient.Pawn = this;
 	}
 
 	/// <summary>
