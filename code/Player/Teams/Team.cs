@@ -106,6 +106,9 @@ public sealed partial class Team : Entity
 		foreach ( var grub in Grubs )
 			grub.Simulate( cl );
 
+		if ( ActiveClient is null )
+			return;
+
 		if ( ActiveClient.Pawn is not DummyPawn pawn )
 			return;
 

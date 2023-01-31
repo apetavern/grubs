@@ -17,7 +17,7 @@ public partial class GrubController : EntityComponent<Grub>
 	}
 
 	[Net, Predicted]
-	public float CurrentEyeHeight { get; set; } = 24f;
+	public float CurrentEyeHeight { get; set; } = 32f;
 
 	public Vector3 BaseVelocity { get; set; }
 	public Vector3 LastVelocity { get; set; }
@@ -27,8 +27,8 @@ public partial class GrubController : EntityComponent<Grub>
 	public Vector3 GroundNormal { get; set; }
 	public float CurrentGroundAngle { get; set; }
 
-	public static float BodyGirth => 32f;
-	public static float EyeHeight => 24f;
+	public static float BodyGirth => 24f;
+	public static float EyeHeight => 32f;
 
 	public BBox Hull
 	{
