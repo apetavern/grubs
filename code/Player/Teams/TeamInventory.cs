@@ -5,8 +5,6 @@ namespace Grubs.Player;
 public sealed partial class GrubsInventory : EntityComponent
 {
 	[Net]
-	public Entity Owner { get; set; } = null!;
-	[Net]
 	public GrubWeapon? LastUsedWeapon { get; set; }
 
 	[Net]
@@ -31,8 +29,8 @@ public sealed partial class GrubsInventory : EntityComponent
 
 		// Handle picking up a weapon we do not have.
 		Items.Add( weapon );
-		weapon.Parent = Owner;
-		weapon.OnCarryStart( Owner );
+		weapon.Parent = Entity;
+		weapon.OnCarryStart( Entity );
 	}
 
 	public bool IsCarrying( GrubWeapon weapon )

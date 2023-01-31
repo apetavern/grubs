@@ -45,7 +45,7 @@ public sealed class GrubsGame : GameManager
 
 		if ( Game.IsClient )
 		{
-			// _ = new Hud();
+			_ = new Hud();
 		}
 	}
 
