@@ -3,7 +3,7 @@ using Grubs.Utils.Extensions;
 
 namespace Grubs.Player;
 
-public partial class GrubController : BasePlayerController
+public partial class GrubControllerOld : BasePlayerController
 {
 	[Net] public float DefaultSpeed { get; set; } = 80.0f;
 	[Net] public float Acceleration { get; set; } = 10.0f;
@@ -28,7 +28,7 @@ public partial class GrubController : BasePlayerController
 	protected Vector3 mins;
 	protected Vector3 maxs;
 
-	public GrubController()
+	public GrubControllerOld()
 	{
 		Unstuck = new Unstuck( this );
 		Debug = false;
@@ -200,16 +200,19 @@ public partial class GrubController : BasePlayerController
 		LookPos = Velocity.Normal.WithZ( 0 ).IsNearZeroLength ? LookPos : Velocity.WithZ( 0 ).Normal;
 
 		// Only allow aiming changes if the grub isn't moving and not currently charging a weapon shot.
-		if ( (Pawn as Grub)!.IsTurn && !isFiring )
+		if ( Pawn is not Grub grub )
+			return;
+
+		if ( grub!.IsTurn && !isFiring )
 		{
 			// Aim with W & S keys
-			EyeRotation = Rotation.LookAt( LookPos );
+			grub.EyeRotation = Rotation.LookAt( LookPos );
 
 			if ( Velocity.IsNearlyZero( 0.1f ) )
 				LookRotOffset = Math.Clamp( LookRotOffset + Input.AnalogMove.x * 2, -45, 75 );
 
 			// Rotate EyeRot by our offset
-			EyeRotation = EyeRotation.RotateAroundAxis( EyeRotation.Left, LookRotOffset );
+			grub.EyeRotation = EyeRotation.RotateAroundAxis( EyeRotation.Left, LookRotOffset );
 		}
 
 		// Recalculate the grubs rotation if we're moving.
@@ -222,12 +225,13 @@ public partial class GrubController : BasePlayerController
 		if ( Pawn is not Grub grub )
 			return;
 
-		float grubFacing = grub.EyeRotation.Forward.Dot( Pawn.Rotation.Forward );
+		float grubFacing = grub.EyeRotation.Forward.Dot( grub.Rotation.Forward );
+		Log.Info( grub.EyeRotation );
 
 		if ( grubFacing < 0 )
 		{
 			Rotation *= Rotation.From( 0, 180, 0 );
-			Pawn.ResetInterpolation();
+			grub.ResetInterpolation();
 		}
 	}
 

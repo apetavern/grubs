@@ -38,6 +38,12 @@ public sealed partial class Team : Entity
 	public Grub ActiveGrub { get; private set; }
 
 	/// <summary>
+	/// The teams weapon inventory.
+	/// </summary>
+	[Net]
+	public GrubsInventory Inventory { get; private set; }
+
+	/// <summary>
 	/// The name of this team.
 	/// </summary>
 	[Net]
@@ -107,6 +113,12 @@ public sealed partial class Team : Entity
 
 		foreach ( var grub in Grubs )
 			grub.Simulate( cl );
+	}
+
+	public override void BuildInput()
+	{
+		foreach ( var grub in Grubs )
+			grub.BuildInput();
 	}
 
 	protected override void OnDestroy()

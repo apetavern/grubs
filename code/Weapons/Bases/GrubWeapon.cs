@@ -174,8 +174,8 @@ public abstract partial class GrubWeapon : BaseCarriable, IResolvable
 	{
 		// Only fire if our grub is grounded and we haven't used our turn.
 		var controller = (Owner as Team)!.ActiveGrub.Controller;
-		if ( !controller.IsGrounded || BaseGamemode.Instance!.UsedTurn )
-			return;
+		/*if ( !controller.IsGrounded || BaseGamemode.Instance!.UsedTurn )
+			return;*/
 
 		switch ( FiringType )
 		{

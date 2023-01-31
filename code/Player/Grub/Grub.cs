@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Threading.Tasks;
-using Grubs.Crates;
+﻿using Grubs.Crates;
 using Grubs.States;
 using Grubs.Terrain;
 using Grubs.Utils;
@@ -13,13 +11,13 @@ namespace Grubs.Player;
 /// A playable grub.
 /// </summary>
 [Category( "Grubs" )]
-public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
+public partial class Grub : AnimatedEntity, IDamageable, IResolvable
 {
 	/// <summary>
 	/// The grubs movement controller.
 	/// </summary>
-	[Net, Predicted]
-	public GrubController Controller { get; private set; } = null!;
+	[BindComponent]
+	public GrubController Controller { get; } = null!;
 
 	/// <summary>
 	/// The currently active weapon the grub is using.
@@ -43,26 +41,6 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 	/// Helper property to get a grubs team.
 	/// </summary>
 	public Team Team => (Owner as Team)!;
-
-	[Browsable( false )]
-	public Vector3 EyePosition
-	{
-		get => Transform.PointToWorld( EyeLocalPosition );
-		set => EyeLocalPosition = Transform.PointToLocal( value );
-	}
-
-	[Net, Predicted, Browsable( false )]
-	public Vector3 EyeLocalPosition { get; set; }
-
-	[Browsable( false )]
-	public Rotation EyeRotation
-	{
-		get => Transform.RotationToWorld( EyeLocalRotation );
-		set => EyeLocalRotation = Transform.RotationToLocal( value );
-	}
-
-	[Net, Predicted, Browsable( false )]
-	public Rotation EyeLocalRotation { get; set; }
 
 	/// <summary>
 	/// Returns whether or not this grub has been damaged.
@@ -173,7 +151,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		EnableHitboxes = true;
 		EyePosition = Position + new Vector3( 0, 0, 30 );
 
-		Controller = new GrubController();
+		Components.Create<GrubController>();
 
 		if ( cl is not null )
 			DressFromClient( cl );
@@ -218,7 +196,7 @@ public sealed partial class Grub : AnimatedEntity, IDamageable, IResolvable
 		base.Simulate( cl );
 
 		Gravestone?.Simulate( cl );
-		Controller?.Simulate( cl, this );
+		// Controller?.Simulate( cl, this );
 
 		if ( LifeState != LifeState.Dead )
 		{

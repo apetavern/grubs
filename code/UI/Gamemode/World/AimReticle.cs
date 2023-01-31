@@ -25,11 +25,11 @@ public sealed class AimReticle : WorldPanel
 			return;
 		}
 
-		if ( !activeGrub.Controller.IsGrounded || !activeGrub.Velocity.IsNearlyZero( 2.5f ) )
+		/*if ( !activeGrub.Controller.IsGrounded || !activeGrub.Velocity.IsNearlyZero( 2.5f ) )
 		{
 			SetClass( "hidden", true );
 			return;
-		}
+		}*/
 
 		SetClass( "hidden", false );
 		Position = activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f;
