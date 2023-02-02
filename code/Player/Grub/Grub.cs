@@ -63,8 +63,8 @@ public partial class Grub : AnimatedEntity
 
 		if ( Game.IsServer && Input.Down( InputButton.PrimaryAttack ) )
 		{
-			var min = new Vector3( Position.x, -64, Position.z + LookAngles.pitch - 24f );
-			var max = new Vector3( Position.x + facing * 50f, 64, Position.z + LookAngles.pitch );
+			var min = new Vector3( Position.x, -64, Position.z + LookAngles.pitch - 32f );
+			var max = new Vector3( Position.x + facing * 64f, 64, Position.z + LookAngles.pitch + 32f );
 			DebugOverlay.Box( min, max );
 			if ( facing == 1 )
 				world.SubtractCube( min, max );

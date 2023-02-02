@@ -29,11 +29,11 @@ public partial class GrubController : EntityComponent<Grub>
 		get => GroundEntity != null;
 	}
 
-	public static float BodyGirth => 24f;
-	public static float EyeHeight => 32f;
+	public static float BodyGirth => 20f;
+	public static float EyeHeight => 28f;
 
 	[Net, Predicted]
-	public float CurrentEyeHeight { get; set; } = 32f;
+	public float CurrentEyeHeight { get; set; } = 28f;
 
 	public IEnumerable<ControllerMechanic> Mechanics => Entity.Components.GetAll<ControllerMechanic>();
 	public ControllerMechanic BestMechanic => Mechanics.OrderByDescending( x => x.SortOrder ).FirstOrDefault( x => x.IsActive );
