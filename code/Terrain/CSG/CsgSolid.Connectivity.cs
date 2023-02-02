@@ -264,8 +264,12 @@ namespace Sandbox.Csg
 
 		private bool ConnectivityUpdate()
 		{
+			// We don't want to kill off disconnected islands.
+			return false;
+
 			if ( !DisconnectIslands ) return false;
 			if ( !UpdateIslands() ) return false;
+
 
 			// Find all islands
 

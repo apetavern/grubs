@@ -37,6 +37,10 @@ public sealed partial class GrubsGame : GameManager
 		{
 			// _ = new Hud();
 		}
+		else
+		{
+			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
+		}
 	}
 
 	public override void ClientJoined( IClient client )

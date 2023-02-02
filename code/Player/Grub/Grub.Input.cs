@@ -38,8 +38,14 @@ public partial class Grub
 			.WithRoll( 0f )
 			.WithYaw( 0f );
 
-		DebugOverlay.ScreenText( $"MoveInput: {MoveInput}", 13 );
-		DebugOverlay.ScreenText( $"LookInput: {LookInput}", 14 );
-		DebugOverlay.ScreenText( $"LookAngles: {LookAngles}", 15 );
+		if ( Debug && IsTurn )
+		{
+			DebugOverlay.ScreenText( $"MoveInput: {MoveInput}", 13 );
+			DebugOverlay.ScreenText( $"LookInput: {LookInput}", 14 );
+			DebugOverlay.ScreenText( $"LookAngles: {LookAngles}", 15 );
+		}
 	}
+
+	[ConVar.Replicated( "gr_debug_input" )]
+	public static bool Debug { get; set; } = false;
 }
