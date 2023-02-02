@@ -55,6 +55,22 @@ public partial class Grub : AnimatedEntity
 	{
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
+
+		var game = GrubsGame.Instance;
+		var world = game.World;
+		var ahead = EyePosition + Rotation.Forward * 1f;
+		var facing = ahead.x > Position.x ? 1 : -1;
+
+		if ( Game.IsServer && Input.Down( InputButton.PrimaryAttack ) )
+		{
+			var min = new Vector3( Position.x, -64, Position.z + LookAngles.pitch - 24f );
+			var max = new Vector3( Position.x + facing * 50f, 64, Position.z + LookAngles.pitch );
+			DebugOverlay.Box( min, max );
+			if ( facing == 1 )
+				world.SubtractCube( min, max );
+			else
+				world.SubtractCube( max, min );
+		}
 	}
 
 	public override void FrameSimulate( IClient client )
