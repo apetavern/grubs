@@ -1,10 +1,11 @@
-﻿namespace Grubs.Player;
+﻿namespace Grubs;
 
 public partial class Grub
 {
-	public Vector2 MoveInput { get; protected set; }
+	public float MoveInput { get; set; }
+	public float LookInput { get; set; }
 
-	public Angles LookInput { get; protected set; }
+	public Angles LookAngles { get; set; }
 
 	public Vector3 EyePosition
 	{
@@ -24,22 +25,21 @@ public partial class Grub
 	[Net, Predicted]
 	public Rotation EyeLocalRotation { get; set; }
 
-	public override Ray AimRay => new Ray( EyePosition, EyeRotation.Forward );
+	public override Ray AimRay => new( EyePosition, EyeRotation.Forward );
 
-	public void UpdateFromClient( Vector2 moveInput, Angles lookInput )
+	public void UpdateInputFromOwner( float moveInput, float lookInput )
 	{
 		MoveInput = moveInput;
 		LookInput = lookInput;
 
-		if ( Debug && IsTurn )
-		{
-			var lineOffset = 10;
+		var look = (LookAngles + LookInput).Normal;
+		LookAngles = look
+			.WithPitch( look.pitch.Clamp( -80f, 75f ) )
+			.WithRoll( 0f )
+			.WithYaw( 0f );
 
-			DebugOverlay.ScreenText( $"MoveInput {MoveInput}", ++lineOffset );
-			DebugOverlay.ScreenText( $"LookInput {LookInput}", ++lineOffset );
-		}
+		DebugOverlay.ScreenText( $"MoveInput: {MoveInput}", 13 );
+		DebugOverlay.ScreenText( $"LookInput: {LookInput}", 14 );
+		DebugOverlay.ScreenText( $"LookAngles: {LookAngles}", 15 );
 	}
-
-	[ConVar.Replicated( "gr_debug_input" )]
-	public static bool Debug { get; set; } = false;
 }
