@@ -3,7 +3,7 @@
   "Type": "game",
   "Org": "apetavern",
   "Ident": "grubs",
-  "Tags": "",
+  "Tags": "artillery turnbased pvp strategy multiplayer",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -290,7 +290,7 @@
         "Description": "The amount of Grubs each team will have.",
         "Group": "Game",
         "Minimum": 1,
-        "Maximum": 100
+        "Maximum": 8
       },
       {
         "DisplayType": "Float",
@@ -354,109 +354,37 @@
         "Maximum": 60
       },
       {
-        "Choices": [],
-        "ConVarName": "terrain_file",
-        "DisplayName": "Terrain File",
-        "DefaultValue": "",
-        "Description": "The path to a custom Grubs map to use instead of random generation. This file is only needed on the server host.",
-        "Group": "Terrain"
-      },
-      {
-        "DisplayType": "Choice",
-        "Choices": [
-          {
-            "Value": "None",
-            "Name": "None"
-          },
-          {
-            "Value": "Dirt",
-            "Name": "Dirt"
-          },
-          {
-            "Value": "Sand",
-            "Name": "Sand"
-          },
-          {
-            "Value": "Lava",
-            "Name": "Lava"
-          }
-        ],
-        "ConVarName": "terrain_type",
-        "DisplayName": "Terrain Type",
-        "DefaultValue": "Sand",
-        "Description": "The type of material to be applied to the terrain.",
-        "Group": "Terrain"
-      },
-      {
-        "DisplayType": "Boolean",
-        "Choices": [],
-        "ConVarName": "terrain_border",
-        "DisplayName": "Terrain Border",
-        "DefaultValue": "false",
-        "Description": "Whether the terrain should have a border or not.",
-        "Group": "Terrain"
-      },
-      {
-        "DisplayType": "Boolean",
-        "Choices": [],
-        "ConVarName": "terrain_altered",
-        "DisplayName": "Use Altered Terrain",
-        "DefaultValue": "true",
-        "Description": "Altered terrain is curated to look more like little islands with a height threshold so the terrain does not fill up the entire grid. We recommend using it.",
-        "Group": "Terrain"
-      },
-      {
         "DisplayType": "Integer",
         "Choices": [],
-        "ConVarName": "terrain_dilation",
-        "DisplayName": "Terrain Dilation Amount",
-        "DefaultValue": "1",
-        "Description": "The amount the terrain is dilated. The blobs in the terrain are extruded a certain number of times. Only applicable when Altered Terrain is enabled.",
+        "ConVarName": "terrain_length",
+        "DisplayName": "Terrain Length",
+        "DefaultValue": "2048",
+        "Description": "The length of the terrain.",
         "Group": "Terrain",
-        "Maximum": 10
-      },
-      {
-        "DisplayType": "Float",
-        "Choices": [],
-        "ConVarName": "terrain_resolution",
-        "DisplayName": "Terrain Resolution",
-        "DefaultValue": "0.5",
-        "Description": "The resolution of the noise for the terrain. Lower means less blobs, and higher means more blobs.",
-        "Group": "Terrain",
-        "Maximum": 2
-      },
-      {
-        "DisplayType": "Integer",
-        "Choices": [],
-        "ConVarName": "terrain_scale",
-        "DisplayName": "Terrain Scale",
-        "DefaultValue": "15",
-        "Description": "Represents the size of a single point of terrain. A higher scale means the terrain is larger in the world.",
-        "Group": "Terrain",
-        "Minimum": 1,
-        "Maximum": 50
-      },
-      {
-        "DisplayType": "Integer",
-        "Choices": [],
-        "ConVarName": "terrain_width",
-        "DisplayName": "Terrain Width",
-        "DefaultValue": "320",
-        "Description": "The width of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
-        "Group": "Terrain",
-        "Minimum": 50,
-        "Maximum": 500
+        "Minimum": 512,
+        "Maximum": 4096
       },
       {
         "DisplayType": "Integer",
         "Choices": [],
         "ConVarName": "terrain_height",
         "DisplayName": "Terrain Height",
-        "DefaultValue": "180",
-        "Description": "The height of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
+        "DefaultValue": "1024",
+        "Description": "The height of the terrain.",
         "Group": "Terrain",
-        "Minimum": 50,
-        "Maximum": 500
+        "Minimum": 256,
+        "Maximum": 2048
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_noise_zoom",
+        "DisplayName": "Terrain Zoom",
+        "DefaultValue": "2",
+        "Description": "The amount of zoom applied to the Perlin noise.",
+        "Group": "Terrain",
+        "Minimum": 1,
+        "Maximum": 4
       }
     ]
   }

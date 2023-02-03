@@ -7,28 +7,27 @@ public partial class World : Entity
 	[Net]
 	public CsgSolid CsgWorld { get; set; }
 
+	[Net]
+	public CsgSolid CsgBackground { get; set; }
+
 	public CsgBrush CubeBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cube.csg" );
 	public CsgBrush CoolBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cool.csg" );
 	public CsgMaterial DefaultMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/default.csgmat" );
 	public CsgMaterial SandMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/sand.csgmat" );
+	public CsgMaterial LavaMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/lava.csgmat" );
 
-	private const float WorldLength = 2048f;
-	private const float WorldWidth = 64f;
-	private const float WorldHeight = 1024f;
+	public readonly float WorldLength = GrubsConfig.TerrainLength;
+	public readonly float WorldHeight = GrubsConfig.TerrainHeight;
+	public const float WorldWidth = 64f;
 
+	private readonly float _zoom = GrubsConfig.TerrainNoiseZoom;
 	private const float GridSize = 1024f;
 
 	public override void Spawn()
 	{
 		Assert.True( Game.IsServer );
 
-		CsgWorld = new CsgSolid( GridSize );
-
-		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
-
-		SubtractCube( -100, 100 );
-
-		GenerateRandomWorld();
+		Reset();
 	}
 
 	public void Reset()
@@ -36,31 +35,29 @@ public partial class World : Entity
 		CsgWorld?.Delete();
 
 		CsgWorld = new CsgSolid( GridSize );
-
 		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
+
+		CsgBackground = new CsgSolid( GridSize );
+		CsgBackground.Add( CubeBrush, DefaultMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 72, -WorldHeight / 2 ) );
 
 		GenerateRandomWorld();
 	}
 
-	public void SubtractCube( Vector3 min, Vector3 max )
+	public void SubtractDefault( Vector3 min, Vector3 max )
 	{
 		CsgWorld.Subtract( CoolBrush, (min + max) * 0.5f, max - min );
+		CsgWorld.Paint( CoolBrush, DefaultMaterial, (min + max) * 0.5f, (max - min) * 1.1f );
 	}
 
-	float[,] TerrainGrid;
-	int resolution = 32;
-	int zoom = 16;
+	private float[,] _terrainGrid;
+	private readonly int _resolution = 16;
 
 	public void GenerateRandomWorld()
 	{
-		var pointsX = (WorldLength / resolution).CeilToInt();
-		var pointsZ = (WorldHeight / resolution).CeilToInt();
-		var points = pointsX * pointsZ;
+		var pointsX = (WorldLength / _resolution).CeilToInt();
+		var pointsZ = (WorldHeight / _resolution).CeilToInt();
 
-		Log.Info( $"pointsX: {pointsX}, pointsZ: {pointsZ}" );
-		Log.Info( $"Total Points of Noise: {points}" );
-
-		TerrainGrid = new float[pointsX, pointsZ];
+		_terrainGrid = new float[pointsX, pointsZ];
 
 		var r = Game.Random.Int( 99999 );
 
@@ -69,18 +66,23 @@ public partial class World : Entity
 		{
 			for ( var z = 0; z < pointsZ; z++ )
 			{
-				var n = Noise.Perlin( (x + r) * 3, r, (z + r) * 3 );
+				var n = Noise.Perlin( (x + r) * _zoom, r, (z + r) * _zoom );
 				n = Math.Abs( (n * 2) - 1 );
-				TerrainGrid[x, z] = n;
+				_terrainGrid[x, z] = n;
 
-				if ( TerrainGrid[x, z] < 0.1f )
+				// Subtract from the solid where the noise is under a certain threshold.
+				if ( _terrainGrid[x, z] < 0.1f )
 				{
-					var paddedRes = resolution + 24;
-					var min = new Vector3( (x * resolution) - paddedRes, -64, (z * resolution) - paddedRes );
-					var max = new Vector3( (x * resolution) + paddedRes, 64, (z * resolution) + paddedRes );
+					// Pad the subtraction so the subtraction is more clean.
+					var paddedRes = _resolution + (_resolution * 0.75f);
+
+					var min = new Vector3( (x * _resolution) - paddedRes, -32, (z * _resolution) - paddedRes );
+					var max = new Vector3( (x * _resolution) + paddedRes, 32, (z * _resolution) + paddedRes );
+
+					// Offset by position.
 					min -= new Vector3( WorldLength / 2, 0, WorldHeight );
 					max -= new Vector3( WorldLength / 2, 0, WorldHeight );
-					SubtractCube( min, max );
+					SubtractDefault( min, max );
 				}
 			}
 		}
