@@ -1,4 +1,6 @@
-﻿namespace Grubs;
+﻿using static Sandbox.Event;
+
+namespace Grubs;
 
 public partial class Grub : AnimatedEntity
 {
@@ -31,12 +33,16 @@ public partial class Grub : AnimatedEntity
 	public Grub()
 	{
 		Transmit = TransmitType.Always;
+
+		Tags.Add( "player" );
 	}
 
 	public override void Spawn()
 	{
 		Model = CitizenGrubModel;
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+
+		Name = Game.Random.FromArray( GrubsConfig.GrubNames );
 
 		EnableDrawing = true;
 		EnableHitboxes = true;
@@ -47,8 +53,6 @@ public partial class Grub : AnimatedEntity
 		Components.Create<AirMoveMechanic>();
 		Components.Create<SquirmMechanic>();
 		Components.Create<JumpMechanic>();
-
-		Tags.Add( "player" );
 	}
 
 	public override void Simulate( IClient client )

@@ -157,8 +157,6 @@ public partial class GrubController : EntityComponent<Grub>
 			.Ignore( Grub )
 			.Run();
 
-
-
 		return tr;
 	}
 

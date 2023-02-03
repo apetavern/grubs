@@ -59,12 +59,13 @@ public partial class Player : Entity
 		if ( Camera is null )
 			Camera = new PlayerCamera();
 
+		Camera?.SetTarget( GamemodeSystem.Instance.CameraTarget );
 		Camera?.UpdateCamera( this );
 	}
 
 	private void CreateGrubs()
 	{
-		for ( int i = 0; i < 1; i++ )
+		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
 			var grub = new Grub();
 			grub.Owner = this;
@@ -72,5 +73,14 @@ public partial class Player : Entity
 		}
 
 		ActiveGrub = Grubs.First();
+	}
+
+	public void RotateGrubs()
+	{
+		var current = Grubs[0];
+		Grubs.RemoveAt( 0 );
+		Grubs.Add( current );
+
+		ActiveGrub = Grubs[0];
 	}
 }

@@ -20,9 +20,8 @@ public class PlayerCamera
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
 
-		FindTarget( player );
 		if ( Target is null || !Target.IsValid )
-			return;
+			SetTarget( player.ActiveGrub );
 
 		// Get the center position, plus move the camera up a little bit.
 		var cameraCenter = CenterOnPawn ? Target.Position : Center;
@@ -44,9 +43,14 @@ public class PlayerCamera
 			CenterOnPawn = true;
 	}
 
-	private void FindTarget( Player player )
+	public void SetTarget( Entity entity )
 	{
-		Target = player.ActiveGrub;
+		if ( entity == Target )
+			return;
+
+		LastTarget = Target;
+		Target = entity;
+		TimeSinceTargetChanged = 0f;
 	}
 
 	private void MoveCamera()

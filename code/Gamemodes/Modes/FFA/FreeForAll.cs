@@ -6,7 +6,10 @@ public partial class FreeForAll : Gamemode
 	public override bool AllowFriendlyFire => true;
 	public override int MinimumPlayers => GrubsConfig.MinimumPlayers;
 
-	public IList<Player> PlayerRotation { get; set; } = new List<Player>();
+	[Net]
+	public TimeUntil TimeUntilTurnOver { get; set; }
+
+	public List<Player> PlayerRotation { get; set; } = new();
 
 	private bool _gameHasStarted = false;
 
@@ -31,6 +34,17 @@ public partial class FreeForAll : Gamemode
 		ActivePlayer = PlayerRotation.First();
 	}
 
+	private void RotateActivePlayer()
+	{
+		var current = ActivePlayer;
+		ActivePlayer.RotateGrubs();
+
+		PlayerRotation.RemoveAt( 0 );
+		PlayerRotation.Add( current );
+
+		ActivePlayer = PlayerRotation[0];
+	}
+
 	internal override void MoveToSpawnpoint( IClient client )
 	{
 		if ( client.Pawn is not Player player )
@@ -51,5 +65,24 @@ public partial class FreeForAll : Gamemode
 			Start();
 		}
 
+		if ( _gameHasStarted && TimeUntilTurnOver < 0f )
+		{
+			RotateActivePlayer();
+			TimeUntilTurnOver = GrubsConfig.TurnDuration;
+		}
+
+		CameraTarget = ActivePlayer?.ActiveGrub;
+
+		if ( Debug )
+		{
+			var lineOffset = 17;
+			DebugOverlay.ScreenText( $"ActivePlayer {ActivePlayer}", lineOffset++ );
+			DebugOverlay.ScreenText( $"ActiveGrub {ActivePlayer?.ActiveGrub}", lineOffset++ );
+			DebugOverlay.ScreenText( $"Turn Timer {TimeUntilTurnOver}", lineOffset++ );
+			DebugOverlay.ScreenText( $"", lineOffset++ );
+		}
 	}
+
+	[ConVar.Replicated( "gr_debug_ffa" )]
+	public static bool Debug { get; set; } = false;
 }

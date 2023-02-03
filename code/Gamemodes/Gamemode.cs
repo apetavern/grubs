@@ -11,6 +11,9 @@ public partial class Gamemode : Entity
 	[Net]
 	public Player ActivePlayer { get; set; }
 
+	[Net]
+	public Entity CameraTarget { get; set; }
+
 	public virtual bool AllowMovement => true;
 	public virtual bool AllowDamage => true;
 	public virtual bool AllowFriendlyFire => false;
