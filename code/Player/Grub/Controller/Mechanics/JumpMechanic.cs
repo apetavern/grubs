@@ -62,7 +62,7 @@ public partial class JumpMechanic : ControllerMechanic
 		var ahead = Grub.EyePosition + Grub.Rotation.Forward * 1f;
 		var facing = ahead.x > Grub.Position.x ? 1 : -1;
 
-		Velocity += new Vector3( facing * 200f, 0f, 0f );
+		Velocity += new Vector3( facing * 150f, 0f, 0f );
 		Velocity = Velocity.WithZ( _jumpPower );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 

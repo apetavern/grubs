@@ -2,7 +2,7 @@
 
 public class SquirmMechanic : ControllerMechanic
 {
-	public override float WishSpeed { get; protected set; } = 80.0f;
+	public override float WishSpeed { get; protected set; } = 60.0f;
 
 	public static float Acceleration => 10.0f;
 	public static float GroundFriction => 4.0f;
@@ -13,7 +13,7 @@ public class SquirmMechanic : ControllerMechanic
 
 	public float SurfaceFriction { get; protected set; } = 1.0f;
 
-	public override int SortOrder => 1;
+	public override int SortOrder => 50;
 
 	protected override bool ShouldStart()
 	{
