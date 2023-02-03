@@ -12,6 +12,7 @@ public partial class FreeForAll : Gamemode
 	public List<Player> PlayerRotation { get; set; } = new();
 
 	private bool _gameHasStarted = false;
+	private bool _terrainReady = false;
 
 	internal override void Initialize()
 	{
@@ -60,7 +61,16 @@ public partial class FreeForAll : Gamemode
 	[Event.Tick.Server]
 	public void Tick()
 	{
-		if ( PlayerCount >= MinimumPlayers && !_gameHasStarted )
+		// Check if the terrain is done sending modifications to clients.
+		if ( !_terrainReady )
+		{
+			if ( GrubsGame.Instance.World.CsgWorld.TimeSinceLastModification > 1f )
+			{
+				_terrainReady = true;
+			}
+		}
+
+		if ( PlayerCount >= MinimumPlayers && !_gameHasStarted && _terrainReady )
 		{
 			Start();
 		}

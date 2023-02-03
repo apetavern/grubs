@@ -18,10 +18,12 @@
 
 		private int _appliedModifications;
 		private readonly List<CsgModification> _modifications = new List<CsgModification>();
-		private readonly Dictionary<IEntity, int> _sentModifications = new Dictionary<IEntity, int>();
+		private readonly Dictionary<IClient, int> _sentModifications = new Dictionary<IClient, int>();
+
+		public TimeSince TimeSinceLastModification { get; private set; }
 
 		[ThreadStatic]
-		private static List<IEntity> _sToRemove;
+		private static List<IClient> _sToRemove;
 
 		private void AddModification( in CsgModification modification )
 		{
@@ -30,7 +32,7 @@
 
 		private void SendModifications()
 		{
-			_sToRemove ??= new List<IEntity>();
+			_sToRemove ??= new List<IClient>();
 			_sToRemove.Clear();
 
 			foreach ( var (pawn, _) in _sentModifications )
@@ -41,20 +43,19 @@
 				}
 			}
 
-			foreach ( var entity in _sToRemove )
+			foreach ( var client in _sToRemove )
 			{
-				_sentModifications.Remove( entity );
+				_sentModifications.Remove( client );
 			}
 
 			foreach ( var client in Game.Clients )
 			{
 				if ( client.IsBot ) continue;
-				if ( client.Pawn is null ) continue;
 
-				if ( !_sentModifications.TryGetValue( client.Pawn, out var prevCount ) )
+				if ( !_sentModifications.TryGetValue( client, out var prevCount ) )
 				{
 					prevCount = 0;
-					_sentModifications.Add( client.Pawn, prevCount );
+					_sentModifications.Add( client, prevCount );
 				}
 
 				Assert.True( prevCount <= _modifications.Count );
@@ -76,7 +77,9 @@
 
 				msg.SendRpc( To.Single( client ), null );
 
-				_sentModifications[client.Pawn] = prevCount + msgCount;
+				TimeSinceLastModification = 0;
+
+				_sentModifications[client] = prevCount + msgCount;
 			}
 		}
 
