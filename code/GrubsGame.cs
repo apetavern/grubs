@@ -10,7 +10,7 @@ global using System.IO;
 global using System.Linq;
 global using System.Threading.Tasks;
 using Sandbox.Csg;
-using static Sandbox.CitizenAnimationHelper;
+using static Sandbox.Event;
 
 namespace Grubs;
 
@@ -23,12 +23,6 @@ public sealed partial class GrubsGame : GameManager
 
 	[Net]
 	public World World { get; set; }
-
-	/*	[Net]
-		public CsgSolid CsgWorld { get; set; }
-
-		public CsgBrush CubeBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cube.csg" );
-		public CsgMaterial DefaultMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/default.csgmat" );*/
 
 
 	public GrubsGame()
@@ -52,12 +46,14 @@ public sealed partial class GrubsGame : GameManager
 			SpawnWorld();
 		}
 
-		client.Pawn = new Player();
+		GamemodeSystem.Instance?.OnClientJoined( client );
 	}
 
-	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
+	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
-		base.ClientDisconnect( cl, reason );
+		base.ClientDisconnect( client, reason );
+
+		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 	}
 
 	public override void Simulate( IClient cl )
@@ -75,5 +71,12 @@ public sealed partial class GrubsGame : GameManager
 		Assert.True( Game.IsServer );
 
 		World = new World();
+	}
+
+	[Event.Entity.PostSpawn]
+	public void PostEntitySpawn()
+	{
+		Log.Info( " PostEntitySpawn " );
+		GamemodeSystem.SetupGamemode();
 	}
 }

@@ -175,7 +175,7 @@ public partial class GrubController : EntityComponent<Grub>
 	// A Grub can only move left and right for now.
 	public float GetWishInput()
 	{
-		return Grub.MoveInput;
+		return Grub.IsTurn ? Grub.MoveInput : 0f;
 	}
 
 	public Vector3 GetWishVelocity( bool zeroPitch = false )

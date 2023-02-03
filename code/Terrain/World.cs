@@ -88,6 +88,11 @@ public partial class World : Entity
 		}
 	}
 
+	public Vector3 FindSpawnLocation()
+	{
+		return new Vector3( 0f );
+	}
+
 	[ConCmd.Admin( "gr_regen" )]
 	public static void RegenWorld()
 	{

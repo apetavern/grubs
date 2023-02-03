@@ -6,7 +6,7 @@ public static class GrubsConfig
 	/// The Grubs gamemode to play.
 	/// </summary>
 	[ConVar.Replicated( "grubs_game" )]
-	public static string Gamemode { get; set; } = "ffa";
+	public static string Gamemode { get; set; } = "FreeForAll";
 
 	/// <summary>
 	/// The minimum amount of players needed to start the game.

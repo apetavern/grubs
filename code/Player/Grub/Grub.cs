@@ -22,7 +22,7 @@ public partial class Grub : AnimatedEntity
 			if ( Player is null )
 				return false;
 
-			return Player.ActiveGrub == this;
+			return Player.ActiveGrub == this && Player.IsTurn;
 		}
 	}
 

@@ -16,6 +16,9 @@ public partial class JumpMechanic : ControllerMechanic
 
 	protected override bool ShouldStart()
 	{
+		if ( !Grub.IsTurn )
+			return false;
+
 		// If we already pressed jump once, and we didn't hit it again within
 		// the time limit, we normal jump.
 		if ( TimeSinceJumpPressed > _timeBeforeSecondPress && !_firstTime )

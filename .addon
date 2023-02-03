@@ -245,17 +245,13 @@
         "DisplayType": "Choice",
         "Choices": [
           {
-            "Value": "ffa",
+            "Value": "FreeForAll",
             "Name": "Free For All"
-          },
-          {
-            "Value": "tdm",
-            "Name": "Team Deathmatch"
           }
         ],
         "ConVarName": "grubs_game",
         "DisplayName": "Gamemode",
-        "DefaultValue": "ffa",
+        "DefaultValue": "FreeForAll",
         "Description": "",
         "Group": "Game"
       },
@@ -264,7 +260,7 @@
         "Choices": [],
         "ConVarName": "minimum_players",
         "DisplayName": "Minimum Players",
-        "DefaultValue": "0",
+        "DefaultValue": "2",
         "Description": "The minimum amount of players you need to play the game.",
         "Group": "Game",
         "Minimum": 2,

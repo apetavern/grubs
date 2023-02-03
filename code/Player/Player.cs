@@ -13,6 +13,14 @@ public partial class Player : Entity
 
 	public PlayerCamera Camera { get; private set; }
 
+	public bool IsTurn
+	{
+		get
+		{
+			return GamemodeSystem.Instance.ActivePlayer == this;
+		}
+	}
+
 	public Player()
 	{
 		Transmit = TransmitType.Always;
@@ -37,7 +45,8 @@ public partial class Player : Entity
 			grub.Simulate( client );
 		}
 
-		ActiveGrub?.UpdateInputFromOwner( MoveInput, LookInput );
+		if ( IsTurn )
+			ActiveGrub?.UpdateInputFromOwner( MoveInput, LookInput );
 	}
 
 	public override void FrameSimulate( IClient client )
