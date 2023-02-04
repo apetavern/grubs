@@ -85,7 +85,7 @@ public partial class FreeForAll : Gamemode
 
 		if ( Debug )
 		{
-			var lineOffset = 17;
+			var lineOffset = 19;
 			DebugOverlay.ScreenText( $"ActivePlayer {ActivePlayer}", lineOffset++ );
 			DebugOverlay.ScreenText( $"ActiveGrub {ActivePlayer?.ActiveGrub}", lineOffset++ );
 			DebugOverlay.ScreenText( $"Turn Timer {TimeUntilTurnOver}", lineOffset++ );

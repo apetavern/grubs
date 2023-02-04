@@ -63,7 +63,7 @@ public partial class Grub : AnimatedEntity
 		var game = GrubsGame.Instance;
 		var world = game.World;
 
-		if ( Game.IsServer && Input.Down( InputButton.PrimaryAttack ) )
+		if ( Game.IsServer && Input.Down( InputButton.PrimaryAttack ) && IsTurn )
 		{
 			var aimRay = Trace.Ray( AimRay, 80f ).WithTag( "solid" ).Ignore( this ).Run();
 			if ( aimRay.Hit )

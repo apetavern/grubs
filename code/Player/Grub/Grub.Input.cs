@@ -31,6 +31,9 @@ public partial class Grub
 	[Net, Predicted]
 	public int Facing { get; set; }
 
+	[Net, Predicted]
+	public int LastFacing { get; set; }
+
 	public override Ray AimRay => new( EyePosition, Facing * EyeRotation.Forward );
 
 	public void UpdateInputFromOwner( float moveInput, float lookInput )
@@ -44,12 +47,18 @@ public partial class Grub
 			.WithRoll( 0f )
 			.WithYaw( 0f );
 
+		if ( Facing != LastFacing )
+			LookAngles = LookAngles.WithPitch( LookAngles.pitch * -1 );
+
+		LastFacing = Facing;
+
 		if ( Debug && IsTurn )
 		{
 			DebugOverlay.ScreenText( $"MoveInput: {MoveInput}", 13 );
 			DebugOverlay.ScreenText( $"LookInput: {LookInput}", 14 );
 			DebugOverlay.ScreenText( $"LookAngles: {LookAngles}", 15 );
 			DebugOverlay.ScreenText( $"Facing: {Facing}", 16 );
+			DebugOverlay.ScreenText( $"LastFacing: {LastFacing}", 17 );
 			var tr = Trace.Ray( AimRay, 80f ).Run();
 			DebugOverlay.TraceResult( tr );
 		}
