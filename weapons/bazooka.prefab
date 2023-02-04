@@ -42,6 +42,10 @@
       "FiringType": {
         "Type": "FiringType",
         "Value": "\u0022Charged\u0022"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "-1"
       }
     }
   }

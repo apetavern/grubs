@@ -77,6 +77,7 @@ public partial class FreeForAll : Gamemode
 
 		if ( _gameHasStarted && TimeUntilTurnOver < 0f )
 		{
+			ActivePlayer?.EndTurn();
 			RotateActivePlayer();
 			TimeUntilTurnOver = GrubsConfig.TurnDuration;
 		}

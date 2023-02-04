@@ -29,10 +29,10 @@ public partial class Grub
 	public Rotation EyeLocalRotation { get; set; }
 
 	[Net, Predicted]
-	public int Facing { get; set; }
+	public int Facing { get; set; } = 1;
 
 	[Net, Predicted]
-	public int LastFacing { get; set; }
+	public int LastFacing { get; set; } = 1;
 
 	public override Ray AimRay => new( EyePosition, Facing * EyeRotation.Forward );
 

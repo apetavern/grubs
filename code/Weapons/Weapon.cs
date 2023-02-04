@@ -4,6 +4,37 @@
 public partial class Weapon : AnimatedEntity
 {
 	/// <summary>
+	/// The hold pose for this weapon.
+	/// </summary>
+	[Prefab, Net]
+	public HoldPose HoldPose { get; set; } = HoldPose.None;
+
+	/// <summary>
+	/// The firing type for this weapon (instant or charged).
+	/// </summary>
+	[Prefab, Net]
+	public FiringType FiringType { get; set; } = FiringType.Charged;
+
+	/// <summary>
+	/// The amount of times this weapon can be fired in succession 
+	/// before the Grub's turn ends and an ammo is deducted.
+	/// </summary>
+	[Prefab, Net]
+	public int Charges { get; set; } = 0;
+
+	/// <summary>
+	/// Whether the aim reticle should be shown for this weapon.
+	/// </summary>
+	[Prefab, Net]
+	public bool ShowReticle { get; set; } = false;
+
+	/// <summary>
+	/// The default amount of ammo for a weapon. -1 means infinite.
+	/// </summary>
+	[Prefab, Net]
+	public int DefaultAmmoAmount { get; set; } = 0;
+
+	/// <summary>
 	/// The amount of uses this weapon has.
 	/// </summary>
 	[Net]
@@ -38,35 +69,10 @@ public partial class Weapon : AnimatedEntity
 	}
 
 	/// <summary>
-	/// The hold pose for this weapon.
+	/// Spawns and returns a Weapon from the Prefab Library.
 	/// </summary>
-	[Prefab]
-	public HoldPose HoldPose { get; set; } = HoldPose.None;
-
-	/// <summary>
-	/// The firing type for this weapon (instant or charged).
-	/// </summary>
-	[Prefab]
-	public FiringType FiringType { get; set; } = FiringType.Charged;
-
-	/// <summary>
-	/// The amount of times this weapon can be fired in succession 
-	/// before the Grub's turn ends and an ammo is deducted.
-	/// </summary>
-	[Prefab]
-	public int Charges { get; set; } = 0;
-
-	/// <summary>
-	/// Whether the aim reticle should be shown for this weapon.
-	/// </summary>
-	[Net, Prefab]
-	public bool ShowReticle { get; set; } = false;
-
-	/*	/// <summary>
-		/// Spawns and returns a Weapon from the Prefab Library.
-		/// </summary>
-		/// <param name="prefabName">The asset path to the prefab.</param>
-		/// <returns>The weapon if spawned successfully, otherwise null.</returns>*/
+	/// <param name="prefabName">The asset path to the prefab.</param>
+	/// <returns>The weapon if spawned successfully, otherwise null.</returns>
 	public static Weapon FromPrefab( string prefabName )
 	{
 		if ( PrefabLibrary.TrySpawn<Weapon>( prefabName, out var weapon ) )
@@ -75,5 +81,11 @@ public partial class Weapon : AnimatedEntity
 		}
 
 		return null;
+	}
+
+	public static IEnumerable<Prefab> GetAllWeaponPrefabs()
+	{
+		return ResourceLibrary.GetAll<Prefab>()
+			.Where( x => TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon ) );
 	}
 }

@@ -8,6 +8,9 @@ public partial class Inventory : EntityComponent<Player>
 	[Net, Predicted]
 	public Weapon ActiveWeapon { get; private set; }
 
+	[Net, Predicted]
+	public Weapon LastActiveWeapon { get; private set; }
+
 	public void Add( Weapon weapon, bool makeActive = false )
 	{
 		if ( !weapon.IsValid() )
@@ -45,8 +48,32 @@ public partial class Inventory : EntityComponent<Player>
 		weapon?.OnDeploy( Entity.ActiveGrub );
 	}
 
+	public void UnsetActiveWeapon()
+	{
+		SetActiveWeapon( null );
+	}
+
 	public bool IsCarrying( Weapon weapon )
 	{
 		return Weapons.Any( item => item.Name == weapon.Name );
+	}
+
+	public bool HasAmmo( int index )
+	{
+		return Weapons[index].Ammo != 0;
+	}
+
+	[ConCmd.Admin( "gr_set_weapon" )]
+	public static void SetWeapon( int weaponIndex )
+	{
+		if ( ConsoleSystem.Caller.Pawn is not Player player )
+			return;
+
+		if ( !player.IsTurn )
+			return;
+
+		var weapon = player.Inventory.Weapons[weaponIndex];
+		player.Inventory.LastActiveWeapon = weapon;
+		player.Inventory.SetActiveWeapon( weapon );
 	}
 }

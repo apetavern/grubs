@@ -31,11 +31,15 @@ public partial class Player : Entity
 		CreateGrubs();
 
 		Components.Create<Inventory>();
-		Inventory?.Add( Weapon.FromPrefab( "weapons/bazooka.prefab" ), true );
-		Inventory?.Add( Weapon.FromPrefab( "weapons/baseballbat.prefab" ) );
 
-		if ( Game.IsClient )
-			Camera = new PlayerCamera();
+		var weaponPrefabs = Weapon.GetAllWeaponPrefabs();
+		foreach ( var prefab in weaponPrefabs )
+		{
+			if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) )
+			{
+				Inventory?.Add( weapon );
+			}
+		}
 	}
 
 	public override void Simulate( IClient client )
@@ -86,5 +90,17 @@ public partial class Player : Entity
 		Grubs.Add( current );
 
 		ActiveGrub = Grubs[0];
+	}
+
+	public void EndTurn()
+	{
+		if ( ActiveGrub == null )
+			return;
+
+		if ( ActiveGrub.ActiveWeapon is null )
+			return;
+
+		ActiveGrub.ActiveWeapon.OnHolster();
+		Inventory.UnsetActiveWeapon();
 	}
 }
