@@ -3,33 +3,9 @@
 [Prefab]
 public partial class Weapon : AnimatedEntity
 {
-
-
 	/// <summary>
-	/// The hold pose for this weapon.
+	/// The amount of uses this weapon has.
 	/// </summary>
-	[Prefab]
-	public HoldPose HoldPose { get; set; } = HoldPose.None;
-
-	/// <summary>
-	/// The firing type for this weapon (instant or charged).
-	/// </summary>
-	[Prefab]
-	public FiringType FiringType { get; set; } = FiringType.Charged;
-
-	/// <summary>
-	/// The amount of times this weapon can be fired in succession 
-	/// before the Grub's turn ends and an ammo is deducted.
-	/// </summary>
-	[Prefab]
-	public int Charges { get; set; } = 0;
-
-	/// <summary>
-	/// Whether the aim reticle should be shown for this weapon.
-	/// </summary>
-	[Prefab]
-	public bool ShowReticle { get; set; } = false;
-
 	[Net]
 	public int Ammo { get; set; }
 
@@ -61,7 +37,30 @@ public partial class Weapon : AnimatedEntity
 		EnableDrawing = false;
 	}
 
+	/// <summary>
+	/// The hold pose for this weapon.
+	/// </summary>
+	[Prefab]
+	public HoldPose HoldPose { get; set; } = HoldPose.None;
 
+	/// <summary>
+	/// The firing type for this weapon (instant or charged).
+	/// </summary>
+	[Prefab]
+	public FiringType FiringType { get; set; } = FiringType.Charged;
+
+	/// <summary>
+	/// The amount of times this weapon can be fired in succession 
+	/// before the Grub's turn ends and an ammo is deducted.
+	/// </summary>
+	[Prefab]
+	public int Charges { get; set; } = 0;
+
+	/// <summary>
+	/// Whether the aim reticle should be shown for this weapon.
+	/// </summary>
+	[Prefab]
+	public bool ShowReticle { get; set; } = false;
 
 	public static Weapon FromPrefab( string prefabName )
 	{
