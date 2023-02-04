@@ -62,6 +62,11 @@ public partial class Weapon : AnimatedEntity
 	[Prefab]
 	public bool ShowReticle { get; set; } = false;
 
+	/// <summary>
+	/// Spawns and returns a Weapon from the Prefab Library.
+	/// </summary>
+	/// <param name="prefabName">The asset path to the prefab.</param>
+	/// <returns>The weapon if spawned successfully, otherwise null.</returns>
 	public static Weapon FromPrefab( string prefabName )
 	{
 		if ( PrefabLibrary.TrySpawn<Weapon>( prefabName, out var weapon ) )
