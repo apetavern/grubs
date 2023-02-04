@@ -31,7 +31,7 @@ public partial class Player : Entity
 		CreateGrubs();
 
 		Components.Create<Inventory>();
-		Inventory?.Add( Weapon.FromPrefab( "weapons/bazooka.prefab" ) );
+		Inventory?.Add( Weapon.FromPrefab( "weapons/bazooka.prefab" ), true );
 		Inventory?.Add( Weapon.FromPrefab( "weapons/baseballbat.prefab" ) );
 
 		if ( Game.IsClient )

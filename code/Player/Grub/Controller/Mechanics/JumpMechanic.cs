@@ -59,10 +59,7 @@ public partial class JumpMechanic : ControllerMechanic
 
 	private void Jump()
 	{
-		var ahead = Grub.EyePosition + Grub.Rotation.Forward * 1f;
-		var facing = ahead.x > Grub.Position.x ? 1 : -1;
-
-		Velocity += new Vector3( facing * 150f, 0f, 0f );
+		Velocity += new Vector3( Grub.Facing * 150f, 0f, 0f );
 		Velocity = Velocity.WithZ( _jumpPower );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 
@@ -77,10 +74,7 @@ public partial class JumpMechanic : ControllerMechanic
 
 	private void Backflip()
 	{
-		var ahead = Grub.EyePosition + Grub.Rotation.Forward * 1f;
-		var facing = ahead.x > Grub.Position.x ? 1 : -1;
-
-		Velocity += new Vector3( -facing * 50f, 0f, 0f );
+		Velocity += new Vector3( -Grub.Facing * 50f, 0f, 0f );
 		Velocity = Velocity.WithZ( _jumpPower * 1.75f );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 

@@ -28,12 +28,15 @@ public partial class Grub
 	[Net, Predicted, HideInEditor]
 	public Rotation EyeLocalRotation { get; set; }
 
-	public override Ray AimRay => new( EyePosition, EyeRotation.Forward );
+	[Net, Predicted]
+	public int Facing { get; set; }
+
+	public override Ray AimRay => new( EyePosition, Facing * EyeRotation.Forward );
 
 	public void UpdateInputFromOwner( float moveInput, float lookInput )
 	{
 		MoveInput = moveInput;
-		LookInput = lookInput;
+		LookInput = -Facing * lookInput;
 
 		var look = (LookAngles + LookInput).Normal;
 		LookAngles = look
@@ -46,6 +49,9 @@ public partial class Grub
 			DebugOverlay.ScreenText( $"MoveInput: {MoveInput}", 13 );
 			DebugOverlay.ScreenText( $"LookInput: {LookInput}", 14 );
 			DebugOverlay.ScreenText( $"LookAngles: {LookAngles}", 15 );
+			DebugOverlay.ScreenText( $"Facing: {Facing}", 16 );
+			var tr = Trace.Ray( AimRay, 80f ).Run();
+			DebugOverlay.TraceResult( tr );
 		}
 	}
 

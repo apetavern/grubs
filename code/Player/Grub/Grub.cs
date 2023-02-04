@@ -62,18 +62,17 @@ public partial class Grub : AnimatedEntity
 
 		var game = GrubsGame.Instance;
 		var world = game.World;
-		var ahead = EyePosition + Rotation.Forward * 1f;
-		var facing = ahead.x > Position.x ? 1 : -1;
 
 		if ( Game.IsServer && Input.Down( InputButton.PrimaryAttack ) )
 		{
-			var min = new Vector3( Position.x, -32, Position.z + LookAngles.pitch - 32f );
-			var max = new Vector3( Position.x + facing * 64f, 32, Position.z + LookAngles.pitch + 32f );
-			DebugOverlay.Box( min, max );
-			if ( facing == 1 )
+			var aimRay = Trace.Ray( AimRay, 80f ).WithTag( "solid" ).Ignore( this ).Run();
+			if ( aimRay.Hit )
+			{
+				var min = new Vector3( aimRay.EndPosition.x - 16f, -32, aimRay.EndPosition.z - 16f );
+				var max = new Vector3( aimRay.EndPosition.x + 16f, 32, aimRay.EndPosition.z + 16f );
+				DebugOverlay.Box( min, max );
 				world.SubtractDefault( min, max );
-			else
-				world.SubtractDefault( max, min );
+			}
 		}
 	}
 

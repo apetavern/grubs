@@ -104,6 +104,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 	protected void SimulateEyes()
 	{
+		Grub.Facing = Grub.Rotation.z < 0 ? -1 : 1;
 		Grub.EyeRotation = Grub.LookAngles.ToRotation();
 		Grub.EyeLocalPosition = Vector3.Up * CurrentEyeHeight;
 	}

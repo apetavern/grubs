@@ -9,8 +9,6 @@ global using System.Collections.Generic;
 global using System.IO;
 global using System.Linq;
 global using System.Threading.Tasks;
-using Sandbox.Csg;
-using static Sandbox.Event;
 
 namespace Grubs;
 
@@ -29,7 +27,7 @@ public sealed partial class GrubsGame : GameManager
 	{
 		if ( Game.IsClient )
 		{
-			// _ = new Hud();
+			_ = new GrubsHud();
 		}
 		else
 		{
@@ -76,7 +74,6 @@ public sealed partial class GrubsGame : GameManager
 	[Event.Entity.PostSpawn]
 	public void PostEntitySpawn()
 	{
-		Log.Info( " PostEntitySpawn " );
 		GamemodeSystem.SetupGamemode();
 	}
 }
