@@ -13,5 +13,8 @@ public class GrubAnimator : EntityComponent<Grub>
 		grub.SetAnimParameter( "grounded", ctrl.IsGrounded );
 		grub.SetAnimParameter( "aimangle", grub.EyeRotation.Pitch() );
 		grub.SetAnimParameter( "velocity", ctrl.GetWishVelocity().Length );
+
+		if ( grub.ActiveWeapon is not null )
+			grub.SetAnimParameter( "holdpose", (int)grub.ActiveWeapon.HoldPose );
 	}
 }

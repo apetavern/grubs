@@ -31,6 +31,7 @@ public partial class Player : Entity
 		CreateGrubs();
 
 		Components.Create<Inventory>();
+		// Inventory?.Add( Weapon.FromPrefab( "weapons/bazooka.prefab" ), true );
 
 		if ( Game.IsClient )
 			Camera = new PlayerCamera();
@@ -38,7 +39,7 @@ public partial class Player : Entity
 
 	public override void Simulate( IClient client )
 	{
-		Inventory?.Simulate( client );
+		// Inventory?.Simulate( client );
 
 		foreach ( var grub in Grubs )
 		{
@@ -78,6 +79,8 @@ public partial class Player : Entity
 	public void RotateGrubs()
 	{
 		var current = Grubs[0];
+		current.EyeRotation = Rotation.Identity;
+
 		Grubs.RemoveAt( 0 );
 		Grubs.Add( current );
 

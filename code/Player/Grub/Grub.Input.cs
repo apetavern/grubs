@@ -7,22 +7,24 @@ public partial class Grub
 
 	public Angles LookAngles { get; set; }
 
+	[HideInEditor]
 	public Vector3 EyePosition
 	{
 		get => Transform.PointToWorld( EyeLocalPosition );
 		set => EyeLocalPosition = Transform.PointToLocal( value );
 	}
 
-	[Net, Predicted]
+	[Net, Predicted, HideInEditor]
 	public Vector3 EyeLocalPosition { get; set; }
 
+	[HideInEditor]
 	public Rotation EyeRotation
 	{
 		get => Transform.RotationToWorld( EyeLocalRotation );
 		set => EyeLocalRotation = Transform.RotationToLocal( value );
 	}
 
-	[Net, Predicted]
+	[Net, Predicted, HideInEditor]
 	public Rotation EyeLocalRotation { get; set; }
 
 	public override Ray AimRay => new( EyePosition, EyeRotation.Forward );

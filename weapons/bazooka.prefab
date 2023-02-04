@@ -1,0 +1,48 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "8dd501f2-c0df-402a-a80e-6cd533ce12e2",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/bazooka/bazooka.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Bazooka\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Bazooka\u0022"
+      },
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Charged\u0022"
+      }
+    }
+  }
+}
