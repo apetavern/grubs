@@ -13,6 +13,9 @@ public partial class Player : Entity
 
 	public PlayerCamera Camera { get; private set; }
 
+	// TODO: Allow the player to choose their own color.
+	public Color Color { get; private set; } = new Color( 0.5f, 0.5f, 0.5f, 1 );
+
 	public bool IsTurn
 	{
 		get

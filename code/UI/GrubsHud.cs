@@ -9,5 +9,6 @@ public class GrubsHud : RootPanel
 		Game.AssertClient();
 
 		_aimReticle = new AimReticle();
+		_ = new NameTagManager();
 	}
 }

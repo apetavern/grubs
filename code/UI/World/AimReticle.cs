@@ -1,5 +1,9 @@
 ﻿namespace Grubs;
 
+/// <summary>
+/// AimReticle is a WorldPanel that only appears
+/// for the local Client's Grubs.
+/// </summary>
 public class AimReticle : WorldPanel
 {
 	public AimReticle()

@@ -83,6 +83,10 @@ public partial class Weapon : AnimatedEntity
 		return null;
 	}
 
+	/// <summary>
+	/// Returns all prefabs from the Prefab Library that are of Weapon type.
+	/// </summary>
+	/// <returns>A collection of Prefabs with the Weapon type.</returns>
 	public static IEnumerable<Prefab> GetAllWeaponPrefabs()
 	{
 		return ResourceLibrary.GetAll<Prefab>()

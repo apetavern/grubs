@@ -1,8 +1,6 @@
-﻿using static Sandbox.Event;
+﻿namespace Grubs;
 
-namespace Grubs;
-
-public partial class Grub : AnimatedEntity
+public partial class Grub : AnimatedEntity, INameTag
 {
 	[BindComponent]
 	public GrubController Controller { get; }
@@ -28,6 +26,8 @@ public partial class Grub : AnimatedEntity
 		}
 	}
 
+	public Color Color => Player.Color;
+
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
 
 	public Grub()
@@ -43,6 +43,7 @@ public partial class Grub : AnimatedEntity
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 
 		Name = Game.Random.FromArray( GrubsConfig.GrubNames );
+		Health = 100;
 
 		EnableDrawing = true;
 		EnableHitboxes = true;
