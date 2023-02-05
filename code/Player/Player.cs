@@ -48,6 +48,8 @@ public partial class Player : Entity
 
 	public override void Simulate( IClient client )
 	{
+		Inventory?.Simulate( client );
+
 		foreach ( var grub in Grubs )
 		{
 			grub.Simulate( client );

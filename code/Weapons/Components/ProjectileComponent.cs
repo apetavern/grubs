@@ -20,4 +20,19 @@ public class ProjectileComponent : WeaponComponent
 
 	[Prefab]
 	public float ProjectileForceMultiplier { get; set; } = 1.0f;
+
+	public override bool ShouldStart()
+	{
+		return Grub.IsTurn && Grub.Controller.IsGrounded;
+	}
+
+	public override void Simulate( IClient client )
+	{
+		base.Simulate( client );
+
+		if ( Input.Down( InputButton.PrimaryAttack ) )
+		{
+			Log.Info( "Grubs: ProjectileComponent::Simulate FIRE!" );
+		}
+	}
 }

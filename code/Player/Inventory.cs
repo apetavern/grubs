@@ -63,6 +63,11 @@ public partial class Inventory : EntityComponent<Player>
 		return Weapons[index].Ammo != 0;
 	}
 
+	public void Simulate( IClient client )
+	{
+		ActiveWeapon?.Simulate( client );
+	}
+
 	[ConCmd.Admin( "gr_set_weapon" )]
 	public static void SetWeapon( int weaponIndex )
 	{

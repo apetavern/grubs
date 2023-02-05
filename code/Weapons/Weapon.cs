@@ -52,7 +52,7 @@ public partial class Weapon : AnimatedEntity
 
 	public override void Simulate( IClient client )
 	{
-
+		SimulateComponents( client );
 	}
 
 	public void OnDeploy( Grub grub )
@@ -66,6 +66,14 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster()
 	{
 		EnableDrawing = false;
+	}
+
+	protected void SimulateComponents( IClient client )
+	{
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			component.Simulate( client );
+		}
 	}
 
 	/// <summary>
