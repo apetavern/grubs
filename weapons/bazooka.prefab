@@ -3,10 +3,41 @@
   "Name": null,
   "Description": null,
   "Root": {
-    "Guid": "8dd501f2-c0df-402a-a80e-6cd533ce12e2",
+    "Guid": "c69d83a8-b7f6-4266-9f56-4c216bdd7271",
     "Class": "Weapon",
     "Entities": [],
-    "Components": [],
+    "Components": [
+      {
+        "Guid": "99ea6c92-fbbd-4378-95ff-fbca3414345f",
+        "Class": "ProjectileComponent",
+        "Keys": {
+          "ProjectileModel": {
+            "Type": "Model",
+            "Value": "\u0022models/weapons/shell/shell.vmdl\u0022"
+          },
+          "ProjectileShouldBounce": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "ProjectileMaxBounces": {
+            "Type": "Int32",
+            "Value": "0"
+          },
+          "ProjectileSpeed": {
+            "Type": "Single",
+            "Value": "1000"
+          },
+          "ProjectileExplosionRadius": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "_name": {
+            "Value": "\u0022Projectile Component\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
     "Keys": {
       "Model": {
         "Type": "Model",
@@ -27,10 +58,6 @@
       "_tags": {
         "Value": "\u0022weapon\u0022"
       },
-      "HoldPose": {
-        "Type": "HoldPose",
-        "Value": "\u0022Bazooka\u0022"
-      },
       "Charges": {
         "Type": "Int32",
         "Value": "1"
@@ -39,13 +66,17 @@
         "Type": "Boolean",
         "Value": "true"
       },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "-1"
+      },
       "FiringType": {
         "Type": "FiringType",
         "Value": "\u0022Charged\u0022"
       },
-      "DefaultAmmoAmount": {
-        "Type": "Int32",
-        "Value": "-1"
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Bazooka\u0022"
       }
     }
   }

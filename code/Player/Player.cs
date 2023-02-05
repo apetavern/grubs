@@ -14,7 +14,8 @@ public partial class Player : Entity
 	public PlayerCamera Camera { get; private set; }
 
 	// TODO: Allow the player to choose their own color.
-	public Color Color { get; private set; } = new Color( 0.5f, 0.5f, 0.5f, 1 );
+	[Net]
+	public Color Color { get; private set; } = Color.Random;
 
 	public bool IsTurn
 	{
@@ -47,8 +48,6 @@ public partial class Player : Entity
 
 	public override void Simulate( IClient client )
 	{
-		// Inventory?.Simulate( client );
-
 		foreach ( var grub in Grubs )
 		{
 			grub.Simulate( client );

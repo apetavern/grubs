@@ -90,6 +90,21 @@ public partial class World : Entity
 
 	public Vector3 FindSpawnLocation()
 	{
+		int iterations = 0;
+		while ( true && iterations < 10000 )
+		{
+			var x = Game.Random.Int( ((int)WorldLength / _resolution) - 1 );
+			var z = Game.Random.Int( ((int)WorldHeight / _resolution) - 1 );
+			if ( _terrainGrid[x, z] > 0.1f )
+				continue;
+
+			var startPos = new Vector3( (x * _resolution) - WorldLength / 2, 0, (z * _resolution) - WorldHeight );
+			var tr = Trace.Ray( startPos, startPos + Vector3.Down * WorldHeight ).WithTag( "solid" ).Run();
+			if ( tr.Hit )
+				return tr.EndPosition;
+		}
+
+		Log.Warning( "Couldn't find spawn location in 10,000 iterations." );
 		return new Vector3( 0f );
 	}
 
