@@ -34,7 +34,21 @@
           "_name": {
             "Value": "\u0022Projectile Component\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          },
+          "ProjectileExplodeAfter": {
+            "Type": "Single",
+            "Value": "5"
+          },
+          "ProjectileForceMultiplier": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "ProjectileShouldUseTrace": {
+            "Type": "Boolean",
+            "Value": "true"
+          }
         }
       }
     ],

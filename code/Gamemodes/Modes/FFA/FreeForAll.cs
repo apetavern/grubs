@@ -94,6 +94,17 @@ public partial class FreeForAll : Gamemode
 		}
 	}
 
+	[ConCmd.Admin( "gr_skip_turn" )]
+	public static void SkipTurn()
+	{
+		if ( GamemodeSystem.Instance is not FreeForAll ffa )
+			return;
+
+		ffa.ActivePlayer?.EndTurn();
+		ffa.RotateActivePlayer();
+		ffa.TimeUntilTurnOver = GrubsConfig.TurnDuration;
+	}
+
 	[ConVar.Replicated( "gr_debug_ffa" )]
 	public static bool Debug { get; set; } = false;
 }

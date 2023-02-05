@@ -9,6 +9,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	[Net, Predicted]
 	public TimeSince TimeSinceActivated { get; protected set; }
 
+	[Net, Predicted]
+	public int Charge { get; protected set; } = 0;
+
 	public virtual bool ShouldStart()
 	{
 		return false;
