@@ -88,7 +88,9 @@ public class ProjectileComponent : WeaponComponent
 		}
 		else
 		{
-			// do something with physics enabled
+			projectile.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+			projectile.PhysicsEnabled = true;
+			projectile.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * Charge * ProjectileSpeed * ProjectileForceMultiplier).WithY( 0f );
 		}
 
 		if ( ProjectileExplodeAfter > 0 )

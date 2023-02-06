@@ -209,7 +209,7 @@ public class Projectile : ModelEntity
 
 	private void HandlePhysicsTick()
 	{
-		// TODO: Handle physics on tick.
+		// Position = Position.WithY( 0f );
 	}
 
 	private void OnCollision()
