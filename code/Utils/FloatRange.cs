@@ -1,4 +1,4 @@
-﻿namespace Grubs.Utils;
+﻿namespace Grubs;
 
 /// <summary>
 /// Utility struct that defines a range of floats and useful behaviour associated with the range.

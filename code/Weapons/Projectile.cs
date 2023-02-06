@@ -1,25 +1,16 @@
-﻿using Grubs.Player;
-using Grubs.States;
-using Grubs.Utils;
+﻿namespace Grubs;
 
-namespace Grubs.Weapons.Base;
-
-/// <summary>
-/// An arc trace based projectile.
-/// </summary>
-[Category( "Weapons" )]
-public sealed class Projectile : ModelEntity, IDamageable, IResolvable
+public class Projectile : ModelEntity
 {
 	public bool HasBeenDamaged => false;
 
 	public bool Resolved => false;
 
-	private Grub Grub { get; set; } = null!;
+	private Grub Grub { get; set; }
 	private float Speed { get; set; } = 0.001f;
 	private float ExplosionRadius { get; set; } = 1000;
 	private float CollisionExplosionDelaySeconds { get; set; }
-	private List<ArcSegment> Segments { get; set; } = null!;
-	private Vector3 PhysicsImpulse { get; set; }
+	private List<ArcSegment> Segments { get; set; } = new();
 	private string ExplosionSound { get; set; } = "";
 	private string TrailParticle { get; set; } = "";
 	private ProjectileCollisionReaction CollisionReaction { get; set; }
@@ -36,13 +27,24 @@ public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 	}
 
 	/// <summary>
-	/// Sets the model of this projectile.
+	/// Sets the model of this projectile to the passed in path.
 	/// </summary>
 	/// <param name="modelPath">The path to the model to set.</param>
 	/// <returns>The projectile instance.</returns>
 	public Projectile WithModel( string modelPath )
 	{
 		SetModel( modelPath );
+		return this;
+	}
+
+	/// <summary>
+	/// Sets the model of this projectile to the passed in model.
+	/// </summary>
+	/// <param name="model">The model to be set.</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithModel( Model model )
+	{
+		Model = model;
 		return this;
 	}
 
@@ -143,30 +145,11 @@ public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 	}
 
 	/// <summary>
-	/// Sets a starting impulse for the projectile to apply.
-	/// </summary>
-	/// <param name="force">The starting force.</param>
-	/// <returns>The projectile instance.</returns>
-	public Projectile UsePhysicsImpulse( Vector3 force )
-	{
-		// TODO: Implement physics impulse.
-		PhysicsImpulse = force;
-
-		return this;
-	}
-
-	/// <summary>
 	/// Verifies that the projectile has its basic information set.
 	/// </summary>
 	/// <returns>The projectile instance.</returns>
 	public Projectile Finish()
 	{
-		Assert.True( Grub is not null, $"{nameof( Projectile )} is missing {nameof( Grub )}" );
-		if ( PhysicsImpulse == Vector3.Zero )
-			Assert.True( Segments is not null, $"{nameof( Projectile )} is missing {nameof( Segments )}" );
-		if ( Segments is null )
-			Assert.True( PhysicsImpulse != Vector3.Zero, $"{nameof( Projectile )} is missing {nameof( PhysicsImpulse )}" );
-
 		Health = 1;
 		return this;
 	}
@@ -226,12 +209,12 @@ public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 
 	private void HandlePhysicsTick()
 	{
-		// TODO: Handle physics on tick.
+		// Position = Position.WithY( 0f );
 	}
 
 	private void OnCollision()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		if ( CollisionExplosionDelaySeconds > 0 )
@@ -251,7 +234,7 @@ public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 				ExplosionHelper.Explode( Position, Grub, ExplosionRadius );
 				break;
 			case ProjectileCollisionReaction.Incendiary:
-				FireHelper.StartFiresAt( Position, Segments[Segments.Count - 1].EndPos - Segments[Segments.Count - 1].StartPos, 10 );
+				// FireHelper.StartFiresAt( Position, Segments[Segments.Count - 1].EndPos - Segments[Segments.Count - 1].StartPos, 10 );
 				break;
 		}
 
@@ -271,4 +254,19 @@ public sealed class Projectile : ModelEntity, IDamageable, IResolvable
 		foreach ( var segment in Segments )
 			DebugOverlay.Line( segment.StartPos, segment.EndPos );
 	}
+}
+
+/// <summary>
+/// Defines the type of reaction a <see cref="Projectile"/> has when it collides.
+/// </summary>
+public enum ProjectileCollisionReaction
+{
+	/// <summary>
+	/// The projectile will explode.
+	/// </summary>
+	Explosive,
+	/// <summary>
+	/// The projectile will explode in fire.
+	/// </summary>
+	Incendiary
 }
