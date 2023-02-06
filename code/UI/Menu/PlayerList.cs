@@ -1,60 +1,52 @@
-﻿using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System.Linq;
+﻿namespace Grubs.UI.Menu;
 
-namespace Grubs.UI.Menu
+public class PlayerEntry : Panel
 {
-	public partial class PlayerEntry : Panel
+	public IClient Client { get; set; }
+	public Image Avatar { get; set; }
+	public Label PlayerName { get; set; }
+	public bool Loaded { get; set; }
+
+	public PlayerEntry( IClient client )
 	{
-		public Client Client { get; set; }
-		public Image Avatar { get; set; }
-		public Label PlayerName { get; set; }
-		public bool Loaded { get; set; }
-
-		public PlayerEntry( Client client )
-		{
-			Client = client;
-			Avatar = Add.Image( $"avatar:{client.PlayerId}", "avatar" );
-			PlayerName = Add.Label( client.Name, "name" );
-		}
-
-		public override void Tick()
-		{
-			base.Tick();
-
-			if ( !Client.IsValid() ) return;
-
-			SetClass( "loaded", Loaded );
-		}
+		Client = client;
+		Avatar = Add.Image( $"avatar:{client.SteamId}", "avatar" );
+		PlayerName = Add.Label( client.Name, "name" );
 	}
 
-	[UseTemplate]
-	public partial class PlayerList : Panel
+	public override void Tick()
 	{
-		Panel PlayersContainer { get; set; }
+		base.Tick();
 
-		public string PlayerCount => $"{Client.All.Count}";
-		public string LobbyCount => $"{ Game.Instance?.StateHandler.LobbyCount }";
+		if ( !Client.IsValid() )
+			return;
 
-		public PlayerList()
+		SetClass( "loaded", Loaded );
+	}
+}
+
+[UseTemplate]
+public partial class PlayerList : Panel
+{
+	public Panel PlayersContainer { get; set; } = null!;
+
+	public static string PlayerCount => $"{Game.Clients.Count}";
+	// public string LobbyCount => $"{Game.Instance?.StateHandler.LobbyCount}";
+
+	public override void Tick()
+	{
+		foreach ( var panel in PlayersContainer.Children.OfType<PlayerEntry>() )
 		{
-			StyleSheet.Load( "/UI/Menu/PlayerList.scss" );
+			if ( panel.Client.IsValid() )
+				continue;
+			panel.Delete();
 		}
 
-		public override void Tick()
+		foreach ( var client in Game.Clients )
 		{
-			foreach ( var panel in PlayersContainer.Children.OfType<PlayerEntry>() )
-			{
-				if ( panel.Client.IsValid() ) continue;
-				panel.Delete();
-			}
-
-			foreach ( var client in Client.All )
-			{
-				if ( PlayersContainer.Children.OfType<PlayerEntry>().Any( panel => panel.Client == client ) ) continue;
-				PlayersContainer.AddChild( new PlayerEntry( client ) );
-			}
+			if ( PlayersContainer.Children.OfType<PlayerEntry>().Any( panel => panel.Client == client ) )
+				continue;
+			PlayersContainer.AddChild( new PlayerEntry( client ) );
 		}
 	}
 }

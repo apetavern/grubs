@@ -2,8 +2,7 @@
 {
 	_class = "CParticleSystemDefinition"
 	m_nBehaviorVersion = 10
-	m_flConstantLifespan = 0.25
-	m_nMaxParticles = 3
+	m_nMaxParticles = 25
 	m_controlPointConfigurations = 
 	[
 		{
@@ -18,7 +17,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 3.0
+				m_flLiteralValue = 1.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -231,7 +230,6 @@
 					m_vDomainMaxs = [ 1.0, 1.0 ]
 				}
 			}
-			m_bDisableOperator = true
 		},
 	]
 	m_Operators = 
@@ -575,7 +573,6 @@
 					]
 				}
 			}
-			m_bDisableOperator = true
 		},
 	]
 	m_Renderers = 
@@ -586,7 +583,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 1.0
+				m_flLiteralValue = 5.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -627,12 +624,12 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
-			m_hTexture = resource:"particles/explosion/grubs_explosion_base_png_6a277992.vtex"
+			m_hTexture = resource:"particles/explosion/grubs_explosion_base.vtex"
 			m_flAlphaScale = 
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 0.5
+				m_flLiteralValue = 0.75
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -718,6 +715,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_RenderSprites"
@@ -767,7 +765,7 @@
 				}
 			}
 			m_bOnlyRenderInEffectsBloomPass = true
-			m_hTexture = resource:"particles/explosion/grubs_explosion_base_png_6a277992.vtex"
+			m_hTexture = resource:"particles/explosion/grubs_explosion_base.vtex"
 			m_flRadiusScale = 
 			{
 				m_nType = "PF_TYPE_LITERAL"
@@ -813,6 +811,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_RenderSprites"
@@ -1117,18 +1116,23 @@
 				}
 			}
 			m_hTexture = resource:"materials/particles/ring_wave_radial.vtex"
+			m_bDisableOperator = true
 		},
 	]
 	m_Children = 
 	[
 		{
+			m_ChildRef = resource:"particles/explosion/grubs_explosion_smoke.vpcf"
+		},
+		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_shockwave.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_fire.vpcf"
+			m_bDisableChild = true
 		},
 		{
-			m_ChildRef = resource:"particles/explosion/grubs_explosion_smoke.vpcf"
+			m_ChildRef = resource:"particles/explosion/grubs_explosion_fireball.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_sparks.vpcf"

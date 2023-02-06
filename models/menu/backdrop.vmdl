@@ -11,13 +11,7 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "phong1.vmat"
-								to = "models/menu/materials/grassleaves.vmat"
-							},
-						]
+						remaps = [  ]
 						use_global_default = false
 						global_default_material = ""
 					},
@@ -49,5 +43,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

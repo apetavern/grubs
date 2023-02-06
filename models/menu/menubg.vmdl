@@ -11,9 +11,9 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models\\menu\\dmx\\mesh\\menubg.dmx"
-						import_translation = [ -50.174999, 213.858002, 9.05151 ]
-						import_rotation = [ -6.84085, 306.412994, 99.964104 ]
+						filename = "models/menu/dmx/mesh/menubg.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -33,13 +33,7 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "models/weapons/sixshooter/materials/sixshooter.vmat"
-								to = "models/weapons/revolver/materials/sixshooter.vmat"
-							},
-						]
+						remaps = [  ]
 						use_global_default = false
 						global_default_material = ""
 					},
@@ -49,5 +43,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

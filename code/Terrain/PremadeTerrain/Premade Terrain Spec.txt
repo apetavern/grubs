@@ -1,0 +1,38 @@
+### VERSION 2 SPEC ###
+
+Pre-made terrain version : Int32 - The version the pre-made terrain was serialized in.
+
+Num settings : Int32 - The number of settings that are in this terrain.
+for ( x = 0; x < Num settings; x++ )
+    setting : Byte - The setting that is being defined. Maps to Grubs.Terrain.TerrainSetting
+    value : any - The value of the setting. Type depends on setting.
+    
+Width : Int32 - The width of the terrain.
+Height : Int32 - The height of the terrain.
+start : Boolean - The starting value in the terrain grid.
+
+Num changes : Int32 - The number of changes in the terrain grid value.
+for ( x = 0; x < Num changes; x++ )
+    index : Int32 - The inclusive index where the value changes.
+
+
+
+
+
+### VERSION 1 SPEC ###
+
+Pre-made terrain version : Int32 - The version the pre-made terrain was serialized in.
+
+Num settings : Int32 - The number of settings that are in this terrain.
+for ( x = 0; x < Num settings; x++ )
+    setting : Byte - The setting that is being defined. Maps to Grubs.Terrain.TerrainSetting
+    value : any - The value of the setting. Type depends on setting.
+    
+Width : Int32 - The width of the terrain.
+Height : Int32 - The height of the terrain.
+start : Boolean - The starting value in the terrain grid.
+
+Num changes : Int32 - The number of changes in the terrain grid value.
+for ( x = 0; x < Num changes; x++ )
+    xCoord : Int32 - The inclusive x coordinate where the value changes. 
+    yCoord : Int32 - The inclusive y coordinate where the value changes.

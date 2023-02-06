@@ -1,22 +1,22 @@
-﻿using Sandbox;
-using Grubs.Pawn;
+﻿using Grubs.Player;
 
-namespace Grubs.Crates
+namespace Grubs.Crates;
+
+/// <summary>
+/// A crate that heals Grubs on touch.
+/// </summary>
+public sealed class HealthCrate : BaseCrate
 {
-	[Library( "crate_health" )]
-	public class HealthCrate : Crate
+	public override void Spawn()
 	{
-		public override void Spawn()
-		{
-			base.Spawn();
-			SetModel( "models/crates/health_crate/health_crate.vmdl" );
-		}
+		base.Spawn();
 
-		protected override void OnPickup( Worm worm )
-		{
-			base.OnPickup( worm );
+		SetModel( "models/crates/health_crate/health_crate.vmdl" );
+	}
 
-			worm.GiveHealth( 50 );
-		}
+	public override void OnPickup( Grub grub )
+	{
+		if ( grub.GiveHealth( 50 ) )
+			base.OnPickup( grub );
 	}
 }

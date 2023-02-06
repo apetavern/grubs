@@ -1,0 +1,30 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		HitForce = 500
+		TraceCount = 1
+		TraceSpread = 25
+		TraceDelay = 0
+		ExplosionRadius = 20
+		Damage = 20
+		DamageTags = 
+		[
+			"bullet",
+		]
+		PenetrateTargets = true
+		PenetrateTerrain = false
+		WeaponName = "Revolver"
+		Model = resource:"models/weapons/revolver/revolver.vmdl"
+		Icon = resource:"models/weapons/revolver/revolver.vmdl_c.png"
+		ParticleType = resource:"particles/guntrace/guntrace.vpcf"
+		FiringType = "Instant"
+		HoldPose = "Revolver"
+		Uses = 6
+		DropChance = 3
+		HasReticle = true
+		InfiniteAmmo = false
+		FireSound = resource:"weapons/rust_pistol/sound/rust_pistol.shoot.sound"
+		DeploySound = resource:"weapons/rust_smg/sounds/rust_smg.deploy.sound"
+	}
+}

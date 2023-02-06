@@ -1,64 +1,68 @@
-﻿using Sandbox;
-using System;
+﻿using Grubs.Weapons.Base;
 
-namespace Grubs.Utils
+namespace Grubs.Utils;
+
+/// <summary>
+/// A utility class to handle drop chance of weapons.
+/// </summary>
+public static class CrateDropTables
 {
-	public static class CrateDropTables
+	private static bool _init;
+	private static float[] _cumulativeDropPercentages = null!;
+	private static WeaponAsset[] _dropMap = null!;
+
+	private static void Init()
 	{
-		private static bool init = false;
-		private static float[] cumulativeDropPercentages;
+		if ( _init )
+			return;
 
-		public enum WeaponDropTypes
+		var sumTotalOfDropRates = 0f;
+		var numEntries = 0;
+		foreach ( var weaponAsset in WeaponAsset.All )
 		{
-			BaseballBat, Railgun, Shotgun, Dynamite, Uzi,
-			LandMine, Minigun, PetrolBomb, Revolver
+			if ( weaponAsset.DropChance <= 0 )
+				continue;
+
+			numEntries++;
+			sumTotalOfDropRates += weaponAsset.DropChance;
 		}
 
-		public enum ToolDropTypes
+		// Calculate the cumulative drop percentage of each Weapon in the crate.
+		_cumulativeDropPercentages = new float[numEntries];
+		_dropMap = new WeaponAsset[numEntries];
+		var i = 0;
+		foreach ( var weaponAsset in WeaponAsset.All )
 		{
-			Jetpack
+			if ( weaponAsset.DropChance <= 0 )
+				continue;
+
+			_cumulativeDropPercentages[i] = weaponAsset.DropChance / sumTotalOfDropRates;
+			_dropMap[i] = weaponAsset;
+			if ( i > 0 )
+				_cumulativeDropPercentages[i] += _cumulativeDropPercentages[i - 1];
+
+			i++;
 		}
 
-		public static void Init()
-		{
-			if ( init ) return;
+		_init = true;
+	}
 
-			float sumTotalOfDropRates = 0f;
-			foreach ( var entry in GameConfig.WeaponCrateDropChances )
-			{
-				sumTotalOfDropRates += entry.Value;
-			}
+	/// <summary>
+	/// Gets a random <see cref="WeaponAsset"/> for a weapon crate.
+	/// </summary>
+	/// <returns>The randomly chosen weapon.</returns>
+	public static WeaponAsset GetRandomWeaponFromCrate()
+	{
+		if ( !_init )
+			Init();
 
-			// Calculate the cumulative drop percentage of each Weapon in the crate.
-			cumulativeDropPercentages = new float[GameConfig.WeaponCrateDropChances.Count];
-			int i = 0;
-			foreach ( var entry in GameConfig.WeaponCrateDropChances )
-			{
-				cumulativeDropPercentages[i] = (entry.Value / sumTotalOfDropRates);
-				if ( i > 0 ) cumulativeDropPercentages[i] += cumulativeDropPercentages[i - 1];
+		var random = new Random( Time.Now.CeilToInt() );
+		var roll = random.Next( 100 ) / 100f;
 
-				i++;
-			}
+		var weapon = 0;
+		while ( _cumulativeDropPercentages[weapon] <= roll )
+			weapon++;
 
-			init = true;
-		}
-
-		public static WeaponDropTypes GetRandomWeaponFromCrate()
-		{
-			if ( !init ) Init();
-
-			Random random = new Random( Time.Now.CeilToInt() );
-			WeaponDropTypes weapon = 0;
-			var roll = random.Next( 100 ) / 100f;
-
-			while ( cumulativeDropPercentages[(int)weapon] <= roll ) weapon++;
-			return weapon;
-		}
-
-		public static ToolDropTypes GetRandomToolFromCrate()
-		{
-			// TODO: Implement Tools
-			return ToolDropTypes.Jetpack;
-		}
+		return _dropMap[weapon];
 	}
 }

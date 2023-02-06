@@ -1,17 +1,464 @@
 {
-  "SharedAssets": "*.*",
   "Title": "Grubs",
   "Type": "game",
   "Org": "apetavern",
   "Ident": "grubs",
+  "Tags": "",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
   "ResourcePaths": [
     "/fonts/*",
-    "/textures/ui/*"
+    "/materials/*",
+    "/models/*",
+    "/particles/*",
+    "/postprocess/*",
+    "/sounds/*",
+    "/textures/*",
+    "/weapons/*"
   ],
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "Grubs"
+  "Metadata": {
+    "MapList": [
+      "apetavern.grubs_test_map"
+    ],
+    "MaxPlayers": 8,
+    "MinPlayers": 0,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Hidden",
+    "RankType": "None",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "GameCategory": "None",
+    "Compiler": {
+      "RootNamespace": "Grubs",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;",
+      "Nullables": true
+    },
+    "GameSettings": {
+      "grubs_game": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "ffa",
+            "Name": "Free For All"
+          },
+          {
+            "Value": "tdm",
+            "Name": "Team Deathmatch"
+          }
+        ],
+        "ConVarName": "grubs_game",
+        "DisplayName": "Gamemode",
+        "DefaultValue": "ffa",
+        "Description": ""
+      },
+      "minimum_players": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "minimum_players",
+        "DisplayName": "Minimum Players",
+        "DefaultValue": "0",
+        "Description": "The minimum amount of players you need to play the game.",
+        "Minimum": 2,
+        "Maximum": 99
+      },
+      "maximum_players": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "maximum_players",
+        "DisplayName": "Maximum Players",
+        "DefaultValue": "4",
+        "Description": "The maximum amount of players that can play the game.",
+        "Minimum": 2,
+        "Maximum": 100
+      },
+      "grub_count": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "grub_count",
+        "DisplayName": "Grub Count",
+        "DefaultValue": "4",
+        "Description": "The amount of Grubs each team will have.",
+        "Minimum": 1,
+        "Maximum": 100
+      },
+      "turn_duration": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "turn_duration",
+        "DisplayName": "Turn Duration",
+        "DefaultValue": "60",
+        "Description": "The max time in seconds that a turn will last.",
+        "Minimum": 1,
+        "Maximum": 60
+      },
+      "wind_enabled": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "wind_enabled",
+        "DisplayName": "Wind Enabled",
+        "DefaultValue": "true",
+        "Description": "Whether or not the wind system is enabled."
+      },
+      "wind_force": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "wind_force",
+        "DisplayName": "Wind Force",
+        "DefaultValue": "0.1",
+        "Description": "The amount of force a single step of wind will have.",
+        "Minimum": 0.1,
+        "Maximum": 1
+      },
+      "crate_weapon_chance": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_weapon_chance",
+        "DisplayName": "Weapon Crate Chance",
+        "DefaultValue": "10",
+        "Description": "The percent chance that a weapon crate will spawn at the end of every turn.",
+        "Maximum": 100
+      },
+      "crate_health_chance": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_health_chance",
+        "DisplayName": "Health Crate Chance",
+        "DefaultValue": "5",
+        "Description": "The percent chance that a health crate will spawn at the end of every turn.",
+        "Maximum": 100
+      },
+      "movement_grace": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "movement_grace",
+        "DisplayName": "Movement Grace Period",
+        "DefaultValue": "5",
+        "Description": "The amount of seconds a Grub will get to move after using their weapon.",
+        "Maximum": 60
+      },
+      "terrain_file": {
+        "Choices": [],
+        "ConVarName": "terrain_file",
+        "DisplayName": "Terrain File",
+        "DefaultValue": "",
+        "Description": "The path to a custom Grubs map to use instead of random generation. This file is only needed on the server host."
+      },
+      "terrain_type": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "None",
+            "Name": "None"
+          },
+          {
+            "Value": "Dirt",
+            "Name": "Dirt"
+          },
+          {
+            "Value": "Sand",
+            "Name": "Sand"
+          },
+          {
+            "Value": "Lava",
+            "Name": "Lava"
+          }
+        ],
+        "ConVarName": "terrain_type",
+        "DisplayName": "Terrain Type",
+        "DefaultValue": "Sand",
+        "Description": "The type of material to be applied to the terrain."
+      },
+      "terrain_border": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_border",
+        "DisplayName": "Terrain Border",
+        "DefaultValue": "false",
+        "Description": "Whether the terrain should have a border or not."
+      },
+      "terrain_altered": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_altered",
+        "DisplayName": "Use Altered Terrain",
+        "DefaultValue": "true",
+        "Description": "Altered terrain is curated to look more like little islands with a height threshold so the terrain does not fill up the entire grid. We recommend using it."
+      },
+      "terrain_dilation": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_dilation",
+        "DisplayName": "Terrain Dilation Amount",
+        "DefaultValue": "1",
+        "Description": "The amount the terrain is dilated. The blobs in the terrain are extruded a certain number of times. Only applicable when Altered Terrain is enabled.",
+        "Maximum": 10
+      },
+      "terrain_resolution": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_resolution",
+        "DisplayName": "Terrain Resolution",
+        "DefaultValue": "0.5",
+        "Description": "The resolution of the noise for the terrain. Lower means less blobs, and higher means more blobs.",
+        "Maximum": 1
+      },
+      "terrain_scale": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_scale",
+        "DisplayName": "Terrain Scale",
+        "DefaultValue": "15",
+        "Description": "Represents the size of a single point of terrain. A higher scale means the terrain is larger in the world.",
+        "Minimum": 5,
+        "Maximum": 50
+      },
+      "terrain_width": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_width",
+        "DisplayName": "Terrain Width",
+        "DefaultValue": "320",
+        "Description": "The width of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
+        "Minimum": 50,
+        "Maximum": 500
+      },
+      "terrain_height": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_height",
+        "DisplayName": "Terrain Height",
+        "DefaultValue": "180",
+        "Description": "The height of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
+        "Minimum": 50,
+        "Maximum": 500
+      }
+    },
+    "ControlModes": {
+      "Keyboard": true
+    },
+    "ParentPackage": "",
+    "PackageSettings": [
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "ffa",
+            "Name": "Free For All"
+          },
+          {
+            "Value": "tdm",
+            "Name": "Team Deathmatch"
+          }
+        ],
+        "ConVarName": "grubs_game",
+        "DisplayName": "Gamemode",
+        "DefaultValue": "ffa",
+        "Description": "",
+        "Group": "Game"
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "minimum_players",
+        "DisplayName": "Minimum Players",
+        "DefaultValue": "0",
+        "Description": "The minimum amount of players you need to play the game.",
+        "Group": "Game",
+        "Minimum": 2,
+        "Maximum": 99
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "maximum_players",
+        "DisplayName": "Maximum Players",
+        "DefaultValue": "4",
+        "Description": "The maximum amount of players that can play the game.",
+        "Group": "Game",
+        "Minimum": 2,
+        "Maximum": 100
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "grub_count",
+        "DisplayName": "Grub Count",
+        "DefaultValue": "4",
+        "Description": "The amount of Grubs each team will have.",
+        "Group": "Game",
+        "Minimum": 1,
+        "Maximum": 100
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "turn_duration",
+        "DisplayName": "Turn Duration",
+        "DefaultValue": "60",
+        "Description": "The max time in seconds that a turn will last.",
+        "Group": "Game",
+        "Minimum": 1,
+        "Maximum": 60
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "wind_enabled",
+        "DisplayName": "Wind Enabled",
+        "DefaultValue": "true",
+        "Description": "Whether or not the wind system is enabled.",
+        "Group": "Game"
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "wind_force",
+        "DisplayName": "Wind Force",
+        "DefaultValue": "0.1",
+        "Description": "The amount of force a single step of wind will have.",
+        "Group": "Game",
+        "Minimum": 0.1,
+        "Maximum": 1
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_weapon_chance",
+        "DisplayName": "Weapon Crate Chance",
+        "DefaultValue": "10",
+        "Description": "The percent chance that a weapon crate will spawn at the end of every turn.",
+        "Group": "Crates",
+        "Maximum": 100
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_health_chance",
+        "DisplayName": "Health Crate Chance",
+        "DefaultValue": "5",
+        "Description": "The percent chance that a health crate will spawn at the end of every turn.",
+        "Group": "Crates",
+        "Maximum": 100
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "movement_grace",
+        "DisplayName": "Movement Grace Period",
+        "DefaultValue": "5",
+        "Description": "The amount of seconds a Grub will get to move after using their weapon.",
+        "Group": "Game",
+        "Maximum": 60
+      },
+      {
+        "Choices": [],
+        "ConVarName": "terrain_file",
+        "DisplayName": "Terrain File",
+        "DefaultValue": "",
+        "Description": "The path to a custom Grubs map to use instead of random generation. This file is only needed on the server host.",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "None",
+            "Name": "None"
+          },
+          {
+            "Value": "Dirt",
+            "Name": "Dirt"
+          },
+          {
+            "Value": "Sand",
+            "Name": "Sand"
+          },
+          {
+            "Value": "Lava",
+            "Name": "Lava"
+          }
+        ],
+        "ConVarName": "terrain_type",
+        "DisplayName": "Terrain Type",
+        "DefaultValue": "Sand",
+        "Description": "The type of material to be applied to the terrain.",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_border",
+        "DisplayName": "Terrain Border",
+        "DefaultValue": "false",
+        "Description": "Whether the terrain should have a border or not.",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_altered",
+        "DisplayName": "Use Altered Terrain",
+        "DefaultValue": "true",
+        "Description": "Altered terrain is curated to look more like little islands with a height threshold so the terrain does not fill up the entire grid. We recommend using it.",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_dilation",
+        "DisplayName": "Terrain Dilation Amount",
+        "DefaultValue": "1",
+        "Description": "The amount the terrain is dilated. The blobs in the terrain are extruded a certain number of times. Only applicable when Altered Terrain is enabled.",
+        "Group": "Terrain",
+        "Maximum": 10
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_resolution",
+        "DisplayName": "Terrain Resolution",
+        "DefaultValue": "0.5",
+        "Description": "The resolution of the noise for the terrain. Lower means less blobs, and higher means more blobs.",
+        "Group": "Terrain",
+        "Maximum": 2
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_scale",
+        "DisplayName": "Terrain Scale",
+        "DefaultValue": "15",
+        "Description": "Represents the size of a single point of terrain. A higher scale means the terrain is larger in the world.",
+        "Group": "Terrain",
+        "Minimum": 1,
+        "Maximum": 50
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_width",
+        "DisplayName": "Terrain Width",
+        "DefaultValue": "320",
+        "Description": "The width of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
+        "Group": "Terrain",
+        "Minimum": 50,
+        "Maximum": 500
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_height",
+        "DisplayName": "Terrain Height",
+        "DefaultValue": "180",
+        "Description": "The height of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
+        "Group": "Terrain",
+        "Minimum": 50,
+        "Maximum": 500
+      }
+    ]
+  }
 }

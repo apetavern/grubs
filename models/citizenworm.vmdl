@@ -14,12 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "citizen_skin.vmat"
-								to = "models/citizen/skin/citizen_skin.vmat"
-							},
-							{
 								from = "phong1.vmat"
-								to = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
 							},
 							{
 								from = "citizen_eyes.vmat"
@@ -36,7 +32,13 @@
 					{
 						_class = "MaterialGroup"
 						name = "Skin01"
-						remaps = [  ]
+						remaps = 
+						[
+							{
+								from = "models/citizen/skin/citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
+							},
+						]
 					},
 					{
 						_class = "MaterialGroup"
@@ -739,6 +741,64 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "incline_correct_top_add"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "stancepose"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_incline_correct.fbx"
+						start_frame = 10
+						end_frame = 10
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "incline_correct_bottom_add"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "stancepose"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_incline_correct.fbx"
+						start_frame = 20
+						end_frame = 20
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -972,9 +1032,70 @@
 					},
 				]
 			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "head"
+						children = 
+						[
+							{
+								_class = "HitboxCapsule"
+								parent_bone = "head"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								radius = 6.5
+								point0 = [ 2.0, 1.0, 0.0 ]
+								point1 = [ 8.42101, 0.0, 0.0 ]
+							},
+						]
+					},
+					{
+						_class = "HitboxSet"
+						name = "body"
+						children = 
+						[
+							{
+								_class = "HitboxCapsule"
+								parent_bone = "spine_1"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								radius = 5.0
+								point0 = [ -2.0, 0.0, 0.0 ]
+								point1 = [ 4.42101, -1.59962, 0.0 ]
+							},
+							{
+								_class = "HitboxCapsule"
+								parent_bone = "pelvis"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								radius = 3.480337
+								point0 = [ -2.0, 0.0, 0.0 ]
+								point1 = [ 2.42101, -0.59962, 0.0 ]
+							},
+							{
+								_class = "HitboxCapsule"
+								parent_bone = "spine_2"
+								surface_property = ""
+								translation_only = false
+								group_id = 0
+								radius = 4.0
+								point0 = [ -2.0, 0.0, 0.0 ]
+								point1 = [ -0.57899, 3.40038, 0.0 ]
+							},
+						]
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/citizenworm.vanmgrph"
+		base_model_name = ""
 	}
 }
