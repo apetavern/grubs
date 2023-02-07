@@ -213,7 +213,7 @@ public class Projectile : ModelEntity
 		Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
 		var helper = new MoveHelper( Position, Velocity );
-		helper.Trace = helper.Trace.Size( 12f );
+		helper.Trace = helper.Trace.Size( 12f ).WithAnyTags( "player", "solid" );
 		helper.TryMove( Time.Delta );
 		Velocity = helper.Velocity;
 		Position = helper.Position;

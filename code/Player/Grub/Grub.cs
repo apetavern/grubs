@@ -40,7 +40,6 @@ public partial class Grub : AnimatedEntity, INameTag
 	public override void Spawn()
 	{
 		Model = CitizenGrubModel;
-		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 
 		Name = Game.Random.FromArray( GrubsConfig.GrubNames );
 		Health = 100;
@@ -54,6 +53,8 @@ public partial class Grub : AnimatedEntity, INameTag
 		Components.Create<AirMoveMechanic>();
 		Components.Create<SquirmMechanic>();
 		Components.Create<JumpMechanic>();
+
+		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Controller.Hull.Mins, Controller.Hull.Maxs );
 	}
 
 	public override void Simulate( IClient client )

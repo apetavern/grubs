@@ -89,6 +89,7 @@ public class ProjectileComponent : WeaponComponent
 		else
 		{
 			projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Weapon.Position.WithY( 0f ), 7f );
+			projectile.Position = Weapon.Position.WithY( 0 ) + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 32f);
 			projectile.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * Charge * ProjectileSpeed).WithY( 0f );
 		}
 
