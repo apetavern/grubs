@@ -25,7 +25,7 @@
           },
           "ProjectileSpeed": {
             "Type": "Single",
-            "Value": "25"
+            "Value": "15"
           },
           "ProjectileExplosionRadius": {
             "Type": "Single",
@@ -48,6 +48,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "ProjectilePhysicsType": {
+            "Type": "PhysicsType",
+            "Value": "\u0022Rolling\u0022"
           }
         }
       }

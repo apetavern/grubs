@@ -209,7 +209,19 @@ public class Projectile : ModelEntity
 
 	private void HandlePhysicsTick()
 	{
-		// Position = Position.WithY( 0f );
+		// Apply gravity.
+		Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
+
+		var helper = new MoveHelper( Position, Velocity );
+		helper.Trace = helper.Trace.Size( 12f );
+		helper.TryMove( Time.Delta );
+		Velocity = helper.Velocity;
+		Position = helper.Position;
+
+		// Apply rotation using some shit I pulled out of my ass.
+		var angularX = Velocity.x * 5f * Time.Delta;
+		float degrees = angularX.Clamp( -20, 20 );
+		Rotation = Rotation.RotateAroundAxis( new Vector3( 0, 1, 0 ), degrees );
 	}
 
 	private void OnCollision()
