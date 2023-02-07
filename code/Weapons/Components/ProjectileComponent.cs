@@ -89,7 +89,9 @@ public class ProjectileComponent : WeaponComponent
 		else
 		{
 			projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Weapon.Position.WithY( 0f ), 7f );
-			projectile.Position = Weapon.Position.WithY( 0 ) + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 32f);
+			var desiredPosition = Weapon.Position.WithY( 0 ) + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
+			var tr = Trace.Ray( Weapon.Position.WithY( 0 ), desiredPosition ).Ignore( Weapon.Owner ).Run();
+			projectile.Position = tr.EndPosition;
 			projectile.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * Charge * ProjectileSpeed).WithY( 0f );
 		}
 
