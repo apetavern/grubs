@@ -1,6 +1,4 @@
-﻿using Sandbox.Internal;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 public partial class GrubController : EntityComponent<Grub>
 {

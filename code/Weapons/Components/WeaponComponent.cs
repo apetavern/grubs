@@ -26,5 +26,36 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	{
 		if ( ShouldStart() )
 			OnStart();
+
+		if ( Input.Down( InputButton.PrimaryAttack ) && Weapon.FiringType is FiringType.Charged )
+		{
+			IncreaseCharge();
+		}
+
+		if ( Input.Released( InputButton.PrimaryAttack ) )
+		{
+			switch ( Weapon.FiringType )
+			{
+				case FiringType.Instant:
+					FireInstant();
+					break;
+				case FiringType.Charged:
+					FireCharged();
+					break;
+				default:
+					throw new NotImplementedException();
+			}
+		}
+	}
+
+	public virtual void FireInstant() { }
+
+	public virtual void FireCharged() { }
+
+	private void IncreaseCharge()
+	{
+		Charge++;
+		Charge = Charge.Clamp( 0, 100 );
+		Log.Info( Charge );
 	}
 }

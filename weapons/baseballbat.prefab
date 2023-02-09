@@ -1,0 +1,81 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "3f255604-3fc7-48bb-b33a-7b31add5cd16",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "80ba66d8-0911-47f1-9ab3-8a9c02ef651d",
+        "Class": "MeleeComponent",
+        "Keys": {
+          "Damage": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "HitForce": {
+            "Type": "Vector3",
+            "Value": "\u0022500,0,0\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Swing\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "HitDelay": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "HitSize": {
+            "Type": "Vector3",
+            "Value": "\u0022128,0,128\u0022"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Swing\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/baseballbat/baseballbat.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Baseball Bat\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      }
+    }
+  }
+}

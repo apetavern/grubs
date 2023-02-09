@@ -1,6 +1,4 @@
-﻿using System.Buffers;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 [Prefab]
 public class ProjectileComponent : WeaponComponent
@@ -37,34 +35,14 @@ public class ProjectileComponent : WeaponComponent
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
-
-		if ( Input.Down( InputButton.PrimaryAttack ) && Weapon.FiringType is FiringType.Charged )
-		{
-			IncreaseCharge();
-		}
-
-		if ( Input.Released( InputButton.PrimaryAttack ) )
-		{
-			switch ( Weapon.FiringType )
-			{
-				case FiringType.Instant:
-					FireInstant();
-					break;
-				case FiringType.Charged:
-					FireCharged();
-					break;
-				default:
-					throw new NotImplementedException();
-			}
-		}
 	}
 
-	private void FireInstant()
+	public override void FireInstant()
 	{
 		Log.Info( "Fire Instant" );
 	}
 
-	private void FireCharged()
+	public override void FireCharged()
 	{
 		Log.Info( "Fire Charged: " + Charge );
 
@@ -83,7 +61,6 @@ public class ProjectileComponent : WeaponComponent
 				? arcTrace.RunTowardsWithBounces( Grub.EyeRotation.Forward.Normal * Grub.Facing, ProjectileForceMultiplier * Charge, 0, ProjectileMaxBounces )
 				: arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, ProjectileForceMultiplier * Charge, 0f );
 
-			Log.Info( segments.Count );
 			projectile.MoveAlongTrace( segments );
 		}
 		else
@@ -99,14 +76,10 @@ public class ProjectileComponent : WeaponComponent
 			projectile.ExplodeAfterSeconds( ProjectileExplodeAfter );
 
 		projectile.Finish();
+		Grub.SetAnimParameter( "fire", true );
 
 		Charge = 0;
 	}
 
-	private void IncreaseCharge()
-	{
-		Charge++;
-		Charge = Charge.Clamp( 0, 100 );
-		Log.Info( Charge );
-	}
+
 }
