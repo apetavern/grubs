@@ -1,18 +1,21 @@
 ﻿namespace Grubs;
 
 [Prefab]
-public class MeleeComponent : WeaponComponent
+public partial class MeleeComponent : WeaponComponent
 {
-	[Prefab]
+	[Prefab, Net]
 	public float Damage { get; set; } = 25;
 
-	[Prefab]
+	[Prefab, Net]
 	public Vector3 HitForce { get; set; }
 
 	[Prefab]
 	public Vector3 HitSize { get; set; }
 
-	[Prefab]
+	[Prefab, Net]
+	public Vector3 HitOffset { get; set; }
+
+	[Prefab, Net]
 	public float HitDelay { get; set; }
 
 	public override bool ShouldStart()
@@ -23,13 +26,25 @@ public class MeleeComponent : WeaponComponent
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
+
+		if ( IsFiring && TimeSinceFired > HitDelay )
+		{
+			Fire();
+		}
 	}
 
 	public override void FireInstant()
 	{
-		var grubsHit = GetGrubsInSwing();
-		Log.Info( grubsHit.Count );
+		if ( Game.IsServer )
+		{
+			var grubsHit = GetGrubsInSwing();
+			foreach ( var (grub, dir) in grubsHit )
+			{
+				grub.ApplyAbsoluteImpulse( HitForce * dir );
+			}
+		}
 
+		IsFiring = false;
 		Grub.SetAnimParameter( "fire", true );
 	}
 
@@ -38,26 +53,27 @@ public class MeleeComponent : WeaponComponent
 		Grub.SetAnimParameter( "fire", true );
 	}
 
-	private List<Grub> GetGrubsInSwing()
+	private Dictionary<Grub, Vector3> GetGrubsInSwing()
 	{
-		// Scrap this and just use a ray trace instead
-		var min = new Vector3(
-			Grub.Position.x + 16f * Grub.Facing,
-			-16f,
-			Grub.EyePosition.z + (Grub.LookAngles.pitch * -Grub.Facing) - (HitSize.z / 2) );
+		if ( Game.IsClient )
+			return null;
 
-		var max = new Vector3(
-			min.x + HitSize.x * Grub.Facing,
-			16f,
-			min.z + (HitSize.z / 2) );
+		var ray = new Ray( Grub.EyePosition + HitOffset, Grub.Facing * Grub.EyeRotation.Forward );
+		var trs = Trace.Ray( ray, HitSize.x ).Ignore( Grub ).RunAll();
 
-		var grubsHit = new List<Grub>();
+		var grubsHitToDirection = new Dictionary<Grub, Vector3>();
 
-		if ( Grub.Facing > 0 )
-			DebugOverlay.Box( max, min, Color.Red, 10 );
-		else
-			DebugOverlay.Box( min, max, Color.Red, 10 );
+		if ( trs is null )
+			return grubsHitToDirection;
 
-		return grubsHit;
+		foreach ( var trace in trs )
+		{
+			if ( trace.Hit && trace.Entity is Grub grub )
+			{
+				grubsHitToDirection.Add( grub, trace.Direction );
+			}
+		}
+
+		return grubsHitToDirection;
 	}
 }

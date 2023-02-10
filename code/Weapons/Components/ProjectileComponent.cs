@@ -35,6 +35,9 @@ public class ProjectileComponent : WeaponComponent
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
+
+		if ( IsFiring )
+			Fire();
 	}
 
 	public override void FireInstant()
@@ -78,6 +81,7 @@ public class ProjectileComponent : WeaponComponent
 		projectile.Finish();
 		Grub.SetAnimParameter( "fire", true );
 
+		IsFiring = false;
 		Charge = 0;
 	}
 

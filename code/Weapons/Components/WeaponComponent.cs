@@ -12,6 +12,12 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	[Net, Predicted]
 	public int Charge { get; protected set; } = 0;
 
+	[Net, Predicted]
+	public bool IsFiring { get; set; }
+
+	[Net, Predicted]
+	public TimeSince TimeSinceFired { get; set; }
+
 	public virtual bool ShouldStart()
 	{
 		return false;
@@ -34,17 +40,22 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 		if ( Input.Released( InputButton.PrimaryAttack ) )
 		{
-			switch ( Weapon.FiringType )
-			{
-				case FiringType.Instant:
-					FireInstant();
-					break;
-				case FiringType.Charged:
-					FireCharged();
-					break;
-				default:
-					throw new NotImplementedException();
-			}
+			IsFiring = true;
+		}
+	}
+
+	public void Fire()
+	{
+		switch ( Weapon.FiringType )
+		{
+			case FiringType.Instant:
+				FireInstant();
+				break;
+			case FiringType.Charged:
+				FireCharged();
+				break;
+			default:
+				throw new NotImplementedException();
 		}
 	}
 
@@ -56,6 +67,5 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	{
 		Charge++;
 		Charge = Charge.Clamp( 0, 100 );
-		Log.Info( Charge );
 	}
 }

@@ -17,7 +17,7 @@
           },
           "HitForce": {
             "Type": "Vector3",
-            "Value": "\u0022500,0,0\u0022"
+            "Value": "\u00221000,0,1\u0022"
           },
           "_name": {
             "Value": "\u0022Swing\u0022"
@@ -27,11 +27,15 @@
           },
           "HitDelay": {
             "Type": "Single",
-            "Value": "0"
+            "Value": "1.5"
           },
           "HitSize": {
             "Type": "Vector3",
-            "Value": "\u0022128,0,128\u0022"
+            "Value": "\u002256,0,0\u0022"
+          },
+          "HitOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,-10\u0022"
           }
         }
       }
