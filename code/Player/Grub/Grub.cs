@@ -26,6 +26,13 @@ public partial class Grub : AnimatedEntity, INameTag
 		}
 	}
 
+	[Net]
+	public bool HasBeenDamaged { get; set; }
+
+	public bool ShouldTakeDamage { get; set; }
+
+	public Queue<DamageInfo> DamageQueue { get; set; } = new();
+
 	public Color Color => Player.Color;
 
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
@@ -75,6 +82,47 @@ public partial class Grub : AnimatedEntity, INameTag
 				DebugOverlay.Box( min, max );
 				world.SubtractDefault( min, max );
 			}
+		}
+	}
+
+	public override void TakeDamage( DamageInfo info )
+	{
+		if ( !Game.IsServer )
+			return;
+
+		// Quick and temporary method to get rid of a Grub upon falling out of bounds.
+		if ( info.HasTag( "outofarea" ) )
+		{
+			Health = 0;
+			Player.Inventory.UnsetActiveWeapon();
+			EnableDrawing = false;
+			Components.Remove( Controller );
+			LifeState = LifeState.Dead;
+			return;
+		}
+
+		if ( !ShouldTakeDamage )
+		{
+			if ( IsTurn && GamemodeSystem.Instance is FreeForAll )
+				GamemodeSystem.Instance.UseTurn( false );
+
+			DamageQueue.Enqueue( info );
+			HasBeenDamaged = true;
+			return;
+		}
+
+		LastAttacker = info.Attacker;
+		LastAttackerWeapon = info.Weapon;
+
+		if ( Health <= 0 || LifeState != LifeState.Alive )
+			return;
+
+		Health -= info.Damage;
+
+		if ( Health < 0 )
+		{
+			Health = 0;
+			OnKilled();
 		}
 	}
 

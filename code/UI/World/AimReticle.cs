@@ -24,7 +24,7 @@ public class AimReticle : WorldPanel
 		}
 
 		var activeGrub = player.ActiveGrub;
-		if ( activeGrub == null )
+		if ( activeGrub == null || activeGrub.LifeState == LifeState.Dead )
 		{
 			SetClass( "hidden", true );
 			return;

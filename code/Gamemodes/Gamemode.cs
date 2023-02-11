@@ -54,4 +54,6 @@ public partial class Gamemode : Entity
 	internal virtual void OnWeaponDropped( Player player, Weapon weapon ) { }
 
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
+
+	internal virtual void UseTurn( bool giveMovementGrace ) { }
 }

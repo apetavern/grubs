@@ -45,7 +45,7 @@ public static partial class ExplosionHelper
 	}
 
 	/// <summary>
-	/// Client receiver to do effects of the explosion/
+	/// Client receiver to do effects of the explosion.
 	/// </summary>
 	/// <param name="position">The center point of the explosion.</param>
 	/// <param name="radius">The radius of the explosion.</param>

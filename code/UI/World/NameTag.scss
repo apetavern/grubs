@@ -2,6 +2,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    &.hidden {
+        display: none;
+    }
 }
 
 label {
@@ -15,8 +19,4 @@ label {
     text-align: center;
     align-items: center;
     margin: 2px 0;
-
-    &.hidden {
-        display: none;
-    }
 }

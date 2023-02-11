@@ -9,6 +9,12 @@ public partial class FreeForAll : Gamemode
 	[Net]
 	public TimeUntil TimeUntilTurnOver { get; set; }
 
+	[Net]
+	public bool MovementOnly { get; set; }
+
+	[Net]
+	public bool UsedTurn { get; set; }
+
 	public List<Player> PlayerRotation { get; set; } = new();
 
 	private bool _gameHasStarted = false;
@@ -103,6 +109,19 @@ public partial class FreeForAll : Gamemode
 			DebugOverlay.ScreenText( $"ActiveGrub {ActivePlayer?.ActiveGrub}", lineOffset++ );
 			DebugOverlay.ScreenText( $"Turn Timer {TimeUntilTurnOver}", lineOffset++ );
 			DebugOverlay.ScreenText( $"", lineOffset++ );
+		}
+	}
+
+	internal override void UseTurn( bool giveMovementGrace )
+	{
+		if ( giveMovementGrace )
+		{
+			TimeUntilTurnOver = GrubsConfig.MovementGracePeriod;
+			MovementOnly = true;
+		}
+		else
+		{
+			UsedTurn = true;
 		}
 	}
 

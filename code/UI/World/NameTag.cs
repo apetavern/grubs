@@ -41,7 +41,7 @@ public class NameTag : WorldPanel
 			return;
 		}
 
-		_healthLabel.SetClass( "hidden", Entity.LifeState == LifeState.Dead );
+		SetClass( "hidden", Entity.LifeState == LifeState.Dead );
 
 		Position = Entity.Position + (Vector3.Up * 52f);
 		Rotation = Rotation.LookAt( Vector3.Right );
