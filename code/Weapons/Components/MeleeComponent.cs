@@ -41,6 +41,12 @@ public partial class MeleeComponent : WeaponComponent
 			foreach ( var (grub, dir) in grubsHit )
 			{
 				grub.ApplyAbsoluteImpulse( HitForce * dir );
+				grub.TakeDamage( new DamageInfo
+				{
+					Attacker = Grub,
+					Damage = Damage,
+					Position = grub.Position,
+				} );
 			}
 		}
 

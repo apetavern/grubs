@@ -106,8 +106,6 @@ public partial class World : Entity
 			.WithPosition( Vector3.Zero )
 			.WithShape( killBounds )
 			.Finish<DamageZone>();
-
-		Log.Info( "killzone" );
 	}
 
 	public Vector3 FindSpawnLocation()
