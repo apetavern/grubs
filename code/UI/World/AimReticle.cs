@@ -44,7 +44,19 @@ public class AimReticle : WorldPanel
 
 		SetClass( "hidden", false );
 
-		Position = activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
+		Vector3 reticlePosition;
+
+		var muzzle = activeGrub.ActiveWeapon.GetAttachment( "muzzle" );
+		if ( muzzle is not null )
+		{
+			reticlePosition = muzzle.Value.Position + muzzle.Value.Rotation.Forward * 80f;
+		}
+		else
+		{
+			reticlePosition = activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
+		}
+
+		Position = reticlePosition;
 		Position = Position.WithY( -33 );
 		Rotation = Rotation.RotateAroundAxis( Vector3.Forward, 0.25f );
 	}

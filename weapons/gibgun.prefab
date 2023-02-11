@@ -37,7 +37,7 @@
           },
           "HitForce": {
             "Type": "Vector3",
-            "Value": "\u002250,0,1\u0022"
+            "Value": "\u002250,0,350\u0022"
           },
           "TraceCount": {
             "Type": "Int32",
@@ -62,7 +62,9 @@
           "_name": {
             "Value": "\u0022Laser\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
