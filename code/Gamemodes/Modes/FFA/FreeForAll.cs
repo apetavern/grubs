@@ -82,6 +82,18 @@ public partial class FreeForAll : Gamemode
 			TimeUntilTurnOver = GrubsConfig.TurnDuration;
 		}
 
+		var grubs = All.OfType<Grub>();
+		foreach ( var grub in grubs )
+		{
+			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+			{
+				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( grub ) )
+					continue;
+
+				zone.Trigger( grub );
+			}
+		}
+
 		CameraTarget = ActivePlayer?.ActiveGrub;
 
 		if ( Debug )

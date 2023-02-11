@@ -10,6 +10,9 @@ public partial class World : Entity
 	[Net]
 	public CsgSolid CsgBackground { get; set; }
 
+	[Net]
+	public DamageZone KillZone { get; set; }
+
 	public CsgBrush CubeBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cube.csg" );
 	public CsgBrush CoolBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cool.csg" );
 	public CsgMaterial DefaultMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/default.csgmat" );
@@ -41,6 +44,7 @@ public partial class World : Entity
 		CsgBackground.Add( CubeBrush, DefaultMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 72, -WorldHeight / 2 ) );
 
 		GenerateRandomWorld();
+		SetupKillZone();
 	}
 
 	public void SubtractDefault( Vector3 min, Vector3 max )
@@ -86,6 +90,24 @@ public partial class World : Entity
 				}
 			}
 		}
+	}
+
+	private void SetupKillZone()
+	{
+		var killBounds = new MultiShape().AddShape(
+			BoxShape
+			.WithSize( new Vector3( int.MaxValue, WorldWidth, 100 ) )
+			.WithOffset( new Vector3( -int.MaxValue / 2, -WorldWidth / 2, -WorldHeight - 100 ) ) );
+
+		KillZone = new DamageZone()
+			.WithDamageTags( "outofarea" )
+			.WithInstantKill( true )
+			.WithDamage( 9999 )
+			.WithPosition( Vector3.Zero )
+			.WithShape( killBounds )
+			.Finish<DamageZone>();
+
+		Log.Info( "killzone" );
 	}
 
 	public Vector3 FindSpawnLocation()

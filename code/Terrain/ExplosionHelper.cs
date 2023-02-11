@@ -32,7 +32,7 @@ public static partial class ExplosionHelper
 			dir = dir.WithY( 0f );
 			grub.ApplyAbsoluteImpulse( dir * force );
 
-			// grub.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
+			grub.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
 		}
 
 		var min = new Vector3( position.x - radius, -32, position.z - radius );
