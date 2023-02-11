@@ -1,8 +1,8 @@
-# sbox-grubs
+# Grubs
 Grubs is a worms-inspired artillery game for s&box.
 Our goal is to create a polished, well-written game
 that is fun to play. Everything is open source and licensed
-under GPLv3.
+under MIT.
 
 ### Contributing
 If you are interested in contributing, make a pull request
