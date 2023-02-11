@@ -45,6 +45,7 @@ public class AimReticle : WorldPanel
 		SetClass( "hidden", false );
 
 		Position = activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
+		Position = Position.WithY( -33 );
 		Rotation = Rotation.RotateAroundAxis( Vector3.Forward, 0.25f );
 	}
 }

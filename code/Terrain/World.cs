@@ -53,6 +53,20 @@ public partial class World : Entity
 		CsgWorld.Paint( CoolBrush, DefaultMaterial, (min + max) * 0.5f, (max - min) * 1.1f );
 	}
 
+	public void SubtractLine( Vector3 start, Vector3 stop, float radius )
+	{
+		var totalLength = start - stop;
+		var stepCount = MathF.Round( totalLength.Length / _resolution / 2 );
+
+		for ( var i = 0; i < stepCount; i++ )
+		{
+			var currentPoint = Vector3.Lerp( start, stop, i / stepCount );
+			var min = new Vector3( currentPoint.x - radius, -32, currentPoint.z - radius );
+			var max = new Vector3( currentPoint.x + radius, 32, currentPoint.z + radius );
+			SubtractDefault( min, max );
+		}
+	}
+
 	private float[,] _terrainGrid;
 	private readonly int _resolution = 16;
 

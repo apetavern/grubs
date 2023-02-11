@@ -24,6 +24,9 @@ public partial class HitScanComponent : WeaponComponent
 	public float ExplosionRadius { get; set; } = 0f;
 
 	[Prefab, Net]
+	public float ExplosionDamage { get; set; } = 1f;
+
+	[Prefab, Net]
 	public bool PenetrateTargets { get; set; } = false;
 
 	[Prefab, Net]
@@ -81,27 +84,39 @@ public partial class HitScanComponent : WeaponComponent
 		}
 
 		// Trace the shot.
-		var tr = Trace.Ray( startPos, endPos ).Ignore( Grub ).Run();
+		var tr = Trace.Ray( startPos, endPos ).Ignore( Grub );
 
 
 		if ( Game.IsServer )
 		{
-			// DebugOverlay.TraceResult( tr, 5 );
-			var traceParticles = Particles.Create( TraceParticle.ResourcePath );
-			traceParticles?.SetPosition( 0, startPos );
-			traceParticles?.SetPosition( 1, tr.EndPosition );
+			Vector3 particleEndPosition = endPos;
 
-			if ( tr.Hit )
+			if ( PenetrateWorld )
 			{
-				if ( tr.Entity is Grub grub )
+				tr = tr.WithoutTags( "solid" );
+				GrubsGame.Instance.World.SubtractLine( startPos, endPos, ExplosionRadius );
+			}
+
+			TraceResult[] result;
+			if ( PenetrateTargets )
+			{
+				result = tr.RunAll();
+				if ( result is not null )
 				{
-					HitGrub( grub, tr.Direction );
-				}
-				else if ( tr.Entity is CsgSolid )
-				{
-					ExplosionHelper.Explode( tr.EndPosition, Grub, 10, 1 );
+					TraceHitMultiple( result );
 				}
 			}
+			else
+			{
+				result = new TraceResult[1];
+				result[0] = tr.Run();
+				particleEndPosition = result[0].EndPosition;
+				TraceHitSingle( result[0] );
+			}
+
+			var traceParticles = Particles.Create( TraceParticle.ResourcePath );
+			traceParticles?.SetPosition( 0, startPos );
+			traceParticles?.SetPosition( 1, particleEndPosition );
 		}
 
 		if ( TraceDelay > 0 )
@@ -127,6 +142,29 @@ public partial class HitScanComponent : WeaponComponent
 	private void FireEffects()
 	{
 		Grub.SetAnimParameter( "fire", true );
+	}
+
+	private void TraceHitSingle( TraceResult tr )
+	{
+		if ( tr.Hit )
+		{
+			if ( tr.Entity is Grub grub )
+			{
+				HitGrub( grub, tr.Direction );
+			}
+			else if ( tr.Entity is CsgSolid )
+			{
+				ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionDamage );
+			}
+		}
+	}
+
+	private void TraceHitMultiple( TraceResult[] results )
+	{
+		for ( int i = 0; i < results.Length; i++ )
+		{
+			TraceHitSingle( results[i] );
+		}
 	}
 
 	private void HitGrub( Grub grub, Vector3 direction )
