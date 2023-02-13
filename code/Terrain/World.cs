@@ -53,18 +53,13 @@ public partial class World : Entity
 		CsgWorld.Paint( CoolBrush, DefaultMaterial, (min + max) * 0.5f, (max - min) * 1.1f );
 	}
 
-	public void SubtractLine( Vector3 start, Vector3 stop, float radius )
+	public void SubtractLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
 	{
-		var totalLength = start - stop;
-		var stepCount = MathF.Round( totalLength.Length / _resolution / 2 );
+		var midpoint = new Vector3( (start.x + stop.x) / 2, 0f, (start.z + stop.z) / 2 );
+		var scale = new Vector3( Vector3.DistanceBetween( start, stop ), 64f, size );
 
-		for ( var i = 0; i < stepCount; i++ )
-		{
-			var currentPoint = Vector3.Lerp( start, stop, i / stepCount );
-			var min = new Vector3( currentPoint.x - radius, -32, currentPoint.z - radius );
-			var max = new Vector3( currentPoint.x + radius, 32, currentPoint.z + radius );
-			SubtractDefault( min, max );
-		}
+		CsgWorld.Subtract( CubeBrush, midpoint, scale, Rotation.FromPitch( rotation.Pitch() ) );
+		CsgWorld.Paint( CubeBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
 	}
 
 	private float[,] _terrainGrid;

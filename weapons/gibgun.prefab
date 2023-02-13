@@ -17,7 +17,7 @@
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "24"
+            "Value": "32"
           },
           "PenetrateTargets": {
             "Type": "Boolean",

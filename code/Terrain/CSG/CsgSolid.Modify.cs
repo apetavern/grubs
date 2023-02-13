@@ -231,14 +231,14 @@
 				transform = Matrix.CreateTranslation( position.Value );
 			}
 
-			if ( scale != null )
-			{
-				transform = Matrix.CreateScale( scale.Value ) * transform;
-			}
-
 			if ( rotation != null )
 			{
 				transform = Matrix.CreateRotation( rotation.Value ) * transform;
+			}
+
+			if ( scale != null )
+			{
+				transform = Matrix.CreateScale( scale.Value ) * transform;
 			}
 
 			return transform;

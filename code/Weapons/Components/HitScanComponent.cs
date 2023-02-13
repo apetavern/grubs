@@ -73,6 +73,9 @@ public partial class HitScanComponent : WeaponComponent
 		var endPos = muzzle is not null
 			? startPos + muzzle.Value.Rotation.Forward * TraceDistance + (Vector3.Random * TraceSpread)
 			: startPos + Grub.EyeRotation.Forward * TraceDistance + (Vector3.Random * TraceSpread);
+		var pitch = muzzle is not null ? muzzle.Value.Rotation.Pitch() : Grub.EyeRotation.Pitch();
+		pitch *= Grub.Facing;
+		var rotation = Rotation.FromPitch( pitch );
 		startPos = startPos.WithY( 0f );
 		endPos = endPos.WithY( 1f );
 
@@ -94,7 +97,7 @@ public partial class HitScanComponent : WeaponComponent
 			if ( PenetrateWorld )
 			{
 				tr = tr.WithoutTags( "solid" );
-				GrubsGame.Instance.World.SubtractLine( startPos, endPos, ExplosionRadius );
+				GrubsGame.Instance.World.SubtractLine( startPos, endPos, ExplosionRadius, rotation );
 			}
 
 			TraceResult[] result;
