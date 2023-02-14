@@ -1,0 +1,113 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "9b86ae11-2d50-4c80-8261-efd3c0dbc6a3",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "333bfe4a-5461-4bd9-8191-66a43e13146b",
+        "Class": "HitScanComponent",
+        "Keys": {
+          "HitForce": {
+            "Type": "Vector3",
+            "Value": "\u002220,0,0\u0022"
+          },
+          "TraceCount": {
+            "Type": "Int32",
+            "Value": "25"
+          },
+          "TraceSpread": {
+            "Type": "Single",
+            "Value": "600"
+          },
+          "TraceDelay": {
+            "Type": "Single",
+            "Value": "0.2"
+          },
+          "TraceDistance": {
+            "Type": "Single",
+            "Value": "5000"
+          },
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "25"
+          },
+          "ExplosionDamage": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "PenetrateTargets": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "PenetrateWorld": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "Damage": {
+            "Type": "Single",
+            "Value": "5"
+          },
+          "UseMuzzleParticle": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "TraceParticle": {
+            "Type": "ParticleSystem",
+            "Value": "\u0022particles/guntrace/guntrace.vpcf\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Shoot\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Minigun\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/minigun/minigun.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Minigun\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      }
+    }
+  }
+}
