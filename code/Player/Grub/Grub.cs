@@ -57,6 +57,7 @@ public partial class Grub : AnimatedEntity, INameTag
 		Components.Create<GrubController>();
 		Components.Create<GrubAnimator>();
 
+		Components.Create<UnstuckMechanic>();
 		Components.Create<AirMoveMechanic>();
 		Components.Create<SquirmMechanic>();
 		Components.Create<JumpMechanic>();

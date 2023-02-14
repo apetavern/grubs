@@ -71,9 +71,6 @@ public partial class GrubController : EntityComponent<Grub>
 
 	public virtual void Simulate( IClient client )
 	{
-		if ( Stuck() )
-			return;
-
 		SimulateEyes();
 		SimulateMechanics();
 		UpdateRotation();
@@ -100,49 +97,6 @@ public partial class GrubController : EntityComponent<Grub>
 				DebugOverlay.ScreenText( $"{mechanic}", ++lineOffset );
 			}
 		}
-	}
-
-	int StuckTries = 0;
-
-	private bool Stuck()
-	{
-		var result = TraceBBox( Position, Position );
-
-		// Not stuck
-		if ( !result.StartedSolid )
-		{
-			StuckTries = 0;
-			return false;
-		}
-
-		if ( Game.IsClient )
-			return true;
-
-#if DEBUG
-		if ( GetMechanic<NoclipMechanic>()?.IsActive ?? false )
-			return false;
-#endif
-
-		int AttemptsPerTick = 20;
-
-		for ( int i = 0; i < AttemptsPerTick; i++ )
-		{
-			var pos = Position + Vector3.Random.Normal * (StuckTries / 2.0f);
-
-			if ( i == 0 )
-				pos = Position + Vector3.Up * 5;
-
-			result = TraceBBox( pos, pos );
-
-			if ( !result.StartedSolid )
-			{
-				Position = pos;
-				return false;
-			}
-		}
-
-		StuckTries++;
-		return true;
 	}
 
 	public virtual void FrameSimulate( IClient client )
