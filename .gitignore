@@ -30,6 +30,8 @@ _bakeresourcecache/
 *.vpcf_c
 *.vpost_c
 *.sound_c
+*.csg_c
+*.prefab_c
 
 # Allowlist
 !*_dev.vpk
