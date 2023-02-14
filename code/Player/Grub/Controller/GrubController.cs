@@ -116,6 +116,11 @@ public partial class GrubController : EntityComponent<Grub>
 		if ( Game.IsClient )
 			return true;
 
+#if DEBUG
+		if ( GetMechanic<NoclipMechanic>().IsActive )
+			return false;
+#endif
+
 		int AttemptsPerTick = 20;
 
 		for ( int i = 0; i < AttemptsPerTick; i++ )
