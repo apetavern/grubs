@@ -19,10 +19,6 @@ public sealed partial class GrubsGame : GameManager
 	/// </summary>
 	public static GrubsGame Instance => Current as GrubsGame;
 
-	[Net]
-	public World World { get; set; }
-
-
 	public GrubsGame()
 	{
 		if ( Game.IsClient )
@@ -39,10 +35,8 @@ public sealed partial class GrubsGame : GameManager
 	{
 		base.ClientJoined( client );
 
-		if ( World == null )
-		{
-			SpawnWorld();
-		}
+		if ( GamemodeSystem.Instance.GameWorld is null )
+			GamemodeSystem.Instance.GameWorld = new World();
 
 		GamemodeSystem.Instance?.OnClientJoined( client );
 	}
@@ -62,13 +56,6 @@ public sealed partial class GrubsGame : GameManager
 	public override void FrameSimulate( IClient cl )
 	{
 		base.FrameSimulate( cl );
-	}
-
-	private void SpawnWorld()
-	{
-		Assert.True( Game.IsServer );
-
-		World = new World();
 	}
 
 	[Event.Entity.PostSpawn]

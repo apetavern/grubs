@@ -6,29 +6,81 @@ public partial class FreeForAll : Gamemode
 	public override bool AllowFriendlyFire => true;
 	public override int MinimumPlayers => GrubsConfig.MinimumPlayers;
 
-	[Net]
-	public TimeUntil TimeUntilTurnOver { get; set; }
+	public enum GameState
+	{
+		Waiting,
+		Playing,
+		GameOver
+	}
+	public override string GetGameStateLabel()
+	{
+		return CurrentState switch
+		{
+			GameState.Waiting => "Waiting for game to begin",
+			GameState.Playing => "Game in progress",
+			GameState.GameOver => "Game is over",
+			_ => null,
+		};
+	}
 
 	[Net]
-	public bool MovementOnly { get; set; }
+	public GameState CurrentState { get; set; }
 
+	/// <summary>
+	/// Whether or not the GameWorld modifications have finished transmitting to clients.
+	/// TODO: What if a new player joins?
+	/// </summary>
+	[Net]
+	public bool TerrainReady { get; set; } = false;
+
+	/// <summary>
+	/// The amount of time before the current player's turn is concluded.
+	/// </summary>
+	[Net]
+	public TimeUntil TimeUntilNextTurn { get; set; }
+
+	/// <summary>
+	/// Whether or not the current player has used their turn.
+	/// </summary>
 	[Net]
 	public bool UsedTurn { get; set; }
 
+	/// <summary>
+	/// A list of players, rotated cyclically to rotate through turns.
+	/// </summary>
 	public List<Player> PlayerRotation { get; set; } = new();
 
-	private bool _gameHasStarted = false;
-	private bool _terrainReady = false;
+	/// <summary>
+	/// Whether we have started the game or not.
+	/// </summary>
+	public bool Started { get; set; } = false;
+
+	/// <summary>
+	/// An async task for switching between player turns.
+	/// </summary>
+	public Task NextTurnTask { get; set; }
 
 	internal override void Initialize()
 	{
+		base.Initialize();
 
+		CurrentState = GameState.Waiting;
 	}
 
-	private void Start()
+	internal override void Start()
 	{
-		_gameHasStarted = true;
+		SpawnPlayers();
 
+		CurrentState = GameState.Playing;
+		Started = true;
+	}
+
+	/// <summary>
+	/// Spawn a Player and its Grubs for each client.
+	/// Then, set the ActivePlayer.
+	/// </summary>
+	private void SpawnPlayers()
+	{
 		foreach ( var client in Game.Clients )
 		{
 			var player = new Player();
@@ -38,7 +90,71 @@ public partial class FreeForAll : Gamemode
 			MoveToSpawnpoint( client );
 		}
 
-		ActivePlayer = PlayerRotation.First();
+
+		ActivePlayer = PlayerRotation[0];
+	}
+
+	private void ZoneTrigger()
+	{
+		var grubs = All.OfType<Grub>();
+		foreach ( var grub in grubs )
+		{
+			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+			{
+				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( grub ) )
+					continue;
+
+				zone.Trigger( grub );
+			}
+		}
+	}
+
+	internal override void UseTurn( bool giveMovementGrace = false )
+	{
+		if ( giveMovementGrace )
+		{
+			TimeUntilNextTurn = GrubsConfig.MovementGracePeriod;
+		}
+		else
+		{
+			UsedTurn = true;
+		}
+	}
+
+	private async Task NextTurn()
+	{
+		TurnIsChanging = true;
+		await CleanupTurn();
+
+		// TODO: Check win condition.
+
+		RotateActivePlayer();
+		UsedTurn = false;
+		TimeUntilNextTurn = GrubsConfig.TurnDuration;
+		TurnIsChanging = false;
+
+		await SetupTurn();
+	}
+
+	/// <summary>
+	/// Handle cleaning up the existing player's turn.
+	/// </summary>
+	private async Task CleanupTurn()
+	{
+		ActivePlayer.EndTurn();
+		await GameTask.DelaySeconds( 1f );
+
+		// TODO: Handle Grub deaths.
+
+		// TODO: Handle potential crate spawns.
+	}
+
+	/// <summary>
+	/// Handle setting up the new player's turn.
+	/// </summary>
+	private async Task SetupTurn()
+	{
+		// TODO: I am not sure.
 	}
 
 	private void RotateActivePlayer()
@@ -59,69 +175,62 @@ public partial class FreeForAll : Gamemode
 
 		foreach ( var grub in player.Grubs )
 		{
-			var spawnPos = GrubsGame.Instance.World.FindSpawnLocation();
+			var spawnPos = GameWorld.FindSpawnLocation();
 			grub.Position = spawnPos;
 		}
 	}
 
 	[Event.Tick.Server]
-	public void Tick()
+	private void Tick()
 	{
-		// Check if the terrain is done sending modifications to clients.
-		if ( !_terrainReady )
+		//
+		// Waiting Logic
+		//
+		if ( CurrentState is GameState.Waiting )
 		{
-			if ( GrubsGame.Instance.World.CsgWorld.TimeSinceLastModification > 1f )
+			if ( !TerrainReady )
 			{
-				_terrainReady = true;
+				TerrainReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
+			}
+
+			if ( PlayerCount >= MinimumPlayers && TerrainReady && !Started )
+			{
+				Start();
 			}
 		}
 
-		if ( PlayerCount >= MinimumPlayers && !_gameHasStarted && _terrainReady )
+		//
+		// Playing Logic
+		//
+		if ( CurrentState is GameState.Playing )
 		{
-			Start();
-		}
-
-		if ( _gameHasStarted && TimeUntilTurnOver < 0f )
-		{
-			ActivePlayer?.EndTurn();
-			RotateActivePlayer();
-			TimeUntilTurnOver = GrubsConfig.TurnDuration;
-		}
-
-		var grubs = All.OfType<Grub>();
-		foreach ( var grub in grubs )
-		{
-			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+			if ( TimeUntilNextTurn <= 0f && !UsedTurn )
 			{
-				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( grub ) )
-					continue;
-
-				zone.Trigger( grub );
+				UseTurn();
 			}
+
+			if ( UsedTurn && (NextTurnTask is null || NextTurnTask.IsCompleted) )
+			{
+				NextTurnTask = NextTurn();
+			}
+
+			ZoneTrigger();
+			CameraTarget = ActivePlayer.ActiveGrub;
 		}
 
-		CameraTarget = ActivePlayer?.ActiveGrub;
+		//
+		// Game Over Logic
+		//
+		if ( CurrentState is GameState.GameOver )
+		{
+
+		}
 
 		if ( Debug )
 		{
 			var lineOffset = 19;
-			DebugOverlay.ScreenText( $"ActivePlayer {ActivePlayer}", lineOffset++ );
-			DebugOverlay.ScreenText( $"ActiveGrub {ActivePlayer?.ActiveGrub}", lineOffset++ );
-			DebugOverlay.ScreenText( $"Turn Timer {TimeUntilTurnOver}", lineOffset++ );
-			DebugOverlay.ScreenText( $"", lineOffset++ );
-		}
-	}
-
-	internal override void UseTurn( bool giveMovementGrace )
-	{
-		if ( giveMovementGrace )
-		{
-			TimeUntilTurnOver = GrubsConfig.MovementGracePeriod;
-			MovementOnly = true;
-		}
-		else
-		{
-			UsedTurn = true;
+			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
+			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
 		}
 	}
 
@@ -131,9 +240,8 @@ public partial class FreeForAll : Gamemode
 		if ( GamemodeSystem.Instance is not FreeForAll ffa )
 			return;
 
-		ffa.ActivePlayer?.EndTurn();
-		ffa.RotateActivePlayer();
-		ffa.TimeUntilTurnOver = GrubsConfig.TurnDuration;
+		ffa.NextTurnTask = null;
+		ffa.UseTurn();
 	}
 
 	[ConVar.Replicated( "gr_debug_ffa" )]

@@ -14,6 +14,17 @@ public partial class Gamemode : Entity
 	[Net]
 	public Entity CameraTarget { get; set; }
 
+	[Net]
+	public World GameWorld { get; set; }
+
+	/// <summary>
+	/// Whether or not the turn is currently changing.
+	/// </summary>
+	[Net]
+	public bool TurnIsChanging { get; set; }
+
+	public bool Initialized { get; set; } = false;
+
 	public virtual bool AllowMovement => true;
 	public virtual bool AllowDamage => true;
 	public virtual bool AllowFriendlyFire => false;
@@ -35,7 +46,15 @@ public partial class Gamemode : Entity
 		return -1;
 	}
 
-	internal virtual void Initialize() { }
+	internal virtual void Initialize()
+	{
+		if ( Initialized )
+			return;
+
+		Initialized = true;
+	}
+
+	internal virtual void Start() { }
 
 	internal virtual void OnClientJoined( IClient client )
 	{
@@ -55,5 +74,5 @@ public partial class Gamemode : Entity
 
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
-	internal virtual void UseTurn( bool giveMovementGrace ) { }
+	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
 }

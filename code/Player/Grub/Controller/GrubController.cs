@@ -215,7 +215,13 @@ public partial class GrubController : EntityComponent<Grub>
 	// A Grub can only move left and right for now.
 	public float GetWishInput()
 	{
-		return Grub.IsTurn ? Grub.MoveInput : 0f;
+		return ShouldAllowMovement() ? Grub.MoveInput : 0f;
+	}
+
+	public bool ShouldAllowMovement()
+	{
+		var gm = GamemodeSystem.Instance;
+		return Grub.IsTurn && !gm.TurnIsChanging && gm.AllowMovement;
 	}
 
 	public Vector3 GetWishVelocity( bool zeroPitch = false )

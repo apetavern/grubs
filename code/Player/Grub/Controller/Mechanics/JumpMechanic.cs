@@ -16,7 +16,7 @@ public partial class JumpMechanic : ControllerMechanic
 
 	protected override bool ShouldStart()
 	{
-		if ( !Grub.IsTurn )
+		if ( !Controller.ShouldAllowMovement() )
 			return false;
 
 		// If we already pressed jump once, and we didn't hit it again within

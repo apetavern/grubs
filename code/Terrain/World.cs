@@ -36,6 +36,7 @@ public partial class World : Entity
 	public void Reset()
 	{
 		CsgWorld?.Delete();
+		CsgBackground?.Delete();
 
 		CsgWorld = new CsgSolid( GridSize );
 		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
@@ -140,8 +141,7 @@ public partial class World : Entity
 	[ConCmd.Admin( "gr_regen" )]
 	public static void RegenWorld()
 	{
-		var game = GrubsGame.Instance;
-		var world = game.World;
+		var world = GamemodeSystem.Instance.GameWorld;
 
 		world.Reset();
 	}

@@ -69,8 +69,7 @@ public partial class Grub : AnimatedEntity, INameTag
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
 
-		var game = GrubsGame.Instance;
-		var world = game.World;
+		var world = GamemodeSystem.Instance.GameWorld;
 
 		if ( Game.IsServer && Input.Down( InputButton.Flashlight ) && IsTurn )
 		{

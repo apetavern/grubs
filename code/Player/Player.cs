@@ -88,7 +88,7 @@ public partial class Player : Entity
 	public void RotateGrubs()
 	{
 		var current = Grubs[0];
-		current.EyeRotation = Rotation.Identity;
+		// current.EyeRotation = Rotation.Identity;
 
 		Grubs.RemoveAt( 0 );
 		Grubs.Add( current );

@@ -37,7 +37,7 @@ public static partial class ExplosionHelper
 
 		var min = new Vector3( position.x - radius, -32, position.z - radius );
 		var max = new Vector3( position.x + radius, 32, position.z + radius );
-		GrubsGame.Instance.World.SubtractDefault( min, max );
+		GamemodeSystem.Instance.GameWorld.SubtractDefault( min, max );
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );

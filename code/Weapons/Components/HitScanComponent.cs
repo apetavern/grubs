@@ -97,7 +97,7 @@ public partial class HitScanComponent : WeaponComponent
 			if ( PenetrateWorld )
 			{
 				tr = tr.WithoutTags( "solid" );
-				GrubsGame.Instance.World.SubtractLine( startPos, endPos, ExplosionRadius, rotation );
+				GamemodeSystem.Instance.GameWorld.SubtractLine( startPos, endPos, ExplosionRadius, rotation );
 			}
 
 			TraceResult[] result;
