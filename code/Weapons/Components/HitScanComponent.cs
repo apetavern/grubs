@@ -89,7 +89,6 @@ public partial class HitScanComponent : WeaponComponent
 		// Trace the shot.
 		var tr = Trace.Ray( startPos, endPos ).Ignore( Grub );
 
-
 		if ( Game.IsServer )
 		{
 			Vector3 particleEndPosition = endPos;
@@ -147,26 +146,32 @@ public partial class HitScanComponent : WeaponComponent
 		Grub.SetAnimParameter( "fire", true );
 	}
 
-	private void TraceHitSingle( TraceResult tr )
+	private bool TraceHitSingle( TraceResult tr )
 	{
 		if ( tr.Hit )
 		{
 			if ( tr.Entity is Grub grub )
 			{
 				HitGrub( grub, tr.Direction );
+				return false;
 			}
 			else if ( tr.Entity is CsgSolid )
 			{
 				ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionDamage );
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	private void TraceHitMultiple( TraceResult[] results )
 	{
 		for ( int i = 0; i < results.Length; i++ )
 		{
-			TraceHitSingle( results[i] );
+			var hitTerrain = TraceHitSingle( results[i] );
+			if ( hitTerrain )
+				return;
 		}
 	}
 

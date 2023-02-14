@@ -226,7 +226,7 @@ public partial class FreeForAll : Gamemode
 
 		}
 
-		if ( Debug )
+		if ( Debug && CurrentState is GameState.Playing )
 		{
 			var lineOffset = 19;
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
