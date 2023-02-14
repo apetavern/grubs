@@ -1,0 +1,36 @@
+@namespace Grubs
+
+<root>
+    <label class="charges">@Weapon.Charges</label>
+</root>
+
+@code {
+    public Weapon Weapon { get; set; }
+}
+
+<style>
+    InventoryItem {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(165, 165, 165, 0.37);
+        border-radius: 4px;
+        transition: all 0.1s ease-out;
+
+        .charges {
+            position: absolute;
+            bottom: 0px;
+            font-family: Londrina Solid;
+            font-size: 20px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        &:hover {
+            transform: scale(1.25);
+        }
+        
+        &:active {
+            transform: scale(1);
+        }
+    }
+</style>

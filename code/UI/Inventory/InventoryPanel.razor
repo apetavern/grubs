@@ -1,0 +1,33 @@
+@using Sandbox;
+
+@namespace Grubs
+
+@if (Game.LocalPawn is not Player player)
+{
+    return;
+}
+
+<root>
+    <div class="items">
+        @foreach(var weapon in player.Inventory.Weapons)
+        {
+            <InventoryItem Weapon=@weapon />
+        }
+    </div>
+</root>
+
+<style>
+    InventoryPanel {
+        position: absolute;
+        bottom: 125px;
+        width: 320px;
+        transition: all 150ms ease;
+        right: 100px;
+        pointer-events: all;
+
+        .items {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+</style>
