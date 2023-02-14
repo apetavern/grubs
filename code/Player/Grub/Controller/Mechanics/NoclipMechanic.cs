@@ -1,10 +1,11 @@
 #if DEBUG
+
 namespace Grubs;
 
 public class NoclipMechanic : ControllerMechanic
 {
 	[ConCmd.Admin( "noclip" )]
-	private static void Noclip()
+	private static void ToggleNoclip()
 	{
 		if ( ConsoleSystem.Caller.Pawn is not Player player )
 			return;
@@ -22,11 +23,13 @@ public class NoclipMechanic : ControllerMechanic
 	protected override void OnStart()
 	{
 		Grub.Components.RemoveAny<AirMoveMechanic>();
+		Grub.Components.RemoveAny<UnstuckMechanic>();
 	}
 
 	protected override void OnStop()
 	{
 		Grub.Components.GetOrCreate<AirMoveMechanic>();
+		Grub.Components.GetOrCreate<UnstuckMechanic>();
 	}
 
 	protected override void Simulate()
