@@ -3,7 +3,7 @@
 public partial class WeaponComponent : EntityComponent<Weapon>
 {
 	protected Weapon Weapon => Entity;
-	protected Grub Grub => Weapon.Owner as Grub;
+	protected Grub Grub => Weapon.Grub;
 	protected Player Player => Grub.Player;
 
 	[Net, Predicted]

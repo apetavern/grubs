@@ -40,6 +40,8 @@ public partial class Weapon : AnimatedEntity
 	[Net]
 	public int Ammo { get; set; }
 
+	public Grub Grub => Owner as Grub;
+
 	public Weapon()
 	{
 		Transmit = TransmitType.Always;
@@ -53,6 +55,8 @@ public partial class Weapon : AnimatedEntity
 	public override void Simulate( IClient client )
 	{
 		SimulateComponents( client );
+
+		DetermineWeaponVisibility();
 	}
 
 	public void OnDeploy( Grub grub )
@@ -74,6 +78,11 @@ public partial class Weapon : AnimatedEntity
 		{
 			component.Simulate( client );
 		}
+	}
+
+	private void DetermineWeaponVisibility()
+	{
+		EnableDrawing = Grub.Controller.ShouldShowWeapon();
 	}
 
 	/// <summary>

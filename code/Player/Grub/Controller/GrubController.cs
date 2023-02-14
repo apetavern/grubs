@@ -19,6 +19,8 @@ public partial class GrubController : EntityComponent<Grub>
 	public Vector3 BaseVelocity { get; set; }
 	public Vector3 LastVelocity { get; set; }
 	public Vector3 WishVelocity { get; set; }
+
+	[Net]
 	public Entity GroundEntity { get; set; }
 	public Entity LastGroundEntity { get; set; }
 	public Vector3 GroundNormal { get; set; }
@@ -222,6 +224,11 @@ public partial class GrubController : EntityComponent<Grub>
 	{
 		var gm = GamemodeSystem.Instance;
 		return Grub.IsTurn && !gm.TurnIsChanging && gm.AllowMovement;
+	}
+
+	public bool ShouldShowWeapon()
+	{
+		return Grub.IsTurn && Velocity.IsNearlyZero( 2.5f ) && IsGrounded;
 	}
 
 	public Vector3 GetWishVelocity( bool zeroPitch = false )
