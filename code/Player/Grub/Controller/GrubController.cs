@@ -117,7 +117,7 @@ public partial class GrubController : EntityComponent<Grub>
 			return true;
 
 #if DEBUG
-		if ( GetMechanic<NoclipMechanic>().IsActive )
+		if ( GetMechanic<NoclipMechanic>()?.IsActive ?? false )
 			return false;
 #endif
 

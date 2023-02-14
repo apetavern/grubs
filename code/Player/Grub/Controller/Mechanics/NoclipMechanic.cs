@@ -3,10 +3,8 @@ namespace Grubs;
 
 public class NoclipMechanic : ControllerMechanic
 {
-	private bool _isEnabled = false;
-
 	[ConCmd.Admin( "noclip" )]
-	public static void Noclip()
+	private static void Noclip()
 	{
 		if ( ConsoleSystem.Caller.Pawn is not Player player )
 			return;
@@ -18,10 +16,8 @@ public class NoclipMechanic : ControllerMechanic
 		noclip._isEnabled = !noclip._isEnabled;
 	}
 
-	protected override bool ShouldStart()
-	{
-		return _isEnabled;
-	}
+	private bool _isEnabled = false;
+	protected override bool ShouldStart() => _isEnabled;
 
 	protected override void OnStart()
 	{
