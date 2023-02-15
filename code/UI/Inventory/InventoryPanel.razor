@@ -7,7 +7,7 @@
     return;
 }
 
-<root>
+<root class="@(_isOpen ? "open" : "")">
     <div class="items">
         @foreach(var weapon in player.Inventory.Weapons)
         {
@@ -16,14 +16,35 @@
     </div>
 </root>
 
+@code {
+    private bool _isOpen = false;
+
+    public override void Tick()
+    {
+        if (Input.Pressed(InputButton.Menu))
+            _isOpen = !_isOpen;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(_isOpen);
+    }
+}
+
 <style>
     InventoryPanel {
         position: absolute;
         bottom: 125px;
         width: 320px;
-        transition: all 150ms ease;
-        right: 100px;
-        pointer-events: all;
+        transition: all 150ms ease-out;
+        opacity: 0;
+        right: -200px;
+
+        &.open {
+            pointer-events: all;
+            right: 100px;
+            opacity: 1;
+        }
 
         .items {
             flex-wrap: wrap;
