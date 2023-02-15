@@ -31,12 +31,8 @@
     public override void Tick()
     {
         if (Game.LocalPawn is not Player player || !player.IsTurn)
-        {
             _isOpen = false;
-            return;
-        }
-
-        if (Input.Pressed(InputButton.Menu))
+        else if (Input.Pressed(InputButton.Menu))
             _isOpen = !_isOpen;
     }
 
