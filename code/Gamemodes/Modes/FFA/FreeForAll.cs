@@ -40,12 +40,6 @@ public partial class FreeForAll : Gamemode
 	public TimeUntil TimeUntilNextTurn { get; set; }
 
 	/// <summary>
-	/// Whether or not the current player has used their turn.
-	/// </summary>
-	[Net]
-	public bool UsedTurn { get; set; }
-
-	/// <summary>
 	/// A list of players, rotated cyclically to rotate through turns.
 	/// </summary>
 	public List<Player> PlayerRotation { get; set; } = new();

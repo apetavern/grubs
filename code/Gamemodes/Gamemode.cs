@@ -23,6 +23,12 @@ public partial class Gamemode : Entity
 	[Net]
 	public bool TurnIsChanging { get; set; }
 
+	/// <summary>
+	/// Whether or not the current player has used their turn.
+	/// </summary>
+	[Net]
+	public bool UsedTurn { get; set; }
+
 	public bool Initialized { get; set; } = false;
 
 	public virtual bool AllowMovement => true;

@@ -33,6 +33,12 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		if ( ShouldStart() )
 			OnStart();
 
+		if ( Weapon.CurrentUses >= Weapon.Charges || GamemodeSystem.Instance.UsedTurn )
+			return;
+
+		if ( !Grub.Controller.ShouldShowWeapon() )
+			return;
+
 		if ( Input.Down( InputButton.PrimaryAttack ) && Weapon.FiringType is FiringType.Charged )
 		{
 			IncreaseCharge();
@@ -43,8 +49,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			IsFiring = true;
 			Weapon.CurrentUses++;
 		}
-
-		Log.Info( Weapon.CurrentUses );
 	}
 
 	public void Fire()
