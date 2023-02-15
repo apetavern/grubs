@@ -1,5 +1,6 @@
 ﻿namespace Grubs;
 
+[Category( "Weapon" )]
 public class Projectile : ModelEntity
 {
 	public bool HasBeenDamaged => false;

@@ -2,6 +2,7 @@
 
 namespace Grubs;
 
+[Category( "Terrain" )]
 public partial class World : Entity
 {
 	[Net]

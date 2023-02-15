@@ -1,5 +1,6 @@
 ﻿namespace Sandbox.Csg
 {
+	[Category( "Terrain" )]
 	public partial class CsgSolid : ModelEntity
 	{
 		[ConVar.Server( "csg_log", Help = "If set, CSG timing info is logged" )]

@@ -1,6 +1,6 @@
 ﻿namespace Grubs;
 
-[Prefab]
+[Prefab, Category( "Weapon" )]
 public partial class Weapon : AnimatedEntity
 {
 	/// <summary>
