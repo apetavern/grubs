@@ -36,16 +36,14 @@ public partial class Inventory : EntityComponent<Player>
 
 	public void SetActiveWeapon( Weapon weapon )
 	{
-		var currentWeapon = ActiveWeapon;
-		if ( currentWeapon.IsValid() )
-		{
-			currentWeapon.OnHolster();
+		if ( ActiveWeapon == weapon )
+			return;
 
-			ActiveWeapon = null;
-		}
+		if ( ActiveWeapon.IsValid() )
+			ActiveWeapon.OnHolster();
 
 		ActiveWeapon = weapon;
-		weapon?.OnDeploy( Entity.ActiveGrub );
+		ActiveWeapon?.OnDeploy( Entity.ActiveGrub );
 	}
 
 	public void UnsetActiveWeapon()
@@ -65,9 +63,9 @@ public partial class Inventory : EntityComponent<Player>
 
 	public void Simulate( IClient client )
 	{
-		if ( Entity.ActiveWeaponInput.IsValid() && ActiveWeapon != Entity.ActiveWeaponInput )
+		if ( Entity.ActiveWeaponInput is Weapon weapon )
 		{
-			SetActiveWeapon( Entity.ActiveWeaponInput as Weapon );
+			SetActiveWeapon( weapon );
 			Entity.ActiveWeaponInput = null;
 		}
 
