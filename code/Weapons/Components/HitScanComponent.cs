@@ -138,6 +138,8 @@ public partial class HitScanComponent : WeaponComponent
 			{
 				FireEffects();
 			}
+
+			FireFinished();
 		}
 	}
 

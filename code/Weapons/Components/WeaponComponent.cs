@@ -41,7 +41,10 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		if ( Input.Released( InputButton.PrimaryAttack ) )
 		{
 			IsFiring = true;
+			Weapon.CurrentUses++;
 		}
+
+		Log.Info( Weapon.CurrentUses );
 	}
 
 	public void Fire()
@@ -62,6 +65,12 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public virtual void FireInstant() { }
 
 	public virtual void FireCharged() { }
+
+	public virtual void FireFinished()
+	{
+		if ( Weapon.CurrentUses >= Weapon.Charges )
+			GamemodeSystem.Instance.UseTurn( true );
+	}
 
 	private void IncreaseCharge()
 	{

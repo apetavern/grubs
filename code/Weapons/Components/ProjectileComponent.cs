@@ -83,6 +83,8 @@ public class ProjectileComponent : WeaponComponent
 
 		IsFiring = false;
 		Charge = 0;
+
+		FireFinished();
 	}
 
 

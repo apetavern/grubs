@@ -22,6 +22,9 @@ public partial class Weapon : AnimatedEntity
 	[Prefab, Net]
 	public int Charges { get; set; } = 0;
 
+	[Net]
+	public int CurrentUses { get; set; } = 0;
+
 	/// <summary>
 	/// Whether the aim reticle should be shown for this weapon.
 	/// </summary>
@@ -73,6 +76,8 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster()
 	{
 		EnableDrawing = false;
+
+		CurrentUses = 0;
 	}
 
 	protected void SimulateComponents( IClient client )

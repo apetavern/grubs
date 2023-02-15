@@ -52,11 +52,13 @@ public partial class MeleeComponent : WeaponComponent
 
 		IsFiring = false;
 		Grub.SetAnimParameter( "fire", true );
+		FireFinished();
 	}
 
 	public override void FireCharged()
 	{
 		Grub.SetAnimParameter( "fire", true );
+		FireFinished();
 	}
 
 	private Dictionary<Grub, Vector3> GetGrubsInSwing()
