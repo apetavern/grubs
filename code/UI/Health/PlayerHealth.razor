@@ -4,12 +4,22 @@
     <img src="avatar:@Player.Client.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
         <label text=@Player.Client.Name class="name" />
-        <div class="health"><div class="fill" style="background-color: @Player.Color.Hex;" /></div>
+        <div class="health"><div class="fill" style="background-color: @Player.Color.Hex; width: @(GetHealthPercentage())%;" /></div>
     </div>
 </root>
 
 @code {
     public Player Player { get; set; }
+
+    public int GetHealthPercentage()
+    {
+        return Player.GetGrubsHealth() / Player.Grubs.Count;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player.GetGrubsHealth());
+    }
 }
 
 <style>
@@ -34,8 +44,9 @@
             background-color: rgba(235, 235, 235, 0.24);
 
             .fill {
+                transition: all 750ms ease-in-out;
                 height: 100%;
-                width: 75%;
+                width: 100%;
                 border-radius: 4px;
             }
         }
