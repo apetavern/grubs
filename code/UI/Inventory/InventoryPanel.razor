@@ -12,11 +12,13 @@
     <div class="items">
         @foreach(var weapon in player.Inventory.Weapons)
         {
+            var isAvailable = weapon.Charges > 0;
             <InventoryItem
              Weapon=@weapon
+             IsAvailable=@isAvailable
              @onmouseover=@(() => _hoveredWeapon = weapon)
              @onmouseout=@(() => _hoveredWeapon = null)
-             @onclick=@(() => { if (weapon.Charges > 0) player.Inventory.SetActiveWeapon(weapon); })
+             @onclick=@(() => { if (isAvailable) player.Inventory.SetActiveWeapon(weapon); })
             />
         }
     </div>
@@ -28,7 +30,12 @@
 
     public override void Tick()
     {
-        @* TODO: Might be able to class bind, pressed might behave differently though. *@
+        if (Game.LocalPawn is not Player player || !player.IsTurn)
+        {
+            _isOpen = false;
+            return;
+        }
+
         if (Input.Pressed(InputButton.Menu))
             _isOpen = !_isOpen;
     }

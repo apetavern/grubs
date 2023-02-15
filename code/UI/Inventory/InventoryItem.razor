@@ -1,23 +1,24 @@
 @namespace Grubs
 
-<root class="@(Weapon.Charges <= 0 ? "disabled" : "")">
+<root class="@(!IsAvailable ? "disabled" : "")">
     <img src=@Weapon.Icon class="icon" />
     <label class="charges">@Weapon.Charges</label>
 </root>
 
 @code {
     public Weapon Weapon { get; set; }
+    public bool IsAvailable { get; set; }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Weapon.Charges);
+        return HashCode.Combine(IsAvailable);
     }
 }
 
 <style>
     InventoryItem {
-        width: 50px;
-        height: 50px;
+        width: 65px;
+        height: 65px;
         background-color: rgba(235, 235, 235, 0.24));
         border-radius: 4px;
         transition: all 0.1s ease-out;
