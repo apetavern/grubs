@@ -1,19 +1,24 @@
 @namespace Grubs
 
-<root>
+<root class="@(Weapon.Charges <= 0 ? "disabled" : "")">
     <img src=@Weapon.Icon class="icon" />
     <label class="charges">@Weapon.Charges</label>
 </root>
 
 @code {
     public Weapon Weapon { get; set; }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Weapon.Charges);
+    }
 }
 
 <style>
     InventoryItem {
         width: 50px;
         height: 50px;
-        background-color: rgba(165, 165, 165, 0.37);
+        background-color: rgba(235, 235, 235, 0.24));
         border-radius: 4px;
         transition: all 0.1s ease-out;
 
@@ -33,10 +38,17 @@
 
         &:hover {
             transform: scale(1.25);
+            cursor: pointer;
         }
         
         &:active {
             transform: scale(1);
+        }
+
+        &.disabled {
+            transform: scale(1);
+            opacity: 0.6;
+            cursor: default;
         }
     }
 </style>

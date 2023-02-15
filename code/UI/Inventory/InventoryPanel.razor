@@ -16,6 +16,7 @@
              Weapon=@weapon
              @onmouseover=@(() => _hoveredWeapon = weapon)
              @onmouseout=@(() => _hoveredWeapon = null)
+             @onclick=@(() => { if (weapon.Charges > 0) player.Inventory.SetActiveWeapon(weapon); })
             />
         }
     </div>
@@ -27,6 +28,7 @@
 
     public override void Tick()
     {
+        @* TODO: Might be able to class bind, pressed might behave differently though. *@
         if (Input.Pressed(InputButton.Menu))
             _isOpen = !_isOpen;
     }
