@@ -1,6 +1,7 @@
 @namespace Grubs
 
 <root>
+    <img src=@Weapon.Icon class="icon" />
     <label class="charges">@Weapon.Charges</label>
 </root>
 
@@ -23,6 +24,11 @@
             font-size: 20px;
             color: white;
             text-shadow: 2px 2px 0px black;
+        }
+
+        .icon {
+            height: 100%;
+            width: 100%;
         }
 
         &:hover {

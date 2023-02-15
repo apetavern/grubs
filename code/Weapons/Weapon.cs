@@ -40,7 +40,7 @@ public partial class Weapon : AnimatedEntity
 	[Net]
 	public int Ammo { get; set; }
 
-	[Prefab, ResourceType( "png" )]
+	[Prefab, Net, ResourceType( "png" )]
 	public string Icon { get; set; }
 
 	public Grub Grub => Owner as Grub;

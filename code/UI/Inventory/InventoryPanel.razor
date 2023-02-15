@@ -8,15 +8,21 @@
 }
 
 <root class="@(_isOpen ? "open" : "")">
+    <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
         @foreach(var weapon in player.Inventory.Weapons)
         {
-            <InventoryItem Weapon=@weapon />
+            <InventoryItem
+             Weapon=@weapon
+             @onmouseover=@(() => _hoveredWeapon = weapon)
+             @onmouseout=@(() => _hoveredWeapon = null)
+            />
         }
     </div>
 </root>
 
 @code {
+    private Weapon _hoveredWeapon;
     private bool _isOpen = false;
 
     public override void Tick()
@@ -27,7 +33,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(_isOpen);
+        return HashCode.Combine(_isOpen, _hoveredWeapon?.GetHashCode());
     }
 }
 
@@ -39,11 +45,19 @@
         transition: all 150ms ease-out;
         opacity: 0;
         right: -200px;
+        flex-direction: column;
 
         &.open {
             pointer-events: all;
             right: 100px;
             opacity: 1;
+        }
+
+        .name {
+            font-family: Londrina Solid;
+            font-size: 40px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
         }
 
         .items {
