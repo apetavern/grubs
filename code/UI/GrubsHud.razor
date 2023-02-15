@@ -1,0 +1,18 @@
+@namespace Grubs
+@inherits RootPanel
+
+<root>
+    <InventoryPanel />
+</root>
+
+@code 
+{
+    public GrubsHud()
+    {
+        Game.AssertClient();
+        Game.RootPanel = this;
+
+        _ = new AimReticle();
+        _ = new NameTagManager();
+    } 
+}

@@ -99,6 +99,10 @@
       "HoldPose": {
         "Type": "HoldPose",
         "Value": "\u0022Throwable\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/grenade/grenade.vmdl_c.png\u0022"
       }
     }
   }

@@ -79,6 +79,10 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/baseballbat/baseballbat.vmdl_c.png\u0022"
       }
     }
   }

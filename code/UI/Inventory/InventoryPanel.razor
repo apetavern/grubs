@@ -1,0 +1,73 @@
+@using Sandbox;
+
+@namespace Grubs
+
+@if (Game.LocalPawn is not Player player)
+{
+    return;
+}
+
+<root class="@(_isOpen ? "open" : "")">
+    <label class="name" text=@_hoveredWeapon?.Name />
+    <div class="items">
+        @foreach(var weapon in player.Inventory.Weapons)
+        {
+            var isAvailable = weapon.Charges > 0;
+            <InventoryItem
+             Weapon=@weapon
+             IsAvailable=@isAvailable
+             @onmouseover=@(() => _hoveredWeapon = weapon)
+             @onmouseout=@(() => _hoveredWeapon = null)
+             @onclick=@(() => { if (isAvailable) player.Inventory.SetActiveWeapon(weapon); })
+            />
+        }
+    </div>
+</root>
+
+@code {
+    private Weapon _hoveredWeapon;
+    private bool _isOpen = false;
+
+    public override void Tick()
+    {
+        if (Game.LocalPawn is not Player player || !player.IsTurn)
+            _isOpen = false;
+        else if (Input.Pressed(InputButton.Menu))
+            _isOpen = !_isOpen;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(_isOpen, _hoveredWeapon?.GetHashCode());
+    }
+}
+
+<style>
+    InventoryPanel {
+        position: absolute;
+        bottom: 125px;
+        width: 320px;
+        transition: all 150ms ease-out;
+        opacity: 0;
+        right: -200px;
+        flex-direction: column;
+
+        &.open {
+            pointer-events: all;
+            right: 100px;
+            opacity: 1;
+        }
+
+        .name {
+            font-family: Londrina Solid;
+            font-size: 40px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .items {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+</style>

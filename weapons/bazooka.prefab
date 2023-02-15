@@ -91,6 +91,10 @@
       "HoldPose": {
         "Type": "HoldPose",
         "Value": "\u0022Bazooka\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/bazooka/bazooka.vmdl_c.png\u0022"
       }
     }
   }

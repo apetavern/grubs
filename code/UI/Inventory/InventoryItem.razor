@@ -1,0 +1,49 @@
+@namespace Grubs
+
+<root class="@(!IsAvailable ? "disabled" : "")">
+    <label class="charges">@Weapon.Charges</label>
+    <img src=@Weapon.Icon />
+</root>
+
+@code {
+    public Weapon Weapon { get; set; }
+    public bool IsAvailable { get; set; }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(IsAvailable);
+    }
+}
+
+<style>
+    InventoryItem {
+        width: 65px;
+        height: 65px;
+        background-color: rgba(235, 235, 235, 0.24));
+        border-radius: 4px;
+        transition: all 0.1s ease-out;
+
+        .charges {
+            position: absolute;
+            font-family: Londrina Solid;
+            font-size: 20px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        &:hover {
+            transform: scale(1.25);
+            cursor: pointer;
+        }
+        
+        &:active {
+            transform: scale(1.1);
+        }
+
+        &.disabled {
+            transform: scale(1);
+            opacity: 0.6;
+            cursor: default;
+        }
+    }
+</style>
