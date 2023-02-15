@@ -65,6 +65,12 @@ public partial class Inventory : EntityComponent<Player>
 
 	public void Simulate( IClient client )
 	{
+		if ( Entity.ActiveWeaponInput.IsValid() && ActiveWeapon != Entity.ActiveWeaponInput )
+		{
+			SetActiveWeapon( Entity.ActiveWeaponInput as Weapon );
+			Entity.ActiveWeaponInput = null;
+		}
+
 		ActiveWeapon?.Simulate( client );
 	}
 

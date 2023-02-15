@@ -14,6 +14,9 @@ public partial class Player
 	[ClientInput]
 	public float LookInput { get; set; }
 
+	[ClientInput]
+	public Entity ActiveWeaponInput { get; set; }
+
 	public override void BuildInput()
 	{
 		if ( Input.StopProcessing )

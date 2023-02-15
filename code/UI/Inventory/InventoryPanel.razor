@@ -18,7 +18,7 @@
              IsAvailable=@isAvailable
              @onmouseover=@(() => _hoveredWeapon = weapon)
              @onmouseout=@(() => _hoveredWeapon = null)
-             @onclick=@(() => { if (isAvailable) player.Inventory.SetActiveWeapon(weapon); })
+             @onclick=@(() => { if (isAvailable) player.ActiveWeaponInput = weapon; })
             />
         }
     </div>
