@@ -139,6 +139,25 @@ public partial class FreeForAll : Gamemode
 		await GameTask.DelaySeconds( 1f );
 
 		// TODO: Handle Grub deaths.
+		bool rerun;
+		do
+		{
+			rerun = false;
+			foreach ( var grub in All.OfType<Grub>() )
+			{
+				if ( grub.LifeState == LifeState.Dead )
+					continue;
+
+				if ( !grub.HasBeenDamaged )
+					continue;
+
+				rerun = true;
+				if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+					await grub.DeathTask;
+
+				await GameTask.Delay( 300 );
+			}
+		} while ( rerun );
 
 		// TODO: Handle potential crate spawns.
 	}

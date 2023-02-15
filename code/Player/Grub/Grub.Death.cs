@@ -54,6 +54,35 @@ public partial class Grub
 		}
 	}
 
+	public bool ApplyDamage()
+	{
+		if ( !HasBeenDamaged )
+			return false;
+
+		ShouldTakeDamage = true;
+
+		var totalDamage = 0f;
+		var damageInfo = new List<DamageInfo>();
+		while ( DamageQueue.TryDequeue( out var dmgInfo ) )
+		{
+			damageInfo.Add( dmgInfo );
+			totalDamage += dmgInfo.Damage;
+		}
+
+		var dead = false;
+		if ( totalDamage >= Health )
+		{
+			dead = true;
+			DeathReason = DeathReason.FindReason( this, damageInfo );
+		}
+
+		TakeDamage( DamageInfo.Generic( Math.Min( totalDamage, Health ) ) );
+
+		ShouldTakeDamage = false;
+		HasBeenDamaged = false;
+		return dead;
+	}
+
 	public override void OnKilled()
 	{
 		if ( LifeState is LifeState.Dying or LifeState.Dead )
