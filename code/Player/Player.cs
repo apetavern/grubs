@@ -120,7 +120,7 @@ public partial class Player : Entity
 		Inventory.UnsetActiveWeapon();
 	}
 
-	public int GetGrubsHealth()
+	public int GetTotalGrubHealth()
 	{
 		return (int)Grubs.Sum( g => g.Health );
 	}
