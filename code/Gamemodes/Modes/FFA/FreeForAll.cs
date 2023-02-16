@@ -81,6 +81,7 @@ public partial class FreeForAll : Gamemode
 			client.Pawn = player;
 			PlayerRotation.Add( player );
 
+			PlayerList.Add( player );
 			MoveToSpawnpoint( client );
 		}
 
@@ -279,6 +280,16 @@ public partial class FreeForAll : Gamemode
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
 			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
 		}
+	}
+
+	internal override void OnClientDisconnect( IClient client, NetworkDisconnectionReason reason )
+	{
+		base.OnClientDisconnect( client, reason );
+
+		if ( client.Pawn is not Player player )
+			return;
+
+		PlayerList.Remove( player );
 	}
 
 	[ConCmd.Admin( "gr_skip_turn" )]
