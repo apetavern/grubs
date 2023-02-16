@@ -30,7 +30,7 @@ public static class GrubsConfig
 	/// The max time in seconds that a player has to make their turn.
 	/// </summary>
 	[ConVar.Replicated( "turn_duration" )]
-	public static int TurnDuration { get; set; } = 30;
+	public static int TurnDuration { get; set; } = 45;
 
 	/// <summary>
 	/// The percent chance that a <see cref="WeaponCrate"/> will spawn every turn.

@@ -283,6 +283,7 @@ public partial class FreeForAll : Gamemode
 		if ( CurrentState is GameState.GameOver )
 		{
 			Log.Info( "Game is over." );
+			CameraTarget = PlayerList.Where( player => !player.Dead ).First();
 		}
 
 		if ( Debug && CurrentState is GameState.Playing )
