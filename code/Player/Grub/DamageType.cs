@@ -18,9 +18,17 @@ public enum DamageType
 	/// </summary>
 	Fall,
 	/// <summary>
+	/// Shot by a HitScan weapon.
+	/// </summary>
+	HitScan,
+	/// <summary>
 	/// Touching an instant kill zone.
 	/// </summary>
 	KillTrigger,
+	/// <summary>
+	/// Killed by a melee weapon.
+	/// </summary>
+	Melee,
 	/// <summary>
 	/// Admin abuse.
 	/// </summary>

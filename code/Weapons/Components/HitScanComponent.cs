@@ -185,6 +185,6 @@ public partial class HitScanComponent : WeaponComponent
 			Attacker = Grub,
 			Damage = Damage,
 			Position = grub.Position,
-		} );
+		}.WithTag( "hitscan" ) );
 	}
 }

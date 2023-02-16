@@ -63,6 +63,7 @@ public partial class Grub : AnimatedEntity, INameTag
 	{
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
+		Gravestone?.Simulate( client );
 	}
 
 	public override void FrameSimulate( IClient client )

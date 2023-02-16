@@ -138,7 +138,6 @@ public partial class FreeForAll : Gamemode
 		ActivePlayer.EndTurn();
 		await GameTask.DelaySeconds( 1f );
 
-		// TODO: Handle Grub deaths.
 		bool rerun;
 		do
 		{
@@ -173,7 +172,7 @@ public partial class FreeForAll : Gamemode
 	private void RotateActivePlayer()
 	{
 		var current = ActivePlayer;
-		ActivePlayer.RotateGrubs();
+		ActivePlayer.PickNextGrub();
 
 		PlayerRotation.RemoveAt( 0 );
 		PlayerRotation.Add( current );

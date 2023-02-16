@@ -85,6 +85,15 @@ public partial class Player : Entity
 		ActiveGrub = Grubs.First();
 	}
 
+	public void PickNextGrub()
+	{
+		do
+		{
+			RotateGrubs();
+			ActiveGrub = Grubs[0];
+		} while ( ActiveGrub.LifeState == LifeState.Dead );
+	}
+
 	public void RotateGrubs()
 	{
 		var current = Grubs[0];
@@ -92,8 +101,6 @@ public partial class Player : Entity
 
 		Grubs.RemoveAt( 0 );
 		Grubs.Add( current );
-
-		ActiveGrub = Grubs[0];
 	}
 
 	public void EndTurn()
