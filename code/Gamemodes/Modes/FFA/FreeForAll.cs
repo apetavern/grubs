@@ -81,6 +81,7 @@ public partial class FreeForAll : Gamemode
 			client.Pawn = player;
 			PlayerRotation.Add( player );
 
+			PlayerList.Add( player );
 			MoveToSpawnpoint( client );
 		}
 
@@ -118,9 +119,8 @@ public partial class FreeForAll : Gamemode
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
-		await CleanupTurn();
-
-		// TODO: Check win condition.
+		if ( await CleanupTurn() )
+			return;
 
 		RotateActivePlayer();
 		UsedTurn = false;
@@ -133,33 +133,45 @@ public partial class FreeForAll : Gamemode
 	/// <summary>
 	/// Handle cleaning up the existing player's turn.
 	/// </summary>
-	private async Task CleanupTurn()
+	private async ValueTask<bool> CleanupTurn()
 	{
 		ActivePlayer.EndTurn();
 		await GameTask.DelaySeconds( 1f );
 
-		// TODO: Handle Grub deaths.
+		await HandleGrubDeaths();
+
+		// TODO: Handle potential crate spawns.
+
+		return CheckWinConditions();
+	}
+
+	private async Task HandleGrubDeaths()
+	{
 		bool rerun;
 		do
 		{
 			rerun = false;
-			foreach ( var grub in All.OfType<Grub>() )
+			foreach ( var player in PlayerList )
 			{
-				if ( grub.LifeState == LifeState.Dead )
+				if ( player.Dead )
 					continue;
 
-				if ( !grub.HasBeenDamaged )
-					continue;
+				foreach ( var grub in player.Grubs )
+				{
+					if ( grub.LifeState == LifeState.Dead )
+						continue;
 
-				rerun = true;
-				if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
-					await grub.DeathTask;
+					if ( !grub.HasBeenDamaged )
+						continue;
 
-				await GameTask.Delay( 300 );
+					rerun = true;
+					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+						await grub.DeathTask;
+
+					await GameTask.Delay( 300 );
+				}
 			}
 		} while ( rerun );
-
-		// TODO: Handle potential crate spawns.
 	}
 
 	/// <summary>
@@ -170,15 +182,49 @@ public partial class FreeForAll : Gamemode
 		// TODO: I am not sure.
 	}
 
+	private bool CheckWinConditions()
+	{
+		var deadPlayers = 0;
+		Player lastPlayerAlive;
+
+		foreach ( var player in All.OfType<Player>() )
+		{
+			if ( player.Dead )
+			{
+				deadPlayers++;
+				continue;
+			}
+
+			lastPlayerAlive = player;
+		}
+
+		// TODO: Pass win/lose/draw information.
+		if ( deadPlayers == PlayerCount )
+		{
+			// Draw
+			CurrentState = GameState.GameOver;
+			return true;
+		}
+
+		if ( deadPlayers == PlayerCount - 1 )
+		{
+			// 1 Player remaining
+			CurrentState = GameState.GameOver;
+			return true;
+		}
+
+		return false;
+	}
+
 	private void RotateActivePlayer()
 	{
 		var current = ActivePlayer;
-		ActivePlayer.RotateGrubs();
 
 		PlayerRotation.RemoveAt( 0 );
 		PlayerRotation.Add( current );
 
 		ActivePlayer = PlayerRotation[0];
+		ActivePlayer.PickNextGrub();
 	}
 
 	internal override void MoveToSpawnpoint( IClient client )
@@ -236,7 +282,8 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.GameOver )
 		{
-
+			Log.Info( "Game is over." );
+			CameraTarget = PlayerList.Where( player => !player.Dead ).First();
 		}
 
 		if ( Debug && CurrentState is GameState.Playing )
@@ -245,6 +292,16 @@ public partial class FreeForAll : Gamemode
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
 			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
 		}
+	}
+
+	internal override void OnClientDisconnect( IClient client, NetworkDisconnectionReason reason )
+	{
+		base.OnClientDisconnect( client, reason );
+
+		if ( client.Pawn is not Player player )
+			return;
+
+		PlayerList.Remove( player );
 	}
 
 	[ConCmd.Admin( "gr_skip_turn" )]

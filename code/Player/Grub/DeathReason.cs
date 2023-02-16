@@ -63,6 +63,12 @@ public struct DeathReason
 					// Died from hitting a kill zone.
 					case DamageType.KillTrigger:
 						return $"{Grub.Name} escaped the simulation";
+					// Died from a HitScan weapon.
+					case DamageType.HitScan:
+						return $"{Grub.Name} was shot in the head.";
+					// Died from a Melee weapon.
+					case DamageType.Melee:
+						return $"{Grub.Name} took a blunt object to the face.";
 				}
 				break;
 			// Assisted by an explosion.
@@ -85,6 +91,12 @@ public struct DeathReason
 						return FirstInfo!.Value.Attacker == Grub
 							? $"{Grub.Name} sent themself to the shadow realm"
 							: $"{Grub.Name} got sent to the shadow realm by {FirstInfo.Value.Attacker.Name}";
+					// Killed from a HitScan weapon after an explosion (this shouldn't happen).
+					case DamageType.HitScan:
+						return $"{Grub.Name} has experienced a series of unfortunate events.";
+					// Killed from a Melee weapon after an explosion (this shouldn't happen).
+					case DamageType.Melee:
+						return $"{Grub.Name} shouldn't have skipped gym class.";
 				}
 				break;
 			// Assisted by a fall.
@@ -100,6 +112,44 @@ public struct DeathReason
 					// Fell into a kill zone (this shouldn't happen).
 					case DamageType.KillTrigger:
 						return $"{Grub.Name} escaped the simulation";
+					// Fell into a HitScan weapon.
+					case DamageType.HitScan:
+						return $"{Grub.Name} was sniped in mid-air.";
+					// Fell into a Melee weapon hit (this shouldn't happen).
+					case DamageType.Melee:
+						return $"{Grub.Name} got kicked in the stomach.";
+				}
+				break;
+			// Shot by a HitScan weapon.
+			case DamageType.HitScan:
+				switch ( SecondReason )
+				{
+					case DamageType.Explosion:
+						return $"{Grub.Name} got shot so hard they blew up.";
+					case DamageType.Fall:
+						return $"{Grub.Name} suffered an unfortunate fall.";
+					case DamageType.KillTrigger:
+						return $"{Grub.Name} was no-scoped into hell.";
+					case DamageType.HitScan:
+						return $"{Grub.Name} was made into swiss cheese.";
+					case DamageType.Melee:
+						return $"{Grub.Name} was pulverized.";
+				}
+				break;
+			// Hit with a Melee weapon.
+			case DamageType.Melee:
+				switch ( SecondReason )
+				{
+					case DamageType.Explosion:
+						return $"{Grub.Name} was punted into an explosive situation.";
+					case DamageType.Fall:
+						return $"{Grub.Name} got Sparta kicked.";
+					case DamageType.KillTrigger:
+						return $"{Grub.Name} was sent to the Nether.";
+					case DamageType.HitScan:
+						return $"{Grub.Name} is definitely dead.";
+					case DamageType.Melee:
+						return $"{Grub.Name} got fisted.";
 				}
 				break;
 		}
@@ -150,6 +200,18 @@ public struct DeathReason
 						lastReason = reason;
 						reasonInfo = damageInfo;
 						reason = DamageType.Fall;
+						break;
+					case "hitscan":
+						lastReasonInfo = reasonInfo;
+						lastReason = reason;
+						reasonInfo = damageInfo;
+						reason = DamageType.HitScan;
+						break;
+					case "melee":
+						lastReasonInfo = reasonInfo;
+						lastReason = reason;
+						reasonInfo = damageInfo;
+						reason = DamageType.Melee;
 						break;
 					// Hit a kill trigger.
 					case "outofarea":

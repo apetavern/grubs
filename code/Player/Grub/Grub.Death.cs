@@ -7,6 +7,9 @@ public partial class Grub
 	public Task DeathTask { get; set; }
 
 	[Net]
+	public Gravestone Gravestone { get; set; }
+
+	[Net]
 	public bool HasBeenDamaged { get; set; }
 
 	public bool ShouldTakeDamage { get; set; }
@@ -17,17 +20,6 @@ public partial class Grub
 	{
 		if ( !Game.IsServer )
 			return;
-
-		/*		// Quick and temporary method to get rid of a Grub upon falling out of bounds.
-				if ( info.HasTag( "outofarea" ) )
-				{
-					Health = 0;
-					Player.Inventory.UnsetActiveWeapon();
-					EnableDrawing = false;
-					Components.Remove( Controller );
-					LifeState = LifeState.Dead;
-					return;
-				}*/
 
 		if ( !ShouldTakeDamage )
 		{
@@ -47,7 +39,7 @@ public partial class Grub
 
 		Health -= info.Damage;
 
-		if ( Health < 0 )
+		if ( Health <= 0 )
 		{
 			Health = 0;
 			OnKilled();
@@ -107,6 +99,8 @@ public partial class Grub
 		};
 		await GameTask.Delay( 1025 );
 
+		Log.Info( DeathReason.ToString() );
+
 		ExplosionHelper.Explode( Position, this, 50f );
 		plunger.Delete();
 		FinishDie();
@@ -117,7 +111,10 @@ public partial class Grub
 		LifeState = LifeState.Dead;
 		EnableDrawing = false;
 
-		// TODO: Gravestone
-
+		Gravestone = new Gravestone( this )
+		{
+			Owner = this,
+			Parent = this,
+		};
 	}
 }

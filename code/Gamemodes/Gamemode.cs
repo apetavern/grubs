@@ -8,6 +8,13 @@ public partial class Gamemode : Entity
 	[Net]
 	public int PlayerCount { get; private set; }
 
+	/// <summary>
+	/// All players in the game, including dead players.
+	/// Excludes disconnected players.
+	/// </summary>
+	[Net]
+	public IList<Player> PlayerList { get; set; }
+
 	[Net]
 	public Player ActivePlayer { get; set; }
 

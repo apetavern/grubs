@@ -46,7 +46,7 @@ public partial class MeleeComponent : WeaponComponent
 					Attacker = Grub,
 					Damage = Damage,
 					Position = grub.Position,
-				} );
+				}.WithTag( "melee" ) );
 			}
 		}
 

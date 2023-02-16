@@ -12,7 +12,10 @@ public static class DamageInfoExtension
 	/// <returns>The constructed <see cref="DamageInfo"/>.</returns>
 	public static DamageInfo FromExplosion( float damage, Vector3 position, Vector3 force, Entity attacker )
 	{
-		return DamageInfo.FromExplosion( position, force, damage ).WithAttacker( attacker );
+		return DamageInfo
+			.FromExplosion( position, force, damage )
+			.WithTag( "explosion" )
+			.WithAttacker( attacker );
 	}
 
 	/// <summary>

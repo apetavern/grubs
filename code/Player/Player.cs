@@ -8,6 +8,8 @@ public partial class Player : Entity
 	[Net]
 	public Grub ActiveGrub { get; private set; }
 
+	public bool Dead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
+
 	[BindComponent]
 	public Inventory Inventory { get; }
 
@@ -85,6 +87,18 @@ public partial class Player : Entity
 		ActiveGrub = Grubs.First();
 	}
 
+	public void PickNextGrub()
+	{
+		RotateGrubs();
+
+		if ( Grubs[0].LifeState is LifeState.Dead or LifeState.Dying )
+		{
+			RotateGrubs();
+		}
+
+		ActiveGrub = Grubs[0];
+	}
+
 	public void RotateGrubs()
 	{
 		var current = Grubs[0];
@@ -92,8 +106,6 @@ public partial class Player : Entity
 
 		Grubs.RemoveAt( 0 );
 		Grubs.Add( current );
-
-		ActiveGrub = Grubs[0];
 	}
 
 	public void EndTurn()
