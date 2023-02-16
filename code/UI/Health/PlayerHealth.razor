@@ -4,7 +4,12 @@
     <img src="avatar:@Player.Client.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
         <label text=@Player.Client.Name class="name" />
-        <div class="health"><div class="fill" style="background-color: @Player.Color.Hex; width: @(GetHealthPercentage())%;" /></div>
+        <div class="health">
+            <div 
+                class="fill" 
+                style="background: linear-gradient(to top, @Player.Color.Hex, @Player.Color.Lighten(-0.4f).Hex); width: @(GetHealthPercentage())%;" 
+            />
+        </div>
     </div>
 </root>
 

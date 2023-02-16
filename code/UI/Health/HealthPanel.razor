@@ -1,14 +1,8 @@
 @namespace Grubs
 
 <root>
-    @* TODO Let's get the player inside of the game... *@
-    @foreach (var client in Game.Clients)
+    @foreach (var player in GamemodeSystem.Instance.PlayerList)
     {
-        if (client.Pawn is not Player player)
-        {
-            continue;
-        }
-
         <PlayerHealth Player=@player />
     }
 </root>
@@ -16,7 +10,7 @@
 @code {
     protected override int BuildHash()
     {
-        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId));
+        return HashCode.Combine(GamemodeSystem.Instance.PlayerList.HashCombine(p => p.Client.SteamId));
     }
 }
 
