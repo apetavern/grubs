@@ -138,29 +138,40 @@ public partial class FreeForAll : Gamemode
 		ActivePlayer.EndTurn();
 		await GameTask.DelaySeconds( 1f );
 
-		bool rerun;
-		do
-		{
-			rerun = false;
-			foreach ( var grub in All.OfType<Grub>() )
-			{
-				if ( grub.LifeState == LifeState.Dead )
-					continue;
-
-				if ( !grub.HasBeenDamaged )
-					continue;
-
-				rerun = true;
-				if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
-					await grub.DeathTask;
-
-				await GameTask.Delay( 300 );
-			}
-		} while ( rerun );
+		await HandleGrubDeaths();
 
 		// TODO: Handle potential crate spawns.
 
 		return CheckWinConditions();
+	}
+
+	private async Task HandleGrubDeaths()
+	{
+		bool rerun;
+		do
+		{
+			rerun = false;
+			foreach ( var player in PlayerList )
+			{
+				if ( player.Dead )
+					continue;
+
+				foreach ( var grub in player.Grubs )
+				{
+					if ( grub.LifeState == LifeState.Dead )
+						continue;
+
+					if ( !grub.HasBeenDamaged )
+						continue;
+
+					rerun = true;
+					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+						await grub.DeathTask;
+
+					await GameTask.Delay( 300 );
+				}
+			}
+		} while ( rerun );
 	}
 
 	/// <summary>
