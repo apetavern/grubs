@@ -16,6 +16,11 @@ public class Projectile : ModelEntity
 	private string TrailParticle { get; set; } = "";
 	private ProjectileCollisionReaction CollisionReaction { get; set; }
 
+	public Projectile()
+	{
+		Transmit = TransmitType.Always;
+	}
+
 	/// <summary>
 	/// Sets the grub that is the reason for this projectile existing.
 	/// </summary>

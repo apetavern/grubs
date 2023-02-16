@@ -20,8 +20,10 @@ public class PlayerCamera
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
 
+		FindTarget();
+
 		if ( Target is null || !Target.IsValid )
-			SetTarget( player.ActiveGrub );
+			return;
 
 		// Get the center position, plus move the camera up a little bit.
 		var cameraCenter = CenterOnPawn ? Target.Position : Center;
@@ -41,6 +43,44 @@ public class PlayerCamera
 		// Check the last time we panned the camera, update CenterOnPawn if greater than N.
 		if ( !Input.Down( InputButton.SecondaryAttack ) && TimeSinceMousePan > SecondsBeforeReturnFromPan )
 			CenterOnPawn = true;
+	}
+
+	private void FindTarget()
+	{
+		if ( GamemodeSystem.Instance is not Gamemode gm )
+			return;
+
+		if ( gm.TurnIsChanging )
+		{
+			foreach ( var grub in Entity.All.OfType<Grub>() )
+			{
+				if ( grub.LifeState != LifeState.Dying )
+					continue;
+
+				SetTarget( grub );
+				return;
+			}
+		}
+		else
+		{
+			foreach ( var projectile in Entity.All.OfType<Projectile>() )
+			{
+				SetTarget( projectile );
+				return;
+			}
+
+			foreach ( var grub in Entity.All.OfType<Grub>() )
+			{
+				if ( !grub.HasBeenDamaged )
+					continue;
+
+				SetTarget( grub );
+				return;
+			}
+
+			SetTarget( gm.ActivePlayer.ActiveGrub );
+			return;
+		}
 	}
 
 	public void SetTarget( Entity entity )
