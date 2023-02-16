@@ -119,4 +119,9 @@ public partial class Player : Entity
 		ActiveGrub.ActiveWeapon.OnHolster();
 		Inventory.UnsetActiveWeapon();
 	}
+
+	public int GetTotalGrubHealth()
+	{
+		return (int)Grubs.Sum( g => g.Health );
+	}
 }
