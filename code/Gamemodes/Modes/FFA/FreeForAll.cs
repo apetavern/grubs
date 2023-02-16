@@ -118,9 +118,8 @@ public partial class FreeForAll : Gamemode
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
-		await CleanupTurn();
-
-		// TODO: Check win condition.
+		if ( await CleanupTurn() )
+			return;
 
 		RotateActivePlayer();
 		UsedTurn = false;
@@ -133,7 +132,7 @@ public partial class FreeForAll : Gamemode
 	/// <summary>
 	/// Handle cleaning up the existing player's turn.
 	/// </summary>
-	private async Task CleanupTurn()
+	private async ValueTask<bool> CleanupTurn()
 	{
 		ActivePlayer.EndTurn();
 		await GameTask.DelaySeconds( 1f );
@@ -159,6 +158,8 @@ public partial class FreeForAll : Gamemode
 		} while ( rerun );
 
 		// TODO: Handle potential crate spawns.
+
+		return CheckWinConditions();
 	}
 
 	/// <summary>
@@ -167,6 +168,40 @@ public partial class FreeForAll : Gamemode
 	private async Task SetupTurn()
 	{
 		// TODO: I am not sure.
+	}
+
+	private bool CheckWinConditions()
+	{
+		var deadPlayers = 0;
+		Player lastPlayerAlive;
+
+		foreach ( var player in All.OfType<Player>() )
+		{
+			if ( player.Dead )
+			{
+				deadPlayers++;
+				continue;
+			}
+
+			lastPlayerAlive = player;
+		}
+
+		// TODO: Pass win/lose/draw information.
+		if ( deadPlayers == PlayerCount )
+		{
+			// Draw
+			CurrentState = GameState.GameOver;
+			return true;
+		}
+
+		if ( deadPlayers == PlayerCount - 1 )
+		{
+			// 1 Player remaining
+			CurrentState = GameState.GameOver;
+			return true;
+		}
+
+		return false;
 	}
 
 	private void RotateActivePlayer()
@@ -235,7 +270,7 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.GameOver )
 		{
-
+			Log.Info( "Game is over." );
 		}
 
 		if ( Debug && CurrentState is GameState.Playing )

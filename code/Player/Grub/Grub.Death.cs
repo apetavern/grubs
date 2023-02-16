@@ -41,7 +41,6 @@ public partial class Grub
 
 		if ( Health <= 0 )
 		{
-			Log.Info( "asdf" );
 			Health = 0;
 			OnKilled();
 		}
