@@ -87,6 +87,10 @@ public partial class Weapon : AnimatedEntity
 			Ammo--;
 
 		HasFired = false;
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			component.IsFiring = false;
+		}
 	}
 
 	protected void SimulateComponents( IClient client )
