@@ -1,0 +1,42 @@
+@using System.Linq;
+
+@namespace Grubs
+
+<root>
+    @foreach (var player in GamemodeSystem.Instance.PlayerList)
+    {
+        <PlayerInfo Player=@player />
+    }
+</root>
+
+@code {
+    public static PlayerInfoPanel Current;
+    public PlayerInfoPanel() => Current = this;
+
+    public void OnVoicePlayed( IClient client )
+    {
+        ChildrenOfType<PlayerInfo>().FirstOrDefault(e => e.Player.Client.SteamId == client.SteamId)?.OnVoicePlayed();
+    }
+
+    public override void Tick()
+    {
+        // Show the voice indicator if the local client is talking
+        if (Voice.IsRecording)
+            OnVoicePlayed(Game.LocalClient);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GamemodeSystem.Instance.PlayerList.HashCombine(p => p.Client.SteamId));
+    }
+}
+
+<style>
+    PlayerInfoPanel {
+        position: absolute;
+        bottom: 125px;
+        left: 100px;
+        flex-direction: column;
+        gap: 10px;
+    }
+</style>

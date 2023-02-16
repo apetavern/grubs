@@ -11,24 +11,41 @@
             />
         </div>
     </div>
+    <label class="voice-icon" style="opacity: @(_isTalking ? 1 : 0)">record_voice_over</label>
 </root>
 
 @code {
     public Player Player { get; set; }
 
-    public int GetHealthPercentage()
+    private RealTimeSince _timeSincePlayed;
+    private readonly float _voiceTimeout = 0.1f;
+    private bool _isTalking = false;
+
+    public void OnVoicePlayed()
+    {
+        _timeSincePlayed = 0;
+    }
+
+    public override void Tick()
+    {
+        var timeoutInv = 1 - (_timeSincePlayed / _voiceTimeout);
+        timeoutInv = MathF.Min( timeoutInv * 2.0f, 1.0f );
+        _isTalking = timeoutInv > 0;
+    }
+
+    private int GetHealthPercentage()
     {
         return Player.Grubs.Count != 0 ? Player.GetTotalGrubHealth() / Player.Grubs.Count : 0;
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player.GetTotalGrubHealth());
+        return HashCode.Combine(Player.GetTotalGrubHealth(), _isTalking);
     }
 }
 
 <style>
-    PlayerHealth {
+    PlayerInfo {
         .avatar {
             width: 65px;
             height: 65px;
@@ -55,5 +72,29 @@
                 border-radius: 4px;
             }
         }
+
+        .voice-icon {
+            position: absolute;
+            left: -42px;
+            top: -13px;
+            transition: opacity 100ms ease-out;
+
+            font-family: MaterialIcons;
+            font-size: 30px;
+            color: rgb(252, 215, 52);
+            text-shadow: 2px 2px 0px black;
+
+            animation-duration: 1s;
+            animation-name: wiggle;
+            animation-iteration-count: infinite;
+        }
+    }
+
+    @@keyframes wiggle {
+        0% {transform: rotate(0deg);}
+        25% {transform: rotate(-3deg);}
+        50% {transform: rotate(3deg);}
+        75% {transform: rotate(-2deg);}
+        100% {transform: rotate(1deg);}
     }
 </style>
