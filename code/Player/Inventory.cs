@@ -39,6 +39,9 @@ public partial class Inventory : EntityComponent<Player>
 		if ( ActiveWeapon == weapon )
 			return;
 
+		if ( weapon.IsValid() && !weapon.HasAmmo() )
+			return;
+
 		if ( ActiveWeapon.IsValid() )
 			ActiveWeapon.OnHolster();
 

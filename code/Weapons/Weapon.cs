@@ -93,6 +93,11 @@ public partial class Weapon : AnimatedEntity
 		}
 	}
 
+	public bool HasAmmo()
+	{
+		return Ammo != 0;
+	}
+
 	protected void SimulateComponents( IClient client )
 	{
 		foreach ( var component in Components.GetAll<WeaponComponent>() )

@@ -1,13 +1,13 @@
 @namespace Grubs
 
-<root class="@(!IsAvailable ? "disabled" : "")">
+<root class="@(!HasAmmo ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>
     <img src=@Weapon.Icon />
 </root>
 
 @code {
     public Weapon Weapon { get; set; }
-    public bool IsAvailable { get; set; }
+    public bool HasAmmo { get; set; }
 
     protected string GetAmmoString()
     {
@@ -16,7 +16,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(IsAvailable, Weapon.Ammo);
+        return HashCode.Combine(HasAmmo, Weapon.Ammo);
     }
 }
 

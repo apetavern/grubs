@@ -12,13 +12,13 @@
     <div class="items">
         @foreach(var weapon in player.Inventory.Weapons)
         {
-            var isAvailable = weapon.Charges > 0;
+            var hasAmmo = weapon.HasAmmo();
             <InventoryItem
              Weapon=@weapon
-             IsAvailable=@isAvailable
+             HasAmmo=@hasAmmo
              @onmouseover=@(() => _hoveredWeapon = weapon)
              @onmouseout=@(() => _hoveredWeapon = null)
-             @onclick=@(() => { if (isAvailable) player.ActiveWeaponInput = weapon; })
+             @onclick=@(() => { if (hasAmmo) player.ActiveWeaponInput = weapon; })
             />
         }
     </div>
