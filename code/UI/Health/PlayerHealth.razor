@@ -1,0 +1,59 @@
+@namespace Grubs
+
+<root>
+    <img src="avatar:@Player.Client.SteamId" class="avatar" />
+    <div style="flex-direction: column; margin-left: 5px;">
+        <label text=@Player.Client.Name class="name" />
+        <div class="health">
+            <div 
+                class="fill" 
+                style="background: linear-gradient(to top, @Player.Color.Hex, @Player.Color.Lighten(-0.4f).Hex); width: @(GetHealthPercentage())%;" 
+            />
+        </div>
+    </div>
+</root>
+
+@code {
+    public Player Player { get; set; }
+
+    public int GetHealthPercentage()
+    {
+        return Player.Grubs.Count != 0 ? Player.GetTotalGrubHealth() / Player.Grubs.Count : 0;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player.GetTotalGrubHealth());
+    }
+}
+
+<style>
+    PlayerHealth {
+        .avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 4px;
+        }
+
+        .name {
+            font-family: Londrina Solid;
+            font-size: 30px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .health {
+            width: 250px;
+            height: 20px;
+            border-radius: 4px;
+            background-color: rgba(235, 235, 235, 0.24);
+
+            .fill {
+                transition: all 750ms ease-in-out;
+                height: 100%;
+                width: 100%;
+                border-radius: 4px;
+            }
+        }
+    }
+</style>
