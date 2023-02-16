@@ -85,6 +85,8 @@ public partial class Weapon : AnimatedEntity
 
 		if ( HasFired && Ammo > 0 )
 			Ammo--;
+
+		HasFired = false;
 	}
 
 	protected void SimulateComponents( IClient client )
