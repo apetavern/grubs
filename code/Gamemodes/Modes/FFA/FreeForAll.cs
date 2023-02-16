@@ -54,6 +54,11 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	public Task NextTurnTask { get; set; }
 
+	public override float GetTimeRemaining()
+	{
+		return TimeUntilNextTurn;
+	}
+
 	internal override void Initialize()
 	{
 		base.Initialize();
