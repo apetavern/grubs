@@ -34,12 +34,16 @@ public partial class Inventory : EntityComponent<Player>
 			SetActiveWeapon( weapon );
 	}
 
-	public void SetActiveWeapon( Weapon weapon )
+	public void SetActiveWeapon( Weapon weapon, bool forced = false )
 	{
 		if ( ActiveWeapon == weapon )
 			return;
 
 		if ( weapon.IsValid() && !weapon.HasAmmo() )
+			return;
+
+		// disallow switching weapons for a weapon that has already been fired
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.HasFired && !forced )
 			return;
 
 		if ( ActiveWeapon.IsValid() )
@@ -51,7 +55,7 @@ public partial class Inventory : EntityComponent<Player>
 
 	public void UnsetActiveWeapon()
 	{
-		SetActiveWeapon( null );
+		SetActiveWeapon( null, true );
 	}
 
 	public bool IsCarrying( Weapon weapon )

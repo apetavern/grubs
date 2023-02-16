@@ -93,6 +93,17 @@ public partial class Weapon : AnimatedEntity
 		}
 	}
 
+	public bool IsFiring()
+	{
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			if ( component.IsFiring )
+				return true;
+		}
+
+		return false;
+	}
+
 	public bool HasAmmo()
 	{
 		return Ammo != 0;
