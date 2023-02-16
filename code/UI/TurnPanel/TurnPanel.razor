@@ -1,14 +1,8 @@
 @namespace Grubs
 
-@* Should turn duration & current player turn be in ffa? *@
-@if (GamemodeSystem.Instance is not FreeForAll ffa)
-{
-    return;
-}
-
 <root>
-    <label class="timer" text=@FormatAsTimer(ffa.TimeUntilNextTurn) />
-    <label class="name" text=@($"{@ffa.ActivePlayer.Client.Name}'s Turn") />
+    <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
+    <label class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.Client.Name}'s Turn") />
 </root>
 
 @code {
@@ -19,10 +13,7 @@
 
     protected override int BuildHash()
     {
-        if (GamemodeSystem.Instance is FreeForAll ffa)
-            return HashCode.Combine(FormatAsTimer(ffa.TimeUntilNextTurn), ffa.ActivePlayer.Client.SteamId);
-
-        return HashCode.Combine(-1);
+        return HashCode.Combine(FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), GamemodeSystem.Instance.ActivePlayer.Client.SteamId);
     }
 }
 
