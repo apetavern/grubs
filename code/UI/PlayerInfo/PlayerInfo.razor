@@ -84,17 +84,17 @@
             color: rgb(252, 215, 52);
             text-shadow: 2px 2px 0px black;
 
-            animation-duration: 2s;
-            animation-name: bounce;
+            animation-duration: 1s;
+            animation-name: wiggle;
             animation-iteration-count: infinite;
-
-            @@keyframes bounce {
-                0% { transform: rotate(-45deg); }
-                25% { transform: translateY(-10px); }
-                50% { transform: translateY(0px); }
-                75% { transform: translateY(10px); }
-                100% { transform: translateY(0px); }
-            }
         }
+    }
+
+    @@keyframes wiggle {
+        0% {transform: rotate(0deg);}
+        25% {transform: rotate(-3deg);}
+        50% {transform: rotate(3deg);}
+        75% {transform: rotate(-2deg);}
+        100% {transform: rotate(1deg);}
     }
 </style>
