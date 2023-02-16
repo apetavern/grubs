@@ -49,10 +49,15 @@ public class ProjectileComponent : WeaponComponent
 	{
 		Log.Info( "Fire Charged: " + Charge );
 
+		var position = Weapon.Position.WithY( 0f );
+		var muzzle = Weapon.GetAttachment( "muzzle" );
+		if ( muzzle is not null )
+			position = muzzle.Value.Position.WithY( 0f );
+
 		var projectile = new Projectile()
 			.WithGrub( Grub )
 			.WithModel( ProjectileModel )
-			.WithPosition( Weapon.Position.WithY( 0f ) )
+			.WithPosition( position )
 			.WithSpeed( ProjectileSpeed )
 			.WithExplosionRadius( ProjectileExplosionRadius )
 			.SetCollisionReaction( ProjectileCollisionReaction.Explosive );
@@ -68,9 +73,9 @@ public class ProjectileComponent : WeaponComponent
 		}
 		else
 		{
-			projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Weapon.Position.WithY( 0f ), 7f );
-			var desiredPosition = Weapon.Position.WithY( 0 ) + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
-			var tr = Trace.Ray( Weapon.Position.WithY( 0 ), desiredPosition ).Ignore( Weapon.Owner ).Run();
+			projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, position, 7f );
+			var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
+			var tr = Trace.Ray( position, desiredPosition ).Ignore( Weapon.Owner ).Run();
 			projectile.Position = tr.EndPosition;
 			projectile.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * Charge * ProjectileSpeed).WithY( 0f );
 		}
