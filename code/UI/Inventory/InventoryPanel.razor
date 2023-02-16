@@ -7,7 +7,7 @@
     return;
 }
 
-<root class="@(_isOpen ? "open" : "")">
+<root class="@(RequestOpen() ? "open" : "")">
     <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
         @foreach(var weapon in player.Inventory.Weapons)
@@ -26,19 +26,11 @@
 
 @code {
     private Weapon _hoveredWeapon;
-    private bool _isOpen = false;
-
-    public override void Tick()
-    {
-        if (Game.LocalPawn is not Player player || !player.IsTurn)
-            _isOpen = false;
-        else if (Input.Pressed(InputButton.Menu))
-            _isOpen = !_isOpen;
-    }
+    private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down(InputButton.Menu);
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(_isOpen, _hoveredWeapon?.GetHashCode());
+        return HashCode.Combine(RequestOpen(), _hoveredWeapon?.GetHashCode());
     }
 }
 
