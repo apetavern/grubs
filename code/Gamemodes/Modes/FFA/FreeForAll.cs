@@ -219,12 +219,12 @@ public partial class FreeForAll : Gamemode
 	private void RotateActivePlayer()
 	{
 		var current = ActivePlayer;
-		ActivePlayer.PickNextGrub();
 
 		PlayerRotation.RemoveAt( 0 );
 		PlayerRotation.Add( current );
 
 		ActivePlayer = PlayerRotation[0];
+		ActivePlayer.PickNextGrub();
 	}
 
 	internal override void MoveToSpawnpoint( IClient client )

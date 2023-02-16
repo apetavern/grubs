@@ -89,11 +89,14 @@ public partial class Player : Entity
 
 	public void PickNextGrub()
 	{
-		do
+		RotateGrubs();
+
+		if ( Grubs[0].LifeState is LifeState.Dead or LifeState.Dying )
 		{
 			RotateGrubs();
-			ActiveGrub = Grubs[0];
-		} while ( ActiveGrub.LifeState == LifeState.Dead );
+		}
+
+		ActiveGrub = Grubs[0];
 	}
 
 	public void RotateGrubs()
