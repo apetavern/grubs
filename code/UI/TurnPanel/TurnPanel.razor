@@ -1,6 +1,11 @@
 @namespace Grubs
 
-<root>
+@if (GamemodeSystem.Instance is null || !GamemodeSystem.Instance.ActivePlayer.IsValid())
+{
+    return;
+}
+
+<root class="@(GamemodeSystem.Instance.TurnIsChanging ? "hide" : "")">
     <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
     <label class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.Client.Name}'s Turn") />
 </root>
@@ -8,12 +13,19 @@
 @code {
     private string FormatAsTimer(float time)
     {
-        return TimeSpan.FromSeconds( time.CeilToInt() ).ToString( @"ss" );
+        return TimeSpan.FromSeconds( time.CeilToInt() ).TotalSeconds.ToString();
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), GamemodeSystem.Instance.ActivePlayer.Client.SteamId);
+        if (GamemodeSystem.Instance is null)
+            return HashCode.Combine(-1);
+
+        return HashCode.Combine(
+            FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), 
+            GamemodeSystem.Instance.ActivePlayer?.Client?.SteamId,
+            GamemodeSystem.Instance.TurnIsChanging
+        );
     }
 }
 
@@ -25,7 +37,8 @@
         transform: translateX(-50%) translateY(-50%);
         flex-direction: column;
         align-items: center;
-        width: 1000px;
+        width: 300px;
+        transition: opacity 150ms ease-in;
 
         .timer, .name {
             font-family: Londrina Solid;
@@ -41,7 +54,7 @@
         }
 
         &.hide {
-
+            opacity: 0;
         }
     }
 </style>
