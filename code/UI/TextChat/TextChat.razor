@@ -1,0 +1,70 @@
+@namespace Grubs
+
+<root>
+	<div class="canvas" @ref=Canvas />
+	<TextEntry @ref=Input onsubmit=@Submit onblur=@Close />
+</root>
+
+<style>
+	TextChat {
+		position: absolute;
+		left: 100px;
+		bottom: 500px;
+		z-index: 100;
+		flex-direction: column;
+		width: 505px;
+		max-height: 350px;
+		font-size: 16px;
+		pointer-events: none;
+		transition: all 0.1s ease, border 0s ease;
+
+		textentry {
+			transition: opacity 0.1s ease;
+			flex-shrink: 0;
+			opacity: 0;
+			border-radius: 4px;
+		}
+
+		.placeholder {
+			color: #c0cee7;
+		}
+
+		.content-label {
+			margin-left: 16px;
+		}
+
+		.placeholder, .content-label {
+			font-family: Londrina Solid;
+			font-size: 20px;
+			color: white;
+			text-shadow: 2px 2px 0px black;
+			font-weight: 300;
+			margin-top: 10px;
+		}
+
+		.canvas {
+			flex-direction: column;
+			align-items: flex-start;
+			overflow: scroll;
+		}
+
+		&.open {
+			pointer-events: all;
+			bottom: 475px;
+			border-radius: 4 4 0 0;
+
+			textentry {
+				opacity: 0.9;
+				width: 100%;
+				cursor: text;
+			}
+
+			.canvas {
+				TextChatEntry {
+					transition: opacity 0.1s ease;
+					opacity: 0.9;
+				}
+			}
+		}
+	}
+</style>
