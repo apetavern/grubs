@@ -58,6 +58,11 @@ public sealed partial class GrubsGame : GameManager
 		base.FrameSimulate( cl );
 	}
 
+	public override void OnVoicePlayed( IClient client )
+	{
+		PlayerInfoPanel.Current?.OnVoicePlayed( client );
+	}
+
 	[Event.Entity.PostSpawn]
 	public void PostEntitySpawn()
 	{
