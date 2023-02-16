@@ -116,7 +116,6 @@ public partial class Player : Entity
 		if ( ActiveGrub.ActiveWeapon is null )
 			return;
 
-		ActiveGrub.ActiveWeapon.OnHolster();
 		Inventory.UnsetActiveWeapon();
 	}
 

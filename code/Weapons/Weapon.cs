@@ -43,6 +43,9 @@ public partial class Weapon : AnimatedEntity
 	[Net]
 	public int Ammo { get; set; }
 
+	[Net]
+	public bool HasFired { get; set; } = false;
+
 	[Prefab, Net, ResourceType( "png" )]
 	public string Icon { get; set; }
 
@@ -56,6 +59,8 @@ public partial class Weapon : AnimatedEntity
 	public override void Spawn()
 	{
 		EnableDrawing = false;
+
+		Ammo = DefaultAmmoAmount;
 	}
 
 	public override void Simulate( IClient client )
@@ -76,8 +81,10 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster()
 	{
 		EnableDrawing = false;
-
 		CurrentUses = 0;
+
+		if ( HasFired && Ammo > 0 )
+			Ammo--;
 	}
 
 	protected void SimulateComponents( IClient client )

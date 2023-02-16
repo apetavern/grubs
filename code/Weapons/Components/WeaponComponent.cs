@@ -53,6 +53,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public void Fire()
 	{
+		Weapon.HasFired = true;
+
 		switch ( Weapon.FiringType )
 		{
 			case FiringType.Instant:
