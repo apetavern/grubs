@@ -244,6 +244,15 @@ public partial class FreeForAll : Gamemode
 		}
 	}
 
+	private bool CheckCurrentPlayerFiring()
+	{
+		var weapon = ActivePlayer.ActiveGrub.ActiveWeapon;
+		if ( weapon is null )
+			return false;
+
+		return weapon.IsFiring();
+	}
+
 	[Event.Tick.Server]
 	private void Tick()
 	{
@@ -279,6 +288,8 @@ public partial class FreeForAll : Gamemode
 			}
 
 			ZoneTrigger();
+			AllowMovement = !CheckCurrentPlayerFiring();
+
 			CameraTarget = ActivePlayer.ActiveGrub;
 		}
 

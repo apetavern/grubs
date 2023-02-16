@@ -38,7 +38,12 @@ public partial class Gamemode : Entity
 
 	public bool Initialized { get; set; } = false;
 
-	public virtual bool AllowMovement => true;
+	/// <summary>
+	/// Whether or not movement is currently allowed.
+	/// </summary>
+	[Net]
+	public bool AllowMovement { get; set; }
+
 	public virtual bool AllowDamage => true;
 	public virtual bool AllowFriendlyFire => false;
 
