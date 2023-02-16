@@ -27,6 +27,9 @@ public class ProjectileComponent : WeaponComponent
 	[Prefab]
 	public float ProjectileForceMultiplier { get; set; } = 1.0f;
 
+	[Prefab]
+	public float ProjectileRadius { get; set; } = 1.0f;
+
 	public override bool ShouldStart()
 	{
 		return Grub.IsTurn && Grub.Controller.IsGrounded;
@@ -73,7 +76,7 @@ public class ProjectileComponent : WeaponComponent
 		}
 		else
 		{
-			projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, position, 7f );
+			projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, position, ProjectileRadius );
 			var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
 			var tr = Trace.Ray( position, desiredPosition ).Ignore( Weapon.Owner ).Run();
 			projectile.Position = tr.EndPosition;

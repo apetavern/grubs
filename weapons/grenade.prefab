@@ -52,6 +52,10 @@
           "ProjectilePhysicsType": {
             "Type": "PhysicsType",
             "Value": "\u0022Rolling\u0022"
+          },
+          "ProjectileRadius": {
+            "Type": "Single",
+            "Value": "7"
           }
         }
       }
