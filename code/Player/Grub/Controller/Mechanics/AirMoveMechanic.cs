@@ -14,7 +14,7 @@ public class AirMoveMechanic : ControllerMechanic
 	{
 		var ctrl = Controller;
 		ctrl.Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
-		ctrl.Velocity -= new Vector3( 0, 0, ctrl.BaseVelocity.z ) * Time.Delta;
+		ctrl.Velocity += new Vector3( 0, 0, ctrl.BaseVelocity.z ) * Time.Delta;
 		ctrl.BaseVelocity = ctrl.BaseVelocity.WithZ( 0 );
 
 		var groundedAtStart = GroundEntity.IsValid();
