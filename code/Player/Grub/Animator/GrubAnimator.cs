@@ -14,6 +14,10 @@ public class GrubAnimator : EntityComponent<Grub>
 		grub.SetAnimParameter( "aimangle", grub.EyeRotation.Pitch() * -grub.Facing );
 		grub.SetAnimParameter( "velocity", ctrl.GetWishVelocity().Length );
 
+		var airMove = ctrl.GetMechanic<AirMoveMechanic>();
+		if ( airMove is not null )
+			grub.SetAnimParameter( "hardfall", airMove.IsHardFalling );
+
 		var holdPose = HoldPose.None;
 		if ( grub.IsTurn && grub.ActiveWeapon is not null && ctrl.ShouldShowWeapon() )
 			holdPose = grub.ActiveWeapon.HoldPose;
