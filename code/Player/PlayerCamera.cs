@@ -14,13 +14,15 @@ public class PlayerCamera
 	private Entity Target { get; set; }
 	private Entity LastTarget { get; set; }
 	private TimeSince TimeSinceTargetChanged { get; set; }
+	private TimeUntil TimeUntilCameraUnlocked { get; set; }
 
 	public virtual void UpdateCamera( Player player )
 	{
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
 
-		FindTarget();
+		if ( TimeUntilCameraUnlocked <= 0 )
+			FindTarget();
 
 		if ( Target is null || !Target.IsValid )
 			return;
@@ -50,11 +52,20 @@ public class PlayerCamera
 		if ( GamemodeSystem.Instance is not Gamemode gm )
 			return;
 
+		if ( gm.CameraTarget is not null )
+		{
+			SetTarget( gm.CameraTarget, 1f );
+			return;
+		}
+
 		if ( gm.TurnIsChanging )
 		{
 			foreach ( var grub in Entity.All.OfType<Grub>() )
 			{
 				if ( grub.LifeState != LifeState.Dying )
+					continue;
+
+				if ( grub.LifeState is LifeState.Dead )
 					continue;
 
 				SetTarget( grub );
@@ -69,24 +80,20 @@ public class PlayerCamera
 				return;
 			}
 
-			foreach ( var grub in Entity.All.OfType<Grub>() )
-			{
-				if ( !grub.HasBeenDamaged )
-					continue;
-
-				SetTarget( grub );
-				return;
-			}
-
 			SetTarget( gm.ActivePlayer.ActiveGrub );
 			return;
 		}
 	}
 
-	public void SetTarget( Entity entity )
+	public void SetTarget( Entity entity, float duration = 0 )
 	{
 		if ( entity == Target )
 			return;
+
+		if ( duration > 0 )
+		{
+			TimeUntilCameraUnlocked = duration;
+		}
 
 		LastTarget = Target;
 		Target = entity;

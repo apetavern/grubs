@@ -173,7 +173,10 @@ public partial class FreeForAll : Gamemode
 					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
 						await grub.DeathTask;
 
-					await GameTask.Delay( 300 );
+					CameraTarget = grub;
+					// TODO: Send an event to the UI for grub damage worldhud.
+					await GameTask.Delay( 1000 );
+					CameraTarget = null;
 				}
 			}
 		} while ( rerun );
@@ -277,6 +280,7 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.Playing )
 		{
+
 			if ( TimeUntilNextTurn <= 0f && !UsedTurn )
 			{
 				UseTurn();
