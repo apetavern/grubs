@@ -13,6 +13,8 @@ public class GrubAnimator : EntityComponent<Grub>
 		grub.SetAnimParameter( "grounded", ctrl.IsGrounded );
 		grub.SetAnimParameter( "aimangle", grub.EyeRotation.Pitch() * -grub.Facing );
 		grub.SetAnimParameter( "velocity", ctrl.GetWishVelocity().Length );
+		grub.SetAnimParameter( "lowhp", grub.Health <= 20f );
+		grub.SetAnimParameter( "explode", grub.LifeState == LifeState.Dying );
 
 		var airMove = ctrl.GetMechanic<AirMoveMechanic>();
 		if ( airMove is not null )
