@@ -67,7 +67,7 @@ public partial class MeleeComponent : WeaponComponent
 			return null;
 
 		var ray = new Ray( Grub.EyePosition + HitOffset, Grub.Facing * Grub.EyeRotation.Forward );
-		var trs = Trace.Ray( ray, HitSize.x ).Ignore( Grub ).RunAll();
+		var trs = Trace.Ray( ray, HitSize.x ).Ignore( Grub ).WithoutTags( "dead" ).RunAll();
 
 		var grubsHitToDirection = new Dictionary<Grub, Vector3>();
 

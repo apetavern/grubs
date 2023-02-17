@@ -12,6 +12,7 @@ public partial class Grub
 	[Net]
 	public bool HasBeenDamaged { get; set; }
 
+	[Net]
 	public bool ShouldTakeDamage { get; set; }
 
 	public Queue<DamageInfo> DamageQueue { get; set; } = new();
@@ -108,8 +109,12 @@ public partial class Grub
 
 	private void FinishDie()
 	{
+		Log.Info( $"{Name} has successfully died." );
+
 		LifeState = LifeState.Dead;
 		EnableDrawing = false;
+		Tags.Remove( "player" );
+		Tags.Add( "dead" );
 
 		Gravestone = new Gravestone( this )
 		{

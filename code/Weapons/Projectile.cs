@@ -1,7 +1,7 @@
 ﻿namespace Grubs;
 
 [Category( "Weapon" )]
-public class Projectile : ModelEntity
+public partial class Projectile : ModelEntity
 {
 	public bool HasBeenDamaged => false;
 
@@ -18,6 +18,13 @@ public class Projectile : ModelEntity
 
 	public Projectile()
 	{
+		Transmit = TransmitType.Always;
+	}
+
+	public override void Spawn()
+	{
+		base.Spawn();
+
 		Transmit = TransmitType.Always;
 	}
 
@@ -157,7 +164,15 @@ public class Projectile : ModelEntity
 	public Projectile Finish()
 	{
 		Health = 1;
+		SetCameraTarget( To.Everyone );
 		return this;
+	}
+
+	[ClientRpc]
+	public void SetCameraTarget()
+	{
+		var player = Game.LocalPawn as Player;
+		player.Camera?.SetTarget( this );
 	}
 
 	/// <summary>
@@ -219,7 +234,7 @@ public class Projectile : ModelEntity
 		Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
 		var helper = new MoveHelper( Position, Velocity );
-		helper.Trace = helper.Trace.Size( 12f ).WithAnyTags( "player", "solid" );
+		helper.Trace = helper.Trace.Size( 12f ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" );
 		helper.TryMove( Time.Delta );
 		Velocity = helper.Velocity;
 		Position = helper.Position;

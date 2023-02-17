@@ -71,7 +71,6 @@ public partial class Player : Entity
 		if ( Camera is null )
 			Camera = new PlayerCamera();
 
-		Camera?.SetTarget( GamemodeSystem.Instance.CameraTarget );
 		Camera?.UpdateCamera( this );
 	}
 
@@ -91,10 +90,22 @@ public partial class Player : Entity
 	{
 		RotateGrubs();
 
+		var debugMsg = $"List of living Grubs for {Client.Name}: ";
+		foreach ( var grub in Grubs )
+		{
+			if ( grub.LifeState == LifeState.Alive )
+			{
+				debugMsg += $"{grub.Name}, ";
+			}
+		}
+		Log.Info( debugMsg.TrimEnd( ',' ) );
+
 		if ( Grubs[0].LifeState is LifeState.Dead or LifeState.Dying )
 		{
 			RotateGrubs();
 		}
+
+		Log.Info( $"Selected Grub {Grubs[0].Name} for {Client.Name} with LifeState {LifeState}" );
 
 		ActiveGrub = Grubs[0];
 	}

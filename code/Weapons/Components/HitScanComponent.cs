@@ -87,7 +87,7 @@ public partial class HitScanComponent : WeaponComponent
 		}
 
 		// Trace the shot.
-		var tr = Trace.Ray( startPos, endPos ).Ignore( Grub );
+		var tr = Trace.Ray( startPos, endPos ).WithoutTags( "dead" ).Ignore( Grub );
 
 		if ( Game.IsServer )
 		{

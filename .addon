@@ -382,6 +382,11 @@
         "Minimum": 1,
         "Maximum": 4
       }
-    ]
+    ],
+    "CsProjName": "",
+    "Summary": "A worms-inspired artillery game for s\u0026box with randomly generated levels.",
+    "Description": "Grubs in 2023! Who knew.",
+    "Public": false,
+    "ReplaceTags": ""
   }
 }
