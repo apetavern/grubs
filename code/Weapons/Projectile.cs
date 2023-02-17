@@ -164,15 +164,7 @@ public partial class Projectile : ModelEntity
 	public Projectile Finish()
 	{
 		Health = 1;
-		SetCameraTarget( To.Everyone );
 		return this;
-	}
-
-	[ClientRpc]
-	public void SetCameraTarget()
-	{
-		var player = Game.LocalPawn as Player;
-		player.Camera?.SetTarget( this );
 	}
 
 	/// <summary>
