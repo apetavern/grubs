@@ -49,10 +49,11 @@ public class AirMoveMechanic : ControllerMechanic
 
 	private void CheckFallDamage()
 	{
+		IsHardFalling = GroundEntity is null && FallVelocity > FallVelocityDamageThreshold && Grub.IsTurn;
+
 		if ( Grub.LifeState is LifeState.Dead || FallVelocity < FallPunchThreshold || Grub.GetWaterLevel() >= 1f )
 			return;
 
-		IsHardFalling = GroundEntity is null && FallVelocity > FallVelocityDamageThreshold;
 		if ( FallVelocity > FallVelocityDamageThreshold )
 			ApplyFallDamage();
 	}
