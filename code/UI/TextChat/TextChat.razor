@@ -9,11 +9,11 @@
 	TextChat {
 		position: absolute;
 		left: 100px;
-		bottom: 500px;
+		bottom: 770px;
 		z-index: 100;
 		flex-direction: column;
 		width: 505px;
-		max-height: 350px;
+		max-height: 230px;
 		font-size: 16px;
 		pointer-events: none;
 		transition: all 0.1s ease, border 0s ease;
@@ -23,10 +23,7 @@
 			flex-shrink: 0;
 			opacity: 0;
 			border-radius: 4px;
-		}
-
-		.placeholder {
-			color: #c0cee7;
+			background-color: rgb(207, 207, 207, 0.2);
 		}
 
 		.content-label {
@@ -34,12 +31,11 @@
 		}
 
 		.placeholder, .content-label {
-			font-family: Londrina Solid;
 			font-size: 20px;
-			color: white;
+			font-family: Londrina Solid;
+			color: rgb(207, 207, 207);
 			text-shadow: 2px 2px 0px black;
-			font-weight: 300;
-			margin-top: 10px;
+			margin: 5px;
 		}
 
 		.canvas {
@@ -50,7 +46,6 @@
 
 		&.open {
 			pointer-events: all;
-			bottom: 480px;
 			border-radius: 4 4 0 0;
 
 			textentry {
