@@ -23,6 +23,12 @@ public class ControllerMechanic : EntityComponent<Grub>
 		set => Controller.Position = value;
 	}
 
+	public Vector3 BaseVelocity
+	{
+		get => Controller.BaseVelocity;
+		set => Controller.BaseVelocity = value;
+	}
+
 	public Vector3 Velocity
 	{
 		get => Controller.Velocity;
