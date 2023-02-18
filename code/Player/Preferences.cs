@@ -13,7 +13,7 @@ public partial class Preferences : EntityComponent
 		Color.FromBytes(56, 229, 77),   // Green
 		Color.FromBytes(248, 249, 136), // Yellow
 		Color.FromBytes(251, 172, 204), // Pink
-		Color.FromBytes(109, 220, 207), // Cyan
+		Color.FromBytes(103, 234, 202), // Cyan
 		Color.FromBytes(255, 174, 109), // Orange
 		Color.FromBytes(173, 162, 255), // Purple
 	};
