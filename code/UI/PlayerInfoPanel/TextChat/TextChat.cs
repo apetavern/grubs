@@ -101,4 +101,10 @@ public partial class TextChat : Panel
 	{
 		Current?.AddEntry( new TextChatEntry { Name = name, Message = message, SteamId = steamId } );
 	}
+
+	[ClientRpc]
+	public static void AddInfoChatEntry( string message )
+	{
+		Current?.AddEntry( new TextChatEntry { Message = message } );
+	}
 }

@@ -100,8 +100,6 @@ public partial class Grub
 		};
 		await GameTask.Delay( 1025 );
 
-		Log.Info( DeathReason.ToString() );
-
 		ExplosionHelper.Explode( Position, this, 50f );
 		plunger.Delete();
 		FinishDie();
@@ -110,6 +108,7 @@ public partial class Grub
 	private void FinishDie()
 	{
 		Log.Info( $"{Name} has successfully died." );
+		TextChat.AddInfoChatEntry( DeathReason.ToString() );
 
 		LifeState = LifeState.Dead;
 		EnableDrawing = false;
@@ -121,5 +120,17 @@ public partial class Grub
 			Owner = this,
 			Parent = this,
 		};
+	}
+
+	[ConCmd.Admin( "kill" )]
+	private static void Kill()
+	{
+		if ( ConsoleSystem.Caller.Pawn is not Player player )
+			return;
+
+		if ( !player.IsTurn )
+			return;
+
+		player.ActiveGrub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "admin" ) );
 	}
 }
