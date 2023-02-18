@@ -15,7 +15,7 @@
 				{
 					_class = "CStateMachineAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 800.0, -96.0 ]
+					m_vecPosition = [ 800.0, -112.0 ]
 					m_nNodeID = 
 					{
 						m_id = 54021215
@@ -80,7 +80,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.2
+									m_blendDuration = 0.01
 									m_destState = 
 									{
 										m_id = 1126826319
@@ -182,7 +182,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.2
+									m_blendDuration = 0.01
 									m_destState = 
 									{
 										m_id = 2016959285
@@ -405,7 +405,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.2
+									m_blendDuration = 0.01
 									m_destState = 
 									{
 										m_id = 2016959285
