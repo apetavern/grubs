@@ -1,4 +1,5 @@
-﻿using Sandbox.Csg;
+﻿using Grubs.Terrain.CSG;
+using Sandbox.Csg;
 
 namespace Grubs;
 
@@ -16,6 +17,7 @@ public partial class World : Entity
 
 	public CsgBrush CubeBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cube.csg" );
 	public CsgBrush CoolBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cool.csg" );
+	public CSGBrushPrefab PrefabBrush { get; set; }
 	public CsgMaterial DefaultMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/default.csgmat" );
 	public CsgMaterial SandMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/sand_b.csgmat" );
 	public CsgMaterial LavaMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/lava.csgmat" );
@@ -51,8 +53,16 @@ public partial class World : Entity
 
 	public void SubtractDefault( Vector3 min, Vector3 max )
 	{
-		CsgWorld.Subtract( CoolBrush, (min + max) * 0.5f, max - min );
-		CsgWorld.Paint( CoolBrush, DefaultMaterial, (min + max) * 0.5f, (max - min) * 1.1f );
+		/*if ( PrefabBrush is null )
+		{
+			PrefabBrush = CSGBrushPrefab.FromPrefab( "brushes/csgsphere.prefab" );
+			PrefabBrush.GenerateBrush();
+			Log.Info( "Loaded prefab brush!" );
+			Log.Info( PrefabBrush.GeneratedBrush.ConvexSolids[0].Planes.Count + " planes" );
+		}*/
+
+		CsgWorld.Subtract( CoolBrush, (min + max) * 0.5f, max - min );//PrefabBrush.GeneratedBrush
+		CsgWorld.Paint( CoolBrush, DefaultMaterial, (min + max) * 0.5f, (max - min) * 1.2f );//PrefabBrush.GeneratedBrush
 	}
 
 	public void SubtractLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
