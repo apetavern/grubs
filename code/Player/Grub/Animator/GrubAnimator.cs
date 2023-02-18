@@ -38,6 +38,7 @@ public class GrubAnimator : EntityComponent<Grub>
 			grub.SetAnimParameter( "hardfall", airMove.IsHardFalling );
 
 		var tr = Trace.Ray( grub.Position + grub.Rotation.Up * 10f, grub.Position + grub.Rotation.Down * 128 )
+			.Size( 2f )
 			.Ignore( grub )
 			.IncludeClientside()
 			.Run();
