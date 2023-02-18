@@ -38,6 +38,11 @@ public partial class Grub : AnimatedEntity, INameTag
 		Tags.Add( "player" );
 	}
 
+	public Grub( IClient client ) : this()
+	{
+		PostSpawnSetup( client );
+	}
+
 	public override void Spawn()
 	{
 		Model = CitizenGrubModel;
@@ -59,6 +64,15 @@ public partial class Grub : AnimatedEntity, INameTag
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Controller.Hull.Mins, Controller.Hull.Maxs );
 	}
 
+	/// <summary>
+	/// PostSpawnSetup is used to handle things we want to handle in Spawn, but 
+	/// cannot because the Client hasn't been transmitted to the Grub yet.
+	/// </summary>
+	private void PostSpawnSetup( IClient client )
+	{
+		DressFromClient( client );
+	}
+
 	public override void Simulate( IClient client )
 	{
 		Controller?.Simulate( client );
@@ -69,5 +83,47 @@ public partial class Grub : AnimatedEntity, INameTag
 	public override void FrameSimulate( IClient client )
 	{
 		Controller?.FrameSimulate( client );
+	}
+
+	private void DressFromClient( IClient client )
+	{
+		var clothes = new ClothingContainer();
+		clothes.LoadFromClient( client );
+
+		// Skin tone
+		var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizenworm.vmdl" );
+		SetMaterialGroup( skinTone?.MaterialGroup );
+
+		// We only want the hair/hats so we won't use the logic built into Clothing
+		var items = clothes.Clothing.Where( item =>
+			item.Category is Clothing.ClothingCategory.Hair or Clothing.ClothingCategory.Hat
+				or Clothing.ClothingCategory.Facial or Clothing.ClothingCategory.Skin
+		);
+
+		foreach ( var item in items )
+		{
+			var ent = new AnimatedEntity( item.Model, this );
+
+			// Add a tag to the hat so we can reference it later.
+			if ( item.Category is Clothing.ClothingCategory.Hat or Clothing.ClothingCategory.Hair )
+				ent.Tags.Add( "head" );
+
+			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
+				ent.SetMaterialGroup( item.MaterialGroup );
+
+			if ( item.Category != Clothing.ClothingCategory.Skin )
+				continue;
+
+			var skinMaterial = Material.Load( item.SkinMaterial );
+			SetMaterialOverride( skinMaterial, "skin" );
+		}
+	}
+
+	public void SetHatVisible( bool visible )
+	{
+		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( "head" ) );
+
+		foreach ( var hat in hats )
+			hat.EnableDrawing = visible;
 	}
 }

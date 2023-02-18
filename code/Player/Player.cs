@@ -37,9 +37,14 @@ public partial class Player : Entity
 		Transmit = TransmitType.Always;
 	}
 
+	public Player( IClient client ) : this()
+	{
+		CreateGrubs( client );
+	}
+
 	public override void Spawn()
 	{
-		CreateGrubs();
+		// CreateGrubs();
 
 		Components.Create<Inventory>();
 
@@ -79,11 +84,11 @@ public partial class Player : Entity
 		Camera?.UpdateCamera( this );
 	}
 
-	private void CreateGrubs()
+	private void CreateGrubs( IClient client )
 	{
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
-			var grub = new Grub();
+			var grub = new Grub( client );
 			grub.Owner = this;
 			Grubs.Add( grub );
 		}

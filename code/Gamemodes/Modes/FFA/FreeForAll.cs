@@ -82,7 +82,7 @@ public partial class FreeForAll : Gamemode
 	{
 		foreach ( var client in Game.Clients )
 		{
-			var player = new Player();
+			var player = new Player( client );
 			client.Pawn = player;
 
 			// TODO: The user should be able to set this in the menu.

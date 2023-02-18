@@ -46,6 +46,9 @@ public partial class Weapon : AnimatedEntity
 	[Net]
 	public bool HasFired { get; set; } = false;
 
+	[Net]
+	public bool WeaponHasHat { get; set; }
+
 	[Prefab, Net, ResourceType( "png" )]
 	public string Icon { get; set; }
 
@@ -61,6 +64,7 @@ public partial class Weapon : AnimatedEntity
 		EnableDrawing = false;
 
 		Ammo = DefaultAmmoAmount;
+		WeaponHasHat = CheckWeaponForHat();
 	}
 
 	public override void Simulate( IClient client )
@@ -119,7 +123,21 @@ public partial class Weapon : AnimatedEntity
 
 	private void DetermineWeaponVisibility()
 	{
-		EnableDrawing = Grub.Controller.ShouldShowWeapon();
+		var show = Grub.Controller.ShouldShowWeapon();
+		EnableDrawing = show;
+
+		Grub.SetHatVisible( !WeaponHasHat );
+	}
+
+	private bool CheckWeaponForHat()
+	{
+		for ( var i = 0; i < BoneCount; i++ )
+		{
+			if ( GetBoneName( i ) == "head" )
+				return true;
+		}
+
+		return false;
 	}
 
 	/// <summary>
