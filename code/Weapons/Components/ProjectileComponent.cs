@@ -52,6 +52,9 @@ public class ProjectileComponent : WeaponComponent
 	{
 		Log.Info( "Fire Charged: " + Charge );
 
+		if ( !Game.IsServer )
+			return;
+
 		var position = Weapon.Position.WithY( 0f );
 		var muzzle = Weapon.GetAttachment( "muzzle" );
 		if ( muzzle is not null )
