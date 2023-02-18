@@ -1,7 +1,10 @@
 @namespace Grubs
 
 <root>
-	<img src="avatar:@SteamId" />
+	@if (SteamId > 0)
+	{
+		<img src="avatar:@SteamId" />
+	}
 	<label class="name" text=@Name />
 	<label class="msg" text=@Message />
 </root>
