@@ -4,13 +4,10 @@
 
 <root>
     <TextChat />
-    <div style="height: 10px;" />
-    <div class="players">
-        @foreach (var player in GamemodeSystem.Instance.PlayerList)
-        {
-            <PlayerInfo Player=@player />
-        }
-    </div>
+    @foreach (var player in GamemodeSystem.Instance.PlayerList)
+    {
+        <PlayerInfo Player=@player />
+    }
 </root>
 
 @code {
@@ -42,10 +39,5 @@
         left: 100px;
         flex-direction: column;
         justify-content: flex-end;
-
-        .players {
-            flex-direction: column;
-            gap: 10px;
-        }
     }
 </style>
