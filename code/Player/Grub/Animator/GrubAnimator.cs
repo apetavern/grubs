@@ -2,6 +2,7 @@
 
 public class GrubAnimator : EntityComponent<Grub>
 {
+	private float _incline;
 	public virtual void Simulate( IClient client )
 	{
 		var grub = Entity;
@@ -19,6 +20,14 @@ public class GrubAnimator : EntityComponent<Grub>
 		var airMove = ctrl.GetMechanic<AirMoveMechanic>();
 		if ( airMove is not null )
 			grub.SetAnimParameter( "hardfall", airMove.IsHardFalling );
+
+		var tr = Trace.Ray( grub.Position + grub.Rotation.Up * 10f, grub.Position + grub.Rotation.Down * 128 )
+			.Ignore( grub )
+			.IncludeClientside()
+			.Run();
+		_incline = MathX.Lerp( _incline, grub.Rotation.Forward.Angle( tr.Normal ) - 90f, 0.25f );
+		grub.SetAnimParameter( "incline", _incline );
+		grub.SetAnimParameter( "heightdiff", tr.Distance );
 
 		var holdPose = HoldPose.None;
 		if ( grub.IsTurn && grub.ActiveWeapon is not null && ctrl.ShouldShowWeapon() )
