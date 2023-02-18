@@ -74,7 +74,7 @@ public partial class JumpMechanic : ControllerMechanic
 
 	private void Backflip()
 	{
-		Entity.SetAnimParameter( "backflip", true );
+		Grub.Animator.Backflip();
 
 		Velocity += new Vector3( -Grub.Facing * 50f, 0f, 0f );
 		Velocity = Velocity.WithZ( _jumpPower * 1.75f );
