@@ -3,10 +3,14 @@
 @namespace Grubs
 
 <root>
-    @foreach (var player in GamemodeSystem.Instance.PlayerList)
-    {
-        <PlayerInfo Player=@player />
-    }
+    <TextChat />
+    <div style="height: 10px;" />
+    <div class="players">
+        @foreach (var player in GamemodeSystem.Instance.PlayerList)
+        {
+            <PlayerInfo Player=@player />
+        }
+    </div>
 </root>
 
 @code {
@@ -37,7 +41,11 @@
         bottom: 125px;
         left: 100px;
         flex-direction: column;
-        gap: 10px;
         justify-content: flex-end;
+
+        .players {
+            flex-direction: column;
+            gap: 10px;
+        }
     }
 </style>
