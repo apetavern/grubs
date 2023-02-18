@@ -84,6 +84,10 @@ public partial class FreeForAll : Gamemode
 		{
 			var player = new Player();
 			client.Pawn = player;
+
+			// TODO: The user should be able to set this in the menu.
+			player.Preferences.SetColor();
+
 			PlayerRotation.Add( player );
 
 			PlayerList.Add( player );
