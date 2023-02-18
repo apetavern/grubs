@@ -15,9 +15,14 @@ public partial class Player : Entity
 
 	public PlayerCamera Camera { get; private set; }
 
-	// TODO: Allow the player to choose their own color.
-	[Net]
-	public Color Color { get; private set; } = Color.Random;
+	public Preferences Preferences
+	{
+		get
+		{
+			return _preferences ??= Client.Components.Get<Preferences>();
+		}
+	}
+	private Preferences _preferences;
 
 	public bool IsTurn
 	{
