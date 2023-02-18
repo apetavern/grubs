@@ -799,6 +799,27 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "backflip"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/character_animations/citizenworm_backflip.fbx"
+						start_frame = 19
+						end_frame = 39
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -1046,7 +1067,7 @@
 								parent_bone = "head"
 								surface_property = ""
 								translation_only = false
-								group_id = 0
+								tags = ""
 								radius = 6.5
 								point0 = [ 2.0, 1.0, 0.0 ]
 								point1 = [ 8.42101, 0.0, 0.0 ]
@@ -1063,7 +1084,7 @@
 								parent_bone = "spine_1"
 								surface_property = ""
 								translation_only = false
-								group_id = 0
+								tags = ""
 								radius = 5.0
 								point0 = [ -2.0, 0.0, 0.0 ]
 								point1 = [ 4.42101, -1.59962, 0.0 ]
@@ -1073,7 +1094,7 @@
 								parent_bone = "pelvis"
 								surface_property = ""
 								translation_only = false
-								group_id = 0
+								tags = ""
 								radius = 3.480337
 								point0 = [ -2.0, 0.0, 0.0 ]
 								point1 = [ 2.42101, -0.59962, 0.0 ]
@@ -1083,7 +1104,7 @@
 								parent_bone = "spine_2"
 								surface_property = ""
 								translation_only = false
-								group_id = 0
+								tags = ""
 								radius = 4.0
 								point0 = [ -2.0, 0.0, 0.0 ]
 								point1 = [ -0.57899, 3.40038, 0.0 ]
