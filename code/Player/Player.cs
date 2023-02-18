@@ -90,24 +90,10 @@ public partial class Player : Entity
 	{
 		RotateGrubs();
 
-		var debugMsg = $"List of living Grubs for {Client.Name}: ";
-		foreach ( var grub in Grubs )
-		{
-			if ( grub.LifeState == LifeState.Alive )
-			{
-				debugMsg += $"{grub.Name}, ";
-			}
-		}
-		Log.Info( debugMsg.TrimEnd( ',' ) );
-
-		if ( Grubs[0].LifeState is LifeState.Dead or LifeState.Dying )
+		while ( ActiveGrub.LifeState is LifeState.Dead or LifeState.Dying )
 		{
 			RotateGrubs();
 		}
-
-		Log.Info( $"Selected Grub {Grubs[0].Name} for {Client.Name} with LifeState {LifeState}" );
-
-		ActiveGrub = Grubs[0];
 	}
 
 	public void RotateGrubs()
@@ -117,6 +103,8 @@ public partial class Player : Entity
 
 		Grubs.RemoveAt( 0 );
 		Grubs.Add( current );
+
+		ActiveGrub = Grubs[0];
 	}
 
 	public void EndTurn()
