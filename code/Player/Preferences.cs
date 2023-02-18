@@ -19,10 +19,14 @@ public partial class Preferences : EntityComponent
 	};
 
 	[Net]
-	public Color Color { get; set; } = Color.Transparent;
+	public Color Color { get; set; }
 
+	// TODO: Players should be able to choose a color preset not in use via the menu.
 	public void SetColor()
 	{
 		Color = ColorPresets[ColorIndex++];
+
+		if ( ColorIndex >= ColorPresets.Count )
+			ColorIndex = 0;
 	}
 }
