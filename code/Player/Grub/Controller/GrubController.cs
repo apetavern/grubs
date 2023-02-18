@@ -120,7 +120,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 	protected void UpdateRotation()
 	{
-		if ( Velocity.Normal.IsNearZeroLength )
+		if ( Velocity.Normal.IsNearZeroLength || (Grub.IsTurn && !Grub.Controller.IsGrounded) )
 			return;
 
 		var facing = Velocity.Normal.x;
