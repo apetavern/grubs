@@ -51,10 +51,10 @@ public partial class Grub : AnimatedEntity, INameTag
 		Components.Create<GrubController>();
 		Components.Create<GrubAnimator>();
 
+		Components.Create<UnstuckMechanic>();
+		Components.Create<AirMoveMechanic>();
 		Components.Create<SquirmMechanic>();
 		Components.Create<JumpMechanic>();
-		Components.Create<AirMoveMechanic>();
-		Components.Create<UnstuckMechanic>();
 
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Controller.Hull.Mins, Controller.Hull.Maxs );
 	}
