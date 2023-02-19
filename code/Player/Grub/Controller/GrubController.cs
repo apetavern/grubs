@@ -123,12 +123,11 @@ public partial class GrubController : EntityComponent<Grub>
 		if ( Velocity.Normal.IsNearZeroLength || (Grub.IsTurn && !Grub.Controller.IsGrounded) )
 			return;
 
-		var facing = Velocity.Normal.x;
-		if ( facing.AlmostEqual( 1, within: 0.5f ) )
+		if ( Grub.MoveInput == -1 )
 		{
 			Grub.Rotation = Rotation.Identity;
 		}
-		else if ( facing.AlmostEqual( -1, within: 0.5f ) )
+		else if ( Grub.MoveInput == 1 )
 		{
 			Grub.Rotation = Rotation.From( 0, 180, 0 );
 		}
