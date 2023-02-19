@@ -17,8 +17,10 @@ public partial class World : Entity
 	public CsgBrush CubeBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cube.csg" );
 	public CsgBrush CoolBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cool.csg" );
 	public CsgMaterial DefaultMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/default.csgmat" );
+	public CsgMaterial SandPlainMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/sand_a.csgmat" );
 	public CsgMaterial SandMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/sand_b.csgmat" );
 	public CsgMaterial LavaMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/lava.csgmat" );
+	public CsgMaterial RockMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/rocks_a.csgmat" );
 
 	public readonly float WorldLength = GrubsConfig.TerrainLength;
 	public readonly float WorldHeight = GrubsConfig.TerrainHeight;
@@ -43,7 +45,7 @@ public partial class World : Entity
 		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
 
 		CsgBackground = new CsgSolid( GridSize );
-		CsgBackground.Add( CubeBrush, DefaultMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 72, -WorldHeight / 2 ) );
+		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 72, -WorldHeight / 2 ) );
 
 		GenerateRandomWorld();
 		SetupKillZone();
@@ -52,7 +54,7 @@ public partial class World : Entity
 	public void SubtractDefault( Vector3 min, Vector3 max )
 	{
 		CsgWorld.Subtract( CoolBrush, (min + max) * 0.5f, max - min );
-		CsgWorld.Paint( CoolBrush, DefaultMaterial, (min + max) * 0.5f, (max - min) * 1.1f );
+		CsgWorld.Paint( CoolBrush, SandPlainMaterial, (min + max) * 0.5f, (max - min) * 1.1f );
 	}
 
 	public void SubtractLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
@@ -61,7 +63,7 @@ public partial class World : Entity
 		var scale = new Vector3( Vector3.DistanceBetween( start, stop ), 64f, size );
 
 		CsgWorld.Subtract( CubeBrush, midpoint, scale, Rotation.FromPitch( rotation.Pitch() ) );
-		CsgWorld.Paint( CubeBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
+		CsgWorld.Paint( CubeBrush, SandPlainMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
 	}
 
 	private float[,] _terrainGrid;
