@@ -166,11 +166,8 @@ public partial class Weapon : AnimatedEntity
 	}
 
 	[ClientRpc]
-	public void SoundFromScreen( string sound )
+	public void PlayScreenSound( string sound )
 	{
-		var pos = Position.ToScreen();
-		var dist = (Game.LocalPawn as Player).Camera.Distance;
-		pos = ((pos - 0.5f) * dist) + 0.5f;
-		Sound.FromScreen( sound, -pos.x, -pos.y );
+		this.SoundFromScreen( sound );
 	}
 }

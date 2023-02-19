@@ -64,6 +64,14 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "TraceSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/uzi/uzi_shot.sound\u0022"
+          },
+          "FinishSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/uzi/uzi_casing_drop.sound\u0022"
           }
         }
       }

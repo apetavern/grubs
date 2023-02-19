@@ -20,6 +20,15 @@ public partial class HitScanComponent : WeaponComponent
 	[Prefab, Net]
 	public float TraceDistance { get; set; } = 0f;
 
+	[Prefab, ResourceType( "sound" )]
+	public string TraceSound { get; set; }
+
+	[Prefab, ResourceType( "sound" )]
+	public string StartupSound { get; set; }
+
+	[Prefab, ResourceType( "sound" )]
+	public string FinishSound { get; set; }
+
 	[Prefab, Net]
 	public float ExplosionRadius { get; set; } = 0f;
 
@@ -143,9 +152,17 @@ public partial class HitScanComponent : WeaponComponent
 		}
 	}
 
+	public override void FireFinished()
+	{
+		base.FireFinished();
+
+		Weapon.PlayScreenSound( To.Everyone, FinishSound );
+	}
+
 	private void FireEffects()
 	{
 		Grub.SetAnimParameter( "fire", true );
+		Weapon.PlayScreenSound( To.Everyone, TraceSound );
 	}
 
 	private bool TraceHitSingle( TraceResult tr )
