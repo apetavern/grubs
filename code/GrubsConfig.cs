@@ -39,7 +39,7 @@ public static class GrubsConfig
 	public static int WeaponCrateChancePerTurn { get; set; } = 10;
 
 	/// <summary>
-	/// The percent chance that a <see cref="HealthCrate"/> will spawn every turn.
+	/// The percent chance that a <see cref="HealthPickup"/> will spawn every turn.
 	/// </summary>
 	[ConVar.Replicated( "crate_health_chance" )]
 	public static int HealthCrateChancePerTurn { get; set; } = 5;

@@ -1,0 +1,43 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "5bfc7018-cf4c-42a2-83e7-b94688ef6328",
+    "Class": "Crate",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "c0add33c-75ae-47b0-b769-b254095002c2",
+        "Class": "HealthPickup",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022HealthPickup\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/crates/health_crate/health_crate.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Health Crate\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022crate\u0022"
+      }
+    }
+  }
+}

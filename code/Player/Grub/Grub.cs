@@ -31,6 +31,9 @@ public partial class Grub : AnimatedEntity, INameTag
 
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
 
+	private const float MaxHealth = 100;
+	private const float MaxOverhealHealth = 250;
+
 	public Grub()
 	{
 		Transmit = TransmitType.Always;
@@ -125,5 +128,21 @@ public partial class Grub : AnimatedEntity, INameTag
 
 		foreach ( var hat in hats )
 			hat.EnableDrawing = visible;
+	}
+
+	/// <summary>
+	/// Attempts to heal the Grub by the given amount.
+	/// </summary>
+	/// <param name="health">The amount of health to try giving to the Grub.</param>
+	/// <returns>Whether or not any healing was applied.</returns>
+	public void GiveHealth( float health )
+	{
+		Game.AssertServer();
+
+		var healthToGive = Math.Min( health, MaxOverhealHealth - Health );
+		if ( healthToGive <= 0 )
+			return;
+
+		Health += healthToGive;
 	}
 }
