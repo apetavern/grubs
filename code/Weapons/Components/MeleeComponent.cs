@@ -59,7 +59,7 @@ public partial class MeleeComponent : WeaponComponent
 
 		if ( grubsHit is not null && grubsHit.Count > 0 )
 		{
-			Sound.FromEntity( ImpactSound, Weapon );
+			Weapon.SoundFromScreen( To.Everyone, ImpactSound );
 		}
 
 		IsFiring = false;
@@ -74,7 +74,7 @@ public partial class MeleeComponent : WeaponComponent
 	public override void FireStart()
 	{
 		Grub.SetAnimParameter( "fire", true );
-		Sound.FromEntity( HitSound, Weapon );
+		Weapon.SoundFromScreen( To.Everyone, HitSound );
 	}
 
 	private Dictionary<Grub, Vector3> GetGrubsInSwing()

@@ -164,4 +164,13 @@ public partial class Weapon : AnimatedEntity
 		return ResourceLibrary.GetAll<Prefab>()
 			.Where( x => TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon ) );
 	}
+
+	[ClientRpc]
+	public void SoundFromScreen( string sound )
+	{
+		var pos = Position.ToScreen();
+		var dist = (Game.LocalPawn as Player).Camera.Distance;
+		pos = ((pos - 0.5f) * dist) + 0.5f;
+		Sound.FromScreen( sound, -pos.x, -pos.y );
+	}
 }
