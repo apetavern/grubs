@@ -56,6 +56,10 @@
           "ProjectileRadius": {
             "Type": "Single",
             "Value": "7"
+          },
+          "ProjectileExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
           }
         }
       }

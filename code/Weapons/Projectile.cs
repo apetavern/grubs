@@ -263,9 +263,14 @@ public partial class Projectile : ModelEntity
 				break;
 		}
 
-		PlaySound( ExplosionSound );
-
+		ExplodeSoundClient( To.Everyone, ExplosionSound );
 		Delete();
+	}
+
+	[ClientRpc]
+	public void ExplodeSoundClient( string explosionSound )
+	{
+		this.SoundFromScreen( explosionSound );
 	}
 
 	/// <summary>

@@ -1,7 +1,7 @@
 ﻿namespace Grubs;
 
 [Prefab]
-public class ProjectileComponent : WeaponComponent
+public partial class ProjectileComponent : WeaponComponent
 {
 	[Prefab]
 	public Model ProjectileModel { get; set; }
@@ -29,6 +29,9 @@ public class ProjectileComponent : WeaponComponent
 
 	[Prefab]
 	public float ProjectileRadius { get; set; } = 1.0f;
+
+	[Prefab, ResourceType( "sound" )]
+	public string ProjectileExplosionSound { get; set; }
 
 	public override bool ShouldStart()
 	{
@@ -65,6 +68,7 @@ public class ProjectileComponent : WeaponComponent
 			.WithModel( ProjectileModel )
 			.WithPosition( position )
 			.WithSpeed( ProjectileSpeed )
+			.WithExplosionSound( ProjectileExplosionSound )
 			.WithExplosionRadius( ProjectileExplosionRadius )
 			.SetCollisionReaction( ProjectileCollisionReaction.Explosive );
 
