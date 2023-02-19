@@ -46,7 +46,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 		if ( Input.Released( InputButton.PrimaryAttack ) )
 		{
+			TimeSinceFired = 0f;
 			IsFiring = true;
+			FireStart();
 			Weapon.CurrentUses++;
 		}
 	}
@@ -71,6 +73,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public virtual void FireInstant() { }
 
 	public virtual void FireCharged() { }
+
+	public virtual void FireStart() { }
 
 	public virtual void FireFinished()
 	{

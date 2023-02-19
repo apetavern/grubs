@@ -18,6 +18,12 @@ public partial class MeleeComponent : WeaponComponent
 	[Prefab, Net]
 	public float HitDelay { get; set; }
 
+	[Prefab, ResourceType( "sound" )]
+	public string HitSound { get; set; }
+
+	[Prefab, ResourceType( "sound" )]
+	public string ImpactSound { get; set; }
+
 	public override bool ShouldStart()
 	{
 		return Grub.IsTurn && Grub.Controller.IsGrounded;
@@ -35,9 +41,10 @@ public partial class MeleeComponent : WeaponComponent
 
 	public override void FireInstant()
 	{
+		var grubsHit = GetGrubsInSwing();
+
 		if ( Game.IsServer )
 		{
-			var grubsHit = GetGrubsInSwing();
 			foreach ( var (grub, dir) in grubsHit )
 			{
 				grub.ApplyAbsoluteImpulse( HitForce * dir );
@@ -50,15 +57,24 @@ public partial class MeleeComponent : WeaponComponent
 			}
 		}
 
+		if ( grubsHit is not null && grubsHit.Count > 0 )
+		{
+			Sound.FromEntity( ImpactSound, Weapon );
+		}
+
 		IsFiring = false;
-		Grub.SetAnimParameter( "fire", true );
 		FireFinished();
 	}
 
 	public override void FireCharged()
 	{
-		Grub.SetAnimParameter( "fire", true );
 		FireFinished();
+	}
+
+	public override void FireStart()
+	{
+		Grub.SetAnimParameter( "fire", true );
+		Sound.FromEntity( HitSound, Weapon );
 	}
 
 	private Dictionary<Grub, Vector3> GetGrubsInSwing()

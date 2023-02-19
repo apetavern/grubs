@@ -92,4 +92,16 @@ public partial class Inventory : EntityComponent<Player>
 		player.Inventory.LastActiveWeapon = weapon;
 		player.Inventory.SetActiveWeapon( weapon );
 	}
+
+	[ConCmd.Admin( "gr_unlimited_ammo" )]
+	public static void SetUnlimitedAmmo()
+	{
+		if ( ConsoleSystem.Caller.Pawn is not Player player )
+			return;
+
+		foreach ( var weapon in player.Inventory.Weapons )
+		{
+			weapon.Ammo = -1;
+		}
+	}
 }

@@ -27,7 +27,7 @@
           },
           "HitDelay": {
             "Type": "Single",
-            "Value": "1.5"
+            "Value": "0.1"
           },
           "HitSize": {
             "Type": "Vector3",
@@ -36,6 +36,14 @@
           "HitOffset": {
             "Type": "Vector3",
             "Value": "\u00220,0,-10\u0022"
+          },
+          "HitSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/bat/bat_swing.sound\u0022"
+          },
+          "ImpactSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/bat/bat_impact.sound\u0022"
           }
         }
       }
