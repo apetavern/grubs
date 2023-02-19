@@ -64,6 +64,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "TraceSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/gibgun/gibgun_shot.sound\u0022"
           }
         }
       }

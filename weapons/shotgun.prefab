@@ -64,6 +64,14 @@
           "TraceDistance": {
             "Type": "Single",
             "Value": "2000"
+          },
+          "ExplosionDamage": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "TraceSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/shotgun/shotgun_fire.sound\u0022"
           }
         }
       }
