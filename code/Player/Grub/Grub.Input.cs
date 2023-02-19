@@ -2,8 +2,10 @@
 
 public partial class Grub
 {
-	public float MoveInput { get; set; }
 	public float LookInput { get; set; }
+
+	[Net, Predicted]
+	public float MoveInput { get; set; }
 
 	[Net, Predicted]
 	public Angles LookAngles { get; set; }
