@@ -1,6 +1,5 @@
 ﻿using Grubs.Terrain.CSG;
 using Sandbox.Csg;
-using System.Runtime.Intrinsics.X86;
 
 namespace Grubs;
 
