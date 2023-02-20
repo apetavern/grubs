@@ -80,7 +80,9 @@ public class PlayerCamera
 				return;
 			}
 
-			SetTarget( gm.ActivePlayer.ActiveGrub );
+			if ( gm.ActivePlayer.IsValid() && gm.ActivePlayer.ActiveGrub.IsValid() )
+				SetTarget( gm.ActivePlayer.ActiveGrub );
+
 			return;
 		}
 	}

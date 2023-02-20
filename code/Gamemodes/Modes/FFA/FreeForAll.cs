@@ -40,6 +40,11 @@ public partial class FreeForAll : Gamemode
 	public TimeUntil TimeUntilNextTurn { get; set; }
 
 	/// <summary>
+	/// A list of recently disconnected players.
+	/// </summary>
+	private List<Player> DisconnectedPlayers { get; set; } = new();
+
+	/// <summary>
 	/// A list of players, rotated cyclically to rotate through turns.
 	/// </summary>
 	public List<Player> PlayerRotation { get; set; } = new();
@@ -88,12 +93,11 @@ public partial class FreeForAll : Gamemode
 			// TODO: The user should be able to set this in the menu.
 			player.Preferences.SetColor();
 
+			Players.Add( player );
 			PlayerRotation.Add( player );
 
-			PlayerList.Add( player );
 			MoveToSpawnpoint( client );
 		}
-
 
 		ActivePlayer = PlayerRotation[0];
 	}
@@ -145,6 +149,7 @@ public partial class FreeForAll : Gamemode
 	private async ValueTask<bool> CleanupTurn()
 	{
 		ActivePlayer.EndTurn();
+
 		await GameTask.DelaySeconds( 1f );
 
 		await HandleGrubDeaths();
@@ -156,13 +161,14 @@ public partial class FreeForAll : Gamemode
 
 	private async Task HandleGrubDeaths()
 	{
+		// Rewrite this entire fucking thing
 		bool rerun;
 		do
 		{
 			rerun = false;
-			foreach ( var player in PlayerList )
+			foreach ( var player in Players )
 			{
-				if ( player.Dead )
+				if ( player.IsDead )
 					continue;
 
 				foreach ( var grub in player.Grubs )
@@ -184,6 +190,34 @@ public partial class FreeForAll : Gamemode
 				}
 			}
 		} while ( rerun );
+
+		bool rerun2;
+		do
+		{
+			rerun2 = false;
+			foreach ( var player in DisconnectedPlayers )
+			{
+				if ( player.IsDead )
+					continue;
+
+				foreach ( var grub in player.Grubs )
+				{
+					if ( grub.LifeState == LifeState.Dead )
+						continue;
+
+					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
+
+					rerun2 = true;
+					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+						await grub.DeathTask;
+
+					CameraTarget = grub;
+					// TODO: Send an event to the UI for grub damage worldhud.
+					await GameTask.Delay( 1000 );
+					CameraTarget = null;
+				}
+			}
+		} while ( rerun2 );
 	}
 
 	/// <summary>
@@ -199,9 +233,9 @@ public partial class FreeForAll : Gamemode
 		var deadPlayers = 0;
 		Player lastPlayerAlive;
 
-		foreach ( var player in All.OfType<Player>() )
+		foreach ( var player in Players )
 		{
-			if ( player.Dead )
+			if ( player.IsDead )
 			{
 				deadPlayers++;
 				continue;
@@ -211,14 +245,14 @@ public partial class FreeForAll : Gamemode
 		}
 
 		// TODO: Pass win/lose/draw information.
-		if ( deadPlayers == PlayerCount )
+		if ( deadPlayers == Players.Count )
 		{
 			// Draw
 			CurrentState = GameState.GameOver;
 			return true;
 		}
 
-		if ( deadPlayers == PlayerCount - 1 )
+		if ( deadPlayers == Players.Count - 1 )
 		{
 			// 1 Player remaining
 			CurrentState = GameState.GameOver;
@@ -233,7 +267,8 @@ public partial class FreeForAll : Gamemode
 		var current = ActivePlayer;
 
 		PlayerRotation.RemoveAt( 0 );
-		PlayerRotation.Add( current );
+		if ( !ActivePlayer.IsDisconnected )
+			PlayerRotation.Add( current );
 
 		ActivePlayer = PlayerRotation[0];
 		ActivePlayer.PickNextGrub();
@@ -276,7 +311,7 @@ public partial class FreeForAll : Gamemode
 				TerrainReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
 			}
 
-			if ( PlayerCount >= MinimumPlayers && TerrainReady && !Started )
+			if ( Game.Clients.Count >= MinimumPlayers && TerrainReady && !Started )
 			{
 				Start();
 			}
@@ -287,6 +322,10 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.Playing )
 		{
+			if ( ActivePlayer.IsDisconnected )
+			{
+				UseTurn( false );
+			}
 
 			if ( TimeUntilNextTurn <= 0f && !UsedTurn )
 			{
@@ -296,6 +335,7 @@ public partial class FreeForAll : Gamemode
 			if ( UsedTurn && (NextTurnTask is null || NextTurnTask.IsCompleted) )
 			{
 				NextTurnTask = NextTurn();
+				return;
 			}
 
 			ZoneTrigger();
@@ -320,12 +360,11 @@ public partial class FreeForAll : Gamemode
 
 	internal override void OnClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
-		base.OnClientDisconnect( client, reason );
-
 		if ( client.Pawn is not Player player )
 			return;
 
-		PlayerList.Remove( player );
+		Players.Remove( player );
+		DisconnectedPlayers.Add( player );
 	}
 
 	[ConCmd.Admin( "gr_skip_turn" )]

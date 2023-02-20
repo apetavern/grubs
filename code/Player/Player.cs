@@ -8,7 +8,7 @@ public partial class Player : Entity
 	[Net]
 	public Grub ActiveGrub { get; private set; }
 
-	public bool Dead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
+	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
 
 	[BindComponent]
 	public Inventory Inventory { get; }
@@ -31,6 +31,8 @@ public partial class Player : Entity
 			return GamemodeSystem.Instance.ActivePlayer == this;
 		}
 	}
+
+	public bool IsDisconnected => !Client.IsValid();
 
 	public Player()
 	{

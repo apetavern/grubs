@@ -45,8 +45,6 @@ public sealed partial class GrubsGame : GameManager
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
-		base.ClientDisconnect( client, reason );
-
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 	}
 
