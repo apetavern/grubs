@@ -387,29 +387,43 @@
         "Choices": [
           {
             "Value": "0",
-            "Name": "Random Noise"
+            "Name": "Generated"
           },
           {
             "Value": "1",
-            "Name": "Grubs logo"
+            "Name": "Texture"
+          }
+        ],
+        "ConVarName": "terrain_type",
+        "DisplayName": "Terrain Type",
+        "DefaultValue": "0",
+        "Description": "The type of terrain to be used, currently between random generated noise and texture (experimental).",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "0",
+            "Name": "Grubs"
+          },
+          {
+            "Value": "1",
+            "Name": "TestLevel"
           },
           {
             "Value": "2",
-            "Name": "Test terrain"
-          },
-          {
-            "Value": "3",
             "Name": "Battlefield"
           },
           {
-            "Value": "4",
+            "Value": "3",
             "Name": "Cavern"
           }
         ],
-        "ConVarName": "level_type",
-        "DisplayName": "Level Type",
+        "ConVarName": "terrain_texture",
+        "DisplayName": "Terrain Texture",
         "DefaultValue": "0",
-        "Description": "",
+        "Description": "The prefabricated texture to use for the terrain.",
         "Group": "Terrain"
       }
     ],

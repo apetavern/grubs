@@ -72,18 +72,30 @@ public static class GrubsConfig
 
 	public enum TerrainType
 	{
-		RandomNoise = 0,
-		Grubs = 1,
-		TestLevel = 2,
-		Battlefield = 3,
-		Cavern = 4
+		Generated = 0,
+		Texture = 1,
+	}
+
+	public enum TerrainTexture
+	{
+		Grubs = 0,
+		TestLevel = 1,
+		Battlefield = 2,
+		Cavern = 3,
 	}
 
 	/// <summary>
-	/// Level type to load ,will use enum name as filename to load when picking textures.
+	/// The type of terrain to use.
 	/// </summary>
-	[ConVar.Replicated( "level_type" )]
-	public static TerrainType TerrainLevelType { get; set; } = TerrainType.RandomNoise;
+	[ConVar.Replicated( "terrain_type" )]
+	public static TerrainType WorldTerrainType { get; set; } = TerrainType.Generated;
+
+	/// <summary>
+	/// If texture is selected for TerrainType, TerrainTexture is used for determine which
+	/// prefabricated texture is used to build the terrain.
+	/// </summary>
+	[ConVar.Replicated( "terrain_texture" )]
+	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Grubs;
 
 	public static string[] GrubNames => new[]
 	{
