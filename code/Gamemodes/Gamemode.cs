@@ -11,7 +11,7 @@ public partial class Gamemode : Entity
 	[Net]
 	public IList<Player> Players { get; set; }
 
-	public List<Player> DisconnectedPlayers { get; set; } = new();
+	private List<Player> DisconnectedPlayers { get; set; } = new();
 
 	[Net]
 	public Player ActivePlayer { get; set; }
