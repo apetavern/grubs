@@ -11,7 +11,7 @@ Layer0
 	g_bFogEnabled "0"
 
 	//---- Main ----
-	Colour "textures/environment/sand_c_color.png"
+	Colour "textures/environment/Sand_A_color.png"
 	Normal "textures/environment/sand_a_normal.png"
 	Rough "textures/environment/sand_a_rough.png"
 }
