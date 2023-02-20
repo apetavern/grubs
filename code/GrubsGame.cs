@@ -1,4 +1,3 @@
-global using Editor;
 global using Sandbox;
 global using Sandbox.Diagnostics;
 global using Sandbox.UI;
@@ -51,6 +50,8 @@ public sealed partial class GrubsGame : GameManager
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
+
+		GamemodeSystem.Instance.Simulate( cl );
 	}
 
 	public override void FrameSimulate( IClient cl )

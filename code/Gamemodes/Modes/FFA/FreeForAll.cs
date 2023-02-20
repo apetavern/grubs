@@ -251,8 +251,6 @@ public partial class FreeForAll : Gamemode
 
 			Players.Remove( player );
 			PlayerRotation.Remove( player );
-
-			player.Delete();
 		}
 
 		ActivePlayer = PlayerRotation[0];
