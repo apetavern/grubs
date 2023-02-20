@@ -4,12 +4,14 @@ Layer0
 {
 	shader "shaders/gr_foreground.shader"
 
-	Colour "textures/environment/sand_a_color.png"
 	g_flDirectionalLightmapMinZ "0.050"
 	g_flDirectionalLightmapStrength "1.000"
-	Normal "textures/environment/sand_a_normal.png"
-	Rough "textures/environment/sand_a_rough.png"
 
 	//---- Fog ----
-	g_bFogEnabled "1"
+	g_bFogEnabled "0"
+
+	//---- Main ----
+	Colour "textures/environment/sand_c_color.png"
+	Normal "textures/environment/sand_a_normal.png"
+	Rough "textures/environment/sand_a_rough.png"
 }
