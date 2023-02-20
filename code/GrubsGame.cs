@@ -39,6 +39,8 @@ public sealed partial class GrubsGame : GameManager
 		if ( GamemodeSystem.Instance.GameWorld is null )
 			GamemodeSystem.Instance.GameWorld = new World();
 
+		Sound.FromScreen( To.Single( client ), "beach_ambience" );
+
 		GamemodeSystem.Instance?.OnClientJoined( client );
 	}
 
