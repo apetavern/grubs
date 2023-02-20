@@ -307,8 +307,7 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.Playing )
 		{
-			var isPreparingNextTurn = NextTurnTask is not null;
-			if ( isPreparingNextTurn )
+			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
 				return;
 
 			if ( ActivePlayer.IsDisconnected )
@@ -321,7 +320,7 @@ public partial class FreeForAll : Gamemode
 				UseTurn();
 			}
 
-			if ( UsedTurn && !isPreparingNextTurn )
+			if ( UsedTurn )
 			{
 				NextTurnTask ??= NextTurn();
 			}
