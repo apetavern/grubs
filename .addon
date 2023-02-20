@@ -400,6 +400,10 @@
           {
             "Value": "3",
             "Name": "Battlefield"
+          },
+          {
+            "Value": "4",
+            "Name": "Cavern"
           }
         ],
         "ConVarName": "level_type",

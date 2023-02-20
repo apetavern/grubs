@@ -75,7 +75,8 @@ public static class GrubsConfig
 		RandomNoise = 0,
 		Grubs = 1,
 		TestLevel = 2,
-		Battlefield = 3
+		Battlefield = 3,
+		Cavern = 4
 	}
 
 	/// <summary>
