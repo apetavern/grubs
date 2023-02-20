@@ -161,63 +161,51 @@ public partial class FreeForAll : Gamemode
 
 	private async Task HandleGrubDeaths()
 	{
-		// Rewrite this entire fucking thing
-		bool rerun;
-		do
+		foreach ( var player in Players )
 		{
-			rerun = false;
-			foreach ( var player in Players )
+			if ( player.IsDead )
+				continue;
+
+			foreach ( var grub in player.Grubs )
 			{
-				if ( player.IsDead )
+				if ( grub.LifeState == LifeState.Dead || !grub.HasBeenDamaged )
 					continue;
 
-				foreach ( var grub in player.Grubs )
-				{
-					if ( grub.LifeState == LifeState.Dead )
-						continue;
-
-					if ( !grub.HasBeenDamaged )
-						continue;
-
-					rerun = true;
-					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
-						await grub.DeathTask;
-
-					CameraTarget = grub;
-					// TODO: Send an event to the UI for grub damage worldhud.
-					await GameTask.Delay( 1000 );
-					CameraTarget = null;
-				}
+				await HandleGrubDeath( grub );
 			}
-		} while ( rerun );
+		}
 
-		bool rerun2;
-		do
+		for ( int i = DisconnectedPlayers.Count - 1; i >= 0; ++i )
 		{
-			rerun2 = false;
-			foreach ( var player in DisconnectedPlayers )
+			var disconnectedPlayer = DisconnectedPlayers[i];
+			if ( !disconnectedPlayer.IsDead )
 			{
-				if ( player.IsDead )
-					continue;
-
-				foreach ( var grub in player.Grubs )
+				foreach ( var grub in disconnectedPlayer.Grubs )
 				{
 					if ( grub.LifeState == LifeState.Dead )
 						continue;
 
 					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
-
-					rerun2 = true;
-					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
-						await grub.DeathTask;
-
-					CameraTarget = grub;
-					// TODO: Send an event to the UI for grub damage worldhud.
-					await GameTask.Delay( 1000 );
-					CameraTarget = null;
+					await HandleGrubDeath( grub );
 				}
 			}
-		} while ( rerun2 );
+
+			DisconnectedPlayers.RemoveAt( i );
+			disconnectedPlayer.Delete();
+		}
+	}
+
+	private async Task HandleGrubDeath( Grub grub )
+	{
+		if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+			await grub.DeathTask;
+
+		CameraTarget = grub;
+
+		// TODO: Send an event to the UI for grub damage worldhud.
+		await GameTask.Delay( 1000 );
+
+		CameraTarget = null;
 	}
 
 	/// <summary>
@@ -335,7 +323,6 @@ public partial class FreeForAll : Gamemode
 			if ( UsedTurn && (NextTurnTask is null || NextTurnTask.IsCompleted) )
 			{
 				NextTurnTask = NextTurn();
-				return;
 			}
 
 			ZoneTrigger();
