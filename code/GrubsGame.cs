@@ -42,11 +42,13 @@ public sealed partial class GrubsGame : GameManager
 		Sound.FromScreen( To.Single( client ), "beach_ambience" );
 
 		GamemodeSystem.Instance?.OnClientJoined( client );
+		TextChat.AddInfoChatEntry( $"{client.Name} has joined" );
 	}
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
+		TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
 	}
 
 	public override void Simulate( IClient cl )

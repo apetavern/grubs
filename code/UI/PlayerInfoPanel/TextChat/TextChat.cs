@@ -2,7 +2,7 @@ namespace Grubs;
 
 public partial class TextChat : Panel
 {
-	public static TextChat Current;
+	private static TextChat _instance;
 
 	public bool IsOpen
 	{
@@ -35,7 +35,7 @@ public partial class TextChat : Panel
 		Input.AcceptsFocus = true;
 		Input.AllowEmojiReplace = true;
 
-		Current = this;
+		_instance = this;
 	}
 
 	public override void Tick()
@@ -99,12 +99,12 @@ public partial class TextChat : Panel
 	[ClientRpc]
 	public static void AddChatEntry( string name, string message, long steamId )
 	{
-		Current?.AddEntry( new TextChatEntry { Name = name, Message = message, SteamId = steamId } );
+		_instance?.AddEntry( new TextChatEntry { Name = name, Message = message, SteamId = steamId } );
 	}
 
 	[ClientRpc]
 	public static void AddInfoChatEntry( string message )
 	{
-		Current?.AddEntry( new TextChatEntry { Message = message } );
+		_instance?.AddEntry( new TextChatEntry { Message = message } );
 	}
 }
