@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "complex.shader"
+	shader "shaders/complex.shader"
 
 	//---- PBR ----
 	F_SPECULAR 1
@@ -10,12 +10,12 @@ Layer0
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "textures/environment/Rocks_A_ao.png"
+	TextureAmbientOcclusion "textures/environment/rocks_a_ao.png"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "textures/environment/Rocks_A_color.png"
+	TextureColor "textures/environment/rocks_a_color.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -31,15 +31,15 @@ Layer0
 	g_flMetalness "0.000"
 
 	//---- Normal ----
-	TextureNormal "textures/environment/Rocks_A_normal.png"
+	TextureNormal "textures/environment/rocks_a_normal.png"
 
 	//---- Roughness ----
-	TextureRoughness "textures/environment/Rocks_A_rough.png"
+	TextureRoughness "textures/environment/rocks_a_rough.png"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
 	g_nScaleTexCoordVByModelScaleAxis "0"
 	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScale "[0.250 0.250]"
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
 }
