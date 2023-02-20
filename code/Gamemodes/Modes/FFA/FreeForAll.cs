@@ -128,7 +128,8 @@ public partial class FreeForAll : Gamemode
 	{
 		TurnIsChanging = true;
 
-		await CleanupTurn();
+		if ( await CleanupTurn() )
+			return;
 
 		RotateActivePlayer();
 

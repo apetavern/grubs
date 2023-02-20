@@ -52,7 +52,7 @@ public struct DeathReason
 					// Died from an admin.
 					case DamageType.Admin:
 						return $"{Grub.Name} was RDMed by an admin";
-					// The controlling player left.
+					// Controlling player disconnected.
 					case DamageType.Disconnect:
 						return $"{Grub.Name} had no reason left to live...";
 					// Died from an explosion.
@@ -190,7 +190,7 @@ public struct DeathReason
 						reasonInfo = damageInfo;
 						reason = DamageType.Admin;
 						break;
-					// The controlling player left.
+					// Controlling player disconnected.
 					case "disconnect":
 						lastReasonInfo = reasonInfo;
 						lastReason = reason;
