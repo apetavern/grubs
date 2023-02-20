@@ -40,11 +40,6 @@ public partial class FreeForAll : Gamemode
 	public TimeUntil TimeUntilNextTurn { get; set; }
 
 	/// <summary>
-	/// A list of recently disconnected players.
-	/// </summary>
-	private List<Player> DisconnectedPlayers { get; set; } = new();
-
-	/// <summary>
 	/// A list of players, rotated cyclically to rotate through turns.
 	/// </summary>
 	public List<Player> PlayerRotation { get; set; } = new();
@@ -148,7 +143,8 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private async ValueTask<bool> CleanupTurn()
 	{
-		ActivePlayer.EndTurn();
+		if ( ActivePlayer.IsValid() )
+			ActivePlayer.EndTurn();
 
 		await GameTask.DelaySeconds( 1f );
 
@@ -168,30 +164,17 @@ public partial class FreeForAll : Gamemode
 
 			foreach ( var grub in player.Grubs )
 			{
-				if ( grub.LifeState == LifeState.Dead || !grub.HasBeenDamaged )
+				if ( grub.LifeState == LifeState.Dead )
+					continue;
+
+				if ( player.IsDisconnected )
+					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
+
+				if ( !grub.HasBeenDamaged )
 					continue;
 
 				await HandleGrubDeath( grub );
 			}
-		}
-
-		for ( int i = DisconnectedPlayers.Count - 1; i >= 0; ++i )
-		{
-			var disconnectedPlayer = DisconnectedPlayers[i];
-			if ( !disconnectedPlayer.IsDead )
-			{
-				foreach ( var grub in disconnectedPlayer.Grubs )
-				{
-					if ( grub.LifeState == LifeState.Dead )
-						continue;
-
-					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
-					await HandleGrubDeath( grub );
-				}
-			}
-
-			DisconnectedPlayers.RemoveAt( i );
-			disconnectedPlayer.Delete();
 		}
 	}
 
@@ -252,11 +235,26 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		var current = ActivePlayer;
+		if ( ActivePlayer.IsValid() && !ActivePlayer.IsDisconnected )
+		{
+			PlayerRotation.RemoveAt( 0 );
+			PlayerRotation.Add( ActivePlayer );
+		}
 
-		PlayerRotation.RemoveAt( 0 );
-		if ( !ActivePlayer.IsDisconnected )
-			PlayerRotation.Add( current );
+		// Clean up any disconnected players
+		foreach ( var player in Players )
+		{
+			if ( !player.IsDisconnected )
+				continue;
+
+			Players.Remove( player );
+			PlayerRotation.Remove( player );
+
+			player.Delete();
+		}
+
+		Log.Info( Players.Count );
+		Log.Info( PlayerRotation.Count );
 
 		ActivePlayer = PlayerRotation[0];
 		ActivePlayer.PickNextGrub();
@@ -276,7 +274,7 @@ public partial class FreeForAll : Gamemode
 
 	private bool CheckCurrentPlayerFiring()
 	{
-		var weapon = ActivePlayer.ActiveGrub.ActiveWeapon;
+		var weapon = ActivePlayer?.ActiveGrub?.ActiveWeapon;
 		if ( weapon is null )
 			return false;
 
@@ -310,7 +308,7 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.Playing )
 		{
-			if ( ActivePlayer.IsDisconnected )
+			if ( ActivePlayer.IsValid() && ActivePlayer.IsDisconnected )
 			{
 				UseTurn( false );
 			}
@@ -343,15 +341,6 @@ public partial class FreeForAll : Gamemode
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
 			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
 		}
-	}
-
-	internal override void OnClientDisconnect( IClient client, NetworkDisconnectionReason reason )
-	{
-		if ( client.Pawn is not Player player )
-			return;
-
-		Players.Remove( player );
-		DisconnectedPlayers.Add( player );
 	}
 
 	[ConCmd.Admin( "gr_skip_turn" )]
