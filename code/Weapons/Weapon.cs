@@ -95,6 +95,8 @@ public partial class Weapon : AnimatedEntity
 		{
 			component.IsFiring = false;
 		}
+
+		Grub.SetHatVisible( true );
 	}
 
 	public bool IsFiring()
@@ -126,7 +128,7 @@ public partial class Weapon : AnimatedEntity
 		var show = Grub.Controller.ShouldShowWeapon();
 		EnableDrawing = show;
 
-		Grub.SetHatVisible( !WeaponHasHat );
+		Grub.SetHatVisible( !WeaponHasHat || !show );
 	}
 
 	private bool CheckWeaponForHat()

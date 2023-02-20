@@ -21,6 +21,9 @@ public partial class World
 	private float amplitude = 72f;
 	private float frequency = 3f;
 
+	private float noiseMin = 0.45f;
+	private float noiseMax = 0.55f;
+
 	private void GenerateAlt()
 	{
 		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
@@ -82,7 +85,7 @@ public partial class World
 			{
 				DensityMap[x, z] = Noise.Simplex( x, z );
 
-				if ( DensityMap[x, z] > 0.45f && DensityMap[x, z] < 0.55f )
+				if ( DensityMap[x, z] > noiseMin && DensityMap[x, z] < noiseMax )
 				{
 					TerrainMap[x, z] = false;
 				}
