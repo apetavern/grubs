@@ -8,6 +8,11 @@ public partial class World
 		PaintDefault( min, max );
 	}
 
+	public void SubtractBackground( Vector3 min, Vector3 max )
+	{
+		CsgBackground.Subtract( CoolBrush, (min + max) * 0.5f, max - min );
+	}
+
 	public void SubtractLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
 	{
 		var midpoint = new Vector3( (start.x + stop.x) / 2, 0f, (start.z + stop.z) / 2 );
@@ -19,7 +24,7 @@ public partial class World
 
 	public void AddDefault( Vector3 min, Vector3 max )
 	{
-		CsgWorld.Add( CoolBrush, SandMaterial, (min + max) * 0.5f, (max - min) * 1.2f );
+		CsgWorld.Add( CoolBrush, SandMaterial, (min + max) * 0.5f, (max - min) * 1.2f);
 	}
 
 	public void PaintDefault( Vector3 min, Vector3 max )
