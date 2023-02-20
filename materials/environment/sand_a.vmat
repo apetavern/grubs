@@ -2,44 +2,14 @@
 
 Layer0
 {
-	shader "complex.shader"
+	shader "shaders/gr_foreground.shader"
 
-	//---- PBR ----
-	F_SPECULAR 1
-
-	//---- Ambient Occlusion ----
-	g_flAmbientOcclusionDirectDiffuse "0.000"
-	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "textures/environment/Sand_A_ao.png"
-
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "textures/environment/Sand_A_color.png"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
+	Colour "textures/environment/sand_a_color.png"
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
+	Normal "textures/environment/sand_a_normal.png"
+	Rough "textures/environment/sand_a_rough.png"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
-
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
-	//---- Metalness ----
-	g_flMetalness "0.000"
-
-	//---- Normal ----
-	TextureNormal "textures/environment/Sand_A_normal.png"
-
-	//---- Roughness ----
-	TextureRoughness "textures/environment/Sand_A_rough.png"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
 }

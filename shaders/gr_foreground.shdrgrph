@@ -1,0 +1,187 @@
+{
+  "Model": "models/dev/box.vmdl",
+  "Description": "",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {
+        "Identifier": "3cc0b018-03ca-4c3a-bbbd-0504167ae7c7",
+        "Output": "Result"
+      },
+      "Emission": {},
+      "Opacity": {},
+      "TintMask": {},
+      "Normal": {
+        "Identifier": "3e21556b-a91f-40fd-b751-86ec2fdf6917",
+        "Output": "Result"
+      },
+      "Roughness": {
+        "Identifier": "e5baa142-51c6-43fd-871a-ae05ba756902",
+        "Output": "Result"
+      },
+      "Metalness": {},
+      "AmbientOcclusion": {},
+      "Sheen": {},
+      "SheenRoughness": {},
+      "Clearcoat": {},
+      "ClearcoatRoughness": {},
+      "ClearcoatNormal": {},
+      "Anisotropy": {},
+      "AnisotropyRotation": {},
+      "Thickness": {},
+      "SubsurfacePower": {},
+      "SheenColor": {},
+      "SubsurfaceColor": {},
+      "Transmission": {},
+      "Absorption": {},
+      "IndexOfRefraction": {},
+      "MicroThickness": {},
+      "Identifier": "d725080e-ba89-482b-829b-535cf57163bb",
+      "Position": "992,-304"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "4c595f1a-670e-40e2-8c12-da4b13abb103",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Colour",
+        "Group": ""
+      },
+      "Sampler": {},
+      "Identifier": "4d82d6e0-3b2e-473a-9537-debdd14dbd1c",
+      "Position": "-256,-272"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "4c595f1a-670e-40e2-8c12-da4b13abb103",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Normal",
+        "Group": "",
+        "Extension": "Normal",
+        "Processor": "NormalizeNormals"
+      },
+      "Sampler": {},
+      "Identifier": "3e21556b-a91f-40fd-b751-86ec2fdf6917",
+      "Position": "-256,-208"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "4c595f1a-670e-40e2-8c12-da4b13abb103",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Rough",
+        "Group": "",
+        "Extension": "Rough"
+      },
+      "Sampler": {},
+      "Identifier": "e5baa142-51c6-43fd-871a-ae05ba756902",
+      "Position": "-256,-144"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "4c595f1a-670e-40e2-8c12-da4b13abb103",
+      "Position": "-960,-272"
+    },
+    {
+      "_class": "SplitVector",
+      "Input": {
+        "Identifier": "eea3a3f4-e2bb-4009-bb2b-fee455a3ad5c",
+        "Output": "Result"
+      },
+      "Identifier": "ca4323c0-6910-49ff-b063-5c59fe39ce40",
+      "Position": "-256,256"
+    },
+    {
+      "_class": "Vector4",
+      "Value": "0,0,0,1",
+      "Identifier": "3df929d1-9987-4d85-9b7e-96ab4ccd2c4c",
+      "Position": "-256,96"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "a62795c3-d6e7-4e21-bfde-fdbc02f0a075",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 1000,
+      "Identifier": "8683823e-139c-4abf-9416-acdaad969425",
+      "Position": "128,304"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "b2709a8e-2ce0-4fec-88cc-6616798872c7",
+        "Output": "Value"
+      },
+      "B": {
+        "Identifier": "4d82d6e0-3b2e-473a-9537-debdd14dbd1c",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "24b8a125-59fc-4acf-a227-15354282382a",
+      "Position": "160,-336"
+    },
+    {
+      "_class": "Vector4",
+      "Value": "1,1,1,1",
+      "Identifier": "fdbc8569-6a47-4555-a357-bff001868714",
+      "Position": "-256,-64"
+    },
+    {
+      "_class": "WorldPosition",
+      "Identifier": "eea3a3f4-e2bb-4009-bb2b-fee455a3ad5c",
+      "Position": "-464,256"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "24b8a125-59fc-4acf-a227-15354282382a",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "4d82d6e0-3b2e-473a-9537-debdd14dbd1c",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "8683823e-139c-4abf-9416-acdaad969425",
+        "Output": "Result"
+      },
+      "Fraction": 0,
+      "Identifier": "3cc0b018-03ca-4c3a-bbbd-0504167ae7c7",
+      "Position": "544,-304"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "ca4323c0-6910-49ff-b063-5c59fe39ce40",
+        "Output": "Z"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 1024,
+      "Identifier": "a62795c3-d6e7-4e21-bfde-fdbc02f0a075",
+      "Position": "-64,304"
+    },
+    {
+      "_class": "Vector4",
+      "Value": "0.42775,0.24317,0.17651,1",
+      "Identifier": "b2709a8e-2ce0-4fec-88cc-6616798872c7",
+      "Position": "-96,-448"
+    }
+  ]
+}

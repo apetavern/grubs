@@ -63,7 +63,7 @@ public partial class World : Entity
 		var scale = new Vector3( Vector3.DistanceBetween( start, stop ), 64f, size );
 
 		CsgWorld.Subtract( CubeBrush, midpoint, scale, Rotation.FromPitch( rotation.Pitch() ) );
-		CsgWorld.Paint( CubeBrush, SandPlainMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
+		CsgWorld.Paint( CubeBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
 	}
 
 	private float[,] _terrainGrid;
