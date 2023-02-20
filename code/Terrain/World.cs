@@ -98,11 +98,15 @@ public partial class World : Entity
 
 	private float[,] _terrainGrid;
 	private readonly int _resolution = 16;
+
+	public List<Vector3> PossibleSpawnPoints = new List<Vector3>();
+
 	public void GenerateTextureWorld( string TexturePath )
 	{
 		ResourceLibrary.TryGet<TextureLevel>( TexturePath, out TextureLevel map );
 		if ( map != null )
 		{
+			PossibleSpawnPoints.Clear();
 			var _WorldLength = map.texture.Width * 16;
 			var _WorldHeight = map.texture.Height * 16;
 			var pointsX = map.texture.Width;
@@ -138,6 +142,18 @@ public partial class World : Entity
 						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
 						AddDefault( min, max );
 					}
+					else
+					{
+						var min = new Vector3( (x * 16), -32, (z * 16) );
+						var max = new Vector3( (x * 16), 32, (z * 16) );
+
+						// Offset by position.
+						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+
+						var avg = (min + max) / 2;
+						PossibleSpawnPoints.Add( avg );
+					}
 				}
 			}
 		}
@@ -145,6 +161,7 @@ public partial class World : Entity
 
 	public void GenerateRandomWorld()
 	{
+		PossibleSpawnPoints.Clear();
 		var pointsX = (WorldLength / _resolution).CeilToInt();
 		var pointsZ = (WorldHeight / _resolution).CeilToInt();
 
@@ -174,6 +191,9 @@ public partial class World : Entity
 					min -= new Vector3( WorldLength / 2, 0, WorldHeight );
 					max -= new Vector3( WorldLength / 2, 0, WorldHeight );
 					SubtractDefault( min, max );
+
+					var avg = (min + max) / 2;
+					PossibleSpawnPoints.Add( avg );
 				}
 			}
 		}
@@ -200,12 +220,12 @@ public partial class World : Entity
 		int iterations = 0;
 		while ( true && iterations < 10000 )
 		{
-			var x = Game.Random.Int( ((int)WorldLength / _resolution) - 1 );
+			/*var x = Game.Random.Int( ((int)WorldLength / _resolution) - 1 );
 			var z = Game.Random.Int( ((int)WorldHeight / _resolution) - 1 );
 			if ( _terrainGrid[x, z] > 0.1f )
-				continue;
+				continue;*/
 
-			var startPos = new Vector3( (x * _resolution) - WorldLength / 2, 0, (z * _resolution) - WorldHeight );
+			var startPos = Game.Random.FromList( PossibleSpawnPoints );//new Vector3( (x * _resolution) - WorldLength / 2, 0, (z * _resolution) - WorldHeight );
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * WorldHeight ).WithTag( "solid" ).Run();
 			if ( tr.Hit )
 				return tr.EndPosition;
