@@ -44,27 +44,47 @@ public partial class World : Entity
 		CsgBackground?.Delete();
 
 		CsgWorld = new CsgSolid( GridSize );
-		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
+
 
 		CsgBackground = new CsgSolid( GridSize );
-		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 72, -WorldHeight / 2 ) );
 
-		GenerateRandomWorld();
+		if ( GrubsConfig.TerrainLevelType == 0 )
+		{
+			CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
+			CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 72, -WorldHeight / 2 ) );
+			GenerateRandomWorld();
+		}
+		else
+		{
+			GenerateTextureWorld( "textures/texturelevels/" + GrubsConfig.TerrainLevelType.ToString().ToLower() + ".tlvl" );
+		}
 		SetupKillZone();
-	}
 
-	public void SubtractDefault( Vector3 min, Vector3 max )
-	{
 		/*if ( PrefabBrush is null )
 		{
-			PrefabBrush = CSGBrushPrefab.FromPrefab( "brushes/csgsphere.prefab" );
+			PrefabBrush = CSGBrushPrefab.FromPrefab( "brushes/csgsphere_low.prefab" );
 			PrefabBrush.GenerateBrush();
 			Log.Info( "Loaded prefab brush!" );
 			Log.Info( PrefabBrush.GeneratedBrush.ConvexSolids[0].Planes.Count + " planes" );
 		}*/
 
-		CsgWorld.Subtract( CoolBrush, (min + max) * 0.5f, max - min );//PrefabBrush.GeneratedBrush
+
+	}
+
+	public void SubtractDefault( Vector3 min, Vector3 max )
+	{
+		CsgWorld.Subtract( CoolBrush, (min + max) * 0.5f, max - min );//
 		CsgWorld.Paint( CoolBrush, AltSandMaterial, (min + max) * 0.5f, (max - min) * 1.2f );//PrefabBrush.GeneratedBrush
+	}
+
+	public void AddDefault( Vector3 min, Vector3 max )
+	{
+		CsgWorld.Add( CoolBrush, SandMaterial, (min + max) * 0.5f, ((max - min) * 1.15f).WithY( 36 ) );
+	}
+
+	public void PaintDefault( Vector3 min, Vector3 max )
+	{
+		CsgWorld.Paint( CoolBrush, AltSandMaterial, (min + max) * 0.5f, (max - min) * 1.2f );
 	}
 
 	public void SubtractLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
@@ -78,6 +98,50 @@ public partial class World : Entity
 
 	private float[,] _terrainGrid;
 	private readonly int _resolution = 16;
+	public void GenerateTextureWorld( string TexturePath )
+	{
+		ResourceLibrary.TryGet<TextureLevel>( TexturePath, out TextureLevel map );
+		if ( map != null )
+		{
+			var _WorldLength = map.texture.Width * 16;
+			var _WorldHeight = map.texture.Height * 16;
+			var pointsX = map.texture.Width;
+			var pointsZ = map.texture.Height;
+
+			CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
+
+			_terrainGrid = new float[pointsX, pointsZ];
+
+			IEnumerable<Color32> pixels = map.texture.GetPixels().Reverse();
+
+			for ( var x = 0; x < pointsX; x++ )
+			{
+				for ( var z = 0; z < pointsZ; z++ )
+				{
+					int index = z * pointsX + x;
+
+					var n = pixels.ElementAt( index ).a;
+
+					_terrainGrid[x, z] = n;
+
+					// Add solid where alpha == 255
+					if ( _terrainGrid[x, z] == 255 )
+					{
+						// Pad the subtraction so the subtraction is more clean.
+						var paddedRes = 16 + (16 * 0.5f);
+
+						var min = new Vector3( (x * 16) - paddedRes, -32, (z * 16) - paddedRes );
+						var max = new Vector3( (x * 16) + paddedRes, 32, (z * 16) + paddedRes );
+
+						// Offset by position.
+						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+						AddDefault( min, max );
+					}
+				}
+			}
+		}
+	}
 
 	public void GenerateRandomWorld()
 	{
