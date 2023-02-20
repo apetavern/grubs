@@ -27,7 +27,7 @@ public partial class Grub : AnimatedEntity, INameTag
 		}
 	}
 
-	public Color Color => Player?.Preferences?.Color ?? Color.Transparent;
+	public Color Color => Player.Preferences.Color;
 
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
 
