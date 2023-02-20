@@ -15,24 +15,36 @@ public partial class World : Entity
 	[Net]
 	public DamageZone KillZone { get; set; }
 
+	/*
+	 * Brushes
+	 */
 	public CsgBrush CubeBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cube.csg" );
 	public CsgBrush CoolBrush { get; } = ResourceLibrary.Get<CsgBrush>( "brushes/cool.csg" );
-	public CSGBrushPrefab PrefabBrush { get; set; }
+
+	public CsgBrushPrefab PrefabBrush { get; set; }
+
+	/*
+	 * Materials
+	 */
 	public CsgMaterial DefaultMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/default.csgmat" );
+	public CsgMaterial AltSandMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/sand_a.csgmat" );
 	public CsgMaterial SandMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/sand_b.csgmat" );
 	public CsgMaterial LavaMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/lava.csgmat" );
+	public CsgMaterial RockMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/rocks_a.csgmat" );
+
+	public List<Vector3> PossibleSpawnPoints = new();
 
 	public readonly float WorldLength = GrubsConfig.TerrainLength;
 	public readonly float WorldHeight = GrubsConfig.TerrainHeight;
 	public const float WorldWidth = 64f;
 
 	private readonly float _zoom = GrubsConfig.TerrainNoiseZoom;
+	private readonly int _resolution = 16;
+	private float[,] _terrainGrid;
 	private const float GridSize = 1024f;
 
 	public override void Spawn()
 	{
-		Assert.True( Game.IsServer );
-
 		Reset();
 	}
 
@@ -42,75 +54,22 @@ public partial class World : Entity
 		CsgBackground?.Delete();
 
 		CsgWorld = new CsgSolid( GridSize );
-		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
-
 		CsgBackground = new CsgSolid( GridSize );
-		CsgBackground.Add( CubeBrush, DefaultMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 72, -WorldHeight / 2 ) );
 
-		GenerateRandomWorld();
-		SetupKillZone();
-	}
-
-	public void SubtractDefault( Vector3 min, Vector3 max )
-	{
-		/*if ( PrefabBrush is null )
+		switch ( GrubsConfig.WorldTerrainType )
 		{
-			PrefabBrush = CSGBrushPrefab.FromPrefab( "brushes/csgsphere.prefab" );
-			PrefabBrush.GenerateBrush();
-			Log.Info( "Loaded prefab brush!" );
-			Log.Info( PrefabBrush.GeneratedBrush.ConvexSolids[0].Planes.Count + " planes" );
-		}*/
-
-		CsgWorld.Subtract( CoolBrush, (min + max) * 0.5f, max - min );//PrefabBrush.GeneratedBrush
-		CsgWorld.Paint( CoolBrush, DefaultMaterial, (min + max) * 0.5f, (max - min) * 1.2f );//PrefabBrush.GeneratedBrush
-	}
-
-	public void SubtractLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
-	{
-		var midpoint = new Vector3( (start.x + stop.x) / 2, 0f, (start.z + stop.z) / 2 );
-		var scale = new Vector3( Vector3.DistanceBetween( start, stop ), 64f, size );
-
-		CsgWorld.Subtract( CubeBrush, midpoint, scale, Rotation.FromPitch( rotation.Pitch() ) );
-		CsgWorld.Paint( CubeBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
-	}
-
-	private float[,] _terrainGrid;
-	private readonly int _resolution = 16;
-
-	public void GenerateRandomWorld()
-	{
-		var pointsX = (WorldLength / _resolution).CeilToInt();
-		var pointsZ = (WorldHeight / _resolution).CeilToInt();
-
-		_terrainGrid = new float[pointsX, pointsZ];
-
-		var r = Game.Random.Int( 99999 );
-
-		// Initialize Simplex array of noise.
-		for ( var x = 0; x < pointsX; x++ )
-		{
-			for ( var z = 0; z < pointsZ; z++ )
-			{
-				var n = Noise.Perlin( (x + r) * _zoom, r, (z + r) * _zoom );
-				n = Math.Abs( (n * 2) - 1 );
-				_terrainGrid[x, z] = n;
-
-				// Subtract from the solid where the noise is under a certain threshold.
-				if ( _terrainGrid[x, z] < 0.1f )
-				{
-					// Pad the subtraction so the subtraction is more clean.
-					var paddedRes = _resolution + (_resolution * 0.75f);
-
-					var min = new Vector3( (x * _resolution) - paddedRes, -32, (z * _resolution) - paddedRes );
-					var max = new Vector3( (x * _resolution) + paddedRes, 32, (z * _resolution) + paddedRes );
-
-					// Offset by position.
-					min -= new Vector3( WorldLength / 2, 0, WorldHeight );
-					max -= new Vector3( WorldLength / 2, 0, WorldHeight );
-					SubtractDefault( min, max );
-				}
-			}
+			case GrubsConfig.TerrainType.Generated:
+				SetupGenerateWorld();
+				break;
+			case GrubsConfig.TerrainType.Texture:
+				SetupTextureWorld();
+				break;
+			default:
+				SetupGenerateWorld();
+				break;
 		}
+
+		SetupKillZone();
 	}
 
 	private void SetupKillZone()
@@ -134,12 +93,7 @@ public partial class World : Entity
 		int iterations = 0;
 		while ( true && iterations < 10000 )
 		{
-			var x = Game.Random.Int( ((int)WorldLength / _resolution) - 1 );
-			var z = Game.Random.Int( ((int)WorldHeight / _resolution) - 1 );
-			if ( _terrainGrid[x, z] > 0.1f )
-				continue;
-
-			var startPos = new Vector3( (x * _resolution) - WorldLength / 2, 0, (z * _resolution) - WorldHeight );
+			var startPos = Game.Random.FromList( PossibleSpawnPoints );
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * WorldHeight ).WithTag( "solid" ).Run();
 			if ( tr.Hit )
 				return tr.EndPosition;

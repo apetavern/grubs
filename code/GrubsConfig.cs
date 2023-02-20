@@ -2,6 +2,8 @@
 
 public static class GrubsConfig
 {
+
+
 	/// <summary>
 	/// The Grubs gamemode to play.
 	/// </summary>
@@ -67,6 +69,33 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar.Replicated( "terrain_noise_zoom" )]
 	public static float TerrainNoiseZoom { get; set; } = 2f;
+
+	public enum TerrainType
+	{
+		Generated = 0,
+		Texture = 1,
+	}
+
+	public enum TerrainTexture
+	{
+		Grubs = 0,
+		TestLevel = 1,
+		Battlefield = 2,
+		Cavern = 3,
+	}
+
+	/// <summary>
+	/// The type of terrain to use.
+	/// </summary>
+	[ConVar.Replicated( "terrain_type" )]
+	public static TerrainType WorldTerrainType { get; set; } = TerrainType.Generated;
+
+	/// <summary>
+	/// If texture is selected for TerrainType, TerrainTexture is used for determine which
+	/// prefabricated texture is used to build the terrain.
+	/// </summary>
+	[ConVar.Replicated( "terrain_texture" )]
+	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Grubs;
 
 	public static string[] GrubNames => new[]
 	{
