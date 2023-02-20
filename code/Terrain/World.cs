@@ -113,7 +113,7 @@ public partial class World : Entity
 			var pointsX = map.texture.Width;
 			var pointsZ = map.texture.Height;
 
-			CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 0, -_WorldHeight / 2 ) );
+			//CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 0, -_WorldHeight / 2 ) );
 			CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
 
 			_terrainGrid = new float[pointsX, pointsZ];
@@ -146,8 +146,10 @@ public partial class World : Entity
 						// Offset by position.
 						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
 						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
-						//AddDefault( min, max );
 						AddDefault( min, max );
+						//SubtractDefault( min, max );
+						/*var avg = (min + max) / 2;
+						PossibleSpawnPoints.Add( avg );*/
 					}
 					else
 					{
