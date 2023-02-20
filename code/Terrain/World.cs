@@ -1,5 +1,6 @@
 ﻿using Grubs.Terrain.CSG;
 using Sandbox.Csg;
+using System.Runtime.Intrinsics.X86;
 
 namespace Grubs;
 
@@ -56,6 +57,7 @@ public partial class World : Entity
 		}
 		else
 		{
+
 			GenerateTextureWorld( "textures/texturelevels/" + GrubsConfig.TerrainLevelType.ToString().ToLower() + ".tlvl" );
 		}
 		SetupKillZone();
@@ -112,40 +114,46 @@ public partial class World : Entity
 			var pointsX = map.texture.Width;
 			var pointsZ = map.texture.Height;
 
+			CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 0, -_WorldHeight / 2 ) );
 			CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
 
 			_terrainGrid = new float[pointsX, pointsZ];
 
-			IEnumerable<Color32> pixels = map.texture.GetPixels().Reverse();
+			Color32[] pixels = map.texture.GetPixels().Reverse().ToArray();
+
+			var min = new Vector3();
+			var max = new Vector3();
+			var n = 0;
+			int index = 0;
+
+			var paddedRes = 16;// + (16 * 0.5f);
 
 			for ( var x = 0; x < pointsX; x++ )
 			{
 				for ( var z = 0; z < pointsZ; z++ )
 				{
-					int index = z * pointsX + x;
+					index = z * pointsX + x;
 
-					var n = pixels.ElementAt( index ).a;
+					n = pixels[index].a;
 
 					_terrainGrid[x, z] = n;
 
 					// Add solid where alpha == 255
 					if ( _terrainGrid[x, z] == 255 )
 					{
-						// Pad the subtraction so the subtraction is more clean.
-						var paddedRes = 16 + (16 * 0.5f);
-
-						var min = new Vector3( (x * 16) - paddedRes, -32, (z * 16) - paddedRes );
-						var max = new Vector3( (x * 16) + paddedRes, 32, (z * 16) + paddedRes );
+						min = new Vector3( (x * 16) - paddedRes, -32, (z * 16) - paddedRes );
+						max = new Vector3( (x * 16) + paddedRes, 32, (z * 16) + paddedRes );
 
 						// Offset by position.
 						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
 						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+						//AddDefault( min, max );
 						AddDefault( min, max );
 					}
 					else
 					{
-						var min = new Vector3( (x * 16), -32, (z * 16) );
-						var max = new Vector3( (x * 16), 32, (z * 16) );
+						min = new Vector3( (x * 16), -32, (z * 16) );
+						max = new Vector3( (x * 16), 32, (z * 16) );
 
 						// Offset by position.
 						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
