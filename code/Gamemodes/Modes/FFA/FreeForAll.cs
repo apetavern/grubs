@@ -127,13 +127,15 @@ public partial class FreeForAll : Gamemode
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
-		if ( await CleanupTurn() )
-			return;
+
+		await CleanupTurn();
 
 		RotateActivePlayer();
+
 		UsedTurn = false;
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 		TurnIsChanging = false;
+		NextTurnTask = null;
 
 		await SetupTurn();
 	}
@@ -143,8 +145,7 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private async ValueTask<bool> CleanupTurn()
 	{
-		if ( ActivePlayer.IsValid() )
-			ActivePlayer.EndTurn();
+		ActivePlayer.EndTurn();
 
 		await GameTask.DelaySeconds( 1f );
 
@@ -235,15 +236,15 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		if ( ActivePlayer.IsValid() && !ActivePlayer.IsDisconnected )
+		if ( !ActivePlayer.IsDisconnected )
 		{
 			PlayerRotation.RemoveAt( 0 );
 			PlayerRotation.Add( ActivePlayer );
 		}
 
-		// Clean up any disconnected players
-		foreach ( var player in Players )
+		for ( int i = Players.Count - 1; i >= 0; --i )
 		{
+			var player = Players[i];
 			if ( !player.IsDisconnected )
 				continue;
 
@@ -252,9 +253,6 @@ public partial class FreeForAll : Gamemode
 
 			player.Delete();
 		}
-
-		Log.Info( Players.Count );
-		Log.Info( PlayerRotation.Count );
 
 		ActivePlayer = PlayerRotation[0];
 		ActivePlayer.PickNextGrub();
@@ -274,7 +272,7 @@ public partial class FreeForAll : Gamemode
 
 	private bool CheckCurrentPlayerFiring()
 	{
-		var weapon = ActivePlayer?.ActiveGrub?.ActiveWeapon;
+		var weapon = ActivePlayer.ActiveGrub.ActiveWeapon;
 		if ( weapon is null )
 			return false;
 
@@ -308,7 +306,11 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.Playing )
 		{
-			if ( ActivePlayer.IsValid() && ActivePlayer.IsDisconnected )
+			var isPreparingNextTurn = NextTurnTask is not null;
+			if ( isPreparingNextTurn )
+				return;
+
+			if ( ActivePlayer.IsDisconnected )
 			{
 				UseTurn( false );
 			}
@@ -318,9 +320,9 @@ public partial class FreeForAll : Gamemode
 				UseTurn();
 			}
 
-			if ( UsedTurn && (NextTurnTask is null || NextTurnTask.IsCompleted) )
+			if ( UsedTurn && !isPreparingNextTurn )
 			{
-				NextTurnTask = NextTurn();
+				NextTurnTask ??= NextTurn();
 			}
 
 			ZoneTrigger();
