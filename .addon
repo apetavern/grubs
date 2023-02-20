@@ -381,6 +381,32 @@
         "Group": "Terrain",
         "Minimum": 1,
         "Maximum": 4
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "0",
+            "Name": "Random Noise"
+          },
+          {
+            "Value": "1",
+            "Name": "Grubs logo"
+          },
+          {
+            "Value": "2",
+            "Name": "Test terrain"
+          },
+          {
+            "Value": "3",
+            "Name": "Battlefield"
+          }
+        ],
+        "ConVarName": "level_type",
+        "DisplayName": "Level Type",
+        "DefaultValue": "0",
+        "Description": "",
+        "Group": "Terrain"
       }
     ],
     "CsProjName": "",

@@ -2,6 +2,8 @@
 
 public static class GrubsConfig
 {
+
+
 	/// <summary>
 	/// The Grubs gamemode to play.
 	/// </summary>
@@ -67,6 +69,20 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar.Replicated( "terrain_noise_zoom" )]
 	public static float TerrainNoiseZoom { get; set; } = 2f;
+
+	public enum TerrainType
+	{
+		RandomNoise = 0,
+		Grubs = 1,
+		TestLevel = 2,
+		Battlefield = 3
+	}
+
+	/// <summary>
+	/// Level type to load ,will use enum name as filename to load when picking textures.
+	/// </summary>
+	[ConVar.Replicated( "level_type" )]
+	public static TerrainType TerrainLevelType { get; set; } = TerrainType.RandomNoise;
 
 	public static string[] GrubNames => new[]
 	{
