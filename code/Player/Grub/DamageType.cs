@@ -32,5 +32,9 @@ public enum DamageType
 	/// <summary>
 	/// Admin abuse.
 	/// </summary>
-	Admin
+	Admin,
+	/// <summary>
+	/// The player disconnected.
+	/// </summary>
+	Disconnect
 }

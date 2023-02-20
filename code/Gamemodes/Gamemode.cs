@@ -5,15 +5,13 @@ public partial class Gamemode : Entity
 {
 	public virtual string GamemodeName => "";
 
-	[Net]
-	public int PlayerCount { get; private set; }
-
 	/// <summary>
-	/// All players in the game, including dead players.
-	/// Excludes disconnected players.
+	/// A list of currently connected players that are actively apart of the gamemode.
 	/// </summary>
 	[Net]
-	public IList<Player> PlayerList { get; set; }
+	public IList<Player> Players { get; set; }
+
+	private List<Player> DisconnectedPlayers { get; set; } = new();
 
 	[Net]
 	public Player ActivePlayer { get; set; }
@@ -54,6 +52,14 @@ public partial class Gamemode : Entity
 		Transmit = TransmitType.Always;
 	}
 
+	public override void Simulate( IClient client )
+	{
+		foreach ( var disconnectedPlayer in DisconnectedPlayers )
+		{
+			disconnectedPlayer.Simulate( client );
+		}
+	}
+
 	public virtual string GetGameStateLabel()
 	{
 		return "";
@@ -74,14 +80,12 @@ public partial class Gamemode : Entity
 
 	internal virtual void Start() { }
 
-	internal virtual void OnClientJoined( IClient client )
-	{
-		PlayerCount++;
-	}
+	internal virtual void OnClientJoined( IClient client ) { }
 
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
-		PlayerCount--;
+		if ( cl.Pawn is Player player )
+			DisconnectedPlayers.Add( player );
 	}
 
 	internal virtual void PrepareLoadout( Player player, Inventory inventory ) { }

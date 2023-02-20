@@ -1,4 +1,3 @@
-global using Editor;
 global using Sandbox;
 global using Sandbox.Diagnostics;
 global using Sandbox.UI;
@@ -45,14 +44,14 @@ public sealed partial class GrubsGame : GameManager
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
-		base.ClientDisconnect( client, reason );
-
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 	}
 
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
+
+		GamemodeSystem.Instance.Simulate( cl );
 	}
 
 	public override void FrameSimulate( IClient cl )

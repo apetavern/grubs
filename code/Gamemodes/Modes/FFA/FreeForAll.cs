@@ -88,12 +88,11 @@ public partial class FreeForAll : Gamemode
 			// TODO: The user should be able to set this in the menu.
 			player.Preferences.SetColor();
 
+			Players.Add( player );
 			PlayerRotation.Add( player );
 
-			PlayerList.Add( player );
 			MoveToSpawnpoint( client );
 		}
-
 
 		ActivePlayer = PlayerRotation[0];
 	}
@@ -128,13 +127,16 @@ public partial class FreeForAll : Gamemode
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
+
 		if ( await CleanupTurn() )
 			return;
 
 		RotateActivePlayer();
+
 		UsedTurn = false;
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 		TurnIsChanging = false;
+		NextTurnTask = null;
 
 		await SetupTurn();
 	}
@@ -145,6 +147,7 @@ public partial class FreeForAll : Gamemode
 	private async ValueTask<bool> CleanupTurn()
 	{
 		ActivePlayer.EndTurn();
+
 		await GameTask.DelaySeconds( 1f );
 
 		await HandleGrubDeaths();
@@ -156,34 +159,38 @@ public partial class FreeForAll : Gamemode
 
 	private async Task HandleGrubDeaths()
 	{
-		bool rerun;
-		do
+		foreach ( var player in Players )
 		{
-			rerun = false;
-			foreach ( var player in PlayerList )
+			if ( player.IsDead )
+				continue;
+
+			foreach ( var grub in player.Grubs )
 			{
-				if ( player.Dead )
+				if ( grub.LifeState == LifeState.Dead )
 					continue;
 
-				foreach ( var grub in player.Grubs )
-				{
-					if ( grub.LifeState == LifeState.Dead )
-						continue;
+				if ( player.IsDisconnected )
+					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
 
-					if ( !grub.HasBeenDamaged )
-						continue;
+				if ( !grub.HasBeenDamaged )
+					continue;
 
-					rerun = true;
-					if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
-						await grub.DeathTask;
-
-					CameraTarget = grub;
-					// TODO: Send an event to the UI for grub damage worldhud.
-					await GameTask.Delay( 1000 );
-					CameraTarget = null;
-				}
+				await HandleGrubDeath( grub );
 			}
-		} while ( rerun );
+		}
+	}
+
+	private async Task HandleGrubDeath( Grub grub )
+	{
+		if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+			await grub.DeathTask;
+
+		CameraTarget = grub;
+
+		// TODO: Send an event to the UI for grub damage worldhud.
+		await GameTask.Delay( 1000 );
+
+		CameraTarget = null;
 	}
 
 	/// <summary>
@@ -199,9 +206,9 @@ public partial class FreeForAll : Gamemode
 		var deadPlayers = 0;
 		Player lastPlayerAlive;
 
-		foreach ( var player in All.OfType<Player>() )
+		foreach ( var player in Players )
 		{
-			if ( player.Dead )
+			if ( player.IsDead )
 			{
 				deadPlayers++;
 				continue;
@@ -211,14 +218,14 @@ public partial class FreeForAll : Gamemode
 		}
 
 		// TODO: Pass win/lose/draw information.
-		if ( deadPlayers == PlayerCount )
+		if ( deadPlayers == Players.Count )
 		{
 			// Draw
 			CurrentState = GameState.GameOver;
 			return true;
 		}
 
-		if ( deadPlayers == PlayerCount - 1 )
+		if ( deadPlayers == Players.Count - 1 )
 		{
 			// 1 Player remaining
 			CurrentState = GameState.GameOver;
@@ -230,10 +237,21 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		var current = ActivePlayer;
+		if ( !ActivePlayer.IsDisconnected )
+		{
+			PlayerRotation.RemoveAt( 0 );
+			PlayerRotation.Add( ActivePlayer );
+		}
 
-		PlayerRotation.RemoveAt( 0 );
-		PlayerRotation.Add( current );
+		for ( int i = Players.Count - 1; i >= 0; --i )
+		{
+			var player = Players[i];
+			if ( !player.IsDisconnected )
+				continue;
+
+			Players.Remove( player );
+			PlayerRotation.Remove( player );
+		}
 
 		ActivePlayer = PlayerRotation[0];
 		ActivePlayer.PickNextGrub();
@@ -276,7 +294,7 @@ public partial class FreeForAll : Gamemode
 				TerrainReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
 			}
 
-			if ( PlayerCount >= MinimumPlayers && TerrainReady && !Started )
+			if ( Game.Clients.Count >= MinimumPlayers && TerrainReady && !Started )
 			{
 				Start();
 			}
@@ -287,15 +305,22 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is GameState.Playing )
 		{
+			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
+				return;
+
+			if ( ActivePlayer.IsDisconnected )
+			{
+				UseTurn( false );
+			}
 
 			if ( TimeUntilNextTurn <= 0f && !UsedTurn )
 			{
 				UseTurn();
 			}
 
-			if ( UsedTurn && (NextTurnTask is null || NextTurnTask.IsCompleted) )
+			if ( UsedTurn )
 			{
-				NextTurnTask = NextTurn();
+				NextTurnTask ??= NextTurn();
 			}
 
 			ZoneTrigger();
@@ -316,16 +341,6 @@ public partial class FreeForAll : Gamemode
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
 			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
 		}
-	}
-
-	internal override void OnClientDisconnect( IClient client, NetworkDisconnectionReason reason )
-	{
-		base.OnClientDisconnect( client, reason );
-
-		if ( client.Pawn is not Player player )
-			return;
-
-		PlayerList.Remove( player );
 	}
 
 	[ConCmd.Admin( "gr_skip_turn" )]
