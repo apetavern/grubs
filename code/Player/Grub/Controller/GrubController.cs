@@ -61,8 +61,6 @@ public partial class GrubController : EntityComponent<Grub>
 		{
 			var girth = BodyGirth * 0.5f;
 
-			CurrentEyeHeight = 28f - Grub.GetAnimParameterFloat( "heightdiff" );
-
 			var mins = new Vector3( -girth, -girth, 0 );
 			var maxs = new Vector3( +girth, +girth, CurrentEyeHeight );
 
