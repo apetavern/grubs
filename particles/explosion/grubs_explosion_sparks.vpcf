@@ -412,13 +412,14 @@
 		},
 		{
 			_class = "C_OP_BasicMovement"
-			m_Gravity = [ 0.0, 0.0, -900.0 ]
+			m_Gravity = [ 0.0, 0.0, -500.0 ]
 		},
 	]
 	m_Constraints = 
 	[
 		{
 			_class = "C_OP_WorldTraceConstraint"
+			m_bDisableOperator = true
 		},
 	]
 	m_Renderers = 

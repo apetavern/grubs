@@ -400,6 +400,7 @@
 		{
 			_class = "C_OP_FadeAndKill"
 			m_flStartFadeOutTime = 0.3
+			m_flEndFadeOutTime = 0.65
 		},
 		{
 			_class = "C_OP_SetVec"

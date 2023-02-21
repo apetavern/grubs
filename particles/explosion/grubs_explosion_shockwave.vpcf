@@ -174,8 +174,7 @@
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.25
 			m_flStartScale = 0.0
-			m_flEndScale = 25.0
-			m_bDisableOperator = true
+			m_flEndScale = 3.0
 		},
 	]
 	m_Renderers = 
