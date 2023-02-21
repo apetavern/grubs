@@ -23,7 +23,7 @@ public class UnstuckMechanic : ControllerMechanic
 
 		for ( int i = 0; i < AttemptsPerTick; i++ )
 		{
-			var pos = Position + Vector3.Random.Normal * (_stuckTries / 2.0f);
+			var pos = Position + Vector3.Random.Normal.WithY( 0 ) * (_stuckTries / 2.0f);
 
 			if ( i == 0 )
 				pos = Position + Vector3.Up * 5;
