@@ -1,5 +1,10 @@
 @namespace Grubs
 
+@if (!IsPlaying())
+{
+    return;
+}
+
 <root class="@(_isEnabled ? "" : "hide")">
     <div>
         <label>Toggle Input</label>
@@ -42,7 +47,13 @@
             _isEnabled = !_isEnabled;
     }
 
-    protected override int BuildHash() => HashCode.Combine(_isEnabled);
+    @* TODO: What about other gamemodes? *@
+    private bool IsPlaying()
+    {
+        return GamemodeSystem.Instance is FreeForAll ffa && ffa.CurrentState == FreeForAll.GameState.Playing;
+    }
+
+    protected override int BuildHash() => HashCode.Combine(_isEnabled, IsPlaying());
 }
 
 <style>
