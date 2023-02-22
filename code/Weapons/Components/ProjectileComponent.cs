@@ -7,6 +7,9 @@ public partial class ProjectileComponent : WeaponComponent
 	public Model ProjectileModel { get; set; }
 
 	[Prefab]
+	public bool ShouldFollowProjectile { get; set; } = true;
+
+	[Prefab]
 	public bool ProjectileShouldBounce { get; set; } = false;
 
 	[Prefab]
@@ -33,6 +36,9 @@ public partial class ProjectileComponent : WeaponComponent
 	[Prefab, ResourceType( "sound" )]
 	public string ProjectileExplosionSound { get; set; }
 
+	[Prefab, ResourceType( "vpcf" )]
+	public string TrailParticle { get; set; }
+
 	public override bool ShouldStart()
 	{
 		return Grub.IsTurn && Grub.Controller.IsGrounded;
@@ -48,13 +54,12 @@ public partial class ProjectileComponent : WeaponComponent
 
 	public override void FireInstant()
 	{
-		Log.Info( "Fire Instant" );
+		// Instantly fire using the minimum charge.
+		FireCharged();
 	}
 
 	public override void FireCharged()
 	{
-		Log.Info( "Fire Charged: " + Charge );
-
 		if ( !Game.IsServer )
 			return;
 
@@ -70,6 +75,8 @@ public partial class ProjectileComponent : WeaponComponent
 			.WithSpeed( ProjectileSpeed )
 			.WithExplosionSound( ProjectileExplosionSound )
 			.WithExplosionRadius( ProjectileExplosionRadius )
+			.WithTrailParticle( TrailParticle )
+			.WithProjectileFollow( ShouldFollowProjectile )
 			.SetCollisionReaction( ProjectileCollisionReaction.Explosive );
 
 		if ( ProjectileShouldUseTrace )
@@ -84,7 +91,7 @@ public partial class ProjectileComponent : WeaponComponent
 		else
 		{
 			projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, position, ProjectileRadius );
-			var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
+			var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 35f);
 			var tr = Trace.Ray( position, desiredPosition ).Ignore( Weapon.Owner ).Run();
 			projectile.Position = tr.EndPosition;
 			projectile.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * Charge * ProjectileSpeed).WithY( 0f );
@@ -97,7 +104,7 @@ public partial class ProjectileComponent : WeaponComponent
 		Grub.SetAnimParameter( "fire", true );
 
 		IsFiring = false;
-		Charge = 0;
+		Charge = MinCharge;
 
 		FireFinished();
 	}

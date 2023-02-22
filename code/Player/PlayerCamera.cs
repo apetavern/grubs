@@ -76,7 +76,8 @@ public class PlayerCamera
 		{
 			foreach ( var projectile in Entity.All.OfType<Projectile>() )
 			{
-				SetTarget( projectile );
+				if ( projectile.ShouldFollowProjectile )
+					SetTarget( projectile );
 				return;
 			}
 

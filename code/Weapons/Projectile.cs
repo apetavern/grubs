@@ -3,8 +3,10 @@
 [Category( "Weapon" )]
 public partial class Projectile : ModelEntity
 {
-	public bool HasBeenDamaged => false;
+	[Net]
+	public bool ShouldFollowProjectile { get; private set; } = true;
 
+	public bool HasBeenDamaged => false;
 	public bool Resolved => false;
 
 	private Grub Grub { get; set; }
@@ -124,6 +126,17 @@ public partial class Projectile : ModelEntity
 	public Projectile SetCollisionReaction( ProjectileCollisionReaction reaction )
 	{
 		CollisionReaction = reaction;
+		return this;
+	}
+
+	/// <summary>
+	/// Whether or not the camera should follow the projectile.
+	/// </summary>
+	/// <param name="following"></param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithProjectileFollow( bool following )
+	{
+		ShouldFollowProjectile = following;
 		return this;
 	}
 

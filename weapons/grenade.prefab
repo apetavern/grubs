@@ -60,6 +60,10 @@
           "ProjectileExplosionSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "ShouldFollowProjectile": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       }

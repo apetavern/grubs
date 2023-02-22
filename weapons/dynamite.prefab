@@ -1,0 +1,117 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "41711919-af6a-4dee-adf5-154b032d8d48",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "2d63a499-f234-4646-b055-cd7297b4bfdc",
+        "Class": "ProjectileComponent",
+        "Keys": {
+          "ProjectileShouldBounce": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "ProjectileShouldUseTrace": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "ProjectileMaxBounces": {
+            "Type": "Int32",
+            "Value": "0"
+          },
+          "ProjectileSpeed": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "ProjectileExplosionRadius": {
+            "Type": "Single",
+            "Value": "70"
+          },
+          "ProjectileExplodeAfter": {
+            "Type": "Single",
+            "Value": "5"
+          },
+          "ProjectileForceMultiplier": {
+            "Type": "Single",
+            "Value": "0.7"
+          },
+          "ProjectileRadius": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "ProjectileExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "ProjectileModel": {
+            "Type": "Model",
+            "Value": "\u0022models/weapons/dynamite/armeddynamite.vmdl\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Projectile\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "TrailParticle": {
+            "Type": "String",
+            "Value": "\u0022particles/smoke_trail.vpcf\u0022"
+          },
+          "ShouldFollowProjectile": {
+            "Type": "Boolean",
+            "Value": "false"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Droppable\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/dynamite/dynamite.vmdl_c.png\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/dynamite/dynamite.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Dynamite\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      }
+    }
+  }
+}
