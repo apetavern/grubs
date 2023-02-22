@@ -51,6 +51,6 @@ public class NameTag : WorldPanel
 
 		Style.FontColor = nameTaggedEntity.Color;
 
-		WorldScale = (1.0f + Game.LocalClient.Components.Get<CameraMode>().DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
+		WorldScale = (1.0f + Game.LocalClient.Components.Get<GrubsCamera>().DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
 	}
 }

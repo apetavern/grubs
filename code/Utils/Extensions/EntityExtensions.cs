@@ -10,7 +10,7 @@ public static class EntityExtensions
 			return;
 
 		var pos = e.Position.ToScreen();
-		var dist = Game.LocalClient.Components.Get<CameraMode>().Distance / 10f;
+		var dist = Game.LocalClient.Components.Get<GrubsCamera>().Distance / 10f;
 		pos = ((pos - 0.5f) * dist) + 0.5f;
 		Sound.FromScreen( sound, -pos.x, -pos.y );
 	}

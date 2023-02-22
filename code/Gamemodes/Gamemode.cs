@@ -82,7 +82,7 @@ public partial class Gamemode : Entity
 
 	internal virtual void OnClientJoined( IClient client )
 	{
-		client.Components.Create<CameraMode>();
+		client.Components.Create<GrubsCamera>();
 	}
 
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
