@@ -8,7 +8,7 @@ Layer0
 	g_flDirectionalLightmapStrength "1.000"
 
 	//---- Fog ----
-	g_bFogEnabled "0"
+	g_bFogEnabled "1"
 
 	//---- Main ----
 	Colour "textures/environment/sand_shells_color.png"

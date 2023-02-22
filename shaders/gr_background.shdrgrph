@@ -1,22 +1,233 @@
 {
   "Model": null,
   "Description": "",
+  "BlendMode": "Opaque",
   "nodes": [
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Normal",
+        "Group": "Main",
+        "Extension": "Normal",
+        "Processor": "NormalizeNormals",
+        "ColorSpace": "Linear"
+      },
+      "Sampler": {},
+      "Identifier": "0",
+      "Position": "-816,-320"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Rough",
+        "Group": "Main",
+        "Extension": "Rough",
+        "ColorSpace": "Linear"
+      },
+      "Sampler": {},
+      "Identifier": "1",
+      "Position": "-816,-160"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "0.03789,0.04075,0.04624,1",
+      "Identifier": "2",
+      "Position": "-816,-640"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "3",
+      "Position": "-1120,-416"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Colour",
+        "Group": "Main"
+      },
+      "Sampler": {},
+      "Identifier": "4",
+      "Position": "-816,-480"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "5",
+      "Position": "304,-160"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "DefaultA": 1,
+      "DefaultB": 0.2,
+      "Identifier": "6",
+      "Position": "-384,-576"
+    },
+    {
+      "_class": "Saturate",
+      "Input": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "Identifier": "7",
+      "Position": "-192,64"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 75,
+      "Identifier": "8",
+      "Position": "-416,64"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "15",
+        "Output": "Y"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 0,
+      "Identifier": "9",
+      "Position": "-608,64"
+    },
+    {
+      "_class": "Saturate",
+      "Input": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "Identifier": "10",
+      "Position": "-192,160"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "15",
+        "Output": "Z"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 1024,
+      "Identifier": "11",
+      "Position": "-608,160"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "12",
+      "Position": "448,-464"
+    },
+    {
+      "_class": "WorldPosition",
+      "Identifier": "13",
+      "Position": "-1008,112"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 750,
+      "Identifier": "14",
+      "Position": "-416,160"
+    },
+    {
+      "_class": "SplitVector",
+      "Input": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "Identifier": "15",
+      "Position": "-800,112"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "C": {},
+      "Fraction": 0.65,
+      "Identifier": "16",
+      "Position": "752,-464"
+    },
     {
       "_class": "Result",
       "Albedo": {
-        "Identifier": "96a3989e-ef57-4769-847d-86bde60d37c3",
+        "Identifier": "16",
         "Output": "Result"
       },
       "Emission": {},
       "Opacity": {},
       "TintMask": {},
       "Normal": {
-        "Identifier": "524934f7-1c48-4503-a768-68ac2ccf041a",
+        "Identifier": "0",
         "Output": "Result"
       },
       "Roughness": {
-        "Identifier": "269ef07c-4963-4fa3-a425-54e6efa9c0fa",
+        "Identifier": "1",
         "Output": "Result"
       },
       "Metalness": {},
@@ -36,84 +247,8 @@
       "Absorption": {},
       "IndexOfRefraction": {},
       "MicroThickness": {},
-      "Identifier": "7609c021-bce0-4c0e-91b1-8c409f767e2a",
-      "Position": "272,-240"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "fa1646cd-83ad-400a-bf4d-cb17d426f848",
-        "Output": "Result"
-      },
-      "Texture": "textures/dev/white.vtex",
-      "UI": {
-        "Name": "Colour",
-        "Group": ""
-      },
-      "Sampler": {},
-      "Identifier": "96a3989e-ef57-4769-847d-86bde60d37c3",
-      "Position": "-176,-256"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "fa1646cd-83ad-400a-bf4d-cb17d426f848",
-        "Output": "Result"
-      },
-      "Texture": "textures/dev/white.vtex",
-      "UI": {
-        "Name": "Normal",
-        "Group": "",
-        "Extension": "Normal",
-        "Processor": "NormalizeNormals"
-      },
-      "Sampler": {},
-      "Identifier": "524934f7-1c48-4503-a768-68ac2ccf041a",
-      "Position": "-176,-192"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "fa1646cd-83ad-400a-bf4d-cb17d426f848",
-        "Output": "Result"
-      },
-      "Texture": "textures/dev/white.vtex",
-      "UI": {
-        "Name": "Rough",
-        "Group": "",
-        "Extension": "Rough"
-      },
-      "Sampler": {},
-      "Identifier": "269ef07c-4963-4fa3-a425-54e6efa9c0fa",
-      "Position": "-176,-128"
-    },
-    {
-      "_class": "Float",
-      "Value": 0.25,
-      "Identifier": "de4afa6f-a70c-4384-8271-ecdbaa8ea4de",
-      "Position": "-656,-144"
-    },
-    {
-      "_class": "Multiply",
-      "A": {
-        "Identifier": "2a442b1e-1640-4ca6-9607-f1056f356c96",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "de4afa6f-a70c-4384-8271-ecdbaa8ea4de",
-        "Output": "Value"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "fa1646cd-83ad-400a-bf4d-cb17d426f848",
-      "Position": "-416,-192"
-    },
-    {
-      "_class": "TextureCoord",
-      "UseSecondaryCoord": false,
-      "Tiling": "1,1",
-      "Identifier": "2a442b1e-1640-4ca6-9607-f1056f356c96",
-      "Position": "-656,-224"
+      "Identifier": "17",
+      "Position": "1056,-464"
     }
   ]
 }

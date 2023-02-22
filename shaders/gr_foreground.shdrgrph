@@ -1,1 +1,254 @@
-{"Model":"models/dev/box.vmdl","Description":"","nodes":[{"_class":"Result","Albedo":{"Identifier":"19","Output":"Result"},"Emission":{},"Opacity":{},"TintMask":{},"Normal":{"Identifier":"2","Output":"Result"},"Roughness":{"Identifier":"3","Output":"Result"},"Metalness":{},"AmbientOcclusion":{},"Sheen":{},"SheenRoughness":{},"Clearcoat":{},"ClearcoatRoughness":{},"ClearcoatNormal":{},"Anisotropy":{},"AnisotropyRotation":{},"Thickness":{},"SubsurfacePower":{},"SheenColor":{},"SubsurfaceColor":{},"Transmission":{},"Absorption":{},"IndexOfRefraction":{},"MicroThickness":{},"Identifier":"0","Position":"1600,-320"},{"_class":"TextureSampler","Coords":{"Identifier":"4","Output":"Result"},"Texture":"textures/dev/white.vtex","UI":{"Name":"Colour","Group":"Main"},"Sampler":{},"Identifier":"1","Position":"-256,-272"},{"_class":"TextureSampler","Coords":{"Identifier":"4","Output":"Result"},"Texture":"textures/dev/white.vtex","UI":{"Name":"Normal","Group":"Main","Extension":"Normal","Processor":"NormalizeNormals","ColorSpace":"Linear"},"Sampler":{},"Identifier":"2","Position":"-256,-208"},{"_class":"TextureSampler","Coords":{"Identifier":"4","Output":"Result"},"Texture":"textures/dev/white.vtex","UI":{"Name":"Rough","Group":"Main","Extension":"Rough","ColorSpace":"Linear"},"Sampler":{},"Identifier":"3","Position":"-256,-144"},{"_class":"TextureCoord","UseSecondaryCoord":false,"Tiling":"1,1","Identifier":"4","Position":"-576,-272"},{"_class":"SplitVector","Input":{"Identifier":"9","Output":"Result"},"Identifier":"5","Position":"-256,256"},{"_class":"Float4","Name":"","Value":"0,0,0,1","Identifier":"6","Position":"-256,96"},{"_class":"Divide","A":{"Identifier":"11","Output":"Result"},"B":{},"DefaultA":0,"DefaultB":2000,"Identifier":"7","Position":"128,304"},{"_class":"Float4","Name":"","Value":"1,1,1,1","Identifier":"8","Position":"-256,-64"},{"_class":"WorldPosition","Identifier":"9","Position":"-464,256"},{"_class":"Lerp","A":{"Identifier":"1","Output":"Result"},"B":{"Identifier":"13","Output":"Result"},"C":{"Identifier":"17","Output":"Result"},"Fraction":0.5,"Identifier":"10","Position":"992,-320"},{"_class":"Add","A":{"Identifier":"5","Output":"Z"},"B":{},"DefaultA":0,"DefaultB":1024,"Identifier":"11","Position":"-64,304"},{"_class":"Float4","Name":"","Value":"0.16185,0.05906,0.02194,1","Identifier":"12","Position":"-256,-432"},{"_class":"Multiply","A":{"Identifier":"1","Output":"Result"},"B":{"Identifier":"12","Output":"Result"},"DefaultA":1,"DefaultB":0.2,"Identifier":"13","Position":"96,-352"},{"_class":"Add","A":{"Identifier":"5","Output":"Y"},"B":{},"DefaultA":0,"DefaultB":20,"Identifier":"14","Position":"-64,208"},{"_class":"Divide","A":{"Identifier":"14","Output":"Result"},"B":{},"DefaultA":0,"DefaultB":75,"Identifier":"15","Position":"128,208"},{"_class":"Saturate","Input":{"Identifier":"7","Output":"Result"},"Identifier":"16","Position":"352,304"},{"_class":"Saturate","Input":{"Identifier":"15","Output":"Result"},"Identifier":"17","Position":"352,208"},{"_class":"Lerp","A":{"Identifier":"13","Output":"Result"},"B":{"Identifier":"1","Output":"Result"},"C":{"Identifier":"16","Output":"Result"},"Fraction":0,"Identifier":"18","Position":"848,-16"},{"_class":"Lerp","A":{"Identifier":"10","Output":"Result"},"B":{"Identifier":"18","Output":"Result"},"C":{},"Fraction":0.65,"Identifier":"19","Position":"1296,-320"}]}
+{
+  "Model": "models/dev/box.vmdl",
+  "Description": "",
+  "BlendMode": "Opaque",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "Emission": {},
+      "Opacity": {},
+      "TintMask": {},
+      "Normal": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "Roughness": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Metalness": {},
+      "AmbientOcclusion": {},
+      "Sheen": {},
+      "SheenRoughness": {},
+      "Clearcoat": {},
+      "ClearcoatRoughness": {},
+      "ClearcoatNormal": {},
+      "Anisotropy": {},
+      "AnisotropyRotation": {},
+      "Thickness": {},
+      "SubsurfacePower": {},
+      "SheenColor": {},
+      "SubsurfaceColor": {},
+      "Transmission": {},
+      "Absorption": {},
+      "IndexOfRefraction": {},
+      "MicroThickness": {},
+      "Identifier": "0",
+      "Position": "1600,-320"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Colour",
+        "Group": "Main"
+      },
+      "Sampler": {},
+      "Identifier": "1",
+      "Position": "-272,-336"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Normal",
+        "Group": "Main",
+        "Extension": "Normal",
+        "Processor": "NormalizeNormals",
+        "ColorSpace": "Linear"
+      },
+      "Sampler": {},
+      "Identifier": "2",
+      "Position": "-272,-176"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Rough",
+        "Group": "Main",
+        "Extension": "Rough",
+        "ColorSpace": "Linear"
+      },
+      "Sampler": {},
+      "Identifier": "3",
+      "Position": "-272,-16"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "4",
+      "Position": "-576,-272"
+    },
+    {
+      "_class": "SplitVector",
+      "Input": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "Identifier": "5",
+      "Position": "-256,256"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 2000,
+      "Identifier": "6",
+      "Position": "128,304"
+    },
+    {
+      "_class": "WorldPosition",
+      "Identifier": "7",
+      "Position": "-464,256"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "8",
+      "Position": "992,-320"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "5",
+        "Output": "Z"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 1024,
+      "Identifier": "9",
+      "Position": "-64,304"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "0.16185,0.05906,0.02194,1",
+      "Identifier": "10",
+      "Position": "-272,-496"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "DefaultA": 1,
+      "DefaultB": 0.2,
+      "Identifier": "11",
+      "Position": "160,-432"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "5",
+        "Output": "Y"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 20,
+      "Identifier": "12",
+      "Position": "-64,208"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 75,
+      "Identifier": "13",
+      "Position": "128,208"
+    },
+    {
+      "_class": "Saturate",
+      "Input": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "Identifier": "14",
+      "Position": "352,304"
+    },
+    {
+      "_class": "Saturate",
+      "Input": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "Identifier": "15",
+      "Position": "352,208"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "16",
+      "Position": "848,-16"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "16",
+        "Output": "Result"
+      },
+      "C": {},
+      "Fraction": 0.65,
+      "Identifier": "17",
+      "Position": "1296,-320"
+    }
+  ]
+}
