@@ -14,6 +14,7 @@
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_vecCP1Pos = [ 0.0, 0.0, 32.0 ]
+			m_bDisableOperator = true
 		},
 	]
 	m_Emitters = 
@@ -79,7 +80,7 @@
 			m_flSpeedMin = 
 			{
 				m_nType = "PF_TYPE_NAMED_VALUE"
-				m_nMapType = "PF_MAP_TYPE_MULT"
+				m_nMapType = "PF_MAP_TYPE_DIRECT"
 				m_NamedValue = "Speed"
 				m_flLiteralValue = 25.0
 				m_nControlPoint = 0
@@ -125,7 +126,7 @@
 			m_flSpeedMax = 
 			{
 				m_nType = "PF_TYPE_NAMED_VALUE"
-				m_nMapType = "PF_MAP_TYPE_MULT"
+				m_nMapType = "PF_MAP_TYPE_DIRECT"
 				m_NamedValue = "Speed"
 				m_flLiteralValue = 25.0
 				m_nControlPoint = 0
