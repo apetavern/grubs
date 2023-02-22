@@ -80,7 +80,10 @@ public partial class Gamemode : Entity
 
 	internal virtual void Start() { }
 
-	internal virtual void OnClientJoined( IClient client ) { }
+	internal virtual void OnClientJoined( IClient client )
+	{
+		client.Components.Create<GrubsCamera>();
+	}
 
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
