@@ -1,0 +1,286 @@
+{
+  "Model": "models/dev/box.vmdl",
+  "Description": "",
+  "BlendMode": "Opaque",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "Emission": {},
+      "Opacity": {},
+      "TintMask": {},
+      "Normal": {
+        "Identifier": "19",
+        "Output": "Result"
+      },
+      "Roughness": {
+        "Identifier": "20",
+        "Output": "Result"
+      },
+      "Metalness": {},
+      "AmbientOcclusion": {},
+      "Sheen": {},
+      "SheenRoughness": {},
+      "Clearcoat": {},
+      "ClearcoatRoughness": {},
+      "ClearcoatNormal": {},
+      "Anisotropy": {},
+      "AnisotropyRotation": {},
+      "Thickness": {},
+      "SubsurfacePower": {},
+      "SheenColor": {},
+      "SubsurfaceColor": {},
+      "Transmission": {},
+      "Absorption": {},
+      "IndexOfRefraction": {},
+      "MicroThickness": {},
+      "Identifier": "0",
+      "Position": "-320,-272"
+    },
+    {
+      "_class": "VoronoiNoise",
+      "Coords": {},
+      "A": {},
+      "B": {},
+      "AngleOffset": 3.14,
+      "CellDensity": 10,
+      "Identifier": "1",
+      "Position": "-2512,-272"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "0.17771,0.74386,1,1",
+      "Identifier": "2",
+      "Position": "-1952,-752"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "16",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "3",
+      "Position": "-1952,-576"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "1,1,1,1",
+      "Identifier": "4",
+      "Position": "-2512,-448"
+    },
+    {
+      "_class": "Step",
+      "Input": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "Edge": {},
+      "DefaultEdge": 0.1,
+      "DefaultInput": 0,
+      "Identifier": "5",
+      "Position": "-2096,-256"
+    },
+    {
+      "_class": "RemapValue",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {},
+      "C": {},
+      "D": {},
+      "E": {},
+      "In": 0.5,
+      "InMin": 0.7,
+      "InMax": 1,
+      "OutMin": 0,
+      "OutMax": 1,
+      "Clamp": true,
+      "Identifier": "6",
+      "Position": "-2288,-288"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "7",
+      "Position": "-1472,16"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "0.75,0.75",
+      "Identifier": "8",
+      "Position": "-1472,128"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 10,
+      "Identifier": "9",
+      "Position": "-1248,16"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "10",
+      "Position": "-1040,64"
+    },
+    {
+      "_class": "ViewDirection",
+      "Identifier": "11",
+      "Position": "-2416,80"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "12",
+      "Position": "-2176,0"
+    },
+    {
+      "_class": "Float",
+      "Name": "",
+      "Value": 0,
+      "Identifier": "13",
+      "Position": "-2416,16"
+    },
+    {
+      "_class": "Float",
+      "Name": "",
+      "Value": 1,
+      "Identifier": "14",
+      "Position": "-2416,-48"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "C": {},
+      "Fraction": 1,
+      "BlendMode": "Lighten",
+      "Clamp": true,
+      "Identifier": "15",
+      "Position": "-1824,-256"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "0,0.10628,0.46821,1",
+      "Identifier": "16",
+      "Position": "-2512,-608"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "17",
+      "Position": "-1616,-608"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Colour",
+        "Group": "",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "18",
+      "Position": "-672,-192"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Normal",
+        "Group": "",
+        "Extension": "Normal",
+        "Processor": "NormalizeNormals",
+        "ColorSpace": "Linear"
+      },
+      "Sampler": {},
+      "Identifier": "19",
+      "Position": "-672,-32"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Rough",
+        "Group": "",
+        "Extension": "Rough",
+        "ColorSpace": "Linear"
+      },
+      "Sampler": {},
+      "Identifier": "20",
+      "Position": "-672,144"
+    }
+  ]
+}
