@@ -18,6 +18,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	[Net, Predicted]
 	public TimeSince TimeSinceFired { get; set; }
 
+	public Particles ChargeParticles { get; set; }
+
 	public virtual bool ShouldStart()
 	{
 		return false;
@@ -41,12 +43,17 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 		if ( Input.Down( InputButton.PrimaryAttack ) && Weapon.FiringType is FiringType.Charged )
 		{
+			ChargeParticles ??= Particles.Create( "particles/weaponcharge/weaponcharge.vpcf" );
+			ChargeParticles?.SetPosition( 0, GetMuzzlePosition() );
+			ChargeParticles?.SetPosition( 1, GetMuzzlePosition() + GetMuzzleRotation().Forward * 80f );
+			ChargeParticles?.Set( "Speed", 30f );
 			IncreaseCharge();
 		}
 
 		if ( Input.Released( InputButton.PrimaryAttack ) )
 		{
 			TimeSinceFired = 0f;
+			ChargeParticles?.Destroy();
 			IsFiring = true;
 			FireStart();
 			Weapon.CurrentUses++;
@@ -70,6 +77,22 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		}
 	}
 
+	public Vector3 GetMuzzlePosition()
+	{
+		var muzzle = Weapon.GetAttachment( "muzzle" );
+		if ( muzzle is null )
+			return Grub.EyePosition;
+		return muzzle.Value.Position;
+	}
+
+	public Rotation GetMuzzleRotation()
+	{
+		var muzzle = Weapon.GetAttachment( "muzzle" );
+		if ( muzzle is null )
+			return Grub.EyeRotation;
+		return muzzle.Value.Rotation;
+	}
+
 	public virtual void FireInstant() { }
 
 	public virtual void FireCharged() { }
@@ -84,6 +107,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	private void IncreaseCharge()
 	{
+		Log.Info( Charge );
 		Charge++;
 		Charge = Charge.Clamp( 0, 100 );
 	}
