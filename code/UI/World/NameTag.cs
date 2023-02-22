@@ -46,18 +46,11 @@ public class NameTag : WorldPanel
 		Position = Entity.Position + (Vector3.Up * 52f);
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		if ( Game.LocalPawn is not Player player )
-			return;
-
 		if ( Entity is not INameTag nameTaggedEntity )
 			return;
 
 		Style.FontColor = nameTaggedEntity.Color;
 
-		var cam = player.Camera;
-		if ( cam is null )
-			return;
-
-		WorldScale = (1.0f + cam.DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
+		WorldScale = (1.0f + Game.LocalClient.Components.Get<CameraMode>().DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
 	}
 }

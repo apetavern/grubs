@@ -1,6 +1,6 @@
 ﻿namespace Grubs;
 
-public class PlayerCamera
+public class CameraMode : EntityComponent
 {
 	public float Distance { get; set; } = 1024;
 	public float DistanceScrollRate { get; set; } = 32f;
@@ -16,7 +16,8 @@ public class PlayerCamera
 	private TimeSince TimeSinceTargetChanged { get; set; }
 	private TimeUntil TimeUntilCameraUnlocked { get; set; }
 
-	public virtual void UpdateCamera( Player player )
+	[Event.Client.Frame]
+	private void UpdateCamera()
 	{
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
@@ -80,7 +81,7 @@ public class PlayerCamera
 				return;
 			}
 
-			SetTarget( gm.ActivePlayer.ActiveGrub );
+			SetTarget( gm?.ActivePlayer?.ActiveGrub );
 			return;
 		}
 	}
@@ -111,6 +112,7 @@ public class PlayerCamera
 			if ( !delta.LengthSquared.AlmostEqual( 0, 0.1f ) )
 				CenterOnPawn = false;
 		}
+
 		Center += delta;
 	}
 }

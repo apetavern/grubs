@@ -13,8 +13,6 @@ public partial class Player : Entity
 	[BindComponent]
 	public Inventory Inventory { get; }
 
-	public PlayerCamera Camera { get; private set; }
-
 	public Preferences Preferences
 	{
 		get
@@ -79,11 +77,6 @@ public partial class Player : Entity
 		{
 			grub.FrameSimulate( client );
 		}
-
-		if ( Camera is null )
-			Camera = new PlayerCamera();
-
-		Camera?.UpdateCamera( this );
 	}
 
 	private void CreateGrubs( IClient client )
