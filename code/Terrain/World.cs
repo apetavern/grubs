@@ -70,6 +70,7 @@ public partial class World : Entity
 		}
 
 		SetupKillZone();
+		SetupWater();
 	}
 
 	private void SetupKillZone()
@@ -86,6 +87,16 @@ public partial class World : Entity
 			.WithPosition( Vector3.Zero )
 			.WithShape( killBounds )
 			.Finish<DamageZone>();
+	}
+
+	private void SetupWater()
+	{
+		var water = new Water();
+
+		var min = new Vector3( -WorldLength * 4, -WorldWidth * 16, -WorldHeight );
+		var max = new Vector3( WorldLength * 4, WorldWidth * 16, -WorldHeight + 1);
+		water.CollisionBounds = new BBox( min, max );
+		water.Position = new Vector3( 0, 0, 8 );
 	}
 
 	public Vector3 FindSpawnLocation()

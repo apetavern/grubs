@@ -18,7 +18,7 @@ public partial class World
 	private int[] NoiseMap;
 	private float[,] DensityMap;
 
-	private float amplitude = 72f;
+	private float amplitude = 48f;
 	private float frequency = 3f;
 
 	private float noiseMin = 0.45f;
