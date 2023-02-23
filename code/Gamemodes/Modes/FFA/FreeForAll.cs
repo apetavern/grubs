@@ -108,6 +108,8 @@ public partial class FreeForAll : Gamemode
 					continue;
 
 				zone.Trigger( grub );
+				if ( grub.IsTurn )
+					UseTurn();
 			}
 		}
 
