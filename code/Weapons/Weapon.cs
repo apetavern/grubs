@@ -110,6 +110,17 @@ public partial class Weapon : AnimatedEntity
 		return false;
 	}
 
+	public bool IsCharging()
+	{
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			if ( component.IsCharging )
+				return true;
+		}
+
+		return false;
+	}
+
 	public bool HasAmmo()
 	{
 		return Ammo != 0;

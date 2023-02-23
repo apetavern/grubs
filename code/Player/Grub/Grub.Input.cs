@@ -43,6 +43,10 @@ public partial class Grub
 		MoveInput = moveInput;
 		LookInput = -Facing * lookInput;
 
+		if ( ActiveWeapon is not null )
+			if ( ActiveWeapon.IsCharging() )
+				return;
+
 		var look = (LookAngles + LookInput).Normal;
 		LookAngles = look
 			.WithPitch( look.pitch.Clamp( -80f, 75f ) )
