@@ -18,7 +18,7 @@ public partial class World
 	private float[,] DensityMap;
 
 	private float amplitude = 48f;
-	private float frequency = 2.3f;
+	private float frequency = 3.2f;
 
 	private float noiseMin = 0.45f;
 	private float noiseMax = 0.55f;
@@ -46,7 +46,7 @@ public partial class World
 		// Generate Noise Map.
 		for ( var x = 0; x < pointsX; x++ )
 		{
-			NoiseMap[x] = GetNoise( x + r, 0 ).FloorToInt();
+			NoiseMap[x] = (GetNoise( x + r, 0 ) * GrubsConfig.TerrainHeight / 1024f).FloorToInt();
 			if ( NoiseMap[x] >= pointsZ )
 				NoiseMap[x] = pointsZ - 1;
 			TerrainMap[x, NoiseMap[x]] = true;

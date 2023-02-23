@@ -188,9 +188,17 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = grub;
 
 		// TODO: Send an event to the UI for grub damage worldhud.
+		DamageGrubEventClient( To.Everyone, grub );
 		await GameTask.Delay( 1000 );
 
 		CameraTarget = null;
+	}
+
+	[ClientRpc]
+	public void DamageGrubEventClient( Grub grub )
+	{
+		Log.Info( "sending grub damage event" );
+		Event.Run( "grub.damaged", grub.NetworkIdent );
 	}
 
 	/// <summary>

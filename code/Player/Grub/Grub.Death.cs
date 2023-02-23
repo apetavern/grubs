@@ -15,6 +15,9 @@ public partial class Grub
 	[Net]
 	public bool ShouldTakeDamage { get; set; }
 
+	[Net]
+	public int TotalDamageTaken { get; set; }
+
 	public Queue<DamageInfo> DamageQueue { get; set; } = new();
 
 	public override void TakeDamage( DamageInfo info )
@@ -68,6 +71,8 @@ public partial class Grub
 			dead = true;
 			DeathReason = DeathReason.FindReason( this, damageInfo );
 		}
+
+		TotalDamageTaken = totalDamage.FloorToInt();
 
 		TakeDamage( DamageInfo.Generic( Math.Min( totalDamage, Health ) ) );
 
