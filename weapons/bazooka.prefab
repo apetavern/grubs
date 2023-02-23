@@ -39,11 +39,11 @@
           },
           "ProjectileExplodeAfter": {
             "Type": "Single",
-            "Value": "5"
+            "Value": "7"
           },
           "ProjectileForceMultiplier": {
             "Type": "Single",
-            "Value": "1"
+            "Value": "0.67"
           },
           "ProjectileShouldUseTrace": {
             "Type": "Boolean",
