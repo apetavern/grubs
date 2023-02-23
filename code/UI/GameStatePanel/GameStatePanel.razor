@@ -9,16 +9,23 @@
     @if (IsWaiting())
     {
         <label class="header" text="Grubs Playtest" />
-        <label class="subtext" text=@($"Waiting for players {Game.Clients.Count}/{GrubsConfig.MinimumPlayers}") />
+        <label class="subtext" text=@($"Players required {Game.Clients.Count}/{GrubsConfig.MinimumPlayers}") />
 
         @if (!IsTerrainReady())
         {
             <label class="subtext" text="Generating terrain..." />
         }
 
-        @if (Game.IsServerHost && Game.Clients.Count >= GrubsConfig.MinimumPlayers && IsTerrainReady())
+        @if (Game.Clients.Count >= GrubsConfig.MinimumPlayers && IsTerrainReady())
         {
-            <button onclick=@StartGame text="Start" />
+            @if (Game.LocalClient.IsListenServerHost)
+            {
+                <button onclick=@StartGame text="Start" />
+            }
+            else
+            {
+                <label class="subtext" text="Waiting for host to start game..." />
+            }
         }
     }
 
@@ -36,7 +43,7 @@
     
     protected override int BuildHash()
     {
-        return HashCode.Combine(IsWaiting(), IsFinished(), IsTerrainReady(), Game.Clients.Count, GrubsConfig.MinimumPlayers, Game.IsServerHost);
+        return HashCode.Combine(IsWaiting(), IsFinished(), IsTerrainReady(), Game.Clients.Count, GrubsConfig.MinimumPlayers, Game.LocalClient.IsListenServerHost);
     }
 }
 
