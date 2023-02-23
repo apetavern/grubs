@@ -12,7 +12,7 @@ public partial class World
 
 	private void GenerateTextureWorld( string TexturePath )
 	{
-		ResourceLibrary.TryGet<TextureLevel>( TexturePath, out TextureLevel map );
+		ResourceLibrary.TryGet( TexturePath, out TextureLevel map );
 		if ( map != null )
 		{
 			PossibleSpawnPoints.Clear();
