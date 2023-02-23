@@ -271,18 +271,18 @@
         "Choices": [],
         "ConVarName": "maximum_players",
         "DisplayName": "Maximum Players",
-        "DefaultValue": "4",
+        "DefaultValue": "8",
         "Description": "The maximum amount of players that can play the game.",
         "Group": "Game",
         "Minimum": 2,
-        "Maximum": 100
+        "Maximum": 8
       },
       {
         "DisplayType": "Integer",
         "Choices": [],
         "ConVarName": "grub_count",
         "DisplayName": "Grub Count",
-        "DefaultValue": "4",
+        "DefaultValue": "2.3223982",
         "Description": "The amount of Grubs each team will have.",
         "Group": "Game",
         "Minimum": 1,
@@ -293,11 +293,11 @@
         "Choices": [],
         "ConVarName": "turn_duration",
         "DisplayName": "Turn Duration",
-        "DefaultValue": "60",
+        "DefaultValue": "45",
         "Description": "The max time in seconds that a turn will last.",
         "Group": "Game",
         "Minimum": 1,
-        "Maximum": 60
+        "Maximum": 120
       },
       {
         "DisplayType": "Boolean",
@@ -344,7 +344,7 @@
         "Choices": [],
         "ConVarName": "movement_grace",
         "DisplayName": "Movement Grace Period",
-        "DefaultValue": "5",
+        "DefaultValue": "4",
         "Description": "The amount of seconds a Grub will get to move after using their weapon.",
         "Group": "Game",
         "Maximum": 60
