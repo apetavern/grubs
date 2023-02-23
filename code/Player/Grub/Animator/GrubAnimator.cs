@@ -34,8 +34,12 @@ public class GrubAnimator : EntityComponent<Grub>
 		}
 
 		var airMove = ctrl.GetMechanic<AirMoveMechanic>();
+		var isHardFalling = false;
 		if ( airMove is not null )
-			grub.SetAnimParameter( "hardfall", airMove.IsHardFalling );
+			isHardFalling = airMove.IsHardFalling;
+
+		grub.SetAnimParameter( "hardfall", isHardFalling );
+		grub.SetAnimParameter( "sliding", grub.HasBeenDamaged && !isHardFalling && !ctrl.Velocity.IsNearlyZero( 2.5f ) );
 
 		var tr = Trace.Ray( grub.Position + grub.Rotation.Up * 10f, grub.Position + grub.Rotation.Down * 128 )
 			.Size( 2f )
