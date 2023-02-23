@@ -44,16 +44,18 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		if ( Input.Down( InputButton.PrimaryAttack ) && Weapon.FiringType is FiringType.Charged )
 		{
 			ChargeParticles ??= Particles.Create( "particles/weaponcharge/weaponcharge.vpcf" );
+			ChargeParticles?.Set( "Alpha", 100f );
 			ChargeParticles?.SetPosition( 0, GetMuzzlePosition() );
 			ChargeParticles?.SetPosition( 1, GetMuzzlePosition() + GetMuzzleRotation().Forward * 80f );
-			ChargeParticles?.Set( "Speed", 30f );
+			ChargeParticles?.Set( "Speed", 50f );
 			IncreaseCharge();
 		}
 
 		if ( Input.Released( InputButton.PrimaryAttack ) )
 		{
 			TimeSinceFired = 0f;
-			ChargeParticles?.Destroy();
+			ChargeParticles?.Set( "Alpha", 0f );
+			//ChargeParticles?.Destroy();
 			IsFiring = true;
 			FireStart();
 			Weapon.CurrentUses++;
