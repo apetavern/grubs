@@ -56,6 +56,9 @@ public partial class World : Entity
 		CsgWorld = new CsgSolid( GridSize );
 		CsgBackground = new CsgSolid( GridSize );
 
+		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
+		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 64, -WorldHeight / 2 ) );
+
 		switch ( GrubsConfig.WorldTerrainType )
 		{
 			case GrubsConfig.TerrainType.Generated:
@@ -92,9 +95,10 @@ public partial class World : Entity
 	private void SetupWater()
 	{
 		var water = new Water();
+		water.WaterMaterial = "materials/water/water_pond_a.vmat";
 
 		var min = new Vector3( -WorldLength * 4, -WorldWidth * 16, -WorldHeight );
-		var max = new Vector3( WorldLength * 4, WorldWidth * 16, -WorldHeight + 1);
+		var max = new Vector3( WorldLength * 4, WorldWidth * 16, -WorldHeight + 1 );
 		water.CollisionBounds = new BBox( min, max );
 		water.Position = new Vector3( 0, 0, 8 );
 	}

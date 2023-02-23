@@ -1,4 +1,6 @@
-﻿namespace Grubs;
+﻿using Sandbox.Csg;
+
+namespace Grubs;
 
 public partial class World
 {
@@ -8,9 +10,20 @@ public partial class World
 		PaintDefault( min, max );
 	}
 
+	public void SubtractDefault( CsgBrush brush, Vector3 min, Vector3 max )
+	{
+		CsgWorld.Subtract( brush, (min + max) * 0.5f, max - min );
+		PaintDefault( min, max );
+	}
+
 	public void SubtractBackground( Vector3 min, Vector3 max )
 	{
 		CsgBackground.Subtract( CoolBrush, (min + max) * 0.5f, max - min );
+	}
+
+	public void SubtractBackground( CsgBrush brush, Vector3 min, Vector3 max )
+	{
+		CsgBackground.Subtract( brush, (min + max) * 0.5f, max - min );
 	}
 
 	public void SubtractLine( Vector3 start, Vector3 stop, float size, Rotation rotation )

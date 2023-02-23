@@ -288,7 +288,7 @@ public partial class FreeForAll : Gamemode
 		{
 			if ( !TerrainReady )
 			{
-				if ( GameWorld is null )
+				if ( GameWorld is null  || GameWorld.CsgWorld is null )
 					return;
 
 				TerrainReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
