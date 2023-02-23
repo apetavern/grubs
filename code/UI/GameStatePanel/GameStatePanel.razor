@@ -1,0 +1,90 @@
+@namespace Grubs
+
+@if (!IsWaiting() && !IsFinished())
+{
+    return;
+}
+
+<root>
+    @if (IsWaiting())
+    {
+        <label class="header" text="Grubs Playtest" />
+        <label class="subtext" text=@($"Waiting for players {Game.Clients.Count}/{GrubsConfig.MinimumPlayers}") />
+
+        @if (!IsTerrainReady())
+        {
+            <label class="subtext" text="Generating terrain..." />
+        }
+
+        @if (Game.IsServerHost && Game.Clients.Count >= GrubsConfig.MinimumPlayers && IsTerrainReady())
+        {
+            <button onclick=@StartGame text="Start" />
+        }
+    }
+
+    @if (IsFinished())
+    {
+        <label class="header" text="Game Over!" />
+        <label class="subtext" text="Provide feedback @@ discord.gg/apetavern" />
+    }
+</root>
+
+@code {
+    private bool IsWaiting() => GamemodeSystem.Instance is FreeForAll ffa && ffa.CurrentState == FreeForAll.GameState.Waiting;
+    private bool IsFinished() => GamemodeSystem.Instance is FreeForAll ffa && ffa.CurrentState == FreeForAll.GameState.GameOver;
+    private bool IsTerrainReady() => GamemodeSystem.Instance is FreeForAll ffa && ffa.TerrainReady;
+    
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(IsWaiting(), IsFinished(), IsTerrainReady(), Game.Clients.Count, GrubsConfig.MinimumPlayers, Game.IsServerHost);
+    }
+}
+
+<style>
+    GameStatePanel {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        flex-direction: column;
+        align-items: center;
+
+        .header, .subtext {
+            font-family: Londrina Solid;
+            font-size: 70px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .subtext {
+            font-size: 40px;
+        }
+
+        button
+        {
+            transition: all 0.1s ease;
+            color: #ffa631;
+            text-shadow: 2px 2px 0px black;
+            pointer-events: all;
+
+            label
+            {
+                font-family: Londrina Solid;
+                font-size: 55px;
+            }
+
+            &:hover
+            {
+                color: #df912b;
+                cursor: pointer;
+                transform: scale(1.01);
+            }
+
+            &:active
+            {
+                color: #ffa631;
+                transform: scale(1);
+            }
+        }
+    }
+</style>
