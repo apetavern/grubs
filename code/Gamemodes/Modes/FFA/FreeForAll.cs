@@ -108,6 +108,20 @@ public partial class FreeForAll : Gamemode
 					continue;
 
 				zone.Trigger( grub );
+				if ( grub.IsTurn )
+					UseTurn();
+			}
+		}
+
+		var projectiles = All.OfType<Projectile>();
+		foreach ( var proj in projectiles )
+		{
+			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+			{
+				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( proj ) )
+					continue;
+
+				zone.Trigger( proj );
 			}
 		}
 	}

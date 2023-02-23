@@ -180,7 +180,12 @@ public partial class GrubController : EntityComponent<Grub>
 	public bool ShouldAllowMovement()
 	{
 		var gm = GamemodeSystem.Instance;
-		return Grub.IsTurn && !gm.TurnIsChanging && gm.AllowMovement;
+
+		var isCharging = false;
+		if ( Grub.ActiveWeapon is not null && Grub.ActiveWeapon.IsCharging() )
+			isCharging = true;
+
+		return Grub.IsTurn && !gm.TurnIsChanging && !isCharging && gm.AllowMovement;
 	}
 
 	public bool ShouldShowWeapon()

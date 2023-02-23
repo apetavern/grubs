@@ -16,6 +16,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public bool IsFiring { get; set; }
 
 	[Net, Predicted]
+	public bool IsCharging { get; set; }
+
+	[Net, Predicted]
 	public TimeSince TimeSinceFired { get; set; }
 
 	public Particles ChargeParticles { get; set; }
@@ -44,19 +47,23 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		if ( Input.Down( InputButton.PrimaryAttack ) && Weapon.FiringType is FiringType.Charged )
 		{
 			ChargeParticles ??= Particles.Create( "particles/weaponcharge/weaponcharge.vpcf" );
-			ChargeParticles?.Set( "Alpha", 100f );
 			ChargeParticles?.SetPosition( 0, GetMuzzlePosition() );
-			ChargeParticles?.SetPosition( 1, GetMuzzlePosition() + GetMuzzleRotation().Forward * 80f );
+			ChargeParticles?.SetPosition( 1, GetMuzzlePosition() + GetMuzzleForward() * 80f );
+			ChargeParticles?.Set( "Alpha", 100f );
 			ChargeParticles?.Set( "Speed", 50f );
+
+			IsCharging = true;
 			IncreaseCharge();
 		}
 
-		if ( Input.Released( InputButton.PrimaryAttack ) )
+		if ( Input.Released( InputButton.PrimaryAttack ) || Charge == 100 )
 		{
-			TimeSinceFired = 0f;
 			ChargeParticles?.Set( "Alpha", 0f );
-			//ChargeParticles?.Destroy();
+			ChargeParticles?.Set( "Speed", 10000f );
+
+			TimeSinceFired = 0f;
 			IsFiring = true;
+			IsCharging = false;
 			FireStart();
 			Weapon.CurrentUses++;
 		}
@@ -87,12 +94,12 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		return muzzle.Value.Position;
 	}
 
-	public Rotation GetMuzzleRotation()
+	public Vector3 GetMuzzleForward()
 	{
 		var muzzle = Weapon.GetAttachment( "muzzle" );
 		if ( muzzle is null )
-			return Grub.EyeRotation;
-		return muzzle.Value.Rotation;
+			return Grub.EyeRotation.Forward * Grub.Facing;
+		return muzzle.Value.Rotation.Forward;
 	}
 
 	public virtual void FireInstant() { }
@@ -109,7 +116,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	private void IncreaseCharge()
 	{
-		Log.Info( Charge );
 		Charge++;
 		Charge = Charge.Clamp( 0, 100 );
 	}

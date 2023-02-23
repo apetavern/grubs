@@ -64,6 +64,10 @@ public class AirMoveMechanic : ControllerMechanic
 			GamemodeSystem.Instance.UseTurn();
 
 		float fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
+		if ( fallDamage < 1 )
+		{
+			fallDamage = 1;
+		}
 		Grub.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Grub ) );
 	}
 }
