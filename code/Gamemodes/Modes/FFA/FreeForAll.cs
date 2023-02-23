@@ -199,7 +199,6 @@ public partial class FreeForAll : Gamemode
 	[ClientRpc]
 	public void DamageGrubEventClient( Grub grub )
 	{
-		Log.Info( "sending grub damage event" );
 		Event.Run( "grub.damaged", grub.NetworkIdent );
 	}
 

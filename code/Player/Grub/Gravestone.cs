@@ -15,13 +15,13 @@ public partial class Gravestone : ModelEntity
 	{
 		_Grub = grub;
 		SetModel( "models/gravestones/basic_gravestone/gravestone_basic.vmdl" );
-		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+
+		Position = _Grub.Position;
 	}
 
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
-
-		Position = _Grub.Position;
 	}
 }
