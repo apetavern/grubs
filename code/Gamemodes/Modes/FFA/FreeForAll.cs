@@ -185,9 +185,11 @@ public partial class FreeForAll : Gamemode
 		if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
 			await grub.DeathTask;
 
+		if ( grub.Position.z < -GrubsConfig.TerrainHeight )
+			return;
+
 		CameraTarget = grub;
 
-		// TODO: Send an event to the UI for grub damage worldhud.
 		DamageGrubEventClient( To.Everyone, grub );
 		await GameTask.Delay( 1000 );
 
