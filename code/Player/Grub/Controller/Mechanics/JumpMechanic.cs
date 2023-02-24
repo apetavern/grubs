@@ -7,66 +7,36 @@ public partial class JumpMechanic : ControllerMechanic
 	public override int SortOrder => 5;
 
 	[Net, Predicted]
-	public TimeSince TimeSinceJumpPressed { get; set; }
+	public bool IsBackflipping { get; set; } = false;
 
-	private static readonly float _timeBeforeSecondPress = 0.25f;
-
-	[Net, Predicted]
-	private bool _backflip { get; set; } = false;
-
-	[Net, Predicted] 
-	private bool _firstTime { get; set; } = true;
-
-	private float _jumpPower => 240f;
+	private static float _jumpPower => 240f;
 
 	protected override bool ShouldStart()
 	{
 		if ( !Controller.ShouldAllowMovement() )
 			return false;
 
-		// If we already pressed jump once, and we didn't hit it again within
-		// the time limit, we normal jump.
-		if ( TimeSinceJumpPressed > _timeBeforeSecondPress && !_firstTime )
-			return true;
-
 		if ( Controller.IsGrounded )
 		{
 			if ( Input.Pressed( JumpButton ) ) 
 			{
-				_backflip = false;
+				IsBackflipping = false;
 				return true;
 			}
 
 			if ( Input.Pressed( BackflipButton ) )
 			{
-				_backflip = true;
+				IsBackflipping = true;
 				return true;
 			}
 		}
-/*		if ( Input.Pressed( JumpButton ) && GroundEntity.IsValid() )
-		{
-			// Handle the first jump.
-			if ( _firstTime )
-			{
-				_firstTime = false;
-				TimeSinceJumpPressed = 0f;
-				return false;
-			}
-
-			// If Jump is hit twice before the time is up, we want to backflip.
-			if ( TimeSinceJumpPressed < _timeBeforeSecondPress )
-			{
-				_backflip = true;
-				return true;
-			}
-		}*/
 
 		return false;
 	}
 
 	protected override void OnStart()
 	{
-		if ( _backflip )
+		if ( IsBackflipping )
 		{
 			Backflip();
 		}
@@ -86,9 +56,7 @@ public partial class JumpMechanic : ControllerMechanic
 			.ClearGroundEntity();
 
 		IsActive = false;
-
-		_firstTime = true;
-		_backflip = false;
+		IsBackflipping = false;
 	}
 
 	private void Backflip()
@@ -103,8 +71,6 @@ public partial class JumpMechanic : ControllerMechanic
 			.ClearGroundEntity();
 
 		IsActive = false;
-
-		_firstTime = true;
-		_backflip = false;
+		IsBackflipping = false;
 	}
 }
