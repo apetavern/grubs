@@ -3,6 +3,9 @@
 [GameResource( "TextureLevel", "tlvl", "Texture level data", Icon = "cottage" )]
 public partial class TextureLevel : GameResource
 {
-	[Property] 
+	[Property]
 	public Texture texture { get; set; }
+
+	[Property]
+	public Texture background { get; set; }
 }
