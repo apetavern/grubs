@@ -3,14 +3,19 @@
 public partial class JumpMechanic : ControllerMechanic
 {
 	public static InputButton JumpButton => InputButton.Jump;
+	public static InputButton BackflipButton => InputButton.Run;
 	public override int SortOrder => 5;
 
 	[Net, Predicted]
 	public TimeSince TimeSinceJumpPressed { get; set; }
 
 	private static readonly float _timeBeforeSecondPress = 0.25f;
-	private bool _backflip = false;
-	private bool _firstTime = true;
+
+	[Net, Predicted]
+	private bool _backflip { get; set; } = false;
+
+	[Net, Predicted] 
+	private bool _firstTime { get; set; } = true;
 
 	private float _jumpPower => 240f;
 
@@ -24,7 +29,21 @@ public partial class JumpMechanic : ControllerMechanic
 		if ( TimeSinceJumpPressed > _timeBeforeSecondPress && !_firstTime )
 			return true;
 
-		if ( Input.Pressed( JumpButton ) && GroundEntity.IsValid() )
+		if ( Controller.IsGrounded )
+		{
+			if ( Input.Pressed( JumpButton ) ) 
+			{
+				_backflip = false;
+				return true;
+			}
+
+			if ( Input.Pressed( BackflipButton ) )
+			{
+				_backflip = true;
+				return true;
+			}
+		}
+/*		if ( Input.Pressed( JumpButton ) && GroundEntity.IsValid() )
 		{
 			// Handle the first jump.
 			if ( _firstTime )
@@ -40,7 +59,7 @@ public partial class JumpMechanic : ControllerMechanic
 				_backflip = true;
 				return true;
 			}
-		}
+		}*/
 
 		return false;
 	}
