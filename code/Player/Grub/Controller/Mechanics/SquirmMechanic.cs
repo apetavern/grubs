@@ -118,11 +118,8 @@ public class SquirmMechanic : ControllerMechanic
 
 		GroundEntity = entity;
 
-		if ( GroundEntity != null )
-		{
-			Velocity = Velocity.WithZ( 0 );
+		if ( GroundEntity != null && GroundEntity is not Grubs.Grub )
 			Controller.BaseVelocity = GroundEntity.Velocity;
-		}
 	}
 
 	public void CategorizePosition( bool bStayOnGround )
