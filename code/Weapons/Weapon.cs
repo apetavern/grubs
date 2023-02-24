@@ -192,7 +192,6 @@ public partial class Weapon : AnimatedEntity
 	[ClientRpc]
 	public void EnablePointer()
 	{
-		Log.Info( "weapon.enablepointer" );
 		Event.Run( "pointer.enabled" );
 	}
 }
