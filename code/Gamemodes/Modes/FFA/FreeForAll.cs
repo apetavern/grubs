@@ -47,7 +47,7 @@ public partial class FreeForAll : Gamemode
 	/// <summary>
 	/// Whether we have started the game or not.
 	/// </summary>
-	public bool Started { get; set; } = false;
+	[Net] public bool Started { get; set; } = false;
 
 	/// <summary>
 	/// An async task for switching between player turns.
