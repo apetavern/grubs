@@ -120,6 +120,8 @@ public partial class Player : Entity
 		if ( ActiveGrub.ActiveWeapon is null )
 			return;
 
+		Inventory.ActiveWeapon.SetPointerEvents( To.Single( this ), false );
+
 		Inventory.UnsetActiveWeapon();
 	}
 

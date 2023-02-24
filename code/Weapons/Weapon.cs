@@ -83,7 +83,7 @@ public partial class Weapon : AnimatedEntity
 
 		if ( FiringType is FiringType.Cursor )
 		{
-			EnablePointer( To.Single( Grub ) );
+			SetPointerEvents( To.Single( Grub ), true );
 		}
 	}
 
@@ -102,6 +102,11 @@ public partial class Weapon : AnimatedEntity
 		}
 
 		Grub.SetHatVisible( true );
+
+		if ( FiringType is FiringType.Cursor )
+		{
+			SetPointerEvents( To.Single( Grub ), false );
+		}
 	}
 
 	public bool IsFiring()
@@ -190,8 +195,11 @@ public partial class Weapon : AnimatedEntity
 	}
 
 	[ClientRpc]
-	public void EnablePointer()
+	public void SetPointerEvents( bool enabled )
 	{
-		Event.Run( "pointer.enabled" );
+		if ( enabled )
+			Event.Run( "pointer.enabled" );
+		else
+			Event.Run( "pointer.disabled" );
 	}
 }
