@@ -101,7 +101,7 @@ public partial class Player : Entity
 		}
 	}
 
-	public void RotateGrubs()
+	private void RotateGrubs()
 	{
 		var current = Grubs[0];
 		current.EyeRotation = Rotation.Identity;
