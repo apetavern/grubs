@@ -82,6 +82,7 @@ public static class GrubsConfig
 		TestLevel = 1,
 		Battlefield = 2,
 		Cavern = 3,
+		Bunkers = 4,
 	}
 
 	/// <summary>

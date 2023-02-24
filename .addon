@@ -418,6 +418,10 @@
           {
             "Value": "3",
             "Name": "Cavern"
+          },
+          {
+            "Value": "4",
+            "Name": "Bunkers"
           }
         ],
         "ConVarName": "terrain_texture",
