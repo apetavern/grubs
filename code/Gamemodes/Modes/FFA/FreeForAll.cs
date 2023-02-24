@@ -40,9 +40,9 @@ public partial class FreeForAll : Gamemode
 	public TimeUntil TimeUntilNextTurn { get; set; }
 
 	/// <summary>
-	/// A list of players, rotated cyclically to rotate through turns.
+	/// A queue of players determining their turn order.
 	/// </summary>
-	public List<Player> PlayerRotation { get; set; } = new();
+	public Queue<Player> PlayerTurnQueue { get; set; } = new();
 
 	/// <summary>
 	/// Whether we have started the game or not.
@@ -89,12 +89,12 @@ public partial class FreeForAll : Gamemode
 			player.Preferences.SetColor();
 
 			Players.Add( player );
-			PlayerRotation.Add( player );
+			PlayerTurnQueue.Enqueue( player );
 
 			MoveToSpawnpoint( client );
 		}
 
-		ActivePlayer = PlayerRotation[0];
+		ActivePlayer = PlayerTurnQueue.Dequeue();
 	}
 
 	private void ZoneTrigger()
@@ -260,20 +260,22 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		var current = PlayerRotation[0];
-		PlayerRotation.RemoveAt( 0 );
+		if ( CanUseTurn( ActivePlayer ) )
+			PlayerTurnQueue.Enqueue( ActivePlayer );
 
-		if ( !current.IsDead && !current.IsDisconnected )
+		ActivePlayer = PlayerTurnQueue.Dequeue();
+		while ( !CanUseTurn( ActivePlayer ) )
 		{
-			PlayerRotation.Add( current );
-		}
-		else
-		{
-			Players.Remove( current );
+			Players.Remove( ActivePlayer );
+			ActivePlayer = PlayerTurnQueue.Dequeue();
 		}
 
-		ActivePlayer = PlayerRotation[0];
 		ActivePlayer.PickNextGrub();
+	}
+
+	private bool CanUseTurn( Player player )
+	{
+		return !player.IsDead && !player.IsDisconnected;
 	}
 
 	internal override void MoveToSpawnpoint( IClient client )
