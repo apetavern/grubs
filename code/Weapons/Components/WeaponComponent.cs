@@ -81,6 +81,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			case FiringType.Charged:
 				FireCharged();
 				break;
+			case FiringType.Cursor:
+				FireCursor();
+				break;
 			default:
 				throw new NotImplementedException();
 		}
@@ -105,6 +108,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public virtual void FireInstant() { }
 
 	public virtual void FireCharged() { }
+
+	public virtual void FireCursor() { }
 
 	public virtual void FireStart() { }
 

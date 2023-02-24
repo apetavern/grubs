@@ -17,6 +17,9 @@ public partial class Player
 	[ClientInput]
 	public Entity ActiveWeaponInput { get; set; }
 
+	[ClientInput]
+	public Vector3 MousePosition { get; set; }
+
 	public override void BuildInput()
 	{
 		if ( Input.StopProcessing )
@@ -24,5 +27,10 @@ public partial class Player
 
 		MoveInput = Input.AnalogMove.y;
 		LookInput = Input.AnalogMove.x;
+
+		var mouseDir = Screen.GetDirection( Mouse.Position );
+		var playerCamera = Client.Components.Get<GrubsCamera>();
+		var tr = Trace.Ray( Camera.Position, Camera.Position + mouseDir * playerCamera.Distance ).Run();
+		MousePosition = tr.EndPosition.WithY( 0f );
 	}
 }

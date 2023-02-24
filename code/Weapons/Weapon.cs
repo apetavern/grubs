@@ -80,6 +80,11 @@ public partial class Weapon : AnimatedEntity
 
 		SetParent( grub, true );
 		Owner = grub;
+
+		if ( FiringType is FiringType.Cursor )
+		{
+			EnablePointer( To.Single( Grub ) );
+		}
 	}
 
 	public void OnHolster()
@@ -182,5 +187,12 @@ public partial class Weapon : AnimatedEntity
 	public void PlayScreenSound( string sound )
 	{
 		this.SoundFromScreen( sound );
+	}
+
+	[ClientRpc]
+	public void EnablePointer()
+	{
+		Log.Info( "weapon.enablepointer" );
+		Event.Run( "pointer.enabled" );
 	}
 }

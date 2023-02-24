@@ -18,5 +18,6 @@ public enum HoldPose
 public enum FiringType
 {
 	Instant,
-	Charged
+	Charged,
+	Cursor,
 }

@@ -25,7 +25,7 @@
           },
           "HitForce": {
             "Type": "Vector3",
-            "Value": "\u0022250,0,1\u0022"
+            "Value": "\u0022500,0,100\u0022"
           },
           "TraceCount": {
             "Type": "Int32",
