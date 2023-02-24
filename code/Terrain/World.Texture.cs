@@ -16,10 +16,14 @@ public partial class World
 		if ( map != null )
 		{
 			PossibleSpawnPoints.Clear();
+
 			var _WorldLength = map.texture.Width * 16;
 			var _WorldHeight = map.texture.Height * 16;
 			var pointsX = map.texture.Width;
 			var pointsZ = map.texture.Height;
+
+			SetupWater( _WorldLength, _WorldHeight );
+			SetupKillZone( _WorldHeight );
 
 			//CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 0, -_WorldHeight / 2 ) );
 			CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
@@ -48,8 +52,8 @@ public partial class World
 					// Add solid where alpha == 255
 					if ( _terrainGrid[x, z] == 255 )
 					{
-						min = new Vector3( (x * 16) - paddedRes, -32, (z * 16) - paddedRes );
-						max = new Vector3( (x * 16) + paddedRes, 32, (z * 16) + paddedRes );
+						min = new Vector3( (x * 16) - paddedRes, -16, (z * 16) - paddedRes );
+						max = new Vector3( (x * 16) + paddedRes, 16, (z * 16) + paddedRes );
 
 						// Offset by position.
 						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
@@ -61,8 +65,8 @@ public partial class World
 					}
 					else
 					{
-						min = new Vector3( (x * 16), -32, (z * 16) );
-						max = new Vector3( (x * 16), 32, (z * 16) );
+						min = new Vector3( (x * 16), -16, (z * 16) );
+						max = new Vector3( (x * 16), 16, (z * 16) );
 
 						// Offset by position.
 						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );

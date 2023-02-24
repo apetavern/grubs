@@ -4,7 +4,11 @@ public partial class World
 {
 	private void SetupGenerateWorld()
 	{
+		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
+		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 64, -WorldHeight / 2 ) );
 		GenerateAlt();
+		SetupWater( WorldLength, WorldHeight );
+		SetupKillZone( WorldHeight );
 	}
 
 	/*
@@ -75,10 +79,10 @@ public partial class World
 				}
 			}
 		}
-		
+
 
 		var bb = new Vector3( 0, -WorldWidth / 2 + 64, pointsZ * _resolution );
-		var aa = new Vector3( pointsX * _resolution, WorldWidth /2 + 64, maxZ * _resolution );
+		var aa = new Vector3( pointsX * _resolution, WorldWidth / 2 + 64, maxZ * _resolution );
 
 		aa -= new Vector3( WorldLength / 2, 0, WorldHeight );
 		bb -= new Vector3( WorldLength / 2, 0, WorldHeight );
@@ -86,7 +90,7 @@ public partial class World
 
 		aa = aa.WithY( aa.y - 64 );
 		bb = bb.WithY( bb.y - 64 );
-		SubtractDefault(CubeBrush, aa, bb );
+		SubtractDefault( CubeBrush, aa, bb );
 
 		// Populate Density maps for caves and update TerrainMap from it.
 		for ( var x = 0; x < pointsX; x++ )
@@ -130,64 +134,64 @@ public partial class World
 		return amplitude * Noise.Perlin( x * frequency, y * frequency );
 	}
 
-/*	private bool AllFalse( bool[,] grid, int top, int bottom, int left, int right )
-	{
-		for ( int i = top; i < bottom; i++ )
+	/*	private bool AllFalse( bool[,] grid, int top, int bottom, int left, int right )
 		{
-			for ( int j = left; j < right; j++ )
+			for ( int i = top; i < bottom; i++ )
 			{
-				if ( grid[i, j] )
+				for ( int j = left; j < right; j++ )
 				{
-					return false;
+					if ( grid[i, j] )
+					{
+						return false;
+					}
 				}
 			}
+
+			return true;
 		}
 
-		return true;
-	}
-
-	private void GenerateRandomWorld()
-	{
-		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
-		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 64, -WorldHeight / 2 ) );
-
-		PossibleSpawnPoints.Clear();
-		var pointsX = (WorldLength / _resolution).CeilToInt();
-		var pointsZ = (WorldHeight / _resolution).CeilToInt();
-
-		_terrainGrid = new float[pointsX, pointsZ];
-
-		var r = Game.Random.Int( 99999 );
-
-		// Initialize Perlin noise grid.
-		for ( var x = 0; x < pointsX; x++ )
+		private void GenerateRandomWorld()
 		{
-			for ( var z = 0; z < pointsZ; z++ )
+			CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
+			CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 64, -WorldHeight / 2 ) );
+
+			PossibleSpawnPoints.Clear();
+			var pointsX = (WorldLength / _resolution).CeilToInt();
+			var pointsZ = (WorldHeight / _resolution).CeilToInt();
+
+			_terrainGrid = new float[pointsX, pointsZ];
+
+			var r = Game.Random.Int( 99999 );
+
+			// Initialize Perlin noise grid.
+			for ( var x = 0; x < pointsX; x++ )
 			{
-				var n = Noise.Perlin( (x + r) * _zoom, r, (z + r) * _zoom );
-				n = Math.Abs( (n * 2) - 1 );
-				_terrainGrid[x, z] = n;
-
-				// Subtract from the solid where the noise is under a certain threshold.
-				if ( _terrainGrid[x, z] < 0.15f )
+				for ( var z = 0; z < pointsZ; z++ )
 				{
-					// Pad the subtraction so the subtraction is more clean.
-					var paddedRes = _resolution + (_resolution * 0.75f);
+					var n = Noise.Perlin( (x + r) * _zoom, r, (z + r) * _zoom );
+					n = Math.Abs( (n * 2) - 1 );
+					_terrainGrid[x, z] = n;
 
-					var min = new Vector3( (x * _resolution) - paddedRes, -32, (z * _resolution) - paddedRes );
-					var max = new Vector3( (x * _resolution) + paddedRes, 32, (z * _resolution) + paddedRes );
+					// Subtract from the solid where the noise is under a certain threshold.
+					if ( _terrainGrid[x, z] < 0.15f )
+					{
+						// Pad the subtraction so the subtraction is more clean.
+						var paddedRes = _resolution + (_resolution * 0.75f);
 
-					// Offset by position.
-					min -= new Vector3( WorldLength / 2, 0, WorldHeight );
-					max -= new Vector3( WorldLength / 2, 0, WorldHeight );
-					SubtractDefault( min, max );
+						var min = new Vector3( (x * _resolution) - paddedRes, -32, (z * _resolution) - paddedRes );
+						var max = new Vector3( (x * _resolution) + paddedRes, 32, (z * _resolution) + paddedRes );
 
-					var avg = (min + max) / 2;
-					PossibleSpawnPoints.Add( avg );
+						// Offset by position.
+						min -= new Vector3( WorldLength / 2, 0, WorldHeight );
+						max -= new Vector3( WorldLength / 2, 0, WorldHeight );
+						SubtractDefault( min, max );
+
+						var avg = (min + max) / 2;
+						PossibleSpawnPoints.Add( avg );
+					}
 				}
 			}
-		}
-	}*/
+		}*/
 
 	/*var visited = new bool[pointsX, pointsZ];
 

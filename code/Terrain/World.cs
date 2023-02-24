@@ -56,9 +56,6 @@ public partial class World : Entity
 		CsgWorld = new CsgSolid( GridSize );
 		CsgBackground = new CsgSolid( GridSize );
 
-		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
-		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 64, -WorldHeight / 2 ) );
-
 		switch ( GrubsConfig.WorldTerrainType )
 		{
 			case GrubsConfig.TerrainType.Generated:
@@ -71,17 +68,14 @@ public partial class World : Entity
 				SetupGenerateWorld();
 				break;
 		}
-
-		SetupKillZone();
-		SetupWater();
 	}
 
-	private void SetupKillZone()
+	private void SetupKillZone( float height )
 	{
 		var killBounds = new MultiShape().AddShape(
 			BoxShape
 			.WithSize( new Vector3( int.MaxValue, WorldWidth, 100 ) )
-			.WithOffset( new Vector3( -int.MaxValue / 2, -WorldWidth / 2, -WorldHeight - 100 ) ) );
+			.WithOffset( new Vector3( -int.MaxValue / 2, -WorldWidth / 2, -height - 100 ) ) );
 
 		KillZone = new DamageZone()
 			.WithDamageTags( "outofarea" )
@@ -92,13 +86,13 @@ public partial class World : Entity
 			.Finish<DamageZone>();
 	}
 
-	private void SetupWater()
+	private void SetupWater( float length, float height )
 	{
 		var water = new Water();
 		water.WaterMaterial = "materials/water/water_pond_a.vmat";
 
-		var min = new Vector3( -WorldLength * 4, -WorldWidth * 16, -WorldHeight );
-		var max = new Vector3( WorldLength * 4, WorldWidth * 16, -WorldHeight + 1 );
+		var min = new Vector3( -length * 4, -WorldWidth * 16, -height );
+		var max = new Vector3( length * 4, WorldWidth * 16, -height + 1 );
 		water.CollisionBounds = new BBox( min, max );
 		water.Position = new Vector3( 0, 0, 8 );
 	}
