@@ -50,14 +50,15 @@ public partial class World
 					_terrainGrid[x, z] = n;
 
 					// Add solid where alpha == 255
-					if ( _terrainGrid[x, z] == 255 )
+					if ( _terrainGrid[x, z] > 0 )
 					{
-						min = new Vector3( (x * 16) - paddedRes, -16, (z * 16) - paddedRes );
+						var depth = (_terrainGrid[x, z] / 255f) * 16;
+						min = new Vector3( (x * 16) - paddedRes, -depth, (z * 16) - paddedRes );
 						max = new Vector3( (x * 16) + paddedRes, 16, (z * 16) + paddedRes );
 
 						// Offset by position.
-						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
-						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+						min -= new Vector3( _WorldLength / 2, depth - 8, _WorldHeight );
+						max -= new Vector3( _WorldLength / 2, depth - 8, _WorldHeight );
 						AddDefault( min, max );
 						//SubtractDefault( min, max );
 						/*var avg = (min + max) / 2;
