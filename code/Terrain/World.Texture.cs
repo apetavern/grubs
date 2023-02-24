@@ -1,4 +1,8 @@
-﻿namespace Grubs;
+﻿using Sandbox.Csg;
+using System;
+using System.Numerics;
+
+namespace Grubs;
 
 public partial class World
 {
@@ -26,13 +30,95 @@ public partial class World
 			SetupKillZone( _WorldHeight );
 
 			//CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 0, -_WorldHeight / 2 ) );
-			CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
+			if ( map.background == null )
+			{
+				CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
+			}
 
 			_terrainGrid = new float[pointsX, pointsZ];
 
 			Color32[] pixels = map.texture.GetPixels().Reverse().ToArray();
 
-			var min = new Vector3();
+
+
+			List<Vector3> points = new List<Vector3>();
+			List<Vector3> lineStarts = new List<Vector3>();
+			List<Vector3> lineEnds = new List<Vector3>();
+
+			float lineWidth = 44.0f; // width of each CSG line
+
+			for ( int i = 0; i < pixels.Length; i++ )
+			{
+				int x = i % pointsX;
+				int y = i / pointsX;
+
+				// check if the current pixel is part of a CSG line
+				if ( pixels[i].a > 0 )
+				{
+					var min = new Vector3( (x * 16) - 16, -16, (y * 16) - 16 );
+					var max = new Vector3( (x * 16) + 16, 16, (y * 16) + 16 );
+
+					// Offset by position.
+					min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+					max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+
+					// add the current point to the list of points
+					points.Add( (min + max) / 2 );
+
+					// check if the next pixel in the same row is also part of the line
+					int nextX = x;
+					while ( nextX < pointsX - 1 && pixels[i + 1].a > 0 )
+					{
+						nextX++;
+						i++;
+					}
+					if ( nextX > x )
+					{
+						// add a line between the current point and the last point in the same row
+						min = new Vector3( (nextX * 16) - 16, -16, (y * 16) - 16 );
+						max = new Vector3( (nextX * 16) + 16, 16, (y * 16) + 16 );
+
+						// Offset by position.
+						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+
+						points.Add( (min + max) / 2 );
+
+						lineStarts.Add( points[points.Count - 2] );
+						lineEnds.Add( points[points.Count - 1] );
+					}
+				}
+				else
+				{
+					var min = new Vector3( (x * 16) - 16, -16, (y * 16) - 16 );
+					var max = new Vector3( (x * 16) + 16, 16, (y * 16) + 16 );
+
+					// Offset by position.
+					min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+					max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+					PossibleSpawnPoints.Add( (min + max) / 2 );
+				}
+			}
+
+			// create CSG lines from the list of line start and end points
+
+
+
+			for ( int i = 0; i < lineStarts.Count; i++ )
+			{
+				Vector3 start = lineStarts[i];
+				Vector3 end = lineEnds[i];
+				float size = lineWidth;
+				Quaternion rotation = Rotation.Identity;
+				AddLine( start, end, size, rotation );
+			}
+
+			/*for ( int i = 0; i < mines.Count; i++ )
+			{
+				AddDefaultCube( mines[i], maxes[i] );
+			}*/
+
+			/*var min = new Vector3();
 			var max = new Vector3();
 			var n = 0;
 			int index = 0;
@@ -61,8 +147,6 @@ public partial class World
 						max -= new Vector3( _WorldLength / 2, depth - 8, _WorldHeight );
 						AddDefault( min, max );
 						//SubtractDefault( min, max );
-						/*var avg = (min + max) / 2;
-						PossibleSpawnPoints.Add( avg );*/
 					}
 					else
 					{
@@ -77,7 +161,77 @@ public partial class World
 						PossibleSpawnPoints.Add( avg );
 					}
 				}
+			}*/
+
+			if ( map.background != null )
+			{
+				_terrainGrid = new float[pointsX, pointsZ];
+
+				pixels = map.background.GetPixels().Reverse().ToArray();
+
+				points.Clear();
+				lineStarts.Clear();
+				lineEnds.Clear();
+
+				lineWidth = 46.0f; // width of each CSG line
+
+				for ( int i = 0; i < pixels.Length; i++ )
+				{
+					int x = i % pointsX;
+					int y = i / pointsX;
+
+					// check if the current pixel is part of a CSG line
+					if ( pixels[i].a > 0 )
+					{
+						var min = new Vector3( (x * 16) - 16, -16, (y * 16) - 16 );
+						var max = new Vector3( (x * 16) + 16, 16, (y * 16) + 16 );
+
+						// Offset by position.
+						min -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
+						max -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
+
+						// add the current point to the list of points
+						points.Add( (min + max) / 2 );
+
+						// check if the next pixel in the same row is also part of the line
+						int nextX = x;
+						while ( nextX < pointsX - 1 && pixels[i + 1].a > 0 )
+						{
+							nextX++;
+							i++;
+						}
+						if ( nextX > x )
+						{
+							// add a line between the current point and the last point in the same row
+							min = new Vector3( (nextX * 16) - 16, -16, (y * 16) - 16 );
+							max = new Vector3( (nextX * 16) + 16, 16, (y * 16) + 16 );
+
+							// Offset by position.
+							min -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
+							max -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
+
+							points.Add( (min + max) / 2 );
+
+							lineStarts.Add( points[points.Count - 2] );
+							lineEnds.Add( points[points.Count - 1] );
+						}
+					}
+				}
+
+				// create CSG lines from the list of line start and end points
+
+
+
+				for ( int i = 0; i < lineStarts.Count; i++ )
+				{
+					Vector3 start = lineStarts[i];
+					Vector3 end = lineEnds[i];
+					float size = lineWidth;
+					Quaternion rotation = Rotation.Identity;
+					AddBackgroundLine( start, end, size, rotation );
+				}
 			}
 		}
 	}
+
 }
