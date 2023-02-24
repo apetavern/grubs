@@ -22,6 +22,21 @@ public class GrubsCamera : EntityComponent
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
 
+		if ( GamemodeSystem.Instance is FreeForAll ffa )
+		{
+			if ( !ffa.Started )
+			{
+				var pregameCameraCenter = Vector3.Zero - Vector3.Up * GrubsConfig.TerrainHeight / 2f;
+
+				var pregameTargetPosition = pregameCameraCenter + Vector3.Right * Distance;
+				var pregameCurrentPosition = Camera.Position;
+				Camera.Position = pregameCurrentPosition.LerpTo( pregameTargetPosition, Time.Delta * LerpSpeed );
+
+				var pregameLookDir = (pregameCameraCenter - pregameTargetPosition).Normal;
+				Camera.Rotation = Rotation.LookAt( pregameLookDir, Vector3.Up );
+			}
+		}
+
 		if ( TimeUntilCameraUnlocked <= 0 )
 			FindTarget();
 
