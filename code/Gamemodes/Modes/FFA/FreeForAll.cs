@@ -260,20 +260,16 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		if ( !ActivePlayer.IsDisconnected )
+		var current = PlayerRotation[0];
+		PlayerRotation.RemoveAt( 0 );
+
+		if ( !current.IsDead && !current.IsDisconnected )
 		{
-			PlayerRotation.RemoveAt( 0 );
-			PlayerRotation.Add( ActivePlayer );
+			PlayerRotation.Add( current );
 		}
-
-		for ( int i = Players.Count - 1; i >= 0; --i )
+		else
 		{
-			var player = Players[i];
-			if ( !player.IsDisconnected )
-				continue;
-
-			Players.Remove( player );
-			PlayerRotation.Remove( player );
+			Players.Remove( current );
 		}
 
 		ActivePlayer = PlayerRotation[0];
