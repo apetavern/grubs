@@ -36,6 +36,15 @@ public partial class World
 		CsgWorld.Paint( CubeBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
 	}
 
+	public void SubtractCoolLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
+	{
+		var midpoint = new Vector3( (start.x + stop.x) / 2, 0f, (start.z + stop.z) / 2 );
+		var scale = new Vector3( Vector3.DistanceBetween( start, stop ), 64f, size );
+
+		CsgWorld.Subtract( CoolBrush, midpoint, scale, Rotation.FromPitch( rotation.Pitch() ) );
+		CsgWorld.Paint( CoolBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
+	}
+
 	public void AddDefault( Vector3 min, Vector3 max )
 	{
 		CsgWorld.Add( CoolBrush, SandMaterial, (min + max) * 0.5f, (max - min) * 1.2f );
