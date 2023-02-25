@@ -11,4 +11,16 @@ public partial class GameStatePanel : Panel
 		if ( Game.Clients.Count >= GrubsConfig.MinimumPlayers && ffa.TerrainReady && !ffa.Started )
 			ffa.Start();
 	}
+
+	[ConCmd.Server]
+	public static void RestartGame()
+	{
+		Game.ResetMap( Array.Empty<Entity>() );
+
+		GamemodeSystem.Instance.Delete();
+		GamemodeSystem.SetupGamemode();
+		GamemodeSystem.Instance.GameWorld = new World();
+
+		World.RegenWorld();
+	}
 }

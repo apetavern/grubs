@@ -33,6 +33,14 @@
     {
         <label class="header" text="Game Over!" />
         <label class="subtext" text="Provide feedback @@ discord.gg/apetavern" />
+        @if (Game.LocalClient.IsListenServerHost)
+        {
+            <button onclick=@RestartGame text="Restart" />
+        }
+        else
+        {
+            <label class="subtext" text="Waiting for host to restart game..." />
+        }
     }
 </root>
 
