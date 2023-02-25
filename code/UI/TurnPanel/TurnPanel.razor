@@ -7,7 +7,10 @@
 
 <root class="@(GamemodeSystem.Instance.TurnIsChanging ? "hide" : "")">
     <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
-    <label class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.Client.Name}'s Turn") />
+    <label 
+        class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn") 
+        style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
+    />
 </root>
 
 @code {
@@ -23,7 +26,7 @@
 
         return HashCode.Combine(
             FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), 
-            GamemodeSystem.Instance.ActivePlayer?.Client?.SteamId,
+            GamemodeSystem.Instance.ActivePlayer?.SteamId,
             GamemodeSystem.Instance.TurnIsChanging
         );
     }

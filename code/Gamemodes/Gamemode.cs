@@ -6,7 +6,7 @@ public partial class Gamemode : Entity
 	public virtual string GamemodeName => "";
 
 	/// <summary>
-	/// A list of currently connected players that are actively apart of the gamemode.
+	/// A list of players that are participants in the game.
 	/// </summary>
 	[Net]
 	public IList<Player> Players { get; set; }
