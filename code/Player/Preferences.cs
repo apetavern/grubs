@@ -5,7 +5,7 @@ public partial class Preferences : EntityComponent<Player>
 	private static int ColorIndex = 0;
 	private readonly List<Color> ColorPresets = new()
 	{
-		Color.FromBytes(246, 90, 131),  // Red
+		Color.FromBytes(232, 59, 105),  // Red
 		Color.FromBytes(33, 146, 255),  // Blue
 		Color.FromBytes(56, 229, 77),   // Green
 		Color.FromBytes(248, 249, 136), // Yellow

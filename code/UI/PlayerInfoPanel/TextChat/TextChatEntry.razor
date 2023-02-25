@@ -12,6 +12,7 @@
 @code
 {
 	public string Name { get; set; }
+	public Color Color { get; set; }
 	public string Message { get; set; }
 	public long SteamId { get; set; }
 	public TimeSince Lifetime { get; init; } = 0;
@@ -40,7 +41,7 @@
 			font-weight: 700;
 			font-size: 20px;
 			font-family: Londrina Solid;
-			color: white;
+			color: @Color.Hex;
 			text-shadow: 2px 2px 0px black;
 			font-weight: bold;
 		}

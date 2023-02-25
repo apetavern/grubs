@@ -93,13 +93,14 @@ public partial class TextChat : Panel
 		if ( message.Contains( '\n' ) || message.Contains( '\r' ) )
 			return;
 
-		AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message, ConsoleSystem.Caller.SteamId );
+		var color = (ConsoleSystem.Caller.Pawn as Player)?.Preferences?.Color ?? Color.White;
+		AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, color, message, ConsoleSystem.Caller.SteamId );
 	}
 
 	[ClientRpc]
-	public static void AddChatEntry( string name, string message, long steamId )
+	public static void AddChatEntry( string name, Color color, string message, long steamId )
 	{
-		_instance?.AddEntry( new TextChatEntry { Name = name, Message = message, SteamId = steamId } );
+		_instance?.AddEntry( new TextChatEntry { Name = name, Color = color, Message = message, SteamId = steamId } );
 	}
 
 	[ClientRpc]

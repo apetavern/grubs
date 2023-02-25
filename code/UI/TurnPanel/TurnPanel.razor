@@ -23,7 +23,7 @@
 
         return HashCode.Combine(
             FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), 
-            GamemodeSystem.Instance.ActivePlayer?.Client?.SteamId,
+            GamemodeSystem.Instance.ActivePlayer?.SteamId,
             GamemodeSystem.Instance.TurnIsChanging
         );
     }
@@ -51,6 +51,7 @@
             position: absolute;
             bottom: -30px;
             font-size: 40px;
+            color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;
         }
 
         &.hide {
