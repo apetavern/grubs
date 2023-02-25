@@ -1,0 +1,4 @@
+{
+  "texture": "textures/texturestamps/girder.vtex",
+  "material": "materials/csg/default.csgmat"
+}
