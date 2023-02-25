@@ -16,6 +16,8 @@ public partial class Player : Entity
 
 	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
 
+	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
+
 	[BindComponent]
 	public Inventory Inventory { get; }
 

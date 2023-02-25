@@ -257,22 +257,16 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		if ( CanUseTurn( ActivePlayer ) )
+		if ( ActivePlayer.IsAvailableForTurn )
 			PlayerTurnQueue.Enqueue( ActivePlayer );
 
 		ActivePlayer = PlayerTurnQueue.Dequeue();
-		while ( !CanUseTurn( ActivePlayer ) )
+		while ( !ActivePlayer.IsAvailableForTurn )
 		{
-			Players.Remove( ActivePlayer );
 			ActivePlayer = PlayerTurnQueue.Dequeue();
 		}
 
 		ActivePlayer.PickNextGrub();
-	}
-
-	private bool CanUseTurn( Player player )
-	{
-		return !player.IsDead && !player.IsDisconnected;
 	}
 
 	internal override void MoveToSpawnpoint( IClient client )

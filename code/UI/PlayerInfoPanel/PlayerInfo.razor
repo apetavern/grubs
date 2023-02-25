@@ -1,6 +1,6 @@
 @namespace Grubs
 
-<root>
+<root class="@(!Player.IsAvailableForTurn ? "inactive" : "")">
     <img src="avatar:@Player.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
         <label text=@Player.SteamName class="name" style="font-color: @Player.Preferences.Color.Hex;" />
@@ -40,7 +40,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player.GetTotalGrubHealth(), _isTalking);
+        return HashCode.Combine(Player.GetTotalGrubHealth(), Player.IsAvailableForTurn, _isTalking);
     }
 }
 
@@ -48,6 +48,7 @@
     PlayerInfo {
         flex-shrink: 0;
         padding-top: 10px;
+        transition: all 300ms ease-in;
 
         .avatar {
             width: 65px;
@@ -89,6 +90,11 @@
             animation-duration: 1s;
             animation-name: wiggle;
             animation-iteration-count: infinite;
+        }
+
+        &.inactive {
+            opacity: 0.3;
+            transform: translateX(-3%);
         }
     }
 
