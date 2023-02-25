@@ -429,7 +429,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 640122344
+									m_id = 2016484433
 								}
 								m_outputID = 
 								{
@@ -2551,7 +2551,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 544.0, -16.0 ]
+					m_vecPosition = [ 272.0, -48.0 ]
 					m_nNodeID = 
 					{
 						m_id = 640122344
@@ -2657,7 +2657,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 544.0, -64.0 ]
+					m_vecPosition = [ 544.0, -80.0 ]
 					m_nNodeID = 
 					{
 						m_id = 662157317
@@ -5040,6 +5040,60 @@
 			{
 				key = 
 				{
+					m_id = 2016484433
+				}
+				value = 
+				{
+					_class = "CBoneMaskAnimNode"
+					m_sName = "LayerAiming"
+					m_vecPosition = [ 544.0, -32.0 ]
+					m_nNodeID = 
+					{
+						m_id = 2016484433
+					}
+					m_networkMode = "ClientPredicted"
+					m_sNote = ""
+					m_weightListName = "aiming"
+					m_inputConnection1 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 640122344
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_inputConnection2 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 1198032904
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_blendSpace = "BlendSpace_Parent"
+					m_bUseBlendScale = false
+					m_blendValueSource = "Parameter"
+					m_blendParameter = 
+					{
+						m_id = 4294967295
+					}
+					m_timingBehavior = "UseChild2"
+					m_flTimingBlend = 0.5
+					m_flRootMotionBlend = 0.0
+					m_footMotionTiming = "Child1"
+					m_bResetChild1 = true
+					m_bResetChild2 = true
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 2028934485
 				}
 				value = 
@@ -5561,5 +5615,11 @@
 	[
 		"models/citizenworm.vmdl",
 	]
-	m_boneMergeModels = [  ]
+	m_boneMergeModels = 
+	[
+		{
+			m_name = "models/tools/blowtorch/blowtorch.vmdl"
+			m_bEnabled = true
+		},
+	]
 }
