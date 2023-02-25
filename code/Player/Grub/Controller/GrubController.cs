@@ -35,7 +35,7 @@ public partial class GrubController : EntityComponent<Grub>
 	public static float EyeHeight => 28f;
 
 	[Net, Predicted]
-	public float CurrentEyeHeight { get; set; } = 28f;
+	public float CurrentEyeHeight { get; set; } = 24f;
 
 	public IEnumerable<ControllerMechanic> Mechanics => Entity.Components.GetAll<ControllerMechanic>();
 	public ControllerMechanic BestMechanic => Mechanics.OrderByDescending( x => x.SortOrder ).FirstOrDefault( x => x.IsActive );
@@ -108,6 +108,9 @@ public partial class GrubController : EntityComponent<Grub>
 	{
 		Grub.Facing = Grub.Rotation.z < 0 ? -1 : 1;
 		Grub.EyeRotation = Grub.LookAngles.ToRotation();
+
+
+
 		Grub.EyeLocalPosition = Vector3.Up * CurrentEyeHeight;
 	}
 
@@ -183,7 +186,7 @@ public partial class GrubController : EntityComponent<Grub>
 		var gm = GamemodeSystem.Instance;
 
 		var isCharging = false;
-		if ( Grub.ActiveWeapon is not null && Grub.ActiveWeapon.IsCharging() )
+		if ( Grub.ActiveWeapon is not null && Grub.ActiveWeapon.IsCharging() && !Grub.ActiveWeapon.AllowMovement )
 			isCharging = true;
 
 		return Grub.IsTurn && !gm.TurnIsChanging && !isCharging && gm.AllowMovement;
@@ -191,7 +194,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 	public bool ShouldShowWeapon()
 	{
-		return Grub.IsTurn && Velocity.IsNearlyZero( 2.5f ) && IsGrounded;
+		return Grub.IsTurn && ((Velocity.IsNearlyZero( 2.5f ) && IsGrounded) || Grub.ActiveWeapon.AllowMovement);
 	}
 
 	public Vector3 GetWishVelocity( bool zeroPitch = false )
