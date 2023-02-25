@@ -11,6 +11,10 @@
             />
         </div>
     </div>
+    @if (Player.IsDisconnected)
+    {
+        <label class="disconnect-icon">link_off</label>
+    }
     <label class="voice-icon" style="opacity: @(_isTalking ? 1 : 0)">record_voice_over</label>
 </root>
 
@@ -40,7 +44,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player.GetTotalGrubHealth(), Player.IsAvailableForTurn, _isTalking);
+        return HashCode.Combine(Player.GetTotalGrubHealth(), Player.IsAvailableForTurn, Player.IsDisconnected, _isTalking);
     }
 }
 
@@ -92,8 +96,19 @@
             animation-iteration-count: infinite;
         }
 
+        .disconnect-icon {
+            position: absolute;
+            left: -13px;
+            top: -3px;
+
+            font-family: MaterialIcons;
+            font-size: 30px;
+            color: red;
+            text-shadow: 2px 2px 0px black;
+        }
+
         &.inactive {
-            opacity: 0.3;
+            opacity: 0.5;
             transform: translateX(-3%);
         }
     }
