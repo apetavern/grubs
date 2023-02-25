@@ -19,10 +19,12 @@ public partial class World
 		ResourceLibrary.TryGet( TexturePath, out TextureLevel map );
 		if ( map != null )
 		{
+			float resolution = 8;
+
 			PossibleSpawnPoints.Clear();
 
-			var _WorldLength = map.texture.Width * 16;
-			var _WorldHeight = map.texture.Height * 16;
+			var _WorldLength = map.texture.Width * resolution;
+			var _WorldHeight = map.texture.Height * resolution;
 			var pointsX = map.texture.Width;
 			var pointsZ = map.texture.Height;
 
@@ -45,7 +47,7 @@ public partial class World
 			List<Vector3> lineStarts = new List<Vector3>();
 			List<Vector3> lineEnds = new List<Vector3>();
 
-			float lineWidth = 44.0f; // width of each CSG line
+			float lineWidth = 18.0f; // width of each CSG line
 
 			for ( int i = 0; i < pixels.Length; i++ )
 			{
@@ -55,8 +57,8 @@ public partial class World
 				// check if the current pixel is part of a CSG line
 				if ( pixels[i].a > 0 )
 				{
-					var min = new Vector3( (x * 16) - 16, -16, (y * 16) - 16 );
-					var max = new Vector3( (x * 16) + 16, 16, (y * 16) + 16 );
+					var min = new Vector3( (x * resolution) - resolution, -16, (y * resolution) - resolution );
+					var max = new Vector3( (x * resolution) + resolution, 16, (y * resolution) + resolution );
 
 					// Offset by position.
 					min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
@@ -75,8 +77,8 @@ public partial class World
 					if ( nextX > x )
 					{
 						// add a line between the current point and the last point in the same row
-						min = new Vector3( (nextX * 16) - 16, -16, (y * 16) - 16 );
-						max = new Vector3( (nextX * 16) + 16, 16, (y * 16) + 16 );
+						min = new Vector3( (nextX * resolution) - resolution, -16, (y * resolution) - resolution );
+						max = new Vector3( (nextX * resolution) + resolution, 16, (y * resolution) + resolution );
 
 						// Offset by position.
 						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
@@ -90,8 +92,8 @@ public partial class World
 				}
 				else
 				{
-					var min = new Vector3( (x * 16) - 16, -16, (y * 16) - 16 );
-					var max = new Vector3( (x * 16) + 16, 16, (y * 16) + 16 );
+					var min = new Vector3( (x * resolution) - resolution, -16, (y * resolution) - resolution );
+					var max = new Vector3( (x * resolution) + resolution, 16, (y * resolution) + resolution );
 
 					// Offset by position.
 					min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
@@ -165,7 +167,7 @@ public partial class World
 
 			if ( map.background != null )
 			{
-				_terrainGrid = new float[pointsX, pointsZ];
+				//_terrainGrid = new float[pointsX, pointsZ];
 
 				pixels = map.background.GetPixels().Reverse().ToArray();
 
@@ -173,7 +175,7 @@ public partial class World
 				lineStarts.Clear();
 				lineEnds.Clear();
 
-				lineWidth = 46.0f; // width of each CSG line
+				//lineWidth = 24.0f; // width of each CSG line
 
 				for ( int i = 0; i < pixels.Length; i++ )
 				{
@@ -183,8 +185,8 @@ public partial class World
 					// check if the current pixel is part of a CSG line
 					if ( pixels[i].a > 0 )
 					{
-						var min = new Vector3( (x * 16) - 16, -16, (y * 16) - 16 );
-						var max = new Vector3( (x * 16) + 16, 16, (y * 16) + 16 );
+						var min = new Vector3( (x * resolution) - resolution, -16, (y * resolution) - resolution );
+						var max = new Vector3( (x * resolution) + resolution, 16, (y * resolution) + resolution );
 
 						// Offset by position.
 						min -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
@@ -203,8 +205,8 @@ public partial class World
 						if ( nextX > x )
 						{
 							// add a line between the current point and the last point in the same row
-							min = new Vector3( (nextX * 16) - 16, -16, (y * 16) - 16 );
-							max = new Vector3( (nextX * 16) + 16, 16, (y * 16) + 16 );
+							min = new Vector3( (nextX * resolution) - resolution, -16, (y * resolution) - resolution );
+							max = new Vector3( (nextX * resolution) + resolution, 16, (y * resolution) + resolution );
 
 							// Offset by position.
 							min -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
