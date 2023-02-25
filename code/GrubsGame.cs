@@ -34,8 +34,6 @@ public sealed partial class GrubsGame : GameManager
 	{
 		base.ClientJoined( client );
 
-		client.Components.Create<Preferences>();
-
 		if ( GamemodeSystem.Instance.GameWorld is null )
 			GamemodeSystem.Instance.GameWorld = new World();
 
