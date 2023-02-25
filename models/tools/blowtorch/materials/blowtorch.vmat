@@ -1,0 +1,14 @@
+
+Layer0
+{
+	shader "complex.vfx"
+
+	TextureColor "models/tools/blowtorch/materials/phong1_color.png"
+	TextureAmbientOcclusion "models/tools/blowtorch/materials/phong1_ao.png"
+	TextureNormal "models/tools/blowtorch/materials/phong1_normal.png"
+	TextureRoughness "models/tools/blowtorch/materials/phong1_rough.png"
+	F_METALNESS_TEXTURE 1
+	F_SPECULAR 1
+	TextureMetalness "models/tools/blowtorch/materials/phong1_metallic.png"
+
+}
