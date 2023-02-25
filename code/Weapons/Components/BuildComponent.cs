@@ -1,4 +1,6 @@
-﻿namespace Grubs;
+﻿using System.Numerics;
+
+namespace Grubs;
 
 [Prefab]
 public partial class BuildComponent : WeaponComponent
@@ -12,6 +14,9 @@ public partial class BuildComponent : WeaponComponent
 
 	public ModelEntity GirderPreview { get; set; }
 
+	[Net, Predicted]
+	public float RotationAngle { get; set; }
+
 	public override bool ShouldStart()
 	{
 		return Grub.IsTurn && Grub.Controller.IsGrounded;
@@ -20,11 +25,24 @@ public partial class BuildComponent : WeaponComponent
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
+
+		RotationAngle += Input.MouseWheel * 10f;
+
 		if ( Game.IsClient && !IsFiring && !Weapon.HasFired )
 		{
 			if ( GirderPreview != null && GirderPreview.IsValid )
 			{
 				GirderPreview.Position = Grub.Player.MousePosition;
+				GirderPreview.Rotation = Rotation.Identity * new Angles( RotationAngle, 0, 0 ).ToRotation();
+
+				GrubsCamera cam = Grub.Player.Client.Components.Get<GrubsCamera>();
+
+				if ( cam != null )
+				{
+					cam.Distance = 512f;
+					cam.DistanceScrollRate = 0f;
+				}
+
 				if ( Trace.Body( GirderPreview.PhysicsBody, Grub.Player.MousePosition ).Run().StartedSolid )
 				{
 					GirderPreview.RenderColor = Color.Red;
@@ -53,8 +71,14 @@ public partial class BuildComponent : WeaponComponent
 		if ( GirderPreview != null && GirderPreview.IsValid )
 		{
 			GirderPreview.Delete();
+			GrubsCamera cam = Grub.Player.Client.Components.Get<GrubsCamera>();
+
+			if ( cam != null )
+			{
+				cam.DistanceScrollRate = 32f;
+			}
 		}
-		GamemodeSystem.Instance.GameWorld.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition );
+		GamemodeSystem.Instance.GameWorld.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
 
 		FireFinished();
 	}
@@ -65,6 +89,12 @@ public partial class BuildComponent : WeaponComponent
 		if ( GirderPreview != null && GirderPreview.IsValid )
 		{
 			GirderPreview.Delete();
+
+			GrubsCamera cam = Grub.Player.Client.Components.Get<GrubsCamera>();
+			if ( cam != null )
+			{
+				cam.DistanceScrollRate = 32f;
+			}
 		}
 		if ( Game.IsClient )
 			Event.Run( "pointer.disabled" );

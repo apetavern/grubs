@@ -44,7 +44,7 @@
 					{
 						_class = "RenderMeshFile"
 						filename = "models/weapons/girder/girderpreview.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_translation = [ 0.0, 0.0, -0.5 ]
 						import_rotation = [ 0.0, 90.0, 0.0 ]
 						import_scale = 30.0
 						align_origin_x_type = "None"

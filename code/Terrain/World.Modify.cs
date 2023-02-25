@@ -61,7 +61,7 @@ public partial class World
 		//CsgWorld.Paint( CubeBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
 	}
 
-	public void AddTextureStamp( string TexturePath, Vector3 Center )
+	public void AddTextureStamp( string TexturePath, Vector3 Center, float Angle )
 	{
 		ResourceLibrary.TryGet( TexturePath, out TextureStamp stamp );
 		if ( stamp != null )
@@ -69,6 +69,7 @@ public partial class World
 			float resolution = 8;
 
 			var pointsX = stamp.texture.Width;
+			var pointsY = stamp.texture.Height;
 
 			Color32[] pixels = stamp.texture.GetPixels().Reverse().ToArray();
 
@@ -77,6 +78,8 @@ public partial class World
 			List<Vector3> lineEnds = new List<Vector3>();
 
 			float lineWidth = 14.0f; // width of each CSG line
+
+			Rotation RotationAngle = new Angles( Angle, 0, 0 ).ToRotation();
 
 			for ( int i = 0; i < pixels.Length; i++ )
 			{
@@ -88,6 +91,9 @@ public partial class World
 				{
 					var min = new Vector3( (x * resolution) - resolution, -8, (y * resolution) - resolution );
 					var max = new Vector3( (x * resolution) + resolution, 8, (y * resolution) + resolution );
+
+					min *= RotationAngle;
+					max *= RotationAngle;
 
 					// Offset by position.
 					min += Center.WithY( 0 );
@@ -109,14 +115,17 @@ public partial class World
 						min = new Vector3( (nextX * resolution) - resolution, -16, (y * resolution) - resolution );
 						max = new Vector3( (nextX * resolution) + resolution, 16, (y * resolution) + resolution );
 
+						min *= RotationAngle;
+						max *= RotationAngle;
+
 						// Offset by position.
 						min += Center.WithY( 0 );
 						max += Center.WithY( 0 );
 
 						points.Add( (min + max) / 2 );
 
-						lineStarts.Add( points[points.Count - 2] - (Vector3.Forward * pointsX * resolution * 0.5f) );
-						lineEnds.Add( points[points.Count - 1] - (Vector3.Forward * pointsX * resolution * 0.5f) );
+						lineStarts.Add( points[points.Count - 2] - (RotationAngle.Forward * pointsX * resolution * 0.5f) - (RotationAngle.Up * pointsY * resolution * 0.5f) );
+						lineEnds.Add( points[points.Count - 1] - (RotationAngle.Forward * pointsX * resolution * 0.5f) - (RotationAngle.Up * pointsY * resolution * 0.5f) );
 					}
 				}
 			}
@@ -125,11 +134,25 @@ public partial class World
 			{
 				Vector3 start = lineStarts[i];
 				Vector3 end = lineEnds[i];
+
 				float size = lineWidth;
-				Quaternion rotation = Rotation.Identity;
+				Quaternion rotation = RotationAngle;
 				AddLine( start, end, size, rotation, false, stamp.material );
 			}
 		}
+	}
+
+	public static Rotation FromAngleAxis( float angle, Vector3 axis )
+	{
+		axis = axis.Normal;
+		float halfAngle = angle * 0.5f;
+		float sinHalfAngle = (float)Math.Sin( halfAngle );
+		float cosHalfAngle = (float)Math.Cos( halfAngle );
+		float x = axis.x * sinHalfAngle;
+		float y = axis.y * sinHalfAngle;
+		float z = axis.z * sinHalfAngle;
+		float w = cosHalfAngle;
+		return new Rotation( x, y, z, w );
 	}
 
 	public void AddBackgroundLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
