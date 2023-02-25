@@ -1,4 +1,5 @@
 ﻿using Sandbox.Csg;
+using System.Numerics;
 
 namespace Grubs;
 
@@ -45,18 +46,90 @@ public partial class World
 		CsgWorld.Add( CubeBrush, SandMaterial, (min + max) * 0.5f, (max - min) * 1.2f );
 	}
 
-	public void AddLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
+	public void AddLine( Vector3 start, Vector3 stop, float size, Rotation rotation, bool Caps = true, CsgMaterial mat = null )
 	{
 		var midpoint = new Vector3( (start.x + stop.x) / 2, 0f, (start.z + stop.z) / 2 );
 		var scale = new Vector3( Vector3.DistanceBetween( start, stop ), 64f, size );
 
-		CsgWorld.Add( CubeBrush, SandMaterial, midpoint, scale, Rotation.FromPitch( rotation.Pitch() ) );
+		CsgWorld.Add( CubeBrush, mat == null ? SandMaterial : mat, midpoint, scale, Rotation.FromPitch( rotation.Pitch() ) );
 
-		//DebugOverlay.Sphere( start, 64f, Color.Red, 1f );
-
-		CsgWorld.Add( CoolBrush, SandMaterial, start, (Vector3.One * size).WithY( 64f ) );
-		CsgWorld.Add( CoolBrush, SandMaterial, stop, (Vector3.One * size).WithY( 64f ) );
+		if ( Caps )
+		{
+			CsgWorld.Add( CoolBrush, mat == null ? SandMaterial : mat, start, (Vector3.One * size).WithY( 64f ) );
+			CsgWorld.Add( CoolBrush, mat == null ? SandMaterial : mat, stop, (Vector3.One * size).WithY( 64f ) );
+		}
 		//CsgWorld.Paint( CubeBrush, DefaultMaterial, midpoint, scale.WithZ( size * 1.1f ), Rotation.FromPitch( rotation.Pitch() ) );
+	}
+
+	public void AddTextureStamp( string TexturePath, Vector3 Center )
+	{
+		ResourceLibrary.TryGet( TexturePath, out TextureStamp stamp );
+		if ( stamp != null )
+		{
+			float resolution = 8;
+
+			var pointsX = stamp.texture.Width;
+
+			Color32[] pixels = stamp.texture.GetPixels().Reverse().ToArray();
+
+			List<Vector3> points = new List<Vector3>();
+			List<Vector3> lineStarts = new List<Vector3>();
+			List<Vector3> lineEnds = new List<Vector3>();
+
+			float lineWidth = 14.0f; // width of each CSG line
+
+			for ( int i = 0; i < pixels.Length; i++ )
+			{
+				int x = i % pointsX;
+				int y = i / pointsX;
+
+				// check if the current pixel is part of a CSG line
+				if ( pixels[i].a > 0 )
+				{
+					var min = new Vector3( (x * resolution) - resolution, -8, (y * resolution) - resolution );
+					var max = new Vector3( (x * resolution) + resolution, 8, (y * resolution) + resolution );
+
+					// Offset by position.
+					min += Center.WithY( 0 );
+					max += Center.WithY( 0 );
+
+					// add the current point to the list of points
+					points.Add( (min + max) / 2 );
+
+					// check if the next pixel in the same row is also part of the line
+					int nextX = x;
+					while ( nextX < pointsX - 1 && pixels[i + 1].a > 0 )
+					{
+						nextX++;
+						i++;
+					}
+					if ( nextX > x )
+					{
+						// add a line between the current point and the last point in the same row
+						min = new Vector3( (nextX * resolution) - resolution, -16, (y * resolution) - resolution );
+						max = new Vector3( (nextX * resolution) + resolution, 16, (y * resolution) + resolution );
+
+						// Offset by position.
+						min += Center.WithY( 0 );
+						max += Center.WithY( 0 );
+
+						points.Add( (min + max) / 2 );
+
+						lineStarts.Add( points[points.Count - 2] - (Vector3.Forward * pointsX * resolution * 0.5f) );
+						lineEnds.Add( points[points.Count - 1] - (Vector3.Forward * pointsX * resolution * 0.5f) );
+					}
+				}
+			}
+
+			for ( int i = 0; i < lineStarts.Count; i++ )
+			{
+				Vector3 start = lineStarts[i];
+				Vector3 end = lineEnds[i];
+				float size = lineWidth;
+				Quaternion rotation = Rotation.Identity;
+				AddLine( start, end, size, rotation, false, stamp.material );
+			}
+		}
 	}
 
 	public void AddBackgroundLine( Vector3 start, Vector3 stop, float size, Rotation rotation )
