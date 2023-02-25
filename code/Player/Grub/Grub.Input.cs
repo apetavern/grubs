@@ -38,6 +38,12 @@ public partial class Grub
 
 	public override Ray AimRay => new( EyePosition, Facing * EyeRotation.Forward );
 
+	[Net, Predicted]
+	public float SnappedLookAngle { get; set; } = 0f;
+
+	[Net, Predicted]
+	public bool ChangedSnapAngle { get; set; } = false;
+
 	public void UpdateInputFromOwner( float moveInput, float lookInput )
 	{
 		MoveInput = moveInput;
@@ -52,6 +58,31 @@ public partial class Grub
 			.WithPitch( look.pitch.Clamp( -80f, 75f ) )
 			.WithRoll( 0f )
 			.WithYaw( 0f );
+
+		if ( ActiveWeapon != null && ActiveWeapon.ClampAim )
+		{
+			LookAngles = look
+			.WithPitch( SnappedLookAngle )
+			.WithRoll( 0f )
+			.WithYaw( 0f );
+
+			if ( LookInput > 0 && !ChangedSnapAngle )
+			{
+				SnappedLookAngle += 45f;
+				ChangedSnapAngle = true;
+			}
+			else if ( LookInput < 0 && !ChangedSnapAngle )
+			{
+				SnappedLookAngle -= 45f;
+				ChangedSnapAngle = true;
+			}
+			else if ( ChangedSnapAngle && LookInput == 0 )
+			{
+				ChangedSnapAngle = false;
+			}
+
+			SnappedLookAngle = MathX.Clamp( SnappedLookAngle, -45f, 45f );
+		}
 
 		if ( Facing != LastFacing )
 			LookAngles = LookAngles.WithPitch( LookAngles.pitch * -1 );

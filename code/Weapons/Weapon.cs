@@ -38,6 +38,18 @@ public partial class Weapon : AnimatedEntity
 	public int DefaultAmmoAmount { get; set; } = 0;
 
 	/// <summary>
+	/// Whether the player is allowed to move while this weapon is firing.
+	/// </summary>
+	[Prefab, Net]
+	public bool AllowMovement { get; set; } = false;
+
+	/// <summary>
+	/// Whether the player's aim should clamp to 45 degree angles while in use.
+	/// </summary>
+	[Prefab, Net]
+	public bool ClampAim { get; set; } = false;
+
+	/// <summary>
 	/// The amount of uses this weapon has.
 	/// </summary>
 	[Net]

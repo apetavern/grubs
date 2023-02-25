@@ -287,7 +287,7 @@ public partial class FreeForAll : Gamemode
 		if ( weapon is null )
 			return false;
 
-		return weapon.IsFiring();
+		return weapon.IsFiring() && !weapon.AllowMovement;
 	}
 
 	[Event.Tick.Server]
