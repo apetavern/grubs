@@ -39,7 +39,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "20"
+        "Value": "2"
       },
       "FiringType": {
         "Type": "FiringType",
@@ -55,7 +55,7 @@
       },
       "Icon": {
         "Type": "String",
-        "Value": "\u0022clothing_icons/hard_hat.png\u0022"
+        "Value": "\u0022models/tools/girders/girder_short.vmdl_c.png\u0022"
       },
       "_name": {
         "Value": "\u0022Girder\u0022"
@@ -71,6 +71,14 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }
