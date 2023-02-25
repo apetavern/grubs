@@ -1,9 +1,6 @@
 namespace Grubs;
 
-/// <summary>
-/// Attached to every single client on connect.
-/// </summary>
-public partial class Preferences : EntityComponent
+public partial class Preferences : EntityComponent<Player>
 {
 	private static int ColorIndex = 0;
 	private readonly List<Color> ColorPresets = new()
@@ -21,8 +18,13 @@ public partial class Preferences : EntityComponent
 	[Net]
 	public Color Color { get; set; }
 
+	protected override void OnActivate()
+	{
+		SetColor();
+	}
+
 	// TODO: Players should be able to choose a color preset not in use via the menu.
-	public void SetColor()
+	private void SetColor()
 	{
 		Color = ColorPresets[ColorIndex++];
 

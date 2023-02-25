@@ -16,7 +16,7 @@
 
     public void OnVoicePlayed( IClient client )
     {
-        ChildrenOfType<PlayerInfo>().FirstOrDefault(e => e.Player.Client.SteamId == client.SteamId)?.OnVoicePlayed();
+        ChildrenOfType<PlayerInfo>().FirstOrDefault(e => e.Player.SteamId == client.SteamId)?.OnVoicePlayed();
     }
 
     public override void Tick()
@@ -28,7 +28,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GamemodeSystem.Instance.Players.HashCombine(p => p.Client.SteamId));
+        return HashCode.Combine(GamemodeSystem.Instance.Players.HashCombine(p => p.SteamId));
     }
 }
 

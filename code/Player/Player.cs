@@ -8,6 +8,12 @@ public partial class Player : Entity
 	[Net]
 	public Grub ActiveGrub { get; private set; }
 
+	[Net]
+	public string SteamName { get; private set; }
+
+	[Net]
+	public long SteamId { get; private set; }
+
 	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
 
 	[BindComponent]
@@ -17,7 +23,7 @@ public partial class Player : Entity
 	{
 		get
 		{
-			return _preferences ??= Client.Components.Get<Preferences>();
+			return _preferences ??= Components.Get<Preferences>();
 		}
 	}
 	private Preferences _preferences;
@@ -37,9 +43,14 @@ public partial class Player : Entity
 		Transmit = TransmitType.Always;
 	}
 
-	public Player( IClient client ) : this()
+	public Player( IClient client, Preferences preferences ) : this()
 	{
 		CreateGrubs( client );
+
+		SteamName = client.Name;
+		SteamId = client.SteamId;
+
+		Components.Add( preferences );
 	}
 
 	public override void Spawn()

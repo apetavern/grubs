@@ -82,11 +82,8 @@ public partial class FreeForAll : Gamemode
 	{
 		foreach ( var client in Game.Clients )
 		{
-			var player = new Player( client );
+			var player = new Player( client, new Preferences() );
 			client.Pawn = player;
-
-			// TODO: The user should be able to set this in the menu.
-			player.Preferences.SetColor();
 
 			Players.Add( player );
 			PlayerTurnQueue.Enqueue( player );
@@ -315,11 +312,10 @@ public partial class FreeForAll : Gamemode
 				TerrainReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
 			}
 		}
-
 		//
 		// Playing Logic
 		//
-		if ( CurrentState is GameState.Playing )
+		else if ( CurrentState is GameState.Playing )
 		{
 			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
 				return;
@@ -342,13 +338,12 @@ public partial class FreeForAll : Gamemode
 			ZoneTrigger();
 			AllowMovement = !CheckCurrentPlayerFiring();
 		}
-
 		//
 		// Game Over Logic
 		//
-		if ( CurrentState is GameState.GameOver )
+		else if ( CurrentState is GameState.GameOver )
 		{
-			Log.Info( "Game is over." );
+
 		}
 
 		if ( Debug && CurrentState is GameState.Playing )

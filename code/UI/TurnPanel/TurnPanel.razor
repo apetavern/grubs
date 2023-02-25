@@ -7,7 +7,7 @@
 
 <root class="@(GamemodeSystem.Instance.TurnIsChanging ? "hide" : "")">
     <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
-    <label class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.Client.Name}'s Turn") />
+    <label class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn") />
 </root>
 
 @code {
