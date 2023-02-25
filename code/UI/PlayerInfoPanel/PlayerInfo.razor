@@ -3,7 +3,7 @@
 <root>
     <img src="avatar:@Player.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
-        <label text=@Player.SteamName class="name" />
+        <label text=@Player.SteamName class="name" style="font-color: @Player.Preferences.Color.Hex;" />
         <div class="health">
             <div 
                 class="fill" 
@@ -58,7 +58,6 @@
         .name {
             font-family: Londrina Solid;
             font-size: 30px;
-            color: @Player.Preferences.Color.Hex;
             text-shadow: 2px 2px 0px black;
         }
 
