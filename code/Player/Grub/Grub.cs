@@ -13,6 +13,8 @@ public partial class Grub : AnimatedEntity, INameTag
 
 	public Weapon ActiveWeapon => Player?.Inventory?.ActiveWeapon;
 
+	public List<Explosive> CreatedExplosives { get; set; } = new();
+
 	/// <summary>
 	/// Whether it is this Grub's turn.
 	/// </summary>
@@ -78,6 +80,7 @@ public partial class Grub : AnimatedEntity, INameTag
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
 		Gravestone?.Simulate( client );
+		SimulateExplosives( client );
 	}
 
 	public override void FrameSimulate( IClient client )
@@ -125,5 +128,20 @@ public partial class Grub : AnimatedEntity, INameTag
 
 		foreach ( var hat in hats )
 			hat.EnableDrawing = visible;
+	}
+
+	private void SimulateExplosives( IClient client )
+	{
+		for ( int i = CreatedExplosives.Count - 1; i >= 0; --i )
+		{
+			var explosive = CreatedExplosives[i];
+			if ( !explosive.IsValid() || explosive.LifeState == LifeState.Dead )
+			{
+				CreatedExplosives.RemoveAt( i );
+				continue;
+			}
+
+			explosive.Simulate( client );
+		}
 	}
 }
