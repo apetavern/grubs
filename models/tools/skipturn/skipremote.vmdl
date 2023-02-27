@@ -13,8 +13,8 @@
 						_class = "RenderMeshFile"
 						name = "teleporter"
 						filename = "models/tools/teleporter/teleporter.fbx"
-						import_translation = [ 2.0, 0.0, 2.0 ]
-						import_rotation = [ 0.0, 0.0, -5.0 ]
+						import_translation = [ 3.0, 0.6, 2.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -73,19 +73,6 @@
 					},
 				]
 				default_root_bone_name = ""
-			},
-			{
-				_class = "Skeleton"
-				children = 
-				[
-					{
-						_class = "Bone"
-						name = "hold_L"
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						do_not_discard = true
-					},
-				]
 			},
 		]
 		model_archetype = ""
