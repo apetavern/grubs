@@ -18,7 +18,7 @@ public partial class JumpMechanic : ControllerMechanic
 
 		if ( Controller.IsGrounded )
 		{
-			if ( Input.Pressed( JumpButton ) ) 
+			if ( Input.Pressed( JumpButton ) )
 			{
 				IsBackflipping = false;
 				return true;
@@ -48,8 +48,7 @@ public partial class JumpMechanic : ControllerMechanic
 
 	private void Jump()
 	{
-		Velocity += new Vector3( Grub.Facing * 150f, 0f, 0f );
-		Velocity = Velocity.WithZ( _jumpPower );
+		Velocity = new Vector3( Grub.Facing * 125f, 0f, _jumpPower );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 
 		Controller.GetMechanic<SquirmMechanic>()
