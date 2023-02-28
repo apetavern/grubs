@@ -82,6 +82,78 @@
 					},
 				]
 			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "particle"
+						game_keys = 
+						{
+							name = resource:"particles/muzzleflash/grubs_muzzleflash.vpcf"
+							attachment_point = "jet_middle"
+							attachment_type = "5"
+							attachment_offset = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "particle"
+						game_keys = 
+						{
+							name = resource:"particles/muzzleflash/grubs_muzzleflash.vpcf"
+							attachment_point = "jet_left"
+							attachment_type = "5"
+							attachment_offset = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "particle"
+						game_keys = 
+						{
+							name = resource:"particles/muzzleflash/grubs_muzzleflash.vpcf"
+							attachment_point = "jet_right"
+							attachment_type = "5"
+							attachment_offset = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "jet_middle"
+						parent_bone = "Handsroot"
+						relative_origin = [ 0.0, 6.017779, -17.034899 ]
+						relative_angles = [ 0.000032, 0.0, 124.539307 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "jet_right"
+						parent_bone = "Handsroot"
+						relative_origin = [ -9.081878, 4.6542, -6.782448 ]
+						relative_angles = [ 0.000032, 0.0, 89.715988 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "jet_left"
+						parent_bone = "Handsroot"
+						relative_origin = [ 9.08188, 4.6542, -6.78245 ]
+						relative_angles = [ 0.000032, 0.0, 89.715988 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""

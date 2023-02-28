@@ -5618,7 +5618,7 @@
 	m_boneMergeModels = 
 	[
 		{
-			m_name = "models/tools/blowtorch/blowtorch.vmdl"
+			m_name = "models/tools/jetpack/jetpack.vmdl"
 			m_bEnabled = true
 		},
 	]
