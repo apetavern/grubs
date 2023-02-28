@@ -31,6 +31,7 @@ public partial class World : Entity
 	public CsgMaterial SandMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/sand_b.csgmat" );
 	public CsgMaterial LavaMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/lava.csgmat" );
 	public CsgMaterial RockMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/rocks_a.csgmat" );
+	public CsgMaterial MetalMaterial { get; } = ResourceLibrary.Get<CsgMaterial>( "materials/csg/metal_a.csgmat" );
 
 	public List<Vector3> PossibleSpawnPoints = new();
 

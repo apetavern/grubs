@@ -1,0 +1,9 @@
+{
+  "TextureMode": "Default",
+  "Material": "materials/environment/metal_a.vmat",
+  "TextureX": null,
+  "TextureY": null,
+  "TextureZ": null,
+  "Density": 25,
+  "RuntimeMaterial": "materials/environment/metal_a.vmat"
+}
