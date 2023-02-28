@@ -19,16 +19,13 @@ public partial class Player : Entity
 	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
 
 	[BindComponent]
-	public Inventory Inventory { get; }
+	public GrubsCamera GrubsCamera { get; }
 
-	public Preferences Preferences
-	{
-		get
-		{
-			return _preferences ??= Components.Get<Preferences>();
-		}
-	}
-	private Preferences _preferences;
+	[BindComponent]
+	public Preferences Preferences { get; }
+
+	[BindComponent]
+	public Inventory Inventory { get; }
 
 	public bool IsTurn
 	{
@@ -45,20 +42,16 @@ public partial class Player : Entity
 		Transmit = TransmitType.Always;
 	}
 
-	public Player( IClient client, Preferences preferences ) : this()
+	public Player( IClient client ) : this()
 	{
-		CreateGrubs( client );
-
 		SteamName = client.Name;
 		SteamId = client.SteamId;
-
-		Components.Add( preferences );
 	}
 
 	public override void Spawn()
 	{
-		// CreateGrubs();
-
+		Components.Create<GrubsCamera>();
+		Components.Create<Preferences>();
 		Components.Create<Inventory>();
 
 		var weaponPrefabs = Weapon.GetAllWeaponPrefabs();
@@ -92,13 +85,11 @@ public partial class Player : Entity
 		}
 	}
 
-	private void CreateGrubs( IClient client )
+	public void CreateGrubs()
 	{
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
-			var grub = new Grub( client );
-			grub.Owner = this;
-			Grubs.Add( grub );
+			Grubs.Add( new Grub( Client ) { Owner = this } );
 		}
 
 		ActiveGrub = Grubs.First();

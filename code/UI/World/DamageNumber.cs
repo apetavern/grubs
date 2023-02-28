@@ -32,9 +32,7 @@ public class DamageNumber : WorldPanel
 
 	public override void Tick()
 	{
-		base.Tick();
-
-		if ( !Grub.IsValid )
+		if ( Game.LocalPawn is not Player player || !Grub.IsValid() )
 		{
 			Delete();
 			return;
@@ -43,7 +41,7 @@ public class DamageNumber : WorldPanel
 		Position += Vector3.Up * RiseSpeed * Time.Delta;
 		Rotation = Rotation.LookAt( Vector3.Right );
 
-		WorldScale = (1.0f + Game.LocalClient.Components.Get<GrubsCamera>().DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
+		WorldScale = (1.0f + player.GrubsCamera.DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
 	}
 
 	private async Task DelayDelete()

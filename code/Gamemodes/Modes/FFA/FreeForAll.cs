@@ -82,9 +82,10 @@ public partial class FreeForAll : Gamemode
 	{
 		foreach ( var client in Game.Clients )
 		{
-			var player = new Player( client, new Preferences() );
-			client.Pawn = player;
+			if ( client.Pawn is not Player player )
+				continue;
 
+			player.CreateGrubs();
 			Players.Add( player );
 			PlayerTurnQueue.Enqueue( player );
 

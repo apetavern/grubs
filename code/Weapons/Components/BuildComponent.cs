@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 [Prefab]
 public partial class BuildComponent : WeaponComponent
@@ -35,13 +33,8 @@ public partial class BuildComponent : WeaponComponent
 				GirderPreview.Position = Grub.Player.MousePosition;
 				GirderPreview.Rotation = Rotation.Identity * new Angles( RotationAngle, 0, 0 ).ToRotation();
 
-				GrubsCamera cam = Grub.Player.Client.Components.Get<GrubsCamera>();
-
-				if ( cam != null )
-				{
-					cam.Distance = 512f;
-					cam.DistanceScrollRate = 0f;
-				}
+				Grub.Player.GrubsCamera.Distance = 512f;
+				Grub.Player.GrubsCamera.DistanceScrollRate = 0f;
 
 				if ( Trace.Body( GirderPreview.PhysicsBody, Grub.Player.MousePosition ).Run().StartedSolid )
 				{
@@ -59,6 +52,7 @@ public partial class BuildComponent : WeaponComponent
 				GirderPreview.Owner = Grub;
 			}
 		}
+
 		if ( IsFiring )
 		{
 			Fire();
@@ -68,16 +62,13 @@ public partial class BuildComponent : WeaponComponent
 	public override void FireCursor()
 	{
 		IsFiring = false;
-		if ( GirderPreview != null && GirderPreview.IsValid )
+
+		if ( GirderPreview.IsValid() )
 		{
 			GirderPreview.Delete();
-			GrubsCamera cam = Grub.Player.Client.Components.Get<GrubsCamera>();
-
-			if ( cam != null )
-			{
-				cam.DistanceScrollRate = 32f;
-			}
+			Grub.Player.GrubsCamera.DistanceScrollRate = 32f;
 		}
+
 		GamemodeSystem.Instance.GameWorld.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
 
 		FireFinished();
@@ -86,16 +77,13 @@ public partial class BuildComponent : WeaponComponent
 	public override void FireFinished()
 	{
 		base.FireFinished();
-		if ( GirderPreview != null && GirderPreview.IsValid )
+
+		if ( GirderPreview.IsValid() )
 		{
 			GirderPreview.Delete();
-
-			GrubsCamera cam = Grub.Player.Client.Components.Get<GrubsCamera>();
-			if ( cam != null )
-			{
-				cam.DistanceScrollRate = 32f;
-			}
+			Grub.Player.GrubsCamera.DistanceScrollRate = 32f;
 		}
+
 		if ( Game.IsClient )
 			Event.Run( "pointer.disabled" );
 	}
