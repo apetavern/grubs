@@ -50,18 +50,11 @@ public partial class Player : Entity
 
 	public override void Spawn()
 	{
+		Tags.Add( "ignorereset" );
+
 		Components.Create<GrubsCamera>();
 		Components.Create<Preferences>();
 		Components.Create<Inventory>();
-
-		var weaponPrefabs = Weapon.GetAllWeaponPrefabs();
-		foreach ( var prefab in weaponPrefabs )
-		{
-			if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) )
-			{
-				Inventory?.Add( weapon );
-			}
-		}
 	}
 
 	public override void Simulate( IClient client )
@@ -70,7 +63,7 @@ public partial class Player : Entity
 
 		foreach ( var grub in Grubs )
 		{
-			grub.Simulate( client );
+			grub?.Simulate( client );
 		}
 
 		if ( IsTurn )
@@ -79,13 +72,24 @@ public partial class Player : Entity
 
 	public override void FrameSimulate( IClient client )
 	{
+		GrubsCamera.FrameSimulate( client );
+
 		foreach ( var grub in Grubs )
 		{
-			grub.FrameSimulate( client );
+			grub?.FrameSimulate( client );
 		}
 	}
 
-	public void CreateGrubs()
+	public void Respawn()
+	{
+		Inventory.Clear();
+		Inventory.GiveDefaultLoadout();
+
+		Grubs.Clear();
+		CreateGrubs();
+	}
+
+	private void CreateGrubs()
 	{
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{

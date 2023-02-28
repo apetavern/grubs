@@ -79,6 +79,24 @@ public partial class Inventory : EntityComponent<Player>
 		ActiveWeapon?.Simulate( client );
 	}
 
+	public void Clear()
+	{
+		Weapons.Clear();
+		ActiveWeapon = null;
+	}
+
+	public void GiveDefaultLoadout()
+	{
+		var weaponPrefabs = Weapon.GetAllWeaponPrefabs();
+		foreach ( var prefab in weaponPrefabs )
+		{
+			if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) )
+			{
+				Add( weapon );
+			}
+		}
+	}
+
 	[ConCmd.Admin( "gr_set_weapon" )]
 	public static void SetWeapon( int weaponIndex )
 	{

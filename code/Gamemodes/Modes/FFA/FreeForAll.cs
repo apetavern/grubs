@@ -85,7 +85,7 @@ public partial class FreeForAll : Gamemode
 			if ( client.Pawn is not Player player )
 				continue;
 
-			player.CreateGrubs();
+			player.Respawn();
 			Players.Add( player );
 			PlayerTurnQueue.Enqueue( player );
 
