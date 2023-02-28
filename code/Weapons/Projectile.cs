@@ -15,6 +15,8 @@ public partial class Projectile : ModelEntity
 	private string ExplosionSound { get; set; } = "";
 	private string TrailParticle { get; set; } = "";
 	private ProjectileCollisionReaction CollisionReaction { get; set; }
+	private bool Bouncing { get; set; } = false;
+	private bool Rotate { get; set; } = true;
 
 	public Projectile()
 	{
@@ -69,6 +71,28 @@ public partial class Projectile : ModelEntity
 	public Projectile WithPosition( Vector3 position )
 	{
 		Position = position.WithY( 0f );
+		return this;
+	}
+
+	/// <summary>
+	/// Should the projectile bounce?
+	/// </summary>
+	/// <param name="value">Bounce value</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithBouncing( bool value )
+	{
+		Bouncing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// Should the projectile rotate?
+	/// </summary>
+	/// <param name="value">Rotate value</param>
+	/// <returns>The projectile instance.</returns>
+	public Projectile WithRotate( bool value )
+	{
+		Rotate = value;
 		return this;
 	}
 
@@ -226,15 +250,33 @@ public partial class Projectile : ModelEntity
 		Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
 		var helper = new MoveHelper( Position, Velocity );
-		helper.Trace = helper.Trace.Size( 12f ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" );
+		helper.Trace = helper.Trace.Size( 12f ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" ).Ignore( this );
 		helper.TryMove( Time.Delta );
 		Velocity = helper.Velocity;
 		Position = helper.Position;
 
-		// Apply rotation using some shit I pulled out of my ass.
-		var angularX = Velocity.x * 5f * Time.Delta;
-		float degrees = angularX.Clamp( -20, 20 );
-		Rotation = Rotation.RotateAroundAxis( new Vector3( 0, 1, 0 ), degrees );
+		var desiredPosition = Position - Vector3.Up * 40f;
+		var tr = Trace.Body( PhysicsBody, desiredPosition ).Ignore( this ).Run();
+
+		if ( tr.Hit && Bouncing && CollisionExplosionDelaySeconds <= 0 && CollisionReaction == ProjectileCollisionReaction.Explosive )
+		{
+			//Position = tr.EndPosition;
+			Velocity = (Vector3.Up * 400f).WithY( 0f );
+			ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius );
+			ExplodeSoundClient( To.Everyone, ExplosionSound );
+		}
+
+		if ( Rotate )
+		{
+			// Apply rotation using some shit I pulled out of my ass.
+			var angularX = Velocity.x * 5f * Time.Delta;
+			float degrees = angularX.Clamp( -20, 20 );
+			Rotation = Rotation.RotateAroundAxis( new Vector3( 0, 1, 0 ), degrees );
+		}
+		else
+		{
+			Rotation = Rotation.Identity;
+		}
 	}
 
 	private void OnCollision()
@@ -247,6 +289,8 @@ public partial class Projectile : ModelEntity
 			ExplodeAfterSeconds( CollisionExplosionDelaySeconds );
 			return;
 		}
+
+		Log.Info( "touched" );
 
 		Explode();
 	}
