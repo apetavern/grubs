@@ -1,0 +1,125 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "dc561292-9418-48be-b7b6-f25c8b994b2b",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "7339d1cc-7d7b-4432-ac6e-7a1107d24a68",
+        "Class": "ProjectileComponent",
+        "Keys": {
+          "ProjectileExplodeAfter": {
+            "Type": "Single",
+            "Value": "-1"
+          },
+          "ProjectileForceMultiplier": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "ProjectileRadius": {
+            "Type": "Single",
+            "Value": "10"
+          },
+          "ProjectileShouldBounce": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "ProjectileShouldUseTrace": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "ProjectileMaxBounces": {
+            "Type": "Int32",
+            "Value": "100"
+          },
+          "ProjectileSpeed": {
+            "Type": "Single",
+            "Value": "500"
+          },
+          "ProjectileExplosionRadius": {
+            "Type": "Single",
+            "Value": "90"
+          },
+          "ProjectileModel": {
+            "Type": "Model",
+            "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl\u0022"
+          },
+          "_name": {
+            "Value": "\u0022concretegarry\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "ProjectileShouldUseModelCollision": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "ProjectileShouldRotate": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "ProjectileExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "0"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Cursor\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Holdable\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/airstrikes/radio.vmdl\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl_c.png\u0022"
+      },
+      "_name": {
+        "Value": "\u0022ConcreteGarry\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      }
+    }
+  }
+}
