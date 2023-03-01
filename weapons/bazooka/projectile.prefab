@@ -62,7 +62,7 @@
       },
       "ExplodeAfter": {
         "Type": "Single",
-        "Value": "0"
+        "Value": "2"
       },
       "ShouldUseModelCollision": {
         "Type": "Boolean",
@@ -91,6 +91,10 @@
       "ExplosionCollisionRadius": {
         "Type": "Single",
         "Value": "0"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }

@@ -14,7 +14,7 @@ public partial class ProjectileComponent : ExplosiveComponent
 	public override void OnStart()
 	{
 		// TODO: What about bouncing?
-		var arcTrace = new ArcTrace( Grub, Grub.Player.MousePosition.WithZ( 1000 ) );
+		var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
 		Segments = arcTrace.RunTowards( -Vector3.Up, Explosive.ExplosionForceMultiplier * 10f, 0f ); // With charge?
 		Explosive.Position = Segments[0].StartPos;
 	}

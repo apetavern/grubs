@@ -20,10 +20,23 @@ public partial class ExplosiveComponent : EntityComponent<Explosive>
 			OnStart();
 			HasStarted = true;
 		}
+
+		ExplodeAfterSeconds( Explosive.ExplodeAfter );
 	}
 
 	public virtual void Explode()
 	{
+		Explosive.Delete();
+	}
 
+	// TODO: Remove or move, just for debugging.
+	public async void ExplodeAfterSeconds( float seconds )
+	{
+		await GameTask.DelaySeconds( seconds );
+
+		if ( !Explosive.IsValid() )
+			return;
+
+		Explode();
 	}
 }
