@@ -60,6 +60,14 @@
           "ProjectileExplosionSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "ProjectileShouldRotate": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "ProjectileShouldUseModelCollision": {
+            "Type": "Boolean",
+            "Value": "false"
           }
         }
       }
@@ -111,6 +119,14 @@
       "Icon": {
         "Type": "String",
         "Value": "\u0022models/weapons/grenade/grenade.vmdl_c.png\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }

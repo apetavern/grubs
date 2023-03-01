@@ -62,6 +62,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "cluster"
+						remaps = 
+						[
+							{
+								from = "models/weapons/grenade/materials/grenade.vmat"
+								to = "models/weapons/grenade/materials/grenade_cluster.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
