@@ -35,6 +35,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public virtual void Simulate( IClient client )
 	{
+		// TODO: Talk about this before merging, does this actually do anything for us??
 		if ( ShouldStart() )
 			OnStart();
 

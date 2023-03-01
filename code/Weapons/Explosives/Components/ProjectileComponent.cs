@@ -9,8 +9,8 @@ public partial class ProjectileComponent : ExplosiveComponent
 	[Prefab]
 	public float ProjectileSpeed { get; set; } = 1000.0f;
 
-	public override bool ShouldStart()
+	public override void Simulate( IClient client )
 	{
-		return true;
+
 	}
 }
