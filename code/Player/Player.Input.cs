@@ -29,8 +29,7 @@ public partial class Player
 		LookInput = Input.AnalogMove.x;
 
 		var mouseDir = Screen.GetDirection( Mouse.Position );
-		var playerCamera = Client.Components.Get<GrubsCamera>();
-		var tr = Trace.Ray( Camera.Position, Camera.Position + mouseDir * playerCamera.Distance ).Run();
+		var tr = Trace.Ray( Camera.Position, Camera.Position + mouseDir * GrubsCamera.Distance ).Run();
 		MousePosition = tr.EndPosition.WithY( 0f );
 	}
 }
