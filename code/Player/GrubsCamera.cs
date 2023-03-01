@@ -90,12 +90,12 @@ public class GrubsCamera : EntityComponent
 		}
 		else
 		{
-			// TODO: Revert
-			// foreach ( var projectile in Entity.All.OfType<Projectile>() )
-			// {
-			// 	SetTarget( projectile );
-			// 	return;
-			// }
+			foreach ( var explosive in Entity.All.OfType<Explosive>() )
+			{
+				if ( explosive.ShouldCameraFollow )
+					SetTarget( explosive );
+				return;
+			}
 
 			SetTarget( gm?.ActivePlayer?.ActiveGrub );
 			return;

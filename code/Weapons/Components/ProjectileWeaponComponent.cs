@@ -45,7 +45,7 @@ public partial class ProjectileWeaponComponent : WeaponComponent
 
 		if ( PrefabLibrary.TrySpawn<Explosive>( ProjectilePrefabPath, out var explosive ) )
 		{
-			Log.Info( explosive );
+			explosive.Owner = Grub;
 		}
 
 		Grub.SetAnimParameter( "fire", true );

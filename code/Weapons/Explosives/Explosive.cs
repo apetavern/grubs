@@ -32,6 +32,9 @@ public partial class Explosive : AnimatedEntity
 	[Prefab]
 	public bool ShouldBounce { get; set; } = false;
 
+	[Prefab]
+	public bool ShouldCameraFollow { get; set; } = true;
+
 	[Prefab, ResourceType( "sound" )]
 	public string ExplosionSound { get; set; }
 
@@ -42,11 +45,11 @@ public partial class Explosive : AnimatedEntity
 	{
 		base.Spawn();
 
-		Transmit = TransmitType.Always;
-		Health = 1;
-
 		// TODO: Figure out something else.
 		GamemodeSystem.Instance.Explosives.Add( this );
+
+		Transmit = TransmitType.Always;
+		Health = 1;
 	}
 
 	public override void Simulate( IClient client )

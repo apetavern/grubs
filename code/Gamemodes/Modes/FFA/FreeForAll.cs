@@ -110,18 +110,17 @@ public partial class FreeForAll : Gamemode
 			}
 		}
 
-		// TODO: Revert
-		// var projectiles = All.OfType<Projectile>();
-		// foreach ( var proj in projectiles )
-		// {
-		// 	foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
-		// 	{
-		// 		if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( proj ) )
-		// 			continue;
+		var explosives = All.OfType<Explosive>();
+		foreach ( var proj in explosives )
+		{
+			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
+			{
+				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( proj ) )
+					continue;
 
-		// 		zone.Trigger( proj );
-		// 	}
-		// }
+				zone.Trigger( proj );
+			}
+		}
 	}
 
 	internal override void UseTurn( bool giveMovementGrace = false )

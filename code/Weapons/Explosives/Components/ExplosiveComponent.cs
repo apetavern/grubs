@@ -6,9 +6,20 @@ public partial class ExplosiveComponent : EntityComponent<Explosive>
 	protected Grub Grub => Explosive.Grub;
 	protected Player Player => Grub.Player;
 
-	public virtual void Simulate( IClient client )
+	private bool HasStarted = false;
+
+	public virtual void OnStart()
 	{
 
+	}
+
+	public virtual void Simulate( IClient client )
+	{
+		if ( !HasStarted )
+		{
+			OnStart();
+			HasStarted = true;
+		}
 	}
 
 	public virtual void Explode()
