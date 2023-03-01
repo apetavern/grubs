@@ -109,6 +109,58 @@ public partial class ProjectileComponent : WeaponComponent
 	public override void FireInstant()
 	{
 		Log.Info( "Fire Instant" );
+
+		if ( !Game.IsServer )
+			return;
+
+		var position = Weapon.Position.WithY( 0f );
+		var muzzle = Weapon.GetAttachment( "muzzle" );
+		if ( muzzle is not null )
+			position = muzzle.Value.Position.WithY( 0f );
+
+		var projectile = new Projectile()
+			.WithGrub( Grub )
+			.WithModel( ProjectileModel )
+			.WithPosition( position )
+			.WithSpeed( ProjectileSpeed )
+			.WithExplosionSound( ProjectileExplosionSound )
+			.WithExplosionRadius( ProjectileExplosionRadius )
+			.WithBouncing( ProjectileShouldBounce )
+			.WithRotate( ProjectileShouldRotate )
+			.SetCollisionReaction( ProjectileCollisionReaction.Explosive );
+
+		if ( ProjectileShouldUseTrace )
+		{
+			var arcTrace = new ArcTrace( Grub, Grub.Player.MousePosition.WithZ( 1000 ) );
+			var segments = ProjectileShouldBounce
+				? arcTrace.RunTowardsWithBounces( -Vector3.Up, ProjectileForceMultiplier, 0, ProjectileMaxBounces )
+				: arcTrace.RunTowards( -Vector3.Up, ProjectileForceMultiplier, 0f );
+
+			projectile.MoveAlongTrace( segments );
+		}
+		else
+		{
+			if ( ProjectileShouldUseModelCollision )
+			{
+				projectile.SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+			}
+			else
+			{
+				projectile.SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, position, ProjectileRadius );
+			}
+			var desiredPosition = position - Vector3.Up * 40f;
+			var tr = Trace.Ray( position, desiredPosition ).Ignore( projectile ).Ignore( Weapon.Owner ).Run();
+			projectile.Position = tr.EndPosition;
+			projectile.Velocity = (-Vector3.Up * ProjectileSpeed).WithY( 0f );
+		}
+
+		if ( ProjectileExplodeAfter > 0 )
+			projectile.ExplodeAfterSeconds( ProjectileExplodeAfter );
+
+		projectile.Finish();
+		Grub.SetAnimParameter( "fire", true );
+		IsFiring = false;
+		FireFinished();
 	}
 
 	public override void FireCharged()
