@@ -43,8 +43,8 @@
 					{
 						_class = "RenderMeshFile"
 						filename = "models/weapons/dynamite/dynamite.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, -90.0 ]
+						import_translation = [ 0.0, 0.0, -3.0 ]
+						import_rotation = [ 36.0, 0.0, -90.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -61,9 +61,24 @@
 					},
 				]
 			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFromRender"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						faceMergeAngle = 20.0
+						maxHullVertices = 32
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
