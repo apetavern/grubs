@@ -33,7 +33,8 @@ _bakeresourcecache/
 *.csg_c
 *.csgmat_c
 *.prefab_c
-
+*.tsta_c
+*.tlvl_c
 
 # Allowlist
 !*_dev.vpk
