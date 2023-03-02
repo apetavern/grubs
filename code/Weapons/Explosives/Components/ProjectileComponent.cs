@@ -22,11 +22,25 @@ public partial class ProjectileComponent : ExplosiveComponent
 
 	public override void OnFired( Weapon weapon, int charge )
 	{
+		var position = weapon.Position.WithY( 0f );
+		var muzzle = weapon.GetAttachment( "muzzle" );
+		if ( muzzle is not null )
+			position = muzzle.Value.Position.WithY( 0f );
+
+		Explosive.Position = position;
+
 		if ( Explosive.UseCustomPhysics )
 		{
 			var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
 			Segments = arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, Explosive.ExplosionForceMultiplier * charge, 0f );
 			Explosive.Position = Segments[0].StartPos;
+		}
+		else
+		{
+			var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
+			var tr = Trace.Ray( desiredPosition, desiredPosition ).Ignore( Grub ).Run(); // This trace is incorrect, should be from position -> desired position.
+			Explosive.Position = tr.EndPosition;
+			Explosive.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ProjectileSpeed).WithY( 0f );
 		}
 	}
 
@@ -34,7 +48,10 @@ public partial class ProjectileComponent : ExplosiveComponent
 	{
 		base.Simulate( client );
 
-		if ( Explosive.UseCustomPhysics && ProjectileDebug )
+		if ( !Explosive.UseCustomPhysics )
+			return;
+
+		if ( ProjectileDebug )
 			DrawSegments();
 
 		if ( (Segments[0].EndPos - Explosive.Position).IsNearlyZero( 2.5f ) )

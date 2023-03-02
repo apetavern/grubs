@@ -1,0 +1,81 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "7976d609-e709-4a51-b137-cf9effe26b81",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "7cf69677-1d97-4ff0-b855-4b6f2accb591",
+        "Class": "ProjectileWeaponComponent",
+        "Keys": {
+          "ProjectilePrefabPath": {
+            "Type": "String",
+            "Value": "\u0022weapons/grenade/projectile.prefab\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Projectile\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "-1"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Charged\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Throwable\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/grenade/grenade.vmdl\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/grenade/grenade.vmdl_c.png\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Grenade\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      }
+    }
+  }
+}

@@ -62,9 +62,11 @@ public partial class Gamemode : Entity
 			disconnectedPlayer.Simulate( client );
 		}
 
+		// Need to handle this differently...
 		foreach ( var explosive in Explosives )
 		{
-			explosive.Simulate( client );
+			if ( explosive.IsValid() )
+				explosive.Simulate( client );
 		}
 	}
 
