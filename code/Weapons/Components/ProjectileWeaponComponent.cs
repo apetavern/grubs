@@ -47,6 +47,7 @@ public partial class ProjectileWeaponComponent : WeaponComponent
 		{
 			// TODO: Maybe have some generic way we can pass this information into an explosive?
 			// OnFire(Grub, Charge, Position, Velocity)?
+			// Then we can calculate the arc trace inside of the projectile component instead of doing it here.
 			if ( explosive.Components.TryGet<ProjectileComponent>( out var projectile ) )
 			{
 				explosive.Owner = Grub;
@@ -56,6 +57,7 @@ public partial class ProjectileWeaponComponent : WeaponComponent
 				{
 					var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
 					projectile.Segments = arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, explosive.ExplosionForceMultiplier * Charge, 0f );
+					explosive.Position = projectile.Segments[0].StartPos;
 				}
 				else
 				{
