@@ -27,6 +27,9 @@ public partial class Explosive : AnimatedEntity
 	public float ExplosiveCollisionRadius { get; set; } = 1.0f;
 
 	[Prefab]
+	public bool UseCustomPhysics { get; set; } = false;
+
+	[Prefab]
 	public bool ShouldRotate { get; set; } = true;
 
 	[Prefab]
@@ -56,11 +59,50 @@ public partial class Explosive : AnimatedEntity
 		GamemodeSystem.Instance.Explosives.Add( this );
 	}
 
+	public void OnFired( Grub grub, Weapon weapon, int charge )
+	{
+		Owner = grub;
+
+		foreach ( var component in Components.GetAll<ExplosiveComponent>() )
+		{
+			component.OnFired( weapon, charge );
+		}
+	}
+
 	public override void Simulate( IClient client )
 	{
 		foreach ( var component in Components.GetAll<ExplosiveComponent>() )
 		{
 			component.Simulate( client );
+		}
+
+		if ( !UseCustomPhysics )
+			HandlePhysicsTick();
+	}
+
+	private void HandlePhysicsTick()
+	{
+		// Apply gravity.
+		Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
+
+		var helper = new MoveHelper( Position, Velocity );
+		helper.Trace = helper.Trace.Size( 12f ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" ).Ignore( this );
+		helper.TryMove( Time.Delta );
+		Velocity = helper.Velocity;
+		Position = helper.Position;
+
+		// TODO: What about bouncing and stuff?
+
+		if ( ShouldRotate )
+		{
+			// Apply rotation using some shit I pulled out of my ass.
+			var angularX = Velocity.x * 5f * Time.Delta;
+			float degrees = angularX.Clamp( -20, 20 );
+			Rotation = Rotation.RotateAroundAxis( new Vector3( 0, 1, 0 ), degrees );
+		}
+		else
+		{
+			Rotation = Rotation.Identity;
 		}
 	}
 }

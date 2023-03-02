@@ -50,7 +50,7 @@
       },
       "ExplosionRadius": {
         "Type": "Single",
-        "Value": "0"
+        "Value": "10"
       },
       "ExplosionDamage": {
         "Type": "Single",
@@ -98,7 +98,11 @@
       },
       "MaxExplosionDamage": {
         "Type": "Single",
-        "Value": "0"
+        "Value": "50"
+      },
+      "UseCustomPhysics": {
+        "Type": "Boolean",
+        "Value": "true"
       }
     }
   }

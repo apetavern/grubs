@@ -4,12 +4,9 @@ namespace Grubs;
 public partial class ProjectileComponent : ExplosiveComponent
 {
 	[Prefab]
-	public bool ProjectileShouldUseTrace { get; set; } = false;
-
-	[Prefab]
 	public float ProjectileSpeed { get; set; } = 1000.0f;
 
-	public List<ArcSegment> Segments { get; set; } = new();
+	private List<ArcSegment> Segments { get; set; } = new();
 
 	/// <summary>
 	/// Debug console variable to see the projectiles path.
@@ -23,11 +20,21 @@ public partial class ProjectileComponent : ExplosiveComponent
 			DebugOverlay.Line( segment.StartPos, segment.EndPos, Game.IsServer ? Color.Red : Color.Green );
 	}
 
+	public override void OnFired( Weapon weapon, int charge )
+	{
+		if ( Explosive.UseCustomPhysics )
+		{
+			var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
+			Segments = arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, Explosive.ExplosionForceMultiplier * charge, 0f );
+			Explosive.Position = Segments[0].StartPos;
+		}
+	}
+
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
 
-		if ( ProjectileShouldUseTrace && ProjectileDebug )
+		if ( Explosive.UseCustomPhysics && ProjectileDebug )
 			DrawSegments();
 
 		if ( (Segments[0].EndPos - Explosive.Position).IsNearlyZero( 2.5f ) )

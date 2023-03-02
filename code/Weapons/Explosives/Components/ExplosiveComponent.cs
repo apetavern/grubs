@@ -6,6 +6,11 @@ public partial class ExplosiveComponent : EntityComponent<Explosive>
 	protected Grub Grub => Explosive.Grub;
 	protected Player Player => Grub.Player;
 
+	public virtual void OnFired( Weapon weapon, int charge )
+	{
+
+	}
+
 	public virtual void Simulate( IClient client )
 	{
 
