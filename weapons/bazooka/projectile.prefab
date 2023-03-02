@@ -95,6 +95,10 @@
       "ShouldCameraFollow": {
         "Type": "Boolean",
         "Value": "false"
+      },
+      "MaxExplosionDamage": {
+        "Type": "Single",
+        "Value": "0"
       }
     }
   }

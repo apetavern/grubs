@@ -51,21 +51,10 @@ public partial class ProjectileWeaponComponent : WeaponComponent
 			if ( explosive.Components.TryGet<ProjectileComponent>( out var projectile ) )
 			{
 				explosive.Owner = Grub;
-				explosive.Position = position;
 
-				if ( projectile.ProjectileShouldUseTrace )
-				{
-					var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
-					projectile.Segments = arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, explosive.ExplosionForceMultiplier * Charge, 0f );
-					explosive.Position = projectile.Segments[0].StartPos;
-				}
-				else
-				{
-					var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
-					var tr = Trace.Ray( position, desiredPosition ).Ignore( Weapon.Owner ).Run();
-					explosive.Position = tr.EndPosition;
-					explosive.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * Charge * projectile.ProjectileSpeed).WithY( 0f );
-				}
+				var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
+				projectile.Segments = arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, explosive.ExplosionForceMultiplier * Charge, 0f );
+				explosive.Position = projectile.Segments[0].StartPos;
 			}
 		}
 

@@ -29,15 +29,6 @@ public partial class ProjectileComponent : ExplosiveComponent
 
 		if ( ProjectileShouldUseTrace && ProjectileDebug )
 			DrawSegments();
-	}
-
-	protected override void PhysicsTick()
-	{
-		if ( !ProjectileShouldUseTrace )
-		{
-			base.PhysicsTick();
-			return;
-		}
 
 		if ( (Segments[0].EndPos - Explosive.Position).IsNearlyZero( 2.5f ) )
 		{
