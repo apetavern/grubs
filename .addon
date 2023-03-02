@@ -34,7 +34,7 @@
     "Compiler": {
       "RootNamespace": "Grubs",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
-      "NoWarn": "1701;1702;1591;"
+      "NoWarn": "1701;1702;1591;1998"
     },
     "GameSettings": {
       "grubs_game": {
