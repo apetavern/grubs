@@ -5,7 +5,7 @@
 [Prefab]
 public partial class ProjectileWeaponComponent : WeaponComponent
 {
-	[Prefab]
+	[Prefab, Net]
 	public string ProjectilePrefabPath { get; set; }
 
 	public override bool ShouldStart()
