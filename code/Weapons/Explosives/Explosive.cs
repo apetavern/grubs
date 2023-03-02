@@ -43,18 +43,17 @@ public partial class Explosive : AnimatedEntity
 
 	public override void Spawn()
 	{
-		base.Spawn();
-
-		// TODO: Figure out something else.
-		GamemodeSystem.Instance.Explosives.Add( this );
-
 		Transmit = TransmitType.Always;
+		EnableLagCompensation = true;
 		Health = 1;
 
 		if ( ShouldUseModelCollision )
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		else
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, ExplosiveCollisionRadius );
+
+		// TODO: Figure out something else.
+		GamemodeSystem.Instance.Explosives.Add( this );
 	}
 
 	public override void Simulate( IClient client )
