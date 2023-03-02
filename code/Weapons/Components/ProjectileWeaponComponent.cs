@@ -35,9 +35,6 @@ public partial class ProjectileWeaponComponent : WeaponComponent
 	{
 		Log.Info( "Fire Charged: " + Charge );
 
-		if ( !Game.IsServer )
-			return;
-
 		var position = Weapon.Position.WithY( 0f );
 		var muzzle = Weapon.GetAttachment( "muzzle" );
 		if ( muzzle is not null )
@@ -45,7 +42,15 @@ public partial class ProjectileWeaponComponent : WeaponComponent
 
 		if ( PrefabLibrary.TrySpawn<Explosive>( ProjectilePrefabPath, out var explosive ) )
 		{
+			// TODO: Maybe have some generic way we can pass this information into an explosive?
+			// OnFire(Grub, Charge, Position, Velocity)?
 			explosive.Owner = Grub;
+			explosive.Position = position;
+			explosive.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * Charge * 100f).WithY( 0f );
+
+			var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
+			if ( explosive.Components.TryGet<ProjectileComponent>( out var projectile ) )
+				projectile.Segments = arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, explosive.ExplosionForceMultiplier * Charge, 0f );
 		}
 
 		Grub.SetAnimParameter( "fire", true );

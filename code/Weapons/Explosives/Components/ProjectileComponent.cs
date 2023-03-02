@@ -9,24 +9,29 @@ public partial class ProjectileComponent : ExplosiveComponent
 	[Prefab]
 	public float ProjectileSpeed { get; set; } = 1000.0f;
 
-	private List<ArcSegment> Segments { get; set; } = new();
+	public List<ArcSegment> Segments { get; set; } = new();
 
-	public override void OnStart()
+	/// <summary>
+	/// Debug console variable to see the projectiles path.
+	/// </summary>
+	[ConVar.Replicated( "projectile_debug" )]
+	public static bool ProjectileDebug { get; set; }
+
+	private void DrawSegments()
 	{
-		// TODO: What about bouncing?
-		var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
-		Segments = arcTrace.RunTowards( -Vector3.Up, Explosive.ExplosionForceMultiplier * 10f, 0f ); // With charge?
-		Explosive.Position = Segments[0].StartPos;
+		foreach ( var segment in Segments )
+			DebugOverlay.Line( segment.StartPos, segment.EndPos );
 	}
 
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
 
+		if ( ProjectileDebug )
+			DrawSegments();
+
 		if ( Segments.Count > 0 )
-		{
 			HandleSegmentTick();
-		}
 	}
 
 	private void HandleSegmentTick()
@@ -35,8 +40,8 @@ public partial class ProjectileComponent : ExplosiveComponent
 		{
 			if ( Segments.Count > 1 )
 				Segments.RemoveAt( 0 );
-			// else
-			// 	OnCollision();
+			else
+				Explode();
 
 			return;
 		}
