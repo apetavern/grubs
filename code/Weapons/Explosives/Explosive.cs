@@ -39,7 +39,7 @@ public partial class Explosive : AnimatedEntity
 	public string ExplosionSound { get; set; }
 
 	[Prefab]
-	private ExplosiveReaction ExplosionReaction { get; set; }
+	public ExplosiveReaction ExplosionReaction { get; set; }
 
 	public override void Spawn()
 	{
@@ -50,6 +50,11 @@ public partial class Explosive : AnimatedEntity
 
 		Transmit = TransmitType.Always;
 		Health = 1;
+
+		if ( ShouldUseModelCollision )
+			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		else
+			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, ExplosiveCollisionRadius );
 	}
 
 	public override void Simulate( IClient client )

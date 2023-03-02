@@ -13,6 +13,23 @@ public partial class ExplosiveComponent : EntityComponent<Explosive>
 
 	public virtual void Explode()
 	{
+		switch ( Explosive.ExplosionReaction )
+		{
+			case ExplosiveReaction.Explosion:
+				ExplosionHelper.Explode( Explosive.Position, Grub, Explosive.ExplosionRadius );
+				break;
+			case ExplosiveReaction.Incendiary:
+				// FireHelper.StartFiresAt( Position, Segments[Segments.Count - 1].EndPos - Segments[Segments.Count - 1].StartPos, 10 );
+				break;
+		}
+
+		ExplodeSoundClient( To.Everyone, Explosive.ExplosionSound );
 		Explosive.Delete();
+	}
+
+	[ClientRpc]
+	public void ExplodeSoundClient( string explosionSound )
+	{
+		Explosive.SoundFromScreen( explosionSound );
 	}
 }
