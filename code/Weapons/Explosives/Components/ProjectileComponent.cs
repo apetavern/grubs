@@ -27,15 +27,18 @@ public partial class ProjectileComponent : ExplosiveComponent
 	{
 		base.Simulate( client );
 
-		if ( ProjectileDebug )
+		if ( ProjectileShouldUseTrace && ProjectileDebug )
 			DrawSegments();
-
-		if ( Segments.Count > 0 )
-			HandleSegmentTick();
 	}
 
-	private void HandleSegmentTick()
+	protected override void PhysicsTick()
 	{
+		if ( !ProjectileShouldUseTrace )
+		{
+			base.PhysicsTick();
+			return;
+		}
+
 		if ( (Segments[0].EndPos - Explosive.Position).IsNearlyZero( 2.5f ) )
 		{
 			if ( Segments.Count > 1 )

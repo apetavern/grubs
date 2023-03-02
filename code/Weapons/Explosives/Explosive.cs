@@ -9,7 +9,7 @@ public partial class Explosive : AnimatedEntity
 	public float ExplosionRadius { get; set; } = 100.0f;
 
 	[Prefab, Net]
-	public float ExplosionDamage { get; set; } = 50f;
+	public float MaxExplosionDamage { get; set; } = 100f;
 
 	[Prefab, Net]
 	public float ExplosionForceMultiplier { get; set; } = 1.0f;
