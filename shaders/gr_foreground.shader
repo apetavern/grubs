@@ -77,25 +77,31 @@ PS
 
 		float2 local0 = i.vTextureCoords.xy * float2( 1, 1 );
 		float4 local1 = Tex2DS( g_tColour, g_sSampler0, local0 );
-		float4 local2 = float4( 0.16185, 0.05906, 0.02194, 1 );
-		float4 local3 = local1 * local2;
-		float local4 = ( i.vPositionWithOffsetWs + g_vHighPrecisionLightingOffsetWs ).y;
+		float4 local2 = float4( 0.24855489, 0.07742485, 0, 1 );
+		float4 local3 = saturate( lerp( local2, Overlay_blend( local2, local1 ), 1 ) );
+		float local4 = ( i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz ).y;
 		float local5 = local4 + 20;
 		float local6 = local5 / 75;
 		float local7 = saturate( local6 );
 		float4 local8 = lerp( local1, local3, local7 );
-		float local9 = ( i.vPositionWithOffsetWs + g_vHighPrecisionLightingOffsetWs ).z;
+		float local9 = ( i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz ).z;
 		float local10 = local9 + 1024;
 		float local11 = local10 / 2000;
 		float local12 = saturate( local11 );
 		float4 local13 = lerp( local3, local1, local12 );
 		float4 local14 = lerp( local8, local13, 0.65 );
 		float4 local15 = Tex2DS( g_tNormal, g_sSampler0, local0 );
-		float4 local16 = Tex2DS( g_tRough, g_sSampler0, local0 );
+		float3 local16 = TransformNormal( i, DecodeNormal( local15.xyz ) );
+		float4 local17 = Tex2DS( g_tRough, g_sSampler0, local0 );
+		float local18 = 1;
+		float local19 = 0.5;
+		float local20 = lerp( local18, local19, local13.x );
+		float local21 = saturate( local20 );
 
 		m.Albedo = local14.xyz;
-		m.Normal = local15.xyz;
-		m.Roughness = local16.x;
+		m.Normal = local16;
+		m.Roughness = local17.x;
+		m.AmbientOcclusion = local21;
 
 		ShadingModelValveStandard sm;
 		return FinalizePixelMaterial( i, m, sm );
