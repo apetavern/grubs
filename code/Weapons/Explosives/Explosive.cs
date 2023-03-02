@@ -11,7 +11,7 @@ public partial class Explosive : AnimatedEntity
 	[Prefab, Net]
 	public float ExplosionDamage { get; set; } = 50f;
 
-	[Prefab]
+	[Prefab, Net]
 	public float ExplosionForceMultiplier { get; set; } = 1.0f;
 
 	/// <summary>

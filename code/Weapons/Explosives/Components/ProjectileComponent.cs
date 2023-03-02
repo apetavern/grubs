@@ -20,7 +20,7 @@ public partial class ProjectileComponent : ExplosiveComponent
 	private void DrawSegments()
 	{
 		foreach ( var segment in Segments )
-			DebugOverlay.Line( segment.StartPos, segment.EndPos );
+			DebugOverlay.Line( segment.StartPos, segment.EndPos, Game.IsServer ? Color.Red : Color.Green );
 	}
 
 	public override void Simulate( IClient client )
