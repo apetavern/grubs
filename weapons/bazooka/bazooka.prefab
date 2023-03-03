@@ -3,87 +3,105 @@
   "Name": null,
   "Description": null,
   "Root": {
-    "Guid": "c69d83a8-b7f6-4266-9f56-4c216bdd7271",
+    "Guid": "94fdd21b-e17f-4ef9-a418-c52533ddeb08",
     "Class": "Weapon",
     "Entities": [],
     "Components": [
       {
-        "Guid": "99ea6c92-fbbd-4378-95ff-fbca3414345f",
+        "Guid": "8ff99db8-19cc-4229-ab54-691178815001",
         "Class": "ExplosiveWeaponComponent",
         "Keys": {
-          "ProjectileModel": {
-            "Type": "Model",
-            "Value": "\u0022models/weapons/shell/shell.vmdl\u0022"
-          },
-          "ProjectileShouldBounce": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "ProjectileMaxBounces": {
-            "Type": "Int32",
-            "Value": "0"
-          },
-          "ProjectileSpeed": {
-            "Type": "Single",
-            "Value": "1000"
-          },
-          "ProjectileExplosionRadius": {
-            "Type": "Single",
-            "Value": "50"
+          "ExplosivePrefabPath": {
+            "Type": "String",
+            "Value": "\u0022weapons/bazooka/projectile.prefab\u0022"
           },
           "_name": {
             "Value": "\u0022Explosive Weapon Component\u0022"
           },
-          "_tags": {
-            "Value": "[]"
-          },
-          "ProjectileExplodeAfter": {
-            "Type": "Single",
-            "Value": "-1"
-          },
-          "ProjectileForceMultiplier": {
-            "Type": "Single",
-            "Value": "0.67"
-          },
-          "ProjectileShouldUseTrace": {
-            "Type": "Boolean",
-            "Value": "true"
-          },
-          "ProjectileRadius": {
-            "Type": "Single",
-            "Value": "0"
-          },
-          "ProjectileExplosionSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
-          },
-          "ProjectileShouldRotate": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "ProjectileShouldUseModelCollision": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "ProjectilePrefabName": {
-            "Type": "String",
-            "Value": "\u0022\u0022"
-          },
-          "ProjectilePrefabPath": {
-            "Type": "String",
-            "Value": "\u0022weapons/bazooka/projectile.prefab\u0022"
-          },
-          "ExplosivePrefabPath": {
-            "Type": "String",
-            "Value": "\u0022weapons/bazooka/projectile.prefab\u0022"
-          }
+          "_tags": {}
         }
       }
     ],
     "Keys": {
+      "ExplosionRadius": {
+        "Type": "Single",
+        "Value": "0"
+      },
+      "MaxExplosionDamage": {
+        "Type": "Single",
+        "Value": "0"
+      },
+      "ExplosionForceMultiplier": {
+        "Type": "Single",
+        "Value": "0"
+      },
+      "ExplodeAfter": {
+        "Type": "Single",
+        "Value": "0"
+      },
+      "ShouldUseModelCollision": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ExplosiveCollisionRadius": {
+        "Type": "Single",
+        "Value": "0"
+      },
+      "UseCustomPhysics": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ShouldRotate": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ShouldBounce": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ExplosionReaction": {
+        "Type": "ExplosiveReaction",
+        "Value": "\u0022Explosion\u0022"
+      },
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "-1"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Charged\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Bazooka\u0022"
+      },
       "Model": {
         "Type": "Model",
         "Value": "\u0022models/weapons/bazooka/bazooka.vmdl\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/bazooka/bazooka.vmdl_c.png\u0022"
       },
       "_name": {
         "Value": "\u0022Bazooka\u0022"
@@ -99,38 +117,6 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
-      },
-      "Charges": {
-        "Type": "Int32",
-        "Value": "1"
-      },
-      "ShowReticle": {
-        "Type": "Boolean",
-        "Value": "true"
-      },
-      "DefaultAmmoAmount": {
-        "Type": "Int32",
-        "Value": "-1"
-      },
-      "FiringType": {
-        "Type": "FiringType",
-        "Value": "\u0022Charged\u0022"
-      },
-      "HoldPose": {
-        "Type": "HoldPose",
-        "Value": "\u0022Bazooka\u0022"
-      },
-      "Icon": {
-        "Type": "String",
-        "Value": "\u0022models/weapons/bazooka/bazooka.vmdl_c.png\u0022"
-      },
-      "AllowMovement": {
-        "Type": "Boolean",
-        "Value": "false"
-      },
-      "ClampAim": {
-        "Type": "Boolean",
-        "Value": "false"
       }
     }
   }

@@ -22,16 +22,13 @@ public partial class Player : Entity
 	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
 
 	[BindComponent]
-	public Inventory Inventory { get; }
+	public GrubsCamera GrubsCamera { get; }
 
-	public Preferences Preferences
-	{
-		get
-		{
-			return _preferences ??= Components.Get<Preferences>();
-		}
-	}
-	private Preferences _preferences;
+	[BindComponent]
+	public Preferences Preferences { get; }
+
+	[BindComponent]
+	public Inventory Inventory { get; }
 
 	public bool IsTurn
 	{
@@ -48,30 +45,19 @@ public partial class Player : Entity
 		Transmit = TransmitType.Always;
 	}
 
-	public Player( IClient client, Preferences preferences ) : this()
+	public Player( IClient client ) : this()
 	{
-		CreateGrubs( client );
-
 		SteamName = client.Name;
 		SteamId = client.SteamId;
-
-		Components.Add( preferences );
 	}
 
 	public override void Spawn()
 	{
-		// CreateGrubs();
+		Tags.Add( "ignorereset" );
 
+		Components.Create<GrubsCamera>();
+		Components.Create<Preferences>();
 		Components.Create<Inventory>();
-
-		var weaponPrefabs = Weapon.GetAllWeaponPrefabs();
-		foreach ( var prefab in weaponPrefabs )
-		{
-			if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) )
-			{
-				Inventory?.Add( weapon );
-			}
-		}
 	}
 
 	public override void Simulate( IClient client )
@@ -81,7 +67,7 @@ public partial class Player : Entity
 
 		foreach ( var grub in Grubs )
 		{
-			grub.Simulate( client );
+			grub?.Simulate( client );
 		}
 
 		if ( IsTurn )
@@ -102,19 +88,28 @@ public partial class Player : Entity
 
 	public override void FrameSimulate( IClient client )
 	{
+		GrubsCamera.FrameSimulate( client );
+
 		foreach ( var grub in Grubs )
 		{
-			grub.FrameSimulate( client );
+			grub?.FrameSimulate( client );
 		}
 	}
 
-	private void CreateGrubs( IClient client )
+	public void Respawn()
+	{
+		Inventory.Clear();
+		Inventory.GiveDefaultLoadout();
+
+		Grubs.Clear();
+		CreateGrubs();
+	}
+
+	private void CreateGrubs()
 	{
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
-			var grub = new Grub( client );
-			grub.Owner = this;
-			Grubs.Add( grub );
+			Grubs.Add( new Grub( Client ) { Owner = this } );
 		}
 
 		ActiveGrub = Grubs.First();

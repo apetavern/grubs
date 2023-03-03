@@ -15,7 +15,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/weapons/grenade/materials/grenade_color.psd"
+	TextureColor "models/weapons/grenade/materials/grenade_cluster_color.psd"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"

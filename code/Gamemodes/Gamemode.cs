@@ -82,7 +82,8 @@ public partial class Gamemode : Entity
 
 	internal virtual void OnClientJoined( IClient client )
 	{
-		client.Components.Create<GrubsCamera>();
+		var player = new Player( client );
+		client.Pawn = player;
 	}
 
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )

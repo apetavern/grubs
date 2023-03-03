@@ -6,19 +6,6 @@
 		children = 
 		[
 			{
-				_class = "Skeleton"
-				children = 
-				[
-					{
-						_class = "Bone"
-						name = "hold_L"
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						do_not_discard = true
-					},
-				]
-			},
-			{
 				_class = "MaterialGroupList"
 				children = 
 				[
@@ -27,8 +14,12 @@
 						remaps = 
 						[
 							{
-								from = "phong1.vmat"
-								to = "models/weapons/dynamite/materials/dynamite.vmat"
+								from = "inner.vmat"
+								to = "particles/muzzleflash/grubs_muzzleflash_flash.vmat"
+							},
+							{
+								from = "outer.vmat"
+								to = "particles/blueflame/blueflame_gradient.vmat"
 							},
 						]
 						use_global_default = false
@@ -42,36 +33,22 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/weapons/dynamite/dynamite.fbx"
-						import_translation = [ 0.0, 0.0, -3.0 ]
-						import_rotation = [ 36.0, 0.0, -90.0 ]
+						filename = "particles/blueflame/blueflame.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = "hold_L"
+						parent_bone = ""
 						import_filter = 
 						{
 							exclude_by_default = true
 							exception_list = 
 							[
-								"pCylinder23",
+								"Flame",
 							]
 						}
-					},
-				]
-			},
-			{
-				_class = "PhysicsShapeList"
-				children = 
-				[
-					{
-						_class = "PhysicsHullFromRender"
-						parent_bone = ""
-						surface_prop = "default"
-						collision_tags = "solid"
-						faceMergeAngle = 20.0
-						maxHullVertices = 32
 					},
 				]
 			},

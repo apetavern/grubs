@@ -2,9 +2,10 @@
 
 public class GrubsCamera : EntityComponent
 {
+	public readonly FloatRange DistanceRange = new( 128f, 2048f );
 	public float Distance { get; set; } = 1024;
 	public float DistanceScrollRate { get; set; } = 32f;
-	public FloatRange DistanceRange { get; } = new FloatRange( 128f, 2048f );
+
 	private float LerpSpeed { get; set; } = 5f;
 	private bool CenterOnPawn { get; set; } = true;
 	private Vector3 Center { get; set; }
@@ -16,8 +17,7 @@ public class GrubsCamera : EntityComponent
 	private TimeSince TimeSinceTargetChanged { get; set; }
 	private TimeUntil TimeUntilCameraUnlocked { get; set; }
 
-	[Event.Client.Frame]
-	private void UpdateCamera()
+	public void FrameSimulate( IClient _ )
 	{
 		Distance -= Input.MouseWheel * DistanceScrollRate;
 		Distance = DistanceRange.Clamp( Distance );
@@ -40,7 +40,7 @@ public class GrubsCamera : EntityComponent
 		if ( TimeUntilCameraUnlocked <= 0 )
 			FindTarget();
 
-		if ( Target is null || !Target.IsValid )
+		if ( !Target.IsValid() )
 			return;
 
 		// Get the center position, plus move the camera up a little bit.
@@ -61,6 +61,21 @@ public class GrubsCamera : EntityComponent
 		// Check the last time we panned the camera, update CenterOnPawn if greater than N.
 		if ( !Input.Down( InputButton.SecondaryAttack ) && TimeSinceMousePan > SecondsBeforeReturnFromPan )
 			CenterOnPawn = true;
+	}
+
+	public void SetTarget( Entity entity, float duration = 0 )
+	{
+		if ( entity == Target )
+			return;
+
+		if ( duration > 0 )
+		{
+			TimeUntilCameraUnlocked = duration;
+		}
+
+		LastTarget = Target;
+		Target = entity;
+		TimeSinceTargetChanged = 0f;
 	}
 
 	private void FindTarget()
@@ -102,21 +117,6 @@ public class GrubsCamera : EntityComponent
 		}
 	}
 
-	public void SetTarget( Entity entity, float duration = 0 )
-	{
-		if ( entity == Target )
-			return;
-
-		if ( duration > 0 )
-		{
-			TimeUntilCameraUnlocked = duration;
-		}
-
-		LastTarget = Target;
-		Target = entity;
-		TimeSinceTargetChanged = 0f;
-	}
-
 	private void MoveCamera()
 	{
 		var delta = new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
@@ -124,6 +124,7 @@ public class GrubsCamera : EntityComponent
 		if ( CenterOnPawn )
 		{
 			Center = Target.Position;
+
 			// Check if we've moved the camera, don't center on the pawn if we have
 			if ( !delta.LengthSquared.AlmostEqual( 0, 0.1f ) )
 				CenterOnPawn = false;

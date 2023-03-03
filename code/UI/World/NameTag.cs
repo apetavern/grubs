@@ -35,7 +35,7 @@ public class NameTag : WorldPanel
 
 	public override void Tick()
 	{
-		if ( !Entity.IsValid() )
+		if ( Game.LocalPawn is not Player player || !Entity.IsValid() )
 		{
 			Delete();
 			return;
@@ -51,6 +51,6 @@ public class NameTag : WorldPanel
 
 		Style.FontColor = nameTaggedEntity.Color;
 
-		WorldScale = (1.0f + Game.LocalClient.Components.Get<GrubsCamera>().DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
+		WorldScale = (1.0f + player.GrubsCamera.DistanceRange.LerpInverse( Camera.Position.y )) * 3f;
 	}
 }
