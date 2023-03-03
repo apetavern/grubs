@@ -1,7 +1,7 @@
 namespace Grubs;
 
 [Prefab]
-public partial class DroppableComponent : ExplosiveComponent
+public partial class DroppableExplosiveComponent : ExplosiveComponent
 {
 	public override void OnFired( Weapon weapon, int charge )
 	{

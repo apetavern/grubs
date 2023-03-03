@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "98cef78c-6eb2-44eb-89db-e4e659c16d5f",
-        "Class": "DroppableComponent",
+        "Class": "DroppableExplosiveComponent",
         "Keys": {
           "_name": {
             "Value": "\u0022Droppable\u0022"

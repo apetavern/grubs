@@ -1,7 +1,7 @@
 namespace Grubs;
 
 [Prefab]
-public partial class ProjectileComponent : ExplosiveComponent
+public partial class ProjectileExplosiveComponent : ExplosiveComponent
 {
 	[Prefab, Net]
 	public float ProjectileSpeed { get; set; } = 1000.0f;

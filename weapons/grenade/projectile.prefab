@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "410309e4-ceda-4696-8dfa-b08545abfc88",
-        "Class": "ProjectileComponent",
+        "Class": "ProjectileExplosiveComponent",
         "Keys": {
           "ProjectileSpeed": {
             "Type": "Single",

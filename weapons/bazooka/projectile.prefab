@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "a5931c8f-827c-4301-8bff-d5617b86b9c4",
-        "Class": "ProjectileComponent",
+        "Class": "ProjectileExplosiveComponent",
         "Keys": {
           "ProjectileShouldUseTrace": {
             "Type": "Boolean",
