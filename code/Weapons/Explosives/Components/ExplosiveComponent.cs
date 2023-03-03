@@ -8,12 +8,23 @@ public partial class ExplosiveComponent : EntityComponent<Explosive>
 
 	public virtual void OnFired( Weapon weapon, int charge )
 	{
-
+		if ( Explosive.ExplodeAfter > 0 )
+			ExplodeAfterSeconds( Explosive.ExplodeAfter );
 	}
 
 	public virtual void Simulate( IClient client )
 	{
 
+	}
+
+	public async void ExplodeAfterSeconds( float seconds )
+	{
+		await GameTask.DelaySeconds( seconds );
+
+		if ( !Explosive.IsValid() )
+			return;
+
+		Explode();
 	}
 
 	protected virtual void Explode()

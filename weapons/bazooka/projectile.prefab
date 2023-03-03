@@ -17,13 +17,21 @@
           },
           "ProjectileSpeed": {
             "Type": "Single",
-            "Value": "100"
+            "Value": "1000"
           },
           "_name": {
             "Value": "\u0022Projectile\u0022"
           },
           "_tags": {
             "Value": "[]"
+          },
+          "ShouldBounce": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "MaxBounces": {
+            "Type": "Int32",
+            "Value": "0"
           }
         }
       }
@@ -50,7 +58,7 @@
       },
       "ExplosionRadius": {
         "Type": "Single",
-        "Value": "10"
+        "Value": "50"
       },
       "ExplosionDamage": {
         "Type": "Single",
@@ -62,7 +70,7 @@
       },
       "ExplodeAfter": {
         "Type": "Single",
-        "Value": "2"
+        "Value": "0"
       },
       "ShouldUseModelCollision": {
         "Type": "Boolean",
@@ -94,11 +102,11 @@
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
-        "Value": "false"
+        "Value": "true"
       },
       "MaxExplosionDamage": {
         "Type": "Single",
-        "Value": "50"
+        "Value": "100"
       },
       "UseCustomPhysics": {
         "Type": "Boolean",

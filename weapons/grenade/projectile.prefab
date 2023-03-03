@@ -20,6 +20,14 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "ShouldBounce": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "MaxBounces": {
+            "Type": "Int32",
+            "Value": "0"
           }
         }
       }
@@ -39,7 +47,7 @@
       },
       "ExplodeAfter": {
         "Type": "Single",
-        "Value": "4"
+        "Value": "5"
       },
       "ShouldUseModelCollision": {
         "Type": "Boolean",
@@ -63,7 +71,7 @@
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
-        "Value": "false"
+        "Value": "true"
       },
       "ExplosionReaction": {
         "Type": "ExplosiveReaction",

@@ -3,8 +3,14 @@ namespace Grubs;
 [Prefab]
 public partial class ProjectileComponent : ExplosiveComponent
 {
-	[Prefab]
+	[Prefab, Net]
 	public float ProjectileSpeed { get; set; } = 1000.0f;
+
+	[Prefab, Net]
+	public bool ShouldBounce { get; set; } = false;
+
+	[Prefab, Net]
+	public int MaxBounces { get; set; } = 0;
 
 	[Net]
 	private IList<ArcSegment> Segments { get; set; }
@@ -23,6 +29,8 @@ public partial class ProjectileComponent : ExplosiveComponent
 
 	public override void OnFired( Weapon weapon, int charge )
 	{
+		base.OnFired( weapon, charge );
+
 		var position = weapon.Position.WithY( 0f );
 		var muzzle = weapon.GetAttachment( "muzzle" );
 		if ( muzzle is not null )
@@ -33,7 +41,9 @@ public partial class ProjectileComponent : ExplosiveComponent
 		if ( Explosive.UseCustomPhysics )
 		{
 			var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
-			Segments = arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, Explosive.ExplosionForceMultiplier * charge, 0f );
+			Segments = ShouldBounce
+				? arcTrace.RunTowardsWithBounces( Grub.EyeRotation.Forward.Normal * Grub.Facing, Explosive.ExplosionForceMultiplier * charge, 0, MaxBounces )
+				: arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, Explosive.ExplosionForceMultiplier * charge, 0f );
 			Explosive.Position = Segments[0].StartPos;
 		}
 		else
@@ -55,15 +65,17 @@ public partial class ProjectileComponent : ExplosiveComponent
 		if ( ProjectileDebug )
 			DrawSegments();
 
-		Explosive.Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
-		Explosive.Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, Time.Delta / (1 / ProjectileSpeed) );
+		var currentSegment = Segments.First();
 
-		if ( (Segments[0].EndPos - Explosive.Position).IsNearlyZero( 2.5f ) )
+		Explosive.Rotation = Rotation.LookAt( currentSegment.EndPos - currentSegment.StartPos );
+		Explosive.Position = Vector3.Lerp( currentSegment.StartPos, currentSegment.EndPos, Time.Delta / (1 / ProjectileSpeed) );
+
+		if ( (currentSegment.EndPos - Explosive.Position).IsNearlyZero( 2.5f ) )
 		{
 			if ( Segments.Count > 1 )
 				Segments.RemoveAt( 0 );
 			else
-				Explode();
+				ExplodeAfterSeconds( Explosive.ExplodeAfter );
 
 			return;
 		}

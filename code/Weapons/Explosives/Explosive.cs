@@ -15,7 +15,7 @@ public partial class Explosive : AnimatedEntity
 	public float ExplosionForceMultiplier { get; set; } = 1.0f;
 
 	/// <summary>
-	/// The number of seconds before it explodes, set to "-1" if something else handles the exploding.
+	/// The number of seconds before it explodes, set to "0" if something else handles the exploding.
 	/// </summary>
 	[Prefab]
 	public float ExplodeAfter { get; set; } = 4.0f;
@@ -35,7 +35,7 @@ public partial class Explosive : AnimatedEntity
 	[Prefab]
 	public bool ShouldBounce { get; set; } = false;
 
-	[Prefab]
+	[Prefab, Net]
 	public bool ShouldCameraFollow { get; set; } = true;
 
 	[Prefab, ResourceType( "sound" )]
