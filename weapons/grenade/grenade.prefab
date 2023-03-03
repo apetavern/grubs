@@ -9,17 +9,21 @@
     "Components": [
       {
         "Guid": "7cf69677-1d97-4ff0-b855-4b6f2accb591",
-        "Class": "ProjectileWeaponComponent",
+        "Class": "ExplosiveWeaponComponent",
         "Keys": {
           "ProjectilePrefabPath": {
             "Type": "String",
             "Value": "\u0022weapons/grenade/projectile.prefab\u0022"
           },
           "_name": {
-            "Value": "\u0022Projectile\u0022"
+            "Value": "\u0022Explosive Weapon Component\u0022"
           },
           "_tags": {
             "Value": "[]"
+          },
+          "ExplosivePrefabPath": {
+            "Type": "String",
+            "Value": "\u0022weapons/grenade/projectile.prefab\u0022"
           }
         }
       }

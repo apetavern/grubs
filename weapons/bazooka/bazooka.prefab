@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "99ea6c92-fbbd-4378-95ff-fbca3414345f",
-        "Class": "ProjectileWeaponComponent",
+        "Class": "ExplosiveWeaponComponent",
         "Keys": {
           "ProjectileModel": {
             "Type": "Model",
@@ -32,7 +32,7 @@
             "Value": "50"
           },
           "_name": {
-            "Value": "\u0022Projectile Component\u0022"
+            "Value": "\u0022Explosive Weapon Component\u0022"
           },
           "_tags": {
             "Value": "[]"
@@ -70,6 +70,10 @@
             "Value": "\u0022\u0022"
           },
           "ProjectilePrefabPath": {
+            "Type": "String",
+            "Value": "\u0022weapons/bazooka/projectile.prefab\u0022"
+          },
+          "ExplosivePrefabPath": {
             "Type": "String",
             "Value": "\u0022weapons/bazooka/projectile.prefab\u0022"
           }

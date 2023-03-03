@@ -10,7 +10,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public TimeSince TimeSinceActivated { get; protected set; }
 
 	[Net, Predicted]
-	public int Charge { get; protected set; } = 0;
+	public int Charge { get; protected set; } = MinCharge;
+	public const int MinCharge = 1;
+	public const int MaxCharge = 100;
 
 	[Net, Predicted]
 	public bool IsFiring { get; set; }
@@ -123,6 +125,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	private void IncreaseCharge()
 	{
 		Charge++;
-		Charge = Charge.Clamp( 0, 100 );
+		Charge = Charge.Clamp( MinCharge, MaxCharge );
 	}
 }
