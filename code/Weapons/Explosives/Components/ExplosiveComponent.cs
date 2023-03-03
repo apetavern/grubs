@@ -18,6 +18,9 @@ public partial class ExplosiveComponent : EntityComponent<Explosive>
 
 	protected virtual void Explode()
 	{
+		if ( !Game.IsServer )
+			return;
+
 		switch ( Explosive.ExplosionReaction )
 		{
 			case ExplosiveReaction.Explosion:

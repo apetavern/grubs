@@ -26,7 +26,7 @@ public partial class Explosive : AnimatedEntity
 	[Prefab]
 	public float ExplosiveCollisionRadius { get; set; } = 1.0f;
 
-	[Prefab]
+	[Prefab, Net]
 	public bool UseCustomPhysics { get; set; } = false;
 
 	[Prefab]

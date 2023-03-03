@@ -6,7 +6,8 @@ public partial class ProjectileComponent : ExplosiveComponent
 	[Prefab]
 	public float ProjectileSpeed { get; set; } = 1000.0f;
 
-	private List<ArcSegment> Segments { get; set; } = new();
+	[Net]
+	private IList<ArcSegment> Segments { get; set; }
 
 	/// <summary>
 	/// Debug console variable to see the projectiles path.
