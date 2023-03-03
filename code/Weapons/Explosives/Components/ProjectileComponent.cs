@@ -31,6 +31,13 @@ public partial class ProjectileComponent : ExplosiveComponent
 	{
 		base.OnFired( weapon, charge );
 
+		var position = weapon.Position.WithY( 0f );
+		var muzzle = weapon.GetAttachment( "muzzle" );
+		if ( muzzle is not null )
+			position = muzzle.Value.Position.WithY( 0f );
+
+		Explosive.Position = position;
+
 		if ( Explosive.UseCustomPhysics )
 		{
 			var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
@@ -41,7 +48,7 @@ public partial class ProjectileComponent : ExplosiveComponent
 		}
 		else
 		{
-			var desiredPosition = Explosive.Position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
+			var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
 			var tr = Trace.Ray( desiredPosition, desiredPosition ).Ignore( Grub ).Run(); // This trace is incorrect, should be from position -> desired position.
 			Explosive.Position = tr.EndPosition;
 			Explosive.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ProjectileSpeed).WithY( 0f );
