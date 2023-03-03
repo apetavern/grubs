@@ -55,6 +55,9 @@ public partial class ProjectileComponent : ExplosiveComponent
 		if ( ProjectileDebug )
 			DrawSegments();
 
+		Explosive.Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
+		Explosive.Position = Explosive.Position.LerpTo( Segments[0].EndPos, Time.Delta / (1 / ProjectileSpeed) );
+
 		if ( (Segments[0].EndPos - Explosive.Position).IsNearlyZero( 2.5f ) )
 		{
 			if ( Segments.Count > 1 )
@@ -64,8 +67,5 @@ public partial class ProjectileComponent : ExplosiveComponent
 
 			return;
 		}
-
-		Explosive.Rotation = Rotation.LookAt( Segments[0].EndPos - Segments[0].StartPos );
-		Explosive.Position = Vector3.Lerp( Segments[0].StartPos, Segments[0].EndPos, Time.Delta / (1 / ProjectileSpeed) );
 	}
 }
