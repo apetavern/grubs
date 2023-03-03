@@ -54,14 +54,12 @@ public partial class Explosive : AnimatedEntity
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		else
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, ExplosiveCollisionRadius );
-
-		// TODO: Figure out something else.
-		GamemodeSystem.Instance.Explosives.Add( this );
 	}
 
 	public void OnFired( Grub grub, Weapon weapon, int charge )
 	{
 		Owner = grub;
+		grub.Player.AddExplosive( this );
 
 		foreach ( var component in Components.GetAll<ExplosiveComponent>() )
 		{

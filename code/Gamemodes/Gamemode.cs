@@ -11,9 +11,6 @@ public partial class Gamemode : Entity
 	[Net]
 	public IList<Player> Players { get; set; }
 
-	// TODO: Got any better ideas?
-	public List<Explosive> Explosives { get; set; } = new();
-
 	private List<Player> DisconnectedPlayers { get; set; } = new();
 
 	[Net]
@@ -60,13 +57,6 @@ public partial class Gamemode : Entity
 		foreach ( var disconnectedPlayer in DisconnectedPlayers )
 		{
 			disconnectedPlayer.Simulate( client );
-		}
-
-		// Need to handle this differently...
-		foreach ( var explosive in Explosives )
-		{
-			if ( explosive.IsValid() )
-				explosive.Simulate( client );
 		}
 	}
 
