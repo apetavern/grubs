@@ -4,6 +4,9 @@ public partial class Player : Entity
 {
 	[Net]
 	public IList<Grub> Grubs { get; private set; }
+	
+	[Net]
+	public IList<Drop> Drops { get; set; }
 
 	[Net]
 	public Grub ActiveGrub { get; private set; }
@@ -68,6 +71,11 @@ public partial class Player : Entity
 		foreach ( var grub in Grubs )
 		{
 			grub?.Simulate( client );
+		}
+
+		foreach ( var drop in Drops )
+		{
+			drop?.Simulate( client );
 		}
 
 		if ( IsTurn )

@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "5bf7291a-6f66-4b78-ba4c-9d6833c0452e",
+    "Class": "Drop",
+    "Entities": [
+      {
+        "Guid": "0d183746-5ef9-4df8-911f-5a3b5c8ba1f7",
+        "Class": "animated_entity",
+        "Entities": [],
+        "Components": [],
+        "Keys": {
+          "_attachment": {
+            "Type": "String",
+            "Value": "\u0022_bonemerge\u0022"
+          },
+          "Model": {
+            "Type": "Model",
+            "Value": "\u0022models/crates/crate_parachute/crate_parachute.vmdl\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Parachute\u0022"
+          },
+          "_localposition": {
+            "Value": "\u00220,0,0\u0022"
+          },
+          "_localrotation": {
+            "Value": "\u00220,0,0\u0022"
+          },
+          "_scale": {
+            "Value": "1"
+          },
+          "_tags": {
+            "Value": "\u0022parachute\u0022"
+          }
+        }
+      }
+    ],
+    "Components": [
+      {
+        "Guid": "25c3735e-c0d4-445d-915e-9e2a966e3446",
+        "Class": "CrateComponent",
+        "Keys": {
+          "CrateType": {
+            "Type": "CrateType",
+            "Value": "\u0022Tools\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Tools\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/crates/tools_crate/tools_crate.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Tool Crate\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022crates drops\u0022"
+      }
+    }
+  }
+}

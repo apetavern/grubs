@@ -1,0 +1,32 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "b429f31f-0f19-4449-af92-1c8cf971d462",
+    "Class": "Drop",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/oildrum/oildrum.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Oil Barrel\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022drops\u0022"
+      }
+    }
+  }
+}
