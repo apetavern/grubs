@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "7339d1cc-7d7b-4432-ac6e-7a1107d24a68",
-        "Class": "ProjectileComponent",
+        "Class": "ExplosiveWeaponComponent",
         "Keys": {
           "ProjectileExplodeAfter": {
             "Type": "Single",
@@ -48,7 +48,7 @@
             "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl\u0022"
           },
           "_name": {
-            "Value": "\u0022concretegarry\u0022"
+            "Value": "\u0022Explosive\u0022"
           },
           "_tags": {
             "Value": "[]"
@@ -64,6 +64,10 @@
           "ProjectileExplosionSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "ExplosivePrefabPath": {
+            "Type": "String",
+            "Value": "\u0022weapons/concretegarry/projectile.prefab\u0022"
           }
         }
       }
@@ -71,7 +75,7 @@
     "Keys": {
       "Charges": {
         "Type": "Int32",
-        "Value": "1"
+        "Value": "50"
       },
       "ShowReticle": {
         "Type": "Boolean",
@@ -79,7 +83,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "0"
+        "Value": "50"
       },
       "AllowMovement": {
         "Type": "Boolean",
@@ -106,7 +110,7 @@
         "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl_c.png\u0022"
       },
       "_name": {
-        "Value": "\u0022ConcreteGarry\u0022"
+        "Value": "\u0022Concrete Garry\u0022"
       },
       "_localposition": {
         "Value": "\u00220,0,0\u0022"
@@ -118,7 +122,7 @@
         "Value": "1"
       },
       "_tags": {
-        "Value": "\u0022\u0022"
+        "Value": "\u0022weapon\u0022"
       }
     }
   }
