@@ -9,6 +9,9 @@ public partial class Player : Entity
 	public Grub ActiveGrub { get; private set; }
 
 	[Net]
+	public IList<Gadget> Gadgets { get; private set; }
+
+	[Net]
 	public string SteamName { get; private set; }
 
 	[Net]
@@ -60,6 +63,7 @@ public partial class Player : Entity
 	public override void Simulate( IClient client )
 	{
 		Inventory?.Simulate( client );
+		SimulateGadgets( client );
 
 		foreach ( var grub in Grubs )
 		{
@@ -68,6 +72,18 @@ public partial class Player : Entity
 
 		if ( IsTurn )
 			ActiveGrub?.UpdateInputFromOwner( MoveInput, LookInput );
+	}
+
+	private void SimulateGadgets( IClient client )
+	{
+		for ( int i = Gadgets.Count - 1; i >= 0; --i )
+		{
+			var gadget = Gadgets[i];
+			if ( gadget.IsValid() )
+				gadget.Simulate( client );
+			else
+				Gadgets.RemoveAt( i );
+		}
 	}
 
 	public override void FrameSimulate( IClient client )
@@ -122,15 +138,11 @@ public partial class Player : Entity
 
 	public void EndTurn()
 	{
-		if ( ActiveGrub == null )
-			return;
-
-		if ( ActiveGrub.ActiveWeapon is null )
+		if ( !ActiveGrub.IsValid() || !ActiveGrub.ActiveWeapon.IsValid() )
 			return;
 
 		Inventory.ActiveWeapon.SetPointerEvents( To.Single( this ), false );
-
-		Inventory.UnsetActiveWeapon();
+		Inventory.SetActiveWeapon( null, true );
 	}
 
 	public int GetTotalGrubHealth()

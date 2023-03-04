@@ -105,9 +105,10 @@ public class GrubsCamera : EntityComponent
 		}
 		else
 		{
-			foreach ( var projectile in Entity.All.OfType<Projectile>() )
+			foreach ( var gadget in Entity.All.OfType<Gadget>() )
 			{
-				SetTarget( projectile );
+				if ( gadget.ShouldCameraFollow )
+					SetTarget( gadget );
 				return;
 			}
 

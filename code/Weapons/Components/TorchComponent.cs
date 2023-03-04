@@ -52,11 +52,6 @@ public partial class TorchComponent : WeaponComponent
 
 	public static readonly string MuzzleParticlesPath = "particles/muzzleflash/grubs_muzzleflash.vpcf";
 
-	public override bool ShouldStart()
-	{
-		return Grub.IsTurn && Grub.Controller.IsGrounded;
-	}
-
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );

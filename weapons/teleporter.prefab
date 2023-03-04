@@ -67,6 +67,14 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }

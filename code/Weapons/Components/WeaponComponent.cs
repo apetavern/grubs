@@ -7,10 +7,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	protected Player Player => Grub.Player;
 
 	[Net, Predicted]
-	public TimeSince TimeSinceActivated { get; protected set; }
-
-	[Net, Predicted]
-	public int Charge { get; protected set; } = 0;
+	public int Charge { get; protected set; } = MinCharge;
+	public const int MinCharge = 1;
+	public const int MaxCharge = 100;
 
 	[Net, Predicted]
 	public bool IsFiring { get; set; }
@@ -23,21 +22,18 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public Particles ChargeParticles { get; set; }
 
-	public virtual bool ShouldStart()
+	public virtual void OnDeploy()
 	{
-		return false;
+
 	}
 
-	public virtual void OnStart()
+	public virtual void OnHolster()
 	{
-		TimeSinceActivated = 0;
+		IsFiring = false;
 	}
 
 	public virtual void Simulate( IClient client )
 	{
-		if ( ShouldStart() )
-			OnStart();
-
 		if ( Weapon.CurrentUses >= Weapon.Charges || GamemodeSystem.Instance.UsedTurn )
 			return;
 
@@ -122,6 +118,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	private void IncreaseCharge()
 	{
 		Charge++;
-		Charge = Charge.Clamp( 0, 100 );
+		Charge = Charge.Clamp( MinCharge, MaxCharge );
 	}
 }
