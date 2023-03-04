@@ -1,0 +1,105 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "6937410b-569d-42a4-90a3-b3a327060b5a",
+    "Class": "Explosive",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "46b175db-324e-4a01-870a-b06a9323c7b1",
+        "Class": "ConcreteGarryComponent",
+        "Keys": {
+          "ProjectileSpeed": {
+            "Type": "Single",
+            "Value": "500"
+          },
+          "ShouldBounce": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "MaxBounces": {
+            "Type": "Int32",
+            "Value": "999"
+          },
+          "_name": {
+            "Value": "\u0022Projectile\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "ExplosionRadius": {
+        "Type": "Single",
+        "Value": "90"
+      },
+      "MaxExplosionDamage": {
+        "Type": "Single",
+        "Value": "100"
+      },
+      "ExplosionForceMultiplier": {
+        "Type": "Single",
+        "Value": "2"
+      },
+      "ExplodeAfter": {
+        "Type": "Single",
+        "Value": "0"
+      },
+      "ShouldUseModelCollision": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "ExplosiveCollisionRadius": {
+        "Type": "Single",
+        "Value": "10"
+      },
+      "UseCustomPhysics": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "ShouldRotate": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ShouldBounce": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "ExplosionReaction": {
+        "Type": "ExplosiveReaction",
+        "Value": "\u0022Explosion\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Concrete Garry Projectile\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022explosive\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl\u0022"
+      },
+      "ExplosionSound": {
+        "Type": "String",
+        "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+      }
+    }
+  }
+}

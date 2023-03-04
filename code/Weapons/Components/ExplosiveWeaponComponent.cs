@@ -21,12 +21,11 @@ public partial class ExplosiveWeaponComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-
+		FireCharged();
 	}
 
 	public override void FireInstant()
 	{
-		// Fire with min charge.
 		FireCharged();
 	}
 
@@ -36,9 +35,7 @@ public partial class ExplosiveWeaponComponent : WeaponComponent
 			return;
 
 		if ( PrefabLibrary.TrySpawn<Explosive>( ExplosivePrefabPath, out var explosive ) )
-		{
 			explosive.OnFired( Grub, Weapon, Charge );
-		}
 
 		Grub.SetAnimParameter( "fire", true );
 

@@ -13,7 +13,7 @@ public partial class ProjectileExplosiveComponent : ExplosiveComponent
 	public int MaxBounces { get; set; } = 0;
 
 	[Net]
-	private IList<ArcSegment> Segments { get; set; }
+	protected IList<ArcSegment> Segments { get; set; }
 
 	/// <summary>
 	/// Debug console variable to see the projectiles path.
@@ -72,8 +72,8 @@ public partial class ProjectileExplosiveComponent : ExplosiveComponent
 		{
 			if ( Segments.Count > 1 )
 				Segments.RemoveAt( 0 );
-			else
-				ExplodeAfterSeconds( Explosive.ExplodeAfter );
+			// else
+			// 	ExplodeAfterSeconds( Explosive.ExplodeAfter );
 
 			return;
 		}
