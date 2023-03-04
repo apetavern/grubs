@@ -14,9 +14,6 @@ public partial class Gadget : AnimatedEntity
 	[Prefab, Net]
 	public bool ShouldCameraFollow { get; set; } = true;
 
-	[Prefab]
-	public bool IsDroppable { get; set; } = false;
-
 	public override void Spawn()
 	{
 		Transmit = TransmitType.Always;
@@ -35,10 +32,7 @@ public partial class Gadget : AnimatedEntity
 		Owner = grub;
 		grub.Player.Gadgets.Add( this );
 
-		if ( IsDroppable )
-		{
-			Position = (Grub.EyePosition + (Grub.Facing * 20f)).WithY( 0 );
-		}
+		Position = (Grub.EyePosition + (Grub.Facing * 20f)).WithY( 0 );
 
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{

@@ -111,8 +111,8 @@ public partial class FreeForAll : Gamemode
 			}
 		}
 
-		var explosives = All.OfType<Explosive>();
-		foreach ( var proj in explosives )
+		var gadgets = All.OfType<Gadget>();
+		foreach ( var proj in gadgets )
 		{
 			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
 			{

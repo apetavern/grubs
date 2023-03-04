@@ -6,6 +6,21 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool ShouldRotate { get; set; } = true;
 
+	[Prefab, Net]
+	public bool ShouldThrow { get; set; } = false;
+
+	[Prefab, Net]
+	public int ThrowSpeed { get; set; } = 10;
+
+	public override void OnUse( Weapon weapon, int charge )
+	{
+		if ( ShouldThrow )
+		{
+			Gadget.Position = Gadget.Position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
+			Gadget.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ThrowSpeed).WithY( 0f );
+		}
+	}
+
 	public override void Simulate( IClient client )
 	{
 		// Apply gravity.

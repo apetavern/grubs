@@ -1,0 +1,105 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "128652fa-8191-44d1-89d5-ac8fd97b126b",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "4b451452-db92-4099-be34-3e4ff5e8d634",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "100"
+          },
+          "ExplosionForceMultiplier": {
+            "Type": "Single",
+            "Value": "0.35"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "5"
+          },
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Explosive\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "45e3311d-e280-4816-b95e-d39673974216",
+        "Class": "PhysicsGadgetComponent",
+        "Keys": {
+          "ShouldRotate": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "ThrowSpeed": {
+            "Type": "Int32",
+            "Value": "10"
+          },
+          "ShouldThrow": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "_name": {
+            "Value": "\u0022Physics\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "ShouldUseModelCollision": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "CollisionRadius": {
+        "Type": "Single",
+        "Value": "7"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "IsDroppable": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/grenade/grenade.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Grenade Projectile\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget\u0022"
+      }
+    }
+  }
+}
