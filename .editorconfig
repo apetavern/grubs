@@ -130,3 +130,5 @@ dotnet_naming_symbols.pp.applicable_accessibilities = private
 dotnet_naming_rule.privatePropertiesUnderscore.symbols = pp
 dotnet_naming_rule.privatePropertiesUnderscore.style = _pp
 dotnet_naming_rule.privatePropertiesUnderscore.severity = none
+
+dotnet_diagnostic.CA1822.severity = none
