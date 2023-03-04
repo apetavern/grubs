@@ -138,15 +138,11 @@ public partial class Player : Entity
 
 	public void EndTurn()
 	{
-		if ( ActiveGrub == null )
-			return;
-
-		if ( ActiveGrub.ActiveWeapon is null )
+		if ( !ActiveGrub.IsValid() || !ActiveGrub.ActiveWeapon.IsValid() )
 			return;
 
 		Inventory.ActiveWeapon.SetPointerEvents( To.Single( this ), false );
-
-		ActiveGrub.ActiveWeapon.Holster();
+		Inventory.SetActiveWeapon( null, true );
 	}
 
 	public void AddExplosive( Explosive explosive )

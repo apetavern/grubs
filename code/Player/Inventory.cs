@@ -34,7 +34,7 @@ public partial class Inventory : EntityComponent<Player>
 			SetActiveWeapon( weapon );
 	}
 
-	public void SetActiveWeapon( Weapon weapon )
+	public void SetActiveWeapon( Weapon weapon, bool forced = false )
 	{
 		if ( ActiveWeapon == weapon )
 			return;
@@ -42,7 +42,7 @@ public partial class Inventory : EntityComponent<Player>
 		if ( weapon.IsValid() && !weapon.HasAmmo() )
 			return;
 
-		if ( ActiveWeapon.IsValid() && ActiveWeapon.HasFired )
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.HasFired && !forced )
 			return;
 
 		if ( ActiveWeapon.IsValid() )
