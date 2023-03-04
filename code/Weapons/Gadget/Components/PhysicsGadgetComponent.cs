@@ -27,7 +27,7 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		Gadget.Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
-		helper.Trace = helper.Trace.Size( 12f ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" ).Ignore( Gadget );
+		helper.Trace = helper.Trace.Size( Gadget.CollisionBounds ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" ).Ignore( Gadget );
 		helper.TryMove( Time.Delta );
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;

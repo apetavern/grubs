@@ -20,41 +20,15 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "ShouldThrow": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "ThrowSpeed": {
+            "Type": "Int32",
+            "Value": "0"
           }
-        }
-      },
-      {
-        "Guid": "7088ed23-68b4-4b25-926c-393482a9909a",
-        "Class": "ExplosiveGadgetComponent",
-        "Keys": {
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "75"
-          },
-          "MaxExplosionDamage": {
-            "Type": "Single",
-            "Value": "125"
-          },
-          "ExplosionForceMultiplier": {
-            "Type": "Single",
-            "Value": "10"
-          },
-          "ExplodeAfter": {
-            "Type": "Single",
-            "Value": "5"
-          },
-          "ExplosionReaction": {
-            "Type": "ExplosiveReaction",
-            "Value": "\u0022Explosion\u0022"
-          },
-          "ExplosionSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
-          },
-          "_name": {
-            "Value": "\u0022Explosive\u0022"
-          },
-          "_tags": {}
         }
       }
     ],
@@ -65,7 +39,7 @@
       },
       "CollisionRadius": {
         "Type": "Single",
-        "Value": "0"
+        "Value": "3"
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",

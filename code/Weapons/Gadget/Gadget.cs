@@ -21,7 +21,6 @@ public partial class Gadget : AnimatedEntity
 		Health = 1;
 
 		if ( ShouldUseModelCollision )
-			// TODO: This doesn't seem to work.
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		else
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, CollisionRadius );
