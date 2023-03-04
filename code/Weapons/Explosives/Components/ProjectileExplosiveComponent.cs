@@ -48,9 +48,7 @@ public partial class ProjectileExplosiveComponent : ExplosiveComponent
 		}
 		else
 		{
-			var desiredPosition = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
-			var tr = Trace.Ray( desiredPosition, desiredPosition ).Ignore( Grub ).Run(); // This trace is incorrect, should be from position -> desired position.
-			Explosive.Position = tr.EndPosition;
+			Explosive.Position = position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
 			Explosive.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ProjectileSpeed).WithY( 0f );
 		}
 	}

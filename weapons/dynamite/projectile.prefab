@@ -67,7 +67,7 @@
       },
       "Model": {
         "Type": "Model",
-        "Value": "\u0022models/weapons/dynamite/dynamite.vmdl\u0022"
+        "Value": "\u0022models/weapons/dynamite/dynamite_projectile.vmdl\u0022"
       },
       "ExplosionSound": {
         "Type": "String",
@@ -87,6 +87,10 @@
       },
       "_tags": {
         "Value": "\u0022explosive\u0022"
+      },
+      "PrismModel": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }

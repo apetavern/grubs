@@ -7,9 +7,6 @@ public partial class DroppableExplosiveComponent : ExplosiveComponent
 	{
 		base.OnFired( weapon, charge );
 
-		var desiredPosition = Grub.Position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
-		var tr = Trace.Ray( desiredPosition, desiredPosition ).Ignore( Grub ).Run(); // This trace is incorrect, should be from position -> desired position.
-		Explosive.Position = tr.EndPosition;
-		Explosive.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing).WithY( 0f );
+		Explosive.Position = (Grub.EyePosition + (Grub.Facing * 20f)).WithY( 0 );
 	}
 }
