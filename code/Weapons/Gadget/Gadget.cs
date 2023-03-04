@@ -14,11 +14,17 @@ public partial class Gadget : AnimatedEntity
 	[Prefab, Net]
 	public bool ShouldCameraFollow { get; set; } = true;
 
+	[Prefab, ResourceType( "vpcf" )]
+	public string TrailParticle { get; set; }
+
 	public override void Spawn()
 	{
 		Transmit = TransmitType.Always;
 		EnableLagCompensation = true;
 		Health = 1;
+
+		if ( !string.IsNullOrEmpty( TrailParticle ) )
+			Particles.Create( TrailParticle, this, "trail" );
 
 		if ( ShouldUseModelCollision )
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
