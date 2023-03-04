@@ -59,7 +59,7 @@ public partial class Explosive : AnimatedEntity
 	public void OnFired( Grub grub, Weapon weapon, int charge )
 	{
 		Owner = grub;
-		grub.Player.AddExplosive( this );
+		// grub.Player.AddExplosive( this );
 
 		foreach ( var component in Components.GetAll<ExplosiveComponent>() )
 		{
@@ -103,19 +103,4 @@ public partial class Explosive : AnimatedEntity
 			Rotation = Rotation.Identity;
 		}
 	}
-}
-
-/// <summary>
-/// Defines the type of reaction a <see cref="Explosion"/> has when it explodes.
-/// </summary>
-public enum ExplosiveReaction
-{
-	/// <summary>
-	/// Produces a regular explosion.
-	/// </summary>
-	Explosion,
-	/// <summary>
-	/// Produces a fire.
-	/// </summary>
-	Incendiary
 }

@@ -9,7 +9,7 @@ public partial class Player : Entity
 	public Grub ActiveGrub { get; private set; }
 
 	[Net]
-	public IList<Explosive> Explosives { get; private set; }
+	public IList<Gadget> Gadgets { get; private set; }
 
 	[Net]
 	public string SteamName { get; private set; }
@@ -63,7 +63,7 @@ public partial class Player : Entity
 	public override void Simulate( IClient client )
 	{
 		Inventory?.Simulate( client );
-		SimulateExplosives( client );
+		SimulateGadgets( client );
 
 		foreach ( var grub in Grubs )
 		{
@@ -74,15 +74,15 @@ public partial class Player : Entity
 			ActiveGrub?.UpdateInputFromOwner( MoveInput, LookInput );
 	}
 
-	private void SimulateExplosives( IClient client )
+	private void SimulateGadgets( IClient client )
 	{
-		for ( int i = Explosives.Count - 1; i >= 0; --i )
+		for ( int i = Gadgets.Count - 1; i >= 0; --i )
 		{
-			var explosive = Explosives[i];
-			if ( explosive.IsValid() )
-				explosive.Simulate( client );
+			var gadget = Gadgets[i];
+			if ( gadget.IsValid() )
+				gadget.Simulate( client );
 			else
-				Explosives.RemoveAt( i );
+				Gadgets.RemoveAt( i );
 		}
 	}
 
@@ -143,11 +143,6 @@ public partial class Player : Entity
 
 		Inventory.ActiveWeapon.SetPointerEvents( To.Single( this ), false );
 		Inventory.SetActiveWeapon( null, true );
-	}
-
-	public void AddExplosive( Explosive explosive )
-	{
-		Explosives.Add( explosive );
 	}
 
 	public int GetTotalGrubHealth()

@@ -1,10 +1,10 @@
 ﻿namespace Grubs;
 
 [Prefab]
-public partial class ExplosiveWeaponComponent : WeaponComponent
+public partial class GadgetWeaponComponent : WeaponComponent
 {
 	[Prefab, Net]
-	public string ExplosivePrefabPath { get; set; }
+	public string GadgetPrefabPath { get; set; }
 
 	public override void Simulate( IClient client )
 	{
@@ -29,8 +29,8 @@ public partial class ExplosiveWeaponComponent : WeaponComponent
 		if ( !Game.IsServer )
 			return;
 
-		if ( PrefabLibrary.TrySpawn<Explosive>( ExplosivePrefabPath, out var explosive ) )
-			explosive.OnFired( Grub, Weapon, Charge );
+		if ( PrefabLibrary.TrySpawn<Gadget>( GadgetPrefabPath, out var gadget ) )
+			gadget.OnUse( Grub, Weapon, Charge );
 
 		Grub.SetAnimParameter( "fire", true );
 

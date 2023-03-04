@@ -3,78 +3,84 @@
   "Name": null,
   "Description": null,
   "Root": {
-    "Guid": "b5657524-d461-4463-b4b6-57b545c5654b",
-    "Class": "Explosive",
+    "Guid": "40f1ddd1-da83-498f-8df5-e92b72ecc115",
+    "Class": "Gadget",
     "Entities": [],
     "Components": [
       {
-        "Guid": "98cef78c-6eb2-44eb-89db-e4e659c16d5f",
-        "Class": "DroppableExplosiveComponent",
+        "Guid": "6f5dd43c-b0c4-4cf2-ae29-93e80e03ff82",
+        "Class": "PhysicsGadgetComponent",
         "Keys": {
+          "ShouldRotate": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
           "_name": {
-            "Value": "\u0022Droppable\u0022"
+            "Value": "\u0022Physics\u0022"
           },
           "_tags": {
             "Value": "[]"
           }
         }
+      },
+      {
+        "Guid": "7088ed23-68b4-4b25-926c-393482a9909a",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "75"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "125"
+          },
+          "ExplosionForceMultiplier": {
+            "Type": "Single",
+            "Value": "10"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "5"
+          },
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Explosive\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {
-      "ExplosionRadius": {
-        "Type": "Single",
-        "Value": "75"
-      },
-      "MaxExplosionDamage": {
-        "Type": "Single",
-        "Value": "125"
-      },
-      "ExplosionForceMultiplier": {
-        "Type": "Single",
-        "Value": "10"
-      },
-      "ExplodeAfter": {
-        "Type": "Single",
-        "Value": "5"
-      },
       "ShouldUseModelCollision": {
         "Type": "Boolean",
         "Value": "true"
       },
-      "ExplosiveCollisionRadius": {
+      "CollisionRadius": {
         "Type": "Single",
         "Value": "0"
-      },
-      "UseCustomPhysics": {
-        "Type": "Boolean",
-        "Value": "false"
-      },
-      "ShouldRotate": {
-        "Type": "Boolean",
-        "Value": "false"
-      },
-      "ShouldBounce": {
-        "Type": "Boolean",
-        "Value": "false"
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
         "Value": "false"
       },
-      "ExplosionReaction": {
-        "Type": "ExplosiveReaction",
-        "Value": "\u0022Explosion\u0022"
+      "IsDroppable": {
+        "Type": "Boolean",
+        "Value": "true"
       },
       "Model": {
         "Type": "Model",
         "Value": "\u0022models/weapons/dynamite/dynamite_projectile.vmdl\u0022"
       },
-      "ExplosionSound": {
-        "Type": "String",
-        "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
-      },
       "_name": {
-        "Value": "\u0022Dynamite Explosive\u0022"
+        "Value": "\u0022Dynamite Projectile\u0022"
       },
       "_localposition": {
         "Value": "\u00220,0,0\u0022"
@@ -86,11 +92,7 @@
         "Value": "1"
       },
       "_tags": {
-        "Value": "\u0022explosive\u0022"
-      },
-      "PrismModel": {
-        "Type": "Boolean",
-        "Value": "false"
+        "Value": "\u0022gadget\u0022"
       }
     }
   }

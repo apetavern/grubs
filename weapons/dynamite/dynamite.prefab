@@ -3,51 +3,49 @@
   "Name": null,
   "Description": null,
   "Root": {
-    "Guid": "fe13338a-b59b-4fd1-8a8e-ef8be31564f2",
+    "Guid": "f4f8d4ac-dc48-407c-b547-f42213cb032d",
     "Class": "Weapon",
     "Entities": [],
     "Components": [
       {
-        "Guid": "e7bac43e-7170-4348-8830-a8650b1dec4f",
-        "Class": "ExplosiveWeaponComponent",
+        "Guid": "0513f912-2c74-4888-80cc-6b2bf7cdb319",
+        "Class": "GadgetWeaponComponent",
         "Keys": {
-          "ExplosivePrefabPath": {
+          "GadgetPrefabPath": {
             "Type": "String",
             "Value": "\u0022weapons/dynamite/projectile.prefab\u0022"
           },
           "_name": {
-            "Value": "\u0022Explosive Weapon Component\u0022"
+            "Value": "\u0022Gadget\u0022"
           },
-          "_tags": {
-            "Value": "[]"
-          }
+          "_tags": {}
         }
       }
     ],
     "Keys": {
       "Charges": {
         "Type": "Int32",
-        "Value": "1"
+        "Value": "90"
       },
       "ShowReticle": {
-        "Type": "Boolean",
-        "Value": "false"
-      },
-      "ClampAim": {
-        "Type": "Boolean",
-        "Value": "false"
-      },
-      "DefaultAmmoAmount": {
-        "Type": "Int32",
-        "Value": "2"
-      },
-      "AllowMovement": {
         "Type": "Boolean",
         "Value": "false"
       },
       "FiringType": {
         "Type": "FiringType",
         "Value": "\u0022Instant\u0022"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "90"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
       },
       "HoldPose": {
         "Type": "HoldPose",
