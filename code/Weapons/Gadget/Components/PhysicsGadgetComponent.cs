@@ -3,7 +3,7 @@ namespace Grubs;
 [Prefab]
 public partial class PhysicsGadgetComponent : GadgetComponent
 {
-	[Prefab]
+	[Prefab, Net]
 	public bool ShouldRotate { get; set; } = true;
 
 	public override void Simulate( IClient client )
