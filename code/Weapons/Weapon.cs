@@ -93,13 +93,16 @@ public partial class Weapon : AnimatedEntity
 		SetParent( grub, true );
 		Owner = grub;
 
-		if ( FiringType is FiringType.Cursor )
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{
-			SetPointerEvents( To.Single( Grub ), true );
+			component.OnDeploy();
 		}
+
+		if ( FiringType is FiringType.Cursor )
+			SetPointerEvents( To.Single( Grub ), true );
 	}
 
-	public void OnHolster()
+	public void Holster()
 	{
 		EnableDrawing = false;
 		CurrentUses = 0;
@@ -108,17 +111,16 @@ public partial class Weapon : AnimatedEntity
 			Ammo--;
 
 		HasFired = false;
+
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{
-			component.IsFiring = false;
+			component.OnHolster();
 		}
 
 		Grub.SetHatVisible( true );
 
 		if ( FiringType is FiringType.Cursor )
-		{
 			SetPointerEvents( To.Single( Grub ), false );
-		}
 	}
 
 	public bool IsFiring()

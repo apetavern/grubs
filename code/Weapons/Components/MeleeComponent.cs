@@ -24,11 +24,6 @@ public partial class MeleeComponent : WeaponComponent
 	[Prefab, ResourceType( "sound" )]
 	public string ImpactSound { get; set; }
 
-	public override bool ShouldStart()
-	{
-		return Grub.IsTurn && Grub.Controller.IsGrounded;
-	}
-
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );

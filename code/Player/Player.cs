@@ -146,7 +146,7 @@ public partial class Player : Entity
 
 		Inventory.ActiveWeapon.SetPointerEvents( To.Single( this ), false );
 
-		Inventory.UnsetActiveWeapon();
+		ActiveGrub.ActiveWeapon.Holster();
 	}
 
 	public void AddExplosive( Explosive explosive )

@@ -15,9 +15,19 @@ public partial class BuildComponent : WeaponComponent
 	[Net, Predicted]
 	public float RotationAngle { get; set; }
 
-	public override bool ShouldStart()
+	public override void OnDeploy()
 	{
-		return Grub.IsTurn && Grub.Controller.IsGrounded;
+		if ( !Game.IsClient )
+			return;
+
+		GirderPreview = new ModelEntity( "models/tools/girders/girderpreview.vmdl" );
+		GirderPreview.SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		GirderPreview.Owner = Grub;
+	}
+
+	public override void OnHolster()
+	{
+		DeleteGirderPreview();
 	}
 
 	public override void Simulate( IClient client )
@@ -28,7 +38,7 @@ public partial class BuildComponent : WeaponComponent
 
 		if ( Game.IsClient && !IsFiring && !Weapon.HasFired )
 		{
-			if ( GirderPreview != null && GirderPreview.IsValid )
+			if ( GirderPreview.IsValid() )
 			{
 				GirderPreview.Position = Grub.Player.MousePosition;
 				GirderPreview.Rotation = Rotation.Identity * new Angles( RotationAngle, 0, 0 ).ToRotation();
@@ -45,12 +55,6 @@ public partial class BuildComponent : WeaponComponent
 					GirderPreview.RenderColor = Color.Green;
 				}
 			}
-			else
-			{
-				GirderPreview = new ModelEntity( "models/tools/girders/girderpreview.vmdl" );
-				GirderPreview.SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
-				GirderPreview.Owner = Grub;
-			}
 		}
 
 		if ( IsFiring )
@@ -62,22 +66,18 @@ public partial class BuildComponent : WeaponComponent
 	public override void FireCursor()
 	{
 		IsFiring = false;
-
-		if ( GirderPreview.IsValid() )
-		{
-			GirderPreview.Delete();
-			Grub.Player.GrubsCamera.DistanceScrollRate = 32f;
-		}
-
 		GamemodeSystem.Instance.GameWorld.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
-
 		FireFinished();
 	}
 
 	public override void FireFinished()
 	{
+		DeleteGirderPreview();
 		base.FireFinished();
+	}
 
+	private void DeleteGirderPreview()
+	{
 		if ( GirderPreview.IsValid() )
 		{
 			GirderPreview.Delete();
