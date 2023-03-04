@@ -30,6 +30,42 @@
             "Value": "0"
           }
         }
+      },
+      {
+        "Guid": "105b730c-bc9f-4ce2-bf23-d4edb4919185",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "75"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "100"
+          },
+          "ExplosionForceMultiplier": {
+            "Type": "Single",
+            "Value": "10"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "5"
+          },
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Explosive\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
       }
     ],
     "Keys": {

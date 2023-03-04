@@ -18,14 +18,16 @@
           "_name": {
             "Value": "\u0022Gadget\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
     "Keys": {
       "Charges": {
         "Type": "Int32",
-        "Value": "90"
+        "Value": "1"
       },
       "ShowReticle": {
         "Type": "Boolean",
@@ -37,7 +39,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "90"
+        "Value": "2"
       },
       "AllowMovement": {
         "Type": "Boolean",
