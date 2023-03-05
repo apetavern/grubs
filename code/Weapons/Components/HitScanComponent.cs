@@ -73,7 +73,7 @@ public partial class HitScanComponent : WeaponComponent
 		// Setup start and end positions from muzzle if possible.
 		// Otherwise, use Weapon position and Grub.EyeRotation.
 		var muzzle = Weapon.GetAttachment( "muzzle" );
-		var startPos = muzzle is not null ? muzzle.Value.Position : Weapon.Position;
+		var startPos = Weapon.GetStartPosition();
 		var endPos = muzzle is not null
 			? startPos + muzzle.Value.Rotation.Forward * TraceDistance + (Vector3.Random * TraceSpread)
 			: startPos + Grub.EyeRotation.Forward * TraceDistance + (Vector3.Random * TraceSpread);

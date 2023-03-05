@@ -43,8 +43,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		if ( Input.Down( InputButton.PrimaryAttack ) && Weapon.FiringType is FiringType.Charged )
 		{
 			ChargeParticles ??= Particles.Create( "particles/weaponcharge/weaponcharge.vpcf" );
-			ChargeParticles?.SetPosition( 0, GetMuzzlePosition() );
-			ChargeParticles?.SetPosition( 1, GetMuzzlePosition() + GetMuzzleForward() * 80f );
+			ChargeParticles?.SetPosition( 0, Weapon.GetMuzzlePosition() );
+			ChargeParticles?.SetPosition( 1, Weapon.GetMuzzlePosition() + Weapon.GetMuzzleForward() * 80f );
 			ChargeParticles?.Set( "Alpha", 100f );
 			ChargeParticles?.Set( "Speed", 50f );
 
@@ -83,22 +83,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			default:
 				throw new NotImplementedException();
 		}
-	}
-
-	public Vector3 GetMuzzlePosition()
-	{
-		var muzzle = Weapon.GetAttachment( "muzzle" );
-		if ( muzzle is null )
-			return Grub.EyePosition;
-		return muzzle.Value.Position;
-	}
-
-	public Vector3 GetMuzzleForward()
-	{
-		var muzzle = Weapon.GetAttachment( "muzzle" );
-		if ( muzzle is null )
-			return Grub.EyeRotation.Forward * Grub.Facing;
-		return muzzle.Value.Rotation.Forward;
 	}
 
 	public virtual void FireInstant() { }

@@ -12,12 +12,14 @@ public class ArcTrace
 	public Vector3 StartPos { get; set; }
 	public Vector3 EndPos { get; set; }
 	private int SegmentCount { get; set; } = 80;
-	private Entity Owner { get; set; }
+	private Grub Owner { get; set; }
+	private Gadget Gadget { get; set; }
 
-	public ArcTrace( Entity fromGrub, Vector3 startPos )
+	public ArcTrace( Grub fromGrub, Gadget gadget, Vector3 startPos )
 	{
 		StartPos = startPos;
 		Owner = fromGrub;
+		Gadget = gadget;
 	}
 
 	/// <summary>
@@ -38,7 +40,7 @@ public class ArcTrace
 			from = position;
 			segment.EndPos = from;
 
-			var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Ignore( Owner ).Radius( 2f ).Run();
+			var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Ignore( Owner ).Ignore( Gadget ).Radius( 2f ).Run();
 
 			if ( tr.Hit )
 			{
@@ -84,6 +86,7 @@ public class ArcTrace
 
 			var tr = Trace.Ray( segment.StartPos, segment.EndPos )
 				.Ignore( Owner )
+				.Ignore( Gadget )
 				.Radius( 2f )
 				.Run();
 

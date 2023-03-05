@@ -37,7 +37,7 @@ public partial class Gadget : AnimatedEntity
 		Owner = grub;
 		grub.Player.Gadgets.Add( this );
 
-		Position = (Grub.EyePosition + (Grub.Facing * 20f)).WithY( 0 );
+		Position = weapon.GetStartPosition( true );
 
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{
