@@ -11,7 +11,8 @@ public partial class Drop : ModelEntity
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		EnableTouch = true;
 		EnableAllCollisions = true;
-		UsePhysicsCollision = true;
+
+		Tags.Add( "trigger" );
 	}
 
 	public override void Simulate( IClient client )
@@ -24,7 +25,13 @@ public partial class Drop : ModelEntity
 
 	public override void StartTouch( Entity other )
 	{
-		Log.Info( $"Touched by {other}" );
+		if ( Game.IsClient )
+			return;
+
+		foreach ( var component in Components.GetAll<DropComponent>() )
+		{
+			component.OnTouch( other );
+		}
 	}
 
 	public static IEnumerable<Prefab> GetAllDropPrefabs()
@@ -36,17 +43,14 @@ public partial class Drop : ModelEntity
 	[ConCmd.Admin( "gr_spawn_drop" )]
 	public static void SpawnDrop()
 	{
-		foreach ( var prefab in GetAllDropPrefabs() )
-		{
-			if ( PrefabLibrary.TrySpawn<Drop>( prefab.ResourcePath, out var drop ) )
-			{
-				drop.Position = new Vector3( 0, 0, 0 );
-				var player = Game.Clients.First().Pawn as Player;
-				player?.Drops.Add( drop );
-				drop.Owner = player;
-			}
-
+		var prefabs = GetAllDropPrefabs().ToList();
+		var prefab = prefabs.ElementAt( Game.Random.Int( prefabs.Count - 1 ) );
+		if ( !PrefabLibrary.TrySpawn<Drop>( prefab.ResourcePath, out var drop ) )
 			return;
-		}
+
+		drop.Position = new Vector3( 0, 0, 0 );
+		var player = Game.Clients.First().Pawn as Player;
+		player?.Drops.Add( drop );
+		drop.Owner = player;
 	}
 }

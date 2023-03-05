@@ -10,10 +10,20 @@ public class GrubDamageManager
 	[GrubsEvent.Grub.Damaged]
 	public void CreateDamageNumber( int grubNetworkIdent )
 	{
-		var ent = Entity.FindByIndex( grubNetworkIdent );
-		if ( ent is not Grub grub )
-			return;
-
+		var grub = GetGrubByNetworkIndex( grubNetworkIdent );
 		_ = new DamageNumber( grub, grub.TotalDamageTaken );
+	}
+
+	[Event( "grub.healed" )]
+	public void CreateDamageNumber( int grubNetworkIdent, int healAmount )
+	{
+		var grub = GetGrubByNetworkIndex( grubNetworkIdent );
+		_ = new DamageNumber( grub, -healAmount );
+	}
+
+	private Grub GetGrubByNetworkIndex( int netIndex )
+	{
+		var ent = Entity.FindByIndex( netIndex );
+		return ent is not Grub grub ? null : grub;
 	}
 }

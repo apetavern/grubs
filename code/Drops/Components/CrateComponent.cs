@@ -1,7 +1,7 @@
 ﻿namespace Grubs;
 
 [Prefab]
-public class CrateComponent : DropComponent
+public partial class CrateComponent : DropComponent
 {
 	[Prefab]
 	public CrateType CrateType { get; set; }
@@ -37,6 +37,35 @@ public class CrateComponent : DropComponent
 
 		Drop.Position = move.Position;
 		Drop.Velocity = move.Velocity;
+	}
+
+	public override void OnTouch( Entity other )
+	{
+		if ( other is not Grub grub )
+			return;
+
+		switch ( CrateType )
+		{
+			case CrateType.Weapons:
+				Drop.Delete();
+				break;
+			case CrateType.Tools:
+				Drop.Delete();
+				break;
+			case CrateType.Health:
+				grub.Health += 25;
+				HealGrubEventClient( To.Everyone, grub, 25 );
+				Drop.Delete();
+				break;
+			default:
+				return;
+		}
+	}
+
+	[ClientRpc]
+	public void HealGrubEventClient( Grub grub, int healAmount )
+	{
+		Event.Run( "grub.healed", grub.NetworkIdent, healAmount );
 	}
 }
 
