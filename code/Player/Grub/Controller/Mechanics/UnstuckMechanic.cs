@@ -2,8 +2,12 @@ namespace Grubs;
 
 public class UnstuckMechanic : ControllerMechanic
 {
-	protected override bool ShouldStart() => true;
 	private int _stuckTries = 0;
+
+	protected override bool ShouldStart()
+	{
+		return Grub.LifeState != LifeState.Dead;
+	}
 
 	protected override void Simulate()
 	{
