@@ -3,16 +3,15 @@ namespace Grubs;
 [Prefab, Category( "Drops" )]
 public partial class Drop : ModelEntity
 {
-	[Prefab] public float Size { get; } = 12f;
-
-	public Drop()
-	{
-		Transmit = TransmitType.Always;
-	}
+	[Prefab, Net]
+	public float Size { get; set; } = 16f;
 
 	public override void Spawn()
 	{
-		Log.Info( "Spawning Drop" );
+		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		EnableTouch = true;
+		EnableAllCollisions = true;
+		UsePhysicsCollision = true;
 	}
 
 	public override void Simulate( IClient client )
@@ -22,13 +21,16 @@ public partial class Drop : ModelEntity
 			component.Simulate( client );
 		}
 	}
-	
-	
+
+	public override void StartTouch( Entity other )
+	{
+		Log.Info( $"Touched by {other}" );
+	}
 
 	public static IEnumerable<Prefab> GetAllDropPrefabs()
 	{
 		return ResourceLibrary.GetAll<Prefab>()
-			.Where( x => TypeLibrary.GetType( x.Root.Class ).TargetType == typeof(Drop) );
+			.Where( x => TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Drop ) );
 	}
 
 	[ConCmd.Admin( "gr_spawn_drop" )]
@@ -43,6 +45,8 @@ public partial class Drop : ModelEntity
 				player?.Drops.Add( drop );
 				drop.Owner = player;
 			}
+
+			return;
 		}
 	}
 }

@@ -50,7 +50,9 @@
           "_name": {
             "Value": "\u0022Weapons\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -73,6 +75,10 @@
       },
       "_tags": {
         "Value": "\u0022crates drops\u0022"
+      },
+      "Size": {
+        "Type": "Single",
+        "Value": "32"
       }
     }
   }
