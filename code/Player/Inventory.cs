@@ -114,6 +114,7 @@ public partial class Inventory : EntityComponent<Player>
 		foreach ( var weapon in player.Inventory.Weapons )
 		{
 			weapon.Ammo = -1;
+			weapon.Charges = int.MaxValue;
 		}
 	}
 }
