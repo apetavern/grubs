@@ -106,7 +106,7 @@
       },
       "TrailParticle": {
         "Type": "String",
-        "Value": "\u0022particles/smoke_trail.vpcf\u0022"
+        "Value": "\u0022particles/fuse/fuse_spark.vpcf\u0022"
       }
     }
   }
