@@ -8,7 +8,7 @@ public static partial class GrubsEvent
 
 		/// <summary>
 		/// Occurs if the pointer event changes.
-		/// <para><see cref="bool"/> If the pointer events are enabled </para>
+		/// <para><see cref="bool"/>If the pointer events are enabled</para>
 		/// </summary>
 		public class PointerEventChangedAttribute : EventAttribute
 		{

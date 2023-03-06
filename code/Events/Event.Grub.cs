@@ -8,7 +8,7 @@ public static partial class GrubsEvent
 
 		/// <summary>
 		/// Occurs when a grub is damaged.
-		/// <para><see cref="int"/> The network ident of the damaged grub</para>
+		/// <para><see cref="int"/>The network ident of the damaged grub</para>
 		/// </summary>
 		public class DamagedAttribute : EventAttribute
 		{

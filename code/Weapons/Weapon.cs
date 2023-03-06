@@ -103,7 +103,6 @@ public partial class Weapon : AnimatedEntity
 
 	public void Holster( Grub _ )
 	{
-		SetParent( null );
 		EnableDrawing = false;
 		CurrentUses = 0;
 
