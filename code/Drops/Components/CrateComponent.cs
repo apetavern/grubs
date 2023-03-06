@@ -59,7 +59,7 @@ public partial class CrateComponent : DropComponent
 		{
 			case CrateType.Weapons:
 				var weaponResourcePath = CrateDrops.GetRandomWeaponFromCrate();
-				Log.Info( weaponResourcePath );
+				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some weaponized goods." );
 				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
 				Drop.Delete();
 				break;
@@ -68,6 +68,7 @@ public partial class CrateComponent : DropComponent
 				break;
 			case CrateType.Health:
 				grub.Health += 25;
+				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} received medical attention." );
 				HealGrubEventClient( To.Everyone, grub, 25 );
 				Drop.Delete();
 				break;
