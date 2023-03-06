@@ -40,7 +40,12 @@ public class ArcTrace
 			from = position;
 			segment.EndPos = from;
 
-			var tr = Trace.Ray( segment.StartPos, segment.EndPos ).Ignore( Owner ).Ignore( Gadget ).Radius( 2f ).Run();
+			var tr = Trace.Ray( segment.StartPos, segment.EndPos )
+				.Ignore( Owner )
+				.Ignore( Gadget )
+				.WithoutTags( "dead" )
+				.Radius( 2f )
+				.Run();
 
 			if ( tr.Hit )
 			{
@@ -87,6 +92,7 @@ public class ArcTrace
 			var tr = Trace.Ray( segment.StartPos, segment.EndPos )
 				.Ignore( Owner )
 				.Ignore( Gadget )
+				.WithoutTags( "dead" )
 				.Radius( 2f )
 				.Run();
 
