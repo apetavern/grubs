@@ -98,7 +98,7 @@ public partial class Weapon : AnimatedEntity
 		}
 
 		if ( FiringType is FiringType.Cursor )
-			SetPointerEvents( To.Single( Grub ), true );
+			SetPointerEvents( true );
 	}
 
 	public void Holster( Grub grub )
@@ -120,7 +120,7 @@ public partial class Weapon : AnimatedEntity
 		Grub.SetHatVisible( true );
 
 		if ( FiringType is FiringType.Cursor )
-			SetPointerEvents( To.Single( Grub ), false );
+			SetPointerEvents( false );
 	}
 
 	public bool IsFiring()
@@ -177,6 +177,14 @@ public partial class Weapon : AnimatedEntity
 		return false;
 	}
 
+	private void SetPointerEvents( bool enabled )
+	{
+		if ( enabled )
+			Event.Run( "pointer.enabled" );
+		else
+			Event.Run( "pointer.disabled" );
+	}
+
 	/// <summary>
 	/// Spawns and returns a Weapon from the Prefab Library.
 	/// </summary>
@@ -206,14 +214,5 @@ public partial class Weapon : AnimatedEntity
 	public void PlayScreenSound( string sound )
 	{
 		this.SoundFromScreen( sound );
-	}
-
-	[ClientRpc]
-	public void SetPointerEvents( bool enabled )
-	{
-		if ( enabled )
-			Event.Run( "pointer.enabled" );
-		else
-			Event.Run( "pointer.disabled" );
 	}
 }
