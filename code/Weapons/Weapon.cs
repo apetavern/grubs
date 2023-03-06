@@ -88,9 +88,8 @@ public partial class Weapon : AnimatedEntity
 
 	public void Deploy( Grub grub )
 	{
-		EnableDrawing = true;
-
 		SetParent( grub, true );
+		EnableDrawing = true;
 		Owner = grub;
 
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
@@ -104,6 +103,7 @@ public partial class Weapon : AnimatedEntity
 
 	public void Holster( Grub grub )
 	{
+		SetParent( null );
 		EnableDrawing = false;
 		CurrentUses = 0;
 
