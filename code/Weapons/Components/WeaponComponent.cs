@@ -29,6 +29,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public virtual void OnHolster()
 	{
+		ChargeParticles?.Destroy( true );
+		ChargeParticles = null;
+
 		IsFiring = false;
 	}
 

@@ -112,6 +112,8 @@ public partial class Weapon : AnimatedEntity
 
 		HasFired = false;
 
+		Log.Info( Game.IsClient );
+
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{
 			component.OnHolster();
@@ -121,6 +123,14 @@ public partial class Weapon : AnimatedEntity
 
 		if ( FiringType is FiringType.Cursor )
 			SetPointerEvents( false );
+	}
+
+	public void Fire()
+	{
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			component.Fire();
+		}
 	}
 
 	public bool IsFiring()

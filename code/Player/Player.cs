@@ -141,6 +141,9 @@ public partial class Player : Entity
 		if ( !ActiveGrub.IsValid() || !ActiveGrub.ActiveWeapon.IsValid() )
 			return;
 
+		if ( Inventory.ActiveWeapon.IsCharging() )
+			Inventory.ActiveWeapon.Fire();
+
 		Inventory.SetActiveWeapon( null, true );
 	}
 

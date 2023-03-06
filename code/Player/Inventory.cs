@@ -11,8 +11,7 @@ public partial class Inventory : EntityComponent<Player>
 	[Net, Predicted]
 	public Weapon LastActiveWeapon { get; private set; }
 
-	[Net, Predicted]
-	private bool RequestWeaponSwap { get; set; } = false;
+	private Weapon _lastSwappedWeapon { get; set; }
 
 	public void Simulate( IClient client )
 	{
@@ -22,11 +21,12 @@ public partial class Inventory : EntityComponent<Player>
 			Entity.ActiveWeaponInput = null;
 		}
 
-		if ( RequestWeaponSwap )
+		if ( _lastSwappedWeapon != ActiveWeapon )
 		{
 			LastActiveWeapon?.Holster( Entity.ActiveGrub );
 			ActiveWeapon?.Deploy( Entity.ActiveGrub );
-			RequestWeaponSwap = false;
+
+			_lastSwappedWeapon = ActiveWeapon;
 		}
 
 		ActiveWeapon?.Simulate( client );
@@ -68,7 +68,6 @@ public partial class Inventory : EntityComponent<Player>
 
 		LastActiveWeapon = ActiveWeapon;
 		ActiveWeapon = weapon;
-		RequestWeaponSwap = true;
 	}
 
 	public bool IsCarrying( Weapon weapon )
