@@ -101,7 +101,7 @@ public partial class Weapon : AnimatedEntity
 			Event.Run( GrubsEvent.Player.PointerEventChanged, true );
 	}
 
-	public void Holster( Grub grub )
+	public void Holster( Grub _ )
 	{
 		SetParent( null );
 		EnableDrawing = false;
@@ -111,8 +111,6 @@ public partial class Weapon : AnimatedEntity
 			Ammo--;
 
 		HasFired = false;
-
-		Log.Info( Game.IsClient );
 
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{
