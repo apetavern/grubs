@@ -185,14 +185,6 @@ public partial class Weapon : AnimatedEntity
 		return false;
 	}
 
-	private void SetPointerEvents( bool enabled )
-	{
-		if ( enabled )
-			Event.Run( "pointer.enabled" );
-		else
-			Event.Run( "pointer.disabled" );
-	}
-
 	/// <summary>
 	/// Spawns and returns a Weapon from the Prefab Library.
 	/// </summary>
