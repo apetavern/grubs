@@ -11,6 +11,27 @@ public partial class Inventory : EntityComponent<Player>
 	[Net, Predicted]
 	public Weapon LastActiveWeapon { get; private set; }
 
+	private Weapon _lastSwappedWeapon { get; set; }
+
+	public void Simulate( IClient client )
+	{
+		if ( Entity.ActiveWeaponInput is Weapon weapon )
+		{
+			SetActiveWeapon( weapon );
+			Entity.ActiveWeaponInput = null;
+		}
+
+		if ( _lastSwappedWeapon != ActiveWeapon )
+		{
+			LastActiveWeapon?.Holster( Entity.ActiveGrub );
+			ActiveWeapon?.Deploy( Entity.ActiveGrub );
+
+			_lastSwappedWeapon = ActiveWeapon;
+		}
+
+		ActiveWeapon?.Simulate( client );
+	}
+
 	public void Add( Weapon weapon, bool makeActive = false )
 	{
 		if ( !weapon.IsValid() )
@@ -45,11 +66,8 @@ public partial class Inventory : EntityComponent<Player>
 		if ( ActiveWeapon.IsValid() && ActiveWeapon.HasFired && !forced )
 			return;
 
-		if ( ActiveWeapon.IsValid() )
-			ActiveWeapon.Holster();
-
+		LastActiveWeapon = ActiveWeapon;
 		ActiveWeapon = weapon;
-		ActiveWeapon?.OnDeploy( Entity.ActiveGrub );
 	}
 
 	public bool IsCarrying( Weapon weapon )
@@ -60,17 +78,6 @@ public partial class Inventory : EntityComponent<Player>
 	public bool HasAmmo( int index )
 	{
 		return Weapons[index].Ammo != 0;
-	}
-
-	public void Simulate( IClient client )
-	{
-		if ( Entity.ActiveWeaponInput is Weapon weapon )
-		{
-			SetActiveWeapon( weapon );
-			Entity.ActiveWeaponInput = null;
-		}
-
-		ActiveWeapon?.Simulate( client );
 	}
 
 	public void Clear()
@@ -101,7 +108,6 @@ public partial class Inventory : EntityComponent<Player>
 			return;
 
 		var weapon = player.Inventory.Weapons[weaponIndex];
-		player.Inventory.LastActiveWeapon = weapon;
 		player.Inventory.SetActiveWeapon( weapon );
 	}
 

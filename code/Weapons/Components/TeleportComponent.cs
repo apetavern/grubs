@@ -26,7 +26,6 @@ public partial class TeleportComponent : WeaponComponent
 	{
 		base.FireFinished();
 
-		if ( Game.IsClient )
-			Event.Run( "pointer.disabled" );
+		Event.Run( GrubsEvent.Player.PointerEventChanged, false );
 	}
 }

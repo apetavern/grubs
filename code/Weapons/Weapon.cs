@@ -86,11 +86,10 @@ public partial class Weapon : AnimatedEntity
 		DetermineWeaponVisibility();
 	}
 
-	public void OnDeploy( Grub grub )
+	public void Deploy( Grub grub )
 	{
-		EnableDrawing = true;
-
 		SetParent( grub, true );
+		EnableDrawing = true;
 		Owner = grub;
 
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
@@ -99,10 +98,10 @@ public partial class Weapon : AnimatedEntity
 		}
 
 		if ( FiringType is FiringType.Cursor )
-			SetPointerEvents( To.Single( Grub ), true );
+			Event.Run( GrubsEvent.Player.PointerEventChanged, true );
 	}
 
-	public void Holster()
+	public void Holster( Grub _ )
 	{
 		EnableDrawing = false;
 		CurrentUses = 0;
@@ -120,7 +119,15 @@ public partial class Weapon : AnimatedEntity
 		Grub.SetHatVisible( true );
 
 		if ( FiringType is FiringType.Cursor )
-			SetPointerEvents( To.Single( Grub ), false );
+			Event.Run( GrubsEvent.Player.PointerEventChanged, false );
+	}
+
+	public void Fire()
+	{
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			component.Fire();
+		}
 	}
 
 	public bool IsFiring()
@@ -238,14 +245,5 @@ public partial class Weapon : AnimatedEntity
 	public void PlayScreenSound( string sound )
 	{
 		this.SoundFromScreen( sound );
-	}
-
-	[ClientRpc]
-	public void SetPointerEvents( bool enabled )
-	{
-		if ( enabled )
-			Event.Run( "pointer.enabled" );
-		else
-			Event.Run( "pointer.disabled" );
 	}
 }

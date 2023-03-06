@@ -211,7 +211,7 @@ public partial class FreeForAll : Gamemode
 	[ClientRpc]
 	public void DamageGrubEventClient( Grub grub )
 	{
-		Event.Run( "grub.damaged", grub.NetworkIdent );
+		Event.Run( GrubsEvent.Grub.Damaged, grub.NetworkIdent );
 	}
 
 	/// <summary>

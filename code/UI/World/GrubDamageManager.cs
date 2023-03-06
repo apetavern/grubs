@@ -7,7 +7,7 @@ public class GrubDamageManager
 		Event.Register( this );
 	}
 
-	[Event( "grub.damaged" )]
+	[GrubsEvent.Grub.Damaged]
 	public void CreateDamageNumber( int grubNetworkIdent )
 	{
 		var ent = Entity.FindByIndex( grubNetworkIdent );

@@ -84,7 +84,6 @@ public partial class BuildComponent : WeaponComponent
 			Grub.Player.GrubsCamera.DistanceScrollRate = 32f;
 		}
 
-		if ( Game.IsClient )
-			Event.Run( "pointer.disabled" );
+		Event.Run( GrubsEvent.Player.PointerEventChanged, false );
 	}
 }
