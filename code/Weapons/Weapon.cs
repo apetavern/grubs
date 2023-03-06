@@ -98,7 +98,7 @@ public partial class Weapon : AnimatedEntity
 		}
 
 		if ( FiringType is FiringType.Cursor )
-			SetPointerEvents( true );
+			Event.Run( GrubsEvent.Player.PointerEventChanged, true );
 	}
 
 	public void Holster( Grub grub )
@@ -122,7 +122,7 @@ public partial class Weapon : AnimatedEntity
 		Grub.SetHatVisible( true );
 
 		if ( FiringType is FiringType.Cursor )
-			SetPointerEvents( false );
+			Event.Run( GrubsEvent.Player.PointerEventChanged, false );
 	}
 
 	public void Fire()

@@ -7,17 +7,9 @@ public class EnablePointerEvents : Panel
 		Event.Register( this );
 	}
 
-	[Event( "pointer.enabled" )]
-	public void EnablePointer()
+	[GrubsEvent.Player.PointerEventChanged]
+	public void OnPointerEventChanged( bool enabled )
 	{
-		Log.Info( $"Enabling pointer events for {Game.LocalClient.Name}" );
-		Style.PointerEvents = PointerEvents.All;
-	}
-
-	[Event( "pointer.disabled" )]
-	public void DisablePointer()
-	{
-		Log.Info( $"Disabling pointer events for {Game.LocalClient.Name}" );
-		Style.PointerEvents = PointerEvents.None;
+		Style.PointerEvents = enabled ? PointerEvents.All : PointerEvents.None;
 	}
 }
