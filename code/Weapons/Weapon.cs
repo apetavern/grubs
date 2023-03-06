@@ -88,8 +88,6 @@ public partial class Weapon : AnimatedEntity
 
 	public void Deploy( Grub grub )
 	{
-		Log.Info( Game.IsServer );
-
 		EnableDrawing = true;
 
 		SetParent( grub, true );
@@ -104,10 +102,8 @@ public partial class Weapon : AnimatedEntity
 			SetPointerEvents( To.Single( Grub ), true );
 	}
 
-	public void Holster()
+	public void Holster( Grub grub )
 	{
-		// Log.Info( Game.IsServer );
-
 		EnableDrawing = false;
 		CurrentUses = 0;
 
