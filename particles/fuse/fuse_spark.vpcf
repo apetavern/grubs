@@ -729,8 +729,8 @@
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
-				m_flRandomMin = 0.5
-				m_flRandomMax = 1.0
+				m_flRandomMin = 2.0
+				m_flRandomMax = 5.0
 				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
 				m_flLOD0 = 0.0
 				m_flLOD1 = 0.0
@@ -1131,7 +1131,7 @@
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
 				m_NamedValue = ""
-				m_flLiteralValue = 3.0
+				m_flLiteralValue = 5.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -1172,7 +1172,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
-			m_hTexture = resource:"textures/particles/fire_a.vtex"
+			m_hTexture = resource:"particles/guntrace/guntrace.vtex"
 			m_flMaxLength = 20.0
 			m_flMinLength = 10.0
 			m_bBlendFramesSeq0 = false
