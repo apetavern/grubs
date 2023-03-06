@@ -91,6 +91,18 @@
       "Icon": {
         "Type": "String",
         "Value": "\u0022models/weapons/baseballbat/baseballbat.vmdl_c.png\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "3"
       }
     }
   }

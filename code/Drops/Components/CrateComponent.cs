@@ -8,6 +8,8 @@ public partial class CrateComponent : DropComponent
 
 	public override void Simulate( IClient client )
 	{
+		var shouldRotate = true;
+
 		var move = new MoveHelper( Drop.Position, Drop.Velocity );
 		move.Trace = move.Trace
 			.Ignore( Drop )
@@ -27,6 +29,7 @@ public partial class CrateComponent : DropComponent
 				return;
 
 			chute.SetAnimParameter( "landed", true );
+			shouldRotate = false;
 
 			if ( Game.IsServer )
 				chute.DeleteAsync( 0.3f );
@@ -37,6 +40,14 @@ public partial class CrateComponent : DropComponent
 
 		Drop.Position = move.Position;
 		Drop.Velocity = move.Velocity;
+
+		Drop.Rotation = Rotation.Slerp(
+			Drop.Rotation,
+			Rotation.Identity * new Angles(
+				shouldRotate
+					? MathF.Sin( Time.Now * 2f ) * 15f
+					: 0f, 0, 0 ).ToRotation(),
+			0.75f );
 	}
 
 	public override void OnTouch( Entity other )
@@ -47,6 +58,9 @@ public partial class CrateComponent : DropComponent
 		switch ( CrateType )
 		{
 			case CrateType.Weapons:
+				var weaponResourcePath = CrateDrops.GetRandomWeaponFromCrate();
+				Log.Info( weaponResourcePath );
+				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
 				Drop.Delete();
 				break;
 			case CrateType.Tools:

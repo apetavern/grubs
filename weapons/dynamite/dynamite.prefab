@@ -75,6 +75,10 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "1.5"
       }
     }
   }

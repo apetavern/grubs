@@ -50,6 +50,13 @@ public partial class Weapon : AnimatedEntity
 	public bool ClampAim { get; set; } = false;
 
 	/// <summary>
+	/// The chance of receiving this weapon in a crate.
+	/// A chance of zero means it will not spawn from a crate.
+	/// </summary>
+	[Prefab, Net]
+	public float DropChance { get; set; } = 1f;
+
+	/// <summary>
 	/// The amount of uses this weapon has.
 	/// </summary>
 	[Net]

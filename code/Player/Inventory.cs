@@ -40,7 +40,7 @@ public partial class Inventory : EntityComponent<Player>
 		if ( IsCarrying( weapon ) )
 		{
 			var existingWeapon = Weapons.FirstOrDefault(
-				item => item.GetType() == weapon.GetType() );
+				item => item.Name == weapon.Name );
 
 			if ( existingWeapon is not null && existingWeapon.Ammo != -1 )
 				existingWeapon.Ammo++;
@@ -53,6 +53,14 @@ public partial class Inventory : EntityComponent<Player>
 
 		if ( makeActive )
 			SetActiveWeapon( weapon );
+	}
+
+	public void AddByResourcePath( string weaponResourcePath, bool makeActive = false )
+	{
+		if ( !PrefabLibrary.TrySpawn<Weapon>( weaponResourcePath, out var weapon ) )
+			return;
+
+		Add( weapon, makeActive );
 	}
 
 	public void SetActiveWeapon( Weapon weapon, bool forced = false )
@@ -94,8 +102,15 @@ public partial class Inventory : EntityComponent<Player>
 			if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) )
 			{
 				Add( weapon );
+
+				// We are initializing our drop map here as we cannot access this information
+				// as we might a GameResource. Consider refactoring in the future.
+				if ( !CrateDrops.DropChancesPopulated )
+					CrateDrops.DropChances.TryAdd( prefab.ResourcePath, weapon.DropChance );
 			}
 		}
+
+		CrateDrops.DropChancesPopulated = true;
 	}
 
 	[ConCmd.Admin( "gr_set_weapon" )]

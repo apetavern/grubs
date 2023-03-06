@@ -12,6 +12,7 @@ public partial class FreeForAll : Gamemode
 		Playing,
 		GameOver
 	}
+
 	public override string GetGameStateLabel()
 	{
 		return CurrentState switch
@@ -206,6 +207,11 @@ public partial class FreeForAll : Gamemode
 		await GameTask.Delay( 1000 );
 
 		CameraTarget = null;
+	}
+
+	private async Task HandleCrateSpawns()
+	{
+
 	}
 
 	[ClientRpc]

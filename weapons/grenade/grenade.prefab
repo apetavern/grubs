@@ -18,7 +18,9 @@
           "_name": {
             "Value": "\u0022Projectile\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -73,6 +75,10 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "0"
       }
     }
   }

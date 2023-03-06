@@ -75,6 +75,10 @@
       "ClampAim": {
         "Type": "Boolean",
         "Value": "false"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "2"
       }
     }
   }
