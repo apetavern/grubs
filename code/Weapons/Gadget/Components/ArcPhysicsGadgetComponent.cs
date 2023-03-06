@@ -30,7 +30,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
 		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
 
-		var arcTrace = new ArcTrace( Grub, Grub.EyePosition );
+		var arcTrace = new ArcTrace( Grub, Gadget, weapon.GetStartPosition() );
 		Segments = ShouldBounce
 			? arcTrace.RunTowardsWithBounces( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, 0, MaxBounces )
 			: arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, 0f );

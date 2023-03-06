@@ -150,6 +150,38 @@ public partial class Weapon : AnimatedEntity
 		return Ammo != 0;
 	}
 
+	public Vector3 GetStartPosition( bool isDroppable = false )
+	{
+		if ( isDroppable )
+			return Position.WithY( 0 );
+
+		var muzzle = GetAttachment( "muzzle" );
+		if ( muzzle is null )
+			return Grub.EyePosition;
+
+		var tr = Trace.Ray( Grub.Controller.Hull.Center + Grub.Position, muzzle.Value.Position + muzzle.Value.Rotation.Forward )
+			.Ignore( this )
+			.Run();
+
+		return tr.EndPosition;
+	}
+
+	public Vector3 GetMuzzlePosition()
+	{
+		var muzzle = GetAttachment( "muzzle" );
+		if ( muzzle is null )
+			return Grub.EyePosition;
+		return muzzle.Value.Position;
+	}
+
+	public Vector3 GetMuzzleForward()
+	{
+		var muzzle = GetAttachment( "muzzle" );
+		if ( muzzle is null )
+			return Grub.EyeRotation.Forward * Grub.Facing;
+		return muzzle.Value.Rotation.Forward;
+	}
+
 	protected void SimulateComponents( IClient client )
 	{
 		foreach ( var component in Components.GetAll<WeaponComponent>() )

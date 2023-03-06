@@ -16,8 +16,8 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	{
 		if ( ShouldThrow )
 		{
-			Gadget.Position = Gadget.Position + (Grub.EyeRotation.Forward.Normal * Grub.Facing * 40f);
-			Gadget.Velocity = (Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ThrowSpeed).WithY( 0f );
+			Gadget.Position = weapon.GetStartPosition();
+			Gadget.Velocity = Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ThrowSpeed;
 		}
 	}
 
@@ -27,7 +27,7 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		Gadget.Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
-		helper.Trace = helper.Trace.Size( Gadget.CollisionBounds ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" ).Ignore( Gadget );
+		helper.Trace = helper.Trace.Size( Gadget.CollisionBounds ).Ignore( Grub ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" );
 		helper.TryMove( Time.Delta );
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
