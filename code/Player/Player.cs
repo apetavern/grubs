@@ -141,7 +141,6 @@ public partial class Player : Entity
 		if ( !ActiveGrub.IsValid() || !ActiveGrub.ActiveWeapon.IsValid() )
 			return;
 
-		Inventory.ActiveWeapon.SetPointerEvents( To.Single( this ), false );
 		Inventory.SetActiveWeapon( null, true );
 	}
 

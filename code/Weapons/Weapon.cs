@@ -86,8 +86,10 @@ public partial class Weapon : AnimatedEntity
 		DetermineWeaponVisibility();
 	}
 
-	public void OnDeploy( Grub grub )
+	public void Deploy( Grub grub )
 	{
+		Log.Info( Game.IsServer );
+
 		EnableDrawing = true;
 
 		SetParent( grub, true );
@@ -104,6 +106,8 @@ public partial class Weapon : AnimatedEntity
 
 	public void Holster()
 	{
+		// Log.Info( Game.IsServer );
+
 		EnableDrawing = false;
 		CurrentUses = 0;
 
