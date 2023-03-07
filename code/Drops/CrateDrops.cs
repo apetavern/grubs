@@ -1,6 +1,4 @@
-﻿using Sandbox;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 public static class CrateDrops
 {
