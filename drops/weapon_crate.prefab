@@ -5,39 +5,7 @@
   "Root": {
     "Guid": "666971bb-8f53-44da-a706-8670e45ebeaf",
     "Class": "Drop",
-    "Entities": [
-      {
-        "Guid": "233469b6-b785-4c7e-a116-bf7f403d26a3",
-        "Class": "animated_entity",
-        "Entities": [],
-        "Components": [],
-        "Keys": {
-          "_attachment": {
-            "Type": "String",
-            "Value": "\u0022_bonemerge\u0022"
-          },
-          "Model": {
-            "Type": "Model",
-            "Value": "\u0022models/crates/crate_parachute/crate_parachute.vmdl\u0022"
-          },
-          "_name": {
-            "Value": "\u0022Parachute\u0022"
-          },
-          "_localposition": {
-            "Value": "\u00220,0,0\u0022"
-          },
-          "_localrotation": {
-            "Value": "\u00220,0,0\u0022"
-          },
-          "_scale": {
-            "Value": "1"
-          },
-          "_tags": {
-            "Value": "\u0022parachute\u0022"
-          }
-        }
-      }
-    ],
+    "Entities": [],
     "Components": [
       {
         "Guid": "94834f7a-8ac6-476a-a647-af6f5ac17604",

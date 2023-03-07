@@ -164,8 +164,7 @@ public partial class FreeForAll : Gamemode
 		await GameTask.DelaySeconds( 1f );
 
 		await HandleGrubDeaths();
-
-		// TODO: Handle potential crate spawns.
+		await HandleCrateSpawns();
 
 		return CheckWinConditions();
 	}
@@ -211,7 +210,42 @@ public partial class FreeForAll : Gamemode
 
 	private async Task HandleCrateSpawns()
 	{
+		var player = Game.Clients.First().Pawn as Player;
 
+		var rand = Game.Random.Int( 100 );
+		if ( rand <= GrubsConfig.WeaponCrateChancePerTurn )
+		{
+			var drop = Drop.WeaponCrate;
+			
+			var spawned = await SetupDrop( drop, player );
+			if ( spawned )
+				TextChat.AddInfoChatEntry( $"A weapons crate has been spawned!" );
+			await GameTask.DelaySeconds( 1f );
+		}
+
+		rand = Game.Random.Int( 100 );
+		if ( rand <= GrubsConfig.HealthCrateChancePerTurn )
+		{
+			var drop = Drop.HealthCrate;
+			var spawned = await SetupDrop( drop, player );
+			if ( spawned )
+				TextChat.AddInfoChatEntry( $"A health crate has been spawned!" );
+			await GameTask.DelaySeconds( 1f );
+		}
+	}
+
+	private async ValueTask<bool> SetupDrop( Drop drop, Player player )
+	{
+		if ( drop is not null )
+		{
+			var spawnPos = GameWorld.FindSpawnLocation();
+			drop.Position = spawnPos;
+			drop.Owner = player;
+			player.Drops.Add( drop );
+			return true;
+		}
+
+		return false;
 	}
 
 	[ClientRpc]

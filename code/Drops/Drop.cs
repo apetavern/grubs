@@ -6,6 +6,10 @@ public partial class Drop : ModelEntity
 	[Prefab, Net]
 	public float Size { get; set; } = 16f;
 
+	public static Drop HealthCrate => SpawnDropOfType( "health_crate" );
+	public static Drop WeaponCrate => SpawnDropOfType( "weapon_crate" );
+	public static Drop ToolCrate => SpawnDropOfType( "tool_crate" );
+
 	public override void Spawn()
 	{
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
@@ -38,6 +42,18 @@ public partial class Drop : ModelEntity
 	{
 		return ResourceLibrary.GetAll<Prefab>()
 			.Where( x => TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Drop ) );
+	}
+
+	public static Drop SpawnDropOfType( string crateType )
+	{
+		var dropPrefab = GetAllDropPrefabs().FirstOrDefault( drop => drop.ResourceName == crateType );
+		if ( dropPrefab is null )
+			return null;
+
+		if ( !PrefabLibrary.TrySpawn<Drop>( dropPrefab.ResourcePath, out var drop ) )
+			return null;
+
+		return drop;
 	}
 
 	[ConCmd.Admin( "gr_spawn_drop" )]
