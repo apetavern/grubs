@@ -44,7 +44,7 @@ public static class GrubsConfig
 	/// The percent chance that a Tools Crate will spawn every turn.
 	/// </summary>
 	[ConVar.Replicated( "crate_tool_chance" )]
-	public static int ToolsCrateChancePerTurn { get; set; } = 5;
+	public static int ToolCrateChancePerTurn { get; set; } = 5;
 
 	/// <summary>
 	/// The percent chance that a Health Crate will spawn every turn.

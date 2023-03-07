@@ -228,6 +228,19 @@ public partial class FreeForAll : Gamemode
 		}
 
 		rand = Game.Random.Int( 100 );
+		if ( rand <= GrubsConfig.ToolCrateChancePerTurn )
+		{
+			var drop = Drop.ToolCrate;
+			var spawned = await SetupDrop( drop, player );
+			if ( spawned )
+			{
+				TextChat.AddInfoChatEntry( $"A tool crate has been spawned!" );
+				CameraTarget = drop;
+				await GameTask.DelaySeconds( 1f );
+			}
+		}
+
+		rand = Game.Random.Int( 100 );
 		if ( rand <= GrubsConfig.HealthCrateChancePerTurn )
 		{
 			var drop = Drop.HealthCrate;

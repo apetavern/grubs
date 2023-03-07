@@ -56,6 +56,9 @@ public partial class Weapon : AnimatedEntity
 	[Prefab, Net]
 	public float DropChance { get; set; } = 1f;
 
+	[Prefab, Net]
+	public WeaponType WeaponType { get; set; } = WeaponType.Weapon;
+
 	/// <summary>
 	/// The amount of uses this weapon has.
 	/// </summary>
@@ -253,4 +256,10 @@ public partial class Weapon : AnimatedEntity
 	{
 		this.SoundFromScreen( sound );
 	}
+}
+
+public enum WeaponType
+{
+	Weapon,
+	Tool
 }

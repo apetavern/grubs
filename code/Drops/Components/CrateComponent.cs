@@ -44,6 +44,9 @@ public partial class CrateComponent : DropComponent
 				Drop.Delete();
 				break;
 			case CrateType.Tools:
+				weaponResourcePath = CrateDrops.GetRandomToolFromCrate();
+				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up a tool." );
+				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
 				Drop.Delete();
 				break;
 			case CrateType.Health:

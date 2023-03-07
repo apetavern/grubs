@@ -75,6 +75,10 @@
       "DropChance": {
         "Type": "Single",
         "Value": "0"
+      },
+      "WeaponType": {
+        "Type": "WeaponType",
+        "Value": "\u0022Tool\u0022"
       }
     }
   }

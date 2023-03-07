@@ -105,8 +105,13 @@ public partial class Inventory : EntityComponent<Player>
 
 				// We are initializing our drop map here as we cannot access this information
 				// as we might a GameResource. Consider refactoring in the future.
-				if ( !CrateDrops.DropChancesPopulated )
-					CrateDrops.DropChances.TryAdd( prefab.ResourcePath, weapon.DropChance );
+				if ( CrateDrops.DropChancesPopulated )
+					break;
+
+				if ( weapon.WeaponType is WeaponType.Weapon )
+					CrateDrops.DropChancesWeapons.TryAdd( prefab.ResourcePath, weapon.DropChance );
+				else if ( weapon.WeaponType is WeaponType.Tool )
+					CrateDrops.DropChancesTools.TryAdd( prefab.ResourcePath, weapon.DropChance );
 			}
 		}
 
