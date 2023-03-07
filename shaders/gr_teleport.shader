@@ -6,7 +6,8 @@ HEADER
 
 FEATURES
 {
-    #include "common/features.hlsl"
+	#include "vr_common_features.fxc"
+	Feature( F_ADDITIVE_BLEND, 0..1, "Blending" );
 }
 
 COMMON
@@ -54,6 +55,9 @@ PS
 	#include "common/pixel.color.blending.hlsl"
 	#include "common/proceedural.hlsl"
 
+	float4 g_vColour < UiType( Color ); UiGroup( "Colour,1/Emission,1/0" ); Default4( 0.00, 222.99, 248.83, 1.00 ); >;
+	float g_flTiling < UiGroup( "Adjustments,0/Tiling,0/0" ); Default1( -0.2 ); Range1( -1, 1 ); >;
+	float g_flSpeed < UiGroup( "Adjustments,0/Speed,0/0" ); Default1( 2.5 ); Range1( 0, 5 ); >;
 
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -68,16 +72,21 @@ PS
 		m.Emission = float3( 0, 0, 0 );
 		m.Transmission = 0;
 
-		float4 local0 = float4( 0, 222.9932, 248.83, 1 );
-		float4 local1 = float4( ( i.vPositionWithOffsetWs + g_vHighPrecisionLightingOffsetWs ).xyz, 0 ).zzzw;
-		float local2 = -0.2;
-		float local3 = g_flTime * 2.5;
-		float2 local4 = TileAndOffsetUv( local1.xy, float2( local2, local2 ), float2( local3, local3 ) );
-		float local5 = Simplex2D( local4 );
-		float local6 = step( 0.005, local5 );
+		float4 local0 = g_vColour;
+		float3 local1 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
+		float4 local2 = float4( local1.xyz, 0 ).zzzw;
+		float local3 = g_flTiling;
+		float local4 = g_flSpeed;
+		float local5 = g_flTime * local4;
+		float2 local6 = TileAndOffsetUv( local2.xy, float2( local3, local3 ), float2( local5, local5 ) );
+		float local7 = Simplex2D( local6 );
+		float local8 = step( 0.005, local7 );
 
 		m.Emission = local0.xyz;
-		m.Opacity = local6;
+		m.Opacity = local8;
+		m.Roughness = 1;
+		m.Metalness = 0;
+		m.AmbientOcclusion = 1;
 
 		ShadingModelValveStandard sm;
 		return FinalizePixelMaterial( i, m, sm );

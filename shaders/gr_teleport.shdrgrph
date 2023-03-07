@@ -1,1 +1,160 @@
-{"Model":"models/citizenworm.vmdl","Description":"","BlendMode":"Masked","nodes":[{"_class":"Result","Albedo":{},"Emission":{"Identifier":"2","Output":"Result"},"Opacity":{"Identifier":"9","Output":"Result"},"TintMask":{},"Normal":{},"Roughness":{},"Metalness":{},"AmbientOcclusion":{},"Sheen":{},"SheenRoughness":{},"Clearcoat":{},"ClearcoatRoughness":{},"ClearcoatNormal":{},"Anisotropy":{},"AnisotropyRotation":{},"Thickness":{},"SubsurfacePower":{},"SheenColor":{},"SubsurfaceColor":{},"Transmission":{},"Absorption":{},"IndexOfRefraction":{},"MicroThickness":{},"Identifier":"0","Position":"448,-48"},{"_class":"SimplexNoise","Coords":{"Identifier":"4","Output":"Result"},"Identifier":"1","Position":"-96,0"},{"_class":"Float4","Name":"","Value":"0,222.9932,248.83,1","Identifier":"2","Position":"128,-176"},{"_class":"Time","Identifier":"3","Position":"-864,112"},{"_class":"TileAndOffset","Coords":{"Identifier":"7","Output":"Output"},"Tile":{"Identifier":"6","Output":"Result"},"Offset":{"Identifier":"8","Output":"Result"},"DefaultTile":"1,1","DefaultOffset":"0,0","WrapTo01":false,"Identifier":"4","Position":"-336,0"},{"_class":"WorldPosition","Identifier":"5","Position":"-848,-48"},{"_class":"Float","Name":"","Value":-0.2,"Identifier":"6","Position":"-640,32"},{"_class":"SwizzleVector","Input":{"Identifier":"5","Output":"Result"},"RedOut":"Blue","GreenOut":"Blue","BlueOut":"Blue","AlphaOut":"Alpha","Identifier":"7","Position":"-640,-48"},{"_class":"Multiply","A":{"Identifier":"3","Output":"Result"},"B":{},"DefaultA":0,"DefaultB":2.5,"Identifier":"8","Position":"-640,112"},{"_class":"Step","Input":{"Identifier":"1","Output":"Result"},"Edge":{},"DefaultEdge":0.005,"DefaultInput":0,"Identifier":"9","Position":"128,0"}]}
+{
+  "Model": "models/citizenworm.vmdl",
+  "Description": "",
+  "BlendMode": "Masked",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {},
+      "Emission": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "Normal": {},
+      "Roughness": {},
+      "Metalness": {},
+      "AmbientOcclusion": {},
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "448,-48"
+    },
+    {
+      "_class": "SimplexNoise",
+      "Coords": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "Identifier": "1",
+      "Position": "-96,0"
+    },
+    {
+      "_class": "Float4",
+      "Name": "Colour",
+      "Value": "0,222.9932,248.83,1",
+      "UI": {
+        "Type": "Color",
+        "PrimaryGroup": {
+          "Name": "Colour",
+          "Priority": 1
+        },
+        "SecondaryGroup": {
+          "Name": "Emission",
+          "Priority": 1
+        }
+      },
+      "Identifier": "2",
+      "Position": "128,-176"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "3",
+      "Position": "-864,112"
+    },
+    {
+      "_class": "TileAndOffset",
+      "Coords": {
+        "Identifier": "7",
+        "Output": "Output"
+      },
+      "Tile": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "4",
+      "Position": "-336,0"
+    },
+    {
+      "_class": "WorldPosition",
+      "Identifier": "5",
+      "Position": "-848,-48"
+    },
+    {
+      "_class": "Float",
+      "Min": -1,
+      "Max": 1,
+      "Name": "Tiling",
+      "Value": -0.2,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Adjustments"
+        },
+        "SecondaryGroup": {
+          "Name": "Tiling"
+        }
+      },
+      "Identifier": "6",
+      "Position": "-640,32"
+    },
+    {
+      "_class": "SwizzleVector",
+      "Input": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "RedOut": "Blue",
+      "GreenOut": "Blue",
+      "BlueOut": "Blue",
+      "AlphaOut": "Alpha",
+      "Identifier": "7",
+      "Position": "-640,-48"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 2.5,
+      "Identifier": "8",
+      "Position": "-640,112"
+    },
+    {
+      "_class": "Step",
+      "Input": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "Edge": {},
+      "DefaultEdge": 0.005,
+      "DefaultInput": 0,
+      "Identifier": "9",
+      "Position": "128,0"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 5,
+      "Name": "Speed",
+      "Value": 2.5,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Adjustments"
+        },
+        "SecondaryGroup": {
+          "Name": "Speed"
+        }
+      },
+      "Identifier": "10",
+      "Position": "-864,176"
+    }
+  ]
+}
