@@ -26,13 +26,13 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 	public override void FireCharged()
 	{
+		Grub.SetAnimParameter( "fire", true );
+
 		if ( !Game.IsServer )
 			return;
 
 		if ( PrefabLibrary.TrySpawn<Gadget>( GadgetPrefabPath, out var gadget ) )
 			gadget.OnUse( Grub, Weapon, Charge );
-
-		Grub.SetAnimParameter( "fire", true );
 
 		IsFiring = false;
 		Charge = MinCharge;
