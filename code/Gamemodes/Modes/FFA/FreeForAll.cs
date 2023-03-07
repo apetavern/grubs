@@ -216,7 +216,7 @@ public partial class FreeForAll : Gamemode
 		if ( rand <= GrubsConfig.WeaponCrateChancePerTurn )
 		{
 			var drop = Drop.WeaponCrate;
-			
+
 			var spawned = await SetupDrop( drop, player );
 			if ( spawned )
 				TextChat.AddInfoChatEntry( $"A weapons crate has been spawned!" );

@@ -4,7 +4,7 @@ public partial class Player : Entity
 {
 	[Net]
 	public IList<Grub> Grubs { get; private set; }
-	
+
 	[Net]
 	public IList<Drop> Drops { get; set; }
 

@@ -1,0 +1,71 @@
+@inherits Sandbox.UI.WorldPanel
+@namespace Grubs
+
+@if (!IsPlayersTurn() || _hasMoved)
+{
+    return;
+}
+
+<root style="color: @_grub.Player.Preferences.Color.Hex;">
+    <label>expand_more</label>
+</root>
+
+@code {
+    private Grub _grub;
+    private bool _hasMoved = false;
+
+    public TurnBobber(Grub grub)
+    {
+        _grub = grub;
+        SceneObject.Flags.ViewModelLayer = true;
+    }
+
+    public override void Tick()
+    {
+        if (!IsPlayersTurn())
+        {
+            _hasMoved = false;
+            return;
+        }
+
+        if (_grub.Velocity.Length > 0 || _grub.ActiveWeapon is not null)
+            _hasMoved = true;
+
+        Position = _grub.Position + Vector3.Up * 105;
+        Rotation = Rotation.LookAt( Vector3.Right );
+    }
+
+    private bool IsPlayersTurn()
+    {
+        return _grub.IsValid() && _grub.IsTurn && Game.LocalPawn == _grub.Player;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(IsPlayersTurn(), _hasMoved);
+    }
+}
+
+<style>
+    TurnBobber {
+        animation-duration: 0.7s;
+        animation-name: bobbing;
+        animation-iteration-count: infinite;
+
+        label {
+            font-family: MaterialIcons;
+            font-size: 650px;
+            text-shadow: 2px 2px 0px rgba( black, 0.75 );
+            text-align: center;
+        }
+    }
+
+    @@keyframes bobbing {
+        0%   { transform: scale(1,1)      translateY(0); }
+        10%  { transform: scale(1.1,.9)   translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-100px); }
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        57%  { transform: scale(1,1)      translateY(-7px); }
+        100% { transform: scale(1,1)      translateY(0); }
+    }
+</style>
