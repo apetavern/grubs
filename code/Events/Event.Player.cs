@@ -7,8 +7,8 @@ public static partial class GrubsEvent
 		public const string PointerEventChanged = "player.pointer.event";
 
 		/// <summary>
-		/// Occurs if the pointer event changes.
-		/// <para><see cref="bool"/>If the pointer events are enabled</para>
+		/// Called when the Pointer Events behaviour changes for the player.
+		/// <para><see cref="bool"/>Whether Pointer Events are enabled.</para>
 		/// </summary>
 		public class PointerEventChangedAttribute : EventAttribute
 		{

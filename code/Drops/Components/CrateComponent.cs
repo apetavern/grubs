@@ -80,7 +80,7 @@ public partial class CrateComponent : DropComponent
 	[ClientRpc]
 	public void HealGrubEventClient( Grub grub, int healAmount )
 	{
-		Event.Run( "grub.healed", grub.NetworkIdent, healAmount );
+		Event.Run( GrubsEvent.Grub.Healed, grub.NetworkIdent, healAmount );
 	}
 }
 

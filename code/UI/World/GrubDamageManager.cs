@@ -14,7 +14,7 @@ public class GrubDamageManager
 		_ = new DamageNumber( grub, grub.TotalDamageTaken );
 	}
 
-	[Event( "grub.healed" )]
+	[GrubsEvent.Grub.Healed]
 	public void CreateDamageNumber( int grubNetworkIdent, int healAmount )
 	{
 		var grub = GetGrubByNetworkIndex( grubNetworkIdent );
