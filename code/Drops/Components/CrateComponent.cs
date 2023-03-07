@@ -8,8 +8,6 @@ public partial class CrateComponent : DropComponent
 
 	public override void Simulate( IClient client )
 	{
-		var shouldRotate = true;
-
 		var move = new MoveHelper( Drop.Position, Drop.Velocity );
 		move.Trace = move.Trace
 			.Ignore( Drop )
@@ -23,16 +21,6 @@ public partial class CrateComponent : DropComponent
 		else
 		{
 			move.Velocity = 0;
-
-			var parachute = Drop.Children.FirstOrDefault( c => c.Tags.Has( "parachute" ) );
-			if ( parachute is not AnimatedEntity chute )
-				return;
-
-			chute.SetAnimParameter( "landed", true );
-			shouldRotate = false;
-
-			if ( Game.IsServer )
-				chute.DeleteAsync( 0.3f );
 		}
 
 		move.ApplyFriction( 2.0f, Time.Delta );
@@ -40,14 +28,6 @@ public partial class CrateComponent : DropComponent
 
 		Drop.Position = move.Position;
 		Drop.Velocity = move.Velocity;
-
-		Drop.Rotation = Rotation.Slerp(
-			Drop.Rotation,
-			Rotation.Identity * new Angles(
-				shouldRotate
-					? MathF.Sin( Time.Now * 2f ) * 15f
-					: 0f, 0, 0 ).ToRotation(),
-			0.75f );
 	}
 
 	public override void OnTouch( Entity other )
