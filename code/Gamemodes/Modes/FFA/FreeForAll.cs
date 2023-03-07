@@ -219,8 +219,12 @@ public partial class FreeForAll : Gamemode
 
 			var spawned = await SetupDrop( drop, player );
 			if ( spawned )
+			{
 				TextChat.AddInfoChatEntry( $"A weapons crate has been spawned!" );
-			await GameTask.DelaySeconds( 1f );
+				CameraTarget = drop;
+				await GameTask.DelaySeconds( 1f );
+			}
+				
 		}
 
 		rand = Game.Random.Int( 100 );
@@ -229,9 +233,14 @@ public partial class FreeForAll : Gamemode
 			var drop = Drop.HealthCrate;
 			var spawned = await SetupDrop( drop, player );
 			if ( spawned )
+			{
 				TextChat.AddInfoChatEntry( $"A health crate has been spawned!" );
-			await GameTask.DelaySeconds( 1f );
+				CameraTarget = drop;
+				await GameTask.DelaySeconds( 1f );
+			}
 		}
+
+		CameraTarget = null;
 	}
 
 	private async ValueTask<bool> SetupDrop( Drop drop, Player player )

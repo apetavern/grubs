@@ -10,6 +10,10 @@ public partial class Drop : ModelEntity
 	public static Drop WeaponCrate => SpawnDropOfType( "weapon_crate" );
 	public static Drop ToolCrate => SpawnDropOfType( "tool_crate" );
 
+	public TimeSince TimeSinceSpawned { get; set; } = 0f;
+
+	private static readonly Material _spawnMaterial = Material.Load( "materials/effects/teleport/teleport.vmat" );
+
 	public override void Spawn()
 	{
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
@@ -17,6 +21,10 @@ public partial class Drop : ModelEntity
 		EnableAllCollisions = true;
 
 		Tags.Add( "trigger" );
+
+		TimeSinceSpawned = 0f;
+
+		SetMaterialOverride( _spawnMaterial );
 	}
 
 	public override void Simulate( IClient client )
@@ -24,6 +32,15 @@ public partial class Drop : ModelEntity
 		foreach ( var component in Components.GetAll<DropComponent>() )
 		{
 			component.Simulate( client );
+		}
+	}
+
+	[Event.Client.Frame]
+	public void UpdateEffects()
+	{
+		if ( TimeSinceSpawned > 1f )
+		{
+			ClearMaterialOverride();
 		}
 	}
 
