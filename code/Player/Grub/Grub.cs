@@ -64,6 +64,11 @@ public partial class Grub : AnimatedEntity, INameTag
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Controller.Hull.Mins, Controller.Hull.Maxs );
 	}
 
+	public override void ClientSpawn()
+	{
+		_ = new TurnBobber( this );
+	}
+
 	/// <summary>
 	/// PostSpawnSetup is used to handle things we want to handle in Spawn, but 
 	/// cannot because the Client hasn't been transmitted to the Grub yet.
