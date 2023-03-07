@@ -11,7 +11,6 @@
       },
       "Emission": {},
       "Opacity": {},
-      "TintMask": {},
       "Normal": {
         "Identifier": "17",
         "Output": "Result"
@@ -25,56 +24,69 @@
         "Identifier": "21",
         "Output": "Result"
       },
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "1600,-256"
+      "Position": "1728,-288"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "4",
+        "Identifier": "24",
         "Output": "Result"
       },
       "Texture": "textures/dev/white.vtex",
+      "Sampler": {},
       "UI": {
         "Name": "Colour",
-        "Group": "Main"
+        "PrimaryGroup": {
+          "Name": "Textures",
+          "Priority": 3
+        }
       },
-      "Sampler": {},
       "Identifier": "1",
       "Position": "-272,-336"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "4",
+        "Identifier": "24",
         "Output": "Result"
       },
       "Texture": "textures/dev/white.vtex",
+      "Sampler": {},
       "UI": {
         "Name": "Normal",
-        "Group": "Main",
         "Extension": "Normal",
         "Processor": "NormalizeNormals",
-        "ColorSpace": "Linear"
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": "Textures",
+          "Priority": 3
+        }
       },
-      "Sampler": {},
       "Identifier": "2",
       "Position": "-272,-144"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "4",
+        "Identifier": "24",
         "Output": "Result"
       },
       "Texture": "textures/dev/white.vtex",
+      "Sampler": {},
       "UI": {
         "Name": "Rough",
-        "Group": "Main",
         "Extension": "Rough",
-        "ColorSpace": "Linear"
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": "Textures",
+          "Priority": 3
+        }
       },
-      "Sampler": {},
       "Identifier": "3",
       "Position": "-272,48"
     },
@@ -83,7 +95,7 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "4",
-      "Position": "-576,-272"
+      "Position": "-768,-176"
     },
     {
       "_class": "SplitVector",
@@ -92,7 +104,7 @@
         "Output": "Result"
       },
       "Identifier": "5",
-      "Position": "-272,256"
+      "Position": "-816,400"
     },
     {
       "_class": "Divide",
@@ -100,16 +112,19 @@
         "Identifier": "9",
         "Output": "Result"
       },
-      "B": {},
+      "B": {
+        "Identifier": "29",
+        "Output": "Result"
+      },
       "DefaultA": 0,
       "DefaultB": 2000,
       "Identifier": "6",
-      "Position": "128,336"
+      "Position": "-16,480"
     },
     {
       "_class": "WorldPosition",
       "Identifier": "7",
-      "Position": "-480,256"
+      "Position": "-1024,400"
     },
     {
       "_class": "Lerp",
@@ -135,16 +150,28 @@
         "Identifier": "5",
         "Output": "Z"
       },
-      "B": {},
+      "B": {
+        "Identifier": "27",
+        "Output": "Result"
+      },
       "DefaultA": 0,
       "DefaultB": 1024,
       "Identifier": "9",
-      "Position": "-48,336"
+      "Position": "-416,480"
     },
     {
       "_class": "Float4",
-      "Name": "",
+      "Name": "Tint_Colour",
       "Value": "0.24855,0.07742,0,1",
+      "UI": {
+        "Type": "Color",
+        "PrimaryGroup": {
+          "Name": "Tint"
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
       "Identifier": "10",
       "Position": "-272,-496"
     },
@@ -154,11 +181,14 @@
         "Identifier": "5",
         "Output": "Y"
       },
-      "B": {},
+      "B": {
+        "Identifier": "26",
+        "Output": "Result"
+      },
       "DefaultA": 0,
       "DefaultB": 20,
       "Identifier": "11",
-      "Position": "-48,240"
+      "Position": "-416,384"
     },
     {
       "_class": "Divide",
@@ -166,11 +196,14 @@
         "Identifier": "11",
         "Output": "Result"
       },
-      "B": {},
+      "B": {
+        "Identifier": "28",
+        "Output": "Result"
+      },
       "DefaultA": 0,
       "DefaultB": 75,
       "Identifier": "12",
-      "Position": "128,240"
+      "Position": "-16,384"
     },
     {
       "_class": "Saturate",
@@ -179,7 +212,7 @@
         "Output": "Result"
       },
       "Identifier": "13",
-      "Position": "288,336"
+      "Position": "144,480"
     },
     {
       "_class": "Saturate",
@@ -188,7 +221,7 @@
         "Output": "Result"
       },
       "Identifier": "14",
-      "Position": "288,240"
+      "Position": "144,384"
     },
     {
       "_class": "Lerp",
@@ -218,7 +251,10 @@
         "Identifier": "15",
         "Output": "Result"
       },
-      "C": {},
+      "C": {
+        "Identifier": "25",
+        "Output": "Result"
+      },
       "Fraction": 0.65,
       "Identifier": "16",
       "Position": "1296,-320"
@@ -237,8 +273,18 @@
       "_class": "Float",
       "Min": 0,
       "Max": 1,
-      "Name": "",
+      "Name": "AO Minus",
       "Value": 0.5,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "AO",
+          "Priority": 2
+        },
+        "SecondaryGroup": {
+          "Name": "",
+          "Priority": 1
+        }
+      },
       "Identifier": "18",
       "Position": "992,240"
     },
@@ -246,8 +292,17 @@
       "_class": "Float",
       "Min": 0,
       "Max": 1,
-      "Name": "",
+      "Name": "AO Plus",
       "Value": 1,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "AO",
+          "Priority": 2
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
       "Identifier": "19",
       "Position": "992,176"
     },
@@ -294,6 +349,126 @@
       "Clamp": true,
       "Identifier": "22",
       "Position": "112,-480"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 5,
+      "Name": "Tiling",
+      "Value": 1,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Textures"
+        },
+        "SecondaryGroup": {
+          "Name": "",
+          "Priority": 1
+        }
+      },
+      "Identifier": "23",
+      "Position": "-768,-48"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "23",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "24",
+      "Position": "-464,-128"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "Tint_Blend",
+      "Value": 0.65,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Tint"
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "25",
+      "Position": "992,-400"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 64,
+      "Name": "Y Position",
+      "Value": 20,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Position"
+        },
+        "SecondaryGroup": {
+          "Name": "Y"
+        }
+      },
+      "Identifier": "26",
+      "Position": "-640,320"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 2048,
+      "Name": "Z Position",
+      "Value": 1024,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Position"
+        },
+        "SecondaryGroup": {
+          "Name": "Z",
+          "Priority": 1
+        }
+      },
+      "Identifier": "27",
+      "Position": "-640,576"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 128,
+      "Name": "Y Smoothing",
+      "Value": 75,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Position"
+        },
+        "SecondaryGroup": {
+          "Name": "Y"
+        }
+      },
+      "Identifier": "28",
+      "Position": "-256,432"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 2048,
+      "Name": "Z Smoothing",
+      "Value": 2000,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Position"
+        },
+        "SecondaryGroup": {
+          "Name": "Z",
+          "Priority": 1
+        }
+      },
+      "Identifier": "29",
+      "Position": "-256,544"
     }
   ]
 }

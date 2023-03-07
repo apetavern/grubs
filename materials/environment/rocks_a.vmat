@@ -2,16 +2,28 @@
 
 Layer0
 {
-	shader "shaders/gr_background.shader"
+	shader "shaders/gr_foreground.shader"
 
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
+	//---- AO ----
+	g_flAOMinus "0.000"
+	g_flAOPlus "1.000"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Main ----
+	//---- Position ----
+	g_flYPosition "32.000"
+	g_flYSmoothing "128.000"
+	g_flZPosition "1024.000"
+	g_flZSmoothing "200.000"
+
+	//---- Textures ----
 	Colour "textures/environment/rocks_a_color.png"
+	g_flTiling "0.500"
 	Normal "textures/environment/rocks_a_normal.png"
 	Rough "textures/environment/rocks_a_rough.png"
+
+	//---- Tint ----
+	g_flTintBlend "0.500"
+	g_vTintColour "[0.000000 0.000000 0.000000 1.000000]"
 }

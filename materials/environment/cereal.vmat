@@ -2,46 +2,28 @@
 
 Layer0
 {
-	shader "parallax_occlusion.vfx"
+	shader "shaders/gr_foreground.shader"
 
-	//---- Ambient Occlusion ----
-	TextureAmbientOcclusion "textures/environment/cereal_ao.png"
-
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "textures/environment/cereal_color.png"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
+	//---- AO ----
+	g_flAOMinus "0.500"
+	g_flAOPlus "1.000"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
+	//---- Position ----
+	g_flYPosition "20.000"
+	g_flYSmoothing "75.000"
+	g_flZPosition "1024.000"
+	g_flZSmoothing "2000.000"
 
-	//---- Metalness ----
-	TextureMetalness "materials/default/default_metal.tga"
+	//---- Textures ----
+	Colour "textures/environment/cereal_color.png"
+	g_flTiling "1.000"
+	Normal "textures/environment/cereal_normal.png"
+	Rough "textures/environment/cereal_rough.png"
 
-	//---- Normal ----
-	TextureNormal "textures/environment/cereal_normal.png"
-
-	//---- Parallax ----
-	g_flHeightMapScale "0.100"
-	g_nLODThreshold "4"
-	g_nMaxSamples "32"
-	g_nMinSamples "8"
-	TextureHeight "textures/environment/cereal_height.png"
-
-	//---- Roughness ----
-	TextureRoughness "textures/environment/cereal_rough.png"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
+	//---- Tint ----
+	g_flTintBlend "0.650"
+	g_vTintColour "[0.250980 0.078431 0.000000 1.000000]"
 }
