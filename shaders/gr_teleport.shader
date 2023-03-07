@@ -55,9 +55,10 @@ PS
 	#include "common/pixel.color.blending.hlsl"
 	#include "common/proceedural.hlsl"
 
-	float4 g_vColour < UiType( Color ); UiGroup( "Colour,1/Emission,1/0" ); Default4( 0.00, 222.99, 248.83, 1.00 ); >;
-	float g_flTiling < UiGroup( "Adjustments,0/Tiling,0/0" ); Default1( -0.2 ); Range1( -1, 1 ); >;
-	float g_flSpeed < UiGroup( "Adjustments,0/Speed,0/0" ); Default1( 2.5 ); Range1( 0, 5 ); >;
+	float4 g_vColour < UiType( Color ); UiGroup( "Colour,1/Emission,1/0" ); Default4( 0.00, 448.08, 500.00, 1.00 ); >;
+	float g_flTiling < UiGroup( "Adjustments,0/Tiling,1/0" ); Default1( -0.2 ); Range1( -1, 1 ); >;
+	float g_flSpeed < UiGroup( "Adjustments,0/Speed,2/0" ); Default1( 2.5 ); Range1( 0, 5 ); >;
+	float g_flMasterOpacity < UiGroup( "Adjustments,0/,0/0" ); Default1( 1 ); Range1( 0, 1 ); >;
 
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -81,9 +82,11 @@ PS
 		float2 local6 = TileAndOffsetUv( local2.xy, float2( local3, local3 ), float2( local5, local5 ) );
 		float local7 = Simplex2D( local6 );
 		float local8 = step( 0.005, local7 );
+		float local9 = g_flMasterOpacity;
+		float local10 = lerp( 0, local8, local9 );
 
 		m.Emission = local0.xyz;
-		m.Opacity = local8;
+		m.Opacity = local10;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;

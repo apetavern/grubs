@@ -11,7 +11,7 @@
         "Output": "Result"
       },
       "Opacity": {
-        "Identifier": "9",
+        "Identifier": "12",
         "Output": "Result"
       },
       "Normal": {},
@@ -23,7 +23,7 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "448,-48"
+      "Position": "848,-144"
     },
     {
       "_class": "SimplexNoise",
@@ -37,7 +37,7 @@
     {
       "_class": "Float4",
       "Name": "Colour",
-      "Value": "0,222.9932,248.83,1",
+      "Value": "0,448.0834,500,1",
       "UI": {
         "Type": "Color",
         "PrimaryGroup": {
@@ -50,12 +50,12 @@
         }
       },
       "Identifier": "2",
-      "Position": "128,-176"
+      "Position": "528,-192"
     },
     {
       "_class": "Time",
       "Identifier": "3",
-      "Position": "-864,112"
+      "Position": "-928,96"
     },
     {
       "_class": "TileAndOffset",
@@ -80,7 +80,7 @@
     {
       "_class": "WorldPosition",
       "Identifier": "5",
-      "Position": "-848,-48"
+      "Position": "-928,-48"
     },
     {
       "_class": "Float",
@@ -93,7 +93,8 @@
           "Name": "Adjustments"
         },
         "SecondaryGroup": {
-          "Name": "Tiling"
+          "Name": "Tiling",
+          "Priority": 1
         }
       },
       "Identifier": "6",
@@ -134,10 +135,10 @@
         "Output": "Result"
       },
       "Edge": {},
-      "DefaultEdge": 0.005,
       "DefaultInput": 0,
+      "DefaultEdge": 0.005,
       "Identifier": "9",
-      "Position": "128,0"
+      "Position": "208,0"
     },
     {
       "_class": "Float",
@@ -150,11 +151,64 @@
           "Name": "Adjustments"
         },
         "SecondaryGroup": {
-          "Name": "Speed"
+          "Name": "Speed",
+          "Priority": 2
         }
       },
       "Identifier": "10",
-      "Position": "-864,176"
+      "Position": "-928,160"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "Master Opacity",
+      "Value": 1,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Adjustments"
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "11",
+      "Position": "208,96"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "12",
+      "Position": "528,-16"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "",
+      "Value": 0,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "13",
+      "Position": "208,-80"
     }
   ]
 }
