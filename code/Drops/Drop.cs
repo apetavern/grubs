@@ -38,9 +38,13 @@ public partial class Drop : ModelEntity
 	[Event.Client.Frame]
 	public void UpdateEffects()
 	{
-		if ( TimeSinceSpawned > 1f )
+		if ( TimeSinceSpawned > 2f )
 		{
 			ClearMaterialOverride();
+		}
+		else
+		{
+			SceneObject.Attributes.Set( "opacity", TimeSinceSpawned / 2 );
 		}
 	}
 

@@ -222,7 +222,7 @@ public partial class FreeForAll : Gamemode
 			{
 				TextChat.AddInfoChatEntry( $"A weapons crate has been spawned!" );
 				CameraTarget = drop;
-				await GameTask.DelaySeconds( 1f );
+				await GameTask.DelaySeconds( 2f );
 			}
 				
 		}
@@ -236,7 +236,7 @@ public partial class FreeForAll : Gamemode
 			{
 				TextChat.AddInfoChatEntry( $"A tool crate has been spawned!" );
 				CameraTarget = drop;
-				await GameTask.DelaySeconds( 1f );
+				await GameTask.DelaySeconds( 2f );
 			}
 		}
 
@@ -249,7 +249,7 @@ public partial class FreeForAll : Gamemode
 			{
 				TextChat.AddInfoChatEntry( $"A health crate has been spawned!" );
 				CameraTarget = drop;
-				await GameTask.DelaySeconds( 1f );
+				await GameTask.DelaySeconds( 2f );
 			}
 		}
 
