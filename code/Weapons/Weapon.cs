@@ -1,7 +1,7 @@
 ﻿namespace Grubs;
 
 [Prefab, Category( "Weapon" )]
-public partial class Weapon : AnimatedEntity
+public partial class Weapon : AnimatedEntity, IResolvable
 {
 	/// <summary>
 	/// The hold pose for this weapon.
@@ -75,6 +75,8 @@ public partial class Weapon : AnimatedEntity
 	public string Icon { get; set; }
 
 	public Grub Grub => Owner as Grub;
+
+	public bool Resolved => !IsFiring() && !IsCharging();
 
 	public Weapon()
 	{
