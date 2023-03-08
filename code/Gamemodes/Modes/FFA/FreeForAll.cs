@@ -230,7 +230,6 @@ public partial class FreeForAll : Gamemode
 				CameraTarget = drop;
 				await GameTask.DelaySeconds( 2f );
 			}
-				
 		}
 
 		rand = Game.Random.Int( 100 );
