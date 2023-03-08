@@ -15,7 +15,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	/// <summary>
 	/// The number of seconds before it explodes, set to "0" if something else handles the exploding.
 	/// </summary>
-	[Prefab]
+	[Prefab, Net]
 	public float ExplodeAfter { get; set; } = 4.0f;
 
 	[Prefab, ResourceType( "sound" )]
@@ -29,7 +29,8 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 
 	public override void OnClientSpawn()
 	{
-		_ = new ExplosiveGadgetWorldPanel( Gadget );
+		if ( ExplodeAfter > 0 )
+			_ = new ExplosiveGadgetWorldPanel( Gadget );
 	}
 
 	public override void OnUse( Weapon weapon, int charge )
