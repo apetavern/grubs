@@ -24,6 +24,11 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Prefab]
 	public ExplosiveReaction ExplosionReaction { get; set; }
 
+	public override void OnClientSpawn()
+	{
+		_ = new ExplosiveGadgetWorldPanel( Gadget );
+	}
+
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		if ( ExplodeAfter > 0 )

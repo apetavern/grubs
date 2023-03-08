@@ -1,33 +1,37 @@
 @inherits EntityWorldPanel
 @namespace Grubs
 
-@if (Entity is not Grub grub)
+@if (Entity is not Gadget gadget)
 {
     return;
 }
 
-<root style="color: @grub.Player.Preferences.Color.Hex">
-    <text>@grub.Name</text>
-    <texT>@grub.Health</texT>
+<root>
+    <text>@_explosiveComponent.ExplodeAfter</text>
 </root>
 
 @code {
-    public GrubWorldPanel(Grub grub) : base(grub) {}
+    private ExplosiveGadgetComponent _explosiveComponent;
+
+    public ExplosiveGadgetWorldPanel(Gadget gadget) : base(gadget) 
+    {
+        _explosiveComponent = gadget.Components.Get<ExplosiveGadgetComponent>();
+    }
 
     protected override int BuildHash()
     {
-        var grub = Entity as Grub;
-        return HashCode.Combine(grub?.Name, grub?.Health);
+        return HashCode.Combine(_explosiveComponent?.ExplodeAfter);
     }
 }
 
 <style>
-    GrubWorldPanel {
+    ExplosiveGadgetWorldPanel {
         align-items: center;
 		justify-content: center;
         flex-direction: column;
 
         label {
+            color: white;
             font-size: 150px;
             font-family: Londrina Solid;
             background-color: rgba( black, 0.1 );
