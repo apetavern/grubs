@@ -7,7 +7,7 @@
 }
 
 <root style="color: @_grub.Player.Preferences.Color.Hex;">
-    <label>expand_more</label>
+    <label>arrow_drop_down</label>
 </root>
 
 @code {
@@ -31,7 +31,7 @@
         if (_grub.Velocity.Length > 0 || _grub.ActiveWeapon is not null)
             _hasMoved = true;
 
-        Position = _grub.Position + Vector3.Up * 105;
+        Position = _grub.Position + Vector3.Up * 90;
         Rotation = Rotation.LookAt( Vector3.Right );
     }
 
@@ -53,7 +53,7 @@
         animation-iteration-count: infinite;
 
         label {
-            font-family: MaterialIcons;
+            font-family: MaterialIconsRound;
             font-size: 650px;
             text-shadow: 2px 2px 0px rgba( black, 0.75 );
             text-align: center;
