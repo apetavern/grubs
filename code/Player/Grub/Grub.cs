@@ -1,7 +1,7 @@
 ﻿namespace Grubs;
 
 [Category( "Grub" )]
-public partial class Grub : AnimatedEntity, INameTag
+public partial class Grub : AnimatedEntity
 {
 	[BindComponent]
 	public GrubController Controller { get; }
@@ -66,6 +66,7 @@ public partial class Grub : AnimatedEntity, INameTag
 
 	public override void ClientSpawn()
 	{
+		_ = new GrubWorldPanel( this );
 		_ = new TurnBobber( this );
 	}
 
