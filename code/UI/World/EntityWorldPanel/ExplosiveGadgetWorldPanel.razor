@@ -1,26 +1,21 @@
 @inherits EntityWorldPanel
 @namespace Grubs
 
-@if (Entity is not Gadget gadget)
-{
-    return;
-}
-
 <root>
-    <text>@_explosiveComponent.ExplodeAfter</text>
+    <text>@TimeSpan.FromSeconds(_timeUntilExplosion).Seconds</text>
 </root>
 
 @code {
-    private ExplosiveGadgetComponent _explosiveComponent;
+    private TimeUntil _timeUntilExplosion;
 
     public ExplosiveGadgetWorldPanel(Gadget gadget) : base(gadget) 
     {
-        _explosiveComponent = gadget.Components.Get<ExplosiveGadgetComponent>();
+        _timeUntilExplosion = gadget.Components.Get<ExplosiveGadgetComponent>().TimeUntilExplosion;
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(_explosiveComponent?.ExplodeAfter);
+        return HashCode.Combine(_timeUntilExplosion.ToString());
     }
 }
 

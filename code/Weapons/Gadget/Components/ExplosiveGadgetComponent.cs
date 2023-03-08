@@ -24,6 +24,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Prefab]
 	public ExplosiveReaction ExplosionReaction { get; set; }
 
+	[Net]
+	public TimeUntil TimeUntilExplosion { get; private set; }
+
 	public override void OnClientSpawn()
 	{
 		_ = new ExplosiveGadgetWorldPanel( Gadget );
@@ -32,7 +35,10 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		if ( ExplodeAfter > 0 )
+		{
+			TimeUntilExplosion = ExplodeAfter;
 			ExplodeAfterSeconds( ExplodeAfter );
+		}
 	}
 
 	public async void ExplodeAfterSeconds( float seconds )
