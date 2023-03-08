@@ -16,28 +16,28 @@
     private bool _isHeal;
 
     public DamageNumber( Grub grub, float damage )
-	{
+    {
         SceneObject.Flags.ViewModelLayer = true;
 
         _damage = damage;
         _isHeal = _damage < 0;
 
-		Position = grub.Position + Offset;
-		Position = Position.WithY( -34 );
+        Position = grub.Position + Offset;
+        Position = Position.WithY( -34 );
         Rotation = Rotation.LookAt( Vector3.Right );
-    
-		_ = DelayDelete();
-	}
+
+        _ = DelayDelete();
+    }
 
     public override void Tick() => Position += Vector3.Up * RiseSpeed * Time.Delta;
     protected override int BuildHash() => HashCode.Combine(_damage, _isHeal);
 
     private async Task DelayDelete()
-	{
-		await GameTask.Delay( 5000 );
+    {
+        await GameTask.Delay( 5000 );
 
-		Delete();
-	}
+        Delete();
+    }
 }
 
 <style>
