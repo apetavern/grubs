@@ -27,29 +27,29 @@
         background-color: rgba(235, 235, 235, 0.24);
         border-radius: 4px;
         transition: all 0.1s ease-out;
+
         .charges
+        {
+            position: absolute;
+            font-family: Londrina Solid;
+            font-size: 20px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
 
-    {
-        position: absolute;
-        font-family: Londrina Solid;
-        font-size: 20px;
-        color: white;
-        text-shadow: 2px 2px 0px black;
+        &:hover {
+            transform: scale(1.25);
+            cursor: pointer;
+        }
+
+        &:active {
+            transform: scale(1.1);
+        }
+
+        &.disabled {
+            transform: scale(1);
+            opacity: 0.6;
+            cursor: default;
+        }
     }
-
-    &:hover {
-        transform: scale(1.25);
-        cursor: pointer;
-    }
-
-    &:active {
-        transform: scale(1.1);
-    }
-
-    &.disabled {
-        transform: scale(1);
-        opacity: 0.6;
-        cursor: default;
-    }
-
-    }</style>
+</style>
