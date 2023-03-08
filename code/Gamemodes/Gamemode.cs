@@ -42,7 +42,9 @@ public partial class Gamemode : Entity
 	[Net]
 	public bool AllowMovement { get; set; }
 
-	public virtual bool AllowDamage => true;
+	[Net]
+	public bool AllowDamage { get; set; }
+
 	public virtual bool AllowFriendlyFire => false;
 
 	public virtual int MinimumPlayers => 2;
@@ -101,4 +103,9 @@ public partial class Gamemode : Entity
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
+
+	internal virtual bool IsWorldResolved()
+	{
+		return All.OfType<IResolvable>().All( ent => ent.Resolved );
+	}
 }

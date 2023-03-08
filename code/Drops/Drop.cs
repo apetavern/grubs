@@ -1,7 +1,7 @@
 namespace Grubs;
 
 [Prefab, Category( "Drops" )]
-public partial class Drop : ModelEntity
+public partial class Drop : ModelEntity, IResolvable
 {
 	[Prefab, Net]
 	public float Size { get; set; } = 16f;
@@ -9,6 +9,8 @@ public partial class Drop : ModelEntity
 	public static Drop HealthCrate => SpawnDropOfType( "health_crate" );
 	public static Drop WeaponCrate => SpawnDropOfType( "weapon_crate" );
 	public static Drop ToolCrate => SpawnDropOfType( "tool_crate" );
+
+	public bool Resolved => Velocity.IsNearlyZero( 2.5f );
 
 	public TimeSince TimeSinceSpawned { get; set; } = 0f;
 
@@ -38,9 +40,13 @@ public partial class Drop : ModelEntity
 	[Event.Client.Frame]
 	public void UpdateEffects()
 	{
-		if ( TimeSinceSpawned > 1f )
+		if ( TimeSinceSpawned > 2f )
 		{
 			ClearMaterialOverride();
+		}
+		else
+		{
+			SceneObject.Attributes.Set( "opacity", TimeSinceSpawned / 2 );
 		}
 	}
 

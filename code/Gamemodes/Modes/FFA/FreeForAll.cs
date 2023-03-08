@@ -64,6 +64,7 @@ public partial class FreeForAll : Gamemode
 	{
 		base.Initialize();
 
+		AllowDamage = false;
 		CurrentState = GameState.Waiting;
 	}
 
@@ -188,6 +189,11 @@ public partial class FreeForAll : Gamemode
 					continue;
 
 				await HandleGrubDeath( grub );
+
+				while ( !IsWorldResolved() )
+				{
+					await GameTask.Delay( 300 );
+				}
 			}
 		}
 	}
@@ -222,7 +228,7 @@ public partial class FreeForAll : Gamemode
 			{
 				TextChat.AddInfoChatEntry( $"A weapons crate has been spawned!" );
 				CameraTarget = drop;
-				await GameTask.DelaySeconds( 1f );
+				await GameTask.DelaySeconds( 2f );
 			}
 				
 		}
@@ -236,7 +242,7 @@ public partial class FreeForAll : Gamemode
 			{
 				TextChat.AddInfoChatEntry( $"A tool crate has been spawned!" );
 				CameraTarget = drop;
-				await GameTask.DelaySeconds( 1f );
+				await GameTask.DelaySeconds( 2f );
 			}
 		}
 
@@ -249,8 +255,13 @@ public partial class FreeForAll : Gamemode
 			{
 				TextChat.AddInfoChatEntry( $"A health crate has been spawned!" );
 				CameraTarget = drop;
-				await GameTask.DelaySeconds( 1f );
+				await GameTask.DelaySeconds( 2f );
 			}
+		}
+
+		while ( !IsWorldResolved() )
+		{
+			await GameTask.Delay( 300 );
 		}
 
 		CameraTarget = null;
@@ -387,7 +398,7 @@ public partial class FreeForAll : Gamemode
 				UseTurn();
 			}
 
-			if ( UsedTurn )
+			if ( UsedTurn && IsWorldResolved() )
 			{
 				NextTurnTask ??= NextTurn();
 			}

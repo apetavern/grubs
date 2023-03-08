@@ -1,7 +1,7 @@
 ﻿namespace Grubs;
 
 [Category( "Grub" )]
-public partial class Grub : AnimatedEntity
+public partial class Grub : AnimatedEntity, IResolvable
 {
 	[BindComponent]
 	public GrubController Controller { get; }
@@ -28,6 +28,8 @@ public partial class Grub : AnimatedEntity
 	}
 
 	public Color Color => Player.Preferences.Color;
+
+	public bool Resolved => Controller.Velocity.IsNearlyZero( 0.1f ) || LifeState is LifeState.Dead;
 
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
 

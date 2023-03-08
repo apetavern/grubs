@@ -1,7 +1,7 @@
 namespace Grubs;
 
 [Prefab, Category( "Gadget" )]
-public partial class Gadget : AnimatedEntity
+public partial class Gadget : AnimatedEntity, IResolvable
 {
 	public Grub Grub => Owner as Grub;
 
@@ -16,6 +16,8 @@ public partial class Gadget : AnimatedEntity
 
 	[Prefab, ResourceType( "vpcf" )]
 	public string TrailParticle { get; set; }
+
+	public bool Resolved => Velocity.IsNearlyZero( 2.5f );
 
 	public override void Spawn()
 	{

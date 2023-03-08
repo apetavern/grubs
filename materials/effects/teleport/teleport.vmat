@@ -4,8 +4,13 @@ Layer0
 {
 	shader "shaders/gr_teleport.shader"
 
-	g_flDirectionalLightmapMinZ "0.000"
-	g_flDirectionalLightmapStrength "0.000"
+	//---- Adjustments ----
+	g_flMasterOpacity "1.000"
+	g_flSpeed "2.500"
+	g_flTiling "-0.200"
+
+	//---- Colour ----
+	g_vColour "[0.000000 1.000000 1.000000 1.000000]"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
@@ -13,4 +18,9 @@ Layer0
 	//---- Translucent ----
 	g_flAlphaTestReference "0.500"
 	g_flAntiAliasedEdgeStrength "1.000"
+
+	DynamicParams
+	{
+		g_flMasterOpacity "opacity"
+	}
 }
