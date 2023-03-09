@@ -1,0 +1,53 @@
+@inherits Sandbox.UI.WorldPanel
+@namespace Grubs
+
+<root>
+    <img src="materials/reticle/reticle.png" />
+</root>
+
+@code {
+    public AimReticle() 
+    {
+        SceneObject.Flags.ViewModelLayer = true;
+        Rotation = Rotation.RotateAroundAxis( Vector3.Up, 90f );
+    }
+
+    private bool IsShowing()
+    {
+        if (Game.LocalPawn is not Player player || !player.ActiveGrub.IsValid() || player.ActiveGrub.LifeState == LifeState.Dead)
+            return false;
+
+        if (!player.ActiveGrub.ActiveWeapon.IsValid() || !player.ActiveGrub.ActiveWeapon.ShowReticle)
+            return false;
+
+        return player.ActiveGrub.Controller.IsGrounded && player.ActiveGrub.Velocity.IsNearlyZero( 2.5f );
+    }
+
+    public override void Tick()
+    {
+        var isShowing = IsShowing();
+        SetClass("hidden", !isShowing);
+
+        if (!isShowing)
+            return;
+
+        var activeGrub = (Game.LocalPawn as Player).ActiveGrub;
+        var muzzle = activeGrub.ActiveWeapon.GetAttachment( "muzzle" );
+
+        var reticlePosition = muzzle is not null ? 
+            muzzle.Value.Position + muzzle.Value.Rotation.Forward * 80f : 
+            activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
+
+        Position = reticlePosition;
+        Position = Position.WithY( -33 );
+        Rotation = Rotation.RotateAroundAxis( Vector3.Forward, 0.25f );
+    }
+}
+
+<style>
+    AimReticle {
+        &.hidden {
+            display: none;
+        }
+    }
+</style>

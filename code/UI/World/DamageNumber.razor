@@ -1,0 +1,68 @@
+@inherits Sandbox.UI.WorldPanel
+@namespace Grubs
+
+<root>
+    <label 
+        class="@(_isHeal ? "heal" : "damage")" 
+        text=@(_isHeal ? $"+{Math.Floor( Math.Abs( _damage ) )}" : $"-{Math.Floor( _damage )}") 
+    />
+</root>
+
+@code {
+    private const float RiseSpeed = 5;
+    private static Vector3 Offset = Vector3.Up * 64;
+
+    private float _damage;
+    private bool _isHeal;
+
+    public DamageNumber( Grub grub, float damage )
+    {
+        SceneObject.Flags.ViewModelLayer = true;
+
+        _damage = damage;
+        _isHeal = _damage < 0;
+
+        Position = grub.Position + Offset;
+        Position = Position.WithY( -34 );
+        Rotation = Rotation.LookAt( Vector3.Right );
+
+        _ = DelayDelete();
+    }
+
+    public override void Tick() => Position += Vector3.Up * RiseSpeed * Time.Delta;
+    protected override int BuildHash() => HashCode.Combine(_damage, _isHeal);
+
+    private async Task DelayDelete()
+    {
+        await GameTask.Delay( 5000 );
+
+        Delete();
+    }
+}
+
+<style>
+    DamageNumber {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        label {
+            font-size: 80px;
+            font-family: Londrina Solid;
+            background-color: rgba( black, 0.1 );
+            border: 2px solid rgba( black, 0.1 );
+            border-radius: 4px;
+            padding: 0px 20px;
+            text-shadow: 2px 2px 0px rgba( black, 0.75 );
+            margin: 2px 0;
+
+            &.heal {
+                color: #00ad00;
+            }
+
+            &.damage {
+                color: #ff0000;
+            }
+        }
+    }
+</style>

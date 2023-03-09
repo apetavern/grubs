@@ -34,6 +34,14 @@ public partial class Gadget : AnimatedEntity, IResolvable
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, CollisionRadius );
 	}
 
+	public override void ClientSpawn()
+	{
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			component.OnClientSpawn();
+		}
+	}
+
 	public void OnUse( Grub grub, Weapon weapon, int charge )
 	{
 		Owner = grub;
