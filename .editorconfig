@@ -17,6 +17,12 @@ indent_style = tab
 indent_size = tab
 tab_size = 4
 
+# Razor files
+[*.razor]
+indent_style = tab
+indent_size = tab
+tab_size = 4
+
 # New line preferences
 end_of_line = crlf
 insert_final_newline = true
