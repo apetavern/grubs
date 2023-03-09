@@ -11,14 +11,8 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-# C# files
-[*.cs]
-indent_style = tab
-indent_size = tab
-tab_size = 4
-
-# Razor files
-[*.razor]
+# C# & Razor files
+[*.{cs,razor}]
 indent_style = tab
 indent_size = tab
 tab_size = 4
