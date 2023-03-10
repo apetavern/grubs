@@ -44,10 +44,26 @@ public partial class Grub
 	[Net, Predicted]
 	public bool ChangedSnapAngle { get; set; } = false;
 
+	public TimeSince TimeSinceLastSqueak { get; set; }
+
 	public void UpdateInputFromOwner( float moveInput, float lookInput )
 	{
 		MoveInput = moveInput;
 		LookInput = -Facing * lookInput;
+
+		if ( IsTurn && TimeSinceLastSqueak > 0.7f )
+		{
+			if ( MoveInput != 0f && Controller.IsGrounded )
+			{
+				if ( IsTurn )
+					Log.Info( TimeSinceLastSqueak );
+				if ( TimeSinceLastSqueak > 0.6f )
+				{
+					TimeSinceLastSqueak = 0f;
+					WalkEffects( To.Everyone );
+				}
+			}
+		}
 
 		if ( ActiveWeapon is not null )
 			if ( ActiveWeapon.IsCharging() )
@@ -99,6 +115,13 @@ public partial class Grub
 			var tr = Trace.Ray( AimRay, 80f ).Run();
 			DebugOverlay.TraceResult( tr );
 		}
+	}
+
+
+	[ClientRpc]
+	public void WalkEffects()
+	{
+		this.SoundFromScreen( "my_sound" );
 	}
 
 	[ConVar.Replicated( "gr_debug_input" )]
