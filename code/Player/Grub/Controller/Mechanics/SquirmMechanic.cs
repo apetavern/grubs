@@ -1,6 +1,6 @@
 ﻿namespace Grubs;
 
-public partial class SquirmMechanic : ControllerMechanic
+public class SquirmMechanic : ControllerMechanic
 {
 	public override float WishSpeed { get; protected set; } = 60.0f;
 
@@ -12,8 +12,6 @@ public partial class SquirmMechanic : ControllerMechanic
 	public static float StopSpeed => 100.0f;
 
 	public float SurfaceFriction { get; protected set; } = 1.0f;
-
-	public TimeSince TimeSinceLastSqueak { get; protected set; }
 
 	public override int SortOrder => 50;
 
