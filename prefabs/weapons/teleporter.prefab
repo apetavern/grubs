@@ -1,0 +1,89 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "55a4836f-49d7-45a5-b179-7885757f4885",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "2e66268d-b626-4c01-a44a-38a40b90d36e",
+        "Class": "TeleportComponent",
+        "Keys": {
+          "Test": {
+            "Type": "String",
+            "Value": "\u0022\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Teleport\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "2"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Cursor\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Holdable\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/tools/teleporter/teleporter.vmdl\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/airstrikes/radio.vmdl_c.png\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Teleporter\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "2"
+      },
+      "WeaponType": {
+        "Type": "WeaponType",
+        "Value": "\u0022Tool\u0022"
+      }
+    }
+  }
+}

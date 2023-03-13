@@ -1,0 +1,89 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "f4f8d4ac-dc48-407c-b547-f42213cb032d",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "0513f912-2c74-4888-80cc-6b2bf7cdb319",
+        "Class": "GadgetWeaponComponent",
+        "Keys": {
+          "GadgetPrefabPath": {
+            "Type": "String",
+            "Value": "\u0022prefabs/weapons/dynamite/projectile.prefab\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Gadget\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "2"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Droppable\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/dynamite/dynamite.vmdl\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/dynamite/dynamite.vmdl_c.png\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Dynamite\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "1.5"
+      },
+      "WeaponType": {
+        "Type": "WeaponType",
+        "Value": "\u0022Weapon\u0022"
+      }
+    }
+  }
+}
