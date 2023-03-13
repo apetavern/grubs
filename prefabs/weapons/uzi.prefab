@@ -1,0 +1,137 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "92fccae4-9165-40f9-9997-3c25d04a7add",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "eab44b8a-7a6b-4144-aa72-b64a0bccce0c",
+        "Class": "HitScanComponent",
+        "Keys": {
+          "HitForce": {
+            "Type": "Vector3",
+            "Value": "\u002250,0,0\u0022"
+          },
+          "TraceCount": {
+            "Type": "Int32",
+            "Value": "15"
+          },
+          "TraceSpread": {
+            "Type": "Single",
+            "Value": "200"
+          },
+          "TraceDelay": {
+            "Type": "Single",
+            "Value": "0.05"
+          },
+          "TraceDistance": {
+            "Type": "Single",
+            "Value": "5000"
+          },
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "15"
+          },
+          "ExplosionDamage": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "PenetrateTargets": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "PenetrateWorld": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "Damage": {
+            "Type": "Single",
+            "Value": "4"
+          },
+          "UseMuzzleParticle": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "TraceParticle": {
+            "Type": "ParticleSystem",
+            "Value": "\u0022particles/guntrace/guntrace.vpcf\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Shoot\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "TraceSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/uzi/uzi_shot.sound\u0022"
+          },
+          "FinishSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/uzi/uzi_casing_drop.sound\u0022"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "2"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Uzi\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/uzi/uzi.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Uzi\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/uzi/uzi.vmdl_c.png\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "3"
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "3f255604-3fc7-48bb-b33a-7b31add5cd16",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "80ba66d8-0911-47f1-9ab3-8a9c02ef651d",
+        "Class": "MeleeComponent",
+        "Keys": {
+          "Damage": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "HitForce": {
+            "Type": "Vector3",
+            "Value": "\u00221500,0,500\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Swing\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "HitDelay": {
+            "Type": "Single",
+            "Value": "0.1"
+          },
+          "HitSize": {
+            "Type": "Vector3",
+            "Value": "\u002256,0,0\u0022"
+          },
+          "HitOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,-10\u0022"
+          },
+          "HitSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/bat/bat_swing.sound\u0022"
+          },
+          "ImpactSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/bat/bat_impact.sound\u0022"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "2"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Swing\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/baseballbat/baseballbat.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Baseball Bat\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/baseballbat/baseballbat.vmdl_c.png\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "3"
+      }
+    }
+  }
+}
