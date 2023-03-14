@@ -132,6 +132,9 @@ public partial class Grub
 			Owner = this,
 			Parent = this,
 		};
+
+		if ( DeathReason.FromKillTrigger )
+			Delete();
 	}
 
 	[ConCmd.Admin( "kill" )]

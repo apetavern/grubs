@@ -100,7 +100,9 @@ public partial class FreeForAll : Gamemode
 	private void ZoneTrigger()
 	{
 		var grubs = All.OfType<Grub>();
-		foreach ( var grub in grubs )
+
+		// Loop in reverse incase any grubs get deleted.
+		foreach ( var grub in grubs.Reverse() )
 		{
 			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
 			{
@@ -108,7 +110,6 @@ public partial class FreeForAll : Gamemode
 					continue;
 
 				zone.Trigger( grub );
-				grub.Delete();
 			}
 		}
 

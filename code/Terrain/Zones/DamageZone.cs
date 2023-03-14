@@ -72,5 +72,9 @@ public sealed partial class DamageZone : TerrainZone
 		var damageInfo = DamageInfoExtension.FromZone( this );
 		damageInfo.Position = entity.Position;
 		entity.TakeDamage( damageInfo );
+
+		// Immediately apply damage given by a damage zone.
+		if ( entity is Grub grub )
+			grub.ApplyDamage();
 	}
 }

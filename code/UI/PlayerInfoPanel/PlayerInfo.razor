@@ -39,7 +39,7 @@
 
     private int GetHealthPercentage()
     {
-        return Player.Grubs.Count != 0 ? Player.GetTotalGrubHealth() / Player.Grubs.Count : 0;
+        return Player.GetTotalGrubHealth() / GrubsConfig.GrubCount;
     }
 
     protected override int BuildHash()
