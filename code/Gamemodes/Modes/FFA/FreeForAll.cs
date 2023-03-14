@@ -108,11 +108,7 @@ public partial class FreeForAll : Gamemode
 					continue;
 
 				zone.Trigger( grub );
-				if ( grub.IsTurn )
-				{
-					grub.KilledFromZone = true;
-					UseTurn();
-				}
+				grub.Delete();
 			}
 		}
 
@@ -359,11 +355,11 @@ public partial class FreeForAll : Gamemode
 
 	private bool CheckCurrentPlayerFiring()
 	{
-		var weapon = ActivePlayer.ActiveGrub.ActiveWeapon;
-		if ( weapon is null )
+		if ( !ActivePlayer.ActiveGrub.IsValid() )
 			return false;
 
-		return weapon.IsFiring() && !weapon.AllowMovement;
+		var weapon = ActivePlayer.ActiveGrub.ActiveWeapon;
+		return weapon.IsValid() && weapon.IsFiring() && !weapon.AllowMovement;
 	}
 
 	[Event.Tick.Server]
@@ -390,7 +386,7 @@ public partial class FreeForAll : Gamemode
 			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
 				return;
 
-			if ( ActivePlayer.IsDisconnected )
+			if ( !ActivePlayer.ActiveGrub.IsValid() || ActivePlayer.IsDisconnected )
 			{
 				UseTurn( false );
 			}
