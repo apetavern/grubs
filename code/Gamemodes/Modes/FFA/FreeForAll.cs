@@ -164,6 +164,11 @@ public partial class FreeForAll : Gamemode
 
 		await GameTask.DelaySeconds( 1f );
 
+		while ( !IsWorldResolved() )
+		{
+			await GameTask.Delay( 300 );
+		}
+
 		await HandleGrubDeaths();
 		await HandleCrateSpawns();
 

@@ -55,8 +55,6 @@ public partial class Grub
 		{
 			if ( MoveInput != 0f && Controller.IsGrounded )
 			{
-				if ( IsTurn )
-					Log.Info( TimeSinceLastSqueak );
 				if ( TimeSinceLastSqueak > 0.6f )
 				{
 					TimeSinceLastSqueak = 0f;

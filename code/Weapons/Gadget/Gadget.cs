@@ -17,7 +17,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	[Prefab, ResourceType( "vpcf" )]
 	public string TrailParticle { get; set; }
 
-	public bool Resolved => Velocity.IsNearlyZero( 2.5f );
+	public bool Resolved => false;
 
 	public override void Spawn()
 	{
