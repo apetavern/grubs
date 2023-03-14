@@ -29,7 +29,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 	public Color Color => Player.Preferences.Color;
 
-	public bool Resolved => Controller.Velocity.IsNearlyZero( 0.1f ) || LifeState is LifeState.Dead;
+	public bool Resolved => Controller.Velocity.IsNearlyZero( 0.1f ) || LifeState is LifeState.Dead or LifeState.Dying || KilledFromZone;
 
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
 

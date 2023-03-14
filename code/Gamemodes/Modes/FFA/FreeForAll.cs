@@ -109,7 +109,10 @@ public partial class FreeForAll : Gamemode
 
 				zone.Trigger( grub );
 				if ( grub.IsTurn )
+				{
+					grub.KilledFromZone = true;
 					UseTurn();
+				}
 			}
 		}
 
@@ -163,11 +166,6 @@ public partial class FreeForAll : Gamemode
 		ActivePlayer.EndTurn();
 
 		await GameTask.DelaySeconds( 1f );
-
-		while ( !IsWorldResolved() )
-		{
-			await GameTask.Delay( 300 );
-		}
 
 		await HandleGrubDeaths();
 		await HandleCrateSpawns();
@@ -423,6 +421,7 @@ public partial class FreeForAll : Gamemode
 			var lineOffset = 19;
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
 			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
+			DebugOverlay.ScreenText( $"UsedTurn: {UsedTurn}", lineOffset++ );
 		}
 	}
 
