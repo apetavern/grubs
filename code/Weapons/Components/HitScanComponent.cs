@@ -191,7 +191,6 @@ public partial class HitScanComponent : WeaponComponent
 
 	private void HitGrub( Grub grub, Vector3 direction )
 	{
-		Log.Info( direction );
 		grub.ApplyAbsoluteImpulse( HitForce * direction );
 		grub.TakeDamage( new DamageInfo
 		{
