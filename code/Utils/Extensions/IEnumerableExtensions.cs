@@ -16,9 +16,9 @@ public static class ListExtensions
 	{
 		for ( int i = list.Count - 1; i >= 0; --i )
 		{
-			var gadget = list.ElementAt( i );
-			if ( gadget.IsValid() )
-				gadget.Simulate( client );
+			var entity = list.ElementAt( i );
+			if ( entity.IsValid() )
+				entity.Simulate( client );
 			else
 				list.RemoveAt( i );
 		}
