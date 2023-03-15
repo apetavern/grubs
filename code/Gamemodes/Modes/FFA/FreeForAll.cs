@@ -97,35 +97,6 @@ public partial class FreeForAll : Gamemode
 		ActivePlayer = PlayerTurnQueue.Dequeue();
 	}
 
-	private void ZoneTrigger()
-	{
-		var grubs = All.OfType<Grub>();
-
-		// Loop in reverse incase any grubs get deleted.
-		foreach ( var grub in grubs.Reverse() )
-		{
-			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
-			{
-				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( grub ) )
-					continue;
-
-				zone.Trigger( grub );
-			}
-		}
-
-		var gadgets = All.OfType<Gadget>();
-		foreach ( var proj in gadgets )
-		{
-			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
-			{
-				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( proj ) )
-					continue;
-
-				zone.Trigger( proj );
-			}
-		}
-	}
-
 	internal override void UseTurn( bool giveMovementGrace = false )
 	{
 		if ( giveMovementGrace )
@@ -402,7 +373,6 @@ public partial class FreeForAll : Gamemode
 				NextTurnTask ??= NextTurn();
 			}
 
-			ZoneTrigger();
 			AllowMovement = !CheckCurrentPlayerFiring();
 		}
 		//

@@ -73,17 +73,17 @@ public partial class World : Entity
 
 	private void SetupKillZone( float height )
 	{
-		var killBounds = new MultiShape().AddShape(
-			BoxShape
-			.WithSize( new Vector3( int.MaxValue, WorldWidth, 100 ) )
-			.WithOffset( new Vector3( -int.MaxValue / 2, -WorldWidth / 2, -height - 100 ) ) );
+		// Need a custom value here since DebugOverlay.Box breaks with float.MaxValue.
+		var maxValue = 2147483;
+
+		var min = new Vector3( -maxValue, -WorldWidth / 2, -height - 100 );
+		var max = new Vector3( maxValue, WorldWidth / 2, -height );
 
 		KillZone = new DamageZone()
 			.WithDamageTags( "outofarea" )
-			.WithInstantKill( true )
 			.WithDamage( 9999 )
 			.WithPosition( Vector3.Zero )
-			.WithShape( killBounds )
+			.WithBBox( new BBox( min, max ) )
 			.Finish<DamageZone>();
 	}
 
