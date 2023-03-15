@@ -49,12 +49,12 @@ public partial class Gamemode : Entity
 	/// The current amount of wind steps.
 	/// </summary>
 	[Net]
-	public int WindSteps { get; set; }
+	public int ActiveWindSteps { get; set; }
 
 	/// <summary>
 	/// The current wind force.
 	/// </summary>
-	public float Wind => WindSteps * GrubsConfig.WindForce;
+	public float ActiveWindForce => ActiveWindSteps * GrubsConfig.WindForce;
 
 	public virtual bool AllowFriendlyFire => false;
 
