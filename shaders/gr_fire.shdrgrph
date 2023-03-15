@@ -1,0 +1,624 @@
+{
+  "Model": "models/dev/box.vmdl",
+  "Description": "",
+  "BlendMode": "Translucent",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {
+        "Identifier": "35",
+        "Output": "Result"
+      },
+      "Emission": {
+        "Identifier": "37",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
+      "Normal": {},
+      "Roughness": {},
+      "Metalness": {},
+      "AmbientOcclusion": {},
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "2864,320"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "6",
+        "Output": "Vector"
+      },
+      "Texture": "materials/particles/beam_noise05.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "Noise One",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "1",
+      "Position": "-320,-80"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "2",
+      "Position": "-1088,96"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Y"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "3",
+      "Position": "-640,48"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "4",
+      "Position": "-1104,-96"
+    },
+    {
+      "_class": "SplitVector",
+      "Input": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "Identifier": "5",
+      "Position": "-864,-96"
+    },
+    {
+      "_class": "CombineVector",
+      "X": {
+        "Identifier": "5",
+        "Output": "X"
+      },
+      "Y": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Z": {},
+      "W": {},
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "6",
+      "Position": "-512,-80"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 5,
+      "Name": "Noise One Pan Speed",
+      "Value": 1,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "7",
+      "Position": "-1088,32"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "8",
+      "Position": "-848,48"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "9",
+      "Position": "992,304"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "25",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "10",
+      "Position": "880,192"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "UV Distortion Intensity",
+      "Value": 0.5,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "11",
+      "Position": "656,240"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "12",
+      "Position": "656,336"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "Texture": "materials/particles/beam_generic_7_edge.vtex",
+      "Sampler": {
+        "AddressU": "Clamp",
+        "AddressV": "Clamp"
+      },
+      "UI": {
+        "Name": "Gradient",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "13",
+      "Position": "1184,304"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "20",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "14",
+      "Position": "-912,640"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "15",
+      "Position": "-1168,496"
+    },
+    {
+      "_class": "CombineVector",
+      "X": {
+        "Identifier": "19",
+        "Output": "X"
+      },
+      "Y": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "Z": {},
+      "W": {},
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "16",
+      "Position": "-576,512"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "19",
+        "Output": "Y"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "17",
+      "Position": "-704,640"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "18",
+      "Position": "-1152,688"
+    },
+    {
+      "_class": "SplitVector",
+      "Input": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "Identifier": "19",
+      "Position": "-928,496"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 5,
+      "Name": "Noise Two Pan Speed",
+      "Value": 0.5,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "20",
+      "Position": "-1152,624"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "16",
+        "Output": "Vector"
+      },
+      "Texture": "materials/particle/base_trail.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "Noise Two",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "21",
+      "Position": "-384,512"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "21",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "22",
+      "Position": "0,192"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": " Noise 02",
+      "Input": {},
+      "Identifier": "23",
+      "Position": "-672,608"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": " Noise 01",
+      "Input": {},
+      "Identifier": "24",
+      "Position": "-608,16"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "22",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "27",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "25",
+      "Position": "528,192"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "Gradient",
+      "Input": {},
+      "Identifier": "26",
+      "Position": "1264,272"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {},
+      "Texture": "materials/particle/base_sprite.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "Distortion Mask",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "27",
+      "Position": "288,288"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "30",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "28",
+      "Position": "1712,368"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "UV Distort",
+      "Input": {},
+      "Identifier": "29",
+      "Position": "768,192"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "41",
+        "Output": "Result"
+      },
+      "Texture": "materials/particles/fluids/beam_blood_spray_01.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "Flame Mask",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "30",
+      "Position": "1472,496"
+    },
+    {
+      "_class": "SmoothStep",
+      "Input": {
+        "Identifier": "28",
+        "Output": "Result"
+      },
+      "Edge1": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "Edge2": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "Identifier": "31",
+      "Position": "2064,368"
+    },
+    {
+      "_class": "Saturate",
+      "Input": {
+        "Identifier": "31",
+        "Output": "Result"
+      },
+      "Identifier": "32",
+      "Position": "2320,368"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "SmoothStep In",
+      "Value": 0,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "33",
+      "Position": "1808,496"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "SmoothStep Out",
+      "Value": 1,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "34",
+      "Position": "1808,560"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "28",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "36",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "35",
+      "Position": "2048,-96"
+    },
+    {
+      "_class": "Float4",
+      "Name": "Colour",
+      "Value": "1,1,1,1",
+      "UI": {
+        "Type": "Color",
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "36",
+      "Position": "1712,-240"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "35",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "38",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "37",
+      "Position": "2384,-96"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 100,
+      "Name": "Emission Strength",
+      "Value": 1,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "38",
+      "Position": "2160,-0"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "Flame Mask Distortion",
+      "Value": 0.05,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "39",
+      "Position": "-16,864"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "22",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "39",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "40",
+      "Position": "224,848"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "40",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "42",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "41",
+      "Position": "720,848"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "42",
+      "Position": "464,896"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "Colour",
+      "Input": {},
+      "Identifier": "43",
+      "Position": "2240,-96"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "Flame Mask",
+      "Input": {},
+      "Identifier": "44",
+      "Position": "1728,512"
+    }
+  ]
+}
