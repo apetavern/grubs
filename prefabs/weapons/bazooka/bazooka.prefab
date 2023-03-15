@@ -20,6 +20,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "GadgetPrefab": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/bazooka/bazooka_projectile.prefab\u0022"
           }
         }
       }

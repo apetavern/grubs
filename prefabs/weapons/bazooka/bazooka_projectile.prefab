@@ -62,7 +62,9 @@
           "_name": {
             "Value": "\u0022Explosive\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],

@@ -4,7 +4,7 @@
 public partial class GadgetWeaponComponent : WeaponComponent
 {
 	[Prefab, Net]
-	public string GadgetPrefabPath { get; set; }
+	public Prefab GadgetPrefab { get; set; }
 
 	public override void Simulate( IClient client )
 	{
@@ -31,8 +31,8 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		if ( !Game.IsServer )
 			return;
 
-		if ( PrefabLibrary.TrySpawn<Gadget>( GadgetPrefabPath, out var gadget ) )
-			gadget.OnUse( Grub, Weapon, Charge );
+		var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
+		gadget.OnUse( Grub, Weapon, Charge );
 
 		IsFiring = false;
 		Charge = MinCharge;
