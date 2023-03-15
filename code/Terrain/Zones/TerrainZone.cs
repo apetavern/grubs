@@ -57,9 +57,6 @@ public partial class TerrainZone : ModelEntity
 	[ConVar.Server( "gr_zone_debug" )]
 	public static bool ZoneDebug { get; set; }
 
-	/// <summary>
-	/// Adds/Removes queued zones and shows all the zones if <see cref="ZoneDebug"/> is true.
-	/// </summary>
 	[Event.Tick.Server]
 	public void Tick()
 	{

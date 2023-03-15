@@ -12,7 +12,7 @@ public sealed partial class DamageZone : TerrainZone
 	public IList<string> DamageTags { get; private set; } = null!;
 
 	/// <summary>
-	/// The damage that will be applied for every turn the grub is in it.
+	/// The damage that will be applied when another entity touches it.
 	/// </summary>
 	[Net]
 	public float DamagePerTrigger { get; private set; }
