@@ -15,7 +15,7 @@ public sealed partial class DamageZone : TerrainZone
 	/// The damage that will be applied when another entity touches it.
 	/// </summary>
 	[Net]
-	public float DamagePerTrigger { get; private set; }
+	public float DamageOnTouch { get; private set; }
 
 	/// <summary>
 	/// Sets the damage tags to use in the damage applied to the entity.
@@ -36,7 +36,7 @@ public sealed partial class DamageZone : TerrainZone
 	/// <returns>The damage zone instance.</returns>
 	public DamageZone WithDamage( float damage )
 	{
-		DamagePerTrigger = damage;
+		DamageOnTouch = damage;
 		return this;
 	}
 
