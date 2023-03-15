@@ -148,6 +148,9 @@ public partial class FreeForAll : Gamemode
 		if ( await CleanupTurn() )
 			return;
 
+		if ( GrubsConfig.WindEnabled )
+			WindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
+
 		RotateActivePlayer();
 
 		UsedTurn = false;

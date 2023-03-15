@@ -32,8 +32,8 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 
 		var arcTrace = new ArcTrace( Grub, Gadget, weapon.GetStartPosition() );
 		Segments = ShouldBounce
-			? arcTrace.RunTowardsWithBounces( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, 0, MaxBounces )
-			: arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, 0f );
+			? arcTrace.RunTowardsWithBounces( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, GamemodeSystem.Instance.Wind, MaxBounces )
+			: arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, 0f, GamemodeSystem.Instance.Wind );
 		Gadget.Position = Segments[0].StartPos;
 	}
 

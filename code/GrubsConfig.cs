@@ -47,6 +47,12 @@ public static class GrubsConfig
 	public static float WindForce { get; set; } = 0.1f;
 
 	/// <summary>
+	/// Determines the range of how weak or strong the wind will be each turn.
+	/// </summary>
+	[ConVar.Replicated( "wind_steps" )]
+	public static int WindSteps { get; set; } = 3;
+
+	/// <summary>
 	/// The percent chance that a Weapon Crate will spawn every turn.
 	/// </summary>
 	[ConVar.Replicated( "crate_weapon_chance" )]
