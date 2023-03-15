@@ -166,7 +166,7 @@ public partial class HitScanComponent : WeaponComponent
 		{
 			if ( tr.Entity is Grub grub )
 			{
-				HitGrub( grub, tr.Direction );
+				HitGrub( grub, -tr.Normal );
 				return false;
 			}
 			else if ( tr.Entity is CsgSolid )
