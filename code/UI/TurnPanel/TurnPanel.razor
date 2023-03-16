@@ -2,20 +2,20 @@
 
 @if (GamemodeSystem.Instance is null || !GamemodeSystem.Instance.ActivePlayer.IsValid())
 {
-    return;
+	return;
 }
 
 <root class="@(GamemodeSystem.Instance.TurnIsChanging ? "hide" : "")">
-    <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
-    <label 
-        class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn") 
-        style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
-    />
+	<label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
+	<label 
+		class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn") 
+		style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
+	/>
 	<div class="wind">
 		@for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
 		{
 			var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
-			<label class="icon" text=@(facingRight ? "east" : "west") />
+				<label class="icon" text=@(facingRight ? "east" : "west") />
 		}
 	</div>
 </root>
@@ -23,7 +23,7 @@
 @code {
 	private string FormatAsTimer(float time)
 	{
-		return TimeSpan.FromSeconds( time.CeilToInt() ).TotalSeconds.ToString();
+		return TimeSpan.FromSeconds(time.CeilToInt()).TotalSeconds.ToString();
 	}
 
 	protected override int BuildHash()
@@ -32,7 +32,7 @@
 			return HashCode.Combine(-1);
 
 		return HashCode.Combine(
-			FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), 
+			FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()),
 			GamemodeSystem.Instance.ActivePlayer?.SteamId,
 			GamemodeSystem.Instance.TurnIsChanging,
 			GamemodeSystem.Instance.ActiveWindSteps
