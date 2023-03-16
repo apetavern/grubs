@@ -64,6 +64,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "AffectedByWind": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       }
