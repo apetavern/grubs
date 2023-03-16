@@ -28,15 +28,15 @@
 
     protected override int BuildHash()
     {
-        if (GamemodeSystem.Instance is null)
-            return HashCode.Combine(-1);
+		if (GamemodeSystem.Instance is null)
+			return HashCode.Combine(-1);
 
-        return HashCode.Combine(
-            FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), 
-            GamemodeSystem.Instance.ActivePlayer?.SteamId,
-            GamemodeSystem.Instance.TurnIsChanging,
+		return HashCode.Combine(
+			FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), 
+			GamemodeSystem.Instance.ActivePlayer?.SteamId,
+			GamemodeSystem.Instance.TurnIsChanging,
 			GamemodeSystem.Instance.ActiveWindSteps
-        );
+		);
     }
 }
 
