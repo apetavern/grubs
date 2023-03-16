@@ -41,6 +41,6 @@ public static class DamageInfoExtension
 	{
 		return new DamageInfo()
 			.WithTags( zone.DamageTags.ToArray() )
-			.WithDamage( zone.DamagePerTrigger );
+			.WithDamage( zone.DamageOnTouch );
 	}
 }

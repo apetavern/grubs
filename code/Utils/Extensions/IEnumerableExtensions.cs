@@ -11,4 +11,16 @@ public static class ListExtensions
 
 		return result;
 	}
+
+	public static void Simulate<T>( this IList<T> list, IClient client ) where T : Entity
+	{
+		for ( int i = list.Count - 1; i >= 0; --i )
+		{
+			var entity = list.ElementAt( i );
+			if ( entity.IsValid() )
+				entity.Simulate( client );
+			else
+				list.RemoveAt( i );
+		}
+	}
 }

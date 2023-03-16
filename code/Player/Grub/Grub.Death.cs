@@ -18,9 +18,6 @@ public partial class Grub
 	[Net]
 	public int TotalDamageTaken { get; set; }
 
-	[Net]
-	public bool KilledFromZone { get; set; }
-
 	public Queue<DamageInfo> DamageQueue { get; set; } = new();
 
 	public override void TakeDamage( DamageInfo info )
@@ -135,6 +132,9 @@ public partial class Grub
 			Owner = this,
 			Parent = this,
 		};
+
+		if ( DeathReason.FromKillTrigger )
+			Delete();
 	}
 
 	[ConCmd.Admin( "kill" )]

@@ -12,17 +12,10 @@ public sealed partial class DamageZone : TerrainZone
 	public IList<string> DamageTags { get; private set; } = null!;
 
 	/// <summary>
-	/// Whether or not this zone is a kill barrier.
+	/// The damage that will be applied when another entity touches it.
 	/// </summary>
 	[Net]
-	public bool InstantKill { get; private set; }
-
-	/// <summary>
-	/// The damage for every turn the grub is in it.
-	/// <remarks>In the case of <see cref="InstantKill"/> being true. This will be the damage applied to kill the grub.</remarks>
-	/// </summary>
-	[Net]
-	public float DamagePerTrigger { get; private set; }
+	public float DamageOnTouch { get; private set; }
 
 	/// <summary>
 	/// Sets the damage tags to use in the damage applied to the entity.
@@ -37,40 +30,24 @@ public sealed partial class DamageZone : TerrainZone
 	}
 
 	/// <summary>
-	/// Sets whether or not this zone is meant to instant kill anything that enters it.
-	/// </summary>
-	/// <param name="instantKill">Whether or not to instant kill.</param>
-	/// <returns>The damage zone instance.</returns>
-	public DamageZone WithInstantKill( bool instantKill )
-	{
-		InstantKill = instantKill;
-		return this;
-	}
-
-	/// <summary>
 	/// Sets the amount of damage this zone will deal to anything that enters it.
 	/// </summary>
 	/// <param name="damage">The damage to deal.</param>
 	/// <returns>The damage zone instance.</returns>
 	public DamageZone WithDamage( float damage )
 	{
-		DamagePerTrigger = damage;
+		DamageOnTouch = damage;
 		return this;
 	}
 
-	/// <summary>
-	/// Deals damage to an entity that is inside the zone.
-	/// </summary>
-	/// <param name="entity">The entity that is being damaged.</param>
-	public override void Trigger( Entity entity )
+	public override void StartTouch( Entity entity )
 	{
-		base.Trigger( entity );
-
-		if ( !InZone( entity ) )
-			return;
-
 		var damageInfo = DamageInfoExtension.FromZone( this );
 		damageInfo.Position = entity.Position;
 		entity.TakeDamage( damageInfo );
+
+		// Immediately apply damage given by a damage zone if it's a Grub.
+		if ( entity is Grub grub )
+			grub.ApplyDamage();
 	}
 }

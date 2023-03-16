@@ -97,38 +97,6 @@ public partial class FreeForAll : Gamemode
 		ActivePlayer = PlayerTurnQueue.Dequeue();
 	}
 
-	private void ZoneTrigger()
-	{
-		var grubs = All.OfType<Grub>();
-		foreach ( var grub in grubs )
-		{
-			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
-			{
-				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( grub ) )
-					continue;
-
-				zone.Trigger( grub );
-				if ( grub.IsTurn )
-				{
-					grub.KilledFromZone = true;
-					UseTurn();
-				}
-			}
-		}
-
-		var gadgets = All.OfType<Gadget>();
-		foreach ( var proj in gadgets )
-		{
-			foreach ( var zone in TerrainZone.All.OfType<DamageZone>() )
-			{
-				if ( !zone.IsValid || !zone.InstantKill || !zone.InZone( proj ) )
-					continue;
-
-				zone.Trigger( proj );
-			}
-		}
-	}
-
 	internal override void UseTurn( bool giveMovementGrace = false )
 	{
 		if ( giveMovementGrace )
@@ -359,11 +327,11 @@ public partial class FreeForAll : Gamemode
 
 	private bool CheckCurrentPlayerFiring()
 	{
-		var weapon = ActivePlayer.ActiveGrub.ActiveWeapon;
-		if ( weapon is null )
+		if ( !ActivePlayer.ActiveGrub.IsValid() )
 			return false;
 
-		return weapon.IsFiring() && !weapon.AllowMovement;
+		var weapon = ActivePlayer.ActiveGrub.ActiveWeapon;
+		return weapon.IsValid() && weapon.IsFiring() && !weapon.AllowMovement;
 	}
 
 	[Event.Tick.Server]
@@ -390,7 +358,7 @@ public partial class FreeForAll : Gamemode
 			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
 				return;
 
-			if ( ActivePlayer.IsDisconnected )
+			if ( !ActivePlayer.ActiveGrub.IsValid() || ActivePlayer.IsDisconnected )
 			{
 				UseTurn( false );
 			}
@@ -405,7 +373,6 @@ public partial class FreeForAll : Gamemode
 				NextTurnTask ??= NextTurn();
 			}
 
-			ZoneTrigger();
 			AllowMovement = !CheckCurrentPlayerFiring();
 		}
 		//

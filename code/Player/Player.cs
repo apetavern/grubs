@@ -65,33 +65,13 @@ public partial class Player : Entity
 
 	public override void Simulate( IClient client )
 	{
-		Inventory?.Simulate( client );
-		SimulateGadgets( client );
-
-		foreach ( var grub in Grubs )
-		{
-			grub?.Simulate( client );
-		}
-
-		foreach ( var drop in Drops )
-		{
-			drop?.Simulate( client );
-		}
+		Inventory.Simulate( client );
+		Grubs.Simulate( client );
+		Gadgets.Simulate( client );
+		Drops.Simulate( client );
 
 		if ( IsTurn )
 			ActiveGrub?.UpdateInputFromOwner( MoveInput, LookInput );
-	}
-
-	private void SimulateGadgets( IClient client )
-	{
-		for ( int i = Gadgets.Count - 1; i >= 0; --i )
-		{
-			var gadget = Gadgets[i];
-			if ( gadget.IsValid() )
-				gadget.Simulate( client );
-			else
-				Gadgets.RemoveAt( i );
-		}
 	}
 
 	public override void FrameSimulate( IClient client )
