@@ -21,13 +21,13 @@
 </root>
 
 @code {
-    private string FormatAsTimer(float time)
-    {
-        return TimeSpan.FromSeconds( time.CeilToInt() ).TotalSeconds.ToString();
-    }
+	private string FormatAsTimer(float time)
+	{
+		return TimeSpan.FromSeconds( time.CeilToInt() ).TotalSeconds.ToString();
+	}
 
-    protected override int BuildHash()
-    {
+	protected override int BuildHash()
+	{
 		if (GamemodeSystem.Instance is null)
 			return HashCode.Combine(-1);
 
@@ -37,7 +37,7 @@
 			GamemodeSystem.Instance.TurnIsChanging,
 			GamemodeSystem.Instance.ActiveWindSteps
 		);
-    }
+	}
 }
 
 <style>
