@@ -11,13 +11,15 @@
 		class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn") 
 		style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
 	/>
-	<div class="wind">
-		@for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
-		{
-			var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
-				<label class="icon" text=@(facingRight ? "east" : "west") />
-		}
-	</div>
+	@{
+		var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
+		<div class="wind @(facingRight ? "right" : "left")">
+			@for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
+			{
+				<label class="icon" text=@(facingRight ? "keyboard_arrow_right" : "keyboard_arrow_left") />
+			}
+		</div>
+	}
 </root>
 
 @code {
@@ -43,7 +45,7 @@
 <style>
 	TurnPanel {
 		position: absolute;
-		bottom: 140px;
+		bottom: 160px;
 		left: 50%;
 		transform: translateX(-50%) translateY(-50%);
 		flex-direction: column;
@@ -66,18 +68,42 @@
 
 		.wind {
 			position: absolute;
-			bottom: -55px;
+			bottom: -70px;
 
 			.icon {
-				font-family: MaterialIcons;
-				font-size: 30px;
+				font-family: MaterialIconsRound;
+				font-size: 40px;
 				color: white;
 				text-shadow: 2px 2px 0px black;
+			}
+
+			animation-duration: 1.3s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease-in-out;
+
+			&.left {
+				animation-name: moving-left;
+			}
+
+			&.right {
+				animation-name: moving-right;
 			}
 		}
 
 		&.hide {
 			opacity: 0;
 		}
+	}
+
+	@@keyframes moving-left {
+		0%		{ transform:	translateX(0); }
+		75%		{ transform:	translateX(-10); }
+		100%	{ transform:	translateX(0); }
+	}
+
+	@@keyframes moving-right {
+		0%		{ transform:	translateX(0); }
+		75%		{ transform:	translateX(10); }
+		100%	{ transform:	translateX(0); }
 	}
 </style>
