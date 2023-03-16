@@ -11,6 +11,13 @@
         class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn") 
         style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
     />
+	<div class="wind">
+		@for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
+		{
+			var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
+			<label class="icon" text=@(facingRight ? "east" : "west") />
+		}
+	</div>
 </root>
 
 @code {
@@ -27,7 +34,8 @@
         return HashCode.Combine(
             FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()), 
             GamemodeSystem.Instance.ActivePlayer?.SteamId,
-            GamemodeSystem.Instance.TurnIsChanging
+            GamemodeSystem.Instance.TurnIsChanging,
+			GamemodeSystem.Instance.ActiveWindSteps
         );
     }
 }
@@ -35,7 +43,7 @@
 <style>
     TurnPanel {
         position: absolute;
-        bottom: 125px;
+        bottom: 140px;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         flex-direction: column;
@@ -55,6 +63,18 @@
             bottom: -30px;
             font-size: 40px;
         }
+
+		.wind {
+            position: absolute;
+            bottom: -55px;
+
+			.icon {
+				font-family: MaterialIcons;
+				font-size: 30px;
+				color: white;
+				text-shadow: 2px 2px 0px black;
+			}
+		}
 
         &.hide {
             opacity: 0;
