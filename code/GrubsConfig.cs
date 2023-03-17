@@ -35,11 +35,29 @@ public static class GrubsConfig
 	public static int TurnDuration { get; set; } = 45;
 
 	/// <summary>
+	/// Whether or not wind is enabled.
+	/// </summary>
+	[ConVar.Replicated( "wind_enabled" )]
+	public static bool WindEnabled { get; set; } = true;
+
+	/// <summary>
+	/// The step force of wind.
+	/// </summary>
+	[ConVar.Replicated( "wind_force" )]
+	public static float WindForce { get; set; } = 0.1f;
+
+	/// <summary>
+	/// Determines the range of how weak or strong the wind will be each turn.
+	/// </summary>
+	[ConVar.Replicated( "wind_steps" )]
+	public static int WindSteps { get; set; } = 3;
+
+	/// <summary>
 	/// The percent chance that a Weapon Crate will spawn every turn.
 	/// </summary>
 	[ConVar.Replicated( "crate_weapon_chance" )]
 	public static int WeaponCrateChancePerTurn { get; set; } = 5;
-	
+
 	/// <summary>
 	/// The percent chance that a Tools Crate will spawn every turn.
 	/// </summary>

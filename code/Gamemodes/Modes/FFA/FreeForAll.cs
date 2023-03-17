@@ -116,6 +116,9 @@ public partial class FreeForAll : Gamemode
 		if ( await CleanupTurn() )
 			return;
 
+		if ( GrubsConfig.WindEnabled )
+			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
+
 		RotateActivePlayer();
 
 		UsedTurn = false;
@@ -400,6 +403,15 @@ public partial class FreeForAll : Gamemode
 
 		ffa.NextTurnTask = null;
 		ffa.UseTurn();
+	}
+
+	[ConCmd.Admin( "gr_wind_steps" )]
+	public static void SetWindSteps( int wind )
+	{
+		if ( GamemodeSystem.Instance is not FreeForAll ffa )
+			return;
+
+		ffa.ActiveWindSteps = wind;
 	}
 
 	[ConVar.Replicated( "gr_debug_ffa" )]

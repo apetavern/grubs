@@ -12,6 +12,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public int ThrowSpeed { get; set; } = 10;
 
+	[Prefab, Net]
+	public bool AffectedByWind { get; set; } = false;
+
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		if ( ShouldThrow )
@@ -31,6 +34,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		helper.TryMove( Time.Delta );
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
+
+		if ( GrubsConfig.WindEnabled && AffectedByWind )
+			Gadget.Velocity += new Vector3( GamemodeSystem.Instance.ActiveWindForce ).WithY( 0 );
 
 		if ( ShouldRotate )
 		{

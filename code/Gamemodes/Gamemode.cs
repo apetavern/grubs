@@ -45,6 +45,17 @@ public partial class Gamemode : Entity
 	[Net]
 	public bool AllowDamage { get; set; }
 
+	/// <summary>
+	/// The current amount of wind steps.
+	/// </summary>
+	[Net]
+	public int ActiveWindSteps { get; set; }
+
+	/// <summary>
+	/// The current wind force.
+	/// </summary>
+	public float ActiveWindForce => ActiveWindSteps * GrubsConfig.WindForce;
+
 	public virtual bool AllowFriendlyFire => false;
 
 	public virtual int MinimumPlayers => 2;
