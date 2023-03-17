@@ -14,7 +14,7 @@
     public static PlayerInfoPanel Current;
     public PlayerInfoPanel() => Current = this;
 
-    public void OnVoicePlayed( IClient client )
+    public void OnVoicePlayed(IClient client)
     {
         ChildrenOfType<PlayerInfo>().FirstOrDefault(e => e.Player.SteamId == client.SteamId)?.OnVoicePlayed();
     }

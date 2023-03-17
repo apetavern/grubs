@@ -4,23 +4,23 @@
 <root />
 
 @code {
-	protected readonly Entity Entity;
+    protected readonly Entity Entity;
 
-	public EntityWorldPanel( Entity entity )
-	{
-		SceneObject.Flags.ViewModelLayer = true;
-		Entity = entity;
-		Rotation = Rotation.LookAt( Vector3.Right );
-	}
+    public EntityWorldPanel(Entity entity)
+    {
+        SceneObject.Flags.ViewModelLayer = true;
+        Entity = entity;
+        Rotation = Rotation.LookAt(Vector3.Right);
+    }
 
-	public override void Tick()
-	{
-		if ( !Entity.IsValid() || Entity.LifeState == LifeState.Dead )
-		{
-			Delete( true );
-			return;
-		}
+    public override void Tick()
+    {
+        if (!Entity.IsValid() || Entity.LifeState == LifeState.Dead)
+        {
+            Delete(true);
+            return;
+        }
 
-		Position = Entity.Position + Vector3.Up * 50f;
-	}
+        Position = Entity.Position + Vector3.Up * 50f;
+    }
 }

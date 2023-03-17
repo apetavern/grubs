@@ -2,108 +2,109 @@
 
 @if (GamemodeSystem.Instance is null || !GamemodeSystem.Instance.ActivePlayer.IsValid())
 {
-	return;
+    return;
 }
 
 <root class="@(GamemodeSystem.Instance.TurnIsChanging ? "hide" : "")">
-	<label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
-	<label 
-		class="name" text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn") 
-		style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
-	/>
-	@{
-		var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
-		<div class="wind @(facingRight ? "right" : "left")">
-			@for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
-			{
-				<label class="icon" text=@(facingRight ? "keyboard_arrow_right" : "keyboard_arrow_left") />
-			}
-		</div>
-	}
+    <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
+    <label class="name" 
+        text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn")
+        style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
+    />
+    @{
+        var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
+        <div class="wind @(facingRight ? "right" : "left")">
+        @for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
+        {
+            <label class="icon" text=@(facingRight ? "keyboard_arrow_right" : "keyboard_arrow_left") />
+        }
+        </div>
+    }
 </root>
 
 @code {
-	private string FormatAsTimer(float time)
-	{
-		return TimeSpan.FromSeconds(time.CeilToInt()).TotalSeconds.ToString();
-	}
+    private string FormatAsTimer(float time)
+    {
+        return TimeSpan.FromSeconds(time.CeilToInt()).TotalSeconds.ToString();
+    }
 
-	protected override int BuildHash()
-	{
-		if (GamemodeSystem.Instance is null)
-			return HashCode.Combine(-1);
+    protected override int BuildHash()
+    {
+        if (GamemodeSystem.Instance is null)
+            return HashCode.Combine(-1);
 
-		return HashCode.Combine(
-			FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()),
-			GamemodeSystem.Instance.ActivePlayer?.SteamId,
-			GamemodeSystem.Instance.TurnIsChanging,
-			GamemodeSystem.Instance.ActiveWindSteps
-		);
-	}
+        return HashCode.Combine(
+            FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()),
+            GamemodeSystem.Instance.ActivePlayer?.SteamId,
+            GamemodeSystem.Instance.TurnIsChanging,
+            GamemodeSystem.Instance.ActiveWindSteps
+        );
+    }
 }
 
 <style>
-	TurnPanel {
-		position: absolute;
-		bottom: 160px;
-		left: 50%;
-		transform: translateX(-50%) translateY(-50%);
-		flex-direction: column;
-		align-items: center;
-		width: 600px;
-		transition: opacity 150ms ease-in;
+    TurnPanel {
+        position: absolute;
+        bottom: 160px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        flex-direction: column;
+        align-items: center;
+        width: 600px;
+        transition: opacity 150ms ease-in;
 
-		.timer, .name {
-			font-family: Londrina Solid;
-			font-size: 80px;
-			color: white;
-			text-shadow: 2px 2px 0px black;
-		}
+        .timer,
+        .name {
+            font-family: Londrina Solid;
+            font-size: 80px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
 
-		.name {
-			position: absolute;
-			bottom: -30px;
-			font-size: 40px;
-		}
+        .name {
+            position: absolute;
+            bottom: -30px;
+            font-size: 40px;
+        }
 
-		.wind {
-			position: absolute;
-			bottom: -70px;
+        .wind {
+            position: absolute;
+            bottom: -70px;
 
-			.icon {
-				font-family: MaterialIconsRound;
-				font-size: 40px;
-				color: white;
-				text-shadow: 2px 2px 0px black;
-			}
+            .icon {
+                font-family: MaterialIconsRound;
+                font-size: 40px;
+                color: white;
+                text-shadow: 2px 2px 0px black;
+            }
 
-			animation-duration: 1.3s;
-			animation-iteration-count: infinite;
-			animation-timing-function: ease-in-out;
+            animation-duration: 1.3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
 
-			&.left {
-				animation-name: moving-left;
-			}
+            &.left {
+                animation-name: moving-left;
+            }
 
-			&.right {
-				animation-name: moving-right;
-			}
-		}
+            &.right {
+                animation-name: moving-right;
+            }
+        }
 
-		&.hide {
-			opacity: 0;
-		}
-	}
+        &.hide {
+            opacity: 0;
+        }
+    }
 
-	@@keyframes moving-left {
-		0%		{ transform:	translateX(0); }
-		75%		{ transform:	translateX(-10); }
-		100%	{ transform:	translateX(0); }
-	}
+    @@keyframes moving-left {
+        0%   { transform: translateX(0); }
+        75%  { transform: translateX(-10); }
+        100% { transform: translateX(0); }
+    }
 
-	@@keyframes moving-right {
-		0%		{ transform:	translateX(0); }
-		75%		{ transform:	translateX(10); }
-		100%	{ transform:	translateX(0); }
-	}
+    @@keyframes moving-right {
+        0%   { transform: translateX(0); }
+        75%  { transform: translateX(10); }
+        100% { transform: translateX(0); }
+    }
 </style>

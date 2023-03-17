@@ -15,7 +15,7 @@
     private float _damage;
     private bool _isHeal;
 
-    public DamageNumber( Grub grub, float damage )
+    public DamageNumber(Grub grub, float damage)
     {
         SceneObject.Flags.ViewModelLayer = true;
 
@@ -23,8 +23,8 @@
         _isHeal = _damage < 0;
 
         Position = grub.Position + Offset;
-        Position = Position.WithY( -34 );
-        Rotation = Rotation.LookAt( Vector3.Right );
+        Position = Position.WithY(-34);
+        Rotation = Rotation.LookAt(Vector3.Right);
 
         _ = DelayDelete();
     }
@@ -34,7 +34,7 @@
 
     private async Task DelayDelete()
     {
-        await GameTask.Delay( 5000 );
+        await GameTask.Delay(5000);
 
         Delete();
     }
@@ -49,11 +49,11 @@
         label {
             font-size: 80px;
             font-family: Londrina Solid;
-            background-color: rgba( black, 0.1 );
-            border: 2px solid rgba( black, 0.1 );
+            background-color: rgba(black, 0.1);
+            border: 2px solid rgba(black, 0.1);
             border-radius: 4px;
             padding: 0px 20px;
-            text-shadow: 2px 2px 0px rgba( black, 0.75 );
+            text-shadow: 2px 2px 0px rgba(black, 0.75);
             margin: 2px 0;
 
             &.heal {

@@ -2,84 +2,84 @@
 
 @if (!IsPlaying())
 {
-	return;
+    return;
 }
 
 <root>
-	<div>
-		<label>Toggle Input</label>
-		<InputGlyph button="Score" />
-	</div>
-	<div>
-		<label>Attack</label>
-		<InputGlyph button="PrimaryAttack" />
-	</div>
-	<div>
-		<label>Camera</label>
-		<InputGlyph button="SecondaryAttack" />
-	</div>
-	<div>
-		<label>Move</label>
-		<InputGlyph button="Left" />
-		<InputGlyph button="Right" />
-	</div>
-	<div>
-		<label>Aim</label>
-		<InputGlyph button="Forward" />
-		<InputGlyph button="Back" />
-	</div>
-	<div>
-		<label>Inventory</label>
-		<InputGlyph button="Menu" />
-	</div>
-	<div>
-		<label>Jump</label>
-		<InputGlyph button="Jump" />
-	</div>
-	<div>
-		<label>Backflip</label>
-		<InputGlyph button="Run" />
-	</div>
+    <div>
+        <label>Toggle Input</label>
+        <InputGlyph button="Score" />
+    </div>
+    <div>
+        <label>Attack</label>
+        <InputGlyph button="PrimaryAttack" />
+    </div>
+    <div>
+        <label>Camera</label>
+        <InputGlyph button="SecondaryAttack" />
+    </div>
+    <div>
+        <label>Move</label>
+        <InputGlyph button="Left" />
+        <InputGlyph button="Right" />
+    </div>
+    <div>
+        <label>Aim</label>
+        <InputGlyph button="Forward" />
+        <InputGlyph button="Back" />
+    </div>
+    <div>
+        <label>Inventory</label>
+        <InputGlyph button="Menu" />
+    </div>
+    <div>
+        <label>Jump</label>
+        <InputGlyph button="Jump" />
+    </div>
+    <div>
+        <label>Backflip</label>
+        <InputGlyph button="Run" />
+    </div>
 </root>
 
 @code {
-	@* TODO: What about other gamemodes? *@
-	private bool IsPlaying()
-	{
-		return GamemodeSystem.Instance is FreeForAll ffa && ffa.CurrentState == FreeForAll.GameState.Playing;
-	}
+    @* TODO: What about other gamemodes? *@
+    private bool IsPlaying()
+    {
+        return GamemodeSystem.Instance is FreeForAll ffa && ffa.CurrentState == FreeForAll.GameState.Playing;
+    }
 
-	protected override int BuildHash() => HashCode.Combine(IsPlaying());
+    protected override int BuildHash() => HashCode.Combine(IsPlaying());
 }
 
 <style>
-	InputPanel {
-		position: absolute;
-		flex-direction: column;
-		align-items: flex-end;
-		top: 125px;
-		right: 100px;
-		opacity: 0.8;
-		transition: all 150ms ease-out;
+    InputPanel {
+        position: absolute;
+        flex-direction: column;
+        align-items: flex-end;
+        top: 125px;
+        right: 100px;
+        opacity: 0.8;
+        transition: all 150ms ease-out;
 
-		div {
-			align-items: center;
+        div {
+            align-items: center;
 
-			label {
-				font-size: 20px;
-				font-family: Londrina Solid;
-				color: white;
-				font-weight: bold;
-				text-shadow: 1px 1px 0px black;
-			}
+            label {
+                font-size: 20px;
+                font-family: Londrina Solid;
+                color: white;
+                font-weight: bold;
+                text-shadow: 1px 1px 0px black;
+            }
 
-			inputglyph {
-				margin: 5px 0px 5px 2px;
-			}
-		}
+            inputglyph {
+                margin: 5px 0px 5px 2px;
+            }
+        }
 
-		&.hide {
-			opacity: 0;
-		}
-	}
+        &.hide {
+            opacity: 0;
+        }
+    }
 </style>
