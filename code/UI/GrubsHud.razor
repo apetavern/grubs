@@ -2,26 +2,26 @@
 @inherits RootPanel
 
 <root>
-	<PlayerInfoPanel />
-	<TurnPanel />
-	<InventoryPanel />
-	<InputPanel />
+    <PlayerInfoPanel />
+    <TurnPanel />
+    <InventoryPanel />
+    <InputPanel />
 
-	@* Replace with proper menu *@
-	<GameStatePanel />
+    @* Replace with proper menu *@
+    <GameStatePanel />
 </root>
 
 @code
 {
-	public GrubsHud()
-	{
-		Game.AssertClient();
-		Game.RootPanel = this;
+    public GrubsHud()
+    {
+        Game.AssertClient();
+        Game.RootPanel = this;
 
-		_ = new AimReticle();
-		_ = new GrubDamageManager();
-		AddChild<EnablePointerEvents>();
-	}
+        _ = new AimReticle();
+        _ = new GrubDamageManager();
+        AddChild<EnablePointerEvents>();
+    }
 }
 
 <style>

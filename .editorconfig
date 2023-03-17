@@ -6,13 +6,18 @@ root = true
 indent_style = space
 indent_size = 4
 
+# Razor files
+[*.razor]
+indent_style = space
+indent_size = 4
+
 # html files
 [*.html]
 indent_style = space
 indent_size = 4
 
-# C# & Razor files
-[*.{cs,razor}]
+# C# files
+[*.cs]
 indent_style = tab
 indent_size = tab
 tab_size = 4

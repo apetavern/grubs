@@ -1,61 +1,61 @@
 @namespace Grubs
 
 <root>
-	@if (SteamId > 0)
-	{
-		<img src="avatar:@SteamId" />
-	}
-	<label class="name" text=@Name style="font-color: @Color.Hex;" />
-	<label class="msg" text=@Message />
+    @if (SteamId > 0)
+    {
+        <img src="avatar:@SteamId" />
+    }
+    <label class="name" text=@Name style="font-color: @Color.Hex;" />
+    <label class="msg" text=@Message />
 </root>
 
 @code
 {
-	public string Name { get; set; }
-	public Color Color { get; set; }
-	public string Message { get; set; }
-	public long SteamId { get; set; }
-	public TimeSince Lifetime { get; init; } = 0;
+    public string Name { get; set; }
+    public Color Color { get; set; }
+    public string Message { get; set; }
+    public long SteamId { get; set; }
+    public TimeSince Lifetime { get; init; } = 0;
 }
 
 <style>
-	TextChatEntry {
-		max-width: 100%;
-		transition: opacity 0.15s ease;
-		margin-bottom: 6px;
-		flex-shrink: 0;
+    TextChatEntry {
+        max-width: 100%;
+        transition: opacity 0.15s ease;
+        margin-bottom: 6px;
+        flex-shrink: 0;
 
-		img {
-			height: 30px;
-			width: 30px;
-			margin-right: 5px;
-			border-radius: 4px;
-			flex-shrink: 0;
-		}
+        img {
+            height: 30px;
+            width: 30px;
+            margin-right: 5px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
 
-		.name {
-			margin-right: 8px;
-			margin-top: 3px;
-			flex-shrink: 0;
+        .name {
+            margin-right: 8px;
+            margin-top: 3px;
+            flex-shrink: 0;
 
-			font-weight: 700;
-			font-size: 20px;
-			font-family: Londrina Solid;
-			text-shadow: 2px 2px 0px black;
-			font-weight: bold;
-		}
+            font-weight: 700;
+            font-size: 20px;
+            font-family: Londrina Solid;
+            text-shadow: 2px 2px 0px black;
+            font-weight: bold;
+        }
 
-		.msg {
-			margin-top: 3px;
-			font-size: 20px;
-			font-family: Londrina Solid;
-			color: rgb(207, 207, 207);
-			text-shadow: 2px 2px 0px black;
-		}
+        .msg {
+            margin-top: 3px;
+            font-size: 20px;
+            font-family: Londrina Solid;
+            color: rgb(207, 207, 207);
+            text-shadow: 2px 2px 0px black;
+        }
 
-		&.stale {
-			transition: opacity 1s ease;
-			opacity: 0;
-		}
-	}
+        &.stale {
+            transition: opacity 1s ease;
+            opacity: 0;
+        }
+    }
 </style>

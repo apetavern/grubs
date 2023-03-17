@@ -6,10 +6,10 @@
 </root>
 
 @code {
-    public AimReticle() 
+    public AimReticle()
     {
         SceneObject.Flags.ViewModelLayer = true;
-        Rotation = Rotation.RotateAroundAxis( Vector3.Up, 90f );
+        Rotation = Rotation.RotateAroundAxis(Vector3.Up, 90f);
     }
 
     private bool IsShowing()
@@ -20,7 +20,7 @@
         if (!player.ActiveGrub.ActiveWeapon.IsValid() || !player.ActiveGrub.ActiveWeapon.ShowReticle)
             return false;
 
-        return player.ActiveGrub.Controller.IsGrounded && player.ActiveGrub.Velocity.IsNearlyZero( 2.5f );
+        return player.ActiveGrub.Controller.IsGrounded && player.ActiveGrub.Velocity.IsNearlyZero(2.5f);
     }
 
     public override void Tick()
@@ -32,15 +32,15 @@
             return;
 
         var activeGrub = (Game.LocalPawn as Player).ActiveGrub;
-        var muzzle = activeGrub.ActiveWeapon.GetAttachment( "muzzle" );
+        var muzzle = activeGrub.ActiveWeapon.GetAttachment("muzzle");
 
-        var reticlePosition = muzzle is not null ? 
-            muzzle.Value.Position + muzzle.Value.Rotation.Forward * 80f : 
-            activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
+        var reticlePosition = muzzle is not null ?
+        muzzle.Value.Position + muzzle.Value.Rotation.Forward * 80f :
+        activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
 
         Position = reticlePosition;
-        Position = Position.WithY( -33 );
-        Rotation = Rotation.RotateAroundAxis( Vector3.Forward, 0.25f );
+        Position = Position.WithY(-33);
+        Rotation = Rotation.RotateAroundAxis(Vector3.Forward, 0.25f);
     }
 }
 
