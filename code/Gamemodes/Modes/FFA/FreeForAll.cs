@@ -134,6 +134,8 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private async ValueTask<bool> CleanupTurn()
 	{
+		Log.Info( "called" );
+
 		ActivePlayer.EndTurn();
 
 		await GameTask.DelaySeconds( 1f );
@@ -362,19 +364,13 @@ public partial class FreeForAll : Gamemode
 				return;
 
 			if ( !ActivePlayer.ActiveGrub.IsValid() || ActivePlayer.IsDisconnected )
-			{
 				UseTurn( false );
-			}
 
 			if ( TimeUntilNextTurn <= 0f && !UsedTurn )
-			{
 				UseTurn();
-			}
 
 			if ( UsedTurn && IsWorldResolved() )
-			{
 				NextTurnTask ??= NextTurn();
-			}
 
 			AllowMovement = !CheckCurrentPlayerFiring();
 		}

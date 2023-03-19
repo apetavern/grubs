@@ -189,7 +189,7 @@ public partial class GrubController : EntityComponent<Grub>
 		if ( Grub.ActiveWeapon is not null && Grub.ActiveWeapon.IsCharging() && !Grub.ActiveWeapon.AllowMovement )
 			isCharging = true;
 
-		return Grub.IsTurn && !gm.TurnIsChanging && !isCharging && gm.AllowMovement;
+		return Grub.IsTurn && !gm.UsedTurn && !gm.TurnIsChanging && !isCharging && gm.AllowMovement;
 	}
 
 	public bool ShouldShowWeapon()
