@@ -51,15 +51,12 @@ public partial class Grub
 		MoveInput = moveInput;
 		LookInput = -Facing * lookInput;
 
-		if ( IsTurn && TimeSinceLastSqueak > 0.7f )
+		if ( IsTurn && TimeSinceLastSqueak > 0.9f )
 		{
-			if ( MoveInput != 0f && Controller.IsGrounded )
+			if ( MoveInput != 0f && Controller.IsGrounded && !Velocity.IsNearlyZero( 50f ) )
 			{
-				if ( TimeSinceLastSqueak > 0.6f )
-				{
-					TimeSinceLastSqueak = 0f;
-					WalkEffects( To.Everyone );
-				}
+				TimeSinceLastSqueak = 0f;
+				WalkEffects( To.Everyone );
 			}
 		}
 
