@@ -52,6 +52,9 @@ public partial class Drop : ModelEntity, IResolvable
 
 	public override void StartTouch( Entity other )
 	{
+		if ( Game.IsClient )
+			return;
+
 		foreach ( var component in Components.GetAll<DropComponent>() )
 		{
 			component.OnTouch( other );
