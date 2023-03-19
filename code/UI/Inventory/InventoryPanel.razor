@@ -16,8 +16,8 @@
             <InventoryItem
             Weapon=@weapon
             HasAmmo=@hasAmmo
-            @onmouseover=@( () => SetHoveredWeapon(weapon) )
-            @onmouseout=@( () => SetHoveredWeapon(null) )
+            @onmouseover=@( () => _hoveredWeapon = weapon )
+            @onmouseout=@( () => _hoveredWeapon = null )
             @onclick=@( () => { if ( hasAmmo ) PlaySound("ui_button_click"); player.ActiveWeaponInput = weapon; } ) />
         }
     </div>
@@ -27,14 +27,6 @@
     private Weapon _hoveredWeapon;
     private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down(InputButton.Menu);
     private readonly int _totalAmmo = (Game.LocalPawn as Player).Inventory.Weapons.Sum(x => x.Ammo);
-
-    private void SetHoveredWeapon(Weapon weapon)
-    {
-        if (weapon is not null && weapon.HasAmmo())
-            PlaySound("ui_button_hover");
-
-        _hoveredWeapon = weapon;
-    }
 
     public override void Tick()
     {
