@@ -119,7 +119,7 @@ public partial class Grub
 	[ClientRpc]
 	public void WalkEffects()
 	{
-		this.SoundFromScreen( "my_sound" );
+		this.SoundFromScreen( "grub_squeak" );
 	}
 
 	[ConVar.Replicated( "gr_debug_input" )]
