@@ -6,12 +6,10 @@ public static class EntityExtensions
 	{
 		Assert.True( Game.IsClient );
 
-		if ( Game.LocalPawn is not Player player || !e.IsValid() )
+		if ( !e.IsValid() )
 			return;
 
 		var pos = e.Position.ToScreen();
-		var dist = player.GrubsCamera.Distance / 10f;
-		pos = ((pos - 0.5f) * dist) + 0.5f;
-		Sound.FromScreen( sound, -pos.x, -pos.y );
+		Sound.FromScreen( sound, pos.x, pos.y );
 	}
 }
