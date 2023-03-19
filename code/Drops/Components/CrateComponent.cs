@@ -1,4 +1,6 @@
-﻿namespace Grubs;
+﻿using static Grubs.GrubsEvent;
+
+namespace Grubs;
 
 [Prefab]
 public partial class CrateComponent : DropComponent
@@ -58,6 +60,14 @@ public partial class CrateComponent : DropComponent
 			default:
 				return;
 		}
+
+		PlayPickupSound( To.Everyone );
+	}
+
+	[ClientRpc]
+	public void PlayPickupSound()
+	{
+		Entity.SoundFromScreen( "item_pickup" );
 	}
 
 	[ClientRpc]
