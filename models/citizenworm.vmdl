@@ -161,7 +161,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 0
+								event_frame = 5
 								event_keys = 
 								{
 									name = "sounds/grub/grub_squeak.sound"
@@ -173,7 +173,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 4
+								event_frame = 9
 								event_keys = 
 								{
 									name = "sounds/grub/grub_squeak2.sound"
