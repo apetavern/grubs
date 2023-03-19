@@ -2,35 +2,35 @@
 
 @namespace Grubs
 
-@if ( Game.LocalPawn is not Player player )
+@if (Game.LocalPawn is not Player player)
 {
     return;
 }
 
 <root class="@( RequestOpen() ? "open" : "" )">
-    <label class="name" text=@_hoveredWeapon?.Name/>
+    <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
-        @foreach ( var weapon in player.Inventory.Weapons )
+        @foreach (var weapon in player.Inventory.Weapons)
         {
             var hasAmmo = weapon.HasAmmo();
             <InventoryItem
-                Weapon=@weapon
-                HasAmmo=@hasAmmo
-             @onmouseover=@( () => _hoveredWeapon = weapon )
-             @onmouseout=@( () => _hoveredWeapon = null )
-             @onclick=@( () => { if ( hasAmmo ) player.ActiveWeaponInput = weapon; } )/>
+            Weapon=@weapon
+            HasAmmo=@hasAmmo
+            @onmouseover=@( () => _hoveredWeapon = weapon )
+            @onmouseout=@( () => _hoveredWeapon = null )
+            @onclick=@( () => { if ( hasAmmo ) PlaySound("ui_button_click"); player.ActiveWeaponInput = weapon; } ) />
         }
     </div>
 </root>
 
 @code {
     private Weapon _hoveredWeapon;
-    private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down( InputButton.Menu );
-    private readonly int _totalAmmo = (Game.LocalPawn as Player).Inventory.Weapons.Sum( x => x.Ammo );
+    private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down(InputButton.Menu);
+    private readonly int _totalAmmo = (Game.LocalPawn as Player).Inventory.Weapons.Sum(x => x.Ammo);
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( RequestOpen(), _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode() );
+        return HashCode.Combine(RequestOpen(), _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
     }
 }
 
@@ -48,6 +48,7 @@
             pointer-events: all;
             right: 100px;
             opacity: 1;
+            sound-in: ui_inventory_open;
         }
 
         .name {
