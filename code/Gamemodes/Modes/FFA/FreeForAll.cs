@@ -134,8 +134,6 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private async ValueTask<bool> CleanupTurn()
 	{
-		Log.Info( "called" );
-
 		ActivePlayer.EndTurn();
 
 		await GameTask.DelaySeconds( 1f );
