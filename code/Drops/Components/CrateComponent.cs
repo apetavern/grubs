@@ -37,37 +37,36 @@ public partial class CrateComponent : DropComponent
 		if ( other is not Grub grub )
 			return;
 
-		switch ( CrateType )
+		if ( Game.IsServer )
 		{
-			case CrateType.Weapons:
-				var weaponResourcePath = CrateDrops.GetRandomWeaponFromCrate();
-				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some weaponized goods." );
-				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
-				Drop.Delete();
-				break;
-			case CrateType.Tools:
-				weaponResourcePath = CrateDrops.GetRandomToolFromCrate();
-				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up a tool." );
-				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
-				Drop.Delete();
-				break;
-			case CrateType.Health:
-				grub.Health += 25;
-				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} received medical attention." );
-				HealGrubEventClient( To.Everyone, grub, 25 );
-				Drop.Delete();
-				break;
-			default:
-				return;
+			switch ( CrateType )
+			{
+				case CrateType.Weapons:
+					var weaponResourcePath = CrateDrops.GetRandomWeaponFromCrate();
+					TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some weaponized goods." );
+					grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
+					Drop.Delete();
+					break;
+				case CrateType.Tools:
+					weaponResourcePath = CrateDrops.GetRandomToolFromCrate();
+					TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up a tool." );
+					grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
+					Drop.Delete();
+					break;
+				case CrateType.Health:
+					grub.Health += 25;
+					TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} received medical attention." );
+					HealGrubEventClient( To.Everyone, grub, 25 );
+					Drop.Delete();
+					break;
+				default:
+					return;
+			}
 		}
-
-		PlayPickupSound( To.Everyone );
-	}
-
-	[ClientRpc]
-	public void PlayPickupSound()
-	{
-		Entity.SoundFromScreen( "item_pickup" );
+		else
+		{
+			Entity.SoundFromScreen( "item_pickup" );
+		}
 	}
 
 	[ClientRpc]

@@ -51,7 +51,7 @@ public partial class Grub
 		MoveInput = moveInput;
 		LookInput = -Facing * lookInput;
 
-		if ( IsTurn && TimeSinceLastSqueak > 0.9f )
+		if ( Game.IsServer && IsTurn && TimeSinceLastSqueak > 0.7f )
 		{
 			if ( MoveInput != 0f && Controller.IsGrounded && !Velocity.IsNearlyZero( 50f ) )
 			{
