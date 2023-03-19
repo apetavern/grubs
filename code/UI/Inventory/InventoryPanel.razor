@@ -28,12 +28,6 @@
     private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down(InputButton.Menu);
     private readonly int _totalAmmo = (Game.LocalPawn as Player).Inventory.Weapons.Sum(x => x.Ammo);
 
-    public override void Tick()
-    {
-        if (Input.Pressed(InputButton.Menu) && RequestOpen())
-            PlaySound("ui_inventory_open");
-    }
-
     protected override int BuildHash()
     {
         return HashCode.Combine(RequestOpen(), _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
@@ -54,6 +48,7 @@
             pointer-events: all;
             right: 100px;
             opacity: 1;
+            sound-in: ui_inventory_open;
         }
 
         .name {
