@@ -1,0 +1,11 @@
+@namespace Grubs
+
+<root />
+
+@code {
+    [GrubsEvent.Player.PointerEventChanged]
+    public void OnPointerEventChanged(bool enabled)
+    {
+        Style.PointerEvents = enabled ? PointerEvents.All : PointerEvents.None;
+    }
+}
