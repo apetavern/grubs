@@ -45,6 +45,9 @@ public partial class Grub
 
 		if ( Health <= 0 )
 		{
+			if ( ActiveWeapon.IsValid() )
+				ActiveWeapon.Holster( this );
+
 			Health = 0;
 			OnKilled();
 		}

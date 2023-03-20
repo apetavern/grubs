@@ -24,6 +24,10 @@
           "TextureToStamp": {
             "Type": "TextureStamp",
             "Value": "\u0022textures/texturestamps/girder.tsta\u0022"
+          },
+          "BuildSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/girder/gurder_build.sound\u0022"
           }
         }
       }
@@ -87,6 +91,10 @@
       "WeaponType": {
         "Type": "WeaponType",
         "Value": "\u0022Tool\u0022"
+      },
+      "FireSound": {
+        "Type": "String",
+        "Value": "\u0022sounds/weapons/girder/gurder_build.sound\u0022"
       }
     }
   }
