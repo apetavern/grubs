@@ -45,9 +45,8 @@ public partial class Grub
 
 		if ( Health <= 0 )
 		{
-			if ( ActiveWeapon.IsValid() )
-				ActiveWeapon.Holster( this );
-
+			// Holster active weapon before death.
+			Player.Inventory.SetActiveWeapon( null, true );
 			Health = 0;
 			OnKilled();
 		}
