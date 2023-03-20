@@ -10,9 +10,6 @@ public partial class BuildComponent : WeaponComponent
 	public string TextureToStamp { get; set; }
 
 	[Net]
-	public Vector2 MousePosition { get; set; }
-
-	[Net]
 	public ModelEntity GirderPreview { get; set; }
 
 	[Net, Predicted]
@@ -25,20 +22,24 @@ public partial class BuildComponent : WeaponComponent
 
 		GirderPreview = new ModelEntity( "models/tools/girders/girderpreview.vmdl" );
 		GirderPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
-		GirderPreview.Owner = Grub;
 		GirderPreview.Tags.Add( "trigger" );
+		GirderPreview.Owner = Grub;
 	}
 
 	public override void OnHolster()
 	{
 		base.OnHolster();
 
-		if ( Game.IsServer && GirderPreview.IsValid() )
-			GirderPreview.Delete();
-
-		Grub.Player.GrubsCamera.DistanceScrollRate = 32f;
-
-		Event.Run( GrubsEvent.Player.PointerEventChanged, false );
+		if ( Game.IsServer )
+		{
+			if ( GirderPreview.IsValid() )
+				GirderPreview.Delete();
+		}
+		else
+		{
+			Grub.Player.GrubsCamera.DistanceScrollRate = 32f;
+			Event.Run( GrubsEvent.Player.PointerEventChanged, false );
+		}
 	}
 
 	public override void Simulate( IClient client )
@@ -50,22 +51,22 @@ public partial class BuildComponent : WeaponComponent
 
 		RotationAngle += Input.MouseWheel * 10f;
 
+		Grub.Player.GrubsCamera.Distance = 512f;
+		Grub.Player.GrubsCamera.DistanceScrollRate = 0f;
+
 		GirderPreview.Position = Grub.Player.MousePosition;
 		GirderPreview.Rotation = Rotation.Identity * new Angles( RotationAngle, 0, 0 ).ToRotation();
 
 		var isValidPlacement = !Trace.Body( GirderPreview.PhysicsBody, Grub.Player.MousePosition ).Ignore( GirderPreview ).Run().Hit;
 		GirderPreview.RenderColor = isValidPlacement ? Color.Green : Color.Red;
 
-		Grub.Player.GrubsCamera.Distance = 512f;
-		Grub.Player.GrubsCamera.DistanceScrollRate = 0f;
+		if ( !IsFiring )
+			return;
 
-		if ( IsFiring )
-		{
-			if ( isValidPlacement )
-				Fire();
+		if ( isValidPlacement )
+			Fire();
 
-			IsFiring = false;
-		}
+		IsFiring = false;
 	}
 
 	public override void FireCursor()
