@@ -27,7 +27,7 @@
           },
           "BuildSound": {
             "Type": "String",
-            "Value": "\u0022sounds/weapons/girder/gurder_build.sound\u0022"
+            "Value": "\u0022sounds/weapons/girder/girder_build.sound\u0022"
           }
         }
       }

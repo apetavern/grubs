@@ -49,6 +49,11 @@ public partial class BuildComponent : WeaponComponent
 		if ( !GirderPreview.IsValid() )
 			return;
 
+		GirderPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon();
+
+		if ( !GirderPreview.EnableDrawing )
+			return;
+
 		RotationAngle += Input.MouseWheel * 10f;
 
 		Grub.Player.GrubsCamera.Distance = 512f;
