@@ -28,6 +28,10 @@
           "ThrowSpeed": {
             "Type": "Int32",
             "Value": "0"
+          },
+          "UseSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
           }
         }
       },
