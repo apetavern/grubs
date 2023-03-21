@@ -111,6 +111,10 @@
       "TrailParticle": {
         "Type": "String",
         "Value": "\u0022particles/fuse/fuse_spark.vpcf\u0022"
+      },
+      "StartSound": {
+        "Type": "String",
+        "Value": "\u0022sounds/weapons/dynamite/dynamite_fuse.sound\u0022"
       }
     }
   }
