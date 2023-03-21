@@ -190,9 +190,9 @@ public partial class FreeForAll : Gamemode
 
 	private async Task HandleCrateSpawns()
 	{
-		await SpawnCrate( CrateType.Weapons, GrubsConfig.WeaponCrateChancePerTurn, "A weapons crate has been spawned!" );
-		await SpawnCrate( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
-		await SpawnCrate( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
+		await CheckCrateSpawn( CrateType.Weapons, GrubsConfig.WeaponCrateChancePerTurn, "A weapons crate has been spawned!" );
+		await CheckCrateSpawn( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
+		await CheckCrateSpawn( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
 		while ( !IsWorldResolved() )
 		{
@@ -202,7 +202,7 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = null;
 	}
 
-	private async Task SpawnCrate( CrateType crateType, int chance, string message )
+	private async Task CheckCrateSpawn( CrateType crateType, int chance, string message )
 	{
 		if ( Game.Random.Int( 100 ) > chance )
 			return;
@@ -210,26 +210,15 @@ public partial class FreeForAll : Gamemode
 		var player = Game.Clients.First().Pawn as Player;
 		var crate = CrateGadgetComponent.SpawnCrate( crateType );
 
-		if ( await SetupDrop( crate, player ) )
-		{
-			TextChat.AddInfoChatEntry( message );
-			CameraTarget = crate;
-			await GameTask.DelaySeconds( 2f );
-		}
-	}
+		var spawnPos = GameWorld.FindSpawnLocation();
+		crate.Position = spawnPos;
+		crate.Owner = player;
+		player.Gadgets.Add( crate );
 
-	private async ValueTask<bool> SetupDrop( Gadget drop, Player player )
-	{
-		if ( drop is not null )
-		{
-			var spawnPos = GameWorld.FindSpawnLocation();
-			drop.Position = spawnPos;
-			drop.Owner = player;
-			player.Gadgets.Add( drop );
-			return true;
-		}
+		TextChat.AddInfoChatEntry( message );
+		CameraTarget = crate;
 
-		return false;
+		await GameTask.DelaySeconds( 2f );
 	}
 
 	[ClientRpc]

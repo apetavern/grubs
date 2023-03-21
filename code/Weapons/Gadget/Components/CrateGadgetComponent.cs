@@ -76,9 +76,9 @@ public partial class CrateGadgetComponent : GadgetComponent
 	{
 		var path = crate switch
 		{
-			CrateType.Weapons => "prefabs/drops/weapons_crate.prefab",
-			CrateType.Tools => "prefabs/drops/tools_crate.prefab",
-			CrateType.Health => "prefabs/drops/health_crate.prefab",
+			CrateType.Weapons => "prefabs/crates/weapons_crate.prefab",
+			CrateType.Tools => "prefabs/crates/tools_crate.prefab",
+			CrateType.Health => "prefabs/crates/health_crate.prefab",
 			_ => "",
 		};
 
@@ -86,13 +86,13 @@ public partial class CrateGadgetComponent : GadgetComponent
 	}
 
 	[ConCmd.Admin( "gr_spawn_crate" )]
-	public static void DebugSpawnCrate()
+	private static void DebugSpawnCrate()
 	{
 		var crate = SpawnCrate( (CrateType)Random.Shared.Int( 0, 2 ) );
 		var player = ConsoleSystem.Caller.Pawn as Player;
 		player?.Gadgets.Add( crate );
 		crate.Owner = player;
-		crate.Position = Vector3.Zero;
+		crate.Position = player.Grubs.FirstOrDefault()?.Position + Vector3.Up * 300f ?? Vector3.Zero;
 	}
 }
 
