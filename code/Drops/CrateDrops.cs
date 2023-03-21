@@ -6,12 +6,12 @@ public static class CrateDrops
 	public static Dictionary<string, float> DropChancesTools = new();
 	public static bool DropChancesPopulated = false;
 
-	static List<string> _dropMapWeapons = new();
-	static List<float> _cumulativeDropPercentagesWeapons = new();
+	private static readonly List<string> _dropMapWeapons = new();
+	private static readonly List<float> _cumulativeDropPercentagesWeapons = new();
 
-	static List<string> _dropMapTools = new();
-	static List<float> _cumulativeDropPercentagesTools = new();
-	static bool _init;
+	private static readonly List<string> _dropMapTools = new();
+	private static readonly List<float> _cumulativeDropPercentagesTools = new();
+	private static bool _init;
 
 	static void Initialize()
 	{
