@@ -6,9 +6,6 @@ public partial class Player : Entity
 	public IList<Grub> Grubs { get; private set; }
 
 	[Net]
-	public IList<Drop> Drops { get; set; }
-
-	[Net]
 	public Grub ActiveGrub { get; private set; }
 
 	[Net]
@@ -68,7 +65,6 @@ public partial class Player : Entity
 		Inventory.Simulate( client );
 		Grubs.Simulate( client );
 		Gadgets.Simulate( client );
-		Drops.Simulate( client );
 
 		if ( IsTurn )
 			ActiveGrub?.UpdateInputFromOwner( MoveInput, LookInput );

@@ -17,7 +17,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	[Prefab, ResourceType( "vpcf" )]
 	public string TrailParticle { get; set; }
 
-	public bool Resolved => false;
+	public bool Resolved => IsResolved();
 
 	public override void Spawn()
 	{
@@ -32,6 +32,11 @@ public partial class Gadget : AnimatedEntity, IResolvable
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		else
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, CollisionRadius );
+
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			component.Spawn();
+		}
 	}
 
 	public override void ClientSpawn()
@@ -40,6 +45,17 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		{
 			component.OnClientSpawn();
 		}
+	}
+
+	public bool IsResolved()
+	{
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			if ( component.IsResolved() )
+				return true;
+		}
+
+		return true;
 	}
 
 	public void OnUse( Grub grub, Weapon weapon, int charge )
@@ -55,11 +71,25 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		}
 	}
 
+	public override void StartTouch( Entity other )
+	{
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			component.OnTouch( other );
+		}
+	}
+
 	public override void Simulate( IClient client )
 	{
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{
 			component.Simulate( client );
 		}
+	}
+
+	[ClientRpc]
+	public void PlayScreenSound( string sound )
+	{
+		this.SoundFromScreen( sound );
 	}
 }

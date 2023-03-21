@@ -76,8 +76,6 @@ public static class CrateDrops
 		while ( dropPercentages[weapon] <= roll )
 			weapon++;
 
-		Log.Info( dropMap[weapon] );
-
 		return dropMap[weapon];
 	}
 }

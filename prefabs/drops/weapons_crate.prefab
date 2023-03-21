@@ -3,32 +3,12 @@
   "Name": null,
   "Description": null,
   "Root": {
-    "Guid": "7731eb37-8e36-418f-81cb-1c7010f1b042",
+    "Guid": "8b2e591e-25aa-4808-8ee2-25caee23a5a5",
     "Class": "Gadget",
     "Entities": [],
     "Components": [
       {
-        "Guid": "3b0cce5c-d92f-4280-ad34-57427e6308f8",
-        "Class": "CrateGadgetComponent",
-        "Keys": {
-          "CrateType": {
-            "Type": "CrateType",
-            "Value": "\u0022Health\u0022"
-          },
-          "PickupSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/world/item_pickup.sound\u0022"
-          },
-          "_name": {
-            "Value": "\u0022Crate\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
-      },
-      {
-        "Guid": "2ad887e6-fdf8-4df6-a3de-ba3273140cb1",
+        "Guid": "8ec09372-2b13-465e-b3f3-133340a40770",
         "Class": "PhysicsGadgetComponent",
         "Keys": {
           "ShouldRotate": {
@@ -38,23 +18,43 @@
           "_name": {
             "Value": "\u0022Physics\u0022"
           },
-          "_tags": {
-            "Value": "[]"
-          }
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "c5cbdec2-6e0d-4e9d-90bb-147b58321cfe",
+        "Class": "CrateGadgetComponent",
+        "Keys": {
+          "CrateType": {
+            "Type": "CrateType",
+            "Value": "\u0022Weapons\u0022"
+          },
+          "PickupSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/world/item_pickup.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Crate\u0022"
+          },
+          "_tags": {}
         }
       }
     ],
     "Keys": {
       "Model": {
         "Type": "Model",
-        "Value": "\u0022models/crates/health_crate/health_crate.vmdl\u0022"
+        "Value": "\u0022models/crates/weapons_crate/weapons_crate.vmdl\u0022"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
       },
       "ShouldUseModelCollision": {
         "Type": "Boolean",
         "Value": "true"
       },
       "_name": {
-        "Value": "\u0022Health Crate\u0022"
+        "Value": "\u0022Weapons Crate\u0022"
       },
       "_localposition": {
         "Value": "\u00220,0,0\u0022"
@@ -67,10 +67,6 @@
       },
       "_tags": {
         "Value": "\u0022gadget\u0022"
-      },
-      "ShouldCameraFollow": {
-        "Type": "Boolean",
-        "Value": "false"
       }
     }
   }

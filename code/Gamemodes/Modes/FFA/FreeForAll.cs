@@ -190,47 +190,9 @@ public partial class FreeForAll : Gamemode
 
 	private async Task HandleCrateSpawns()
 	{
-		var player = Game.Clients.First().Pawn as Player;
-
-		var rand = Game.Random.Int( 100 );
-		if ( rand <= GrubsConfig.WeaponCrateChancePerTurn )
-		{
-			var drop = Drop.WeaponCrate;
-
-			var spawned = await SetupDrop( drop, player );
-			if ( spawned )
-			{
-				TextChat.AddInfoChatEntry( $"A weapons crate has been spawned!" );
-				CameraTarget = drop;
-				await GameTask.DelaySeconds( 2f );
-			}
-		}
-
-		rand = Game.Random.Int( 100 );
-		if ( rand <= GrubsConfig.ToolCrateChancePerTurn )
-		{
-			var drop = Drop.ToolCrate;
-			var spawned = await SetupDrop( drop, player );
-			if ( spawned )
-			{
-				TextChat.AddInfoChatEntry( $"A tool crate has been spawned!" );
-				CameraTarget = drop;
-				await GameTask.DelaySeconds( 2f );
-			}
-		}
-
-		rand = Game.Random.Int( 100 );
-		if ( rand <= GrubsConfig.HealthCrateChancePerTurn )
-		{
-			var drop = Drop.HealthCrate;
-			var spawned = await SetupDrop( drop, player );
-			if ( spawned )
-			{
-				TextChat.AddInfoChatEntry( $"A health crate has been spawned!" );
-				CameraTarget = drop;
-				await GameTask.DelaySeconds( 2f );
-			}
-		}
+		await SpawnCrate( CrateType.Weapons, GrubsConfig.WeaponCrateChancePerTurn, "A weapons crate has been spawned!" );
+		await SpawnCrate( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
+		await SpawnCrate( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
 		while ( !IsWorldResolved() )
 		{
@@ -240,14 +202,30 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = null;
 	}
 
-	private async ValueTask<bool> SetupDrop( Drop drop, Player player )
+	private async Task SpawnCrate( CrateType crateType, int chance, string message )
+	{
+		if ( Game.Random.Int( 100 ) > chance )
+			return;
+
+		var player = Game.Clients.First().Pawn as Player;
+		var crate = CrateGadgetComponent.SpawnCrate( crateType );
+
+		if ( await SetupDrop( crate, player ) )
+		{
+			TextChat.AddInfoChatEntry( message );
+			CameraTarget = crate;
+			await GameTask.DelaySeconds( 2f );
+		}
+	}
+
+	private async ValueTask<bool> SetupDrop( Gadget drop, Player player )
 	{
 		if ( drop is not null )
 		{
 			var spawnPos = GameWorld.FindSpawnLocation();
 			drop.Position = spawnPos;
 			drop.Owner = player;
-			player.Drops.Add( drop );
+			player.Gadgets.Add( drop );
 			return true;
 		}
 
