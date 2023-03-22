@@ -1,7 +1,6 @@
-#if DEBUG
-
 namespace Grubs;
 
+#if DEBUG
 public class NoclipMechanic : ControllerMechanic
 {
 	[ConCmd.Admin( "noclip" )]
