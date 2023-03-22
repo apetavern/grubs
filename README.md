@@ -11,4 +11,4 @@ and we will review it when we get the chance. For help on
 Git workflow, check out our [Contributing Wiki](https://github.com/apetavern/sbox-grubs/wiki/Contributing).
 
 ## Discord
-Want to chat with the devs? Join the discord [discord](https://discord.gg/apetavern).
+Want to chat with the devs? Join the [discord](https://discord.gg/apetavern).
