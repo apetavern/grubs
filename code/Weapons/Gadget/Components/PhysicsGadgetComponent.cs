@@ -15,8 +15,13 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool AffectedByWind { get; set; } = false;
 
+	[Prefab, ResourceType( "sound" )]
+	public string UseSound { get; set; }
+
 	public override void OnUse( Weapon weapon, int charge )
 	{
+		weapon.PlayScreenSound( UseSound );
+
 		if ( ShouldThrow )
 		{
 			Gadget.Position = weapon.GetStartPosition();
