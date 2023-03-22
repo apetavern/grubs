@@ -60,7 +60,7 @@
             "Value": "\u0022particles/guntrace/guntrace.vpcf\u0022"
           },
           "_name": {
-            "Value": "\u0022Shoot\u0022"
+            "Value": "\u0022Fire\u0022"
           },
           "_tags": {
             "Value": "[]"
@@ -125,7 +125,7 @@
       },
       "ClampAim": {
         "Type": "Boolean",
-        "Value": "true"
+        "Value": "false"
       },
       "DropChance": {
         "Type": "Single",

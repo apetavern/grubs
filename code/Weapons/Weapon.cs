@@ -44,12 +44,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public bool AllowMovement { get; set; } = false;
 
 	/// <summary>
-	/// Whether the player's aim should clamp to 45 degree angles while in use.
-	/// </summary>
-	[Prefab, Net]
-	public bool ClampAim { get; set; } = false;
-
-	/// <summary>
 	/// The chance of receiving this weapon in a crate.
 	/// A chance of zero means it will not spawn from a crate.
 	/// </summary>

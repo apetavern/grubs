@@ -59,31 +59,6 @@ public partial class Grub
 			.WithRoll( 0f )
 			.WithYaw( 0f );
 
-		if ( ActiveWeapon != null && ActiveWeapon.ClampAim )
-		{
-			LookAngles = look
-			.WithPitch( SnappedLookAngle )
-			.WithRoll( 0f )
-			.WithYaw( 0f );
-
-			if ( LookInput > 0 && !ChangedSnapAngle )
-			{
-				SnappedLookAngle += 45f;
-				ChangedSnapAngle = true;
-			}
-			else if ( LookInput < 0 && !ChangedSnapAngle )
-			{
-				SnappedLookAngle -= 45f;
-				ChangedSnapAngle = true;
-			}
-			else if ( ChangedSnapAngle && LookInput == 0 )
-			{
-				ChangedSnapAngle = false;
-			}
-
-			SnappedLookAngle = MathX.Clamp( SnappedLookAngle, -45f, 45f );
-		}
-
 		if ( Facing != LastFacing )
 			LookAngles = LookAngles.WithPitch( LookAngles.pitch * -1 );
 
