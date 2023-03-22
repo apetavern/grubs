@@ -24,6 +24,14 @@
           "GadgetPrefab": {
             "Type": "Prefab",
             "Value": "\u0022prefabs/weapons/bazooka/bazooka_projectile.prefab\u0022"
+          },
+          "UseSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/bazooka/bazooka_fire.sound\u0022"
+          },
+          "MuzzleParticle": {
+            "Type": "String",
+            "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
           }
         }
       }

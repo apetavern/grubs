@@ -24,6 +24,10 @@
           "GadgetPrefab": {
             "Type": "Prefab",
             "Value": "\u0022prefabs/weapons/grenade/grenade_projectile.prefab\u0022"
+          },
+          "UseSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
           }
         }
       }
