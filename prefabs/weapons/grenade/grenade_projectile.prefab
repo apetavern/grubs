@@ -72,6 +72,10 @@
           "ThrowSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
+          },
+          "UseSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
           }
         }
       }

@@ -17,6 +17,10 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	[Prefab, ResourceType( "vpcf" )]
 	public string TrailParticle { get; set; }
 
+	[Prefab, Net, ResourceType( "sound" )]
+	public string StartSound { get; set; }
+	private Sound _startSound;
+
 	public bool Resolved => false;
 
 	public override void Spawn()
@@ -36,6 +40,8 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public override void ClientSpawn()
 	{
+		_startSound = this.SoundFromScreen( StartSound );
+
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{
 			component.OnClientSpawn();
@@ -61,5 +67,16 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		{
 			component.Simulate( client );
 		}
+	}
+
+	protected override void OnDestroy()
+	{
+		OnClientDestroy();
+	}
+
+	[ClientRpc]
+	private void OnClientDestroy()
+	{
+		_startSound.Stop();
 	}
 }
