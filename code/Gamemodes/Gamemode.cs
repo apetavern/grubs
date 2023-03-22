@@ -115,8 +115,9 @@ public partial class Gamemode : Entity
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
 
-	internal virtual bool IsWorldResolved()
+	internal async virtual Task WorldResolved()
 	{
-		return All.OfType<IResolvable>().All( ent => ent.Resolved );
+		while ( !All.OfType<IResolvable>().All( ent => ent.Resolved ) )
+			await GameTask.Delay( 300 );
 	}
 }

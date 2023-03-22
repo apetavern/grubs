@@ -61,7 +61,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 				return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public void OnUse( Grub grub, Weapon weapon, int charge )

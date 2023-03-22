@@ -94,8 +94,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public virtual void FireCursor() { }
 
-	public virtual void FireStart() { }
-
 	public virtual void FireFinished()
 	{
 		if ( Weapon.CurrentUses >= Weapon.Charges )
