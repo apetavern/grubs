@@ -190,47 +190,9 @@ public partial class FreeForAll : Gamemode
 
 	private async Task HandleCrateSpawns()
 	{
-		var player = Game.Clients.First().Pawn as Player;
-
-		var rand = Game.Random.Int( 100 );
-		if ( rand <= GrubsConfig.WeaponCrateChancePerTurn )
-		{
-			var drop = Drop.WeaponCrate;
-
-			var spawned = await SetupDrop( drop, player );
-			if ( spawned )
-			{
-				TextChat.AddInfoChatEntry( $"A weapons crate has been spawned!" );
-				CameraTarget = drop;
-				await GameTask.DelaySeconds( 2f );
-			}
-		}
-
-		rand = Game.Random.Int( 100 );
-		if ( rand <= GrubsConfig.ToolCrateChancePerTurn )
-		{
-			var drop = Drop.ToolCrate;
-			var spawned = await SetupDrop( drop, player );
-			if ( spawned )
-			{
-				TextChat.AddInfoChatEntry( $"A tool crate has been spawned!" );
-				CameraTarget = drop;
-				await GameTask.DelaySeconds( 2f );
-			}
-		}
-
-		rand = Game.Random.Int( 100 );
-		if ( rand <= GrubsConfig.HealthCrateChancePerTurn )
-		{
-			var drop = Drop.HealthCrate;
-			var spawned = await SetupDrop( drop, player );
-			if ( spawned )
-			{
-				TextChat.AddInfoChatEntry( $"A health crate has been spawned!" );
-				CameraTarget = drop;
-				await GameTask.DelaySeconds( 2f );
-			}
-		}
+		await CheckCrateSpawn( CrateType.Weapons, GrubsConfig.WeaponCrateChancePerTurn, "A weapons crate has been spawned!" );
+		await CheckCrateSpawn( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
+		await CheckCrateSpawn( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
 		while ( !IsWorldResolved() )
 		{
@@ -240,18 +202,23 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = null;
 	}
 
-	private async ValueTask<bool> SetupDrop( Drop drop, Player player )
+	private async Task CheckCrateSpawn( CrateType crateType, int chance, string message )
 	{
-		if ( drop is not null )
-		{
-			var spawnPos = GameWorld.FindSpawnLocation();
-			drop.Position = spawnPos;
-			drop.Owner = player;
-			player.Drops.Add( drop );
-			return true;
-		}
+		if ( Game.Random.Int( 100 ) > chance )
+			return;
 
-		return false;
+		var player = Game.Clients.First().Pawn as Player;
+		var crate = CrateGadgetComponent.SpawnCrate( crateType );
+
+		var spawnPos = GameWorld.FindSpawnLocation();
+		crate.Position = spawnPos;
+		crate.Owner = player;
+		player.Gadgets.Add( crate );
+
+		TextChat.AddInfoChatEntry( message );
+		CameraTarget = crate;
+
+		await GameTask.DelaySeconds( 2f );
 	}
 
 	[ClientRpc]

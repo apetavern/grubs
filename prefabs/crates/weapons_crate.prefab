@@ -1,0 +1,73 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "8b2e591e-25aa-4808-8ee2-25caee23a5a5",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "8ec09372-2b13-465e-b3f3-133340a40770",
+        "Class": "PhysicsGadgetComponent",
+        "Keys": {
+          "ShouldRotate": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "_name": {
+            "Value": "\u0022Physics\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "c5cbdec2-6e0d-4e9d-90bb-147b58321cfe",
+        "Class": "CrateGadgetComponent",
+        "Keys": {
+          "CrateType": {
+            "Type": "CrateType",
+            "Value": "\u0022Weapons\u0022"
+          },
+          "PickupSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/world/item_pickup.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Crate\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/crates/weapons_crate/weapons_crate.vmdl\u0022"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ShouldUseModelCollision": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "_name": {
+        "Value": "\u0022Weapons Crate\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget\u0022"
+      }
+    }
+  }
+}

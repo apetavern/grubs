@@ -21,7 +21,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	public string StartSound { get; set; }
 	private Sound _startSound;
 
-	public bool Resolved => false;
+	public bool Resolved => IsResolved();
 
 	public override void Spawn()
 	{
@@ -36,6 +36,11 @@ public partial class Gadget : AnimatedEntity, IResolvable
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		else
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, CollisionRadius );
+
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			component.Spawn();
+		}
 	}
 
 	public override void ClientSpawn()
@@ -48,6 +53,17 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		}
 	}
 
+	public bool IsResolved()
+	{
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			if ( component.IsResolved() )
+				return true;
+		}
+
+		return true;
+	}
+
 	public void OnUse( Grub grub, Weapon weapon, int charge )
 	{
 		Owner = grub;
@@ -58,6 +74,14 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{
 			component.OnUse( weapon, charge );
+		}
+	}
+
+	public override void StartTouch( Entity other )
+	{
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			component.OnTouch( other );
 		}
 	}
 
@@ -78,5 +102,11 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	private void OnClientDestroy()
 	{
 		_startSound.Stop();
+	}
+
+	[ClientRpc]
+	public void PlayScreenSound( string sound )
+	{
+		this.SoundFromScreen( sound );
 	}
 }

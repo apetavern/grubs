@@ -100,21 +100,22 @@ public class GrubsCamera : EntityComponent
 					continue;
 
 				SetTarget( grub );
-				return;
-			}
-		}
-		else
-		{
-			foreach ( var gadget in Entity.All.OfType<Gadget>() )
-			{
-				if ( gadget.ShouldCameraFollow )
-					SetTarget( gadget );
-				return;
 			}
 
-			SetTarget( gm?.ActivePlayer?.ActiveGrub );
 			return;
 		}
+
+		foreach ( var gadget in Entity.All.OfType<Gadget>() )
+		{
+			if ( gadget.ShouldCameraFollow )
+			{
+				SetTarget( gadget );
+				return;
+			}
+		}
+
+		SetTarget( gm?.ActivePlayer?.ActiveGrub );
+		return;
 	}
 
 	private void MoveCamera()
