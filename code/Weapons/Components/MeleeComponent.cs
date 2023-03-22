@@ -57,19 +57,11 @@ public partial class MeleeComponent : WeaponComponent
 			Weapon.PlayScreenSound( To.Everyone, ImpactSound );
 		}
 
-		IsFiring = false;
-		FireFinished();
-	}
-
-	public override void FireCharged()
-	{
-		FireFinished();
-	}
-
-	public override void FireStart()
-	{
 		Grub.SetAnimParameter( "fire", true );
 		Weapon.PlayScreenSound( To.Everyone, HitSound );
+
+		IsFiring = false;
+		FireFinished();
 	}
 
 	private Dictionary<Grub, Vector3> GetGrubsInSwing()

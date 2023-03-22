@@ -115,8 +115,6 @@ public partial class FreeForAll : Gamemode
 
 		await WorldResolved();
 
-		Log.Info( "turn is changing" );
-
 		TurnIsChanging = true;
 
 		if ( await CleanupTurn() )
