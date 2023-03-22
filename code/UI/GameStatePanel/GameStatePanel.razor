@@ -8,7 +8,7 @@
 <root>
     @if (IsWaiting())
     {
-        <label class="header" text="Grubs Playtest" />
+        <label class="header" text="Grubs" />
         <label class="subtext" text=@($"Players required {Game.Clients.Count}/{GrubsConfig.MinimumPlayers}") />
 
         @if (!IsTerrainReady())
@@ -48,7 +48,7 @@
     private bool IsWaiting() => GamemodeSystem.Instance is FreeForAll ffa && ffa.CurrentState == FreeForAll.GameState.Waiting;
     private bool IsFinished() => GamemodeSystem.Instance is FreeForAll ffa && ffa.CurrentState == FreeForAll.GameState.GameOver;
     private bool IsTerrainReady() => GamemodeSystem.Instance is FreeForAll ffa && ffa.TerrainReady;
-    
+
     protected override int BuildHash()
     {
         return HashCode.Combine(IsWaiting(), IsFinished(), IsTerrainReady(), Game.Clients.Count, GrubsConfig.MinimumPlayers, Game.LocalClient.IsListenServerHost);
@@ -64,7 +64,8 @@
         flex-direction: column;
         align-items: center;
 
-        .header, .subtext {
+        .header,
+        .subtext {
             font-family: Londrina Solid;
             font-size: 70px;
             color: white;
@@ -75,28 +76,24 @@
             font-size: 40px;
         }
 
-        button
-        {
+        button {
             transition: all 0.1s ease;
             color: #ffa631;
             text-shadow: 2px 2px 0px black;
             pointer-events: all;
 
-            label
-            {
+            label {
                 font-family: Londrina Solid;
                 font-size: 55px;
             }
 
-            &:hover
-            {
+            &:hover {
                 color: #df912b;
                 cursor: pointer;
                 transform: scale(1.01);
             }
 
-            &:active
-            {
+            &:active {
                 color: #ffa631;
                 transform: scale(1);
             }
