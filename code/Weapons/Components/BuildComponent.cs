@@ -37,7 +37,7 @@ public partial class BuildComponent : WeaponComponent
 		}
 		else
 		{
-			Grub.Player.GrubsCamera.DistanceScrollRate = 32f;
+			Grub.Player.GrubsCamera.CanScroll( true );
 			Event.Run( GrubsEvent.Player.PointerEventChanged, false );
 		}
 	}
@@ -57,7 +57,7 @@ public partial class BuildComponent : WeaponComponent
 		RotationAngle += Input.MouseWheel * 10f;
 
 		Grub.Player.GrubsCamera.Distance = 512f;
-		Grub.Player.GrubsCamera.DistanceScrollRate = 0f;
+		Grub.Player.GrubsCamera.CanScroll( false );
 
 		GirderPreview.Position = Grub.Player.MousePosition;
 		GirderPreview.Rotation = Rotation.Identity * new Angles( RotationAngle, 0, 0 ).ToRotation();

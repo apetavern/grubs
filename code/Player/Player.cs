@@ -22,13 +22,12 @@ public partial class Player : Entity
 	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
 
 	[BindComponent]
-	public GrubsCamera GrubsCamera { get; }
-
-	[BindComponent]
 	public Preferences Preferences { get; }
 
 	[BindComponent]
 	public Inventory Inventory { get; }
+
+	public GrubsCamera GrubsCamera { get; } = new();
 
 	public bool IsTurn
 	{
@@ -55,7 +54,6 @@ public partial class Player : Entity
 	{
 		Tags.Add( "ignorereset" );
 
-		Components.Create<GrubsCamera>();
 		Components.Create<Preferences>();
 		Components.Create<Inventory>();
 	}
