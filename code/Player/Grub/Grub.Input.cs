@@ -49,9 +49,8 @@ public partial class Grub
 		MoveInput = moveInput;
 		LookInput = -Facing * lookInput;
 
-		if ( ActiveWeapon is not null )
-			if ( ActiveWeapon.IsCharging() )
-				return;
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.IsCharging() )
+			return;
 
 		var look = (LookAngles + LookInput).Normal;
 		LookAngles = look
@@ -59,7 +58,7 @@ public partial class Grub
 			.WithRoll( 0f )
 			.WithYaw( 0f );
 
-		if ( ActiveWeapon != null && ActiveWeapon.ClampAim )
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.ClampAim )
 		{
 			LookAngles = look
 			.WithPitch( SnappedLookAngle )

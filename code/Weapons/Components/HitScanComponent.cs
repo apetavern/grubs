@@ -42,6 +42,9 @@ public partial class HitScanComponent : WeaponComponent
 	public bool PenetrateWorld { get; set; } = false;
 
 	[Prefab, Net]
+	public bool AutoMove { get; set; } = false;
+
+	[Prefab, Net]
 	public float Damage { get; set; } = 25;
 
 	[Prefab]
@@ -63,9 +66,10 @@ public partial class HitScanComponent : WeaponComponent
 		base.Simulate( client );
 
 		if ( IsFiring && TimeSinceLastHitScan >= TraceDelay && FireCount < TraceCount )
-		{
 			Fire();
-		}
+
+		if ( IsFiring && AutoMove )
+			Grub.MoveInput = -Grub.Facing * 0.75f;
 	}
 
 	public override void FireInstant()
