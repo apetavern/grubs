@@ -11,11 +11,6 @@ public static class CrateDrops
 	private static readonly List<string> _dropMapTools = new();
 	private static readonly List<float> _cumulativeDropPercentagesTools = new();
 	private static bool _init;
-
-	static CrateDrops()
-	{
-		Initialize();
-	}
 	
 	static void Initialize()
 	{
