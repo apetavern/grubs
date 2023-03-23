@@ -65,8 +65,7 @@ public class GrubsCamera
 		if ( Input.Down( InputButton.SecondaryAttack ) )
 			MoveCamera();
 
-		// Check the last time we panned the camera, update CenterOnPawn if greater than N.
-		if ( !Input.Down( InputButton.SecondaryAttack ) && _timeSinceMousePan > _secondsBeforeCentering )
+		if ( Input.Pressed( InputButton.Zoom ) || !Input.Down( InputButton.SecondaryAttack ) && _timeSinceMousePan > _secondsBeforeCentering )
 			_isCenteredOnGrub = true;
 	}
 
