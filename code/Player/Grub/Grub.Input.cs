@@ -49,15 +49,39 @@ public partial class Grub
 		MoveInput = moveInput;
 		LookInput = -Facing * lookInput;
 
-		if ( ActiveWeapon is not null )
-			if ( ActiveWeapon.IsCharging() )
-				return;
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.IsCharging() )
+			return;
 
 		var look = (LookAngles + LookInput).Normal;
 		LookAngles = look
 			.WithPitch( look.pitch.Clamp( -80f, 75f ) )
 			.WithRoll( 0f )
 			.WithYaw( 0f );
+
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.ClampAim )
+		{
+			LookAngles = look
+			.WithPitch( SnappedLookAngle )
+			.WithRoll( 0f )
+			.WithYaw( 0f );
+
+			if ( LookInput > 0 && !ChangedSnapAngle )
+			{
+				SnappedLookAngle += 45f;
+				ChangedSnapAngle = true;
+			}
+			else if ( LookInput < 0 && !ChangedSnapAngle )
+			{
+				SnappedLookAngle -= 45f;
+				ChangedSnapAngle = true;
+			}
+			else if ( ChangedSnapAngle && LookInput == 0 )
+			{
+				ChangedSnapAngle = false;
+			}
+
+			SnappedLookAngle = MathX.Clamp( SnappedLookAngle, -45f, 45f );
+		}
 
 		if ( Facing != LastFacing )
 			LookAngles = LookAngles.WithPitch( LookAngles.pitch * -1 );

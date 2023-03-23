@@ -130,7 +130,7 @@
       },
       "ClampAim": {
         "Type": "Boolean",
-        "Value": "false"
+        "Value": "true"
       },
       "DropChance": {
         "Type": "Single",
