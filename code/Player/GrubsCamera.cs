@@ -17,11 +17,6 @@ public class GrubsCamera
 	private Entity _target;
 	private TimeUntil _timeUntilCameraUnlock;
 
-	public GrubsCamera()
-	{
-
-	}
-
 	public void CanScroll( bool toggle )
 	{
 		_canScroll = toggle;
