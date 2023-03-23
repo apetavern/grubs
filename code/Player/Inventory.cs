@@ -96,26 +96,11 @@ public partial class Inventory : EntityComponent<Player>
 
 	public void GiveDefaultLoadout()
 	{
-		var weaponPrefabs = Weapon.GetAllWeaponPrefabs();
-		foreach ( var prefab in weaponPrefabs )
+		foreach ( var prefab in Weapon.GetAllWeaponPrefabs())
 		{
-			if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) )
-			{
-				Add( weapon );
-
-				// We are initializing our drop map here as we cannot access this information
-				// as we might a GameResource. Consider refactoring in the future.
-				if ( CrateDrops.DropChancesPopulated )
-					break;
-
-				if ( weapon.WeaponType is WeaponType.Weapon )
-					CrateDrops.DropChancesWeapons.TryAdd( prefab.ResourcePath, weapon.DropChance );
-				else if ( weapon.WeaponType is WeaponType.Tool )
-					CrateDrops.DropChancesTools.TryAdd( prefab.ResourcePath, weapon.DropChance );
-			}
+			Assert.True( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) );
+			Add( weapon );
 		}
-
-		CrateDrops.DropChancesPopulated = true;
 	}
 
 	[ConCmd.Admin( "gr_set_weapon" )]
