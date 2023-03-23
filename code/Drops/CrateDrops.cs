@@ -2,9 +2,8 @@
 
 public static class CrateDrops
 {
-	public static Dictionary<string, float> DropChancesWeapons = new();
-	public static Dictionary<string, float> DropChancesTools = new();
-	public static bool DropChancesPopulated = false;
+	private static Dictionary<string, float> DropChancesWeapons = new();
+	private static Dictionary<string, float> DropChancesTools = new();
 
 	private static readonly List<string> _dropMapWeapons = new();
 	private static readonly List<float> _cumulativeDropPercentagesWeapons = new();
@@ -13,18 +12,35 @@ public static class CrateDrops
 	private static readonly List<float> _cumulativeDropPercentagesTools = new();
 	private static bool _init;
 
+	static CrateDrops()
+	{
+		Initialize();
+	}
+	
 	static void Initialize()
 	{
 		if ( _init )
 			return;
-
+		
+		foreach ( var prefab in Weapon.GetAllWeaponPrefabs() )
+		{
+			var weaponType = prefab.Root.GetValue<WeaponType>( nameof(WeaponType) );
+			var dropChance = prefab.Root.GetValue<float>( nameof(Weapon.DropChance) );
+			
+			if ( weaponType is WeaponType.Weapon )
+				DropChancesWeapons.TryAdd( prefab.ResourcePath, dropChance );
+			else if ( weaponType is WeaponType.Tool )
+				DropChancesTools.TryAdd( prefab.ResourcePath, dropChance );
+		}
+		
 		InitDropMap( DropChancesWeapons, _cumulativeDropPercentagesWeapons, _dropMapWeapons );
 		InitDropMap( DropChancesTools, _cumulativeDropPercentagesTools, _dropMapTools );
 
 		_init = true;
 	}
 
-	private static void InitDropMap( Dictionary<string, float> dropChances, List<float> dropPercentages, List<string> dropMap )
+	private static void InitDropMap( Dictionary<string, float> dropChances, List<float> dropPercentages,
+		List<string> dropMap )
 	{
 		var sumTotalOfDropRates = 0f;
 		var numEntries = 0;
