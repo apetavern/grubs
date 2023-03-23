@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "333bfe4a-5461-4bd9-8191-66a43e13146b",
-        "Class": "TorchComponent",
+        "Class": "HitScanComponent",
         "Keys": {
           "HitForce": {
             "Type": "Vector3",
@@ -68,6 +68,10 @@
           "TraceSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
+          },
+          "AutoMove": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       }
