@@ -8,6 +8,6 @@ public partial class TorchComponent : HitScanComponent
 		base.Simulate( client );
 
 		if ( IsFiring )
-			Grub.MoveInput = -Grub.Facing * 1f;
+			Grub.MoveInput = -Grub.Facing * 0.75f;
 	}
 }

@@ -53,7 +53,7 @@
           },
           "UseMuzzleParticle": {
             "Type": "Boolean",
-            "Value": "false"
+            "Value": "true"
           },
           "TraceParticle": {
             "Type": "ParticleSystem",
@@ -66,7 +66,8 @@
             "Value": "[]"
           },
           "TraceSound": {
-            "Type": "null"
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
           }
         }
       }
