@@ -70,8 +70,6 @@ public partial class BuildComponent : WeaponComponent
 
 		if ( isValidPlacement )
 			Fire();
-
-		IsFiring = false;
 	}
 
 	public override void FireCursor()

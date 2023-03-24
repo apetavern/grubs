@@ -13,7 +13,6 @@ public partial class SkipTurnComponent : WeaponComponent
 
 	public override void FireInstant()
 	{
-		IsFiring = false;
 		FireFinished();
 	}
 }

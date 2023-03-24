@@ -37,6 +37,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		Gadget.Position = Segments[0].StartPos;
 	}
 
+	public override bool IsResolved()
+	{
+		return false;
+	}
+
 	public override void Simulate( IClient client )
 	{
 		if ( ProjectileDebug )

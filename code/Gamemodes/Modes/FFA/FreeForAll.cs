@@ -113,7 +113,7 @@ public partial class FreeForAll : Gamemode
 	{
 		ActivePlayer.EndTurn();
 
-		await WorldResolved();
+		await World.UntilResolve();
 
 		TurnIsChanging = true;
 
@@ -165,7 +165,7 @@ public partial class FreeForAll : Gamemode
 
 				await HandleGrubDeath( grub );
 
-				await WorldResolved();
+				await World.UntilResolve();
 			}
 		}
 	}
@@ -192,7 +192,7 @@ public partial class FreeForAll : Gamemode
 		await CheckCrateSpawn( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
 		await CheckCrateSpawn( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
-		await WorldResolved();
+		await World.UntilResolve();
 
 		CameraTarget = null;
 	}

@@ -114,10 +114,4 @@ public partial class Gamemode : Entity
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
-
-	internal async virtual Task WorldResolved()
-	{
-		while ( !All.OfType<IResolvable>().All( ent => ent.Resolved ) )
-			await GameTask.Delay( 300 );
-	}
 }

@@ -64,6 +64,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public void Fire()
 	{
 		Weapon.HasFired = true;
+		TimeSinceFired = 0f;
+		IsCharging = false;
+		Weapon.CurrentUses++;
 
 		switch ( Weapon.FiringType )
 		{
@@ -89,11 +92,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public virtual void FireFinished()
 	{
-		Weapon.HasFired = true;
-		TimeSinceFired = 0f;
-		IsCharging = false;
 		IsFiring = false;
-		Weapon.CurrentUses++;
 
 		if ( Weapon.CurrentUses >= Weapon.Charges )
 			GamemodeSystem.Instance.UseTurn( true );

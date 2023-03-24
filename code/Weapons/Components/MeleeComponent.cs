@@ -29,9 +29,7 @@ public partial class MeleeComponent : WeaponComponent
 		base.Simulate( client );
 
 		if ( IsFiring && TimeSinceFired > HitDelay )
-		{
 			Fire();
-		}
 	}
 
 	public override void FireInstant()
@@ -60,7 +58,6 @@ public partial class MeleeComponent : WeaponComponent
 		Grub.SetAnimParameter( "fire", true );
 		Weapon.PlayScreenSound( To.Everyone, HitSound );
 
-		IsFiring = false;
 		FireFinished();
 	}
 

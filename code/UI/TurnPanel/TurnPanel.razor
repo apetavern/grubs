@@ -5,19 +5,18 @@
     return;
 }
 
-<root class="@(GamemodeSystem.Instance.TurnIsChanging ? "hide" : "")">
+<root class="@(GamemodeSystem.Instance.TurnIsChanging || GamemodeSystem.Instance.GetTimeRemaining() < 0 ? "hide" : "")">
     <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
-    <label class="name" 
-        text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn")
-        style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" 
-    />
+    <label class="name"
+    text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn")
+    style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" />
     @{
         var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
         <div class="wind @(facingRight ? "right" : "left")">
-        @for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
-        {
-            <label class="icon" text=@(facingRight ? "keyboard_arrow_right" : "keyboard_arrow_left") />
-        }
+            @for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
+            {
+                <label class="icon" text=@(facingRight ? "keyboard_arrow_right" : "keyboard_arrow_left") />
+            }
         </div>
     }
 </root>
@@ -30,15 +29,8 @@
 
     protected override int BuildHash()
     {
-        if (GamemodeSystem.Instance is null)
-            return HashCode.Combine(-1);
-
-        return HashCode.Combine(
-            FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()),
-            GamemodeSystem.Instance.ActivePlayer?.SteamId,
-            GamemodeSystem.Instance.TurnIsChanging,
-            GamemodeSystem.Instance.ActiveWindSteps
-        );
+        var instance = GamemodeSystem.Instance;
+        return HashCode.Combine(instance?.GetTimeRemaining(), instance?.ActivePlayer?.SteamId, instance?.TurnIsChanging, instance?.ActiveWindSteps);
     }
 }
 
@@ -97,14 +89,30 @@
     }
 
     @@keyframes moving-left {
-        0%   { transform: translateX(0); }
-        75%  { transform: translateX(-10); }
-        100% { transform: translateX(0); }
+        0% {
+            transform: translateX(0);
+        }
+
+        75% {
+            transform: translateX(-10);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
     }
 
     @@keyframes moving-right {
-        0%   { transform: translateX(0); }
-        75%  { transform: translateX(10); }
-        100% { transform: translateX(0); }
+        0% {
+            transform: translateX(0);
+        }
+
+        75% {
+            transform: translateX(10);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
     }
 </style>

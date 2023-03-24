@@ -24,6 +24,11 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		}
 	}
 
+	public override bool IsResolved()
+	{
+		return Gadget.Velocity.IsNearlyZero( 2.5f );
+	}
+
 	public override void Simulate( IClient client )
 	{
 		// Apply gravity.

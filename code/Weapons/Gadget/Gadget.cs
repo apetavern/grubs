@@ -55,13 +55,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool IsResolved()
 	{
-		foreach ( var component in Components.GetAll<GadgetComponent>() )
-		{
-			if ( component.IsResolved() )
-				return true;
-		}
-
-		return false;
+		return Components.GetAll<GadgetComponent>().All( c => c.IsResolved() );
 	}
 
 	public void OnUse( Grub grub, Weapon weapon, int charge )
