@@ -1,0 +1,301 @@
+{
+  "Model": "particles/watersplash/splash_ring.vmdl",
+  "Description": "",
+  "BlendMode": "Masked",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {
+        "Identifier": "19",
+        "Output": "Result"
+      },
+      "Emission": {},
+      "Opacity": {
+        "Identifier": "16",
+        "Output": "Result"
+      },
+      "Normal": {},
+      "Roughness": {},
+      "Metalness": {},
+      "AmbientOcclusion": {},
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "800,64"
+    },
+    {
+      "_class": "PolarCoordinates",
+      "Coords": {},
+      "Center": {},
+      "RadialScale": {},
+      "LengthScale": {},
+      "DefaultCenter": "0.5,0.5",
+      "DefaultRadialScale": 3,
+      "DefaultLengthScale": 1,
+      "Identifier": "1",
+      "Position": "-592,-128"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Texture": "particles/watersplash/textures/water_ring_png_9fab6d08.generated.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "",
+        "Default": "1,1,1,1",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "2",
+      "Position": "-64,-128"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "3",
+      "Position": "-256,-128"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "4",
+      "Position": "-832,144"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "Speed One",
+      "Value": 0.1,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "5",
+      "Position": "-832,64"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "DefaultA": -0.3,
+      "DefaultB": 0,
+      "Identifier": "6",
+      "Position": "-544,64"
+    },
+    {
+      "_class": "Subtract",
+      "A": {},
+      "B": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "DefaultA": 1,
+      "DefaultB": 0,
+      "Identifier": "7",
+      "Position": "-384,32"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "Texture": "particles/watersplash/textures/water_ring_png_9fab6d08.generated.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "",
+        "Default": "1,1,1,1",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "8",
+      "Position": "-64,256"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "9",
+      "Position": "-848,528"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "Speed Two",
+      "Value": 0.2,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "10",
+      "Position": "-848,448"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "DefaultA": -0.3,
+      "DefaultB": 0,
+      "Identifier": "11",
+      "Position": "-560,448"
+    },
+    {
+      "_class": "Subtract",
+      "A": {},
+      "B": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "DefaultA": 1,
+      "DefaultB": 0,
+      "Identifier": "12",
+      "Position": "-400,416"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "13",
+      "Position": "-272,272"
+    },
+    {
+      "_class": "PolarCoordinates",
+      "Coords": {},
+      "Center": {},
+      "RadialScale": {},
+      "LengthScale": {},
+      "DefaultCenter": "0.5,0.5",
+      "DefaultRadialScale": 3,
+      "DefaultLengthScale": 1,
+      "Identifier": "14",
+      "Position": "-848,288"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "2",
+        "Output": "R"
+      },
+      "B": {
+        "Identifier": "8",
+        "Output": "G"
+      },
+      "C": {},
+      "Fraction": 0.5,
+      "Identifier": "15",
+      "Position": "272,64"
+    },
+    {
+      "_class": "SmoothStep",
+      "Input": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "Edge1": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "Edge2": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "Identifier": "16",
+      "Position": "560,176"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "",
+      "Value": 0,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "17",
+      "Position": "320,224"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Name": "",
+      "Value": 0.6,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "18",
+      "Position": "320,304"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "1,1,1,1",
+      "UI": {
+        "Type": "Color",
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "19",
+      "Position": "272,-144"
+    }
+  ]
+}
