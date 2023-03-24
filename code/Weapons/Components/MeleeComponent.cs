@@ -29,9 +29,7 @@ public partial class MeleeComponent : WeaponComponent
 		base.Simulate( client );
 
 		if ( IsFiring && TimeSinceFired > HitDelay )
-		{
 			Fire();
-		}
 	}
 
 	public override void FireInstant()
@@ -57,19 +55,10 @@ public partial class MeleeComponent : WeaponComponent
 			Weapon.PlayScreenSound( To.Everyone, ImpactSound );
 		}
 
-		IsFiring = false;
-		FireFinished();
-	}
-
-	public override void FireCharged()
-	{
-		FireFinished();
-	}
-
-	public override void FireStart()
-	{
 		Grub.SetAnimParameter( "fire", true );
 		Weapon.PlayScreenSound( To.Everyone, HitSound );
+
+		FireFinished();
 	}
 
 	private Dictionary<Grub, Vector3> GetGrubsInSwing()

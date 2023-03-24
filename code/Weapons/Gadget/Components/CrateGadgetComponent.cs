@@ -20,11 +20,6 @@ public partial class CrateGadgetComponent : GadgetComponent
 		Gadget.SetMaterialOverride( _spawnMaterial );
 	}
 
-	public override bool IsResolved()
-	{
-		return Gadget.Velocity.IsNearlyZero( 2.5f );
-	}
-
 	public override void OnTouch( Entity other )
 	{
 		if ( Game.IsClient || other is not Grub grub )

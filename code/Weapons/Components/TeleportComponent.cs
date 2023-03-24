@@ -48,13 +48,10 @@ public partial class TeleportComponent : WeaponComponent
 
 		if ( isValidPlacement )
 			Fire();
-
-		IsFiring = false;
 	}
 
 	public override void FireCursor()
 	{
-		IsFiring = false;
 		Grub.Position = Grub.Player.MousePosition;
 
 		FireFinished();

@@ -44,6 +44,17 @@ public partial class World : Entity
 	private float[,] _terrainGrid;
 	private const float GridSize = 1024f;
 
+	public static bool IsResolved()
+	{
+		return All.OfType<IResolvable>().All( ent => ent.Resolved );
+	}
+
+	public static async Task UntilResolve()
+	{
+		while ( !IsResolved() )
+			await GameTask.Delay( 300 );
+	}
+
 	public override void Spawn()
 	{
 		Reset();

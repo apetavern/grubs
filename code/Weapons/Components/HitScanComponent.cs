@@ -139,13 +139,10 @@ public partial class HitScanComponent : WeaponComponent
 
 		if ( FireCount >= TraceCount )
 		{
-			IsFiring = false;
 			FireCount = 0;
 
 			if ( TraceDelay == 0 )
-			{
 				FireEffects();
-			}
 
 			FireFinished();
 		}

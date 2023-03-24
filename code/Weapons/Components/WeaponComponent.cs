@@ -31,8 +31,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	{
 		ChargeParticles?.Destroy( true );
 		ChargeParticles = null;
-
-		IsFiring = false;
 	}
 
 	public virtual void Simulate( IClient client )
@@ -59,18 +57,16 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		{
 			ChargeParticles?.Set( "Alpha", 0f );
 			ChargeParticles?.Set( "Speed", 10000f );
-
-			TimeSinceFired = 0f;
 			IsFiring = true;
-			IsCharging = false;
-			FireStart();
-			Weapon.CurrentUses++;
 		}
 	}
 
 	public void Fire()
 	{
 		Weapon.HasFired = true;
+		TimeSinceFired = 0f;
+		IsCharging = false;
+		Weapon.CurrentUses++;
 
 		switch ( Weapon.FiringType )
 		{
@@ -94,10 +90,10 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public virtual void FireCursor() { }
 
-	public virtual void FireStart() { }
-
 	public virtual void FireFinished()
 	{
+		IsFiring = false;
+
 		if ( Weapon.CurrentUses >= Weapon.Charges )
 			GamemodeSystem.Instance.UseTurn( true );
 	}

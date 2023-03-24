@@ -51,7 +51,6 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		gadget.OnUse( Grub, Weapon, Charge );
 		gadget.PlayScreenSound( UseSound );
 
-		IsFiring = false;
 		Charge = MinCharge;
 
 		FireFinished();

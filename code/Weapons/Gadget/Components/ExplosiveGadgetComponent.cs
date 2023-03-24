@@ -42,6 +42,11 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		}
 	}
 
+	public override bool IsResolved()
+	{
+		return TimeUntilExplosion;
+	}
+
 	public async void ExplodeAfterSeconds( float seconds )
 	{
 		await GameTask.DelaySeconds( seconds );

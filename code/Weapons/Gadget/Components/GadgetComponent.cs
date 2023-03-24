@@ -18,7 +18,7 @@ public partial class GadgetComponent : EntityComponent<Gadget>
 
 	public virtual bool IsResolved()
 	{
-		return false;
+		return true;
 	}
 
 	public virtual void OnUse( Weapon weapon, int charge )

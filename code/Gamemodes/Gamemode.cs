@@ -114,9 +114,4 @@ public partial class Gamemode : Entity
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
-
-	internal virtual bool IsWorldResolved()
-	{
-		return All.OfType<IResolvable>().All( ent => ent.Resolved );
-	}
 }

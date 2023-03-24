@@ -111,6 +111,10 @@ public partial class FreeForAll : Gamemode
 
 	private async Task NextTurn()
 	{
+		ActivePlayer.EndTurn();
+
+		await World.UntilResolve();
+
 		TurnIsChanging = true;
 
 		if ( await CleanupTurn() )
@@ -134,10 +138,7 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private async ValueTask<bool> CleanupTurn()
 	{
-		ActivePlayer.EndTurn();
-
 		await GameTask.DelaySeconds( 1f );
-
 		await HandleGrubDeaths();
 		await HandleCrateSpawns();
 
@@ -164,10 +165,7 @@ public partial class FreeForAll : Gamemode
 
 				await HandleGrubDeath( grub );
 
-				while ( !IsWorldResolved() )
-				{
-					await GameTask.Delay( 300 );
-				}
+				await World.UntilResolve();
 			}
 		}
 	}
@@ -194,10 +192,7 @@ public partial class FreeForAll : Gamemode
 		await CheckCrateSpawn( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
 		await CheckCrateSpawn( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
-		while ( !IsWorldResolved() )
-		{
-			await GameTask.Delay( 300 );
-		}
+		await World.UntilResolve();
 
 		CameraTarget = null;
 	}
@@ -334,7 +329,7 @@ public partial class FreeForAll : Gamemode
 			if ( TimeUntilNextTurn <= 0f && !UsedTurn )
 				UseTurn();
 
-			if ( UsedTurn && IsWorldResolved() )
+			if ( UsedTurn )
 				NextTurnTask ??= NextTurn();
 
 			AllowMovement = !CheckCurrentPlayerFiring();
