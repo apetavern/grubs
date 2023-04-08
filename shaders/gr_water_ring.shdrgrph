@@ -1,7 +1,7 @@
 {
   "Model": "particles/watersplash/splash_ring.vmdl",
   "Description": "",
-  "BlendMode": "Masked",
+  "BlendMode": "Translucent",
   "nodes": [
     {
       "_class": "Result",
@@ -251,7 +251,7 @@
       "_class": "Float",
       "Min": 0,
       "Max": 1,
-      "Name": "",
+      "Name": "Smooth Step Min",
       "Value": 0,
       "UI": {
         "PrimaryGroup": {
@@ -268,9 +268,10 @@
       "_class": "Float",
       "Min": 0,
       "Max": 1,
-      "Name": "",
+      "Name": "Smooth Step Max",
       "Value": 0.6,
       "UI": {
+        "Priority": 1,
         "PrimaryGroup": {
           "Name": ""
         },
@@ -296,6 +297,20 @@
       },
       "Identifier": "19",
       "Position": "272,-144"
+    },
+    {
+      "_class": "VertexColor",
+      "Identifier": "20",
+      "Position": "-208,576"
+    },
+    {
+      "_class": "SplitVector",
+      "Input": {
+        "Identifier": "20",
+        "Output": "RGB"
+      },
+      "Identifier": "21",
+      "Position": "-16,576"
     }
   ]
 }
