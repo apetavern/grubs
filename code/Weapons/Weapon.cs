@@ -128,10 +128,12 @@ public partial class Weapon : AnimatedEntity, IResolvable
 			component.OnHolster();
 		}
 
-		Grub.SetHatVisible( true );
+		Grub?.SetHatVisible( true );
 
 		if ( FiringType is FiringType.Cursor )
 			Event.Run( GrubsEvent.Player.PointerEventChanged, false );
+
+		SetParent( null );
 	}
 
 	public void Fire()

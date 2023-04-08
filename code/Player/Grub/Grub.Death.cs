@@ -45,8 +45,6 @@ public partial class Grub
 
 		if ( Health <= 0 )
 		{
-			// Holster active weapon before death.
-			Player.Inventory.SetActiveWeapon( null, true );
 			Health = 0;
 			OnKilled();
 		}
@@ -87,6 +85,11 @@ public partial class Grub
 	{
 		if ( LifeState is LifeState.Dying or LifeState.Dead )
 			return;
+
+		// Force a holster of the active weapon and
+		// set it to null immediately since Simulate() won't handle it.
+		Player.Inventory.ActiveWeapon.Holster( this );
+		Player.Inventory.SetActiveWeapon( null, true );
 
 		DeathTask = Die();
 	}
