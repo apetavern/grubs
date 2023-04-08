@@ -1,29 +1,17 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "shaders/gr_foreground.shader"
-
-	//---- AO ----
-	g_flAOMinus "0.500"
-	g_flAOPlus "1.000"
-
-	//---- Fog ----
-	g_bFogEnabled "1"
-
-	//---- Position ----
-	g_flYPosition "20.000"
-	g_flYSmoothing "75.000"
-	g_flZPosition "1024.000"
-	g_flZSmoothing "2000.000"
-
-	//---- Textures ----
-	Colour "textures/environment/Sand_A_color.png"
-	g_flTiling "1.000"
-	Normal "textures/environment/sand_a_normal.png"
-	Rough "textures/environment/sand_a_rough.png"
-
-	//---- Tint ----
-	g_flTintBlend "0.650"
-	g_vTintColour "[0.250980 0.078431 0.000000 1.000000]"
+	"shader"		"shaders/gr_foreground.shader_c"
+	"g_flAOMinus"		"0.500000"
+	"g_flAOPlus"		"1.000000"
+	"g_bFogEnabled"		"1"
+	"g_flYPosition"		"20.000000"
+	"g_flYSmoothing"		"75.000000"
+	"g_flZPosition"		"1024.000000"
+	"g_flZSmoothing"		"2000.000000"
+	"Colour"		"textures/environment/Sand_A_color.png"
+	"g_flTiling"		"1.000000"
+	"Normal"		"textures/environment/sand_a_normal.png"
+	"Rough"		"textures/environment/sand_a_rough.png"
+	"g_flTintBlend"		"0.650000"
+	"g_vTintColour"		"[0.250980 0.078431 0.000000 1.000000]"
 }
