@@ -49,7 +49,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 		var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
 		gadget.OnUse( Grub, Weapon, Charge );
-		gadget.PlayScreenSound( UseSound );
+		gadget.PlaySound( UseSound );
 
 		Charge = MinCharge;
 

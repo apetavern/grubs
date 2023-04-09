@@ -74,8 +74,7 @@ public partial class BuildComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-		Weapon.PlayScreenSound( To.Everyone, BuildSound );
-
+		Weapon.PlaySound( BuildSound );
 		GamemodeSystem.Instance.GameWorld.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
 		FireFinished();
 	}

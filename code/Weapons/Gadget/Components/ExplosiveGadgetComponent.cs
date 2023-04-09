@@ -72,14 +72,8 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 				break;
 		}
 
-		ExplodeSoundClient( To.Everyone, ExplosionSound );
+		Gadget.PlaySound( ExplosionSound );
 		Gadget.Delete();
-	}
-
-	[ClientRpc]
-	public void ExplodeSoundClient( string explosionSound )
-	{
-		Gadget.SoundFromScreen( explosionSound );
 	}
 }
 

@@ -45,7 +45,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public override void ClientSpawn()
 	{
-		_startSound = this.SoundFromScreen( StartSound );
+		_startSound = PlaySound( StartSound );
 
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{
@@ -96,11 +96,5 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	private void OnClientDestroy()
 	{
 		_startSound.Stop();
-	}
-
-	[ClientRpc]
-	public void PlayScreenSound( string sound )
-	{
-		this.SoundFromScreen( sound );
 	}
 }

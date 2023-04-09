@@ -111,15 +111,9 @@ public partial class Grub
 		await GameTask.Delay( 1025 );
 
 		ExplosionHelper.Explode( Position, this, 50f );
-		PlayDeathSound( To.Everyone, "explosion_short_tail" );
+		PlaySound( "explosion_short_tail" );
 		plunger.Delete();
 		FinishDie();
-	}
-
-	[ClientRpc]
-	public void PlayDeathSound( string sound )
-	{
-		this.SoundFromScreen( sound );
 	}
 
 	private void FinishDie()

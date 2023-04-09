@@ -254,12 +254,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		return ResourceLibrary.GetAll<Prefab>()
 			.Where( x => TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon ) );
 	}
-
-	[ClientRpc]
-	public void PlayScreenSound( string sound )
-	{
-		this.SoundFromScreen( sound );
-	}
 }
 
 public enum WeaponType

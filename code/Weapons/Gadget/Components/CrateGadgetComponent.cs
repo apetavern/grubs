@@ -25,7 +25,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 		if ( Game.IsClient || other is not Grub grub )
 			return;
 
-		Gadget.PlayScreenSound( PickupSound );
+		Gadget.PlaySound( PickupSound );
 
 		switch ( CrateType )
 		{
