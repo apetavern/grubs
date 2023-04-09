@@ -2,10 +2,18 @@
 
 Layer0
 {
-	shader "shaders/gr_water_ring.shader"
+	shader "shaders/gr_water_ring.shader_c"
 
+	g_flSmoothStepMax "0.834"
+	g_flSmoothStepMin "0.142"
+	g_flSpeedOne "0.100"
+	g_flSpeedTwo "0.200"
 	Texture "particles/watersplash/textures/water_ring.png"
+	Texture0 "particles/watersplash/textures/water_ring.png"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
+
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
 }

@@ -13,10 +13,10 @@ FEATURES
 COMMON
 {
 #ifndef S_ALPHA_TEST
-#define S_ALPHA_TEST 1
+#define S_ALPHA_TEST 0
 #endif
 #ifndef S_TRANSLUCENT
-#define S_TRANSLUCENT 0
+#define S_TRANSLUCENT 1
 #endif
 
 	#include "common/shared.hlsl"
@@ -60,6 +60,8 @@ PS
 	CreateInputTexture2D( Texture0, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	CreateTexture2DWithoutSampler( g_tTexture ) < Channel( RGBA, Box( Texture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	CreateTexture2DWithoutSampler( g_tTexture0 ) < Channel( RGBA, Box( Texture0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	float g_flSmoothStepMin < UiGroup( ",0/,0/0" ); Default1( 0 ); Range1( 0, 1 ); >;
+	float g_flSmoothStepMax < UiGroup( ",0/,0/1" ); Default1( 0.6 ); Range1( 0, 1 ); >;
 	float g_flSpeedOne < UiGroup( ",0/,0/0" ); Default1( 0.1 ); Range1( 0, 1 ); >;
 	float g_flSpeedTwo < UiGroup( ",0/,0/0" ); Default1( 0.2 ); Range1( 0, 1 ); >;
 
@@ -77,23 +79,25 @@ PS
 		m.Transmission = 0;
 
 		float4 local0 = float4( 1, 1, 1, 1 );
-		float2 local1 = PolarCoordinates( ( i.vTextureCoords.xy ) - ( float2( 0.5, 0.5 ) ), 3, 1 );
-		float local2 = g_flSpeedOne;
-		float local3 = local2 * g_flTime;
-		float local4 = 1 - local3;
-		float2 local5 = local1 + float2( local4, local4 );
-		float4 local6 = Tex2DS( g_tTexture, g_sSampler0, local5 );
-		float2 local7 = PolarCoordinates( ( i.vTextureCoords.xy ) - ( float2( 0.5, 0.5 ) ), 3, 1 );
-		float local8 = g_flSpeedTwo;
-		float local9 = local8 * g_flTime;
-		float local10 = 1 - local9;
-		float2 local11 = local7 + float2( local10, local10 );
-		float4 local12 = Tex2DS( g_tTexture0, g_sSampler0, local11 );
-		float local13 = lerp( local6.r, local12.g, 0.5 );
-		float local14 = smoothstep( 0, 0.6, local13 );
+		float local1 = g_flSmoothStepMin;
+		float local2 = g_flSmoothStepMax;
+		float2 local3 = PolarCoordinates( ( i.vTextureCoords.xy ) - ( float2( 0.5, 0.5 ) ), 3, 1 );
+		float local4 = g_flSpeedOne;
+		float local5 = local4 * g_flTime;
+		float local6 = 1 - local5;
+		float2 local7 = local3 + float2( local6, local6 );
+		float4 local8 = Tex2DS( g_tTexture, g_sSampler0, local7 );
+		float2 local9 = PolarCoordinates( ( i.vTextureCoords.xy ) - ( float2( 0.5, 0.5 ) ), 3, 1 );
+		float local10 = g_flSpeedTwo;
+		float local11 = local10 * g_flTime;
+		float local12 = 1 - local11;
+		float2 local13 = local9 + float2( local12, local12 );
+		float4 local14 = Tex2DS( g_tTexture0, g_sSampler0, local13 );
+		float local15 = lerp( local8.r, local14.g, 0.5 );
+		float local16 = smoothstep( local1, local2, local15 );
 
 		m.Albedo = local0.xyz;
-		m.Opacity = local14;
+		m.Opacity = local16;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;
