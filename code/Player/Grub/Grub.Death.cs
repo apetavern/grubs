@@ -88,7 +88,7 @@ public partial class Grub
 
 		// Force a holster of the active weapon and
 		// set it to null immediately since Simulate() won't handle it.
-		Player.Inventory.ActiveWeapon.Holster( this );
+		Player.Inventory.ActiveWeapon?.Holster( this );
 		Player.Inventory.SetActiveWeapon( null, true );
 
 		DeathTask = Die();
