@@ -57,20 +57,19 @@ PS
 
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
 	CreateInputTexture2D( Colour, Srgb, 8, "None", "_color", "Textures,3/,0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Textures,3/,0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( Normal, Linear, 8, "None", "_normal", "Textures,3/,0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
 	CreateInputTexture2D( Rough, Linear, 8, "None", "_rough", "Textures,3/,0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( AO, Linear, 8, "None", "_ao", "Textures,3/,0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
 	CreateTexture2DWithoutSampler( g_tColour ) < Channel( RGBA, Box( Colour ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGBA, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
 	CreateTexture2DWithoutSampler( g_tRough ) < Channel( RGBA, Box( Rough ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
+	CreateTexture2DWithoutSampler( g_tAO ) < Channel( RGBA, Box( AO ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
 	float g_flTiling < UiGroup( "Textures,0/,1/0" ); Default1( 1 ); Range1( 0, 5 ); >;
 	float4 g_vTintColour < UiType( Color ); UiGroup( "Tint,0/,0/0" ); Default4( 0.25, 0.08, 0.00, 1.00 ); >;
-	float g_flYPosition < UiGroup( "Position,0/Y,0/0" ); Default1( 20 ); Range1( 0, 64 ); >;
-	float g_flYSmoothing < UiGroup( "Position,0/Y,0/0" ); Default1( 75 ); Range1( 0, 128 ); >;
-	float g_flZPosition < UiGroup( "Position,0/Z,1/0" ); Default1( 1024 ); Range1( 0, 2048 ); >;
-	float g_flZSmoothing < UiGroup( "Position,0/Z,1/0" ); Default1( 2000 ); Range1( 0, 2048 ); >;
-	float g_flTintBlend < UiGroup( "Tint,0/,0/0" ); Default1( 0.65 ); Range1( 0, 1 ); >;
-	float g_flAOPlus < UiGroup( "AO,2/,0/0" ); Default1( 1 ); Range1( 0, 1 ); >;
-	float g_flAOMinus < UiGroup( "AO,2/,1/0" ); Default1( 0.5 ); Range1( 0, 1 ); >;
+	float g_flYPosition < UiGroup( "Position,0/Y,0/3" ); Default1( 20 ); Range1( 0, 64 ); >;
+	float g_flYSmoothing < UiGroup( "Position,0/Y,0/4" ); Default1( 75 ); Range1( 0, 128 ); >;
+	float g_flZPosition < UiGroup( "Position,0/Z,1/1" ); Default1( 1024 ); Range1( 0, 2048 ); >;
+	float g_flZSmoothing < UiGroup( "Position,0/Z,1/2" ); Default1( 2000 ); Range1( 0, 2048 ); >;
 
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -106,23 +105,24 @@ PS
 		float local18 = local16 / local17;
 		float local19 = saturate( local18 );
 		float4 local20 = lerp( local5, local3, local19 );
-		float local21 = g_flTintBlend;
-		float4 local22 = lerp( local13, local20, local21 );
-		float4 local23 = Tex2DS( g_tNormal, g_sSampler0, local2 );
-		float3 local24 = TransformNormal( i, DecodeNormal( local23.xyz ) );
-		float4 local25 = Tex2DS( g_tRough, g_sSampler0, local2 );
-		float local26 = g_flAOPlus;
-		float local27 = g_flAOMinus;
-		float local28 = lerp( local26, local27, local20.x );
-		float local29 = saturate( local28 );
+		float4 local21 = local13 * local20;
+		float4 local22 = Tex2DS( g_tNormal, g_sSampler0, local2 );
+		float3 local23 = TransformNormal( i, DecodeNormal( local22.xyz ) );
+		float4 local24 = Tex2DS( g_tRough, g_sSampler0, local2 );
+		float4 local25 = Tex2DS( g_tAO, g_sSampler0, local2 );
 
-		m.Albedo = local22.xyz;
+		m.Albedo = local21.xyz;
 		m.Opacity = 1;
-		m.Normal = local24;
-		m.Roughness = local25.x;
+		m.Normal = local23;
+		m.Roughness = local24.x;
 		m.Metalness = 0;
-		m.AmbientOcclusion = local29;
+		m.AmbientOcclusion = local25.x;
 
+		m.AmbientOcclusion = saturate( m.AmbientOcclusion );
+		m.Roughness = saturate( m.Roughness );
+		m.Metalness = saturate( m.Metalness );
+		m.Opacity = saturate( m.Opacity );
+		
 		ShadingModelValveStandard sm;
 		return FinalizePixelMaterial( i, m, sm );
 	}

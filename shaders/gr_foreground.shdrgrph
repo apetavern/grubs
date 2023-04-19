@@ -21,7 +21,7 @@
       },
       "Metalness": {},
       "AmbientOcclusion": {
-        "Identifier": "21",
+        "Identifier": "25",
         "Output": "Result"
       },
       "DefaultOpacity": 1,
@@ -29,15 +29,15 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "1728,-288"
+      "Position": "1600,-192"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "24",
+        "Identifier": "20",
         "Output": "Result"
       },
-      "Texture": "textures/dev/white.vtex",
+      "Texture": "textures/environment/sand_a_color_png_25ab3fcc.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Colour",
@@ -52,15 +52,14 @@
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "24",
+        "Identifier": "20",
         "Output": "Result"
       },
-      "Texture": "textures/dev/white.vtex",
+      "Texture": "textures/environment/sand_a_normal_png_17bd4f6c.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Normal",
         "Extension": "Normal",
-        "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": "Textures",
@@ -73,10 +72,10 @@
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "24",
+        "Identifier": "20",
         "Output": "Result"
       },
-      "Texture": "textures/dev/white.vtex",
+      "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Rough",
@@ -113,7 +112,7 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "29",
+        "Identifier": "24",
         "Output": "Result"
       },
       "DefaultA": 0,
@@ -133,7 +132,7 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "22",
+        "Identifier": "18",
         "Output": "Result"
       },
       "C": {
@@ -142,7 +141,7 @@
       },
       "Fraction": 0.5,
       "Identifier": "8",
-      "Position": "992,-320"
+      "Position": "912,-384"
     },
     {
       "_class": "Add",
@@ -151,7 +150,7 @@
         "Output": "Z"
       },
       "B": {
-        "Identifier": "27",
+        "Identifier": "22",
         "Output": "Result"
       },
       "DefaultA": 0,
@@ -182,7 +181,7 @@
         "Output": "Y"
       },
       "B": {
-        "Identifier": "26",
+        "Identifier": "21",
         "Output": "Result"
       },
       "DefaultA": 0,
@@ -197,7 +196,7 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "28",
+        "Identifier": "23",
         "Output": "Result"
       },
       "DefaultA": 0,
@@ -226,7 +225,7 @@
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "22",
+        "Identifier": "18",
         "Output": "Result"
       },
       "B": {
@@ -239,10 +238,10 @@
       },
       "Fraction": 0.5,
       "Identifier": "15",
-      "Position": "992,32"
+      "Position": "912,-272"
     },
     {
-      "_class": "Lerp",
+      "_class": "Multiply",
       "A": {
         "Identifier": "8",
         "Output": "Result"
@@ -251,13 +250,10 @@
         "Identifier": "15",
         "Output": "Result"
       },
-      "C": {
-        "Identifier": "25",
-        "Output": "Result"
-      },
-      "Fraction": 0.65,
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Identifier": "16",
-      "Position": "1296,-320"
+      "Position": "1264,-304"
     },
     {
       "_class": "TransformNormal",
@@ -267,71 +263,7 @@
       },
       "DecodeNormal": true,
       "Identifier": "17",
-      "Position": "1296,-208"
-    },
-    {
-      "_class": "Float",
-      "Min": 0,
-      "Max": 1,
-      "Name": "AO Minus",
-      "Value": 0.5,
-      "UI": {
-        "PrimaryGroup": {
-          "Name": "AO",
-          "Priority": 2
-        },
-        "SecondaryGroup": {
-          "Name": "",
-          "Priority": 1
-        }
-      },
-      "Identifier": "18",
-      "Position": "992,240"
-    },
-    {
-      "_class": "Float",
-      "Min": 0,
-      "Max": 1,
-      "Name": "AO Plus",
-      "Value": 1,
-      "UI": {
-        "PrimaryGroup": {
-          "Name": "AO",
-          "Priority": 2
-        },
-        "SecondaryGroup": {
-          "Name": ""
-        }
-      },
-      "Identifier": "19",
-      "Position": "992,176"
-    },
-    {
-      "_class": "Lerp",
-      "A": {
-        "Identifier": "19",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "18",
-        "Output": "Result"
-      },
-      "C": {
-        "Identifier": "15",
-        "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "20",
-      "Position": "1280,176"
-    },
-    {
-      "_class": "Saturate",
-      "Input": {
-        "Identifier": "20",
-        "Output": "Result"
-      },
-      "Identifier": "21",
-      "Position": "1504,176"
+      "Position": "-32,-144"
     },
     {
       "_class": "Blend",
@@ -347,8 +279,8 @@
       "Fraction": 1,
       "BlendMode": "Overlay",
       "Clamp": true,
-      "Identifier": "22",
-      "Position": "112,-480"
+      "Identifier": "18",
+      "Position": "112,-496"
     },
     {
       "_class": "Float",
@@ -365,7 +297,7 @@
           "Priority": 1
         }
       },
-      "Identifier": "23",
+      "Identifier": "19",
       "Position": "-768,-48"
     },
     {
@@ -375,30 +307,13 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "23",
+        "Identifier": "19",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "24",
+      "Identifier": "20",
       "Position": "-464,-128"
-    },
-    {
-      "_class": "Float",
-      "Min": 0,
-      "Max": 1,
-      "Name": "Tint_Blend",
-      "Value": 0.65,
-      "UI": {
-        "PrimaryGroup": {
-          "Name": "Tint"
-        },
-        "SecondaryGroup": {
-          "Name": ""
-        }
-      },
-      "Identifier": "25",
-      "Position": "992,-400"
     },
     {
       "_class": "Float",
@@ -407,6 +322,7 @@
       "Name": "Y Position",
       "Value": 20,
       "UI": {
+        "Priority": 3,
         "PrimaryGroup": {
           "Name": "Position"
         },
@@ -414,7 +330,7 @@
           "Name": "Y"
         }
       },
-      "Identifier": "26",
+      "Identifier": "21",
       "Position": "-640,320"
     },
     {
@@ -424,6 +340,7 @@
       "Name": "Z Position",
       "Value": 1024,
       "UI": {
+        "Priority": 1,
         "PrimaryGroup": {
           "Name": "Position"
         },
@@ -432,7 +349,7 @@
           "Priority": 1
         }
       },
-      "Identifier": "27",
+      "Identifier": "22",
       "Position": "-640,576"
     },
     {
@@ -442,6 +359,7 @@
       "Name": "Y Smoothing",
       "Value": 75,
       "UI": {
+        "Priority": 4,
         "PrimaryGroup": {
           "Name": "Position"
         },
@@ -449,7 +367,7 @@
           "Name": "Y"
         }
       },
-      "Identifier": "28",
+      "Identifier": "23",
       "Position": "-256,432"
     },
     {
@@ -459,6 +377,7 @@
       "Name": "Z Smoothing",
       "Value": 2000,
       "UI": {
+        "Priority": 2,
         "PrimaryGroup": {
           "Name": "Position"
         },
@@ -467,8 +386,28 @@
           "Priority": 1
         }
       },
-      "Identifier": "29",
+      "Identifier": "24",
       "Position": "-256,544"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "20",
+        "Output": "Result"
+      },
+      "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "AO",
+        "Extension": "AO",
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": "Textures",
+          "Priority": 3
+        }
+      },
+      "Identifier": "25",
+      "Position": "-272,240"
     }
   ]
 }

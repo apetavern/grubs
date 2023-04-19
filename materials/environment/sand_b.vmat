@@ -1,0 +1,37 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/blendable.shader_c"
+
+	F_MULTIBLEND 1 // 2 Layers
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	TextureColor "textures/environment/sand_shells_color.png"
+	TextureTintMask "materials/default/default.tga"
+
+	//---- Material A ----
+	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusionA "textures/environment/sand_a_ao.png"
+	TextureBlendMaskA "textures/environment/sand_shells_blend.png"
+	TextureColorA "textures/environment/sand_a_color.png"
+	TextureMetalnessA "materials/default/default_metal.tga"
+	TextureNormalA "textures/environment/sand_a_normal.png"
+	TextureRoughnessA "textures/environment/sand_a_rough.png"
+	TextureTintMaskA "materials/default/default.tga"
+
+	//---- Material B ----
+	g_flBlendSoftnessB "0.500"
+	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
+	g_vTexCoordScale2 "[1.000 1.000]"
+	TextureAmbientOcclusionB "textures/environment/sand_shells_ao.png"
+	TextureBlendMaskB "textures/environment/sand_shells_blend.png"
+	TextureColorB "textures/environment/sand_shells_color.png"
+	TextureMetalnessB "materials/default/default_metal.tga"
+	TextureNormalB "textures/environment/sand_shells_normal.png"
+	TextureRoughnessB "textures/environment/sand_shells_rough.png"
+	TextureTintMaskB "materials/default/default.tga"
+}
