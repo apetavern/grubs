@@ -2,8 +2,6 @@
 
 public partial class JumpMechanic : ControllerMechanic
 {
-	public static InputButton JumpButton => InputButton.Jump;
-	public static InputButton BackflipButton => InputButton.Run;
 	public override int SortOrder => 5;
 
 	[Net, Predicted]
@@ -18,13 +16,13 @@ public partial class JumpMechanic : ControllerMechanic
 
 		if ( Controller.IsGrounded )
 		{
-			if ( Input.Pressed( JumpButton ) )
+			if ( Input.Pressed( InputAction.Jump ) )
 			{
 				IsBackflipping = false;
 				return true;
 			}
 
-			if ( Input.Pressed( BackflipButton ) )
+			if ( Input.Pressed( InputAction.Backflip ) )
 			{
 				IsBackflipping = true;
 				return true;

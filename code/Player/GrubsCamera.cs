@@ -62,10 +62,10 @@ public class GrubsCamera
 		var lookDir = (cameraCenter - targetPosition).Normal;
 		Camera.Rotation = Rotation.LookAt( lookDir, Vector3.Up );
 
-		if ( Input.Down( InputButton.SecondaryAttack ) )
+		if ( Input.Down( InputAction.CameraPan ) )
 			MoveCamera();
 
-		if ( Input.Pressed( InputButton.Zoom ) || !Input.Down( InputButton.SecondaryAttack ) && _timeSinceMousePan > _secondsBeforeCentering )
+		if ( Input.Pressed( InputAction.CameraReset ) || !Input.Down( InputAction.CameraPan ) && _timeSinceMousePan > _secondsBeforeCentering )
 			_isCenteredOnGrub = true;
 	}
 

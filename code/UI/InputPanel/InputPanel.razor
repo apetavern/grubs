@@ -7,38 +7,34 @@
 
 <root>
     <div>
-        <label>Toggle Input</label>
-        <InputGlyph button="Score" />
-    </div>
-    <div>
         <label>Attack</label>
-        <InputGlyph button="PrimaryAttack" />
+        <InputGlyph button=@InputAction.Fire />
     </div>
     <div>
         <label>Camera</label>
-        <InputGlyph button="SecondaryAttack" />
+        <InputGlyph button=@InputAction.CameraPan />
     </div>
     <div>
         <label>Move</label>
-        <InputGlyph button="Left" />
-        <InputGlyph button="Right" />
+        <InputGlyph button=@InputAction.MoveLeft />
+        <InputGlyph button=@InputAction.MoveRight />
     </div>
     <div>
         <label>Aim</label>
-        <InputGlyph button="Forward" />
-        <InputGlyph button="Back" />
+        <InputGlyph button=@InputAction.AimUp />
+        <InputGlyph button=@InputAction.AimDown />
     </div>
     <div>
         <label>Inventory</label>
-        <InputGlyph button="Menu" />
+        <InputGlyph button=@InputAction.Inventory />
     </div>
     <div>
         <label>Jump</label>
-        <InputGlyph button="Jump" />
+        <InputGlyph button=@InputAction.Jump />
     </div>
     <div>
         <label>Backflip</label>
-        <InputGlyph button="Run" />
+        <InputGlyph button=@InputAction.Backflip />
     </div>
 </root>
 

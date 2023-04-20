@@ -3,16 +3,16 @@
 <root />
 
 @code {
-    private InputButton _inputButton;
+    private string _inputAction;
     private InputGlyphSize _inputGlyphSize;
     private GlyphStyle _glyphStyle;
 
-    public void SetButton(InputButton inputButton)
+    public void SetButton(string inputAction)
     {
-        if (_inputButton == inputButton)
+        if (_inputAction == inputAction)
             return;
 
-        _inputButton = inputButton;
+        _inputAction = inputAction;
         Update();
     }
 
@@ -22,8 +22,7 @@
         {
             case "button":
                 {
-                    InputButton.TryParse(value, true, out _inputButton);
-                    SetButton(_inputButton);
+                    SetButton(value);
                     Update();
 
                     break;
@@ -45,9 +44,7 @@
                         "light" => GlyphStyle.Light,
                         "dark" => GlyphStyle.Dark,
                         _ => _glyphStyle
-                    }
-
-                    ;
+                    };
 
                     Update();
                     break;
@@ -59,7 +56,7 @@
 
     private void Update()
     {
-        var texture = Input.GetGlyph(_inputButton, _inputGlyphSize, _glyphStyle);
+        var texture = Input.GetGlyph(_inputAction, _inputGlyphSize, _glyphStyle);
         Style.BackgroundImage = texture;
         Style.Width = texture.Width;
         Style.Height = texture.Height;

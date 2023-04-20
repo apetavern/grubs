@@ -490,6 +490,65 @@
           "r": "Trigger"
         }
       ]
+    },
+    "InputSettings": {
+      "Actions": [
+        {
+          "Name": "camera_pan",
+          "KeyboardCode": "mouse2",
+          "GroupName": "Camera"
+        },
+        {
+          "Name": "camera_reset",
+          "KeyboardCode": "mouse3",
+          "GroupName": "Camera"
+        },
+        {
+          "Name": "inventory",
+          "KeyboardCode": "q",
+          "GroupName": "UI"
+        },
+        {
+          "Name": "chat",
+          "KeyboardCode": "enter",
+          "GroupName": "UI"
+        },
+        {
+          "Name": "fire",
+          "KeyboardCode": "mouse1",
+          "GroupName": "Weapon"
+        },
+        {
+          "Name": "forward",
+          "KeyboardCode": "w",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "backward",
+          "KeyboardCode": "s",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "left",
+          "KeyboardCode": "a",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "right",
+          "KeyboardCode": "d",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "jump",
+          "KeyboardCode": "space",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "backflip",
+          "KeyboardCode": "shift",
+          "GroupName": "Movement"
+        }
+      ]
     }
   }
 }

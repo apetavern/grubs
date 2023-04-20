@@ -25,7 +25,7 @@
 
 @code {
     private Weapon _hoveredWeapon;
-    private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down(InputButton.Menu);
+    private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down(InputAction.Inventory);
     private readonly int _totalAmmo = (Game.LocalPawn as Player).Inventory.Weapons.Sum(x => x.Ammo);
 
     protected override int BuildHash()
