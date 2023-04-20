@@ -31,7 +31,7 @@
       },
       "ShouldUseModelCollision": {
         "Type": "Boolean",
-        "Value": "false"
+        "Value": "true"
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
@@ -50,7 +50,7 @@
         "Value": "1"
       },
       "_tags": {
-        "Value": "\u0022gadget\u0022"
+        "Value": "\u0022gadget dead\u0022"
       },
       "CollisionRadius": {
         "Type": "Single",
