@@ -40,7 +40,7 @@ public partial class TextChat : Panel
 
 	public override void Tick()
 	{
-		if ( Sandbox.Input.Pressed( InputButton.Chat ) )
+		if ( Sandbox.Input.Pressed( InputAction.Chat ) )
 			Open();
 	}
 
