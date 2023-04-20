@@ -83,9 +83,11 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 	public override void Simulate( IClient client )
 	{
+		if ( LifeState == LifeState.Dead )
+			return;
+
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
-		Gravestone?.Simulate( client );
 	}
 
 	public override void FrameSimulate( IClient client )

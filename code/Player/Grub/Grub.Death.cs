@@ -7,9 +7,6 @@ public partial class Grub
 	public Task DeathTask { get; set; }
 
 	[Net]
-	public Gravestone Gravestone { get; set; }
-
-	[Net]
 	public bool HasBeenDamaged { get; set; }
 
 	[Net]
@@ -132,14 +129,16 @@ public partial class Grub
 		Tags.Remove( "player" );
 		Tags.Add( "dead" );
 
-		Gravestone = new Gravestone( this )
+		if ( !DeathReason.FromKillTrigger )
 		{
-			Owner = this,
-			Parent = this,
-		};
+			var gravestone = PrefabLibrary.Spawn<Gadget>( "prefabs/world/gravestone.prefab" );
+			gravestone.Owner = Player;
+			gravestone.Position = Position;
+			Player.Gadgets.Add( gravestone );
+			return;
+		}
 
-		if ( DeathReason.FromKillTrigger )
-			Delete();
+		Delete();
 	}
 
 	[ConCmd.Admin( "kill" )]

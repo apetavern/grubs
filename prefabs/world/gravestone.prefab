@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "0cb9b3ea-a564-4ff5-9675-b62d679d15be",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "18a79594-2ca3-4d00-aab7-c77b6ace1a74",
+        "Class": "PhysicsGadgetComponent",
+        "Keys": {
+          "ShouldRotate": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "_name": {
+            "Value": "\u0022Physics\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/gravestones/basic_gravestone/gravestone_basic.vmdl\u0022"
+      },
+      "ShouldUseModelCollision": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "_name": {
+        "Value": "\u0022Gravestone\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget\u0022"
+      },
+      "CollisionRadius": {
+        "Type": "Single",
+        "Value": "0.1"
+      }
+    }
+  }
+}
