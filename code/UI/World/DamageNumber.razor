@@ -2,10 +2,9 @@
 @namespace Grubs
 
 <root>
-    <label 
-        class="@(_isHeal ? "heal" : "damage")" 
-        text=@(_isHeal ? $"+{Math.Floor( Math.Abs( _damage ) )}" : $"-{Math.Floor( _damage )}") 
-    />
+    <label
+    class="@(_isHeal ? "heal" : "damage")"
+    text=@FormatDamage() />
 </root>
 
 @code {
@@ -31,6 +30,12 @@
 
     public override void Tick() => Position += Vector3.Up * RiseSpeed * Time.Delta;
     protected override int BuildHash() => HashCode.Combine(_damage, _isHeal);
+
+    private string FormatDamage()
+    {
+        var damage = Math.Floor(Math.Min(_damage, 9999));
+        return _isHeal ? $"+{Math.Abs(damage)}" : $"-{damage}";
+    }
 
     private async Task DelayDelete()
     {

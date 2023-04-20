@@ -37,7 +37,7 @@
 
     private bool IsPlayersTurn()
     {
-        return _grub.IsValid() && _grub.IsTurn && Game.LocalPawn == _grub.Player;
+        return _grub.IsValid() && _grub.IsTurn && Game.LocalPawn == _grub.Player && _grub.LifeState != LifeState.Dead;
     }
 
     protected override int BuildHash()
@@ -61,11 +61,28 @@
     }
 
     @@keyframes bobbing {
-        0%   { transform: scale(1,1)      translateY(0); }
-        10%  { transform: scale(1.1,.9)   translateY(0); }
-        30%  { transform: scale(.9,1.1)   translateY(-100px); }
-        50%  { transform: scale(1.05,.95) translateY(0); }
-        57%  { transform: scale(1,1)      translateY(-7px); }
-        100% { transform: scale(1,1)      translateY(0); }
+        0% {
+            transform: scale(1, 1) translateY(0);
+        }
+
+        10% {
+            transform: scale(1.1, .9) translateY(0);
+        }
+
+        30% {
+            transform: scale(.9, 1.1) translateY(-100px);
+        }
+
+        50% {
+            transform: scale(1.05, .95) translateY(0);
+        }
+
+        57% {
+            transform: scale(1, 1) translateY(-7px);
+        }
+
+        100% {
+            transform: scale(1, 1) translateY(0);
+        }
     }
 </style>

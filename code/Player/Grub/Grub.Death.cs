@@ -13,7 +13,7 @@ public partial class Grub
 	public bool ShouldTakeDamage { get; set; }
 
 	[Net]
-	public int TotalDamageTaken { get; set; }
+	public float TotalDamageTaken { get; set; }
 
 	public Queue<DamageInfo> DamageQueue { get; set; } = new();
 
@@ -69,7 +69,7 @@ public partial class Grub
 			DeathReason = DeathReason.FindReason( this, damageInfo );
 		}
 
-		TotalDamageTaken = totalDamage.FloorToInt();
+		TotalDamageTaken = totalDamage;
 
 		TakeDamage( DamageInfo.Generic( Math.Min( totalDamage, Health ) ) );
 
