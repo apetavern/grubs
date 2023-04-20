@@ -2,44 +2,30 @@
 
 Layer0
 {
-	shader "complex.vfx"
+	shader "shaders/foliage.shader_c"
 
-	//---- PBR ----
-	F_SPECULAR 1
-
-	//---- Ambient Occlusion ----
-	g_flAmbientOcclusionDirectDiffuse "0.000"
-	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "models/menu/materials/grassleaves_ao.png"
-
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/menu/materials/grassleaves_color.png"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
+	//---- Foliage Animation ----
+	F_FOLIAGE_ANIMATION 1 // Vertex Color Based
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
+	//---- Foliage Animation ----
+	g_flBranchAmplitude "0.300"
+	g_flBranchFrequency "0.330"
+	g_flEdgeAmplitude "0.300"
+	g_flEdgeFrequency "0.330"
+	g_flTrunkDeflection "0.000"
+	g_flTrunkDeflectionStart "0.000"
 
-	//---- Metalness ----
-	g_flMetalness "0.000"
-
-	//---- Normal ----
+	//---- Material ----
+	g_flTintColor "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusion "models/menu/materials/grassleaves_ao.png"
+	TextureBlendMask "materials/default/default_blend.tga"
+	TextureColor "models/menu/materials/grassleaves_color.png"
+	TextureMetalness "materials/default/default_metal.tga"
 	TextureNormal "models/menu/materials/grassleaves_normal.png"
-
-	//---- Roughness ----
 	TextureRoughness "models/menu/materials/grassleaves_rough.png"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
+	TextureTintMask "materials/default/default.tga"
+	TextureTranslucency "materials/default/default_trans.tga"
 }
