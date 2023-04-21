@@ -30,7 +30,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	public override void OnClientSpawn()
 	{
 		if ( ExplodeAfter > 0 )
-			_ = new ExplosiveGadgetWorldPanel( Gadget );
+			_ = new UI.ExplosiveGadgetWorldPanel( Gadget );
 	}
 
 	public override void OnUse( Weapon weapon, int charge )

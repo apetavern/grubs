@@ -31,19 +31,19 @@ public partial class CrateGadgetComponent : GadgetComponent
 		{
 			case CrateType.Weapons:
 				var weaponResourcePath = CrateDrops.GetRandomWeaponFromCrate();
-				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some weaponized goods." );
+				UI.TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some weaponized goods." );
 				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
 				Gadget.Delete();
 				break;
 			case CrateType.Tools:
 				weaponResourcePath = CrateDrops.GetRandomToolFromCrate();
-				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up a tool." );
+				UI.TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up a tool." );
 				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
 				Gadget.Delete();
 				break;
 			case CrateType.Health:
 				grub.Health += 25;
-				TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} received medical attention." );
+				UI.TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} received medical attention." );
 				HealGrubEventClient( To.Everyone, grub, 25 );
 				Gadget.Delete();
 				break;

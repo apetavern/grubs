@@ -210,7 +210,7 @@ public partial class FreeForAll : Gamemode
 		crate.Owner = player;
 		player.Gadgets.Add( crate );
 
-		TextChat.AddInfoChatEntry( message );
+		UI.TextChat.AddInfoChatEntry( message );
 		CameraTarget = crate;
 
 		await GameTask.DelaySeconds( 2f );

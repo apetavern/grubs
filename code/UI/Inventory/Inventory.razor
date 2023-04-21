@@ -1,8 +1,6 @@
-@using Sandbox;
+@namespace Grubs.UI
 
-@namespace Grubs
-
-@if (Game.LocalPawn is not Player player)
+@if (Game.LocalPawn is not Grubs.Player player)
 {
     return;
 }
@@ -13,7 +11,7 @@
         @foreach (var weapon in player.Inventory.Weapons)
         {
             var hasAmmo = weapon.HasAmmo();
-            <InventoryItem
+            <InventorySlot
             Weapon=@weapon
             HasAmmo=@hasAmmo
             @onmouseover=@( () => _hoveredWeapon = weapon )
@@ -25,8 +23,8 @@
 
 @code {
     private Weapon _hoveredWeapon;
-    private bool RequestOpen() => Game.LocalPawn is Player player && player.IsTurn && Input.Down(InputAction.Inventory);
-    private readonly int _totalAmmo = (Game.LocalPawn as Player).Inventory.Weapons.Sum(x => x.Ammo);
+    private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && player.IsTurn && Input.Down(InputAction.Inventory);
+    private readonly int _totalAmmo = (Game.LocalPawn as Grubs.Player).Inventory.Weapons.Sum(x => x.Ammo);
 
     protected override int BuildHash()
     {
@@ -35,7 +33,7 @@
 }
 
 <style>
-    InventoryPanel {
+    Inventory {
         position: absolute;
         bottom: 125px;
         width: 320px;

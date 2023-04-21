@@ -22,7 +22,7 @@ public sealed partial class GrubsGame : GameManager
 	{
 		if ( Game.IsClient )
 		{
-			_ = new GrubsHud();
+			_ = new UI.GrubsHud();
 		}
 		else
 		{
@@ -40,13 +40,13 @@ public sealed partial class GrubsGame : GameManager
 		Sound.FromScreen( To.Single( client ), "beach_ambience" );
 
 		GamemodeSystem.Instance?.OnClientJoined( client );
-		TextChat.AddInfoChatEntry( $"{client.Name} has joined" );
+		UI.TextChat.AddInfoChatEntry( $"{client.Name} has joined" );
 	}
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
-		TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
+		UI.TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
 	}
 
 	public override void Simulate( IClient cl )
@@ -63,7 +63,7 @@ public sealed partial class GrubsGame : GameManager
 
 	public override void OnVoicePlayed( IClient client )
 	{
-		PlayerInfoPanel.Current?.OnVoicePlayed( client );
+		UI.PlayerList.Current?.OnVoicePlayed( client );
 	}
 
 	[Event.Entity.PostSpawn]

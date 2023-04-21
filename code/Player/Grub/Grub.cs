@@ -68,8 +68,8 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 	public override void ClientSpawn()
 	{
-		_ = new GrubWorldPanel( this );
-		_ = new TurnBobber( this );
+		_ = new UI.GrubWorldPanel( this );
+		_ = new UI.TurnBobber( this );
 	}
 
 	/// <summary>

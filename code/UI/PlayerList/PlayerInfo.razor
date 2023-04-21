@@ -1,14 +1,13 @@
-@namespace Grubs
+@namespace Grubs.UI
 
 <root class="@(!Player.IsAvailableForTurn ? "inactive" : "")">
     <img src="avatar:@Player.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
         <label text=@Player.SteamName class="name" style="font-color: @Player.Preferences.Color.Hex;" />
         <div class="health">
-            <div 
-                class="fill" 
-                style="background: linear-gradient(to top, @Player.Preferences.Color.Hex, @Player.Preferences.Color.Lighten(-0.3f).Hex); width: @(GetHealthPercentage())%;" 
-            />
+            <div
+            class="fill"
+            style="background: linear-gradient(to top, @Player.Preferences.Color.Hex, @Player.Preferences.Color.Lighten(-0.3f).Hex); width: @(GetHealthPercentage())%;" />
         </div>
     </div>
     @if (Player.IsDisconnected)
@@ -33,7 +32,7 @@
     public override void Tick()
     {
         var timeoutInv = 1 - (_timeSincePlayed / _voiceTimeout);
-        timeoutInv = MathF.Min( timeoutInv * 2.0f, 1.0f );
+        timeoutInv = MathF.Min(timeoutInv * 2.0f, 1.0f);
         _isTalking = timeoutInv > 0;
     }
 
@@ -114,10 +113,24 @@
     }
 
     @@keyframes wiggle {
-        0% {transform: rotate(0deg);}
-        25% {transform: rotate(-3deg);}
-        50% {transform: rotate(3deg);}
-        75% {transform: rotate(-2deg);}
-        100% {transform: rotate(1deg);}
+        0% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(-3deg);
+        }
+
+        50% {
+            transform: rotate(3deg);
+        }
+
+        75% {
+            transform: rotate(-2deg);
+        }
+
+        100% {
+            transform: rotate(1deg);
+        }
     }
 </style>

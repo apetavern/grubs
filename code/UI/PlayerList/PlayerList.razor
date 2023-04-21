@@ -1,6 +1,6 @@
 @using System.Linq;
 
-@namespace Grubs
+@namespace Grubs.UI
 
 <root>
     <TextChat />
@@ -11,8 +11,8 @@
 </root>
 
 @code {
-    public static PlayerInfoPanel Current;
-    public PlayerInfoPanel() => Current = this;
+    public static PlayerList Current;
+    public PlayerList() => Current = this;
 
     public void OnVoicePlayed(IClient client)
     {
@@ -33,7 +33,7 @@
 }
 
 <style>
-    PlayerInfoPanel {
+    PlayerList {
         position: absolute;
         bottom: 125px;
         left: 100px;

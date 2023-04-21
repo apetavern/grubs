@@ -1,6 +1,6 @@
-namespace Grubs;
+namespace Grubs.UI;
 
-public partial class GameStatePanel : Panel
+public partial class GameState : Panel
 {
 	[ConCmd.Server]
 	public static void StartGame()

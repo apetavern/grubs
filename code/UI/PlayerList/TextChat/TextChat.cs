@@ -1,4 +1,4 @@
-namespace Grubs;
+namespace Grubs.UI;
 
 public partial class TextChat : Panel
 {

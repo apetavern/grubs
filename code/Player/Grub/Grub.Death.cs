@@ -122,7 +122,7 @@ public partial class Grub
 	private void FinishDie()
 	{
 		Log.Info( $"{Name} has successfully died." );
-		TextChat.AddInfoChatEntry( DeathReason.ToString() );
+		UI.TextChat.AddInfoChatEntry( DeathReason.ToString() );
 
 		LifeState = LifeState.Dead;
 		EnableDrawing = false;

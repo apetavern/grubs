@@ -1,4 +1,4 @@
-@namespace Grubs
+@namespace Grubs.UI
 
 <root class="@(!HasAmmo ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>
@@ -21,7 +21,7 @@
 }
 
 <style>
-    InventoryItem {
+    InventorySlot {
         width: 65px;
         height: 65px;
         background-color: rgba(235, 235, 235, 0.24);
