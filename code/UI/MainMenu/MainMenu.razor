@@ -1,6 +1,14 @@
 @namespace Grubs.UI
 
 <root>
+    <div class="header">
+        <label style="font-size: 100px;">GRUBS</label>
+        <div class="buttons">
+            <button @onclick=@(() => SetActiveTab(Tab.PlayMenu)) icon="play_arrow" class="@IsActiveTab(Tab.PlayMenu)">Play</button>
+            <button @onclick=@(() => SetActiveTab(Tab.CustomizeMenu)) icon="emoji_people" class="@IsActiveTab(Tab.CustomizeMenu)">Customize</button>
+            <button @onclick=@(() => SetActiveTab(Tab.OptionsMenu)) icon="settings" class="@IsActiveTab(Tab.OptionsMenu)">Options</button>
+        </div>
+    </div>
     @if (CurrentTab == Tab.PlayMenu)
     {
         <PlayMenu />
@@ -25,6 +33,16 @@
 
     private Tab CurrentTab = Tab.PlayMenu;
 
+    private void SetActiveTab(Tab tab)
+    {
+        CurrentTab = tab;
+    }
+
+    private string IsActiveTab(Tab tab)
+    {
+        return CurrentTab == tab ? "active" : "";
+    }
+
     protected override int BuildHash()
     {
         return HashCode.Combine(CurrentTab);
@@ -36,6 +54,47 @@
         height: 100%;
         width: 100%;
         z-index: 10;
-        background-color: white;
+        flex-direction: column;
+        pointer-events: all;
+
+        .header {
+            background-image: linear-gradient(90deg, #462255, #a94364);
+            height: 200px;
+            width: 100%;
+            align-items: center;
+            padding: 0px 150px;
+            justify-content: space-between;
+            font-family: Londrina Solid;
+            color: white;
+
+            .buttons {
+                font-size: 75px;
+                gap: 75px;
+
+                button {
+                    align-items: center;
+                    transition: all 0.1s ease;
+
+                    &.active {
+                        color: #fde74c;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.02);
+                        sound-in: ui_button_hover;
+                    }
+
+                    &:active {
+                        transform: scale(0.98);
+                        sound-in: ui_button_click;
+                    }
+
+                    .iconpanel {
+                        font-family: MaterialIcons;
+                    }
+                }
+            }
+        }
     }
 </style>
