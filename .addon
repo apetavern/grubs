@@ -547,6 +547,11 @@
           "Name": "backflip",
           "KeyboardCode": "shift",
           "GroupName": "Movement"
+        },
+        {
+          "Name": "voice",
+          "KeyboardCode": "v",
+          "GroupName": "Other"
         }
       ]
     }
