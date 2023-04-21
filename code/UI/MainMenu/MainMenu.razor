@@ -1,0 +1,41 @@
+@namespace Grubs.UI
+
+<root>
+    @if (CurrentTab == Tab.PlayMenu)
+    {
+        <PlayMenu />
+    }
+    else if (CurrentTab == Tab.CustomizeMenu)
+    {
+        <CustomizeMenu />
+    }
+    else if (CurrentTab == Tab.OptionsMenu)
+    {
+        <OptionsMenu />
+    }
+</root>
+
+@code {
+    private enum Tab
+    {
+        PlayMenu,
+        CustomizeMenu,
+        OptionsMenu
+    }
+
+    private Tab CurrentTab = Tab.PlayMenu;
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(CurrentTab);
+    }
+}
+
+<style>
+    MainMenu {
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        background-color: white;
+    }
+</style>
