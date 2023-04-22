@@ -8,20 +8,6 @@
     "Entities": [],
     "Components": [
       {
-        "Guid": "8ec09372-2b13-465e-b3f3-133340a40770",
-        "Class": "PhysicsGadgetComponent",
-        "Keys": {
-          "ShouldRotate": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "_name": {
-            "Value": "\u0022Physics\u0022"
-          },
-          "_tags": {}
-        }
-      },
-      {
         "Guid": "c5cbdec2-6e0d-4e9d-90bb-147b58321cfe",
         "Class": "CrateGadgetComponent",
         "Keys": {
@@ -36,7 +22,9 @@
           "_name": {
             "Value": "\u0022Crate\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],

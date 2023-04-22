@@ -35,7 +35,17 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		Gadget.Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
-		helper.Trace = helper.Trace.Size( Gadget.CollisionBounds ).Ignore( Grub ).WithAnyTags( "player", "solid" ).WithoutTags( "dead" );
+		helper.Trace = helper.Trace
+			.Size( Gadget.CollisionBounds )
+			.Ignore( Grub )
+			.WithAnyTags( "player", "solid" )
+			.WithoutTags( "dead" );
+
+		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
+
+		if (groundEntity is not null )
+			helper.ApplyFriction( 1.0f, Time.Delta );
+
 		helper.TryMove( Time.Delta );
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;

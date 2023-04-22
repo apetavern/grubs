@@ -26,22 +26,6 @@
             "Value": "[]"
           }
         }
-      },
-      {
-        "Guid": "2ad887e6-fdf8-4df6-a3de-ba3273140cb1",
-        "Class": "PhysicsGadgetComponent",
-        "Keys": {
-          "ShouldRotate": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "_name": {
-            "Value": "\u0022Physics\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
       }
     ],
     "Keys": {
