@@ -22,24 +22,6 @@ public class WormPreview : Panel
 		_worm = new SceneModel( sceneWorld, Model.Load( "models/citizenworm.vmdl" ),
 			Transform.Zero.WithScale( 1f ).WithPosition( new Vector3( -64, 32, 4 ) ).WithRotation( Rotation.From( 0, -135, 0 ) ) );
 
-		var skycolor = Color.Orange;
-		var sceneLight = Entity.All.FirstOrDefault( x => x is EnvironmentLightEntity ) as EnvironmentLightEntity;
-		if ( sceneLight.IsValid() )
-			skycolor = sceneLight.SkyColor;
-
-		// Right side light
-		// new SceneLight( sceneWorld, Vector3.Up * 150.0f, 200.0f, Color.White * 5.0f );
-		// Background light
-		_ = new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Forward * 150.0f, 200, Color.White * 2.0f );
-		// Foreground light
-		_ = new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Backward * 80.0f, 200, Color.White * 5.0f );
-		// Back/rim light
-		_ = new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Left * 100.0f, 200, skycolor * 3.0f );
-		// Soft right side fill light
-		_ = new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Right * 100.0f, 200, skycolor * 3.0f );
-		// Right side yellow light
-		_ = new SceneLight( sceneWorld, Vector3.Up * 100.0f + Vector3.Up, 200, Color.Yellow * 2.0f );
-
 		_renderScene = Add.ScenePanel( sceneWorld, Vector3.One, Rotation.Identity, 75 );
 		_renderScene.Style.Width = Length.Percent( 100 );
 		_renderScene.Style.Height = Length.Percent( 100 );
