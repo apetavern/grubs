@@ -1,3 +1,4 @@
 {
-  "texture": "textures/texturelevels/testlevel.vtex"
+  "texture": "textures/texturelevels/testlevel.vtex",
+  "background": "textures/texturelevels/testlevel_back.vtex"
 }
