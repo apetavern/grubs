@@ -115,7 +115,11 @@ public partial class World : Entity
 		while ( true && iterations < 10000 )
 		{
 			var startPos = Game.Random.FromList( PossibleSpawnPoints );
-			var tr = Trace.Ray( startPos, startPos + Vector3.Down * WorldHeight ).WithAnyTags( "solid", "gadget" ).Run();
+			var tr = Trace.Ray( startPos, startPos + Vector3.Down * WorldHeight )
+				.Size( 1f )
+				.WithAnyTags( "solid", "gadget" )
+				.Run();
+
 			if ( tr.Hit )
 			{
 				return tr.EndPosition;
@@ -124,6 +128,27 @@ public partial class World : Entity
 
 		Log.Warning( "Couldn't find spawn location in 10,000 iterations." );
 		return new Vector3( 0f );
+	}
+
+	[ConCmd.Admin( "gr_spawn_check" )]
+	public static void SpawnCheck()
+	{
+		var world = GamemodeSystem.Instance.GameWorld;
+		var spawnLocation = world.FindSpawnLocation();
+		DebugOverlay.Sphere( spawnLocation, 16f, Color.Random, 16f );
+		Log.Info( "SpawnCheck: " + spawnLocation );
+	}
+
+	[ConCmd.Admin( "gr_trace_check" )]
+	public static void TraceCheck( float x, float y, float z )
+	{
+		var vec = new Vector3( x, y, z );
+		var tr = Trace.Ray( vec, vec + Vector3.Down * GamemodeSystem.Instance.GameWorld.WorldHeight )
+				.WithAnyTags( "solid", "gadget" )
+				.Run();
+		DebugOverlay.TraceResult( tr, 10f );
+		Log.Info( tr.EndPosition );
+		Log.Info( tr.StartedSolid );
 	}
 
 	[ConCmd.Admin( "gr_regen" )]
