@@ -56,6 +56,16 @@ public partial class BuildComponent : WeaponComponent
 
 		RotationAngle += Input.MouseWheel * 10f;
 
+		if ( RotationAngle < -90 )
+		{
+			RotationAngle += 180;
+		}
+
+		if ( RotationAngle > 90 )
+		{
+			RotationAngle -= 180;
+		}
+
 		Grub.Player.GrubsCamera.Distance = 512f;
 		Grub.Player.GrubsCamera.CanScroll( false );
 
