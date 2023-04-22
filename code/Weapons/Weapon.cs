@@ -252,7 +252,10 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public static IEnumerable<Prefab> GetAllWeaponPrefabs()
 	{
 		return ResourceLibrary.GetAll<Prefab>()
-			.Where( x => TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon ) );
+			.Where( x => x is not null 
+				&& x.Root is not null 
+				&& TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon ) 
+			);
 	}
 
 	[ClientRpc]
