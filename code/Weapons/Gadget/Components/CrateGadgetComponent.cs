@@ -52,6 +52,33 @@ public partial class CrateGadgetComponent : GadgetComponent
 		}
 	}
 
+	public override void Simulate( IClient client )
+	{
+		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
+		helper.Trace = helper.Trace
+			.Size( Gadget.CollisionBounds )
+			.Ignore( Grub )
+			.WithAnyTags( "player", "solid" )
+			.WithoutTags( "dead" );
+
+		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
+
+		if ( groundEntity is null )
+		{
+			helper.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
+		}
+		else
+		{
+			helper.Velocity = 0;
+		}
+
+		helper.ApplyFriction( 2.0f, Time.Delta );
+		helper.TryMove( Time.Delta );
+
+		Gadget.Velocity = helper.Velocity;
+		Gadget.Position = helper.Position;
+	}
+
 	[Event.Client.Frame]
 	public void UpdateEffects()
 	{
