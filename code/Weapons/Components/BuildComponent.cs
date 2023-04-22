@@ -49,7 +49,7 @@ public partial class BuildComponent : WeaponComponent
 		if ( !GirderPreview.IsValid() )
 			return;
 
-		GirderPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon();
+		GirderPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && !Weapon.HasFired;
 
 		if ( !GirderPreview.EnableDrawing )
 			return;
