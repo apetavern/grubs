@@ -1,5 +1,88 @@
 @namespace Grubs.UI
 
 <root>
-    <label>I am the play menu</label>
+    <div style="width: 25%; flex-direction: column;">
+        <div class="players">
+            <label class="title">Players</label>
+            @foreach (var client in Game.Clients)
+            {
+                <div class="player">
+                    <img src="avatar:@client.SteamId" class="avatar" />
+                    <label class="name">@client.Name</label>
+                </div>
+            }
+        </div>
+        <div style="height: 20px;" />
+        <button class="button">START</button>
+    </div>
 </root>
+
+@code {
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId));
+    }
+}
+
+<style>
+    PlayMenu {
+        width: 100%;
+        height: 100%;
+        top: 40px;
+        left: 150px;
+        font-family: Londrina Solid;
+        color: white;
+
+        .players {
+            width: 100%;
+            height: 600px;
+            background-color: #462255b2;
+            flex-direction: column;
+            border-radius: 4px;
+            border-width: 10px;
+            border-color: #afafaf0c;
+            align-items: center;
+            gap: 10px;
+
+            .title {
+                font-size: 50px;
+            }
+
+            .player {
+                align-items: center;
+                width: 100%;
+                padding: 0px 20px;
+
+                .avatar {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 4px;
+                    flex-shrink: 0;
+                    margin-right: 5px;
+                }
+
+                .name {
+                    font-size: 40px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+
+        .button {
+            width: 100%;
+            height: 100px;
+            border-radius: 4px;
+            background-color: #8d7f3b;
+            border-radius: 4px;
+            border-width: 10px;
+            border-color: #afafaf0c;
+
+            justify-content: center;
+            align-items: center;
+
+            font-size: 75px;
+            color: #5a5024;
+        }
+    }
+</style>
