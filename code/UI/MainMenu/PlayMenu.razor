@@ -13,27 +13,40 @@
             }
         </div>
         <div style="height: 20px;" />
-        <button class="button" onclick=@StartGame>@GetButtonText()</button>
+        <button class="button @(IsButtonEnabled() ? "enabled" : "")" onclick=@OnStartClick>@GetButtonText()</button>
     </div>
 </root>
 
 @code {
-    private bool IsTerrainReady() => GamemodeSystem.Instance.WorldReady;
-
     private string GetButtonText()
     {
-        if (!IsTerrainReady())
+        if (!GamemodeSystem.Instance.WorldReady)
             return "GENERATING...";
 
         if (Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers)
             return $"PLAYERS {Game.Clients.Count}/{GamemodeSystem.Instance.MinimumPlayers}";
 
+        if (!Game.LocalClient.IsListenServerHost)
+            return "WAITING FOR HOST...";
+
         return "START";
+    }
+
+    private void OnStartClick()
+    {
+        if (IsButtonEnabled())
+            StartGame();
+    }
+
+    private bool IsButtonEnabled()
+    {
+        @* Not the best... *@
+        return GetButtonText() == "START";
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId), GetButtonText());
+        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId), GetButtonText(), IsButtonEnabled());
     }
 }
 
@@ -96,6 +109,18 @@
 
             font-size: 75px;
             color: #5a5024;
+
+            &.enabled {
+                color: #fde74c;
+            }
+
+            &:hover {
+                &.enabled {
+                    cursor: pointer;
+                    transform: scale(1.02);
+                    sound-in: ui_button_hover;
+                }
+            }
         }
     }
 </style>
