@@ -1,15 +1,17 @@
 namespace Grubs.UI;
 
-public partial class GameState : Panel
+public partial class PlayMenu : Panel
 {
 	[ConCmd.Server]
 	public static void StartGame()
 	{
-		if ( GamemodeSystem.Instance is not FreeForAll ffa )
+		if ( Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers )
 			return;
 
-		if ( Game.Clients.Count >= GrubsConfig.MinimumPlayers && ffa.TerrainReady && !ffa.Started )
-			ffa.Start();
+		if ( !GamemodeSystem.Instance.WorldReady || GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu )
+			return;
+
+		GamemodeSystem.Instance.Start();
 	}
 
 	[ConCmd.Server]

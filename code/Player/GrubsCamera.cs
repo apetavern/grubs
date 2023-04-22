@@ -30,22 +30,6 @@ public class GrubsCamera
 			Distance = _distanceRange.Clamp( Distance );
 		}
 
-		// Lets clean this up in the future.
-		if ( GamemodeSystem.Instance is FreeForAll ffa )
-		{
-			if ( !ffa.Started )
-			{
-				var pregameCameraCenter = Vector3.Zero - Vector3.Up * GrubsConfig.TerrainHeight / 2f;
-
-				var pregameTargetPosition = pregameCameraCenter + Vector3.Right * Distance;
-				var pregameCurrentPosition = Camera.Position;
-				Camera.Position = pregameCurrentPosition.LerpTo( pregameTargetPosition, Time.Delta * _lerpSpeed );
-
-				var pregameLookDir = (pregameCameraCenter - pregameTargetPosition).Normal;
-				Camera.Rotation = Rotation.LookAt( pregameLookDir, Vector3.Up );
-			}
-		}
-
 		if ( _timeUntilCameraUnlock <= 0 )
 			FindTarget();
 

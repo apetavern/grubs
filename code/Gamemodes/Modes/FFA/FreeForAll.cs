@@ -3,36 +3,7 @@
 public partial class FreeForAll : Gamemode
 {
 	public override string GamemodeName => "Free For All";
-	public override bool AllowFriendlyFire => true;
 	public override int MinimumPlayers => GrubsConfig.MinimumPlayers;
-
-	public enum GameState
-	{
-		Waiting,
-		Playing,
-		GameOver
-	}
-
-	public override string GetGameStateLabel()
-	{
-		return CurrentState switch
-		{
-			GameState.Waiting => "Waiting for game to begin",
-			GameState.Playing => "Game in progress",
-			GameState.GameOver => "Game is over",
-			_ => null,
-		};
-	}
-
-	[Net]
-	public GameState CurrentState { get; set; }
-
-	/// <summary>
-	/// Whether or not the GameWorld modifications have finished transmitting to clients.
-	/// TODO: What if a new player joins?
-	/// </summary>
-	[Net]
-	public bool TerrainReady { get; set; } = false;
 
 	/// <summary>
 	/// The amount of time before the current player's turn is concluded.
@@ -44,11 +15,6 @@ public partial class FreeForAll : Gamemode
 	/// A queue of players determining their turn order.
 	/// </summary>
 	public Queue<Player> PlayerTurnQueue { get; set; } = new();
-
-	/// <summary>
-	/// Whether we have started the game or not.
-	/// </summary>
-	[Net] public bool Started { get; set; } = false;
 
 	/// <summary>
 	/// An async task for switching between player turns.
@@ -64,16 +30,14 @@ public partial class FreeForAll : Gamemode
 	{
 		base.Initialize();
 
-		AllowDamage = false;
-		CurrentState = GameState.Waiting;
+		CurrentState = State.MainMenu;
 	}
 
 	internal override void Start()
 	{
 		SpawnPlayers();
 
-		CurrentState = GameState.Playing;
-		Started = true;
+		CurrentState = State.Playing;
 	}
 
 	/// <summary>
@@ -250,14 +214,14 @@ public partial class FreeForAll : Gamemode
 		if ( deadPlayers == Players.Count )
 		{
 			// Draw
-			CurrentState = GameState.GameOver;
+			CurrentState = State.GameOver;
 			return true;
 		}
 
 		if ( deadPlayers == Players.Count - 1 )
 		{
 			// 1 Player remaining
-			CurrentState = GameState.GameOver;
+			CurrentState = State.GameOver;
 			return true;
 		}
 
@@ -303,22 +267,22 @@ public partial class FreeForAll : Gamemode
 	private void Tick()
 	{
 		//
-		// Waiting Logic
+		// MainMenu Logic
 		//
-		if ( CurrentState is GameState.Waiting )
+		if ( CurrentState is State.MainMenu )
 		{
-			if ( !TerrainReady )
+			if ( !WorldReady )
 			{
 				if ( GameWorld is null || GameWorld.CsgWorld is null )
 					return;
 
-				TerrainReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
+				WorldReady = GameWorld.CsgWorld.TimeSinceLastModification > 1.5f;
 			}
 		}
 		//
 		// Playing Logic
 		//
-		else if ( CurrentState is GameState.Playing )
+		else if ( CurrentState is State.Playing )
 		{
 			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
 				return;
@@ -337,12 +301,12 @@ public partial class FreeForAll : Gamemode
 		//
 		// Game Over Logic
 		//
-		else if ( CurrentState is GameState.GameOver )
+		else if ( CurrentState is State.GameOver )
 		{
 
 		}
 
-		if ( Debug && CurrentState is GameState.Playing )
+		if ( Debug && CurrentState is State.Playing )
 		{
 			var lineOffset = 19;
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );

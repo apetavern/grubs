@@ -13,14 +13,27 @@
             }
         </div>
         <div style="height: 20px;" />
-        <button class="button">START</button>
+        <button class="button" onclick=@StartGame>@GetButtonText()</button>
     </div>
 </root>
 
 @code {
+    private bool IsTerrainReady() => GamemodeSystem.Instance.WorldReady;
+
+    private string GetButtonText()
+    {
+        if (!IsTerrainReady())
+            return "GENERATING...";
+
+        if (Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers)
+            return $"PLAYERS {Game.Clients.Count}/{GamemodeSystem.Instance.MinimumPlayers}";
+
+        return "START";
+    }
+
     protected override int BuildHash()
     {
-        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId));
+        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId), GetButtonText());
     }
 }
 
