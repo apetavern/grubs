@@ -115,9 +115,11 @@ public partial class World : Entity
 		while ( true && iterations < 10000 )
 		{
 			var startPos = Game.Random.FromList( PossibleSpawnPoints );
-			var tr = Trace.Ray( startPos, startPos + Vector3.Down * WorldHeight ).WithTag( "solid" ).Run();
+			var tr = Trace.Ray( startPos, startPos + Vector3.Down * WorldHeight ).WithAnyTags( "solid", "gadget" ).Run();
 			if ( tr.Hit )
+			{
 				return tr.EndPosition;
+			}
 		}
 
 		Log.Warning( "Couldn't find spawn location in 10,000 iterations." );
