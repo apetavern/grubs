@@ -4,10 +4,8 @@ public class WormPreview : Panel
 {
 	private readonly ScenePanel _renderScene;
 	private readonly SceneModel _worm;
-	private Angles _renderSceneAngles = new( 25f, 0f, 0f );
 	private float _renderSceneDistance = 100f;
-	private Vector3 _renderScenePosition = new( -100f, -50f, 25f );
-	private float _yaw;
+	private float _yaw = -175;
 
 	public WormPreview()
 	{
@@ -42,12 +40,14 @@ public class WormPreview : Panel
 		// Right side yellow light
 		_ = new SceneLight( sceneWorld, Vector3.Up * 100.0f + Vector3.Up, 200, Color.Yellow * 2.0f );
 
-		_renderScene = Add.ScenePanel( sceneWorld, _renderScenePosition, Rotation.From( _renderSceneAngles ), 75 );
+		_renderScene = Add.ScenePanel( sceneWorld, Vector3.One, Rotation.Identity, 75 );
 		_renderScene.Style.Width = Length.Percent( 100 );
 		_renderScene.Style.Height = Length.Percent( 100 );
-		_renderScene.Camera.Rotation = Rotation.From( 0, 75, 0 );
-		_renderSceneAngles = _renderScene.Camera.Rotation.Angles();
 		_renderScene.Camera.AmbientLightColor = new Color( .25f, .15f, .15f ) * 0.5f;
+		_renderScene.Camera.Position = _worm.Position + new Vector3(
+			MathF.Sin( _yaw ) * _renderSceneDistance,
+			MathF.Cos( _yaw ) * _renderSceneDistance
+		);
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )
@@ -62,7 +62,7 @@ public class WormPreview : Panel
 	public override void OnMouseWheel( float value )
 	{
 		_renderSceneDistance += value * 3;
-		_renderSceneDistance = _renderSceneDistance.Clamp( 10, 200 );
+		_renderSceneDistance = _renderSceneDistance.Clamp( 50, 150 );
 		base.OnMouseWheel( value );
 	}
 
@@ -72,10 +72,7 @@ public class WormPreview : Panel
 			return;
 
 		if ( HasMouseCapture )
-		{
 			_yaw -= Mouse.Delta.x;
-			_renderSceneAngles.pitch = 0;
-		}
 
 		_yaw = _yaw.Clamp( -200, -130 );
 
@@ -92,11 +89,6 @@ public class WormPreview : Panel
 		wormEyePos += _worm.Rotation.Right * 4;
 		_renderScene.Camera.Rotation = Rotation.LookAt( (wormEyePos - _renderScene.Camera.Position).Normal );
 
-		Animate();
-	}
-
-	private void Animate()
-	{
 		_worm.Update( Time.Delta );
 		_worm.SetAnimParameter( "grounded", true );
 		_worm.SetAnimParameter( "incline", 0f );
