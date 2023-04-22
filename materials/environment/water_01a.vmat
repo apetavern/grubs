@@ -1,15 +1,10 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "shaders/gr_water.shader"
-
-	Colour "textures/environment/water_color.png"
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-	Normal "textures/environment/water_normal.png"
-	Rough "textures/environment/water_rough.png"
-
-	//---- Fog ----
-	g_bFogEnabled "1"
+	"shader"		"shaders/gr_water.shader_c"
+	"Colour"		"textures/environment/water_color.png"
+	"g_flDirectionalLightmapMinZ"		"0.050000"
+	"g_flDirectionalLightmapStrength"		"1.000000"
+	"Normal"		"textures/environment/water_normal.png"
+	"Rough"		"textures/environment/water_rough.png"
+	"g_bFogEnabled"		"1"
 }
