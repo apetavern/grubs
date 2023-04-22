@@ -5,8 +5,8 @@ public class WormPreview : Panel
 	private readonly ScenePanel _renderScene;
 	private readonly SceneModel _worm;
 	private Angles _renderSceneAngles = new( 25f, 0f, 0f );
-	private float _renderSceneDistance = 50f;
-	private Vector3 _renderScenePosition => new( -100f, -50f, 25f );
+	private float _renderSceneDistance = 100f;
+	private Vector3 _renderScenePosition = new( -100f, -50f, 25f );
 	private float _yaw;
 
 	public WormPreview()
@@ -19,8 +19,7 @@ public class WormPreview : Panel
 		_renderScene?.Delete( true );
 
 		var sceneWorld = new SceneWorld();
-		var stage = new SceneModel( sceneWorld, Model.Load( "models/menu/menubg.vmdl" ),
-			Transform.Zero.WithScale( 1f ).WithPosition( Vector3.Down * 4 ) );
+		var map = new SceneMap( sceneWorld, "maps/gr_menu" );
 
 		_worm = new SceneModel( sceneWorld, Model.Load( "models/citizenworm.vmdl" ),
 			Transform.Zero.WithScale( 1f ).WithPosition( new Vector3( -64, 32, 4 ) ).WithRotation( Rotation.From( 0, -135, 0 ) ) );
