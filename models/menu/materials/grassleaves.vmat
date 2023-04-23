@@ -11,11 +11,11 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Foliage Animation ----
-	g_flBranchAmplitude "0.750"
-	g_flBranchFrequency "0.330"
-	g_flEdgeAmplitude "0.600"
-	g_flEdgeFrequency "0.075"
-	g_flTrunkDeflection "0.500"
+	g_flBranchAmplitude "0.558"
+	g_flBranchFrequency "0.827"
+	g_flEdgeAmplitude "0.110"
+	g_flEdgeFrequency "0.588"
+	g_flTrunkDeflection "0.814"
 	g_flTrunkDeflectionStart "0.000"
 
 	//---- Material ----
