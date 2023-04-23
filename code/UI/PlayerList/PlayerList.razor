@@ -4,7 +4,7 @@
 
 <root>
     <TextChat />
-    <div class="players">
+    <div @ref=Players class="players">
         @foreach (var player in GamemodeSystem.Instance.Players)
         {
             <PlayerInfo Player=@player />
@@ -14,11 +14,13 @@
 
 @code {
     public static PlayerList Current;
+    private Panel Players { get; set; }
+
     public PlayerList() => Current = this;
 
     public void OnVoicePlayed(IClient client)
     {
-        ChildrenOfType<PlayerInfo>().FirstOrDefault(e => e.Player.SteamId == client.SteamId)?.OnVoicePlayed();
+        Players?.ChildrenOfType<PlayerInfo>().FirstOrDefault(e => e.Player.SteamId == client.SteamId)?.OnVoicePlayed();
     }
 
     public override void Tick()
@@ -43,9 +45,12 @@
         justify-content: flex-end;
 
         .players {
+            left: -10px;
             flex-direction: column;
             overflow: scroll;
-            max-height: 70%;
+            max-height: 75%;
+            width: 340px;
+            align-items: center;
         }
     }
 </style>
