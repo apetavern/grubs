@@ -1,15 +1,17 @@
 @namespace Grubs.UI
 
 <root>
-    <div class="players">
+    <div class="container">
         <label class="title">Players</label>
-        @foreach (var client in Game.Clients)
-        {
-            <div class="player">
-                <img src="avatar:@client.SteamId" class="avatar" />
-                <label class="name">@client.Name</label>
-            </div>
-        }
+        <div class="players">
+            @foreach (var client in Game.Clients)
+            {
+                <div class="player">
+                    <img src="avatar:@client.SteamId" class="avatar" />
+                    <label class="name">@client.Name</label>
+                </div>
+            }
+        </div>
     </div>
     <div style="height: 20px;" />
     <button class="button @(IsButtonEnabled() ? "enabled" : "")" onclick=@OnStartClick>@GetButtonText()</button>
@@ -52,42 +54,43 @@
     PlayMenu {
         top: 40px;
         left: 150px;
-        font-family: Londrina Solid;
-        color: white;
         width: 25%;
         flex-direction: column;
 
-        .players {
+        .container {
             height: 600px;
-            background-color: #462255b2;
             flex-direction: column;
-            border-radius: 4px;
-            border-width: 10px;
-            border-color: #afafaf0c;
             align-items: center;
-            gap: 10px;
 
             .title {
                 font-size: 50px;
+                margin-bottom: 10px;
             }
 
-            .player {
-                align-items: center;
+            .players {
+                gap: 10px;
+                flex-direction: column;
+                overflow: scroll;
                 width: 100%;
-                padding: 0px 20px;
 
-                .avatar {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 4px;
+                .player {
+                    align-items: center;
+                    padding: 0px 20px;
                     flex-shrink: 0;
-                    margin-right: 5px;
-                }
 
-                .name {
-                    font-size: 40px;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
+                    .avatar {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 4px;
+                        flex-shrink: 0;
+                        margin-right: 5px;
+                    }
+
+                    .name {
+                        font-size: 40px;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
                 }
             }
         }
@@ -100,6 +103,8 @@
             border-radius: 4px;
             border-width: 10px;
             border-color: #afafaf0c;
+            font-family: Londrina Solid;
+            color: white;
 
             justify-content: center;
             align-items: center;
