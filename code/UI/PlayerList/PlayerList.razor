@@ -4,10 +4,12 @@
 
 <root>
     <TextChat />
-    @foreach (var player in GamemodeSystem.Instance.Players)
-    {
-        <PlayerInfo Player=@player />
-    }
+    <div class="players">
+        @foreach (var player in GamemodeSystem.Instance.Players)
+        {
+            <PlayerInfo Player=@player />
+        }
+    </div>
 </root>
 
 @code {
@@ -39,5 +41,11 @@
         left: 100px;
         flex-direction: column;
         justify-content: flex-end;
+
+        .players {
+            flex-direction: column;
+            overflow: scroll;
+            max-height: 70%;
+        }
     }
 </style>
