@@ -20,7 +20,7 @@ public class WormPreview : Panel
 		var map = new SceneMap( sceneWorld, "maps/gr_menu" );
 
 		_worm = new SceneModel( sceneWorld, Model.Load( "models/citizenworm.vmdl" ),
-			Transform.Zero.WithScale( 1f ).WithPosition( new Vector3( -64, 32, 4 ) ).WithRotation( Rotation.From( 0, -135, 0 ) ) );
+			Transform.Zero.WithScale( 1f ).WithPosition( new Vector3( -64, 32, 6 ) ).WithRotation( Rotation.From( 0, -135, 0 ) ) );
 
 		_renderScene = Add.ScenePanel( sceneWorld, Vector3.One, Rotation.Identity, 75 );
 		_renderScene.Style.Width = Length.Percent( 100 );
@@ -54,18 +54,19 @@ public class WormPreview : Panel
 			return;
 
 		if ( HasMouseCapture )
-			_yaw -= Mouse.Delta.x;
+			_yaw -= Mouse.Delta.x * 0.05f;
 
 		_yaw = _yaw.Clamp( -200, -130 );
 
 		float yawRad = MathX.DegreeToRadian( _yaw );
 		float height = 16;
 
-		_renderScene.Camera.Position = _worm.Position + new Vector3(
+		var currentPosition = _renderScene.Camera.Position;
+		_renderScene.Camera.Position = currentPosition.LerpTo( _worm.Position + new Vector3(
 			MathF.Sin( yawRad ) * _renderSceneDistance,
 			MathF.Cos( yawRad ) * _renderSceneDistance,
 			height
-		);
+		), Time.Delta * 4.0f );
 
 		var wormEyePos = _worm.Position + _worm.Rotation.Up * 24;
 		wormEyePos += _worm.Rotation.Right * 4;
