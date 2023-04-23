@@ -20,6 +20,8 @@ public partial class Player
 	[ClientInput]
 	public Vector3 MousePosition { get; set; }
 
+	private static readonly Plane _plane = new( new Vector3( 0f ), Vector3.Left );
+
 	public override void BuildInput()
 	{
 		if ( Input.StopProcessing )
@@ -29,8 +31,7 @@ public partial class Player
 		LookInput = Input.AnalogMove.x;
 
 		var cursorRay = Camera.Main.GetRay( Mouse.Position );
-		var plane = new Plane( new Vector3( 0, 0, 0 ), Vector3.Left );
-		var endPos = plane.Trace( cursorRay, twosided: true );
+		var endPos = _plane.Trace( cursorRay, twosided: true );
 		MousePosition = endPos ?? 0f;
 	}
 }

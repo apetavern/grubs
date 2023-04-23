@@ -33,7 +33,7 @@ public partial class TeleportComponent : WeaponComponent
 		if ( !TeleportPreview.IsValid() )
 			return;
 
-		TeleportPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon();
+		TeleportPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && !Weapon.HasFired;
 
 		if ( !TeleportPreview.EnableDrawing )
 			return;
