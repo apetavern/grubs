@@ -30,6 +30,16 @@ public class WormPreview : Panel
 			MathF.Sin( _yaw ) * _renderSceneDistance,
 			MathF.Cos( _yaw ) * _renderSceneDistance
 		);
+
+		map.World.GradientFog.Enabled = true;
+		map.World.GradientFog.Color = new Color32( 57, 48, 69 );
+		map.World.GradientFog.MaximumOpacity = 0.6f;
+		map.World.GradientFog.StartHeight = 10;
+		map.World.GradientFog.EndHeight = 9000;
+		map.World.GradientFog.DistanceFalloffExponent = 4;
+		map.World.GradientFog.VerticalFalloffExponent = 4;
+		map.World.GradientFog.StartDistance = 250;
+		map.World.GradientFog.EndDistance = 600;
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )
