@@ -4,6 +4,9 @@ Layer0
 {
 	shader "shaders/complex.shader_c"
 
+	//---- PBR ----
+	F_SPECULAR 1
+
 	//---- Translucent ----
 	F_TRANSLUCENT 1
 
@@ -30,7 +33,7 @@ Layer0
 	TextureNormal "materials/default/default_normal.tga"
 
 	//---- Roughness ----
-	TextureRoughness "materials/default/default_rough.tga"
+	TextureRoughness "[0.750000 0.750000 0.750000 0.000000]"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
