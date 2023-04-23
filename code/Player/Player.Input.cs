@@ -28,8 +28,9 @@ public partial class Player
 		MoveInput = Input.AnalogMove.y;
 		LookInput = Input.AnalogMove.x;
 
-		var mouseDir = Screen.GetDirection( Mouse.Position );
-		var tr = Trace.Ray( Camera.Position, Camera.Position + mouseDir * GrubsCamera.Distance ).Run();
-		MousePosition = tr.EndPosition.WithY( 0f );
+		var cursorRay = Camera.Main.GetRay( Mouse.Position );
+		var plane = new Plane( new Vector3( 0, 0, 0 ), Vector3.Left );
+		var endPos = plane.Trace( cursorRay, twosided: true );
+		MousePosition = endPos ?? 0f;
 	}
 }
