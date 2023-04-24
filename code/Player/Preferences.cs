@@ -2,8 +2,7 @@ namespace Grubs;
 
 public partial class Preferences : EntityComponent<Player>
 {
-	private static int ColorIndex = 0;
-	private readonly List<Color> ColorPresets = new()
+	public readonly List<Color> ColorPresets = new()
 	{
 		Color.FromBytes(232, 59, 105),  // Red
 		Color.FromBytes(33, 146, 255),  // Blue
@@ -20,15 +19,6 @@ public partial class Preferences : EntityComponent<Player>
 
 	protected override void OnActivate()
 	{
-		SetColor();
-	}
-
-	// TODO: Players should be able to choose a color preset not in use via the menu.
-	private void SetColor()
-	{
-		Color = ColorPresets[ColorIndex++];
-
-		if ( ColorIndex >= ColorPresets.Count )
-			ColorIndex = 0;
+		Color = Random.Shared.FromList( ColorPresets );
 	}
 }

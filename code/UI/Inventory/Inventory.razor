@@ -16,7 +16,7 @@
             HasAmmo=@hasAmmo
             @onmouseover=@( () => _hoveredWeapon = weapon )
             @onmouseout=@( () => _hoveredWeapon = null )
-            @onclick=@( () => { if ( hasAmmo ) PlaySound("ui_button_click"); player.ActiveWeaponInput = weapon; } ) />
+            @onclick=@( () => { if ( hasAmmo ) player.ActiveWeaponInput = weapon; } ) />
         }
     </div>
 </root>

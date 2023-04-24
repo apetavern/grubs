@@ -1,5 +1,64 @@
 @namespace Grubs.UI
 
+@if (Game.LocalPawn is not Player player)
+{
+    return;
+}
+
 <root>
-    <label>I am the customize menu</label>
+    <div class="container">
+        <div class="section">
+            <label class="title">Colors</label>
+            <div>
+                @foreach (var color in player.Preferences.ColorPresets)
+                {
+                    var isSelected = player.Preferences.Color == color;
+                    <button class="color @(isSelected ? "selected" : "")" style="background-color: @color.Hex;" />
+                }
+            </div>
+        </div>
+    </div>
 </root>
+
+@code {
+    protected override int BuildHash()
+    {
+        var player = Game.LocalPawn as Player;
+        return HashCode.Combine(player?.Preferences?.Color.GetHashCode());
+    }
+}
+
+<style>
+    CustomizeMenu {
+        top: 40px;
+        left: 150px;
+        width: 25%;
+
+        .container {
+            height: 700px;
+            padding: 10px;
+
+            .section {
+                flex-direction: column;
+                margin-bottom: 10px;
+
+                .title {
+                    font-size: 50px;
+                }
+
+                .color {
+                    height: 50px;
+                    width: 75px;
+                    margin: 5px;
+                    border-width: 4px;
+                    border-color: transparent;
+
+                    &.selected {
+                        border-width: 4px;
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+    }
+</style>

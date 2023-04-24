@@ -47,6 +47,10 @@
 
         &:active {
             transform: scale(1.1);
+
+            &:not(.disabled) {
+                sound-in: ui_button_click;
+            }
         }
 
         &.disabled {

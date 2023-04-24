@@ -1,0 +1,39 @@
+button {
+    font-family: Londrina Solid;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease;
+    border-radius: 4px;
+
+    .iconpanel {
+        font-family: MaterialIcons;
+    }
+
+    &.selected {
+        color: #fde74c;
+    }
+
+    &:hover {
+        transform: scale(1.02);
+        cursor: pointer;
+
+        &:not(.disabled) {
+            sound-in: ui_button_hover;
+        }
+    }
+
+    &:active {
+        transform: scale(0.98);
+
+        &:not(.disabled) {
+            sound-in: ui_button_click;
+        }
+    }
+
+    &.disabled {
+        transform: scale(1);
+        opacity: 0.2;
+        cursor: default;
+    }
+}
