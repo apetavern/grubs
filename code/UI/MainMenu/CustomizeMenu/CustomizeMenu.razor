@@ -17,6 +17,18 @@
                 }
             </div>
         </div>
+        <div class="section">
+            <label class="title">Names</label>
+            <div style="flex-wrap: wrap;">
+                @for (int i = 0; i < GrubsConfig.GrubCount; ++i)
+                {
+                    <div style="width: 50%; flex-direction: column; font-size: 30px; margin-bottom: 5px;">
+                        <label>@($"Grub #{i + 1}")</label>
+                        <TextEntry text="grubnamehere" />
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </root>
 
@@ -24,7 +36,7 @@
     protected override int BuildHash()
     {
         var player = Game.LocalPawn as Player;
-        return HashCode.Combine(player?.Preferences?.Color.GetHashCode());
+        return HashCode.Combine(player?.Preferences?.Color.GetHashCode(), GrubsConfig.GrubCount);
     }
 }
 
@@ -37,10 +49,12 @@
         .container {
             height: 700px;
             padding: 10px;
+            overflow: scroll;
 
             .section {
                 flex-direction: column;
                 margin-bottom: 10px;
+                flex-shrink: 0;
 
                 .title {
                     font-size: 50px;
@@ -48,7 +62,7 @@
 
                 .color {
                     height: 50px;
-                    width: 75px;
+                    width: 10%;
                     margin: 5px;
                     border-width: 4px;
                     border-color: transparent;
@@ -58,6 +72,17 @@
                         transform: scale(1.2);
                     }
                 }
+            }
+        }
+
+        textentry {
+            transition: opacity 0.1s ease;
+            border-radius: 4px;
+            background-color: rgb(207, 207, 207, 0.2);
+            margin: 5px;
+
+            label {
+                padding: 0px 5px;
             }
         }
     }
