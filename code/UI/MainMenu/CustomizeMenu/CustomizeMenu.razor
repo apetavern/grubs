@@ -10,30 +10,29 @@
         <div class="section">
             <label class="title">Colors</label>
             <div>
-                @foreach (var color in Preferences.ColorPresets)
+                @foreach (var color in Player.ColorPresets)
                 {
-                    var isSelected = player.Preferences.SelectedColor == color;
+                    var isSelected = player.ActiveColor == color;
                     <button
                     class="color @(isSelected ? "selected" : "")"
                     style="background-color: @color.Hex;"
-                    @onclick=@(() => { player.Preferences.SelectedColor = color; }) />
+                    @onclick=@(() => { SetColor(color); }) />
                 }
             </div>
         </div>
         <div class="section">
             <label class="title">Names</label>
             <div style="flex-wrap: wrap;">
-                @for (int i = 0; i < player.Preferences.SelectGrubNames.Count; ++i)
+                @for (int i = 0; i < player.SelectedGrubNames.Count; ++i)
                 {
                     var index = i; // Weird razor issue, otherwise this doesn't work with OnTextEdited.
                     <div style="width: 50%; flex-direction: column; font-size: 30px; margin-bottom: 5px;">
                         <label>@($"Grub #{i + 1}")</label>
                         <TextEntry
-                        text=@player.Preferences.SelectGrubNames[i]
-                        MinLength=@(1)
+                        text=@player.SelectedGrubNames[i]
                         MaxLength=@(10)
                         CharacterRegex="^[A-Za-z]$"
-                        OnTextEdited=@((string text) => { player.Preferences.SelectGrubNames[index] = text; }) />
+                        OnTextEdited=@((string text) => { player.SelectedGrubNames[index] = text; player.SerializeGrubNames(); }) />
                     </div>
                 }
             </div>
@@ -45,7 +44,7 @@
     protected override int BuildHash()
     {
         var player = Game.LocalPawn as Player;
-        return HashCode.Combine(player?.Preferences?.SelectedColor.GetHashCode(), player?.Preferences?.SelectGrubNames?.HashCombine(n => n.GetHashCode()));
+        return HashCode.Combine(player?.ActiveColor.GetHashCode(), player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()));
     }
 }
 
@@ -93,10 +92,6 @@
 
             label {
                 padding: 0px 5px;
-            }
-
-            &.invalid {
-                background-color: #f7595970;
             }
         }
     }

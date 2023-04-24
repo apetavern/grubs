@@ -22,9 +22,6 @@ public partial class Player : Entity
 	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
 
 	[BindComponent]
-	public Preferences Preferences { get; }
-
-	[BindComponent]
 	public Inventory Inventory { get; }
 
 	public GrubsCamera GrubsCamera { get; } = new();
@@ -50,11 +47,16 @@ public partial class Player : Entity
 		SteamId = client.SteamId;
 	}
 
+	public override void ClientSpawn()
+	{
+		if ( IsLocalPawn )
+			SetDefaultGrubNames();
+	}
+
 	public override void Spawn()
 	{
 		Tags.Add( "ignorereset" );
 
-		Components.Create<Preferences>();
 		Components.Create<Inventory>();
 	}
 
@@ -89,9 +91,11 @@ public partial class Player : Entity
 
 	private void CreateGrubs()
 	{
+		var grubNames = string.IsNullOrEmpty( GrubNames ) ? new List<string>() : System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
-			Grubs.Add( new Grub( Client ) { Owner = this } );
+			var grubName = grubNames.ElementAtOrDefault( i ) ?? Random.Shared.FromList( GrubNamePresets );
+			Grubs.Add( new Grub( Client ) { Owner = this, Name = grubName } );
 		}
 
 		ActiveGrub = Grubs.First();

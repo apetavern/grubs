@@ -9,7 +9,7 @@
     <label class="timer" text=@FormatAsTimer(GamemodeSystem.Instance.GetTimeRemaining()) />
     <label class="name"
     text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn")
-    style="font-color: @GamemodeSystem.Instance.ActivePlayer.Preferences.Color.Hex;" />
+    style="font-color: @GamemodeSystem.Instance.ActivePlayer.ActiveColor.Hex;" />
     @{
         var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
         <div class="wind @(facingRight ? "right" : "left")">

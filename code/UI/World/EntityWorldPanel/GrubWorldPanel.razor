@@ -6,7 +6,7 @@
     return;
 }
 
-<root style="color: @grub.Player.Preferences.Color.Hex">
+<root style="color: @grub.Player.ActiveColor.Hex">
     <text>@grub.Name</text>
     <texT>@((int)grub.Health)</texT>
 </root>
@@ -28,7 +28,7 @@
         flex-direction: column;
 
         label {
-            font-size: 150px;
+            font-size: 135px;
             font-family: Londrina Solid;
             background-color: rgba(black, 0.1);
             border: 2px solid rgba(black, 0.1);
@@ -36,6 +36,10 @@
             padding: 0px 20px;
             text-shadow: 2px 2px 0px rgba(black, 0.75);
             margin: 2px 0;
+            max-width: 500px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
         }
     }
 </style>
