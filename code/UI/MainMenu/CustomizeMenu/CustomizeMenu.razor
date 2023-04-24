@@ -25,13 +25,15 @@
             <div style="flex-wrap: wrap;">
                 @for (int i = 0; i < player.Preferences.SelectGrubNames.Count; ++i)
                 {
+                    var index = i; // Weird razor issue, otherwise this doesn't work with OnTextEdited.
                     <div style="width: 50%; flex-direction: column; font-size: 30px; margin-bottom: 5px;">
                         <label>@($"Grub #{i + 1}")</label>
                         <TextEntry
                         text=@player.Preferences.SelectGrubNames[i]
                         MinLength=@(1)
                         MaxLength=@(10)
-                        CharacterRegex="^[A-Za-z]$" />
+                        CharacterRegex="^[A-Za-z]$"
+                        OnTextEdited=@((string text) => { player.Preferences.SelectGrubNames[index] = text; }) />
                     </div>
                 }
             </div>
