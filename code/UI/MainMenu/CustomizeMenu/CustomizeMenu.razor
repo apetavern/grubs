@@ -10,21 +10,28 @@
         <div class="section">
             <label class="title">Colors</label>
             <div>
-                @foreach (var color in player.Preferences.ColorPresets)
+                @foreach (var color in Preferences.ColorPresets)
                 {
-                    var isSelected = player.Preferences.Color == color;
-                    <button class="color @(isSelected ? "selected" : "")" style="background-color: @color.Hex;" />
+                    var isSelected = player.Preferences.SelectedColor == color;
+                    <button
+                    class="color @(isSelected ? "selected" : "")"
+                    style="background-color: @color.Hex;"
+                    @onclick=@(() => { player.Preferences.SelectedColor = color; }) />
                 }
             </div>
         </div>
         <div class="section">
             <label class="title">Names</label>
             <div style="flex-wrap: wrap;">
-                @for (int i = 0; i < GrubsConfig.GrubCount; ++i)
+                @for (int i = 0; i < player.Preferences.SelectGrubNames.Count; ++i)
                 {
                     <div style="width: 50%; flex-direction: column; font-size: 30px; margin-bottom: 5px;">
                         <label>@($"Grub #{i + 1}")</label>
-                        <TextEntry text="grubnamehere" />
+                        <TextEntry
+                        text=@player.Preferences.SelectGrubNames[i]
+                        MinLength=@(1)
+                        MaxLength=@(10)
+                        CharacterRegex="^[A-Za-z]$" />
                     </div>
                 }
             </div>
@@ -36,7 +43,7 @@
     protected override int BuildHash()
     {
         var player = Game.LocalPawn as Player;
-        return HashCode.Combine(player?.Preferences?.Color.GetHashCode(), GrubsConfig.GrubCount);
+        return HashCode.Combine(player?.Preferences?.SelectedColor.GetHashCode(), player?.Preferences?.SelectGrubNames?.HashCombine(n => n.GetHashCode()));
     }
 }
 
@@ -49,6 +56,7 @@
         .container {
             height: 700px;
             padding: 10px;
+            width: 100%;
             overflow: scroll;
 
             .section {
@@ -83,6 +91,10 @@
 
             label {
                 padding: 0px 5px;
+            }
+
+            &.invalid {
+                background-color: #f7595970;
             }
         }
     }

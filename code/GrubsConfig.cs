@@ -25,8 +25,14 @@ public static class GrubsConfig
 	/// <summary>
 	/// The amount of <see cref="Grub"/>s that will be spawned per team.
 	/// </summary>
-	[ConVar.Replicated( "grub_count" )]
+	[ConVar.Replicated( "grub_count" ), Change( nameof( OnGrubCountChange ) )]
 	public static int GrubCount { get; set; } = 1;
+
+	private static void OnGrubCountChange( int _, int _1 )
+	{
+		if ( Game.LocalPawn is Player player )
+			player.Preferences.SetDefaultGrubNames();
+	}
 
 	/// <summary>
 	/// The max time in seconds that a player has to make their turn.
