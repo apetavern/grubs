@@ -15,10 +15,16 @@ public partial class Player
 	};
 
 	/// <summary>
-	/// The players active color.
+	/// The player's active color networked to everyone.
 	/// </summary>
 	[Net]
-	public Color ActiveColor { get; set; } = Random.Shared.FromList( ColorPresets );
+	public Color ActiveColor { get; private set; }
+
+	/// <summary>
+	/// The player's selected color during customization, only networked to the server.
+	/// </summary>
+	[ConVar.ClientData]
+	public Color SelectedColor { get; set; } = Random.Shared.FromList( ColorPresets );
 
 	public static readonly List<string> GrubNamePresets = new()
 	{

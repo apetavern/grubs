@@ -85,6 +85,7 @@ public partial class Player : Entity
 		Inventory.Clear();
 		Inventory.GiveDefaultLoadout();
 
+		ActiveColor = !Client.IsBot ? SelectedColor : Random.Shared.FromList( ColorPresets );
 		Grubs.Clear();
 		CreateGrubs();
 	}

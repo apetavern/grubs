@@ -12,11 +12,11 @@
             <div>
                 @foreach (var color in Player.ColorPresets)
                 {
-                    var isSelected = player.ActiveColor == color;
+                    var isSelected = player.SelectedColor == color;
                     <button
                     class="color @(isSelected ? "selected" : "")"
                     style="background-color: @color.Hex;"
-                    @onclick=@(() => { SetColor(color); }) />
+                    @onclick=@(() => { player.SelectedColor = color; }) />
                 }
             </div>
         </div>
