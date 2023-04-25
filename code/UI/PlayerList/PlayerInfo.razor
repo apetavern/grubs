@@ -3,11 +3,11 @@
 <root class="@(!Player.IsAvailableForTurn ? "inactive" : "")">
     <img src="avatar:@Player.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
-        <label text=@Player.SteamName class="name" style="font-color: @Player.ActiveColor.Hex;" />
+        <label text=@Player.SteamName class="name" style="font-color: @Player.Color.Hex;" />
         <div class="health">
             <div
             class="fill"
-            style="background: linear-gradient(to top, @Player.ActiveColor.Hex, @Player.ActiveColor.Lighten(-0.3f).Hex); width: @(GetHealthPercentage())%;" />
+            style="background: linear-gradient(to top, @Player.Color.Hex, @Player.Color.Lighten(-0.3f).Hex); width: @(GetHealthPercentage())%;" />
         </div>
     </div>
     @if (Player.IsDisconnected)

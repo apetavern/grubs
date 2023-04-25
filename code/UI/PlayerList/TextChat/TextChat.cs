@@ -93,7 +93,7 @@ public partial class TextChat : Panel
 		if ( message.Contains( '\n' ) || message.Contains( '\r' ) )
 			return;
 
-		var color = (ConsoleSystem.Caller.Pawn as Player)?.ActiveColor ?? Color.White;
+		var color = (ConsoleSystem.Caller.Pawn as Player)?.Color ?? Color.White;
 		AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, color, message, ConsoleSystem.Caller.SteamId );
 	}
 

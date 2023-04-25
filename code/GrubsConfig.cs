@@ -31,7 +31,7 @@ public static class GrubsConfig
 	private static void OnGrubCountChange( int _, int _1 )
 	{
 		if ( Game.LocalPawn is Player player )
-			player.SetDefaultGrubNames();
+			player.PopulateGrubNames();
 	}
 
 	/// <summary>

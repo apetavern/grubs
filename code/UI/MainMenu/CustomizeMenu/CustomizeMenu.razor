@@ -25,7 +25,7 @@
             <div style="flex-wrap: wrap;">
                 @for (int i = 0; i < player.SelectedGrubNames.Count; ++i)
                 {
-                    var index = i; // Weird razor issue, otherwise this doesn't work with OnTextEdited.
+                    var index = i;
                     <div style="width: 50%; flex-direction: column; font-size: 30px; margin-bottom: 5px;">
                         <label>@($"Grub #{i + 1}")</label>
                         <TextEntry
@@ -40,11 +40,12 @@
         <div class="section">
             <label class="title">Clothing</label>
             <div style="flex-wrap: wrap;">
-                @foreach (var cosmetic in Player.CosmeticPresets)
+                @for (int i = 0; i < player.CosmeticPresets.Count; ++i)
                 {
-                    var isSelected = player.SelectedCosmetic == cosmetic;
-                    <button class="cosmetic @(isSelected ? "selected" : "")" @onclick=@(() => { player.SelectedCosmetic = isSelected ? null : cosmetic; })>
-                        <img src=@cosmetic.Icon />
+                    var index = i;
+                    var isSelected = player.SelectedCosmeticIndex == i;
+                    <button class="cosmetic @(isSelected ? "selected" : "")" @onclick=@(() => { player.SelectedCosmeticIndex = isSelected ? -1 : index; })>
+                        <img src=@player.CosmeticPresets[i].Icon />
                     </button>
                 }
             </div>
@@ -56,7 +57,7 @@
     protected override int BuildHash()
     {
         var player = Game.LocalPawn as Player;
-        return HashCode.Combine(player?.ActiveColor.GetHashCode(), player?.SelectedCosmetic?.GetHashCode(), player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()));
+        return HashCode.Combine(player?.Color.GetHashCode(), player?.SelectedCosmeticIndex, player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()));
     }
 }
 

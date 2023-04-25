@@ -49,7 +49,12 @@ public partial class Player : Entity
 
 	public override void ClientSpawn()
 	{
-		PopulateDefaultPreferences();
+		if ( IsLocalPawn )
+		{
+			SelectedColor = Random.Shared.FromList( ColorPresets );
+			SelectedCosmeticIndex = -1;
+			PopulateGrubNames();
+		}
 	}
 
 	public override void Spawn()
@@ -57,6 +62,7 @@ public partial class Player : Entity
 		Tags.Add( "ignorereset" );
 
 		Components.Create<Inventory>();
+		CosmeticPresets = Cosmetic.GetCosmetics();
 	}
 
 	public override void Simulate( IClient client )
@@ -84,7 +90,7 @@ public partial class Player : Entity
 		Inventory.Clear();
 		Inventory.GiveDefaultLoadout();
 
-		ActiveColor = !Client.IsBot ? SelectedColor : Random.Shared.FromList( ColorPresets );
+		Color = !Client.IsBot ? SelectedColor : Random.Shared.FromList( ColorPresets );
 		Grubs.Clear();
 		CreateGrubs();
 	}

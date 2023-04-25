@@ -3,24 +3,39 @@ namespace Grubs;
 [Prefab, Category( "Cosmetic" )]
 public partial class Cosmetic : AnimatedEntity
 {
-	[Prefab, ResourceType( "png" )]
+	[Prefab, Net, ResourceType( "png" )]
 	public string Icon { get; set; }
 
-	public static IEnumerable<Prefab> GetCosmeticPrefabs()
+	public static IList<Cosmetic> GetCosmetics()
 	{
-		return ResourceLibrary.GetAll<Prefab>()
+		var cosmetics = new List<Cosmetic>();
+		var cosmeticPrefabs = ResourceLibrary.GetAll<Prefab>()
 			.Where( x => x is not null
 				&& x.Root is not null
 				&& TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Cosmetic )
 			);
+
+		foreach ( var prefab in cosmeticPrefabs )
+		{
+			Assert.True( PrefabLibrary.TrySpawn<Cosmetic>( prefab.ResourcePath, out var cosmetic ) );
+			cosmetics.Add( cosmetic );
+		}
+
+		return cosmetics;
 	}
 }
 
 public partial class Player
 {
-	public static readonly List<Cosmetic> CosmeticPresets = new();
+	[Net]
+	public IList<Cosmetic> CosmeticPresets { get; set; }
 
-	public Cosmetic SelectedCosmetic { get; set; }
+	/// <summary>
+	/// The index of the cosmetic selected from <see cref="CosmeticPresets"/>
+	/// "-1" indicating we want to use client clothes.
+	/// </summary>
+	[ConVar.ClientData]
+	public int SelectedCosmeticIndex { get; set; }
 
 	public static readonly List<Color> ColorPresets = new()
 	{
@@ -38,7 +53,7 @@ public partial class Player
 	/// The player's active color networked to everyone.
 	/// </summary>
 	[Net]
-	public Color ActiveColor { get; private set; }
+	public Color Color { get; private set; }
 
 	/// <summary>
 	/// The player's selected color during customization, only networked to the server.
@@ -81,7 +96,7 @@ public partial class Player
 	/// <summary>
 	/// Populates <see cref="SelectedGrubNames"/> with random names of size <see cref="GrubsConfig.GrubCount"/>
 	/// </summary>
-	public void SetDefaultGrubNames()
+	public void PopulateGrubNames()
 	{
 		SelectedGrubNames.Clear();
 
@@ -91,23 +106,12 @@ public partial class Player
 		SerializeGrubNames();
 	}
 
+	/// <summary>
+	/// Updates <see cref="GrubNames"/> with the serialized version of <see cref="SelectedGrubNames"/>
+	/// We do this because we cannot have a [ConVar.ClientData] of type list string
+	/// </summary>
 	public void SerializeGrubNames()
 	{
 		GrubNames = System.Text.Json.JsonSerializer.Serialize( SelectedGrubNames );
-	}
-
-	public void PopulateDefaultPreferences()
-	{
-		if ( !IsLocalPawn )
-			return;
-
-		SelectedColor = Random.Shared.FromList( ColorPresets );
-		SetDefaultGrubNames();
-
-		foreach ( var prefab in Cosmetic.GetCosmeticPrefabs() )
-		{
-			Assert.True( PrefabLibrary.TrySpawn<Cosmetic>( prefab.ResourcePath, out var cosmetic ) );
-			CosmeticPresets.Add( cosmetic );
-		}
 	}
 }
