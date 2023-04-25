@@ -1,7 +1,27 @@
 namespace Grubs;
 
+[Prefab, Category( "Cosmetic" )]
+public partial class Cosmetic : AnimatedEntity
+{
+	[Prefab, ResourceType( "png" )]
+	public string Icon { get; set; }
+
+	public static IEnumerable<Prefab> GetCosmeticPrefabs()
+	{
+		return ResourceLibrary.GetAll<Prefab>()
+			.Where( x => x is not null
+				&& x.Root is not null
+				&& TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Cosmetic )
+			);
+	}
+}
+
 public partial class Player
 {
+	public static readonly List<Cosmetic> CosmeticPresets = new();
+
+	public Cosmetic SelectedCosmetic { get; set; }
+
 	public static readonly List<Color> ColorPresets = new()
 	{
 		Color.FromBytes(232, 59, 105),  // Red
@@ -24,7 +44,7 @@ public partial class Player
 	/// The player's selected color during customization, only networked to the server.
 	/// </summary>
 	[ConVar.ClientData]
-	public Color SelectedColor { get; set; } = Random.Shared.FromList( ColorPresets );
+	public Color SelectedColor { get; set; }
 
 	public static readonly List<string> GrubNamePresets = new()
 	{
@@ -74,5 +94,20 @@ public partial class Player
 	public void SerializeGrubNames()
 	{
 		GrubNames = System.Text.Json.JsonSerializer.Serialize( SelectedGrubNames );
+	}
+
+	public void PopulateDefaultPreferences()
+	{
+		if ( !IsLocalPawn )
+			return;
+
+		SelectedColor = Random.Shared.FromList( ColorPresets );
+		SetDefaultGrubNames();
+
+		foreach ( var prefab in Cosmetic.GetCosmeticPrefabs() )
+		{
+			Assert.True( PrefabLibrary.TrySpawn<Cosmetic>( prefab.ResourcePath, out var cosmetic ) );
+			CosmeticPresets.Add( cosmetic );
+		}
 	}
 }

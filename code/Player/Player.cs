@@ -49,8 +49,7 @@ public partial class Player : Entity
 
 	public override void ClientSpawn()
 	{
-		if ( IsLocalPawn )
-			SetDefaultGrubNames();
+		PopulateDefaultPreferences();
 	}
 
 	public override void Spawn()

@@ -37,6 +37,18 @@
                 }
             </div>
         </div>
+        <div class="section">
+            <label class="title">Clothing</label>
+            <div style="flex-wrap: wrap;">
+                @foreach (var cosmetic in Player.CosmeticPresets)
+                {
+                    var isSelected = player.SelectedCosmetic == cosmetic;
+                    <button class="cosmetic @(isSelected ? "selected" : "")" @onclick=@(() => { player.SelectedCosmetic = isSelected ? null : cosmetic; })>
+                        <img src=@cosmetic.Icon />
+                    </button>
+                }
+            </div>
+        </div>
     </div>
 </root>
 
@@ -44,7 +56,7 @@
     protected override int BuildHash()
     {
         var player = Game.LocalPawn as Player;
-        return HashCode.Combine(player?.ActiveColor.GetHashCode(), player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()));
+        return HashCode.Combine(player?.ActiveColor.GetHashCode(), player?.SelectedCosmetic?.GetHashCode(), player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()));
     }
 }
 
@@ -70,6 +82,7 @@
                 }
 
                 .color {
+                    aspect-ratio: 1;
                     height: 50px;
                     width: 10%;
                     margin: 5px;
@@ -77,8 +90,26 @@
                     border-color: transparent;
 
                     &.selected {
-                        border-width: 4px;
                         transform: scale(1.2);
+                    }
+                }
+
+                .cosmetic {
+                    aspect-ratio: 1;
+                    width: 20%;
+                    height: 5px;
+                    margin: 5px;
+                    background-color: rgba(235, 235, 235, 0.24);
+
+                    img {
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    &.selected {
+                        transform: scale(1.1);
                     }
                 }
             }
