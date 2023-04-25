@@ -1,13 +1,13 @@
 namespace Grubs.UI;
 
-public class WormPreview : Panel
+public class GrubPreview : Panel
 {
 	private readonly ScenePanel _renderScene;
 	private readonly SceneModel _worm;
 	private float _renderSceneDistance = 100f;
 	private float _yaw = -175;
 
-	public WormPreview()
+	public GrubPreview()
 	{
 		Style.Width = Length.Percent( 100 );
 		Style.Height = Length.Percent( 100 );
