@@ -23,6 +23,11 @@ public sealed partial class DamageZone : TerrainZone
 	public string TouchSound { get; private set; }
 
 	/// <summary>
+	/// The particle that is created when an entity touches the zone.
+	/// </summary>
+	public string ParticlePath { get; private set; }
+
+	/// <summary>
 	/// Sets the damage tags to use in the damage applied to the entity.
 	/// </summary>
 	/// <param name="tags">The tags to set.</param>
@@ -56,6 +61,12 @@ public sealed partial class DamageZone : TerrainZone
 		return this;
 	}
 
+	public DamageZone WithParticle( string particlePath )
+	{
+		ParticlePath = particlePath;
+		return this;
+	}
+
 	public override void StartTouch( Entity entity )
 	{
 		var damageInfo = DamageInfoExtension.FromZone( this );
@@ -63,6 +74,9 @@ public sealed partial class DamageZone : TerrainZone
 		entity.TakeDamage( damageInfo );
 
 		OnTouchSound( TouchSound );
+
+		if ( !string.IsNullOrEmpty( ParticlePath ) )
+			Particles.Create( ParticlePath, entity.Position );
 
 		// Immediately apply damage given by a damage zone if it's a Grub.
 		if ( entity is Grub grub )
