@@ -1,0 +1,16 @@
+{
+  "MenuIcon": "models/cosmetics/leafhat/leafhat.vmdl_c.png",
+  "Title": "Leaf Hat",
+  "Subtitle": "",
+  "Category": "Hat",
+  "SubCategory": "",
+  "Parent": null,
+  "Model": "models/cosmetics/leafhat/leafhat.vmdl",
+  "SkinMaterial": null,
+  "EyesMaterial": null,
+  "MaterialGroup": "",
+  "SlotsUnder": 0,
+  "SlotsOver": 0,
+  "HideBody": 0,
+  "Icon": {}
+}

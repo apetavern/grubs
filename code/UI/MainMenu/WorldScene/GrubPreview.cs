@@ -40,10 +40,10 @@ public class GrubPreview : ScenePanel
 		}
 
 		var clothingContainer = new ClothingContainer();
+		clothingContainer.LoadFromClient( player.Client );
+
 		if ( player.HasCosmeticSelected )
-			clothingContainer.Toggle( new Clothing() { Model = player.CosmeticPresets[player.SelectedCosmeticIndex].Model.ResourcePath } );
-		else
-			clothingContainer.LoadFromClient( player.Client );
+			clothingContainer.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 
 		_sceneClothing.AddRange( clothingContainer.DressSceneObject( Grub ) );
 	}

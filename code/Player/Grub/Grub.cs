@@ -38,9 +38,9 @@ public partial class Grub : AnimatedEntity, IResolvable
 		Tags.Add( "player" );
 	}
 
-	public Grub( IClient client ) : this()
+	public Grub( Player player ) : this()
 	{
-		PostSpawnSetup( client );
+		PostSpawnSetup( player );
 	}
 
 	public override void Spawn()
@@ -71,11 +71,11 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 	/// <summary>
 	/// PostSpawnSetup is used to handle things we want to handle in Spawn, but 
-	/// cannot because the Client hasn't been transmitted to the Grub yet.
+	/// cannot because the Player hasn't been transmitted to the Grub yet.
 	/// </summary>
-	private void PostSpawnSetup( IClient client )
+	private void PostSpawnSetup( Player player )
 	{
-		DressFromClient( client );
+		DressFromPlayer( player );
 	}
 
 	public override void Simulate( IClient client )
@@ -92,10 +92,13 @@ public partial class Grub : AnimatedEntity, IResolvable
 		Controller?.FrameSimulate( client );
 	}
 
-	private void DressFromClient( IClient client )
+	private void DressFromPlayer( Player player )
 	{
 		var clothes = new ClothingContainer();
-		clothes.LoadFromClient( client );
+		clothes.LoadFromClient( player.Client );
+
+		if ( player.HasCosmeticSelected )
+			clothes.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 
 		// Skin tone
 		var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizenworm.vmdl" );

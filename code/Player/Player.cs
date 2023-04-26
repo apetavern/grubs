@@ -62,7 +62,6 @@ public partial class Player : Entity
 		Tags.Add( "ignorereset" );
 
 		Components.Create<Inventory>();
-		CosmeticPresets = Cosmetic.GetCosmetics();
 	}
 
 	public override void Simulate( IClient client )
@@ -101,7 +100,7 @@ public partial class Player : Entity
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
 			var grubName = grubNames.ElementAtOrDefault( i ) ?? Random.Shared.FromList( GrubNamePresets );
-			Grubs.Add( new Grub( Client ) { Owner = this, Name = grubName } );
+			Grubs.Add( new Grub( this ) { Owner = this, Name = grubName } );
 		}
 
 		ActiveGrub = Grubs.First();

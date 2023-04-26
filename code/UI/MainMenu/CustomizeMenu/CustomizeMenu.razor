@@ -40,12 +40,12 @@
         <div class="section">
             <label class="title">Clothing</label>
             <div style="flex-wrap: wrap;">
-                @for (int i = 0; i < player.CosmeticPresets.Count; ++i)
+                @for (int i = 0; i < Player.CosmeticPresets.Count; ++i)
                 {
                     var index = i;
                     var isSelected = player.SelectedCosmeticIndex == i;
                     <button class="cosmetic @(isSelected ? "selected" : "")" @onclick=@(() => { player.SelectedCosmeticIndex = isSelected ? -1 : index; })>
-                        <img src=@player.CosmeticPresets[i].Icon />
+                        <img src=@Player.CosmeticPresets[i].MenuIcon />
                     </button>
                 }
             </div>

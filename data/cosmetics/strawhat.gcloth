@@ -1,0 +1,16 @@
+{
+  "MenuIcon": "models/cosmetics/strawhat/strawhat.vmdl_c.png",
+  "Title": "Straw Hat",
+  "Subtitle": "",
+  "Category": "Hat",
+  "SubCategory": "",
+  "Parent": null,
+  "Model": "models/cosmetics/strawhat/strawhat.vmdl",
+  "SkinMaterial": null,
+  "EyesMaterial": null,
+  "MaterialGroup": "",
+  "SlotsUnder": 0,
+  "SlotsOver": 0,
+  "HideBody": 0,
+  "Icon": {}
+}

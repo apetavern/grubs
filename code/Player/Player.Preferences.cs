@@ -1,34 +1,24 @@
 namespace Grubs;
 
-[Prefab, Category( "Cosmetic" )]
-public partial class Cosmetic : AnimatedEntity
+[GameResource( "Grub Clothing", "gcloth", "A piece of grub clothing that can be equipped." )]
+public partial class Cosmetic : Clothing
 {
-	[Prefab, Net, ResourceType( "png" )]
-	public string Icon { get; set; }
+	[Category( "Display Information" )]
+	[ResourceType( "png" )]
+	public string MenuIcon { get; set; }
 
-	public static IList<Cosmetic> GetCosmetics()
+	/// <inheritdoc/>
+	protected sealed override void PostLoad()
 	{
-		var cosmetics = new List<Cosmetic>();
-		var cosmeticPrefabs = ResourceLibrary.GetAll<Prefab>()
-			.Where( x => x is not null
-				&& x.Root is not null
-				&& TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Cosmetic )
-			);
+		base.PostLoad();
 
-		foreach ( var prefab in cosmeticPrefabs )
-		{
-			Assert.True( PrefabLibrary.TrySpawn<Cosmetic>( prefab.ResourcePath, out var cosmetic ) );
-			cosmetics.Add( cosmetic );
-		}
-
-		return cosmetics;
+		Player.CosmeticPresets.Add( this );
 	}
 }
 
 public partial class Player
 {
-	[Net]
-	public IList<Cosmetic> CosmeticPresets { get; set; }
+	public static readonly List<Cosmetic> CosmeticPresets = new();
 
 	/// <summary>
 	/// The index of the cosmetic selected from <see cref="CosmeticPresets"/>

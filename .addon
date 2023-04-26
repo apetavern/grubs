@@ -15,7 +15,8 @@
     "/postprocess/*",
     "/sounds/*",
     "/textures/*",
-    "/weapons/*"
+    "/weapons/*",
+    "/data/*"
   ],
   "HasCode": true,
   "CodePath": "code",
@@ -554,6 +555,7 @@
           "GroupName": "Other"
         }
       ]
-    }
+    },
+    "HttpAllowList": null
   }
 }
