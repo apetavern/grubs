@@ -52,7 +52,9 @@ public partial class TeleportComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
+		Particles.Create( "particles/teleport/teleport_base.vpcf", Grub.EyePosition );
 		Grub.Position = Grub.Player.MousePosition;
+		Particles.Create( "particles/teleport/teleport_base.vpcf", Grub.EyePosition );
 
 		FireFinished();
 	}
