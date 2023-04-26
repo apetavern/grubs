@@ -22,7 +22,7 @@ public partial class Player
 
 	/// <summary>
 	/// The index of the cosmetic selected from <see cref="CosmeticPresets"/>
-	/// "-1" indicating we want to use client clothes.
+	/// "-1" indicating we have nothing selected.
 	/// </summary>
 	[ConVar.ClientData]
 	public int SelectedCosmeticIndex { get; set; }
