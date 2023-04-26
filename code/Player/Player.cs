@@ -106,8 +106,8 @@ public partial class Player : Entity
 		var grubNames = string.IsNullOrEmpty( GrubNames ) ? new List<string>() : System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
-			var grubName = grubNames.ElementAtOrDefault( i ) ?? Random.Shared.FromList( GrubNamePresets );
-			Grubs.Add( new Grub( this ) { Owner = this, Name = grubName } );
+			var grubName = grubNames.ElementAtOrDefault( i );
+			Grubs.Add( new Grub( this ) { Owner = this, Name = !string.IsNullOrEmpty( grubName ) ? grubName : Random.Shared.FromList( GrubNamePresets ) } );
 		}
 
 		ActiveGrub = Grubs.First();
