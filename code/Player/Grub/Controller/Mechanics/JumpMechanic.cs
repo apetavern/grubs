@@ -54,6 +54,8 @@ public partial class JumpMechanic : ControllerMechanic
 
 		IsActive = false;
 		IsBackflipping = false;
+
+		PlayJumpSound( To.Everyone );
 	}
 
 	private void Backflip()
@@ -69,5 +71,11 @@ public partial class JumpMechanic : ControllerMechanic
 
 		IsActive = false;
 		IsBackflipping = false;
+	}
+
+	[ClientRpc]
+	public void PlayJumpSound()
+	{
+		Grub.SoundFromScreen( "grub_jump" );
 	}
 }

@@ -1,0 +1,13 @@
+{
+  "UI": true,
+  "Volume": "0.31,0.36,1",
+  "Pitch": "0.95,1.02,1",
+  "Decibels": 70,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/grub/jump1.vsnd",
+    "sounds/grub/jump2.vsnd"
+  ],
+  "MaximumDistance": 1143.9335,
+  "MinimumDistance": 57.196674
+}
