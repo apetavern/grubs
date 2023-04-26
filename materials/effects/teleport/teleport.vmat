@@ -4,26 +4,24 @@ Layer0
 {
 	shader "shaders/gr_teleport.shader_c"
 
-	//---- Z-Buffering ----
-	F_DISABLE_Z_PREPASS 1
-
 	//---- Adjustments ----
-	g_flMasterOpacity "1.000"
-	g_flSpeed "2.500"
-	g_flTiling "-0.200"
+	g_flGapOpacity "0.250"
+	g_flSolidOpacity "0.750"
+	g_flSpeed "2.000"
+	g_flTiling "-0.250"
 
 	//---- Colour ----
+	g_flColourStrength "2.000"
 	g_vColour "[0.000000 1.000000 1.000000 1.000000]"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Translucent ----
-	g_flAlphaTestReference "0.500"
-	g_flAntiAliasedEdgeStrength "1.000"
+	g_flOpacityScale "1.000"
 
 	DynamicParams
 	{
-		g_flMasterOpacity "opacity"
+		g_flOpacityScale "opacity"
 	}
 }
