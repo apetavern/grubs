@@ -9,7 +9,10 @@
         "Identifier": "19",
         "Output": "Result"
       },
-      "Emission": {},
+      "Emission": {
+        "Identifier": "22",
+        "Output": "Result"
+      },
       "Opacity": {
         "Identifier": "16",
         "Output": "Result"
@@ -51,7 +54,8 @@
         "SrgbRead": true,
         "PrimaryGroup": {
           "Name": ""
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "2",
       "Position": "-64,-128"
@@ -134,7 +138,8 @@
         "SrgbRead": true,
         "PrimaryGroup": {
           "Name": ""
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "8",
       "Position": "-64,256"
@@ -219,13 +224,16 @@
       "_class": "Lerp",
       "A": {
         "Identifier": "2",
-        "Output": "R"
+        "Output": "Result"
       },
       "B": {
         "Identifier": "8",
-        "Output": "G"
+        "Output": "Result"
       },
-      "C": {},
+      "C": {
+        "Identifier": "24",
+        "Output": "Result"
+      },
       "Fraction": 0.5,
       "Identifier": "15",
       "Position": "272,64"
@@ -284,7 +292,7 @@
     },
     {
       "_class": "Float4",
-      "Name": "",
+      "Name": "Color",
       "Value": "1,1,1,1",
       "UI": {
         "Type": "Color",
@@ -296,12 +304,12 @@
         }
       },
       "Identifier": "19",
-      "Position": "272,-144"
+      "Position": "320,-240"
     },
     {
       "_class": "VertexColor",
       "Identifier": "20",
-      "Position": "-208,576"
+      "Position": "-240,576"
     },
     {
       "_class": "SplitVector",
@@ -311,6 +319,47 @@
       },
       "Identifier": "21",
       "Position": "-16,576"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "19",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "23",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 2,
+      "Identifier": "22",
+      "Position": "560,16"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 10,
+      "Name": "Emission Strength",
+      "Value": 0.5,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "23",
+      "Position": "320,-80"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "21",
+        "Output": "X"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 5,
+      "Identifier": "24",
+      "Position": "176,400"
     }
   ]
 }
