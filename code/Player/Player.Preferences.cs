@@ -36,6 +36,7 @@ public partial class Player
 	/// </summary>
 	[ConVar.ClientData]
 	public int SelectedCosmeticIndex { get; set; }
+	public bool HasCosmeticSelected => SelectedCosmeticIndex != -1;
 
 	public static readonly List<Color> ColorPresets = new()
 	{

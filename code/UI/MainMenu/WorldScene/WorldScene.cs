@@ -1,13 +1,13 @@
 namespace Grubs.UI;
 
-public class GrubPreview : Panel
+public class WorldScene : Panel
 {
+	private readonly GrubPreview _grubPreview;
 	private readonly ScenePanel _renderScene;
-	private readonly SceneModel _worm;
 	private float _renderSceneDistance = 100f;
 	private float _yaw = -175;
 
-	public GrubPreview()
+	public WorldScene()
 	{
 		Style.Width = Length.Percent( 100 );
 		Style.Height = Length.Percent( 100 );
@@ -19,14 +19,16 @@ public class GrubPreview : Panel
 		var sceneWorld = new SceneWorld();
 		var map = new SceneMap( sceneWorld, "maps/gr_menu" );
 
-		_worm = new SceneModel( sceneWorld, Model.Load( "models/citizenworm.vmdl" ),
-			Transform.Zero.WithScale( 1f ).WithPosition( new Vector3( -64, 32, 6 ) ).WithRotation( Rotation.From( 0, -135, 0 ) ) );
+		_grubPreview = new GrubPreview( sceneWorld );
+		_grubPreview.Grub.Position = new Vector3( -64, 32, 6 );
+		_grubPreview.Grub.Rotation = Rotation.From( 0, -135, 0 );
+		AddChild( _grubPreview );
 
 		_renderScene = Add.ScenePanel( sceneWorld, Vector3.One, Rotation.Identity, 75 );
 		_renderScene.Style.Width = Length.Percent( 100 );
 		_renderScene.Style.Height = Length.Percent( 100 );
 		_renderScene.Camera.AmbientLightColor = new Color( .25f, .15f, .15f ) * 0.5f;
-		_renderScene.Camera.Position = _worm.Position + new Vector3(
+		_renderScene.Camera.Position = _grubPreview.Grub.Position + new Vector3(
 			MathF.Sin( _yaw ) * _renderSceneDistance,
 			MathF.Cos( _yaw ) * _renderSceneDistance
 		);
@@ -72,18 +74,14 @@ public class GrubPreview : Panel
 		float height = 16;
 
 		var currentPosition = _renderScene.Camera.Position;
-		_renderScene.Camera.Position = currentPosition.LerpTo( _worm.Position + new Vector3(
+		_renderScene.Camera.Position = currentPosition.LerpTo( _grubPreview.Grub.Position + new Vector3(
 			MathF.Sin( yawRad ) * _renderSceneDistance,
 			MathF.Cos( yawRad ) * _renderSceneDistance,
 			height
 		), Time.Delta * 4.0f );
 
-		var wormEyePos = _worm.Position + _worm.Rotation.Up * 24;
-		wormEyePos += _worm.Rotation.Right * 4;
+		var wormEyePos = _grubPreview.Grub.Position + _grubPreview.Grub.Rotation.Up * 24;
+		wormEyePos += _grubPreview.Grub.Rotation.Right * 4;
 		_renderScene.Camera.Rotation = Rotation.LookAt( (wormEyePos - _renderScene.Camera.Position).Normal );
-
-		_worm.Update( Time.Delta );
-		_worm.SetAnimParameter( "grounded", true );
-		_worm.SetAnimParameter( "incline", 0f );
 	}
 }
