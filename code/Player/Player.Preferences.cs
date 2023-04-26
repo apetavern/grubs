@@ -70,7 +70,13 @@ public partial class Player
 		"Bakky",
 		"Avoofo",
 		"Gibby",
-		"Matty"
+		"Matty",
+		"Maggie",
+		"Weevil",
+		"Gub",
+		"Jaspy",
+		"Borris",
+		"Slugma"
 	};
 
 	/// <summary>
