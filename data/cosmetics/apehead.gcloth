@@ -9,7 +9,7 @@
   "SkinMaterial": null,
   "EyesMaterial": null,
   "MaterialGroup": "",
-  "SlotsUnder": "HeadTop, HeadBottom",
+  "SlotsUnder": "HeadTop, HeadBottom, Face",
   "SlotsOver": 0,
   "HideBody": 0,
   "Icon": {}
