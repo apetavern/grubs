@@ -22,6 +22,9 @@ public partial class Grub
 		if ( !Game.IsServer )
 			return;
 
+		SetAnimParameter( "hit", true );
+		SetAnimParameter( "hit_direction", info.Force );
+
 		if ( !ShouldTakeDamage )
 		{
 			if ( IsTurn && GamemodeSystem.Instance is FreeForAll )

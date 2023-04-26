@@ -61,6 +61,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -95,6 +98,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -129,6 +135,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -163,6 +172,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -197,6 +209,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -254,6 +269,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -318,6 +336,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -352,6 +373,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -386,6 +410,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -420,6 +447,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -477,6 +507,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -541,6 +574,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -605,6 +641,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -669,6 +708,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -726,6 +768,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -813,6 +858,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -870,6 +918,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -1397,6 +1448,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -1454,6 +1508,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -1516,7 +1573,7 @@
 				{
 					_class = "CRootAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 2336.0, 32.0 ]
+					m_vecPosition = [ 2768.0, -48.0 ]
 					m_nNodeID = 
 					{
 						m_id = 403567328
@@ -1527,7 +1584,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 1364788982
+							m_id = 417048522
 						}
 						m_outputID = 
 						{
@@ -1710,6 +1767,12 @@
 					{
 						m_id = 1364134191
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.1
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -1719,6 +1782,7 @@
 						m_vControlPoint1 = [ 0.5, 0.0 ]
 						m_vControlPoint2 = [ 0.5, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -1776,6 +1840,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -1833,6 +1900,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -1863,6 +1933,73 @@
 					]
 					m_bBlockWaningTags = false
 					m_bLockStateWhenWaning = false
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 417048522
+				}
+				value = 
+				{
+					_class = "CHitReactAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 2448.0, -64.0 ]
+					m_nNodeID = 
+					{
+						m_id = 417048522
+					}
+					m_networkMode = "ClientPredicted"
+					m_sNote = ""
+					m_inputConnection = 
+					{
+						m_nodeID = 
+						{
+							m_id = 1364788982
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_flMinDelayBetweenHits = 0.0
+					m_triggerParam = 
+					{
+						m_id = 1820284138
+					}
+					m_hitBoneParam = 
+					{
+						m_id = 181409537
+					}
+					m_hitOffsetParam = 
+					{
+						m_id = 1799207469
+					}
+					m_hitDirectionParam = 
+					{
+						m_id = 1360333862
+					}
+					m_hitStrengthParam = 
+					{
+						m_id = 1153540060
+					}
+					m_weightListName = "default"
+					m_hipBoneName = "head"
+					m_flHipBoneTranslationScale = 1.0
+					m_nEffectedBoneCount = 3
+					m_flMaxImpactForce = 250.0
+					m_flMinImpactForce = 50.0
+					m_flWhipImpactScale = 1.0
+					m_flCounterRotationScale = 0.6
+					m_flDistanceFadeScale = 1.0
+					m_flPropagationScale = 1.0
+					m_flWhipDelay = 0.03
+					m_flSpringStrength = 10.0
+					m_flWhipSpringStrength = 15.0
+					m_flHipDipSpringStrength = 10.0
+					m_flHipDipImpactScale = 1.0
+					m_flHipDipDelay = 0.08
+					m_bResetBase = true
 				}
 			},
 			{
@@ -2038,6 +2175,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -2095,6 +2235,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -2309,6 +2452,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -2366,6 +2512,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -2453,6 +2602,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -2510,6 +2662,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -3162,6 +3317,12 @@
 					{
 						m_id = 1364134191
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.2
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -3171,6 +3332,7 @@
 						m_vControlPoint1 = [ 0.5, 0.0 ]
 						m_vControlPoint2 = [ 0.5, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -3228,6 +3390,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -3285,6 +3450,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -3503,6 +3671,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -3560,6 +3731,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -4002,6 +4176,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -4059,6 +4236,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -4341,6 +4521,12 @@
 					{
 						m_id = 4294967295
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.2
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -4350,6 +4536,7 @@
 						m_vControlPoint1 = [ 0.5, 0.0 ]
 						m_vControlPoint2 = [ 0.5, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -4576,6 +4763,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -4640,6 +4830,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -4727,6 +4920,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -5016,6 +5212,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -5073,6 +5272,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -5636,6 +5838,83 @@
 				m_bAutoReset = true
 				m_bPredicted = true
 				m_bDefaultValue = false
+			},
+			{
+				_class = "CBoolAnimParameter"
+				m_name = "hit"
+				m_id = 
+				{
+					m_id = 1820284138
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = true
+				m_bUseMostRecentValue = false
+				m_bAutoReset = true
+				m_bPredicted = false
+				m_bDefaultValue = false
+			},
+			{
+				_class = "CVectorAnimParameter"
+				m_name = "hit_offset"
+				m_id = 
+				{
+					m_id = 1799207469
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = true
+				m_bUseMostRecentValue = true
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_defaultValue = [ 0.0, 0.0, 0.0 ]
+				m_bInterpolate = false
+			},
+			{
+				_class = "CFloatAnimParameter"
+				m_name = "hit_strength"
+				m_id = 
+				{
+					m_id = 1153540060
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = true
+				m_bUseMostRecentValue = true
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_fDefaultValue = 0.001
+				m_fMinValue = 0.0
+				m_fMaxValue = 1.0
+				m_bInterpolate = false
+			},
+			{
+				_class = "CVectorAnimParameter"
+				m_name = "hit_direction"
+				m_id = 
+				{
+					m_id = 1360333862
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = true
+				m_bUseMostRecentValue = true
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_defaultValue = [ 0.0, 0.0, 0.0 ]
+				m_bInterpolate = false
+			},
+			{
+				_class = "CIntAnimParameter"
+				m_name = "hit_bone"
+				m_id = 
+				{
+					m_id = 181409537
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = true
+				m_bUseMostRecentValue = true
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_defaultValue = 20
+				m_minValue = 0
+				m_maxValue = 127
 			},
 		]
 	}
