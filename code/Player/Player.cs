@@ -155,10 +155,12 @@ public partial class Player : Entity
 		var clothes = new ClothingContainer();
 		clothes.LoadFromClient( client );
 
-		clothes.Clothing.RemoveAll( c => c.Category is not Clothing.ClothingCategory.Hair
-										and not Clothing.ClothingCategory.Hat
-										and not Clothing.ClothingCategory.Facial
-										and not Clothing.ClothingCategory.Skin );
+		clothes.Clothing.RemoveAll(
+			c => c.Category is not Clothing.ClothingCategory.Hair
+			and not Clothing.ClothingCategory.Hat
+			and not Clothing.ClothingCategory.Facial
+			and not Clothing.ClothingCategory.Skin
+		);
 
 		AvatarClothingData = clothes.Serialize();
 	}
