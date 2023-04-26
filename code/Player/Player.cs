@@ -17,6 +17,12 @@ public partial class Player : Entity
 	[Net]
 	public long SteamId { get; private set; }
 
+	/// <summary>
+	/// The clothing the player joined the game with.
+	/// </summary>
+	[Net]
+	public string AvatarClothingData { get; private set; }
+
 	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
 
 	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
@@ -45,6 +51,7 @@ public partial class Player : Entity
 	{
 		SteamName = client.Name;
 		SteamId = client.SteamId;
+		SaveClientClothes( client );
 	}
 
 	public override void ClientSpawn()
@@ -141,5 +148,18 @@ public partial class Player : Entity
 	public int GetTotalGrubHealth()
 	{
 		return (int)Grubs.Sum( g => g.Health );
+	}
+
+	private void SaveClientClothes( IClient client )
+	{
+		var clothes = new ClothingContainer();
+		clothes.LoadFromClient( client );
+
+		clothes.Clothing.RemoveAll( c => c.Category is not Clothing.ClothingCategory.Hair
+										and not Clothing.ClothingCategory.Hat
+										and not Clothing.ClothingCategory.Facial
+										and not Clothing.ClothingCategory.Skin );
+
+		AvatarClothingData = clothes.Serialize();
 	}
 }

@@ -95,22 +95,12 @@ public partial class Grub : AnimatedEntity, IResolvable
 	private void DressFromPlayer( Player player )
 	{
 		var clothes = new ClothingContainer();
-		clothes.LoadFromClient( player.Client );
+		clothes.Deserialize( player.AvatarClothingData );
 
 		if ( player.HasCosmeticSelected )
 			clothes.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 
-		// Skin tone
-		var skinTone = clothes.Clothing.FirstOrDefault( model => model.Model == "models/citizenworm.vmdl" );
-		SetMaterialGroup( skinTone?.MaterialGroup );
-
-		// We only want the hair/hats so we won't use the logic built into Clothing
-		var items = clothes.Clothing.Where( item =>
-			item.Category is Clothing.ClothingCategory.Hair or Clothing.ClothingCategory.Hat
-				or Clothing.ClothingCategory.Facial or Clothing.ClothingCategory.Skin
-		);
-
-		foreach ( var item in items )
+		foreach ( var item in clothes.Clothing )
 		{
 			var ent = new AnimatedEntity( item.Model, this );
 
