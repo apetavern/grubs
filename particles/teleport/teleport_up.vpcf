@@ -1188,4 +1188,10 @@
 			m_bOnlyRenderInEffectsBloomPass = true
 		},
 	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/teleport/teleport_base.vpcf"
+		},
+	]
 }

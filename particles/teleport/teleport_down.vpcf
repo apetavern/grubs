@@ -12,8 +12,7 @@
 	[
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
-			m_vecCP1Pos = [ 0.0, 0.0, 512.0 ]
-			m_nCP1 = 0
+			m_vecCP1Pos = [ 0.0, 0.0, 128.0 ]
 		},
 	]
 	m_Emitters = 
@@ -26,6 +25,7 @@
 	[
 		{
 			_class = "C_INIT_CreateWithinSphere"
+			m_nControlPointNumber = 1
 		},
 		{
 			_class = "C_INIT_MoveBetweenPoints"
@@ -281,7 +281,7 @@
 			m_InputValue = 
 			{
 				m_nType = "PVEC_TYPE_LITERAL"
-				m_vLiteralValue = [ 0.0, 0.0, -0.1 ]
+				m_vLiteralValue = [ 0.0, 0.0, -0.05 ]
 				m_NamedValue = ""
 				m_LiteralColor = [ 0, 0, 0, 0 ]
 				m_nVectorAttribute = 6
@@ -1186,6 +1186,12 @@
 				}
 			}
 			m_bOnlyRenderInEffectsBloomPass = true
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/teleport/teleport_base.vpcf"
 		},
 	]
 }

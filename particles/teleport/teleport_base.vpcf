@@ -838,14 +838,4 @@
 			}
 		},
 	]
-	m_Children = 
-	[
-		{
-			m_ChildRef = resource:"particles/teleport/teleport_squish.vpcf"
-		},
-		{
-			m_ChildRef = resource:"particles/teleport/teleport_down.vpcf"
-			m_bDisableChild = true
-		},
-	]
 }
