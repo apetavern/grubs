@@ -61,6 +61,11 @@ public sealed partial class DamageZone : TerrainZone
 		return this;
 	}
 
+	/// <summary>
+	/// The particles to create when an entity touches the damage zone.
+	/// </summary>
+	/// <param name="particlePath">The particles to create.</param>
+	/// <returns>The damage zone instance.</returns>
 	public DamageZone WithParticle( string particlePath )
 	{
 		ParticlePath = particlePath;
