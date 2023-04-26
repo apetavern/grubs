@@ -92,6 +92,7 @@ public partial class World : Entity
 
 		KillZone = new DamageZone()
 			.WithDamageTags( "outofarea" )
+			.WithSound( "water_splash" )
 			.WithDamage( 9999 )
 			.WithPosition( Vector3.Zero )
 			.WithBBox( new BBox( min, max ) )

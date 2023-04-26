@@ -18,6 +18,11 @@ public sealed partial class DamageZone : TerrainZone
 	public float DamageOnTouch { get; private set; }
 
 	/// <summary>
+	/// The sound that is played when an entity touches the zone.
+	/// </summary>
+	public string TouchSound { get; private set; }
+
+	/// <summary>
 	/// Sets the damage tags to use in the damage applied to the entity.
 	/// </summary>
 	/// <param name="tags">The tags to set.</param>
@@ -40,14 +45,33 @@ public sealed partial class DamageZone : TerrainZone
 		return this;
 	}
 
+	/// <summary>
+	/// The sound to play when an entity touches the damage zone.
+	/// </summary>
+	/// <param name="sound">The sound string to play.</param>
+	/// <returns>The damage zone instance.</returns>
+	public DamageZone WithSound( string sound )
+	{
+		TouchSound = sound;
+		return this;
+	}
+
 	public override void StartTouch( Entity entity )
 	{
 		var damageInfo = DamageInfoExtension.FromZone( this );
 		damageInfo.Position = entity.Position;
 		entity.TakeDamage( damageInfo );
 
+		OnTouchSound( TouchSound );
+
 		// Immediately apply damage given by a damage zone if it's a Grub.
 		if ( entity is Grub grub )
 			grub.ApplyDamage();
+	}
+
+	[ClientRpc]
+	private void OnTouchSound( string sound )
+	{
+		this.SoundFromScreen( sound );
 	}
 }
