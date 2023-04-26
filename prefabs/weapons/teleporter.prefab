@@ -51,7 +51,7 @@
       },
       "Icon": {
         "Type": "String",
-        "Value": "\u0022models/weapons/airstrikes/radio.vmdl_c.png\u0022"
+        "Value": "\u0022models/tools/teleporter/teleporter.vmdl_c.png\u0022"
       },
       "_name": {
         "Value": "\u0022Teleporter\u0022"
