@@ -1,38 +1,28 @@
 @inherits EntityWorldPanel
 @namespace Grubs.UI
 
-@if (Entity is not Grub grub || !grub.IsValid())
+@if (Entity is not Grub grub || !grub.IsValid() || Game.LocalPawn is not Grubs.Player player)
 {
     return;
 }
 
 <root style="color: @grub.Player.Color.Hex">
-    <img @ref=Avatar src="avatar:@grub.Player.SteamId" />
+    @{
+        // We remap the camera distance to values between 0.0f and 1f.
+        var opacity = (player.GrubsCamera.Distance - 128f) / (350f - 128f) * (0.5f - 1f) + 1f;
+        <img src="avatar:@grub.Player.SteamId" style="opacity: @opacity;" />
+    }
     <text>@grub.Name</text>
     <text>@((int)grub.Health)</text>
 </root>
 
 @code {
-    private Panel Avatar { get; set; }
-
     public GrubWorldPanel(Grub grub) : base(grub) { }
-
-    public override void Tick()
-    {
-        base.Tick();
-
-        if (IsDeleting || Game.LocalPawn is not Grubs.Player player)
-            return;
-
-        // We remap the camera distance to values between 0.0f and 1f.
-        var opacity = (player.GrubsCamera.Distance - 128f) / (350f - 128f) * (0.5f - 1f) + 1f;
-        Avatar.Style.Opacity = opacity;
-    }
 
     protected override int BuildHash()
     {
         var grub = Entity as Grub;
-        return HashCode.Combine(grub?.Name, grub?.Health);
+        return HashCode.Combine(grub?.Name, grub?.Health, (Game.LocalPawn as Grubs.Player)?.GrubsCamera?.Distance);
     }
 }
 
