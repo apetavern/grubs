@@ -44,7 +44,7 @@ public partial class TeleportComponent : WeaponComponent
 		TeleportPreview.Rotation = Grub.Rotation;
 
 		var isValidPlacement = !Trace.Box( Grub.Controller.Hull, Grub.Player.MousePosition, Grub.Player.MousePosition ).Ignore( TeleportPreview ).Run().Hit;
-		TeleportPreview.RenderColor = isValidPlacement ? Color.Green : Color.Red;
+		TeleportPreview.RenderColor = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.5f );
 
 		if ( !IsFiring )
 			return;
