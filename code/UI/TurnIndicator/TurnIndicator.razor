@@ -15,7 +15,7 @@
         <div class="wind @(facingRight ? "right" : "left")">
             @for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
             {
-                <label class="icon" text=@(facingRight ? "keyboard_arrow_right" : "keyboard_arrow_left") />
+                <label class="icon" text=@(facingRight ? "keyboard_double_arrow_right" : "keyboard_double_arrow_left") />
             }
         </div>
     }
@@ -61,11 +61,11 @@
 
         .wind {
             position: absolute;
-            bottom: -70px;
+            bottom: -75px;
 
             .icon {
                 font-family: MaterialIconsRound;
-                font-size: 40px;
+                font-size: 50px;
                 color: white;
                 text-shadow: 2px 2px 0px black;
             }
