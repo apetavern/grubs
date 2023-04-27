@@ -191,7 +191,7 @@ public partial class FreeForAll : Gamemode
 		UI.TextChat.AddInfoChatEntry( message );
 		CameraTarget = crate;
 
-		await GameTask.DelaySeconds( 3 );
+		await GameTask.DelaySeconds( 2 );
 	}
 
 	[ClientRpc]

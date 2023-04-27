@@ -24,6 +24,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "SpawnSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/world/crate_spawn.sound\u0022"
           }
         }
       }

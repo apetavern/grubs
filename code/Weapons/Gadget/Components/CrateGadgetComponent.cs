@@ -7,6 +7,9 @@ public partial class CrateGadgetComponent : GadgetComponent
 	public CrateType CrateType { get; set; }
 
 	[Prefab, ResourceType( "sound" )]
+	public string SpawnSound { get; set; }
+
+	[Prefab, ResourceType( "sound" )]
 	public string PickupSound { get; set; }
 
 	private readonly Material _spawnMaterial = Material.Load( "materials/effects/teleport/teleport.vmat" );
@@ -18,6 +21,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 		Gadget.EnableAllCollisions = true;
 		Gadget.Tags.Add( "trigger" );
 		Gadget.SetMaterialOverride( _spawnMaterial );
+		Gadget.PlaySound( SpawnSound );
 	}
 
 	public override void OnTouch( Entity other )
@@ -82,7 +86,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 	[Event.Client.Frame]
 	public void UpdateEffects()
 	{
-		if ( TimeSinceSpawned > 2f )
+		if ( TimeSinceSpawned > 1f )
 			Gadget.ClearMaterialOverride();
 		else
 			Gadget.SceneObject.Attributes.Set( "opacity", TimeSinceSpawned / 2 );
