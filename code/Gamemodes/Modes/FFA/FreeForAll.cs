@@ -81,8 +81,11 @@ public partial class FreeForAll : Gamemode
 
 		TurnIsChanging = true;
 
-		if ( await CleanupTurn() )
+		if ( await HasGameWinner() )
+		{
+			RestartGame();
 			return;
+		}
 
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
@@ -100,13 +103,24 @@ public partial class FreeForAll : Gamemode
 	/// <summary>
 	/// Handle cleaning up the existing player's turn.
 	/// </summary>
-	private async ValueTask<bool> CleanupTurn()
+	private async ValueTask<bool> HasGameWinner()
 	{
 		await GameTask.DelaySeconds( 1f );
 		await HandleGrubDeaths();
 		await HandleCrateSpawns();
 
 		return CheckWinConditions();
+	}
+
+	private void RestartGame()
+	{
+		Game.ResetMap( Array.Empty<Entity>() );
+
+		GamemodeSystem.Instance.Delete();
+		GamemodeSystem.SetupGamemode();
+		GamemodeSystem.Instance.GameWorld = new World();
+
+		World.RegenWorld();
 	}
 
 	private async Task HandleGrubDeaths()
