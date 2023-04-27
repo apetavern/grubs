@@ -48,7 +48,7 @@ public partial class Player
 	/// The player's active color networked to everyone.
 	/// </summary>
 	[Net]
-	public Color Color { get; private set; }
+	public Color Color { get; private set; } = Color.White;
 
 	/// <summary>
 	/// The player's selected color during customization, only networked to the server.
