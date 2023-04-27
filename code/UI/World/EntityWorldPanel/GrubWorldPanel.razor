@@ -6,23 +6,30 @@
     return;
 }
 
-<root style="color: @grub.Player.Color.Hex">
+<root style="color: @Grub.Player.Color.Hex">
     @{
-        // We remap the camera distance to values between 0.0f and 1f.
-        var opacity = (player.GrubsCamera.Distance - 128f) / (350f - 128f) * (0.5f - 1f) + 1f;
-        <img src="avatar:@grub.Player.SteamId" style="opacity: @opacity;" />
+        <img src="avatar:@Grub.Player.SteamId" class="avatar @DisplayAvatar()" />
     }
-    <text>@grub.Name</text>
-    <text>@((int)grub.Health)</text>
+    <text>@Grub.Name</text>
+    <text>@((int)Grub.Health)</text>
 </root>
 
 @code {
+    public Grub Grub => Entity as Grub;
+    public Player LocalPlayer => Game.LocalPawn as Player;
+
     public GrubWorldPanel(Grub grub) : base(grub) { }
+
+    string DisplayAvatar()
+    {
+        if ( LocalPlayer.GrubsCamera.Distance < 512f )
+            return "show";
+        return "";
+    }
 
     protected override int BuildHash()
     {
-        var grub = Entity as Grub;
-        return HashCode.Combine(grub?.Name, grub?.Health, (Game.LocalPawn as Grubs.Player)?.GrubsCamera?.Distance);
+        return HashCode.Combine(Grub?.Name, Grub?.Health, LocalPlayer?.GrubsCamera?.Distance);
     }
 }
 
@@ -31,6 +38,15 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
+        .avatar {
+            opacity: 0;
+            transition: all 0.4s ease-in;
+
+            &.show {
+                opacity: 1;
+            }
+        }
 
         label,
         img {
