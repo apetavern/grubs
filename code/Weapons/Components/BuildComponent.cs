@@ -22,7 +22,7 @@ public partial class BuildComponent : WeaponComponent
 
 		GirderPreview = new ModelEntity( "models/tools/girders/girderpreview.vmdl" );
 		GirderPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
-		GirderPreview.Tags.Add( "trigger" );
+		GirderPreview.Tags.Add( "preview" );
 		GirderPreview.Owner = Grub;
 	}
 

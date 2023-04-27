@@ -14,7 +14,7 @@ public partial class TeleportComponent : WeaponComponent
 		TeleportPreview = new AnimatedEntity( "models/citizenworm.vmdl" );
 		TeleportPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
 		TeleportPreview.SetAnimParameter( "grounded", true );
-		TeleportPreview.Tags.Add( "trigger" );
+		TeleportPreview.Tags.Add( "preview" );
 		TeleportPreview.Owner = Grub;
 	}
 

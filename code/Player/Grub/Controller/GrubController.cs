@@ -254,7 +254,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 	public void StepMove( float groundAngle = 46f, float stepSize = 18f )
 	{
-		MoveHelper mover = new MoveHelper( Position, Velocity );
+		var mover = new MoveHelper( Position, Velocity );
 		mover.Trace = mover.Trace.Size( Hull )
 			.Ignore( Grub );
 		mover.MaxStandableAngle = groundAngle;
@@ -267,7 +267,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 	public void Move( float groundAngle = 46f )
 	{
-		MoveHelper mover = new MoveHelper( Position, Velocity );
+		var mover = new MoveHelper( Position, Velocity );
 		mover.Trace = mover.Trace.Size( Hull )
 			.Ignore( Grub );
 		mover.MaxStandableAngle = groundAngle;

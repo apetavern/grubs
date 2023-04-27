@@ -36,7 +36,7 @@ public class GrubAnimator : EntityComponent<Grub>
 		var tr = Trace.Ray( grub.Position + grub.Rotation.Up * 10f, grub.Position + grub.Rotation.Down * 128 )
 			.Size( 2f )
 			.Ignore( grub )
-			.WithoutTags( "trigger" )
+			.WithoutTags( "trigger", "preview" )
 			.IncludeClientside()
 			.Run();
 		_incline = MathX.Lerp( _incline, grub.Rotation.Forward.Angle( tr.Normal ) - 90f, 0.25f );

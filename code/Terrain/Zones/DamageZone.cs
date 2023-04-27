@@ -74,6 +74,9 @@ public sealed partial class DamageZone : TerrainZone
 
 	public override void StartTouch( Entity entity )
 	{
+		if ( entity.Tags.Has( "preview" ) )
+			return;
+
 		var damageInfo = DamageInfoExtension.FromZone( this );
 		damageInfo.Position = entity.Position;
 		entity.TakeDamage( damageInfo );

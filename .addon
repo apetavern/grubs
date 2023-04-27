@@ -24,7 +24,7 @@
   "EditorReferences": null,
   "Metadata": {
     "MapList": [
-      "apetavern.gr_beach"
+      "apetavern.grubs_test_map"
     ],
     "MaxPlayers": 8,
     "MinPlayers": 0,
@@ -457,7 +457,8 @@
         "trigger": "Trigger",
         "ladder": "Ignore",
         "water": "Trigger",
-        "player": "Unset"
+        "player": "Unset",
+        "preview": "Ignore"
       },
       "Pairs": [
         {
