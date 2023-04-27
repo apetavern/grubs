@@ -31,23 +31,20 @@ public partial class World
 			SetupWater( _WorldLength, _WorldHeight );
 			SetupKillZone( _WorldHeight );
 
-			//CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 0, -_WorldHeight / 2 ) );
 			if ( map.background == null )
 			{
 				CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
 			}
 
-			_terrainGrid = new float[pointsX, pointsZ];
-
 			Color32[] pixels = map.texture.GetPixels().Reverse().ToArray();
 
-
+			_terrainGrid = new float[pointsX, pointsZ];
 
 			List<Vector3> points = new List<Vector3>();
 			List<Vector3> lineStarts = new List<Vector3>();
 			List<Vector3> lineEnds = new List<Vector3>();
 
-			float lineWidth = 18.0f; // width of each CSG line
+			float lineWidth = 28.0f; // width of each CSG line
 
 			for ( int i = 0; i < pixels.Length; i++ )
 			{
@@ -104,8 +101,6 @@ public partial class World
 
 			// create CSG lines from the list of line start and end points
 
-
-
 			for ( int i = 0; i < lineStarts.Count; i++ )
 			{
 				Vector3 start = lineStarts[i];
@@ -115,67 +110,60 @@ public partial class World
 				AddLine( start, end, size, rotation );
 			}
 
-			/*for ( int i = 0; i < mines.Count; i++ )
+			/*List<Vector3> LineCapEnds = new List<Vector3>();
+			List<Vector3> LineCapStarts = new List<Vector3>();
+
+			for ( int i = 0; i < lineStarts.Count; i++ )
 			{
-				AddDefaultCube( mines[i], maxes[i] );
-			}*/
-
-			/*var min = new Vector3();
-			var max = new Vector3();
-			var n = 0;
-			int index = 0;
-
-			var paddedRes = 16;// + (16 * 0.5f);
-
-			for ( var x = 0; x < pointsX; x++ )
-			{
-				for ( var z = 0; z < pointsZ; z++ )
+				Vector3 currentEndPoint = lineEnds[i];
+				Vector3 currentStartPoint = lineStarts[i];
+				for ( int j = i + 1; j < lineStarts.Count; j++ )
 				{
-					index = z * pointsX + x;
+					Vector3 nextEndPoint = lineEnds[j];
+					Vector3 nextStartPoint = lineStarts[j];
 
-					n = pixels[index].a;
+					float EndDist = Vector3.DistanceBetween( currentEndPoint, nextEndPoint );
 
-					_terrainGrid[x, z] = n;
+					float StartDist = Vector3.DistanceBetween( currentStartPoint, nextStartPoint );
 
-					// Add solid where alpha == 255
-					if ( _terrainGrid[x, z] > 0 )
+					if ( EndDist <= 18f && EndDist > 10f && !LineCapStarts.Contains( currentEndPoint ) )
 					{
-						var depth = (_terrainGrid[x, z] / 255f) * 16;
-						min = new Vector3( (x * 16) - paddedRes, -depth, (z * 16) - paddedRes );
-						max = new Vector3( (x * 16) + paddedRes, 16, (z * 16) + paddedRes );
-
-						// Offset by position.
-						min -= new Vector3( _WorldLength / 2, depth - 8, _WorldHeight );
-						max -= new Vector3( _WorldLength / 2, depth - 8, _WorldHeight );
-						AddDefault( min, max );
-						//SubtractDefault( min, max );
+						LineCapStarts.Add( currentEndPoint );
+						LineCapEnds.Add( nextEndPoint );
 					}
-					else
+
+					if ( StartDist <= 18f && StartDist > 10f && !LineCapStarts.Contains( currentStartPoint ) )
 					{
-						min = new Vector3( (x * 16), -16, (z * 16) );
-						max = new Vector3( (x * 16), 16, (z * 16) );
-
-						// Offset by position.
-						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
-						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
-
-						var avg = (min + max) / 2;
-						PossibleSpawnPoints.Add( avg );
+						LineCapStarts.Add( currentStartPoint );
+						LineCapEnds.Add( nextStartPoint );
 					}
 				}
+			}
+
+			for ( int i = 0; i < LineCapStarts.Count; i++ )
+			{
+				Vector3 start = LineCapStarts[i];
+				Vector3 end = LineCapEnds[i];
+				float size = lineWidth;
+				Vector3 direction = end - start;
+
+				if ( lineStarts.Contains( end ) )
+				{
+					direction = start - end;
+				}
+
+				Quaternion rotation = Rotation.LookAt( direction );
+				//DebugOverlay.Line( start, end, 60f, false );
+				//AddLine( start, end, size, rotation, false );
 			}*/
 
 			if ( map.background != null )
 			{
-				//_terrainGrid = new float[pointsX, pointsZ];
-
 				pixels = map.background.GetPixels().Reverse().ToArray();
 
 				points.Clear();
 				lineStarts.Clear();
 				lineEnds.Clear();
-
-				//lineWidth = 24.0f; // width of each CSG line
 
 				for ( int i = 0; i < pixels.Length; i++ )
 				{
@@ -219,10 +207,6 @@ public partial class World
 						}
 					}
 				}
-
-				// create CSG lines from the list of line start and end points
-
-
 
 				for ( int i = 0; i < lineStarts.Count; i++ )
 				{
