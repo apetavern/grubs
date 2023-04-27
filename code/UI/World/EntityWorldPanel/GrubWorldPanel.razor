@@ -7,12 +7,27 @@
 }
 
 <root style="color: @grub.Player.Color.Hex">
+    <img @ref=Avatar src="avatar:@grub.Player.SteamId" />
     <text>@grub.Name</text>
     <text>@((int)grub.Health)</text>
 </root>
 
 @code {
+    private Panel Avatar { get; set; }
+
     public GrubWorldPanel(Grub grub) : base(grub) { }
+
+    public override void Tick()
+    {
+        base.Tick();
+
+        if (IsDeleting || Game.LocalPawn is not Grubs.Player player)
+            return;
+
+        // We remap the camera distance to values between 0.0f and 1f.
+        var opacity = (player.GrubsCamera.Distance - 128f) / (350f - 128f) * (0.5f - 1f) + 1f;
+        Avatar.Style.Opacity = opacity;
+    }
 
     protected override int BuildHash()
     {
@@ -27,7 +42,8 @@
         justify-content: center;
         flex-direction: column;
 
-        label {
+        label,
+        img {
             font-size: 135px;
             font-family: Londrina Solid;
             background-color: rgba(black, 0.1);
@@ -41,6 +57,11 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             text-align: center;
+        }
+
+        img {
+            opacity: 0.5;
+            aspect-ratio: 1;
         }
     }
 </style>

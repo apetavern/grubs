@@ -33,7 +33,7 @@ public partial class Player
 		Color.FromBytes(232, 59, 105),  // Red
 		Color.FromBytes(33, 146, 255),  // Blue
 		Color.FromBytes(56, 229, 77),   // Green
-		Color.FromBytes(97, 122, 46),	// Sap Green
+		Color.FromBytes(56, 118, 29),	// Forest Green
 		Color.FromBytes(248, 249, 136), // Yellow
 		Color.FromBytes(251, 172, 204), // Pink
 		Color.FromBytes(103, 234, 202), // Cyan
