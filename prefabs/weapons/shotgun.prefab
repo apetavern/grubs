@@ -45,7 +45,7 @@
           },
           "Damage": {
             "Type": "Single",
-            "Value": "5"
+            "Value": "4"
           },
           "_name": {
             "Value": "\u0022Shoot\u0022"
