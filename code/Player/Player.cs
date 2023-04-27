@@ -106,8 +106,7 @@ public partial class Player : Entity
 		var grubNames = string.IsNullOrEmpty( GrubNames ) ? new List<string>() : System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
 		for ( int i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
-			var grubName = grubNames.ElementAtOrDefault( i );
-			Grubs.Add( new Grub( this ) { Owner = this, Name = !string.IsNullOrEmpty( grubName ) ? grubName : Random.Shared.FromList( GrubNamePresets ) } );
+			Grubs.Add( new Grub( this ) { Owner = this, Name = ParseGrubName( grubNames.ElementAtOrDefault( i ) ) } );
 		}
 
 		ActiveGrub = Grubs.First();
@@ -163,5 +162,10 @@ public partial class Player : Entity
 		);
 
 		AvatarClothingData = clothes.Serialize();
+	}
+
+	private string ParseGrubName( string name )
+	{
+		return string.IsNullOrWhiteSpace( name ) ? Random.Shared.FromList( GrubNamePresets ) : name.Trim();
 	}
 }

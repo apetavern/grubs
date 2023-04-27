@@ -31,7 +31,7 @@
                         <TextEntry
                         text=@player.SelectedGrubNames[i]
                         MaxLength=@(10)
-                        CharacterRegex="^[A-Za-z]$"
+                        CharacterRegex="^[a-zA-Z0-9 ]+$"
                         OnTextEdited=@((string text) => { player.SelectedGrubNames[index] = text; player.SerializeGrubNames(); }) />
                     </div>
                 }
