@@ -83,7 +83,7 @@ public static class CrateDrops
 		var roll = Game.Random.Float( 0f, 1f );
 
 		var weapon = 0;
-		while ( dropPercentages[weapon] <= roll )
+		while ( weapon < dropPercentages.Count && dropPercentages[weapon] <= roll )
 			weapon++;
 
 		return dropMap[weapon];
