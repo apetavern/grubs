@@ -13,6 +13,7 @@ public partial class TeleportComponent : WeaponComponent
 
 		TeleportPreview = new AnimatedEntity( "models/citizenworm.vmdl" );
 		TeleportPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
+		TeleportPreview.SetMaterialGroup( "Teleport_Preview" );
 		TeleportPreview.SetAnimParameter( "grounded", true );
 		TeleportPreview.Tags.Add( "preview" );
 		TeleportPreview.Owner = Grub;
@@ -39,6 +40,8 @@ public partial class TeleportComponent : WeaponComponent
 			return;
 
 		TeleportPreview.Position = Grub.Player.MousePosition;
+
+		TeleportPreview.Rotation = Grub.Rotation;
 
 		var isValidPlacement = !Trace.Box( Grub.Controller.Hull, Grub.Player.MousePosition, Grub.Player.MousePosition ).Ignore( TeleportPreview ).Run().Hit;
 		TeleportPreview.RenderColor = isValidPlacement ? Color.Green : Color.Red;
