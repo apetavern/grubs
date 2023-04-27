@@ -84,7 +84,7 @@ public sealed partial class DamageZone : TerrainZone
 		OnTouchSound( TouchSound );
 
 		if ( !string.IsNullOrEmpty( ParticlePath ) )
-			Particles.Create( ParticlePath, entity.Position );
+			Particles.Create( ParticlePath, entity.Position.WithZ( CollisionBounds.Maxs.z ) );
 
 		// Immediately apply damage given by a damage zone if it's a Grub.
 		if ( entity is Grub grub )
