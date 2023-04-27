@@ -1,0 +1,29 @@
+{
+  "publish": {
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "Grubs Beach",
+      "Type": "map",
+      "Org": "apetavern",
+      "Ident": "gr_beach",
+      "Tags": null,
+      "Schema": 0,
+      "HasAssets": false,
+      "AssetsPath": null,
+      "ResourcePaths": null,
+      "HasCode": false,
+      "CodePath": null,
+      "PackageReferences": [],
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "maps/gr_beach.vmap",
+        "GameSupport": [
+          "apetavern.grubs"
+        ],
+        "Summary": "",
+        "Description": "",
+        "Public": false
+      }
+    }
+  }
+}
