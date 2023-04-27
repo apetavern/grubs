@@ -128,9 +128,15 @@ public partial class Grub
 		UI.TextChat.AddInfoChatEntry( DeathReason.ToString() );
 
 		LifeState = LifeState.Dead;
-		EnableDrawing = false;
 		Tags.Remove( "player" );
 		Tags.Add( "dead" );
+
+		EnableDrawing = false;
+
+		// Disable drawing of any clothes, for whatever reason EnableDrawing doesn't handle it.
+		var clothes = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( "clothing" ) );
+		foreach ( var clothing in clothes )
+			clothing.EnableDrawing = false;
 
 		if ( !DeathReason.FromKillTrigger )
 		{

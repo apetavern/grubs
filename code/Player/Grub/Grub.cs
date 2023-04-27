@@ -108,6 +108,8 @@ public partial class Grub : AnimatedEntity, IResolvable
 			if ( item.Category is Clothing.ClothingCategory.Hat or Clothing.ClothingCategory.Hair )
 				ent.Tags.Add( "head" );
 
+			ent.Tags.Add( "clothing" );
+
 			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 				ent.SetMaterialGroup( item.MaterialGroup );
 
