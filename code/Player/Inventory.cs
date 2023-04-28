@@ -55,14 +55,6 @@ public partial class Inventory : EntityComponent<Player>
 			SetActiveWeapon( weapon );
 	}
 
-	public void AddByResourcePath( string weaponResourcePath, bool makeActive = false )
-	{
-		if ( !PrefabLibrary.TrySpawn<Weapon>( weaponResourcePath, out var weapon ) )
-			return;
-
-		Add( weapon, makeActive );
-	}
-
 	public void SetActiveWeapon( Weapon weapon, bool forced = false )
 	{
 		if ( ActiveWeapon == weapon )
@@ -96,7 +88,7 @@ public partial class Inventory : EntityComponent<Player>
 
 	public void GiveDefaultLoadout()
 	{
-		foreach ( var prefab in Weapon.GetAllWeaponPrefabs())
+		foreach ( var prefab in Weapon.GetAllWeaponPrefabs() )
 		{
 			Assert.True( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var weapon ) );
 			Add( weapon );

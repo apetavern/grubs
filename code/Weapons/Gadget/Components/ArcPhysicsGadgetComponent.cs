@@ -15,6 +15,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	[Net]
 	private IList<ArcSegment> Segments { get; set; }
 
+	private float _alpha = 0;
 	private ExplosiveGadgetComponent _explosiveComponent;
 
 	/// <summary>
@@ -51,11 +52,15 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		{
 			var currentSegment = Segments.FirstOrDefault();
 
-			Gadget.Rotation = Rotation.LookAt( currentSegment.EndPos - currentSegment.StartPos );
-			Gadget.Position = Vector3.Lerp( currentSegment.StartPos, currentSegment.EndPos, Time.Delta / (1 / ProjectileSpeed) );
-
-			if ( (currentSegment.EndPos - Gadget.Position).IsNearlyZero( 2.5f ) )
+			_alpha += Time.Delta * ProjectileSpeed;
+			if ( _alpha >= 1f )
+			{
+				_alpha = 0;
 				Segments.RemoveAt( 0 );
+			}
+
+			Gadget.Rotation = Rotation.LookAt( currentSegment.EndPos - currentSegment.StartPos );
+			Gadget.Position = Vector3.Lerp( currentSegment.StartPos, currentSegment.EndPos, _alpha );
 		}
 		else
 		{

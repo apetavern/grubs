@@ -62,9 +62,11 @@ PS
 	Texture2D g_tTexture0 < Channel( RGBA, Box( Texture0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	float4 g_vColor < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
 	float g_flEmissionStrength < UiGroup( ",0/,0/0" ); Default1( 0.5 ); Range1( 0, 10 ); >;
-	float g_flSmoothStepMin < UiGroup( ",0/,0/0" ); Default1( 0 ); Range1( 0, 1 ); >;
-	float g_flSmoothStepMax < UiGroup( ",0/,0/1" ); Default1( 0.6 ); Range1( 0, 1 ); >;
+	float g_flSmoothStepMin < UiGroup( ",0/,0/0" ); Default1( 0.25 ); Range1( 0, 1 ); >;
+	float g_flSmoothStepMax < UiGroup( ",0/,0/1" ); Default1( 0.35 ); Range1( 0, 1 ); >;
+	float2 g_vUVTilingOne < UiGroup( ",0/,0/0" ); Default2( 10,1 ); >;
 	float g_flSpeedOne < UiGroup( ",0/,0/0" ); Default1( 0.1 ); Range1( 0, 1 ); >;
+	float2 g_vUVTilingTwo < UiGroup( ",0/,0/0" ); Default2( 16,1 ); >;
 	float g_flSpeedTwo < UiGroup( ",0/,0/0" ); Default1( 0.2 ); Range1( 0, 1 ); >;
 
 	float4 MainPs( PixelInput i ) : SV_Target0
@@ -85,27 +87,25 @@ PS
 		float4 local2 = local0 * float4( local1, local1, local1, local1 );
 		float local3 = g_flSmoothStepMin;
 		float local4 = g_flSmoothStepMax;
-		float2 local5 = PolarCoordinates( ( i.vTextureCoords.xy ) - ( float2( 0.5, 0.5 ) ), 3, 1 );
-		float local6 = g_flSpeedOne;
-		float local7 = local6 * g_flTime;
-		float local8 = 1 - local7;
-		float2 local9 = local5 + float2( local8, local8 );
-		float4 local10 = Tex2DS( g_tTexture, g_sSampler0, local9 );
-		float2 local11 = PolarCoordinates( ( i.vTextureCoords.xy ) - ( float2( 0.5, 0.5 ) ), 3, 1 );
-		float local12 = g_flSpeedTwo;
-		float local13 = local12 * g_flTime;
-		float local14 = 1 - local13;
-		float2 local15 = local11 + float2( local14, local14 );
-		float4 local16 = Tex2DS( g_tTexture0, g_sSampler0, local15 );
-		float3 local17 = i.vVertexColor.rgb;
-		float local18 = local17.x;
-		float local19 = local18 * 5;
-		float4 local20 = lerp( local10, local16, local19 );
-		float4 local21 = smoothstep( local3, local4, local20 );
+		float2 local5 = i.vTextureCoords.xy * float2( 1, 1 );
+		float2 local6 = g_vUVTilingOne;
+		float local7 = g_flSpeedOne;
+		float local8 = local7 * g_flTime;
+		float local9 = 1 - local8;
+		float2 local10 = TileAndOffsetUv( local5, local6, float2( local9, local9 ) );
+		float4 local11 = Tex2DS( g_tTexture, g_sSampler0, local10 );
+		float2 local12 = g_vUVTilingTwo;
+		float local13 = g_flSpeedTwo;
+		float local14 = local13 * g_flTime;
+		float local15 = 1 - local14;
+		float2 local16 = TileAndOffsetUv( local5, local12, float2( local15, local15 ) );
+		float4 local17 = Tex2DS( g_tTexture0, g_sSampler0, local16 );
+		float4 local18 = lerp( local11, local17, 0.5 );
+		float4 local19 = smoothstep( local3, local4, local18 );
 
 		m.Albedo = local0.xyz;
 		m.Emission = local2.xyz;
-		m.Opacity = local21.x;
+		m.Opacity = local19.x;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;

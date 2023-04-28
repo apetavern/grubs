@@ -2,21 +2,12 @@ namespace Grubs.UI;
 
 public partial class TextChat : Panel
 {
-	private static TextChat _instance;
-
-	public bool IsOpen
+	public struct ChatMessage
 	{
-		get => HasClass( "open" );
-		set
-		{
-			SetClass( "open", value );
-			if ( value )
-			{
-				Input.Focus();
-				Input.Text = string.Empty;
-				Input.Label.SetCaretPosition( 0 );
-			}
-		}
+		public string Name;
+		public Color Color;
+		public string Message;
+		public long SteamId;
 	}
 
 	private const int MaxItems = 100;
@@ -34,8 +25,6 @@ public partial class TextChat : Panel
 		Canvas.PreferScrollToBottom = true;
 		Input.AcceptsFocus = true;
 		Input.AllowEmojiReplace = true;
-
-		_instance = this;
 	}
 
 	public override void Tick()
@@ -100,12 +89,18 @@ public partial class TextChat : Panel
 	[ClientRpc]
 	public static void AddChatEntry( string name, Color color, string message, long steamId )
 	{
-		_instance?.AddEntry( new TextChatEntry { Name = name, Color = color, Message = message, SteamId = steamId } );
+		Event.Run( GrubsEvent.Player.ChatMessageSent, new ChatMessage() { Name = name, Color = color, Message = message, SteamId = steamId } );
 	}
 
 	[ClientRpc]
 	public static void AddInfoChatEntry( string message )
 	{
-		_instance?.AddEntry( new TextChatEntry { Message = message } );
+		Event.Run( GrubsEvent.Player.ChatMessageSent, new ChatMessage() { Message = message } );
+	}
+
+	[GrubsEvent.Player.ChatMessageSent]
+	private void OnChatMessage( ChatMessage chatMessage )
+	{
+		AddEntry( new TextChatEntry { Name = chatMessage.Name, Color = chatMessage.Color, Message = chatMessage.Message, SteamId = chatMessage.SteamId } );
 	}
 }
