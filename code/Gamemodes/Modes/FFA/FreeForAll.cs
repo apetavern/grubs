@@ -139,18 +139,18 @@ public partial class FreeForAll : Gamemode
 
 		while ( GamemodeSystem.Instance.DamageQueue.Any() )
 		{
-			var damageEvent = GamemodeSystem.Instance.DamageQueue.Dequeue();
-			if ( !damageEvent.DamagedGrub.IsValid() )
+			var damagedGrub = GamemodeSystem.Instance.DamageQueue.Dequeue();
+			if ( !damagedGrub.IsValid() )
 				continue;
 
-			damageEvent.DamagedGrub.ApplyDamage( damageEvent.DamageInfo );
+			damagedGrub.ApplyDamage();
 
-			await DisplayGrubDamage( damageEvent.DamagedGrub );
+			await TargetDamagedGrub( damagedGrub );
 			await World.UntilResolve();
 		}
 	}
 
-	private async Task DisplayGrubDamage( Grub grub )
+	private async Task TargetDamagedGrub( Grub grub )
 	{
 		if ( grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
 			await grub.DeathTask;

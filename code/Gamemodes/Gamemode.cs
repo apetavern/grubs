@@ -72,9 +72,9 @@ public partial class Gamemode : Entity
 	public bool AllowMovement { get; set; }
 
 	/// <summary>
-	/// A queue containing information about which grubs were damaged.
+	/// A queue containing the order of damaged grubs.
 	/// </summary>
-	public Queue<DamageEvent> DamageQueue { get; set; } = new();
+	public Queue<Grub> DamageQueue { get; set; } = new();
 
 	/// <summary>
 	/// The amount of wind steps that is currently being applied.

@@ -88,7 +88,7 @@ public sealed partial class DamageZone : TerrainZone
 
 		// Immediately apply damage given by a damage zone if it's a Grub.
 		if ( entity is Grub grub )
-			grub.ApplyDamage( damageInfo );
+			grub.ApplyDamage();
 	}
 
 	[ClientRpc]
