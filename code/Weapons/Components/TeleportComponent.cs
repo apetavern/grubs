@@ -3,6 +3,9 @@
 [Prefab]
 public partial class TeleportComponent : WeaponComponent
 {
+	[Prefab, ResourceType( "sound" )]
+	public string UseSound { get; set; }
+
 	[Net]
 	public AnimatedEntity TeleportPreview { get; set; }
 
@@ -55,6 +58,8 @@ public partial class TeleportComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
+		Weapon.PlayScreenSound( UseSound );
+
 		Particles.Create( "particles/teleport/teleport_up.vpcf", Grub.EyePosition );
 		Grub.Position = Grub.Player.MousePosition;
 		Particles.Create( "particles/teleport/teleport_down.vpcf", Grub.EyePosition );
