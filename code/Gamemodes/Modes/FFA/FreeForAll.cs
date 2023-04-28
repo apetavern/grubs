@@ -106,7 +106,7 @@ public partial class FreeForAll : Gamemode
 	private async ValueTask<bool> HasGameWinner()
 	{
 		await GameTask.DelaySeconds( 1f );
-		await HandleGrubDeaths();
+		await DealGrubDamage();
 		await HandleCrateSpawns();
 
 		return CheckWinConditions();
@@ -123,7 +123,7 @@ public partial class FreeForAll : Gamemode
 		World.RegenWorld();
 	}
 
-	private async Task HandleGrubDeaths()
+	private async Task DealGrubDamage()
 	{
 		foreach ( var player in Players )
 		{
@@ -137,20 +137,25 @@ public partial class FreeForAll : Gamemode
 
 				if ( player.IsDisconnected )
 					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
-
-				if ( !grub.HasBeenDamaged )
-					continue;
-
-				await HandleGrubDeath( grub );
-
-				await World.UntilResolve();
 			}
+		}
+
+		while ( GamemodeSystem.Instance.DamageQueue.Any() )
+		{
+			var damageEvent = GamemodeSystem.Instance.DamageQueue.Dequeue();
+			if ( !damageEvent.DamagedGrub.IsValid() )
+				continue;
+
+			damageEvent.DamagedGrub.ApplyDamage( damageEvent.DamageInfo );
+
+			await DisplayGrubDamage( damageEvent.DamagedGrub );
+			await World.UntilResolve();
 		}
 	}
 
-	private async Task HandleGrubDeath( Grub grub )
+	private async Task DisplayGrubDamage( Grub grub )
 	{
-		if ( grub.ApplyDamage() && grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
+		if ( grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
 			await grub.DeathTask;
 
 		if ( grub.Position.z < -GrubsConfig.TerrainHeight )

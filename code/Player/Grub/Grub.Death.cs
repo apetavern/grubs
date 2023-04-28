@@ -1,5 +1,11 @@
 ﻿namespace Grubs;
 
+public struct DamageEvent
+{
+	public Grub DamagedGrub;
+	public DamageInfo DamageInfo;
+}
+
 public partial class Grub
 {
 	public DeathReason DeathReason { get; set; }
@@ -15,8 +21,6 @@ public partial class Grub
 	[Net]
 	public float TotalDamageTaken { get; set; }
 
-	public Queue<DamageInfo> DamageQueue { get; set; } = new();
-
 	public override void TakeDamage( DamageInfo info )
 	{
 		if ( !Game.IsServer )
@@ -30,7 +34,7 @@ public partial class Grub
 			if ( IsTurn && GamemodeSystem.Instance is FreeForAll )
 				GamemodeSystem.Instance.UseTurn( false );
 
-			DamageQueue.Enqueue( info );
+			GamemodeSystem.Instance.DamageQueue.Enqueue( new DamageEvent() { DamagedGrub = this, DamageInfo = info } );
 			HasBeenDamaged = true;
 			return;
 		}
@@ -50,35 +54,21 @@ public partial class Grub
 		}
 	}
 
-	public bool ApplyDamage()
+	public void ApplyDamage( DamageInfo info )
 	{
-		if ( !HasBeenDamaged )
-			return false;
-
 		ShouldTakeDamage = true;
 
 		var totalDamage = 0f;
-		var damageInfo = new List<DamageInfo>();
-		while ( DamageQueue.TryDequeue( out var dmgInfo ) )
-		{
-			damageInfo.Add( dmgInfo );
-			totalDamage += dmgInfo.Damage;
-		}
+		totalDamage += info.Damage;
 
-		var dead = false;
 		if ( totalDamage >= Health )
-		{
-			dead = true;
-			DeathReason = DeathReason.FindReason( this, damageInfo );
-		}
-
-		TotalDamageTaken = totalDamage;
+			DeathReason = DeathReason.FindReason( this, info );
 
 		TakeDamage( DamageInfo.Generic( Math.Min( totalDamage, Health ) ) );
 
+		TotalDamageTaken = totalDamage;
 		ShouldTakeDamage = false;
 		HasBeenDamaged = false;
-		return dead;
 	}
 
 	public override void OnKilled()

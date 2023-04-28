@@ -168,81 +168,78 @@ public struct DeathReason
 	/// Parses a set of damage info and creates a reason for a grubs death.
 	/// </summary>
 	/// <param name="grub">The grub that is dying.</param>
-	/// <param name="damageInfos">The damage info the grub received.</param>
+	/// <param name="damageInfo">The damage info the grub received.</param>
 	/// <returns></returns>
-	public static DeathReason FindReason( Grub grub, List<DamageInfo> damageInfos )
+	public static DeathReason FindReason( Grub grub, DamageInfo damageInfo )
 	{
 		DamageInfo? lastReasonInfo = null;
 		var lastReason = DamageType.None;
 		DamageInfo? reasonInfo = null;
 		var reason = DamageType.None;
 
-		foreach ( var damageInfo in damageInfos )
+		foreach ( var tag in damageInfo.Tags )
 		{
-			foreach ( var tag in damageInfo.Tags )
+			switch ( tag )
 			{
-				switch ( tag )
-				{
-					// An admin has abused the grub, move as normal.
-					case "admin":
-						lastReasonInfo = reasonInfo;
-						lastReason = reason;
-						reasonInfo = damageInfo;
-						reason = DamageType.Admin;
+				// An admin has abused the grub, move as normal.
+				case "admin":
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = DamageType.Admin;
+					break;
+				// Controlling player disconnected.
+				case "disconnect":
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = DamageType.Disconnect;
+					break;
+				// An explosion, just move the reasons around as normal.
+				case "explosion":
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = DamageType.Explosion;
+					break;
+				// Fell from a great height. Only move the reasons around if we weren't already falling.
+				case "fall":
+					if ( reason == DamageType.Fall )
 						break;
-					// Controlling player disconnected.
-					case "disconnect":
-						lastReasonInfo = reasonInfo;
-						lastReason = reason;
-						reasonInfo = damageInfo;
-						reason = DamageType.Disconnect;
-						break;
-					// An explosion, just move the reasons around as normal.
-					case "explosion":
-						lastReasonInfo = reasonInfo;
-						lastReason = reason;
-						reasonInfo = damageInfo;
-						reason = DamageType.Explosion;
-						break;
-					// Fell from a great height. Only move the reasons around if we weren't already falling.
-					case "fall":
-						if ( reason == DamageType.Fall )
-							break;
 
-						lastReasonInfo = reasonInfo;
-						lastReason = reason;
-						reasonInfo = damageInfo;
-						reason = DamageType.Fall;
-						break;
-					case "hitscan":
-						lastReasonInfo = reasonInfo;
-						lastReason = reason;
-						reasonInfo = damageInfo;
-						reason = DamageType.HitScan;
-						break;
-					case "melee":
-						lastReasonInfo = reasonInfo;
-						lastReason = reason;
-						reasonInfo = damageInfo;
-						reason = DamageType.Melee;
-						break;
-					// Hit a kill trigger.
-					case "outofarea":
-						// If we got to the kill trigger from falling from a great height then just overwrite it.
-						if ( reason == DamageType.Fall )
-						{
-							reasonInfo = damageInfo;
-							reason = DamageType.KillTrigger;
-							break;
-						}
-
-						// Move as normal.
-						lastReasonInfo = reasonInfo;
-						lastReason = reason;
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = DamageType.Fall;
+					break;
+				case "hitscan":
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = DamageType.HitScan;
+					break;
+				case "melee":
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = DamageType.Melee;
+					break;
+				// Hit a kill trigger.
+				case "outofarea":
+					// If we got to the kill trigger from falling from a great height then just overwrite it.
+					if ( reason == DamageType.Fall )
+					{
 						reasonInfo = damageInfo;
 						reason = DamageType.KillTrigger;
 						break;
-				}
+					}
+
+					// Move as normal.
+					lastReasonInfo = reasonInfo;
+					lastReason = reason;
+					reasonInfo = damageInfo;
+					reason = DamageType.KillTrigger;
+					break;
 			}
 		}
 
