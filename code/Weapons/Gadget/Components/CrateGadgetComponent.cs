@@ -34,15 +34,15 @@ public partial class CrateGadgetComponent : GadgetComponent
 		switch ( CrateType )
 		{
 			case CrateType.Weapons:
-				var weaponResourcePath = CrateDrops.GetRandomWeaponFromCrate();
-				UI.TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some weaponized goods." );
-				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
-				Gadget.Delete();
-				break;
 			case CrateType.Tools:
-				weaponResourcePath = CrateDrops.GetRandomToolFromCrate();
-				UI.TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up a tool." );
-				grub.Player.Inventory.AddByResourcePath( weaponResourcePath );
+				var weaponResourcePath = CrateType == CrateType.Weapons ? CrateDrops.GetRandomWeaponFromCrate() : CrateDrops.GetRandomToolFromCrate();
+				if ( !PrefabLibrary.TrySpawn<Weapon>( weaponResourcePath, out var weapon ) )
+					return;
+
+				UI.TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some goods." );
+				DisplayPickupPanel( To.Everyone, Gadget.Position, weapon.Icon );
+				grub.Player.Inventory.Add( weapon );
+
 				Gadget.Delete();
 				break;
 			case CrateType.Health:
@@ -93,7 +93,13 @@ public partial class CrateGadgetComponent : GadgetComponent
 	}
 
 	[ClientRpc]
-	public void HealGrubEventClient( Grub grub, int healAmount )
+	private void DisplayPickupPanel( Vector3 pos, string icon )
+	{
+		_ = new UI.CratePickupWorldPanel( pos, icon );
+	}
+
+	[ClientRpc]
+	private void HealGrubEventClient( Grub grub, int healAmount )
 	{
 		Event.Run( GrubsEvent.Grub.Healed, grub.NetworkIdent, healAmount );
 	}

@@ -8,8 +8,8 @@
 </root>
 
 @code {
-    private const float RiseSpeed = 5;
-    private static Vector3 Offset = Vector3.Up * 64;
+    private const float _riseSpeed = 5;
+    private Vector3 _offset = Vector3.Up * 64;
 
     private float _damage;
     private bool _isHeal;
@@ -21,14 +21,14 @@
         _damage = damage;
         _isHeal = _damage < 0;
 
-        Position = grub.Position + Offset;
+        Position = grub.Position + _offset;
         Position = Position.WithY(-34);
         Rotation = Rotation.LookAt(Vector3.Right);
 
         _ = DelayDelete();
     }
 
-    public override void Tick() => Position += Vector3.Up * RiseSpeed * Time.Delta;
+    public override void Tick() => Position += Vector3.Up * _riseSpeed * Time.Delta;
     protected override int BuildHash() => HashCode.Combine(_damage, _isHeal);
 
     private string FormatDamage()
@@ -50,6 +50,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        transition: opacity 0.15s ease;
 
         label {
             font-size: 80px;
@@ -68,6 +69,10 @@
             &.damage {
                 color: #ff0000;
             }
+        }
+
+        &:outro {
+            opacity: 0;
         }
     }
 </style>
