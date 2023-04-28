@@ -127,15 +127,12 @@ public partial class FreeForAll : Gamemode
 	{
 		foreach ( var player in Players )
 		{
-			if ( player.IsDead )
+			if ( player.IsDead || !player.IsDisconnected )
 				continue;
 
 			foreach ( var grub in player.Grubs )
 			{
-				if ( grub.LifeState == LifeState.Dead )
-					continue;
-
-				if ( player.IsDisconnected )
+				if ( grub.LifeState == LifeState.Alive )
 					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
 			}
 		}
