@@ -6,15 +6,15 @@
     {
       "_class": "Result",
       "Albedo": {
-        "Identifier": "19",
+        "Identifier": "17",
         "Output": "Result"
       },
       "Emission": {
-        "Identifier": "22",
+        "Identifier": "20",
         "Output": "Result"
       },
       "Opacity": {
-        "Identifier": "16",
+        "Identifier": "14",
         "Output": "Result"
       },
       "Normal": {},
@@ -29,21 +29,29 @@
       "Position": "800,64"
     },
     {
-      "_class": "PolarCoordinates",
-      "Coords": {},
-      "Center": {},
-      "RadialScale": {},
-      "LengthScale": {},
-      "DefaultCenter": "0.5,0.5",
-      "DefaultRadialScale": 3,
-      "DefaultLengthScale": 1,
+      "_class": "TileAndOffset",
+      "Coords": {
+        "Identifier": "22",
+        "Output": "Result"
+      },
+      "Tile": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
       "Identifier": "1",
-      "Position": "-592,-128"
+      "Position": "-336,160"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "3",
+        "Identifier": "1",
         "Output": "Result"
       },
       "Texture": "particles/watersplash/textures/water_ring_png_9fab6d08.generated.vtex",
@@ -58,27 +66,24 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "2",
-      "Position": "-64,-128"
+      "Position": "-64,128"
     },
     {
-      "_class": "Add",
-      "A": {
-        "Identifier": "1",
-        "Output": "Result"
+      "_class": "Float2",
+      "Name": "UV Tiling One",
+      "Value": "10,1",
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        }
       },
-      "B": {
-        "Identifier": "7",
-        "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
       "Identifier": "3",
-      "Position": "-256,-128"
+      "Position": "-1216,272"
     },
     {
       "_class": "Time",
       "Identifier": "4",
-      "Position": "-832,144"
+      "Position": "-976,128"
     },
     {
       "_class": "Float",
@@ -95,7 +100,7 @@
         }
       },
       "Identifier": "5",
-      "Position": "-832,64"
+      "Position": "-976,48"
     },
     {
       "_class": "Multiply",
@@ -110,7 +115,7 @@
       "DefaultA": -0.3,
       "DefaultB": 0,
       "Identifier": "6",
-      "Position": "-544,64"
+      "Position": "-752,64"
     },
     {
       "_class": "Subtract",
@@ -122,12 +127,12 @@
       "DefaultA": 1,
       "DefaultB": 0,
       "Identifier": "7",
-      "Position": "-384,32"
+      "Position": "-640,64"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "13",
+        "Identifier": "23",
         "Output": "Result"
       },
       "Texture": "particles/watersplash/textures/water_ring_png_9fab6d08.generated.vtex",
@@ -142,12 +147,12 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "8",
-      "Position": "-64,256"
+      "Position": "-64,320"
     },
     {
       "_class": "Time",
       "Identifier": "9",
-      "Position": "-848,528"
+      "Position": "-864,496"
     },
     {
       "_class": "Float",
@@ -164,7 +169,7 @@
         }
       },
       "Identifier": "10",
-      "Position": "-848,448"
+      "Position": "-864,416"
     },
     {
       "_class": "Multiply",
@@ -179,7 +184,7 @@
       "DefaultA": -0.3,
       "DefaultB": 0,
       "Identifier": "11",
-      "Position": "-560,448"
+      "Position": "-624,448"
     },
     {
       "_class": "Subtract",
@@ -191,34 +196,7 @@
       "DefaultA": 1,
       "DefaultB": 0,
       "Identifier": "12",
-      "Position": "-400,416"
-    },
-    {
-      "_class": "Add",
-      "A": {
-        "Identifier": "14",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "12",
-        "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "13",
-      "Position": "-272,272"
-    },
-    {
-      "_class": "PolarCoordinates",
-      "Coords": {},
-      "Center": {},
-      "RadialScale": {},
-      "LengthScale": {},
-      "DefaultCenter": "0.5,0.5",
-      "DefaultRadialScale": 3,
-      "DefaultLengthScale": 1,
-      "Identifier": "14",
-      "Position": "-848,288"
+      "Position": "-512,448"
     },
     {
       "_class": "Lerp",
@@ -230,29 +208,26 @@
         "Identifier": "8",
         "Output": "Result"
       },
-      "C": {
-        "Identifier": "24",
-        "Output": "Result"
-      },
+      "C": {},
       "Fraction": 0.5,
-      "Identifier": "15",
+      "Identifier": "13",
       "Position": "272,64"
     },
     {
       "_class": "SmoothStep",
       "Input": {
-        "Identifier": "15",
+        "Identifier": "13",
         "Output": "Result"
       },
       "Edge1": {
-        "Identifier": "17",
+        "Identifier": "15",
         "Output": "Result"
       },
       "Edge2": {
-        "Identifier": "18",
+        "Identifier": "16",
         "Output": "Result"
       },
-      "Identifier": "16",
+      "Identifier": "14",
       "Position": "560,176"
     },
     {
@@ -260,7 +235,7 @@
       "Min": 0,
       "Max": 1,
       "Name": "Smooth Step Min",
-      "Value": 0,
+      "Value": 0.25,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -269,7 +244,7 @@
           "Name": ""
         }
       },
-      "Identifier": "17",
+      "Identifier": "15",
       "Position": "320,224"
     },
     {
@@ -277,7 +252,7 @@
       "Min": 0,
       "Max": 1,
       "Name": "Smooth Step Max",
-      "Value": 0.6,
+      "Value": 0.35,
       "UI": {
         "Priority": 1,
         "PrimaryGroup": {
@@ -287,7 +262,7 @@
           "Name": ""
         }
       },
-      "Identifier": "18",
+      "Identifier": "16",
       "Position": "320,304"
     },
     {
@@ -303,36 +278,36 @@
           "Name": ""
         }
       },
-      "Identifier": "19",
+      "Identifier": "17",
       "Position": "320,-240"
     },
     {
       "_class": "VertexColor",
-      "Identifier": "20",
-      "Position": "-240,576"
+      "Identifier": "18",
+      "Position": "-256,576"
     },
     {
       "_class": "SplitVector",
       "Input": {
-        "Identifier": "20",
+        "Identifier": "18",
         "Output": "RGB"
       },
-      "Identifier": "21",
-      "Position": "-16,576"
+      "Identifier": "19",
+      "Position": "-32,576"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "19",
+        "Identifier": "17",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "23",
+        "Identifier": "21",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 2,
-      "Identifier": "22",
+      "Identifier": "20",
       "Position": "560,16"
     },
     {
@@ -346,20 +321,47 @@
           "Name": ""
         }
       },
-      "Identifier": "23",
+      "Identifier": "21",
       "Position": "320,-80"
     },
     {
-      "_class": "Multiply",
-      "A": {
-        "Identifier": "21",
-        "Output": "X"
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "22",
+      "Position": "-1280,176"
+    },
+    {
+      "_class": "TileAndOffset",
+      "Coords": {
+        "Identifier": "22",
+        "Output": "Result"
       },
-      "B": {},
-      "DefaultA": 0,
-      "DefaultB": 5,
+      "Tile": {
+        "Identifier": "24",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "23",
+      "Position": "-336,288"
+    },
+    {
+      "_class": "Float2",
+      "Name": "UV Tiling Two",
+      "Value": "16,1",
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
       "Identifier": "24",
-      "Position": "176,400"
+      "Position": "-1216,384"
     }
   ]
 }
