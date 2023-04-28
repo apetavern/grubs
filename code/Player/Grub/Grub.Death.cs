@@ -1,11 +1,5 @@
 ﻿namespace Grubs;
 
-public struct DamageEvent
-{
-	public Grub DamagedGrub;
-	public DamageInfo DamageInfo;
-}
-
 public partial class Grub
 {
 	public DeathReason DeathReason { get; set; }

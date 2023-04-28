@@ -145,12 +145,12 @@ public partial class FreeForAll : Gamemode
 
 			damagedGrub.ApplyDamage();
 
-			await TargetDamagedGrub( damagedGrub );
+			await ShowDamagedGrub( damagedGrub );
 			await World.UntilResolve();
 		}
 	}
 
-	private async Task TargetDamagedGrub( Grub grub )
+	private async Task ShowDamagedGrub( Grub grub )
 	{
 		if ( grub.DeathTask is not null && !grub.DeathTask.IsCompleted )
 			await grub.DeathTask;

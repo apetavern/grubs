@@ -72,7 +72,7 @@ public partial class Gamemode : Entity
 	public bool AllowMovement { get; set; }
 
 	/// <summary>
-	/// A queue containing the order of damaged grubs.
+	/// A queue containing the order of grubs damaged.
 	/// </summary>
 	public Queue<Grub> DamageQueue { get; set; } = new();
 
