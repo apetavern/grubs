@@ -72,6 +72,10 @@
           "FinishSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/uzi/uzi_casing_drop.sound\u0022"
+          },
+          "MuzzleParticle": {
+            "Type": "String",
+            "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
           }
         }
       }

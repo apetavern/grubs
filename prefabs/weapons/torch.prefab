@@ -72,6 +72,10 @@
           "AutoMove": {
             "Type": "Boolean",
             "Value": "true"
+          },
+          "MuzzleParticle": {
+            "Type": "String",
+            "Value": "\u0022particles/blueflame/blueflame_base.vpcf\u0022"
           }
         }
       }

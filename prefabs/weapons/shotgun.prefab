@@ -72,6 +72,10 @@
           "TraceSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/shotgun/shotgun_fire.sound\u0022"
+          },
+          "MuzzleParticle": {
+            "Type": "String",
+            "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
           }
         }
       }

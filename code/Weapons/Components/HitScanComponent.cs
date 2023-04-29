@@ -50,6 +50,9 @@ public partial class HitScanComponent : WeaponComponent
 	[Prefab]
 	public bool UseMuzzleParticle { get; set; } = false;
 
+	[Prefab, Net, ResourceType( "vpcf" )]
+	public string MuzzleParticle { get; set; }
+
 	[Prefab, Net]
 	public ParticleSystem TraceParticle { get; set; }
 
@@ -58,8 +61,6 @@ public partial class HitScanComponent : WeaponComponent
 
 	[Net, Predicted]
 	public int FireCount { get; set; } = 0;
-
-	public static readonly string MuzzleParticlesPath = "particles/muzzleflash/grubs_muzzleflash.vpcf";
 
 	public override void Simulate( IClient client )
 	{
@@ -87,10 +88,9 @@ public partial class HitScanComponent : WeaponComponent
 		startPos = startPos.WithY( 0f );
 		endPos = endPos.WithY( 1f );
 
-		// Handle muzzle flash if applicable.
-		if ( UseMuzzleParticle && muzzle is not null )
+		if ( !string.IsNullOrEmpty( MuzzleParticle ) )
 		{
-			var muzzleFlash = Particles.Create( MuzzleParticlesPath, muzzle.Value.Position );
+			var muzzleFlash = Particles.Create( MuzzleParticle, muzzle.Value.Position );
 			muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );
 		}
 
