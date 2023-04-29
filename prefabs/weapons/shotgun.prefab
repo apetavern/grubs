@@ -13,7 +13,7 @@
         "Keys": {
           "HitForce": {
             "Type": "Vector3",
-            "Value": "\u0022200,0,1\u0022"
+            "Value": "\u0022100,0,1\u0022"
           },
           "TraceCount": {
             "Type": "Int32",
