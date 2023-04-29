@@ -47,9 +47,6 @@ public partial class HitScanComponent : WeaponComponent
 	[Prefab, Net]
 	public float Damage { get; set; } = 25;
 
-	[Prefab]
-	public bool UseMuzzleParticle { get; set; } = false;
-
 	[Prefab, Net, ResourceType( "vpcf" )]
 	public string MuzzleParticle { get; set; }
 
