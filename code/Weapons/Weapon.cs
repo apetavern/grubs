@@ -180,8 +180,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		if ( muzzle is null )
 			return Grub.EyePosition;
 
-		var tr = Trace.Ray( Grub.Controller.Hull.Center + Grub.Position, muzzle.Value.Position + muzzle.Value.Rotation.Forward )
+		var tr = Trace.Ray( Grub.Controller.Hull.Center + Grub.Position, muzzle.Value.Position )
 			.Ignore( this )
+			.Ignore( Grub )
 			.Run();
 
 		return tr.EndPosition;
@@ -252,9 +253,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public static IEnumerable<Prefab> GetAllWeaponPrefabs()
 	{
 		return ResourceLibrary.GetAll<Prefab>()
-			.Where( x => x is not null 
-				&& x.Root is not null 
-				&& TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon ) 
+			.Where( x => x is not null
+				&& x.Root is not null
+				&& TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon )
 			);
 	}
 
