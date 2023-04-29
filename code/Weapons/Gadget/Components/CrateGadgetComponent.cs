@@ -83,7 +83,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 		Gadget.Position = helper.Position;
 	}
 
-	[Event.Client.Frame]
+	[GameEvent.Client.Frame]
 	public void UpdateEffects()
 	{
 		if ( TimeSinceSpawned > 1f )

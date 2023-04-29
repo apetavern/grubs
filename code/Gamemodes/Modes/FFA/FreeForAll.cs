@@ -279,7 +279,7 @@ public partial class FreeForAll : Gamemode
 		return weapon.IsValid() && weapon.IsFiring() && !weapon.AllowMovement;
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	private void Tick()
 	{
 		//

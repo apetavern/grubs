@@ -66,7 +66,7 @@ public sealed partial class GrubsGame : GameManager
 		UI.PlayerList.Current?.OnVoicePlayed( client );
 	}
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void PostEntitySpawn()
 	{
 		GamemodeSystem.SetupGamemode();

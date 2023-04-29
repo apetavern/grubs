@@ -40,7 +40,7 @@
 			Tags.Add( "solid" );
 		}
 
-		[Event.Tick.Server]
+		[GameEvent.Tick.Server]
 		private void ServerTick()
 		{
 			if ( _invalidConnectivity.Count > 0 )
@@ -55,7 +55,7 @@
 			CollisionUpdate();
 		}
 
-		[Event.Tick.Client]
+		[GameEvent.Tick.Client]
 		private void ClientTick()
 		{
 			if ( !IsClientOnly )

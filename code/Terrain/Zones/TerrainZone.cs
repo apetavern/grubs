@@ -57,7 +57,7 @@ public partial class TerrainZone : ModelEntity
 	[ConVar.Server( "gr_zone_debug" )]
 	public static bool ZoneDebug { get; set; }
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void Tick()
 	{
 		if ( !ZoneDebug )
