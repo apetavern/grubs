@@ -17,7 +17,7 @@
         if (Game.LocalPawn is not Player player || !player.ActiveGrub.IsValid() || player.ActiveGrub.LifeState == LifeState.Dead)
             return false;
 
-        if (!player.ActiveGrub.ActiveWeapon.IsValid() || !player.ActiveGrub.ActiveWeapon.ShowReticle)
+        if (!player.ActiveGrub.ActiveWeapon.IsValid() || !player.ActiveGrub.ActiveWeapon.ShowReticle || !player.IsTurn)
             return false;
 
         return player.ActiveGrub.Controller.IsGrounded && player.ActiveGrub.Velocity.IsNearlyZero(2.5f);
