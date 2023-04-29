@@ -32,7 +32,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		ChargeParticles?.Destroy( true );
 		ChargeParticles = null;
 
-		FireFinished();
+		IsFiring = false;
+		IsCharging = false;
 	}
 
 	public virtual void Simulate( IClient client )
