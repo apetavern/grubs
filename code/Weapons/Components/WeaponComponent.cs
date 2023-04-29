@@ -31,6 +31,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	{
 		ChargeParticles?.Destroy( true );
 		ChargeParticles = null;
+
+		FireFinished();
 	}
 
 	public virtual void Simulate( IClient client )
