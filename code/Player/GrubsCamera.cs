@@ -15,7 +15,7 @@ public class GrubsCamera
 	private Vector3 _center;
 	private TimeSince _timeSinceMousePan;
 	private Entity _target;
-	private TimeUntil _timeUntilCameraUnlock;
+	private RealTimeUntil _timeUntilCameraUnlock;
 
 	public void CanScroll( bool toggle )
 	{
@@ -55,11 +55,11 @@ public class GrubsCamera
 
 	public void SetTarget( Entity entity, float duration = 0 )
 	{
-		if ( entity == _target )
-			return;
-
 		if ( duration > 0 )
 			_timeUntilCameraUnlock = duration;
+
+		if ( entity == _target )
+			return;
 
 		_target = entity;
 	}
@@ -95,7 +95,7 @@ public class GrubsCamera
 		{
 			if ( gadget.ShouldCameraFollow )
 			{
-				SetTarget( gadget );
+				SetTarget( gadget, 2f );
 				return;
 			}
 		}
