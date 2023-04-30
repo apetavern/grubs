@@ -3,12 +3,6 @@
 public class GrubAnimator : EntityComponent<Grub>
 {
 	private float _incline;
-	private TimeSince _timeSinceBackflip;
-
-	public void Backflip()
-	{
-		_timeSinceBackflip = 0f;
-	}
 
 	public virtual void Simulate( IClient client )
 	{
@@ -18,8 +12,12 @@ public class GrubAnimator : EntityComponent<Grub>
 		if ( ctrl is null )
 			return;
 
-		grub.SetAnimParameter( "backflip", _timeSinceBackflip < 0.1f );
-		grub.SetAnimParameter( "grounded", ctrl.IsGrounded );
+		var isBackflipping = ctrl.IsMechanicActive<BackflipMechanic>();
+		grub.SetAnimParameter( "backflip", isBackflipping );
+
+		if ( !isBackflipping )
+			grub.SetAnimParameter( "grounded", ctrl.IsGrounded );
+
 		grub.SetAnimParameter( "aimangle", grub.EyeRotation.Pitch() * -grub.Facing );
 		grub.SetAnimParameter( "velocity", ctrl.GetWishVelocity().Length );
 		grub.SetAnimParameter( "lowhp", grub.Health <= 20f );

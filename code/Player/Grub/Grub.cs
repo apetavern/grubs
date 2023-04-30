@@ -59,6 +59,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		Components.Create<AirMoveMechanic>();
 		Components.Create<SquirmMechanic>();
 		Components.Create<JumpMechanic>();
+		Components.Create<BackflipMechanic>();
 
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Controller.Hull.Mins, Controller.Hull.Maxs );
 	}
