@@ -48,11 +48,13 @@
         opacity: 0;
         right: -200px;
         flex-direction: column;
+        pointer-events: none;
 
         &.open {
             right: 100px;
             opacity: 1;
             sound-in: ui_inventory_open;
+            pointer-events: all;
         }
 
         .name {

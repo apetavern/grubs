@@ -32,7 +32,6 @@
         var isEnabled = _instance._references.Any();
 
         // Root panel handles all pointer events for us.
-        Game.RootPanel.Style.PointerEvents = isEnabled ? PointerEvents.All : PointerEvents.None;
         _instance.SetClass("hide", !isEnabled);
     }
 
@@ -47,13 +46,16 @@
 
 <style>
     Cursor {
-        pointer-events: none;
+        position: absolute;
         z-index: 500;
         opacity: 1;
         transition: opacity 125ms ease-out;
+        height: 0px;
+        width: 0px;
 
         img {
             position: absolute;
+            pointer-events: none;
             height: 64;
             background-repeat: no-repeat;
             background-size: contain;
