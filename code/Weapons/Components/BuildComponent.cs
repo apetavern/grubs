@@ -57,14 +57,10 @@ public partial class BuildComponent : WeaponComponent
 		RotationAngle += Input.MouseWheel * 10f;
 
 		if ( RotationAngle < -90 )
-		{
 			RotationAngle += 180;
-		}
 
 		if ( RotationAngle > 90 )
-		{
 			RotationAngle -= 180;
-		}
 
 		Grub.Player.GrubsCamera.Distance = 512f;
 		Grub.Player.GrubsCamera.CanScroll( false );
@@ -75,11 +71,10 @@ public partial class BuildComponent : WeaponComponent
 		var isValidPlacement = !Trace.Body( GirderPreview.PhysicsBody, Grub.Player.MousePosition ).Ignore( GirderPreview ).Run().Hit;
 		GirderPreview.RenderColor = isValidPlacement ? Color.Green : Color.Red;
 
-		if ( !IsFiring )
-			return;
-
-		if ( isValidPlacement )
+		if ( IsFiring && isValidPlacement )
 			Fire();
+		else
+			IsFiring = false;
 	}
 
 	public override void FireCursor()
