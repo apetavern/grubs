@@ -1,12 +1,11 @@
 @namespace Grubs.UI
 
 <root>
-    <img @ref=CursorImage src="textures/ui/cursor.png" />
+    <img src="textures/ui/cursor.png" />
 </root>
 
 @code {
     private static Cursor _instance;
-    private Panel CursorImage { get; set; }
 
     // There could be different UI elements and classes requesting the cursor stay active.
     // Keep track of all references and show the cursor as long as it has references.
@@ -41,8 +40,8 @@
     {
         var mousePosition = Mouse.Position / Screen.Size;
 
-        CursorImage.Style.Left = Length.Fraction(mousePosition.x);
-        CursorImage.Style.Top = Length.Fraction(mousePosition.y);
+        Style.Left = Length.Fraction(mousePosition.x);
+        Style.Top = Length.Fraction(mousePosition.y);
     }
 }
 
