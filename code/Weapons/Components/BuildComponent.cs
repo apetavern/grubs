@@ -51,9 +51,6 @@ public partial class BuildComponent : WeaponComponent
 
 		GirderPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && !Weapon.HasFired;
 
-		if ( !GirderPreview.EnableDrawing )
-			return;
-
 		RotationAngle += Input.MouseWheel * 10f;
 
 		if ( RotationAngle < -90 )
@@ -71,7 +68,7 @@ public partial class BuildComponent : WeaponComponent
 		var isValidPlacement = !Trace.Body( GirderPreview.PhysicsBody, Grub.Player.MousePosition ).Ignore( GirderPreview ).Run().Hit;
 		GirderPreview.RenderColor = isValidPlacement ? Color.Green : Color.Red;
 
-		if ( IsFiring && isValidPlacement )
+		if ( IsFiring && GirderPreview.EnableDrawing && isValidPlacement )
 			Fire();
 		else
 			IsFiring = false;
