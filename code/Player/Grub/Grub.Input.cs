@@ -46,8 +46,10 @@ public partial class Grub
 
 	public void UpdateInputFromOwner( float moveInput, float lookInput )
 	{
+		var nextFacing = Rotation.z < 0 ? -1 : 1;
+
 		MoveInput = moveInput;
-		LookInput = -Facing * lookInput;
+		LookInput = -nextFacing * lookInput;
 
 		if ( ActiveWeapon.IsValid() && ActiveWeapon.IsCharging() )
 			return;
@@ -80,13 +82,14 @@ public partial class Grub
 				ChangedSnapAngle = false;
 			}
 
-			SnappedLookAngle = MathX.Clamp( SnappedLookAngle, -45f, 45f );
+			if ( nextFacing != LastFacing )
+				SnappedLookAngle = -SnappedLookAngle.Clamp( -45f, 45f );
+			else
+				SnappedLookAngle = SnappedLookAngle.Clamp( -45f, 45f );
 		}
 
-		if ( Facing != LastFacing )
+		if ( nextFacing != LastFacing )
 			LookAngles = LookAngles.WithPitch( LookAngles.pitch * -1 );
-
-		LastFacing = Facing;
 
 		if ( Debug && IsTurn )
 		{
@@ -98,6 +101,8 @@ public partial class Grub
 			var tr = Trace.Ray( AimRay, 80f ).Run();
 			DebugOverlay.TraceResult( tr );
 		}
+
+		LastFacing = nextFacing;
 	}
 
 	[ConVar.Replicated( "gr_debug_input" )]
