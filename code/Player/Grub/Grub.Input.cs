@@ -91,6 +91,8 @@ public partial class Grub
 		if ( nextFacing != LastFacing )
 			LookAngles = LookAngles.WithPitch( LookAngles.pitch * -1 );
 
+		LastFacing = nextFacing;
+
 		if ( Debug && IsTurn )
 		{
 			DebugOverlay.ScreenText( $"MoveInput: {MoveInput}", 13 );
@@ -101,8 +103,6 @@ public partial class Grub
 			var tr = Trace.Ray( AimRay, 80f ).Run();
 			DebugOverlay.TraceResult( tr );
 		}
-
-		LastFacing = nextFacing;
 	}
 
 	[ConVar.Replicated( "gr_debug_input" )]
