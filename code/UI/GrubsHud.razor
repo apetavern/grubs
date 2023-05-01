@@ -4,14 +4,15 @@
 @attribute [StyleSheet("/ui/GrubsHud.scss")]
 
 <root>
-    @if (GamemodeSystem.Instance.CurrentState == Gamemode.State.Playing)
-    {
-        <PlayHud />
-    }
-    else
-    {
-        <MainMenu />
-    }
+    @* In-game UI *@
+    <PlayerList />
+    <TurnIndicator />
+    <Inventory />
+    <InputHints />
+    <GlobalPointerEvents />
+
+    @* Main Menu *@
+    <MainMenu />
 </root>
 
 @code
@@ -20,10 +21,14 @@
     {
         Game.AssertClient();
         Game.RootPanel = this;
-    }
 
-    protected override int BuildHash()
-    {
-        return HashCode.Combine(GamemodeSystem.Instance.CurrentState);
+        _ = new AimReticle();
+        _ = new GrubDamageManager();
     }
 }
+
+<style>
+    GrubsHud {
+        pointer-events: none;
+    }
+</style>
