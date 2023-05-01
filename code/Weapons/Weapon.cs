@@ -112,7 +112,10 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		}
 
 		if ( FiringType is FiringType.Cursor )
-			Event.Run( GrubsEvent.Player.CursorToggle, true );
+		{
+			UI.Cursor.Enabled( "Weapon", true );
+			Event.Run( GrubsEvent.Player.PointerEventChanged, true );
+		}
 	}
 
 	public void Holster( Grub _ )
@@ -133,7 +136,10 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		Grub?.SetHatVisible( true );
 
 		if ( FiringType is FiringType.Cursor )
-			Event.Run( GrubsEvent.Player.CursorToggle, false );
+		{
+			UI.Cursor.Enabled( "Weapon", false );
+			Event.Run( GrubsEvent.Player.PointerEventChanged, false );
+		}
 
 		SetParent( null );
 	}

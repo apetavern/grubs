@@ -4,15 +4,15 @@ public static partial class GrubsEvent
 {
 	public static class Player
 	{
-		public const string CursorToggle = "player.cursor.toogle";
+		public const string PointerEventChanged = "player.pointer.event";
 
 		/// <summary>
-		/// Called when the custom cursor should be toggled.
-		/// <para><see cref="bool"/>Whether the cursor should be enabled.</para>
+		/// Called when the Pointer Events behaviour changes for the player.
+		/// <para><see cref="bool"/>Whether Pointer Events are enabled.</para>
 		/// </summary>
-		public class CursorToggleAttribute : EventAttribute
+		public class PointerEventChangedAttribute : EventAttribute
 		{
-			public CursorToggleAttribute() : base( CursorToggle ) { }
+			public PointerEventChangedAttribute() : base( PointerEventChanged ) { }
 		}
 
 		public const string ChatMessageSent = "player.chat.message";

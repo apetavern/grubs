@@ -45,6 +45,11 @@
         return CurrentTab == tab ? "selected" : "";
     }
 
+    public override void Tick()
+    {
+        Cursor.Enabled("MainMenu", !HasClass("hide"));
+    }
+
     protected override int BuildHash()
     {
         return HashCode.Combine(CurrentTab, GamemodeSystem.Instance.CurrentState.GetHashCode());
@@ -56,7 +61,6 @@
         height: 100%;
         width: 100%;
         flex-direction: column;
-        pointer-events: all;
         transition: all 225ms ease-out;
 
         .container {
@@ -88,7 +92,6 @@
         }
 
         &.hide {
-            pointer-events: none;
             bottom: 100%;
         }
 
