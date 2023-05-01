@@ -38,7 +38,6 @@ public partial class BuildComponent : WeaponComponent
 		else
 		{
 			Grub.Player.GrubsCamera.CanScroll( true );
-			Event.Run( GrubsEvent.Player.PointerEventChanged, false );
 		}
 	}
 

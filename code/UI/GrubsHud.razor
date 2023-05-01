@@ -4,12 +4,14 @@
 @attribute [StyleSheet("/ui/GrubsHud.scss")]
 
 <root>
+    @* Global *@
+    <Cursor />
+
     @* In-game UI *@
     <PlayerList />
     <TurnIndicator />
     <Inventory />
     <InputHints />
-    <GlobalPointerEvents />
 
     @* Main Menu *@
     <MainMenu />
@@ -29,6 +31,6 @@
 
 <style>
     GrubsHud {
-        pointer-events: none;
+        cursor: none;
     }
 </style>

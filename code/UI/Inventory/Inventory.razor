@@ -5,7 +5,7 @@
     return;
 }
 
-<root class="@( RequestOpen() ? "open" : "" )">
+<root class="@( _isOpen ? "open" : "" )">
     <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
         @foreach (var weapon in player.Inventory.Weapons)
@@ -22,13 +22,20 @@
 </root>
 
 @code {
+    private bool _isOpen;
     private Weapon _hoveredWeapon;
     private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && player.IsTurn && Input.Down(InputAction.Inventory);
     private readonly int _totalAmmo = (Game.LocalPawn as Grubs.Player).Inventory.Weapons.Sum(x => x.Ammo);
 
+    public override void Tick()
+    {
+        _isOpen = RequestOpen();
+        Cursor.Enabled("Inventory", _isOpen);
+    }
+
     protected override int BuildHash()
     {
-        return HashCode.Combine(RequestOpen(), _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
+        return HashCode.Combine(_isOpen, _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
     }
 }
 
@@ -43,7 +50,6 @@
         flex-direction: column;
 
         &.open {
-            pointer-events: all;
             right: 100px;
             opacity: 1;
             sound-in: ui_inventory_open;

@@ -11,7 +11,6 @@
         flex-direction: column;
         width: 505px;
         font-size: 16px;
-        pointer-events: none;
         transition: all 0.1s ease, border 0s ease;
         height: 230px;
 
@@ -44,13 +43,11 @@
         }
 
         &.open {
-            pointer-events: all;
             border-radius: 4 4 0 0;
 
             textentry {
                 opacity: 0.9;
                 width: 100%;
-                cursor: text;
             }
 
             .canvas {

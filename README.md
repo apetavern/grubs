@@ -1,4 +1,4 @@
-<h1><img src="images/grubs_logo.png" alt="Grubs logo" height="125"/></h1>
+<h1><img src="textures/ui/grubs_logo.png" alt="Grubs logo" height="125"/></h1>
 
 Grubs is a worms-inspired artillery game for s&box.
 Our goal is to create a polished, well-written game
