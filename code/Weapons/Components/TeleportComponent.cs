@@ -39,9 +39,6 @@ public partial class TeleportComponent : WeaponComponent
 
 		TeleportPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && !Weapon.HasFired;
 
-		if ( !TeleportPreview.EnableDrawing )
-			return;
-
 		TeleportPreview.Position = Grub.Player.MousePosition;
 
 		TeleportPreview.Rotation = Grub.Rotation;
@@ -49,11 +46,10 @@ public partial class TeleportComponent : WeaponComponent
 		var isValidPlacement = !Trace.Box( Grub.Controller.Hull, Grub.Player.MousePosition, Grub.Player.MousePosition ).Ignore( TeleportPreview ).Run().Hit;
 		TeleportPreview.RenderColor = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.5f );
 
-		if ( !IsFiring )
-			return;
-
-		if ( isValidPlacement )
+		if ( IsFiring && TeleportPreview.EnableDrawing && isValidPlacement )
 			Fire();
+		else
+			IsFiring = false;
 	}
 
 	public override void FireCursor()
