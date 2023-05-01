@@ -16,7 +16,6 @@ button {
 
     &:hover {
         transform: scale(1.02);
-        cursor: pointer;
 
         &:not(.disabled) {
             sound-in: ui_button_hover;
@@ -34,6 +33,5 @@ button {
     &.disabled {
         transform: scale(1);
         opacity: 0.2;
-        cursor: default;
     }
 }
