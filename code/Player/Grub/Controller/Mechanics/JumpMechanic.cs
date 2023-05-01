@@ -24,7 +24,6 @@ public partial class JumpMechanic : ControllerMechanic
 		Controller.GetMechanic<SquirmMechanic>()
 			.ClearGroundEntity();
 
-		if ( Game.IsClient )
-			Grub.SoundFromScreen( "grub_jump" );
+		PlayScreenSound( "grub_jump" );
 	}
 }

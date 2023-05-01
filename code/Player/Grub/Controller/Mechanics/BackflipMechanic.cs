@@ -25,7 +25,6 @@ public partial class BackflipMechanic : ControllerMechanic
 		Controller.GetMechanic<SquirmMechanic>()
 			.ClearGroundEntity();
 
-		if ( Game.IsClient )
-			Grub.SoundFromScreen( "grub_backflip" );
+		PlayScreenSound( "grub_backflip" );
 	}
 }
