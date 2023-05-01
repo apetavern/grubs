@@ -49,7 +49,7 @@ public partial class BuildComponent : WeaponComponent
 		if ( !GirderPreview.IsValid() )
 			return;
 
-		GirderPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && !Weapon.HasFired;
+		GirderPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
 		RotationAngle += Input.MouseWheel * 10f;
 
@@ -59,8 +59,9 @@ public partial class BuildComponent : WeaponComponent
 		if ( RotationAngle > 90 )
 			RotationAngle -= 180;
 
-		Grub.Player.GrubsCamera.Distance = 512f;
-		Grub.Player.GrubsCamera.CanScroll( false );
+		Grub.Player.GrubsCamera.CanScroll( !Weapon.HasChargesRemaining );
+		if ( Weapon.HasChargesRemaining )
+			Grub.Player.GrubsCamera.Distance = 512f;
 
 		GirderPreview.Position = Grub.Player.MousePosition;
 		GirderPreview.Rotation = Rotation.Identity * new Angles( RotationAngle, 0, 0 ).ToRotation();

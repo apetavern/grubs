@@ -37,10 +37,8 @@ public partial class TeleportComponent : WeaponComponent
 		if ( !TeleportPreview.IsValid() )
 			return;
 
-		TeleportPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && !Weapon.HasFired;
-
+		TeleportPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 		TeleportPreview.Position = Grub.Player.MousePosition;
-
 		TeleportPreview.Rotation = Grub.Rotation;
 
 		var isValidPlacement = !Trace.Box( Grub.Controller.Hull, Grub.Player.MousePosition, Grub.Player.MousePosition ).Ignore( TeleportPreview ).Run().Hit;

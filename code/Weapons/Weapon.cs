@@ -78,6 +78,8 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 	public bool Resolved => !IsFiring() && !IsCharging();
 
+	public bool HasChargesRemaining => CurrentUses < Charges;
+
 	public Weapon()
 	{
 		Transmit = TransmitType.Always;
