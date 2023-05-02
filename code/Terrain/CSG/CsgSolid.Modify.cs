@@ -89,7 +89,13 @@
 			var msgCount = read.Read<int>();
 			var totalCount = read.Read<int>();
 
-			CsgHelpers.AssertAreEqual( prevCount, _modifications.Count );
+			// CsgHelpers.AssertAreEqual( prevCount, _modifications.Count );
+			// Ape fix: ClientRPC failed to go through, regen everything.
+			if ( prevCount != _modifications.Count && Game.LocalPawn.IsLocalPawn )
+			{
+				Grubs.GamemodeSystem.Instance.GameWorld.Reset();
+				return;
+			}
 
 			for ( var i = 0; i < msgCount; ++i )
 			{
