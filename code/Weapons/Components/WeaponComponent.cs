@@ -58,8 +58,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 		if ( Input.Released( InputAction.Fire ) || Charge == 100 )
 		{
-			ChargeParticles?.Set( "Alpha", 0f );
-			ChargeParticles?.Set( "Speed", 10000f );
+			ChargeParticles?.Destroy( true );
+			ChargeParticles = null;
 			IsFiring = true;
 		}
 	}
