@@ -58,6 +58,12 @@ public partial class CrateGadgetComponent : GadgetComponent
 
 	public override void Simulate( IClient client )
 	{
+		if ( Game.IsServer )
+		{
+			if ( TimeSinceSpawned > 1f )
+				Gadget.ClearMaterialOverride();
+		}
+
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
 		helper.Trace = helper.Trace
 			.Size( Gadget.CollisionBounds )
@@ -81,15 +87,6 @@ public partial class CrateGadgetComponent : GadgetComponent
 
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
-	}
-
-	[GameEvent.Client.Frame]
-	public void UpdateEffects()
-	{
-		if ( TimeSinceSpawned > 1f )
-			Gadget.ClearMaterialOverride();
-		else
-			Gadget.SceneObject.Attributes.Set( "opacity", TimeSinceSpawned / 2 );
 	}
 
 	[ClientRpc]
