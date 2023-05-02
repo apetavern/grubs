@@ -119,8 +119,6 @@ public partial class FreeForAll : Gamemode
 		GamemodeSystem.Instance.Delete();
 		GamemodeSystem.SetupGamemode();
 		GamemodeSystem.Instance.GameWorld = new World();
-
-		World.RegenWorld();
 	}
 
 	private async Task DealGrubDamage()
