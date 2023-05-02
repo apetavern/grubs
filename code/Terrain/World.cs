@@ -103,7 +103,7 @@ public partial class World : Entity
 	private void SetupWater( float length, float height )
 	{
 		var water = new Water();
-		water.WaterMaterial = "materials/water/water_pond_a.vmat";
+		water.WaterMaterial = "materials/effects/water/simple-water.vmat";
 
 		var min = new Vector3( -length * 4, -WorldWidth * 16, -height );
 		var max = new Vector3( length * 4, WorldWidth * 16, -height + 1 );
