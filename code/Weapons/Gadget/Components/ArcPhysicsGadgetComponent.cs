@@ -60,6 +60,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 			}
 
 			Gadget.Rotation = Rotation.LookAt( currentSegment.EndPos - currentSegment.StartPos );
+			Gadget.Velocity = (currentSegment.EndPos - Gadget.Position) * ProjectileSpeed;
 			Gadget.Position = Vector3.Lerp( currentSegment.StartPos, currentSegment.EndPos, _alpha );
 		}
 		else

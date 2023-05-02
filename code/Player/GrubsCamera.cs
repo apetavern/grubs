@@ -39,9 +39,11 @@ public class GrubsCamera
 		var cameraCenter = _isCenteredOnGrub ? _target.Position : _center;
 		cameraCenter += Vector3.Up * _cameraOffset;
 
+		Log.Info( _target.Velocity.Length / 50 );
+
 		var targetPosition = cameraCenter + Vector3.Right * Distance;
 		var currentPosition = Camera.Position;
-		Camera.Position = currentPosition.LerpTo( targetPosition, Time.Delta * _lerpSpeed );
+		Camera.Position = currentPosition.LerpTo( targetPosition, Time.Delta * Math.Max( _lerpSpeed, _target.Velocity.Length / 50 ) );
 
 		var lookDir = (cameraCenter - targetPosition).Normal;
 		Camera.Rotation = Rotation.LookAt( lookDir, Vector3.Up );
