@@ -40,7 +40,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 					return;
 
 				UI.TextChat.AddInfoChatEntry( $"{grub.Player.Client.Name} picked up some goods." );
-				DisplayPickupPanel( To.Everyone, Gadget.Position, weapon.Icon );
+				DisplayPickupPanel( To.Single( grub.Player ), Gadget.Position, weapon.Icon );
 				grub.Player.Inventory.Add( weapon );
 
 				Gadget.Delete();
