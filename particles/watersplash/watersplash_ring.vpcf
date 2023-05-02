@@ -14,8 +14,7 @@
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_nCP1 = 0
-			m_vecCP1Pos = [ 0.0, 0.0, 4.0 ]
-			m_bDisableOperator = true
+			m_vecCP1Pos = [ 0.0, 0.0, 10.0 ]
 		},
 	]
 	m_Emitters = 
@@ -427,7 +426,6 @@
 				},
 			]
 			m_bIgnoreNormal = true
-			m_bCannotBeRefracted = false
 			m_flRadiusScale = 
 			{
 				m_nType = "PF_TYPE_LITERAL"
