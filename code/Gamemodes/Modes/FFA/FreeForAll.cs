@@ -285,13 +285,10 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is State.MainMenu )
 		{
-			if ( !WorldReady )
-			{
-				if ( GameWorld is null || GameWorld.CsgWorld is null )
-					return;
+			if ( GameWorld is null || GameWorld.CsgWorld is null )
+				return;
 
-				WorldReady = GameWorld.CsgWorld.TimeSinceLastModification > 1.5f;
-			}
+			WorldReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
 		}
 		//
 		// Playing Logic
