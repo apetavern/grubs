@@ -6,8 +6,8 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	[Prefab, Net]
 	public Prefab GadgetPrefab { get; set; }
 
-	[Prefab, Net, ResourceType( "vpcf" )]
-	public string MuzzleParticle { get; set; }
+	[Prefab, Net]
+	public ParticleSystem MuzzleParticle { get; set; }
 
 	[Prefab, ResourceType( "sound" )]
 	public string UseSound { get; set; }
@@ -34,12 +34,12 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	{
 		Grub.SetAnimParameter( "fire", true );
 
-		if ( !string.IsNullOrEmpty( MuzzleParticle ) )
+		if ( MuzzleParticle is not null )
 		{
 			var muzzle = Weapon.GetAttachment( "muzzle" );
 			if ( muzzle is not null )
 			{
-				var muzzleFlash = Particles.Create( MuzzleParticle, muzzle.Value.Position );
+				var muzzleFlash = Particles.Create( MuzzleParticle.ResourcePath, muzzle.Value.Position );
 				muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );
 			}
 		}

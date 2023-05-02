@@ -47,8 +47,8 @@ public partial class HitScanComponent : WeaponComponent
 	[Prefab, Net]
 	public float Damage { get; set; } = 25;
 
-	[Prefab, Net, ResourceType( "vpcf" )]
-	public string MuzzleParticle { get; set; }
+	[Prefab, Net]
+	public ParticleSystem MuzzleParticle { get; set; }
 
 	[Prefab, Net]
 	public ParticleSystem TraceParticle { get; set; }
@@ -85,9 +85,9 @@ public partial class HitScanComponent : WeaponComponent
 		startPos = startPos.WithY( 0f );
 		endPos = endPos.WithY( 1f );
 
-		if ( !string.IsNullOrEmpty( MuzzleParticle ) )
+		if ( MuzzleParticle is not null && muzzle is not null )
 		{
-			var muzzleFlash = Particles.Create( MuzzleParticle, muzzle.Value.Position );
+			var muzzleFlash = Particles.Create( MuzzleParticle.ResourcePath, muzzle.Value.Position );
 			muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );
 		}
 
