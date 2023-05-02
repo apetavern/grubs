@@ -93,6 +93,8 @@
 			// Ape fix: ClientRPC failed to go through, regen everything.
 			if ( prevCount != _modifications.Count && Game.LocalPawn.IsLocalPawn )
 			{
+				Grubs.GamemodeSystem.Instance.GameWorld.Delete();
+				Grubs.GamemodeSystem.Instance.GameWorld = new Grubs.World();
 				Grubs.GamemodeSystem.Instance.GameWorld.Reset();
 				return;
 			}
