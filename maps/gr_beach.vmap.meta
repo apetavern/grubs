@@ -14,7 +14,7 @@
       "HasCode": false,
       "CodePath": null,
       "PackageReferences": [],
-      "EditorReferences": null,
+      "EditorReferences": [],
       "Metadata": {
         "SingleAssetSource": "maps/gr_beach.vmap",
         "GameSupport": [
