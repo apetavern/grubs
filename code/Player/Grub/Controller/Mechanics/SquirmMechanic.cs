@@ -6,7 +6,7 @@ public class SquirmMechanic : ControllerMechanic
 
 	public static float Acceleration => 10.0f;
 	public static float GroundFriction => 4.0f;
-	public static float GroundAngle => 46.0f;
+	public static float GroundAngle => 47.0f;
 	public static float StepSize => 8.0f;
 	public static float MaxNonJumpVelocity => 140.0f;
 	public static float StopSpeed => 100.0f;
