@@ -44,8 +44,7 @@ public partial class Gamemode : Entity
 	/// <summary>
 	/// The CSG game world.
 	/// </summary>
-	[Net]
-	public World GameWorld { get; set; }
+	public World GameWorld => GrubsGame.Instance.GameWorld;
 
 	/// <summary>
 	/// Whether or not the world is finished generating.
@@ -118,6 +117,8 @@ public partial class Gamemode : Entity
 	internal virtual void Initialize() { }
 
 	internal virtual void Start() { }
+
+	internal virtual void Restart() { }
 
 	internal virtual void OnClientJoined( IClient client )
 	{

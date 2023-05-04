@@ -83,7 +83,8 @@ public partial class FreeForAll : Gamemode
 
 		if ( await HasGameWinner() )
 		{
-			RestartGame();
+			Event.Run( "gr_game_over" );
+			// RestartGame();
 			return;
 		}
 
@@ -112,13 +113,10 @@ public partial class FreeForAll : Gamemode
 		return CheckWinConditions();
 	}
 
-	private void RestartGame()
+	internal override void Restart()
 	{
 		Game.ResetMap( Array.Empty<Entity>() );
-
-		GamemodeSystem.Instance.Delete();
-		GamemodeSystem.SetupGamemode();
-		GamemodeSystem.Instance.GameWorld = new World();
+		GamemodeSystem.Instance.GameWorld.Reset();
 	}
 
 	private async Task DealGrubDamage()
@@ -280,6 +278,7 @@ public partial class FreeForAll : Gamemode
 	[GameEvent.Tick.Server]
 	private void Tick()
 	{
+		Log.Info( GameWorld );
 		//
 		// MainMenu Logic
 		//

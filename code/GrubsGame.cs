@@ -18,6 +18,9 @@ public sealed partial class GrubsGame : GameManager
 	/// </summary>
 	public static GrubsGame Instance => Current as GrubsGame;
 
+	[Net]
+	public World GameWorld { get; set; }
+
 	public GrubsGame()
 	{
 		if ( Game.IsClient )
@@ -34,8 +37,7 @@ public sealed partial class GrubsGame : GameManager
 	{
 		base.ClientJoined( client );
 
-		if ( GamemodeSystem.Instance.GameWorld is null )
-			GamemodeSystem.Instance.GameWorld = new World();
+		GameWorld ??= new World();
 
 		Sound.FromScreen( To.Single( client ), "beach_ambience" );
 
@@ -64,6 +66,12 @@ public sealed partial class GrubsGame : GameManager
 	public override void OnVoicePlayed( IClient client )
 	{
 		UI.PlayerList.Current?.OnVoicePlayed( client );
+	}
+
+	[Event( "gr_game_over" )]
+	public void OnGameOver()
+	{
+		GamemodeSystem.Instance.Restart();
 	}
 
 	[GameEvent.Entity.PostSpawn]

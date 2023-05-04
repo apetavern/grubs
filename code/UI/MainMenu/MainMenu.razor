@@ -52,6 +52,8 @@
 
     protected override int BuildHash()
     {
+        if (GamemodeSystem.Instance is null)
+            return HashCode.Combine(Time.Now);
         return HashCode.Combine(CurrentTab, GamemodeSystem.Instance.CurrentState.GetHashCode());
     }
 }
