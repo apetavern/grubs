@@ -116,7 +116,10 @@ public partial class Gamemode : Entity
 
 	internal virtual void Initialize() { }
 
-	internal virtual void Start() { }
+	internal virtual void Start()
+	{
+		Event.Run( GrubsEvent.Game.Start );
+	}
 
 	internal virtual void OnClientJoined( IClient client )
 	{

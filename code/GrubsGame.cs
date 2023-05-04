@@ -68,7 +68,7 @@ public sealed partial class GrubsGame : GameManager
 		UI.PlayerList.Current?.OnVoicePlayed( client );
 	}
 
-	[Event( "gr_game_over" )]
+	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
 		GamemodeSystem.Instance.Delete();
@@ -80,6 +80,5 @@ public sealed partial class GrubsGame : GameManager
 	public void PostEntitySpawn()
 	{
 		GamemodeSystem.SetupGamemode();
-
 	}
 }

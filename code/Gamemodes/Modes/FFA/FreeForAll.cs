@@ -83,8 +83,7 @@ public partial class FreeForAll : Gamemode
 
 		if ( await HasGameWinner() )
 		{
-			Event.Run( "gr_game_over" );
-			// RestartGame();
+			Event.Run( GrubsEvent.Game.End );
 			return;
 		}
 
