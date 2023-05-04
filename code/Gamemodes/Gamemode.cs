@@ -118,8 +118,6 @@ public partial class Gamemode : Entity
 
 	internal virtual void Start() { }
 
-	internal virtual void Restart() { }
-
 	internal virtual void OnClientJoined( IClient client )
 	{
 		var player = new Player( client );

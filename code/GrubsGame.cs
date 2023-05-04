@@ -71,12 +71,15 @@ public sealed partial class GrubsGame : GameManager
 	[Event( "gr_game_over" )]
 	public void OnGameOver()
 	{
-		GamemodeSystem.Instance.Restart();
+		GamemodeSystem.Instance.Delete();
+		GamemodeSystem.SetupGamemode();
+		GameWorld.Reset();
 	}
 
 	[GameEvent.Entity.PostSpawn]
 	public void PostEntitySpawn()
 	{
 		GamemodeSystem.SetupGamemode();
+
 	}
 }

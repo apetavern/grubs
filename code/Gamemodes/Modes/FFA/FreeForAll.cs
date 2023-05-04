@@ -113,12 +113,6 @@ public partial class FreeForAll : Gamemode
 		return CheckWinConditions();
 	}
 
-	internal override void Restart()
-	{
-		Game.ResetMap( Array.Empty<Entity>() );
-		GamemodeSystem.Instance.GameWorld.Reset();
-	}
-
 	private async Task DealGrubDamage()
 	{
 		foreach ( var player in Players )
@@ -278,7 +272,6 @@ public partial class FreeForAll : Gamemode
 	[GameEvent.Tick.Server]
 	private void Tick()
 	{
-		Log.Info( GameWorld );
 		//
 		// MainMenu Logic
 		//
