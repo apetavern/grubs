@@ -28,7 +28,6 @@ public partial class World
 			var pointsX = map.texture.Width;
 			var pointsZ = map.texture.Height;
 
-			SetupWater( _WorldLength, _WorldHeight );
 			SetupKillZone( _WorldHeight );
 
 			if ( map.background == null )

@@ -7,7 +7,6 @@ public partial class World
 		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
 		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 64, -WorldHeight / 2 ) );
 		GenerateAlt();
-		SetupWater( WorldLength, WorldHeight );
 		SetupKillZone( WorldHeight );
 	}
 
