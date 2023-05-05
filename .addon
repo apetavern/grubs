@@ -437,7 +437,7 @@
     "CsProjName": "",
     "Summary": "A worms-inspired artillery game for s\u0026box with randomly generated levels.",
     "Description": "Grubs (in development) by Ape Tavern\n\nLeave your feedback @ discord.gg/apetavern\n\nCredits:\nGooman\nTrundler\nMatt944\nShadowBrain\nxezno\nJammieDodger\nmatek\nWillow\nPukes",
-    "Public": false,
+    "Public": true,
     "ReplaceTags": "",
     "Physics": {
       "SubSteps": 1,
