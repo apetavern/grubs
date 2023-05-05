@@ -4,8 +4,15 @@ public partial class World
 {
 	private void SetupGenerateWorld()
 	{
-		CsgWorld.Add( CubeBrush, SandMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 0, -WorldHeight / 2 ) );
-		CsgBackground.Add( CubeBrush, RockMaterial, scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), position: new Vector3( 0, 64, -WorldHeight / 2 ) );
+		CsgWorld.Add( 
+			CubeBrush, 
+			SandMaterial, 
+			scale: new Vector3( WorldLength, WorldWidth, WorldHeight ), 
+			position: new Vector3( 0, 0, WorldHeight / 2 ) );
+		CsgBackground.Add( 
+			CubeBrush, RockMaterial, 
+			scale: new Vector3( WorldLength, WorldWidth, WorldHeight ),
+			position: new Vector3( 0, 64, WorldHeight / 2 ) );
 		GenerateAlt();
 		SetupKillZone( WorldHeight );
 	}
@@ -72,8 +79,8 @@ public partial class World
 					var min = new Vector3( x * _resolution - paddedRes, -WorldWidth / 2 + 64, z * _resolution - paddedRes );
 					var max = new Vector3( x * _resolution + paddedRes, WorldWidth / 2 + 64, z * _resolution + paddedRes );
 
-					min -= new Vector3( WorldLength / 2, 0, WorldHeight );
-					max -= new Vector3( WorldLength / 2, 0, WorldHeight );
+					min -= new Vector3( WorldLength / 2, 0, 0 );
+					max -= new Vector3( WorldLength / 2, 0, 0 );
 					SubtractBackground( min, max );
 				}
 			}
@@ -83,8 +90,8 @@ public partial class World
 		var bb = new Vector3( 0, -WorldWidth / 2 + 64, pointsZ * _resolution );
 		var aa = new Vector3( pointsX * _resolution, WorldWidth / 2 + 64, maxZ * _resolution );
 
-		aa -= new Vector3( WorldLength / 2, 0, WorldHeight );
-		bb -= new Vector3( WorldLength / 2, 0, WorldHeight );
+		aa -= new Vector3( WorldLength / 2, 0, 0 );
+		bb -= new Vector3( WorldLength / 2, 0, 0 );
 		SubtractBackground( CubeBrush, aa, bb );
 
 		aa = aa.WithY( aa.y - 64 );
@@ -115,8 +122,8 @@ public partial class World
 					var min = new Vector3( x * _resolution - paddedRes, -WorldWidth / 2, z * _resolution - paddedRes );
 					var max = new Vector3( x * _resolution + paddedRes, WorldWidth / 2, z * _resolution + paddedRes );
 
-					min -= new Vector3( WorldLength / 2, 0, WorldHeight );
-					max -= new Vector3( WorldLength / 2, 0, WorldHeight );
+					min -= new Vector3( WorldLength / 2, 0, 0 );
+					max -= new Vector3( WorldLength / 2, 0, 0 );
 					SubtractDefault( min, max );
 
 					var avg = (min + max) / 2;
