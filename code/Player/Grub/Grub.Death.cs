@@ -55,7 +55,7 @@ public partial class Grub
 		}
 	}
 
-	public void ApplyDamage()
+	public float ApplyDamage()
 	{
 		ShouldTakeDamage = true;
 
@@ -75,6 +75,8 @@ public partial class Grub
 		TotalDamageTaken = totalDamage;
 		ShouldTakeDamage = false;
 		HasBeenDamaged = false;
+
+		return totalDamage;
 	}
 
 	public override void OnKilled()
