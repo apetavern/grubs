@@ -14,7 +14,7 @@ public partial class World
 			scale: new Vector3( WorldLength, WorldWidth, WorldHeight ),
 			position: new Vector3( 0, 64, WorldHeight / 2 ) );
 		GenerateAlt();
-		SetupKillZone( WorldHeight );
+		SetupKillZone();
 	}
 
 	/*

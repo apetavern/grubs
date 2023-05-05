@@ -28,7 +28,7 @@ public partial class World
 			var pointsX = map.texture.Width;
 			var pointsZ = map.texture.Height;
 
-			SetupKillZone( _WorldHeight );
+			SetupKillZone();
 
 			if ( map.background == null )
 			{

@@ -39,6 +39,9 @@ public partial class World : Entity
 	public readonly float WorldHeight = GrubsConfig.TerrainHeight;
 	public const float WorldWidth = 64f;
 
+	public Vector3 WorldMins => new Vector3( -WorldLength / 2, float.NegativeInfinity, 0 );
+	public Vector3 WorldMaxs => new Vector3( WorldLength / 2, 0, WorldHeight );
+
 	private readonly float _zoom = GrubsConfig.TerrainNoiseZoom;
 	private readonly int _resolution = 16;
 	private float[,] _terrainGrid;
@@ -82,13 +85,13 @@ public partial class World : Entity
 		}
 	}
 
-	private void SetupKillZone( float height )
+	private void SetupKillZone()
 	{
 		// Need a custom value here since DebugOverlay.Box breaks with float.MaxValue.
 		var maxValue = 2147483;
 
-		var min = new Vector3( -maxValue, -WorldWidth / 2, -height - 100 );
-		var max = new Vector3( maxValue, WorldWidth / 2, -height );
+		var min = new Vector3( -maxValue, -WorldWidth / 2, -100 );
+		var max = new Vector3( maxValue, WorldWidth / 2, 0 );
 
 		KillZone = new DamageZone()
 			.WithDamageTags( "outofarea" )

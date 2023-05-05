@@ -17,6 +17,8 @@ public class GrubsCamera
 	private Entity _target;
 	private RealTimeUntil _timeUntilCameraUnlock;
 
+	private World World => GamemodeSystem.Instance.GameWorld;
+
 	public void CanScroll( bool toggle )
 	{
 		_canScroll = toggle;
@@ -42,6 +44,7 @@ public class GrubsCamera
 		var targetPosition = cameraCenter + Vector3.Right * Distance;
 		var currentPosition = Camera.Position;
 		Camera.Position = currentPosition.LerpTo( targetPosition, Time.Delta * Math.Max( _lerpSpeed, _target.Velocity.Length / 50 ) );
+		Camera.Position = Camera.Position.Clamp( World.WorldMins.WithZ( 16f ), World.WorldMaxs );
 
 		var lookDir = (cameraCenter - targetPosition).Normal;
 		Camera.Rotation = Rotation.LookAt( lookDir, Vector3.Up );
