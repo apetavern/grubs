@@ -32,7 +32,7 @@ public partial class World
 
 			if ( map.background == null )
 			{
-				CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, -_WorldHeight / 2 ) );
+				CsgBackground.Add( CoolBrush, RockMaterial, scale: new Vector3( _WorldLength, WorldWidth, _WorldHeight ), position: new Vector3( 0, 72, _WorldHeight / 2 ) );
 			}
 
 			Color32[] pixels = map.texture.GetPixels().Reverse().ToArray();
@@ -57,8 +57,8 @@ public partial class World
 					var max = new Vector3( (x * resolution) + resolution, 16, (y * resolution) + resolution );
 
 					// Offset by position.
-					min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
-					max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+					min -= new Vector3( _WorldLength / 2, 0, 0 );
+					max -= new Vector3( _WorldLength / 2, 0, 0 );
 
 					// add the current point to the list of points
 					points.Add( (min + max) / 2 );
@@ -77,8 +77,8 @@ public partial class World
 						max = new Vector3( (nextX * resolution) + resolution, 16, (y * resolution) + resolution );
 
 						// Offset by position.
-						min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
-						max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+						min -= new Vector3( _WorldLength / 2, 0, 0 );
+						max -= new Vector3( _WorldLength / 2, 0, 0 );
 
 						points.Add( (min + max) / 2 );
 
@@ -92,8 +92,8 @@ public partial class World
 					var max = new Vector3( (x * resolution) + resolution, 16, (y * resolution) + resolution );
 
 					// Offset by position.
-					min -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
-					max -= new Vector3( _WorldLength / 2, 0, _WorldHeight );
+					min -= new Vector3( _WorldLength / 2, 0, 0 );
+					max -= new Vector3( _WorldLength / 2, 0, 0 );
 					PossibleSpawnPoints.Add( (min + max) / 2 );
 				}
 			}
@@ -176,8 +176,8 @@ public partial class World
 						var max = new Vector3( (x * resolution) + resolution, 16, (y * resolution) + resolution );
 
 						// Offset by position.
-						min -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
-						max -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
+						min -= new Vector3( _WorldLength / 2, -64, 0 );
+						max -= new Vector3( _WorldLength / 2, -64, 0 );
 
 						// add the current point to the list of points
 						points.Add( (min + max) / 2 );
@@ -196,8 +196,8 @@ public partial class World
 							max = new Vector3( (nextX * resolution) + resolution, 16, (y * resolution) + resolution );
 
 							// Offset by position.
-							min -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
-							max -= new Vector3( _WorldLength / 2, -64, _WorldHeight );
+							min -= new Vector3( _WorldLength / 2, -64, 0 );
+							max -= new Vector3( _WorldLength / 2, -64, 0 );
 
 							points.Add( (min + max) / 2 );
 
