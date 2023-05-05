@@ -14,7 +14,7 @@
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_nCP1 = 0
-			m_vecCP1Pos = [ 0.0, 0.0, 10.0 ]
+			m_vecCP1Pos = [ 0.0, 0.0, 2.0 ]
 		},
 	]
 	m_Emitters = 
