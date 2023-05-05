@@ -37,7 +37,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		if ( MuzzleParticle is not null )
 		{
 			var muzzle = Weapon.GetAttachment( "muzzle" );
-			if ( muzzle is not null )
+			if ( Prediction.FirstTime && muzzle is not null )
 			{
 				var muzzleFlash = Particles.Create( MuzzleParticle.ResourcePath, muzzle.Value.Position );
 				muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );

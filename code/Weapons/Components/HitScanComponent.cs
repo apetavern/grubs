@@ -85,7 +85,7 @@ public partial class HitScanComponent : WeaponComponent
 		startPos = startPos.WithY( 0f );
 		endPos = endPos.WithY( 1f );
 
-		if ( MuzzleParticle is not null && muzzle is not null )
+		if ( Prediction.FirstTime && MuzzleParticle is not null && muzzle is not null )
 		{
 			var muzzleFlash = Particles.Create( MuzzleParticle.ResourcePath, muzzle.Value.Position );
 			muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );
