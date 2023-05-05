@@ -73,6 +73,7 @@ public sealed partial class GrubsGame : GameManager
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
+		Game.ResetMap( new Entity[] { GameWorld } );
 		GamemodeSystem.Instance.Delete();
 		GamemodeSystem.SetupGamemode();
 		GameWorld.Reset();
