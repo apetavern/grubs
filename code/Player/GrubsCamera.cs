@@ -13,6 +13,7 @@ public class GrubsCamera
 	private bool _canScroll = true;
 	private bool _isCenteredOnGrub = true;
 	private Vector3 _center;
+	private Vector3 _panDelta;
 	private TimeSince _timeSinceMousePan;
 	private Entity _target;
 	private RealTimeUntil _timeUntilCameraUnlock;
@@ -50,6 +51,8 @@ public class GrubsCamera
 
 		if ( Input.Down( InputAction.CameraPan ) )
 			MoveCamera();
+
+		ClampCamera();
 
 		if ( Input.Pressed( InputAction.CameraReset ) || !Input.Down( InputAction.CameraPan ) && _timeSinceMousePan > _secondsBeforeCentering )
 			_isCenteredOnGrub = true;
@@ -110,16 +113,27 @@ public class GrubsCamera
 	{
 		_timeSinceMousePan = 0;
 
-		var delta = new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
+		_panDelta = new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
 		if ( _isCenteredOnGrub )
 		{
 			_center = _target.Position;
 
 			// Check if we've moved the camera, don't center on the pawn if we have
-			if ( !delta.LengthSquared.AlmostEqual( 0, 0.1f ) )
+			if ( !_panDelta.LengthSquared.AlmostEqual( 0, 0.1f ) )
 				_isCenteredOnGrub = false;
 		}
 
-		_center += delta;
+		_center += _panDelta;
+	}
+
+	private void ClampCamera()
+	{
+		if ( _panDelta.z > 0f )
+			return;
+
+		const float padding = 4;
+		var killZoneZ = World.KillZone.Position.z + World.KillZone.CollisionBounds.Maxs.z + padding;
+		if ( _center.z <= killZoneZ )
+			_center.z = killZoneZ;
 	}
 }
