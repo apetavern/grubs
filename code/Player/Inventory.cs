@@ -2,14 +2,11 @@
 
 public partial class Inventory : EntityComponent<Player>
 {
-	[Net]
-	public IList<Weapon> Weapons { get; private set; }
+	[Net] public IList<Weapon> Weapons { get; private set; }
 
-	[Net, Predicted]
-	public Weapon ActiveWeapon { get; private set; }
+	[Net, Predicted] public Weapon ActiveWeapon { get; private set; }
 
-	[Net, Predicted]
-	public Weapon LastActiveWeapon { get; private set; }
+	[Net, Predicted] public Weapon LastActiveWeapon { get; private set; }
 
 	private Weapon _lastSwappedWeapon { get; set; }
 
