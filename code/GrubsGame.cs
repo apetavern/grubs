@@ -29,6 +29,7 @@ public sealed partial class GrubsGame : GameManager
 		}
 		else
 		{
+			PrecacheFiles();
 			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
 		}
 	}
@@ -68,6 +69,27 @@ public sealed partial class GrubsGame : GameManager
 	public override void OnVoicePlayed( IClient client )
 	{
 		UI.PlayerList.Current?.OnVoicePlayed( client );
+	}
+
+	private void PrecacheFiles()
+	{
+		foreach ( var clothing in ResourceLibrary.GetAll<Clothing>() )
+		{
+			// These are the only types of clothing that can be applied to Grubs.
+			if ( clothing.Category != Clothing.ClothingCategory.Hair &&
+				clothing.Category != Clothing.ClothingCategory.Hat &&
+				clothing.Category != Clothing.ClothingCategory.Facial &&
+				clothing.Category != Clothing.ClothingCategory.Skin )
+				continue;
+
+			// Cache all their stuff.
+			if ( !string.IsNullOrEmpty( clothing.Model ) )
+				Precache.Add( clothing.Model );
+			if ( !string.IsNullOrEmpty( clothing.SkinMaterial ) )
+				Precache.Add( clothing.SkinMaterial );
+			if ( !string.IsNullOrEmpty( clothing.EyesMaterial ) )
+				Precache.Add( clothing.EyesMaterial );
+		}
 	}
 
 	[GrubsEvent.Game.End]
