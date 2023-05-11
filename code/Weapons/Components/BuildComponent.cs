@@ -78,7 +78,7 @@ public partial class BuildComponent : WeaponComponent
 	{
 		Weapon.PlayScreenSound( To.Everyone, BuildSound );
 
-		GamemodeSystem.Instance.GameWorld.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
+		// GamemodeSystem.Instance.Terrain.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
 		FireFinished();
 	}
 }

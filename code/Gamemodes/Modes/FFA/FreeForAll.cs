@@ -77,7 +77,7 @@ public partial class FreeForAll : Gamemode
 	{
 		ActivePlayer.EndTurn();
 
-		await World.UntilResolve();
+		await Terrain.UntilResolve();
 
 		TurnIsChanging = true;
 
@@ -137,7 +137,7 @@ public partial class FreeForAll : Gamemode
 				continue;
 
 			await ShowDamagedGrub( damagedGrub );
-			await World.UntilResolve();
+			await Terrain.UntilResolve();
 		}
 	}
 
@@ -163,7 +163,7 @@ public partial class FreeForAll : Gamemode
 		await CheckCrateSpawn( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
 		await CheckCrateSpawn( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
-		await World.UntilResolve();
+		await Terrain.UntilResolve();
 
 		CameraTarget = null;
 	}
@@ -176,7 +176,7 @@ public partial class FreeForAll : Gamemode
 		var player = Game.Clients.First().Pawn as Player;
 		var crate = CrateGadgetComponent.SpawnCrate( crateType );
 
-		var spawnPos = GameWorld.FindSpawnLocation();
+		var spawnPos = Terrain.FindSpawnLocation();
 		crate.Position = spawnPos;
 		crate.Owner = player;
 		player.Gadgets.Add( crate );
@@ -256,7 +256,7 @@ public partial class FreeForAll : Gamemode
 
 		foreach ( var grub in player.Grubs )
 		{
-			var spawnPos = GameWorld.FindSpawnLocation();
+			var spawnPos = Terrain.FindSpawnLocation();
 			grub.Position = spawnPos;
 		}
 	}
@@ -278,10 +278,10 @@ public partial class FreeForAll : Gamemode
 		//
 		if ( CurrentState is State.MainMenu )
 		{
-			if ( GameWorld is null || GameWorld.CsgWorld is null )
+			if ( Terrain is null || Terrain.SdfWorld is null )
 				return;
 
-			WorldReady = GameWorld.CsgWorld.TimeSinceLastModification > 1f;
+			WorldReady = true;
 		}
 		//
 		// Playing Logic

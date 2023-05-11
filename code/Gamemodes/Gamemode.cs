@@ -44,13 +44,13 @@ public partial class Gamemode : Entity
 	/// <summary>
 	/// The CSG game world.
 	/// </summary>
-	public World GameWorld => GrubsGame.Instance.GameWorld;
+	public Terrain Terrain => GrubsGame.Instance.Terrain;
 
 	/// <summary>
 	/// Whether or not the world is finished generating.
 	/// </summary>
 	[Net]
-	public bool WorldReady { get; set; } = false;
+	public bool WorldReady { get; set; } = true;
 
 	/// <summary>
 	/// Whether or not the turn is changing between players.

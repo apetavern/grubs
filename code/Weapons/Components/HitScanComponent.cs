@@ -1,4 +1,4 @@
-﻿using Sandbox.Csg;
+﻿using Sandbox.Sdf;
 
 namespace Grubs;
 
@@ -101,7 +101,7 @@ public partial class HitScanComponent : WeaponComponent
 			if ( PenetrateWorld )
 			{
 				tr = tr.WithoutTags( "solid" );
-				GamemodeSystem.Instance.GameWorld.SubtractLine( startPos, endPos, ExplosionRadius, rotation );
+				// GamemodeSystem.Instance.Terrain.SubtractLine( startPos, endPos, ExplosionRadius, rotation );
 			}
 
 			TraceResult[] result;
@@ -167,9 +167,9 @@ public partial class HitScanComponent : WeaponComponent
 				HitGrub( grub, -tr.Normal );
 				return false;
 			}
-			else if ( tr.Entity is CsgSolid )
+			else if ( tr.Entity is Sdf2DWorld )
 			{
-				ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionDamage );
+				// ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionDamage );
 				return true;
 			}
 		}

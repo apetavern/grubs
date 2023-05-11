@@ -18,7 +18,7 @@ public class GrubsCamera
 	private Entity _target;
 	private RealTimeUntil _timeUntilCameraUnlock;
 
-	private World World => GamemodeSystem.Instance.GameWorld;
+	private Terrain Terrain => GrubsGame.Instance.Terrain;
 
 	public void CanScroll( bool toggle )
 	{
@@ -52,7 +52,7 @@ public class GrubsCamera
 		if ( Input.Down( InputAction.CameraPan ) )
 			MoveCamera();
 
-		ClampCamera();
+		// ClampCamera();
 
 		if ( Input.Pressed( InputAction.CameraReset ) || !Input.Down( InputAction.CameraPan ) && _timeSinceMousePan > _secondsBeforeCentering )
 			_isCenteredOnGrub = true;
@@ -126,14 +126,14 @@ public class GrubsCamera
 		_center += _panDelta;
 	}
 
-	private void ClampCamera()
+/*	private void ClampCamera()
 	{
 		if ( _panDelta.z > 0f )
 			return;
 
 		const float padding = 4;
-		var killZoneZ = World.KillZone.Position.z + World.KillZone.CollisionBounds.Maxs.z + padding;
+		var killZoneZ = Terrain.KillZone.Position.z + Terrain.KillZone.CollisionBounds.Maxs.z + padding;
 		if ( _center.z <= killZoneZ )
 			_center.z = killZoneZ;
-	}
+	}*/
 }

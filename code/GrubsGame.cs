@@ -18,8 +18,7 @@ public sealed partial class GrubsGame : GameManager
 	/// </summary>
 	public static GrubsGame Instance => Current as GrubsGame;
 
-	[Net]
-	public World GameWorld { get; set; }
+	[Net] public Terrain Terrain { get; set; }
 
 	public GrubsGame()
 	{
@@ -37,10 +36,6 @@ public sealed partial class GrubsGame : GameManager
 	public override void ClientJoined( IClient client )
 	{
 		base.ClientJoined( client );
-
-		// s&box moment
-		if ( Game.IsServer && GameWorld is null )
-			GameWorld = new World();
 
 		Sound.FromScreen( To.Single( client ), "beach_ambience" );
 
@@ -64,6 +59,11 @@ public sealed partial class GrubsGame : GameManager
 	public override void FrameSimulate( IClient cl )
 	{
 		base.FrameSimulate( cl );
+	}
+
+	public override void PostLevelLoaded()
+	{
+		Terrain = new Terrain();
 	}
 
 	public override void OnVoicePlayed( IClient client )
@@ -95,10 +95,11 @@ public sealed partial class GrubsGame : GameManager
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
-		Game.ResetMap( new Entity[] { GameWorld } );
+		Game.ResetMap( new Entity[] { Terrain } );
 		GamemodeSystem.Instance.Delete();
 		GamemodeSystem.SetupGamemode();
-		GameWorld.Reset();
+
+		Terrain.Reset();
 	}
 
 	[GameEvent.Entity.PostSpawn]
