@@ -78,6 +78,10 @@ public partial class Terrain : Entity
 
 	public Vector3 FindSpawnLocation()
 	{
-		return new Vector3( 0f );
+		var tr = Trace.Ray( new Vector3( 0, 0, GrubsConfig.TerrainHeight + 64f ), Vector3.Down * GrubsConfig.TerrainHeight )
+			.WithAnyTags( "solid" )
+			.Radius( 1f )
+			.Run();
+		return tr.Hit ? tr.EndPosition : new Vector3( 0f );
 	}
 }
