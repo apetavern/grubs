@@ -4,6 +4,9 @@ namespace Grubs;
 
 public partial class Terrain
 {
+	private int lengthOffset;
+	private int heightOffset;
+
 	/// <summary>
 	/// Wrapper for a standard circle subtraction.
 	/// </summary>
@@ -20,9 +23,10 @@ public partial class Terrain
 	/// </summary>
 	/// <param name="mins">The minimum bounds for the box.</param>
 	/// <param name="maxs">The maximum bounds for the box.</param>
-	public void SubtractBox( Vector2 mins, Vector2 maxs)
+	/// <param name="cornerRadius">The corner radius of the box.</param>
+	public void SubtractBox( Vector2 mins, Vector2 maxs, float cornerRadius = 0 )
 	{
-		var boxSdf = new BoxSdf( mins, maxs );
+		var boxSdf = new BoxSdf( mins, maxs, cornerRadius );
 		Subtract( SdfWorld, boxSdf, DevMaterial );
 	}
 
@@ -33,6 +37,9 @@ public partial class Terrain
 	/// <param name="height">The height of the world.</param>
 	private void AddWorldBox( int length, int height )
 	{
+		lengthOffset = length / 2;
+		heightOffset = 0;
+
 		var boxSdf = new BoxSdf( new Vector2( -length / 2, 0 ), new Vector2( length / 2, height ) );
 		Add( SdfWorld, boxSdf, DevMaterial );
 	}
@@ -56,6 +63,7 @@ public partial class Terrain
 	/// <param name="material">The material to apply.</param>
 	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DMaterial material )
 	{
+		sdf = sdf.Translate( new Vector2( -lengthOffset, heightOffset ) );
 		world.Subtract( sdf, material );
 	}
 }
