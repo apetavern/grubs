@@ -1,14 +1,12 @@
 ﻿namespace Grubs;
 
-/// <summary>
-/// Handles a zone in the terrain that can trigger on entities.
-/// </summary>
 [Category( "Terrain" )]
 public partial class TerrainZone : ModelEntity
 {
 	public override void Spawn()
 	{
 		Tags.Add( "trigger" );
+		Transmit = TransmitType.Always;
 	}
 
 	/// <summary>

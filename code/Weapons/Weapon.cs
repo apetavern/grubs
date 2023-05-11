@@ -256,11 +256,14 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	/// <returns>A collection of Prefabs with the Weapon type.</returns>
 	public static IEnumerable<Prefab> GetAllWeaponPrefabs()
 	{
-		return ResourceLibrary.GetAll<Prefab>()
-			.Where( x => x is not null
-				&& x.Root is not null
-				&& TypeLibrary.GetType( x.Root.Class ).TargetType == typeof( Weapon )
-			);
+		foreach ( var prefab in ResourceLibrary.GetAll<Prefab>() )
+		{
+			var prefabType = TypeLibrary.GetType( prefab.Root.Class );
+			if ( prefabType is not null && prefabType.TargetType == typeof( Weapon ) )
+			{
+				yield return prefab;
+			}
+		}
 	}
 
 	[ClientRpc]

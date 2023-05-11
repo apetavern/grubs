@@ -20,7 +20,6 @@ public partial class GrubController : EntityComponent<Grub>
 	public Vector3 LastVelocity { get; set; }
 	public Vector3 WishVelocity { get; set; }
 
-	[Net, Predicted]
 	public Entity GroundEntity { get; set; }
 	public Entity LastGroundEntity { get; set; }
 	public Vector3 GroundNormal { get; set; }
@@ -158,6 +157,7 @@ public partial class GrubController : EntityComponent<Grub>
 			.WithAnyTags( "solid", "player" )
 			.Ignore( Grub )
 			.Run();
+		DebugOverlay.TraceResult( tr );
 
 		return tr;
 	}
