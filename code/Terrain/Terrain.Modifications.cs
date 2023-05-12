@@ -37,6 +37,21 @@ public partial class Terrain
 	}
 
 	/// <summary>
+	/// Wrapper for a standard line subtraction.
+	/// </summary>
+	/// <param name="start">The start point of the line.</param>
+	/// <param name="end">The end point of the line.</param>
+	/// <param name="radius">The radius of the line.</param>
+	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
+	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
+	public void SubtractLine( Vector2 start, Vector2 end, float radius, Dictionary<Sdf2DMaterial, float> materials, bool worldOffset = false )
+	{
+		var lineSdf = new LineSdf( start, end, radius );
+		foreach ( var (material, offset) in materials )
+			Subtract( SdfWorld, lineSdf.Expand( offset ), material, offset: worldOffset );
+	}
+
+	/// <summary>
 	/// Creates the standard world box for generated terrain.
 	/// </summary>
 	/// <param name="length">The length of the world.</param>
