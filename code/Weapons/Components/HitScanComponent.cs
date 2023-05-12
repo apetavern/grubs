@@ -101,7 +101,9 @@ public partial class HitScanComponent : WeaponComponent
 			if ( PenetrateWorld )
 			{
 				tr = tr.WithoutTags( "solid" );
-				// GamemodeSystem.Instance.Terrain.SubtractLine( startPos, endPos, ExplosionRadius, rotation );
+				var terrain = GamemodeSystem.Instance.Terrain;
+				var materials = terrain.GetSandMaterials( includeBackground: true, bgOffset: -8f );
+				terrain.SubtractLine( new Vector2(startPos.x, startPos.z), new Vector2( endPos.x, endPos.z ), ExplosionRadius, materials );
 			}
 
 			TraceResult[] result;
