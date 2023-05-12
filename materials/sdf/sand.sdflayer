@@ -1,0 +1,10 @@
+{
+  "CollisionTags": "solid",
+  "Depth": 64,
+  "Offset": 0,
+  "TexCoordSize": 256,
+  "FrontFaceMaterial": "materials/environment/sand_shells.vmat",
+  "BackFaceMaterial": "materials/environment/sand_shells.vmat",
+  "CutFaceMaterial": "materials/environment/sand_a.vmat",
+  "Quality": "Medium"
+}

@@ -15,7 +15,7 @@ public partial class Terrain
 	public void SubtractCircle( Vector2 center, float radius )
 	{
 		var circleSdf = new CircleSdf( center, radius );
-		Subtract( SdfWorld, circleSdf, DevMaterial );
+		Subtract( SdfWorld, circleSdf, SandMaterial );
 	}
 
 	/// <summary>
@@ -27,7 +27,7 @@ public partial class Terrain
 	public void SubtractBox( Vector2 mins, Vector2 maxs, float cornerRadius = 0 )
 	{
 		var boxSdf = new BoxSdf( mins, maxs, cornerRadius );
-		Subtract( SdfWorld, boxSdf, DevMaterial );
+		Subtract( SdfWorld, boxSdf, SandMaterial );
 	}
 
 	/// <summary>
@@ -41,7 +41,7 @@ public partial class Terrain
 		heightOffset = 0;
 
 		var boxSdf = new BoxSdf( new Vector2( -length / 2, 0 ), new Vector2( length / 2, height ) );
-		Add( SdfWorld, boxSdf, DevMaterial );
+		Add( SdfWorld, boxSdf, SandMaterial );
 	}
 
 	/// <summary>

@@ -23,6 +23,8 @@ public partial class Terrain
 
 	private float resolution = 8f;
 
+	private float zoom = 2f;
+
 	void GenerateWorld()
 	{
 		var wLength = GrubsConfig.TerrainLength;
@@ -70,7 +72,7 @@ public partial class Terrain
 		{
 			for ( var y = 0; y < maxY; y++ )
 			{
-				DensityMap[x, y] = Noise.Simplex( x + r, y + r );
+				DensityMap[x, y] = Noise.Simplex( (x + r) / zoom, (y + r) / zoom );
 
 				if ( DensityMap[x, y] > noiseMin && DensityMap[x, y] < noiseMax )
 				{
