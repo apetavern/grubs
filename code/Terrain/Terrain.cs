@@ -16,6 +16,7 @@ public partial class Terrain : Entity
 	[Net] public DamageZone KillZone { get; set; }
 
 	public Sdf2DMaterial DevMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf2d_default.sdflayer" );
+	public Sdf2DMaterial SandMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/sand.sdflayer" );
 
 	public override void Spawn()
 	{
@@ -35,7 +36,7 @@ public partial class Terrain : Entity
 	{
 		SetupKillZone();
 
-		SdfWorld = new Sdf2DWorld( Sdf2DWorldQuality.Medium )
+		SdfWorld = new Sdf2DWorld()
 		{
 			LocalRotation = Rotation.FromRoll( 90f ),
 		};

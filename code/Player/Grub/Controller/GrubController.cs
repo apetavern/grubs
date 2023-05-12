@@ -88,6 +88,7 @@ public partial class GrubController : EntityComponent<Grub>
 			DebugOverlay.ScreenText( $"    BaseVelocity: {BaseVelocity}", ++lineOffset );
 			DebugOverlay.ScreenText( $"    GroundEntity: {GroundEntity} [{GroundEntity?.Velocity}]", ++lineOffset );
 			DebugOverlay.ScreenText( $"           Speed: {Velocity.Length}", ++lineOffset );
+			DebugOverlay.ScreenText( $"     GroundAngle: {CurrentGroundAngle}", ++lineOffset );
 
 			++lineOffset;
 			DebugOverlay.ScreenText( $"Mechanics", ++lineOffset );
@@ -157,7 +158,6 @@ public partial class GrubController : EntityComponent<Grub>
 			.WithAnyTags( "solid", "player" )
 			.Ignore( Grub )
 			.Run();
-		DebugOverlay.TraceResult( tr );
 
 		return tr;
 	}
