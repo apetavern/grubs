@@ -20,10 +20,9 @@ public partial class Terrain
 
 	private float noiseMin = 0.45f;
 	private float noiseMax = 0.55f;
+	private float noiseZoom = 2f;
 
 	private float resolution = 8f;
-
-	private float zoom = 2f;
 
 	void GenerateWorld()
 	{
@@ -63,6 +62,7 @@ public partial class Terrain
 			}
 		}
 
+		// Subtract from the background.
 		var bgSandMaterials = GetSandMaterials( includeForeground: false, includeBackground: true );
 		for ( var x = 0; x < pointsX; x++ )
 		{
@@ -71,23 +71,22 @@ public partial class Terrain
 				if ( !TerrainMap[x, y] )
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
-					SubtractCircle( midpoint, 8f, bgSandMaterials );
+					SubtractCircle( midpoint, 8f, bgSandMaterials, worldOffset: true );
 				}
 			}
 		}
 
-				var bb = new Vector2( 0, maxY * resolution );
+		var bb = new Vector2( 0, maxY * resolution );
 		var aa = new Vector2( wLength, pointsY * resolution );
-		SubtractBox( bb, aa, GetSandMaterials( includeBackground: true ) );
+		SubtractBox( bb, aa, GetSandMaterials( includeBackground: true ), worldOffset: true );
 
 		// Populate Density Map for unique terrain features.
-
 		var fgSandMaterials = GetSandMaterials();
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY; y++ )
 			{
-				DensityMap[x, y] = Noise.Simplex( (x + r) / zoom, (y + r) / zoom );
+				DensityMap[x, y] = Noise.Simplex( (x + r) / noiseZoom, (y + r) / noiseZoom );
 
 				if ( DensityMap[x, y] > noiseMin && DensityMap[x, y] < noiseMax )
 				{
@@ -99,7 +98,7 @@ public partial class Terrain
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
 					// TODO: figure out best way to subtract
-					SubtractCircle( midpoint, 8f, fgSandMaterials );
+					SubtractCircle( midpoint, 8f, fgSandMaterials, worldOffset: true );
 					// SubtractBox( midpoint - 8f, midpoint + 8f, 4f );
 				}
 			}

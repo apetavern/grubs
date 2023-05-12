@@ -20,9 +20,6 @@
 @code {
     private string GetButtonText()
     {
-        if (!GamemodeSystem.Instance.WorldReady)
-            return "GENERATING WORLD...";
-
         if (Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers)
             return $"PLAYERS {Game.Clients.Count}/{GamemodeSystem.Instance.MinimumPlayers}";
 
