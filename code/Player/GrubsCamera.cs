@@ -128,7 +128,7 @@ public class GrubsCamera
 
 	private void ClampCamera()
 	{
-		if ( _panDelta.z > 0f )
+		if ( _panDelta.z > 0f || Terrain.KillZone is null )
 			return;
 
 		const float padding = 4;
