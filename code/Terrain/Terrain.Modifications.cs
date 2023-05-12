@@ -12,8 +12,8 @@ public partial class Terrain
 	/// </summary>
 	/// <param name="center">The Vector2 center of the subtraction.</param>
 	/// <param name="radius">The radius of the subtraction.</param>
-	/// <param name="includeBg">Whether or not to subtract from the background.</param>
-	public void SubtractCircle( Vector2 center, float radius, Dictionary<Sdf2DMaterial, float> materials, bool includeBg = false )
+	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
+	public void SubtractCircle( Vector2 center, float radius, Dictionary<Sdf2DMaterial, float> materials )
 	{
 		var circleSdf = new CircleSdf( center, radius );
 		foreach ( var (material, offset) in materials )
@@ -25,6 +25,7 @@ public partial class Terrain
 	/// </summary>
 	/// <param name="mins">The minimum bounds for the box.</param>
 	/// <param name="maxs">The maximum bounds for the box.</param>
+	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="cornerRadius">The corner radius of the box.</param>
 	public void SubtractBox( Vector2 mins, Vector2 maxs, Dictionary<Sdf2DMaterial, float> materials, float cornerRadius = 0 )
 	{
