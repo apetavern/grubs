@@ -63,11 +63,26 @@ public partial class Terrain
 			}
 		}
 
-		var bb = new Vector2( 0, maxY * resolution );
+		var bgSandMaterials = GetSandMaterials( includeForeground: false, includeBackground: true );
+		for ( var x = 0; x < pointsX; x++ )
+		{
+			for ( var y = 0; y < maxY + 1; y++ )
+			{
+				if ( !TerrainMap[x, y] )
+				{
+					var midpoint = new Vector2( x * resolution, y * resolution );
+					SubtractCircle( midpoint, 8f, bgSandMaterials );
+				}
+			}
+		}
+
+				var bb = new Vector2( 0, maxY * resolution );
 		var aa = new Vector2( wLength, pointsY * resolution );
-		SubtractBox( bb, aa );
+		SubtractBox( bb, aa, GetSandMaterials( includeBackground: true ) );
 
 		// Populate Density Map for unique terrain features.
+
+		var fgSandMaterials = GetSandMaterials();
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY; y++ )
@@ -84,7 +99,7 @@ public partial class Terrain
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
 					// TODO: figure out best way to subtract
-					SubtractCircle( midpoint, 8f );
+					SubtractCircle( midpoint, 8f, fgSandMaterials );
 					// SubtractBox( midpoint - 8f, midpoint + 8f, 4f );
 				}
 			}

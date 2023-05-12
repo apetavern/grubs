@@ -15,9 +15,6 @@ public partial class Terrain : Entity
 	/// </summary>
 	[Net] public DamageZone KillZone { get; set; }
 
-	public Sdf2DMaterial DevMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf2d_default.sdflayer" );
-	public Sdf2DMaterial SandMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/sand.sdflayer" );
-
 	public override void Spawn()
 	{
 		InitializeSdfWorld();
