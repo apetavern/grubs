@@ -1,4 +1,6 @@
-﻿namespace Grubs;
+﻿using Sandbox.Sdf;
+
+namespace Grubs;
 
 [Prefab]
 public partial class BuildComponent : WeaponComponent
@@ -78,6 +80,15 @@ public partial class BuildComponent : WeaponComponent
 	{
 		Weapon.PlayScreenSound( To.Everyone, BuildSound );
 
+		if ( Game.IsServer )
+		{
+			var mapSdfTexture = Texture.Load( FileSystem.Mounted, "textures/texturestamps/girder_sdf.png" );
+			var texSDF = new TextureSdf( mapSdfTexture, 2, mapSdfTexture.Width * 2f );
+
+			var transformedSDF = texSDF.Transform( new Vector2( Grub.Player.MousePosition.x, Grub.Player.MousePosition.z ), new Rotation2D( RotationAngle ) );
+
+			GamemodeSystem.Instance.Terrain.SdfWorld.Add( transformedSDF, GamemodeSystem.Instance.Terrain.SandMaterial );
+		}
 		// GamemodeSystem.Instance.Terrain.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
 		FireFinished();
 	}
