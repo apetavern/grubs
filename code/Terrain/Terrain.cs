@@ -76,7 +76,7 @@ public partial class Terrain : Entity
 
 	public Vector3 FindSpawnLocation()
 	{
-		var tr = Trace.Ray( new Vector3( 0, 0, GrubsConfig.TerrainHeight + 64f ), Vector3.Down * GrubsConfig.TerrainHeight )
+		var tr = Trace.Ray( new Vector3( GrubsConfig.TerrainLength / 2f, 0, GrubsConfig.TerrainHeight + GrubsConfig.TerrainHeight / 2f ), Vector3.Down * GrubsConfig.TerrainHeight )
 			.WithAnyTags( "solid" )
 			.Radius( 1f )
 			.Run();
