@@ -280,8 +280,6 @@ public partial class FreeForAll : Gamemode
 		{
 			if ( Terrain is null || Terrain.SdfWorld is null )
 				return;
-
-			WorldReady = true;
 		}
 		//
 		// Playing Logic

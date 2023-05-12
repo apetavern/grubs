@@ -13,11 +13,12 @@ public partial class Terrain
 	/// <param name="center">The Vector2 center of the subtraction.</param>
 	/// <param name="radius">The radius of the subtraction.</param>
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
-	public void SubtractCircle( Vector2 center, float radius, Dictionary<Sdf2DMaterial, float> materials )
+	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
+	public void SubtractCircle( Vector2 center, float radius, Dictionary<Sdf2DMaterial, float> materials, bool worldOffset = false )
 	{
 		var circleSdf = new CircleSdf( center, radius );
 		foreach ( var (material, offset) in materials )
-			Subtract( SdfWorld, circleSdf.Expand( offset ), material );
+			Subtract( SdfWorld, circleSdf.Expand( offset ), material, offset: worldOffset );
 	}
 
 	/// <summary>
@@ -27,11 +28,12 @@ public partial class Terrain
 	/// <param name="maxs">The maximum bounds for the box.</param>
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="cornerRadius">The corner radius of the box.</param>
-	public void SubtractBox( Vector2 mins, Vector2 maxs, Dictionary<Sdf2DMaterial, float> materials, float cornerRadius = 0 )
+	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
+	public void SubtractBox( Vector2 mins, Vector2 maxs, Dictionary<Sdf2DMaterial, float> materials, float cornerRadius = 0, bool worldOffset = false )
 	{
 		var boxSdf = new BoxSdf( mins, maxs, cornerRadius );
 		foreach ( var (material, offset) in materials )
-			Subtract( SdfWorld, boxSdf.Expand( offset ), material );
+			Subtract( SdfWorld, boxSdf.Expand( offset ), material, offset: worldOffset );
 	}
 
 	/// <summary>
@@ -66,9 +68,11 @@ public partial class Terrain
 	/// <param name="world">The world to subtract from.</param>
 	/// <param name="sdf">The Sdf to apply.</param>
 	/// <param name="material">The material to apply.</param>
-	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DMaterial material )
+	/// <param name="offset">Whether to apply the offset of the Sdf to world position.</param>
+	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DMaterial material, bool offset = false )
 	{
-		sdf = sdf.Translate( new Vector2( -lengthOffset, heightOffset ) );
+		if ( offset )
+			sdf = sdf.Translate( new Vector2( -lengthOffset, heightOffset ) );
 		world.Subtract( sdf, material );
 	}
 }

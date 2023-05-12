@@ -47,12 +47,6 @@ public partial class Gamemode : Entity
 	public Terrain Terrain => GrubsGame.Instance.Terrain;
 
 	/// <summary>
-	/// Whether or not the world is finished generating.
-	/// </summary>
-	[Net]
-	public bool WorldReady { get; set; } = true;
-
-	/// <summary>
 	/// Whether or not the turn is changing between players.
 	/// </summary>
 	[Net]

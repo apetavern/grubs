@@ -8,7 +8,7 @@ public partial class Terrain
 	public Sdf2DMaterial SandMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/sand.sdflayer" );
 	public Sdf2DMaterial RockMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/rock.sdflayer" );
 
-	private Dictionary<Sdf2DMaterial, float> GetSandMaterials(
+	public Dictionary<Sdf2DMaterial, float> GetSandMaterials(
 		bool includeForeground = true,
 		bool includeBackground = false,
 		float fgOffset = 0,
