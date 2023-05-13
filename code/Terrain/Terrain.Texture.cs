@@ -1,10 +1,11 @@
-﻿using Sandbox.MarchingCubes;
-using Sandbox.Sdf;
+﻿using Sandbox.Sdf;
 
 namespace Grubs;
 
 public partial class Terrain
 {
+	public int WorldTextureHeight = 0;
+
 	void SetupWorldFromTexture()
 	{
 		DoTextureLoad();
@@ -13,6 +14,7 @@ public partial class Terrain
 	async void DoTextureLoad()
 	{
 		var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + ".png" );
+		WorldTextureHeight = mapSdfTexture.Height * 2;
 		var mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f );
 		var transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength / 2, 0 ) );
 

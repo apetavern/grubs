@@ -84,10 +84,14 @@ public partial class Terrain : Entity
 		var existingGrubs = All.OfType<Grub>();
 		var fallbackPosition = new Vector3();
 
+		var maxHeight = GrubsConfig.TerrainHeight;
+		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture )
+			maxHeight = WorldTextureHeight - 64;
+
 		while ( retries < 5000 )
 		{
 			var randX = Game.Random.Int( GrubsConfig.TerrainLength ) - GrubsConfig.TerrainLength / 2;
-			var randZ = Game.Random.Int( GrubsConfig.TerrainHeight );
+			var randZ = Game.Random.Int( maxHeight );
 			var startPos = new Vector3( randX, 0, randZ );
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * GrubsConfig.TerrainHeight )
 				.WithAnyTags( "solid", "player" )
