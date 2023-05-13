@@ -17,6 +17,8 @@ public partial class Terrain : Entity
 
 	public override void Spawn()
 	{
+		Transmit = TransmitType.Always;
+
 		InitializeSdfWorld();
 	}
 

@@ -102,7 +102,8 @@ public partial class HitScanComponent : WeaponComponent
 			{
 				tr = tr.WithoutTags( "solid" );
 				var terrain = GamemodeSystem.Instance.Terrain;
-				var materials = terrain.GetSandMaterials( includeBackground: true, bgOffset: -8f );
+				var materialsConfig = new MaterialsConfig( includeBackground: true, bgOffset: -8f );
+				var materials = terrain.GetActiveMaterials( materialsConfig );
 				terrain.SubtractLine( new Vector2(startPos.x, startPos.z), new Vector2( endPos.x, endPos.z ), ExplosionRadius, materials );
 			}
 

@@ -56,14 +56,16 @@ public partial class Terrain
 	/// </summary>
 	/// <param name="length">The length of the world.</param>
 	/// <param name="height">The height of the world.</param>
-	private void AddWorldBox( int length, int height )
+	/// <param name="fgMaterial">The material for the foreground of the world.</param>
+	/// <param name="bgMaterial">The material for the background of the world.</param>
+	private void AddWorldBox( int length, int height, Sdf2DMaterial fgMaterial, Sdf2DMaterial bgMaterial )
 	{
 		lengthOffset = length / 2;
 		heightOffset = 0;
 
 		var boxSdf = new BoxSdf( new Vector2( -length / 2, 0 ), new Vector2( length / 2, height ) );
-		Add( SdfWorld, boxSdf, SandMaterial );
-		Add( SdfWorld, boxSdf, RockMaterial );
+		Add( SdfWorld, boxSdf, fgMaterial );
+		Add( SdfWorld, boxSdf, bgMaterial );
 	}
 
 	/// <summary>

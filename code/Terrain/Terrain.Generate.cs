@@ -1,12 +1,16 @@
-﻿using Sandbox.Sdf;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 public partial class Terrain
 {
 	void SetupGeneratedWorld()
 	{
-		AddWorldBox( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
+		var cfg = new MaterialsConfig( true, true );
+		var materials = GetActiveMaterials( cfg );
+		AddWorldBox( 
+			GrubsConfig.TerrainLength, 
+			GrubsConfig.TerrainHeight, 
+			materials.ElementAt(0).Key, 
+			materials.ElementAt(1).Key );
 
 		GenerateWorld();
 	}
@@ -63,7 +67,8 @@ public partial class Terrain
 		}
 
 		// Subtract from the background.
-		var bgSandMaterials = GetSandMaterials( includeForeground: false, includeBackground: true );
+		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );
+		var bgMaterials = GetActiveMaterials( materialsConfig );
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY + 1; y++ )
@@ -71,17 +76,17 @@ public partial class Terrain
 				if ( !TerrainMap[x, y] )
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
-					SubtractCircle( midpoint, 8f, bgSandMaterials, worldOffset: true );
+					SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
 				}
 			}
 		}
 
 		var bb = new Vector2( 0, maxY * resolution );
 		var aa = new Vector2( wLength, pointsY * resolution );
-		SubtractBox( bb, aa, GetSandMaterials( includeBackground: true ), worldOffset: true );
+		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
 
 		// Populate Density Map for unique terrain features.
-		var fgSandMaterials = GetSandMaterials();
+		var fgMaterials = GetActiveMaterials( MaterialsConfig.Default );
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY; y++ )
@@ -98,7 +103,7 @@ public partial class Terrain
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
 					// TODO: figure out best way to subtract
-					SubtractCircle( midpoint, 8f, fgSandMaterials, worldOffset: true );
+					SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
 					// SubtractBox( midpoint - 8f, midpoint + 8f, 4f );
 				}
 			}
