@@ -434,6 +434,24 @@
         "DefaultValue": "0",
         "Description": "The prefabricated texture to use for the terrain.",
         "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "0",
+            "Name": "Sand"
+          },
+          {
+            "Value": "1",
+            "Name": "Dirt"
+          }
+        ],
+        "ConVarName": "terrain_environment_type",
+        "DisplayName": "Terrain Environment Type",
+        "DefaultValue": "0",
+        "Description": "The type of environment to be used for the terrain.",
+        "Group": "Terrain"
       }
     ],
     "CsProjName": "",

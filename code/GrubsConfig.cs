@@ -100,6 +100,18 @@ public static class GrubsConfig
 	[ConVar.Replicated( "terrain_noise_zoom" )]
 	public static float TerrainNoiseZoom { get; set; } = 2f;
 
+	public enum TerrainEnvironmentType
+	{
+		Sand = 0,
+		Dirt = 1,
+	}
+
+	/// <summary>
+	/// The environment type for the terrain (affects the materials used).
+	/// </summary>
+	[ConVar.Replicated( "terrain_environment_type" )]
+	public static TerrainEnvironmentType WorldTerrainEnvironmentType { get; set; } = TerrainEnvironmentType.Sand;
+
 	public enum TerrainType
 	{
 		Generated = 0,
