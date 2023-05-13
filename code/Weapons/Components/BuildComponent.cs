@@ -89,7 +89,7 @@ public partial class BuildComponent : WeaponComponent
 			terrain.AddTexture( 
 				girderTexture, 
 				2, 
-				girderTexture.Width, 
+				girderTexture.Width * 2f, 
 				new Vector2( Grub.Player.MousePosition.x, Grub.Player.MousePosition.z ), 
 				new Rotation2D( RotationAngle ),
 				materials );
