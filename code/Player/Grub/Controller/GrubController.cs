@@ -243,7 +243,8 @@ public partial class GrubController : EntityComponent<Grub>
 
 		// Scale the velocity
 		float newspeed = speed - drop;
-		if ( newspeed < 0 ) newspeed = 0;
+		if ( newspeed < 0 )
+			newspeed = 0;
 
 		if ( newspeed != speed )
 		{
@@ -261,11 +262,23 @@ public partial class GrubController : EntityComponent<Grub>
 
 		mover.TryMoveWithStep( Time.Delta, stepSize );
 
+		var tr = Trace.Ray( new Ray( mover.Position + Vector3.Up * 2f, Vector3.Forward * Grub.Facing ), 16.0f )
+			.Size( 1f )
+			.WithAnyTags( "solid" )
+			.Ignore( Grub )
+			.Run();
+
+		if ( tr.Hit )
+		{
+			var angle = Vector3.GetAngle( Vector3.Up, tr.Normal );
+			if ( angle > groundAngle )
+				return;
+		}
 		Position = mover.Position.WithY( 0f );
 		Velocity = mover.Velocity;
 	}
 
-	public void Move( float groundAngle = 46f )
+	public void Move( float groundAngle = 70f )
 	{
 		var mover = new MoveHelper( Position, Velocity );
 		mover.Trace = mover.Trace.Size( Hull )

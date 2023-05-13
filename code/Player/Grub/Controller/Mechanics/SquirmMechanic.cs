@@ -84,7 +84,7 @@ public class SquirmMechanic : ControllerMechanic
 
 			var dest = (ctrl.Position + ctrl.Velocity * Time.Delta).WithZ( ctrl.Position.z );
 			var pm = ctrl.TraceBBox( ctrl.Position, dest );
-
+			
 			if ( pm.Fraction == 1 )
 			{
 				ctrl.Position = pm.EndPosition;
