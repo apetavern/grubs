@@ -52,6 +52,23 @@ public partial class Terrain
 	}
 
 	/// <summary>
+	/// Wrapper for a texture addition.
+	/// </summary>
+	/// <param name="texture">The Texture to add to the world.</param>
+	/// <param name="gradientWidth">The gradient width of the texture.</param>
+	/// <param name="worldWidth">The width of the texture.</param>
+	/// <param name="position">The position of the Sdf.</param>
+	/// <param name="rotation">The rotation of the Sdf.</param>
+	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
+	public void AddTexture( Texture texture, int gradientWidth, float worldWidth, Vector2 position, Rotation2D rotation, Dictionary<Sdf2DMaterial, float> materials )
+	{
+		var textureSdf = new TextureSdf( texture, gradientWidth, worldWidth );
+		var transformedTextureSdf = textureSdf.Transform( position, rotation );
+		foreach ( var (material, offset) in materials )
+			Add( SdfWorld, transformedTextureSdf.Expand( offset ), material );
+	}
+
+	/// <summary>
 	/// Creates the standard world box for generated terrain.
 	/// </summary>
 	/// <param name="length">The length of the world.</param>

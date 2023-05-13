@@ -82,14 +82,19 @@ public partial class BuildComponent : WeaponComponent
 
 		if ( Game.IsServer )
 		{
-			var mapSdfTexture = Texture.Load( FileSystem.Mounted, "textures/texturestamps/girder_sdf.png" );
-			var texSDF = new TextureSdf( mapSdfTexture, 2, mapSdfTexture.Width * 2f );
+			var girderTexture = Texture.Load( FileSystem.Mounted, "textures/texturestamps/girder_sdf.png" );
 
-			var transformedSDF = texSDF.Transform( new Vector2( Grub.Player.MousePosition.x, Grub.Player.MousePosition.z ), new Rotation2D( RotationAngle ) );
-
-			GamemodeSystem.Instance.Terrain.SdfWorld.Add( transformedSDF, GamemodeSystem.Instance.Terrain.SandMaterial );
+			var terrain = GamemodeSystem.Instance.Terrain;
+			var materials = terrain.GetActiveMaterials( MaterialsConfig.Default );
+			terrain.AddTexture( 
+				girderTexture, 
+				2, 
+				girderTexture.Width, 
+				new Vector2( Grub.Player.MousePosition.x, Grub.Player.MousePosition.z ), 
+				new Rotation2D( RotationAngle ),
+				materials );
 		}
-		// GamemodeSystem.Instance.Terrain.AddTextureStamp( TextureToStamp, Grub.Player.MousePosition, RotationAngle );
+
 		FireFinished();
 	}
 }
