@@ -102,8 +102,20 @@ public partial class Player
 	{
 		SelectedGrubNames.Clear();
 
-		for ( int i = 0; i < GrubsConfig.GrubCount; ++i )
-			SelectedGrubNames.Add( Random.Shared.FromList( GrubNamePresets ) );
+		if ( !FileSystem.Data.FileExists( "GrubNames.txt" ) )
+		{
+			for ( int i = 0; i < GrubsConfig.GrubCount; ++i )
+				SelectedGrubNames.Add( Random.Shared.FromList( GrubNamePresets ) );
+		}
+		else
+		{
+			GrubNames = FileSystem.Data.ReadAllText( "GrubNames.txt" );
+			SelectedGrubNames = System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
+
+			while ( SelectedGrubNames.Count < GrubsConfig.GrubCount )
+				SelectedGrubNames.Add( Random.Shared.FromList( GrubNamePresets ) );
+
+		}
 
 		SerializeGrubNames();
 	}
@@ -115,5 +127,6 @@ public partial class Player
 	public void SerializeGrubNames()
 	{
 		GrubNames = System.Text.Json.JsonSerializer.Serialize( SelectedGrubNames );
+		FileSystem.Data.WriteAllText( "GrubNames.txt", GrubNames );
 	}
 }
