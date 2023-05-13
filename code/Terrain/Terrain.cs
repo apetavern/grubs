@@ -76,22 +76,58 @@ public partial class Terrain : Entity
 			.Finish<DamageZone>();
 	}
 
+	/// <summary>
+	/// Find a spawn location for an entity. Attempts to sample for existing Grub locations.
+	/// </summary>
+	/// <returns>A Vector3 position where an entity can spawn.</returns>
 	public Vector3 FindSpawnLocation()
 	{
 		int retries = 0;
+		var existingGrubs = All.OfType<Grub>();
+		var fallbackPosition = new Vector3();
+
 		while ( retries < 5000 )
 		{
-			var randX = Game.Random.Int( GrubsConfig.TerrainLength );
+			var randX = Game.Random.Int( GrubsConfig.TerrainLength ) - GrubsConfig.TerrainLength / 2;
 			var randZ = Game.Random.Int( GrubsConfig.TerrainHeight );
-			var tr = Trace.Ray( new Vector3( randX, 0, randZ ), Vector3.Down * GrubsConfig.TerrainHeight )
+			var startPos = new Vector3( randX, 0, randZ );
+			var tr = Trace.Ray( startPos, startPos + Vector3.Down * GrubsConfig.TerrainHeight )
 				.WithAnyTags( "solid", "player" )
-				.Radius( 16f )
+				.Size( 16f )
 				.Run();
 
 			if ( tr.Hit && !tr.StartedSolid )
-				return tr.EndPosition;
+			{
+				if ( tr.Entity is Grub )
+					continue;
+
+				if ( IsInsideTerrain( tr.EndPosition ) )
+					continue;
+
+				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) > 70f )
+					continue;
+
+				fallbackPosition = tr.EndPosition;
+				foreach ( var grub in existingGrubs )
+				{
+					if ( tr.EndPosition.Distance( grub.Position ) < 64f )
+						continue;
+
+					return tr.EndPosition;
+				}
+			}
+
 		}
 
-		return new Vector3( 0f );
+		return fallbackPosition;
+	}
+
+	private bool IsInsideTerrain( Vector3 position )
+	{
+		var tr = Trace.Ray( position, position + Vector3.Right * 64f )
+			.WithAnyTags( "solid" )
+			.Size( 1f )
+			.Run();
+		return tr.Hit;
 	}
 }

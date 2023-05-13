@@ -13,7 +13,7 @@
         "Keys": {
           "ProjectileSpeed": {
             "Type": "Single",
-            "Value": "200"
+            "Value": "50"
           },
           "ShouldBounce": {
             "Type": "Boolean",
