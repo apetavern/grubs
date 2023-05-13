@@ -121,7 +121,7 @@ public static class GrubsConfig
 	public enum TerrainTexture
 	{
 		Grubs = 0,
-		TestLevel = 1,
+		Islands = 1,
 		Battlefield = 2,
 		Cavern = 3,
 		Bunkers = 4,
