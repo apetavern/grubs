@@ -78,10 +78,20 @@ public partial class Terrain : Entity
 
 	public Vector3 FindSpawnLocation()
 	{
-		var tr = Trace.Ray( new Vector3( GrubsConfig.TerrainLength / 2f, 0, GrubsConfig.TerrainHeight + GrubsConfig.TerrainHeight / 2f ), Vector3.Down * GrubsConfig.TerrainHeight )
-			.WithAnyTags( "solid" )
-			.Radius( 1f )
-			.Run();
-		return tr.Hit ? tr.EndPosition : new Vector3( 0f );
+		int retries = 0;
+		while ( retries < 5000 )
+		{
+			var randX = Game.Random.Int( GrubsConfig.TerrainLength );
+			var randZ = Game.Random.Int( GrubsConfig.TerrainHeight );
+			var tr = Trace.Ray( new Vector3( randX, 0, randZ ), Vector3.Down * GrubsConfig.TerrainHeight )
+				.WithAnyTags( "solid", "player" )
+				.Radius( 16f )
+				.Run();
+
+			if ( tr.Hit && !tr.StartedSolid )
+				return tr.EndPosition;
+		}
+
+		return new Vector3( 0f );
 	}
 }

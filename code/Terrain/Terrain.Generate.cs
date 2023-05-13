@@ -19,7 +19,7 @@ public partial class Terrain
 	private int[] NoiseMap;
 	private float[,] DensityMap;
 
-	private float amplitude = 48f;
+	private float amplitude = 36f;
 	private float frequency = 3.2f;
 
 	private float noiseMin = 0.45f;

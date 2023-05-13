@@ -6,7 +6,7 @@ public class SquirmMechanic : ControllerMechanic
 
 	public static float Acceleration => 10.0f;
 	public static float GroundFriction => 4.0f;
-	public static float GroundAngle => 47.0f;
+	public static float GroundAngle => 70.0f;
 	public static float StepSize => 8.0f;
 	public static float MaxNonJumpVelocity => 140.0f;
 	public static float StopSpeed => 100.0f;
@@ -92,7 +92,7 @@ public class SquirmMechanic : ControllerMechanic
 				return;
 			}
 
-			ctrl.StepMove();
+			ctrl.StepMove( GroundAngle );
 		}
 		finally
 		{
@@ -153,7 +153,7 @@ public class SquirmMechanic : ControllerMechanic
 		var angle = Vector3.GetAngle( Vector3.Up, pm.Normal );
 		Controller.CurrentGroundAngle = angle;
 
-		if ( pm.Entity == null || Vector3.GetAngle( Vector3.Up, pm.Normal ) > GroundAngle )
+		if ( pm.Entity == null || angle > GroundAngle )
 		{
 			ClearGroundEntity();
 			bMoveToEndPos = false;
@@ -177,7 +177,8 @@ public class SquirmMechanic : ControllerMechanic
 		Controller.GroundNormal = tr.Normal;
 
 		SurfaceFriction = tr.Surface.Friction * 1.25f;
-		if ( SurfaceFriction > 1 ) SurfaceFriction = 1;
+		if ( SurfaceFriction > 1 ) 
+			SurfaceFriction = 1;
 
 		SetGroundEntity( tr.Entity );
 	}
