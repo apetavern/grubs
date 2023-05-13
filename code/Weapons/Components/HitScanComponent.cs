@@ -45,6 +45,9 @@ public partial class HitScanComponent : WeaponComponent
 	public bool AutoMove { get; set; } = false;
 
 	[Prefab, Net]
+	public bool StopOnNoHit { get; set; } = false;
+
+	[Prefab, Net]
 	public float Damage { get; set; } = 25;
 
 	[Prefab, Net]
@@ -91,8 +94,13 @@ public partial class HitScanComponent : WeaponComponent
 			muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );
 		}
 
+		bool HitNothing = false;
+
 		// Trace the shot.
 		var tr = Trace.Ray( startPos, endPos ).WithoutTags( "dead" ).Ignore( Grub );
+
+		// Trace a twice as far to make sure you hit nothing if you kept going
+		HitNothing = !Trace.Ray( startPos, endPos + muzzle.Value.Rotation.Forward * TraceDistance * 2f ).WithoutTags( "dead" ).Ignore( Grub ).Run().Hit;
 
 		if ( Game.IsServer )
 		{
@@ -104,7 +112,7 @@ public partial class HitScanComponent : WeaponComponent
 				var terrain = GamemodeSystem.Instance.Terrain;
 				var materialsConfig = new MaterialsConfig( includeBackground: true, bgOffset: -8f );
 				var materials = terrain.GetActiveMaterials( materialsConfig );
-				terrain.SubtractLine( new Vector2(startPos.x, startPos.z), new Vector2( endPos.x, endPos.z ), ExplosionRadius, materials );
+				terrain.SubtractLine( new Vector2( startPos.x, startPos.z ), new Vector2( endPos.x, endPos.z ), ExplosionRadius, materials );
 			}
 
 			TraceResult[] result;
@@ -137,7 +145,7 @@ public partial class HitScanComponent : WeaponComponent
 		FireCount++;
 		TimeSinceLastHitScan = 0;
 
-		if ( FireCount >= TraceCount )
+		if ( FireCount >= TraceCount || (StopOnNoHit && HitNothing) )
 		{
 			FireCount = 0;
 
