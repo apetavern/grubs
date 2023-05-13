@@ -9,16 +9,17 @@ public partial class Terrain
 	public Sdf2DMaterial DirtMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/dirt.sdflayer" );
 	public Sdf2DMaterial RockMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/rock.sdflayer" );
 
+	public Sdf2DMaterial GirderMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/girder.sdflayer" );
+
 	public Dictionary<Sdf2DMaterial, float> GetActiveMaterials( MaterialsConfig cfg )
 	{
 		var materials = new Dictionary<Sdf2DMaterial, float>();
 
 		var terrainType = GrubsConfig.WorldTerrainEnvironmentType;
 
-		Sdf2DMaterial fgMaterial;
-		Sdf2DMaterial bgMaterial;
+		List<Sdf2DMaterial> activeMaterials;
 
-		(fgMaterial, bgMaterial) = terrainType switch
+		activeMaterials = terrainType switch
 		{
 			GrubsConfig.TerrainEnvironmentType.Sand => GetSandMaterials(),
 			GrubsConfig.TerrainEnvironmentType.Dirt => GetDirtMaterials(),
@@ -26,21 +27,33 @@ public partial class Terrain
 		};
 
 		if ( cfg.includeForeground )
-			materials.Add( fgMaterial, cfg.fgOffset );
+			materials.Add( activeMaterials.ElementAt( 0 ), cfg.fgOffset );
 		if ( cfg.includeBackground )
-			materials.Add( bgMaterial, cfg.bgOffset );
-
+			materials.Add( activeMaterials.ElementAt( 1 ), cfg.bgOffset );
+		if ( cfg.isDestruction )
+			materials.Add( GetAllMaterials().First(), 0f );
+		
 		return materials;
 	}
 
-	public (Sdf2DMaterial, Sdf2DMaterial) GetSandMaterials()
+	public List<Sdf2DMaterial> GetSandMaterials()
 	{
-		return (SandMaterial, RockMaterial);
+		return new List<Sdf2DMaterial>() { SandMaterial, RockMaterial };
 	}
 
-	public (Sdf2DMaterial, Sdf2DMaterial) GetDirtMaterials()
+	public List<Sdf2DMaterial> GetDirtMaterials()
 	{
-		return (DirtMaterial, RockMaterial);
+		return new List<Sdf2DMaterial>() { DirtMaterial, RockMaterial };
+	}
+
+	public List<Sdf2DMaterial> GetGirderMaterials()
+	{
+		return new List<Sdf2DMaterial>() { GirderMaterial };
+	}
+
+	public List<Sdf2DMaterial> GetAllMaterials()
+	{
+		return new List<Sdf2DMaterial>() { GirderMaterial };
 	}
 }
 
@@ -48,25 +61,31 @@ public struct MaterialsConfig
 {
 	public bool includeForeground = true;
 	public bool includeBackground = false;
+	public bool isDestruction = true;
 	public float fgOffset = 0;
 	public float bgOffset = 0;
 
-	public MaterialsConfig( 
+	public MaterialsConfig(
 		bool includeForeground = true,
 		bool includeBackground = false,
+		bool isDestruction = true,
 		float fgOffset = 0,
 		float bgOffset = 0 )
 	{
 		this.includeForeground = includeForeground;
 		this.includeBackground = includeBackground;
+		this.isDestruction = isDestruction;
 		this.fgOffset = fgOffset;
 		this.bgOffset = bgOffset;
 	}
 
-	public static MaterialsConfig Default => new( true, false, 0f, 0f );
+	public static MaterialsConfig Default => new( true, false, false, 0f, 0f );
+	public static MaterialsConfig Destruction => new( true, false, true, 0f, 0f );
+	public static MaterialsConfig DestructionWithBackground => new( true, true, true, 0f, 0f );
 
 	public override string ToString()
 	{
 		return $"fg: {includeForeground} - {fgOffset} // bg: {includeBackground} - {bgOffset}";
 	}
 }
+

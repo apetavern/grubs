@@ -37,7 +37,7 @@ public static partial class ExplosionHelper
 			grub.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
 		}
 
-		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Default );
+		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Destruction );
 		Terrain.SubtractCircle( new Vector2( position.x, position.z), radius, materials );
 
 		if ( ExplosionDebug )
