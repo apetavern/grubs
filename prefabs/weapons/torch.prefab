@@ -17,7 +17,7 @@
           },
           "TraceCount": {
             "Type": "Int32",
-            "Value": "30"
+            "Value": "45"
           },
           "TraceSpread": {
             "Type": "Single",
@@ -25,15 +25,15 @@
           },
           "TraceDelay": {
             "Type": "Single",
-            "Value": "0.2"
+            "Value": "0.15"
           },
           "TraceDistance": {
             "Type": "Single",
-            "Value": "35"
+            "Value": "10"
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "34"
+            "Value": "18"
           },
           "ExplosionDamage": {
             "Type": "Single",
@@ -76,6 +76,10 @@
           "MuzzleParticle": {
             "Type": "String",
             "Value": "\u0022particles/blueflame/blueflame_base.vpcf\u0022"
+          },
+          "StopOnNoHit": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       }
