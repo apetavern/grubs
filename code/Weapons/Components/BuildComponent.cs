@@ -85,12 +85,16 @@ public partial class BuildComponent : WeaponComponent
 			var girderTexture = Texture.Load( FileSystem.Mounted, "textures/texturestamps/girder_sdf.png" );
 
 			var terrain = GamemodeSystem.Instance.Terrain;
-			var materials = terrain.GetActiveMaterials( MaterialsConfig.Default );
-			terrain.AddTexture( 
-				girderTexture, 
-				2, 
-				girderTexture.Width * 2f, 
-				new Vector2( Grub.Player.MousePosition.x, Grub.Player.MousePosition.z ), 
+			var materials = new Dictionary<Sdf2DMaterial, float>()
+			{
+				{ ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/girder.sdflayer" ), MaterialsConfig.Default.fgOffset },
+			};
+
+			terrain.AddTexture(
+				girderTexture,
+				1,
+				girderTexture.Width * 2f,
+				new Vector2( Grub.Player.MousePosition.x - 5f, Grub.Player.MousePosition.z ),
 				new Rotation2D( RotationAngle ),
 				materials );
 		}

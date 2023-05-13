@@ -1,0 +1,10 @@
+{
+  "CollisionTags": "solid",
+  "Depth": 64,
+  "Offset": 0,
+  "TexCoordSize": 128,
+  "FrontFaceMaterial": "materials/environment/metal_a.vmat",
+  "BackFaceMaterial": "materials/environment/metal_a.vmat",
+  "CutFaceMaterial": "materials/environment/metal_a.vmat",
+  "Quality": "High"
+}
