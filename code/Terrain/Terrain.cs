@@ -8,7 +8,7 @@ public partial class Terrain : Entity
 	/// <summary>
 	/// The 2D SDF World that represents our terrain.
 	/// </summary>
-	[Net] public Sdf2DWorld SdfWorld { get; set; }
+	public Sdf2DWorld SdfWorld { get; set; }
 
 	/// <summary>
 	/// The zone at the bottom of the map that instantly kills entities that fall into it.
@@ -27,7 +27,7 @@ public partial class Terrain : Entity
 	/// </summary>
 	public void Reset()
 	{
-		SdfWorld?.Delete();
+		SdfWorld.Clear();
 		InitializeSdfWorld();
 	}
 
@@ -35,10 +35,8 @@ public partial class Terrain : Entity
 	{
 		SetupKillZone();
 
-		SdfWorld = new Sdf2DWorld()
-		{
-			LocalRotation = Rotation.FromRoll( 90f ),
-		};
+		SdfWorld ??= new Sdf2DWorld();
+		SdfWorld.LocalRotation = Rotation.FromRoll( 90f );
 		SdfWorld.Tags.Add( "solid" );
 
 		var creationStrategy = GrubsConfig.WorldTerrainType;
@@ -116,7 +114,7 @@ public partial class Terrain : Entity
 					return tr.EndPosition;
 				}
 			}
-
+			retries++;
 		}
 
 		return fallbackPosition;
@@ -129,5 +127,11 @@ public partial class Terrain : Entity
 			.Size( 1f )
 			.Run();
 		return tr.Hit;
+	}
+
+	[ConCmd.Admin( "gr_regen" )]
+	public static void RegenWorld()
+	{
+		GrubsGame.Instance.Terrain.Reset();
 	}
 }

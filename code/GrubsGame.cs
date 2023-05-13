@@ -95,7 +95,7 @@ public sealed partial class GrubsGame : GameManager
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
-		Game.ResetMap( new Entity[] { Terrain } );
+		Game.ResetMap( new Entity[] { Terrain, Terrain.SdfWorld } );
 		GamemodeSystem.Instance.Delete();
 		GamemodeSystem.SetupGamemode();
 
