@@ -4,22 +4,25 @@ Layer0
 {
 	shader "shaders/gr_foreground.shader_c"
 
+	BlendMask "materials/default/default_mask.tga"
+
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Position ----
-	g_flYPosition "32.000"
-	g_flYSmoothing "128.000"
-	g_flZPosition "1024.000"
-	g_flZSmoothing "200.000"
+	g_flYPosition "64.000"
+	g_flYSmoothing "75.000"
+	g_flZPosition "0.000"
+	g_flZSmoothing "250.000"
 
 	//---- Textures ----
 	AO "textures/environment/rocks_a_ao.png"
 	Colour "textures/environment/rocks_a_color.png"
-	g_flTiling "0.500"
+	g_flTiling "1.000"
 	Normal "textures/environment/rocks_a_normal.png"
 	Rough "textures/environment/rocks_a_rough.png"
 
 	//---- Tint ----
-	g_vTintColour "[0.000000 0.000000 0.000000 1.000000]"
+	g_bTintDirectionToggle "0"
+	g_vTintColour "[0.545098 0.513726 0.447059 1.000000]"
 }

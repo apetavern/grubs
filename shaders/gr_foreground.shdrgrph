@@ -6,13 +6,13 @@
     {
       "_class": "Result",
       "Albedo": {
-        "Identifier": "16",
+        "Identifier": "25",
         "Output": "Result"
       },
       "Emission": {},
       "Opacity": {},
       "Normal": {
-        "Identifier": "17",
+        "Identifier": "16",
         "Output": "Result"
       },
       "Roughness": {
@@ -21,7 +21,7 @@
       },
       "Metalness": {},
       "AmbientOcclusion": {
-        "Identifier": "25",
+        "Identifier": "24",
         "Output": "Result"
       },
       "DefaultOpacity": 1,
@@ -29,22 +29,24 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "1600,-192"
+      "Position": "1872,-192"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "20",
+        "Identifier": "19",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_a_color_png_25ab3fcc.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Colour",
+        "SrgbRead": true,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "1",
       "Position": "-272,-336"
@@ -52,10 +54,10 @@
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "20",
+        "Identifier": "19",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_normal_png_17bd4f6c.generated.vtex",
+      "Texture": "textures/environment/sand_a_normal_png_4d9e3190.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Normal",
@@ -64,7 +66,8 @@
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "2",
       "Position": "-272,-144"
@@ -72,7 +75,7 @@
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "20",
+        "Identifier": "19",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
@@ -84,7 +87,8 @@
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "3",
       "Position": "-272,48"
@@ -103,7 +107,7 @@
         "Output": "Result"
       },
       "Identifier": "5",
-      "Position": "-816,400"
+      "Position": "-816,432"
     },
     {
       "_class": "Divide",
@@ -112,18 +116,18 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "24",
+        "Identifier": "23",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 2000,
       "Identifier": "6",
-      "Position": "-16,480"
+      "Position": "-16,512"
     },
     {
       "_class": "WorldPosition",
       "Identifier": "7",
-      "Position": "-1024,400"
+      "Position": "-1024,432"
     },
     {
       "_class": "Lerp",
@@ -132,7 +136,7 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "18",
+        "Identifier": "31",
         "Output": "Result"
       },
       "C": {
@@ -141,7 +145,7 @@
       },
       "Fraction": 0.5,
       "Identifier": "8",
-      "Position": "912,-384"
+      "Position": "912,-544"
     },
     {
       "_class": "Add",
@@ -150,18 +154,18 @@
         "Output": "Z"
       },
       "B": {
-        "Identifier": "22",
+        "Identifier": "21",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1024,
       "Identifier": "9",
-      "Position": "-416,480"
+      "Position": "-416,512"
     },
     {
       "_class": "Float4",
       "Name": "Tint_Colour",
-      "Value": "0.24855,0.07742,0,1",
+      "Value": "0.40784,0.21569,0.1098,1",
       "UI": {
         "Type": "Color",
         "PrimaryGroup": {
@@ -181,13 +185,13 @@
         "Output": "Y"
       },
       "B": {
-        "Identifier": "21",
+        "Identifier": "20",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 20,
       "Identifier": "11",
-      "Position": "-416,384"
+      "Position": "-416,416"
     },
     {
       "_class": "Divide",
@@ -196,13 +200,13 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "23",
+        "Identifier": "22",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 75,
       "Identifier": "12",
-      "Position": "-16,384"
+      "Position": "-16,416"
     },
     {
       "_class": "Saturate",
@@ -211,7 +215,7 @@
         "Output": "Result"
       },
       "Identifier": "13",
-      "Position": "144,480"
+      "Position": "144,512"
     },
     {
       "_class": "Saturate",
@@ -220,40 +224,17 @@
         "Output": "Result"
       },
       "Identifier": "14",
-      "Position": "144,384"
+      "Position": "144,416"
     },
     {
-      "_class": "Lerp",
-      "A": {
-        "Identifier": "18",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "1",
-        "Output": "Result"
-      },
-      "C": {
-        "Identifier": "13",
-        "Output": "Result"
-      },
-      "Fraction": 0.5,
+      "_class": "CommentNode",
+      "Size": "224,176",
+      "Color": "Green",
+      "Description": "",
+      "Title": "Y",
+      "Layer": 1,
       "Identifier": "15",
-      "Position": "912,-272"
-    },
-    {
-      "_class": "Multiply",
-      "A": {
-        "Identifier": "8",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "15",
-        "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "16",
-      "Position": "1264,-304"
+      "Position": "880,-592"
     },
     {
       "_class": "TransformNormal",
@@ -262,25 +243,23 @@
         "Output": "Result"
       },
       "DecodeNormal": true,
-      "Identifier": "17",
+      "Identifier": "16",
       "Position": "-32,-144"
     },
     {
-      "_class": "Blend",
+      "_class": "Multiply",
       "A": {
-        "Identifier": "10",
+        "Identifier": "13",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "1",
-        "Output": "Result"
+        "Identifier": "10",
+        "Output": "A"
       },
-      "C": {},
-      "Fraction": 1,
-      "BlendMode": "Overlay",
-      "Clamp": true,
-      "Identifier": "18",
-      "Position": "112,-496"
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "17",
+      "Position": "448,224"
     },
     {
       "_class": "Float",
@@ -297,7 +276,7 @@
           "Priority": 1
         }
       },
-      "Identifier": "19",
+      "Identifier": "18",
       "Position": "-768,-48"
     },
     {
@@ -307,20 +286,20 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "19",
+        "Identifier": "18",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "20",
+      "Identifier": "19",
       "Position": "-464,-128"
     },
     {
       "_class": "Float",
       "Min": 0,
-      "Max": 64,
+      "Max": 1024,
       "Name": "Y Position",
-      "Value": 20,
+      "Value": 64,
       "UI": {
         "Priority": 3,
         "PrimaryGroup": {
@@ -330,15 +309,15 @@
           "Name": "Y"
         }
       },
-      "Identifier": "21",
-      "Position": "-640,320"
+      "Identifier": "20",
+      "Position": "-640,352"
     },
     {
       "_class": "Float",
       "Min": 0,
       "Max": 2048,
       "Name": "Z Position",
-      "Value": 1024,
+      "Value": 0,
       "UI": {
         "Priority": 1,
         "PrimaryGroup": {
@@ -349,13 +328,13 @@
           "Priority": 1
         }
       },
-      "Identifier": "22",
-      "Position": "-640,576"
+      "Identifier": "21",
+      "Position": "-640,608"
     },
     {
       "_class": "Float",
       "Min": 0,
-      "Max": 128,
+      "Max": 1024,
       "Name": "Y Smoothing",
       "Value": 75,
       "UI": {
@@ -367,15 +346,15 @@
           "Name": "Y"
         }
       },
-      "Identifier": "23",
-      "Position": "-256,432"
+      "Identifier": "22",
+      "Position": "-256,464"
     },
     {
       "_class": "Float",
       "Min": 0,
       "Max": 2048,
       "Name": "Z Smoothing",
-      "Value": 2000,
+      "Value": 250,
       "UI": {
         "Priority": 2,
         "PrimaryGroup": {
@@ -386,13 +365,13 @@
           "Priority": 1
         }
       },
-      "Identifier": "24",
-      "Position": "-256,544"
+      "Identifier": "23",
+      "Position": "-256,576"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "20",
+        "Identifier": "19",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
@@ -404,10 +383,130 @@
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "24",
+      "Position": "-272,240"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "30",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "25",
+      "Position": "1520,-432"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "19",
+        "Output": "Result"
+      },
+      "Texture": "textures/environment/sand_shells_blend_png_acc24e2f.generated.vtex",
+      "Sampler": {},
+      "UI": {
+        "Name": "Blend Mask",
+        "Default": "0,0,0,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "26",
+      "Position": "-272,-688"
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "224,176",
+      "Color": "Red",
+      "Description": "",
+      "Title": "X",
+      "Layer": 2,
+      "Identifier": "27",
+      "Position": "992,-352"
+    },
+    {
+      "_class": "Subtract",
+      "A": {},
+      "B": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "DefaultA": 1,
+      "DefaultB": 1,
+      "Identifier": "28",
+      "Position": "656,288"
+    },
+    {
+      "_class": "Branch",
+      "True": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "False": {
+        "Identifier": "28",
+        "Output": "Result"
+      },
+      "A": {},
+      "B": {},
+      "Name": "Tint Direction Toggle",
+      "Operator": "Equal",
+      "Enabled": false,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Tint",
+          "Priority": 1
         }
       },
-      "Identifier": "25",
-      "Position": "-272,240"
+      "Identifier": "29",
+      "Position": "784,192"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "31",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "29",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "BlendMode": "Overlay",
+      "Clamp": true,
+      "Identifier": "30",
+      "Position": "1024,-304"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "26",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "BlendMode": "SoftLight",
+      "Clamp": true,
+      "Identifier": "31",
+      "Position": "288,-576"
     }
   ]
 }

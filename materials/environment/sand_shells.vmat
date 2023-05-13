@@ -4,22 +4,25 @@ Layer0
 {
 	shader "shaders/gr_foreground.shader_c"
 
+	BlendMask "textures/environment/sand_shells_blend.png"
+
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Position ----
-	g_flYPosition "50.000"
-	g_flYSmoothing "100.000"
-	g_flZPosition "1024.000"
-	g_flZSmoothing "500.000"
+	g_flYPosition "64.000"
+	g_flYSmoothing "75.000"
+	g_flZPosition "0.000"
+	g_flZSmoothing "250.000"
 
 	//---- Textures ----
 	AO "textures/environment/sand_shells_ao.png"
 	Colour "textures/environment/sand_shells_color.png"
-	g_flTiling "1.000"
+	g_flTiling "2.000"
 	Normal "textures/environment/sand_shells_normal.png"
 	Rough "textures/environment/sand_shells_rough.png"
 
 	//---- Tint ----
-	g_vTintColour "[0.407843 0.215686 0.109804 1.000000]"
+	g_bTintDirectionToggle "0"
+	g_vTintColour "[0.411765 0.219608 0.109804 1.000000]"
 }
