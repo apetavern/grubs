@@ -99,7 +99,7 @@ public partial class HitScanComponent : WeaponComponent
 		// Trace the shot.
 		var tr = Trace.Ray( startPos, endPos ).WithoutTags( "dead" ).Ignore( Grub );
 
-		// Trace a twice as far to make sure you hit nothing if you kept going
+		// Trace a thrice as far to make sure you hit nothing if you kept going
 		HitNothing = !Trace.Ray( startPos, endPos + muzzle.Value.Rotation.Forward * TraceDistance * 2f ).WithoutTags( "dead" ).Ignore( Grub ).Run().Hit;
 
 		if ( Game.IsServer )
