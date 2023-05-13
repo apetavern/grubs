@@ -6,5 +6,8 @@
   "FrontFaceMaterial": "materials/environment/metal_a.vmat",
   "BackFaceMaterial": "materials/environment/metal_a.vmat",
   "CutFaceMaterial": "materials/environment/metal_a.vmat",
-  "Quality": "High"
+  "QualityLevel": "Extreme",
+  "ChunkResolution": 16,
+  "ChunkSize": 256,
+  "MaxDistance": 64
 }
