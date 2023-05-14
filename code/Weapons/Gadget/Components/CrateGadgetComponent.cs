@@ -13,6 +13,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 	public string PickupSound { get; set; }
 
 	private readonly Material _spawnMaterial = Material.Load( "materials/effects/teleport/teleport.vmat" );
+	private AnimatedEntity _parachute;
 	private TimeSince TimeSinceSpawned { get; set; } = 0f;
 
 	public override void Spawn()
@@ -22,6 +23,14 @@ public partial class CrateGadgetComponent : GadgetComponent
 		Gadget.Tags.Add( "trigger" );
 		Gadget.SetMaterialOverride( _spawnMaterial );
 		Gadget.PlaySound( SpawnSound );
+
+		_ = SpawnParachuteDelayed();
+	}
+
+	private async Task SpawnParachuteDelayed()
+	{
+		await GameTask.DelaySeconds( 0.2f );
+		_parachute = new AnimatedEntity( "models/crates/crate_parachute/crate_parachute.vmdl", Entity );
 	}
 
 	public override void OnTouch( Entity other )
@@ -69,7 +78,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 			.Size( Gadget.CollisionBounds )
 			.Ignore( Grub )
 			.WithAnyTags( "player", "solid" )
-			.WithoutTags( "dead" );
+			.WithoutTags( "dead", "gadget" );
 
 		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
 
@@ -79,14 +88,24 @@ public partial class CrateGadgetComponent : GadgetComponent
 		}
 		else
 		{
+			_parachute?.DeleteAsync( 0.3f );
+			_parachute?.SetAnimParameter( "landed", true );
+			_parachute = null;
 			helper.Velocity = 0;
 		}
 
-		helper.ApplyFriction( 2.0f, Time.Delta );
+		var parachuteAirFrictionModifier = _parachute is not null ? 1.5f : 0.5f;
+		helper.ApplyFriction( 2.0f * parachuteAirFrictionModifier, Time.Delta );
 		helper.TryMove( Time.Delta );
 
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
+		if ( Game.IsServer )
+		{
+			Gadget.LocalRotation = Rotation.Slerp( Gadget.Rotation, Rotation.Identity *
+				new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(), 0.75f );
+		}
+		
 	}
 
 	[ClientRpc]

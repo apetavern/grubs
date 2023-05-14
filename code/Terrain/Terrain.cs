@@ -78,7 +78,7 @@ public partial class Terrain : Entity
 	/// Find a spawn location for an entity. Attempts to sample for existing Grub locations.
 	/// </summary>
 	/// <returns>A Vector3 position where an entity can spawn.</returns>
-	public Vector3 FindSpawnLocation()
+	public Vector3 FindSpawnLocation( bool traceDown = true )
 	{
 		int retries = 0;
 		var existingGrubs = All.OfType<Grub>();
@@ -93,6 +93,7 @@ public partial class Terrain : Entity
 			var randX = Game.Random.Int( GrubsConfig.TerrainLength ) - GrubsConfig.TerrainLength / 2;
 			var randZ = Game.Random.Int( maxHeight );
 			var startPos = new Vector3( randX, 0, randZ );
+
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * GrubsConfig.TerrainHeight )
 				.WithAnyTags( "solid", "player" )
 				.Size( 16f )
@@ -115,6 +116,8 @@ public partial class Terrain : Entity
 					if ( tr.EndPosition.Distance( grub.Position ) < 64f )
 						continue;
 
+					if ( !traceDown )
+						return startPos;
 					return tr.EndPosition;
 				}
 			}

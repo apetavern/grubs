@@ -176,7 +176,7 @@ public partial class FreeForAll : Gamemode
 		var player = Game.Clients.First().Pawn as Player;
 		var crate = CrateGadgetComponent.SpawnCrate( crateType );
 
-		var spawnPos = Terrain.FindSpawnLocation();
+		var spawnPos = Terrain.FindSpawnLocation( traceDown: false );
 		crate.Position = spawnPos;
 		crate.Owner = player;
 		player.Gadgets.Add( crate );
