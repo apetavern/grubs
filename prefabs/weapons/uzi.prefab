@@ -17,7 +17,7 @@
           },
           "TraceCount": {
             "Type": "Int32",
-            "Value": "15"
+            "Value": "20"
           },
           "TraceSpread": {
             "Type": "Single",

@@ -49,7 +49,7 @@
           },
           "Damage": {
             "Type": "Single",
-            "Value": "3"
+            "Value": "1"
           },
           "UseMuzzleParticle": {
             "Type": "Boolean",
