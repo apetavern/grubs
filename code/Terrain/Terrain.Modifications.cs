@@ -63,7 +63,9 @@ public partial class Terrain
 	public void AddTexture( Texture texture, int gradientWidth, float worldWidth, Vector2 position, Rotation2D rotation, Dictionary<Sdf2DMaterial, float> materials )
 	{
 		var textureSdf = new TextureSdf( texture, gradientWidth, worldWidth );
-		var transformedTextureSdf = textureSdf.Transform( position, rotation );
+		var transformedTextureSdf = textureSdf
+			.Translate( textureSdf.Bounds.Size * -0.5f )
+			.Transform( position, rotation );
 		foreach ( var (material, offset) in materials )
 			Add( SdfWorld, transformedTextureSdf.Expand( offset ), material );
 	}
