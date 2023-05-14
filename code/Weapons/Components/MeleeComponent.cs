@@ -40,6 +40,7 @@ public partial class MeleeComponent : WeaponComponent
 		{
 			foreach ( var (grub, dir) in grubsHit )
 			{
+				grub.Controller.ClearGroundEntity();
 				grub.ApplyAbsoluteImpulse( HitForce * dir );
 				grub.TakeDamage( new DamageInfo
 				{

@@ -31,7 +31,9 @@ public static partial class ExplosionHelper
 			var force = distanceFactor * 1000;
 
 			var dir = (grub.Position - position).Normal;
+			dir = dir.WithZ( MathF.Abs( dir.z ) );
 			dir = dir.WithY( 0f );
+			grub.Controller.ClearGroundEntity();
 			grub.ApplyAbsoluteImpulse( dir * force );
 
 			grub.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );

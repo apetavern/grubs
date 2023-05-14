@@ -292,6 +292,13 @@ public partial class GrubController : EntityComponent<Grub>
 		Velocity = mover.Velocity;
 	}
 
+	public void ClearGroundEntity()
+	{
+		var squirm = GetMechanic<SquirmMechanic>();
+		if ( squirm is not null )
+			squirm.ClearGroundEntity();
+	}
+
 	[ConVar.Replicated( "gr_debug_playercontroller" )]
 	public static bool Debug { get; set; } = false;
 }
