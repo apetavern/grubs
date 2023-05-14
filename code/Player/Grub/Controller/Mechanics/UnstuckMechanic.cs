@@ -36,6 +36,7 @@ public class UnstuckMechanic : ControllerMechanic
 
 			var tr = Trace.Ray( result.EndPosition, result.EndPosition + Vector3.Right * 64f )
 				.WithAnyTags( "solid" )
+				.Size( 1f )
 				.Run();
 
 			if ( tr.Hit )

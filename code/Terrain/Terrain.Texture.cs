@@ -4,7 +4,7 @@ namespace Grubs;
 
 public partial class Terrain
 {
-	public int WorldTextureHeight = 0;
+	[Net] public int WorldTextureHeight { get; set; } = 0;
 
 	void SetupWorldFromTexture()
 	{

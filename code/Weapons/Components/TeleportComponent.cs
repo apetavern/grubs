@@ -41,13 +41,18 @@ public partial class TeleportComponent : WeaponComponent
 		TeleportPreview.Position = Grub.Player.MousePosition;
 		TeleportPreview.Rotation = Grub.Rotation;
 
-		var isValidPlacement = !Trace.Box( Grub.Controller.Hull, Grub.Player.MousePosition, Grub.Player.MousePosition ).Ignore( TeleportPreview ).Run().Hit;
-		TeleportPreview.RenderColor = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.5f );
+		// Causes a little bit of delay on the teleport preview, but clientside traces
+		// here are causing some odd behaviour.
+		if ( Game.IsServer )
+		{
+			var isValidPlacement = CheckValidPlacement( Grub.Player.MousePosition );
+			TeleportPreview.RenderColor = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.5f );
 
-		if ( IsFiring && TeleportPreview.EnableDrawing && isValidPlacement )
-			Fire();
-		else
-			IsFiring = false;
+			if ( IsFiring && TeleportPreview.EnableDrawing && isValidPlacement )
+				Fire();
+			else
+				IsFiring = false;
+		}
 	}
 
 	public override void FireCursor()
@@ -59,5 +64,25 @@ public partial class TeleportComponent : WeaponComponent
 		Particles.Create( "particles/teleport/teleport_down.vpcf", Grub.EyePosition );
 
 		FireFinished();
+	}
+
+	private bool CheckValidPlacement( Vector3 mousePosition )
+	{
+		var trLocation = Trace.Box( Grub.Controller.Hull, mousePosition, mousePosition )
+			.Ignore( TeleportPreview )
+			.Run();
+
+		var trTerrain = Trace.Ray( trLocation.EndPosition, trLocation.EndPosition + Vector3.Right * 64f )
+			.WithAnyTags( "solid" )
+			.Size( 1f )
+			.Ignore( TeleportPreview )
+			.Run();
+
+		var terrain = GrubsGame.Instance.Terrain;
+		var exceedsTerrainHeight = false;
+		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture && trLocation.EndPosition.z >= terrain.WorldTextureHeight - 64f )
+			exceedsTerrainHeight = true;
+
+		return !trLocation.Hit && !trTerrain.Hit && !exceedsTerrainHeight;
 	}
 }
