@@ -68,7 +68,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 				ExplosionHelper.Explode( Gadget.Position, Grub, ExplosionRadius, MaxExplosionDamage );
 				break;
 			case ExplosiveReaction.Incendiary:
-				// FireHelper.StartFiresAt( Position, Segments[Segments.Count - 1].EndPos - Segments[Segments.Count - 1].StartPos, 10 );
+				FireHelper.StartFiresAt( Gadget.Position, 0.1f, 10 );
 				break;
 		}
 
