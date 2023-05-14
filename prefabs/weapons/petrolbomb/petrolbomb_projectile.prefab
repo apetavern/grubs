@@ -1,0 +1,69 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "62bb1c68-fe01-42e2-83f4-05ba69662a86",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "9de33314-2190-4e29-bedf-3830bcad42ff",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Incendiary\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Explosive\u0022"
+          },
+          "_tags": {}
+        }
+      },
+      {
+        "Guid": "2484593f-9943-4358-a867-f6965aa677f2",
+        "Class": "PhysicsGadgetComponent",
+        "Keys": {
+          "AffectedByWind": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "ShouldThrow": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "_name": {
+            "Value": "\u0022PhysicsGadgetComponent\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/petrolbomb/petrolbomb.vmdl\u0022"
+      },
+      "CollisionRadius": {
+        "Type": "Single",
+        "Value": "5"
+      },
+      "_name": {
+        "Value": "\u0022Petrol Bomb Projectile\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget\u0022"
+      }
+    }
+  }
+}
