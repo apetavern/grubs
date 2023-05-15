@@ -78,7 +78,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 			.Size( Gadget.CollisionBounds )
 			.Ignore( Grub )
 			.WithAnyTags( "player", "solid" )
-			.WithoutTags( "dead", "gadget" );
+			.WithoutTags( "dead" );
 
 		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
 
@@ -105,7 +105,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 			Gadget.LocalRotation = Rotation.Slerp( Gadget.Rotation, Rotation.Identity *
 				new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(), 0.75f );
 		}
-		
+
 	}
 
 	[ClientRpc]
