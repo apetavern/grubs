@@ -15,6 +15,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool AffectedByWind { get; set; } = false;
 
+	[Prefab, Net]
+	public bool CheckResolve { get; set; } = true;
+
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		if ( ShouldThrow )
@@ -26,7 +29,7 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 
 	public override bool IsResolved()
 	{
-		return Gadget.Velocity.IsNearlyZero( 2.5f );
+		return CheckResolve ? Gadget.Velocity.IsNearlyZero( 2.5f ) : true;
 	}
 
 	public override void Simulate( IClient client )
@@ -43,7 +46,7 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 
 		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
 
-		if (groundEntity is not null )
+		if ( groundEntity is not null )
 			helper.ApplyFriction( 1.0f, Time.Delta );
 
 		helper.TryMove( Time.Delta );

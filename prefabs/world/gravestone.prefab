@@ -20,6 +20,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "CheckResolve": {
+            "Type": "Boolean",
+            "Value": "false"
           }
         }
       }

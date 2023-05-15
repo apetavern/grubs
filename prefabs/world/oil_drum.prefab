@@ -18,7 +18,13 @@
           "_name": {
             "Value": "\u0022Physics\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          },
+          "CheckResolve": {
+            "Type": "Boolean",
+            "Value": "false"
+          }
         }
       },
       {
@@ -40,7 +46,9 @@
           "_name": {
             "Value": "\u0022Explosive\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
