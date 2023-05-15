@@ -8,7 +8,7 @@ public class AirMoveMechanic : ControllerMechanic
 	public static float FallVelocityFatalThreshold => MathF.Sqrt( 2 * Gravity * 50 * 12 );
 	public static float FallPunchThreshold => 300f;
 	public static float FallDamage => 100f / (FallVelocityFatalThreshold - FallVelocityDamageThreshold);
-	public static float FallDamageModifier => 0.15f;
+	public static float FallDamageModifier => 0.13f;
 
 	public bool IsHardFalling { get; set; } = false;
 	public float FallVelocity { get; set; }
@@ -63,11 +63,7 @@ public class AirMoveMechanic : ControllerMechanic
 		if ( Game.IsServer && Grub.IsTurn )
 			GamemodeSystem.Instance.UseTurn();
 
-		float fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
-		if ( fallDamage < 1 )
-		{
-			fallDamage = 1;
-		}
-		Grub.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Grub ) );
+		var fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
+		Grub.TakeDamage( DamageInfoExtension.FromFall( float.Max( fallDamage, 1 ), Grub ) );
 	}
 }
