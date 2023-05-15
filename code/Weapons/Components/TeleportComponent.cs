@@ -33,7 +33,7 @@ public partial class TeleportComponent : WeaponComponent
 		}
 		else
 		{
-			Grub.Player.GrubsCamera.AutomaticCentering = true;
+			Grub.Player.GrubsCamera.AutomaticRefocus = true;
 		}
 	}
 
@@ -48,7 +48,7 @@ public partial class TeleportComponent : WeaponComponent
 		TeleportPreview.Position = Grub.Player.MousePosition;
 		TeleportPreview.Rotation = Grub.Rotation;
 
-		Grub.Player.GrubsCamera.AutomaticCentering = !Weapon.HasChargesRemaining;
+		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
 
 		// Causes a little bit of delay on the teleport preview, but clientside traces
 		// here are causing some odd behaviour.

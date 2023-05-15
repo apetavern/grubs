@@ -4,7 +4,7 @@ public class GrubsCamera
 {
 	public float Distance = 1024f;
 	public bool CanScroll { get; set; } = true;
-	public bool AutomaticCentering { get; set; } = true;
+	public bool AutomaticRefocus { get; set; } = true;
 
 	private readonly FloatRange _distanceRange = new( 128f, 2048f );
 	private readonly float _scrollRate = 32f;
@@ -50,10 +50,10 @@ public class GrubsCamera
 
 		ClampCamera();
 
-		var requestCenter = Input.Pressed( InputAction.CameraReset );
-		var automaticCenter = !Input.Down( InputAction.CameraPan ) && _timeSinceMousePan > _secondsBeforeCentering && AutomaticCentering;
+		var requestRefocus = Input.Pressed( InputAction.CameraReset );
+		var automaticRefocus = !Input.Down( InputAction.CameraPan ) && _timeSinceMousePan > _secondsBeforeCentering && AutomaticRefocus;
 
-		if ( requestCenter || automaticCenter )
+		if ( requestRefocus || automaticRefocus )
 			_isCenteredOnGrub = true;
 	}
 
