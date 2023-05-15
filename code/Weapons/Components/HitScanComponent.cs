@@ -45,9 +45,6 @@ public partial class HitScanComponent : WeaponComponent
 	public bool AutoMove { get; set; } = false;
 
 	[Prefab, Net]
-	public bool StopOnNoHit { get; set; } = false;
-
-	[Prefab, Net]
 	public float Damage { get; set; } = 25;
 
 	[Prefab, Net]
@@ -70,7 +67,12 @@ public partial class HitScanComponent : WeaponComponent
 			Fire();
 
 		if ( IsFiring && AutoMove )
+		{
 			Grub.MoveInput = -Grub.Facing * 0.75f;
+
+			if ( Input.Down( InputAction.Fire ) )
+				FireFinished();
+		}
 	}
 
 	public override void FireInstant()
@@ -84,7 +86,6 @@ public partial class HitScanComponent : WeaponComponent
 			: startPos + Grub.EyeRotation.Forward * TraceDistance + (Vector3.Random * TraceSpread);
 		var pitch = muzzle is not null ? muzzle.Value.Rotation.Pitch() : Grub.EyeRotation.Pitch();
 		pitch *= Grub.Facing;
-		var rotation = Rotation.FromPitch( pitch );
 		startPos = startPos.WithY( 0f );
 		endPos = endPos.WithY( 1f );
 
@@ -94,13 +95,8 @@ public partial class HitScanComponent : WeaponComponent
 			muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );
 		}
 
-		bool HitNothing = false;
-
 		// Trace the shot.
 		var tr = Trace.Ray( startPos, endPos ).WithoutTags( "dead" ).Ignore( Grub );
-
-		// Trace a thrice as far to make sure you hit nothing if you kept going
-		HitNothing = !Trace.Ray( startPos, endPos + muzzle.Value.Rotation.Forward * TraceDistance * 2f ).WithoutTags( "dead" ).Ignore( Grub ).Run().Hit;
 
 		if ( Game.IsServer )
 		{
@@ -145,7 +141,7 @@ public partial class HitScanComponent : WeaponComponent
 		FireCount++;
 		TimeSinceLastHitScan = 0;
 
-		if ( FireCount >= TraceCount || (StopOnNoHit && HitNothing) )
+		if ( FireCount >= TraceCount )
 		{
 			FireCount = 0;
 
