@@ -44,7 +44,7 @@ public class ArcTrace
 				.Ignore( Owner )
 				.Ignore( Gadget )
 				.WithoutTags( "dead" )
-				.Radius( 2f )
+				.Radius( Gadget.CollisionRadius )
 				.Run();
 
 			if ( tr.Hit )
@@ -93,7 +93,7 @@ public class ArcTrace
 				.Ignore( Owner )
 				.Ignore( Gadget )
 				.WithoutTags( "dead" )
-				.Radius( 2f )
+				.Radius( Gadget.CollisionRadius )
 				.Run();
 
 			if ( tr.Hit )
