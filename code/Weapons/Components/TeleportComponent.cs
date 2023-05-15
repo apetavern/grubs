@@ -26,8 +26,15 @@ public partial class TeleportComponent : WeaponComponent
 	{
 		base.OnHolster();
 
-		if ( Game.IsServer && TeleportPreview.IsValid() )
-			TeleportPreview.Delete();
+		if ( Game.IsServer )
+		{
+			if ( TeleportPreview.IsValid() )
+				TeleportPreview.Delete();
+		}
+		else
+		{
+			Grub.Player.GrubsCamera.AutomaticCentering = true;
+		}
 	}
 
 	public override void Simulate( IClient client )
@@ -40,6 +47,8 @@ public partial class TeleportComponent : WeaponComponent
 		TeleportPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 		TeleportPreview.Position = Grub.Player.MousePosition;
 		TeleportPreview.Rotation = Grub.Rotation;
+
+		Grub.Player.GrubsCamera.AutomaticCentering = !Weapon.HasChargesRemaining;
 
 		// Causes a little bit of delay on the teleport preview, but clientside traces
 		// here are causing some odd behaviour.

@@ -2,15 +2,16 @@
 
 public class GrubsCamera
 {
+	public float Distance = 1024f;
+	public bool CanScroll { get; set; } = true;
+	public bool AutomaticCentering { get; set; } = true;
+
 	private readonly FloatRange _distanceRange = new( 128f, 2048f );
 	private readonly float _scrollRate = 32f;
 	private readonly float _lerpSpeed = 5f;
 	private readonly float _cameraOffset = 32f;
 	private readonly int _secondsBeforeCentering = 3;
 
-	public float Distance = 1024f;
-
-	private bool _canScroll = true;
 	private bool _isCenteredOnGrub = true;
 	private Vector3 _center;
 	private Vector3 _panDelta;
@@ -20,14 +21,9 @@ public class GrubsCamera
 
 	private Terrain Terrain => GrubsGame.Instance.Terrain;
 
-	public void CanScroll( bool toggle )
-	{
-		_canScroll = toggle;
-	}
-
 	public void FrameSimulate( IClient _ )
 	{
-		if ( _canScroll )
+		if ( CanScroll )
 		{
 			Distance -= Input.MouseWheel * _scrollRate;
 			Distance = _distanceRange.Clamp( Distance );
@@ -54,7 +50,10 @@ public class GrubsCamera
 
 		ClampCamera();
 
-		if ( Input.Pressed( InputAction.CameraReset ) || !Input.Down( InputAction.CameraPan ) && _timeSinceMousePan > _secondsBeforeCentering )
+		var requestCenter = Input.Pressed( InputAction.CameraReset );
+		var automaticCenter = !Input.Down( InputAction.CameraPan ) && _timeSinceMousePan > _secondsBeforeCentering && AutomaticCentering;
+
+		if ( requestCenter || automaticCenter )
 			_isCenteredOnGrub = true;
 	}
 

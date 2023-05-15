@@ -39,7 +39,8 @@ public partial class BuildComponent : WeaponComponent
 		}
 		else
 		{
-			Grub.Player.GrubsCamera.CanScroll( true );
+			Grub.Player.GrubsCamera.CanScroll = true;
+			Grub.Player.GrubsCamera.AutomaticCentering = true;
 		}
 	}
 
@@ -60,9 +61,11 @@ public partial class BuildComponent : WeaponComponent
 		if ( RotationAngle > 90 )
 			RotationAngle -= 180;
 
-		Grub.Player.GrubsCamera.CanScroll( !Weapon.HasChargesRemaining );
+		Grub.Player.GrubsCamera.CanScroll = !Weapon.HasChargesRemaining;
+		Grub.Player.GrubsCamera.AutomaticCentering = !Weapon.HasChargesRemaining;
+
 		if ( Weapon.HasChargesRemaining )
-			Grub.Player.GrubsCamera.Distance = 512f;
+			Grub.Player.GrubsCamera.Distance = 1024f;
 
 		GirderPreview.Position = Grub.Player.MousePosition;
 		GirderPreview.Rotation = Rotation.Identity * new Angles( RotationAngle, 0, 0 ).ToRotation();
