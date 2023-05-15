@@ -132,6 +132,9 @@ public partial class FreeForAll : Gamemode
 			if ( !damagedGrub.IsValid() )
 				continue;
 
+			while ( !damagedGrub.Resolved )
+				await GameTask.Delay( 200 );
+
 			var damageTaken = damagedGrub.ApplyDamage();
 			if ( damageTaken <= 0 )
 				continue;
