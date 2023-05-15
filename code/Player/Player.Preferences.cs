@@ -112,6 +112,11 @@ public partial class Player
 			GrubNames = FileSystem.Data.ReadAllText( "GrubNames.txt" );
 			SelectedGrubNames = System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
 
+			// If we have too many saved, just grab the grub count amount.
+			if ( SelectedGrubNames.Count >= GrubsConfig.GrubCount )
+				SelectedGrubNames = SelectedGrubNames.GetRange( 0, GrubsConfig.GrubCount );
+
+			// If we don't have enough names, fetch random ones from the preset.
 			while ( SelectedGrubNames.Count < GrubsConfig.GrubCount )
 				SelectedGrubNames.Add( Random.Shared.FromList( GrubNamePresets ) );
 
