@@ -117,8 +117,17 @@ public partial class Gamemode : Entity
 
 	internal virtual void OnClientJoined( IClient client )
 	{
-		var player = new Player( client );
-		client.Pawn = player;
+		var existingPlayer = DisconnectedPlayers.Where( p => p.SteamId == client.SteamId ).FirstOrDefault();
+		if ( existingPlayer is not null )
+		{
+			client.Pawn = existingPlayer;
+			DisconnectedPlayers.Remove( existingPlayer );
+		}
+		else
+		{
+			var player = new Player( client );
+			client.Pawn = player;
+		}
 	}
 
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
