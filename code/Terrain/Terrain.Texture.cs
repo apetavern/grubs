@@ -15,6 +15,10 @@ public partial class Terrain
 	{
 		var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + ".png" );
 		WorldTextureHeight = mapSdfTexture.Height * 2;
+
+		GrubsConfig.TerrainLength = mapSdfTexture.Width;
+		GrubsConfig.TerrainHeight = mapSdfTexture.Height;
+
 		var mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f );
 		var transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength / 2, 0 ) );
 
