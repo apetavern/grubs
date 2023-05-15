@@ -18,7 +18,9 @@
           "_name": {
             "Value": "\u0022GadgetWeaponComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -49,7 +51,7 @@
       },
       "FiringType": {
         "Type": "FiringType",
-        "Value": "\u0022Instant\u0022"
+        "Value": "\u0022Charged\u0022"
       },
       "HoldPose": {
         "Type": "HoldPose",

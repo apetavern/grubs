@@ -18,23 +18,25 @@
           "_name": {
             "Value": "\u0022Explosive\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "0"
+          }
         }
       },
       {
-        "Guid": "2484593f-9943-4358-a867-f6965aa677f2",
-        "Class": "PhysicsGadgetComponent",
+        "Guid": "9361dd21-c98d-4d1b-afdd-df97da0502fc",
+        "Class": "ArcPhysicsGadgetComponent",
         "Keys": {
-          "AffectedByWind": {
-            "Type": "Boolean",
-            "Value": "true"
-          },
-          "ShouldThrow": {
-            "Type": "Boolean",
-            "Value": "true"
+          "ProjectileSpeed": {
+            "Type": "Single",
+            "Value": "50"
           },
           "_name": {
-            "Value": "\u0022PhysicsGadgetComponent\u0022"
+            "Value": "\u0022ArcPhysicsGadgetComponent\u0022"
           },
           "_tags": {}
         }
