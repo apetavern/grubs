@@ -6,20 +6,28 @@
         <label>Wind</label>
     </div>
     @{
-        var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
-        <div class="wind @(facingRight ? "right" : "left")">
-            @for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
-            {
-                <label class="icon" text=@(facingRight ? "keyboard_double_arrow_right" : "keyboard_double_arrow_left") />
-            }
-        </div>
+        var windActive = GamemodeSystem.Instance.ActiveWindSteps != 0;
+        if (windActive)
+        {
+            var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
+            <div class="wind @(facingRight ? "right" : "left")">
+                @for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
+                {
+                    <label class="icon" text=@(facingRight ? "keyboard_double_arrow_right" : "keyboard_double_arrow_left") />
+                }
+            </div>
+        }
+        else
+        {
+            <label class="icon">more_horiz</label>
+        }
     }
 </root>
 
 @code {
     protected override int BuildHash()
     {
-        return HashCode.Combine(GamemodeSystem.Instance.ActiveWindSteps);
+        return HashCode.Combine(GamemodeSystem.Instance?.ActiveWindSteps);
     }
 }
 
@@ -45,13 +53,6 @@
         }
 
         .wind {
-            .icon {
-                font-family: MaterialIconsRound;
-                font-size: 50px;
-                color: white;
-                text-shadow: 2px 2px 0px black;
-            }
-
             animation-duration: 1.3s;
             animation-iteration-count: infinite;
             animation-timing-function: ease-in-out;
@@ -63,6 +64,13 @@
             &.right {
                 animation-name: moving-right;
             }
+        }
+
+        .icon {
+            font-family: MaterialIconsRound;
+            font-size: 50px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
         }
     }
 
