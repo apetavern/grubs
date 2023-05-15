@@ -139,24 +139,4 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar.Replicated( "terrain_texture" )]
 	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Grubs;
-
-	public static string[] GrubNames => new[]
-	{
-		"Froggy",
-		"Balls",
-		"Boggy",
-		"Spicy",
-		"Hot",
-		"Pinky",
-		"Perky",
-		"Gumby",
-		"Dick",
-		"Panini",
-		"Wilson",
-		"Winky",
-		"Cammy",
-		"Bakky",
-		"Avoofo",
-		"Gibby"
-	};
 }
