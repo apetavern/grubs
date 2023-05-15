@@ -294,9 +294,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 	public void ClearGroundEntity()
 	{
-		var squirm = GetMechanic<SquirmMechanic>();
-		if ( squirm is not null )
-			squirm.ClearGroundEntity();
+		GetMechanic<SquirmMechanic>()?.ClearGroundEntity();
 	}
 
 	[ConVar.Replicated( "gr_debug_playercontroller" )]

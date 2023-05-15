@@ -31,7 +31,6 @@ public static partial class ExplosionHelper
 			var force = distanceFactor * 1000;
 
 			var dir = (grub.Position - position).Normal;
-			dir = dir.WithZ( MathF.Abs( dir.z ) );
 			dir = dir.WithY( 0f );
 			grub.Controller.ClearGroundEntity();
 			grub.ApplyAbsoluteImpulse( dir * force );
@@ -40,7 +39,7 @@ public static partial class ExplosionHelper
 		}
 
 		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Destruction );
-		Terrain.SubtractCircle( new Vector2( position.x, position.z), radius, materials );
+		Terrain.SubtractCircle( new Vector2( position.x, position.z ), radius, materials );
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
