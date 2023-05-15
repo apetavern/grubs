@@ -418,7 +418,7 @@
           },
           {
             "Value": "2",
-            "Name": "Battlefield"
+            "Name": "AntFarm"
           },
           {
             "Value": "3",
@@ -427,6 +427,10 @@
           {
             "Value": "4",
             "Name": "Bunkers"
+          },
+          {
+            "Value": "5",
+            "Name": "AICavern"
           }
         ],
         "ConVarName": "terrain_texture",

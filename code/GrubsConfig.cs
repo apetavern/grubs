@@ -122,9 +122,10 @@ public static class GrubsConfig
 	{
 		Grubs = 0,
 		Islands = 1,
-		Battlefield = 2,
+		AntFarm = 2,
 		Cavern = 3,
 		Bunkers = 4,
+		AICavern = 5,
 	}
 
 	/// <summary>
