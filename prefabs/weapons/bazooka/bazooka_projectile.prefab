@@ -45,7 +45,7 @@
           },
           "ExplosionForceMultiplier": {
             "Type": "Single",
-            "Value": "0.67"
+            "Value": "0.45"
           },
           "ExplodeAfter": {
             "Type": "Single",

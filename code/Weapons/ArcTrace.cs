@@ -83,7 +83,7 @@ public class ArcTrace
 		{
 			ArcSegment segment = new() { StartPos = position };
 
-			velocity -= new Vector3( windForceX, 0, 0 );
+			velocity -= new Vector3( windForceX / 2, 0, 0 );
 			velocity -= Game.PhysicsWorld.Gravity * epsilon;
 			position -= velocity;
 
