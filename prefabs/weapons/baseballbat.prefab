@@ -17,7 +17,7 @@
           },
           "HitForce": {
             "Type": "Vector3",
-            "Value": "\u00221500,0,1500\u0022"
+            "Value": "\u00221000,0,500\u0022"
           },
           "_name": {
             "Value": "\u0022Swing\u0022"
