@@ -2,8 +2,6 @@
 
 public static class GrubsConfig
 {
-
-
 	/// <summary>
 	/// The Grubs gamemode to play.
 	/// </summary>
@@ -15,12 +13,6 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar.Replicated( "minimum_players" )]
 	public static int MinimumPlayers { get; set; } = 2;
-
-	/// <summary>
-	/// The maximum amount of players that can be in the game.
-	/// </summary>
-	[ConVar.Replicated( "maximum_players" )]
-	public static int MaximumPlayers { get; set; } = 4;
 
 	/// <summary>
 	/// The amount of <see cref="Grub"/>s that will be spawned per team.
