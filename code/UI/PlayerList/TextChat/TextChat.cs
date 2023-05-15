@@ -73,7 +73,7 @@ public partial class TextChat : Panel
 		SendChat( message );
 	}
 
-	[ConCmd.Server( "say" )]
+	[ConCmd.Server( "gr_say" )]
 	public static void SendChat( string message )
 	{
 		if ( !ConsoleSystem.Caller.IsValid() )
