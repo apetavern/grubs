@@ -51,7 +51,7 @@
       },
       "Icon": {
         "Type": "String",
-        "Value": "\u0022models/tools/skipturn/skipremote.vmdl_c.png\u0022"
+        "Value": "\u0022models/weapons/bazooka/bazooka_homing.vmdl_c.png\u0022"
       },
       "_name": {
         "Value": "\u0022Homing Missile\u0022"
