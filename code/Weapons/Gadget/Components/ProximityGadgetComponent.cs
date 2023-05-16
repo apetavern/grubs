@@ -20,6 +20,8 @@ public partial class ProximityGadgetComponent : GadgetComponent
 
 	public override void Spawn()
 	{
+		Gadget.Tags.Add( "trigger" );
+
 		_timeUntilArm = ArmAfter;
 		_isArmed = false;
 		_isTriggered = false;
@@ -37,17 +39,11 @@ public partial class ProximityGadgetComponent : GadgetComponent
 		if ( Game.IsClient )
 			return;
 
-		if ( _timeUntilArm && !_isTriggered )
+		if ( _timeUntilArm && !_isArmed )
 		{
-			if ( !_isArmed )
-			{
-				_isArmed = true;
-				Gadget.SetMaterialGroup( 0 );
-				Gadget.PlayScreenSound( "beep" );
-			}
-
-			_isTriggered = Sandbox.Entity.FindInSphere( Gadget.Position, TriggerRadius ).OfType<Grub>().Where( g => g.LifeState == LifeState.Alive ).Any();
-			_timeUntilExplode = ExplodeAfter;
+			_isArmed = true;
+			Gadget.SetMaterialGroup( 0 );
+			Gadget.PlayScreenSound( "beep" );
 		}
 
 		if ( _isTriggered )
@@ -63,5 +59,14 @@ public partial class ProximityGadgetComponent : GadgetComponent
 			if ( _timeUntilExplode )
 				Gadget.Components.Get<ExplosiveGadgetComponent>()?.Explode();
 		}
+	}
+
+	public override void OnTouch( Entity other )
+	{
+		if ( !_isArmed || _isTriggered || other is not Grub grub || grub.LifeState != LifeState.Alive )
+			return;
+
+		_isTriggered = true;
+		_timeUntilExplode = ExplodeAfter;
 	}
 }

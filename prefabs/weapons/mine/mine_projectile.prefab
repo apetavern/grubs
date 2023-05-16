@@ -47,7 +47,7 @@
           },
           "ExplodeAfter": {
             "Type": "Single",
-            "Value": "2"
+            "Value": "1.5"
           }
         }
       },
@@ -73,7 +73,7 @@
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "40"
+            "Value": "60"
           },
           "_name": {
             "Value": "\u0022ExplosiveGadgetComponent\u0022"
