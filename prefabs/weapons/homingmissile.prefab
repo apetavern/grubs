@@ -39,7 +39,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "10"
+        "Value": "1"
       },
       "HoldPose": {
         "Type": "HoldPose",
