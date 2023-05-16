@@ -59,6 +59,10 @@
       "ShouldCameraFollow": {
         "Type": "Boolean",
         "Value": "false"
+      },
+      "UseModelCollision": {
+        "Type": "Boolean",
+        "Value": "true"
       }
     }
   }

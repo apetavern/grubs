@@ -77,7 +77,8 @@ public partial class CrateGadgetComponent : GadgetComponent
 		helper.Trace = helper.Trace
 			.Size( Gadget.CollisionBounds )
 			.Ignore( Grub )
-			.WithAnyTags( "player", "solid" )
+			.Ignore( Gadget )
+			.WithAnyTags( "player", "solid", "gadget" )
 			.WithoutTags( "dead" );
 
 		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
