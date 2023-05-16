@@ -1,0 +1,117 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "b1bea4b3-2ddf-4c5c-8ca9-fe9cb1e9f260",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "2446e95a-9e3f-4ebe-ba2d-3b4e163adeab",
+        "Class": "PhysicsGadgetComponent",
+        "Keys": {
+          "ShouldRotate": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "CheckResolve": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "_name": {
+            "Value": "\u0022PhysicsGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "dbbd6a7c-95e6-4f7f-a7c1-7144128e1365",
+        "Class": "ProximityGadgetComponent",
+        "Keys": {
+          "ArmAfter": {
+            "Type": "Int32",
+            "Value": "4"
+          },
+          "_name": {
+            "Value": "\u0022ProximityGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "TriggerRadius": {
+            "Type": "Single",
+            "Value": "11"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "2"
+          }
+        }
+      },
+      {
+        "Guid": "42e2ace6-9155-411c-9a3f-2341f8cadf19",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "-1"
+          },
+          "ExplosionForceMultiplier": {
+            "Type": "Single",
+            "Value": "0.35"
+          },
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "40"
+          },
+          "_name": {
+            "Value": "\u0022ExplosiveGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "_name": {
+        "Value": "\u0022Mine\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/landmine/landmine_projectile.vmdl\u0022"
+      },
+      "UseModelCollision": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
+      }
+    }
+  }
+}

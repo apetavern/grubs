@@ -27,7 +27,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Net]
 	public TimeUntil TimeUntilExplosion { get; private set; }
 
-	public override void OnClientSpawn()
+	public override void ClientSpawn()
 	{
 		if ( ExplodeAfter > 0 )
 			_ = new UI.ExplosiveGadgetWorldPanel( Gadget );
@@ -57,7 +57,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		Explode();
 	}
 
-	protected virtual void Explode()
+	public virtual void Explode()
 	{
 		if ( !Game.IsServer )
 			return;

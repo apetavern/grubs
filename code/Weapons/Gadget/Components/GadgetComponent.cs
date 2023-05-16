@@ -11,7 +11,7 @@ public partial class GadgetComponent : EntityComponent<Gadget>
 
 	}
 
-	public virtual void OnClientSpawn()
+	public virtual void ClientSpawn()
 	{
 
 	}

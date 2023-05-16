@@ -6,7 +6,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	public Grub Grub => Owner as Grub;
 
 	[Prefab]
-	public bool ShouldUseModelCollision { get; set; } = false;
+	public bool UseModelCollision { get; set; } = false;
 
 	[Prefab]
 	public float CollisionRadius { get; set; } = 1.0f;
@@ -32,7 +32,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		if ( !string.IsNullOrEmpty( TrailParticle ) )
 			Particles.Create( TrailParticle, this, "trail" );
 
-		if ( ShouldUseModelCollision )
+		if ( UseModelCollision )
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		else
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, CollisionRadius );
@@ -49,7 +49,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{
-			component.OnClientSpawn();
+			component.ClientSpawn();
 		}
 	}
 
