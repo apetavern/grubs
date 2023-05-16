@@ -143,6 +143,8 @@ public partial class Grub
 			gravestone.Position = Position;
 			Player.Gadgets.Add( gravestone );
 		}
+
+		Delete();
 	}
 
 	[ConCmd.Admin( "kill" )]
