@@ -46,7 +46,7 @@ public partial class ProximityGadgetComponent : GadgetComponent
 				Gadget.PlayScreenSound( "beep" );
 			}
 
-			_isTriggered = Sandbox.Entity.FindInSphere( Gadget.Position, TriggerRadius ).OfType<Grub>().Any();
+			_isTriggered = Sandbox.Entity.FindInSphere( Gadget.Position, TriggerRadius ).OfType<Grub>().Where( g => g.LifeState == LifeState.Alive ).Any();
 			_timeUntilExplode = ExplodeAfter;
 		}
 

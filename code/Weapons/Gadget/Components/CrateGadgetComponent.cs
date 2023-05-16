@@ -35,7 +35,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 
 	public override void OnTouch( Entity other )
 	{
-		if ( Game.IsClient || other is not Grub grub )
+		if ( Game.IsClient || other is not Grub grub || grub.LifeState != LifeState.Alive )
 			return;
 
 		Gadget.PlayScreenSound( PickupSound );
