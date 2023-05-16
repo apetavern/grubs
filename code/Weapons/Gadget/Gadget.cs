@@ -21,6 +21,9 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	public string StartSound { get; set; }
 	private Sound _startSound;
 
+	[Net]
+	public Vector3 Target { get; set; } = Vector3.Zero;
+
 	public bool Resolved => IsResolved();
 
 	public override void Spawn()
@@ -64,6 +67,13 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		grub.Player.Gadgets.Add( this );
 
 		Position = weapon.GetStartPosition( true );
+
+		Target = weapon.Target;
+
+		if ( Target != Vector3.Zero )
+		{
+			SetMaterialGroup( 1 );
+		}
 
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{

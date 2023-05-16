@@ -25,6 +25,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "homing"
+						remaps = 
+						[
+							{
+								from = "models/weapons/shell/materials/shell_colors.vmat"
+								to = "models/weapons/shell/materials/shell_homing_colors.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
@@ -61,7 +72,7 @@
 						_class = "PhysicsShapeCapsule"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						radius = 3.8
 						point0 = [ -2.16293, 0.0, 0.0 ]
 						point1 = [ 1.819, 0.0, 0.0 ]
@@ -87,5 +98,6 @@
 		model_archetype = "default"
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

@@ -23,6 +23,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public int Charges { get; set; } = 0;
 
 	[Net]
+	public Vector3 Target { get; set; } = Vector3.Zero;
+
+	[Net]
 	public int CurrentUses { get; set; } = 0;
 
 	/// <summary>
@@ -94,11 +97,25 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		DetermineWeaponVisibility();
 	}
 
+	[Net]
+	ModelEntity TargetIndicator { get; set; }
+
 	public void Deploy( Grub grub )
 	{
 		SetParent( grub, true );
 		EnableDrawing = true;
 		Owner = grub;
+
+		if ( Target != Vector3.Zero )
+		{
+			SetMaterialGroup( 1 );
+			if ( Game.IsServer )
+			{
+				TargetIndicator = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" );
+				TargetIndicator.Owner = Owner;
+				TargetIndicator.Position = Target;
+			}
+		}
 
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{
@@ -116,6 +133,15 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 		if ( HasFired && Ammo > 0 )
 			Ammo--;
+
+		if ( HasFired )
+		{
+			if ( TargetIndicator.IsValid() )
+			{
+				TargetIndicator.Delete();
+				TargetIndicator = null;
+			}
+		}
 
 		HasFired = false;
 

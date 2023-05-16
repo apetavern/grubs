@@ -38,6 +38,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "homing"
+						remaps = 
+						[
+							{
+								from = "models/weapons/bazooka/materials/bazooka.vmat"
+								to = "models/weapons/bazooka/materials/bazooka_homing.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
@@ -84,5 +95,6 @@
 		model_archetype = "default"
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

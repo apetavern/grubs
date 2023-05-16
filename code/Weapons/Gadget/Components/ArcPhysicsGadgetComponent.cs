@@ -18,6 +18,15 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	private float _alpha = 0;
 	private ExplosiveGadgetComponent _explosiveComponent;
 
+	[Net]
+	bool DoHoming { get; set; } = false;
+
+	[Net]
+	Vector3 Target { get; set; } = Vector3.Zero;
+
+	[Net]
+	TimeSince TimeSinceFired { get; set; }
+
 	/// <summary>
 	/// Debug console variable to see the projectiles path.
 	/// </summary>
@@ -27,6 +36,9 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		base.OnUse( weapon, charge );
+
+		Target = weapon.Target;
+		TimeSinceFired = 0f;
 
 		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
 		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
@@ -48,7 +60,14 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		if ( ProjectileDebug )
 			DrawSegments();
 
-		if ( Segments.Any() )
+		if ( Target != Vector3.Zero && TimeSinceFired > 0.6f && TimeSinceFired < 5f && !DoHoming )
+		{
+			DoHoming = true;
+			Gadget.PlayScreenSound( "beep" );
+			Gadget.Velocity = Gadget.Rotation.Forward * ProjectileSpeed / 2f;
+		}
+
+		if ( Segments.Any() && !DoHoming )
 		{
 			var currentSegment = Segments.FirstOrDefault();
 
@@ -63,9 +82,35 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 			Gadget.Velocity = (currentSegment.EndPos - Gadget.Position) * ProjectileSpeed;
 			Gadget.Position = Vector3.Lerp( currentSegment.StartPos, currentSegment.EndPos, _alpha );
 		}
-		else
+		else if ( !DoHoming )
 		{
 			_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
+		}
+
+		if ( DoHoming )
+		{
+			var rotation = Rotation.LookAt( (Target - Gadget.Position).WithY( 0 ), Vector3.Right );
+
+			Gadget.Rotation = Rotation.Slerp( Gadget.Rotation, rotation, 0.075f );
+			Gadget.Velocity = Vector3.Lerp( Gadget.Velocity, Gadget.Rotation.Forward * ProjectileSpeed / 4f, 0.5f );
+			Gadget.Position += Gadget.Velocity;
+
+			Gadget.Position = Gadget.Position.WithY( 0 );
+
+			if ( TimeSinceFired > 5f )
+			{
+				DoHoming = false;
+				var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
+				Segments = ShouldBounce
+					? arcTrace.RunTowardsWithBounces( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
+					: arcTrace.RunTowards( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce );
+				return;
+			}
+
+			if ( Trace.Ray( Gadget.Position, Gadget.Position + Gadget.Velocity ).Ignore( Gadget ).Run().Hit )
+			{
+				_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
+			}
 		}
 	}
 
