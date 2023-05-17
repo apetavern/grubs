@@ -70,7 +70,7 @@
       },
       "Icon": {
         "Type": "String",
-        "Value": "\u0022models/weapons/homingmissle/homingmissle.vmdl_c.png\u0022"
+        "Value": "\u0022models/weapons/homingmissile/homingmissile.vmdl_c.png\u0022"
       },
       "DropChance": {
         "Type": "Single",
