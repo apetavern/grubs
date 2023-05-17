@@ -16,7 +16,6 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 		if ( !Game.IsServer )
 			return;
 
-		// TODO: This should be animated? Look into this before merge.
 		TargetPreview = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" );
 		TargetPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
 		TargetPreview.Tags.Add( "preview" );
@@ -48,7 +47,10 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 		TargetPreview.EnableDrawing = _isTargetSet || Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
 		if ( !_isTargetSet )
-			TargetPreview.Position = Grub.Player.MousePosition;
+		{
+			TargetPreview.Position = Grub.Player.MousePosition.WithY( -33 );
+			TargetPreview.Rotation = Rotation.Lerp( TargetPreview.Rotation, TargetPreview.Rotation.RotateAroundAxis( Vector3.Right, 200 ), Time.Delta );
+		}
 
 		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
 		UI.Cursor.Enabled( "Weapon", Weapon.FiringType == FiringType.Cursor );
@@ -63,5 +65,6 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 		IsFiring = false;
 		Weapon.FiringType = FiringType.Charged;
 		Weapon.ShowReticle = true;
+		Weapon.PlayScreenSound( "ui_button_click" );
 	}
 }
