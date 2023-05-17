@@ -15,6 +15,7 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 		if ( !Game.IsServer )
 			return;
 
+		// TODO: This should be animated? Look into this before merge.
 		TargetPreview = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" );
 		TargetPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
 		TargetPreview.Tags.Add( "preview" );
@@ -54,6 +55,9 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
 	}
 
+	// Fire cursor shrimply locks the target preview from moving and changes the fire type
+	// to be charged. Since the firing type is charged, base.Simulate(...) will handle charging
+	// and firing the missile.
 	public override void FireCursor()
 	{
 		_isTargetSet = true;
