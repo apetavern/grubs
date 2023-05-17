@@ -11,7 +11,7 @@
         <img src="avatar:@Grub.Player.SteamId" class="avatar @DisplayAvatar()" />
     }
     <text>@Grub.Name</text>
-    <text>@((int)_health)</text>
+    <text>@((int)MathF.Ceiling(_health))</text>
 </root>
 
 @code {
