@@ -1,0 +1,55 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "e333abb9-cf94-40bc-b7f1-76e191f21226",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "47c44a3c-51c9-4b47-b244-526fb1574e64",
+        "Class": "ArcPhysicsGadgetComponent",
+        "Keys": {
+          "IsHoming": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "ProjectileSpeed": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "_name": {
+            "Value": "\u0022Physics\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/shell/shell.vmdl\u0022"
+      },
+      "CollisionRadius": {
+        "Type": "Single",
+        "Value": "6"
+      },
+      "_name": {
+        "Value": "\u0022Homing Missile Projectile\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget\u0022"
+      }
+    }
+  }
+}

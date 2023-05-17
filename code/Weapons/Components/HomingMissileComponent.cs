@@ -1,20 +1,22 @@
-﻿namespace Grubs;
+namespace Grubs;
 
 [Prefab]
-public partial class HomingMissileComponent : WeaponComponent
+public partial class HomingMissileComponent : GadgetWeaponComponent
 {
-	[Prefab, ResourceType( "sound" )]
-	public string UseSound { get; set; }
-
 	[Net]
-	public AnimatedEntity TargetPreview { get; set; }
+	public ModelEntity TargetPreview { get; set; }
+
+	private bool _isTargetSet;
 
 	public override void OnDeploy()
 	{
+		_isTargetSet = false;
+
 		if ( !Game.IsServer )
 			return;
 
-		TargetPreview = new AnimatedEntity( "models/weapons/targetindicator/targetindicator.vmdl" );
+		TargetPreview = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" );
+		TargetPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
 		TargetPreview.Tags.Add( "preview" );
 		TargetPreview.Owner = Grub;
 	}
@@ -41,24 +43,21 @@ public partial class HomingMissileComponent : WeaponComponent
 		if ( !TargetPreview.IsValid() )
 			return;
 
-		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
+		TargetPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
-		if ( Game.IsServer )
+		if ( !_isTargetSet )
 		{
-			if ( IsFiring )
-				Fire();
-			else
-				IsFiring = false;
+			TargetPreview.Position = Grub.Player.MousePosition;
+			TargetPreview.Rotation = Grub.Rotation;
 		}
+
+		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
 	}
 
 	public override void FireCursor()
 	{
-		Weapon.PlayScreenSound( UseSound );
-
-		FireFinished();
-
-		Grub.Player.Inventory.SetActiveWeapon( Weapon.FromPrefab( "prefabs/weapons/bazooka/bazooka.prefab" ), true );
-		Grub.ActiveWeapon.Target = Grub.Player.MousePosition;
+		_isTargetSet = true;
+		IsFiring = false;
+		Weapon.FiringType = FiringType.Charged;
 	}
 }
