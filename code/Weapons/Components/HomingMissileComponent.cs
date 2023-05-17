@@ -63,5 +63,6 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 		_isTargetSet = true;
 		IsFiring = false;
 		Weapon.FiringType = FiringType.Charged;
+		Weapon.ShowReticle = true;
 	}
 }

@@ -75,6 +75,10 @@
       "DropChance": {
         "Type": "Single",
         "Value": "0"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }
