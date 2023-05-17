@@ -155,7 +155,7 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = grub;
 
 		DamageGrubEventClient( To.Everyone, grub );
-		await GameTask.Delay( 1000 );
+		await GameTask.Delay( 1250 );
 
 		CameraTarget = null;
 	}
