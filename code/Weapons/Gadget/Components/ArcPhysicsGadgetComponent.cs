@@ -12,20 +12,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public int MaxBounces { get; set; } = 0;
 
-	[Prefab, Net]
-	public bool HasHoming { get; set; } = false;
-
 	[Net]
-	private IList<ArcSegment> Segments { get; set; }
+	protected IList<ArcSegment> Segments { get; set; }
 
+	protected ExplosiveGadgetComponent _explosiveComponent;
 	private float _alpha = 0;
-	private ExplosiveGadgetComponent _explosiveComponent;
-
-	[Net]
-	public Vector3 TargetPosition { get; set; } = Vector3.Zero;
-
-	[Net]
-	public TimeSince TimeSinceFired { get; set; }
 
 	/// <summary>
 	/// Debug console variable to see the projectiles path.
@@ -37,16 +28,8 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	{
 		base.OnUse( weapon, charge );
 
-		TargetPosition = weapon.Target;
-		TimeSinceFired = 0f;
-
 		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
-		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
-
-		var arcTrace = new ArcTrace( Grub, Gadget, weapon.GetStartPosition() );
-		Segments = ShouldBounce
-			? arcTrace.RunTowardsWithBounces( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
-			: arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce );
+		Segments = CalculateTrajectory( Grub.EyeRotation.Forward.Normal * Grub.Facing, charge );
 		Gadget.Position = Segments[0].StartPos;
 	}
 
@@ -57,26 +40,14 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 
 	public override void Simulate( IClient client )
 	{
+		RunAlongSegments();
+	}
+
+	protected void RunAlongSegments()
+	{
 		if ( ProjectileDebug )
 			DrawSegments();
 
-		// Technical Debt: Homing should be declared at a prefab level. This requires
-		// a refactor of Weapon to support multiple steps / firing types.
-		if ( TargetPosition != Vector3.Zero && TimeSinceFired > 0.6f && TimeSinceFired < 5.0f && !HasHoming )
-		{
-			HasHoming = true;
-			Gadget.PlayScreenSound( "beep" );
-			Gadget.Velocity = Gadget.Rotation.Forward * ProjectileSpeed / 2f;
-		}
-
-		if ( !HasHoming )
-			RunAlongSegments();
-		else
-			RunTowardsTarget();
-	}
-
-	private void RunAlongSegments()
-	{
 		if ( Segments.Any() )
 		{
 			var currentSegment = Segments.FirstOrDefault();
@@ -98,30 +69,13 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		}
 	}
 
-	private void RunTowardsTarget()
+	protected List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
 	{
-		var rotation = Rotation.LookAt( (TargetPosition - Gadget.Position).WithY( 0 ), Vector3.Right );
-
-		Gadget.Rotation = Rotation.Slerp( Gadget.Rotation, rotation, 0.075f );
-		Gadget.Velocity = Vector3.Lerp( Gadget.Velocity, Gadget.Rotation.Forward * ProjectileSpeed / 4f, 0.5f );
-		Gadget.Position += Gadget.Velocity;
-
-		Gadget.Position = Gadget.Position.WithY( 0 );
-
-		if ( TimeSinceFired > 5f )
-		{
-			HasHoming = false;
-			var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
-			Segments = ShouldBounce
-				? arcTrace.RunTowardsWithBounces( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
-				: arcTrace.RunTowards( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce );
-			return;
-		}
-
-		if ( Trace.Ray( Gadget.Position, Gadget.Position + Gadget.Velocity ).Ignore( Gadget ).Run().Hit )
-		{
-			_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
-		}
+		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
+		var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
+		return ShouldBounce
+			? arcTrace.RunTowardsWithBounces( direction, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
+			: arcTrace.RunTowards( direction, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce );
 	}
 
 	private void DrawSegments()

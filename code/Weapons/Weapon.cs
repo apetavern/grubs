@@ -23,9 +23,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public int Charges { get; set; } = 0;
 
 	[Net]
-	public Vector3 Target { get; set; } = Vector3.Zero;
-
-	[Net]
 	public int CurrentUses { get; set; } = 0;
 
 	/// <summary>
@@ -93,7 +90,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public override void Simulate( IClient client )
 	{
 		SimulateComponents( client );
-
 		DetermineWeaponVisibility();
 	}
 
@@ -106,26 +102,12 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		EnableDrawing = true;
 		Owner = grub;
 
-		if ( Target != Vector3.Zero )
-		{
-			SetMaterialGroup( 1 );
-			if ( Game.IsServer )
-			{
-				TargetIndicator = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" )
-				{
-					Owner = Owner,
-					Position = Target
-				};
-			}
-		}
-
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{
 			component.OnDeploy();
 		}
 
-		if ( FiringType is FiringType.Cursor )
-			UI.Cursor.Enabled( "Weapon", true );
+		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
 	}
 
 	public void Holster( Grub _ )
@@ -136,15 +118,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		if ( HasFired && Ammo > 0 )
 			Ammo--;
 
-		if ( HasFired )
-		{
-			if ( TargetIndicator.IsValid() )
-			{
-				TargetIndicator.Delete();
-				TargetIndicator = null;
-			}
-		}
-
 		HasFired = false;
 
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
@@ -154,8 +127,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 		Grub?.SetHatVisible( true );
 
-		if ( FiringType is FiringType.Cursor )
-			UI.Cursor.Enabled( "Weapon", false );
+		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
 
 		SetParent( null );
 	}
