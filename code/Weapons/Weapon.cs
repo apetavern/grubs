@@ -98,7 +98,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	}
 
 	[Net]
-	ModelEntity TargetIndicator { get; set; }
+	public ModelEntity TargetIndicator { get; set; }
 
 	public void Deploy( Grub grub )
 	{
@@ -111,9 +111,11 @@ public partial class Weapon : AnimatedEntity, IResolvable
 			SetMaterialGroup( 1 );
 			if ( Game.IsServer )
 			{
-				TargetIndicator = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" );
-				TargetIndicator.Owner = Owner;
-				TargetIndicator.Position = Target;
+				TargetIndicator = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" )
+				{
+					Owner = Owner,
+					Position = Target
+				};
 			}
 		}
 
