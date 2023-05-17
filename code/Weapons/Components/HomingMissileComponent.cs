@@ -5,12 +5,13 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 {
 	[Net]
 	public ModelEntity TargetPreview { get; set; }
-
 	private bool _isTargetSet;
 
 	public override void OnDeploy()
 	{
 		_isTargetSet = false;
+		Weapon.FiringType = FiringType.Cursor;
+		Weapon.ShowReticle = false;
 
 		if ( !Game.IsServer )
 			return;
@@ -44,15 +45,13 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 		if ( !TargetPreview.IsValid() )
 			return;
 
-		TargetPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
+		TargetPreview.EnableDrawing = _isTargetSet || Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
 		if ( !_isTargetSet )
-		{
 			TargetPreview.Position = Grub.Player.MousePosition;
-			TargetPreview.Rotation = Grub.Rotation;
-		}
 
 		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
+		UI.Cursor.Enabled( "Weapon", Weapon.FiringType == FiringType.Cursor );
 	}
 
 	// Fire cursor shrimply locks the target preview from moving and changes the fire type

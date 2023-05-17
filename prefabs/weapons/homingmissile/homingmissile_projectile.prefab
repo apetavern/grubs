@@ -8,22 +8,38 @@
     "Entities": [],
     "Components": [
       {
-        "Guid": "47c44a3c-51c9-4b47-b244-526fb1574e64",
+        "Guid": "96b578c4-a6db-4a4f-b751-3d22e7b182f9",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "_name": {
+            "Value": "\u0022ExplosiveGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "-1"
+          }
+        }
+      },
+      {
+        "Guid": "9a83f752-adf4-479e-ae1f-3cae8c5bb612",
         "Class": "ArcPhysicsGadgetComponent",
         "Keys": {
-          "IsHoming": {
-            "Type": "Boolean",
-            "Value": "true"
+          "_name": {
+            "Value": "\u0022ArcPhysicsGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
           },
           "ProjectileSpeed": {
             "Type": "Single",
             "Value": "50"
-          },
-          "_name": {
-            "Value": "\u0022Physics\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
           }
         }
       }

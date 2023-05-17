@@ -91,7 +91,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	{
 		SimulateComponents( client );
 		DetermineWeaponVisibility();
-		UI.Cursor.Enabled( "Weapon", FiringType is FiringType.Cursor );
 	}
 
 	[Net]
@@ -107,6 +106,8 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		{
 			component.OnDeploy();
 		}
+
+		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
 	}
 
 	public void Holster( Grub _ )
@@ -125,6 +126,8 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		}
 
 		Grub?.SetHatVisible( true );
+
+		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
 
 		SetParent( null );
 	}
