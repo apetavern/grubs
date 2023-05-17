@@ -16,31 +16,45 @@
             "Value": "\u0022Explosion\u0022"
           },
           "_name": {
-            "Value": "\u0022ExplosiveGadgetComponent\u0022"
+            "Value": "\u0022Explosive\u0022"
           },
           "_tags": {
             "Value": "[]"
           },
           "ExplodeAfter": {
             "Type": "Single",
-            "Value": "-1"
+            "Value": "0"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "ExplosionForceMultiplier": {
+            "Type": "Single",
+            "Value": "0.45"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "90"
+          },
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "40"
           }
         }
       },
       {
-        "Guid": "9a83f752-adf4-479e-ae1f-3cae8c5bb612",
-        "Class": "ArcPhysicsGadgetComponent",
+        "Guid": "05e965aa-e6b0-4aab-9be6-44e021c92379",
+        "Class": "HomingPhysicsGadgetComponent",
         "Keys": {
-          "_name": {
-            "Value": "\u0022ArcPhysicsGadgetComponent\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          },
           "ProjectileSpeed": {
             "Type": "Single",
             "Value": "50"
-          }
+          },
+          "_name": {
+            "Value": "\u0022Physics\u0022"
+          },
+          "_tags": {}
         }
       }
     ],

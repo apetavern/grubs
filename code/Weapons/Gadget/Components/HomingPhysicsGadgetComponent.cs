@@ -1,0 +1,65 @@
+namespace Grubs;
+
+[Prefab]
+public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
+{
+	[Net, Prefab]
+	private float TimeUntilHoming { get; set; } = 0.6f;
+
+	[Net, Prefab]
+	private float TimeUntilFail { get; set; } = 5f;
+
+	[Net]
+	private Vector3 TargetPosition { get; set; }
+
+	[Net]
+	private TimeSince TimeSinceFired { get; set; }
+
+	private bool _isHoming = false;
+
+	public override void OnUse( Weapon weapon, int charge )
+	{
+		base.OnUse( weapon, charge );
+
+		TargetPosition = weapon.Components.Get<HomingMissileComponent>().TargetPreview.Position;
+		TimeSinceFired = 0f;
+	}
+
+	public override void Simulate( IClient client )
+	{
+		if ( TimeSinceFired >= TimeUntilHoming && !_isHoming )
+		{
+			_isHoming = true;
+			Gadget.Velocity = Gadget.Rotation.Forward * ProjectileSpeed / 2f;
+			Gadget.PlayScreenSound( "beep" );
+		}
+
+		if ( _isHoming )
+			RunTowardsTarget();
+		else
+			RunAlongSegments();
+	}
+
+	private void RunTowardsTarget()
+	{
+		var rotation = Rotation.LookAt( (TargetPosition - Gadget.Position).WithY( 0 ), Vector3.Right );
+
+		Gadget.Rotation = Rotation.Slerp( Gadget.Rotation, rotation, 0.075f );
+		Gadget.Velocity = Vector3.Lerp( Gadget.Velocity, Gadget.Rotation.Forward * ProjectileSpeed / 4f, 0.5f );
+		Gadget.Position += Gadget.Velocity;
+		Gadget.Position = Gadget.Position.WithY( 0 );
+
+		if ( TimeSinceFired > TimeUntilFail )
+		{
+			_isHoming = false;
+			var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
+			Segments = ShouldBounce
+				? arcTrace.RunTowardsWithBounces( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
+				: arcTrace.RunTowards( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce );
+			return;
+		}
+
+		if ( Trace.Ray( Gadget.Position, Gadget.Position + Gadget.Velocity ).Size( Gadget.CollisionBounds ).Ignore( Gadget ).Run().Hit )
+			_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
+	}
+}

@@ -13,10 +13,10 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	public int MaxBounces { get; set; } = 0;
 
 	[Net]
-	private IList<ArcSegment> Segments { get; set; }
+	protected IList<ArcSegment> Segments { get; set; }
 
+	protected ExplosiveGadgetComponent _explosiveComponent;
 	private float _alpha = 0;
-	private ExplosiveGadgetComponent _explosiveComponent;
 
 	/// <summary>
 	/// Debug console variable to see the projectiles path.
@@ -44,6 +44,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	}
 
 	public override void Simulate( IClient client )
+	{
+		RunAlongSegments();
+	}
+
+	protected void RunAlongSegments()
 	{
 		if ( ProjectileDebug )
 			DrawSegments();
