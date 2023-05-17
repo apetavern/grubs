@@ -67,6 +67,10 @@
       "Icon": {
         "Type": "String",
         "Value": "\u0022models/weapons/landmine/landmine.vmdl_c.png\u0022"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "2"
       }
     }
   }
