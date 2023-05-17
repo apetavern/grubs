@@ -60,6 +60,10 @@
           "TimeUntilFail": {
             "Type": "Single",
             "Value": "3"
+          },
+          "LockOnSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/homingmissile/homingmissile_lock.sound\u0022"
           }
         }
       }

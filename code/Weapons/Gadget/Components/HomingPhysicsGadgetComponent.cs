@@ -3,6 +3,9 @@ namespace Grubs;
 [Prefab]
 public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 {
+	[Prefab, ResourceType( "sound" )]
+	public string LockOnSound { get; set; }
+
 	[Net, Prefab]
 	private float TimeUntilHoming { get; set; } = 0.6f;
 
@@ -33,7 +36,7 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 			_isHoming = true;
 			_isInitialized = true;
 			Gadget.Velocity = Gadget.Rotation.Forward * ProjectileSpeed / 2f;
-			Gadget.PlayScreenSound( "beep" );
+			Gadget.PlayScreenSound( LockOnSound );
 		}
 
 		if ( _isHoming )
