@@ -54,7 +54,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "-1"
+        "Value": "1"
       },
       "Charges": {
         "Type": "Int32",

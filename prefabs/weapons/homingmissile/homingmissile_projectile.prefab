@@ -35,11 +35,11 @@
           },
           "MaxExplosionDamage": {
             "Type": "Single",
-            "Value": "90"
+            "Value": "100"
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "40"
+            "Value": "50"
           }
         }
       },

@@ -57,7 +57,7 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 		if ( TimeSinceFired > TimeUntilFail )
 		{
 			_isHoming = false;
-			Segments = CalculateSegments( Gadget.Velocity, (int)(ProjectileSpeed / 20f) );
+			Segments = CalculateTrajectory( Gadget.Velocity, (int)(ProjectileSpeed / 20f) );
 			return;
 		}
 

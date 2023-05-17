@@ -29,7 +29,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		base.OnUse( weapon, charge );
 
 		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
-		Segments = CalculateSegments( Grub.EyeRotation.Forward.Normal * Grub.Facing, charge );
+		Segments = CalculateTrajectory( Grub.EyeRotation.Forward.Normal * Grub.Facing, charge );
 		Gadget.Position = Segments[0].StartPos;
 	}
 
@@ -69,7 +69,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		}
 	}
 
-	protected List<ArcSegment> CalculateSegments( Vector3 direction, int charge )
+	protected List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
 	{
 		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
 		var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
