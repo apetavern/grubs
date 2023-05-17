@@ -74,7 +74,7 @@
       },
       "DropChance": {
         "Type": "Single",
-        "Value": "0.2"
+        "Value": "1.5"
       },
       "ShowReticle": {
         "Type": "Boolean",
