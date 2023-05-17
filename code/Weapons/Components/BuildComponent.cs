@@ -88,7 +88,7 @@ public partial class BuildComponent : WeaponComponent
 			var girderTexture = Texture.Load( FileSystem.Mounted, "textures/texturestamps/girder_sdf.png" );
 
 			var terrain = GamemodeSystem.Instance.Terrain;
-			var materials = new Dictionary<Sdf2DMaterial, float>();
+			var materials = new Dictionary<Sdf2DLayer, float>();
 			foreach ( var mat in terrain.GetGirderMaterials() )
 				materials.Add( mat, 0f );
 

@@ -4,20 +4,20 @@ namespace Grubs;
 
 public partial class Terrain
 {
-	public Sdf2DMaterial DevMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf2d_default.sdflayer" );
-	public Sdf2DMaterial SandMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/sand.sdflayer" );
-	public Sdf2DMaterial DirtMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/dirt.sdflayer" );
-	public Sdf2DMaterial RockMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/rock.sdflayer" );
+	public Sdf2DLayer DevMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf2d_default.sdflayer" );
+	public Sdf2DLayer SandMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
+	public Sdf2DLayer DirtMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/dirt.sdflayer" );
+	public Sdf2DLayer RockMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/rock.sdflayer" );
 
-	public Sdf2DMaterial GirderMaterial { get; } = ResourceLibrary.Get<Sdf2DMaterial>( "materials/sdf/girder.sdflayer" );
+	public Sdf2DLayer GirderMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/girder.sdflayer" );
 
-	public Dictionary<Sdf2DMaterial, float> GetActiveMaterials( MaterialsConfig cfg )
+	public Dictionary<Sdf2DLayer, float> GetActiveMaterials( MaterialsConfig cfg )
 	{
-		var materials = new Dictionary<Sdf2DMaterial, float>();
+		var materials = new Dictionary<Sdf2DLayer, float>();
 
 		var terrainType = GrubsConfig.WorldTerrainEnvironmentType;
 
-		List<Sdf2DMaterial> activeMaterials;
+		List<Sdf2DLayer> activeMaterials;
 
 		activeMaterials = terrainType switch
 		{
@@ -36,24 +36,24 @@ public partial class Terrain
 		return materials;
 	}
 
-	public List<Sdf2DMaterial> GetSandMaterials()
+	public List<Sdf2DLayer> GetSandMaterials()
 	{
-		return new List<Sdf2DMaterial>() { SandMaterial, RockMaterial };
+		return new List<Sdf2DLayer>() { SandMaterial, RockMaterial };
 	}
 
-	public List<Sdf2DMaterial> GetDirtMaterials()
+	public List<Sdf2DLayer> GetDirtMaterials()
 	{
-		return new List<Sdf2DMaterial>() { DirtMaterial, RockMaterial };
+		return new List<Sdf2DLayer>() { DirtMaterial, RockMaterial };
 	}
 
-	public List<Sdf2DMaterial> GetGirderMaterials()
+	public List<Sdf2DLayer> GetGirderMaterials()
 	{
-		return new List<Sdf2DMaterial>() { GirderMaterial };
+		return new List<Sdf2DLayer>() { GirderMaterial };
 	}
 
-	public List<Sdf2DMaterial> GetAllMaterials()
+	public List<Sdf2DLayer> GetAllMaterials()
 	{
-		return new List<Sdf2DMaterial>() { GirderMaterial };
+		return new List<Sdf2DLayer>() { GirderMaterial };
 	}
 }
 
