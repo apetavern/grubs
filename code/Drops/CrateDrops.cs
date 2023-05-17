@@ -88,4 +88,38 @@ public static class CrateDrops
 
 		return dropMap[weapon];
 	}
+
+	[ConCmd.Admin("gr_show_droprates")]
+	public static void ShowDropRates()
+	{
+		// Ensure the drop tables have been initialized.
+		GetRandomToolFromCrate();
+		GetRandomWeaponFromCrate();
+
+		// Print weapon drop table.
+		Log.Info( "=== WEAPONS DROP TABLE ===" );
+		for ( int i = 0; i < _cumulativeDropPercentagesWeapons.Count; i++ )
+		{
+			float dropChance;
+			if ( i > 0 )
+				dropChance = _cumulativeDropPercentagesWeapons[i] - _cumulativeDropPercentagesWeapons[i - 1];
+			else
+				dropChance = _cumulativeDropPercentagesWeapons[i];
+
+			Log.Info( $"{_dropMapWeapons[i]}: {dropChance * 100f}%");
+		}
+
+		Log.Info( "=== TOOLS DROP TABLE ===" );
+		// Print tool drop table.
+		for ( int i = 0; i < _cumulativeDropPercentagesTools.Count; i++ )
+		{
+			float dropChance;
+			if ( i > 0 )
+				dropChance = _cumulativeDropPercentagesTools[i] - _cumulativeDropPercentagesTools[i - 1];
+			else
+				dropChance = _cumulativeDropPercentagesTools[i];
+
+			Log.Info( $"{_dropMapTools[i]}: {dropChance * 100f}%" );
+		}
+	}
 }
