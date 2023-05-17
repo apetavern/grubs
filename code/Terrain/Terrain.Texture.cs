@@ -19,7 +19,7 @@ public partial class Terrain
 		GrubsConfig.TerrainLength = mapSdfTexture.Width;
 		GrubsConfig.TerrainHeight = mapSdfTexture.Height;
 
-		var mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f );
+		var mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f, pivot: 0f );
 		var transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength, 0 ) );
 
 		var cfg = new MaterialsConfig( true, true );
@@ -28,7 +28,7 @@ public partial class Terrain
 		SdfWorld.Add( transformedSdf, materials.ElementAt( 0 ).Key );
 
 		mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + "_back.png" );
-		mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f );
+		mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f, pivot: 0f );
 		transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength, 0 ) );
 
 		SdfWorld.Add( transformedSdf, materials.ElementAt( 1 ).Key );

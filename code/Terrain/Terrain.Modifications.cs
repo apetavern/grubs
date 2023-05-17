@@ -64,7 +64,6 @@ public partial class Terrain
 	{
 		var textureSdf = new TextureSdf( texture, gradientWidth, worldWidth );
 		var transformedTextureSdf = textureSdf
-			.Translate( textureSdf.Bounds.Size * -0.5f )
 			.Transform( position, rotation );
 		foreach ( var (material, offset) in materials )
 			Add( SdfWorld, transformedTextureSdf.Expand( offset ), material );
