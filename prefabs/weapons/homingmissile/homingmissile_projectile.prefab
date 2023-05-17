@@ -22,14 +22,16 @@
           "_name": {
             "Value": "\u0022Physics\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
     "Keys": {
       "Model": {
         "Type": "Model",
-        "Value": "\u0022models/weapons/shell/shell.vmdl\u0022"
+        "Value": "\u0022models/weapons/shell/homingshell.vmdl\u0022"
       },
       "CollisionRadius": {
         "Type": "Single",
