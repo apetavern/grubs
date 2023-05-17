@@ -29,12 +29,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		base.OnUse( weapon, charge );
 
 		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
-		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
-
-		var arcTrace = new ArcTrace( Grub, Gadget, weapon.GetStartPosition() );
-		Segments = ShouldBounce
-			? arcTrace.RunTowardsWithBounces( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
-			: arcTrace.RunTowards( Grub.EyeRotation.Forward.Normal * Grub.Facing, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce );
+		Segments = CalculateSegments( Grub.EyeRotation.Forward.Normal * Grub.Facing, charge );
 		Gadget.Position = Segments[0].StartPos;
 	}
 
@@ -72,6 +67,15 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		{
 			_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
 		}
+	}
+
+	protected List<ArcSegment> CalculateSegments( Vector3 direction, int charge )
+	{
+		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
+		var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
+		return ShouldBounce
+			? arcTrace.RunTowardsWithBounces( direction, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
+			: arcTrace.RunTowards( direction, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce );
 	}
 
 	private void DrawSegments()

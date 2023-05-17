@@ -7,7 +7,7 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 	private float TimeUntilHoming { get; set; } = 0.6f;
 
 	[Net, Prefab]
-	private float TimeUntilFail { get; set; } = 5f;
+	private float TimeUntilFail { get; set; } = 3f;
 
 	[Net]
 	private Vector3 TargetPosition { get; set; }
@@ -16,6 +16,7 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 	private TimeSince TimeSinceFired { get; set; }
 
 	private bool _isHoming = false;
+	private bool _isInitialized = false;
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
@@ -27,9 +28,10 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 
 	public override void Simulate( IClient client )
 	{
-		if ( TimeSinceFired >= TimeUntilHoming && !_isHoming )
+		if ( TimeSinceFired >= TimeUntilHoming && !_isInitialized )
 		{
 			_isHoming = true;
+			_isInitialized = true;
 			Gadget.Velocity = Gadget.Rotation.Forward * ProjectileSpeed / 2f;
 			Gadget.PlayScreenSound( "beep" );
 		}
@@ -52,10 +54,7 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 		if ( TimeSinceFired > TimeUntilFail )
 		{
 			_isHoming = false;
-			var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
-			Segments = ShouldBounce
-				? arcTrace.RunTowardsWithBounces( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
-				: arcTrace.RunTowards( Gadget.Velocity, ProjectileSpeed / 10f, GamemodeSystem.Instance.ActiveWindForce );
+			Segments = CalculateSegments( Gadget.Velocity, (int)(ProjectileSpeed / 20f) );
 			return;
 		}
 

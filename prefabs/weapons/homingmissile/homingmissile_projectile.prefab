@@ -54,7 +54,13 @@
           "_name": {
             "Value": "\u0022Physics\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          },
+          "TimeUntilFail": {
+            "Type": "Single",
+            "Value": "3"
+          }
         }
       }
     ],
