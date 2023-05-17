@@ -21,6 +21,7 @@ public partial class ProximityGadgetComponent : GadgetComponent
 	public override void Spawn()
 	{
 		Gadget.Tags.Add( "trigger" );
+		Gadget.EnableTouchPersists = true;
 
 		_timeUntilArm = ArmAfter;
 		_isArmed = false;
@@ -61,8 +62,10 @@ public partial class ProximityGadgetComponent : GadgetComponent
 		}
 	}
 
-	public override void OnTouch( Entity other )
+	public override void Touch( Entity other )
 	{
+		Log.Info( "called" );
+
 		if ( !_isArmed || _isTriggered || other is not Grub grub || grub.LifeState != LifeState.Alive )
 			return;
 

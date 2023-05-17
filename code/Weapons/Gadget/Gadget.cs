@@ -71,11 +71,11 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		}
 	}
 
-	public override void StartTouch( Entity other )
+	public override void Touch( Entity other )
 	{
 		foreach ( var component in Components.GetAll<GadgetComponent>() )
 		{
-			component.OnTouch( other );
+			component.Touch( other );
 		}
 	}
 

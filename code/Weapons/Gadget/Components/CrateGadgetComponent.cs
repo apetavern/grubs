@@ -33,7 +33,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 		_parachute = new AnimatedEntity( "models/crates/crate_parachute/crate_parachute.vmdl", Entity );
 	}
 
-	public override void OnTouch( Entity other )
+	public override void Touch( Entity other )
 	{
 		if ( Game.IsClient || other is not Grub grub || grub.LifeState != LifeState.Alive )
 			return;

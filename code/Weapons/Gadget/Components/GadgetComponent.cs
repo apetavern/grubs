@@ -26,7 +26,7 @@ public partial class GadgetComponent : EntityComponent<Gadget>
 
 	}
 
-	public virtual void OnTouch( Entity other )
+	public virtual void Touch( Entity other )
 	{
 
 	}
