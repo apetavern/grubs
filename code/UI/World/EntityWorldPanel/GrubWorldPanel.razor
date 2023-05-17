@@ -11,14 +11,32 @@
         <img src="avatar:@Grub.Player.SteamId" class="avatar @DisplayAvatar()" />
     }
     <text>@Grub.Name</text>
-    <text>@((int)Grub.Health)</text>
+    <text>@((int)_health)</text>
 </root>
 
 @code {
     public Grub Grub => Entity as Grub;
     public Player LocalPlayer => Game.LocalPawn as Player;
 
-    public GrubWorldPanel(Grub grub) : base(grub) { }
+    private float _health;
+    private const float _transitionRate = 35f;
+
+    public GrubWorldPanel(Grub grub) : base(grub)
+    {
+        _health = Grub.Health;
+    }
+
+    public override void Tick()
+    {
+        base.Tick();
+
+        if (_health != Grub.Health)
+        {
+            int delta = Grub.Health < _health ? -1 : 1; // Is health decreasing or increasing?
+            float health = _health + (delta * Time.Delta * _transitionRate);
+            _health = health.Clamp(Math.Min(_health, Grub.Health), Math.Max(_health, Grub.Health)); // Ensure we don't overshoot.
+        }
+    }
 
     string DisplayAvatar()
     {
@@ -29,7 +47,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Grub?.Name, Grub?.Health, LocalPlayer?.GrubsCamera?.Distance);
+        return HashCode.Combine(Grub?.Name, _health, LocalPlayer?.GrubsCamera?.Distance);
     }
 }
 
