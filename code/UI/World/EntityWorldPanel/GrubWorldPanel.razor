@@ -32,9 +32,9 @@
 
         if (_health != Grub.Health)
         {
-            int delta = Grub.Health < _health ? -1 : 1; // Is health decreasing or increasing?
+            int delta = Grub.Health < _health ? -1 : 1;
             float health = _health + (delta * Time.Delta * _transitionRate);
-            _health = health.Clamp(Math.Min(_health, Grub.Health), Math.Max(_health, Grub.Health)); // Ensure we don't overshoot.
+            _health = health.Clamp(Math.Min(_health, Grub.Health), Math.Max(_health, Grub.Health));
         }
     }
 
