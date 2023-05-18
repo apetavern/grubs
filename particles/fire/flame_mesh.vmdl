@@ -14,7 +14,7 @@
 						remaps = 
 						[
 							{
-								from = "cylinder.vmat"
+								from = "material.vmat"
 								to = "particles/fire/fire_02.vmat"
 							},
 						]
