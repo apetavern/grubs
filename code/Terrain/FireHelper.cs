@@ -65,7 +65,7 @@ public class FireEntity : ModelEntity, IResolvable
 	{
 		Velocity += new Vector3( _moveDirection ) * Time.Delta / 2f;
 		Velocity += Game.PhysicsWorld.Gravity * Time.Delta / 10f;
-		Velocity += GamemodeSystem.Instance.ActiveWindForce * 512f * Time.Delta;
+		Velocity += GamemodeSystem.Instance.ActiveWindForce * 128f * Time.Delta;
 
 		Velocity = Velocity.WithY( 0f );
 

@@ -169,9 +169,9 @@ public partial class HitScanComponent : WeaponComponent
 	{
 		if ( tr.Hit )
 		{
-			if ( tr.Entity is Grub grub )
+			if ( tr.Entity is Grub || tr.Entity is Gadget )
 			{
-				HitGrub( grub, -tr.Normal );
+				HitEntity( tr.Entity, -tr.Normal );
 				return false;
 			}
 			else if ( tr.Entity is Sdf2DWorld )
@@ -194,14 +194,14 @@ public partial class HitScanComponent : WeaponComponent
 		}
 	}
 
-	private void HitGrub( Grub grub, Vector3 direction )
+	private void HitEntity( Entity entity, Vector3 direction )
 	{
-		grub.ApplyAbsoluteImpulse( HitForce * direction );
-		grub.TakeDamage( new DamageInfo
+		entity.ApplyAbsoluteImpulse( HitForce * direction );
+		entity.TakeDamage( new DamageInfo
 		{
 			Attacker = Grub,
 			Damage = Damage,
-			Position = grub.Position,
+			Position = entity.Position,
 			Force = direction
 		}.WithTag( "hitscan" ) );
 	}

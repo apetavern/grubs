@@ -92,6 +92,12 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	public override void OnKilled()
 	{
 		ExplosionHelper.Explode( Position, this, 50f );
+
+		if ( IsCrateGadget )
+		{
+			FireHelper.StartFiresAt( Position + Vector3.Random.WithY( 0f ) * 15f, Vector3.Random.WithY( 0f ) * 30f, 4 );
+		}
+
 		PlayScreenSound( "explosion_short_tail" );
 		Delete();
 	}
