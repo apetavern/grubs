@@ -43,8 +43,8 @@ public class FireEntity : ModelEntity, IResolvable
 
 	public override void Spawn()
 	{
-		Model = Model.Load( "particles/flamemodel.vmdl" );
-		// FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
+		// Model = Model.Load( "particles/flamemodel.vmdl" );
+		FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
 		Tags.Add( "fire" );
 		Name = "fire";
 	}
@@ -93,7 +93,7 @@ public class FireEntity : ModelEntity, IResolvable
 			}
 			else if ( collisionTrace.Entity is Gadget gadget )
 			{
-				if ( gadget.Name == "Weapons Crate" || gadget.Name == "Tools Crate" || gadget.Name == "Health Crate" )
+				if ( gadget.IsCrateGadget )
 				{
 					gadget.TakeDamage(
 						DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
@@ -104,46 +104,5 @@ public class FireEntity : ModelEntity, IResolvable
 		var terrain = GrubsGame.Instance.Terrain;
 		var materials = terrain.GetActiveMaterials( MaterialsConfig.Destruction );
 		terrain.SubtractCircle( new Vector2( Position.x, Position.z ), fireSize, materials );
-
-		/*		var midpoint = new Vector3( _desiredPosition.x, _desiredPosition.z );
-				var terrain = GrubsGame.Instance.Terrain;
-
-				var materials = terrain.GetActiveMaterials( MaterialsConfig.Destruction );
-				terrain.SubtractCircle( midpoint, fireSize, materials );
-
-				// todo: optimize this
-				var sourcePosition = _desiredPosition;
-				foreach ( var grub in All.OfType<Grub>().Where( x => Vector3.DistanceBetween( sourcePosition, x.Position ) <= fireSize ) )
-				{
-					if ( !grub.IsValid() || grub.LifeState != LifeState.Alive )
-						continue;
-
-					var dist = Vector3.DistanceBetween( _desiredPosition, grub.Position );
-					if ( dist > fireSize )
-						continue;
-
-					var distanceFactor = 1.0f - Math.Clamp( dist / fireSize, 0, 1 );
-					var force = distanceFactor * 1000f;
-
-					var dir = (grub.Position - _desiredPosition).Normal;
-					grub.ApplyAbsoluteImpulse( dir * force );
-					grub.TakeDamage( DamageInfoExtension.FromExplosion( 6, _desiredPosition, Vector3.Up * 32, this ) );
-				}
-
-				_desiredPosition += _moveDirection * 1.5f;
-				var tr = Trace.Sphere( fireSize * 1.5f, Position, _desiredPosition ).WithAnyTags( "solid", "gadget" ).Run();
-				var grounded = tr.Hit;
-
-				if ( grounded )
-				{
-					_moveDirection += Vector3.Random.WithY( 0f ) * 2.5f;
-					_moveDirection += tr.Normal * 0.5f;
-					_moveDirection = _moveDirection * 5f;
-				}
-				else
-				{
-					_moveDirection += Vector3.Down * 2.5f;
-					_moveDirection = _moveDirection.Normal * 10f;
-				}*/
 	}
 }

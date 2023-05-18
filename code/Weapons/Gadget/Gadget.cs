@@ -23,6 +23,8 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool Resolved => IsResolved();
 
+	public bool IsCrateGadget => Components.GetAll<GadgetComponent>().Any( c => c is CrateGadgetComponent );
+
 	public override void Spawn()
 	{
 		Transmit = TransmitType.Always;
