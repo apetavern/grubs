@@ -11,7 +11,7 @@ public static partial class ExplosionHelper
 	/// <param name="source">The grub responsible for creating this explosion.</param>
 	/// <param name="radius">The radius of the explosion.</param>
 	/// <param name="maxDamage">The max amount of damage the explosion can do to a grub.</param>
-	public static void Explode( Vector3 position, Grub source, float radius = 100, float maxDamage = 100 )
+	public static void Explode( Vector3 position, Entity source, float radius = 100, float maxDamage = 100 )
 	{
 		if ( !Game.IsServer )
 			return;

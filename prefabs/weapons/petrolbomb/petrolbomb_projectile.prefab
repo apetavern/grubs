@@ -38,7 +38,9 @@
           "_name": {
             "Value": "\u0022ArcPhysicsGadgetComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -49,7 +51,7 @@
       },
       "CollisionRadius": {
         "Type": "Single",
-        "Value": "5"
+        "Value": "1"
       },
       "_name": {
         "Value": "\u0022Petrol Bomb Projectile\u0022"

@@ -87,6 +87,13 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		}
 	}
 
+	public override void OnKilled()
+	{
+		ExplosionHelper.Explode( Position, this, 50f );
+		PlayScreenSound( "explosion_short_tail" );
+		Delete();
+	}
+
 	protected override void OnDestroy()
 	{
 		OnClientDestroy();
