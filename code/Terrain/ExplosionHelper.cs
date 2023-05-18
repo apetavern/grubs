@@ -17,12 +17,14 @@ public static partial class ExplosionHelper
 			return;
 
 		var sourcePos = position;
-		foreach ( var grub in Entity.All.OfType<Grub>().Where( x => Vector3.DistanceBetween( sourcePos, x.Position ) <= radius ) )
+
+		
+		foreach ( var entity in Entity.FindInSphere( position, radius ) )
 		{
-			if ( !grub.IsValid() || grub.LifeState != LifeState.Alive )
+			if ( !entity.IsValid() || entity.LifeState != LifeState.Alive )
 				continue;
 
-			var dist = Vector3.DistanceBetween( position, grub.Position );
+			var dist = Vector3.DistanceBetween( position, entity.Position );
 			if ( dist > radius )
 				continue;
 
@@ -30,12 +32,16 @@ public static partial class ExplosionHelper
 			// TODO: PhysicsGroup/Body is invalid on grubs
 			var force = distanceFactor * 1000;
 
-			var dir = (grub.Position - position).Normal;
+			var dir = (entity.Position - position).Normal;
 			dir = dir.WithY( 0f );
-			grub.Controller.ClearGroundEntity();
-			grub.ApplyAbsoluteImpulse( dir * force );
 
-			grub.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
+			if ( entity is Grub grub )
+			{
+				grub.Controller.ClearGroundEntity();
+				grub.ApplyAbsoluteImpulse( dir * force );
+			}
+
+			entity.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
 		}
 
 		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Destruction );

@@ -96,7 +96,7 @@ public partial class Terrain : Entity
 
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * GrubsConfig.TerrainHeight )
 				.WithAnyTags( "solid", "player" )
-				.Size( 16f )
+				.Size( 32f )
 				.Run();
 
 			if ( tr.Hit && !tr.StartedSolid )
