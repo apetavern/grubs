@@ -8,9 +8,9 @@ public static class FireHelper
 
 		for ( var i = 0; i < fireQuantity; i++ )
 		{
-			var baseDirection = Vector3.Random.WithY( 0f ) * 5f;
+			var baseDirection = Vector3.Random.WithY( 0f ) * 45f;
 			_ = new FireEntity(
-				position + Vector3.Random.WithY( 0f ) * 30f,
+				position + Vector3.Random.WithY( 0f ) * 45f,
 				baseDirection * moveDirection );
 		}
 	}
@@ -36,14 +36,12 @@ public class FireEntity : ModelEntity, IResolvable
 	{
 		Position = startPosition;
 		_moveDirection = moveDirection;
-		Log.Info( _moveDirection );
 
 		_expiryTime = Time.Now + Game.Random.Float( 0.5f, 2.5f );
 	}
 
 	public override void Spawn()
 	{
-		// Model = Model.Load( "particles/flamemodel.vmdl" );
 		FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
 		Tags.Add( "fire" );
 		Name = "fire";
