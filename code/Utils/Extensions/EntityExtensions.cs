@@ -7,6 +7,6 @@ public static class EntityExtensions
 		Assert.True( Game.IsClient );
 
 		var pos = e.Position.ToScreen();
-		return Sound.FromScreen( sound, pos.x, pos.y );
+		return Sound.FromScreen( sound, -pos.x, -pos.y );
 	}
 }
