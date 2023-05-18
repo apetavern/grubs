@@ -1,7 +1,11 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/sky.shader_c"
-	"g_flBrightnessExposureBias"		"0.000000"
-	"g_flRenderOnlyExposureBias"		"0.000000"
-	"SkyTexture"		"textures/hdr/beach_01.exr"
+	shader "shaders/sky.shader_c"
+
+	//---- Texture ----
+	g_flBrightnessExposureBias "0.000"
+	g_flRenderOnlyExposureBias "0.000"
+	SkyTexture "textures/hdr/fs002_day.exr"
 }
