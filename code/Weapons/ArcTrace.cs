@@ -93,6 +93,7 @@ public class ArcTrace
 				.Ignore( Owner )
 				.Ignore( Gadget )
 				.WithoutTags( "dead" )
+				.Size( 1f )
 				.Radius( Gadget.CollisionRadius )
 				.Run();
 
