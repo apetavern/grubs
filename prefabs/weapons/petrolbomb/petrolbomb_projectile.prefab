@@ -24,6 +24,10 @@
           "ExplodeAfter": {
             "Type": "Single",
             "Value": "0"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/petrolbomb/petrolbomb_explode.sound\u0022"
           }
         }
       },
