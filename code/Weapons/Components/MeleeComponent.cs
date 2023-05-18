@@ -85,6 +85,20 @@ public partial class MeleeComponent : WeaponComponent
 			{
 				grubsHitToDirection.Add( grub, trace.Direction );
 			}
+			else if ( trace.Hit && trace.Entity is Gadget gadget )
+			{
+				if ( gadget.IsCrateGadget )
+				{
+					gadget.TakeDamage(
+						new DamageInfo
+						{
+							Attacker = Grub,
+							Damage = Damage,
+							Position = gadget.Position
+						}.WithTag( "melee" ) );
+				}
+
+			}
 		}
 
 		return grubsHitToDirection;
