@@ -91,7 +91,7 @@ public class FireEntity : ModelEntity, IResolvable
 			}
 			else if ( collisionTrace.Entity is Gadget gadget )
 			{
-				if ( gadget.IsCrateGadget )
+				if ( gadget.IsCrate )
 				{
 					gadget.TakeDamage(
 						DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
