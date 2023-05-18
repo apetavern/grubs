@@ -136,6 +136,26 @@ public partial class Terrain : Entity
 		return tr.Hit;
 	}
 
+	private Vector3 GetRandomPositionInWorld( int length, int height )
+	{
+		var randX = Game.Random.Int( length ) - length / 2;
+		var randZ = Game.Random.Int( height );
+		return new Vector3( randX, 0, randZ );
+	}
+
+	TimeSince TimeSinceLastWindEffect = 0f;
+
+	[GameEvent.Tick.Client]
+	private void ClientTick()
+	{
+		if ( TimeSinceLastWindEffect > 0.5f )
+		{
+			var pos = GetRandomPositionInWorld( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
+			_ = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
+
+		}
+	}
+
 	[ConCmd.Admin( "gr_regen" )]
 	public static void RegenWorld()
 	{
