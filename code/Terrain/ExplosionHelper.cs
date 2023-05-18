@@ -15,9 +15,6 @@ public static partial class ExplosionHelper
 	{
 		if ( !Game.IsServer )
 			return;
-
-		var sourcePos = position;
-
 		
 		foreach ( var entity in Entity.FindInSphere( position, radius ) )
 		{

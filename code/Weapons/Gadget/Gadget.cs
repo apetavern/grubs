@@ -95,7 +95,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 		if ( IsCrateGadget )
 		{
-			FireHelper.StartFiresAt( Position + Vector3.Random.WithY( 0f ) * 15f, Vector3.Random.WithY( 0f ) * 30f, 4 );
+			FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, 4 );
 		}
 
 		PlayScreenSound( "explosion_short_tail" );
