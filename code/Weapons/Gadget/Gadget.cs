@@ -23,7 +23,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool Resolved => IsResolved();
 
-	public bool IsCrateGadget => Components.GetAll<GadgetComponent>().Any( c => c is CrateGadgetComponent );
+	public bool IsCrate => Components.Get<CrateGadgetComponent>() is not null;
 
 	public override void Spawn()
 	{
@@ -93,7 +93,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	{
 		ExplosionHelper.Explode( Position, this, 50f );
 
-		if ( IsCrateGadget )
+		if ( IsCrate )
 		{
 			FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, 4 );
 		}

@@ -26,14 +26,13 @@ public static partial class ExplosionHelper
 				continue;
 
 			var distanceFactor = 1.0f - Math.Clamp( dist / radius, 0, 1 );
-			// TODO: PhysicsGroup/Body is invalid on grubs
-			var force = distanceFactor * 1000;
-
-			var dir = (entity.Position - position).Normal;
-			dir = dir.WithY( 0f );
 
 			if ( entity is Grub grub )
 			{
+				var force = distanceFactor * 1000;
+				var dir = (entity.Position - position).Normal;
+				dir = dir.WithY( 0f );
+
 				grub.Controller.ClearGroundEntity();
 				grub.ApplyAbsoluteImpulse( dir * force );
 			}

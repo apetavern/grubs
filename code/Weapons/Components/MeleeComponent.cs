@@ -87,7 +87,7 @@ public partial class MeleeComponent : WeaponComponent
 			}
 			else if ( trace.Hit && trace.Entity is Gadget gadget )
 			{
-				if ( gadget.IsCrateGadget )
+				if ( gadget.IsCrate )
 				{
 					gadget.TakeDamage(
 						new DamageInfo
