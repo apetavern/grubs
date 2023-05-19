@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/gr_foreground.shader_c"
+	shader "shaders/gr_foreground_scorch.shader_c"
 
 	BlendMask "textures/environment/sand_shells_blend.png"
 
@@ -15,6 +15,15 @@ Layer0
 	g_flZPosition "0.000"
 	g_flZSmoothing "250.000"
 
+	//---- Scorch ----
+	g_flScorchBlendDistance "32.000"
+	g_vScorchTint_Colour "[0.235294 0.188235 0.149020 1.000000]"
+	ScorchAO "textures/environment/lava_rocks_ao.png"
+	ScorchBlendMask "textures/environment/lava_rocks_selfillum.png"
+	ScorchColour "textures/environment/rocks_a_color.png"
+	ScorchNormal "textures/environment/lava_rocks_normal.png"
+	ScorchRough "textures/environment/lava_rocks_rough.png"
+
 	//---- Textures ----
 	AO "textures/environment/sand_shells_ao.png"
 	Colour "textures/environment/sand_shells_color.png"
@@ -24,5 +33,5 @@ Layer0
 
 	//---- Tint ----
 	g_bTintDirectionToggle "0"
-	g_vTintColour "[0.411765 0.219608 0.109804 1.000000]"
+	g_vTint_Colour "[0.411765 0.219608 0.109804 1.000000]"
 }
