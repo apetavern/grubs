@@ -5,6 +5,7 @@ namespace Grubs;
 public partial class Terrain
 {
 	[Net] public int WorldTextureHeight { get; set; } = 0;
+	[Net] public int WorldTextureLength { get; set; } = 0;
 
 	void SetupWorldFromTexture()
 	{
@@ -15,6 +16,7 @@ public partial class Terrain
 	{
 		var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + ".png" );
 		WorldTextureHeight = mapSdfTexture.Height * 2;
+		WorldTextureLength = mapSdfTexture.Width * 2;
 
 		GrubsConfig.TerrainLength = mapSdfTexture.Width;
 		GrubsConfig.TerrainHeight = mapSdfTexture.Height;

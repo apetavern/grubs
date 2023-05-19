@@ -78,25 +78,30 @@ public partial class Terrain : Entity
 	/// Find a spawn location for an entity. Attempts to sample for existing Grub locations.
 	/// </summary>
 	/// <returns>A Vector3 position where an entity can spawn.</returns>
-	public Vector3 FindSpawnLocation( bool traceDown = true )
+	public Vector3 FindSpawnLocation( bool traceDown = true, float size = 16f )
 	{
 		int retries = 0;
 		var existingGrubs = All.OfType<Grub>();
 		var fallbackPosition = new Vector3();
 
+		var maxWidth = GrubsConfig.TerrainLength;
 		var maxHeight = GrubsConfig.TerrainHeight;
 		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture )
+		{
+			maxWidth = WorldTextureLength;
 			maxHeight = WorldTextureHeight - 64;
+		}
+			
 
 		while ( retries < 5000 )
 		{
-			var randX = Game.Random.Int( GrubsConfig.TerrainLength ) - GrubsConfig.TerrainLength / 2;
+			var randX = Game.Random.Int( maxWidth ) - maxWidth / 2;
 			var randZ = Game.Random.Int( maxHeight );
 			var startPos = new Vector3( randX, 0, randZ );
 
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * GrubsConfig.TerrainHeight )
 				.WithAnyTags( "solid", "player" )
-				.Size( 32f )
+				.Size( size )
 				.Run();
 
 			if ( tr.Hit && !tr.StartedSolid )
@@ -104,10 +109,10 @@ public partial class Terrain : Entity
 				if ( tr.Entity is Grub )
 					continue;
 
-				if ( IsInsideTerrain( tr.EndPosition ) )
+				if ( IsInsideTerrain( tr.EndPosition, size ) )
 					continue;
 
-				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) > 70f )
+				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) >= 70f )
 					continue;
 
 				fallbackPosition = tr.EndPosition;
@@ -127,11 +132,11 @@ public partial class Terrain : Entity
 		return fallbackPosition;
 	}
 
-	private bool IsInsideTerrain( Vector3 position )
+	private bool IsInsideTerrain( Vector3 position, float size )
 	{
 		var tr = Trace.Ray( position, position + Vector3.Right * 64f )
 			.WithAnyTags( "solid" )
-			.Size( 1f )
+			.Size( size )
 			.Run();
 		return tr.Hit;
 	}
@@ -145,16 +150,18 @@ public partial class Terrain : Entity
 
 	TimeSince TimeSinceLastWindEffect = 0f;
 
-	[GameEvent.Tick.Client]
+/*	[GameEvent.Tick.Client]
 	private void ClientTick()
 	{
-		if ( TimeSinceLastWindEffect > 0.5f )
+		if ( TimeSinceLastWindEffect > 2f )
 		{
 			var pos = GetRandomPositionInWorld( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
-			_ = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
-
+			var wind = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
+			wind.SetPosition( 1, GamemodeSystem.Instance.ActiveWindForce * GamemodeSystem.Instance.ActiveWindSteps * 1280f );
+			Log.Info( GamemodeSystem.Instance.ActiveWindForce * 1280f );
+			TimeSinceLastWindEffect = 0f;
 		}
-	}
+	}*/
 
 	[ConCmd.Admin( "gr_regen" )]
 	public static void RegenWorld()

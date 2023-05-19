@@ -179,7 +179,7 @@ public partial class FreeForAll : Gamemode
 		var player = Game.Clients.First().Pawn as Player;
 		var crate = CrateGadgetComponent.SpawnCrate( crateType );
 
-		var spawnPos = Terrain.FindSpawnLocation( traceDown: false );
+		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, size: 32f );
 		crate.Position = spawnPos;
 		crate.Owner = player;
 		player.Gadgets.Add( crate );
@@ -259,7 +259,7 @@ public partial class FreeForAll : Gamemode
 
 		foreach ( var grub in player.Grubs )
 		{
-			var spawnPos = Terrain.FindSpawnLocation();
+			var spawnPos = Terrain.FindSpawnLocation( size: 16f );
 			grub.Position = spawnPos;
 		}
 	}
