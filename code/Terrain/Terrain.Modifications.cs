@@ -22,6 +22,17 @@ public partial class Terrain
 	}
 
 	/// <summary>
+	/// Scorches a circle shape.
+	/// </summary>
+	/// <param name="center">The Vector2 center of the scorch.</param>
+	/// <param name="radius">The radius of the scorch.</param>
+	public void Scorch( Vector2 center, float radius )
+	{
+		var circleSdf = new CircleSdf( center, radius );
+		Add( SdfWorld, circleSdf, ScorchMaterial );
+	}
+
+	/// <summary>
 	/// Wrapper for a standard box subtraction.
 	/// </summary>
 	/// <param name="mins">The minimum bounds for the box.</param>
