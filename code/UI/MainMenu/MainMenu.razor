@@ -2,11 +2,11 @@
 
 <root class="@(GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu ? "hide" : "")">
     <div class="header">
-        <label style="font-size: 100px;">GRUBS</label>
+        <label style="font-size: 72px;">GRUBS</label>
         <div class="buttons">
             <button @onclick=@(() => SetActiveTab(Tab.PlayMenu)) icon="play_arrow" class="@IsSelected(Tab.PlayMenu)">Play</button>
             <button @onclick=@(() => SetActiveTab(Tab.CustomizeMenu)) icon="emoji_people" class="@IsSelected(Tab.CustomizeMenu)">Customize</button>
-            @* <button @onclick=@(() => SetActiveTab(Tab.OptionsMenu)) icon="settings" class="@IsSelected(Tab.OptionsMenu)">Options</button> *@
+            <button @onclick=@(() => SetActiveTab(Tab.OptionsMenu)) icon="settings" class="@IsSelected(Tab.OptionsMenu)">Options</button>
         </div>
     </div>
     @if (CurrentTab == Tab.PlayMenu)
@@ -19,7 +19,7 @@
     }
     else if (CurrentTab == Tab.OptionsMenu)
     {
-        @* <OptionsMenu /> *@
+        <OptionsMenu /> 
     }
     <TextChat class="@(GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu ? "hide" : "")" />
     <WorldScene />
@@ -65,10 +65,7 @@
         pointer-events: all;
 
         .container {
-            background-color: #462255b2;
-            border-radius: 4px;
-            border-width: 4px;
-            border-color: #afafaf0c;
+            background-color: #46225550;
             font-family: Londrina Solid;
             color: white;
             flex-direction: column;
@@ -77,7 +74,7 @@
 
         .header {
             background-image: linear-gradient(90deg, #462255, #a94364);
-            height: 200px;
+            height: 150px;
             width: 100%;
             align-items: center;
             padding: 0px 5%;
@@ -87,7 +84,8 @@
             flex-shrink: 0;
 
             .buttons {
-                font-size: 65px;
+                font-size: 48px;
+                font-weight: 200;
                 gap: 60px;
             }
         }
