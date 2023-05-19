@@ -27,6 +27,11 @@ OptionsMenu {
         align-items: center;
         font-size: 32px;
 
+        .iconpanel {
+            position: absolute;
+            left: 16px;
+        }
+
         &:hover:not(.tab-selected) {
             background-color: #4E3E5450;
         }
