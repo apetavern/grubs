@@ -8,6 +8,7 @@ public partial class Terrain
 	public Sdf2DLayer SandMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
 	public Sdf2DLayer DirtMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/dirt.sdflayer" );
 	public Sdf2DLayer RockMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/rock.sdflayer" );
+	public Sdf2DLayer ScorchMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/scorch.sdflayer" );
 
 	public Sdf2DLayer GirderMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/girder.sdflayer" );
 

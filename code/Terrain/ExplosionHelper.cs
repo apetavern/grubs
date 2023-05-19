@@ -42,6 +42,7 @@ public static partial class ExplosionHelper
 
 		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Destruction );
 		Terrain.SubtractCircle( new Vector2( position.x, position.z ), radius, materials );
+		Terrain.Scorch( new Vector2( position.x, position.z ), radius + 8f );
 
 		if ( ExplosionDebug )
 			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
