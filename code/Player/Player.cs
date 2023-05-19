@@ -1,4 +1,6 @@
-﻿namespace Grubs;
+﻿using Sandbox;
+
+namespace Grubs;
 
 public partial class Player : Entity
 {

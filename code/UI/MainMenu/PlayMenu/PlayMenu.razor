@@ -1,5 +1,10 @@
 @namespace Grubs.UI
 
+@if (Game.LocalPawn is not Player player)
+{
+    return;
+}
+
 <root>
     <div class="container">
         <label class="title">Players</label>
@@ -8,13 +13,20 @@
             {
                 <div class="player">
                     <img src="avatar:@client.SteamId" class="avatar" />
-                    <label class="name">@client.Name</label>
+                    <div style="align-items: center;">
+                        <label class="name">@client.Name</label>
+                        <label class="hours">
+                            <button icon="timer"></button>
+                            <label>@player.PlayTime.ToString("0.0")hrs</label>
+                        </label>
+                    </div>
+                    
                 </div>
             }
         </div>
     </div>
     <div style="height: 20px;" />
-    <button class="selected @(IsButtonEnabled() ? "" : "disabled")" onclick=@OnStartClick>@GetButtonText()</button>
+    <button class="play-button @(IsButtonEnabled() ? "" : "disabled")" onclick=@OnStartClick>@GetButtonText()</button>
 </root>
 
 @code {
@@ -26,7 +38,7 @@
         if (!Game.LocalClient.IsListenServerHost)
             return "WAITING FOR HOST...";
 
-        return "START";
+        return "PLAY";
     }
 
     private void OnStartClick()
@@ -38,7 +50,7 @@
     private bool IsButtonEnabled()
     {
         @* Not the best... *@
-        return GetButtonText() == "START";
+        return GetButtonText() == "PLAY";
     }
 
     protected override int BuildHash()
@@ -93,21 +105,29 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                     }
+
+                    .hours {
+                        margin-left: 4px;
+                        font-size: 16px;
+                        font-weight: lighter;
+                    }
                 }
             }
         }
 
-        button {
+        .play-button {
             width: 100%;
             height: 100px;
-            background-color: #a59441;
-            color: white;
-            border-width: 4px;
-            border-color: #afafaf0c;
+            background-color: #FDE74C86;
+            color: black;
             backdrop-filter-blur: 20px;
 
             label {
                 font-size: 3vw;
+            }
+
+            &.disabled {
+                opacity: 0.6;
             }
         }
     }

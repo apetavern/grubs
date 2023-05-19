@@ -41,6 +41,36 @@ public sealed partial class GrubsGame : GameManager
 
 		GamemodeSystem.Instance?.OnClientJoined( client );
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has joined" );
+
+		FetchInteractionsClient( To.Single( client ) );
+	}
+
+	[ConCmd.Server]
+	public static void SetPlayTimeServer( int clientNetworkId, float hours )
+	{
+		var ent = FindByIndex( clientNetworkId );
+		if ( ent is not IClient client )
+			return;
+		if ( client.Pawn is not Player player )
+			return;
+
+		player.PlayTime = hours;
+	}
+
+	[ClientRpc]
+	public async Task FetchInteractionsClient()
+	{
+		var pkg = await FetchPackageInfo();
+		SetPlayTimeServer( Game.LocalClient.NetworkIdent, pkg.Interaction.Seconds / 3600f );
+	}
+
+	public static async Task<Package> FetchPackageInfo()
+	{
+		var pkg = await Package.Fetch( "apetavern.grubs", false );
+		if ( pkg is null )
+			return null;
+
+		return pkg;
 	}
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )

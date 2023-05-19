@@ -18,6 +18,8 @@ public partial class Cosmetic : Clothing
 
 public partial class Player
 {
+	[Net] public float PlayTime { get; set; } = 0f;
+
 	public static readonly List<Cosmetic> CosmeticPresets = new();
 
 	/// <summary>
