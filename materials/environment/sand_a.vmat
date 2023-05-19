@@ -17,7 +17,7 @@ Layer0
 
 	//---- Scorch ----
 	g_flScorchBlendDistance "32.000"
-	g_vScorchTint_Colour "[0.235294 0.188235 0.149020 1.000000]"
+	g_vScorchTint_Colour "[0.749020 0.266667 0.043137 1.000000]"
 	ScorchAO "textures/environment/lava_rocks_ao.png"
 	ScorchBlendMask "textures/environment/lava_rocks_selfillum.png"
 	ScorchColour "textures/environment/rocks_a_color.png"
