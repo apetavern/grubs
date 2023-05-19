@@ -3,8 +3,10 @@ OptionsMenu {
     height: 100%;
 
     .options-container {
-        margin: auto;
-        width: 1440px;
+        margin-top: auto;
+        margin-bottom: auto;
+        left: 64px;
+        width: 1200px;
         height: 810px;
         background-color: #46225550;
         font-family: Londrina Solid;
@@ -18,18 +20,19 @@ OptionsMenu {
         flex-direction: column;
         flex-shrink: 0;
         overflow: scroll;
+        background-color: #0D060F50;
     }
 
     .options-sidebar-entry {
         width: 100%;
         height: 80px;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         font-size: 32px;
+        padding-left: 16px;
 
         .iconpanel {
-            position: absolute;
-            left: 16px;
+            margin-right: 8px;
         }
 
         &:hover:not(.tab-selected) {
