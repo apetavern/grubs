@@ -26,7 +26,7 @@ public partial class Terrain
 	/// </summary>
 	/// <param name="center">The Vector2 center of the scorch.</param>
 	/// <param name="radius">The radius of the scorch.</param>
-	public void Scorch( Vector2 center, float radius )
+	public void ScorchCircle( Vector2 center, float radius )
 	{
 		var circleSdf = new CircleSdf( center, radius );
 		Add( SdfWorld, circleSdf, ScorchMaterial );
@@ -60,6 +60,12 @@ public partial class Terrain
 		var lineSdf = new LineSdf( start, end, radius );
 		foreach ( var (material, offset) in materials )
 			Subtract( SdfWorld, lineSdf.Expand( offset ), material, offset: worldOffset );
+	}
+
+	public void ScorchLine( Vector2 start, Vector2 end, float radius )
+	{
+		var lineSdf = new LineSdf( start, end, radius );
+		Add( SdfWorld, lineSdf, ScorchMaterial );
 	}
 
 	/// <summary>
