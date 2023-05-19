@@ -5,16 +5,62 @@
 <root>
     <div class="options-container">
         <div class="options-sidebar">
-            <div class="options-sidebar-entry">
-                Terrain
-            </div>
-            <div class="options-sidebar-entry">
-                Gameplay
-            </div>
-            <div class="options-sidebar-entry">
-                Weapons
-            </div>
+            <button 
+                @onclick=@(() => SetActiveTab(Tab.Terrain))
+                class="options-sidebar-entry @IsSelected(Tab.Terrain)"
+                icon="landscape"
+                text="Terrain" />
+            <button
+                @onclick=@(() => SetActiveTab(Tab.Gameplay))
+                class="options-sidebar-entry @IsSelected(Tab.Gameplay)"
+                icon="gamepad"
+                text="Gameplay" />
+            <button 
+                @onclick=@(() => SetActiveTab(Tab.Weapons)) 
+                class="options-sidebar-entry @IsSelected(Tab.Weapons)"
+                icon="whatshot"
+                text="Weapons" />
         </div>
-        <div class="options-tab">test2</div>
+        @switch (CurrentTab)
+        {
+            case Tab.Terrain:
+                <div class="options-tab">Terrain</div>
+                break;
+            case Tab.Gameplay:
+                <div class="options-tab">Gameplay</div>
+                break;
+            case Tab.Weapons:
+                <div class="options-tab">Weapons</div>
+                break;
+            default:
+                <div>How did you get here??</div>
+                break;
+        }
     </div>
 </root>
+
+@code {
+    private enum Tab
+    {
+        Terrain,
+        Gameplay,
+        Weapons
+    }
+
+    private Tab CurrentTab = Tab.Terrain;
+
+    private void SetActiveTab(Tab tab)
+    {
+        CurrentTab = tab;
+    }
+
+    private string IsSelected(Tab tab)
+    {
+        return CurrentTab == tab ? "tab-selected" : "";
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(CurrentTab);
+    }
+}

@@ -6,19 +6,40 @@ OptionsMenu {
         margin: auto;
         width: 1440px;
         height: 810px;
-        border: 2px solid red;
+        background-color: #46225550;
+        font-family: Londrina Solid;
+        color: white;
         border-radius: 4px;
+        backdrop-filter-blur: 20px;
     }
 
     .options-sidebar {
         width: 300px;
-        border: 2px solid yellow;
         flex-direction: column;
         flex-shrink: 0;
+        overflow: scroll;
+    }
+
+    .options-sidebar-entry {
+        width: 100%;
+        height: 80px;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+
+        &:hover:not(.tab-selected) {
+            background-color: #4E3E5450;
+        }
+    }
+
+    .tab-selected {
+        background-color: #4E3E54E0;
     }
 
     .options-tab {
         width: 100%;
-        border: 2px solid green;
+        padding-top: 12px;
+        padding-left: 32px;
+        font-size: 48px;
     }
 }
