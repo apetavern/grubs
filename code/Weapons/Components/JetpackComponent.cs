@@ -40,7 +40,7 @@ public partial class JetpackComponent : WeaponComponent
 
 		Grub.Velocity = Vector3.Zero;
 
-		if ( Input.Down( InputAction.Fire ) )
+		if ( Grub.Player.LookInput > 0 )
 		{
 			if ( Grub.Controller.IsGrounded )
 			{
