@@ -63,14 +63,11 @@ public partial class JetpackComponent : WeaponComponent
 		{
 			Grub.Rotation = new Angles( 0, 180f, 0 ).ToRotation();
 		}
-		var tr = Trace.Box( Grub.Controller.Hull, Grub.Position, Grub.Position + VelocityInput * Time.Delta * ThrustSpeed ).Ignore( Grub ).Run();
 
 		MoveHelper mover = new MoveHelper( Grub.Position, VelocityInput * Time.Delta * ThrustSpeed );
 		mover.Trace = Trace.Box( Grub.Controller.Hull, Grub.Position, Grub.Position + VelocityInput * Time.Delta * ThrustSpeed ).Ignore( Grub );
 		mover.TryMove( Time.Delta );
 		Grub.Position = mover.Position + mover.Velocity;
-		//Grub.Position += VelocityInput * Time.Delta * ThrustSpeed;
-
 	}
 
 	public override void OnDeploy()
@@ -90,7 +87,6 @@ public partial class JetpackComponent : WeaponComponent
 
 	public override void FireFinished()
 	{
-
 		FuelCount = Fuel;
 		Player.Inventory.SetActiveWeapon( null, true );
 	}
