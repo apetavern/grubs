@@ -32,6 +32,10 @@
           "ThrustSpeed": {
             "Type": "Single",
             "Value": "25"
+          },
+          "Fuel": {
+            "Type": "Single",
+            "Value": "10"
           }
         }
       }

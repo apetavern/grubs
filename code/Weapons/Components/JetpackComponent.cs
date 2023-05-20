@@ -10,7 +10,7 @@ public partial class JetpackComponent : WeaponComponent
 	public float ThrustSpeed { get; set; } = 25f;
 
 	[Prefab, Net]
-	public float Fuel { get; set; } = 20f;
+	public float Fuel { get; set; } = 10f;
 
 	[Net]
 	public float FuelCount { get; set; }
