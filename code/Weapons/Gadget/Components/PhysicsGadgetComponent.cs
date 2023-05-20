@@ -25,7 +25,7 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	public string CollisionSound { get; set; }
 
 	private bool _isGrounded;
-	private bool _lastKnownGround;
+	private bool _wasGrounded;
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
@@ -58,11 +58,11 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		if ( _isGrounded )
 			helper.ApplyFriction( Friction, Time.Delta );
 
-		if ( _lastKnownGround != _isGrounded || helper.HitWall )
+		if ( _wasGrounded != _isGrounded || helper.HitWall )
 		{
-			_lastKnownGround = _isGrounded || helper.HitWall;
+			_wasGrounded = _isGrounded || helper.HitWall;
 
-			if ( _lastKnownGround )
+			if ( _wasGrounded )
 				Gadget.PlaySound( CollisionSound );
 		}
 
