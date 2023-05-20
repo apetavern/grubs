@@ -1,0 +1,105 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "55a4836f-49d7-45a5-b179-7885757f4885",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "2e66268d-b626-4c01-a44a-38a40b90d36e",
+        "Class": "JetpackComponent",
+        "Keys": {
+          "Test": {
+            "Type": "String",
+            "Value": "\u0022\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Jet\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "TextureToStamp": {
+            "Type": "TextureStamp",
+            "Value": "\u0022textures/texturestamps/girder.tsta\u0022"
+          },
+          "BuildSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/girder/girder_build.sound\u0022"
+          },
+          "ThrustSpeed": {
+            "Type": "Single",
+            "Value": "25"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "100"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "10"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022None\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/tools/jetpack/jetpack.vmdl\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/tools/jetpack/jetpack.vmdl_c.png\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Jetpack\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "3"
+      },
+      "WeaponType": {
+        "Type": "WeaponType",
+        "Value": "\u0022Tool\u0022"
+      },
+      "FireSound": {
+        "Type": "String",
+        "Value": "\u0022sounds/weapons/girder/gurder_build.sound\u0022"
+      }
+    }
+  }
+}
