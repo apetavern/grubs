@@ -129,8 +129,8 @@
 						_class = "Attachment"
 						name = "jet_middle"
 						parent_bone = "Handsroot"
-						relative_origin = [ 0.0, 6.017779, -17.034899 ]
-						relative_angles = [ 0.000032, 0.0, 124.539307 ]
+						relative_origin = [ 0.0, 6.017782, -17.034899 ]
+						relative_angles = [ 45.0, -90.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -139,7 +139,7 @@
 						name = "jet_right"
 						parent_bone = "Handsroot"
 						relative_origin = [ -9.081878, 4.6542, -6.782448 ]
-						relative_angles = [ 0.000032, 0.0, 89.715988 ]
+						relative_angles = [ -0.0, -90.0, 90.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -148,7 +148,7 @@
 						name = "jet_left"
 						parent_bone = "Handsroot"
 						relative_origin = [ 9.08188, 4.6542, -6.78245 ]
-						relative_angles = [ 0.000032, 0.0, 89.715988 ]
+						relative_angles = [ 0.0, -90.0, 90.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},

@@ -18,6 +18,17 @@ public partial class JetpackComponent : WeaponComponent
 	[Net]
 	public Vector3 VelocityInput { get; set; }
 
+
+	Particles jetparticle1 { get; set; }
+
+
+	Particles jetparticle2 { get; set; }
+
+
+	Particles jetparticle3 { get; set; }
+
+	//particles/blueflame/blueflame_base.vpcf
+
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
@@ -36,6 +47,39 @@ public partial class JetpackComponent : WeaponComponent
 				Grub.Controller.GetMechanic<SquirmMechanic>().ClearGroundEntity();
 			}
 
+			if ( jetparticle1 is null )
+			{
+				jetparticle1 = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+				jetparticle2 = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+				jetparticle3 = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+
+				jetparticle1.SetEntityAttachment( 0, Weapon, "jet_middle" );
+				jetparticle2.SetEntityAttachment( 0, Weapon, "jet_left" );
+				jetparticle3.SetEntityAttachment( 0, Weapon, "jet_right" );
+			}
+			else
+			{
+				jetparticle1.SetEntityAttachment( 0, Weapon, "jet_middle" );
+				jetparticle2.SetEntityAttachment( 0, Weapon, "jet_left" );
+				jetparticle3.SetEntityAttachment( 0, Weapon, "jet_right" );
+			}
+
+			if ( jetparticle1 is not null )
+			{
+				if ( Grub.Player.MoveInput != 0 )
+				{
+					jetparticle1.EnableDrawing = true;
+				}
+				else
+				{
+					jetparticle1.EnableDrawing = false;
+				}
+				jetparticle2.EnableDrawing = true;
+				jetparticle3.EnableDrawing = true;
+			}
+
+			Sound.FromScreen( "torch_fire" ).SetPitch( 1f ).SetVolume( 0.5f );
+
 			FuelCount -= Time.Delta;
 
 			if ( FuelCount <= 0 )
@@ -47,6 +91,12 @@ public partial class JetpackComponent : WeaponComponent
 		}
 		else if ( !Grub.Controller.IsGrounded )
 		{
+			if ( jetparticle1 is not null )
+			{
+				jetparticle1.EnableDrawing = false;
+				jetparticle2.EnableDrawing = false;
+				jetparticle3.EnableDrawing = false;
+			}
 			Grub.Position -= Vector3.Up * 300 * Time.Delta;
 			Grub.Position += new Vector3( 0, 0, VelocityInput.z * Time.Delta * ThrustSpeed );
 		}
