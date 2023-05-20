@@ -58,9 +58,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		if ( _isGrounded )
 			helper.ApplyFriction( Friction, Time.Delta );
 
-		if ( _lastKnownGround != _isGrounded )
+		if ( _lastKnownGround != _isGrounded || helper.HitWall )
 		{
-			_lastKnownGround = _isGrounded;
+			_lastKnownGround = _isGrounded || helper.HitWall;
 
 			if ( _lastKnownGround )
 				Gadget.PlaySound( CollisionSound );
