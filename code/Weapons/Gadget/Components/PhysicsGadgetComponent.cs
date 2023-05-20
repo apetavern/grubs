@@ -13,6 +13,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	public int ThrowSpeed { get; set; } = 10;
 
 	[Prefab, Net]
+	public float Friction { get; set; } = 1.0f;
+
+	[Prefab, Net]
 	public bool AffectedByWind { get; set; } = false;
 
 	[Prefab, Net]
@@ -20,6 +23,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 
 	[Prefab, ResourceType( "sound" )]
 	public string CollisionSound { get; set; }
+
+	private bool _isGrounded;
+	private bool _lastKnownGround;
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
@@ -35,7 +41,6 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		return CheckResolve ? Gadget.Velocity.IsNearlyZero( 2.5f ) : true;
 	}
 
-	TimeSince collisionSoundPlayed;
 	public override void Simulate( IClient client )
 	{
 		// Apply gravity.
@@ -48,23 +53,22 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 			.WithAnyTags( "player", "solid" )
 			.WithoutTags( "dead" );
 
-		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
+		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 
-		if ( groundEntity is not null )
-			helper.ApplyFriction( 1.0f, Time.Delta );
+		if ( _isGrounded )
+			helper.ApplyFriction( Friction, Time.Delta );
+
+		if ( _lastKnownGround != _isGrounded )
+		{
+			_lastKnownGround = _isGrounded;
+
+			if ( _lastKnownGround )
+				Gadget.PlaySound( CollisionSound );
+		}
 
 		helper.TryMove( Time.Delta );
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
-
-		if(CollisionSound is not null && collisionSoundPlayed >= .3f)
-		{
-			if( !Gadget.Velocity.IsNearlyZero( 20f ) && (helper.HitWall || groundEntity is not null))
-			{
-				Gadget.PlaySound( CollisionSound );
-				collisionSoundPlayed = 0f;
-			}
-		}
 
 		if ( GrubsConfig.WindEnabled && AffectedByWind )
 			Gadget.Velocity += new Vector3( GamemodeSystem.Instance.ActiveWindForce ).WithY( 0 );

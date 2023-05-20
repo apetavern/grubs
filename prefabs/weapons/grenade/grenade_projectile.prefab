@@ -79,7 +79,7 @@
           },
           "CollisionSound": {
             "Type": "String",
-            "Value": "\u0022weapons/rust_smg/sounds/rust_smg.shoot.sound\u0022"
+            "Value": "\u0022sounds/weapons/metal_impact.sound\u0022"
           }
         }
       }
