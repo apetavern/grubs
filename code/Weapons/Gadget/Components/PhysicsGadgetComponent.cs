@@ -18,6 +18,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool CheckResolve { get; set; } = true;
 
+	[Prefab, ResourceType( "sound" )]
+	public string CollisionSound { get; set; }
+
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		if ( ShouldThrow )
@@ -32,6 +35,7 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		return CheckResolve ? Gadget.Velocity.IsNearlyZero( 2.5f ) : true;
 	}
 
+	TimeSince collisionSoundPlayed;
 	public override void Simulate( IClient client )
 	{
 		// Apply gravity.
@@ -52,6 +56,15 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		helper.TryMove( Time.Delta );
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
+
+		if(CollisionSound is not null && collisionSoundPlayed >= .3f)
+		{
+			if( !Gadget.Velocity.IsNearlyZero( 20f ) && (helper.HitWall || groundEntity is not null))
+			{
+				Gadget.PlaySound( CollisionSound );
+				collisionSoundPlayed = 0f;
+			}
+		}
 
 		if ( GrubsConfig.WindEnabled && AffectedByWind )
 			Gadget.Velocity += new Vector3( GamemodeSystem.Instance.ActiveWindForce ).WithY( 0 );
