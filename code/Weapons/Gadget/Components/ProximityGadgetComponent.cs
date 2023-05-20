@@ -64,8 +64,6 @@ public partial class ProximityGadgetComponent : GadgetComponent
 
 	public override void Touch( Entity other )
 	{
-		Log.Info( "called" );
-
 		if ( !_isArmed || _isTriggered || other is not Grub grub || grub.LifeState != LifeState.Alive )
 			return;
 
