@@ -12,10 +12,10 @@ public partial class JetpackComponent : WeaponComponent
 	[Prefab, Net]
 	public float Fuel { get; set; } = 10f;
 
-	[Net]
+	[Net, Predicted]
 	public float FuelCount { get; set; }
 
-	[Net]
+	[Net, Predicted]
 	public Vector3 VelocityInput { get; set; }
 
 
