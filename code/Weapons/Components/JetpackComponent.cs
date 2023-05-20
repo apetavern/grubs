@@ -7,7 +7,13 @@ public partial class JetpackComponent : WeaponComponent
 {
 
 	[Prefab, Net]
-	public float ThrustSpeed { get; set; } = 2;
+	public float ThrustSpeed { get; set; } = 25f;
+
+	[Prefab, Net]
+	public float Fuel { get; set; } = 20f;
+
+	[Net]
+	public float FuelCount { get; set; }
 
 	[Net]
 	public Vector3 VelocityInput { get; set; }
@@ -17,7 +23,7 @@ public partial class JetpackComponent : WeaponComponent
 		base.Simulate( client );
 
 		Grub.SetAnimParameter( "jetpack_active", true );
-		Grub.SetAnimParameter( "jetpack_dir", Grub.Facing * VelocityInput.x / 5f );
+		Grub.SetAnimParameter( "jetpack_dir", Grub.Facing * VelocityInput.x / 15f );
 
 		VelocityInput = new Vector3( MathX.Lerp( VelocityInput.x, 0, Time.Delta / 2f ), 0, MathX.Lerp( VelocityInput.z, 0, Time.Delta ) );
 
@@ -28,6 +34,13 @@ public partial class JetpackComponent : WeaponComponent
 			if ( Grub.Controller.IsGrounded )
 			{
 				Grub.Controller.GetMechanic<SquirmMechanic>().ClearGroundEntity();
+			}
+
+			FuelCount -= Time.Delta;
+
+			if ( FuelCount <= 0 )
+			{
+				FireFinished();
 			}
 
 			VelocityInput = Vector3.Lerp( VelocityInput, new Vector3( -Grub.Player.MoveInput * ThrustSpeed, 0, ThrustSpeed / 2f ), Time.Delta );
@@ -44,25 +57,26 @@ public partial class JetpackComponent : WeaponComponent
 
 		if ( Grub.MoveInput == -1 )
 		{
-			Grub.Rotation = new Angles( 2.5f * VelocityInput.x, 0f, 0 ).ToRotation();
+			Grub.Rotation = Rotation.Identity;
 		}
 		else if ( Grub.MoveInput == 1 )
 		{
-			Grub.Rotation = new Angles( -2.5f * VelocityInput.x, 180f, 0 ).ToRotation();
+			Grub.Rotation = new Angles( 0, 180f, 0 ).ToRotation();
 		}
-		else
-		{
-			Grub.Rotation = new Angles( -2.5f * VelocityInput.x, Grub.Rotation.Angles().yaw, 0 ).ToRotation();
-		}
+		var tr = Trace.Box( Grub.Controller.Hull, Grub.Position, Grub.Position + VelocityInput * Time.Delta * ThrustSpeed ).Ignore( Grub ).Run();
 
+		MoveHelper mover = new MoveHelper( Grub.Position, VelocityInput * Time.Delta * ThrustSpeed );
+		mover.Trace = Trace.Box( Grub.Controller.Hull, Grub.Position, Grub.Position + VelocityInput * Time.Delta * ThrustSpeed ).Ignore( Grub );
+		mover.TryMove( Time.Delta );
+		Grub.Position = mover.Position + mover.Velocity;
+		//Grub.Position += VelocityInput * Time.Delta * ThrustSpeed;
 
-		Grub.Position += VelocityInput * Time.Delta * ThrustSpeed;
+	}
 
-
-		if ( Weapon.CurrentUses <= 0 )
-		{
-			FireFinished();
-		}
+	public override void OnDeploy()
+	{
+		base.OnDeploy();
+		FuelCount = Fuel;
 	}
 
 	public override void OnHolster()
@@ -70,15 +84,14 @@ public partial class JetpackComponent : WeaponComponent
 		base.OnHolster();
 		Grub.SetAnimParameter( "jetpack_active", false );
 		VelocityInput = Vector3.Zero;
-	}
-
-	public override void FireInstant()
-	{
-
+		FuelCount = Fuel;
+		Weapon.Ammo -= 1;
 	}
 
 	public override void FireFinished()
 	{
-		base.FireFinished();
+
+		FuelCount = Fuel;
+		Player.Inventory.SetActiveWeapon( null, true );
 	}
 }
