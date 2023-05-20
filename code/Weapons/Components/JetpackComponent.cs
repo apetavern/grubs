@@ -118,6 +118,7 @@ public partial class JetpackComponent : WeaponComponent
 		mover.Trace = Trace.Box( Grub.Controller.Hull, Grub.Position, Grub.Position + VelocityInput * Time.Delta * ThrustSpeed ).Ignore( Grub );
 		mover.TryMove( Time.Delta );
 		Grub.Position = mover.Position + mover.Velocity;
+		Grub.Velocity = mover.Velocity;
 	}
 
 	public override void OnDeploy()
