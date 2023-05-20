@@ -2300,7 +2300,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -16.0, 608.0 ]
+					m_vecPosition = [ -32.0, 528.0 ]
 					m_nNodeID = 
 					{
 						m_id = 464562224
@@ -3871,7 +3871,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -16.0, 560.0 ]
+					m_vecPosition = [ -32.0, 480.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1159119542
@@ -3946,7 +3946,7 @@
 				{
 					_class = "CBlendAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 160.0, 576.0 ]
+					m_vecPosition = [ 144.0, 496.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1309470901
@@ -4782,7 +4782,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -16.0, 656.0 ]
+					m_vecPosition = [ -32.0, 576.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1681320708
@@ -5121,7 +5121,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 160.0, 448.0 ]
+					m_vecPosition = [ 144.0, 432.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1856264129
