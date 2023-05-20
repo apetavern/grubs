@@ -24,6 +24,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "Friction": {
+            "Type": "Single",
+            "Value": "4"
           }
         }
       },

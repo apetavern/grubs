@@ -13,10 +13,19 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	public int ThrowSpeed { get; set; } = 10;
 
 	[Prefab, Net]
+	public float Friction { get; set; } = 1.0f;
+
+	[Prefab, Net]
 	public bool AffectedByWind { get; set; } = false;
 
 	[Prefab, Net]
 	public bool CheckResolve { get; set; } = true;
+
+	[Prefab, ResourceType( "sound" )]
+	public string CollisionSound { get; set; }
+
+	private bool _isGrounded;
+	private bool _wasGrounded;
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
@@ -44,10 +53,18 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 			.WithAnyTags( "player", "solid" )
 			.WithoutTags( "dead" );
 
-		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
+		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 
-		if ( groundEntity is not null )
-			helper.ApplyFriction( 1.0f, Time.Delta );
+		if ( _isGrounded )
+			helper.ApplyFriction( Friction, Time.Delta );
+
+		if ( _wasGrounded != _isGrounded || helper.HitWall )
+		{
+			_wasGrounded = _isGrounded || helper.HitWall;
+
+			if ( _wasGrounded )
+				Gadget.PlaySound( CollisionSound );
+		}
 
 		helper.TryMove( Time.Delta );
 		Gadget.Velocity = helper.Velocity;

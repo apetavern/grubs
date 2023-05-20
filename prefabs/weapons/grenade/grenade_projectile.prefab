@@ -76,6 +76,10 @@
           "UseSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
+          },
+          "CollisionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/generic_impact.sound\u0022"
           }
         }
       }
