@@ -192,7 +192,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 	public bool ShouldShowWeapon()
 	{
-		return Grub.IsTurn && ((Velocity.IsNearlyZero( 2.5f ) && IsGrounded) || Grub.ActiveWeapon.AllowMovement);
+		return Grub.IsTurn && ((Velocity.IsNearlyZero( 2.5f ) && IsGrounded) || (Grub.ActiveWeapon is not null && Grub.ActiveWeapon.AllowMovement));
 	}
 
 	public Vector3 GetWishVelocity( bool zeroPitch = false )
