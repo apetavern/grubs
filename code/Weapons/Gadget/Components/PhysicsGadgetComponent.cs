@@ -26,6 +26,8 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 
 	private bool _isGrounded;
 	private bool _wasGrounded;
+	private bool _isTouchingCeiling;
+	private bool _wasTouchingCeiling;
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
@@ -54,15 +56,17 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 			.WithoutTags( "dead" );
 
 		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
+		_isTouchingCeiling = helper.TraceDirection( Vector3.Up ).Entity is not null;
 
 		if ( _isGrounded )
 			helper.ApplyFriction( Friction, Time.Delta );
 
-		if ( _wasGrounded != _isGrounded || helper.HitWall )
+		if ( _wasGrounded != _isGrounded || _wasTouchingCeiling != _isTouchingCeiling || helper.HitWall )
 		{
 			_wasGrounded = _isGrounded || helper.HitWall;
+			_wasTouchingCeiling = _isTouchingCeiling;
 
-			if ( _wasGrounded )
+			if ( _wasGrounded || _wasTouchingCeiling )
 				Gadget.PlaySound( CollisionSound );
 		}
 
