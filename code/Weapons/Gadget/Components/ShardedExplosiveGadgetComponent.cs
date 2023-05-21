@@ -35,9 +35,9 @@ public partial class ShardedExplosiveGadgetComponent : ExplosiveGadgetComponent
 		for ( int i = 0; i < AmountOfShards; i++ )
 		{
 			var gadget = PrefabLibrary.Spawn<Gadget>( ShardGadgetPrefab );
-			var DirectionRNG = new Random( Time.Tick + i );
-			var direction = Rotation.LookAt( Vector3.Up + Vector3.Forward * DirectionRNG.Float() * 0.5f, Vector3.Right );
-			gadget.OnUse( Grub, Gadget.Position, direction, (int)MathF.Round( ShardCharge * DirectionRNG.Float( 0.5f, 1f ) ) );
+			var directionRNG = new Random( Time.Tick + i );
+			var direction = Rotation.LookAt( Vector3.Up + Vector3.Forward * directionRNG.Float( -1f, 1f ) * 0.5f, Vector3.Right );
+			gadget.OnUse( Grub, Gadget.Position, direction, (int)MathF.Round( ShardCharge * directionRNG.Float( 0.5f, 1f ) ) );
 		}
 
 		ExplodeSoundClient( To.Everyone, ExplosionSound );
