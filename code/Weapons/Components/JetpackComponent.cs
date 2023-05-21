@@ -97,8 +97,11 @@ public partial class JetpackComponent : WeaponComponent
 				jetparticle2.EnableDrawing = false;
 				jetparticle3.EnableDrawing = false;
 			}
-			Grub.Position -= Vector3.Up * 300 * Time.Delta;
-			Grub.Position += new Vector3( 0, 0, VelocityInput.z * Time.Delta * ThrustSpeed );
+			if ( Grub.Controller.GetMechanic<JumpMechanic>().TimeSinceStop > 1f && Grub.Controller.GetMechanic<BackflipMechanic>().TimeSinceStop > 1f )
+			{
+				Grub.Position -= Vector3.Up * 300 * Time.Delta;
+				Grub.Position += new Vector3( 0, 0, VelocityInput.z * Time.Delta * ThrustSpeed );
+			}
 		}
 		else
 		{
