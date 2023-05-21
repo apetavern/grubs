@@ -7,7 +7,7 @@ public partial class ShardedExplosiveGadgetComponent : ExplosiveGadgetComponent
 	public Prefab ShardGadgetPrefab { get; set; }
 
 	[Prefab, Net]
-	public int AmountOfShards { get; set; }
+	public int ShardsSpawned { get; set; } = 5;
 
 	[Prefab, Net]
 	public int SpreadSpeed { get; set; } = 30;
@@ -20,7 +20,7 @@ public partial class ShardedExplosiveGadgetComponent : ExplosiveGadgetComponent
 		if ( !Game.IsServer )
 			return;
 
-		for ( int i = 0; i < AmountOfShards; i++ )
+		for ( int i = 0; i < ShardsSpawned; i++ )
 		{
 			var newGadget = PrefabLibrary.Spawn<Gadget>( ShardGadgetPrefab );
 			var randomDirection = new Random( Time.Tick + i );
