@@ -118,6 +118,7 @@ public static class GrubsConfig
 		Cavern = 3,
 		Bunkers = 4,
 		AICavern = 5,
+		Hightower = 6,
 	}
 
 	/// <summary>

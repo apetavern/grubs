@@ -431,6 +431,10 @@
           {
             "Value": "5",
             "Name": "AICavern"
+          },
+          {
+            "Value": "6",
+            "Name": "Hightower"
           }
         ],
         "ConVarName": "terrain_texture",
