@@ -83,20 +83,11 @@ public class FireEntity : ModelEntity, IResolvable
 
 		if ( collisionTrace.Hit )
 		{
+			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( "invincible" ) )
+				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
+
 			if ( collisionTrace.Entity is Grub grub )
-			{
-				grub.TakeDamage(
-					DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
 				grub.ApplyAbsoluteImpulse( (grub.Position - Position).Normal * 32f );
-			}
-			else if ( collisionTrace.Entity is Gadget gadget )
-			{
-				if ( gadget.IsCrate )
-				{
-					gadget.TakeDamage(
-						DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
-				}
-			}
 		}
 
 		var terrain = GrubsGame.Instance.Terrain;
