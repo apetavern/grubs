@@ -73,6 +73,19 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		}
 	}
 
+	public void OnUse( Grub grub, Vector3 position, Rotation direction, int charge )
+	{
+		Owner = grub;
+		grub.Player.Gadgets.Add( this );
+
+		Position = position;
+
+		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		{
+			component.OnUse( position, direction, charge );
+		}
+	}
+
 	public override void Touch( Entity other )
 	{
 		foreach ( var component in Components.GetAll<GadgetComponent>() )

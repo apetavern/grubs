@@ -26,6 +26,11 @@ public partial class GadgetComponent : EntityComponent<Gadget>
 
 	}
 
+	public virtual void OnUse( Vector3 position, Rotation direction, int charge )
+	{
+
+	}
+
 	public virtual void Touch( Entity other )
 	{
 
