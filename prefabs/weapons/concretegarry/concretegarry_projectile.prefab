@@ -23,7 +23,7 @@
           },
           "Bounces": {
             "Type": "Int32",
-            "Value": "5"
+            "Value": "4"
           },
           "CollisionSound": {
             "Type": "String",

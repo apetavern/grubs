@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "5b785ead-2a77-462d-95d3-4b23e18e254c",
-        "Class": "GadgetWeaponComponent",
+        "Class": "AnvilComponent",
         "Keys": {
           "_name": {
             "Value": "\u0022GadgetWeaponComponent\u0022"
@@ -42,7 +42,7 @@
       },
       "Model": {
         "Type": "Model",
-        "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl\u0022"
+        "Value": "\u0022models/weapons/airstrikes/radio.vmdl\u0022"
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
