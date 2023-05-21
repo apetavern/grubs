@@ -25,7 +25,7 @@
           },
           "ExplodeAfter": {
             "Type": "Single",
-            "Value": "0"
+            "Value": "-1"
           },
           "ExplosionReaction": {
             "Type": "ExplosiveReaction",
@@ -44,6 +44,10 @@
           "AmountOfShards": {
             "Type": "Int32",
             "Value": "0"
+          },
+          "ExplodeOnTouch": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },
@@ -84,18 +88,6 @@
           "CollisionSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/generic_impact.sound\u0022"
-          }
-        }
-      },
-      {
-        "Guid": "37acd186-6474-4c55-b57a-a573319656c5",
-        "Class": "TouchExplodeGadgetComponent",
-        "Keys": {
-          "_name": {
-            "Value": "\u0022TouchExplodeGadgetComponent\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
           }
         }
       }
