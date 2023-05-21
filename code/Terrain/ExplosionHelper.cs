@@ -15,10 +15,10 @@ public static partial class ExplosionHelper
 	{
 		if ( !Game.IsServer )
 			return;
-		
+
 		foreach ( var entity in Entity.FindInSphere( position, radius ) )
 		{
-			if ( !entity.IsValid() || entity.LifeState != LifeState.Alive )
+			if ( !entity.IsValid() || entity.LifeState != LifeState.Alive || entity.Tags.Has( "invulnerable" ) )
 				continue;
 
 			var dist = Vector3.DistanceBetween( position, entity.Position );

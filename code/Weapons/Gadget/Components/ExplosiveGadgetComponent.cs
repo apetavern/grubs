@@ -66,9 +66,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 			return;
 
 		var tr = Trace.Ray( Gadget.Position, Gadget.Position + Gadget.Velocity.Normal * 4f )
-					.Size( 20f )
-					.WithoutTags( "shard" )
-					.Run();
+				.Size( Gadget.CollisionBounds )
+				.WithoutTags( "shard" )
+				.Run();
 
 		if ( tr.Hit )
 			Explode();
