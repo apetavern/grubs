@@ -28,7 +28,18 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
-		Gadget.Position = Grub.Player.MousePosition + Vector3.Up * 150f;
+		var trTerrain = Trace.Ray( Player.MousePosition, Player.MousePosition + Vector3.Forward * 1000f )
+			.WithAnyTags( "solid" )
+			.Size( 1f )
+			.Run();
+
+		Gadget.Position = Grub.Player.MousePosition;
+		if ( trTerrain.Hit )
+			Gadget.Position = Gadget.Position.WithZ( GrubsConfig.TerrainHeight + 64f );
+		else
+			Gadget.Position += Vector3.Up * 350f;
+
+		Gadget.Position.Clamp( 0, GrubsConfig.TerrainHeight + 64f );
 	}
 
 	public override void Simulate( IClient client )
