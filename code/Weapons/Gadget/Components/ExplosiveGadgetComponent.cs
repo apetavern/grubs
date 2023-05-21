@@ -73,7 +73,8 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		}
 
 		ExplodeSoundClient( To.Everyone, ExplosionSound );
-		Gadget.Delete();
+		if ( !Gadget.Tags.Has( "invulnerable" ) )
+			Gadget.Delete();
 	}
 
 	[ClientRpc]
