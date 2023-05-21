@@ -1,0 +1,77 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "3243de2d-7c3f-436a-9197-1a364b067691",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "5b785ead-2a77-462d-95d3-4b23e18e254c",
+        "Class": "GadgetWeaponComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022GadgetWeaponComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "GadgetPrefab": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/concretegarry/concretegarry_projectile.prefab\u0022"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "_name": {
+        "Value": "\u0022Concrete Garry\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl\u0022"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Cursor\u0022"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Holdable\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl_c.png\u0022"
+      },
+      "WeaponType": {
+        "Type": "WeaponType",
+        "Value": "\u0022Weapon\u0022"
+      }
+    }
+  }
+}
