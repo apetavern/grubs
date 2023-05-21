@@ -13,11 +13,11 @@
         "Keys": {
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "10"
+            "Value": "35"
           },
           "MaxExplosionDamage": {
             "Type": "Single",
-            "Value": "10"
+            "Value": "35"
           },
           "ExplosionForceMultiplier": {
             "Type": "Single",
@@ -25,7 +25,7 @@
           },
           "ExplodeAfter": {
             "Type": "Single",
-            "Value": "0"
+            "Value": "-1"
           },
           "ExplosionReaction": {
             "Type": "ExplosiveReaction",
@@ -44,6 +44,10 @@
           "AmountOfShards": {
             "Type": "Int32",
             "Value": "0"
+          },
+          "ExplodeOnTouch": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },
@@ -86,18 +90,6 @@
             "Value": "\u0022sounds/weapons/generic_impact.sound\u0022"
           }
         }
-      },
-      {
-        "Guid": "37acd186-6474-4c55-b57a-a573319656c5",
-        "Class": "TouchExplodeGadgetComponent",
-        "Keys": {
-          "_name": {
-            "Value": "\u0022TouchExplodeGadgetComponent\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
       }
     ],
     "Keys": {
@@ -107,7 +99,7 @@
       },
       "CollisionRadius": {
         "Type": "Single",
-        "Value": "7"
+        "Value": "3"
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
@@ -134,7 +126,7 @@
         "Value": "1"
       },
       "_tags": {
-        "Value": "\u0022gadget\u0022"
+        "Value": "\u0022gadget invincible\u0022"
       }
     }
   }

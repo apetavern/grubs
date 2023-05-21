@@ -38,15 +38,6 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		}
 	}
 
-	public override void OnUse( Vector3 position, Rotation direction, int charge )
-	{
-		if ( ShouldThrow )
-		{
-			Gadget.Position = position;
-			Gadget.Velocity = direction.Forward * charge * ThrowSpeed;
-		}
-	}
-
 	public override bool IsResolved()
 	{
 		return CheckResolve ? Gadget.Velocity.IsNearlyZero( 2.5f ) : true;

@@ -12,6 +12,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public float ExplosionForceMultiplier { get; set; } = 1.0f;
 
+	[Prefab, Net]
+	public bool ExplodeOnTouch { get; set; } = false;
+
 	/// <summary>
 	/// The number of seconds before it explodes, set to "0" if something else handles the exploding.
 	/// </summary>
@@ -55,6 +58,20 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 			return;
 
 		Explode();
+	}
+
+	public override void Simulate( IClient client )
+	{
+		if ( !ExplodeOnTouch )
+			return;
+
+		var tr = Trace.Ray( Gadget.Position, Gadget.Position )
+				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
+				.WithoutTags( "shard" )
+				.Run();
+
+		if ( tr.Hit )
+			Explode();
 	}
 
 	public virtual void Explode()
