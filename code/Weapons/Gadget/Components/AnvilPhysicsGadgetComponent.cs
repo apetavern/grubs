@@ -39,7 +39,7 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 		else
 			Gadget.Position += Vector3.Up * 350f;
 
-		Gadget.Position.Clamp( 0, GrubsConfig.TerrainHeight + 64f );
+		Gadget.Position.z.Clamp( 0, GrubsConfig.TerrainHeight + 64f );
 	}
 
 	public override void Simulate( IClient client )
