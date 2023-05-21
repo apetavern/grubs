@@ -10,7 +10,7 @@ public partial class ShardedExplosiveGadgetComponent : ExplosiveGadgetComponent
 	public int AmountOfShards { get; set; }
 
 	[Prefab, Net]
-	public int ShardCharge { get; set; } = 30;
+	public int SpreadSpeed { get; set; } = 30;
 
 	[Prefab, Net]
 	public int SpawnSpeed { get; set; } = 10;
@@ -31,7 +31,7 @@ public partial class ShardedExplosiveGadgetComponent : ExplosiveGadgetComponent
 			Grub.Player.Gadgets.Add( newGadget );
 
 			newGadget.Position = Gadget.Position;
-			newGadget.Velocity = direction.Forward * MathF.Round( ShardCharge * randomDirection.Float( 0.5f, 1f ) ) * SpawnSpeed;
+			newGadget.Velocity = direction.Forward * MathF.Round( SpreadSpeed * randomDirection.Float( 0.5f, 1f ) ) * SpawnSpeed;
 		}
 
 		ExplodeSoundClient( To.Everyone, ExplosionSound );

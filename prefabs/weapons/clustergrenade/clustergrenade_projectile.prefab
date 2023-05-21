@@ -127,6 +127,10 @@
       },
       "_tags": {
         "Value": "\u0022gadget\u0022"
+      },
+      "UseModelCollision": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }

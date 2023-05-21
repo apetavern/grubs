@@ -65,8 +65,8 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		if ( !ExplodeOnTouch )
 			return;
 
-		var tr = Trace.Ray( Gadget.Position, Gadget.Position + Gadget.Velocity.Normal * 4f )
-				.Size( Gadget.CollisionBounds )
+		var tr = Trace.Ray( Gadget.Position, Gadget.Position )
+				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
 				.WithoutTags( "shard" )
 				.Run();
 
