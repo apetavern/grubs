@@ -51,7 +51,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "10"
+        "Value": "1"
       },
       "FiringType": {
         "Type": "FiringType",
