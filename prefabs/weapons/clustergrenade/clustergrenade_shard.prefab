@@ -13,11 +13,11 @@
         "Keys": {
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "45"
+            "Value": "35"
           },
           "MaxExplosionDamage": {
             "Type": "Single",
-            "Value": "60"
+            "Value": "35"
           },
           "ExplosionForceMultiplier": {
             "Type": "Single",
@@ -126,7 +126,7 @@
         "Value": "1"
       },
       "_tags": {
-        "Value": "\u0022gadget invulnerable\u0022"
+        "Value": "\u0022gadget invincible\u0022"
       }
     }
   }
