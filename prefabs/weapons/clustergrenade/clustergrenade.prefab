@@ -70,7 +70,7 @@
         "Value": "\u0022models/weapons/grenade/clustergrenade.vmdl_c.png\u0022"
       },
       "_name": {
-        "Value": "\u0022ClusterGrenade\u0022"
+        "Value": "\u0022Cluster Grenade\u0022"
       },
       "_localposition": {
         "Value": "\u00220,0,0\u0022"
@@ -86,7 +86,7 @@
       },
       "DropChance": {
         "Type": "Single",
-        "Value": "0"
+        "Value": "3"
       },
       "WeaponType": {
         "Type": "WeaponType",
