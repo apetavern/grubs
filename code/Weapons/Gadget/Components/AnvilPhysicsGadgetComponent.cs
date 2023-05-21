@@ -4,6 +4,9 @@
 public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 {
 	[Prefab, Net]
+	public bool LockXAxis { get; set; } = true;
+
+	[Prefab, Net]
 	public bool AffectedByWind { get; set; } = false;
 
 	[Prefab, ResourceType( "sound" )]
@@ -43,8 +46,10 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 			.WithoutTags( "dead" );
 
 		helper.TryMove( Time.Delta );
-		Gadget.Velocity = helper.Velocity.WithX( 0 );
 		Gadget.Position = helper.Position;
+		Gadget.Velocity = helper.Velocity;
+		if(LockXAxis)
+			Gadget.Velocity = Gadget.Velocity.WithX( 0 );
 
 		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 

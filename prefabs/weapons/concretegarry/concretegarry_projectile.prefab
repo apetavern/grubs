@@ -36,6 +36,10 @@
           "AffectedByWind": {
             "Type": "Boolean",
             "Value": "false"
+          },
+          "LockXAxis": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },
