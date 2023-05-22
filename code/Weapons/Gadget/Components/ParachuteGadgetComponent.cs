@@ -44,7 +44,7 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 
 		helper.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
 
-		var parachuteAirFrictionModifier = Parachute is not null ? 1.5f : 0f;
+		var parachuteAirFrictionModifier = !_hasLanded ? 1.5f : 5f;
 		helper.ApplyFriction( 2.0f * parachuteAirFrictionModifier, Time.Delta );
 		helper.TryMove( Time.Delta );
 
