@@ -35,7 +35,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 	{
 		Transmit = TransmitType.Always;
 
-		Tags.Add( "player" );
+		Tags.Add( Tag.Player );
 	}
 
 	public Grub( Player player ) : this()
@@ -107,9 +107,9 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 			// Add a tag to the hat so we can reference it later.
 			if ( item.Category is Clothing.ClothingCategory.Hat or Clothing.ClothingCategory.Hair )
-				ent.Tags.Add( "head" );
+				ent.Tags.Add( Tag.Head );
 
-			ent.Tags.Add( "clothing" );
+			ent.Tags.Add( Tag.Clothing );
 
 			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
 				ent.SetMaterialGroup( item.MaterialGroup );
@@ -124,7 +124,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 	public void SetHatVisible( bool visible )
 	{
-		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( "head" ) );
+		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( Tag.Head ) );
 
 		foreach ( var hat in hats )
 			hat.EnableDrawing = visible;

@@ -18,7 +18,7 @@ public partial class TeleportComponent : WeaponComponent
 		TeleportPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
 		TeleportPreview.SetMaterialGroup( "Teleport_Preview" );
 		TeleportPreview.SetAnimParameter( "grounded", true );
-		TeleportPreview.Tags.Add( "preview" );
+		TeleportPreview.Tags.Add( Tag.Preview );
 		TeleportPreview.Owner = Grub;
 	}
 
@@ -82,7 +82,7 @@ public partial class TeleportComponent : WeaponComponent
 			.Run();
 
 		var trTerrain = Trace.Ray( trLocation.EndPosition, trLocation.EndPosition + Vector3.Right * 64f )
-			.WithAnyTags( "solid" )
+			.WithAnyTags( Tag.Solid )
 			.Size( 1f )
 			.Ignore( TeleportPreview )
 			.Run();

@@ -68,7 +68,7 @@ public partial class Player : Entity
 
 	public override void Spawn()
 	{
-		Tags.Add( "ignorereset" );
+		Tags.Add( Tag.IgnoreReset );
 
 		Components.Create<Inventory>();
 	}

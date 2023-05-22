@@ -18,7 +18,7 @@ public static partial class ExplosionHelper
 
 		foreach ( var entity in Entity.FindInSphere( position, radius ) )
 		{
-			if ( !entity.IsValid() || entity.LifeState != LifeState.Alive || entity.Tags.Has( "invincible" ) )
+			if ( !entity.IsValid() || entity.LifeState != LifeState.Alive || entity.Tags.Has( Tag.Invincible ) )
 				continue;
 
 			var dist = Vector3.DistanceBetween( position, entity.Position );

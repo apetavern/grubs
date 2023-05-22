@@ -37,7 +37,7 @@ public partial class Terrain : Entity
 
 		SdfWorld ??= new Sdf2DWorld();
 		SdfWorld.LocalRotation = Rotation.FromRoll( 90f );
-		SdfWorld.Tags.Add( "solid" );
+		SdfWorld.Tags.Add( Tag.Solid );
 
 		var creationStrategy = GrubsConfig.WorldTerrainType;
 		switch ( creationStrategy )
@@ -65,7 +65,7 @@ public partial class Terrain : Entity
 		var max = new Vector3( maxValue, 64f / 2, 0 );
 
 		KillZone = new DamageZone()
-			.WithDamageTags( "outofarea" )
+			.WithDamageTags( Tag.OutOfArea )
 			.WithSound( "water_splash" )
 			.WithParticle( "particles/watersplash/watersplash_base.vpcf" )
 			.WithDamage( 9999 )
@@ -100,7 +100,7 @@ public partial class Terrain : Entity
 			var startPos = new Vector3( randX, 0, randZ );
 
 			var tr = Trace.Ray( startPos, startPos + Vector3.Down * GrubsConfig.TerrainHeight )
-				.WithAnyTags( "solid", "player" )
+				.WithAnyTags( Tag.Solid, Tag.Player )
 				.Size( size )
 				.Run();
 
@@ -135,7 +135,7 @@ public partial class Terrain : Entity
 	private bool IsInsideTerrain( Vector3 position, float size )
 	{
 		var tr = Trace.Ray( position, position + Vector3.Right * 64f )
-			.WithAnyTags( "solid" )
+			.WithAnyTags( Tag.Solid )
 			.Size( size )
 			.Run();
 		return tr.Hit;

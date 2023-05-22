@@ -20,7 +20,7 @@ public partial class ProximityGadgetComponent : GadgetComponent
 
 	public override void Spawn()
 	{
-		Gadget.Tags.Add( "trigger" );
+		Gadget.Tags.Add( Tag.Trigger );
 		Gadget.EnableTouchPersists = true;
 
 		_timeUntilArm = ArmAfter;

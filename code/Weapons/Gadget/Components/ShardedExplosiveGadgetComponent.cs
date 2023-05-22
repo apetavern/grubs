@@ -26,7 +26,7 @@ public partial class ShardedExplosiveGadgetComponent : ExplosiveGadgetComponent
 			var randomDirection = new Random( Time.Tick + i );
 			var direction = Rotation.LookAt( Vector3.Up + Vector3.Forward * randomDirection.Float( -1f, 1f ) * 0.5f, Vector3.Right );
 
-			newGadget.Tags.Add( "shard" );
+			newGadget.Tags.Add( Tag.Shard );
 			newGadget.Owner = Grub;
 			Grub.Player.Gadgets.Add( newGadget );
 

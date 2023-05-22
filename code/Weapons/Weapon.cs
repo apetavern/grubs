@@ -179,7 +179,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		var tr = Trace.Ray( Grub.Controller.Hull.Center + Grub.Position, muzzle.Value.Position )
 			.Ignore( this )
 			.Ignore( Grub )
-			.WithoutTags( "gadget" )
+			.WithoutTags( Tag.Gadget )
 			.Radius( 1 )
 			.Run();
 

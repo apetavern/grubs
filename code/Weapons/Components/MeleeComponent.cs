@@ -66,7 +66,7 @@ public partial class MeleeComponent : WeaponComponent
 		var trs = Trace.Ray( ray, HitSize.x )
 			.Size( 12f )
 			.Ignore( Grub )
-			.WithoutTags( "dead" )
+			.WithoutTags( Tag.Dead )
 			.RunAll();
 
 		var grubsHitToDirection = new Dictionary<Grub, Vector3>();

@@ -156,7 +156,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 		var tr = Trace.Ray( start, end )
 			.Size( mins, maxs )
-			.WithAnyTags( "solid", "player" )
+			.WithAnyTags( Tag.Solid, Tag.Player )
 			.Ignore( Grub )
 			.Run();
 
@@ -265,7 +265,7 @@ public partial class GrubController : EntityComponent<Grub>
 
 		var tr = Trace.Ray( new Ray( mover.Position + Vector3.Up * 2f, Vector3.Forward * Grub.Facing ), 16.0f )
 			.Size( 1f )
-			.WithAnyTags( "solid" )
+			.WithAnyTags( Tag.Solid )
 			.Ignore( Grub )
 			.Run();
 

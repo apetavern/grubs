@@ -18,7 +18,7 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 
 		TargetPreview = new ModelEntity( "models/weapons/targetindicator/targetindicator.vmdl" );
 		TargetPreview.SetupPhysicsFromModel( PhysicsMotionType.Static );
-		TargetPreview.Tags.Add( "preview" );
+		TargetPreview.Tags.Add( Tag.Preview );
 		TargetPreview.Owner = Grub;
 	}
 

@@ -52,8 +52,8 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		helper.Trace = helper.Trace
 			.Size( Gadget.CollisionBounds )
 			.Ignore( Grub )
-			.WithAnyTags( "player", "solid" )
-			.WithoutTags( "dead" );
+			.WithAnyTags( Tag.Player, Tag.Solid )
+			.WithoutTags( Tag.Dead );
 
 		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 		_isTouchingCeiling = helper.TraceDirection( Vector3.Up ).Entity is not null;

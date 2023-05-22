@@ -43,7 +43,7 @@ public class ArcTrace
 			var tr = Trace.Ray( segment.StartPos, segment.EndPos )
 				.Ignore( Owner )
 				.Ignore( Gadget )
-				.WithoutTags( "dead" )
+				.WithoutTags( Tag.Dead )
 				.Radius( Gadget.CollisionRadius )
 				.Run();
 
@@ -92,7 +92,7 @@ public class ArcTrace
 			var tr = Trace.Ray( segment.StartPos, segment.EndPos )
 				.Ignore( Owner )
 				.Ignore( Gadget )
-				.WithoutTags( "dead" )
+				.WithoutTags( Tag.Dead )
 				.Size( 1f )
 				.Radius( Gadget.CollisionRadius )
 				.Run();

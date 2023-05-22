@@ -5,7 +5,7 @@ public partial class TerrainZone : ModelEntity
 {
 	public override void Spawn()
 	{
-		Tags.Add( "trigger" );
+		Tags.Add( Tag.Trigger );
 		Transmit = TransmitType.Always;
 	}
 

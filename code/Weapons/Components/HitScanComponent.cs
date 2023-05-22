@@ -96,7 +96,7 @@ public partial class HitScanComponent : WeaponComponent
 		}
 
 		// Trace the shot.
-		var tr = Trace.Ray( startPos, endPos ).WithoutTags( "dead" ).Ignore( Grub );
+		var tr = Trace.Ray( startPos, endPos ).WithoutTags( Tag.Dead ).Ignore( Grub );
 
 		if ( Game.IsServer )
 		{
@@ -104,7 +104,7 @@ public partial class HitScanComponent : WeaponComponent
 
 			if ( PenetrateWorld )
 			{
-				tr = tr.WithoutTags( "solid" );
+				tr = tr.WithoutTags( Tag.Solid );
 				var terrain = GamemodeSystem.Instance.Terrain;
 				var materialsConfig = new MaterialsConfig( includeBackground: (TraceDistance > 10f), isDestruction: true, bgOffset: -8f );
 				var materials = terrain.GetActiveMaterials( materialsConfig );
