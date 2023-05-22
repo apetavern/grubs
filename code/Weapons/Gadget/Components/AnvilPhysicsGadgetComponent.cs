@@ -51,7 +51,14 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 		if ( LockXAxis )
 			Gadget.Velocity = Gadget.Velocity.WithX( 0 );
 
-		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
+		var trCollision = Trace.Ray( Gadget.Position, Gadget.Position )
+				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
+				.Ignore( Gadget )
+				.WithAnyTags( Tag.Player, Tag.Solid )
+				.WithoutTags( Tag.Shard )
+				.Run();
+
+		_isGrounded = trCollision.Hit;
 
 		if ( _wasGrounded != _isGrounded )
 		{
