@@ -68,6 +68,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		var tr = Trace.Ray( Gadget.Position, Gadget.Position )
 				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
 				.WithoutTags( Tag.Shard )
+				.UseHitboxes( true )
 				.Run();
 
 		if ( tr.Hit )
