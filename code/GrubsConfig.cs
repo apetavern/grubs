@@ -69,6 +69,12 @@ public static class GrubsConfig
 	public static int HealthCrateChancePerTurn { get; set; } = 5;
 
 	/// <summary>
+	/// The percent chance that a barrel will spawn.
+	/// </summary>
+	[ConVar.Replicated( "barrel_chance" )]
+	public static int BarrelChancePerTurn { get; set; } = 10;
+
+	/// <summary>
 	/// The time in seconds to give <see cref="Grub"/>s after using their turn.
 	/// </summary>
 	[ConVar.Replicated( "movement_grace" )]

@@ -34,7 +34,6 @@ public partial class ShardedExplosiveGadgetComponent : ExplosiveGadgetComponent
 			newGadget.Velocity = direction.Forward * MathF.Round( SpreadSpeed * randomDirection.Float( 0.5f, 1f ) ) * SpawnSpeed;
 		}
 
-		ExplodeSoundClient( To.Everyone, ExplosionSound );
-		Gadget.Delete();
+		base.Explode();
 	}
 }

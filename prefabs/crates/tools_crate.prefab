@@ -30,6 +30,20 @@
             "Value": "\u0022sounds/world/crate_spawn.sound\u0022"
           }
         }
+      },
+      {
+        "Guid": "21fd4439-66d6-4837-a9d6-877e998d7b0c",
+        "Class": "ParachuteGadgetComponent",
+        "Keys": {
+          "SpawnSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/world/crate_spawn.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Parachute\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {
