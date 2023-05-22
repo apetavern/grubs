@@ -36,7 +36,6 @@ public partial class FreeForAll : Gamemode
 	internal override void Start()
 	{
 		SpawnPlayers();
-		SpawnBarrels();
 
 		CurrentState = State.Playing;
 	}
@@ -60,20 +59,6 @@ public partial class FreeForAll : Gamemode
 		}
 
 		ActivePlayer = PlayerTurnQueue.Dequeue();
-	}
-
-	private void SpawnBarrels()
-	{
-		for ( int i = 0; i < GrubsConfig.GrubCount * Players.Count; ++i )
-		{
-			var player = Game.Clients.First().Pawn as Player;
-			var spawnPos = Terrain.FindSpawnLocation( size: 9f );
-
-			PrefabLibrary.TrySpawn<Gadget>( "prefabs/world/oil_drum.prefab", out var barrel );
-			barrel.Position = spawnPos;
-			barrel.Owner = player;
-			player.Gadgets.Add( barrel );
-		}
 	}
 
 	internal override void UseTurn( bool giveMovementGrace = false )
@@ -119,6 +104,7 @@ public partial class FreeForAll : Gamemode
 		await GameTask.DelaySeconds( 1f );
 		await DealGrubDamage();
 		await HandleCrateSpawns();
+		await HandleBarrelSpawn();
 
 		return CheckWinConditions();
 	}
@@ -199,6 +185,26 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = crate;
 
 		await GameTask.DelaySeconds( 2 );
+	}
+
+	private async Task HandleBarrelSpawn()
+	{
+		if ( Game.Random.Int( 100 ) > GrubsConfig.BarrelChancePerTurn )
+			return;
+
+		PrefabLibrary.TrySpawn<Gadget>( "prefabs/world/oil_drum.prefab", out var barrel );
+		var player = Game.Clients.First().Pawn as Player;
+
+		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, size: 32f );
+		barrel.Position = spawnPos;
+		barrel.Owner = player;
+		player.Gadgets.Add( barrel );
+
+		UI.TextChat.AddInfoChatEntry( "A dancing barrel just spawned... what the spruce??" );
+		CameraTarget = barrel;
+
+		await GameTask.DelaySeconds( 2 );
+		CameraTarget = null;
 	}
 
 	[ClientRpc]

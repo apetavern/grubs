@@ -8,30 +8,6 @@
     "Entities": [],
     "Components": [
       {
-        "Guid": "c17d4702-650e-4945-8978-3a97ef1b97a3",
-        "Class": "PhysicsGadgetComponent",
-        "Keys": {
-          "ShouldRotate": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "_name": {
-            "Value": "\u0022Physics\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          },
-          "CheckResolve": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "Friction": {
-            "Type": "Single",
-            "Value": "5"
-          }
-        }
-      },
-      {
         "Guid": "8bc215b3-2884-40cd-95f4-a88083eecb92",
         "Class": "ExplosiveGadgetComponent",
         "Keys": {
@@ -53,6 +29,20 @@
           "_tags": {
             "Value": "[]"
           }
+        }
+      },
+      {
+        "Guid": "94f94e22-0a3d-452b-ba5d-91869d0ce58e",
+        "Class": "ParachuteGadgetComponent",
+        "Keys": {
+          "SpawnSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/world/crate_spawn.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Parachute\u0022"
+          },
+          "_tags": {}
         }
       }
     ],
