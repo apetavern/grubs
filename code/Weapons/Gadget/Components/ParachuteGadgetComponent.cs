@@ -6,14 +6,19 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 	[Prefab, ResourceType( "sound" )]
 	public string SpawnSound { get; set; }
 
+	[Net]
+	private AnimatedEntity Parachute { get; set; }
+
 	private readonly Material _spawnMaterial = Material.Load( "materials/effects/teleport/teleport.vmat" );
-	private AnimatedEntity _parachute;
-	private TimeSince TimeSinceSpawned { get; set; } = 0f;
+	private TimeSince _timeSinceSpawned;
+	private bool _wasGrounded = false;
 
 	public override void Spawn()
 	{
 		Gadget.SetMaterialOverride( _spawnMaterial );
 		Gadget.PlaySound( SpawnSound );
+
+		_timeSinceSpawned = 0f;
 
 		_ = SpawnParachuteDelayed();
 	}
@@ -21,16 +26,13 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 	private async Task SpawnParachuteDelayed()
 	{
 		await GameTask.DelaySeconds( 0.2f );
-		_parachute = new AnimatedEntity( "models/crates/crate_parachute/crate_parachute.vmdl", Entity );
+		Parachute = new AnimatedEntity( "models/crates/crate_parachute/crate_parachute.vmdl", Entity );
 	}
 
 	public override void Simulate( IClient client )
 	{
-		if ( Game.IsServer )
-		{
-			if ( TimeSinceSpawned > 1f )
-				Gadget.ClearMaterialOverride();
-		}
+		if ( Game.IsServer && _timeSinceSpawned > 1f )
+			Gadget.ClearMaterialOverride();
 
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
 		helper.Trace = helper.Trace
@@ -40,31 +42,23 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 			.WithAnyTags( Tag.Player, Tag.Solid, Tag.Gadget )
 			.WithoutTags( Tag.Dead );
 
-		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
+		_wasGrounded |= helper.TraceDirection( Vector3.Down ).Entity is not null;
 
-		if ( groundEntity is null )
-		{
+		if ( !_wasGrounded )
 			helper.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
-		}
 		else
-		{
-			_parachute?.DeleteAsync( 0.3f );
-			_parachute?.SetAnimParameter( "landed", true );
-			_parachute = null;
+			Parachute.SetAnimParameter( "landed", true );
 
-			helper.Velocity = 0;
-		}
-
-		var parachuteAirFrictionModifier = _parachute is not null ? 1.5f : 0.5f;
+		var parachuteAirFrictionModifier = Parachute is not null ? 1.5f : 0.5f;
 		helper.ApplyFriction( 2.0f * parachuteAirFrictionModifier, Time.Delta );
 		helper.TryMove( Time.Delta );
 
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
-		Gadget.Rotation = Rotation.Lerp(
-			Gadget.Rotation,
-			new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(),
-			Time.Delta
-		);
+
+		if ( !_wasGrounded )
+			Gadget.Rotation = Rotation.Lerp( Gadget.Rotation, new Angles( MathF.Sin( Time.Now * 2f ) * 15f, 0, 0 ).ToRotation(), Time.Delta );
+		else
+			Gadget.Rotation = Angles.Zero.ToRotation();
 	}
 }

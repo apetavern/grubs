@@ -225,6 +225,7 @@
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.1
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_FadeAndKill"
@@ -232,6 +233,9 @@
 		},
 		{
 			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_LerpToInitialPosition"
 		},
 	]
 	m_Renderers = 

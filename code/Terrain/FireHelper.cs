@@ -36,7 +36,7 @@ public class FireEntity : ModelEntity, IResolvable
 	{
 		Position = startPosition;
 		_moveDirection = moveDirection;
-
+		Velocity = _moveDirection * Time.Delta * 10f;
 		_expiryTime = Time.Now + Game.Random.Float( 0.5f, 2.5f );
 	}
 
@@ -61,7 +61,9 @@ public class FireEntity : ModelEntity, IResolvable
 
 	private void Move()
 	{
-		Velocity += new Vector3( _moveDirection ) * Time.Delta / 2f;
+		//DebugOverlay.Sphere( Position, 5f, Color.Red );
+
+		Velocity += _moveDirection * Time.Delta / 2f;
 		Velocity += Game.PhysicsWorld.Gravity * Time.Delta / 10f;
 		Velocity += GamemodeSystem.Instance.ActiveWindForce * 128f * Time.Delta;
 
@@ -76,6 +78,9 @@ public class FireEntity : ModelEntity, IResolvable
 		mover.TryMove( Time.Delta );
 		Velocity = mover.Velocity;
 		Position = mover.Position;
+
+		if ( FireParticle is not null )
+			FireParticle.SetPosition( 0, Position );
 
 		var collisionTrace = Trace.Sphere( fireSize / 2, Position, Position + Vector3.Down * 5f )
 			.WithAnyTags( Tag.Solid, Tag.Gadget, Tag.Player )
@@ -93,5 +98,6 @@ public class FireEntity : ModelEntity, IResolvable
 		var terrain = GrubsGame.Instance.Terrain;
 		var materials = terrain.GetActiveMaterials( MaterialsConfig.Destruction );
 		terrain.SubtractCircle( new Vector2( Position.x, Position.z ), fireSize, materials );
+		terrain.ScorchCircle( new Vector2( Position.x, Position.z ), fireSize + 4f );
 	}
 }

@@ -54,27 +54,6 @@
 				[
 					{
 						_class = "AnimFile"
-						name = "deploy"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models/crates/crate_parachute/crate_parachute.fbx"
-						start_frame = 1
-						end_frame = 22
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
 						name = "flutter"
 						activity_name = ""
 						activity_weight = 1
@@ -90,6 +69,27 @@
 						source_filename = "models/crates/crate_parachute/crate_parachute.fbx"
 						start_frame = 24
 						end_frame = 34
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/crates/crate_parachute/crate_parachute.fbx"
+						start_frame = 1
+						end_frame = 22
 						framerate = -1.0
 						take = 0
 						reverse = false
@@ -127,7 +127,7 @@
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = "models/crates/crate_parachute/crate_parachute.vanmgrph"
+		anim_graph_name = "models/tools/parachute/parachute.vanmgrph"
 		base_model_name = ""
 	}
 }
