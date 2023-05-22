@@ -87,17 +87,14 @@ public partial class MeleeComponent : WeaponComponent
 			}
 			else if ( trace.Hit && trace.Entity is Gadget gadget )
 			{
-				if ( gadget.IsCrate )
-				{
-					gadget.TakeDamage(
-						new DamageInfo
-						{
-							Attacker = Grub,
-							Damage = Damage,
-							Position = gadget.Position
-						}.WithTag( "melee" ) );
-				}
-
+				gadget.TakeDamage(
+					new DamageInfo
+					{
+						Attacker = Grub,
+						Damage = Damage,
+						Position = gadget.Position
+					}.WithTag( "melee" )
+				);
 			}
 		}
 

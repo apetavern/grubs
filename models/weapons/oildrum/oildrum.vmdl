@@ -31,7 +31,7 @@
 						_class = "RenderMeshFile"
 						filename = "models/weapons/oildrum/oildrum.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 90.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -89,9 +89,25 @@
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ 0.299358, -0.0565, 16.479519 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 23.247734, 24.594368, 30.487282 ]
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/oildrum/oildrum.vanmgrph"
+		base_model_name = ""
 	}
 }
