@@ -14,6 +14,9 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public bool ShouldCameraFollow { get; set; } = true;
 
+	[Prefab, Net]
+	public bool ExplodeOnKilled { get; set; } = false;
+
 	[Prefab, ResourceType( "vpcf" )]
 	public string TrailParticle { get; set; }
 
@@ -89,14 +92,18 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		}
 	}
 
-	public override void OnKilled()
+	public override void TakeDamage( DamageInfo damageInfo )
 	{
-		ExplosionHelper.Explode( Position, this, 50f );
+		base.TakeDamage( damageInfo );
 
-		if ( IsCrate )
-		{
-			FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, 4 );
-		}
+		if ( Health > 0 )
+			return;
+
+		if ( !ExplodeOnKilled || damageInfo.HasTag( "outofarea" ) )
+			return;
+
+		ExplosionHelper.Explode( Position, this, 50f );
+		FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, 4 );
 
 		PlayScreenSound( "explosion_short_tail" );
 		Delete();
