@@ -57,7 +57,7 @@
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "80"
+            "Value": "85"
           },
           "ExplodeAfter": {
             "Type": "Single",
