@@ -136,7 +136,13 @@ public partial class JetpackComponent : WeaponComponent
 		Grub.SetAnimParameter( "jetpack_active", false );
 		VelocityInput = Vector3.Zero;
 		FuelCount = Fuel;
-		Weapon.Ammo -= 1;
+		if ( Weapon.Ammo != 0 )
+		{
+			Weapon.Ammo -= 1;
+		}
+		jetparticle1.Destroy();
+		jetparticle2.Destroy();
+		jetparticle3.Destroy();
 	}
 
 	public override void FireFinished()
