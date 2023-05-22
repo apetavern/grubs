@@ -18,9 +18,6 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public float BounceForce { get; set; } = 100.0f;
 
-	[Prefab]
-	public bool ShouldExplode { get; set; } = false;
-
 	private bool _isGrounded;
 	private bool _wasGrounded;
 
@@ -74,9 +71,6 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 	private void OnCollision()
 	{
 		Gadget.PlaySound( CollisionSound );
-
-		if ( ShouldExplode && Gadget.Components.TryGet( out ExplosiveGadgetComponent comp ) )
-			comp.Explode();
 
 		if ( Bounces > 0 )
 		{
