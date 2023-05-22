@@ -8,15 +8,18 @@
 <root class="@( _isOpen ? "open" : "" )">
     <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
-        @foreach (var weapon in player.Inventory.Weapons)
-        {
-            var hasAmmo = weapon.HasAmmo();
-            <InventorySlot
-            Weapon=@weapon
-            HasAmmo=@hasAmmo
-            @onmouseover=@( () => _hoveredWeapon = weapon )
-            @onmouseout=@( () => _hoveredWeapon = null )
-            @onclick=@( () => { if ( hasAmmo ) player.ActiveWeaponInput = weapon; } ) />
+        @{
+            var sortedWeapons = player.Inventory.Weapons.OrderByDescending(w => w.WeaponType == WeaponType.Weapon);
+            @foreach (var weapon in sortedWeapons)
+            {
+                var hasAmmo = weapon.HasAmmo();
+                <InventorySlot
+                Weapon=@weapon
+                HasAmmo=@hasAmmo
+                @onmouseover=@( () => _hoveredWeapon = weapon )
+                @onmouseout=@( () => _hoveredWeapon = null )
+                @onclick=@( () => { if ( hasAmmo ) player.ActiveWeaponInput = weapon; } ) />
+            }
         }
     </div>
 </root>
