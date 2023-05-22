@@ -31,10 +31,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						origin = [ 0.0, 0.0, 12.5 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 25.0, 25.0, 25.0 ]
@@ -66,9 +63,23 @@
 					},
 				]
 			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "parachute_attach"
+						origin = [ 0.0, 0.0, -7.485192 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						do_not_discard = true
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

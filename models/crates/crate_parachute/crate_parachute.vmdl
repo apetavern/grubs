@@ -36,7 +36,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "parachute_attach"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -108,6 +108,19 @@
 						weights = [  ]
 						master_morph_weight = 1.0
 						morph_weights = [  ]
+					},
+				]
+			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "parachute_attach"
+						origin = [ 0.0, 0.0, 0.0 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						do_not_discard = true
 					},
 				]
 			},
