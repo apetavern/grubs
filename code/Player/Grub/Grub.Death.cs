@@ -126,13 +126,13 @@ public partial class Grub
 		UI.TextChat.AddInfoChatEntry( DeathReason.ToString() );
 
 		LifeState = LifeState.Dead;
-		Tags.Remove( "player" );
-		Tags.Add( "dead" );
+		Tags.Remove( Tag.Player );
+		Tags.Add( Tag.Dead );
 
 		EnableDrawing = false;
 
 		// Disable drawing of any clothes, for whatever reason EnableDrawing doesn't handle it.
-		var clothes = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( "clothing" ) );
+		var clothes = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( Tag.Clothing ) );
 		foreach ( var clothing in clothes )
 			clothing.EnableDrawing = false;
 

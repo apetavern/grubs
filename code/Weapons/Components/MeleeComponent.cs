@@ -42,12 +42,7 @@ public partial class MeleeComponent : WeaponComponent
 			{
 				grub.Controller.ClearGroundEntity();
 				grub.ApplyAbsoluteImpulse( HitForce * dir );
-				grub.TakeDamage( new DamageInfo
-				{
-					Attacker = Grub,
-					Damage = Damage,
-					Position = grub.Position,
-				}.WithTag( "melee" ) );
+				grub.TakeDamage( new DamageInfo { Attacker = Grub, Damage = Damage, Position = grub.Position, }.WithTag( "melee" ) );
 			}
 		}
 
@@ -71,7 +66,7 @@ public partial class MeleeComponent : WeaponComponent
 		var trs = Trace.Ray( ray, HitSize.x )
 			.Size( 12f )
 			.Ignore( Grub )
-			.WithoutTags( "dead" )
+			.WithoutTags( Tag.Dead )
 			.RunAll();
 
 		var grubsHitToDirection = new Dictionary<Grub, Vector3>();
@@ -81,24 +76,10 @@ public partial class MeleeComponent : WeaponComponent
 
 		foreach ( var trace in trs )
 		{
-			if ( trace.Hit && trace.Entity is Grub grub )
-			{
+			if ( trace.Entity is Grub grub )
 				grubsHitToDirection.Add( grub, trace.Direction );
-			}
-			else if ( trace.Hit && trace.Entity is Gadget gadget )
-			{
-				if ( gadget.IsCrate )
-				{
-					gadget.TakeDamage(
-						new DamageInfo
-						{
-							Attacker = Grub,
-							Damage = Damage,
-							Position = gadget.Position
-						}.WithTag( "melee" ) );
-				}
-
-			}
+			else if ( trace.Entity is Gadget gadget )
+				gadget.TakeDamage( new DamageInfo { Attacker = Grub, Damage = Damage, Position = gadget.Position }.WithTag( "melee" ) );
 		}
 
 		return grubsHitToDirection;

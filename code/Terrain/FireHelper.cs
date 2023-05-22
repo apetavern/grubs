@@ -43,7 +43,7 @@ public class FireEntity : ModelEntity, IResolvable
 	public override void Spawn()
 	{
 		FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
-		Tags.Add( "fire" );
+		Tags.Add( Tag.Fire );
 		Name = "fire";
 	}
 
@@ -70,33 +70,24 @@ public class FireEntity : ModelEntity, IResolvable
 		var mover = new MoveHelper( Position, Velocity );
 		mover.Trace = mover.Trace
 			.Size( fireSize )
-			.WithAnyTags( "solid", "gadget" )
-			.WithoutTags( "fire", "player" );
+			.WithAnyTags( Tag.Solid, Tag.Gadget )
+			.WithoutTags( Tag.Fire, Tag.Player );
 
 		mover.TryMove( Time.Delta );
 		Velocity = mover.Velocity;
 		Position = mover.Position;
 
 		var collisionTrace = Trace.Sphere( fireSize / 2, Position, Position + Vector3.Down * 5f )
-			.WithAnyTags( "solid", "gadget", "player" )
+			.WithAnyTags( Tag.Solid, Tag.Gadget, Tag.Player )
 			.Run();
 
 		if ( collisionTrace.Hit )
 		{
+			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( Tag.Invincible ) )
+				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
+
 			if ( collisionTrace.Entity is Grub grub )
-			{
-				grub.TakeDamage(
-					DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
 				grub.ApplyAbsoluteImpulse( (grub.Position - Position).Normal * 32f );
-			}
-			else if ( collisionTrace.Entity is Gadget gadget )
-			{
-				if ( gadget.IsCrate )
-				{
-					gadget.TakeDamage(
-						DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
-				}
-			}
 		}
 
 		var terrain = GrubsGame.Instance.Terrain;

@@ -38,15 +38,6 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		}
 	}
 
-	public override void OnUse( Vector3 position, Rotation direction, int charge )
-	{
-		if ( ShouldThrow )
-		{
-			Gadget.Position = position;
-			Gadget.Velocity = direction.Forward * charge * ThrowSpeed;
-		}
-	}
-
 	public override bool IsResolved()
 	{
 		return CheckResolve ? Gadget.Velocity.IsNearlyZero( 2.5f ) : true;
@@ -61,8 +52,8 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		helper.Trace = helper.Trace
 			.Size( Gadget.CollisionBounds )
 			.Ignore( Grub )
-			.WithAnyTags( "player", "solid" )
-			.WithoutTags( "dead" );
+			.WithAnyTags( Tag.Player, Tag.Solid )
+			.WithoutTags( Tag.Dead );
 
 		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 		_isTouchingCeiling = helper.TraceDirection( Vector3.Up ).Entity is not null;

@@ -115,6 +115,10 @@
       "ShouldCameraFollow": {
         "Type": "Boolean",
         "Value": "false"
+      },
+      "ExplodeOnKilled": {
+        "Type": "Boolean",
+        "Value": "true"
       }
     }
   }

@@ -20,7 +20,7 @@ public partial class CrateGadgetComponent : GadgetComponent
 	{
 		Gadget.EnableTouch = true;
 		Gadget.EnableAllCollisions = true;
-		Gadget.Tags.Add( "trigger" );
+		Gadget.Tags.Add( Tag.Trigger );
 		Gadget.SetMaterialOverride( _spawnMaterial );
 		Gadget.PlaySound( SpawnSound );
 
@@ -78,8 +78,8 @@ public partial class CrateGadgetComponent : GadgetComponent
 			.Size( Gadget.CollisionBounds )
 			.Ignore( Grub )
 			.Ignore( Gadget )
-			.WithAnyTags( "player", "solid", "gadget" )
-			.WithoutTags( "dead" );
+			.WithAnyTags( Tag.Player, Tag.Solid, Tag.Gadget )
+			.WithoutTags( Tag.Dead );
 
 		var groundEntity = helper.TraceDirection( Vector3.Down ).Entity;
 

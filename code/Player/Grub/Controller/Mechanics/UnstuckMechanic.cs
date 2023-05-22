@@ -35,7 +35,7 @@ public class UnstuckMechanic : ControllerMechanic
 			result = Controller.TraceBBox( pos, pos );
 
 			var tr = Trace.Ray( result.EndPosition, result.EndPosition + Vector3.Right * 64f )
-				.WithAnyTags( "solid" )
+				.WithAnyTags( Tag.Solid )
 				.Size( 1f )
 				.Run();
 

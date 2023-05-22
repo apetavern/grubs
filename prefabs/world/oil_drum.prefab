@@ -24,6 +24,10 @@
           "CheckResolve": {
             "Type": "Boolean",
             "Value": "false"
+          },
+          "Friction": {
+            "Type": "Single",
+            "Value": "5"
           }
         }
       },
@@ -70,13 +74,21 @@
         "Value": "1"
       },
       "_tags": {
-        "Value": "\u0022gadget\u0022"
+        "Value": "\u0022gadget solid\u0022"
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
         "Value": "false"
       },
       "ShouldUseModelCollision": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "UseModelCollision": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "ExplodeOnKilled": {
         "Type": "Boolean",
         "Value": "true"
       }

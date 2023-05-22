@@ -36,7 +36,7 @@
             "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
           },
           "_name": {
-            "Value": "\u0022Explosive\u0022"
+            "Value": "\u0022Sharded Explosive\u0022"
           },
           "_tags": {
             "Value": "[]"
@@ -127,6 +127,10 @@
       },
       "_tags": {
         "Value": "\u0022gadget\u0022"
+      },
+      "UseModelCollision": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }
