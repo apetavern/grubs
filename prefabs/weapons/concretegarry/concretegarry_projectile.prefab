@@ -11,10 +11,6 @@
         "Guid": "ffe53123-fb28-468c-be03-5e3f861fb0c7",
         "Class": "AnvilPhysicsGadgetComponent",
         "Keys": {
-          "ShouldExplode": {
-            "Type": "Boolean",
-            "Value": "true"
-          },
           "_name": {
             "Value": "\u0022AnvilPhysicsGadgetComponent\u0022"
           },
@@ -31,7 +27,7 @@
           },
           "BounceForce": {
             "Type": "Single",
-            "Value": "300"
+            "Value": "250"
           },
           "AffectedByWind": {
             "Type": "Boolean",
@@ -72,6 +68,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "ExplodeOnTouch": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       }
@@ -94,7 +94,7 @@
         "Value": "1"
       },
       "_tags": {
-        "Value": "\u0022gadget invulnerable\u0022"
+        "Value": "\u0022gadget invincible\u0022"
       },
       "Model": {
         "Type": "Model",

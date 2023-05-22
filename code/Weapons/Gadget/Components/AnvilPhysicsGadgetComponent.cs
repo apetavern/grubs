@@ -18,9 +18,6 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public float BounceForce { get; set; } = 100.0f;
 
-	[Prefab]
-	public bool ShouldExplode { get; set; } = false;
-
 	private bool _isGrounded;
 	private bool _wasGrounded;
 
@@ -57,26 +54,21 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 		{
 			_wasGrounded = _isGrounded;
 			if ( _isGrounded )
-			{
-				Gadget.PlaySound( CollisionSound );
-
-				if ( ShouldExplode && Gadget.Components.TryGet( out ExplosiveGadgetComponent comp ) )
-					comp.Explode();
-
-				HandleBounce();
-			}
+				OnCollision();
 		}
 
 		if ( GrubsConfig.WindEnabled && AffectedByWind )
 			Gadget.Velocity += new Vector3( GamemodeSystem.Instance.ActiveWindForce ).WithY( 0 );
 	}
 
-	private void HandleBounce()
+	private void OnCollision()
 	{
+		Gadget.PlaySound( CollisionSound );
+
 		if ( Bounces > 0 )
 		{
 			Bounces--;
-			Gadget.Velocity = Gadget.Velocity.WithZ( Gadget.Velocity.z + BounceForce );
+			Gadget.Velocity = Gadget.Velocity.WithZ( BounceForce );
 			Gadget.Velocity -= new Vector3( 0, 0, 400f * 0.5f ) * Time.Delta;
 		}
 		else
