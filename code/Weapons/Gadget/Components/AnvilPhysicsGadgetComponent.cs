@@ -42,13 +42,13 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
 		helper.Trace = helper.Trace
 			.Size( Gadget.CollisionBounds )
-			.WithAnyTags( "player", "solid" )
-			.WithoutTags( "dead" );
+			.WithAnyTags( Tag.Player, Tag.Solid )
+			.WithoutTags( Tag.Dead );
 
 		helper.TryMove( Time.Delta );
 		Gadget.Position = helper.Position;
 		Gadget.Velocity = helper.Velocity;
-		if(LockXAxis)
+		if ( LockXAxis )
 			Gadget.Velocity = Gadget.Velocity.WithX( 0 );
 
 		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;

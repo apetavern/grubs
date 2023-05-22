@@ -15,7 +15,7 @@ public partial class TargetPreview : ModelEntity
 		{
 			SetModel( "models/weapons/targetindicator/targetindicator.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
-			Tags.Add( "preview" );
+			Tags.Add( Tag.Preview );
 		}
 
 		Owner = grub;

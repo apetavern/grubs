@@ -99,7 +99,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		if ( Health > 0 )
 			return;
 
-		if ( !ExplodeOnKilled || damageInfo.HasTag( "outofarea" ) )
+		if ( !ExplodeOnKilled || damageInfo.HasTag( Tag.OutOfArea ) )
 			return;
 
 		ExplosionHelper.Explode( Position, this, 50f );

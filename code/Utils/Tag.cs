@@ -22,4 +22,12 @@ public static class Tag
 	/* World */
 	public static readonly string Trigger = "trigger";
 	public static readonly string OutOfArea = "outofarea";
+
+	/* DamageInfo */
+	public static readonly string Melee = "melee";
+	public static readonly string Hitscan = "hitscan";
+	public static readonly string Explosion = "explosion";
+	public static readonly string Fall = "fall";
+	public static readonly string Admin = "admin";
+	public static readonly string Disconnect = "disconnect";
 }

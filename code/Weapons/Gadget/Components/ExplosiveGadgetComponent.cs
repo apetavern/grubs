@@ -90,7 +90,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		}
 
 		ExplodeSoundClient( To.Everyone, ExplosionSound );
-		if ( !Gadget.Tags.Has( "invulnerable" ) )
+		if ( !Gadget.Tags.Has( Tag.Invincible ) )
 			Gadget.Delete();
 	}
 
