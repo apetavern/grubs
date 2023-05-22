@@ -19,7 +19,7 @@
           },
           "Bounces": {
             "Type": "Int32",
-            "Value": "4"
+            "Value": "19"
           },
           "CollisionSound": {
             "Type": "String",
@@ -57,7 +57,7 @@
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "85"
+            "Value": "115"
           },
           "ExplodeAfter": {
             "Type": "Single",
@@ -76,6 +76,10 @@
           "ExplodeOnTouch": {
             "Type": "Boolean",
             "Value": "true"
+          },
+          "DeleteOnExplode": {
+            "Type": "Boolean",
+            "Value": "false"
           }
         }
       }

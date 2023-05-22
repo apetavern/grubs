@@ -28,7 +28,10 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
-		Gadget.Position = Grub.Player.MousePosition.WithZ( GrubsConfig.TerrainHeight + 128f );
+		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture )
+			Gadget.Position = Grub.Player.MousePosition.WithZ( GrubsGame.Instance.Terrain.WorldTextureHeight + 192f );
+		else
+			Gadget.Position = Grub.Player.MousePosition.WithZ( GrubsConfig.TerrainHeight + 192f );
 	}
 
 	public override void Simulate( IClient client )
@@ -40,7 +43,8 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 		helper.Trace = helper.Trace
 			.Size( Gadget.CollisionBounds )
 			.WithAnyTags( Tag.Player, Tag.Solid )
-			.WithoutTags( Tag.Dead );
+			.WithoutTags( Tag.Dead )
+			.UseHitboxes( true );
 
 		helper.TryMove( Time.Delta );
 		Gadget.Position = helper.Position;
@@ -53,6 +57,7 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 				.Ignore( Gadget )
 				.WithAnyTags( Tag.Player, Tag.Solid )
 				.WithoutTags( Tag.Shard )
+				.UseHitboxes( true )
 				.Run();
 
 		_isGrounded = trCollision.Hit;

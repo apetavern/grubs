@@ -15,6 +15,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool ExplodeOnTouch { get; set; } = false;
 
+	[Prefab, Net]
+	public bool DeleteOnExplode { get; set; } = true;
+
 	/// <summary>
 	/// The number of seconds before it explodes, set to "0" if something else handles the exploding.
 	/// </summary>
@@ -101,7 +104,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		}
 
 		ExplodeSoundClient( To.Everyone, ExplosionSound );
-		if ( !Gadget.Tags.Has( Tag.Invincible ) )
+		if ( DeleteOnExplode || !Gadget.Tags.Has( Tag.Invincible ) )
 			Gadget.Delete();
 	}
 
