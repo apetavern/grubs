@@ -9,7 +9,7 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 	public override void OnDeploy()
 	{
 		TargetPreview = new();
-		TargetPreview.OnDeploy( Grub );
+		TargetPreview.Display( Grub );
 
 		Weapon.FiringType = FiringType.Cursor;
 		Weapon.ShowReticle = false;
@@ -19,7 +19,7 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 	{
 		base.OnHolster();
 
-		TargetPreview.OnHolster();
+		TargetPreview.Hide();
 
 		if ( !Game.IsServer )
 			Grub.Player.GrubsCamera.AutomaticRefocus = true;
@@ -37,7 +37,7 @@ public partial class HomingMissileComponent : GadgetWeaponComponent
 	// and firing the missile.
 	public override void FireCursor()
 	{
-		TargetPreview.FireCursor();
+		TargetPreview.LockCursor();
 
 		IsFiring = false;
 		Weapon.FiringType = FiringType.Charged;

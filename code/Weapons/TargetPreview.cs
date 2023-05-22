@@ -9,7 +9,7 @@ public partial class TargetPreview : ModelEntity
 
 	private bool _isTargetSet;
 
-	public virtual void OnDeploy( Grub grub )
+	public virtual void Display( Grub grub )
 	{
 		if ( Game.IsServer )
 		{
@@ -22,7 +22,7 @@ public partial class TargetPreview : ModelEntity
 		_isTargetSet = false;
 	}
 
-	public virtual void OnHolster()
+	public virtual void Hide()
 	{
 		if ( Game.IsServer )
 			Delete();
@@ -42,9 +42,6 @@ public partial class TargetPreview : ModelEntity
 		UI.Cursor.Enabled( "Weapon", _weapon.FiringType == FiringType.Cursor );
 	}
 
-	// Fire cursor shrimply locks the target preview from moving.
-	public virtual void FireCursor()
-	{
-		_isTargetSet = true;
-	}
+	public virtual void LockCursor() => _isTargetSet = true;
+	public virtual void UnlockCursor() => _isTargetSet = false;
 }

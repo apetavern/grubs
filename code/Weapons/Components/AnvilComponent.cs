@@ -9,7 +9,7 @@ public partial class AnvilComponent : GadgetWeaponComponent
 	public override void OnDeploy()
 	{
 		TargetPreview = new();
-		TargetPreview.OnDeploy( Grub );
+		TargetPreview.Display( Grub );
 
 		Weapon.FiringType = FiringType.Cursor;
 		Weapon.ShowReticle = false;
@@ -19,7 +19,7 @@ public partial class AnvilComponent : GadgetWeaponComponent
 	{
 		base.OnHolster();
 
-		TargetPreview.OnHolster();
+		TargetPreview.Hide();
 
 		if ( !Game.IsServer )
 			Grub.Player.GrubsCamera.AutomaticRefocus = true;
@@ -36,7 +36,14 @@ public partial class AnvilComponent : GadgetWeaponComponent
 	{
 		base.FireCursor();
 
-		TargetPreview.FireCursor();
+		TargetPreview.LockCursor();
 		Weapon.PlayScreenSound( "ui_button_click" );
+	}
+
+	public override void FireFinished()
+	{
+		base.FireFinished();
+
+		TargetPreview.UnlockCursor();
 	}
 }
