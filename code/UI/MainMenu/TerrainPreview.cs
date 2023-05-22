@@ -16,8 +16,8 @@ public class TerrainPreview : ScenePanel
 
 		var center = new Vector3( 0f, 0f, terrain.WorldTextureHeight / 2 );
 
-		Camera.ZFar = 4096f;
-		Camera.Position = center.WithY( -2048f );
+		Camera.ZFar = Camera.Position.y * 1.5f;
+		Camera.Position = center.WithY( -2048f * (terrain.WorldTextureLength / 2048f) );
 		Camera.Rotation = Rotation.LookAt( terrain.Rotation.Left );
 	}
 }

@@ -6,11 +6,11 @@ public partial class Terrain
 	{
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
-		AddWorldBox( 
-			GrubsConfig.TerrainLength, 
-			GrubsConfig.TerrainHeight, 
-			materials.ElementAt(0).Key, 
-			materials.ElementAt(1).Key );
+		AddWorldBox(
+			GrubsConfig.TerrainLength,
+			GrubsConfig.TerrainHeight,
+			materials.ElementAt( 0 ).Key,
+			materials.ElementAt( 1 ).Key );
 
 		WorldTextureLength = GrubsConfig.TerrainLength;
 		WorldTextureHeight = GrubsConfig.TerrainHeight;
@@ -68,6 +68,8 @@ public partial class Terrain
 				TerrainMap[x, y] = true;
 			}
 		}
+
+		WorldTextureHeight = maxY;
 
 		// Subtract from the background.
 		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );
