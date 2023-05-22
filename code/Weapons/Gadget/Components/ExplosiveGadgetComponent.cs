@@ -72,7 +72,15 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 				.Run();
 
 		if ( tr.Hit )
+		{
+			if ( ExplosionReaction == ExplosiveReaction.Incendiary )
+			{
+				DebugOverlay.Line( Gadget.Position, Gadget.Position + Gadget.Velocity * 100f, 10f );
+				Gadget.Velocity = tr.Normal;
+
+			}
 			Explode();
+		}
 	}
 
 	public virtual void Explode()
@@ -86,7 +94,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 				ExplosionHelper.Explode( Gadget.Position, Grub, ExplosionRadius, MaxExplosionDamage );
 				break;
 			case ExplosiveReaction.Incendiary:
-				FireHelper.StartFiresAt( Gadget.Position, Gadget.Velocity.Normal, 10 );
+				FireHelper.StartFiresAt( Gadget.Position, Gadget.Velocity.Normal * 10f, 10 );
 				break;
 		}
 
