@@ -26,7 +26,7 @@
     }
     <div class="right-aligned">
         <div class="terrain-preview">
-            @* TODO: Terrain Preview in its own component *@
+            <TerrainPreview />
         </div>
         <TextChat class="@(GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu ? "hide" : "")" />
     </div>
@@ -121,16 +121,21 @@
         }
 
         .terrain-preview {
-            border: 1px solid red;
             width: 100%;
             height: 256px;
             flex-grow: 1;
+            border: 8px #a94364;
+            border-radius: 8px;
         }
 
         textchat {
-            border: 1px solid red;
             width: 100%;
             margin-top: auto;
         }
     }
+
+    TerrainPreview {
+        flex-grow: 1;
+    }
+
 </style>

@@ -12,6 +12,9 @@ public partial class Terrain
 			materials.ElementAt(0).Key, 
 			materials.ElementAt(1).Key );
 
+		WorldTextureLength = GrubsConfig.TerrainLength;
+		WorldTextureHeight = GrubsConfig.TerrainHeight;
+
 		GenerateWorld();
 	}
 
