@@ -61,10 +61,10 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
-		if ( Game.IsServer )
-		{
-			Gadget.LocalRotation = Rotation.Slerp( Gadget.Rotation, Rotation.Identity *
-				new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(), 0.75f );
-		}
+		Gadget.Rotation = Rotation.Lerp(
+			Gadget.Rotation,
+			new Angles( _parachute is not null ? MathF.Sin( Time.Now * 2f ) * 15f : 0f, 0, 0 ).ToRotation(),
+			Time.Delta
+		);
 	}
 }
