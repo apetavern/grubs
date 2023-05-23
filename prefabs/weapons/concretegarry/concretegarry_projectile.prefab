@@ -18,8 +18,7 @@
             "Value": "[]"
           },
           "CollisionSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/footsteps/footstep-concrete.sound\u0022"
+            "Type": "null"
           },
           "BounceForce": {
             "Type": "Single",

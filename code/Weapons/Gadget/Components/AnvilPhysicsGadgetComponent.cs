@@ -31,10 +31,9 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
-		int zPos = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture ? GrubsGame.Instance.Terrain.WorldTextureHeight : GrubsConfig.TerrainHeight;
-		Gadget.Position = Gadget.Position.WithZ( zPos + 192f );
-
 		_bouncesRemaining = MaxBounces;
+
+		Gadget.Position = Gadget.Position.WithZ( GrubsGame.Instance.Terrain.WorldTextureHeight + 256f );
 	}
 
 	public override void Simulate( IClient client )
@@ -55,15 +54,13 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 		if ( LockXAxis )
 			Gadget.Velocity = Gadget.Velocity.WithX( 0 );
 
-		var trCollision = Trace.Ray( Gadget.Position, Gadget.Position )
-				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
-				.Ignore( Gadget )
-				.WithAnyTags( Tag.Player, Tag.Solid )
-				.WithoutTags( Tag.Shard )
-				.UseHitboxes( true )
-				.Run();
+		// Update collision trace to use same CollisionBounds as ExplosiveGadgetComponent.
+		// I don't know why we can't just set this in the original trace,
+		// but testing shows that the gadget will just bounce on the ground and never explode.
+		helper.Trace = helper.Trace
+			.Size( Gadget.CollisionBounds * 1.1f );
 
-		_isGrounded = trCollision.Hit;
+		_isGrounded = helper.TraceFromTo( Gadget.Position, Gadget.Position ).Hit;
 
 		if ( _wasGrounded != _isGrounded )
 		{
