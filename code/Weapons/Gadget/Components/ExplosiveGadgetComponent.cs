@@ -15,6 +15,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool ExplodeOnTouch { get; set; } = false;
 
+	[Prefab, Net]
+	public bool DeleteOnExplode { get; set; } = true;
+
 	/// <summary>
 	/// The number of seconds before it explodes, set to "0" if something else handles the exploding.
 	/// </summary>
@@ -67,6 +70,8 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 
 		var tr = Trace.Ray( Gadget.Position, Gadget.Position )
 				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
+				.Ignore( Gadget )
+				.WithAnyTags( Tag.Player, Tag.Solid )
 				.WithoutTags( Tag.Shard )
 				.UseHitboxes( true )
 				.Run();
@@ -99,7 +104,8 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		}
 
 		ExplodeSoundClient( To.Everyone, ExplosionSound );
-		Gadget.Delete();
+		if ( DeleteOnExplode )
+			Gadget.Delete();
 	}
 
 	[ClientRpc]

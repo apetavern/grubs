@@ -1,0 +1,112 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "7f0733e9-e76d-4c5c-9663-d99f802d6a34",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "ffe53123-fb28-468c-be03-5e3f861fb0c7",
+        "Class": "AnvilPhysicsGadgetComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022AnvilPhysicsGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "CollisionSound": {
+            "Type": "null"
+          },
+          "BounceForce": {
+            "Type": "Single",
+            "Value": "250"
+          },
+          "AffectedByWind": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "LockXAxis": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "SortOrder": {
+            "Type": "Int32",
+            "Value": "1"
+          },
+          "MaxBounces": {
+            "Type": "Int32",
+            "Value": "19"
+          }
+        }
+      },
+      {
+        "Guid": "da4d30b3-719e-46b2-bbdf-5d0a1ea18583",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "ExplosionRadius": {
+            "Type": "Single",
+            "Value": "115"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022ExplosiveGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "ExplodeOnTouch": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "DeleteOnExplode": {
+            "Type": "Boolean",
+            "Value": "false"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "UseModelCollision": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "_name": {
+        "Value": "\u0022Concrete Garry Projectile\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget invincible\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/concretegarry/concretegarry.vmdl\u0022"
+      }
+    }
+  }
+}

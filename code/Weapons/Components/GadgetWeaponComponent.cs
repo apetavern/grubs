@@ -12,9 +12,55 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	[Prefab, ResourceType( "sound" )]
 	public string UseSound { get; set; }
 
+	[Prefab, Net]
+	public bool UseTargetPreview { get; set; }
+
+	[Prefab, Net]
+	public bool LockPreviewBeforeFire { get; set; }
+
+	[Net]
+	public TargetPreview TargetPreview { get; set; }
+
+	[Net]
+	private FiringType _fireType { get; set; }
+
+	public override void OnDeploy()
+	{
+		base.OnDeploy();
+
+		if ( UseTargetPreview )
+		{
+			_fireType = Weapon.FiringType;
+			Weapon.FiringType = FiringType.Cursor;
+			Weapon.ShowReticle = false;
+
+			if ( Game.IsServer )
+			{
+				TargetPreview = new();
+				TargetPreview.Owner = Grub;
+			}
+		}
+	}
+
+	public override void OnHolster()
+	{
+		base.OnHolster();
+
+		if ( UseTargetPreview )
+		{
+			if ( Game.IsServer )
+				TargetPreview?.Delete();
+			else
+				Grub.Player.GrubsCamera.AutomaticRefocus = true;
+		}
+	}
+
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
+
+		if ( UseTargetPreview )
+			TargetPreview?.Simulate( client );
 
 		if ( IsFiring )
 			Fire();
@@ -22,6 +68,20 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
+		Weapon.PlayScreenSound( "ui_button_click" );
+
+		if ( UseTargetPreview && TargetPreview.IsValid() && !TargetPreview.IsTargetSet )
+		{
+			TargetPreview.LockCursor();
+			if ( LockPreviewBeforeFire )
+			{
+				IsFiring = false;
+				Weapon.FiringType = _fireType;
+				Weapon.ShowReticle = true;
+				return;
+			}
+		}
+
 		FireCharged();
 	}
 
@@ -54,5 +114,13 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		Charge = MinCharge;
 
 		FireFinished();
+	}
+
+	public override void FireFinished()
+	{
+		if ( UseTargetPreview )
+			TargetPreview?.Hide();
+
+		base.FireFinished();
 	}
 }

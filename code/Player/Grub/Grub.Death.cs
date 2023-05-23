@@ -154,6 +154,6 @@ public partial class Grub
 		if ( !player.IsTurn )
 			return;
 
-		player.ActiveGrub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "admin" ) );
+		player.ActiveGrub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( Tag.Admin ) );
 	}
 }
