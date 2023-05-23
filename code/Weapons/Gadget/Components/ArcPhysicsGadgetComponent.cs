@@ -63,9 +63,13 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 			Gadget.Velocity = (currentSegment.EndPos - Gadget.Position) * ProjectileSpeed;
 			Gadget.Position = Vector3.Lerp( currentSegment.StartPos, currentSegment.EndPos, _alpha );
 		}
-		else
+		else if ( _explosiveComponent?.ExplodeAfter > 0 )
 		{
 			_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
+		}
+		else
+		{
+			_explosiveComponent?.Explode();
 		}
 	}
 
