@@ -28,10 +28,8 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
-		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture )
-			Gadget.Position = Grub.Player.MousePosition.WithZ( GrubsGame.Instance.Terrain.WorldTextureHeight + 192f );
-		else
-			Gadget.Position = Grub.Player.MousePosition.WithZ( GrubsConfig.TerrainHeight + 192f );
+		int zPos = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture ? GrubsGame.Instance.Terrain.WorldTextureHeight : GrubsConfig.TerrainHeight;
+		Gadget.Position = weapon.GetStartPosition().WithZ( zPos + 192f );
 	}
 
 	public override void Simulate( IClient client )

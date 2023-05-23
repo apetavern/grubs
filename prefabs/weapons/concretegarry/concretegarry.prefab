@@ -62,7 +62,7 @@
       },
       "FiringType": {
         "Type": "FiringType",
-        "Value": "\u0022Instant\u0022"
+        "Value": "\u0022Cursor\u0022"
       },
       "ShowReticle": {
         "Type": "Boolean",
