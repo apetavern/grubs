@@ -11,7 +11,7 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 
 	private readonly Material _spawnMaterial = Material.Load( "materials/effects/teleport/teleport.vmat" );
 	private TimeSince _timeSinceSpawned;
-	private bool _wasGrounded = false;
+	private bool _hasLanded = false;
 
 	public override void Spawn()
 	{
@@ -42,23 +42,24 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 			.WithAnyTags( Tag.Player, Tag.Solid, Tag.Gadget )
 			.WithoutTags( Tag.Dead );
 
-		_wasGrounded |= helper.TraceDirection( Vector3.Down ).Entity is not null;
+		helper.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
 
-		if ( !_wasGrounded )
-			helper.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
-		else
-			Parachute.SetAnimParameter( "landed", true );
-
-		var parachuteAirFrictionModifier = Parachute is not null ? 1.5f : 0.5f;
+		var parachuteAirFrictionModifier = !_hasLanded ? 1.5f : 5f;
 		helper.ApplyFriction( 2.0f * parachuteAirFrictionModifier, Time.Delta );
 		helper.TryMove( Time.Delta );
 
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
 
-		if ( !_wasGrounded )
-			Gadget.Rotation = Rotation.Lerp( Gadget.Rotation, new Angles( MathF.Sin( Time.Now * 2f ) * 15f, 0, 0 ).ToRotation(), Time.Delta );
-		else
+		_hasLanded |= helper.TraceDirection( Vector3.Down ).Entity is not null;
+		if ( _hasLanded )
+		{
+			Parachute.SetAnimParameter( "landed", true );
 			Gadget.Rotation = Angles.Zero.ToRotation();
+		}
+		else
+		{
+			Gadget.Rotation = Rotation.Lerp( Gadget.Rotation, new Angles( MathF.Sin( Time.Now * 2f ) * 15f, 0, 0 ).ToRotation(), Time.Delta );
+		}
 	}
 }

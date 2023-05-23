@@ -27,6 +27,9 @@ public partial class Terrain : Entity
 	/// </summary>
 	public void Reset()
 	{
+		WorldTextureLength = 0;
+		WorldTextureHeight = 0;
+
 		SdfWorld.Clear();
 		InitializeSdfWorld();
 	}
