@@ -17,10 +17,6 @@
           "_tags": {
             "Value": "[]"
           },
-          "Bounces": {
-            "Type": "Int32",
-            "Value": "19"
-          },
           "CollisionSound": {
             "Type": "String",
             "Value": "\u0022sounds/footsteps/footstep-concrete.sound\u0022"
@@ -40,6 +36,10 @@
           "SortOrder": {
             "Type": "Int32",
             "Value": "1"
+          },
+          "MaxBounces": {
+            "Type": "Int32",
+            "Value": "19"
           }
         }
       },

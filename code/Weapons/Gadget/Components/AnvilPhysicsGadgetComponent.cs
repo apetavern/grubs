@@ -12,24 +12,29 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 	[Prefab, ResourceType( "sound" )]
 	public string CollisionSound { get; set; }
 
-	[Prefab, Net, Predicted]
-	public int Bounces { get; set; } = 0;
-
 	[Prefab, Net]
 	public float BounceForce { get; set; } = 100.0f;
+
+	[Prefab, Net]
+	public int MaxBounces { get; set; } = 0;
+
+	[Net, Predicted]
+	private int _bouncesRemaining { get; set; }
 
 	private bool _isGrounded;
 	private bool _wasGrounded;
 
 	public override bool IsResolved()
 	{
-		return Bounces == 0 && Gadget.Velocity.IsNearlyZero( 2.5f );
+		return _bouncesRemaining == 0 && Gadget.Velocity.IsNearlyZero( 2.5f );
 	}
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		int zPos = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture ? GrubsGame.Instance.Terrain.WorldTextureHeight : GrubsConfig.TerrainHeight;
-		Gadget.Position = weapon.GetStartPosition().WithZ( zPos + 192f );
+		Gadget.Position = Gadget.Position.WithZ( zPos + 192f );
+
+		_bouncesRemaining = MaxBounces;
 	}
 
 	public override void Simulate( IClient client )
@@ -75,9 +80,9 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 	{
 		Gadget.PlaySound( CollisionSound );
 
-		if ( Bounces > 0 )
+		if ( _bouncesRemaining > 0 )
 		{
-			Bounces--;
+			_bouncesRemaining--;
 			Gadget.Velocity = Gadget.Velocity.WithZ( BounceForce );
 			Gadget.Velocity -= new Vector3( 0, 0, 400f * 0.5f ) * Time.Delta;
 		}
