@@ -11,7 +11,7 @@ public class ArcTrace
 {
 	public Vector3 StartPos { get; set; }
 	public Vector3 EndPos { get; set; }
-	private int SegmentCount { get; set; } = 80;
+	private int SegmentCount { get; set; } = 256;
 	private Grub Owner { get; set; }
 	private Gadget Gadget { get; set; }
 
