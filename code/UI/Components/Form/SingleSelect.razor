@@ -1,0 +1,96 @@
+﻿@namespace Grubs.UI
+
+<root>
+    <label class="select-label">@SelectLabel</label>
+    <button class="select" @onclick=@( () => OpenOptions() )>
+        <label>@Options[SelectedIndex]</label>
+        <button icon="expand_more" class="expand" />
+    </button>
+    <div class="select-options" @ref=_optionsPanel>
+        @foreach (var option in Options)
+        {
+            <label class="select-option" @onclick=@( () => OnOptionClick( option ) )>@option</label>
+        }
+    </div>
+</root>
+
+
+
+@code {
+    public int SelectedIndex { get; set; } = 0;
+    public List<string> Options { get; set; }
+    public string SelectLabel { get; set; } = "Placeholder";
+    public Action<string> OnOptionSelected { get; set; }
+
+    private Panel _optionsPanel;
+
+    private void OpenOptions()
+    {
+        _optionsPanel.AddClass( "show" );
+    }
+
+    private void OnOptionClick( string option )
+    {
+        SelectedIndex = Options.IndexOf( option );
+        _optionsPanel.RemoveClass( "show" );
+
+        OnOptionSelected(option);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( SelectedIndex );
+    }
+}
+
+<style>
+    SingleSelect {
+        margin: 8px;
+        flex-direction: column;
+        
+        .select-label {
+            font-size: 32px;
+        }
+
+        .select {
+            background-color: rgba(235, 235, 235, 0.24);
+            margin: 2px;
+            border-radius: 4px;
+            justify-content: flex-start;
+            padding: 5px 10px;
+            font-size: 24px;
+            font-weight: light;
+            align-items: center;
+        }
+
+        .select-options {
+            opacity: 0;
+            margin: 2px;
+            padding: 4px;
+            flex-direction: column;
+            background-color: rgba(235, 235, 235, 0.24);
+            border-radius: 4px;
+
+            &.show {
+                opacity: 1;
+            }
+        }
+
+        .select-option {
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 24px;
+            font-weight: light;
+            border-radius: 4px;
+            padding-right: 4px;
+
+            &:hover {
+                background-color: rgba(235, 235, 235, 0.48);
+            }
+        }
+
+        .expand {
+            margin-left: auto;
+        }
+    }
+</style>
