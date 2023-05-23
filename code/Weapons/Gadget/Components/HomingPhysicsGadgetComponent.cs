@@ -25,7 +25,7 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 	{
 		base.OnUse( weapon, charge );
 
-		TargetPosition = weapon.Components.Get<HomingMissileComponent>().TargetPreview.Position.WithY( 0f );
+		TargetPosition = weapon.Components.Get<GadgetWeaponComponent>().TargetPreview.Position.WithY( 0f );
 		TimeSinceFired = 0f;
 	}
 

@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "5b785ead-2a77-462d-95d3-4b23e18e254c",
-        "Class": "AnvilComponent",
+        "Class": "GadgetWeaponComponent",
         "Keys": {
           "_name": {
             "Value": "\u0022GadgetWeaponComponent\u0022"
@@ -20,6 +20,14 @@
           "GadgetPrefab": {
             "Type": "Prefab",
             "Value": "\u0022prefabs/weapons/concretegarry/concretegarry_projectile.prefab\u0022"
+          },
+          "UseTargetPreview": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "LockPreviewBeforeFire": {
+            "Type": "Boolean",
+            "Value": "false"
           }
         }
       }
@@ -54,7 +62,7 @@
       },
       "FiringType": {
         "Type": "FiringType",
-        "Value": "\u0022Cursor\u0022"
+        "Value": "\u0022Instant\u0022"
       },
       "ShowReticle": {
         "Type": "Boolean",

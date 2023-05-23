@@ -4,22 +4,16 @@ namespace Grubs;
 
 public partial class TargetPreview : ModelEntity
 {
+	public bool IsTargetSet { get; private set; } = false;
+
 	private Grub _grub => Owner as Grub;
 	private Weapon _weapon => _grub.ActiveWeapon;
 
-	private bool _isTargetSet;
-
-	public virtual void Display( Grub grub )
+	public override void Spawn()
 	{
-		if ( Game.IsServer )
-		{
-			SetModel( "models/weapons/targetindicator/targetindicator.vmdl" );
-			SetupPhysicsFromModel( PhysicsMotionType.Static );
-			Tags.Add( Tag.Preview );
-		}
-
-		Owner = grub;
-		_isTargetSet = false;
+		SetModel( "models/weapons/targetindicator/targetindicator.vmdl" );
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
+		Tags.Add( Tag.Preview );
 	}
 
 	public virtual void Hide()
@@ -30,9 +24,9 @@ public partial class TargetPreview : ModelEntity
 
 	public override void Simulate( IClient client )
 	{
-		EnableDrawing = _isTargetSet || _grub.Controller.ShouldShowWeapon() && _weapon.HasChargesRemaining;
+		EnableDrawing = IsTargetSet || _grub.Controller.ShouldShowWeapon() && _weapon.HasChargesRemaining;
 
-		if ( !_isTargetSet )
+		if ( !IsTargetSet )
 		{
 			Position = _grub.Player.MousePosition.WithY( -33 );
 			Rotation = Rotation.Lerp( Rotation, Rotation.RotateAroundAxis( Vector3.Right, 200 ), Time.Delta );
@@ -42,6 +36,6 @@ public partial class TargetPreview : ModelEntity
 		UI.Cursor.Enabled( "Weapon", _weapon.FiringType == FiringType.Cursor );
 	}
 
-	public virtual void LockCursor() => _isTargetSet = true;
-	public virtual void UnlockCursor() => _isTargetSet = false;
+	public virtual void LockCursor() => IsTargetSet = true;
+	public virtual void UnlockCursor() => IsTargetSet = false;
 }

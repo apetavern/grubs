@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "191bf2a1-74b2-4fd6-8af1-9807311c22bc",
-        "Class": "HomingMissileComponent",
+        "Class": "GadgetWeaponComponent",
         "Keys": {
           "UseSound": {
             "Type": "String",
@@ -28,6 +28,14 @@
           "GadgetPrefab": {
             "Type": "Prefab",
             "Value": "\u0022prefabs/weapons/homingmissile/homingmissile_projectile.prefab\u0022"
+          },
+          "UseTargetPreview": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "LockPreviewBeforeFire": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       }
@@ -62,7 +70,7 @@
       },
       "FiringType": {
         "Type": "FiringType",
-        "Value": "\u0022Cursor\u0022"
+        "Value": "\u0022Charged\u0022"
       },
       "HoldPose": {
         "Type": "HoldPose",
