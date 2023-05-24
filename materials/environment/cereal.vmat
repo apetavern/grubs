@@ -27,7 +27,7 @@ Layer0
 	//---- Textures ----
 	AO "textures/environment/cereal_ao.png"
 	Colour "textures/environment/cereal_color.png"
-	g_flTiling "1.000"
+	g_flTiling "2.000"
 	Normal "textures/environment/cereal_normal.png"
 	Rough "textures/environment/cereal_rough.png"
 
