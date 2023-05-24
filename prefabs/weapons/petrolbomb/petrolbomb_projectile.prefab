@@ -28,6 +28,10 @@
           "ExplosionSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/petrolbomb/petrolbomb_explode.sound\u0022"
+          },
+          "ExplosionForceMultiplier": {
+            "Type": "Single",
+            "Value": "0.4"
           }
         }
       },
