@@ -42,6 +42,9 @@ public class GrubPreview : ScenePanel
 		var clothingContainer = new ClothingContainer();
 		clothingContainer.Deserialize( player.AvatarClothingData );
 
+		Material skinoverride = null;
+		Material eyeoverride = null;
+
 		for ( int i = 0; i < clothingContainer.Clothing.Count; i++ )
 		{
 			var item = clothingContainer.Clothing[i];
@@ -50,6 +53,21 @@ public class GrubPreview : ScenePanel
 				if ( item.Model != null )
 				{
 					clothingContainer.Clothing.Remove( item );
+
+					var materials = Model.Load( item.Model ).Materials;
+
+					foreach ( var mat in materials )
+					{
+						if ( mat.Name.Contains( "eyes" ) )
+						{
+							eyeoverride = mat;
+						}
+
+						if ( mat.Name.Contains( "_skin" ) )
+						{
+							skinoverride = mat;
+						}
+					}
 				}
 			}
 		}
@@ -58,5 +76,11 @@ public class GrubPreview : ScenePanel
 			clothingContainer.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 
 		_sceneClothing.AddRange( clothingContainer.DressSceneObject( Grub ) );
+
+		if ( skinoverride != null )
+		{
+			Grub.SetMaterialOverride( skinoverride, "skin" );
+			Grub.SetMaterialOverride( eyeoverride, "eyes" );
+		}
 	}
 }
