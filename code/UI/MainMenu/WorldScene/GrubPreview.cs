@@ -42,6 +42,18 @@ public class GrubPreview : ScenePanel
 		var clothingContainer = new ClothingContainer();
 		clothingContainer.Deserialize( player.AvatarClothingData );
 
+		for ( int i = 0; i < clothingContainer.Clothing.Count; i++ )
+		{
+			var item = clothingContainer.Clothing[i];
+			if ( item.Category == Clothing.ClothingCategory.Skin )
+			{
+				if ( item.Model != null )
+				{
+					clothingContainer.Clothing.Remove( item );
+				}
+			}
+		}
+
 		if ( player.HasCosmeticSelected )
 			clothingContainer.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 
