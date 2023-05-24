@@ -9,12 +9,8 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Material ----
-	TextureColor "textures/environment/sand_shells_color.png"
-	TextureTintMask "materials/default/default.tga"
-
 	//---- Material A ----
-	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	g_flTintColorA "[1.000000 0.247059 0.000000 1.000000]"
 	TextureAmbientOcclusionA "textures/environment/sand_a_ao.png"
 	TextureBlendMaskA "textures/environment/sand_shells_blend.png"
 	TextureColorA "textures/environment/sand_a_color.png"
@@ -25,7 +21,7 @@ Layer0
 
 	//---- Material B ----
 	g_flBlendSoftnessB "0.500"
-	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
+	g_flTintColorB "[1.000000 0.376471 0.109804 1.000000]"
 	g_vTexCoordScale2 "[1.000 1.000]"
 	TextureAmbientOcclusionB "textures/environment/sand_shells_ao.png"
 	TextureBlendMaskB "textures/environment/sand_shells_blend.png"

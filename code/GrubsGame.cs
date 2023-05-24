@@ -137,4 +137,46 @@ public sealed partial class GrubsGame : GameManager
 	{
 		GamemodeSystem.SetupGamemode();
 	}
+
+	[ConCmd.Server]
+	public static void SetTerrainEnvironmentType( string option )
+	{
+		if ( Enum.TryParse<GrubsConfig.TerrainEnvironmentType>( option, true, out var result ) )
+		{
+			GrubsConfig.WorldTerrainEnvironmentType = result;
+			Instance.Terrain.Reset();
+		}
+		else
+		{
+			Log.Error( "We had trouble setting this option. Contact a dev!" );
+		}
+	}
+
+	[ConCmd.Server]
+	public static void SetTerrainType( string option )
+	{
+		if ( Enum.TryParse<GrubsConfig.TerrainType>( option, true, out var result ) )
+		{
+			GrubsConfig.WorldTerrainType = result;
+			Instance.Terrain.Reset();
+		}
+		else
+		{
+			Log.Error( "We had trouble setting this option. Contact a dev!" );
+		}
+	}
+
+	[ConCmd.Server]
+	public static void SetTerrainTexture( string option )
+	{
+		if ( Enum.TryParse<GrubsConfig.TerrainTexture>( option, true, out var result ) )
+		{
+			GrubsConfig.WorldTerrainTexture = result;
+			Instance.Terrain.Reset();
+		}
+		else
+		{
+			Log.Error( "We had trouble setting this option. Contact a dev!" );
+		}
+	}
 }

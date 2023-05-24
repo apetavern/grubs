@@ -19,10 +19,10 @@ public static class FireHelper
 [Category( "Weapons" )]
 public class FireEntity : ModelEntity, IResolvable
 {
-	public bool Resolved => Time.Now > _expiryTime;
+	public bool Resolved => _timeUntilExpire;
 	private Vector3 _moveDirection { get; set; }
 
-	private readonly float _expiryTime;
+	private TimeUntil _timeUntilExpire;
 	private const float fireSize = 10f;
 
 	private Particles FireParticle { get; set; }
@@ -37,21 +37,24 @@ public class FireEntity : ModelEntity, IResolvable
 		Position = startPosition;
 		_moveDirection = moveDirection;
 		Velocity = _moveDirection * Time.Delta * 10f;
-		_expiryTime = Time.Now + Game.Random.Float( 0.5f, 2.5f );
 	}
 
 	public override void Spawn()
 	{
 		FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
+		FireParticle.Set( "Lifetime", (float)(_timeUntilExpire = Game.Random.Float( 0.5f, 2.5f )) );
+		Health = 1;
 		Tags.Add( Tag.Fire );
 		Name = "fire";
+		SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, fireSize );
 	}
 
 	[GameEvent.Tick.Server]
 	private void Tick()
 	{
-		if ( Time.Now > _expiryTime )
+		if ( _timeUntilExpire )
 		{
+			FireParticle.Destroy();
 			FireParticle = null;
 			Delete();
 		}
@@ -61,8 +64,6 @@ public class FireEntity : ModelEntity, IResolvable
 
 	private void Move()
 	{
-		//DebugOverlay.Sphere( Position, 5f, Color.Red );
-
 		Velocity += _moveDirection * Time.Delta / 2f;
 		Velocity += Game.PhysicsWorld.Gravity * Time.Delta / 10f;
 		Velocity += GamemodeSystem.Instance.ActiveWindForce * 128f * Time.Delta;
@@ -79,8 +80,7 @@ public class FireEntity : ModelEntity, IResolvable
 		Velocity = mover.Velocity;
 		Position = mover.Position;
 
-		if ( FireParticle is not null )
-			FireParticle.SetPosition( 0, Position );
+		FireParticle?.SetPosition( 0, Position );
 
 		var collisionTrace = Trace.Sphere( fireSize / 2, Position, Position + Vector3.Down * 5f )
 			.WithAnyTags( Tag.Solid, Tag.Gadget, Tag.Player )

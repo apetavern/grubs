@@ -14,7 +14,7 @@ public static class DamageInfoExtension
 	{
 		return DamageInfo
 			.FromExplosion( position, force, damage )
-			.WithTag( "explosion" )
+			.WithTag( Tag.Explosion )
 			.WithAttacker( attacker );
 	}
 
@@ -27,7 +27,7 @@ public static class DamageInfoExtension
 	public static DamageInfo FromFall( float damage, Entity attacker )
 	{
 		return new DamageInfo()
-			.WithTag( "fall" )
+			.WithTag( Tag.Fall )
 			.WithDamage( damage )
 			.WithAttacker( attacker );
 	}

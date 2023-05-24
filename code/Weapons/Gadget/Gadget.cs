@@ -28,6 +28,8 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool IsCrate => Components.Get<CrateGadgetComponent>() is not null;
 
+	private IEnumerable<GadgetComponent> _sortCache;
+
 	public override void Spawn()
 	{
 		Transmit = TransmitType.Always;
@@ -42,7 +44,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		else
 			SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, CollisionRadius );
 
-		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		foreach ( var component in GetSortedComponents() )
 		{
 			component.Spawn();
 		}
@@ -52,7 +54,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	{
 		_startSound = this.SoundFromScreen( StartSound );
 
-		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		foreach ( var component in GetSortedComponents() )
 		{
 			component.ClientSpawn();
 		}
@@ -60,7 +62,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool IsResolved()
 	{
-		return Components.GetAll<GadgetComponent>().All( c => c.IsResolved() );
+		return GetSortedComponents().All( c => c.IsResolved() );
 	}
 
 	public void OnUse( Grub grub, Weapon weapon, int charge )
@@ -70,7 +72,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 		Position = weapon.GetStartPosition( true );
 
-		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		foreach ( var component in GetSortedComponents() )
 		{
 			component.OnUse( weapon, charge );
 		}
@@ -78,7 +80,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public override void Touch( Entity other )
 	{
-		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		foreach ( var component in GetSortedComponents() )
 		{
 			component.Touch( other );
 		}
@@ -86,7 +88,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public override void Simulate( IClient client )
 	{
-		foreach ( var component in Components.GetAll<GadgetComponent>() )
+		foreach ( var component in GetSortedComponents() )
 		{
 			component.Simulate( client );
 		}
@@ -99,7 +101,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		if ( Health > 0 )
 			return;
 
-		if ( !ExplodeOnKilled || damageInfo.HasTag( "outofarea" ) )
+		if ( !ExplodeOnKilled || damageInfo.HasTag( Tag.OutOfArea ) )
 			return;
 
 		ExplosionHelper.Explode( Position, this, 50f );
@@ -124,5 +126,11 @@ public partial class Gadget : AnimatedEntity, IResolvable
 	public void PlayScreenSound( string sound )
 	{
 		this.SoundFromScreen( sound );
+	}
+
+	private IEnumerable<GadgetComponent> GetSortedComponents()
+	{
+		_sortCache ??= Components.GetAll<GadgetComponent>().OrderByDescending( c => c.SortOrder );
+		return _sortCache;
 	}
 }

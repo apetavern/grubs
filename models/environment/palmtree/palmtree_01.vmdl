@@ -14,12 +14,12 @@
 						remaps = 
 						[
 							{
-								from = "phong1.vmat"
-								to = "models/weapons/concretegarry/materials/newman.vmat"
+								from = "leafs.vmat"
+								to = "models/environment/palmtree/materials/leafs.vmat"
 							},
 							{
-								from = "newmanface:phong2.vmat"
-								to = "models/weapons/concretegarry/materials/concretebase.vmat"
+								from = "palmtree.vmat"
+								to = "models/environment/palmtree/materials/palmtree1.vmat"
 							},
 						]
 						use_global_default = false
@@ -33,22 +33,19 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/weapons/concretegarry/concretegarry.fbx"
+						name = "palmtree_01"
+						filename = "models/environment/palmtree/palmtree_01.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, -90.0, 0.0 ]
-						import_scale = 1.0
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.3937
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
 						parent_bone = ""
 						import_filter = 
 						{
-							exclude_by_default = true
-							exception_list = 
-							[
-								"pCube7",
-								"Trim_Text_newman_1_3",
-							]
+							exclude_by_default = false
+							exception_list = [  ]
 						}
 					},
 				]
@@ -58,13 +55,28 @@
 				children = 
 				[
 					{
-						_class = "PhysicsShapeBox"
+						_class = "PhysicsHullFile"
+						name = "palmtree_01"
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						origin = [ 0.0, 0.0, 61.416004 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 105.0, 10.0, 138.717377 ]
+						recenter_on_parent_bone = false
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						filename = "models/environment/palmtree/palmtree_01.fbx"
+						import_scale = 0.3937
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "HullPerMesh"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},

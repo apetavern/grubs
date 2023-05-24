@@ -6,6 +6,9 @@ public partial class GadgetComponent : EntityComponent<Gadget>
 	protected Grub Grub => Gadget.Grub;
 	protected Player Player => Grub.Player;
 
+	[Prefab, Net]
+	public int SortOrder { get; set; } = 0;
+
 	public virtual void Spawn()
 	{
 

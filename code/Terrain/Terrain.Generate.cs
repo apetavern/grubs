@@ -69,7 +69,7 @@ public partial class Terrain
 			}
 		}
 
-		WorldTextureHeight = maxY;
+		WorldTextureHeight = (int)(maxY * resolution);
 
 		// Subtract from the background.
 		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );

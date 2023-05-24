@@ -127,7 +127,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 		Grub?.SetHatVisible( true );
 
-		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
+		UI.Cursor.Enabled( "Weapon", false );
 
 		SetParent( null );
 	}
@@ -169,6 +169,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 	public Vector3 GetStartPosition( bool isDroppable = false )
 	{
+		if ( FiringType == FiringType.Cursor )
+			return Grub.Player.MousePosition;
+
 		if ( isDroppable )
 			return Position.WithY( 0 );
 

@@ -15,6 +15,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool ExplodeOnTouch { get; set; } = false;
 
+	[Prefab, Net]
+	public bool DeleteOnExplode { get; set; } = true;
+
 	/// <summary>
 	/// The number of seconds before it explodes, set to "0" if something else handles the exploding.
 	/// </summary>
@@ -60,29 +63,6 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		Explode();
 	}
 
-	public override void Simulate( IClient client )
-	{
-		if ( !ExplodeOnTouch )
-			return;
-
-		var tr = Trace.Ray( Gadget.Position, Gadget.Position )
-				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
-				.WithoutTags( Tag.Shard )
-				.UseHitboxes( true )
-				.Run();
-
-		if ( tr.Hit )
-		{
-			if ( ExplosionReaction == ExplosiveReaction.Incendiary )
-			{
-				DebugOverlay.Line( Gadget.Position, Gadget.Position + Gadget.Velocity * 100f, 10f );
-				Gadget.Velocity = tr.Normal;
-
-			}
-			Explode();
-		}
-	}
-
 	public virtual void Explode()
 	{
 		if ( !Game.IsServer )
@@ -99,7 +79,8 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		}
 
 		ExplodeSoundClient( To.Everyone, ExplosionSound );
-		Gadget.Delete();
+		if ( DeleteOnExplode )
+			Gadget.Delete();
 	}
 
 	[ClientRpc]

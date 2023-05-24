@@ -81,7 +81,8 @@ public sealed partial class DamageZone : TerrainZone
 		damageInfo.Position = entity.Position;
 		entity.TakeDamage( damageInfo );
 
-		OnTouchSound( TouchSound );
+		if ( !entity.Tags.Has( Tag.Fire ) )
+			OnTouchSound( TouchSound );
 
 		if ( !string.IsNullOrEmpty( ParticlePath ) )
 			Particles.Create( ParticlePath, entity.Position.WithZ( CollisionBounds.Maxs.z ) );

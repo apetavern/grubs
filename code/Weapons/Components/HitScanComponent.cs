@@ -204,6 +204,6 @@ public partial class HitScanComponent : WeaponComponent
 			Damage = Damage,
 			Position = entity.Position,
 			Force = direction
-		}.WithTag( "hitscan" ) );
+		}.WithTag( Tag.Hitscan ) );
 	}
 }
