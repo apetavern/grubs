@@ -42,10 +42,15 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 			.WithAnyTags( Tag.Player, Tag.Solid, Tag.Gadget )
 			.WithoutTags( Tag.Dead );
 
+		var isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
+
 		helper.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
 
+		var baseFriction = 2.0f;
+		if ( isGrounded )
+			baseFriction *= 12.0f;
 		var parachuteAirFrictionModifier = !_hasLanded ? 1.5f : 5f;
-		helper.ApplyFriction( 2.0f * parachuteAirFrictionModifier, Time.Delta );
+		helper.ApplyFriction( baseFriction * parachuteAirFrictionModifier, Time.Delta );
 		helper.TryMove( Time.Delta );
 
 		Gadget.Velocity = helper.Velocity;
@@ -54,7 +59,7 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 		_hasLanded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 		if ( _hasLanded )
 		{
-			Parachute.SetAnimParameter( "landed", true );
+			Parachute?.SetAnimParameter( "landed", true );
 			Gadget.Rotation = Angles.Zero.ToRotation();
 		}
 		else
