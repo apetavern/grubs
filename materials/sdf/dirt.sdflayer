@@ -1,4 +1,5 @@
 {
+  "IsTextureSourceOnly": false,
   "CollisionTags": "solid",
   "Depth": 64,
   "Offset": 0,
@@ -6,5 +7,14 @@
   "FrontFaceMaterial": "materials/environment/dirt_rocks.vmat",
   "BackFaceMaterial": "materials/environment/dirt_rocks.vmat",
   "CutFaceMaterial": "materials/environment/dirt_rocks.vmat",
-  "Quality": "Medium"
+  "LayerTextures": [
+    {
+      "TargetAttribute": "ScorchLayer",
+      "SourceLayer": "materials/sdf/scorch.sdflayer"
+    }
+  ],
+  "QualityLevel": "Medium",
+  "ChunkResolution": 16,
+  "ChunkSize": 256,
+  "MaxDistance": 64
 }
