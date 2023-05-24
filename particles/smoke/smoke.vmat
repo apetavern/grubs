@@ -1,0 +1,22 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_smoke.shader_c"
+
+	g_flCellDensity "0.075"
+	g_flFadeamount "1.000"
+	g_flTimeSpeed "3.000"
+	g_vColour "[0.294118 0.294118 0.294118 1.000000]"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
+
+	DynamicParams
+	{
+		g_flFadeamount "Fadeamount"
+	}
+}

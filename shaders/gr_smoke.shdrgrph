@@ -1,0 +1,239 @@
+{
+  "Model": "particles/explosion/explosionmodel.vmdl",
+  "Description": "",
+  "BlendMode": "Translucent",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "Emission": {},
+      "Opacity": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "Normal": {},
+      "Roughness": {},
+      "Metalness": {},
+      "AmbientOcclusion": {},
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "384,-16"
+    },
+    {
+      "_class": "VoronoiNoise",
+      "Coords": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "A": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "AngleOffset": 3.14,
+      "CellDensity": 6,
+      "Worley": false,
+      "Identifier": "1",
+      "Position": "-1136,-32"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 100,
+      "Value": 0.075,
+      "Name": "Cell Density",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "2",
+      "Position": "-1568,112"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "3",
+      "Position": "-1824,-64"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "4",
+      "Position": "-1552,-32"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 100,
+      "Value": 3,
+      "Name": "Time Speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "5",
+      "Position": "-1824,16"
+    },
+    {
+      "_class": "SmoothStep",
+      "Input": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "Edge1": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "Edge2": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "Identifier": "6",
+      "Position": "-112,80"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "7",
+      "Position": "-352,112"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 2,
+      "Value": 1,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "8",
+      "Position": "-352,176"
+    },
+    {
+      "_class": "Float4",
+      "Value": "1,1,1,1",
+      "Name": "Colour",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "9",
+      "Position": "-1120,-304"
+    },
+    {
+      "_class": "WorldPosition",
+      "Identifier": "10",
+      "Position": "-1392,-112"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "11",
+      "Position": "-560,-112"
+    },
+    {
+      "_class": "Lerp",
+      "A": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "16",
+        "Output": "Result"
+      },
+      "Fraction": 0.5,
+      "Identifier": "12",
+      "Position": "-592,352"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "13",
+      "Position": "-944,320"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "14",
+      "Position": "-944,384"
+    },
+    {
+      "_class": "Saturate",
+      "Input": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "Identifier": "15",
+      "Position": "128,112"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "16",
+      "Position": "-736,144"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "Fade amount",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "17",
+      "Position": "-960,208"
+    }
+  ]
+}
