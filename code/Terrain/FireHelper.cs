@@ -37,13 +37,12 @@ public class FireEntity : ModelEntity, IResolvable
 		Position = startPosition;
 		_moveDirection = moveDirection;
 		Velocity = _moveDirection * Time.Delta * 10f;
-		_timeUntilExpire = Game.Random.Float( 0.5f, 2.5f );
 	}
 
 	public override void Spawn()
 	{
 		FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
-		FireParticle.Set( "Lifetime", 2.5f );
+		FireParticle.Set( "Lifetime", (float)(_timeUntilExpire = Game.Random.Float( 0.5f, 2.5f )) );
 		Health = 1;
 		Tags.Add( Tag.Fire );
 		Name = "fire";
@@ -56,6 +55,7 @@ public class FireEntity : ModelEntity, IResolvable
 		if ( _timeUntilExpire )
 		{
 			FireParticle.Destroy();
+			FireParticle = null;
 			Delete();
 		}
 
