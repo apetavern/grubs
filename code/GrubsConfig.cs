@@ -102,6 +102,7 @@ public static class GrubsConfig
 	{
 		Sand = 0,
 		Dirt = 1,
+		Cereal = 2,
 	}
 
 	/// <summary>

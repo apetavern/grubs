@@ -6,7 +6,7 @@
   "TexCoordSize": 256,
   "FrontFaceMaterial": "materials/environment/dirt_rocks.vmat",
   "BackFaceMaterial": "materials/environment/dirt_rocks.vmat",
-  "CutFaceMaterial": "materials/environment/dirt_rocks.vmat",
+  "CutFaceMaterial": "materials/environment/dirt_a.vmat",
   "LayerTextures": [
     {
       "TargetAttribute": "ScorchLayer",

@@ -10,7 +10,7 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Position ----
-	g_flYPosition "64.000"
+	g_flYPosition "75.000"
 	g_flYSmoothing "75.000"
 	g_flZPosition "0.000"
 	g_flZSmoothing "250.000"
@@ -32,6 +32,7 @@ Layer0
 	Rough "textures/environment/sand_a_rough.png"
 
 	//---- Tint ----
-	g_bTintDirectionToggle "0"
+	g_bTintDirectionToggle "1"
+	g_bTintGradientEnabled "1"
 	g_vTint_Colour "[0.411765 0.219608 0.109804 1.000000]"
 }
