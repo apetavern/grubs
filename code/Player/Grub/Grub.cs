@@ -121,8 +121,25 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 			if ( item.Model != null )
 			{
-				//var skinMaterial = Model.Load( item.Model ).GetData<Material>();
-				//SetMaterialOverride( skinMaterial, "skin" );
+				var materials = Model.Load( item.Model ).Materials;
+
+				var skinMaterial = Material.Load( "models/citizen/skin/citizen_skin01.vmat" );
+				var eyeMaterial = Material.Load( "models/citizen/skin/citizen_eyes_advanced.vmat" );
+				foreach ( var mat in materials )
+				{
+					if ( mat.Name.Contains( "eyes" ) )
+					{
+						eyeMaterial = mat;
+					}
+
+					if ( mat.Name.Contains( "_skin" ) )
+					{
+						skinMaterial = mat;
+					}
+				}
+
+				SetMaterialOverride( skinMaterial, "skin" );
+				SetMaterialOverride( eyeMaterial, "eyes" );
 			}
 			else
 			{
