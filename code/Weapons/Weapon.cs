@@ -127,7 +127,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 		Grub?.SetHatVisible( true );
 
-		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
+		UI.Cursor.Enabled( "Weapon", false );
 
 		SetParent( null );
 	}
