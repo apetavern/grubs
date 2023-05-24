@@ -42,23 +42,18 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 		Gadget.Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
-		helper.Trace = helper.Trace
-			.Size( Gadget.CollisionBounds )
-			.WithAnyTags( Tag.Player, Tag.Solid )
-			.WithoutTags( Tag.Dead )
-			.UseHitboxes( true );
-
 		helper.TryMove( Time.Delta );
 		Gadget.Position = helper.Position;
 		Gadget.Velocity = helper.Velocity;
+
 		if ( LockXAxis )
 			Gadget.Velocity = Gadget.Velocity.WithX( 0 );
 
-		// Update collision trace to use same CollisionBounds as ExplosiveGadgetComponent.
-		// I don't know why we can't just set this in the original trace,
-		// but testing shows that the gadget will just bounce on the ground and never explode.
 		helper.Trace = helper.Trace
-			.Size( Gadget.CollisionBounds * 1.1f );
+			.Size( Gadget.CollisionBounds )
+			.Ignore( Gadget )
+			.WithAnyTags( Tag.Player, Tag.Solid )
+			.WithoutTags( Tag.Shard, Tag.Dead );
 
 		_isGrounded = helper.TraceFromTo( Gadget.Position, Gadget.Position ).Hit;
 

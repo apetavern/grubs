@@ -68,24 +68,17 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		if ( !ExplodeOnTouch )
 			return;
 
-		var tr = Trace.Ray( Gadget.Position, Gadget.Position )
-				.Size( Gadget.CollisionBounds * 1.1f ) // Slightly increase to make sure it collides.
+		var tr = Trace.Box( Gadget.CollisionBounds, Gadget.Position, Gadget.Position )
+				.Size( Gadget.CollisionBounds )
 				.Ignore( Gadget )
 				.WithAnyTags( Tag.Player, Tag.Solid )
-				.WithoutTags( Tag.Shard )
-				.UseHitboxes( true )
+				.WithoutTags( Tag.Shard, Tag.Dead )
 				.Run();
 
-		if ( tr.Hit )
-		{
-			if ( ExplosionReaction == ExplosiveReaction.Incendiary )
-			{
-				DebugOverlay.Line( Gadget.Position, Gadget.Position + Gadget.Velocity * 100f, 10f );
-				Gadget.Velocity = tr.Normal;
+		if ( !tr.Hit )
+			return;
 
-			}
-			Explode();
-		}
+		Explode();
 	}
 
 	public virtual void Explode()
