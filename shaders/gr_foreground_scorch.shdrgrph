@@ -29,7 +29,7 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "2240,736"
+      "Position": "2448,624"
     },
     {
       "_class": "TextureSampler",
@@ -57,13 +57,14 @@
         "Identifier": "48",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_normal_png_4d9e3190.generated.vtex",
+      "Texture": "textures/environment/sand_shells_normal_png_ab6f098e.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Normal",
         "Extension": "Normal",
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
+        "Priority": 1,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
@@ -85,6 +86,7 @@
         "Name": "Rough",
         "Extension": "Rough",
         "ColorSpace": "Linear",
+        "Priority": 2,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
@@ -170,6 +172,7 @@
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
+        "Priority": 2,
         "PrimaryGroup": {
           "Name": "Tint"
         },
@@ -392,6 +395,7 @@
         "Name": "AO",
         "Extension": "AO",
         "ColorSpace": "Linear",
+        "Priority": 3,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
@@ -475,6 +479,7 @@
       "Operator": "Equal",
       "Enabled": false,
       "UI": {
+        "Priority": 1,
         "PrimaryGroup": {
           "Name": "Tint",
           "Priority": 1
@@ -569,7 +574,7 @@
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "75",
+        "Identifier": "82",
         "Output": "Result"
       },
       "B": {
@@ -582,7 +587,7 @@
       },
       "Fraction": 0.5,
       "Identifier": "35",
-      "Position": "1680,496"
+      "Position": "1936,496"
     },
     {
       "_class": "Float4",
@@ -685,7 +690,7 @@
       },
       "DecodeNormal": true,
       "Identifier": "42",
-      "Position": "1904,688"
+      "Position": "2160,688"
     },
     {
       "_class": "CommentNode",
@@ -724,7 +729,7 @@
         "Identifier": "47",
         "Output": "Result"
       },
-      "Texture": "textures/environment/rocks_a_ao_png_e1d0d96f.generated.vtex",
+      "Texture": "textures/environment/lava_rocks_ao_png_ef32fc5c.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Scorch AO",
@@ -746,7 +751,7 @@
         "Identifier": "47",
         "Output": "Result"
       },
-      "Texture": null,
+      "Texture": "textures/environment/lava_rocks_selfillum_png_b7008b5c.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Scorch Blend Mask",
@@ -818,7 +823,7 @@
         "Identifier": "47",
         "Output": "Result"
       },
-      "Texture": "textures/environment/rocks_a_rough_png_e678fd68.generated.vtex",
+      "Texture": "textures/environment/lava_rocks_rough_png_350b4792.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Scorch Rough",
@@ -840,7 +845,7 @@
         "Identifier": "47",
         "Output": "Result"
       },
-      "Texture": "textures/environment/rocks_a_normal_png_7c26211f.generated.vtex",
+      "Texture": "textures/environment/lava_rocks_normal_png_404cfac.generated.vtex",
       "Sampler": {},
       "UI": {
         "Name": "Scorch Normal",
@@ -873,7 +878,7 @@
       },
       "Fraction": 0.5,
       "Identifier": "53",
-      "Position": "1680,624"
+      "Position": "1936,624"
     },
     {
       "_class": "Lerp",
@@ -891,7 +896,7 @@
       },
       "Fraction": 0.5,
       "Identifier": "54",
-      "Position": "1680,752"
+      "Position": "1936,752"
     },
     {
       "_class": "Lerp",
@@ -909,7 +914,7 @@
       },
       "Fraction": 0.5,
       "Identifier": "55",
-      "Position": "1680,880"
+      "Position": "1936,880"
     },
     {
       "_class": "Reroute",
@@ -919,7 +924,7 @@
         "Output": "Result"
       },
       "Identifier": "56",
-      "Position": "1408,768"
+      "Position": "1552,768"
     },
     {
       "_class": "Subtract",
@@ -1040,7 +1045,7 @@
         "Output": "Result"
       },
       "Identifier": "67",
-      "Position": "1488,448"
+      "Position": "1632,448"
     },
     {
       "_class": "Reroute",
@@ -1050,7 +1055,7 @@
         "Output": "Result"
       },
       "Identifier": "68",
-      "Position": "1488,464"
+      "Position": "1632,464"
     },
     {
       "_class": "Reroute",
@@ -1060,7 +1065,7 @@
         "Output": "Result"
       },
       "Identifier": "69",
-      "Position": "1488,480"
+      "Position": "1632,480"
     },
     {
       "_class": "Reroute",
@@ -1070,7 +1075,7 @@
         "Output": "Result"
       },
       "Identifier": "70",
-      "Position": "1536,1072"
+      "Position": "1680,1072"
     },
     {
       "_class": "Reroute",
@@ -1080,7 +1085,7 @@
         "Output": "Result"
       },
       "Identifier": "71",
-      "Position": "1536,1088"
+      "Position": "1680,1088"
     },
     {
       "_class": "Reroute",
@@ -1090,7 +1095,7 @@
         "Output": "Result"
       },
       "Identifier": "72",
-      "Position": "1536,1104"
+      "Position": "1680,1104"
     },
     {
       "_class": "Reroute",
@@ -1100,7 +1105,7 @@
         "Output": "Result"
       },
       "Identifier": "73",
-      "Position": "1536,1056"
+      "Position": "1680,1056"
     },
     {
       "_class": "Reroute",
@@ -1116,11 +1121,11 @@
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "25",
+        "Identifier": "1",
         "Output": "Result"
       },
       "Identifier": "75",
-      "Position": "1488,432"
+      "Position": "576,112"
     },
     {
       "_class": "Multiply",
@@ -1195,6 +1200,46 @@
       "DefaultB": 0.5,
       "Identifier": "80",
       "Position": "48,816"
+    },
+    {
+      "_class": "Branch",
+      "True": {
+        "Identifier": "25",
+        "Output": "Result"
+      },
+      "False": {
+        "Identifier": "75",
+        "Output": "Result"
+      },
+      "A": {},
+      "B": {},
+      "Name": "Tint Gradient Enabled",
+      "Operator": "Equal",
+      "Enabled": true,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Tint"
+        }
+      },
+      "Identifier": "81",
+      "Position": "1488,48"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "81",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "C": {},
+      "Fraction": 0.5,
+      "BlendMode": "SoftLight",
+      "Clamp": true,
+      "Identifier": "82",
+      "Position": "1728,208"
     }
   ]
 }

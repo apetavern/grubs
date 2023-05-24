@@ -9,7 +9,7 @@ public partial class Terrain
 	public Sdf2DLayer DirtMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/dirt.sdflayer" );
 	public Sdf2DLayer RockMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/rock.sdflayer" );
 	public Sdf2DLayer ScorchMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/scorch.sdflayer" );
-
+	public Sdf2DLayer CerealMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/cereal.sdflayer" );
 	public Sdf2DLayer GirderMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/girder.sdflayer" );
 
 	public Dictionary<Sdf2DLayer, float> GetActiveMaterials( MaterialsConfig cfg )
@@ -24,6 +24,7 @@ public partial class Terrain
 		{
 			GrubsConfig.TerrainEnvironmentType.Sand => GetSandMaterials(),
 			GrubsConfig.TerrainEnvironmentType.Dirt => GetDirtMaterials(),
+			GrubsConfig.TerrainEnvironmentType.Cereal => GetCerealMaterials(),
 			_ => GetSandMaterials(),
 		};
 
@@ -46,7 +47,10 @@ public partial class Terrain
 	{
 		return new List<Sdf2DLayer>() { DirtMaterial, RockMaterial };
 	}
-
+	public List<Sdf2DLayer> GetCerealMaterials()
+	{
+		return new List<Sdf2DLayer>() { CerealMaterial, RockMaterial };
+	}
 	public List<Sdf2DLayer> GetGirderMaterials()
 	{
 		return new List<Sdf2DLayer>() { GirderMaterial };

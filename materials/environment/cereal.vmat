@@ -1,17 +1,38 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/gr_foreground.shader_c"
-	"g_flAOMinus"		"0.500000"
-	"g_flAOPlus"		"1.000000"
-	"g_bFogEnabled"		"1"
-	"g_flYPosition"		"20.000000"
-	"g_flYSmoothing"		"75.000000"
-	"g_flZPosition"		"1024.000000"
-	"g_flZSmoothing"		"2000.000000"
-	"Colour"		"textures/environment/cereal_color.png"
-	"g_flTiling"		"1.000000"
-	"Normal"		"textures/environment/cereal_normal.png"
-	"Rough"		"textures/environment/cereal_rough.png"
-	"g_flTintBlend"		"0.650000"
-	"g_vTintColour"		"[0.250980 0.078431 0.000000 1.000000]"
+	shader "shaders/gr_foreground_scorch.shader_c"
+
+	BlendMask "materials/default/default_mask.tga"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Position ----
+	g_flYPosition "64.000"
+	g_flYSmoothing "75.000"
+	g_flZPosition "0.000"
+	g_flZSmoothing "250.000"
+
+	//---- Scorch ----
+	g_flScorchBlendDistance "32.000"
+	g_vScorchTint_Colour "[0.286275 0.168627 0.086275 1.000000]"
+	ScorchAO "textures/environment/lava_rocks_ao.png"
+	ScorchBlendMask "textures/environment/lava_rocks_selfillum.png"
+	ScorchColour "textures/environment/rocks_a_color.png"
+	ScorchNormal "textures/environment/lava_rocks_normal.png"
+	ScorchRough "textures/environment/lava_rocks_rough.png"
+
+	//---- Textures ----
+	AO "textures/environment/cereal_ao.png"
+	Colour "textures/environment/cereal_color.png"
+	g_flTiling "1.000"
+	Normal "textures/environment/cereal_normal.png"
+	Rough "textures/environment/cereal_rough.png"
+
+	//---- Tint ----
+	g_bTintDirectionToggle "0"
+	g_bTintGradientEnabled "0"
+	g_vTint_Colour "[0.415686 0.231373 0.074510 1.000000]"
 }
