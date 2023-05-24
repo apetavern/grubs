@@ -18,16 +18,11 @@ public partial class JetpackComponent : WeaponComponent
 	[Net, Predicted]
 	public Vector3 VelocityInput { get; set; }
 
-
 	Particles jetparticle1 { get; set; }
-
 
 	Particles jetparticle2 { get; set; }
 
-
 	Particles jetparticle3 { get; set; }
-
-	//particles/blueflame/blueflame_base.vpcf
 
 	public override void Simulate( IClient client )
 	{
