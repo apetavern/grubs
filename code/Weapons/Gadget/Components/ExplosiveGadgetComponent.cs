@@ -63,24 +63,6 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		Explode();
 	}
 
-	public override void Simulate( IClient client )
-	{
-		if ( !ExplodeOnTouch )
-			return;
-
-		var tr = Trace.Box( Gadget.CollisionBounds, Gadget.Position, Gadget.Position )
-				.Size( Gadget.CollisionBounds )
-				.Ignore( Gadget )
-				.WithAnyTags( Tag.Player, Tag.Solid )
-				.WithoutTags( Tag.Shard, Tag.Dead )
-				.Run();
-
-		if ( !tr.Hit )
-			return;
-
-		Explode();
-	}
-
 	public virtual void Explode()
 	{
 		if ( !Game.IsServer )
