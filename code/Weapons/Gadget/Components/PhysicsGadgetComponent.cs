@@ -61,9 +61,6 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		if ( _isGrounded )
 			helper.ApplyFriction( Friction, Time.Delta );
 
-		if ( _isGrounded || _isTouchingCeiling )
-			if ( Gadget.Components.TryGet( out ExplosiveGadgetComponent comp ) && comp.ExplodeOnTouch )
-				comp.Explode();
 
 		if ( _wasGrounded != _isGrounded || _wasTouchingCeiling != _isTouchingCeiling || helper.HitWall )
 		{
@@ -71,7 +68,7 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 			_wasTouchingCeiling = _isTouchingCeiling;
 
 			if ( _wasGrounded || _wasTouchingCeiling )
-				Gadget.PlaySound( CollisionSound );
+				OnCollision();
 		}
 
 		helper.TryMove( Time.Delta );
@@ -92,5 +89,13 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		{
 			Gadget.Rotation = Rotation.Identity;
 		}
+	}
+
+	private void OnCollision()
+	{
+		Gadget.PlaySound( CollisionSound );
+
+		if ( Gadget.Components.TryGet( out ExplosiveGadgetComponent comp ) && comp.ExplodeOnTouch )
+			comp.Explode();
 	}
 }
