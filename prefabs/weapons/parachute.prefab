@@ -16,6 +16,14 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "DisengageSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/parachute/parachute_disengage.sound\u0022"
+          },
+          "DeploySound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/parachute/parachute_deploy.sound\u0022"
           }
         }
       }
