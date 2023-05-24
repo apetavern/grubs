@@ -101,6 +101,23 @@ public sealed partial class GrubsGame : GameManager
 		UI.PlayerList.Current?.OnVoicePlayed( client );
 	}
 
+#if DEBUG
+	public override void DoPlayerDevCam( IClient client )
+	{
+		Game.AssertServer();
+
+		var camera = client.Components.Get<DebugCamera>( true );
+		if ( camera is null )
+		{
+			camera = new DebugCamera();
+			client.Components.Add( camera );
+			return;
+		}
+
+		camera.Enabled = !camera.Enabled;
+	}
+#endif
+
 	private void PrecacheFiles()
 	{
 		foreach ( var clothing in ResourceLibrary.GetAll<Clothing>() )
