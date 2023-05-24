@@ -189,36 +189,26 @@
 					m_spline = 
 					[
 						{
-							x = 0.048917
-							y = 0.0
-							m_flSlopeIncoming = 8.892
-							m_flSlopeOutgoing = 8.892
+							x = 0.0
+							y = 1.0
+							m_flSlopeIncoming = 0.0
+							m_flSlopeOutgoing = 0.0
 						},
 						{
-							x = 0.135242
+							x = 0.794188
 							y = 0.7676
-							m_flSlopeIncoming = 2.35872
-							m_flSlopeOutgoing = 2.35872
+							m_flSlopeIncoming = -1.330105
+							m_flSlopeOutgoing = -1.330105
 						},
 						{
-							x = 0.811453
-							y = 0.81608
-							m_flSlopeIncoming = -2.105999
-							m_flSlopeOutgoing = -2.105999
-						},
-						{
-							x = 0.943818
+							x = 0.955328
 							y = 0.0
-							m_flSlopeIncoming = -6.16539
-							m_flSlopeOutgoing = -6.16539
+							m_flSlopeIncoming = -4.763571
+							m_flSlopeOutgoing = -4.763571
 						},
 					]
 					m_tangents = 
 					[
-						{
-							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
-							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
-						},
 						{
 							m_nIncomingTangent = "CURVE_TANGENT_FREE"
 							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
@@ -284,38 +274,78 @@
 					[
 						{
 							x = 0.0
-							y = 0.0
+							y = 1.0
 							m_flSlopeIncoming = 0.0
-							m_flSlopeOutgoing = 5.994
+							m_flSlopeOutgoing = 0.0
 						},
 						{
-							x = 0.14963
-							y = 0.89688
-							m_flSlopeIncoming = 0.75816
-							m_flSlopeOutgoing = 0.75816
+							x = 0.117977
+							y = 0.96152
+							m_flSlopeIncoming = -0.326165
+							m_flSlopeOutgoing = 0.330353
 						},
 						{
-							x = 0.863248
-							y = 0.65448
+							x = 0.264729
+							y = 1.01
+							m_flSlopeIncoming = 0.330353
+							m_flSlopeOutgoing = 0.032276
+						},
+						{
+							x = 0.368319
+							y = 0.9696
+							m_flSlopeIncoming = -0.0702
+							m_flSlopeOutgoing = -0.0702
+						},
+						{
+							x = 0.494929
+							y = 0.99384
+							m_flSlopeIncoming = 0.097954
+							m_flSlopeOutgoing = 0.097954
+						},
+						{
+							x = 0.615783
+							y = 0.99384
+							m_flSlopeIncoming = -0.823035
+							m_flSlopeOutgoing = -0.823035
+						},
+						{
+							x = 0.828718
+							y = 0.71912
 							m_flSlopeIncoming = -2.105999
 							m_flSlopeOutgoing = -2.105999
 						},
 						{
-							x = 0.981225
+							x = 0.969715
 							y = 0.0
-							m_flSlopeIncoming = -5.547513
-							m_flSlopeOutgoing = -5.547513
+							m_flSlopeIncoming = -5.100245
+							m_flSlopeOutgoing = -5.100245
 						},
 					]
 					m_tangents = 
 					[
 						{
+							m_nIncomingTangent = "CURVE_TANGENT_FREE"
+							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
+						},
+						{
 							m_nIncomingTangent = "CURVE_TANGENT_LINEAR"
 							m_nOutgoingTangent = "CURVE_TANGENT_LINEAR"
 						},
 						{
-							m_nIncomingTangent = "CURVE_TANGENT_FREE"
-							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
+							m_nIncomingTangent = "CURVE_TANGENT_LINEAR"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
 						},
 						{
 							m_nIncomingTangent = "CURVE_TANGENT_FREE"
