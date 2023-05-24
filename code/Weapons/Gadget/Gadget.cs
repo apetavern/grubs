@@ -130,9 +130,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	private IEnumerable<GadgetComponent> GetSortedComponents()
 	{
-		if ( _sortCache is null )
-			_sortCache = Components.GetAll<GadgetComponent>().OrderByDescending( c => c.SortOrder );
-
+		_sortCache ??= Components.GetAll<GadgetComponent>().OrderByDescending( c => c.SortOrder );
 		return _sortCache;
 	}
 }

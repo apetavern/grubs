@@ -57,6 +57,9 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 
 		_isGrounded = helper.TraceFromTo( Gadget.Position, Gadget.Position ).Hit;
 
+		if ( _isGrounded && Gadget.Components.TryGet( out ExplosiveGadgetComponent comp ) && comp.ExplodeOnTouch )
+			comp.Explode();
+
 		if ( _wasGrounded != _isGrounded )
 		{
 			_wasGrounded = _isGrounded;
