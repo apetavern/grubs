@@ -51,7 +51,7 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
 
-		_hasLanded |= helper.TraceDirection( Vector3.Down ).Entity is not null;
+		_hasLanded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 		if ( _hasLanded )
 		{
 			Parachute.SetAnimParameter( "landed", true );
