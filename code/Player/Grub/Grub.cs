@@ -103,22 +103,32 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 		foreach ( var item in clothes.Clothing )
 		{
-			var ent = new AnimatedEntity( item.Model, this );
+			if ( item.Category != Clothing.ClothingCategory.Skin )
+			{
+				var ent = new AnimatedEntity( item.Model, this );
 
-			// Add a tag to the hat so we can reference it later.
-			if ( item.Category is Clothing.ClothingCategory.Hat or Clothing.ClothingCategory.Hair )
-				ent.Tags.Add( Tag.Head );
+				// Add a tag to the hat so we can reference it later.
+				if ( item.Category is Clothing.ClothingCategory.Hat or Clothing.ClothingCategory.Hair )
+					ent.Tags.Add( Tag.Head );
 
-			ent.Tags.Add( Tag.Clothing );
+				ent.Tags.Add( Tag.Clothing );
 
-			if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
-				ent.SetMaterialGroup( item.MaterialGroup );
-
+				if ( !string.IsNullOrEmpty( item.MaterialGroup ) )
+					ent.SetMaterialGroup( item.MaterialGroup );
+			}
 			if ( item.Category != Clothing.ClothingCategory.Skin )
 				continue;
 
-			var skinMaterial = Material.Load( item.SkinMaterial );
-			SetMaterialOverride( skinMaterial, "skin" );
+			if ( item.Model != null )
+			{
+				//var skinMaterial = Model.Load( item.Model ).GetData<Material>();
+				//SetMaterialOverride( skinMaterial, "skin" );
+			}
+			else
+			{
+				var skinMaterial = Material.Load( item.SkinMaterial );
+				SetMaterialOverride( skinMaterial, "skin" );
+			}
 		}
 	}
 
