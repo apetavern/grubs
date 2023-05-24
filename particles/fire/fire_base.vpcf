@@ -2,8 +2,7 @@
 {
 	_class = "CParticleSystemDefinition"
 	m_nBehaviorVersion = 10
-	m_nInitialParticles = 1
-	m_nMaxParticles = 5
+	m_nMaxParticles = 1
 	m_controlPointConfigurations = 
 	[
 		{
@@ -14,104 +13,12 @@
 	[
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 
-			{
-				m_nType = "PF_TYPE_LITERAL"
-				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_NamedValue = ""
-				m_flLiteralValue = 5.0
-				m_nControlPoint = 0
-				m_nScalarAttribute = 3
-				m_nVectorAttribute = 6
-				m_nVectorComponent = 0
-				m_flRandomMin = 0.0
-				m_flRandomMax = 1.0
-				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
-				m_flLOD0 = 0.0
-				m_flLOD1 = 0.0
-				m_flLOD2 = 0.0
-				m_flLOD3 = 0.0
-				m_flNoiseOutputMin = 0.0
-				m_flNoiseOutputMax = 1.0
-				m_flNoiseScale = 0.1
-				m_vecNoiseOffsetRate = [ 0.0, 0.0, 0.0 ]
-				m_flNoiseOffset = 0.0
-				m_nNoiseOctaves = 1
-				m_nNoiseTurbulence = "PF_NOISE_TURB_NONE"
-				m_nNoiseType = "PF_NOISE_TYPE_PERLIN"
-				m_nNoiseModifier = "PF_NOISE_MODIFIER_NONE"
-				m_flNoiseTurbulenceScale = 1.25
-				m_flNoiseTurbulenceMix = 0.5
-				m_flNoiseImgPreviewScale = 1.0
-				m_bNoiseImgPreviewLive = true
-				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
-				m_flMultFactor = 1.0
-				m_flInput0 = 0.0
-				m_flInput1 = 1.0
-				m_flOutput0 = 0.0
-				m_flOutput1 = 1.0
-				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
-				m_flBiasParameter = 0.0
-				m_Curve = 
-				{
-					m_spline = [  ]
-					m_tangents = [  ]
-					m_vDomainMins = [ 0.0, 0.0 ]
-					m_vDomainMaxs = [ 0.0, 0.0 ]
-				}
-			}
-			m_bDisableOperator = true
-			m_flStartTime = 
-			{
-				m_nType = "PF_TYPE_LITERAL"
-				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_NamedValue = ""
-				m_flLiteralValue = 0.5
-				m_nControlPoint = 0
-				m_nScalarAttribute = 3
-				m_nVectorAttribute = 6
-				m_nVectorComponent = 0
-				m_flRandomMin = 0.0
-				m_flRandomMax = 1.0
-				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
-				m_flLOD0 = 0.0
-				m_flLOD1 = 0.0
-				m_flLOD2 = 0.0
-				m_flLOD3 = 0.0
-				m_flNoiseOutputMin = 0.0
-				m_flNoiseOutputMax = 1.0
-				m_flNoiseScale = 0.1
-				m_vecNoiseOffsetRate = [ 0.0, 0.0, 0.0 ]
-				m_flNoiseOffset = 0.0
-				m_nNoiseOctaves = 1
-				m_nNoiseTurbulence = "PF_NOISE_TURB_NONE"
-				m_nNoiseType = "PF_NOISE_TYPE_PERLIN"
-				m_nNoiseModifier = "PF_NOISE_MODIFIER_NONE"
-				m_flNoiseTurbulenceScale = 1.25
-				m_flNoiseTurbulenceMix = 0.5
-				m_flNoiseImgPreviewScale = 1.0
-				m_bNoiseImgPreviewLive = true
-				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
-				m_flMultFactor = 1.0
-				m_flInput0 = 0.0
-				m_flInput1 = 1.0
-				m_flOutput0 = 0.0
-				m_flOutput1 = 1.0
-				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
-				m_flBiasParameter = 0.0
-				m_Curve = 
-				{
-					m_spline = [  ]
-					m_tangents = [  ]
-					m_vDomainMins = [ 0.0, 0.0 ]
-					m_vDomainMaxs = [ 0.0, 0.0 ]
-				}
-			}
 		},
 		{
 			_class = "C_OP_MaintainEmitter"
-			m_nParticlesToMaintain = 3
+			m_nParticlesToMaintain = 1
 			m_flStartTime = 0.25
+			m_bDisableOperator = true
 		},
 	]
 	m_Initializers = 
@@ -123,11 +30,11 @@
 			_class = "C_INIT_InitFloat"
 			m_InputValue = 
 			{
-				m_nType = "PF_TYPE_RANDOM_UNIFORM"
+				m_nType = "PF_TYPE_NAMED_VALUE"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_NamedValue = ""
+				m_NamedValue = "Lifetime"
 				m_flLiteralValue = 0.0
-				m_nControlPoint = 0
+				m_nControlPoint = 1
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
@@ -236,6 +143,194 @@
 		},
 		{
 			_class = "C_OP_LerpToInitialPosition"
+		},
+		{
+			_class = "C_OP_SetFloat"
+			m_InputValue = 
+			{
+				m_nType = "PF_TYPE_PARTICLE_AGE_NORMALIZED"
+				m_nMapType = "PF_MAP_TYPE_CURVE"
+				m_NamedValue = ""
+				m_flLiteralValue = 0.0
+				m_nControlPoint = 0
+				m_nScalarAttribute = 3
+				m_nVectorAttribute = 6
+				m_nVectorComponent = 0
+				m_flRandomMin = 0.0
+				m_flRandomMax = 1.0
+				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
+				m_flLOD0 = 0.0
+				m_flLOD1 = 0.0
+				m_flLOD2 = 0.0
+				m_flLOD3 = 0.0
+				m_flNoiseOutputMin = 0.0
+				m_flNoiseOutputMax = 1.0
+				m_flNoiseScale = 0.1
+				m_vecNoiseOffsetRate = [ 0.0, 0.0, 0.0 ]
+				m_flNoiseOffset = 0.0
+				m_nNoiseOctaves = 1
+				m_nNoiseTurbulence = "PF_NOISE_TURB_NONE"
+				m_nNoiseType = "PF_NOISE_TYPE_PERLIN"
+				m_nNoiseModifier = "PF_NOISE_MODIFIER_NONE"
+				m_flNoiseTurbulenceScale = 1.25
+				m_flNoiseTurbulenceMix = 0.5
+				m_flNoiseImgPreviewScale = 1.0
+				m_bNoiseImgPreviewLive = true
+				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
+				m_flMultFactor = 1.0
+				m_flInput0 = 0.0
+				m_flInput1 = 1.0
+				m_flOutput0 = 0.0
+				m_flOutput1 = 1.0
+				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
+				m_flBiasParameter = 0.0
+				m_Curve = 
+				{
+					m_spline = 
+					[
+						{
+							x = 0.048917
+							y = 0.0
+							m_flSlopeIncoming = 8.892
+							m_flSlopeOutgoing = 8.892
+						},
+						{
+							x = 0.135242
+							y = 0.7676
+							m_flSlopeIncoming = 2.35872
+							m_flSlopeOutgoing = 2.35872
+						},
+						{
+							x = 0.811453
+							y = 0.81608
+							m_flSlopeIncoming = -2.105999
+							m_flSlopeOutgoing = -2.105999
+						},
+						{
+							x = 0.943818
+							y = 0.0
+							m_flSlopeIncoming = -6.16539
+							m_flSlopeOutgoing = -6.16539
+						},
+					]
+					m_tangents = 
+					[
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_FREE"
+							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_FREE"
+							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+					]
+					m_vDomainMins = [ 0.0, 0.0 ]
+					m_vDomainMaxs = [ 1.0, 1.0 ]
+				}
+			}
+			m_nOutputField = "7"
+		},
+		{
+			_class = "C_OP_SetFloat"
+			m_InputValue = 
+			{
+				m_nType = "PF_TYPE_PARTICLE_AGE_NORMALIZED"
+				m_nMapType = "PF_MAP_TYPE_CURVE"
+				m_NamedValue = ""
+				m_flLiteralValue = 0.0
+				m_nControlPoint = 0
+				m_nScalarAttribute = 3
+				m_nVectorAttribute = 6
+				m_nVectorComponent = 0
+				m_flRandomMin = 0.0
+				m_flRandomMax = 1.0
+				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
+				m_flLOD0 = 0.0
+				m_flLOD1 = 0.0
+				m_flLOD2 = 0.0
+				m_flLOD3 = 0.0
+				m_flNoiseOutputMin = 0.0
+				m_flNoiseOutputMax = 1.0
+				m_flNoiseScale = 0.1
+				m_vecNoiseOffsetRate = [ 0.0, 0.0, 0.0 ]
+				m_flNoiseOffset = 0.0
+				m_nNoiseOctaves = 1
+				m_nNoiseTurbulence = "PF_NOISE_TURB_NONE"
+				m_nNoiseType = "PF_NOISE_TYPE_PERLIN"
+				m_nNoiseModifier = "PF_NOISE_MODIFIER_NONE"
+				m_flNoiseTurbulenceScale = 1.25
+				m_flNoiseTurbulenceMix = 0.5
+				m_flNoiseImgPreviewScale = 1.0
+				m_bNoiseImgPreviewLive = true
+				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
+				m_flMultFactor = 1.0
+				m_flInput0 = 0.0
+				m_flInput1 = 1.0
+				m_flOutput0 = 0.0
+				m_flOutput1 = 1.0
+				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
+				m_flBiasParameter = 0.0
+				m_Curve = 
+				{
+					m_spline = 
+					[
+						{
+							x = 0.0
+							y = 0.0
+							m_flSlopeIncoming = 0.0
+							m_flSlopeOutgoing = 5.994
+						},
+						{
+							x = 0.14963
+							y = 0.89688
+							m_flSlopeIncoming = 0.75816
+							m_flSlopeOutgoing = 0.75816
+						},
+						{
+							x = 0.863248
+							y = 0.65448
+							m_flSlopeIncoming = -2.105999
+							m_flSlopeOutgoing = -2.105999
+						},
+						{
+							x = 0.981225
+							y = 0.0
+							m_flSlopeIncoming = -5.547513
+							m_flSlopeOutgoing = -5.547513
+						},
+					]
+					m_tangents = 
+					[
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_LINEAR"
+							m_nOutgoingTangent = "CURVE_TANGENT_LINEAR"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_FREE"
+							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_FREE"
+							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+					]
+					m_vDomainMins = [ 0.0, 0.0 ]
+					m_vDomainMaxs = [ 1.0, 1.0 ]
+				}
+			}
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Renderers = 
