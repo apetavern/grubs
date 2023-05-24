@@ -33,5 +33,6 @@ Layer0
 
 	//---- Tint ----
 	g_bTintDirectionToggle "1"
-	g_vTint_Colour "[1.000000 1.000000 1.000000 1.000000]"
+	g_bTintGradientEnabled "1"
+	g_vTint_Colour "[0.823529 0.670588 0.584314 1.000000]"
 }
