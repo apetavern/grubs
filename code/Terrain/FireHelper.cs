@@ -46,7 +46,7 @@ public class FireEntity : ModelEntity, IResolvable
 		Health = 1;
 		Tags.Add( Tag.Fire );
 		Name = "fire";
-		SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, 5f );
+		SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Position, fireSize );
 	}
 
 	[GameEvent.Tick.Server]
