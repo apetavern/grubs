@@ -22,6 +22,7 @@ public partial class SkipTurnComponent : WeaponComponent
 		{
 			var muzzleFlash = Particles.Create( SmokeParticle.ResourcePath, muzzle.Value.Position );
 			muzzleFlash.SetOrientation( 0, muzzle.Value.Rotation.Angles() );
+			muzzleFlash.SetPosition( 1, 2f );
 		}
 
 		FireFinished();

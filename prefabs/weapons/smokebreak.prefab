@@ -19,7 +19,7 @@
           },
           "SmokeParticle": {
             "Type": "ParticleSystem",
-            "Value": "\u0022particles/smoke_trail.vpcf\u0022"
+            "Value": "\u0022particles/smoke/smoke.vpcf\u0022"
           }
         }
       }
