@@ -10,13 +10,21 @@
         <div class="section">
             <label class="title">Colors</label>
             <div style="flex-wrap: wrap;">
-                @foreach (var color in Player.ColorPresets)
+                @foreach (var kvp in Player.ColorPresets)
                 {
-                    var isSelected = player.SelectedColor == color;
-                    <button
-                    class="color @(isSelected ? "selected" : "")"
-                    style="background-color: @color.Hex;"
-                    @onclick=@(() => { player.SelectedColor = color; }) />
+                    var colId = kvp.Key;
+                    var color = kvp.Value;
+
+                    // Only considered taken if it isn't our color
+                    var alreadyTaken = GrubsGame.Instance.TakenColors.Values.Contains(colId) &&
+                    GrubsGame.Instance.TakenColors[Game.LocalClient.SteamId] != colId;
+
+                    var isSelected = player.Color == color;
+                    var displayColor = color;
+
+                    <button class="color @(isSelected ? "selected" : "") @(alreadyTaken ? "disabled" : "")"
+                        style="background-color: @displayColor.Hex;" @onclick=@(() => { Player.PlayerSelectColor(colId);
+                    }) />
                 }
             </div>
         </div>
@@ -28,11 +36,9 @@
                     var index = i;
                     <div style="width: 50%; flex-direction: column; font-size: 30px; margin-bottom: 5px;">
                         <label>@($"Grub #{i + 1}")</label>
-                        <TextEntry
-                        text=@player.SelectedGrubNames[i]
-                        MaxLength=@(10)
-                        CharacterRegex="^[a-zA-Z0-9 ]+$"
-                        OnTextEdited=@((string text) => { player.SelectedGrubNames[index] = text; player.SerializeGrubNames(); }) />
+                        <TextEntry text=@player.SelectedGrubNames[i] MaxLength=@(10) CharacterRegex="^[a-zA-Z0-9 ]+$"
+                            OnTextEdited=@((string text) => { player.SelectedGrubNames[index] = text;
+                        player.SerializeGrubNames(); }) />
                     </div>
                 }
             </div>
@@ -44,7 +50,8 @@
                 {
                     var index = i;
                     var isSelected = player.SelectedCosmeticIndex == i;
-                    <button class="cosmetic @(isSelected ? "selected" : "")" @onclick=@(() => { player.SelectedCosmeticIndex = isSelected ? -1 : index; })>
+                    <button class="cosmetic @(isSelected ? "selected" : "")" @onclick=@(() => { player.SelectedCosmeticIndex
+                    = isSelected ? -1 : index; })>
                         <img src=@Player.CosmeticPresets[i].MenuIcon />
                     </button>
                 }
@@ -57,7 +64,8 @@
     protected override int BuildHash()
     {
         var player = Game.LocalPawn as Player;
-        return HashCode.Combine(player?.Color.GetHashCode(), player?.SelectedCosmeticIndex, player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()));
+        return HashCode.Combine(player?.Color.GetHashCode(), player?.SelectedCosmeticIndex,
+        player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()));
     }
 }
 
@@ -97,6 +105,11 @@
                     &.selected {
                         transform: scale(1.2);
                     }
+
+                    &.disabled {
+                        opacity: 0.4;
+                        transform: scale(0.7) rotate(-15);
+                    }
                 }
 
                 .cosmetic {
@@ -115,6 +128,7 @@
 
                     &.selected {
                         transform: scale(1.1);
+                        border-bottom: 2px solid white;
                     }
                 }
             }

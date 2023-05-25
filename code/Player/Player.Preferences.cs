@@ -30,33 +30,64 @@ public partial class Player
 	public int SelectedCosmeticIndex { get; set; }
 	public bool HasCosmeticSelected => SelectedCosmeticIndex != -1;
 
-	public static readonly List<Color> ColorPresets = new()
+	public enum ColorId
 	{
-		Color.FromBytes(232, 59, 105),  // Red
-		Color.FromBytes(33, 146, 255),  // Blue
-		Color.FromBytes(56, 229, 77),   // Green
-		Color.FromBytes(56, 118, 29),	// Forest Green
-		Color.FromBytes(248, 249, 136), // Yellow
-		Color.FromBytes(251, 172, 204), // Pink
-		Color.FromBytes(103, 234, 202), // Cyan
-		Color.FromBytes(255, 174, 109), // Orange
-		Color.FromBytes(173, 162, 255), // Purple
-		Color.FromBytes(175, 99, 59),	// Brown
-		Color.FromBytes(118, 103, 87),	// Pastel Brown
-		Color.FromBytes(240, 236, 211)	// Eggshell
+		Undecided,
+		Red,
+		Blue,
+		Green,
+		ForestGreen,
+		Yellow,
+		Pink,
+		Cyan,
+		Orange,
+		Purple,
+		Brown,
+		PastelBrown,
+		Eggshell
+	}
+
+	public static readonly Dictionary<ColorId, Color> ColorPresets = new()
+	{
+		{ColorId.Undecided, Color.White},
+		{ColorId.Red, Color.FromBytes(232, 59, 105)},
+		{ColorId.Blue, Color.FromBytes(33, 146, 255)},
+		{ColorId.Green , Color.FromBytes(56, 229, 77)},
+		{ColorId.ForestGreen, Color.FromBytes(56, 118, 29)},
+		{ColorId.Yellow, Color.FromBytes(248, 249, 136)},
+		{ColorId.Pink, Color.FromBytes(251, 172, 204)},
+		{ColorId.Cyan, Color.FromBytes(103, 234, 202)},
+		{ColorId.Orange, Color.FromBytes(255, 174, 109)},
+		{ColorId.Purple, Color.FromBytes(173, 162, 255)},
+		{ColorId.Brown, Color.FromBytes(175, 99, 59)},
+		{ColorId.PastelBrown, Color.FromBytes(118, 103, 87)},
+		{ColorId.Eggshell, Color.FromBytes(240, 236, 211)}
 	};
 
 	/// <summary>
 	/// The player's active color networked to everyone.
 	/// </summary>
 	[Net]
-	public Color Color { get; private set; } = Color.White;
+	public Color Color { get; set; } = ColorPresets.GetValueOrDefault( ColorId.Undecided );
 
-	/// <summary>
-	/// The player's selected color during customization, only networked to the server.
-	/// </summary>
-	[ConVar.ClientData]
-	public Color SelectedColor { get; set; }
+	[ConCmd.Server]
+	public static void PlayerSelectColor( Player.ColorId colorId )
+	{
+		if ( GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu )
+			return;
+
+		var caller = ConsoleSystem.Caller;
+		if ( caller.Pawn is not Player player )
+			return;
+
+		// Someone is already using this color
+		if ( GrubsGame.Instance.TakenColors.Values.Contains( colorId ) && colorId != Player.ColorId.Undecided )
+			return;
+
+		player.Color = Player.ColorPresets.GetValueOrDefault( colorId );
+		GrubsGame.Instance.TakenColors[caller.SteamId] = colorId;
+		Log.Info( colorId );
+	}
 
 	public static readonly List<string> GrubNamePresets = new()
 	{

@@ -20,6 +20,12 @@ public sealed partial class GrubsGame : GameManager
 
 	[Net] public Terrain Terrain { get; set; }
 
+	/// <summary>
+	/// The colors that are already in use by other players. 
+	/// </summary>
+	/// <returns></returns>
+	[Net] public IDictionary<long, Player.ColorId> TakenColors { get; private set; }
+
 	public GrubsGame()
 	{
 		if ( Game.IsClient )
@@ -43,6 +49,8 @@ public sealed partial class GrubsGame : GameManager
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has joined" );
 
 		FetchInteractionsClient( To.Single( client ) );
+
+		TakenColors[client.SteamId] = Player.ColorId.Undecided;
 	}
 
 	[ConCmd.Server]
