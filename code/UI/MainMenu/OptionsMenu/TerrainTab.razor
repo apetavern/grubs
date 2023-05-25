@@ -8,18 +8,21 @@
             Options=@EnvironmentOptions 
             SelectLabel="Environment Type" 
             Key="terrain_environment_type"
+            IsDisabled=@(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated || !Game.LocalClient.IsListenServerHost)
             OnOptionSelected=@SetConfigOption />
         <SingleSelect
             SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
             Options=@TerrainTypeOptions
             SelectLabel="Terrain Type"
             Key="terrain_type"
+            IsDisabled=@(!Game.LocalClient.IsListenServerHost)
             OnOptionSelected=@SetConfigOption />
         <SingleSelect
             SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
             Options=@TerrainTextureOptions
             SelectLabel="Terrain Texture"
             Key="terrain_texture"
+            IsDisabled=@(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated || !Game.LocalClient.IsListenServerHost)
             OnOptionSelected=@SetConfigOption />
     </div>
 </root>

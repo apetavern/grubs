@@ -2,7 +2,7 @@
 
 <root>
     <label class="select-label">@SelectLabel</label>
-    <button class="select" @onclick=@( () => OpenOptions() )>
+    <button @ref=_selectButton class="select" @onclick=@( () => ToggleOptions() )>
         <label>@Options[SelectedIndex]</label>
         <button icon="expand_more" class="expand" />
     </button>
@@ -24,11 +24,15 @@
     public string Key { get; set; }
     public bool IsDisabled = false;
 
+    private Button _selectButton;
     private Panel _optionsPanel;
 
-    private void OpenOptions()
+    private void ToggleOptions()
     {
-        _optionsPanel.AddClass( "show" );
+        if (IsDisabled)
+            return;
+
+        _optionsPanel.SetClass( "show", !_optionsPanel.HasClass("show") );
     }
 
     private void OnOptionClick( string option )
@@ -42,6 +46,13 @@
     protected override int BuildHash()
     {
         return HashCode.Combine( SelectedIndex, IsDisabled );
+    }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        _selectButton.SetClass("disabled", IsDisabled);
     }
 }
 
@@ -63,6 +74,10 @@
             font-size: 24px;
             font-weight: light;
             align-items: center;
+
+            &.disabled {
+                background-color: rgba(235, 235, 235, 0.77);
+            }
         }
 
         .select-options {
