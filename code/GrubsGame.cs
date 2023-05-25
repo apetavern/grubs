@@ -142,6 +142,11 @@ public sealed partial class GrubsGame : GameManager
 	public static void SetConfigOption( string key, string value )
 	{
 		ConsoleSystem.SetValue( key, value );
-		Instance.Terrain.Reset();
+
+		if ( key == "terrain_environment_type" 
+			&& GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated )
+			Instance.Terrain.Refresh();
+		else
+			Instance.Terrain.Reset();
 	}
 }

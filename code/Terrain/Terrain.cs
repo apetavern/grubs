@@ -34,6 +34,28 @@ public partial class Terrain : Entity
 		InitializeSdfWorld();
 	}
 
+	/// <summary>
+	/// Clear the generated world and re-create with new environment.
+	/// </summary>
+	public void Refresh()
+	{
+		SdfWorld.Clear();
+
+		var cfg = new MaterialsConfig( true, true );
+		var materials = GetActiveMaterials( cfg );
+		AddWorldBox(
+			GrubsConfig.TerrainLength,
+			GrubsConfig.TerrainHeight,
+			materials.ElementAt( 0 ).Key,
+			materials.ElementAt( 1 ).Key );
+
+		SubtractBackground(
+			GrubsConfig.TerrainLength,
+			(GrubsConfig.TerrainLength / resolution).CeilToInt(),
+			(GrubsConfig.TerrainHeight / resolution).CeilToInt() );
+		SubtractForeground( (GrubsConfig.TerrainLength / resolution).CeilToInt() );
+	}
+
 	protected void InitializeSdfWorld()
 	{
 		SetupKillZone();
