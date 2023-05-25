@@ -1,0 +1,46 @@
+﻿@namespace Grubs.UI
+
+<root>
+    <label>Terrain</label>
+    <div>
+        <SingleSelect 
+            SelectedIndex=@((int)GrubsConfig.WorldTerrainEnvironmentType)
+            Options=@EnvironmentOptions 
+            SelectLabel="Environment Type" 
+            Key="terrain_environment_type"
+            IsDisabled=@(!Game.LocalClient.IsListenServerHost)
+            OnOptionSelected=@SetConfigOption />
+        <SingleSelect
+            SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
+            Options=@TerrainTypeOptions
+            SelectLabel="Terrain Type"
+            Key="terrain_type"
+            IsDisabled=@(!Game.LocalClient.IsListenServerHost)
+            OnOptionSelected=@SetConfigOption />
+        <SingleSelect
+            SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
+            Options=@TerrainTextureOptions
+            SelectLabel="Terrain Texture"
+            Key="terrain_texture"
+            IsDisabled=@(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated || !Game.LocalClient.IsListenServerHost)
+            OnOptionSelected=@SetConfigOption />
+    </div>
+</root>
+
+@code {
+
+    private void SetConfigOption( string key, string value )
+    {
+        GrubsGame.SetConfigOption(key, value);
+    }
+
+    private List<string> EnvironmentOptions = Enum.GetNames<GrubsConfig.TerrainEnvironmentType>().ToList();
+    private List<string> TerrainTypeOptions = Enum.GetNames<GrubsConfig.TerrainType>().ToList();
+    private List<string> TerrainTextureOptions = Enum.GetNames<GrubsConfig.TerrainTexture>().ToList();
+}
+
+<style>
+    TerrainTab {
+        flex-direction: column;
+    }
+</style>

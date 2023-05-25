@@ -2,7 +2,7 @@
 
 <root>
     <label class="select-label">@SelectLabel</label>
-    <button class="select" @onclick=@( () => OpenOptions() )>
+    <button @ref=_selectButton class="select" @onclick=@( () => ToggleOptions() )>
         <label>@Options[SelectedIndex]</label>
         <button icon="expand_more" class="expand" />
     </button>
@@ -17,16 +17,22 @@
 
 
 @code {
-    public int SelectedIndex { get; set; } = 0;
     public List<string> Options { get; set; }
+    public int SelectedIndex { get; set; } = 0;
     public string SelectLabel { get; set; } = "Placeholder";
-    public Action<string> OnOptionSelected { get; set; }
+    public Action<string, string> OnOptionSelected { get; set; }
+    public string Key { get; set; }
+    public bool IsDisabled = false;
 
+    private Button _selectButton;
     private Panel _optionsPanel;
 
-    private void OpenOptions()
+    private void ToggleOptions()
     {
-        _optionsPanel.AddClass( "show" );
+        if (IsDisabled)
+            return;
+
+        _optionsPanel.SetClass( "show", !_optionsPanel.HasClass("show") );
     }
 
     private void OnOptionClick( string option )
@@ -34,12 +40,19 @@
         SelectedIndex = Options.IndexOf( option );
         _optionsPanel.RemoveClass( "show" );
 
-        OnOptionSelected(option);
+        OnOptionSelected(Key, SelectedIndex.ToString());
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( SelectedIndex );
+        return HashCode.Combine( SelectedIndex, IsDisabled );
+    }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        _selectButton.SetClass("disabled", IsDisabled);
     }
 }
 
@@ -61,6 +74,10 @@
             font-size: 24px;
             font-weight: light;
             align-items: center;
+
+            &.disabled {
+                background-color: rgba(235, 235, 235, 0.77);
+            }
         }
 
         .select-options {
@@ -78,14 +95,15 @@
 
         .select-option {
             align-items: center;
-            justify-content: flex-end;
+            margin: 4px;
+            justify-content: flex-start;
             font-size: 24px;
             font-weight: light;
             border-radius: 4px;
-            padding-right: 4px;
 
             &:hover {
                 background-color: rgba(235, 235, 235, 0.48);
+                sound-in: ui_button_hover;
             }
         }
 

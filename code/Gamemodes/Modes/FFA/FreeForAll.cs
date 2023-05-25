@@ -82,6 +82,16 @@ public partial class FreeForAll : Gamemode
 			Event.Run( GrubsEvent.Game.End );
 			return;
 		}
+		else if ( Game.Clients.Where( C => C.IsBot ).Any() )
+		{
+			BBox worldbox = new BBox();
+			worldbox.Maxs = new Vector3( Terrain.WorldTextureLength / 2f, 10f, Terrain.WorldTextureHeight );
+			worldbox.Mins = new Vector3( -Terrain.WorldTextureLength / 2f, -10f, 0 );
+
+			//DebugOverlay.Box( worldbox, Color.Red, 100f );
+
+			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 150f, standableAngle: 45f, save: false );
+		}
 
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );

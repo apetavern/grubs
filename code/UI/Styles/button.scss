@@ -14,12 +14,9 @@ button {
         color: #fde74c;
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
         transform: scale(1.02);
-
-        &:not(.disabled) {
-            sound-in: ui_button_hover;
-        }
+        sound-in: ui_button_hover;
     }
 
     &:active {

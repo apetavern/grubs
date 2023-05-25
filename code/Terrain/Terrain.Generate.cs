@@ -21,6 +21,7 @@ public partial class Terrain
 	private bool[,] TerrainMap;
 	private int[] NoiseMap;
 	private float[,] DensityMap;
+	private bool[,] BackgroundMap;
 
 	private float amplitude = 36f;
 	private float frequency = 3.2f;
@@ -30,6 +31,8 @@ public partial class Terrain
 	private float noiseZoom = 2f;
 
 	private float resolution = 8f;
+
+	private int maxY;
 
 	void GenerateWorld()
 	{
@@ -42,6 +45,7 @@ public partial class Terrain
 		TerrainMap = new bool[pointsX, pointsY];
 		NoiseMap = new int[pointsX];
 		DensityMap = new float[pointsX, pointsY];
+		BackgroundMap = new bool[pointsX, pointsY];
 
 		var r = Game.Random.Int( 99999 );
 
@@ -54,7 +58,7 @@ public partial class Terrain
 		}
 
 		// Generate Noise Map.
-		int maxY = 0;
+		maxY = 0;
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 1024f).FloorToInt();
@@ -72,23 +76,8 @@ public partial class Terrain
 		WorldTextureHeight = (int)(maxY * resolution);
 
 		// Subtract from the background.
-		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );
-		var bgMaterials = GetActiveMaterials( materialsConfig );
-		for ( var x = 0; x < pointsX; x++ )
-		{
-			for ( var y = 0; y < maxY + 1; y++ )
-			{
-				if ( !TerrainMap[x, y] )
-				{
-					var midpoint = new Vector2( x * resolution, y * resolution );
-					SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
-				}
-			}
-		}
-
-		var bb = new Vector2( 0, maxY * resolution );
-		var aa = new Vector2( wLength, pointsY * resolution );
-		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
+		Array.Copy( TerrainMap, BackgroundMap, pointsX * pointsY );
+		SubtractBackground( wLength, pointsX, pointsY );
 
 		// Populate Density Map for unique terrain features.
 		var fgMaterials = GetActiveMaterials( MaterialsConfig.Default );
@@ -110,6 +99,43 @@ public partial class Terrain
 					// TODO: figure out best way to subtract
 					SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
 					// SubtractBox( midpoint - 8f, midpoint + 8f, 4f );
+				}
+			}
+		}
+	}
+
+	void SubtractBackground( int wLength, int pointsX, int pointsY )
+	{
+		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );
+		var bgMaterials = GetActiveMaterials( materialsConfig );
+		for ( var x = 0; x < pointsX; x++ )
+		{
+			for ( var y = 0; y < maxY + 1; y++ )
+			{
+				if ( !BackgroundMap[x, y] )
+				{
+					var midpoint = new Vector2( x * resolution, y * resolution );
+					SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
+				}
+			}
+		}
+
+		var bb = new Vector2( 0, maxY * resolution );
+		var aa = new Vector2( wLength, pointsY * resolution );
+		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
+	}
+
+	void SubtractForeground( int pointsX )
+	{
+		var fgMaterials = GetActiveMaterials( MaterialsConfig.Default );
+		for ( var x = 0; x < pointsX; x++ )
+		{
+			for ( var y = 0; y < maxY; y++ )
+			{
+				if ( !TerrainMap[x, y] )
+				{
+					var midpoint = new Vector2( x * resolution, y * resolution );
+					SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
 				}
 			}
 		}
