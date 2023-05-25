@@ -57,7 +57,8 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId), GetButtonText(), IsButtonEnabled());
+        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId), GetButtonText(), IsButtonEnabled(),
+        GrubsGame.Instance.ClaimedPlayerColors.GetHashCode());
     }
 }
 

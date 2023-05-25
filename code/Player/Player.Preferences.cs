@@ -69,7 +69,7 @@ public partial class Player
 	public Color Color { get; set; } = ColorPresets.GetValueOrDefault( ColorId.Undecided );
 
 	[ConCmd.Server]
-	public static void SelectColor( Player.ColorId colorId )
+	public static void SelectColor( ColorId colorId )
 	{
 		if ( GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu )
 			return;
@@ -79,10 +79,10 @@ public partial class Player
 			return;
 
 		// Someone is already using this color, but it's okay for ColorId.Undecided (White).
-		if ( GrubsGame.Instance.ClaimedPlayerColors.Values.Contains( colorId ) && colorId != Player.ColorId.Undecided )
+		if ( GrubsGame.Instance.ClaimedPlayerColors.Values.Contains( colorId ) && colorId != ColorId.Undecided )
 			return;
 
-		player.Color = Player.ColorPresets.GetValueOrDefault( colorId );
+		player.Color = ColorPresets.GetValueOrDefault( colorId );
 		GrubsGame.Instance.ClaimedPlayerColors[caller.SteamId] = colorId;
 	}
 

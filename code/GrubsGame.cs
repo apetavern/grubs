@@ -85,6 +85,9 @@ public sealed partial class GrubsGame : GameManager
 	{
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
+
+		if ( ClaimedPlayerColors.ContainsKey( client.SteamId ) )
+			ClaimedPlayerColors[client.SteamId] = Player.ColorId.Undecided;
 	}
 
 	public override void Simulate( IClient cl )

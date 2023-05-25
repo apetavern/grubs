@@ -10,20 +10,22 @@
         <div class="section">
             <label class="title">Colors</label>
             <div style="flex-wrap: wrap;">
+                @{
+                    var localPlayerColorId = GrubsGame.Instance.ClaimedPlayerColors[Game.LocalClient.SteamId];
+                }
+
                 @foreach (var kvp in Player.ColorPresets)
                 {
-                    var colId = kvp.Key;
+                    var colorId = kvp.Key;
                     var color = kvp.Value;
 
+                    var isSelected = localPlayerColorId == colorId;
                     // Only considered claimed if it isn't our color and if it isn't the "Undecided" color preset (White).
-                    var alreadyClaimed = GrubsGame.Instance.ClaimedPlayerColors.Values.Contains(colId) &&
-                    GrubsGame.Instance.ClaimedPlayerColors[Game.LocalClient.SteamId] != colId && colId !=
-                    Player.ColorId.Undecided;
-
-                    var isSelected = player.Color == color;
+                    var alreadyClaimed = !isSelected && GrubsGame.Instance.ClaimedPlayerColors.Values.Contains(colorId) &&
+                    colorId != Player.ColorId.Undecided;
 
                     <button class="color @(isSelected ? "selected" : "") @(alreadyClaimed ? "disabled" : "")"
-                        style="background-color: @color.Hex;" @onclick=@(() => { Player.SelectColor(colId); }) />
+                        style="background-color: @color.Hex;" @onclick=@(() => { Player.SelectColor(colorId); }) />
                 }
             </div>
         </div>
