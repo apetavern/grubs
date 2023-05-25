@@ -8,7 +8,7 @@
             Options=@EnvironmentOptions 
             SelectLabel="Environment Type" 
             Key="terrain_environment_type"
-            IsDisabled=@(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated || !Game.LocalClient.IsListenServerHost)
+            IsDisabled=@(!Game.LocalClient.IsListenServerHost)
             OnOptionSelected=@SetConfigOption />
         <SingleSelect
             SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
