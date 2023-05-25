@@ -83,6 +83,10 @@
       "WeaponType": {
         "Type": "WeaponType",
         "Value": "\u0022Tool\u0022"
+      },
+      "OverrideHat": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }
