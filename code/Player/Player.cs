@@ -97,10 +97,11 @@ public partial class Player : Entity
 		Inventory.Clear();
 		Inventory.GiveDefaultLoadout();
 
-
 		if ( Color == ColorPresets.GetValueOrDefault( ColorId.Undecided ) )
 		{
-			Random.Shared.FromArray<Color>( ColorPresets.Values.ToArray() );
+			var takenColors = GrubsGame.Instance.TakenColors;
+			var randomUnTakenColor = Random.Shared.FromArray( ColorPresets.Where( x => !takenColors.Values.Contains( x.Key ) ).ToArray() );
+			Color = randomUnTakenColor.Value;
 		}
 
 		Grubs.Clear();

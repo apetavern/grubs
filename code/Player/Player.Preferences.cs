@@ -69,7 +69,7 @@ public partial class Player
 	public Color Color { get; set; } = ColorPresets.GetValueOrDefault( ColorId.Undecided );
 
 	[ConCmd.Server]
-	public static void PlayerSelectColor( Player.ColorId colorId )
+	public static void SelectColor( Player.ColorId colorId )
 	{
 		if ( GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu )
 			return;
@@ -78,13 +78,12 @@ public partial class Player
 		if ( caller.Pawn is not Player player )
 			return;
 
-		// Someone is already using this color
+		// Someone is already using this color, but it's okay for ColorId.Undecided (White).
 		if ( GrubsGame.Instance.TakenColors.Values.Contains( colorId ) && colorId != Player.ColorId.Undecided )
 			return;
 
 		player.Color = Player.ColorPresets.GetValueOrDefault( colorId );
 		GrubsGame.Instance.TakenColors[caller.SteamId] = colorId;
-		Log.Info( colorId );
 	}
 
 	public static readonly List<string> GrubNamePresets = new()
