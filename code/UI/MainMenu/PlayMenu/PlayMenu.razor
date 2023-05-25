@@ -1,6 +1,6 @@
 @namespace Grubs.UI
 
-@if (Game.LocalPawn is not Player player)
+@if (Game.LocalPawn is not Player localPlayer)
 {
     return;
 }
@@ -11,16 +11,18 @@
         <div class="players">
             @foreach (var client in Game.Clients)
             {
+                if (client.Pawn is not Player player)
+                    continue;
+
                 <div class="player">
                     <img src="avatar:@client.SteamId" class="avatar" />
                     <div style="align-items: center;">
-                        <label class="name">@client.Name</label>
+                        <label class="name" style="color: @player.Color.Hex">@client.Name</label>
                         <label class="hours">
                             <button icon="timer" />
                             <label>@player.PlayTime.ToString("0.0")hrs</label>
                         </label>
                     </div>
-                    
                 </div>
             }
         </div>
