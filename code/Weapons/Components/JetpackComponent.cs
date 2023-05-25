@@ -135,9 +135,12 @@ public partial class JetpackComponent : WeaponComponent
 		{
 			Weapon.Ammo -= 1;
 		}
-		jetparticle1.Destroy();
-		jetparticle2.Destroy();
-		jetparticle3.Destroy();
+		if ( jetparticle1 != null )
+		{
+			jetparticle1.Destroy();
+			jetparticle2.Destroy();
+			jetparticle3.Destroy();
+		}
 	}
 
 	public override void FireFinished()
