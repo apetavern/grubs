@@ -49,7 +49,7 @@ public partial class Grub
 		var nextFacing = Rotation.z < 0 ? -1 : 1;
 
 		MoveInput = moveInput;
-		LookInput = -nextFacing * lookInput;
+		LookInput = -nextFacing * (lookInput * 1.4f);
 
 		if ( ActiveWeapon.IsValid() && ActiveWeapon.IsCharging() )
 			return;
