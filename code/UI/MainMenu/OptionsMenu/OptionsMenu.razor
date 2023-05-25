@@ -25,24 +25,7 @@
         {
             case Tab.Terrain:
                 <div class="options-tab">
-                    <label>Terrain</label>
-                    <div>
-                        <SingleSelect 
-                            SelectedIndex=@((int)GrubsConfig.WorldTerrainEnvironmentType)
-                            Options=@EnvironmentOptions 
-                            SelectLabel="Environment Type" 
-                            OnOptionSelected=@SetEnvironmentOption />
-                        <SingleSelect
-                            SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
-                            Options=@TerrainTypeOptions
-                            SelectLabel="Terrain Type"
-                            OnOptionSelected=@SetTerrainTypeOption />
-                        <SingleSelect
-                            SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
-                            Options=@TerrainTextureOptions
-                            SelectLabel="Terrain Texture"
-                            OnOptionSelected=@SetTerrainTextureOption />
-                    </div>
+                    <TerrainTab />
                 </div>
                 break;
             case Tab.Gameplay:
@@ -64,28 +47,6 @@
         Terrain,
         Gameplay,
         Weapons
-    }
-
-    // TODO: Make this less verbose so we don't have a server command for every single config option :joy_cat:
-    private List<string> EnvironmentOptions = Enum.GetNames<GrubsConfig.TerrainEnvironmentType>().ToList();
-
-    private void SetEnvironmentOption( string option )
-    {
-        GrubsGame.SetTerrainEnvironmentType( option );
-    }
-
-    private List<string> TerrainTypeOptions = Enum.GetNames<GrubsConfig.TerrainType>().ToList();
-
-    private void SetTerrainTypeOption( string option )
-    {
-        GrubsGame.SetTerrainType( option );
-    }
-
-    private List<string> TerrainTextureOptions = Enum.GetNames<GrubsConfig.TerrainTexture>().ToList();
-
-    private void SetTerrainTextureOption( string option )
-    {
-        GrubsGame.SetTerrainTexture( option );
     }
 
     private Tab CurrentTab = Tab.Terrain;

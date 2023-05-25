@@ -17,10 +17,12 @@
 
 
 @code {
-    public int SelectedIndex { get; set; } = 0;
     public List<string> Options { get; set; }
+    public int SelectedIndex { get; set; } = 0;
     public string SelectLabel { get; set; } = "Placeholder";
-    public Action<string> OnOptionSelected { get; set; }
+    public Action<string, string> OnOptionSelected { get; set; }
+    public string Key { get; set; }
+    public bool IsDisabled = false;
 
     private Panel _optionsPanel;
 
@@ -34,12 +36,12 @@
         SelectedIndex = Options.IndexOf( option );
         _optionsPanel.RemoveClass( "show" );
 
-        OnOptionSelected(option);
+        OnOptionSelected(Key, SelectedIndex.ToString());
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( SelectedIndex );
+        return HashCode.Combine( SelectedIndex, IsDisabled );
     }
 }
 
