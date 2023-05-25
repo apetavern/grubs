@@ -99,7 +99,7 @@ public partial class Player : Entity
 
 		if ( Color == ColorPresets.GetValueOrDefault( ColorId.Undecided ) )
 		{
-			var takenColors = GrubsGame.Instance.TakenColors;
+			var takenColors = GrubsGame.Instance.ClaimedPlayerColors;
 			var randomUnTakenColor = Random.Shared.FromArray( ColorPresets.Where( x => !takenColors.Values.Contains( x.Key ) ).ToArray() );
 			Color = randomUnTakenColor.Value;
 		}

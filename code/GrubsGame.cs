@@ -24,7 +24,7 @@ public sealed partial class GrubsGame : GameManager
 	/// The colors that are already in use by other players. 
 	/// </summary>
 	/// <returns></returns>
-	[Net] public IDictionary<long, Player.ColorId> TakenColors { get; private set; }
+	[Net] public IDictionary<long, Player.ColorId> ClaimedPlayerColors { get; private set; }
 
 	public GrubsGame()
 	{
@@ -50,7 +50,7 @@ public sealed partial class GrubsGame : GameManager
 
 		FetchInteractionsClient( To.Single( client ) );
 
-		TakenColors[client.SteamId] = Player.ColorId.Undecided;
+		ClaimedPlayerColors[client.SteamId] = Player.ColorId.Undecided;
 	}
 
 	[ConCmd.Server]

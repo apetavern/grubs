@@ -79,11 +79,11 @@ public partial class Player
 			return;
 
 		// Someone is already using this color, but it's okay for ColorId.Undecided (White).
-		if ( GrubsGame.Instance.TakenColors.Values.Contains( colorId ) && colorId != Player.ColorId.Undecided )
+		if ( GrubsGame.Instance.ClaimedPlayerColors.Values.Contains( colorId ) && colorId != Player.ColorId.Undecided )
 			return;
 
 		player.Color = Player.ColorPresets.GetValueOrDefault( colorId );
-		GrubsGame.Instance.TakenColors[caller.SteamId] = colorId;
+		GrubsGame.Instance.ClaimedPlayerColors[caller.SteamId] = colorId;
 	}
 
 	public static readonly List<string> GrubNamePresets = new()
