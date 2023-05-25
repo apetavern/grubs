@@ -42,7 +42,6 @@ public partial class Player
 		Cyan,
 		Orange,
 		Purple,
-		Brown,
 		PastelBrown,
 		Eggshell
 	}
@@ -59,7 +58,6 @@ public partial class Player
 		{ColorId.Cyan, Color.FromBytes(103, 234, 202)},
 		{ColorId.Orange, Color.FromBytes(255, 174, 109)},
 		{ColorId.Purple, Color.FromBytes(173, 162, 255)},
-		{ColorId.Brown, Color.FromBytes(175, 99, 59)},
 		{ColorId.PastelBrown, Color.FromBytes(118, 103, 87)},
 		{ColorId.Eggshell, Color.FromBytes(240, 236, 211)}
 	};
