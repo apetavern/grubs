@@ -62,6 +62,12 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Net]
 	public bool HasFired { get; set; } = false;
 
+	/// <summary>
+	/// If the weapon has a hat, override any Grub clothing.
+	/// </summary>
+	[Prefab, Net]
+	public bool OverrideHat { get; set; } = true;
+
 	[Net]
 	public bool WeaponHasHat { get; set; }
 
@@ -84,7 +90,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		EnableDrawing = false;
 
 		Ammo = DefaultAmmoAmount;
-		WeaponHasHat = CheckWeaponForHat();
+		WeaponHasHat = OverrideHat && CheckWeaponForHat();
 	}
 
 	public override void Simulate( IClient client )

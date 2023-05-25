@@ -50,13 +50,13 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			ChargeParticles?.SetPosition( 0, Weapon.GetMuzzlePosition() );
 			ChargeParticles?.SetPosition( 1, Weapon.GetMuzzlePosition() + Weapon.GetMuzzleForward() * 80f );
 			ChargeParticles?.Set( "Alpha", 100f );
-			ChargeParticles?.Set( "Speed", 50f );
+			ChargeParticles?.Set( "Speed", 40f );
 
 			IsCharging = true;
 			IncreaseCharge();
 		}
 
-		if ( Input.Released( InputAction.Fire ) || Charge == 100 )
+		if ( Input.Released( InputAction.Fire ) || Charge >= 100 )
 		{
 			ChargeParticles?.Destroy( true );
 			ChargeParticles = null;
