@@ -75,11 +75,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 
 	protected List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
 	{
-		var forceMultiplayer = _explosiveComponent?.ExplosionForceMultiplier ?? 1;
+		var force = charge * 0.5f;
 		var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
 		return ShouldBounce
-			? arcTrace.RunTowardsWithBounces( direction, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
-			: arcTrace.RunTowards( direction, forceMultiplayer * charge, GamemodeSystem.Instance.ActiveWindForce );
+			? arcTrace.RunTowardsWithBounces( direction, force, GamemodeSystem.Instance.ActiveWindForce, MaxBounces )
+			: arcTrace.RunTowards( direction, force, GamemodeSystem.Instance.ActiveWindForce );
 	}
 
 	private void DrawSegments()

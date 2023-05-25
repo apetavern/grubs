@@ -10,9 +10,6 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	public float MaxExplosionDamage { get; set; } = 100f;
 
 	[Prefab, Net]
-	public float ExplosionForceMultiplier { get; set; } = 1.0f;
-
-	[Prefab, Net]
 	public bool ExplodeOnTouch { get; set; } = false;
 
 	[Prefab, Net]
