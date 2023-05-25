@@ -21,10 +21,9 @@
                     Player.ColorId.Undecided;
 
                     var isSelected = player.Color == color;
-                    var displayColor = color;
 
                     <button class="color @(isSelected ? "selected" : "") @(alreadyClaimed ? "disabled" : "")"
-                        style="background-color: @displayColor.Hex;" @onclick=@(() => { Player.SelectColor(colId); }) />
+                        style="background-color: @color.Hex;" @onclick=@(() => { Player.SelectColor(colId); }) />
                 }
             </div>
         </div>
