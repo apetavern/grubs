@@ -1,0 +1,92 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CPostProcessData"
+	m_layers = 
+	[
+		{
+			_class = "CBloomLayer"
+			m_name = "Bloom Bright"
+			m_nOpacityPercent = 100
+			m_bVisible = true
+			m_pLayerMask = null
+			m_params = 
+			{
+				m_blendMode = "BLOOM_BLEND_ADD"
+				m_flBloomStrength = 0.1
+				m_flScreenBloomStrength = 1.0
+				m_flBlurBloomStrength = 1.0
+				m_flBloomThreshold = 1.0
+				m_flBloomThresholdWidth = 2.35
+				m_flSkyboxBloomStrength = 1.0
+				m_flBloomStartValue = 1.0
+				m_flBlurWeight = 
+				[
+					0.1999, 0.1999, 0.1999, 0.1999,
+					0.1999,
+				]
+				m_vBlurTint = 
+				[
+					[ 1.0, 1.0, 1.0 ],
+					[ 1.0, 1.0, 1.0 ],
+					[ 1.0, 1.0, 1.0 ],
+					[ 1.0, 1.0, 1.0 ],
+					[ 1.0, 1.0, 1.0 ],
+				]
+			}
+		},
+		{
+			_class = "CLevelsColorCorrectionLayer"
+			m_name = "Levels 0"
+			m_nOpacityPercent = 100
+			m_bVisible = true
+			m_pLayerMask = null
+			m_nInputBlackPointRGB = 0
+			m_nInputBlackPointR = 0
+			m_nInputBlackPointG = 0
+			m_nInputBlackPointB = 0
+			m_nInputWhitePointRGB = 255
+			m_nInputWhitePointR = 255
+			m_nInputWhitePointG = 255
+			m_nInputWhitePointB = 255
+			m_nOutputBlackPointRGB = 0
+			m_nOutputBlackPointR = 0
+			m_nOutputBlackPointG = 0
+			m_nOutputBlackPointB = 0
+			m_nOutputWhitePointRGB = 255
+			m_nOutputWhitePointR = 255
+			m_nOutputWhitePointG = 255
+			m_nOutputWhitePointB = 255
+			m_flGammaRGB = 1.25
+			m_flGammaR = 1.0
+			m_flGammaG = 1.0
+			m_flGammaB = 1.0
+		},
+		{
+			_class = "CBrightnessContrastColorCorrectionLayer"
+			m_name = "Brightness/Contrast 0"
+			m_nOpacityPercent = 100
+			m_bVisible = true
+			m_pLayerMask = null
+			m_nBrightness = 0
+			m_nContrast = -10
+		},
+		{
+			_class = "CToneMappingLayer"
+			m_name = "Tone Mapping 1"
+			m_nOpacityPercent = 100
+			m_bVisible = false
+			m_pLayerMask = null
+			m_params = 
+			{
+				m_flExposureBias = 0.0
+				m_flShoulderStrength = 0.0999
+				m_flLinearStrength = 1.0
+				m_flLinearAngle = 0.1
+				m_flToeStrength = 0.2082
+				m_flToeNum = 0.0
+				m_flToeDenom = 1.0
+				m_flWhitePoint = 5.9994
+			}
+		},
+	]
+}
