@@ -52,7 +52,9 @@ public partial class Player
 		if ( GrubsGame.Instance.PlayerColors[desiredColor] )
 			return;
 
-		GrubsGame.Instance.PlayerColors[player.Color] = false;
+		if ( player.Color != DefaultColor )
+			GrubsGame.Instance.PlayerColors[player.Color] = false;
+
 		GrubsGame.Instance.PlayerColors[desiredColor] = true;
 		player.Color = desiredColor;
 	}
