@@ -63,7 +63,7 @@
     {
         var player = Game.LocalPawn as Player;
         return HashCode.Combine(player?.Color.GetHashCode(), player?.SelectedCosmeticIndex,
-        player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()), GrubsGame.Instance.PlayerColors.GetHashCode());
+        player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()), Game.Clients.HashCombine(c => (c.Pawn as Player).Color.RawInt));
     }
 }
 
