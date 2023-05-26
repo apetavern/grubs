@@ -39,8 +39,6 @@ public partial class AimingState : BaseState
 
 		//DebugOverlay.TraceResult( tr );
 
-		Log.Info( Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal ) );
-
 		MyPlayer.LookInput = Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal );
 
 		if ( !facingTarget )
