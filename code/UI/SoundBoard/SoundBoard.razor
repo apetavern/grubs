@@ -11,13 +11,13 @@
 		foreach (var sound in GrubsGame.Instance.SoundBoardSounds)
 		{
 			<div>
-                <label text=@sound.Icon></label>
+               
 				<button onclick=@( ()=> 
 				{
 					if(player.SinceSandboardPlay >= GrubsConfig.SoundboardCooldown )
 						GrubsGame.PlaySoundBoardSound(sound.Title); 
 				})
-				>@sound.Title</button>
+				> <label text=@sound.Icon></label> @sound.Title</button>
 			</div>
 		}
 	}
@@ -55,6 +55,11 @@
                 height: auto;
                 flex-grow: 1;
                 border: 2px white;
+
+                .label {
+                    margin-right: auto;
+                    margin-left: 0;
+                }
             } 
         }
     }
