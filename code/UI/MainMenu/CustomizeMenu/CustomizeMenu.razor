@@ -52,9 +52,12 @@
                 {
                     var index = i;
                     var isSelected = player.SelectedCosmeticIndex == i;
-                    <button class="cosmetic @(isSelected ? "selected" : "")" @onclick=@(() => { player.SelectedCosmeticIndex
-                    = isSelected ? -1 : index; })>
-                        <img src=@Player.CosmeticPresets[i].MenuIcon />
+                    <button class="cosmetic @(isSelected ? "selected" : "")" 
+                    @onclick=@(() => 
+                    { 
+                        player.SelectedCosmeticIndex = isSelected ? -1 : index; 
+                    })>
+                    <img src=@Player.CosmeticPresets[i].MenuIcon />
                     </button>
                 }
             </div>
