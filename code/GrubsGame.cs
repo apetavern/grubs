@@ -21,7 +21,7 @@ public sealed partial class GrubsGame : GameManager
 	[Net] public Terrain Terrain { get; set; }
 
 	/// <summary>
-	/// The colors that are already in use by other players. 
+	/// Per-player color, and if the color is already in use.
 	/// </summary>
 	/// <returns></returns>
 	[Net] public IDictionary<Color, bool> PlayerColors { get; private set; }
