@@ -67,8 +67,8 @@
 			m_nOpacityPercent = 100
 			m_bVisible = true
 			m_pLayerMask = null
-			m_nBrightness = 0
-			m_nContrast = -10
+			m_nBrightness = 25
+			m_nContrast = 10
 		},
 		{
 			_class = "CToneMappingLayer"
