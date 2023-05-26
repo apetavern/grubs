@@ -47,7 +47,7 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private void SpawnPlayers()
 	{
-		foreach ( var client in Game.Clients.OrderByDescending( x => !x.IsBot ) )
+		foreach ( var client in Game.Clients.Shuffle().OrderByDescending( x => !x.IsBot ) )
 		{
 			if ( client.Pawn is not Player player )
 				continue;
