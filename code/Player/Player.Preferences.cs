@@ -49,7 +49,7 @@ public partial class Player
 			return;
 
 		var desiredColor = new Color( raw );
-		if ( GrubsGame.Instance.PlayerColors.ContainsKey( desiredColor ) )
+		if ( GrubsGame.Instance.PlayerColors.ContainsKey( desiredColor ) && GrubsGame.Instance.PlayerColors[desiredColor] )
 			return;
 
 		if ( player.Color != DefaultColor )
