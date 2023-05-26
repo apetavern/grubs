@@ -11,7 +11,8 @@
             <label class="title">Colors</label>
             <div style="flex-wrap: wrap;">
                 @{
-                    var localPlayerColorId = GrubsGame.Instance.ClaimedPlayerColors[Game.LocalClient.SteamId];
+                    var claimedColors = GrubsGame.Instance.ClaimedPlayerColors;
+                    var localPlayerColorId = claimedColors[Game.LocalClient.SteamId];
                 }
 
                 @foreach (var kvp in Player.ColorPresets)
@@ -20,11 +21,9 @@
                     var color = kvp.Value;
 
                     var isSelected = localPlayerColorId == colorId;
-                    // Only considered claimed if it isn't our color and if it isn't the "Undecided" color preset (White).
-                    var alreadyClaimed = !isSelected && GrubsGame.Instance.ClaimedPlayerColors.Values.Contains(colorId) &&
-                    colorId != Player.ColorId.Undecided;
+                    var alreadyClaimed = claimedColors.Values.Contains(colorId) && !isSelected && colorId != Player.ColorId.Undecided;
 
-                    <button class="color @(isSelected ? "selected" : "") @(alreadyClaimed ? "disabled" : "")"
+                    <button class="color @(isSelected ? "selected" : "")"
                         style="background-color: @color.Hex;" @onclick=@(() => { Player.SelectColor(colorId); }) />
                 }
             </div>
@@ -66,7 +65,7 @@
     {
         var player = Game.LocalPawn as Player;
         return HashCode.Combine(player?.Color.GetHashCode(), player?.SelectedCosmeticIndex,
-        player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()), GrubsGame.Instance.ClaimedPlayerColors.GetHashCode());
+        player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()), Game.Clients.HashCombine(c => HashCode.Combine((c.Pawn as Player)?.Color)));
     }
 }
 
