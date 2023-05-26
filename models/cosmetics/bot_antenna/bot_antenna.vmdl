@@ -1,0 +1,386 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "JiggleBoneList"
+				children = 
+				[
+					{
+						_class = "JiggleBone"
+						jiggle_root_bone = "joint1"
+						jiggle_type = 1
+						has_yaw_constraint = true
+						has_pitch_constraint = true
+						has_angle_constraint = false
+						has_base_spring = false
+						allow_flex_length = false
+						invert_axes = false
+						has_collision = false
+						cloth_collision_layer0 = true
+						cloth_collision_layer1 = true
+						cloth_collision_layer2 = true
+						cloth_collision_layer3 = true
+						length = 5.0
+						tip_mass = 0.0
+						angle_limit = 0.0
+						min_yaw = -5.0
+						max_yaw = 5.0
+						yaw_friction = 0.0
+						yaw_bounce = 1.0
+						min_pitch = -5.0
+						max_pitch = 5.0
+						pitch_friction = 0.0
+						pitch_bounce = 0.0
+						base_mass = 0.0
+						base_stiffness = 0.0
+						base_damping = 0.0
+						base_left_min = 0.0
+						base_left_max = 0.0
+						base_left_friction = 0.0
+						base_up_min = 0.0
+						base_up_max = 0.0
+						base_up_friction = 0.0
+						base_forward_min = 0.0
+						base_forward_max = 0.0
+						base_forward_friction = 0.0
+						yaw_stiffness = 1.0
+						yaw_damping = 0.0
+						pitch_stiffness = 1.0
+						pitch_damping = 0.0
+						along_stiffness = 1.0
+						along_damping = 0.0
+						radius0 = 1.0
+						radius1 = 1.0
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 2.0, 0.0, 0.0 ]
+					},
+					{
+						_class = "JiggleBone"
+						jiggle_root_bone = "joint2"
+						jiggle_type = 1
+						has_yaw_constraint = true
+						has_pitch_constraint = true
+						has_angle_constraint = false
+						has_base_spring = false
+						allow_flex_length = false
+						invert_axes = false
+						has_collision = false
+						cloth_collision_layer0 = true
+						cloth_collision_layer1 = true
+						cloth_collision_layer2 = true
+						cloth_collision_layer3 = true
+						length = 5.0
+						tip_mass = 0.0
+						angle_limit = 0.0
+						min_yaw = -5.0
+						max_yaw = 5.0
+						yaw_friction = 0.0
+						yaw_bounce = 1.0
+						min_pitch = -5.0
+						max_pitch = 5.0
+						pitch_friction = 0.0
+						pitch_bounce = 0.0
+						base_mass = 0.0
+						base_stiffness = 0.0
+						base_damping = 0.0
+						base_left_min = 0.0
+						base_left_max = 0.0
+						base_left_friction = 0.0
+						base_up_min = 0.0
+						base_up_max = 0.0
+						base_up_friction = 0.0
+						base_forward_min = 0.0
+						base_forward_max = 0.0
+						base_forward_friction = 0.0
+						yaw_stiffness = 1.0
+						yaw_damping = 0.0
+						pitch_stiffness = 1.0
+						pitch_damping = 0.0
+						along_stiffness = 1.0
+						along_damping = 0.0
+						radius0 = 1.0
+						radius1 = 1.0
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 2.0, 0.0, 0.0 ]
+					},
+					{
+						_class = "JiggleBone"
+						jiggle_root_bone = "joint3"
+						jiggle_type = 1
+						has_yaw_constraint = true
+						has_pitch_constraint = true
+						has_angle_constraint = false
+						has_base_spring = false
+						allow_flex_length = false
+						invert_axes = false
+						has_collision = false
+						cloth_collision_layer0 = true
+						cloth_collision_layer1 = true
+						cloth_collision_layer2 = true
+						cloth_collision_layer3 = true
+						length = 5.0
+						tip_mass = 0.0
+						angle_limit = 0.0
+						min_yaw = -5.0
+						max_yaw = 5.0
+						yaw_friction = 0.0
+						yaw_bounce = 1.0
+						min_pitch = -5.0
+						max_pitch = 5.0
+						pitch_friction = 0.0
+						pitch_bounce = 0.0
+						base_mass = 0.0
+						base_stiffness = 0.0
+						base_damping = 0.0
+						base_left_min = 0.0
+						base_left_max = 0.0
+						base_left_friction = 0.0
+						base_up_min = 0.0
+						base_up_max = 0.0
+						base_up_friction = 0.0
+						base_forward_min = 0.0
+						base_forward_max = 0.0
+						base_forward_friction = 0.0
+						yaw_stiffness = 1.0
+						yaw_damping = 0.0
+						pitch_stiffness = 1.0
+						pitch_damping = 0.0
+						along_stiffness = 1.0
+						along_damping = 0.0
+						radius0 = 1.0
+						radius1 = 1.0
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 2.0, 0.0, 0.0 ]
+					},
+					{
+						_class = "JiggleBone"
+						jiggle_root_bone = "joint4"
+						jiggle_type = 1
+						has_yaw_constraint = true
+						has_pitch_constraint = true
+						has_angle_constraint = false
+						has_base_spring = false
+						allow_flex_length = false
+						invert_axes = false
+						has_collision = false
+						cloth_collision_layer0 = true
+						cloth_collision_layer1 = true
+						cloth_collision_layer2 = true
+						cloth_collision_layer3 = true
+						length = 5.0
+						tip_mass = 0.0
+						angle_limit = 0.0
+						min_yaw = -5.0
+						max_yaw = 5.0
+						yaw_friction = 0.0
+						yaw_bounce = 1.0
+						min_pitch = -5.0
+						max_pitch = 5.0
+						pitch_friction = 0.0
+						pitch_bounce = 0.0
+						base_mass = 0.0
+						base_stiffness = 0.0
+						base_damping = 0.0
+						base_left_min = 0.0
+						base_left_max = 0.0
+						base_left_friction = 0.0
+						base_up_min = 0.0
+						base_up_max = 0.0
+						base_up_friction = 0.0
+						base_forward_min = 0.0
+						base_forward_max = 0.0
+						base_forward_friction = 0.0
+						yaw_stiffness = 1.0
+						yaw_damping = 0.0
+						pitch_stiffness = 1.0
+						pitch_damping = 0.0
+						along_stiffness = 1.0
+						along_damping = 0.0
+						radius0 = 1.0
+						radius1 = 1.0
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 2.0, 0.0, 0.0 ]
+					},
+					{
+						_class = "JiggleBone"
+						jiggle_root_bone = "joint5"
+						jiggle_type = 1
+						has_yaw_constraint = true
+						has_pitch_constraint = true
+						has_angle_constraint = false
+						has_base_spring = false
+						allow_flex_length = false
+						invert_axes = false
+						has_collision = false
+						cloth_collision_layer0 = true
+						cloth_collision_layer1 = true
+						cloth_collision_layer2 = true
+						cloth_collision_layer3 = true
+						length = 5.0
+						tip_mass = 0.0
+						angle_limit = 0.0
+						min_yaw = -5.0
+						max_yaw = 5.0
+						yaw_friction = 0.0
+						yaw_bounce = 1.0
+						min_pitch = -5.0
+						max_pitch = 5.0
+						pitch_friction = 0.0
+						pitch_bounce = 0.0
+						base_mass = 0.0
+						base_stiffness = 0.0
+						base_damping = 0.0
+						base_left_min = 0.0
+						base_left_max = 0.0
+						base_left_friction = 0.0
+						base_up_min = 0.0
+						base_up_max = 0.0
+						base_up_friction = 0.0
+						base_forward_min = 0.0
+						base_forward_max = 0.0
+						base_forward_friction = 0.0
+						yaw_stiffness = 1.0
+						yaw_damping = 0.0
+						pitch_stiffness = 1.0
+						pitch_damping = 0.0
+						along_stiffness = 1.0
+						along_damping = 0.0
+						radius0 = 1.0
+						radius1 = 1.0
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 0.0, 2.0, 0.0 ]
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "phong1.vmat"
+								to = "models/cosmetics/bot_antenna/materials/phong1.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "active"
+						remaps = 
+						[
+							{
+								from = "models/cosmetics/bot_antenna/materials/phong1.vmat"
+								to = "models/cosmetics/bot_antenna/materials/phong1_active.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "standard"
+						remaps = 
+						[
+							{
+								from = "models/cosmetics/bot_antenna/materials/phong1.vmat"
+								to = "models/cosmetics/bot_antenna/materials/phong1.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/cosmetics/bot_antenna/bot_antenna.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"pCube8",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = "antenna_root"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "joint1"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "joint2"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "joint3"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "joint4"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "joint5"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "head"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				]
+				bone_cull_type = "Aggressive"
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}

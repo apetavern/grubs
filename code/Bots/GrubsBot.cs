@@ -76,17 +76,67 @@ public partial class GrubsBot : Bot
 		for ( int i = 0; i < count; i++ )
 		{
 			var bot = new GrubsBot();
+			bot.TurnedOffAntenna = true;
 		}
 	}
+
+	List<ModelEntity> Antenna = new List<ModelEntity>();
+
+	public bool TurnedOffAntenna;
+
+	ModelEntity LastAntennaActivated;
 
 	public override void Tick()
 	{
 		if ( (Client.Pawn as Player).IsTurn )
 		{
+			if ( TurnedOffAntenna )
+			{
+				foreach ( var item in MyPlayer.ActiveGrub.Children )
+				{
+					if ( item.Tags.Has( "antenna" ) )
+					{
+						Log.Info( "Found antenna" );
+						(item as ModelEntity).SetMaterialGroup( "active" );
+						LastAntennaActivated = item as ModelEntity;
+					}
+				}
+				TurnedOffAntenna = false;
+			}
+
 
 		}
 		else
 		{
+			if ( !TurnedOffAntenna && LastAntennaActivated != null )
+			{
+				LastAntennaActivated.SetMaterialGroup( "standard" );
+
+				TurnedOffAntenna = true;
+			}
+
+			//Sloppy initialization of antenna models, this script stays around when the game ends but your grubs don't so I gotta re-check and re-init every round.
+			if ( MyPlayer.Grubs.Count > 0 && (Antenna.Count == 0 || Antenna[0] == null || !Antenna[0].IsValid) )
+			{
+				foreach ( var anten in Antenna )
+				{
+					if ( anten != null )
+					{
+						anten.Delete();
+					}
+				}
+
+				Antenna.Clear();
+
+				foreach ( var grub in MyPlayer.Grubs )
+				{
+					var antenna = new ModelEntity( "models/cosmetics/bot_antenna/bot_antenna.vmdl" );
+					Antenna.Add( antenna );
+					antenna.Tags.Add( "antenna" );
+					antenna.SetParent( grub, true );
+				}
+			}
+
 			TargetGrub = null;
 		}
 	}
