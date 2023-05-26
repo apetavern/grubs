@@ -587,7 +587,7 @@
         {
           "Name": "sound_board",
           "KeyboardCode": "tab",
-          "GroupName": "Fun"
+          "GroupName": "fun"
         }
       ]
     },

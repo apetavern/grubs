@@ -5,36 +5,57 @@
 	return;
 }
 
-<root class="@(_isOpen ? "open" : "")">
+<root>
+    <div class="panel @(_isOpen ? "open" : "")">
 	@{
-		foreach (var data in GrubsGame.SoundBoardSounds)
+		foreach (var sound in GrubsGame.Instance.SoundBoardSounds)
 		{
 			<div>
-				<button onclick=@( ()=> {GrubsGame.PlaySoundBoardSound(data.Key); })>@data.Key</button>
+                <label text=@sound.Icon></label>
+				<button onclick=@( ()=> 
+				{
+					if(player.SinceSandboardPlay >= GrubsConfig.SoundboardCooldown )
+						GrubsGame.PlaySoundBoardSound(sound.Title); 
+				})
+				>@sound.Title</button>
 			</div>
 		}
 	}
+    </div>
 </root>
 
 <style>
     SoundBoard {
         position: absolute;
-        background-color: black;
-        width: 300px;
+        display: flex;
+        width: 100%;
         height: 300px;
-        opacity: 0;
+        top: 50%;
+        font-size: 32px;
+        align-items: center;
+        justify-content: center;
 
-        &.open {
-            opacity: 1.0;
-            pointer-events: all;
-        }
+        .panel {
+            opacity: 0;
+            padding: 2%;
+            background-color: rgba(0, 0, 0, 0.301);
+            display: flex;
+            flex-direction: column;
+            gap: 9%;
 
-        .button {
-            width: 50%;
-            height: 50%;
-            background: white;
-            font-size: 32px;
-            border: 2px white;
+            &.open {
+                transition: opacity 100ms ease-in-out;
+                backdrop-filter: blur(60%);
+                opacity: 1.0;
+                pointer-events: all;
+            }  
+
+            .button {
+                width: auto;
+                height: auto;
+                flex-grow: 1;
+                border: 2px white;
+            } 
         }
     }
 </style>

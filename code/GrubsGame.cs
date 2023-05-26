@@ -40,6 +40,9 @@ public sealed partial class GrubsGame : GameManager
 			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
 			PopulatePlayerColors();
 		}
+
+		if ( GrubsConfig.SoundboardCooldown >= 0 )
+			LoadSoundBoard();
 	}
 
 	public override void ClientJoined( IClient client )
@@ -185,11 +188,11 @@ public sealed partial class GrubsGame : GameManager
 	[ConCmd.Server]
 	public static void PlaySoundBoardSound( string soundName )
 	{
-		if ( ConsoleSystem.Caller.Pawn is not Player player )
+		if ( ConsoleSystem.Caller.Pawn is not Player player || string.IsNullOrEmpty( soundName ) )
 			return;
 
 		var soundData = Instance.SoundBoardSounds.Find( x => x.Title == soundName );
-		if ( soundData is null || player.SinceSandboardPlay < GrubsConfig.SoundboardCooldown )
+		if ( player.SinceSandboardPlay < GrubsConfig.SoundboardCooldown || soundData is null || soundData.Sound is null )
 			return;
 
 		Instance.PlaySound( soundData.Sound.ResourcePath );
