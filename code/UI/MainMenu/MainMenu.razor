@@ -1,6 +1,6 @@
 @namespace Grubs.UI
 
-<root class="@(GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu ? "hide" : "")">
+<root>
     <div class="header">
         <div>
             <image src="textures/ui/grub.png" />
@@ -28,7 +28,7 @@
         <div class="terrain-preview">
             <TerrainPreview />
         </div>
-        <TextChat class="@(GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu ? "hide" : "")" />
+        <TextChat />
     </div>
     <WorldScene />
 </root>
@@ -60,7 +60,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(CurrentTab, GamemodeSystem.Instance?.CurrentState.GetHashCode());
+        return HashCode.Combine(CurrentTab);
     }
 }
 
@@ -69,7 +69,6 @@
         height: 100%;
         width: 100%;
         flex-direction: column;
-        transition: all 225ms ease-out;
         pointer-events: all;
 
         image {
@@ -104,10 +103,6 @@
             }
         }
 
-        &.hide {
-            bottom: 100%;
-        }
-
         .right-aligned {
             position: absolute;
             height: 810px;
@@ -133,9 +128,4 @@
             margin-top: auto;
         }
     }
-
-    TerrainPreview {
-        flex-grow: 1;
-    }
-
 </style>

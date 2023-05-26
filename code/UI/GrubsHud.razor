@@ -7,15 +7,20 @@
     @* Global *@
     <Cursor />
 
-    @* In-game UI *@
-    <PlayerList />
-    <TurnIndicator />
-    <Inventory />
-    <WindIndicator />
-    <InputHints />
-
-    @* Main Menu *@
-    <MainMenu />
+    @if (GamemodeSystem.Instance?.CurrentState == Gamemode.State.Playing)
+    {
+        @* In-game UI *@
+        <PlayerList />
+        <TurnIndicator />
+        <Inventory />
+        <WindIndicator />
+        <InputHints />
+    }
+    else
+    {
+        @* Main Menu *@
+        <MainMenu />
+    }
 </root>
 
 @code
@@ -27,6 +32,11 @@
 
         _ = new AimReticle();
         _ = new GrubDamageManager();
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GamemodeSystem.Instance?.CurrentState.GetHashCode());
     }
 }
 
