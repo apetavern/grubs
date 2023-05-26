@@ -43,6 +43,11 @@
 
     private Tab CurrentTab = Tab.PlayMenu;
 
+    public MainMenu()
+    {
+        Cursor.Enabled("MainMenu", true);
+    }
+
     private void SetActiveTab(Tab tab)
     {
         CurrentTab = tab;
@@ -53,9 +58,9 @@
         return CurrentTab == tab ? "selected" : "";
     }
 
-    public override void Tick()
+    public override void OnDeleted()
     {
-        Cursor.Enabled("MainMenu", !HasClass("hide"));
+        Cursor.Enabled("MainMenu", false);
     }
 
     protected override int BuildHash()
