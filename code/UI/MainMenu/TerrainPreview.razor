@@ -1,16 +1,16 @@
-﻿namespace Grubs.UI;
+﻿@namespace Grubs.UI
+@inherits ScenePanel
 
-public class TerrainPreview : ScenePanel
-{
-	public TerrainPreview() : base()
+<root />
+
+@code {
+    public TerrainPreview()
 	{
 		World = Game.SceneWorld;
 	}
 
 	public override void Tick()
 	{
-		base.Tick();
-
 		if ( GamemodeSystem.Instance.Terrain is not Terrain terrain )
 			return;
 
@@ -21,3 +21,9 @@ public class TerrainPreview : ScenePanel
 		Camera.Rotation = Rotation.LookAt( terrain.Rotation.Left );
 	}
 }
+
+<style>
+    TerrainPreview {
+        flex-grow: 1;
+    }
+</style>

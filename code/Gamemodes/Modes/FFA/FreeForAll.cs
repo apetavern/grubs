@@ -37,6 +37,7 @@ public partial class FreeForAll : Gamemode
 	{
 		SpawnPlayers();
 
+		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 		CurrentState = State.Playing;
 	}
 
@@ -46,7 +47,7 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private void SpawnPlayers()
 	{
-		foreach ( var client in Game.Clients )
+		foreach ( var client in Game.Clients.Shuffle().OrderByDescending( x => !x.IsBot ) )
 		{
 			if ( client.Pawn is not Player player )
 				continue;

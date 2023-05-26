@@ -3,7 +3,7 @@
 @namespace Grubs.UI
 
 <root>
-    <TextChat class="@(GamemodeSystem.Instance.CurrentState != Gamemode.State.Playing ? "hide" : "")" />
+    <TextChat />
     <div @ref=Players class="players">
         @foreach (var player in GamemodeSystem.Instance.Players)
         {
@@ -32,7 +32,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GamemodeSystem.Instance.Players.HashCombine(p => p.SteamId), GamemodeSystem.Instance.CurrentState.GetHashCode());
+        return HashCode.Combine(GamemodeSystem.Instance.Players.HashCombine(p => p.SteamId));
     }
 }
 
