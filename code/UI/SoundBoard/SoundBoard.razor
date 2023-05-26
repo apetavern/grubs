@@ -1,0 +1,56 @@
+@namespace Grubs.UI
+
+@if (Game.LocalPawn is not Grubs.Player player)
+{
+	return;
+}
+
+<root class="@(_isOpen ? "open" : "")">
+	@{
+		foreach (var data in GrubsGame.SoundBoardSounds)
+		{
+			<div>
+				<button onclick=@( ()=> {GrubsGame.PlaySoundBoardSound(data.Key); })>@data.Key</button>
+			</div>
+		}
+	}
+</root>
+
+<style>
+    SoundBoard {
+        position: absolute;
+        background-color: black;
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+
+        &.open {
+            opacity: 1.0;
+            pointer-events: all;
+        }
+
+        .button {
+            width: 50%;
+            height: 50%;
+            background: white;
+            font-size: 32px;
+            border: 2px white;
+        }
+    }
+</style>
+
+@code {
+
+	private bool _isOpen;
+
+	public override void Tick()
+	{
+		_isOpen = Input.Down(Grubs.InputAction.SoundBoard);
+        Cursor.Enabled("SoundBoard", _isOpen);
+	}
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Time.Now);
+    }
+}

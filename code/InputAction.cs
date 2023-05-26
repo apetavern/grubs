@@ -13,4 +13,5 @@ public static class InputAction
 	public const string AimDown = "backward";
 	public const string Jump = "jump";
 	public const string Backflip = "backflip";
+	public const string SoundBoard = "sound_board";
 }

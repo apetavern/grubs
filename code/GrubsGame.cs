@@ -143,10 +143,23 @@ public sealed partial class GrubsGame : GameManager
 	{
 		ConsoleSystem.SetValue( key, value );
 
-		if ( key == "terrain_environment_type" 
+		if ( key == "terrain_environment_type"
 			&& GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated )
 			Instance.Terrain.Refresh();
 		else
 			Instance.Terrain.Reset();
+	}
+
+	[ConCmd.Server]
+	public static void PlaySoundBoardSound( string path )
+	{
+		if ( ConsoleSystem.Caller.Pawn is not Player player )
+			return;
+
+		if ( !SoundBoardSounds.TryGetValue( key, out var sound ) || player.SinceSandboardPlay < GrubsConfig.SoundboardCooldown )
+			return;
+
+		Instance.PlaySound( sound );
+		player.SinceSandboardPlay = 0;
 	}
 }
