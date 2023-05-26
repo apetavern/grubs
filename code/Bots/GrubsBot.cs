@@ -20,7 +20,7 @@ public partial class GrubsBot : Bot
 		{
 			ClearUnusableWeapons();
 
-			if ( !BrainEnt.IsValid || BrainEnt is null )
+			if ( BrainEnt is null || !BrainEnt.IsValid )
 			{
 				BrainEnt = new BotBrain();
 				BrainEnt.Owner = MyPlayer;
@@ -32,6 +32,11 @@ public partial class GrubsBot : Bot
 		}
 		else
 		{
+			if ( BrainEnt is null || !BrainEnt.IsValid )
+			{
+				BrainEnt = new BotBrain();
+				BrainEnt.Owner = MyPlayer;
+			}
 			TargetGrub = null;
 			BrainEnt.TargetGrub = null;
 			BrainEnt.CurrentState = 0;
@@ -71,12 +76,6 @@ public partial class GrubsBot : Bot
 		for ( int i = 0; i < count; i++ )
 		{
 			var bot = new GrubsBot();
-
-			var brains = new BotBrain();
-
-			brains.Owner = bot.MyPlayer;
-
-			bot.BrainEnt = brains;
 		}
 	}
 
