@@ -62,7 +62,7 @@ public partial class RetreatState : BaseState
 			Input.SetAction( "jump", false );
 		}
 
-		if ( Game.Random.Float() > 0.95f )
+		if ( Game.Random.Float() > 0.995f )
 		{
 			MyPlayer.MoveInput = -MyPlayer.MoveInput;
 			Input.SetAction( "backflip", true );
