@@ -10,21 +10,16 @@
         <div class="section">
             <label class="title">Colors</label>
             <div style="flex-wrap: wrap;">
-                @{
-                    var claimedColors = GrubsGame.Instance.ClaimedPlayerColors;
-                    var localPlayerColorId = claimedColors[Game.LocalClient.SteamId];
-                }
-
-                @foreach (var kvp in Player.ColorPresets)
+                @foreach (var pair in GrubsGame.Instance.PlayerColors)
                 {
-                    var colorId = kvp.Key;
-                    var color = kvp.Value;
+                    var color = pair.Key;
+                    var isTaken = pair.Value && player.Color != color;
 
-                    var isSelected = localPlayerColorId == colorId;
-                    var alreadyClaimed = claimedColors.Values.Contains(colorId) && !isSelected && colorId != Player.ColorId.Undecided;
-
-                    <button class="color @(isSelected ? "selected" : "")"
-                        style="background-color: @color.Hex;" @onclick=@(() => { Player.SelectColor(colorId); }) />
+                    <button
+                    class="color @(player.Color == color ? "selected" : "") @(isTaken ? "disabled" : "") "
+                    style="background-color: @color.Hex;" 
+                    @onclick=@(() => { Player.SelectColor(color.RawInt); }) 
+                    />
                 }
             </div>
         </div>
@@ -36,8 +31,11 @@
                     var index = i;
                     <div style="width: 50%; flex-direction: column; font-size: 30px; margin-bottom: 5px;">
                         <label>@($"Grub #{i + 1}")</label>
-                        <TextEntry text=@player.SelectedGrubNames[i] MaxLength=@(10) CharacterRegex="^[a-zA-Z0-9 ]+$"
-                            OnTextEdited=@((string text) => { player.SelectedGrubNames[index] = text;
+                        <TextEntry 
+                        text=@player.SelectedGrubNames[i] 
+                        MaxLength=@(10) 
+                        CharacterRegex="^[a-zA-Z0-9 ]+$"
+                        OnTextEdited=@((string text) => { player.SelectedGrubNames[index] = text;
                         player.SerializeGrubNames(); }) />
                     </div>
                 }
@@ -65,7 +63,7 @@
     {
         var player = Game.LocalPawn as Player;
         return HashCode.Combine(player?.Color.GetHashCode(), player?.SelectedCosmeticIndex,
-        player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()), Game.Clients.HashCombine(c => HashCode.Combine((c.Pawn as Player)?.Color)));
+        player?.SelectedGrubNames?.HashCombine(n => n.GetHashCode()), GrubsGame.Instance.PlayerColors.GetHashCode());
     }
 }
 

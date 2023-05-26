@@ -24,7 +24,7 @@ public sealed partial class GrubsGame : GameManager
 	/// The colors that are already in use by other players. 
 	/// </summary>
 	/// <returns></returns>
-	[Net] public IDictionary<long, Player.ColorId> ClaimedPlayerColors { get; private set; }
+	[Net] public IDictionary<Color, bool> PlayerColors { get; private set; }
 
 	public GrubsGame()
 	{
@@ -36,6 +36,7 @@ public sealed partial class GrubsGame : GameManager
 		{
 			PrecacheFiles();
 			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
+			GeneratePlayerColors();
 		}
 	}
 
@@ -50,7 +51,8 @@ public sealed partial class GrubsGame : GameManager
 
 		FetchInteractionsClient( To.Single( client ) );
 
-		ClaimedPlayerColors[client.SteamId] = Player.ColorId.Undecided;
+		if ( client.Pawn is not Player player )
+			return;
 	}
 
 	[ConCmd.Server]
@@ -86,8 +88,10 @@ public sealed partial class GrubsGame : GameManager
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
 
-		if ( ClaimedPlayerColors.ContainsKey( client.SteamId ) )
-			ClaimedPlayerColors.Remove( client.SteamId );
+		if ( client.Pawn is not Player player )
+			return;
+
+		PlayerColors[player.Color] = false;
 	}
 
 	public override void Simulate( IClient cl )
@@ -133,6 +137,21 @@ public sealed partial class GrubsGame : GameManager
 		}
 	}
 
+	private void GeneratePlayerColors()
+	{
+		PlayerColors.Add( Color.FromBytes( 232, 59, 105 ), false );     //Red
+		PlayerColors.Add( Color.FromBytes( 33, 146, 255 ), false );     //Blue
+		PlayerColors.Add( Color.FromBytes( 56, 229, 77 ), false );      //Green 
+		PlayerColors.Add( Color.FromBytes( 56, 118, 29 ), false );      //ForestGreen
+		PlayerColors.Add( Color.FromBytes( 248, 249, 136 ), false );    //Yellow
+		PlayerColors.Add( Color.FromBytes( 251, 172, 204 ), false );    //Pink
+		PlayerColors.Add( Color.FromBytes( 103, 234, 202 ), false );    //Cyan
+		PlayerColors.Add( Color.FromBytes( 255, 174, 109 ), false );    //Orange
+		PlayerColors.Add( Color.FromBytes( 173, 162, 255 ), false );    //Purple
+		PlayerColors.Add( Color.FromBytes( 118, 103, 87 ), false );     //PastelBrown
+		PlayerColors.Add( Color.FromBytes( 240, 236, 211 ), false );    //Eggshell
+	}
+
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
@@ -154,7 +173,7 @@ public sealed partial class GrubsGame : GameManager
 	{
 		ConsoleSystem.SetValue( key, value );
 
-		if ( key == "terrain_environment_type" 
+		if ( key == "terrain_environment_type"
 			&& GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated )
 			Instance.Terrain.Refresh();
 		else

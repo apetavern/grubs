@@ -30,46 +30,16 @@ public partial class Player
 	public int SelectedCosmeticIndex { get; set; }
 	public bool HasCosmeticSelected => SelectedCosmeticIndex != -1;
 
-	public enum ColorId
-	{
-		Undecided,
-		Red,
-		Blue,
-		Green,
-		ForestGreen,
-		Yellow,
-		Pink,
-		Cyan,
-		Orange,
-		Purple,
-		PastelBrown,
-		Eggshell
-	}
-
-	public static readonly Dictionary<ColorId, Color> ColorPresets = new()
-	{
-		{ColorId.Undecided, Color.White},
-		{ColorId.Red, Color.FromBytes(232, 59, 105)},
-		{ColorId.Blue, Color.FromBytes(33, 146, 255)},
-		{ColorId.Green , Color.FromBytes(56, 229, 77)},
-		{ColorId.ForestGreen, Color.FromBytes(56, 118, 29)},
-		{ColorId.Yellow, Color.FromBytes(248, 249, 136)},
-		{ColorId.Pink, Color.FromBytes(251, 172, 204)},
-		{ColorId.Cyan, Color.FromBytes(103, 234, 202)},
-		{ColorId.Orange, Color.FromBytes(255, 174, 109)},
-		{ColorId.Purple, Color.FromBytes(173, 162, 255)},
-		{ColorId.PastelBrown, Color.FromBytes(118, 103, 87)},
-		{ColorId.Eggshell, Color.FromBytes(240, 236, 211)}
-	};
-
 	/// <summary>
 	/// The player's active color networked to everyone.
 	/// </summary>
 	[Net]
-	public Color Color { get; set; } = ColorPresets.GetValueOrDefault( ColorId.Undecided );
+	public Color Color { get; set; } = DefaultColor;
+
+	public static Color DefaultColor = Color.White;
 
 	[ConCmd.Server]
-	public static void SelectColor( ColorId colorId )
+	public static void SelectColor( uint raw )
 	{
 		if ( GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu )
 			return;
@@ -78,12 +48,13 @@ public partial class Player
 		if ( caller.Pawn is not Player player )
 			return;
 
-		// Someone is already using this color, but it's okay for ColorId.Undecided (White).
-		if ( GrubsGame.Instance.ClaimedPlayerColors.Values.Contains( colorId ) && colorId != ColorId.Undecided )
+		var desiredColor = new Color( raw );
+		if ( GrubsGame.Instance.PlayerColors[desiredColor] )
 			return;
 
-		player.Color = ColorPresets.GetValueOrDefault( colorId );
-		GrubsGame.Instance.ClaimedPlayerColors[caller.SteamId] = colorId;
+		GrubsGame.Instance.PlayerColors[player.Color] = false;
+		GrubsGame.Instance.PlayerColors[desiredColor] = true;
+		player.Color = desiredColor;
 	}
 
 	public static readonly List<string> GrubNamePresets = new()
