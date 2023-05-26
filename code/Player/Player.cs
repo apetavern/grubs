@@ -60,7 +60,6 @@ public partial class Player : Entity
 	{
 		if ( IsLocalPawn )
 		{
-			SelectedColor = Random.Shared.FromList( ColorPresets );
 			SelectedCosmeticIndex = -1;
 			PopulateGrubNames();
 		}
@@ -98,7 +97,6 @@ public partial class Player : Entity
 		Inventory.Clear();
 		Inventory.GiveDefaultLoadout();
 
-		Color = !Client.IsBot ? SelectedColor : Random.Shared.FromList( ColorPresets );
 		Grubs.Clear();
 		CreateGrubs();
 	}
