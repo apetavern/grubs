@@ -168,11 +168,4 @@ public partial class Player : Entity
 	{
 		return string.IsNullOrWhiteSpace( name ) ? Random.Shared.FromList( GrubNamePresets ) : name.Trim();
 	}
-
-	[GrubsEvent.Game.Start]
-	void OnGameStart()
-	{
-		if ( Color == DefaultColor )
-			Color = GetRandomUnusedColor();
-	}
 }

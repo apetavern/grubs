@@ -58,8 +58,11 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId), GetButtonText(), IsButtonEnabled(),
-		Game.Clients.HashCombine(c => (c.Pawn as Player).Color.RawInt));
+        return HashCode.Combine(
+            GetButtonText(), 
+            IsButtonEnabled(),
+            Game.Clients.HashCombine(c => HashCode.Combine((c.Pawn as Player)?.Color.RawInt, c.SteamId))
+        );
     }
 }
 

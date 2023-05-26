@@ -48,20 +48,20 @@ public partial class Player
 		if ( caller.Pawn is not Player player )
 			return;
 
-		var desiredColor = new Color( raw );
-		if ( GrubsGame.Instance.PlayerColors.ContainsKey( desiredColor ) && GrubsGame.Instance.PlayerColors[desiredColor] )
+		var selectedColor = new Color( raw );
+		if ( !GrubsGame.Instance.PlayerColors.ContainsKey( selectedColor ) || GrubsGame.Instance.PlayerColors[selectedColor] )
 			return;
 
 		if ( player.Color != DefaultColor )
 			GrubsGame.Instance.PlayerColors[player.Color] = false;
 
-		GrubsGame.Instance.PlayerColors[desiredColor] = true;
-		player.Color = desiredColor;
+		GrubsGame.Instance.PlayerColors[selectedColor] = true;
+		player.Color = selectedColor;
 	}
 
 	public static Color GetRandomUnusedColor()
 	{
-		var colors = GrubsGame.Instance.PlayerColors.Where( x => x.Value != true ).ToArray();
+		var colors = GrubsGame.Instance.PlayerColors.Where( x => !x.Value ).ToArray();
 		return colors.Length > 0 ? Random.Shared.FromArray( colors ).Key : Random.Shared.FromArray( GrubsGame.Instance.PlayerColors.Keys.ToArray() );
 	}
 
@@ -142,5 +142,12 @@ public partial class Player
 	{
 		GrubNames = System.Text.Json.JsonSerializer.Serialize( SelectedGrubNames );
 		FileSystem.Data.WriteAllText( "GrubNames.txt", GrubNames );
+	}
+
+	[GrubsEvent.Game.Start]
+	void OnGameStart()
+	{
+		if ( Color == DefaultColor )
+			Color = GetRandomUnusedColor();
 	}
 }
