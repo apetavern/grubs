@@ -65,7 +65,7 @@ public partial class GrubsBot : Bot
 		}
 	}
 
-	[ConCmd.Server( "grubs_bot_add" )]
+	[ConCmd.Server( "gr_bot_add" )]
 	public static void CreateGrubsBot( int count = 1 )
 	{
 		for ( int i = 0; i < count; i++ )
