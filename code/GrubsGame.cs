@@ -36,7 +36,7 @@ public sealed partial class GrubsGame : GameManager
 		{
 			PrecacheFiles();
 			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
-			GeneratePlayerColors();
+			PopulatePlayerColors();
 		}
 	}
 
@@ -50,9 +50,6 @@ public sealed partial class GrubsGame : GameManager
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has joined" );
 
 		FetchInteractionsClient( To.Single( client ) );
-
-		if ( client.Pawn is not Player player )
-			return;
 	}
 
 	[ConCmd.Server]
@@ -91,7 +88,8 @@ public sealed partial class GrubsGame : GameManager
 		if ( client.Pawn is not Player player )
 			return;
 
-		PlayerColors[player.Color] = false;
+		if ( player.Color != Player.DefaultColor )
+			PlayerColors[player.Color] = false;
 	}
 
 	public override void Simulate( IClient cl )
@@ -137,7 +135,7 @@ public sealed partial class GrubsGame : GameManager
 		}
 	}
 
-	private void GeneratePlayerColors()
+	private void PopulatePlayerColors()
 	{
 		PlayerColors.Add( Color.FromBytes( 232, 59, 105 ), false );     //Red
 		PlayerColors.Add( Color.FromBytes( 33, 146, 255 ), false );     //Blue

@@ -97,13 +97,6 @@ public partial class Player : Entity
 		Inventory.Clear();
 		Inventory.GiveDefaultLoadout();
 
-		if ( Color == DefaultColor )
-		{
-			var colors = GrubsGame.Instance.PlayerColors.Where( x => x.Value != true ).ToArray();
-			var randomUnTakenColor = colors.Length > 0 ? Random.Shared.FromArray( colors ).Key : Random.Shared.FromArray( GrubsGame.Instance.PlayerColors.Keys.ToArray() );
-			Color = randomUnTakenColor;
-		}
-
 		Grubs.Clear();
 		CreateGrubs();
 	}
@@ -174,5 +167,12 @@ public partial class Player : Entity
 	private string ParseGrubName( string name )
 	{
 		return string.IsNullOrWhiteSpace( name ) ? Random.Shared.FromList( GrubNamePresets ) : name.Trim();
+	}
+
+	[GrubsEvent.Game.Start]
+	void OnGameStart()
+	{
+		if ( Color == DefaultColor )
+			Color = GetRandomUnusedColor();
 	}
 }

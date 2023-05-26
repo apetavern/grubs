@@ -49,7 +49,7 @@ public partial class Player
 			return;
 
 		var desiredColor = new Color( raw );
-		if ( GrubsGame.Instance.PlayerColors[desiredColor] )
+		if ( GrubsGame.Instance.PlayerColors.ContainsKey( desiredColor ) )
 			return;
 
 		if ( player.Color != DefaultColor )
@@ -57,6 +57,12 @@ public partial class Player
 
 		GrubsGame.Instance.PlayerColors[desiredColor] = true;
 		player.Color = desiredColor;
+	}
+
+	public static Color GetRandomUnusedColor()
+	{
+		var colors = GrubsGame.Instance.PlayerColors.Where( x => x.Value != true ).ToArray();
+		return colors.Length > 0 ? Random.Shared.FromArray( colors ).Key : Random.Shared.FromArray( GrubsGame.Instance.PlayerColors.Keys.ToArray() );
 	}
 
 	public static readonly List<string> GrubNamePresets = new()
