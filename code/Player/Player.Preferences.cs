@@ -30,33 +30,40 @@ public partial class Player
 	public int SelectedCosmeticIndex { get; set; }
 	public bool HasCosmeticSelected => SelectedCosmeticIndex != -1;
 
-	public static readonly List<Color> ColorPresets = new()
-	{
-		Color.FromBytes(232, 59, 105),  // Red
-		Color.FromBytes(33, 146, 255),  // Blue
-		Color.FromBytes(56, 229, 77),   // Green
-		Color.FromBytes(56, 118, 29),	// Forest Green
-		Color.FromBytes(248, 249, 136), // Yellow
-		Color.FromBytes(251, 172, 204), // Pink
-		Color.FromBytes(103, 234, 202), // Cyan
-		Color.FromBytes(255, 174, 109), // Orange
-		Color.FromBytes(173, 162, 255), // Purple
-		Color.FromBytes(175, 99, 59),	// Brown
-		Color.FromBytes(118, 103, 87),	// Pastel Brown
-		Color.FromBytes(240, 236, 211)	// Eggshell
-	};
-
 	/// <summary>
 	/// The player's active color networked to everyone.
 	/// </summary>
 	[Net]
-	public Color Color { get; private set; } = Color.White;
+	public Color Color { get; set; } = DefaultColor;
 
-	/// <summary>
-	/// The player's selected color during customization, only networked to the server.
-	/// </summary>
-	[ConVar.ClientData]
-	public Color SelectedColor { get; set; }
+	public static Color DefaultColor = Color.White;
+
+	[ConCmd.Server]
+	public static void SelectColor( uint raw )
+	{
+		if ( GamemodeSystem.Instance.CurrentState != Gamemode.State.MainMenu )
+			return;
+
+		var caller = ConsoleSystem.Caller;
+		if ( caller.Pawn is not Player player )
+			return;
+
+		var selectedColor = new Color( raw );
+		if ( !GrubsGame.Instance.PlayerColors.ContainsKey( selectedColor ) || GrubsGame.Instance.PlayerColors[selectedColor] )
+			return;
+
+		if ( player.Color != DefaultColor )
+			GrubsGame.Instance.PlayerColors[player.Color] = false;
+
+		GrubsGame.Instance.PlayerColors[selectedColor] = true;
+		player.Color = selectedColor;
+	}
+
+	public static Color GetRandomUnusedColor()
+	{
+		var colors = GrubsGame.Instance.PlayerColors.Where( x => !x.Value ).ToArray();
+		return colors.Length > 0 ? Random.Shared.FromArray( colors ).Key : Random.Shared.FromArray( GrubsGame.Instance.PlayerColors.Keys.ToArray() );
+	}
 
 	public static readonly List<string> GrubNamePresets = new()
 	{
@@ -135,5 +142,12 @@ public partial class Player
 	{
 		GrubNames = System.Text.Json.JsonSerializer.Serialize( SelectedGrubNames );
 		FileSystem.Data.WriteAllText( "GrubNames.txt", GrubNames );
+	}
+
+	[GrubsEvent.Game.Start]
+	void OnGameStart()
+	{
+		if ( Color == DefaultColor )
+			Color = GetRandomUnusedColor();
 	}
 }
