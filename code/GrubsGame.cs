@@ -26,6 +26,8 @@ public sealed partial class GrubsGame : GameManager
 	/// </summary>
 	[Net] public IDictionary<Color, bool> PlayerColors { get; private set; }
 
+	public List<SoundBoardSound> SoundBoardSounds { get; private set; }
+
 	public GrubsGame()
 	{
 		if ( Game.IsClient )
@@ -147,6 +149,11 @@ public sealed partial class GrubsGame : GameManager
 		PlayerColors.Add( Color.FromBytes( 240, 236, 211 ), false ); // Eggshell
 	}
 
+	private void LoadSoundBoard()
+	{
+		SoundBoardSounds = ResourceLibrary.GetAll<SoundBoardSound>().ToList();
+	}
+
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
@@ -176,15 +183,16 @@ public sealed partial class GrubsGame : GameManager
 	}
 
 	[ConCmd.Server]
-	public static void PlaySoundBoardSound( string path )
+	public static void PlaySoundBoardSound( string soundName )
 	{
 		if ( ConsoleSystem.Caller.Pawn is not Player player )
 			return;
 
-		if ( !SoundBoardSounds.TryGetValue( key, out var sound ) || player.SinceSandboardPlay < GrubsConfig.SoundboardCooldown )
+		var soundData = Instance.SoundBoardSounds.Find( x => x.Title == soundName );
+		if ( soundData is null || player.SinceSandboardPlay < GrubsConfig.SoundboardCooldown )
 			return;
 
-		Instance.PlaySound( sound );
+		Instance.PlaySound( soundData.Sound.ResourcePath );
 		player.SinceSandboardPlay = 0;
 	}
 }
