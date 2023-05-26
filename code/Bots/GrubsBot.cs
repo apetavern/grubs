@@ -18,31 +18,15 @@ public partial class GrubsBot : Bot
 		base.BuildInput();
 		if ( MyPlayer.IsTurn )
 		{
-			if ( BrainEnt.MyPlayer != MyPlayer )
+			ClearUnusableWeapons();
+
+			if ( !BrainEnt.IsValid || BrainEnt is null )
 			{
-				BrainEnt.MyPlayer = MyPlayer;
+				BrainEnt = new BotBrain();
+				BrainEnt.Owner = MyPlayer;
 			}
+
 			TargetGrub = BrainEnt.TargetGrub;
-
-			if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "shot" ) ).Any() )
-			{
-				MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "shot" ) ).First() );
-			}
-
-			if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "para" ) ).Any() )
-			{
-				MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "para" ) ).First() );
-			}
-
-			if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "jetpack" ) ).Any() )
-			{
-				MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "jetpack" ) ).First() );
-			}
-
-			if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "torch" ) ).Any() )
-			{
-				MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "torch" ) ).First() );
-			}
 
 			BrainEnt.SimulateCurrentState();
 		}
@@ -55,6 +39,29 @@ public partial class GrubsBot : Bot
 			Input.SetAction( "fire", false );
 			Input.SetAction( "jump", false );
 			Input.SetAction( "backflip", false );
+		}
+	}
+
+	public void ClearUnusableWeapons()
+	{
+		if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "shot" ) ).Any() )
+		{
+			MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "shot" ) ).First() );
+		}
+
+		if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "para" ) ).Any() )
+		{
+			MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "para" ) ).First() );
+		}
+
+		if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "jetpack" ) ).Any() )
+		{
+			MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "jetpack" ) ).First() );
+		}
+
+		if ( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "torch" ) ).Any() )
+		{
+			MyPlayer.Inventory.Weapons.Remove( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "torch" ) ).First() );
 		}
 	}
 
