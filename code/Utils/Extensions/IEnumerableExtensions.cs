@@ -23,4 +23,9 @@ public static class ListExtensions
 				list.RemoveAt( i );
 		}
 	}
+
+	public static IEnumerable<T> Shuffle<T>( this IEnumerable<T> list )
+	{
+		return list.OrderBy( x => Guid.NewGuid() );
+	}
 }
