@@ -1,0 +1,39 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/blendable.shader_c"
+
+	F_MULTIBLEND 1 // 2 Layers
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material A ----
+	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusionA "textures/environment/rocks_a_ao.png"
+	TextureBlendMaskA "materials/default/default_blend.tga"
+	TextureColorA "textures/environment/rocks_a_color.png"
+	TextureMetalnessA "materials/default/default_metal.tga"
+	TextureNormalA "textures/environment/rocks_a_normal.png"
+	TextureRoughnessA "textures/environment/rocks_a_rough.png"
+	TextureTintMaskA "materials/default/default.tga"
+
+	//---- Material B ----
+	g_flBlendSoftnessB "0.500"
+	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
+	g_vTexCoordScale2 "[2.000 2.000]"
+	TextureAmbientOcclusionB "textures/environment/sand_a_ao.png"
+	TextureBlendMaskB "materials/default/default_blend.tga"
+	TextureColorB "textures/environment/sand_a_color.png"
+	TextureMetalnessB "materials/default/default_metal.tga"
+	TextureNormalB "textures/environment/sand_a_normal.png"
+	TextureRoughnessB "textures/environment/sand_a_rough.png"
+	TextureTintMaskB "materials/default/default.tga"
+
+	SystemAttributes
+	{
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}

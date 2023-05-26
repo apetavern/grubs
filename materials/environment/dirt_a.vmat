@@ -32,7 +32,7 @@ Layer0
 	Rough "textures/environment/dirt_a_rough.png"
 
 	//---- Tint ----
-	g_bTintDirectionToggle "1"
-	g_bTintGradientEnabled "1"
-	g_vTint_Colour "[0.823529 0.670588 0.584314 1.000000]"
+	g_bGradientTint "1"
+	g_bTintDirectionToggle "0"
+	g_vTint_Colour "[0.000000 0.000000 0.000000 1.000000]"
 }
