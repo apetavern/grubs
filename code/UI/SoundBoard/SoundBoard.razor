@@ -5,73 +5,36 @@
 	return;
 }
 
-<root>
-    <div class="panel @(_isOpen ? "open" : "")">
+<root class="@(_isOpen ? "open" : "")">
+    <label class="sound-title" text=@_hoveredSound?.Title />
 	@{
-		foreach (var sound in GrubsGame.Instance.SoundBoardSounds)
+        var canPlaySound = player.SinceSandboardPlay >= GrubsConfig.SoundboardCooldown;
+
+        <div class="items">
+		@foreach (var sound in GrubsGame.Instance.SoundBoardSounds)
 		{
-			<div>
-               
-				<button onclick=@( ()=> 
+				<SoundBoardButton class="@(!canPlaySound ? "disabled" : "")"
+                Sound=@sound
+                @onmouseover=@(() => _hoveredSound = sound)
+                @onmouseout=@(() => _hoveredSound = null)
+                onclick=@( ()=> 
 				{
-					if(player.SinceSandboardPlay >= GrubsConfig.SoundboardCooldown )
+					if( canPlaySound )
 						GrubsGame.PlaySoundBoardSound(sound.Title); 
-				})
-				> <label text=@sound.Icon></label> @sound.Title</button>
-			</div>
+				})></SoundBoardButton>
 		}
+        </div>
 	}
-    </div>
 </root>
-
-<style>
-    SoundBoard {
-        position: absolute;
-        display: flex;
-        width: 100%;
-        height: 300px;
-        top: 50%;
-        font-size: 32px;
-        align-items: center;
-        justify-content: center;
-
-        .panel {
-            opacity: 0;
-            padding: 2%;
-            background-color: rgba(0, 0, 0, 0.301);
-            display: flex;
-            flex-direction: column;
-            gap: 9%;
-
-            &.open {
-                transition: opacity 100ms ease-in-out;
-                backdrop-filter: blur(60%);
-                opacity: 1.0;
-                pointer-events: all;
-            }  
-
-            .button {
-                width: auto;
-                height: auto;
-                flex-grow: 1;
-                border: 2px white;
-
-                .label {
-                    margin-right: auto;
-                    margin-left: 0;
-                }
-            } 
-        }
-    }
-</style>
 
 @code {
 
 	private bool _isOpen;
+    private SoundBoardSound _hoveredSound;
 
 	public override void Tick()
 	{
-		_isOpen = Input.Down(Grubs.InputAction.SoundBoard);
+		_isOpen = Input.Down(Grubs.InputAction.SoundBoard) && !Inventory.IsOpen;
         Cursor.Enabled("SoundBoard", _isOpen);
 	}
 
@@ -80,3 +43,36 @@
         return HashCode.Combine(Time.Now);
     }
 }
+
+<style>
+    SoundBoard {
+        position: absolute;
+        bottom: 225px;
+        width: 375px;
+        transition: all 150ms ease-out;
+        opacity: 0;
+        right: -200px;
+        flex-direction: column;
+        pointer-events: none;
+
+        &.open {
+            right: 100px;
+            opacity: 1;
+            sound-in: ui_inventory_open;
+            pointer-events: all;
+        }
+
+        .sound-title {
+            font-family: Londrina Solid;
+            font-size: 40px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .items {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+    }
+</style>

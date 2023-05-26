@@ -1,0 +1,41 @@
+@namespace Grubs.UI
+
+<root>
+	<label>@Sound.Icon</label>
+</root>
+
+@code {
+    public SoundBoardSound Sound {get; set;}
+}
+
+<style>
+    SoundBoardButton {
+        width: 65px;
+        height: 65px;
+        background-color: rgba(235, 235, 235, 0.24);
+        border-radius: 4px;
+        transition: all 0.1s ease-out;
+        font-size: 20px;
+        justify-content: center;
+        align-items: center;
+
+        .label {
+            font-size: 30px;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        &.disabled {
+            transform: scale(1);
+            opacity: 0.6;
+        }
+    
+        &:hover {
+            transform: scale(1.25);
+        
+            &:not(.disabled) {
+                sound-in: ui_button_hover;
+            }
+        }
+        
+    }
+</style>

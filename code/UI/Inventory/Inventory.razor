@@ -5,7 +5,7 @@
     return;
 }
 
-<root class="@( _isOpen ? "open" : "" )">
+<root class="@( IsOpen ? "open" : "" )">
     <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
         @{
@@ -25,20 +25,20 @@
 </root>
 
 @code {
-    private bool _isOpen;
+    public static bool IsOpen {get; private set;}
     private Weapon _hoveredWeapon;
     private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && player.IsTurn && Input.Down(InputAction.Inventory);
     private readonly int _totalAmmo = (Game.LocalPawn as Grubs.Player).Inventory.Weapons.Sum(x => x.Ammo);
 
     public override void Tick()
     {
-        _isOpen = RequestOpen();
-        Cursor.Enabled("Inventory", _isOpen);
+        IsOpen = RequestOpen();
+        Cursor.Enabled("Inventory", IsOpen);
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(_isOpen, _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
+        return HashCode.Combine(IsOpen, _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
     }
 }
 
