@@ -13,7 +13,7 @@
         "Keys": {
           "ExplosionReaction": {
             "Type": "ExplosiveReaction",
-            "Value": "\u0022Explosion\u0022"
+            "Value": "\u0022Incendiary\u0022"
           },
           "ExplosionSound": {
             "Type": "String",
@@ -42,7 +42,9 @@
           "_name": {
             "Value": "\u0022Parachute\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
