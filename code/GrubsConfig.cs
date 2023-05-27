@@ -112,7 +112,7 @@ public static class GrubsConfig
 	public static TerrainEnvironmentType WorldTerrainEnvironmentType { get; set; } = TerrainEnvironmentType.Sand;
 
 	[ConVar.Replicated( "soundboard_cooldown", Help = "How often (in seconds) players can annoy eachother with sounds." )]
-	public static float SoundboardCooldown { get; set; } = 3;
+	public static float SoundboardCooldown { get; set; } = 5;
 
 	public enum TerrainType
 	{

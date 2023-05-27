@@ -461,6 +461,18 @@
         "DefaultValue": "0",
         "Description": "The type of environment to be used for the terrain.",
         "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "soundboard_cooldown",
+        "DisplayName": "Soundboard Cooldown",
+        "DefaultValue": "5",
+        "Description": "How often (in seconds) players play sounds from the soundboard. Set to a negative number to disable the soundboard entirely.",
+        "Group": "Soundboard",
+        "Minimum": -1,
+        "Maximum": 120,
+        "Step": 1
       }
     ],
     "CsProjName": "",

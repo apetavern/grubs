@@ -188,6 +188,9 @@ public sealed partial class GrubsGame : GameManager
 	[ConCmd.Server]
 	public static void PlaySoundboardSound( string soundName )
 	{
+		if ( GrubsConfig.SoundboardCooldown < 0 )
+			return;
+
 		if ( ConsoleSystem.Caller.Pawn is not Player player || string.IsNullOrEmpty( soundName ) )
 			return;
 
