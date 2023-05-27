@@ -5,6 +5,12 @@ namespace Grubs.Bots;
 
 public partial class GrubsBot : Bot
 {
+	public GrubsBot()
+	{
+		SetDefaultNames( BotNames );
+		MyPlayer.Color = new Color( Game.Random.Float(), Game.Random.Float(), Game.Random.Float(), 1f );
+	}
+
 	Grub TargetGrub { get; set; }
 
 	Grub ActiveGrub => (Client.Pawn as Player).ActiveGrub;
@@ -12,6 +18,37 @@ public partial class GrubsBot : Bot
 	Player MyPlayer => Client.Pawn as Player;
 
 	BotBrain BrainEnt;
+
+
+	List<string> BotNames = new List<string>
+		{
+		"[Bot] El Jabroga",
+		"[Bot] Clyde",
+		"[Bot] Mike Oxlong",
+		"[Bot] Null Reference",
+		"[Bot] Chip Danger",
+		"[Bot] RealBigSnorris",
+		"[Bot] BigJohnBorris",
+		"[Bot] Melty Chihuahua",
+		"[Bot] Blitz Command",
+		"[Bot] Scorch Shot",
+		"[Bot] Toxic Viper",
+		"[Bot] Snipe Hawk",
+		"[Bot] Chaos Fury",
+		"[Bot] Blast Engine",
+		"[Bot] Meteor Blitz",
+		"[Bot] Annihilate X",
+		"[Bot] Rapid Marksman",
+		"[Bot] Shadow Stalker",
+		"[Bot] Doombringer",
+		"[Bot] Avalanche Strike",
+		"[Bot] Wreck Bot",
+		"[Bot] Venomous Fang",
+		"[Bot] Destroyer",
+		"[Bot] Sizzle Blast",
+		"[Bot] Blade Master",
+		"[Bot] Pyro",
+		};
 
 	public override void BuildInput()
 	{
