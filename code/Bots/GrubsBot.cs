@@ -96,7 +96,6 @@ public partial class GrubsBot : Bot
 				{
 					if ( item.Tags.Has( "antenna" ) )
 					{
-						Log.Info( "Found antenna" );
 						(item as ModelEntity).SetMaterialGroup( "active" );
 						LastAntennaActivated = item as ModelEntity;
 					}
