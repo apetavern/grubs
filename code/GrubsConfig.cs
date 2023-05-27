@@ -117,6 +117,12 @@ public static class GrubsConfig
 	[ConVar.Replicated( "soundboard_enabled" )]
 	public static bool SoundboardEnabled { get; set; } = true;
 
+	/// <summary>
+	/// Clientside soundboard volume.
+	/// </summary>
+	[ConVar.Client( "soundboard_volume" )]
+	public static float SoundboardVolume { get; set; } = 1;
+
 	public enum TerrainType
 	{
 		Generated = 0,

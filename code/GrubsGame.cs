@@ -26,7 +26,7 @@ public sealed partial class GrubsGame : GameManager
 	/// </summary>
 	[Net] public IDictionary<Color, bool> PlayerColors { get; private set; }
 
-	public List<SoundboardSound> SoundboardSounds { get; private set; }
+	public static List<SoundboardSound> SoundboardSounds { get; private set; } = ResourceLibrary.GetAll<SoundboardSound>().ToList();
 
 	public GrubsGame()
 	{
@@ -40,9 +40,6 @@ public sealed partial class GrubsGame : GameManager
 			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
 			PopulatePlayerColors();
 		}
-
-		if ( GrubsConfig.SoundboardEnabled )
-			LoadSoundboard();
 	}
 
 	public override void ClientJoined( IClient client )
@@ -152,11 +149,6 @@ public sealed partial class GrubsGame : GameManager
 		PlayerColors.Add( Color.FromBytes( 240, 236, 211 ), false ); // Eggshell
 	}
 
-	private void LoadSoundboard()
-	{
-		SoundboardSounds = ResourceLibrary.GetAll<SoundboardSound>().ToList();
-	}
-
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
@@ -194,11 +186,17 @@ public sealed partial class GrubsGame : GameManager
 		if ( ConsoleSystem.Caller.Pawn is not Player player || string.IsNullOrEmpty( soundName ) )
 			return;
 
-		var soundData = Instance.SoundboardSounds.Find( x => x.Title == soundName );
-		if ( player.SinceSoundboardPlay < GrubsConfig.SoundboardCooldown || soundData is null || soundData.Sound is null )
+		var soundData = SoundboardSounds.Find( x => x.Title == soundName );
+		if ( player.TimeSinceSoundboardPlayed < GrubsConfig.SoundboardCooldown || soundData is null || soundData.Sound is null )
 			return;
 
-		Instance.PlaySound( soundData.Sound.ResourcePath );
-		player.SinceSoundboardPlay = 0;
+		PlaySoundBoardSoundClient( To.Everyone, soundData.Sound.ResourcePath );
+		player.TimeSinceSoundboardPlayed = 0;
+	}
+
+	[ClientRpc]
+	public static void PlaySoundBoardSoundClient( string path )
+	{
+		Instance.PlaySound( path ).SetVolume( GrubsConfig.SoundboardVolume );
 	}
 }
