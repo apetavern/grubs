@@ -114,6 +114,9 @@ public static class GrubsConfig
 	[ConVar.Replicated( "soundboard_cooldown", Help = "How often (in seconds) players can annoy eachother with sounds." )]
 	public static float SoundboardCooldown { get; set; } = 5;
 
+	[ConVar.Replicated( "soundboard_enabled" )]
+	public static bool SoundboardEnabled { get; set; } = true;
+
 	public enum TerrainType
 	{
 		Generated = 0,

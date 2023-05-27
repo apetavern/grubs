@@ -41,7 +41,7 @@ public sealed partial class GrubsGame : GameManager
 			PopulatePlayerColors();
 		}
 
-		if ( GrubsConfig.SoundboardCooldown >= 0 )
+		if ( GrubsConfig.SoundboardEnabled )
 			LoadSoundboard();
 	}
 
@@ -188,7 +188,7 @@ public sealed partial class GrubsGame : GameManager
 	[ConCmd.Server]
 	public static void PlaySoundboardSound( string soundName )
 	{
-		if ( GrubsConfig.SoundboardCooldown < 0 )
+		if ( !GrubsConfig.SoundboardEnabled )
 			return;
 
 		if ( ConsoleSystem.Caller.Pawn is not Player player || string.IsNullOrEmpty( soundName ) )
