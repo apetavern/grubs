@@ -37,7 +37,7 @@
         timeoutInv = MathF.Min(timeoutInv * 2.0f, 1.0f);
         _isTalking = timeoutInv > 0;
 
-        _isUsingSoundboard = Player.TimeSinceSoundboardPlayed <= 4;
+        _isUsingSoundboard = Player.TimeSinceSoundboardPlayed <= 4 && Player.TimeSinceSoundboardPlayed >= 0.1f;
     }
 
     private int GetHealthPercentage()

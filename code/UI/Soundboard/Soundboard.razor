@@ -7,42 +7,38 @@
 
 <root class="@(_isOpen ? "open" : "")">
     <label class="sound-title" text=@_hoveredSound?.Title />
-	@{
-        var canPlaySound = GrubsConfig.SoundboardEnabled && player.TimeSinceSoundboardPlayed>= GrubsConfig.SoundboardCooldown;
-
         <div class="items">
 		@foreach (var sound in GrubsGame.SoundboardSounds)
 		{
-				<SoundboardButton class="@(!canPlaySound ? "disabled" : "")"
+				<SoundboardButton class="@(!_canUseSoundboard ? "disabled" : "")"
                 Sound=@sound
                 @onmouseover=@(() => _hoveredSound = sound)
                 @onmouseout=@(() => _hoveredSound = null)
                 onclick=@( ()=> 
 				{
-					if( canPlaySound )
+					if( _canUseSoundboard )
 						GrubsGame.PlaySoundboardSound(sound.Title); 
 				})></SoundboardButton>
 		}
         </div>
-        
-        @* TODO: Add a slider for clientside soundboard volume when sliders get added. *@
-	}
 </root>
 
 @code {
 
 	private bool _isOpen;
+    private bool _canUseSoundboard;
     private SoundboardSound _hoveredSound;
 
 	public override void Tick()
 	{
 		_isOpen = Input.Down(Grubs.InputAction.Soundboard) && !Inventory.IsOpen;
+        _canUseSoundboard = GrubsConfig.SoundboardEnabled && (Game.LocalPawn as Player).TimeSinceSoundboardPlayed >= GrubsConfig.SoundboardCooldown;
         Cursor.Enabled("Soundboard", _isOpen);
 	}
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(_isOpen, _hoveredSound?.GetHashCode());
+        return HashCode.Combine(_isOpen, _canUseSoundboard, _hoveredSound?.GetHashCode());
     }
 }
 
