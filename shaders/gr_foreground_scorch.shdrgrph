@@ -474,7 +474,7 @@
         "Output": "A"
       },
       "Fraction": 0.5,
-      "BlendMode": "Multiply",
+      "BlendMode": "SoftLight",
       "Clamp": true,
       "Identifier": "28",
       "Position": "64,-576"
@@ -1145,11 +1145,11 @@
     {
       "_class": "Branch",
       "True": {
-        "Identifier": "81",
+        "Identifier": "80",
         "Output": "Result"
       },
       "False": {
-        "Identifier": "28",
+        "Identifier": "82",
         "Output": "Result"
       },
       "A": {},
@@ -1183,7 +1183,22 @@
       "Position": "1632,432"
     },
     {
-      "_class": "Lerp",
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "81",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "80",
+      "Position": "1312,-384"
+    },
+    {
+      "_class": "Blend",
       "A": {
         "Identifier": "1",
         "Output": "Result"
@@ -1197,23 +1212,27 @@
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "80",
+      "BlendMode": "Overlay",
+      "Clamp": true,
+      "Identifier": "81",
       "Position": "1024,-304"
     },
     {
-      "_class": "Lerp",
+      "_class": "Blend",
       "A": {
-        "Identifier": "8",
+        "Identifier": "10",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "80",
+        "Identifier": "1",
         "Output": "Result"
       },
       "C": {},
       "Fraction": 0.5,
-      "Identifier": "81",
-      "Position": "1280,-416"
+      "BlendMode": "Mix",
+      "Clamp": true,
+      "Identifier": "82",
+      "Position": "576,64"
     }
   ]
 }

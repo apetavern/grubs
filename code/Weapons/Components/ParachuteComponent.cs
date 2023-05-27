@@ -20,7 +20,7 @@ public partial class ParachuteComponent : WeaponComponent
 			Fire();
 
 		if ( Deployed )
-			Grub.Velocity = new Vector3( Grub.Velocity.x - Player.MoveInput + GamemodeSystem.Instance.ActiveWindForce, Grub.Velocity.y, Grub.Velocity.ClampLength( 75f ).z );
+			Grub.Velocity = new Vector3( Grub.Velocity.x - Player.MoveInput + GamemodeSystem.Instance.ActiveWindForce, Grub.Velocity.y, Grub.Velocity.ClampLength( 70f ).z );
 
 		if ( Grub.Controller.IsGrounded && Deployed )
 			FireFinished();

@@ -56,12 +56,6 @@ public partial class FiringState : BaseState
 
 		if ( Brain.TimeSinceStateStarted < 5f )
 		{
-			if ( MyPlayer.ActiveGrub.ActiveWeapon == null && !MyPlayer.ActiveGrub.HasBeenDamaged )
-			{
-				Brain.PreviousState();
-				Brain.PreviousState();
-				return;
-			}
 			if ( MyPlayer.ActiveGrub.ActiveWeapon != null && MyPlayer.ActiveGrub.ActiveWeapon.CurrentUses < MyPlayer.ActiveGrub.ActiveWeapon.Charges )
 			{
 				if ( MyPlayer.ActiveGrub.ActiveWeapon.Charges > 1 )
@@ -127,7 +121,7 @@ public partial class FiringState : BaseState
 			Input.SetAction( "fire", false );
 		}
 
-		if ( Brain.TimeSinceStateStarted > 5f )
+		if ( Brain.TimeSinceStateStarted > 5f || MyPlayer.ActiveGrub.ActiveWeapon.CurrentUses >= MyPlayer.ActiveGrub.ActiveWeapon.Charges )
 		{
 			Firing = false;
 			FinishedState();

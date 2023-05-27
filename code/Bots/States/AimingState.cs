@@ -51,7 +51,7 @@ public partial class AimingState : BaseState
 			MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f );
 		}
 
-		if ( !MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 40f ) && MathX.AlmostEqual( Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal ), 0.05f ) )
+		if ( Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal ) < 0.05f && Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal ) > -0.05f )
 		{
 			MyPlayer.LookInput = 0f;
 			FinishedState();

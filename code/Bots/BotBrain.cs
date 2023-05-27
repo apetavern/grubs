@@ -1,4 +1,5 @@
 ﻿using Grubs.Bots.States;
+using Grubs.Bots;
 using Sandbox;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ public partial class BotBrain : Entity
 
 	public IEnumerable<BaseState> States;
 
-	public Player MyPlayer;
+	public Player MyPlayer => Owner as Player;
 
 	public TimeSince TimeSinceStateStarted = 0f;
 

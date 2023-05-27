@@ -47,7 +47,7 @@
           },
           "TriggerRadius": {
             "Type": "Single",
-            "Value": "11"
+            "Value": "40"
           },
           "ExplodeAfter": {
             "Type": "Single",
@@ -77,13 +77,17 @@
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "60"
+            "Value": "65"
           },
           "_name": {
             "Value": "\u0022ExplosiveGadgetComponent\u0022"
           },
           "_tags": {
             "Value": "[]"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "65"
           }
         }
       }

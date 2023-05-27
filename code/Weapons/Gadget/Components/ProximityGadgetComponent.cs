@@ -47,6 +47,18 @@ public partial class ProximityGadgetComponent : GadgetComponent
 			Gadget.PlayScreenSound( "beep" );
 		}
 
+		if ( !_isTriggered && _isArmed )
+		{
+			var shouldTrigger = Sandbox.Entity.FindInSphere( Gadget.Position, TriggerRadius )
+											  .Where( e => e != Gadget && e is Gadget || (e is Grub grub && grub.LifeState == LifeState.Alive) ).Any();
+
+			if ( shouldTrigger )
+			{
+				_isTriggered = true;
+				_timeUntilExplode = ExplodeAfter;
+			}
+		}
+
 		if ( _isTriggered )
 		{
 			Gadget.SetMaterialGroup( _timeUntilNextBeep ? 0 : 1 );
@@ -60,14 +72,5 @@ public partial class ProximityGadgetComponent : GadgetComponent
 			if ( _timeUntilExplode )
 				Gadget.Components.Get<ExplosiveGadgetComponent>()?.Explode();
 		}
-	}
-
-	public override void Touch( Entity other )
-	{
-		if ( !_isArmed || _isTriggered || other is not Grub grub || grub.LifeState != LifeState.Alive )
-			return;
-
-		_isTriggered = true;
-		_timeUntilExplode = ExplodeAfter;
 	}
 }

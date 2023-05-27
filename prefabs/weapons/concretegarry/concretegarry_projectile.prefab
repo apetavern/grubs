@@ -38,7 +38,7 @@
           },
           "MaxBounces": {
             "Type": "Int32",
-            "Value": "19"
+            "Value": "9999"
           }
         }
       },

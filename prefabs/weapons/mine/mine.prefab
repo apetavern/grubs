@@ -24,6 +24,14 @@
           "UseSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
+          },
+          "UseTargetPreview": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "LockPreviewBeforeFire": {
+            "Type": "Boolean",
+            "Value": "false"
           }
         }
       }
@@ -31,7 +39,7 @@
     "Keys": {
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "2"
+        "Value": "0"
       },
       "Charges": {
         "Type": "Int32",

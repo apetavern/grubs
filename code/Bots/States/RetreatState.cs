@@ -49,46 +49,29 @@ public partial class RetreatState : BaseState
 			GamemodeSystem.Instance.UseTurn();
 		}
 
-		if ( (distance < 200f && !OnEdge && !lineOfSight) || !facingTarget )
+		MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f );
+
+		MyPlayer.LookInput = 0f;
+
+		if ( Game.Random.Float() > 0.9f && !OnEdge )
 		{
-
-			MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f );
-
-			MyPlayer.LookInput = 0f;
-
-			if ( Game.Random.Float() > 0.9f && !OnEdge )
-			{
-				Input.SetAction( "jump", true );
-			}
-			else
-			{
-				Input.SetAction( "jump", false );
-			}
-
-			if ( Game.Random.Float() > 0.95f )
-			{
-				MyPlayer.MoveInput = -MyPlayer.MoveInput;
-				Input.SetAction( "backflip", true );
-			}
-			else
-			{
-				Input.SetAction( "backflip", false );
-			}
+			Input.SetAction( "jump", true );
 		}
-		else if ( OnEdge )
+		else
 		{
-			//MyPlayer.Inventory.SetActiveWeapon( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "bazook" ) ).First(), true );
-			if ( Game.Random.Float() > 0.95f )
-			{
-				MyPlayer.MoveInput = -activeGrub.Facing;
-				Input.SetAction( "backflip", true );
-			}
-
-			MyPlayer.LookInput = Vector3.Dot( forwardLook, direction.Normal * Rotation.FromPitch( 95f ) );
-
-			MyPlayer.MoveInput = 0f;
-
+			Input.SetAction( "jump", false );
 		}
+
+		if ( Game.Random.Float() > 0.995f )
+		{
+			MyPlayer.MoveInput = -MyPlayer.MoveInput;
+			Input.SetAction( "backflip", true );
+		}
+		else
+		{
+			Input.SetAction( "backflip", false );
+		}
+
 	}
 
 	public override void FinishedState()

@@ -27,12 +27,12 @@ Layer0
 	//---- Textures ----
 	AO "textures/environment/cereal_ao.png"
 	Colour "textures/environment/cereal_color.png"
-	g_flTiling "2.000"
+	g_flTiling "1.000"
 	Normal "textures/environment/cereal_normal.png"
 	Rough "textures/environment/cereal_rough.png"
 
 	//---- Tint ----
 	g_bGradientTint "0"
 	g_bTintDirectionToggle "0"
-	g_vTint_Colour "[0.729412 0.729412 0.729412 1.000000]"
+	g_vTint_Colour "[0.000000 0.000000 0.000000 1.000000]"
 }

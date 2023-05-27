@@ -39,21 +39,21 @@ public partial class WeaponSelectState : BaseState
 				selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
 			}
 
-			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon, true );
+			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 		else
 		{
 			GadgetWeaponComponent gadgetcomp = null;
 			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
 
-			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon, true );
+			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
 		if ( MyPlayer.ActiveGrub.ActiveWeapon == null )
 		{
 			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
 
-			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon, true );
+			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
 

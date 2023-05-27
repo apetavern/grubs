@@ -41,6 +41,7 @@ public class FireEntity : ModelEntity, IResolvable
 
 	public override void Spawn()
 	{
+		Transmit = TransmitType.Always;
 		FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
 		FireParticle.SetPosition( 1, (float)(_timeUntilExpire = Game.Random.Float( 0.5f, 2.5f )) );
 		Health = 1;
