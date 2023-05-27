@@ -12,10 +12,10 @@
 			m_params = 
 			{
 				m_blendMode = "BLOOM_BLEND_ADD"
-				m_flBloomStrength = 0.1
+				m_flBloomStrength = 0.5
 				m_flScreenBloomStrength = 1.0
 				m_flBlurBloomStrength = 1.0
-				m_flBloomThreshold = 1.0
+				m_flBloomThreshold = 0.999
 				m_flBloomThresholdWidth = 2.35
 				m_flSkyboxBloomStrength = 1.0
 				m_flBloomStartValue = 1.0
@@ -48,15 +48,15 @@
 			m_nInputWhitePointR = 255
 			m_nInputWhitePointG = 255
 			m_nInputWhitePointB = 255
-			m_nOutputBlackPointRGB = 0
+			m_nOutputBlackPointRGB = 5
 			m_nOutputBlackPointR = 0
 			m_nOutputBlackPointG = 0
 			m_nOutputBlackPointB = 0
-			m_nOutputWhitePointRGB = 255
+			m_nOutputWhitePointRGB = 250
 			m_nOutputWhitePointR = 255
 			m_nOutputWhitePointG = 255
 			m_nOutputWhitePointB = 255
-			m_flGammaRGB = 1.25
+			m_flGammaRGB = 1.05
 			m_flGammaR = 1.0
 			m_flGammaG = 1.0
 			m_flGammaB = 1.0
@@ -68,7 +68,7 @@
 			m_bVisible = true
 			m_pLayerMask = null
 			m_nBrightness = 25
-			m_nContrast = 10
+			m_nContrast = 50
 		},
 		{
 			_class = "CToneMappingLayer"
