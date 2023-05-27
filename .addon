@@ -463,15 +463,24 @@
         "Group": "Terrain"
       },
       {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "soundboard_enabled",
+        "DisplayName": "Enable Soundboard",
+        "DefaultValue": "true",
+        "Description": "Whether or not players can use the soundboard.",
+        "Group": "Soundboard"
+      },
+      {
         "DisplayType": "Float",
         "Choices": [],
         "ConVarName": "soundboard_cooldown",
         "DisplayName": "Soundboard Cooldown",
         "DefaultValue": "5",
-        "Description": "How often (in seconds) players play sounds from the soundboard. Set to a negative number to disable the soundboard entirely.",
+        "Description": "How often (in seconds) players play sounds from the soundboard.",
         "Group": "Soundboard",
-        "Minimum": -1,
-        "Maximum": 120,
+        "Minimum": 0,
+        "Maximum": 300,
         "Step": 1
       }
     ],
