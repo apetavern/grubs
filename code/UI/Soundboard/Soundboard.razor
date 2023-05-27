@@ -8,10 +8,10 @@
 <root class="@(_isOpen ? "open" : "")">
     <label class="sound-title" text=@_hoveredSound?.Title />
 	@{
-        var canPlaySound = GrubsConfig.SoundboardEnabled && player.SinceSoundboardPlay >= GrubsConfig.SoundboardCooldown;
+        var canPlaySound = GrubsConfig.SoundboardEnabled && player.TimeSinceSoundboardPlayed>= GrubsConfig.SoundboardCooldown;
 
         <div class="items">
-		@foreach (var sound in GrubsGame.Instance.SoundboardSounds)
+		@foreach (var sound in GrubsGame.SoundboardSounds)
 		{
 				<SoundboardButton class="@(!canPlaySound ? "disabled" : "")"
                 Sound=@sound
