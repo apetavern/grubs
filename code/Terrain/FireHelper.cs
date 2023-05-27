@@ -6,7 +6,7 @@ public static class FireHelper
 	{
 		Game.AssertServer();
 
-		for ( var i = 0; i < fireQuantity; i++ )
+		for ( var i = 0; i < fireQuantity * 5; i++ )
 		{
 			var baseDirection = Vector3.Random.WithY( 0f ) * 45f;
 			_ = new FireEntity(
@@ -23,7 +23,7 @@ public class FireEntity : ModelEntity, IResolvable
 	private Vector3 _moveDirection { get; set; }
 
 	private TimeUntil _timeUntilExpire;
-	private const float fireSize = 10f;
+	private const float fireSize = 7.5f;
 
 	private Particles FireParticle { get; set; }
 
@@ -89,6 +89,8 @@ public class FireEntity : ModelEntity, IResolvable
 
 		if ( collisionTrace.Hit )
 		{
+			Velocity *= 0.95f;
+
 			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( Tag.Invincible ) )
 				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
 
