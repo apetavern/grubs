@@ -15,6 +15,7 @@
         <label class="disconnect-icon">link_off</label>
     }
     <label class="voice-icon" style="opacity: @(_isTalking ? 1 : 0)">record_voice_over</label>
+    <label class="soundboard-icon" style="opacity: @(_isUsingSoundboard ? 1 : 0)">graphic_eq</label>
 </root>
 
 @code {
@@ -23,6 +24,7 @@
     private RealTimeSince _timeSincePlayed;
     private readonly float _voiceTimeout = 0.1f;
     private bool _isTalking = false;
+    private bool _isUsingSoundboard = false;
 
     public void OnVoicePlayed()
     {
@@ -34,6 +36,8 @@
         var timeoutInv = 1 - (_timeSincePlayed / _voiceTimeout);
         timeoutInv = MathF.Min(timeoutInv * 2.0f, 1.0f);
         _isTalking = timeoutInv > 0;
+
+        _isUsingSoundboard = Player.TimeSinceSoundboardPlayed <= 4;
     }
 
     private int GetHealthPercentage()
@@ -43,7 +47,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GetHealthPercentage(), Player.IsAvailableForTurn, Player.IsDisconnected, _isTalking);
+        return HashCode.Combine(GetHealthPercentage(), Player.IsAvailableForTurn, Player.IsDisconnected, _isTalking, _isUsingSoundboard);
     }
 }
 
@@ -96,6 +100,18 @@
             animation-duration: 1s;
             animation-name: wiggle;
             animation-iteration-count: infinite;
+        }
+
+        .soundboard-icon {
+            position: absolute;
+            left: -39px;
+            top: 32px;
+            transition: opacity 200ms ease-out;
+
+            font-family: MaterialIcons;
+            font-size: 30px;
+            color: rgb(252, 215, 52);
+            text-shadow: 2px 2px 0px black;
         }
 
         .disconnect-icon {
