@@ -7,13 +7,11 @@ public class SoundboardSound : GameResource
 	/// The name shown to players in the UI.
 	/// Also used as a parameter in the ServerCmd for playing sounds. 
 	/// </summary>
-	/// <value></value>
 	public string Title { get; set; }
 
 	/// <summary>
 	/// The Emoji to serve as an icon for the sound.
 	/// </summary>
-	/// <value></value>
 	public string Icon { get; set; }
 	public SoundEvent Sound { get; set; }
 }
