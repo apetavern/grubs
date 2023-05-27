@@ -1,6 +1,6 @@
 namespace Grubs;
 
-[GameResource( "Sound Board Sound", "sb", "A sound to play on the in-game sound board.", Icon = "grid_view" )]
+[GameResource( "Soundboard Sound", "sb", "A sound to play on the in-game sound board.", Icon = "grid_view" )]
 public class SoundboardSound : GameResource
 {
 	/// <summary>
