@@ -120,7 +120,7 @@ public static class GrubsConfig
 	/// <summary>
 	/// Clientside soundboard volume.
 	/// </summary>
-	[ConVar.Client( "soundboard_volume" )]
+	[ConVar.Client( "soundboard_volume", Min = 0, Max = 1 )]
 	public static float SoundboardVolume { get; set; } = 1;
 
 	public enum TerrainType
