@@ -26,7 +26,7 @@ public partial class Player : Entity
 	public string AvatarClothingData { get; private set; }
 
 	[Net]
-	public RealTimeSince SinceSandboardPlay { get; set; } = 0;
+	public RealTimeSince SinceSoundboardPlay { get; set; } = 0;
 
 	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
 

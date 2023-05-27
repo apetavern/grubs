@@ -8,20 +8,20 @@
 <root class="@(_isOpen ? "open" : "")">
     <label class="sound-title" text=@_hoveredSound?.Title />
 	@{
-        var canPlaySound = player.SinceSandboardPlay >= GrubsConfig.SoundboardCooldown;
+        var canPlaySound = player.SinceSoundboardPlay>= GrubsConfig.SoundboardCooldown;
 
         <div class="items">
-		@foreach (var sound in GrubsGame.Instance.SoundBoardSounds)
+		@foreach (var sound in GrubsGame.Instance.SoundboardSounds)
 		{
-				<SoundBoardButton class="@(!canPlaySound ? "disabled" : "")"
+				<SoundboardButton class="@(!canPlaySound ? "disabled" : "")"
                 Sound=@sound
                 @onmouseover=@(() => _hoveredSound = sound)
                 @onmouseout=@(() => _hoveredSound = null)
                 onclick=@( ()=> 
 				{
 					if( canPlaySound )
-						GrubsGame.PlaySoundBoardSound(sound.Title); 
-				})></SoundBoardButton>
+						GrubsGame.PlaySoundboardSound(sound.Title); 
+				})></SoundboardButton>
 		}
         </div>
 	}
@@ -30,12 +30,12 @@
 @code {
 
 	private bool _isOpen;
-    private SoundBoardSound _hoveredSound;
+    private SoundboardSound _hoveredSound;
 
 	public override void Tick()
 	{
-		_isOpen = Input.Down(Grubs.InputAction.SoundBoard) && !Inventory.IsOpen;
-        Cursor.Enabled("SoundBoard", _isOpen);
+		_isOpen = Input.Down(Grubs.InputAction.Soundboard) && !Inventory.IsOpen;
+        Cursor.Enabled("Soundboard", _isOpen);
 	}
 
     protected override int BuildHash()
@@ -45,7 +45,7 @@
 }
 
 <style>
-    SoundBoard {
+    Soundboard {
         position: absolute;
         bottom: 225px;
         width: 375px;
