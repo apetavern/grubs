@@ -26,7 +26,7 @@ public sealed partial class GrubsGame : GameManager
 	/// </summary>
 	[Net] public IDictionary<Color, bool> PlayerColors { get; private set; }
 
-	public static List<SoundboardSound> SoundboardSounds { get; private set; } = ResourceLibrary.GetAll<SoundboardSound>().ToList();
+	public static List<SoundboardSound> SoundboardSounds { get; private set; }
 
 	public GrubsGame()
 	{
@@ -40,6 +40,8 @@ public sealed partial class GrubsGame : GameManager
 			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
 			PopulatePlayerColors();
 		}
+
+		SoundboardSounds = ResourceLibrary.GetAll<SoundboardSound>().ToList();
 	}
 
 	public override void ClientJoined( IClient client )
