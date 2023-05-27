@@ -7,7 +7,7 @@ public partial class GrubsBot : Bot
 {
 	public GrubsBot()
 	{
-		SetDefaultNames( BotNames );
+		GrubsBot.SetDefaultNames( BotNames );
 		MyPlayer.Color = new Color( Game.Random.Float(), Game.Random.Float(), Game.Random.Float(), 1f );
 	}
 
