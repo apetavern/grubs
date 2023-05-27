@@ -48,11 +48,10 @@ public partial class BotBrain : Entity
 
 	public void SimulateCurrentState()
 	{
-		if ( MyPlayer.IsTurn && CurrentState < States.Count() - 1 )
+		if ( MyPlayer.IsTurn && CurrentState < States.Count() - 1 && !MyPlayer.ActiveGrub.HasBeenDamaged )
 		{
 			if ( TimeSinceStateStarted > States.ElementAt( CurrentState ).MaxTimeInState && !States.ElementAt( CurrentState ).ToString().Contains( "Base" ) )
 			{
-				//Log.Info( "Spent too long in this state!" );
 				States.ElementAt( CurrentState ).FinishedState();
 				return;
 			}
