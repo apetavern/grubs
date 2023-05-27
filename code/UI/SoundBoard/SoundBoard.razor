@@ -40,7 +40,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Time.Now);
+        return HashCode.Combine(_isOpen, _hoveredSound?.GetHashCode());
     }
 }
 
@@ -73,6 +73,5 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-
     }
 </style>
