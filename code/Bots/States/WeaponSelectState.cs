@@ -31,12 +31,12 @@ public partial class WeaponSelectState : BaseState
 		if ( !lineOfSight )
 		{
 			HitScanComponent hitscancomp;
-			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 ).Where( W => W.FiringType == FiringType.Instant ).Where( W => W.Components.TryGet( out hitscancomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).Where( W => W.FiringType == FiringType.Instant ).Where( W => W.Components.TryGet( out hitscancomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
 
 			if ( selectedWeapon == null )//We ran out of trace weapons...
 			{
 				GadgetWeaponComponent gadgetcomp = null;
-				selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+				selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
 			}
 
 			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
@@ -44,14 +44,14 @@ public partial class WeaponSelectState : BaseState
 		else
 		{
 			GadgetWeaponComponent gadgetcomp = null;
-			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
 
 			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
 		if ( MyPlayer.ActiveGrub.ActiveWeapon == null )
 		{
-			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
 
 			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
