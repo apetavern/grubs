@@ -192,12 +192,12 @@ public sealed partial class GrubsGame : GameManager
 		if ( player.TimeSinceSoundboardPlayed < GrubsConfig.SoundboardCooldown || soundData is null || soundData.Sound is null )
 			return;
 
-		PlaySoundBoardSoundClient( To.Everyone, soundData.Sound.ResourcePath );
+		PlaySoundboardSoundClient( To.Everyone, soundData.Sound.ResourcePath );
 		player.TimeSinceSoundboardPlayed = 0;
 	}
 
 	[ClientRpc]
-	public static void PlaySoundBoardSoundClient( string path )
+	public static void PlaySoundboardSoundClient( string path )
 	{
 		Instance.PlaySound( path ).SetVolume( GrubsConfig.SoundboardVolume );
 	}
