@@ -173,7 +173,7 @@
 						disable_compression = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = 79
-						end_frame = 89
+						end_frame = 80
 						framerate = 3.0
 						take = 0
 						reverse = false
@@ -193,7 +193,7 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						source_filename = "models/weapons/goat/goat.fbx"
-						start_frame = 89
+						start_frame = 80
 						end_frame = 99
 						framerate = 60.0
 						take = 0
