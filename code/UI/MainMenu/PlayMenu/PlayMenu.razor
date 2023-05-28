@@ -24,8 +24,11 @@
                         <label class="name">@client.Name</label>
                     </div>
                     <div class="hours" style="align-items: center;">
-                        <label>@player.PlayTime.ToString("0.0")hrs</label>
-                        <button icon="timer" style="margin-left: 4px;" />
+                        @if(!client.IsBot)
+                        {
+                            <label>@player.PlayTime.ToString("0.0")hrs</label>
+                            <button icon="timer" style="margin-left: 4px;" />
+                        }
                     </div>
                 </div>
             }
