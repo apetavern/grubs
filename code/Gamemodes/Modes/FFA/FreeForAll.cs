@@ -39,6 +39,7 @@ public partial class FreeForAll : Gamemode
 
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 		CurrentState = State.Playing;
+		base.Start();
 	}
 
 	/// <summary>
