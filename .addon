@@ -29,7 +29,7 @@
     "MapList": [
       "apetavern.gr_beach"
     ],
-    "MaxPlayers": 8,
+    "MaxPlayers": 16,
     "MinPlayers": 0,
     "GameNetworkType": "Multiplayer",
     "MapSelect": "Hidden",
