@@ -59,7 +59,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "1"
+        "Value": "0"
       },
       "AllowMovement": {
         "Type": "Boolean",
@@ -98,7 +98,7 @@
       },
       "DropChance": {
         "Type": "Single",
-        "Value": "1.5"
+        "Value": "1.3"
       },
       "WeaponType": {
         "Type": "WeaponType",
