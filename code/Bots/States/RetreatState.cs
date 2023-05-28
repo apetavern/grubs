@@ -17,28 +17,12 @@ public partial class RetreatState : BaseState
 
 	public void DoPositioning( Grub activeGrub )
 	{
-
-		/*if ( activeGrub.ActiveWeapon != null && activeGrub.ActiveWeapon.CurrentUses < activeGrub.ActiveWeapon.Charges )
-		{
-			Brain.PreviousState();
-		}*/
-
 		Vector3 direction = activeGrub.Position - Brain.TargetGrub.Position;
-
-		float distance = direction.Length;
-
-		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 3f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
-
-		bool lineOfSight = tr.Entity == Brain.TargetGrub;
-
-		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
 
 		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 90f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 
 		//DebugOverlay.TraceResult( tr );
 		//DebugOverlay.TraceResult( clifftr );
-
-		bool facingTarget = Vector3.DistanceBetween( activeGrub.Position + activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position ) < Vector3.DistanceBetween( activeGrub.Position - activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position );
 
 		//DebugOverlay.Line( activeGrub.EyePosition + forwardLook * 50f, activeGrub.EyePosition );
 

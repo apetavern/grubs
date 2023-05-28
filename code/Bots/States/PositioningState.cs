@@ -83,6 +83,8 @@ public partial class PositioningState : BaseState
 
 		bool OnEdge = !clifftr.Hit;
 
+		float LookAtTargetValue = Vector3.Dot( forwardLook, direction.Normal * Rotation.FromPitch( 90f ) );
+
 		if ( (distance > 200f && !OnEdge && !lineOfSight) || !facingTarget )
 		{
 
@@ -116,14 +118,13 @@ public partial class PositioningState : BaseState
 		}
 		else if ( OnEdge )
 		{
-			//MyPlayer.Inventory.SetActiveWeapon( MyPlayer.Inventory.Weapons.Where( W => W.Name.ToLower().Contains( "bazook" ) ).First(), true );
 			if ( Game.Random.Float() > 0.95f )
 			{
 				MyPlayer.MoveInput = -activeGrub.Facing;
 				Input.SetAction( "backflip", true );
 			}
 
-			MyPlayer.LookInput = Vector3.Dot( forwardLook, direction.Normal * Rotation.FromPitch( 95f ) );
+			MyPlayer.LookInput = LookAtTargetValue;
 
 			MyPlayer.MoveInput = 0f;
 
@@ -155,7 +156,7 @@ public partial class PositioningState : BaseState
 		}
 		else if ( distance < 200f && distance > 30f )
 		{
-			MyPlayer.LookInput = Vector3.Dot( forwardLook, direction.Normal * Rotation.FromPitch( 90f ) );
+			MyPlayer.LookInput = LookAtTargetValue;
 
 			MyPlayer.MoveInput = 0f;
 
