@@ -8,7 +8,7 @@
 
     public EntityWorldPanel(Entity entity)
     {
-        SceneObject.Flags.ViewModelLayer = true;
+        SceneObject.RenderLayer = SceneRenderLayer.OverlayWithoutDepth;
         Entity = entity;
         Rotation = Rotation.LookAt(Vector3.Right);
     }
