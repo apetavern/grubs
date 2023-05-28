@@ -1,13 +1,10 @@
-﻿using Sandbox;
-using System.Linq;
-
-namespace Grubs.Bots;
+﻿namespace Grubs.Bots;
 
 public partial class GrubsBot : Bot
 {
-	public GrubsBot()
+	static GrubsBot()
 	{
-		GrubsBot.SetDefaultNames( BotNames );
+		SetDefaultNames( BotNames );
 	}
 
 	Grub TargetGrub { get; set; }
@@ -19,8 +16,8 @@ public partial class GrubsBot : Bot
 	BotBrain BrainEnt;
 
 
-	List<string> BotNames = new List<string>
-		{
+	static List<string> BotNames = new List<string>
+	{
 		"[Bot] El Jabroga",
 		"[Bot] Clyde",
 		"[Bot] Mike Oxlong",
@@ -47,7 +44,7 @@ public partial class GrubsBot : Bot
 		"[Bot] Sizzle Blast",
 		"[Bot] Blade Master",
 		"[Bot] Pyro",
-		};
+	};
 
 	public override void BuildInput()
 	{
