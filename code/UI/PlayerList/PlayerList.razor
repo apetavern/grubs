@@ -5,7 +5,7 @@
 <root>
     <TextChat />
     <div @ref=Players class="players">
-        @foreach (var player in GamemodeSystem.Instance.Players)
+        @foreach (var player in GamemodeSystem.Instance.Players.OrderByDescending(x => x.GetHealthPercentage))
         {
             <PlayerInfo Player=@player />
         }
@@ -32,7 +32,8 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GamemodeSystem.Instance.Players.HashCombine(p => p.SteamId));
+        var players = GamemodeSystem.Instance.Players;
+        return HashCode.Combine(players.HashCombine(p => p.SteamId), players.HashCombine(p => p.GetHealthPercentage) );
     }
 }
 
