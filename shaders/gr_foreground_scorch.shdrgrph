@@ -6,22 +6,22 @@
     {
       "_class": "Result",
       "Albedo": {
-        "Identifier": "32",
+        "Identifier": "25",
         "Output": "Result"
       },
       "Emission": {},
       "Opacity": {},
       "Normal": {
-        "Identifier": "39",
+        "Identifier": "32",
         "Output": "Result"
       },
       "Roughness": {
-        "Identifier": "51",
+        "Identifier": "44",
         "Output": "Result"
       },
       "Metalness": {},
       "AmbientOcclusion": {
-        "Identifier": "52",
+        "Identifier": "45",
         "Output": "Result"
       },
       "DefaultOpacity": 1,
@@ -29,12 +29,12 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "2448,624"
+      "Position": "2624,608"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "45",
+        "Identifier": "38",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_shells_color_png_7343c749.generated.vtex",
@@ -54,7 +54,7 @@
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "45",
+        "Identifier": "38",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_shells_normal_png_ab6f098e.generated.vtex",
@@ -77,7 +77,7 @@
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "45",
+        "Identifier": "38",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
@@ -110,45 +110,27 @@
         "Output": "Result"
       },
       "Identifier": "5",
-      "Position": "-880,-1104"
+      "Position": "-1248,-1136"
     },
     {
       "_class": "Divide",
       "A": {
-        "Identifier": "9",
+        "Identifier": "8",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "22",
+        "Identifier": "15",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 2000,
       "Identifier": "6",
-      "Position": "-80,-1024"
+      "Position": "-752,-1056"
     },
     {
       "_class": "WorldPosition",
       "Identifier": "7",
-      "Position": "-1088,-1104"
-    },
-    {
-      "_class": "Lerp",
-      "A": {
-        "Identifier": "1",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "28",
-        "Output": "Result"
-      },
-      "C": {
-        "Identifier": "14",
-        "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "8",
-      "Position": "672,-560"
+      "Position": "-1456,-1136"
     },
     {
       "_class": "Add",
@@ -157,13 +139,13 @@
         "Output": "Z"
       },
       "B": {
-        "Identifier": "20",
+        "Identifier": "14",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1024,
-      "Identifier": "9",
-      "Position": "-480,-1024"
+      "Identifier": "8",
+      "Position": "-1008,-1056"
     },
     {
       "_class": "Float4",
@@ -181,38 +163,8 @@
           "Name": ""
         }
       },
-      "Identifier": "10",
+      "Identifier": "9",
       "Position": "-272,-496"
-    },
-    {
-      "_class": "Add",
-      "A": {
-        "Identifier": "5",
-        "Output": "Y"
-      },
-      "B": {
-        "Identifier": "19",
-        "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 20,
-      "Identifier": "11",
-      "Position": "-480,-1120"
-    },
-    {
-      "_class": "Divide",
-      "A": {
-        "Identifier": "11",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "21",
-        "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 75,
-      "Identifier": "12",
-      "Position": "-80,-1120"
     },
     {
       "_class": "Saturate",
@@ -220,41 +172,22 @@
         "Identifier": "6",
         "Output": "Result"
       },
-      "Identifier": "13",
-      "Position": "80,-1024"
-    },
-    {
-      "_class": "Saturate",
-      "Input": {
-        "Identifier": "12",
-        "Output": "Result"
-      },
-      "Identifier": "14",
-      "Position": "80,-1120"
-    },
-    {
-      "_class": "CommentNode",
-      "Size": "224,176",
-      "Color": "Green",
-      "Description": "",
-      "Title": "Y",
-      "Layer": 4,
-      "Identifier": "15",
-      "Position": "640,-608"
+      "Identifier": "10",
+      "Position": "-592,-1056"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "47",
+        "Identifier": "40",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "41",
+        "Identifier": "34",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "16",
+      "Identifier": "11",
       "Position": "0,1200"
     },
     {
@@ -273,7 +206,7 @@
           "Priority": 1
         }
       },
-      "Identifier": "17",
+      "Identifier": "12",
       "Position": "-1952,592"
     },
     {
@@ -283,32 +216,13 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "17",
+        "Identifier": "12",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "18",
+      "Identifier": "13",
       "Position": "-1648,512"
-    },
-    {
-      "_class": "Float",
-      "Min": 0,
-      "Max": 1024,
-      "Value": 64,
-      "Name": "Y Position",
-      "IsAttribute": false,
-      "UI": {
-        "Priority": 3,
-        "PrimaryGroup": {
-          "Name": "Position"
-        },
-        "SecondaryGroup": {
-          "Name": "Y"
-        }
-      },
-      "Identifier": "19",
-      "Position": "-704,-1184"
     },
     {
       "_class": "Float",
@@ -327,33 +241,14 @@
           "Priority": 1
         }
       },
-      "Identifier": "20",
-      "Position": "-704,-928"
-    },
-    {
-      "_class": "Float",
-      "Min": 0,
-      "Max": 1024,
-      "Value": 75,
-      "Name": "Y Smoothing",
-      "IsAttribute": false,
-      "UI": {
-        "Priority": 4,
-        "PrimaryGroup": {
-          "Name": "Position"
-        },
-        "SecondaryGroup": {
-          "Name": "Y"
-        }
-      },
-      "Identifier": "21",
-      "Position": "-320,-1072"
+      "Identifier": "14",
+      "Position": "-1232,-976"
     },
     {
       "_class": "Float",
       "Min": 0,
       "Max": 2048,
-      "Value": 250,
+      "Value": 512,
       "Name": "Z Smoothing",
       "IsAttribute": false,
       "UI": {
@@ -366,13 +261,13 @@
           "Priority": 1
         }
       },
-      "Identifier": "22",
-      "Position": "-320,-960"
+      "Identifier": "15",
+      "Position": "-976,-928"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "45",
+        "Identifier": "38",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
@@ -388,13 +283,13 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "23",
+      "Identifier": "16",
       "Position": "-272,240"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "45",
+        "Identifier": "38",
         "Output": "Result"
       },
       "Texture": "textures/environment/sand_shells_blend_png_acc24e2f.generated.vtex",
@@ -409,7 +304,7 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "24",
+      "Identifier": "17",
       "Position": "-272,-688"
     },
     {
@@ -417,31 +312,31 @@
       "Size": "224,176",
       "Color": "Red",
       "Description": "",
-      "Title": "X",
+      "Title": "Z",
       "Layer": 2,
-      "Identifier": "25",
-      "Position": "992,-352"
+      "Identifier": "18",
+      "Position": "576,-512"
     },
     {
       "_class": "Subtract",
       "A": {},
       "B": {
-        "Identifier": "78",
+        "Identifier": "10",
         "Output": "Result"
       },
       "DefaultA": 1,
       "DefaultB": 1,
-      "Identifier": "26",
-      "Position": "624,-48"
+      "Identifier": "19",
+      "Position": "-368,-960"
     },
     {
       "_class": "Branch",
       "True": {
-        "Identifier": "78",
+        "Identifier": "10",
         "Output": "Result"
       },
       "False": {
-        "Identifier": "26",
+        "Identifier": "19",
         "Output": "Result"
       },
       "A": {},
@@ -456,13 +351,13 @@
           "Priority": 1
         }
       },
-      "Identifier": "27",
-      "Position": "752,-144"
+      "Identifier": "20",
+      "Position": "-192,-1056"
     },
     {
       "_class": "Blend",
       "A": {
-        "Identifier": "10",
+        "Identifier": "9",
         "Output": "Result"
       },
       "B": {
@@ -470,14 +365,14 @@
         "Output": "Result"
       },
       "C": {
-        "Identifier": "24",
+        "Identifier": "17",
         "Output": "A"
       },
       "Fraction": 0.5,
       "BlendMode": "SoftLight",
       "Clamp": true,
-      "Identifier": "28",
-      "Position": "64,-576"
+      "Identifier": "21",
+      "Position": "160,-544"
     },
     {
       "_class": "CommentNode",
@@ -486,18 +381,18 @@
       "Description": "",
       "Title": "Scorch Distance",
       "Layer": 1,
-      "Identifier": "29",
+      "Identifier": "22",
       "Position": "-992,480"
     },
     {
       "_class": "ObjectPosition",
-      "Identifier": "30",
+      "Identifier": "23",
       "Position": "-976,800"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "35",
+        "Identifier": "28",
         "Output": "Result"
       },
       "Texture": "dev/vgui/materials/white.vtex",
@@ -519,26 +414,26 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "31",
+      "Identifier": "24",
       "Position": "-432,544"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "77",
+        "Identifier": "72",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "70",
+        "Identifier": "63",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "53",
+        "Identifier": "46",
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "32",
-      "Position": "1936,496"
+      "Identifier": "25",
+      "Position": "2112,480"
     },
     {
       "_class": "Float4",
@@ -554,47 +449,47 @@
           "Name": ""
         }
       },
-      "Identifier": "33",
+      "Identifier": "26",
       "Position": "-976,608"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "33",
+        "Identifier": "26",
         "Output": "B"
       },
       "B": {
-        "Identifier": "30",
+        "Identifier": "23",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "34",
+      "Identifier": "27",
       "Position": "-672,784"
     },
     {
       "_class": "Add",
       "A": {
-        "Identifier": "36",
+        "Identifier": "29",
         "Output": "Vector"
       },
       "B": {
-        "Identifier": "34",
+        "Identifier": "27",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "35",
+      "Identifier": "28",
       "Position": "-544,640"
     },
     {
       "_class": "CombineVector",
       "X": {
-        "Identifier": "33",
+        "Identifier": "26",
         "Output": "R"
       },
       "Y": {
-        "Identifier": "33",
+        "Identifier": "26",
         "Output": "G"
       },
       "Z": {},
@@ -603,45 +498,45 @@
       "DefaultY": 0,
       "DefaultZ": 0,
       "DefaultW": 0,
-      "Identifier": "36",
+      "Identifier": "29",
       "Position": "-768,528"
     },
     {
       "_class": "Subtract",
       "A": {
-        "Identifier": "31",
+        "Identifier": "24",
         "Output": "R"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": 0.5,
-      "Identifier": "37",
+      "Identifier": "30",
       "Position": "-224,560"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "37",
+        "Identifier": "30",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "33",
+        "Identifier": "26",
         "Output": "A"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "38",
+      "Identifier": "31",
       "Position": "-128,656"
     },
     {
       "_class": "TransformNormal",
       "Input": {
-        "Identifier": "50",
+        "Identifier": "43",
         "Output": "Result"
       },
       "DecodeNormal": true,
-      "Identifier": "39",
-      "Position": "2160,688"
+      "Identifier": "32",
+      "Position": "2336,672"
     },
     {
       "_class": "CommentNode",
@@ -650,13 +545,13 @@
       "Description": "",
       "Title": "Scorch Material",
       "Layer": 3,
-      "Identifier": "40",
+      "Identifier": "33",
       "Position": "-320,960"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "44",
+        "Identifier": "37",
         "Output": "Result"
       },
       "Texture": "textures/environment/rocks_a_color_png_57cea3a9.generated.vtex",
@@ -671,13 +566,13 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "41",
+      "Identifier": "34",
       "Position": "-304,1360"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "44",
+        "Identifier": "37",
         "Output": "Result"
       },
       "Texture": "textures/environment/lava_rocks_ao_png_ef32fc5c.generated.vtex",
@@ -693,13 +588,13 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "42",
+      "Identifier": "35",
       "Position": "-304,1936"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "44",
+        "Identifier": "37",
         "Output": "Result"
       },
       "Texture": "textures/environment/lava_rocks_selfillum_png_b7008b5c.generated.vtex",
@@ -716,27 +611,27 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "43",
+      "Identifier": "36",
       "Position": "-304,1008"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "18",
+        "Identifier": "13",
         "Output": "Result"
       },
-      "Identifier": "44",
+      "Identifier": "37",
       "Position": "-608,1520"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "18",
+        "Identifier": "13",
         "Output": "Result"
       },
-      "Identifier": "45",
+      "Identifier": "38",
       "Position": "-528,-208"
     },
     {
@@ -746,7 +641,7 @@
       "Description": "",
       "Title": "Main Material",
       "Layer": 4,
-      "Identifier": "46",
+      "Identifier": "39",
       "Position": "-288,-752"
     },
     {
@@ -765,13 +660,13 @@
           "Name": ""
         }
       },
-      "Identifier": "47",
+      "Identifier": "40",
       "Position": "-304,1200"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "44",
+        "Identifier": "37",
         "Output": "Result"
       },
       "Texture": "textures/environment/lava_rocks_rough_png_350b4792.generated.vtex",
@@ -787,13 +682,13 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "48",
+      "Identifier": "41",
       "Position": "-304,1744"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "44",
+        "Identifier": "37",
         "Output": "Result"
       },
       "Texture": "textures/environment/lava_rocks_normal_png_404cfac.generated.vtex",
@@ -810,132 +705,132 @@
         },
         "CreateInput": "CreateInputTexture2D"
       },
-      "Identifier": "49",
+      "Identifier": "42",
       "Position": "-304,1552"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "64",
+        "Identifier": "57",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "67",
+        "Identifier": "60",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "53",
+        "Identifier": "46",
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "50",
-      "Position": "1936,624"
+      "Identifier": "43",
+      "Position": "2112,608"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "65",
+        "Identifier": "58",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "68",
+        "Identifier": "61",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "53",
+        "Identifier": "46",
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "51",
-      "Position": "1936,752"
+      "Identifier": "44",
+      "Position": "2112,736"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "66",
+        "Identifier": "59",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "69",
+        "Identifier": "62",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "53",
+        "Identifier": "46",
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "52",
-      "Position": "1936,880"
+      "Identifier": "45",
+      "Position": "2112,864"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "57",
+        "Identifier": "50",
         "Output": "Result"
       },
-      "Identifier": "53",
+      "Identifier": "46",
       "Position": "1552,768"
     },
     {
       "_class": "Subtract",
       "A": {
-        "Identifier": "72",
+        "Identifier": "65",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "55",
+        "Identifier": "48",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "54",
+      "Identifier": "47",
       "Position": "512,592"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "76",
+        "Identifier": "69",
         "Output": "Result"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": 32,
-      "Identifier": "55",
+      "Identifier": "48",
       "Position": "256,800"
     },
     {
       "_class": "Max",
       "InputA": {
-        "Identifier": "54",
+        "Identifier": "47",
         "Output": "Result"
       },
       "InputB": {},
       "DefaultA": 0,
       "DefaultB": 0,
-      "Identifier": "56",
+      "Identifier": "49",
       "Position": "624,592"
     },
     {
       "_class": "Min",
       "InputA": {
-        "Identifier": "56",
+        "Identifier": "49",
         "Output": "Result"
       },
       "InputB": {},
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "57",
+      "Identifier": "50",
       "Position": "816,592"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "23",
+        "Identifier": "16",
         "Output": "R"
       },
-      "Identifier": "58",
+      "Identifier": "51",
       "Position": "80,144"
     },
     {
@@ -945,7 +840,7 @@
         "Identifier": "3",
         "Output": "A"
       },
-      "Identifier": "59",
+      "Identifier": "52",
       "Position": "80,128"
     },
     {
@@ -955,129 +850,129 @@
         "Identifier": "2",
         "Output": "Result"
       },
-      "Identifier": "60",
+      "Identifier": "53",
       "Position": "80,112"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "49",
+        "Identifier": "42",
         "Output": "Result"
       },
-      "Identifier": "61",
+      "Identifier": "54",
       "Position": "272,1456"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "48",
+        "Identifier": "41",
         "Output": "R"
       },
-      "Identifier": "62",
+      "Identifier": "55",
       "Position": "272,1472"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "42",
+        "Identifier": "35",
         "Output": "R"
       },
-      "Identifier": "63",
+      "Identifier": "56",
       "Position": "272,1488"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "60",
+        "Identifier": "53",
         "Output": "Result"
       },
-      "Identifier": "64",
+      "Identifier": "57",
       "Position": "1632,448"
     },
     {
       "_class": "Reroute",
       "Comment": null,
       "Input": {
-        "Identifier": "59",
+        "Identifier": "52",
         "Output": "Result"
       },
-      "Identifier": "65",
+      "Identifier": "58",
       "Position": "1632,464"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "58",
+        "Identifier": "51",
         "Output": "Result"
       },
-      "Identifier": "66",
+      "Identifier": "59",
       "Position": "1632,480"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "61",
+        "Identifier": "54",
         "Output": "Result"
       },
-      "Identifier": "67",
+      "Identifier": "60",
       "Position": "1680,1072"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "62",
+        "Identifier": "55",
         "Output": "Result"
       },
-      "Identifier": "68",
+      "Identifier": "61",
       "Position": "1680,1088"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "63",
+        "Identifier": "56",
         "Output": "Result"
       },
-      "Identifier": "69",
+      "Identifier": "62",
       "Position": "1680,1104"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "71",
+        "Identifier": "64",
         "Output": "Result"
       },
-      "Identifier": "70",
+      "Identifier": "63",
       "Position": "1680,1056"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "16",
+        "Identifier": "11",
         "Output": "Result"
       },
-      "Identifier": "71",
+      "Identifier": "64",
       "Position": "272,1440"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "75",
+        "Identifier": "68",
         "Output": "Result"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": -0.5,
-      "Identifier": "72",
+      "Identifier": "65",
       "Position": "192,656"
     },
     {
@@ -1097,59 +992,59 @@
           "Name": ""
         }
       },
-      "Identifier": "73",
+      "Identifier": "66",
       "Position": "-416,832"
     },
     {
       "_class": "Divide",
       "A": {
-        "Identifier": "33",
+        "Identifier": "26",
         "Output": "A"
       },
       "B": {
-        "Identifier": "73",
+        "Identifier": "66",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "74",
+      "Identifier": "67",
       "Position": "-112,784"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "38",
+        "Identifier": "31",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "74",
+        "Identifier": "67",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "75",
+      "Identifier": "68",
       "Position": "32,656"
     },
     {
       "_class": "Subtract",
       "A": {
-        "Identifier": "43",
+        "Identifier": "36",
         "Output": "R"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": 0.5,
-      "Identifier": "76",
+      "Identifier": "69",
       "Position": "48,816"
     },
     {
       "_class": "Branch",
       "True": {
-        "Identifier": "80",
+        "Identifier": "73",
         "Output": "Result"
       },
       "False": {
-        "Identifier": "82",
+        "Identifier": "74",
         "Output": "Result"
       },
       "A": {},
@@ -1162,40 +1057,28 @@
           "Name": "Tint"
         }
       },
-      "Identifier": "77",
-      "Position": "1664,192"
+      "Identifier": "70",
+      "Position": "960,-320"
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "1536,368",
+      "Color": "Orange",
+      "Description": "",
+      "Title": "World Position Gradient",
+      "Layer": 3,
+      "Identifier": "71",
+      "Position": "-1488,-1200"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "13",
+        "Identifier": "70",
         "Output": "Result"
       },
-      "Identifier": "78",
-      "Position": "464,-96"
-    },
-    {
-      "_class": "Reroute",
-      "Comment": "",
-      "Input": {},
-      "Identifier": "79",
+      "Identifier": "72",
       "Position": "1632,432"
-    },
-    {
-      "_class": "Multiply",
-      "A": {
-        "Identifier": "8",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "81",
-        "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "80",
-      "Position": "1312,-384"
     },
     {
       "_class": "Blend",
@@ -1204,23 +1087,23 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "28",
+        "Identifier": "21",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "27",
+        "Identifier": "20",
         "Output": "Result"
       },
       "Fraction": 0.5,
       "BlendMode": "Overlay",
       "Clamp": true,
-      "Identifier": "81",
-      "Position": "1024,-304"
+      "Identifier": "73",
+      "Position": "608,-464"
     },
     {
       "_class": "Blend",
       "A": {
-        "Identifier": "10",
+        "Identifier": "9",
         "Output": "Result"
       },
       "B": {
@@ -1231,8 +1114,8 @@
       "Fraction": 0.5,
       "BlendMode": "Mix",
       "Clamp": true,
-      "Identifier": "82",
-      "Position": "576,64"
+      "Identifier": "74",
+      "Position": "608,-288"
     }
   ]
 }
