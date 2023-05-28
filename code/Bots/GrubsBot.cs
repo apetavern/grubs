@@ -8,7 +8,6 @@ public partial class GrubsBot : Bot
 	public GrubsBot()
 	{
 		GrubsBot.SetDefaultNames( BotNames );
-		MyPlayer.Color = new Color( Game.Random.Float(), Game.Random.Float(), Game.Random.Float(), 1f );
 	}
 
 	Grub TargetGrub { get; set; }
