@@ -134,17 +134,22 @@ public sealed partial class GrubsGame : GameManager
 
 	private void PopulatePlayerColors()
 	{
-		PlayerColors.Add( Color.FromBytes( 232, 59, 105 ), false );  // Red
-		PlayerColors.Add( Color.FromBytes( 33, 146, 255 ), false );  // Blue
-		PlayerColors.Add( Color.FromBytes( 56, 229, 77 ), false );   // Green 
-		PlayerColors.Add( Color.FromBytes( 56, 118, 29 ), false );   // ForestGreen
-		PlayerColors.Add( Color.FromBytes( 248, 249, 136 ), false ); // Yellow
-		PlayerColors.Add( Color.FromBytes( 251, 172, 204 ), false ); // Pink
-		PlayerColors.Add( Color.FromBytes( 103, 234, 202 ), false ); // Cyan
-		PlayerColors.Add( Color.FromBytes( 255, 174, 109 ), false ); // Orange
-		PlayerColors.Add( Color.FromBytes( 173, 162, 255 ), false ); // Purple
-		PlayerColors.Add( Color.FromBytes( 118, 103, 87 ), false );  // PastelBrown
-		PlayerColors.Add( Color.FromBytes( 240, 236, 211 ), false ); // Eggshell
+		PlayerColors.Add( Color.FromBytes( 56, 229, 77 ), false );      // Green
+		PlayerColors.Add( Color.FromBytes( 192, 255, 169 ), false );    // Bright Pastel Green
+		PlayerColors.Add( Color.FromBytes( 56, 118, 29 ), false );      // ForestGreen
+		PlayerColors.Add( Color.FromBytes( 255, 174, 109 ), false );    // Orange
+		PlayerColors.Add( Color.FromBytes( 255, 216, 89 ), false );     // Bright Yellow
+		PlayerColors.Add( Color.FromBytes( 248, 249, 136 ), false );    // Yellow
+		PlayerColors.Add( Color.FromBytes( 103, 234, 202 ), false );    // Cyan
+		PlayerColors.Add( Color.FromBytes( 118, 103, 87 ), false );     // PastelBrown
+		PlayerColors.Add( Color.FromBytes( 240, 236, 211 ), false );    // Eggshell
+		PlayerColors.Add( Color.FromBytes( 232, 59, 105 ), false );     // Red
+		PlayerColors.Add( Color.FromBytes( 255, 129, 172 ), false );    // Strong Pink
+		PlayerColors.Add( Color.FromBytes( 251, 172, 204 ), false );    // Pink
+		PlayerColors.Add( Color.FromBytes( 213, 69, 255 ), false );     // Strong Purple
+		PlayerColors.Add( Color.FromBytes( 173, 162, 255 ), false );    // Purple
+		PlayerColors.Add( Color.FromBytes( 33, 146, 255 ), false );     // Blue
+		PlayerColors.Add( Color.FromBytes( 169, 213, 255 ), false );    // Bright Pastel Blue
 	}
 
 	[GrubsEvent.Game.End]
