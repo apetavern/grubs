@@ -29,7 +29,7 @@ public class GrubsCamera
 			Distance = _distanceRange.Clamp( Distance );
 		}
 
-		if ( _timeUntilCameraUnlock <= 0 || _target.IsDormant )
+		if ( _timeUntilCameraUnlock <= 0 || (_target is not null && _target.IsDormant) )
 			FindTarget();
 
 		if ( !_target.IsValid() )
@@ -96,7 +96,7 @@ public class GrubsCamera
 		}
 
 		foreach ( var gadget in Entity.All.OfType<Gadget>().Where( e => !e.IsDormant ) )
- 		{
+		{
 			if ( gadget.ShouldCameraFollow )
 			{
 				SetTarget( gadget, 2f );
