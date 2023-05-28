@@ -61,8 +61,10 @@ public partial class Player
 
 	public static Color GetRandomUnusedColor()
 	{
-		var colors = GrubsGame.Instance.PlayerColors.Where( x => !x.Value ).ToArray();
-		return colors.Length > 0 ? Random.Shared.FromArray( colors ).Key : Random.Shared.FromArray( GrubsGame.Instance.PlayerColors.Keys.ToArray() );
+		var color = Game.Random.FromList( GrubsGame.Instance.PlayerColors.Where( k => !k.Value ).ToList() ).Key;
+		GrubsGame.Instance.PlayerColors[color] = true;
+
+		return color;
 	}
 
 	public static readonly List<string> GrubNamePresets = new()
@@ -142,12 +144,5 @@ public partial class Player
 	{
 		GrubNames = System.Text.Json.JsonSerializer.Serialize( SelectedGrubNames );
 		FileSystem.Data.WriteAllText( "GrubNames.txt", GrubNames );
-	}
-
-	[GrubsEvent.Game.Start]
-	void OnGameStart()
-	{
-		if ( Color == DefaultColor )
-			Color = GetRandomUnusedColor();
 	}
 }
