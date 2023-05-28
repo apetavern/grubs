@@ -23,13 +23,13 @@
                         <img src="avatar:@client.SteamId" class="avatar" />
                         <label class="name">@client.Name</label>
                     </div>
-                    <div class="hours" style="align-items: center;">
-                        @if(!client.IsBot)
-                        {
+                    @if(!client.IsBot)
+                    {
+                        <div class="hours" style="align-items: center;">
                             <label>@player.PlayTime.ToString("0.0")hrs</label>
-                            <button icon="timer" style="margin-left: 4px;" />
-                        }
-                    </div>
+                            <button icon="timer" style="margin-left: 4px;" />             
+                        </div>
+                    }
                 </div>
             }
         </div>
