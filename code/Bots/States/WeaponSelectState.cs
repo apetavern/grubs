@@ -14,6 +14,47 @@ public partial class WeaponSelectState : BaseState
 		DecideWeapon();
 	}
 
+	List<string> LineOfSightWeapons = new List<string>()
+	{
+		"bazooka",
+		"grenade",
+		"cluster grenade",
+		"revolver",
+		"shotgun",
+		"petrolbomb",
+		"uzi",
+		"gibgun",
+		"minigun",
+	};
+
+	List<string> LandPenetratingWeapons = new List<string>()
+	{
+		"uzi",
+		"gibgun",
+		"minigun",
+		"torch"
+	};
+
+	List<string> ClosebyWeapons = new List<string>()
+	{
+		"mine",
+		"dynamite",
+		"baseballbat",
+		"bitchslap"
+	};
+
+	List<string> DroppableProjectileWeapons = new List<string>()
+	{
+		"mine",
+		"dynamite"
+	};
+
+	List<string> FarReachWeapons = new List<string>()
+	{
+		"teleporter",
+		"concrete garry"
+	};
+
 	public void DecideWeapon()
 	{
 		var activeGrub = MyPlayer.ActiveGrub;
@@ -28,34 +69,49 @@ public partial class WeaponSelectState : BaseState
 
 		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
 
+		var availableWeapons = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).OrderBy( x => Game.Random.Int( 1000 ) );
+
 		if ( !lineOfSight )
 		{
-			HitScanComponent hitscancomp;
-			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).Where( W => W.FiringType == FiringType.Instant ).Where( W => W.Components.TryGet( out hitscancomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+			var selectedWeapon = availableWeapons.Where( W => LandPenetratingWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
 
-			if ( selectedWeapon == null )//We ran out of trace weapons...
+			if ( selectedWeapon == null )//We ran out of penetrate weapons...
 			{
-				GadgetWeaponComponent gadgetcomp = null;
-				selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+				selectedWeapon = availableWeapons.Where( W => LineOfSightWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
 			}
 
 			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 		else
 		{
-			GadgetWeaponComponent gadgetcomp = null;
-			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).Where( W => W.FiringType == FiringType.Charged ).Where( W => W.Components.TryGet( out gadgetcomp ) == true ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+			var selectedWeapon = availableWeapons.Where( W => LineOfSightWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
 
 			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
-		if ( MyPlayer.ActiveGrub.ActiveWeapon == null )
+		if ( direction.z < -128 )
 		{
-			var selectedWeapon = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).OrderBy( x => Game.Random.Int( 1000 ) ).FirstOrDefault();
+			var selectedWeapon = availableWeapons.Where( W => DroppableProjectileWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
 
-			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
+			if ( selectedWeapon != null )
+				MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
+		if ( distance < 64f )
+		{
+			var selectedWeapon = availableWeapons.Where( W => ClosebyWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
+
+			if ( selectedWeapon != null )
+				MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
+		}
+
+		if ( distance > 400f || direction.z > 128 )
+		{
+			var selectedWeapon = availableWeapons.Where( W => FarReachWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
+
+			if ( selectedWeapon != null )
+				MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
+		}
 
 		FinishedState();
 	}
