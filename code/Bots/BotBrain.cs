@@ -16,6 +16,8 @@ public partial class BotBrain : Entity
 
 	public IEnumerable<BaseState> States;
 
+	public const float MaxFallDistance = 150f;
+
 	public Player MyPlayer => Owner as Player;
 
 	public TimeSince TimeSinceStateStarted = 0f;
@@ -23,6 +25,7 @@ public partial class BotBrain : Entity
 	public override void Spawn()
 	{
 		Components.Create<TargetingState>();
+		Components.Create<CrateFindingState>();
 		Components.Create<PositioningState>();
 		Components.Create<WeaponSelectState>();
 		Components.Create<AimingState>();
@@ -42,7 +45,7 @@ public partial class BotBrain : Entity
 
 		if ( !GridAStar.Grid.Exists() )
 		{
-			GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 150f, standableAngle: 45f, save: false );
+			GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 100f, standableAngle: 50f, save: false );
 		}
 	}
 
