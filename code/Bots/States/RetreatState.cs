@@ -19,21 +19,24 @@ public partial class RetreatState : BaseState
 	{
 		Vector3 direction = activeGrub.Position - Brain.TargetGrub.Position;
 
-		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 90f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 30f + Vector3.Up * 5f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 50f - Vector3.Up * 512f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 
 		//DebugOverlay.TraceResult( tr );
-		//DebugOverlay.TraceResult( clifftr );
+
+		//DebugOverlay.TraceResult( tr );
 
 		//DebugOverlay.Line( activeGrub.EyePosition + forwardLook * 50f, activeGrub.EyePosition );
 
-		bool OnEdge = !clifftr.Hit;
+		bool OnEdge = clifftr.Distance > BotBrain.MaxFallDistance || !clifftr.Hit || MathF.Round( clifftr.EndPosition.z ) == 0;
+
+		bool WaterEdge = MathF.Round( clifftr.EndPosition.z ) == 0;
 
 		if ( Brain.TimeSinceStateStarted > 5f )
 		{
 			GamemodeSystem.Instance.UseTurn();
 		}
 
-		MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f );
+		MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f * (WaterEdge ? -1 : 1) );
 
 		MyPlayer.LookInput = 0f;
 
@@ -46,7 +49,7 @@ public partial class RetreatState : BaseState
 			Input.SetAction( "jump", false );
 		}
 
-		if ( Game.Random.Float() > 0.995f )
+		if ( Game.Random.Float() > 0.995f || WaterEdge )
 		{
 			MyPlayer.MoveInput = -MyPlayer.MoveInput;
 			Input.SetAction( "backflip", true );
