@@ -24,12 +24,20 @@ public partial class PositioningState : BaseState
 
 	public Vector3 ProcessPath()
 	{
-		if ( Vector3.DistanceBetween( MyPlayer.ActiveGrub.Position, CellPath.ElementAt( PathIndex ).Position ) < 25f && PathIndex < CellPath.Count - 1 )
+		if ( Vector3.DistanceBetween( MyPlayer.ActiveGrub.Position, CellPath.ElementAt( PathIndex ).Position ) < 50f && PathIndex < CellPath.Count - 1 )
 		{
 			PathIndex++;
 		}
+		else
+		{
+			CellPath.Clear();
+			PathIndex = 0;
+			return Vector3.Zero;
+		}
 
-		/*for ( int i = 0; i < CellPath.Count - 1; i++ )
+		/*Log.Info( "Found a path!" );
+
+		for ( int i = 0; i < CellPath.Count - 1; i++ )
 		{
 			DebugOverlay.Sphere( CellPath[i].Position, 10f, Color.Blue, 0, false );
 		}*/
@@ -43,26 +51,28 @@ public partial class PositioningState : BaseState
 
 		Vector3 pathDirection = activeGrub.Position - Brain.TargetGrub.Position;
 
-		if ( Grid.Main.Exists() )
-		{
-			if ( CellPath.Count == 0 )
-			{
-				var CellStart = Grid.Main.GetNearestCell( activeGrub.Position, false );
-				var CellEnd = Grid.Main.GetNearestCell( Brain.TargetGrub.Position, false );
+		Grid grid = Grid.Grids.First().Value;
 
-				CellPath = Grid.Main.ComputePath( CellStart, CellEnd, false, null ).ToList();
-			}
-			else if ( CellPath.Count > 1 )
-			{
-				pathDirection = ProcessPath();
-			}
-			else
-			{
-				var CellPos = Grid.Main.GetCellInDirection( Grid.Main.GetNearestCell( activeGrub.Position, false ), direction, 5 ).Position;
-				pathDirection = MyPlayer.ActiveGrub.Position - CellPos;
-				//DebugOverlay.Sphere( CellPos, 10f, Color.Blue, 0, false );
-			}
+
+		if ( CellPath.Count == 0 )
+		{
+			var CellStart = grid.GetNearestCell( activeGrub.Position, false );
+			var CellEnd = grid.GetNearestCell( Brain.TargetGrub.Position, false );
+
+			//DebugOverlay.Sphere( CellStart.Position, 10f, Color.Blue, 0, false );
+
+			//DebugOverlay.Sphere( CellEnd.Position, 10f, Color.Blue, 0, false );
+
+			CellPath = grid.ComputePath( CellStart, CellEnd, false, null ).ToList();
 		}
+		else if ( CellPath.Count > 1 )
+		{
+			pathDirection = ProcessPath();
+		}
+
+
+		//DebugOverlay.Line( activeGrub.EyePosition, activeGrub.EyePosition - pathDirection, Color.Red );
+
 
 		float distance = direction.Length;
 
@@ -72,16 +82,26 @@ public partial class PositioningState : BaseState
 
 		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
 
-		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 90f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+		//DebugOverlay.TraceResult( tr );
+		//DebugOverlay.TraceResult( clifftr );
+
+		//DebugOverlay.Line( activeGrub.EyePosition + pathDirection, activeGrub.EyePosition );
+
 
 		//DebugOverlay.TraceResult( tr );
 		//DebugOverlay.TraceResult( clifftr );
 
 		bool facingTarget = Vector3.DistanceBetween( activeGrub.Position + activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position ) < Vector3.DistanceBetween( activeGrub.Position - activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position );
 
+
+		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 15f + Vector3.Up * 5f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 512f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+
+
 		//DebugOverlay.Line( activeGrub.EyePosition + pathDirection, activeGrub.EyePosition );
 
-		bool OnEdge = !clifftr.Hit;
+		bool OnEdge = clifftr.Distance > BotBrain.MaxFallDistance || !clifftr.Hit || MathF.Round( clifftr.EndPosition.z ) == 0;
+
+		//DebugOverlay.Text( clifftr.Distance + "" + OnEdge, MyPlayer.ActiveGrub.EyePosition + Vector3.Up * 10f );
 
 		float LookAtTargetValue = Vector3.Dot( forwardLook, direction.Normal * Rotation.FromPitch( 90f ) );
 
@@ -90,7 +110,7 @@ public partial class PositioningState : BaseState
 
 			MyPlayer.MoveInput = MathF.Sign( pathDirection.Normal.x * 2f );
 
-			if ( MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 50f ) )
+			if ( MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 100f ) )
 			{
 				MyPlayer.MoveInput = MathF.Sign( -pathDirection.Normal.x * 2f );
 			}
@@ -172,6 +192,8 @@ public partial class PositioningState : BaseState
 		CellPath.Clear();
 
 		MyPlayer.LookInput = 0f;
+
+		PathIndex = 0;
 
 		Input.SetAction( "jump", false );
 
