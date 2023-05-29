@@ -92,7 +92,7 @@ public partial class FreeForAll : Gamemode
 
 			//DebugOverlay.Box( worldbox, Color.Red, 100f );
 
-			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 150f, standableAngle: 45f, save: false );
+			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 50f, standableAngle: 50f, save: false );
 		}
 
 		if ( GrubsConfig.WindEnabled )
