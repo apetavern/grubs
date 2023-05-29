@@ -6,6 +6,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 	[Prefab]
 	public float ExplosionRadius { get; set; } = 100.0f;
 
+	[Prefab]
+	public float DamageRadius { get; set; } = 125.0f;
+
 	[Prefab, Net]
 	public float MaxExplosionDamage { get; set; } = 100f;
 
@@ -68,7 +71,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		switch ( ExplosionReaction )
 		{
 			case ExplosiveReaction.Explosion:
-				ExplosionHelper.Explode( Gadget.Position, Grub, ExplosionRadius, MaxExplosionDamage );
+				ExplosionHelper.Explode( Gadget.Position, Grub, ExplosionRadius, DamageRadius, MaxExplosionDamage );
 				break;
 			case ExplosiveReaction.Incendiary:
 				FireHelper.StartFiresAt( Gadget.Position, Gadget.Velocity.Normal * 10f, 10 );

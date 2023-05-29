@@ -9,23 +9,36 @@ public static partial class ExplosionHelper
 	/// </summary>
 	/// <param name="position">The center point of the explosion.</param>
 	/// <param name="source">The grub responsible for creating this explosion.</param>
-	/// <param name="radius">The radius of the explosion.</param>
+	/// <param name="explosionRadius">The radius of the explosion.</param>
+	/// <param name="damageRadius">The radius of the explosion's damage.</param>
 	/// <param name="maxDamage">The max amount of damage the explosion can do to a grub.</param>
-	public static void Explode( Vector3 position, Entity source, float radius = 100, float maxDamage = 100 )
+	public static void Explode( Vector3 position, Entity source, float explosionRadius = 100, float damageRadius = 100, float maxDamage = 100 )
 	{
 		if ( !Game.IsServer )
 			return;
 
-		foreach ( var entity in Entity.FindInSphere( position, radius ) )
+		foreach ( var entity in Entity.FindInSphere( position, damageRadius ) )
 		{
 			if ( !entity.IsValid() || entity.LifeState != LifeState.Alive || entity.Tags.Has( Tag.Invincible ) )
 				continue;
 
 			var dist = Vector3.DistanceBetween( position, entity.Position );
-			if ( dist > radius )
-				continue;
+			if ( dist > explosionRadius )
+			{
+				// Do a line-of-sight trace with just the target entity and the world.
+				entity.Tags.Add( Tag.Target );
 
-			var distanceFactor = 1.0f - Math.Clamp( dist / radius, 0, 1 );
+				var losTr = Trace.Ray( new Ray( position, entity.Position - position ), damageRadius )
+					.WithAnyTags( Tag.Solid, Tag.Target )
+					.Run();
+
+				entity.Tags.Remove( Tag.Target );
+
+				if ( losTr.Entity != entity )
+					continue;
+			}
+
+			var distanceFactor = 1.0f - Math.Clamp( dist / damageRadius, 0, 1 );
 
 			if ( entity is Grub grub )
 			{
@@ -41,12 +54,16 @@ public static partial class ExplosionHelper
 		}
 
 		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Destruction );
-		Terrain.SubtractCircle( new Vector2( position.x, position.z ), radius, materials );
-		Terrain.ScorchCircle( new Vector2( position.x, position.z ), radius + 8f );
+		Terrain.SubtractCircle( new Vector2( position.x, position.z ), explosionRadius, materials );
+		Terrain.ScorchCircle( new Vector2( position.x, position.z ), explosionRadius + 8f );
 
 		if ( ExplosionDebug )
-			DebugOverlay.Sphere( position, radius, Color.Red, 5 );
-		DoExplosionEffectsAt( To.Everyone, position, radius );
+		{
+			DebugOverlay.Sphere( position, explosionRadius, Color.Red, 5 );
+			DebugOverlay.Sphere( position, damageRadius, Color.Orange, 5 );
+		}
+
+		DoExplosionEffectsAt( To.Everyone, position, explosionRadius );
 	}
 
 	/// <summary>
