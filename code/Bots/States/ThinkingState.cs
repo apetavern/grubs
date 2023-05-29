@@ -37,8 +37,10 @@ public partial class ThinkingState : BaseState
 
 	public override void StartedState()
 	{
-		TimeToThink = Game.Random.Float( 1f, 5f );
 		base.StartedState();
+		TimeToThink = Game.Random.Float( 1f, 5f );
+		MyPlayer.MoveInput = 0f;
+		MyPlayer.LookInput = 0f;
 	}
 
 	public override void FinishedState()
