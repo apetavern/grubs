@@ -25,14 +25,15 @@ public partial class BotBrain : Entity
 	public override void Spawn()
 	{
 		Components.Create<TargetingState>();
+		Components.Create<ThinkingState>();
 		Components.Create<CrateFindingState>();
 		Components.Create<PositioningState>();
+		Components.Create<ThinkingState>();
 		Components.Create<WeaponSelectState>();
 		Components.Create<AimingState>();
 		Components.Create<FiringState>();
 		Components.Create<RetreatState>();
-
-		Components.Create<BaseState>();
+		Components.Create<ThinkingState>();
 
 		States = Components.GetAll<BaseState>();
 
@@ -62,7 +63,8 @@ public partial class BotBrain : Entity
 
 			(States.ElementAt( 0 ) as TargetingState).LineOfSightTargetCheck();
 
-			DebugOverlay.Text( States.ElementAt( CurrentState ).ToString(), MyPlayer.ActiveGrub.EyePosition );
+			if ( Debug )
+				DebugOverlay.Text( States.ElementAt( CurrentState ).ToString(), MyPlayer.ActiveGrub.EyePosition );
 		}
 		else
 		{
@@ -97,6 +99,8 @@ public partial class BotBrain : Entity
 			CurrentState += 1;
 			TimeSinceStateStarted = 0f;
 
+			States.ElementAt( CurrentState ).StartedState();
+
 			Input.SetAction( "jump", false );
 			Input.SetAction( "backflip", false );
 			Input.SetAction( "fire", false );
@@ -108,4 +112,7 @@ public partial class BotBrain : Entity
 			//Log.Info( "No more states!" );
 		}
 	}
+
+	[ConVar.Replicated( "gr_debug_botbrain" )]
+	public static bool Debug { get; set; } = false;
 }

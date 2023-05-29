@@ -32,8 +32,6 @@ public partial class FiringState : BaseState
 
 		bool facingTarget = Vector3.DistanceBetween( activeGrub.Position + activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position ) < Vector3.DistanceBetween( activeGrub.Position - activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position );
 
-		//DebugOverlay.TraceResult( tr );
-
 		if ( !facingTarget || MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 10f ) )
 		{
 			MyPlayer.MoveInput = MathF.Sign( direction.Normal.x * 2f );

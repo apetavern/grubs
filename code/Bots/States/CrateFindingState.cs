@@ -57,12 +57,13 @@ public partial class CrateFindingState : BaseState
 			return Vector3.Zero;
 		}
 
-		/*Log.Info( "Found a path!" );
-
-		for ( int i = 0; i < CellPath.Count - 1; i++ )
+		if ( BotBrain.Debug )
 		{
-			DebugOverlay.Sphere( CellPath[i].Position, 10f, Color.Blue, 0, false );
-		}*/
+			for ( int i = 0; i < CellPath.Count - 1; i++ )
+			{
+				DebugOverlay.Sphere( CellPath[i].Position, 10f, Color.Blue, 0, false );
+			}
+		}
 
 		return MyPlayer.ActiveGrub.Position - CellPath.ElementAt( PathIndex ).Position;
 	}

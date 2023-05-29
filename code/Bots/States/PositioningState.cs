@@ -35,12 +35,13 @@ public partial class PositioningState : BaseState
 			return Vector3.Zero;
 		}
 
-		/*Log.Info( "Found a path!" );
-
-		for ( int i = 0; i < CellPath.Count - 1; i++ )
+		if ( BotBrain.Debug )
 		{
-			DebugOverlay.Sphere( CellPath[i].Position, 10f, Color.Blue, 0, false );
-		}*/
+			for ( int i = 0; i < CellPath.Count - 1; i++ )
+			{
+				DebugOverlay.Sphere( CellPath[i].Position, 10f, Color.Blue, 0, false );
+			}
+		}
 
 		return MyPlayer.ActiveGrub.Position - CellPath.ElementAt( PathIndex ).Position;
 	}
@@ -70,10 +71,6 @@ public partial class PositioningState : BaseState
 			pathDirection = ProcessPath();
 		}
 
-
-		//DebugOverlay.Line( activeGrub.EyePosition, activeGrub.EyePosition - pathDirection, Color.Red );
-
-
 		float distance = direction.Length;
 
 		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 3f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
@@ -82,28 +79,21 @@ public partial class PositioningState : BaseState
 
 		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
 
-		//DebugOverlay.TraceResult( tr );
-		//DebugOverlay.TraceResult( clifftr );
-
-		//DebugOverlay.Line( activeGrub.EyePosition + pathDirection, activeGrub.EyePosition );
-
-
-		//DebugOverlay.TraceResult( tr );
-		//DebugOverlay.TraceResult( clifftr );
-
 		bool facingTarget = Vector3.DistanceBetween( activeGrub.Position + activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position ) < Vector3.DistanceBetween( activeGrub.Position - activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position );
 
 
 		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 15f + Vector3.Up * 5f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 512f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 
-
-		//DebugOverlay.Line( activeGrub.EyePosition + pathDirection, activeGrub.EyePosition );
-
 		bool OnEdge = clifftr.Distance > BotBrain.MaxFallDistance || !clifftr.Hit || MathF.Round( clifftr.EndPosition.z ) == 0;
 
-		//DebugOverlay.Text( clifftr.Distance + "" + OnEdge, MyPlayer.ActiveGrub.EyePosition + Vector3.Up * 10f );
-
 		float LookAtTargetValue = Vector3.Dot( forwardLook, direction.Normal * Rotation.FromPitch( 90f ) );
+
+		if ( BotBrain.Debug )
+		{
+			DebugOverlay.Line( activeGrub.EyePosition + pathDirection, activeGrub.EyePosition );
+			DebugOverlay.TraceResult( tr );
+			DebugOverlay.TraceResult( clifftr );
+		}
 
 		if ( (distance > 200f && !OnEdge && !lineOfSight) || !facingTarget )
 		{

@@ -21,6 +21,10 @@ public partial class BaseState : EntityComponent<BotBrain>
 			FinishedState();
 		}
 	}
+	public virtual void StartedState()
+	{
+
+	}
 
 	public virtual void FinishedState()
 	{

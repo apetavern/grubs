@@ -31,8 +31,6 @@ public partial class AimingState : BaseState
 
 		float LookAtTargetValue = Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal );
 
-		//DebugOverlay.TraceResult( tr );
-
 		MyPlayer.LookInput = LookAtTargetValue;
 
 		if ( !facingTarget )
