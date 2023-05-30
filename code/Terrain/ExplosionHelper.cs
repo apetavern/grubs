@@ -38,7 +38,7 @@ public static partial class ExplosionHelper
 					continue;
 			}
 
-			var distanceFactor = 1.0f - Math.Clamp( dist / damageRadius, 0, 1 );
+			var distanceFactor = 1.0f - MathF.Pow( dist / damageRadius, 2 ).Clamp( 0, 1 );
 
 			if ( entity is Grub grub )
 			{
