@@ -64,6 +64,8 @@ public partial class Terrain : Entity
 		SdfWorld.LocalRotation = Rotation.FromRoll( 90f );
 		SdfWorld.Tags.Add( Tag.Solid );
 
+		ResetTerrainPosition();
+
 		var creationStrategy = GrubsConfig.WorldTerrainType;
 		switch ( creationStrategy )
 		{
@@ -155,6 +157,22 @@ public partial class Terrain : Entity
 		}
 
 		return fallbackPosition;
+	}
+
+	public async Task LowerTerrain( float amount )
+	{
+		Vector3 targetPosition = SdfWorld.Position - Vector3.Up * amount;
+		while ( Vector3.DistanceBetween( SdfWorld.Position, targetPosition ) > Time.Delta * 2f )
+		{
+			Camera.Main.Position += Vector3.Random * 10f;
+			SdfWorld.Position = Vector3.Lerp( SdfWorld.Position, targetPosition, Time.Delta * 10f );
+			await GameTask.DelaySeconds( Time.Delta );
+		}
+	}
+
+	public void ResetTerrainPosition()
+	{
+		SdfWorld.Position = SdfWorld.Position.WithZ( 0 );
 	}
 
 	private bool IsInsideTerrain( Vector3 position, float size )
