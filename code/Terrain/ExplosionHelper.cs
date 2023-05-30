@@ -42,7 +42,7 @@ public static partial class ExplosionHelper
 
 			if ( entity is Grub grub )
 			{
-				var force = distanceFactor * 1000;
+				var force = distanceFactor * 750;
 				var dir = (entity.Position - position).Normal;
 				dir = dir.WithY( 0f );
 
