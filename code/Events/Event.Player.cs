@@ -22,9 +22,9 @@ public static partial class GrubsEvent
 		/// (before they are added to <see cref="Gamemode.DisconnectedPlayers"/>).
 		/// <para><see cref="Grubs.Player"/>The player who is disconnecting.</para>
 		/// </summary>
-		public class PlayerDisconnectAttribute : EventAttribute
+		public class DisconnectAttribute : EventAttribute
 		{
-			public PlayerDisconnectAttribute() : base( Disconnect ) { }
+			public DisconnectAttribute() : base( Disconnect ) { }
 		}
 	}
 }
