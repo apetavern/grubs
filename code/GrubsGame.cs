@@ -82,11 +82,14 @@ public sealed partial class GrubsGame : GameManager
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
+		if ( client.Pawn is Player player )
+			Event.Run( GrubsEvent.Player.Disconnect, player );
+
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
 
-		if ( client.Pawn is Player player && PlayerColors.ContainsKey( player.Color ) )
-			PlayerColors[player.Color] = false;
+		if ( client.Pawn is Player ply && PlayerColors.ContainsKey( ply.Color ) )
+			PlayerColors[ply.Color] = false;
 	}
 
 	public override void Simulate( IClient cl )

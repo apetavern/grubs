@@ -14,5 +14,17 @@ public static partial class GrubsEvent
 		{
 			public ChatMessageSentAttribute() : base( ChatMessageSent ) { }
 		}
+
+		public const string Disconnect = "player.disconnect";
+
+		/// <summary>
+		/// Called when a player disconnects from the game. This is ran BEFORE <see cref="Gamemode.OnClientDisconnect"/>
+		/// (before they are added to <see cref="Gamemode.DisconnectedPlayers"/>).
+		/// <para><see cref="Grubs.Player"/>The player who is disconnecting.</para>
+		/// </summary>
+		public class PlayerDisconnectAttribute : EventAttribute
+		{
+			public PlayerDisconnectAttribute() : base( Disconnect ) { }
+		}
 	}
 }
