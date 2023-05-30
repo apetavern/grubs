@@ -111,6 +111,7 @@ public partial class Terrain
 	/// <param name="material">The material to apply.</param>
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material )
 	{
+		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
 		world.Add( sdf, material );
 	}
 
@@ -123,6 +124,7 @@ public partial class Terrain
 	/// <param name="offset">Whether to apply the offset of the Sdf to world position.</param>
 	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material, bool offset = false )
 	{
+		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
 		if ( offset )
 			sdf = sdf.Translate( new Vector2( -lengthOffset, heightOffset ) );
 		world.Subtract( sdf, material );
