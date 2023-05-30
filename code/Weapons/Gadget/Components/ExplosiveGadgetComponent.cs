@@ -4,7 +4,7 @@ namespace Grubs;
 public partial class ExplosiveGadgetComponent : GadgetComponent
 {
 	[Prefab]
-	public float ExplosionRadius { get; set; } = 100.0f;
+	public float DestructionRadius { get; set; } = 100.0f;
 
 	[Prefab]
 	public float DamageRadius { get; set; } = 125.0f;
@@ -71,7 +71,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		switch ( ExplosionReaction )
 		{
 			case ExplosiveReaction.Explosion:
-				ExplosionHelper.Explode( Gadget.Position, Grub, ExplosionRadius, DamageRadius, MaxExplosionDamage );
+				ExplosionHelper.Explode( Gadget.Position, Grub, DestructionRadius, DamageRadius, MaxExplosionDamage );
 				break;
 			case ExplosiveReaction.Incendiary:
 				FireHelper.StartFiresAt( Gadget.Position, Gadget.Velocity.Normal * 10f, 10 );

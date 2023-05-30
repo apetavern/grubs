@@ -9,10 +9,10 @@ public static partial class ExplosionHelper
 	/// </summary>
 	/// <param name="position">The center point of the explosion.</param>
 	/// <param name="source">The grub responsible for creating this explosion.</param>
-	/// <param name="explosionRadius">The radius of the explosion.</param>
+	/// <param name="destructionRadius">The radius of the explosion's destruction.</param>
 	/// <param name="damageRadius">The radius of the explosion's damage.</param>
 	/// <param name="maxDamage">The max amount of damage the explosion can do to a grub.</param>
-	public static void Explode( Vector3 position, Entity source, float explosionRadius = 100, float damageRadius = 100, float maxDamage = 100 )
+	public static void Explode( Vector3 position, Entity source, float destructionRadius = 100, float damageRadius = 100, float maxDamage = 100 )
 	{
 		if ( !Game.IsServer )
 			return;
@@ -23,7 +23,7 @@ public static partial class ExplosionHelper
 				continue;
 
 			var dist = Vector3.DistanceBetween( position, entity.Position );
-			if ( dist > explosionRadius )
+			if ( dist > destructionRadius )
 			{
 				// Do a line-of-sight trace with just the target entity and the world.
 				entity.Tags.Add( Tag.Target );
@@ -54,16 +54,16 @@ public static partial class ExplosionHelper
 		}
 
 		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Destruction );
-		Terrain.SubtractCircle( new Vector2( position.x, position.z ), explosionRadius, materials );
-		Terrain.ScorchCircle( new Vector2( position.x, position.z ), explosionRadius + 8f );
+		Terrain.SubtractCircle( new Vector2( position.x, position.z ), destructionRadius, materials );
+		Terrain.ScorchCircle( new Vector2( position.x, position.z ), destructionRadius + 8f );
 
 		if ( ExplosionDebug )
 		{
-			DebugOverlay.Sphere( position, explosionRadius, Color.Red, 5 );
+			DebugOverlay.Sphere( position, destructionRadius, Color.Red, 5 );
 			DebugOverlay.Sphere( position, damageRadius, Color.Orange, 5 );
 		}
 
-		DoExplosionEffectsAt( To.Everyone, position, explosionRadius );
+		DoExplosionEffectsAt( To.Everyone, position, destructionRadius );
 	}
 
 	/// <summary>

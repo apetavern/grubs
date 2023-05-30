@@ -11,10 +11,6 @@
         "Guid": "4b451452-db92-4099-be34-3e4ff5e8d634",
         "Class": "ShardedExplosiveGadgetComponent",
         "Keys": {
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "50"
-          },
           "MaxExplosionDamage": {
             "Type": "Single",
             "Value": "75"
@@ -48,6 +44,14 @@
           "ShardGadgetPrefab": {
             "Type": "Prefab",
             "Value": "\u0022prefabs/weapons/clustergrenade/clustergrenade_shard.prefab\u0022"
+          },
+          "DestructionRadius": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "75"
           }
         }
       },
