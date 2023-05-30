@@ -33,6 +33,10 @@ public partial class ThinkingState : BaseState
 		{
 			FinishedState();
 		}
+		else
+		{
+			MyPlayer.ActiveGrub.SetAnimParameter( "bot_thinking", true );
+		}
 	}
 
 	public override void StartedState()
@@ -46,7 +50,7 @@ public partial class ThinkingState : BaseState
 	public override void FinishedState()
 	{
 		base.FinishedState();
-
+		MyPlayer.ActiveGrub.SetAnimParameter( "bot_thinking", false );
 		if ( CogsModel is not null )
 		{
 			CogsModel.Delete();
