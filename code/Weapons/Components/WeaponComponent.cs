@@ -72,7 +72,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public void Fire()
 	{
-		Weapon.HasFired = true;
+		Weapon.IsChargeConsumed = true;
 		TimeSinceFired = 0f;
 		IsCharging = false;
 
