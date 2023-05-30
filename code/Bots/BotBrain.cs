@@ -33,7 +33,7 @@ public partial class BotBrain : Entity
 		Components.Create<AimingState>();
 		Components.Create<FiringState>();
 		Components.Create<RetreatState>();
-		Components.Create<ThinkingState>();
+		Components.Create<BaseState>();
 
 		States = Components.GetAll<BaseState>();
 

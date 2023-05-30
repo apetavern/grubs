@@ -84,6 +84,9 @@ public partial class PositioningState : BaseState
 
 		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 15f + Vector3.Up * 5f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 512f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 
+		var ceiltr = Trace.Ray( activeGrub.EyePosition, activeGrub.EyePosition + Vector3.Up * 10f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+
+
 		bool OnEdge = clifftr.Distance > BotBrain.MaxFallDistance || !clifftr.Hit || MathF.Round( clifftr.EndPosition.z ) == 0;
 
 		float LookAtTargetValue = Vector3.Dot( forwardLook, direction.Normal * Rotation.FromPitch( 90f ) );
@@ -100,14 +103,14 @@ public partial class PositioningState : BaseState
 
 			MyPlayer.MoveInput = MathF.Sign( pathDirection.Normal.x * 2f );
 
-			if ( MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 100f ) )
+			if ( MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 75f ) )
 			{
 				MyPlayer.MoveInput = MathF.Sign( -pathDirection.Normal.x * 2f );
 			}
 
 			MyPlayer.LookInput = 0f;
 
-			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.95f && !OnEdge )
+			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.95f && !OnEdge && !ceiltr.Hit )
 			{
 				Input.SetAction( "jump", true );
 			}
@@ -116,7 +119,7 @@ public partial class PositioningState : BaseState
 				Input.SetAction( "jump", false );
 			}
 
-			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.99f )
+			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.99f && !ceiltr.Hit )
 			{
 				MyPlayer.MoveInput = -MyPlayer.MoveInput;
 				Input.SetAction( "backflip", true );
@@ -145,7 +148,7 @@ public partial class PositioningState : BaseState
 
 			MyPlayer.LookInput = 0f;
 
-			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.95f && !OnEdge )
+			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.95f && !OnEdge && !ceiltr.Hit )
 			{
 				Input.SetAction( "jump", true );
 			}
@@ -154,7 +157,7 @@ public partial class PositioningState : BaseState
 				Input.SetAction( "jump", false );
 			}
 
-			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.99f )
+			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.99f && !ceiltr.Hit )
 			{
 				MyPlayer.MoveInput = -MyPlayer.MoveInput;
 				Input.SetAction( "backflip", true );
