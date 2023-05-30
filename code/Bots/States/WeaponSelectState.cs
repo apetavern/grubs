@@ -63,7 +63,7 @@ public partial class WeaponSelectState : BaseState
 
 		float distance = direction.Length;
 
-		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 3f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 5f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 
 		bool lineOfSight = tr.Entity == Brain.TargetGrub;
 
@@ -109,7 +109,7 @@ public partial class WeaponSelectState : BaseState
 				MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
-		if ( distance > 400f || direction.z < -256f )
+		if ( (distance > 400f || direction.z < -256f) && !lineOfSight )
 		{
 			var selectedWeapon = availableWeapons.Where( W => FarReachWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
 
