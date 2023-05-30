@@ -7,9 +7,6 @@ Layer0
 	//---- Animation ----
 	F_TEXTURE_ANIMATION 1
 
-	//---- PBR ----
-	F_SELF_ILLUM 1
-
 	//---- Rendering ----
 	F_RENDER_BACKFACES 1
 
@@ -44,14 +41,6 @@ Layer0
 	//---- Roughness ----
 	g_flRoughnessScaleFactor "1.000"
 	TextureRoughness "[1.000000 1.000000 1.000000 0.000000]"
-
-	//---- Self Illum ----
-	g_flSelfIllumAlbedoFactor "1.000"
-	g_flSelfIllumBrightness "5.000"
-	g_flSelfIllumScale "16.000"
-	g_vSelfIllumScrollSpeed "[0.000 0.000]"
-	g_vSelfIllumTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureSelfIllumMask "models/bots/cogs_animated_alpha.psd"
 
 	//---- Texture Animation ----
 	g_flAnimationFrame "0.000"
