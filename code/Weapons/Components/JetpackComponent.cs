@@ -3,8 +3,11 @@
 [Prefab]
 public partial class JetpackComponent : WeaponComponent
 {
-	public float MaxVerticalSpeed => 80f;
-	public float MaxHorizontalSpeed => 300f;
+	[Prefab]
+	public float MaxVerticalSpeed { get; set; } = 80f;
+
+	[Prefab]
+	public float MaxHorizontalSpeed { get; set; } = 300f;
 
 	private Particles _leftJetParticle;
 	private Particles _rightJetParticle;
@@ -65,5 +68,6 @@ public partial class JetpackComponent : WeaponComponent
 			controller.Velocity = controller.Velocity.WithZ( verticalVelocity );
 
 		controller.Velocity = Vector3.Lerp( controller.Velocity, controller.Velocity.WithX( horizontalVelocity ), Time.Delta );
+		controller.Velocity = controller.Velocity.ComponentMax( controller.Velocity.WithZ( -350 ) );
 	}
 }
