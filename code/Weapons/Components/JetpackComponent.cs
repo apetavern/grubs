@@ -1,151 +1,70 @@
-﻿using Sandbox.Sdf;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 [Prefab]
 public partial class JetpackComponent : WeaponComponent
 {
+	public float MaxVerticalSpeed => 80f;
+	public float MaxHorizontalSpeed => 300f;
 
-	[Prefab, Net]
-	public float ThrustSpeed { get; set; } = 25f;
-
-	[Prefab, Net]
-	public float Fuel { get; set; } = 10f;
-
-	[Net, Predicted]
-	public float FuelCount { get; set; }
-
-	[Net, Predicted]
-	public Vector3 VelocityInput { get; set; }
-
-	Particles jetparticle1 { get; set; }
-
-	Particles jetparticle2 { get; set; }
-
-	Particles jetparticle3 { get; set; }
-
-	public override void Simulate( IClient client )
-	{
-		base.Simulate( client );
-
-		Grub.SetAnimParameter( "jetpack_active", true );
-		Grub.SetAnimParameter( "jetpack_dir", Grub.Facing * VelocityInput.x / 15f );
-
-		VelocityInput = new Vector3( MathX.Lerp( VelocityInput.x, 0, Time.Delta / 2f ), 0, MathX.Lerp( VelocityInput.z, 0, Time.Delta ) );
-
-		Grub.Velocity = Vector3.Zero;
-
-		if ( Grub.Player.LookInput > 0 )
-		{
-			if ( Grub.Controller.IsGrounded )
-			{
-				Grub.Controller.GetMechanic<SquirmMechanic>().ClearGroundEntity();
-			}
-
-			if ( jetparticle1 is null )
-			{
-				jetparticle1 = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-				jetparticle2 = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-				jetparticle3 = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-
-				jetparticle1.SetEntityAttachment( 0, Weapon, "jet_middle" );
-				jetparticle2.SetEntityAttachment( 0, Weapon, "jet_left" );
-				jetparticle3.SetEntityAttachment( 0, Weapon, "jet_right" );
-			}
-			else
-			{
-				jetparticle1.SetEntityAttachment( 0, Weapon, "jet_middle" );
-				jetparticle2.SetEntityAttachment( 0, Weapon, "jet_left" );
-				jetparticle3.SetEntityAttachment( 0, Weapon, "jet_right" );
-			}
-
-			if ( jetparticle1 is not null )
-			{
-				if ( Grub.Player.MoveInput != 0 )
-				{
-					jetparticle1.EnableDrawing = true;
-				}
-				else
-				{
-					jetparticle1.EnableDrawing = false;
-				}
-				jetparticle2.EnableDrawing = true;
-				jetparticle3.EnableDrawing = true;
-			}
-
-			Sound.FromScreen( "torch_fire" ).SetPitch( 1f ).SetVolume( 0.5f );
-
-			FuelCount -= Time.Delta;
-
-			if ( FuelCount <= 0 )
-			{
-				FireFinished();
-			}
-
-			VelocityInput = Vector3.Lerp( VelocityInput, new Vector3( -Grub.Player.MoveInput * ThrustSpeed, 0, ThrustSpeed / 2f ), Time.Delta );
-		}
-		else if ( !Grub.Controller.IsGrounded )
-		{
-			if ( jetparticle1 is not null )
-			{
-				jetparticle1.EnableDrawing = false;
-				jetparticle2.EnableDrawing = false;
-				jetparticle3.EnableDrawing = false;
-			}
-			if ( Grub.Controller.GetMechanic<JumpMechanic>().TimeSinceStop > 1f && Grub.Controller.GetMechanic<BackflipMechanic>().TimeSinceStop > 1f )
-			{
-				Grub.Position -= Vector3.Up * 300 * Time.Delta;
-				Grub.Position += new Vector3( 0, 0, VelocityInput.z * Time.Delta * ThrustSpeed );
-			}
-		}
-		else
-		{
-			VelocityInput = Vector3.Zero;
-		}
-
-		if ( Grub.MoveInput == -1 )
-		{
-			Grub.Rotation = Rotation.Identity;
-		}
-		else if ( Grub.MoveInput == 1 )
-		{
-			Grub.Rotation = new Angles( 0, 180f, 0 ).ToRotation();
-		}
-
-		MoveHelper mover = new MoveHelper( Grub.Position, VelocityInput * Time.Delta * ThrustSpeed );
-		mover.Trace = Trace.Box( Grub.Controller.Hull, Grub.Position, Grub.Position + VelocityInput * Time.Delta * ThrustSpeed ).Ignore( Grub );
-		mover.TryMove( Time.Delta );
-		Grub.Position = mover.Position + mover.Velocity;
-		Grub.Velocity = mover.Velocity;
-	}
+	private Particles _leftJetParticle;
+	private Particles _rightJetParticle;
+	private Particles _bottomJetParticle;
 
 	public override void OnDeploy()
 	{
 		base.OnDeploy();
-		FuelCount = Fuel;
+
+		Grub.SetAnimParameter( "jetpack_active", true );
+
+		if ( !Prediction.FirstTime )
+			return;
+
+		_leftJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+		_rightJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+		_bottomJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+
+		_leftJetParticle.SetEntityAttachment( 0, Weapon, "jet_middle" );
+		_rightJetParticle.SetEntityAttachment( 0, Weapon, "jet_left" );
+		_bottomJetParticle.SetEntityAttachment( 0, Weapon, "jet_right" );
 	}
 
 	public override void OnHolster()
 	{
 		base.OnHolster();
+
 		Grub.SetAnimParameter( "jetpack_active", false );
-		VelocityInput = Vector3.Zero;
-		FuelCount = Fuel;
-		if ( Weapon.Ammo != 0 )
-		{
-			Weapon.Ammo -= 1;
-		}
-		if ( jetparticle1 != null )
-		{
-			jetparticle1.Destroy();
-			jetparticle2.Destroy();
-			jetparticle3.Destroy();
-		}
+
+		_leftJetParticle?.Destroy( true );
+		_rightJetParticle?.Destroy( true );
+		_bottomJetParticle?.Destroy( true );
 	}
 
-	public override void FireFinished()
+	public override void Simulate( IClient client )
 	{
-		FuelCount = Fuel;
-		Player.Inventory.SetActiveWeapon( null, true );
+		base.Simulate( client );
+
+		var controller = Grub.Controller;
+		var horizontalInput = -Grub.MoveInput;
+		var verticalInput = -Grub.LookInput * Grub.Facing;
+
+		var isAscending = verticalInput > 0;
+		var isReversing = horizontalInput != Grub.Facing;
+
+		if ( !isAscending && controller.IsGrounded )
+			return;
+
+		Grub.Controller.ClearGroundEntity();
+		Grub.SetAnimParameter( "jetpack_dir", Grub.Facing * horizontalInput );
+
+		var horizontalVelocity = !isReversing ? MaxHorizontalSpeed * horizontalInput : MaxHorizontalSpeed * horizontalInput * 0.85f;
+		var verticalVelocity = verticalInput * MaxVerticalSpeed;
+
+		if ( verticalVelocity > 0 )
+			controller.Velocity = controller.Velocity.WithZ( verticalVelocity );
+
+		controller.Velocity = Vector3.Lerp( controller.Velocity, controller.Velocity.WithX( horizontalVelocity ), Time.Delta );
+
+		var mover = new MoveHelper( controller.Position, controller.Velocity );
+		mover.Trace = mover.Trace.Size( controller.Hull ).Ignore( Grub );
 	}
 }
