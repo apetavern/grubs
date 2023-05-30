@@ -13,7 +13,7 @@ public partial class JetpackComponent : WeaponComponent
 	public float MaxFuel { get; set; } = 25f;
 
 	[Net, Predicted]
-	private float FuelRemaining { get; set; }
+	public float FuelRemaining { get; private set; }
 
 	private Particles _leftJetParticle;
 	private Particles _rightJetParticle;
@@ -28,7 +28,7 @@ public partial class JetpackComponent : WeaponComponent
 		Grub.SetAnimParameter( "jetpack_active", true );
 
 		if ( Game.IsClient )
-			_fuelWorldPanel = new( Grub );
+			_fuelWorldPanel = new( Grub, this );
 		else
 			FuelRemaining = MaxFuel;
 
@@ -68,9 +68,9 @@ public partial class JetpackComponent : WeaponComponent
 
 		var isAscending = verticalInput > 0;
 
-		_leftJetParticle.EnableDrawing = isAscending;
-		_rightJetParticle.EnableDrawing = isAscending;
-		_backJetParticle.EnableDrawing = horizontalInput != 0;
+		_leftJetParticle.EnableDrawing = isAscending && !controller.IsGrounded;
+		_rightJetParticle.EnableDrawing = isAscending && !controller.IsGrounded;
+		_backJetParticle.EnableDrawing = horizontalInput != 0 && !controller.IsGrounded;
 
 		if ( !isAscending && controller.IsGrounded )
 			return;
