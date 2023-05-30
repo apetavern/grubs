@@ -21,7 +21,7 @@
     private float _health;
     private const float _transitionRate = 50f;
 
-    public GrubWorldPanel(Grub grub) : base(grub)
+    public GrubWorldPanel(Grub grub) : base(grub, Vector3.Up * 50f)
     {
         _health = Grub.Health;
     }
