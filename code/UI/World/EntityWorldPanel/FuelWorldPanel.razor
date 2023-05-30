@@ -15,7 +15,7 @@
 
     private float FuelPercentageRemaining()
     {
-        return (_jetpackComponent.FuelRemaining / _jetpackComponent.MaxFuel) * 100;
+        return (_jetpackComponent.RemainingFuel / _jetpackComponent.MaxFuel) * 100;
     }
 
     protected override int BuildHash()
@@ -32,7 +32,7 @@
         transform: rotate(180deg);
 
         .fill {
-            background-color: #ffbe448f;
+            background-color: #ffbe44d5;
             width: 100%;
         }
     }

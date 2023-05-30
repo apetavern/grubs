@@ -10,10 +10,10 @@ public partial class JetpackComponent : WeaponComponent
 	public float MaxHorizontalSpeed { get; set; } = 300f;
 
 	[Prefab, Net]
-	public float MaxFuel { get; set; } = 25f;
+	public float MaxFuel { get; set; } = 15f;
 
 	[Net, Predicted]
-	public float FuelRemaining { get; private set; }
+	public float RemainingFuel { get; private set; }
 
 	private Particles _leftJetParticle;
 	private Particles _rightJetParticle;
@@ -30,7 +30,7 @@ public partial class JetpackComponent : WeaponComponent
 		if ( Game.IsClient )
 			_fuelWorldPanel = new( Grub, this );
 		else
-			FuelRemaining = MaxFuel;
+			RemainingFuel = MaxFuel;
 
 		if ( !Prediction.FirstTime )
 			return;
@@ -50,6 +50,10 @@ public partial class JetpackComponent : WeaponComponent
 
 		Grub.SetAnimParameter( "jetpack_active", false );
 
+		// TODO: Rewrite this behaviour.
+		if ( RemainingFuel != MaxFuel && Weapon.Ammo > 0 )
+			Weapon.Ammo -= 1;
+
 		if ( Game.IsClient )
 			_fuelWorldPanel.Delete( true );
 
@@ -67,10 +71,14 @@ public partial class JetpackComponent : WeaponComponent
 		var verticalInput = -Grub.LookInput * Grub.Facing;
 
 		var isAscending = verticalInput > 0;
+		var hasFuel = RemainingFuel > 0;
 
-		_leftJetParticle.EnableDrawing = isAscending && !controller.IsGrounded;
-		_rightJetParticle.EnableDrawing = isAscending && !controller.IsGrounded;
-		_backJetParticle.EnableDrawing = horizontalInput != 0 && !controller.IsGrounded;
+		_leftJetParticle.EnableDrawing = isAscending && !controller.IsGrounded && hasFuel;
+		_rightJetParticle.EnableDrawing = isAscending && !controller.IsGrounded && hasFuel;
+		_backJetParticle.EnableDrawing = horizontalInput != 0 && !controller.IsGrounded && hasFuel;
+
+		if ( !hasFuel )
+			return;
 
 		if ( !isAscending && controller.IsGrounded )
 			return;
@@ -78,9 +86,15 @@ public partial class JetpackComponent : WeaponComponent
 		Grub.Controller.ClearGroundEntity();
 		Grub.SetAnimParameter( "jetpack_dir", Grub.Facing * horizontalInput );
 
-		var isUsingJetpack = isAscending || horizontalInput != 0;
-		if ( isUsingJetpack )
-			FuelRemaining -= Time.Delta;
+		var burnRate = 1f * Time.Delta;
+
+		if ( isAscending )
+			burnRate *= 1.2f;
+
+		if ( horizontalInput != 0 )
+			burnRate *= 1.2f;
+
+		RemainingFuel = Math.Max( RemainingFuel - burnRate, 0f );
 
 		if ( Grub.MoveInput != 0 )
 			Grub.Rotation = Grub.MoveInput != 1 ? Rotation.Identity : Rotation.From( 0, 180, 0 );
@@ -92,6 +106,6 @@ public partial class JetpackComponent : WeaponComponent
 			controller.Velocity = controller.Velocity.WithZ( verticalVelocity );
 
 		controller.Velocity = Vector3.Lerp( controller.Velocity, controller.Velocity.WithX( horizontalVelocity ), Time.Delta );
-		controller.Velocity = controller.Velocity.ComponentMax( controller.Velocity.WithZ( -350 ) );
+		controller.Velocity = controller.Velocity.ComponentMax( controller.Velocity.WithZ( -250 ) );
 	}
 }
