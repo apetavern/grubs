@@ -17,6 +17,30 @@ public partial class FreeForAll : Gamemode
 	public Queue<Player> PlayerTurnQueue { get; set; } = new();
 
 	/// <summary>
+	/// Is sudden death active?
+	/// </summary>
+	[Net]
+	public bool SuddenDeath { get; set; } = false;
+
+	/// <summary>
+	/// How many full rotations of the player list until sudden death is activated?
+	/// </summary>
+	[Net]
+	public int RoundsUntilSuddenDeath { get; set; } = 20;
+
+	/// <summary>
+	/// How many regular turns of players have passed?
+	/// </summary>
+	[Net]
+	public float TurnsPassed { get; set; } = 0;
+
+	/// <summary>
+	/// How many full rotations of the player list have happened?
+	/// </summary>
+	[Net]
+	public int RoundsPassed { get; set; } = 0;
+
+	/// <summary>
 	/// An async task for switching between player turns.
 	/// </summary>
 	public Task NextTurnTask { get; set; }
@@ -35,6 +59,12 @@ public partial class FreeForAll : Gamemode
 
 	internal override void Start()
 	{
+		TurnsPassed = 0f;
+
+		Terrain.ResetTerrainPosition();
+
+		SuddenDeath = false;
+
 		SpawnPlayers();
 
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
@@ -71,11 +101,33 @@ public partial class FreeForAll : Gamemode
 			UsedTurn = true;
 	}
 
+	private async Task CheckSuddenDeath()
+	{
+		if ( RoundsPassed != (int)MathF.Floor( TurnsPassed / (PlayerTurnQueue.Count + 1) ) )
+		{
+			RoundsPassed = (int)MathF.Floor( TurnsPassed / (PlayerTurnQueue.Count + 1) );
+
+			if ( RoundsPassed > RoundsUntilSuddenDeath )
+			{
+				SuddenDeath = true;
+			}
+
+			if ( SuddenDeath )
+			{
+				await Terrain.LowerTerrain( 10f );
+			}
+		}
+	}
+
 	private async Task NextTurn()
 	{
 		ActivePlayer.EndTurn();
 
 		await Terrain.UntilResolve();
+
+		TurnsPassed += 1;
+
+		await CheckSuddenDeath();
 
 		TurnIsChanging = true;
 
