@@ -1,0 +1,26 @@
+@inherits EntityWorldPanel
+@namespace Grubs.UI
+
+<root>
+    <div class="fill" />
+</root>
+
+@code {
+    public FuelWorldPanel(Grub grub) : base(grub, Vector3.Backward * 30f) {
+        this.PanelBounds = new(0, -500, 100, 800);
+    }
+}
+
+<style>
+    FuelWorldPanel {
+        background-color: rgba(black, 0.4);
+        border: 2px solid rgba(black, 0.4);
+        border-radius: 4px;
+
+        .fill {
+            background-color: #ffbe448f;
+            height: 100%;
+            width: 100%;
+        }
+    }
+</style>

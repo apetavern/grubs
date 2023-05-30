@@ -3,15 +3,23 @@
 [Prefab]
 public partial class JetpackComponent : WeaponComponent
 {
-	[Prefab]
+	[Prefab, Net]
 	public float MaxVerticalSpeed { get; set; } = 80f;
 
-	[Prefab]
+	[Prefab, Net]
 	public float MaxHorizontalSpeed { get; set; } = 300f;
+
+	[Prefab, Net]
+	public float MaxFuel { get; set; } = 25f;
+
+	[Net, Predicted]
+	private float FuelRemaining { get; set; }
 
 	private Particles _leftJetParticle;
 	private Particles _rightJetParticle;
-	private Particles _bottomJetParticle;
+	private Particles _backJetParticle;
+
+	private UI.FuelWorldPanel _fuelWorldPanel;
 
 	public override void OnDeploy()
 	{
@@ -19,16 +27,21 @@ public partial class JetpackComponent : WeaponComponent
 
 		Grub.SetAnimParameter( "jetpack_active", true );
 
+		if ( Game.IsClient )
+			_fuelWorldPanel = new( Grub );
+		else
+			FuelRemaining = MaxFuel;
+
 		if ( !Prediction.FirstTime )
 			return;
 
-		// _leftJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-		// _rightJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-		// _bottomJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+		_leftJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+		_rightJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
+		_backJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
 
-		// _leftJetParticle.SetEntityAttachment( 0, Weapon, "jet_middle" );
-		// _rightJetParticle.SetEntityAttachment( 0, Weapon, "jet_left" );
-		// _bottomJetParticle.SetEntityAttachment( 0, Weapon, "jet_right" );
+		_leftJetParticle.SetEntityAttachment( 0, Weapon, "jet_left" );
+		_rightJetParticle.SetEntityAttachment( 0, Weapon, "jet_right" );
+		_backJetParticle.SetEntityAttachment( 0, Weapon, "jet_middle" );
 	}
 
 	public override void OnHolster()
@@ -37,9 +50,12 @@ public partial class JetpackComponent : WeaponComponent
 
 		Grub.SetAnimParameter( "jetpack_active", false );
 
-		// _leftJetParticle?.Destroy( true );
-		// _rightJetParticle?.Destroy( true );
-		// _bottomJetParticle?.Destroy( true );
+		if ( Game.IsClient )
+			_fuelWorldPanel.Delete( true );
+
+		_leftJetParticle?.Destroy( true );
+		_rightJetParticle?.Destroy( true );
+		_backJetParticle?.Destroy( true );
 	}
 
 	public override void Simulate( IClient client )
@@ -52,11 +68,19 @@ public partial class JetpackComponent : WeaponComponent
 
 		var isAscending = verticalInput > 0;
 
+		_leftJetParticle.EnableDrawing = isAscending;
+		_rightJetParticle.EnableDrawing = isAscending;
+		_backJetParticle.EnableDrawing = horizontalInput != 0;
+
 		if ( !isAscending && controller.IsGrounded )
 			return;
 
 		Grub.Controller.ClearGroundEntity();
 		Grub.SetAnimParameter( "jetpack_dir", Grub.Facing * horizontalInput );
+
+		var isUsingJetpack = isAscending || horizontalInput != 0;
+		if ( isUsingJetpack )
+			FuelRemaining -= Time.Delta;
 
 		if ( Grub.MoveInput != 0 )
 			Grub.Rotation = Grub.MoveInput != 1 ? Rotation.Identity : Rotation.From( 0, 180, 0 );
