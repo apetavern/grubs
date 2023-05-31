@@ -22,7 +22,7 @@ public partial class FreeForAll : Gamemode
 	public Task NextTurnTask { get; set; }
 
 	private Queue<Player> LateJoinSpawnQueue { get; set; } = new();
-	private string[] _lateJoinPhrases = new string[3] { "arrived fashionably late!", "has dropped in unexpected!", "finally decided to showed up!" };
+	private string[] _lateJoinPhrases = new string[3] { "arrived fashionably late!", "has dropped in unexpectedly!", "finally decided to showed up!" };
 
 	public override float GetTimeRemaining()
 	{
@@ -52,6 +52,8 @@ public partial class FreeForAll : Gamemode
 
 		if ( !LateJoinSpawnQueue.Contains( player ) || DisconnectedPlayers.Contains( player ) )
 			LateJoinSpawnQueue.Enqueue( player );
+
+		base.PlayerJoinedLate( player );
 	}
 
 	/// <summary>
@@ -87,8 +89,6 @@ public partial class FreeForAll : Gamemode
 	{
 		ActivePlayer.EndTurn();
 
-		await HandleLateJoinerSpawn();
-
 		await Terrain.UntilResolve();
 
 		TurnIsChanging = true;
@@ -112,6 +112,7 @@ public partial class FreeForAll : Gamemode
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
 
+
 		RotateActivePlayer();
 
 		UsedTurn = false;
@@ -131,6 +132,7 @@ public partial class FreeForAll : Gamemode
 		await DealGrubDamage();
 		await HandleCrateSpawns();
 		await HandleBarrelSpawn();
+		await HandleLateJoinerSpawn();
 
 		return CheckWinConditions();
 	}
@@ -243,14 +245,20 @@ public partial class FreeForAll : Gamemode
 			return;
 
 		player.HandleLateJoin();
-
 		Players.Add( player );
 		PlayerTurnQueue.Enqueue( player );
 
-		UI.TextChat.AddInfoChatEntry( $"{player.Client.Name} {Game.Random.FromArray( _lateJoinPhrases )}" );
-		CameraTarget = player.ActiveGrub;
+		if ( !player.ActiveGrub.Components.TryGet<LateJoinComponent>( out var lateJoin ) )
+			return;
 
-		await GameTask.DelaySeconds( 3 );
+		UI.TextChat.AddInfoChatEntry( $"{player.Client.Name} {Game.Random.FromArray( _lateJoinPhrases )}" );
+
+		while ( !lateJoin.IsDoneParachuting || !player.ActiveGrub.Resolved )
+		{
+			CameraTarget = player.ActiveGrub;
+			await GameTask.Delay( 1 );
+		}
+
 		CameraTarget = null;
 	}
 

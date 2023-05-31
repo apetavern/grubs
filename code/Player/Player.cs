@@ -121,6 +121,7 @@ public partial class Player : Entity
 
 		grub.Components.Create<LateJoinComponent>();
 		Grubs.Add( grub );
+		ActiveGrub = grub;
 	}
 
 	private void CreateGrubs()

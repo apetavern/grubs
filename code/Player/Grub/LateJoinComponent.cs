@@ -3,6 +3,7 @@ namespace Grubs;
 public partial class LateJoinComponent : EntityComponent<Grub>
 {
 	private AnimatedEntity? _parachute { get; set; }
+	public bool IsDoneParachuting { get; private set; }
 
 	protected override void OnActivate()
 	{
@@ -11,22 +12,26 @@ public partial class LateJoinComponent : EntityComponent<Grub>
 			Model = Model.Load( "models/tools/parachute/parachute.vmdl" ),
 		};
 
-		_parachute.SetParent( Entity, true );
-		_parachute.SetAnimParameter( "landed", false );
-		_parachute.SetAnimParameter( "deploy", true );
+		_parachute?.SetParent( Entity, true );
+		_parachute?.SetAnimParameter( "landed", false );
+		_parachute?.SetAnimParameter( "deploy", true );
 	}
 
 	[GameEvent.Tick]
 	void Tick()
 	{
-		if ( Game.IsServer && _parachute is not null )
-			Entity.Velocity = new Vector3( GamemodeSystem.Instance.ActiveWindForce, Entity.Velocity.y, Entity.Velocity.ClampLength( 70f ).z );
+		IsDoneParachuting = Entity.Controller.IsGrounded;
 
-		if ( Entity.Controller.IsGrounded && _parachute is not null )
+		if ( !IsDoneParachuting )
 		{
-			_parachute.SetAnimParameter( "deploy", false );
-			_parachute.SetAnimParameter( "landed", true );
-			_parachute.Delete();
+			if ( Game.IsServer )
+				Entity.Velocity = new Vector3( GamemodeSystem.Instance.ActiveWindForce, Entity.Velocity.y, Entity.Velocity.ClampLength( 200f ).z );
+		}
+		else
+		{
+			_parachute?.SetAnimParameter( "deploy", false );
+			_parachute?.SetAnimParameter( "landed", true );
+			_parachute?.Delete();
 		}
 	}
 }

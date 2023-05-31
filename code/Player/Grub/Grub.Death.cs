@@ -110,6 +110,7 @@ public partial class Grub
 			{
 				Position = Facing == -1 ? Position - new Vector3( 30, 0, 0 ) : Position
 			};
+
 			await GameTask.Delay( 1025 );
 
 			ExplosionHelper.Explode( Position, this, 50f );
