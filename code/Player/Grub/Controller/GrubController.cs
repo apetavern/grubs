@@ -31,8 +31,14 @@ public partial class GrubController : EntityComponent<Grub>
 		get => GroundEntity != null;
 	}
 
-	public float TimeSpentUnGrounded { get; private set; }
-	public float MaxUnGroundedTime { get; set; } = 4f;
+	private float TimeSpentInAir { get; set; }
+
+	/// <summary>
+	/// How long a grub can be in the air (with no velocity) before we
+	/// assume they are stuck and need to be force-resolved.
+	/// </summary>
+	/// <value></value>
+	private float MaxAirTime { get; set; } = 4f;
 
 	public static float BodyGirth => 20f;
 	public static float EyeHeight => 28f;
@@ -77,7 +83,7 @@ public partial class GrubController : EntityComponent<Grub>
 		SimulateEyes();
 		SimulateMechanics();
 		UpdateRotation();
-		UpdateUnGroundedTime();
+		UpdateAirTime();
 
 		if ( Debug && Grub.IsTurn )
 		{
@@ -139,14 +145,14 @@ public partial class GrubController : EntityComponent<Grub>
 		}
 	}
 
-	private void UpdateUnGroundedTime()
+	private void UpdateAirTime()
 	{
 		// Don't force resolve if we're already resolved or we are intentionally in the air (jetpack, parachute, long fall).
 		if ( Entity.Resolved || !Velocity.IsNearlyZero() )
 			return;
 
-		TimeSpentUnGrounded = IsGrounded ? 0 : TimeSpentUnGrounded += Time.Delta;
-		if ( TimeSpentUnGrounded >= MaxUnGroundedTime )
+		TimeSpentInAir = IsGrounded ? 0 : TimeSpentInAir += Time.Delta;
+		if ( TimeSpentInAir >= MaxAirTime )
 		{
 			var groundingTrace = Trace.Ray( Position, Position + Vector3.Down * 4096 ).Ignore( Entity ).Run();
 			if ( groundingTrace.StartedSolid )
