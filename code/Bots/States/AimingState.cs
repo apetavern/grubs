@@ -9,7 +9,7 @@ namespace Grubs.Bots.States;
 public partial class AimingState : BaseState
 {
 
-	new public float MaxTimeInState = 3f;
+	new public float MaxTimeInState = 5f;
 
 	public override void Simulate()
 	{
@@ -43,7 +43,7 @@ public partial class AimingState : BaseState
 			MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f );
 		}
 
-		if ( LookAtTargetValue < 0.05f && LookAtTargetValue > -0.05f )
+		if ( Brain.TimeSinceStateStarted > MaxTimeInState )
 		{
 			MyPlayer.LookInput = 0f;
 			FinishedState();
