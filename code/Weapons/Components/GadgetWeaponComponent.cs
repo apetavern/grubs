@@ -24,15 +24,6 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	[Net]
 	private FiringType _fireType { get; set; }
 
-	[Prefab, Net]
-	public bool RemoteDetonate { get; set; }
-
-	[Net]
-	public Gadget ActiveGadget { get; set; }
-
-	[Net]
-	public bool HasFired { get; set; }
-
 	public override void OnDeploy()
 	{
 		base.OnDeploy();
@@ -71,24 +62,8 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		if ( UseTargetPreview )
 			TargetPreview?.Simulate( client );
 
-
-		if ( RemoteDetonate && IsFiring && HasFired )
-		{
-			if ( Input.Down( InputAction.Fire ) )
-			{
-				ActiveGadget.Components.Get<ExplosiveGadgetComponent>().Explode();
-				FireFinished();
-			}
-
-			if ( ActiveGadget is null )
-			{
-				FireFinished();
-			}
-		}
-
-		if ( IsFiring && ActiveGadget is null )
+		if ( IsFiring )
 			Fire();
-
 	}
 
 	public override void FireCursor()
@@ -135,24 +110,16 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
 		gadget.OnUse( Grub, Weapon, Charge );
 		gadget.PlayScreenSound( UseSound );
-		ActiveGadget = gadget;
-		HasFired = true;
 
 		Charge = MinCharge;
 
-		if ( !RemoteDetonate )
-		{
-			FireFinished();
-		}
-
+		FireFinished();
 	}
 
 	public override void FireFinished()
 	{
 		if ( UseTargetPreview )
 			TargetPreview?.Hide();
-
-		HasFired = false;
 
 		base.FireFinished();
 	}

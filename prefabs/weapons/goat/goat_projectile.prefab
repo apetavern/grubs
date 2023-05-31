@@ -52,6 +52,14 @@
           "ShouldBounce": {
             "Type": "Boolean",
             "Value": "true"
+          },
+          "AutoMove": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "IsAnimated": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },
@@ -94,6 +102,18 @@
             "Value": "100"
           }
         }
+      },
+      {
+        "Guid": "bbecdda3-b1f8-4637-bccb-df5567695be6",
+        "Class": "RemoteDetonateGadgetComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022Remote Detonate\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
       }
     ],
     "Keys": {
@@ -107,7 +127,7 @@
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
-        "Value": "false"
+        "Value": "true"
       },
       "IsDroppable": {
         "Type": "Boolean",

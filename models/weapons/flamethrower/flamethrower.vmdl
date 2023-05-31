@@ -1,0 +1,126 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "flamethrower.vmat"
+								to = "models/weapons/flamethrower/materials/flamethrower.vmat"
+							},
+							{
+								from = "inner.vmat"
+								to = "particles/blueflame/blueflame_gradient.vmat"
+							},
+							{
+								from = "outer.vmat"
+								to = "particles/blueflame/blueflame_gradient.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "muzzle"
+						parent_bone = "hold_L"
+						relative_origin = [ 20.623173, 0.729729, 5.872581 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "pilotlight"
+						parent_bone = "hold_L"
+						relative_origin = [ 22.01988, 0.730087, 1.691908 ]
+						relative_angles = [ -50.852364, -0.327594, 1.91707 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "hose_1"
+						parent_bone = "hold_L"
+						relative_origin = [ -0.743065, 0.038426, 5.827281 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "hose_2"
+						parent_bone = "neck_0"
+						relative_origin = [ -1.880467, -9.180754, 4.703886 ]
+						relative_angles = [ -85.166565, -66.395401, -108.884605 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/weapons/flamethrower/flamethrower.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"pCube14",
+								"pCylinder23",
+								"polySurface3",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "blueflame"
+						filename = "particles/blueflame/blueflame.fbx"
+						import_translation = [ 217.0, 8.0, 17.0 ]
+						import_rotation = [ -41.0, 0.0, 0.0 ]
+						import_scale = 0.1
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = "hold_L"
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+	}
+}
