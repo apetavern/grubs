@@ -119,7 +119,7 @@ public partial class Player : Entity
 			Position = GrubsGame.Instance.Terrain.FindSpawnLocation( traceDown: false )
 		};
 
-		grub.Components.Create<LateJoinComponent>();
+		grub.Components.Create<LateJoinMechanic>();
 		Grubs.Add( grub );
 		ActiveGrub = grub;
 	}

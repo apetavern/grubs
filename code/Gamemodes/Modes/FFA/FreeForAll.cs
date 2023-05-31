@@ -248,12 +248,12 @@ public partial class FreeForAll : Gamemode
 		Players.Add( player );
 		PlayerTurnQueue.Enqueue( player );
 
-		if ( !player.ActiveGrub.Components.TryGet<LateJoinComponent>( out var lateJoin ) )
+		if ( !player.ActiveGrub.Components.TryGet<LateJoinMechanic>( out var lateJoin ) )
 			return;
 
 		UI.TextChat.AddInfoChatEntry( $"{player.Client.Name} {Game.Random.FromArray( _lateJoinPhrases )}" );
 
-		while ( !lateJoin.IsDoneParachuting || !player.ActiveGrub.Resolved )
+		while ( !lateJoin.FinishedParachuting || !player.ActiveGrub.Resolved )
 		{
 			CameraTarget = player.ActiveGrub;
 			await GameTask.Delay( 1 );

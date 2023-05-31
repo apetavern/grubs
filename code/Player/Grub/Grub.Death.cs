@@ -104,7 +104,7 @@ public partial class Grub
 		LifeState = LifeState.Dying;
 
 		// This grub joined in late, don't explode them, just kill them!
-		if ( Components.Get<LateJoinComponent>() is null )
+		if ( Components.Get<LateJoinMechanic>() is null )
 		{
 			var plunger = new ModelEntity( "models/tools/dynamiteplunger/dynamiteplunger.vmdl" )
 			{
