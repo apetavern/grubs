@@ -132,6 +132,10 @@ public partial class Gamemode : Entity
 
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
+		// We don't care about disconnected players outside of the playing state.
+		if ( GamemodeSystem.Instance.CurrentState != Gamemode.State.Playing )
+			return;
+
 		if ( cl.Pawn is Player player )
 			DisconnectedPlayers.Add( player );
 	}

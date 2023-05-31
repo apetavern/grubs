@@ -69,9 +69,6 @@ public partial class Player : Entity
 
 	public override void Spawn()
 	{
-		if ( Color == DefaultColor )
-			Color = GetRandomUnusedColor();
-
 		Tags.Add( Tag.IgnoreReset );
 
 		Components.Create<Inventory>();

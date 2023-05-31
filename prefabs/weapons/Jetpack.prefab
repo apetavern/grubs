@@ -36,6 +36,10 @@
           "Fuel": {
             "Type": "Single",
             "Value": "10"
+          },
+          "MaxFuel": {
+            "Type": "Single",
+            "Value": "15"
           }
         }
       }

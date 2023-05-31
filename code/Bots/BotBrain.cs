@@ -16,6 +16,8 @@ public partial class BotBrain : Entity
 
 	public IEnumerable<BaseState> States;
 
+	public const float MaxFallDistance = 150f;
+
 	public Player MyPlayer => Owner as Player;
 
 	public TimeSince TimeSinceStateStarted = 0f;
@@ -23,12 +25,14 @@ public partial class BotBrain : Entity
 	public override void Spawn()
 	{
 		Components.Create<TargetingState>();
+		Components.Create<ThinkingState>();
+		Components.Create<CrateFindingState>();
 		Components.Create<PositioningState>();
+		Components.Create<ThinkingState>();
 		Components.Create<WeaponSelectState>();
 		Components.Create<AimingState>();
 		Components.Create<FiringState>();
 		Components.Create<RetreatState>();
-
 		Components.Create<BaseState>();
 
 		States = Components.GetAll<BaseState>();
@@ -42,7 +46,7 @@ public partial class BotBrain : Entity
 
 		if ( !GridAStar.Grid.Exists() )
 		{
-			GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 150f, standableAngle: 45f, save: false );
+			GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 100f, standableAngle: 50f, save: false );
 		}
 	}
 
@@ -59,7 +63,8 @@ public partial class BotBrain : Entity
 
 			(States.ElementAt( 0 ) as TargetingState).LineOfSightTargetCheck();
 
-			DebugOverlay.Text( States.ElementAt( CurrentState ).ToString(), MyPlayer.ActiveGrub.EyePosition );
+			if ( Debug )
+				DebugOverlay.Text( States.ElementAt( CurrentState ).ToString(), MyPlayer.ActiveGrub.EyePosition );
 		}
 		else
 		{
@@ -94,6 +99,8 @@ public partial class BotBrain : Entity
 			CurrentState += 1;
 			TimeSinceStateStarted = 0f;
 
+			States.ElementAt( CurrentState ).StartedState();
+
 			Input.SetAction( "jump", false );
 			Input.SetAction( "backflip", false );
 			Input.SetAction( "fire", false );
@@ -105,4 +112,7 @@ public partial class BotBrain : Entity
 			//Log.Info( "No more states!" );
 		}
 	}
+
+	[ConVar.Replicated( "gr_debug_botbrain" )]
+	public static bool Debug { get; set; } = false;
 }

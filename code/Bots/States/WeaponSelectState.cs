@@ -63,13 +63,17 @@ public partial class WeaponSelectState : BaseState
 
 		float distance = direction.Length;
 
-		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 3f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 5f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 
 		bool lineOfSight = tr.Entity == Brain.TargetGrub;
 
 		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
 
 		var availableWeapons = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).OrderBy( x => Game.Random.Int( 1000 ) );
+
+		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 15f + Vector3.Up * 5f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 512f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+
+		bool OnEdge = clifftr.Distance > BotBrain.MaxFallDistance || !clifftr.Hit || MathF.Round( clifftr.EndPosition.z ) == 0;
 
 		if ( !lineOfSight )
 		{
@@ -89,7 +93,7 @@ public partial class WeaponSelectState : BaseState
 			MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
-		if ( direction.z < -128 )
+		if ( direction.z > 128 && OnEdge )
 		{
 			var selectedWeapon = availableWeapons.Where( W => DroppableProjectileWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
 
@@ -105,7 +109,7 @@ public partial class WeaponSelectState : BaseState
 				MyPlayer.Inventory.SetActiveWeapon( selectedWeapon );
 		}
 
-		if ( distance > 400f || direction.z > 128 )
+		if ( (distance > 400f || direction.z < -256f) && !lineOfSight )
 		{
 			var selectedWeapon = availableWeapons.Where( W => FarReachWeapons.Contains( W.Name.ToLower() ) ).FirstOrDefault();
 
