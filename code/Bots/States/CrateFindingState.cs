@@ -72,6 +72,10 @@ public partial class CrateFindingState : BaseState
 	{
 		if ( FoundCrate is null || !FoundCrate.IsValid() )
 		{
+			MyPlayer.LookInput = 0f;
+
+			MyPlayer.MoveInput = 0f;
+
 			if ( Brain.TimeSinceStateStarted > 4f )
 			{
 				FinishedState();
