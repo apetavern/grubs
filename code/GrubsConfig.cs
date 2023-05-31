@@ -17,7 +17,7 @@ public static class GrubsConfig
 	/// <summary>
 	/// If late joiners get a worm spawned in to play with.
 	/// </summary>
-	[ConVar.Replicated( "spawn_late_joiners" )]
+	[ConVar.Replicated( "gr_spawn_late_joiners" )]
 	public static bool SpawnLateJoiners { get; set; } = false;
 
 	/// <summary>

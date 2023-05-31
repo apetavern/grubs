@@ -465,7 +465,7 @@
       {
         "DisplayType": "Boolean",
         "Choices": [],
-        "ConVarName": "spawn_late_joiners",
+        "ConVarName": "gr_spawn_late_joiners",
         "DisplayName": "Spawn Late Joiners",
         "DefaultValue": "false",
         "Description": "Spawns a single worm at a random location for players who join late instead of them being a spectator.",
