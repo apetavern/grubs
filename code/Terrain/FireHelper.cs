@@ -19,7 +19,7 @@ public static class FireHelper
 	{
 		Game.AssertServer();
 
-		for ( var i = 0; i < fireQuantity * 5; i++ )
+		for ( var i = 0; i < fireQuantity * 3; i++ )
 		{
 			_ = new FireEntity(
 				position + moveDirection.Normal * Game.Random.Float(),
