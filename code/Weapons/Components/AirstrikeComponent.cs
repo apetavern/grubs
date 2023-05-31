@@ -4,24 +4,21 @@ namespace Grubs;
 public partial class AirstrikeComponent : WeaponComponent
 {
 	[Prefab]
-	public Prefab Payload { get; set; }
+	public Prefab PlanePrefab { get; set; }
 
-	[Prefab]
-	public int PayloadCount { get; set; }
+	/// <summary>
+	/// 1 for "left to right"
+	/// -1 for "right to left"
+	/// </summary>
+	[Net, Predicted]
+	private int Direction { get; set; }
+	private bool LeftToRight => Direction > 0;
 
 	[Net]
 	private ModelEntity AirstrikeCursor { get; set; }
 
-	/// <summary>
-	/// -1 for "right to left"
-	/// 1 for "left to right"
-	/// </summary>
-	/// <value></value>
-	[Net, Predicted]
-	private int Direction { get; set; }
-
 	[Net]
-	public Vector3 AirstrikeTarget { get; private set; }
+	public Vector3 AirstrikePosition { get; private set; }
 
 	public override void OnDeploy()
 	{
@@ -62,7 +59,7 @@ public partial class AirstrikeComponent : WeaponComponent
 
 		// TODO: Use a dedicated InputAction binding.
 		if ( Input.Released( InputAction.CameraPan ) )
-			Direction = Direction < 0 ? 1 : -1;
+			Direction = LeftToRight ? -1 : 1;
 
 
 		Grub.Player.GrubsCamera.CanScroll = !Weapon.HasChargesRemaining;
@@ -72,11 +69,12 @@ public partial class AirstrikeComponent : WeaponComponent
 			Grub.Player.GrubsCamera.Distance = 1024f;
 
 		AirstrikeCursor.Position = Grub.Player.MousePosition;
-		AirstrikeCursor.Rotation = Direction > 0 ? Rotation.Identity : Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation();
+		AirstrikeCursor.Rotation = LeftToRight ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
 
 		if ( IsFiring && AirstrikeCursor.EnableDrawing )
 		{
-			AirstrikeTarget = Grub.Player.MousePosition.WithY( 0 ).WithZ( 0 );
+			AirstrikePosition = Grub.Player.MousePosition;
+			DebugOverlay.Sphere( AirstrikePosition, 20, Color.Red, 20 );
 			Fire();
 		}
 		else
@@ -85,11 +83,14 @@ public partial class AirstrikeComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-		if ( Game.IsServer && PrefabLibrary.TrySpawn<AirstrikePlane>( "prefabs/weapons/airstrike/airstrike_plane.prefab", out var plane ) )
+		if ( Game.IsServer && PrefabLibrary.TrySpawn<AirstrikePlane>( PlanePrefab.ResourcePath, out var plane ) )
 		{
-			plane.Position = AirstrikeTarget.WithZ( 512 );
+			var planeSpawnX = LeftToRight ? GrubsConfig.TerrainLength : -(GrubsConfig.TerrainLength / 2);
+			plane.Owner = Weapon.Owner;
+			plane.TargetX = AirstrikePosition.x;
+			plane.LeftToRight = LeftToRight;
+			plane.Position = new Vector3( planeSpawnX, 0, 512 );
 			plane.Rotation = AirstrikeCursor.Rotation;
-			plane.DeleteAsync( 5 );
 		}
 
 		FireFinished();

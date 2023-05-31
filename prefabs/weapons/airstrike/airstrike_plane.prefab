@@ -30,6 +30,26 @@
       "PayloadCount": {
         "Type": "Int32",
         "Value": "0"
+      },
+      "DropOffset": {
+        "Type": "Vector3",
+        "Value": "\u00220,0,32\u0022"
+      },
+      "ProjectileCount": {
+        "Type": "Int32",
+        "Value": "4"
+      },
+      "Projectile": {
+        "Type": "Prefab",
+        "Value": "\u0022prefabs/weapons/airstrike/bomb.prefab\u0022"
+      },
+      "RenderColor": {
+        "Type": "Color",
+        "Value": "\u00221,1,1,1\u0022"
+      },
+      "DropRateSeconds": {
+        "Type": "Single",
+        "Value": "0.4"
       }
     }
   }

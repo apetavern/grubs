@@ -1,0 +1,89 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "8eb548c9-0469-4d77-b05f-39edc93ccb4f",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "2ff2b782-cfa1-4ebf-84f6-c7cbd34031c8",
+        "Class": "AnvilPhysicsGadgetComponent",
+        "Keys": {
+          "LockXAxis": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "AffectedByWind": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "BounceForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "_name": {
+            "Value": "\u0022AnvilPhysicsGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "7c7ac55b-4cca-4cdc-9166-c02d8f166f0d",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "ExplodeOnTouch": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022ExplosiveGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/airstrikes/bomb.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Bomb\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
+      }
+    }
+  }
+}

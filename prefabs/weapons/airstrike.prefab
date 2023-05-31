@@ -13,12 +13,30 @@
         "Keys": {
           "PayloadCount": {
             "Type": "Int32",
-            "Value": "0"
+            "Value": "1"
           },
           "_name": {
             "Value": "\u0022AirstrikeComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          },
+          "Payload": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/mine/mine.prefab\u0022"
+          },
+          "Fuck": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "HelloWorld": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "PlanePrefab": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/airstrike/airstrike_plane.prefab\u0022"
+          }
         }
       }
     ],
