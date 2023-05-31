@@ -98,7 +98,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		var clothes = new ClothingContainer();
 		clothes.Deserialize( player.AvatarClothingData );
 
-		if ( player.HasCosmeticSelected )
+		if ( player.HasCosmeticSelected && !player.Client.IsBot )
 			clothes.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 
 		foreach ( var item in clothes.Clothing )
@@ -146,6 +146,15 @@ public partial class Grub : AnimatedEntity, IResolvable
 				var skinMaterial = Material.Load( item.SkinMaterial );
 				SetMaterialOverride( skinMaterial, "skin" );
 			}
+		}
+
+		if ( player.Client.IsBot )
+		{
+			var skinMaterial = Material.Load( "models/bots/materials/phong1.vmat" );
+			var eyeMaterial = Material.Load( "models/bots/materials/eyes.vmat" );
+
+			SetMaterialOverride( skinMaterial, "skin" );
+			SetMaterialOverride( eyeMaterial, "eyes" );
 		}
 	}
 
