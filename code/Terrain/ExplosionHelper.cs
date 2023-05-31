@@ -28,7 +28,7 @@ public static partial class ExplosionHelper
 				// Do a line-of-sight trace with just the target entity and the world.
 				entity.Tags.Add( Tag.Target );
 
-				var losTr = Trace.Ray( new Ray( position, entity.Position - position ), damageRadius )
+				var losTr = Trace.Ray( new Ray( position, (entity.Position + Vector3.Up * 5f) - position ), damageRadius )
 					.WithAnyTags( Tag.Solid, Tag.Target )
 					.Run();
 
@@ -42,7 +42,8 @@ public static partial class ExplosionHelper
 
 			if ( entity is Grub grub )
 			{
-				var force = distanceFactor * 750;
+				var linearDistanceFactor = 1.0f - Math.Clamp( dist / destructionRadius, 0, 1 );
+				var force = linearDistanceFactor * 1000;
 				var dir = (entity.Position - position).Normal;
 				dir = dir.WithY( 0f );
 
