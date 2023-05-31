@@ -21,10 +21,11 @@ public partial class WeaponSelectState : BaseState
 		"cluster grenade",
 		"revolver",
 		"shotgun",
-		"petrolbomb",
+		"petrol bomb",
 		"uzi",
 		"gibgun",
 		"minigun",
+		"flamethrower",
 	};
 
 	List<string> LandPenetratingWeapons = new List<string>()
@@ -32,15 +33,16 @@ public partial class WeaponSelectState : BaseState
 		"uzi",
 		"gibgun",
 		"minigun",
-		"torch"
+		"torch",
+		"flamethrower",
 	};
 
 	List<string> ClosebyWeapons = new List<string>()
 	{
 		"mine",
 		"dynamite",
-		"baseballbat",
-		"bitchslap"
+		"baseball bat",
+		"bitch slap"
 	};
 
 	List<string> DroppableProjectileWeapons = new List<string>()
