@@ -21,6 +21,9 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	public Task NextTurnTask { get; set; }
 
+	private Queue<Player> LateJoinSpawnQueue { get; set; } = new();
+	private string[] _lateJoinPhrases = new string[3] { "arrived fashionably late!", "has dropped in unexpected!", "finally decided to showed up!" };
+
 	public override float GetTimeRemaining()
 	{
 		return TimeUntilNextTurn;
@@ -47,9 +50,8 @@ public partial class FreeForAll : Gamemode
 		if ( !GrubsConfig.SpawnLateJoiners )
 			return;
 
-		player.HandleLateJoin();
-		Players.Add( player );
-		PlayerTurnQueue.Enqueue( player );
+		if ( !LateJoinSpawnQueue.Contains( player ) || DisconnectedPlayers.Contains( player ) )
+			LateJoinSpawnQueue.Enqueue( player );
 	}
 
 	/// <summary>
@@ -84,6 +86,8 @@ public partial class FreeForAll : Gamemode
 	private async Task NextTurn()
 	{
 		ActivePlayer.EndTurn();
+
+		await HandleLateJoinerSpawn();
 
 		await Terrain.UntilResolve();
 
@@ -226,6 +230,27 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = barrel;
 
 		await GameTask.DelaySeconds( 2 );
+		CameraTarget = null;
+	}
+
+	private async Task HandleLateJoinerSpawn()
+	{
+		if ( LateJoinSpawnQueue.Count <= 0 )
+			return;
+
+		var player = LateJoinSpawnQueue.Dequeue();
+		if ( !player.IsValid() )
+			return;
+
+		player.HandleLateJoin();
+
+		Players.Add( player );
+		PlayerTurnQueue.Enqueue( player );
+
+		UI.TextChat.AddInfoChatEntry( $"{player.Client.Name} {Game.Random.FromArray( _lateJoinPhrases )}" );
+		CameraTarget = player.ActiveGrub;
+
+		await GameTask.DelaySeconds( 3 );
 		CameraTarget = null;
 	}
 
