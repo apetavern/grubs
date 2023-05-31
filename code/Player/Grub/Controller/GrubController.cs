@@ -148,7 +148,7 @@ public partial class GrubController : EntityComponent<Grub>
 	private void UpdateAirTime()
 	{
 		// Don't force resolve if we're already resolved or we are intentionally in the air (jetpack, parachute, long fall).
-		if ( Entity.Resolved || !Velocity.IsNearlyZero() )
+		if ( Entity.Resolved || !Velocity.IsNearlyZero( 1.0f ) )
 			return;
 
 		TimeSpentInAir = IsGrounded ? 0 : TimeSpentInAir += Time.Delta;
