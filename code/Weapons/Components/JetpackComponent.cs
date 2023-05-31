@@ -18,6 +18,8 @@ public partial class JetpackComponent : WeaponComponent
 	private Particles _leftJetParticle;
 	private Particles _rightJetParticle;
 	private Particles _backJetParticle;
+	private Vector3 _sideJetStrength = Vector3.Zero;
+	private Vector3 _backJetStrength = Vector3.Zero;
 
 	private UI.FuelWorldPanel _fuelWorldPanel;
 
@@ -35,13 +37,9 @@ public partial class JetpackComponent : WeaponComponent
 		if ( !Prediction.FirstTime )
 			return;
 
-		_leftJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-		_rightJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-		_backJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf" );
-
-		_leftJetParticle.SetEntityAttachment( 0, Weapon, "jet_left" );
-		_rightJetParticle.SetEntityAttachment( 0, Weapon, "jet_right" );
-		_backJetParticle.SetEntityAttachment( 0, Weapon, "jet_middle" );
+		_leftJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf", Weapon, "jet_left" );
+		_rightJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf", Weapon, "jet_right" );
+		_backJetParticle = Particles.Create( "particles/blueflame/blueflame_continuous.vpcf", Weapon, "jet_middle" );
 	}
 
 	public override void OnHolster()
@@ -73,9 +71,12 @@ public partial class JetpackComponent : WeaponComponent
 		var isAscending = verticalInput > 0;
 		var hasFuel = RemainingFuel > 0;
 
-		_leftJetParticle.EnableDrawing = isAscending && !controller.IsGrounded && hasFuel;
-		_rightJetParticle.EnableDrawing = isAscending && !controller.IsGrounded && hasFuel;
-		_backJetParticle.EnableDrawing = horizontalInput != 0 && !controller.IsGrounded && hasFuel;
+		_sideJetStrength = _sideJetStrength.LerpTo( isAscending && hasFuel ? new( .7f ) : !controller.IsGrounded && hasFuel ? new( .4f ) : new( 0 ), Time.Delta * 3 );
+		_backJetStrength = _backJetStrength.LerpTo( !controller.IsGrounded && hasFuel && horizontalInput != 0 ? new( .65f ) : new( 0 ), Time.Delta * 3 );
+
+		_leftJetParticle.SetPosition( 5, _sideJetStrength );
+		_rightJetParticle.SetPosition( 5, _sideJetStrength );
+		_backJetParticle.SetPosition( 5, _backJetStrength );
 
 		if ( !hasFuel )
 			return;
@@ -106,6 +107,6 @@ public partial class JetpackComponent : WeaponComponent
 			controller.Velocity = controller.Velocity.WithZ( verticalVelocity );
 
 		controller.Velocity = Vector3.Lerp( controller.Velocity, controller.Velocity.WithX( horizontalVelocity ), Time.Delta );
-		controller.Velocity = controller.Velocity.ComponentMax( controller.Velocity.WithZ( -250 ) );
+		controller.Velocity = controller.Velocity.ComponentMax( controller.Velocity.WithZ( -225 ) );
 	}
 }

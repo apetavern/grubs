@@ -83,45 +83,6 @@
 				]
 			},
 			{
-				_class = "GameDataList"
-				children = 
-				[
-					{
-						_class = "GenericGameData"
-						game_class = "particle"
-						game_keys = 
-						{
-							name = resource:"particles/muzzleflash/grubs_muzzleflash.vpcf"
-							attachment_point = "jet_middle"
-							attachment_type = "5"
-							attachment_offset = [ 0.0, 0.0, 0.0 ]
-						}
-					},
-					{
-						_class = "GenericGameData"
-						game_class = "particle"
-						game_keys = 
-						{
-							name = resource:"particles/muzzleflash/grubs_muzzleflash.vpcf"
-							attachment_point = "jet_left"
-							attachment_type = "5"
-							attachment_offset = [ 0.0, 0.0, 0.0 ]
-						}
-					},
-					{
-						_class = "GenericGameData"
-						game_class = "particle"
-						game_keys = 
-						{
-							name = resource:"particles/muzzleflash/grubs_muzzleflash.vpcf"
-							attachment_point = "jet_right"
-							attachment_type = "5"
-							attachment_offset = [ 0.0, 0.0, 0.0 ]
-						}
-					},
-				]
-			},
-			{
 				_class = "AttachmentList"
 				children = 
 				[
@@ -139,7 +100,7 @@
 						name = "jet_right"
 						parent_bone = "Handsroot"
 						relative_origin = [ -9.081878, 4.6542, -6.782448 ]
-						relative_angles = [ -0.0, -90.0, 90.0 ]
+						relative_angles = [ 0.0, -90.0, 90.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},

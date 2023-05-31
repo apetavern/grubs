@@ -11,10 +11,6 @@
         "Guid": "4b451452-db92-4099-be34-3e4ff5e8d634",
         "Class": "ExplosiveGadgetComponent",
         "Keys": {
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "50"
-          },
           "MaxExplosionDamage": {
             "Type": "Single",
             "Value": "100"
@@ -40,6 +36,14 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "DestructionRadius": {
+            "Type": "Single",
+            "Value": "50"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "75"
           }
         }
       },

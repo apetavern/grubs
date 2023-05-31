@@ -21,7 +21,7 @@ public partial class Gamemode : Entity
 	/// <summary>
 	/// Players who were created a pawn and then later disconnected.
 	/// </summary>
-	private List<Player> DisconnectedPlayers { get; set; } = new();
+	protected List<Player> DisconnectedPlayers { get; set; } = new();
 
 	/// <summary>
 	/// The CurrentState of the game.
