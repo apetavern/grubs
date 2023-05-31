@@ -31,6 +31,9 @@ public partial class GrubController : EntityComponent<Grub>
 		get => GroundEntity != null;
 	}
 
+	public float TimeSpentUnGrounded { get; private set; }
+	public float MaxUnGroundedTime { get; set; } = 4f;
+
 	public static float BodyGirth => 20f;
 	public static float EyeHeight => 28f;
 
@@ -74,6 +77,7 @@ public partial class GrubController : EntityComponent<Grub>
 		SimulateEyes();
 		SimulateMechanics();
 		UpdateRotation();
+		UpdateUnGroundedTime();
 
 		if ( Debug && Grub.IsTurn )
 		{
@@ -132,6 +136,24 @@ public partial class GrubController : EntityComponent<Grub>
 		else if ( Grub.MoveInput == 1 )
 		{
 			Grub.Rotation = Rotation.From( 0, 180, 0 );
+		}
+	}
+
+	private void UpdateUnGroundedTime()
+	{
+		// Don't force resolve if we're already resolved or we are intentionally in the air (jetpack, parachute, long fall).
+		if ( Entity.Resolved || !Velocity.IsNearlyZero() )
+			return;
+
+		TimeSpentUnGrounded = IsGrounded ? 0 : TimeSpentUnGrounded += Time.Delta;
+		if ( TimeSpentUnGrounded >= MaxUnGroundedTime )
+		{
+			var groundingTrace = Trace.Ray( Position, Position + Vector3.Down * 4096 ).Ignore( Entity ).Run();
+			if ( groundingTrace.StartedSolid )
+				return;
+
+			if ( Vector3.GetAngle( Vector3.Up, groundingTrace.Normal ) <= 90 )
+				Position = groundingTrace.HitPosition + Vector3.Up;
 		}
 	}
 
