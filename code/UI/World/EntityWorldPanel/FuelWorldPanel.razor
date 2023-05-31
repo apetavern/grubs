@@ -1,0 +1,39 @@
+@inherits EntityWorldPanel
+@namespace Grubs.UI
+
+<root>
+    <div class="fill" style="height: @FuelPercentageRemaining()%;" />
+</root>
+
+@code {
+    private JetpackComponent _jetpackComponent;
+
+    public FuelWorldPanel(Grub grub, JetpackComponent jetpackComponent) : base(grub, Vector3.Backward * 30f) {
+        PanelBounds = new(0, -500, 100, 800);
+        _jetpackComponent = jetpackComponent;
+    }
+
+    private float FuelPercentageRemaining()
+    {
+        return (_jetpackComponent.RemainingFuel / _jetpackComponent.MaxFuel) * 100;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(FuelPercentageRemaining());
+    }
+}
+
+<style>
+    FuelWorldPanel {
+        background-color: rgba(black, 0.4);
+        border: 2px solid rgba(black, 0.4);
+        border-radius: 4px;
+        transform: rotate(180deg);
+
+        .fill {
+            background-image: linear-gradient(#e01a00dc 0%, #00a108dc 70%);
+            width: 100%;
+        }
+    }
+</style>
