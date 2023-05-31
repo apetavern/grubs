@@ -19,7 +19,7 @@ public partial class LateJoinComponent : EntityComponent<Grub>
 	[GameEvent.Tick]
 	void Tick()
 	{
-		if ( Game.IsServer )
+		if ( Game.IsServer && _parachute is not null )
 			Entity.Velocity = new Vector3( GamemodeSystem.Instance.ActiveWindForce, Entity.Velocity.y, Entity.Velocity.ClampLength( 70f ).z );
 
 		if ( Entity.Controller.IsGrounded && _parachute is not null )
