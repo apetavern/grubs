@@ -1,0 +1,36 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "db39453b-53dc-4bab-99e1-1a0ef6337c9e",
+    "Class": "AirstrikePlane",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "_name": {
+        "Value": "\u0022Airstrike Plane\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/airstrikes/plane.vmdl\u0022"
+      },
+      "PayloadCount": {
+        "Type": "Int32",
+        "Value": "0"
+      }
+    }
+  }
+}
