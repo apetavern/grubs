@@ -461,6 +461,15 @@
         "DefaultValue": "0",
         "Description": "The type of environment to be used for the terrain.",
         "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "spawn_late_joiners",
+        "DisplayName": "Spawn Late Joiners",
+        "DefaultValue": "false",
+        "Description": "Spawns a single worm at a random location for players who join late instead of them being a spectator.",
+        "Group": "Game"
       }
     ],
     "CsProjName": "",

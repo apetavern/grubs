@@ -42,6 +42,16 @@ public partial class FreeForAll : Gamemode
 		base.Start();
 	}
 
+	internal override void PlayerJoinedLate( Player player )
+	{
+		if ( !GrubsConfig.SpawnLateJoiners )
+			return;
+
+		player.HandleLateJoin();
+		Players.Add( player );
+		PlayerTurnQueue.Enqueue( player );
+	}
+
 	/// <summary>
 	/// Spawn a Player and its Grubs for each client.
 	/// Then, set the ActivePlayer.
