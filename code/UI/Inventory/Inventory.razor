@@ -12,13 +12,11 @@
             var sortedWeapons = player.Inventory.Weapons.OrderByDescending(w => w.WeaponType == WeaponType.Weapon);
             @foreach (var weapon in sortedWeapons)
             {
-                var hasAmmo = weapon.HasAmmo();
                 <InventorySlot
                 Weapon=@weapon
-                HasAmmo=@hasAmmo
                 @onmouseover=@( () => _hoveredWeapon = weapon )
                 @onmouseout=@( () => _hoveredWeapon = null )
-                @onclick=@( () => { if ( hasAmmo ) player.ActiveWeaponInput = weapon; } ) />
+                @onclick=@( () => { if ( weapon.HasAmmo() ) player.ActiveWeaponInput = weapon; } ) />
             }
         }
     </div>

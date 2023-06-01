@@ -15,14 +15,14 @@ public static class FireHelper
 		}
 	}
 
-	public static void EmitFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity )
+	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity )
 	{
 		Game.AssertServer();
 
 		for ( var i = 0; i < fireQuantity * 3; i++ )
 		{
 			_ = new FireEntity(
-				position + moveDirection.Normal * Game.Random.Float(),
+				position + moveDirection.Normal * 3f,
 				moveDirection * Game.Random.Float( 0.8f, 1f ),
 				Game.PhysicsWorld.Gravity * Time.Delta / 2f );
 		}
@@ -127,10 +127,10 @@ public class FireEntity : ModelEntity, IResolvable
 			_moveDirection *= 0.95f;
 
 			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( Tag.Invincible ) )
-				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
+				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position.WithY( 0f ), Vector3.Up * 32f, this ) );
 
 			if ( collisionTrace.Entity is Grub grub )
-				grub.ApplyAbsoluteImpulse( (grub.Position - Position).Normal * 32f );
+				grub.ApplyAbsoluteImpulse( ((grub.Position - Position).Normal * 32f).WithY( 0f ) );
 		}
 
 		var terrain = GrubsGame.Instance.Terrain;
