@@ -9,7 +9,7 @@
     "Components": [
       {
         "Guid": "e4f091bd-7cc1-4a5a-a846-8b3b59139158",
-        "Class": "FireGadgetComponent",
+        "Class": "FireEmitGadgetComponent",
         "Keys": {
           "_name": {
             "Value": "\u0022Fire\u0022"

@@ -15,7 +15,7 @@ public static class FireHelper
 		}
 	}
 
-	public static void EmitFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity )
+	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity )
 	{
 		Game.AssertServer();
 
