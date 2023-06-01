@@ -56,6 +56,18 @@
           "GadgetCountPerShot": {
             "Type": "Int32",
             "Value": "2"
+          },
+          "GadgetsPerUse": {
+            "Type": "Int32",
+            "Value": "1"
+          },
+          "DelayPerUse": {
+            "Type": "Single",
+            "Value": "0.06"
+          },
+          "TotalUseCount": {
+            "Type": "Int32",
+            "Value": "30"
           }
         }
       }

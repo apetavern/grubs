@@ -7,13 +7,13 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	public Prefab GadgetPrefab { get; set; }
 
 	[Prefab, Net]
-	public float GadgetDelay { get; set; } = 0f;
+	public float DelayPerUse { get; set; } = 0f;
 
 	[Prefab, Net]
-	public int GadgetCount { get; set; } = 1;
+	public int TotalUseCount { get; set; } = 1;
 
 	[Prefab, Net]
-	public int GadgetsPerShot { get; set; } = 1;
+	public int GadgetsPerUse { get; set; } = 1;
 
 	[Prefab, Net]
 	public ParticleSystem MuzzleParticle { get; set; }
@@ -31,7 +31,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	private TimeSince TimeSinceLastFire { get; set; } = 0f;
 
 	[Net, Predicted]
-	private int FireCount { get; set; } = 0;
+	private int UseCount { get; set; } = 0;
 
 	[Net]
 	public TargetPreview TargetPreview { get; set; }
@@ -77,7 +77,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		if ( UseTargetPreview )
 			TargetPreview?.Simulate( client );
 
-		if ( IsFiring && TimeSinceLastFire >= GadgetDelay && FireCount < GadgetCount )
+		if ( IsFiring && TimeSinceLastFire >= DelayPerUse && UseCount < TotalUseCount )
 			Fire();
 	}
 
@@ -124,7 +124,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 		Weapon.PlayScreenSound( UseSound );
 
-		for ( int i = 0; i < GadgetsPerShot; i++ )
+		for ( int i = 0; i < GadgetsPerUse; i++ )
 		{
 			var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
 			gadget.OnUse( Grub, Weapon, Charge );
@@ -132,11 +132,11 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 		Charge = MinCharge;
 		TimeSinceLastFire = 0;
-		FireCount++;
+		UseCount++;
 
-		if ( FireCount >= GadgetCount )
+		if ( UseCount >= TotalUseCount )
 		{
-			FireCount = 0;
+			UseCount = 0;
 			FireFinished();
 		}
 	}
