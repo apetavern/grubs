@@ -129,7 +129,7 @@ public partial class Gamemode : Entity
 			client.Pawn = player;
 
 			if ( CurrentState == State.Playing )
-				PlayerJoinedLate( player );
+				OnPlayerJoinedLate( player );
 		}
 	}
 
@@ -151,7 +151,7 @@ public partial class Gamemode : Entity
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
 
-	internal virtual void PlayerJoinedLate( Player player )
+	internal virtual void OnPlayerJoinedLate( Player player )
 	{
 		GrubsGame.Instance.TryAssignUnusedColor( player );
 	}

@@ -45,7 +45,7 @@ public partial class FreeForAll : Gamemode
 		base.Start();
 	}
 
-	internal override void PlayerJoinedLate( Player player )
+	internal override void OnPlayerJoinedLate( Player player )
 	{
 		if ( !GrubsConfig.SpawnLateJoiners )
 			return;
@@ -53,7 +53,7 @@ public partial class FreeForAll : Gamemode
 		if ( !LateJoinSpawnQueue.Contains( player ) || DisconnectedPlayers.Contains( player ) )
 			LateJoinSpawnQueue.Enqueue( player );
 
-		base.PlayerJoinedLate( player );
+		base.OnPlayerJoinedLate( player );
 	}
 
 	/// <summary>
