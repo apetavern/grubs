@@ -20,6 +20,12 @@ public sealed partial class GrubsGame : GameManager
 
 	[Net] public Terrain Terrain { get; set; }
 
+	/// <summary>
+	/// The available player colors with a boolean to determine if a
+	/// player has the color assigned to them.
+	/// </summary>
+	[Net] public IDictionary<Color, bool> PlayerColors { get; private set; }
+
 	public GrubsGame()
 	{
 		if ( Game.IsClient )
@@ -30,6 +36,7 @@ public sealed partial class GrubsGame : GameManager
 		{
 			PrecacheFiles();
 			Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
+			PopulatePlayerColors();
 		}
 	}
 
@@ -77,6 +84,11 @@ public sealed partial class GrubsGame : GameManager
 	{
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
+
+		if ( client.Pawn is not Player player || GamemodeSystem.Instance.CurrentState == Gamemode.State.Playing )
+			return;
+
+		DeletePlayer( player );
 	}
 
 	public override void Simulate( IClient cl )
@@ -139,6 +151,61 @@ public sealed partial class GrubsGame : GameManager
 		}
 	}
 
+	private void PopulatePlayerColors()
+	{
+		PlayerColors.Add( Color.FromBytes( 56, 229, 77 ), false );      // Green
+		PlayerColors.Add( Color.FromBytes( 192, 255, 169 ), false );    // Bright Pastel Green
+		PlayerColors.Add( Color.FromBytes( 56, 118, 29 ), false );      // ForestGreen
+		PlayerColors.Add( Color.FromBytes( 255, 174, 109 ), false );    // Orange
+		PlayerColors.Add( Color.FromBytes( 255, 216, 89 ), false );     // Bright Yellow
+		PlayerColors.Add( Color.FromBytes( 248, 249, 136 ), false );    // Yellow
+		PlayerColors.Add( Color.FromBytes( 103, 234, 202 ), false );    // Cyan
+		PlayerColors.Add( Color.FromBytes( 118, 103, 87 ), false );     // PastelBrown
+		PlayerColors.Add( Color.FromBytes( 240, 236, 211 ), false );    // Eggshell
+		PlayerColors.Add( Color.FromBytes( 232, 59, 105 ), false );     // Red
+		PlayerColors.Add( Color.FromBytes( 255, 129, 172 ), false );    // Strong Pink
+		PlayerColors.Add( Color.FromBytes( 251, 172, 204 ), false );    // Pink
+		PlayerColors.Add( Color.FromBytes( 213, 69, 255 ), false );     // Strong Purple
+		PlayerColors.Add( Color.FromBytes( 173, 162, 255 ), false );    // Purple
+		PlayerColors.Add( Color.FromBytes( 33, 146, 255 ), false );     // Blue
+		PlayerColors.Add( Color.FromBytes( 169, 213, 255 ), false );    // Bright Pastel Blue
+	}
+
+	/// <summary>
+	/// Tries to assign an unused color to the Player.
+	/// Will use <see cref="Player.DefaultColor"/> if there aren't any unused colors left.
+	/// </summary>
+	/// <param name="player"></param>
+	/// <returns></returns>
+	public bool TryAssignUnusedColor( Player player )
+	{
+		Game.AssertServer();
+
+		var unusedColors = GrubsGame.Instance.PlayerColors.Where( k => !k.Value ).ToArray();
+		if ( unusedColors.Length > 0 )
+		{
+			var color = Game.Random.FromArray( unusedColors ).Key;
+			GrubsGame.Instance.PlayerColors[color] = true;
+			player.Color = color;
+			return true;
+		}
+
+		player.Color = Player.DefaultColor;
+		return false;
+	}
+
+	/// <summary>
+	/// Delete the player's pawn and reset the <see cref="PlayerColors"/> color slot they were using.
+	/// </summary>
+	/// <param name="player"></param>
+	private void DeletePlayer( Player player )
+	{
+		if ( PlayerColors.ContainsKey( player.Color ) )
+			PlayerColors[player.Color] = false;
+
+		player.Delete();
+	}
+
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{
@@ -156,44 +223,14 @@ public sealed partial class GrubsGame : GameManager
 	}
 
 	[ConCmd.Server]
-	public static void SetTerrainEnvironmentType( string option )
+	public static void SetConfigOption( string key, string value )
 	{
-		if ( Enum.TryParse<GrubsConfig.TerrainEnvironmentType>( option, true, out var result ) )
-		{
-			GrubsConfig.WorldTerrainEnvironmentType = result;
-			Instance.Terrain.Reset();
-		}
-		else
-		{
-			Log.Error( "We had trouble setting this option. Contact a dev!" );
-		}
-	}
+		ConsoleSystem.SetValue( key, value );
 
-	[ConCmd.Server]
-	public static void SetTerrainType( string option )
-	{
-		if ( Enum.TryParse<GrubsConfig.TerrainType>( option, true, out var result ) )
-		{
-			GrubsConfig.WorldTerrainType = result;
-			Instance.Terrain.Reset();
-		}
+		if ( key == "terrain_environment_type"
+			&& GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated )
+			Instance.Terrain.Refresh();
 		else
-		{
-			Log.Error( "We had trouble setting this option. Contact a dev!" );
-		}
-	}
-
-	[ConCmd.Server]
-	public static void SetTerrainTexture( string option )
-	{
-		if ( Enum.TryParse<GrubsConfig.TerrainTexture>( option, true, out var result ) )
-		{
-			GrubsConfig.WorldTerrainTexture = result;
 			Instance.Terrain.Reset();
-		}
-		else
-		{
-			Log.Error( "We had trouble setting this option. Contact a dev!" );
-		}
 	}
 }

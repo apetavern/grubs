@@ -22,6 +22,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public Particles ChargeParticles { get; set; }
 
+	private Sound _chargeSound;
+
 	public virtual void OnDeploy()
 	{
 
@@ -52,12 +54,16 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			ChargeParticles?.Set( "Alpha", 100f );
 			ChargeParticles?.Set( "Speed", 40f );
 
+			if ( Game.IsClient && !_chargeSound.IsPlaying )
+				_chargeSound = Weapon.SoundFromScreen( "charge" );
+
 			IsCharging = true;
 			IncreaseCharge();
 		}
 
 		if ( Input.Released( InputAction.Fire ) || Charge >= 100 )
 		{
+			_chargeSound.Stop( To.Everyone );
 			ChargeParticles?.Destroy( true );
 			ChargeParticles = null;
 			IsFiring = true;
@@ -66,7 +72,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public void Fire()
 	{
-		Weapon.HasFired = true;
+		Weapon.IsChargeConsumed = true;
 		TimeSinceFired = 0f;
 		IsCharging = false;
 

@@ -7,7 +7,7 @@
         <div class="health">
             <div
             class="fill"
-            style="background: linear-gradient(to top, @Player.Color.Hex, @Player.Color.Lighten(-0.3f).Hex); width: @(GetHealthPercentage())%;" />
+            style="background: linear-gradient(to top, @Player.Color.Hex, @Player.Color.Lighten(-0.3f).Hex); width: @(Player.GetHealthPercentage)%;" />
         </div>
     </div>
     @if (Player.IsDisconnected)
@@ -36,14 +36,9 @@
         _isTalking = timeoutInv > 0;
     }
 
-    private int GetHealthPercentage()
-    {
-        return Player.GetTotalGrubHealth() / GrubsConfig.GrubCount;
-    }
-
     protected override int BuildHash()
     {
-        return HashCode.Combine(GetHealthPercentage(), Player.IsAvailableForTurn, Player.IsDisconnected, _isTalking);
+        return HashCode.Combine(Player.GetHealthPercentage, Player.IsAvailableForTurn, Player.IsDisconnected, _isTalking);
     }
 }
 
@@ -85,8 +80,7 @@
 
         .voice-icon {
             position: absolute;
-            left: -42px;
-            top: -5px;
+            left: -35px;
             transition: opacity 100ms ease-out;
 
             font-family: MaterialIcons;

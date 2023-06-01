@@ -36,6 +36,10 @@
           "Fuel": {
             "Type": "Single",
             "Value": "10"
+          },
+          "MaxFuel": {
+            "Type": "Single",
+            "Value": "15"
           }
         }
       }
@@ -51,7 +55,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "1"
+        "Value": "0"
       },
       "FiringType": {
         "Type": "FiringType",

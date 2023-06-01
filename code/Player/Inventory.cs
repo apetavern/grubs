@@ -60,7 +60,7 @@ public partial class Inventory : EntityComponent<Player>
 		if ( weapon.IsValid() && !weapon.HasAmmo() )
 			return;
 
-		if ( ActiveWeapon.IsValid() && ActiveWeapon.HasFired && !forced )
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.IsChargeConsumed && !forced )
 			return;
 
 		LastActiveWeapon = ActiveWeapon;

@@ -6,12 +6,25 @@ public static class FireHelper
 	{
 		Game.AssertServer();
 
-		for ( var i = 0; i < fireQuantity; i++ )
+		for ( var i = 0; i < fireQuantity * 5; i++ )
 		{
 			var baseDirection = Vector3.Random.WithY( 0f ) * 45f;
 			_ = new FireEntity(
 				position + Vector3.Random.WithY( 0f ) * 45f,
 				baseDirection * moveDirection );
+		}
+	}
+
+	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity )
+	{
+		Game.AssertServer();
+
+		for ( var i = 0; i < fireQuantity * 3; i++ )
+		{
+			_ = new FireEntity(
+				position + moveDirection.Normal * 3f,
+				moveDirection * Game.Random.Float( 0.8f, 1f ),
+				Game.PhysicsWorld.Gravity * Time.Delta / 2f );
 		}
 	}
 }
@@ -23,9 +36,11 @@ public class FireEntity : ModelEntity, IResolvable
 	private Vector3 _moveDirection { get; set; }
 
 	private TimeUntil _timeUntilExpire;
-	private const float fireSize = 10f;
+	private const float fireSize = 7.5f;
 
 	private Particles FireParticle { get; set; }
+
+	public Vector3 Gravity;
 
 	public FireEntity()
 	{
@@ -37,10 +52,29 @@ public class FireEntity : ModelEntity, IResolvable
 		Position = startPosition;
 		_moveDirection = moveDirection;
 		Velocity = _moveDirection * Time.Delta * 10f;
+
+		Gravity = Game.PhysicsWorld.Gravity * Time.Delta / 10f;
+	}
+
+	public FireEntity( Vector3 startPosition, Vector3 moveDirection, Vector3 gravity )
+	{
+		Position = startPosition;
+		_moveDirection = moveDirection;
+		Velocity = _moveDirection * Time.Delta * 10f;
+
+		if ( gravity == Vector3.Zero )
+		{
+			Gravity = Game.PhysicsWorld.Gravity * Time.Delta / 10f;
+		}
+		else
+		{
+			Gravity = gravity;
+		}
 	}
 
 	public override void Spawn()
 	{
+		Transmit = TransmitType.Always;
 		FireParticle = Particles.Create( "particles/fire/fire_base.vpcf", this, true );
 		FireParticle.SetPosition( 1, (float)(_timeUntilExpire = Game.Random.Float( 0.5f, 2.5f )) );
 		Health = 1;
@@ -65,7 +99,7 @@ public class FireEntity : ModelEntity, IResolvable
 	private void Move()
 	{
 		Velocity += _moveDirection * Time.Delta / 2f;
-		Velocity += Game.PhysicsWorld.Gravity * Time.Delta / 10f;
+		Velocity += Gravity;
 		Velocity += GamemodeSystem.Instance.ActiveWindForce * 128f * Time.Delta;
 
 		Velocity = Velocity.WithY( 0f );
@@ -88,11 +122,15 @@ public class FireEntity : ModelEntity, IResolvable
 
 		if ( collisionTrace.Hit )
 		{
+			Velocity *= 0.95f;
+
+			_moveDirection *= 0.95f;
+
 			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( Tag.Invincible ) )
-				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
+				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position.WithY( 0f ), Vector3.Up * 32f, this ) );
 
 			if ( collisionTrace.Entity is Grub grub )
-				grub.ApplyAbsoluteImpulse( (grub.Position - Position).Normal * 32f );
+				grub.ApplyAbsoluteImpulse( ((grub.Position - Position).Normal * 32f).WithY( 0f ) );
 		}
 
 		var terrain = GrubsGame.Instance.Terrain;

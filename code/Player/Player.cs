@@ -26,6 +26,8 @@ public partial class Player : Entity
 	public string AvatarClothingData { get; private set; }
 
 	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
+	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.Health );
+	public int GetHealthPercentage => GetTotalGrubHealth / GrubsConfig.GrubCount;
 
 	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
 
@@ -60,7 +62,6 @@ public partial class Player : Entity
 	{
 		if ( IsLocalPawn )
 		{
-			SelectedColor = Random.Shared.FromList( ColorPresets );
 			SelectedCosmeticIndex = -1;
 			PopulateGrubNames();
 		}
@@ -98,7 +99,6 @@ public partial class Player : Entity
 		Inventory.Clear();
 		Inventory.GiveDefaultLoadout();
 
-		Color = !Client.IsBot ? SelectedColor : Random.Shared.FromList( ColorPresets );
 		Grubs.Clear();
 		CreateGrubs();
 	}
@@ -144,11 +144,6 @@ public partial class Player : Entity
 			Inventory.ActiveWeapon.Fire();
 
 		Inventory.SetActiveWeapon( null, true );
-	}
-
-	public int GetTotalGrubHealth()
-	{
-		return (int)Grubs.Sum( g => g.Health );
 	}
 
 	private void SaveClientClothes( IClient client )

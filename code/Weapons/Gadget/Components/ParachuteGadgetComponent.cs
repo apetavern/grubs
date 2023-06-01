@@ -43,20 +43,16 @@ public partial class ParachuteGadgetComponent : GadgetComponent
 			.WithoutTags( Tag.Dead );
 
 		var isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
+		var parachuteAirFrictionModifier = !isGrounded ? 1.5f : 12.0f;
 
 		helper.Velocity += Game.PhysicsWorld.Gravity * Time.Delta;
-
-		var baseFriction = 2.0f;
-		if ( isGrounded )
-			baseFriction *= 12.0f;
-		var parachuteAirFrictionModifier = !_hasLanded ? 1.5f : 5f;
-		helper.ApplyFriction( baseFriction * parachuteAirFrictionModifier, Time.Delta );
+		helper.ApplyFriction( 2.0f * parachuteAirFrictionModifier, Time.Delta );
 		helper.TryMove( Time.Delta );
 
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
 
-		_hasLanded = helper.TraceDirection( Vector3.Down ).Entity is not null;
+		_hasLanded |= isGrounded;
 		if ( _hasLanded )
 		{
 			Parachute?.SetAnimParameter( "landed", true );

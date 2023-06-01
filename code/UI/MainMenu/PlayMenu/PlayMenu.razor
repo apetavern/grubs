@@ -1,26 +1,35 @@
 @namespace Grubs.UI
 
-@if (Game.LocalPawn is not Player player)
+@if (Game.LocalPawn is not Player localPlayer)
 {
     return;
 }
 
 <root>
     <div class="container">
-        <label class="title">Players</label>
+            <div class="header">
+                <label>Players</label>
+                <label>@(Game.Clients.Count) / @(Game.Server.MaxPlayers)</label>
+            </div>
         <div class="players">
             @foreach (var client in Game.Clients)
             {
+                if (client.Pawn is not Player player)
+                    continue;
+
                 <div class="player">
-                    <img src="avatar:@client.SteamId" class="avatar" />
                     <div style="align-items: center;">
+                        <div class="color-strip" style="background-color: @player.Color.Hex"></div>
+                        <img src="avatar:@client.SteamId" class="avatar" />
                         <label class="name">@client.Name</label>
-                        <label class="hours">
-                            <button icon="timer" />
-                            <label>@player.PlayTime.ToString("0.0")hrs</label>
-                        </label>
                     </div>
-                    
+                    @if(!client.IsBot)
+                    {
+                        <div class="hours" style="align-items: center;">
+                            <label>@player.PlayTime.ToString("0.0")hrs</label>
+                            <button icon="timer" style="margin-left: 4px;" />             
+                        </div>
+                    }
                 </div>
             }
         </div>
@@ -55,7 +64,11 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Game.Clients.HashCombine(c => c.SteamId), GetButtonText(), IsButtonEnabled());
+        return HashCode.Combine(
+            GetButtonText(), 
+            IsButtonEnabled(),
+            Game.Clients.HashCombine(c => HashCode.Combine((c.Pawn as Player)?.Color.RawInt, c.SteamId))
+        );
     }
 }
 
@@ -70,17 +83,18 @@
             height: 600px;
             flex-direction: column;
 
-            .title {
+            .header {
+                height: 80px;
                 align-items: center;
                 margin-top: 2px;
                 font-size: 48px;
                 padding: 16px;
                 background-image: linear-gradient(90deg, #3E0655AA, #3E065500);
+
             }
 
             .players {
-                padding-top: 4px;
-                margin: 8px;
+                padding: 10px 16px 0px 16px;
                 gap: 10px;
                 flex-direction: column;
                 overflow: scroll;
@@ -88,15 +102,22 @@
                 height: 100%;
 
                 .player {
-                    align-items: center;
                     flex-shrink: 0;
+                    justify-content: space-between;
+
+                    .color-strip {
+                        width: 5px;
+                        height: 100%;
+                        margin-right: 4px;
+                        border-radius: 4px 0px 0px 4px;
+                    }
 
                     .avatar {
                         width: 50px;
                         height: 50px;
-                        border-radius: 4px;
                         flex-shrink: 0;
-                        margin-right: 5px;
+                        margin-right: 12px;
+                        border-radius: 0px 4px 4px 0px;
                     }
 
                     .name {
@@ -108,7 +129,7 @@
 
                     .hours {
                         margin-left: 4px;
-                        font-size: 16px;
+                        font-size: 20px;
                         font-weight: lighter;
                     }
                 }

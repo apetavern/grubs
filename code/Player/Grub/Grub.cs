@@ -98,6 +98,17 @@ public partial class Grub : AnimatedEntity, IResolvable
 		var clothes = new ClothingContainer();
 		clothes.Deserialize( player.AvatarClothingData );
 
+		if ( player.Client.IsBot )
+		{
+			var skinMaterial = Material.Load( "models/bots/materials/phong1.vmat" );
+			var eyeMaterial = Material.Load( "models/bots/materials/eyes.vmat" );
+
+			SetMaterialOverride( skinMaterial, "skin" );
+			SetMaterialOverride( eyeMaterial, "eyes" );
+
+			return;
+		}
+
 		if ( player.HasCosmeticSelected )
 			clothes.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 

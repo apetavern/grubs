@@ -104,7 +104,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		if ( !ExplodeOnKilled || damageInfo.HasTag( Tag.OutOfArea ) )
 			return;
 
-		ExplosionHelper.Explode( Position, this, 50f );
+		ExplosionHelper.Explode( Position, this, 50f, 75f );
 		FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, 4 );
 
 		PlayScreenSound( "explosion_short_tail" );

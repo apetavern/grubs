@@ -21,14 +21,15 @@
   "HasCode": true,
   "CodePath": "code",
   "PackageReferences": [
-    "facepunch.libsdf"
+    "facepunch.libsdf",
+    "fish.grid_and_astar"
   ],
   "EditorReferences": null,
   "Metadata": {
     "MapList": [
       "apetavern.gr_beach"
     ],
-    "MaxPlayers": 8,
+    "MaxPlayers": 16,
     "MinPlayers": 0,
     "GameNetworkType": "Multiplayer",
     "MapSelect": "Hidden",

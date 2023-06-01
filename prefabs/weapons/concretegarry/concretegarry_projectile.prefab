@@ -38,7 +38,7 @@
           },
           "MaxBounces": {
             "Type": "Int32",
-            "Value": "19"
+            "Value": "9999"
           }
         }
       },
@@ -53,10 +53,6 @@
           "MaxExplosionDamage": {
             "Type": "Single",
             "Value": "50"
-          },
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "115"
           },
           "ExplodeAfter": {
             "Type": "Single",
@@ -79,6 +75,14 @@
           "DeleteOnExplode": {
             "Type": "Boolean",
             "Value": "false"
+          },
+          "DestructionRadius": {
+            "Type": "Single",
+            "Value": "115"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "125"
           }
         }
       }

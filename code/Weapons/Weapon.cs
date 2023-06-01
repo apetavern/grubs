@@ -60,7 +60,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public int Ammo { get; set; }
 
 	[Net]
-	public bool HasFired { get; set; } = false;
+	public bool IsChargeConsumed { get; set; } = false;
 
 	/// <summary>
 	/// If the weapon has a hat, override any Grub clothing.
@@ -121,10 +121,10 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		EnableDrawing = false;
 		CurrentUses = 0;
 
-		if ( HasFired && Ammo > 0 )
+		if ( IsChargeConsumed && Ammo > 0 )
 			Ammo--;
 
-		HasFired = false;
+		IsChargeConsumed = false;
 
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{

@@ -37,7 +37,9 @@ public partial class FreeForAll : Gamemode
 	{
 		SpawnPlayers();
 
+		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 		CurrentState = State.Playing;
+		base.Start();
 	}
 
 	/// <summary>
@@ -46,7 +48,7 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private void SpawnPlayers()
 	{
-		foreach ( var client in Game.Clients )
+		foreach ( var client in Game.Clients.Shuffle().OrderByDescending( x => !x.IsBot ) )
 		{
 			if ( client.Pawn is not Player player )
 				continue;
@@ -81,6 +83,16 @@ public partial class FreeForAll : Gamemode
 		{
 			Event.Run( GrubsEvent.Game.End );
 			return;
+		}
+		else if ( Game.Clients.Where( C => C.IsBot ).Any() )
+		{
+			BBox worldbox = new BBox();
+			worldbox.Maxs = new Vector3( Terrain.WorldTextureLength / 2f, 10f, Terrain.WorldTextureHeight );
+			worldbox.Mins = new Vector3( -Terrain.WorldTextureLength / 2f, -10f, 0 );
+
+			//DebugOverlay.Box( worldbox, Color.Red, 100f );
+
+			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 50f, standableAngle: 50f, save: false );
 		}
 
 		if ( GrubsConfig.WindEnabled )

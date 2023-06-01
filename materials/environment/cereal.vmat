@@ -10,10 +10,8 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Position ----
-	g_flYPosition "64.000"
-	g_flYSmoothing "75.000"
 	g_flZPosition "0.000"
-	g_flZSmoothing "250.000"
+	g_flZSmoothing "512.000"
 
 	//---- Scorch ----
 	g_flScorchBlendDistance "32.000"
@@ -27,12 +25,12 @@ Layer0
 	//---- Textures ----
 	AO "textures/environment/cereal_ao.png"
 	Colour "textures/environment/cereal_color.png"
-	g_flTiling "2.000"
+	g_flTiling "1.000"
 	Normal "textures/environment/cereal_normal.png"
 	Rough "textures/environment/cereal_rough.png"
 
 	//---- Tint ----
+	g_bGradientTint "0"
 	g_bTintDirectionToggle "0"
-	g_bTintGradientEnabled "0"
-	g_vTint_Colour "[0.415686 0.231373 0.074510 1.000000]"
+	g_vTint_Colour "[0.000000 0.000000 0.000000 1.000000]"
 }
