@@ -16,6 +16,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "FireSpeed": {
+            "Type": "Single",
+            "Value": "1200"
           }
         }
       }
