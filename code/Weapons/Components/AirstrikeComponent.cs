@@ -6,13 +6,8 @@ public partial class AirstrikeComponent : WeaponComponent
 	[Prefab]
 	public Prefab PlanePrefab { get; set; }
 
-	/// <summary>
-	/// 1 for "left to right"
-	/// -1 for "right to left"
-	/// </summary>
 	[Net, Predicted]
-	private int Direction { get; set; }
-	private bool LeftToRight => Direction > 0;
+	private bool RightToLeft { get; set; }
 
 	[Net]
 	private ModelEntity AirstrikeCursor { get; set; }
@@ -59,7 +54,7 @@ public partial class AirstrikeComponent : WeaponComponent
 
 		// TODO: Use a dedicated InputAction binding.
 		if ( Input.Released( InputAction.CameraPan ) )
-			Direction = LeftToRight ? -1 : 1;
+			RightToLeft = !RightToLeft;
 
 
 		Grub.Player.GrubsCamera.CanScroll = !Weapon.HasChargesRemaining;
@@ -69,12 +64,11 @@ public partial class AirstrikeComponent : WeaponComponent
 			Grub.Player.GrubsCamera.Distance = 1024f;
 
 		AirstrikeCursor.Position = Grub.Player.MousePosition;
-		AirstrikeCursor.Rotation = LeftToRight ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
+		AirstrikeCursor.Rotation = RightToLeft ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
 
 		if ( IsFiring && AirstrikeCursor.EnableDrawing )
 		{
 			AirstrikePosition = Grub.Player.MousePosition;
-			DebugOverlay.Sphere( AirstrikePosition, 20, Color.Red, 20 );
 			Fire();
 		}
 		else
@@ -85,11 +79,18 @@ public partial class AirstrikeComponent : WeaponComponent
 	{
 		if ( Game.IsServer && PrefabLibrary.TrySpawn<AirstrikePlane>( PlanePrefab.ResourcePath, out var plane ) )
 		{
-			var planeSpawnX = LeftToRight ? GrubsConfig.TerrainLength : -(GrubsConfig.TerrainLength / 2);
+			const float zOffset = 64;
+			const float xOffset = 128;
+
+			var rootPosition = GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( GrubsConfig.TerrainHeight + zOffset );
+			var direction = RightToLeft ? Vector3.Forward : Vector3.Backward;
+			var planeSpawnPosition = rootPosition + direction * GrubsConfig.TerrainLength + xOffset;
+
+			GamemodeSystem.Instance.CameraTarget = plane;
 			plane.Owner = Weapon.Owner;
-			plane.TargetX = AirstrikePosition.x;
-			plane.LeftToRight = LeftToRight;
-			plane.Position = new Vector3( planeSpawnX, 0, 512 );
+			plane.TargetPosition = AirstrikePosition;
+			plane.RightToLeft = RightToLeft;
+			plane.Position = planeSpawnPosition;
 			plane.Rotation = AirstrikeCursor.Rotation;
 		}
 

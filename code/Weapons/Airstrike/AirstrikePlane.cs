@@ -21,20 +21,29 @@ public partial class AirstrikePlane : AnimatedEntity
 	[Prefab]
 	public Vector3 DropOffset { get; set; }
 
-	public bool LeftToRight { get; set; }
-	public float TargetX { get; set; }
+	[Net]
+	public bool RightToLeft { get; set; }
+
+	public Vector3 TargetPosition { get; set; }
 
 	private float _speed = 9;
+	private bool _reachedTarget = false;
 
 	[GameEvent.Tick]
 	void OnTick()
 	{
 		if ( Game.IsServer )
 		{
-			var dir = LeftToRight ? Vector3.Backward : Vector3.Forward;
+			var dir = RightToLeft ? Vector3.Backward : Vector3.Forward;
 			Position += dir * _speed;
-			if ( Position.x.AlmostEqual( TargetX, LeftToRight ? 3 : -3 ) )
+
+			const float xLookAhead = 200;
+			var targetX = TargetPosition.x;
+
+			bool withinTargetPosition = (RightToLeft && Position.x <= targetX + xLookAhead) || (!RightToLeft && Position.x >= targetX - xLookAhead);
+			if ( withinTargetPosition && !_reachedTarget )
 			{
+				_reachedTarget = true;
 				DropPayload();
 				DeleteAsync( 10 );
 			}
