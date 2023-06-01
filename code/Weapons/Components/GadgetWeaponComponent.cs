@@ -13,6 +13,9 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	public int GadgetCount { get; set; } = 1;
 
 	[Prefab, Net]
+	public int GadgetsPerShot { get; set; } = 1;
+
+	[Prefab, Net]
 	public ParticleSystem MuzzleParticle { get; set; }
 
 	[Prefab, ResourceType( "sound" )]
@@ -120,8 +123,12 @@ public partial class GadgetWeaponComponent : WeaponComponent
 			return;
 
 		Weapon.PlayScreenSound( UseSound );
-		var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
-		gadget.OnUse( Grub, Weapon, Charge );
+
+		for ( int i = 0; i < GadgetsPerShot; i++ )
+		{
+			var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
+			gadget.OnUse( Grub, Weapon, Charge );
+		}
 
 		Charge = MinCharge;
 		TimeSinceLastFire = 0;
