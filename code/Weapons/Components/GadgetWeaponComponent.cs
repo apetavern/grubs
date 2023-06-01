@@ -7,6 +7,15 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	public Prefab GadgetPrefab { get; set; }
 
 	[Prefab, Net]
+	public float DelayPerUse { get; set; } = 0f;
+
+	[Prefab, Net]
+	public int TotalUseCount { get; set; } = 1;
+
+	[Prefab, Net]
+	public int GadgetsPerUse { get; set; } = 1;
+
+	[Prefab, Net]
 	public ParticleSystem MuzzleParticle { get; set; }
 
 	[Prefab, ResourceType( "sound" )]
@@ -19,10 +28,16 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	public bool LockPreviewBeforeFire { get; set; }
 
 	[Net]
+	private TimeSince TimeSinceLastFire { get; set; } = 0f;
+
+	[Net, Predicted]
+	private int UseCount { get; set; } = 0;
+
+	[Net]
 	public TargetPreview TargetPreview { get; set; }
 
 	[Net]
-	private FiringType _fireType { get; set; }
+	private FiringType FireType { get; set; }
 
 	public override void OnDeploy()
 	{
@@ -30,7 +45,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 		if ( UseTargetPreview )
 		{
-			_fireType = Weapon.FiringType;
+			FireType = Weapon.FiringType;
 			Weapon.FiringType = FiringType.Cursor;
 			Weapon.ShowReticle = false;
 
@@ -62,7 +77,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		if ( UseTargetPreview )
 			TargetPreview?.Simulate( client );
 
-		if ( IsFiring )
+		if ( IsFiring && TimeSinceLastFire >= DelayPerUse && UseCount < TotalUseCount )
 			Fire();
 	}
 
@@ -76,7 +91,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 			if ( LockPreviewBeforeFire )
 			{
 				IsFiring = false;
-				Weapon.FiringType = _fireType;
+				Weapon.FiringType = FireType;
 				Weapon.ShowReticle = true;
 				return;
 			}
@@ -107,13 +122,23 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		if ( !Game.IsServer )
 			return;
 
-		var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
-		gadget.OnUse( Grub, Weapon, Charge );
-		gadget.PlayScreenSound( UseSound );
+		Weapon.PlayScreenSound( UseSound );
+
+		for ( int i = 0; i < GadgetsPerUse; i++ )
+		{
+			var gadget = PrefabLibrary.Spawn<Gadget>( GadgetPrefab );
+			gadget.OnUse( Grub, Weapon, Charge );
+		}
 
 		Charge = MinCharge;
+		TimeSinceLastFire = 0;
+		UseCount++;
 
-		FireFinished();
+		if ( UseCount >= TotalUseCount )
+		{
+			UseCount = 0;
+			FireFinished();
+		}
 	}
 
 	public override void FireFinished()
