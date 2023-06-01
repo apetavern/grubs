@@ -8,7 +8,7 @@ public partial class FireEmitGadgetComponent : GadgetComponent
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
-		FireHelper.StartFiresWithDirection( weapon.GetStartPosition(), Grub.EyeRotation.Forward.Normal * Grub.Facing * FireSpeed, 1 );
+		FireHelper.StartFiresWithDirection( weapon.GetStartPosition().WithY( 0f ), (Grub.EyeRotation.Forward.Normal * Grub.Facing * FireSpeed).WithY( 0f ), 1 );
 		Gadget.Delete();
 	}
 }
