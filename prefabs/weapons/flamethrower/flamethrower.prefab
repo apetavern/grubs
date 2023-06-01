@@ -8,90 +8,50 @@
     "Entities": [],
     "Components": [
       {
-        "Guid": "333bfe4a-5461-4bd9-8191-66a43e13146b",
-        "Class": "FireEmitComponent",
+        "Guid": "dd072def-b987-4deb-97d6-6c77ab103a77",
+        "Class": "GadgetWeaponComponent",
         "Keys": {
-          "HitForce": {
-            "Type": "Vector3",
-            "Value": "\u0022100,0,15\u0022"
+          "UseTargetPreview": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "LockPreviewBeforeFire": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "GadgetPrefab": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/flamethrower/flamethrower_projectile.prefab\u0022"
+          },
+          "MuzzleParticle": {
+            "Type": "ParticleSystem",
+            "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
+          },
+          "UseSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Fire Projectile\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
           },
           "TraceCount": {
             "Type": "Int32",
             "Value": "30"
           },
-          "TraceSpread": {
-            "Type": "Single",
-            "Value": "600"
-          },
           "TraceDelay": {
             "Type": "Single",
             "Value": "0.06"
           },
-          "TraceDistance": {
-            "Type": "Single",
-            "Value": "5000"
-          },
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "10"
-          },
-          "ExplosionDamage": {
-            "Type": "Single",
-            "Value": "0"
-          },
-          "PenetrateTargets": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "PenetrateWorld": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "Damage": {
-            "Type": "Single",
-            "Value": "3"
-          },
-          "UseMuzzleParticle": {
-            "Type": "Boolean",
-            "Value": "true"
-          },
-          "TraceParticle": {
-            "Type": "ParticleSystem",
-            "Value": "\u0022particles/guntrace/guntrace.vpcf\u0022"
-          },
-          "_name": {
-            "Value": "\u0022Shoot\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          },
-          "TraceSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/weapons/minigun/minigun_shot.sound\u0022"
-          },
-          "MuzzleParticle": {
-            "Type": "String",
-            "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
-          },
-          "FlameDelay": {
-            "Type": "Single",
-            "Value": "0.06"
-          },
-          "FlamesSpread": {
-            "Type": "Single",
-            "Value": "100"
-          },
-          "FlameVelocity": {
-            "Type": "Int32",
-            "Value": "1200"
-          },
-          "FlamesCount": {
+          "GadgetCount": {
             "Type": "Int32",
             "Value": "30"
           },
-          "FlameSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
+          "GadgetDelay": {
+            "Type": "Single",
+            "Value": "0.06"
           }
         }
       }
