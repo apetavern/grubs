@@ -18,21 +18,23 @@
           "_name": {
             "Value": "\u0022AirstrikeRemoteComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
     "Keys": {
       "Model": {
         "Type": "Model",
-        "Value": "\u0022models/tools/skipturn/skipremote.vmdl\u0022"
+        "Value": "\u0022models/weapons/airstrikes/radio.vmdl\u0022"
       },
       "StartSound": {
         "Type": "null"
       },
       "Icon": {
         "Type": "String",
-        "Value": "\u0022models/weapons/airstrikes/materials/radio_color.psd\u0022"
+        "Value": "\u0022models/weapons/airstrikes/radio.vmdl_c.png\u0022"
       },
       "OverrideHat": {
         "Type": "Boolean",
