@@ -31,7 +31,14 @@ public partial class LateJoinMechanic : ControllerMechanic
 
 		if ( !FinishedParachuting )
 		{
-			Entity.Velocity = new Vector3( GamemodeSystem.Instance.ActiveWindForce, Entity.Velocity.y, Entity.Velocity.ClampLength( 200f ).z );
+			var chuteHelper = new GrubParachuteHelper
+			{
+				FallSpeed = 200f,
+				IsPlayerControlled = false,
+				IsAffectedByWind = true,
+			};
+
+			chuteHelper.Fall( Entity );
 			return;
 		}
 
