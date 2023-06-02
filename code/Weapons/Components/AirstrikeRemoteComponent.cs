@@ -20,8 +20,7 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 		if ( !Game.IsServer )
 			return;
 
-		AirstrikeCursor = new ModelEntity( "models/weapons/airstrikes/plane.vmdl" );
-		AirstrikeCursor.Scale = 0.25f;
+		AirstrikeCursor = new ModelEntity( "models/weapons/targetindicator/arrowindicator.vmdl" );
 		AirstrikeCursor.SetupPhysicsFromModel( PhysicsMotionType.Static );
 		AirstrikeCursor.Tags.Add( Tag.Preview );
 		AirstrikeCursor.Owner = Grub;
@@ -56,7 +55,6 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 		if ( Input.Released( InputAction.Inventory ) )
 			RightToLeft = !RightToLeft;
 
-
 		Grub.Player.GrubsCamera.CanScroll = !Weapon.HasChargesRemaining;
 		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
 
@@ -64,7 +62,7 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 			Grub.Player.GrubsCamera.Distance = 1024f;
 
 		AirstrikeCursor.Position = Grub.Player.MousePosition;
-		AirstrikeCursor.Rotation = RightToLeft ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
+		AirstrikeCursor.Rotation = RightToLeft ? Rotation.Identity : Rotation.Identity * new Angles( -90, 0, 0 ).ToRotation();
 
 		if ( IsFiring && AirstrikeCursor.EnableDrawing )
 		{
@@ -82,13 +80,13 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 			const float zOffset = 64;
 			const float xOffset = 80;
 
-			var rootPosition = GrubsGame.Instance.Terrain.Position.WithZ( GrubsConfig.TerrainHeight + zOffset );
+			var rootPosition = GrubsGame.Instance.Terrain.Position.WithZ( GrubsConfig.TerrainHeight + zOffset ).WithY( -64 );
 			var direction = RightToLeft ? Vector3.Forward : Vector3.Backward;
 			var planeSpawnPosition = rootPosition + direction * GrubsConfig.TerrainLength + xOffset;
 
 			plane.Owner = Weapon.Owner;
 			plane.Position = planeSpawnPosition;
-			plane.Rotation = AirstrikeCursor.Rotation;
+			plane.Rotation = RightToLeft ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
 			Grub.Player.Gadgets.Add( plane );
 
 			var airstrike = plane.Components.Get<AirstrikeGadgetComponent>();
@@ -97,5 +95,11 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 		}
 
 		FireFinished();
+	}
+
+	public override void FireFinished()
+	{
+		base.FireFinished();
+		Weapon.Holster( Grub );
 	}
 }

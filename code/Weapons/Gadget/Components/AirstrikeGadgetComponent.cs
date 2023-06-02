@@ -18,44 +18,45 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	public bool HasReachedTarget { get; private set; }
 	public Vector3 TargetPosition { get; set; }
 
-	private float _speed = 18;
+	private float _speed = 20;
 
 	public override void Simulate( IClient client )
 	{
-		var dir = RightToLeft ? Vector3.Backward : Vector3.Forward;
-		Gadget.Position += dir * _speed;
+		Gadget.Position += RightToLeft ? Vector3.Backward * _speed : Vector3.Forward * _speed;
 
 		if ( !Game.IsServer )
 			return;
 
-		const float xLookAhead = 200;
-		var targetX = TargetPosition.x;
-
-		bool withinTargetPosition = (RightToLeft && Gadget.Position.x <= targetX + xLookAhead) || (!RightToLeft && Gadget.Position.x >= targetX - xLookAhead);
-		if ( withinTargetPosition && !HasReachedTarget )
+		if ( Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( TargetPosition.WithY( 0 ).WithZ( 0 ) ) <= 200 && !HasReachedTarget )
 		{
 			HasReachedTarget = true;
 			Gadget.ShouldCameraFollow = false;
 			DropPayload();
-			Gadget.DeleteAsync( 2 );
 		}
+
+		if ( HasReachedTarget && Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3 )
+			Gadget.Delete();
 	}
 
 	private async void DropPayload()
 	{
-		var drop = Gadget.GetAttachment( "droppoint", true );
-		var dropPosition = drop.HasValue ? drop.Value.Position : Gadget.Position;
-
+		var dropAttachment = Gadget.GetAttachment( "droppoint", false );
 		for ( int i = 0; i < ProjectileCount; i++ )
 		{
+			await GameTask.DelaySeconds( DropRateSeconds );
+
 			if ( !PrefabLibrary.TrySpawn<Gadget>( Projectile.ResourcePath, out var bomb ) )
 				continue;
 
 			bomb.Owner = Gadget.Owner;
-			bomb.Position = dropPosition;
+			bomb.Position = dropAttachment.HasValue ? Gadget.Position + dropAttachment.Value.Position : Gadget.Position;
 			Player.Gadgets.Add( bomb );
 
-			await GameTask.DelaySeconds( DropRateSeconds );
+			if ( i == 0 )
+				bomb.ShouldCameraFollow = true;
+
+			if ( bomb.Components.TryGet<ArcPhysicsGadgetComponent>( out var arcPhysics ) )
+				arcPhysics.OnUse( null, 0 );
 		}
 	}
 }
