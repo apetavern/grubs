@@ -20,7 +20,16 @@ public partial class ParachuteComponent : WeaponComponent
 			Fire();
 
 		if ( Deployed )
-			Grub.Velocity = new Vector3( Grub.Velocity.x - Player.MoveInput + GamemodeSystem.Instance.ActiveWindForce, Grub.Velocity.y, Grub.Velocity.ClampLength( 70f ).z );
+		{
+			var chuteHelper = new GrubParachuteHelper
+			{
+				Drag = 70f,
+				IsAffectedByWind = true,
+				IsPlayerControlled = true,
+			};
+
+			chuteHelper.Fall( Grub );
+		}
 
 		if ( Grub.Controller.IsGrounded && Deployed )
 			FireFinished();
