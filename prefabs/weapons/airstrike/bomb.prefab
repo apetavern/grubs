@@ -24,12 +24,16 @@
         }
       },
       {
-        "Guid": "e652de73-fdaa-4704-ad41-1d5a91685655",
+        "Guid": "87159af9-6d87-401d-a90c-fd66d17c8954",
         "Class": "ExplosiveGadgetComponent",
         "Keys": {
           "ExplosionReaction": {
             "Type": "ExplosiveReaction",
             "Value": "\u0022Explosion\u0022"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "0"
           },
           "ExplodeOnTouch": {
             "Type": "Boolean",
@@ -38,17 +42,7 @@
           "_name": {
             "Value": "\u0022ExplosiveGadgetComponent\u0022"
           },
-          "_tags": {
-            "Value": "[]"
-          },
-          "ExplosionSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
-          },
-          "ExplodeAfter": {
-            "Type": "Single",
-            "Value": "0"
-          }
+          "_tags": {}
         }
       }
     ],

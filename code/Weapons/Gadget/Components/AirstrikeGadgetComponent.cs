@@ -43,20 +43,17 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 
 	private async void DropPayload()
 	{
+		var drop = Gadget.GetAttachment( "droppoint", true );
+		var dropPosition = drop.HasValue ? drop.Value.Position : Gadget.Position;
+
 		for ( int i = 0; i < ProjectileCount; i++ )
 		{
 			if ( !PrefabLibrary.TrySpawn<Gadget>( Projectile.ResourcePath, out var bomb ) )
 				continue;
 
-			var drop = Gadget.GetAttachment( "droppoint", true );
-			var dropPosition = drop.HasValue ? drop.Value.Position : Gadget.Position;
-
 			bomb.Owner = Gadget.Owner;
 			bomb.Position = dropPosition;
 			Player.Gadgets.Add( bomb );
-
-			foreach ( var comp in bomb.Components.GetAll<GadgetComponent>() )
-				comp.OnUse( null, 0 );
 
 			await GameTask.DelaySeconds( DropRateSeconds );
 		}

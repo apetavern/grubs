@@ -83,6 +83,10 @@
       "ShouldCameraFollow": {
         "Type": "Boolean",
         "Value": "true"
+      },
+      "CollisionRadius": {
+        "Type": "Single",
+        "Value": "0"
       }
     }
   }
