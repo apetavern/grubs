@@ -4,9 +4,38 @@
   "Description": null,
   "Root": {
     "Guid": "db39453b-53dc-4bab-99e1-1a0ef6337c9e",
-    "Class": "AirstrikePlane",
+    "Class": "Gadget",
     "Entities": [],
-    "Components": [],
+    "Components": [
+      {
+        "Guid": "de44d8b2-e4ae-4ec6-8b98-4ca0c04fdbdc",
+        "Class": "AirstrikeGadgetComponent",
+        "Keys": {
+          "DropOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "Projectile": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/airstrike/bomb.prefab\u0022"
+          },
+          "DropRateSeconds": {
+            "Type": "Single",
+            "Value": "0.09"
+          },
+          "ProjectileCount": {
+            "Type": "Int32",
+            "Value": "4"
+          },
+          "_name": {
+            "Value": "\u0022AirstrikeGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
     "Keys": {
       "_name": {
         "Value": "\u0022Airstrike Plane\u0022"
@@ -50,6 +79,10 @@
       "DropRateSeconds": {
         "Type": "Single",
         "Value": "0.4"
+      },
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "true"
       }
     }
   }

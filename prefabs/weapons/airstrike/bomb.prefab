@@ -6,7 +6,52 @@
     "Guid": "8eb548c9-0469-4d77-b05f-39edc93ccb4f",
     "Class": "Gadget",
     "Entities": [],
-    "Components": [],
+    "Components": [
+      {
+        "Guid": "590d96bc-7830-4496-96cf-d31307737a97",
+        "Class": "AnvilPhysicsGadgetComponent",
+        "Keys": {
+          "AffectedByWind": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "_name": {
+            "Value": "\u0022AnvilPhysicsGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "e652de73-fdaa-4704-ad41-1d5a91685655",
+        "Class": "ExplosiveGadgetComponent",
+        "Keys": {
+          "ExplosionReaction": {
+            "Type": "ExplosiveReaction",
+            "Value": "\u0022Explosion\u0022"
+          },
+          "ExplodeOnTouch": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "_name": {
+            "Value": "\u0022ExplosiveGadgetComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "ExplosionSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/explosions/explosion_short_tail.sound\u0022"
+          },
+          "ExplodeAfter": {
+            "Type": "Single",
+            "Value": "0"
+          }
+        }
+      }
+    ],
     "Keys": {
       "Model": {
         "Type": "Model",
@@ -28,6 +73,10 @@
         "Value": "\u0022\u0022"
       },
       "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "UseModelCollision": {
         "Type": "Boolean",
         "Value": "false"
       }

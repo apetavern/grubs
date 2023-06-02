@@ -1,7 +1,7 @@
 namespace Grubs;
 
 [Prefab]
-public partial class AirstrikeComponent : WeaponComponent
+public partial class AirstrikeRemoteComponent : WeaponComponent
 {
 	[Prefab]
 	public Prefab PlanePrefab { get; set; }
@@ -53,7 +53,7 @@ public partial class AirstrikeComponent : WeaponComponent
 		AirstrikeCursor.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
 		// TODO: Use a dedicated InputAction binding.
-		if ( Input.Released( InputAction.CameraPan ) )
+		if ( Input.Released( InputAction.Inventory ) )
 			RightToLeft = !RightToLeft;
 
 
@@ -77,21 +77,23 @@ public partial class AirstrikeComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-		if ( Game.IsServer && PrefabLibrary.TrySpawn<AirstrikePlane>( PlanePrefab.ResourcePath, out var plane ) )
+		if ( Game.IsServer && PrefabLibrary.TrySpawn<Gadget>( PlanePrefab.ResourcePath, out var plane ) )
 		{
 			const float zOffset = 64;
-			const float xOffset = 128;
+			const float xOffset = 80;
 
-			var rootPosition = GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( GrubsConfig.TerrainHeight + zOffset );
+			var rootPosition = GrubsGame.Instance.Terrain.Position.WithZ( GrubsConfig.TerrainHeight + zOffset );
 			var direction = RightToLeft ? Vector3.Forward : Vector3.Backward;
 			var planeSpawnPosition = rootPosition + direction * GrubsConfig.TerrainLength + xOffset;
 
 			plane.Owner = Weapon.Owner;
-			plane.TargetPosition = AirstrikePosition;
-			plane.RightToLeft = RightToLeft;
 			plane.Position = planeSpawnPosition;
 			plane.Rotation = AirstrikeCursor.Rotation;
+			Grub.Player.Gadgets.Add( plane );
 
+			var airstrike = plane.Components.Get<AirstrikeGadgetComponent>();
+			airstrike.TargetPosition = AirstrikePosition;
+			airstrike.RightToLeft = RightToLeft;
 		}
 
 		FireFinished();

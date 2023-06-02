@@ -8,35 +8,17 @@
     "Entities": [],
     "Components": [
       {
-        "Guid": "f78a8d40-1a4b-449e-a29b-f6056f0db74c",
-        "Class": "AirstrikeComponent",
+        "Guid": "c436cb6c-dad1-461c-b6e7-e3af69b80a1b",
+        "Class": "AirstrikeRemoteComponent",
         "Keys": {
-          "PayloadCount": {
-            "Type": "Int32",
-            "Value": "1"
-          },
-          "_name": {
-            "Value": "\u0022AirstrikeComponent\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          },
-          "Payload": {
-            "Type": "Prefab",
-            "Value": "\u0022prefabs/weapons/mine/mine.prefab\u0022"
-          },
-          "Fuck": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "HelloWorld": {
-            "Type": "Single",
-            "Value": "0"
-          },
           "PlanePrefab": {
             "Type": "Prefab",
             "Value": "\u0022prefabs/weapons/airstrike/airstrike_plane.prefab\u0022"
-          }
+          },
+          "_name": {
+            "Value": "\u0022AirstrikeRemoteComponent\u0022"
+          },
+          "_tags": {}
         }
       }
     ],
