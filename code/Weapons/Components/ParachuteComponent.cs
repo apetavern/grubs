@@ -23,7 +23,7 @@ public partial class ParachuteComponent : WeaponComponent
 		{
 			var chuteHelper = new GrubParachuteHelper
 			{
-				Drag = 70f,
+				FallSpeed = 70f,
 				IsAffectedByWind = true,
 				IsPlayerControlled = true,
 			};
