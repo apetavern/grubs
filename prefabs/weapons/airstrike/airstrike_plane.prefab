@@ -21,7 +21,7 @@
           },
           "DropRateSeconds": {
             "Type": "Single",
-            "Value": "0.09"
+            "Value": "0.07"
           },
           "ProjectileCount": {
             "Type": "Int32",

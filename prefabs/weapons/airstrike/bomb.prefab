@@ -8,15 +8,11 @@
     "Entities": [],
     "Components": [
       {
-        "Guid": "590d96bc-7830-4496-96cf-d31307737a97",
-        "Class": "AnvilPhysicsGadgetComponent",
+        "Guid": "d7e4fde9-3f49-4ece-bd86-c2c18c8a4359",
+        "Class": "ArcPhysicsGadgetComponent",
         "Keys": {
-          "AffectedByWind": {
-            "Type": "Boolean",
-            "Value": "true"
-          },
           "_name": {
-            "Value": "\u0022AnvilPhysicsGadgetComponent\u0022"
+            "Value": "\u0022ArcPhysicsGadgetComponent\u0022"
           },
           "_tags": {
             "Value": "[]"
@@ -24,7 +20,7 @@
         }
       },
       {
-        "Guid": "87159af9-6d87-401d-a90c-fd66d17c8954",
+        "Guid": "d7d00fb0-0d6c-4284-9b40-3283e81d01c1",
         "Class": "ExplosiveGadgetComponent",
         "Keys": {
           "ExplosionReaction": {
@@ -42,7 +38,9 @@
           "_name": {
             "Value": "\u0022ExplosiveGadgetComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -68,7 +66,7 @@
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
-        "Value": "true"
+        "Value": "false"
       },
       "UseModelCollision": {
         "Type": "Boolean",
