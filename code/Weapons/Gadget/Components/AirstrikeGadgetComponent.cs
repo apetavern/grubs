@@ -3,23 +3,14 @@ namespace Grubs;
 [Prefab]
 public partial class AirstrikeGadgetComponent : GadgetComponent
 {
-	/// <summary>
-	/// What are we dropping?
-	/// </summary>
 	[Prefab]
 	public Prefab Projectile { get; set; }
 
 	[Prefab]
 	public float DropRateSeconds { get; set; } = 0.2f;
 
-	/// <summary>
-	/// How many are we dropping?
-	/// </summary>
 	[Prefab]
 	public int ProjectileCount { get; set; } = 1;
-
-	[Prefab]
-	public Vector3 DropOffset { get; set; }
 
 	[Net]
 	public bool RightToLeft { get; set; }
@@ -58,7 +49,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 				continue;
 
 			var drop = Gadget.GetAttachment( "droppoint", true );
-			var dropPosition = drop.HasValue ? drop.Value.Position : Gadget.Position + Vector3.Down * 32;
+			var dropPosition = drop.HasValue ? drop.Value.Position : Gadget.Position;
 
 			bomb.Owner = Gadget.Owner;
 			bomb.Position = dropPosition;
