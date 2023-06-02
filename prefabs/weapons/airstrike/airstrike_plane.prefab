@@ -33,7 +33,7 @@
       },
       "DropOffset": {
         "Type": "Vector3",
-        "Value": "\u00220,0,32\u0022"
+        "Value": "\u00220,0,128\u0022"
       },
       "ProjectileCount": {
         "Type": "Int32",

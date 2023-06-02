@@ -86,12 +86,12 @@ public partial class AirstrikeComponent : WeaponComponent
 			var direction = RightToLeft ? Vector3.Forward : Vector3.Backward;
 			var planeSpawnPosition = rootPosition + direction * GrubsConfig.TerrainLength + xOffset;
 
-			GamemodeSystem.Instance.CameraTarget = plane;
 			plane.Owner = Weapon.Owner;
 			plane.TargetPosition = AirstrikePosition;
 			plane.RightToLeft = RightToLeft;
 			plane.Position = planeSpawnPosition;
 			plane.Rotation = AirstrikeCursor.Rotation;
+
 		}
 
 		FireFinished();

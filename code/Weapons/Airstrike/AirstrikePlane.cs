@@ -24,29 +24,31 @@ public partial class AirstrikePlane : AnimatedEntity
 	[Net]
 	public bool RightToLeft { get; set; }
 
+	public bool HasReachedTarget { get; private set; }
 	public Vector3 TargetPosition { get; set; }
 
-	private float _speed = 9;
-	private bool _reachedTarget = false;
+	private float _speed = 18;
 
-	[GameEvent.Tick]
+	public override void Spawn()
+	{
+		GamemodeSystem.Instance.CameraTarget = this;
+	}
+
+	[GameEvent.Tick.Server]
 	void OnTick()
 	{
-		if ( Game.IsServer )
+		var dir = RightToLeft ? Vector3.Backward : Vector3.Forward;
+		Position += dir * _speed;
+
+		const float xLookAhead = 200;
+		var targetX = TargetPosition.x;
+
+		bool withinTargetPosition = (RightToLeft && Position.x <= targetX + xLookAhead) || (!RightToLeft && Position.x >= targetX - xLookAhead);
+		if ( withinTargetPosition && !HasReachedTarget )
 		{
-			var dir = RightToLeft ? Vector3.Backward : Vector3.Forward;
-			Position += dir * _speed;
-
-			const float xLookAhead = 200;
-			var targetX = TargetPosition.x;
-
-			bool withinTargetPosition = (RightToLeft && Position.x <= targetX + xLookAhead) || (!RightToLeft && Position.x >= targetX - xLookAhead);
-			if ( withinTargetPosition && !_reachedTarget )
-			{
-				_reachedTarget = true;
-				DropPayload();
-				DeleteAsync( 10 );
-			}
+			HasReachedTarget = true;
+			DropPayload();
+			DeleteAsync( 10 );
 		}
 	}
 
@@ -57,8 +59,16 @@ public partial class AirstrikePlane : AnimatedEntity
 			if ( !PrefabLibrary.TrySpawn<Entity>( Projectile.ResourcePath, out var bomb ) )
 				continue;
 
+			if ( ProjectileCount == 1 )
+				GamemodeSystem.Instance.CameraTarget = bomb;
+			else if ( i == ProjectileCount / 2 )
+				GamemodeSystem.Instance.CameraTarget = bomb;
+
+			var drop = GetAttachment( "droppoint", true );
+			var dropPosition = drop.HasValue ? drop.Value.Position : Position + Vector3.Down * 32;
+
 			bomb.Owner = Owner;
-			bomb.Position = Position + DropOffset;
+			bomb.Position = dropPosition;
 
 			foreach ( var comp in bomb.Components.GetAll<GadgetComponent>() )
 				comp.OnUse( null, 0 );
