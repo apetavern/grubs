@@ -51,8 +51,7 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 
 		AirstrikeCursor.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
-		// TODO: Use a dedicated InputAction binding.
-		if ( Input.Released( InputAction.Inventory ) )
+		if ( Input.Released( InputAction.ChangeAirstrikeDirection ) )
 			RightToLeft = !RightToLeft;
 
 		Grub.Player.GrubsCamera.CanScroll = !Weapon.HasChargesRemaining;
