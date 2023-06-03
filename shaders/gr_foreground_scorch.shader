@@ -126,7 +126,7 @@ PS
 		float4 local20 = Tex2DS( g_tScorchColour, g_sSampler0, local2 );
 		float4 local21 = local19 * local20;
 		float4 local22 = g_vScorchLayer_Params;
-		float4 local23 = float4( local22.r, local22.g, 0, 0 );
+		float4 local23 = float4( local22.r, local22.r, 0, 0 );
 		float3 local24 = i.vPositionOs;
 		float3 local25 = float3( local22.b, local22.b, local22.b ) * local24;
 		float4 local26 = local23 + float4( local25, 0 );

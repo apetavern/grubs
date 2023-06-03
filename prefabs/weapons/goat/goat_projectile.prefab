@@ -52,6 +52,14 @@
           "ShouldBounce": {
             "Type": "Boolean",
             "Value": "true"
+          },
+          "AutoMove": {
+            "Type": "Boolean",
+            "Value": "true"
+          },
+          "IsAnimated": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },
@@ -59,10 +67,6 @@
         "Guid": "105b730c-bc9f-4ce2-bf23-d4edb4919185",
         "Class": "ExplosiveGadgetComponent",
         "Keys": {
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "100"
-          },
           "MaxExplosionDamage": {
             "Type": "Single",
             "Value": "100"
@@ -88,6 +92,26 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "125"
+          },
+          "DestructionRadius": {
+            "Type": "Single",
+            "Value": "100"
+          }
+        }
+      },
+      {
+        "Guid": "bbecdda3-b1f8-4637-bccb-df5567695be6",
+        "Class": "RemoteDetonateGadgetComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022Remote Detonate\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
           }
         }
       }
@@ -103,7 +127,7 @@
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
-        "Value": "false"
+        "Value": "true"
       },
       "IsDroppable": {
         "Type": "Boolean",

@@ -25,7 +25,11 @@ public partial class Player
 	public override void BuildInput()
 	{
 		if ( Input.StopProcessing )
+		{
+			MoveInput = 0;
+			LookInput = 0;
 			return;
+		}
 
 		MoveInput = Input.AnalogMove.y;
 		LookInput = Input.AnalogMove.x;

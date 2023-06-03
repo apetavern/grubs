@@ -85,8 +85,10 @@ public sealed partial class GrubsGame : GameManager
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 		UI.TextChat.AddInfoChatEntry( $"{client.Name} has left ({reason})" );
 
-		if ( client.Pawn is Player player && PlayerColors.ContainsKey( player.Color ) )
-			PlayerColors[player.Color] = false;
+		if ( client.Pawn is not Player player || GamemodeSystem.Instance.CurrentState == Gamemode.State.Playing )
+			return;
+
+		DeletePlayer( player );
 	}
 
 	public override void Simulate( IClient cl )
@@ -110,6 +112,23 @@ public sealed partial class GrubsGame : GameManager
 	{
 		UI.PlayerList.Current?.OnVoicePlayed( client );
 	}
+
+#if DEBUG
+	public override void DoPlayerDevCam( IClient client )
+	{
+		Game.AssertServer();
+
+		var camera = client.Components.Get<DebugCamera>( true );
+		if ( camera is null )
+		{
+			camera = new DebugCamera();
+			client.Components.Add( camera );
+			return;
+		}
+
+		camera.Enabled = !camera.Enabled;
+	}
+#endif
 
 	private void PrecacheFiles()
 	{
@@ -150,6 +169,41 @@ public sealed partial class GrubsGame : GameManager
 		PlayerColors.Add( Color.FromBytes( 173, 162, 255 ), false );    // Purple
 		PlayerColors.Add( Color.FromBytes( 33, 146, 255 ), false );     // Blue
 		PlayerColors.Add( Color.FromBytes( 169, 213, 255 ), false );    // Bright Pastel Blue
+	}
+
+	/// <summary>
+	/// Tries to assign an unused color to the Player.
+	/// Will use <see cref="Player.DefaultColor"/> if there aren't any unused colors left.
+	/// </summary>
+	/// <param name="player"></param>
+	/// <returns></returns>
+	public bool TryAssignUnusedColor( Player player )
+	{
+		Game.AssertServer();
+
+		var unusedColors = GrubsGame.Instance.PlayerColors.Where( k => !k.Value ).ToArray();
+		if ( unusedColors.Length > 0 )
+		{
+			var color = Game.Random.FromArray( unusedColors ).Key;
+			GrubsGame.Instance.PlayerColors[color] = true;
+			player.Color = color;
+			return true;
+		}
+
+		player.Color = Player.DefaultColor;
+		return false;
+	}
+
+	/// <summary>
+	/// Delete the player's pawn and reset the <see cref="PlayerColors"/> color slot they were using.
+	/// </summary>
+	/// <param name="player"></param>
+	private void DeletePlayer( Player player )
+	{
+		if ( PlayerColors.ContainsKey( player.Color ) )
+			PlayerColors[player.Color] = false;
+
+		player.Delete();
 	}
 
 	[GrubsEvent.Game.End]

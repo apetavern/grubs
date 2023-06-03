@@ -18,6 +18,7 @@ public static class Tag
 	public static readonly string Fire = "fire";
 	public static readonly string Shard = "shard";
 	public static readonly string Preview = "preview";
+	public static readonly string Target = "target";
 
 	/* World */
 	public static readonly string Trigger = "trigger";

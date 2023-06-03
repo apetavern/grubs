@@ -1,13 +1,12 @@
 @namespace Grubs.UI
 
-<root class="@(!HasAmmo ? "disabled" : "")">
+<root class="@(!Weapon.HasAmmo() ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>
     <img src=@Weapon.Icon />
 </root>
 
 @code {
     public Weapon Weapon { get; set; }
-    public bool HasAmmo { get; set; }
 
     protected string GetAmmoString()
     {
@@ -16,7 +15,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(HasAmmo, Weapon.Ammo);
+        return HashCode.Combine(Weapon.HasAmmo(), GetAmmoString());
     }
 }
 
@@ -30,6 +29,7 @@
 
         .charges {
             position: absolute;
+            left: 2px;
             font-family: Londrina Solid;
             font-size: 20px;
             color: white;

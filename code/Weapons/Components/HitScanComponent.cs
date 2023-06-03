@@ -168,21 +168,25 @@ public partial class HitScanComponent : WeaponComponent
 
 	private bool TraceHitSingle( TraceResult tr )
 	{
-		if ( tr.Hit )
+		if ( !tr.Hit )
+			return false;
+
+		if ( tr.Entity is Grub || tr.Entity is Gadget )
 		{
-			if ( tr.Entity is Grub || tr.Entity is Gadget )
+			if ( Entity.Components.TryGet<TeleportTargetComponent>( out var teleport ) )
 			{
-				HitEntity( tr.Entity, -tr.Normal );
-				return false;
-			}
-			else if ( tr.Entity is Sdf2DWorld )
-			{
-				ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionDamage );
+				teleport.Teleport( tr.Entity );
 				return true;
 			}
+
+			HitEntity( tr.Entity, -tr.Normal );
+			return true;
 		}
 
-		return false;
+		if ( tr.Entity is Sdf2DWorld )
+			ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionRadius, ExplosionDamage );
+
+		return true;
 	}
 
 	private void TraceHitMultiple( TraceResult[] results )

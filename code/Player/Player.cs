@@ -69,9 +69,6 @@ public partial class Player : Entity
 
 	public override void Spawn()
 	{
-		if ( Color == DefaultColor )
-			Color = GetRandomUnusedColor();
-
 		Tags.Add( Tag.IgnoreReset );
 
 		Components.Create<Inventory>();
@@ -104,6 +101,27 @@ public partial class Player : Entity
 
 		Grubs.Clear();
 		CreateGrubs();
+	}
+
+	public void HandleLateJoin()
+	{
+		if ( !GrubsConfig.SpawnLateJoiners )
+			return;
+
+		Inventory.Clear();
+		Inventory.GiveDefaultLoadout();
+
+		var grubNames = string.IsNullOrEmpty( GrubNames ) ? new List<string>() : System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
+		var grub = new Grub( this )
+		{
+			Owner = this,
+			Name = ParseGrubName( Game.Random.FromList( grubNames ) ),
+			Position = GrubsGame.Instance.Terrain.FindSpawnLocation( traceDown: false )
+		};
+
+		grub.Components.Create<LateJoinMechanic>();
+		Grubs.Add( grub );
+		ActiveGrub = grub;
 	}
 
 	private void CreateGrubs()

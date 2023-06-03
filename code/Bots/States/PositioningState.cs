@@ -167,7 +167,7 @@ public partial class PositioningState : BaseState
 				Input.SetAction( "backflip", false );
 			}
 		}
-		else if ( distance < 200f && distance > 30f )
+		else if ( (distance < 200f && distance > 30f) || (lineOfSight && facingTarget) )
 		{
 			MyPlayer.LookInput = LookAtTargetValue;
 
