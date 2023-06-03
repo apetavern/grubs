@@ -78,6 +78,16 @@
             "Value": "true"
           }
         }
+      },
+      {
+        "Guid": "73fb9b57-81e5-4029-a327-6340f9478518",
+        "Class": "TeleportTargetComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022TeleportTargetComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

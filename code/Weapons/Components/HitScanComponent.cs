@@ -36,9 +36,6 @@ public partial class HitScanComponent : WeaponComponent
 	public float ExplosionDamage { get; set; } = 1f;
 
 	[Prefab, Net]
-	public bool TeleportTarget { get; set; } = false;
-
-	[Prefab, Net]
 	public bool PenetrateTargets { get; set; } = false;
 
 	[Prefab, Net]
@@ -171,28 +168,25 @@ public partial class HitScanComponent : WeaponComponent
 
 	private bool TraceHitSingle( TraceResult tr )
 	{
-		if ( tr.Hit )
+		if ( !tr.Hit )
+			return false;
+
+		if ( tr.Entity is Grub || tr.Entity is Gadget )
 		{
-			if ( tr.Entity is Grub || tr.Entity is Gadget )
+			if ( Entity.Components.TryGet<TeleportTargetComponent>( out var teleport ) )
 			{
-				if ( !TeleportTarget )
-				{
-					HitEntity( tr.Entity, -tr.Normal );
-				}
-				else
-				{
-					TeleportEntity( tr.Entity );
-				}
-				return false;
-			}
-			else if ( tr.Entity is Sdf2DWorld )
-			{
-				ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionRadius, ExplosionDamage );
+				teleport.Teleport( tr.Entity );
 				return true;
 			}
+
+			HitEntity( tr.Entity, -tr.Normal );
+			return true;
 		}
 
-		return false;
+		if ( tr.Entity is Sdf2DWorld )
+			ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionRadius, ExplosionDamage );
+
+		return true;
 	}
 
 	private void TraceHitMultiple( TraceResult[] results )
@@ -203,18 +197,6 @@ public partial class HitScanComponent : WeaponComponent
 			if ( hitTerrain )
 				return;
 		}
-	}
-
-	private void TeleportEntity( Entity entity )
-	{
-		var teleportPos = GamemodeSystem.Instance.Terrain.FindSpawnLocation( traceDown: true, size: 32f );
-		if ( entity is Gadget )
-		{
-			teleportPos = Grub.EyePosition + Vector3.Up * 10f;
-		}
-		Particles.Create( "particles/teleport/teleport_up.vpcf", entity.Position );
-		entity.Position = teleportPos;
-		Particles.Create( "particles/teleport/teleport_down.vpcf", entity.Position );
 	}
 
 	private void HitEntity( Entity entity, Vector3 direction )
