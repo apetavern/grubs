@@ -102,15 +102,22 @@ public partial class Grub
 
 		await GameTask.Delay( 200 );
 		LifeState = LifeState.Dying;
-		var plunger = new ModelEntity( "models/tools/dynamiteplunger/dynamiteplunger.vmdl" )
-		{
-			Position = Facing == -1 ? Position - new Vector3( 30, 0, 0 ) : Position
-		};
-		await GameTask.Delay( 1025 );
 
-		ExplosionHelper.Explode( Position, this, 50f, 75f );
-		PlayDeathSound( To.Everyone, "explosion_short_tail" );
-		plunger.Delete();
+		// This grub joined in late, don't explode them, just kill them!
+		if ( Components.Get<LateJoinMechanic>() is null )
+		{
+			var plunger = new ModelEntity( "models/tools/dynamiteplunger/dynamiteplunger.vmdl" )
+			{
+				Position = Facing == -1 ? Position - new Vector3( 30, 0, 0 ) : Position
+			};
+
+			await GameTask.Delay( 1025 );
+
+			ExplosionHelper.Explode( Position, this, 50f );
+			PlayDeathSound( To.Everyone, "explosion_short_tail" );
+			plunger.Delete();
+		}
+
 		FinishDie();
 	}
 

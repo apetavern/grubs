@@ -15,6 +15,12 @@ public static class GrubsConfig
 	public static int MinimumPlayers { get; set; } = 2;
 
 	/// <summary>
+	/// If late joiners get a worm spawned in to play with.
+	/// </summary>
+	[ConVar.Replicated( "gr_spawn_late_joiners" )]
+	public static bool SpawnLateJoiners { get; set; } = false;
+
+	/// <summary>
 	/// The amount of <see cref="Grub"/>s that will be spawned per team.
 	/// </summary>
 	[ConVar.Replicated( "grub_count" ), Change( nameof( OnGrubCountChange ) )]

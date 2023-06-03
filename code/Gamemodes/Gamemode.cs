@@ -127,6 +127,9 @@ public partial class Gamemode : Entity
 		{
 			var player = new Player( client );
 			client.Pawn = player;
+
+			if ( CurrentState == State.Playing )
+				OnPlayerJoinedLate( player );
 		}
 	}
 
@@ -147,4 +150,9 @@ public partial class Gamemode : Entity
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
+
+	internal virtual void OnPlayerJoinedLate( Player player )
+	{
+		GrubsGame.Instance.TryAssignUnusedColor( player );
+	}
 }

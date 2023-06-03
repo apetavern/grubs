@@ -37,7 +37,6 @@ public partial class GrubController : EntityComponent<Grub>
 	/// How long a grub can be in the air (with no velocity) before we
 	/// assume they are stuck and need to be force-resolved.
 	/// </summary>
-	/// <value></value>
 	private float MaxAirTime { get; set; } = 4f;
 
 	public static float BodyGirth => 20f;
