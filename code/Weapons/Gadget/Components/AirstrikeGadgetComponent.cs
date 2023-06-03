@@ -54,9 +54,8 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 			if ( !PrefabLibrary.TrySpawn<Gadget>( Projectile.ResourcePath, out var bomb ) )
 				continue;
 
-			bomb.Owner = Gadget.Owner;
+			Gadget.Grub.AssignGadget( bomb );
 			bomb.Position = dropAttachment.HasValue ? Gadget.Position + dropAttachment.Value.Position : Gadget.Position;
-			Player.Gadgets.Add( bomb );
 
 			if ( i == 0 )
 				bomb.ShouldCameraFollow = true;

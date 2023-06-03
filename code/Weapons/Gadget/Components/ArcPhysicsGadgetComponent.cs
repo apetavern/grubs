@@ -28,9 +28,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	{
 		base.OnUse( weapon, charge );
 
-		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
+		Gadget.Position = weapon.GetStartPosition();
 		Segments = CalculateTrajectory( Grub.EyeRotation.Forward.Normal * Grub.Facing, charge );
 		Gadget.Position = Segments[0].StartPos;
+
+		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
 	}
 
 	public override bool IsResolved()
@@ -73,7 +75,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		}
 	}
 
-	protected List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
+	public List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
 	{
 		var force = charge * 0.5f;
 		var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
