@@ -141,15 +141,23 @@ public partial class FreeForAll : Gamemode
 
 	private async Task CheckSuddenDeath()
 	{
-		if ( PlayerTurnQueue.Count == 0 )
-		{
-			RoundsUntilSuddenDeath -= 1;
-			if ( RoundsUntilSuddenDeath <= 0 )
-				SuddenDeath = true;
+		// Must be the end of a full rotation of players.
+		if ( PlayerTurnQueue.Count > 0 ) return;
 
-			if ( SuddenDeath )
-				await Terrain.LowerTerrain( 10f );
+		RoundsUntilSuddenDeath -= 1;
+		if ( RoundsUntilSuddenDeath <= 0 && !SuddenDeath )
+		{
+			SuddenDeath = true;
+
+			if ( GrubsConfig.SuddenDeathOneHealth )
+			{
+				foreach ( var grub in Entity.All.OfType<Grub>() )
+					grub.Health = 1;
+			}
 		}
+
+		if ( SuddenDeath )
+			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
 	}
 
 	/// <summary>
