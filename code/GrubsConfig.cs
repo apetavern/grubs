@@ -39,6 +39,12 @@ public static class GrubsConfig
 	public static int TurnDuration { get; set; } = 45;
 
 	/// <summary>
+	/// The amount of rounds to be played before Sudden Death begins.
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_delay" )]
+	public static int SuddenDeathDelay { get; set; } = 15;
+
+	/// <summary>
 	/// Whether or not wind is enabled.
 	/// </summary>
 	[ConVar.Replicated( "wind_enabled" )]

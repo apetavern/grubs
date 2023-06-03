@@ -26,19 +26,7 @@ public partial class FreeForAll : Gamemode
 	/// How many full rotations of the player list until sudden death is activated?
 	/// </summary>
 	[Net]
-	public int RoundsUntilSuddenDeath { get; set; } = 20;
-
-	/// <summary>
-	/// How many regular turns of players have passed?
-	/// </summary>
-	[Net]
-	public float TurnsPassed { get; set; } = 0;
-
-	/// <summary>
-	/// How many full rotations of the player list have happened?
-	/// </summary>
-	[Net]
-	public int RoundsPassed { get; set; } = 0;
+	public int RoundsUntilSuddenDeath { get; set; }
 
 	/// <summary>
 	/// An async task for switching between player turns.
@@ -62,16 +50,14 @@ public partial class FreeForAll : Gamemode
 
 	internal override void Start()
 	{
-		TurnsPassed = 0f;
-
 		Terrain.ResetTerrainPosition();
-
-		SuddenDeath = false;
 
 		SpawnPlayers();
 
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
+		RoundsUntilSuddenDeath = GrubsConfig.SuddenDeathDelay;
 		CurrentState = State.Playing;
+		SuddenDeath = false;
 		base.Start();
 	}
 
@@ -104,7 +90,7 @@ public partial class FreeForAll : Gamemode
 			MoveToSpawnpoint( client );
 		}
 
-		ActivePlayer = PlayerTurnQueue.Dequeue();
+		RotateActivePlayer();
 	}
 
 	internal override void UseTurn( bool giveMovementGrace = false )
@@ -115,33 +101,11 @@ public partial class FreeForAll : Gamemode
 			UsedTurn = true;
 	}
 
-	private async Task CheckSuddenDeath()
-	{
-		if ( RoundsPassed != (int)MathF.Floor( TurnsPassed / (PlayerTurnQueue.Count + 1) ) )
-		{
-			RoundsPassed = (int)MathF.Floor( TurnsPassed / (PlayerTurnQueue.Count + 1) );
-
-			if ( RoundsPassed > RoundsUntilSuddenDeath )
-			{
-				SuddenDeath = true;
-			}
-
-			if ( SuddenDeath )
-			{
-				await Terrain.LowerTerrain( 10f );
-			}
-		}
-	}
-
 	private async Task NextTurn()
 	{
 		ActivePlayer.EndTurn();
 
 		await Terrain.UntilResolve();
-
-		TurnsPassed += 1;
-
-		await CheckSuddenDeath();
 
 		TurnIsChanging = true;
 
@@ -164,7 +128,7 @@ public partial class FreeForAll : Gamemode
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
 
-
+		await CheckSuddenDeath();
 		RotateActivePlayer();
 
 		UsedTurn = false;
@@ -173,6 +137,19 @@ public partial class FreeForAll : Gamemode
 		NextTurnTask = null;
 
 		await SetupTurn();
+	}
+
+	private async Task CheckSuddenDeath()
+	{
+		if ( PlayerTurnQueue.Count == 0 )
+		{
+			RoundsUntilSuddenDeath -= 1;
+			if ( RoundsUntilSuddenDeath <= 0 )
+				SuddenDeath = true;
+
+			if ( SuddenDeath )
+				await Terrain.LowerTerrain( 10f );
+		}
 	}
 
 	/// <summary>
@@ -364,8 +341,13 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		if ( ActivePlayer.IsAvailableForTurn )
-			PlayerTurnQueue.Enqueue( ActivePlayer );
+		if ( PlayerTurnQueue.Count == 0 )
+		{
+			foreach ( var player in Players )
+			{
+				PlayerTurnQueue.Enqueue( player );
+			}
+		}
 
 		ActivePlayer = PlayerTurnQueue.Dequeue();
 		while ( !ActivePlayer.IsAvailableForTurn )
