@@ -15,21 +15,27 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	[Net]
 	public bool RightToLeft { get; set; }
 
-	public bool HasReachedTarget { get; private set; }
 	public Vector3 TargetPosition { get; set; }
 
-	private float _speed = 20;
+	public bool HasReachedTarget { get; private set; }
+
+	public const float SpawnOffsetX = 3000;
+	public const float SpawnOffsetY = -30;
+	public const float SpawnOffsetZ = 64;
+
+	private const float _dropPayloadDistanceThreshold = 950;
+	private float _planeSpeed = 23;
+	private bool _logged = false;
 
 	public override void Simulate( IClient client )
 	{
-		Gadget.Position += RightToLeft ? Vector3.Backward * _speed : Vector3.Forward * _speed;
-		var currentDistanceFromTarget = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( TargetPosition.WithY( 0 ).WithZ( 0 ) );
+		Gadget.Position += RightToLeft ? Vector3.Backward * _planeSpeed : Vector3.Forward * _planeSpeed;
+		var distanceToTarget = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( TargetPosition.WithY( 0 ).WithZ( 0 ) );
 
-		// Start the animation a bit early to give it enough time.
-		if ( currentDistanceFromTarget <= 300 )
-			Gadget.SetAnimParameter( "open", true );
+		if ( distanceToTarget <= _dropPayloadDistanceThreshold + 300 )
+			Animate();
 
-		if ( currentDistanceFromTarget <= 200 && !HasReachedTarget )
+		if ( distanceToTarget <= _dropPayloadDistanceThreshold && !HasReachedTarget )
 		{
 			HasReachedTarget = true;
 
@@ -47,6 +53,9 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	private async void DropPayload()
 	{
 		var dropAttachment = Gadget.GetAttachment( "droppoint", false );
+		var direction = RightToLeft ? Vector3.Backward : Vector3.Forward;
+		direction *= _planeSpeed;
+
 		for ( int i = 0; i < ProjectileCount; i++ )
 		{
 			await GameTask.DelaySeconds( DropRateSeconds );
@@ -61,7 +70,14 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 				bomb.ShouldCameraFollow = true;
 
 			if ( bomb.Components.TryGet<ArcPhysicsGadgetComponent>( out var arcPhysics ) )
-				arcPhysics.OnUse( null, 0 );
+				arcPhysics.Start( bomb.Position, Vector3.Down + direction, 1 );
 		}
+	}
+
+	private async void Animate()
+	{
+		Gadget.SetAnimParameter( "open", true );
+		await GameTask.DelaySeconds( 1 );
+		Gadget.SetAnimParameter( "open", false );
 	}
 }

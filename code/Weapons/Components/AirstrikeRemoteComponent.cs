@@ -76,15 +76,11 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 	{
 		if ( Game.IsServer && PrefabLibrary.TrySpawn<Gadget>( PlanePrefab.ResourcePath, out var plane ) )
 		{
-			const float zOffset = 64;
-			const float xOffset = 80;
-
-			var rootPosition = GrubsGame.Instance.Terrain.Position.WithZ( GrubsConfig.TerrainHeight + zOffset ).WithY( -64 );
-			var direction = RightToLeft ? Vector3.Forward : Vector3.Backward;
-			var planeSpawnPosition = rootPosition + direction * GrubsConfig.TerrainLength + xOffset;
 
 			plane.Owner = Weapon.Owner;
-			plane.Position = planeSpawnPosition;
+			plane.Position = new Vector3( AirstrikePosition.x + (RightToLeft ? AirstrikeGadgetComponent.SpawnOffsetX : -AirstrikeGadgetComponent.SpawnOffsetX),
+			AirstrikeGadgetComponent.SpawnOffsetY,
+			GrubsConfig.TerrainHeight + AirstrikeGadgetComponent.SpawnOffsetZ );
 			plane.Rotation = RightToLeft ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
 			Grub.Player.Gadgets.Add( plane );
 

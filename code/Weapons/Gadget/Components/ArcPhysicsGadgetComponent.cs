@@ -27,9 +27,13 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	public override void OnUse( Weapon weapon, int charge )
 	{
 		base.OnUse( weapon, charge );
+		Start( weapon.GetStartPosition(), Grub.EyeRotation.Forward.Normal * Grub.Facing, charge );
+	}
 
-		Gadget.Position = weapon.GetStartPosition();
-		Segments = CalculateTrajectory( Grub.EyeRotation.Forward.Normal * Grub.Facing, charge );
+	public void Start( Vector3 position, Vector3 dir, int charge )
+	{
+		Gadget.Position = position;
+		Segments = CalculateTrajectory( dir, charge );
 		Gadget.Position = Segments[0].StartPos;
 
 		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
