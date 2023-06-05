@@ -86,7 +86,7 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 
 			var airstrike = plane.Components.Get<AirstrikeGadgetComponent>();
 			airstrike.TargetPosition = AirstrikePosition;
-			airstrike.RightToLeft = RightToLeft;
+			airstrike.BombingDirection = RightToLeft ? Vector3.Backward : Vector3.Forward;
 		}
 
 		FireFinished();

@@ -12,9 +12,15 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	[Prefab]
 	public int ProjectileCount { get; set; } = 1;
 
+	/// <summary>
+	/// Usually only Vector3.Backward or Vector3.Forward.
+	/// Vector3.Forward for Left -> Right and vice-versa.
+	/// </summary>
 	[Net]
-	public bool RightToLeft { get; set; }
+	public Vector3 BombingDirection { get; set; }
 
+	// Network this so the client can play the bombing animation at the right time.
+	[Net]
 	public Vector3 TargetPosition { get; set; }
 
 	public bool HasReachedTarget { get; private set; }
@@ -24,15 +30,14 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	public const float SpawnOffsetZ = 64;
 
 	private const float _dropPayloadDistanceThreshold = 950;
-	private float _planeSpeed = 23;
-	private bool _logged = false;
+	private float _planeFlySpeed = 23;
 
 	public override void Simulate( IClient client )
 	{
-		Gadget.Position += RightToLeft ? Vector3.Backward * _planeSpeed : Vector3.Forward * _planeSpeed;
+		Gadget.Position += BombingDirection * _planeFlySpeed;
 		var distanceToTarget = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( TargetPosition.WithY( 0 ).WithZ( 0 ) );
 
-		if ( distanceToTarget <= _dropPayloadDistanceThreshold + 300 )
+		if ( distanceToTarget <= _dropPayloadDistanceThreshold + 320 )
 			Animate();
 
 		if ( distanceToTarget <= _dropPayloadDistanceThreshold && !HasReachedTarget )
@@ -53,9 +58,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	private async void DropPayload()
 	{
 		var dropAttachment = Gadget.GetAttachment( "droppoint", false );
-		var direction = RightToLeft ? Vector3.Backward : Vector3.Forward;
-		direction *= _planeSpeed;
-
+		var angularDirection = BombingDirection * _planeFlySpeed;
 		for ( int i = 0; i < ProjectileCount; i++ )
 		{
 			await GameTask.DelaySeconds( DropRateSeconds );
@@ -70,7 +73,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 				bomb.ShouldCameraFollow = true;
 
 			if ( bomb.Components.TryGet<ArcPhysicsGadgetComponent>( out var arcPhysics ) )
-				arcPhysics.Start( bomb.Position, Vector3.Down + direction, 1 );
+				arcPhysics.Start( bomb.Position, Vector3.Down + angularDirection, 1 );
 		}
 	}
 
