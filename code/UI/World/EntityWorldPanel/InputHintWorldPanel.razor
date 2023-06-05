@@ -14,14 +14,21 @@
 </root>
 
 @code {
-    private IList<string> _inputActions;
-    private IList<string> _inputDescriptions;
+    private List<string> _inputActions;
+    private List<string> _inputDescriptions;
 
     public InputHintWorldPanel(Entity entity, InputHintComponent inputHint) : base(entity, Vector3.Down * 7.5f)
     {
-        _inputActions = inputHint.InputActions;
-        _inputDescriptions = inputHint.InputDescriptions;
+        _inputActions = inputHint.InputActions.ToList();
+        _inputDescriptions = inputHint.InputDescriptions.ToList();
     }
+
+	public void UpdateInput( string inputAction, string description )
+	{
+		var actionIndex = _inputActions.IndexOf( inputAction );
+		if ( actionIndex != -1 )
+			_inputDescriptions[actionIndex] = description;
+	}
 
     protected override void OnAfterTreeRender( bool firstTime )
     {
@@ -46,9 +53,6 @@
 
         .background {
             flex-direction: column;
-            background-color: rgba(black, 0.1);
-            border: 2px solid rgba(black, 0.1);
-            border-radius: 4px;
             padding: 10px 10px;
             margin: 2px 0;
         }

@@ -70,6 +70,9 @@ public partial class HitScanComponent : WeaponComponent
 		{
 			Grub.MoveInput = -Grub.Facing * 0.75f;
 
+			if ( Game.IsClient )
+				Weapon.InputHintWorldPanel?.UpdateInput( InputAction.Fire, "Stop" );
+
 			if ( Input.Down( InputAction.Fire ) )
 				FireFinished();
 		}

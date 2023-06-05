@@ -1,6 +1,4 @@
-﻿using Sandbox;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 public partial class TargetPreview : ModelEntity
 {
@@ -34,6 +32,12 @@ public partial class TargetPreview : ModelEntity
 
 		_grub.Player.GrubsCamera.AutomaticRefocus = !_weapon.HasChargesRemaining;
 		UI.Cursor.Enabled( "Weapon", _weapon.FiringType == FiringType.Cursor );
+
+		if ( Game.IsClient )
+		{
+			var fireHint = _weapon.FiringType == FiringType.Charged ? "Fire (Hold)" : "Fire";
+			_weapon.InputHintWorldPanel?.UpdateInput( InputAction.Fire, !IsTargetSet ? "Mark" : fireHint );
+		}
 	}
 
 	public virtual void LockCursor() => IsTargetSet = true;

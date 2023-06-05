@@ -80,7 +80,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 	public bool HasChargesRemaining => CurrentUses < Charges;
 
-	private UI.InputHintWorldPanel _inputHintWorldPanel;
+	public UI.InputHintWorldPanel InputHintWorldPanel { get; set; }
 
 	public Weapon()
 	{
@@ -118,7 +118,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
 
 		if ( Game.IsClient && Components.TryGet<InputHintComponent>( out var inputHint ) )
-			_inputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputHint );
+			InputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputHint );
 	}
 
 	public void Holster( Grub _ )
@@ -141,7 +141,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		UI.Cursor.Enabled( "Weapon", false );
 
 		if ( Game.IsClient )
-			_inputHintWorldPanel?.Delete( true );
+			InputHintWorldPanel?.Delete( true );
 
 		SetParent( null );
 	}

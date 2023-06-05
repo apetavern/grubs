@@ -82,6 +82,24 @@
             "Value": "true"
           }
         }
+      },
+      {
+        "Guid": "c7d8b496-599f-4cdd-9a86-ebeaec170a17",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Dig\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

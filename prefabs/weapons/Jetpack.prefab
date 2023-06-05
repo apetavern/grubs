@@ -42,24 +42,6 @@
             "Value": "15"
           }
         }
-      },
-      {
-        "Guid": "e881b852-9045-4304-bdab-6d06d96d8399",
-        "Class": "InputHintComponent",
-        "Keys": {
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022forward\u0022\r\n]"
-          },
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Ascend\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022Input Hint\u0022"
-          },
-          "_tags": {}
-        }
       }
     ],
     "Keys": {
