@@ -5,8 +5,8 @@ public partial class RemoteDetonateGadgetComponent : GadgetComponent
 {
 	public override void ClientSpawn()
 	{
-		// if ( Gadget.Owner.IsLocalPawn )
-		// 	_ = new UI.InputGlyphWorldPanel( Gadget, InputAction.Fire );
+		if ( Gadget.Owner.IsLocalPawn )
+			_ = new UI.InputHintWorldPanel( Gadget, new List<string>() { InputAction.Fire }, new List<string>() { "Explode" } );
 	}
 
 	public override void Simulate( IClient client )

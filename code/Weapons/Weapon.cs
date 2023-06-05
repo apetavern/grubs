@@ -118,7 +118,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
 
 		if ( Game.IsClient && Components.TryGet<InputHintComponent>( out var inputHint ) )
-			InputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputHint );
+			InputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputHint.InputActions, inputHint.InputDescriptions );
 	}
 
 	public void Holster( Grub _ )

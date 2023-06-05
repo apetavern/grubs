@@ -17,10 +17,10 @@
     private List<string> _inputActions;
     private List<string> _inputDescriptions;
 
-    public InputHintWorldPanel(Entity entity, InputHintComponent inputHint) : base(entity, Vector3.Down * 7.5f)
+    public InputHintWorldPanel(Entity entity, IList<string> inputActions, IList<string> inputDescriptions) : base(entity, Vector3.Down * 7.5f)
     {
-        _inputActions = inputHint.InputActions.ToList();
-        _inputDescriptions = inputHint.InputDescriptions.ToList();
+        _inputActions = inputActions.ToList();
+        _inputDescriptions = inputDescriptions.ToList();
     }
 
 	public void UpdateInput( string inputAction, string description )
