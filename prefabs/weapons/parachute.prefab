@@ -26,6 +26,24 @@
             "Value": "\u0022sounds/weapons/parachute/parachute_deploy.sound\u0022"
           }
         }
+      },
+      {
+        "Guid": "9ec9ba9a-9e0c-4329-99d0-be93d13eedb3",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Deploy\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

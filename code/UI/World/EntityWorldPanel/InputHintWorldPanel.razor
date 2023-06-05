@@ -17,10 +17,19 @@
     private IList<string> _inputActions;
     private IList<string> _inputDescriptions;
 
-    public InputHintWorldPanel(Entity entity, InputHintComponent inputHint) : base(entity, Vector3.Down * 30f)
+    public InputHintWorldPanel(Entity entity, InputHintComponent inputHint) : base(entity, Vector3.Down * 7.5f)
     {
         _inputActions = inputHint.InputActions;
         _inputDescriptions = inputHint.InputDescriptions;
+    }
+
+    protected override void OnAfterTreeRender( bool firstTime )
+    {
+        if (firstTime)
+            return;
+
+        var width = 1500;
+        PanelBounds = new(-width/2, 0, width, 1000);
     }
 
     protected override int BuildHash()
@@ -36,6 +45,7 @@
         padding: 5px;
 
         .background {
+            flex-direction: column;
             background-color: rgba(black, 0.1);
             border: 2px solid rgba(black, 0.1);
             border-radius: 4px;

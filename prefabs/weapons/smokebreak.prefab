@@ -22,6 +22,24 @@
             "Value": "\u0022particles/smoke/smoke.vpcf\u0022"
           }
         }
+      },
+      {
+        "Guid": "48d1b192-92aa-4236-ba87-a7f98384865c",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Smoke\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

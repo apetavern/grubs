@@ -26,6 +26,24 @@
             "Value": "\u0022sounds/weapons/teleporter/teleport_use.sound\u0022"
           }
         }
+      },
+      {
+        "Guid": "56a4b649-ff01-4dcb-be91-4ba21dda3d80",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Teleport\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

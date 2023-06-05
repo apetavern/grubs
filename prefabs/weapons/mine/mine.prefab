@@ -34,6 +34,24 @@
             "Value": "false"
           }
         }
+      },
+      {
+        "Guid": "59194f44-40f8-48e6-87e2-74e680a42eaf",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Drop\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

@@ -86,6 +86,26 @@
           "_name": {
             "Value": "\u0022TeleportTargetComponent\u0022"
           },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "e1f16693-9f74-40ae-bec4-4065037ed088",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Shoot\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
           "_tags": {}
         }
       }

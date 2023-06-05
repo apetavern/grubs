@@ -30,6 +30,26 @@
             "Value": "false"
           }
         }
+      },
+      {
+        "Guid": "c211172b-6463-4928-b9a2-134aa46540bb",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Call Garry\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
       }
     ],
     "Keys": {

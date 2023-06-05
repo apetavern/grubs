@@ -30,6 +30,24 @@
             "Value": "\u0022sounds/weapons/girder/girder_build.sound\u0022"
           }
         }
+      },
+      {
+        "Guid": "6d6968d6-16f1-4633-a79e-a7dea9cb80e6",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022,\r\n  \u0022camera_reset\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Build\u0022,\r\n  \u0022Rotate\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

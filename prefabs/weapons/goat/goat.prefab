@@ -42,6 +42,24 @@
             "Value": "true"
           }
         }
+      },
+      {
+        "Guid": "5547e51a-b28b-490b-9a85-0e0fa5111d04",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Throw\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

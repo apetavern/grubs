@@ -28,6 +28,34 @@
           "UseSound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
+          },
+          "UseTargetPreview": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "LockPreviewBeforeFire": {
+            "Type": "Boolean",
+            "Value": "false"
+          }
+        }
+      },
+      {
+        "Guid": "67647e58-c332-486d-9922-d4bd4679118a",
+        "Class": "InputHintComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Drop\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022Input Hint\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
           }
         }
       }
