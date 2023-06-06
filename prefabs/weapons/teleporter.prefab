@@ -28,8 +28,8 @@
         }
       },
       {
-        "Guid": "56a4b649-ff01-4dcb-be91-4ba21dda3d80",
-        "Class": "InputHintComponent",
+        "Guid": "b65ae70e-a693-450d-82c1-f5c849d33ddd",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
           "InputActions": {
             "Type": "List\u00601",
@@ -40,7 +40,7 @@
             "Value": "[\r\n  \u0022Teleport\u0022\r\n]"
           },
           "_name": {
-            "Value": "\u0022Input Hint\u0022"
+            "Value": "\u0022InputHintOverrideComponent\u0022"
           },
           "_tags": {}
         }

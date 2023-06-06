@@ -70,26 +70,6 @@
             "Value": "30"
           }
         }
-      },
-      {
-        "Guid": "bb593f74-ea9f-4d39-91d3-dcc197d325bf",
-        "Class": "InputHintComponent",
-        "Keys": {
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022fire\u0022\r\n]"
-          },
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Shoot\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022InputHintComponent\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
       }
     ],
     "Keys": {

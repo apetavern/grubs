@@ -30,24 +30,6 @@
             "Value": "\u0022sounds/weapons/generic_throw.sound\u0022"
           }
         }
-      },
-      {
-        "Guid": "d1486cf0-8394-45fe-b189-a7cba118a3fd",
-        "Class": "InputHintComponent",
-        "Keys": {
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Throw (Hold)\u0022\r\n]"
-          },
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Fire\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022Input Hint\u0022"
-          },
-          "_tags": {}
-        }
       }
     ],
     "Keys": {

@@ -32,8 +32,8 @@
         }
       },
       {
-        "Guid": "6d6968d6-16f1-4633-a79e-a7dea9cb80e6",
-        "Class": "InputHintComponent",
+        "Guid": "e86a8414-7936-4861-8ed5-e7cc1145604c",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
           "InputActions": {
             "Type": "List\u00601",
@@ -44,7 +44,7 @@
             "Value": "[\r\n  \u0022Build\u0022,\r\n  \u0022Rotate\u0022\r\n]"
           },
           "_name": {
-            "Value": "\u0022Input Hint\u0022"
+            "Value": "\u0022InputHintOverrideComponent\u0022"
           },
           "_tags": {}
         }

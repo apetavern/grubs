@@ -32,23 +32,21 @@
         }
       },
       {
-        "Guid": "c211172b-6463-4928-b9a2-134aa46540bb",
-        "Class": "InputHintComponent",
+        "Guid": "29d41ec2-65f2-4538-90d4-ed6fcd06ef13",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022fire\u0022\r\n]"
-          },
           "InputDescriptions": {
             "Type": "List\u00601",
             "Value": "[\r\n  \u0022Call Garry\u0022\r\n]"
           },
-          "_name": {
-            "Value": "\u0022Input Hint\u0022"
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
           },
-          "_tags": {
-            "Value": "[]"
-          }
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
         }
       }
     ],

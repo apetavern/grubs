@@ -70,26 +70,6 @@
             "Value": "\u0022sounds/weapons/gibgun/gibgun_shot.sound\u0022"
           }
         }
-      },
-      {
-        "Guid": "f0628c7b-1ec1-4195-bb72-7e06ce832c2a",
-        "Class": "InputHintComponent",
-        "Keys": {
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Shoot\u0022\r\n]"
-          },
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022fire\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022Input Hint\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
       }
     ],
     "Keys": {

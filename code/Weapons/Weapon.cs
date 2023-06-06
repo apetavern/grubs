@@ -81,6 +81,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public bool HasChargesRemaining => CurrentUses < Charges;
 
 	public UI.InputHintWorldPanel InputHintWorldPanel { get; set; }
+	private bool _hasInputOverride;
 
 	public Weapon()
 	{
@@ -99,6 +100,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	{
 		SimulateComponents( client );
 		DetermineWeaponVisibility();
+
+		if ( Game.IsClient && !_hasInputOverride )
+			InputHintWorldPanel.UpdateInput( InputAction.Fire, GetFireInputActionDescription() );
 	}
 
 	[Net]
@@ -115,10 +119,18 @@ public partial class Weapon : AnimatedEntity, IResolvable
 			component.OnDeploy();
 		}
 
+		if ( Game.IsServer )
+			return;
+
 		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
 
-		if ( Game.IsClient && Components.TryGet<InputHintComponent>( out var inputHint ) )
-			InputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputHint.InputActions, inputHint.InputDescriptions );
+		var inputHintOverride = Components.Get<InputHintOverrideComponent>();
+		_hasInputOverride = inputHintOverride is not null;
+
+		var inputActions = _hasInputOverride ? inputHintOverride.InputActions.ToList() : new List<string>() { InputAction.Fire };
+		var inputDescriptions = _hasInputOverride ? inputHintOverride.InputDescriptions.ToList() : new List<string>() { GetFireInputActionDescription() };
+
+		InputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputActions, inputDescriptions );
 	}
 
 	public void Holster( Grub _ )
@@ -141,7 +153,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		UI.Cursor.Enabled( "Weapon", false );
 
 		if ( Game.IsClient )
-			InputHintWorldPanel?.Delete( true );
+			InputHintWorldPanel.Delete( true );
 
 		SetParent( null );
 	}
@@ -244,6 +256,17 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		}
 
 		return false;
+	}
+
+	private string GetFireInputActionDescription()
+	{
+		return FiringType switch
+		{
+			FiringType.Instant => "Fire",
+			FiringType.Charged => "Fire (Hold)",
+			FiringType.Cursor => "Mark Position",
+			_ => string.Empty,
+		};
 	}
 
 	/// <summary>

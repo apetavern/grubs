@@ -38,26 +38,6 @@
             "Value": "true"
           }
         }
-      },
-      {
-        "Guid": "731db843-9f87-45ea-a54c-fa47692d872e",
-        "Class": "InputHintComponent",
-        "Keys": {
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Mark\u0022\r\n]"
-          },
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022fire\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022Input Action\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
       }
     ],
     "Keys": {

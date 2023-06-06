@@ -84,19 +84,19 @@
         }
       },
       {
-        "Guid": "c7d8b496-599f-4cdd-9a86-ebeaec170a17",
-        "Class": "InputHintComponent",
+        "Guid": "06e6ab5f-b640-4e2c-a38c-6e1946b65399",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Dig\u0022\r\n]"
-          },
           "InputActions": {
             "Type": "List\u00601",
             "Value": "[\r\n  \u0022fire\u0022\r\n]"
           },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Start/Stop\u0022\r\n]"
+          },
           "_name": {
-            "Value": "\u0022Input Hint\u0022"
+            "Value": "\u0022InputHintOverrideComponent\u0022"
           },
           "_tags": {}
         }

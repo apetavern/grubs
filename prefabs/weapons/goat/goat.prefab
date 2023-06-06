@@ -44,19 +44,19 @@
         }
       },
       {
-        "Guid": "5547e51a-b28b-490b-9a85-0e0fa5111d04",
-        "Class": "InputHintComponent",
+        "Guid": "76682d7d-0ad4-4a71-b8a1-576a321c8673",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Throw\u0022\r\n]"
-          },
           "InputActions": {
             "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Fire\u0022\r\n]"
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Release\u0022\r\n]"
           },
           "_name": {
-            "Value": "\u0022Input Hint\u0022"
+            "Value": "\u0022InputHintOverrideComponent\u0022"
           },
           "_tags": {}
         }

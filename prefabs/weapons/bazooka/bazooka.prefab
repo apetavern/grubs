@@ -34,30 +34,6 @@
             "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
           }
         }
-      },
-      {
-        "Guid": "75f33826-6b27-47b8-ab7a-0dafe4980da2",
-        "Class": "InputHintComponent",
-        "Keys": {
-          "Actions": {
-            "Type": "List\u00601",
-            "Value": "[]"
-          },
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Fire (Hold)\u0022\r\n]"
-          },
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022fire\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022Input Glyph\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
       }
     ],
     "Keys": {

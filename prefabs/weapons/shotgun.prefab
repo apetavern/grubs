@@ -78,24 +78,6 @@
             "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
           }
         }
-      },
-      {
-        "Guid": "aa06528b-6077-469f-8763-7dd0f8e6192b",
-        "Class": "InputHintComponent",
-        "Keys": {
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022fire\u0022\r\n]"
-          },
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Shoot\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022Input Hint\u0022"
-          },
-          "_tags": {}
-        }
       }
     ],
     "Keys": {

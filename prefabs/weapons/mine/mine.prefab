@@ -36,8 +36,8 @@
         }
       },
       {
-        "Guid": "59194f44-40f8-48e6-87e2-74e680a42eaf",
-        "Class": "InputHintComponent",
+        "Guid": "68f453fb-f237-446c-ae18-718a89337698",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
           "InputDescriptions": {
             "Type": "List\u00601",
@@ -48,7 +48,7 @@
             "Value": "[\r\n  \u0022fire\u0022\r\n]"
           },
           "_name": {
-            "Value": "\u0022Input Hint\u0022"
+            "Value": "\u0022InputHintOverrideComponent\u0022"
           },
           "_tags": {}
         }

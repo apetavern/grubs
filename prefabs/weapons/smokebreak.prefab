@@ -24,8 +24,8 @@
         }
       },
       {
-        "Guid": "48d1b192-92aa-4236-ba87-a7f98384865c",
-        "Class": "InputHintComponent",
+        "Guid": "e3af01dd-d55d-446d-9637-08971d09fda3",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
           "InputActions": {
             "Type": "List\u00601",
@@ -33,10 +33,10 @@
           },
           "InputDescriptions": {
             "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Smoke\u0022\r\n]"
+            "Value": "[\r\n  \u0022Skip Turn\u0022\r\n]"
           },
           "_name": {
-            "Value": "\u0022Input Hint\u0022"
+            "Value": "\u0022InputHintOverrideComponent\u0022"
           },
           "_tags": {}
         }

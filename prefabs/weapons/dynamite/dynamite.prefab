@@ -40,8 +40,8 @@
         }
       },
       {
-        "Guid": "67647e58-c332-486d-9922-d4bd4679118a",
-        "Class": "InputHintComponent",
+        "Guid": "4970d510-4e36-48d8-9519-14ab17423a00",
+        "Class": "InputHintOverrideComponent",
         "Keys": {
           "InputDescriptions": {
             "Type": "List\u00601",
@@ -52,11 +52,9 @@
             "Value": "[\r\n  \u0022fire\u0022\r\n]"
           },
           "_name": {
-            "Value": "\u0022Input Hint\u0022"
+            "Value": "\u0022InputHintOverrideComponent\u0022"
           },
-          "_tags": {
-            "Value": "[]"
-          }
+          "_tags": {}
         }
       }
     ],
