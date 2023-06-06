@@ -56,10 +56,13 @@
 
     private void Update()
     {
+        // TODO: Rever this change, going to make a s&box issue for this.
+        // For some reason keyboard buttons are larger...
+        var isMouseButton = _inputAction == InputAction.Fire || _inputAction == InputAction.CameraPan || _inputAction == InputAction.CameraReset;
         var texture = Input.GetGlyph(_inputAction, _inputGlyphSize, _glyphStyle);
         Style.BackgroundImage = texture;
-        Style.Width = texture.Width;
-        Style.Height = texture.Height;
+        Style.Width = isMouseButton ? texture.Width : texture.Width / 2.6f;
+        Style.Height = isMouseButton ? texture.Height : texture.Height / 2.6f;
     }
 }
 

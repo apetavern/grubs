@@ -264,7 +264,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		{
 			FiringType.Instant => "Fire",
 			FiringType.Charged => "Fire (Hold)",
-			FiringType.Cursor => "Mark Position",
+			FiringType.Cursor => "Set Target",
 			_ => string.Empty,
 		};
 	}
