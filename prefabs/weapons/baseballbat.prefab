@@ -46,6 +46,24 @@
             "Value": "\u0022sounds/weapons/bat/bat_impact.sound\u0022"
           }
         }
+      },
+      {
+        "Guid": "bdb9a8b8-2b61-437f-b851-af6867862666",
+        "Class": "InputHintOverrideComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Swing\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

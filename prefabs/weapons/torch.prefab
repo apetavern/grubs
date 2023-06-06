@@ -82,6 +82,24 @@
             "Value": "true"
           }
         }
+      },
+      {
+        "Guid": "06e6ab5f-b640-4e2c-a38c-6e1946b65399",
+        "Class": "InputHintOverrideComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Start/Stop\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

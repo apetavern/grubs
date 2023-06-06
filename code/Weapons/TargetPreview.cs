@@ -1,6 +1,4 @@
-﻿using Sandbox;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 public partial class TargetPreview : ModelEntity
 {
