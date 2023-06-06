@@ -51,9 +51,17 @@
         padding: 5px;
 
         .background {
+            position: absolute;
             flex-direction: column;
             padding: 10px 10px;
             margin: 2px 0;
+            top: 0px;
+            transition: all 0.2s ease;
+
+            &:intro {
+                opacity: 0;
+                top: -25px;
+            }
         }
 
         InputGlyph {
