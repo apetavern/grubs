@@ -153,7 +153,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		UI.Cursor.Enabled( "Weapon", false );
 
 		if ( Game.IsClient )
-			InputHintWorldPanel.Delete( true );
+			InputHintWorldPanel.Delete();
 
 		SetParent( null );
 	}

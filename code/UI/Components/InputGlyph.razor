@@ -56,8 +56,9 @@
 
     private void Update()
     {
-        // TODO: Rever this change, going to make a s&box issue for this.
+        // TODO: Revert this change, going to make a s&box issue for this.
         // For some reason keyboard buttons are larger...
+        // https://github.com/sboxgame/issues/issues/3397#issuecomment-1579362751
         var isMouseButton = _inputAction == InputAction.Fire || _inputAction == InputAction.CameraPan || _inputAction == InputAction.CameraReset;
         var texture = Input.GetGlyph(_inputAction, _inputGlyphSize, _glyphStyle);
         Style.BackgroundImage = texture;
