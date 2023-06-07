@@ -34,7 +34,7 @@
       },
       "Icon": {
         "Type": "String",
-        "Value": "\u0022models/weapons/airstrikes/radio.vmdl_c.png\u0022"
+        "Value": "\u0022models/weapons/airstrikes/bomb.vmdl.png\u0022"
       },
       "OverrideHat": {
         "Type": "Boolean",
