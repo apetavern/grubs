@@ -592,11 +592,6 @@
           "Name": "voice",
           "KeyboardCode": "v",
           "GroupName": "Other"
-        },
-        {
-          "Name": "change_airstrike_direction",
-          "KeyboardCode": "Z",
-          "GroupName": "Weapon"
         }
       ]
     },
