@@ -15,12 +15,13 @@ public static class SoundExtensions
 		var untilDone = 0f;
 		var currentVolume = startVolume;
 
-		while (untilDone <= fadeTime)
+		while ( untilDone <= fadeTime )
 		{
-			if ( currentVolume <= 0 )
+			currentVolume -= Time.Delta * fadeMultiplier;
+			if ( currentVolume <= 0 || !sound.IsPlaying )
 				break;
 
-			sound.SetVolume( currentVolume -= Time.Delta * fadeMultiplier );
+			sound.SetVolume( currentVolume );
 			await GameTask.DelaySeconds( fadeRate );
 			untilDone += Time.Delta;
 		}

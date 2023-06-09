@@ -1,3 +1,5 @@
+using Grubs.Utils;
+
 namespace Grubs;
 
 [Prefab]
@@ -25,12 +27,20 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 
 	public bool HasReachedTarget { get; private set; }
 
+
 	public const float SpawnOffsetX = 3000;
 	public const float SpawnOffsetY = -30;
 	public const float SpawnOffsetZ = 64;
 
+	private Sound _engineSound;
+	private float _engineSoundFadeVolume = 1.0f;
 	private const float _dropPayloadDistanceThreshold = 950;
 	private float _planeFlySpeed = 23;
+
+	public override void ClientSpawn()
+	{
+		_engineSound = Entity.SoundFromScreen( "sounds/airstrike/plane_engine_loop.sound" );
+	}
 
 	public override void Simulate( IClient client )
 	{
@@ -49,10 +59,22 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 				Gadget.ShouldCameraFollow = false;
 				DropPayload();
 			}
+
+			if ( Game.IsClient )
+			{
+				_engineSound.FadeOut( 0.150f, fadeTime: 1.4f, fadeMultiplier: 2.5f );
+				Entity.SoundFromScreen( "sounds/airstrike/plane_bay_door_open.sound" );
+			}
 		}
 
-		if ( Game.IsServer && (HasReachedTarget && Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3) )
-			Gadget.Delete();
+		if ( (HasReachedTarget && Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3) )
+		{
+			if ( Game.IsClient )
+				_engineSound.Stop();
+
+			if ( Game.IsServer )
+				Gadget.Delete();
+		}
 	}
 
 	private async void DropPayload()
