@@ -27,18 +27,18 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 
 	public bool HasReachedTarget { get; private set; }
 
-
 	public const float SpawnOffsetX = 3000;
 	public const float SpawnOffsetY = -30;
 	public const float SpawnOffsetZ = 64;
 
+	private Particles _trail;
 	private Sound _engineSound;
-	private float _engineSoundFadeVolume = 1.0f;
 	private const float _dropPayloadDistanceThreshold = 950;
-	private float _planeFlySpeed = 23;
+	private const float _planeFlySpeed = 23;
 
 	public override void ClientSpawn()
 	{
+		_trail = Particles.Create( "particles/contrails/contrail_base.vpcf", Gadget, "trail" );
 		_engineSound = Entity.SoundFromScreen( "sounds/airstrike/plane_engine_loop.sound" );
 	}
 
@@ -67,10 +67,13 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 			}
 		}
 
-		if ( (HasReachedTarget && Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3) )
+		if ( HasReachedTarget && Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3 )
 		{
 			if ( Game.IsClient )
+			{
+				_trail.Destroy();
 				_engineSound.Stop();
+			}
 
 			if ( Game.IsServer )
 				Gadget.Delete();
