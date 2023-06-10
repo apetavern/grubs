@@ -586,6 +586,18 @@
         }
       ]
     },
-    "HttpAllowList": null
+    "HttpAllowList": null,
+    "LaunchConfigs": [
+      {
+        "Name": "Grubs Dev",
+        "GameIdent": "apetavern.grubs#local",
+        "MapName": "apetavern.gr_beach",
+        "MaxPlayers": 8,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "",
+        "PostLaunchCommand": ""
+      }
+    ]
   }
 }
