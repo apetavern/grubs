@@ -74,7 +74,7 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 
 			Grub.AssignGadget( plane );
 
-			plane.Position = new Vector3( AirstrikePosition.x + (RightToLeft ? AirstrikeGadgetComponent.SpawnOffsetX : -AirstrikeGadgetComponent.SpawnOffsetX),
+			plane.Position = new Vector3( AirstrikePosition.x + (RightToLeft ? GrubsConfig.TerrainLength * 1.5f : -GrubsConfig.TerrainLength * 1.5f),
 			AirstrikeGadgetComponent.SpawnOffsetY,
 			GrubsConfig.TerrainHeight + AirstrikeGadgetComponent.SpawnOffsetZ );
 			plane.Rotation = RightToLeft ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
