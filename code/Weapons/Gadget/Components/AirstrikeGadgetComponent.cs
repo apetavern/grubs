@@ -38,7 +38,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 
 	public override void ClientSpawn()
 	{
-		_trail = Particles.Create( "particles/contrails/contrail_base.vpcf", Gadget, "trail" );
+		_trail = Particles.Create( "particles/smoke/contrail_base.vpcf", Gadget, "trail" );
 		_engineSound = Entity.SoundFromScreen( "sounds/airstrike/plane_engine_loop.sound" );
 	}
 
