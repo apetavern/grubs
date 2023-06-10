@@ -18,8 +18,8 @@ public partial class Terrain
 		WorldTextureHeight = mapSdfTexture.Height * 2;
 		WorldTextureLength = mapSdfTexture.Width * 2;
 
-		GrubsConfig.TerrainLength = mapSdfTexture.Width;
-		GrubsConfig.TerrainHeight = mapSdfTexture.Height;
+		GrubsConfig.TerrainLength = mapSdfTexture.Width * 2;
+		GrubsConfig.TerrainHeight = mapSdfTexture.Height * 2;
 
 		var mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f, pivot: 0f );
 		var transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength, 0 ) );
