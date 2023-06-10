@@ -47,21 +47,15 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 		AirstrikeCursor.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
 		// Change the direction of the airstrike based on which way our Grub is facing.
-		RightToLeft = Grub.Facing < 0 ? true : false;
+		RightToLeft = Grub.Facing < 0;
 
-		Grub.Player.GrubsCamera.CanScroll = !Weapon.HasChargesRemaining;
 		Grub.Player.GrubsCamera.AutomaticRefocus = !Weapon.HasChargesRemaining;
-
-		if ( Weapon.HasChargesRemaining )
-			Grub.Player.GrubsCamera.Distance = 1024f;
 
 		AirstrikeCursor.Position = Grub.Player.MousePosition;
 		AirstrikeCursor.Rotation = RightToLeft ? Rotation.Identity : Rotation.Identity * new Angles( -90, 0, 0 ).ToRotation();
 
 		if ( IsFiring && AirstrikeCursor.EnableDrawing )
-		{
 			Fire();
-		}
 		else
 			IsFiring = false;
 	}
