@@ -35,11 +35,6 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 			if ( AirstrikeCursor.IsValid() )
 				AirstrikeCursor.Delete();
 		}
-		else
-		{
-			Grub.Player.GrubsCamera.CanScroll = true;
-			Grub.Player.GrubsCamera.AutomaticRefocus = true;
-		}
 	}
 
 	public override void Simulate( IClient client )
@@ -65,7 +60,6 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 
 		if ( IsFiring && AirstrikeCursor.EnableDrawing )
 		{
-			AirstrikePosition = Grub.Player.MousePosition;
 			Fire();
 		}
 		else
@@ -76,17 +70,18 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 	{
 		if ( Game.IsServer && PrefabLibrary.TrySpawn<Gadget>( PlanePrefab.ResourcePath, out var plane ) )
 		{
+			AirstrikePosition = Grub.Player.MousePosition;
 
-			plane.Owner = Weapon.Owner;
+			Grub.AssignGadget( plane );
+
 			plane.Position = new Vector3( AirstrikePosition.x + (RightToLeft ? AirstrikeGadgetComponent.SpawnOffsetX : -AirstrikeGadgetComponent.SpawnOffsetX),
 			AirstrikeGadgetComponent.SpawnOffsetY,
 			GrubsConfig.TerrainHeight + AirstrikeGadgetComponent.SpawnOffsetZ );
 			plane.Rotation = RightToLeft ? Rotation.Identity * new Angles( 180, 0, 180 ).ToRotation() : Rotation.Identity;
-			Grub.Player.Gadgets.Add( plane );
 
-			var airstrike = plane.Components.Get<AirstrikeGadgetComponent>();
-			airstrike.TargetPosition = AirstrikePosition;
-			airstrike.BombingDirection = RightToLeft ? Vector3.Backward : Vector3.Forward;
+			var airstrikeInfo = plane.Components.Get<AirstrikeGadgetComponent>();
+			airstrikeInfo.TargetPosition = AirstrikePosition;
+			airstrikeInfo.BombingDirection = RightToLeft ? Vector3.Backward : Vector3.Forward;
 		}
 
 		FireFinished();

@@ -46,6 +46,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	{
 		Gadget.Position += BombingDirection * _planeFlySpeed;
 		var distanceToTarget = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( TargetPosition.WithY( 0 ).WithZ( 0 ) );
+		var planeIsOutOfBounds = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3;
 
 		if ( distanceToTarget <= _dropPayloadDistanceThreshold + 320 )
 			Animate();
@@ -67,7 +68,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 			}
 		}
 
-		if ( HasReachedTarget && Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3 )
+		if ( HasReachedTarget && planeIsOutOfBounds )
 		{
 			if ( Game.IsClient )
 			{
