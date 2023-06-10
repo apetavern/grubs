@@ -12,10 +12,10 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public const int MaxCharge = 100;
 
 	[Net, Predicted]
-	public bool IsFiring { get; set; } = false;
+	public bool IsFiring { get; set; }
 
 	[Net, Predicted]
-	public bool IsCharging { get; set; } = false;
+	public bool IsCharging { get; set; }
 
 	[Net, Predicted]
 	public TimeSince TimeSinceFired { get; set; }
