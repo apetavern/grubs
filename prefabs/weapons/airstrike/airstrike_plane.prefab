@@ -87,6 +87,10 @@
       "CollisionRadius": {
         "Type": "Single",
         "Value": "0"
+      },
+      "TrailParticle": {
+        "Type": "String",
+        "Value": "\u0022particles/contrails/contrail_base.vpcf\u0022"
       }
     }
   }

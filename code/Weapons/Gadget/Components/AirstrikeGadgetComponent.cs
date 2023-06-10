@@ -14,6 +14,10 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	[Prefab]
 	public int ProjectileCount { get; set; } = 1;
 
+	[Prefab]
+	[ResourceType( ".vpcf" )]
+	public string Trail { get; set; }
+
 	/// <summary>
 	/// Usually only Vector3.Backward or Vector3.Forward.
 	/// Vector3.Forward for Left -> Right and vice-versa.
@@ -31,21 +35,25 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	public const float SpawnOffsetY = -30;
 	public const float SpawnOffsetZ = 64;
 
-	private Particles _trail;
+	private Particles _trail0;
+	private Particles _trail1;
 	private Sound _engineSound;
 	private const float _dropPayloadDistanceThreshold = 950;
 	private const float _planeFlySpeed = 23;
 
 	public override void ClientSpawn()
 	{
-		_trail = Particles.Create( "particles/smoke/contrail_base.vpcf", Gadget, "trail" );
 		_engineSound = Entity.SoundFromScreen( "sounds/airstrike/plane_engine_loop.sound" );
+		_trail0 = Particles.Create( Trail, Gadget, "trailA" );
+		_trail1 = Particles.Create( Trail, Gadget, "trailB" );
 	}
 
 	public override void Simulate( IClient client )
 	{
 		Gadget.Position += BombingDirection * _planeFlySpeed;
 		Gadget.Position += new Vector3( 0, 0, MathF.Sin( Time.Tick / 10f ) * 2.5f );
+		Gadget.Rotation *= Rotation.Identity * new Angles( 0, 0, MathF.Sin( Time.Tick / 10f ) * 0.5f ).ToRotation();
+
 		var distanceToTarget = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( TargetPosition.WithY( 0 ).WithZ( 0 ) );
 		var planeIsOutOfBounds = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3;
 
@@ -73,7 +81,8 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 		{
 			if ( Game.IsClient )
 			{
-				_trail.Destroy();
+				_trail0.Destroy();
+				_trail1.Destroy();
 				_engineSound.Stop();
 			}
 
