@@ -45,6 +45,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	public override void Simulate( IClient client )
 	{
 		Gadget.Position += BombingDirection * _planeFlySpeed;
+		Gadget.Position += new Vector3( 0, 0, MathF.Sin( Time.Tick / 10f ) * 2.5f );
 		var distanceToTarget = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( TargetPosition.WithY( 0 ).WithZ( 0 ) );
 		var planeIsOutOfBounds = Gadget.Position.WithY( 0 ).WithZ( 0 ).Distance( GrubsGame.Instance.Terrain.Position.WithY( 0 ).WithZ( 0 ) ) >= GrubsConfig.TerrainLength * 3;
 
