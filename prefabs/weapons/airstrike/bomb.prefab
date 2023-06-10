@@ -63,7 +63,7 @@
         "Value": "\u00220,0,0\u0022"
       },
       "_scale": {
-        "Value": "1"
+        "Value": "0.8"
       },
       "_tags": {
         "Value": "\u0022\u0022"
@@ -75,6 +75,10 @@
       "UseModelCollision": {
         "Type": "Boolean",
         "Value": "false"
+      },
+      "TrailParticle": {
+        "Type": "String",
+        "Value": "\u0022particles/contrails/trail_bomb.vpcf\u0022"
       }
     }
   }
