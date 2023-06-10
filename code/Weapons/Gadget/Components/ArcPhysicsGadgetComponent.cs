@@ -79,7 +79,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		}
 	}
 
-	public List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
+	protected List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
 	{
 		var force = charge * 0.5f;
 		var arcTrace = new ArcTrace( Grub, Gadget, Gadget.Position );
