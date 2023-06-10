@@ -1,5 +1,6 @@
 ﻿# Sandbox
 code/accesslist.txt
+code/code.sln
 Properties
 .intermediate
 *.csproj
@@ -15,6 +16,7 @@ Properties
 # Build results
 [Oo]bj/
 .vs/
+.vscode/
 
 # VRAD artifacts
 _bakeresourcecache/
