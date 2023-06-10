@@ -14,9 +14,8 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	[Prefab]
 	public int ProjectileCount { get; set; } = 1;
 
-	[Prefab]
-	[ResourceType( ".vpcf" )]
-	public string Trail { get; set; }
+	[Prefab, Net, ResourceType( "vpcf" )]
+	public string ConTrail { get; set; }
 
 	/// <summary>
 	/// Usually only Vector3.Backward or Vector3.Forward.
@@ -35,8 +34,8 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	public const float SpawnOffsetY = -30;
 	public const float SpawnOffsetZ = 64;
 
-	private Particles _trail0;
-	private Particles _trail1;
+	private Particles _trailLeft;
+	private Particles _trailRight;
 	private Sound _engineSound;
 	private const float _dropPayloadDistanceThreshold = 950;
 	private const float _planeFlySpeed = 23;
@@ -44,8 +43,8 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 	public override void ClientSpawn()
 	{
 		_engineSound = Entity.SoundFromScreen( "sounds/airstrike/plane_engine_loop.sound" );
-		_trail0 = Particles.Create( Trail, Gadget, "trailA" );
-		_trail1 = Particles.Create( Trail, Gadget, "trailB" );
+		_trailLeft = Particles.Create( ConTrail, Gadget, "trailLeft" );
+		_trailRight = Particles.Create( ConTrail, Gadget, "trailRight" );
 	}
 
 	public override void Simulate( IClient client )
@@ -81,8 +80,8 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 		{
 			if ( Game.IsClient )
 			{
-				_trail0.Destroy();
-				_trail1.Destroy();
+				_trailLeft.Destroy();
+				_trailRight.Destroy();
 				_engineSound.Stop();
 			}
 

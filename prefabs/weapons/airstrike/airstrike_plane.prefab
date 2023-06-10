@@ -32,6 +32,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "ConTrail": {
+            "Type": "String",
+            "Value": "\u0022particles/smoke/contrail_base.vpcf\u0022"
           }
         }
       }
@@ -89,8 +93,7 @@
         "Value": "0"
       },
       "TrailParticle": {
-        "Type": "String",
-        "Value": "\u0022particles/contrails/contrail_base.vpcf\u0022"
+        "Type": "null"
       }
     }
   }

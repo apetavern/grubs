@@ -67,7 +67,7 @@
 					},
 					{
 						_class = "Attachment"
-						name = "trailA"
+						name = "trailRight"
 						parent_bone = "root"
 						relative_origin = [ -90.006523, -71.247238, -53.517548 ]
 						relative_angles = [ -0.0, 0.0, 0.0 ]
@@ -76,7 +76,7 @@
 					},
 					{
 						_class = "Attachment"
-						name = "trailB"
+						name = "trailLeft"
 						parent_bone = "root"
 						relative_origin = [ 90.209175, 63.35273, -53.512592 ]
 						relative_angles = [ -0.0, 0.0, 0.0 ]
