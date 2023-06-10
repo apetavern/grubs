@@ -86,10 +86,4 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 
 		FireFinished();
 	}
-
-	public override void FireFinished()
-	{
-		base.FireFinished();
-		Weapon.Holster( Grub );
-	}
 }
