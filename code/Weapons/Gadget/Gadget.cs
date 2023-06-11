@@ -110,12 +110,6 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	protected override void OnDestroy()
 	{
-		OnClientDestroy();
-	}
-
-	[ClientRpc]
-	private void OnClientDestroy()
-	{
 		_startSound.Stop();
 	}
 
