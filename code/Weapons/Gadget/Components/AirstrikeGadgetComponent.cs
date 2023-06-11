@@ -1,5 +1,3 @@
-using Grubs.Utils;
-
 namespace Grubs;
 
 [Prefab]
