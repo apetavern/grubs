@@ -60,7 +60,7 @@ public partial class AirstrikeRemoteComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-		if ( Game.IsServer )
+		if ( Game.IsClient )
 			return;
 
 		PrefabLibrary.TrySpawn<Gadget>( PlanePrefab.ResourcePath, out var plane );
