@@ -1,12 +1,12 @@
 {
-  "UI": true,
+  "UI": false,
   "Volume": "0.50,0.50,0",
   "Pitch": "1.00,1.00,0",
-  "Decibels": 70,
+  "Decibels": 100,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/charge.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 2301.2522,
+  "MinimumDistance": 115.062614
 }

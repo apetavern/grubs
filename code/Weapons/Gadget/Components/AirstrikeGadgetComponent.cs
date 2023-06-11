@@ -42,7 +42,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 
 	public override void ClientSpawn()
 	{
-		_engineSound = Entity.SoundFromScreen( "sounds/airstrike/plane_engine_loop.sound" );
+		_engineSound = Gadget.PlaySound( "sounds/airstrike/plane_engine_loop.sound" );
 		_trailLeft = Particles.Create( ConTrail, Gadget, "trailLeft" );
 		_trailRight = Particles.Create( ConTrail, Gadget, "trailRight" );
 	}
@@ -69,11 +69,7 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 				DropPayload();
 			}
 
-			if ( Game.IsClient )
-			{
-				_engineSound.FadeOut( 0.150f, fadeTime: 1.4f, fadeMultiplier: 2.5f );
-				Entity.SoundFromScreen( "sounds/airstrike/plane_bay_door_open.sound" );
-			}
+			Gadget.PlaySound( "sounds/airstrike/plane_bay_door_open.sound" );
 		}
 
 		if ( HasReachedTarget && planeIsOutOfBounds )

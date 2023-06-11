@@ -40,6 +40,10 @@
           "MaxFuel": {
             "Type": "Single",
             "Value": "15"
+          },
+          "ThrustSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
           }
         }
       },

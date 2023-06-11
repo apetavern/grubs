@@ -55,7 +55,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			ChargeParticles?.Set( "Speed", 40f );
 
 			if ( Game.IsClient && !_chargeSound.IsPlaying )
-				_chargeSound = Weapon.SoundFromScreen( "charge" );
+				_chargeSound = Weapon.PlaySound( "charge" );
 
 			IsCharging = true;
 			IncreaseCharge();

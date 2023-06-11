@@ -83,7 +83,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-		Weapon.PlayScreenSound( "ui_button_click" );
+		Weapon.PlaySound( "ui_button_click" );
 
 		if ( UseTargetPreview && TargetPreview.IsValid() && !TargetPreview.IsTargetSet )
 		{
@@ -122,7 +122,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 		if ( !Game.IsServer )
 			return;
 
-		Weapon.PlayScreenSound( UseSound );
+		Weapon.PlaySound( UseSound );
 
 		for ( int i = 0; i < GadgetsPerUse; i++ )
 		{

@@ -1,12 +1,12 @@
 {
-  "UI": true,
-  "Volume": "0.50,0.50,0",
+  "UI": false,
+  "Volume": "0.80,0.80,0",
   "Pitch": "0.95,1.05,1",
-  "Decibels": 70,
+  "Decibels": 105,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/bitchslap/slap.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 2533.85,
+  "MinimumDistance": 126.692505
 }

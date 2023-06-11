@@ -78,15 +78,11 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 				break;
 		}
 
-		ExplodeSoundClient( To.Everyone, ExplosionSound );
+		// Play it from world since the gadget deletes and the sound will move to (0, 0, 0).
+		Sound.FromWorld( To.Everyone, ExplosionSound, Gadget.Position );
+
 		if ( DeleteOnExplode )
 			Gadget.Delete();
-	}
-
-	[ClientRpc]
-	public void ExplodeSoundClient( string explosionSound )
-	{
-		Gadget.SoundFromScreen( explosionSound );
 	}
 }
 

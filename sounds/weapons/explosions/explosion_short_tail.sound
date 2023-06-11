@@ -1,14 +1,14 @@
 {
-  "UI": true,
+  "UI": false,
   "Volume": "0.60,0.60,0",
   "Pitch": "0.96,1.04,1",
-  "Decibels": 70,
+  "Decibels": 100,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/explosions/explosion_short_tail_1.vsnd",
     "sounds/weapons/explosions/explosion_short_tail_2.vsnd",
     "sounds/weapons/explosions/explosion_short_tail_3.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 2301.2522,
+  "MinimumDistance": 115.062614
 }

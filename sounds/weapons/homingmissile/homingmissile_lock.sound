@@ -1,12 +1,12 @@
 {
-  "UI": true,
+  "UI": false,
   "Volume": "0.50,0.50,0",
   "Pitch": "1.00,1.00,0",
-  "Decibels": 70,
+  "Decibels": 90,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/homingmissile/homingmissile_lock.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 1870.0942,
+  "MinimumDistance": 93.504715
 }

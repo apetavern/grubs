@@ -299,12 +299,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 			}
 		}
 	}
-
-	[ClientRpc]
-	public void PlayScreenSound( string sound )
-	{
-		this.SoundFromScreen( sound );
-	}
 }
 
 public enum WeaponType

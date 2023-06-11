@@ -56,7 +56,7 @@ public partial class ParachuteComponent : WeaponComponent
 	private void Deploy()
 	{
 		if ( !Deployed )
-			Weapon.PlayScreenSound( DeploySound );
+			Weapon.PlaySound( DeploySound );
 
 		Deployed = true;
 		Weapon.SetAnimParameter( "landed", false );
@@ -66,7 +66,7 @@ public partial class ParachuteComponent : WeaponComponent
 	private void Disengage()
 	{
 		if ( Deployed )
-			Weapon.PlayScreenSound( DisengageSound );
+			Weapon.PlaySound( DisengageSound );
 
 		Deployed = false;
 		Weapon.SetAnimParameter( "deploy", false );

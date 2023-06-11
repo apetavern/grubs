@@ -96,10 +96,4 @@ public partial class ControllerMechanic : EntityComponent<Grub>
 	protected virtual void Simulate() { }
 
 	protected virtual void Tick() { }
-
-	[ClientRpc]
-	protected void PlayScreenSound( string sound )
-	{
-		Grub.SoundFromScreen( sound );
-	}
 }
