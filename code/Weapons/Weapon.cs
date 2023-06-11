@@ -43,6 +43,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public bool AllowMovement { get; set; } = false;
 
+	[Prefab, Net]
+	public bool ShowInputHints { get; set; } = true;
+
 	/// <summary>
 	/// The chance of receiving this weapon in a crate.
 	/// A chance of zero means it will not spawn from a crate.
@@ -80,7 +83,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 	public bool HasChargesRemaining => CurrentUses < Charges;
 
-	public UI.InputHintWorldPanel InputHintWorldPanel { get; set; }
+	private UI.InputHintWorldPanel InputHintWorldPanel { get; set; }
 	private bool _hasInputOverride;
 
 	public Weapon()
@@ -102,7 +105,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		DetermineWeaponVisibility();
 
 		if ( Game.IsClient && !_hasInputOverride )
-			InputHintWorldPanel.UpdateInput( InputAction.Fire, GetFireInputActionDescription() );
+			InputHintWorldPanel?.UpdateInput( InputAction.Fire, GetFireInputActionDescription() );
 	}
 
 	[Net]
@@ -123,6 +126,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 			return;
 
 		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
+
+		if ( !ShowInputHints )
+			return;
 
 		var inputHintOverride = Components.Get<InputHintOverrideComponent>();
 		_hasInputOverride = inputHintOverride is not null;
@@ -153,7 +159,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		UI.Cursor.Enabled( "Weapon", false );
 
 		if ( Game.IsClient )
-			InputHintWorldPanel.Delete();
+			InputHintWorldPanel?.Delete();
 
 		SetParent( null );
 	}

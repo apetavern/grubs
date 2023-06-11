@@ -46,26 +46,6 @@
             "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
           }
         }
-      },
-      {
-        "Guid": "c12dba2a-7654-4dc6-ae12-d2721611e0ee",
-        "Class": "InputHintOverrideComponent",
-        "Keys": {
-          "InputActions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022forward\u0022\r\n]"
-          },
-          "InputDescriptions": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Ascend\u0022\r\n]"
-          },
-          "_name": {
-            "Value": "\u0022InputHintOverrideComponent\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          }
-        }
       }
     ],
     "Keys": {
@@ -131,6 +111,10 @@
       "FireSound": {
         "Type": "String",
         "Value": "\u0022sounds/weapons/girder/gurder_build.sound\u0022"
+      },
+      "ShowInputHints": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }
