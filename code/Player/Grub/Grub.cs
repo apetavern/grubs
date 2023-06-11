@@ -70,6 +70,20 @@ public partial class Grub : AnimatedEntity, IResolvable
 		_ = new UI.TurnBobber( this );
 	}
 
+	public void AssignGadget( Gadget gadget )
+	{
+		gadget.Owner = this;
+		Player.Gadgets.Add( gadget );
+	}
+
+	public void SetHatVisible( bool visible )
+	{
+		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( Tag.Head ) );
+
+		foreach ( var hat in hats )
+			hat.EnableDrawing = visible;
+	}
+
 	/// <summary>
 	/// PostSpawnSetup is used to handle things we want to handle in Spawn, but 
 	/// cannot because the Player hasn't been transmitted to the Grub yet.
@@ -158,13 +172,5 @@ public partial class Grub : AnimatedEntity, IResolvable
 				SetMaterialOverride( skinMaterial, "skin" );
 			}
 		}
-	}
-
-	public void SetHatVisible( bool visible )
-	{
-		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( Tag.Head ) );
-
-		foreach ( var hat in hats )
-			hat.EnableDrawing = visible;
 	}
 }

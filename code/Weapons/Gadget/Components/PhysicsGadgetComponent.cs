@@ -4,6 +4,9 @@ namespace Grubs;
 public partial class PhysicsGadgetComponent : GadgetComponent
 {
 	[Prefab, Net]
+	public bool IsDroppable { get; set; } = false;
+
+	[Prefab, Net]
 	public bool ShouldRotate { get; set; } = true;
 
 	[Prefab, Net]
@@ -43,11 +46,10 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 
 	public override void OnUse( Weapon weapon, int charge )
 	{
+		Gadget.Position = weapon.GetStartPosition( IsDroppable );
+
 		if ( ShouldThrow )
-		{
-			Gadget.Position = weapon.GetStartPosition();
 			Gadget.Velocity = Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ThrowSpeed;
-		}
 
 		if ( AutoMove )
 			_moveDirection = Grub.Facing;

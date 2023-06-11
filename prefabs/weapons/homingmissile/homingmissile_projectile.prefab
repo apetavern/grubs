@@ -95,6 +95,10 @@
       },
       "_tags": {
         "Value": "\u0022gadget\u0022"
+      },
+      "TrailParticle": {
+        "Type": "String",
+        "Value": "\u0022particles/smoke/projectile_trail_base.vpcf\u0022"
       }
     }
   }

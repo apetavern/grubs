@@ -28,6 +28,10 @@
           "Friction": {
             "Type": "Single",
             "Value": "4"
+          },
+          "IsDroppable": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },

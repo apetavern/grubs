@@ -1,7 +1,7 @@
 namespace Grubs;
 
 [Prefab]
-public partial class TeleportTargetComponent : WeaponComponent
+public partial class TeleportTargetComponent : EntityComponent<Weapon>
 {
 	/// <summary>
 	/// Teleport a target.
@@ -12,7 +12,7 @@ public partial class TeleportTargetComponent : WeaponComponent
 	{
 		var teleportPos = position is null ? GamemodeSystem.Instance.Terrain.FindSpawnLocation( traceDown: true, size: 32f ) : position.Value;
 		if ( entity is Gadget )
-			teleportPos = Grub.EyePosition + Vector3.Up * 10f;
+			teleportPos = Entity.Grub.EyePosition + Vector3.Up * 10f;
 
 		Particles.Create( "particles/teleport/teleport_up.vpcf", entity.Position );
 		entity.Position = teleportPos;

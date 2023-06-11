@@ -67,10 +67,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public void OnUse( Grub grub, Weapon weapon, int charge )
 	{
-		Owner = grub;
-		grub.Player.Gadgets.Add( this );
-
-		Position = weapon.GetStartPosition( true );
+		grub.AssignGadget( this );
 
 		foreach ( var component in GetSortedComponents() )
 		{

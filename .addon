@@ -7,7 +7,7 @@
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "Resources": "/data/*\n/fonts/*\n*.csgmat\n*.vmat\n*.vtex\n*.png\n*.sdflayer\n*.vmdl\n*.fbx\n*.vanmgrph\n*.dmx\n*.txt\n*.vmap\n*.vpcf\n*.tlvl\n*.tsta\n*.scss\n*.png.meta\n*.prefab\n*.shader\n*.vpost\n*.mp3\n*.sound\n*.wav",
+  "Resources": "/data/*\n/fonts/*\n/textures/ui/*.png\n*.csgmat\n*.vmat\n*.vtex\n*.sdflayer\n*.vmdl\n*.vanmgrph\n*.dmx\n*.txt\n*.vpcf\n*.tlvl\n*.tsta\n*.scss\n*.png.meta\n*.prefab\n*.shader\n*.vpost\n*.mp3\n*.sound\n*.wav",
   "MenuResources": null,
   "HasCode": true,
   "CodePath": "code",
