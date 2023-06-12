@@ -162,10 +162,10 @@ public partial class Terrain : Entity
 	public async Task LowerTerrain( float amount )
 	{
 		Vector3 targetPosition = SdfWorld.Position - Vector3.Up * amount;
-		while ( Vector3.DistanceBetween( SdfWorld.Position, targetPosition ) > Time.Delta * 2f )
+		while ( Vector3.DistanceBetween( SdfWorld.Position, targetPosition ) > Time.Delta * 10f )
 		{
 			Camera.Main.Position += Vector3.Random * 10f;
-			SdfWorld.Position = Vector3.Lerp( SdfWorld.Position, targetPosition, Time.Delta * 10f );
+			SdfWorld.Position = Vector3.Lerp( SdfWorld.Position, targetPosition, Time.Delta * 2f );
 			await GameTask.DelaySeconds( Time.Delta );
 		}
 	}
