@@ -1,12 +1,12 @@
 {
-  "UI": true,
-  "Volume": "1.00,1.00,0",
+  "UI": false,
+  "Volume": "0.30,0.30,0",
   "Pitch": "1.00,1.00,0",
-  "Decibels": 70,
+  "Decibels": 110,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/minigun/minigun_shot.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 2777.795,
+  "MinimumDistance": 138.88976
 }

@@ -23,6 +23,8 @@ public class GrubsCamera
 
 	public void FrameSimulate( IClient _ )
 	{
+		Sound.Listener = new Transform( Camera.Position, Camera.Rotation );
+
 		if ( CanScroll )
 		{
 			Distance -= Input.MouseWheel * _scrollRate;

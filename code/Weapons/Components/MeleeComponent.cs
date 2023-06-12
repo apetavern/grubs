@@ -47,12 +47,10 @@ public partial class MeleeComponent : WeaponComponent
 		}
 
 		if ( grubsHit is not null && grubsHit.Count > 0 )
-		{
-			Weapon.PlayScreenSound( To.Everyone, ImpactSound );
-		}
+			Weapon.PlaySound( ImpactSound );
 
 		Grub.SetAnimParameter( "fire", true );
-		Weapon.PlayScreenSound( To.Everyone, HitSound );
+		Weapon.PlaySound( HitSound );
 
 		FireFinished();
 	}

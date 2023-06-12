@@ -157,13 +157,13 @@ public partial class HitScanComponent : WeaponComponent
 	{
 		base.FireFinished();
 
-		Weapon.PlayScreenSound( To.Everyone, FinishSound );
+		Weapon.PlaySound( FinishSound );
 	}
 
 	private void FireEffects()
 	{
 		Grub.SetAnimParameter( "fire", true );
-		Weapon.PlayScreenSound( To.Everyone, TraceSound );
+		Weapon.PlaySound( TraceSound );
 	}
 
 	private bool TraceHitSingle( TraceResult tr )

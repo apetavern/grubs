@@ -1,12 +1,12 @@
 {
-  "UI": true,
-  "Volume": "0.10,0.10,0",
+  "UI": false,
+  "Volume": "0.25,0.25,0",
   "Pitch": "0.98,1.02,1",
-  "Decibels": 70,
+  "Decibels": 110,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/world/crate_spawn.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 2777.795,
+  "MinimumDistance": 138.88976
 }

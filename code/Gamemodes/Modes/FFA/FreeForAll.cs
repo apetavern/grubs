@@ -103,11 +103,11 @@ public partial class FreeForAll : Gamemode
 
 	private async Task NextTurn()
 	{
+		TurnIsChanging = true;
+
 		ActivePlayer.EndTurn();
 
 		await Terrain.UntilResolve();
-
-		TurnIsChanging = true;
 
 		if ( await HasGameWinner() )
 		{

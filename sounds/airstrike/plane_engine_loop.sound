@@ -1,0 +1,12 @@
+{
+  "UI": false,
+  "Volume": "0.60,0.60,0",
+  "Pitch": "1.00,1.00,0",
+  "Decibels": 120,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/airstrike/plane_engine_loop.vsnd"
+  ],
+  "MaximumDistance": 3299.7227,
+  "MinimumDistance": 164.98613
+}

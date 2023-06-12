@@ -1,0 +1,84 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "6b4951b6-a7fb-4e75-9411-23c8405317fe",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "c436cb6c-dad1-461c-b6e7-e3af69b80a1b",
+        "Class": "AirstrikeRemoteComponent",
+        "Keys": {
+          "PlanePrefab": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/airstrike/airstrike_plane.prefab\u0022"
+          },
+          "_name": {
+            "Value": "\u0022AirstrikeRemoteComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/airstrikes/radio.vmdl\u0022"
+      },
+      "StartSound": {
+        "Type": "null"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/airstrikes/airstrike_icon.png\u0022"
+      },
+      "OverrideHat": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "WeaponType": {
+        "Type": "WeaponType",
+        "Value": "\u0022Tool\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Cursor\u0022"
+      },
+      "RenderColor": {
+        "Type": "Color",
+        "Value": "\u00221,0,0,1\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Airstrike Remote\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Holdable\u0022"
+      }
+    }
+  }
+}

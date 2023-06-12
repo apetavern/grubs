@@ -22,6 +22,24 @@
             "Value": "\u0022particles/smoke/smoke.vpcf\u0022"
           }
         }
+      },
+      {
+        "Guid": "e3af01dd-d55d-446d-9637-08971d09fda3",
+        "Class": "InputHintOverrideComponent",
+        "Keys": {
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Skip Turn\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

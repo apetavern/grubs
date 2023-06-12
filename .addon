@@ -7,17 +7,8 @@
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "ResourcePaths": [
-    "/fonts/*",
-    "/materials/*",
-    "/models/*",
-    "/particles/*",
-    "/postprocess/*",
-    "/sounds/*",
-    "/textures/*",
-    "/weapons/*",
-    "/data/*"
-  ],
+  "Resources": "/data/*\n/fonts/*\n/textures/ui/*.png\n*.csgmat\n*.vmat\n*.vtex\n*.sdflayer\n*.vmdl\n*.vanmgrph\n*.dmx\n*.txt\n*.vpcf\n*.tlvl\n*.tsta\n*.scss\n*.png.meta\n*.prefab\n*.shader\n*.vpost\n*.mp3\n*.sound\n*.wav",
+  "MenuResources": null,
   "HasCode": true,
   "CodePath": "code",
   "PackageReferences": [
@@ -637,6 +628,18 @@
         }
       ]
     },
-    "HttpAllowList": null
+    "HttpAllowList": null,
+    "LaunchConfigs": [
+      {
+        "Name": "Grubs Dev",
+        "GameIdent": "apetavern.grubs#local",
+        "MapName": "apetavern.gr_beach",
+        "MaxPlayers": 8,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "",
+        "PostLaunchCommand": ""
+      }
+    ]
   }
 }

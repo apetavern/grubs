@@ -33,6 +33,7 @@ public partial class AnvilPhysicsGadgetComponent : GadgetComponent
 	{
 		_bouncesRemaining = MaxBounces;
 
+		Gadget.Position = weapon.GetStartPosition();
 		Gadget.Position = Gadget.Position.WithZ( GrubsGame.Instance.Terrain.WorldTextureHeight + 256f );
 	}
 

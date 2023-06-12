@@ -1,12 +1,12 @@
 {
-  "UI": true,
-  "Volume": "1.00,1.00,0",
+  "UI": false,
+  "Volume": "0.75,0.75,0",
   "Pitch": "1.00,1.00,0",
-  "Decibels": 70,
+  "Decibels": 95,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/world/item_pickup.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 2080,
+  "MinimumDistance": 104
 }

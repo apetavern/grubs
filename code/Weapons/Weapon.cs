@@ -43,6 +43,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public bool AllowMovement { get; set; } = false;
 
+	[Prefab, Net]
+	public bool ShowInputHints { get; set; } = true;
+
 	/// <summary>
 	/// The chance of receiving this weapon in a crate.
 	/// A chance of zero means it will not spawn from a crate.
@@ -80,6 +83,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 	public bool HasChargesRemaining => CurrentUses < Charges;
 
+	private UI.InputHintWorldPanel InputHintWorldPanel { get; set; }
+	private bool _hasInputOverride;
+
 	public Weapon()
 	{
 		Transmit = TransmitType.Always;
@@ -97,6 +103,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	{
 		SimulateComponents( client );
 		DetermineWeaponVisibility();
+
+		if ( Game.IsClient && !_hasInputOverride )
+			InputHintWorldPanel?.UpdateInput( InputAction.Fire, GetFireInputActionDescription() );
 	}
 
 	[Net]
@@ -113,7 +122,21 @@ public partial class Weapon : AnimatedEntity, IResolvable
 			component.OnDeploy();
 		}
 
+		if ( Game.IsServer )
+			return;
+
 		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
+
+		if ( !ShowInputHints )
+			return;
+
+		var inputHintOverride = Components.Get<InputHintOverrideComponent>();
+		_hasInputOverride = inputHintOverride is not null;
+
+		var inputActions = _hasInputOverride ? inputHintOverride.InputActions.ToList() : new List<string>() { InputAction.Fire };
+		var inputDescriptions = _hasInputOverride ? inputHintOverride.InputDescriptions.ToList() : new List<string>() { GetFireInputActionDescription() };
+
+		InputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputActions, inputDescriptions );
 	}
 
 	public void Holster( Grub _ )
@@ -134,6 +157,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		Grub?.SetHatVisible( true );
 
 		UI.Cursor.Enabled( "Weapon", false );
+
+		if ( Game.IsClient )
+			InputHintWorldPanel?.Delete();
 
 		SetParent( null );
 	}
@@ -238,6 +264,17 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		return false;
 	}
 
+	private string GetFireInputActionDescription()
+	{
+		return FiringType switch
+		{
+			FiringType.Instant => "Fire",
+			FiringType.Charged => "Fire (Hold)",
+			FiringType.Cursor => "Set Target",
+			_ => string.Empty,
+		};
+	}
+
 	/// <summary>
 	/// Spawns and returns a Weapon from the Prefab Library.
 	/// </summary>
@@ -267,12 +304,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 				yield return prefab;
 			}
 		}
-	}
-
-	[ClientRpc]
-	public void PlayScreenSound( string sound )
-	{
-		this.SoundFromScreen( sound );
 	}
 }
 
