@@ -17,18 +17,6 @@ public partial class FreeForAll : Gamemode
 	public Queue<Player> PlayerTurnQueue { get; set; } = new();
 
 	/// <summary>
-	/// Is sudden death active?
-	/// </summary>
-	[Net]
-	public bool SuddenDeath { get; set; } = false;
-
-	/// <summary>
-	/// How many full rotations of the player list until sudden death is activated?
-	/// </summary>
-	[Net]
-	public int RoundsUntilSuddenDeath { get; set; }
-
-	/// <summary>
 	/// An async task for switching between player turns.
 	/// </summary>
 	public Task NextTurnTask { get; set; }
@@ -55,9 +43,7 @@ public partial class FreeForAll : Gamemode
 		SpawnPlayers();
 
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
-		RoundsUntilSuddenDeath = GrubsConfig.SuddenDeathDelay;
 		CurrentState = State.Playing;
-		SuddenDeath = false;
 		base.Start();
 	}
 
@@ -128,7 +114,9 @@ public partial class FreeForAll : Gamemode
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
 
-		await CheckSuddenDeath();
+		if ( PlayerTurnQueue.Count == 0 )
+			await CheckSuddenDeath();
+
 		RotateActivePlayer();
 
 		UsedTurn = false;
@@ -137,27 +125,6 @@ public partial class FreeForAll : Gamemode
 		NextTurnTask = null;
 
 		await SetupTurn();
-	}
-
-	private async Task CheckSuddenDeath()
-	{
-		// Must be the end of a full rotation of players.
-		if ( PlayerTurnQueue.Count > 0 ) return;
-
-		RoundsUntilSuddenDeath -= 1;
-		if ( RoundsUntilSuddenDeath <= 0 && !SuddenDeath )
-		{
-			SuddenDeath = true;
-
-			if ( GrubsConfig.SuddenDeathOneHealth )
-			{
-				foreach ( var grub in Entity.All.OfType<Grub>() )
-					grub.Health = 1;
-			}
-		}
-
-		if ( SuddenDeath )
-			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
 	}
 
 	/// <summary>
