@@ -94,6 +94,10 @@
       },
       "TrailParticle": {
         "Type": "null"
+      },
+      "StartSound": {
+        "Type": "String",
+        "Value": "\u0022sounds/airstrike/plane_engine_loop.sound\u0022"
       }
     }
   }
