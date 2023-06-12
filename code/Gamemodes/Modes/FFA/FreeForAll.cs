@@ -93,6 +93,12 @@ public partial class FreeForAll : Gamemode
 
 		ActivePlayer.EndTurn();
 
+		if ( PlayerTurnQueue.Count == 0 )
+		{
+			RoundsUntilSuddenDeath -= 1;
+			await CheckSuddenDeath();
+		}
+
 		await Terrain.UntilResolve();
 
 		if ( await HasGameWinner() )
@@ -113,9 +119,6 @@ public partial class FreeForAll : Gamemode
 
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
-
-		if ( PlayerTurnQueue.Count == 0 )
-			await CheckSuddenDeath();
 
 		RotateActivePlayer();
 

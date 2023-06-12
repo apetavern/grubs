@@ -177,7 +177,6 @@ public partial class Gamemode : Entity
 
 	internal async Task CheckSuddenDeath()
 	{
-		RoundsUntilSuddenDeath -= 1;
 		if ( RoundsUntilSuddenDeath <= 0 && !SuddenDeath )
 		{
 			SuddenDeath = true;
