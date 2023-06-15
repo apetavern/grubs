@@ -10,11 +10,11 @@
     <label class="name"
     text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn")
     style="font-color: @GamemodeSystem.Instance.ActivePlayer.Color.Hex;" />
-    <label class="counter @(_lastCounterUpdate > 3 ? "hide" : "")" text=@SuddenDeathText() />
+    <label class="counter @(_counterUpdate > 3 ? "hide" : "")" text=@SuddenDeathText() />
 </root>
 
 @code {
-    private TimeSince _lastCounterUpdate;
+    private TimeSince _counterUpdate;
     private int _lastCounterValue;
 
     private string FormatAsTimer(float time)
@@ -38,12 +38,13 @@
 
     public override void Tick()
     {
-        var instance = GamemodeSystem.Instance;
+        if (HasClass("hide")) return;
 
+        var instance = GamemodeSystem.Instance;
         if (_lastCounterValue != instance.RoundsUntilSuddenDeath)
         {
             _lastCounterValue = instance.RoundsUntilSuddenDeath;
-            _lastCounterUpdate = 0;
+            _counterUpdate = 0;
         }
     }
 
