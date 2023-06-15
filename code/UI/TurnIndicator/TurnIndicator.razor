@@ -10,48 +10,18 @@
     <label class="name"
     text=@($"{@GamemodeSystem.Instance.ActivePlayer.SteamName}'s Turn")
     style="font-color: @GamemodeSystem.Instance.ActivePlayer.Color.Hex;" />
-    <label class="counter @(_counterUpdate > 3 ? "hide" : "")" text=@SuddenDeathText() />
 </root>
 
 @code {
-    private TimeSince _counterUpdate;
-    private int _lastCounterValue;
-
     private string FormatAsTimer(float time)
     {
         return TimeSpan.FromSeconds(time.CeilToInt()).TotalSeconds.ToString();
     }
 
-    private string SuddenDeathText()
-    {
-        var instance = GamemodeSystem.Instance;
-
-        if (instance.RoundsUntilSuddenDeath < 0 || instance.RoundsUntilSuddenDeath > 3)
-            return "";
-
-        if (instance.SuddenDeath == true)
-            return "SUDDEN DEATH";
-
-        string roundText = instance.RoundsUntilSuddenDeath == 1 ? "round" : "rounds";
-        return $"{instance.RoundsUntilSuddenDeath} {roundText} until Sudden Death";
-    }
-
-    public override void Tick()
-    {
-        if (HasClass("hide")) return;
-
-        var instance = GamemodeSystem.Instance;
-        if (_lastCounterValue != instance.RoundsUntilSuddenDeath)
-        {
-            _lastCounterValue = instance.RoundsUntilSuddenDeath;
-            _counterUpdate = 0;
-        }
-    }
-
     protected override int BuildHash()
     {
         var instance = GamemodeSystem.Instance;
-        return HashCode.Combine(instance?.GetTimeRemaining(), instance?.ActivePlayer?.SteamId, instance?.RoundsUntilSuddenDeath, instance?.TurnIsChanging);
+        return HashCode.Combine(instance?.GetTimeRemaining(), instance?.ActivePlayer?.SteamId, instance?.TurnIsChanging);
     }
 }
 
@@ -67,7 +37,6 @@
         transition: opacity 150ms ease-in;
 
         .timer,
-        .counter,
         .name {
             font-family: Londrina Solid;
             font-size: 80px;
@@ -79,18 +48,6 @@
             position: absolute;
             bottom: -30px;
             font-size: 40px;
-        }
-
-        .counter {
-            position: absolute;
-            bottom: -65px;
-            font-size: 35px;
-            opacity: 1;
-            transition: opacity 150ms ease-in;
-
-            &.hide {
-                opacity: 0;
-            }
         }
 
         &.hide {

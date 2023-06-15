@@ -1,0 +1,57 @@
+@namespace Grubs.UI
+
+<root>
+	<div class="title">
+		<label style="font-family: MaterialIconsRound; font-size: 35px;">flood</label>
+		<label>Sudden Death</label>
+	</div>
+	@{
+		var instance = GamemodeSystem.Instance;
+		@if(instance.RoundsUntilSuddenDeath <= 0)
+		{
+			<label class="body">ACTIVE</label>
+		}
+		else
+		{
+			string roundsText = instance.RoundsUntilSuddenDeath == 1 ? "round" : "rounds";
+			<label class="body">@instance.RoundsUntilSuddenDeath @roundsText</label>
+		}
+	}
+</root>
+
+@code {
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(GamemodeSystem.Instance?.RoundsUntilSuddenDeath);
+	}
+}
+
+<style>
+	SuddenDeathIndicator {
+		position: absolute;
+		bottom: 125px;
+		right: 100px;
+		background-color: rgba(235, 235, 235, 0.24);
+		border-radius: 4px;
+		width: 180px;
+		height: 45px;
+		justify-content: center;
+		align-items: center;
+		
+		.title {
+			position: absolute;
+			top: -30px;
+			font-family: Londrina Solid;
+			font-size: 25px;
+			color: white;
+			text-shadow: 2px 2px 0px black;
+		}
+
+		.body {
+			font-family: Londrina Solid;
+			font-size: 35px;
+			color: white;
+			text-shadow: 2px 2px 0px black;
+		}
+	}
+</style>
