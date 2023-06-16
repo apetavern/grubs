@@ -34,13 +34,11 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 
 	private Particles _trailLeft;
 	private Particles _trailRight;
-	private Sound _engineSound;
 	private const float _dropPayloadDistanceThreshold = 950;
 	private const float _planeFlySpeed = 23;
 
 	public override void ClientSpawn()
 	{
-		_engineSound = Gadget.PlaySound( "sounds/airstrike/plane_engine_loop.sound" );
 		_trailLeft = Particles.Create( ConTrail, Gadget, "trailLeft" );
 		_trailRight = Particles.Create( ConTrail, Gadget, "trailRight" );
 	}
@@ -76,7 +74,6 @@ public partial class AirstrikeGadgetComponent : GadgetComponent
 			{
 				_trailLeft.Destroy();
 				_trailRight.Destroy();
-				_engineSound.Stop();
 			}
 
 			if ( Game.IsServer )
