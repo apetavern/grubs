@@ -177,18 +177,20 @@ public partial class Gamemode : Entity
 
 	internal async Task CheckSuddenDeath()
 	{
-		if ( RoundsUntilSuddenDeath <= 0 && !SuddenDeath )
-		{
-			SuddenDeath = true;
-
-			if ( GrubsConfig.SuddenDeathOneHealth )
-			{
-				foreach ( var grub in Entity.All.OfType<Grub>() )
-					grub.Health = 1;
-			}
-		}
+		RoundsUntilSuddenDeath -= 1;
+		SuddenDeath = RoundsUntilSuddenDeath <= 0;
 
 		if ( SuddenDeath )
+		{
 			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
+
+			if ( GrubsConfig.SuddenDeathOneHealth && RoundsUntilSuddenDeath == 0 )
+			{
+				foreach ( var grub in All.OfType<Grub>() )
+				{
+					grub.Health = 1;
+				}
+			}
+		}
 	}
 }

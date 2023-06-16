@@ -93,11 +93,8 @@ public partial class FreeForAll : Gamemode
 
 		ActivePlayer.EndTurn();
 
-		if ( PlayerTurnQueue.Count == 0 )
-		{
-			RoundsUntilSuddenDeath -= 1;
+		if ( !PlayerTurnQueue.Any() )
 			await CheckSuddenDeath();
-		}
 
 		await Terrain.UntilResolve();
 
@@ -319,7 +316,7 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		if ( PlayerTurnQueue.Count == 0 )
+		if ( !PlayerTurnQueue.Any() )
 		{
 			foreach ( var player in Players )
 			{
