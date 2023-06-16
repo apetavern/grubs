@@ -9,7 +9,10 @@
         <div class="buttons">
             <button @onclick=@(() => SetActiveTab(Tab.PlayMenu)) icon="play_arrow" class="@IsSelected(Tab.PlayMenu)">Play</button>
             <button @onclick=@(() => SetActiveTab(Tab.CustomizeMenu)) icon="emoji_people" class="@IsSelected(Tab.CustomizeMenu)">Customize</button>
-            <button @onclick=@(() => SetActiveTab(Tab.OptionsMenu)) icon="settings" class="@IsSelected(Tab.OptionsMenu)">Options</button>
+            @if (Game.LocalClient.IsListenServerHost)
+            {
+                <button @onclick=@(() => SetActiveTab(Tab.OptionsMenu)) icon="settings" class="@IsSelected(Tab.OptionsMenu)">Options</button>
+            }
         </div>
     </div>
     @if (CurrentTab == Tab.PlayMenu)
@@ -22,7 +25,7 @@
     }
     else if (CurrentTab == Tab.OptionsMenu)
     {
-        <OptionsMenu /> 
+        <OptionsMenu />
     }
     <div class="right-aligned">
         <div class="terrain-preview">
