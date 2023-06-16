@@ -108,7 +108,7 @@ PS
 		//TODO: This is a little dubious, objects in front will sort of have some shimmering around their borders. 
 		//I can probably mess with the depth texture or something to get around this, but I'm not sure how to do that yet.
 		float3 frame = Tex2D( g_tFrameBufferCopyTexture, vPositionSs + distortFinal * g_flOpDistort ).rgb;
-		Material m = GatherMaterial( i );
+		Material m = Material::From( i );
 		
 		//Apply the distortion to the normal
 		m.Normal = TransformNormal( i, DecodeNormal(lerp(float3(0.5,0.5,1),distortFinal,g_flDistortAmt))    ) ;
@@ -120,8 +120,6 @@ PS
 		m.Metalness = 0.0;
 		m.Roughness = g_flRoughness;
 
-		ShadingModelValveStandard sm;
-		return FinalizePixelMaterial(i, m, sm);
-
+		return ShadingModelStandard::Shade(i, m);
 	}
 }
