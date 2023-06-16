@@ -9,12 +9,12 @@
         var instance = GamemodeSystem.Instance;
         @if (instance.SuddenDeath)
         {
-                    <label class="body active">ACTIVE</label>
+            <label class="body active">ACTIVE</label>
         }
         else
         {
             string roundsText = instance.RoundsUntilSuddenDeath == 1 ? "round" : "rounds";
-                    <label class="body">@instance.RoundsUntilSuddenDeath @roundsText</label>
+            <label class="body">@instance.RoundsUntilSuddenDeath @roundsText</label>
         }
     }
 </root>
@@ -27,39 +27,39 @@
 }
 
 <style>
-	SuddenDeathIndicator {
-		position: absolute;
-		bottom: 125px;
-		right: 100px;
-		background-color: rgba(235, 235, 235, 0.24);
-		border-radius: 4px;
-		width: 180px;
-		height: 45px;
-		justify-content: center;
-		align-items: center;
+    SuddenDeathIndicator {
+        position: absolute;
+        bottom: 125px;
+        right: 100px;
+        background-color: rgba(235, 235, 235, 0.24);
+        border-radius: 4px;
+        width: 180px;
+        height: 45px;
+        justify-content: center;
+        align-items: center;
 
-		.title {
-			position: absolute;
-			top: -22px;
-			font-family: Londrina Solid;
-			font-size: 25px;
-			color: white;
-			text-shadow: 2px 2px 0px black;
-		}
+        .title {
+            position: absolute;
+            top: -22px;
+            font-family: Londrina Solid;
+            font-size: 25px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
 
-		.icon {
-			top: -9px;
-			font-family: MaterialIconsRound;
-			font-size: 35px;
-			color: white;
-			text-shadow: 2px 2px 0px black;
-		}
+        .icon {
+            top: -9px;
+            font-family: MaterialIconsRound;
+            font-size: 35px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
 
-		.body {
-			font-family: Londrina Solid;
-			font-size: 35px;
-			color: white;
-			text-shadow: 2px 2px 0px black;
+        .body {
+            font-family: Londrina Solid;
+            font-size: 35px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
 
             &.active {
                 animation-name: pulsing-text;
@@ -67,8 +67,8 @@
                 animation-iteration-count: infinite;
                 animation-timing-function: ease-in-out;
             }
-		}
-	}
+        }
+    }
 
     @@keyframes pulsing-text {
         0% {
