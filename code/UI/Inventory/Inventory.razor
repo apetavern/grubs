@@ -12,11 +12,7 @@
             var sortedWeapons = player.Inventory.Weapons.OrderByDescending(w => w.WeaponType == WeaponType.Weapon);
             @foreach (var weapon in sortedWeapons)
             {
-                <InventorySlot
-                Weapon=@weapon
-                @onmouseover=@( () => _hoveredWeapon = weapon )
-                @onmouseout=@( () => _hoveredWeapon = null )
-                @onclick=@( () => { if ( weapon.HasAmmo() ) player.ActiveWeaponInput = weapon; } ) />
+                <InventorySlot Weapon=@weapon @onmouseover=@( () => _hoveredWeapon = weapon ) @onmouseout=@( () => _hoveredWeapon = null ) @onclick=@( () => { if ( weapon.HasAmmo() ) player.ActiveWeaponInput = weapon; } ) />
             }
         }
     </div>
@@ -43,7 +39,7 @@
 <style>
     Inventory {
         position: absolute;
-        bottom: 225px;
+        bottom: 290px;
         width: 375px;
         transition: all 150ms ease-out;
         opacity: 0;
