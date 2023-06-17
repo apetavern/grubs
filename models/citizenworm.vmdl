@@ -1185,6 +1185,36 @@
 					},
 				]
 			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "show"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "yes"
+								meshes = 
+								[
+									"unnamed_1",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "no"
+								meshes = 
+								[
+									"",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""

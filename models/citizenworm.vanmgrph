@@ -6205,8 +6205,8 @@
 	m_boneMergeModels = 
 	[
 		{
-			m_name = "models/weapons/dynamite/dynamite.vmdl"
-			m_bEnabled = false
+			m_name = "models/cosmetics/skeleton/skeleton_grub.vmdl"
+			m_bEnabled = true
 		},
 	]
 }
