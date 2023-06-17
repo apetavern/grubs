@@ -146,6 +146,25 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 			if ( item.Model != null )
 			{
+				if ( item.ResourceName.ToLower().Contains( "skel" ) )
+				{
+					var skeleton = new ModelEntity( "models/cosmetics/skeleton/skeleton_grub.vmdl" );
+					skeleton.SetParent( this, true );
+					SetBodyGroup( "show", 1 );
+
+					var modelmaterials = Model.Load( item.Model ).Materials;
+
+					foreach ( var mat in modelmaterials )
+					{
+						if ( mat.Name.Contains( "_skin" ) )
+						{
+							skeleton.SetMaterialOverride( mat );
+						}
+					}
+
+					continue;
+				}
+
 				var materials = Model.Load( item.Model ).Materials;
 
 				var skinMaterial = Material.Load( "models/citizen/skin/citizen_skin01.vmat" );
