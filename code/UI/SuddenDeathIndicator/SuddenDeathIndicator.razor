@@ -1,0 +1,87 @@
+@namespace Grubs.UI
+
+<root>
+    <div class="title">
+        <label class="icon">flood</label>
+        <label>Sudden Death</label>
+    </div>
+    @{
+        var instance = GamemodeSystem.Instance;
+        @if (instance.SuddenDeath)
+        {
+            <label class="body active">ACTIVE</label>
+        }
+        else
+        {
+            string roundsText = instance.RoundsUntilSuddenDeath == 1 ? "round" : "rounds";
+            <label class="body">@instance.RoundsUntilSuddenDeath @roundsText</label>
+        }
+    }
+</root>
+
+@code {
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GamemodeSystem.Instance?.RoundsUntilSuddenDeath);
+    }
+}
+
+<style>
+    SuddenDeathIndicator {
+        position: absolute;
+        bottom: 125px;
+        right: 100px;
+        background-color: rgba(235, 235, 235, 0.24);
+        border-radius: 4px;
+        width: 180px;
+        height: 45px;
+        justify-content: center;
+        align-items: center;
+
+        .title {
+            position: absolute;
+            top: -22px;
+            font-family: Londrina Solid;
+            font-size: 25px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .icon {
+            top: -9px;
+            font-family: MaterialIconsRound;
+            font-size: 35px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .body {
+            font-family: Londrina Solid;
+            font-size: 35px;
+            color: white;
+            text-shadow: 2px 2px 0px black;
+
+            &.active {
+                animation-name: pulsing-text;
+                animation-duration: 1.5s;
+                animation-iteration-count: infinite;
+                animation-timing-function: ease-in-out;
+            }
+        }
+    }
+
+    @@keyframes pulsing-text {
+        0% {
+            transform: scale(1);
+        }
+        25% {
+            transform: scale(1.1);
+        }
+        75% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>

@@ -39,6 +39,24 @@ public static class GrubsConfig
 	public static int TurnDuration { get; set; } = 45;
 
 	/// <summary>
+	/// The amount of rounds to be played before Sudden Death begins.
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_delay" )]
+	public static int SuddenDeathDelay { get; set; } = 15;
+
+	/// <summary>
+	/// Should all Grubs have their health set to 1 when Sudden Death begins?
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_onehealth" )]
+	public static bool SuddenDeathOneHealth { get; set; } = false;
+
+	/// <summary>
+	/// How harshly Sudden Death affects the terrain.
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_aggression" )]
+	public static int SuddenDeathAggression { get; set; } = 30;
+
+	/// <summary>
 	/// Whether or not wind is enabled.
 	/// </summary>
 	[ConVar.Replicated( "wind_enabled" )]

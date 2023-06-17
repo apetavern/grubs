@@ -85,6 +85,18 @@ public partial class Gamemode : Entity
 	/// </summary>
 	public virtual int MinimumPlayers => 2;
 
+	/// <summary>
+	/// Is sudden death active?
+	/// </summary>
+	[Net]
+	public bool SuddenDeath { get; set; } = false;
+
+	/// <summary>
+	/// How many full rotations of the player list until sudden death is activated?
+	/// </summary>
+	[Net]
+	public int RoundsUntilSuddenDeath { get; set; }
+
 	public override void Spawn()
 	{
 		Transmit = TransmitType.Always;
@@ -154,5 +166,32 @@ public partial class Gamemode : Entity
 	internal virtual void OnPlayerJoinedLate( Player player )
 	{
 		GrubsGame.Instance.TryAssignUnusedColor( player );
+	}
+
+	[GrubsEvent.Game.Start]
+	internal virtual void InitializeSuddenDeath()
+	{
+		RoundsUntilSuddenDeath = GrubsConfig.SuddenDeathDelay;
+		SuddenDeath = false;
+	}
+
+	internal async Task CheckSuddenDeath()
+	{
+		RoundsUntilSuddenDeath -= 1;
+		SuddenDeath = RoundsUntilSuddenDeath <= 0;
+
+		if ( SuddenDeath )
+		{
+			Sound.FromScreen( "suddendeath_rumble" );
+			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
+
+			if ( GrubsConfig.SuddenDeathOneHealth && RoundsUntilSuddenDeath == 0 )
+			{
+				foreach ( var grub in All.OfType<Grub>() )
+				{
+					grub.Health = 1;
+				}
+			}
+		}
 	}
 }

@@ -461,6 +461,48 @@
         "DefaultValue": "false",
         "Description": "Spawns a single worm at a random location for players who join late instead of them being a spectator.",
         "Group": "Game"
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "gr_sd_delay",
+        "DisplayName": "Sudden Death Delay",
+        "DefaultValue": "15",
+        "Description": "The amount of rounds to be played before Sudden Death begins.",
+        "Group": "Sudden Death",
+        "Minimum": 1,
+        "Maximum": 40
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "15",
+            "Name": "Low"
+          },
+          {
+            "Value": "25",
+            "Name": "Medium"
+          },
+          {
+            "Value": "50",
+            "Name": "High"
+          }
+        ],
+        "ConVarName": "gr_sd_aggression",
+        "DisplayName": "Sudden Death Aggression",
+        "DefaultValue": "25",
+        "Description": "How harshly Sudden Death affects the terrain.",
+        "Group": "Sudden Death"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "gr_sd_onehealth",
+        "DisplayName": "One Health",
+        "DefaultValue": "false",
+        "Description": "Should all Grubs have their health set to 1 when Sudden Death begins?",
+        "Group": "Sudden Death"
       }
     ],
     "CsProjName": "",

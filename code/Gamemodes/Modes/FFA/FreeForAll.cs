@@ -38,6 +38,8 @@ public partial class FreeForAll : Gamemode
 
 	internal override void Start()
 	{
+		Terrain.ResetTerrainPosition();
+
 		SpawnPlayers();
 
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
@@ -74,7 +76,7 @@ public partial class FreeForAll : Gamemode
 			MoveToSpawnpoint( client );
 		}
 
-		ActivePlayer = PlayerTurnQueue.Dequeue();
+		RotateActivePlayer();
 	}
 
 	internal override void UseTurn( bool giveMovementGrace = false )
@@ -90,6 +92,9 @@ public partial class FreeForAll : Gamemode
 		TurnIsChanging = true;
 
 		ActivePlayer.EndTurn();
+
+		if ( !PlayerTurnQueue.Any() )
+			await CheckSuddenDeath();
 
 		await Terrain.UntilResolve();
 
@@ -311,8 +316,13 @@ public partial class FreeForAll : Gamemode
 
 	private void RotateActivePlayer()
 	{
-		if ( ActivePlayer.IsAvailableForTurn )
-			PlayerTurnQueue.Enqueue( ActivePlayer );
+		if ( !PlayerTurnQueue.Any() )
+		{
+			foreach ( var player in Players )
+			{
+				PlayerTurnQueue.Enqueue( player );
+			}
+		}
 
 		ActivePlayer = PlayerTurnQueue.Dequeue();
 		while ( !ActivePlayer.IsAvailableForTurn )

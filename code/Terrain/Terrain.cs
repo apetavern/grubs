@@ -64,6 +64,8 @@ public partial class Terrain : Entity
 		SdfWorld.LocalRotation = Rotation.FromRoll( 90f );
 		SdfWorld.Tags.Add( Tag.Solid );
 
+		ResetTerrainPosition();
+
 		var creationStrategy = GrubsConfig.WorldTerrainType;
 		switch ( creationStrategy )
 		{
@@ -155,6 +157,32 @@ public partial class Terrain : Entity
 		}
 
 		return fallbackPosition;
+	}
+
+	public async Task LowerTerrain( float amount )
+	{
+		var grubs = All.OfType<Grub>();
+
+		Vector3 targetPosition = SdfWorld.Position - Vector3.Up * amount;
+		while ( Vector3.DistanceBetween( SdfWorld.Position, targetPosition ) > Time.Delta * 5f )
+		{
+			Camera.Main.Position += Vector3.Random * 10f;
+
+			var oldPos = SdfWorld.Position;
+			SdfWorld.Position = Vector3.Lerp( SdfWorld.Position, targetPosition, Time.Delta * 3f );
+
+			// Lower Grubs with the terrain, otherwise they can clip into terrain above them.
+			// I don't want to do this, but movement code is hard sometimes :(
+			foreach ( var grub in grubs )
+				grub.Position += Vector3.Up * (SdfWorld.Position.z - oldPos.z);
+
+			await GameTask.DelaySeconds( Time.Delta );
+		}
+	}
+
+	public void ResetTerrainPosition()
+	{
+		SdfWorld.Position = SdfWorld.Position.WithZ( 0 );
 	}
 
 	private bool IsInsideTerrain( Vector3 position, float size )
