@@ -182,6 +182,7 @@ public partial class Gamemode : Entity
 
 		if ( SuddenDeath )
 		{
+			Sound.FromScreen( To.Everyone, "suddendeath_rumble" );
 			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
 
 			if ( GrubsConfig.SuddenDeathOneHealth && RoundsUntilSuddenDeath == 0 )
