@@ -33,14 +33,13 @@ public static class FireHelper
 public class FireEntity : ModelEntity, IResolvable
 {
 	public bool Resolved => _timeUntilExpire;
-	private Vector3 _moveDirection { get; set; }
-
-	private TimeUntil _timeUntilExpire;
-	private const float fireSize = 7.5f;
-
-	private Particles FireParticle { get; set; }
-
 	public Vector3 Gravity;
+
+	private const float fireSize = 7.5f;
+	private Particles FireParticle { get; set; }
+	private Vector3 MoveDirection { get; set; }
+	private TimeUntil _timeUntilExpire;
+	private Sound _burningSound;
 
 	public FireEntity()
 	{
@@ -50,8 +49,8 @@ public class FireEntity : ModelEntity, IResolvable
 	public FireEntity( Vector3 startPosition, Vector3 moveDirection )
 	{
 		Position = startPosition;
-		_moveDirection = moveDirection;
-		Velocity = _moveDirection * Time.Delta * 10f;
+		MoveDirection = moveDirection;
+		Velocity = MoveDirection * Time.Delta * 10f;
 
 		Gravity = Game.PhysicsWorld.Gravity * Time.Delta / 10f;
 	}
@@ -59,8 +58,8 @@ public class FireEntity : ModelEntity, IResolvable
 	public FireEntity( Vector3 startPosition, Vector3 moveDirection, Vector3 gravity )
 	{
 		Position = startPosition;
-		_moveDirection = moveDirection;
-		Velocity = _moveDirection * Time.Delta * 10f;
+		MoveDirection = moveDirection;
+		Velocity = MoveDirection * Time.Delta * 10f;
 
 		if ( gravity == Vector3.Zero )
 		{
@@ -86,8 +85,12 @@ public class FireEntity : ModelEntity, IResolvable
 	[GameEvent.Tick.Server]
 	private void Tick()
 	{
+		if ( !_burningSound.IsPlaying )
+			_burningSound = PlaySound( "fire" );
+
 		if ( _timeUntilExpire )
 		{
+			_burningSound.Stop();
 			FireParticle.Destroy();
 			FireParticle = null;
 			Delete();
@@ -98,7 +101,7 @@ public class FireEntity : ModelEntity, IResolvable
 
 	private void Move()
 	{
-		Velocity += _moveDirection * Time.Delta / 2f;
+		Velocity += MoveDirection * Time.Delta / 2f;
 		Velocity += Gravity;
 		Velocity += GamemodeSystem.Instance.ActiveWindForce * 128f * Time.Delta;
 
@@ -124,7 +127,7 @@ public class FireEntity : ModelEntity, IResolvable
 		{
 			Velocity *= 0.95f;
 
-			_moveDirection *= 0.95f;
+			MoveDirection *= 0.95f;
 
 			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( Tag.Invincible ) )
 				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position.WithY( 0f ), Vector3.Up * 32f, this ) );
