@@ -182,16 +182,18 @@ public partial class Gamemode : Entity
 
 		if ( SuddenDeath )
 		{
-			Sound.FromScreen( "suddendeath_rumble" );
-			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
-
 			if ( GrubsConfig.SuddenDeathOneHealth && RoundsUntilSuddenDeath == 0 )
 			{
+				UI.TextChat.AddInfoChatEntry( "The earth begins to rumble and shake..." );
+
 				foreach ( var grub in All.OfType<Grub>() )
 				{
 					grub.Health = 1;
 				}
 			}
+
+			Sound.FromScreen( "suddendeath_rumble" );
+			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
 		}
 	}
 }
