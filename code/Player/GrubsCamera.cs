@@ -31,7 +31,7 @@ public class GrubsCamera
 			Distance = _distanceRange.Clamp( Distance );
 		}
 
-		if ( _timeUntilCameraUnlock <= 0 || (_target is not null && _target.IsDormant) )
+		if ( _timeUntilCameraUnlock )
 			FindTarget();
 
 		if ( !_target.IsValid() )
@@ -101,7 +101,7 @@ public class GrubsCamera
 		{
 			if ( gadget.ShouldCameraFollow )
 			{
-				SetTarget( gadget, 2f );
+				SetTarget( gadget, 3f );
 				return;
 			}
 		}
