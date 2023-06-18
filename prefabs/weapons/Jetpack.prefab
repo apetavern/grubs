@@ -43,7 +43,7 @@
           },
           "ThrustSound": {
             "Type": "String",
-            "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
+            "Value": "\u0022sounds/weapons/jetpack/thrust.sound\u0022"
           }
         }
       }

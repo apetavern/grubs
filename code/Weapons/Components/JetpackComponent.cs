@@ -12,6 +12,9 @@ public partial class JetpackComponent : WeaponComponent
 	[Prefab, Net]
 	public float MaxFuel { get; set; } = 15f;
 
+	[Prefab, ResourceType( "sound" )]
+	public string ThrustSound { get; set; }
+
 	[Net, Predicted]
 	public float RemainingFuel { get; private set; }
 
@@ -22,6 +25,7 @@ public partial class JetpackComponent : WeaponComponent
 	private Vector3 _backJetStrength = Vector3.Zero;
 
 	private UI.FuelWorldPanel _fuelWorldPanel;
+	private Sound _thrustSound;
 
 	public override void OnDeploy()
 	{
@@ -55,6 +59,8 @@ public partial class JetpackComponent : WeaponComponent
 		if ( Game.IsClient )
 			_fuelWorldPanel.Delete( true );
 
+		_thrustSound.Stop();
+
 		_leftJetParticle?.Destroy( true );
 		_rightJetParticle?.Destroy( true );
 		_backJetParticle?.Destroy( true );
@@ -78,6 +84,9 @@ public partial class JetpackComponent : WeaponComponent
 		_rightJetParticle.SetPosition( 5, _sideJetStrength );
 		_backJetParticle.SetPosition( 5, _backJetStrength );
 
+		if ( !hasFuel || controller.IsGrounded )
+			_thrustSound.Stop();
+
 		if ( !hasFuel )
 			return;
 
@@ -96,6 +105,11 @@ public partial class JetpackComponent : WeaponComponent
 			burnRate *= 1.2f;
 
 		RemainingFuel = Math.Max( RemainingFuel - burnRate, 0f );
+
+		if ( !_thrustSound.IsPlaying )
+			_thrustSound = Weapon.PlaySound( ThrustSound );
+
+		_thrustSound.SetVolume( isAscending ? 0.8f : 0.4f );
 
 		if ( Grub.MoveInput != 0 )
 			Grub.Rotation = Grub.MoveInput != 1 ? Rotation.Identity : Rotation.From( 0, 180, 0 );

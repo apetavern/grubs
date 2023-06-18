@@ -1,0 +1,12 @@
+{
+  "UI": false,
+  "Volume": "0.70,0.70,0",
+  "Pitch": "1.00,1.00,0",
+  "Decibels": 105,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/weapons/jetpack/thrust.vsnd"
+  ],
+  "MaximumDistance": 2533.85,
+  "MinimumDistance": 126.692505
+}
