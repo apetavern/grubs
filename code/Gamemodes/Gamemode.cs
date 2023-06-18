@@ -161,6 +161,11 @@ public partial class Gamemode : Entity
 
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
+	internal virtual async Task SetupTurn() 
+	{
+		GrubsGame.Instance.PlaySoundClient( To.Single(ActivePlayer), "sounds/ui/ui_turn_indicator.sound" );
+	}
+
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
 
 	internal virtual void OnPlayerJoinedLate( Player player )

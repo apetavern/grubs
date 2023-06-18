@@ -277,7 +277,7 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	private async Task SetupTurn()
 	{
-		// TODO: I am not sure.
+		await base.SetupTurn();
 	}
 
 	private bool CheckWinConditions()
