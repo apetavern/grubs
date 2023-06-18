@@ -206,13 +206,6 @@ public sealed partial class GrubsGame : GameManager
 		player.Delete();
 	}
 
-	[ClientRpc]
-	public void PlaySoundClient( string sound )
-	{
-		Game.AssertClient();
-		PlaySound( sound );
-	}
-
 	[GrubsEvent.Game.End]
 	public void OnGameOver()
 	{

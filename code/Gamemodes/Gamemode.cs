@@ -163,7 +163,7 @@ public partial class Gamemode : Entity
 
 	internal virtual async Task SetupTurn() 
 	{
-		GrubsGame.Instance.PlaySoundClient( To.Single(ActivePlayer), "sounds/ui/ui_turn_indicator.sound" );
+		Sound.FromScreen( To.Single(ActivePlayer), "sounds/ui/ui_turn_indicator.sound" );
 	}
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
