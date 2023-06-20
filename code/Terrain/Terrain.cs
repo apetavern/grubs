@@ -118,7 +118,7 @@ public partial class Terrain : Entity
 			maxWidth = WorldTextureLength;
 			maxHeight = WorldTextureHeight - 64;
 		}
-			
+
 
 		while ( retries < 5000 )
 		{
@@ -201,20 +201,19 @@ public partial class Terrain : Entity
 		return new Vector3( randX, 0, randZ );
 	}
 
-	TimeSince TimeSinceLastWindEffect = 0f;
+	private TimeSince TimeSinceLastWindEffect = 0f;
 
-/*	[GameEvent.Tick.Client]
+	[GameEvent.Tick.Client]
 	private void ClientTick()
 	{
-		if ( TimeSinceLastWindEffect > 2f )
-		{
-			var pos = GetRandomPositionInWorld( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
-			var wind = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
-			wind.SetPosition( 1, GamemodeSystem.Instance.ActiveWindForce * GamemodeSystem.Instance.ActiveWindSteps * 1280f );
-			Log.Info( GamemodeSystem.Instance.ActiveWindForce * 1280f );
-			TimeSinceLastWindEffect = 0f;
-		}
-	}*/
+		if ( TimeSinceLastWindEffect < 0.1f )
+			return;
+
+		var pos = GetRandomPositionInWorld( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight ).WithY( -33 );
+		var wind = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
+		wind.SetPosition( 1, GamemodeSystem.Instance.ActiveWindSteps * 75f );
+		TimeSinceLastWindEffect = 0f;
+	}
 
 	[ConCmd.Admin( "gr_regen" )]
 	public static void RegenWorld()
