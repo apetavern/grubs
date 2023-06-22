@@ -530,9 +530,6 @@
 	m_Operators = 
 	[
 		{
-			_class = "C_OP_Decay"
-		},
-		{
 			_class = "C_OP_BasicMovement"
 		},
 		{
@@ -931,6 +928,9 @@
 			}
 			m_nOutputField = "21"
 			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_Decay"
 		},
 	]
 	m_Renderers = 

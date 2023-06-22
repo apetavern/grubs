@@ -63,7 +63,7 @@ PS
 	
 	float4 g_vColour < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
 	float g_flVoronoiSpeed < UiGroup( ",0/,0/0" ); Default1( 1 ); Range1( 0, 25 ); >;
-	float g_flCellDensity < UiGroup( ",0/,0/0" ); Default1( 6 ); Range1( 0, 100 ); >;
+	float g_flCellDensity < UiGroup( ",0/,0/0" ); Default1( 4 ); Range1( 0, 100 ); >;
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -83,12 +83,10 @@ PS
 		float l_2 = g_flTime * l_1;
 		float l_3 = g_flCellDensity;
 		float l_4 = VoronoiNoise( i.vTextureCoords.xy, l_2, l_3 );
-		float l_5 = sin( l_2 );
-		float l_6 = lerp( l_4, l_5, 0.5 );
-		float l_7 = saturate( l_6 );
+		float l_5 = saturate( l_4 );
 		
 		m.Albedo = l_0.xyz;
-		m.Opacity = l_7;
+		m.Opacity = l_5;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;

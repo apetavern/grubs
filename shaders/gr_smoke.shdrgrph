@@ -6,12 +6,12 @@
     {
       "_class": "Result",
       "Albedo": {
-        "Identifier": "8",
+        "Identifier": "6",
         "Output": "Result"
       },
       "Emission": {},
       "Opacity": {
-        "Identifier": "9",
+        "Identifier": "7",
         "Output": "Result"
       },
       "Normal": {},
@@ -47,7 +47,7 @@
       "_class": "Float",
       "Min": 0,
       "Max": 100,
-      "Value": 6,
+      "Value": 4,
       "Name": "Cell Density",
       "IsAttribute": false,
       "UI": {
@@ -56,7 +56,7 @@
         }
       },
       "Identifier": "2",
-      "Position": "-816,32"
+      "Position": "-1088,16"
     },
     {
       "_class": "Time",
@@ -94,30 +94,6 @@
       "Position": "-1200,224"
     },
     {
-      "_class": "Sine",
-      "Input": {
-        "Identifier": "4",
-        "Output": "Result"
-      },
-      "Identifier": "6",
-      "Position": "-608,176"
-    },
-    {
-      "_class": "Lerp",
-      "A": {
-        "Identifier": "1",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "6",
-        "Output": "Result"
-      },
-      "C": {},
-      "Fraction": 0.5,
-      "Identifier": "7",
-      "Position": "-304,64"
-    },
-    {
       "_class": "Float4",
       "Value": "1,1,1,1",
       "Name": "Colour",
@@ -128,16 +104,16 @@
           "Name": ""
         }
       },
-      "Identifier": "8",
+      "Identifier": "6",
       "Position": "-96,-192"
     },
     {
       "_class": "Saturate",
       "Input": {
-        "Identifier": "7",
+        "Identifier": "1",
         "Output": "Result"
       },
-      "Identifier": "9",
+      "Identifier": "7",
       "Position": "48,48"
     }
   ]
