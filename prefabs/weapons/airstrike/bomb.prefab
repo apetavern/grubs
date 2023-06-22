@@ -78,7 +78,7 @@
       },
       "TrailParticle": {
         "Type": "String",
-        "Value": "\u0022particles/smoke/projectile_trail_base.vpcf\u0022"
+        "Value": "\u0022particles/smoke/smoke_ring.vpcf\u0022"
       }
     }
   }
