@@ -943,7 +943,7 @@
 					m_model = resource:"particles/smoke/smoke_ring.vmdl"
 				},
 			]
-			m_hOverrideMaterial = resource:"materials/default/white.vmat"
+			m_hOverrideMaterial = resource:"particles/smoke/smoke.vmat"
 		},
 	]
 }
