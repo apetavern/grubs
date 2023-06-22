@@ -22,8 +22,8 @@
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
-				m_flRandomMin = 8.0
-				m_flRandomMax = 12.0
+				m_flRandomMin = 20.0
+				m_flRandomMax = 30.0
 				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
 				m_flLOD0 = 0.0
 				m_flLOD1 = 0.0
@@ -67,6 +67,9 @@
 	]
 	m_Initializers = 
 	[
+		{
+			_class = "C_INIT_RingWave"
+		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 
@@ -115,6 +118,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_INIT_InitFloatCollection"
@@ -123,7 +127,7 @@
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
 				m_NamedValue = ""
-				m_flLiteralValue = 1.0
+				m_flLiteralValue = 0.75
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -178,8 +182,8 @@
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
-				m_flRandomMin = 1.15
-				m_flRandomMax = 1.65
+				m_flRandomMin = 1.5
+				m_flRandomMax = 2.0
 				m_nRandomMode = "PF_RANDOM_MODE_CONSTANT"
 				m_flLOD0 = 0.0
 				m_flLOD1 = 0.0
@@ -315,6 +319,7 @@
 			}
 			m_nOutputField = "12"
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_ADD_TO_CURRENT_VALUE"
 		},
 		{
 			_class = "C_INIT_InitVec"
@@ -578,35 +583,25 @@
 					[
 						{
 							x = 0.0
-							y = 0.0
-							m_flSlopeIncoming = 13.118811
-							m_flSlopeOutgoing = 13.118811
-						},
-						{
-							x = 0.152453
 							y = 2.0
-							m_flSlopeIncoming = 1.1872
-							m_flSlopeOutgoing = 1.1872
+							m_flSlopeIncoming = -1.484342
+							m_flSlopeOutgoing = -1.484342
 						},
 						{
-							x = 0.408356
-							y = 0.4848
-							m_flSlopeIncoming = -2.359751
-							m_flSlopeOutgoing = -2.359751
+							x = 0.58531
+							y = 1.1312
+							m_flSlopeIncoming = -2.0
+							m_flSlopeOutgoing = -2.0
 						},
 						{
 							x = 1.0
 							y = 0.0
-							m_flSlopeIncoming = -0.819411
-							m_flSlopeOutgoing = -0.819411
+							m_flSlopeIncoming = -2.727821
+							m_flSlopeOutgoing = -2.727821
 						},
 					]
 					m_tangents = 
 					[
-						{
-							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
-							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
-						},
 						{
 							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
 							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
@@ -673,26 +668,20 @@
 						{
 							x = 0.0
 							y = 0.0
-							m_flSlopeIncoming = 6.757907
-							m_flSlopeOutgoing = 6.757907
+							m_flSlopeIncoming = 7.945108
+							m_flSlopeOutgoing = 7.945108
 						},
 						{
 							x = 0.176954
-							y = 1.19584
-							m_flSlopeIncoming = 2.940262
-							m_flSlopeOutgoing = 2.940262
-						},
-						{
-							x = 0.582588
-							y = 1.71296
-							m_flSlopeIncoming = 0.977054
-							m_flSlopeOutgoing = 0.977054
+							y = 1.40592
+							m_flSlopeIncoming = 1.419478
+							m_flSlopeOutgoing = 1.419478
 						},
 						{
 							x = 1.0
 							y = 2.0
-							m_flSlopeIncoming = 0.687665
-							m_flSlopeOutgoing = 0.687665
+							m_flSlopeIncoming = 0.721807
+							m_flSlopeOutgoing = 0.721807
 						},
 					]
 					m_tangents = 
@@ -702,16 +691,12 @@
 							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
 						},
 						{
-							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
-							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+							m_nIncomingTangent = "CURVE_TANGENT_FREE"
+							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
 						},
 						{
-							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
-							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
-						},
-						{
-							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
-							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+							m_nIncomingTangent = "CURVE_TANGENT_FREE"
+							m_nOutgoingTangent = "CURVE_TANGENT_MIRROR"
 						},
 					]
 					m_vDomainMins = [ 0.0, 0.0 ]
@@ -927,7 +912,6 @@
 				}
 			}
 			m_nOutputField = "21"
-			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_Decay"
@@ -943,7 +927,13 @@
 					m_model = resource:"particles/smoke/smoke_ring.vmdl"
 				},
 			]
-			m_hOverrideMaterial = resource:"particles/smoke/smoke.vmat"
+			m_bOrientZ = true
+			m_bDisableShadows = true
+		},
+		{
+			_class = "C_OP_RenderSprites"
+			m_hTexture = resource:"materials/particles/particle_ring_soft_inner.vtex"
+			m_bDisableOperator = true
 		},
 	]
 }
