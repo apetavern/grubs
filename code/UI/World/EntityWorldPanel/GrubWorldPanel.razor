@@ -1,7 +1,7 @@
 @namespace Grubs.UI
 @inherits EntityWorldPanel
 
-@if (Entity is not Grub grub || !grub.IsValid() || Game.LocalPawn is not Grubs.Player player)
+@if (Entity is not Grub grub || !grub.IsValid())
 {
     return;
 }
@@ -10,7 +10,7 @@
     @{
         <img src="avatar:@Grub.Player.SteamId" class="avatar @DisplayAvatar()" />
     }
-    <label>@Grub.Name</label>
+    <label class="name">@Grub.Name</label>
     <label>@((int)MathF.Ceiling(_health))</label>
 </root>
 
@@ -19,7 +19,7 @@
     public Player LocalPlayer => Game.LocalPawn as Player;
 
     private float _health;
-        private const float _transitionRate = 50f;
+    private float _transitionRate = 50f;
 
     public GrubWorldPanel(Grub grub) : base(grub, Vector3.Up * 50f)
     {
@@ -32,17 +32,15 @@
 
         if (_health != Grub.Health)
         {
-            int delta = Grub.Health < _health ? -1 : 1;
-            float health = _health + (delta * Time.Delta * _transitionRate);
+            var delta = Grub.Health < _health ? -1 : 1;
+            var health = _health + (delta * Time.Delta * _transitionRate);
             _health = health.Clamp(Math.Min(_health, Grub.Health), Math.Max(_health, Grub.Health));
         }
     }
 
     private string DisplayAvatar()
     {
-        if (LocalPlayer.GrubsCamera.Distance < 512f)
-            return "show";
-        return "";
+        return LocalPlayer.GrubsCamera.Distance < 512f ? "show" : "";
     }
 
     protected override int BuildHash()
@@ -65,6 +63,12 @@
                 opacity: 1;
             }
         }
+        
+        .name {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+        }
 
         label,
         img {
@@ -78,9 +82,6 @@
             text-stroke: 4px black;
             margin: 2px 0;
             max-width: 500px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            word-break: break-all;
             text-align: center;
         }
 
