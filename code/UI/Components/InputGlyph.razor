@@ -1,4 +1,5 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
 
 <root />
 
@@ -20,35 +21,35 @@
     {
         switch (name)
         {
-            case "button":
-                {
-                    SetButton(value);
-                    Update();
+        case "button":
+        {
+            SetButton(value);
+            Update();
 
-                    break;
-                }
+            break;
+        }
 
-            case "size":
-                {
-                    InputGlyphSize.TryParse(value, true, out _inputGlyphSize);
-                    Update();
+        case "size":
+        {
+            InputGlyphSize.TryParse(value, true, out _inputGlyphSize);
+            Update();
 
-                    break;
-                }
+            break;
+        }
 
-            case "style":
-                {
-                    _glyphStyle = value switch
-                    {
-                        "knockout" => GlyphStyle.Knockout,
-                        "light" => GlyphStyle.Light,
-                        "dark" => GlyphStyle.Dark,
-                        _ => _glyphStyle
-                    };
+        case "style":
+        {
+            _glyphStyle = value switch
+            {
+                "knockout" => GlyphStyle.Knockout,
+                "light" => GlyphStyle.Light,
+                "dark" => GlyphStyle.Dark,
+                _ => _glyphStyle
+                };
 
-                    Update();
-                    break;
-                }
+            Update();
+            break;
+        }
         }
 
         base.SetProperty(name, value);

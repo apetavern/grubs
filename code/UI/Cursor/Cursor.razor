@@ -1,4 +1,5 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
 
 <root>
     <img src="textures/ui/cursor.png" />
@@ -31,7 +32,7 @@
 
         var isEnabled = _instance._references.Any();
 
-        // Root panel handles all pointer events for us.
+    // Root panel handles all pointer events for us.
         _instance.SetClass("hide", !isEnabled);
     }
 

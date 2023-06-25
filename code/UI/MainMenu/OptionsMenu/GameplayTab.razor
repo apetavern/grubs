@@ -1,38 +1,40 @@
 ﻿@using Grubs.Bots
 @using System.Linq;
+
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
 
 <root>
     <label>Gameplay</label>
     <div>
-		<button 
-			@onclick=@(() => AddBot())
-			class="options-sidebar-entry true"
-			icon="smart_toy"
-			text="Add Bot" />
+        <button
+            @onclick=@(() => AddBot())
+            class="options-sidebar-entry true"
+            icon="smart_toy"
+            text="Add Bot" />
     </div>
-	<div>
-		<button @onclick=@(() => RemoveBot())
-			class="options-sidebar-entry true"
-			icon="delete_forever"
-			text="Remove Bot" />
-	</div>
+    <div>
+        <button @onclick=@(() => RemoveBot())
+            class="options-sidebar-entry true"
+            icon="delete_forever"
+            text="Remove Bot" />
+    </div>
 </root>
 
 @code {
 
-	private void AddBot( )
-	{
-		GrubsBot.CreateGrubsBot(1);
-	}
+    private void AddBot()
+    {
+        GrubsBot.CreateGrubsBot(1);
+    }
 
-	private void RemoveBot( )
-	{
-		if (Game.Clients.Where(c => c.IsBot).Any())
-		{
-			Game.Clients.Where(c => c.IsBot).FirstOrDefault().Kick();
-		}
-	}
+    private void RemoveBot()
+    {
+        if (Game.Clients.Where(c => c.IsBot).Any())
+        {
+            Game.Clients.Where(c => c.IsBot).FirstOrDefault().Kick();
+        }
+    }
 }
 
 <style>

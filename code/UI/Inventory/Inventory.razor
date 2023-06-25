@@ -1,18 +1,19 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
 
 @if (Game.LocalPawn is not Grubs.Player player)
 {
     return;
 }
 
-<root class="@( _isOpen ? "open" : "" )">
+<root class="@(_isOpen ? "open" : "")">
     <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
         @{
             var sortedWeapons = player.Inventory.Weapons.OrderByDescending(w => w.WeaponType == WeaponType.Weapon);
             @foreach (var weapon in sortedWeapons)
             {
-                <InventorySlot Weapon=@weapon @onmouseover=@( () => _hoveredWeapon = weapon ) @onmouseout=@( () => _hoveredWeapon = null ) @onclick=@( () => { if ( weapon.HasAmmo() ) player.ActiveWeaponInput = weapon; } ) />
+                <InventorySlot Weapon=@weapon @onmouseover=@(() => _hoveredWeapon = weapon) @onmouseout=@(() => _hoveredWeapon = null) @onclick=@(() => { if (weapon.HasAmmo()) player.ActiveWeaponInput = weapon; }) />
             }
         }
     </div>

@@ -1,11 +1,12 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
 
 @attribute [StyleSheet("/UI/MainMenu/OptionsMenu/OptionsMenu.scss")]
 
 <root>
     <div class="options-container">
         <div class="options-sidebar">
-            <button 
+            <button
                 @onclick=@(() => SetActiveTab(Tab.Terrain))
                 class="options-sidebar-entry @IsSelected(Tab.Terrain)"
                 icon="landscape"
@@ -15,28 +16,28 @@
                 class="options-sidebar-entry @IsSelected(Tab.Gameplay)"
                 icon="gamepad"
                 text="Gameplay" />
-            <button 
-                @onclick=@(() => SetActiveTab(Tab.Weapons)) 
+            <button
+                @onclick=@(() => SetActiveTab(Tab.Weapons))
                 class="options-sidebar-entry @IsSelected(Tab.Weapons)"
                 icon="whatshot"
                 text="Weapons" />
         </div>
         @switch (CurrentTab)
         {
-            case Tab.Terrain:
-                <div class="options-tab">
-                    <TerrainTab />
-                </div>
-                break;
-            case Tab.Gameplay:
-                <div class="options-tab"><GameplayTab/></div>
-                break;
-            case Tab.Weapons:
-                <div class="options-tab">Weapons</div>
-                break;
-            default:
-                <div>How did you get here??</div>
-                break;
+        case Tab.Terrain:
+            <div class="options-tab">
+                <TerrainTab />
+            </div>
+            break;
+        case Tab.Gameplay:
+            <div class="options-tab"><GameplayTab /></div>
+            break;
+        case Tab.Weapons:
+            <div class="options-tab">Weapons</div>
+            break;
+        default:
+            <div>How did you get here??</div>
+            break;
         }
     </div>
 </root>
@@ -51,18 +52,18 @@
 
     private Tab CurrentTab = Tab.Terrain;
 
-    private void SetActiveTab( Tab tab )
+    private void SetActiveTab(Tab tab)
     {
         CurrentTab = tab;
     }
 
-    private string IsSelected( Tab tab )
+    private string IsSelected(Tab tab)
     {
         return CurrentTab == tab ? "tab-selected" : "";
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( CurrentTab );
+        return HashCode.Combine(CurrentTab);
     }
 }

@@ -1,5 +1,5 @@
-@inherits EntityWorldPanel
 @namespace Grubs.UI
+@inherits EntityWorldPanel
 
 <root>
     <div class="fill" style="height: @FuelPercentageRemaining()%;" />
@@ -8,7 +8,8 @@
 @code {
     private JetpackComponent _jetpackComponent;
 
-    public FuelWorldPanel(Grub grub, JetpackComponent jetpackComponent) : base(grub, Vector3.Backward * 30f) {
+    public FuelWorldPanel(Grub grub, JetpackComponent jetpackComponent) : base(grub, Vector3.Backward * 30f)
+    {
         PanelBounds = new(0, -500, 100, 800);
         _jetpackComponent = jetpackComponent;
     }

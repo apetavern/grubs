@@ -1,5 +1,5 @@
-@inherits EntityWorldPanel
 @namespace Grubs.UI
+@inherits EntityWorldPanel
 
 @if (Entity is not Grub grub || !grub.IsValid() || Game.LocalPawn is not Grubs.Player player)
 {
@@ -19,7 +19,7 @@
     public Player LocalPlayer => Game.LocalPawn as Player;
 
     private float _health;
-    private const float _transitionRate = 50f;
+        private const float _transitionRate = 50f;
 
     public GrubWorldPanel(Grub grub) : base(grub, Vector3.Up * 50f)
     {

@@ -1,4 +1,5 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
 
 <root class="@(!Weapon.HasAmmo() ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>

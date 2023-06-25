@@ -1,5 +1,5 @@
-@inherits Sandbox.UI.WorldPanel
 @namespace Grubs.UI
+@inherits Sandbox.UI.WorldPanel
 
 <root>
     <img src="materials/reticle/reticle.png" />
@@ -35,8 +35,8 @@
         var muzzle = activeGrub.ActiveWeapon.GetAttachment("muzzle");
 
         var reticlePosition = muzzle is not null ?
-        muzzle.Value.Position + muzzle.Value.Rotation.Forward * 80f :
-        activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
+            muzzle.Value.Position + muzzle.Value.Rotation.Forward * 80f :
+            activeGrub.EyePosition + activeGrub.EyeRotation.Forward * 80f * activeGrub.Facing;
 
         Position = reticlePosition;
         Position = Position.WithY(-33);

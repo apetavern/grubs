@@ -1,14 +1,14 @@
-@inherits Sandbox.UI.WorldPanel
 @namespace Grubs.UI
+@inherits Sandbox.UI.WorldPanel
 
 <root>
     <label
-    class="@(_isHeal ? "heal" : "damage")"
-    text=@FormatDamage() />
+        class="@(_isHeal ? "heal" : "damage")"
+        text=@FormatDamage() />
 </root>
 
 @code {
-    private const float _riseSpeed = 5;
+        private const float _riseSpeed = 5;
     private Vector3 _offset = Vector3.Up * 64;
 
     private float _damage;
