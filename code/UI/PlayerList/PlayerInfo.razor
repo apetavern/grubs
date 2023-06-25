@@ -7,8 +7,8 @@
         <label text=@Player.SteamName class="name" style="font-color: @Player.Color.Hex;" />
         <div class="health">
             <div
-            class="fill"
-            style="background: linear-gradient(to top, @Player.Color.Hex, @Player.Color.Lighten(-0.3f).Hex); width: @(Player.GetHealthPercentage)%;" />
+                class="fill"
+                style="background: linear-gradient(to bottom, @Player.Color.Hex, @Player.Color.Lighten(-0.3f).Hex); width: @(Player.GetHealthPercentage)%;" />
         </div>
     </div>
     @if (Player.IsDisconnected)
