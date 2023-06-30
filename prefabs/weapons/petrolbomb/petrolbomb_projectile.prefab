@@ -40,6 +40,10 @@
           "DestructionRadius": {
             "Type": "Single",
             "Value": "100"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "35"
           }
         }
       },

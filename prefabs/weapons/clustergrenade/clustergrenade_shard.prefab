@@ -13,7 +13,7 @@
         "Keys": {
           "MaxExplosionDamage": {
             "Type": "Single",
-            "Value": "35"
+            "Value": "15"
           },
           "ExplosionForceMultiplier": {
             "Type": "Single",
