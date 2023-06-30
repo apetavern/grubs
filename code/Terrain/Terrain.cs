@@ -49,10 +49,8 @@ public partial class Terrain : Entity
 			materials.ElementAt( 0 ).Key,
 			materials.ElementAt( 1 ).Key );
 
-		SubtractBackground(
-			GrubsConfig.TerrainLength,
-			(GrubsConfig.TerrainLength / resolution).CeilToInt(),
-			(GrubsConfig.TerrainHeight / resolution).CeilToInt() );
+		SubtractBackgroundBox( GrubsConfig.TerrainLength, (GrubsConfig.TerrainHeight / resolution).CeilToInt() );
+		SubtractBackground( (GrubsConfig.TerrainLength / resolution).CeilToInt() );
 		SubtractForeground( (GrubsConfig.TerrainLength / resolution).CeilToInt() );
 	}
 
