@@ -84,7 +84,7 @@ public class SquirmMechanic : ControllerMechanic
 
 			var dest = (ctrl.Position + ctrl.Velocity * Time.Delta).WithZ( ctrl.Position.z );
 			var pm = ctrl.TraceBBox( ctrl.Position, dest );
-			
+
 			if ( pm.Fraction == 1 )
 			{
 				ctrl.Position = pm.EndPosition;
@@ -108,6 +108,9 @@ public class SquirmMechanic : ControllerMechanic
 
 		LastGroundEntity = GroundEntity;
 		GroundEntity = null;
+
+		Controller.LastGroundHeight = Controller.Position.z;
+
 		SurfaceFriction = 1.0f;
 	}
 
@@ -177,7 +180,7 @@ public class SquirmMechanic : ControllerMechanic
 		Controller.GroundNormal = tr.Normal;
 
 		SurfaceFriction = tr.Surface.Friction * 1.25f;
-		if ( SurfaceFriction > 1 ) 
+		if ( SurfaceFriction > 1 )
 			SurfaceFriction = 1;
 
 		SetGroundEntity( tr.Entity );

@@ -23,6 +23,7 @@ public partial class GrubController : EntityComponent<Grub>
 	[Net, Predicted]
 	public Entity GroundEntity { get; set; }
 	public Entity LastGroundEntity { get; set; }
+	public float LastGroundHeight { get; set; }
 	public Vector3 GroundNormal { get; set; }
 	public float CurrentGroundAngle { get; set; }
 
