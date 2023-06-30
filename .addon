@@ -465,7 +465,7 @@
     ],
     "CsProjName": "",
     "Summary": "A worms-inspired artillery game for s\u0026box with randomly generated levels.",
-    "Description": "Grubs (in development) by Ape Tavern\n\nLeave your feedback @ discord.gg/apetavern\n\nCredits:\nGooman\nTrundler\nMatt944\nShadowBrain\nxezno\nJammieDodger\nmatek\nWillow\nPukes\n\nSpecial thanks for Ziks for 2D SDF Terrain library!",
+    "Description": "Grubs (in development) by Ape Tavern\n\nLeave your feedback @ discord.gg/apetavern\n\nCredits:\nGooman\nTrundler\nMatt944\nShadowBrain\nxezno\nJammie\nmatek\nWillow\nPukes\n\nSpecial thanks for Ziks for 2D SDF Terrain library!",
     "Public": true,
     "ReplaceTags": "",
     "Physics": {
