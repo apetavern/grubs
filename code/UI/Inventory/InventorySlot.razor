@@ -1,7 +1,11 @@
 @namespace Grubs.UI
 @inherits Sandbox.UI.Panel
 
-<root class="@(!Weapon.HasAmmo() ? "disabled" : "")">
+@if ( Game.LocalPawn is not Player player )
+{
+    return;
+}
+<root class="@(!Weapon.HasAmmo() || !player.IsTurn ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>
     <img src=@Weapon.Icon />
 </root>
@@ -16,7 +20,8 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Weapon.HasAmmo(), GetAmmoString());
+        var player = Game.LocalPawn as Player;
+        return HashCode.Combine(Weapon.HasAmmo(), GetAmmoString(), player.IsTurn);
     }
 }
 

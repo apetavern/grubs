@@ -13,7 +13,12 @@
             var sortedWeapons = player.Inventory.Weapons.OrderByDescending(w => w.WeaponType == WeaponType.Weapon);
             @foreach (var weapon in sortedWeapons)
             {
-                <InventorySlot Weapon=@weapon @onmouseover=@(() => _hoveredWeapon = weapon) @onmouseout=@(() => _hoveredWeapon = null) @onclick=@(() => { if (weapon.HasAmmo()) player.ActiveWeaponInput = weapon; }) />
+                <InventorySlot 
+                    Weapon=@weapon 
+                    @onmouseover=@(() => _hoveredWeapon = weapon) 
+                    @onmouseout=@(() => _hoveredWeapon = null)
+                    @onclick=@(() => { if (weapon.HasAmmo() && player.IsTurn) player.ActiveWeaponInput = weapon; }) 
+                />
             }
         }
     </div>
@@ -22,7 +27,7 @@
 @code {
     private bool _isOpen;
     private Weapon _hoveredWeapon;
-    private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && player.IsTurn && Input.Down(InputAction.Inventory);
+    private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && Input.Down(InputAction.Inventory);
     private readonly int _totalAmmo = (Game.LocalPawn as Grubs.Player).Inventory.Weapons.Sum(x => x.Ammo);
 
     public override void Tick()
