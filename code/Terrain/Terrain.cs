@@ -206,7 +206,11 @@ public partial class Terrain : Entity
 	[GameEvent.Tick.Client]
 	private void ClientTick()
 	{
-		if ( TimeSinceLastWindEffect < 0.1f )
+		if ( TimeSinceLastWindEffect < 0.25f )
+			return;
+
+		// Do not show wind particles if there is no active wind.
+		if ( GamemodeSystem.Instance.ActiveWindSteps == 0 )
 			return;
 
 		var pos = GetRandomPositionInWorld( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight ).WithY( -33 );
