@@ -21,6 +21,19 @@ public partial class Terrain
 	{
 		var retryCount = 0;
 
+		if ( retryCount > 10 )
+		{
+			var unresolved = All.OfType<IResolvable>().Where( ent => !ent.Resolved );
+			Log.Warning( $"{unresolved.Count()} ENTITIES ARE NOT RESOLVED" );
+			Log.Warning( $"PLEASE REPORT THIS TO A DEVELOPER AT DISCORD.GG/APETAVERN!!!" );
+			foreach ( var r in unresolved )
+			{
+				if ( r is not Entity e )
+					return;
+				Log.Warning( e.Name );
+			}
+		}
+
 		while ( !IsResolved() || retryCount++ < maxRetries )
 			await GameTask.Delay( 300 );
 	}
