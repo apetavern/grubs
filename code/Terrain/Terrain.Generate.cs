@@ -77,10 +77,14 @@ public partial class Terrain
 
 		// Subtract from the background.
 		Array.Copy( TerrainMap, BackgroundMap, pointsX * pointsY );
-		SubtractBackground( wLength, pointsX, pointsY );
+
+		SubtractBackgroundBox( wLength, pointsX );
 
 		// Populate Density Map for unique terrain features.
 		var fgMaterials = GetActiveMaterials( MaterialsConfig.Default );
+
+		var toSubtract = new List<Vector2>();
+
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY; y++ )
@@ -96,18 +100,36 @@ public partial class Terrain
 				if ( !TerrainMap[x, y] )
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
-					// TODO: figure out best way to subtract
-					SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
-					// SubtractBox( midpoint - 8f, midpoint + 8f, 4f );
+					toSubtract.Add( midpoint );
 				}
 			}
 		}
+
+		toSubtract.Sort( ( a, b ) => (a.GetHashCode() & 0xff) - (b.GetHashCode() & 0xff) );
+
+		foreach ( var midpoint in toSubtract )
+		{
+			// TODO: figure out best way to subtract
+			SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
+		}
+
+		SubtractBackground( pointsX );
 	}
 
-	void SubtractBackground( int wLength, int pointsX, int pointsY )
+	void SubtractBackgroundBox( int wLength, int pointsY )
+	{
+		var bb = new Vector2( 0, maxY * resolution );
+		var aa = new Vector2( wLength, pointsY * resolution );
+		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
+	}
+
+	void SubtractBackground( int pointsX )
 	{
 		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );
 		var bgMaterials = GetActiveMaterials( materialsConfig );
+
+		var toSubtract = new List<Vector2>();
+
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY + 1; y++ )
@@ -115,14 +137,17 @@ public partial class Terrain
 				if ( !BackgroundMap[x, y] )
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
-					SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
+					toSubtract.Add( midpoint );
 				}
 			}
 		}
 
-		var bb = new Vector2( 0, maxY * resolution );
-		var aa = new Vector2( wLength, pointsY * resolution );
-		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
+		toSubtract.Sort( ( a, b ) => Random.Shared.Int( 2 ) * 2 - 1 );
+
+		foreach ( var midpoint in toSubtract )
+		{
+			SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
+		}
 	}
 
 	void SubtractForeground( int pointsX )
