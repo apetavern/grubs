@@ -105,11 +105,11 @@ public partial class FreeForAll : Gamemode
 		}
 		else if ( Game.Clients.Where( C => C.IsBot ).Any() )
 		{
-			BBox worldbox = new BBox();
-			worldbox.Maxs = new Vector3( Terrain.WorldTextureLength / 2f, 10f, Terrain.WorldTextureHeight );
-			worldbox.Mins = new Vector3( -Terrain.WorldTextureLength / 2f, -10f, 0 );
-
-			//DebugOverlay.Box( worldbox, Color.Red, 100f );
+			var worldbox = new BBox
+			{
+				Maxs = new Vector3( Terrain.WorldTextureLength / 2f, 10f, Terrain.WorldTextureHeight ),
+				Mins = new Vector3( -Terrain.WorldTextureLength / 2f, -10f, 0 )
+			};
 
 			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 50f, standableAngle: 50f, save: false );
 		}
@@ -275,7 +275,7 @@ public partial class FreeForAll : Gamemode
 	/// <summary>
 	/// Handle setting up the new player's turn.
 	/// </summary>
-	private async Task SetupTurn()
+	internal override async Task SetupTurn()
 	{
 		await base.SetupTurn();
 	}
@@ -314,7 +314,7 @@ public partial class FreeForAll : Gamemode
 		return false;
 	}
 
-	private void RotateActivePlayer()
+	public void RotateActivePlayer()
 	{
 		if ( !PlayerTurnQueue.Any() )
 		{

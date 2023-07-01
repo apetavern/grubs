@@ -94,6 +94,7 @@ public partial class Grub
 
 	private async Task Die()
 	{
+		Log.Info( $"{Name} Die" );
 		if ( DeathReason.FromKillTrigger )
 		{
 			FinishDie();
@@ -113,7 +114,7 @@ public partial class Grub
 
 			await GameTask.Delay( 1025 );
 
-			ExplosionHelper.Explode( Position, this, 50f );
+			ExplosionHelper.Explode( Position, this, 50f, 65f, 25f );
 			Sound.FromWorld( "explosion_short_tail", Position );
 			plunger.Delete();
 		}

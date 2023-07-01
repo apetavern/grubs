@@ -1,6 +1,4 @@
-﻿using Sandbox;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 public partial class Player : Entity
 {
@@ -138,6 +136,17 @@ public partial class Player : Entity
 	public void PickNextGrub()
 	{
 		RotateGrubs();
+
+		// hack
+		if ( Grubs.All( grub => grub.LifeState == LifeState.Dead ) )
+		{
+			if ( GamemodeSystem.Instance is not FreeForAll gamemode )
+			{
+				return;
+			}
+
+			gamemode.RotateActivePlayer();
+		}
 
 		while ( ActiveGrub.LifeState is LifeState.Dead or LifeState.Dying )
 		{
