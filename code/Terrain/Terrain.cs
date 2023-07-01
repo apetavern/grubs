@@ -30,7 +30,7 @@ public partial class Terrain : Entity
 		WorldTextureLength = 0;
 		WorldTextureHeight = 0;
 
-		SdfWorld.Clear();
+		SdfWorld.ClearAsync();
 		InitializeSdfWorld();
 	}
 
@@ -39,7 +39,7 @@ public partial class Terrain : Entity
 	/// </summary>
 	public void Refresh()
 	{
-		SdfWorld.Clear();
+		SdfWorld.ClearAsync();
 
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
