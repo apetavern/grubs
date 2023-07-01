@@ -28,7 +28,7 @@ public partial class Terrain
 
 	private float noiseMin = 0.45f;
 	private float noiseMax = 0.55f;
-	private float noiseZoom = 2f;
+	private float noiseZoom => GrubsConfig.TerrainNoiseZoom;
 
 	private float resolution = 8f;
 

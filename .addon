@@ -377,7 +377,8 @@
         "Description": "The amount of zoom applied to the Perlin noise.",
         "Group": "Terrain",
         "Minimum": 1,
-        "Maximum": 4
+        "Maximum": 5,
+        "Step": 1
       },
       {
         "DisplayType": "Choice",
