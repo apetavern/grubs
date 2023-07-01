@@ -325,15 +325,9 @@ public partial class FreeForAll : Gamemode
 		}
 
 		ActivePlayer = PlayerTurnQueue.Dequeue();
-		Log.Info( ActivePlayer.Name );
 		while ( !ActivePlayer.IsAvailableForTurn )
 		{
 			ActivePlayer = PlayerTurnQueue.Dequeue();
-			Log.Info( $"Looping for {ActivePlayer}" );
-			if ( ActivePlayer is not null )
-			{
-				Log.Info( ActivePlayer.IsAvailableForTurn );
-			}
 		}
 
 		ActivePlayer.PickNextGrub();
