@@ -454,6 +454,30 @@
         "Group": "Terrain"
       },
       {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_amplitude",
+        "DisplayName": "Terrain Amplitude",
+        "DefaultValue": "48",
+        "Description": "The strength of the curves in the terrain\u0027s heightmap.",
+        "Group": "Terrain",
+        "Minimum": 16,
+        "Maximum": 128,
+        "Step": 1
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_frequency",
+        "DisplayName": "Terrain Frequency",
+        "DefaultValue": "0.5",
+        "Description": "The frequency of the curves in the terrain\u0027s heightmap.",
+        "Group": "Terrain",
+        "Minimum": 0.1,
+        "Maximum": 10,
+        "Step": 0.1
+      },
+      {
         "DisplayType": "Boolean",
         "Choices": [],
         "ConVarName": "gr_spawn_late_joiners",

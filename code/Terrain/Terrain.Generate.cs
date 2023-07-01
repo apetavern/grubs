@@ -23,8 +23,8 @@ public partial class Terrain
 	private float[,] DensityMap;
 	private bool[,] BackgroundMap;
 
-	private float amplitude => 48f;
-	private float frequency => 0.5f;
+	private float amplitude => GrubsConfig.TerrainAmplitude;
+	private float frequency => GrubsConfig.TerrainFrequency;
 
 	private float noiseMin = 0.45f;
 	private float noiseMax = 0.55f;

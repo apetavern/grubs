@@ -164,4 +164,16 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar.Replicated( "terrain_texture" )]
 	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Grubs;
+
+	/// <summary>
+	/// The strength of the curves in the terrain's heightmap.
+	/// </summary>
+	[ConVar.Replicated( "terrain_amplitude" )]
+	public static float TerrainAmplitude { get; set; } = 48f;
+
+	/// <summary>
+	/// The frequency of the curves in the terrain's heightmap.
+	/// </summary>
+	[ConVar.Replicated( "terrain_frequency" )]
+	public static float TerrainFrequency { get; set; } = 0.5f;
 }
