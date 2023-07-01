@@ -21,7 +21,7 @@ public partial class Terrain
 	{
 		var retryCount = 0;
 
-		while ( !IsResolved() || retryCount++ < maxRetries )
+		while ( !IsResolved() && retryCount++ < maxRetries )
 		{
 			if ( retryCount > 10 )
 			{
