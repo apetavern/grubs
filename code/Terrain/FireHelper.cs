@@ -32,7 +32,7 @@ public static class FireHelper
 [Category( "Weapons" )]
 public class FireEntity : ModelEntity, IResolvable
 {
-	public bool Resolved => _timeUntilExpire;
+	public bool Resolved => _timeUntilExpire || IsDormant;
 	public Vector3 Gravity;
 
 	private const float fireSize = 7.5f;

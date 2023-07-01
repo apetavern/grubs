@@ -79,7 +79,7 @@ public partial class Weapon : AnimatedEntity, IResolvable
 
 	public Grub Grub => Owner as Grub;
 
-	public bool Resolved => !IsFiring() && !IsCharging();
+	public bool Resolved => !IsFiring() && !IsCharging() || IsDormant;
 
 	public bool HasChargesRemaining => CurrentUses < Charges;
 

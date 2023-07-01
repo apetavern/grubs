@@ -27,7 +27,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		}
 	}
 
-	public bool Resolved => Controller.Velocity.IsNearlyZero( 0.1f ) || LifeState is LifeState.Dead or LifeState.Dying || HasBeenDamaged;
+	public bool Resolved => Controller.Velocity.IsNearlyZero( 0.1f ) || LifeState is LifeState.Dead or LifeState.Dying || HasBeenDamaged || IsDormant;
 
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
 

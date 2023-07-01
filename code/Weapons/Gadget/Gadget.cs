@@ -62,7 +62,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool IsResolved()
 	{
-		return GetSortedComponents().All( c => c.IsResolved() );
+		return GetSortedComponents().All( c => c.IsResolved() ) || IsDormant;
 	}
 
 	public void OnUse( Grub grub, Weapon weapon, int charge )
