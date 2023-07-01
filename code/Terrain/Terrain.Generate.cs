@@ -23,8 +23,8 @@ public partial class Terrain
 	private float[,] DensityMap;
 	private bool[,] BackgroundMap;
 
-	private float amplitude = 36f;
-	private float frequency = 3.2f;
+	private float amplitude => 48f;
+	private float frequency => 0.5f;
 
 	private float noiseMin = 0.45f;
 	private float noiseMax = 0.55f;
@@ -61,7 +61,7 @@ public partial class Terrain
 		maxY = 0;
 		for ( var x = 0; x < pointsX; x++ )
 		{
-			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 1024f).FloorToInt();
+			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 512f).FloorToInt();
 			if ( NoiseMap[x] >= pointsY )
 				NoiseMap[x] = pointsY - 1;
 			TerrainMap[x, NoiseMap[x]] = true;
