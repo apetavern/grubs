@@ -112,7 +112,7 @@ public partial class Terrain
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material )
 	{
 		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
-		world.Add( sdf, material );
+		world.AddAsync( sdf, material );
 	}
 
 	/// <summary>
@@ -127,6 +127,6 @@ public partial class Terrain
 		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
 		if ( offset )
 			sdf = sdf.Translate( new Vector2( -lengthOffset, heightOffset ) );
-		world.Subtract( sdf, material );
+		world.SubtractAsync( sdf, material );
 	}
 }
