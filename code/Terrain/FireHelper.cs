@@ -44,7 +44,7 @@ public class FireEntity : ModelEntity, IResolvable
 
 	public FireEntity()
 	{
-
+		Transmit = TransmitType.Always;
 	}
 
 	public FireEntity( Vector3 startPosition, Vector3 moveDirection )
