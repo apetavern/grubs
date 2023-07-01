@@ -39,6 +39,7 @@ public class FireEntity : ModelEntity, IResolvable
 	private Particles FireParticle { get; set; }
 	private Vector3 MoveDirection { get; set; }
 	private TimeUntil _timeUntilExpire;
+	private TimeSince _timeSinceSubtraction;
 	private Sound _burningSound;
 
 	public FireEntity()
@@ -136,9 +137,14 @@ public class FireEntity : ModelEntity, IResolvable
 				grub.ApplyAbsoluteImpulse( ((grub.Position - Position).Normal * 32f).WithY( 0f ) );
 		}
 
-		var terrain = GrubsGame.Instance.Terrain;
-		var materials = terrain.GetActiveMaterials( MaterialsConfig.Destruction );
-		terrain.SubtractCircle( new Vector2( Position.x, Position.z ), fireSize, materials );
-		terrain.ScorchCircle( new Vector2( Position.x, Position.z ), fireSize + 4f );
+		if ( _timeSinceSubtraction > 0.1f )
+		{
+			var terrain = GrubsGame.Instance.Terrain;
+			var materials = terrain.GetActiveMaterials( MaterialsConfig.Destruction );
+			terrain.SubtractCircle( new Vector2( Position.x, Position.z ), fireSize, materials );
+			terrain.ScorchCircle( new Vector2( Position.x, Position.z ), fireSize + 4f );
+			_timeSinceSubtraction = 0f;
+		}
+
 	}
 }
