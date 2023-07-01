@@ -96,7 +96,7 @@ public partial class FreeForAll : Gamemode
 		if ( !PlayerTurnQueue.Any() )
 			await CheckSuddenDeath();
 
-		await Terrain.UntilResolve();
+		await Terrain.UntilResolve( 30 );
 
 		if ( await HasGameWinner() )
 		{
@@ -169,7 +169,7 @@ public partial class FreeForAll : Gamemode
 				continue;
 
 			await ShowDamagedGrub( damagedGrub );
-			await Terrain.UntilResolve();
+			await Terrain.UntilResolve( 30 );
 		}
 	}
 
@@ -195,7 +195,7 @@ public partial class FreeForAll : Gamemode
 		await CheckCrateSpawn( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
 		await CheckCrateSpawn( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
-		await Terrain.UntilResolve();
+		await Terrain.UntilResolve( 30 );
 
 		CameraTarget = null;
 	}
