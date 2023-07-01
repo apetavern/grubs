@@ -1,5 +1,6 @@
 {
-  "MenuIcon": "models/cosmetics/apehead/apehead.vmdl_c.png",
+  "CloudIdent": "",
+  "MenuIcon": "models/cosmetics/apehead/apehead.vmdl.png",
   "Title": "Ape Head",
   "Subtitle": "",
   "Category": "Hair",
