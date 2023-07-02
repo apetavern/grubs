@@ -105,7 +105,7 @@ public partial class Terrain
 			}
 		}
 
-		toSubtract.Sort( ( a, b ) => (a.GetHashCode() & 0xff) - (b.GetHashCode() & 0xff) );
+		ShuffleSubtractList( toSubtract );
 
 		foreach ( var midpoint in toSubtract )
 		{
@@ -142,11 +142,22 @@ public partial class Terrain
 			}
 		}
 
-		toSubtract.Sort( ( a, b ) => Random.Shared.Int( 2 ) * 2 - 1 );
+		ShuffleSubtractList( toSubtract );
 
 		foreach ( var midpoint in toSubtract )
 		{
 			SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
+		}
+	}
+
+	private static void ShuffleSubtractList( List<Vector2> list )
+	{
+		var random = Random.Shared;
+
+		for ( var i = 0; i < list.Count; ++i )
+		{
+			var j = random.Next( i, list.Count - 1 );
+			(list[i], list[j]) = (list[j], list[i]);
 		}
 	}
 
