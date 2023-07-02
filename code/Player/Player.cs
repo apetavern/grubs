@@ -137,19 +137,19 @@ public partial class Player : Entity
 	{
 		RotateGrubs();
 
-		// hack
-		if ( Grubs.All( grub => grub.LifeState == LifeState.Dead ) )
-		{
-			if ( GamemodeSystem.Instance is not FreeForAll gamemode )
-			{
-				return;
-			}
-
-			gamemode.RotateActivePlayer();
-		}
-
 		while ( ActiveGrub.LifeState is LifeState.Dead or LifeState.Dying )
 		{
+			// hack
+			if ( Grubs.All( grub => grub.LifeState == LifeState.Dead ) )
+			{
+				if ( GamemodeSystem.Instance is not FreeForAll gamemode )
+				{
+					return;
+				}
+
+				gamemode.RotateActivePlayer();
+			}
+
 			RotateGrubs();
 		}
 	}

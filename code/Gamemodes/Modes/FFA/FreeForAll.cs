@@ -318,7 +318,7 @@ public partial class FreeForAll : Gamemode
 	{
 		if ( !PlayerTurnQueue.Any() )
 		{
-			foreach ( var player in Players )
+			foreach ( var player in Players.Where( p => p.IsAvailableForTurn ) )
 			{
 				PlayerTurnQueue.Enqueue( player );
 			}
