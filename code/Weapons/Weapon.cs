@@ -3,6 +3,8 @@
 [Prefab, Category( "Weapon" )]
 public partial class Weapon : AnimatedEntity, IResolvable
 {
+	#region Prefab
+
 	/// <summary>
 	/// The hold pose for this weapon.
 	/// </summary>
@@ -22,9 +24,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public int Charges { get; set; } = 0;
 
-	[Net]
-	public int CurrentUses { get; set; } = 0;
-
 	/// <summary>
 	/// Whether the aim reticle should be shown for this weapon.
 	/// </summary>
@@ -43,6 +42,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public bool AllowMovement { get; set; } = false;
 
+	/// <summary>
+	/// Whether this weapon should show input hints.
+	/// </summary>
 	[Prefab, Net]
 	public bool ShowInputHints { get; set; } = true;
 
@@ -53,17 +55,17 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public float DropChance { get; set; } = 1f;
 
+	/// <summary>
+	/// The WeaponType of this weapon.
+	/// </summary>
 	[Prefab, Net]
 	public WeaponType WeaponType { get; set; } = WeaponType.Weapon;
 
 	/// <summary>
-	/// The amount of uses this weapon has.
+	/// The amount of turns that must pass before this weapon can be used.
 	/// </summary>
-	[Net]
-	public int Ammo { get; set; }
-
-	[Net]
-	public bool IsChargeConsumed { get; set; } = false;
+	[Prefab, Net]
+	public int UnlockDelay { get; set; } = 0;
 
 	/// <summary>
 	/// If the weapon has a hat, override any Grub clothing.
@@ -71,11 +73,37 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public bool OverrideHat { get; set; } = true;
 
-	[Net]
-	public bool WeaponHasHat { get; set; }
-
+	/// <summary>
+	/// The inventory icon for this weapon.
+	/// </summary>
 	[Prefab, Net, ResourceType( "png" )]
 	public string Icon { get; set; }
+
+	#endregion
+
+	/// <summary>
+	/// The amount of uses this weapon has.
+	/// </summary>
+	[Net]
+	public int Ammo { get; set; }
+
+	/// <summary>
+	/// Whether or not the charge has been consumed for this weapon for the current turn.
+	/// </summary>
+	[Net]
+	public bool IsChargeConsumed { get; set; } = false;
+
+	/// <summary>
+	/// The amount of times this weapon can be used for the current turn.
+	/// </summary>
+	[Net]
+	public int CurrentUses { get; set; } = 0;
+
+	/// <summary>
+	/// Whether a weapon has a hat associated to dress the Grub in.
+	/// </summary>
+	[Net]
+	public bool WeaponHasHat { get; set; }
 
 	public Grub Grub => Owner as Grub;
 

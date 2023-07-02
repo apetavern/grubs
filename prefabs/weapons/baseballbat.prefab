@@ -62,7 +62,9 @@
           "_name": {
             "Value": "\u0022InputHintOverrideComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -121,6 +123,10 @@
       "DropChance": {
         "Type": "Single",
         "Value": "3"
+      },
+      "UnlockDelay": {
+        "Type": "Int32",
+        "Value": "1"
       }
     }
   }

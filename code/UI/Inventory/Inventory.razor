@@ -17,7 +17,7 @@
                     Weapon=@weapon 
                     @onmouseover=@(() => _hoveredWeapon = weapon) 
                     @onmouseout=@(() => _hoveredWeapon = null)
-                    @onclick=@(() => { if (weapon.HasAmmo() && player.IsTurn) player.ActiveWeaponInput = weapon; }) 
+                    @onclick=@(() => OnInventorySlotClicked(weapon)) 
                 />
             }
         }
@@ -29,6 +29,13 @@
     private Weapon _hoveredWeapon;
     private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && Input.Down(InputAction.Inventory);
     private readonly int _totalAmmo = (Game.LocalPawn as Grubs.Player).Inventory.Weapons.Sum(x => x.Ammo);
+
+    void OnInventorySlotClicked(Weapon weapon)
+    {
+        var player = Game.LocalPawn as Player;
+        if (weapon.HasAmmo() && player.IsTurn && weapon.UnlockDelay >= GamemodeSystem.Instance.RoundsPassed) 
+            player.ActiveWeaponInput = weapon;
+    }
 
     public override void Tick()
     {

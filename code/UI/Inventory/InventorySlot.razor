@@ -5,13 +5,20 @@
 {
     return;
 }
-<root class="@(!Weapon.HasAmmo() || !player.IsTurn ? "disabled" : "")">
+<root class="@(IsDisabled(player) ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>
     <img src=@Weapon.Icon />
 </root>
 
 @code {
     public Weapon Weapon { get; set; }
+
+    bool IsDisabled(Player player)
+    {
+        if (!Weapon.HasAmmo() || !player.IsTurn || Weapon.UnlockDelay > GamemodeSystem.Instance.RoundsPassed)
+            return true;
+        return false;
+    }
 
     protected string GetAmmoString()
     {
@@ -21,7 +28,7 @@
     protected override int BuildHash()
     {
         var player = Game.LocalPawn as Player;
-        return HashCode.Combine(Weapon.HasAmmo(), GetAmmoString(), player.IsTurn);
+        return HashCode.Combine(Weapon.HasAmmo(), GetAmmoString(), player.IsTurn, GamemodeSystem.Instance.RoundsPassed);
     }
 }
 

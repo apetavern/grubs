@@ -97,6 +97,9 @@ public partial class Gamemode : Entity
 	[Net]
 	public int RoundsUntilSuddenDeath { get; set; }
 
+	[Net]
+	public int RoundsPassed { get; set; } = 0;
+
 	public override void Spawn()
 	{
 		Transmit = TransmitType.Always;
@@ -161,9 +164,9 @@ public partial class Gamemode : Entity
 
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
-	internal virtual async Task SetupTurn() 
+	internal virtual async Task SetupTurn()
 	{
-		Sound.FromScreen( To.Single(ActivePlayer), "sounds/ui/ui_turn_indicator.sound" );
+		Sound.FromScreen( To.Single( ActivePlayer ), "sounds/ui/ui_turn_indicator.sound" );
 	}
 
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
@@ -171,6 +174,13 @@ public partial class Gamemode : Entity
 	internal virtual void OnPlayerJoinedLate( Player player )
 	{
 		GrubsGame.Instance.TryAssignUnusedColor( player );
+	}
+
+	internal virtual Task OnRoundPassed()
+	{
+		RoundsPassed++;
+
+		return Task.CompletedTask;
 	}
 
 	[GrubsEvent.Game.Start]

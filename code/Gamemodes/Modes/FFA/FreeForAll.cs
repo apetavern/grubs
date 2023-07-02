@@ -87,6 +87,12 @@ public partial class FreeForAll : Gamemode
 			UsedTurn = true;
 	}
 
+	internal override async Task OnRoundPassed()
+	{
+		await base.OnRoundPassed();
+		await CheckSuddenDeath();
+	}
+
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
@@ -94,7 +100,7 @@ public partial class FreeForAll : Gamemode
 		ActivePlayer.EndTurn();
 
 		if ( !PlayerTurnQueue.Any() )
-			await CheckSuddenDeath();
+			await OnRoundPassed();
 
 		await Terrain.UntilResolve( 30 );
 
@@ -398,6 +404,7 @@ public partial class FreeForAll : Gamemode
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
 			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
 			DebugOverlay.ScreenText( $"UsedTurn: {UsedTurn}", lineOffset++ );
+			DebugOverlay.ScreenText( $"RoundsPassed: {RoundsPassed}", lineOffset++ );
 		}
 	}
 
