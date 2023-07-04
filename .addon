@@ -446,6 +446,10 @@
           {
             "Value": "1",
             "Name": "Dirt"
+          },
+          {
+            "Value": "2",
+            "Name": "Cereal"
           }
         ],
         "ConVarName": "terrain_environment_type",
