@@ -99,12 +99,14 @@ public partial class FreeForAll : Gamemode
 
 		ActivePlayer.EndTurn();
 
+		await Terrain.UntilResolve( 30 );
+
+		await CleanupTurn();
+
 		if ( !PlayerTurnQueue.Any() )
 			await OnRoundPassed();
 
-		await Terrain.UntilResolve( 30 );
-
-		if ( await HasGameWinner() )
+		if ( HasGameWinner() )
 		{
 			Event.Run( GrubsEvent.Game.End );
 			return;
@@ -123,6 +125,8 @@ public partial class FreeForAll : Gamemode
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
 
+		await HandleSpawns();
+
 		RotateActivePlayer();
 
 		UsedTurn = false;
@@ -133,19 +137,7 @@ public partial class FreeForAll : Gamemode
 		await SetupTurn();
 	}
 
-	/// <summary>
-	/// Handle cleaning up the existing player's turn.
-	/// </summary>
-	private async ValueTask<bool> HasGameWinner()
-	{
-		await GameTask.DelaySeconds( 1f );
-		await DealGrubDamage();
-		await HandleCrateSpawns();
-		await HandleBarrelSpawn();
-		await HandleLateJoinerSpawn();
-
-		return CheckWinConditions();
-	}
+	private bool HasGameWinner() => CheckWinConditions();
 
 	private async Task DealGrubDamage()
 	{
@@ -279,7 +271,28 @@ public partial class FreeForAll : Gamemode
 	}
 
 	/// <summary>
-	/// Handle setting up the new player's turn.
+	/// Handle cleaning up the existing player's turn.
+	/// </summary>
+	/// <returns></returns>
+	private async Task CleanupTurn()
+	{
+		await GameTask.DelaySeconds( 1f );
+		await DealGrubDamage();
+	}
+
+	/// <summary>
+	/// Handle spawning of game elements.
+	/// </summary>
+	/// <returns></returns>
+	private async Task HandleSpawns()
+	{
+		await HandleCrateSpawns();
+		await HandleBarrelSpawn();
+		await HandleLateJoinerSpawn();
+	}
+
+	/// <summary>
+	/// Handle setting up the next player's turn.
 	/// </summary>
 	internal override async Task SetupTurn()
 	{
