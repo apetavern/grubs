@@ -1,5 +1,6 @@
 ﻿@namespace Grubs.UI
 @inherits ScenePanel
+@attribute [StyleSheet]
 
 <root />
 
@@ -24,9 +25,3 @@
         Camera.Rotation = Rotation.LookAt(terrain.Rotation.Left);
     }
 }
-
-<style>
-    TerrainPreview {
-        flex-grow: 1;
-    }
-</style>

@@ -1,0 +1,63 @@
+﻿MainMenu {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    pointer-events: all;
+
+    image {
+        width: 72px;
+        height: 72px;
+    }
+
+    .container {
+        background-color: #46225550;
+        font-family: Londrina Solid;
+        color: white;
+        flex-direction: column;
+        border-radius: 4px;
+        backdrop-filter-blur: 20px;
+    }
+
+    .header {
+        background-image: linear-gradient(90deg, #462255, #a94364);
+        height: 150px;
+        width: 100%;
+        align-items: center;
+        padding: 0px 5%;
+        justify-content: space-between;
+        font-family: Londrina Solid;
+        color: white;
+        flex-shrink: 0;
+
+        .buttons {
+            font-size: 48px;
+            font-weight: 200;
+            gap: 60px;
+        }
+    }
+
+    .right-aligned {
+        position: absolute;
+        height: 810px;
+        margin-top: auto;
+        margin-bottom: auto;
+        right: 64px;
+        width: 28%;
+        flex-direction: column;
+        top: 215px;
+        gap: 64px;
+    }
+
+    .terrain-preview {
+        width: 100%;
+        height: 256px;
+        flex-grow: 1;
+        border: 8px #a94364;
+        border-radius: 8px;
+    }
+
+    textchat {
+        width: 100%;
+        margin-top: auto;
+    }
+}
