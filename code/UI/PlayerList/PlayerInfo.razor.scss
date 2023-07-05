@@ -1,0 +1,85 @@
+﻿PlayerInfo {
+    flex-shrink: 0;
+    padding-top: 10px;
+    transition: all 300ms ease-in;
+    width: 310px;
+
+    .avatar {
+        width: 65px;
+        height: 65px;
+        border-radius: 4px;
+        flex-shrink: 0;
+    }
+
+    .name {
+        font-family: Londrina Solid;
+        font-size: 30px;
+        text-shadow: 2px 2px 0px black;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .health {
+        width: 250px;
+        height: 20px;
+        border-radius: 4px;
+        background-color: rgba(235, 235, 235, 0.24);
+
+        .fill {
+            transition: all 750ms ease-in-out;
+            height: 100%;
+            width: 100%;
+            border-radius: 4px;
+        }
+    }
+
+    .voice-icon {
+        position: absolute;
+        left: -35px;
+        transition: opacity 100ms ease-out;
+        font-family: MaterialIcons;
+        font-size: 30px;
+        color: rgb(252, 215, 52);
+        text-shadow: 2px 2px 0px black;
+        animation-duration: 1s;
+        animation-name: wiggle;
+        animation-iteration-count: infinite;
+    }
+
+    .disconnect-icon {
+        position: absolute;
+        left: -13px;
+        top: -3px;
+        font-family: MaterialIcons;
+        font-size: 30px;
+        color: red;
+        text-shadow: 2px 2px 0px black;
+    }
+
+    &.inactive {
+        opacity: 0.5;
+        transform: translateX(-3%);
+    }
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+
+    75% {
+        transform: rotate(-2deg);
+    }
+
+    100% {
+        transform: rotate(1deg);
+    }
+}

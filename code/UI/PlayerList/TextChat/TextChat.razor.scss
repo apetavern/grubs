@@ -1,0 +1,57 @@
+﻿TextChat {
+    z-index: 100;
+    flex-direction: column;
+    width: 505px;
+    font-size: 16px;
+    transition: all 0.1s ease, border 0s ease;
+    height: 230px;
+
+    textentry {
+        transition: opacity 0.1s ease;
+        flex-shrink: 0;
+        opacity: 0;
+        border-radius: 4px;
+        background-color: rgb(207, 207, 207, 0.2);
+
+        label {
+            word-break: break-all;
+            white-space: normal;
+        }
+    }
+
+    .content-label {
+        margin-left: 16px;
+    }
+
+    .placeholder,
+    .content-label {
+        font-size: 20px;
+        font-family: Londrina Solid;
+        color: rgb(207, 207, 207);
+        text-shadow: 2px 2px 0px black;
+        margin: 5px;
+    }
+
+    .canvas {
+        flex-direction: column;
+        align-items: flex-start;
+        overflow: scroll;
+        height: 230px;
+    }
+
+    &.open {
+        border-radius: 4 4 0 0;
+
+        textentry {
+            opacity: 0.9;
+            width: 100%;
+        }
+
+        .canvas {
+            TextChatEntry {
+                transition: opacity 0.1s ease;
+                opacity: 0.9;
+            }
+        }
+    }
+}

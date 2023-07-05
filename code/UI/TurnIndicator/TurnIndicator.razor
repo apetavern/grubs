@@ -1,5 +1,6 @@
 @namespace Grubs.UI
 @inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 @if (GamemodeSystem.Instance is null || !GamemodeSystem.Instance.ActivePlayer.IsValid())
 {
@@ -25,34 +26,3 @@
         return HashCode.Combine(instance?.GetTimeRemaining(), instance?.ActivePlayer?.SteamId, instance?.TurnIsChanging);
     }
 }
-
-<style>
-    TurnIndicator {
-        position: absolute;
-        bottom: 125px;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        flex-direction: column;
-        align-items: center;
-        width: 600px;
-        transition: opacity 150ms ease-in;
-
-        .timer,
-        .name {
-            font-family: Londrina Solid;
-            font-size: 80px;
-            color: white;
-            text-shadow: 2px 2px 0px black;
-        }
-
-        .name {
-            position: absolute;
-            bottom: -30px;
-            font-size: 40px;
-        }
-
-        &.hide {
-            opacity: 0;
-        }
-    }
-</style>

@@ -1,0 +1,69 @@
+﻿WindIndicator {
+    position: absolute;
+    bottom: 200px;
+    right: 100px;
+    background-color: rgba(235, 235, 235, 0.24);
+    border-radius: 4px;
+    width: 180px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+
+    .title {
+        position: absolute;
+        top: -30px;
+        font-family: Londrina Solid;
+        font-size: 35px;
+        color: white;
+        text-shadow: 2px 2px 0px black;
+    }
+
+    .wind {
+        animation-duration: 1.3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+
+        &.left {
+            animation-name: moving-left;
+        }
+
+        &.right {
+            animation-name: moving-right;
+        }
+    }
+
+    .icon {
+        font-family: MaterialIconsRound;
+        font-size: 50px;
+        color: white;
+        text-shadow: 2px 2px 0px black;
+    }
+}
+
+@keyframes moving-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(-10);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes moving-right {
+    0% {
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(10);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
