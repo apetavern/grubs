@@ -1,5 +1,6 @@
 @namespace Grubs.UI
 @inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 @if (Game.LocalPawn is not Grubs.Player player)
 {
@@ -48,35 +49,3 @@
         return HashCode.Combine(_isOpen, _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
     }
 }
-
-<style>
-    Inventory {
-        position: absolute;
-        bottom: 290px;
-        width: 375px;
-        transition: all 150ms ease-out;
-        opacity: 0;
-        right: -200px;
-        flex-direction: column;
-        pointer-events: none;
-
-        &.open {
-            right: 100px;
-            opacity: 1;
-            sound-in: ui_inventory_open;
-            pointer-events: all;
-        }
-
-        .name {
-            font-family: Londrina Solid;
-            font-size: 40px;
-            color: white;
-            text-shadow: 2px 2px 0px black;
-        }
-
-        .items {
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-    }
-</style>

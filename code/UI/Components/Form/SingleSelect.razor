@@ -1,5 +1,6 @@
 ﻿@namespace Grubs.UI
 @inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 <root>
     <label class="select-label">@SelectLabel</label>
@@ -55,60 +56,3 @@
         _selectButton.SetClass("disabled", IsDisabled);
     }
 }
-
-<style>
-    SingleSelect {
-        margin: 8px;
-        flex-direction: column;
-        
-        .select-label {
-            font-size: 32px;
-        }
-
-        .select {
-            background-color: rgba(235, 235, 235, 0.24);
-            margin: 2px;
-            border-radius: 4px;
-            justify-content: flex-start;
-            padding: 5px 10px;
-            font-size: 24px;
-            font-weight: light;
-            align-items: center;
-
-            &.disabled {
-                background-color: rgba(235, 235, 235, 0.77);
-            }
-        }
-
-        .select-options {
-            opacity: 0;
-            margin: 2px;
-            padding: 4px;
-            flex-direction: column;
-            background-color: rgba(235, 235, 235, 0.24);
-            border-radius: 4px;
-
-            &.show {
-                opacity: 1;
-            }
-        }
-
-        .select-option {
-            align-items: center;
-            margin: 4px;
-            justify-content: flex-start;
-            font-size: 24px;
-            font-weight: light;
-            border-radius: 4px;
-
-            &:hover {
-                background-color: rgba(235, 235, 235, 0.48);
-                sound-in: ui_button_hover;
-            }
-        }
-
-        .expand {
-            margin-left: auto;
-        }
-    }
-</style>
