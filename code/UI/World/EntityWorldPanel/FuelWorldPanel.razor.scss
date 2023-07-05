@@ -1,0 +1,11 @@
+﻿FuelWorldPanel {
+    background-color: rgba(black, 0.4);
+    border: 2px solid rgba(black, 0.4);
+    border-radius: 4px;
+    transform: rotate(180deg);
+
+    .fill {
+        background-image: linear-gradient(#e01a00dc 0%, #00a108dc 70%);
+        width: 100%;
+    }
+}

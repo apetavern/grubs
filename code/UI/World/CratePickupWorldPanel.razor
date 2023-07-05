@@ -1,5 +1,6 @@
 @namespace Grubs.UI
 @inherits Sandbox.UI.WorldPanel
+@attribute [StyleSheet]
 
 <root>
     <img src=@Icon />
@@ -31,27 +32,3 @@
         Delete();
     }
 }
-
-<style>
-    CratePickupWorldPanel {
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        transition: opacity 0.15s ease;
-
-        img {
-            height: 256px;
-            width: 256px;
-            background-repeat: no-repeat;
-            background-size: contain;
-
-            background-color: rgba(black, 0.1);
-            border: 2px solid rgba(black, 0.1);
-            border-radius: 4px;
-        }
-
-        &:outro {
-            opacity: 0;
-        }
-    }
-</style>

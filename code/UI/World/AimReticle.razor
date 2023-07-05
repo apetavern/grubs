@@ -1,5 +1,6 @@
 @namespace Grubs.UI
 @inherits Sandbox.UI.WorldPanel
+@attribute [StyleSheet]
 
 <root>
     <img src="materials/reticle/reticle.png" />
@@ -43,11 +44,3 @@
         Rotation = Rotation.RotateAroundAxis(Vector3.Forward, 0.25f);
     }
 }
-
-<style>
-    AimReticle {
-        &.hidden {
-            display: none;
-        }
-    }
-</style>
