@@ -108,8 +108,16 @@ public partial class GrubsBot : Bot
 	{
 		for ( int i = 0; i < count; i++ )
 		{
-			var bot = new GrubsBot();
-			bot.TurnedOffAntenna = true;
+			if ( Game.Clients.Count >= Game.Server.MaxPlayers )
+			{
+				Log.Warning( "Cannot add bot - max players already reached." );
+				return;
+			}
+
+			_ = new GrubsBot
+			{
+				TurnedOffAntenna = true
+			};
 		}
 	}
 
