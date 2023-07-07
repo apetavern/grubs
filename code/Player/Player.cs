@@ -158,6 +158,7 @@ public partial class Player : Entity
 	{
 		var current = Grubs[0];
 		current.EyeRotation = Rotation.Identity;
+		Log.Info( $"Rotating Grub for {Client.Name} - Current: {current}" );
 
 		Grubs.RemoveAt( 0 );
 		Grubs.Add( current );

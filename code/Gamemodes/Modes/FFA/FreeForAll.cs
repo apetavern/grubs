@@ -344,6 +344,9 @@ public partial class FreeForAll : Gamemode
 		}
 
 		ActivePlayer = PlayerTurnQueue.Dequeue();
+
+		GameTask.Delay( 200 );
+
 		while ( !ActivePlayer.IsAvailableForTurn )
 		{
 			ActivePlayer = PlayerTurnQueue.Dequeue();
