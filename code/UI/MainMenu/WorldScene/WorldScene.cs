@@ -9,10 +9,7 @@ public class WorldScene : Panel
 
 	public WorldScene()
 	{
-		Style.Width = Length.Percent( 100 );
-		Style.Height = Length.Percent( 100 );
-		Style.Position = PositionMode.Absolute;
-		Style.ZIndex = -10;
+		StyleSheet.Load( "UI/MainMenu/WorldScene/WorldScene.cs.scss" );
 
 		_renderScene?.Delete( true );
 
@@ -24,9 +21,7 @@ public class WorldScene : Panel
 		_grubPreview.Grub.Rotation = Rotation.From( 0, -135, 0 );
 		AddChild( _grubPreview );
 
-		_renderScene = Add.ScenePanel( sceneWorld, Vector3.One, Rotation.Identity, 75 );
-		_renderScene.Style.Width = Length.Percent( 100 );
-		_renderScene.Style.Height = Length.Percent( 100 );
+		_renderScene = Add.ScenePanel( sceneWorld, Vector3.One, Rotation.Identity, 75, "renderScene" );
 		_renderScene.Camera.AmbientLightColor = new Color( .25f, .15f, .15f ) * 0.5f;
 		_renderScene.Camera.Position = _grubPreview.Grub.Position + new Vector3(
 			MathF.Sin( _yaw ) * _renderSceneDistance,

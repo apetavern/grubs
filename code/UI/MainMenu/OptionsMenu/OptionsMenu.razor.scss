@@ -1,3 +1,5 @@
+@import "../../Styles/vars.scss";
+
 OptionsMenu {
     width: 100%;
     height: 100%;
@@ -8,7 +10,7 @@ OptionsMenu {
         left: 64px;
         width: 1200px;
         height: 810px;
-        background-color: #46225550;
+        background-color: rgba($color-grape-purple 0.314);
         font-family: Londrina Solid;
         color: white;
         border-radius: 4px;
@@ -20,7 +22,7 @@ OptionsMenu {
         flex-direction: column;
         flex-shrink: 0;
         overflow: scroll;
-        background-color: #0D060F50;
+        background-color: rgba($color-black-purple 0.314);
     }
 
     .options-sidebar-entry {
@@ -36,12 +38,12 @@ OptionsMenu {
         }
 
         &:hover:not(.tab-selected) {
-            background-color: #4E3E5450;
+            background-color: rgba($color-dull-purple 0.314);
         }
     }
 
     .tab-selected {
-        background-color: #4E3E54E0;
+        background-color: rgba($color-dull-purple 0.878);
     }
 
     .options-tab {

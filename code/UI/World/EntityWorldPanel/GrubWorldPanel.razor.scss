@@ -1,0 +1,41 @@
+﻿GrubWorldPanel {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .avatar {
+        opacity: 0;
+        transition: all 0.4s ease-in;
+
+        &.show {
+            opacity: 1;
+        }
+    }
+
+    .name {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+    }
+
+    label,
+    img {
+        font-size: 135px;
+        font-family: Londrina Solid;
+        background-color: rgba(black, 0.1);
+        border: 2px solid rgba(black, 0.1);
+        border-radius: 4px;
+        padding: 0px 20px;
+        text-shadow: 2px 2px 0px black;
+        text-stroke: 4px black;
+        margin: 2px 0;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    img {
+        opacity: 0.5;
+        aspect-ratio: 1;
+        height: 70px;
+    }
+}
