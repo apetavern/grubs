@@ -1,4 +1,6 @@
-﻿SingleSelect {
+﻿@import "../../Styles/vars.scss";
+
+SingleSelect {
     margin: 8px;
     flex-direction: column;
 
@@ -7,7 +9,7 @@
     }
 
     .select {
-        background-color: rgba(235, 235, 235, 0.24);
+        background-color: rgba($color-cream-white 0.24);
         margin: 2px;
         border-radius: 4px;
         justify-content: flex-start;
@@ -17,7 +19,7 @@
         align-items: center;
 
         &.disabled {
-            background-color: rgba(235, 235, 235, 0.77);
+            background-color: rgba($color-cream-white 0.77);
         }
     }
 
@@ -26,7 +28,7 @@
         margin: 2px;
         padding: 4px;
         flex-direction: column;
-        background-color: rgba(235, 235, 235, 0.24);
+        background-color: rgba($color-cream-white 0.24);
         border-radius: 4px;
 
         &.show {
@@ -43,7 +45,7 @@
         border-radius: 4px;
 
         &:hover {
-            background-color: rgba(235, 235, 235, 0.48);
+            background-color: rgba($color-cream-white 0.48);
             sound-in: ui_button_hover;
         }
     }

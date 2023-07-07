@@ -1,4 +1,6 @@
-﻿CustomizeMenu {
+﻿@import "../../Styles/vars.scss";
+
+CustomizeMenu {
     top: 40px;
     left: 64px;
     width: 25%;
@@ -46,7 +48,7 @@
                 width: 20%;
                 height: 5px;
                 margin: 5px;
-                background-color: rgba(235, 235, 235, 0.24);
+                background-color: rgba($color-cream-white 0.24);
 
                 img {
                     background-repeat: no-repeat;
@@ -66,7 +68,7 @@
     textentry {
         transition: opacity 0.1s ease;
         border-radius: 4px;
-        background-color: rgb(207, 207, 207, 0.2);
+        background-color: rgb($color-light-grey 0.2);
         margin: 5px;
 
         label {

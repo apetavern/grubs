@@ -1,4 +1,6 @@
-﻿DamageNumber {
+﻿@import "../Styles/vars.scss";
+
+DamageNumber {
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -15,11 +17,11 @@
         margin: 2px 0;
 
         &.heal {
-            color: #00ad00;
+            color: $color-mid-green
         }
 
         &.damage {
-            color: #ff0000;
+            color: red;
         }
     }
 

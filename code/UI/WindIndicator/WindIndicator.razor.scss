@@ -1,8 +1,10 @@
-﻿WindIndicator {
+﻿@import "../Styles/vars.scss";
+
+WindIndicator {
     position: absolute;
     bottom: 200px;
     right: 100px;
-    background-color: rgba(235, 235, 235, 0.24);
+    background-color: rgba($color-cream-white 0.24);
     border-radius: 4px;
     width: 180px;
     height: 45px;

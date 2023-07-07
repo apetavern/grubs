@@ -1,4 +1,6 @@
-﻿PlayMenu {
+﻿@import "../../Styles/vars.scss";
+
+PlayMenu {
     top: 40px;
     left: 80px;
     width: 25%;
@@ -11,10 +13,10 @@
         .header {
             height: 80px;
             align-items: center;
-            margin-top: 2px;
+            border-radius: 4px 4px 0px 0px;
             font-size: 48px;
             padding: 16px;
-            background-image: linear-gradient(90deg, #3E0655AA, #3E065500);
+            background-image: linear-gradient(90deg, rgba($color-dark-purple .66), rgba($color-dark-purple 0));
         }
 
         .players {
@@ -63,7 +65,7 @@
     .play-button {
         width: 100%;
         height: 100px;
-        background-color: #FDE74C86;
+        background-color: rgba($color-banana-yellow .525);
         color: black;
         backdrop-filter-blur: 20px;
 

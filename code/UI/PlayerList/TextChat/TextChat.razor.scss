@@ -1,4 +1,6 @@
-﻿TextChat {
+﻿@import "../../Styles/vars.scss";
+
+TextChat {
     z-index: 100;
     flex-direction: column;
     width: 505px;
@@ -11,7 +13,7 @@
         flex-shrink: 0;
         opacity: 0;
         border-radius: 4px;
-        background-color: rgb(207, 207, 207, 0.2);
+        background-color: rgba($color-light-grey 0.2);
 
         label {
             word-break: break-all;
@@ -27,7 +29,7 @@
     .content-label {
         font-size: 20px;
         font-family: Londrina Solid;
-        color: rgb(207, 207, 207);
+        color: $color-light-grey;
         text-shadow: 2px 2px 0px black;
         margin: 5px;
     }

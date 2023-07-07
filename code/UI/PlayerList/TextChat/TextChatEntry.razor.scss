@@ -1,4 +1,6 @@
-﻿TextChatEntry {
+﻿@import "../../Styles/vars.scss";
+
+TextChatEntry {
     max-width: 100%;
     transition: opacity 0.15s ease;
     margin-bottom: 6px;
@@ -27,7 +29,7 @@
         margin-top: 3px;
         font-size: 20px;
         font-family: Londrina Solid;
-        color: rgb(207, 207, 207);
+        color: $color-light-grey;
         text-shadow: 2px 2px 0px black;
     }
 

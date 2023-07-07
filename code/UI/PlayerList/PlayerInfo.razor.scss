@@ -1,4 +1,6 @@
-﻿PlayerInfo {
+﻿@import "../Styles/vars.scss";
+
+PlayerInfo {
     flex-shrink: 0;
     padding-top: 10px;
     transition: all 300ms ease-in;
@@ -23,7 +25,7 @@
         width: 250px;
         height: 20px;
         border-radius: 4px;
-        background-color: rgba(235, 235, 235, 0.24);
+        background-color: rgba($color-cream-white 0.24);
 
         .fill {
             transition: all 750ms ease-in-out;
@@ -39,7 +41,7 @@
         transition: opacity 100ms ease-out;
         font-family: MaterialIcons;
         font-size: 30px;
-        color: rgb(252, 215, 52);
+        color: $color-soft-yellow;
         text-shadow: 2px 2px 0px black;
         animation-duration: 1s;
         animation-name: wiggle;

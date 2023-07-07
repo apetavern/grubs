@@ -1,3 +1,5 @@
+@import "vars.scss";
+
 button {
     font-family: Londrina Solid;
     color: white;
@@ -11,7 +13,7 @@ button {
     }
 
     &.selected {
-        color: #fde74c;
+        color: $color-banana-yellow;
     }
 
     &:hover:not(.disabled) {
