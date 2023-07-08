@@ -28,7 +28,7 @@ public partial class ParachuteComponent : WeaponComponent
 				IsPlayerControlled = true,
 			};
 
-			chuteHelper.Fall( Grub );
+			chuteHelper.Simulate( Grub );
 		}
 
 		if ( Grub.Controller.IsGrounded && Deployed )

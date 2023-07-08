@@ -38,7 +38,7 @@ public partial class LateJoinMechanic : ControllerMechanic
 				IsAffectedByWind = true,
 			};
 
-			chuteHelper.Fall( Entity );
+			chuteHelper.Simulate( Entity );
 			return;
 		}
 

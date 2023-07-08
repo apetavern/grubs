@@ -6,7 +6,7 @@ public struct GrubParachuteHelper
 	public bool IsAffectedByWind { get; set; }
 	public bool IsPlayerControlled { get; set; }
 
-	public void Fall( Grub grub )
+	public void Simulate( Grub grub )
 	{
 		var wind = IsAffectedByWind ? GamemodeSystem.Instance.ActiveWindForce : 0;
 		var playerInput = IsPlayerControlled ? grub.Player.MoveInput : 0;
