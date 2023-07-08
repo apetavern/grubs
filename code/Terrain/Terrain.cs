@@ -103,7 +103,7 @@ public partial class Terrain : Entity
 	/// Find a spawn location for an entity. Attempts to sample for existing Grub locations.
 	/// </summary>
 	/// <returns>A Vector3 position where an entity can spawn.</returns>
-	public Vector3 FindSpawnLocation( bool traceDown = true, float size = 16f )
+	public Vector3 FindSpawnLocation( bool traceDown = true, ModelEntity? ent = null, float size = 16f )
 	{
 		int retries = 0;
 		var existingGrubs = All.OfType<Grub>();
@@ -117,7 +117,6 @@ public partial class Terrain : Entity
 			maxHeight = WorldTextureHeight - 64;
 		}
 
-
 		while ( retries < 5000 )
 		{
 			var randX = Game.Random.Int( maxWidth ) - maxWidth / 2;
@@ -129,12 +128,16 @@ public partial class Terrain : Entity
 				.Size( size )
 				.Run();
 
+			// If we're not tracing down, check the startpos, otherwise we'll clip.
+			if ( ent is not null && !traceDown && IsInsideTerrain( startPos, ent ) )
+				continue;
+
 			if ( tr.Hit && !tr.StartedSolid )
 			{
 				if ( tr.Entity is Grub )
 					continue;
 
-				if ( IsInsideTerrain( tr.EndPosition, size ) )
+				if ( IsInsideTerrain( tr.EndPosition, ent, size ) )
 					continue;
 
 				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) >= 70f )
@@ -153,6 +156,9 @@ public partial class Terrain : Entity
 			}
 			retries++;
 		}
+
+		if ( retries >= 100 )
+			throw new Exception( "Retry count is unusually high in Terrain::FindSpawnLocation." );
 
 		return fallbackPosition;
 	}
@@ -183,8 +189,16 @@ public partial class Terrain : Entity
 		SdfWorld.Position = SdfWorld.Position.WithZ( 0 );
 	}
 
-	private bool IsInsideTerrain( Vector3 position, float size )
+	private bool IsInsideTerrain( Vector3 position, ModelEntity? ent = null, float size = 16f )
 	{
+		if ( ent is not null )
+		{
+			var boxTrace = Trace.Box( ent.CollisionBounds, position, position + Vector3.Right * 64f )
+				.WithAnyTags( Tag.Solid )
+				.Run();
+			return boxTrace.Hit || boxTrace.StartedSolid;
+		}
+
 		var tr = Trace.Ray( position, position + Vector3.Right * 64f )
 			.WithAnyTags( Tag.Solid )
 			.Size( size )

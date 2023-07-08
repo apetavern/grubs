@@ -206,7 +206,7 @@ public partial class FreeForAll : Gamemode
 		var player = Game.Clients.First().Pawn as Player;
 		var crate = CrateGadgetComponent.SpawnCrate( crateType );
 
-		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, size: 32f );
+		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, crate );
 		crate.Position = spawnPos;
 		crate.Owner = player;
 		player.Gadgets.Add( crate );
@@ -225,7 +225,7 @@ public partial class FreeForAll : Gamemode
 		PrefabLibrary.TrySpawn<Gadget>( "prefabs/world/oil_drum.prefab", out var barrel );
 		var player = Game.Clients.First().Pawn as Player;
 
-		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, size: 32f );
+		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, barrel );
 		barrel.Position = spawnPos;
 		barrel.Owner = player;
 		player.Gadgets.Add( barrel );
