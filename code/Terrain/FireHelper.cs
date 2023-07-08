@@ -2,7 +2,7 @@
 
 public static class FireHelper
 {
-	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity )
+	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
 	{
 		Game.AssertServer();
 
@@ -11,11 +11,11 @@ public static class FireHelper
 			var baseDirection = Vector3.Random.WithY( 0f ) * 45f;
 			_ = new FireEntity(
 				position + Vector3.Random.WithY( 0f ) * 45f,
-				baseDirection * moveDirection );
+				baseDirection * moveDirection ).WithKnockbackForce( knockBack );
 		}
 	}
 
-	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity )
+	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
 	{
 		Game.AssertServer();
 
@@ -24,7 +24,7 @@ public static class FireHelper
 			_ = new FireEntity(
 				position + moveDirection.Normal * 3f,
 				moveDirection * Game.Random.Float( 0.8f, 1f ),
-				Game.PhysicsWorld.Gravity * Time.Delta / 2f );
+				Game.PhysicsWorld.Gravity * Time.Delta / 2f ).WithKnockbackForce( knockBack );
 		}
 	}
 }
@@ -34,6 +34,7 @@ public class FireEntity : ModelEntity, IResolvable
 {
 	public bool Resolved => _timeUntilExpire || IsDormant;
 	public Vector3 Gravity;
+	public float KnockbackForce = 1f;
 
 	private const float fireSize = 7.5f;
 	private Particles FireParticle { get; set; }
@@ -70,6 +71,12 @@ public class FireEntity : ModelEntity, IResolvable
 		{
 			Gravity = gravity;
 		}
+	}
+
+	public FireEntity WithKnockbackForce( float force )
+	{
+		KnockbackForce = force;
+		return this;
 	}
 
 	public override void Spawn()
@@ -126,6 +133,7 @@ public class FireEntity : ModelEntity, IResolvable
 
 		if ( collisionTrace.Hit )
 		{
+			var initialVelocity = Velocity;
 			Velocity *= 0.95f;
 
 			MoveDirection *= 0.95f;
@@ -134,7 +142,7 @@ public class FireEntity : ModelEntity, IResolvable
 				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position.WithY( 0f ), Vector3.Up * 32f, this ) );
 
 			if ( collisionTrace.Entity is Grub grub )
-				grub.ApplyAbsoluteImpulse( ((grub.Position - Position).Normal * 32f).WithY( 0f ) );
+				grub.ApplyAbsoluteImpulse( initialVelocity.Normal.WithY( 0f ) * KnockbackForce );
 		}
 
 		if ( _timeSinceSubtraction > 0.1f )

@@ -19,7 +19,11 @@
           },
           "FireSpeed": {
             "Type": "Single",
-            "Value": "1200"
+            "Value": "900"
+          },
+          "FireKnockbackForce": {
+            "Type": "Single",
+            "Value": "1.4"
           }
         }
       }
