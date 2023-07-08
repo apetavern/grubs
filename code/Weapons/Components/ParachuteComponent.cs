@@ -4,7 +4,7 @@
 public partial class ParachuteComponent : WeaponComponent
 {
 	[Net, Predicted]
-	private bool Deployed { get; set; } = false;
+	private bool Deployed { get; set; }
 
 	[Prefab, ResourceType( "sound" )]
 	public string DeploySound { get; set; }
@@ -15,6 +15,9 @@ public partial class ParachuteComponent : WeaponComponent
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
+
+		Weapon.SetAnimParameter( "deploy", Deployed );
+		Weapon.SetAnimParameter( "landed", !Deployed );
 
 		if ( IsFiring )
 			Fire();
@@ -29,10 +32,10 @@ public partial class ParachuteComponent : WeaponComponent
 			};
 
 			chuteHelper.Simulate( Grub );
-		}
 
-		if ( Grub.Controller.IsGrounded && Deployed )
-			FireFinished();
+			if ( Grub.Controller.IsGrounded )
+				FireFinished();
+		}
 	}
 
 	public override void FireInstant()
@@ -59,8 +62,6 @@ public partial class ParachuteComponent : WeaponComponent
 			Weapon.PlaySound( DeploySound );
 
 		Deployed = true;
-		Weapon.SetAnimParameter( "landed", false );
-		Weapon.SetAnimParameter( "deploy", true );
 	}
 
 	private void Disengage()
@@ -69,7 +70,5 @@ public partial class ParachuteComponent : WeaponComponent
 			Weapon.PlaySound( DisengageSound );
 
 		Deployed = false;
-		Weapon.SetAnimParameter( "deploy", false );
-		Weapon.SetAnimParameter( "landed", true );
 	}
 }
