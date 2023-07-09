@@ -1,0 +1,17 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@namespace Grubs.UI
+@attribute [StyleSheet]
+
+<root>
+    <div class="header">
+        <image src="textures/ui/grub.png" />
+        <label style="font-size: 108px;">GRUBS</label>
+    </div>
+    <div class="buttons">
+        <button class="menu-button">Start a Game</button>
+        <button class="menu-button">Find a Game</button>
+        <button class="menu-button">Settings</button>
+        <button class="menu-button" onclick=@(() => Game.Menu.Close())>Quit</button>
+    </div>
+</root>

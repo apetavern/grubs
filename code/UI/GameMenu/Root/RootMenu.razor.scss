@@ -1,0 +1,46 @@
+﻿@import "../../Styles/vars.scss";
+
+RootMenu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg, $color-grape-purple, $color-dark-pink);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Londrina Solid;
+
+    .header {
+        color: white;
+        align-items: center;
+        height: 110px;
+
+        image {
+            width: 108px;
+            height: 108px;
+        }
+    }
+
+    .buttons {
+        width: 15%;
+        height: 40%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .menu-button {
+            width: 100%;
+            height: 75px;
+            background-color: rgba($color-banana-yellow .525);
+            color: black;
+
+            label {
+                font-size: 36px;
+            }
+
+            &.disabled {
+                opacity: 0.6;
+            }
+        }
+    }
+}
