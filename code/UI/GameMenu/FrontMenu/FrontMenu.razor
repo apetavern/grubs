@@ -1,12 +1,13 @@
 ﻿@using Sandbox;
 @using Sandbox.UI;
 @namespace Grubs.UI
+@inherits Panel
 @attribute [StyleSheet]
 
 <root>
     <section class="header">
         <image src="textures/ui/grub.png" />
-        <label style="font-size: 108px;">GRUBS</label>
+        <label>GRUBS</label>
     </section>
     <section class="buttons">
         <a class="menu-button" href="/create">Start a Game</a>
