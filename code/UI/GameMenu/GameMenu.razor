@@ -16,5 +16,10 @@
 
         AddDestination("/", typeof(RootMenu));
         AddDestination("/create", typeof(CreateGameMenu));
+        AddDestination("/ingame", typeof(InGameMenu));
+
+        if (Game.InGame) Navigate("/ingame");
+
+        BindClass("ingame", () => Game.InGame);
     }
 }
