@@ -1,75 +1,45 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 @if (Game.LocalPawn is not Grubs.Player player)
 {
-	return;
+    return;
 }
 
 <root class="@(_isOpen ? "open" : "")">
     <label class="sound-title" text=@_hoveredSound?.Title />
-        <div class="items">
-		@foreach (var sound in GrubsGame.SoundboardSounds)
-		{
-				<SoundboardButton class="@(!_canUseSoundboard ? "disabled" : "")"
-                Sound=@sound
-                @onmouseover=@(() => _hoveredSound = sound)
-                @onmouseout=@(() => _hoveredSound = null)
-                onclick=@( ()=> 
-				{
-					if( _canUseSoundboard )
-						GrubsGame.PlaySoundboardSound(sound.Title); 
-				})></SoundboardButton>
-		}
-        </div>
+    <div class="items">
+        @foreach (var sound in GrubsGame.SoundboardSounds)
+        {
+            <SoundboardButton class="@(!_canUseSoundboard ? "disabled" : "")"
+                              Sound=@sound
+                              @onmouseover=@(() => _hoveredSound = sound)
+                              @onmouseout=@(() => _hoveredSound = null)
+                              onclick=@( ()=>
+                          {
+                          if( _canUseSoundboard )
+                          GrubsGame.PlaySoundboardSound(sound.Title);
+                          })></SoundboardButton>
+        }
+    </div>
 </root>
 
 @code {
 
-	private bool _isOpen;
+    private bool _isOpen;
     private bool _canUseSoundboard;
     private SoundboardSound _hoveredSound;
 
-	public override void Tick()
-	{
-		_isOpen = Input.Down(Grubs.InputAction.Soundboard) && !Inventory.IsOpen;
+    public override void Tick()
+    {
+        _isOpen = Input.Down(Grubs.InputAction.Soundboard) && !Inventory.IsOpen;
         _canUseSoundboard = GrubsConfig.SoundboardEnabled && (Game.LocalPawn as Player).TimeSinceSoundboardPlayed >= GrubsConfig.SoundboardCooldown;
         Cursor.Enabled("Soundboard", _isOpen);
-	}
+    }
 
     protected override int BuildHash()
     {
         return HashCode.Combine(_isOpen, _canUseSoundboard, _hoveredSound?.GetHashCode());
     }
 }
-
-<style>
-    Soundboard {
-        position: absolute;
-        bottom: 225px;
-        width: 375px;
-        transition: all 150ms ease-out;
-        opacity: 0;
-        right: -200px;
-        flex-direction: column;
-        pointer-events: none;
-
-        &.open {
-            right: 100px;
-            opacity: 1;
-            sound-in: ui_inventory_open;
-            pointer-events: all;
-        }
-
-        .sound-title {
-            font-family: Londrina Solid;
-            font-size: 40px;
-            color: white;
-            text-shadow: 2px 2px 0px black;
-        }
-
-        .items {
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-    }
-</style>

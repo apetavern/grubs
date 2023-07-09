@@ -532,6 +532,26 @@
         "DefaultValue": "false",
         "Description": "Should all Grubs have their health set to 1 when Sudden Death begins?",
         "Group": "Sudden Death"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "soundboard_enabled",
+        "DisplayName": "Enable Soundboard",
+        "DefaultValue": "true",
+        "Description": "Whether or not players can use the soundboard.",
+        "Group": "Soundboard"
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "soundboard_cooldown",
+        "DisplayName": "Soundboard Cooldown",
+        "DefaultValue": "5",
+        "Description": "How often (in seconds) players can play sounds from the soundboard.",
+        "Group": "",
+        "Maximum": 300,
+        "Step": 1
       }
     ],
     "CsProjName": "",
@@ -654,6 +674,11 @@
           "Name": "voice",
           "KeyboardCode": "v",
           "GroupName": "Other"
+        },
+        {
+          "Name": "sound_board",
+          "KeyboardCode": "tab",
+          "GroupName": "Soundboard"
         }
       ]
     },
