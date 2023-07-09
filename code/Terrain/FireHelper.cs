@@ -2,16 +2,29 @@
 
 public static class FireHelper
 {
-	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity )
+	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
 	{
 		Game.AssertServer();
 
-		for ( var i = 0; i < fireQuantity; i++ )
+		for ( var i = 0; i < fireQuantity * 5; i++ )
 		{
 			var baseDirection = Vector3.Random.WithY( 0f ) * 45f;
 			_ = new FireEntity(
 				position + Vector3.Random.WithY( 0f ) * 45f,
-				baseDirection * moveDirection );
+				baseDirection * moveDirection ).WithKnockbackForce( knockBack );
+		}
+	}
+
+	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
+	{
+		Game.AssertServer();
+
+		for ( var i = 0; i < fireQuantity * 3; i++ )
+		{
+			_ = new FireEntity(
+				position + moveDirection.Normal * 3f,
+				moveDirection * Game.Random.Float( 0.8f, 1f ),
+				Game.PhysicsWorld.Gravity * Time.Delta / 2f ).WithKnockbackForce( knockBack );
 		}
 	}
 }
@@ -19,24 +32,51 @@ public static class FireHelper
 [Category( "Weapons" )]
 public class FireEntity : ModelEntity, IResolvable
 {
-	public bool Resolved => _timeUntilExpire;
-	private Vector3 _moveDirection { get; set; }
+	public bool Resolved => _timeUntilExpire || IsDormant;
+	public Vector3 Gravity;
+	public float KnockbackForce = 1f;
 
-	private TimeUntil _timeUntilExpire;
-	private const float fireSize = 10f;
-
+	private const float fireSize = 7.5f;
 	private Particles FireParticle { get; set; }
+	private Vector3 MoveDirection { get; set; }
+	private TimeUntil _timeUntilExpire;
+	private TimeSince _timeSinceSubtraction;
+	private Sound _burningSound;
 
 	public FireEntity()
 	{
-
+		Transmit = TransmitType.Always;
 	}
 
 	public FireEntity( Vector3 startPosition, Vector3 moveDirection )
 	{
 		Position = startPosition;
-		_moveDirection = moveDirection;
-		Velocity = _moveDirection * Time.Delta * 10f;
+		MoveDirection = moveDirection;
+		Velocity = MoveDirection * Time.Delta * 10f;
+
+		Gravity = Game.PhysicsWorld.Gravity * Time.Delta / 10f;
+	}
+
+	public FireEntity( Vector3 startPosition, Vector3 moveDirection, Vector3 gravity )
+	{
+		Position = startPosition;
+		MoveDirection = moveDirection;
+		Velocity = MoveDirection * Time.Delta * 10f;
+
+		if ( gravity == Vector3.Zero )
+		{
+			Gravity = Game.PhysicsWorld.Gravity * Time.Delta / 10f;
+		}
+		else
+		{
+			Gravity = gravity;
+		}
+	}
+
+	public FireEntity WithKnockbackForce( float force )
+	{
+		KnockbackForce = force;
+		return this;
 	}
 
 	public override void Spawn()
@@ -53,8 +93,12 @@ public class FireEntity : ModelEntity, IResolvable
 	[GameEvent.Tick.Server]
 	private void Tick()
 	{
+		if ( !_burningSound.IsPlaying )
+			_burningSound = PlaySound( "fire" );
+
 		if ( _timeUntilExpire )
 		{
+			_burningSound.Stop();
 			FireParticle.Destroy();
 			FireParticle = null;
 			Delete();
@@ -65,8 +109,8 @@ public class FireEntity : ModelEntity, IResolvable
 
 	private void Move()
 	{
-		Velocity += _moveDirection * Time.Delta / 2f;
-		Velocity += Game.PhysicsWorld.Gravity * Time.Delta / 10f;
+		Velocity += MoveDirection * Time.Delta / 2f;
+		Velocity += Gravity;
 		Velocity += GamemodeSystem.Instance.ActiveWindForce * 128f * Time.Delta;
 
 		Velocity = Velocity.WithY( 0f );
@@ -89,16 +133,26 @@ public class FireEntity : ModelEntity, IResolvable
 
 		if ( collisionTrace.Hit )
 		{
+			var initialVelocity = Velocity;
+			Velocity *= 0.95f;
+
+			MoveDirection *= 0.95f;
+
 			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( Tag.Invincible ) )
-				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position, Vector3.Up * 32f, this ) );
+				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position.WithY( 0f ), Vector3.Up * 32f, this ) );
 
 			if ( collisionTrace.Entity is Grub grub )
-				grub.ApplyAbsoluteImpulse( (grub.Position - Position).Normal * 32f );
+				grub.ApplyAbsoluteImpulse( initialVelocity.Normal.WithY( 0f ) * KnockbackForce );
 		}
 
-		var terrain = GrubsGame.Instance.Terrain;
-		var materials = terrain.GetActiveMaterials( MaterialsConfig.Destruction );
-		terrain.SubtractCircle( new Vector2( Position.x, Position.z ), fireSize, materials );
-		terrain.ScorchCircle( new Vector2( Position.x, Position.z ), fireSize + 4f );
+		if ( _timeSinceSubtraction > 0.1f )
+		{
+			var terrain = GrubsGame.Instance.Terrain;
+			var materials = terrain.GetActiveMaterials( MaterialsConfig.Destruction );
+			terrain.SubtractCircle( new Vector2( Position.x, Position.z ), fireSize, materials );
+			terrain.ScorchCircle( new Vector2( Position.x, Position.z ), fireSize + 4f );
+			_timeSinceSubtraction = 0f;
+		}
+
 	}
 }

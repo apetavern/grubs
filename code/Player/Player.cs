@@ -1,6 +1,4 @@
-﻿using Sandbox;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 public partial class Player : Entity
 {
@@ -29,6 +27,8 @@ public partial class Player : Entity
 	public RealTimeSince TimeSinceSoundboardPlayed { get; set; } = GrubsConfig.SoundboardCooldown;
 
 	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
+	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.Health );
+	public int GetHealthPercentage => GetTotalGrubHealth / GrubsConfig.GrubCount;
 
 	public bool IsAvailableForTurn => !IsDead && !IsDisconnected;
 
@@ -104,6 +104,27 @@ public partial class Player : Entity
 		CreateGrubs();
 	}
 
+	public void HandleLateJoin()
+	{
+		if ( !GrubsConfig.SpawnLateJoiners )
+			return;
+
+		Inventory.Clear();
+		Inventory.GiveDefaultLoadout();
+
+		var grubNames = string.IsNullOrEmpty( GrubNames ) ? new List<string>() : System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
+		var grub = new Grub( this )
+		{
+			Owner = this,
+			Name = ParseGrubName( Game.Random.FromList( grubNames ) ),
+			Position = GrubsGame.Instance.Terrain.FindSpawnLocation( traceDown: false )
+		};
+
+		grub.Components.Create<LateJoinMechanic>();
+		Grubs.Add( grub );
+		ActiveGrub = grub;
+	}
+
 	private void CreateGrubs()
 	{
 		var grubNames = string.IsNullOrEmpty( GrubNames ) ? new List<string>() : System.Text.Json.JsonSerializer.Deserialize<List<string>>( GrubNames );
@@ -121,6 +142,17 @@ public partial class Player : Entity
 
 		while ( ActiveGrub.LifeState is LifeState.Dead or LifeState.Dying )
 		{
+			// hack
+			if ( Grubs.All( grub => grub.LifeState == LifeState.Dead ) )
+			{
+				if ( GamemodeSystem.Instance is not FreeForAll gamemode )
+				{
+					return;
+				}
+
+				gamemode.RotateActivePlayer();
+			}
+
 			RotateGrubs();
 		}
 	}
@@ -129,6 +161,7 @@ public partial class Player : Entity
 	{
 		var current = Grubs[0];
 		current.EyeRotation = Rotation.Identity;
+		Log.Info( $"Rotating Grub for {Client.Name} - Current: {current}" );
 
 		Grubs.RemoveAt( 0 );
 		Grubs.Add( current );
@@ -145,11 +178,6 @@ public partial class Player : Entity
 			Inventory.ActiveWeapon.Fire();
 
 		Inventory.SetActiveWeapon( null, true );
-	}
-
-	public int GetTotalGrubHealth()
-	{
-		return (int)Grubs.Sum( g => g.Health );
 	}
 
 	private void SaveClientClothes( IClient client )

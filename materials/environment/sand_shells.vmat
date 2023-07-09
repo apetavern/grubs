@@ -10,10 +10,8 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Position ----
-	g_flYPosition "64.000"
-	g_flYSmoothing "64.000"
 	g_flZPosition "0.000"
-	g_flZSmoothing "250.000"
+	g_flZSmoothing "512.000"
 
 	//---- Scorch ----
 	g_flScorchBlendDistance "32.000"
@@ -34,5 +32,5 @@ Layer0
 	//---- Tint ----
 	g_bGradientTint "1"
 	g_bTintDirectionToggle "0"
-	g_vTint_Colour "[0.298039 0.141176 0.066667 1.000000]"
+	g_vTint_Colour "[0.278431 0.109804 0.058824 1.000000]"
 }

@@ -1,4 +1,6 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 <root class="@(!Player.IsAvailableForTurn ? "inactive" : "")">
     <img src="avatar:@Player.SteamId" class="avatar" />
@@ -6,8 +8,8 @@
         <label text=@Player.SteamName class="name" style="font-color: @Player.Color.Hex;" />
         <div class="health">
             <div
-            class="fill"
-            style="background: linear-gradient(to top, @Player.Color.Hex, @Player.Color.Lighten(-0.3f).Hex); width: @(GetHealthPercentage())%;" />
+                class="fill"
+                style="background: linear-gradient(to bottom, @Player.Color.Hex, @Player.Color.Lighten(-0.3f).Hex); width: @(Player.GetHealthPercentage)%;" />
         </div>
     </div>
     @if (Player.IsDisconnected)
@@ -38,11 +40,6 @@
         _isTalking = timeoutInv > 0;
 
         _isUsingSoundboard = Player.TimeSinceSoundboardPlayed <= 4 && Player.TimeSinceSoundboardPlayed >= 0.1f;
-    }
-
-    private int GetHealthPercentage()
-    {
-        return Player.GetTotalGrubHealth() / GrubsConfig.GrubCount;
     }
 
     protected override int BuildHash()

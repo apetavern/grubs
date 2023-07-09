@@ -627,7 +627,7 @@
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_sparks.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/explosion/grubs_explosion_smoke.vpcf"
+			m_ChildRef = resource:"particles/smoke/smoke_cloud.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/grubs_explosion_shockwave.vpcf"

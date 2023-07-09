@@ -1,10 +1,12 @@
-﻿using Sandbox;
-using System.Linq;
-
-namespace Grubs.Bots;
+﻿namespace Grubs.Bots;
 
 public partial class GrubsBot : Bot
 {
+	static GrubsBot()
+	{
+		SetDefaultNames( BotNames );
+	}
+
 	Grub TargetGrub { get; set; }
 
 	Grub ActiveGrub => (Client.Pawn as Player).ActiveGrub;
@@ -12,6 +14,37 @@ public partial class GrubsBot : Bot
 	Player MyPlayer => Client.Pawn as Player;
 
 	BotBrain BrainEnt;
+
+
+	static List<string> BotNames = new List<string>
+	{
+		"[BOT] El Jabroga",
+		"[BOT] Clyde",
+		"[BOT] Mike Oxlong",
+		"[BOT] Null Reference",
+		"[BOT] Chip Danger",
+		"[BOT] RealBigSnorris",
+		"[BOT] BigJohnBorris",
+		"[BOT] Melty Chihuahua",
+		"[BOT] Blitz Command",
+		"[BOT] Scorch Shot",
+		"[BOT] Toxic Viper",
+		"[BOT] Snipe Hawk",
+		"[BOT] Chaos Fury",
+		"[BOT] Blast Engine",
+		"[BOT] Meteor Blitz",
+		"[BOT] Annihilate X",
+		"[BOT] Rapid Marksman",
+		"[BOT] Shadow Stalker",
+		"[BOT] Doombringer",
+		"[BOT] Avalanche Strike",
+		"[BOT] Wreck Bot",
+		"[BOT] Venomous Fang",
+		"[BOT] Destroyer",
+		"[BOT] Sizzle Blast",
+		"[BOT] Blade Master",
+		"[BOT] Pyro",
+	};
 
 	public override void BuildInput()
 	{
@@ -75,8 +108,16 @@ public partial class GrubsBot : Bot
 	{
 		for ( int i = 0; i < count; i++ )
 		{
-			var bot = new GrubsBot();
-			bot.TurnedOffAntenna = true;
+			if ( Game.Clients.Count >= Game.Server.MaxPlayers )
+			{
+				Log.Warning( "Cannot add bot - max players already reached." );
+				return;
+			}
+
+			_ = new GrubsBot
+			{
+				TurnedOffAntenna = true
+			};
 		}
 	}
 
@@ -96,7 +137,6 @@ public partial class GrubsBot : Bot
 				{
 					if ( item.Tags.Has( "antenna" ) )
 					{
-						Log.Info( "Found antenna" );
 						(item as ModelEntity).SetMaterialGroup( "active" );
 						LastAntennaActivated = item as ModelEntity;
 					}

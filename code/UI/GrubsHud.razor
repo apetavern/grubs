@@ -1,7 +1,7 @@
 @namespace Grubs.UI
 @inherits RootPanel
 
-@attribute [StyleSheet("/ui/GrubsHud.scss")]
+@attribute [StyleSheet]
 
 <root>
     @* Global *@
@@ -14,6 +14,7 @@
         <TurnIndicator />
         <Inventory />
         <WindIndicator />
+		<SuddenDeathIndicator />
         <InputHints />
 		<Soundboard />
     }
@@ -40,10 +41,3 @@
         return HashCode.Combine(GamemodeSystem.Instance?.CurrentState.GetHashCode());
     }
 }
-
-<style>
-    GrubsHud {
-        pointer-events: none;
-        cursor: none;
-    }
-</style>

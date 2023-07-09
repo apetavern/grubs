@@ -1,29 +1,27 @@
 ﻿@namespace Grubs.UI
 @inherits ScenePanel
+@attribute [StyleSheet]
 
 <root />
 
 @code {
     public TerrainPreview()
-	{
-		World = Game.SceneWorld;
-	}
-
-	public override void Tick()
-	{
-		if ( GamemodeSystem.Instance.Terrain is not Terrain terrain )
-			return;
-
-		var center = new Vector3( 0f, 0f, terrain.WorldTextureHeight / 2 );
-
-		Camera.ZFar = Camera.Position.y * 1.5f;
-		Camera.Position = center.WithY( -2048f * (terrain.WorldTextureLength / 2048f) );
-		Camera.Rotation = Rotation.LookAt( terrain.Rotation.Left );
-	}
-}
-
-<style>
-    TerrainPreview {
-        flex-grow: 1;
+    {
+        World = Game.SceneWorld;
     }
-</style>
+
+    public override void Tick()
+    {
+        if (GamemodeSystem.Instance.Terrain is not Terrain terrain)
+            return;
+
+        bool isTexture = (GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Texture);
+        var terrainlength = isTexture ? (terrain.WorldTextureLength) : terrain.WorldTextureLength;
+        var terrainheight = isTexture ? (terrain.WorldTextureHeight / 4) : terrain.WorldTextureLength / 2;
+        var center = new Vector3(0f, 0f, terrain.WorldTextureHeight / 2);
+
+        Camera.ZFar = Camera.Position.y * 1.5f;
+        Camera.Position = center.WithY(-2048f * terrainlength / 2048f);
+        Camera.Rotation = Rotation.LookAt(terrain.Rotation.Left);
+    }
+}

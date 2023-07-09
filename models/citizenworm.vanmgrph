@@ -1110,7 +1110,7 @@
 				{
 					_class = "CBoneMaskAnimNode"
 					m_sName = "breathemask"
-					m_vecPosition = [ -1952.0, 64.0 ]
+					m_vecPosition = [ -2192.0, 96.0 ]
 					m_nNodeID = 
 					{
 						m_id = 185781590
@@ -1233,7 +1233,7 @@
 				{
 					_class = "CChoiceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -1648.0, 48.0 ]
+					m_vecPosition = [ -1888.0, 80.0 ]
 					m_nNodeID = 
 					{
 						m_id = 214370923
@@ -1348,7 +1348,7 @@
 				{
 					_class = "CBoneMaskAnimNode"
 					m_sName = "breathemask"
-					m_vecPosition = [ -1955.0, 189.0 ]
+					m_vecPosition = [ -2195.0, 221.0 ]
 					m_nNodeID = 
 					{
 						m_id = 235163556
@@ -2032,7 +2032,7 @@
 				{
 					_class = "CBoneMaskAnimNode"
 					m_sName = "breathemask"
-					m_vecPosition = [ -1952.0, 128.0 ]
+					m_vecPosition = [ -2192.0, 160.0 ]
 					m_nNodeID = 
 					{
 						m_id = 423737508
@@ -3161,7 +3161,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -2368.0, 192.0 ]
+					m_vecPosition = [ -2608.0, 224.0 ]
 					m_nNodeID = 
 					{
 						m_id = 860532150
@@ -4997,6 +4997,103 @@
 			{
 				key = 
 				{
+					m_id = 1780659587
+				}
+				value = 
+				{
+					_class = "CSelectorAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ -1664.0, 128.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1780659587
+					}
+					m_networkMode = "ClientPredicted"
+					m_sNote = ""
+					m_children = 
+					[
+						{
+							m_nodeID = 
+							{
+								m_id = 214370923
+							}
+							m_outputID = 
+							{
+								m_id = 4294967295
+							}
+						},
+						{
+							m_nodeID = 
+							{
+								m_id = 1810277198
+							}
+							m_outputID = 
+							{
+								m_id = 4294967295
+							}
+						},
+					]
+					m_tags = 
+					[
+						{
+							m_id = 4294967295
+						},
+						{
+							m_id = 4294967295
+						},
+					]
+					m_selectionSource = "SelectionSource_Bool"
+					m_boolParamID = 
+					{
+						m_id = 365443360
+					}
+					m_enumParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
+					m_blendDuration = 0.2
+					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
+					m_bResetOnChange = true
+					m_bSyncCyclesOnChange = false
+					m_blendCurve = 
+					{
+						m_vControlPoint1 = [ 0.5, 0.0 ]
+						m_vControlPoint2 = [ 0.5, 1.0 ]
+					}
+					m_intParamNames = [  ]
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 1810277198
+				}
+				value = 
+				{
+					_class = "CSequenceAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ -1888.0, 224.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1810277198
+					}
+					m_networkMode = "ClientPredicted"
+					m_sNote = ""
+					m_tagSpans = [  ]
+					m_sequenceName = "scratch_loop"
+					m_playbackSpeed = 1.0
+					m_bLoop = true
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 1826122487
 				}
 				value = 
@@ -5143,7 +5240,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -2368.0, 256.0 ]
+					m_vecPosition = [ -2608.0, 288.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1864898329
@@ -5186,7 +5283,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -2368.0, 128.0 ]
+					m_vecPosition = [ -2608.0, 160.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1921770054
@@ -5499,7 +5596,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -2368.0, 64.0 ]
+					m_vecPosition = [ -2608.0, 96.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2028934485
@@ -5544,7 +5641,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 214370923
+							m_id = 1780659587
 						}
 						m_outputID = 
 						{
@@ -6045,6 +6142,20 @@
 				m_minValue = 0
 				m_maxValue = 127
 			},
+			{
+				_class = "CBoolAnimParameter"
+				m_name = "bot_thinking"
+				m_id = 
+				{
+					m_id = 365443360
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = true
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_bDefaultValue = false
+			},
 		]
 	}
 	m_pTagManager = 
@@ -6094,8 +6205,8 @@
 	m_boneMergeModels = 
 	[
 		{
-			m_name = "models/weapons/dynamite/dynamite.vmdl"
-			m_bEnabled = false
+			m_name = "models/cosmetics/skeleton/skeleton_grub.vmdl"
+			m_bEnabled = true
 		},
 	]
 }

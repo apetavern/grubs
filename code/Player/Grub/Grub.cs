@@ -27,7 +27,7 @@ public partial class Grub : AnimatedEntity, IResolvable
 		}
 	}
 
-	public bool Resolved => Controller.Velocity.IsNearlyZero( 0.1f ) || LifeState is LifeState.Dead or LifeState.Dying || HasBeenDamaged;
+	public bool Resolved => Controller.Velocity.IsNearlyZero( 0.1f ) || LifeState is LifeState.Dead or LifeState.Dying || HasBeenDamaged || IsDormant;
 
 	private static readonly Model CitizenGrubModel = Model.Load( "models/citizenworm.vmdl" );
 
@@ -70,6 +70,20 @@ public partial class Grub : AnimatedEntity, IResolvable
 		_ = new UI.TurnBobber( this );
 	}
 
+	public void AssignGadget( Gadget gadget )
+	{
+		gadget.Owner = this;
+		Player.Gadgets.Add( gadget );
+	}
+
+	public void SetHatVisible( bool visible )
+	{
+		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( Tag.Head ) );
+
+		foreach ( var hat in hats )
+			hat.EnableDrawing = visible;
+	}
+
 	/// <summary>
 	/// PostSpawnSetup is used to handle things we want to handle in Spawn, but 
 	/// cannot because the Player hasn't been transmitted to the Grub yet.
@@ -98,6 +112,17 @@ public partial class Grub : AnimatedEntity, IResolvable
 		var clothes = new ClothingContainer();
 		clothes.Deserialize( player.AvatarClothingData );
 
+		if ( player.Client.IsBot )
+		{
+			var skinMaterial = Material.Load( "models/bots/materials/phong1.vmat" );
+			var eyeMaterial = Material.Load( "models/bots/materials/eyes.vmat" );
+
+			SetMaterialOverride( skinMaterial, "skin" );
+			SetMaterialOverride( eyeMaterial, "eyes" );
+
+			return;
+		}
+
 		if ( player.HasCosmeticSelected )
 			clothes.Toggle( Player.CosmeticPresets[player.SelectedCosmeticIndex] );
 
@@ -121,6 +146,25 @@ public partial class Grub : AnimatedEntity, IResolvable
 
 			if ( item.Model != null )
 			{
+				if ( item.ResourceName.ToLower().Contains( "skel" ) )
+				{
+					var skeleton = new ModelEntity( "models/cosmetics/skeleton/skeleton_grub.vmdl" );
+					skeleton.SetParent( this, true );
+					SetBodyGroup( "show", 1 );
+
+					var modelmaterials = Model.Load( item.Model ).Materials;
+
+					foreach ( var mat in modelmaterials )
+					{
+						if ( mat.Name.Contains( "_skin" ) )
+						{
+							skeleton.SetMaterialOverride( mat );
+						}
+					}
+
+					continue;
+				}
+
 				var materials = Model.Load( item.Model ).Materials;
 
 				var skinMaterial = Material.Load( "models/citizen/skin/citizen_skin01.vmat" );
@@ -147,13 +191,5 @@ public partial class Grub : AnimatedEntity, IResolvable
 				SetMaterialOverride( skinMaterial, "skin" );
 			}
 		}
-	}
-
-	public void SetHatVisible( bool visible )
-	{
-		var hats = Children.OfType<AnimatedEntity>().Where( child => child.Tags.Has( Tag.Head ) );
-
-		foreach ( var hat in hats )
-			hat.EnableDrawing = visible;
 	}
 }

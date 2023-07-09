@@ -1,14 +1,15 @@
-@inherits Sandbox.UI.WorldPanel
 @namespace Grubs.UI
+@inherits Sandbox.UI.WorldPanel
+@attribute [StyleSheet]
 
 <root>
     <label
-    class="@(_isHeal ? "heal" : "damage")"
-    text=@FormatDamage() />
+        class="@(_isHeal ? "heal" : "damage")"
+        text=@FormatDamage() />
 </root>
 
 @code {
-    private const float _riseSpeed = 5;
+        private const float _riseSpeed = 5;
     private Vector3 _offset = Vector3.Up * 64;
 
     private float _damage;
@@ -44,35 +45,3 @@
         Delete();
     }
 }
-
-<style>
-    DamageNumber {
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        transition: opacity 0.15s ease;
-
-        label {
-            font-size: 80px;
-            font-family: Londrina Solid;
-            background-color: rgba(black, 0.1);
-            border: 2px solid rgba(black, 0.1);
-            border-radius: 4px;
-            padding: 0px 20px;
-            text-shadow: 2px 2px 0px rgba(black, 0.75);
-            margin: 2px 0;
-
-            &.heal {
-                color: #00ad00;
-            }
-
-            &.damage {
-                color: #ff0000;
-            }
-        }
-
-        &:outro {
-            opacity: 0;
-        }
-    }
-</style>

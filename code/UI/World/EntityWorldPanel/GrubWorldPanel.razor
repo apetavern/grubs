@@ -1,7 +1,8 @@
-@inherits EntityWorldPanel
 @namespace Grubs.UI
+@inherits EntityWorldPanel
+@attribute [StyleSheet]
 
-@if (Entity is not Grub grub || !grub.IsValid() || Game.LocalPawn is not Grubs.Player player)
+@if (Entity is not Grub grub || !grub.IsValid())
 {
     return;
 }
@@ -10,7 +11,7 @@
     @{
         <img src="avatar:@Grub.Player.SteamId" class="avatar @DisplayAvatar()" />
     }
-    <label>@Grub.Name</label>
+    <label class="name">@Grub.Name</label>
     <label>@((int)MathF.Ceiling(_health))</label>
 </root>
 
@@ -19,9 +20,9 @@
     public Player LocalPlayer => Game.LocalPawn as Player;
 
     private float _health;
-    private const float _transitionRate = 50f;
+    private float _transitionRate = 50f;
 
-    public GrubWorldPanel(Grub grub) : base(grub)
+    public GrubWorldPanel(Grub grub) : base(grub, Vector3.Up * 50f)
     {
         _health = Grub.Health;
     }
@@ -32,17 +33,15 @@
 
         if (_health != Grub.Health)
         {
-            int delta = Grub.Health < _health ? -1 : 1;
-            float health = _health + (delta * Time.Delta * _transitionRate);
+            var delta = Grub.Health < _health ? -1 : 1;
+            var health = _health + (delta * Time.Delta * _transitionRate);
             _health = health.Clamp(Math.Min(_health, Grub.Health), Math.Max(_health, Grub.Health));
         }
     }
 
     private string DisplayAvatar()
     {
-        if (LocalPlayer.GrubsCamera.Distance < 512f)
-            return "show";
-        return "";
+        return LocalPlayer.GrubsCamera.Distance < 512f ? "show" : "";
     }
 
     protected override int BuildHash()
@@ -50,43 +49,3 @@
         return HashCode.Combine(Grub?.Name, _health, LocalPlayer?.GrubsCamera?.Distance);
     }
 }
-
-<style>
-    GrubWorldPanel {
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-
-        .avatar {
-            opacity: 0;
-            transition: all 0.4s ease-in;
-
-            &.show {
-                opacity: 1;
-            }
-        }
-
-        label,
-        img {
-            font-size: 135px;
-            font-family: Londrina Solid;
-            background-color: rgba(black, 0.1);
-            border: 2px solid rgba(black, 0.1);
-            border-radius: 4px;
-            padding: 0px 20px;
-            text-shadow: 2px 2px 0px black;
-            text-stroke: 4px black;
-            margin: 2px 0;
-            max-width: 500px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        img {
-            opacity: 0.5;
-            aspect-ratio: 1;
-            height: 70px;
-        }
-    }
-</style>

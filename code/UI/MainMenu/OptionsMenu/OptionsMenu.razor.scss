@@ -1,0 +1,56 @@
+@import "../../Styles/vars.scss";
+
+OptionsMenu {
+    width: 100%;
+    height: 100%;
+
+    .options-container {
+        margin-top: auto;
+        margin-bottom: auto;
+        left: 64px;
+        width: 1200px;
+        height: 810px;
+        background-color: rgba($color-grape-purple 0.314);
+        font-family: Londrina Solid;
+        color: white;
+        border-radius: 4px;
+        backdrop-filter-blur: 20px;
+    }
+
+    .options-sidebar {
+        width: 300px;
+        flex-direction: column;
+        flex-shrink: 0;
+        overflow: scroll;
+        background-color: rgba($color-black-purple 0.314);
+    }
+
+    .options-sidebar-entry {
+        width: 100%;
+        height: 80px;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 32px;
+        padding-left: 16px;
+
+        .iconpanel {
+            margin-right: 8px;
+        }
+
+        &:hover:not(.tab-selected) {
+            background-color: rgba($color-dull-purple 0.314);
+        }
+    }
+
+    .tab-selected {
+        background-color: rgba($color-dull-purple 0.878);
+    }
+
+    .options-tab {
+        width: 100%;
+        padding-top: 12px;
+        padding-left: 32px;
+        font-size: 48px;
+        flex-direction: column;
+    }
+}

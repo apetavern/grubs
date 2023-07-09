@@ -57,10 +57,11 @@ public partial class Inventory : EntityComponent<Player>
 		if ( ActiveWeapon == weapon )
 			return;
 
-		if ( weapon.IsValid() && !weapon.HasAmmo() )
+		var gamemode = GamemodeSystem.Instance;
+		if ( weapon.IsValid() && (!weapon.HasAmmo() || gamemode.RoundsPassed < weapon.UnlockDelay) )
 			return;
 
-		if ( ActiveWeapon.IsValid() && ActiveWeapon.HasFired && !forced )
+		if ( ActiveWeapon.IsValid() && ActiveWeapon.IsChargeConsumed && !forced )
 			return;
 
 		LastActiveWeapon = ActiveWeapon;

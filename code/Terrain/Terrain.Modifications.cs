@@ -42,7 +42,7 @@ public partial class Terrain
 	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
 	public void SubtractBox( Vector2 mins, Vector2 maxs, Dictionary<Sdf2DLayer, float> materials, float cornerRadius = 0, bool worldOffset = false )
 	{
-		var boxSdf = new BoxSdf( mins, maxs, cornerRadius );
+		var boxSdf = new RectSdf( mins, maxs, cornerRadius );
 		foreach ( var (material, offset) in materials )
 			Subtract( SdfWorld, boxSdf.Expand( offset ), material, offset: worldOffset );
 	}
@@ -98,7 +98,7 @@ public partial class Terrain
 		lengthOffset = length / 2;
 		heightOffset = 0;
 
-		var boxSdf = new BoxSdf( new Vector2( -length / 2, 0 ), new Vector2( length / 2, height ) );
+		var boxSdf = new RectSdf( new Vector2( -length / 2, 0 ), new Vector2( length / 2, height ) );
 		Add( SdfWorld, boxSdf, fgMaterial );
 		Add( SdfWorld, boxSdf, bgMaterial );
 	}
@@ -111,7 +111,8 @@ public partial class Terrain
 	/// <param name="material">The material to apply.</param>
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material )
 	{
-		world.Add( sdf, material );
+		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
+		world.AddAsync( sdf, material );
 	}
 
 	/// <summary>
@@ -123,8 +124,9 @@ public partial class Terrain
 	/// <param name="offset">Whether to apply the offset of the Sdf to world position.</param>
 	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material, bool offset = false )
 	{
+		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
 		if ( offset )
 			sdf = sdf.Translate( new Vector2( -lengthOffset, heightOffset ) );
-		world.Subtract( sdf, material );
+		world.SubtractAsync( sdf, material );
 	}
 }

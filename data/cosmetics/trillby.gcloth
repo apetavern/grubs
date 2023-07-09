@@ -1,0 +1,17 @@
+{
+  "CloudIdent": "shadb.trilby",
+  "MenuIcon": "https://files.facepunch.com/sbox/asset/shadb.cap_backwards/thumb.png.1cb53ab4fd3179fc",
+  "Title": "Trilby",
+  "Subtitle": "",
+  "Category": "Hat",
+  "SubCategory": "",
+  "Parent": null,
+  "Model": null,
+  "SkinMaterial": null,
+  "EyesMaterial": null,
+  "MaterialGroup": "",
+  "SlotsUnder": "HeadTop",
+  "SlotsOver": 0,
+  "HideBody": 0,
+  "Icon": {}
+}

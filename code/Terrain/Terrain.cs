@@ -30,7 +30,7 @@ public partial class Terrain : Entity
 		WorldTextureLength = 0;
 		WorldTextureHeight = 0;
 
-		SdfWorld.Clear();
+		SdfWorld.ClearAsync();
 		InitializeSdfWorld();
 	}
 
@@ -39,7 +39,7 @@ public partial class Terrain : Entity
 	/// </summary>
 	public void Refresh()
 	{
-		SdfWorld.Clear();
+		SdfWorld.ClearAsync();
 
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
@@ -49,10 +49,8 @@ public partial class Terrain : Entity
 			materials.ElementAt( 0 ).Key,
 			materials.ElementAt( 1 ).Key );
 
-		SubtractBackground(
-			GrubsConfig.TerrainLength,
-			(GrubsConfig.TerrainLength / resolution).CeilToInt(),
-			(GrubsConfig.TerrainHeight / resolution).CeilToInt() );
+		SubtractBackgroundBox( GrubsConfig.TerrainLength, (GrubsConfig.TerrainHeight / resolution).CeilToInt() );
+		SubtractBackground( (GrubsConfig.TerrainLength / resolution).CeilToInt() );
 		SubtractForeground( (GrubsConfig.TerrainLength / resolution).CeilToInt() );
 	}
 
@@ -63,6 +61,8 @@ public partial class Terrain : Entity
 		SdfWorld ??= new Sdf2DWorld();
 		SdfWorld.LocalRotation = Rotation.FromRoll( 90f );
 		SdfWorld.Tags.Add( Tag.Solid );
+
+		ResetTerrainPosition();
 
 		var creationStrategy = GrubsConfig.WorldTerrainType;
 		switch ( creationStrategy )
@@ -103,7 +103,7 @@ public partial class Terrain : Entity
 	/// Find a spawn location for an entity. Attempts to sample for existing Grub locations.
 	/// </summary>
 	/// <returns>A Vector3 position where an entity can spawn.</returns>
-	public Vector3 FindSpawnLocation( bool traceDown = true, float size = 16f )
+	public Vector3 FindSpawnLocation( bool traceDown = true, ModelEntity? ent = null, float size = 16f )
 	{
 		int retries = 0;
 		var existingGrubs = All.OfType<Grub>();
@@ -116,7 +116,6 @@ public partial class Terrain : Entity
 			maxWidth = WorldTextureLength;
 			maxHeight = WorldTextureHeight - 64;
 		}
-			
 
 		while ( retries < 5000 )
 		{
@@ -129,12 +128,16 @@ public partial class Terrain : Entity
 				.Size( size )
 				.Run();
 
+			// If we're not tracing down, check the startpos, otherwise we'll clip.
+			if ( ent is not null && !traceDown && IsInsideTerrain( startPos, ent ) )
+				continue;
+
 			if ( tr.Hit && !tr.StartedSolid )
 			{
 				if ( tr.Entity is Grub )
 					continue;
 
-				if ( IsInsideTerrain( tr.EndPosition, size ) )
+				if ( IsInsideTerrain( tr.EndPosition, ent, size ) )
 					continue;
 
 				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) >= 70f )
@@ -154,11 +157,48 @@ public partial class Terrain : Entity
 			retries++;
 		}
 
+		if ( retries >= 100 )
+			throw new Exception( "Retry count is unusually high in Terrain::FindSpawnLocation." );
+
 		return fallbackPosition;
 	}
 
-	private bool IsInsideTerrain( Vector3 position, float size )
+	public async Task LowerTerrain( float amount )
 	{
+		var grubs = All.OfType<Grub>();
+
+		Vector3 targetPosition = SdfWorld.Position - Vector3.Up * amount;
+		while ( Vector3.DistanceBetween( SdfWorld.Position, targetPosition ) > Time.Delta * 5f )
+		{
+			Camera.Main.Position += Vector3.Random * 10f;
+
+			var oldPos = SdfWorld.Position;
+			SdfWorld.Position = Vector3.Lerp( SdfWorld.Position, targetPosition, Time.Delta * 3f );
+
+			// Lower Grubs with the terrain, otherwise they can clip into terrain above them.
+			// I don't want to do this, but movement code is hard sometimes :(
+			foreach ( var grub in grubs )
+				grub.Position += Vector3.Up * (SdfWorld.Position.z - oldPos.z);
+
+			await GameTask.DelaySeconds( Time.Delta );
+		}
+	}
+
+	public void ResetTerrainPosition()
+	{
+		SdfWorld.Position = SdfWorld.Position.WithZ( 0 );
+	}
+
+	private bool IsInsideTerrain( Vector3 position, ModelEntity? ent = null, float size = 16f )
+	{
+		if ( ent is not null )
+		{
+			var boxTrace = Trace.Box( ent.CollisionBounds, position, position + Vector3.Right * 64f )
+				.WithAnyTags( Tag.Solid )
+				.Run();
+			return boxTrace.Hit || boxTrace.StartedSolid;
+		}
+
 		var tr = Trace.Ray( position, position + Vector3.Right * 64f )
 			.WithAnyTags( Tag.Solid )
 			.Size( size )
@@ -173,20 +213,23 @@ public partial class Terrain : Entity
 		return new Vector3( randX, 0, randZ );
 	}
 
-	TimeSince TimeSinceLastWindEffect = 0f;
+	private TimeSince TimeSinceLastWindEffect = 0f;
 
-/*	[GameEvent.Tick.Client]
+	[GameEvent.Tick.Client]
 	private void ClientTick()
 	{
-		if ( TimeSinceLastWindEffect > 2f )
-		{
-			var pos = GetRandomPositionInWorld( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
-			var wind = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
-			wind.SetPosition( 1, GamemodeSystem.Instance.ActiveWindForce * GamemodeSystem.Instance.ActiveWindSteps * 1280f );
-			Log.Info( GamemodeSystem.Instance.ActiveWindForce * 1280f );
-			TimeSinceLastWindEffect = 0f;
-		}
-	}*/
+		if ( TimeSinceLastWindEffect < 0.25f )
+			return;
+
+		// Do not show wind particles if there is no active wind.
+		if ( GamemodeSystem.Instance.ActiveWindSteps == 0 )
+			return;
+
+		var pos = GetRandomPositionInWorld( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight ).WithY( -33 );
+		var wind = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
+		wind.SetPosition( 1, GamemodeSystem.Instance.ActiveWindSteps * 75f );
+		TimeSinceLastWindEffect = 0f;
+	}
 
 	[ConCmd.Admin( "gr_regen" )]
 	public static void RegenWorld()

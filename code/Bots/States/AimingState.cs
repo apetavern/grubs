@@ -9,7 +9,7 @@ namespace Grubs.Bots.States;
 public partial class AimingState : BaseState
 {
 
-	new public float MaxTimeInState = 3f;
+	new public float MaxTimeInState = 5f;
 
 	public override void Simulate()
 	{
@@ -25,21 +25,13 @@ public partial class AimingState : BaseState
 
 		Vector3 direction = activeGrub.Position - Brain.TargetGrub.Position;
 
-		float distance = direction.Length;
-
-		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 3f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
-
-		bool lineOfSight = tr.Entity == Brain.TargetGrub;
-
-
 		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
-
 
 		bool facingTarget = Vector3.DistanceBetween( activeGrub.Position + activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position ) < Vector3.DistanceBetween( activeGrub.Position - activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position );
 
-		//DebugOverlay.TraceResult( tr );
+		float LookAtTargetValue = Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal );
 
-		MyPlayer.LookInput = Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal );
+		MyPlayer.LookInput = LookAtTargetValue;
 
 		if ( !facingTarget )
 		{
@@ -51,7 +43,7 @@ public partial class AimingState : BaseState
 			MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f );
 		}
 
-		if ( Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal ) < 0.05f && Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal ) > -0.05f )
+		if ( Brain.TimeSinceStateStarted > MaxTimeInState )
 		{
 			MyPlayer.LookInput = 0f;
 			FinishedState();

@@ -1,4 +1,6 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 <root>
     <img src="textures/ui/cursor.png" />
@@ -31,7 +33,7 @@
 
         var isEnabled = _instance._references.Any();
 
-        // Root panel handles all pointer events for us.
+    // Root panel handles all pointer events for us.
         _instance.SetClass("hide", !isEnabled);
     }
 
@@ -43,24 +45,3 @@
         Style.Top = Length.Fraction(mousePosition.y);
     }
 }
-
-<style>
-    Cursor {
-        position: absolute;
-        z-index: 500;
-        opacity: 1;
-        transition: opacity 125ms ease-out;
-
-        img {
-            position: absolute;
-            pointer-events: none;
-            height: 64;
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
-
-        &.hide {
-            opacity: 0;
-        }
-    }
-</style>

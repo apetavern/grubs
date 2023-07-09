@@ -4,6 +4,9 @@ namespace Grubs;
 public partial class PhysicsGadgetComponent : GadgetComponent
 {
 	[Prefab, Net]
+	public bool IsDroppable { get; set; } = false;
+
+	[Prefab, Net]
 	public bool ShouldRotate { get; set; } = true;
 
 	[Prefab, Net]
@@ -21,6 +24,15 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	[Prefab, Net]
 	public bool CheckResolve { get; set; } = true;
 
+	[Prefab, Net]
+	public bool ShouldBounce { get; set; } = false;
+
+	[Prefab, Net]
+	public bool AutoMove { get; set; } = false;
+
+	[Prefab, Net]
+	public bool IsAnimated { get; set; } = false;
+
 	[Prefab, ResourceType( "sound" )]
 	public string CollisionSound { get; set; }
 
@@ -29,13 +41,18 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 	private bool _isTouchingCeiling;
 	private bool _wasTouchingCeiling;
 
+	[Net]
+	private float _moveDirection { get; set; }
+
 	public override void OnUse( Weapon weapon, int charge )
 	{
+		Gadget.Position = weapon.GetStartPosition( IsDroppable );
+
 		if ( ShouldThrow )
-		{
-			Gadget.Position = weapon.GetStartPosition();
 			Gadget.Velocity = Grub.EyeRotation.Forward.Normal * Grub.Facing * charge * ThrowSpeed;
-		}
+
+		if ( AutoMove )
+			_moveDirection = Grub.Facing;
 	}
 
 	public override bool IsResolved()
@@ -48,6 +65,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		// Apply gravity.
 		Gadget.Velocity -= new Vector3( 0, 0, 400 ) * Time.Delta;
 
+		if ( ShouldBounce && _isGrounded && !_isTouchingCeiling )
+			Gadget.Velocity = Vector3.Up * 250f * Game.Random.Float( 0.5f, 1.5f );
+
 		var helper = new MoveHelper( Gadget.Position, Gadget.Velocity );
 		helper.Trace = helper.Trace
 			.Size( Gadget.CollisionBounds )
@@ -58,9 +78,14 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		_isGrounded = helper.TraceDirection( Vector3.Down ).Entity is not null;
 		_isTouchingCeiling = helper.TraceDirection( Vector3.Up ).Entity is not null;
 
+		if ( IsAnimated )
+		{
+			Gadget.SetAnimParameter( "active", true );
+			Gadget.SetAnimParameter( "grounded", _isGrounded );
+		}
+
 		if ( _isGrounded )
 			helper.ApplyFriction( Friction, Time.Delta );
-
 
 		if ( _wasGrounded != _isGrounded || _wasTouchingCeiling != _isTouchingCeiling || helper.HitWall )
 		{
@@ -75,6 +100,9 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 		Gadget.Velocity = helper.Velocity;
 		Gadget.Position = helper.Position;
 
+		if ( AutoMove )
+			Gadget.Velocity = Gadget.Velocity.WithX( _moveDirection * ThrowSpeed );
+
 		if ( GrubsConfig.WindEnabled && AffectedByWind )
 			Gadget.Velocity += new Vector3( GamemodeSystem.Instance.ActiveWindForce ).WithY( 0 );
 
@@ -84,6 +112,14 @@ public partial class PhysicsGadgetComponent : GadgetComponent
 			var angularX = Gadget.Velocity.x * 5f * Time.Delta;
 			float degrees = angularX.Clamp( -20, 20 );
 			Gadget.Rotation = Gadget.Rotation.RotateAroundAxis( new Vector3( 0, 1, 0 ), degrees );
+		}
+		else if ( IsAnimated )
+		{
+			var pitch = MathX.Lerp( Gadget.Rotation.Pitch(), Gadget.Velocity.z / 15f, 0.25f );
+			if ( _moveDirection == 1 )
+				Gadget.Rotation = Rotation.From( pitch, 0, 0 );
+			else if ( _moveDirection == -1 )
+				Gadget.Rotation = Rotation.From( pitch, 180, 0 );
 		}
 		else
 		{

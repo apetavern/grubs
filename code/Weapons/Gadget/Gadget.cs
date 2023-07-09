@@ -52,7 +52,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public override void ClientSpawn()
 	{
-		_startSound = this.SoundFromScreen( StartSound );
+		_startSound = PlaySound( StartSound );
 
 		foreach ( var component in GetSortedComponents() )
 		{
@@ -62,15 +62,12 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool IsResolved()
 	{
-		return GetSortedComponents().All( c => c.IsResolved() );
+		return GetSortedComponents().All( c => c.IsResolved() ) || IsDormant;
 	}
 
 	public void OnUse( Grub grub, Weapon weapon, int charge )
 	{
-		Owner = grub;
-		grub.Player.Gadgets.Add( this );
-
-		Position = weapon.GetStartPosition( true );
+		grub.AssignGadget( this );
 
 		foreach ( var component in GetSortedComponents() )
 		{
@@ -104,28 +101,16 @@ public partial class Gadget : AnimatedEntity, IResolvable
 		if ( !ExplodeOnKilled || damageInfo.HasTag( Tag.OutOfArea ) )
 			return;
 
-		ExplosionHelper.Explode( Position, this, 50f );
+		ExplosionHelper.Explode( Position, this, 50f, 75f );
 		FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, 4 );
 
-		PlayScreenSound( "explosion_short_tail" );
+		Sound.FromWorld( "explosion_short_tail", Position );
 		Delete();
 	}
 
 	protected override void OnDestroy()
 	{
-		OnClientDestroy();
-	}
-
-	[ClientRpc]
-	private void OnClientDestroy()
-	{
 		_startSound.Stop();
-	}
-
-	[ClientRpc]
-	public void PlayScreenSound( string sound )
-	{
-		this.SoundFromScreen( sound );
 	}
 
 	private IEnumerable<GadgetComponent> GetSortedComponents()

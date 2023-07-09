@@ -4,7 +4,7 @@
 public partial class ParachuteComponent : WeaponComponent
 {
 	[Net, Predicted]
-	private bool Deployed { get; set; } = false;
+	private bool Deployed { get; set; }
 
 	[Prefab, ResourceType( "sound" )]
 	public string DeploySound { get; set; }
@@ -16,14 +16,26 @@ public partial class ParachuteComponent : WeaponComponent
 	{
 		base.Simulate( client );
 
+		Weapon.SetAnimParameter( "deploy", Deployed );
+		Weapon.SetAnimParameter( "landed", !Deployed );
+
 		if ( IsFiring )
 			Fire();
 
 		if ( Deployed )
-			Grub.Velocity = new Vector3( Grub.Velocity.x - Player.MoveInput + GamemodeSystem.Instance.ActiveWindForce, Grub.Velocity.y, Grub.Velocity.ClampLength( 70f ).z );
+		{
+			var chuteHelper = new GrubParachuteHelper
+			{
+				FallSpeed = 70f,
+				IsAffectedByWind = true,
+				IsPlayerControlled = true,
+			};
 
-		if ( Grub.Controller.IsGrounded && Deployed )
-			FireFinished();
+			chuteHelper.Simulate( Grub );
+
+			if ( Grub.Controller.IsGrounded )
+				FireFinished();
+		}
 	}
 
 	public override void FireInstant()
@@ -47,20 +59,16 @@ public partial class ParachuteComponent : WeaponComponent
 	private void Deploy()
 	{
 		if ( !Deployed )
-			Weapon.PlayScreenSound( DeploySound );
+			Weapon.PlaySound( DeploySound );
 
 		Deployed = true;
-		Weapon.SetAnimParameter( "landed", false );
-		Weapon.SetAnimParameter( "deploy", true );
 	}
 
 	private void Disengage()
 	{
 		if ( Deployed )
-			Weapon.PlayScreenSound( DisengageSound );
+			Weapon.PlaySound( DisengageSound );
 
 		Deployed = false;
-		Weapon.SetAnimParameter( "deploy", false );
-		Weapon.SetAnimParameter( "landed", true );
 	}
 }

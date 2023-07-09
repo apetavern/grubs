@@ -44,7 +44,7 @@ public partial class ProximityGadgetComponent : GadgetComponent
 		{
 			_isArmed = true;
 			Gadget.SetMaterialGroup( 0 );
-			Gadget.PlayScreenSound( "beep" );
+			Gadget.PlaySound( "beep" );
 		}
 
 		if ( !_isTriggered && _isArmed )
@@ -65,7 +65,7 @@ public partial class ProximityGadgetComponent : GadgetComponent
 
 			if ( _timeUntilNextBeep )
 			{
-				Gadget.PlayScreenSound( "beep" );
+				Gadget.PlaySound( "beep" );
 				_timeUntilNextBeep = _timeUntilExplode / 4;
 			}
 

@@ -67,10 +67,19 @@
 					},
 					{
 						_class = "Attachment"
-						name = "trail"
+						name = "trailRight"
 						parent_bone = "root"
-						relative_origin = [ -13.016706, 17.428045, -171.43898 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_origin = [ -90.006523, -71.247238, -53.517548 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "trailLeft"
+						parent_bone = "root"
+						relative_origin = [ 90.209175, 63.35273, -53.512592 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -108,5 +117,6 @@
 		model_archetype = "animated_model"
 		primary_associated_entity = "prop_dynamic"
 		anim_graph_name = "models/weapons/airstrikes/plane.vanmgrph"
+		base_model_name = ""
 	}
 }

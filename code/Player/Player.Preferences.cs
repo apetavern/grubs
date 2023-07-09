@@ -3,6 +3,9 @@ namespace Grubs;
 [GameResource( "Grub Clothing", "gcloth", "A piece of grub clothing that can be equipped." )]
 public partial class Cosmetic : Clothing
 {
+	[Category( "Cloud Info" )]
+	public string CloudIdent { get; set; } = "";
+
 	[Category( "Display Information" )]
 	[ResourceType( "png" )]
 	public string MenuIcon { get; set; }
@@ -12,7 +15,21 @@ public partial class Cosmetic : Clothing
 	{
 		base.PostLoad();
 
+		if ( CloudIdent != "" )
+		{
+			Package pck = Package.Fetch( CloudIdent, false ).Result;
+			this.MenuIcon = pck.Thumb;
+
+			WaitForMount( pck );
+		}
+
 		Player.CosmeticPresets.Add( this );
+	}
+
+	public async void WaitForMount( Package package )
+	{
+		await package.MountAsync();
+		this.Model = package.GetMeta( "PrimaryAsset", "" );
 	}
 }
 
@@ -57,12 +74,6 @@ public partial class Player
 
 		GrubsGame.Instance.PlayerColors[selectedColor] = true;
 		player.Color = selectedColor;
-	}
-
-	public static Color GetRandomUnusedColor()
-	{
-		var colors = GrubsGame.Instance.PlayerColors.Where( x => !x.Value ).ToArray();
-		return colors.Length > 0 ? Random.Shared.FromArray( colors ).Key : Random.Shared.FromArray( GrubsGame.Instance.PlayerColors.Keys.ToArray() );
 	}
 
 	public static readonly List<string> GrubNamePresets = new()
@@ -148,6 +159,7 @@ public partial class Player
 	void OnGameStart()
 	{
 		if ( Color == DefaultColor )
-			Color = GetRandomUnusedColor();
+			GrubsGame.Instance.TryAssignUnusedColor( this );
+
 	}
 }

@@ -23,12 +23,12 @@ public partial class Terrain
 	private float[,] DensityMap;
 	private bool[,] BackgroundMap;
 
-	private float amplitude = 36f;
-	private float frequency = 3.2f;
+	private float amplitude => GrubsConfig.TerrainAmplitude;
+	private float frequency => GrubsConfig.TerrainFrequency;
 
 	private float noiseMin = 0.45f;
 	private float noiseMax = 0.55f;
-	private float noiseZoom = 2f;
+	private float noiseZoom => GrubsConfig.TerrainNoiseZoom;
 
 	private float resolution = 8f;
 
@@ -61,7 +61,7 @@ public partial class Terrain
 		maxY = 0;
 		for ( var x = 0; x < pointsX; x++ )
 		{
-			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 1024f).FloorToInt();
+			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 512f).FloorToInt();
 			if ( NoiseMap[x] >= pointsY )
 				NoiseMap[x] = pointsY - 1;
 			TerrainMap[x, NoiseMap[x]] = true;
@@ -77,10 +77,14 @@ public partial class Terrain
 
 		// Subtract from the background.
 		Array.Copy( TerrainMap, BackgroundMap, pointsX * pointsY );
-		SubtractBackground( wLength, pointsX, pointsY );
+
+		SubtractBackgroundBox( wLength, pointsX );
 
 		// Populate Density Map for unique terrain features.
 		var fgMaterials = GetActiveMaterials( MaterialsConfig.Default );
+
+		var toSubtract = new List<Vector2>();
+
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY; y++ )
@@ -96,18 +100,36 @@ public partial class Terrain
 				if ( !TerrainMap[x, y] )
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
-					// TODO: figure out best way to subtract
-					SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
-					// SubtractBox( midpoint - 8f, midpoint + 8f, 4f );
+					toSubtract.Add( midpoint );
 				}
 			}
 		}
+
+		ShuffleSubtractList( toSubtract );
+
+		foreach ( var midpoint in toSubtract )
+		{
+			// TODO: figure out best way to subtract
+			SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
+		}
+
+		SubtractBackground( pointsX );
 	}
 
-	void SubtractBackground( int wLength, int pointsX, int pointsY )
+	void SubtractBackgroundBox( int wLength, int pointsY )
+	{
+		var bb = new Vector2( 0, maxY * resolution );
+		var aa = new Vector2( wLength, pointsY * resolution );
+		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
+	}
+
+	void SubtractBackground( int pointsX )
 	{
 		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );
 		var bgMaterials = GetActiveMaterials( materialsConfig );
+
+		var toSubtract = new List<Vector2>();
+
 		for ( var x = 0; x < pointsX; x++ )
 		{
 			for ( var y = 0; y < maxY + 1; y++ )
@@ -115,14 +137,28 @@ public partial class Terrain
 				if ( !BackgroundMap[x, y] )
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
-					SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
+					toSubtract.Add( midpoint );
 				}
 			}
 		}
 
-		var bb = new Vector2( 0, maxY * resolution );
-		var aa = new Vector2( wLength, pointsY * resolution );
-		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
+		ShuffleSubtractList( toSubtract );
+
+		foreach ( var midpoint in toSubtract )
+		{
+			SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
+		}
+	}
+
+	private static void ShuffleSubtractList( List<Vector2> list )
+	{
+		var random = Random.Shared;
+
+		for ( var i = 0; i < list.Count; ++i )
+		{
+			var j = random.Next( i, list.Count - 1 );
+			(list[i], list[j]) = (list[j], list[i]);
+		}
 	}
 
 	void SubtractForeground( int pointsX )

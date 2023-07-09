@@ -36,7 +36,7 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 			_isHoming = true;
 			_isInitialized = true;
 			Gadget.Velocity = Gadget.Rotation.Forward * ProjectileSpeed / 2f;
-			Gadget.PlayScreenSound( LockOnSound );
+			Gadget.PlaySound( LockOnSound );
 		}
 
 		if ( _isHoming )

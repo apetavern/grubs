@@ -45,6 +45,8 @@ public class GrubPreview : ScenePanel
 		Material skinoverride = null;
 		Material eyeoverride = null;
 
+		SceneModel skeleton = null;
+
 		for ( int i = 0; i < clothingContainer.Clothing.Count; i++ )
 		{
 			var item = clothingContainer.Clothing[i];
@@ -52,6 +54,16 @@ public class GrubPreview : ScenePanel
 			{
 				if ( item.Model != null )
 				{
+					if ( item.ResourceName.ToLower().Contains( "skel" ) )
+					{
+						skeleton = new SceneModel( Grub.World, "models/cosmetics/skeleton/skeleton_grub.vmdl", Grub.Transform );
+
+						_sceneClothing.Add( skeleton );
+
+						Grub.AddChild( "clothing", skeleton );
+						Grub.SetBodyGroup( "show", 1 );
+					}
+
 					clothingContainer.Clothing.Remove( item );
 
 					var materials = Model.Load( item.Model ).Materials;
@@ -81,6 +93,11 @@ public class GrubPreview : ScenePanel
 		{
 			Grub.SetMaterialOverride( skinoverride, "skin" );
 			Grub.SetMaterialOverride( eyeoverride, "eyes" );
+
+			if ( skeleton != null )
+			{
+				skeleton.SetMaterialOverride( skinoverride );
+			}
 		}
 	}
 }

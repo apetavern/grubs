@@ -77,24 +77,18 @@ public sealed partial class DamageZone : TerrainZone
 		if ( entity.Tags.Has( Tag.Preview ) )
 			return;
 
-		var damageInfo = DamageInfoExtension.FromZone( this );
-		damageInfo.Position = entity.Position;
-		entity.TakeDamage( damageInfo );
-
 		if ( !entity.Tags.Has( Tag.Fire ) )
-			OnTouchSound( TouchSound );
+			Sound.FromWorld( TouchSound, entity.Position );
 
 		if ( !string.IsNullOrEmpty( ParticlePath ) )
 			Particles.Create( ParticlePath, entity.Position.WithZ( CollisionBounds.Maxs.z ) );
 
+		var damageInfo = DamageInfoExtension.FromZone( this );
+		damageInfo.Position = entity.Position;
+		entity.TakeDamage( damageInfo );
+
 		// Immediately apply damage given by a damage zone if it's a Grub.
 		if ( entity is Grub grub )
 			grub.ApplyDamage();
-	}
-
-	[ClientRpc]
-	private void OnTouchSound( string sound )
-	{
-		this.SoundFromScreen( sound );
 	}
 }

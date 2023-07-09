@@ -1,24 +1,25 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 @if (Game.LocalPawn is not Grubs.Player player)
 {
     return;
 }
 
-<root class="@( IsOpen ? "open" : "" )">
+<root class="@(_isOpen ? "open" : "")">
     <label class="name" text=@_hoveredWeapon?.Name />
     <div class="items">
         @{
             var sortedWeapons = player.Inventory.Weapons.OrderByDescending(w => w.WeaponType == WeaponType.Weapon);
             @foreach (var weapon in sortedWeapons)
             {
-                var hasAmmo = weapon.HasAmmo();
-                <InventorySlot
-                Weapon=@weapon
-                HasAmmo=@hasAmmo
-                @onmouseover=@( () => _hoveredWeapon = weapon )
-                @onmouseout=@( () => _hoveredWeapon = null )
-                @onclick=@( () => { if ( hasAmmo ) player.ActiveWeaponInput = weapon; } ) />
+                <InventorySlot 
+                    Weapon=@weapon 
+                    @onmouseover=@(() => _hoveredWeapon = weapon) 
+                    @onmouseout=@(() => _hoveredWeapon = null)
+                    @onclick=@(() => OnInventorySlotClicked(weapon)) 
+                />
             }
         }
     </div>
@@ -27,8 +28,15 @@
 @code {
     public static bool IsOpen {get; private set;}
     private Weapon _hoveredWeapon;
-    private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && player.IsTurn && Input.Down(InputAction.Inventory);
+    private bool RequestOpen() => Game.LocalPawn is Grubs.Player player && Input.Down(InputAction.Inventory);
     private readonly int _totalAmmo = (Game.LocalPawn as Grubs.Player).Inventory.Weapons.Sum(x => x.Ammo);
+
+    void OnInventorySlotClicked(Weapon weapon)
+    {
+        var player = Game.LocalPawn as Player;
+        if (weapon.HasAmmo() && player.IsTurn && GamemodeSystem.Instance.RoundsPassed >= weapon.UnlockDelay)
+            player.ActiveWeaponInput = weapon;
+    }
 
     public override void Tick()
     {
@@ -41,35 +49,3 @@
         return HashCode.Combine(IsOpen, _hoveredWeapon?.GetHashCode(), _totalAmmo.GetHashCode());
     }
 }
-
-<style>
-    Inventory {
-        position: absolute;
-        bottom: 225px;
-        width: 375px;
-        transition: all 150ms ease-out;
-        opacity: 0;
-        right: -200px;
-        flex-direction: column;
-        pointer-events: none;
-
-        &.open {
-            right: 100px;
-            opacity: 1;
-            sound-in: ui_inventory_open;
-            pointer-events: all;
-        }
-
-        .name {
-            font-family: Londrina Solid;
-            font-size: 40px;
-            color: white;
-            text-shadow: 2px 2px 0px black;
-        }
-
-        .items {
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-    }
-</style>

@@ -13,7 +13,7 @@
         "Keys": {
           "HitForce": {
             "Type": "Vector3",
-            "Value": "\u0022100,0,0\u0022"
+            "Value": "\u0022250,0,0\u0022"
           },
           "HitSize": {
             "Type": "Vector3",
@@ -45,6 +45,24 @@
           "_tags": {
             "Value": "[]"
           }
+        }
+      },
+      {
+        "Guid": "200ce617-d1af-4774-b774-6f8e484b65c6",
+        "Class": "InputHintOverrideComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Slap\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
         }
       }
     ],

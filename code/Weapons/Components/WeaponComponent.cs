@@ -12,10 +12,10 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public const int MaxCharge = 100;
 
 	[Net, Predicted]
-	public bool IsFiring { get; set; }
+	public bool IsFiring { get; set; } = false;
 
 	[Net, Predicted]
-	public bool IsCharging { get; set; }
+	public bool IsCharging { get; set; } = false;
 
 	[Net, Predicted]
 	public TimeSince TimeSinceFired { get; set; }
@@ -54,8 +54,8 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			ChargeParticles?.Set( "Alpha", 100f );
 			ChargeParticles?.Set( "Speed", 40f );
 
-			if ( Game.IsClient && !_chargeSound.IsPlaying )
-				_chargeSound = Weapon.SoundFromScreen( "charge" );
+			if ( !_chargeSound.IsPlaying )
+				_chargeSound = Weapon.PlaySound( "charge" );
 
 			IsCharging = true;
 			IncreaseCharge();
@@ -72,7 +72,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public void Fire()
 	{
-		Weapon.HasFired = true;
+		Weapon.IsChargeConsumed = true;
 		TimeSinceFired = 0f;
 		IsCharging = false;
 

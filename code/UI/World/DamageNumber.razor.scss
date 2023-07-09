@@ -1,0 +1,31 @@
+﻿@import "../Styles/vars.scss";
+
+DamageNumber {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: opacity 0.15s ease;
+
+    label {
+        font-size: 80px;
+        font-family: Londrina Solid;
+        background-color: rgba(black, 0.1);
+        border: 2px solid rgba(black, 0.1);
+        border-radius: 4px;
+        padding: 0px 20px;
+        text-shadow: 2px 2px 0px rgba(black, 0.75);
+        margin: 2px 0;
+
+        &.heal {
+            color: $color-mid-green;
+        }
+
+        &.damage {
+            color: red;
+        }
+    }
+
+    &:outro {
+        opacity: 0;
+    }
+}

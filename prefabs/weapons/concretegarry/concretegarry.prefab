@@ -30,6 +30,24 @@
             "Value": "false"
           }
         }
+      },
+      {
+        "Guid": "29d41ec2-65f2-4538-90d4-ed6fcd06ef13",
+        "Class": "InputHintOverrideComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Call Garry\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

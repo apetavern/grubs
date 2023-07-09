@@ -81,7 +81,7 @@ public partial class BuildComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-		Weapon.PlayScreenSound( To.Everyone, BuildSound );
+		GirderPreview.PlaySound( BuildSound );
 
 		if ( Game.IsServer )
 		{

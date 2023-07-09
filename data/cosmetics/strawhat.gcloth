@@ -1,5 +1,6 @@
 {
-  "MenuIcon": "models/cosmetics/strawhat/strawhat.vmdl_c.png",
+  "CloudIdent": "",
+  "MenuIcon": "models/cosmetics/strawhat/strawhat.vmdl.png",
   "Title": "Straw Hat",
   "Subtitle": "",
   "Category": "Hat",

@@ -1,0 +1,17 @@
+{
+  "CloudIdent": "shadb.jester_hat",
+  "MenuIcon": "https://files.facepunch.com/sbox/asset/shadb.king_hair_crown/thumb.png.e9b5f7c7a7232a98",
+  "Title": "Jester Hat",
+  "Subtitle": "",
+  "Category": "Hat",
+  "SubCategory": "",
+  "Parent": null,
+  "Model": null,
+  "SkinMaterial": null,
+  "EyesMaterial": null,
+  "MaterialGroup": "",
+  "SlotsUnder": "HeadTop",
+  "SlotsOver": 0,
+  "HideBody": 0,
+  "Icon": {}
+}

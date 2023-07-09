@@ -1,12 +1,12 @@
 {
-  "UI": true,
+  "UI": false,
   "Volume": "0.10,0.10,0",
   "Pitch": "0.70,0.80,1",
-  "Decibels": 70,
+  "Decibels": 90,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/grub/squeak.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 1870.0942,
+  "MinimumDistance": 93.504715
 }

@@ -34,6 +34,24 @@
             "Value": "false"
           }
         }
+      },
+      {
+        "Guid": "68f453fb-f237-446c-ae18-718a89337698",
+        "Class": "InputHintOverrideComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Drop\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

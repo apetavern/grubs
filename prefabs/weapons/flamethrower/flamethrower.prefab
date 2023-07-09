@@ -1,0 +1,133 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "9b86ae11-2d50-4c80-8261-efd3c0dbc6a3",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "dd072def-b987-4deb-97d6-6c77ab103a77",
+        "Class": "GadgetWeaponComponent",
+        "Keys": {
+          "UseTargetPreview": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "LockPreviewBeforeFire": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "GadgetPrefab": {
+            "Type": "Prefab",
+            "Value": "\u0022prefabs/weapons/flamethrower/flamethrower_projectile.prefab\u0022"
+          },
+          "MuzzleParticle": {
+            "Type": "ParticleSystem",
+            "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
+          },
+          "UseSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/torch/torch_fire.sound\u0022"
+          },
+          "_name": {
+            "Value": "\u0022Fire Projectile\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "TraceCount": {
+            "Type": "Int32",
+            "Value": "30"
+          },
+          "TraceDelay": {
+            "Type": "Single",
+            "Value": "0.06"
+          },
+          "GadgetCount": {
+            "Type": "Int32",
+            "Value": "30"
+          },
+          "GadgetDelay": {
+            "Type": "Single",
+            "Value": "0.06"
+          },
+          "GadgetCountPerShot": {
+            "Type": "Int32",
+            "Value": "2"
+          },
+          "GadgetsPerUse": {
+            "Type": "Int32",
+            "Value": "1"
+          },
+          "DelayPerUse": {
+            "Type": "Single",
+            "Value": "0.06"
+          },
+          "TotalUseCount": {
+            "Type": "Int32",
+            "Value": "30"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Charges": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "FiringType": {
+        "Type": "FiringType",
+        "Value": "\u0022Instant\u0022"
+      },
+      "ShowReticle": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "DefaultAmmoAmount": {
+        "Type": "Int32",
+        "Value": "1"
+      },
+      "HoldPose": {
+        "Type": "HoldPose",
+        "Value": "\u0022Uzi\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/flamethrower/flamethrower.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Flamethrower\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022models/weapons/flamethrower/flamethrower.vmdl.png\u0022"
+      },
+      "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "ClampAim": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "2"
+      }
+    }
+  }
+}

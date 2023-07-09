@@ -66,7 +66,7 @@ public partial class TeleportComponent : WeaponComponent
 
 	public override void FireCursor()
 	{
-		Weapon.PlayScreenSound( UseSound );
+		Weapon.PlaySound( UseSound );
 
 		Particles.Create( "particles/teleport/teleport_up.vpcf", Grub.EyePosition );
 		Grub.Position = Grub.Player.MousePosition;

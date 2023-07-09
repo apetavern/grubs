@@ -17,39 +17,26 @@ public partial class RetreatState : BaseState
 
 	public void DoPositioning( Grub activeGrub )
 	{
-
-		/*if ( activeGrub.ActiveWeapon != null && activeGrub.ActiveWeapon.CurrentUses < activeGrub.ActiveWeapon.Charges )
-		{
-			Brain.PreviousState();
-		}*/
-
 		Vector3 direction = activeGrub.Position - Brain.TargetGrub.Position;
 
-		float distance = direction.Length;
-
-		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 3f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
-
-		bool lineOfSight = tr.Entity == Brain.TargetGrub;
-
-		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
-
-		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 90f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
+		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 30f + Vector3.Up * 5f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 50f - Vector3.Up * 512f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 
 		//DebugOverlay.TraceResult( tr );
-		//DebugOverlay.TraceResult( clifftr );
 
-		bool facingTarget = Vector3.DistanceBetween( activeGrub.Position + activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position ) < Vector3.DistanceBetween( activeGrub.Position - activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position );
+		//DebugOverlay.TraceResult( tr );
 
 		//DebugOverlay.Line( activeGrub.EyePosition + forwardLook * 50f, activeGrub.EyePosition );
 
-		bool OnEdge = !clifftr.Hit;
+		bool OnEdge = clifftr.Distance > BotBrain.MaxFallDistance || !clifftr.Hit || MathF.Round( clifftr.EndPosition.z ) == 0;
+
+		bool WaterEdge = MathF.Round( clifftr.EndPosition.z ) == 0;
 
 		if ( Brain.TimeSinceStateStarted > 5f )
 		{
 			GamemodeSystem.Instance.UseTurn();
 		}
 
-		MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f );
+		MyPlayer.MoveInput = MathF.Sign( -direction.Normal.x * 2f * (WaterEdge ? -1 : 1) );
 
 		MyPlayer.LookInput = 0f;
 
@@ -62,7 +49,7 @@ public partial class RetreatState : BaseState
 			Input.SetAction( "jump", false );
 		}
 
-		if ( Game.Random.Float() > 0.995f )
+		if ( Game.Random.Float() > 0.995f || WaterEdge )
 		{
 			MyPlayer.MoveInput = -MyPlayer.MoveInput;
 			Input.SetAction( "backflip", true );

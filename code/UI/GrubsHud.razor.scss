@@ -1,0 +1,10 @@
+@import "/ui/styles/button.scss";
+
+GrubsHud {
+    pointer-events: none;
+    cursor: none;
+
+    &.devcamera {
+        display: none;
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "UI": false,
+  "Volume": "0.60,0.60,0",
+  "Pitch": "0.95,1.05,1",
+  "Decibels": 70,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/world/fire-1.vsnd",
+    "sounds/world/fire-2.vsnd",
+    "sounds/world/fire-3.vsnd"
+  ],
+  "MaximumDistance": 1143.9335,
+  "MinimumDistance": 57.196674
+}

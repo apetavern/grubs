@@ -1,0 +1,56 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "42117de1-87d9-46c9-9967-2aa74f6f9412",
+    "Class": "Gadget",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "e4f091bd-7cc1-4a5a-a846-8b3b59139158",
+        "Class": "FireEmitGadgetComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022Fire\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          },
+          "FireSpeed": {
+            "Type": "Single",
+            "Value": "900"
+          },
+          "FireKnockbackForce": {
+            "Type": "Single",
+            "Value": "1.4"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "ShouldCameraFollow": {
+        "Type": "Boolean",
+        "Value": "false"
+      },
+      "_name": {
+        "Value": "\u0022Fire Spawner\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022gadget\u0022"
+      },
+      "StartSound": {
+        "Type": "null"
+      }
+    }
+  }
+}

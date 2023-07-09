@@ -1,0 +1,17 @@
+{
+  "CloudIdent": "shadb.king_hair_crown",
+  "MenuIcon": null,
+  "Title": "Crown",
+  "Subtitle": "",
+  "Category": "Hat",
+  "SubCategory": "",
+  "Parent": null,
+  "Model": null,
+  "SkinMaterial": null,
+  "EyesMaterial": null,
+  "MaterialGroup": "",
+  "SlotsUnder": "HeadTop",
+  "SlotsOver": 0,
+  "HideBody": 0,
+  "Icon": {}
+}

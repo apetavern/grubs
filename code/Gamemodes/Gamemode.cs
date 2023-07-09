@@ -21,7 +21,7 @@ public partial class Gamemode : Entity
 	/// <summary>
 	/// Players who were created a pawn and then later disconnected.
 	/// </summary>
-	private List<Player> DisconnectedPlayers { get; set; } = new();
+	protected List<Player> DisconnectedPlayers { get; set; } = new();
 
 	/// <summary>
 	/// The CurrentState of the game.
@@ -85,6 +85,21 @@ public partial class Gamemode : Entity
 	/// </summary>
 	public virtual int MinimumPlayers => 2;
 
+	/// <summary>
+	/// Is sudden death active?
+	/// </summary>
+	[Net]
+	public bool SuddenDeath { get; set; } = false;
+
+	/// <summary>
+	/// How many full rotations of the player list until sudden death is activated?
+	/// </summary>
+	[Net]
+	public int RoundsUntilSuddenDeath { get; set; }
+
+	[Net]
+	public int RoundsPassed { get; set; } = 0;
+
 	public override void Spawn()
 	{
 		Transmit = TransmitType.Always;
@@ -127,11 +142,18 @@ public partial class Gamemode : Entity
 		{
 			var player = new Player( client );
 			client.Pawn = player;
+
+			if ( CurrentState == State.Playing )
+				OnPlayerJoinedLate( player );
 		}
 	}
 
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
+		// We don't care about disconnected players outside of the playing state.
+		if ( GamemodeSystem.Instance.CurrentState != Gamemode.State.Playing )
+			return;
+
 		if ( cl.Pawn is Player player )
 			DisconnectedPlayers.Add( player );
 	}
@@ -142,5 +164,51 @@ public partial class Gamemode : Entity
 
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 
+	internal virtual async Task SetupTurn()
+	{
+		Sound.FromScreen( To.Single( ActivePlayer ), "sounds/ui/ui_turn_indicator.sound" );
+	}
+
 	internal virtual void UseTurn( bool giveMovementGrace = false ) { }
+
+	internal virtual void OnPlayerJoinedLate( Player player )
+	{
+		GrubsGame.Instance.TryAssignUnusedColor( player );
+	}
+
+	internal virtual Task OnRoundPassed()
+	{
+		RoundsPassed++;
+
+		return Task.CompletedTask;
+	}
+
+	[GrubsEvent.Game.Start]
+	internal virtual void InitializeSuddenDeath()
+	{
+		RoundsUntilSuddenDeath = GrubsConfig.SuddenDeathDelay;
+		SuddenDeath = false;
+	}
+
+	internal async Task CheckSuddenDeath()
+	{
+		RoundsUntilSuddenDeath -= 1;
+		SuddenDeath = RoundsUntilSuddenDeath <= 0;
+
+		if ( SuddenDeath )
+		{
+			if ( GrubsConfig.SuddenDeathOneHealth && RoundsUntilSuddenDeath == 0 )
+			{
+				UI.TextChat.AddInfoChatEntry( "The earth begins to rumble and shake..." );
+
+				foreach ( var grub in All.OfType<Grub>() )
+				{
+					grub.Health = 1;
+				}
+			}
+
+			Sound.FromScreen( "suddendeath_rumble" );
+			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
+		}
+	}
 }

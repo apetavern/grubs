@@ -21,6 +21,9 @@ public partial class FreeForAll : Gamemode
 	/// </summary>
 	public Task NextTurnTask { get; set; }
 
+	private Queue<Player> LateJoinSpawnQueue { get; set; } = new();
+	private string[] _lateJoinPhrases = new string[3] { "arrived fashionably late!", "has dropped in unexpectedly!", "finally decided to showed up!" };
+
 	public override float GetTimeRemaining()
 	{
 		return TimeUntilNextTurn;
@@ -35,10 +38,24 @@ public partial class FreeForAll : Gamemode
 
 	internal override void Start()
 	{
+		Terrain.ResetTerrainPosition();
+
 		SpawnPlayers();
 
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 		CurrentState = State.Playing;
+		base.Start();
+	}
+
+	internal override void OnPlayerJoinedLate( Player player )
+	{
+		if ( !GrubsConfig.SpawnLateJoiners )
+			return;
+
+		if ( !LateJoinSpawnQueue.Contains( player ) || DisconnectedPlayers.Contains( player ) )
+			LateJoinSpawnQueue.Enqueue( player );
+
+		base.OnPlayerJoinedLate( player );
 	}
 
 	/// <summary>
@@ -59,7 +76,7 @@ public partial class FreeForAll : Gamemode
 			MoveToSpawnpoint( client );
 		}
 
-		ActivePlayer = PlayerTurnQueue.Dequeue();
+		RotateActivePlayer();
 	}
 
 	internal override void UseTurn( bool giveMovementGrace = false )
@@ -70,32 +87,45 @@ public partial class FreeForAll : Gamemode
 			UsedTurn = true;
 	}
 
+	internal override async Task OnRoundPassed()
+	{
+		await base.OnRoundPassed();
+		await CheckSuddenDeath();
+	}
+
 	private async Task NextTurn()
 	{
-		ActivePlayer.EndTurn();
-
-		await Terrain.UntilResolve();
-
 		TurnIsChanging = true;
 
-		if ( await HasGameWinner() )
+		ActivePlayer.EndTurn();
+
+		await Terrain.UntilResolve( 30 );
+
+		await CleanupTurn();
+
+		if ( !PlayerTurnQueue.Any() )
+			await OnRoundPassed();
+
+		if ( HasGameWinner() )
 		{
 			Event.Run( GrubsEvent.Game.End );
 			return;
 		}
 		else if ( Game.Clients.Where( C => C.IsBot ).Any() )
 		{
-			BBox worldbox = new BBox();
-			worldbox.Maxs = new Vector3( Terrain.WorldTextureLength / 2f, 10f, Terrain.WorldTextureHeight );
-			worldbox.Mins = new Vector3( -Terrain.WorldTextureLength / 2f, -10f, 0 );
+			var worldbox = new BBox
+			{
+				Maxs = new Vector3( Terrain.WorldTextureLength / 2f, 10f, Terrain.WorldTextureHeight ),
+				Mins = new Vector3( -Terrain.WorldTextureLength / 2f, -10f, 0 )
+			};
 
-			//DebugOverlay.Box( worldbox, Color.Red, 100f );
-
-			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 150f, standableAngle: 45f, save: false );
+			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 50f, standableAngle: 50f, save: false );
 		}
 
 		if ( GrubsConfig.WindEnabled )
 			ActiveWindSteps = Game.Random.Int( -GrubsConfig.WindSteps, GrubsConfig.WindSteps );
+
+		await HandleSpawns();
 
 		RotateActivePlayer();
 
@@ -107,18 +137,7 @@ public partial class FreeForAll : Gamemode
 		await SetupTurn();
 	}
 
-	/// <summary>
-	/// Handle cleaning up the existing player's turn.
-	/// </summary>
-	private async ValueTask<bool> HasGameWinner()
-	{
-		await GameTask.DelaySeconds( 1f );
-		await DealGrubDamage();
-		await HandleCrateSpawns();
-		await HandleBarrelSpawn();
-
-		return CheckWinConditions();
-	}
+	private bool HasGameWinner() => CheckWinConditions();
 
 	private async Task DealGrubDamage()
 	{
@@ -148,8 +167,11 @@ public partial class FreeForAll : Gamemode
 				continue;
 
 			await ShowDamagedGrub( damagedGrub );
-			await Terrain.UntilResolve();
+			await Terrain.UntilResolve( 30 );
 		}
+
+		// Clear dead or disconnected players from player turn queue.
+		PlayerTurnQueue = new( PlayerTurnQueue.Where( p => p.IsAvailableForTurn ) );
 	}
 
 	private async Task ShowDamagedGrub( Grub grub )
@@ -174,7 +196,7 @@ public partial class FreeForAll : Gamemode
 		await CheckCrateSpawn( CrateType.Tools, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
 		await CheckCrateSpawn( CrateType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
 
-		await Terrain.UntilResolve();
+		await Terrain.UntilResolve( 30 );
 
 		CameraTarget = null;
 	}
@@ -187,7 +209,7 @@ public partial class FreeForAll : Gamemode
 		var player = Game.Clients.First().Pawn as Player;
 		var crate = CrateGadgetComponent.SpawnCrate( crateType );
 
-		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, size: 32f );
+		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, crate );
 		crate.Position = spawnPos;
 		crate.Owner = player;
 		player.Gadgets.Add( crate );
@@ -206,7 +228,7 @@ public partial class FreeForAll : Gamemode
 		PrefabLibrary.TrySpawn<Gadget>( "prefabs/world/oil_drum.prefab", out var barrel );
 		var player = Game.Clients.First().Pawn as Player;
 
-		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, size: 32f );
+		var spawnPos = Terrain.FindSpawnLocation( traceDown: false, barrel );
 		barrel.Position = spawnPos;
 		barrel.Owner = player;
 		player.Gadgets.Add( barrel );
@@ -218,6 +240,33 @@ public partial class FreeForAll : Gamemode
 		CameraTarget = null;
 	}
 
+	private async Task HandleLateJoinerSpawn()
+	{
+		if ( LateJoinSpawnQueue.Count <= 0 )
+			return;
+
+		var player = LateJoinSpawnQueue.Dequeue();
+		if ( !player.IsValid() )
+			return;
+
+		player.HandleLateJoin();
+		Players.Add( player );
+		PlayerTurnQueue.Enqueue( player );
+
+		if ( !player.ActiveGrub.Components.TryGet<LateJoinMechanic>( out var lateJoin ) )
+			return;
+
+		UI.TextChat.AddInfoChatEntry( $"{player.Client.Name} {Game.Random.FromArray( _lateJoinPhrases )}" );
+
+		while ( !lateJoin.FinishedParachuting || !player.ActiveGrub.Resolved )
+		{
+			CameraTarget = player.ActiveGrub;
+			await GameTask.Delay( 1 );
+		}
+
+		CameraTarget = null;
+	}
+
 	[ClientRpc]
 	public void DamageGrubEventClient( Grub grub )
 	{
@@ -225,11 +274,32 @@ public partial class FreeForAll : Gamemode
 	}
 
 	/// <summary>
-	/// Handle setting up the new player's turn.
+	/// Handle cleaning up the existing player's turn.
 	/// </summary>
-	private async Task SetupTurn()
+	/// <returns></returns>
+	private async Task CleanupTurn()
 	{
-		// TODO: I am not sure.
+		await GameTask.DelaySeconds( 1f );
+		await DealGrubDamage();
+	}
+
+	/// <summary>
+	/// Handle spawning of game elements.
+	/// </summary>
+	/// <returns></returns>
+	private async Task HandleSpawns()
+	{
+		await HandleCrateSpawns();
+		await HandleBarrelSpawn();
+		await HandleLateJoinerSpawn();
+	}
+
+	/// <summary>
+	/// Handle setting up the next player's turn.
+	/// </summary>
+	internal override async Task SetupTurn()
+	{
+		await base.SetupTurn();
 	}
 
 	private bool CheckWinConditions()
@@ -266,12 +336,20 @@ public partial class FreeForAll : Gamemode
 		return false;
 	}
 
-	private void RotateActivePlayer()
+	public void RotateActivePlayer()
 	{
-		if ( ActivePlayer.IsAvailableForTurn )
-			PlayerTurnQueue.Enqueue( ActivePlayer );
+		if ( !PlayerTurnQueue.Any() )
+		{
+			foreach ( var player in Players.Where( p => p.IsAvailableForTurn ) )
+			{
+				PlayerTurnQueue.Enqueue( player );
+			}
+		}
 
 		ActivePlayer = PlayerTurnQueue.Dequeue();
+
+		GameTask.Delay( 200 );
+
 		while ( !ActivePlayer.IsAvailableForTurn )
 		{
 			ActivePlayer = PlayerTurnQueue.Dequeue();
@@ -345,6 +423,7 @@ public partial class FreeForAll : Gamemode
 			DebugOverlay.ScreenText( $"ActivePlayer & Grub: {ActivePlayer.Client.Name} - {ActivePlayer.ActiveGrub.Name}", lineOffset++ );
 			DebugOverlay.ScreenText( $"TimeUntilNextTurn: {TimeUntilNextTurn}", lineOffset++ );
 			DebugOverlay.ScreenText( $"UsedTurn: {UsedTurn}", lineOffset++ );
+			DebugOverlay.ScreenText( $"RoundsPassed: {RoundsPassed}", lineOffset++ );
 		}
 	}
 

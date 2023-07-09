@@ -28,27 +28,16 @@ public partial class FiringState : BaseState
 
 		float distance = direction.Length;
 
-		var tr = Trace.Ray( activeGrub.EyePosition - Vector3.Up, Brain.TargetGrub.EyePosition - Vector3.Up * 3f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
-
-		bool lineOfSight = tr.Entity == Brain.TargetGrub;
-
 		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
 
 		bool facingTarget = Vector3.DistanceBetween( activeGrub.Position + activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position ) < Vector3.DistanceBetween( activeGrub.Position - activeGrub.Rotation.Forward * 20f, Brain.TargetGrub.Position );
 
-		//DebugOverlay.TraceResult( tr );
-
-		if ( !facingTarget || MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 10f ) )
+		if ( !facingTarget || MyPlayer.ActiveGrub.Position.x.AlmostEqual( Brain.TargetGrub.Position.x, 50f ) )
 		{
 			MyPlayer.MoveInput = MathF.Sign( direction.Normal.x * 2f );
 		}
 
 		MyPlayer.LookInput = Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal );
-
-		if ( MathX.AlmostEqual( Vector3.Dot( forwardLook * Rotation.FromPitch( 90f * MyPlayer.ActiveGrub.Facing ), direction.Normal ), 0f, 0.1f ) )
-		{
-			MyPlayer.LookInput = 0f;
-		}
 	}
 
 	public void FireAtTarget()
@@ -121,7 +110,7 @@ public partial class FiringState : BaseState
 			Input.SetAction( "fire", false );
 		}
 
-		if ( Brain.TimeSinceStateStarted > 5f || MyPlayer.ActiveGrub.ActiveWeapon.CurrentUses >= MyPlayer.ActiveGrub.ActiveWeapon.Charges )
+		if ( Brain.TimeSinceStateStarted > 5f || (MyPlayer.ActiveGrub.IsValid && MyPlayer.ActiveGrub.ActiveWeapon.IsValid && MyPlayer.ActiveGrub.ActiveWeapon.CurrentUses >= MyPlayer.ActiveGrub.ActiveWeapon.Charges) )
 		{
 			Firing = false;
 			FinishedState();

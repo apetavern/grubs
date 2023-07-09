@@ -1,13 +1,25 @@
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
-<root class="@(!HasAmmo ? "disabled" : "")">
+@if ( Game.LocalPawn is not Player player )
+{
+    return;
+}
+<root class="@(IsDisabled(player) ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>
     <img src=@Weapon.Icon />
 </root>
 
 @code {
     public Weapon Weapon { get; set; }
-    public bool HasAmmo { get; set; }
+
+    bool IsDisabled(Player player)
+    {
+        if (!Weapon.HasAmmo() || !player.IsTurn || Weapon.UnlockDelay > GamemodeSystem.Instance.RoundsPassed)
+            return true;
+        return false;
+    }
 
     protected string GetAmmoString()
     {
@@ -16,45 +28,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(HasAmmo, Weapon.Ammo);
+        var player = Game.LocalPawn as Player;
+        return HashCode.Combine(Weapon.HasAmmo(), GetAmmoString(), player.IsTurn, GamemodeSystem.Instance.RoundsPassed);
     }
 }
-
-<style>
-    InventorySlot {
-        width: 65px;
-        height: 65px;
-        background-color: rgba(235, 235, 235, 0.24);
-        border-radius: 4px;
-        transition: all 0.1s ease-out;
-
-        .charges {
-            position: absolute;
-            font-family: Londrina Solid;
-            font-size: 20px;
-            color: white;
-            text-shadow: 2px 2px 0px black;
-        }
-
-        &:hover {
-            transform: scale(1.25);
-
-            &:not(.disabled) {
-                sound-in: ui_button_hover;
-            }
-        }
-
-        &:active {
-            transform: scale(1.1);
-
-            &:not(.disabled) {
-                sound-in: ui_button_click;
-            }
-        }
-
-        &.disabled {
-            transform: scale(1);
-            opacity: 0.6;
-        }
-    }
-</style>

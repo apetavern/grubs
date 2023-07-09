@@ -1,13 +1,13 @@
 {
-  "UI": true,
+  "UI": false,
   "Volume": "0.37,0.37,0",
   "Pitch": "1.04,1.08,1",
-  "Decibels": 70,
+  "Decibels": 95,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/grub/backflip1.vsnd",
     "sounds/grub/backflip2.vsnd"
   ],
-  "MaximumDistance": 1143.9335,
-  "MinimumDistance": 57.196674
+  "MaximumDistance": 2080,
+  "MinimumDistance": 104
 }

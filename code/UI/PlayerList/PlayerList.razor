@@ -1,11 +1,13 @@
 @using System.Linq;
 
 @namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
 
 <root>
     <TextChat />
     <div @ref=Players class="players">
-        @foreach (var player in GamemodeSystem.Instance.Players)
+        @foreach (var player in GamemodeSystem.Instance.Players.OrderByDescending(x => x.GetHealthPercentage))
         {
             <PlayerInfo Player=@player />
         }
@@ -32,27 +34,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GamemodeSystem.Instance.Players.HashCombine(p => p.SteamId));
+        var players = GamemodeSystem.Instance.Players;
+        return HashCode.Combine(players.HashCombine(p => p.SteamId), players.HashCombine(p => p.GetHealthPercentage) );
     }
 }
-
-<style>
-    PlayerList {
-        position: absolute;
-        bottom: 125px;
-        left: 100px;
-        flex-direction: column;
-        justify-content: flex-end;
-
-        .players {
-            left: -38px;
-            flex-direction: column;
-            overflow: hidden;
-            width: 400px;
-            align-items: center;
-            padding-top: 10px;
-            max-height: 625px;
-            pointer-events: all;
-        }
-    }
-</style>

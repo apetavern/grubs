@@ -23,13 +23,15 @@ public class GrubsCamera
 
 	public void FrameSimulate( IClient _ )
 	{
+		Sound.Listener = new Transform( Camera.Position, Camera.Rotation );
+
 		if ( CanScroll )
 		{
 			Distance -= Input.MouseWheel * _scrollRate;
 			Distance = _distanceRange.Clamp( Distance );
 		}
 
-		if ( _timeUntilCameraUnlock <= 0 )
+		if ( _timeUntilCameraUnlock )
 			FindTarget();
 
 		if ( !_target.IsValid() )
@@ -81,7 +83,7 @@ public class GrubsCamera
 
 		if ( gm.TurnIsChanging )
 		{
-			foreach ( var grub in Entity.All.OfType<Grub>() )
+			foreach ( var grub in Entity.All.OfType<Grub>().Where( e => !e.IsDormant ) )
 			{
 				if ( grub.LifeState != LifeState.Dying )
 					continue;
@@ -95,11 +97,11 @@ public class GrubsCamera
 			return;
 		}
 
-		foreach ( var gadget in Entity.All.OfType<Gadget>() )
+		foreach ( var gadget in Entity.All.OfType<Gadget>().Where( e => !e.IsDormant ) )
 		{
 			if ( gadget.ShouldCameraFollow )
 			{
-				SetTarget( gadget, 2f );
+				SetTarget( gadget, 3f );
 				return;
 			}
 		}

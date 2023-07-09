@@ -1,5 +1,6 @@
 {
-  "MenuIcon": "models/cosmetics/leafhat/leafhat.vmdl_c.png",
+  "CloudIdent": "",
+  "MenuIcon": "models/cosmetics/leafhat/leafhat.vmdl.png",
   "Title": "Leaf Hat",
   "Subtitle": "",
   "Category": "Hat",

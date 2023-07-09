@@ -28,6 +28,10 @@
           "Friction": {
             "Type": "Single",
             "Value": "4"
+          },
+          "IsDroppable": {
+            "Type": "Boolean",
+            "Value": "true"
           }
         }
       },
@@ -75,10 +79,6 @@
             "Type": "Single",
             "Value": "0.35"
           },
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "65"
-          },
           "_name": {
             "Value": "\u0022ExplosiveGadgetComponent\u0022"
           },
@@ -88,6 +88,14 @@
           "MaxExplosionDamage": {
             "Type": "Single",
             "Value": "65"
+          },
+          "DestructionRadius": {
+            "Type": "Single",
+            "Value": "65"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "85"
           }
         }
       }

@@ -3,6 +3,8 @@
 [Prefab, Category( "Weapon" )]
 public partial class Weapon : AnimatedEntity, IResolvable
 {
+	#region Prefab
+
 	/// <summary>
 	/// The hold pose for this weapon.
 	/// </summary>
@@ -21,9 +23,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	/// </summary>
 	[Prefab, Net]
 	public int Charges { get; set; } = 0;
-
-	[Net]
-	public int CurrentUses { get; set; } = 0;
 
 	/// <summary>
 	/// Whether the aim reticle should be shown for this weapon.
@@ -44,23 +43,29 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	public bool AllowMovement { get; set; } = false;
 
 	/// <summary>
+	/// Whether this weapon should show input hints.
+	/// </summary>
+	[Prefab, Net]
+	public bool ShowInputHints { get; set; } = true;
+
+	/// <summary>
 	/// The chance of receiving this weapon in a crate.
 	/// A chance of zero means it will not spawn from a crate.
 	/// </summary>
 	[Prefab, Net]
 	public float DropChance { get; set; } = 1f;
 
+	/// <summary>
+	/// The WeaponType of this weapon.
+	/// </summary>
 	[Prefab, Net]
 	public WeaponType WeaponType { get; set; } = WeaponType.Weapon;
 
 	/// <summary>
-	/// The amount of uses this weapon has.
+	/// The amount of turns that must pass before this weapon can be used.
 	/// </summary>
-	[Net]
-	public int Ammo { get; set; }
-
-	[Net]
-	public bool HasFired { get; set; } = false;
+	[Prefab, Net]
+	public int UnlockDelay { get; set; } = 0;
 
 	/// <summary>
 	/// If the weapon has a hat, override any Grub clothing.
@@ -68,17 +73,46 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public bool OverrideHat { get; set; } = true;
 
-	[Net]
-	public bool WeaponHasHat { get; set; }
-
+	/// <summary>
+	/// The inventory icon for this weapon.
+	/// </summary>
 	[Prefab, Net, ResourceType( "png" )]
 	public string Icon { get; set; }
 
+	#endregion
+
+	/// <summary>
+	/// The amount of uses this weapon has.
+	/// </summary>
+	[Net]
+	public int Ammo { get; set; }
+
+	/// <summary>
+	/// Whether or not the charge has been consumed for this weapon for the current turn.
+	/// </summary>
+	[Net]
+	public bool IsChargeConsumed { get; set; } = false;
+
+	/// <summary>
+	/// The amount of times this weapon can be used for the current turn.
+	/// </summary>
+	[Net]
+	public int CurrentUses { get; set; } = 0;
+
+	/// <summary>
+	/// Whether a weapon has a hat associated to dress the Grub in.
+	/// </summary>
+	[Net]
+	public bool WeaponHasHat { get; set; }
+
 	public Grub Grub => Owner as Grub;
 
-	public bool Resolved => !IsFiring() && !IsCharging();
+	public bool Resolved => !IsFiring() && !IsCharging() || IsDormant;
 
 	public bool HasChargesRemaining => CurrentUses < Charges;
+
+	private UI.InputHintWorldPanel InputHintWorldPanel { get; set; }
+	private bool _hasInputOverride;
 
 	public Weapon()
 	{
@@ -97,6 +131,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	{
 		SimulateComponents( client );
 		DetermineWeaponVisibility();
+
+		if ( Game.IsClient && !_hasInputOverride )
+			InputHintWorldPanel?.UpdateInput( InputAction.Fire, GetFireInputActionDescription() );
 	}
 
 	[Net]
@@ -113,7 +150,21 @@ public partial class Weapon : AnimatedEntity, IResolvable
 			component.OnDeploy();
 		}
 
+		if ( Game.IsServer )
+			return;
+
 		UI.Cursor.Enabled( "Weapon", FiringType == FiringType.Cursor );
+
+		if ( !ShowInputHints )
+			return;
+
+		var inputHintOverride = Components.Get<InputHintOverrideComponent>();
+		_hasInputOverride = inputHintOverride is not null;
+
+		var inputActions = _hasInputOverride ? inputHintOverride.InputActions.ToList() : new List<string>() { InputAction.Fire };
+		var inputDescriptions = _hasInputOverride ? inputHintOverride.InputDescriptions.ToList() : new List<string>() { GetFireInputActionDescription() };
+
+		InputHintWorldPanel = new UI.InputHintWorldPanel( grub, inputActions, inputDescriptions );
 	}
 
 	public void Holster( Grub _ )
@@ -121,10 +172,10 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		EnableDrawing = false;
 		CurrentUses = 0;
 
-		if ( HasFired && Ammo > 0 )
+		if ( IsChargeConsumed && Ammo > 0 )
 			Ammo--;
 
-		HasFired = false;
+		IsChargeConsumed = false;
 
 		foreach ( var component in Components.GetAll<WeaponComponent>() )
 		{
@@ -134,6 +185,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		Grub?.SetHatVisible( true );
 
 		UI.Cursor.Enabled( "Weapon", false );
+
+		if ( Game.IsClient )
+			InputHintWorldPanel?.Delete();
 
 		SetParent( null );
 	}
@@ -238,6 +292,17 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		return false;
 	}
 
+	private string GetFireInputActionDescription()
+	{
+		return FiringType switch
+		{
+			FiringType.Instant => "Fire",
+			FiringType.Charged => "Fire (Hold)",
+			FiringType.Cursor => "Set Target",
+			_ => string.Empty,
+		};
+	}
+
 	/// <summary>
 	/// Spawns and returns a Weapon from the Prefab Library.
 	/// </summary>
@@ -267,12 +332,6 @@ public partial class Weapon : AnimatedEntity, IResolvable
 				yield return prefab;
 			}
 		}
-	}
-
-	[ClientRpc]
-	public void PlayScreenSound( string sound )
-	{
-		this.SoundFromScreen( sound );
 	}
 }
 

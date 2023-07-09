@@ -35,11 +35,15 @@
           },
           "MaxExplosionDamage": {
             "Type": "Single",
-            "Value": "100"
+            "Value": "60"
           },
-          "ExplosionRadius": {
+          "DestructionRadius": {
             "Type": "Single",
             "Value": "50"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "75"
           }
         }
       },
@@ -91,6 +95,10 @@
       },
       "_tags": {
         "Value": "\u0022gadget\u0022"
+      },
+      "TrailParticle": {
+        "Type": "String",
+        "Value": "\u0022particles/smoke/smoke_ring.vpcf\u0022"
       }
     }
   }

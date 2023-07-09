@@ -52,11 +52,7 @@
           },
           "MaxExplosionDamage": {
             "Type": "Single",
-            "Value": "50"
-          },
-          "ExplosionRadius": {
-            "Type": "Single",
-            "Value": "115"
+            "Value": "25"
           },
           "ExplodeAfter": {
             "Type": "Single",
@@ -79,6 +75,14 @@
           "DeleteOnExplode": {
             "Type": "Boolean",
             "Value": "false"
+          },
+          "DestructionRadius": {
+            "Type": "Single",
+            "Value": "115"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "125"
           }
         }
       }

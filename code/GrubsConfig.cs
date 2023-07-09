@@ -15,6 +15,12 @@ public static class GrubsConfig
 	public static int MinimumPlayers { get; set; } = 2;
 
 	/// <summary>
+	/// If late joiners get a worm spawned in to play with.
+	/// </summary>
+	[ConVar.Replicated( "gr_spawn_late_joiners" )]
+	public static bool SpawnLateJoiners { get; set; } = false;
+
+	/// <summary>
 	/// The amount of <see cref="Grub"/>s that will be spawned per team.
 	/// </summary>
 	[ConVar.Replicated( "grub_count" ), Change( nameof( OnGrubCountChange ) )]
@@ -31,6 +37,24 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar.Replicated( "turn_duration" )]
 	public static int TurnDuration { get; set; } = 45;
+
+	/// <summary>
+	/// The amount of rounds to be played before Sudden Death begins.
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_delay" )]
+	public static int SuddenDeathDelay { get; set; } = 15;
+
+	/// <summary>
+	/// Should all Grubs have their health set to 1 when Sudden Death begins?
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_onehealth" )]
+	public static bool SuddenDeathOneHealth { get; set; } = false;
+
+	/// <summary>
+	/// How harshly Sudden Death affects the terrain.
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_aggression" )]
+	public static int SuddenDeathAggression { get; set; } = 30;
 
 	/// <summary>
 	/// Whether or not wind is enabled.
@@ -152,4 +176,16 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar.Replicated( "terrain_texture" )]
 	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Grubs;
+
+	/// <summary>
+	/// The strength of the curves in the terrain's heightmap.
+	/// </summary>
+	[ConVar.Replicated( "terrain_amplitude" )]
+	public static float TerrainAmplitude { get; set; } = 48f;
+
+	/// <summary>
+	/// The frequency of the curves in the terrain's heightmap.
+	/// </summary>
+	[ConVar.Replicated( "terrain_frequency" )]
+	public static float TerrainFrequency { get; set; } = 0.5f;
 }

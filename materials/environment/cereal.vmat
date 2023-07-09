@@ -10,10 +10,8 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Position ----
-	g_flYPosition "64.000"
-	g_flYSmoothing "75.000"
 	g_flZPosition "0.000"
-	g_flZSmoothing "250.000"
+	g_flZSmoothing "512.000"
 
 	//---- Scorch ----
 	g_flScorchBlendDistance "32.000"

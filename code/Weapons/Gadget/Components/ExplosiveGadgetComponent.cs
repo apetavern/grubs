@@ -4,7 +4,10 @@ namespace Grubs;
 public partial class ExplosiveGadgetComponent : GadgetComponent
 {
 	[Prefab]
-	public float ExplosionRadius { get; set; } = 100.0f;
+	public float DestructionRadius { get; set; } = 100.0f;
+
+	[Prefab]
+	public float DamageRadius { get; set; } = 125.0f;
 
 	[Prefab, Net]
 	public float MaxExplosionDamage { get; set; } = 100f;
@@ -68,22 +71,18 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		switch ( ExplosionReaction )
 		{
 			case ExplosiveReaction.Explosion:
-				ExplosionHelper.Explode( Gadget.Position, Grub, ExplosionRadius, MaxExplosionDamage );
+				ExplosionHelper.Explode( Gadget.Position, Grub, DestructionRadius, DamageRadius, MaxExplosionDamage );
 				break;
 			case ExplosiveReaction.Incendiary:
 				FireHelper.StartFiresAt( Gadget.Position, Gadget.Velocity.Normal * 10f, 10 );
 				break;
 		}
 
-		ExplodeSoundClient( To.Everyone, ExplosionSound );
+		// Play it from world since the gadget deletes and the sound will move to (0, 0, 0).
+		Sound.FromWorld( To.Everyone, ExplosionSound, Gadget.Position );
+
 		if ( DeleteOnExplode )
 			Gadget.Delete();
-	}
-
-	[ClientRpc]
-	public void ExplodeSoundClient( string explosionSound )
-	{
-		Gadget.SoundFromScreen( explosionSound );
 	}
 }
 

@@ -1,0 +1,46 @@
+@namespace Grubs.UI
+@inherits EntityWorldPanel
+@attribute [StyleSheet]
+
+<root>
+    <div class="background">
+        @for (int i = 0; i < _inputActions.Count; ++i)
+        {
+            <div style="align-items: center;">
+                <InputGlyph button=@_inputActions[i] size="large" />
+                <label>@_inputDescriptions[i]</label>
+            </div>
+        }
+    </div>
+</root>
+
+@code {
+    private List<string> _inputActions;
+    private List<string> _inputDescriptions;
+
+    public InputHintWorldPanel(Entity entity, List<string> inputActions, List<string> inputDescriptions) : base(entity, Vector3.Down * 7.5f)
+    {
+    // We can't use a dictionary since they are not supported in the Prefab Editor.
+    // Basically we need to ensure for every input action we have a description.
+    // In the future it'd be nice to combine together inputActions & inputDescriptions.
+        Assert.True(inputActions.Count == inputDescriptions.Count);
+
+        _inputActions = inputActions;
+        _inputDescriptions = inputDescriptions;
+
+        var width = 1500;
+        PanelBounds = new(-width / 2, 0, width, 1000);
+    }
+
+    public void UpdateInput(string inputAction, string description)
+    {
+        var actionIndex = _inputActions.IndexOf(inputAction);
+        if (actionIndex != -1)
+            _inputDescriptions[actionIndex] = description;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(_inputActions.HashCombine(h => h.GetHashCode()), _inputDescriptions.HashCombine(h => h.GetHashCode()));
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "UI": false,
+  "Volume": "0.80,0.80,0",
+  "Pitch": "0.95,1.05,1",
+  "Decibels": 90,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/weapons/goat/goat1.vsnd",
+    "sounds/weapons/goat/goat2.vsnd",
+    "sounds/weapons/goat/goat3.vsnd",
+    "sounds/weapons/goat/goat4.vsnd"
+  ],
+  "MaximumDistance": 1870.0942,
+  "MinimumDistance": 93.504715
+}

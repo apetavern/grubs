@@ -1,0 +1,12 @@
+{
+  "UI": true,
+  "Volume": "0.10,0.10,0",
+  "Pitch": "0.98,1.02,1",
+  "Decibels": 110,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/world/suddendeath_rumble.vsnd"
+  ],
+  "MaximumDistance": 2777.795,
+  "MinimumDistance": 138.88976
+}

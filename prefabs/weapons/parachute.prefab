@@ -26,6 +26,24 @@
             "Value": "\u0022sounds/weapons/parachute/parachute_deploy.sound\u0022"
           }
         }
+      },
+      {
+        "Guid": "0ca4ba3d-4915-4995-bcd9-d4036edcf0cd",
+        "Class": "InputHintOverrideComponent",
+        "Keys": {
+          "InputDescriptions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022Deploy\u0022\r\n]"
+          },
+          "InputActions": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022fire\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022InputHintOverrideComponent\u0022"
+          },
+          "_tags": {}
+        }
       }
     ],
     "Keys": {

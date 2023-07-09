@@ -32,6 +32,18 @@
           "ExplosionForceMultiplier": {
             "Type": "Single",
             "Value": "0.4"
+          },
+          "DamageRadius": {
+            "Type": "Single",
+            "Value": "110"
+          },
+          "DestructionRadius": {
+            "Type": "Single",
+            "Value": "100"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "35"
           }
         }
       },

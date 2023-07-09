@@ -36,6 +36,14 @@
           "Fuel": {
             "Type": "Single",
             "Value": "10"
+          },
+          "MaxFuel": {
+            "Type": "Single",
+            "Value": "15"
+          },
+          "ThrustSound": {
+            "Type": "String",
+            "Value": "\u0022sounds/weapons/jetpack/thrust.sound\u0022"
           }
         }
       }
@@ -103,6 +111,10 @@
       "FireSound": {
         "Type": "String",
         "Value": "\u0022sounds/weapons/girder/gurder_build.sound\u0022"
+      },
+      "ShowInputHints": {
+        "Type": "Boolean",
+        "Value": "false"
       }
     }
   }
