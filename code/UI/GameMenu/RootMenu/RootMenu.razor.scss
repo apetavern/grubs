@@ -4,7 +4,6 @@ RootMenu {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(90deg, $color-grape-purple, $color-dark-pink);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -35,7 +34,7 @@ RootMenu {
             color: black;
 
             label {
-                font-size: 36px;
+                font-size: 42px;
             }
 
             &.disabled {

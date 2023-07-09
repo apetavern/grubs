@@ -1,0 +1,75 @@
+﻿@import "../../Styles/vars.scss";
+
+CreateGameMenu {
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        height: 80%;
+        width: 50%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: Londrina Solid;
+        color: white;
+
+        .header {
+            height: 25%;
+            align-items: flex-end;
+            font-size: 72px;
+        }
+
+        .controls {
+            height: 75%;
+            width: 40%;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+
+            .form-group {
+                height: 25%;
+                width: 100%;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                label {
+                    font-size: 42px;
+                }
+
+                .form-control {
+                    label {
+                        font-size: 24px;
+                    }
+
+                    .slidercontrol {
+                        width: 30%;
+                    }
+                }
+            }
+
+            .buttons {
+                height: 50%;
+                width: 100%;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+
+                .menu-button {
+                    height: 75px;
+                    width: 75%;
+                    background-color: rgba($color-banana-yellow .525);
+                    color: black;
+
+                    label {
+                        font-size: 42px;
+                    }
+
+                    &.disabled {
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+    }
+}

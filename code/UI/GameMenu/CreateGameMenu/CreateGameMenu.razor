@@ -1,0 +1,43 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@namespace Grubs.UI
+@attribute [StyleSheet]
+
+<root>
+    <div class="container">
+        <Label class="header">Create a Game</Label>
+
+        <div class="controls">
+            <FormGroup class="form-group">
+                <Label>Server Name</Label>
+                <Control>
+                    <TextEntry Value:bind="@_serverTitle" Tooltip="Server Title"> </TextEntry>
+                </Control>
+            </FormGroup>
+
+            <FormGroup class="form-group">
+                <Label>Max Players</Label>
+                <Control>
+                    <SliderControl ShowTextEntry="@false" ShowRange="@true" Min=@(1) Max=@(16) Value:bind="@_maxPlayers"></SliderControl>
+                </Control>
+            </FormGroup>
+
+            <div class="buttons">
+                <a class="menu-button" onclick="@StartGame">Start Game</a>
+                <a class="menu-button" href="/">Back</a>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code {
+    private string _serverTitle { get; set; } = "Grubs Server";
+    private int _maxPlayers { get; set; } = 8;
+    private string _map => "apetavern.gr_beach";
+
+    private void StartGame()
+    {
+        _ = Game.Menu.StartServerAsync(_maxPlayers, _serverTitle, _map);
+        this.Navigate("/ingame");
+    }
+}
