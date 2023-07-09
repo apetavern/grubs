@@ -1,0 +1,33 @@
+﻿@import "../../Styles/vars.scss";
+
+FindGameMenu {
+    justify-content: center;
+    align-items: center;
+
+    .list {
+        width: 50%;
+        height: 70%;
+    }
+
+    .buttons {
+        width: 15%;
+        height: 30%;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .menu-button {
+            width: 100%;
+            height: 75px;
+            background-color: rgba($color-banana-yellow .525);
+            color: black;
+
+            label {
+                font-size: 42px;
+            }
+
+            &.disabled {
+                opacity: 0.6;
+            }
+        }
+    }
+}

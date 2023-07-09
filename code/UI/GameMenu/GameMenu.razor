@@ -16,6 +16,7 @@
 
         AddDestination("/", typeof(RootMenu));
         AddDestination("/create", typeof(CreateGameMenu));
+        AddDestination("/find", typeof(FindGameMenu));
         AddDestination("/ingame", typeof(InGameMenu));
 
         if (Game.InGame) Navigate("/ingame");
