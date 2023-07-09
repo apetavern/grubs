@@ -169,6 +169,9 @@ public partial class FreeForAll : Gamemode
 			await ShowDamagedGrub( damagedGrub );
 			await Terrain.UntilResolve( 30 );
 		}
+
+		// Clear dead or disconnected players from player turn queue.
+		PlayerTurnQueue = new( PlayerTurnQueue.Where( p => p.IsAvailableForTurn ) );
 	}
 
 	private async Task ShowDamagedGrub( Grub grub )
