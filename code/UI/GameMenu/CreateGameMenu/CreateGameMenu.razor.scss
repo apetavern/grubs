@@ -5,73 +5,64 @@ CreateGameMenu {
     align-items: center;
 
     .container {
-        height: 80%;
-        width: 50%;
+        width: 20%;
+        height: 75%;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
         font-family: Londrina Solid;
         color: white;
 
-        .controls {
-            height: 75%;
-            width: 40%;
+        .setting-group {
+            width: 100%;
+            height: 30%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            label {
+                font-size: 24px;
+                padding: 0px 5px;
+
+                &.setting-title {
+                    font-size: 60px;
+                }
+            }
+
+            textentry {
+                width: 80%;
+                height: 50px;
+                text-align: center;
+                transition: opacity 0.1s ease;
+                border-radius: 4px;
+                background-color: rgb($color-light-grey 0.2);
+                margin: 5px;
+            }
+
+            .slidercontrol {
+                width: 80%;
+            }
+        }
+
+        .buttons {
+            width: 100%;
+            height: 40%;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
 
-            .form-group {
-                height: 25%;
-                width: 100%;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+            .menu-button {
+                width: 75%;
+                height: 75px;
+                background-color: rgba($color-banana-yellow .525);
+                color: white;
 
                 label {
-                    font-size: 60px;
+                    font-size: 42px;
                 }
 
-                .form-control {
-                    justify-content: center;
-                    width: 75%;
-
-                    label {
-                        font-size: 24px;
-                        padding: 0px 5px;
-                    }
-
-                    textentry {
-                        width: 100%;
-                        height: 50px;
-                        text-align: center;
-                        transition: opacity 0.1s ease;
-                        border-radius: 4px;
-                        background-color: rgb($color-light-grey 0.2);
-                        margin: 5px;
-                    }
-                }
-            }
-
-            .buttons {
-                height: 50%;
-                width: 100%;
-                flex-direction: column;
-                justify-content: space-evenly;
-                align-items: center;
-
-                .menu-button {
-                    height: 75px;
-                    width: 75%;
-                    background-color: rgba($color-banana-yellow .525);
-                    color: black;
-
-                    label {
-                        font-size: 42px;
-                    }
-
-                    &.disabled {
-                        opacity: 0.6;
-                    }
+                &.disabled {
+                    opacity: 0.6;
                 }
             }
         }

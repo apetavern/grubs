@@ -15,24 +15,24 @@ GameMenu {
         background-image: linear-gradient(90deg, rgba($color-grape-purple .95), rgba($color-dark-pink .95));
     }
 
+    .hidden {
+        display: none;
+    }
+
     .navigator-canvas {
         width: 100%;
         height: 100%;
         flex-grow: 1;
         flex-shrink: 0;
-    }
 
-    .navigator-body {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        flex-direction: column;
-        padding: 100px 0px;
-    }
-
-    .hidden {
-        display: none;
+        .navigator-body {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            flex-direction: column;
+            padding: 100px 0px;
+        }
     }
 }

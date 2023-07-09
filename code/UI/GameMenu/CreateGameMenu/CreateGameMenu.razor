@@ -5,26 +5,20 @@
 
 <root>
     <div class="container">
-        <div class="controls">
-            <FormGroup class="form-group">
-                <Label>Server Name</Label>
-                <Control>
-                    <TextEntry Value:bind="@_serverTitle" Tooltip="Server Title"> </TextEntry>
-                </Control>
-            </FormGroup>
+        <section class="setting-group">
+            <label class="setting-title">Server Name</label>
+            <TextEntry Value:bind="@_serverTitle" Tooltip="Server Title"> </TextEntry>
+        </section>
 
-            <FormGroup class="form-group">
-                <Label>Max Players</Label>
-                <Control>
-                    <SliderControl ShowTextEntry="@false" ShowRange="@true" Min=@(1) Max=@(16) Value:bind="@_maxPlayers"></SliderControl>
-                </Control>
-            </FormGroup>
+        <section class="setting-group">
+            <label class="setting-title">Max Players</label>
+            <SliderControl ShowTextEntry="@false" ShowRange="@true" Min=@(1) Max=@(16) Value:bind="@_maxPlayers"></SliderControl>
+        </section>
 
-            <div class="buttons">
-                <a class="menu-button" onclick="@StartGame">Start Game</a>
-                <a class="menu-button" href="/">Back</a>
-            </div>
-        </div>
+        <section class="buttons">
+            <button class="menu-button" onclick="@StartGame">Start Game</button>
+            <a class="menu-button" href="/">Back</a>
+        </section>
     </div>
 </root>
 
