@@ -170,7 +170,7 @@ public partial class Grub
 			attacker = reason.Attacker;
 		}
 
-		// Source of attack was an entity in the world.
+		// Source of death was an entity in the world.
 		if ( attacker != null && attacker is Grub attackerGrub )
 		{
 			if ( attackerGrub.Player.Client.IsBot ) return;
@@ -178,8 +178,13 @@ public partial class Grub
 			// Killed self.
 			if ( attackerGrub.Player == this.Player )
 				Sandbox.Services.Stats.Increment( Player.Client, "own-grubs-killed", 1 );
-			else // Killed by someone else.
-				Sandbox.Services.Stats.Increment( attackerGrub.Player.Client, "grubs-killed", 1 );
+			else // Killed by another player.
+			{
+				if ( this.Player.Client.IsBot )
+					Sandbox.Services.Stats.Increment( attackerGrub.Player.Client, "bot-grubs-killed", 1 );
+				else
+					Sandbox.Services.Stats.Increment( attackerGrub.Player.Client, "grubs-killed", 1 );
+			}
 		}
 		else if ( !Player.Client.IsBot ) // Attacker is not an actual entity. This should mean the player threw themselves off the map.
 		{
