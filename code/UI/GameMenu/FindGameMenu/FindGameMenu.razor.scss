@@ -1,0 +1,47 @@
+﻿@import "/UI/Styles/vars.scss";
+
+FindGameMenu {
+    justify-content: center;
+    align-items: center;
+
+    .list {
+        width: 50%;
+        height: 70%;
+    }
+
+    .buttons {
+        width: 800px;
+        height: 30%;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 18px;
+
+        .menu-button {
+            padding: 24px;
+            width: 100%;
+            height: 75px;
+            color: #333;
+            background-color: white;
+            border-radius: 8px;
+
+            label {
+                font-size: 42px;
+            }
+
+            &.disabled {
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+ServerListPanel {
+    top: 32px;
+    margin: 24px;
+    background-color: #333;
+    border-radius: 8px;
+}
+
+.loading-status {
+    justify-content: center;
+}

@@ -1,0 +1,21 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@namespace Grubs.UI
+@attribute [StyleSheet]
+
+<root style="flex-direction: column;">
+    <section class="list" style="flex-direction: column; flex-grow: 1; flex-shrink: 1;">
+        <ServerListPanel @ref="ServerList" ShowGame=@false FilterByGame=@Game.Menu.Package.FullIdent></ServerListPanel>
+    </section>
+
+    <section class="buttons">
+        <button class="menu-button" onclick="@(() => ServerList.Refresh())"> Refresh </button>
+        <a class="menu-button" href="/">Back</a>
+    </section>
+</root>
+
+
+@code
+{
+    ServerListPanel ServerList;
+}

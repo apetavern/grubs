@@ -1,0 +1,27 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@namespace Grubs.UI
+@inherits Sandbox.UI.NavHostPanel
+@implements Sandbox.Menu.IGameMenuPanel
+@attribute [StyleSheet]
+
+<root>
+    <worldscene />
+    <div class="navigator-canvas" slot="navigator-canvas"></div>
+</root>
+
+@code {
+    public GameMenu()
+    {
+        DefaultUrl = "/";
+
+        AddDestination("/", typeof(FrontMenu));
+        AddDestination("/create", typeof(CreateGameMenu));
+        AddDestination("/find", typeof(FindGameMenu));
+        AddDestination("/ingame", typeof(InGameMenu));
+
+        if (Game.InGame) Navigate("/ingame");
+
+        BindClass("ingame", () => Game.InGame);
+    }
+}
