@@ -6,7 +6,7 @@ public class AirMoveMechanic : ControllerMechanic
 	public static float AirAcceleration => 8.0f;
 	public static float FallVelocityDamageThreshold => MathF.Sqrt( 2 * Gravity * 15 * 12 );
 	public static float FallVelocityFatalThreshold => MathF.Sqrt( 2 * Gravity * 50 * 12 );
-	public static float FallDistanceThreshold => 150f;
+	public static float FallDistanceThreshold => 50f;
 	public static float FallPunchThreshold => 300f;
 	public static float FallDamage => 100f / (FallVelocityFatalThreshold - FallVelocityDamageThreshold);
 	public static float FallDamageModifier => 0.13f;
