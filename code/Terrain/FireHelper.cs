@@ -2,7 +2,7 @@
 
 public static class FireHelper
 {
-	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
+	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, Entity source, int fireQuantity = 1, float knockBack = 1f )
 	{
 		Game.AssertServer();
 
@@ -11,11 +11,12 @@ public static class FireHelper
 			var baseDirection = Vector3.Random.WithY( 0f ) * 45f;
 			_ = new FireEntity(
 				position + Vector3.Random.WithY( 0f ) * 45f,
-				baseDirection * moveDirection ).WithKnockbackForce( knockBack );
+				baseDirection * moveDirection,
+				source ).WithKnockbackForce( knockBack );
 		}
 	}
 
-	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
+	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, Entity source, int fireQuantity = 1, float knockBack = 1f )
 	{
 		Game.AssertServer();
 
@@ -24,7 +25,8 @@ public static class FireHelper
 			_ = new FireEntity(
 				position + moveDirection.Normal * 3f,
 				moveDirection * Game.Random.Float( 0.8f, 1f ),
-				Game.PhysicsWorld.Gravity * Time.Delta / 2f ).WithKnockbackForce( knockBack );
+				Game.PhysicsWorld.Gravity * Time.Delta / 2f,
+				source ).WithKnockbackForce( knockBack );
 		}
 	}
 }
@@ -35,6 +37,7 @@ public class FireEntity : ModelEntity, IResolvable
 	public bool Resolved => _timeUntilExpire || IsDormant;
 	public Vector3 Gravity;
 	public float KnockbackForce = 1f;
+	public Entity Source { get; private set; }
 
 	private const float fireSize = 7.5f;
 	private Particles FireParticle { get; set; }
@@ -48,20 +51,22 @@ public class FireEntity : ModelEntity, IResolvable
 		Transmit = TransmitType.Always;
 	}
 
-	public FireEntity( Vector3 startPosition, Vector3 moveDirection )
+	public FireEntity( Vector3 startPosition, Vector3 moveDirection, Entity source )
 	{
 		Position = startPosition;
 		MoveDirection = moveDirection;
 		Velocity = MoveDirection * Time.Delta * 10f;
+		Source = source;
 
 		Gravity = Game.PhysicsWorld.Gravity * Time.Delta / 10f;
 	}
 
-	public FireEntity( Vector3 startPosition, Vector3 moveDirection, Vector3 gravity )
+	public FireEntity( Vector3 startPosition, Vector3 moveDirection, Vector3 gravity, Entity source )
 	{
 		Position = startPosition;
 		MoveDirection = moveDirection;
 		Velocity = MoveDirection * Time.Delta * 10f;
+		Source = source;
 
 		if ( gravity == Vector3.Zero )
 		{
