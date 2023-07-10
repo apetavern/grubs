@@ -4,7 +4,7 @@
 
 <root>
     <label>Terrain</label>
-    <div>
+    <div class="options">
         <SingleSelect 
             SelectedIndex=@((int)GrubsConfig.WorldTerrainEnvironmentType)
             Options=@EnvironmentOptions 
@@ -26,6 +26,7 @@
             Key="terrain_texture"
             IsDisabled=@(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated || !Game.LocalClient.IsListenServerHost)
             OnOptionSelected=@SetConfigOption />
+        <Slider />
     </div>
 </root>
 

@@ -9,7 +9,7 @@ SingleSelect {
     }
 
     .select {
-        background-color: rgba($color-cream-white 0.24);
+        background-color: $color-good-greyvy;
         margin: 2px;
         border-radius: 4px;
         justify-content: flex-start;
@@ -19,20 +19,23 @@ SingleSelect {
         align-items: center;
 
         &.disabled {
-            background-color: rgba($color-cream-white 0.77);
+            background-color: rgba($color-good-greyvy 1.2);
         }
     }
 
     .select-options {
+        position: absolute;
+        top: 100%;
         opacity: 0;
         margin: 2px;
         padding: 4px;
         flex-direction: column;
-        background-color: rgba($color-cream-white 0.24);
+        background-color: $color-good-greyvy;
         border-radius: 4px;
 
         &.show {
             opacity: 1;
+            z-index: 1000;
         }
     }
 

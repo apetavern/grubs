@@ -1,0 +1,17 @@
+﻿@namespace Grubs.UI
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+    <div>Left</div>
+    <div>Middle</div>
+    <div>Right</div>
+</root>
+
+@code {
+    
+    public bool IsHorizontal { get; set; } = false;
+
+    public float Min { get; set; } = 0;
+    public float Max { get; set; } = 100;
+}
