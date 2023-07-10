@@ -138,12 +138,52 @@ public partial class Grub
 		foreach ( var clothing in clothes )
 			clothing.EnableDrawing = false;
 
+		IncrementKilledStats();
+
 		if ( !DeathReason.FromKillTrigger )
 		{
 			var gravestone = PrefabLibrary.Spawn<Gadget>( "prefabs/world/gravestone.prefab" );
 			gravestone.Owner = Player;
 			gravestone.Position = Position;
 			Player.Gadgets.Add( gravestone );
+		}
+	}
+
+	private void IncrementKilledStats()
+	{
+		// Find source of attack.
+		Entity attacker = null;
+		if ( DeathReason.FirstInfo.HasValue )
+		{
+			var reason = DeathReason.FirstInfo.Value;
+			if ( reason.Attacker is FireEntity fire )
+				reason.Attacker = fire.Source;
+
+			attacker = reason.Attacker;
+		}
+		if ( attacker == null && DeathReason.SecondInfo.HasValue )
+		{
+			var reason = DeathReason.SecondInfo.Value;
+			if ( reason.Attacker is FireEntity fire )
+				reason.Attacker = fire.Source;
+
+			attacker = reason.Attacker;
+		}
+
+		// Source of attack was an entity in the world.
+		if ( attacker != null && attacker is Grub attackerGrub )
+		{
+			if ( attackerGrub.Player.Client.IsBot ) return;
+
+			// Killed self.
+			if ( attackerGrub.Player == this.Player )
+				Sandbox.Services.Stats.Increment( Player.Client, "own-grubs-killed", 1 );
+			else // Killed by someone else.
+				Sandbox.Services.Stats.Increment( attackerGrub.Player.Client, "grubs-killed", 1 );
+		}
+		else if ( !Player.Client.IsBot ) // Attacker is not an actual entity. This should mean the player threw themselves off the map.
+		{
+			Sandbox.Services.Stats.Increment( Player.Client, "own-grubs-killed", 1 );
 		}
 	}
 

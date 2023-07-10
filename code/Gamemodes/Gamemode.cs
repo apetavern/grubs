@@ -130,6 +130,9 @@ public partial class Gamemode : Entity
 		Event.Run( GrubsEvent.Game.Start );
 	}
 
+	[GrubsEvent.Game.Start]
+	internal virtual void IncrementGamesPlayedStat() { }
+
 	internal virtual void OnClientJoined( IClient client )
 	{
 		var existingPlayer = DisconnectedPlayers.Where( p => p.SteamId == client.SteamId ).FirstOrDefault();

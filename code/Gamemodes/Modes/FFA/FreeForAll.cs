@@ -47,6 +47,14 @@ public partial class FreeForAll : Gamemode
 		base.Start();
 	}
 
+	internal override void IncrementGamesPlayedStat()
+	{
+		foreach ( var player in Players.Where( p => !p.Client.IsBot ) )
+		{
+			Sandbox.Services.Stats.Increment( player.Client, "ffa-games-played", 1 );
+		}
+	}
+
 	internal override void OnPlayerJoinedLate( Player player )
 	{
 		if ( !GrubsConfig.SpawnLateJoiners )
@@ -305,7 +313,7 @@ public partial class FreeForAll : Gamemode
 	private bool CheckWinConditions()
 	{
 		var deadPlayers = 0;
-		Player lastPlayerAlive;
+		Player lastPlayerAlive = null;
 
 		foreach ( var player in Players )
 		{
@@ -329,6 +337,9 @@ public partial class FreeForAll : Gamemode
 		if ( deadPlayers == Players.Count - 1 )
 		{
 			// 1 Player remaining
+			if ( !lastPlayerAlive.Client.IsBot )
+				Sandbox.Services.Stats.Increment( lastPlayerAlive.Client, "ffa-wins", 1 );
+
 			CurrentState = State.GameOver;
 			return true;
 		}
