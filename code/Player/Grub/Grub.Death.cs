@@ -138,6 +138,8 @@ public partial class Grub
 		foreach ( var clothing in clothes )
 			clothing.EnableDrawing = false;
 
+		Stats.IncrementGrubsKilled( GamemodeSystem.Instance.ActivePlayer, Player );
+
 		if ( !DeathReason.FromKillTrigger )
 		{
 			var gravestone = PrefabLibrary.Spawn<Gadget>( "prefabs/world/gravestone.prefab" );
