@@ -169,6 +169,8 @@ public partial class Grub
 		if ( weapon == null && DeathReason.SecondInfo.HasValue && DeathReason.SecondInfo.Value.Weapon is Weapon )
 			weapon = DeathReason.SecondInfo.Value.Weapon as Weapon;
 
+		if ( !weapon.IsValid() ) return;
+
 		if ( weapon.Name == "Bitch Slap" )
 			Sandbox.Services.Stats.Increment( attacker.Client, "bitchslap-kills", 1 );
 	}
