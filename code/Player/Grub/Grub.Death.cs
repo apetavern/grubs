@@ -161,6 +161,16 @@ public partial class Grub
 			statIdent = "bot-grubs-killed";
 
 		Sandbox.Services.Stats.Increment( attacker.Client, statIdent, 1 );
+
+		// Get weapon used to kill this grub.
+		Weapon weapon = null;
+		if ( DeathReason.FirstInfo.HasValue && DeathReason.FirstInfo.Value.Weapon is Weapon )
+			weapon = DeathReason.FirstInfo.Value.Weapon as Weapon;
+		if ( weapon == null && DeathReason.SecondInfo.HasValue && DeathReason.SecondInfo.Value.Weapon is Weapon )
+			weapon = DeathReason.SecondInfo.Value.Weapon as Weapon;
+
+		if ( weapon.Name == "Bitch Slap" )
+			Sandbox.Services.Stats.Increment( attacker.Client, "bitchslap-kills", 1 );
 	}
 
 	[ConCmd.Admin( "kill" )]

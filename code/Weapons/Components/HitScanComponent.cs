@@ -207,6 +207,7 @@ public partial class HitScanComponent : WeaponComponent
 			Attacker = Grub,
 			Damage = Damage,
 			Position = entity.Position,
+			Weapon = Weapon,
 			Force = direction
 		}.WithTag( Tag.Hitscan ) );
 	}
