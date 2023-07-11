@@ -10,7 +10,7 @@ public static class Stats
 	public static string GamesWon( string gamemode ) => $"{gamemode}-games-won";
 	public static string WeaponKills( string weapon )
 	{
-		weapon = weapon.ToLower().Replace( " ", "-" );
+		weapon = weapon.Trim().ToLower().Replace( " ", "-" );
 		return $"weapon-{weapon}-kills";
 	}
 
