@@ -23,10 +23,6 @@ public static partial class ExplosionHelper
 			if ( !entity.IsValid() || entity.LifeState != LifeState.Alive || entity.Tags.Has( Tag.Invincible ) )
 				continue;
 
-			Weapon weapon = null;
-			if ( source is Grub sourceGrub )
-				weapon = sourceGrub.Player.Inventory.LastActiveWeapon;
-
 			var dist = Vector3.DistanceBetween( position, entity.Position );
 			if ( dist > destructionRadius )
 			{
@@ -56,7 +52,7 @@ public static partial class ExplosionHelper
 				grub.ApplyAbsoluteImpulse( dir * force );
 			}
 
-			entity.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ).WithWeapon( weapon ) );
+			entity.TakeDamage( DamageInfoExtension.FromExplosion( maxDamage * distanceFactor, position, Vector3.Up * 32, source ) );
 		}
 
 		var materials = Terrain.GetActiveMaterials( MaterialsConfig.Destruction );
