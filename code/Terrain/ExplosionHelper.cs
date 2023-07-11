@@ -12,7 +12,8 @@ public static partial class ExplosionHelper
 	/// <param name="destructionRadius">The radius of the explosion's destruction.</param>
 	/// <param name="damageRadius">The radius of the explosion's damage.</param>
 	/// <param name="maxDamage">The max amount of damage the explosion can do to a grub.</param>
-	public static void Explode( Vector3 position, Entity source, float destructionRadius = 100, float damageRadius = 100, float maxDamage = 100 )
+	/// <param name="knockbackForce">The physical force the explosion applies to a grub.</param>
+	public static void Explode( Vector3 position, Entity source, float destructionRadius = 100, float damageRadius = 100, float maxDamage = 100, float knockbackForce = 1000 )
 	{
 		if ( !Game.IsServer )
 			return;
@@ -47,7 +48,7 @@ public static partial class ExplosionHelper
 			if ( entity is Grub grub )
 			{
 				var linearDistanceFactor = 1.0f - Math.Clamp( dist / destructionRadius, 0, 1 );
-				var force = linearDistanceFactor * 1000;
+				var force = linearDistanceFactor * knockbackForce;
 				var dir = (entity.Position - position).Normal;
 				dir = dir.WithY( 0f );
 

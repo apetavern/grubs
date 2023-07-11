@@ -1,3 +1,7 @@
 ﻿TerrainTab {
     flex-direction: column;
+    
+    .options {
+        flex-wrap: wrap;
+    }
 }
