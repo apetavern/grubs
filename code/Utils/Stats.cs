@@ -2,6 +2,18 @@
 
 public static class Stats
 {
+	public const string GrubsKilled = "grubs-killed";
+	public const string OwnGrubsKilled = "own-grubs-killed";
+	public const string BotGrubsKilled = "bot-grubs-killed";
+
+	public static string GamesPlayed( string gamemode ) => $"{gamemode}-games-played";
+	public static string GamesWon( string gamemode ) => $"{gamemode}-games-won";
+	public static string WeaponKills( string weapon )
+	{
+		weapon = weapon.ToLower().Replace( " ", "-" );
+		return $"weapon-{weapon}-kills";
+	}
+
 	/// <summary>
 	/// Increment "gamemode-games-won" stat for winning client.
 	/// </summary>
@@ -11,7 +23,7 @@ public static class Stats
 	{
 		if ( client.IsBot ) return;
 
-		Sandbox.Services.Stats.Increment( client, $"{gamemode}-games-won", 1 );
+		Sandbox.Services.Stats.Increment( client, GamesWon( gamemode ), 1 );
 	}
 
 	/// <summary>
@@ -22,7 +34,7 @@ public static class Stats
 	{
 		foreach ( var player in GamemodeSystem.Instance.Players.Where( p => !p.Client.IsBot ) )
 		{
-			Sandbox.Services.Stats.Increment( player.Client, $"{gamemode}-games-played", 1 );
+			Sandbox.Services.Stats.Increment( player.Client, GamesPlayed( gamemode ), 1 );
 		}
 	}
 
@@ -36,11 +48,11 @@ public static class Stats
 		if ( attacker.Client.IsBot ) return;
 
 		// General kill stat.
-		string statIdent = "grubs-killed";
+		string statIdent = GrubsKilled;
 		if ( attacker == victim ) // Killed self.
-			statIdent = "own-grubs-killed";
+			statIdent = OwnGrubsKilled;
 		else if ( victim.Client.IsBot ) // Killed a bot.
-			statIdent = "bot-grubs-killed";
+			statIdent = BotGrubsKilled;
 
 		Sandbox.Services.Stats.Increment( attacker.Client, statIdent, 1 );
 
@@ -49,7 +61,6 @@ public static class Stats
 		Weapon weapon = hasWeaponEquipped ? attacker.Inventory.ActiveWeapon : attacker.Inventory.LastActiveWeapon;
 		if ( !weapon.IsValid() ) return;
 
-		string weaponName = weapon.Name.ToLower().Replace( " ", "-" );
-		Sandbox.Services.Stats.Increment( attacker.Client, $"{weaponName}-kills", 1 );
+		Sandbox.Services.Stats.Increment( attacker.Client, WeaponKills( weapon.Name ), 1 );
 	}
 }
