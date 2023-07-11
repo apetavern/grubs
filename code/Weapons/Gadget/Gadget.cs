@@ -102,7 +102,7 @@ public partial class Gadget : AnimatedEntity, IResolvable
 			return;
 
 		ExplosionHelper.Explode( Position, this, 50f, 75f );
-		FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, this, 4 );
+		FireHelper.StartFiresAt( Position, Vector3.Random.WithY( 0f ) * 30f, 4 );
 
 		Sound.FromWorld( "explosion_short_tail", Position );
 		Delete();

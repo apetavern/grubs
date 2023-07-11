@@ -2,7 +2,7 @@
 
 public static class FireHelper
 {
-	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, Entity source, int fireQuantity = 1, float knockBack = 1f )
+	public static void StartFiresAt( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
 	{
 		Game.AssertServer();
 
@@ -15,7 +15,7 @@ public static class FireHelper
 		}
 	}
 
-	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, Entity source, int fireQuantity = 1, float knockBack = 1f )
+	public static void StartFiresWithDirection( Vector3 position, Vector3 moveDirection, int fireQuantity = 1, float knockBack = 1f )
 	{
 		Game.AssertServer();
 
