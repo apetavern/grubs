@@ -138,7 +138,7 @@ public partial class Grub
 		foreach ( var clothing in clothes )
 			clothing.EnableDrawing = false;
 
-		IncrementKilledStats();
+		Stats.IncrementGrubsKilled( GamemodeSystem.Instance.ActivePlayer, Player );
 
 		if ( !DeathReason.FromKillTrigger )
 		{
@@ -147,32 +147,6 @@ public partial class Grub
 			gravestone.Position = Position;
 			Player.Gadgets.Add( gravestone );
 		}
-	}
-
-	private void IncrementKilledStats()
-	{
-		var attacker = GamemodeSystem.Instance.ActivePlayer;
-		if ( attacker.Client.IsBot ) return;
-
-		string statIdent = "grubs-killed";
-		if ( attacker == Player ) // Killed self.
-			statIdent = "own-grubs-killed";
-		else if ( Player.Client.IsBot ) // Killed a bot.
-			statIdent = "bot-grubs-killed";
-
-		Sandbox.Services.Stats.Increment( attacker.Client, statIdent, 1 );
-
-		// Get weapon used to kill this grub.
-		Weapon weapon = null;
-		if ( DeathReason.FirstInfo.HasValue && DeathReason.FirstInfo.Value.Weapon is Weapon )
-			weapon = DeathReason.FirstInfo.Value.Weapon as Weapon;
-		if ( weapon == null && DeathReason.SecondInfo.HasValue && DeathReason.SecondInfo.Value.Weapon is Weapon )
-			weapon = DeathReason.SecondInfo.Value.Weapon as Weapon;
-
-		if ( !weapon.IsValid() ) return;
-
-		if ( weapon.Name == "Bitch Slap" )
-			Sandbox.Services.Stats.Increment( attacker.Client, "bitchslap-kills", 1 );
 	}
 
 	[ConCmd.Admin( "kill" )]

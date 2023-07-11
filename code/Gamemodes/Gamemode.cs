@@ -130,7 +130,7 @@ public partial class Gamemode : Entity
 		Event.Run( GrubsEvent.Game.Start );
 	}
 
-	[GrubsEvent.Game.Start]
+	[GrubsEvent.Game.End]
 	internal virtual void IncrementGamesPlayedStat() { }
 
 	internal virtual void OnClientJoined( IClient client )

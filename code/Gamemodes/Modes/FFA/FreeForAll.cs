@@ -47,13 +47,7 @@ public partial class FreeForAll : Gamemode
 		base.Start();
 	}
 
-	internal override void IncrementGamesPlayedStat()
-	{
-		foreach ( var player in Players.Where( p => !p.Client.IsBot ) )
-		{
-			Sandbox.Services.Stats.Increment( player.Client, "ffa-games-played", 1 );
-		}
-	}
+	internal override void IncrementGamesPlayedStat() => Stats.IncrementGamesPlayed( "ffa" );
 
 	internal override void OnPlayerJoinedLate( Player player )
 	{
@@ -337,9 +331,7 @@ public partial class FreeForAll : Gamemode
 		if ( deadPlayers == Players.Count - 1 )
 		{
 			// 1 Player remaining
-			if ( !lastPlayerAlive.Client.IsBot )
-				Sandbox.Services.Stats.Increment( lastPlayerAlive.Client, "ffa-wins", 1 );
-
+			Stats.IncrementGamesWon( "ffa", lastPlayerAlive.Client );
 			CurrentState = State.GameOver;
 			return true;
 		}
