@@ -42,7 +42,7 @@ public partial class MeleeComponent : WeaponComponent
 			{
 				grub.Controller.ClearGroundEntity();
 				grub.ApplyAbsoluteImpulse( HitForce * dir );
-				grub.TakeDamage( new DamageInfo { Attacker = Grub, Damage = Damage, Position = grub.Position }.WithTag( Tag.Melee ) );
+				grub.TakeDamage( new DamageInfo { Attacker = Grub, Damage = Damage, Position = grub.Position, }.WithTag( Tag.Melee ) );
 			}
 		}
 
