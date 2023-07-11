@@ -151,45 +151,16 @@ public partial class Grub
 
 	private void IncrementKilledStats()
 	{
-		// Find source of attack.
-		Entity attacker = null;
-		if ( DeathReason.FirstInfo.HasValue )
-		{
-			var reason = DeathReason.FirstInfo.Value;
-			if ( reason.Attacker is FireEntity fire )
-				reason.Attacker = fire.Source;
+		var attacker = GamemodeSystem.Instance.ActivePlayer;
+		if ( attacker.Client.IsBot ) return;
 
-			attacker = reason.Attacker;
-		}
-		if ( attacker == null && DeathReason.SecondInfo.HasValue )
-		{
-			var reason = DeathReason.SecondInfo.Value;
-			if ( reason.Attacker is FireEntity fire )
-				reason.Attacker = fire.Source;
+		string statIdent = "grubs-killed";
+		if ( attacker == Player ) // Killed self.
+			statIdent = "own-grubs-killed";
+		else if ( Player.Client.IsBot ) // Killed a bot.
+			statIdent = "bot-grubs-killed";
 
-			attacker = reason.Attacker;
-		}
-
-		// Source of death was an entity in the world.
-		if ( attacker != null && attacker is Grub attackerGrub )
-		{
-			if ( attackerGrub.Player.Client.IsBot ) return;
-
-			// Killed self.
-			if ( attackerGrub.Player == this.Player )
-				Sandbox.Services.Stats.Increment( Player.Client, "own-grubs-killed", 1 );
-			else // Killed by another player.
-			{
-				if ( this.Player.Client.IsBot )
-					Sandbox.Services.Stats.Increment( attackerGrub.Player.Client, "bot-grubs-killed", 1 );
-				else
-					Sandbox.Services.Stats.Increment( attackerGrub.Player.Client, "grubs-killed", 1 );
-			}
-		}
-		else if ( !Player.Client.IsBot ) // Attacker is not an actual entity. This should mean the player threw themselves off the map.
-		{
-			Sandbox.Services.Stats.Increment( Player.Client, "own-grubs-killed", 1 );
-		}
+		Sandbox.Services.Stats.Increment( attacker.Client, statIdent, 1 );
 	}
 
 	[ConCmd.Admin( "kill" )]
