@@ -1,4 +1,4 @@
-@namespace Grubs.UI
+﻿@namespace Grubs.UI
 @inherits Sandbox.UI.Panel
 @attribute [StyleSheet("PlayMenu.razor.scss")]
 
@@ -9,10 +9,10 @@
 
 <root>
     <div class="container">
-            <div class="header">
-                <label>Players</label>
-                <label>@(Game.Clients.Count) / @(Game.Server.MaxPlayers)</label>
-            </div>
+        <div class="header">
+            <label>Players</label>
+            <label>@(Game.Clients.Count) / @(Game.Server.MaxPlayers)</label>
+        </div>
         <div class="players">
             @foreach (var client in Game.Clients)
             {
@@ -25,11 +25,16 @@
                         <img src="avatar:@client.SteamId" class="avatar" />
                         <label class="name">@client.Name</label>
                     </div>
-                    @if(!client.IsBot)
+
+                    @if (!client.IsBot)
                     {
                         <div class="hours" style="align-items: center;">
+                            @if (client.IsListenServerHost)
+                            {
+                                <button icon="stars" class="host-badge"></button>
+                            }
                             <label>@player.PlayTime.ToString("0.0")hrs</label>
-                            <button icon="timer" style="margin-left: 4px;" />             
+                            <button icon="timer" style="margin-left: 4px;" />
                         </div>
                     }
                 </div>
@@ -67,7 +72,7 @@
     protected override int BuildHash()
     {
         return HashCode.Combine(
-            GetButtonText(), 
+            GetButtonText(),
             IsButtonEnabled(),
             Game.Clients.HashCombine(c => HashCode.Combine((c.Pawn as Player)?.Color.RawInt, c.SteamId))
         );
