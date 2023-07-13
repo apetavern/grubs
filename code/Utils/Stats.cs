@@ -21,7 +21,7 @@ public static class Stats
 	/// <param name="gamemode"></param>
 	public static void IncrementGamesWon( string gamemode, IClient client )
 	{
-		if ( client.IsBot ) return;
+		if ( !client.IsValid() || client.IsBot ) return;
 
 		Sandbox.Services.Stats.Increment( client, GamesWon( gamemode ), 1 );
 	}
@@ -32,7 +32,7 @@ public static class Stats
 	/// <param name="gamemode"></param>
 	public static void IncrementGamesPlayed( string gamemode )
 	{
-		foreach ( var player in GamemodeSystem.Instance.Players.Where( p => !p.Client.IsBot ) )
+		foreach ( var player in GamemodeSystem.Instance.Players.Where( p => p.Client.IsValid() && !p.Client.IsBot ) )
 		{
 			Sandbox.Services.Stats.Increment( player.Client, GamesPlayed( gamemode ), 1 );
 		}
@@ -45,7 +45,7 @@ public static class Stats
 	/// <param name="victim"></param>
 	public static void IncrementGrubsKilled( Player attacker, Player victim )
 	{
-		if ( attacker.Client.IsBot ) return;
+		if ( !attacker.Client.IsValid() || attacker.Client.IsBot ) return;
 
 		// General kill stat.
 		string statIdent = GrubsKilled;
