@@ -7,13 +7,35 @@ InventorySlot {
     border-radius: 4px;
     transition: all 0.1s ease-out;
 
-    .charges {
+    label {
         position: absolute;
-        left: 2px;
         font-family: Londrina Solid;
         font-size: 20px;
         color: white;
         text-shadow: 2px 2px 0px black;
+
+        &.charges {
+            left: 2px;
+        }
+
+        &.delay {
+            right: 2px;
+            bottom: 2px;
+            opacity: 1;
+
+            &.hidden {
+                opacity: 0;
+            }
+        }
+    }
+
+    .delay-progress {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        background-color: rgba($color-cream-white .75);
+        opacity: 1;
+        border-radius: 0px 0px 4px 4px;
     }
 
     &:hover {
