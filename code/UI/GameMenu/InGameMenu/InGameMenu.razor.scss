@@ -8,6 +8,11 @@ InGameMenu {
     justify-content: center;
     align-items: center;
     font-family: Londrina Solid;
+    opacity: 1;
+
+    &.hidden {
+        opacity: 0;
+    }
 
     .header {
         color: white;

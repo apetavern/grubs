@@ -1,6 +1,7 @@
 ﻿@using Sandbox;
 @using Sandbox.UI;
 @namespace Grubs.UI
+@inherits Panel
 @attribute [StyleSheet]
 
 <root>
@@ -13,3 +14,10 @@
         <button class="menu-button" onclick="@Game.Menu.Close">Quit</button>
     </section>
 </root>
+
+@code {
+    public InGameMenu()
+    {
+        BindClass("hidden", () => Game.Menu.IsLoading);
+    }
+}
