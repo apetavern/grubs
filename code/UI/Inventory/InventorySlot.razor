@@ -11,8 +11,8 @@
     <img src=@Weapon.Icon />
     <div class="delay-progress" style="height: @(GetDelayHeight())%"></div>
     <section class="delay @(ShouldHideDelay() ? "hidden" : "")">
-        <label>@(Weapon.UnlockDelay - GamemodeSystem.Instance.RoundsPassed)</label>
         <label class="icon">lock</label>
+        <label>@(Weapon.UnlockDelay - GamemodeSystem.Instance.RoundsPassed)</label>
     </section>
 </root>
 
