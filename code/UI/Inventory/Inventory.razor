@@ -34,7 +34,7 @@
     void OnInventorySlotClicked(Weapon weapon)
     {
         var player = Game.LocalPawn as Player;
-        if (weapon.HasAmmo() && player.IsTurn && GamemodeSystem.Instance.RoundsPassed >= weapon.UnlockDelay)
+        if (weapon.HasAmmo() && player.IsTurn && weapon.Unlocked)
             player.ActiveWeaponInput = weapon;
     }
 

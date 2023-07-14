@@ -10,7 +10,7 @@
     <label class="charges">@GetAmmoString()</label>
     <img src=@Weapon.Icon />
     <div class="delay-progress" style="height: @(GetDelayHeight())%"></div>
-    <section class="delay @(ShouldHideDelay() ? "hidden" : "")">
+    <section class="delay @(Weapon.Unlocked ? "hidden" : "")">
         <label class="icon">lock</label>
         <label>@(Weapon.UnlockDelay - GamemodeSystem.Instance.RoundsPassed)</label>
     </section>
@@ -21,16 +21,14 @@
 
     bool IsDisabled(Player player)
     {
-        if (!Weapon.HasAmmo() || !player.IsTurn || Weapon.UnlockDelay > GamemodeSystem.Instance.RoundsPassed)
+        if (!Weapon.HasAmmo() || !player.IsTurn || !Weapon.Unlocked)
             return true;
         return false;
     }
 
-    bool ShouldHideDelay() => GamemodeSystem.Instance.RoundsPassed >= Weapon.UnlockDelay;
-
     private float GetDelayHeight()
     {
-        if (Weapon.UnlockDelay == 0) return 0;
+        if (Weapon.Unlocked) return 0;
         return (1 - ((float)GamemodeSystem.Instance.RoundsPassed + 1) / (Weapon.UnlockDelay + 1)) * 100;
     }
 

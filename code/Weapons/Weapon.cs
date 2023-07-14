@@ -67,6 +67,8 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public int UnlockDelay { get; set; } = 0;
 
+	public bool Unlocked => GamemodeSystem.Instance?.RoundsPassed >= UnlockDelay || Ammo == -1;
+
 	/// <summary>
 	/// If the weapon has a hat, override any Grub clothing.
 	/// </summary>
