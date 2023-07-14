@@ -42,7 +42,9 @@
           "_name": {
             "Value": "\u0022InputHintOverrideComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -93,6 +95,10 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
+      },
+      "UnlockDelay": {
+        "Type": "Int32",
+        "Value": "1"
       }
     }
   }

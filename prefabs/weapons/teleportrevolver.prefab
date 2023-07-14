@@ -151,6 +151,10 @@
       "WeaponType": {
         "Type": "WeaponType",
         "Value": "\u0022Tool\u0022"
+      },
+      "UnlockDelay": {
+        "Type": "Int32",
+        "Value": "1"
       }
     }
   }
