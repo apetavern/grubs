@@ -401,6 +401,11 @@ public partial class FreeForAll : Gamemode
 			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
 				return;
 
+#if DEBUG
+			if ( GrubsConfig.InstantlyEndBotTurns && ActivePlayer.Client.IsBot )
+				UseTurn( false );
+#endif
+
 			if ( !ActivePlayer.ActiveGrub.IsValid() || ActivePlayer.IsDisconnected )
 				UseTurn( false );
 
