@@ -1,0 +1,61 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@namespace Grubs.UI
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+    <div style="align-items: center;">
+        <div class="color-strip" style="background-color: @Player.Color.Hex"></div>
+        <img src="avatar:@Player.Client.SteamId" class="avatar" />
+        <label class="name">@Player.Client.Name</label>
+        <button icon="stars" class="host-badge @(!Player.Client.IsListenServerHost ? "hidden" : "")"></button>
+    </div>
+
+    @if (!Player.Client.IsBot)
+    {
+        <section class="stats">
+            <label>@GetStatText()</label>
+            <button icon="@GetStatIcon()" style="padding-left: 2px" />
+        </section>
+    }
+</root>
+
+@code {
+    public Grubs.Player Player { get; set; }
+    public static TimeSince HoursStatShown = 0f;
+
+    private double _gamesWon, _grubsKilled;
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        if (!firstTime || Player.Client.IsBot) return;
+
+        GetStats();
+    }
+
+    private async void GetStats()
+    {
+        _gamesWon = await Stats.GetLeaderboardEntry("games-won", Player);
+        _grubsKilled = await Stats.GetLeaderboardEntry("grubs-killed", Player);
+    }
+
+    private string GetStatText()
+    {
+        if (HoursStatShown <= 15.0f) return $"{Player.PlayTime.ToString("0.0")} hrs";
+        else if (HoursStatShown <= 30.0f) return $"{_gamesWon.ToString("0")} wins";
+        else return $"{_grubsKilled.ToString("0")} kills";
+    }
+
+    private string GetStatIcon()
+    {
+        if (HoursStatShown <= 15.0f) return "timer";
+        else if (HoursStatShown <= 30.0f) return "emoji_events";
+        else return "person_off";
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GetStatIcon(), _gamesWon, _grubsKilled);
+    }
+}

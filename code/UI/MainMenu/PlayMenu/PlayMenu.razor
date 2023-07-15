@@ -19,25 +19,7 @@
                 if (client.Pawn is not Player player)
                     continue;
 
-                <div class="player">
-                    <div style="align-items: center;">
-                        <div class="color-strip" style="background-color: @player.Color.Hex"></div>
-                        <img src="avatar:@client.SteamId" class="avatar" />
-                        <label class="name">@client.Name</label>
-                    </div>
-
-                    @if (!client.IsBot)
-                    {
-                        <div class="hours" style="align-items: center;">
-                            @if (client.IsListenServerHost)
-                            {
-                                <button icon="stars" class="host-badge"></button>
-                            }
-                            <label>@player.PlayTime.ToString("0.0")hrs</label>
-                            <button icon="timer" style="margin-left: 4px;" />
-                        </div>
-                    }
-                </div>
+                <PlayerEntry Player=@player></PlayerEntry>
             }
         </div>
     </div>
@@ -67,6 +49,19 @@
     {
         @* Not the best... *@
         return GetButtonText() == "PLAY";
+    }
+
+    public override void Tick()
+    {
+        if (PlayerEntry.HoursStatShown >= 45.0f)
+            PlayerEntry.HoursStatShown = 0.0f;
+    }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        if (!firstTime) return;
+
+        PlayerEntry.HoursStatShown = 0.0f;
     }
 
     protected override int BuildHash()
