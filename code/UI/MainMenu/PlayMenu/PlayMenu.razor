@@ -53,15 +53,15 @@
 
     public override void Tick()
     {
-        if (PlayerEntry.HoursStatShown >= 45.0f)
-            PlayerEntry.HoursStatShown = 0.0f;
+        if (PlayerEntry.StatTimer >= 45.0f)
+            PlayerEntry.StatTimer = 0.0f;
     }
 
     protected override void OnAfterTreeRender(bool firstTime)
     {
         if (!firstTime) return;
 
-        PlayerEntry.HoursStatShown = 0.0f;
+        PlayerEntry.StatTimer = 0.0f;
     }
 
     protected override int BuildHash()

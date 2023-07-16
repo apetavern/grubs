@@ -23,7 +23,7 @@
 
 @code {
     public Grubs.Player Player { get; set; }
-    public static TimeSince HoursStatShown = 0f;
+    public static TimeSince StatTimer = 0f;
 
     private double _gamesWon, _grubsKilled;
 
@@ -42,15 +42,15 @@
 
     private string GetStatText()
     {
-        if (HoursStatShown <= 15.0f) return $"{Player.PlayTime.ToString("0.0")} hrs";
-        else if (HoursStatShown <= 30.0f) return $"{_gamesWon.ToString("0")} wins";
+        if (StatTimer <= 15.0f) return $"{Player.PlayTime.ToString("0.0")} hrs";
+        else if (StatTimer <= 30.0f) return $"{_gamesWon.ToString("0")} wins";
         else return $"{_grubsKilled.ToString("0")} kills";
     }
 
     private string GetStatIcon()
     {
-        if (HoursStatShown <= 15.0f) return "timer";
-        else if (HoursStatShown <= 30.0f) return "emoji_events";
+        if (StatTimer <= 15.0f) return "timer";
+        else if (StatTimer <= 30.0f) return "emoji_events";
         else return "person_off";
     }
 
