@@ -63,19 +63,4 @@ public static class Stats
 
 		Sandbox.Services.Stats.Increment( attacker.Client, WeaponKills( weapon.Name ), 1 );
 	}
-
-	public static async Task<double> GetLeaderboardEntry( string leaderboard, Player player )
-	{
-		if ( !player.Client.IsValid() || player.Client.IsBot ) return 0f;
-
-		var steamId = player.SteamId;
-		var board = Sandbox.Services.Leaderboards.Get( leaderboard );
-		board.TargetSteamId = steamId;
-		await board.Refresh();
-
-		var entry = board.Entries.Where( e => e.SteamId == steamId ).FirstOrDefault();
-		if ( entry.SteamId != steamId ) return 0f;
-
-		return entry.Value;
-	}
 }

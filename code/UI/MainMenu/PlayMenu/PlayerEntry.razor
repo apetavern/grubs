@@ -36,8 +36,8 @@
 
     private async void GetStats()
     {
-        _gamesWon = await Stats.GetLeaderboardEntry("games-won", Player);
-        _grubsKilled = await Stats.GetLeaderboardEntry("grubs-killed", Player);
+        _gamesWon = await Player.Client.GetLeaderboardEntry("games-won");
+        _grubsKilled = await Player.Client.GetLeaderboardEntry("grubs-killed");
     }
 
     private string GetStatText()
