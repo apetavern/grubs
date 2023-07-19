@@ -1,0 +1,674 @@
+{
+  "Title": "Grubs",
+  "Type": "game",
+  "Org": "apetavern",
+  "Ident": "grubs",
+  "Tags": "artillery turnbased pvp strategy multiplayer",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "Resources": "/data/*\n/fonts/*\n/textures/ui/*.png\n/textures/texturelevels/*.png\n/textures/texturestamps/*.png\n*/airstrike_icon.png\n*/reticle.png\n*/reticle_trans.png\n*.vmdl.png\n*.vmdl_c.png\n*.csgmat\n*.vmat\n*.vtex\n*.sdflayer\n*.vmdl\n*.vanmgrph\n*.dmx\n*.txt\n*.vpcf\n*.tlvl\n*.tsta\n*.scss\n*.png.meta\n*.prefab\n*.shader\n*.vpost\n*.mp3\n*.sound\n*.wav",
+  "MenuResources": "\nmaps/gr_menu.vpk\ntextures/ui/*\nUI/GameMenu/*\nfonts/*\nUI/Styles/*\nUI/MainMenu/WorldScene/*\nmaterials/effects/lightcookies/tree_canopy.vmat\nmodels/citizenworm.vmdl\nmodels/crates/weapons_crate/materials/weaponcrate.vmat\nmodels/crates/tools_crate/materials/toolcrate.vmat\nmodels/menu/materials/tree_01.vmat\nmodels/menu/materials/grassleaves.vmat\nmodels/menu/materials/backdrop_dirt.vmat\nmodels/weapons/airstrikes/materials/plane.vmat\nmodels/weapons/airstrikes/materials/propellor_active.vmat\nmodels/weapons/oildrum/materials/flame_emoji.vmat\nmodels/weapons/oildrum/materials/oildrum.vmat\nmodels/weapons/revolver/materials/sixshooter.vmat\nmodels/weapons/uzi/materials/uzi.vmat\nmodels/weapons/dynamite/materials/dynamite.vmat\nmodels/weapons/shotgun/materials/shotgun_colors.vmat\nmaterials/effects/lightcookies/tree_canopy.vmat_c\nmodels/citizenworm.vmdl_c\nmodels/crates/weapons_crate/materials/weaponcrate.vmat_c\nmodels/crates/tools_crate/materials/toolcrate.vmat_c\nmodels/menu/materials/tree_01.vmat_c\nmodels/menu/materials/grassleaves.vmat_c\nmodels/menu/materials/backdrop_dirt.vmat_c\nmodels/weapons/airstrikes/materials/plane.vmat_c\nmodels/weapons/airstrikes/materials/propellor_active.vmat_c\nmodels/weapons/oildrum/materials/flame_emoji.vmat_c\nmodels/weapons/oildrum/materials/oildrum.vmat_c\nmodels/weapons/revolver/materials/sixshooter.vmat_c\nmodels/weapons/uzi/materials/uzi.vmat_c\nmodels/weapons/dynamite/materials/dynamite.vmat_c\nmodels/weapons/shotgun/materials/shotgun_colors.vmat_c",
+  "HasCode": true,
+  "CodePath": "code",
+  "PackageReferences": [
+    "facepunch.libsdf",
+    "fish.grid_and_astar"
+  ],
+  "EditorReferences": null,
+  "Metadata": {
+    "MapList": [
+      "apetavern.gr_beach"
+    ],
+    "MaxPlayers": 16,
+    "MinPlayers": 0,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Hidden",
+    "RankType": "None",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "GameCategory": "None",
+    "Compiler": {
+      "RootNamespace": "Grubs",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;1998"
+    },
+    "GameSettings": {
+      "grubs_game": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "ffa",
+            "Name": "Free For All"
+          },
+          {
+            "Value": "tdm",
+            "Name": "Team Deathmatch"
+          }
+        ],
+        "ConVarName": "grubs_game",
+        "DisplayName": "Gamemode",
+        "DefaultValue": "ffa",
+        "Description": ""
+      },
+      "minimum_players": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "minimum_players",
+        "DisplayName": "Minimum Players",
+        "DefaultValue": "0",
+        "Description": "The minimum amount of players you need to play the game.",
+        "Minimum": 2,
+        "Maximum": 99
+      },
+      "maximum_players": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "maximum_players",
+        "DisplayName": "Maximum Players",
+        "DefaultValue": "4",
+        "Description": "The maximum amount of players that can play the game.",
+        "Minimum": 2,
+        "Maximum": 100
+      },
+      "grub_count": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "grub_count",
+        "DisplayName": "Grub Count",
+        "DefaultValue": "4",
+        "Description": "The amount of Grubs each team will have.",
+        "Minimum": 1,
+        "Maximum": 100
+      },
+      "turn_duration": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "turn_duration",
+        "DisplayName": "Turn Duration",
+        "DefaultValue": "60",
+        "Description": "The max time in seconds that a turn will last.",
+        "Minimum": 1,
+        "Maximum": 60
+      },
+      "wind_enabled": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "wind_enabled",
+        "DisplayName": "Wind Enabled",
+        "DefaultValue": "true",
+        "Description": "Whether or not the wind system is enabled."
+      },
+      "wind_force": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "wind_force",
+        "DisplayName": "Wind Force",
+        "DefaultValue": "0.1",
+        "Description": "The amount of force a single step of wind will have.",
+        "Minimum": 0.1,
+        "Maximum": 1
+      },
+      "crate_weapon_chance": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_weapon_chance",
+        "DisplayName": "Weapon Crate Chance",
+        "DefaultValue": "10",
+        "Description": "The percent chance that a weapon crate will spawn at the end of every turn.",
+        "Maximum": 100
+      },
+      "crate_health_chance": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_health_chance",
+        "DisplayName": "Health Crate Chance",
+        "DefaultValue": "5",
+        "Description": "The percent chance that a health crate will spawn at the end of every turn.",
+        "Maximum": 100
+      },
+      "movement_grace": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "movement_grace",
+        "DisplayName": "Movement Grace Period",
+        "DefaultValue": "5",
+        "Description": "The amount of seconds a Grub will get to move after using their weapon.",
+        "Maximum": 60
+      },
+      "terrain_file": {
+        "Choices": [],
+        "ConVarName": "terrain_file",
+        "DisplayName": "Terrain File",
+        "DefaultValue": "",
+        "Description": "The path to a custom Grubs map to use instead of random generation. This file is only needed on the server host."
+      },
+      "terrain_type": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "None",
+            "Name": "None"
+          },
+          {
+            "Value": "Dirt",
+            "Name": "Dirt"
+          },
+          {
+            "Value": "Sand",
+            "Name": "Sand"
+          },
+          {
+            "Value": "Lava",
+            "Name": "Lava"
+          }
+        ],
+        "ConVarName": "terrain_type",
+        "DisplayName": "Terrain Type",
+        "DefaultValue": "Sand",
+        "Description": "The type of material to be applied to the terrain."
+      },
+      "terrain_border": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_border",
+        "DisplayName": "Terrain Border",
+        "DefaultValue": "false",
+        "Description": "Whether the terrain should have a border or not."
+      },
+      "terrain_altered": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "terrain_altered",
+        "DisplayName": "Use Altered Terrain",
+        "DefaultValue": "true",
+        "Description": "Altered terrain is curated to look more like little islands with a height threshold so the terrain does not fill up the entire grid. We recommend using it."
+      },
+      "terrain_dilation": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_dilation",
+        "DisplayName": "Terrain Dilation Amount",
+        "DefaultValue": "1",
+        "Description": "The amount the terrain is dilated. The blobs in the terrain are extruded a certain number of times. Only applicable when Altered Terrain is enabled.",
+        "Maximum": 10
+      },
+      "terrain_resolution": {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_resolution",
+        "DisplayName": "Terrain Resolution",
+        "DefaultValue": "0.5",
+        "Description": "The resolution of the noise for the terrain. Lower means less blobs, and higher means more blobs.",
+        "Maximum": 1
+      },
+      "terrain_scale": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_scale",
+        "DisplayName": "Terrain Scale",
+        "DefaultValue": "15",
+        "Description": "Represents the size of a single point of terrain. A higher scale means the terrain is larger in the world.",
+        "Minimum": 5,
+        "Maximum": 50
+      },
+      "terrain_width": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_width",
+        "DisplayName": "Terrain Width",
+        "DefaultValue": "320",
+        "Description": "The width of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
+        "Minimum": 50,
+        "Maximum": 500
+      },
+      "terrain_height": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_height",
+        "DisplayName": "Terrain Height",
+        "DefaultValue": "180",
+        "Description": "The height of the terrain grid. The higher this is, the slower performance will be during terrain updates.",
+        "Minimum": 50,
+        "Maximum": 500
+      }
+    },
+    "ControlModes": {
+      "Keyboard": true
+    },
+    "ParentPackage": "",
+    "PackageSettings": [
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "FreeForAll",
+            "Name": "Free For All"
+          }
+        ],
+        "ConVarName": "grubs_game",
+        "DisplayName": "Gamemode",
+        "DefaultValue": "FreeForAll",
+        "Description": "",
+        "Group": "Game"
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "minimum_players",
+        "DisplayName": "Minimum Players",
+        "DefaultValue": "2",
+        "Description": "The minimum amount of players you need to play the game.",
+        "Group": "Game",
+        "Minimum": 2,
+        "Maximum": 99
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "maximum_players",
+        "DisplayName": "Maximum Players",
+        "DefaultValue": "8",
+        "Description": "The maximum amount of players that can play the game.",
+        "Group": "Game",
+        "Minimum": 2,
+        "Maximum": 8
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "grub_count",
+        "DisplayName": "Grub Count",
+        "DefaultValue": "2.3223982",
+        "Description": "The amount of Grubs each team will have.",
+        "Group": "Game",
+        "Minimum": 1,
+        "Maximum": 8
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "turn_duration",
+        "DisplayName": "Turn Duration",
+        "DefaultValue": "45",
+        "Description": "The max time in seconds that a turn will last.",
+        "Group": "Game",
+        "Minimum": 1,
+        "Maximum": 180
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "wind_enabled",
+        "DisplayName": "Wind Enabled",
+        "DefaultValue": "true",
+        "Description": "Whether or not the wind system is enabled.",
+        "Group": "Game"
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "wind_force",
+        "DisplayName": "Wind Force",
+        "DefaultValue": "0.1",
+        "Description": "The amount of force a single step of wind will have.",
+        "Group": "Game",
+        "Minimum": 0.1,
+        "Maximum": 1
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_weapon_chance",
+        "DisplayName": "Weapon Crate Chance",
+        "DefaultValue": "10",
+        "Description": "The percent chance that a weapon crate will spawn at the end of every turn.",
+        "Group": "Crates",
+        "Maximum": 100
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "crate_health_chance",
+        "DisplayName": "Health Crate Chance",
+        "DefaultValue": "5",
+        "Description": "The percent chance that a health crate will spawn at the end of every turn.",
+        "Group": "Crates",
+        "Maximum": 100
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "movement_grace",
+        "DisplayName": "Movement Grace Period",
+        "DefaultValue": "4",
+        "Description": "The amount of seconds a Grub will get to move after using their weapon.",
+        "Group": "Game",
+        "Maximum": 60
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_length",
+        "DisplayName": "Terrain Length",
+        "DefaultValue": "2048",
+        "Description": "The length of the terrain.",
+        "Group": "Terrain",
+        "Minimum": 512,
+        "Maximum": 4096
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "terrain_height",
+        "DisplayName": "Terrain Height",
+        "DefaultValue": "1024",
+        "Description": "The height of the terrain.",
+        "Group": "Terrain",
+        "Minimum": 256,
+        "Maximum": 2048
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_noise_zoom",
+        "DisplayName": "Terrain Zoom",
+        "DefaultValue": "2",
+        "Description": "The amount of zoom applied to the Perlin noise.",
+        "Group": "Terrain",
+        "Minimum": 1,
+        "Maximum": 5,
+        "Step": 1
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "0",
+            "Name": "Generated"
+          },
+          {
+            "Value": "1",
+            "Name": "Texture"
+          }
+        ],
+        "ConVarName": "terrain_type",
+        "DisplayName": "Terrain Type",
+        "DefaultValue": "0",
+        "Description": "The type of terrain to be used, currently between random generated noise and texture (experimental).",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "0",
+            "Name": "Grubs"
+          },
+          {
+            "Value": "1",
+            "Name": "Islands"
+          },
+          {
+            "Value": "2",
+            "Name": "AntFarm"
+          },
+          {
+            "Value": "3",
+            "Name": "Cavern"
+          },
+          {
+            "Value": "4",
+            "Name": "Bunkers"
+          },
+          {
+            "Value": "5",
+            "Name": "AICavern"
+          },
+          {
+            "Value": "6",
+            "Name": "Hightower"
+          }
+        ],
+        "ConVarName": "terrain_texture",
+        "DisplayName": "Terrain Texture",
+        "DefaultValue": "0",
+        "Description": "The prefabricated texture to use for the terrain.",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "0",
+            "Name": "Sand"
+          },
+          {
+            "Value": "1",
+            "Name": "Dirt"
+          },
+          {
+            "Value": "2",
+            "Name": "Cereal"
+          }
+        ],
+        "ConVarName": "terrain_environment_type",
+        "DisplayName": "Terrain Environment Type",
+        "DefaultValue": "0",
+        "Description": "The type of environment to be used for the terrain.",
+        "Group": "Terrain"
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_amplitude",
+        "DisplayName": "Terrain Amplitude",
+        "DefaultValue": "48",
+        "Description": "The strength of the curves in the terrain\u0027s heightmap.",
+        "Group": "Terrain",
+        "Minimum": 16,
+        "Maximum": 128,
+        "Step": 1
+      },
+      {
+        "DisplayType": "Float",
+        "Choices": [],
+        "ConVarName": "terrain_frequency",
+        "DisplayName": "Terrain Frequency",
+        "DefaultValue": "0.5",
+        "Description": "The frequency of the curves in the terrain\u0027s heightmap.",
+        "Group": "Terrain",
+        "Minimum": 0.1,
+        "Maximum": 10,
+        "Step": 0.1
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "gr_spawn_late_joiners",
+        "DisplayName": "Spawn Late Joiners",
+        "DefaultValue": "false",
+        "Description": "Spawns a single worm at a random location for players who join late instead of them being a spectator.",
+        "Group": "Game"
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "gr_sd_delay",
+        "DisplayName": "Sudden Death Delay",
+        "DefaultValue": "15",
+        "Description": "The amount of rounds to be played before Sudden Death begins.",
+        "Group": "Sudden Death",
+        "Minimum": 1,
+        "Maximum": 40
+      },
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "15",
+            "Name": "Low"
+          },
+          {
+            "Value": "25",
+            "Name": "Medium"
+          },
+          {
+            "Value": "50",
+            "Name": "High"
+          }
+        ],
+        "ConVarName": "gr_sd_aggression",
+        "DisplayName": "Sudden Death Aggression",
+        "DefaultValue": "25",
+        "Description": "How harshly Sudden Death affects the terrain.",
+        "Group": "Sudden Death"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "gr_sd_onehealth",
+        "DisplayName": "One Health",
+        "DefaultValue": "false",
+        "Description": "Should all Grubs have their health set to 1 when Sudden Death begins?",
+        "Group": "Sudden Death"
+      }
+    ],
+    "CsProjName": "",
+    "Summary": "A worms-inspired artillery game for s\u0026box with randomly generated levels.",
+    "Description": "Grubs (in development) by Ape Tavern\n\nLeave your feedback @ discord.gg/apetavern\n\nCredits:\nGooman\nTrundler\nMatt944\nShadowBrain\nxezno\nJammie\nmatek\nWillow\nPukes\n\nSpecial thanks for Ziks for 2D SDF Terrain library!",
+    "Public": true,
+    "ReplaceTags": "",
+    "Physics": {
+      "SubSteps": 1,
+      "TimeScale": 1,
+      "Gravity": "0,0,-800",
+      "AirDensity": 1.2,
+      "SleepingEnabled": true,
+      "SimulationMode": "Continuous",
+      "PositionIterations": 2,
+      "VelocityIterations": 8,
+      "SoftBodyIterations": 1,
+      "SoftBodySubsteps": 1
+    },
+    "Collision": {
+      "Defaults": {
+        "solid": "Collide",
+        "trigger": "Trigger",
+        "ladder": "Ignore",
+        "water": "Trigger",
+        "player": "Unset",
+        "preview": "Ignore"
+      },
+      "Pairs": [
+        {
+          "a": "solid",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "playerclip",
+          "r": "Ignore"
+        },
+        {
+          "a": "trigger",
+          "b": "solid",
+          "r": "Trigger"
+        },
+        {
+          "a": "solid",
+          "b": "trigger",
+          "r": "Collide"
+        },
+        {
+          "a": "playerclip",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "player",
+          "r": "Trigger"
+        }
+      ]
+    },
+    "InputSettings": {
+      "Actions": [
+        {
+          "Name": "camera_pan",
+          "KeyboardCode": "mouse2",
+          "GroupName": "Camera"
+        },
+        {
+          "Name": "camera_reset",
+          "KeyboardCode": "mouse3",
+          "GroupName": "Camera"
+        },
+        {
+          "Name": "inventory",
+          "KeyboardCode": "q",
+          "GroupName": "UI"
+        },
+        {
+          "Name": "chat",
+          "KeyboardCode": "enter",
+          "GroupName": "UI"
+        },
+        {
+          "Name": "fire",
+          "KeyboardCode": "mouse1",
+          "GroupName": "Weapon"
+        },
+        {
+          "Name": "forward",
+          "KeyboardCode": "w",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "backward",
+          "KeyboardCode": "s",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "left",
+          "KeyboardCode": "a",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "right",
+          "KeyboardCode": "d",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "jump",
+          "KeyboardCode": "space",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "backflip",
+          "KeyboardCode": "shift",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "voice",
+          "KeyboardCode": "v",
+          "GroupName": "Other"
+        }
+      ]
+    },
+    "HttpAllowList": null,
+    "LaunchConfigs": [
+      {
+        "Name": "Grubs Dev",
+        "GameIdent": "apetavern.grubs#local",
+        "MapName": "apetavern.gr_beach",
+        "MaxPlayers": 8,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "",
+        "PostLaunchCommand": ""
+      }
+    ]
+  }
+}
