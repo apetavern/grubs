@@ -41,6 +41,7 @@ struct PixelInput
 {
 	#include "common/pixelinput.hlsl"
 	float3 vPositionOs : TEXCOORD14;
+	float3 vNormalOs : TEXCOORD15;
 };
 
 VS
@@ -51,6 +52,7 @@ VS
 	{
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
+		i.vNormalOs = v.vNormalOs.xyz;
 
 		return FinalizeVertex( i );
 	}
@@ -71,9 +73,36 @@ PS
 	Texture2D g_tNormal < Channel( RGBA, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
 	Texture2D g_tRough < Channel( RGBA, Box( Rough ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
 	Texture2D g_tAO < Channel( RGBA, Box( AO ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
+	float g_flTiling < UiGroup( "Textures,0/,1/0" ); Default1( 1 ); Range1( 0, 5 ); >;
 	float4 g_vTint_Colour < UiType( Color ); UiGroup( "Tint,0/,0/0" ); Default4( 0.41, 0.22, 0.11, 1.00 ); >;
+	float g_flYPosition < UiGroup( "Position,0/Y,0/3" ); Default1( 64 ); Range1( 0, 1024 ); >;
+	float g_flYSmoothing < UiGroup( "Position,0/Y,0/4" ); Default1( 75 ); Range1( 0, 1024 ); >;
+	float g_flZPosition < UiGroup( "Position,0/Z,1/1" ); Default1( 0 ); Range1( 0, 2048 ); >;
+	float g_flZSmoothing < UiGroup( "Position,0/Z,1/2" ); Default1( 250 ); Range1( 0, 2048 ); >;
 	bool g_bTintDirectionToggle < UiGroup( "Tint,1/,0/0" ); Default( 0 ); >;
 		
+	float4 TexTriplanar_Color( in Texture2D tTex, in SamplerState sSampler, float3 vPosition, float3 vNormal )
+	{
+		float2 uvX = vPosition.zy;
+		float2 uvY = vPosition.xz;
+		float2 uvZ = vPosition.xy;
+	
+		float3 triblend = saturate(pow(vNormal, 4));
+		triblend /= max(dot(triblend, half3(1,1,1)), 0.0001);
+	
+		half3 axisSign = vNormal < 0 ? -1 : 1;
+	
+		uvX.x *= axisSign.x;
+		uvY.x *= axisSign.y;
+		uvZ.x *= -axisSign.z;
+	
+		float4 colX = Tex2DS( tTex, sSampler, uvX );
+		float4 colY = Tex2DS( tTex, sSampler, uvY );
+		float4 colZ = Tex2DS( tTex, sSampler, uvZ );
+	
+		return colX * triblend.x + colY * triblend.y + colZ * triblend.z;
+	}
+	
 	float SoftLight_blend( float a, float b )
 	{
 	    if ( b <= 0.5f )
@@ -124,6 +153,41 @@ PS
 	    );
 	}
 	
+	float3 TexTriplanar_Normal( in Texture2D tTex, in SamplerState sSampler, float3 vPosition, float3 vNormal )
+	{
+		float2 uvX = vPosition.zy;
+		float2 uvY = vPosition.xz;
+		float2 uvZ = vPosition.xy;
+	
+		float3 triblend = saturate( pow( vNormal, 4 ) );
+		triblend /= max( dot( triblend, half3( 1, 1, 1 ) ), 0.0001 );
+	
+		half3 axisSign = vNormal < 0 ? -1 : 1;
+	
+		uvX.x *= axisSign.x;
+		uvY.x *= axisSign.y;
+		uvZ.x *= -axisSign.z;
+	
+		float3 tnormalX = DecodeNormal( Tex2DS( tTex, sSampler, uvX ).xyz );
+		float3 tnormalY = DecodeNormal( Tex2DS( tTex, sSampler, uvY ).xyz );
+		float3 tnormalZ = DecodeNormal( Tex2DS( tTex, sSampler, uvZ ).xyz );
+	
+		tnormalX.x *= axisSign.x;
+		tnormalY.x *= axisSign.y;
+		tnormalZ.x *= -axisSign.z;
+	
+		tnormalX = half3( tnormalX.xy + vNormal.zy, vNormal.x );
+		tnormalY = half3( tnormalY.xy + vNormal.xz, vNormal.y );
+		tnormalZ = half3( tnormalZ.xy + vNormal.xy, vNormal.z );
+	
+		return normalize(
+			tnormalX.zyx * triblend.x +
+			tnormalY.xzy * triblend.y +
+			tnormalZ.xyz * triblend.z +
+			vNormal
+		);
+	}
+	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		Material m;
@@ -137,38 +201,44 @@ PS
 		m.Emission = float3( 0, 0, 0 );
 		m.Transmission = 0;
 		
-		float2 l_0 = i.vTextureCoords.xy * float2( 1, 1 );
-		float2 l_1 = l_0 * float2( 1, 1 );
-		float4 l_2 = Tex2DS( g_tColour, g_sSampler0, l_1 );
-		float4 l_3 = g_vTint_Colour;
-		float4 l_4 = Tex2DS( g_tBlendMask, g_sSampler0, l_1 );
-		float4 l_5 = saturate( lerp( l_3, SoftLight_blend( l_3, l_2 ), l_4 ) );
-		float3 l_6 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
-		float l_7 = l_6.y;
-		float l_8 = l_7 + 1;
-		float l_9 = l_8 / 75;
-		float l_10 = saturate( l_9 );
-		float4 l_11 = lerp( l_2, l_5, l_10 );
-		float l_12 = l_6.z;
-		float l_13 = l_12 + 1;
-		float l_14 = l_13 / 2000;
-		float l_15 = saturate( l_14 );
-		float l_16 = l_15 * l_3.a;
-		float l_17 = 1 - l_16;
-		float l_18 = g_bTintDirectionToggle ? l_16 : l_17;
-		float4 l_19 = saturate( lerp( l_2, Overlay_blend( l_2, l_5 ), l_18 ) );
-		float4 l_20 = l_11 * l_19;
-		float4 l_21 = Tex2DS( g_tNormal, g_sSampler0, l_1 );
-		float3 l_22 = TransformNormal( i, DecodeNormal( l_21.xyz ) );
-		float4 l_23 = Tex2DS( g_tRough, g_sSampler0, l_1 );
-		float4 l_24 = Tex2DS( g_tAO, g_sSampler0, l_1 );
+		float3 l_0 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
+		float l_1 = g_flTiling;
+		float l_2 = l_1 * 0.0078125;
+		float3 l_3 = l_0 * float3( l_2, l_2, l_2 );
+		float4 l_4 = TexTriplanar_Color( g_tColour, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_5 = g_vTint_Colour;
+		float4 l_6 = TexTriplanar_Color( g_tBlendMask, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_7 = saturate( lerp( l_5, SoftLight_blend( l_5, l_4 ), l_6 ) );
+		float3 l_8 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
+		float l_9 = l_8.y;
+		float l_10 = g_flYPosition;
+		float l_11 = l_9 + l_10;
+		float l_12 = g_flYSmoothing;
+		float l_13 = l_11 / l_12;
+		float l_14 = saturate( l_13 );
+		float4 l_15 = lerp( l_4, l_7, l_14 );
+		float l_16 = l_8.z;
+		float l_17 = g_flZPosition;
+		float l_18 = l_16 + l_17;
+		float l_19 = g_flZSmoothing;
+		float l_20 = l_18 / l_19;
+		float l_21 = saturate( l_20 );
+		float l_22 = l_21 * l_5.a;
+		float l_23 = 1 - l_22;
+		float l_24 = g_bTintDirectionToggle ? l_22 : l_23;
+		float4 l_25 = saturate( lerp( l_4, Overlay_blend( l_4, l_7 ), l_24 ) );
+		float4 l_26 = l_15 * l_25;
+		float3 l_27 = TexTriplanar_Normal( g_tNormal, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float3 l_28 = normalize( l_27 );
+		float4 l_29 = TexTriplanar_Color( g_tRough, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_30 = TexTriplanar_Color( g_tAO, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
 		
-		m.Albedo = l_20.xyz;
+		m.Albedo = l_26.xyz;
 		m.Opacity = 1;
-		m.Normal = l_22;
-		m.Roughness = l_23.x;
+		m.Normal = l_28;
+		m.Roughness = l_29.x;
 		m.Metalness = 0;
-		m.AmbientOcclusion = l_24.x;
+		m.AmbientOcclusion = l_30.x;
 		
 		m.AmbientOcclusion = saturate( m.AmbientOcclusion );
 		m.Roughness = saturate( m.Roughness );
