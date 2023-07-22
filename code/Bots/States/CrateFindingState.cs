@@ -12,7 +12,7 @@ namespace Grubs.Bots.States;
 
 public partial class CrateFindingState : BaseState
 {
-	List<Cell> CellPath = new List<Cell>();
+	List<AStarNode> CellPath = new();
 
 	public int PathIndex;
 
@@ -46,7 +46,7 @@ public partial class CrateFindingState : BaseState
 
 	public Vector3 ProcessPath()
 	{
-		if ( Vector3.DistanceBetween( MyPlayer.ActiveGrub.Position, CellPath.ElementAt( PathIndex ).Position ) < 50f && PathIndex < CellPath.Count - 1 )
+		if ( Vector3.DistanceBetween( MyPlayer.ActiveGrub.Position, CellPath.ElementAt( PathIndex ).EndPosition ) < 50f && PathIndex < CellPath.Count - 1 )
 		{
 			PathIndex++;
 		}
@@ -61,11 +61,11 @@ public partial class CrateFindingState : BaseState
 		{
 			for ( int i = 0; i < CellPath.Count - 1; i++ )
 			{
-				DebugOverlay.Sphere( CellPath[i].Position, 10f, Color.Blue, 0, false );
+				DebugOverlay.Sphere( CellPath[i].EndPosition, 10f, Color.Blue, 0, false );
 			}
 		}
 
-		return MyPlayer.ActiveGrub.Position - CellPath.ElementAt( PathIndex ).Position;
+		return MyPlayer.ActiveGrub.Position - CellPath.ElementAt( PathIndex ).EndPosition;
 	}
 
 	public void DoPositioning( Grub activeGrub )
@@ -89,12 +89,11 @@ public partial class CrateFindingState : BaseState
 
 		Grid grid = Grid.Grids.First().Value;
 
-		if ( CellPath.Count == 0 )
+		if ( CellPath is null || CellPath.Count == 0 )
 		{
 			var CellStart = grid.GetNearestCell( activeGrub.Position, false );
 			var CellEnd = grid.GetNearestCell( FoundCrate.Position, false );
-
-			CellPath = grid.ComputePath( CellStart, CellEnd, false, null ).ToList();
+			CellPath = new AStarPathBuilder( grid ).Run( CellStart, CellEnd ).Nodes;
 		}
 		else if ( CellPath.Count > 1 )
 		{
