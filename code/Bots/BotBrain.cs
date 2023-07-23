@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GridAStar;
 
 namespace Grubs.Bots;
 public partial class BotBrain : Entity
@@ -44,19 +45,26 @@ public partial class BotBrain : Entity
 		worldbox.Maxs = new Vector3( terrain.WorldTextureLength / 2f, 10f, terrain.WorldTextureHeight );
 		worldbox.Mins = new Vector3( -terrain.WorldTextureLength / 2f, -10f, -terrain.WorldTextureHeight );
 
-		if ( !GridAStar.Grid.Exists() )
+		/*if ( !GridAStar.Grid.Exists() )
 		{
+			var normalJump = new JumpDefinition( "jump", 125f, 240f, 400f );
+
+			var backflip = new JumpDefinition( "backflip", 50f, 240f * 1.75f, 400f );
+
 			var builder = new GridAStar.GridBuilder()
 				.WithBounds( Vector3.Zero, worldbox, Rotation.Identity )
+				.WithStaticOnly( false )
 				.WithHeightClearance( 30 )
-				.WithStepSize( 100 )
+				.WithStepSize( 50 )
 				.WithStandableAngle( 50 )
-				.WithStaticOnly( false );
+				.WithMaxDropHeight( 80 )
+				.AddJumpDefinition( normalJump )
+				.AddJumpDefinition( backflip );
 
 			var createTask = builder.Create();
 			createTask.Wait();
 			GridAStar.Grid.Main = createTask.Result;
-		}
+		}*/
 	}
 
 	public void SimulateCurrentState()

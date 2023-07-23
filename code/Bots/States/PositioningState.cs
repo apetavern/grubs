@@ -69,6 +69,19 @@ public partial class PositioningState : BaseState
 		else if ( CellPath.Count > 1 )
 		{
 			pathDirection = ProcessPath();
+
+			if ( CellPath.ElementAt( PathIndex ).MovementTag.Contains( "jump" ) )
+			{
+				Input.SetAction( "jump", true );
+			}
+
+			if ( CellPath.ElementAt( PathIndex ).MovementTag.Contains( "backflip" ) )
+			{
+				MyPlayer.MoveInput = -MyPlayer.MoveInput;
+				Brain.TargetGrub.Facing *= -1;
+				Brain.TargetGrub.Rotation *= Rotation.FromYaw( 180 );
+				Input.SetAction( "backflip", true );
+			}
 		}
 
 		float distance = direction.Length;
@@ -98,6 +111,7 @@ public partial class PositioningState : BaseState
 			DebugOverlay.TraceResult( clifftr );
 		}
 
+
 		if ( (distance > 200f && !OnEdge && !lineOfSight) || !facingTarget )
 		{
 
@@ -109,39 +123,39 @@ public partial class PositioningState : BaseState
 			}
 
 			MyPlayer.LookInput = 0f;
-
-			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.95f && !OnEdge && !ceiltr.Hit )
-			{
-				Input.SetAction( "jump", true );
-			}
-			else
-			{
-				Input.SetAction( "jump", false );
-			}
-
-			if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.99f && !ceiltr.Hit )
-			{
-				MyPlayer.MoveInput = -MyPlayer.MoveInput;
-				Input.SetAction( "backflip", true );
-			}
-			else
-			{
-				Input.SetAction( "backflip", false );
-			}
 		}
-		else if ( OnEdge )
+		/*if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.95f && !OnEdge && !ceiltr.Hit )
 		{
-			if ( Game.Random.Float() > 0.95f )
-			{
-				MyPlayer.MoveInput = -activeGrub.Facing;
-				Input.SetAction( "backflip", true );
-			}
-
-			MyPlayer.LookInput = LookAtTargetValue;
-
-			MyPlayer.MoveInput = 0f;
-
+			Input.SetAction( "jump", true );
 		}
+		else
+		{
+			Input.SetAction( "jump", false );
+		}
+
+		if ( MathF.Round( Time.Now ) % 5 == 1 && Game.Random.Float() > 0.99f && !ceiltr.Hit )
+		{
+			MyPlayer.MoveInput = -MyPlayer.MoveInput;
+			Input.SetAction( "backflip", true );
+		}
+		else
+		{
+			Input.SetAction( "backflip", false );
+		}
+	}
+	else if ( OnEdge )
+	{
+		if ( Game.Random.Float() > 0.95f )
+		{
+			MyPlayer.MoveInput = -activeGrub.Facing;
+			Input.SetAction( "backflip", true );
+		}
+
+		MyPlayer.LookInput = LookAtTargetValue;
+
+		MyPlayer.MoveInput = 0f;
+
+	}*/
 		else if ( distance < 30f )
 		{
 			MyPlayer.MoveInput = MathF.Sign( -pathDirection.Normal.x * 2f );
