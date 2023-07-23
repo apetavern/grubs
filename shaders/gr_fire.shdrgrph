@@ -107,7 +107,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 5,
       "Value": 1,
@@ -171,7 +170,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.5,
@@ -291,7 +289,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 5,
       "Value": 0.5,
@@ -469,7 +466,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0,
@@ -488,7 +484,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 1,
@@ -554,7 +549,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 100,
       "Value": 1,
@@ -573,7 +567,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.05,
