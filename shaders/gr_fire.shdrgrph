@@ -25,6 +25,7 @@
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
+      "PositionOffset": {},
       "Identifier": "0",
       "Position": "2864,320"
     },
@@ -34,7 +35,7 @@
         "Identifier": "6",
         "Output": "Vector"
       },
-      "Texture": "materials/particles/beam_noise05.vtex",
+      "Image": "particles/fire/textures/fire_noise_01.png",
       "Sampler": {},
       "UI": {
         "Name": "Noise One",
@@ -43,7 +44,8 @@
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "1",
       "Position": "-320,-80"
@@ -105,10 +107,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 5,
-      "Name": "Noise One Pan Speed",
       "Value": 1,
+      "Name": "Noise One Pan Speed",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -167,10 +171,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "UV Distortion Intensity",
       "Value": 0.5,
+      "Name": "UV Distortion Intensity",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -195,7 +201,7 @@
         "Identifier": "9",
         "Output": "Result"
       },
-      "Texture": "materials/particles/beam_generic_7_edge.vtex",
+      "Image": "particles/fire/textures/fire_gradient.png",
       "Sampler": {
         "AddressU": "Clamp",
         "AddressV": "Clamp"
@@ -207,7 +213,8 @@
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "13",
       "Position": "1184,304"
@@ -284,10 +291,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 5,
-      "Name": "Noise Two Pan Speed",
       "Value": 0.5,
+      "Name": "Noise Two Pan Speed",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -305,7 +314,7 @@
         "Identifier": "16",
         "Output": "Vector"
       },
-      "Texture": "materials/particle/base_trail.vtex",
+      "Image": "particles/fire/textures/fire_noise_02.png",
       "Sampler": {},
       "UI": {
         "Name": "Noise Two",
@@ -314,7 +323,8 @@
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "21",
       "Position": "-384,512"
@@ -373,7 +383,7 @@
     {
       "_class": "TextureSampler",
       "Coords": {},
-      "Texture": "materials/particle/base_sprite.vtex",
+      "Image": "particles/fire/textures/fire_bellmask.png",
       "Sampler": {},
       "UI": {
         "Name": "Distortion Mask",
@@ -382,7 +392,8 @@
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "27",
       "Position": "288,288"
@@ -415,7 +426,7 @@
         "Identifier": "41",
         "Output": "Result"
       },
-      "Texture": "materials/particles/fluids/beam_blood_spray_01.vtex",
+      "Image": "particles/fire/textures/fire_diamondmask.png",
       "Sampler": {},
       "UI": {
         "Name": "Flame Mask",
@@ -424,7 +435,8 @@
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        }
+        },
+        "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "30",
       "Position": "1472,496"
@@ -457,10 +469,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "SmoothStep In",
       "Value": 0,
+      "Name": "SmoothStep In",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -474,10 +488,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "SmoothStep Out",
       "Value": 1,
+      "Name": "SmoothStep Out",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -506,8 +522,9 @@
     },
     {
       "_class": "Float4",
-      "Name": "Colour",
       "Value": "1,1,1,1",
+      "Name": "Colour",
+      "IsAttribute": false,
       "UI": {
         "Type": "Color",
         "PrimaryGroup": {
@@ -537,10 +554,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 100,
-      "Name": "Emission Strength",
       "Value": 1,
+      "Name": "Emission Strength",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -550,14 +569,16 @@
         }
       },
       "Identifier": "38",
-      "Position": "2160,-0"
+      "Position": "2160,0"
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "Flame Mask Distortion",
       "Value": 0.05,
+      "Name": "Flame Mask Distortion",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
