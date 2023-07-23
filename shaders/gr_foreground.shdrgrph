@@ -28,6 +28,7 @@
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
+      "PositionOffset": {},
       "Identifier": "0",
       "Position": "1872,-192"
     },
@@ -37,7 +38,7 @@
         "Identifier": "19",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_color_png_25ab3fcc.generated.vtex",
+      "Image": "textures/environment/sand_a_color.png",
       "Sampler": {},
       "UI": {
         "Name": "Colour",
@@ -57,7 +58,7 @@
         "Identifier": "19",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_normal_png_4d9e3190.generated.vtex",
+      "Image": "textures/environment/sand_a_normal.png",
       "Sampler": {},
       "UI": {
         "Name": "Normal",
@@ -78,7 +79,7 @@
         "Identifier": "19",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
+      "Image": "textures/environment/sand_a_rough.png",
       "Sampler": {},
       "UI": {
         "Name": "Rough",
@@ -158,14 +159,15 @@
         "Output": "Result"
       },
       "DefaultA": 0,
-      "DefaultB": 1024,
+      "DefaultB": 1,
       "Identifier": "9",
       "Position": "-416,512"
     },
     {
       "_class": "Float4",
-      "Name": "Tint_Colour",
       "Value": "0.40784,0.21569,0.1098,1",
+      "Name": "Tint_Colour",
+      "IsAttribute": false,
       "UI": {
         "Type": "Color",
         "PrimaryGroup": {
@@ -189,7 +191,7 @@
         "Output": "Result"
       },
       "DefaultA": 0,
-      "DefaultB": 20,
+      "DefaultB": 1,
       "Identifier": "11",
       "Position": "-416,416"
     },
@@ -263,10 +265,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 5,
-      "Name": "Tiling",
       "Value": 1,
+      "Name": "Tiling",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": "Textures"
@@ -296,10 +300,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1024,
-      "Name": "Y Position",
       "Value": 64,
+      "Name": "Y Position",
+      "IsAttribute": false,
       "UI": {
         "Priority": 3,
         "PrimaryGroup": {
@@ -314,10 +320,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 2048,
-      "Name": "Z Position",
       "Value": 0,
+      "Name": "Z Position",
+      "IsAttribute": false,
       "UI": {
         "Priority": 1,
         "PrimaryGroup": {
@@ -333,10 +341,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1024,
-      "Name": "Y Smoothing",
       "Value": 75,
+      "Name": "Y Smoothing",
+      "IsAttribute": false,
       "UI": {
         "Priority": 4,
         "PrimaryGroup": {
@@ -351,10 +361,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 2048,
-      "Name": "Z Smoothing",
       "Value": 250,
+      "Name": "Z Smoothing",
+      "IsAttribute": false,
       "UI": {
         "Priority": 2,
         "PrimaryGroup": {
@@ -374,7 +386,7 @@
         "Identifier": "19",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
+      "Image": "textures/environment/sand_a_rough.png",
       "Sampler": {},
       "UI": {
         "Name": "AO",
@@ -410,7 +422,7 @@
         "Identifier": "19",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_shells_blend_png_acc24e2f.generated.vtex",
+      "Image": "textures/environment/sand_shells_blend.png",
       "Sampler": {},
       "UI": {
         "Name": "Blend Mask",
