@@ -1,19 +1,26 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/gr_fire.shader_c"
-	"DistortionMask"		"materials/default/default_mask.tga"
-	"FlameMask"		"materials/default/default_mask.tga"
-	"g_flEmissionStrength"		"10.000000"
-	"g_flFlameMaskDistortion"		"0.030000"
-	"g_flNoiseOnePanSpeed"		"1.500000"
-	"g_flNoiseTwoPanSpeed"		"0.800000"
-	"g_flSmoothStepIn"		"0.100000"
-	"g_flSmoothStepOut"		"0.500000"
-	"g_flUVDistortionIntensity"		"0.300000"
-	"g_vColour"		"[1.000000 0.231373 0.000000 1.000000]"
-	"Gradient"		"particles/fire/textures/fire_gradient.png"
-	"NoiseOne"		"particles/fire/textures/fire_noise_01.png"
-	"NoiseTwo"		"particles/fire/textures/fire_noise_02.png"
-	"g_bFogEnabled"		"1"
-	"g_flOpacityScale"		"1.000000"
+	shader "shaders/gr_fire.shader"
+
+	DistortionMask "materials/default/default_mask.tga"
+	FlameMask "materials/default/default_mask.tga"
+	g_flEmissionStrength "10.000"
+	g_flFlameMaskDistortion "0.030"
+	g_flNoiseOnePanSpeed "1.500"
+	g_flNoiseTwoPanSpeed "0.800"
+	g_flSmoothStepIn "0.100"
+	g_flSmoothStepOut "0.500"
+	g_flUVDistortionIntensity "0.300"
+	g_vColour "[1.000000 0.231373 0.000000 1.000000]"
+	Gradient "particles/fire/textures/fire_gradient.png"
+	NoiseOne "particles/fire/textures/fire_noise_01.png"
+	NoiseTwo "particles/fire/textures/fire_noise_02.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
 }
