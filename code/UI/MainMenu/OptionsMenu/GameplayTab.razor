@@ -31,9 +31,6 @@
 
     private void RemoveBot()
     {
-        if (Game.Clients.Where(c => c.IsBot).Any())
-        {
-            Game.Clients.Where(c => c.IsBot).FirstOrDefault().Kick();
-        }
+        GrubsBot.RemoveGrubsBot();
     }
 }

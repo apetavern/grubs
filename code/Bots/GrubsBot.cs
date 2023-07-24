@@ -126,6 +126,25 @@ public partial class GrubsBot : Bot
 		}
 	}
 
+	[ConCmd.Server( "gr_bot_remove" )]
+	public static void RemoveGrubsBot( int count = 1 )
+	{
+		for ( int i = 0; i < count; i++ )
+		{
+			var bot = Game.Clients.FirstOrDefault( client => client.IsBot );
+			if ( bot is null )
+			{
+				if ( ConsoleSystem.Caller is not null )
+					TextChat.AddInfoChatEntry( To.Single( ConsoleSystem.Caller ), "Cannot remove anymore bots as there are none left." );
+
+				Log.Warning( "Cannot remove bot - none left." );
+				break;
+			}
+
+			bot.Kick();
+		}
+	}
+
 	List<ModelEntity> Antenna = new List<ModelEntity>();
 
 	public bool TurnedOffAntenna;
