@@ -1,4 +1,6 @@
-﻿namespace Grubs.Bots;
+﻿using Grubs.UI;
+
+namespace Grubs.Bots;
 
 public partial class GrubsBot : Bot
 {
@@ -110,6 +112,9 @@ public partial class GrubsBot : Bot
 		{
 			if ( Game.Clients.Count >= Game.Server.MaxPlayers )
 			{
+				if ( ConsoleSystem.Caller is not null )
+					TextChat.AddInfoChatEntry( To.Single( ConsoleSystem.Caller ), "Cannot add anymore bots to the server since it is full." );
+
 				Log.Warning( "Cannot add bot - max players already reached." );
 				return;
 			}
