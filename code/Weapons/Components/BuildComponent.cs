@@ -53,7 +53,7 @@ public partial class BuildComponent : WeaponComponent
 
 		GirderPreview.EnableDrawing = Grub.Controller.ShouldShowWeapon() && Weapon.HasChargesRemaining;
 
-		RotationAngle += Player.MouseWheel * 10f;
+		RotationAngle += Input.MouseWheel * 10f;
 
 		if ( RotationAngle < -90 )
 			RotationAngle += 180;

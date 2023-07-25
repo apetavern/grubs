@@ -20,9 +20,6 @@ public partial class Player
 	[ClientInput]
 	public Vector3 MousePosition { get; set; }
 
-	[ClientInput]
-	public int MouseWheel { get; set; }
-
 	private static readonly Plane _plane = new( new Vector3( 0f ), Vector3.Left );
 
 	public override void BuildInput()
@@ -40,19 +37,5 @@ public partial class Player
 		var cursorRay = Camera.Main.GetRay( Mouse.Position );
 		var endPos = _plane.Trace( cursorRay, twosided: true );
 		MousePosition = endPos ?? 0f;
-
-		if ( Input.MouseWheel != 0 )
-			MouseWheel = Input.MouseWheel;
-	}
-
-	/// <summary>
-	/// Workaround for Input.MouseWheel value not persisting if several frames (and therefore usercmds) pass before a tick occurs.
-	/// </summary>
-	[GameEvent.Tick]
-	private void Tick()
-	{
-		if ( Game.IsServer ) return;
-
-		MouseWheel = 0;
 	}
 }
