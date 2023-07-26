@@ -28,6 +28,17 @@
 </root>
 
 @code {
+    private static TimeSince _statTimer;
+
+    public override void Tick()
+    {
+        if (_statTimer >= 10f)
+        {
+            PlayerEntry.NextStat();
+            _statTimer = 0f;
+        }
+    }
+
     private string GetButtonText()
     {
         if (Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers)
@@ -49,19 +60,6 @@
     {
         @* Not the best... *@
         return GetButtonText() == "PLAY";
-    }
-
-    public override void Tick()
-    {
-        if (PlayerEntry.StatTimer >= 45.0f)
-            PlayerEntry.StatTimer = 0.0f;
-    }
-
-    protected override void OnAfterTreeRender(bool firstTime)
-    {
-        if (!firstTime) return;
-
-        PlayerEntry.StatTimer = 0.0f;
     }
 
     protected override int BuildHash()

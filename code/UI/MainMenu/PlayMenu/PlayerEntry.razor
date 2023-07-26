@@ -1,5 +1,5 @@
-﻿@using Sandbox;
-@using Sandbox.UI;
+﻿@using Sandbox.UI;
+@using Grubs;
 @namespace Grubs.UI
 @inherits Panel
 @attribute [StyleSheet]
@@ -15,47 +15,76 @@
     @if (!Player.Client.IsBot)
     {
         <section class="stats">
-            <label>@GetStatText()</label>
-            <button icon="@GetStatIcon()" style="padding-left: 2px" />
+            <label>@_currentStat</label>
+            <button icon="@_currentStat.Icon" style="padding-left: 2px" />
         </section>
     }
 </root>
 
 @code {
-    public Grubs.Player Player { get; set; }
-    public static TimeSince StatTimer = 0f;
+    public Player Player { get; set; }
 
-    private double _gamesWon, _grubsKilled;
+    private StatInfo[] _stats = {
+        new StatInfo(null, "hrs", "timer", "0.0"),
+        new StatInfo("ffa-games-won", "wins", "emoji_events"),
+        new StatInfo("grubs-killed", "kills", "person_off")
+    };
+    private StatInfo _currentStat => _stats[_statIndex];
+    private static int _statIndex;
+    private static int _statsLength;
 
-    protected override void OnAfterTreeRender(bool firstTime)
-    {
-        if (!firstTime || Player.Client.IsBot) return;
-
-        GetStats();
-    }
-
-    private async void GetStats()
-    {
-        _gamesWon = await Player.Client.GetLeaderboardEntry("games-won");
-        _grubsKilled = await Player.Client.GetLeaderboardEntry("grubs-killed");
-    }
-
-    private string GetStatText()
-    {
-        if (StatTimer <= 15.0f) return $"{Player.PlayTime.ToString("0.0")} hrs";
-        else if (StatTimer <= 30.0f) return $"{_gamesWon.ToString("0")} wins";
-        else return $"{_grubsKilled.ToString("0")} kills";
-    }
-
-    private string GetStatIcon()
-    {
-        if (StatTimer <= 15.0f) return "timer";
-        else if (StatTimer <= 30.0f) return "emoji_events";
-        else return "person_off";
-    }
+    public static void NextStat() => _statIndex = (_statIndex + 1) % _statsLength;
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GetStatIcon(), _gamesWon, _grubsKilled);
+        return HashCode.Combine(_statIndex, Player.PlayTime);
+    }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        if (!firstTime) return;
+
+        _statsLength = _stats.Length;
+        foreach (var stat in _stats)
+            stat.Populate(Player);
+    }
+
+    private class StatInfo
+    {
+        public string Icon;
+
+        private string _ident; 
+        private string _suffix;
+        private string _format;
+        private double _val;
+
+        private Player _player;
+        private static Sandbox.Services.Stats.PlayerStats _statCache;
+
+        public StatInfo(string ident, string suffix, string icon, string format = "0")
+        {
+            Icon = icon;
+            _ident = ident;
+            _suffix = suffix;
+            _format = format;
+        }
+
+        public void Populate(Player player)
+        {
+            _player = player;
+            if(_statCache == null)
+                _statCache = player.Client.GetPlayerStats();
+
+            _val = _statCache.Where(s => s.Name == _ident).FirstOrDefault().Value;
+        }
+
+        public override string ToString()
+        {
+            // Continuously fetch PlayTime (it changes, and isn't even networked by the time we call Populate()).
+            if(_ident == null && _player.IsValid())
+                _val = _player.PlayTime;
+
+            return $"{_val.ToString(_format)} {_suffix}";
+        }
     }
 }
