@@ -46,7 +46,16 @@ public partial class BotBrain : Entity
 
 		if ( !GridAStar.Grid.Exists() )
 		{
-			GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 100f, standableAngle: 50f, save: false );
+			var builder = new GridAStar.GridBuilder()
+				.WithBounds( Vector3.Zero, worldbox, Rotation.Identity )
+				.WithHeightClearance( 30 )
+				.WithStepSize( 100 )
+				.WithStandableAngle( 50 )
+				.WithStaticOnly( false );
+
+			var createTask = builder.Create();
+			createTask.Wait();
+			GridAStar.Grid.Main = createTask.Result;
 		}
 	}
 

@@ -1,4 +1,6 @@
-﻿namespace Grubs.Bots;
+﻿using Grubs.UI;
+
+namespace Grubs.Bots;
 
 public partial class GrubsBot : Bot
 {
@@ -110,6 +112,9 @@ public partial class GrubsBot : Bot
 		{
 			if ( Game.Clients.Count >= Game.Server.MaxPlayers )
 			{
+				if ( ConsoleSystem.Caller is not null )
+					TextChat.AddInfoChatEntry( To.Single( ConsoleSystem.Caller ), "Cannot add anymore bots to the server since it is full." );
+
 				Log.Warning( "Cannot add bot - max players already reached." );
 				return;
 			}
@@ -118,6 +123,25 @@ public partial class GrubsBot : Bot
 			{
 				TurnedOffAntenna = true
 			};
+		}
+	}
+
+	[ConCmd.Server( "gr_bot_remove" )]
+	public static void RemoveGrubsBot( int count = 1 )
+	{
+		for ( int i = 0; i < count; i++ )
+		{
+			var bot = Game.Clients.FirstOrDefault( client => client.IsBot );
+			if ( bot is null )
+			{
+				if ( ConsoleSystem.Caller is not null )
+					TextChat.AddInfoChatEntry( To.Single( ConsoleSystem.Caller ), "Cannot remove anymore bots as there are none left." );
+
+				Log.Warning( "Cannot remove bot - none left." );
+				break;
+			}
+
+			bot.Kick();
 		}
 	}
 

@@ -48,10 +48,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": -1,
       "Max": 1,
-      "Name": "Tiling",
       "Value": -0.25,
+      "Name": "Tiling",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": "Adjustments"
@@ -81,10 +83,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 5,
-      "Name": "Speed",
       "Value": 2,
+      "Name": "Speed",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": "Adjustments"
@@ -111,10 +115,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "Solid Opacity",
       "Value": 0.75,
+      "Name": "Solid Opacity",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": "Adjustments"
@@ -128,10 +134,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "Gap Opacity",
       "Value": 0.25,
+      "Name": "Gap Opacity",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": "Adjustments"
@@ -154,10 +162,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 25,
-      "Name": "Colour Strength",
       "Value": 2,
+      "Name": "Colour Strength",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": "Colour"
@@ -168,8 +178,9 @@
     },
     {
       "_class": "Float4",
-      "Name": "Colour",
       "Value": "0,448.0834,500,1",
+      "Name": "Colour",
+      "IsAttribute": false,
       "UI": {
         "Type": "Color",
         "PrimaryGroup": {
@@ -236,6 +247,7 @@
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
+      "PositionOffset": {},
       "Identifier": "15",
       "Position": "896,-288"
     }
