@@ -14,8 +14,9 @@ public partial class Terrain
 	{
 		var builder = new GridAStar.GridBuilder()
 			.WithBounds( Vector3.Zero, WorldBox, Rotation.Identity )
-			.WithHeightClearance( GrubController.EyeHeight )
+			.WithHeightClearance( 24f ) // EyeHeight is set to 28 but everywhere I can find uses 24f
 			.WithWidthClearance( GrubController.BodyGirth )
+			.WithoutTags( "trigger" )
 			.WithEdgeNeighbourCount( 2 )
 			.WithStepSize( SquirmMechanic.StepSize )
 			.WithStandableAngle( SquirmMechanic.GroundAngle )
