@@ -4,7 +4,7 @@ public partial class ControllerMechanic : EntityComponent<Grub>
 {
 	protected GrubController Controller => Entity.Controller;
 	protected Grub Grub => Entity;
-	protected static float Gravity => 800.0f;
+	public static float Gravity => 800.0f;
 
 	public bool IsActive { get; protected set; }
 

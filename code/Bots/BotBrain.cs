@@ -45,26 +45,8 @@ public partial class BotBrain : Entity
 		worldbox.Maxs = new Vector3( terrain.WorldTextureLength / 2f, 10f, terrain.WorldTextureHeight );
 		worldbox.Mins = new Vector3( -terrain.WorldTextureLength / 2f, -10f, -terrain.WorldTextureHeight );
 
-		/*if ( !GridAStar.Grid.Exists() )
-		{
-			var normalJump = new JumpDefinition( "jump", 125f, 240f, 400f );
-
-			var backflip = new JumpDefinition( "backflip", 50f, 240f * 1.75f, 400f );
-
-			var builder = new GridAStar.GridBuilder()
-				.WithBounds( Vector3.Zero, worldbox, Rotation.Identity )
-				.WithStaticOnly( false )
-				.WithHeightClearance( 30 )
-				.WithStepSize( 50 )
-				.WithStandableAngle( 50 )
-				.WithMaxDropHeight( 80 )
-				.AddJumpDefinition( normalJump )
-				.AddJumpDefinition( backflip );
-
-			var createTask = builder.Create();
-			createTask.Wait();
-			GridAStar.Grid.Main = createTask.Result;
-		}*/
+		if ( !GridAStar.Grid.Exists() )
+			Terrain.GenerateGrid().Wait();
 	}
 
 	public void SimulateCurrentState()
