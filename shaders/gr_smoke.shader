@@ -27,7 +27,6 @@ COMMON
 	
 	#include "common/shared.hlsl"
 	#include "procedural.hlsl"
-	#include "blendmodes.hlsl"
 
 	#define S_UV2 1
 	#define CUSTOM_MATERIAL_INPUTS
@@ -62,8 +61,6 @@ PS
 	#include "common/pixel.hlsl"
 	
 	float4 g_vColour < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
-	float g_flVoronoiSpeed < UiGroup( ",0/,0/0" ); Default1( 1 ); Range1( 0, 25 ); >;
-	float g_flCellDensity < UiGroup( ",0/,0/0" ); Default1( 4 ); Range1( 0, 100 ); >;
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -79,14 +76,12 @@ PS
 		m.Transmission = 0;
 		
 		float4 l_0 = g_vColour;
-		float l_1 = g_flVoronoiSpeed;
-		float l_2 = g_flTime * l_1;
-		float l_3 = g_flCellDensity;
-		float l_4 = VoronoiNoise( i.vTextureCoords.xy, l_2, l_3 );
-		float l_5 = saturate( l_4 );
+		float l_1 = g_flTime * 1;
+		float l_2 = VoronoiNoise( i.vTextureCoords.xy, l_1, 6 );
+		float l_3 = saturate( l_2 );
 		
 		m.Albedo = l_0.xyz;
-		m.Opacity = l_5;
+		m.Opacity = l_3;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;

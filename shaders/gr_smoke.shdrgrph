@@ -45,6 +45,7 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 100,
       "Value": 4,
@@ -80,6 +81,7 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 25,
       "Value": 1,

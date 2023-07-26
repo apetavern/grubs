@@ -25,6 +25,7 @@
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
+      "PositionOffset": {},
       "Identifier": "0",
       "Position": "800,64"
     },
@@ -54,7 +55,7 @@
         "Identifier": "1",
         "Output": "Result"
       },
-      "Texture": "particles/watersplash/textures/water_ring_png_9fab6d08.generated.vtex",
+      "Image": "particles/watersplash/textures/water_ring.png",
       "Sampler": {},
       "UI": {
         "Name": "",
@@ -70,8 +71,9 @@
     },
     {
       "_class": "Float2",
-      "Name": "UV Tiling One",
       "Value": "10,1",
+      "Name": "UV Tiling One",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -87,10 +89,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "Speed One",
       "Value": 0.1,
+      "Name": "Speed One",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -135,7 +139,7 @@
         "Identifier": "23",
         "Output": "Result"
       },
-      "Texture": "particles/watersplash/textures/water_ring_png_9fab6d08.generated.vtex",
+      "Image": "particles/watersplash/textures/water_ring.png",
       "Sampler": {},
       "UI": {
         "Name": "",
@@ -156,10 +160,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "Speed Two",
       "Value": 0.2,
+      "Name": "Speed Two",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -232,10 +238,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "Smooth Step Min",
       "Value": 0.25,
+      "Name": "Smooth Step Min",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -249,10 +257,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Name": "Smooth Step Max",
       "Value": 0.35,
+      "Name": "Smooth Step Max",
+      "IsAttribute": false,
       "UI": {
         "Priority": 1,
         "PrimaryGroup": {
@@ -267,8 +277,9 @@
     },
     {
       "_class": "Float4",
-      "Name": "Color",
       "Value": "1,1,1,1",
+      "Name": "Color",
+      "IsAttribute": false,
       "UI": {
         "Type": "Color",
         "PrimaryGroup": {
@@ -312,10 +323,12 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 10,
-      "Name": "Emission Strength",
       "Value": 0.5,
+      "Name": "Emission Strength",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""
@@ -353,8 +366,9 @@
     },
     {
       "_class": "Float2",
-      "Name": "UV Tiling Two",
       "Value": "16,1",
+      "Name": "UV Tiling Two",
+      "IsAttribute": false,
       "UI": {
         "PrimaryGroup": {
           "Name": ""

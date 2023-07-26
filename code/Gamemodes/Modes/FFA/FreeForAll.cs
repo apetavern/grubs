@@ -121,7 +121,13 @@ public partial class FreeForAll : Gamemode
 				Mins = new Vector3( -Terrain.WorldTextureLength / 2f, -10f, 0 )
 			};
 
-			await GridAStar.Grid.Create( Vector3.Zero, worldbox, Rotation.Identity, worldOnly: false, heightClearance: 30f, stepSize: 50f, standableAngle: 50f, save: false );
+			var builder = new GridAStar.GridBuilder()
+				.WithBounds( Vector3.Zero, worldbox, Rotation.Identity )
+				.WithStaticOnly( false )
+				.WithHeightClearance( 30 )
+				.WithStepSize( 50 )
+				.WithStandableAngle( 50 );
+			GridAStar.Grid.Main = await builder.Create();
 		}
 
 		if ( GrubsConfig.WindEnabled )
@@ -400,6 +406,11 @@ public partial class FreeForAll : Gamemode
 		{
 			if ( NextTurnTask is not null && !NextTurnTask.IsCompleted )
 				return;
+
+#if DEBUG
+			if ( GrubsConfig.InstantlyEndBotTurns && ActivePlayer.Client.IsBot )
+				UseTurn( false );
+#endif
 
 			if ( !ActivePlayer.ActiveGrub.IsValid() || ActivePlayer.IsDisconnected )
 				UseTurn( false );

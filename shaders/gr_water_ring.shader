@@ -6,22 +6,30 @@ HEADER
 
 FEATURES
 {
-	#include "vr_common_features.fxc"
-	Feature( F_ADDITIVE_BLEND, 0..1, "Blending" );
+	#include "common/features.hlsl"
+}
+
+MODES
+{
+	VrForward();
+	Depth(); 
+	ToolsVis( S_MODE_TOOLS_VIS );
 }
 
 COMMON
 {
-#ifndef S_ALPHA_TEST
-#define S_ALPHA_TEST 0
-#endif
-#ifndef S_TRANSLUCENT
-#define S_TRANSLUCENT 1
-#endif
-
+	#ifndef S_ALPHA_TEST
+	#define S_ALPHA_TEST 0
+	#endif
+	#ifndef S_TRANSLUCENT
+	#define S_TRANSLUCENT 1
+	#endif
+	
 	#include "common/shared.hlsl"
+	#include "procedural.hlsl"
 
 	#define S_UV2 1
+	#define CUSTOM_MATERIAL_INPUTS
 }
 
 struct VertexInput
@@ -32,43 +40,35 @@ struct VertexInput
 struct PixelInput
 {
 	#include "common/pixelinput.hlsl"
+	float3 vPositionOs : TEXCOORD14;
 };
 
 VS
 {
 	#include "common/vertex.hlsl"
 
-	PixelInput MainVs( VertexInput i )
+	PixelInput MainVs( VertexInput v )
 	{
-		PixelInput o = ProcessVertex( i );
-		return FinalizeVertex( o );
+		PixelInput i = ProcessVertex( v );
+		i.vPositionOs = v.vPositionOs.xyz;
+
+		return FinalizeVertex( i );
 	}
 }
 
 PS
 {
-	#include "sbox_pixel.fxc"
-	#include "common/pixel.material.structs.hlsl"
-	#include "common/pixel.lighting.hlsl"
-	#include "common/pixel.shading.hlsl"
-	#include "common/pixel.material.helpers.hlsl"
-	#include "common/pixel.color.blending.hlsl"
-	#include "common/proceedural.hlsl"
-
+	#include "common/pixel.hlsl"
+	
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
-	CreateInputTexture2D( Texture, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	CreateInputTexture2D( Texture0, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	Texture2D g_tTexture < Channel( RGBA, Box( Texture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	Texture2D g_tTexture0 < Channel( RGBA, Box( Texture0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	CreateInputTexture2D( Texture_ps_0, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	CreateInputTexture2D( Texture_ps_1, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	Texture2D g_tTexture_ps_0 < Channel( RGBA, Box( Texture_ps_0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	Texture2D g_tTexture_ps_1 < Channel( RGBA, Box( Texture_ps_1 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	float4 g_vColor < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
-	float g_flEmissionStrength < UiGroup( ",0/,0/0" ); Default1( 0.5 ); Range1( 0, 10 ); >;
-	float g_flSmoothStepMin < UiGroup( ",0/,0/0" ); Default1( 0.25 ); Range1( 0, 1 ); >;
-	float g_flSmoothStepMax < UiGroup( ",0/,0/1" ); Default1( 0.35 ); Range1( 0, 1 ); >;
 	float2 g_vUVTilingOne < UiGroup( ",0/,0/0" ); Default2( 10,1 ); >;
-	float g_flSpeedOne < UiGroup( ",0/,0/0" ); Default1( 0.1 ); Range1( 0, 1 ); >;
 	float2 g_vUVTilingTwo < UiGroup( ",0/,0/0" ); Default2( 16,1 ); >;
-	float g_flSpeedTwo < UiGroup( ",0/,0/0" ); Default1( 0.2 ); Range1( 0, 1 ); >;
-
+	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		Material m;
@@ -81,41 +81,35 @@ PS
 		m.Opacity = 1;
 		m.Emission = float3( 0, 0, 0 );
 		m.Transmission = 0;
-
-		float4 local0 = g_vColor;
-		float local1 = g_flEmissionStrength;
-		float4 local2 = local0 * float4( local1, local1, local1, local1 );
-		float local3 = g_flSmoothStepMin;
-		float local4 = g_flSmoothStepMax;
-		float2 local5 = i.vTextureCoords.xy * float2( 1, 1 );
-		float2 local6 = g_vUVTilingOne;
-		float local7 = g_flSpeedOne;
-		float local8 = local7 * g_flTime;
-		float local9 = 1 - local8;
-		float2 local10 = TileAndOffsetUv( local5, local6, float2( local9, local9 ) );
-		float4 local11 = Tex2DS( g_tTexture, g_sSampler0, local10 );
-		float2 local12 = g_vUVTilingTwo;
-		float local13 = g_flSpeedTwo;
-		float local14 = local13 * g_flTime;
-		float local15 = 1 - local14;
-		float2 local16 = TileAndOffsetUv( local5, local12, float2( local15, local15 ) );
-		float4 local17 = Tex2DS( g_tTexture0, g_sSampler0, local16 );
-		float4 local18 = lerp( local11, local17, 0.5 );
-		float4 local19 = smoothstep( local3, local4, local18 );
-
-		m.Albedo = local0.xyz;
-		m.Emission = local2.xyz;
-		m.Opacity = local19.x;
+		
+		float4 l_0 = g_vColor;
+		float4 l_1 = l_0 * float4( 2, 2, 2, 2 );
+		float2 l_2 = i.vTextureCoords.xy * float2( 1, 1 );
+		float2 l_3 = g_vUVTilingOne;
+		float l_4 = -0.3 * g_flTime;
+		float l_5 = 1 - l_4;
+		float2 l_6 = TileAndOffsetUv( l_2, l_3, float2( l_5, l_5 ) );
+		float4 l_7 = Tex2DS( g_tTexture_ps_0, g_sSampler0, l_6 );
+		float2 l_8 = g_vUVTilingTwo;
+		float l_9 = -0.3 * g_flTime;
+		float l_10 = 1 - l_9;
+		float2 l_11 = TileAndOffsetUv( l_2, l_8, float2( l_10, l_10 ) );
+		float4 l_12 = Tex2DS( g_tTexture_ps_1, g_sSampler0, l_11 );
+		float4 l_13 = lerp( l_7, l_12, 0.5 );
+		float4 l_14 = smoothstep( 0.0f, 0.0f, l_13 );
+		
+		m.Albedo = l_0.xyz;
+		m.Emission = l_1.xyz;
+		m.Opacity = l_14.x;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;
-
+		
 		m.AmbientOcclusion = saturate( m.AmbientOcclusion );
 		m.Roughness = saturate( m.Roughness );
 		m.Metalness = saturate( m.Metalness );
 		m.Opacity = saturate( m.Opacity );
 		
-		ShadingModelValveStandard sm;
-		return FinalizePixelMaterial( i, m, sm );
+		return ShadingModelStandard::Shade( i, m );
 	}
 }

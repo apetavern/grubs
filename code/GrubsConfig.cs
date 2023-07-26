@@ -38,6 +38,14 @@ public static class GrubsConfig
 	[ConVar.Replicated( "turn_duration" )]
 	public static int TurnDuration { get; set; } = 45;
 
+#if DEBUG
+	/// <summary>
+	/// If bot turns get used up instantly.
+	/// </summary>
+	[ConVar.Server( "gr_bot_instantly_end_turn" )]
+	public static bool InstantlyEndBotTurns { get; set; }
+#endif
+
 	/// <summary>
 	/// The amount of rounds to be played before Sudden Death begins.
 	/// </summary>

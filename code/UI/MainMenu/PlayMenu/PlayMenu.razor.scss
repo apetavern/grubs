@@ -60,6 +60,12 @@ PlayMenu {
                 }
             }
         }
+
+        .host-badge {
+            font-size: 32px;
+            color: $color-banana-yellow;
+            padding-right: 8px;
+        }
     }
 
     .play-button {

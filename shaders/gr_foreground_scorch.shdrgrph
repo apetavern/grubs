@@ -28,6 +28,7 @@
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
+      "PositionOffset": {},
       "Identifier": "0",
       "Position": "2624,608"
     },
@@ -37,7 +38,7 @@
         "Identifier": "38",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_shells_color_png_7343c749.generated.vtex",
+      "Image": "textures/environment/sand_shells_color.png",
       "Sampler": {},
       "UI": {
         "Name": "Colour",
@@ -57,7 +58,7 @@
         "Identifier": "38",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_shells_normal_png_ab6f098e.generated.vtex",
+      "Image": "textures/environment/sand_shells_normal.png",
       "Sampler": {},
       "UI": {
         "Name": "Normal",
@@ -80,7 +81,7 @@
         "Identifier": "38",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
+      "Image": "textures/environment/sand_a_rough.png",
       "Sampler": {},
       "UI": {
         "Name": "Rough",
@@ -143,7 +144,7 @@
         "Output": "Result"
       },
       "DefaultA": 0,
-      "DefaultB": 1024,
+      "DefaultB": 1,
       "Identifier": "8",
       "Position": "-1008,-1056"
     },
@@ -192,6 +193,7 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 5,
       "Value": 1,
@@ -226,6 +228,7 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 2048,
       "Value": 0,
@@ -246,6 +249,7 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 2048,
       "Value": 512,
@@ -270,7 +274,7 @@
         "Identifier": "38",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_a_rough_png_ce45b348.generated.vtex",
+      "Image": "textures/environment/sand_a_rough.png",
       "Sampler": {},
       "UI": {
         "Name": "AO",
@@ -292,7 +296,7 @@
         "Identifier": "38",
         "Output": "Result"
       },
-      "Texture": "textures/environment/sand_shells_blend_png_acc24e2f.generated.vtex",
+      "Image": "textures/environment/sand_shells_blend.png",
       "Sampler": {},
       "UI": {
         "Name": "Blend Mask",
@@ -395,7 +399,7 @@
         "Identifier": "28",
         "Output": "Result"
       },
-      "Texture": "dev/vgui/materials/white.vtex",
+      "Image": "materials/dev/white_color.tga",
       "Sampler": {
         "AddressU": "Clamp",
         "AddressV": "Clamp"
@@ -554,7 +558,7 @@
         "Identifier": "37",
         "Output": "Result"
       },
-      "Texture": "textures/environment/rocks_a_color_png_57cea3a9.generated.vtex",
+      "Image": "textures/environment/rocks_a_color.png",
       "Sampler": {},
       "UI": {
         "Name": "Scorch Colour",
@@ -575,7 +579,7 @@
         "Identifier": "37",
         "Output": "Result"
       },
-      "Texture": "textures/environment/lava_rocks_ao_png_ef32fc5c.generated.vtex",
+      "Image": "textures/environment/lava_rocks_ao.png",
       "Sampler": {},
       "UI": {
         "Name": "Scorch AO",
@@ -597,7 +601,7 @@
         "Identifier": "37",
         "Output": "Result"
       },
-      "Texture": "textures/environment/lava_rocks_selfillum_png_b7008b5c.generated.vtex",
+      "Image": "textures/environment/lava_rocks_selfillum.png",
       "Sampler": {},
       "UI": {
         "Name": "Scorch Blend Mask",
@@ -669,7 +673,7 @@
         "Identifier": "37",
         "Output": "Result"
       },
-      "Texture": "textures/environment/lava_rocks_rough_png_350b4792.generated.vtex",
+      "Image": "textures/environment/lava_rocks_rough.png",
       "Sampler": {},
       "UI": {
         "Name": "Scorch Rough",
@@ -691,7 +695,7 @@
         "Identifier": "37",
         "Output": "Result"
       },
-      "Texture": "textures/environment/lava_rocks_normal_png_404cfac.generated.vtex",
+      "Image": "textures/environment/lava_rocks_normal.png",
       "Sampler": {},
       "UI": {
         "Name": "Scorch Normal",
@@ -977,6 +981,7 @@
     },
     {
       "_class": "Float",
+      "Ignore": 0,
       "Min": 0,
       "Max": 256,
       "Value": 32,
