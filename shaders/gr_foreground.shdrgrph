@@ -65,6 +65,7 @@
       "UI": {
         "Name": "Normal",
         "Extension": "Normal",
+        "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": "Textures",
@@ -105,7 +106,7 @@
       },
       "B": {},
       "DefaultA": 0,
-      "DefaultB": 0.0078125,
+      "DefaultB": 0.00390625,
       "Identifier": "4",
       "Position": "-656,-32"
     },

@@ -79,8 +79,8 @@ PS
 	Texture2D g_tScorchColour < Channel( RGBA, Box( ScorchColour ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	Texture2D g_tScorchLayer < Attribute( "ScorchLayer" ); >;
 	Texture2D g_tScorchBlendMask < Channel( RGBA, Box( ScorchBlendMask ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	Texture2D g_tNormal < Channel( RGBA, Box( Normal ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	Texture2D g_tScorchNormal < Channel( RGBA, Box( ScorchNormal ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	Texture2D g_tNormal < Channel( RGBA, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
+	Texture2D g_tScorchNormal < Channel( RGBA, Box( ScorchNormal ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
 	Texture2D g_tRough < Channel( RGBA, Box( Rough ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	Texture2D g_tScorchRough < Channel( RGBA, Box( ScorchRough ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	Texture2D g_tAO < Channel( RGBA, Box( AO ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
@@ -217,7 +217,7 @@ PS
 		
 		float3 l_0 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
 		float l_1 = g_flTiling;
-		float l_2 = l_1 * 0.0078125;
+		float l_2 = l_1 * 0.00390625;
 		float3 l_3 = l_0 * float3( l_2, l_2, l_2 );
 		float4 l_4 = TexTriplanar_Color( g_tColour, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
 		float4 l_5 = g_vTint_Colour;

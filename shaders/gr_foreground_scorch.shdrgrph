@@ -86,7 +86,6 @@
         "Extension": "Normal",
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
-        "SrgbRead": true,
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "3",
@@ -100,7 +99,7 @@
       },
       "B": {},
       "DefaultA": 0,
-      "DefaultB": 0.0078125,
+      "DefaultB": 0.00390625,
       "Identifier": "4",
       "Position": "-1792,592"
     },
@@ -996,7 +995,6 @@
         "Extension": "Normal",
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
-        "SrgbRead": true,
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "68",
