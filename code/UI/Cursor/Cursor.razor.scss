@@ -3,10 +3,10 @@
     z-index: 500;
     opacity: 1;
     transition: opacity 125ms ease-out;
+    pointer-events: none;
 
     img {
         position: absolute;
-        pointer-events: none;
         height: 64;
         background-repeat: no-repeat;
         background-size: contain;
