@@ -71,7 +71,7 @@ public partial class WeaponSelectState : BaseState
 
 		var forwardLook = activeGrub.EyeRotation.Forward * activeGrub.Facing;
 
-		var availableWeapons = MyPlayer.Inventory.Weapons.Where( W => W.Ammo > 0 || W.Ammo == -1 ).OrderBy( x => Game.Random.Int( 1000 ) );
+		var availableWeapons = MyPlayer.Inventory.Weapons.Where( w => w.IsAvailable() ).OrderBy( x => Game.Random.Int( 1000 ) );
 
 		var clifftr = Trace.Ray( activeGrub.EyePosition + activeGrub.Rotation.Forward * 15f + Vector3.Up * 5f, activeGrub.EyePosition + activeGrub.Rotation.Forward * 20f - Vector3.Up * 512f ).Ignore( activeGrub ).UseHitboxes( true ).Run();
 

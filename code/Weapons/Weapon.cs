@@ -67,6 +67,8 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public int UnlockDelay { get; set; } = 0;
 
+	public bool Unlocked => GamemodeSystem.Instance?.RoundsPassed >= UnlockDelay || Ammo == -1;
+
 	/// <summary>
 	/// If the weapon has a hat, override any Grub clothing.
 	/// </summary>
@@ -222,9 +224,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		return false;
 	}
 
-	public bool HasAmmo()
+	public bool IsAvailable()
 	{
-		return Ammo != 0;
+		return HasAmmo() && Unlocked;
 	}
 
 	public Vector3 GetStartPosition( bool isDroppable = false )
@@ -271,6 +273,11 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		{
 			component.Simulate( client );
 		}
+	}
+
+	private bool HasAmmo()
+	{
+		return Ammo != 0;
 	}
 
 	private void DetermineWeaponVisibility()
