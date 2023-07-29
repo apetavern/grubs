@@ -2,10 +2,11 @@
 @inherits Sandbox.UI.Panel
 @attribute [StyleSheet]
 
-@if ( Game.LocalPawn is not Player player )
+@if (Game.LocalPawn is not Player player)
 {
     return;
 }
+
 <root class="@(IsDisabled(player) ? "disabled" : "")">
     <label class="charges">@GetAmmoString()</label>
     <img src=@Weapon.Icon />
@@ -19,17 +20,14 @@
 @code {
     public Weapon Weapon { get; set; }
 
-    bool IsDisabled(Player player)
+    private bool IsDisabled(Player player)
     {
-        if (!Weapon.HasAmmo() || !player.IsTurn || !Weapon.Unlocked)
-            return true;
-        return false;
+        return !player.IsValid() || !player.IsTurn || !Weapon.IsAvailable();
     }
 
     private float GetDelayHeight()
     {
-        if (Weapon.Unlocked) return 0;
-        return (1 - ((float)GamemodeSystem.Instance.RoundsPassed + 1) / (Weapon.UnlockDelay + 1)) * 100;
+        return Weapon.Unlocked ? 0 : (1 - ((float)GamemodeSystem.Instance.RoundsPassed + 1) / (Weapon.UnlockDelay + 1)) * 100;
     }
 
     protected string GetAmmoString()
@@ -39,7 +37,6 @@
 
     protected override int BuildHash()
     {
-        var player = Game.LocalPawn as Player;
-        return HashCode.Combine(Weapon.HasAmmo(), GetAmmoString(), player.IsTurn, GamemodeSystem.Instance.RoundsPassed);
+        return HashCode.Combine(IsDisabled(Game.LocalPawn as Player), GetAmmoString(), GamemodeSystem.Instance.RoundsPassed);
     }
 }
