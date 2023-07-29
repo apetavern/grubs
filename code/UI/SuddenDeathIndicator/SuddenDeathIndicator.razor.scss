@@ -4,7 +4,9 @@ SuddenDeathIndicator {
     position: absolute;
     bottom: 125px;
     right: 100px;
-    background-color: rgba($color-cream-white 0.24);
+    background-image: linear-gradient(to top, rgba(#7c7c7c, 0.05), rgba(#737473, 0.1));
+    border: 1px #ffffff1f;
+    backdrop-filter-blur: 20px;
     border-radius: 4px;
     width: 180px;
     height: 45px;

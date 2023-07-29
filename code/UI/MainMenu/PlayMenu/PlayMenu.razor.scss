@@ -16,7 +16,6 @@ PlayMenu {
             border-radius: 4px 4px 0px 0px;
             font-size: 48px;
             padding: 16px;
-            background-image: linear-gradient(90deg, rgba($color-dark-purple .66), rgba($color-dark-purple 0));
         }
 
         .players {
@@ -32,11 +31,12 @@ PlayMenu {
     .play-button {
         width: 100%;
         height: 100px;
-        background-color: rgba($color-banana-yellow .525);
-        color: black;
+        background-image: linear-gradient(to top, rgba(#7c7c7c, 0.15), rgba(#737473, 0.2));
+        border: 1px #ffffff1f;
         backdrop-filter-blur: 20px;
 
-        label {
+        label,
+        iconpanel {
             font-size: 3vw;
         }
 

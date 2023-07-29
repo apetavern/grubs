@@ -3,8 +3,8 @@
 @attribute [StyleSheet]
 
 <root>
-    <div class="header">
-        <image src="textures/ui/grubs_logo.png" class="logo" />
+    <div class="header" style="border-bottom: 1px #ffffff1f;">
+        <image src="textures/ui/grubs_logo.png" />
         <div class="buttons">
             <button @onclick=@(() => SetActiveTab(Tab.PlayMenu)) icon="play_arrow" class="@IsSelected(Tab.PlayMenu)">Play</button>
             <button @onclick=@(() => SetActiveTab(Tab.CustomizeMenu)) icon="emoji_people" class="@IsSelected(Tab.CustomizeMenu)">Customize</button>

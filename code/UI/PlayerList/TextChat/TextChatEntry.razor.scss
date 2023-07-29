@@ -10,7 +10,7 @@ TextChatEntry {
         height: 30px;
         width: 30px;
         margin-right: 5px;
-        border-radius: 4px;
+        border-radius: 50%;
         flex-shrink: 0;
     }
 
@@ -29,7 +29,7 @@ TextChatEntry {
         margin-top: 3px;
         font-size: 20px;
         font-family: Londrina Solid;
-        color: $color-light-grey;
+        color: #ffffffec;
         text-shadow: 2px 2px 0px black;
     }
 
