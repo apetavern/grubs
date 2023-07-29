@@ -15,9 +15,6 @@ public class GrubPreview : ScenePanel
 
 	public override void Tick()
 	{
-		if ( !IsVisible || Game.LocalPawn is not Player player )
-			return;
-
 		foreach ( var model in _sceneClothing )
 		{
 			model.Update( Time.Delta );
@@ -26,6 +23,9 @@ public class GrubPreview : ScenePanel
 		Grub.Update( Time.Delta );
 		Grub.SetAnimParameter( "grounded", true );
 		Grub.SetAnimParameter( "incline", 0f );
+
+		if ( Game.LocalPawn is not Player player )
+			return;
 
 		var hasChangedCosmetic = player.SelectedCosmeticIndex != _lastSelectedCosmeticIndex;
 		if ( !hasChangedCosmetic )
