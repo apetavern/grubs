@@ -2,11 +2,6 @@
 @inherits Sandbox.UI.Panel
 @attribute [StyleSheet("PlayMenu.razor.scss")]
 
-@if (Game.LocalPawn is not Player localPlayer)
-{
-    return;
-}
-
 <root>
     <div class="container">
         <div class="header">
@@ -28,17 +23,6 @@
 </root>
 
 @code {
-    private static TimeSince _statTimer;
-
-    public override void Tick()
-    {
-        if (_statTimer >= 10f)
-        {
-            PlayerEntry.NextStat();
-            _statTimer = 0f;
-        }
-    }
-
     private string GetButtonText()
     {
         if (Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers)

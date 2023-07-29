@@ -9,14 +9,14 @@
         <div class="color-strip" style="background-color: @Player.Color.Hex"></div>
         <img src="avatar:@Player.Client.SteamId" class="avatar" />
         <label class="name">@Player.Client.Name</label>
-        <button icon="stars" class="host-badge @(!Player.Client.IsListenServerHost ? "hidden" : "")"></button>
+        <div class="host-badge icon @(!Player.Client.IsListenServerHost ? "hidden" : "")">stars</div>
     </div>
 
     @if (!Player.Client.IsBot)
     {
         <section class="stats">
-            <label>@_currentStat</label>
-            <button icon="@_currentStat.Icon" style="padding-left: 2px" />
+            <label style="padding-right: 5px;">@_currentStat</label>
+            <div class="icon">@_currentStat.Icon</div>
         </section>
     }
 </root>
@@ -24,16 +24,25 @@
 @code {
     public Player Player { get; set; }
 
-    private StatInfo[] _stats = {
-        new StatInfo(null, "hrs", "timer", "0.0"),
-        new StatInfo("ffa-games-won", "wins", "emoji_events"),
-        new StatInfo("grubs-killed", "kills", "person_off")
+    private readonly StatInfo[] _stats =
+    {
+        new(null, "hrs", "timer", "0.0"),
+        new("ffa-games-won", "wins", "emoji_events"),
+        new("grubs-killed", "kills", "person_off")
     };
     private StatInfo _currentStat => _stats[_statIndex];
-    private static int _statIndex;
-    private static int _statsLength;
+    private int _statIndex;
 
-    public static void NextStat() => _statIndex = (_statIndex + 1) % _statsLength;
+    private TimeUntil _timeUntilNextStat;
+
+    public override void Tick()
+    {
+        if (!_timeUntilNextStat)
+            return;
+
+        _statIndex = _statIndex == _stats.Length - 1 ? 0 : _statIndex + 1;
+        _timeUntilNextStat = 7f;
+    }
 
     protected override int BuildHash()
     {
@@ -42,20 +51,20 @@
 
     protected override void OnAfterTreeRender(bool firstTime)
     {
-        if (!firstTime) return;
+        if (!firstTime)
+            return;
 
-        _statsLength = _stats.Length;
         foreach (var stat in _stats)
             stat.Populate(Player);
     }
 
     private class StatInfo
     {
-        public string Icon;
+        public readonly string Icon;
 
-        private string _ident; 
-        private string _suffix;
-        private string _format;
+        private readonly string _ident;
+        private readonly string _suffix;
+        private readonly string _format;
         private double _val;
 
         private Player _player;
@@ -72,10 +81,8 @@
         public void Populate(Player player)
         {
             _player = player;
-            if(_statCache == null)
-                _statCache = player.Client.GetPlayerStats();
-
-            _val = _statCache.Where(s => s.Name == _ident).FirstOrDefault().Value;
+            _statCache ??= player.Client.GetPlayerStats();
+            _val = _statCache.FirstOrDefault(s => s.Name == _ident).Value;
         }
 
         public override string ToString()

@@ -16,10 +16,6 @@ button, a {
         color: $color-banana-yellow;
     }
 
-    &:hover {
-        cursor: pointer;
-    }
-
     &:hover:not(.disabled) {
         transform: scale(1.02);
         sound-in: ui_button_hover;

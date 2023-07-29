@@ -9,17 +9,16 @@ public static class IClientExtensions
 	/// <param name="leaderboard">Ident of the leaderboard to fetch.</param>
 	public static async Task<double> GetLeaderboardEntry( this IClient client, string leaderboard )
 	{
-		if ( !client.IsValid() || client.IsBot ) return 0f;
+		if ( !client.IsValid() || client.IsBot ) 
+			return 0f;
 
 		var steamId = client.SteamId;
 		var board = Sandbox.Services.Leaderboards.Get( leaderboard );
 		board.TargetSteamId = steamId;
 		await board.Refresh();
 
-		var entry = board.Entries.Where( e => e.SteamId == steamId ).FirstOrDefault();
-		if ( entry.SteamId != steamId ) return 0f;
-
-		return entry.Value;
+		var entry = board.Entries.FirstOrDefault( e => e.SteamId == steamId );
+		return entry.SteamId != steamId ? 0f : entry.Value;
 	}
 
 	/// <summary>
@@ -28,7 +27,8 @@ public static class IClientExtensions
 	/// </summary>
 	public static Sandbox.Services.Stats.PlayerStats GetPlayerStats( this IClient client )
 	{
-		if ( !client.IsValid() || client.IsBot ) return null;
+		if ( !client.IsValid() || client.IsBot )
+			return null;
 
 		return Sandbox.Services.Stats.GetPlayerStats( "apetavern.grubs", client.SteamId );
 	}
