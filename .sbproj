@@ -669,6 +669,7 @@
         "PreLaunchCommand": "",
         "PostLaunchCommand": ""
       }
-    ]
+    ],
+    "TickRate": 50
   }
 }
