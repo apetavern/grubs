@@ -56,9 +56,8 @@ public partial class Inventory : EntityComponent<Player>
 	{
 		if ( ActiveWeapon == weapon )
 			return;
-
-		var gamemode = GamemodeSystem.Instance;
-		if ( weapon.IsValid() && (!weapon.HasAmmo() || gamemode.RoundsPassed < weapon.UnlockDelay) )
+		
+		if ( weapon.IsValid() && !weapon.IsAvailable() )
 			return;
 
 		if ( ActiveWeapon.IsValid() && ActiveWeapon.IsChargeConsumed && !forced )
@@ -71,11 +70,6 @@ public partial class Inventory : EntityComponent<Player>
 	public bool IsCarrying( Weapon weapon )
 	{
 		return Weapons.Any( item => item.Name == weapon.Name );
-	}
-
-	public bool HasAmmo( int index )
-	{
-		return Weapons[index].Ammo != 0;
 	}
 
 	public void Clear()
