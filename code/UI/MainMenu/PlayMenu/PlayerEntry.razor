@@ -24,6 +24,7 @@
 @code {
     public Player Player { get; set; }
 
+    private static TimeUntil _timeUntilNextStat;
     private readonly StatInfo[] _stats =
     {
         new(null, "hrs", "timer", "0.0"),
@@ -32,8 +33,6 @@
     };
     private StatInfo _currentStat => _stats[_statIndex];
     private int _statIndex;
-
-    private TimeUntil _timeUntilNextStat;
 
     public override void Tick()
     {
