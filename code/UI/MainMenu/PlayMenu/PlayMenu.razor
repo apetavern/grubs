@@ -2,11 +2,6 @@
 @inherits Sandbox.UI.Panel
 @attribute [StyleSheet("PlayMenu.razor.scss")]
 
-@if (Game.LocalPawn is not Player localPlayer)
-{
-    return;
-}
-
 <root>
     <div class="container">
         <div class="header">
@@ -19,25 +14,7 @@
                 if (client.Pawn is not Player player)
                     continue;
 
-                <div class="player">
-                    <div style="align-items: center;">
-                        <div class="color-strip" style="background-color: @player.Color.Hex"></div>
-                        <img src="avatar:@client.SteamId" class="avatar" />
-                        <label class="name">@client.Name</label>
-                    </div>
-
-                    @if (!client.IsBot)
-                    {
-                        <div class="hours" style="align-items: center;">
-                            @if (client.IsListenServerHost)
-                            {
-                                <button icon="stars" class="host-badge"></button>
-                            }
-                            <label>@player.PlayTime.ToString("0.0")hrs</label>
-                            <button icon="timer" style="margin-left: 4px;" />
-                        </div>
-                    }
-                </div>
+                <PlayerEntry Player=@player></PlayerEntry>
             }
         </div>
     </div>

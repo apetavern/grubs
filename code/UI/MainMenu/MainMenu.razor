@@ -4,10 +4,7 @@
 
 <root>
     <div class="header">
-        <div>
-            <image src="textures/ui/grub.png" />
-            <label style="font-size: 72px;">GRUBS</label>
-        </div>
+        <image src="textures/ui/grubs_logo.png" class="logo" />
         <div class="buttons">
             <button @onclick=@(() => SetActiveTab(Tab.PlayMenu)) icon="play_arrow" class="@IsSelected(Tab.PlayMenu)">Play</button>
             <button @onclick=@(() => SetActiveTab(Tab.CustomizeMenu)) icon="emoji_people" class="@IsSelected(Tab.CustomizeMenu)">Customize</button>

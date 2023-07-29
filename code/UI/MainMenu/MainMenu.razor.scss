@@ -6,11 +6,6 @@ MainMenu {
     flex-direction: column;
     pointer-events: all;
 
-    image {
-        width: 72px;
-        height: 72px;
-    }
-
     .container {
         background-color: rgba($color-grape-purple 0.314);
         font-family: Londrina Solid;
@@ -30,6 +25,12 @@ MainMenu {
         font-family: Londrina Solid;
         color: white;
         flex-shrink: 0;
+
+        .logo {
+            width: 400px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
 
         .buttons {
             font-size: 48px;
