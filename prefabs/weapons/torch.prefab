@@ -93,12 +93,14 @@
           },
           "InputDescriptions": {
             "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Start/Stop\u0022\r\n]"
+            "Value": "[\r\n  \u0022Fire (Hold)\u0022\r\n]"
           },
           "_name": {
             "Value": "\u0022InputHintOverrideComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
