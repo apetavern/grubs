@@ -14,14 +14,11 @@ InGameMenu {
         opacity: 0;
     }
 
-    .header {
-        color: white;
-        height: 110px;
-
-        image {
-            width: 108px;
-            height: 108px;
-        }
+    .logo {
+        aspect-ratio: 1;
+        width: 300px;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .buttons {
