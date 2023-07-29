@@ -23,6 +23,17 @@
 </root>
 
 @code {
+    private TimeUntil _timeUntilNextStat;
+
+    public override void Tick()
+    {
+        if (!_timeUntilNextStat)
+            return;
+
+        _timeUntilNextStat = 7f;
+        PlayerEntry.ShowNextStat();
+    }
+
     private string GetButtonText()
     {
         if (Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers)

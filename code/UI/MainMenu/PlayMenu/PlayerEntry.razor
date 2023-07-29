@@ -24,23 +24,18 @@
 @code {
     public Player Player { get; set; }
 
-    private static TimeUntil _timeUntilNextStat;
-    private readonly StatInfo[] _stats =
+    private static readonly StatInfo[] _stats =
     {
         new(null, "hrs", "timer", "0.0"),
         new("ffa-games-won", "wins", "emoji_events"),
         new("grubs-killed", "kills", "person_off")
     };
     private StatInfo _currentStat => _stats[_statIndex];
-    private int _statIndex;
+    private static int _statIndex;
 
-    public override void Tick()
+    public static void ShowNextStat()
     {
-        if (!_timeUntilNextStat)
-            return;
-
         _statIndex = _statIndex == _stats.Length - 1 ? 0 : _statIndex + 1;
-        _timeUntilNextStat = 7f;
     }
 
     protected override int BuildHash()
