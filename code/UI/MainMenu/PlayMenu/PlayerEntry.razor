@@ -15,7 +15,7 @@
     @if (!Player.Client.IsBot)
     {
         <section class="stats">
-            <label style="padding-right: 5px;">@_currentStat</label>
+            <label style="padding-right: 5px;">@_currentStat.Format(_currentValue)</label>
             <div class="icon">@_currentStat.Icon</div>
         </section>
     }
@@ -30,8 +30,9 @@
         new("ffa-games-won", "wins", "emoji_events"),
         new("grubs-killed", "kills", "person_off")
     };
-    private StatInfo _currentStat => _stats[_statIndex];
     private static int _statIndex;
+    private StatInfo _currentStat => _stats[_statIndex];
+    private double _currentValue;
 
     public static void ShowNextStat()
     {
@@ -40,52 +41,36 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(_statIndex, Player.PlayTime);
+        return HashCode.Combine(_statIndex, _currentValue);
     }
 
     protected override void OnAfterTreeRender(bool firstTime)
     {
-        if (!firstTime)
+        if (!Player.Client.IsValid() || Player.Client.IsBot)
             return;
 
-        foreach (var stat in _stats)
-            stat.Populate(Player);
+        // PlayTime is a package stat, not a leaderboard stat.
+        _currentValue = _currentStat.Ident == null ? Player.PlayTime : Player.Client.GetPlayerStats().FirstOrDefault(s => s.Name == _currentStat.Ident).Value;
     }
 
     private class StatInfo
     {
+        public readonly string Ident;
         public readonly string Icon;
 
-        private readonly string _ident;
         private readonly string _suffix;
         private readonly string _format;
-        private double _val;
 
         private Player _player;
-        private static Sandbox.Services.Stats.PlayerStats _statCache;
 
         public StatInfo(string ident, string suffix, string icon, string format = "0")
         {
+            Ident = ident;
             Icon = icon;
-            _ident = ident;
             _suffix = suffix;
             _format = format;
         }
 
-        public void Populate(Player player)
-        {
-            _player = player;
-            _statCache ??= player.Client.GetPlayerStats();
-            _val = _statCache.FirstOrDefault(s => s.Name == _ident).Value;
-        }
-
-        public override string ToString()
-        {
-            // Continuously fetch PlayTime (it changes, and isn't even networked by the time we call Populate()).
-            if(_ident == null && _player.IsValid())
-                _val = _player.PlayTime;
-
-            return $"{_val.ToString(_format)} {_suffix}";
-        }
+        public string Format(double val) => $"{val.ToString(_format)} {_suffix}";
     }
 }
