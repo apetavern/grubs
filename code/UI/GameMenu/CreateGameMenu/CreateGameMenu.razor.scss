@@ -37,30 +37,19 @@ CreateGameMenu {
                 border-radius: 4px;
                 background-color: rgb($color-light-grey 0.2);
                 margin: 5px;
-                cursor: none;
-            }
-
-            .slidercontrol {
-                cursor: none;
             }
         }
 
         .buttons {
-            width: 100%;
             height: 0px;
-            gap: 50px;
-            justify-content: center;
 
             .menu-button {
                 color: white;
+                width: 50%;
 
                 label,
                 iconpanel {
-                    font-size: 42px;
-                }
-
-                label {
-                    padding: 5px;
+                    font-size: 2vw;
                 }
 
                 &.disabled {

@@ -18,15 +18,15 @@ FindGameMenu {
     .buttons {
         justify-content: space-evenly;
         align-items: center;
-        gap: 50px;
         padding: 40px;
 
         .menu-button {
             color: white;
+            width: 50%;
 
             label,
             iconpanel {
-                font-size: 42px;
+                font-size: 2vw;
             }
 
             label {
@@ -43,7 +43,7 @@ FindGameMenu {
 ServerListPanel {
     padding-top: 20px;
     height: 90%;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .loading-status {

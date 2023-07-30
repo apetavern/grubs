@@ -7,8 +7,8 @@ PlayerEntry {
     .color-strip {
         width: 5px;
         height: 100%;
-        margin-right: 4px;
-        border-radius: 4px 0px 0px 4px;
+        margin-right: 6px;
+        border-radius: 4px;
     }
 
     .avatar {
@@ -16,7 +16,7 @@ PlayerEntry {
         height: 50px;
         flex-shrink: 0;
         margin-right: 12px;
-        border-radius: 0px 4px 4px 0px;
+        border-radius: 4px;
     }
 
     .name {
@@ -46,7 +46,7 @@ PlayerEntry {
         font-size: 20px;
         font-weight: lighter;
     }
-    
+
     .icon {
         font-family: MaterialIcons;
     }

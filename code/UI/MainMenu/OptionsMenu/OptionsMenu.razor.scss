@@ -1,19 +1,17 @@
 @import "../../Styles/vars.scss";
 
 OptionsMenu {
-    width: 100%;
-    height: 100%;
+    top: 40px;
+    left: 80px;
 
     .options-container {
-        margin-top: auto;
-        margin-bottom: auto;
-        left: 64px;
-        width: 1200px;
-        height: 810px;
-        background-color: rgba($color-grape-purple 0.314);
+        width: 1500px;
+        height: 720px;
         font-family: Londrina Solid;
         color: white;
         border-radius: 4px;
+        background-image: linear-gradient(to top, rgba(#7c7c7c, 0.05), rgba(#737473, 0.1));
+        border: 1px #ffffff1f;
         backdrop-filter-blur: 20px;
     }
 
@@ -22,7 +20,7 @@ OptionsMenu {
         flex-direction: column;
         flex-shrink: 0;
         overflow: scroll;
-        background-color: rgba($color-black-purple 0.314);
+        background-color: rgba(#111111 0.314);
     }
 
     .options-sidebar-entry {
@@ -38,12 +36,12 @@ OptionsMenu {
         }
 
         &:hover:not(.tab-selected) {
-            background-color: rgba($color-dull-purple 0.314);
+            background-color: rgba(#7c7c7c 0.314);
         }
     }
 
     .tab-selected {
-        background-color: rgba($color-dull-purple 0.878);
+        background-color: rgba(#747474 0.1);
     }
 
     .options-tab {

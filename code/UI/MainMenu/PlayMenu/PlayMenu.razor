@@ -1,6 +1,6 @@
 ﻿@namespace Grubs.UI
 @inherits Sandbox.UI.Panel
-@attribute [StyleSheet("PlayMenu.razor.scss")]
+@attribute [StyleSheet]
 
 <root>
     <div class="container">
@@ -19,11 +19,17 @@
         </div>
     </div>
     <div style="height: 20px;" />
-    <button class="play-button @(IsButtonEnabled() ? "" : "disabled")" onclick=@OnStartClick>@GetButtonText()</button>
+    <button class="play-button @(IsButtonEnabled() ? "" : "disabled")" icon="play_arrow" onclick=@OnStartClick>@GetButtonText()</button>
 </root>
 
 @code {
     private TimeUntil _timeUntilNextStat;
+
+    [ConCmd.Server]
+	public static void StartGame()
+	{
+		GamemodeSystem.Instance.Start();
+	}
 
     public override void Tick()
     {

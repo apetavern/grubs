@@ -16,7 +16,7 @@ PlayerInfo {
     .name {
         font-family: Londrina Solid;
         font-size: 30px;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -42,7 +42,7 @@ PlayerInfo {
         font-family: MaterialIcons;
         font-size: 30px;
         color: $color-soft-yellow;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
         animation-duration: 1s;
         animation-name: wiggle;
         animation-iteration-count: infinite;
@@ -55,7 +55,7 @@ PlayerInfo {
         font-family: MaterialIcons;
         font-size: 30px;
         color: red;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
     }
 
     &.inactive {

@@ -4,7 +4,9 @@ WindIndicator {
     position: absolute;
     bottom: 200px;
     right: 100px;
-    background-color: rgba($color-cream-white 0.24);
+    background-image: linear-gradient(to top, rgba(#7c7c7c, 0.05), rgba(#737473, 0.1));
+    border: 1px #ffffff1f;
+    backdrop-filter-blur: 20px;
     border-radius: 4px;
     width: 180px;
     height: 45px;
@@ -17,7 +19,7 @@ WindIndicator {
         font-family: Londrina Solid;
         font-size: 35px;
         color: white;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
     }
 
     .wind {
@@ -38,7 +40,7 @@ WindIndicator {
         font-family: MaterialIconsRound;
         font-size: 50px;
         color: white;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
     }
 }
 

@@ -13,7 +13,9 @@ TextChat {
         flex-shrink: 0;
         opacity: 0;
         border-radius: 4px;
-        background-color: rgba($color-light-grey 0.2);
+        background-image: linear-gradient(to top, rgba(#7c7c7c, 0.05), rgba(#737473, 0.1));
+        border: 1px #ffffff1f;
+        backdrop-filter-blur: 20px;
 
         label {
             word-break: break-all;
@@ -29,8 +31,8 @@ TextChat {
     .content-label {
         font-size: 20px;
         font-family: Londrina Solid;
-        color: $color-light-grey;
-        text-shadow: 2px 2px 0px black;
+        color: #ffffffec;
+        text-shadow: 2px 2px 2px black;
         margin: 5px;
     }
 
