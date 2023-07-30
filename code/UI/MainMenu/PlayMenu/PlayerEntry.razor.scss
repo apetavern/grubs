@@ -5,10 +5,10 @@ PlayerEntry {
     justify-content: space-between;
 
     .color-strip {
-        width: 8px;
-        height: 8px;
-        margin-right: 8px;
-        border-radius: 50%;
+        width: 5px;
+        height: 100%;
+        margin-right: 6px;
+        border-radius: 4px;
     }
 
     .avatar {
@@ -16,7 +16,7 @@ PlayerEntry {
         height: 50px;
         flex-shrink: 0;
         margin-right: 12px;
-        border-radius: 50%;
+        border-radius: 4px;
     }
 
     .name {

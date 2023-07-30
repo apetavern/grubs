@@ -13,10 +13,6 @@ a {
         font-family: MaterialIcons;
     }
 
-    &.selected {
-        opacity: 0.6;
-    }
-
     &:hover:not(.disabled) {
         transform: scale(1.02);
         sound-in: ui_button_hover;

@@ -32,6 +32,12 @@ MainMenu {
             font-size: 48px;
             font-weight: 200;
             gap: 60px;
+
+            button {
+                &:not(.selected) {
+                    opacity: 0.5;
+                }
+            }
         }
     }
 

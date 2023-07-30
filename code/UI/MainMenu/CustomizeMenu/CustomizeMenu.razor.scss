@@ -57,9 +57,8 @@ CustomizeMenu {
                     width: 100%;
                 }
 
-                &.selected {
-                    transform: scale(1.1);
-                    border-bottom: 2px solid white;
+                &:not(.selected) {
+                    opacity: 0.5;
                 }
             }
         }
