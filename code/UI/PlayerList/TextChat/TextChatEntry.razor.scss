@@ -21,7 +21,7 @@ TextChatEntry {
         font-weight: 700;
         font-size: 20px;
         font-family: Londrina Solid;
-        text-shadow: 2px 2px 2px black;
+        text-shadow: 2px 2px 1px black;
         font-weight: bold;
     }
 
@@ -30,7 +30,7 @@ TextChatEntry {
         font-size: 20px;
         font-family: Londrina Solid;
         color: #ffffffec;
-        text-shadow: 2px 2px 2px black;
+        text-shadow: 2px 2px 1px black;
     }
 
     &.stale {
