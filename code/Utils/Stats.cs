@@ -36,6 +36,8 @@ public static class Stats
 		{
 			Sandbox.Services.Stats.Increment( player.Client, GamesPlayed( gamemode ), 1 );
 		}
+
+		Sandbox.Services.Stats.Flush();
 	}
 
 	/// <summary>
