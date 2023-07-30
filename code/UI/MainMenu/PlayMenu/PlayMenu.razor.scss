@@ -31,7 +31,7 @@ PlayMenu {
     .play-button {
         width: 100%;
         height: 100px;
-        background-image: linear-gradient(to top, rgba(#7c7c7c, 0.15), rgba(#737473, 0.2));
+        background-image: linear-gradient(to top, rgba(#f7f7f7, 0.03), rgba(#ffffff, 0.05));
         border: 1px #ffffff1f;
         backdrop-filter-blur: 20px;
 
@@ -41,7 +41,7 @@ PlayMenu {
         }
 
         &.disabled {
-            opacity: 0.6;
+            opacity: 0.2;
         }
     }
 }
