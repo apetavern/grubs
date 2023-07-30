@@ -19,7 +19,7 @@ SuddenDeathIndicator {
         font-family: Londrina Solid;
         font-size: 25px;
         color: white;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
     }
 
     .icon {
@@ -27,14 +27,14 @@ SuddenDeathIndicator {
         font-family: MaterialIconsRound;
         font-size: 35px;
         color: white;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
     }
 
     .body {
         font-family: Londrina Solid;
         font-size: 35px;
         color: white;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
 
         &.active {
             animation-name: pulsing-text;
