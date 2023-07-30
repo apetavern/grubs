@@ -1,3 +1,95 @@
-﻿slider {
-    z-index: -1;
+﻿Slider {
+    flex-direction: row;
+    min-width: 50px;
+    position: relative;
+    flex-shrink: 0;
+    flex-direction: row;
+    pointer-events: all;
+    cursor: none;
+    gap: 8px;
+    flex-grow: 1;
+    align-items: center;
+
+    >.inner {
+        flex-direction: column;
+        flex-shrink: 1;
+        flex-grow: 1;
+        min-height: 32px;
+
+        >.values {
+            width: 100%;
+            pointer-events: none;
+            font-size: 14px;
+            color: #aaa;
+
+            >.left {
+                flex-grow: 1;
+            }
+        }
+
+        >.track {
+            background-color: #888;
+            height: 7px;
+            margin: 8px;
+            align-items: center;
+            border-radius: 4px;
+
+            >.track-active {
+                background-color: #fff;
+                position: absolute;
+                height: 100%;
+                left: 0px;
+                border-radius: 4px;
+            }
+
+            >.thumb {
+                background-color: #fff;
+                border-radius: 100px;
+                width: 16px;
+                height: 16px;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    >.entry {
+        width: 50px;
+        flex-shrink: 0;
+        flex-grow: 0;
+
+        >textentry {
+            text-align: right;
+            width: 100%;
+            border-radius: 4px;
+            padding: 0;
+            min-height: 0px;
+
+            >.content-label {
+                padding: 0 4px;
+            }
+        }
+    }
+}
+
+Slider .value-tooltip {
+    position: absolute;
+    bottom: 150%;
+    left: -8px;
+    z-index: 1000;
+    flex-direction: column;
+
+    >.label {
+        font-size: 20px;
+        background-color: black;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    >.tail {
+        left: 8px;
+        background-color: black;
+        width: 10px;
+        height: 10px;
+        transform: rotateZ(45 deg);
+    }
 }
