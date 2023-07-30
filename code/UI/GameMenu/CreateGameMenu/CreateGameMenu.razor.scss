@@ -41,21 +41,15 @@ CreateGameMenu {
         }
 
         .buttons {
-            width: 100%;
             height: 0px;
-            gap: 50px;
-            justify-content: center;
 
             .menu-button {
                 color: white;
+                width: 50%;
 
                 label,
                 iconpanel {
-                    font-size: 42px;
-                }
-
-                label {
-                    padding: 5px;
+                    font-size: 2vw;
                 }
 
                 &.disabled {
