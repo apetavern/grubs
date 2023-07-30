@@ -1,5 +1,4 @@
 ﻿@using Grubs.Bots
-@using System.Linq;
 
 @namespace Grubs.UI
 @inherits Sandbox.UI.Panel
@@ -20,6 +19,11 @@
             icon="delete_forever"
             text="Remove Bot" />
     </div>
+    <Slider 
+        Label="Grub Count"
+        Max=@(10)
+        Value:bind="@GrubsConfig.GrubCount" 
+        OnValueChanged=@((float count) => GrubsGame.SetConfigOption("grub_count", count.ToString())) />
 </root>
 
 @code {

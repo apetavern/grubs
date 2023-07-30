@@ -223,9 +223,12 @@ public sealed partial class GrubsGame : GameManager
 	}
 
 	[ConCmd.Server]
-	public static void SetConfigOption( string key, string value )
+	public static void SetConfigOption( string key, string value, bool refreshTerrain = false )
 	{
 		ConsoleSystem.SetValue( key, value );
+
+		if ( !refreshTerrain )
+			return;
 
 		if ( key == "terrain_environment_type"
 			&& GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated )

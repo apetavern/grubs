@@ -12,37 +12,29 @@
                 SelectLabel="Environment Type" 
                 Key="terrain_environment_type"
                 IsDisabled=@(!Game.LocalClient.IsListenServerHost)
-                OnOptionSelected=@SetConfigOption />
+                OnOptionSelected=@SetTerrainOption />
             <SingleSelect
                 SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
                 Options=@TerrainTypeOptions
                 SelectLabel="Terrain Type"
                 Key="terrain_type"
                 IsDisabled=@(!Game.LocalClient.IsListenServerHost)
-                OnOptionSelected=@SetConfigOption />
+                OnOptionSelected=@SetTerrainOption />
             <SingleSelect
                 SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
                 Options=@TerrainTextureOptions
                 SelectLabel="Terrain Texture"
                 Key="terrain_texture"
                 IsDisabled=@(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated || !Game.LocalClient.IsListenServerHost)
-                OnOptionSelected=@SetConfigOption />
+                OnOptionSelected=@SetTerrainOption />
         </div>
-
-        @* <div>
-            <Slider 
-                Label="Grub Count"
-                Max=@(10)
-                Value:bind="@GrubsConfig.GrubCount" 
-                OnValueChanged=@((float f) => SetConfigOption("grub_count", f.ToString())) />
-        </div> *@
     </div>
 </root>
 
 @code {
-    private void SetConfigOption( string key, string value )
+    private void SetTerrainOption( string key, string value )
     {
-        GrubsGame.SetConfigOption(key, value);
+        GrubsGame.SetConfigOption(key, value, true);
     }
 
     private List<string> EnvironmentOptions = Enum.GetNames<GrubsConfig.TerrainEnvironmentType>().ToList();
