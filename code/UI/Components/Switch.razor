@@ -1,0 +1,51 @@
+@using System
+@using Sandbox.Razor
+@namespace Sandbox.UI
+@inherits BaseControl
+@attribute [StyleSheet]
+
+<root class="@StateClass">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label style="font-size: 32px; margin-bottom: 5px;">@Label</label>
+    }
+    <div class="switch-frame">
+        <div class="switch-inner">
+        </div>
+    </div>
+</root>
+
+@code
+{
+    /// <summary>
+    /// Text indicating the purpose of the switch.
+    /// </summary>
+    public string Label { get; set; } = "";
+    public Action<bool> OnValueChanged { get; set; }
+
+    private string StateClass => Value ? "active" : "inactive";
+    private bool _value;
+
+    public bool Value
+    {
+        get => _value;
+
+        set
+        {
+            if (_value == value)
+                return;
+
+            _value = value;
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnMouseDown( MousePanelEvent e )
+    {
+        base.OnMouseDown( e );
+
+        Value = !Value;
+        OnValueChanged?.Invoke( Value );
+        e.StopPropagation();
+    }
+}

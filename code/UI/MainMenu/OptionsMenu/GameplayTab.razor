@@ -19,11 +19,17 @@
             icon="delete_forever"
             text="Remove Bot" />
     </div>
-    <Slider 
-        Label="Grub Count"
-        Max=@(10)
-        Value:bind="@GrubsConfig.GrubCount" 
-        OnValueChanged=@((float count) => GrubsGame.SetConfigOption("grub_count", count.ToString())) />
+    <div style="flex-direction: column; gap: 10px;">
+        <Slider 
+            Label="Grub Count"
+            Max=@(10)
+            Value:bind="@GrubsConfig.GrubCount" 
+            OnValueChanged=@((float count) => GrubsGame.SetConfigOption("grub_count", count.ToString())) />
+        <Switch
+            Label="Wind"
+            Value:bind="@GrubsConfig.WindEnabled"
+            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("wind_enabled", enabled.ToString()))  />
+    </div>
 </root>
 
 @code {
