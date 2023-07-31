@@ -79,7 +79,7 @@
       },
       "CollisionRadius": {
         "Type": "Single",
-        "Value": "1"
+        "Value": "4"
       },
       "ShouldCameraFollow": {
         "Type": "Boolean",
