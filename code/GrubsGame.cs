@@ -26,11 +26,13 @@ public sealed partial class GrubsGame : GameManager
 	/// </summary>
 	[Net] public IDictionary<Color, bool> PlayerColors { get; private set; }
 
+	private UI.GrubsHud _hud;
+
 	public GrubsGame()
 	{
 		if ( Game.IsClient )
 		{
-			_ = new UI.GrubsHud();
+			_hud ??= new UI.GrubsHud();
 		}
 		else
 		{
@@ -155,7 +157,6 @@ public sealed partial class GrubsGame : GameManager
 	{
 		PlayerColors.Add( Color.FromBytes( 56, 229, 77 ), false );      // Green
 		PlayerColors.Add( Color.FromBytes( 192, 255, 169 ), false );    // Bright Pastel Green
-		PlayerColors.Add( Color.FromBytes( 56, 118, 29 ), false );      // ForestGreen
 		PlayerColors.Add( Color.FromBytes( 255, 174, 109 ), false );    // Orange
 		PlayerColors.Add( Color.FromBytes( 255, 216, 89 ), false );     // Bright Yellow
 		PlayerColors.Add( Color.FromBytes( 248, 249, 136 ), false );    // Yellow
