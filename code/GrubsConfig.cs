@@ -50,7 +50,7 @@ public static class GrubsConfig
 	/// The amount of rounds to be played before Sudden Death begins.
 	/// </summary>
 	[ConVar.Replicated( "gr_sd_delay" )]
-	public static int SuddenDeathDelay { get; set; } = 10;
+	public static int SuddenDeathDelay { get; set; } = 6;
 
 	/// <summary>
 	/// Should all Grubs have their health set to 1 when Sudden Death begins?
