@@ -111,7 +111,6 @@
         if ( !HasActive || e.MouseButton == MouseButtons.Middle ) return;
 
         Value = ScreenPosToValue( Mouse.Position );
-        OnValueChanged?.Invoke( Value );
         e.StopPropagation();
     }
 
@@ -123,10 +122,20 @@
         base.OnMouseDown( e );
 
         Value = ScreenPosToValue( Mouse.Position );
-        OnValueChanged?.Invoke( Value );
         e.StopPropagation();
 
         TextEntryPanel?.Blur();
+    }
+
+    /// <summary>
+    /// Wait until MouseUp before propagating value change (so we don't spam terrain regen).
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnMouseUp(MousePanelEvent e)
+    {
+        base.OnMouseUp(e);
+
+        OnValueChanged?.Invoke(Value);
     }
 
     protected override void OnMiddleClick( MousePanelEvent e )
