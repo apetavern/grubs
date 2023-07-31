@@ -61,6 +61,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public WeaponType WeaponType { get; set; } = WeaponType.Weapon;
 
+	[Prefab, Net]
+	public bool CanSwapAfterUse { get; set; } = false;
+
 	/// <summary>
 	/// The amount of turns that must pass before this weapon can be used.
 	/// </summary>

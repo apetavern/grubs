@@ -106,7 +106,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		IsFiring = false;
 		Weapon.CurrentUses++;
 
-		if ( Weapon.CurrentUses >= Weapon.Charges )
+		if ( Weapon.CurrentUses >= Weapon.Charges && !Weapon.CanSwapAfterUse )
 			GamemodeSystem.Instance.UseTurn( true );
 	}
 
