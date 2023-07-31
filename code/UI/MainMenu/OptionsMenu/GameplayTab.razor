@@ -5,46 +5,54 @@
 @attribute [StyleSheet]
 
 <root>
-    <label>Gameplay</label>
-    <button
-            @onclick=@(() => AddBot())
-            class="options-sidebar-entry true"
-            icon="smart_toy"
-            text="Add Bot" />
-    <button @onclick=@(() => RemoveBot())
-            class="options-sidebar-entry true"
-            icon="delete_forever"
-            text="Remove Bot" />
+    <div style="flex-direction: column; flex-shrink: 0;">
+        <label>Gameplay</label>
 
-    <Slider 
-        Label="Grub Count"
-        Max=@(10)
-        Value:bind="@GrubsConfig.GrubCount" 
-        OnValueChanged=@((float count) => GrubsGame.SetConfigOption("grub_count", count.ToString())) />
-    <Slider 
-        Label="Movement Grace Period"
-        Max=@(10)
-        Value:bind="@GrubsConfig.MovementGracePeriod" 
-        OnValueChanged=@((float grace) => GrubsGame.SetConfigOption("movement_grace", grace.ToString())) />
-        
-    <Switch
-        Label="Wind"
-        Value:bind="@GrubsConfig.WindEnabled"
-        OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("wind_enabled", enabled.ToString()))  />
-    @if (GrubsConfig.WindEnabled)
-    {
+        <button
+                @onclick=@(() => AddBot())
+                class="options-sidebar-entry true"
+                icon="smart_toy"
+                text="Add Bot" />
+        <button @onclick=@(() => RemoveBot())
+                class="options-sidebar-entry true"
+                icon="delete_forever"
+                text="Remove Bot" />
+
         <Slider 
-            Label="Wind Force"
-            Step=@(0.1f)
-            Max=@(1)
-            Value:bind="@GrubsConfig.WindForce" 
-            OnValueChanged=@((float force) => GrubsGame.SetConfigOption("wind_force", force.ToString())) />
+            Label="Grub Count"
+            Max=@(10)
+            Value:bind="@GrubsConfig.GrubCount" 
+            OnValueChanged=@((float count) => GrubsGame.SetConfigOption("grub_count", count.ToString())) />
         <Slider 
-            Label="Wind Steps"
-            Max=@(5)
-            Value:bind="@GrubsConfig.WindSteps" 
-            OnValueChanged=@((float steps) => GrubsGame.SetConfigOption("wind_steps", steps.ToString())) />
-    }
+            Label="Turn Duration"
+            Max=@(60)
+            Value:bind="@GrubsConfig.TurnDuration" 
+            OnValueChanged=@((float duration) => GrubsGame.SetConfigOption("turn_duration", duration.ToString())) />
+        <Slider 
+            Label="Movement Grace Period"
+            Max=@(10)
+            Value:bind="@GrubsConfig.MovementGracePeriod" 
+            OnValueChanged=@((float grace) => GrubsGame.SetConfigOption("movement_grace", grace.ToString())) />
+            
+        <Switch
+            Label="Wind"
+            Value:bind="@GrubsConfig.WindEnabled"
+            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("wind_enabled", enabled.ToString()))  />
+        @if (GrubsConfig.WindEnabled)
+        {
+            <Slider 
+                Label="Wind Force"
+                Step=@(0.1f)
+                Max=@(1)
+                Value:bind="@GrubsConfig.WindForce" 
+                OnValueChanged=@((float force) => GrubsGame.SetConfigOption("wind_force", force.ToString())) />
+            <Slider 
+                Label="Wind Steps"
+                Max=@(5)
+                Value:bind="@GrubsConfig.WindSteps" 
+                OnValueChanged=@((float steps) => GrubsGame.SetConfigOption("wind_steps", steps.ToString())) />
+        }
+    </div>
 </root>
 
 @code {
