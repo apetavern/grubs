@@ -29,11 +29,24 @@
             Label="Wind"
             Value:bind="@GrubsConfig.WindEnabled"
             OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("wind_enabled", enabled.ToString()))  />
+        @if (GrubsConfig.WindEnabled)
+        {
+            <Slider 
+                Label="Wind Force"
+                Step=@(0.1f)
+                Max=@(1)
+                Value:bind="@GrubsConfig.WindForce" 
+                OnValueChanged=@((float force) => GrubsGame.SetConfigOption("wind_force", force.ToString())) />
+            <Slider 
+                Label="Wind Steps"
+                Max=@(5)
+                Value:bind="@GrubsConfig.WindSteps" 
+                OnValueChanged=@((float steps) => GrubsGame.SetConfigOption("wind_steps", steps.ToString())) />
+        }
     </div>
 </root>
 
 @code {
-
     private void AddBot()
     {
         GrubsBot.CreateGrubsBot(1);
@@ -42,5 +55,10 @@
     private void RemoveBot()
     {
         GrubsBot.RemoveGrubsBot();
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GrubsConfig.WindEnabled);
     }
 }
