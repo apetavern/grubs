@@ -8,6 +8,7 @@ a {
     align-items: center;
     transition: all 0.1s ease;
     border-radius: 4px;
+    flex-shrink: 0;
 
     .iconpanel {
         font-family: MaterialIcons;

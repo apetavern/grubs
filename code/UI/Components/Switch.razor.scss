@@ -2,6 +2,8 @@ Switch {
     flex-direction: column;
     min-height: 24px;
     gap: 8px;
+    padding-bottom: 15px;
+    flex-shrink: 0;
 
     .switch-frame {
         flex-grow: 0;
