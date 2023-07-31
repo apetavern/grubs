@@ -34,7 +34,7 @@ public class FireEntity : ModelEntity, IResolvable
 {
 	public bool Resolved => _timeUntilExpire || IsDormant;
 	public Vector3 Gravity;
-	public float KnockbackForce = 1f;
+	public float KnockbackForce = 4f;
 
 	private const float fireSize = 7.5f;
 	private Particles FireParticle { get; set; }
@@ -139,7 +139,7 @@ public class FireEntity : ModelEntity, IResolvable
 			MoveDirection *= 0.95f;
 
 			if ( collisionTrace.Entity is not null && !collisionTrace.Entity.Tags.Has( Tag.Invincible ) )
-				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.25f, Position.WithY( 0f ), Vector3.Up * 32f, this ) );
+				collisionTrace.Entity.TakeDamage( DamageInfoExtension.FromExplosion( 0.07f, Position.WithY( 0f ), Vector3.Up * 32f, this ) );
 
 			if ( collisionTrace.Entity is Grub grub )
 				grub.ApplyAbsoluteImpulse( initialVelocity.Normal.WithY( 0f ) * KnockbackForce );
