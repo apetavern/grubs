@@ -51,7 +51,7 @@
     "Keys": {
       "Charges": {
         "Type": "Int32",
-        "Value": "100"
+        "Value": "1"
       },
       "ShowReticle": {
         "Type": "Boolean",
@@ -59,7 +59,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "0"
+        "Value": "1"
       },
       "FiringType": {
         "Type": "FiringType",
@@ -119,6 +119,10 @@
       "UnlockDelay": {
         "Type": "Int32",
         "Value": "1"
+      },
+      "CanSwapAfterUse": {
+        "Type": "Boolean",
+        "Value": "true"
       }
     }
   }
