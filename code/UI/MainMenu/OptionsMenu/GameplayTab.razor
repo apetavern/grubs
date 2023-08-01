@@ -29,6 +29,11 @@
             Value:bind="@GrubsConfig.TurnDuration" 
             OnValueChanged=@((float duration) => GrubsGame.SetConfigOption("turn_duration", duration.ToString())) />
         <Slider 
+            Label="Sudden Death Round Delay"
+            Max=@(15)
+            Value:bind="@GrubsConfig.SuddenDeathDelay" 
+            OnValueChanged=@((float count) => GrubsGame.SetConfigOption("gr_sd_delay", count.ToString())) />
+        <Slider 
             Label="Movement Grace Period"
             Max=@(10)
             Value:bind="@GrubsConfig.MovementGracePeriod" 
