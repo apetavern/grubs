@@ -101,6 +101,9 @@ public partial class Grub
 			return;
 		}
 
+		while ( !Resolved )
+			await GameTask.Delay( 200 );
+
 		await GameTask.Delay( 200 );
 		LifeState = LifeState.Dying;
 
