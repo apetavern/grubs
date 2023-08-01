@@ -34,6 +34,8 @@
             Value:bind="@GrubsConfig.MovementGracePeriod" 
             OnValueChanged=@((float grace) => GrubsGame.SetConfigOption("movement_grace", grace.ToString())) />
 
+        <div style="height: 20px;" />
+
         <Switch
             Label="Sudden Death"
             Value:bind="@GrubsConfig.SuddenDeathEnabled"
@@ -55,6 +57,8 @@
                 Value:bind="@GrubsConfig.SuddenDeathAggression" 
                 OnValueChanged=@((float amount) => GrubsGame.SetConfigOption("gr_sd_aggression", amount.ToString())) />
         }
+
+        <div style="height: 20px;" />
         
         <Switch
             Label="Wind"
