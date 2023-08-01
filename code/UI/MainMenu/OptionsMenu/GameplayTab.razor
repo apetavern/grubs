@@ -40,15 +40,20 @@
             OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_enabled", enabled.ToString()))  />
         @if (GrubsConfig.SuddenDeathEnabled)
         {
+            <Switch
+                Label="Sudden Death 1 Health"
+                Value:bind="@GrubsConfig.SuddenDeathOneHealth"
+                OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_onehealth", enabled.ToString()))  />
             <Slider 
                 Label="Sudden Death Round Delay"
                 Max=@(15)
                 Value:bind="@GrubsConfig.SuddenDeathDelay" 
                 OnValueChanged=@((float count) => GrubsGame.SetConfigOption("gr_sd_delay", count.ToString())) />
-            <Switch
-                Label="Sudden Death 1 Health"
-                Value:bind="@GrubsConfig.SuddenDeathOneHealth"
-                OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_onehealth", enabled.ToString()))  />
+            <Slider 
+                Label="Sudden Death Strength"
+                Max=@(100)
+                Value:bind="@GrubsConfig.SuddenDeathAggression" 
+                OnValueChanged=@((float amount) => GrubsGame.SetConfigOption("gr_sd_aggression", amount.ToString())) />
         }
         
         <Switch
