@@ -117,7 +117,11 @@ public partial class Grub
 
 			await GameTask.Delay( 1025 );
 
-			ExplosionHelper.Explode( Position, this, 50f, 65f, 25f );
+			if ( !DeathReason.FromDisconnect )
+				ExplosionHelper.Explode( Position, this, 50f, 65f, 25f );
+			else
+				ExplosionHelper.Explode( Position, this, 25f, 30f, 15f );
+
 			Sound.FromWorld( "explosion_short_tail", Position );
 			plunger.Delete();
 		}

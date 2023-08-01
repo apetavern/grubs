@@ -181,6 +181,7 @@ public partial class Gamemode : Entity
 
 	internal virtual Task OnRoundPassed()
 	{
+		Event.Run( GrubsEvent.Game.RoundPassed );
 		RoundsPassed++;
 
 		return Task.CompletedTask;
