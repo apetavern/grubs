@@ -1,9 +1,6 @@
-﻿@import "../Styles/vars.scss";
+﻿@import "../../Styles/vars.scss";
 
 WindIndicator {
-    position: absolute;
-    bottom: 205px;
-    right: 100px;
     background-image: linear-gradient(to top, rgba(#7c7c7c, 0.05), rgba(#737473, 0.1));
     border: 1px #ffffff1f;
     backdrop-filter-blur: 20px;

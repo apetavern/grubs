@@ -29,20 +29,28 @@
             Value:bind="@GrubsConfig.TurnDuration" 
             OnValueChanged=@((float duration) => GrubsGame.SetConfigOption("turn_duration", duration.ToString())) />
         <Slider 
-            Label="Sudden Death Round Delay"
-            Max=@(15)
-            Value:bind="@GrubsConfig.SuddenDeathDelay" 
-            OnValueChanged=@((float count) => GrubsGame.SetConfigOption("gr_sd_delay", count.ToString())) />
-        <Switch
-            Label="Sudden Death 1 Health"
-            Value:bind="@GrubsConfig.SuddenDeathOneHealth"
-            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_onehealth", enabled.ToString()))  />
-        <Slider 
             Label="Movement Grace Period"
             Max=@(10)
             Value:bind="@GrubsConfig.MovementGracePeriod" 
             OnValueChanged=@((float grace) => GrubsGame.SetConfigOption("movement_grace", grace.ToString())) />
-            
+
+        <Switch
+            Label="Sudden Death"
+            Value:bind="@GrubsConfig.SuddenDeathEnabled"
+            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_enabled", enabled.ToString()))  />
+        @if (GrubsConfig.SuddenDeathEnabled)
+        {
+            <Slider 
+                Label="Sudden Death Round Delay"
+                Max=@(15)
+                Value:bind="@GrubsConfig.SuddenDeathDelay" 
+                OnValueChanged=@((float count) => GrubsGame.SetConfigOption("gr_sd_delay", count.ToString())) />
+            <Switch
+                Label="Sudden Death 1 Health"
+                Value:bind="@GrubsConfig.SuddenDeathOneHealth"
+                OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_onehealth", enabled.ToString()))  />
+        }
+        
         <Switch
             Label="Wind"
             Value:bind="@GrubsConfig.WindEnabled"
@@ -77,6 +85,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GrubsConfig.WindEnabled);
+        return HashCode.Combine(GrubsConfig.WindEnabled, GrubsConfig.SuddenDeathEnabled);
     }
 }

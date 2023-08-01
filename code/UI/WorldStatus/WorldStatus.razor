@@ -1,0 +1,22 @@
+@namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
+
+<root>
+    @if (GrubsConfig.WindEnabled)
+    {
+        <WindIndicator />
+    }
+
+    @if (GrubsConfig.SuddenDeathEnabled)
+    {
+        <SuddenDeathIndicator />
+    }
+</root>
+
+@code {
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GrubsConfig.WindEnabled, GrubsConfig.SuddenDeathEnabled);
+    }
+}

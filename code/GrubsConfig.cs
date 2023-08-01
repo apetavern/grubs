@@ -47,6 +47,12 @@ public static class GrubsConfig
 #endif
 
 	/// <summary>
+	/// Whether or not sudden death is enabled.
+	/// </summary>
+	[ConVar.Replicated( "gr_sd_enabled" )]
+	public static bool SuddenDeathEnabled { get; set; } = true;
+
+	/// <summary>
 	/// The amount of rounds to be played before Sudden Death begins.
 	/// </summary>
 	[ConVar.Replicated( "gr_sd_delay" )]

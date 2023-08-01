@@ -2,7 +2,7 @@
 @inherits Sandbox.UI.Panel
 @attribute [StyleSheet]
 
-<root style="display: @(GrubsConfig.WindEnabled ? "flex" : "none")">
+<root>
     <div class="title">
         <label style="font-family: MaterialIconsRound;">wind_power</label>
         <label>Wind</label>
@@ -29,6 +29,6 @@
 @code {
     protected override int BuildHash()
     {
-        return HashCode.Combine(GamemodeSystem.Instance?.ActiveWindSteps, GrubsConfig.WindEnabled);
+        return HashCode.Combine(GamemodeSystem.Instance?.ActiveWindSteps);
     }
 }
