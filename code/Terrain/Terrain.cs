@@ -30,7 +30,7 @@ public partial class Terrain : Entity
 		WorldTextureLength = 0;
 		WorldTextureHeight = 0;
 
-		SdfWorld.ClearAsync();
+		SdfWorld?.ClearAsync();
 		InitializeSdfWorld();
 	}
 
@@ -229,6 +229,12 @@ public partial class Terrain : Entity
 		var wind = Particles.Create( "particles/wind/wind_wisp_base.vpcf", pos );
 		wind.SetPosition( 1, GamemodeSystem.Instance.ActiveWindSteps * 75f );
 		TimeSinceLastWindEffect = 0f;
+	}
+
+	[ConCmd.Server]
+	public static void RegenWorldServer()
+	{
+		GrubsGame.Instance.Terrain.Reset();
 	}
 
 	[ConCmd.Admin( "gr_regen" )]
