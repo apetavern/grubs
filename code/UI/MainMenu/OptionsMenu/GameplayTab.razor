@@ -33,6 +33,10 @@
             Max=@(15)
             Value:bind="@GrubsConfig.SuddenDeathDelay" 
             OnValueChanged=@((float count) => GrubsGame.SetConfigOption("gr_sd_delay", count.ToString())) />
+        <Switch
+            Label="Sudden Death 1 Health"
+            Value:bind="@GrubsConfig.SuddenDeathOneHealth"
+            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_onehealth", enabled.ToString()))  />
         <Slider 
             Label="Movement Grace Period"
             Max=@(10)
