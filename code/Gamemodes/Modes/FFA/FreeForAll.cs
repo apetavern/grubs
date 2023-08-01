@@ -149,15 +149,18 @@ public partial class FreeForAll : Gamemode
 
 	private async Task DealGrubDamage()
 	{
-		foreach ( var player in Players )
+		if ( GrubsConfig.SuicideOnDisconnect )
 		{
-			if ( player.IsDead || !player.IsDisconnected )
-				continue;
-
-			foreach ( var grub in player.Grubs )
+			foreach ( var player in Players )
 			{
-				if ( grub.LifeState == LifeState.Alive )
-					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
+				if ( player.IsDead || !player.IsDisconnected )
+					continue;
+
+				foreach ( var grub in player.Grubs )
+				{
+					if ( grub.IsValid() && grub.LifeState == LifeState.Alive )
+						grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
+				}
 			}
 		}
 

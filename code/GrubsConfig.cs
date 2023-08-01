@@ -65,6 +65,12 @@ public static class GrubsConfig
 	public static int SuddenDeathAggression { get; set; } = 30;
 
 	/// <summary>
+	/// If a player disconnects, whether or not their grubs should suicide.
+	/// </summary>
+	[ConVar.Replicated( "gr_disconnect_suicide" )]
+	public static bool SuicideOnDisconnect { get; set; } = true;
+
+	/// <summary>
 	/// Whether or not wind is enabled.
 	/// </summary>
 	[ConVar.Replicated( "wind_enabled" )]

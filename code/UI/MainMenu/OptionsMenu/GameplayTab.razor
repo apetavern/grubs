@@ -33,6 +33,11 @@
             Max=@(10)
             Value:bind="@GrubsConfig.MovementGracePeriod" 
             OnValueChanged=@((float grace) => GrubsGame.SetConfigOption("movement_grace", grace.ToString())) />
+
+        <Switch
+            Label="Grubs Suicide On Disconnect"
+            Value:bind="@GrubsConfig.SuicideOnDisconnect"
+            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_disconnect_suicide", enabled.ToString()))  />
             
         <Switch
             Label="Wind"
