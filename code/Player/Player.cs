@@ -62,6 +62,8 @@ public partial class Player : Entity
 		{
 			SelectedCosmeticIndex = -1;
 			PopulateGrubNames();
+
+			_ = new UI.TurnBobber();
 		}
 	}
 
