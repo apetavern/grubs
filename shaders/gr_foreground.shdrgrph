@@ -38,7 +38,10 @@
         "Identifier": "18",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -59,7 +62,10 @@
         "Identifier": "18",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -82,7 +88,10 @@
         "Identifier": "18",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -108,7 +117,7 @@
       "DefaultA": 0,
       "DefaultB": 0.00390625,
       "Identifier": "4",
-      "Position": "-656,-32"
+      "Position": "-784,-32"
     },
     {
       "_class": "SplitVector",
@@ -279,12 +288,12 @@
         }
       },
       "Identifier": "17",
-      "Position": "-944,-64"
+      "Position": "-1072,-64"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "32",
+        "Identifier": "33",
         "Output": "Result"
       },
       "B": {
@@ -294,7 +303,7 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "18",
-      "Position": "-464,-128"
+      "Position": "-592,-128"
     },
     {
       "_class": "Float",
@@ -380,7 +389,10 @@
         "Identifier": "18",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -417,7 +429,10 @@
         "Identifier": "18",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -517,18 +532,25 @@
       "Position": "288,-576"
     },
     {
-      "_class": "Normalize",
+      "_class": "TransformNormal",
       "Input": {
         "Identifier": "2",
         "Output": "Result"
       },
+      "InputSpace": "Object",
+      "DecodeNormal": false,
       "Identifier": "31",
-      "Position": "1328,-144"
+      "Position": "1376,-128"
     },
     {
-      "_class": "WorldPosition",
+      "_class": "ObjectSpaceNormal",
       "Identifier": "32",
-      "Position": "-720,-144"
+      "Position": "-624,-16"
+    },
+    {
+      "_class": "ObjectPosition",
+      "Identifier": "33",
+      "Position": "-848,-160"
     }
   ]
 }
