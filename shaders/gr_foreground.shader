@@ -42,6 +42,7 @@ struct PixelInput
 	#include "common/pixelinput.hlsl"
 	float3 vPositionOs : TEXCOORD14;
 	float3 vNormalOs : TEXCOORD15;
+	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
 };
 
 VS
@@ -52,7 +53,8 @@ VS
 	{
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
-		i.vNormalOs = v.vNormalOs.xyz;
+
+		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
 
 		return FinalizeVertex( i );
 	}
@@ -188,6 +190,15 @@ PS
 		);
 	}
 	
+	float3 Vec3OsToTs( float3 vVectorOs, float3 vNormalOs, float3 vTangentUOs, float3 vTangentVOs )
+	{
+		float3 vVectorTs;
+		vVectorTs.x = dot( vVectorOs.xyz, vTangentUOs.xyz );
+		vVectorTs.y = dot( vVectorOs.xyz, vTangentVOs.xyz );
+		vVectorTs.z = dot( vVectorOs.xyz, vNormalOs.xyz );
+		return vVectorTs.xyz;
+	}
+	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		Material m;
@@ -201,13 +212,13 @@ PS
 		m.Emission = float3( 0, 0, 0 );
 		m.Transmission = 0;
 		
-		float3 l_0 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
+		float3 l_0 = i.vPositionOs;
 		float l_1 = g_flTiling;
 		float l_2 = l_1 * 0.00390625;
 		float3 l_3 = l_0 * float3( l_2, l_2, l_2 );
-		float4 l_4 = TexTriplanar_Color( g_tColour, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_4 = TexTriplanar_Color( g_tColour, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_5 = g_vTint_Colour;
-		float4 l_6 = TexTriplanar_Color( g_tBlendMask, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_6 = TexTriplanar_Color( g_tBlendMask, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_7 = saturate( lerp( l_5, SoftLight_blend( l_5, l_4 ), l_6 ) );
 		float3 l_8 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
 		float l_9 = l_8.y;
@@ -228,10 +239,10 @@ PS
 		float l_24 = g_bTintDirectionToggle ? l_22 : l_23;
 		float4 l_25 = saturate( lerp( l_4, Overlay_blend( l_4, l_7 ), l_24 ) );
 		float4 l_26 = l_15 * l_25;
-		float3 l_27 = TexTriplanar_Normal( g_tNormal, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
-		float3 l_28 = normalize( l_27 );
-		float4 l_29 = TexTriplanar_Color( g_tRough, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
-		float4 l_30 = TexTriplanar_Color( g_tAO, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float3 l_27 = TexTriplanar_Normal( g_tNormal, g_sSampler0, l_3, i.vNormalOs );
+		float3 l_28 = TransformNormal( i, Vec3OsToTs( l_27, i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz, cross( i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz ) * i.vTangentUOs_flTangentVSign.w ) );
+		float4 l_29 = TexTriplanar_Color( g_tRough, g_sSampler0, l_3, i.vNormalOs );
+		float4 l_30 = TexTriplanar_Color( g_tAO, g_sSampler0, l_3, i.vNormalOs );
 		
 		m.Albedo = l_26.xyz;
 		m.Opacity = 1;

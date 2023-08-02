@@ -42,6 +42,7 @@ struct PixelInput
 	#include "common/pixelinput.hlsl"
 	float3 vPositionOs : TEXCOORD14;
 	float3 vNormalOs : TEXCOORD15;
+	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
 };
 
 VS
@@ -52,7 +53,8 @@ VS
 	{
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
-		i.vNormalOs = v.vNormalOs.xyz;
+
+		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
 
 		return FinalizeVertex( i );
 	}
@@ -202,6 +204,15 @@ PS
 		);
 	}
 	
+	float3 Vec3OsToTs( float3 vVectorOs, float3 vNormalOs, float3 vTangentUOs, float3 vTangentVOs )
+	{
+		float3 vVectorTs;
+		vVectorTs.x = dot( vVectorOs.xyz, vTangentUOs.xyz );
+		vVectorTs.y = dot( vVectorOs.xyz, vTangentVOs.xyz );
+		vVectorTs.z = dot( vVectorOs.xyz, vNormalOs.xyz );
+		return vVectorTs.xyz;
+	}
+	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		Material m;
@@ -215,13 +226,13 @@ PS
 		m.Emission = float3( 0, 0, 0 );
 		m.Transmission = 0;
 		
-		float3 l_0 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
+		float3 l_0 = i.vPositionOs;
 		float l_1 = g_flTiling;
 		float l_2 = l_1 * 0.00390625;
 		float3 l_3 = l_0 * float3( l_2, l_2, l_2 );
-		float4 l_4 = TexTriplanar_Color( g_tColour, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_4 = TexTriplanar_Color( g_tColour, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_5 = g_vTint_Colour;
-		float4 l_6 = TexTriplanar_Color( g_tBlendMask, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_6 = TexTriplanar_Color( g_tBlendMask, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_7 = saturate( lerp( l_5, SoftLight_blend( l_5, l_4 ), l_6.r ) );
 		float3 l_8 = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
 		float l_9 = l_8.z;
@@ -236,7 +247,7 @@ PS
 		float4 l_18 = saturate( lerp( l_5, l_4, 0.5 ) );
 		float4 l_19 = g_bGradientTint ? l_17 : l_18;
 		float4 l_20 = g_vScorchTint_Colour;
-		float4 l_21 = TexTriplanar_Color( g_tScorchColour, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_21 = TexTriplanar_Color( g_tScorchColour, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_22 = l_20 * l_21;
 		float4 l_23 = g_vScorchLayer_Params;
 		float4 l_24 = float4( l_23.r, l_23.r, 0, 0 );
@@ -250,22 +261,22 @@ PS
 		float l_32 = l_23.a / l_31;
 		float l_33 = l_30 * l_32;
 		float l_34 = l_33 * -0.5;
-		float4 l_35 = TexTriplanar_Color( g_tScorchBlendMask, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_35 = TexTriplanar_Color( g_tScorchBlendMask, g_sSampler0, l_3, i.vNormalOs );
 		float l_36 = l_35.r - 0.5;
 		float l_37 = l_36 * 32;
 		float l_38 = l_34 - l_37;
 		float l_39 = max( l_38, 0 );
 		float l_40 = min( l_39, 1 );
 		float4 l_41 = lerp( l_19, l_22, l_40 );
-		float3 l_42 = TexTriplanar_Normal( g_tNormal, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
-		float3 l_43 = TexTriplanar_Normal( g_tScorchNormal, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float3 l_42 = TexTriplanar_Normal( g_tNormal, g_sSampler0, l_3, i.vNormalOs );
+		float3 l_43 = TexTriplanar_Normal( g_tScorchNormal, g_sSampler0, l_3, i.vNormalOs );
 		float3 l_44 = lerp( l_42, l_43, l_40 );
-		float3 l_45 = normalize( l_44 );
-		float4 l_46 = TexTriplanar_Color( g_tRough, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
-		float4 l_47 = TexTriplanar_Color( g_tScorchRough, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float3 l_45 = TransformNormal( i, Vec3OsToTs( l_44, i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz, cross( i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz ) * i.vTangentUOs_flTangentVSign.w ) );
+		float4 l_46 = TexTriplanar_Color( g_tRough, g_sSampler0, l_3, i.vNormalOs );
+		float4 l_47 = TexTriplanar_Color( g_tScorchRough, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_48 = lerp( l_46, float4( l_47.r, l_47.r, l_47.r, l_47.r ), l_40 );
-		float4 l_49 = TexTriplanar_Color( g_tAO, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
-		float4 l_50 = TexTriplanar_Color( g_tScorchAO, g_sSampler0, l_3, normalize( i.vNormalWs.xyz ) );
+		float4 l_49 = TexTriplanar_Color( g_tAO, g_sSampler0, l_3, i.vNormalOs );
+		float4 l_50 = TexTriplanar_Color( g_tScorchAO, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_51 = lerp( l_49, float4( l_50.r, l_50.r, l_50.r, l_50.r ), l_40 );
 		
 		m.Albedo = l_41.xyz;

@@ -12,7 +12,7 @@
       "Emission": {},
       "Opacity": {},
       "Normal": {
-        "Identifier": "74",
+        "Identifier": "79",
         "Output": "Result"
       },
       "Roughness": {
@@ -30,7 +30,7 @@
       "DefaultAmbientOcclusion": 1,
       "PositionOffset": {},
       "Identifier": "0",
-      "Position": "2752,576"
+      "Position": "2944,592"
     },
     {
       "_class": "TextureTriplanar",
@@ -38,7 +38,10 @@
         "Identifier": "33",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
       "Image": "textures/environment/lava_rocks_ao.png",
       "Sampler": {},
       "UI": {
@@ -77,7 +80,10 @@
         "Identifier": "33",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
       "Image": "textures/environment/lava_rocks_normal.png",
       "Sampler": {},
       "UI": {
@@ -270,7 +276,10 @@
         "Identifier": "33",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
       "Image": "textures/environment/lava_rocks_selfillum.png",
       "Sampler": {},
       "UI": {
@@ -290,7 +299,10 @@
         "Identifier": "33",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
       "Image": "textures/environment/rocks_a_color.png",
       "Sampler": {},
       "UI": {
@@ -968,7 +980,10 @@
         "Identifier": "34",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
       "Image": "textures/environment/sand_shells_color.png",
       "Sampler": {},
       "UI": {
@@ -986,7 +1001,10 @@
         "Identifier": "34",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
       "Image": "textures/environment/sand_shells_normal.png",
       "Sampler": {},
       "UI": {
@@ -1006,7 +1024,10 @@
         "Identifier": "34",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
       "Image": "textures/environment/sand_shells_rough.png",
       "Sampler": {},
       "UI": {
@@ -1026,7 +1047,10 @@
         "Identifier": "34",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
       "Image": "textures/environment/sand_shells_ao.png",
       "Sampler": {},
       "UI": {
@@ -1046,7 +1070,10 @@
         "Identifier": "34",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
       "Image": "textures/environment/sand_shells_blend.png",
       "Sampler": {},
       "UI": {
@@ -1066,7 +1093,10 @@
         "Identifier": "33",
         "Output": "Result"
       },
-      "Normal": {},
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
       "Image": "textures/environment/lava_rocks_rough.png",
       "Sampler": {},
       "UI": {
@@ -1091,18 +1121,53 @@
       "Position": "1680,1072"
     },
     {
-      "_class": "Normalize",
+      "_class": "TransformNormal",
+      "Input": {},
+      "InputSpace": "Tangent",
+      "DecodeNormal": true,
+      "Identifier": "74",
+      "Position": "-144,1136"
+    },
+    {
+      "_class": "ObjectPosition",
+      "Identifier": "75",
+      "Position": "-1952,320"
+    },
+    {
+      "_class": "ObjectSpaceNormal",
+      "Identifier": "76",
+      "Position": "-1744,720"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Input": {
+        "Identifier": "76",
+        "Output": "Result"
+      },
+      "Identifier": "77",
+      "Position": "-528,-176"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Input": {
+        "Identifier": "76",
+        "Output": "Result"
+      },
+      "Identifier": "78",
+      "Position": "-608,1552"
+    },
+    {
+      "_class": "TransformNormal",
       "Input": {
         "Identifier": "36",
         "Output": "Result"
       },
-      "Identifier": "74",
-      "Position": "2336,608"
-    },
-    {
-      "_class": "WorldPosition",
-      "Identifier": "75",
-      "Position": "-1952,416"
+      "InputSpace": "Object",
+      "DecodeNormal": false,
+      "Identifier": "79",
+      "Position": "2496,624"
     }
   ]
 }
