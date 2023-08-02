@@ -6,6 +6,7 @@
     <div class="options">
         <label>Terrain</label>
         <SingleSelect 
+            style="z-index: 100;"
             SelectedIndex=@((int)GrubsConfig.WorldTerrainEnvironmentType)
             Options=@EnvironmentOptions 
             SelectLabel="Environment Type" 
@@ -13,6 +14,7 @@
             IsDisabled=@(!Game.LocalClient.IsListenServerHost)
             OnOptionSelected=@SetTerrainOption />
         <SingleSelect
+            style="z-index: 99;"
             SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
             Options=@TerrainTypeOptions
             SelectLabel="Terrain Type"
@@ -20,6 +22,7 @@
             IsDisabled=@(!Game.LocalClient.IsListenServerHost)
             OnOptionSelected=@SetTerrainOption />
         <SingleSelect
+            style="z-index: 98;"
             SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
             Options=@TerrainTextureOptions
             SelectLabel="Terrain Texture"

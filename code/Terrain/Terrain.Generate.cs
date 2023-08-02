@@ -48,6 +48,7 @@ public partial class Terrain
 		BackgroundMap = new bool[pointsX, pointsY];
 
 		var r = Game.Random.Int( 99999 );
+		Log.Info( $"Seed: {r}" );
 
 		for ( var x = 0; x < pointsX; x++ )
 		{
