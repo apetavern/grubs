@@ -23,6 +23,8 @@ public partial class Player : Entity
 	[Net]
 	public string AvatarClothingData { get; private set; }
 
+	public int RoundsDisconnected { get; private set; }
+
 	public bool IsDead => Grubs.All( grub => grub.LifeState == LifeState.Dead );
 	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.Health );
 	public int GetHealthPercentage => GetTotalGrubHealth / GrubsConfig.GrubCount;
@@ -62,6 +64,8 @@ public partial class Player : Entity
 		{
 			SelectedCosmeticIndex = -1;
 			PopulateGrubNames();
+
+			_ = new UI.TurnBobber();
 		}
 	}
 
@@ -94,6 +98,7 @@ public partial class Player : Entity
 
 	public void Respawn()
 	{
+		RoundsDisconnected = 0;
 		Inventory.Clear();
 		Inventory.GiveDefaultLoadout();
 
@@ -195,5 +200,12 @@ public partial class Player : Entity
 	private string ParseGrubName( string name )
 	{
 		return string.IsNullOrWhiteSpace( name ) ? Random.Shared.FromList( GrubNamePresets ) : name.Trim();
+	}
+
+	[GrubsEvent.Game.RoundPassed]
+	private void OnRoundPass()
+	{
+		if ( IsDisconnected )
+			RoundsDisconnected += 1;
 	}
 }

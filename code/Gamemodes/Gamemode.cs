@@ -181,6 +181,7 @@ public partial class Gamemode : Entity
 
 	internal virtual Task OnRoundPassed()
 	{
+		Event.Run( GrubsEvent.Game.RoundPassed );
 		RoundsPassed++;
 
 		return Task.CompletedTask;
@@ -195,23 +196,29 @@ public partial class Gamemode : Entity
 
 	internal async Task CheckSuddenDeath()
 	{
+		if ( !GrubsConfig.SuddenDeathEnabled )
+			return;
+
 		RoundsUntilSuddenDeath -= 1;
 		SuddenDeath = RoundsUntilSuddenDeath <= 0;
 
-		if ( SuddenDeath )
-		{
-			if ( GrubsConfig.SuddenDeathOneHealth && RoundsUntilSuddenDeath == 0 )
-			{
-				UI.TextChat.AddInfoChatEntry( "The earth begins to rumble and shake..." );
+		if ( !SuddenDeath )
+			return;
 
+		if ( RoundsUntilSuddenDeath == 0 )
+		{
+			UI.TextChat.AddInfoChatEntry( "The earth begins to rumble and shake..." );
+
+			if ( GrubsConfig.SuddenDeathOneHealth )
+			{
 				foreach ( var grub in All.OfType<Grub>() )
 				{
 					grub.Health = 1;
 				}
 			}
-
-			Sound.FromScreen( "suddendeath_rumble" );
-			await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
 		}
+
+		Sound.FromScreen( "suddendeath_rumble" );
+		await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
 	}
 }

@@ -78,6 +78,14 @@
       "HoldPose": {
         "Type": "HoldPose",
         "Value": "\u0022Holdable\u0022"
+      },
+      "UnlockDelay": {
+        "Type": "Int32",
+        "Value": "3"
+      },
+      "DropChance": {
+        "Type": "Single",
+        "Value": "1"
       }
     }
   }

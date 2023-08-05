@@ -1,11 +1,6 @@
 ﻿@namespace Grubs.UI
 @inherits Sandbox.UI.Panel
-@attribute [StyleSheet("PlayMenu.razor.scss")]
-
-@if (Game.LocalPawn is not Player localPlayer)
-{
-    return;
-}
+@attribute [StyleSheet]
 
 <root>
     <div class="container">
@@ -19,33 +14,32 @@
                 if (client.Pawn is not Player player)
                     continue;
 
-                <div class="player">
-                    <div style="align-items: center;">
-                        <div class="color-strip" style="background-color: @player.Color.Hex"></div>
-                        <img src="avatar:@client.SteamId" class="avatar" />
-                        <label class="name">@client.Name</label>
-                    </div>
-
-                    @if (!client.IsBot)
-                    {
-                        <div class="hours" style="align-items: center;">
-                            @if (client.IsListenServerHost)
-                            {
-                                <button icon="stars" class="host-badge"></button>
-                            }
-                            <label>@player.PlayTime.ToString("0.0")hrs</label>
-                            <button icon="timer" style="margin-left: 4px;" />
-                        </div>
-                    }
-                </div>
+                <PlayerEntry Player=@player></PlayerEntry>
             }
         </div>
     </div>
     <div style="height: 20px;" />
-    <button class="play-button @(IsButtonEnabled() ? "" : "disabled")" onclick=@OnStartClick>@GetButtonText()</button>
+    <button class="play-button @(IsButtonEnabled() ? "" : "disabled")" icon="play_arrow" onclick=@OnStartClick>@GetButtonText()</button>
 </root>
 
 @code {
+    private TimeUntil _timeUntilNextStat;
+
+    [ConCmd.Server]
+	public static void StartGame()
+	{
+		GamemodeSystem.Instance.Start();
+	}
+
+    public override void Tick()
+    {
+        if (!_timeUntilNextStat)
+            return;
+
+        _timeUntilNextStat = 7f;
+        PlayerEntry.ShowNextStat();
+    }
+
     private string GetButtonText()
     {
         if (Game.Clients.Count < GamemodeSystem.Instance.MinimumPlayers)

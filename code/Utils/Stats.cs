@@ -36,6 +36,8 @@ public static class Stats
 		{
 			Sandbox.Services.Stats.Increment( player.Client, GamesPlayed( gamemode ), 1 );
 		}
+
+		Sandbox.Services.Stats.Flush();
 	}
 
 	/// <summary>
@@ -51,7 +53,7 @@ public static class Stats
 		string statIdent = GrubsKilled;
 		if ( attacker == victim ) // Killed self.
 			statIdent = OwnGrubsKilled;
-		else if ( victim.Client.IsBot ) // Killed a bot.
+		else if ( victim.Client.IsValid() && victim.Client.IsBot ) // Killed a bot.
 			statIdent = BotGrubsKilled;
 
 		Sandbox.Services.Stats.Increment( attacker.Client, statIdent, 1 );

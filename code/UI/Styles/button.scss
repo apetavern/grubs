@@ -1,19 +1,17 @@
 @import "vars.scss";
 
-button, a {
+button,
+a {
     font-family: Londrina Solid;
     color: white;
     justify-content: center;
     align-items: center;
     transition: all 0.1s ease;
     border-radius: 4px;
+    flex-shrink: 0;
 
     .iconpanel {
         font-family: MaterialIcons;
-    }
-
-    &.selected {
-        color: $color-banana-yellow;
     }
 
     &:hover:not(.disabled) {

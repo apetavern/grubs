@@ -1,0 +1,34 @@
+@namespace Grubs.UI
+@inherits Sandbox.UI.Panel
+@attribute [StyleSheet]
+
+<root>
+    <div class="title">
+        <label style="font-family: MaterialIconsRound;">wind_power</label>
+        <label>Wind</label>
+    </div>
+    @{
+        var windActive = GamemodeSystem.Instance.ActiveWindSteps != 0;
+        if (windActive)
+        {
+            var facingRight = GamemodeSystem.Instance.ActiveWindSteps > 0;
+            <div class="wind @(facingRight ? "right" : "left")">
+                @for (int i = 0; i < Math.Abs(GamemodeSystem.Instance.ActiveWindSteps); ++i)
+                {
+                    <label class="icon" text=@(facingRight ? "keyboard_double_arrow_right" : "keyboard_double_arrow_left") />
+                }
+            </div>
+        }
+        else
+        {
+            <label class="icon">more_horiz</label>
+        }
+    }
+</root>
+
+@code {
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GamemodeSystem.Instance?.ActiveWindSteps);
+    }
+}

@@ -5,13 +5,11 @@
 @attribute [StyleSheet]
 
 <root>
-    <section class="header">
-        <image src="textures/ui/grub.png" />
-        <label style="font-size: 108px;">GRUBS</label>
-    </section>
+    <image src="textures/ui/grubs_logo.png" class="logo" />
+    <div style="height: 15%;" />
     <section class="buttons">
-        <button class="menu-button" onclick="@Game.Menu.HideMenu">Resume</button>
-        <button class="menu-button" onclick="@Game.Menu.Close">Quit</button>
+        <button class="menu-button" icon="play_arrow" onclick="@Game.Menu.HideMenu">Resume</button>
+        <button class="menu-button" icon="close" onclick="@Game.Menu.Close">Quit</button>
     </section>
 </root>
 

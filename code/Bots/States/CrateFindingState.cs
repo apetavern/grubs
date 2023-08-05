@@ -167,7 +167,10 @@ public partial class CrateFindingState : BaseState
 	{
 		base.FinishedState();
 
-		CellPath.Clear();
+		if ( CellPath != null )
+		{
+			CellPath.Clear();
+		}
 
 		MyPlayer.LookInput = 0f;
 

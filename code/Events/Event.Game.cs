@@ -23,5 +23,15 @@ public static partial class GrubsEvent
 		{
 			public EndAttribute() : base( End ) { }
 		}
+
+		public const string RoundPassed = "game.round";
+
+		/// <summary>
+		/// Called when a round has passed.
+		/// </summary>
+		public class RoundPassedAttribute : EventAttribute
+		{
+			public RoundPassedAttribute() : base( RoundPassed ) { }
+		}
 	}
 }

@@ -2,47 +2,77 @@
 @inherits Sandbox.UI.WorldPanel
 @attribute [StyleSheet]
 
-@if (!IsPlayersTurn() || _hasMoved)
+@if (Game.LocalPawn is not Player player || !IsTurn() || _hasMoved)
 {
     return;
 }
 
-<root style="color: @_grub.Player.Color.Hex;">
+<root style="color: @player.Color.Hex;">
     <label>arrow_drop_down</label>
 </root>
 
 @code {
-    private Grub _grub;
+    private const float _afkTime = 10f;
     private bool _hasMoved = false;
-
-    public TurnBobber(Grub grub)
+    private RealTimeUntil _timeUntilTurnSkip = _afkTime;
+    private List<string> _activeInputs = new List<string>()
     {
-        _grub = grub;
-        SceneObject.Flags.ViewModelLayer = true;
+        InputAction.CameraPan,
+        InputAction.Inventory,
+        InputAction.Chat,
+        InputAction.MoveLeft,
+        InputAction.MoveRight,
+        InputAction.Jump,
+        InputAction.Backflip
+    };
+
+    public TurnBobber()
+    {
+        SceneObject.RenderLayer = SceneRenderLayer.OverlayWithoutDepth;
     }
 
     public override void Tick()
     {
-        if (!IsPlayersTurn())
+        if (Game.LocalPawn is not Player player)
+            return;
+
+        if (!IsTurn())
         {
             _hasMoved = false;
+            _timeUntilTurnSkip = _afkTime;
             return;
         }
 
-        if (_grub.Velocity.Length > 0 || _grub.ActiveWeapon is not null)
+        if (!_hasMoved && (_activeInputs.Any((input) => Input.Pressed(input)) || Input.MouseWheel != 0))
             _hasMoved = true;
 
-        Position = _grub.Position + Vector3.Up * 90;
+        Position = player.ActiveGrub.Position + Vector3.Up * 90;
         Rotation = Rotation.LookAt(Vector3.Right);
+
+        if (!_hasMoved && _timeUntilTurnSkip)
+            SkipTurn();
     }
 
-    private bool IsPlayersTurn()
+    private bool IsTurn()
     {
-        return _grub.IsValid() && _grub.IsTurn && Game.LocalPawn == _grub.Player && _grub.LifeState != LifeState.Dead;
+        return Game.LocalPawn is Player player && player.IsTurn && player.ActiveGrub.IsValid();
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(IsPlayersTurn(), _hasMoved);
+        return HashCode.Combine(IsTurn(), _hasMoved);
+    }
+
+    [ConCmd.Server]
+    private static void SkipTurn()
+    {
+        if ( ConsoleSystem.Caller.Pawn is not Player player)
+            return;
+
+        if ( player.IsTurn && !GamemodeSystem.Instance.UsedTurn )
+        {
+            GamemodeSystem.Instance.UseTurn( false );
+            UI.TextChat.AddInfoChatEntry($"{player.SteamName} was too busy playing with their other grub...");
+        }
     }
 }

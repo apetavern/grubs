@@ -1,29 +1,87 @@
 ﻿@using Grubs.Bots
-@using System.Linq;
 
 @namespace Grubs.UI
 @inherits Sandbox.UI.Panel
 @attribute [StyleSheet]
 
 <root>
-    <label>Gameplay</label>
-    <div>
+    <div style="flex-direction: column; flex-shrink: 0;">
+        <label>Gameplay</label>
+
         <button
-            @onclick=@(() => AddBot())
-            class="options-sidebar-entry true"
-            icon="smart_toy"
-            text="Add Bot" />
-    </div>
-    <div>
+                @onclick=@(() => AddBot())
+                class="options-sidebar-entry true"
+                icon="smart_toy"
+                text="Add Bot" />
         <button @onclick=@(() => RemoveBot())
-            class="options-sidebar-entry true"
-            icon="delete_forever"
-            text="Remove Bot" />
+                class="options-sidebar-entry true"
+                icon="delete_forever"
+                text="Remove Bot" />
+
+        <Slider 
+            Label="Grub Count"
+            Max=@(10)
+            Value:bind="@GrubsConfig.GrubCount" 
+            OnValueChanged=@((float count) => GrubsGame.SetConfigOption("grub_count", count.ToString())) />
+        <Slider 
+            Label="Turn Duration"
+            Max=@(60)
+            Value:bind="@GrubsConfig.TurnDuration" 
+            OnValueChanged=@((float duration) => GrubsGame.SetConfigOption("turn_duration", duration.ToString())) />
+        <Slider 
+            Label="Movement Grace Period"
+            Max=@(10)
+            Value:bind="@GrubsConfig.MovementGracePeriod" 
+            OnValueChanged=@((float grace) => GrubsGame.SetConfigOption("movement_grace", grace.ToString())) />
+
+        <div style="height: 20px;" />
+
+        <Switch
+            Label="Sudden Death"
+            Value:bind="@GrubsConfig.SuddenDeathEnabled"
+            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_enabled", enabled.ToString()))  />
+        @if (GrubsConfig.SuddenDeathEnabled)
+        {
+            <Switch
+                Label="Sudden Death 1 Health"
+                Value:bind="@GrubsConfig.SuddenDeathOneHealth"
+                OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_onehealth", enabled.ToString()))  />
+            <Slider 
+                Label="Sudden Death Round Delay"
+                Max=@(15)
+                Value:bind="@GrubsConfig.SuddenDeathDelay" 
+                OnValueChanged=@((float count) => GrubsGame.SetConfigOption("gr_sd_delay", count.ToString())) />
+            <Slider 
+                Label="Sudden Death Strength"
+                Max=@(100)
+                Value:bind="@GrubsConfig.SuddenDeathAggression" 
+                OnValueChanged=@((float amount) => GrubsGame.SetConfigOption("gr_sd_aggression", amount.ToString())) />
+        }
+
+        <div style="height: 20px;" />
+        
+        <Switch
+            Label="Wind"
+            Value:bind="@GrubsConfig.WindEnabled"
+            OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("wind_enabled", enabled.ToString()))  />
+        @if (GrubsConfig.WindEnabled)
+        {
+            <Slider 
+                Label="Wind Force"
+                Step=@(0.1f)
+                Max=@(1)
+                Value:bind="@GrubsConfig.WindForce" 
+                OnValueChanged=@((float force) => GrubsGame.SetConfigOption("wind_force", force.ToString())) />
+            <Slider 
+                Label="Wind Steps"
+                Max=@(5)
+                Value:bind="@GrubsConfig.WindSteps" 
+                OnValueChanged=@((float steps) => GrubsGame.SetConfigOption("wind_steps", steps.ToString())) />
+        }
     </div>
 </root>
 
 @code {
-
     private void AddBot()
     {
         GrubsBot.CreateGrubsBot(1);
@@ -32,5 +90,10 @@
     private void RemoveBot()
     {
         GrubsBot.RemoveGrubsBot();
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GrubsConfig.WindEnabled, GrubsConfig.SuddenDeathEnabled);
     }
 }

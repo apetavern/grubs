@@ -127,6 +127,10 @@
       "DropChance": {
         "Type": "Single",
         "Value": "1"
+      },
+      "UnlockDelay": {
+        "Type": "Int32",
+        "Value": "4"
       }
     }
   }

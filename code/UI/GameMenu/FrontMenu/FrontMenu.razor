@@ -5,13 +5,15 @@
 @attribute [StyleSheet]
 
 <root>
-    <section class="header">
-        <image src="textures/ui/grub.png" />
-        <label>GRUBS</label>
-    </section>
+    <image src="textures/ui/grubs_logo.png" class="logo" />
     <section class="buttons">
         <a class="menu-button" href="/create">Start a Game</a>
         <a class="menu-button" href="/find">Find a Game</a>
         <button class="menu-button" onclick="@Game.Menu.Close">Quit</button>
+        <div style="height: 1px; width: 100%; background-color: white; opacity: 0.3;" />
+        <div style="align-items: center;">
+            <img src="avatar:@Game.SteamId" style="border-radius: 50%; aspect-ratio: 1; height: 40px; margin-right: 5px;" />
+            <text style="font-size: 20px; opacity: 0.6;">@Game.UserName</text>
+        </div>
     </section>
 </root>

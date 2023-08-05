@@ -3,17 +3,27 @@
 InventorySlot {
     width: 65px;
     height: 65px;
-    background-color: rgba($color-cream-white 0.24);
+    background-image: linear-gradient(to top, rgba(#aaaaaa, 0.1), rgba(#dadada, 0.15));
+    border: 1px #ffffff1f;
+    backdrop-filter-blur: 20px;
     border-radius: 4px;
     transition: all 0.1s ease-out;
 
-    .charges {
-        position: absolute;
-        left: 2px;
+    label {
         font-family: Londrina Solid;
         font-size: 20px;
         color: white;
-        text-shadow: 2px 2px 0px black;
+        text-shadow: 2px 2px 2px black;
+
+        &.charges {
+            position: absolute;
+            left: 2px;
+        }
+
+        &.icon {
+            font-family: MaterialIconsRound;
+            font-size: 18px;
+        }
     }
 
     &:hover {
@@ -34,6 +44,41 @@ InventorySlot {
 
     &.disabled {
         transform: scale(1);
-        opacity: 0.6;
+        background-color: rgba($color-cream-white 0.144);
+
+        img {
+            opacity: 0.6;
+        }
+
+        .charges {
+            opacity: 0.6;
+        }
+    }
+
+    .delay {
+        position: absolute;
+        right: 2px;
+        bottom: 4px;
+        width: 30px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        opacity: 1;
+        transition: opacity 0.25s ease-out;
+        pointer-events: none;
+
+        &.hidden {
+            opacity: 0;
+        }
+    }
+
+    .delay-progress {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        background-color: rgba(10, 10, 10, .4);
+        border-radius: 0px 0px 4px 4px;
+        transition: height 0.25s ease-out;
+        pointer-events: none;
     }
 }

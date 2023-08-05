@@ -1,5 +1,5 @@
 {
-  "Model": "models/dev/box.vmdl",
+  "Model": null,
   "Description": "",
   "BlendMode": "Opaque",
   "nodes": [
@@ -12,16 +12,16 @@
       "Emission": {},
       "Opacity": {},
       "Normal": {
-        "Identifier": "32",
+        "Identifier": "79",
         "Output": "Result"
       },
       "Roughness": {
-        "Identifier": "44",
+        "Identifier": "37",
         "Output": "Result"
       },
       "Metalness": {},
       "AmbientOcclusion": {
-        "Identifier": "45",
+        "Identifier": "38",
         "Output": "Result"
       },
       "DefaultOpacity": 1,
@@ -30,79 +30,84 @@
       "DefaultAmbientOcclusion": 1,
       "PositionOffset": {},
       "Identifier": "0",
-      "Position": "2624,608"
+      "Position": "2944,592"
     },
     {
-      "_class": "TextureSampler",
+      "_class": "TextureTriplanar",
       "Coords": {
-        "Identifier": "38",
+        "Identifier": "33",
         "Output": "Result"
       },
-      "Image": "textures/environment/sand_shells_color.png",
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/lava_rocks_ao.png",
       "Sampler": {},
       "UI": {
-        "Name": "Colour",
+        "Name": "Scorch AO",
+        "Default": "1,1,1,1",
+        "Extension": "AO",
+        "ColorSpace": "Linear",
         "SrgbRead": true,
-        "PrimaryGroup": {
-          "Name": "Textures",
-          "Priority": 3
-        },
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "1",
-      "Position": "-272,-336"
+      "Position": "-496,1984"
     },
     {
-      "_class": "TextureSampler",
+      "_class": "Float4",
+      "Value": "1,1,1,1",
+      "Name": "Scorch Tint_Colour",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color",
+        "Priority": 2,
+        "PrimaryGroup": {
+          "Name": "Tint",
+          "Priority": 2
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "2",
+      "Position": "-496,1216"
+    },
+    {
+      "_class": "NormapMapTriplanar",
       "Coords": {
-        "Identifier": "38",
+        "Identifier": "33",
         "Output": "Result"
       },
-      "Image": "textures/environment/sand_shells_normal.png",
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/lava_rocks_normal.png",
       "Sampler": {},
       "UI": {
-        "Name": "Normal",
+        "Name": "Scorch Normal",
+        "Default": "1,1,1,1",
         "Extension": "Normal",
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
-        "Priority": 1,
-        "PrimaryGroup": {
-          "Name": "Textures",
-          "Priority": 3
-        },
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "2",
-      "Position": "-272,-144"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "38",
-        "Output": "Result"
-      },
-      "Image": "textures/environment/sand_a_rough.png",
-      "Sampler": {},
-      "UI": {
-        "Name": "Rough",
-        "Extension": "Rough",
-        "ColorSpace": "Linear",
-        "Priority": 2,
-        "PrimaryGroup": {
-          "Name": "Textures",
-          "Priority": 3
-        },
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "3",
-      "Position": "-272,48"
+      "Position": "-496,1568"
     },
     {
-      "_class": "TextureCoord",
-      "UseSecondaryCoord": false,
-      "Tiling": "1,1",
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 0.00390625,
       "Identifier": "4",
-      "Position": "-1952,464"
+      "Position": "-1792,592"
     },
     {
       "_class": "SplitVector",
@@ -144,7 +149,7 @@
         "Output": "Result"
       },
       "DefaultA": 0,
-      "DefaultB": 1,
+      "DefaultB": 1024,
       "Identifier": "8",
       "Position": "-1008,-1056"
     },
@@ -165,7 +170,7 @@
         }
       },
       "Identifier": "9",
-      "Position": "-272,-496"
+      "Position": "-272,-528"
     },
     {
       "_class": "Saturate",
@@ -179,21 +184,20 @@
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "40",
+        "Identifier": "2",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "34",
+        "Identifier": "17",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "11",
-      "Position": "0,1200"
+      "Position": "-80,1248"
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 5,
       "Value": 1,
@@ -209,16 +213,16 @@
         }
       },
       "Identifier": "12",
-      "Position": "-1952,592"
+      "Position": "-2016,560"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "4",
+        "Identifier": "75",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "12",
+        "Identifier": "4",
         "Output": "Result"
       },
       "DefaultA": 0,
@@ -228,7 +232,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 2048,
       "Value": 0,
@@ -249,7 +252,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 2048,
       "Value": 512,
@@ -269,47 +271,48 @@
       "Position": "-976,-928"
     },
     {
-      "_class": "TextureSampler",
+      "_class": "TextureTriplanar",
       "Coords": {
-        "Identifier": "38",
+        "Identifier": "33",
         "Output": "Result"
       },
-      "Image": "textures/environment/sand_a_rough.png",
-      "Sampler": {},
-      "UI": {
-        "Name": "AO",
-        "Extension": "AO",
-        "ColorSpace": "Linear",
-        "Priority": 3,
-        "PrimaryGroup": {
-          "Name": "Textures",
-          "Priority": 3
-        },
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "16",
-      "Position": "-272,240"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "38",
+      "Normal": {
+        "Identifier": "78",
         "Output": "Result"
       },
-      "Image": "textures/environment/sand_shells_blend.png",
+      "Image": "textures/environment/lava_rocks_selfillum.png",
       "Sampler": {},
       "UI": {
-        "Name": "Blend Mask",
+        "Name": "Scorch Blend Mask",
         "Default": "0,0,0,1",
         "Extension": "Mask",
         "ColorSpace": "Linear",
-        "PrimaryGroup": {
-          "Name": ""
-        },
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "16",
+      "Position": "-496,1024"
+    },
+    {
+      "_class": "TextureTriplanar",
+      "Coords": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/rocks_a_color.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Scorch Colour",
+        "Default": "1,1,1,1",
+        "SrgbRead": true,
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "17",
-      "Position": "-272,-688"
+      "Position": "-496,1376"
     },
     {
       "_class": "CommentNode",
@@ -365,12 +368,12 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "1",
+        "Identifier": "67",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "17",
-        "Output": "A"
+        "Identifier": "71",
+        "Output": "R"
       },
       "Fraction": 0.5,
       "BlendMode": "SoftLight",
@@ -399,7 +402,7 @@
         "Identifier": "28",
         "Output": "Result"
       },
-      "Image": "materials/dev/white_color.tga",
+      "Image": "textures/environment/cereal_height.png",
       "Sampler": {
         "AddressU": "Clamp",
         "AddressV": "Clamp"
@@ -419,20 +422,20 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "24",
-      "Position": "-432,544"
+      "Position": "-432,528"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "72",
+        "Identifier": "64",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "63",
+        "Identifier": "55",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "46",
+        "Identifier": "39",
         "Output": "Result"
       },
       "Fraction": 0.5,
@@ -441,7 +444,7 @@
     },
     {
       "_class": "Float4",
-      "Value": "0,0,1,128",
+      "Value": "0,0,1,64",
       "Name": "ScorchLayer_Params",
       "IsAttribute": true,
       "UI": {
@@ -533,90 +536,14 @@
       "Position": "-128,656"
     },
     {
-      "_class": "TransformNormal",
-      "Input": {
-        "Identifier": "43",
-        "Output": "Result"
-      },
-      "DecodeNormal": true,
-      "Identifier": "32",
-      "Position": "2336,672"
-    },
-    {
       "_class": "CommentNode",
-      "Size": "192,1184",
+      "Size": "192,1200",
       "Color": "Green",
       "Description": "",
       "Title": "Scorch Material",
       "Layer": 3,
-      "Identifier": "33",
-      "Position": "-320,960"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "37",
-        "Output": "Result"
-      },
-      "Image": "textures/environment/rocks_a_color.png",
-      "Sampler": {},
-      "UI": {
-        "Name": "Scorch Colour",
-        "SrgbRead": true,
-        "Priority": 1,
-        "PrimaryGroup": {
-          "Name": "Scorch",
-          "Priority": 10
-        },
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "34",
-      "Position": "-304,1360"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "37",
-        "Output": "Result"
-      },
-      "Image": "textures/environment/lava_rocks_ao.png",
-      "Sampler": {},
-      "UI": {
-        "Name": "Scorch AO",
-        "Extension": "AO",
-        "ColorSpace": "Linear",
-        "Priority": 5,
-        "PrimaryGroup": {
-          "Name": "Scorch",
-          "Priority": 10
-        },
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "35",
-      "Position": "-304,1936"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "37",
-        "Output": "Result"
-      },
-      "Image": "textures/environment/lava_rocks_selfillum.png",
-      "Sampler": {},
-      "UI": {
-        "Name": "Scorch Blend Mask",
-        "Default": "0,0,0,1",
-        "Extension": "Mask",
-        "ColorSpace": "Linear",
-        "Priority": 6,
-        "PrimaryGroup": {
-          "Name": "Scorch",
-          "Priority": 10
-        },
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "36",
-      "Position": "-304,1008"
+      "Identifier": "32",
+      "Position": "-512,976"
     },
     {
       "_class": "Reroute",
@@ -625,7 +552,7 @@
         "Identifier": "13",
         "Output": "Result"
       },
-      "Identifier": "37",
+      "Identifier": "33",
       "Position": "-608,1520"
     },
     {
@@ -635,307 +562,243 @@
         "Identifier": "13",
         "Output": "Result"
       },
-      "Identifier": "38",
+      "Identifier": "34",
       "Position": "-528,-208"
     },
     {
       "_class": "CommentNode",
-      "Size": "192,1184",
+      "Size": "192,1200",
       "Color": "Green",
       "Description": "",
       "Title": "Main Material",
       "Layer": 4,
-      "Identifier": "39",
-      "Position": "-288,-752"
-    },
-    {
-      "_class": "Float4",
-      "Value": "0.13295,0.12546,0.12134,1",
-      "Name": "Scorch Tint_Colour",
-      "IsAttribute": false,
-      "UI": {
-        "Type": "Color",
-        "Priority": 2,
-        "PrimaryGroup": {
-          "Name": "Scorch",
-          "Priority": 10
-        },
-        "SecondaryGroup": {
-          "Name": ""
-        }
-      },
-      "Identifier": "40",
-      "Position": "-304,1200"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "37",
-        "Output": "Result"
-      },
-      "Image": "textures/environment/lava_rocks_rough.png",
-      "Sampler": {},
-      "UI": {
-        "Name": "Scorch Rough",
-        "Extension": "Rough",
-        "ColorSpace": "Linear",
-        "Priority": 4,
-        "PrimaryGroup": {
-          "Name": "Scorch",
-          "Priority": 10
-        },
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "41",
-      "Position": "-304,1744"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "37",
-        "Output": "Result"
-      },
-      "Image": "textures/environment/lava_rocks_normal.png",
-      "Sampler": {},
-      "UI": {
-        "Name": "Scorch Normal",
-        "Extension": "Normal",
-        "Processor": "NormalizeNormals",
-        "ColorSpace": "Linear",
-        "Priority": 3,
-        "PrimaryGroup": {
-          "Name": "Scorch",
-          "Priority": 10
-        },
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "42",
-      "Position": "-304,1552"
+      "Identifier": "35",
+      "Position": "-288,-768"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "57",
+        "Identifier": "49",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "60",
+        "Identifier": "73",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "46",
+        "Identifier": "39",
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "43",
+      "Identifier": "36",
       "Position": "2112,608"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "58",
+        "Identifier": "50",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "61",
+        "Identifier": "53",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "46",
+        "Identifier": "39",
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "44",
+      "Identifier": "37",
       "Position": "2112,736"
     },
     {
       "_class": "Lerp",
       "A": {
-        "Identifier": "59",
+        "Identifier": "51",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "62",
+        "Identifier": "54",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "46",
+        "Identifier": "39",
         "Output": "Result"
       },
       "Fraction": 0.5,
-      "Identifier": "45",
+      "Identifier": "38",
       "Position": "2112,864"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "50",
+        "Identifier": "43",
         "Output": "Result"
       },
-      "Identifier": "46",
+      "Identifier": "39",
       "Position": "1552,768"
     },
     {
       "_class": "Subtract",
       "A": {
-        "Identifier": "65",
+        "Identifier": "57",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "48",
+        "Identifier": "41",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "47",
+      "Identifier": "40",
       "Position": "512,592"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "69",
+        "Identifier": "61",
         "Output": "Result"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": 32,
-      "Identifier": "48",
+      "Identifier": "41",
       "Position": "256,800"
     },
     {
       "_class": "Max",
       "InputA": {
-        "Identifier": "47",
+        "Identifier": "40",
         "Output": "Result"
       },
       "InputB": {},
       "DefaultA": 0,
       "DefaultB": 0,
-      "Identifier": "49",
+      "Identifier": "42",
       "Position": "624,592"
     },
     {
       "_class": "Min",
       "InputA": {
-        "Identifier": "49",
+        "Identifier": "42",
         "Output": "Result"
       },
       "InputB": {},
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "50",
+      "Identifier": "43",
       "Position": "816,592"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "16",
-        "Output": "R"
+        "Identifier": "70",
+        "Output": "Result"
       },
-      "Identifier": "51",
+      "Identifier": "44",
       "Position": "80,144"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "3",
-        "Output": "A"
+        "Identifier": "69",
+        "Output": "Result"
       },
-      "Identifier": "52",
+      "Identifier": "45",
       "Position": "80,128"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "2",
+        "Identifier": "68",
         "Output": "Result"
       },
-      "Identifier": "53",
+      "Identifier": "46",
       "Position": "80,112"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "42",
-        "Output": "Result"
-      },
-      "Identifier": "54",
-      "Position": "272,1456"
-    },
-    {
-      "_class": "Reroute",
-      "Comment": "",
-      "Input": {
-        "Identifier": "41",
+        "Identifier": "72",
         "Output": "R"
       },
-      "Identifier": "55",
+      "Identifier": "47",
       "Position": "272,1472"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "35",
+        "Identifier": "1",
         "Output": "R"
       },
-      "Identifier": "56",
+      "Identifier": "48",
       "Position": "272,1488"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "53",
+        "Identifier": "46",
         "Output": "Result"
       },
-      "Identifier": "57",
+      "Identifier": "49",
       "Position": "1632,448"
     },
     {
       "_class": "Reroute",
       "Comment": null,
       "Input": {
-        "Identifier": "52",
+        "Identifier": "45",
         "Output": "Result"
       },
-      "Identifier": "58",
+      "Identifier": "50",
       "Position": "1632,464"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "51",
+        "Identifier": "44",
         "Output": "Result"
       },
-      "Identifier": "59",
+      "Identifier": "51",
       "Position": "1632,480"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "54",
+        "Identifier": "3",
         "Output": "Result"
       },
-      "Identifier": "60",
-      "Position": "1680,1072"
+      "Identifier": "52",
+      "Position": "272,1456"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "55",
+        "Identifier": "47",
         "Output": "Result"
       },
-      "Identifier": "61",
+      "Identifier": "53",
       "Position": "1680,1088"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Input": {
+        "Identifier": "48",
+        "Output": "Result"
+      },
+      "Identifier": "54",
+      "Position": "1680,1104"
     },
     {
       "_class": "Reroute",
@@ -944,17 +807,7 @@
         "Identifier": "56",
         "Output": "Result"
       },
-      "Identifier": "62",
-      "Position": "1680,1104"
-    },
-    {
-      "_class": "Reroute",
-      "Comment": "",
-      "Input": {
-        "Identifier": "64",
-        "Output": "Result"
-      },
-      "Identifier": "63",
+      "Identifier": "55",
       "Position": "1680,1056"
     },
     {
@@ -964,24 +817,23 @@
         "Identifier": "11",
         "Output": "Result"
       },
-      "Identifier": "64",
+      "Identifier": "56",
       "Position": "272,1440"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "68",
+        "Identifier": "60",
         "Output": "Result"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": -0.5,
-      "Identifier": "65",
+      "Identifier": "57",
       "Position": "192,656"
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 256,
       "Value": 32,
@@ -997,7 +849,7 @@
           "Name": ""
         }
       },
-      "Identifier": "66",
+      "Identifier": "58",
       "Position": "-416,832"
     },
     {
@@ -1007,12 +859,12 @@
         "Output": "A"
       },
       "B": {
-        "Identifier": "66",
+        "Identifier": "58",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "67",
+      "Identifier": "59",
       "Position": "-112,784"
     },
     {
@@ -1022,34 +874,34 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "67",
+        "Identifier": "59",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "68",
+      "Identifier": "60",
       "Position": "32,656"
     },
     {
       "_class": "Subtract",
       "A": {
-        "Identifier": "36",
+        "Identifier": "16",
         "Output": "R"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": 0.5,
-      "Identifier": "69",
+      "Identifier": "61",
       "Position": "48,816"
     },
     {
       "_class": "Branch",
       "True": {
-        "Identifier": "73",
+        "Identifier": "65",
         "Output": "Result"
       },
       "False": {
-        "Identifier": "74",
+        "Identifier": "66",
         "Output": "Result"
       },
       "A": {},
@@ -1062,7 +914,7 @@
           "Name": "Tint"
         }
       },
-      "Identifier": "70",
+      "Identifier": "62",
       "Position": "960,-320"
     },
     {
@@ -1072,23 +924,23 @@
       "Description": "",
       "Title": "World Position Gradient",
       "Layer": 3,
-      "Identifier": "71",
+      "Identifier": "63",
       "Position": "-1488,-1200"
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Input": {
-        "Identifier": "70",
+        "Identifier": "62",
         "Output": "Result"
       },
-      "Identifier": "72",
+      "Identifier": "64",
       "Position": "1632,432"
     },
     {
       "_class": "Blend",
       "A": {
-        "Identifier": "1",
+        "Identifier": "67",
         "Output": "Result"
       },
       "B": {
@@ -1102,7 +954,7 @@
       "Fraction": 0.5,
       "BlendMode": "Overlay",
       "Clamp": true,
-      "Identifier": "73",
+      "Identifier": "65",
       "Position": "608,-464"
     },
     {
@@ -1112,15 +964,210 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "1",
+        "Identifier": "67",
         "Output": "Result"
       },
       "C": {},
       "Fraction": 0.5,
       "BlendMode": "Mix",
       "Clamp": true,
-      "Identifier": "74",
+      "Identifier": "66",
       "Position": "608,-288"
+    },
+    {
+      "_class": "TextureTriplanar",
+      "Coords": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/sand_shells_color.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Colour",
+        "Default": "1,1,1,1",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "67",
+      "Position": "-272,-368"
+    },
+    {
+      "_class": "NormapMapTriplanar",
+      "Coords": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/sand_shells_normal.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Normal",
+        "Default": "1,1,1,1",
+        "Extension": "Normal",
+        "Processor": "NormalizeNormals",
+        "ColorSpace": "Linear",
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "68",
+      "Position": "-272,-176"
+    },
+    {
+      "_class": "TextureTriplanar",
+      "Coords": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/sand_shells_rough.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Rough",
+        "Default": "1,1,1,1",
+        "Extension": "Rough",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "69",
+      "Position": "-272,48"
+    },
+    {
+      "_class": "TextureTriplanar",
+      "Coords": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/sand_shells_ao.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "AO",
+        "Default": "1,1,1,1",
+        "Extension": "AO",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "70",
+      "Position": "-272,240"
+    },
+    {
+      "_class": "TextureTriplanar",
+      "Coords": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "77",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/sand_shells_blend.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Blend Mask",
+        "Default": "0,0,0,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "71",
+      "Position": "-272,-720"
+    },
+    {
+      "_class": "TextureTriplanar",
+      "Coords": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      },
+      "Image": "textures/environment/lava_rocks_rough.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Scorch Rough",
+        "Default": "1,1,1,1",
+        "Extension": "Rough",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "72",
+      "Position": "-496,1792"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Input": {
+        "Identifier": "52",
+        "Output": "Result"
+      },
+      "Identifier": "73",
+      "Position": "1680,1072"
+    },
+    {
+      "_class": "TransformNormal",
+      "Input": {},
+      "InputSpace": "Tangent",
+      "DecodeNormal": true,
+      "Identifier": "74",
+      "Position": "-144,1136"
+    },
+    {
+      "_class": "ObjectPosition",
+      "Identifier": "75",
+      "Position": "-1952,320"
+    },
+    {
+      "_class": "ObjectSpaceNormal",
+      "Identifier": "76",
+      "Position": "-1744,720"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Input": {
+        "Identifier": "76",
+        "Output": "Result"
+      },
+      "Identifier": "77",
+      "Position": "-528,-176"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Input": {
+        "Identifier": "76",
+        "Output": "Result"
+      },
+      "Identifier": "78",
+      "Position": "-608,1552"
+    },
+    {
+      "_class": "TransformNormal",
+      "Input": {
+        "Identifier": "36",
+        "Output": "Result"
+      },
+      "InputSpace": "Object",
+      "DecodeNormal": false,
+      "Identifier": "79",
+      "Position": "2496,624"
     }
   ]
 }

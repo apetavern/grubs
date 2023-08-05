@@ -1,7 +1,22 @@
 ﻿TerrainTab {
     flex-direction: column;
-    
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+
     .options {
-        flex-wrap: wrap;
+        overflow: scroll;
+        width: 75%;
+        flex-direction: column;
+        
+        > label {
+            flex-shrink: 0;
+        }
     }
+}
+
+.apply-button {
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
 }

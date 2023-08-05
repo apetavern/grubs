@@ -3,6 +3,7 @@
 SingleSelect {
     margin: 8px;
     flex-direction: column;
+    flex-shrink: 0;
 
     .select-label {
         font-size: 32px;

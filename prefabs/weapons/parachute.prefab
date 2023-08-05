@@ -24,6 +24,10 @@
           "DeploySound": {
             "Type": "String",
             "Value": "\u0022sounds/weapons/parachute/parachute_deploy.sound\u0022"
+          },
+          "ConsumeTurnOnFinish": {
+            "Type": "Boolean",
+            "Value": "false"
           }
         }
       },
@@ -42,7 +46,9 @@
           "_name": {
             "Value": "\u0022InputHintOverrideComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -87,6 +93,10 @@
         "Value": "\u0022\u0022"
       },
       "AllowMovement": {
+        "Type": "Boolean",
+        "Value": "true"
+      },
+      "CanSwapAfterUse": {
         "Type": "Boolean",
         "Value": "true"
       }

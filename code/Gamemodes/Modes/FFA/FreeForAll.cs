@@ -139,13 +139,13 @@ public partial class FreeForAll : Gamemode
 	{
 		foreach ( var player in Players )
 		{
-			if ( player.IsDead || !player.IsDisconnected )
+			if ( player.IsDead || !player.IsDisconnected || player.RoundsDisconnected <= 2 )
 				continue;
 
 			foreach ( var grub in player.Grubs )
 			{
-				if ( grub.LifeState == LifeState.Alive )
-					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( "disconnect" ) );
+				if ( grub.IsValid() && grub.LifeState == LifeState.Alive )
+					grub.TakeDamage( DamageInfo.Generic( float.MaxValue ).WithTag( Tag.Disconnect ) );
 			}
 		}
 

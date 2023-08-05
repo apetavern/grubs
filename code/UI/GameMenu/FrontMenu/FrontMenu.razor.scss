@@ -6,19 +6,13 @@ FrontMenu {
     height: 100%;
     font-family: Londrina Solid;
 
-    .header {
+    .logo {
         top: 64px;
         left: 64px;
-        color: white;
-        
-        label {
-            font-size: 72px;
-        }
-
-        image {
-            width: 72px;
-            height: 72px;
-        }
+        aspect-ratio: 1;
+        width: 300px;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .buttons {
@@ -27,8 +21,8 @@ FrontMenu {
         left: 64px;
         flex-direction: column;
         width: 300px;
-        gap: 12px;
-        
+        gap: 14px;
+
         .menu-button {
             justify-content: flex-start;
             width: 300px;

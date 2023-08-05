@@ -2,11 +2,11 @@
 
 CustomizeMenu {
     top: 40px;
-    left: 64px;
+    left: 80px;
     width: 25%;
 
     .container {
-        height: 840px;
+        height: 720px;
         padding: 10px;
         width: 100%;
         overflow: scroll;
@@ -57,9 +57,8 @@ CustomizeMenu {
                     width: 100%;
                 }
 
-                &.selected {
-                    transform: scale(1.1);
-                    border-bottom: 2px solid white;
+                &:not(.selected) {
+                    opacity: 0.5;
                 }
             }
         }

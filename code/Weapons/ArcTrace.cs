@@ -17,7 +17,7 @@ public class ArcTrace
 
 	public ArcTrace( Grub fromGrub, Gadget gadget, Vector3 startPos )
 	{
-		StartPos = startPos;
+		StartPos = startPos.WithY( 0 );
 		Owner = fromGrub;
 		Gadget = gadget;
 	}

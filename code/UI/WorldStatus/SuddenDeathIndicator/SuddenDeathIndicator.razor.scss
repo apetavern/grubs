@@ -1,0 +1,61 @@
+﻿@import "../../Styles/vars.scss";
+
+SuddenDeathIndicator {
+    background-image: linear-gradient(to top, rgba(#7c7c7c, 0.05), rgba(#737473, 0.1));
+    border: 1px #ffffff1f;
+    backdrop-filter-blur: 20px;
+    border-radius: 4px;
+    width: 180px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+
+    .title {
+        position: absolute;
+        top: -22px;
+        font-family: Londrina Solid;
+        font-size: 25px;
+        color: white;
+        text-shadow: 2px 2px 2px black;
+    }
+
+    .icon {
+        top: -9px;
+        font-family: MaterialIconsRound;
+        font-size: 35px;
+        color: white;
+        text-shadow: 2px 2px 2px black;
+    }
+
+    .body {
+        font-family: Londrina Solid;
+        font-size: 35px;
+        color: white;
+        text-shadow: 2px 2px 2px black;
+
+        &.active {
+            animation-name: pulsing-text;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+    }
+}
+
+@keyframes pulsing-text {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.1);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

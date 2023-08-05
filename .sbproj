@@ -496,7 +496,7 @@
         "Choices": [],
         "ConVarName": "gr_sd_delay",
         "DisplayName": "Sudden Death Delay",
-        "DefaultValue": "15",
+        "DefaultValue": "6",
         "Description": "The amount of rounds to be played before Sudden Death begins.",
         "Group": "Sudden Death",
         "Minimum": 1,

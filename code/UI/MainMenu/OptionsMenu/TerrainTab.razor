@@ -3,38 +3,77 @@
 @attribute [StyleSheet]
 
 <root>
-    <label>Terrain</label>
     <div class="options">
+        <label>Terrain</label>
         <SingleSelect 
+            style="z-index: 100;"
             SelectedIndex=@((int)GrubsConfig.WorldTerrainEnvironmentType)
             Options=@EnvironmentOptions 
             SelectLabel="Environment Type" 
             Key="terrain_environment_type"
             IsDisabled=@(!Game.LocalClient.IsListenServerHost)
-            OnOptionSelected=@SetConfigOption />
+            OnOptionSelected=@SetTerrainOption />
         <SingleSelect
+            style="z-index: 99;"
             SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
             Options=@TerrainTypeOptions
             SelectLabel="Terrain Type"
             Key="terrain_type"
             IsDisabled=@(!Game.LocalClient.IsListenServerHost)
-            OnOptionSelected=@SetConfigOption />
+            OnOptionSelected=@SetTerrainOption />
         <SingleSelect
+            style="z-index: 98;"
             SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
             Options=@TerrainTextureOptions
             SelectLabel="Terrain Texture"
             Key="terrain_texture"
             IsDisabled=@(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated || !Game.LocalClient.IsListenServerHost)
-            OnOptionSelected=@SetConfigOption />
-        <Slider />
+            OnOptionSelected=@SetTerrainOption />
+        <Slider
+            Label="Terrain Length"
+            Min=@(512)
+            Max=@(4096)
+            Value:bind="@GrubsConfig.TerrainLength"
+            OnValueChanged=@((float length) => GrubsGame.SetConfigOption("terrain_length", length.ToString()))
+        />
+        <Slider
+            Label="Terrain Height"
+            Min=@(256)
+            Max=@(2048)
+            Value:bind="@GrubsConfig.TerrainHeight"
+            OnValueChanged=@((float height) => GrubsGame.SetConfigOption("terrain_height", height.ToString()))
+        />
+        <Slider
+            Label="Terrain Noise Zoom"
+            Min=@(1)
+            Max=@(5)
+            Step=@(0.1f)
+            Value:bind="@GrubsConfig.TerrainNoiseZoom"
+            OnValueChanged=@((float zoom) => GrubsGame.SetConfigOption("terrain_noise_zoom", zoom.ToString()))
+        />
+        <Slider
+            Label="Terrain Heightmap Amplitude"
+            Min=@(16)
+            Max=@(128)
+            Value:bind="@GrubsConfig.TerrainAmplitude"
+            OnValueChanged=@((float amp) => GrubsGame.SetConfigOption("terrain_amplitude", amp.ToString()))
+        />
+        <Slider
+            Label="Terrain Heightmap Frequency"
+            Min=@(0.1f)
+            Max=@(10)
+            Step=@(0.1f)
+            Value:bind="@GrubsConfig.TerrainFrequency"
+            OnValueChanged=@((float freq) => GrubsGame.SetConfigOption("terrain_frequency", freq.ToString()))
+        />
     </div>
+    <button class="apply-button" onclick=@Terrain.RegenWorldServer>Apply</button>
 </root>
 
 @code {
-
-    private void SetConfigOption( string key, string value )
+    private void SetTerrainOption( string key, string value )
     {
-        GrubsGame.SetConfigOption(key, value);
+        GrubsGame.SetConfigOption(key, value, true);
     }
 
     private List<string> EnvironmentOptions = Enum.GetNames<GrubsConfig.TerrainEnvironmentType>().ToList();

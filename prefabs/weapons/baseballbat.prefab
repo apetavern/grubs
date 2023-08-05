@@ -126,7 +126,7 @@
       },
       "UnlockDelay": {
         "Type": "Int32",
-        "Value": "0"
+        "Value": "2"
       }
     }
   }

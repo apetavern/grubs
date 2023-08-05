@@ -31,6 +31,8 @@ public struct DeathReason
 	/// </summary>
 	public bool FromKillTrigger => FirstReason == DamageType.KillTrigger || SecondReason == DamageType.KillTrigger;
 
+	public bool FromDisconnect => FirstReason == DamageType.Disconnect || SecondReason == DamageType.Disconnect;
+
 	public DeathReason( Grub grub, DamageInfo? firstInfo, DamageType firstReason, DamageInfo? secondInfo,
 		DamageType secondReason )
 	{

@@ -61,11 +61,16 @@ public partial class Weapon : AnimatedEntity, IResolvable
 	[Prefab, Net]
 	public WeaponType WeaponType { get; set; } = WeaponType.Weapon;
 
+	[Prefab, Net]
+	public bool CanSwapAfterUse { get; set; } = false;
+
 	/// <summary>
 	/// The amount of turns that must pass before this weapon can be used.
 	/// </summary>
 	[Prefab, Net]
 	public int UnlockDelay { get; set; } = 0;
+
+	public bool Unlocked => GamemodeSystem.Instance?.RoundsPassed >= UnlockDelay || Ammo == -1;
 
 	/// <summary>
 	/// If the weapon has a hat, override any Grub clothing.
@@ -222,9 +227,9 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		return false;
 	}
 
-	public bool HasAmmo()
+	public bool IsAvailable()
 	{
-		return Ammo != 0;
+		return HasAmmo() && Unlocked;
 	}
 
 	public Vector3 GetStartPosition( bool isDroppable = false )
@@ -271,6 +276,11 @@ public partial class Weapon : AnimatedEntity, IResolvable
 		{
 			component.Simulate( client );
 		}
+	}
+
+	private bool HasAmmo()
+	{
+		return Ammo != 0;
 	}
 
 	private void DetermineWeaponVisibility()

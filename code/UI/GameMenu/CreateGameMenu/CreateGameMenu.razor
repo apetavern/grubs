@@ -8,7 +8,7 @@
     <div class="container">
         <section class="setting-group">
             <label class="setting-title">Server Name</label>
-            <TextEntry Value:bind="@_serverTitle" Tooltip="Server Title"> </TextEntry>
+            <TextEntry Value:bind="@_serverTitle" Tooltip="Server Title"></TextEntry>
         </section>
 
         <section class="setting-group">
@@ -16,9 +16,11 @@
             <SliderControl ShowTextEntry="@false" ShowRange="@true" Min=@(1) Max=@(16) Value:bind="@_maxPlayers"></SliderControl>
         </section>
 
+        <div style="width: 95%; height: 1px; background-color: #ffffff1f;"></div>
+
         <section class="buttons">
-            <button class="menu-button" onclick="@StartGame">Start Game</button>
-            <a class="menu-button" href="/">Back</a>
+            <button onclick="@StartGame" class="menu-button" icon="play_arrow">Start Game</button>
+            <a href="/"><button class="menu-button" icon="undo">Back</button></a>
         </section>
     </div>
 </root>

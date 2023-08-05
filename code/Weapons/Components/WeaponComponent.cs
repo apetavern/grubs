@@ -61,7 +61,10 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			IncreaseCharge();
 		}
 
-		if ( Input.Released( InputAction.Fire ) || Charge >= 100 )
+		var shouldFire = Weapon.FiringType is FiringType.Charged && (Input.Released( InputAction.Fire ) || Charge >= 100);
+		shouldFire |= Weapon.FiringType is not FiringType.Charged && Input.Pressed( InputAction.Fire );
+
+		if ( shouldFire )
 		{
 			_chargeSound.Stop( To.Everyone );
 			ChargeParticles?.Destroy( true );
@@ -104,7 +107,12 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		Weapon.CurrentUses++;
 
 		if ( Weapon.CurrentUses >= Weapon.Charges )
-			GamemodeSystem.Instance.UseTurn( true );
+		{
+			if ( !Weapon.CanSwapAfterUse )
+				GamemodeSystem.Instance.UseTurn( true );
+			else
+				Player.Inventory.SetActiveWeapon( null );
+		}
 	}
 
 	private void IncreaseCharge()

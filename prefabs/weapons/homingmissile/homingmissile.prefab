@@ -87,6 +87,10 @@
       "ShowReticle": {
         "Type": "Boolean",
         "Value": "false"
+      },
+      "UnlockDelay": {
+        "Type": "Int32",
+        "Value": "2"
       }
     }
   }

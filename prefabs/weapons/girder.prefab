@@ -46,7 +46,9 @@
           "_name": {
             "Value": "\u0022InputHintOverrideComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -113,6 +115,10 @@
       "FireSound": {
         "Type": "String",
         "Value": "\u0022sounds/weapons/girder/gurder_build.sound\u0022"
+      },
+      "UnlockDelay": {
+        "Type": "Int32",
+        "Value": "1"
       }
     }
   }

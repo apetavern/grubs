@@ -110,7 +110,7 @@ public partial class FiringState : BaseState
 			Input.SetAction( "fire", false );
 		}
 
-		if ( Brain.TimeSinceStateStarted > 5f || (MyPlayer.ActiveGrub.IsValid && MyPlayer.ActiveGrub.ActiveWeapon.IsValid && MyPlayer.ActiveGrub.ActiveWeapon.CurrentUses >= MyPlayer.ActiveGrub.ActiveWeapon.Charges) )
+		if ( Brain.TimeSinceStateStarted > 5f || (MyPlayer.IsValid() && MyPlayer.ActiveGrub.IsValid() && MyPlayer.ActiveGrub.ActiveWeapon.IsValid() && MyPlayer.ActiveGrub.ActiveWeapon.CurrentUses >= MyPlayer.ActiveGrub.ActiveWeapon.Charges) )
 		{
 			Firing = false;
 			FinishedState();
