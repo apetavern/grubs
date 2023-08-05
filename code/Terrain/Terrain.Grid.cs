@@ -22,7 +22,8 @@ public partial class Terrain
 			.WithStandableAngle( SquirmMechanic.GroundAngle )
 			.WithMaxDropHeight( 150 )
 			.AddJumpDefinition( NormalJump )
-			.AddJumpDefinition( BackFlipJump );
+			.AddJumpDefinition( BackFlipJump )
+			.JumpsIgnoreConnections( true );
 
 		await builder.Create( 1, printInfo: true );
 	}
