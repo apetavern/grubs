@@ -11,7 +11,6 @@
       },
       "Emission": {},
       "Opacity": {},
-      "TintMask": {},
       "Normal": {
         "Identifier": "19",
         "Output": "Result"
@@ -22,21 +21,11 @@
       },
       "Metalness": {},
       "AmbientOcclusion": {},
-      "Sheen": {},
-      "SheenRoughness": {},
-      "Clearcoat": {},
-      "ClearcoatRoughness": {},
-      "ClearcoatNormal": {},
-      "Anisotropy": {},
-      "AnisotropyRotation": {},
-      "Thickness": {},
-      "SubsurfacePower": {},
-      "SheenColor": {},
-      "SubsurfaceColor": {},
-      "Transmission": {},
-      "Absorption": {},
-      "IndexOfRefraction": {},
-      "MicroThickness": {},
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "PositionOffset": {},
       "Identifier": "0",
       "Position": "-320,-272"
     },
@@ -47,13 +36,18 @@
       "B": {},
       "AngleOffset": 3.14,
       "CellDensity": 10,
+      "Worley": false,
       "Identifier": "1",
       "Position": "-2512,-272"
     },
     {
       "_class": "Float4",
-      "Name": "",
       "Value": "0.17771,0.74386,1,1",
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
       "Identifier": "2",
       "Position": "-1952,-752"
     },
@@ -77,8 +71,12 @@
     },
     {
       "_class": "Float4",
-      "Name": "",
       "Value": "1,1,1,1",
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
       "Identifier": "4",
       "Position": "-2512,-448"
     },
@@ -89,8 +87,8 @@
         "Output": "Result"
       },
       "Edge": {},
-      "DefaultEdge": 0.1,
       "DefaultInput": 0,
+      "DefaultEdge": 0.1,
       "Identifier": "5",
       "Position": "-2096,-256"
     },
@@ -147,8 +145,6 @@
         "Identifier": "8",
         "Output": "Result"
       },
-      "DefaultA": 0,
-      "DefaultB": 1,
       "Identifier": "10",
       "Position": "-1040,64"
     },
@@ -177,15 +173,25 @@
     },
     {
       "_class": "Float",
-      "Name": "",
+      "Ignore": 0,
+      "Min": 0,
+      "Max": 1,
       "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
       "Identifier": "13",
       "Position": "-2416,16"
     },
     {
       "_class": "Float",
-      "Name": "",
+      "Ignore": 0,
+      "Min": 0,
+      "Max": 1,
       "Value": 1,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
       "Identifier": "14",
       "Position": "-2416,-48"
     },
@@ -208,8 +214,12 @@
     },
     {
       "_class": "Float4",
-      "Name": "",
       "Value": "0,0.10628,0.46821,1",
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
       "Identifier": "16",
       "Position": "-2512,-608"
     },
@@ -237,13 +247,13 @@
         "Identifier": "10",
         "Output": "Result"
       },
-      "Texture": "textures/dev/white.vtex",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {},
       "UI": {
         "Name": "Colour",
-        "Group": "",
-        "SrgbRead": true
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
       },
-      "Sampler": {},
       "Identifier": "18",
       "Position": "-672,-192"
     },
@@ -253,15 +263,15 @@
         "Identifier": "10",
         "Output": "Result"
       },
-      "Texture": "textures/dev/white.vtex",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {},
       "UI": {
         "Name": "Normal",
-        "Group": "",
         "Extension": "Normal",
         "Processor": "NormalizeNormals",
-        "ColorSpace": "Linear"
+        "ColorSpace": "Linear",
+        "CreateInput": "CreateInputTexture2D"
       },
-      "Sampler": {},
       "Identifier": "19",
       "Position": "-672,-32"
     },
@@ -271,14 +281,14 @@
         "Identifier": "10",
         "Output": "Result"
       },
-      "Texture": "textures/dev/white.vtex",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {},
       "UI": {
         "Name": "Rough",
-        "Group": "",
         "Extension": "Rough",
-        "ColorSpace": "Linear"
+        "ColorSpace": "Linear",
+        "CreateInput": "CreateInputTexture2D"
       },
-      "Sampler": {},
       "Identifier": "20",
       "Position": "-672,144"
     }
