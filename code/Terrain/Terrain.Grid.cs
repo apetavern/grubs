@@ -14,7 +14,7 @@ public partial class Terrain
 	{
 		var builder = new GridAStar.GridBuilder()
 			.WithBounds( Vector3.Zero, WorldBox, Rotation.Identity )
-			.WithHeightClearance( 24f ) // EyeHeight is set to 28 but everywhere I can find uses 24f
+			.WithHeightClearance( 20f ) // EyeHeight is set to 28 but everywhere I can find uses 24f, 20f seems to work for tight corridors though
 			.WithWidthClearance( GrubController.BodyGirth )
 			.WithoutTags( "trigger" )
 			.WithEdgeNeighbourCount( 2 )
