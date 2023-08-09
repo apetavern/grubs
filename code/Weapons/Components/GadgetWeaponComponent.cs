@@ -37,7 +37,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	public TargetPreview TargetPreview { get; set; }
 
 	[Net]
-	private FiringType FireType { get; set; }
+	private FiringType _fireType { get; set; }
 
 	public override void OnDeploy()
 	{
@@ -45,7 +45,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 		if ( UseTargetPreview )
 		{
-			FireType = Weapon.FiringType;
+			_fireType = Weapon.FiringType;
 			Weapon.FiringType = FiringType.Cursor;
 			Weapon.ShowReticle = false;
 
@@ -63,9 +63,10 @@ public partial class GadgetWeaponComponent : WeaponComponent
 
 		if ( UseTargetPreview )
 		{
-			if ( Game.IsServer )
-				TargetPreview?.Delete();
-			else
+			Weapon.FiringType = _fireType;
+			TargetPreview.Hide();
+
+			if ( Game.IsClient )
 				Grub.Player.GrubsCamera.AutomaticRefocus = true;
 		}
 	}
@@ -91,7 +92,7 @@ public partial class GadgetWeaponComponent : WeaponComponent
 			if ( LockPreviewBeforeFire )
 			{
 				IsFiring = false;
-				Weapon.FiringType = FireType;
+				Weapon.FiringType = _fireType;
 				Weapon.ShowReticle = true;
 				return;
 			}
@@ -144,7 +145,10 @@ public partial class GadgetWeaponComponent : WeaponComponent
 	public override void FireFinished()
 	{
 		if ( UseTargetPreview )
-			TargetPreview?.Hide();
+		{
+			Weapon.FiringType = FiringType.Cursor;
+			TargetPreview.UnlockCursor();
+		}
 
 		base.FireFinished();
 	}

@@ -46,7 +46,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		if ( !Grub.Controller.ShouldShowWeapon() )
 			return;
 
-		if ( Input.Down( InputAction.Fire ) && Weapon.FiringType is FiringType.Charged )
+		if ( Weapon.FiringType is FiringType.Charged && (Input.Pressed( InputAction.Fire ) || IsCharging) )
 		{
 			ChargeParticles ??= Particles.Create( "particles/weaponcharge/weaponcharge.vpcf" );
 			ChargeParticles?.SetPosition( 0, Weapon.GetMuzzlePosition() );
@@ -61,7 +61,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 			IncreaseCharge();
 		}
 
-		var shouldFire = Weapon.FiringType is FiringType.Charged && (Input.Released( InputAction.Fire ) || Charge >= 100);
+		var shouldFire = Weapon.FiringType is FiringType.Charged && (Input.Released( InputAction.Fire ) && IsCharging || Charge >= 100);
 		shouldFire |= Weapon.FiringType is not FiringType.Charged && Input.Pressed( InputAction.Fire );
 
 		if ( shouldFire )
