@@ -7,8 +7,9 @@
     .options {
         overflow: scroll;
         width: 75%;
+        height: 100%;
         flex-direction: column;
-        
+
         > label {
             flex-shrink: 0;
         }
