@@ -64,11 +64,18 @@ public static class GrubsConfig
 	[ConVar.Replicated( "gr_sd_onehealth" )]
 	public static bool SuddenDeathOneHealth { get; set; } = false;
 
+	public enum SuddenDeathAggressionAmount
+	{
+		Low = 15,
+		Medium = 30,
+		High = 50
+	};
+
 	/// <summary>
 	/// How harshly Sudden Death affects the terrain.
 	/// </summary>
 	[ConVar.Replicated( "gr_sd_aggression" )]
-	public static int SuddenDeathAggression { get; set; } = 30;
+	public static SuddenDeathAggressionAmount SuddenDeathAggression { get; set; } = SuddenDeathAggressionAmount.Medium;
 
 	/// <summary>
 	/// Whether or not wind is enabled.

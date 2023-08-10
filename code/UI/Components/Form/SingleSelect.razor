@@ -41,7 +41,7 @@
         SelectedIndex = Options.IndexOf(option);
         _optionsPanel.RemoveClass("show");
 
-        OnOptionSelected(Key, SelectedIndex.ToString());
+        OnOptionSelected(Key, option);
     }
 
     protected override int BuildHash()

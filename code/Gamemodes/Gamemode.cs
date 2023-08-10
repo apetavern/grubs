@@ -219,6 +219,6 @@ public partial class Gamemode : Entity
 		}
 
 		Sound.FromScreen( "suddendeath_rumble" );
-		await Terrain.LowerTerrain( GrubsConfig.SuddenDeathAggression );
+		await Terrain.LowerTerrain( (int)GrubsConfig.SuddenDeathAggression );
 	}
 }

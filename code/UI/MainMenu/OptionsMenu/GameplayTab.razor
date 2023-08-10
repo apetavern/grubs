@@ -48,14 +48,16 @@
                 OnValueChanged=@((bool enabled) => GrubsGame.SetConfigOption("gr_sd_onehealth", enabled.ToString()))  />
             <Slider 
                 Label="Sudden Death Round Delay"
+                Min=@(1)
                 Max=@(15)
                 Value:bind="@GrubsConfig.SuddenDeathDelay" 
                 OnValueChanged=@((float count) => GrubsGame.SetConfigOption("gr_sd_delay", count.ToString())) />
-            <Slider 
-                Label="Sudden Death Strength"
-                Max=@(100)
-                Value:bind="@GrubsConfig.SuddenDeathAggression" 
-                OnValueChanged=@((float amount) => GrubsGame.SetConfigOption("gr_sd_aggression", amount.ToString())) />
+            <SingleSelect
+                style="z-index: 100"
+                SelectLabel="Sudden Death Strength"
+                Options="@_aggressionOptions"
+                SelectedIndex="@(_aggressionOptions.IndexOf(GrubsConfig.SuddenDeathAggression.ToString()))"
+                OnOptionSelected="@((string key, string value) => GrubsGame.SetConfigOption("gr_sd_aggression", value, false))" />
         }
 
         <div style="height: 20px;" />
@@ -82,6 +84,8 @@
 </root>
 
 @code {
+    private List<string> _aggressionOptions = Enum.GetNames<GrubsConfig.SuddenDeathAggressionAmount>().ToList();
+
     private void AddBot()
     {
         GrubsBot.CreateGrubsBot(1);

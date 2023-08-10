@@ -510,7 +510,7 @@
             "Name": "Low"
           },
           {
-            "Value": "25",
+            "Value": "30",
             "Name": "Medium"
           },
           {
@@ -520,7 +520,7 @@
         ],
         "ConVarName": "gr_sd_aggression",
         "DisplayName": "Sudden Death Aggression",
-        "DefaultValue": "25",
+        "DefaultValue": "30",
         "Description": "How harshly Sudden Death affects the terrain.",
         "Group": "Sudden Death"
       },
