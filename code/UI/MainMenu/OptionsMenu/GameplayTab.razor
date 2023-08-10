@@ -20,11 +20,13 @@
 
         <Slider 
             Label="Grub Count"
+            Min=@(1)
             Max=@(10)
             Value:bind="@GrubsConfig.GrubCount" 
-            OnValueChanged=@((float count) => GrubsGame.SetConfigOption("grub_count", count.ToString())) />
+            OnValueChanged=@((float count) => SetGrubCount(count)) />
         <Slider 
             Label="Turn Duration"
+            Min=@(1)
             Max=@(60)
             Value:bind="@GrubsConfig.TurnDuration" 
             OnValueChanged=@((float duration) => GrubsGame.SetConfigOption("turn_duration", duration.ToString())) />
@@ -94,6 +96,17 @@
     private void RemoveBot()
     {
         GrubsBot.RemoveGrubsBot();
+    }
+
+    private void SetGrubCount(float count)
+    {
+        // Workaround for updating Grub name UI for host.
+        // Change callbacks don't appear to get called for the calling client (in this case, the host)
+        // from code-executed config changes (ConsoleSystem.SetValue()).
+        if (Game.LocalPawn is Player player)
+            player.PopulateGrubNames();
+
+        GrubsGame.SetConfigOption("grub_count", count.ToString());
     }
 
     protected override int BuildHash()
