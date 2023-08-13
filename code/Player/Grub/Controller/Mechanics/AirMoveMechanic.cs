@@ -58,6 +58,12 @@ public class AirMoveMechanic : ControllerMechanic
 		if ( Controller.LastGroundHeight - Controller.Position.z < FallDistanceThreshold )
 			return;
 
+		if ( Grub.ActiveWeapon?.Components.TryGet<ParachuteComponent>( out var parachuteComponent ) ?? false )
+		{
+			parachuteComponent.Fire();
+			return;
+		}
+
 		if ( FallVelocity > FallVelocityDamageThreshold )
 			ApplyFallDamage();
 	}

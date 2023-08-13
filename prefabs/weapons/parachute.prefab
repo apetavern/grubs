@@ -37,7 +37,7 @@
         "Keys": {
           "InputDescriptions": {
             "Type": "List\u00601",
-            "Value": "[\r\n  \u0022Deploy\u0022\r\n]"
+            "Value": "[\r\n  \u0022Toggle (in air)\u0022\r\n]"
           },
           "InputActions": {
             "Type": "List\u00601",

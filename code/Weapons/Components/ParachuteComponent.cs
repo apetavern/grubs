@@ -19,9 +19,6 @@ public partial class ParachuteComponent : WeaponComponent
 		Weapon.SetAnimParameter( "deploy", Deployed );
 		Weapon.SetAnimParameter( "landed", !Deployed );
 
-		if ( IsFiring )
-			Fire();
-
 		if ( Deployed )
 		{
 			var chuteHelper = new GrubParachuteHelper
@@ -33,14 +30,21 @@ public partial class ParachuteComponent : WeaponComponent
 
 			chuteHelper.Simulate( Grub );
 
-			if ( Grub.Controller.IsGrounded )
+			if ( IsFiring || Grub.Controller.IsGrounded )
 				FireFinished();
 		}
+
+		if ( IsFiring )
+			Fire();
 	}
 
 	public override void FireInstant()
 	{
-		Deploy();
+		IsFiring = false;
+
+		if ( !Grub.Controller.IsGrounded )
+			Deploy();
+
 		base.FireInstant();
 	}
 
