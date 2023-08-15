@@ -59,6 +59,8 @@ public partial class HitScanComponent : WeaponComponent
 	[Net, Predicted]
 	public int FireCount { get; set; } = 0;
 
+	private UI.FuelWorldPanel _ammoWorldPanel;
+
 	public override void Simulate( IClient client )
 	{
 		base.Simulate( client );
@@ -71,7 +73,7 @@ public partial class HitScanComponent : WeaponComponent
 			Grub.MoveInput = -Grub.Facing * 0.75f;
 
 			if ( !Input.Down( InputAction.Fire ) )
-				FireFinished();
+				IsFiring = false;
 		}
 	}
 
@@ -153,11 +155,28 @@ public partial class HitScanComponent : WeaponComponent
 		}
 	}
 
+	public override void OnDeploy()
+	{
+		FireCount = 0;
+
+		if ( Game.IsClient && AutoMove )
+			_ammoWorldPanel = new( Grub, this );
+	}
+
+	public override void OnHolster()
+	{
+		if ( Game.IsClient && AutoMove )
+			_ammoWorldPanel.Delete();
+	}
+
 	public override void FireFinished()
 	{
 		base.FireFinished();
 
 		Weapon.PlaySound( FinishSound );
+
+		if ( Game.IsClient && AutoMove )
+			_ammoWorldPanel.Delete();
 	}
 
 	private void FireEffects()
