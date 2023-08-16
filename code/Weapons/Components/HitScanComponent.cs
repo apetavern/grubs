@@ -157,6 +157,8 @@ public partial class HitScanComponent : WeaponComponent
 
 	public override void OnDeploy()
 	{
+		base.OnDeploy();
+
 		FireCount = 0;
 
 		if ( Game.IsClient && AutoMove )
@@ -165,8 +167,10 @@ public partial class HitScanComponent : WeaponComponent
 
 	public override void OnHolster()
 	{
+		base.OnHolster();
+
 		if ( Game.IsClient && AutoMove )
-			_ammoWorldPanel.Delete();
+			_ammoWorldPanel?.Delete();
 	}
 
 	public override void FireFinished()
@@ -176,7 +180,7 @@ public partial class HitScanComponent : WeaponComponent
 		Weapon.PlaySound( FinishSound );
 
 		if ( Game.IsClient && AutoMove )
-			_ammoWorldPanel.Delete();
+			_ammoWorldPanel?.Delete();
 	}
 
 	private void FireEffects()
