@@ -25,6 +25,9 @@
     public GrubWorldPanel(Grub grub) : base(grub, Vector3.Up * 50f)
     {
         _health = Grub.Health;
+
+        // Enlarge the panel bounds to fit larger names.
+        PanelBounds = new Rect( -1000, -1000, 2000, 2000 );
     }
 
     public override void Tick()
