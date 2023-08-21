@@ -25,6 +25,10 @@
     public GrubWorldPanel(Grub grub) : base(grub, Vector3.Up * 50f)
     {
         _health = Grub.Health;
+
+        // Enlarge the panel bounds to fit larger names.
+        // The default is ( -500, -500, 1000, 1000 )
+        PanelBounds = new Rect( -1000, -1000, 2000, 2000 );
     }
 
     public override void Tick()
@@ -46,6 +50,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Grub?.Name, _health, LocalPlayer?.GrubsCamera?.Distance);
+        @* return HashCode.Combine(Grub?.Name, _health, LocalPlayer?.GrubsCamera?.Distance); *@
+        return HashCode.Combine(DateTime.Now.ToString());
     }
 }
