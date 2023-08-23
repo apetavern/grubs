@@ -89,7 +89,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	{
 		Gadget.Rotation = Rotation.LookAt( segment.EndPos - segment.StartPos );
 		Gadget.Velocity = (segment.EndPos - Gadget.Position) * ProjectileSpeed;
-		Gadget.Position = Vector3.Lerp( segment.StartPos, segment.EndPos, _alpha );
+		Gadget.Position = Vector3.Lerp( segment.StartPos, segment.EndPos, alpha );
 	}
 
 	protected List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
