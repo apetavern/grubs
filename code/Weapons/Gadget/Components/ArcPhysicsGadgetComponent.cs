@@ -15,8 +15,8 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	[Net]
 	protected IList<ArcSegment> Segments { get; set; }
 
-	protected ExplosiveGadgetComponent _explosiveComponent;
-	private float _alpha = 0;
+	protected ExplosiveGadgetComponent ExplosiveComponent;
+	float _alpha = 0;
 
 	/// <summary>
 	/// Debug console variable to see the projectiles path.
@@ -36,7 +36,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		Segments = CalculateTrajectory( dir, charge );
 		Gadget.Position = Segments[0].StartPos;
 
-		_explosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
+		ExplosiveComponent = Gadget.Components.Get<ExplosiveGadgetComponent>();
 	}
 
 	public override bool IsResolved()
@@ -54,29 +54,42 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 		if ( ProjectileDebug )
 			DrawSegments();
 
+		_alpha += Time.Delta * ProjectileSpeed;
+		
 		if ( Segments.Any() )
 		{
 			var currentSegment = Segments.FirstOrDefault();
-
-			_alpha += Time.Delta * ProjectileSpeed;
+			
 			if ( _alpha >= 1f )
 			{
+				if ( Segments.Count == 1 )
+				{
+					UpdateGadget( currentSegment, 1f );
+					Segments.RemoveAt( 0 );
+					return;
+				}
+				
 				_alpha = 0;
 				Segments.RemoveAt( 0 );
 			}
-
-			Gadget.Rotation = Rotation.LookAt( currentSegment.EndPos - currentSegment.StartPos );
-			Gadget.Velocity = (currentSegment.EndPos - Gadget.Position) * ProjectileSpeed;
-			Gadget.Position = Vector3.Lerp( currentSegment.StartPos, currentSegment.EndPos, _alpha );
+			
+			UpdateGadget( currentSegment, _alpha );
 		}
-		else if ( _explosiveComponent?.ExplodeAfter > 0 )
+		else if ( ExplosiveComponent?.ExplodeAfter > 0 )
 		{
-			_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
+			ExplosiveComponent?.ExplodeAfterSeconds( ExplosiveComponent.ExplodeAfter );
 		}
 		else
 		{
-			_explosiveComponent?.Explode();
+			ExplosiveComponent?.Explode();
 		}
+	}
+
+	void UpdateGadget( ArcSegment segment, float alpha )
+	{
+		Gadget.Rotation = Rotation.LookAt( segment.EndPos - segment.StartPos );
+		Gadget.Velocity = (segment.EndPos - Gadget.Position) * ProjectileSpeed;
+		Gadget.Position = Vector3.Lerp( segment.StartPos, segment.EndPos, _alpha );
 	}
 
 	protected List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
@@ -88,9 +101,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 			: arcTrace.RunTowards( direction, force, GamemodeSystem.Instance.ActiveWindForce );
 	}
 
-	private void DrawSegments()
+	void DrawSegments()
 	{
 		foreach ( var segment in Segments )
-			DebugOverlay.Line( segment.StartPos, segment.EndPos, Game.IsServer ? Color.Red : Color.Green );
+			DebugOverlay.Line( segment.StartPos, segment.EndPos, Game.IsServer ? Color.Red : Color.Green, 12f );
+		
+		DebugOverlay.Sphere( Segments.LastOrDefault().EndPos, 16f, Color.Blue, 12f );
 	}
 }

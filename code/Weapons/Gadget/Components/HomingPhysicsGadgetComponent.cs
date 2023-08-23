@@ -62,6 +62,6 @@ public partial class HomingPhysicsGadgetComponent : ArcPhysicsGadgetComponent
 		}
 
 		if ( Trace.Ray( Gadget.Position, Gadget.Position + Gadget.Velocity ).Size( Gadget.CollisionBounds ).Ignore( Gadget ).Run().Hit )
-			_explosiveComponent?.ExplodeAfterSeconds( _explosiveComponent.ExplodeAfter );
+			ExplosiveComponent?.ExplodeAfterSeconds( ExplosiveComponent.ExplodeAfter );
 	}
 }
