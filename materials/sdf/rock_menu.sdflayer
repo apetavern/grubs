@@ -1,0 +1,24 @@
+{
+  "Depth": 64,
+  "Offset": -64,
+  "TexCoordSize": 256,
+  "FrontFaceMaterial": "materials/environment/rocks_d.vmat",
+  "BackFaceMaterial": "materials/environment/rocks_d.vmat",
+  "CutFaceMaterial": "materials/environment/rocks_d.vmat",
+  "EdgeStyle": "Round",
+  "MaxSmoothAngle": 180,
+  "EdgeRadius": 8,
+  "EdgeFaces": 3,
+  "IsTextureSourceOnly": false,
+  "CollisionTags": "solid",
+  "QualityLevel": "Medium",
+  "ChunkResolution": 16,
+  "ChunkSize": 256,
+  "MaxDistance": 64,
+  "ReferencedTextures": [
+    {
+      "TargetAttribute": "ScorchLayer",
+      "Source": "materials/sdf/scorch.sdflayer"
+    }
+  ]
+}

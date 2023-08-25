@@ -1,0 +1,28 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_foreground.shader"
+
+	BlendMask "materials/default/default_mask.tga"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Position ----
+	g_flYPosition "64.000"
+	g_flYSmoothing "75.000"
+	g_flZPosition "0.000"
+	g_flZSmoothing "250.000"
+
+	//---- Textures ----
+	AO "textures/environment/rocks_a_ao.png"
+	Colour "textures/environment/rocks_a_color.png"
+	g_flTiling "1.000"
+	Normal "textures/environment/rocks_a_normal.png"
+	Rough "textures/environment/rocks_a_rough.png"
+
+	//---- Tint ----
+	g_bTintDirectionToggle "0"
+	g_vTint_Colour "[0.741176 0.662745 0.623529 1.000000]"
+}

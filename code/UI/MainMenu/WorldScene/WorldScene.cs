@@ -49,8 +49,8 @@ public class WorldScene : Panel
 	{
 		try
 		{
-			var sand = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
-			var rock = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/rock.sdflayer" );
+			var sand = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand_menu.sdflayer" );
+			var rock = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/rock_menu.sdflayer" );
 
 			var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + ".png" );
 			var mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f, pivot: 0f );
@@ -90,7 +90,7 @@ public class WorldScene : Panel
 		var prevLocalPos = _sdfWorld.Transform.PointToLocal( prevWorldPos );
 		var nextLocalPos = _sdfWorld.Transform.PointToLocal( nextWorldPos );
 
-		var sand = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
+		var sand = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand_menu.sdflayer" );
 		var scorch = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/scorch.sdflayer" );
 
 		var sdf = new LineSdf( prevLocalPos, nextLocalPos, 32f );
