@@ -1,9 +1,15 @@
+using Sandbox;
+using Sandbox.Sdf;
+
 namespace Grubs.UI;
 
 public class WorldScene : Panel
 {
+	public bool ShowLogo { get; set; }
+
 	private readonly GrubPreview _grubPreview;
 	private readonly ScenePanel _renderScene;
+	private Sdf2DWorld _sdfWorld;
 	private float _renderSceneDistance = 100f;
 	private float _yaw = -175;
 
@@ -39,11 +45,67 @@ public class WorldScene : Panel
 		map.World.GradientFog.EndDistance = 600;
 	}
 
+	private async Task SetupWorld()
+	{
+		try
+		{
+			var sand = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
+			var rock = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/rock.sdflayer" );
+
+			var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + ".png" );
+			var mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f, pivot: 0f );
+			var transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength / 2f, 0 ) );
+
+			await _sdfWorld.AddAsync( transformedSdf, sand );
+
+			mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + "_back.png" );
+			mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f, pivot: 0f );
+			transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength / 2f, 0 ) );
+
+			await _sdfWorld.AddAsync( transformedSdf, rock );
+		}
+		catch ( Exception e )
+		{
+			Log.Error( e );
+		}
+	}
+
+	public void DrawOnTerrain( Vector2 prevPos, Vector2 nextPos )
+	{
+		if ( _sdfWorld == null )
+		{
+			return;
+		}
+
+		var plane = new Plane( _sdfWorld.Position, _sdfWorld.Rotation.Up );
+		var prevRay = _renderScene.Camera.GetRay( prevPos );
+		var nextRay = _renderScene.Camera.GetRay( nextPos );
+
+		if ( !plane.TryTrace( prevRay, out var prevWorldPos, true )
+			|| !plane.TryTrace( nextRay, out var nextWorldPos, true ) )
+		{
+			return;
+		}
+
+		var prevLocalPos = _sdfWorld.Transform.PointToLocal( prevWorldPos );
+		var nextLocalPos = _sdfWorld.Transform.PointToLocal( nextWorldPos );
+
+		var sand = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
+		var scorch = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/scorch.sdflayer" );
+
+		var sdf = new LineSdf( prevLocalPos, nextLocalPos, 32f );
+
+		_ = _sdfWorld.SubtractAsync( sdf, sand );
+		_ = _sdfWorld.AddAsync( sdf.Expand( 8f ), scorch );
+	}
+
 	public override void OnButtonEvent( ButtonEvent e )
 	{
 		// CaptureMouseInput doesn't work wtf scam?
 		if ( e.Button == "mouseleft" )
+		{
 			SetMouseCapture( e.Pressed );
+		}
 
 		base.OnButtonEvent( e );
 	}
@@ -59,6 +121,20 @@ public class WorldScene : Panel
 	{
 		if ( _renderScene == null )
 			return;
+
+		if ( ShowLogo && _sdfWorld == null )
+		{
+			_sdfWorld = new Sdf2DWorld( _renderScene.World )
+			{
+				Scale = 1f / 24f,
+				Rotation = Rotation.FromRoll( 90f ),
+				Position = _grubPreview.Grub.Position + Vector3.Up * 32f
+			};
+
+			_ = SetupWorld();
+		}
+
+		_sdfWorld?.Update();
 
 		if ( HasMouseCapture )
 			_yaw -= Mouse.Delta.x * 0.05f;
