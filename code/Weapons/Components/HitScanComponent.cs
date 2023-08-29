@@ -206,9 +206,7 @@ public partial class HitScanComponent : WeaponComponent
 			return true;
 		}
 
-		if ( tr.Entity is Sdf2DWorld )
-			ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionRadius, ExplosionDamage, knockbackForce: 500 );
-
+		ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionRadius, ExplosionDamage, knockbackForce: 500 );
 		return true;
 	}
 
