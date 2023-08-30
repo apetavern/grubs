@@ -1,6 +1,4 @@
-﻿using Sandbox.Sdf;
-
-namespace Grubs;
+﻿namespace Grubs;
 
 [Prefab]
 public partial class HitScanComponent : WeaponComponent
@@ -203,7 +201,7 @@ public partial class HitScanComponent : WeaponComponent
 			}
 
 			HitEntity( tr.Entity, -tr.Normal );
-			return true;
+			return false;
 		}
 
 		ExplosionHelper.Explode( tr.EndPosition, Grub, ExplosionRadius, ExplosionRadius, ExplosionDamage, knockbackForce: 500 );
