@@ -5,7 +5,6 @@ global using Sandbox.UI.Construct;
 global using Sandbox.Utility;
 global using System;
 global using System.Collections.Generic;
-global using System.IO;
 global using System.Linq;
 global using System.Threading.Tasks;
 
@@ -151,6 +150,9 @@ public sealed partial class GrubsGame : GameManager
 			if ( !string.IsNullOrEmpty( clothing.EyesMaterial ) )
 				Precache.Add( clothing.EyesMaterial );
 		}
+
+		// Bot skin.
+		Precache.Add( "models/bots/materials/phong1.vmat" );
 	}
 
 	private void PopulatePlayerColors()
