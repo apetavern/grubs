@@ -17,11 +17,11 @@
           },
           "TraceCount": {
             "Type": "Int32",
-            "Value": "20"
+            "Value": "25"
           },
           "TraceSpread": {
             "Type": "Single",
-            "Value": "200"
+            "Value": "450"
           },
           "TraceDelay": {
             "Type": "Single",
@@ -33,7 +33,7 @@
           },
           "ExplosionRadius": {
             "Type": "Single",
-            "Value": "15"
+            "Value": "5"
           },
           "ExplosionDamage": {
             "Type": "Single",
@@ -49,7 +49,7 @@
           },
           "Damage": {
             "Type": "Single",
-            "Value": "4"
+            "Value": "3"
           },
           "UseMuzzleParticle": {
             "Type": "Boolean",
