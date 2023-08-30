@@ -28,6 +28,10 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "MaxExplosionDamage": {
+            "Type": "Single",
+            "Value": "65"
           }
         }
       },

@@ -59,7 +59,7 @@
     "Keys": {
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "0"
+        "Value": "1"
       },
       "Charges": {
         "Type": "Int32",

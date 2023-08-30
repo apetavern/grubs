@@ -17,7 +17,7 @@
           },
           "Damage": {
             "Type": "Single",
-            "Value": "50"
+            "Value": "35"
           },
           "UseMuzzleParticle": {
             "Type": "Boolean",
@@ -87,7 +87,7 @@
       },
       "DefaultAmmoAmount": {
         "Type": "Int32",
-        "Value": "2"
+        "Value": "1"
       },
       "FiringType": {
         "Type": "FiringType",

@@ -21,7 +21,7 @@
           },
           "TraceSpread": {
             "Type": "Single",
-            "Value": "600"
+            "Value": "450"
           },
           "TraceDelay": {
             "Type": "Single",

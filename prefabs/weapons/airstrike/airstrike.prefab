@@ -85,7 +85,7 @@
       },
       "DropChance": {
         "Type": "Single",
-        "Value": "1"
+        "Value": "0"
       }
     }
   }
