@@ -28,6 +28,8 @@ public partial class Gadget : AnimatedEntity, IResolvable
 
 	public bool IsCrate => Components.Get<CrateGadgetComponent>() is not null;
 
+	public bool QueuedForDeletion { get; set; } = false;
+
 	private IEnumerable<GadgetComponent> _sortCache;
 
 	public override void Spawn()
@@ -99,6 +101,9 @@ public partial class Gadget : AnimatedEntity, IResolvable
 			return;
 
 		if ( !ExplodeOnKilled || damageInfo.HasTag( Tag.OutOfArea ) )
+			return;
+
+		if ( QueuedForDeletion )
 			return;
 
 		ExplosionHelper.Explode( Position, this, 50f, 75f );

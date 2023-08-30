@@ -50,13 +50,12 @@ public partial class ProximityGadgetComponent : GadgetComponent
 		if ( !_isTriggered && _isArmed )
 		{
 			var shouldTrigger = Sandbox.Entity.FindInSphere( Gadget.Position, TriggerRadius )
-											  .Where( e => e != Gadget && e is Gadget || (e is Grub grub && grub.LifeState == LifeState.Alive) ).Any();
+											  .Where( TriggersProximity )
+											  .Any();
 
+			_isTriggered |= shouldTrigger;
 			if ( shouldTrigger )
-			{
-				_isTriggered = true;
 				_timeUntilExplode = ExplodeAfter;
-			}
 		}
 
 		if ( _isTriggered )
@@ -72,5 +71,10 @@ public partial class ProximityGadgetComponent : GadgetComponent
 			if ( _timeUntilExplode )
 				Gadget.Components.Get<ExplosiveGadgetComponent>()?.Explode();
 		}
+	}
+
+	bool TriggersProximity( Entity e )
+	{
+		return e != Gadget && e is Gadget || (e is Grub grub && grub.LifeState == LifeState.Alive && !grub.Velocity.IsNearlyZero( 1f ));
 	}
 }

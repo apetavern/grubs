@@ -68,6 +68,9 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		if ( !Game.IsServer )
 			return;
 
+		if ( DeleteOnExplode )
+			Gadget.QueuedForDeletion = true;
+
 		switch ( ExplosionReaction )
 		{
 			case ExplosiveReaction.Explosion:
@@ -81,7 +84,7 @@ public partial class ExplosiveGadgetComponent : GadgetComponent
 		// Play it from world since the gadget deletes and the sound will move to (0, 0, 0).
 		Sound.FromWorld( To.Everyone, ExplosionSound, Gadget.Position );
 
-		if ( DeleteOnExplode )
+		if ( Gadget.QueuedForDeletion )
 			Gadget.Delete();
 	}
 }
