@@ -1,11 +1,4 @@
 ﻿using Grubs.Bots.States;
-using Grubs.Bots;
-using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Grubs.Bots;
 public partial class BotBrain : Entity
@@ -54,7 +47,7 @@ public partial class BotBrain : Entity
 				.WithStaticOnly( false );
 
 			var createTask = builder.Create();
-			createTask.Wait();
+			createTask?.Wait();
 			GridAStar.Grid.Main = createTask.Result;
 		}
 	}

@@ -55,11 +55,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 			DrawSegments();
 
 		_alpha += Time.Delta * ProjectileSpeed;
-		
+
 		if ( Segments.Any() )
 		{
 			var currentSegment = Segments.FirstOrDefault();
-			
+
 			if ( _alpha >= 1f )
 			{
 				if ( Segments.Count == 1 )
@@ -68,11 +68,11 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 					Segments.RemoveAt( 0 );
 					return;
 				}
-				
+
 				_alpha = 0;
 				Segments.RemoveAt( 0 );
 			}
-			
+
 			UpdateGadget( currentSegment, _alpha );
 		}
 		else if ( ExplosiveComponent?.ExplodeAfter > 0 )
@@ -87,6 +87,10 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 
 	void UpdateGadget( ArcSegment segment, float alpha )
 	{
+		// Hack: Why is this running before the gadget authority is lined up?
+		if ( !Gadget.IsAuthority )
+			return;
+
 		Gadget.Rotation = Rotation.LookAt( segment.EndPos - segment.StartPos );
 		Gadget.Velocity = (segment.EndPos - Gadget.Position) * ProjectileSpeed;
 		Gadget.Position = Vector3.Lerp( segment.StartPos, segment.EndPos, alpha );
@@ -105,7 +109,7 @@ public partial class ArcPhysicsGadgetComponent : GadgetComponent
 	{
 		foreach ( var segment in Segments )
 			DebugOverlay.Line( segment.StartPos, segment.EndPos, Game.IsServer ? Color.Red : Color.Green, 12f );
-		
+
 		DebugOverlay.Sphere( Segments.LastOrDefault().EndPos, 16f, Color.Blue, 12f );
 	}
 }

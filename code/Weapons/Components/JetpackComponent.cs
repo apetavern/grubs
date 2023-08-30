@@ -80,9 +80,9 @@ public partial class JetpackComponent : WeaponComponent
 		_sideJetStrength = _sideJetStrength.LerpTo( isAscending && hasFuel ? new( .7f ) : !controller.IsGrounded && hasFuel ? new( .4f ) : new( 0 ), Time.Delta * 3 );
 		_backJetStrength = _backJetStrength.LerpTo( !controller.IsGrounded && hasFuel && horizontalInput != 0 ? new( .65f ) : new( 0 ), Time.Delta * 3 );
 
-		_leftJetParticle.SetPosition( 5, _sideJetStrength );
-		_rightJetParticle.SetPosition( 5, _sideJetStrength );
-		_backJetParticle.SetPosition( 5, _backJetStrength );
+		_leftJetParticle?.SetPosition( 5, _sideJetStrength );
+		_rightJetParticle?.SetPosition( 5, _sideJetStrength );
+		_backJetParticle?.SetPosition( 5, _backJetStrength );
 
 		if ( !hasFuel || controller.IsGrounded )
 			_thrustSound.Stop();

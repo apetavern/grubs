@@ -119,10 +119,17 @@ public partial class GrubsBot : Bot
 				return;
 			}
 
-			_ = new GrubsBot
+			try
 			{
-				TurnedOffAntenna = true
-			};
+				_ = new GrubsBot
+				{
+					TurnedOffAntenna = true
+				};
+			}
+			catch ( Exception ex )
+			{
+				Log.Warning( "Failed to add bot: " + ex.Message );
+			}
 		}
 	}
 
