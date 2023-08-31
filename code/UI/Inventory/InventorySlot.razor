@@ -19,6 +19,31 @@
 
 @code {
     public Weapon Weapon { get; set; }
+    public Inventory Inventory { get; set; }
+
+    public override void Tick()
+    {
+        base.Tick();
+
+        if ( Inventory is null )
+            return;
+
+        if ( PanelOrChildrenHovered() )
+        {
+            Inventory.HoveredWeapon = Weapon;
+        }
+    }
+
+    public bool PanelOrChildrenHovered()
+    {
+        if (Children.Any(child => child.HasHovered))
+        {
+            return true;
+        }
+
+        return HasHovered;
+
+    }
 
     private bool IsDisabled(Player player)
     {
