@@ -1,4 +1,3 @@
-using Sandbox;
 using Sandbox.Sdf;
 
 namespace Grubs.UI;
@@ -6,30 +5,34 @@ namespace Grubs.UI;
 public class WorldScene : Panel
 {
 	public bool ShowLogo { get; set; }
+	public bool HasGrubPreview { get; set; }
 
-	private readonly GrubPreview _grubPreview;
-	private readonly ScenePanel _renderScene;
+	private GrubPreview _grubPreview;
+	private ScenePanel _renderScene;
 	private Sdf2DWorld _sdfWorld;
 	private float _renderSceneDistance = 100f;
 	private float _yaw = -175;
 
+	Vector3 _grubDefaultPosition = new Vector3( -64, 32, 6 );
+	Vector3 TargetPosition => HasGrubPreview ? (_grubPreview?.Grub?.Position ?? _grubDefaultPosition) : _grubDefaultPosition;
+
 	public WorldScene()
 	{
 		StyleSheet.Load( "UI/MainMenu/WorldScene/WorldScene.cs.scss" );
+		InitializeRenderScene();
+	}
 
+	void InitializeRenderScene()
+	{
 		_renderScene?.Delete( true );
 
 		var sceneWorld = new SceneWorld();
 		var map = new SceneMap( sceneWorld, "maps/gr_menu" );
 
-		_grubPreview = new GrubPreview( sceneWorld );
-		_grubPreview.Grub.Position = new Vector3( -64, 32, 6 );
-		_grubPreview.Grub.Rotation = Rotation.From( 0, -135, 0 );
-		AddChild( _grubPreview );
-
 		_renderScene = Add.ScenePanel( sceneWorld, Vector3.One, Rotation.Identity, 75, "renderScene" );
+
 		_renderScene.Camera.AmbientLightColor = new Color( .25f, .15f, .15f ) * 0.5f;
-		_renderScene.Camera.Position = _grubPreview.Grub.Position + new Vector3(
+		_renderScene.Camera.Position = TargetPosition + new Vector3(
 			MathF.Sin( _yaw ) * _renderSceneDistance,
 			MathF.Cos( _yaw ) * _renderSceneDistance
 		);
@@ -122,16 +125,26 @@ public class WorldScene : Panel
 		if ( _renderScene == null )
 			return;
 
-		if ( ShowLogo && _sdfWorld == null )
+		if ( ShowLogo && _sdfWorld is null )
 		{
+			var sdfWorldPos = TargetPosition + Vector3.Up * 32f;
+
 			_sdfWorld = new Sdf2DWorld( _renderScene.World )
 			{
 				Scale = 1f / 24f,
 				Rotation = Rotation.FromRoll( 90f ),
-				Position = _grubPreview.Grub.Position + Vector3.Up * 32f
+				Position = sdfWorldPos,
 			};
 
 			_ = SetupWorld();
+		}
+
+		if ( HasGrubPreview && _grubPreview is null )
+		{
+			_grubPreview = new GrubPreview( _renderScene.World );
+			_grubPreview.Grub.Position = _grubDefaultPosition;
+			_grubPreview.Grub.Rotation = Rotation.From( 0, -135, 0 );
+			AddChild( _grubPreview );
 		}
 
 		_sdfWorld?.Update();
@@ -145,14 +158,14 @@ public class WorldScene : Panel
 		float height = 16;
 
 		var currentPosition = _renderScene.Camera.Position;
-		_renderScene.Camera.Position = currentPosition.LerpTo( _grubPreview.Grub.Position + new Vector3(
+		_renderScene.Camera.Position = currentPosition.LerpTo( TargetPosition + new Vector3(
 			MathF.Sin( yawRad ) * _renderSceneDistance,
 			MathF.Cos( yawRad ) * _renderSceneDistance,
 			height
 		), Time.Delta * 4.0f );
 
-		var wormEyePos = _grubPreview.Grub.Position + _grubPreview.Grub.Rotation.Up * 24;
-		wormEyePos += _grubPreview.Grub.Rotation.Right * 4;
+		var wormEyePos = TargetPosition + Vector3.Up * 24;
+		wormEyePos += Vector3.Right * 4;
 		_renderScene.Camera.Rotation = Rotation.LookAt( (wormEyePos - _renderScene.Camera.Position).Normal );
 	}
 }
