@@ -100,7 +100,6 @@ public partial class Player
 		"Gub",
 		"Jaspy",
 		"Borris",
-		"Slugma",
 		"Ziks"
 	};
 
