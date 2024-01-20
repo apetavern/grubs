@@ -36,6 +36,8 @@ public sealed class GrubPlayerController : Component
 		if ( IsProxy )
 			return;
 
+		UpdateJump();
+
 		if ( IsGrounded )
 		{
 			var wishVel = GetWishVelocity();
@@ -46,8 +48,8 @@ public sealed class GrubPlayerController : Component
 		}
 		else
 		{
-			CharacterController.Velocity -= Gravity * Time.Delta * 0.5f;
-			CharacterController.ApplyFriction( 0.2f );
+			CharacterController.Velocity -= Gravity * Time.Delta;
+			CharacterController.ApplyFriction( 0.1f );
 		}
 
 		CharacterController.Move();
@@ -70,7 +72,7 @@ public sealed class GrubPlayerController : Component
 	{
 		var nextFacing = Transform.Rotation.z < 0 ? -1 : 1;
 
-		var look = (LookAngles + LookInput * -nextFacing).Normal;
+		var look = (LookAngles + LookInput * nextFacing).Normal;
 		LookAngles = look.WithPitch( look.pitch.Clamp( -80f, 75f ) )
 			.WithRoll( 0f )
 			.WithYaw( 0f );
@@ -83,8 +85,17 @@ public sealed class GrubPlayerController : Component
 
 	private void UpdateEyeRotation()
 	{
-		Facing = Transform.Rotation.z < 0 ? -1 : 1;
+		Facing = Transform.Rotation.z <= 0 ? 1 : -1;
 		EyeRotation = LookAngles.ToRotation();
+	}
+
+	private void UpdateJump()
+	{
+		if ( Input.Pressed( "jump" ) && IsGrounded )
+		{
+			CharacterController.Velocity = new Vector3( Facing * 175f, 0f, 220f );
+			CharacterController.IsOnGround = false;
+		}
 	}
 
 	private Vector3 GetWishVelocity()
