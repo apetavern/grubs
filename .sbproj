@@ -11,10 +11,7 @@
   "MenuResources": "\nmaps/gr_menu.vpk\ntextures/ui/*\ntextures/texturelevels/*.png\nmaterials/sdf/*.sdflayer\nUI/GameMenu/*\nfonts/*\nUI/Styles/*\nUI/MainMenu/WorldScene/*\nmaterials/effects/lightcookies/tree_canopy.vmat\nmodels/citizenworm.vmdl\nmodels/crates/weapons_crate/materials/weaponcrate.vmat\nmodels/crates/tools_crate/materials/toolcrate.vmat\nmodels/menu/materials/tree_01.vmat\nmodels/menu/materials/grassleaves.vmat\nmodels/menu/materials/backdrop_dirt.vmat\nmodels/weapons/airstrikes/materials/plane.vmat\nmodels/weapons/airstrikes/materials/propellor_active.vmat\nmodels/weapons/oildrum/materials/flame_emoji.vmat\nmodels/weapons/oildrum/materials/oildrum.vmat\nmodels/weapons/revolver/materials/sixshooter.vmat\nmodels/weapons/uzi/materials/uzi.vmat\nmodels/weapons/dynamite/materials/dynamite.vmat\nmodels/weapons/shotgun/materials/shotgun_colors.vmat\nmaterials/effects/lightcookies/tree_canopy.vmat_c\nmodels/citizenworm.vmdl_c\nmodels/crates/weapons_crate/materials/weaponcrate.vmat_c\nmodels/crates/tools_crate/materials/toolcrate.vmat_c\nmodels/menu/materials/tree_01.vmat_c\nmodels/menu/materials/grassleaves.vmat_c\nmodels/menu/materials/backdrop_dirt.vmat_c\nmodels/weapons/airstrikes/materials/plane.vmat_c\nmodels/weapons/airstrikes/materials/propellor_active.vmat_c\nmodels/weapons/oildrum/materials/flame_emoji.vmat_c\nmodels/weapons/oildrum/materials/oildrum.vmat_c\nmodels/weapons/revolver/materials/sixshooter.vmat_c\nmodels/weapons/uzi/materials/uzi.vmat_c\nmodels/weapons/dynamite/materials/dynamite.vmat_c\nmodels/weapons/shotgun/materials/shotgun_colors.vmat_c",
   "HasCode": true,
   "CodePath": "code",
-  "PackageReferences": [
-    "facepunch.libsdf",
-    "fish.grid_and_astar"
-  ],
+  "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {
     "MapList": [
@@ -31,7 +28,15 @@
     "Compiler": {
       "RootNamespace": "Grubs",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
-      "NoWarn": "1701;1702;1591;1998"
+      "NoWarn": "1701;1702;1591;1998",
+      "WarningsAsErrors": "",
+      "Nullables": true,
+      "AssemblyReferences": [],
+      "IgnoreFolders": [
+        "editor",
+        "unittest"
+      ],
+      "DistinctAssemblyReferences": []
     },
     "GameSettings": {
       "grubs_game": {
@@ -539,18 +544,6 @@
     "Description": "Grubs (in development) by Ape Tavern\n\nLeave your feedback @ discord.gg/apetavern\n\nCredits:\nGooman\nTrundler\nMatt944\nShadowBrain\nxezno\nJammie\nmatek\nWillow\nPukes\n\nSpecial thanks for Ziks for 2D SDF Terrain library!",
     "Public": true,
     "ReplaceTags": "",
-    "Physics": {
-      "SubSteps": 1,
-      "TimeScale": 1,
-      "Gravity": "0,0,-800",
-      "AirDensity": 1.2,
-      "SleepingEnabled": true,
-      "SimulationMode": "Continuous",
-      "PositionIterations": 2,
-      "VelocityIterations": 8,
-      "SoftBodyIterations": 1,
-      "SoftBodySubsteps": 1
-    },
     "Collision": {
       "Defaults": {
         "solid": "Collide",
@@ -670,6 +663,6 @@
         "PostLaunchCommand": ""
       }
     ],
-    "TickRate": 50
+    "TickRate": 120
   }
 }
