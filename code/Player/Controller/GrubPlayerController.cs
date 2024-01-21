@@ -48,11 +48,14 @@ public sealed class GrubPlayerController : Component
 		}
 		else
 		{
-			CharacterController.Velocity -= Gravity * Time.Delta;
+			CharacterController.Velocity -= Gravity * Time.Delta * 0.5f;
 			CharacterController.ApplyFriction( 0.1f );
 		}
 
 		CharacterController.Move();
+
+		if ( !IsGrounded )
+			CharacterController.Velocity -= Gravity * Time.Delta * 0.5f;
 	}
 
 	private void UpdateRotation()
