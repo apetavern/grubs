@@ -18,10 +18,11 @@ public sealed class GrubAnimator : Component
 		Grub.Set( "holdpose", 0 );
 		Grub.Set( "velocity", Controller.Velocity.Length );
 
-		_incline = MathX.Lerp(
-			_incline,
-			Grub.Transform.Rotation.Forward.Angle( Controller.CurrentGroundAngle ) - 90f,
-			0.25f );
+		var tr = Scene.Trace.Ray( Controller.Transform.Position + Controller.Transform.Rotation.Up * 10f,
+				Controller.Transform.Position + Controller.Transform.Rotation.Down * 128 )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.Run();
+		_incline = MathX.Lerp( _incline, Controller.Transform.Rotation.Forward.Angle( tr.Normal ) - 90f, 0.2f );
 		Grub.Set( "incline", _incline );
 	}
 }

@@ -284,7 +284,7 @@
           "__enabled": true,
           "Acceleration": 10,
           "Controller": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
-          "GroundAngle": 45,
+          "GroundAngle": 65,
           "Height": 30.99,
           "IgnoreLayers": "",
           "Radius": 5,

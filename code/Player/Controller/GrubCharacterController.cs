@@ -30,8 +30,6 @@ public class GrubCharacterController : Component
 
 	[Sync] public bool IsOnGround { get; set; }
 
-	[Sync] public float CurrentGroundAngle { get; set; }
-
 	protected override void DrawGizmos()
 	{
 		Gizmo.Draw.LineBBox( BoundingBox );
@@ -179,7 +177,6 @@ public class GrubCharacterController : Component
 		// we are on ground
 		//
 		IsOnGround = true;
-		CurrentGroundAngle = Vector3.GetAngle( Vector3.Up, pm.Normal );
 
 		//
 		// move to this ground position, if we moved, and hit
