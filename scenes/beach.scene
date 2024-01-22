@@ -174,6 +174,74 @@
       ]
     },
     {
+      "Id": "a23135d1-a5aa-4dc1-ab59-eba9781b4ac5",
+      "Name": "Terrain (1)",
+      "Position": "-250.6936,512,-22.52875",
+      "Rotation": "0.00000003579929,-0.6006124,0.0000000000000007193462,0.7995409",
+      "Scale": "50,2,5",
+      "Tags": "solid",
+      "Enabled": true,
+      "Components": [
+        {
+          "__version": 0,
+          "__type": "SkinnedModelRenderer",
+          "__enabled": true,
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__version": 0,
+          "__type": "BoxCollider",
+          "__enabled": true,
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "50,50,50",
+          "Static": false,
+          "Surface": null
+        }
+      ]
+    },
+    {
+      "Id": "662860ab-7687-400a-a893-e8f112d2c431",
+      "Name": "Terrain (2)",
+      "Position": "-762.8104,512,125.988",
+      "Rotation": "0.0000000564333,-0.9467937,-0.000000000000001325312,0.3218421",
+      "Scale": "50,2,5",
+      "Tags": "solid",
+      "Enabled": true,
+      "Components": [
+        {
+          "__version": 0,
+          "__type": "SkinnedModelRenderer",
+          "__enabled": true,
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__version": 0,
+          "__type": "BoxCollider",
+          "__enabled": true,
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "50,50,50",
+          "Static": false,
+          "Surface": null
+        }
+      ]
+    },
+    {
       "Id": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
       "Name": "Grub",
       "Position": "-512,512,224.0157",
@@ -217,9 +285,9 @@
           "Acceleration": 10,
           "Controller": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
           "GroundAngle": 45,
-          "Height": 64,
+          "Height": 30.99,
           "IgnoreLayers": "",
-          "Radius": 16,
+          "Radius": 5,
           "StepHeight": 18
         },
         {

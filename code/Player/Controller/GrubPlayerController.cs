@@ -19,6 +19,7 @@ public sealed class GrubPlayerController : Component
 	public int LastFacing { get; set; } = 1;
 	[Sync] public Rotation EyeRotation { get; set; }
 	public bool IsGrounded => CharacterController.IsOnGround;
+	public float CurrentGroundAngle => CharacterController.CurrentGroundAngle;
 	public Vector3 Velocity => CharacterController.Velocity;
 
 	protected override void OnUpdate()
