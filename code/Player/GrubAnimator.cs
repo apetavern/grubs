@@ -20,7 +20,7 @@ public sealed class GrubAnimator : Component
 		Grub.Set( "holdpose", 0 );
 		Grub.Set( "velocity", Controller.Velocity.Length );
 
-		Grub.Set( "lookatweight", MathX.Lerp( Grub.GetFloat( "lookatweight" ), Controller.IsGrounded ? 1f : 0f, 0.2f ) );
+		Grub.Set( "lookatweight", MathX.Lerp( Grub.GetFloat( "lookatweight" ), Controller.IsGrounded && !Grub.GetBool( "lowhp" ) ? 1f : 0f, 0.2f ) );
 
 		_looktarget = Vector3.Lerp( _looktarget, Transform.World.PointToLocal( Scene.Camera.Transform.Position ), Time.Delta * 5f );
 
