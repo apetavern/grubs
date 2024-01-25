@@ -75,6 +75,9 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        },
+        {
+          "__type": "Highlight"
         }
       ]
     },
@@ -290,6 +293,15 @@
         {
           "__type": "HealthComponent",
           "MaxHealth": 150
+        },
+        {
+          "__type": "HighlightOutline",
+          "Color": "0,0,0,1",
+          "InsideColor": "0,0,0,0",
+          "InsideObscuredColor": "0,0,0,0",
+          "Material": null,
+          "ObscuredColor": "0,0,0,0.4",
+          "Width": 0.35
         }
       ],
       "Children": [
