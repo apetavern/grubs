@@ -22,7 +22,7 @@ public sealed class GrubAnimator : Component
 
 		Grub.Set( "lookatweight", MathX.Lerp( Grub.GetFloat( "lookatweight" ), Controller.IsGrounded && !Grub.GetBool( "lowhp" ) ? 1f : 0f, 0.2f ) );
 
-		_looktarget = Vector3.Lerp( _looktarget, Transform.World.PointToLocal( Scene.Camera.Transform.Position ), Time.Delta * 5f );
+		_looktarget = Vector3.Lerp( _looktarget, new Vector3( 3f, 4f * -Controller.Facing, 0f ), Time.Delta * 5f );
 
 		Grub.Set( "looktarget", _looktarget );
 
