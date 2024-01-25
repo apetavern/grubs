@@ -18,6 +18,8 @@ public sealed class GrubPlayerController : Component
 	public int Facing { get; set; } = 1;
 	public int LastFacing { get; set; } = 1;
 	[Sync] public Rotation EyeRotation { get; set; }
+	[Sync] public bool IsChargingBackflip { get; set; } = false;
+	[Sync] public float BackflipCharge { get; set; } = 0;
 	public bool IsGrounded => CharacterController.IsOnGround;
 	public float CurrentGroundAngle => CharacterController.CurrentGroundAngle;
 	public Vector3 Velocity => CharacterController.Velocity;
@@ -38,6 +40,7 @@ public sealed class GrubPlayerController : Component
 			return;
 
 		UpdateJump();
+		UpdateBackflip();
 
 		if ( IsGrounded )
 		{
@@ -100,6 +103,29 @@ public sealed class GrubPlayerController : Component
 			CharacterController.Velocity = new Vector3( Facing * 175f, 0f, 220f );
 			CharacterController.IsOnGround = false;
 		}
+	}
+
+	private void UpdateBackflip()
+	{
+		if ( !Input.Down( "backflip" ) && IsChargingBackflip )
+			DoBackflip();
+
+		if ( Input.Down( "backflip" ) && IsGrounded )
+		{
+			IsChargingBackflip = true;
+			BackflipCharge += 0.01f;
+			BackflipCharge = BackflipCharge.Clamp( 0f, 1f );
+		}
+	}
+
+	private void DoBackflip()
+	{
+		CharacterController.Velocity =
+			new Vector3( -Facing * (50f + 75f * BackflipCharge), 0f, 150f + 220f * BackflipCharge );
+		CharacterController.IsOnGround = false;
+
+		IsChargingBackflip = false;
+		BackflipCharge = 0f;
 	}
 
 	private Vector3 GetWishVelocity()
