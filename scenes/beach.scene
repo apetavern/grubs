@@ -78,6 +78,10 @@
         },
         {
           "__type": "Highlight"
+        },
+        {
+          "__type": "GrubFollowCamera",
+          "Target": "1bf41274-2ee0-492e-a854-3c9d8fb24274"
         }
       ]
     },
