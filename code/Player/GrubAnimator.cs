@@ -18,7 +18,9 @@ public sealed class GrubAnimator : Component
 		Grub.Set( "holdpose", 0 );
 		Grub.Set( "velocity", Controller.Velocity.Length );
 
-		var tr = Scene.Trace.Ray( Controller.Transform.Position + Controller.Transform.Rotation.Up * 10f,
+		var tr = Scene.Trace
+			.Ray(
+				Controller.Transform.Position + Controller.Transform.Rotation.Up * 10f,
 				Controller.Transform.Position + Controller.Transform.Rotation.Down * 128 )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();

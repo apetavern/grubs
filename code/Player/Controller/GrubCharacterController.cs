@@ -1,4 +1,6 @@
-﻿namespace Grubs.Player.Controller;
+﻿using Sandbox.Utility;
+
+namespace Grubs.Player.Controller;
 
 [Title( "Grubs - Character Controller" )]
 [Category( "Grubs" )]
@@ -29,6 +31,8 @@ public class GrubCharacterController : Component
 	[Sync] public Vector3 Velocity { get; set; }
 
 	[Sync] public bool IsOnGround { get; set; }
+
+	[Sync] public float CurrentGroundAngle { get; set; }
 
 	protected override void DrawGizmos()
 	{
@@ -65,6 +69,8 @@ public class GrubCharacterController : Component
 			accelspeed = addspeed;
 
 		Velocity += wishdir * accelspeed;
+		var angleFactor = Easing.ExpoOut( 1.0f - -Controller.Facing * CurrentGroundAngle / 80f ).Clamp( 0f, 1f );
+		Velocity *= angleFactor;
 	}
 
 	/// <summary>
@@ -156,13 +162,20 @@ public class GrubCharacterController : Component
 		//
 		point.z -= wasOnGround ? StepHeight : 0.1f;
 
-
 		var pm = BuildTrace( vBumpOrigin, point ).Run();
+
+		var trForward = Scene.Trace.Ray( Transform.Position, Transform.Position + Transform.Rotation.Forward * 10f )
+			.IgnoreGameObjectHierarchy( GameObject ).Run();
+		var trBackward = Scene.Trace.Ray( Transform.Position, Transform.Position + Transform.Rotation.Backward * 10f )
+			.IgnoreGameObjectHierarchy( GameObject ).Run();
+
+		var squished = trForward.Hit && trBackward.Hit;
+		var shouldGround = Vector3.GetAngle( Vector3.Up, pm.Normal ) <= GroundAngle || squished;
 
 		//
 		// we didn't hit - or the ground is too steep to be ground
 		//
-		if ( !pm.Hit || Vector3.GetAngle( Vector3.Up, pm.Normal ) > GroundAngle )
+		if ( !pm.Hit || !shouldGround )
 		{
 			IsOnGround = false;
 			return;
@@ -177,6 +190,9 @@ public class GrubCharacterController : Component
 		// we are on ground
 		//
 		IsOnGround = true;
+		CurrentGroundAngle = Vector3.GetAngle( Transform.Rotation.Up, pm.Normal );
+		if ( pm.Normal.x < 0 )
+			CurrentGroundAngle *= -1;
 
 		//
 		// move to this ground position, if we moved, and hit
@@ -189,6 +205,7 @@ public class GrubCharacterController : Component
 
 	protected void OnLanded()
 	{
+		Velocity /= 1.8f;
 		// var plycontr = GameObject.Components.Get<GrubPlayerController>( FindMode.InSelf );
 		// plycontr.TriggerLandingEvent( MathF.Abs( LastVelocity.z ) );
 		//Log.Info( $"Character landed at {LastVelocity.z} velocity" );
