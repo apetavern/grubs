@@ -20,7 +20,6 @@
 					{
 						m_id = 54021215
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -817,7 +816,6 @@
 					{
 						m_id = 58102526
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -967,7 +965,6 @@
 					{
 						m_id = 131630633
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "incline_correct_bottom_add"
 					m_nFrameIndex = 0
@@ -988,7 +985,6 @@
 					{
 						m_id = 131896515
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "shotgun_fire"
@@ -1010,7 +1006,6 @@
 					{
 						m_id = 139444293
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -1077,6 +1072,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -1094,7 +1091,6 @@
 					{
 						m_id = 178317492
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "throwable_fire"
 					m_nFrameIndex = 8
@@ -1115,7 +1111,6 @@
 					{
 						m_id = 185781590
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "head_light"
 					m_inputConnection1 = 
@@ -1169,7 +1164,6 @@
 					{
 						m_id = 209557947
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -1221,6 +1215,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -1238,7 +1234,6 @@
 					{
 						m_id = 214370923
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -1331,7 +1326,6 @@
 					{
 						m_id = 217417510
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "walk_down"
@@ -1353,7 +1347,6 @@
 					{
 						m_id = 235163556
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "head_light"
 					m_inputConnection1 = 
@@ -1407,7 +1400,6 @@
 					{
 						m_id = 339156577
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -1557,7 +1549,6 @@
 					{
 						m_id = 388980171
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "uzi_aim"
 					m_nFrameIndex = 0
@@ -1578,7 +1569,6 @@
 					{
 						m_id = 403567328
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -1607,7 +1597,6 @@
 					{
 						m_id = 405204906
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -1799,7 +1788,6 @@
 					{
 						m_id = 408973641
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -1949,7 +1937,6 @@
 					{
 						m_id = 417048522
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -2016,7 +2003,6 @@
 					{
 						m_id = 418471138
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "throwable_aim"
 					m_nFrameIndex = 0
@@ -2037,7 +2023,6 @@
 					{
 						m_id = 423737508
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "head_light"
 					m_inputConnection1 = 
@@ -2091,7 +2076,6 @@
 					{
 						m_id = 431601777
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "lowhp_down"
@@ -2113,7 +2097,6 @@
 					{
 						m_id = 431830485
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "walk_up"
 					m_nFrameIndex = 0
@@ -2134,7 +2117,6 @@
 					{
 						m_id = 440527250
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -2284,7 +2266,6 @@
 					{
 						m_id = 459883444
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "minigun_aim"
 					m_nFrameIndex = 0
@@ -2305,7 +2286,6 @@
 					{
 						m_id = 464562224
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "jetpack_aim"
 					m_nFrameIndex = 0
@@ -2326,7 +2306,6 @@
 					{
 						m_id = 557421532
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "bazooka_aim"
 					m_nFrameIndex = 0
@@ -2347,7 +2326,6 @@
 					{
 						m_id = 566444856
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "bazooka_aim"
 					m_nFrameIndex = 0
@@ -2368,7 +2346,6 @@
 					{
 						m_id = 566995956
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "bazooka_aim"
 					m_nFrameIndex = 2
@@ -2389,7 +2366,6 @@
 					{
 						m_id = 571436460
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "eyes_closed"
@@ -2411,7 +2387,6 @@
 					{
 						m_id = 583946232
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -2561,7 +2536,6 @@
 					{
 						m_id = 599787470
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -2711,7 +2685,6 @@
 					{
 						m_id = 640122344
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "mid_air"
@@ -2733,7 +2706,6 @@
 					{
 						m_id = 658166805
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -2800,6 +2772,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -2817,7 +2791,6 @@
 					{
 						m_id = 662157317
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "jump_start"
@@ -2839,7 +2812,6 @@
 					{
 						m_id = 666823532
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -2914,7 +2886,6 @@
 					{
 						m_id = 685445113
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "aiming"
 					m_inputConnection1 = 
@@ -2968,7 +2939,6 @@
 					{
 						m_id = 701235812
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -3020,6 +2990,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -3037,7 +3009,6 @@
 					{
 						m_id = 829819952
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "radio_hold"
 					m_nFrameIndex = 0
@@ -3058,7 +3029,6 @@
 					{
 						m_id = 852724858
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "head_light"
 					m_inputConnection1 = 
@@ -3112,7 +3082,6 @@
 					{
 						m_id = 856138032
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "eyes"
 					m_inputConnection1 = 
@@ -3166,7 +3135,6 @@
 					{
 						m_id = 860532150
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "scratch"
@@ -3188,7 +3156,6 @@
 					{
 						m_id = 862111766
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "walk_up"
@@ -3210,7 +3177,6 @@
 					{
 						m_id = 873708881
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "lowhp"
@@ -3232,7 +3198,6 @@
 					{
 						m_id = 890555059
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -3424,7 +3389,6 @@
 					{
 						m_id = 905818758
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -3574,7 +3538,6 @@
 					{
 						m_id = 919446886
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -3612,6 +3575,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -3629,7 +3594,6 @@
 					{
 						m_id = 931268082
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "throwable_fire"
@@ -3651,7 +3615,6 @@
 					{
 						m_id = 968698486
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "aiming"
 					m_inputConnection1 = 
@@ -3705,7 +3668,6 @@
 					{
 						m_id = 1118718718
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -3855,7 +3817,6 @@
 					{
 						m_id = 1150342760
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "bazooka_aim"
 					m_nFrameIndex = 1
@@ -3876,7 +3837,6 @@
 					{
 						m_id = 1159119542
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "jetpack_aim"
 					m_nFrameIndex = 1
@@ -3897,7 +3857,6 @@
 					{
 						m_id = 1198032904
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "hands"
 					m_inputConnection1 = 
@@ -3951,7 +3910,6 @@
 					{
 						m_id = 1309470901
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -4018,6 +3976,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -4035,7 +3995,6 @@
 					{
 						m_id = 1313612676
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "throwable_aim"
 					m_nFrameIndex = 0
@@ -4056,7 +4015,6 @@
 					{
 						m_id = 1332956422
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "hard_fall"
@@ -4078,7 +4036,6 @@
 					{
 						m_id = 1333035838
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "explode"
@@ -4100,7 +4057,6 @@
 					{
 						m_id = 1347390929
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "backflip"
@@ -4122,7 +4078,6 @@
 					{
 						m_id = 1364788982
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_baseInput = 
 					{
@@ -4168,7 +4123,6 @@
 					{
 						m_id = 1384964533
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "rifle_aim"
 					m_nFrameIndex = 0
@@ -4189,7 +4143,6 @@
 					{
 						m_id = 1399491902
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "walk_down"
 					m_nFrameIndex = 0
@@ -4210,7 +4163,6 @@
 					{
 						m_id = 1407188095
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -4360,7 +4312,6 @@
 					{
 						m_id = 1455802856
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "stancepose"
@@ -4382,7 +4333,6 @@
 					{
 						m_id = 1458860072
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -4443,7 +4393,6 @@
 					{
 						m_id = 1516773827
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -4467,8 +4416,8 @@
 					}
 					m_lookatChainName = "head"
 					m_attachmentName = "lookaim"
-					m_flYawLimit = 45.0
-					m_flPitchLimit = 45.0
+					m_flYawLimit = 30.0
+					m_flPitchLimit = 120.0
 					m_bResetBase = true
 					m_bLockWhenWaning = true
 					m_bUseHysteresis = false
@@ -4481,6 +4430,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -4498,7 +4449,6 @@
 					{
 						m_id = 1569776558
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "hands"
 					m_inputConnection1 = 
@@ -4552,7 +4502,6 @@
 					{
 						m_id = 1598518779
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -4590,6 +4539,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -4607,7 +4558,6 @@
 					{
 						m_id = 1649834858
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -4682,7 +4632,6 @@
 					{
 						m_id = 1657815335
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -4749,6 +4698,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -4766,7 +4717,6 @@
 					{
 						m_id = 1670380065
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "shotgun_aim"
 					m_nFrameIndex = 0
@@ -4787,7 +4737,6 @@
 					{
 						m_id = 1681320708
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "jetpack_aim"
 					m_nFrameIndex = 2
@@ -4808,7 +4757,6 @@
 					{
 						m_id = 1701091856
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "revolver_aim"
 					m_nFrameIndex = 0
@@ -4829,7 +4777,6 @@
 					{
 						m_id = 1756824905
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "walk_forward"
@@ -4851,7 +4798,6 @@
 					{
 						m_id = 1768773564
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -5008,7 +4954,6 @@
 					{
 						m_id = 1780659587
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -5083,7 +5028,6 @@
 					{
 						m_id = 1810277198
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "scratch_loop"
@@ -5105,7 +5049,6 @@
 					{
 						m_id = 1826122487
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -5223,7 +5166,6 @@
 					{
 						m_id = 1856264129
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "mid_air"
@@ -5245,7 +5187,6 @@
 					{
 						m_id = 1864898329
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "lowhp"
@@ -5267,7 +5208,6 @@
 					{
 						m_id = 1897445146
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "bat_aim"
 					m_nFrameIndex = 0
@@ -5288,7 +5228,6 @@
 					{
 						m_id = 1921770054
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "lookaround"
@@ -5310,7 +5249,6 @@
 					{
 						m_id = 1927793168
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "stancepose"
 					m_nFrameIndex = 0
@@ -5331,7 +5269,6 @@
 					{
 						m_id = 1932366709
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "bat_fire"
@@ -5353,7 +5290,6 @@
 					{
 						m_id = 1944337827
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "damage_slide"
@@ -5375,7 +5311,6 @@
 					{
 						m_id = 1977891491
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "lowhp_up"
@@ -5397,7 +5332,6 @@
 					{
 						m_id = 1998049552
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -5547,7 +5481,6 @@
 					{
 						m_id = 2016484433
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "aiming"
 					m_inputConnection1 = 
@@ -5601,7 +5534,6 @@
 					{
 						m_id = 2028934485
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "cough"
@@ -5623,7 +5555,6 @@
 					{
 						m_id = 2126473301
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "idlemask"
 					m_inputConnection1 = 
@@ -5677,7 +5608,6 @@
 					{
 						m_id = 2140454750
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -5744,6 +5674,8 @@
 						m_fSpeedScale = 1.0
 						m_fMinSpeed = 10.0
 						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -5761,7 +5693,6 @@
 					{
 						m_id = 2142216896
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "incline_correct_top_add"
 					m_nFrameIndex = 0
@@ -5783,14 +5714,11 @@
 					m_id = 1586547244
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_fDefaultValue = 0.0
 				m_fMinValue = -45.0
 				m_fMaxValue = 45.0
-				m_bInterpolate = false
 			},
 			{
 				_class = "CFloatAnimParameter"
@@ -5800,14 +5728,11 @@
 					m_id = 1366017252
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_fDefaultValue = 0.0
 				m_fMinValue = 0.0
 				m_fMaxValue = 1.0
-				m_bInterpolate = false
 			},
 			{
 				_class = "CFloatAnimParameter"
@@ -5817,14 +5742,11 @@
 					m_id = 2085939065
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_fDefaultValue = 0.0
 				m_fMinValue = -90.0
 				m_fMaxValue = 90.0
-				m_bInterpolate = false
 			},
 			{
 				_class = "CEnumAnimParameter"
@@ -5834,10 +5756,8 @@
 					m_id = 1364134191
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_defaultValue = 0
 				m_enumOptions = 
 				[
@@ -5862,10 +5782,8 @@
 					m_id = 2115413904
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -5876,10 +5794,8 @@
 					m_id = 1855991579
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = true
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -5890,10 +5806,8 @@
 					m_id = 759073846
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = false
 				m_bUseMostRecentValue = false
 				m_bAutoReset = true
-				m_bPredicted = false
 				m_bDefaultValue = false
 			},
 			{
@@ -5904,10 +5818,8 @@
 					m_id = 1584813805
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = true
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -5918,10 +5830,8 @@
 					m_id = 1663111264
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = false
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_bDefaultValue = false
 			},
 			{
@@ -5932,14 +5842,11 @@
 					m_id = 175958271
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_fDefaultValue = 0.0
 				m_fMinValue = -1.0
 				m_fMaxValue = 1.0
-				m_bInterpolate = false
 			},
 			{
 				_class = "CBoolAnimParameter"
@@ -5949,10 +5856,8 @@
 					m_id = 1823472739
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -5963,10 +5868,8 @@
 					m_id = 1673910444
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -5977,10 +5880,8 @@
 					m_id = 2130746682
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -5991,12 +5892,9 @@
 					m_id = 1721277431
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = false
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_defaultValue = [ 0.0, 0.0, 0.0 ]
-				m_bInterpolate = true
 			},
 			{
 				_class = "CFloatAnimParameter"
@@ -6006,14 +5904,11 @@
 					m_id = 652798595
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = false
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_fDefaultValue = 0.0
 				m_fMinValue = 0.0
 				m_fMaxValue = 1.0
-				m_bInterpolate = false
 			},
 			{
 				_class = "CFloatAnimParameter"
@@ -6023,14 +5918,11 @@
 					m_id = 1541473524
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_fDefaultValue = 0.0
 				m_fMinValue = -18.0
 				m_fMaxValue = 18.0
-				m_bInterpolate = false
 			},
 			{
 				_class = "CEnumAnimParameter"
@@ -6040,10 +5932,8 @@
 					m_id = 284938255
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_defaultValue = 0
 				m_enumOptions = 
 				[
@@ -6059,10 +5949,8 @@
 					m_id = 160748264
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = true
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -6073,10 +5961,8 @@
 					m_id = 1820284138
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = true
-				m_bPredicted = false
 				m_bDefaultValue = false
 			},
 			{
@@ -6087,12 +5973,9 @@
 					m_id = 1799207469
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = true
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_defaultValue = [ 0.0, 0.0, 0.0 ]
-				m_bInterpolate = false
 			},
 			{
 				_class = "CFloatAnimParameter"
@@ -6102,14 +5985,11 @@
 					m_id = 1153540060
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = true
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_fDefaultValue = 0.001
 				m_fMinValue = 0.0
 				m_fMaxValue = 1.0
-				m_bInterpolate = false
 			},
 			{
 				_class = "CVectorAnimParameter"
@@ -6119,12 +5999,9 @@
 					m_id = 1360333862
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = true
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_defaultValue = [ 0.0, 0.0, 0.0 ]
-				m_bInterpolate = false
 			},
 			{
 				_class = "CIntAnimParameter"
@@ -6134,10 +6011,8 @@
 					m_id = 181409537
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = true
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_defaultValue = 20
 				m_minValue = 0
 				m_maxValue = 127
@@ -6150,10 +6025,8 @@
 					m_id = 365443360
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = true
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = false
 				m_bDefaultValue = false
 			},
 		]
@@ -6188,8 +6061,6 @@
 			},
 			{
 				_class = "CAnimGraphNetworkSettings"
-				m_bNetworkingEnabled = true
-				m_defaultNetworkMode = "ServerAuthoritative"
 			},
 		]
 	}
@@ -6206,7 +6077,14 @@
 	[
 		{
 			m_name = "models/cosmetics/skeleton/skeleton_grub.vmdl"
-			m_bEnabled = true
+			m_bEnabled = false
 		},
 	]
+	m_cameraSettings = 
+	{
+		m_flFov = 60.0
+		m_sLockBoneName = "neck_0"
+		m_bLockCamera = false
+		m_bViewModelCamera = false
+	}
 }

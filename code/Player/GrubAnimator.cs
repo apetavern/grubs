@@ -11,12 +11,20 @@ public sealed class GrubAnimator : Component
 
 	private float _incline;
 
+	private Vector3 _looktarget;
+
 	protected override void OnUpdate()
 	{
 		Grub.Set( "aimangle", Controller.EyeRotation.Pitch() * -Controller.Facing );
 		Grub.Set( "grounded", Controller.IsGrounded );
 		Grub.Set( "holdpose", 0 );
 		Grub.Set( "velocity", Controller.Velocity.Length );
+
+		Grub.Set( "lookatweight", MathX.Lerp( Grub.GetFloat( "lookatweight" ), Controller.IsGrounded ? 1f : 0f, 0.2f ) );
+
+		_looktarget = Vector3.Lerp( _looktarget, Transform.World.PointToLocal( Scene.Camera.Transform.Position ), Time.Delta * 5f );
+
+		Grub.Set( "looktarget", _looktarget );
 
 		var tr = Scene.Trace
 			.Ray(
