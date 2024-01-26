@@ -823,7 +823,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 1440804656
+									m_id = 1047690013
 								}
 								m_outputID = 
 								{
@@ -3703,6 +3703,59 @@
 			{
 				key = 
 				{
+					m_id = 1047690013
+				}
+				value = 
+				{
+					_class = "CBoneMaskAnimNode"
+					m_sName = "idlemask"
+					m_vecPosition = [ 544.0, 288.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1047690013
+					}
+					m_sNote = ""
+					m_weightListName = "idlemask"
+					m_inputConnection1 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 968698486
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_inputConnection2 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 1440804656
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_blendSpace = "BlendSpace_Parent"
+					m_bUseBlendScale = false
+					m_blendValueSource = "Parameter"
+					m_blendParameter = 
+					{
+						m_id = 4294967295
+					}
+					m_timingBehavior = "UseChild2"
+					m_flTimingBlend = 0.5
+					m_flRootMotionBlend = 0.0
+					m_footMotionTiming = "Child1"
+					m_bResetChild1 = true
+					m_bResetChild2 = true
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 1118718718
 				}
 				value = 
@@ -4172,7 +4225,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 544.0, 192.0 ]
+					m_vecPosition = [ 544.0, 400.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1347390929
@@ -4407,7 +4460,7 @@
 				{
 					_class = "CCycleControlAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 544.0, 256.0 ]
+					m_vecPosition = [ 544.0, 352.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1440804656
@@ -5409,7 +5462,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 544.0, 320.0 ]
+					m_vecPosition = [ 544.0, 224.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2010724009
