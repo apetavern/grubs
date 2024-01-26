@@ -8,5 +8,5 @@ public sealed class Grub : Component
 {
 	[Property] public required HealthComponent Health { get; set; }
 
-	[Sync] public string Name { get; set; } = "";
+	[Sync] public string Name { get; set; } = "Grubby";
 }

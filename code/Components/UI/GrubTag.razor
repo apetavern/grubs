@@ -1,0 +1,43 @@
+@using Grubs.Player
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+    <div class="hp">@_health.CeilToInt()</div>
+    <div class="title">@Grub.Name</div>
+</root>
+
+@code
+{
+    [Property] public required Grub Grub { get; set; }
+
+    private float _health;
+    private float _transitionRate = 25f;
+
+    protected override void OnStart()
+    {
+        base.OnStart();
+
+        Transform.Position = Grub.Transform.Position + Vector3.Up * 44f;
+        _health = Grub.Health.CurrentHealth;
+    }
+
+    protected override void OnUpdate()
+    {
+        if (_health != Grub.Health.CurrentHealth)
+        {
+            var delta = Grub.Health.CurrentHealth < _health ? -1 : 1;
+            var health = _health + delta * Time.Delta * _transitionRate;
+            _health = health.Clamp(Math.Min(_health, Grub.Health.CurrentHealth), Math.Max(_health, Grub.Health.CurrentHealth));
+        }
+    }
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, _health);
+    }
+}

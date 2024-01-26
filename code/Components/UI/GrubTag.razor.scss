@@ -1,0 +1,41 @@
+GrubTag {
+    border-radius: 20px;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    .title {
+        background-color: #91F06E;
+        color: white;
+        border-radius: 12px;
+        font-size: 96px;
+        font-weight: bolder;
+        font-family: Poppins;
+        margin-top: -12px;
+        z-index: 0;
+        width: 100%;
+        height: 50%;
+        align-items: center;
+        justify-content: center;
+        text-stroke: 8px black;
+
+        > label {
+            top: 8px;
+        }
+    }
+
+    .hp {
+        background-color: #91F06E;
+        color: white;
+        z-index: 1;
+        border-radius: 12px;
+        font-size: 72px;
+        font-weight: bold;
+        width: 30%;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-end;
+        margin-right: 12px;
+        text-stroke: 6px black;
+    }
+}

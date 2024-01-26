@@ -6,7 +6,6 @@
       "Name": "Menu Camera",
       "Position": "-2194.694,1256.365,288.1016",
       "Rotation": "-0.008123212,0.005402988,0.8326037,0.5537851",
-      "Enabled": true,
       "Components": [
         {
           "__type": "CameraComponent",
@@ -32,7 +31,6 @@
       "Position": "-512,-1024,256",
       "Rotation": "0.0000000444179,-0.000000002547514,0.7071068,0.7071068",
       "Tags": "maincamera",
-      "Enabled": true,
       "Components": [
         {
           "__type": "CameraComponent",
@@ -718,6 +716,31 @@
               "Start": "0,0,-5",
               "Static": false,
               "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "15cc7f0a-5db9-498e-a11d-45be16ec4fe5",
+          "Name": "UI",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "WorldPanel",
+              "HorizontalAlign": "Center",
+              "LookAtCamera": true,
+              "PanelSize": "1024,350",
+              "RenderScale": 1,
+              "VerticalAlign": "Center"
+            },
+            {
+              "__type": "GrubTag",
+              "Grub": {
+                "_type": "component",
+                "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
+                "component_type": "Grub"
+              },
+              "MyStringValue": "Test 123"
             }
           ]
         }
