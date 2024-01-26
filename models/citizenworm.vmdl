@@ -927,9 +927,9 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						enable_scale = false
-						source_filename = "models/citizenworm.fbx"
-						start_frame = 79
-						end_frame = 84
+						source_filename = "models/character_animations/citizenworm_backflip_charge.fbx"
+						start_frame = 0
+						end_frame = 5
 						framerate = -1.0
 						take = 0
 						reverse = false
