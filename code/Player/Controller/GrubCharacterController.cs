@@ -211,7 +211,6 @@ public class GrubCharacterController : Component
 
 	protected void OnLanded()
 	{
-		Log.Info( "OnLanded" );
 		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
 	}

@@ -1,4 +1,6 @@
-﻿namespace Grubs.Player.Controller;
+﻿using Grubs.Components;
+
+namespace Grubs.Player.Controller;
 
 public partial class GrubPlayerController
 {
@@ -29,6 +31,13 @@ public partial class GrubPlayerController
 			return;
 
 		if ( FallVelocity > FallVelocityDamageThreshold )
-			Log.Info( "Apply fall damage" );
+			ApplyFallDamage();
+	}
+
+	private void ApplyFallDamage()
+	{
+		var fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
+		var health = GameObject.Components.Get<HealthComponent>();
+		health?.TakeDamage( fallDamage );
 	}
 }
