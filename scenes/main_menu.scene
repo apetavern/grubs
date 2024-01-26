@@ -1,0 +1,96 @@
+{
+  "Id": "1aef78f6-e507-47ac-8724-74f92c9ec5db",
+  "GameObjects": [
+    {
+      "Id": "2e35c746-223e-47ab-9608-440dd81bc057",
+      "Name": "Map",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "MapInstance",
+          "MapName": "maps/gr_menu.vpk",
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "Id": "91464b46-2177-41fc-84e8-6a639bcabac9",
+      "Name": "Camera",
+      "Position": "-59.19152,-75.90276,35.9887",
+      "Rotation": "0.01079825,-0.01079825,0.7070243,0.7070243",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CameraComponent",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 80,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    },
+    {
+      "Id": "2f773373-3d4a-4d90-a19f-f27ad74cc00d",
+      "Name": "Spot Light",
+      "Position": "-70.78873,-153.7505,126.6426",
+      "Rotation": "-0.157559,0.2053349,0.5880182,0.7663205",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SpotLight",
+          "Attenuation": 1,
+          "ConeInner": 35,
+          "ConeOuter": 45,
+          "Cookie": null,
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "1,0.96262,0.91373,1",
+          "Radius": 500,
+          "Shadows": true
+        }
+      ]
+    },
+    {
+      "Id": "5759e5a3-a78f-41d5-8043-c46cbcd9e79b",
+      "Name": "Object",
+      "Position": "-32,32,100",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "VolumetricFogVolume",
+          "Bounds": {
+            "Mins": "-150,-150,-100",
+            "Maxs": "150,150,100"
+          },
+          "FalloffExponent": 1,
+          "Strength": 10
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true
+  },
+  "Title": "main_menu",
+  "Description": "",
+  "__references": []
+}
