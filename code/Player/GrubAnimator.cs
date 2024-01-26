@@ -30,12 +30,15 @@ public sealed class GrubAnimator : Component
 
 		var tr = Scene.Trace
 			.Ray(
-				Controller.Transform.Position + Controller.Transform.Rotation.Up * 10f,
+				Controller.Transform.Position
+				+ Controller.Transform.Rotation.Forward * 4f
+				+ Controller.Transform.Rotation.Up * 10f,
 				Controller.Transform.Position + Controller.Transform.Rotation.Down * 128 )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();
 		_incline = MathX.Lerp( _incline, Controller.Transform.Rotation.Forward.Angle( tr.Normal ) - 90f, 0.2f );
 		Grub.Set( "incline", _incline );
 		Grub.Set( "backflip_charge", Controller.BackflipCharge );
+		Grub.Set( "hardfall", Controller.IsHardFalling );
 	}
 }

@@ -142,6 +142,12 @@ public class GrubCharacterController : Component
 		Velocity = mover.Velocity;
 	}
 
+	public void ReleaseFromGround()
+	{
+		IsOnGround = false;
+		Controller.LastGroundHeight = Transform.Position.z;
+	}
+
 	private void CategorizePosition()
 	{
 		var pos = Transform.Position;
@@ -205,10 +211,9 @@ public class GrubCharacterController : Component
 
 	protected void OnLanded()
 	{
+		Log.Info( "OnLanded" );
+		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
-		// var plycontr = GameObject.Components.Get<GrubPlayerController>( FindMode.InSelf );
-		// plycontr.TriggerLandingEvent( MathF.Abs( LastVelocity.z ) );
-		//Log.Info( $"Character landed at {LastVelocity.z} velocity" );
 	}
 
 	/// <summary>

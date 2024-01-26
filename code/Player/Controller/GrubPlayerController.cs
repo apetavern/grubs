@@ -2,7 +2,7 @@
 
 [Title( "Grubs - Player Controller" )]
 [Category( "Grubs" )]
-public sealed class GrubPlayerController : Component
+public sealed partial class GrubPlayerController : Component
 {
 	[Property] public required GameObject Body { get; set; }
 	[Property] public required GameObject Head { get; set; }
@@ -18,10 +18,9 @@ public sealed class GrubPlayerController : Component
 	public int Facing { get; set; } = 1;
 	public int LastFacing { get; set; } = 1;
 	[Sync] public Rotation EyeRotation { get; set; }
-	[Sync] public bool IsChargingBackflip { get; set; } = false;
-	[Sync] public float BackflipCharge { get; set; } = 0;
+	[Sync] public bool IsChargingBackflip { get; set; }
+	[Sync] public float BackflipCharge { get; set; }
 	public bool IsGrounded => CharacterController.IsOnGround;
-	public float CurrentGroundAngle => CharacterController.CurrentGroundAngle;
 	public Vector3 Velocity => CharacterController.Velocity;
 
 	protected override void OnUpdate()
@@ -41,6 +40,7 @@ public sealed class GrubPlayerController : Component
 
 		UpdateJump();
 		UpdateBackflip();
+		UpdateFallVelocity();
 
 		if ( IsGrounded )
 		{
@@ -101,7 +101,7 @@ public sealed class GrubPlayerController : Component
 		if ( Input.Pressed( "jump" ) && IsGrounded )
 		{
 			CharacterController.Velocity = new Vector3( Facing * 175f, 0f, 220f );
-			CharacterController.IsOnGround = false;
+			CharacterController.ReleaseFromGround();
 		}
 	}
 
@@ -122,7 +122,7 @@ public sealed class GrubPlayerController : Component
 	{
 		CharacterController.Velocity =
 			new Vector3( -Facing * (50f + 75f * BackflipCharge), 0f, 150f + 220f * BackflipCharge );
-		CharacterController.IsOnGround = false;
+		CharacterController.ReleaseFromGround();
 
 		IsChargingBackflip = false;
 		BackflipCharge = 0f;
