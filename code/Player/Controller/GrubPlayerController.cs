@@ -77,7 +77,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateLookAngles()
 	{
-		var nextFacing = Transform.Rotation.z < 0 ? -1 : 1;
+		var nextFacing = Transform.Rotation.z <= 0 ? -1 : 1;
 
 		var look = (LookAngles + LookInput * nextFacing).Normal;
 		LookAngles = look.WithPitch( look.pitch.Clamp( -80f, 75f ) )
