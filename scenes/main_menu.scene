@@ -19,8 +19,8 @@
     {
       "Id": "91464b46-2177-41fc-84e8-6a639bcabac9",
       "Name": "Camera",
-      "Position": "-59.19152,-75.90276,35.9887",
-      "Rotation": "0.01079825,-0.01079825,0.7070243,0.7070243",
+      "Position": "-85,-105,25",
+      "Rotation": "0.028038,-0.03341439,0.6421758,0.7653154",
       "Tags": "maincamera",
       "Enabled": true,
       "Components": [
@@ -28,7 +28,7 @@
           "__type": "CameraComponent",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
-          "FieldOfView": 80,
+          "FieldOfView": 60,
           "IsMainCamera": true,
           "Orthographic": false,
           "OrthographicHeight": 1204,
@@ -37,8 +37,30 @@
           "RenderTags": "",
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
-          "ZFar": 10000,
+          "ZFar": 2000,
           "ZNear": 10
+        },
+        {
+          "__type": "ColorAdjustments",
+          "Brightness": 1,
+          "Contrast": 1.01,
+          "HueRotate": 0,
+          "Saturation": 1.05
+        },
+        {
+          "__type": "Vignette",
+          "Center": "0.5,0.5",
+          "Color": "0,0,0,1",
+          "Intensity": 0.3,
+          "Roundness": 0.35,
+          "Smoothness": 1
+        },
+        {
+          "__type": "DepthOfField",
+          "BackBlur": true,
+          "BlurSize": 25,
+          "FocalDistance": 135,
+          "FrontBlur": false
         }
       ]
     },
@@ -65,7 +87,7 @@
     },
     {
       "Id": "5759e5a3-a78f-41d5-8043-c46cbcd9e79b",
-      "Name": "Object",
+      "Name": "Fog",
       "Position": "-32,32,100",
       "Enabled": true,
       "Components": [
@@ -76,7 +98,7 @@
             "Maxs": "150,150,100"
           },
           "FalloffExponent": 1,
-          "Strength": 10
+          "Strength": 5
         }
       ]
     }
