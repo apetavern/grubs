@@ -19,8 +19,12 @@ public sealed class GrubAnimator : Component
 	{
 		GrubRenderer.Set( "aimangle", Controller.EyeRotation.Pitch() * -Controller.Facing );
 		GrubRenderer.Set( "grounded", Controller.IsGrounded );
-		GrubRenderer.Set( "holdpose", (int)(Grub.ActiveEquipment?.HoldPose ?? HoldPose.None) );
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
+
+		var holdPose = HoldPose.None;
+		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() )
+			holdPose = Grub.ActiveEquipment.HoldPose;
+		GrubRenderer.Set( "holdpose", (int)holdPose );
 
 		var shouldLookAt = Controller.IsGrounded && Grub.ActiveEquipment is null
 		                                         && !GrubRenderer.GetBool( "lowhp" )

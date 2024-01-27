@@ -247,10 +247,20 @@
             "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
             "component_type": "EquipmentComponent"
           },
+          "CharacterController": {
+            "_type": "component",
+            "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
+            "component_type": "GrubCharacterController"
+          },
           "Health": {
             "_type": "component",
             "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
             "component_type": "HealthComponent"
+          },
+          "PlayerController": {
+            "_type": "component",
+            "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
+            "component_type": "GrubPlayerController"
           }
         },
         {
@@ -807,6 +817,7 @@
       "Components": [
         {
           "__type": "SkinnedModelRenderer",
+          "__enabled": false,
           "BodyGroups": 18446744073709551615,
           "BoneMergeTarget": null,
           "CreateBoneObjects": false,

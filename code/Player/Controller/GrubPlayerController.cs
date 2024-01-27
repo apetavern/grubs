@@ -140,4 +140,9 @@ public sealed partial class GrubPlayerController : Component
 
 		return result;
 	}
+
+	public bool ShouldShowWeapon()
+	{
+		return Velocity.IsNearlyZero( 2.5f ) && IsGrounded && !IsChargingBackflip;
+	}
 }

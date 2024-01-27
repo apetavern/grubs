@@ -9,6 +9,8 @@ namespace Grubs.Player;
 public sealed class Grub : Component
 {
 	[Property] public required HealthComponent Health { get; set; }
+	[Property] public required GrubPlayerController PlayerController { get; set; }
+	[Property] public required GrubCharacterController CharacterController { get; set; }
 	[Property] public EquipmentComponent? ActiveEquipment { get; set; }
 
 	private EquipmentComponent? LastEquipped { get; set; }
@@ -19,7 +21,7 @@ public sealed class Grub : Component
 	{
 		base.OnStart();
 
-		ActiveEquipment?.Equip( Components.Get<SkinnedModelRenderer>() );
+		ActiveEquipment?.Deploy( this );
 	}
 
 	protected override void OnUpdate()
@@ -38,7 +40,7 @@ public sealed class Grub : Component
 			controller.LookAngles = Rotation.FromPitch( 0f ).Angles();
 
 			ActiveEquipment = LastEquipped;
-			ActiveEquipment?.Equip( Components.Get<SkinnedModelRenderer>() );
+			ActiveEquipment?.Deploy( this );
 		}
 		else
 		{
