@@ -3,20 +3,29 @@
 @using Grubs.Player
 @using Sandbox;
 @using Sandbox.UI;
+@using Sandbox.Utility
 
 @inherits PanelComponent
 
 <root>
-    <div class="hp" style="background-color: @Color.Hex">
-        <label>
-            @_health.CeilToInt()
-        </label>
-        <i>favorite</i>
+    <div class="top">
+
+        <div class="hp" style="background-color: @Color.Hex">
+            <label>
+                @_health.CeilToInt()
+            </label>
+            <i>favorite</i>
+        </div>
     </div>
     <div
         class="title"
         style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));
                border-bottom-color: darken(adjust-hue(@Color.Hex, 45), 50%)">
+        @* <div class="avi"> *@
+        @*     <image *@
+        @*         src="avatar:@(Grub.Network.OwnerConnection?.SteamId ?? Steam.SteamId)" *@
+        @*         style="background-color: @Color.Hex; border-color: @Color.Hex"/> *@
+        @* </div> *@
         @Grub.Name
     </div>
 </root>

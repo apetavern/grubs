@@ -4,6 +4,18 @@ GrubTag {
     width: 100%;
     height: 100%;
 
+    .top {
+        width: 100%;
+    }
+
+    .avi {
+        > image {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+    }
+
     .title {
         color: white;
         border-radius: 24px;
@@ -28,7 +40,8 @@ GrubTag {
     .hp {
         color: white;
         z-index: 1;
-        border-radius: 24px;
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
         font-size: 64px;
         font-weight: bold;
         margin-right: 16px;
@@ -36,6 +49,7 @@ GrubTag {
         align-items: center;
         justify-content: center;
         align-self: flex-end;
+        margin-left: auto;
         text-stroke: 10px black;
         gap: 8px;
 
