@@ -1,19 +1,28 @@
+@namespace Grubs.Components.UI
+
 @using Grubs.Player
 @using Sandbox;
 @using Sandbox.UI;
+
 @inherits PanelComponent
 
 <root>
-    <div class="hp">@_health.CeilToInt()</div>
-    <div class="title">@Grub.Name</div>
+    <div class="hp" style="background-color: @Color.Hex">
+        <label>
+            @_health.CeilToInt()
+        </label>
+        <i>favorite</i>
+    </div>
+    <div class="title" style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45))">@Grub.Name</div>
 </root>
 
 @code
 {
     [Property] public required Grub Grub { get; set; }
+    [Property] public Color Color { get; set; }
 
     private float _health;
-    private float _transitionRate = 25f;
+    private const float _transitionRate = 25f;
 
     protected override void OnStart()
     {
@@ -38,6 +47,6 @@
     /// </summary>
     protected override int BuildHash()
     {
-        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, _health);
+        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, _health, Color.Hex);
     }
 }

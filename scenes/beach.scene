@@ -735,12 +735,12 @@
             },
             {
               "__type": "GrubTag",
+              "Color": "0,0.93333,1,1",
               "Grub": {
                 "_type": "component",
                 "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
                 "component_type": "Grub"
-              },
-              "MyStringValue": "Test 123"
+              }
             }
           ]
         }
