@@ -11,6 +11,8 @@ public sealed class GrubAnimator : Component
 	[Property] public required SkinnedModelRenderer GrubRenderer { get; set; }
 	[Property] public required GrubPlayerController Controller { get; set; }
 
+	public bool Thinking;
+
 	private float _incline;
 
 	private Vector3 _looktarget;
@@ -20,6 +22,7 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "aimangle", Controller.EyeRotation.Pitch() * -Controller.Facing );
 		GrubRenderer.Set( "grounded", Controller.IsGrounded );
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
+		GrubRenderer.Set( "bot_thinking", Thinking );
 
 		var holdPose = HoldPose.None;
 		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() )
