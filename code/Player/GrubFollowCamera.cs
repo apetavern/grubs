@@ -26,10 +26,12 @@ public class GrubFollowCamera : Component
 
 	private void AdjustHighlightOutline()
 	{
-		if ( !Target.Components.TryGet( out HighlightOutline highlight ) )
-			return;
+		var highlights = Scene.GetAllComponents<HighlightOutline>();
 
-		var desiredWidth = (1 / Distance * 100).Clamp( 0f, 0.35f );
-		highlight.Width = highlight.Width.LerpTo( desiredWidth, Time.Delta * 5f );
+		foreach ( var highlight in highlights )
+		{
+			var desiredWidth = (1 / Distance * 100).Clamp( 0f, 0.35f );
+			highlight.Width = highlight.Width.LerpTo( desiredWidth, Time.Delta * 5f );
+		}
 	}
 }
