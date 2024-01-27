@@ -1,13 +1,87 @@
 {
   "RootObject": {
     "Id": "1a7e2249-e9d1-4460-9922-120304b1db14",
-    "Name": "BotBrain",
-    "Position": "-421.668,119.113,429.0407",
+    "Name": "botbrain",
     "Enabled": true,
     "Components": [
       {
         "__type": "BotBrain",
-        "BrainAction": null
+        "ActiveGrub": null,
+        "BrainAction": {
+          "Kind": "Action",
+          "Version": 3,
+          "Variables": [
+            {
+              "Name": "_this",
+              "Type": "Sandbox.Game/Sandbox.Component",
+              "Default": {
+                "_type": "component",
+                "go": "1a7e2249-e9d1-4460-9922-120304b1db14",
+                "component_type": "BotBrain"
+              }
+            }
+          ],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "botbrain.base",
+              "UserData": {
+                "Position": "192,0"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "botbrain.thinking",
+              "UserData": {
+                "Position": "400,0"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.apetavern.grubs/BotBrain"
+              },
+              "UserData": {
+                "Position": "-0,32"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "_target"
+            }
+          ],
+          "UserData": {
+            "Title": "Brain Action",
+            "id": "7ae78727-43ff-4f54-ac67-fda28b40e79e"
+          }
+        }
       }
     ]
   },
