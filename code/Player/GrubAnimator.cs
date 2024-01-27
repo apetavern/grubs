@@ -22,10 +22,12 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "holdpose", (int)(Grub.ActiveEquipment?.HoldPose ?? HoldPose.None) );
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
 
-		var ShouldLookAt = Controller.IsGrounded && !GrubRenderer.GetBool( "lowhp" ) && !Controller.IsChargingBackflip;
+		var shouldLookAt = Controller.IsGrounded && Grub.ActiveEquipment is null
+		                                         && !GrubRenderer.GetBool( "lowhp" )
+		                                         && !Controller.IsChargingBackflip;
 
 		GrubRenderer.Set( "lookatweight",
-			MathX.Lerp( GrubRenderer.GetFloat( "lookatweight" ), ShouldLookAt ? 1f : 0f,
+			MathX.Lerp( GrubRenderer.GetFloat( "lookatweight" ), shouldLookAt ? 1f : 0f,
 				0.2f ) );
 
 		_looktarget = Vector3.Lerp( _looktarget, new Vector3( 3f, 4f * -Controller.Facing, 0f ), Time.Delta * 5f );

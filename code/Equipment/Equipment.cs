@@ -8,5 +8,12 @@ public class EquipmentComponent : Component
 	public void Equip( SkinnedModelRenderer target )
 	{
 		Model.BoneMergeTarget = target;
+		Model.Enabled = true;
+	}
+
+	public void Holster()
+	{
+		Model.BoneMergeTarget = null;
+		Model.Enabled = false;
 	}
 }

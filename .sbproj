@@ -647,6 +647,11 @@
           "Name": "voice",
           "KeyboardCode": "v",
           "GroupName": "Other"
+        },
+        {
+          "Name": "toggle_equipment",
+          "KeyboardCode": "C",
+          "GroupName": "Other"
         }
       ]
     },
