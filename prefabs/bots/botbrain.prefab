@@ -1,0 +1,18 @@
+{
+  "RootObject": {
+    "Id": "1a7e2249-e9d1-4460-9922-120304b1db14",
+    "Name": "BotBrain",
+    "Position": "-421.668,119.113,429.0407",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "BotBrain",
+        "BrainAction": null
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
