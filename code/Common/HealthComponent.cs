@@ -1,4 +1,4 @@
-﻿namespace Grubs.Components;
+﻿namespace Grubs.Common;
 
 public class HealthComponent : Component
 {

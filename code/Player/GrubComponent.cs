@@ -1,4 +1,4 @@
-﻿using Grubs.Components;
+﻿using Grubs.Common;
 
 namespace Grubs.Player;
 

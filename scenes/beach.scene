@@ -293,10 +293,6 @@
           }
         },
         {
-          "__type": "HealthComponent",
-          "MaxHealth": 150
-        },
-        {
           "__type": "HighlightOutline",
           "Color": "0,0,0,1",
           "InsideColor": "0,0,0,0",
@@ -304,6 +300,10 @@
           "Material": null,
           "ObscuredColor": "0,0,0,0.4",
           "Width": 0.35
+        },
+        {
+          "__type": "HealthComponent",
+          "MaxHealth": 150
         }
       ],
       "Children": [
@@ -735,7 +735,7 @@
             },
             {
               "__type": "GrubTag",
-              "Color": "0,0.93333,1,1",
+              "Color": "0.51628,1,0.82264,1",
               "Grub": {
                 "_type": "component",
                 "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
