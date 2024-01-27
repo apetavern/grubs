@@ -26,7 +26,7 @@ public sealed class GrubAnimator : Component
 			holdPose = Grub.ActiveEquipment.HoldPose;
 		GrubRenderer.Set( "holdpose", (int)holdPose );
 
-		var shouldLookAt = Controller.IsGrounded && Grub.ActiveEquipment is null
+		var shouldLookAt = Controller.IsGrounded && (Grub.ActiveEquipment is null || !Controller.ShouldShowWeapon())
 		                                         && !GrubRenderer.GetBool( "lowhp" )
 		                                         && !Controller.IsChargingBackflip;
 
