@@ -242,6 +242,11 @@
         },
         {
           "__type": "Grub",
+          "ActiveEquipment": {
+            "_type": "component",
+            "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
+            "component_type": "EquipmentComponent"
+          },
           "Health": {
             "_type": "component",
             "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
@@ -287,6 +292,11 @@
             "component_type": "GrubPlayerController"
           },
           "Grub": {
+            "_type": "component",
+            "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
+            "component_type": "Grub"
+          },
+          "GrubRenderer": {
             "_type": "component",
             "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
             "component_type": "SkinnedModelRenderer"
@@ -786,6 +796,43 @@
           "Name": "Spawn (2)",
           "Position": "789.9045,-5.776825,57.7177",
           "Enabled": true
+        }
+      ]
+    },
+    {
+      "Id": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
+      "Name": "Bazooka",
+      "Position": "-477.0251,-240.1879,324.0206",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkinnedModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/weapons/bazooka/bazooka.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "EquipmentComponent",
+          "HoldPose": "Bazooka",
+          "Model": {
+            "_type": "component",
+            "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
+            "component_type": "SkinnedModelRenderer"
+          }
+        },
+        {
+          "__type": "HighlightOutline",
+          "Color": "0,0,0,1",
+          "InsideColor": "0,0,0,0",
+          "InsideObscuredColor": "0,0,0,0",
+          "Material": null,
+          "ObscuredColor": "0,0,0,0.4",
+          "Width": 0.35
         }
       ]
     }

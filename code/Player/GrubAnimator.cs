@@ -1,4 +1,5 @@
-﻿using Grubs.Player.Controller;
+﻿using Grubs.Equipment;
+using Grubs.Player.Controller;
 
 namespace Grubs.Player;
 
@@ -6,7 +7,8 @@ namespace Grubs.Player;
 [Category( "Grubs" )]
 public sealed class GrubAnimator : Component
 {
-	[Property] public required SkinnedModelRenderer Grub { get; set; }
+	[Property] public required Grub Grub { get; set; }
+	[Property] public required SkinnedModelRenderer GrubRenderer { get; set; }
 	[Property] public required GrubPlayerController Controller { get; set; }
 
 	private float _incline;
@@ -15,20 +17,20 @@ public sealed class GrubAnimator : Component
 
 	protected override void OnUpdate()
 	{
-		Grub.Set( "aimangle", Controller.EyeRotation.Pitch() * -Controller.Facing );
-		Grub.Set( "grounded", Controller.IsGrounded );
-		Grub.Set( "holdpose", 0 );
-		Grub.Set( "velocity", Controller.Velocity.Length );
+		GrubRenderer.Set( "aimangle", Controller.EyeRotation.Pitch() * -Controller.Facing );
+		GrubRenderer.Set( "grounded", Controller.IsGrounded );
+		GrubRenderer.Set( "holdpose", (int)(Grub.ActiveEquipment?.HoldPose ?? HoldPose.None) );
+		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
 
-		bool ShouldLookAt = Controller.IsGrounded && !Grub.GetBool( "lowhp" ) && !Controller.IsChargingBackflip;
+		var ShouldLookAt = Controller.IsGrounded && !GrubRenderer.GetBool( "lowhp" ) && !Controller.IsChargingBackflip;
 
-		Grub.Set( "lookatweight",
-			MathX.Lerp( Grub.GetFloat( "lookatweight" ), ShouldLookAt ? 1f : 0f,
+		GrubRenderer.Set( "lookatweight",
+			MathX.Lerp( GrubRenderer.GetFloat( "lookatweight" ), ShouldLookAt ? 1f : 0f,
 				0.2f ) );
 
 		_looktarget = Vector3.Lerp( _looktarget, new Vector3( 3f, 4f * -Controller.Facing, 0f ), Time.Delta * 5f );
 
-		Grub.Set( "looktarget", _looktarget );
+		GrubRenderer.Set( "looktarget", _looktarget );
 
 		var tr = Scene.Trace
 			.Ray(
@@ -39,8 +41,8 @@ public sealed class GrubAnimator : Component
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();
 		_incline = MathX.Lerp( _incline, Controller.Transform.Rotation.Forward.Angle( tr.Normal ) - 90f, 0.2f );
-		Grub.Set( "incline", _incline );
-		Grub.Set( "backflip_charge", Controller.BackflipCharge );
-		Grub.Set( "hardfall", Controller.IsHardFalling );
+		GrubRenderer.Set( "incline", _incline );
+		GrubRenderer.Set( "backflip_charge", Controller.BackflipCharge );
+		GrubRenderer.Set( "hardfall", Controller.IsHardFalling );
 	}
 }
