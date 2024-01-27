@@ -13,7 +13,12 @@
         </label>
         <i>favorite</i>
     </div>
-    <div class="title" style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45))">@Grub.Name</div>
+    <div
+        class="title"
+        style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));
+               border-bottom-color: darken(adjust-hue(@Color.Hex, 45), 50%)">
+        @Grub.Name
+    </div>
 </root>
 
 @code
