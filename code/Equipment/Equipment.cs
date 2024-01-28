@@ -2,6 +2,8 @@
 
 namespace Grubs.Equipment;
 
+[Title( "Grubs - Equipment" )]
+[Category( "Equipment" )]
 public class EquipmentComponent : Component
 {
 	[Property] public required SkinnedModelRenderer Model { get; set; }

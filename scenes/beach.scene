@@ -844,6 +844,81 @@
           "Material": null,
           "ObscuredColor": "0,0,0,0.4",
           "Width": 0.35
+        },
+        {
+          "__type": "WeaponComponent",
+          "Equipment": {
+            "_type": "component",
+            "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
+            "component_type": "EquipmentComponent"
+          },
+          "FiringType": "Charged",
+          "OnFire": {
+            "Kind": "Action",
+            "Version": 3,
+            "Variables": [
+              {
+                "Name": "_this",
+                "Type": "Sandbox.Game/Sandbox.Component",
+                "Default": {
+                  "_type": "component",
+                  "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9"
+                }
+              }
+            ],
+            "Nodes": [
+              {
+                "Id": 0,
+                "Type": "input"
+              },
+              {
+                "Id": 1,
+                "Type": "grubs.spawn_projectile",
+                "UserData": {
+                  "Position": "304,-32"
+                }
+              },
+              {
+                "Id": 2,
+                "Type": "scene.get",
+                "Properties": {
+                  "T": "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
+                },
+                "UserData": {
+                  "Position": "-32,-112"
+                }
+              }
+            ],
+            "Links": [
+              {
+                "SrcId": 0,
+                "SrcName": "_signal",
+                "DstId": 1,
+                "DstName": "_signal"
+              },
+              {
+                "SrcId": 0,
+                "SrcName": "charge",
+                "DstId": 1,
+                "DstName": "charge"
+              },
+              {
+                "Value": "prefabs/bazooka_shell.prefab",
+                "DstId": 1,
+                "DstName": "projectile"
+              },
+              {
+                "SrcId": 2,
+                "SrcName": "_result",
+                "DstId": 1,
+                "DstName": "source"
+              }
+            ],
+            "UserData": {
+              "Title": "On Fire",
+              "id": "94d366b3-b003-4026-9a13-abc3d87be83d"
+            }
+          }
         }
       ]
     }

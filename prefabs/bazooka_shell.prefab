@@ -1,0 +1,36 @@
+{
+  "RootObject": {
+    "Id": "bd33082c-1bea-48da-9da7-2f6036e3aac0",
+    "Name": "bazooka_shell",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "SkinnedModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/weapons/shell/shell.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ProjectileComponent"
+      },
+      {
+        "__type": "HighlightOutline",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "Material": null,
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
