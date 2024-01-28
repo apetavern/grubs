@@ -1,38 +1,23 @@
 ﻿using Grubs.Player;
+using Grubs.Player.Controller;
 
 namespace Grubs.Equipment.Weapons;
 
-public class ProjectileComponent : Component
+[Title( "Grub - Projectile" )]
+[Category( "Equipment" )]
+public abstract class ProjectileComponent : Component
 {
 	[Property] public float ProjectileSpeed { get; set; } = 4f;
+	[Property] public required SkinnedModelRenderer Model { get; set; }
 
 	public WeaponComponent? Source { get; set; }
+	public Grub? Grub => Source?.Equipment.Grub;
+	public GrubPlayerController? PlayerController => Grub?.PlayerController;
+
 	public int Charge { get; set; }
 
-	public Vector3 Velocity { get; set; }
-
-	protected override void OnStart()
+	public void ViewReady()
 	{
-		if ( Source is null )
-			return;
-
-		var equipmentMuzzle = Source.Equipment.Model.GetAttachment( "muzzle" );
-		if ( equipmentMuzzle is null )
-			return;
-
-		Transform.Position = equipmentMuzzle.Value.Position;
-		Transform.Rotation = equipmentMuzzle.Value.Rotation;
-
-		if ( Source.Equipment.Grub is not { } grub )
-			return;
-
-		var controller = grub.PlayerController;
-		Velocity = controller.EyeRotation.Forward.Normal * controller.Facing * Charge * ProjectileSpeed;
-		var body = Components.Create<Rigidbody>();
-		body.ApplyImpulse( Velocity );
-	}
-
-	protected override void OnFixedUpdate()
-	{
+		Model.Enabled = true;
 	}
 }

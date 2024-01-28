@@ -1,11 +1,12 @@
 {
   "RootObject": {
-    "Id": "bd33082c-1bea-48da-9da7-2f6036e3aac0",
+    "Id": "31f366e5-9066-4d93-9bff-ab65dcd3147f",
     "Name": "bazooka_shell",
     "Enabled": true,
     "Components": [
       {
         "__type": "SkinnedModelRenderer",
+        "__enabled": false,
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
         "CreateBoneObjects": false,
@@ -16,9 +17,6 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ProjectileComponent"
-      },
-      {
         "__type": "HighlightOutline",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
@@ -26,6 +24,17 @@
         "Material": null,
         "ObscuredColor": "0,0,0,0.4",
         "Width": 0.25
+      },
+      {
+        "__type": "ArcProjectileComponent",
+        "MaxBounces": 0,
+        "Model": {
+          "_type": "component",
+          "go": "31f366e5-9066-4d93-9bff-ab65dcd3147f",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "ProjectileSpeed": 35,
+        "ShouldBounce": false
       }
     ]
   },

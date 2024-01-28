@@ -862,7 +862,8 @@
                 "Type": "Sandbox.Game/Sandbox.Component",
                 "Default": {
                   "_type": "component",
-                  "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9"
+                  "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
+                  "component_type": "SkinnedModelRenderer"
                 }
               }
             ],

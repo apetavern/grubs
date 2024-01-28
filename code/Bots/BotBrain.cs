@@ -2,11 +2,13 @@ using Grubs.Player.Controller;
 using Sandbox;
 using System.Threading.Tasks;
 
+namespace Grubs.Bots;
+
 public partial class BotBrain : Component
 {
-	[Property] public Func<Task> BrainAction { get; set; }
+	[Property] public Func<Task>? BrainAction { get; set; }
 
-	[Property] public GameObject ActiveGrub { get; set; }
+	[Property] public GameObject? ActiveGrub { get; set; }
 
 	protected override void OnStart()
 	{
