@@ -8,8 +8,24 @@
 @inherits PanelComponent
 
 <root>
+    <div
+        class="title"
+        style="color: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));">
+        @Grub.Name
+    </div>
+    <div class="health-container" style="background-color: darken(@Color.Hex, 60%)">
+        <div class="health-bar" style="width: @(_health / 150f * 100f)%; 
+        background-image: linear-gradient(@Color.Hex, darken(@Color.Hex, 20%))">
+            <div class="health-bar-overflow" style="width: @((_health - 150f) / 150f * 100f)%;
+            background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))"/>
+        </div>
+    </div>
+    @*<div class="avi">
+        <image
+            src="avatar:@(Grub.Network.OwnerConnection?.SteamId ?? Steam.SteamId)"
+            style="background-color: @Color.Hex; border-color: @Color.Hex"/>
+    </div>
     <div class="top">
-
         <div class="hp" style="background-color: @Color.Hex">
             <label>
                 @_health.CeilToInt()
@@ -21,13 +37,8 @@
         class="title"
         style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));
                border-bottom-color: darken(adjust-hue(@Color.Hex, 45), 50%)">
-        @* <div class="avi"> *@
-        @*     <image *@
-        @*         src="avatar:@(Grub.Network.OwnerConnection?.SteamId ?? Steam.SteamId)" *@
-        @*         style="background-color: @Color.Hex; border-color: @Color.Hex"/> *@
-        @* </div> *@
         @Grub.Name
-    </div>
+    </div>*@
 </root>
 
 @code
@@ -36,7 +47,7 @@
     [Property] public Color Color { get; set; }
 
     private float _health;
-    private const float _transitionRate = 25f;
+    private const float _transitionRate = 50f;
 
     protected override void OnStart()
     {

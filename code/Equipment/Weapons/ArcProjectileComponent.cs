@@ -21,9 +21,12 @@ public class ArcProjectileComponent : ProjectileComponent
 
 		if ( PlayerController is null )
 			return;
+
 		var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
 		Segments = CalculateTrajectory( dir, Charge );
-		Transform.Position = Segments[0].StartPos;
+		Transform.Position = Segments[0].StartPos.WithY( 512f );
+
+		ViewReady();
 	}
 
 	protected override void OnFixedUpdate()
@@ -50,8 +53,6 @@ public class ArcProjectileComponent : ProjectileComponent
 			currentSegment = Segments.FirstOrDefault();
 			UpdateFromArcSegment( currentSegment, _alpha );
 		}
-
-		ViewReady();
 	}
 
 	private void UpdateFromArcSegment( ArcSegment segment, float alpha )

@@ -49,4 +49,14 @@ public sealed class Grub : Component
 			ActiveEquipment = null;
 		}
 	}
+
+	[ConCmd( "gr_take_dmg" )]
+	public static void TakeDmgCmd( float hp )
+	{
+		var grub = GameManager.ActiveScene.GetAllComponents<Grub>().FirstOrDefault();
+		if ( grub is null )
+			return;
+
+		grub.Health.TakeDamage( hp );
+	}
 }

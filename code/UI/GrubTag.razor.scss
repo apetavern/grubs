@@ -1,60 +1,36 @@
 GrubTag {
-    border-radius: 20px;
     flex-direction: column;
     width: 100%;
     height: 100%;
-
-    .top {
-        width: 100%;
-    }
-
-    .avi {
-        > image {
-            width: 50px;
-            height: 50px;
-            border-radius: 100%;
-        }
-    }
+    justify-content: center;
+    align-items: center;
 
     .title {
-        color: white;
-        border-radius: 24px;
-        font-size: 96px;
-        font-weight: bolder;
+        font-size: 72px;
         font-family: Poppins;
-        margin-top: -12px;
-        z-index: 0;
-        width: 100%;
-        height: 55%;
-        align-items: center;
-        justify-content: center;
-        text-stroke: 12px black;
-        flex-shrink: 0;
-        border-bottom: 8px black;
-
-        > label {
-            top: 4px;
-        }
+        font-weight: bold;
+        text-stroke: 8px black;
+        text-overflow: ellipsis;
     }
 
-    .hp {
-        color: white;
-        z-index: 1;
-        border-top-left-radius: 24px;
-        border-top-right-radius: 24px;
-        font-size: 64px;
-        font-weight: bold;
-        margin-right: 16px;
-        padding: 12px;
-        align-items: center;
-        justify-content: center;
-        align-self: flex-end;
-        margin-left: auto;
-        text-stroke: 10px black;
-        gap: 8px;
+    .health-container {
+        width: 80%;
+        height: 36px;
+        border: 6px black;
+        border-radius: 12px;
+        background-color: darken(lightgreen, 60%);
+        flex-wrap: nowrap;
 
-        > i {
-            font-size: 48px;
+        .health-bar {
+            height: 100%;
+            background-image: linear-gradient(lightgreen, darken(lightgreen, 20%));
+            border-radius: 8px;
+        }
+
+        .health-bar-overflow {
+            height: 100%;
+            background-color: black;
+            border-radius: 8px;
         }
     }
 }

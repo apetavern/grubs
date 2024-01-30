@@ -79,7 +79,10 @@
         },
         {
           "__type": "GrubFollowCamera",
-          "Target": "1bf41274-2ee0-492e-a854-3c9d8fb24274"
+          "Target": {
+            "_type": "gameobject",
+            "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274"
+          }
         }
       ]
     },
@@ -270,14 +273,20 @@
             "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
             "component_type": "GrubAnimator"
           },
-          "Body": "3c577029-55ed-43b6-9430-b60fe668095f",
+          "Body": {
+            "_type": "gameobject",
+            "go": "3c577029-55ed-43b6-9430-b60fe668095f"
+          },
           "CharacterController": {
             "_type": "component",
             "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
             "component_type": "GrubCharacterController"
           },
           "Gravity": "0,0,800",
-          "Head": "2f21c45c-16cd-44da-a427-6d4d4423df97",
+          "Head": {
+            "_type": "gameobject",
+            "go": "2f21c45c-16cd-44da-a427-6d4d4423df97"
+          },
           "WishSpeed": 80
         },
         {
@@ -779,11 +788,24 @@
           "Components": [
             {
               "__type": "NetworkHelper",
-              "PlayerPrefab": "prefabs/grub.prefab",
+              "PlayerPrefab": {
+                "_type": "gameobject",
+                "go": "780085b8-d011-423b-bf7a-1739c8a0f479",
+                "prefab": "prefabs/grub.prefab"
+              },
               "SpawnPoints": [
-                "504b9b94-a176-4ef2-8d95-d6a747a75503",
-                "9dc026f3-462f-450c-a93d-6c267a247aae",
-                "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4"
+                {
+                  "_type": "gameobject",
+                  "go": "504b9b94-a176-4ef2-8d95-d6a747a75503"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "9dc026f3-462f-450c-a93d-6c267a247aae"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4"
+                }
               ],
               "StartServer": true
             }
@@ -904,7 +926,11 @@
                 "DstName": "charge"
               },
               {
-                "Value": "prefabs/bazooka_shell.prefab",
+                "Value": {
+                  "_type": "gameobject",
+                  "go": "08532a0f-a33b-4dd7-89ed-115e71d8e700",
+                  "prefab": "prefabs/bazooka_shell.prefab"
+                },
                 "DstId": 1,
                 "DstName": "projectile"
               },
@@ -935,5 +961,6 @@
   },
   "Title": "beach",
   "Description": "",
+  "LastSaved": "2024-01-30T18:08:42.9118941-04:00",
   "__references": []
 }

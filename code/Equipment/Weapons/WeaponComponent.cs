@@ -64,6 +64,6 @@ public partial class WeaponComponent : Component
 			.Radius( 1f )
 			.Run();
 
-		return tr.EndPosition;
+		return tr.EndPosition.WithY( 0f );
 	}
 }
