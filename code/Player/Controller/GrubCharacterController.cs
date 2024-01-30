@@ -24,6 +24,8 @@ public class GrubCharacterController : Component
 
 	[Property] public required GrubPlayerController Controller { get; set; }
 
+	[Property] public required LegacyParticleSystem LandingParticles { get; set; }
+
 	[Property] public TagSet IgnoreLayers { get; set; } = new();
 
 	public BBox BoundingBox => new(new Vector3( -Radius, -Radius, 0 ), new Vector3( Radius, Radius, Height ));
@@ -33,6 +35,8 @@ public class GrubCharacterController : Component
 	[Sync] public bool IsOnGround { get; set; }
 
 	[Sync] public float CurrentGroundAngle { get; set; }
+
+	public TimeSince TimeSinceLanding { get; set; }
 
 	protected override void DrawGizmos()
 	{
@@ -213,6 +217,8 @@ public class GrubCharacterController : Component
 	{
 		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
+		LandingParticles.Enabled = true;
+		TimeSinceLanding = TimeSinceLanding > 1f ? 0f : TimeSinceLanding;
 	}
 
 	/// <summary>
@@ -313,6 +319,14 @@ public class GrubCharacterController : Component
 		_stuckTries++;
 
 		return true;
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		base.OnFixedUpdate();
+
+		if ( TimeSinceLanding > 1f )
+			LandingParticles.Enabled = false;
 	}
 
 	public void Write( ref ByteStream stream )

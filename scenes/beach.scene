@@ -300,6 +300,11 @@
           "GroundAngle": 70,
           "Height": 30.99,
           "IgnoreLayers": "",
+          "LandingParticles": {
+            "_type": "component",
+            "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
+            "component_type": "LegacyParticleSystem"
+          },
           "Radius": 5,
           "StepHeight": 18
         },
@@ -333,6 +338,14 @@
         {
           "__type": "HealthComponent",
           "MaxHealth": 150
+        },
+        {
+          "__type": "LegacyParticleSystem",
+          "__enabled": false,
+          "ControlPoints": [],
+          "Looped": false,
+          "Particles": "particles/landimpact/landimpact.vpcf",
+          "PlaybackSpeed": 1
         }
       ],
       "Children": [
@@ -790,7 +803,7 @@
               "__type": "NetworkHelper",
               "PlayerPrefab": {
                 "_type": "gameobject",
-                "go": "780085b8-d011-423b-bf7a-1739c8a0f479",
+                "go": "8f2d3c9a-484f-4a63-b079-32cb30b51ed2",
                 "prefab": "prefabs/grub.prefab"
               },
               "SpawnPoints": [
@@ -928,7 +941,7 @@
               {
                 "Value": {
                   "_type": "gameobject",
-                  "go": "08532a0f-a33b-4dd7-89ed-115e71d8e700",
+                  "go": "675c50aa-b65d-4e6e-9786-2ff05cef2869",
                   "prefab": "prefabs/bazooka_shell.prefab"
                 },
                 "DstId": 1,
@@ -961,6 +974,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-01-30T18:08:42.9118941-04:00",
+  "LastSaved": "2024-01-30T19:24:56.0272468-04:00",
   "__references": []
 }
