@@ -1,7 +1,6 @@
 ﻿namespace Grubs.Equipment.Weapons;
 
-[Title( "Grubs - Weapon" )]
-[Category( "Equipment" )]
+[Title( "Grubs - Weapon" ), Category( "Equipment" )]
 public partial class WeaponComponent : Component
 {
 	public delegate void OnFireDelegate( int charge );

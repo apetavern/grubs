@@ -2,8 +2,7 @@
 
 namespace Grubs.Equipment.Weapons;
 
-[Title( "Grub - Arc Projectile" )]
-[Category( "Equipment" )]
+[Title( "Grubs - Arc Projectile" ), Category( "Equipment" )]
 public class ArcProjectileComponent : ProjectileComponent
 {
 	[Property] public bool ShouldBounce { get; set; }
@@ -32,6 +31,8 @@ public class ArcProjectileComponent : ProjectileComponent
 
 	protected override void OnFixedUpdate()
 	{
+		// We are seeing the model for the projectile very quickly moving from its spawn location
+		// to the proper start position unless we wait until the second physics tick to render it.
 		if ( secondUpdate && !Model.Enabled )
 			ViewReady();
 

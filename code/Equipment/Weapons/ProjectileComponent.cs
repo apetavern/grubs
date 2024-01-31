@@ -3,8 +3,7 @@ using Grubs.Player.Controller;
 
 namespace Grubs.Equipment.Weapons;
 
-[Title( "Grub - Projectile" )]
-[Category( "Equipment" )]
+[Title( "Grubs - Projectile" ), Category( "Equipment" )]
 public abstract class ProjectileComponent : Component
 {
 	[Property] public float ProjectileSpeed { get; set; } = 4f;
