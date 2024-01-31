@@ -8,6 +8,7 @@ public class ArcProjectileComponent : ProjectileComponent
 {
 	[Property] public bool ShouldBounce { get; set; }
 	[Property] public int MaxBounces { get; set; }
+	[Property] public ExplosiveProjectileComponent? Explosive { get; set; }
 
 	private List<ArcSegment> Segments = new();
 	private float _alpha;
@@ -57,6 +58,10 @@ public class ArcProjectileComponent : ProjectileComponent
 
 			currentSegment = Segments.FirstOrDefault();
 			UpdateFromArcSegment( currentSegment, _alpha );
+		}
+		else
+		{
+			Explosive?.Explode();
 		}
 	}
 
