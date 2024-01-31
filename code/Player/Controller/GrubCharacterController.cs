@@ -207,7 +207,7 @@ public class GrubCharacterController : Component
 		//
 		// move to this ground position, if we moved, and hit
 		//
-		if ( wasOnGround && !pm.StartedSolid && pm.Fraction > 0.003f && pm.Fraction < 1.0f )
+		if ( wasOnGround && !pm.StartedSolid && pm.Fraction > 0.002f && pm.Fraction < 1.0f )
 		{
 			Transform.Position = pm.EndPosition + pm.Normal * 0.01f;
 		}

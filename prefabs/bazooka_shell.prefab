@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "31f366e5-9066-4d93-9bff-ab65dcd3147f",
+    "Id": "8984fe2f-d8a3-4206-b5bf-b8fcd6d903a6",
     "Name": "bazooka_shell",
     "Enabled": true,
     "Components": [
@@ -27,14 +27,14 @@
       },
       {
         "__type": "ArcProjectileComponent",
-        "MaxBounces": 0,
+        "MaxBounces": 5,
         "Model": {
           "_type": "component",
-          "go": "31f366e5-9066-4d93-9bff-ab65dcd3147f",
+          "go": "8984fe2f-d8a3-4206-b5bf-b8fcd6d903a6",
           "component_type": "SkinnedModelRenderer"
         },
         "ProjectileSpeed": 35,
-        "ShouldBounce": false
+        "ShouldBounce": true
       }
     ]
   },

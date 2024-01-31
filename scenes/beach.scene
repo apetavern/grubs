@@ -803,7 +803,7 @@
               "__type": "NetworkHelper",
               "PlayerPrefab": {
                 "_type": "gameobject",
-                "go": "8f2d3c9a-484f-4a63-b079-32cb30b51ed2",
+                "go": "3b3179e3-76a1-452e-b08b-034dcbaa1542",
                 "prefab": "prefabs/grub.prefab"
               },
               "SpawnPoints": [
@@ -941,7 +941,7 @@
               {
                 "Value": {
                   "_type": "gameobject",
-                  "go": "675c50aa-b65d-4e6e-9786-2ff05cef2869",
+                  "go": "1eb7074f-e93f-4281-b884-aceeed13ed92",
                   "prefab": "prefabs/bazooka_shell.prefab"
                 },
                 "DstId": 1,
@@ -974,6 +974,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-01-30T19:24:56.0272468-04:00",
+  "LastSaved": "2024-01-30T21:45:40.4377586-04:00",
   "__references": []
 }

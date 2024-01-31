@@ -25,12 +25,17 @@ public class ArcProjectileComponent : ProjectileComponent
 		var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
 		Segments = CalculateTrajectory( dir, Charge );
 		Transform.Position = Segments[0].StartPos.WithY( 512f );
-
-		ViewReady();
 	}
+
+	private bool secondUpdate;
 
 	protected override void OnFixedUpdate()
 	{
+		if ( secondUpdate && !Model.Enabled )
+			ViewReady();
+
+		secondUpdate = true;
+
 		_alpha += Time.Delta * ProjectileSpeed;
 
 		if ( Segments.Any() )
@@ -71,5 +76,17 @@ public class ArcProjectileComponent : ProjectileComponent
 		return ShouldBounce
 			? arcTrace.RunTowardsWithBounces( Scene, direction, force, 0f, MaxBounces )
 			: arcTrace.RunTowards( Scene, direction, force, 0f );
+	}
+
+	protected override void DrawGizmos()
+	{
+		base.DrawGizmos();
+
+		Gizmo.Transform = global::Transform.Zero.WithScale( 1f );
+
+		foreach ( var segment in Segments )
+		{
+			Gizmo.Draw.Line( segment.StartPos.WithY( 512f ), segment.EndPos.WithY( 512f ) );
+		}
 	}
 }
