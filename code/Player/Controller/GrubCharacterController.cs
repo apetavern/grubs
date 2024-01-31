@@ -1,30 +1,29 @@
-﻿using Sandbox.Utility;
+﻿using Grubs.Helpers;
+using Sandbox.Utility;
 
 namespace Grubs.Player.Controller;
 
-[Title( "Grubs - Character Controller" )]
-[Category( "Grubs" )]
-[Icon( "directions_walk", "red", "white" )]
-[EditorHandle( "materials/gizmo/charactercontroller.png" )]
+[Title( "Grubs - Character Controller" ), Category( "Grubs" ), Icon( "directions_walk", "red", "white" ),
+ EditorHandle( "materials/gizmo/charactercontroller.png" )]
 public class GrubCharacterController : Component
 {
 	private int _stuckTries;
 
 
 	public Vector3 LastVelocity;
-	[Range( 0, 200 )] [Property] public float Radius { get; set; } = 16.0f;
+	[Range( 0, 200 ), Property]  public float Radius { get; set; } = 16.0f;
 
-	[Range( 0, 200 )] [Property] public float Height { get; set; } = 64.0f;
+	[Range( 0, 200 ), Property]  public float Height { get; set; } = 64.0f;
 
-	[Range( 0, 50 )] [Property] public float StepHeight { get; set; } = 18.0f;
+	[Range( 0, 50 ), Property]  public float StepHeight { get; set; } = 18.0f;
 
-	[Range( 0, 90 )] [Property] public float GroundAngle { get; set; } = 45.0f;
+	[Range( 0, 90 ), Property]  public float GroundAngle { get; set; } = 45.0f;
 
-	[Range( 0, 20 )] [Property] public float Acceleration { get; set; } = 10.0f;
+	[Range( 0, 20 ), Property]  public float Acceleration { get; set; } = 10.0f;
 
 	[Property] public required GrubPlayerController Controller { get; set; }
 
-	[Property] public required LegacyParticleSystem LandingParticles { get; set; }
+	[Property] public required ParticleSystem LandingParticles { get; set; }
 
 	[Property] public TagSet IgnoreLayers { get; set; } = new();
 
@@ -217,7 +216,7 @@ public class GrubCharacterController : Component
 	{
 		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
-		LandingParticles.Enabled = true;
+		ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, Transform.World );
 		TimeSinceLanding = TimeSinceLanding > 1f ? 0f : TimeSinceLanding;
 	}
 
@@ -319,14 +318,6 @@ public class GrubCharacterController : Component
 		_stuckTries++;
 
 		return true;
-	}
-
-	protected override void OnFixedUpdate()
-	{
-		base.OnFixedUpdate();
-
-		if ( TimeSinceLanding > 1f )
-			LandingParticles.Enabled = false;
 	}
 
 	public void Write( ref ByteStream stream )
