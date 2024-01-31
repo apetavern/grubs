@@ -346,13 +346,6 @@
           "Looped": false,
           "Particles": "particles/landimpact/landimpact.vpcf",
           "PlaybackSpeed": 1
-        },
-        {
-          "__type": "ModelCollider",
-          "IsTrigger": false,
-          "Model": "models/citizenworm.vmdl",
-          "Static": false,
-          "Surface": null
         }
       ],
       "Children": [
@@ -995,6 +988,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-01-31T15:56:08.6113316-04:00",
+  "LastSaved": "2024-01-31T16:14:00.1149257-04:00",
   "__references": []
 }

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "33cda936-2588-4765-b9d5-bb5c88a24ce8",
+    "Id": "c144b2e6-426c-4845-ae95-c30064bef906",
     "Name": "bazooka_shell",
     "Enabled": true,
     "Components": [
@@ -29,13 +29,13 @@
         "__type": "ArcProjectileComponent",
         "Explosive": {
           "_type": "component",
-          "go": "33cda936-2588-4765-b9d5-bb5c88a24ce8",
+          "go": "c144b2e6-426c-4845-ae95-c30064bef906",
           "component_type": "ExplosiveProjectileComponent"
         },
         "MaxBounces": 5,
         "Model": {
           "_type": "component",
-          "go": "33cda936-2588-4765-b9d5-bb5c88a24ce8",
+          "go": "c144b2e6-426c-4845-ae95-c30064bef906",
           "component_type": "SkinnedModelRenderer"
         },
         "ProjectileSpeed": 35,
@@ -46,7 +46,9 @@
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
-        "ExplosionDamage": 50
+        "ExplosionDamage": 30,
+        "ExplosionRadius": 100,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound"
       }
     ]
   },
