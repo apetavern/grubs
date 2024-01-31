@@ -11,6 +11,7 @@ public class ExplosiveProjectileComponent : Component
 	[Property] public bool DeleteOnExplode { get; set; } = true;
 	[Property, Sync] public float ExplodeAfter { get; set; } = 4.0f;
 	[Property, ResourceType( "sound" )] private string ExplosionSound { get; set; } = "";
+	[Property, ResourceType( "vpcf" )] private ParticleSystem? Particles { get; set; }
 
 	[Net] private TimeUntil TimeUntilExplosion { get; set; }
 
@@ -37,6 +38,12 @@ public class ExplosiveProjectileComponent : Component
 	{
 		Sound.Play( ExplosionSound );
 		ExplosionHelperComponent.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage );
+
+		if ( Particles is not null )
+		{
+			var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( Particles, Transform.World );
+			sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
+		}
 
 		if ( DeleteOnExplode )
 			GameObject.Destroy();
