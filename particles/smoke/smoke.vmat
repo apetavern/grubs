@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/gr_smoke.shader_c"
+	shader "shaders/gr_smoke.shader"
 
 	//---- Rendering ----
 	F_DO_NOT_CAST_SHADOWS 1

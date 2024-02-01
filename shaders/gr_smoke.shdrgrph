@@ -5,30 +5,28 @@
   "nodes": [
     {
       "_class": "Result",
-      "Albedo": {
-        "Identifier": "6",
-        "Output": "Result"
-      },
-      "Emission": {},
-      "Opacity": {
-        "Identifier": "7",
-        "Output": "Result"
-      },
-      "Normal": {},
-      "Roughness": {},
-      "Metalness": {},
-      "AmbientOcclusion": {},
       "DefaultOpacity": 1,
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
-      "PositionOffset": {},
       "Identifier": "0",
-      "Position": "384,-16"
+      "Position": "384,-16",
+      "Albedo": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "7",
+        "Output": "Result"
+      }
     },
     {
       "_class": "VoronoiNoise",
-      "Coords": {},
+      "AngleOffset": 3.14,
+      "CellDensity": 6,
+      "Worley": false,
+      "Identifier": "1",
+      "Position": "-272,48",
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -36,16 +34,10 @@
       "B": {
         "Identifier": "2",
         "Output": "Result"
-      },
-      "AngleOffset": 3.14,
-      "CellDensity": 6,
-      "Worley": false,
-      "Identifier": "1",
-      "Position": "-608,-16"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 100,
       "Value": 4,
@@ -57,15 +49,19 @@
         }
       },
       "Identifier": "2",
-      "Position": "-1088,16"
+      "Position": "-544,144"
     },
     {
       "_class": "Time",
       "Identifier": "3",
-      "Position": "-1200,144"
+      "Position": "-736,-16"
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "4",
+      "Position": "-464,16",
       "A": {
         "Identifier": "3",
         "Output": "Result"
@@ -73,15 +69,10 @@
       "B": {
         "Identifier": "5",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "4",
-      "Position": "-928,176"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 25,
       "Value": 1,
@@ -93,7 +84,7 @@
         }
       },
       "Identifier": "5",
-      "Position": "-1200,224"
+      "Position": "-736,64"
     },
     {
       "_class": "Float4",
@@ -111,12 +102,12 @@
     },
     {
       "_class": "Saturate",
+      "Identifier": "7",
+      "Position": "48,48",
       "Input": {
         "Identifier": "1",
         "Output": "Result"
-      },
-      "Identifier": "7",
-      "Position": "48,48"
+      }
     }
   ]
 }
