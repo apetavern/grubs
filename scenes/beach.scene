@@ -234,7 +234,7 @@
       "Components": [
         {
           "__type": "SkinnedModelRenderer",
-          "BodyGroups": 1,
+          "BodyGroups": 5,
           "BoneMergeTarget": null,
           "CreateBoneObjects": true,
           "MaterialGroup": null,
@@ -799,7 +799,7 @@
               "__type": "NetworkHelper",
               "PlayerPrefab": {
                 "_type": "gameobject",
-                "go": "1190710f-3d80-437a-b7a7-d39d7eeb2e5f",
+                "go": "4276eff8-c60c-4b34-9a61-82d6732b72aa",
                 "prefab": "prefabs/grub.prefab"
               },
               "SpawnPoints": [
@@ -937,7 +937,7 @@
               {
                 "Value": {
                   "_type": "gameobject",
-                  "go": "5ed7adf5-af20-4ebc-8ada-d9546314ab90",
+                  "go": "178abb0e-6083-4671-ad4a-da28921576e3",
                   "prefab": "prefabs/bazooka_shell.prefab"
                 },
                 "DstId": 1,
@@ -984,6 +984,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-01-31T19:35:04.2812406-04:00",
+  "LastSaved": "2024-02-01T08:19:23.5789344-04:00",
   "__references": []
 }
