@@ -1,5 +1,6 @@
 {
   "publish": {
+    "Allowed": true,
     "Enabled": true,
     "ProjectConfig": {
       "Title": "Grubs Beach",
@@ -10,7 +11,8 @@
       "Schema": 0,
       "HasAssets": false,
       "AssetsPath": null,
-      "ResourcePaths": null,
+      "Resources": null,
+      "MenuResources": "*",
       "HasCode": false,
       "CodePath": null,
       "PackageReferences": [],
