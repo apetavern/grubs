@@ -1,5 +1,5 @@
 {
-  "Id": "2a467417-c0ba-4613-ba98-2d6f4940e25d",
+  "Id": "c0571110-4e3a-4fa4-b18a-0278b8599d2a",
   "GameObjects": [
     {
       "Id": "91e0de17-917f-4860-bc89-2e0261f4a419",
@@ -79,7 +79,10 @@
         },
         {
           "__type": "GrubFollowCamera",
-          "Target": null
+          "Target": {
+            "_type": "gameobject",
+            "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274"
+          }
         }
       ]
     },
@@ -415,6 +418,25 @@
           "__type": "ParticleHelperComponent"
         }
       ]
+    },
+    {
+      "Id": "6a895242-a7f3-46c9-8132-6c2c98967310",
+      "Name": "Object",
+      "Position": "-384.1077,-443.9945,492.728",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "EnvmapProbe",
+          "Bounds": {
+            "Mins": "-512,-512,-512",
+            "Maxs": "512,512,512"
+          },
+          "Feathering": 0.02,
+          "Projection": "Sphere",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "TintColor": "1,1,1,1"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -440,6 +462,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-02-02T22:40:06.048741-04:00",
+  "LastSaved": "2024-02-03T23:08:04.5624629\u002B00:00",
   "__references": []
 }

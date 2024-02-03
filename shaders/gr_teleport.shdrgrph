@@ -10,16 +10,16 @@
     },
     {
       "_class": "SwizzleVector",
-      "Input": {
-        "Identifier": "0",
-        "Output": "Result"
-      },
       "RedOut": "Blue",
       "GreenOut": "Blue",
       "BlueOut": "Blue",
       "AlphaOut": "Alpha",
       "Identifier": "1",
-      "Position": "-704,-272"
+      "Position": "-704,-272",
+      "Input": {
+        "Identifier": "0",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Time",
@@ -28,6 +28,11 @@
     },
     {
       "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "3",
+      "Position": "-400,-224",
       "Coords": {
         "Identifier": "1",
         "Output": "Output"
@@ -39,16 +44,10 @@
       "Offset": {
         "Identifier": "5",
         "Output": "Result"
-      },
-      "DefaultTile": "1,1",
-      "DefaultOffset": "0,0",
-      "WrapTo01": false,
-      "Identifier": "3",
-      "Position": "-400,-224"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": -1,
       "Max": 1,
       "Value": -0.25,
@@ -68,6 +67,10 @@
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 2.5,
+      "Identifier": "5",
+      "Position": "-704,-112",
       "A": {
         "Identifier": "2",
         "Output": "Result"
@@ -75,15 +78,10 @@
       "B": {
         "Identifier": "6",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 2.5,
-      "Identifier": "5",
-      "Position": "-704,-112"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 5,
       "Value": 2,
@@ -103,19 +101,17 @@
     },
     {
       "_class": "Step",
-      "Input": {
-        "Identifier": "10",
-        "Output": "Result"
-      },
-      "Edge": {},
       "DefaultInput": 0,
       "DefaultEdge": 0.005,
       "Identifier": "7",
-      "Position": "144,-224"
+      "Position": "144,-224",
+      "Input": {
+        "Identifier": "10",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.75,
@@ -134,7 +130,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.25,
@@ -153,16 +148,15 @@
     },
     {
       "_class": "SimplexNoise",
+      "Identifier": "10",
+      "Position": "-160,-224",
       "Coords": {
         "Identifier": "3",
         "Output": "Result"
-      },
-      "Identifier": "10",
-      "Position": "-160,-224"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 25,
       "Value": 2,
@@ -197,6 +191,9 @@
     },
     {
       "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "13",
+      "Position": "464,-240",
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -208,13 +205,14 @@
       "C": {
         "Identifier": "8",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "13",
-      "Position": "464,-240"
+      }
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "14",
+      "Position": "720,-448",
       "A": {
         "Identifier": "12",
         "Output": "Result"
@@ -222,15 +220,16 @@
       "B": {
         "Identifier": "11",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "14",
-      "Position": "720,-448"
+      }
     },
     {
       "_class": "Result",
-      "Albedo": {},
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "15",
+      "Position": "896,-288",
       "Emission": {
         "Identifier": "14",
         "Output": "Result"
@@ -238,18 +237,7 @@
       "Opacity": {
         "Identifier": "13",
         "Output": "Result"
-      },
-      "Normal": {},
-      "Roughness": {},
-      "Metalness": {},
-      "AmbientOcclusion": {},
-      "DefaultOpacity": 1,
-      "DefaultRoughness": 1,
-      "DefaultMetalness": 0,
-      "DefaultAmbientOcclusion": 1,
-      "PositionOffset": {},
-      "Identifier": "15",
-      "Position": "896,-288"
+      }
     }
   ]
 }

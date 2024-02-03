@@ -5,6 +5,12 @@
   "nodes": [
     {
       "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "800,64",
       "Albedo": {
         "Identifier": "17",
         "Output": "Result"
@@ -16,21 +22,15 @@
       "Opacity": {
         "Identifier": "14",
         "Output": "Result"
-      },
-      "Normal": {},
-      "Roughness": {},
-      "Metalness": {},
-      "AmbientOcclusion": {},
-      "DefaultOpacity": 1,
-      "DefaultRoughness": 1,
-      "DefaultMetalness": 0,
-      "DefaultAmbientOcclusion": 1,
-      "PositionOffset": {},
-      "Identifier": "0",
-      "Position": "800,64"
+      }
     },
     {
       "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "1",
+      "Position": "-336,160",
       "Coords": {
         "Identifier": "22",
         "Output": "Result"
@@ -42,19 +42,10 @@
       "Offset": {
         "Identifier": "7",
         "Output": "Result"
-      },
-      "DefaultTile": "1,1",
-      "DefaultOffset": "0,0",
-      "WrapTo01": false,
-      "Identifier": "1",
-      "Position": "-336,160"
+      }
     },
     {
       "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "1",
-        "Output": "Result"
-      },
       "Image": "particles/watersplash/textures/water_ring.png",
       "Sampler": {},
       "UI": {
@@ -67,7 +58,11 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "2",
-      "Position": "-64,128"
+      "Position": "-64,128",
+      "Coords": {
+        "Identifier": "1",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Float2",
@@ -89,7 +84,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.1,
@@ -108,6 +102,10 @@
     },
     {
       "_class": "Multiply",
+      "DefaultA": -0.3,
+      "DefaultB": 0,
+      "Identifier": "6",
+      "Position": "-752,64",
       "A": {
         "Identifier": "5",
         "Output": "Result"
@@ -115,30 +113,21 @@
       "B": {
         "Identifier": "4",
         "Output": "Result"
-      },
-      "DefaultA": -0.3,
-      "DefaultB": 0,
-      "Identifier": "6",
-      "Position": "-752,64"
+      }
     },
     {
       "_class": "Subtract",
-      "A": {},
-      "B": {
-        "Identifier": "6",
-        "Output": "Result"
-      },
       "DefaultA": 1,
       "DefaultB": 0,
       "Identifier": "7",
-      "Position": "-640,64"
+      "Position": "-640,64",
+      "B": {
+        "Identifier": "6",
+        "Output": "Result"
+      }
     },
     {
       "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "23",
-        "Output": "Result"
-      },
       "Image": "particles/watersplash/textures/water_ring.png",
       "Sampler": {},
       "UI": {
@@ -151,7 +140,11 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "8",
-      "Position": "-64,320"
+      "Position": "-64,320",
+      "Coords": {
+        "Identifier": "23",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Time",
@@ -160,7 +153,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.2,
@@ -179,6 +171,10 @@
     },
     {
       "_class": "Multiply",
+      "DefaultA": -0.3,
+      "DefaultB": 0,
+      "Identifier": "11",
+      "Position": "-624,448",
       "A": {
         "Identifier": "10",
         "Output": "Result"
@@ -186,26 +182,24 @@
       "B": {
         "Identifier": "9",
         "Output": "Result"
-      },
-      "DefaultA": -0.3,
-      "DefaultB": 0,
-      "Identifier": "11",
-      "Position": "-624,448"
+      }
     },
     {
       "_class": "Subtract",
-      "A": {},
-      "B": {
-        "Identifier": "11",
-        "Output": "Result"
-      },
       "DefaultA": 1,
       "DefaultB": 0,
       "Identifier": "12",
-      "Position": "-512,448"
+      "Position": "-512,448",
+      "B": {
+        "Identifier": "11",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "13",
+      "Position": "272,64",
       "A": {
         "Identifier": "2",
         "Output": "Result"
@@ -213,14 +207,12 @@
       "B": {
         "Identifier": "8",
         "Output": "Result"
-      },
-      "C": {},
-      "Fraction": 0.5,
-      "Identifier": "13",
-      "Position": "272,64"
+      }
     },
     {
       "_class": "SmoothStep",
+      "Identifier": "14",
+      "Position": "560,176",
       "Input": {
         "Identifier": "13",
         "Output": "Result"
@@ -232,13 +224,10 @@
       "Edge2": {
         "Identifier": "16",
         "Output": "Result"
-      },
-      "Identifier": "14",
-      "Position": "560,176"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.25,
@@ -257,7 +246,6 @@
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
       "Value": 0.35,
@@ -299,15 +287,19 @@
     },
     {
       "_class": "SplitVector",
+      "Identifier": "19",
+      "Position": "-32,576",
       "Input": {
         "Identifier": "18",
         "Output": "RGB"
-      },
-      "Identifier": "19",
-      "Position": "-32,576"
+      }
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 2,
+      "Identifier": "20",
+      "Position": "560,16",
       "A": {
         "Identifier": "17",
         "Output": "Result"
@@ -315,15 +307,10 @@
       "B": {
         "Identifier": "21",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 2,
-      "Identifier": "20",
-      "Position": "560,16"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 10,
       "Value": 0.5,
@@ -346,6 +333,11 @@
     },
     {
       "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "23",
+      "Position": "-336,288",
       "Coords": {
         "Identifier": "22",
         "Output": "Result"
@@ -357,12 +349,7 @@
       "Offset": {
         "Identifier": "12",
         "Output": "Result"
-      },
-      "DefaultTile": "1,1",
-      "DefaultOffset": "0,0",
-      "WrapTo01": false,
-      "Identifier": "23",
-      "Position": "-336,288"
+      }
     },
     {
       "_class": "Float2",

@@ -5,12 +5,16 @@
   "nodes": [
     {
       "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "1872,-192",
       "Albedo": {
         "Identifier": "24",
         "Output": "Result"
       },
-      "Emission": {},
-      "Opacity": {},
       "Normal": {
         "Identifier": "31",
         "Output": "Result"
@@ -19,29 +23,13 @@
         "Identifier": "3",
         "Output": "Result"
       },
-      "Metalness": {},
       "AmbientOcclusion": {
         "Identifier": "23",
         "Output": "Result"
-      },
-      "DefaultOpacity": 1,
-      "DefaultRoughness": 1,
-      "DefaultMetalness": 0,
-      "DefaultAmbientOcclusion": 1,
-      "PositionOffset": {},
-      "Identifier": "0",
-      "Position": "1872,-192"
+      }
     },
     {
       "_class": "TextureTriplanar",
-      "Coords": {
-        "Identifier": "18",
-        "Output": "Result"
-      },
-      "Normal": {
-        "Identifier": "32",
-        "Output": "Result"
-      },
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -54,10 +42,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "1",
-      "Position": "-272,-336"
-    },
-    {
-      "_class": "NormapMapTriplanar",
+      "Position": "-272,-336",
       "Coords": {
         "Identifier": "18",
         "Output": "Result"
@@ -65,7 +50,10 @@
       "Normal": {
         "Identifier": "32",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "NormapMapTriplanar",
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -80,10 +68,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "2",
-      "Position": "-272,-144"
-    },
-    {
-      "_class": "TextureTriplanar",
+      "Position": "-272,-144",
       "Coords": {
         "Identifier": "18",
         "Output": "Result"
@@ -91,7 +76,10 @@
       "Normal": {
         "Identifier": "32",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "TextureTriplanar",
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -105,31 +93,42 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "3",
-      "Position": "-272,48"
+      "Position": "-272,48",
+      "Coords": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "32",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Multiply",
-      "A": {
-        "Identifier": "17",
-        "Output": "Result"
-      },
-      "B": {},
       "DefaultA": 0,
       "DefaultB": 0.00390625,
       "Identifier": "4",
-      "Position": "-784,-32"
+      "Position": "-784,-32",
+      "A": {
+        "Identifier": "17",
+        "Output": "Result"
+      }
     },
     {
       "_class": "SplitVector",
+      "Identifier": "5",
+      "Position": "-816,432",
       "Input": {
         "Identifier": "7",
         "Output": "Result"
-      },
-      "Identifier": "5",
-      "Position": "-816,432"
+      }
     },
     {
       "_class": "Divide",
+      "DefaultA": 0,
+      "DefaultB": 2000,
+      "Identifier": "6",
+      "Position": "-16,512",
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -137,11 +136,7 @@
       "B": {
         "Identifier": "22",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 2000,
-      "Identifier": "6",
-      "Position": "-16,512"
+      }
     },
     {
       "_class": "WorldPosition",
@@ -150,6 +145,9 @@
     },
     {
       "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "8",
+      "Position": "912,-544",
       "A": {
         "Identifier": "1",
         "Output": "Result"
@@ -161,13 +159,14 @@
       "C": {
         "Identifier": "14",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "8",
-      "Position": "912,-544"
+      }
     },
     {
       "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1024,
+      "Identifier": "9",
+      "Position": "-416,512",
       "A": {
         "Identifier": "5",
         "Output": "Z"
@@ -175,11 +174,7 @@
       "B": {
         "Identifier": "20",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1024,
-      "Identifier": "9",
-      "Position": "-416,512"
+      }
     },
     {
       "_class": "Float4",
@@ -200,6 +195,10 @@
     },
     {
       "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 20,
+      "Identifier": "11",
+      "Position": "-416,416",
       "A": {
         "Identifier": "5",
         "Output": "Y"
@@ -207,14 +206,14 @@
       "B": {
         "Identifier": "19",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 20,
-      "Identifier": "11",
-      "Position": "-416,416"
+      }
     },
     {
       "_class": "Divide",
+      "DefaultA": 0,
+      "DefaultB": 75,
+      "Identifier": "12",
+      "Position": "-16,416",
       "A": {
         "Identifier": "11",
         "Output": "Result"
@@ -222,42 +221,42 @@
       "B": {
         "Identifier": "21",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 75,
-      "Identifier": "12",
-      "Position": "-16,416"
+      }
     },
     {
       "_class": "Saturate",
+      "Identifier": "13",
+      "Position": "144,512",
       "Input": {
         "Identifier": "6",
         "Output": "Result"
-      },
-      "Identifier": "13",
-      "Position": "144,512"
+      }
     },
     {
       "_class": "Saturate",
+      "Identifier": "14",
+      "Position": "144,416",
       "Input": {
         "Identifier": "12",
         "Output": "Result"
-      },
-      "Identifier": "14",
-      "Position": "144,416"
+      }
     },
     {
       "_class": "CommentNode",
       "Size": "224,176",
       "Color": "Green",
-      "Description": "",
       "Title": "Y",
+      "Description": "",
       "Layer": 1,
       "Identifier": "15",
       "Position": "880,-592"
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "16",
+      "Position": "448,224",
       "A": {
         "Identifier": "13",
         "Output": "Result"
@@ -265,11 +264,7 @@
       "B": {
         "Identifier": "10",
         "Output": "A"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "16",
-      "Position": "448,224"
+      }
     },
     {
       "_class": "Float",
@@ -292,6 +287,10 @@
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "18",
+      "Position": "-592,-128",
       "A": {
         "Identifier": "33",
         "Output": "Result"
@@ -299,11 +298,7 @@
       "B": {
         "Identifier": "4",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "18",
-      "Position": "-592,-128"
+      }
     },
     {
       "_class": "Float",
@@ -385,14 +380,6 @@
     },
     {
       "_class": "TextureTriplanar",
-      "Coords": {
-        "Identifier": "18",
-        "Output": "Result"
-      },
-      "Normal": {
-        "Identifier": "32",
-        "Output": "Result"
-      },
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -406,25 +393,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "23",
-      "Position": "-272,240"
-    },
-    {
-      "_class": "Multiply",
-      "A": {
-        "Identifier": "8",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "29",
-        "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "24",
-      "Position": "1520,-432"
-    },
-    {
-      "_class": "TextureTriplanar",
+      "Position": "-272,240",
       "Coords": {
         "Identifier": "18",
         "Output": "Result"
@@ -432,7 +401,25 @@
       "Normal": {
         "Identifier": "32",
         "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "24",
+      "Position": "1520,-432",
+      "A": {
+        "Identifier": "8",
+        "Output": "Result"
       },
+      "B": {
+        "Identifier": "29",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureTriplanar",
       "Image": "materials/dev/white_color.tga",
       "Sampler": {},
       "UI": {
@@ -443,42 +430,39 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "25",
-      "Position": "-272,-688"
+      "Position": "-272,-688",
+      "Coords": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "32",
+        "Output": "Result"
+      }
     },
     {
       "_class": "CommentNode",
       "Size": "224,176",
       "Color": "Red",
-      "Description": "",
       "Title": "X",
+      "Description": "",
       "Layer": 2,
       "Identifier": "26",
       "Position": "992,-352"
     },
     {
       "_class": "Subtract",
-      "A": {},
-      "B": {
-        "Identifier": "16",
-        "Output": "Result"
-      },
       "DefaultA": 1,
       "DefaultB": 1,
       "Identifier": "27",
-      "Position": "656,288"
+      "Position": "656,288",
+      "B": {
+        "Identifier": "16",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Branch",
-      "True": {
-        "Identifier": "16",
-        "Output": "Result"
-      },
-      "False": {
-        "Identifier": "27",
-        "Output": "Result"
-      },
-      "A": {},
-      "B": {},
       "Name": "Tint Direction Toggle",
       "Operator": "Equal",
       "Enabled": false,
@@ -489,10 +473,23 @@
         }
       },
       "Identifier": "28",
-      "Position": "784,192"
+      "Position": "784,192",
+      "True": {
+        "Identifier": "16",
+        "Output": "Result"
+      },
+      "False": {
+        "Identifier": "27",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Blend",
+      "Fraction": 0.5,
+      "BlendMode": "Overlay",
+      "Clamp": true,
+      "Identifier": "29",
+      "Position": "1024,-304",
       "A": {
         "Identifier": "1",
         "Output": "Result"
@@ -504,15 +501,15 @@
       "C": {
         "Identifier": "28",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "BlendMode": "Overlay",
-      "Clamp": true,
-      "Identifier": "29",
-      "Position": "1024,-304"
+      }
     },
     {
       "_class": "Blend",
+      "Fraction": 0.5,
+      "BlendMode": "SoftLight",
+      "Clamp": true,
+      "Identifier": "30",
+      "Position": "288,-576",
       "A": {
         "Identifier": "10",
         "Output": "Result"
@@ -524,23 +521,19 @@
       "C": {
         "Identifier": "25",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "BlendMode": "SoftLight",
-      "Clamp": true,
-      "Identifier": "30",
-      "Position": "288,-576"
+      }
     },
     {
       "_class": "TransformNormal",
+      "InputSpace": "Object",
+      "OutputSpace": "Tangent",
+      "DecodeNormal": false,
+      "Identifier": "31",
+      "Position": "1376,-128",
       "Input": {
         "Identifier": "2",
         "Output": "Result"
-      },
-      "InputSpace": "Object",
-      "DecodeNormal": false,
-      "Identifier": "31",
-      "Position": "1376,-128"
+      }
     },
     {
       "_class": "ObjectSpaceNormal",

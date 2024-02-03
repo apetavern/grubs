@@ -5,12 +5,16 @@
   "nodes": [
     {
       "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "2944,592",
       "Albedo": {
         "Identifier": "25",
         "Output": "Result"
       },
-      "Emission": {},
-      "Opacity": {},
       "Normal": {
         "Identifier": "79",
         "Output": "Result"
@@ -19,29 +23,13 @@
         "Identifier": "37",
         "Output": "Result"
       },
-      "Metalness": {},
       "AmbientOcclusion": {
         "Identifier": "38",
         "Output": "Result"
-      },
-      "DefaultOpacity": 1,
-      "DefaultRoughness": 1,
-      "DefaultMetalness": 0,
-      "DefaultAmbientOcclusion": 1,
-      "PositionOffset": {},
-      "Identifier": "0",
-      "Position": "2944,592"
+      }
     },
     {
       "_class": "TextureTriplanar",
-      "Coords": {
-        "Identifier": "33",
-        "Output": "Result"
-      },
-      "Normal": {
-        "Identifier": "78",
-        "Output": "Result"
-      },
       "Image": "textures/environment/lava_rocks_ao.png",
       "Sampler": {},
       "UI": {
@@ -53,7 +41,15 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "1",
-      "Position": "-496,1984"
+      "Position": "-496,1984",
+      "Coords": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Float4",
@@ -76,14 +72,6 @@
     },
     {
       "_class": "NormapMapTriplanar",
-      "Coords": {
-        "Identifier": "33",
-        "Output": "Result"
-      },
-      "Normal": {
-        "Identifier": "78",
-        "Output": "Result"
-      },
       "Image": "textures/environment/lava_rocks_normal.png",
       "Sampler": {},
       "UI": {
@@ -95,31 +83,42 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "3",
-      "Position": "-496,1568"
+      "Position": "-496,1568",
+      "Coords": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Multiply",
-      "A": {
-        "Identifier": "12",
-        "Output": "Result"
-      },
-      "B": {},
       "DefaultA": 0,
       "DefaultB": 0.00390625,
       "Identifier": "4",
-      "Position": "-1792,592"
+      "Position": "-1792,592",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      }
     },
     {
       "_class": "SplitVector",
+      "Identifier": "5",
+      "Position": "-1248,-1136",
       "Input": {
         "Identifier": "7",
         "Output": "Result"
-      },
-      "Identifier": "5",
-      "Position": "-1248,-1136"
+      }
     },
     {
       "_class": "Divide",
+      "DefaultA": 0,
+      "DefaultB": 2000,
+      "Identifier": "6",
+      "Position": "-752,-1056",
       "A": {
         "Identifier": "8",
         "Output": "Result"
@@ -127,11 +126,7 @@
       "B": {
         "Identifier": "15",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 2000,
-      "Identifier": "6",
-      "Position": "-752,-1056"
+      }
     },
     {
       "_class": "WorldPosition",
@@ -140,6 +135,10 @@
     },
     {
       "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1024,
+      "Identifier": "8",
+      "Position": "-1008,-1056",
       "A": {
         "Identifier": "5",
         "Output": "Z"
@@ -147,11 +146,7 @@
       "B": {
         "Identifier": "14",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1024,
-      "Identifier": "8",
-      "Position": "-1008,-1056"
+      }
     },
     {
       "_class": "Float4",
@@ -174,15 +169,19 @@
     },
     {
       "_class": "Saturate",
+      "Identifier": "10",
+      "Position": "-592,-1056",
       "Input": {
         "Identifier": "6",
         "Output": "Result"
-      },
-      "Identifier": "10",
-      "Position": "-592,-1056"
+      }
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "11",
+      "Position": "-80,1248",
       "A": {
         "Identifier": "2",
         "Output": "Result"
@@ -190,11 +189,7 @@
       "B": {
         "Identifier": "17",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "11",
-      "Position": "-80,1248"
+      }
     },
     {
       "_class": "Float",
@@ -217,6 +212,10 @@
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "13",
+      "Position": "-1648,512",
       "A": {
         "Identifier": "75",
         "Output": "Result"
@@ -224,11 +223,7 @@
       "B": {
         "Identifier": "4",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "13",
-      "Position": "-1648,512"
+      }
     },
     {
       "_class": "Float",
@@ -272,14 +267,6 @@
     },
     {
       "_class": "TextureTriplanar",
-      "Coords": {
-        "Identifier": "33",
-        "Output": "Result"
-      },
-      "Normal": {
-        "Identifier": "78",
-        "Output": "Result"
-      },
       "Image": "textures/environment/lava_rocks_selfillum.png",
       "Sampler": {},
       "UI": {
@@ -291,10 +278,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "16",
-      "Position": "-496,1024"
-    },
-    {
-      "_class": "TextureTriplanar",
+      "Position": "-496,1024",
       "Coords": {
         "Identifier": "33",
         "Output": "Result"
@@ -302,7 +286,10 @@
       "Normal": {
         "Identifier": "78",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "TextureTriplanar",
       "Image": "textures/environment/rocks_a_color.png",
       "Sampler": {},
       "UI": {
@@ -312,42 +299,39 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "17",
-      "Position": "-496,1376"
+      "Position": "-496,1376",
+      "Coords": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      }
     },
     {
       "_class": "CommentNode",
       "Size": "224,176",
       "Color": "Red",
-      "Description": "",
       "Title": "Z",
+      "Description": "",
       "Layer": 2,
       "Identifier": "18",
       "Position": "576,-512"
     },
     {
       "_class": "Subtract",
-      "A": {},
-      "B": {
-        "Identifier": "10",
-        "Output": "Result"
-      },
       "DefaultA": 1,
       "DefaultB": 1,
       "Identifier": "19",
-      "Position": "-368,-960"
+      "Position": "-368,-960",
+      "B": {
+        "Identifier": "10",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Branch",
-      "True": {
-        "Identifier": "10",
-        "Output": "Result"
-      },
-      "False": {
-        "Identifier": "19",
-        "Output": "Result"
-      },
-      "A": {},
-      "B": {},
       "Name": "Tint Direction Toggle",
       "Operator": "Equal",
       "Enabled": false,
@@ -359,10 +343,23 @@
         }
       },
       "Identifier": "20",
-      "Position": "-192,-1056"
+      "Position": "-192,-1056",
+      "True": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "False": {
+        "Identifier": "19",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Blend",
+      "Fraction": 0.5,
+      "BlendMode": "SoftLight",
+      "Clamp": true,
+      "Identifier": "21",
+      "Position": "160,-544",
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -374,19 +371,14 @@
       "C": {
         "Identifier": "71",
         "Output": "R"
-      },
-      "Fraction": 0.5,
-      "BlendMode": "SoftLight",
-      "Clamp": true,
-      "Identifier": "21",
-      "Position": "160,-544"
+      }
     },
     {
       "_class": "CommentNode",
       "Size": "2032,432",
       "Color": "Yellow",
-      "Description": "",
       "Title": "Scorch Distance",
+      "Description": "",
       "Layer": 1,
       "Identifier": "22",
       "Position": "-992,480"
@@ -398,10 +390,6 @@
     },
     {
       "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "28",
-        "Output": "Result"
-      },
       "Image": "textures/environment/cereal_height.png",
       "Sampler": {
         "AddressU": "Clamp",
@@ -422,10 +410,17 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "24",
-      "Position": "-432,528"
+      "Position": "-432,528",
+      "Coords": {
+        "Identifier": "28",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "25",
+      "Position": "2112,480",
       "A": {
         "Identifier": "64",
         "Output": "Result"
@@ -437,10 +432,7 @@
       "C": {
         "Identifier": "39",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "25",
-      "Position": "2112,480"
+      }
     },
     {
       "_class": "Float4",
@@ -461,6 +453,10 @@
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "27",
+      "Position": "-672,784",
       "A": {
         "Identifier": "26",
         "Output": "B"
@@ -468,14 +464,14 @@
       "B": {
         "Identifier": "23",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "27",
-      "Position": "-672,784"
+      }
     },
     {
       "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "28",
+      "Position": "-544,640",
       "A": {
         "Identifier": "29",
         "Output": "Vector"
@@ -483,14 +479,16 @@
       "B": {
         "Identifier": "27",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "28",
-      "Position": "-544,640"
+      }
     },
     {
       "_class": "CombineVector",
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "29",
+      "Position": "-768,528",
       "X": {
         "Identifier": "26",
         "Output": "R"
@@ -498,30 +496,25 @@
       "Y": {
         "Identifier": "26",
         "Output": "R"
-      },
-      "Z": {},
-      "W": {},
-      "DefaultX": 0,
-      "DefaultY": 0,
-      "DefaultZ": 0,
-      "DefaultW": 0,
-      "Identifier": "29",
-      "Position": "-768,528"
+      }
     },
     {
       "_class": "Subtract",
-      "A": {
-        "Identifier": "24",
-        "Output": "R"
-      },
-      "B": {},
       "DefaultA": 0,
       "DefaultB": 0.5,
       "Identifier": "30",
-      "Position": "-224,560"
+      "Position": "-224,560",
+      "A": {
+        "Identifier": "24",
+        "Output": "R"
+      }
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "31",
+      "Position": "-128,656",
       "A": {
         "Identifier": "30",
         "Output": "Result"
@@ -529,18 +522,14 @@
       "B": {
         "Identifier": "26",
         "Output": "A"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "31",
-      "Position": "-128,656"
+      }
     },
     {
       "_class": "CommentNode",
       "Size": "192,1200",
       "Color": "Green",
-      "Description": "",
       "Title": "Scorch Material",
+      "Description": "",
       "Layer": 3,
       "Identifier": "32",
       "Position": "-512,976"
@@ -548,35 +537,38 @@
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "33",
+      "Position": "-608,1520",
       "Input": {
         "Identifier": "13",
         "Output": "Result"
-      },
-      "Identifier": "33",
-      "Position": "-608,1520"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "34",
+      "Position": "-528,-208",
       "Input": {
         "Identifier": "13",
         "Output": "Result"
-      },
-      "Identifier": "34",
-      "Position": "-528,-208"
+      }
     },
     {
       "_class": "CommentNode",
       "Size": "192,1200",
       "Color": "Green",
-      "Description": "",
       "Title": "Main Material",
+      "Description": "",
       "Layer": 4,
       "Identifier": "35",
       "Position": "-288,-768"
     },
     {
       "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "36",
+      "Position": "2112,608",
       "A": {
         "Identifier": "49",
         "Output": "Result"
@@ -588,13 +580,13 @@
       "C": {
         "Identifier": "39",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "36",
-      "Position": "2112,608"
+      }
     },
     {
       "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "37",
+      "Position": "2112,736",
       "A": {
         "Identifier": "50",
         "Output": "Result"
@@ -606,13 +598,13 @@
       "C": {
         "Identifier": "39",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "37",
-      "Position": "2112,736"
+      }
     },
     {
       "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "38",
+      "Position": "2112,864",
       "A": {
         "Identifier": "51",
         "Output": "Result"
@@ -624,23 +616,24 @@
       "C": {
         "Identifier": "39",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "38",
-      "Position": "2112,864"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "39",
+      "Position": "1552,768",
       "Input": {
         "Identifier": "43",
         "Output": "Result"
-      },
-      "Identifier": "39",
-      "Position": "1552,768"
+      }
     },
     {
       "_class": "Subtract",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "40",
+      "Position": "512,592",
       "A": {
         "Identifier": "57",
         "Output": "Result"
@@ -648,189 +641,181 @@
       "B": {
         "Identifier": "41",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "40",
-      "Position": "512,592"
+      }
     },
     {
       "_class": "Multiply",
-      "A": {
-        "Identifier": "61",
-        "Output": "Result"
-      },
-      "B": {},
       "DefaultA": 0,
       "DefaultB": 32,
       "Identifier": "41",
-      "Position": "256,800"
+      "Position": "256,800",
+      "A": {
+        "Identifier": "61",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Max",
-      "InputA": {
-        "Identifier": "40",
-        "Output": "Result"
-      },
-      "InputB": {},
       "DefaultA": 0,
       "DefaultB": 0,
       "Identifier": "42",
-      "Position": "624,592"
+      "Position": "624,592",
+      "InputA": {
+        "Identifier": "40",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Min",
-      "InputA": {
-        "Identifier": "42",
-        "Output": "Result"
-      },
-      "InputB": {},
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "43",
-      "Position": "816,592"
+      "Position": "816,592",
+      "InputA": {
+        "Identifier": "42",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "44",
+      "Position": "80,144",
       "Input": {
         "Identifier": "70",
         "Output": "Result"
-      },
-      "Identifier": "44",
-      "Position": "80,144"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "45",
+      "Position": "80,128",
       "Input": {
         "Identifier": "69",
         "Output": "Result"
-      },
-      "Identifier": "45",
-      "Position": "80,128"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "46",
+      "Position": "80,112",
       "Input": {
         "Identifier": "68",
         "Output": "Result"
-      },
-      "Identifier": "46",
-      "Position": "80,112"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "47",
+      "Position": "272,1472",
       "Input": {
         "Identifier": "72",
         "Output": "R"
-      },
-      "Identifier": "47",
-      "Position": "272,1472"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "48",
+      "Position": "272,1488",
       "Input": {
         "Identifier": "1",
         "Output": "R"
-      },
-      "Identifier": "48",
-      "Position": "272,1488"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "49",
+      "Position": "1632,448",
       "Input": {
         "Identifier": "46",
         "Output": "Result"
-      },
-      "Identifier": "49",
-      "Position": "1632,448"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": null,
+      "Identifier": "50",
+      "Position": "1632,464",
       "Input": {
         "Identifier": "45",
         "Output": "Result"
-      },
-      "Identifier": "50",
-      "Position": "1632,464"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "51",
+      "Position": "1632,480",
       "Input": {
         "Identifier": "44",
         "Output": "Result"
-      },
-      "Identifier": "51",
-      "Position": "1632,480"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "52",
+      "Position": "272,1456",
       "Input": {
         "Identifier": "3",
         "Output": "Result"
-      },
-      "Identifier": "52",
-      "Position": "272,1456"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "53",
+      "Position": "1680,1088",
       "Input": {
         "Identifier": "47",
         "Output": "Result"
-      },
-      "Identifier": "53",
-      "Position": "1680,1088"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "54",
+      "Position": "1680,1104",
       "Input": {
         "Identifier": "48",
         "Output": "Result"
-      },
-      "Identifier": "54",
-      "Position": "1680,1104"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "55",
+      "Position": "1680,1056",
       "Input": {
         "Identifier": "56",
         "Output": "Result"
-      },
-      "Identifier": "55",
-      "Position": "1680,1056"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "56",
+      "Position": "272,1440",
       "Input": {
         "Identifier": "11",
         "Output": "Result"
-      },
-      "Identifier": "56",
-      "Position": "272,1440"
+      }
     },
     {
       "_class": "Multiply",
-      "A": {
-        "Identifier": "60",
-        "Output": "Result"
-      },
-      "B": {},
       "DefaultA": 0,
       "DefaultB": -0.5,
       "Identifier": "57",
-      "Position": "192,656"
+      "Position": "192,656",
+      "A": {
+        "Identifier": "60",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Float",
@@ -854,6 +839,10 @@
     },
     {
       "_class": "Divide",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "59",
+      "Position": "-112,784",
       "A": {
         "Identifier": "26",
         "Output": "A"
@@ -861,14 +850,14 @@
       "B": {
         "Identifier": "58",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "59",
-      "Position": "-112,784"
+      }
     },
     {
       "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "60",
+      "Position": "32,656",
       "A": {
         "Identifier": "31",
         "Output": "Result"
@@ -876,36 +865,21 @@
       "B": {
         "Identifier": "59",
         "Output": "Result"
-      },
-      "DefaultA": 0,
-      "DefaultB": 1,
-      "Identifier": "60",
-      "Position": "32,656"
+      }
     },
     {
       "_class": "Subtract",
-      "A": {
-        "Identifier": "16",
-        "Output": "R"
-      },
-      "B": {},
       "DefaultA": 0,
       "DefaultB": 0.5,
       "Identifier": "61",
-      "Position": "48,816"
+      "Position": "48,816",
+      "A": {
+        "Identifier": "16",
+        "Output": "R"
+      }
     },
     {
       "_class": "Branch",
-      "True": {
-        "Identifier": "65",
-        "Output": "Result"
-      },
-      "False": {
-        "Identifier": "66",
-        "Output": "Result"
-      },
-      "A": {},
-      "B": {},
       "Name": "Gradient Tint",
       "Operator": "Equal",
       "Enabled": true,
@@ -915,14 +889,22 @@
         }
       },
       "Identifier": "62",
-      "Position": "960,-320"
+      "Position": "960,-320",
+      "True": {
+        "Identifier": "65",
+        "Output": "Result"
+      },
+      "False": {
+        "Identifier": "66",
+        "Output": "Result"
+      }
     },
     {
       "_class": "CommentNode",
       "Size": "1536,368",
       "Color": "Orange",
-      "Description": "",
       "Title": "World Position Gradient",
+      "Description": "",
       "Layer": 3,
       "Identifier": "63",
       "Position": "-1488,-1200"
@@ -930,15 +912,20 @@
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "64",
+      "Position": "1632,432",
       "Input": {
         "Identifier": "62",
         "Output": "Result"
-      },
-      "Identifier": "64",
-      "Position": "1632,432"
+      }
     },
     {
       "_class": "Blend",
+      "Fraction": 0.5,
+      "BlendMode": "Overlay",
+      "Clamp": true,
+      "Identifier": "65",
+      "Position": "608,-464",
       "A": {
         "Identifier": "67",
         "Output": "Result"
@@ -950,15 +937,15 @@
       "C": {
         "Identifier": "20",
         "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "BlendMode": "Overlay",
-      "Clamp": true,
-      "Identifier": "65",
-      "Position": "608,-464"
+      }
     },
     {
       "_class": "Blend",
+      "Fraction": 0.5,
+      "BlendMode": "Mix",
+      "Clamp": true,
+      "Identifier": "66",
+      "Position": "608,-288",
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -966,24 +953,10 @@
       "B": {
         "Identifier": "67",
         "Output": "Result"
-      },
-      "C": {},
-      "Fraction": 0.5,
-      "BlendMode": "Mix",
-      "Clamp": true,
-      "Identifier": "66",
-      "Position": "608,-288"
+      }
     },
     {
       "_class": "TextureTriplanar",
-      "Coords": {
-        "Identifier": "34",
-        "Output": "Result"
-      },
-      "Normal": {
-        "Identifier": "77",
-        "Output": "Result"
-      },
       "Image": "textures/environment/sand_shells_color.png",
       "Sampler": {},
       "UI": {
@@ -993,10 +966,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "67",
-      "Position": "-272,-368"
-    },
-    {
-      "_class": "NormapMapTriplanar",
+      "Position": "-272,-368",
       "Coords": {
         "Identifier": "34",
         "Output": "Result"
@@ -1004,7 +974,10 @@
       "Normal": {
         "Identifier": "77",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "NormapMapTriplanar",
       "Image": "textures/environment/sand_shells_normal.png",
       "Sampler": {},
       "UI": {
@@ -1016,10 +989,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "68",
-      "Position": "-272,-176"
-    },
-    {
-      "_class": "TextureTriplanar",
+      "Position": "-272,-176",
       "Coords": {
         "Identifier": "34",
         "Output": "Result"
@@ -1027,7 +997,10 @@
       "Normal": {
         "Identifier": "77",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "TextureTriplanar",
       "Image": "textures/environment/sand_shells_rough.png",
       "Sampler": {},
       "UI": {
@@ -1039,10 +1012,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "69",
-      "Position": "-272,48"
-    },
-    {
-      "_class": "TextureTriplanar",
+      "Position": "-272,48",
       "Coords": {
         "Identifier": "34",
         "Output": "Result"
@@ -1050,7 +1020,10 @@
       "Normal": {
         "Identifier": "77",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "TextureTriplanar",
       "Image": "textures/environment/sand_shells_ao.png",
       "Sampler": {},
       "UI": {
@@ -1062,10 +1035,7 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "70",
-      "Position": "-272,240"
-    },
-    {
-      "_class": "TextureTriplanar",
+      "Position": "-272,240",
       "Coords": {
         "Identifier": "34",
         "Output": "Result"
@@ -1073,7 +1043,10 @@
       "Normal": {
         "Identifier": "77",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "TextureTriplanar",
       "Image": "textures/environment/sand_shells_blend.png",
       "Sampler": {},
       "UI": {
@@ -1085,18 +1058,18 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "71",
-      "Position": "-272,-720"
-    },
-    {
-      "_class": "TextureTriplanar",
+      "Position": "-272,-720",
       "Coords": {
-        "Identifier": "33",
+        "Identifier": "34",
         "Output": "Result"
       },
       "Normal": {
-        "Identifier": "78",
+        "Identifier": "77",
         "Output": "Result"
-      },
+      }
+    },
+    {
+      "_class": "TextureTriplanar",
       "Image": "textures/environment/lava_rocks_rough.png",
       "Sampler": {},
       "UI": {
@@ -1108,22 +1081,30 @@
         "CreateInput": "CreateInputTexture2D"
       },
       "Identifier": "72",
-      "Position": "-496,1792"
+      "Position": "-496,1792",
+      "Coords": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "78",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "73",
+      "Position": "1680,1072",
       "Input": {
         "Identifier": "52",
         "Output": "Result"
-      },
-      "Identifier": "73",
-      "Position": "1680,1072"
+      }
     },
     {
       "_class": "TransformNormal",
-      "Input": {},
       "InputSpace": "Tangent",
+      "OutputSpace": "Tangent",
       "DecodeNormal": true,
       "Identifier": "74",
       "Position": "-144,1136"
@@ -1141,33 +1122,34 @@
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "77",
+      "Position": "-528,-176",
       "Input": {
         "Identifier": "76",
         "Output": "Result"
-      },
-      "Identifier": "77",
-      "Position": "-528,-176"
+      }
     },
     {
       "_class": "Reroute",
       "Comment": "",
+      "Identifier": "78",
+      "Position": "-608,1552",
       "Input": {
         "Identifier": "76",
         "Output": "Result"
-      },
-      "Identifier": "78",
-      "Position": "-608,1552"
+      }
     },
     {
       "_class": "TransformNormal",
+      "InputSpace": "Object",
+      "OutputSpace": "Tangent",
+      "DecodeNormal": false,
+      "Identifier": "79",
+      "Position": "2496,624",
       "Input": {
         "Identifier": "36",
         "Output": "Result"
-      },
-      "InputSpace": "Object",
-      "DecodeNormal": false,
-      "Identifier": "79",
-      "Position": "2496,624"
+      }
     }
   ]
 }

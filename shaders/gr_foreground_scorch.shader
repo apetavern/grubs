@@ -14,6 +14,8 @@ MODES
 	VrForward();
 	Depth(); 
 	ToolsVis( S_MODE_TOOLS_VIS );
+	ToolsWireframe( "vr_tools_wireframe.shader" );
+	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
 COMMON
@@ -35,6 +37,7 @@ COMMON
 struct VertexInput
 {
 	#include "common/vertexinput.hlsl"
+	float4 vColor : COLOR0 < Semantic( Color ); >;
 };
 
 struct PixelInput
@@ -43,6 +46,7 @@ struct PixelInput
 	float3 vPositionOs : TEXCOORD14;
 	float3 vNormalOs : TEXCOORD15;
 	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
+	float4 vColor : COLOR0;
 };
 
 VS
@@ -53,6 +57,7 @@ VS
 	{
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
+		i.vColor = v.vColor;
 
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
 
@@ -215,9 +220,9 @@ PS
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		Material m;
+		Material m = Material::Init();
 		m.Albedo = float3( 1, 1, 1 );
-		m.Normal = TransformNormal( i, float3( 0, 0, 1 ) );
+		m.Normal = float3( 0, 0, 1 );
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;
@@ -271,7 +276,7 @@ PS
 		float3 l_42 = TexTriplanar_Normal( g_tNormal, g_sSampler0, l_3, i.vNormalOs );
 		float3 l_43 = TexTriplanar_Normal( g_tScorchNormal, g_sSampler0, l_3, i.vNormalOs );
 		float3 l_44 = lerp( l_42, l_43, l_40 );
-		float3 l_45 = TransformNormal( i, Vec3OsToTs( l_44, i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz, cross( i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz ) * i.vTangentUOs_flTangentVSign.w ) );
+		float3 l_45 = Vec3OsToTs( l_44, i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz, cross( i.vNormalOs.xyz, i.vTangentUOs_flTangentVSign.xyz ) * i.vTangentUOs_flTangentVSign.w );
 		float4 l_46 = TexTriplanar_Color( g_tRough, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_47 = TexTriplanar_Color( g_tScorchRough, g_sSampler0, l_3, i.vNormalOs );
 		float4 l_48 = lerp( l_46, float4( l_47.r, l_47.r, l_47.r, l_47.r ), l_40 );
@@ -290,6 +295,14 @@ PS
 		m.Roughness = saturate( m.Roughness );
 		m.Metalness = saturate( m.Metalness );
 		m.Opacity = saturate( m.Opacity );
+
+		// Result node takes normal as tangent space, convert it to world space now
+		m.Normal = TransformNormal( m.Normal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
+
+		// for some toolvis shit
+		m.WorldTangentU = i.vTangentUWs;
+		m.WorldTangentV = i.vTangentVWs;
+        m.TextureCoords = i.vTextureCoords.xy;
 		
 		return ShadingModelStandard::Shade( i, m );
 	}
