@@ -2,12 +2,20 @@
 
 public class GrubFollowCamera : Component
 {
-	[Property] public required GameObject Target { get; set; }
-
+	[Property, ReadOnly] public GameObject? Target { get; set; }
+	public static GrubFollowCamera? Local { get; set; }
 	public float Distance { get; set; } = 1024f;
+
+	public GrubFollowCamera()
+	{
+		Local = this;
+	}
 
 	protected override void OnUpdate()
 	{
+		if ( Target is null )
+			return;
+
 		var cam = GameObject;
 		var targetPos = Target.Transform.Position + Vector3.Right * Distance;
 		targetPos.z += 32f;

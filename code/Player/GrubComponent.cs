@@ -4,8 +4,7 @@ using Grubs.Player.Controller;
 
 namespace Grubs.Player;
 
-[Title( "Grubs - Container" )]
-[Category( "Grubs" )]
+[Title( "Grubs - Container" ), Category( "Grubs" )]
 public sealed class Grub : Component
 {
 	[Property] public required HealthComponent Health { get; set; }
@@ -22,6 +21,9 @@ public sealed class Grub : Component
 		base.OnStart();
 
 		ActiveEquipment?.Deploy( this );
+
+		if ( !IsProxy )
+			InitializeLocal();
 	}
 
 	protected override void OnUpdate()
@@ -48,6 +50,12 @@ public sealed class Grub : Component
 			LastEquipped = ActiveEquipment;
 			ActiveEquipment = null;
 		}
+	}
+
+	private void InitializeLocal()
+	{
+		if ( GrubFollowCamera.Local is not null )
+			GrubFollowCamera.Local.Target = GameObject;
 	}
 
 	[ConCmd( "gr_take_dmg" )]
