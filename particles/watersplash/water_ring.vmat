@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/gr_water_ring.shader_c"
+	shader "shaders/gr_water_ring.shader"
 
 	//---- Blending ----
 	F_ADDITIVE_BLEND 1
@@ -11,17 +11,20 @@ Layer0
 	F_DISABLE_Z_PREPASS 1
 
 	g_flEmissionStrength "0.500"
-	g_flSmoothStepMax "0.834"
-	g_flSmoothStepMin "0.000"
-	g_flSpeedOne "0.050"
-	g_flSpeedTwo "0.250"
+	g_flSmoothStepMax "0.350"
+	g_flSmoothStepMin "0.250"
+	g_flSpeedOne "0.100"
+	g_flSpeedTwo "0.200"
 	g_vColor "[1.000000 1.000000 1.000000 1.000000]"
+	g_vUVTilingOne "[10.000 1.000]"
+	g_vUVTilingTwo "[16.000 1.000]"
 	Texture "particles/watersplash/textures/water_ring.png"
-	Texture0 "particles/watersplash/textures/water_ring.png"
+	Texture_0 "particles/watersplash/textures/water_ring.png"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Translucent ----
-	g_flOpacityScale "1.000"
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
 }

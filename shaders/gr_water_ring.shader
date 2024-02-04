@@ -21,10 +21,10 @@ MODES
 COMMON
 {
 	#ifndef S_ALPHA_TEST
-	#define S_ALPHA_TEST 0
+	#define S_ALPHA_TEST 1
 	#endif
 	#ifndef S_TRANSLUCENT
-	#define S_TRANSLUCENT 1
+	#define S_TRANSLUCENT 0
 	#endif
 	
 	#include "common/shared.hlsl"
@@ -70,10 +70,10 @@ PS
 	#include "common/pixel.hlsl"
 	
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
-	CreateInputTexture2D( Texture_ps_0, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	CreateInputTexture2D( Texture_ps_1, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	Texture2D g_tTexture_ps_0 < Channel( RGBA, Box( Texture_ps_0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	Texture2D g_tTexture_ps_1 < Channel( RGBA, Box( Texture_ps_1 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	CreateInputTexture2D( Texture, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	CreateInputTexture2D( Texture_0, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	Texture2D g_tTexture < Channel( RGBA, Box( Texture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	Texture2D g_tTexture_0 < Channel( RGBA, Box( Texture_0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	float4 g_vColor < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
 	float g_flEmissionStrength < UiGroup( ",0/,0/0" ); Default1( 0.5 ); Range1( 0, 10 ); >;
 	float g_flSmoothStepMin < UiGroup( ",0/,0/0" ); Default1( 0.25 ); Range1( 0, 1 ); >;
@@ -107,13 +107,13 @@ PS
 		float l_8 = l_7 * g_flTime;
 		float l_9 = 1 - l_8;
 		float2 l_10 = TileAndOffsetUv( l_5, l_6, float2( l_9, l_9 ) );
-		float4 l_11 = Tex2DS( g_tTexture_ps_0, g_sSampler0, l_10 );
+		float4 l_11 = Tex2DS( g_tTexture, g_sSampler0, l_10 );
 		float2 l_12 = g_vUVTilingTwo;
 		float l_13 = g_flSpeedTwo;
 		float l_14 = l_13 * g_flTime;
 		float l_15 = 1 - l_14;
 		float2 l_16 = TileAndOffsetUv( l_5, l_12, float2( l_15, l_15 ) );
-		float4 l_17 = Tex2DS( g_tTexture_ps_1, g_sSampler0, l_16 );
+		float4 l_17 = Tex2DS( g_tTexture_0, g_sSampler0, l_16 );
 		float4 l_18 = lerp( l_11, l_17, 0.5 );
 		float4 l_19 = smoothstep( l_3, l_4, l_18 );
 		

@@ -1,7 +1,7 @@
 {
   "Model": "particles/watersplash/splash_ring.vmdl",
   "Description": "",
-  "BlendMode": "Translucent",
+  "BlendMode": "Masked",
   "nodes": [
     {
       "_class": "Result",
@@ -16,7 +16,7 @@
         "Output": "Result"
       },
       "Emission": {
-        "Identifier": "20",
+        "Identifier": "18",
         "Output": "Result"
       },
       "Opacity": {
@@ -32,7 +32,7 @@
       "Identifier": "1",
       "Position": "-336,160",
       "Coords": {
-        "Identifier": "22",
+        "Identifier": "20",
         "Output": "Result"
       },
       "Tile": {
@@ -49,7 +49,7 @@
       "Image": "particles/watersplash/textures/water_ring.png",
       "Sampler": {},
       "UI": {
-        "Name": "",
+        "Name": "Texture1",
         "Default": "1,1,1,1",
         "SrgbRead": true,
         "PrimaryGroup": {
@@ -131,7 +131,7 @@
       "Image": "particles/watersplash/textures/water_ring.png",
       "Sampler": {},
       "UI": {
-        "Name": "",
+        "Name": "Texture2",
         "Default": "1,1,1,1",
         "SrgbRead": true,
         "PrimaryGroup": {
@@ -142,7 +142,7 @@
       "Identifier": "8",
       "Position": "-64,320",
       "Coords": {
-        "Identifier": "23",
+        "Identifier": "21",
         "Output": "Result"
       }
     },
@@ -281,31 +281,17 @@
       "Position": "320,-240"
     },
     {
-      "_class": "VertexColor",
-      "Identifier": "18",
-      "Position": "-256,576"
-    },
-    {
-      "_class": "SplitVector",
-      "Identifier": "19",
-      "Position": "-32,576",
-      "Input": {
-        "Identifier": "18",
-        "Output": "RGB"
-      }
-    },
-    {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 2,
-      "Identifier": "20",
+      "Identifier": "18",
       "Position": "560,16",
       "A": {
         "Identifier": "17",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "21",
+        "Identifier": "19",
         "Output": "Result"
       }
     },
@@ -321,14 +307,14 @@
           "Name": ""
         }
       },
-      "Identifier": "21",
+      "Identifier": "19",
       "Position": "320,-80"
     },
     {
       "_class": "TextureCoord",
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
-      "Identifier": "22",
+      "Identifier": "20",
       "Position": "-1280,176"
     },
     {
@@ -336,14 +322,14 @@
       "DefaultTile": "1,1",
       "DefaultOffset": "0,0",
       "WrapTo01": false,
-      "Identifier": "23",
+      "Identifier": "21",
       "Position": "-336,288",
       "Coords": {
-        "Identifier": "22",
+        "Identifier": "20",
         "Output": "Result"
       },
       "Tile": {
-        "Identifier": "24",
+        "Identifier": "22",
         "Output": "Result"
       },
       "Offset": {
@@ -361,7 +347,7 @@
           "Name": ""
         }
       },
-      "Identifier": "24",
+      "Identifier": "22",
       "Position": "-1216,384"
     }
   ]
