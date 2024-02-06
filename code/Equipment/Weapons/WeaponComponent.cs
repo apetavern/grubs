@@ -14,6 +14,9 @@ public partial class WeaponComponent : Component
 
 	protected override void OnUpdate()
 	{
+		if ( IsProxy )
+			return;
+
 		if ( FiringType is FiringType.Charged )
 		{
 			if ( Input.Down( "fire" ) )

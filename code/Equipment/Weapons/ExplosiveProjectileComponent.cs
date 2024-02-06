@@ -36,16 +36,24 @@ public class ExplosiveProjectileComponent : Component
 
 	public void Explode()
 	{
-		Sound.Play( ExplosionSound );
-		ExplosionHelperComponent.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage );
+		if ( IsProxy )
+			return;
 
-		if ( Particles is not null )
-		{
-			var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( Particles, Transform.World );
-			sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
-		}
+		ExplodeEffects();
+		ExplosionHelperComponent.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage );
 
 		if ( DeleteOnExplode )
 			GameObject.Destroy();
+	}
+
+	[Broadcast]
+	public void ExplodeEffects()
+	{
+		if ( Particles is null )
+			return;
+
+		Sound.Play( ExplosionSound );
+		var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( Particles, Transform.World );
+		sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
 	}
 }

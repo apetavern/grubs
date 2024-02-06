@@ -10,7 +10,10 @@ public sealed class Grub : Component
 	[Property] public required HealthComponent Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
-	[Property] public EquipmentComponent? ActiveEquipment { get; set; }
+	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment { get; set; }
+
+	[Property] public required GameObject BazookaPrefab { get; set; }
+	[Property, ReadOnly] private GameObject? Bazooka { get; set; }
 
 	private EquipmentComponent? LastEquipped { get; set; }
 
@@ -20,8 +23,6 @@ public sealed class Grub : Component
 	{
 		base.OnStart();
 
-		ActiveEquipment?.Deploy( this );
-
 		if ( !IsProxy )
 			InitializeLocal();
 	}
@@ -30,26 +31,52 @@ public sealed class Grub : Component
 	{
 		base.OnUpdate();
 
-		if ( !Input.Pressed( "toggle_equipment" ) )
-			return;
-
-		if ( ActiveEquipment is null )
+		if ( Input.Pressed( "toggle_equipment" ) && !IsProxy )
 		{
-			var controller = Components.Get<GrubPlayerController>();
-			if ( controller is null )
-				return;
+			if ( ActiveEquipment is null )
+			{
+				var controller = Components.Get<GrubPlayerController>();
+				if ( controller is null )
+					return;
 
-			controller.LookAngles = Rotation.FromPitch( 0f ).Angles();
+				controller.LookAngles = Rotation.FromPitch( 0f ).Angles();
 
-			ActiveEquipment = LastEquipped;
-			ActiveEquipment?.Deploy( this );
+				if ( LastEquipped is null )
+				{
+					Bazooka = BazookaPrefab.Clone();
+					AssignEquipment();
+				}
+				else
+					ActiveEquipment = LastEquipped;
+
+				DeployEquipment();
+			}
+			else
+			{
+				HolsterEquipment();
+			}
 		}
-		else
-		{
-			ActiveEquipment?.Holster();
-			LastEquipped = ActiveEquipment;
-			ActiveEquipment = null;
-		}
+	}
+
+	[Broadcast]
+	private void AssignEquipment()
+	{
+		if ( Bazooka is not null )
+			ActiveEquipment = Bazooka.Components.Get<EquipmentComponent>();
+	}
+
+	[Broadcast]
+	private void DeployEquipment()
+	{
+		ActiveEquipment?.Deploy( this );
+	}
+
+	[Broadcast]
+	private void HolsterEquipment()
+	{
+		ActiveEquipment?.Holster();
+		LastEquipped = ActiveEquipment;
+		ActiveEquipment = null;
 	}
 
 	private void InitializeLocal()

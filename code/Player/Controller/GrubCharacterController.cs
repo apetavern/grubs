@@ -11,15 +11,15 @@ public class GrubCharacterController : Component
 
 
 	public Vector3 LastVelocity;
-	[Range( 0, 200 ), Property]  public float Radius { get; set; } = 16.0f;
+	[Range( 0, 200 ), Property] public float Radius { get; set; } = 16.0f;
 
-	[Range( 0, 200 ), Property]  public float Height { get; set; } = 64.0f;
+	[Range( 0, 200 ), Property] public float Height { get; set; } = 64.0f;
 
-	[Range( 0, 50 ), Property]  public float StepHeight { get; set; } = 18.0f;
+	[Range( 0, 50 ), Property] public float StepHeight { get; set; } = 18.0f;
 
-	[Range( 0, 90 ), Property]  public float GroundAngle { get; set; } = 45.0f;
+	[Range( 0, 90 ), Property] public float GroundAngle { get; set; } = 45.0f;
 
-	[Range( 0, 20 ), Property]  public float Acceleration { get; set; } = 10.0f;
+	[Range( 0, 20 ), Property] public float Acceleration { get; set; } = 10.0f;
 
 	[Property] public required GrubPlayerController Controller { get; set; }
 
@@ -34,8 +34,6 @@ public class GrubCharacterController : Component
 	[Sync] public bool IsOnGround { get; set; }
 
 	[Sync] public float CurrentGroundAngle { get; set; }
-
-	public TimeSince TimeSinceLanding { get; set; }
 
 	protected override void DrawGizmos()
 	{
@@ -216,8 +214,13 @@ public class GrubCharacterController : Component
 	{
 		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
+		OnLandedEffects();
+	}
+
+	[Broadcast]
+	private void OnLandedEffects()
+	{
 		ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, Transform.World );
-		TimeSinceLanding = TimeSinceLanding > 1f ? 0f : TimeSinceLanding;
 	}
 
 	/// <summary>

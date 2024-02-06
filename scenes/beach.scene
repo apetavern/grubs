@@ -246,6 +246,7 @@
           "Components": [
             {
               "__type": "NetworkHelper",
+              "__enabled": false,
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/grub.prefab"
@@ -265,6 +266,13 @@
                 }
               ],
               "StartServer": true
+            },
+            {
+              "__type": "NetHelper",
+              "PlayerPrefab": {
+                "_type": "gameobject",
+                "prefab": "prefabs/grub.prefab"
+              }
             }
           ]
         },
@@ -272,136 +280,37 @@
           "Id": "504b9b94-a176-4ef2-8d95-d6a747a75503",
           "Name": "Spawn",
           "Position": "670.2698,-5.776825,57.7177",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SpawnPoint",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
         },
         {
           "Id": "9dc026f3-462f-450c-a93d-6c267a247aae",
           "Name": "Spawn (1)",
           "Position": "742.2692,-5.776825,57.7177",
-          "Enabled": true
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SpawnPoint",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
         },
         {
           "Id": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4",
           "Name": "Spawn (2)",
           "Position": "789.9045,-5.776825,57.7177",
-          "Enabled": true
-        }
-      ]
-    },
-    {
-      "Id": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
-      "Name": "Bazooka",
-      "Position": "-477.0251,-240.1879,324.0206",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "__enabled": false,
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/weapons/bazooka/bazooka.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "EquipmentComponent",
-          "HoldPose": "Bazooka",
-          "Model": {
-            "_type": "component",
-            "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
-            "component_type": "SkinnedModelRenderer"
-          }
-        },
-        {
-          "__type": "HighlightOutline",
-          "Color": "0,0,0,1",
-          "InsideColor": "0,0,0,0",
-          "InsideObscuredColor": "0,0,0,0",
-          "Material": null,
-          "ObscuredColor": "0,0,0,0.4",
-          "Width": 0.35
-        },
-        {
-          "__type": "WeaponComponent",
-          "Equipment": {
-            "_type": "component",
-            "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
-            "component_type": "EquipmentComponent"
-          },
-          "FiringType": "Charged",
-          "OnFire": {
-            "Kind": "Action",
-            "Version": 3,
-            "Variables": [
-              {
-                "Name": "_this",
-                "Type": "Sandbox.Game/Sandbox.Component",
-                "Default": {
-                  "_type": "component",
-                  "go": "a3a70466-c673-4eed-82a4-bb86e30ab1a9",
-                  "component_type": "SkinnedModelRenderer"
-                }
-              }
-            ],
-            "Nodes": [
-              {
-                "Id": 0,
-                "Type": "input"
-              },
-              {
-                "Id": 1,
-                "Type": "grubs.spawn_projectile",
-                "UserData": {
-                  "Position": "304,-32"
-                }
-              },
-              {
-                "Id": 2,
-                "Type": "scene.get",
-                "Properties": {
-                  "T": "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
-                },
-                "UserData": {
-                  "Position": "-32,-112"
-                }
-              }
-            ],
-            "Links": [
-              {
-                "SrcId": 0,
-                "SrcName": "_signal",
-                "DstId": 1,
-                "DstName": "_signal"
-              },
-              {
-                "SrcId": 0,
-                "SrcName": "charge",
-                "DstId": 1,
-                "DstName": "charge"
-              },
-              {
-                "Value": {
-                  "_type": "gameobject",
-                  "prefab": "prefabs/bazooka_shell.prefab"
-                },
-                "DstId": 1,
-                "DstName": "projectile"
-              },
-              {
-                "SrcId": 2,
-                "SrcName": "_result",
-                "DstId": 1,
-                "DstName": "source"
-              }
-            ],
-            "UserData": {
-              "Title": "On Fire",
-              "id": "94d366b3-b003-4026-9a13-abc3d87be83d"
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SpawnPoint",
+              "Color": "0.8902,0.31765,0.05098,1"
             }
-          }
+          ]
         }
       ]
     },
@@ -420,23 +329,10 @@
       ]
     },
     {
-      "Id": "6a895242-a7f3-46c9-8132-6c2c98967310",
-      "Name": "Object",
-      "Position": "-384.1077,-443.9945,492.728",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "EnvmapProbe",
-          "Bounds": {
-            "Mins": "-512,-512,-512",
-            "Maxs": "512,512,512"
-          },
-          "Feathering": 0.02,
-          "Projection": "Sphere",
-          "Texture": "textures/cubemaps/default2.vtex",
-          "TintColor": "1,1,1,1"
-        }
-      ]
+      "Id": "2a9412d9-17b7-42d8-9713-a2796a662cf7",
+      "Name": "Bazooka",
+      "Position": "-309.4173,291.7556,309.1355",
+      "__Prefab": "prefabs/bazooka.prefab"
     }
   ],
   "SceneProperties": {
@@ -462,6 +358,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-02-03T23:54:53.4130098\u002B00:00",
+  "LastSaved": "2024-02-03T13:21:24.4421369-04:00",
   "__references": []
 }

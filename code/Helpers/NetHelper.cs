@@ -5,6 +5,16 @@ public class NetHelper : Component, Component.INetworkListener
 {
 	[Property] public required GameObject PlayerPrefab { get; set; }
 
+	protected override async Task OnLoad()
+	{
+		if ( !GameNetworkSystem.IsActive )
+		{
+			LoadingScreen.Title = "Creating Lobby";
+			await Task.DelayRealtimeSeconds( 0.1f );
+			GameNetworkSystem.CreateLobby();
+		}
+	}
+
 	public void OnActive( Connection conn )
 	{
 		var startPosition = FindSpawnLocation();

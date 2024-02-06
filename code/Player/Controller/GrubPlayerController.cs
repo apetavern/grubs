@@ -1,7 +1,6 @@
 ﻿namespace Grubs.Player.Controller;
 
-[Title( "Grubs - Player Controller" )]
-[Category( "Grubs" )]
+[Title( "Grubs - Player Controller" ), Category( "Grubs" )]
 public sealed partial class GrubPlayerController : Component
 {
 	[Property] public required GameObject Body { get; set; }
@@ -14,8 +13,8 @@ public sealed partial class GrubPlayerController : Component
 
 	public float MoveInput => Input.AnalogMove.y;
 	public float LookInput => Input.AnalogMove.x;
-	public Angles LookAngles { get; set; }
-	public int Facing { get; set; } = 1;
+	[Sync] public Angles LookAngles { get; set; }
+	[Sync] public int Facing { get; set; } = 1;
 	public int LastFacing { get; set; } = 1;
 	[Sync] public Rotation EyeRotation { get; set; }
 	[Sync] public bool IsChargingBackflip { get; set; }
