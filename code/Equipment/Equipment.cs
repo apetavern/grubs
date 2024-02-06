@@ -8,12 +8,21 @@ public class EquipmentComponent : Component
 	[Property] public required SkinnedModelRenderer Model { get; set; }
 	[Property] public HoldPose HoldPose { get; set; } = HoldPose.None;
 
+	[Property, Sync] public int SlotIndex { get; set; }
+
 	/// <summary>
 	/// This bool exists to break out of the component lifecycle, as it is behaving weirdly.
 	/// </summary>
 	public bool ShouldShow { get; set; }
 
 	public Grub? Grub { get; set; }
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		Holster();
+	}
 
 	protected override void OnUpdate()
 	{
