@@ -15,30 +15,27 @@ public sealed class PlayerInventory : Component
 
 	protected override void OnStart()
 	{
-		if ( !IsProxy )
-			EquipmentActive = false;
+		if ( IsProxy )
+			return;
+
+		EquipmentActive = false;
 
 		foreach ( var prefab in EquipmentPrefabs )
 		{
 			var go = prefab.Clone();
-			if ( go is null )
-				return;
+			go.NetworkSpawn();
 
-			if ( !IsProxy )
-			{
-				Log.Info( $"Networking Spawning {go.Name}!" );
-
-				go.NetworkSpawn();
-			}
+			Log.Info( $"Networking Spawning {go.Name}!" );
 
 			var equipment = go.Components.Get<EquipmentComponent>();
-			if ( equipment is null )
-				return;
 
 			Equipment.Add( equipment );
 
-			ToggleEquipment( true, Equipment.Count - 1 );
-			ToggleEquipment( false, Equipment.Count - 1 );
+			var slotIndex = Equipment.Count - 1;
+
+			equipment.SlotIndex = slotIndex;
+			equipment.Deploy( Grub );
+			equipment.Holster();
 		}
 	}
 
@@ -67,7 +64,10 @@ public sealed class PlayerInventory : Component
 	[Broadcast]
 	private void ToggleEquipment( bool active, int slot )
 	{
-		var equipment = Equipment.ElementAt( slot );
+		var equipment = GetEquipmentAtSlot( slot );
+
+		if ( equipment is null )
+			return;
 
 		if ( active )
 			equipment.Deploy( Grub );
@@ -80,7 +80,12 @@ public sealed class PlayerInventory : Component
 		if ( !EquipmentActive )
 			return null;
 
-		return Equipment.ElementAt( ActiveSlot );
+		return GetEquipmentAtSlot( ActiveSlot );
+	}
+
+	private EquipmentComponent? GetEquipmentAtSlot( int slot )
+	{
+		return GameObject.Components.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants ).FirstOrDefault( x => x.SlotIndex == slot );
 	}
 
 	private void CycleSlot()
