@@ -23,6 +23,9 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
 		GrubRenderer.Set( "bot_thinking", Thinking );
 
+		// if ( IsProxy )
+		// 	Log.Info( Grub.ActiveEquipment );
+
 		var holdPose = HoldPose.None;
 		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() )
 			holdPose = Grub.ActiveEquipment.HoldPose;

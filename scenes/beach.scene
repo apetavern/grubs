@@ -2,51 +2,147 @@
   "Id": "c0571110-4e3a-4fa4-b18a-0278b8599d2a",
   "GameObjects": [
     {
-      "Id": "91e0de17-917f-4860-bc89-2e0261f4a419",
-      "Name": "Menu Camera",
-      "Position": "-2194.694,1256.365,288.1016",
-      "Rotation": "-0.008123212,0.005402988,0.8326037,0.5537851",
-      "Components": [
+      "Id": "450d7fe2-988e-48a6-adc2-53055588418b",
+      "Name": "Static",
+      "Enabled": true,
+      "Children": [
         {
-          "__type": "CameraComponent",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 60,
-          "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 10
+          "Id": "8c43f824-4348-4949-9123-9b8a5b10b681",
+          "Name": "Terrain",
+          "Position": "-195.9637,512,0",
+          "Scale": "50,2,5",
+          "Tags": "solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "BoxCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false,
+              "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "a23135d1-a5aa-4dc1-ab59-eba9781b4ac5",
+          "Name": "Terrain (1)",
+          "Position": "192.1305,512,103.2345",
+          "Rotation": "0.00000007593256,-0.2902639,-0.0000000440438,0.9569466",
+          "Scale": "50,2,5",
+          "Tags": "solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "BoxCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false,
+              "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "662860ab-7687-400a-a893-e8f112d2c431",
+          "Name": "Terrain (2)",
+          "Position": "-577.9463,512,-97.21996",
+          "Rotation": "0.00000001127116,-0.8241808,-0.00000001127116,0.5663267",
+          "Scale": "50,2,5",
+          "Tags": "solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "BoxCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false,
+              "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
+          "Name": "Water",
+          "Position": "316.0363,4234.852,0",
+          "Scale": "200,200,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/physics/water.vmat",
+              "Model": "models/dev/plane.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "b817c40d-8437-4a22-acec-35f71c7f7ae3",
+          "Name": "Sun",
+          "Position": "288.8641,-765.1482,-163.5517",
+          "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "DirectionalLight",
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "0.91373,0.98039,1,1",
+              "Shadows": true,
+              "SkyColor": "0.05882,0.07451,0.08235,1"
+            }
+          ]
         }
       ]
     },
     {
-      "Id": "9ab4bf83-8adc-4860-bd61-017cb68b14ec",
-      "Name": "Game Camera",
-      "Position": "-512,-1024,256",
-      "Rotation": "0.0000000444179,-0.000000002547514,0.7071068,0.7071068",
-      "Tags": "maincamera",
+      "Id": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
+      "Name": "World",
+      "Position": "-340.4734,292.9649,316.1798",
+      "Enabled": true,
       "Components": [
         {
-          "__type": "CameraComponent",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 60,
-          "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1024,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 10
+          "__type": "ExplosionHelperComponent"
+        },
+        {
+          "__type": "ParticleHelperComponent"
         }
       ]
     },
@@ -79,27 +175,7 @@
         },
         {
           "__type": "GrubFollowCamera",
-          "Target": {
-            "_type": "gameobject",
-            "go": "1bf41274-2ee0-492e-a854-3c9d8fb24274"
-          }
-        }
-      ]
-    },
-    {
-      "Id": "b817c40d-8437-4a22-acec-35f71c7f7ae3",
-      "Name": "Sun",
-      "Position": "-27.1722,0.00000284161,69.74006",
-      "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "DirectionalLight",
-          "FogMode": "Enabled",
-          "FogStrength": 1,
-          "LightColor": "0.91373,0.98039,1,1",
-          "Shadows": true,
-          "SkyColor": "0.05882,0.07451,0.08235,1"
+          "Target": null
         }
       ]
     },
@@ -119,120 +195,6 @@
       "Children": []
     },
     {
-      "Id": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
-      "Name": "Water",
-      "Position": "0,5000,0",
-      "Scale": "200,200,0",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "ModelRenderer",
-          "BodyGroups": 18446744073709551615,
-          "MaterialGroup": null,
-          "MaterialOverride": "materials/physics/water.vmat",
-          "Model": "models/dev/plane.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        }
-      ]
-    },
-    {
-      "Id": "8c43f824-4348-4949-9123-9b8a5b10b681",
-      "Name": "Terrain",
-      "Position": "-512,512,0",
-      "Scale": "50,2,5",
-      "Tags": "solid",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "BoxCollider",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false,
-          "Surface": null
-        }
-      ]
-    },
-    {
-      "Id": "a23135d1-a5aa-4dc1-ab59-eba9781b4ac5",
-      "Name": "Terrain (1)",
-      "Position": "-54.93332,512,-22.52875",
-      "Rotation": "0.00000007593256,-0.2902639,-0.0000000440438,0.9569466",
-      "Scale": "50,2,5",
-      "Tags": "solid",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "BoxCollider",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false,
-          "Surface": null
-        }
-      ]
-    },
-    {
-      "Id": "662860ab-7687-400a-a893-e8f112d2c431",
-      "Name": "Terrain (2)",
-      "Position": "-640.8619,512,226.1102",
-      "Rotation": "0.00000001127116,-0.8241808,-0.00000001127116,0.5663267",
-      "Scale": "50,2,5",
-      "Tags": "solid",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "BoxCollider",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false,
-          "Surface": null
-        }
-      ]
-    },
-    {
-      "Id": "1bf41274-2ee0-492e-a854-3c9d8fb24274",
-      "Name": "Grub",
-      "Position": "-330.7031,512,273.8211",
-      "Tags": "player",
-      "__Prefab": "prefabs/grub.prefab"
-    },
-    {
       "Id": "18d67b0f-c777-48d1-ad2e-d002f58bd055",
       "Name": "Network",
       "Position": "-1098.61,507.4031,191.4738",
@@ -244,29 +206,6 @@
           "Position": "607.9057,-129.2016,57.7177",
           "Enabled": true,
           "Components": [
-            {
-              "__type": "NetworkHelper",
-              "__enabled": false,
-              "PlayerPrefab": {
-                "_type": "gameobject",
-                "prefab": "prefabs/grub.prefab"
-              },
-              "SpawnPoints": [
-                {
-                  "_type": "gameobject",
-                  "go": "504b9b94-a176-4ef2-8d95-d6a747a75503"
-                },
-                {
-                  "_type": "gameobject",
-                  "go": "9dc026f3-462f-450c-a93d-6c267a247aae"
-                },
-                {
-                  "_type": "gameobject",
-                  "go": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4"
-                }
-              ],
-              "StartServer": true
-            },
             {
               "__type": "NetHelper",
               "PlayerPrefab": {
@@ -313,26 +252,6 @@
           ]
         }
       ]
-    },
-    {
-      "Id": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
-      "Name": "World",
-      "Position": "-340.4734,292.9649,316.1798",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "ExplosionHelperComponent"
-        },
-        {
-          "__type": "ParticleHelperComponent"
-        }
-      ]
-    },
-    {
-      "Id": "2a9412d9-17b7-42d8-9713-a2796a662cf7",
-      "Name": "Bazooka",
-      "Position": "-309.4173,291.7556,309.1355",
-      "__Prefab": "prefabs/bazooka.prefab"
     }
   ],
   "SceneProperties": {
@@ -358,6 +277,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-02-03T13:21:24.4421369-04:00",
+  "LastSaved": "2024-02-06T15:50:34.6529233-04:00",
   "__references": []
 }

@@ -10,12 +10,8 @@ public sealed class Grub : Component
 	[Property] public required HealthComponent Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
-	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment { get; set; }
-
-	[Property] public required GameObject BazookaPrefab { get; set; }
-	[Property, ReadOnly] private GameObject? Bazooka { get; set; }
-
-	private EquipmentComponent? LastEquipped { get; set; }
+	[Property] public required PlayerInventory Inventory { get; set; }
+	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment => Inventory.ActiveEquipment;
 
 	[Sync] public string Name { get; set; } = "Grubby";
 
@@ -25,58 +21,6 @@ public sealed class Grub : Component
 
 		if ( !IsProxy )
 			InitializeLocal();
-	}
-
-	protected override void OnUpdate()
-	{
-		base.OnUpdate();
-
-		if ( Input.Pressed( "toggle_equipment" ) && !IsProxy )
-		{
-			if ( ActiveEquipment is null )
-			{
-				var controller = Components.Get<GrubPlayerController>();
-				if ( controller is null )
-					return;
-
-				controller.LookAngles = Rotation.FromPitch( 0f ).Angles();
-
-				if ( LastEquipped is null )
-				{
-					Bazooka = BazookaPrefab.Clone();
-					AssignEquipment();
-				}
-				else
-					ActiveEquipment = LastEquipped;
-
-				DeployEquipment();
-			}
-			else
-			{
-				HolsterEquipment();
-			}
-		}
-	}
-
-	[Broadcast]
-	private void AssignEquipment()
-	{
-		if ( Bazooka is not null )
-			ActiveEquipment = Bazooka.Components.Get<EquipmentComponent>();
-	}
-
-	[Broadcast]
-	private void DeployEquipment()
-	{
-		ActiveEquipment?.Deploy( this );
-	}
-
-	[Broadcast]
-	private void HolsterEquipment()
-	{
-		ActiveEquipment?.Holster();
-		LastEquipped = ActiveEquipment;
-		ActiveEquipment = null;
 	}
 
 	private void InitializeLocal()

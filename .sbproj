@@ -652,6 +652,11 @@
           "Name": "toggle_equipment",
           "KeyboardCode": "C",
           "GroupName": "Other"
+        },
+        {
+          "Name": "next_equipment",
+          "KeyboardCode": "E",
+          "GroupName": "Other"
         }
       ]
     },

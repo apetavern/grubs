@@ -31,6 +31,8 @@ public class EquipmentComponent : Component
 
 	public void Deploy( Grub grub )
 	{
+		Log.Info( $"Deploying {GameObject.Name} for {grub.Name}" );
+
 		Grub = grub;
 
 		var target = grub.GameObject.GetAllObjects( true ).First( c => c.Name == "hold_L" );
@@ -41,6 +43,8 @@ public class EquipmentComponent : Component
 
 	public void Holster()
 	{
+		Log.Info( $"Holstering {GameObject.Name} for {Grub?.Name}" );
+
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
 		ShouldShow = false;
