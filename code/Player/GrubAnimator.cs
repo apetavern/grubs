@@ -10,7 +10,7 @@ public sealed class GrubAnimator : Component
 	[Property] public required SkinnedModelRenderer GrubRenderer { get; set; }
 	[Property] public required GrubPlayerController Controller { get; set; }
 
-	public bool Thinking;
+	public bool Thinking { get; set; }
 
 	private float _incline;
 
@@ -22,9 +22,6 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "grounded", Controller.IsGrounded );
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
 		GrubRenderer.Set( "bot_thinking", Thinking );
-
-		// if ( IsProxy )
-		// 	Log.Info( Grub.ActiveEquipment );
 
 		var holdPose = HoldPose.None;
 		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() )
