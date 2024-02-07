@@ -10,10 +10,7 @@ public class EquipmentComponent : Component
 
 	[Property, Sync] public int SlotIndex { get; set; }
 
-	/// <summary>
-	/// This bool exists to break out of the component lifecycle, as it is behaving weirdly.
-	/// </summary>
-	public bool ShouldShow { get; set; }
+	public bool Deployed { get; set; }
 
 	public Grub? Grub { get; set; }
 
@@ -34,28 +31,24 @@ public class EquipmentComponent : Component
 		if ( Grub is null )
 			return;
 
-		var show = Grub.PlayerController.ShouldShowWeapon() && ShouldShow;
+		var show = Grub.PlayerController.ShouldShowWeapon() && Deployed;
 		Model.Enabled = show;
 	}
 
 	public void Deploy( Grub grub )
 	{
-		Log.Info( $"Deploying {GameObject.Name} for {grub.Name}" );
-
 		Grub = grub;
 
 		var target = grub.GameObject.GetAllObjects( true ).First( c => c.Name == "hold_L" );
 		GameObject.SetParent( target, false );
 		Model.Enabled = true;
-		ShouldShow = true;
+		Deployed = true;
 	}
 
 	public void Holster()
 	{
-		Log.Info( $"Holstering {GameObject.Name} for {Grub?.Name}" );
-
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
-		ShouldShow = false;
+		Deployed = false;
 	}
 }

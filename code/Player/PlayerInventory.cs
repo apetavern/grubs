@@ -25,8 +25,6 @@ public sealed class PlayerInventory : Component
 			var go = prefab.Clone();
 			go.NetworkSpawn();
 
-			Log.Info( $"Networking Spawning {go.Name}!" );
-
 			var equipment = go.Components.Get<EquipmentComponent>();
 
 			Equipment.Add( equipment );
@@ -85,7 +83,8 @@ public sealed class PlayerInventory : Component
 
 	private EquipmentComponent? GetEquipmentAtSlot( int slot )
 	{
-		return GameObject.Components.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants ).FirstOrDefault( x => x.SlotIndex == slot );
+		return GameObject.Components.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
+			.FirstOrDefault( x => x.SlotIndex == slot );
 	}
 
 	private void CycleSlot()

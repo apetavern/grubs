@@ -3,8 +3,7 @@ using Grubs.Player;
 
 namespace Grubs.Helpers;
 
-[Title( "Grubs - Explosion Helper" )]
-[Category( "World" )]
+[Title( "Grubs - Explosion Helper" ), Category( "World" )]
 public sealed class ExplosionHelperComponent : Component
 {
 	public static ExplosionHelperComponent Instance { get; set; } = new();
@@ -16,9 +15,6 @@ public sealed class ExplosionHelperComponent : Component
 
 	public void Explode( Component source, Vector3 position, float radius, float damage )
 	{
-		if ( IsProxy )
-			return;
-
 		var gos = Scene.FindInPhysics( new Sphere( position, radius ) );
 		foreach ( var go in gos )
 		{
@@ -27,6 +23,8 @@ public sealed class ExplosionHelperComponent : Component
 
 			var dist = Vector3.DistanceBetween( position, go.Transform.Position );
 			var distFactor = 1.0f - MathF.Pow( dist / radius, 2 ).Clamp( 0, 1 );
+
+			Log.Info( "test" );
 
 			if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
 				HandleGrubExplosion( grub, position );

@@ -40,7 +40,6 @@ public class ExplosiveProjectileComponent : Component
 			return;
 
 		ExplodeEffects();
-		ExplosionHelperComponent.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage );
 
 		if ( DeleteOnExplode )
 			GameObject.Destroy();
@@ -49,10 +48,12 @@ public class ExplosiveProjectileComponent : Component
 	[Broadcast]
 	public void ExplodeEffects()
 	{
+		ExplosionHelperComponent.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage );
+		Sound.Play( ExplosionSound );
+
 		if ( Particles is null )
 			return;
 
-		Sound.Play( ExplosionSound );
 		var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( Particles, Transform.World );
 		sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
 	}
