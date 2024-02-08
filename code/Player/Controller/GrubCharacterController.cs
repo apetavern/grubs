@@ -41,8 +41,8 @@ public class GrubCharacterController : Component
 	}
 
 	/// <summary>
-	///     Add acceleration to the current velocity.
-	///     No need to scale by time delta - it will be done inside.
+	/// Add acceleration to the current velocity.
+	/// No need to scale by time delta - it will be done inside.
 	/// </summary>
 	public void Accelerate( Vector3 vector )
 	{
@@ -214,17 +214,17 @@ public class GrubCharacterController : Component
 	{
 		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
-		OnLandedEffects();
+		OnLandedEffects( Transform.Position );
 	}
 
 	[Broadcast]
-	private void OnLandedEffects()
+	private void OnLandedEffects( Vector3 position )
 	{
-		ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, Transform.World );
+		ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
 	}
 
 	/// <summary>
-	///     Disconnect from ground and punch our velocity. This is useful if you want the player to jump or something.
+	/// Disconnect from ground and punch our velocity. This is useful if you want the player to jump or something.
 	/// </summary>
 	public void Punch( in Vector3 amount )
 	{
@@ -233,7 +233,7 @@ public class GrubCharacterController : Component
 	}
 
 	/// <summary>
-	///     Move a character, with this velocity
+	/// Move a character, with this velocity
 	/// </summary>
 	public void Move()
 	{
@@ -253,8 +253,8 @@ public class GrubCharacterController : Component
 	}
 
 	/// <summary>
-	///     Move from our current position to this target position, but using tracing an sliding.
-	///     This is good for different control modes like ladders and stuff.
+	/// Move from our current position to this target position, but using tracing an sliding.
+	/// This is good for different control modes like ladders and stuff.
 	/// </summary>
 	public void MoveTo( Vector3 targetPosition, bool useStep )
 	{

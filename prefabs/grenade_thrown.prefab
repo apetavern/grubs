@@ -1,0 +1,80 @@
+{
+  "RootObject": {
+    "Id": "d12c4888-71b3-43da-9f41-62eb19d48fef",
+    "Name": "grenade_thrown",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "SkinnedModelRenderer",
+        "BodyGroups": 1,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/weapons/grenade/grenade.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "HighlightOutline",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "Material": null,
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      },
+      {
+        "__type": "ExplosiveProjectileComponent",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 4,
+        "ExplodeOnCollision": false,
+        "ExplosionDamage": 50,
+        "ExplosionRadius": 100,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "PhysicsProjectileComponent",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "go": "d12c4888-71b3-43da-9f41-62eb19d48fef",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "go": "d12c4888-71b3-43da-9f41-62eb19d48fef",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 500
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "Y": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "SphereCollider",
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Radius": 8,
+        "Static": false,
+        "Surface": null
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

@@ -24,8 +24,6 @@ public sealed class ExplosionHelperComponent : Component
 			var dist = Vector3.DistanceBetween( position, go.Transform.Position );
 			var distFactor = 1.0f - MathF.Pow( dist / radius, 2 ).Clamp( 0, 1 );
 
-			Log.Info( "test" );
-
 			if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
 				HandleGrubExplosion( grub, position );
 

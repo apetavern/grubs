@@ -22,7 +22,8 @@
           "_type": "component",
           "go": "c0d0012d-8a2a-4fb8-b8d4-788fa1e26cd4",
           "component_type": "SkinnedModelRenderer"
-        }
+        },
+        "SlotIndex": 0
       },
       {
         "__type": "WeaponComponent",
@@ -85,7 +86,7 @@
             {
               "Value": {
                 "_type": "gameobject",
-                "prefab": "prefabs/bazooka_shell.prefab"
+                "prefab": "prefabs/grenade_thrown.prefab"
               },
               "DstId": 1,
               "DstName": "projectile"

@@ -58,4 +58,10 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "backflip_charge", Controller.BackflipCharge );
 		GrubRenderer.Set( "hardfall", Controller.IsHardFalling );
 	}
+
+	[Broadcast]
+	public void Fire()
+	{
+		GrubRenderer.Set( "fire", true );
+	}
 }

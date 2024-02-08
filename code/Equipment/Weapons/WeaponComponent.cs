@@ -28,6 +28,8 @@ public partial class WeaponComponent : Component
 			if ( Input.Released( "fire" ) )
 			{
 				OnFire?.Invoke( _weaponCharge );
+				if ( Equipment.Grub is not null )
+					Equipment.Grub.Animator.Fire();
 				_weaponCharge = 0;
 			}
 		}

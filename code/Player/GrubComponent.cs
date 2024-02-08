@@ -10,6 +10,7 @@ public sealed class Grub : Component
 	[Property] public required HealthComponent Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
+	[Property] public required GrubAnimator Animator { get; set; }
 	[Property] public required PlayerInventory Inventory { get; set; }
 	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment => Inventory.ActiveEquipment;
 
