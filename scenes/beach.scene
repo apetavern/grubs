@@ -9,7 +9,37 @@
         {
           "Id": "8c43f824-4348-4949-9123-9b8a5b10b681",
           "Name": "Terrain",
-          "Position": "-195.9637,512,0",
+          "Position": "0,512,0",
+          "Scale": "17.77881,2,5",
+          "Tags": "solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "BoxCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false,
+              "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "5c1ed47c-97a5-4589-88e4-61da3623e07c",
+          "Name": "Terrain",
+          "Position": "-400,512,95.58618",
+          "Rotation": "0,0.258819,0,0.9659258",
           "Scale": "50,2,5",
           "Tags": "solid",
           "Enabled": true,
@@ -36,11 +66,11 @@
           ]
         },
         {
-          "Id": "a23135d1-a5aa-4dc1-ab59-eba9781b4ac5",
-          "Name": "Terrain (1)",
-          "Position": "192.1305,512,103.2345",
-          "Rotation": "0.00000007593256,-0.2902639,-0.0000000440438,0.9569466",
-          "Scale": "50,2,5",
+          "Id": "035e29b0-a40d-4a33-aea8-fc1333d67732",
+          "Name": "Terrain",
+          "Position": "-500,512,349.8441",
+          "Rotation": "0,0.258819,0,0.9659258",
+          "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
           "Enabled": true,
           "Components": [
@@ -66,10 +96,100 @@
           ]
         },
         {
-          "Id": "662860ab-7687-400a-a893-e8f112d2c431",
-          "Name": "Terrain (2)",
-          "Position": "-577.9463,512,-97.21996",
-          "Rotation": "0.00000001127116,-0.8241808,-0.00000001127116,0.5663267",
+          "Id": "e19425c7-3276-43ae-bb6e-d305106a6bd9",
+          "Name": "Terrain",
+          "Position": "500,512,349.8441",
+          "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
+          "Scale": "14.3708,2,0.2546272",
+          "Tags": "solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "BoxCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false,
+              "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "e73651dc-286c-4e3b-bc8d-9ca24b114ced",
+          "Name": "Terrain",
+          "Position": "343.9196,512,677.1239",
+          "Rotation": "-0.9659258,-0.00000001131334,0.258819,-0.00000004222196",
+          "Scale": "14.3708,2,0.2546272",
+          "Tags": "solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "BoxCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false,
+              "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "34952084-b254-4941-b6eb-7be548edcdee",
+          "Name": "Terrain",
+          "Position": "-343.961,512,677.1239",
+          "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
+          "Scale": "14.3708,2,0.2546272",
+          "Tags": "solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "BoxCollider",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": false,
+              "Surface": null
+            }
+          ]
+        },
+        {
+          "Id": "66336cc9-0cf4-4d14-bac7-04907656b007",
+          "Name": "Terrain",
+          "Position": "400,512,95.58618",
+          "Rotation": "0,-0.258819,0,0.9659259",
           "Scale": "50,2,5",
           "Tags": "solid",
           "Enabled": true,
@@ -210,7 +330,7 @@
               "__type": "NetHelper",
               "PlayerPrefab": {
                 "_type": "gameobject",
-                "prefab": "prefabs/grub.prefab"
+                "prefab": "prefabs/grub/grub.prefab"
               }
             }
           ]
@@ -218,7 +338,7 @@
         {
           "Id": "504b9b94-a176-4ef2-8d95-d6a747a75503",
           "Name": "Spawn",
-          "Position": "670.2698,-5.776825,57.7177",
+          "Position": "1047.124,-5.776825,57.7177",
           "Enabled": true,
           "Components": [
             {
@@ -230,7 +350,7 @@
         {
           "Id": "9dc026f3-462f-450c-a93d-6c267a247aae",
           "Name": "Spawn (1)",
-          "Position": "742.2692,-5.776825,57.7177",
+          "Position": "1119.123,-5.776825,57.7177",
           "Enabled": true,
           "Components": [
             {
@@ -242,7 +362,7 @@
         {
           "Id": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4",
           "Name": "Spawn (2)",
-          "Position": "789.9045,-5.776825,57.7177",
+          "Position": "1166.758,-5.776825,57.7177",
           "Enabled": true,
           "Components": [
             {
@@ -277,6 +397,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-02-07T19:17:21.5745123-04:00",
+  "LastSaved": "2024-02-08T09:58:51.4559739-04:00",
   "__references": []
 }

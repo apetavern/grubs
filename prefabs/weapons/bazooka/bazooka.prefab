@@ -1,101 +1,117 @@
 {
-  "SchemaVersion": 1,
-  "Name": null,
-  "Description": null,
-  "Root": {
-    "Guid": "41355bd8-6c07-41d8-ad50-3c407dba8d07",
-    "Class": "Weapon",
-    "Entities": [],
+  "RootObject": {
+    "Id": "34e64148-41c5-4881-8521-daecbdeaf713",
+    "Name": "bazooka",
+    "Enabled": true,
     "Components": [
       {
-        "Guid": "d2d1b132-a403-4b27-b9f0-bf7007eebe7f",
-        "Class": "GadgetWeaponComponent",
-        "Keys": {
-          "GadgetPrefabPath": {
-            "Type": "String",
-            "Value": "\u0022prefabs/weapons/bazooka/projectile.prefab\u0022"
-          },
-          "_name": {
-            "Value": "\u0022Projectile\u0022"
-          },
-          "_tags": {
-            "Value": "[]"
-          },
-          "GadgetPrefab": {
-            "Type": "Prefab",
-            "Value": "\u0022prefabs/weapons/bazooka/bazooka_projectile.prefab\u0022"
-          },
-          "UseSound": {
-            "Type": "String",
-            "Value": "\u0022sounds/weapons/bazooka/bazooka_fire.sound\u0022"
-          },
-          "MuzzleParticle": {
-            "Type": "String",
-            "Value": "\u0022particles/muzzleflash/grubs_muzzleflash.vpcf\u0022"
+        "__type": "EquipmentComponent",
+        "HoldPose": "Bazooka",
+        "Model": {
+          "_type": "component",
+          "go": "34e64148-41c5-4881-8521-daecbdeaf713",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "SlotIndex": 0
+      },
+      {
+        "__type": "SkinnedModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/weapons/bazooka/bazooka.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "WeaponComponent",
+        "Equipment": {
+          "_type": "component",
+          "go": "34e64148-41c5-4881-8521-daecbdeaf713",
+          "component_type": "EquipmentComponent"
+        },
+        "FiringType": "Charged",
+        "OnFire": {
+          "Kind": "Action",
+          "Version": 3,
+          "Variables": [
+            {
+              "Name": "_this",
+              "Type": "Sandbox.Game/Sandbox.Component",
+              "Default": {
+                "_type": "component",
+                "go": "34e64148-41c5-4881-8521-daecbdeaf713",
+                "component_type": "EquipmentComponent"
+              }
+            }
+          ],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "224,-96"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
+              },
+              "UserData": {
+                "Position": "-16,-144"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "charge",
+              "DstId": 1,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
+              },
+              "DstId": 1,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "source"
+            }
+          ],
+          "UserData": {
+            "Title": "On Fire",
+            "id": "5684bf7e-9894-4451-992e-51ca8962efb5",
+            "ReferencedComponentTypes": [
+              "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
+            ]
           }
         }
       }
     ],
-    "Keys": {
-      "Charges": {
-        "Type": "Int32",
-        "Value": "1"
-      },
-      "ShowReticle": {
-        "Type": "Boolean",
-        "Value": "true"
-      },
-      "DefaultAmmoAmount": {
-        "Type": "Int32",
-        "Value": "-1"
-      },
-      "ClampAim": {
-        "Type": "Boolean",
-        "Value": "false"
-      },
-      "AllowMovement": {
-        "Type": "Boolean",
-        "Value": "false"
-      },
-      "FiringType": {
-        "Type": "FiringType",
-        "Value": "\u0022Charged\u0022"
-      },
-      "HoldPose": {
-        "Type": "HoldPose",
-        "Value": "\u0022Bazooka\u0022"
-      },
-      "Model": {
-        "Type": "Model",
-        "Value": "\u0022models/weapons/bazooka/bazooka.vmdl\u0022"
-      },
-      "Icon": {
-        "Type": "String",
-        "Value": "\u0022models/weapons/bazooka/bazooka.vmdl_c.png\u0022"
-      },
-      "_name": {
-        "Value": "\u0022Bazooka\u0022"
-      },
-      "_localposition": {
-        "Value": "\u00220,0,0\u0022"
-      },
-      "_localrotation": {
-        "Value": "\u00220,0,0\u0022"
-      },
-      "_scale": {
-        "Value": "1"
-      },
-      "_tags": {
-        "Value": "\u0022weapon\u0022"
-      },
-      "DropChance": {
-        "Type": "Single",
-        "Value": "0"
-      },
-      "WeaponType": {
-        "Type": "WeaponType",
-        "Value": "\u0022Weapon\u0022"
-      }
-    }
-  }
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
 }

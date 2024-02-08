@@ -126,11 +126,11 @@
         "EquipmentPrefabs": [
           {
             "_type": "gameobject",
-            "prefab": "prefabs/bazooka.prefab"
+            "prefab": "prefabs/weapons/bazooka/bazooka.prefab"
           },
           {
             "_type": "gameobject",
-            "prefab": "prefabs/grenade.prefab"
+            "prefab": "prefabs/weapons/grenade/grenade.prefab"
           }
         ],
         "Grub": {
