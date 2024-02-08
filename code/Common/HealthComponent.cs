@@ -1,10 +1,14 @@
-﻿namespace Grubs.Common;
+﻿using Grubs.Equipment.Weapons;
 
-public class HealthComponent : Component
+namespace Grubs.Common;
+
+public partial class HealthComponent : Component
 {
 	[Property] public float MaxHealth { get; set; }
 
 	[Sync] public float CurrentHealth { get; set; }
+
+	public bool DeathInvoked { get; set; } = false;
 
 	protected override void OnStart()
 	{
@@ -14,6 +18,15 @@ public class HealthComponent : Component
 	public void TakeDamage( float damage )
 	{
 		CurrentHealth -= damage;
+		if ( CurrentHealth <= 0 && !DeathInvoked )
+		{
+			DeathInvoked = true;
+
+			if ( Components.TryGet( out ExplosiveProjectileComponent explosive ) && explosive.ExplodeOnDeath )
+			{
+				explosive.Explode();
+			}
+		}
 	}
 
 	public void Heal( float heal )

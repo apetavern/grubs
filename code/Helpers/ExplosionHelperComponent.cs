@@ -4,7 +4,7 @@ using Grubs.Player;
 namespace Grubs.Helpers;
 
 [Title( "Grubs - Explosion Helper" ), Category( "World" )]
-public sealed class ExplosionHelperComponent : Component
+public partial class ExplosionHelperComponent : Component
 {
 	public static ExplosionHelperComponent Instance { get; set; } = new();
 
@@ -18,6 +18,9 @@ public sealed class ExplosionHelperComponent : Component
 		var gos = Scene.FindInPhysics( new Sphere( position, radius ) );
 		foreach ( var go in gos )
 		{
+			if ( source.GameObject == go )
+				continue;
+
 			if ( !go.Components.TryGet( out HealthComponent health, FindMode.EverythingInSelfAndAncestors ) )
 				continue;
 
@@ -30,7 +33,6 @@ public sealed class ExplosionHelperComponent : Component
 			if ( go.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelf ) )
 				HandlePhysicsExplosion( body, position, force );
 
-			Log.Info( $"{go.Name} is taking {damage * distFactor} damage from {source.GameObject.Name}." );
 			health.TakeDamage( damage * distFactor );
 		}
 	}
