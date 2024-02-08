@@ -47,8 +47,6 @@ public sealed class PlayerInventory : Component
 		if ( Input.Pressed( "toggle_equipment" ) )
 		{
 			ToggleEquipment( !EquipmentActive, ActiveSlot );
-
-			EquipmentActive = !EquipmentActive;
 		}
 
 		if ( Input.Pressed( "next_equipment" ) && EquipmentActive )
@@ -60,8 +58,9 @@ public sealed class PlayerInventory : Component
 	}
 
 	[Broadcast]
-	private void ToggleEquipment( bool active, int slot )
+	public void ToggleEquipment( bool active, int slot )
 	{
+		EquipmentActive = active;
 		var equipment = GetEquipmentAtSlot( slot );
 
 		if ( equipment is null )

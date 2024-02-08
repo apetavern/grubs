@@ -13,7 +13,7 @@ public partial class GrubPlayerController
 
 	public float LastGroundHeight { get; set; }
 
-	public bool IsHardFalling { get; set; }
+	[Sync] public bool IsHardFalling { get; set; }
 	public float FallVelocity { get; set; }
 
 	private void UpdateFallVelocity()

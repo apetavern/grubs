@@ -30,6 +30,11 @@ public sealed class Grub : Component
 			GrubFollowCamera.Local.Target = GameObject;
 	}
 
+	public void OnHardFall()
+	{
+		Inventory.ToggleEquipment( false, Inventory.ActiveSlot );
+	}
+
 	[ConCmd( "gr_take_dmg" )]
 	public static void TakeDmgCmd( float hp )
 	{

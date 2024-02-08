@@ -215,6 +215,9 @@ public class GrubCharacterController : Component
 		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
 		OnLandedEffects( Transform.Position );
+
+		if ( Controller.IsHardFalling )
+			Controller.Grub.OnHardFall();
 	}
 
 	[Broadcast]

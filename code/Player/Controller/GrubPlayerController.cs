@@ -6,6 +6,7 @@ public sealed partial class GrubPlayerController : Component
 	[Property] public required GameObject Body { get; set; }
 	[Property] public required GameObject Head { get; set; }
 	[Property] public required GrubAnimator Animator { get; set; }
+	[Property] public required Grub Grub { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
 
 	[Property] public Vector3 Gravity { get; set; } = new(0, 0, 800);
