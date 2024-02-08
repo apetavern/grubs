@@ -31,8 +31,7 @@ public partial class WeaponComponent : Component
 					OnFire.Invoke( _weaponCharge );
 				else
 					FireCharged( _weaponCharge );
-				if ( Equipment.Grub is not null )
-					Equipment.Grub.Animator.Fire();
+				Equipment.Grub?.Animator.Fire();
 				_weaponCharge = 0;
 			}
 		}
@@ -43,8 +42,7 @@ public partial class WeaponComponent : Component
 				OnFire.Invoke( 100 );
 			else
 				FireImmediate();
-			if ( Equipment.Grub is not null )
-				Equipment.Grub.Animator.Fire();
+			Equipment.Grub?.Animator.Fire();
 		}
 	}
 
