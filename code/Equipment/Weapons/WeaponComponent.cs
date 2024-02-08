@@ -27,7 +27,10 @@ public partial class WeaponComponent : Component
 
 			if ( Input.Released( "fire" ) )
 			{
-				OnFire?.Invoke( _weaponCharge );
+				if ( OnFire is not null )
+					OnFire.Invoke( _weaponCharge );
+				else
+					FireCharged( _weaponCharge );
 				if ( Equipment.Grub is not null )
 					Equipment.Grub.Animator.Fire();
 				_weaponCharge = 0;
@@ -36,9 +39,17 @@ public partial class WeaponComponent : Component
 
 		if ( Input.Pressed( "fire" ) )
 		{
-			OnFire?.Invoke( 100 );
+			if ( OnFire is not null )
+				OnFire.Invoke( 100 );
+			else
+				FireImmediate();
+			if ( Equipment.Grub is not null )
+				Equipment.Grub.Animator.Fire();
 		}
 	}
+
+	protected virtual void FireImmediate() { }
+	protected virtual void FireCharged( int charge ) { }
 
 	protected void OnChargedHeld()
 	{

@@ -1,0 +1,52 @@
+{
+  "RootObject": {
+    "Id": "d58fa266-a6d3-4ec6-a2f8-af9ffc7e8aef",
+    "Name": "baseball_bat",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "EquipmentComponent",
+        "HoldPose": "Swing",
+        "Model": {
+          "_type": "component",
+          "go": "d58fa266-a6d3-4ec6-a2f8-af9ffc7e8aef",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "SlotIndex": 0
+      },
+      {
+        "__type": "SkinnedModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/weapons/baseballbat/baseballbat.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "MeleeWeaponComponent",
+        "Damage": 40,
+        "Equipment": {
+          "_type": "component",
+          "go": "d58fa266-a6d3-4ec6-a2f8-af9ffc7e8aef",
+          "component_type": "EquipmentComponent"
+        },
+        "FiringType": "Instant",
+        "HitDelay": 0.1,
+        "HitForce": 512,
+        "HitOffset": "0,0,-10",
+        "HitSize": "56,0,0",
+        "HitSound": "sounds/weapons/bat/bat_swing.sound",
+        "ImpactSound": "sounds/weapons/bat/bat_impact.sound",
+        "OnFire": null
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

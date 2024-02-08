@@ -40,7 +40,8 @@ public class EquipmentComponent : Component
 		Grub = grub;
 
 		var target = grub.GameObject.GetAllObjects( true ).First( c => c.Name == "hold_L" );
-		GameObject.SetParent( target, false );
+		GameObject.SetParent( grub.GameObject, false );
+		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
 		Model.Enabled = true;
 		Deployed = true;
 	}

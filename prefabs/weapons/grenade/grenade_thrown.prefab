@@ -73,7 +73,7 @@
       },
       {
         "__type": "HealthComponent",
-        "MaxHealth": 25
+        "MaxHealth": 80
       }
     ],
     "Children": []
