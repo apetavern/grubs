@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "d12c4888-71b3-43da-9f41-62eb19d48fef",
+    "Id": "8696920b-0ba3-4198-a2a1-2efe5392458c",
     "Name": "grenade_thrown",
     "Enabled": true,
     "Components": [
@@ -39,12 +39,12 @@
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "go": "d12c4888-71b3-43da-9f41-62eb19d48fef",
+          "go": "8696920b-0ba3-4198-a2a1-2efe5392458c",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "go": "d12c4888-71b3-43da-9f41-62eb19d48fef",
+          "go": "8696920b-0ba3-4198-a2a1-2efe5392458c",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 500
@@ -69,6 +69,10 @@
         "Radius": 8,
         "Static": false,
         "Surface": null
+      },
+      {
+        "__type": "HealthComponent",
+        "MaxHealth": 25
       }
     ],
     "Children": []

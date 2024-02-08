@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "7c4ae475-4ed8-4a9e-8a9a-7f1855217ff5",
+    "Id": "b40b2af3-86d0-4cd3-bf8a-a85a59e13c7c",
     "Name": "bazooka_shell",
     "Enabled": true,
     "Components": [
@@ -29,13 +29,13 @@
         "__type": "ArcProjectileComponent",
         "Explosive": {
           "_type": "component",
-          "go": "7c4ae475-4ed8-4a9e-8a9a-7f1855217ff5",
+          "go": "b40b2af3-86d0-4cd3-bf8a-a85a59e13c7c",
           "component_type": "ExplosiveProjectileComponent"
         },
         "MaxBounces": 0,
         "Model": {
           "_type": "component",
-          "go": "7c4ae475-4ed8-4a9e-8a9a-7f1855217ff5",
+          "go": "b40b2af3-86d0-4cd3-bf8a-a85a59e13c7c",
           "component_type": "SkinnedModelRenderer"
         },
         "ProjectileSpeed": 35,
@@ -50,6 +50,10 @@
         "ExplosionRadius": 100,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
         "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "HealthComponent",
+        "MaxHealth": 15
       }
     ],
     "Children": []

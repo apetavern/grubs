@@ -40,7 +40,7 @@
           "Name": "Terrain",
           "Position": "-400,512,95.58618",
           "Rotation": "0,0.258819,0,0.9659258",
-          "Scale": "50,2,5",
+          "Scale": "28.54934,2,5",
           "Tags": "solid",
           "Enabled": true,
           "Components": [
@@ -190,7 +190,7 @@
           "Name": "Terrain",
           "Position": "400,512,95.58618",
           "Rotation": "0,-0.258819,0,0.9659259",
-          "Scale": "50,2,5",
+          "Scale": "28.54934,2,5",
           "Tags": "solid",
           "Enabled": true,
           "Components": [
@@ -317,7 +317,7 @@
     {
       "Id": "18d67b0f-c777-48d1-ad2e-d002f58bd055",
       "Name": "Network",
-      "Position": "-1098.61,507.4031,191.4738",
+      "Position": "-1098.61,512,191.4738",
       "Enabled": true,
       "Children": [
         {
@@ -338,7 +338,7 @@
         {
           "Id": "504b9b94-a176-4ef2-8d95-d6a747a75503",
           "Name": "Spawn",
-          "Position": "1047.124,-5.776825,57.7177",
+          "Position": "1034.61,0,57.7177",
           "Enabled": true,
           "Components": [
             {
@@ -350,7 +350,7 @@
         {
           "Id": "9dc026f3-462f-450c-a93d-6c267a247aae",
           "Name": "Spawn (1)",
-          "Position": "1119.123,-5.776825,57.7177",
+          "Position": "1098.61,0,57.7177",
           "Enabled": true,
           "Components": [
             {
@@ -362,7 +362,7 @@
         {
           "Id": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4",
           "Name": "Spawn (2)",
-          "Position": "1166.758,-5.776825,57.7177",
+          "Position": "1162.61,0,57.7177",
           "Enabled": true,
           "Components": [
             {
@@ -397,6 +397,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-02-08T09:58:51.4559739-04:00",
+  "LastSaved": "2024-02-08T10:01:26.8845711-04:00",
   "__references": []
 }

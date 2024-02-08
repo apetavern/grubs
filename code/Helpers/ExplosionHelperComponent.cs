@@ -13,7 +13,7 @@ public sealed class ExplosionHelperComponent : Component
 		Instance = this;
 	}
 
-	public void Explode( Component source, Vector3 position, float radius, float damage )
+	public void Explode( Component source, Vector3 position, float radius, float damage, float force = 1024f )
 	{
 		var gos = Scene.FindInPhysics( new Sphere( position, radius ) );
 		foreach ( var go in gos )
@@ -27,6 +27,9 @@ public sealed class ExplosionHelperComponent : Component
 			if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
 				HandleGrubExplosion( grub, position );
 
+			if ( go.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelf ) )
+				HandlePhysicsExplosion( body, position, force );
+
 			Log.Info( $"{go.Name} is taking {damage * distFactor} damage from {source.GameObject.Name}." );
 			health.TakeDamage( damage * distFactor );
 		}
@@ -39,5 +42,15 @@ public sealed class ExplosionHelperComponent : Component
 
 		grub.CharacterController.Punch( (dir + Vector3.Up) * 256f );
 		grub.CharacterController.ReleaseFromGround();
+	}
+
+	private void HandlePhysicsExplosion( Rigidbody body, Vector3 position, float force )
+	{
+		var dir = (body.Transform.Position - position).Normal;
+		dir = dir.WithY( 0f );
+
+		body.ApplyImpulseAt(
+			body.Transform.Position + Vector3.Down * 0.25f,
+			(dir + Vector3.Up) * force * 16f );
 	}
 }
