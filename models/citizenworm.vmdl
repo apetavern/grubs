@@ -1229,6 +1229,36 @@
 						master_morph_weight = -1.0
 						morph_weights = [  ]
 					},
+					{
+						_class = "WeightList"
+						name = "uppercut_special"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Handsroot"
+								weight = 1.0
+							},
+							{
+								bone = "hand_L"
+								weight = 0.0
+							},
+							{
+								bone = "hand_R"
+								weight = 0.0
+							},
+							{
+								bone = "head"
+								weight = 1.0
+							},
+							{
+								bone = "neck_0"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
 				]
 			},
 			{
