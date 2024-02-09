@@ -80,6 +80,13 @@ public sealed class PlayerInventory : Component
 		return GetEquipmentAtSlot( ActiveSlot );
 	}
 
+	public int GetNextSlot()
+	{
+		if ( ActiveSlot >= Equipment.Count - 1 )
+			return 0;
+		return ActiveSlot + 1;
+	}
+
 	private EquipmentComponent? GetEquipmentAtSlot( int slot )
 	{
 		return GameObject.Components.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )

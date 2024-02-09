@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "4eb7af93-d13f-4585-a6e5-ecb9a537dbb7",
+    "Id": "529da54e-be2d-4943-a9e4-afad15700fc9",
     "Name": "grenade",
     "Enabled": true,
     "Components": [
@@ -18,18 +18,20 @@
       {
         "__type": "EquipmentComponent",
         "HoldPose": "Throwable",
+        "Icon": "models/weapons/grenade/grenade.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "go": "4eb7af93-d13f-4585-a6e5-ecb9a537dbb7",
+          "go": "529da54e-be2d-4943-a9e4-afad15700fc9",
           "component_type": "SkinnedModelRenderer"
         },
+        "Name": "Grenade",
         "SlotIndex": 0
       },
       {
         "__type": "WeaponComponent",
         "Equipment": {
           "_type": "component",
-          "go": "4eb7af93-d13f-4585-a6e5-ecb9a537dbb7",
+          "go": "529da54e-be2d-4943-a9e4-afad15700fc9",
           "component_type": "EquipmentComponent"
         },
         "FiringType": "Charged",
@@ -42,7 +44,7 @@
               "Type": "Sandbox.Game/Sandbox.Component",
               "Default": {
                 "_type": "component",
-                "go": "4eb7af93-d13f-4585-a6e5-ecb9a537dbb7",
+                "go": "529da54e-be2d-4943-a9e4-afad15700fc9",
                 "component_type": "SkinnedModelRenderer"
               }
             }

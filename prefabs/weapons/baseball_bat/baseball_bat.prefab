@@ -1,17 +1,19 @@
 {
   "RootObject": {
-    "Id": "d58fa266-a6d3-4ec6-a2f8-af9ffc7e8aef",
+    "Id": "07e427e9-7591-4fa8-b977-942d3edbe5d6",
     "Name": "baseball_bat",
     "Enabled": true,
     "Components": [
       {
         "__type": "EquipmentComponent",
         "HoldPose": "Swing",
+        "Icon": "models/weapons/baseballbat/baseballbat.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "go": "d58fa266-a6d3-4ec6-a2f8-af9ffc7e8aef",
+          "go": "07e427e9-7591-4fa8-b977-942d3edbe5d6",
           "component_type": "SkinnedModelRenderer"
         },
+        "Name": "Baseball Bat",
         "SlotIndex": 0
       },
       {
@@ -30,7 +32,7 @@
         "Damage": 40,
         "Equipment": {
           "_type": "component",
-          "go": "d58fa266-a6d3-4ec6-a2f8-af9ffc7e8aef",
+          "go": "07e427e9-7591-4fa8-b977-942d3edbe5d6",
           "component_type": "EquipmentComponent"
         },
         "FiringType": "Instant",

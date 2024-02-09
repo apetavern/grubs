@@ -7,11 +7,13 @@
       {
         "__type": "EquipmentComponent",
         "HoldPose": "Bazooka",
+        "Icon": "models/weapons/bazooka/bazooka.vmdl_c.png",
         "Model": {
           "_type": "component",
           "go": "34e64148-41c5-4881-8521-daecbdeaf713",
           "component_type": "SkinnedModelRenderer"
         },
+        "Name": "Bazooka",
         "SlotIndex": 0
       },
       {
@@ -42,8 +44,7 @@
               "Type": "Sandbox.Game/Sandbox.Component",
               "Default": {
                 "_type": "component",
-                "go": "34e64148-41c5-4881-8521-daecbdeaf713",
-                "component_type": "EquipmentComponent"
+                "go": "34e64148-41c5-4881-8521-daecbdeaf713"
               }
             }
           ],

@@ -558,7 +558,7 @@
       },
       {
         "Id": "01bf6458-75da-496f-bf11-d0bd4b822a47",
-        "Name": "UI",
+        "Name": "World UI",
         "Enabled": true,
         "Components": [
           {
@@ -576,6 +576,29 @@
               "_type": "component",
               "go": "f110dbbd-e5e9-4234-8218-80d179496e8b",
               "component_type": "Grub"
+            }
+          }
+        ]
+      },
+      {
+        "Id": "a5e21760-1945-4403-895f-cf738d49d85d",
+        "Name": "Screen UI",
+        "Position": "46.65069,40.65072,-50.19597",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ScreenPanel",
+            "AutoScreenScale": true,
+            "Opacity": 1,
+            "Scale": 1,
+            "ZIndex": 100
+          },
+          {
+            "__type": "InventoryDisplay",
+            "Inventory": {
+              "_type": "component",
+              "go": "f110dbbd-e5e9-4234-8218-80d179496e8b",
+              "component_type": "PlayerInventory"
             }
           }
         ]

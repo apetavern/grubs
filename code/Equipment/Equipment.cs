@@ -5,9 +5,10 @@ namespace Grubs.Equipment;
 [Title( "Grubs - Equipment" ), Category( "Equipment" )]
 public class EquipmentComponent : Component
 {
+	[Property] public required string Name { get; set; } = "";
 	[Property] public required SkinnedModelRenderer Model { get; set; }
 	[Property] public HoldPose HoldPose { get; set; } = HoldPose.None;
-
+	[Property, ResourceType( "jpg" )] public string Icon { get; set; } = "";
 	[Property, Sync] public int SlotIndex { get; set; }
 
 	public bool Deployed { get; set; }

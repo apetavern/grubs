@@ -1,0 +1,81 @@
+$base: #5A738B;
+$base-darken: darken(#5A738B, 50%);
+
+InventoryDisplay {
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+    font-family: Londrina Solid;
+    color: white;
+    text-stroke: 4px black;
+    gap: 12px;
+
+    .item-container {
+        flex-direction: column;
+        align-items: center;
+
+        &:first-child {
+            width: 175px;
+        }
+
+        &:last-child {
+            margin-left: -20px;
+        }
+    }
+
+    .item-title {
+        &.primary {
+            font-size: 32px;
+        }
+    }
+
+    .item-box {
+        background-color: $base;
+        border-radius: 16px;
+        border-width: 4px;
+        border-color: $base-darken;
+
+        &.secondary {
+            border-width: 2px;
+            border-radius: 12px;
+        }
+
+        &.disabled {
+            background-color: desaturate($base, 40%);
+        }
+
+        > inputglyph {
+            position: absolute;
+            top: 82%;
+            right: 1%;
+            background-color: $base-darken;
+            border-radius: 100%;
+            border: 2px $base-darken;
+
+            &.secondary {
+                top: 72%;
+                right: 0;
+            }
+        }
+    }
+
+    .item-image {
+        width: 125px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        aspect-ratio: 1;
+
+        &.secondary {
+            width: 75px;
+        }
+
+        &.disabled {
+            mask-image: radial-gradient(#FFF, #000);
+        }
+    }
+
+    .flex-end {
+        align-self: flex-end;
+    }
+}
