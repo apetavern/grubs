@@ -954,6 +954,116 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "punch_idle"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/character_animations/citizenworm_punches.fbx"
+						start_frame = 0
+						end_frame = 15
+						framerate = 10.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "punch_right"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/character_animations/citizenworm_punches.fbx"
+						start_frame = 15
+						end_frame = 25
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "punch_left"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/character_animations/citizenworm_punches.fbx"
+						start_frame = 30
+						end_frame = 40
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "punch_left_up"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/character_animations/citizenworm_punches.fbx"
+						start_frame = 60
+						end_frame = 70
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "punch_right_up"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/character_animations/citizenworm_punches.fbx"
+						start_frame = 45
+						end_frame = 55
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
