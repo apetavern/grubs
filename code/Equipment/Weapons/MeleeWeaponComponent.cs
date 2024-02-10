@@ -3,6 +3,7 @@ using Grubs.Player;
 
 namespace Grubs.Equipment.Weapons;
 
+[Title( "Grub - Melee Weapon" ), Category( "Equipment" )]
 public class MeleeWeaponComponent : WeaponComponent
 {
 	[Property] public float Damage { get; set; } = 25f;

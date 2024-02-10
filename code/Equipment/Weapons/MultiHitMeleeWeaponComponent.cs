@@ -3,6 +3,7 @@ using Grubs.Player;
 
 namespace Grubs.Equipment.Weapons;
 
+[Title( "Grub - Multi Hit Melee Weapon" ), Category( "Equipment" )]
 public class MultiHitMeleeWeaponComponent : WeaponComponent
 {
 	/**
