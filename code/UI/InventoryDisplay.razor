@@ -16,7 +16,7 @@
         <div class="item-container">
             <div class="item-box secondary">
                 <img class="item-image secondary" src="@Prev.Icon"/>
-                <InputGlyph class="secondary" button="prev_equipment" size="small"/>
+                <InputGlyph class="prev" button="prev_equipment" size="small"/>
             </div>
         </div>
         <div class="item-container">
@@ -27,7 +27,7 @@
         <div class="item-container">
             <div class="item-box secondary">
                 <img class="item-image secondary" src="@Next.Icon"/>
-                <InputGlyph class="secondary" button="next_equipment" size="small"/>
+                <InputGlyph class="next" button="next_equipment" size="small"/>
             </div>
         </div>
     </div>
@@ -36,22 +36,14 @@
 @code
 {
     [Property] public required PlayerInventory Inventory { get; set; }
+
     private EquipmentComponent? Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
     private EquipmentComponent? Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
     private EquipmentComponent? Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
 
-
-    private string EnabledClasses()
-    {
-        return Inventory.EquipmentActive ? "" : "disabled";
-    }
-
     protected override void OnUpdate()
     {
         SetClass("hide", !Inventory.EquipmentActive);
-
-        // foreach (var child in Panel.Children)
-        //     child.SetClass("disabled", !Inventory.EquipmentActive);
     }
 
     protected override int BuildHash()

@@ -35,27 +35,21 @@ InventoryDisplay {
 
     .item-box {
         background-color: $base;
-        border-radius: 16px;
+        border-radius: 15%;
         border-width: 4px;
         border-color: $base-darken;
 
         &.secondary {
             border-width: 2px;
-            border-radius: 12px;
         }
 
         > inputglyph {
             position: absolute;
-            top: 82%;
-            right: 1%;
+            top: 80%;
+            left: 29%;
             background-color: $base-darken;
             border-radius: 100%;
             border: 2px $base-darken;
-
-            &.secondary {
-                top: 72%;
-                right: 0;
-            }
         }
     }
 

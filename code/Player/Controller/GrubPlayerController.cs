@@ -67,6 +67,9 @@ public sealed partial class GrubPlayerController : Component
 		if ( CharacterController.Velocity.Normal.IsNearZeroLength )
 			return;
 
+		if ( !IsGrounded )
+			return;
+
 		Transform.Rotation = MoveInput switch
 		{
 			<= -1 => Rotation.Identity,
