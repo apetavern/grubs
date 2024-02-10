@@ -4,23 +4,27 @@ $base-darken: darken(#5A738B, 50%);
 InventoryDisplay {
     position: absolute;
     bottom: 50px;
-    left: 100px;
     font-family: Londrina Solid;
     color: white;
     text-stroke: 4px black;
-    gap: 12px;
+    width: 100%;
+    transition: transform 0.3s;
+
+    &.hide {
+        transform: translateY(300px);
+    }
+
+    .items {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 12px;
+    }
 
     .item-container {
         flex-direction: column;
         align-items: center;
-
-        &:first-child {
-            width: 175px;
-        }
-
-        &:last-child {
-            margin-left: -20px;
-        }
+        align-self: center;
     }
 
     .item-title {
@@ -38,10 +42,6 @@ InventoryDisplay {
         &.secondary {
             border-width: 2px;
             border-radius: 12px;
-        }
-
-        &.disabled {
-            background-color: desaturate($base, 40%);
         }
 
         > inputglyph {
@@ -68,10 +68,6 @@ InventoryDisplay {
 
         &.secondary {
             width: 75px;
-        }
-
-        &.disabled {
-            mask-image: radial-gradient(#FFF, #000);
         }
     }
 

@@ -657,6 +657,11 @@
           "Name": "next_equipment",
           "KeyboardCode": "E",
           "GroupName": "Other"
+        },
+        {
+          "Name": "prev_equipment",
+          "KeyboardCode": "Q",
+          "GroupName": "Other"
         }
       ]
     },

@@ -51,10 +51,20 @@ public sealed class PlayerInventory : Component
 
 		if ( Input.Pressed( "next_equipment" ) && EquipmentActive )
 		{
-			ToggleEquipment( false, ActiveSlot );
-			CycleSlot();
-			ToggleEquipment( true, ActiveSlot );
+			CycleItems( true );
 		}
+
+		if ( Input.Pressed( "prev_equipment" ) && EquipmentActive )
+		{
+			CycleItems( false );
+		}
+	}
+
+	private void CycleItems( bool forwards )
+	{
+		ToggleEquipment( false, ActiveSlot );
+		CycleSlot( forwards );
+		ToggleEquipment( true, ActiveSlot );
 	}
 
 	[Broadcast]
@@ -87,21 +97,22 @@ public sealed class PlayerInventory : Component
 		return ActiveSlot + 1;
 	}
 
+	public int GetPrevSlot()
+	{
+		if ( ActiveSlot == 0 )
+			return Equipment.Count - 1;
+		return ActiveSlot - 1;
+	}
+
 	private EquipmentComponent? GetEquipmentAtSlot( int slot )
 	{
 		return GameObject.Components.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
 			.FirstOrDefault( x => x.SlotIndex == slot );
 	}
 
-	private void CycleSlot()
+	private void CycleSlot( bool forwards = true )
 	{
-		if ( ActiveSlot >= Equipment.Count - 1 )
-		{
-			ActiveSlot = 0;
-		}
-		else
-		{
-			ActiveSlot++;
-		}
+		var slot = forwards ? GetNextSlot() : GetPrevSlot();
+		ActiveSlot = slot;
 	}
 }

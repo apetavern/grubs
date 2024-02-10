@@ -47,7 +47,11 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 	[Broadcast]
 	private void ResetCombo()
 	{
+		if ( Equipment.Grub is not { } grub )
+			return;
+
 		_currentStrikeCount = 1;
+		grub.Animator.Punch( _currentStrikeCount );
 	}
 
 	[Broadcast]
@@ -70,7 +74,6 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 		if ( _currentStrikeCount == Strikes )
 		{
 			damage += FinalHitModifier * _currentStrikeCount;
-			Log.Info( damage );
 			foreach ( var tr in trs )
 			{
 				if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
@@ -86,7 +89,6 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 		}
 
 		damage += HitComboModifier * _currentStrikeCount;
-		Log.Info( damage );
 		foreach ( var tr in trs )
 		{
 			if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )

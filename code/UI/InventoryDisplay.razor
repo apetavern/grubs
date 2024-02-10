@@ -7,21 +7,28 @@
 
 @inherits PanelComponent
 
-@if (Current is null || Next is null)
+@if (Current is null || Next is null || Prev is null)
     return;
 
 <root>
-    <div class="item-container">
-        <div class="item-title primary @EnabledClasses()">@Current.Name</div>
-        <div class="item-box primary @EnabledClasses()">
-            <img class="item-image primary @EnabledClasses()" src="@Current.Icon"/>
-            <InputGlyph button="toggle_equipment" size="small"/>
+    @* <div class="item-title primary @EnabledClasses()">@Current.Name</div> *@
+    <div class="items">
+        <div class="item-container">
+            <div class="item-box secondary">
+                <img class="item-image secondary" src="@Prev.Icon"/>
+                <InputGlyph class="secondary" button="prev_equipment" size="small"/>
+            </div>
         </div>
-    </div>
-    <div class="item-container flex-end">
-        <div class="item-box secondary @EnabledClasses()">
-            <img class="item-image secondary @EnabledClasses()" src="@Next.Icon"/>
-            <InputGlyph class="secondary" button="next_equipment" size="small"/>
+        <div class="item-container">
+            <div class="item-box primary">
+                <img class="item-image primary" src="@Current.Icon"/>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-box secondary">
+                <img class="item-image secondary" src="@Next.Icon"/>
+                <InputGlyph class="secondary" button="next_equipment" size="small"/>
+            </div>
         </div>
     </div>
 </root>
@@ -31,6 +38,7 @@
     [Property] public required PlayerInventory Inventory { get; set; }
     private EquipmentComponent? Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
     private EquipmentComponent? Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
+    private EquipmentComponent? Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
 
 
     private string EnabledClasses()
@@ -40,8 +48,10 @@
 
     protected override void OnUpdate()
     {
-        foreach (var child in Panel.Children)
-            child.SetClass("disabled", !Inventory.EquipmentActive);
+        SetClass("hide", !Inventory.EquipmentActive);
+
+        // foreach (var child in Panel.Children)
+        //     child.SetClass("disabled", !Inventory.EquipmentActive);
     }
 
     protected override int BuildHash()
