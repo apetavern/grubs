@@ -64,4 +64,10 @@ public sealed class GrubAnimator : Component
 	{
 		GrubRenderer.Set( "fire", true );
 	}
+
+	[Broadcast]
+	public void Punch( int value )
+	{
+		GrubRenderer.Set( "punch_combo", value );
+	}
 }

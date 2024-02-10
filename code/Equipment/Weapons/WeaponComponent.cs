@@ -31,7 +31,6 @@ public partial class WeaponComponent : Component
 					OnFire.Invoke( _weaponCharge );
 				else
 					FireCharged( _weaponCharge );
-				Equipment.Grub?.Animator.Fire();
 				_weaponCharge = 0;
 			}
 		}
@@ -42,7 +41,6 @@ public partial class WeaponComponent : Component
 				OnFire.Invoke( 100 );
 			else
 				FireImmediate();
-			Equipment.Grub?.Animator.Fire();
 		}
 	}
 

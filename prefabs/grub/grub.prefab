@@ -135,6 +135,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/baseball_bat/baseball_bat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/brass_knuckles/brass_knuckles.prefab"
           }
         ],
         "Grub": {

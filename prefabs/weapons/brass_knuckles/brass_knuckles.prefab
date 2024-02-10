@@ -1,0 +1,55 @@
+{
+  "RootObject": {
+    "Id": "9862f16c-6310-4879-8377-3db65d1734b5",
+    "Name": "brass_knuckles",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "SkinnedModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/weapons/brassknuckles/brassknuckles.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "EquipmentComponent",
+        "HoldPose": "Knuckles",
+        "Icon": "models/weapons/brassknuckles/brassknuckles.vmdl.png",
+        "Model": {
+          "_type": "component",
+          "go": "9862f16c-6310-4879-8377-3db65d1734b5",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Brass Knuckles",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "MultiHitMeleeWeaponComponent",
+        "BaseHitDamage": 10,
+        "BaseHitForce": "50,0,25",
+        "Equipment": {
+          "_type": "component",
+          "go": "9862f16c-6310-4879-8377-3db65d1734b5",
+          "component_type": "EquipmentComponent"
+        },
+        "FinalHitForce": "250,0,200",
+        "FinalHitModifier": 10,
+        "FiringType": "Instant",
+        "HitComboModifier": 6,
+        "HitCooldown": 0.3,
+        "HitDistance": 25,
+        "OnFire": null,
+        "Strikes": 3
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

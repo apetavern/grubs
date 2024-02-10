@@ -24,25 +24,13 @@ public class MeleeWeaponComponent : WeaponComponent
 		HitEffects( ray );
 	}
 
-	protected override void DrawGizmos()
-	{
-		base.DrawGizmos();
-		if ( Equipment.Grub is not { } grub )
-			return;
-
-		Gizmo.Transform = global::Transform.Zero.WithScale( 1f );
-
-		var pc = grub.PlayerController;
-		Gizmo.Draw.LineThickness = 2f;
-		var startPos = grub.Transform.Position + Vector3.Up * 24f + HitOffset;
-		Gizmo.Draw.Line( startPos, startPos + pc.Facing * pc.EyeRotation.Forward * HitSize.x );
-	}
-
 	[Broadcast]
 	public void HitEffects( Ray ray )
 	{
 		if ( Equipment.Grub is not { } grub )
 			return;
+
+		grub.Animator.Fire();
 
 		Sound.Play( HitSound );
 
@@ -71,9 +59,23 @@ public class MeleeWeaponComponent : WeaponComponent
 				body.ApplyImpulseAt( body.Transform.Position + Vector3.Up * 0.25f, tr.Direction * HitForce * 64f );
 			}
 
-
 			if ( tr.GameObject.Components.TryGet( out HealthComponent health, FindMode.EverythingInAncestors ) )
 				health.TakeDamage( Damage );
 		}
+	}
+
+	protected override void DrawGizmos()
+	{
+		base.DrawGizmos();
+
+		if ( Equipment?.Grub is not { } grub )
+			return;
+
+		Gizmo.Transform = global::Transform.Zero.WithScale( 1f );
+
+		var pc = grub.PlayerController;
+		Gizmo.Draw.LineThickness = 2f;
+		var startPos = grub.Transform.Position + Vector3.Up * 24f + HitOffset;
+		Gizmo.Draw.Line( startPos, startPos + pc.Facing * pc.EyeRotation.Forward * HitSize.x );
 	}
 }

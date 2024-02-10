@@ -12,5 +12,6 @@ public enum HoldPose
 	Droppable,
 	Holdable,
 	Minigun,
-	Revolver
+	Revolver,
+	Knuckles
 }
