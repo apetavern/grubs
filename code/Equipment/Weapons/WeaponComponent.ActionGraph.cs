@@ -12,5 +12,7 @@ public partial class WeaponComponent
 			pc.Source = source;
 			pc.Charge = charge;
 		}
+
+		source.TimeSinceLastUsed = 0f;
 	}
 }

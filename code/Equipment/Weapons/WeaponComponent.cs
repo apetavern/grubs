@@ -7,14 +7,19 @@ public partial class WeaponComponent : Component
 
 	[Property] public required EquipmentComponent Equipment { get; set; }
 
+	[Property] public float Cooldown { get; set; } = 2f;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public OnFireDelegate? OnFire { get; set; }
 
 	private int _weaponCharge;
+	protected TimeSince TimeSinceLastUsed { get; set; } = 0;
 
 	protected override void OnUpdate()
 	{
 		if ( IsProxy || !Equipment.Deployed )
+			return;
+
+		if ( TimeSinceLastUsed < Cooldown )
 			return;
 
 		if ( FiringType is FiringType.Charged )

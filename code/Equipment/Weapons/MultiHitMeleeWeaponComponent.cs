@@ -82,10 +82,11 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 					HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * FinalHitForce, true );
 
 				if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
-					HandleBodyHit( body, damage, (tr.Direction + Vector3.Up) * FinalHitForce * 64f );
+					HandleBodyHit( body, damage, tr.HitPosition, (tr.Direction + Vector3.Up) * FinalHitForce );
 			}
 
 			_currentStrikeCount = 1;
+			TimeSinceLastUsed = 0f;
 
 			return;
 		}
@@ -97,7 +98,7 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 				HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * BaseHitForce );
 
 			if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
-				HandleBodyHit( body, damage, (tr.Direction + Vector3.Up) * BaseHitDamage * 64f );
+				HandleBodyHit( body, damage, tr.HitPosition, (tr.Direction + Vector3.Up) * BaseHitDamage );
 		}
 
 		_currentStrikeCount += 1;
@@ -138,11 +139,11 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 		grub.Health.TakeDamage( damage );
 	}
 
-	private void HandleBodyHit( Rigidbody body, float damage, Vector3 force )
+	private void HandleBodyHit( Rigidbody body, float damage, Vector3 position, Vector3 force )
 	{
 		if ( body.Components.TryGet( out HealthComponent health, FindMode.EverythingInSelfAndAncestors ) )
 			health.TakeDamage( damage );
 
-		body.ApplyImpulseAt( body.Transform.Position + Vector3.Up * 0.25f, force );
+		body.ApplyImpulseAt( position, force * body.PhysicsBody.Mass );
 	}
 }

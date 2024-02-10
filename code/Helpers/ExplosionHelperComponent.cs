@@ -53,6 +53,6 @@ public partial class ExplosionHelperComponent : Component
 
 		body.ApplyImpulseAt(
 			body.Transform.Position + Vector3.Down * 0.25f,
-			(dir + Vector3.Up) * force * 16f );
+			dir * force * body.PhysicsBody.Mass );
 	}
 }

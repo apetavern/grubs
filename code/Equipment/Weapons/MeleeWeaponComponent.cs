@@ -57,12 +57,14 @@ public class MeleeWeaponComponent : WeaponComponent
 
 			if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
 			{
-				body.ApplyImpulseAt( body.Transform.Position + Vector3.Up * 0.25f, tr.Direction * HitForce * 64f );
+				body.ApplyImpulseAt( tr.HitPosition, tr.Direction * HitForce * body.PhysicsBody.Mass );
 			}
 
 			if ( tr.GameObject.Components.TryGet( out HealthComponent health, FindMode.EverythingInAncestors ) )
 				health.TakeDamage( Damage );
 		}
+
+		TimeSinceLastUsed = 0f;
 	}
 
 	protected override void DrawGizmos()
