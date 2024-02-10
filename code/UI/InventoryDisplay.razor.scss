@@ -27,12 +27,6 @@ InventoryDisplay {
         align-self: center;
     }
 
-    .item-title {
-        &.primary {
-            font-size: 32px;
-        }
-    }
-
     .item-box {
         background-color: $base;
         border-radius: 15%;
@@ -51,6 +45,13 @@ InventoryDisplay {
             border-radius: 100%;
             border: 2px $base-darken;
         }
+    }
+
+    .item-cooldown {
+        position: absolute;
+        height: 100%;
+        border-radius: 15%;
+        background-color: rgba(black, 0.5);
     }
 
     .item-image {

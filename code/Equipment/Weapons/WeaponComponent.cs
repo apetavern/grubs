@@ -12,7 +12,7 @@ public partial class WeaponComponent : Component
 	[Property] public OnFireDelegate? OnFire { get; set; }
 
 	private int _weaponCharge;
-	protected TimeSince TimeSinceLastUsed { get; set; } = 0;
+	public TimeSince TimeSinceLastUsed { get; set; } = 0;
 
 	protected override void OnUpdate()
 	{
