@@ -35,6 +35,14 @@ public sealed class Grub : Component
 		Inventory.ToggleEquipment( false, Inventory.ActiveSlot );
 	}
 
+	// public void Respawn()
+	// {
+	// 	var spawnPoints = Scene.GetAllComponents<SpawnPoint>().ToArray();
+	// 	var spawn = Random.Shared.FromArray( spawnPoints )?.Transform.World ?? Transform.World;
+	// 	Health.Heal( 150f );
+	// 	Transform.Position = spawn.Position;
+	// }
+
 	[ConCmd( "gr_take_dmg" )]
 	public static void TakeDmgCmd( float hp )
 	{

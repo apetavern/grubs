@@ -3,7 +3,13 @@
 [Title( "Grubs - Network Helper" ), Category( "Networking" )]
 public class NetHelper : Component, Component.INetworkListener
 {
+	public static NetHelper Instance { get; set; }
 	[Property] public required GameObject PlayerPrefab { get; set; }
+
+	public NetHelper()
+	{
+		Instance = this;
+	}
 
 	protected override async Task OnLoad()
 	{

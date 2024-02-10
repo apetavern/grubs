@@ -230,6 +230,17 @@
               "Model": "models/dev/plane.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "KillZoneComponent"
+            },
+            {
+              "__type": "PlaneCollider",
+              "Center": "0,0,0",
+              "IsTrigger": true,
+              "Scale": "50,50",
+              "Static": false,
+              "Surface": null
             }
           ]
         },
@@ -483,6 +494,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-02-10T17:01:03.0343321-04:00",
+  "LastSaved": "2024-02-10T18:12:51.6161845-04:00",
   "__references": []
 }

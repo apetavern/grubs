@@ -1,4 +1,6 @@
 ﻿using Grubs.Equipment.Weapons;
+using Grubs.Helpers;
+using Grubs.Player;
 
 namespace Grubs.Common;
 
@@ -25,6 +27,13 @@ public partial class HealthComponent : Component
 			if ( Components.TryGet( out ExplosiveProjectileComponent explosive ) && explosive.ExplodeOnDeath )
 			{
 				explosive.Explode();
+			}
+
+			if ( Components.TryGet( out Grub grub ) )
+			{
+				var conn = grub.Network.OwnerConnection;
+				grub.GameObject.Destroy();
+				NetHelper.Instance.OnActive( conn );
 			}
 		}
 	}
