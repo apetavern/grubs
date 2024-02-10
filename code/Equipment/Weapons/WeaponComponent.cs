@@ -8,6 +8,7 @@ public partial class WeaponComponent : Component
 	[Property] public required EquipmentComponent Equipment { get; set; }
 
 	[Property] public float Cooldown { get; set; } = 2f;
+	[Property] public bool CanFireWhileMoving { get; set; } = false;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public OnFireDelegate? OnFire { get; set; }
 
@@ -16,10 +17,16 @@ public partial class WeaponComponent : Component
 
 	protected override void OnUpdate()
 	{
+		if ( Equipment.Grub is not { } grub )
+			return;
+
 		if ( IsProxy || !Equipment.Deployed )
 			return;
 
 		if ( TimeSinceLastUsed < Cooldown )
+			return;
+
+		if ( !CanFireWhileMoving && !grub.PlayerController.Velocity.IsNearlyZero( 0.002f ) )
 			return;
 
 		if ( FiringType is FiringType.Charged )
