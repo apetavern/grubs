@@ -13,6 +13,7 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 
 	[Property] public float HitCooldown { get; set; } = 0.25f;
 	[Property] public float HitDistance { get; set; } = 25f;
+	[Property] public Vector3 HitOffset { get; set; }
 
 	/*
 	 * Damage
@@ -81,7 +82,7 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 					HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * FinalHitForce, true );
 
 				if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
-					HandleBodyHit( body, damage, (tr.Direction + Vector3.Up) * FinalHitForce * 16f );
+					HandleBodyHit( body, damage, (tr.Direction + Vector3.Up) * FinalHitForce * 64f );
 			}
 
 			_currentStrikeCount = 1;
@@ -96,7 +97,7 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 				HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * BaseHitForce );
 
 			if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
-				HandleBodyHit( body, damage, (tr.Direction + Vector3.Up) * BaseHitDamage * 16f );
+				HandleBodyHit( body, damage, (tr.Direction + Vector3.Up) * BaseHitDamage * 64f );
 		}
 
 		_currentStrikeCount += 1;
@@ -110,7 +111,7 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 			return res;
 
 		var ctrl = grub.PlayerController;
-		var startPos = ctrl.Transform.Position + Vector3.Up * 24f;
+		var startPos = ctrl.Transform.Position + Vector3.Up * 24f + HitOffset;
 		var trs = Scene.Trace.Ray(
 				startPos, startPos + ctrl.EyeRotation.Forward * ctrl.Facing * HitDistance )
 			.Size( 12f )

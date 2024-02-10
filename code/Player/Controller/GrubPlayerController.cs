@@ -101,7 +101,10 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateJump()
 	{
-		if ( Input.Pressed( "jump" ) && IsGrounded )
+		if ( IsChargingBackflip || !IsGrounded )
+			return;
+
+		if ( Input.Pressed( "jump" ) )
 		{
 			CharacterController.Velocity = new Vector3( Facing * 175f, 0f, 220f );
 			CharacterController.ReleaseFromGround();
@@ -110,6 +113,12 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateBackflip()
 	{
+		if ( !IsGrounded )
+		{
+			IsChargingBackflip = false;
+			BackflipCharge = 0f;
+		}
+
 		if ( !Input.Down( "backflip" ) && IsChargingBackflip )
 			DoBackflip();
 

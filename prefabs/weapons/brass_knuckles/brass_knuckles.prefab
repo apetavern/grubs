@@ -42,6 +42,7 @@
         "HitComboModifier": 6,
         "HitCooldown": 0.3,
         "HitDistance": 25,
+        "HitOffset": "0,0,-8",
         "OnFire": null,
         "Strikes": 3
       }
