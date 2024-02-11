@@ -69,8 +69,8 @@ PS
 {
 	#include "common/pixel.hlsl"
 	
-	float4 g_vColour < UiType( Color ); UiGroup( "Colour,0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
-	float g_flVoronoiSpeed < UiGroup( ",0/,0/0" ); Default1( 1 ); Range1( 0, 25 ); >;
+	float4 g_vColor < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
+	float g_flVoronoiSpeed < UiGroup( ",0/,0/0" ); Default1( 2 ); Range1( 0, 25 ); >;
 	float g_flCellDensity < UiGroup( ",0/,0/0" ); Default1( 4 ); Range1( 0, 100 ); >;
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
@@ -86,7 +86,7 @@ PS
 		m.Emission = float3( 0, 0, 0 );
 		m.Transmission = 0;
 		
-		float4 l_0 = g_vColour;
+		float4 l_0 = g_vColor;
 		float l_1 = g_flVoronoiSpeed;
 		float l_2 = g_flTime * l_1;
 		float l_3 = g_flCellDensity;

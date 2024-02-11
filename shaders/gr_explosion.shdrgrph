@@ -1,5 +1,5 @@
 {
-  "Model": null,
+  "Model": "particles/explosion/explosionmodel.vmdl",
   "Description": "",
   "BlendMode": "Masked",
   "nodes": [
@@ -12,11 +12,11 @@
       "Identifier": "0",
       "Position": "384,-16",
       "Albedo": {
-        "Identifier": "6",
+        "Identifier": "7",
         "Output": "Result"
       },
       "Opacity": {
-        "Identifier": "7",
+        "Identifier": "6",
         "Output": "Result"
       }
     },
@@ -26,7 +26,7 @@
       "CellDensity": 6,
       "Worley": false,
       "Identifier": "1",
-      "Position": "-272,48",
+      "Position": "-192,48",
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -49,19 +49,19 @@
         }
       },
       "Identifier": "2",
-      "Position": "-544,144"
+      "Position": "-848,192"
     },
     {
       "_class": "Time",
       "Identifier": "3",
-      "Position": "-736,-16"
+      "Position": "-848,16"
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "4",
-      "Position": "-464,16",
+      "Position": "-576,48",
       "A": {
         "Identifier": "3",
         "Output": "Result"
@@ -75,7 +75,7 @@
       "_class": "Float",
       "Min": 0,
       "Max": 25,
-      "Value": 1,
+      "Value": 2,
       "Name": "Voronoi Speed",
       "IsAttribute": false,
       "UI": {
@@ -84,28 +84,46 @@
         }
       },
       "Identifier": "5",
-      "Position": "-736,64"
+      "Position": "-848,96"
+    },
+    {
+      "_class": "Saturate",
+      "Identifier": "6",
+      "Position": "48,48",
+      "Input": {
+        "Identifier": "1",
+        "Output": "Result"
+      }
     },
     {
       "_class": "Float4",
       "Value": "1,1,1,1",
-      "Name": "Colour",
+      "Name": "Color",
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
         "PrimaryGroup": {
-          "Name": "Colour"
+          "Name": ""
         }
       },
-      "Identifier": "6",
-      "Position": "-96,-192"
+      "Identifier": "7",
+      "Position": "-112,-352"
     },
     {
       "_class": "Saturate",
-      "Identifier": "7",
-      "Position": "48,48",
+      "Identifier": "8",
+      "Position": "-464,-48",
       "Input": {
-        "Identifier": "1",
+        "Identifier": "9",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Sine",
+      "Identifier": "9",
+      "Position": "-608,-48",
+      "Input": {
+        "Identifier": "3",
         "Output": "Result"
       }
     }

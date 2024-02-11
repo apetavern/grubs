@@ -1,30 +1,63 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/complex.shader_c"
-	"F_SELF_ILLUM"		"1"
-	"F_DO_NOT_CAST_SHADOWS"		"1"
-	"g_flAmbientOcclusionDirectDiffuse"		"0.000000"
-	"g_flAmbientOcclusionDirectSpecular"		"0.000000"
-	"TextureAmbientOcclusion"		"[1.000000 1.000000 1.000000 0.000000]"
-	"g_flModelTintAmount"		"1.000000"
-	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureColor"		"[1.000000 1.000000 1.000000 1.000000]"
-	"g_flFadeExponent"		"1.000000"
-	"g_bFogEnabled"		"0"
-	"g_flDirectionalLightmapMinZ"		"0.050000"
-	"g_flDirectionalLightmapStrength"		"1.000000"
-	"g_flMetalness"		"0.000000"
-	"TextureNormal"		"[0.501961 0.501961 1.000000 0.000000]"
-	"TextureRoughness"		"[1.000000 1.000000 1.000000 0.000000]"
-	"g_flSelfIllumAlbedoFactor"		"1.000000"
-	"g_flSelfIllumBrightness"		"5.000000"
-	"g_flSelfIllumScale"		"1.000000"
-	"g_vSelfIllumScrollSpeed"		"[0.000 0.000]"
-	"g_vSelfIllumTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureSelfIllumMask"		"particles/explosion/fireball_selfillum.png"
-	"g_nScaleTexCoordUByModelScaleAxis"		"0"
-	"g_nScaleTexCoordVByModelScaleAxis"		"0"
-	"g_vTexCoordOffset"		"[0.000 0.000]"
-	"g_vTexCoordScale"		"[2.000 2.000]"
-	"g_vTexCoordScrollSpeed"		"[0.050 0.050]"
+	shader "shaders/complex.shader"
+
+	//---- PBR ----
+	F_SELF_ILLUM 1
+
+	//---- Translucent ----
+	F_ALPHA_TEST 1
+
+	//---- Ambient Occlusion ----
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "[1.000000 0.254902 0.086275 0.000000]"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Metalness ----
+	g_flMetalness "0.000"
+
+	//---- Normal ----
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Roughness ----
+	g_flRoughnessScaleFactor "1.000"
+	TextureRoughness "materials/default/default_rough.tga"
+
+	//---- Self Illum ----
+	g_flSelfIllumAlbedoFactor "1.000"
+	g_flSelfIllumBrightness "6.000"
+	g_flSelfIllumScale "1.000"
+	g_vSelfIllumScrollSpeed "[0.000 0.000]"
+	g_vSelfIllumTint "[1.000000 0.764706 0.000000 0.000000]"
+	TextureSelfIllumMask "particles/explosion/fireball_selfillum.png"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "1"
+	g_nScaleTexCoordVByModelScaleAxis "1"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[-0.200 -0.200]"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.100"
+	g_flAntiAliasedEdgeStrength "1.000"
+	TextureTranslucency "particles/explosion/fireball_selfillum.png"
+
+	DynamicParams
+	{
+		g_flAlphaTestReference "alpha_test"
+	}
 }

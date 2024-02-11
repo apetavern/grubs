@@ -10,7 +10,9 @@ Layer0
 
 	g_flCellDensity "5.000"
 	g_flVoronoiSpeed "0.500"
-	g_vColour "[0.294118 0.294118 0.294118 1.000000]"
+
+	//---- Colour ----
+	g_vColour "[0.058824 0.058824 0.058824 1.000000]"
 
 	//---- Fog ----
 	g_bFogEnabled "0"
