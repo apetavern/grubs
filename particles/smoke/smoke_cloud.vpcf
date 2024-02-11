@@ -387,7 +387,7 @@
 		},
 		{
 			_class = "C_OP_BasicMovement"
-			m_Gravity = [ 0.0, 0.0, 35.0 ]
+			m_Gravity = [ 0.0, 0.0, 10.0 ]
 		},
 		{
 			_class = "C_OP_SetFloat"
@@ -435,21 +435,21 @@
 					[
 						{
 							x = 0.0
-							y = 0.34744
-							m_flSlopeIncoming = 1.865973
-							m_flSlopeOutgoing = 1.865973
+							y = 1.0
+							m_flSlopeIncoming = -0.538122
+							m_flSlopeOutgoing = -0.538122
 						},
 						{
-							x = 0.349716
-							y = 1.0
-							m_flSlopeIncoming = -0.34744
-							m_flSlopeOutgoing = -0.34744
+							x = 0.521964
+							y = 0.71912
+							m_flSlopeIncoming = -1.0
+							m_flSlopeOutgoing = -1.0
 						},
 						{
 							x = 1.0
 							y = 0.0
-							m_flSlopeIncoming = -1.537789
-							m_flSlopeOutgoing = -1.537789
+							m_flSlopeIncoming = -1.504321
+							m_flSlopeOutgoing = -1.504321
 						},
 					]
 					m_tangents = 
@@ -478,7 +478,7 @@
 			m_InputValue = 
 			{
 				m_nType = "PF_TYPE_PARTICLE_AGE_NORMALIZED"
-				m_nMapType = "PF_MAP_TYPE_MULT"
+				m_nMapType = "PF_MAP_TYPE_CURVE"
 				m_NamedValue = ""
 				m_flLiteralValue = 0.0
 				m_nControlPoint = 0
@@ -515,10 +515,44 @@
 				m_flBiasParameter = 0.0
 				m_Curve = 
 				{
-					m_spline = [  ]
-					m_tangents = [  ]
-					m_vDomainMins = [ 0.0, 0.0 ]
-					m_vDomainMaxs = [ 0.0, 0.0 ]
+					m_spline = 
+					[
+						{
+							x = 0.0
+							y = 0.35
+							m_flSlopeIncoming = 1.075811
+							m_flSlopeOutgoing = 1.075811
+						},
+						{
+							x = 0.414961
+							y = 0.79642
+							m_flSlopeIncoming = 0.65
+							m_flSlopeOutgoing = 0.65
+						},
+						{
+							x = 1.0
+							y = 1.0
+							m_flSlopeIncoming = 0.347977
+							m_flSlopeOutgoing = 0.347977
+						},
+					]
+					m_tangents = 
+					[
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+						{
+							m_nIncomingTangent = "CURVE_TANGENT_SPLINE"
+							m_nOutgoingTangent = "CURVE_TANGENT_SPLINE"
+						},
+					]
+					m_vDomainMins = [ 0.0, 0.35 ]
+					m_vDomainMaxs = [ 1.0, 1.0 ]
 				}
 			}
 		},
@@ -590,7 +624,7 @@
 					m_model = resource:"particles/explosion/explosionmodel.vmdl"
 				},
 			]
-			m_hOverrideMaterial = resource:"particles/smoke/smoke.vmat"
+			m_hOverrideMaterial = resource:"particles/smoke/smoke_complex.vmat"
 			m_bDisableShadows = true
 		},
 	]
