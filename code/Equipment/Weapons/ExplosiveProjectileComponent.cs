@@ -14,7 +14,7 @@ public class ExplosiveProjectileComponent : Component
 	[Property, ResourceType( "sound" )] private string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] private ParticleSystem? Particles { get; set; }
 
-	[Net] private TimeUntil TimeUntilExplosion { get; set; }
+	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
 
 	protected override void OnStart()
 	{
