@@ -33,7 +33,7 @@ public partial class HealthComponent : Component
 			{
 				var conn = grub.Network.OwnerConnection;
 				grub.GameObject.Destroy();
-				NetHelper.Instance.OnActive( conn );
+				// NetHelper.Instance.OnActive( conn );
 			}
 		}
 	}
