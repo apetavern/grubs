@@ -1,5 +1,6 @@
 ﻿using Grubs.Common;
 using Grubs.Player;
+using Grubs.Terrain;
 
 namespace Grubs.Helpers;
 
@@ -35,6 +36,9 @@ public partial class ExplosionHelperComponent : Component
 
 			health.TakeDamage( damage * distFactor );
 		}
+		LastPosition = position;
+		LastRadius = radius;
+		GrubsTerrain.Instance.SubtractCircle( new Vector2( position.x, position.z ), radius / 2f );
 	}
 
 	private void HandleGrubExplosion( Grub grub, Vector3 position )
@@ -54,5 +58,17 @@ public partial class ExplosionHelperComponent : Component
 		body.ApplyImpulseAt(
 			body.Transform.Position + Vector3.Down * 0.25f,
 			dir * force * body.PhysicsBody.Mass );
+	}
+
+	private Vector3 LastPosition { get; set; }
+	private float LastRadius { get; set; }
+
+	protected override void DrawGizmos()
+	{
+		base.DrawGizmos();
+
+		Gizmo.Transform = global::Transform.Zero;
+
+		Gizmo.Draw.LineSphere( LastPosition, LastRadius );
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment;
 using Grubs.Player.Controller;
+using Grubs.Terrain;
 
 namespace Grubs.Player;
 
@@ -19,6 +20,9 @@ public sealed class Grub : Component
 	protected override void OnStart()
 	{
 		base.OnStart();
+
+		GrubsTerrain.Instance.Network.TakeOwnership();
+		GrubsTerrain.Instance.Init();
 
 		if ( !IsProxy )
 			InitializeLocal();

@@ -1,265 +1,257 @@
 {
-  "Id": "c0571110-4e3a-4fa4-b18a-0278b8599d2a",
+  "__guid": "c0571110-4e3a-4fa4-b18a-0278b8599d2a",
   "GameObjects": [
     {
-      "Id": "450d7fe2-988e-48a6-adc2-53055588418b",
+      "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
       "Name": "Static",
       "Enabled": true,
+      "NetworkMode": 2,
       "Children": [
         {
-          "Id": "8c43f824-4348-4949-9123-9b8a5b10b681",
+          "__guid": "8c43f824-4348-4949-9123-9b8a5b10b681",
           "Name": "Terrain",
           "Position": "0,512,0",
           "Scale": "17.77881,2,5",
           "Tags": "solid",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
+              "__guid": "6bbee8a4-ed45-451a-ac49-80e0a5dc8fff",
               "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/dev/box.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "BoxCollider",
+              "__guid": "aa2242b9-7e85-4624-8014-aa19b5badb81",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
+              "Static": false
             }
           ]
         },
         {
-          "Id": "5c1ed47c-97a5-4589-88e4-61da3623e07c",
+          "__guid": "5c1ed47c-97a5-4589-88e4-61da3623e07c",
           "Name": "Terrain",
           "Position": "-400,512,95.58618",
           "Rotation": "0,0.258819,0,0.9659258",
           "Scale": "28.54934,2,5",
           "Tags": "solid",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
+              "__guid": "1a682d65-99cb-4b49-914a-a7eb580aec2b",
               "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/dev/box.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "BoxCollider",
+              "__guid": "8d15205b-3f5b-4bce-b268-ad5dabe50be5",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
+              "Static": false
             }
           ]
         },
         {
-          "Id": "035e29b0-a40d-4a33-aea8-fc1333d67732",
+          "__guid": "035e29b0-a40d-4a33-aea8-fc1333d67732",
           "Name": "Terrain",
           "Position": "-500,512,349.8441",
           "Rotation": "0,0.258819,0,0.9659258",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
+              "__guid": "4a3baae3-2c87-48f3-b2b7-3c19b4bc48cb",
               "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/dev/box.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "BoxCollider",
+              "__guid": "dcd7a746-5ec5-46b4-abdf-e2e8b3192597",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
+              "Static": false
             }
           ]
         },
         {
-          "Id": "e19425c7-3276-43ae-bb6e-d305106a6bd9",
+          "__guid": "e19425c7-3276-43ae-bb6e-d305106a6bd9",
           "Name": "Terrain",
           "Position": "500,512,349.8441",
           "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
+              "__guid": "a5f35788-34e2-4ec4-9e35-a62bf5fd65fe",
               "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/dev/box.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "BoxCollider",
+              "__guid": "2d3417ea-fb97-40ad-aff4-718424ccf7d6",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
+              "Static": false
             }
           ]
         },
         {
-          "Id": "e73651dc-286c-4e3b-bc8d-9ca24b114ced",
+          "__guid": "e73651dc-286c-4e3b-bc8d-9ca24b114ced",
           "Name": "Terrain",
           "Position": "343.9196,512,677.1239",
           "Rotation": "-0.9659258,-0.00000001131334,0.258819,-0.00000004222196",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
+              "__guid": "ee25ecd4-4419-4000-9008-4cb292777441",
               "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/dev/box.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "BoxCollider",
+              "__guid": "2a88fb86-d085-4fea-8baa-3b76e38d8beb",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
+              "Static": false
             }
           ]
         },
         {
-          "Id": "34952084-b254-4941-b6eb-7be548edcdee",
+          "__guid": "34952084-b254-4941-b6eb-7be548edcdee",
           "Name": "Terrain",
           "Position": "-343.961,512,677.1239",
           "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
+              "__guid": "061276c0-7e30-44e5-950e-aa047521516c",
               "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/dev/box.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "BoxCollider",
+              "__guid": "47862edd-72ae-40b7-898b-a9c11a3d52bd",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
+              "Static": false
             }
           ]
         },
         {
-          "Id": "66336cc9-0cf4-4d14-bac7-04907656b007",
+          "__guid": "66336cc9-0cf4-4d14-bac7-04907656b007",
           "Name": "Terrain",
           "Position": "400,512,95.58618",
           "Rotation": "0,-0.258819,0,0.9659259",
           "Scale": "28.54934,2,5",
           "Tags": "solid",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
+              "__guid": "05823232-90bf-4a6b-a855-e7c3c391dee4",
               "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/dev/box.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
               "__type": "BoxCollider",
+              "__guid": "b491fbcc-f9b9-4a47-a9d4-145a56fc4e27",
               "Center": "0,0,0",
               "IsTrigger": false,
               "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
+              "Static": false
             }
           ]
         },
         {
-          "Id": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
+          "__guid": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
           "Name": "Water",
           "Position": "316.0363,4234.852,0",
           "Scale": "200,200,0",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "ModelRenderer",
+              "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
               "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
               "MaterialOverride": "materials/physics/water.vmat",
               "Model": "models/dev/plane.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "KillZoneComponent"
+              "__type": "KillZoneComponent",
+              "__guid": "464044f1-44bb-4477-90a7-afe44b2d7cca"
             },
             {
               "__type": "PlaneCollider",
+              "__guid": "55c3a0e7-0f66-4241-9fd7-7786991714ad",
               "Center": "0,0,0",
               "IsTrigger": true,
               "Scale": "50,50",
-              "Static": true,
-              "Surface": null
+              "Static": true
             }
           ]
         },
         {
-          "Id": "b817c40d-8437-4a22-acec-35f71c7f7ae3",
+          "__guid": "b817c40d-8437-4a22-acec-35f71c7f7ae3",
           "Name": "Sun",
           "Position": "288.8641,-765.1482,-163.5517",
           "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
+          "Tags": "light_directional,light",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "DirectionalLight",
+              "__guid": "e266174e-78ae-40c1-a65f-948e9b2123c4",
               "FogMode": "Enabled",
               "FogStrength": 1,
               "LightColor": "0.91373,0.98039,1,1",
@@ -271,29 +263,41 @@
       ]
     },
     {
-      "Id": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
+      "__guid": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
       "Name": "World",
-      "Position": "-340.4734,292.9649,316.1798",
+      "Position": "-0.00009155273,512,149.2906",
+      "Rotation": "0,0,-0.7071068,-0.7071068",
+      "Tags": "solid",
       "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
-          "__type": "ExplosionHelperComponent"
+          "__type": "ExplosionHelperComponent",
+          "__guid": "a28e7356-b54b-4a69-a8f9-58c6e1551164"
         },
         {
-          "__type": "ParticleHelperComponent"
+          "__type": "ParticleHelperComponent",
+          "__guid": "0ab37c18-533c-42b0-853b-c82182be8171"
+        },
+        {
+          "__type": "GrubsTerrain",
+          "__guid": "c4aea594-d7af-476e-9126-8422c1252421",
+          "__enabled": false
         }
       ]
     },
     {
-      "Id": "5a67629e-9c73-4752-be7a-91dfd0b40e8d",
+      "__guid": "5a67629e-9c73-4752-be7a-91dfd0b40e8d",
       "Name": "Camera",
       "Position": "-322.7331,181.9972,221.4703",
       "Rotation": "0.00000004112413,0.0000000009752696,0.7071068,0.7071068",
       "Tags": "maincamera",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "CameraComponent",
+          "__guid": "2b162f48-7432-4445-8f15-7a87a3bcf4a8",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
@@ -309,43 +313,47 @@
           "ZNear": 10
         },
         {
-          "__type": "Highlight"
+          "__type": "Highlight",
+          "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c"
         },
         {
           "__type": "GrubFollowCamera",
-          "Target": null
+          "__guid": "d8745fd3-898e-4de4-a0f5-80cf52e67e78"
         }
       ]
     },
     {
-      "Id": "96d84131-aa4c-4065-b484-68daad9a9384",
+      "__guid": "96d84131-aa4c-4065-b484-68daad9a9384",
       "Name": "Map",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "MapInstance",
+          "__guid": "9b45fbfb-4f36-41d5-8685-0635775e2b7b",
           "MapName": "apetavern.gr_beach",
-          "OnMapLoaded": null,
-          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
       "Children": []
     },
     {
-      "Id": "18d67b0f-c777-48d1-ad2e-d002f58bd055",
+      "__guid": "18d67b0f-c777-48d1-ad2e-d002f58bd055",
       "Name": "Network",
       "Position": "-1098.61,512,191.4738",
       "Enabled": true,
+      "NetworkMode": 2,
       "Children": [
         {
-          "Id": "17e17813-45ef-4835-8195-d968524b4ba7",
+          "__guid": "17e17813-45ef-4835-8195-d968524b4ba7",
           "Name": "Network",
           "Position": "607.9057,-129.2016,57.7177",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NetHelper",
+              "__guid": "a42a14b9-a93d-46f5-a182-4716b80d6a7a",
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/grub/grub.prefab"
@@ -354,37 +362,43 @@
           ]
         },
         {
-          "Id": "504b9b94-a176-4ef2-8d95-d6a747a75503",
+          "__guid": "504b9b94-a176-4ef2-8d95-d6a747a75503",
           "Name": "Spawn",
           "Position": "1034.61,0,57.7177",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SpawnPoint",
+              "__guid": "9c094540-c6d2-4962-900c-b3cec155f074",
               "Color": "0.8902,0.31765,0.05098,1"
             }
           ]
         },
         {
-          "Id": "9dc026f3-462f-450c-a93d-6c267a247aae",
+          "__guid": "9dc026f3-462f-450c-a93d-6c267a247aae",
           "Name": "Spawn (1)",
           "Position": "1098.61,0,57.7177",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SpawnPoint",
+              "__guid": "8d23994b-0eb4-43ad-b78a-011b32e93be5",
               "Color": "0.8902,0.31765,0.05098,1"
             }
           ]
         },
         {
-          "Id": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4",
+          "__guid": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4",
           "Name": "Spawn (2)",
           "Position": "1162.61,0,57.7177",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SpawnPoint",
+              "__guid": "22780e71-e8a5-4e74-a51f-f3ded96110ba",
               "Color": "0.8902,0.31765,0.05098,1"
             }
           ]
@@ -392,23 +406,22 @@
       ]
     },
     {
-      "Id": "04449256-9f14-429c-890f-75e0c3935f6a",
+      "__guid": "04449256-9f14-429c-890f-75e0c3935f6a",
       "Name": "Sphere",
       "Position": "-288.7947,512,299.1826",
-      "Networked": true,
-      "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "ModelRenderer",
+          "__guid": "95612c53-c204-4cb5-8e67-411297d3718d",
           "BodyGroups": 18446744073709551615,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/dev/sphere.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
         },
         {
           "__type": "Rigidbody",
+          "__guid": "b08866f9-a75b-4b32-a33f-08717e77a36e",
           "AngularDamping": 0,
           "Gravity": true,
           "LinearDamping": 0,
@@ -418,41 +431,42 @@
             "Roll": true
           },
           "MassOverride": 0,
+          "MotionEnabled": true,
           "RigidbodyFlags": 0,
           "StartAsleep": false
         },
         {
           "__type": "SphereCollider",
+          "__guid": "6fff5e92-0433-4374-80c5-555ef2b57a92",
           "Center": "0,0,0",
           "IsTrigger": false,
           "Radius": 32.39999,
-          "Static": false,
-          "Surface": null
+          "Static": false
         },
         {
           "__type": "HealthComponent",
+          "__guid": "6ad43024-0280-4cff-acf4-3f54e9acd65b",
           "MaxHealth": 1000
         }
       ]
     },
     {
-      "Id": "cc25f2e0-1a0d-4420-866a-9a9c2a40428a",
+      "__guid": "cc25f2e0-1a0d-4420-866a-9a9c2a40428a",
       "Name": "Sphere (1)",
       "Position": "280.1169,512,299.1826",
-      "Networked": true,
-      "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "ModelRenderer",
+          "__guid": "883f4f42-fd7e-4803-8afe-b779c387826e",
           "BodyGroups": 18446744073709551615,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/dev/sphere.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
         },
         {
           "__type": "Rigidbody",
+          "__guid": "ed1212ee-b18a-4261-ad0e-d6f2d8be0261",
           "AngularDamping": 0,
           "Gravity": true,
           "LinearDamping": 0,
@@ -462,19 +476,21 @@
             "Roll": true
           },
           "MassOverride": 0,
+          "MotionEnabled": true,
           "RigidbodyFlags": 0,
           "StartAsleep": false
         },
         {
           "__type": "SphereCollider",
+          "__guid": "6ae352c0-9346-43b5-ada5-a24b7298421f",
           "Center": "0,0,0",
           "IsTrigger": false,
           "Radius": 32.39999,
-          "Static": false,
-          "Surface": null
+          "Static": false
         },
         {
           "__type": "HealthComponent",
+          "__guid": "fee52871-6528-4cf0-a0e4-ed0e42e981c4",
           "MaxHealth": 1000
         }
       ]
@@ -503,6 +519,8 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-02-15T15:30:36.8379183-04:00",
+  "LastSaved": "2024-04-05T17:25:50.3353862-03:00",
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
