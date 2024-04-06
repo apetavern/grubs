@@ -1,4 +1,5 @@
-﻿using Sandbox.Diagnostics;
+﻿using Grubs.Terrain;
+using Sandbox.Diagnostics;
 using Sandbox.Internal;
 using Sandbox.Utility;
 using System.Collections.Concurrent;
@@ -34,7 +35,7 @@ public interface ISdf<T>
 		_sTypesRegistered = true;
 
 		foreach ( var (method, _) in
-				 GlobalGameNamespace.TypeLibrary.GetMethodsWithAttribute<RegisterSdfTypesAttribute>() )
+		         GlobalGameNamespace.TypeLibrary.GetMethodsWithAttribute<RegisterSdfTypesAttribute>() )
 		{
 			method.Invoke( null );
 		}
@@ -47,7 +48,7 @@ public interface ISdf<T>
 	public static void RegisterType<TSdf>( SdfReader<T, TSdf> readRaw )
 		where TSdf : T
 	{
-		RegisteredTypes.Add( (GlobalGameNamespace.TypeLibrary.GetType( typeof( TSdf ) ),
+		RegisteredTypes.Add( (GlobalGameNamespace.TypeLibrary.GetType( typeof(TSdf) ),
 			( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<T>> sdfTypes ) =>
 				readRaw( ref reader, sdfTypes )) );
 	}
@@ -147,7 +148,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 	internal bool IsDestroying { get; private set; }
 
-	PhysicsBody PhysicsBody { get; set; }
+	private PhysicsBody PhysicsBody { get; set; }
 
 	protected override void OnDestroy()
 	{
@@ -197,6 +198,12 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 				DispatchUpdateMesh( layer );
 			}
 		}
+
+		if ( IsProxy )
+			return;
+
+		foreach ( var conn in Connection.All.Where( c => c != Connection.Host ) )
+			SendModifications( conn );
 	}
 
 	public void Write( Stream stream )
@@ -227,14 +234,12 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		msg.Write( count );
 		msg.Write( ModificationCount );
 
-		var writer = ByteStream.Create( 512 );
+		WriteRange( ref msg, prevModifications, count, NetWrite_TypeIndices );
 
-		WriteRange( ref writer, prevModifications, count, NetWrite_TypeIndices );
+		/*		msg.Write( writer.Length );
+				msg.Write( writer );
 
-		msg.Write( writer.Length );
-		msg.Write( writer );
-
-		writer.Dispose();
+				writer.Dispose();*/
 
 		return count;
 	}
@@ -289,10 +294,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 			NetRead_TypeReaders[index++] = reader;
 		}
 
-		var size = msg.Read<int>();
-		var stream = msg.ReadByteStream( size );
-
-		ReadRange( ref stream, msgCount, NetRead_TypeReaders );
+		ReadRange( ref msg, msgCount, NetRead_TypeReaders );
 
 		return true;
 	}
@@ -329,7 +331,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		return new DisposeAction( () => _receivingModifications = false );
 	}
 
-	[Obsolete( $"Please use {nameof( ClearAsync )}" )]
+	[Obsolete( $"Please use {nameof(ClearAsync)}" )]
 	public void Clear()
 	{
 		_ = ClearAsync();
@@ -378,7 +380,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		await GameTask.WhenAll( Layers.Values.SelectMany( x => x.Chunks.Values ).Select( x => x.ClearAsync( false ) ) );
 	}
 
-	[Obsolete( $"Please use {nameof( ClearAsync )}" )]
+	[Obsolete( $"Please use {nameof(ClearAsync)}" )]
 	public void Clear( TResource resource )
 	{
 		_ = ClearAsync( resource );
@@ -481,7 +483,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		}
 	}
 
-	[Obsolete( $"Please use {nameof( AddAsync )}" )]
+	[Obsolete( $"Please use {nameof(AddAsync)}" )]
 	public bool Add<T>( in T sdf, TResource resource )
 		where T : TSdf
 	{
@@ -506,7 +508,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		return ModifyChunksAsync( sdf, resource, true, ( chunk, sdf ) => chunk.AddAsync( sdf ) );
 	}
 
-	[Obsolete( $"Please use {nameof( SubtractAsync )}" )]
+	[Obsolete( $"Please use {nameof(SubtractAsync)}" )]
 	public bool Subtract<T>( in T sdf, TResource resource )
 		where T : TSdf
 	{
@@ -531,7 +533,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		return ModifyChunksAsync( sdf, resource, false, ( chunk, sdf ) => chunk.SubtractAsync( sdf ) );
 	}
 
-	[Obsolete( $"Please use {nameof( SubtractAsync )}" )]
+	[Obsolete( $"Please use {nameof(SubtractAsync)}" )]
 	public bool Subtract<T>( in T sdf )
 		where T : TSdf
 	{
@@ -561,7 +563,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		if ( IsDestroying ) return null;
 
 		return Layers.TryGetValue( resource, out var layerData )
-			   && layerData.Chunks.TryGetValue( key, out var chunk )
+		       && layerData.Chunks.TryGetValue( key, out var chunk )
 			? chunk
 			: null;
 	}
@@ -647,7 +649,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	{
 		AssertCanModify();
 
-		if ( resource == null ) throw new ArgumentNullException( nameof( resource ) );
+		if ( resource == null ) throw new ArgumentNullException( nameof(resource) );
 
 		Task task;
 
