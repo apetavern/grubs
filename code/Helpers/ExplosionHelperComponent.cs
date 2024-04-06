@@ -36,9 +36,13 @@ public partial class ExplosionHelperComponent : Component
 
 			health.TakeDamage( damage * distFactor );
 		}
+
 		LastPosition = position;
 		LastRadius = radius;
-		GrubsTerrain.Instance.SubtractCircle( new Vector2( position.x, position.z ), radius / 2f );
+
+		var materials = GrubsTerrain.Instance.GetActiveMaterials( MaterialsConfig.Destruction );
+		GrubsTerrain.Instance.SubtractCircle( new Vector2( position.x, position.z ), radius / 2f, 1 );
+		GrubsTerrain.Instance.ScorchCircle( new Vector2( position.x, position.z ), radius / 2f + 8f );
 	}
 
 	private void HandleGrubExplosion( Grub grub, Vector3 position )

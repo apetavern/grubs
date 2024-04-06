@@ -13,7 +13,6 @@
           "Position": "0,512,0",
           "Scale": "17.77881,2,5",
           "Tags": "solid",
-          "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
@@ -42,7 +41,6 @@
           "Rotation": "0,0.258819,0,0.9659258",
           "Scale": "28.54934,2,5",
           "Tags": "solid",
-          "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
@@ -71,7 +69,6 @@
           "Rotation": "0,0.258819,0,0.9659258",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
-          "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
@@ -100,7 +97,6 @@
           "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
-          "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
@@ -129,7 +125,6 @@
           "Rotation": "-0.9659258,-0.00000001131334,0.258819,-0.00000004222196",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
-          "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
@@ -158,7 +153,6 @@
           "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
           "Scale": "14.3708,2,0.2546272",
           "Tags": "solid",
-          "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
@@ -187,7 +181,6 @@
           "Rotation": "0,-0.258819,0,0.9659259",
           "Scale": "28.54934,2,5",
           "Tags": "solid",
-          "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
@@ -537,7 +530,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-06T10:51:21.2192931-03:00",
+  "LastSaved": "2024-04-06T14:11:00.0043958-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
