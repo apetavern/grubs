@@ -7,7 +7,7 @@
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "Resources": "*.vmdl_c.png\n*.vmdl.png\nfonts/*",
+  "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*",
   "HasCode": true,
   "CodePath": "code",
   "PackageReferences": [],

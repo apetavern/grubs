@@ -87,8 +87,6 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	/// </summary>
 	public TChunkKey Key { get; private set; }
 
-	public GameObject ChunkObject { get; set; }
-
 	/// <summary>
 	/// If this chunk has collision, the generated physics mesh for this chunk.
 	/// </summary>

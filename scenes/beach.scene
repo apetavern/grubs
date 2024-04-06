@@ -269,7 +269,7 @@
       "Rotation": "0,0,-0.7071068,-0.7071068",
       "Tags": "solid",
       "Enabled": true,
-      "NetworkMode": 1,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "ExplosionHelperComponent",
@@ -278,11 +278,29 @@
         {
           "__type": "ParticleHelperComponent",
           "__guid": "0ab37c18-533c-42b0-853b-c82182be8171"
-        },
+        }
+      ]
+    },
+    {
+      "__guid": "08a72929-c2dd-4da0-b84d-fdca3b287389",
+      "Name": "Terrain",
+      "Position": "0,512,64",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
         {
           "__type": "GrubsTerrain",
-          "__guid": "c4aea594-d7af-476e-9126-8422c1252421",
-          "__enabled": false
+          "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
+          "SdfWorld": {
+            "_type": "component",
+            "component_id": "18fcdcfa-5aa8-440a-b806-592601ed927a",
+            "go": "08a72929-c2dd-4da0-b84d-fdca3b287389",
+            "component_type": "Sdf2DWorld"
+          }
+        },
+        {
+          "__type": "Sdf2DWorld",
+          "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a"
         }
       ]
     },
@@ -519,7 +537,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-05T17:25:50.3353862-03:00",
+  "LastSaved": "2024-04-06T10:51:21.2192931-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
