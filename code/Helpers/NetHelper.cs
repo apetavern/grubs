@@ -1,4 +1,6 @@
-﻿namespace Grubs.Helpers;
+﻿using Grubs.Terrain;
+
+namespace Grubs.Helpers;
 
 [Title( "Grubs - Network Helper" ), Category( "Networking" )]
 public class NetHelper : Component, Component.INetworkListener
@@ -26,6 +28,7 @@ public class NetHelper : Component, Component.INetworkListener
 		var startPosition = FindSpawnLocation();
 		var player = PlayerPrefab.Clone( startPosition, name: $"Player - {conn.DisplayName}" );
 		player.NetworkSpawn( conn );
+		GrubsTerrain.Instance.SendMeMissing( conn.Id, 1, 0 );
 	}
 
 	private Transform FindSpawnLocation()
