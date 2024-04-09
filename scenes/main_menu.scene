@@ -1,31 +1,33 @@
 {
-  "Id": "1aef78f6-e507-47ac-8724-74f92c9ec5db",
+  "__guid": "1aef78f6-e507-47ac-8724-74f92c9ec5db",
   "GameObjects": [
     {
-      "Id": "2e35c746-223e-47ab-9608-440dd81bc057",
+      "__guid": "2e35c746-223e-47ab-9608-440dd81bc057",
       "Name": "Map",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
-          "__type": "MapInstance",
+          "__type": "Sandbox.MapInstance",
+          "__guid": "cb9273ba-e9ed-4379-91ac-d478f6bc05af",
           "MapName": "maps/gr_menu.vpk",
-          "OnMapLoaded": null,
-          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
       "Children": []
     },
     {
-      "Id": "91464b46-2177-41fc-84e8-6a639bcabac9",
+      "__guid": "91464b46-2177-41fc-84e8-6a639bcabac9",
       "Name": "Camera",
       "Position": "-85,-105,25",
       "Rotation": "0.028038,-0.03341439,0.6421758,0.7653154",
       "Tags": "maincamera",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
-          "__type": "CameraComponent",
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "0c699ae0-d851-40b1-b00b-3690ea15b03c",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
@@ -41,14 +43,16 @@
           "ZNear": 10
         },
         {
-          "__type": "ColorAdjustments",
+          "__type": "Sandbox.ColorAdjustments",
+          "__guid": "15d59149-6457-4a59-b71e-5f4d860249b5",
           "Brightness": 1,
           "Contrast": 1.01,
           "HueRotate": 0,
           "Saturation": 1.05
         },
         {
-          "__type": "Vignette",
+          "__type": "Sandbox.Vignette",
+          "__guid": "cbfd62cb-6427-4a22-a9cd-ed9722d9ab27",
           "Center": "0.5,0.5",
           "Color": "0,0,0,1",
           "Intensity": 0.3,
@@ -56,7 +60,8 @@
           "Smoothness": 1
         },
         {
-          "__type": "DepthOfField",
+          "__type": "Sandbox.DepthOfField",
+          "__guid": "590ae120-c6eb-461d-830a-4af6d20304c9",
           "BackBlur": true,
           "BlurSize": 25,
           "FocalDistance": 135,
@@ -65,18 +70,20 @@
       ]
     },
     {
-      "Id": "2f773373-3d4a-4d90-a19f-f27ad74cc00d",
+      "__guid": "2f773373-3d4a-4d90-a19f-f27ad74cc00d",
       "Name": "Spot Light",
       "Position": "-70.78873,-153.7505,126.6426",
       "Rotation": "-0.157559,0.2053349,0.5880182,0.7663205",
+      "Tags": "light_spot,light",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
-          "__type": "SpotLight",
+          "__type": "Sandbox.SpotLight",
+          "__guid": "c4612ac7-5c38-4531-bcf7-4e5131fd879b",
           "Attenuation": 1,
           "ConeInner": 35,
           "ConeOuter": 45,
-          "Cookie": null,
           "FogMode": "Enabled",
           "FogStrength": 1,
           "LightColor": "1,0.96262,0.91373,1",
@@ -86,19 +93,42 @@
       ]
     },
     {
-      "Id": "5759e5a3-a78f-41d5-8043-c46cbcd9e79b",
+      "__guid": "5759e5a3-a78f-41d5-8043-c46cbcd9e79b",
       "Name": "Fog",
       "Position": "-32,32,100",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
-          "__type": "VolumetricFogVolume",
+          "__type": "Sandbox.VolumetricFogVolume",
+          "__guid": "d00fe9b7-2047-46db-87ae-aa860c1ca92e",
           "Bounds": {
             "Mins": "-150,-150,-100",
             "Maxs": "150,150,100"
           },
           "FalloffExponent": 1,
           "Strength": 5
+        }
+      ]
+    },
+    {
+      "__guid": "65e690eb-fbed-404c-bd61-397ebe06f2c8",
+      "Name": "UI",
+      "Position": "-33.10376,189.3181,51.14672",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "Grubs.UI.Menu.Menu",
+          "__guid": "1e66b6ef-f6ee-465f-ac85-03d40d540f2b"
+        },
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "5947718e-cc50-4245-82a7-b1abd81261d3",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
         }
       ]
     }
@@ -110,9 +140,24 @@
     "NetworkFrequency": 30,
     "ThreadedAnimation": true,
     "TimeScale": 1,
-    "UseFixedUpdate": true
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
   },
   "Title": "main_menu",
   "Description": "",
+  "LastSaved": "2024-04-09T16:01:16.9900253-03:00",
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

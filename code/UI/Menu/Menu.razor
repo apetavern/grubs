@@ -1,0 +1,39 @@
+﻿@namespace Grubs.UI.Menu
+
+@using Grubs.UI.Components
+@using Sandbox;
+@using Sandbox.Razor
+@using Sandbox.UI;
+
+@inherits PanelComponent
+
+<root>
+    <Cursor/>
+
+    <div class="left">
+        <div class="grubs-logo">
+            GRUBS
+        </div>
+        <div class="menu-options">
+            <button>Create Lobby</button>
+            <button>Join Lobby</button>
+            <button>Customize</button>
+            <button>Quit</button>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    protected override void OnTreeBuilt()
+    {
+        base.OnTreeBuilt();
+
+        Cursor.Enabled("menu", true);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Cursor.IsEnabled());
+    }
+}

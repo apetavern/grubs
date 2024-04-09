@@ -9,7 +9,6 @@ public partial class GrubsTerrain : Component
 	public static GrubsTerrain Instance { get; set; }
 
 	[Property] public required Sdf2DWorld SdfWorld { get; set; }
-	public Sdf2DLayer Sand { get; set; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
 
 	public GrubsTerrain()
 	{

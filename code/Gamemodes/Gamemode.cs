@@ -17,4 +17,6 @@ public abstract class Gamemode : Component
 	}
 
 	internal virtual void Initialize() { }
+
+	internal virtual void Start() { }
 }

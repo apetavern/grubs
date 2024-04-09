@@ -13,13 +13,16 @@ public sealed class FreeForAllGamemode : Gamemode
 			GrubsTerrain.Instance.Network.TakeOwnership();
 			GrubsTerrain.Instance.Init();
 		}
+	}
 
-		// var grubs = Scene.GetAllComponents<Grub>();
-		// foreach ( var grub in grubs )
-		// {
-		// 	var spawn = GrubsTerrain.Instance.FindSpawnLocation();
-		// 	Log.Info( spawn );
-		// 	grub.Transform.Position = spawn;
-		// }
+	internal override void Start()
+	{
+		var grubs = Scene.GetAllComponents<Grub>();
+		foreach ( var grub in grubs )
+		{
+			var spawn = GrubsTerrain.Instance.FindSpawnLocation();
+			Log.Info( spawn );
+			grub.Transform.Position = spawn;
+		}
 	}
 }
