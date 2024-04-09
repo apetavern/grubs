@@ -23,7 +23,7 @@ public class NetHelper : Component, Component.INetworkListener
 		}
 	}
 
-	public void OnActive( Connection conn )
+	public async void OnActive( Connection conn )
 	{
 		var startPosition = FindSpawnLocation();
 		var player = PlayerPrefab.Clone( startPosition, name: $"Player - {conn.DisplayName}" );

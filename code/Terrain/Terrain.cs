@@ -1,4 +1,5 @@
-﻿using Sandbox.Sdf;
+﻿using Grubs.Player;
+using Sandbox.Sdf;
 
 namespace Grubs.Terrain;
 
@@ -6,6 +7,7 @@ namespace Grubs.Terrain;
 public partial class GrubsTerrain : Component
 {
 	public static GrubsTerrain Instance { get; set; }
+
 	[Property] public required Sdf2DWorld SdfWorld { get; set; }
 	public Sdf2DLayer Sand { get; set; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
 
@@ -16,10 +18,61 @@ public partial class GrubsTerrain : Component
 
 	public async void Init()
 	{
+		Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
+
 		await SdfWorld.ClearAsync();
 		SdfWorld.Transform.Rotation = Rotation.FromRoll( 90f );
 
 		SetupGeneratedWorld();
+	}
+
+	public Vector3 FindSpawnLocation( float size = 16f )
+	{
+		var retries = 0;
+		var fallbackPosition = new Vector3();
+
+		var maxWidth = GrubsConfig.TerrainLength;
+		var maxHeight = GrubsConfig.TerrainHeight;
+
+		while ( retries < 1000 )
+		{
+			retries++;
+
+			var randX = Game.Random.Int( maxWidth ) - maxWidth / 2;
+			var randZ = Game.Random.Int( maxHeight );
+			var startPos = new Vector3( randX, 0, randZ );
+
+			var tr = Scene.Trace.Ray( startPos, startPos + Vector3.Down * maxHeight )
+				.WithAnyTags( "solid", "player" )
+				.Size( size )
+				.Run();
+
+			if ( tr.Hit && !tr.StartedSolid )
+			{
+				if ( tr.GameObject.Components.TryGet( out Grub _, FindMode.EverythingInSelfAndAncestors ) )
+					continue;
+
+				if ( PointInside( tr.EndPosition ) )
+					continue;
+
+				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) > 80f )
+					continue;
+
+				return tr.EndPosition;
+			}
+		}
+
+		return fallbackPosition;
+	}
+
+	public bool PointInside( Vector3 point )
+	{
+		var tr = Scene.Trace.Ray( point, point + Vector3.Right * 64f )
+			.WithAnyTags( "solid" )
+			.Size( 2f )
+			.Run();
+
+		return tr.Hit;
 	}
 
 	[Broadcast]

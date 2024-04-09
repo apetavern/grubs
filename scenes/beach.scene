@@ -271,6 +271,10 @@
         {
           "__type": "ParticleHelperComponent",
           "__guid": "0ab37c18-533c-42b0-853b-c82182be8171"
+        },
+        {
+          "__type": "FreeForAllGamemode",
+          "__guid": "199907d3-e4fc-4355-a60a-7b994276787b"
         }
       ]
     },
@@ -382,34 +386,6 @@
             {
               "__type": "SpawnPoint",
               "__guid": "9c094540-c6d2-4962-900c-b3cec155f074",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "9dc026f3-462f-450c-a93d-6c267a247aae",
-          "Name": "Spawn (1)",
-          "Position": "1098.61,0,57.7177",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "SpawnPoint",
-              "__guid": "8d23994b-0eb4-43ad-b78a-011b32e93be5",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "799d0b70-21ee-43fc-bc4c-17ab48b5f6e4",
-          "Name": "Spawn (2)",
-          "Position": "1162.61,0,57.7177",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "SpawnPoint",
-              "__guid": "22780e71-e8a5-4e74-a51f-f3ded96110ba",
               "Color": "0.8902,0.31765,0.05098,1"
             }
           ]
@@ -530,7 +506,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-06T14:11:00.0043958-03:00",
+  "LastSaved": "2024-04-06T16:42:39.1464024-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

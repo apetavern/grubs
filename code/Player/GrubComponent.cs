@@ -29,12 +29,6 @@ public sealed class Grub : Component
 	{
 		if ( GrubFollowCamera.Local is not null )
 			GrubFollowCamera.Local.Target = GameObject;
-
-		if ( Connection.Local == Connection.Host )
-		{
-			GrubsTerrain.Instance.Network.TakeOwnership();
-			GrubsTerrain.Instance.Init();
-		}
 	}
 
 	public void OnHardFall()

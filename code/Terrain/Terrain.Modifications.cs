@@ -158,7 +158,7 @@ public partial class GrubsTerrain : Component
 
 		var boxSdf = new RectSdf( new Vector2( -length / 2f, 0 ), new Vector2( length / 2, height ) );
 		Add( SdfWorld, boxSdf, activeMaterials.ElementAt( 0 ).Key );
-		Add( SdfWorld, boxSdf, bgMat` );
+		Add( SdfWorld, boxSdf, bgMat );
 	}
 
 	private bool AssertIsHost()
