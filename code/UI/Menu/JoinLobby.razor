@@ -1,0 +1,18 @@
+﻿@namespace Grubs.UI.Menu
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <button @onclick=@(() => OnBack())>Back</button>
+</root>
+
+@code
+{
+    private void OnBack()
+    {
+        Menu.Instance.Return();
+        Delete();
+    }
+}

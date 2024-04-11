@@ -1,0 +1,9 @@
+﻿JoinLobby {
+    cursor: none;
+    position: absolute;
+    opacity: 1;
+
+    &.hide {
+        opacity: 0;
+    }
+}

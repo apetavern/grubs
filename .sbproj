@@ -7,7 +7,7 @@
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*",
+  "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*",
   "HasCode": true,
   "CodePath": "code",
   "PackageReferences": [],
@@ -637,8 +637,7 @@
       }
     ],
     "TickRate": 120,
-    "StartupScene": "scenes/beach.scene",
-    "MapStartupScene": null,
+    "StartupScene": "scenes/main_menu.scene",
     "LaunchMode": "Normal"
   }
 }

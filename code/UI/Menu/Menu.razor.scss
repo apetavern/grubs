@@ -13,6 +13,12 @@ Menu {
         height: 100%;
         margin-left: 110px;
         flex-direction: column;
+        opacity: 1;
+        transition: all 1s;
+
+        &.hide {
+            transform: translateX(-1080px);
+        }
     }
 
     .grubs-logo {
