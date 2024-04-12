@@ -4,6 +4,8 @@ public abstract class Gamemode : Component
 {
 	public static Gamemode Current { get; set; }
 
+	public bool Started { get; set; }
+
 	public Gamemode()
 	{
 		Current = this;

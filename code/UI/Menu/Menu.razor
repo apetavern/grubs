@@ -15,7 +15,7 @@
             GRUBS
         </div>
         <div class="menu-options">
-            <button>Create Lobby</button>
+            <button onclick=@(() => OnOptionSelected("Create Lobby"))>Create Lobby</button>
             <button onclick=@(() => OnOptionSelected("Join Lobby"))>Join Lobby</button>
             <button>Customize</button>
             <button>Quit</button>
@@ -45,6 +45,7 @@
         switch (option)
         {
             case "Create Lobby":
+                Transition<CreateLobby>();
                 break;
             case "Join Lobby":
                 Transition<JoinLobby>();
@@ -58,7 +59,7 @@
 
     private async void Transition<T>() where T : Panel, new()
     {
-        Current = Panel.AddChild<T>();
+        Current = Panel.AddChild<T>("hide");
         Main?.SetClass("hide", true);
     }
 

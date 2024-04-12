@@ -1,4 +1,5 @@
-﻿using Grubs.Player;
+﻿using Grubs.Gamemodes;
+using Grubs.Player;
 using Sandbox.Sdf;
 
 namespace Grubs.Terrain;
@@ -39,7 +40,7 @@ public partial class GrubsTerrain : Component
 
 			var randX = Game.Random.Int( maxWidth ) - maxWidth / 2;
 			var randZ = Game.Random.Int( maxHeight );
-			var startPos = new Vector3( randX, 0, randZ );
+			var startPos = new Vector3( randX, 512, randZ );
 
 			var tr = Scene.Trace.Ray( startPos, startPos + Vector3.Down * maxHeight )
 				.WithAnyTags( "solid", "player" )
@@ -62,6 +63,17 @@ public partial class GrubsTerrain : Component
 		}
 
 		return fallbackPosition;
+	}
+
+	protected override void DrawGizmos()
+	{
+		base.DrawGizmos();
+
+		Gizmo.Transform = global::Transform.Zero;
+
+		float l = GrubsConfig.TerrainLength;
+		float h = GrubsConfig.TerrainHeight;
+		Gizmo.Draw.LineBBox( new BBox( new Vector3( -l / 2f, 512f - 32f, 0f ), new Vector3( l / 2f, 512f + 96f, h ) ) );
 	}
 
 	public bool PointInside( Vector3 point )

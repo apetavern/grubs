@@ -24,5 +24,16 @@ public sealed class FreeForAllGamemode : Gamemode
 			Log.Info( spawn );
 			grub.Transform.Position = spawn;
 		}
+
+		Started = true;
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( GrubsTerrain.Instance.TimeSinceLastModification > 2f && !Started )
+		{
+			Log.Info( "start" );
+			Start();
+		}
 	}
 }

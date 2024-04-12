@@ -166,6 +166,8 @@ public partial class GrubsTerrain : Component
 		return Connection.Local == Connection.Host;
 	}
 
+	public TimeSince TimeSinceLastModification { get; set; }
+
 	/// <summary>
 	/// Wrapper for a standard Sdf addition.
 	/// </summary>
@@ -174,6 +176,7 @@ public partial class GrubsTerrain : Component
 	/// <param name="material">The material to apply.</param>
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material )
 	{
+		TimeSinceLastModification = 0f;
 		sdf = sdf.Translate( new Vector2( 0, -Transform.Position.z ) );
 		world.AddAsync( sdf, material );
 	}
@@ -187,6 +190,7 @@ public partial class GrubsTerrain : Component
 	/// <param name="offset">Whether to apply the offset of the Sdf to world position.</param>
 	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material, bool offset = false )
 	{
+		TimeSinceLastModification = 0f;
 		sdf = sdf.Translate( new Vector2( 0, -Transform.Position.z ) );
 		if ( offset )
 			sdf = sdf.Translate( new Vector2( -_lengthOffset, _heightOffset ) );

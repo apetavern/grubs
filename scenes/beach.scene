@@ -16,7 +16,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SkinnedModelRenderer",
+              "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "6bbee8a4-ed45-451a-ac49-80e0a5dc8fff",
               "BodyGroups": 18446744073709551615,
               "CreateBoneObjects": false,
@@ -25,7 +25,7 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
+              "__type": "Sandbox.BoxCollider",
               "__guid": "aa2242b9-7e85-4624-8014-aa19b5badb81",
               "Center": "0,0,0",
               "IsTrigger": false,
@@ -44,7 +44,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SkinnedModelRenderer",
+              "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "1a682d65-99cb-4b49-914a-a7eb580aec2b",
               "BodyGroups": 18446744073709551615,
               "CreateBoneObjects": false,
@@ -53,7 +53,7 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
+              "__type": "Sandbox.BoxCollider",
               "__guid": "8d15205b-3f5b-4bce-b268-ad5dabe50be5",
               "Center": "0,0,0",
               "IsTrigger": false,
@@ -72,7 +72,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SkinnedModelRenderer",
+              "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "4a3baae3-2c87-48f3-b2b7-3c19b4bc48cb",
               "BodyGroups": 18446744073709551615,
               "CreateBoneObjects": false,
@@ -81,7 +81,7 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
+              "__type": "Sandbox.BoxCollider",
               "__guid": "dcd7a746-5ec5-46b4-abdf-e2e8b3192597",
               "Center": "0,0,0",
               "IsTrigger": false,
@@ -100,7 +100,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SkinnedModelRenderer",
+              "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "a5f35788-34e2-4ec4-9e35-a62bf5fd65fe",
               "BodyGroups": 18446744073709551615,
               "CreateBoneObjects": false,
@@ -109,7 +109,7 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
+              "__type": "Sandbox.BoxCollider",
               "__guid": "2d3417ea-fb97-40ad-aff4-718424ccf7d6",
               "Center": "0,0,0",
               "IsTrigger": false,
@@ -128,7 +128,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SkinnedModelRenderer",
+              "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "ee25ecd4-4419-4000-9008-4cb292777441",
               "BodyGroups": 18446744073709551615,
               "CreateBoneObjects": false,
@@ -137,7 +137,7 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
+              "__type": "Sandbox.BoxCollider",
               "__guid": "2a88fb86-d085-4fea-8baa-3b76e38d8beb",
               "Center": "0,0,0",
               "IsTrigger": false,
@@ -156,7 +156,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SkinnedModelRenderer",
+              "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "061276c0-7e30-44e5-950e-aa047521516c",
               "BodyGroups": 18446744073709551615,
               "CreateBoneObjects": false,
@@ -165,7 +165,7 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
+              "__type": "Sandbox.BoxCollider",
               "__guid": "47862edd-72ae-40b7-898b-a9c11a3d52bd",
               "Center": "0,0,0",
               "IsTrigger": false,
@@ -184,7 +184,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SkinnedModelRenderer",
+              "__type": "Sandbox.SkinnedModelRenderer",
               "__guid": "05823232-90bf-4a6b-a855-e7c3c391dee4",
               "BodyGroups": 18446744073709551615,
               "CreateBoneObjects": false,
@@ -193,7 +193,7 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
+              "__type": "Sandbox.BoxCollider",
               "__guid": "b491fbcc-f9b9-4a47-a9d4-145a56fc4e27",
               "Center": "0,0,0",
               "IsTrigger": false,
@@ -211,7 +211,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "ModelRenderer",
+              "__type": "Sandbox.ModelRenderer",
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
               "BodyGroups": 18446744073709551615,
               "MaterialOverride": "materials/physics/water.vmat",
@@ -220,11 +220,11 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "KillZoneComponent",
+              "__type": "Grubs.Common.KillZoneComponent",
               "__guid": "464044f1-44bb-4477-90a7-afe44b2d7cca"
             },
             {
-              "__type": "PlaneCollider",
+              "__type": "Sandbox.PlaneCollider",
               "__guid": "55c3a0e7-0f66-4241-9fd7-7786991714ad",
               "Center": "0,0,0",
               "IsTrigger": true,
@@ -243,7 +243,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "DirectionalLight",
+              "__type": "Sandbox.DirectionalLight",
               "__guid": "e266174e-78ae-40c1-a65f-948e9b2123c4",
               "FogMode": "Enabled",
               "FogStrength": 1,
@@ -265,15 +265,15 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "ExplosionHelperComponent",
+          "__type": "Grubs.Helpers.ExplosionHelperComponent",
           "__guid": "a28e7356-b54b-4a69-a8f9-58c6e1551164"
         },
         {
-          "__type": "ParticleHelperComponent",
+          "__type": "Grubs.Helpers.ParticleHelperComponent",
           "__guid": "0ab37c18-533c-42b0-853b-c82182be8171"
         },
         {
-          "__type": "FreeForAllGamemode",
+          "__type": "Grubs.Gamemodes.Modes.FreeForAllGamemode",
           "__guid": "199907d3-e4fc-4355-a60a-7b994276787b"
         }
       ]
@@ -282,11 +282,12 @@
       "__guid": "08a72929-c2dd-4da0-b84d-fdca3b287389",
       "Name": "Terrain",
       "Position": "0,512,64",
+      "Tags": "solid",
       "Enabled": true,
       "NetworkMode": 1,
       "Components": [
         {
-          "__type": "GrubsTerrain",
+          "__type": "Grubs.Terrain.GrubsTerrain",
           "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
           "SdfWorld": {
             "_type": "component",
@@ -296,7 +297,7 @@
           }
         },
         {
-          "__type": "Sdf2DWorld",
+          "__type": "Sandbox.Sdf.Sdf2DWorld",
           "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a"
         }
       ]
@@ -311,7 +312,7 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "CameraComponent",
+          "__type": "Sandbox.CameraComponent",
           "__guid": "2b162f48-7432-4445-8f15-7a87a3bcf4a8",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
@@ -328,11 +329,11 @@
           "ZNear": 10
         },
         {
-          "__type": "Highlight",
+          "__type": "Sandbox.Highlight",
           "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c"
         },
         {
-          "__type": "GrubFollowCamera",
+          "__type": "Grubs.Player.GrubFollowCamera",
           "__guid": "d8745fd3-898e-4de4-a0f5-80cf52e67e78"
         }
       ]
@@ -344,7 +345,7 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "MapInstance",
+          "__type": "Sandbox.MapInstance",
           "__guid": "9b45fbfb-4f36-41d5-8685-0635775e2b7b",
           "MapName": "apetavern.gr_beach",
           "UseMapFromLaunch": false
@@ -367,7 +368,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "NetHelper",
+              "__type": "Grubs.Helpers.NetHelper",
               "__guid": "a42a14b9-a93d-46f5-a182-4716b80d6a7a",
               "PlayerPrefab": {
                 "_type": "gameobject",
@@ -384,7 +385,7 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "SpawnPoint",
+              "__type": "Sandbox.SpawnPoint",
               "__guid": "9c094540-c6d2-4962-900c-b3cec155f074",
               "Color": "0.8902,0.31765,0.05098,1"
             }
@@ -399,7 +400,7 @@
       "NetworkMode": 1,
       "Components": [
         {
-          "__type": "ModelRenderer",
+          "__type": "Sandbox.ModelRenderer",
           "__guid": "95612c53-c204-4cb5-8e67-411297d3718d",
           "BodyGroups": 18446744073709551615,
           "Model": "models/dev/sphere.vmdl",
@@ -407,7 +408,7 @@
           "Tint": "1,1,1,1"
         },
         {
-          "__type": "Rigidbody",
+          "__type": "Sandbox.Rigidbody",
           "__guid": "b08866f9-a75b-4b32-a33f-08717e77a36e",
           "AngularDamping": 0,
           "Gravity": true,
@@ -423,7 +424,7 @@
           "StartAsleep": false
         },
         {
-          "__type": "SphereCollider",
+          "__type": "Sandbox.SphereCollider",
           "__guid": "6fff5e92-0433-4374-80c5-555ef2b57a92",
           "Center": "0,0,0",
           "IsTrigger": false,
@@ -431,7 +432,7 @@
           "Static": false
         },
         {
-          "__type": "HealthComponent",
+          "__type": "Grubs.Common.HealthComponent",
           "__guid": "6ad43024-0280-4cff-acf4-3f54e9acd65b",
           "MaxHealth": 1000
         }
@@ -444,7 +445,7 @@
       "NetworkMode": 1,
       "Components": [
         {
-          "__type": "ModelRenderer",
+          "__type": "Sandbox.ModelRenderer",
           "__guid": "883f4f42-fd7e-4803-8afe-b779c387826e",
           "BodyGroups": 18446744073709551615,
           "Model": "models/dev/sphere.vmdl",
@@ -452,7 +453,7 @@
           "Tint": "1,1,1,1"
         },
         {
-          "__type": "Rigidbody",
+          "__type": "Sandbox.Rigidbody",
           "__guid": "ed1212ee-b18a-4261-ad0e-d6f2d8be0261",
           "AngularDamping": 0,
           "Gravity": true,
@@ -468,7 +469,7 @@
           "StartAsleep": false
         },
         {
-          "__type": "SphereCollider",
+          "__type": "Sandbox.SphereCollider",
           "__guid": "6ae352c0-9346-43b5-ada5-a24b7298421f",
           "Center": "0,0,0",
           "IsTrigger": false,
@@ -476,7 +477,7 @@
           "Static": false
         },
         {
-          "__type": "HealthComponent",
+          "__type": "Grubs.Common.HealthComponent",
           "__guid": "fee52871-6528-4cf0-a0e4-ed0e42e981c4",
           "MaxHealth": 1000
         }
@@ -506,7 +507,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-06T16:42:39.1464024-03:00",
+  "LastSaved": "2024-04-12T09:53:53.6224027-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

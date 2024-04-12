@@ -1,0 +1,30 @@
+﻿@namespace Grubs.UI.Components
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="swipe-container">
+
+    </div>
+</root>
+
+@code
+{
+    public SwipeState State { get; set; }
+    public float TransitionTime { get; set; }
+
+    public SwipePanel()
+    {
+        State = SwipeState.Hidden;
+    }
+
+    public enum SwipeState
+    {
+        Hidden,
+        TransitionIn,
+        TransitionOut,
+        Showing
+    }
+}
