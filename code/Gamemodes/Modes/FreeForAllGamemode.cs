@@ -1,4 +1,4 @@
-﻿using Grubs.Player;
+﻿using Grubs.Pawn;
 using Grubs.Terrain;
 
 namespace Grubs.Gamemodes.Modes;
@@ -17,12 +17,22 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	internal override void Start()
 	{
-		var grubs = Scene.GetAllComponents<Grub>();
-		foreach ( var grub in grubs )
+		var players = Scene.GetAllComponents<Player>();
+		foreach ( var player in players )
 		{
+			var go = player.GrubPrefab.Clone();
+			go.NetworkSpawn();
+
+			var grub = go.Components.Get<Grub>();
+			grub.Player = player;
+			player.ActiveGrub = grub;
+
+			var inv = go.Components.Get<PlayerInventory>();
+			inv.Player = player;
+			inv.InitializeWeapons();
+
 			var spawn = GrubsTerrain.Instance.FindSpawnLocation();
-			Log.Info( spawn );
-			grub.Transform.Position = spawn;
+			go.Transform.Position = spawn;
 		}
 
 		Started = true;

@@ -1,19 +1,20 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment;
-using Grubs.Player.Controller;
+using Grubs.Pawn.Controller;
 using Grubs.Terrain;
 
-namespace Grubs.Player;
+namespace Grubs.Pawn;
 
 [Title( "Grubs - Container" ), Category( "Grubs" )]
 public sealed class Grub : Component
 {
+	public Player? Player { get; set; }
+
 	[Property] public required HealthComponent Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
 	[Property] public required GrubAnimator Animator { get; set; }
-	[Property] public required PlayerInventory Inventory { get; set; }
-	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment => Inventory.ActiveEquipment;
+	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment => Player?.Inventory.ActiveEquipment;
 
 	[Sync] public string Name { get; set; } = "Grubby";
 
@@ -33,7 +34,7 @@ public sealed class Grub : Component
 
 	public void OnHardFall()
 	{
-		Inventory.ToggleEquipment( false, Inventory.ActiveSlot );
+		Player?.Inventory.ToggleEquipment( false, Player.Inventory.ActiveSlot );
 	}
 
 	// public void Respawn()
@@ -47,7 +48,7 @@ public sealed class Grub : Component
 	[ConCmd( "gr_take_dmg" )]
 	public static void TakeDmgCmd( float hp )
 	{
-		var grub = GameManager.ActiveScene.GetAllComponents<Grub>().FirstOrDefault();
+		var grub = Game.ActiveScene.GetAllComponents<Grub>().FirstOrDefault();
 		if ( grub is null )
 			return;
 

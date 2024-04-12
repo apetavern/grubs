@@ -1,0 +1,62 @@
+{
+  "RootObject": {
+    "__guid": "35030784-a159-4877-b60c-423ef6eea657",
+    "Name": "player",
+    "Tags": "player",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "Grubs.Pawn.Player",
+        "__guid": "ae5fd47b-1f27-4baa-8898-b5896030fa3e",
+        "GrubPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/grub/grub.prefab"
+        },
+        "Inventory": {
+          "_type": "component",
+          "component_id": "9e272cc9-6c48-431f-a493-1da5d980903a",
+          "go": "35030784-a159-4877-b60c-423ef6eea657",
+          "component_type": "PlayerInventory"
+        }
+      },
+      {
+        "__type": "Grubs.Pawn.PlayerInventory",
+        "__guid": "9e272cc9-6c48-431f-a493-1da5d980903a",
+        "ActiveSlot": 0,
+        "EquipmentActive": false,
+        "EquipmentPrefabs": [
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/baseball_bat/baseball_bat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/bazooka/bazooka.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/brass_knuckles/brass_knuckles.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/grenade/grenade.prefab"
+          }
+        ],
+        "Player": {
+          "_type": "component",
+          "component_id": "ae5fd47b-1f27-4baa-8898-b5896030fa3e",
+          "go": "35030784-a159-4877-b60c-423ef6eea657",
+          "component_type": "Player"
+        }
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

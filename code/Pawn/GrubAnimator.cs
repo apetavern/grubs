@@ -1,7 +1,7 @@
 ﻿using Grubs.Equipment;
-using Grubs.Player.Controller;
+using Grubs.Pawn.Controller;
 
-namespace Grubs.Player;
+namespace Grubs.Pawn;
 
 [Title( "Grubs - Animator" ), Category( "Grubs" )]
 public sealed class GrubAnimator : Component
@@ -30,8 +30,8 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "holdpose", (int)holdPose );
 
 		var shouldLookAt = Controller.IsGrounded && (Grub.ActiveEquipment is null || !Controller.ShouldShowWeapon())
-												 && !GrubRenderer.GetBool( "lowhp" )
-												 && !Controller.IsChargingBackflip;
+		                                         && !GrubRenderer.GetBool( "lowhp" )
+		                                         && !Controller.IsChargingBackflip;
 
 		var shouldHideHands = Controller.Velocity.Length > 0 && !Controller.IsChargingBackflip;
 

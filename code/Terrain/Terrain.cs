@@ -1,5 +1,5 @@
 ﻿using Grubs.Gamemodes;
-using Grubs.Player;
+using Grubs.Pawn;
 using Sandbox.Sdf;
 
 namespace Grubs.Terrain;

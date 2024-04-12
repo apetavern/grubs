@@ -1,5 +1,5 @@
-﻿using Grubs.Player;
-using Grubs.Player.Controller;
+﻿using Grubs.Pawn;
+using Grubs.Pawn.Controller;
 
 namespace Grubs.Equipment.Weapons;
 

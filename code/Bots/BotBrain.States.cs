@@ -1,4 +1,4 @@
-﻿using Grubs.Player;
+﻿using Grubs.Pawn;
 using Sandbox;
 using System.Threading.Tasks;
 
@@ -6,10 +6,7 @@ namespace Grubs.Bots;
 
 public partial class BotBrain : Component
 {
-	[ActionGraphNode( "botbrain.base" )]
-	[Title( "Base State" )]
-	[Group( "GrubsBot" )]
-	[Icon( "hourglass_bottom" )]
+	[ActionGraphNode( "botbrain.base" ), Title( "Base State" ), Group( "GrubsBot" ), Icon( "hourglass_bottom" )]
 	public async Task<BotBrain> BaseBrainState()
 	{
 		var executed = false;
@@ -24,10 +21,7 @@ public partial class BotBrain : Component
 		return this;
 	}
 
-	[ActionGraphNode( "botbrain.thinking" )]
-	[Title( "Thinking State" )]
-	[Group( "GrubsBot" )]
-	[Icon( "hourglass_bottom" )]
+	[ActionGraphNode( "botbrain.thinking" ), Title( "Thinking State" ), Group( "GrubsBot" ), Icon( "hourglass_bottom" )]
 	public async Task<BotBrain> ThinkingState()
 	{
 		if ( ActiveGrub is null )

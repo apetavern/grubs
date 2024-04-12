@@ -1,12 +1,12 @@
 ﻿using Grubs.Equipment;
 
-namespace Grubs.Player;
+namespace Grubs.Pawn;
 
 [Title( "Grubs - Player Inventory" ), Category( "Grubs" )]
 public sealed class PlayerInventory : Component
 {
 	[Property] public required List<GameObject> EquipmentPrefabs { get; set; } = new();
-	[Property] public required Grub Grub { get; set; }
+	[Property] public required Player Player { get; set; }
 
 	public List<EquipmentComponent> Equipment { get; set; } = new();
 	public EquipmentComponent? ActiveEquipment => GetActiveEquipment();
@@ -15,8 +15,14 @@ public sealed class PlayerInventory : Component
 
 	protected override void OnStart()
 	{
+	}
+
+	public void InitializeWeapons()
+	{
 		if ( IsProxy )
 			return;
+
+		Log.Info( Player );
 
 		EquipmentActive = false;
 
@@ -32,7 +38,7 @@ public sealed class PlayerInventory : Component
 			var slotIndex = Equipment.Count - 1;
 
 			equipment.SlotIndex = slotIndex;
-			equipment.Deploy( Grub );
+			equipment.Deploy( Player.ActiveGrub! );
 			equipment.Holster();
 		}
 	}
@@ -77,7 +83,7 @@ public sealed class PlayerInventory : Component
 			return;
 
 		if ( active )
-			equipment.Deploy( Grub );
+			equipment.Deploy( Player.ActiveGrub! );
 		else
 			equipment.Holster();
 	}
@@ -106,7 +112,8 @@ public sealed class PlayerInventory : Component
 
 	private EquipmentComponent? GetEquipmentAtSlot( int slot )
 	{
-		return GameObject.Components.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
+		return Player.ActiveGrub?.GameObject.Components
+			.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
 			.FirstOrDefault( x => x.SlotIndex == slot );
 	}
 

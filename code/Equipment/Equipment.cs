@@ -1,4 +1,4 @@
-﻿using Grubs.Player;
+﻿using Grubs.Pawn;
 
 namespace Grubs.Equipment;
 
@@ -49,6 +49,7 @@ public class EquipmentComponent : Component
 
 	public void Holster()
 	{
+		Log.Info( Model );
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
 		Deployed = false;

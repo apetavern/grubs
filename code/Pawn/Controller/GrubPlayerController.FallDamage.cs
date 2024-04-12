@@ -1,6 +1,6 @@
 ﻿using Grubs.Common;
 
-namespace Grubs.Player.Controller;
+namespace Grubs.Pawn.Controller;
 
 public partial class GrubPlayerController
 {

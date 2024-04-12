@@ -1,4 +1,4 @@
-using Grubs.Player.Controller;
+using Grubs.Pawn.Controller;
 using Sandbox;
 using System.Threading.Tasks;
 

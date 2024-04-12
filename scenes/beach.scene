@@ -333,8 +333,8 @@
           "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c"
         },
         {
-          "__type": "Grubs.Player.GrubFollowCamera",
-          "__guid": "d8745fd3-898e-4de4-a0f5-80cf52e67e78"
+          "__type": "Grubs.Pawn.GrubFollowCamera",
+          "__guid": "e17df8b5-301e-4295-9023-9375fbaab524"
         }
       ]
     },
@@ -372,7 +372,7 @@
               "__guid": "a42a14b9-a93d-46f5-a182-4716b80d6a7a",
               "PlayerPrefab": {
                 "_type": "gameobject",
-                "prefab": "prefabs/grub/grub.prefab"
+                "prefab": "prefabs/player/player.prefab"
               }
             }
           ]
@@ -507,7 +507,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-12T09:53:53.6224027-03:00",
+  "LastSaved": "2024-04-12T10:55:15.5694486-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

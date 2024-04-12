@@ -1,4 +1,4 @@
-﻿namespace Grubs.Player;
+﻿namespace Grubs.Pawn;
 
 public class GrubFollowCamera : Component
 {

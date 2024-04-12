@@ -1,4 +1,4 @@
-﻿namespace Grubs.Player.Controller;
+﻿namespace Grubs.Pawn.Controller;
 
 [Title( "Grubs - Player Controller" ), Category( "Grubs" )]
 public sealed partial class GrubPlayerController : Component

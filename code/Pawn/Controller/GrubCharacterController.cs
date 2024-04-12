@@ -1,7 +1,7 @@
 ﻿using Grubs.Helpers;
 using Sandbox.Utility;
 
-namespace Grubs.Player.Controller;
+namespace Grubs.Pawn.Controller;
 
 [Title( "Grubs - Character Controller" ), Category( "Grubs" ), Icon( "directions_walk", "red", "white" ),
  EditorHandle( "materials/gizmo/charactercontroller.png" )]

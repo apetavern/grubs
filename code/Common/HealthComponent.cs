@@ -1,6 +1,6 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Helpers;
-using Grubs.Player;
+using Grubs.Pawn;
 
 namespace Grubs.Common;
 
