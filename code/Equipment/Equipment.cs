@@ -49,7 +49,6 @@ public class EquipmentComponent : Component
 
 	public void Holster()
 	{
-		Log.Info( Model );
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
 		Deployed = false;

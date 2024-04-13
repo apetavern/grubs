@@ -22,8 +22,6 @@ public sealed class PlayerInventory : Component
 		if ( IsProxy )
 			return;
 
-		Log.Info( Player );
-
 		EquipmentActive = false;
 
 		foreach ( var prefab in EquipmentPrefabs )

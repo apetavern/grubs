@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "35030784-a159-4877-b60c-423ef6eea657",
+    "__guid": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
     "Name": "player",
     "Tags": "player",
     "Enabled": true,
@@ -8,21 +8,21 @@
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-        "__guid": "ae5fd47b-1f27-4baa-8898-b5896030fa3e",
+        "__guid": "9a8365d4-8c08-422e-b0bc-dc47bccc9fd1",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-          "component_id": "9e272cc9-6c48-431f-a493-1da5d980903a",
-          "go": "35030784-a159-4877-b60c-423ef6eea657",
+          "component_id": "98874ba4-f263-4f00-ba46-6b4a175ce477",
+          "go": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
           "component_type": "PlayerInventory"
         }
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-        "__guid": "9e272cc9-6c48-431f-a493-1da5d980903a",
+        "__guid": "98874ba4-f263-4f00-ba46-6b4a175ce477",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -45,13 +45,41 @@
         ],
         "Player": {
           "_type": "component",
-          "component_id": "ae5fd47b-1f27-4baa-8898-b5896030fa3e",
-          "go": "35030784-a159-4877-b60c-423ef6eea657",
+          "component_id": "9a8365d4-8c08-422e-b0bc-dc47bccc9fd1",
+          "go": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
           "component_type": "Player"
         }
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "92d14376-4ee8-4432-8b2f-b99bedeb9c84",
+        "Name": "Screen UI",
+        "Position": "46.65069,40.65072,-50.19597",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Sandbox.ScreenPanel",
+            "__guid": "843eda37-d573-4bc6-be83-1f0ba0f18fff",
+            "AutoScreenScale": true,
+            "Opacity": 1,
+            "Scale": 1,
+            "ZIndex": 100
+          },
+          {
+            "__type": "Grubs.UI.InventoryDisplay",
+            "__guid": "93396138-c1a4-4f79-8693-f9eb6d8db83a",
+            "Inventory": {
+              "_type": "component",
+              "component_id": "98874ba4-f263-4f00-ba46-6b4a175ce477",
+              "go": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
+              "component_type": "PlayerInventory"
+            }
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

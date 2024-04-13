@@ -27,7 +27,7 @@ public sealed class FreeForAllGamemode : Gamemode
 			grub.Player = player;
 			player.ActiveGrub = grub;
 
-			var inv = go.Components.Get<PlayerInventory>();
+			var inv = player.Components.Get<PlayerInventory>();
 			inv.Player = player;
 			inv.InitializeWeapons();
 
