@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
+    "__guid": "52aa1dc2-b65a-44db-b884-6c93844db0fe",
     "Name": "player",
     "Tags": "player",
     "Enabled": true,
@@ -8,21 +8,21 @@
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-        "__guid": "9a8365d4-8c08-422e-b0bc-dc47bccc9fd1",
+        "__guid": "1de03298-ec2f-4306-b827-00769e434d9c",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-          "component_id": "98874ba4-f263-4f00-ba46-6b4a175ce477",
-          "go": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
+          "component_id": "5b09e5fb-4c67-4a74-82e3-08e4a7478f4b",
+          "go": "52aa1dc2-b65a-44db-b884-6c93844db0fe",
           "component_type": "PlayerInventory"
         }
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-        "__guid": "98874ba4-f263-4f00-ba46-6b4a175ce477",
+        "__guid": "5b09e5fb-4c67-4a74-82e3-08e4a7478f4b",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -45,15 +45,15 @@
         ],
         "Player": {
           "_type": "component",
-          "component_id": "9a8365d4-8c08-422e-b0bc-dc47bccc9fd1",
-          "go": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
+          "component_id": "1de03298-ec2f-4306-b827-00769e434d9c",
+          "go": "52aa1dc2-b65a-44db-b884-6c93844db0fe",
           "component_type": "Player"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "92d14376-4ee8-4432-8b2f-b99bedeb9c84",
+        "__guid": "6c7950a1-0ce2-4c6e-ad3e-deea7c066134",
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
         "Enabled": true,
@@ -61,7 +61,7 @@
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",
-            "__guid": "843eda37-d573-4bc6-be83-1f0ba0f18fff",
+            "__guid": "486e08a3-d7da-4b8d-a8ef-1c8fc215fbfd",
             "AutoScreenScale": true,
             "Opacity": 1,
             "Scale": 1,
@@ -69,13 +69,17 @@
           },
           {
             "__type": "Grubs.UI.InventoryDisplay",
-            "__guid": "93396138-c1a4-4f79-8693-f9eb6d8db83a",
+            "__guid": "54398611-d677-47a5-90d4-6218023a558a",
             "Inventory": {
               "_type": "component",
-              "component_id": "98874ba4-f263-4f00-ba46-6b4a175ce477",
-              "go": "6b9200cb-bca9-4361-93c1-c09bc97341c3",
+              "component_id": "5b09e5fb-4c67-4a74-82e3-08e4a7478f4b",
+              "go": "52aa1dc2-b65a-44db-b884-6c93844db0fe",
               "component_type": "PlayerInventory"
             }
+          },
+          {
+            "__type": "GameLanding",
+            "__guid": "fb17e878-86c2-4c75-90f5-e6855d029dd4"
           }
         ]
       }

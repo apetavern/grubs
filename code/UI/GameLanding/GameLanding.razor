@@ -1,0 +1,50 @@
+﻿@namespace Grubs.UI.GameLanding
+
+@using Grubs.UI.Components
+@inherits PanelComponent
+
+<root>
+    <Cursor/>
+    <SceneBackground @ref="SceneBackground"/>
+    <div class="header">
+        <div class="title">GRUBS</div>
+    </div>
+    <div @ref="MenuBody" class="body">
+        @* <div @onclick=@(() => OnStart()) class="players-preview"> *@
+        @*     A list of players goes here in a grid-like fashion! *@
+        @* </div> *@
+        @* <div class="sidebar-info"> *@
+        @*     <div class="gamemode-name"> *@
+        @*         Free For All *@
+        @*     </div> *@
+        @*     <div class="gamerules"> *@
+        @*         You can't kill Trundler! *@
+        @*     </div> *@
+        @*     <div class="terrain-preview"> *@
+        @*         Preview *@
+        @*     </div> *@
+        @* </div> *@
+    </div>
+
+</root>
+
+@code
+{
+    public static GameLanding Instance { get; set; }
+
+    public SceneBackground SceneBackground { get; set; }
+    public Panel MenuBody { get; set; }
+
+    public GameLanding()
+    {
+        Instance = this;
+        Cursor.Enabled("menu", true);
+    }
+
+    private void OnStart()
+    {
+        SceneBackground.AddClass("hide");
+        MenuBody.AddClass("hide");
+        Cursor.Enabled("menu", false);
+    }
+}
