@@ -8,201 +8,6 @@
       "NetworkMode": 2,
       "Children": [
         {
-          "__guid": "8c43f824-4348-4949-9123-9b8a5b10b681",
-          "Name": "Terrain",
-          "Position": "0,512,0",
-          "Scale": "17.77881,2,5",
-          "Tags": "solid",
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "6bbee8a4-ed45-451a-ac49-80e0a5dc8fff",
-              "BodyGroups": 18446744073709551615,
-              "CreateBoneObjects": false,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "aa2242b9-7e85-4624-8014-aa19b5badb81",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "5c1ed47c-97a5-4589-88e4-61da3623e07c",
-          "Name": "Terrain",
-          "Position": "-400,512,95.58618",
-          "Rotation": "0,0.258819,0,0.9659258",
-          "Scale": "28.54934,2,5",
-          "Tags": "solid",
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "1a682d65-99cb-4b49-914a-a7eb580aec2b",
-              "BodyGroups": 18446744073709551615,
-              "CreateBoneObjects": false,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "8d15205b-3f5b-4bce-b268-ad5dabe50be5",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "035e29b0-a40d-4a33-aea8-fc1333d67732",
-          "Name": "Terrain",
-          "Position": "-500,512,349.8441",
-          "Rotation": "0,0.258819,0,0.9659258",
-          "Scale": "14.3708,2,0.2546272",
-          "Tags": "solid",
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "4a3baae3-2c87-48f3-b2b7-3c19b4bc48cb",
-              "BodyGroups": 18446744073709551615,
-              "CreateBoneObjects": false,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "dcd7a746-5ec5-46b4-abdf-e2e8b3192597",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "e19425c7-3276-43ae-bb6e-d305106a6bd9",
-          "Name": "Terrain",
-          "Position": "500,512,349.8441",
-          "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
-          "Scale": "14.3708,2,0.2546272",
-          "Tags": "solid",
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "a5f35788-34e2-4ec4-9e35-a62bf5fd65fe",
-              "BodyGroups": 18446744073709551615,
-              "CreateBoneObjects": false,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "2d3417ea-fb97-40ad-aff4-718424ccf7d6",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "e73651dc-286c-4e3b-bc8d-9ca24b114ced",
-          "Name": "Terrain",
-          "Position": "343.9196,512,677.1239",
-          "Rotation": "-0.9659258,-0.00000001131334,0.258819,-0.00000004222196",
-          "Scale": "14.3708,2,0.2546272",
-          "Tags": "solid",
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "ee25ecd4-4419-4000-9008-4cb292777441",
-              "BodyGroups": 18446744073709551615,
-              "CreateBoneObjects": false,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "2a88fb86-d085-4fea-8baa-3b76e38d8beb",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "34952084-b254-4941-b6eb-7be548edcdee",
-          "Name": "Terrain",
-          "Position": "-343.961,512,677.1239",
-          "Rotation": "0.9659258,0.00000001131334,0.258819,-0.00000004222196",
-          "Scale": "14.3708,2,0.2546272",
-          "Tags": "solid",
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "061276c0-7e30-44e5-950e-aa047521516c",
-              "BodyGroups": 18446744073709551615,
-              "CreateBoneObjects": false,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "47862edd-72ae-40b7-898b-a9c11a3d52bd",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "66336cc9-0cf4-4d14-bac7-04907656b007",
-          "Name": "Terrain",
-          "Position": "400,512,95.58618",
-          "Rotation": "0,-0.258819,0,0.9659259",
-          "Scale": "28.54934,2,5",
-          "Tags": "solid",
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "05823232-90bf-4a6b-a855-e7c3c391dee4",
-              "BodyGroups": 18446744073709551615,
-              "CreateBoneObjects": false,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "b491fbcc-f9b9-4a47-a9d4-145a56fc4e27",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false
-            }
-          ]
-        },
-        {
           "__guid": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
           "Name": "Water",
           "Position": "316.0363,4234.852,0",
@@ -213,8 +18,9 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
+              "__enabled": false,
               "BodyGroups": 18446744073709551615,
-              "MaterialOverride": "materials/physics/water.vmat",
+              "MaterialOverride": "materials/environment/new_water.vmat",
               "Model": "models/dev/plane.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
@@ -230,6 +36,13 @@
               "IsTrigger": true,
               "Scale": "50,50",
               "Static": true
+            },
+            {
+              "__type": "Grubs.Terrain.Water",
+              "__guid": "83abee40-5ee1-418f-9bde-058e66e46939",
+              "EdgeLength": 50,
+              "Material": "materials/environment/new_water.vmat",
+              "Resolution": 100
             }
           ]
         },
@@ -403,96 +216,6 @@
       ]
     },
     {
-      "__guid": "04449256-9f14-429c-890f-75e0c3935f6a",
-      "Name": "Sphere",
-      "Position": "-288.7947,512,299.1826",
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "95612c53-c204-4cb5-8e67-411297d3718d",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/dev/sphere.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "b08866f9-a75b-4b32-a33f-08717e77a36e",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {
-            "Y": true,
-            "Yaw": true,
-            "Roll": true
-          },
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        },
-        {
-          "__type": "Sandbox.SphereCollider",
-          "__guid": "6fff5e92-0433-4374-80c5-555ef2b57a92",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Radius": 32.39999,
-          "Static": false
-        },
-        {
-          "__type": "Grubs.Common.HealthComponent",
-          "__guid": "6ad43024-0280-4cff-acf4-3f54e9acd65b",
-          "MaxHealth": 1000
-        }
-      ]
-    },
-    {
-      "__guid": "cc25f2e0-1a0d-4420-866a-9a9c2a40428a",
-      "Name": "Sphere (1)",
-      "Position": "280.1169,512,299.1826",
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "883f4f42-fd7e-4803-8afe-b779c387826e",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/dev/sphere.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Sandbox.Rigidbody",
-          "__guid": "ed1212ee-b18a-4261-ad0e-d6f2d8be0261",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {
-            "Y": true,
-            "Yaw": true,
-            "Roll": true
-          },
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        },
-        {
-          "__type": "Sandbox.SphereCollider",
-          "__guid": "6ae352c0-9346-43b5-ada5-a24b7298421f",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Radius": 32.39999,
-          "Static": false
-        },
-        {
-          "__type": "Grubs.Common.HealthComponent",
-          "__guid": "fee52871-6528-4cf0-a0e4-ed0e42e981c4",
-          "MaxHealth": 1000
-        }
-      ]
-    },
-    {
       "__guid": "7d39675e-085e-40cc-8a1e-e09c2113f9ee",
       "Name": "Screen",
       "Position": "-129.7132,-113.9731,554.4797",
@@ -537,7 +260,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-15T23:35:36.6845335-03:00",
+  "LastSaved": "2024-04-15T23:57:43.3936886-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

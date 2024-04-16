@@ -6,6 +6,10 @@ namespace Grubs.Gamemodes.Modes;
 [Title( "Grubs - FFA" ), Category( "Grubs" )]
 public sealed class FreeForAllGamemode : Gamemode
 {
+	public override string GamemodeName => "Free For All";
+
+	[HostSync] public Guid ActivePlayerId { get; set; }
+
 	internal override async void Initialize()
 	{
 		State = GameState.Menu;
@@ -37,14 +41,8 @@ public sealed class FreeForAllGamemode : Gamemode
 			go.Transform.Position = spawn;
 		}
 
+		ActivePlayerId = players.ElementAt( 0 ).Id;
 		Started = true;
 		State = GameState.Playing;
-	}
-
-	protected override void OnUpdate()
-	{
-		base.OnUpdate();
-
-		Log.Info( State );
 	}
 }
