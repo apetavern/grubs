@@ -24,7 +24,7 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "bot_thinking", Thinking );
 
 		var holdPose = HoldPose.None;
-		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() )
+		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() && Grub.IsActive )
 			holdPose = Grub.ActiveEquipment.HoldPose;
 
 		GrubRenderer.Set( "holdpose", (int)holdPose );

@@ -16,6 +16,8 @@ public sealed class Grub : Component
 	[Property] public required GrubAnimator Animator { get; set; }
 	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment => Player?.Inventory.ActiveEquipment;
 
+	public bool IsActive => Player?.ActiveGrub == this;
+
 	[Sync] public string Name { get; set; } = "Grubby";
 
 	protected override void OnStart()

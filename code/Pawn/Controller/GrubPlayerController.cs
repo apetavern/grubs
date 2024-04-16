@@ -169,7 +169,7 @@ public sealed partial class GrubPlayerController : Component
 		if ( IsProxy || Grub.Player is null )
 			return false;
 
-		if ( Grub.Player.ActiveGrub != Grub )
+		if ( Grub.IsActive )
 			return false;
 
 		return true;
