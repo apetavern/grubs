@@ -271,10 +271,19 @@
         {
           "__type": "Grubs.Helpers.ParticleHelperComponent",
           "__guid": "0ab37c18-533c-42b0-853b-c82182be8171"
-        },
+        }
+      ]
+    },
+    {
+      "__guid": "9a1c6253-0abb-4443-85b2-378108afb7b2",
+      "Name": "Gamemode",
+      "Position": "-129.7132,-113.9731,554.4797",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
         {
           "__type": "Grubs.Gamemodes.Modes.FreeForAllGamemode",
-          "__guid": "199907d3-e4fc-4355-a60a-7b994276787b"
+          "__guid": "1b128073-d9c4-4060-a11e-9bf14e46f73d"
         }
       ]
     },
@@ -482,6 +491,27 @@
           "MaxHealth": 1000
         }
       ]
+    },
+    {
+      "__guid": "7d39675e-085e-40cc-8a1e-e09c2113f9ee",
+      "Name": "Screen",
+      "Position": "-129.7132,-113.9731,554.4797",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "cdddaeaa-764d-4d73-b87d-31756e69734a",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "Grubs.UI.GameLanding.GameLanding",
+          "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -507,7 +537,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-13T22:43:22.9937694-03:00",
+  "LastSaved": "2024-04-15T23:13:02.7791068-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

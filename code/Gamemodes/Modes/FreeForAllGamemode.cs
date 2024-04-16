@@ -37,13 +37,4 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		Started = true;
 	}
-
-	protected override void OnUpdate()
-	{
-		if ( GrubsTerrain.Instance.TimeSinceLastModification > 2f && !Started )
-		{
-			Log.Info( "start" );
-			Start();
-		}
-	}
 }
