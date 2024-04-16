@@ -12,8 +12,8 @@ public sealed partial class GrubPlayerController : Component
 	[Property] public Vector3 Gravity { get; set; } = new(0, 0, 800);
 	[Property] public float WishSpeed { get; set; } = 80f;
 
-	public float MoveInput => Input.AnalogMove.y;
-	public float LookInput => Input.AnalogMove.x;
+	public float MoveInput => ShouldAcceptInput() ? Input.AnalogMove.y : 0f;
+	public float LookInput => ShouldAcceptInput() ? Input.AnalogMove.x : 0f;
 	[Sync] public Angles LookAngles { get; set; }
 	[Sync] public int Facing { get; set; } = 1;
 	public int LastFacing { get; set; } = 1;
@@ -101,7 +101,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateJump()
 	{
-		if ( IsChargingBackflip || !IsGrounded )
+		if ( IsChargingBackflip || !IsGrounded || !ShouldAcceptInput() )
 			return;
 
 		if ( Input.Pressed( "jump" ) )
@@ -122,7 +122,7 @@ public sealed partial class GrubPlayerController : Component
 		if ( !Input.Down( "backflip" ) && IsChargingBackflip )
 			DoBackflip();
 
-		if ( Input.Down( "backflip" ) && IsGrounded )
+		if ( Input.Down( "backflip" ) && IsGrounded && ShouldAcceptInput() )
 		{
 			IsChargingBackflip = true;
 			BackflipCharge += 0.01f;
@@ -142,6 +142,12 @@ public sealed partial class GrubPlayerController : Component
 
 	private Vector3 GetWishVelocity()
 	{
+		if ( IsProxy || Grub.Player is null )
+			return 0f;
+
+		if ( Grub.Player.ActiveGrub != Grub )
+			return 0f;
+
 		var result = new Vector3().WithX( -MoveInput );
 		var inSpeed = result.Length.Clamp( 0f, 1f );
 
@@ -156,5 +162,16 @@ public sealed partial class GrubPlayerController : Component
 	public bool ShouldShowWeapon()
 	{
 		return Velocity.IsNearlyZero( 2.5f ) && IsGrounded && !IsChargingBackflip;
+	}
+
+	public bool ShouldAcceptInput()
+	{
+		if ( IsProxy || Grub.Player is null )
+			return false;
+
+		if ( Grub.Player.ActiveGrub != Grub )
+			return false;
+
+		return true;
 	}
 }

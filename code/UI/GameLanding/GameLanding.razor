@@ -51,7 +51,7 @@
 
     public bool CanStart()
     {
-        return Connection.All.Count > 1;
+        return Connection.All.Count > 1 || Game.IsEditor;
     }
 
     public GameLanding()
