@@ -26,19 +26,26 @@ public sealed class FreeForAllGamemode : Gamemode
 		var players = Scene.GetAllComponents<Player>();
 		foreach ( var player in players )
 		{
-			var go = player.GrubPrefab.Clone();
-			go.NetworkSpawn();
+			for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
+			{
+				var go = player.GrubPrefab.Clone();
+				go.NetworkSpawn();
 
-			var grub = go.Components.Get<Grub>();
-			grub.Player = player;
-			player.ActiveGrub = grub;
+				var grub = go.Components.Get<Grub>();
+				grub.Player = player;
+
+				var spawn = GrubsTerrain.Instance.FindSpawnLocation();
+				grub.Transform.Position = spawn;
+
+				if ( i == 0 )
+				{
+					player.ActiveGrub = grub;
+				}
+			}
 
 			var inv = player.Components.Get<PlayerInventory>();
 			inv.Player = player;
 			inv.InitializeWeapons();
-
-			var spawn = GrubsTerrain.Instance.FindSpawnLocation();
-			go.Transform.Position = spawn;
 		}
 
 		ActivePlayerId = players.ElementAt( 0 ).Id;

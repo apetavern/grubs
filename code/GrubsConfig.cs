@@ -23,8 +23,8 @@ public static class GrubsConfig
 	// /// <summary>
 	// /// The amount of <see cref="Grub"/>s that will be spawned per team.
 	// /// </summary>
-	// [ConVar( "grub_count" ), Change( nameof( OnGrubCountChange ) )]
-	// public static int GrubCount { get; set; } = 1;
+	[ConVar( "grub_count" )]
+	public static int GrubCount { get; set; } = 1;
 
 	// private static void OnGrubCountChange( int _, int _1 )
 	// {
