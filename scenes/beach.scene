@@ -318,7 +318,7 @@
       "Rotation": "0.00000004112413,0.0000000009752696,0.7071068,0.7071068",
       "Tags": "maincamera",
       "Enabled": true,
-      "NetworkMode": 2,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -537,7 +537,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-15T23:13:02.7791068-03:00",
+  "LastSaved": "2024-04-15T23:35:36.6845335-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

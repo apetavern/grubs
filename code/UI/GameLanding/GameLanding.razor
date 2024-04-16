@@ -62,12 +62,8 @@
 
     private void OnStart()
     {
-        SceneBackground.AddClass("hide");
-        MenuBody.AddClass("hide");
-        AddClass("hide");
-        Cursor.Enabled("menu", false);
-
-        Gamemode.Current.Start();
+        if (IsHost())
+            Gamemode.Current.Start();
     }
 
     protected override void OnUpdate()
@@ -79,5 +75,10 @@
         SceneBackground.SetClass("hide", hide);
         MenuBody.SetClass("hide", hide);
         SetClass("hide", hide);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Connection.All.Count);
     }
 }

@@ -4,6 +4,7 @@ public abstract class Gamemode : Component
 {
 	public static Gamemode Current { get; set; }
 
+	[Sync] public GameState State { get; set; }
 	[Sync] public bool Started { get; set; }
 
 	public Gamemode()

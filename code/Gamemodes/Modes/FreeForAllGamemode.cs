@@ -8,6 +8,8 @@ public sealed class FreeForAllGamemode : Gamemode
 {
 	internal override async void Initialize()
 	{
+		State = GameState.Menu;
+
 		if ( Connection.Local == Connection.Host )
 		{
 			GrubsTerrain.Instance.Network.TakeOwnership();
@@ -36,5 +38,13 @@ public sealed class FreeForAllGamemode : Gamemode
 		}
 
 		Started = true;
+		State = GameState.Playing;
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		Log.Info( State );
 	}
 }
