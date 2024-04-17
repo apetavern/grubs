@@ -5,11 +5,7 @@
   "Ident": "grubs",
   "Tags": "artillery turnbased pvp strategy multiplayer",
   "Schema": 1,
-  "HasAssets": true,
-  "AssetsPath": "",
   "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*",
-  "HasCode": true,
-  "CodePath": "code",
   "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {
