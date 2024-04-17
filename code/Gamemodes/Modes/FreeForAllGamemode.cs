@@ -8,7 +8,10 @@ public sealed class FreeForAllGamemode : Gamemode
 {
 	public override string GamemodeName => "Free For All";
 
-	[HostSync] public Guid ActivePlayerId { get; set; }
+	[Property, ReadOnly, HostSync] public Guid ActivePlayerId { get; set; }
+	[HostSync] public TimeUntil TimeUntilNextTurn { get; set; }
+
+	public Queue<Player> PlayerTurnQueue { get; set; } = new();
 
 	internal override async void Initialize()
 	{
@@ -46,11 +49,46 @@ public sealed class FreeForAllGamemode : Gamemode
 			var inv = player.Components.Get<PlayerInventory>();
 			inv.Player = player;
 			inv.InitializeWeapons();
+
+			PlayerTurnQueue.Enqueue( player );
 		}
 
-		ActivePlayerId = players.ElementAt( 0 ).Id;
+		var firstPlayer = PlayerTurnQueue.Dequeue();
+		ActivePlayerId = firstPlayer.Id;
 		Started = true;
 		State = GameState.Playing;
+		TimeUntilNextTurn = GrubsConfig.TurnDuration;
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( State is GameState.Playing )
+		{
+			UpdatePlaying();
+		}
+	}
+
+	private void UpdatePlaying()
+	{
+		if ( TimeUntilNextTurn )
+		{
+			RotateActivePlayer();
+		}
+	}
+
+	private void RotateActivePlayer()
+	{
+		if ( !PlayerTurnQueue.Any() )
+		{
+			foreach ( var player in Scene.GetAllComponents<Player>() )
+			{
+				PlayerTurnQueue.Enqueue( player );
+			}
+		}
+
+		var nextPlayer = PlayerTurnQueue.Dequeue();
+		ActivePlayerId = nextPlayer.Id;
+		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 	}
 
 	[Broadcast]
