@@ -1,4 +1,6 @@
-﻿namespace Grubs.Pawn;
+﻿using Grubs.Gamemodes;
+
+namespace Grubs.Pawn;
 
 public class GrubFollowCamera : Component
 {
@@ -13,6 +15,13 @@ public class GrubFollowCamera : Component
 
 	protected override void OnUpdate()
 	{
+		var component = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId );
+		if ( component is not Player player )
+			return;
+
+		if ( player.ActiveGrub is not null )
+			Target = player.ActiveGrub.GameObject;
+
 		if ( Target is null )
 			return;
 

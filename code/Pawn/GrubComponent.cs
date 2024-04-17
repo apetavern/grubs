@@ -16,7 +16,10 @@ public sealed class Grub : Component
 	[Property] public required GrubAnimator Animator { get; set; }
 	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment => Player?.Inventory.ActiveEquipment;
 
-	public bool IsActive => Player?.ActiveGrub == this;
+	/// <summary>
+	/// Returns true if it is the owning player's turn and this is the player's active Grub.
+	/// </summary>
+	public bool IsActive => Player is not null && Player.IsActive && Player.ActiveGrub == this;
 
 	[Sync] public string Name { get; set; } = "Grubby";
 
@@ -30,8 +33,8 @@ public sealed class Grub : Component
 
 	private void InitializeLocal()
 	{
-		if ( GrubFollowCamera.Local is not null )
-			GrubFollowCamera.Local.Target = GameObject;
+		// if ( GrubFollowCamera.Local is not null )
+		// 	GrubFollowCamera.Local.Target = GameObject;
 	}
 
 	public void OnHardFall()
