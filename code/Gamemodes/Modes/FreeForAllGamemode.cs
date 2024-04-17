@@ -29,13 +29,13 @@ public sealed class FreeForAllGamemode : Gamemode
 			for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
 			{
 				var go = player.GrubPrefab.Clone();
-				go.NetworkSpawn( player.Network.OwnerConnection );
+				go.Network.SetOrphanedMode( NetworkOrphaned.Host );
+				go.NetworkSpawn();
 
 				var grub = go.Components.Get<Grub>();
-				grub.Player = player;
+				SetGrubPlayer( player.Id, grub.Id );
 
-				var spawn = GrubsTerrain.Instance.FindSpawnLocation();
-				grub.Transform.Position = spawn;
+				go.Network.AssignOwnership( player.Network.OwnerConnection );
 
 				if ( i == 0 )
 				{
@@ -51,6 +51,18 @@ public sealed class FreeForAllGamemode : Gamemode
 		ActivePlayerId = players.ElementAt( 0 ).Id;
 		Started = true;
 		State = GameState.Playing;
+	}
+
+	[Broadcast]
+	public void SetGrubPlayer( Guid playerId, Guid grubId )
+	{
+		var pc = Scene.Directory.FindComponentByGuid( playerId );
+		var gc = Scene.Directory.FindComponentByGuid( grubId );
+
+		if ( pc is not Player player || gc is not Grub grub )
+			return;
+
+		grub.Player = player;
 	}
 
 	[Broadcast]

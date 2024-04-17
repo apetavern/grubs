@@ -33,8 +33,8 @@ public sealed class Grub : Component
 
 	private void InitializeLocal()
 	{
-		// if ( GrubFollowCamera.Local is not null )
-		// 	GrubFollowCamera.Local.Target = GameObject;
+		var spawn = GrubsTerrain.Instance.FindSpawnLocation();
+		Transform.Position = spawn;
 	}
 
 	public void OnHardFall()

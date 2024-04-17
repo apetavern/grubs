@@ -9,9 +9,14 @@ public sealed class Player : Component
 	public bool IsActive => Gamemode.FFA?.ActivePlayerId == Id;
 	public Grub? ActiveGrub { get; set; }
 
-	[Sync] public string SelectedColor { get; set; } = Color.Random.Hex;
+	[Sync] public string SelectedColor { get; set; }
 
 	[Property] public required GameObject GrubPrefab { get; set; }
 
 	[Property] public required PlayerInventory Inventory { get; set; }
+
+	protected override void OnStart()
+	{
+		SelectedColor = Color.Random.Hex;
+	}
 }
