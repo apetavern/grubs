@@ -1,5 +1,4 @@
-﻿using Grubs.Gamemodes;
-using Grubs.Pawn;
+﻿using Grubs.Pawn;
 using Sandbox.Sdf;
 
 namespace Grubs.Terrain;
@@ -10,6 +9,7 @@ public partial class GrubsTerrain : Component
 	public static GrubsTerrain Instance { get; set; }
 
 	[Property] public required Sdf2DWorld SdfWorld { get; set; }
+	[Property] public Water Water { get; set; }
 
 	public GrubsTerrain()
 	{
