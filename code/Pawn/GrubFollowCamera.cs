@@ -27,22 +27,22 @@ public class GrubFollowCamera : Component
 		if ( _timeUntilCameraUnlock )
 			FindTarget();
 
-		if ( _target is null )
-			return;
+		if ( _target.IsValid() && _isFocusingTarget )
+			_center = _target.Transform.Position;
 
 		var cam = GameObject;
-		var targetPos = (_isFocusingTarget ? _target.Transform.Position : _center) + Vector3.Right * Distance;
+		var targetPos = _center + Vector3.Right * Distance;
 		targetPos.z += 32f;
 		cam.Transform.Position = cam.Transform.Position.LerpTo( targetPos, Time.Delta * 5f );
 
 		if ( Input.Down( "camera_pan" ) )
-			MoveCamera();
+			PanCamera();
 
 		ClampCamera();
 
 		var requestRefocus = Input.Pressed( "camera_reset" );
 		var automaticRefocus = !Input.Down( "camera_pan" ) && _timeSinceMousePan > 3;
-		if ( requestRefocus || automaticRefocus )
+		if ( _target.IsValid() && (requestRefocus || automaticRefocus) )
 			_isFocusingTarget = true;
 	}
 
@@ -77,21 +77,18 @@ public class GrubFollowCamera : Component
 
 	private void FindTarget()
 	{
-		var component = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId );
-		if ( component is not Player player )
-			return;
-
 		foreach ( var projectile in Scene.GetAllComponents<ProjectileComponent>().Where( p => p.Active ) )
 		{
 			SetTarget( projectile.GameObject, 2.5f );
 			return;
 		}
 
-		if ( player.ActiveGrub is not null )
+		var component = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId );
+		if ( component is Player player && player.ActiveGrub is not null )
 			SetTarget( player.ActiveGrub.GameObject );
 	}
 
-	private void MoveCamera()
+	private void PanCamera()
 	{
 		_timeSinceMousePan = 0;
 
