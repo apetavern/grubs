@@ -83,6 +83,8 @@ public sealed class FreeForAllGamemode : Gamemode
 		{
 			foreach ( var player in Scene.GetAllComponents<Player>() )
 			{
+				if ( !player.ShouldHaveTurn )
+					continue;
 				PlayerTurnQueue.Enqueue( player );
 			}
 		}

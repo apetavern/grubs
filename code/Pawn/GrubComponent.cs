@@ -22,6 +22,7 @@ public sealed class Grub : Component
 	public bool IsActive => Player is not null && Player.IsActive && Player.ActiveGrub == this;
 
 	[Sync] public string Name { get; set; } = "Grubby";
+	[Sync] public bool IsDead { get; set; }
 
 	protected override void OnStart()
 	{

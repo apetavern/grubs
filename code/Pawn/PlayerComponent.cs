@@ -7,9 +7,11 @@ namespace Grubs.Pawn;
 public sealed class Player : Component
 {
 	public bool IsActive => Gamemode.FFA?.ActivePlayerId == Id;
+	public bool ShouldHaveTurn => GameObject.IsValid() && !IsDead();
 	public Grub? ActiveGrub { get; set; }
 
-	[Sync] public string SelectedColor { get; set; }
+
+	[Sync] public string SelectedColor { get; set; } = "";
 
 	[Property] public required GameObject GrubPrefab { get; set; }
 
@@ -18,5 +20,17 @@ public sealed class Player : Component
 	protected override void OnStart()
 	{
 		SelectedColor = Color.Random.Hex;
+	}
+
+	public List<Grub> GetOwnedGrubs()
+	{
+		return Scene.GetAllComponents<Grub>()
+			.Where( g => g.IsValid && g.Network.OwnerConnection == Network.OwnerConnection )
+			.ToList();
+	}
+
+	public bool IsDead()
+	{
+		return GetOwnedGrubs().All( g => g.IsDead );
 	}
 }
