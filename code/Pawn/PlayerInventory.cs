@@ -17,6 +17,7 @@ public sealed class PlayerInventory : Component
 	{
 	}
 
+	[Broadcast( NetPermission.HostOnly )]
 	public void InitializeWeapons()
 	{
 		if ( IsProxy )
