@@ -118,7 +118,6 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	/// </summary>
 	protected virtual void OnInit()
 	{
-
 	}
 
 	/// <summary>
@@ -162,8 +161,10 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 
 	protected abstract Task<bool> OnAddAsync<T>( T sdf )
 		where T : TSdf;
+
 	protected abstract Task<bool> OnSubtractAsync<T>( T sdf )
 		where T : TSdf;
+
 	protected abstract Task<bool> OnRebuildAsync( IEnumerable<ChunkModification<TSdf>> modifications );
 
 	internal async Task UpdateMesh()
@@ -208,7 +209,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 			if ( resource.Quality.ChunkSize != Resource.Quality.ChunkSize )
 			{
 				Log.Warning( $"Layer {Resource.ResourceName} references {resource.ResourceName} " +
-					$"as a texture source, but their chunk sizes don't match" );
+				             $"as a texture source, but their chunk sizes don't match" );
 				return;
 			}
 
@@ -351,7 +352,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 			Renderer = new SceneObject( Scene.SceneWorld, model );
 			// Renderer = ChunkObject.Components.Create<ModelRenderer>();
 			// Renderer.SceneObject.Position = new Vector3( 256f, 256f, 256f );
-			Renderer.Batchable = Resource.ReferencedTextures is not { Count: > 0 };
+			Renderer.Batchable = false; // Resource.ReferencedTextures is not { Count: > 0 };
 		}
 
 		Renderer.Model = model;

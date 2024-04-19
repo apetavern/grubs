@@ -1,4 +1,5 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Extensions;
+using Grubs.Pawn;
 using Grubs.Terrain;
 
 namespace Grubs.Gamemodes.Modes;
@@ -94,10 +95,10 @@ public sealed class FreeForAllGamemode : Gamemode
 	[Broadcast]
 	public void SetGrubPlayer( Guid playerId, Guid grubId )
 	{
-		var pc = Scene.Directory.FindComponentByGuid( playerId );
-		var gc = Scene.Directory.FindComponentByGuid( grubId );
+		var player = playerId.ToComponent<Player>();
+		var grub = grubId.ToComponent<Grub>();
 
-		if ( pc is not Player player || gc is not Grub grub )
+		if ( player is null || grub is null )
 			return;
 
 		grub.Player = player;
@@ -106,10 +107,10 @@ public sealed class FreeForAllGamemode : Gamemode
 	[Broadcast]
 	public void SetActiveGrub( Guid playerId, Guid grubId )
 	{
-		var pc = Scene.Directory.FindComponentByGuid( playerId );
-		var gc = Scene.Directory.FindComponentByGuid( grubId );
+		var player = playerId.ToComponent<Player>();
+		var grub = grubId.ToComponent<Grub>();
 
-		if ( pc is not Player player || gc is not Grub grub )
+		if ( player is null || grub is null )
 			return;
 
 		player.ActiveGrub = grub;
