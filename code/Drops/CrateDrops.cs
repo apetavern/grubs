@@ -19,18 +19,13 @@ public static class CrateDrops
 
 	private static void Initialize()
 	{
-		Log.Info( "test123" );
-
 		if ( _init )
 			return;
-
-		Log.Info( "Initializing crate drops" );
 
 		foreach ( var res in EquipmentResource.All )
 		{
 			var equipmentType = res.Type;
 			var dropChance = res.DropChance;
-			Log.Info( $"Initializing {equipmentType} {res.ResourcePath} with drop chance ${dropChance}" );
 
 			if ( equipmentType is EquipmentType.Weapon )
 				_dropChancesWeapons.TryAdd( res.ResourcePath, dropChance );
@@ -92,9 +87,6 @@ public static class CrateDrops
 	private static string RollForItem( List<float> dropPercentages, List<string> dropMap )
 	{
 		var roll = Game.Random.Float( 0f, 1f );
-
-		Log.Trace( "test" );
-		Log.Info( dropPercentages.Count );
 
 		var weapon = 0;
 		while ( weapon < dropPercentages.Count && dropPercentages[weapon] <= roll )

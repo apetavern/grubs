@@ -1,26 +1,28 @@
 {
   "RootObject": {
-    "Id": "f42495bc-0760-4755-ae2c-13ab609d0b40",
+    "__guid": "f42495bc-0760-4755-ae2c-13ab609d0b40",
     "Name": "grenade",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
-        "__type": "SkinnedModelRenderer",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "25a3e0a0-b615-49af-8a82-532750e0ac41",
         "BodyGroups": 1,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/weapons/grenade/grenade.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "EquipmentComponent",
+        "__type": "Grubs.Equipment.EquipmentComponent",
+        "__guid": "04773aff-6660-4d0e-bd29-c69d2a4258a2",
+        "Data": "resources/equipment/weapons/grenade.geq",
         "HoldPose": "Throwable",
         "Icon": "models/weapons/grenade/grenade.vmdl_c.png",
         "Model": {
           "_type": "component",
+          "component_id": "25a3e0a0-b615-49af-8a82-532750e0ac41",
           "go": "f42495bc-0760-4755-ae2c-13ab609d0b40",
           "component_type": "SkinnedModelRenderer"
         },
@@ -28,24 +30,33 @@
         "SlotIndex": 0
       },
       {
-        "__type": "WeaponComponent",
+        "__type": "Grubs.Equipment.Weapons.WeaponComponent",
+        "__guid": "b4f03b92-92bb-45ed-95d6-fa7b7262aed4",
         "CanFireWhileMoving": true,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
+          "component_id": "04773aff-6660-4d0e-bd29-c69d2a4258a2",
           "go": "f42495bc-0760-4755-ae2c-13ab609d0b40",
           "component_type": "EquipmentComponent"
         },
         "FiringType": "Charged",
         "OnFire": {
-          "Kind": "Action",
-          "Version": 3,
+          "__version": 6,
+          "__guid": "91a40e8c-f9a0-4779-adce-a7a362a765fd",
+          "UserData": {
+            "Title": "On Fire",
+            "ReferencedComponentTypes": [
+              "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
+            ]
+          },
           "Variables": [
             {
               "Name": "_this",
               "Type": "Sandbox.Game/Sandbox.Component",
               "Default": {
                 "_type": "component",
+                "component_id": "25a3e0a0-b615-49af-8a82-532750e0ac41",
                 "go": "f42495bc-0760-4755-ae2c-13ab609d0b40",
                 "component_type": "SkinnedModelRenderer"
               }
@@ -101,14 +112,7 @@
               "DstId": 1,
               "DstName": "source"
             }
-          ],
-          "UserData": {
-            "Title": "On Fire",
-            "id": "91a40e8c-f9a0-4779-adce-a7a362a765fd",
-            "ReferencedComponentTypes": [
-              "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
-            ]
-          }
+          ]
         }
       }
     ],
@@ -117,5 +121,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
