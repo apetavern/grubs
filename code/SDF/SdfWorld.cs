@@ -21,11 +21,11 @@ public delegate T SdfReader<TBase, T>( ref ByteStream reader, IReadOnlyDictionar
 public interface ISdf<T>
 	where T : ISdf<T>
 {
-	// ReSharper disable StaticMemberInGenericType
+// ReSharper disable StaticMemberInGenericType
 #pragma warning disable SB3000
 	internal static List<(TypeDescription Type, SdfReader<T> Reader)> RegisteredTypes { get; } = new();
 	private static bool _sTypesRegistered;
-	// ReSharper enable StaticMemberInGenericType
+// ReSharper enable StaticMemberInGenericType
 #pragma warning restore SB3000
 
 	internal static void EnsureTypesRegistered()

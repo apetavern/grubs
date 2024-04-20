@@ -12,50 +12,19 @@
     return;
 
 <root>
-    @* <div class="item-title primary @EnabledClasses()">@Current.Name</div> *@
-    <div class="items">
-        <div class="item-container">
-            <div class="item-box secondary">
-                <img class="item-image secondary" src="@Prev.Icon"/>
-                <InputGlyph class="prev" button="prev_equipment" size="small"/>
-            </div>
-            @if (PrevWeapon is not null && PrevWeapon.TimeSinceLastUsed < PrevWeapon.Cooldown)
-            {
-                <div class="item-cooldown" style="width: @(PrevWeapon.TimeSinceLastUsed / PrevWeapon.Cooldown * 100)%"/>
-            }
-        </div>
-        <div class="item-container">
-            <div class="item-box primary">
-                <img class="item-image primary" src="@Current.Icon"/>
-            </div>
-            @if (CurrentWeapon is not null && CurrentWeapon.TimeSinceLastUsed < CurrentWeapon.Cooldown)
-            {
-                <div class="item-cooldown" style="width: @(CurrentWeapon?.TimeSinceLastUsed / CurrentWeapon?.Cooldown * 100)%"/>
-            }
-        </div>
-        <div class="item-container">
-            <div class="item-box secondary">
-                <img class="item-image secondary" src="@Next.Icon"/>
-                <InputGlyph class="next" button="next_equipment" size="small"/>
-            </div>
-            @if (NextWeapon is not null && NextWeapon.TimeSinceLastUsed < NextWeapon.Cooldown)
-            {
-                <div class="item-cooldown" style="width: @(NextWeapon.TimeSinceLastUsed / NextWeapon.Cooldown * 100)%"/>
-            }
-        </div>
-    </div>
+
 </root>
 
 @code
 {
     [Property] public required PlayerInventory Inventory { get; set; }
 
-    private EquipmentComponent? Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
-    private EquipmentComponent? Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
-    private EquipmentComponent? Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
-    private WeaponComponent? CurrentWeapon => Current?.Components.Get<WeaponComponent>();
-    private WeaponComponent? NextWeapon => Next?.Components.Get<WeaponComponent>();
-    private WeaponComponent? PrevWeapon => Prev?.Components.Get<WeaponComponent>();
+    private EquipmentComponent Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
+    private EquipmentComponent Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
+    private EquipmentComponent Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
+    private WeaponComponent CurrentWeapon => Current?.Components.Get<WeaponComponent>();
+    private WeaponComponent NextWeapon => Next?.Components.Get<WeaponComponent>();
+    private WeaponComponent PrevWeapon => Prev?.Components.Get<WeaponComponent>();
 
     protected override void OnUpdate()
     {
@@ -68,3 +37,36 @@
         return HashCode.Combine(Inventory.EquipmentActive, Inventory.ActiveSlot, cd);
     }
 }
+
+@* <div class="item-title primary @EnabledClasses()">@Current.Name</div> *@
+@* <div class="items"> *@
+@*     <div class="item-container"> *@
+@*         <div class="item-box secondary"> *@
+@*             <img class="item-image secondary" src="@Prev.Icon"/> *@
+@*             <InputGlyph class="prev" button="prev_equipment" size="small"/> *@
+@*         </div> *@
+@*         @if (PrevWeapon is not null && PrevWeapon.TimeSinceLastUsed < PrevWeapon.Cooldown) *@
+@*         { *@
+@*             <div class="item-cooldown" style="width: @(PrevWeapon.TimeSinceLastUsed / PrevWeapon.Cooldown * 100)%"/> *@
+@*         } *@
+@*     </div> *@
+@*     <div class="item-container"> *@
+@*         <div class="item-box primary"> *@
+@*             <img class="item-image primary" src="@Current.Icon"/> *@
+@*         </div> *@
+@*         @if (CurrentWeapon is not null && CurrentWeapon.TimeSinceLastUsed < CurrentWeapon.Cooldown) *@
+@*         { *@
+@*             <div class="item-cooldown" style="width: @(CurrentWeapon?.TimeSinceLastUsed / CurrentWeapon?.Cooldown * 100)%"/> *@
+@*         } *@
+@*     </div> *@
+@*     <div class="item-container"> *@
+@*         <div class="item-box secondary"> *@
+@*             <img class="item-image secondary" src="@Next.Icon"/> *@
+@*             <InputGlyph class="next" button="next_equipment" size="small"/> *@
+@*         </div> *@
+@*         @if (NextWeapon is not null && NextWeapon.TimeSinceLastUsed < NextWeapon.Cooldown) *@
+@*         { *@
+@*             <div class="item-cooldown" style="width: @(NextWeapon.TimeSinceLastUsed / NextWeapon.Cooldown * 100)%"/> *@
+@*         } *@
+@*     </div> *@
+@* </div> *@

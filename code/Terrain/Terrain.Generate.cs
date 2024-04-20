@@ -19,10 +19,10 @@ public partial class GrubsTerrain
 		GenerateWorld();
 	}
 
-	private bool[,]? TerrainMap;
-	private int[]? NoiseMap;
-	private float[,]? DensityMap;
-	private bool[,]? BackgroundMap;
+	private bool[,] TerrainMap;
+	private int[] NoiseMap;
+	private float[,] DensityMap;
+	private bool[,] BackgroundMap;
 
 	private float amplitude => GrubsConfig.TerrainAmplitude;
 	private float frequency => GrubsConfig.TerrainFrequency;

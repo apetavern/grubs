@@ -10,7 +10,7 @@ public partial class WeaponComponent : Component
 	[Property] public float Cooldown { get; set; } = 2f;
 	[Property] public bool CanFireWhileMoving { get; set; } = false;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
-	[Property] public OnFireDelegate? OnFire { get; set; }
+	[Property] public OnFireDelegate OnFire { get; set; }
 
 	private int _weaponCharge;
 	public TimeSince TimeSinceLastUsed { get; set; } = 0;

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using Sandbox.Polygons;
 using System.IO;
-using System.Linq;
-using Sandbox.Diagnostics;
-using Sandbox.Polygons;
 
 namespace Sandbox.Sdf;
 
@@ -182,29 +177,29 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 
 				switch (aNeg, bNeg, cNeg)
 				{
-					case (false, false, false):
+					case (false, false, false ):
 						Indices.Add( ai );
 						Indices.Add( bi );
 						Indices.Add( ci );
 						break;
 
-					case (true, false, false):
+					case (true, false, false ):
 						ClipOne( normal, distance, ai, bi, ci );
 						break;
-					case (false, true, false):
+					case (false, true, false ):
 						ClipOne( normal, distance, bi, ci, ai );
 						break;
-					case (false, false, true):
+					case (false, false, true ):
 						ClipOne( normal, distance, ci, ai, bi );
 						break;
 
-					case (false, true, true):
+					case (false, true, true ):
 						ClipTwo( normal, distance, ai, bi, ci );
 						break;
-					case (true, false, true):
+					case (true, false, true ):
 						ClipTwo( normal, distance, bi, ci, ai );
 						break;
-					case (true, true, false):
+					case (true, true, false ):
 						ClipTwo( normal, distance, ci, ai, bi );
 						break;
 				}
@@ -286,8 +281,8 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 					var next = vertices[edgeLoop.FirstIndex + i];
 					var nextNormal = Helpers.NormalizeSafe( Helpers.Rotate90( curr - next ) );
 
-					var prevV = GetV( curr * (Vector2) scale, prevNormal ) * texCoordScale;
-					var nextV = GetV( curr * (Vector2) scale, nextNormal ) * texCoordScale;
+					var prevV = GetV( curr * (Vector2)scale, prevNormal ) * texCoordScale;
+					var nextV = GetV( curr * (Vector2)scale, nextNormal ) * texCoordScale;
 
 					var index = Vertices.Count;
 					var frontPos = offset + new Vector3( curr.x, curr.y, 0.5f ) * scale;
@@ -461,19 +456,19 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 
 		return count > 0;
 
-		offset = index;
-		count = 1;
+		/*		offset = index;
+				count = 1;
 
-		Assert.True( EdgeLoops[offset].Area > 0f );
+				Assert.True( EdgeLoops[offset].Area > 0f );
 
-		while ( offset + count < EdgeLoops.Count && EdgeLoops[offset + count].Area < 0f )
-		{
-			++count;
-		}
+				while ( offset + count < EdgeLoops.Count && EdgeLoops[offset + count].Area < 0f )
+				{
+					++count;
+				}
 
-		index += count;
+				index += count;
 
-		return count > 0;
+				return count > 0;*/
 	}
 
 	private void InitPolyMeshBuilder( PolygonMeshBuilder builder, int offset, int count )

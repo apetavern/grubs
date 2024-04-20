@@ -5,7 +5,7 @@ namespace Grubs.Gamemodes;
 public abstract class Gamemode : Component
 {
 	public static Gamemode Current { get; set; }
-	public static FreeForAllGamemode? FFA => Current as FreeForAllGamemode;
+	public static FreeForAllGamemode FFA => Current as FreeForAllGamemode;
 
 	public virtual string GamemodeName => "";
 

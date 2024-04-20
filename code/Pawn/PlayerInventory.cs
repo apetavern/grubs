@@ -9,7 +9,7 @@ public sealed class PlayerInventory : Component
 	[Property] public required Player Player { get; set; }
 
 	public List<EquipmentComponent> Equipment { get; set; } = new();
-	public EquipmentComponent? ActiveEquipment => GetActiveEquipment();
+	public EquipmentComponent ActiveEquipment => GetActiveEquipment();
 	[Property, ReadOnly, Sync] public int ActiveSlot { get; set; }
 	[Property, ReadOnly, Sync] public bool EquipmentActive { get; set; }
 
@@ -87,7 +87,7 @@ public sealed class PlayerInventory : Component
 			equipment.Holster();
 	}
 
-	private EquipmentComponent? GetActiveEquipment()
+	private EquipmentComponent GetActiveEquipment()
 	{
 		if ( !EquipmentActive )
 			return null;
@@ -109,7 +109,7 @@ public sealed class PlayerInventory : Component
 		return ActiveSlot - 1;
 	}
 
-	private EquipmentComponent? GetEquipmentAtSlot( int slot )
+	private EquipmentComponent GetEquipmentAtSlot( int slot )
 	{
 		return Player.ActiveGrub?.GameObject.Components
 			.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )

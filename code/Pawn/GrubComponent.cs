@@ -8,13 +8,13 @@ namespace Grubs.Pawn;
 [Title( "Grubs - Container" ), Category( "Grubs" )]
 public sealed class Grub : Component
 {
-	public Player? Player { get; set; }
+	public Player Player { get; set; }
 
 	[Property] public required HealthComponent Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
 	[Property] public required GrubAnimator Animator { get; set; }
-	[Property, ReadOnly] public EquipmentComponent? ActiveEquipment => Player?.Inventory.ActiveEquipment;
+	[Property, ReadOnly] public EquipmentComponent ActiveEquipment => Player?.Inventory.ActiveEquipment;
 
 	/// <summary>
 	/// Returns true if it is the owning player's turn and this is the player's active Grub.

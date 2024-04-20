@@ -5,7 +5,7 @@ public sealed class Water : Component
 {
 	[Property] public int Resolution { get; set; } = 100;
 	[Property] public int EdgeLength { get; set; } = 50;
-	[Property] public Material? Material { get; set; }
+	[Property] public Material Material { get; set; }
 
 	protected override void OnStart()
 	{
@@ -13,7 +13,6 @@ public sealed class Water : Component
 
 		var vertices = new List<SimpleVertex>();
 		var indices = new List<int>();
-		var index = 0;
 
 		for ( var y = 0; y < Resolution; y++ )
 		{
@@ -33,7 +32,6 @@ public sealed class Water : Component
 					indices.Add( i );
 					indices.Add( i + 1 );
 					indices.Add( i + Resolution + 1 );
-					index += 6;
 				}
 			}
 		}

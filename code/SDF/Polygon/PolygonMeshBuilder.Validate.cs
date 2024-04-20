@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Sandbox.Polygons;
+﻿namespace Sandbox.Polygons;
 
 partial class PolygonMeshBuilder
 {
-	[ThreadStatic]
-	private static List<int> Validate_EdgeList;
+	/*	[ThreadStatic]
+		private static List<int> Validate_EdgeList;
 
-	private string _svg;
+		private string _svg;*/
 
 	private void Validate()
 	{
@@ -19,7 +16,7 @@ partial class PolygonMeshBuilder
 
 		_validated = true;
 
-		return;
+		/*return;
 
         _svg = ToSvg();
 
@@ -102,7 +99,7 @@ partial class PolygonMeshBuilder
 			}
 		}
 
-		_validated = true;
+		_validated = true;*/
 	}
 
 	private static Exception InvalidPolygonException()

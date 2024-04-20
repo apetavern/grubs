@@ -28,7 +28,7 @@
             </div>
             @if (IsHost() && CanStart())
             {
-                <div class="action-button ui-btn" @onclick=@OnStart>
+                <div class="action-button ui-btn" @onclick=@Start>
                     Start
                 </div>
             }
@@ -60,7 +60,7 @@
         Cursor.Enabled("menu", true);
     }
 
-    private void OnStart()
+    private void Start()
     {
         if (IsHost())
             Gamemode.Current.Start();

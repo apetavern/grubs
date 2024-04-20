@@ -8,7 +8,7 @@ public sealed class Player : Component
 {
 	public bool IsActive => Gamemode.FFA?.ActivePlayerId == Id;
 	public bool ShouldHaveTurn => GameObject.IsValid() && !IsDead();
-	public Grub? ActiveGrub { get; set; }
+	public Grub ActiveGrub { get; set; }
 
 
 	[Sync] public string SelectedColor { get; set; } = "";

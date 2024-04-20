@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Sandbox.Sdf;
 
@@ -53,7 +51,7 @@ public abstract class SdfResource<T> : GameResource
 	/// Array of tags that physics shapes created by this layer or volume should have.
 	/// If empty, no physics shapes will be created.
 	/// </summary>
-	[HideInEditor]
+	[Hide]
 	[JsonIgnore]
 	public string[] SplitCollisionTags => IsTextureSourceOnly
 		? Array.Empty<string>()
@@ -63,7 +61,7 @@ public abstract class SdfResource<T> : GameResource
 	/// If true, this resource will have a collision mesh. True if <see cref="CollisionTags"/> has any items
 	/// and <see cref="IsTextureSourceOnly"/> is false.
 	/// </summary>
-	[HideInEditor]
+	[Hide]
 	[JsonIgnore]
 	public bool HasCollision => !IsTextureSourceOnly && !string.IsNullOrWhiteSpace( CollisionTags );
 
@@ -103,7 +101,7 @@ public abstract class SdfResource<T> : GameResource
 	[HideIf( nameof( IsTextureSourceOnly ), true )]
 	public List<TextureReference<T>> ReferencedTextures { get; set; }
 
-	[HideInEditor]
+	[Hide]
 	[JsonIgnore]
 	internal WorldQuality Quality => QualityLevel switch
 	{
@@ -113,7 +111,7 @@ public abstract class SdfResource<T> : GameResource
 
 	internal abstract WorldQuality GetQualityFromPreset( WorldQualityPreset preset );
 
-	[HideInEditor]
+	[Hide]
 	[JsonIgnore]
 	internal int ChangeCount { get; private set; }
 

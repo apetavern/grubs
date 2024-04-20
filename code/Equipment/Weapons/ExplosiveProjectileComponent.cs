@@ -12,7 +12,7 @@ public class ExplosiveProjectileComponent : Component
 	[Property] public bool ExplodeOnDeath { get; set; } = true;
 	[Property, Sync] public float ExplodeAfter { get; set; } = 4.0f;
 	[Property, ResourceType( "sound" )] private string ExplosionSound { get; set; } = "";
-	[Property, ResourceType( "vpcf" )] private ParticleSystem? Particles { get; set; }
+	[Property, ResourceType( "vpcf" )] private ParticleSystem Particles { get; set; }
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
 

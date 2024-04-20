@@ -6,10 +6,10 @@ namespace Grubs.Pawn;
 
 public class GrubFollowCamera : Component
 {
-	public static GrubFollowCamera? Local { get; set; }
+	public static GrubFollowCamera Local { get; set; }
 	public float Distance { get; set; } = 1024f;
 
-	[Property, ReadOnly] private GameObject? _target { get; set; }
+	[Property, ReadOnly] private GameObject Target { get; set; }
 
 	private bool _isFocusingTarget;
 	private Vector3 _center;
@@ -27,8 +27,8 @@ public class GrubFollowCamera : Component
 		if ( _timeUntilCameraUnlock )
 			FindTarget();
 
-		if ( _target.IsValid() && _isFocusingTarget )
-			_center = _target.Transform.Position;
+		if ( Target.IsValid() && _isFocusingTarget )
+			_center = Target.Transform.Position;
 
 		var cam = GameObject;
 		var targetPos = _center + Vector3.Right * Distance;
@@ -42,7 +42,7 @@ public class GrubFollowCamera : Component
 
 		var requestRefocus = Input.Pressed( "camera_reset" );
 		var automaticRefocus = !Input.Down( "camera_pan" ) && _timeSinceMousePan > 3;
-		if ( _target.IsValid() && (requestRefocus || automaticRefocus) )
+		if ( Target.IsValid() && (requestRefocus || automaticRefocus) )
 			_isFocusingTarget = true;
 	}
 
@@ -61,7 +61,7 @@ public class GrubFollowCamera : Component
 		if ( duration > 0 )
 			_timeUntilCameraUnlock = duration;
 
-		_target = target;
+		Target = target;
 	}
 
 	private void AdjustHighlightOutline()
@@ -95,7 +95,7 @@ public class GrubFollowCamera : Component
 		_panDelta = new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
 		if ( _isFocusingTarget )
 		{
-			_center = _target?.Transform.Position ?? _center;
+			_center = Target?.Transform.Position ?? _center;
 
 			if ( !_panDelta.LengthSquared.AlmostEqual( 0, 0.1f ) )
 				_isFocusingTarget = false;

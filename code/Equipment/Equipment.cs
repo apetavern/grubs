@@ -19,7 +19,7 @@ public class EquipmentComponent : Component
 
 	public bool Deployed { get; set; }
 
-	public Grub? Grub { get; set; }
+	public Grub Grub { get; set; }
 
 	protected override void OnStart()
 	{
