@@ -1,23 +1,36 @@
-@namespace Grubs.UI
+@namespace Grubs.UI.Inventory
 
 @using Grubs.Equipment
 @using Grubs.Equipment.Weapons
 @using Grubs.Pawn
+@using Grubs.UI.Components
 @using Sandbox;
-@using Sandbox.UI;
+@using Sandbox.UI
 
-@inherits PanelComponent
+@inherits Panel
 
-@if (Current is null || Next is null || Prev is null)
+@attribute [StyleSheet]
+
+@if (Inventory is null)
+{
     return;
+}
 
 <root>
-
+    @for (var i = 0; i < 6; i++)
+    {
+        <div class="inv-row">
+            @for (var j = 0; j < 4; j++)
+            {
+                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * 6 + j)/>
+            }
+        </div>
+    }
 </root>
 
 @code
 {
-    [Property] public required PlayerInventory Inventory { get; set; }
+    public PlayerInventory Inventory { get; set; }
 
     private EquipmentComponent Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
     private EquipmentComponent Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
@@ -26,9 +39,10 @@
     private WeaponComponent NextWeapon => Next?.Components.Get<WeaponComponent>();
     private WeaponComponent PrevWeapon => Prev?.Components.Get<WeaponComponent>();
 
-    protected override void OnUpdate()
+    public override void Tick()
     {
         SetClass("hide", !Inventory.EquipmentActive);
+        Cursor.Enabled("inv", Inventory.EquipmentActive);
     }
 
     protected override int BuildHash()

@@ -1,0 +1,21 @@
+﻿@namespace Grubs.UI.Inventory
+
+@using Grubs.Equipment
+@using Sandbox.UI
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+
+<root>
+    @if (Equipment is not null)
+    {
+        <img src="@Equipment.Icon"/>
+    }
+</root>
+
+@code
+{
+    public EquipmentComponent Equipment { get; set; }
+}

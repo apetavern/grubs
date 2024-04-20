@@ -1,0 +1,26 @@
+﻿@namespace Grubs.UI.Components
+
+@using Grubs.UI.Inventory
+@using Grubs.Pawn
+
+@inherits PanelComponent
+
+<root>
+    <Cursor/>
+
+    <InventoryDisplay Inventory="@Inventory"/>
+</root>
+
+@code
+{
+    [Property] public required PlayerInventory Inventory { get; set; }
+}
+
+<style>
+    PlayerScreen {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: none;
+    }
+</style>
