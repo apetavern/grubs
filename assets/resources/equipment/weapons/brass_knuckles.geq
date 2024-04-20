@@ -1,6 +1,7 @@
 {
   "Name": "Brass Knuckles",
   "Description": "Illegal in many countries!",
+  "Icon": "models/weapons/brassknuckles/brassknuckles.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": null,
   "DropChance": 3,

@@ -1,6 +1,7 @@
 {
   "Name": "Grenade",
   "Description": "Not gonna catch this for ya.",
+  "Icon": "models/weapons/grenade/grenade.vmdl_c.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/grenade/grenade.prefab",
   "DropChance": 0,

@@ -9,7 +9,12 @@ public class EquipmentComponent : Component
 	[Property] public required SkinnedModelRenderer Model { get; set; }
 	[Property] public HoldPose HoldPose { get; set; } = HoldPose.None;
 	[Property, ResourceType( "jpg" )] public string Icon { get; set; } = "";
+
+	/// <summary>
+	/// Data from the GameResource for this Equipment.
+	/// </summary>
 	[Property, ResourceType( "geq" )] public required EquipmentResource Data { get; set; }
+
 	[Property, Sync, ReadOnly] public int SlotIndex { get; set; }
 
 	public bool Deployed { get; set; }

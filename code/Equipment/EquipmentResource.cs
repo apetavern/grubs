@@ -5,6 +5,7 @@ public class EquipmentResource : GameResource
 {
 	public string Name { get; set; } = "Equipment";
 	public string Description { get; set; } = "Equipment definition.";
+	[ResourceType( "jpg" )] public string Icon { get; set; } = "";
 	public EquipmentType Type { get; set; } = EquipmentType.Weapon;
 
 	public required PrefabFile EquipmentPrefab { get; set; }
