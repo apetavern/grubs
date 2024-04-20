@@ -1,0 +1,10 @@
+{
+  "Name": "Grenade",
+  "Description": "Not gonna catch this for ya.",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/grenade/grenade.prefab",
+  "DropChance": 0,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

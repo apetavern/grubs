@@ -1,0 +1,10 @@
+{
+  "Name": "Baseball Bat",
+  "Description": "Violent and deadly!",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/baseball_bat/baseball_bat.prefab",
+  "DropChance": 3,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

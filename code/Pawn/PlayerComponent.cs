@@ -22,11 +22,10 @@ public sealed class Player : Component
 		SelectedColor = Color.Random.Hex;
 	}
 
-	public List<Grub> GetOwnedGrubs()
+	public IEnumerable<Grub> GetOwnedGrubs()
 	{
 		return Scene.GetAllComponents<Grub>()
-			.Where( g => g.IsValid && g.Network.OwnerConnection == Network.OwnerConnection )
-			.ToList();
+			.Where( g => g.IsValid && g.Network.OwnerConnection == Network.OwnerConnection );
 	}
 
 	public bool IsDead()

@@ -1,0 +1,10 @@
+{
+  "Name": "Bazooka",
+  "Description": "Hold the Joe.",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/bazooka/bazooka.prefab",
+  "DropChance": 0,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

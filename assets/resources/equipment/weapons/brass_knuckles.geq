@@ -1,0 +1,10 @@
+{
+  "Name": "Brass Knuckles",
+  "Description": "Illegal in many countries!",
+  "Type": "Weapon",
+  "EquipmentPrefab": null,
+  "DropChance": 3,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}
