@@ -41,8 +41,8 @@
 
     public override void Tick()
     {
-        SetClass("hide", !Inventory.EquipmentActive);
-        Cursor.Enabled("inv", Inventory.EquipmentActive);
+        SetClass("hide", !Inventory.InventoryOpen);
+        Cursor.Enabled("inv", Inventory.InventoryOpen);
     }
 
     protected override int BuildHash()
@@ -51,36 +51,3 @@
         return HashCode.Combine(Inventory.EquipmentActive, Inventory.ActiveSlot, cd);
     }
 }
-
-@* <div class="item-title primary @EnabledClasses()">@Current.Name</div> *@
-@* <div class="items"> *@
-@*     <div class="item-container"> *@
-@*         <div class="item-box secondary"> *@
-@*             <img class="item-image secondary" src="@Prev.Icon"/> *@
-@*             <InputGlyph class="prev" button="prev_equipment" size="small"/> *@
-@*         </div> *@
-@*         @if (PrevWeapon is not null && PrevWeapon.TimeSinceLastUsed < PrevWeapon.Cooldown) *@
-@*         { *@
-@*             <div class="item-cooldown" style="width: @(PrevWeapon.TimeSinceLastUsed / PrevWeapon.Cooldown * 100)%"/> *@
-@*         } *@
-@*     </div> *@
-@*     <div class="item-container"> *@
-@*         <div class="item-box primary"> *@
-@*             <img class="item-image primary" src="@Current.Icon"/> *@
-@*         </div> *@
-@*         @if (CurrentWeapon is not null && CurrentWeapon.TimeSinceLastUsed < CurrentWeapon.Cooldown) *@
-@*         { *@
-@*             <div class="item-cooldown" style="width: @(CurrentWeapon?.TimeSinceLastUsed / CurrentWeapon?.Cooldown * 100)%"/> *@
-@*         } *@
-@*     </div> *@
-@*     <div class="item-container"> *@
-@*         <div class="item-box secondary"> *@
-@*             <img class="item-image secondary" src="@Next.Icon"/> *@
-@*             <InputGlyph class="next" button="next_equipment" size="small"/> *@
-@*         </div> *@
-@*         @if (NextWeapon is not null && NextWeapon.TimeSinceLastUsed < NextWeapon.Cooldown) *@
-@*         { *@
-@*             <div class="item-cooldown" style="width: @(NextWeapon.TimeSinceLastUsed / NextWeapon.Cooldown * 100)%"/> *@
-@*         } *@
-@*     </div> *@
-@* </div> *@

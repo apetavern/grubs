@@ -1,6 +1,7 @@
 ﻿@namespace Grubs.UI.Inventory
 
 @using Grubs.Equipment
+@using Grubs.Pawn
 @using Sandbox.UI
 
 @inherits Panel
@@ -18,4 +19,9 @@
 @code
 {
     public EquipmentComponent Equipment { get; set; }
+
+    protected override void OnClick(MousePanelEvent e)
+    {
+        PlayerInventory.Local.EquipItem(Equipment);
+    }
 }

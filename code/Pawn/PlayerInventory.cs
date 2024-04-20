@@ -13,8 +13,13 @@ public sealed class PlayerInventory : Component
 	[Property, ReadOnly, Sync] public int ActiveSlot { get; set; }
 	[Property, ReadOnly, Sync] public bool EquipmentActive { get; set; }
 
+	public bool InventoryOpen { get; set; }
+	public static PlayerInventory Local { get; set; }
+
 	protected override void OnStart()
 	{
+		if ( !IsProxy )
+			Local = this;
 	}
 
 	[Broadcast( NetPermission.HostOnly )]
@@ -49,6 +54,11 @@ public sealed class PlayerInventory : Component
 		if ( IsProxy )
 			return;
 
+		if ( Input.Pressed( "toggle_inventory" ) )
+		{
+			InventoryOpen = !InventoryOpen;
+		}
+
 		if ( Input.Pressed( "toggle_equipment" ) )
 		{
 			ToggleEquipment( !EquipmentActive, ActiveSlot );
@@ -58,17 +68,22 @@ public sealed class PlayerInventory : Component
 		{
 			CycleItems( true );
 		}
-
-		if ( Input.Pressed( "prev_equipment" ) && EquipmentActive )
-		{
-			CycleItems( false );
-		}
 	}
 
 	private void CycleItems( bool forwards )
 	{
 		ToggleEquipment( false, ActiveSlot );
 		CycleSlot( forwards );
+		ToggleEquipment( true, ActiveSlot );
+	}
+
+	public void EquipItem( EquipmentComponent equipment )
+	{
+		ToggleEquipment( false, ActiveSlot );
+		var index = Equipment.IndexOf( equipment );
+		if ( index == -1 )
+			return;
+		ActiveSlot = index;
 		ToggleEquipment( true, ActiveSlot );
 	}
 

@@ -544,79 +544,95 @@
         {
           "Name": "camera_pan",
           "KeyboardCode": "mouse2",
+          "GamepadCode": "None",
           "GroupName": "Camera"
         },
         {
           "Name": "camera_reset",
           "KeyboardCode": "mouse3",
+          "GamepadCode": "None",
           "GroupName": "Camera"
         },
         {
           "Name": "inventory",
           "KeyboardCode": "q",
+          "GamepadCode": "None",
           "GroupName": "UI"
         },
         {
           "Name": "chat",
           "KeyboardCode": "enter",
+          "GamepadCode": "None",
           "GroupName": "UI"
         },
         {
           "Name": "fire",
           "KeyboardCode": "mouse1",
+          "GamepadCode": "None",
           "GroupName": "Weapon"
         },
         {
           "Name": "forward",
           "KeyboardCode": "w",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "backward",
           "KeyboardCode": "s",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "left",
           "KeyboardCode": "a",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "right",
           "KeyboardCode": "d",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "jump",
           "KeyboardCode": "space",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "backflip",
           "KeyboardCode": "shift",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "voice",
           "KeyboardCode": "v",
+          "GamepadCode": "None",
           "GroupName": "Other"
         },
         {
           "Name": "toggle_equipment",
           "KeyboardCode": "C",
+          "GamepadCode": "None",
           "GroupName": "Other"
         },
         {
           "Name": "next_equipment",
           "KeyboardCode": "E",
+          "GamepadCode": "None",
           "GroupName": "Other"
         },
         {
-          "Name": "prev_equipment",
+          "Name": "toggle_inventory",
           "KeyboardCode": "Q",
+          "GamepadCode": "None",
           "GroupName": "Other"
         }
-      ]
+      ],
+      "__guid": "462cd8dc-4078-4db6-9df8-21ff504a1afb"
     },
     "HttpAllowList": null,
     "LaunchConfigs": [
