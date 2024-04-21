@@ -1,4 +1,6 @@
-﻿namespace Grubs.Pawn.Controller;
+﻿using Grubs.Gamemodes;
+
+namespace Grubs.Pawn.Controller;
 
 [Title( "Grubs - Player Controller" ), Category( "Grubs" )]
 public sealed partial class GrubPlayerController : Component
@@ -9,7 +11,7 @@ public sealed partial class GrubPlayerController : Component
 	[Property] public required Grub Grub { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
 
-	[Property] public Vector3 Gravity { get; set; } = new(0, 0, 800);
+	[Property] public Vector3 Gravity { get; set; } = new( 0, 0, 800 );
 	[Property] public float WishSpeed { get; set; } = 80f;
 
 	public float MoveInput => ShouldAcceptInput() ? Input.AnalogMove.y : 0f;
@@ -167,6 +169,9 @@ public sealed partial class GrubPlayerController : Component
 	public bool ShouldAcceptInput()
 	{
 		if ( IsProxy || Grub.Player is null )
+			return false;
+
+		if ( Gamemode.Current.TurnIsChanging )
 			return false;
 
 		if ( !Grub.IsActive )

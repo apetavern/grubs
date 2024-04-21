@@ -86,10 +86,18 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	private async Task NextTurn()
 	{
+		TurnIsChanging = true;
+
 		await Resolution.UntilWorldResolved( 30 );
+
+		await GameTask.Delay( 1000 );
+		await ApplyDamageQueue();
+
 		RotateActivePlayer();
 
 		_nextTurnTask = null;
+
+		TurnIsChanging = false;
 	}
 
 	private void RotateActivePlayer()
