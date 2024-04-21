@@ -10,7 +10,7 @@ public static class Resolution
 
 		while ( !IsWorldResolved() && retryCount++ < maxRetries )
 		{
-			if ( retryCount > 10 )
+			if ( retryCount > 20 )
 			{
 				var unresolved = Game.ActiveScene.GetAllComponents<IResolvable>().Where( r => !r.Resolved );
 				Log.Warning( $"{unresolved.Count()} COMPONENTS ARE NOT RESOLVED!" );

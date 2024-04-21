@@ -55,6 +55,9 @@ public partial class HealthComponent : Component
 	[Broadcast]
 	public void ApplyDamage()
 	{
+		if ( !DamageQueue.Any() )
+			return;
+
 		var totalDamage = 0f;
 		while ( DamageQueue.TryDequeue( out var damage ) )
 			totalDamage += damage;
