@@ -1,10 +1,11 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Common;
+using Grubs.Pawn;
 using Grubs.Pawn.Controller;
 
 namespace Grubs.Equipment.Weapons;
 
 [Title( "Grubs - Projectile" ), Category( "Equipment" )]
-public abstract class ProjectileComponent : Component
+public abstract class ProjectileComponent : Component, IResolvable
 {
 	[Property] public float ProjectileSpeed { get; set; } = 4f;
 	[Property] public required SkinnedModelRenderer Model { get; set; }
@@ -12,6 +13,7 @@ public abstract class ProjectileComponent : Component
 	public WeaponComponent Source { get; set; }
 	public Grub Grub => Source?.Equipment.Grub;
 	public GrubPlayerController PlayerController => Grub?.PlayerController;
+	public bool Resolved => false;
 
 	public int Charge { get; set; }
 

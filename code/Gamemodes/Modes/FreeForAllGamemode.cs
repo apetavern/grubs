@@ -14,6 +14,8 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	public Queue<Player> PlayerTurnQueue { get; set; } = new();
 
+	private Task _nextTurnTask = null;
+
 	internal override async void Initialize()
 	{
 		State = GameState.Menu;
@@ -71,10 +73,22 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	private void UpdatePlaying()
 	{
-		if ( TimeUntilNextTurn )
+		if ( _nextTurnTask is not null && !_nextTurnTask.IsCompleted )
+			return;
+
+		var nextTurn = TimeUntilNextTurn;
+		if ( nextTurn )
 		{
-			RotateActivePlayer();
+			_nextTurnTask ??= NextTurn();
 		}
+	}
+
+	private async Task NextTurn()
+	{
+		await GrubsTerrain.UntilResolve( 30 );
+		RotateActivePlayer();
+
+		_nextTurnTask = null;
 	}
 
 	private void RotateActivePlayer()
