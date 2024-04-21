@@ -1,4 +1,5 @@
-﻿using Grubs.Extensions;
+﻿using Grubs.Common;
+using Grubs.Extensions;
 using Grubs.Pawn;
 using Grubs.Terrain;
 
@@ -85,7 +86,7 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	private async Task NextTurn()
 	{
-		await GrubsTerrain.UntilResolve( 30 );
+		await Resolution.UntilWorldResolved( 30 );
 		RotateActivePlayer();
 
 		_nextTurnTask = null;

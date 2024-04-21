@@ -1,16 +1,14 @@
-﻿using Grubs.Common;
+﻿namespace Grubs.Common;
 
-namespace Grubs.Terrain;
-
-public partial class GrubsTerrain
+public static class Resolution
 {
-	public static bool IsResolved() => Game.ActiveScene.GetAllComponents<IResolvable>().All( r => r.Resolved );
+	public static bool IsWorldResolved() => Game.ActiveScene.GetAllComponents<IResolvable>().All( r => r.Resolved );
 
-	public static async Task UntilResolve( int maxRetries = -1 )
+	public static async Task UntilWorldResolved( int maxRetries = -1 )
 	{
 		var retryCount = 0;
 
-		while ( !IsResolved() && retryCount++ < maxRetries )
+		while ( !IsWorldResolved() && retryCount++ < maxRetries )
 		{
 			if ( retryCount > 10 )
 			{
@@ -24,4 +22,9 @@ public partial class GrubsTerrain
 			await GameTask.Delay( 500 );
 		}
 	}
+}
+
+public interface IResolvable
+{
+	bool Resolved { get; }
 }
