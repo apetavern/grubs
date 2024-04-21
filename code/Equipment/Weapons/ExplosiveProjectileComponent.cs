@@ -1,9 +1,10 @@
-﻿using Grubs.Helpers;
+﻿using Grubs.Common;
+using Grubs.Helpers;
 
 namespace Grubs.Equipment.Weapons;
 
 [Title( "Grub - Explosive Projectile" ), Category( "Equipment" )]
-public class ExplosiveProjectileComponent : Component
+public class ExplosiveProjectileComponent : Component, IResolvable
 {
 	[Property] private float ExplosionDamage { get; set; } = 50f;
 	[Property] private float ExplosionRadius { get; set; } = 100f;
@@ -15,6 +16,8 @@ public class ExplosiveProjectileComponent : Component
 	[Property, ResourceType( "vpcf" )] private ParticleSystem Particles { get; set; }
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
+
+	public virtual bool Resolved => TimeUntilExplosion;
 
 	protected override void OnStart()
 	{

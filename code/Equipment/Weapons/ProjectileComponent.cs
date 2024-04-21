@@ -13,7 +13,7 @@ public abstract class ProjectileComponent : Component, IResolvable
 	public WeaponComponent Source { get; set; }
 	public Grub Grub => Source?.Equipment.Grub;
 	public GrubPlayerController PlayerController => Grub?.PlayerController;
-	public bool Resolved => false;
+	public virtual bool Resolved => false;
 
 	public int Charge { get; set; }
 

@@ -15,7 +15,7 @@ public partial class GrubsTerrain
 			if ( retryCount > 10 )
 			{
 				var unresolved = Game.ActiveScene.GetAllComponents<IResolvable>().Where( r => !r.Resolved );
-				Log.Warning( $"{unresolved.Count()} GAMEOBJECTS ARE NOT RESOLVED!" );
+				Log.Warning( $"{unresolved.Count()} COMPONENTS ARE NOT RESOLVED!" );
 				Log.Warning( "PLEASE REPORT THIS TO A DEVELOPER AT DISCORD.GG/APETAVERN!!!" );
 				foreach ( var r in unresolved )
 					Log.Warning( r );
