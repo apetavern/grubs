@@ -96,7 +96,8 @@
       "Components": [
         {
           "__type": "Grubs.Gamemodes.Modes.FreeForAllGamemode",
-          "__guid": "1b128073-d9c4-4060-a11e-9bf14e46f73d"
+          "__guid": "1b128073-d9c4-4060-a11e-9bf14e46f73d",
+          "ActivePlayerId": "00000000-0000-0000-0000-000000000000"
         }
       ]
     },
@@ -116,6 +117,12 @@
             "component_id": "18fcdcfa-5aa8-440a-b806-592601ed927a",
             "go": "08a72929-c2dd-4da0-b84d-fdca3b287389",
             "component_type": "Sdf2DWorld"
+          },
+          "Water": {
+            "_type": "component",
+            "component_id": "83abee40-5ee1-418f-9bde-058e66e46939",
+            "go": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
+            "component_type": "Water"
           }
         },
         {
@@ -260,7 +267,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-16T22:09:48.5133786-03:00",
+  "LastSaved": "2024-04-20T19:01:56.8618392-05:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

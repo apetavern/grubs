@@ -1,4 +1,5 @@
-﻿using Grubs.Extensions;
+﻿using Grubs.Common;
+using Grubs.Extensions;
 using Grubs.Pawn;
 using Grubs.Terrain;
 
@@ -13,6 +14,8 @@ public sealed class FreeForAllGamemode : Gamemode
 	[HostSync] public TimeUntil TimeUntilNextTurn { get; set; }
 
 	public Queue<Player> PlayerTurnQueue { get; set; } = new();
+
+	private Task _nextTurnTask = null;
 
 	internal override async void Initialize()
 	{
@@ -71,10 +74,30 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	private void UpdatePlaying()
 	{
-		if ( TimeUntilNextTurn )
+		if ( _nextTurnTask is not null && !_nextTurnTask.IsCompleted )
+			return;
+
+		var nextTurn = TimeUntilNextTurn;
+		if ( nextTurn )
 		{
-			RotateActivePlayer();
+			_nextTurnTask ??= NextTurn();
 		}
+	}
+
+	private async Task NextTurn()
+	{
+		TurnIsChanging = true;
+
+		await Resolution.UntilWorldResolved( 30 );
+
+		await GameTask.Delay( 1000 );
+		await ApplyDamageQueue();
+
+		RotateActivePlayer();
+
+		_nextTurnTask = null;
+
+		TurnIsChanging = false;
 	}
 
 	private void RotateActivePlayer()

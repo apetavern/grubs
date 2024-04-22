@@ -6,7 +6,7 @@ using Grubs.Terrain;
 namespace Grubs.Pawn;
 
 [Title( "Grubs - Container" ), Category( "Grubs" )]
-public sealed class Grub : Component
+public sealed class Grub : Component, IResolvable
 {
 	public Player Player { get; set; }
 
@@ -20,6 +20,8 @@ public sealed class Grub : Component
 	/// Returns true if it is the owning player's turn and this is the player's active Grub.
 	/// </summary>
 	public bool IsActive => Player is not null && Player.IsActive && Player.ActiveGrub == this;
+
+	public bool Resolved => PlayerController.Velocity.IsNearlyZero( 0.1f ) || IsDead;
 
 	[Sync] public string Name { get; set; } = "Grubby";
 	[Sync] public bool IsDead { get; set; }

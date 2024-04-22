@@ -9,6 +9,8 @@ public class ArcProjectileComponent : ProjectileComponent
 	[Property] public int MaxBounces { get; set; }
 	[Property] public ExplosiveProjectileComponent Explosive { get; set; }
 
+	public override bool Resolved => !Segments.Any();
+
 	private List<ArcSegment> Segments = new();
 	private float _alpha;
 
