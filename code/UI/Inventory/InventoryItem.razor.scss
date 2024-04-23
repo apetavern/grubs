@@ -1,5 +1,7 @@
-﻿InventoryItem {
-    background-color: rgba(#65788B, 80%);
+﻿@import '../common.scss';
+
+InventoryItem {
+    background-color: $hud-fg;
     border-radius: 16px;
     margin: 5px;
     width: 100px;
@@ -9,6 +11,6 @@
     }
 
     &:hover {
-        background-color: rgba(darken(#65788B, 20%), 80%);
+        background-color: $hud-fg-hovered;
     }
 }
