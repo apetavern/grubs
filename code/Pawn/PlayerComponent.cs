@@ -1,4 +1,5 @@
-﻿using Grubs.Gamemodes;
+﻿using Grubs.Extensions;
+using Grubs.Gamemodes;
 using Grubs.UI;
 
 namespace Grubs.Pawn;
@@ -12,6 +13,10 @@ public sealed class Player : Component
 
 
 	[Sync] public string SelectedColor { get; set; } = "";
+
+	[Sync] public Guid ActiveGrubId { get; set; }
+
+	[Sync] public NetList<Guid> Grubs { get; set; } = new();
 
 	[Property] public required GameObject GrubPrefab { get; set; }
 

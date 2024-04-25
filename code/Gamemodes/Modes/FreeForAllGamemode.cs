@@ -13,7 +13,8 @@ public sealed class FreeForAllGamemode : Gamemode
 	[Property, ReadOnly, HostSync] public Guid ActivePlayerId { get; set; }
 	[HostSync] public TimeUntil TimeUntilNextTurn { get; set; }
 
-	public Queue<Player> PlayerTurnQueue { get; set; } = new();
+	private Queue<Player> PlayerTurnQueue { get; set; } = new();
+	private Dictionary<Player, Queue<Grub>> PlayerGrubOrder { get; set; } = new();
 
 	private Task _nextTurnTask = null;
 
@@ -33,6 +34,8 @@ public sealed class FreeForAllGamemode : Gamemode
 		var players = Scene.GetAllComponents<Player>();
 		foreach ( var player in players )
 		{
+			PlayerGrubOrder.Add( player, new Queue<Grub>() );
+
 			for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
 			{
 				var go = player.GrubPrefab.Clone();
@@ -41,6 +44,9 @@ public sealed class FreeForAllGamemode : Gamemode
 
 				var grub = go.Components.Get<Grub>();
 				SetGrubPlayer( player.Id, grub.Id );
+
+				var queue = PlayerGrubOrder[player];
+				queue.Enqueue( grub );
 
 				go.Network.AssignOwnership( player.Network.OwnerConnection );
 
@@ -58,6 +64,8 @@ public sealed class FreeForAllGamemode : Gamemode
 		}
 
 		var firstPlayer = PlayerTurnQueue.Dequeue();
+		var firstGrub = PlayerGrubOrder[firstPlayer].Dequeue();
+		PlayerGrubOrder[firstPlayer].Enqueue( firstGrub );
 		ActivePlayerId = firstPlayer.Id;
 		Started = true;
 		State = GameState.Playing;
@@ -114,7 +122,27 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		var nextPlayer = PlayerTurnQueue.Dequeue();
 		ActivePlayerId = nextPlayer.Id;
+
+		var nextGrub = FindNextGrub( nextPlayer );
+		nextPlayer.ActiveGrubId = nextGrub.Id;
+		SetActiveGrub( nextPlayer.Id, nextGrub.Id );
+
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
+	}
+
+	private Grub FindNextGrub( Player player )
+	{
+		var queue = PlayerGrubOrder[player];
+		while ( queue.Any() )
+		{
+			var grub = queue.Dequeue();
+			if ( !grub.IsValid() || grub.IsDead )
+				continue;
+			queue.Enqueue( grub );
+			return grub;
+		}
+
+		return null;
 	}
 
 	[Broadcast]
@@ -127,6 +155,8 @@ public sealed class FreeForAllGamemode : Gamemode
 			return;
 
 		grub.Player = player;
+		Log.Info( $"Adding grub {grub.Id} to player {player.Id} at index {player.Grubs.Count}" );
+		player.Grubs.Add( grub.Id );
 	}
 
 	[Broadcast]
@@ -134,6 +164,8 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		var player = playerId.ToComponent<Player>();
 		var grub = grubId.ToComponent<Grub>();
+
+		Log.Info( $"Setting active grub to {grubId} for player {playerId}" );
 
 		if ( player is null || grub is null )
 			return;
