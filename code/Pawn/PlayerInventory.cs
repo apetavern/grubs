@@ -1,4 +1,5 @@
 ﻿using Grubs.Equipment;
+using Grubs.Gamemodes;
 
 namespace Grubs.Pawn;
 
@@ -53,6 +54,14 @@ public sealed class PlayerInventory : Component
 
 		if ( IsProxy )
 			return;
+
+		if ( !Player.IsActive || Gamemode.Current.TurnIsChanging )
+		{
+			if ( EquipmentActive )
+				ToggleEquipment( false, ActiveSlot );
+
+			return;
+		}
 
 		if ( Input.Pressed( "toggle_inventory" ) )
 		{
