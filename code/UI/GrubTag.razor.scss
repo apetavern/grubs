@@ -26,12 +26,14 @@ GrubTag {
             height: 100%;
             background-image: linear-gradient(lightgreen, darken(lightgreen, 20%));
             border-radius: 8px;
+            transition: width 1s ease-out;
         }
 
         .health-bar-overflow {
             height: 100%;
             background-color: black;
             border-radius: 8px;
+            transition: width 1s ease-out;
         }
     }
 }
