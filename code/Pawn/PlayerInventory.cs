@@ -74,7 +74,7 @@ public sealed class PlayerInventory : Component
 	[Broadcast]
 	public void Equip( int slot )
 	{
-		if ( Gamemode.FFA.TurnIsChanging )
+		if ( Gamemode.FFA.TurnIsChanging || !Player.IsActive )
 			return;
 
 		var equipment = GetHolsteredEquipment( slot );

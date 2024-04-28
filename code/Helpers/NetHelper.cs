@@ -28,6 +28,8 @@ public class NetHelper : Component, Component.INetworkListener
 		var startPosition = FindSpawnLocation();
 		var player = PlayerPrefab.Clone( startPosition, name: $"Player - {conn.DisplayName}" );
 		player.NetworkSpawn( conn );
+		var ui = player.Children.First( x => x.Name == "Screen UI" );
+		Log.Info( ui.Name );
 		GrubsTerrain.Instance.SendMeMissing( conn.Id, 1, 0 );
 	}
 
