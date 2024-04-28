@@ -14,9 +14,9 @@
         @Grub.Name
     </div>
     <div class="health-container" style="background-color: darken(@Color.Hex, 60%)">
-        <div class="health-bar" style="width: @(_health / 150f * 100f)%; 
+        <div class="health-bar" style="width: @(Grub.Health.CurrentHealth / 150f * 100f)%; 
         background-image: linear-gradient(@Color.Hex, darken(@Color.Hex, 20%))">
-            <div class="health-bar-overflow" style="width: @((_health - 150f) / 150f * 100f)%;
+            <div class="health-bar-overflow" style="width: @((Grub.Health.CurrentHealth - 150f) / 150f * 100f)%;
             background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))"/>
         </div>
     </div>
@@ -46,34 +46,18 @@
     [Property] public required Grub Grub { get; set; }
     [Property] public Color Color { get; set; }
 
-    private float _health;
-    private const float _transitionRate = 50f;
-
     protected override void OnStart()
     {
         base.OnStart();
 
         Transform.Position = Grub.Transform.Position + Vector3.Up * 44f;
-        _health = Grub.Health.CurrentHealth;
 
         if (Color.TryParse(Grub.Player?.SelectedColor, out var color))
             Color = color;
     }
 
-    protected override void OnUpdate()
-    {
-        // Log.Info(Grub.Network.OwnerId);
-
-        if (_health != Grub.Health.CurrentHealth)
-        {
-            var delta = Grub.Health.CurrentHealth < _health ? -1 : 1;
-            var health = _health + delta * Time.Delta * _transitionRate;
-            _health = health.Clamp(Math.Min(_health, Grub.Health.CurrentHealth), Math.Max(_health, Grub.Health.CurrentHealth));
-        }
-    }
-
     protected override int BuildHash()
     {
-        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, _health, Color.Hex);
+        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, Color.Hex);
     }
 }

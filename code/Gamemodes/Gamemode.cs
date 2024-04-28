@@ -42,6 +42,9 @@ public abstract class Gamemode : Component
 			if ( !grub.IsValid() )
 				continue;
 
+			while ( !grub.Resolved )
+				await GameTask.Delay( 200 );
+
 			grub.Health.ApplyDamage();
 
 			await ShowDamagedGrub( grub );
@@ -55,7 +58,7 @@ public abstract class Gamemode : Component
 			return;
 
 		CameraTarget = grub.GameObject.Id;
-		await GameTask.Delay( 1500 );
+		await GameTask.Delay( 2000 );
 		CameraTarget = Guid.Empty;
 	}
 }

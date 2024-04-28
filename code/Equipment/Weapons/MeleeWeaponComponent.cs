@@ -61,7 +61,7 @@ public class MeleeWeaponComponent : WeaponComponent
 			}
 
 			if ( tr.GameObject.Components.TryGet( out HealthComponent health, FindMode.EverythingInAncestors ) )
-				health.TakeDamage( Damage );
+				health.TakeDamage( GrubsDamageInfo.FromMelee( Damage, Equipment.Grub.GameObject, GameObject ) );
 		}
 
 		TimeSinceLastUsed = 0f;

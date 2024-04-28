@@ -42,7 +42,7 @@ public sealed class Grub : Component, IResolvable
 
 	public void OnHardFall()
 	{
-		Player?.Inventory.ToggleEquipment( false, Player.Inventory.ActiveSlot );
+		Player?.Inventory.Holster( Player.Inventory.ActiveSlot );
 	}
 
 	// public void Respawn()
@@ -60,6 +60,6 @@ public sealed class Grub : Component, IResolvable
 		if ( grub is null )
 			return;
 
-		grub.Health.TakeDamage( hp );
+		grub.Health.TakeDamage( new GrubsDamageInfo( hp ) );
 	}
 }

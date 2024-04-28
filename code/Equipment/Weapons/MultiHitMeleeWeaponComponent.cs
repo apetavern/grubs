@@ -136,13 +136,13 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 		if ( releaseFromGround )
 			grub.CharacterController.ReleaseFromGround();
 		grub.CharacterController.Punch( force );
-		grub.Health.TakeDamage( damage );
+		grub.Health.TakeDamage( GrubsDamageInfo.FromMelee( damage, Equipment.Grub.GameObject, GameObject ) );
 	}
 
 	private void HandleBodyHit( Rigidbody body, float damage, Vector3 position, Vector3 force )
 	{
 		if ( body.Components.TryGet( out HealthComponent health, FindMode.EverythingInSelfAndAncestors ) )
-			health.TakeDamage( damage );
+			health.TakeDamage( GrubsDamageInfo.FromMelee( damage, Equipment.Grub.GameObject, GameObject ) );
 
 		body.ApplyImpulseAt( position, force * body.PhysicsBody.Mass );
 	}

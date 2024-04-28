@@ -96,6 +96,9 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		TurnIsChanging = true;
 
+		var player = ActivePlayerId.ToComponent<Player>();
+		player?.EndTurn();
+
 		await Resolution.UntilWorldResolved( 30 );
 
 		await GameTask.Delay( 1000 );

@@ -1,5 +1,6 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
+using Grubs.Helpers;
 using Grubs.Pawn;
 
 namespace Grubs.Common;
@@ -11,40 +12,28 @@ public partial class HealthComponent : Component
 	[Sync] public float CurrentHealth { get; set; }
 
 	public bool DeathInvoked { get; set; } = false;
-	private Queue<float> DamageQueue { get; set; } = new();
+	private Queue<GrubsDamageInfo> DamageQueue { get; set; } = new();
 
 	protected override void OnStart()
 	{
 		CurrentHealth = MaxHealth;
 	}
 
-	public void TakeDamage( float damage, bool immediate = false )
+	public void TakeDamage( GrubsDamageInfo damageInfo, bool immediate = false )
 	{
 		if ( Components.TryGet( out Grub grub ) && !immediate )
 		{
 			if ( Connection.Local.IsHost && !Gamemode.Current.DamageQueue.Contains( grub ) )
 				Gamemode.Current.DamageQueue.Enqueue( grub );
 
-			DamageQueue.Enqueue( damage );
+			DamageQueue.Enqueue( damageInfo );
 			return;
 		}
 
-		CurrentHealth -= damage;
+		CurrentHealth -= damageInfo.Damage;
 		if ( CurrentHealth <= 0 && !DeathInvoked )
 		{
-			DeathInvoked = true;
-
-			if ( Components.TryGet( out ExplosiveProjectileComponent explosive ) && explosive.ExplodeOnDeath )
-			{
-				explosive.Explode();
-			}
-
-			if ( grub.IsValid() )
-			{
-				var conn = grub.Network.OwnerConnection;
-				grub.GameObject.Destroy();
-				// NetHelper.Instance.OnActive( conn );
-			}
+			OnDeath( damageInfo.Tags.Has( "killzone" ) );
 		}
 	}
 
@@ -59,14 +48,53 @@ public partial class HealthComponent : Component
 			return;
 
 		var totalDamage = 0f;
-		while ( DamageQueue.TryDequeue( out var damage ) )
-			totalDamage += damage;
+		while ( DamageQueue.TryDequeue( out var info ) )
+			totalDamage += info.Damage;
 
-		TakeDamage( totalDamage, true );
+		TakeDamage( new GrubsDamageInfo( totalDamage ), true );
 	}
 
 	public void Heal( float heal )
 	{
 		CurrentHealth += heal;
+	}
+
+	private async Task OnDeath( bool deleteImmediately = false )
+	{
+		if ( Components.TryGet( out Grub grub ) )
+		{
+			if ( !deleteImmediately )
+			{
+				await GameTask.Delay( 500 ); // Give clients some time to update GrubTag healthbar to 0 before we play death animation.
+				DeathInvoked = true;
+
+				// This is shit, especially since we want a variety of death animations in the future.
+				// Just don't know where to put this right now.
+				var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/dynamite_plunger.prefab" );
+				var plunger = SceneUtility.GetPrefabScene( prefab ).Clone();
+				var position = grub.Transform.Position;
+				plunger.Transform.Position = grub.PlayerController.Facing == -1 ? position - new Vector3( 30, 0, 0 ) : position;
+
+				await GameTask.Delay( 750 );
+
+				// Same as above.
+				var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
+				sceneParticles.SetControlPoint( 1, new Vector3( 100f / 2f, 0, 0 ) );
+				Sound.Play( "explosion_short_tail", position );
+
+				ExplosionHelperComponent.Instance.Explode( grub, position, 100f, 25f );
+				plunger?.Destroy();
+			}
+
+			grub.GameObject.Destroy();
+			return;
+		}
+
+		DeathInvoked = true;
+
+		if ( Components.TryGet( out ExplosiveProjectileComponent explosive ) && explosive.ExplodeOnDeath )
+		{
+			explosive.Explode();
+		}
 	}
 }
