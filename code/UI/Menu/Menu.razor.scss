@@ -1,0 +1,49 @@
+﻿@import '../common.scss';
+
+Menu {
+    cursor: none;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-family: $font-family;
+    pointer-events: all;
+
+    .left {
+        width: 100%;
+        height: 100%;
+        margin-left: 110px;
+        flex-direction: column;
+        opacity: 1;
+        transition: all 0.5s;
+
+        &.hide {
+            transform: translateX(-1080px);
+        }
+    }
+
+    .grubs-logo {
+        font-size: 128px;
+        text-stroke: 24px black;
+        font-weight: bold;
+        margin-top: 80px;
+    }
+
+    .menu-options {
+        font-size: 48px;
+        flex-direction: column;
+        margin-top: auto;
+        align-items: flex-start;
+        margin-bottom: 200px;
+        gap: 24px;
+
+        > button {
+            text-stroke: 4px black;
+            text-shadow: 4px 4px black;
+
+            &:hover {
+                transform: translateX(4px);
+                sound-in: ui_button_hover;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+﻿@import '../common.scss';
+
+TurnTimer {
+    position: absolute;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    bottom: 50px;
+
+    .timer {
+        width: 300px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: $font-family;
+        font-size: 32px;
+        color: white;
+        text-stroke: 8px black;
+
+        > p {
+            font-size: 72px;
+            color: white;
+            text-stroke: 12px black;
+        }
+    }
+}

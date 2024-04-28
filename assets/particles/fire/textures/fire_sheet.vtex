@@ -1,0 +1,15 @@
+{
+  "Sequences": [
+    {
+      "Source": "particles/fire/textures/fire_sheet.png",
+      "IsLooping": true,
+      "FlipBook": true,
+      "Columns": 3,
+      "Rows": 3,
+      "Frames": 9
+    }
+  ],
+  "InputColorSpace": "SRGB",
+  "OutputColorSpace": "SRGB",
+  "OutputTypeString": "2D"
+}

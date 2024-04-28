@@ -1,8 +1,8 @@
 ﻿using Sandbox.Sdf;
 
-namespace Grubs;
+namespace Grubs.Terrain;
 
-public partial class Terrain
+public partial class GrubsTerrain : Component
 {
 	public Sdf2DLayer DevMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf2d_default.sdflayer" );
 	public Sdf2DLayer SandMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
@@ -16,17 +16,17 @@ public partial class Terrain
 	{
 		var materials = new Dictionary<Sdf2DLayer, float>();
 
-		var terrainType = GrubsConfig.WorldTerrainEnvironmentType;
+		// var terrainType = GrubsConfig.WorldTerrainEnvironmentType;
 
-		List<Sdf2DLayer> activeMaterials;
+		var activeMaterials = GetSandMaterials();
 
-		activeMaterials = terrainType switch
-		{
-			GrubsConfig.TerrainEnvironmentType.Sand => GetSandMaterials(),
-			GrubsConfig.TerrainEnvironmentType.Dirt => GetDirtMaterials(),
-			GrubsConfig.TerrainEnvironmentType.Cereal => GetCerealMaterials(),
-			_ => GetSandMaterials(),
-		};
+		// activeMaterials = terrainType switch
+		// {
+		// 	GrubsConfig.TerrainEnvironmentType.Sand => GetSandMaterials(),
+		// 	GrubsConfig.TerrainEnvironmentType.Dirt => GetDirtMaterials(),
+		// 	GrubsConfig.TerrainEnvironmentType.Cereal => GetCerealMaterials(),
+		// 	_ => GetSandMaterials(),
+		// };
 
 		if ( cfg.includeForeground )
 			materials.Add( activeMaterials.ElementAt( 0 ), cfg.fgOffset );
@@ -34,7 +34,7 @@ public partial class Terrain
 			materials.Add( activeMaterials.ElementAt( 1 ), cfg.bgOffset );
 		if ( cfg.isDestruction )
 			materials.Add( GetAllMaterials().First(), 0f );
-		
+
 		return materials;
 	}
 
@@ -47,10 +47,12 @@ public partial class Terrain
 	{
 		return new List<Sdf2DLayer>() { DirtMaterial, RockMaterial };
 	}
+
 	public List<Sdf2DLayer> GetCerealMaterials()
 	{
 		return new List<Sdf2DLayer>() { CerealMaterial, RockMaterial };
 	}
+
 	public List<Sdf2DLayer> GetGirderMaterials()
 	{
 		return new List<Sdf2DLayer>() { GirderMaterial };
@@ -84,13 +86,12 @@ public struct MaterialsConfig
 		this.bgOffset = bgOffset;
 	}
 
-	public static MaterialsConfig Default => new( true, false, false, 0f, 0f );
-	public static MaterialsConfig Destruction => new( true, false, true, 0f, 0f );
-	public static MaterialsConfig DestructionWithBackground => new( true, true, true, 0f, 0f );
+	public static MaterialsConfig Default => new(true, false, false, 0f, 0f);
+	public static MaterialsConfig Destruction => new(true, false, true, 0f, 0f);
+	public static MaterialsConfig DestructionWithBackground => new(true, true, true, 0f, 0f);
 
 	public override string ToString()
 	{
 		return $"fg: {includeForeground} - {fgOffset} // bg: {includeBackground} - {bgOffset}";
 	}
 }
-

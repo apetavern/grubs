@@ -1,0 +1,84 @@
+﻿@namespace Grubs.UI.GameLanding
+
+@using Grubs.Gamemodes
+@using Grubs.UI.Components
+@inherits PanelComponent
+
+<root>
+    <Cursor/>
+    <SceneBackground @ref="SceneBackground"/>
+    <div class="header">
+        <div class="title">GRUBS</div>
+        <div class="header-text">
+            @if (CanStart())
+            {
+                <div>Waiting for host...</div>
+            }
+            else
+            {
+                <div>Waiting for players...</div>
+            }
+        </div>
+        <div class="header-text exit ui-btn"><i>logout</i> Exit</div>
+    </div>
+    <div @ref="MenuBody" class="body">
+        <div class="column-right">
+            <div class="terrain-preview">
+
+            </div>
+            @if (IsHost() && CanStart())
+            {
+                <div class="action-button ui-btn" @onclick=@Start>
+                    Start
+                </div>
+            }
+        </div>
+    </div>
+
+</root>
+
+@code
+{
+    public static GameLanding Instance { get; set; }
+
+    public SceneBackground SceneBackground { get; set; }
+    public Panel MenuBody { get; set; }
+
+    public bool IsHost()
+    {
+        return Connection.Local == Connection.Host;
+    }
+
+    public bool CanStart()
+    {
+        return Connection.All.Count > 1 || Game.IsEditor;
+    }
+
+    public GameLanding()
+    {
+        Instance = this;
+        Cursor.Enabled("menu", true);
+    }
+
+    private void Start()
+    {
+        if (IsHost())
+            Gamemode.Current.Start();
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        var hide = Gamemode.Current?.Started ?? false;
+        Cursor.Enabled("menu", !hide);
+        SceneBackground.SetClass("hide", hide);
+        MenuBody.SetClass("hide", hide);
+        SetClass("hide", hide);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Connection.All?.Count);
+    }
+}

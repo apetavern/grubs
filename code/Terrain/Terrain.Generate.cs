@@ -1,16 +1,17 @@
-﻿namespace Grubs;
+﻿using Sandbox.Utility;
 
-public partial class Terrain
+namespace Grubs.Terrain;
+
+public partial class GrubsTerrain
 {
-	void SetupGeneratedWorld()
+	[Sync] public int WorldTextureHeight { get; set; } = 0;
+	[Sync] public int WorldTextureLength { get; set; } = 0;
+
+	private void SetupGeneratedWorld()
 	{
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
-		AddWorldBox(
-			GrubsConfig.TerrainLength,
-			GrubsConfig.TerrainHeight,
-			materials.ElementAt( 0 ).Key,
-			materials.ElementAt( 1 ).Key );
+		AddWorldBox( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
 
 		WorldTextureLength = GrubsConfig.TerrainLength;
 		WorldTextureHeight = GrubsConfig.TerrainHeight;
@@ -34,7 +35,7 @@ public partial class Terrain
 
 	private int maxY;
 
-	void GenerateWorld()
+	private void GenerateWorld()
 	{
 		var wLength = GrubsConfig.TerrainLength;
 		var wHeight = GrubsConfig.TerrainHeight;
@@ -111,22 +112,22 @@ public partial class Terrain
 		foreach ( var midpoint in toSubtract )
 		{
 			// TODO: figure out best way to subtract
-			SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
+			SubtractCircle( midpoint, 8f, 0, true );
 		}
 
 		SubtractBackground( pointsX );
 	}
 
-	void SubtractBackgroundBox( int wLength, int pointsY )
+	private void SubtractBackgroundBox( int wLength, int pointsY )
 	{
 		var bb = new Vector2( 0, maxY * resolution );
 		var aa = new Vector2( wLength, pointsY * resolution );
-		SubtractBox( bb, aa, GetActiveMaterials( new MaterialsConfig( includeBackground: true ) ), worldOffset: true );
+		SubtractBox( bb, aa, 2, worldOffset: true );
 	}
 
-	void SubtractBackground( int pointsX )
+	private void SubtractBackground( int pointsX )
 	{
-		var materialsConfig = new MaterialsConfig( includeForeground: false, includeBackground: true );
+		var materialsConfig = new MaterialsConfig( false, true );
 		var bgMaterials = GetActiveMaterials( materialsConfig );
 
 		var toSubtract = new List<Vector2>();
@@ -147,7 +148,7 @@ public partial class Terrain
 
 		foreach ( var midpoint in toSubtract )
 		{
-			SubtractCircle( midpoint, 8f, bgMaterials, worldOffset: true );
+			SubtractCircle( midpoint, 8f, 2, true );
 		}
 	}
 
@@ -162,7 +163,7 @@ public partial class Terrain
 		}
 	}
 
-	void SubtractForeground( int pointsX )
+	private void SubtractForeground( int pointsX )
 	{
 		var fgMaterials = GetActiveMaterials( MaterialsConfig.Default );
 		for ( var x = 0; x < pointsX; x++ )
@@ -172,7 +173,7 @@ public partial class Terrain
 				if ( !TerrainMap[x, y] )
 				{
 					var midpoint = new Vector2( x * resolution, y * resolution );
-					SubtractCircle( midpoint, 8f, fgMaterials, worldOffset: true );
+					SubtractCircle( midpoint, 8f, 0, true );
 				}
 			}
 		}

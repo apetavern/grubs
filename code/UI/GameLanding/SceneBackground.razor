@@ -1,0 +1,46 @@
+﻿@namespace Grubs.UI.GameLanding
+
+@inherits ScenePanel
+
+<root>
+
+</root>
+
+<style>
+    SceneBackground {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        z-index: -10;
+        transition: all 0.15s;
+        
+        &.hide {
+            opacity: 0;
+        }
+    }
+</style>
+
+@code
+{
+    public SceneBackground()
+    {
+        var world = new SceneWorld();
+        var map = new SceneMap(world, "maps/gr_menu");
+
+        World = world;
+        World.GradientFog.Enabled = true;
+        World.GradientFog.Color = new Color32(57, 48, 69);
+        World.GradientFog.MaximumOpacity = 0.6f;
+        World.GradientFog.StartHeight = 10;
+        World.GradientFog.EndHeight = 9000;
+        World.GradientFog.DistanceFalloffExponent = 4;
+        World.GradientFog.VerticalFalloffExponent = 4;
+        World.GradientFog.StartDistance = 250;
+        World.GradientFog.EndDistance = 600;
+
+        Camera.AmbientLightColor = new Color(.25f, .15f, .15f) * 0.5f;
+        Camera.Position = new Vector3(-85, -105, 25);
+        Camera.Rotation = Rotation.FromYaw(80f);
+    }
+}

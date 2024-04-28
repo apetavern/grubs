@@ -1,0 +1,79 @@
+@namespace Grubs.UI
+
+@using Grubs.Pawn
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Utility
+
+@inherits PanelComponent
+
+<root>
+    <div
+        class="title"
+        style="color: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));">
+        @Grub.Name
+    </div>
+    <div class="health-container" style="background-color: darken(@Color.Hex, 60%)">
+        <div class="health-bar" style="width: @(_health / 150f * 100f)%; 
+        background-image: linear-gradient(@Color.Hex, darken(@Color.Hex, 20%))">
+            <div class="health-bar-overflow" style="width: @((_health - 150f) / 150f * 100f)%;
+            background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))"/>
+        </div>
+    </div>
+    @*<div class="avi">
+        <image
+            src="avatar:@(Grub.Network.OwnerConnection?.SteamId ?? Steam.SteamId)"
+            style="background-color: @Color.Hex; border-color: @Color.Hex"/>
+    </div>
+    <div class="top">
+        <div class="hp" style="background-color: @Color.Hex">
+            <label>
+                @_health.CeilToInt()
+            </label>
+            <i>favorite</i>
+        </div>
+    </div>
+    <div
+        class="title"
+        style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));
+               border-bottom-color: darken(adjust-hue(@Color.Hex, 45), 50%)">
+        @Grub.Name
+    </div>*@
+</root>
+
+@code
+{
+    [Property] public required Grub Grub { get; set; }
+    [Property] public Color Color { get; set; }
+
+    private float _health;
+    private const float _transitionRate = 50f;
+
+    protected override void OnStart()
+    {
+        base.OnStart();
+
+        Transform.Position = Grub.Transform.Position + Vector3.Up * 44f;
+        _health = Grub.Health.CurrentHealth;
+
+        if (Color.TryParse(Grub.Player?.SelectedColor, out var color))
+            Color = color;
+    }
+
+    protected override void OnUpdate()
+    {
+        // Log.Info(Grub.Network.OwnerId);
+
+        if (_health != Grub.Health.CurrentHealth)
+        {
+            var delta = Grub.Health.CurrentHealth < _health ? -1 : 1;
+            var health = _health + delta * Time.Delta * _transitionRate;
+            _health = health.Clamp(Math.Min(_health, Grub.Health.CurrentHealth), Math.Max(_health, Grub.Health.CurrentHealth));
+        }
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, _health, Color.Hex);
+    }
+}

@@ -1,0 +1,23 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_smoke.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+	F_RENDER_BACKFACES 1
+
+	g_flCellDensity "5.000"
+	g_flVoronoiSpeed "0.500"
+
+	//---- Colour ----
+	g_vColour "[0.058824 0.058824 0.058824 1.000000]"
+
+	//---- Fog ----
+	g_bFogEnabled "0"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+}

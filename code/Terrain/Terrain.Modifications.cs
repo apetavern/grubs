@@ -1,24 +1,42 @@
 ﻿using Sandbox.Sdf;
 
-namespace Grubs;
+namespace Grubs.Terrain;
 
-public partial class Terrain
+public partial class GrubsTerrain : Component
 {
-	private int lengthOffset;
-	private int heightOffset;
+	private int _lengthOffset;
+	private int _heightOffset;
+
+	private MaterialsConfig GetMaterialsFromCode( int code )
+	{
+		return code switch
+		{
+			0 => MaterialsConfig.Default,
+			1 => MaterialsConfig.Destruction,
+			2 => MaterialsConfig.DestructionWithBackground,
+			_ => MaterialsConfig.Default
+		};
+	}
 
 	/// <summary>
 	/// Wrapper for a standard circle subtraction.
 	/// </summary>
 	/// <param name="center">The Vector2 center of the subtraction.</param>
 	/// <param name="radius">The radius of the subtraction.</param>
-	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
+	/// <param name="matCode">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
-	public void SubtractCircle( Vector2 center, float radius, Dictionary<Sdf2DLayer, float> materials, bool worldOffset = false )
+	[Broadcast]
+	public void SubtractCircle( Vector2 center, float radius, int matCode, bool worldOffset = false )
 	{
+		if ( !AssertIsHost() )
+			return;
+
+		var matConfig = GetMaterialsFromCode( matCode );
+		var activeMaterials = GetActiveMaterials( matConfig );
+
 		var circleSdf = new CircleSdf( center, radius );
-		foreach ( var (material, offset) in materials )
-			Subtract( SdfWorld, circleSdf.Expand( offset ), material, offset: worldOffset );
+		foreach ( var (material, offset) in activeMaterials )
+			Subtract( SdfWorld, circleSdf.Expand( offset ), material, worldOffset );
 	}
 
 	/// <summary>
@@ -26,8 +44,12 @@ public partial class Terrain
 	/// </summary>
 	/// <param name="center">The Vector2 center of the scorch.</param>
 	/// <param name="radius">The radius of the scorch.</param>
+	[Broadcast]
 	public void ScorchCircle( Vector2 center, float radius )
 	{
+		if ( !AssertIsHost() )
+			return;
+
 		var circleSdf = new CircleSdf( center, radius );
 		Add( SdfWorld, circleSdf, ScorchMaterial );
 	}
@@ -40,11 +62,19 @@ public partial class Terrain
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="cornerRadius">The corner radius of the box.</param>
 	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
-	public void SubtractBox( Vector2 mins, Vector2 maxs, Dictionary<Sdf2DLayer, float> materials, float cornerRadius = 0, bool worldOffset = false )
+	[Broadcast]
+	public void SubtractBox( Vector2 mins, Vector2 maxs, int matCode,
+		float cornerRadius = 0, bool worldOffset = false )
 	{
+		if ( !AssertIsHost() )
+			return;
+
+		var matConfig = GetMaterialsFromCode( matCode );
+		var activeMaterials = GetActiveMaterials( matConfig );
+
 		var boxSdf = new RectSdf( mins, maxs, cornerRadius );
-		foreach ( var (material, offset) in materials )
-			Subtract( SdfWorld, boxSdf.Expand( offset ), material, offset: worldOffset );
+		foreach ( var (material, offset) in activeMaterials )
+			Subtract( SdfWorld, boxSdf.Expand( offset ), material, worldOffset );
 	}
 
 	/// <summary>
@@ -55,15 +85,27 @@ public partial class Terrain
 	/// <param name="radius">The radius of the line.</param>
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
-	public void SubtractLine( Vector2 start, Vector2 end, float radius, Dictionary<Sdf2DLayer, float> materials, bool worldOffset = false )
+	[Broadcast]
+	public void SubtractLine( Vector2 start, Vector2 end, float radius, int matCode,
+		bool worldOffset = false )
 	{
+		if ( !AssertIsHost() )
+			return;
+
+		var matConfig = GetMaterialsFromCode( matCode );
+		var activeMaterials = GetActiveMaterials( matConfig );
+
 		var lineSdf = new LineSdf( start, end, radius );
-		foreach ( var (material, offset) in materials )
-			Subtract( SdfWorld, lineSdf.Expand( offset ), material, offset: worldOffset );
+		foreach ( var (material, offset) in activeMaterials )
+			Subtract( SdfWorld, lineSdf.Expand( offset ), material, worldOffset );
 	}
 
+	[Broadcast]
 	public void ScorchLine( Vector2 start, Vector2 end, float radius )
 	{
+		if ( !AssertIsHost() )
+			return;
+
 		var lineSdf = new LineSdf( start, end, radius );
 		Add( SdfWorld, lineSdf, ScorchMaterial );
 	}
@@ -77,12 +119,20 @@ public partial class Terrain
 	/// <param name="position">The position of the Sdf.</param>
 	/// <param name="rotation">The rotation of the Sdf.</param>
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
-	public void AddTexture( Texture texture, int gradientWidth, float worldWidth, Vector2 position, Rotation2D rotation, Dictionary<Sdf2DLayer, float> materials )
+	[Broadcast]
+	public void AddTexture( Texture texture, int gradientWidth, float worldWidth, Vector2 position, Rotation2D rotation,
+		int matCode )
 	{
+		if ( !AssertIsHost() )
+			return;
+
+		var matConfig = GetMaterialsFromCode( matCode );
+		var activeMaterials = GetActiveMaterials( matConfig );
+
 		var textureSdf = new TextureSdf( texture, gradientWidth, worldWidth );
 		var transformedTextureSdf = textureSdf
 			.Transform( position, rotation );
-		foreach ( var (material, offset) in materials )
+		foreach ( var (material, offset) in activeMaterials )
 			Add( SdfWorld, transformedTextureSdf.Expand( offset ), material );
 	}
 
@@ -93,15 +143,30 @@ public partial class Terrain
 	/// <param name="height">The height of the world.</param>
 	/// <param name="fgMaterial">The material for the foreground of the world.</param>
 	/// <param name="bgMaterial">The material for the background of the world.</param>
-	private void AddWorldBox( int length, int height, Sdf2DLayer fgMaterial, Sdf2DLayer bgMaterial )
+	[Broadcast]
+	private void AddWorldBox( int length, int height )
 	{
-		lengthOffset = length / 2;
-		heightOffset = 0;
+		if ( !AssertIsHost() )
+			return;
 
-		var boxSdf = new RectSdf( new Vector2( -length / 2, 0 ), new Vector2( length / 2, height ) );
-		Add( SdfWorld, boxSdf, fgMaterial );
-		Add( SdfWorld, boxSdf, bgMaterial );
+		_lengthOffset = length / 2;
+		_heightOffset = 0;
+
+		var matConfig = GetMaterialsFromCode( 0 );
+		var activeMaterials = GetActiveMaterials( matConfig );
+		var bgMat = RockMaterial;
+
+		var boxSdf = new RectSdf( new Vector2( -length / 2f, 0 ), new Vector2( length / 2, height ) );
+		Add( SdfWorld, boxSdf, activeMaterials.ElementAt( 0 ).Key );
+		Add( SdfWorld, boxSdf, bgMat );
 	}
+
+	private bool AssertIsHost()
+	{
+		return Connection.Local == Connection.Host;
+	}
+
+	public TimeSince TimeSinceLastModification { get; set; }
 
 	/// <summary>
 	/// Wrapper for a standard Sdf addition.
@@ -111,7 +176,8 @@ public partial class Terrain
 	/// <param name="material">The material to apply.</param>
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material )
 	{
-		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
+		TimeSinceLastModification = 0f;
+		sdf = sdf.Translate( new Vector2( 0, -Transform.Position.z ) );
 		world.AddAsync( sdf, material );
 	}
 
@@ -124,9 +190,10 @@ public partial class Terrain
 	/// <param name="offset">Whether to apply the offset of the Sdf to world position.</param>
 	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material, bool offset = false )
 	{
-		sdf = sdf.Translate( new Vector2( 0, -world.Position.z ) );
+		TimeSinceLastModification = 0f;
+		sdf = sdf.Translate( new Vector2( 0, -Transform.Position.z ) );
 		if ( offset )
-			sdf = sdf.Translate( new Vector2( -lengthOffset, heightOffset ) );
+			sdf = sdf.Translate( new Vector2( -_lengthOffset, _heightOffset ) );
 		world.SubtractAsync( sdf, material );
 	}
 }

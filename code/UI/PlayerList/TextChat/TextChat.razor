@@ -1,8 +1,0 @@
-@namespace Grubs.UI
-@inherits Sandbox.UI.Panel
-@attribute [StyleSheet("TextChat.razor.scss")]
-
-<root>
-    <div class="canvas" @ref=Canvas />
-    <TextEntry @ref=Input onsubmit=@Submit onblur=@Close />
-</root>

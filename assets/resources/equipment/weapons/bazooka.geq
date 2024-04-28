@@ -1,0 +1,11 @@
+{
+  "Name": "Bazooka",
+  "Description": "Hold the Joe.",
+  "Icon": "models/weapons/bazooka/bazooka.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/bazooka/bazooka.prefab",
+  "DropChance": 0,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

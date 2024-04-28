@@ -1,0 +1,10 @@
+{
+  "Sequences": [
+    {
+      "Source": "particles/meleehit/hit_star.png",
+      "IsLooping": true,
+      "Frames": 64
+    }
+  ],
+  "OutputTypeString": "2D"
+}

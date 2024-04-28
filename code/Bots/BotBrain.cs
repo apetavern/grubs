@@ -1,120 +1,18 @@
-﻿using Grubs.Bots.States;
+using Grubs.Pawn.Controller;
+using Sandbox;
+using System.Threading.Tasks;
 
 namespace Grubs.Bots;
-public partial class BotBrain : Entity
+
+public partial class BotBrain : Component
 {
-	public Grub TargetGrub;
+	[Property] public Func<Task> BrainAction { get; set; }
 
-	public int CurrentState = 0;
+	[Property] public GameObject ActiveGrub { get; set; }
 
-	public IEnumerable<BaseState> States;
-
-	public const float MaxFallDistance = 150f;
-
-	public Player MyPlayer => Owner as Player;
-
-	public TimeSince TimeSinceStateStarted = 0f;
-
-	public override void Spawn()
+	protected override void OnStart()
 	{
-		Components.Create<TargetingState>();
-		Components.Create<ThinkingState>();
-		Components.Create<CrateFindingState>();
-		Components.Create<PositioningState>();
-		Components.Create<ThinkingState>();
-		Components.Create<WeaponSelectState>();
-		Components.Create<AimingState>();
-		Components.Create<FiringState>();
-		Components.Create<RetreatState>();
-		Components.Create<BaseState>();
-
-		States = Components.GetAll<BaseState>();
-
-		if ( GamemodeSystem.Instance.Terrain is not Terrain terrain )
-			return;
-
-		BBox worldbox = new BBox();
-		worldbox.Maxs = new Vector3( terrain.WorldTextureLength / 2f, 10f, terrain.WorldTextureHeight );
-		worldbox.Mins = new Vector3( -terrain.WorldTextureLength / 2f, -10f, -terrain.WorldTextureHeight );
-
-		if ( !GridAStar.Grid.Exists() )
-		{
-			var builder = new GridAStar.GridBuilder()
-				.WithBounds( Vector3.Zero, worldbox, Rotation.Identity )
-				.WithHeightClearance( 30 )
-				.WithStepSize( 100 )
-				.WithStandableAngle( 50 )
-				.WithStaticOnly( false );
-
-			var createTask = builder.Create();
-			createTask?.Wait();
-			GridAStar.Grid.Main = createTask.Result;
-		}
+		//ActiveGrub = Scene.GetAllComponents<GrubPlayerController>().First().GameObject;
+		//BrainAction.Invoke();
 	}
-
-	public void SimulateCurrentState()
-	{
-		if ( MyPlayer.IsTurn && CurrentState < States.Count() - 1 && !MyPlayer.ActiveGrub.HasBeenDamaged )
-		{
-			if ( TimeSinceStateStarted > States.ElementAt( CurrentState ).MaxTimeInState && !States.ElementAt( CurrentState ).ToString().Contains( "Base" ) )
-			{
-				States.ElementAt( CurrentState ).FinishedState();
-				return;
-			}
-			States.ElementAt( CurrentState ).Simulate();
-
-			(States.ElementAt( 0 ) as TargetingState).LineOfSightTargetCheck();
-
-			if ( Debug )
-				DebugOverlay.Text( States.ElementAt( CurrentState ).ToString(), MyPlayer.ActiveGrub.EyePosition );
-		}
-		else
-		{
-			CurrentState = 0;
-			TargetGrub = null;
-		}
-	}
-
-	public void PreviousState()
-	{
-		if ( States.Count() > CurrentState + 1 )
-		{
-			CurrentState -= 1;
-			TimeSinceStateStarted = 0f;
-
-			Input.SetAction( "jump", false );
-			Input.SetAction( "backflip", false );
-			Input.SetAction( "fire", false );
-
-			//Log.Info( "Previous State!" );
-		}
-		else
-		{
-			//Log.Info( "No more states!" );
-		}
-	}
-
-	public void NextState()
-	{
-		if ( States.Count() > CurrentState + 1 )
-		{
-			CurrentState += 1;
-			TimeSinceStateStarted = 0f;
-
-			States.ElementAt( CurrentState ).StartedState();
-
-			Input.SetAction( "jump", false );
-			Input.SetAction( "backflip", false );
-			Input.SetAction( "fire", false );
-
-			//Log.Info( "Next State!" );
-		}
-		else
-		{
-			//Log.Info( "No more states!" );
-		}
-	}
-
-	[ConVar.Replicated( "gr_debug_botbrain" )]
-	public static bool Debug { get; set; } = false;
 }

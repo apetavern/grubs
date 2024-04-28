@@ -1,0 +1,66 @@
+﻿@namespace Grubs.UI.Components
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <img src="textures/ui/cursor.png"/>
+</root>
+
+@code
+{
+    private static Cursor _instance;
+
+    // There could be different UI elements and classes requesting the cursor stay active.
+    // Keep track of all references and show the cursor as long as it has references.
+    private HashSet<string> _references = new();
+
+    public Cursor()
+    {
+        _instance = this;
+    }
+
+    public static void Enabled(string key, bool enabled)
+    {
+        if (_instance is null)
+            return;
+
+        if (enabled)
+        {
+            if (!_instance._references.Contains(key))
+                _instance._references.Add(key);
+        }
+        else
+        {
+            if (_instance._references.Contains(key))
+                _instance._references.Remove(key);
+        }
+
+        var isEnabled = _instance._references.Any();
+
+        // Root panel handles all pointer events for us.
+        _instance.SetClass("hide", !isEnabled);
+    }
+
+    public static bool IsEnabled()
+    {
+        if (_instance is null)
+            return false;
+
+        return _instance._references.Any();
+    }
+
+    public override void Tick()
+    {
+        var mousePosition = (Mouse.Position - 5f) / Screen.Size;
+
+        Style.Left = Length.Fraction(mousePosition.x);
+        Style.Top = Length.Fraction(mousePosition.y);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(IsEnabled());
+    }
+}

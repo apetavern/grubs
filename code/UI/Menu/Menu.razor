@@ -1,0 +1,82 @@
+﻿@namespace Grubs.UI.Menu
+
+@using Grubs.UI.Components
+@using Sandbox;
+@using Sandbox.Razor
+@using Sandbox.UI;
+
+@inherits PanelComponent
+
+<root>
+    <Cursor/>
+
+    <div @ref="Main" class="left">
+        <div class="grubs-logo">
+            GRUBS
+        </div>
+        <div class="menu-options">
+            <button onclick=@(() => OnOptionSelected("Create Lobby"))>Create Lobby</button>
+            <button onclick=@(() => OnOptionSelected("Join Lobby"))>Join Lobby</button>
+            <button>Customize</button>
+            <button>Quit</button>
+        </div>
+    </div>
+
+    @if (Current is not null)
+    {
+        <div @ref="Current"/>
+    }
+</root>
+
+@code
+{
+    public static Menu Instance { get; set; }
+
+    public Panel Current { get; set; }
+    public Panel Main { get; set; }
+
+    public Menu()
+    {
+        Instance = this;
+    }
+
+    private void OnOptionSelected(string option)
+    {
+        switch (option)
+        {
+            case "Create Lobby":
+                Transition<CreateLobby>();
+                break;
+            case "Join Lobby":
+                Transition<JoinLobby>();
+                break;
+            case "Customize":
+                break;
+            case "Quit":
+                break;
+        }
+    }
+
+    private async void Transition<T>() where T : Panel, new()
+    {
+        Current = Panel.AddChild<T>("hide");
+        Main?.SetClass("hide", true);
+    }
+
+    public void Return()
+    {
+        Main?.SetClass("hide", false);
+    }
+
+    protected override void OnTreeBuilt()
+    {
+        base.OnTreeBuilt();
+
+        Cursor.Enabled("menu", true);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Cursor.IsEnabled());
+    }
+}

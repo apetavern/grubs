@@ -1,0 +1,29 @@
+﻿JoinLobby {
+    cursor: none;
+    position: absolute;
+    opacity: 1;
+    transition: all 0.5s;
+
+    .back-button {
+        margin-top: 80px;
+        margin-left: 110px;
+        text-stroke: 8px black;
+        font-size: 64px;
+        gap: 12px;
+        align-items: center;
+
+        > i {
+            font-size: 74px;
+        }
+
+        &:hover:not(.hide) {
+            transform: translateX(4px);
+            sound-in: ui_button_hover;
+        }
+    }
+
+    &.hide {
+        opacity: 0;
+        transform: translateX(-1080px);
+    }
+}

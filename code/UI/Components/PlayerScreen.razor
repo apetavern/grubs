@@ -1,0 +1,42 @@
+﻿@namespace Grubs.UI.Components
+
+@using Grubs.Gamemodes
+@using Grubs.Gamemodes.Modes
+@using Grubs.UI.Inventory
+@using Grubs.UI.TurnInfo
+@using Grubs.Pawn
+
+@inherits PanelComponent
+
+<root>
+    <Cursor/>
+
+    <InventoryDisplay Inventory="@Inventory"/>
+    <TurnTimer/>
+</root>
+
+@code
+{
+    [Property] public required PlayerInventory Inventory { get; set; }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        SetClass("hide", !Gamemode.FFA.Started);
+    }
+}
+
+<style>
+    PlayerScreen {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: none;
+        opacity: 1;
+        
+        &.hide {
+            opacity: 0;
+        }
+    }
+</style>

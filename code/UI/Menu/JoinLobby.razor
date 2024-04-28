@@ -1,0 +1,33 @@
+﻿@namespace Grubs.UI.Menu
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <button class="back-button" @onclick=@(() => OnBack())><i>arrow_back</i>Back</button>
+</root>
+
+@code
+{
+    private TimeUntil TimeUntilShow { get; set; }
+    private bool TransitionOut { get; set; }
+
+    public JoinLobby()
+    {
+        TransitionOut = false;
+        TimeUntilShow = 0.25f;
+    }
+
+    public override void Tick()
+    {
+        var shouldShow = !TransitionOut && TimeUntilShow < 0f;
+        SetClass("hide", !shouldShow);
+    }
+
+    private void OnBack()
+    {
+        TransitionOut = true;
+        Menu.Instance.Return();
+    }
+}

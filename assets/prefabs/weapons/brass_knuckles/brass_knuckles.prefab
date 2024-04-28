@@ -1,0 +1,63 @@
+{
+  "RootObject": {
+    "__guid": "9862f16c-6310-4879-8377-3db65d1734b5",
+    "Name": "brass_knuckles",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "eab2b823-e2e9-405b-8ecc-a7487e88894c",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/brassknuckles/brassknuckles.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.EquipmentComponent",
+        "__guid": "df35392f-77ae-4caf-ab51-b2eeee3864f8",
+        "Data": "resources/equipment/weapons/brass_knuckles.geq",
+        "HoldPose": "Knuckles",
+        "Icon": "models/weapons/brassknuckles/brassknuckles.vmdl.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "eab2b823-e2e9-405b-8ecc-a7487e88894c",
+          "go": "9862f16c-6310-4879-8377-3db65d1734b5",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Brass Knuckles",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.MultiHitMeleeWeaponComponent",
+        "__guid": "e10575e7-d955-4a97-8017-e606359a7b41",
+        "BaseHitDamage": 10,
+        "BaseHitForce": "50,0,25",
+        "CanFireWhileMoving": false,
+        "Cooldown": 2,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "df35392f-77ae-4caf-ab51-b2eeee3864f8",
+          "go": "9862f16c-6310-4879-8377-3db65d1734b5",
+          "component_type": "EquipmentComponent"
+        },
+        "FinalHitForce": "250,0,200",
+        "FinalHitModifier": 10,
+        "FiringType": "Instant",
+        "HitComboModifier": 6,
+        "HitCooldown": 0.3,
+        "HitDistance": 25,
+        "HitOffset": "0,0,-8",
+        "Strikes": 3
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

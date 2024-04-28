@@ -5,63 +5,63 @@ public static class GrubsConfig
 	/// <summary>
 	/// The Grubs gamemode to play.
 	/// </summary>
-	[ConVar.Replicated( "grubs_game" )]
+	[ConVar( "grubs_game" )]
 	public static string Gamemode { get; set; } = "FreeForAll";
 
 	/// <summary>
 	/// The minimum amount of players needed to start the game.
 	/// </summary>
-	[ConVar.Replicated( "minimum_players" )]
+	[ConVar( "minimum_players" )]
 	public static int MinimumPlayers { get; set; } = 2;
 
 	/// <summary>
 	/// If late joiners get a worm spawned in to play with.
 	/// </summary>
-	[ConVar.Replicated( "gr_spawn_late_joiners" )]
+	[ConVar( "gr_spawn_late_joiners" )]
 	public static bool SpawnLateJoiners { get; set; } = false;
 
-	/// <summary>
-	/// The amount of <see cref="Grub"/>s that will be spawned per team.
-	/// </summary>
-	[ConVar.Replicated( "grub_count" ), Change( nameof( OnGrubCountChange ) )]
+	// /// <summary>
+	// /// The amount of <see cref="Grub"/>s that will be spawned per team.
+	// /// </summary>
+	[ConVar( "grub_count" )]
 	public static int GrubCount { get; set; } = 1;
 
-	private static void OnGrubCountChange( int _, int _1 )
-	{
-		if ( Game.LocalPawn is Player player )
-			player.PopulateGrubNames();
-	}
+	// private static void OnGrubCountChange( int _, int _1 )
+	// {
+	// 	if ( Game.LocalPawn is Player player )
+	// 		player.PopulateGrubNames();
+	// }
 
 	/// <summary>
 	/// The max time in seconds that a player has to make their turn.
 	/// </summary>
-	[ConVar.Replicated( "turn_duration" )]
+	[ConVar( "turn_duration" )]
 	public static int TurnDuration { get; set; } = 45;
 
 #if DEBUG
 	/// <summary>
 	/// If bot turns get used up instantly.
 	/// </summary>
-	[ConVar.Server( "gr_bot_instantly_end_turn" )]
+	[ConVar( "gr_bot_instantly_end_turn" )]
 	public static bool InstantlyEndBotTurns { get; set; }
 #endif
 
 	/// <summary>
 	/// Whether or not sudden death is enabled.
 	/// </summary>
-	[ConVar.Replicated( "gr_sd_enabled" )]
+	[ConVar( "gr_sd_enabled" )]
 	public static bool SuddenDeathEnabled { get; set; } = true;
 
 	/// <summary>
 	/// The amount of rounds to be played before Sudden Death begins.
 	/// </summary>
-	[ConVar.Replicated( "gr_sd_delay" )]
+	[ConVar( "gr_sd_delay" )]
 	public static int SuddenDeathDelay { get; set; } = 6;
 
 	/// <summary>
 	/// Should all Grubs have their health set to 1 when Sudden Death begins?
 	/// </summary>
-	[ConVar.Replicated( "gr_sd_onehealth" )]
+	[ConVar( "gr_sd_onehealth" )]
 	public static bool SuddenDeathOneHealth { get; set; } = false;
 
 	public enum SuddenDeathAggressionAmount
@@ -74,92 +74,92 @@ public static class GrubsConfig
 	/// <summary>
 	/// How harshly Sudden Death affects the terrain.
 	/// </summary>
-	[ConVar.Replicated( "gr_sd_aggression" )]
+	[ConVar( "gr_sd_aggression" )]
 	public static SuddenDeathAggressionAmount SuddenDeathAggression { get; set; } = SuddenDeathAggressionAmount.Medium;
 
 	/// <summary>
 	/// Whether or not wind is enabled.
 	/// </summary>
-	[ConVar.Replicated( "wind_enabled" )]
+	[ConVar( "wind_enabled" )]
 	public static bool WindEnabled { get; set; } = true;
 
 	/// <summary>
 	/// The step force of wind.
 	/// </summary>
-	[ConVar.Replicated( "wind_force" )]
+	[ConVar( "wind_force" )]
 	public static float WindForce { get; set; } = 0.1f;
 
 	/// <summary>
 	/// Determines the range of how weak or strong the wind will be each turn.
 	/// </summary>
-	[ConVar.Replicated( "wind_steps" )]
+	[ConVar( "wind_steps" )]
 	public static int WindSteps { get; set; } = 3;
 
 	/// <summary>
 	/// The percent chance that a Weapon Crate will spawn every turn.
 	/// </summary>
-	[ConVar.Replicated( "crate_weapon_chance" )]
+	[ConVar( "crate_weapon_chance" )]
 	public static int WeaponCrateChancePerTurn { get; set; } = 5;
 
 	/// <summary>
 	/// The percent chance that a Tools Crate will spawn every turn.
 	/// </summary>
-	[ConVar.Replicated( "crate_tool_chance" )]
+	[ConVar( "crate_tool_chance" )]
 	public static int ToolCrateChancePerTurn { get; set; } = 5;
 
 	/// <summary>
 	/// The percent chance that a Health Crate will spawn every turn.
 	/// </summary>
-	[ConVar.Replicated( "crate_health_chance" )]
+	[ConVar( "crate_health_chance" )]
 	public static int HealthCrateChancePerTurn { get; set; } = 5;
 
 	/// <summary>
 	/// The percent chance that a barrel will spawn.
 	/// </summary>
-	[ConVar.Replicated( "barrel_chance" )]
+	[ConVar( "barrel_chance" )]
 	public static int BarrelChancePerTurn { get; set; } = 10;
 
 	/// <summary>
 	/// The time in seconds to give <see cref="Grub"/>s after using their turn.
 	/// </summary>
-	[ConVar.Replicated( "movement_grace" )]
+	[ConVar( "movement_grace" )]
 	public static float MovementGracePeriod { get; set; } = 5;
 
 	/// <summary>
 	/// The length of the terrain grid.
 	/// </summary>
-	[ConVar.Replicated( "terrain_length" )]
+	[ConVar( "terrain_length" )]
 	public static int TerrainLength { get; set; } = 2048;
 
 	/// <summary>
 	/// The height of the terrain grid.
 	/// </summary>
-	[ConVar.Replicated( "terrain_height" )]
+	[ConVar( "terrain_height" )]
 	public static int TerrainHeight { get; set; } = 1024;
 
 	/// <summary>
 	/// The zoom amount for the Perlin noise.
 	/// </summary>
-	[ConVar.Replicated( "terrain_noise_zoom" )]
+	[ConVar( "terrain_noise_zoom" )]
 	public static float TerrainNoiseZoom { get; set; } = 2f;
 
 	public enum TerrainEnvironmentType
 	{
 		Sand = 0,
 		Dirt = 1,
-		Cereal = 2,
+		Cereal = 2
 	}
 
 	/// <summary>
 	/// The environment type for the terrain (affects the materials used).
 	/// </summary>
-	[ConVar.Replicated( "terrain_environment_type" )]
+	[ConVar( "terrain_environment_type" )]
 	public static TerrainEnvironmentType WorldTerrainEnvironmentType { get; set; } = TerrainEnvironmentType.Sand;
 
 	public enum TerrainType
 	{
 		Generated = 0,
-		Texture = 1,
+		Texture = 1
 	}
 
 	public enum TerrainTexture
@@ -170,31 +170,31 @@ public static class GrubsConfig
 		Cavern = 3,
 		Bunkers = 4,
 		AICavern = 5,
-		Hightower = 6,
+		Hightower = 6
 	}
 
 	/// <summary>
 	/// The type of terrain to use.
 	/// </summary>
-	[ConVar.Replicated( "terrain_type" )]
+	[ConVar( "terrain_type" )]
 	public static TerrainType WorldTerrainType { get; set; } = TerrainType.Generated;
 
 	/// <summary>
 	/// If texture is selected for TerrainType, TerrainTexture is used for determine which
 	/// prefabricated texture is used to build the terrain.
 	/// </summary>
-	[ConVar.Replicated( "terrain_texture" )]
+	[ConVar( "terrain_texture" )]
 	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Grubs;
 
 	/// <summary>
 	/// The strength of the curves in the terrain's heightmap.
 	/// </summary>
-	[ConVar.Replicated( "terrain_amplitude" )]
+	[ConVar( "terrain_amplitude" )]
 	public static float TerrainAmplitude { get; set; } = 48f;
 
 	/// <summary>
 	/// The frequency of the curves in the terrain's heightmap.
 	/// </summary>
-	[ConVar.Replicated( "terrain_frequency" )]
+	[ConVar( "terrain_frequency" )]
 	public static float TerrainFrequency { get; set; } = 0.5f;
 }

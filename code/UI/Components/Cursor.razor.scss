@@ -1,0 +1,21 @@
+﻿Cursor {
+    position: absolute;
+    cursor: none;
+    z-index: 500;
+    opacity: 1;
+    transition: opacity 125ms ease-out;
+    pointer-events: none;
+    flex-shrink: 1;
+
+    img {
+        position: absolute;
+        height: 64px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        filter: border-wrap(4px, black);
+    }
+
+    &.hide {
+        opacity: 0;
+    }
+}

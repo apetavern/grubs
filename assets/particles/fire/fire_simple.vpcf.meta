@@ -1,0 +1,25 @@
+{
+  "publish": {
+    "Allowed": true,
+    "Enabled": true,
+    "ProjectConfig": {
+      "Title": "Stylized Fire",
+      "Type": "particle",
+      "Org": "apetavern",
+      "Ident": "gr_fire_simple",
+      "Tags": "fire flame smoke embers flipbook animation orange",
+      "Schema": 0,
+      "HasAssets": false,
+      "AssetsPath": null,
+      "Resources": null,
+      "MenuResources": "*",
+      "HasCode": false,
+      "CodePath": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Metadata": {
+        "SingleAssetSource": "particles/fire/fire_simple.vpcf"
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "RootObject": {
+    "__guid": "b2e79968-8253-454a-b90d-f006ee16f064",
+    "Name": "player",
+    "Tags": "player",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "Grubs.Pawn.Player",
+        "__guid": "bc455f5e-d72e-4209-a7a9-a01e6948c92a",
+        "GrubPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/grub/grub.prefab"
+        },
+        "Inventory": {
+          "_type": "component",
+          "component_id": "0f334b1d-9825-4b1d-a8fd-da382d9b5a8f",
+          "go": "b2e79968-8253-454a-b90d-f006ee16f064",
+          "component_type": "PlayerInventory"
+        }
+      },
+      {
+        "__type": "Grubs.Pawn.PlayerInventory",
+        "__guid": "0f334b1d-9825-4b1d-a8fd-da382d9b5a8f",
+        "ActiveSlot": 0,
+        "EquipmentActive": false,
+        "EquipmentPrefabs": [
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/baseball_bat/baseball_bat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/bazooka/bazooka.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/brass_knuckles/brass_knuckles.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/grenade/grenade.prefab"
+          }
+        ],
+        "Player": {
+          "_type": "component",
+          "component_id": "bc455f5e-d72e-4209-a7a9-a01e6948c92a",
+          "go": "b2e79968-8253-454a-b90d-f006ee16f064",
+          "component_type": "Player"
+        }
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "076f0f93-4ff2-48f6-9455-40ae690d7528",
+        "Name": "Screen UI",
+        "Position": "46.65069,40.65072,-50.19597",
+        "Enabled": true,
+        "NetworkMode": 0,
+        "Components": [
+          {
+            "__type": "Sandbox.ScreenPanel",
+            "__guid": "5c34ec8e-0ebb-4e6a-8629-b065785a0065",
+            "AutoScreenScale": true,
+            "Opacity": 1,
+            "Scale": 1,
+            "ZIndex": 100
+          },
+          {
+            "__type": "Grubs.UI.Components.PlayerScreen",
+            "__guid": "30bdc2c2-5f36-4e6d-adf0-368e6259d12c",
+            "Inventory": {
+              "_type": "component",
+              "component_id": "0f334b1d-9825-4b1d-a8fd-da382d9b5a8f",
+              "go": "b2e79968-8253-454a-b90d-f006ee16f064",
+              "component_type": "PlayerInventory"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

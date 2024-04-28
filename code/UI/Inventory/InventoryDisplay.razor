@@ -1,0 +1,53 @@
+@namespace Grubs.UI.Inventory
+
+@using Grubs.Equipment
+@using Grubs.Equipment.Weapons
+@using Grubs.Pawn
+@using Grubs.UI.Components
+@using Sandbox;
+@using Sandbox.UI
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+@if (Inventory is null)
+{
+    return;
+}
+
+<root>
+    @for (var i = 0; i < 6; i++)
+    {
+        <div class="inv-row">
+            @for (var j = 0; j < 4; j++)
+            {
+                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * 6 + j)/>
+            }
+        </div>
+    }
+</root>
+
+@code
+{
+    public PlayerInventory Inventory { get; set; }
+
+    private EquipmentComponent Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
+    private EquipmentComponent Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
+    private EquipmentComponent Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
+    private WeaponComponent CurrentWeapon => Current?.Components.Get<WeaponComponent>();
+    private WeaponComponent NextWeapon => Next?.Components.Get<WeaponComponent>();
+    private WeaponComponent PrevWeapon => Prev?.Components.Get<WeaponComponent>();
+
+    public override void Tick()
+    {
+        SetClass("hide", !Inventory.InventoryOpen);
+        Cursor.Enabled("inv", Inventory.InventoryOpen);
+    }
+
+    protected override int BuildHash()
+    {
+        var cd = CurrentWeapon?.TimeSinceLastUsed + PrevWeapon?.TimeSinceLastUsed + NextWeapon?.TimeSinceLastUsed;
+        return HashCode.Combine(Inventory.EquipmentActive, Inventory.ActiveSlot, cd);
+    }
+}

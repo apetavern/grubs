@@ -1,0 +1,33 @@
+﻿@namespace Grubs.UI.TurnInfo
+
+@using Grubs.Gamemodes
+@using Grubs.Gamemodes.Modes
+@using Sandbox.UI
+@using System
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+@if (FFA is null)
+{
+    return;
+}
+
+<root>
+    <div class="timer">
+        <div class="title">Grubby's Turn</div>
+        <p>@Timer</p>
+    </div>
+</root>
+
+@code
+{
+    public FreeForAllGamemode FFA => Gamemode.FFA;
+    public string Timer => FFA.TimeUntilNextTurn.Relative.CeilToInt().ToString("0");
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Timer);
+    }
+}

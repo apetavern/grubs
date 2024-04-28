@@ -41,3 +41,4 @@ _bakeresourcecache/
 # Allowlist
 !*_dev.vpk
 !models/citizen_clothes/*/*
+.idea

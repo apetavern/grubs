@@ -1,0 +1,96 @@
+@import '../common.scss';
+
+InventoryDisplay {
+    bottom: 50px;
+    right: 100px;
+    width: 400px;
+    height: 600px;
+    position: absolute;
+    font-family: $font-family;
+    font-size: 128px;
+    transition: transform 0.3s;
+    background-color: $hud-bg;
+    border-radius: 32px;
+    flex-direction: column;
+    padding: 12px;
+    justify-content: space-between;
+    pointer-events: all;
+
+    .inv-row {
+        width: 100%;
+        height: 90px;
+    }
+
+    &.hide {
+        transform: translateX(490px);
+        pointer-events: none;
+    }
+
+    //position: absolute;
+    //bottom: 50px;
+    //font-family: Londrina Solid;
+    //color: white;
+    //text-stroke: 4px black;
+    //width: 100%;
+    //transition: transform 0.3s;
+    //
+    //&.hide {
+    //    transform: translateY(300px);
+    //}
+    //
+    //.items {
+    //    align-items: center;
+    //    justify-content: center;
+    //    width: 100%;
+    //    gap: 12px;
+    //}
+    //
+    //.item-container {
+    //    flex-direction: column;
+    //    align-items: center;
+    //    align-self: center;
+    //}
+    //
+    //.item-box {
+    //    background-color: $base;
+    //    border-radius: 15%;
+    //    border-width: 4px;
+    //    border-color: $base-darken;
+    //
+    //    &.secondary {
+    //        border-width: 2px;
+    //    }
+    //
+    //    > inputglyph {
+    //        position: absolute;
+    //        top: 80%;
+    //        left: 29%;
+    //        background-color: $base-darken;
+    //        border-radius: 100%;
+    //        border: 2px $base-darken;
+    //    }
+    //}
+    //
+    //.item-cooldown {
+    //    position: absolute;
+    //    height: 100%;
+    //    border-radius: 15%;
+    //    background-color: rgba(black, 0.5);
+    //}
+    //
+    //.item-image {
+    //    width: 125px;
+    //    background-repeat: no-repeat;
+    //    background-position: center center;
+    //    background-size: cover;
+    //    aspect-ratio: 1;
+    //
+    //    &.secondary {
+    //        width: 75px;
+    //    }
+    //}
+    //
+    //.flex-end {
+    //    align-self: flex-end;
+    //}
+}

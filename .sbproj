@@ -5,16 +5,8 @@
   "Ident": "grubs",
   "Tags": "artillery turnbased pvp strategy multiplayer",
   "Schema": 1,
-  "HasAssets": true,
-  "AssetsPath": "",
-  "Resources": "/data/*\n/fonts/*\n/textures/ui/*.png\n/textures/texturelevels/*.png\n/textures/texturestamps/*.png\n*/airstrike_icon.png\n*/reticle.png\n*/reticle_trans.png\n*.vmdl.png\n*.vmdl_c.png\n*.csgmat\n*.vmat\n*.vtex\n*.sdflayer\n*.vmdl\n*.vanmgrph\n*.dmx\n*.txt\n*.vpcf\n*.tlvl\n*.tsta\n*.scss\n*.png.meta\n*.prefab\n*.shader\n*.vpost\n*.mp3\n*.sound\n*.wav",
-  "MenuResources": "\nmaps/gr_menu.vpk\ntextures/ui/*\ntextures/texturelevels/*.png\nmaterials/sdf/*.sdflayer\nUI/GameMenu/*\nfonts/*\nUI/Styles/*\nUI/MainMenu/WorldScene/*\nmaterials/effects/lightcookies/tree_canopy.vmat\nmodels/citizenworm.vmdl\nmodels/crates/weapons_crate/materials/weaponcrate.vmat\nmodels/crates/tools_crate/materials/toolcrate.vmat\nmodels/menu/materials/tree_01.vmat\nmodels/menu/materials/grassleaves.vmat\nmodels/menu/materials/backdrop_dirt.vmat\nmodels/weapons/airstrikes/materials/plane.vmat\nmodels/weapons/airstrikes/materials/propellor_active.vmat\nmodels/weapons/oildrum/materials/flame_emoji.vmat\nmodels/weapons/oildrum/materials/oildrum.vmat\nmodels/weapons/revolver/materials/sixshooter.vmat\nmodels/weapons/uzi/materials/uzi.vmat\nmodels/weapons/dynamite/materials/dynamite.vmat\nmodels/weapons/shotgun/materials/shotgun_colors.vmat\nmaterials/effects/lightcookies/tree_canopy.vmat_c\nmodels/citizenworm.vmdl_c\nmodels/crates/weapons_crate/materials/weaponcrate.vmat_c\nmodels/crates/tools_crate/materials/toolcrate.vmat_c\nmodels/menu/materials/tree_01.vmat_c\nmodels/menu/materials/grassleaves.vmat_c\nmodels/menu/materials/backdrop_dirt.vmat_c\nmodels/weapons/airstrikes/materials/plane.vmat_c\nmodels/weapons/airstrikes/materials/propellor_active.vmat_c\nmodels/weapons/oildrum/materials/flame_emoji.vmat_c\nmodels/weapons/oildrum/materials/oildrum.vmat_c\nmodels/weapons/revolver/materials/sixshooter.vmat_c\nmodels/weapons/uzi/materials/uzi.vmat_c\nmodels/weapons/dynamite/materials/dynamite.vmat_c\nmodels/weapons/shotgun/materials/shotgun_colors.vmat_c",
-  "HasCode": true,
-  "CodePath": "code",
-  "PackageReferences": [
-    "facepunch.libsdf",
-    "fish.grid_and_astar"
-  ],
+  "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*",
+  "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {
     "MapList": [
@@ -31,7 +23,15 @@
     "Compiler": {
       "RootNamespace": "Grubs",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
-      "NoWarn": "1701;1702;1591;1998"
+      "NoWarn": "1701;1702;1591;1998",
+      "WarningsAsErrors": "",
+      "Whitelist": true,
+      "AssemblyReferences": [],
+      "IgnoreFolders": [
+        "editor",
+        "unittest"
+      ],
+      "DistinctAssemblyReferences": []
     },
     "GameSettings": {
       "grubs_game": {
@@ -539,123 +539,100 @@
     "Description": "Grubs (in development) by Ape Tavern\n\nLeave your feedback @ discord.gg/apetavern\n\nCredits:\nGooman\nTrundler\nMatt944\nShadowBrain\nxezno\nJammie\nmatek\nWillow\nPukes\n\nSpecial thanks for Ziks for 2D SDF Terrain library!",
     "Public": true,
     "ReplaceTags": "",
-    "Physics": {
-      "SubSteps": 1,
-      "TimeScale": 1,
-      "Gravity": "0,0,-800",
-      "AirDensity": 1.2,
-      "SleepingEnabled": true,
-      "SimulationMode": "Continuous",
-      "PositionIterations": 2,
-      "VelocityIterations": 8,
-      "SoftBodyIterations": 1,
-      "SoftBodySubsteps": 1
-    },
-    "Collision": {
-      "Defaults": {
-        "solid": "Collide",
-        "trigger": "Trigger",
-        "ladder": "Ignore",
-        "water": "Trigger",
-        "player": "Unset",
-        "preview": "Ignore"
-      },
-      "Pairs": [
-        {
-          "a": "solid",
-          "b": "solid",
-          "r": "Collide"
-        },
-        {
-          "a": "trigger",
-          "b": "playerclip",
-          "r": "Ignore"
-        },
-        {
-          "a": "trigger",
-          "b": "solid",
-          "r": "Trigger"
-        },
-        {
-          "a": "solid",
-          "b": "trigger",
-          "r": "Collide"
-        },
-        {
-          "a": "playerclip",
-          "b": "solid",
-          "r": "Collide"
-        },
-        {
-          "a": "trigger",
-          "b": "player",
-          "r": "Trigger"
-        }
-      ]
-    },
     "InputSettings": {
       "Actions": [
         {
           "Name": "camera_pan",
           "KeyboardCode": "mouse2",
+          "GamepadCode": "None",
           "GroupName": "Camera"
         },
         {
           "Name": "camera_reset",
           "KeyboardCode": "mouse3",
+          "GamepadCode": "None",
           "GroupName": "Camera"
         },
         {
           "Name": "inventory",
           "KeyboardCode": "q",
+          "GamepadCode": "None",
           "GroupName": "UI"
         },
         {
           "Name": "chat",
           "KeyboardCode": "enter",
+          "GamepadCode": "None",
           "GroupName": "UI"
         },
         {
           "Name": "fire",
           "KeyboardCode": "mouse1",
+          "GamepadCode": "None",
           "GroupName": "Weapon"
         },
         {
           "Name": "forward",
           "KeyboardCode": "w",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "backward",
           "KeyboardCode": "s",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "left",
           "KeyboardCode": "a",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "right",
           "KeyboardCode": "d",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "jump",
           "KeyboardCode": "space",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "backflip",
           "KeyboardCode": "shift",
+          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
           "Name": "voice",
           "KeyboardCode": "v",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "toggle_equipment",
+          "KeyboardCode": "C",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "next_equipment",
+          "KeyboardCode": "E",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "toggle_inventory",
+          "KeyboardCode": "Q",
+          "GamepadCode": "None",
           "GroupName": "Other"
         }
-      ]
+      ],
+      "__guid": "462cd8dc-4078-4db6-9df8-21ff504a1afb"
     },
     "HttpAllowList": null,
     "LaunchConfigs": [
@@ -670,6 +647,8 @@
         "PostLaunchCommand": ""
       }
     ],
-    "TickRate": 50
+    "TickRate": 120,
+    "StartupScene": "scenes/main_menu.scene",
+    "LaunchMode": "Normal"
   }
 }
