@@ -55,6 +55,11 @@ public class EquipmentComponent : Component
 
 	public void Holster()
 	{
+		if ( Grub is not null )
+			GameObject.SetParent( Grub.Player.GameObject );
+
+		Grub = null;
+
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
 		Deployed = false;

@@ -43,7 +43,7 @@ public sealed class PlayerInventory : Component
 			var slotIndex = Equipment.Count - 1;
 
 			equipment.SlotIndex = slotIndex;
-			equipment.Deploy( Player.ActiveGrub! );
+			equipment.Deploy( Player.ActiveGrub );
 			equipment.Holster();
 		}
 	}
@@ -55,68 +55,54 @@ public sealed class PlayerInventory : Component
 		if ( IsProxy )
 			return;
 
-		if ( !Player.IsActive || Gamemode.Current.TurnIsChanging )
-		{
-			if ( EquipmentActive )
-				ToggleEquipment( false, ActiveSlot );
-
-			return;
-		}
-
 		if ( Input.Pressed( "toggle_inventory" ) )
 		{
 			InventoryOpen = !InventoryOpen;
 		}
-
-		if ( Input.Pressed( "toggle_equipment" ) )
-		{
-			ToggleEquipment( !EquipmentActive, ActiveSlot );
-		}
-
-		if ( Input.Pressed( "next_equipment" ) && EquipmentActive )
-		{
-			CycleItems( true );
-		}
-	}
-
-	private void CycleItems( bool forwards )
-	{
-		ToggleEquipment( false, ActiveSlot );
-		CycleSlot( forwards );
-		ToggleEquipment( true, ActiveSlot );
 	}
 
 	public void EquipItem( EquipmentComponent equipment )
 	{
-		ToggleEquipment( false, ActiveSlot );
+		Holster( ActiveSlot );
 		var index = Equipment.IndexOf( equipment );
 		if ( index == -1 )
 			return;
 		ActiveSlot = index;
-		ToggleEquipment( true, ActiveSlot );
+		Equip( ActiveSlot );
 	}
 
 	[Broadcast]
-	public void ToggleEquipment( bool active, int slot )
+	public void Equip( int slot )
 	{
-		EquipmentActive = active;
-		var equipment = GetEquipmentAtSlot( slot );
-
-		if ( equipment is null )
+		if ( Gamemode.FFA.TurnIsChanging )
 			return;
 
-		if ( active )
-			equipment.Deploy( Player.ActiveGrub! );
-		else
-			equipment.Holster();
+		var equipment = GetHolsteredEquipment( slot );
+		if ( equipment is null || !equipment.IsValid() )
+		{
+			Log.Warning( $"Can't equip: nothing at slot {slot} or is null" );
+			return;
+		}
+
+		EquipmentActive = true;
+		equipment.Deploy( Player.ActiveGrub );
+	}
+
+	[Broadcast]
+	public void Holster( int slot )
+	{
+		var equipment = GetActiveEquipment( slot );
+
+		if ( equipment is null || !equipment.IsValid() )
+			return;
+
+		EquipmentActive = false;
+		equipment.Holster();
 	}
 
 	private EquipmentComponent GetActiveEquipment()
 	{
-		if ( !EquipmentActive )
-			return null;
-
-		return GetEquipmentAtSlot( ActiveSlot );
+		return !EquipmentActive ? null : GetActiveEquipment( ActiveSlot );
 	}
 
 	public int GetNextSlot()
@@ -133,9 +119,16 @@ public sealed class PlayerInventory : Component
 		return ActiveSlot - 1;
 	}
 
-	private EquipmentComponent GetEquipmentAtSlot( int slot )
+	private EquipmentComponent GetHolsteredEquipment( int slot )
 	{
-		return Player.ActiveGrub?.GameObject.Components
+		return Player.GameObject.Components
+			.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
+			.FirstOrDefault( x => x.SlotIndex == slot );
+	}
+
+	private EquipmentComponent GetActiveEquipment( int slot )
+	{
+		return Player.ActiveGrub.GameObject.Components
 			.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
 			.FirstOrDefault( x => x.SlotIndex == slot );
 	}

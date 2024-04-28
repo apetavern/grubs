@@ -27,6 +27,11 @@ public sealed class Player : Component
 		SelectedColor = Color.Random.Hex;
 	}
 
+	public void EndTurn()
+	{
+		Inventory.Holster( Inventory.ActiveSlot );
+	}
+
 	public IEnumerable<Grub> GetOwnedGrubs()
 	{
 		return Scene.GetAllComponents<Grub>()
