@@ -1,0 +1,25 @@
+{
+  "RootObject": {
+    "__guid": "6a2c92cf-cc1d-493c-a91d-8eb0dce02dc3",
+    "Name": "dynamite_plunger",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "5d8f4952-5210-4f3e-89f1-d952123d6bf6",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/tools/dynamiteplunger/dynamiteplunger.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

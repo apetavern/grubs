@@ -57,6 +57,9 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "incline", _incline );
 		GrubRenderer.Set( "backflip_charge", Controller.BackflipCharge );
 		GrubRenderer.Set( "hardfall", Controller.IsHardFalling );
+
+		GrubRenderer.Set( "lowhp", Grub.Health.CurrentHealth <= Grub.Health.MaxHealth / 4f );
+		GrubRenderer.Set( "explode", Grub.Health.DeathInvoked );
 	}
 
 	[Broadcast]
