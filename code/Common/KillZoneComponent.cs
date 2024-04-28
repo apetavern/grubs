@@ -8,7 +8,7 @@ public class KillZoneComponent : Component, Component.ITriggerListener
 	public void OnTriggerEnter( Collider other )
 	{
 		if ( other.GameObject.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
-			grub.Health.TakeDamage( 9999, true );
+			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( 9999 ), true );
 	}
 
 	public void OnTriggerExit( Collider other )

@@ -60,6 +60,6 @@ public sealed class Grub : Component, IResolvable
 		if ( grub is null )
 			return;
 
-		grub.Health.TakeDamage( hp );
+		grub.Health.TakeDamage( new GrubsDamageInfo( hp ) );
 	}
 }
