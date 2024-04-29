@@ -11,7 +11,7 @@ public partial class HealthComponent : Component
 
 	[Sync] public float CurrentHealth { get; set; }
 
-	public bool DeathInvoked { get; set; } = false;
+	[Sync] public bool DeathInvoked { get; set; } = false;
 	private Queue<GrubsDamageInfo> DamageQueue { get; set; } = new();
 
 	protected override void OnStart()
@@ -71,16 +71,15 @@ public partial class HealthComponent : Component
 				// This is shit, especially since we want a variety of death animations in the future.
 				// Just don't know where to put this right now.
 				var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/dynamite_plunger.prefab" );
-				var plunger = SceneUtility.GetPrefabScene( prefab ).Clone();
 				var position = grub.Transform.Position;
+				var plunger = SceneUtility.GetPrefabScene( prefab ).Clone();
+				plunger.NetworkSpawn();
 				plunger.Transform.Position = grub.PlayerController.Facing == -1 ? position - new Vector3( 30, 0, 0 ) : position;
 
 				await GameTask.Delay( 750 );
 
 				// Same as above.
-				var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
-				sceneParticles.SetControlPoint( 1, new Vector3( 100f / 2f, 0, 0 ) );
-				Sound.Play( "explosion_short_tail", position );
+				DeathEffects( position );
 
 				ExplosionHelperComponent.Instance.Explode( grub, position, 100f, 25f );
 				plunger?.Destroy();
@@ -96,5 +95,13 @@ public partial class HealthComponent : Component
 		{
 			explosive.Explode();
 		}
+	}
+
+	[Broadcast]
+	private void DeathEffects( Vector3 position )
+	{
+		var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
+		sceneParticles.SetControlPoint( 1, new Vector3( 100f / 2f, 0, 0 ) );
+		Sound.Play( "explosion_short_tail", position );
 	}
 }
