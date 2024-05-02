@@ -108,7 +108,7 @@ PS
 		float2 uvY = vPosition.xz;
 		float2 uvZ = vPosition.xy;
 	
-		float3 triblend = saturate(pow(vNormal, 4));
+		float3 triblend = saturate(pow(abs(vNormal), 4));
 		triblend /= max(dot(triblend, half3(1,1,1)), 0.0001);
 	
 		half3 axisSign = vNormal < 0 ? -1 : 1;
@@ -180,7 +180,7 @@ PS
 		float2 uvY = vPosition.xz;
 		float2 uvZ = vPosition.xy;
 	
-		float3 triblend = saturate( pow( vNormal, 4 ) );
+		float3 triblend = saturate( pow( abs( vNormal ), 4 ) );
 		triblend /= max( dot( triblend, half3( 1, 1, 1 ) ), 0.0001 );
 	
 		half3 axisSign = vNormal < 0 ? -1 : 1;
