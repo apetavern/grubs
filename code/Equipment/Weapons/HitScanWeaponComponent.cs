@@ -69,15 +69,12 @@ public class HitScanWeaponComponent : WeaponComponent
 		grub.Animator.Fire();
 		Sound.Play( TraceSound, startPos );
 
+		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
 		if ( MuzzleParticles is not null )
-		{
-			var transform = new Transform( startPos, grub.Transform.Rotation );
 			ParticleHelperComponent.Instance.PlayInstantaneous( MuzzleParticles, transform );
-		}
 
 		if ( TraceParticles is not null )
 		{
-			var transform = new Transform( startPos, grub.Transform.Rotation );
 			var traceParticles = ParticleHelperComponent.Instance.PlayInstantaneous( TraceParticles, transform );
 			traceParticles.SetControlPoint( 1, endPos );
 		}

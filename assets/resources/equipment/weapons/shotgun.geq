@@ -1,0 +1,11 @@
+{
+  "Name": "Shotgun",
+  "Description": "Can hit the broad side of a barn.",
+  "Icon": "models/weapons/shotgun/shotgun.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/shotgun/shotgun.prefab",
+  "DropChance": 1,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

@@ -49,6 +49,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/uzi/uzi.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/shotgun/shotgun.prefab"
           }
         ],
         "Player": {

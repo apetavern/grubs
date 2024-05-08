@@ -13,9 +13,16 @@ public partial class WeaponComponent : Component
 	[Property] public OnFireDelegate OnFire { get; set; }
 
 	public bool IsFiring { get; set; }
-	public TimeSince TimeSinceLastUsed { get; set; } = 0;
+	public TimeSince TimeSinceLastUsed { get; set; }
 
 	private int _weaponCharge;
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		TimeSinceLastUsed = Cooldown;
+	}
 
 	protected override void OnUpdate()
 	{
@@ -47,6 +54,7 @@ public partial class WeaponComponent : Component
 					FireCharged( _weaponCharge );
 
 				IsFiring = true;
+				TimeSinceLastUsed = 0;
 				_weaponCharge = 0;
 			}
 		}
@@ -59,6 +67,7 @@ public partial class WeaponComponent : Component
 				FireImmediate();
 
 			IsFiring = true;
+			TimeSinceLastUsed = 0;
 		}
 	}
 
