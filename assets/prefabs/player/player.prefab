@@ -41,6 +41,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/grenade/grenade.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/revolver/revolver.prefab"
           }
         ],
         "Player": {

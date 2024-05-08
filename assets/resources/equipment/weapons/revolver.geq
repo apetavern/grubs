@@ -1,0 +1,11 @@
+{
+  "Name": "Revolver",
+  "Description": "Ten paces and turn.",
+  "Icon": "models/weapons/revolver/revolver.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/revolver/revolver.prefab",
+  "DropChance": 0,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}
