@@ -12,8 +12,10 @@ public partial class WeaponComponent : Component
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public OnFireDelegate OnFire { get; set; }
 
-	private int _weaponCharge;
+	public bool IsFiring { get; set; }
 	public TimeSince TimeSinceLastUsed { get; set; } = 0;
+
+	private int _weaponCharge;
 
 	protected override void OnUpdate()
 	{
@@ -43,6 +45,8 @@ public partial class WeaponComponent : Component
 					OnFire.Invoke( _weaponCharge );
 				else
 					FireCharged( _weaponCharge );
+
+				IsFiring = true;
 				_weaponCharge = 0;
 			}
 		}
@@ -53,11 +57,17 @@ public partial class WeaponComponent : Component
 				OnFire.Invoke( 100 );
 			else
 				FireImmediate();
+
+			IsFiring = true;
 		}
 	}
 
 	protected virtual void FireImmediate() { }
 	protected virtual void FireCharged( int charge ) { }
+	protected virtual void FireFinished()
+	{
+		IsFiring = false;
+	}
 
 	protected void OnChargedHeld()
 	{

@@ -1,0 +1,11 @@
+{
+  "Name": "Uzi",
+  "Description": "200% accuracy if you hold it sideways.",
+  "Icon": "models/weapons/uzi/uzi.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/uzi/uzi.prefab",
+  "DropChance": 1,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

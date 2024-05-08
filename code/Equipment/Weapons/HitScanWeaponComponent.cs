@@ -22,7 +22,16 @@ public class HitScanWeaponComponent : WeaponComponent
 	[Property, Category( "Effects" )] public ParticleSystem TraceParticles { get; set; }
 	[Property, Category( "Effects" )] public ParticleSystem MuzzleParticles { get; set; }
 
+	private int _tracesFired = 0;
 	private TimeSince _timeSinceLastTrace = 0;
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		if ( IsFiring && _tracesFired < TraceCount )
+			FireImmediate();
+	}
 
 	protected override void FireImmediate()
 	{
@@ -36,8 +45,19 @@ public class HitScanWeaponComponent : WeaponComponent
 		var pc = grub.PlayerController;
 		var endPos = startPos + pc.Facing * pc.EyeRotation.Forward * TraceDistance + (Vector3.Random * TraceSpread);
 
+		_tracesFired++;
 		_timeSinceLastTrace = 0;
 		FireEffects( startPos, endPos );
+
+		if ( _tracesFired >= TraceCount )
+			FireFinished();
+	}
+
+	protected override void FireFinished()
+	{
+		base.FireFinished();
+
+		_tracesFired = 0;
 	}
 
 	[Broadcast]
