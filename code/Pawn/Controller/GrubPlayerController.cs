@@ -1,4 +1,5 @@
-﻿using Grubs.Gamemodes;
+﻿using Grubs.Equipment.Weapons;
+using Grubs.Gamemodes;
 
 namespace Grubs.Pawn.Controller;
 
@@ -11,7 +12,7 @@ public sealed partial class GrubPlayerController : Component
 	[Property] public required Grub Grub { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
 
-	[Property] public Vector3 Gravity { get; set; } = new( 0, 0, 800 );
+	[Property] public Vector3 Gravity { get; set; } = new(0, 0, 800);
 	[Property] public float WishSpeed { get; set; } = 80f;
 
 	public float MoveInput => ShouldAcceptInput() ? Input.AnalogMove.y : 0f;
@@ -103,7 +104,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateJump()
 	{
-		if ( IsChargingBackflip || !IsGrounded || !ShouldAcceptInput() )
+		if ( IsChargingBackflip || !IsGrounded || !ShouldAcceptMoveInput() )
 			return;
 
 		if ( Input.Pressed( "jump" ) )
@@ -124,7 +125,7 @@ public sealed partial class GrubPlayerController : Component
 		if ( !Input.Down( "backflip" ) && IsChargingBackflip )
 			DoBackflip();
 
-		if ( Input.Down( "backflip" ) && IsGrounded && ShouldAcceptInput() )
+		if ( Input.Down( "backflip" ) && IsGrounded && ShouldAcceptMoveInput() )
 		{
 			IsChargingBackflip = true;
 			BackflipCharge += 0.01f;
@@ -144,10 +145,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private Vector3 GetWishVelocity()
 	{
-		if ( IsProxy || Grub.Player is null )
-			return 0f;
-
-		if ( Grub.Player.ActiveGrub != Grub )
+		if ( !ShouldAcceptMoveInput() )
 			return 0f;
 
 		var result = new Vector3().WithX( -MoveInput );
@@ -164,6 +162,19 @@ public sealed partial class GrubPlayerController : Component
 	public bool ShouldShowWeapon()
 	{
 		return Velocity.IsNearlyZero( 2.5f ) && IsGrounded && !IsChargingBackflip;
+	}
+
+	/// <summary>
+	/// Return
+	/// </summary>
+	public bool ShouldAcceptMoveInput()
+	{
+		var equipment = Grub.ActiveEquipment;
+		if ( equipment is null )
+			return ShouldAcceptInput();
+		if ( !equipment.Components.TryGet( out WeaponComponent weapon ) )
+			return ShouldAcceptInput();
+		return ShouldAcceptInput() && !weapon.IsFiring;
 	}
 
 	public bool ShouldAcceptInput()
