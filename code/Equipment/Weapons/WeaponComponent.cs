@@ -48,12 +48,13 @@ public partial class WeaponComponent : Component
 
 			if ( Input.Released( "fire" ) )
 			{
+				IsFiring = true;
+
 				if ( OnFire is not null )
 					OnFire.Invoke( _weaponCharge );
 				else
 					FireCharged( _weaponCharge );
 
-				IsFiring = true;
 				TimeSinceLastUsed = 0;
 				_weaponCharge = 0;
 			}
@@ -61,12 +62,13 @@ public partial class WeaponComponent : Component
 
 		if ( Input.Pressed( "fire" ) )
 		{
+			IsFiring = true;
+
 			if ( OnFire is not null )
 				OnFire.Invoke( 100 );
 			else
 				FireImmediate();
 
-			IsFiring = true;
 			TimeSinceLastUsed = 0;
 		}
 	}

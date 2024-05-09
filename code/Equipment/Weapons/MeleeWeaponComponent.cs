@@ -23,6 +23,8 @@ public class MeleeWeaponComponent : WeaponComponent
 
 		var ray = new Ray( grub.Transform.Position + Vector3.Up * 24f + HitOffset, pc.Facing * pc.EyeRotation.Forward );
 		HitEffects( ray );
+
+		FireFinished();
 	}
 
 	[Broadcast]

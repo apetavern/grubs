@@ -71,7 +71,10 @@ public class HitScanWeaponComponent : WeaponComponent
 
 		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
 		if ( MuzzleParticles is not null )
-			ParticleHelperComponent.Instance.PlayInstantaneous( MuzzleParticles, transform );
+		{
+			var muzzle = Equipment.Model.GetAttachment( "muzzle" );
+			ParticleHelperComponent.Instance.PlayInstantaneous( MuzzleParticles, muzzle ?? transform );
+		}
 
 		if ( TraceParticles is not null )
 		{

@@ -88,6 +88,7 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 			_currentStrikeCount = 1;
 			TimeSinceLastUsed = 0f;
 
+			FireFinished();
 			return;
 		}
 
