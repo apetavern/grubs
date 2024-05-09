@@ -43,7 +43,7 @@ public class HitScanWeaponComponent : WeaponComponent
 
 		var startPos = GetStartPosition();
 		var pc = grub.PlayerController;
-		var endPos = startPos + pc.Facing * pc.EyeRotation.Forward * TraceDistance + (Vector3.Random * TraceSpread);
+		var endPos = startPos + pc.Facing * pc.EyeRotation.Forward * TraceDistance + Vector3.Random * TraceSpread;
 
 		_tracesFired++;
 		_timeSinceLastTrace = 0;
@@ -76,21 +76,18 @@ public class HitScanWeaponComponent : WeaponComponent
 			ParticleHelperComponent.Instance.PlayInstantaneous( MuzzleParticles, muzzle ?? transform );
 		}
 
-		if ( TraceParticles is not null )
-		{
-			var traceParticles = ParticleHelperComponent.Instance.PlayInstantaneous( TraceParticles, transform );
-			traceParticles.SetControlPoint( 1, endPos );
-		}
-
 		var tr = Scene.Trace.Ray( startPos, endPos )
+			.WithAnyTags( "solid", "player" )
 			.WithoutTags( "dead" )
 			.IgnoreGameObjectHierarchy( Equipment.Grub.GameObject );
 
 		if ( PenetrateWorld )
 		{
 			tr = tr.WithoutTags( "solid" );
-			GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ), new Vector2( endPos.x, endPos.z ), ExplosionRadius, 1 );
-			GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ), new Vector2( endPos.x, endPos.z ), ExplosionRadius + 8f );
+			GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
+				new Vector2( endPos.x, endPos.z ), ExplosionRadius, 1 );
+			GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ), new Vector2( endPos.x, endPos.z ),
+				ExplosionRadius + 8f );
 		}
 
 		if ( PenetrateTargets )
@@ -107,6 +104,13 @@ public class HitScanWeaponComponent : WeaponComponent
 
 	private bool HandleTraceHit( SceneTraceResult tr )
 	{
+		if ( TraceParticles is not null )
+		{
+			var transform = new Transform( tr.StartPosition );
+			var traceParticles = ParticleHelperComponent.Instance.PlayInstantaneous( TraceParticles, transform );
+			traceParticles.SetControlPoint( 1, tr.EndPosition );
+		}
+
 		if ( !tr.Hit )
 			return false;
 
