@@ -1,0 +1,11 @@
+{
+  "Name": "Minigun",
+  "Description": "Not guaranteed to be mini.",
+  "Icon": "models/weapons/minigun/minigun.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/minigun/minigun.prefab",
+  "DropChance": 1,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

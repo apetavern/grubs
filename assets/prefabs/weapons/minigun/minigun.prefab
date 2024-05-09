@@ -1,0 +1,69 @@
+{
+  "RootObject": {
+    "__guid": "c419b745-35a8-4a7b-9d78-823d114a11fe",
+    "Flags": 0,
+    "Name": "minigun",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Equipment.EquipmentComponent",
+        "__guid": "0cd734fc-8a54-47b1-b5c6-7bd383b8c1e3",
+        "Data": "resources/equipment/weapons/minigun.geq",
+        "HoldPose": "Minigun",
+        "Icon": "models/weapons/minigun/minigun.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "cce66982-f457-41d0-bfa2-97e0ca9ce449",
+          "go": "c419b745-35a8-4a7b-9d78-823d114a11fe",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Minigun",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "cce66982-f457-41d0-bfa2-97e0ca9ce449",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/minigun/minigun.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.HitScanWeaponComponent",
+        "__guid": "e040db1e-a75e-46f2-9ca6-f2a315eaa355",
+        "CanFireWhileMoving": false,
+        "Cooldown": 3,
+        "Damage": 3,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "0cd734fc-8a54-47b1-b5c6-7bd383b8c1e3",
+          "go": "c419b745-35a8-4a7b-9d78-823d114a11fe",
+          "component_type": "EquipmentComponent"
+        },
+        "ExplosionDamage": 0,
+        "ExplosionRadius": 10,
+        "FiringType": "Instant",
+        "HitForce": "100,0,15",
+        "MuzzleParticles": "particles/muzzleflash/grubs_muzzleflash.vpcf",
+        "PenetrateTargets": false,
+        "PenetrateWorld": false,
+        "TraceCount": 30,
+        "TraceDelay": 0.06,
+        "TraceDistance": 5000,
+        "TraceParticles": "particles/guntrace/guntrace.vpcf",
+        "TraceSound": "sounds/weapons/minigun/minigun_shot.sound",
+        "TraceSpread": 450
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
