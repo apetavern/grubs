@@ -1,0 +1,11 @@
+{
+  "Name": "Gibgun",
+  "Description": "Alex\u0027s... instagrub?",
+  "Icon": "models/weapons/railgun/railgun.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/gibgun/gibgun.prefab",
+  "DropChance": 1,
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

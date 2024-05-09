@@ -53,6 +53,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/shotgun/shotgun.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/gibgun/gibgun.prefab"
           }
         ],
         "Player": {
