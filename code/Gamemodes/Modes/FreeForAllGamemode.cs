@@ -91,6 +91,16 @@ public sealed class FreeForAllGamemode : Gamemode
 		}
 	}
 
+	public void UseTurn( bool giveMovementGrace = false )
+	{
+		if ( giveMovementGrace )
+			TimeUntilNextTurn = GrubsConfig.MovementGracePeriod;
+		else
+		{
+			_nextTurnTask ??= NextTurn();
+		}
+	}
+
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;

@@ -1,4 +1,5 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Equipment.Weapons;
+using Grubs.Pawn;
 
 namespace Grubs.Equipment;
 
@@ -57,6 +58,9 @@ public class EquipmentComponent : Component
 	{
 		if ( Grub is not null )
 			GameObject.SetParent( Grub.Player.GameObject );
+
+		if ( Components.TryGet( out WeaponComponent weapon ) )
+			weapon.TimesUsed = 0;
 
 		Grub = null;
 

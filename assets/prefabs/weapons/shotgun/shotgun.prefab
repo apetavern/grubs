@@ -1,6 +1,7 @@
 {
   "RootObject": {
-    "__guid": "b15f1012-2071-480e-b032-9e60fdc65fa3",
+    "__guid": "2e8308a0-3f09-48e1-85d9-c1ce2737d2b0",
+    "Flags": 0,
     "Name": "shotgun",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,14 +9,14 @@
     "Components": [
       {
         "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "b17519e0-5a6c-465a-9e32-785f0a6fdd27",
+        "__guid": "13d5b09c-a831-42e2-a880-8460a981f232",
         "Data": "resources/equipment/weapons/shotgun.geq",
         "HoldPose": "Shotgun",
         "Icon": "models/weapons/shotgun/shotgun.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "996d0ca2-255e-4182-989e-49247baa54fb",
-          "go": "b15f1012-2071-480e-b032-9e60fdc65fa3",
+          "component_id": "02a3f2de-3147-468f-8c15-d99953512103",
+          "go": "2e8308a0-3f09-48e1-85d9-c1ce2737d2b0",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Shotgun",
@@ -23,7 +24,7 @@
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "996d0ca2-255e-4182-989e-49247baa54fb",
+        "__guid": "02a3f2de-3147-468f-8c15-d99953512103",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/shotgun/shotgun.vmdl",
@@ -32,20 +33,21 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.HitScanWeaponComponent",
-        "__guid": "886dc641-e158-4031-a742-e1001397a4e4",
+        "__guid": "647fadaf-e025-443c-9be9-0b91f3d6b60d",
         "CanFireWhileMoving": false,
-        "Cooldown": 3,
+        "Cooldown": 1.5,
         "Damage": 5,
         "Equipment": {
           "_type": "component",
-          "component_id": "b17519e0-5a6c-465a-9e32-785f0a6fdd27",
-          "go": "b15f1012-2071-480e-b032-9e60fdc65fa3",
+          "component_id": "13d5b09c-a831-42e2-a880-8460a981f232",
+          "go": "2e8308a0-3f09-48e1-85d9-c1ce2737d2b0",
           "component_type": "EquipmentComponent"
         },
         "ExplosionDamage": 0,
         "ExplosionRadius": 15,
         "FiringType": "Instant",
         "HitForce": "100,0,1",
+        "MaxUses": 2,
         "MuzzleParticles": "particles/muzzleflash/grubs_muzzleflash.vpcf",
         "PenetrateTargets": false,
         "PenetrateWorld": false,

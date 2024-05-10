@@ -63,6 +63,9 @@ public sealed class PlayerInventory : Component
 
 	public void EquipItem( EquipmentComponent equipment )
 	{
+		if ( Player.HasFiredThisTurn )
+			return;
+
 		Holster( ActiveSlot );
 		var index = Equipment.IndexOf( equipment );
 		if ( index == -1 )

@@ -11,6 +11,7 @@ public sealed class Player : Component
 	public bool ShouldHaveTurn => GameObject.IsValid() && !IsDead();
 	public Grub ActiveGrub { get; set; }
 
+	public bool HasFiredThisTurn { get; set; }
 
 	[Sync] public string SelectedColor { get; set; } = "";
 
@@ -30,6 +31,7 @@ public sealed class Player : Component
 	public void EndTurn()
 	{
 		Inventory.Holster( Inventory.ActiveSlot );
+		HasFiredThisTurn = false;
 	}
 
 	public IEnumerable<Grub> GetOwnedGrubs()

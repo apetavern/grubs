@@ -24,7 +24,7 @@
 @code
 {
     public FreeForAllGamemode FFA => Gamemode.FFA;
-    public string Timer => FFA.TimeUntilNextTurn.Relative.CeilToInt().ToString("0");
+    public string Timer => FFA.TimeUntilNextTurn.Relative.CeilToInt().Clamp(0, int.MaxValue).ToString("0");
 
     protected override int BuildHash()
     {
