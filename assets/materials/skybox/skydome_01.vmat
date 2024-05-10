@@ -1,0 +1,18 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_skydome.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+
+	g_flFlowSpeed "0.500"
+	g_flFlowStrength "0.250"
+	g_vWind "[1.000 1.000 0.000]"
+	SkyTexture "textures/hdr/fs002_day_eqirect.exr"
+	SkyTexture_0 "textures/hdr/fs002_day_eqirect.exr"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+}

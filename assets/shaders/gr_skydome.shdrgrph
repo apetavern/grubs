@@ -1,0 +1,552 @@
+{
+  "Model": null,
+  "Description": "",
+  "BlendMode": "Opaque",
+  "nodes": [
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "-176,-192",
+      "Albedo": {
+        "Identifier": "27",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TransformNormal",
+      "InputSpace": "Tangent",
+      "OutputSpace": "Tangent",
+      "DecodeNormal": false,
+      "Identifier": "1",
+      "Position": "-2736,-336",
+      "Input": {
+        "Identifier": "40",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "2",
+      "Position": "-1808,-272",
+      "A": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "224,512",
+      "Color": "Yellow",
+      "Title": "Texture Inputs",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "3",
+      "Position": "-1184,-336"
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "4",
+      "Position": "-2528,-336",
+      "Input": {
+        "Identifier": "1",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Frac",
+      "Identifier": "5",
+      "Position": "-2272,-16",
+      "Input": {
+        "Identifier": "41",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.25,
+      "Name": "Flow Strength",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "6",
+      "Position": "-2320,-176"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "7",
+      "Position": "-1792,-32",
+      "A": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "14",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "590,208",
+      "Color": "Red",
+      "Title": "Phase 1",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "8",
+      "Position": "-2720,-80"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "9",
+      "Position": "-2704,-16"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "10",
+      "Position": "-2080,-272",
+      "A": {
+        "Identifier": "11",
+        "Output": "Vector"
+      },
+      "B": {
+        "Identifier": "6",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CombineVector",
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "11",
+      "Position": "-2320,-336",
+      "X": {
+        "Identifier": "4",
+        "Output": "X"
+      },
+      "Y": {
+        "Identifier": "4",
+        "Output": "Y"
+      }
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "12",
+      "Position": "-1664,-144"
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "574,226",
+      "Color": "Green",
+      "Title": "Phase 2",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "13",
+      "Position": "-2480,144"
+    },
+    {
+      "_class": "Frac",
+      "Identifier": "14",
+      "Position": "-2048,208",
+      "Input": {
+        "Identifier": "15",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "15",
+      "Position": "-2208,208",
+      "A": {
+        "Identifier": "41",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "19",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "16",
+      "Position": "-1376,-32",
+      "A": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "12",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "17",
+      "Position": "-1376,-272",
+      "A": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "12",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "734,290",
+      "Color": "Blue",
+      "Title": "Lerp Mask",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "18",
+      "Position": "-1712,224"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.5,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "19",
+      "Position": "-2448,272"
+    },
+    {
+      "_class": "Subtract",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "20",
+      "Position": "-1248,304",
+      "A": {
+        "Identifier": "21",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "26",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "21",
+      "Position": "-1456,304",
+      "A": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "25",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/simple/simple_tile_color.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "SkyTexture2",
+        "Default": "1,1,1,1",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "22",
+      "Position": "-1152,-32",
+      "Coords": {
+        "Identifier": "16",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/simple/simple_tile_color.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "SkyTexture1",
+        "Default": "1,1,1,1",
+        "SrgbRead": true,
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "23",
+      "Position": "-1152,-272",
+      "Coords": {
+        "Identifier": "17",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Abs",
+      "Identifier": "24",
+      "Position": "-1120,304",
+      "Input": {
+        "Identifier": "20",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 2,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "25",
+      "Position": "-1680,400"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "26",
+      "Position": "-1440,432"
+    },
+    {
+      "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "27",
+      "Position": "-848,-192",
+      "A": {
+        "Identifier": "23",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "22",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "24",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "2096,954",
+      "Color": "Green",
+      "Title": "FlowMap",
+      "Description": "",
+      "Layer": 2,
+      "Identifier": "28",
+      "Position": "-2752,-416"
+    },
+    {
+      "_class": "Float3",
+      "Min": "0,0,0",
+      "Max": "1,1,1",
+      "Value": "0,-1,0",
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "29",
+      "Position": "-4896,-352"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "30",
+      "Position": "-4896,-208"
+    },
+    {
+      "_class": "CombineVector",
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "31",
+      "Position": "-4640,-336",
+      "X": {
+        "Identifier": "29",
+        "Output": "X"
+      },
+      "Y": {
+        "Identifier": "29",
+        "Output": "Y"
+      },
+      "Z": {
+        "Identifier": "29",
+        "Output": "Z"
+      },
+      "W": {
+        "Identifier": "30",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float3",
+      "Min": "0,0,0",
+      "Max": "1,1,1",
+      "Value": "1,1,0",
+      "Name": "Wind",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "32",
+      "Position": "-4640,-192"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "33",
+      "Position": "-4416,-336",
+      "A": {
+        "Identifier": "31",
+        "Output": "Vector"
+      },
+      "B": {
+        "Identifier": "32",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TransformNormal",
+      "InputSpace": "World",
+      "OutputSpace": "Tangent",
+      "DecodeNormal": true,
+      "Identifier": "34",
+      "Position": "-4304,-336",
+      "Input": {
+        "Identifier": "33",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "35",
+      "Position": "-4064,-336",
+      "Input": {
+        "Identifier": "34",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CombineVector",
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "36",
+      "Position": "-3872,-336",
+      "X": {
+        "Identifier": "35",
+        "Output": "X"
+      },
+      "Y": {
+        "Identifier": "35",
+        "Output": "Y"
+      }
+    },
+    {
+      "_class": "Float2",
+      "Min": "0,0",
+      "Max": "1,1",
+      "Value": "1,-1",
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "37",
+      "Position": "-3872,-192"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "38",
+      "Position": "-3600,-336",
+      "A": {
+        "Identifier": "36",
+        "Output": "Vector"
+      },
+      "B": {
+        "Identifier": "37",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.5,
+      "Name": "Flow Speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "39",
+      "Position": "-3472,-224"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "40",
+      "Position": "-3264,-336",
+      "A": {
+        "Identifier": "38",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "39",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "41",
+      "Position": "-2448,-16",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "42",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.1,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "42",
+      "Position": "-2704,48"
+    }
+  ]
+}
