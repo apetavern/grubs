@@ -1,58 +1,67 @@
 {
   "RootObject": {
-    "Id": "b40b2af3-86d0-4cd3-bf8a-a85a59e13c7c",
+    "__guid": "205ff50a-913f-4be9-a98b-1d6414a8a38a",
+    "Flags": 0,
     "Name": "bazooka_shell",
+    "Position": "0,0,32",
+    "Tags": "projectile",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "SkinnedModelRenderer",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "e6047999-2a4d-45c1-9c46-c4a71e8e4831",
         "__enabled": false,
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/weapons/shell/shell.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "HighlightOutline",
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "5ae318b2-3a71-46c6-aa0d-cef480bebdce",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
-        "Material": null,
         "ObscuredColor": "0,0,0,0.4",
         "Width": 0.25
       },
       {
-        "__type": "ArcProjectileComponent",
+        "__type": "Grubs.Equipment.Weapons.ArcProjectileComponent",
+        "__guid": "04ed09a8-d699-4e37-b4d4-512dd9438814",
         "Explosive": {
           "_type": "component",
-          "go": "b40b2af3-86d0-4cd3-bf8a-a85a59e13c7c",
+          "component_id": "1d9f5f90-0ee9-409a-9471-851d8a398527",
+          "go": "205ff50a-913f-4be9-a98b-1d6414a8a38a",
           "component_type": "ExplosiveProjectileComponent"
         },
         "MaxBounces": 0,
         "Model": {
           "_type": "component",
-          "go": "b40b2af3-86d0-4cd3-bf8a-a85a59e13c7c",
+          "component_id": "e6047999-2a4d-45c1-9c46-c4a71e8e4831",
+          "go": "205ff50a-913f-4be9-a98b-1d6414a8a38a",
           "component_type": "SkinnedModelRenderer"
         },
         "ProjectileSpeed": 35,
         "ShouldBounce": false
       },
       {
-        "__type": "ExplosiveProjectileComponent",
+        "__type": "Grubs.Equipment.Weapons.ExplosiveProjectileComponent",
+        "__guid": "1d9f5f90-0ee9-409a-9471-851d8a398527",
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
+        "ExplodeOnDeath": true,
         "ExplosionDamage": 30,
         "ExplosionRadius": 100,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
         "Particles": "particles/explosion/grubs_explosion_base.vpcf"
       },
       {
-        "__type": "HealthComponent",
+        "__type": "Grubs.Common.HealthComponent",
+        "__guid": "b50d26cf-98a3-495f-bff5-211940d2f271",
         "MaxHealth": 15
       }
     ],
@@ -61,5 +70,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
