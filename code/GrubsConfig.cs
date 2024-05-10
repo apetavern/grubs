@@ -197,4 +197,22 @@ public static class GrubsConfig
 	/// </summary>
 	[ConVar( "terrain_frequency" )]
 	public static float TerrainFrequency { get; set; } = 0.5f;
+
+	public static readonly List<string> PresetGrubNames = new()
+	{
+		"Froggy",
+		"Balls",
+		"Boggy",
+		"Cammy",
+		"Gibby",
+		"Jaspy",
+		"Ziks",
+		"Wilson",
+		"Winky",
+		"Panini",
+		"Perky",
+		"Johnson",
+		"Brie",
+		"Scotty"
+	};
 }

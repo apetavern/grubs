@@ -30,6 +30,8 @@ public sealed class Grub : Component, IResolvable
 	{
 		base.OnStart();
 
+		Name = Random.Shared.FromList( GrubsConfig.PresetGrubNames );
+
 		if ( !IsProxy )
 			InitializeLocal();
 	}
