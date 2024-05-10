@@ -116,7 +116,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateBackflip()
 	{
-		if ( !IsGrounded )
+		if ( !IsGrounded || !ShouldAcceptInput() )
 		{
 			IsChargingBackflip = false;
 			BackflipCharge = 0f;
@@ -128,7 +128,7 @@ public sealed partial class GrubPlayerController : Component
 		if ( Input.Down( "backflip" ) && IsGrounded && ShouldAcceptMoveInput() )
 		{
 			IsChargingBackflip = true;
-			BackflipCharge += 0.01f;
+			BackflipCharge += 0.02f;
 			BackflipCharge = BackflipCharge.Clamp( 0f, 1f );
 		}
 	}
@@ -136,7 +136,7 @@ public sealed partial class GrubPlayerController : Component
 	private void DoBackflip()
 	{
 		CharacterController.Velocity =
-			new Vector3( -Facing * (50f + 75f * BackflipCharge), 0f, 150f + 220f * BackflipCharge );
+			new Vector3( -Facing * (25f + 75f * BackflipCharge), 0f, 200f + 220f * BackflipCharge );
 		CharacterController.ReleaseFromGround();
 
 		IsChargingBackflip = false;
@@ -145,7 +145,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private Vector3 GetWishVelocity()
 	{
-		if ( !ShouldAcceptMoveInput() )
+		if ( !ShouldAcceptMoveInput() || IsChargingBackflip )
 			return 0f;
 
 		var result = new Vector3().WithX( -MoveInput );
