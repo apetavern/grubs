@@ -84,10 +84,14 @@ public class HitScanWeaponComponent : WeaponComponent
 		if ( PenetrateWorld )
 		{
 			tr = tr.WithoutTags( "solid" );
-			GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
-				new Vector2( endPos.x, endPos.z ), ExplosionRadius, 1 );
-			GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ), new Vector2( endPos.x, endPos.z ),
-				ExplosionRadius + 8f );
+			using ( Rpc.FilterInclude( c => c.IsHost ) )
+			{
+				GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
+					new Vector2( endPos.x, endPos.z ), ExplosionRadius, 1 );
+				GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
+					new Vector2( endPos.x, endPos.z ),
+					ExplosionRadius + 8f );
+			}
 		}
 
 		if ( PenetrateTargets )
