@@ -92,7 +92,8 @@ public partial class WeaponComponent : Component
 
 		if ( TimesUsed >= MaxUses )
 		{
-			Gamemode.FFA.UseTurn( true );
+			using ( Rpc.FilterInclude( c => c.IsHost ) )
+				Gamemode.FFA.UseTurn( true );
 			if ( Equipment.Grub is { } grub )
 				grub.Player.HasFiredThisTurn = true;
 		}

@@ -91,6 +91,7 @@ public sealed class FreeForAllGamemode : Gamemode
 		}
 	}
 
+	[Broadcast]
 	public void UseTurn( bool giveMovementGrace = false )
 	{
 		if ( giveMovementGrace )
@@ -105,8 +106,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		TurnIsChanging = true;
 
-		var player = ActivePlayerId.ToComponent<Player>();
-		player?.EndTurn();
+		EndTurn();
 
 		await Resolution.UntilWorldResolved( 30 );
 
@@ -183,5 +183,12 @@ public sealed class FreeForAllGamemode : Gamemode
 			return;
 
 		player.ActiveGrub = grub;
+	}
+
+	[Broadcast]
+	public void EndTurn()
+	{
+		var player = ActivePlayerId.ToComponent<Player>();
+		player?.EndTurn();
 	}
 }
