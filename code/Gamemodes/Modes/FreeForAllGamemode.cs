@@ -22,9 +22,8 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		State = GameState.Menu;
 
-		if ( Connection.Local == Connection.Host )
+		if ( Networking.IsHost )
 		{
-			GrubsTerrain.Instance.Network.TakeOwnership();
 			GrubsTerrain.Instance.Init();
 		}
 	}

@@ -3,17 +3,21 @@
   "GameObjects": [
     {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
+      "Flags": 0,
       "Name": "Static",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Children": [
         {
           "__guid": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
+          "Flags": 0,
           "Name": "Water",
           "Position": "316.0363,4234.852,0",
           "Scale": "200,200,0",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -48,12 +52,14 @@
         },
         {
           "__guid": "b817c40d-8437-4a22-acec-35f71c7f7ae3",
+          "Flags": 0,
           "Name": "Sun",
           "Position": "288.8641,-765.1482,-163.5517",
           "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
           "Tags": "light_directional,light",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.DirectionalLight",
@@ -70,12 +76,14 @@
     },
     {
       "__guid": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
+      "Flags": 0,
       "Name": "World",
       "Position": "-0.00009155273,512,149.2906",
       "Rotation": "0,0,-0.7071068,-0.7071068",
       "Tags": "solid",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Helpers.ExplosionHelperComponent",
@@ -89,10 +97,12 @@
     },
     {
       "__guid": "9a1c6253-0abb-4443-85b2-378108afb7b2",
+      "Flags": 0,
       "Name": "Gamemode",
       "Position": "-129.7132,-113.9731,554.4797",
       "Enabled": true,
       "NetworkMode": 1,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Gamemodes.Modes.FreeForAllGamemode",
@@ -103,11 +113,13 @@
     },
     {
       "__guid": "08a72929-c2dd-4da0-b84d-fdca3b287389",
+      "Flags": 0,
       "Name": "Terrain",
       "Position": "0,512,64",
       "Tags": "solid",
       "Enabled": true,
       "NetworkMode": 1,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Terrain.GrubsTerrain",
@@ -133,12 +145,14 @@
     },
     {
       "__guid": "5a67629e-9c73-4752-be7a-91dfd0b40e8d",
+      "Flags": 0,
       "Name": "Camera",
       "Position": "-322.7331,181.9972,221.4703",
       "Rotation": "0.00000004112413,0.0000000009752696,0.7071068,0.7071068",
       "Tags": "maincamera",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -169,9 +183,11 @@
     },
     {
       "__guid": "96d84131-aa4c-4065-b484-68daad9a9384",
+      "Flags": 0,
       "Name": "Map",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
@@ -184,17 +200,21 @@
     },
     {
       "__guid": "18d67b0f-c777-48d1-ad2e-d002f58bd055",
+      "Flags": 0,
       "Name": "Network",
       "Position": "-1098.61,512,191.4738",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Children": [
         {
           "__guid": "17e17813-45ef-4835-8195-d968524b4ba7",
+          "Flags": 0,
           "Name": "Network",
           "Position": "607.9057,-129.2016,57.7177",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Grubs.Helpers.NetHelper",
@@ -208,10 +228,12 @@
         },
         {
           "__guid": "504b9b94-a176-4ef2-8d95-d6a747a75503",
+          "Flags": 0,
           "Name": "Spawn",
           "Position": "1034.61,0,57.7177",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.SpawnPoint",
@@ -224,10 +246,12 @@
     },
     {
       "__guid": "7d39675e-085e-40cc-8a1e-e09c2113f9ee",
+      "Flags": 0,
       "Name": "Screen",
       "Position": "-129.7132,-113.9731,554.4797",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.ScreenPanel",
@@ -246,9 +270,9 @@
   ],
   "SceneProperties": {
     "FixedUpdateFrequency": 50,
-    "Lerping": true,
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
@@ -267,7 +291,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-04-20T19:01:56.8618392-05:00",
+  "LastSaved": "2024-05-09T23:29:01.6777927-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

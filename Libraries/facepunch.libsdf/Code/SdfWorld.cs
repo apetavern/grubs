@@ -596,8 +596,8 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 	private void AssertCanModify()
 	{
-		Assert.True( Network.IsOwner || _receivingModifications,
-			"Can only modify host-created SDF Worlds on the host." );
+		Assert.True( !IsProxy || _receivingModifications,
+			"Can only modify host-created SDF Worlds on the ." );
 	}
 
 	internal void ChunkMeshUpdated( TChunk chunk, bool removed )
