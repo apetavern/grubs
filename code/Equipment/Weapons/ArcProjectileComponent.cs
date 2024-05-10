@@ -40,7 +40,11 @@ public class ArcProjectileComponent : ProjectileComponent
 
 		secondUpdate = true;
 
-		_alpha += Time.Delta * ProjectileSpeed;
+		// We want to evenly increase our alpha based on how many updates we have.
+		// (if Time.Delta * ProjectileSpeed = 0.7, we want an even two 0.5 lerps, not 0.7 -> 0.3
+		var wholeIterations = MathF.Floor( 1f / (Time.Delta * ProjectileSpeed) ) + 1;
+		Log.Info( 1 / wholeIterations );
+		_alpha += 1 / wholeIterations;
 
 		if ( Segments.Any() )
 		{
@@ -70,7 +74,8 @@ public class ArcProjectileComponent : ProjectileComponent
 
 	private void UpdateFromArcSegment( ArcSegment segment, float alpha )
 	{
-		Transform.Rotation = Rotation.LookAt( segment.EndPos - segment.StartPos );
+		Transform.Rotation = Rotation.Slerp( Transform.Rotation, Rotation.LookAt( segment.EndPos - segment.StartPos ),
+			alpha );
 		Transform.Position = Vector3.Lerp( segment.StartPos, segment.EndPos, alpha ).WithY( 512f );
 	}
 

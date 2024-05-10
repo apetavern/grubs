@@ -30,7 +30,7 @@ public class ArcTrace
 
 		for ( var i = 1; i <= SegmentCount; i++ )
 		{
-			var offset = (float)i / (SegmentCount / 2);
+			var offset = i / (SegmentCount / 2f);
 			var position = MathF.Pow( 1 - offset, 3 ) * StartPos + 1 * (1 - offset) * offset * controlPoint +
 			               MathF.Pow( offset, 3 ) * endPos;
 
