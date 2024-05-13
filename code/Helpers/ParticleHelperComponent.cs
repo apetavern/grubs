@@ -16,14 +16,10 @@ public sealed class ParticleHelperComponent : Component
 		return PlayInstantaneous( particles, global::Transform.Zero );
 	}
 
-	public SceneParticles PlayInstantaneous( ParticleSystem particles, Transform transform, float radius=0 )
+	public SceneParticles PlayInstantaneous( ParticleSystem particles, Transform transform )
 	{
 		var sceneObject = new SceneParticles( Scene.SceneWorld, particles );
 		sceneObject.SetControlPoint( 0, transform );
-
-		if (radius > 0)
-			sceneObject.SetControlPoint( 1, new Vector3(radius, 0, 0) );
-
 		sceneObject.Transform = transform;
 
 		_sceneObjects.Add( sceneObject );
