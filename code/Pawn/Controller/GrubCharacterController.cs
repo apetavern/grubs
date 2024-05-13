@@ -223,7 +223,13 @@ public class GrubCharacterController : Component
 	[Broadcast]
 	private void OnLandedEffects( Vector3 position )
 	{
-		ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
+		var fallVelocity = Math.Clamp( Controller.FallVelocity, 0, 1200 ); // Player won't reasonably be falling faster than 1200 so make this the upper limit
+
+		var t = fallVelocity / 1200f;
+		var radius = MathX.Lerp( 0.1f, 2f, t );
+
+		var particles = ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
+		particles.SetControlPoint( 1, new Vector3( radius, 0, 0 ) );
 	}
 
 	/// <summary>
