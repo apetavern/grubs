@@ -23,7 +23,8 @@ public class GrubCharacterController : Component
 
 	[Property] public required GrubPlayerController Controller { get; set; }
 
-	[Property] public required ParticleSystem LandingParticles { get; set; }
+	[Property, Category("Falling")] public required ParticleSystem LandingParticles { get; set; }
+	[Property, Category( "Falling" ), Range( 0, 1200 )] public required float LandingParticleTriggerVelocity { get; set; } = 220f;
 
 	[Property] public TagSet IgnoreLayers { get; set; } = new();
 
@@ -223,7 +224,14 @@ public class GrubCharacterController : Component
 	[Broadcast]
 	private void OnLandedEffects( Vector3 position )
 	{
-		ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
+		var fallVelocity = Math.Clamp( Controller.FallVelocity, 0, 1200 ); // Player won't reasonably be falling faster than 1200 so make this the upper limit
+		if (fallVelocity < LandingParticleTriggerVelocity ) 
+			return;
+
+		var t = (fallVelocity - LandingParticleTriggerVelocity) / (1200 - LandingParticleTriggerVelocity);
+		var radius = MathX.Lerp( 0.2f, 2f, t );
+		
+		ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, new Transform( position ), radius: radius );
 	}
 
 	/// <summary>
