@@ -354,7 +354,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		Modifications.Clear();
 
-		if ( Network.IsOwner )
+		if ( !IsProxy )
 		{
 			++ClearCount;
 		}
@@ -597,7 +597,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	private void AssertCanModify()
 	{
 		Assert.True( !IsProxy || _receivingModifications,
-			"Can only modify host-created SDF Worlds on the ." );
+			"Can only modify host-created SDF Worlds on the host." );
 	}
 
 	internal void ChunkMeshUpdated( TChunk chunk, bool removed )
@@ -677,24 +677,32 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 			await prevTask;
 		}
 
+		var affectedChunks = GetAffectedChunks( sdf, resource.Quality )
+			.ToArray();
+
+		if ( createChunks )
+		{
+			await GameTask.MainThread();
+
+			foreach ( var key in affectedChunks )
+			{
+				GetOrCreateChunk( resource, key );
+			}
+
+			await GameTask.WorkerThread();
+		}
+
 		try
 		{
-			var tasks = new List<(TChunk Chunk, Task<bool> Task)>();
-
-			foreach ( var key in GetAffectedChunks( sdf, resource.Quality ) )
-			{
-				var chunk = !createChunks
-					? GetChunk( resource, key )
-					: GetOrCreateChunk( resource, key );
-
-				if ( chunk == null ) continue;
-
-				tasks.Add( (chunk, func( chunk, sdf )) );
-			}
+			var tasks = affectedChunks
+				.Select( x => GetChunk( resource, x ) )
+				.Where( x => x is not null )
+				.Select( x => (Chunk: x, Task: func( x, sdf )) )
+				.ToArray();
 
 			var result = await GameTask.WhenAll( tasks.Select( x => x.Task ) );
 
-			for ( var i = 0; i < tasks.Count; ++i )
+			for ( var i = 0; i < tasks.Length; ++i )
 			{
 				if ( result[i] )
 				{

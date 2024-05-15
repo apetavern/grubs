@@ -9,6 +9,7 @@ namespace Sandbox.Sdf;
 /// Represents chunks in a <see cref="Sdf2DWorld"/>.
 /// Each chunk contains an SDF for a sub-region of one specific layer.
 /// </summary>
+[Hide]
 public partial class Sdf2DChunk : SdfChunk<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (int X, int Y), Sdf2DArray, ISdf2D>
 {
 	public override Vector3 LocalPosition

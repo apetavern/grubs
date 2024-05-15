@@ -9,6 +9,7 @@ namespace Sandbox.Sdf;
 /// Represents chunks in a <see cref="Sdf3DWorld"/>.
 /// Each chunk contains an SDF for a sub-region of one specific volume.
 /// </summary>
+[Hide]
 public partial class Sdf3DChunk : SdfChunk<Sdf3DWorld, Sdf3DChunk, Sdf3DVolume, (int X, int Y, int Z), Sdf3DArray, ISdf3D>
 {
 	public override Vector3 LocalPosition

@@ -111,6 +111,8 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 		Resource = resource;
 		Key = key;
 
+		Flags |= ComponentFlags.Hidden | ComponentFlags.NotNetworked | ComponentFlags.NotSaved;
+
 		Data = new TArray();
 		Data.Init( resource.Quality );
 
