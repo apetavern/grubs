@@ -18,6 +18,8 @@ public class EquipmentComponent : Component
 
 	[Property, Sync, ReadOnly] public int SlotIndex { get; set; }
 
+	[Sync] public int Ammo { get; set; }
+
 	public bool Deployed { get; set; }
 
 	public Grub Grub { get; set; }
@@ -25,6 +27,8 @@ public class EquipmentComponent : Component
 	protected override void OnStart()
 	{
 		base.OnStart();
+
+		Ammo = Data.DefaultAmmo;
 
 		Holster();
 	}

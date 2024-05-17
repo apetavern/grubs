@@ -10,6 +10,8 @@ public class EquipmentResource : GameResource
 
 	public required PrefabFile EquipmentPrefab { get; set; }
 
+	public int DefaultAmmo { get; set; } = 1;
+
 	/// <summary>
 	/// The chance of receiving this equipment in a crate.
 	/// A chance of zero means it will not spawn from a crate.

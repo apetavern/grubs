@@ -1,4 +1,7 @@
-﻿namespace Grubs.Drops;
+﻿using Grubs.Equipment;
+using Grubs.Pawn;
+
+namespace Grubs.Drops;
 
 [Title( "Grubs - Crate" ), Category( "Grubs" )]
 public sealed class Crate : Component, Component.ITriggerListener
@@ -9,11 +12,13 @@ public sealed class Crate : Component, Component.ITriggerListener
 	{
 		if ( other.GameObject.Tags.Has( "player" ) )
 		{
-			Log.Info( CrateDrops.GetRandomWeaponFromCrate() );
-		}
-	}
+			var resPath = CrateDrops.GetRandomWeaponFromCrate();
+			var equipmentResource = ResourceLibrary.Get<EquipmentResource>( resPath );
+			Log.Info( resPath );
 
-	protected override void OnUpdate()
-	{
+			var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndChildren );
+			var equipment = grub.Player.Inventory.Equipment
+				.FirstOrDefault( e => e.Data.Name == equipmentResource.Name );
+		}
 	}
 }

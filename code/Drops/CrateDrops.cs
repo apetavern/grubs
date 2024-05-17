@@ -36,7 +36,8 @@ public static class CrateDrops
 		InitDropMap( _dropChancesWeapons, _cumulativeDropPercentagesWeapons, _dropMapWeapons );
 		InitDropMap( _dropChancesTools, _cumulativeDropPercentagesTools, _dropMapTools );
 
-		_init = true;
+		if ( !Game.IsEditor )
+			_init = true;
 	}
 
 	private static void InitDropMap( Dictionary<string, float> dropChances, List<float> dropPercentages,
