@@ -30,12 +30,23 @@
         "Static": false
       },
       {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "c8b57dcf-f6c2-4a3f-bded-8ccf9316704e",
+        "Center": "0,0,12.5",
+        "IsTrigger": true,
+        "Scale": "30,30,30",
+        "Static": false
+      },
+      {
         "__type": "Sandbox.Rigidbody",
         "__guid": "89bb11aa-c39c-4cb7-b654-3f63244940f0",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
-        "Locking": {},
+        "Locking": {
+          "Y": true,
+          "Yaw": true
+        },
         "MassOverride": 0,
         "MotionEnabled": true,
         "RigidbodyFlags": 0,

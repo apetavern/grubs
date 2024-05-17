@@ -22,7 +22,7 @@
         <div class="inv-row">
             @for (var j = 0; j < 4; j++)
             {
-                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault((i * 4) + j) />
+                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * 4 + j)/>
             }
         </div>
     }
