@@ -1,0 +1,53 @@
+{
+  "RootObject": {
+    "__guid": "96eb80f5-6760-4342-8b89-a499ea0689a7",
+    "Flags": 0,
+    "Name": "weapons_crate",
+    "Tags": "drop,pickup",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Drops.Crate",
+        "__guid": "9760d574-2d3b-4e39-807b-4d092368e625",
+        "DropType": "Weapon"
+      },
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "f9325a2e-d3d0-4551-82d8-408abe3f0bf3",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/crates/weapons_crate/weapons_crate.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "64420f41-a9f4-41c4-a5a3-3c1ed4497200",
+        "Center": "0,0,12.5",
+        "IsTrigger": false,
+        "Scale": "25,25,25",
+        "Static": false
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "89bb11aa-c39c-4cb7-b654-3f63244940f0",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
