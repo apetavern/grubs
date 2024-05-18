@@ -1,8 +1,8 @@
 {
   "RootObject": {
-    "__guid": "4fbc35d5-8ab4-4f54-900f-615c0dd500d0",
+    "__guid": "265fbafb-bf72-478f-9854-ac788b805fc0",
     "Flags": 0,
-    "Name": "weapons_crate",
+    "Name": "health_crate",
     "Tags": "drop,pickup",
     "Enabled": true,
     "NetworkMode": 2,
@@ -10,20 +10,20 @@
     "Components": [
       {
         "__type": "Grubs.Drops.Crate",
-        "__guid": "b459245f-bc98-4c11-9411-96d31e87de5d",
-        "DropType": "Weapon"
+        "__guid": "8d8c26f9-f4e5-401d-a79c-4961f09f95a7",
+        "DropType": "Health"
       },
       {
         "__type": "Sandbox.ModelRenderer",
-        "__guid": "6d735621-5f79-4171-b899-ed1d6ef4af3a",
+        "__guid": "1ccdd533-0acc-4323-ab9d-64ffc8aa7d06",
         "BodyGroups": 18446744073709551615,
-        "Model": "models/crates/weapons_crate/weapons_crate.vmdl",
+        "Model": "models/crates/health_crate/health_crate.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "7d729c9b-3068-49db-9bdf-6204a54ce118",
+        "__guid": "885556a9-8969-4480-80fe-0639d75f2d12",
         "Center": "0,0,12.5",
         "IsTrigger": false,
         "Scale": "25,25,25",
@@ -31,7 +31,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "00853581-0d73-4388-a280-ec322756e044",
+        "__guid": "efbc6560-2afe-4ac2-8d4f-88d4c8548098",
         "Center": "0,0,12.5",
         "IsTrigger": true,
         "Scale": "30,30,30",
@@ -39,7 +39,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "a20fcb67-041d-4318-a12b-b1b2067fdf66",
+        "__guid": "a1958391-551c-4e74-941a-cecca7346d98",
         "AngularDamping": 0.5,
         "Gravity": true,
         "LinearDamping": 2,
@@ -47,7 +47,7 @@
           "Y": true,
           "Yaw": true
         },
-        "MassOverride": 20,
+        "MassOverride": 10,
         "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false

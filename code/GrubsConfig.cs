@@ -99,19 +99,19 @@ public static class GrubsConfig
 	/// The percent chance that a Weapon Crate will spawn every turn.
 	/// </summary>
 	[ConVar( "crate_weapon_chance" )]
-	public static int WeaponCrateChancePerTurn { get; set; } = 5;
+	public static float WeaponCrateChancePerTurn { get; set; } = 0.05f;
 
 	/// <summary>
 	/// The percent chance that a Tools Crate will spawn every turn.
 	/// </summary>
 	[ConVar( "crate_tool_chance" )]
-	public static int ToolCrateChancePerTurn { get; set; } = 5;
+	public static float ToolCrateChancePerTurn { get; set; } = 0.05f;
 
 	/// <summary>
 	/// The percent chance that a Health Crate will spawn every turn.
 	/// </summary>
 	[ConVar( "crate_health_chance" )]
-	public static int HealthCrateChancePerTurn { get; set; } = 5;
+	public static float HealthCrateChancePerTurn { get; set; } = 0.05f;
 
 	/// <summary>
 	/// The percent chance that a barrel will spawn.

@@ -1,4 +1,5 @@
 ﻿using Grubs.Common;
+using Grubs.Drops;
 using Grubs.Extensions;
 using Grubs.Pawn;
 using Grubs.Terrain;
@@ -105,7 +106,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
-
+		
 		EndTurn();
 
 		await Resolution.UntilWorldResolved( 30 );
@@ -113,11 +114,34 @@ public sealed class FreeForAllGamemode : Gamemode
 		await GameTask.Delay( 1000 );
 		await ApplyDamageQueue();
 
+		await HandleSpawns();
+
 		RotateActivePlayer();
 
 		_nextTurnTask = null;
 
 		TurnIsChanging = false;
+	}
+
+	private async Task HandleSpawns()
+	{
+		await HandleCrateSpawns();
+	}
+
+	private async Task HandleCrateSpawns()
+	{
+		await RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn );
+		await RollCrateSpawn( DropType.Health, GrubsConfig.HealthCrateChancePerTurn );
+	}
+
+	private async Task RollCrateSpawn( DropType dropType, float chance )
+	{
+		if ( Game.Random.Float( 1f ) >= chance )
+			return;
+
+		var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: true );
+		var crate = CrateUtility.Instance.SpawnCrate( dropType );
+		crate.Transform.Position = spawnPos;
 	}
 
 	private void RotateActivePlayer()

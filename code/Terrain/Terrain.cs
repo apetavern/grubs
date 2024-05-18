@@ -26,7 +26,7 @@ public partial class GrubsTerrain : Component
 		SetupGeneratedWorld();
 	}
 
-	public Vector3 FindSpawnLocation( float size = 16f )
+	public Vector3 FindSpawnLocation( bool inAir = false, float size = 16f )
 	{
 		var retries = 0;
 		var fallbackPosition = new Vector3();
@@ -58,7 +58,7 @@ public partial class GrubsTerrain : Component
 				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) > 80f )
 					continue;
 
-				return tr.EndPosition;
+				return inAir ? tr.StartPosition : tr.EndPosition;
 			}
 		}
 

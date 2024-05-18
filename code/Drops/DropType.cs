@@ -3,5 +3,6 @@
 public enum DropType
 {
 	Weapon,
-	Tool
+	Tool,
+	Health,
 }

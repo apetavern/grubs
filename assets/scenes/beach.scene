@@ -92,6 +92,18 @@
         {
           "__type": "Grubs.Helpers.ParticleHelperComponent",
           "__guid": "0ab37c18-533c-42b0-853b-c82182be8171"
+        },
+        {
+          "__type": "Grubs.Drops.CrateUtility",
+          "__guid": "1acc6d58-541e-4e3b-b3c0-40d937dc3ad1",
+          "HealthCratePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/health_crate.prefab"
+          },
+          "WeaponsCratePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/weapons_crate.prefab"
+          }
         }
       ]
     },
@@ -266,17 +278,6 @@
           "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a"
         }
       ]
-    },
-    {
-      "__guid": "96eb80f5-6760-4342-8b89-a499ea0689a7",
-      "Flags": 0,
-      "Name": "Weapons Crate",
-      "Position": "0,512,512",
-      "Tags": "drop,pickup",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "__Prefab": "prefabs/world/drops/weapons_crate.prefab"
     }
   ],
   "SceneProperties": {
@@ -302,7 +303,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-16T23:38:55.5017933-03:00",
+  "LastSaved": "2024-05-18T18:24:49.2790236-03:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
