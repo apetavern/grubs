@@ -17,7 +17,6 @@ public class KillZoneComponent : Component, Component.ITriggerListener
 	{
 		foreach ( var tag in args )
 		{
-			Log.Info(go.Name  );
 			if ( go.Tags.Has( tag ) && go.Transform.Position != 0f )
 				go.Destroy();
 		}
