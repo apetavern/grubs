@@ -1,0 +1,14 @@
+{
+  "Title": "Quick Switcher",
+  "Type": "library",
+  "Org": "trndlr",
+  "Ident": "quickswitcher",
+  "Tags": null,
+  "Schema": 1,
+  "Resources": null,
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "Metadata": {
+    "CsProjName": ""
+  }
+}
