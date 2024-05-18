@@ -10,8 +10,17 @@ public class KillZoneComponent : Component, Component.ITriggerListener
 		if ( other.GameObject.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
 			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( 9999 ), true );
 
-		if ( other.GameObject.Tags.Has( "projectile" ) && other.Transform.Position != 0f )
-			other.GameObject.Destroy();
+		DestroyObjectWithTags( other.GameObject, "projectile", "drop" );
+	}
+
+	private void DestroyObjectWithTags( GameObject go, params string[] args )
+	{
+		foreach ( var tag in args )
+		{
+			Log.Info(go.Name  );
+			if ( go.Tags.Has( tag ) && go.Transform.Position != 0f )
+				go.Destroy();
+		}
 	}
 
 	public void OnTriggerExit( Collider other )

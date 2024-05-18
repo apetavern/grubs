@@ -1,9 +1,8 @@
 {
   "RootObject": {
-    "__guid": "205ff50a-913f-4be9-a98b-1d6414a8a38a",
+    "__guid": "be07f4a5-bc0f-47da-b84b-70f6edb415f3",
     "Flags": 0,
     "Name": "bazooka_shell",
-    "Position": "0,0,32",
     "Tags": "projectile",
     "Enabled": true,
     "NetworkMode": 2,
@@ -11,8 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "e6047999-2a4d-45c1-9c46-c4a71e8e4831",
-        "__enabled": false,
+        "__guid": "86e5e92b-9219-4643-ad6f-9c8597aa7b65",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/shell/shell.vmdl",
@@ -21,7 +19,7 @@
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "5ae318b2-3a71-46c6-aa0d-cef480bebdce",
+        "__guid": "2f690d43-0573-4ee2-8a30-f0fe81d6974d",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -30,18 +28,18 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.ArcProjectileComponent",
-        "__guid": "04ed09a8-d699-4e37-b4d4-512dd9438814",
+        "__guid": "6696cb55-4d45-4dda-94c7-159d0c3d100b",
         "Explosive": {
           "_type": "component",
-          "component_id": "1d9f5f90-0ee9-409a-9471-851d8a398527",
-          "go": "205ff50a-913f-4be9-a98b-1d6414a8a38a",
+          "component_id": "a397112f-5221-47bb-95d5-1e7191493d80",
+          "go": "be07f4a5-bc0f-47da-b84b-70f6edb415f3",
           "component_type": "ExplosiveProjectileComponent"
         },
         "MaxBounces": 0,
         "Model": {
           "_type": "component",
-          "component_id": "e6047999-2a4d-45c1-9c46-c4a71e8e4831",
-          "go": "205ff50a-913f-4be9-a98b-1d6414a8a38a",
+          "component_id": "86e5e92b-9219-4643-ad6f-9c8597aa7b65",
+          "go": "be07f4a5-bc0f-47da-b84b-70f6edb415f3",
           "component_type": "SkinnedModelRenderer"
         },
         "ProjectileSpeed": 35,
@@ -49,7 +47,7 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.ExplosiveProjectileComponent",
-        "__guid": "1d9f5f90-0ee9-409a-9471-851d8a398527",
+        "__guid": "a397112f-5221-47bb-95d5-1e7191493d80",
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
@@ -61,8 +59,17 @@
       },
       {
         "__type": "Grubs.Common.HealthComponent",
-        "__guid": "b50d26cf-98a3-495f-bff5-211940d2f271",
+        "__guid": "107a25ff-fe17-491f-84e1-37dcb360e36b",
         "MaxHealth": 15
+      },
+      {
+        "__type": "Sandbox.CapsuleCollider",
+        "__guid": "b28e4cce-f97b-4b78-968d-bcdfc47f794c",
+        "End": "1.880003,0,0",
+        "IsTrigger": false,
+        "Radius": 4.6000004,
+        "Start": "-5.559999,0,0",
+        "Static": false
       }
     ],
     "Children": []
