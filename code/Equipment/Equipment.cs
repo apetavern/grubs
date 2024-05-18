@@ -82,4 +82,11 @@ public class EquipmentComponent : Component
 			return;
 		Ammo -= 1;
 	}
+
+	public void IncrementAmmo()
+	{
+		if ( Ammo == -1 )
+			return;
+		Ammo += 1;
+	}
 }

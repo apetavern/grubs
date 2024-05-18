@@ -4,6 +4,8 @@
 @using Grubs.Gamemodes.Modes
 @using Sandbox.UI
 @using System
+@using Grubs.Extensions
+@using Grubs.Pawn
 
 @inherits Panel
 
@@ -16,7 +18,7 @@
 
 <root>
     <div class="timer">
-        <div class="title">Grubby's Turn</div>
+        <div class="title">@GetActiveGrubName()'s Turn</div>
         <p>@Timer</p>
     </div>
 </root>
@@ -26,8 +28,17 @@
     public FreeForAllGamemode FFA => Gamemode.FFA;
     public string Timer => FFA.TimeUntilNextTurn.Relative.CeilToInt().Clamp(0, int.MaxValue).ToString("0");
 
+    private string GetActiveGrubName()
+    {
+        var player = FFA.ActivePlayerId.ToComponent<Player>();
+        if (player is null)
+            return "Unknown";
+        var grub = player.ActiveGrub;
+        return grub is null ? "Unknown" : grub.Name;
+    }
+
     protected override int BuildHash()
     {
-        return HashCode.Combine(Timer);
+        return HashCode.Combine(GetActiveGrubName(), Timer);
     }
 }

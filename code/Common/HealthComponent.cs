@@ -33,7 +33,7 @@ public partial class HealthComponent : Component
 		CurrentHealth -= damageInfo.Damage;
 		if ( CurrentHealth <= 0 && !DeathInvoked )
 		{
-			OnDeath( damageInfo.Tags.Has( "killzone" ) );
+			_ = OnDeath( damageInfo.Tags.Has( "killzone" ) );
 		}
 	}
 

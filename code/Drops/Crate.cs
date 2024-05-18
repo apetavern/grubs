@@ -19,6 +19,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 			var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndChildren );
 			var equipment = grub.Player.Inventory.Equipment
 				.FirstOrDefault( e => e.Data.Name == equipmentResource.Name );
+			equipment?.IncrementAmmo();
 		}
 	}
 }

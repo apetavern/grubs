@@ -20,17 +20,17 @@
 @code
 {
     public EquipmentComponent Equipment { get; set; }
-    public string Ammo => Equipment.Ammo == -1 ? "\u221e" : Equipment.Ammo.ToString();
+    public string Ammo => Equipment?.Ammo == -1 ? "\u221e" : Equipment?.Ammo.ToString();
 
     protected override void OnClick(MousePanelEvent e)
     {
-        if (Equipment.Ammo == 0)
+        if (Equipment is { Ammo: 0 })
             return;
         PlayerInventory.Local.EquipItem(Equipment);
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Ammo);
+        return HashCode.Combine(Equipment?.Ammo);
     }
 }
