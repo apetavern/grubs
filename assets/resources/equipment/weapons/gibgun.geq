@@ -4,8 +4,8 @@
   "Icon": "models/weapons/railgun/railgun.vmdl_c.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/gibgun/gibgun.prefab",
+  "DefaultAmmo": 0,
   "DropChance": 1,
-  "ResourceVersion": 0,
   "__version": 0,
   "__references": []
 }

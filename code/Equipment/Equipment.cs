@@ -50,6 +50,9 @@ public class EquipmentComponent : Component
 	public void Deploy( Grub grub )
 	{
 		Grub = grub;
+		
+		if ( Ammo == 0 )
+			return;
 
 		var target = grub.GameObject.GetAllObjects( true ).First( c => c.Name == "hold_L" );
 		GameObject.SetParent( grub.GameObject, false );
@@ -71,5 +74,12 @@ public class EquipmentComponent : Component
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
 		Deployed = false;
+	}
+
+	public void UseAmmo()
+	{
+		if ( Ammo == -1 )
+			return;
+		Ammo -= 1;
 	}
 }

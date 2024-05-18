@@ -10,6 +10,10 @@ public class EquipmentResource : GameResource
 
 	public required PrefabFile EquipmentPrefab { get; set; }
 
+	/// <summary>
+	/// The default amount of ammo a piece of equipment has.
+	/// -1 represents unlimited ammo.
+	/// </summary>
 	public int DefaultAmmo { get; set; } = 1;
 
 	/// <summary>

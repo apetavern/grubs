@@ -5,11 +5,17 @@
   "FrontFaceMaterial": null,
   "BackFaceMaterial": null,
   "CutFaceMaterial": null,
+  "EdgeStyle": "Sharp",
+  "MaxSmoothAngle": 180,
+  "EdgeRadius": 8,
+  "EdgeFaces": 3,
   "IsTextureSourceOnly": true,
   "CollisionTags": "solid",
   "QualityLevel": "Custom",
   "ChunkResolution": 16,
   "ChunkSize": 256,
   "MaxDistance": 64,
-  "ReferencedTextures": null
+  "ReferencedTextures": [],
+  "__version": 0,
+  "__references": []
 }

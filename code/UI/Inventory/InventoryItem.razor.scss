@@ -10,7 +10,22 @@ InventoryItem {
         margin: 8px;
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
         background-color: $hud-fg-hovered;
+    }
+    
+    .ammo {
+        bottom: 0;
+        right: 0;
+        justify-content: center;
+        align-items: center;
+        color: lighten($hud-bg, 90%);
+        position: absolute;
+        font-size: 24px;
+        padding: 2px 8px;
+    }
+    
+    &.disabled {
+        opacity: 0.6;
     }
 }

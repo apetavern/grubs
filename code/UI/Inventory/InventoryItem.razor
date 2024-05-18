@@ -9,19 +9,28 @@
 @attribute [StyleSheet]
 
 
-<root>
+<root class=@(Ammo == "0" ? "disabled" : "")>
     @if (Equipment is not null)
     {
         <img src="@Equipment.Icon"/>
+        <div class="ammo">@Ammo</div>
     }
 </root>
 
 @code
 {
     public EquipmentComponent Equipment { get; set; }
+    public string Ammo => Equipment.Ammo == -1 ? "\u221e" : Equipment.Ammo.ToString();
 
     protected override void OnClick(MousePanelEvent e)
     {
+        if (Equipment.Ammo == 0)
+            return;
         PlayerInventory.Local.EquipItem(Equipment);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Ammo);
     }
 }
