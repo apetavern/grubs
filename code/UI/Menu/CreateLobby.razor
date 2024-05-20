@@ -7,4 +7,41 @@
 @attribute [StyleSheet]
 
 <root>
+    <button class="back-button" @onclick=@(() => OnBack())><i>arrow_back</i>Back</button>
+    <div class="layout">
+        <div class="options">TODO: Options</div>
+        <button class="create-lobby-button" @onclick=@(() => OnCreate())>
+            Create Lobby
+        </button>
+    </div>
+
 </root>
+
+@code
+{
+    private TimeUntil TimeUntilShow { get; set; }
+    private bool TransitionOut { get; set; }
+
+    public CreateLobby()
+    {
+        TransitionOut = false;
+        TimeUntilShow = 0.25f;
+    }
+
+    public override void Tick()
+    {
+        var shouldShow = !TransitionOut && TimeUntilShow < 0f;
+        SetClass("hide", !shouldShow);
+    }
+    
+    private void OnCreate()
+    {
+        Scene.LoadFromFile("scenes/beach.scene");
+    }
+
+    private void OnBack()
+    {
+        TransitionOut = true;
+        Menu.Instance.Return();
+    }
+}

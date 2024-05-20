@@ -17,8 +17,8 @@
         <div class="menu-options">
             <button onclick=@(() => OnOptionSelected("Create Lobby"))>Create Lobby</button>
             <button onclick=@(() => OnOptionSelected("Join Lobby"))>Join Lobby</button>
-            <button>Customize</button>
-            <button>Quit</button>
+            <button onclick=@(() => OnOptionSelected("Customize"))>Customize</button>
+            <button onclick=@(() => OnOptionSelected("Quit"))>Quit</button>
         </div>
     </div>
 
@@ -51,8 +51,10 @@
                 Transition<JoinLobby>();
                 break;
             case "Customize":
+                Log.Warning("Customize coming soon!");
                 break;
             case "Quit":
+                Game.Close();
                 break;
         }
     }

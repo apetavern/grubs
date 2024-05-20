@@ -1,0 +1,64 @@
+﻿@import '../common.scss';
+
+CreateLobby {
+    cursor: none;
+    position: absolute;
+    opacity: 1;
+    transition: all 0.5s;
+    width: 100%;
+    height: 100%;
+
+    .back-button {
+        position: absolute;
+        margin-top: 80px;
+        margin-left: 110px;
+        text-stroke: 8px black;
+        font-size: 64px;
+        gap: 12px;
+        align-items: center;
+        z-index: 100;
+
+        > i {
+            font-size: 74px;
+        }
+
+        &:hover:not(.hide) {
+            transform: translateX(4px);
+            sound-in: ui_button_hover;
+        }
+    }
+    
+    .layout {
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .options {
+        margin-top: auto;
+        font-size: 32px;
+    }
+    
+    .create-lobby-button {
+        font-size: 72px;
+        bottom: 100px;
+        margin-top: auto;
+        text-stroke: 8px black;
+        background-color: $hud-fg;
+        padding: 16px 32px;
+        border-radius: 16px;
+        box-shadow: 4px 4px 4px black;
+
+        &:hover {
+            background-color: $hud-fg-hovered;
+            sound-in: ui_button_hover;
+        }
+    }
+
+    &.hide {
+        opacity: 0;
+        transform: translateX(-1080px);
+    }
+}
