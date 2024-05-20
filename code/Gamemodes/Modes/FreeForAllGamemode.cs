@@ -3,6 +3,7 @@ using Grubs.Drops;
 using Grubs.Extensions;
 using Grubs.Pawn;
 using Grubs.Terrain;
+using Grubs.UI.GameEnd;
 
 namespace Grubs.Gamemodes.Modes;
 
@@ -116,7 +117,7 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		if ( IsGameResolved() && GrubsConfig.KeepGameAlive != true )
 		{
-			Log.Info( "Game is over" );
+			GameEnd.Instance.ShouldShow = true;
 			State = GameState.GameOver;
 			return;
 		}
@@ -214,8 +215,7 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		if ( players.Count() - 1 == deadPlayers )
 		{
-			// 1 player wins!
-			Log.Info( lastPlayerAlive?.Network.OwnerConnection.Name );
+			GameEnd.Instance.Winner = lastPlayerAlive;
 			return true;
 		}
 

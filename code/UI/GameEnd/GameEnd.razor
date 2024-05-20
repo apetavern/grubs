@@ -1,21 +1,50 @@
 ﻿@namespace Grubs.UI.GameEnd
 
 @using Grubs.Gamemodes
+@using Grubs.Pawn
+@using Grubs.UI.Components
 @inherits PanelComponent
 
 <root class=@Show()>
-    Test
+    @if (Winner is not null)
+    {
+        <div>@Winner.Network.OwnerConnection.DisplayName wins!</div>
+    }
+    else
+    {
+        <div>It's a draw!</div>
+    }
+    <button onclick=@(() => ShouldShow = false)>Continue</button>
 </root>
 
 @code
 {
+    public static GameEnd Instance { get; set; }
+    private bool _shouldShow;
+    public bool ShouldShow
+    {
+        get => _shouldShow;
+        set
+        {
+            _shouldShow = value;
+            Cursor.Enabled("gameend", value);
+        } 
+    }
+    
+    public Player Winner { get; set; }
+
+    public GameEnd()
+    {
+        Instance = this;
+    }
+    
     string Show()
     {
-        return Gamemode.FFA.State == GameState.GameOver ? "show" : "";
+        return ShouldShow ? "show" : "";
     }
     
     protected override int BuildHash()
     {
-        return HashCode.Combine(Gamemode.FFA.State);
+        return HashCode.Combine(ShouldShow);
     }
 }

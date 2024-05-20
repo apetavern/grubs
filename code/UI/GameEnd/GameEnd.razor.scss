@@ -1,6 +1,7 @@
 ﻿@import '../common.scss';
 
 GameEnd {
+    pointer-events: all;
     font-family: $font-family;
     color: white;
     font-size: 72px;
