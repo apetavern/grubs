@@ -114,6 +114,13 @@ public sealed class FreeForAllGamemode : Gamemode
 		await GameTask.Delay( 1000 );
 		await ApplyDamageQueue();
 
+		if ( IsGameResolved() && GrubsConfig.KeepGameAlive != true )
+		{
+			Log.Info( "Game is over" );
+			State = GameState.GameOver;
+			return;
+		}
+
 		await HandleSpawns();
 
 		RotateActivePlayer();
@@ -179,6 +186,40 @@ public sealed class FreeForAllGamemode : Gamemode
 		}
 
 		return null;
+	}
+
+	private bool IsGameResolved()
+	{
+		var deadPlayers = 0;
+		Player lastPlayerAlive = null;
+		
+		var players = Scene.GetAllComponents<Player>();
+		foreach ( var player in players )
+		{
+			if ( player.IsDead() )
+			{
+				deadPlayers++;
+				continue;
+			}
+
+			lastPlayerAlive = player;
+		}
+
+		if ( players.Count() == deadPlayers )
+		{
+			// Draw
+			Log.Info( "draw" );
+			return true;
+		}
+
+		if ( players.Count() - 1 == deadPlayers )
+		{
+			// 1 player wins!
+			Log.Info( lastPlayerAlive?.Network.OwnerConnection.Name );
+			return true;
+		}
+
+		return false;
 	}
 
 	[Broadcast]

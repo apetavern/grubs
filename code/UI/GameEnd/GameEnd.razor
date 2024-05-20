@@ -1,0 +1,21 @@
+﻿@namespace Grubs.UI.GameEnd
+
+@using Grubs.Gamemodes
+@inherits PanelComponent
+
+<root class=@Show()>
+    Test
+</root>
+
+@code
+{
+    string Show()
+    {
+        return Gamemode.FFA.State == GameState.GameOver ? "show" : "";
+    }
+    
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Gamemode.FFA.State);
+    }
+}

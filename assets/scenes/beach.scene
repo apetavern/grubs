@@ -276,6 +276,10 @@
         {
           "__type": "Grubs.UI.GameLanding.GameLanding",
           "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a"
+        },
+        {
+          "__type": "Grubs.UI.GameEnd.GameEnd",
+          "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
         }
       ]
     }
@@ -303,8 +307,8 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-18T18:24:49.2790236-03:00",
+  "LastSaved": "2024-05-20T15:21:27.1780059-03:00",
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

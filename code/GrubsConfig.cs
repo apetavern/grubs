@@ -143,6 +143,12 @@ public static class GrubsConfig
 	[ConVar( "terrain_noise_zoom" )]
 	public static float TerrainNoiseZoom { get; set; } = 2f;
 
+	/// <summary>
+	/// If true, we do not end the game when only one player is remaining.
+	/// </summary>
+	[ConVar( "keep_game_alive" )]
+	public static bool KeepGameAlive { get; set; } = false;
+
 	public enum TerrainEnvironmentType
 	{
 		Sand = 0,
