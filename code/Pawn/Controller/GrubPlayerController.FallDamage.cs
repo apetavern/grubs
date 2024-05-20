@@ -38,6 +38,6 @@ public partial class GrubPlayerController
 	{
 		var fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
 		var health = GameObject.Components.Get<HealthComponent>();
-		health?.TakeDamage( GrubsDamageInfo.FromFall( FallDamage ) );
+		health?.TakeDamage( GrubsDamageInfo.FromFall( fallDamage ), true );
 	}
 }

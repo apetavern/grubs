@@ -29,6 +29,9 @@ public partial class HealthComponent : Component
 			DamageQueue.Enqueue( damageInfo );
 			return;
 		}
+		
+		if ( grub.IsActive && immediate )
+			Gamemode.FFA.UseTurn();
 
 		CurrentHealth -= damageInfo.Damage;
 		if ( CurrentHealth <= 0 && !DeathInvoked )
