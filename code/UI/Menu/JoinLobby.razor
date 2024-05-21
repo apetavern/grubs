@@ -1,11 +1,37 @@
 ﻿@namespace Grubs.UI.Menu
 
+@using Grubs.UI.Components
+
 @inherits Panel
 
 @attribute [StyleSheet]
 
 <root>
     <button class="back-button" @onclick=@(() => OnBack())><i>arrow_back</i>Back</button>
+    <div class="layout">
+        <div class="lobby-list">
+            @foreach (var lobby in Lobbies)
+            {
+                <div class="lobby" onclick=@(() => Join( lobby ))>
+                    <TallStack>
+                        <Content class="lobby-details">
+                            <div class="lobby-title">
+                                @lobby.Name
+                            </div>
+                            <div class="lobby-players">
+                                <WideStack>
+                                    <Content>
+                                        <div>@GetPlayersString(lobby)</div>
+                                        <div>@lobby.Map</div>
+                                    </Content>
+                                </WideStack>
+                            </div>
+                        </Content>
+                    </TallStack>
+                </div>
+            }
+        </div>
+    </div>
 </root>
 
 @code
@@ -13,16 +39,57 @@
     private TimeUntil TimeUntilShow { get; set; }
     private bool TransitionOut { get; set; }
 
+    private List<LobbyInformation> Lobbies { get; set; } = new();
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (firstTime)
+            _ = FetchLobbies();
+    }
+
+    string GetPlayersString(LobbyInformation lobby)
+    {
+        return $"{lobby.Members} / {lobby.MaxMembers} players";
+    }
+
     public JoinLobby()
     {
         TransitionOut = false;
         TimeUntilShow = 0.25f;
     }
 
+    void Join( LobbyInformation lobby )
+    {
+        GameNetworkSystem.Connect( lobby.LobbyId );
+    }
+
     public override void Tick()
     {
         var shouldShow = !TransitionOut && TimeUntilShow < 0f;
         SetClass("hide", !shouldShow);
+    }
+
+    async Task FetchLobbies()
+    {
+        if (Game.IsEditor)
+        {
+            Lobbies = new List<LobbyInformation>();
+            Lobbies.Add(new LobbyInformation
+            {
+                LobbyId = 123456789,
+                OwnerId = 987654321,
+                Members = 2,
+                MaxMembers = 4,
+                Name = "Trundler's Game",
+                Map = "gr_beach",
+                Game = "Grubs",
+                Data = null
+            });
+            return;
+        }
+        Lobbies = await Networking.QueryLobbies("apetavern.grubs");
     }
 
     private void OnBack()

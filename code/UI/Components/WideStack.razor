@@ -1,0 +1,13 @@
+﻿@namespace Grubs.UI.Components
+
+@using Sandbox.Razor
+@inherits Panel
+
+<root>
+    <div style="flex-direction: row; gap: 12px">@Content</div>
+</root>
+
+@code
+{
+    public RenderFragment Content { get; set; }
+}

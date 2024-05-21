@@ -1,16 +1,22 @@
-﻿JoinLobby {
+﻿@import '../common.scss';
+
+JoinLobby {
     cursor: none;
     position: absolute;
     opacity: 1;
     transition: all 0.5s;
+    width: 100%;
+    height: 100%;
 
     .back-button {
+        position: absolute;
         margin-top: 80px;
         margin-left: 110px;
         text-stroke: 8px black;
         font-size: 64px;
         gap: 12px;
         align-items: center;
+        z-index: 100;
 
         > i {
             font-size: 74px;
@@ -20,6 +26,58 @@
             transform: translateX(4px);
             sound-in: ui_button_hover;
         }
+    }
+
+    .layout {
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .lobby-list {
+        width: 1200px;
+        height: 800px;
+        background-color: $hud-bg;
+        border-radius: 16px;
+        padding: 24px;
+        overflow: scroll;
+    }
+    
+    .lobby {
+        width: 100%;
+        height: 140px;
+        border-radius: 16px;
+        padding: 16px 32px;
+        background-color: $hud-fg;
+        align-items: center;
+        
+        &:hover {
+            background-color: $hud-fg-hovered;
+            sound-in: ui_button_hover;
+        }
+    }
+    
+    .lobby-details {
+        gap: 12px;
+        
+        .lobby-title {
+            font-size: 40px;
+            text-stroke: 4px black;
+        }
+        
+        .lobby-players {
+            font-size: 24px;
+            font-weight: light;
+            text-stroke: 3px black;
+        }
+    }
+    
+    .map {
+        font-size: 40px;
+        text-stroke: 4px black;
+        margin-left: auto;
     }
 
     &.hide {

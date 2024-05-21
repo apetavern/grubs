@@ -648,7 +648,7 @@
       }
     ],
     "TickRate": 120,
-    "StartupScene": "scenes/beach.scene",
-    "LaunchMode": "QuickPlay"
+    "StartupScene": "scenes/main_menu.scene",
+    "LaunchMode": "Normal"
   }
 }
