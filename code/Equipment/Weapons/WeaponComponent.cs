@@ -1,4 +1,5 @@
 ﻿using Grubs.Gamemodes;
+using Grubs.Helpers;
 
 namespace Grubs.Equipment.Weapons;
 
@@ -16,16 +17,20 @@ public partial class WeaponComponent : Component
 	[Property] public OnFireDelegate OnFire { get; set; }
 
 	public bool IsFiring { get; set; }
+	public bool IsCharging { get; set; }
 	public TimeSince TimeSinceLastUsed { get; set; }
 	public int TimesUsed { get; set; }
 
 	private int _weaponCharge;
+	private SceneParticles _chargeParticles;
+	private ParticleSystem ChargeParticleSystem { get; set; }
 
 	protected override void OnStart()
 	{
 		base.OnStart();
 
 		TimeSinceLastUsed = Cooldown;
+		ChargeParticleSystem = ParticleSystem.Load( "particles/weaponcharge/weaponcharge.vpcf" );
 	}
 
 	protected override void OnUpdate()
@@ -56,6 +61,9 @@ public partial class WeaponComponent : Component
 			if ( Input.Released( "fire" ) )
 			{
 				IsFiring = true;
+				IsCharging = false;
+				ParticleHelperComponent.Instance.Dispose( _chargeParticles );
+				_chargeParticles = ParticleHelperComponent.Instance.PlayInstantaneous( ChargeParticleSystem );
 
 				if ( OnFire is not null )
 					OnFire.Invoke( _weaponCharge );
@@ -77,7 +85,6 @@ public partial class WeaponComponent : Component
 				OnFire.Invoke( 100 );
 			else
 				FireImmediate();
-
 			TimeSinceLastUsed = 0;
 		}
 	}
@@ -103,6 +110,15 @@ public partial class WeaponComponent : Component
 
 	protected void OnChargedHeld()
 	{
+		IsCharging = true;
+		
+		var muzzle = GetMuzzlePosition();
+		_chargeParticles ??= ParticleHelperComponent.Instance.PlayInstantaneous( ChargeParticleSystem, muzzle );
+		_chargeParticles?.SetControlPoint(0, muzzle.Position);
+		_chargeParticles?.SetControlPoint(1, muzzle.Position + GetMuzzleForward() * 80f );
+		_chargeParticles?.SetNamedValue( "Alpha", 100f );
+		_chargeParticles?.SetNamedValue( "Speed", 40f );
+		
 		_weaponCharge++;
 		_weaponCharge.Clamp( 0, 100 );
 	}
@@ -130,5 +146,19 @@ public partial class WeaponComponent : Component
 			.Run();
 
 		return tr.EndPosition.WithY( 512f );
+	}
+
+	protected Transform GetMuzzlePosition()
+	{
+		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
+		return muzzle ?? Equipment.Grub.EyePosition;
+	}
+
+	protected Vector3 GetMuzzleForward()
+	{
+		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
+		if ( muzzle is null )
+			return Equipment.Grub.PlayerController.EyeRotation.Forward * Equipment.Grub.PlayerController.Facing;
+		return muzzle.Value.Rotation.Forward;
 	}
 }

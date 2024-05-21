@@ -26,6 +26,12 @@ public sealed class ParticleHelperComponent : Component
 		return sceneObject;
 	}
 
+	public void Dispose( SceneParticles sceneParticles )
+	{
+		_sceneObjects.Remove( sceneParticles );
+		sceneParticles?.Delete();
+	}
+
 	protected override void OnUpdate()
 	{
 		_sceneObjects.RemoveAll( s => s.Finished );

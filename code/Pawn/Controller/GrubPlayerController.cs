@@ -83,6 +83,10 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateLookAngles()
 	{
+		if ( Grub.ActiveEquipment is not null && Grub.ActiveEquipment.Components.TryGet<WeaponComponent>(out var weapon) )
+			if ( weapon.IsCharging )
+				return;
+		
 		var nextFacing = Transform.Rotation.z <= 0 ? -1 : 1;
 
 		var look = (LookAngles + LookInput * nextFacing).Normal;

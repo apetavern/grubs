@@ -23,6 +23,8 @@ public sealed class Grub : Component, IResolvable
 
 	public bool Resolved => PlayerController.Velocity.IsNearlyZero( 0.1f ) || IsDead;
 
+	public Transform EyePosition => Transform.World.WithPosition( Transform.Position + Vector3.Up * 24f );
+
 	[Sync] public string Name { get; set; } = "Grubby";
 	[Sync] public bool IsDead { get; set; }
 
