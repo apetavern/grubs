@@ -6,6 +6,13 @@ GameRules {
     align-items: center;
     justify-content: center;
     
+    .control-wrap {
+        background-color: $hud-fg;
+        padding: 8px;
+        border-radius: 16px;
+        justify-content: center;
+    }
+    
     .rules-title {
         font-size: 48px;
         text-stroke: 8px black;
@@ -20,5 +27,6 @@ GameRules {
         padding: 24px 32px;
         border-radius: 16px;
         background-color: $hud-bg;
+        gap: 12px;
     }
 }

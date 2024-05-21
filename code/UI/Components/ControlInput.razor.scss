@@ -2,7 +2,8 @@
     flex-direction: column;
     
     > .label {
-        color: black;
+        margin-left: 12px;
         font-size: 24px;
+        text-stroke: 4px black;
     }
 }

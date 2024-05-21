@@ -6,12 +6,12 @@
 
 <root>
     <div class="rules-container">
-        <ControlInput Label="Grub Count: @(GrubsConfig.GrubCount)">
+        <ControlInput class="control-wrap" Label="Grub Count: @(GrubsConfig.GrubCount)">
             <Control>
                 <SliderControl Min=@(1) Max=@(10) Value:bind=@GrubsConfig.GrubCount style="cursor: none" />
             </Control>
         </ControlInput>
-        <ControlInput Label="Turn Duration: @(GrubsConfig.TurnDuration)">
+        <ControlInput class="control-wrap" Label="Turn Duration: @(GrubsConfig.TurnDuration)s">
             <Control>
                 <SliderControl Min=@(10) Max=@(120) Value:bind=@GrubsConfig.TurnDuration />
             </Control>
