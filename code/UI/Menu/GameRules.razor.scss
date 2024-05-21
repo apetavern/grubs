@@ -7,15 +7,14 @@ GameRules {
     justify-content: center;
     
     .control-wrap {
-        background-color: $hud-fg;
-        padding: 8px;
+        background-color: $menu-highlight;
+        padding: 12px;
         border-radius: 16px;
         justify-content: center;
     }
     
     .rules-title {
         font-size: 48px;
-        text-stroke: 8px black;
         margin-bottom: 8px;
     }
     
@@ -26,7 +25,8 @@ GameRules {
         height: 600px;
         padding: 24px 32px;
         border-radius: 16px;
-        background-color: $hud-bg;
+        background-color: $menu-bg;
+        box-shadow: -8px 8px $menu-highlight;
         gap: 12px;
     }
 }

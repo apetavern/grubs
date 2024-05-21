@@ -43,17 +43,16 @@ CreateLobby {
     }
     
     .create-lobby-button {
-        font-size: 72px;
+        font-size: 64px;
         margin-top: auto;
-        text-stroke: 8px black;
-        background-color: $hud-fg;
+        background-color: $menu-highlight;
         padding: 16px 32px;
         border-radius: 16px;
         box-shadow: 4px 4px 4px black;
         align-items: center;
 
         &:hover {
-            background-color: $hud-fg-hovered;
+            background-color: darken($menu-highlight, 50%);
             sound-in: ui_button_hover;
         }
     }

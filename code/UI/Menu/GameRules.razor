@@ -6,14 +6,25 @@
 
 <root>
     <div class="rules-container">
+        <div class="rules-title">GAME RULES</div>
         <ControlInput class="control-wrap" Label="Grub Count: @(GrubsConfig.GrubCount)">
             <Control>
-                <SliderControl Min=@(1) Max=@(10) Value:bind=@GrubsConfig.GrubCount style="cursor: none" />
+                <SliderControl Min=@(1) Max=@(10) Value:bind=@GrubsConfig.GrubCount style="cursor: none"/>
             </Control>
         </ControlInput>
         <ControlInput class="control-wrap" Label="Turn Duration: @(GrubsConfig.TurnDuration)s">
             <Control>
-                <SliderControl Min=@(10) Max=@(120) Value:bind=@GrubsConfig.TurnDuration />
+                <SliderControl Min=@(10) Max=@(120) Value:bind=@GrubsConfig.TurnDuration/>
+            </Control>
+        </ControlInput>
+        <ControlInput class="control-wrap" Label="Weapon Crate Spawn Chance: @($"{GrubsConfig.WeaponCrateChancePerTurn * 100:F0}")%">
+            <Control>
+                <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.WeaponCrateChancePerTurn/>
+            </Control>            
+        </ControlInput>
+        <ControlInput class="control-wrap" Label="Health Crate Spawn Chance: @($"{GrubsConfig.HealthCrateChancePerTurn * 100:F0}")%">
+            <Control>
+                <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.HealthCrateChancePerTurn/>
             </Control>
         </ControlInput>
     </div>
@@ -23,6 +34,7 @@
 {
     protected override int BuildHash()
     {
-        return HashCode.Combine(GrubsConfig.GrubCount, GrubsConfig.TurnDuration);
+        var crateOdds = GrubsConfig.WeaponCrateChancePerTurn + GrubsConfig.HealthCrateChancePerTurn;
+        return HashCode.Combine(GrubsConfig.GrubCount, GrubsConfig.TurnDuration, crateOdds);
     }
 }

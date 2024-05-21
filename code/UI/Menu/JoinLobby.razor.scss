@@ -39,9 +39,10 @@ JoinLobby {
     .lobby-list {
         width: 1200px;
         height: 800px;
-        background-color: $hud-bg;
+        background-color: $menu-bg;
         border-radius: 16px;
         padding: 24px;
+        box-shadow: -8px 8px $menu-highlight;
         overflow: scroll;
     }
     
@@ -50,11 +51,11 @@ JoinLobby {
         height: 140px;
         border-radius: 16px;
         padding: 16px 32px;
-        background-color: $hud-fg;
+        background-color: $menu-highlight;
         align-items: center;
         
         &:hover {
-            background-color: $hud-fg-hovered;
+            background-color: darken($menu-highlight, 50%);
             sound-in: ui_button_hover;
         }
     }
