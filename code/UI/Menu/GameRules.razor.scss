@@ -1,0 +1,24 @@
+﻿@import '../common.scss';
+
+GameRules {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    
+    .rules-title {
+        font-size: 48px;
+        text-stroke: 8px black;
+        margin-bottom: 8px;
+    }
+    
+    .rules-container {
+        position: absolute;
+        flex-direction: column;
+        width: 1400px;
+        height: 600px;
+        padding: 24px 32px;
+        border-radius: 16px;
+        background-color: $hud-bg;
+    }
+}

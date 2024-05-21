@@ -1,0 +1,15 @@
+﻿@using Sandbox.Razor
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="label">@Label</div>
+    <div class="control">@Control</div>
+</root>
+
+@code
+{
+    public string Label { get; set; }
+    public RenderFragment Control { get; set; }
+}

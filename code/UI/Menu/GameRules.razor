@@ -1,0 +1,28 @@
+﻿@inherits Panel
+
+@using Grubs
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="rules-container">
+        <ControlInput Label="Grub Count: @(GrubsConfig.GrubCount)">
+            <Control>
+                <SliderControl Min=@(1) Max=@(10) Value:bind=@GrubsConfig.GrubCount style="cursor: none" />
+            </Control>
+        </ControlInput>
+        <ControlInput Label="Turn Duration: @(GrubsConfig.TurnDuration)">
+            <Control>
+                <SliderControl Min=@(10) Max=@(120) Value:bind=@GrubsConfig.TurnDuration />
+            </Control>
+        </ControlInput>
+    </div>
+</root>
+
+@code
+{
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GrubsConfig.GrubCount, GrubsConfig.TurnDuration);
+    }
+}
