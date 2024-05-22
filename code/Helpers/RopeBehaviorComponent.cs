@@ -47,8 +47,12 @@ public sealed class RopeBehaviorComponent : Component
 	{
 		DrawRope();
 
-		if ( IsProxy ) return;
+		if ( IsProxy ) 
+			return;
 
+		if ( MuzzlePoint is null || !mountComponent.IsValid() || !mountComponent.Grub.IsValid() )
+			return;
+		
 		MuzzlePoint.Transform.Position = Transform.Position + HookDirection * 15f + mountComponent.Grub.Transform.Rotation.Left * 10f;
 
 		HookDirection = (jointComponent.Body.Transform.Position - Transform.Position).Normal;

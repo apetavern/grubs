@@ -12,7 +12,7 @@ public partial class GrubsTerrain
 
 	async void DoTextureLoad()
 	{
-		var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + ".png" );
+		var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture + ".png" );
 		WorldTextureHeight = mapSdfTexture.Height * 2;
 		WorldTextureLength = mapSdfTexture.Width * 2;
 
@@ -25,13 +25,13 @@ public partial class GrubsTerrain
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
 
-		SdfWorld.Add( transformedSdf, materials.ElementAt( 0 ).Key );
+		await SdfWorld.AddAsync( transformedSdf, materials.ElementAt( 0 ).Key );
 
-		mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture.ToString() + "_back.png" );
+		mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture + "_back.png" );
 		mapSdf = new TextureSdf( mapSdfTexture, 10, mapSdfTexture.Width * 2f, pivot: 0f );
 		transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength / 2f, 0 ) );
 
-		SdfWorld.Add( transformedSdf, materials.ElementAt( 1 ).Key );
+		await SdfWorld.AddAsync( transformedSdf, materials.ElementAt( 1 ).Key );
 
 	}
 }
