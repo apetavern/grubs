@@ -1,10 +1,6 @@
 {
   "RootObject": {
-<<<<<<< HEAD
-    "__guid": "34e64148-41c5-4881-8521-daecbdeaf713",
-=======
     "__guid": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
->>>>>>> 31524c57 (Create teleporter equipment)
     "Flags": 0,
     "Name": "bazooka",
     "Enabled": true,
@@ -31,7 +27,6 @@
         "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "MaterialGroup": "default",
         "Model": "models/weapons/bazooka/bazooka.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -51,11 +46,7 @@
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-<<<<<<< HEAD
-          "__guid": "5684bf7e-9894-4451-992e-51ca8962efb5",
-=======
           "__guid": "f1594c5a-08d0-4300-b61b-f1d0e841406a",
->>>>>>> 31524c57 (Create teleporter equipment)
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
