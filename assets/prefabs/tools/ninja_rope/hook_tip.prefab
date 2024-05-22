@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "99fb87e2-b4de-4846-8f55-b8ae8682dd99",
+    "__guid": "e24b3821-71e8-49dc-b874-b41d15687f8f",
     "Flags": 0,
     "Name": "hook_tip",
     "Tags": "tool,projectile",
@@ -10,27 +10,27 @@
     "Components": [
       {
         "__type": "Grubs.Equipment.Weapons.PhysicsProjectileComponent",
-        "__guid": "c8de20f3-a9a9-4e4f-bf87-b51f75cc0e13",
+        "__guid": "b29aa902-347b-4b69-9be5-8345d4cffcbd",
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "d31e6bdf-1a7e-4fb7-8aa7-9f6f01609fea",
-          "go": "99fb87e2-b4de-4846-8f55-b8ae8682dd99",
+          "component_id": "39e7618e-31f9-4315-9809-3b34f67ee6cf",
+          "go": "e24b3821-71e8-49dc-b874-b41d15687f8f",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "e8935b9b-0ffb-475d-ae7e-b0d890b1b1d0",
-          "go": "99fb87e2-b4de-4846-8f55-b8ae8682dd99",
+          "component_id": "7a7997ae-f1a6-4f1f-b6c9-5e836734757a",
+          "go": "e24b3821-71e8-49dc-b874-b41d15687f8f",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 200
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "e8935b9b-0ffb-475d-ae7e-b0d890b1b1d0",
+        "__guid": "7a7997ae-f1a6-4f1f-b6c9-5e836734757a",
         "AngularDamping": 5,
-        "Gravity": true,
+        "Gravity": false,
         "LinearDamping": 1,
         "Locking": {
           "Y": true,
@@ -44,7 +44,7 @@
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "d31e6bdf-1a7e-4fb7-8aa7-9f6f01609fea",
+        "__guid": "39e7618e-31f9-4315-9809-3b34f67ee6cf",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/ninjarope/ninjarope_hook.vmdl",
@@ -53,7 +53,7 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "4e2f6c32-0279-4d4c-9548-751590ceb4b8",
+        "__guid": "a3c888fe-fae4-4f7b-8bcd-9043b534457d",
         "Center": "6.239998,0,0",
         "IsTrigger": false,
         "Radius": 4.2400055,
@@ -61,10 +61,118 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.NinjaRopeHook",
-        "__guid": "59fd9f1f-fec6-4a79-80af-248d074dd0c2"
+        "__guid": "ae4f274d-7404-43cb-8824-4ca5dd5eb071",
+        "MountObject": {
+          "_type": "gameobject",
+          "go": "e2a73882-ccbc-42a4-9008-8393bc45f8ad"
+        },
+        "PhysicsProjectileComponent": {
+          "_type": "component",
+          "component_id": "b29aa902-347b-4b69-9be5-8345d4cffcbd",
+          "go": "e24b3821-71e8-49dc-b874-b41d15687f8f",
+          "component_type": "PhysicsProjectileComponent"
+        }
+      },
+      {
+        "__type": "Sandbox.LineRenderer",
+        "__guid": "d69363a9-117c-4fd5-9aa3-16d0bedbd15c",
+        "Color": {
+          "color": [
+            {
+              "t": 0.5,
+              "c": "0.45116,0.37772,0.29378,1"
+            }
+          ],
+          "alpha": []
+        },
+        "EndCap": "None",
+        "Opaque": true,
+        "Points": [],
+        "SplineBias": 0,
+        "SplineContinuity": 0,
+        "SplineInterpolation": 0,
+        "SplineTension": 0,
+        "StartCap": "None",
+        "Width": {
+          "rangey": "0,2",
+          "frames": [
+            {
+              "y": 1
+            }
+          ]
+        },
+        "Wireframe": false
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "e2a73882-ccbc-42a4-9008-8393bc45f8ad",
+        "Flags": 0,
+        "Name": "MountablePoint",
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.Rigidbody",
+            "__guid": "07179a89-38f6-434b-8881-e43db1213999",
+            "AngularDamping": 0,
+            "Gravity": true,
+            "LinearDamping": 1,
+            "Locking": {
+              "Y": true
+            },
+            "MassOverride": 0,
+            "MotionEnabled": true,
+            "RigidbodyFlags": 0,
+            "StartAsleep": false
+          },
+          {
+            "__type": "Sandbox.SpringJoint",
+            "__guid": "18dcf5ea-ecc7-4957-a79d-df657b4f0e25",
+            "Body": {
+              "_type": "gameobject",
+              "go": "e24b3821-71e8-49dc-b874-b41d15687f8f"
+            },
+            "BreakForce": 0,
+            "BreakTorque": 0,
+            "Damping": 100,
+            "EnableCollision": true,
+            "Frequency": 5000,
+            "MaxLength": 1000,
+            "MinLength": 0
+          },
+          {
+            "__type": "Grubs.RopeBehaviorComponent",
+            "__guid": "52b3c310-f247-48ec-af91-ade2b51d75c6",
+            "CornerObjects": [],
+            "HookObject": {
+              "_type": "gameobject",
+              "go": "e24b3821-71e8-49dc-b874-b41d15687f8f"
+            },
+            "ropeLength": 0,
+            "RopeRenderer": {
+              "_type": "component",
+              "component_id": "d69363a9-117c-4fd5-9aa3-16d0bedbd15c",
+              "go": "e24b3821-71e8-49dc-b874-b41d15687f8f",
+              "component_type": "LineRenderer"
+            }
+          },
+          {
+            "__type": "Sandbox.SphereCollider",
+            "__guid": "55f02b72-a458-49ef-95bf-94a34aed45df",
+            "Center": "0,0,0",
+            "IsTrigger": false,
+            "Radius": 10,
+            "Static": false,
+            "Surface": "surfaces/zero_bounce.surface"
+          },
+          {
+            "__type": "Grubs.Common.Mountable",
+            "__guid": "a5ae31db-c012-4137-b4d7-bf913ea60d15"
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

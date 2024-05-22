@@ -109,6 +109,7 @@
               "Gravity": true,
               "LinearDamping": 1,
               "Locking": {
+                "Y": true,
                 "Pitch": true,
                 "Yaw": true,
                 "Roll": true
@@ -221,7 +222,7 @@
   },
   "Title": "ropetest",
   "Description": "",
-  "LastSaved": "2024-05-22T10:13:09.0277288\u002B02:00",
+  "LastSaved": "2024-05-22T12:03:36.8363911\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

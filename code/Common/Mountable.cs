@@ -10,11 +10,23 @@ public sealed class Mountable : Component
 	public void Mount( Grub grub )
 	{
 		Grub = grub;
+		foreach ( var collider in Grub.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
+		{
+			collider.Enabled = false;
+		}
+		Grub.PlayerController.Enabled = false;
 	}
 
 	public void Dismount()
 	{
+		foreach ( var collider in Grub.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
+		{
+			collider.Enabled = true;
+		}
+		Grub.PlayerController.Enabled = true;
+		Grub.CharacterController.Punch(Components.Get<Rigidbody>().Velocity);
 		Grub = null;
+		GameObject.Destroy();
 	}
 
 	protected override void OnUpdate()

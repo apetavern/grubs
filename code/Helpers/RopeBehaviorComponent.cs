@@ -1,3 +1,4 @@
+using Grubs.Common;
 using Sandbox;
 using System.IO.Pipes;
 
@@ -25,11 +26,24 @@ public sealed class RopeBehaviorComponent : Component
 
 	[Property] float ropeLength {  get; set; }
 
+	protected override void OnDestroy()
+	{
+		foreach ( var item in CornerObjects )
+		{
+			item.Destroy();
+		}
+		base.OnDestroy();
+	}
+
 	protected override void OnUpdate()
 	{
+		DrawRope();
+
+		if ( IsProxy ) return;
+
 		HookDirection = (jointComponent.Body.Transform.Position - Transform.Position).Normal;
 
-		var tr = Scene.Trace.Ray(  Transform.Position, jointComponent.Body.Transform.Position + HookDirection ).IgnoreGameObjectHierarchy(GameObject).Run();
+		var tr = Scene.Trace.Ray(  Transform.Position - HookDirection, jointComponent.Body.Transform.Position + HookDirection ).WithoutTags("player", "tool", "projectile" ).IgnoreGameObjectHierarchy(GameObject).Run();
 
 		if ( tr.Hit )
 		{
@@ -44,7 +58,7 @@ public sealed class RopeBehaviorComponent : Component
 
 		if ( CornerObjects.Count > 1 )
 		{
-			var tr2 = Scene.Trace.Ray( Transform.Position, CornerObjects[CornerObjects.Count - 2].Transform.Position + HookDirection * 2f ).IgnoreGameObjectHierarchy( GameObject ).Run();
+			var tr2 = Scene.Trace.Ray( Transform.Position - HookDirection, CornerObjects[CornerObjects.Count - 2].Transform.Position + HookDirection * 2f ).WithoutTags( "player", "tool", "projectile" ).IgnoreGameObjectHierarchy( GameObject ).Run();
 
 			if ( !tr2.Hit )
 			{
@@ -58,7 +72,7 @@ public sealed class RopeBehaviorComponent : Component
 		}
 		else
 		{
-			var tr2 = Scene.Trace.Ray( Transform.Position,  HookObject.Transform.Position + HookDirection * 2f ).IgnoreGameObjectHierarchy( GameObject ).Run();
+			var tr2 = Scene.Trace.Ray( Transform.Position - HookDirection,  HookObject.Transform.Position + HookDirection * 2f ).WithoutTags( "player", "tool", "projectile" ).IgnoreGameObjectHierarchy( GameObject ).Run();
 
 			if ( !tr2.Hit )
 			{
@@ -66,8 +80,11 @@ public sealed class RopeBehaviorComponent : Component
 				GameObject NewCorner = HookObject;
 				jointComponent.Body = NewCorner;
 				//ropeLength += Vector3.DistanceBetween( LastCorner.Transform.Position, NewCorner.Transform.Position );
-				CornerObjects[CornerObjects.Count - 1].Destroy();
-				CornerObjects.RemoveAt( CornerObjects.Count - 1 );
+				if ( CornerObjects.Count > 0 )
+				{
+					CornerObjects[CornerObjects.Count - 1].Destroy();
+					CornerObjects.RemoveAt( CornerObjects.Count - 1 );
+				}
 			}
 		}
 
@@ -75,13 +92,16 @@ public sealed class RopeBehaviorComponent : Component
 
 		ropeLength -= Input.AnalogMove.x * Time.Delta * 100f;
 
-		ropeLength = ropeLength.Clamp( 100f, 10000f );
+		ropeLength = ropeLength.Clamp( 20f, 10000f );
 
 		Vector3 leftDirection = Vector3.Cross( HookDirection, Vector3.Up ).Normal;
 
-		Components.Get<Rigidbody>().Velocity += leftDirection * Input.AnalogMove.y * -10f;
+		Components.Get<Rigidbody>().Velocity += Vector3.Forward * Input.AnalogMove.y * -10f;
 
-		DrawRope();
+		if ( Input.Pressed( "jump" ) )
+		{
+			Components.Get<Mountable>().Dismount();
+		}
 	}
 
 	public void DrawRope()
