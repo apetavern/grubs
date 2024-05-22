@@ -1,10 +1,6 @@
 {
   "RootObject": {
-<<<<<<< HEAD
-    "__guid": "2aa0ac34-78b9-445d-a074-f95135c775bb",
-=======
-    "__guid": "92102e47-ec65-456f-a09e-a1543508129e",
->>>>>>> 3bbe7a7c (idk)
+    "__guid": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
     "Flags": 0,
     "Name": "player",
     "Tags": "player",
@@ -14,34 +10,22 @@
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-<<<<<<< HEAD
-        "__guid": "5b645864-61de-48ff-b44f-930342c7bee0",
-=======
-        "__guid": "f814cd07-b603-4fc6-b8ca-2c772c42649a",
->>>>>>> 3bbe7a7c (idk)
+        "__guid": "6dfad29f-e9cd-408c-97d8-54500f20ec0d",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-<<<<<<< HEAD
-          "component_id": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
-          "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
-=======
-          "component_id": "ae71daaf-9526-44c8-95d8-d75a795153e6",
-          "go": "92102e47-ec65-456f-a09e-a1543508129e",
->>>>>>> 3bbe7a7c (idk)
+          "component_id": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
+          "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
           "component_type": "PlayerInventory"
-        }
+        },
+        "MousePosition": "0,0,0"
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-<<<<<<< HEAD
-        "__guid": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
-=======
-        "__guid": "ae71daaf-9526-44c8-95d8-d75a795153e6",
->>>>>>> 3bbe7a7c (idk)
+        "__guid": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -83,32 +67,23 @@
           },
           {
             "_type": "gameobject",
-<<<<<<< HEAD
             "prefab": "prefabs/tools/ninja_rope/ninja_rope.prefab"
-=======
+          },
+          {
+            "_type": "gameobject",
             "prefab": "prefabs/weapons/teleporter/teleporter.prefab"
->>>>>>> 3bbe7a7c (idk)
           }
         ],
         "Player": {
           "_type": "component",
-<<<<<<< HEAD
-          "component_id": "5b645864-61de-48ff-b44f-930342c7bee0",
-          "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
-=======
-          "component_id": "f814cd07-b603-4fc6-b8ca-2c772c42649a",
-          "go": "92102e47-ec65-456f-a09e-a1543508129e",
->>>>>>> 3bbe7a7c (idk)
+          "component_id": "6dfad29f-e9cd-408c-97d8-54500f20ec0d",
+          "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
           "component_type": "Player"
         }
       },
       {
         "__type": "Sandbox.ScreenPanel",
-<<<<<<< HEAD
-        "__guid": "7e9cf174-164e-4fc0-a982-ea85b84462c1",
-=======
-        "__guid": "982cd5b1-527f-4c96-91e6-c6a0593ac959",
->>>>>>> 3bbe7a7c (idk)
+        "__guid": "da09eceb-bd21-4c58-8907-aa7ba9293853",
         "AutoScreenScale": true,
         "Opacity": 1,
         "Scale": 1,
@@ -116,30 +91,18 @@
       },
       {
         "__type": "Grubs.UI.Components.PlayerScreen",
-<<<<<<< HEAD
-        "__guid": "7b566d70-5c4e-477c-84a4-c679f6219fb3",
+        "__guid": "c808dd61-f421-4952-af03-70e24cdcb695",
         "Inventory": {
           "_type": "component",
-          "component_id": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
-          "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
-=======
-        "__guid": "a85553c6-e935-4698-9e21-c39747ce0881",
-        "Inventory": {
-          "_type": "component",
-          "component_id": "ae71daaf-9526-44c8-95d8-d75a795153e6",
-          "go": "92102e47-ec65-456f-a09e-a1543508129e",
->>>>>>> 3bbe7a7c (idk)
+          "component_id": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
+          "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
           "component_type": "PlayerInventory"
         }
       }
     ],
     "Children": [
       {
-<<<<<<< HEAD
-        "__guid": "fc93d719-df91-4389-993d-285ec27941f6",
-=======
-        "__guid": "a73c9edc-67b7-4bf8-8854-06aae50b6ff6",
->>>>>>> 3bbe7a7c (idk)
+        "__guid": "912a0354-a70e-478e-bad4-f562fc9babfa",
         "Flags": 0,
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
@@ -148,11 +111,7 @@
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",
-<<<<<<< HEAD
-            "__guid": "41231d36-fdeb-4ff1-a35f-5503b074c3b0",
-=======
-            "__guid": "cb763e01-b149-4d39-9cad-59bd9e1cdb8f",
->>>>>>> 3bbe7a7c (idk)
+            "__guid": "bc9c8f88-dfd2-443a-a8dc-e9ee3566badd",
             "AutoScreenScale": true,
             "Opacity": 1,
             "Scale": 1,
@@ -160,19 +119,11 @@
           },
           {
             "__type": "Grubs.UI.Components.PlayerScreen",
-<<<<<<< HEAD
-            "__guid": "d3b1ad02-e6f2-42b5-a7eb-453d9c5d7695",
+            "__guid": "4af37095-588f-4b01-a549-9ca38cccd3a0",
             "Inventory": {
               "_type": "component",
-              "component_id": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
-              "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
-=======
-            "__guid": "0e7f2fae-622a-45c5-89e3-e8775e378011",
-            "Inventory": {
-              "_type": "component",
-              "component_id": "ae71daaf-9526-44c8-95d8-d75a795153e6",
-              "go": "92102e47-ec65-456f-a09e-a1543508129e",
->>>>>>> 3bbe7a7c (idk)
+              "component_id": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
+              "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
               "component_type": "PlayerInventory"
             }
           }

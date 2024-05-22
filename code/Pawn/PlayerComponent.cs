@@ -23,9 +23,20 @@ public sealed class Player : Component
 
 	[Property] public required PlayerInventory Inventory { get; set; }
 
+	[Property, ReadOnly] public Vector3 MousePosition { get; set; }
+
+	private static readonly Plane _plane = new( new Vector3( 0f, 512f, 0f ), Vector3.Left );
+
 	protected override void OnStart()
 	{
 		SelectedColor = Color.Random.Hex;
+	}
+
+	protected override void OnUpdate()
+	{
+		var cursorRay = Scene.Camera.ScreenPixelToRay( Mouse.Position );
+		var endPos = _plane.Trace( cursorRay, twosided: true );
+		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 	}
 
 	public void EndTurn()
