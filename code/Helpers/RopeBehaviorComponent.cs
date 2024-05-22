@@ -16,12 +16,20 @@ public sealed class RopeBehaviorComponent : Component
 
 	public Vector3 HookDirection;
 
+	GameObject MuzzlePoint { get; set; }
+
+	Mountable mountComponent { get; set; }
+
 	protected override void OnAwake()
 	{
 		jointComponent = Components.Get<SpringJoint>();
 		jointComponent.MaxLength = Vector3.DistanceBetween( Transform.Position, HookObject.Transform.Position );
 		jointComponent.Body = HookObject;
 		ropeLength = jointComponent.MaxLength;
+
+		mountComponent = Components.Get<Mountable>();
+
+		MuzzlePoint = new GameObject( true, "MuzzlePoint" );
 	}
 
 	[Property] float ropeLength {  get; set; }
@@ -40,6 +48,8 @@ public sealed class RopeBehaviorComponent : Component
 		DrawRope();
 
 		if ( IsProxy ) return;
+
+		MuzzlePoint.Transform.Position = Transform.Position + HookDirection * 15f + mountComponent.Grub.Transform.Rotation.Left * 10f;
 
 		HookDirection = (jointComponent.Body.Transform.Position - Transform.Position).Normal;
 
@@ -111,7 +121,7 @@ public sealed class RopeBehaviorComponent : Component
 			RopeRenderer.Points.Clear();
 			RopeRenderer.Points.Add( HookObject );
 			RopeRenderer.Points.AddRange(CornerObjects);
-			RopeRenderer.Points.Add( GameObject );
+			RopeRenderer.Points.Add( MuzzlePoint );
 		}
 		else
 		{
@@ -120,13 +130,13 @@ public sealed class RopeBehaviorComponent : Component
 				RopeRenderer.Points.Clear();
 				RopeRenderer.Points.Add( HookObject );
 				RopeRenderer.Points.Add( CornerObjects[0] );
-				RopeRenderer.Points.Add( GameObject );
+				RopeRenderer.Points.Add( MuzzlePoint );
 			}
 			else
 			{
 				RopeRenderer.Points.Clear();
 				RopeRenderer.Points.Add( HookObject );
-				RopeRenderer.Points.Add( GameObject );
+				RopeRenderer.Points.Add( MuzzlePoint );
 			}
 		}
 	}
