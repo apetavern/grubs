@@ -1,28 +1,30 @@
 {
   "RootObject": {
-    "__guid": "48549c16-9b28-4632-8f68-0fc50e6c7ef7",
+    "__guid": "92102e47-ec65-456f-a09e-a1543508129e",
+    "Flags": 0,
     "Name": "player",
     "Tags": "player",
     "Enabled": true,
     "NetworkMode": 2,
+    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-        "__guid": "6c32169b-91f6-4a21-8f38-0f6490428c5a",
+        "__guid": "f814cd07-b603-4fc6-b8ca-2c772c42649a",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-          "component_id": "15656e79-3836-44ee-b4b4-283c6aea4f4a",
-          "go": "48549c16-9b28-4632-8f68-0fc50e6c7ef7",
+          "component_id": "ae71daaf-9526-44c8-95d8-d75a795153e6",
+          "go": "92102e47-ec65-456f-a09e-a1543508129e",
           "component_type": "PlayerInventory"
         }
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-        "__guid": "15656e79-3836-44ee-b4b4-283c6aea4f4a",
+        "__guid": "ae71daaf-9526-44c8-95d8-d75a795153e6",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -61,18 +63,22 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/minigun/minigun.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/teleporter/teleporter.prefab"
           }
         ],
         "Player": {
           "_type": "component",
-          "component_id": "6c32169b-91f6-4a21-8f38-0f6490428c5a",
-          "go": "48549c16-9b28-4632-8f68-0fc50e6c7ef7",
+          "component_id": "f814cd07-b603-4fc6-b8ca-2c772c42649a",
+          "go": "92102e47-ec65-456f-a09e-a1543508129e",
           "component_type": "Player"
         }
       },
       {
         "__type": "Sandbox.ScreenPanel",
-        "__guid": "ae8e03ea-ed58-4967-94d9-9d0ce48278c7",
+        "__guid": "982cd5b1-527f-4c96-91e6-c6a0593ac959",
         "AutoScreenScale": true,
         "Opacity": 1,
         "Scale": 1,
@@ -80,25 +86,27 @@
       },
       {
         "__type": "Grubs.UI.Components.PlayerScreen",
-        "__guid": "2f860859-f6eb-4572-9c8c-ddbdebd541e5",
+        "__guid": "a85553c6-e935-4698-9e21-c39747ce0881",
         "Inventory": {
           "_type": "component",
-          "component_id": "15656e79-3836-44ee-b4b4-283c6aea4f4a",
-          "go": "48549c16-9b28-4632-8f68-0fc50e6c7ef7",
+          "component_id": "ae71daaf-9526-44c8-95d8-d75a795153e6",
+          "go": "92102e47-ec65-456f-a09e-a1543508129e",
           "component_type": "PlayerInventory"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "cd1b9f17-1130-4733-a027-4fc878570801",
+        "__guid": "a73c9edc-67b7-4bf8-8854-06aae50b6ff6",
+        "Flags": 0,
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
         "NetworkMode": 0,
+        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",
-            "__guid": "cbf8ad9a-c3d1-4f4c-b8ec-333543f393d6",
+            "__guid": "cb763e01-b149-4d39-9cad-59bd9e1cdb8f",
             "AutoScreenScale": true,
             "Opacity": 1,
             "Scale": 1,
@@ -106,11 +114,11 @@
           },
           {
             "__type": "Grubs.UI.Components.PlayerScreen",
-            "__guid": "2bc7db65-e897-495f-aad3-c4df9bb5b9cd",
+            "__guid": "0e7f2fae-622a-45c5-89e3-e8775e378011",
             "Inventory": {
               "_type": "component",
-              "component_id": "15656e79-3836-44ee-b4b4-283c6aea4f4a",
-              "go": "48549c16-9b28-4632-8f68-0fc50e6c7ef7",
+              "component_id": "ae71daaf-9526-44c8-95d8-d75a795153e6",
+              "go": "92102e47-ec65-456f-a09e-a1543508129e",
               "component_type": "PlayerInventory"
             }
           }
@@ -122,6 +130,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

@@ -282,6 +282,26 @@
           "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
         }
       ]
+    },
+    {
+      "__guid": "7ec1f645-9449-4356-9441-fc3b3d507425",
+      "Flags": 0,
+      "Name": "MouseTest",
+      "Position": "-146.6813,983.3716,132.3577",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "31f07944-d04e-4900-9980-2bc125ef5f9f",
+          "BodyGroups": 5,
+          "CreateBoneObjects": false,
+          "Model": "models/citizenworm.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -307,7 +327,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-20T15:21:27.1780059-03:00",
+  "LastSaved": "2024-05-22T14:43:19.1169189-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
