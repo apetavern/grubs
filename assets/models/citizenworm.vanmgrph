@@ -1781,7 +1781,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 288.0, 784.0 ]
+					m_vecPosition = [ 144.0, 976.0 ]
 					m_nNodeID = 
 					{
 						m_id = 309510769
@@ -1970,7 +1970,7 @@
 				{
 					_class = "CBlendAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 528.0, 752.0 ]
+					m_vecPosition = [ 352.0, 944.0 ]
 					m_nNodeID = 
 					{
 						m_id = 383572449
@@ -4002,8 +4002,8 @@
 				value = 
 				{
 					_class = "CBlendAnimNode"
-					m_sName = "AimBlend_Bazooka"
-					m_vecPosition = [ 544.0, 560.0 ]
+					m_sName = "AimBlend"
+					m_vecPosition = [ 352.0, 800.0 ]
 					m_nNodeID = 
 					{
 						m_id = 714026169
@@ -4886,7 +4886,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 272.0, 720.0 ]
+					m_vecPosition = [ 128.0, 912.0 ]
 					m_nNodeID = 
 					{
 						m_id = 977294458
@@ -4979,7 +4979,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 736.0, 560.0 ]
+					m_vecPosition = [ 544.0, 800.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1085137297
@@ -5173,7 +5173,7 @@
 				{
 					_class = "CBoneMaskAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 928.0, 528.0 ]
+					m_vecPosition = [ 736.0, 768.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1135355131
@@ -6278,7 +6278,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 320.0, 624.0 ]
+					m_vecPosition = [ 176.0, 816.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1447466759
@@ -6544,7 +6544,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 320.0, 672.0 ]
+					m_vecPosition = [ 176.0, 864.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1606333603
@@ -6624,7 +6624,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 320.0, 576.0 ]
+					m_vecPosition = [ 176.0, 768.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1708274049
@@ -7054,7 +7054,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 736.0, 496.0 ]
+					m_vecPosition = [ 544.0, 736.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1890539930

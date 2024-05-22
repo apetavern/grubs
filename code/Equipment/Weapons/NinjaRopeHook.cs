@@ -27,13 +27,13 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 			
 			if ( PhysicsProjectileComponent.Grub.IsValid() && mountable.MountEnabled )
 			{
-				Log.Info("updated ninja rope hook"  );
 				var grub = PhysicsProjectileComponent.Grub;
 				grub.Animator.GrubRenderer.Set( "heightdiff", 15f );
 				grub.Animator.GrubRenderer.Set( "aimangle", Vector3.GetAngle( grub.Transform.Rotation.Forward, Rope.HookDirection) - 15f );
 				grub.PlayerController.IsOnRope = true;
 				grub.Transform.Rotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.Transform.Rotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch(45f), Time.Delta * 10f);
 				grub.CharacterController.IsOnGround = false;
+				grub.CharacterController.Velocity = Vector3.Zero;
 			}
 			else
 			{
