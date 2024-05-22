@@ -37,6 +37,8 @@ public sealed class GrubAnimator : Component
 
 		GrubRenderer.SetBodyGroup( "hide_hands", shouldHideHands ? 1 : 0 );
 
+		GrubRenderer.Set( "onrope", Grub.PlayerController.IsOnRope );
+
 		GrubRenderer.Set( "lookatweight",
 			MathX.Lerp( GrubRenderer.GetFloat( "lookatweight" ), shouldLookAt ? 1f : 0f,
 				0.2f ) );
