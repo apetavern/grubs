@@ -8,6 +8,8 @@ public sealed class RopeBehaviorComponent : Component
 
 	[Property] public List<GameObject> CornerObjects { get; set; } = new List<GameObject>();
 
+	[Property] LineRenderer RopeRenderer { get; set; }
+
 	SpringJoint jointComponent { get; set; }
 
 	public Vector3 HookDirection;
@@ -35,7 +37,7 @@ public sealed class RopeBehaviorComponent : Component
 			NewCorner.Transform.Position = tr.HitPosition + tr.Normal;
 			CornerObjects.Add( NewCorner );
 			jointComponent.Body = NewCorner;
-			ropeLength -= Vector3.DistanceBetween( LastCorner.Transform.Position, NewCorner.Transform.Position )*0.95f;
+			//ropeLength -= Vector3.DistanceBetween( LastCorner.Transform.Position, NewCorner.Transform.Position )*0.8f;
 			jointComponent.MaxLength = ropeLength;
 		}
 
@@ -48,7 +50,7 @@ public sealed class RopeBehaviorComponent : Component
 				GameObject LastCorner = jointComponent.Body;
 				GameObject NewCorner = CornerObjects[CornerObjects.Count - 2];
 				jointComponent.Body = NewCorner;
-				ropeLength += Vector3.DistanceBetween( LastCorner.Transform.Position, NewCorner.Transform.Position );
+				//ropeLength += Vector3.DistanceBetween( LastCorner.Transform.Position, NewCorner.Transform.Position );
 				CornerObjects[CornerObjects.Count - 1].Destroy();
 				CornerObjects.RemoveAt( CornerObjects.Count - 1 );
 			}
@@ -62,7 +64,9 @@ public sealed class RopeBehaviorComponent : Component
 				GameObject LastCorner = jointComponent.Body;
 				GameObject NewCorner = HookObject;
 				jointComponent.Body = NewCorner;
-				ropeLength += Vector3.DistanceBetween( LastCorner.Transform.Position, NewCorner.Transform.Position );
+				//ropeLength += Vector3.DistanceBetween( LastCorner.Transform.Position, NewCorner.Transform.Position );
+				CornerObjects[CornerObjects.Count - 1].Destroy();
+				CornerObjects.RemoveAt( CornerObjects.Count - 1 );
 			}
 		}
 
@@ -70,37 +74,37 @@ public sealed class RopeBehaviorComponent : Component
 
 		ropeLength -= Input.AnalogMove.x * Time.Delta * 100f;
 
-		ropeLength = ropeLength.Clamp( 10f, 10000f );
+		ropeLength = ropeLength.Clamp( 100f, 10000f );
 
 		Components.Get<Rigidbody>().Velocity += Transform.Rotation.Forward * Input.AnalogMove.y * -10f;
 
-		DrawDebugs();
+		DrawRope();
 	}
 
-	public void DrawDebugs()
+	public void DrawRope()
 	{
-		Gizmo.Draw.LineThickness = 3f;
 		if ( CornerObjects.Count > 1 )
 		{
-			Gizmo.Draw.Line( HookObject.Transform.Position, CornerObjects[0].Transform.Position );
-			for ( int i = 0; i < CornerObjects.Count - 1; i++ )
-			{
-				Gizmo.Draw.Line( CornerObjects[i].Transform.Position, CornerObjects[i + 1].Transform.Position );
-			}
-			Gizmo.Draw.Line( CornerObjects.Last().Transform.Position, Transform.Position );
+			RopeRenderer.Points.Clear();
+			RopeRenderer.Points.Add( HookObject );
+			RopeRenderer.Points.AddRange(CornerObjects);
+			RopeRenderer.Points.Add( GameObject );
 		}
 		else
 		{
 			if ( CornerObjects.Count == 1 )
 			{
-				Gizmo.Draw.Line( CornerObjects[0].Transform.Position, Transform.Position );
-				Gizmo.Draw.Line( HookObject.Transform.Position, CornerObjects[0].Transform.Position );
+				RopeRenderer.Points.Clear();
+				RopeRenderer.Points.Add( HookObject );
+				RopeRenderer.Points.Add( CornerObjects[0] );
+				RopeRenderer.Points.Add( GameObject );
 			}
 			else
 			{
-				Gizmo.Draw.Line( HookObject.Transform.Position, Transform.Position );
+				RopeRenderer.Points.Clear();
+				RopeRenderer.Points.Add( HookObject );
+				RopeRenderer.Points.Add( GameObject );
 			}
 		}
-		Gizmo.Draw.LineThickness = 1f;
 	}
 }
