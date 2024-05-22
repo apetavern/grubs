@@ -23,7 +23,8 @@ public partial class GrubsTerrain : Component
 		await SdfWorld.ClearAsync();
 		SdfWorld.Transform.Rotation = Rotation.FromRoll( 90f );
 
-		SetupGeneratedWorld();
+		SetupWorldFromTexture();
+		//SetupGeneratedWorld();
 	}
 
 	public Vector3 FindSpawnLocation( bool inAir = false, float size = 16f )

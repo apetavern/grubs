@@ -23,6 +23,7 @@ public sealed partial class GrubPlayerController : Component
 	[Sync] public Rotation EyeRotation { get; set; }
 	[Sync] public bool IsChargingBackflip { get; set; }
 	[Sync] public float BackflipCharge { get; set; }
+	[Sync] public bool IsOnRope { get; set; }
 	public bool IsGrounded => CharacterController.IsOnGround;
 	public Vector3 Velocity => CharacterController.Velocity;
 
@@ -165,7 +166,12 @@ public sealed partial class GrubPlayerController : Component
 
 	public bool ShouldShowWeapon()
 	{
-		return Velocity.IsNearlyZero( 2.5f ) && IsGrounded && !IsChargingBackflip;
+		var showWhileMoving = false;
+		if ( Grub.ActiveEquipment is { } equipment )
+			if ( equipment.Components.Get<WeaponComponent>() is { } weapon )
+				if ( weapon.CanFireWhileMoving )
+					showWhileMoving = true;
+		return (Velocity.IsNearlyZero( 2.5f ) && IsGrounded || IsOnRope || showWhileMoving) && !IsChargingBackflip;
 	}
 
 	/// <summary>

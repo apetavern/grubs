@@ -1,9 +1,11 @@
 {
   "RootObject": {
     "__guid": "34e64148-41c5-4881-8521-daecbdeaf713",
+    "Flags": 0,
     "Name": "bazooka",
     "Enabled": true,
     "NetworkMode": 2,
+    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Grubs.Equipment.EquipmentComponent",
@@ -25,6 +27,7 @@
         "__guid": "4e848481-c922-4889-957e-7f6ee9130352",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
+        "MaterialGroup": "default",
         "Model": "models/weapons/bazooka/bazooka.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -41,8 +44,9 @@
           "component_type": "EquipmentComponent"
         },
         "FiringType": "Charged",
+        "MaxUses": 1,
         "OnFire": {
-          "__version": 6,
+          "__version": 7,
           "__guid": "5684bf7e-9894-4451-992e-51ca8962efb5",
           "UserData": {
             "Title": "On Fire",
@@ -53,7 +57,7 @@
           "Variables": [
             {
               "Name": "_this",
-              "Type": "Sandbox.Game/Sandbox.Component",
+              "Type": "Sandbox.Component",
               "Default": {
                 "_type": "component",
                 "component_id": "af9c76f0-a41e-4152-9656-12e88dc5c62d",
@@ -112,7 +116,13 @@
               "DstId": 1,
               "DstName": "source"
             }
-          ]
+          ],
+          "Defaults": {
+            "$3._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
+            }
+          }
         }
       }
     ],
@@ -122,6 +132,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

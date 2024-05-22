@@ -1,0 +1,183 @@
+{
+  "RootObject": {
+    "__guid": "6e776632-76aa-4a28-b145-34a2341548f0",
+    "Flags": 0,
+    "Name": "hook_tip",
+    "Tags": "tool,projectile,notarget",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Equipment.Weapons.PhysicsProjectileComponent",
+        "__guid": "6c4b2ddd-628c-40b3-b33b-3ee06ade2a96",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "50278dbc-438d-4f7d-baa9-dab1c68907d2",
+          "go": "6e776632-76aa-4a28-b145-34a2341548f0",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "02d591eb-59d6-4e34-ae7c-389f84aae50b",
+          "go": "6e776632-76aa-4a28-b145-34a2341548f0",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 200
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "02d591eb-59d6-4e34-ae7c-389f84aae50b",
+        "AngularDamping": 5,
+        "Gravity": false,
+        "LinearDamping": 1,
+        "Locking": {
+          "Y": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "50278dbc-438d-4f7d-baa9-dab1c68907d2",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/ninjarope/ninjarope_hook.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "7502fb8d-c88f-4e7b-b246-3ebe5fc00553",
+        "Center": "6.239998,0,0",
+        "IsTrigger": false,
+        "Radius": 4.2400055,
+        "Static": false
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.NinjaRopeHook",
+        "__guid": "7b83978a-7da1-4f71-a166-a13e666ec05f",
+        "MountObject": {
+          "_type": "gameobject",
+          "go": "6e932ecd-7a0c-44f7-8182-82fa690f4bb6"
+        },
+        "PhysicsProjectileComponent": {
+          "_type": "component",
+          "component_id": "6c4b2ddd-628c-40b3-b33b-3ee06ade2a96",
+          "go": "6e776632-76aa-4a28-b145-34a2341548f0",
+          "component_type": "PhysicsProjectileComponent"
+        }
+      },
+      {
+        "__type": "Sandbox.LineRenderer",
+        "__guid": "da54890b-318b-4cc0-aa7a-a3ddf2e55450",
+        "Color": {
+          "color": [
+            {
+              "t": 0.5,
+              "c": "0.45116,0.37772,0.29378,1"
+            }
+          ],
+          "alpha": []
+        },
+        "EndCap": "None",
+        "Opaque": true,
+        "Points": [],
+        "SplineBias": 0,
+        "SplineContinuity": 0,
+        "SplineInterpolation": 0,
+        "SplineTension": 0,
+        "StartCap": "None",
+        "Width": {
+          "rangey": "0,2",
+          "frames": [
+            {
+              "y": 1
+            }
+          ]
+        },
+        "Wireframe": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "6e932ecd-7a0c-44f7-8182-82fa690f4bb6",
+        "Flags": 0,
+        "Name": "MountablePoint",
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.Rigidbody",
+            "__guid": "723697e9-64d9-4ec5-acfb-6004a302e22d",
+            "AngularDamping": 0,
+            "Gravity": true,
+            "LinearDamping": 1,
+            "Locking": {
+              "Y": true
+            },
+            "MassOverride": 0,
+            "MotionEnabled": true,
+            "RigidbodyFlags": 0,
+            "StartAsleep": false
+          },
+          {
+            "__type": "Sandbox.SpringJoint",
+            "__guid": "43e24ba7-570b-4c7a-b91f-fde6ac3cd563",
+            "Body": {
+              "_type": "gameobject",
+              "go": "6e776632-76aa-4a28-b145-34a2341548f0"
+            },
+            "BreakForce": 0,
+            "BreakTorque": 0,
+            "Damping": 100,
+            "EnableCollision": true,
+            "Frequency": 5000,
+            "MaxLength": 1000,
+            "MinLength": 0
+          },
+          {
+            "__type": "Grubs.RopeBehaviorComponent",
+            "__guid": "3903d66c-052d-4a0c-b040-eddf46e59f65",
+            "CornerObjects": [],
+            "HookObject": {
+              "_type": "gameobject",
+              "go": "6e776632-76aa-4a28-b145-34a2341548f0"
+            },
+            "ropeLength": 0,
+            "RopeRenderer": {
+              "_type": "component",
+              "component_id": "da54890b-318b-4cc0-aa7a-a3ddf2e55450",
+              "go": "6e776632-76aa-4a28-b145-34a2341548f0",
+              "component_type": "LineRenderer"
+            }
+          },
+          {
+            "__type": "Sandbox.SphereCollider",
+            "__guid": "32a66abb-31af-463b-8c4e-c078693905ac",
+            "Center": "0,0,0",
+            "IsTrigger": false,
+            "Radius": 10,
+            "Static": false,
+            "Surface": "surfaces/zero_bounce.surface"
+          },
+          {
+            "__type": "Grubs.Common.Mountable",
+            "__guid": "c9aec8c3-a949-4739-8aaf-6e7566047a54"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

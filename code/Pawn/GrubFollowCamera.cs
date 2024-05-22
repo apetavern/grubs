@@ -86,6 +86,8 @@ public class GrubFollowCamera : Component
 
 		foreach ( var projectile in Scene.GetAllComponents<ProjectileComponent>().Where( p => p.Active ) )
 		{
+			if ( projectile.Tags.Has( "notarget" ) )
+				continue;
 			SetTarget( projectile.GameObject, 1.5f );
 			return;
 		}
