@@ -1,0 +1,59 @@
+{
+  "RootObject": {
+    "__guid": "e800686b-94d4-4b54-8682-38e153950712",
+    "Flags": 0,
+    "Name": "teleporter",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Equipment.EquipmentComponent",
+        "__guid": "158af041-5c99-4d5e-9c33-395a1b53079a",
+        "Data": "resources/equipment/weapons/teleporter.geq",
+        "HoldPose": "Holdable",
+        "Icon": "models/tools/teleporter/teleporter.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "52d487b6-41a9-469a-83e4-8aff268f06b2",
+          "go": "e800686b-94d4-4b54-8682-38e153950712",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Teleporter",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "52d487b6-41a9-469a-83e4-8aff268f06b2",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/teleporter/teleporter.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ClickToolWeaponComponent",
+        "__guid": "0b199352-9992-4388-8ff3-8145a98a9ab3",
+        "CanFireWhileMoving": true,
+        "Cooldown": 2,
+        "CursorImage": "models/tools/teleporter/teleporter.vmdl_c.png",
+        "CursorRange": 100,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "158af041-5c99-4d5e-9c33-395a1b53079a",
+          "go": "e800686b-94d4-4b54-8682-38e153950712",
+          "component_type": "EquipmentComponent"
+        },
+        "FiringType": "Cursor",
+        "MaxUses": 1
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
