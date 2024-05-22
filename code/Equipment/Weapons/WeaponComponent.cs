@@ -90,8 +90,6 @@ public partial class WeaponComponent : Component
 				else
 					FireImmediate();
 				TimeSinceLastUsed = 0;
-			
-				FireFinished();
 			}
 		}
 		else if ( FiringType is FiringType.Complex )
@@ -119,9 +117,12 @@ public partial class WeaponComponent : Component
 			if ( !CanSwapAfterUse )
 			{
 				grub.Player.HasFiredThisTurn = true;
-				grub.Player.Inventory.Holster( grub.Player.Inventory.ActiveSlot );
 				using ( Rpc.FilterInclude( c => c.IsHost ) )
 					Gamemode.FFA.UseTurn( true );
+			}
+			else
+			{
+				grub.Player.Inventory.Holster( grub.Player.Inventory.ActiveSlot );
 			}
 		}
 	}
