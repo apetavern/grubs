@@ -5,6 +5,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 {
 	public void OnCollisionStart( Collision other )
 	{
+		Log.Info( "Collision Start" );
 		Log.Info( other.Other.GameObject.Tags );
 	}
 

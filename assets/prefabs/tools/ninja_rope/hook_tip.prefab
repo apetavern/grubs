@@ -56,8 +56,12 @@
         "__guid": "4e2f6c32-0279-4d4c-9548-751590ceb4b8",
         "Center": "6.239998,0,0",
         "IsTrigger": false,
-        "Radius": 4.3200054,
+        "Radius": 4.2400055,
         "Static": false
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.NinjaRopeHook",
+        "__guid": "59fd9f1f-fec6-4a79-80af-248d074dd0c2"
       }
     ],
     "Children": []
