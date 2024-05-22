@@ -1,4 +1,5 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Equipment.Weapons;
+using Grubs.Pawn;
 
 namespace Grubs.Common;
 
@@ -23,6 +24,9 @@ public sealed class Mountable : Component
 		{
 			collider.Enabled = true;
 		}
+		Grub.Animator.GrubRenderer.Set( "heightdiff", 0f );
+		Grub.Animator.GrubRenderer.Set( "onrope", false );
+		Grub.Transform.Rotation = Rotation.LookAt( Grub.Transform.Rotation.Forward.WithZ( 0 ), Vector3.Up );
 		Grub.PlayerController.Enabled = true;
 		Grub.CharacterController.Punch(Components.Get<Rigidbody>().Velocity);
 		Grub = null;

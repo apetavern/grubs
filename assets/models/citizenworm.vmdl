@@ -177,6 +177,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 10
@@ -226,6 +227,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 10
@@ -248,6 +250,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 25
@@ -270,6 +273,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 40
@@ -292,6 +296,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 64
@@ -314,6 +319,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_uzi_aim.fbx"
 						start_frame = 0
@@ -336,6 +342,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 79
@@ -358,6 +365,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 89
@@ -380,6 +388,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_eyesclosed.fbx"
 						start_frame = -1
@@ -402,6 +411,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 74
@@ -424,6 +434,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 105
@@ -446,6 +457,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 59
@@ -468,6 +480,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_throw.fbx"
 						start_frame = 0
@@ -490,6 +503,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_fire_shotgun.fbx"
 						start_frame = 0
@@ -512,6 +526,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 55
@@ -534,6 +549,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_baseballbat_hit.fbx"
 						start_frame = 0
@@ -556,6 +572,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_baseballbat_hit.fbx"
 						start_frame = 20
@@ -578,6 +595,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_jetpack_poses.fbx"
 						start_frame = 0
@@ -600,6 +618,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_slide.fbx"
 						start_frame = 19
@@ -622,6 +641,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_radiohold.fbx"
 						start_frame = 64
@@ -644,6 +664,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_minigun_aim.fbx"
 						start_frame = 0
@@ -666,6 +687,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizen_sixshooter_aim.fbx"
 						start_frame = 9
@@ -688,6 +710,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 159
@@ -710,6 +733,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 170
@@ -732,6 +756,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/citizenworm.fbx"
 						start_frame = 181
@@ -754,6 +779,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_explode.fbx"
 						start_frame = 9
@@ -776,6 +802,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_idles.fbx"
 						start_frame = 9
@@ -798,6 +825,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_idles.fbx"
 						start_frame = 39
@@ -820,6 +848,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_idles.fbx"
 						start_frame = 79
@@ -850,6 +879,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_incline_correct.fbx"
 						start_frame = 10
@@ -880,6 +910,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_incline_correct.fbx"
 						start_frame = 20
@@ -902,6 +933,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_backflip.fbx"
 						start_frame = 19
@@ -924,6 +956,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_idles.fbx"
 						start_frame = 49
@@ -946,6 +979,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_backflip_charge.fbx"
 						start_frame = 0
@@ -968,6 +1002,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_punches.fbx"
 						start_frame = 0
@@ -990,6 +1025,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_punches.fbx"
 						start_frame = 15
@@ -1012,6 +1048,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_punches.fbx"
 						start_frame = 30
@@ -1034,6 +1071,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_punches.fbx"
 						start_frame = 60
@@ -1056,6 +1094,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
 						enable_scale = false
 						source_filename = "models/character_animations/citizenworm_punches.fbx"
 						start_frame = 45
@@ -1258,6 +1297,20 @@
 							{
 								bone = "spine_2"
 								weight = 0.505814
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "hands_with_root"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Handsroot"
+								weight = 1.0
 							},
 						]
 						master_morph_weight = -1.0

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "b880954b-c73f-4200-a922-912e3858d3f3",
+    "__guid": "af27f75a-e7ea-4da4-831d-7756478a4546",
     "Flags": 0,
     "Name": "ninja_rope",
     "Tags": "tool",
@@ -10,14 +10,14 @@
     "Components": [
       {
         "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "9b48a0e2-a0ab-41c2-80d0-d64e846e4f8e",
+        "__guid": "292bef2b-25b5-4fe4-9d95-053c5ff299dc",
         "Data": "resources/equipment/tools/ninja_rope.geq",
         "HoldPose": "Uzi",
         "Icon": "models/tools/ninjarope/ninjarope.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "749709c0-a440-41a6-b2f9-3c014db98098",
-          "go": "b880954b-c73f-4200-a922-912e3858d3f3",
+          "component_id": "f0c95a58-46a0-4114-9d7c-c5d8c883c544",
+          "go": "af27f75a-e7ea-4da4-831d-7756478a4546",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Mountable Test",
@@ -25,7 +25,7 @@
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "749709c0-a440-41a6-b2f9-3c014db98098",
+        "__guid": "f0c95a58-46a0-4114-9d7c-c5d8c883c544",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/ninjarope/ninjarope.vmdl",
@@ -34,20 +34,20 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.WeaponComponent",
-        "__guid": "f91ccb54-1aa5-4b4c-9f63-c194ac725895",
+        "__guid": "f139e830-77c9-4bc4-90a9-048a4431be86",
         "CanFireWhileMoving": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "9b48a0e2-a0ab-41c2-80d0-d64e846e4f8e",
-          "go": "b880954b-c73f-4200-a922-912e3858d3f3",
+          "component_id": "292bef2b-25b5-4fe4-9d95-053c5ff299dc",
+          "go": "af27f75a-e7ea-4da4-831d-7756478a4546",
           "component_type": "EquipmentComponent"
         },
         "FiringType": "Instant",
-        "MaxUses": 1,
+        "MaxUses": 5,
         "OnFire": {
           "__version": 7,
-          "__guid": "d92fcfb2-9047-467f-9b1b-a6410747f5e2",
+          "__guid": "05adb2df-a9a8-4bca-8eea-c6b5f8f8803a",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -116,7 +116,7 @@
             }
           ],
           "Defaults": {
-            "$4._value": {
+            "$3._value": {
               "_type": "gameobject",
               "prefab": "prefabs/tools/ninja_rope/hook_tip.prefab"
             }

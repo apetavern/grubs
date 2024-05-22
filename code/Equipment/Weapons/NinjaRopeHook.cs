@@ -9,6 +9,8 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 
 	[Property] public PhysicsProjectileComponent PhysicsProjectileComponent { get; set; }
 
+	RopeBehaviorComponent Rope;
+
 	protected override void OnUpdate()
 	{
 		if ( IsProxy ) return;
@@ -16,6 +18,19 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		if( !MountObject.IsValid() )
 		{
 			GameObject.Destroy();
+		}else if ( MountObject.Enabled && Rope != null)
+		{
+			if ( PhysicsProjectileComponent.Grub.IsValid() )
+			{
+				PhysicsProjectileComponent.Grub.Animator.GrubRenderer.Set( "heightdiff", 18f );
+				PhysicsProjectileComponent.Grub.Animator.GrubRenderer.Set( "onrope", true );
+				PhysicsProjectileComponent.Grub.Transform.Rotation = Rotation.LookAt( Rope.HookDirection, PhysicsProjectileComponent.Grub.Transform.Rotation.Up );
+				PhysicsProjectileComponent.Grub.CharacterController.IsOnGround = false;
+			}
+			else
+			{
+				MountObject.Components.Get<Mountable>().Dismount();
+			}
 		}
 	}
 
@@ -33,6 +48,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		MountObject.Parent = Scene;
 		MountObject.Transform.Position = PhysicsProjectileComponent.Grub.Transform.Position;
 		MountObject.Enabled = true;
+		Rope = MountObject.Components.Get<RopeBehaviorComponent>();
 		MountObject.Components.Get<Mountable>().Mount( PhysicsProjectileComponent.Grub );
 	}
 
