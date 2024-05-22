@@ -38,7 +38,7 @@ public sealed class ParticleHelperComponent : Component
 
 		foreach ( var sceneObject in _sceneObjects )
 		{
-			sceneObject.Simulate( Time.Delta );
+			sceneObject?.Simulate( Time.Delta );
 		}
 	}
 }

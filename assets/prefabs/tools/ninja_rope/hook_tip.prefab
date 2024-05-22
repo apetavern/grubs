@@ -1,0 +1,71 @@
+{
+  "RootObject": {
+    "__guid": "99fb87e2-b4de-4846-8f55-b8ae8682dd99",
+    "Flags": 0,
+    "Name": "hook_tip",
+    "Tags": "tool,projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Equipment.Weapons.PhysicsProjectileComponent",
+        "__guid": "c8de20f3-a9a9-4e4f-bf87-b51f75cc0e13",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "d31e6bdf-1a7e-4fb7-8aa7-9f6f01609fea",
+          "go": "99fb87e2-b4de-4846-8f55-b8ae8682dd99",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "e8935b9b-0ffb-475d-ae7e-b0d890b1b1d0",
+          "go": "99fb87e2-b4de-4846-8f55-b8ae8682dd99",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 200
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "e8935b9b-0ffb-475d-ae7e-b0d890b1b1d0",
+        "AngularDamping": 5,
+        "Gravity": true,
+        "LinearDamping": 1,
+        "Locking": {
+          "Y": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "d31e6bdf-1a7e-4fb7-8aa7-9f6f01609fea",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/ninjarope/ninjarope_hook.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "4e2f6c32-0279-4d4c-9548-751590ceb4b8",
+        "Center": "6.239998,0,0",
+        "IsTrigger": false,
+        "Radius": 4.3200054,
+        "Static": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

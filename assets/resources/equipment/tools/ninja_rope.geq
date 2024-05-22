@@ -1,0 +1,11 @@
+{
+  "Name": "Mountable",
+  "Description": "A mountable tool",
+  "Icon": "models/tools/ninjarope/ninjarope.vmdl.png",
+  "Type": "Tool",
+  "EquipmentPrefab": "resources/equipment/tools/mountable.prefab",
+  "DefaultAmmo": 4,
+  "DropChance": 1,
+  "__references": [],
+  "__version": 0
+}
