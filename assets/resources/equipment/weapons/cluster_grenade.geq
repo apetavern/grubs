@@ -1,0 +1,11 @@
+{
+  "Name": "Cluster Grenade",
+  "Description": "Not gonna catch this for ya.",
+  "Icon": "models/weapons/grenade/clustergrenade.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/cluster_grenade/cluster_grenade.prefab",
+  "DefaultAmmo": -1,
+  "DropChance": 0,
+  "__references": [],
+  "__version": 0
+}
