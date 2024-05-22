@@ -5,7 +5,7 @@ namespace Grubs.Equipment.Weapons;
 [Title( "Grubs - Ninja Rope Hook Tip" ), Category( "Equipment" )]
 public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 {
-	[Property]public GameObject MountObject { get; set; }
+	[Property] public GameObject MountObject { get; set; }
 
 	[Property] public PhysicsProjectileComponent PhysicsProjectileComponent { get; set; }
 
@@ -22,10 +22,13 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		{
 			if ( PhysicsProjectileComponent.Grub.IsValid() )
 			{
-				PhysicsProjectileComponent.Grub.Animator.GrubRenderer.Set( "heightdiff", 18f );
-				PhysicsProjectileComponent.Grub.Animator.GrubRenderer.Set( "onrope", true );
-				PhysicsProjectileComponent.Grub.Transform.Rotation = Rotation.LookAt( Rope.HookDirection, PhysicsProjectileComponent.Grub.Transform.Rotation.Up );
-				PhysicsProjectileComponent.Grub.CharacterController.IsOnGround = false;
+				var grub = PhysicsProjectileComponent.Grub;
+				grub.Animator.GrubRenderer.Set( "heightdiff", 15f );
+				grub.Animator.GrubRenderer.Set( "aimangle", Vector3.GetAngle( grub.Transform.Rotation.Forward, Rope.HookDirection) - 15f );
+				grub.PlayerController.IsOnRope = true;
+				Log.Info( grub.PlayerController.ShouldShowWeapon() );
+				grub.Transform.Rotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.Transform.Rotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch(45f), Time.Delta * 10f);
+				grub.CharacterController.IsOnGround = false;
 			}
 			else
 			{
@@ -38,9 +41,9 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 	{
 		Components.Get<Rigidbody>().Enabled = false;
 
+		Transform.Position = other.Contact.Point - other.Contact.Normal * 5f;
+		Transform.Rotation = Rotation.LookAt( other.Contact.Normal );
 		CreateRopeSystem();
-		//Log.Info( "Collision Start" );
-		//Log.Info( other.Other.GameObject.Tags );
 	}
 
 	public void CreateRopeSystem()

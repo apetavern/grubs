@@ -1781,7 +1781,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 288.0, 672.0 ]
+					m_vecPosition = [ 288.0, 784.0 ]
 					m_nNodeID = 
 					{
 						m_id = 309510769
@@ -1970,7 +1970,7 @@
 				{
 					_class = "CBlendAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 512.0, 608.0 ]
+					m_vecPosition = [ 528.0, 752.0 ]
 					m_nNodeID = 
 					{
 						m_id = 383572449
@@ -1991,7 +1991,7 @@
 								}
 							}
 							m_name = "bottom"
-							m_blendValue = 32.0
+							m_blendValue = 30.0
 						},
 						{
 							m_inputConnection = 
@@ -2006,7 +2006,7 @@
 								}
 							}
 							m_name = "middle"
-							m_blendValue = 8.0
+							m_blendValue = 0.0
 						},
 					]
 					m_blendValueSource = "Parameter"
@@ -3997,6 +3997,91 @@
 			{
 				key = 
 				{
+					m_id = 714026169
+				}
+				value = 
+				{
+					_class = "CBlendAnimNode"
+					m_sName = "AimBlend_Bazooka"
+					m_vecPosition = [ 544.0, 560.0 ]
+					m_nNodeID = 
+					{
+						m_id = 714026169
+					}
+					m_sNote = ""
+					m_children = 
+					[
+						{
+							m_inputConnection = 
+							{
+								m_nodeID = 
+								{
+									m_id = 1708274049
+								}
+								m_outputID = 
+								{
+									m_id = 4294967295
+								}
+							}
+							m_name = "AimUp"
+							m_blendValue = 90.0
+						},
+						{
+							m_inputConnection = 
+							{
+								m_nodeID = 
+								{
+									m_id = 1447466759
+								}
+								m_outputID = 
+								{
+									m_id = 4294967295
+								}
+							}
+							m_name = "AimStraight"
+							m_blendValue = 0.0
+						},
+						{
+							m_inputConnection = 
+							{
+								m_nodeID = 
+								{
+									m_id = 1606333603
+								}
+								m_outputID = 
+								{
+									m_id = 4294967295
+								}
+							}
+							m_name = "AimDown"
+							m_blendValue = -90.0
+						},
+					]
+					m_blendValueSource = "Parameter"
+					m_param = 
+					{
+						m_id = 2085939065
+					}
+					m_blendKeyType = "BlendKey_UserValue"
+					m_bLockBlendOnReset = false
+					m_bSyncCycles = true
+					m_bLoop = true
+					m_bLockWhenWaning = true
+					m_damping = 
+					{
+						_class = "CAnimInputDamping"
+						m_speedFunction = "NoDamping"
+						m_fSpeedScale = 1.0
+						m_fMinSpeed = 10.0
+						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
+					}
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 829819952
 				}
 				value = 
@@ -4801,7 +4886,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 272.0, 608.0 ]
+					m_vecPosition = [ 272.0, 720.0 ]
 					m_nNodeID = 
 					{
 						m_id = 977294458
@@ -4904,7 +4989,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 1447466759
+							m_id = 714026169
 						}
 						m_outputID = 
 						{
@@ -6193,7 +6278,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 512.0, 560.0 ]
+					m_vecPosition = [ 320.0, 624.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1447466759
@@ -6453,6 +6538,26 @@
 			{
 				key = 
 				{
+					m_id = 1606333603
+				}
+				value = 
+				{
+					_class = "CSingleFrameAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 320.0, 672.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1606333603
+					}
+					m_sNote = ""
+					m_sequenceName = "uzi_aim"
+					m_nFrameIndex = 2
+					m_tagSpans = [  ]
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 1670380065
 				}
 				value = 
@@ -6507,6 +6612,26 @@
 					m_sNote = ""
 					m_sequenceName = "revolver_aim"
 					m_nFrameIndex = 0
+					m_tagSpans = [  ]
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 1708274049
+				}
+				value = 
+				{
+					_class = "CSingleFrameAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 320.0, 576.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1708274049
+					}
+					m_sNote = ""
+					m_sequenceName = "uzi_aim"
+					m_nFrameIndex = 1
 					m_tagSpans = [  ]
 				}
 			},
