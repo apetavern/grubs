@@ -1,4 +1,5 @@
 using Sandbox;
+using System.IO.Pipes;
 
 namespace Grubs;
 
@@ -76,7 +77,9 @@ public sealed class RopeBehaviorComponent : Component
 
 		ropeLength = ropeLength.Clamp( 100f, 10000f );
 
-		Components.Get<Rigidbody>().Velocity += Transform.Rotation.Forward * Input.AnalogMove.y * -10f;
+		Vector3 leftDirection = Vector3.Cross( HookDirection, Vector3.Up ).Normal;
+
+		Components.Get<Rigidbody>().Velocity += leftDirection * Input.AnalogMove.y * -10f;
 
 		DrawRope();
 	}

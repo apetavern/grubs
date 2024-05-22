@@ -66,8 +66,7 @@
           "StartCap": "Rounded",
           "Width": [
             {
-              "x": 0.5,
-              "y": 5
+              "y": 1
             }
           ],
           "Wireframe": false
@@ -128,9 +127,9 @@
               },
               "BreakForce": 0,
               "BreakTorque": 0,
-              "Damping": 10,
+              "Damping": 100,
               "EnableCollision": false,
-              "Frequency": 500,
+              "Frequency": 5000,
               "MaxLength": 1000,
               "MinLength": 0
             },
@@ -222,7 +221,7 @@
   },
   "Title": "ropetest",
   "Description": "",
-  "LastSaved": "2024-05-22T10:04:03.1175328\u002B02:00",
+  "LastSaved": "2024-05-22T10:13:09.0277288\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
