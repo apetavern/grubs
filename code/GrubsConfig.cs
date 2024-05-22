@@ -190,7 +190,7 @@ public static class GrubsConfig
 	/// prefabricated texture is used to build the terrain.
 	/// </summary>
 	[ConVar( "terrain_texture" )]
-	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Grubs;
+	public static TerrainTexture WorldTerrainTexture { get; set; } = TerrainTexture.Cavern;
 
 	/// <summary>
 	/// The strength of the curves in the terrain's heightmap.
