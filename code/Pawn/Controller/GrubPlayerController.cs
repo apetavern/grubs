@@ -166,7 +166,12 @@ public sealed partial class GrubPlayerController : Component
 
 	public bool ShouldShowWeapon()
 	{
-		return (Velocity.IsNearlyZero( 2.5f ) && IsGrounded || IsOnRope) && !IsChargingBackflip;
+		var showWhileMoving = false;
+		if ( Grub.ActiveEquipment is { } equipment )
+			if ( equipment.Components.Get<WeaponComponent>() is { } weapon )
+				if ( weapon.CanFireWhileMoving )
+					showWhileMoving = true;
+		return (Velocity.IsNearlyZero( 2.5f ) && IsGrounded || IsOnRope || showWhileMoving) && !IsChargingBackflip;
 	}
 
 	/// <summary>

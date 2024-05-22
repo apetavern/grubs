@@ -4,5 +4,6 @@ public enum FiringType
 {
 	Instant,
 	Charged,
-	Cursor
+	Cursor,
+	Complex,
 }

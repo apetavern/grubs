@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "af27f75a-e7ea-4da4-831d-7756478a4546",
+    "__guid": "e5cb849c-affc-4537-a0aa-ea0a625ea30c",
     "Flags": 0,
     "Name": "ninja_rope",
     "Tags": "tool",
@@ -10,22 +10,22 @@
     "Components": [
       {
         "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "292bef2b-25b5-4fe4-9d95-053c5ff299dc",
+        "__guid": "52bda72b-2ccf-4a6b-9cdc-fcfa2047d9ce",
         "Data": "resources/equipment/tools/ninja_rope.geq",
         "HoldPose": "Uzi",
         "Icon": "models/tools/ninjarope/ninjarope.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "f0c95a58-46a0-4114-9d7c-c5d8c883c544",
-          "go": "af27f75a-e7ea-4da4-831d-7756478a4546",
+          "component_id": "f14a1d0c-b6fe-4e5e-9eb1-4e697c02e5a8",
+          "go": "e5cb849c-affc-4537-a0aa-ea0a625ea30c",
           "component_type": "SkinnedModelRenderer"
         },
-        "Name": "Mountable Test",
+        "Name": "Ninja Rope",
         "SlotIndex": 0
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "f0c95a58-46a0-4114-9d7c-c5d8c883c544",
+        "__guid": "f14a1d0c-b6fe-4e5e-9eb1-4e697c02e5a8",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/ninjarope/ninjarope.vmdl",
@@ -33,65 +33,70 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "Grubs.Equipment.Weapons.WeaponComponent",
-        "__guid": "f139e830-77c9-4bc4-90a9-048a4431be86",
-        "CanFireWhileMoving": false,
-        "Cooldown": 2,
+        "__type": "Grubs.Equipment.Weapons.NinjaRopeWeapon",
+        "__guid": "48669dfa-90ab-4f3a-8bef-24abaf5147ab",
+        "CanFireWhileMoving": true,
+        "CanSwapAfterUse": true,
+        "CanSwapDuringUse": true,
+        "Cooldown": 1,
         "Equipment": {
           "_type": "component",
-          "component_id": "292bef2b-25b5-4fe4-9d95-053c5ff299dc",
-          "go": "af27f75a-e7ea-4da4-831d-7756478a4546",
+          "component_id": "52bda72b-2ccf-4a6b-9cdc-fcfa2047d9ce",
+          "go": "e5cb849c-affc-4537-a0aa-ea0a625ea30c",
           "component_type": "EquipmentComponent"
         },
-        "FiringType": "Instant",
-        "MaxUses": 5,
+        "FiringType": "Complex",
+        "MaxUses": 3,
         "OnFire": {
           "__version": 7,
-          "__guid": "05adb2df-a9a8-4bca-8eea-c6b5f8f8803a",
+          "__guid": "d2a82ff7-ebea-431b-845e-a3436731835f",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.WeaponComponent"
+              "Grubs.Equipment.Weapons.NinjaRopeWeapon"
             ]
           },
           "Variables": [],
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "-64,0"
-              }
+              "Type": "input"
             },
             {
               "Id": 1,
-              "Type": "grubs.spawn_projectile",
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.NinjaRopeWeapon"
+              },
               "UserData": {
-                "Position": "208,-64"
+                "Position": "-80,-96"
               }
             },
             {
               "Id": 2,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.WeaponComponent"
-              },
+              "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "-64,-192"
+                "Position": "192,-64"
               }
             }
           ],
           "Links": [
             {
               "SrcId": 0,
-              "SrcName": "_signal",
+              "SrcName": "_target",
               "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
               "DstName": "_signal"
             },
             {
               "SrcId": 0,
               "SrcName": "charge",
-              "DstId": 1,
+              "DstId": 2,
               "DstName": "charge"
             },
             {
@@ -99,20 +104,14 @@
                 "_type": "gameobject",
                 "prefab": "prefabs/tools/ninja_rope/hook_tip.prefab"
               },
-              "DstId": 1,
+              "DstId": 2,
               "DstName": "projectile"
             },
             {
-              "SrcId": 2,
+              "SrcId": 1,
               "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
               "DstId": 2,
-              "DstName": "_this"
+              "DstName": "source"
             }
           ],
           "Defaults": {

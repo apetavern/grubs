@@ -111,11 +111,6 @@ public sealed class RopeBehaviorComponent : Component
 		Vector3 leftDirection = Vector3.Cross( HookDirection, Vector3.Up ).Normal;
 
 		Components.Get<Rigidbody>().Velocity += Vector3.Forward * Input.AnalogMove.y * -10f;
-
-		if ( Input.Pressed( "jump" ) )
-		{
-			Components.Get<Mountable>().Dismount();
-		}
 	}
 
 	public void DrawRope()

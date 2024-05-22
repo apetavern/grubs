@@ -1,5 +1,6 @@
 ﻿using Grubs.Gamemodes;
 using Grubs.Helpers;
+using Grubs.Pawn;
 
 namespace Grubs.Equipment.Weapons;
 
@@ -12,6 +13,8 @@ public partial class WeaponComponent : Component
 
 	[Property] public float Cooldown { get; set; } = 2f;
 	[Property] public bool CanFireWhileMoving { get; set; } = false;
+	[Property] public bool CanSwapAfterUse { get; set; } = false;
+	[Property] public bool CanSwapDuringUse { get; set; } = false;
 	[Property] public int MaxUses { get; set; } = 1;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public OnFireDelegate OnFire { get; set; }
@@ -76,23 +79,30 @@ public partial class WeaponComponent : Component
 				FireFinished();
 			}
 		}
-
-		if ( Input.Pressed( "fire" ) )
+		else if ( FiringType is FiringType.Instant )
 		{
-			IsFiring = true;
+			if ( Input.Pressed( "fire" ) )
+			{
+				IsFiring = true;
 
-			if ( OnFire is not null )
-				OnFire.Invoke( 100 );
-			else
-				FireImmediate();
-			TimeSinceLastUsed = 0;
+				if ( OnFire is not null )
+					OnFire.Invoke( 100 );
+				else
+					FireImmediate();
+				TimeSinceLastUsed = 0;
 			
-			FireFinished();
+				FireFinished();
+			}
+		}
+		else if ( FiringType is FiringType.Complex )
+		{
+			HandleComplexFiringInput();
 		}
 	}
 
 	protected virtual void FireImmediate() { }
 	protected virtual void FireCharged( int charge ) { }
+	protected virtual void HandleComplexFiringInput() { }
 
 	protected virtual void FireFinished()
 	{
@@ -102,11 +112,17 @@ public partial class WeaponComponent : Component
 		if ( TimesUsed >= MaxUses )
 		{
 			Equipment.UseAmmo();
+
+			if ( Equipment.Grub is not { } grub ) 
+				return;
 			
-			using ( Rpc.FilterInclude( c => c.IsHost ) )
-				Gamemode.FFA.UseTurn( true );
-			if ( Equipment.Grub is { } grub )
+			if ( !CanSwapAfterUse )
+			{
 				grub.Player.HasFiredThisTurn = true;
+				grub.Player.Inventory.Holster( grub.Player.Inventory.ActiveSlot );
+				using ( Rpc.FilterInclude( c => c.IsHost ) )
+					Gamemode.FFA.UseTurn( true );
+			}
 		}
 	}
 
