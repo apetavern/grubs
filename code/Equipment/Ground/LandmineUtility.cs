@@ -15,7 +15,7 @@ public class LandmineUtility : Component
 	public GameObject Spawn( Vector3 position )
 	{
 		var go = LandminePrefab.Clone();
-		go.Transform.Position = position.WithY( 512 );
+		go.Transform.Position = position.WithY( 512f );
 		go.NetworkSpawn();
 
 		return go;
