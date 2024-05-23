@@ -35,13 +35,13 @@ public class TeleportToolComponent : WeaponComponent
 
 		var player = Equipment.Grub.Player;
 		CursorModel.Transform.Position = player.MousePosition;
-		var isValidPlacement = CheckValidPlacement( );
+		var isValidPlacement = CheckValidPlacement();
 		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
 	}
 
 	private bool CheckValidPlacement()
 	{
-		if (Equipment.Grub == null)
+		if ( Equipment.Grub == null )
 			return false;
 
 		var grub = Equipment.Grub;
@@ -70,7 +70,7 @@ public class TeleportToolComponent : WeaponComponent
 		if ( Equipment.Grub is not { } grub )
 			return;
 
-		var valid = CheckValidPlacement( );
+		var valid = CheckValidPlacement();
 		if ( !valid )
 			return;
 
