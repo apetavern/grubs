@@ -1,0 +1,58 @@
+{
+  "RootObject": {
+    "__guid": "2766b7ac-4dba-4420-b55d-140180ae5492",
+    "Flags": 0,
+    "Name": "girder_short",
+    "Tags": "solid",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "7af8f858-79c1-4f6f-ae48-c2b2260168af",
+        "BodyGroups": 9,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/girders/girder_short.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.ModelCollider",
+        "__guid": "3f0ec851-75e5-4ee0-be21-ed5da9bfffe5",
+        "IsTrigger": false,
+        "Model": "models/tools/girders/girder_short.vmdl",
+        "Static": true
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "6c45b951-3ab4-478f-8d51-edd8a8aa0ffa",
+        "MaxHealth": 50
+      },
+      {
+        "__type": "Grubs.DestructibleObject",
+        "__guid": "3eeeb146-d499-4d44-8b5a-3ecdffd6c98a",
+        "HasDamageMeshes": true,
+        "health": {
+          "_type": "component",
+          "component_id": "6c45b951-3ab4-478f-8d51-edd8a8aa0ffa",
+          "go": "2766b7ac-4dba-4420-b55d-140180ae5492",
+          "component_type": "Health"
+        },
+        "SkinnedModelRenderer": {
+          "_type": "component",
+          "component_id": "7af8f858-79c1-4f6f-ae48-c2b2260168af",
+          "go": "2766b7ac-4dba-4420-b55d-140180ae5492",
+          "component_type": "SkinnedModelRenderer"
+        }
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
