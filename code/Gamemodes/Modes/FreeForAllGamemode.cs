@@ -70,10 +70,10 @@ public sealed class FreeForAllGamemode : Gamemode
 		ActivePlayerId = firstPlayer.Id;
 
 		// Landmine Spawning
-		for( var i = 0; i < GrubsConfig.LandmineSpawnCount; i++ )
+		for ( var i = 0; i < GrubsConfig.LandmineSpawnCount; i++ )
 		{
 			var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: false );
-			LandmineUtility.Instance.Spawn(spawnPos);
+			LandmineUtility.Instance.Spawn( spawnPos );
 		}
 
 		Started = true;
@@ -115,7 +115,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
-		
+
 		EndTurn();
 
 		await Resolution.UntilWorldResolved( 30 );
@@ -201,7 +201,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		var deadPlayers = 0;
 		Player lastPlayerAlive = null;
-		
+
 		var players = Scene.GetAllComponents<Player>();
 		foreach ( var player in players )
 		{

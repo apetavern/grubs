@@ -32,7 +32,7 @@ public class LandmineGroundProp : ProximityExplosiveComponent
 	{
 		base.OnUpdate();
 
-		if (IsDetonating)
+		if ( IsDetonating )
 		{
 			if ( _skinToggle >= 0.5f )
 			{

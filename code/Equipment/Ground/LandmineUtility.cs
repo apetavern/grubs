@@ -12,10 +12,10 @@ public class LandmineUtility : Component
 		Instance = this;
 	}
 
-	public GameObject Spawn(Vector3 position)
+	public GameObject Spawn( Vector3 position )
 	{
 		var go = LandminePrefab.Clone();
-		go.Transform.Position = position.WithY(512);
+		go.Transform.Position = position.WithY( 512 );
 		go.NetworkSpawn();
 
 		return go;

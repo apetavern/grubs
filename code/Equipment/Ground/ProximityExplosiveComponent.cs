@@ -1,8 +1,5 @@
 ﻿using Grubs.Common;
 using Grubs.Helpers;
-using Grubs.Pawn;
-using Sandbox;
-using System.Text;
 
 namespace Grubs.Equipment.Ground;
 
@@ -30,9 +27,9 @@ public partial class ProximityExplosiveComponent : Component, Component.ICollisi
 	public virtual void OnArm() { }
 	public virtual void OnTrigger() { }
 
-	public virtual void OnExplode() 
+	public virtual void OnExplode()
 	{
-		if (!IsDud)
+		if ( !IsDud )
 			ExplodeEffects();
 
 		GameObject.Destroy();
@@ -63,9 +60,9 @@ public partial class ProximityExplosiveComponent : Component, Component.ICollisi
 	{
 		base.OnUpdate();
 
-		if (!IsArmed)
+		if ( !IsArmed )
 		{
-			if (_createdAt > ArmTime)
+			if ( _createdAt > ArmTime )
 			{
 				IsArmed = true;
 				OnArm();
@@ -74,9 +71,9 @@ public partial class ProximityExplosiveComponent : Component, Component.ICollisi
 			return;
 		}
 
-		if (IsDetonating)
+		if ( IsDetonating )
 		{
-			if (_detonatedAt > DetonateTime)
+			if ( _detonatedAt > DetonateTime )
 			{
 				OnExplode();
 			}
