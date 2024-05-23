@@ -1,6 +1,4 @@
-﻿using Grubs.Equipment.Weapons;
-
-namespace Grubs.Equipment.Gadgets.Projectiles;
+﻿namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Physics Projectile" ), Category( "Equipment" )]
 public class PhysicsProjectile : Projectile
