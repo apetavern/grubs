@@ -8,9 +8,6 @@ namespace Grubs.Equipment.Gadgets.Ground;
 
 public partial class ProximityExplosive : Component, Component.ITriggerListener, IResolvable
 {
-	[Property] public bool IsDud { get; set; }
-	[Property] public bool IsArmed { get; set; }
-	[Property] public bool IsDetonating { get; set; }
 	[Property] public float Radius { get; set; } = 64.0f;
 	[Property] public float Damage { get; set; } = 100.0f;
 	[Property] public float ArmTime { get; set; } = 5.0f;
@@ -18,6 +15,9 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	[Property, ResourceType( "sound" )] public string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] public ParticleSystem Particles { get; set; }
 
+	public bool IsDud { get; set; }
+	public bool IsArmed { get; set; }
+	public bool IsDetonating { get; set; }
 	private TimeSince _createdAt { get; set; }
 	private TimeSince _detonatedAt { get; set; }
 	private List<Grub> _grubs { get; set; } = new();
