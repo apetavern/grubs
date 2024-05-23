@@ -25,17 +25,6 @@ public class Landmine : ProximityExplosive
 		base.OnExplode();
 	}
 
-	protected override void OnFixedUpdate()
-	{
-		base.OnFixedUpdate();
-
-		Transform.Rotation = Rotation.From(
-			Transform.Rotation.Pitch().Clamp( -45, 45 ),
-			Transform.Rotation.Yaw().Clamp( -45, 45 ),
-			Transform.Rotation.Roll().Clamp(-45, 45)
-			);
-	}
-
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();

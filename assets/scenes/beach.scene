@@ -43,6 +43,10 @@
               "EdgeLength": 50,
               "Material": "materials/environment/new_water.vmat",
               "Resolution": 100
+            },
+            {
+              "__type": "Grubs.Common.KillZone",
+              "__guid": "72d5d8e2-71b7-4213-8602-3fb4951760ae"
             }
           ]
         },
@@ -311,7 +315,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-23T15:15:34.5192539-03:00",
+  "LastSaved": "2024-05-23T15:27:19.4230689-03:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
