@@ -89,9 +89,6 @@ public partial class Weapon : Component
 				else
 					FireImmediate();
 
-				if ( this is not MultiHitMeleeWeapon )
-					FireFinished();
-
 				TimeSinceLastUsed = 0;
 			}
 		}
