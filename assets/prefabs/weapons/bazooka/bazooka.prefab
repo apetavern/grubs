@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "34e64148-41c5-4881-8521-daecbdeaf713",
+    "__guid": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
     "Flags": 0,
     "Name": "bazooka",
     "Enabled": true,
@@ -9,14 +9,14 @@
     "Components": [
       {
         "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "af9c76f0-a41e-4152-9656-12e88dc5c62d",
+        "__guid": "1be96d4e-33e2-42ce-935d-a59507aa4287",
         "Data": "resources/equipment/weapons/bazooka.geq",
         "HoldPose": "Bazooka",
         "Icon": "models/weapons/bazooka/bazooka.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "4e848481-c922-4889-957e-7f6ee9130352",
-          "go": "34e64148-41c5-4881-8521-daecbdeaf713",
+          "component_id": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
+          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Bazooka",
@@ -24,30 +24,29 @@
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "4e848481-c922-4889-957e-7f6ee9130352",
+        "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "MaterialGroup": "default",
         "Model": "models/weapons/bazooka/bazooka.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "Grubs.Equipment.Weapons.WeaponComponent",
-        "__guid": "b6c3e1e6-1e2f-4509-b05a-909c35ce54e4",
+        "__guid": "86f16eac-bde5-4175-89ec-baef0f63bbe0",
         "CanFireWhileMoving": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "af9c76f0-a41e-4152-9656-12e88dc5c62d",
-          "go": "34e64148-41c5-4881-8521-daecbdeaf713",
+          "component_id": "1be96d4e-33e2-42ce-935d-a59507aa4287",
+          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
           "component_type": "EquipmentComponent"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "5684bf7e-9894-4451-992e-51ca8962efb5",
+          "__guid": "f1594c5a-08d0-4300-b61b-f1d0e841406a",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -60,8 +59,8 @@
               "Type": "Sandbox.Component",
               "Default": {
                 "_type": "component",
-                "component_id": "af9c76f0-a41e-4152-9656-12e88dc5c62d",
-                "go": "34e64148-41c5-4881-8521-daecbdeaf713",
+                "component_id": "1be96d4e-33e2-42ce-935d-a59507aa4287",
+                "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
                 "component_type": "EquipmentComponent"
               }
             }

@@ -1,6 +1,5 @@
 ﻿using Grubs.Gamemodes;
 using Grubs.Helpers;
-using Grubs.Pawn;
 
 namespace Grubs.Equipment.Weapons;
 
@@ -92,6 +91,20 @@ public partial class WeaponComponent : Component
 				TimeSinceLastUsed = 0;
 			}
 		}
+		else if ( FiringType is FiringType.Cursor )
+		{
+			if ( Input.Pressed( "fire" ) )
+			{
+				IsFiring = true;
+
+				if ( OnFire is not null )
+					OnFire.Invoke( 100 );
+				else
+					FireImmediate();
+				TimeSinceLastUsed = 0;
+				FireFinished();
+			}
+		}
 		else if ( FiringType is FiringType.Complex )
 		{
 			HandleComplexFiringInput();
@@ -111,9 +124,9 @@ public partial class WeaponComponent : Component
 		{
 			Equipment.UseAmmo();
 
-			if ( Equipment.Grub is not { } grub ) 
+			if ( Equipment.Grub is not { } grub )
 				return;
-			
+
 			if ( !CanSwapAfterUse )
 			{
 				grub.Player.HasFiredThisTurn = true;
@@ -130,14 +143,14 @@ public partial class WeaponComponent : Component
 	protected void OnChargedHeld()
 	{
 		IsCharging = true;
-		
+
 		var muzzle = GetMuzzlePosition();
 		_chargeParticles ??= ParticleHelperComponent.Instance.PlayInstantaneous( ChargeParticleSystem, muzzle );
-		_chargeParticles?.SetControlPoint(0, muzzle.Position);
-		_chargeParticles?.SetControlPoint(1, muzzle.Position + GetMuzzleForward() * 80f );
+		_chargeParticles?.SetControlPoint( 0, muzzle.Position );
+		_chargeParticles?.SetControlPoint( 1, muzzle.Position + GetMuzzleForward() * 80f );
 		_chargeParticles?.SetNamedValue( "Alpha", 100f );
 		_chargeParticles?.SetNamedValue( "Speed", 40f );
-		
+
 		_weaponCharge++;
 		_weaponCharge.Clamp( 0, 100 );
 	}

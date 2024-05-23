@@ -10,21 +10,22 @@
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-        "__guid": "5d7dd456-328a-470e-97ab-ce84ae474a7e",
+        "__guid": "6dfad29f-e9cd-408c-97d8-54500f20ec0d",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-          "component_id": "b6ba99e9-d68e-48be-9032-6b9679543a89",
-          "go": "39273163-5743-4c54-b7e8-13fd137621a5",
+          "component_id": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
+          "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
           "component_type": "PlayerInventory"
-        }
+        },
+        "MousePosition": "0,0,0"
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-        "__guid": "b6ba99e9-d68e-48be-9032-6b9679543a89",
+        "__guid": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -70,19 +71,23 @@
           },
           {
             "_type": "gameobject",
+            "prefab": "prefabs/weapons/teleporter/teleporter.prefab"
+          },
+          {
+            "_type": "gameobject",
             "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade.prefab"
           }
         ],
         "Player": {
           "_type": "component",
-          "component_id": "5d7dd456-328a-470e-97ab-ce84ae474a7e",
-          "go": "39273163-5743-4c54-b7e8-13fd137621a5",
+          "component_id": "6dfad29f-e9cd-408c-97d8-54500f20ec0d",
+          "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
           "component_type": "Player"
         }
       },
       {
         "__type": "Sandbox.ScreenPanel",
-        "__guid": "fe8774ea-7605-448f-8272-04d3317e6089",
+        "__guid": "da09eceb-bd21-4c58-8907-aa7ba9293853",
         "AutoScreenScale": true,
         "Opacity": 1,
         "Scale": 1,
@@ -90,18 +95,18 @@
       },
       {
         "__type": "Grubs.UI.Components.PlayerScreen",
-        "__guid": "2215d1a1-1650-4e31-ae51-f25aaccd28e4",
+        "__guid": "c808dd61-f421-4952-af03-70e24cdcb695",
         "Inventory": {
           "_type": "component",
-          "component_id": "b6ba99e9-d68e-48be-9032-6b9679543a89",
-          "go": "39273163-5743-4c54-b7e8-13fd137621a5",
+          "component_id": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
+          "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
           "component_type": "PlayerInventory"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "fe1fe29a-2bf1-49bb-857e-df3ae9813ac9",
+        "__guid": "912a0354-a70e-478e-bad4-f562fc9babfa",
         "Flags": 0,
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
@@ -110,7 +115,7 @@
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",
-            "__guid": "045c1050-7deb-4c05-aab8-c1e0ea7264c6",
+            "__guid": "bc9c8f88-dfd2-443a-a8dc-e9ee3566badd",
             "AutoScreenScale": true,
             "Opacity": 1,
             "Scale": 1,
@@ -118,11 +123,11 @@
           },
           {
             "__type": "Grubs.UI.Components.PlayerScreen",
-            "__guid": "da275dba-9932-4e78-a4e1-298ff4159df1",
+            "__guid": "4af37095-588f-4b01-a549-9ca38cccd3a0",
             "Inventory": {
               "_type": "component",
-              "component_id": "b6ba99e9-d68e-48be-9032-6b9679543a89",
-              "go": "39273163-5743-4c54-b7e8-13fd137621a5",
+              "component_id": "9432e5e0-0e00-4116-b1fa-f584fbc5d2a8",
+              "go": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
               "component_type": "PlayerInventory"
             }
           }
