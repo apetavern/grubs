@@ -13,6 +13,15 @@ public partial class Health : Component
 	[Sync] public float CurrentHealth { get; set; }
 
 	[Sync] public bool DeathInvoked { get; set; } = false;
+
+	public delegate void Death();
+
+	public event Death ObjectDied;
+
+	public delegate void Damaged( GrubsDamageInfo damageInfo );
+
+	public event Damaged ObjectDamaged;
+
 	private Queue<GrubsDamageInfo> DamageQueue { get; set; } = new();
 
 	protected override void OnStart()
@@ -35,6 +44,9 @@ public partial class Health : Component
 			Gamemode.FFA.UseTurn();
 
 		CurrentHealth -= damageInfo.Damage;
+
+		ObjectDamaged?.Invoke( damageInfo );
+
 		if ( CurrentHealth <= 0 && !DeathInvoked )
 		{
 			_ = OnDeath( damageInfo.Tags.Has( "killzone" ) );
@@ -92,6 +104,8 @@ public partial class Health : Component
 			grub.GameObject.Destroy();
 			return;
 		}
+
+		ObjectDied?.Invoke();
 
 		DeathInvoked = true;
 

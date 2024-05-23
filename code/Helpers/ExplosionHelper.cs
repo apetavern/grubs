@@ -34,7 +34,7 @@ public partial class ExplosionHelper : Component
 			if ( go.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelf ) )
 				HandlePhysicsExplosion( body, position, force );
 
-			health.TakeDamage( GrubsDamageInfo.FromExplosion( damage * distFactor, null, source.GameObject ) );
+			health.TakeDamage( GrubsDamageInfo.FromExplosion( damage * distFactor, null, source.GameObject, position ) );
 		}
 
 		LastPosition = position;
