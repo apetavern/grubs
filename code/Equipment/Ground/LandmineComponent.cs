@@ -32,7 +32,7 @@ public class LandmineComponent : ProximityExplosiveComponent
 		Transform.Rotation = Rotation.From(
 			Transform.Rotation.Pitch().Clamp( -45, 45 ),
 			Transform.Rotation.Yaw().Clamp( -45, 45 ),
-			Transform.Rotation.Roll()
+			Transform.Rotation.Roll().Clamp(-45, 45)
 			);
 	}
 
