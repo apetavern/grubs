@@ -1,0 +1,30 @@
+@namespace Grubs.UI
+
+@using Grubs.Pawn;
+@using Sandbox;
+@using Sandbox.UI;
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root class="@(!Player.IsActive ? "inactive" : "")">
+    <img src="avatar:@Player.SteamId" class="avatar" />
+    <div style="flex-direction: column; margin-left: 5px;">
+        <label text=@Player.SteamName class="name"
+               style="font-color: linear-gradient(@Player.SelectedColor, adjust-hue(@Player.SelectedColor, 45));" />
+        <div class="health" style="background-color: darken(@Player.SelectedColor, 60%);">
+            <div class="fill"
+                 style="background: linear-gradient(to right, @Player.SelectedColor, darken(@Player.SelectedColor, 20%)); width: @(Player.GetHealthPercentage)%;" />
+        </div>
+    </div>
+</root>
+
+@code {
+    public Player Player { get; set; }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player.GetHealthPercentage, Player.IsActive);
+    }
+}

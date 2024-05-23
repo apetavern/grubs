@@ -1,0 +1,27 @@
+@namespace Grubs.UI
+
+@using Grubs.Pawn;
+@using Sandbox;
+@using Sandbox.UI;
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="players">
+        @foreach (var player in _players)
+        {
+            <PlayerListEntry Player=@player />
+        }
+    </div>
+</root>
+
+@code {
+    private List<Player> _players => Scene.GetAllComponents<Player>().ToList();
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Connection.All.Count);
+    }
+}

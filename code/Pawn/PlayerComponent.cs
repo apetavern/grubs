@@ -1,6 +1,5 @@
 ﻿using Grubs.Extensions;
 using Grubs.Gamemodes;
-using Grubs.UI;
 
 namespace Grubs.Pawn;
 
@@ -9,9 +8,14 @@ public sealed class Player : Component
 {
 	public bool IsActive => Gamemode.FFA?.ActivePlayerId == Id;
 	public bool ShouldHaveTurn => GameObject.IsValid() && !IsDead();
+	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.ToComponent<Grub>()?.Health.CurrentHealth );
+	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * Grubs.Count)).FloorToInt();
 	public Grub ActiveGrub { get; set; }
 
 	public bool HasFiredThisTurn { get; set; }
+
+	[Sync] public ulong SteamId { get; set; }
+	[Sync] public string SteamName { get; set; }
 
 	[Sync] public string SelectedColor { get; set; } = "";
 
@@ -25,6 +29,8 @@ public sealed class Player : Component
 
 	protected override void OnStart()
 	{
+		SteamId = Network.OwnerConnection.SteamId;
+		SteamName = Network.OwnerConnection.DisplayName;
 		SelectedColor = Color.Random.Hex;
 	}
 
