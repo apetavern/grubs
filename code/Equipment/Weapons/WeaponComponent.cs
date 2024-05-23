@@ -1,6 +1,7 @@
 ﻿using Grubs.Gamemodes;
 using Grubs.Helpers;
 using Grubs.Pawn;
+using static Sandbox.Gizmo;
 
 namespace Grubs.Equipment.Weapons;
 
@@ -147,24 +148,41 @@ public partial class WeaponComponent : Component
 		if ( FiringType is FiringType.Cursor )
 			return Vector3.Zero;
 
-		if ( isDroppable )
-			return Transform.Position.WithY( 0f );
-
 		if ( Equipment.Grub is not { } grub )
 			return Vector3.Zero;
+
+		var controller = grub.CharacterController;
+
+		if ( isDroppable )
+		{
+			// Perform a forward trace to find the position to drop the item
+			var dropTr = Scene.Trace.Ray( grub.EyePosition.Position, grub.EyePosition.Position + grub.Transform.Rotation.Forward * 25f )
+				.IgnoreGameObjectHierarchy( grub.GameObject )
+				.IgnoreGameObject( GameObject )
+				.Radius( 1f )
+				.Run();
+
+			var startPosition = dropTr.EndPosition;
+
+			if (dropTr.Hit)
+			{
+				startPosition -= grub.Transform.Rotation.Forward * 10f;
+			}
+
+			return startPosition.WithY( 512 );
+		}
 
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( muzzle is null )
 			return grub.Transform.Position;
 
-		var controller = grub.CharacterController;
 		var tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.Transform.Position, muzzle.Value.Position )
 			.IgnoreGameObjectHierarchy( grub.GameObject )
 			.WithoutTags( "projectile" )
 			.Radius( 1f )
 			.Run();
 
-		return tr.EndPosition.WithY( 512f );
+		return tr.EndPosition.WithY( 512 );
 	}
 
 	protected Transform GetMuzzlePosition()
