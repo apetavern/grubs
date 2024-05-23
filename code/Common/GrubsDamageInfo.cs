@@ -2,16 +2,18 @@
 
 public sealed class GrubsDamageInfo
 {
+	public Vector3 WorldPosition { get; set; }
 	public GameObject Attacker { get; set; }
 	public GameObject Weapon { get; set; }
 	public float Damage { get; set; }
 	public TagSet Tags { get; set; }
 
-	public GrubsDamageInfo( float damage, GameObject attacker = null, GameObject weapon = null )
+	public GrubsDamageInfo( float damage, GameObject attacker = null, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
 	{
 		Damage = damage;
 		Attacker = attacker;
 		Weapon = weapon;
+		WorldPosition = worldPosition;
 		Tags = new TagSet();
 	}
 
@@ -32,19 +34,19 @@ public sealed class GrubsDamageInfo
 		return info;
 	}
 
-	public static GrubsDamageInfo FromHitscan( float damage, GameObject attacker = null, GameObject weapon = null )
+	public static GrubsDamageInfo FromHitscan( float damage, GameObject attacker = null, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
 	{
-		return new GrubsDamageInfo( damage, attacker, weapon ).WithTag( "hitscan" );
+		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "hitscan" );
 	}
 
-	public static GrubsDamageInfo FromMelee( float damage, GameObject attacker = null, GameObject weapon = null )
+	public static GrubsDamageInfo FromMelee( float damage, GameObject attacker = null, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
 	{
-		return new GrubsDamageInfo( damage, attacker, weapon ).WithTag( "melee" );
+		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "melee" );
 	}
 
-	public static GrubsDamageInfo FromExplosion( float damage, GameObject attacker = null, GameObject weapon = null )
+	public static GrubsDamageInfo FromExplosion( float damage, GameObject attacker = null, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
 	{
-		return new GrubsDamageInfo( damage, attacker, weapon ).WithTag( "explosion" );
+		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "explosion" );
 	}
 
 	public static GrubsDamageInfo FromKillZone( float damage )

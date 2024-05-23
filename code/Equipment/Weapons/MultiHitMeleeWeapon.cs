@@ -143,7 +143,7 @@ public class MultiHitMeleeWeapon : Weapon
 	private void HandleBodyHit( Rigidbody body, float damage, Vector3 position, Vector3 force )
 	{
 		if ( body.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
-			health.TakeDamage( GrubsDamageInfo.FromMelee( damage, Equipment.Grub.GameObject, GameObject ) );
+			health.TakeDamage( GrubsDamageInfo.FromMelee( damage, Equipment.Grub.GameObject, GameObject, position ) );
 
 		body.ApplyImpulseAt( position, force * body.PhysicsBody.Mass );
 	}
