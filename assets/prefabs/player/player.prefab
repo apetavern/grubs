@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "2aa0ac34-78b9-445d-a074-f95135c775bb",
+    "__guid": "5397ff67-f8f5-4719-8d0a-8fb37da4e267",
     "Flags": 0,
     "Name": "player",
     "Tags": "player",
@@ -10,21 +10,21 @@
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-        "__guid": "5b645864-61de-48ff-b44f-930342c7bee0",
+        "__guid": "d79ce20f-07a6-4154-abd6-d73049d00230",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-          "component_id": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
-          "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
+          "component_id": "0e0de72b-165a-4e5d-a810-d1724fae88b0",
+          "go": "5397ff67-f8f5-4719-8d0a-8fb37da4e267",
           "component_type": "PlayerInventory"
         }
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-        "__guid": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
+        "__guid": "0e0de72b-165a-4e5d-a810-d1724fae88b0",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -67,18 +67,22 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/tools/ninja_rope/ninja_rope.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/landmine/landmine.prefab"
           }
         ],
         "Player": {
           "_type": "component",
-          "component_id": "5b645864-61de-48ff-b44f-930342c7bee0",
-          "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
+          "component_id": "d79ce20f-07a6-4154-abd6-d73049d00230",
+          "go": "5397ff67-f8f5-4719-8d0a-8fb37da4e267",
           "component_type": "Player"
         }
       },
       {
         "__type": "Sandbox.ScreenPanel",
-        "__guid": "7e9cf174-164e-4fc0-a982-ea85b84462c1",
+        "__guid": "c59fbd16-330f-43f4-879d-8f6ac90017b3",
         "AutoScreenScale": true,
         "Opacity": 1,
         "Scale": 1,
@@ -86,18 +90,18 @@
       },
       {
         "__type": "Grubs.UI.Components.PlayerScreen",
-        "__guid": "7b566d70-5c4e-477c-84a4-c679f6219fb3",
+        "__guid": "dfc85cf6-3c1b-412c-b626-e95804ce2b2c",
         "Inventory": {
           "_type": "component",
-          "component_id": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
-          "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
+          "component_id": "0e0de72b-165a-4e5d-a810-d1724fae88b0",
+          "go": "5397ff67-f8f5-4719-8d0a-8fb37da4e267",
           "component_type": "PlayerInventory"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "fc93d719-df91-4389-993d-285ec27941f6",
+        "__guid": "acc74545-9ec3-4183-bd3b-e3848331d693",
         "Flags": 0,
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
@@ -106,7 +110,7 @@
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",
-            "__guid": "41231d36-fdeb-4ff1-a35f-5503b074c3b0",
+            "__guid": "c1d83035-28aa-4a99-8f86-055d004ec799",
             "AutoScreenScale": true,
             "Opacity": 1,
             "Scale": 1,
@@ -114,11 +118,11 @@
           },
           {
             "__type": "Grubs.UI.Components.PlayerScreen",
-            "__guid": "d3b1ad02-e6f2-42b5-a7eb-453d9c5d7695",
+            "__guid": "c75a1527-7005-4a5f-9276-643740a14618",
             "Inventory": {
               "_type": "component",
-              "component_id": "dbc8fb29-fad0-4a8f-9780-bb26a9533403",
-              "go": "2aa0ac34-78b9-445d-a074-f95135c775bb",
+              "component_id": "0e0de72b-165a-4e5d-a810-d1724fae88b0",
+              "go": "5397ff67-f8f5-4719-8d0a-8fb37da4e267",
               "component_type": "PlayerInventory"
             }
           }
