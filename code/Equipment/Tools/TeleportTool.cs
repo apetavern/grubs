@@ -1,5 +1,4 @@
-﻿using Grubs.Equipment.Weapons;
-using Grubs.UI.Components;
+﻿using Grubs.UI.Components;
 
 namespace Grubs.Equipment.Tools;
 
@@ -42,10 +41,11 @@ public class TeleportTool : Tool
 
 	private bool CheckValidPlacement()
 	{
-		if ( Equipment.Grub == null )
+		if ( Equipment.Grub is not { } grub )
 			return false;
 
-		var grub = Equipment.Grub;
+		if ( grub.Player.MousePosition.Distance( grub.Transform.Position ) > CursorRange )
+			return false;
 
 		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, grub.Player.MousePosition, grub.Player.MousePosition )
 			.IgnoreGameObject( GameObject )
