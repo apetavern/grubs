@@ -91,6 +91,7 @@ public partial class WeaponComponent : Component
 				else
 					FireImmediate();
 				TimeSinceLastUsed = 0;
+				FireFinished();
 			}
 		}
 		else if ( FiringType is FiringType.Complex )

@@ -1,4 +1,5 @@
-﻿using Grubs.Helpers;
+﻿using Grubs.Common;
+using Grubs.Helpers;
 using Grubs.Pawn;
 using Sandbox;
 using System.Text;
@@ -7,7 +8,7 @@ namespace Grubs.Equipment.Ground;
 
 [Title( "Grubs - Proximity Explosive" ), Category( "Equipment" )]
 
-public partial class ProximityExplosiveComponent : Component, Component.ICollisionListener
+public partial class ProximityExplosiveComponent : Component, Component.ICollisionListener, IResolvable
 {
 	[Property] public bool IsDud { get; set; }
 	[Property] public bool IsArmed { get; set; }
@@ -24,12 +25,16 @@ public partial class ProximityExplosiveComponent : Component, Component.ICollisi
 	private TimeSince _createdAt { get; set; }
 	private TimeSince _detonatedAt { get; set; }
 
+	public bool Resolved => !IsDetonating;
+
 	public virtual void OnArm() { }
 	public virtual void OnTrigger() { }
 
 	public virtual void OnExplode() 
 	{
-		ExplodeEffects();
+		if (!IsDud)
+			ExplodeEffects();
+
 		GameObject.Destroy();
 	}
 
