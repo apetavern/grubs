@@ -44,8 +44,6 @@ public class MultiHitMeleeWeapon : Weapon
 	{
 		base.OnUpdate();
 
-		Log.Info( $"{_numberOfSwings} / {Strikes} - {_finishAfterCooldown}" );
-
 		if ( _timeSinceLastHit > Cooldown )
 			if ( _finishAfterCooldown )
 				FireFinished();
