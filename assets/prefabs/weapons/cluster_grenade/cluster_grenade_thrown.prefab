@@ -100,7 +100,7 @@
           "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_shrapnel.prefab"
         },
         "ShrapnelSpreadVelocity": 150,
-        "ShrapnelUpVelocity": 500
+        "ShrapnelUpVelocity": 250
       }
     ],
     "Children": []
