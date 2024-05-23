@@ -11,7 +11,7 @@
 
 <root>
     <div class="players">
-        @foreach (var player in _players.OrderByDescending(p => p.GetHealthPercentage))
+        @foreach (var player in _players.OrderByDescending(p => p.GetTotalGrubHealth > 0))
         {
             <PlayerListEntry Player=@player />
         }
