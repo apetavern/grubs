@@ -25,7 +25,7 @@ public sealed class ShrapnelSpawnComponent : Component
 		for ( var i = 0; i < ShrapnelCount; i++ )
 		{
 			var go = ShrapnelPrefab.Clone();
-			go.Transform.Position = GameObject.Transform.Position + (Vector3.Random.WithY(0) + Vector3.Up * 3f) * 2f;
+			go.Transform.Position = GameObject.Transform.Position + (Vector3.Random.WithY( 0 ) + Vector3.Up * 3f) * 2f;
 			go.NetworkSpawn();
 			if ( go.Components.TryGet( out ProjectileComponent pc ) && Components.TryGet( out ProjectileComponent pc2 ) )
 			{
@@ -36,7 +36,7 @@ public sealed class ShrapnelSpawnComponent : Component
 			if ( rb is null )
 				return;
 			var startVelocity = (Vector3.Up * ShrapnelUpVelocity)
-				.WithX(Game.Random.Float(-ShrapnelSpreadVelocity, ShrapnelSpreadVelocity ) );
+				.WithX( Game.Random.Float( -ShrapnelSpreadVelocity, ShrapnelSpreadVelocity ) );
 			rb.Velocity = startVelocity;
 		}
 	}
