@@ -88,7 +88,10 @@ public partial class Weapon : Component
 					OnFire.Invoke( 100 );
 				else
 					FireImmediate();
-				
+
+				if ( this is not MultiHitMeleeWeapon )
+					FireFinished();
+
 				TimeSinceLastUsed = 0;
 			}
 		}

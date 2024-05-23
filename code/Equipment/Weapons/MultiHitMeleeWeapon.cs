@@ -32,6 +32,8 @@ public class MultiHitMeleeWeapon : Weapon
 
 	private TimeSince _timeSinceLastHit = 0;
 	private int _currentStrikeCount = 1;
+	private int _numberOfSwings = 0;
+	private bool _finishAfterCooldown = false;
 
 	protected override void FireImmediate()
 	{
@@ -42,8 +44,21 @@ public class MultiHitMeleeWeapon : Weapon
 	{
 		base.OnUpdate();
 
+		Log.Info( $"{_numberOfSwings} / {Strikes} - {_finishAfterCooldown}" );
+
+		if ( _timeSinceLastHit > Cooldown )
+			if ( _finishAfterCooldown )
+				FireFinished();
+
 		if ( _timeSinceLastHit > 2f )
 			ResetCombo();
+	}
+
+	protected override void FireFinished()
+	{
+		base.FireFinished();
+
+		_finishAfterCooldown = false;
 	}
 
 	[Broadcast]
@@ -60,6 +75,9 @@ public class MultiHitMeleeWeapon : Weapon
 	private void HitEffects()
 	{
 		if ( _timeSinceLastHit < HitCooldown )
+			return;
+
+		if ( _numberOfSwings >= Strikes || _finishAfterCooldown )
 			return;
 
 		if ( Equipment.Grub is not { } grub )
@@ -87,22 +105,31 @@ public class MultiHitMeleeWeapon : Weapon
 
 			_currentStrikeCount = 1;
 			TimeSinceLastUsed = 0f;
+		}
+		else
+		{
+			damage += HitComboModifier * _currentStrikeCount;
+			foreach ( var tr in trs )
+			{
+				if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
+					HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * BaseHitForce );
 
-			FireFinished();
+				if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
+					HandleBodyHit( body, damage, tr.HitPosition, (tr.Direction + Vector3.Up) * BaseHitDamage );
+			}
+
+			_currentStrikeCount += 1;
+		}
+
+		_numberOfSwings += 1;
+
+		if ( _numberOfSwings >= Strikes )
+		{
+			_currentStrikeCount = 1;
+			_numberOfSwings = 0;
+			_finishAfterCooldown = true;
 			return;
 		}
-
-		damage += HitComboModifier * _currentStrikeCount;
-		foreach ( var tr in trs )
-		{
-			if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
-				HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * BaseHitForce );
-
-			if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
-				HandleBodyHit( body, damage, tr.HitPosition, (tr.Direction + Vector3.Up) * BaseHitDamage );
-		}
-
-		_currentStrikeCount += 1;
 	}
 
 	private IEnumerable<SceneTraceResult> GetHitObjects()
