@@ -22,7 +22,7 @@ public class LandmineGroundProp : ProximityExplosiveComponent
 		base.OnFixedUpdate();
 
 		Transform.Rotation = Rotation.From(
-			Transform.Rotation.Pitch().Clamp( -45, 45 ),
+			Transform.Rotation.Pitch(),
 			Transform.Rotation.Yaw().Clamp( -45, 45 ),
 			Transform.Rotation.Roll().Clamp( -45, 45 )
 			);
