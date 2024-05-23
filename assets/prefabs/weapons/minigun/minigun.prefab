@@ -8,8 +8,17 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "0cd734fc-8a54-47b1-b5c6-7bd383b8c1e3",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "cce66982-f457-41d0-bfa2-97e0ca9ce449",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/minigun/minigun.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "c4660ecf-6cf8-4413-8219-fd0d70b03fdd",
         "Data": "resources/equipment/weapons/minigun.geq",
         "HoldPose": "Minigun",
         "Icon": "models/weapons/minigun/minigun.vmdl_c.png",
@@ -23,30 +32,24 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "cce66982-f457-41d0-bfa2-97e0ca9ce449",
-        "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/weapons/minigun/minigun.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.HitScanWeaponComponent",
-        "__guid": "e040db1e-a75e-46f2-9ca6-f2a315eaa355",
+        "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
+        "__guid": "ed45ace8-4586-4a4a-9347-015cfbc932d8",
         "CanFireWhileMoving": false,
-        "Cooldown": 3,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
         "Damage": 3,
         "Equipment": {
           "_type": "component",
-          "component_id": "0cd734fc-8a54-47b1-b5c6-7bd383b8c1e3",
+          "component_id": "c4660ecf-6cf8-4413-8219-fd0d70b03fdd",
           "go": "c419b745-35a8-4a7b-9d78-823d114a11fe",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
-        "ExplosionDamage": 0,
-        "ExplosionRadius": 10,
+        "ExplosionDamage": 2,
+        "ExplosionRadius": 5,
         "FiringType": "Instant",
-        "HitForce": "100,0,15",
+        "HitForce": "50,0,15",
+        "MaxUses": 1,
         "MuzzleParticles": "particles/muzzleflash/grubs_muzzleflash.vpcf",
         "PenetrateTargets": false,
         "PenetrateWorld": false,
@@ -55,7 +58,7 @@
         "TraceDistance": 5000,
         "TraceParticles": "particles/guntrace/guntrace.vpcf",
         "TraceSound": "sounds/weapons/minigun/minigun_shot.sound",
-        "TraceSpread": 450
+        "TraceSpread": 350
       }
     ],
     "Children": []
@@ -64,6 +67,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

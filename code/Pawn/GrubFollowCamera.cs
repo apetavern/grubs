@@ -1,9 +1,11 @@
-﻿using Grubs.Equipment.Weapons;
+﻿using Grubs.Equipment.Gadgets.Projectiles;
+using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
 using Grubs.Terrain;
 
 namespace Grubs.Pawn;
 
+[Title( "Grubs - Follow Camera" ), Category( "Grubs" )]
 public class GrubFollowCamera : Component
 {
 	public static GrubFollowCamera Local { get; set; }
@@ -84,7 +86,7 @@ public class GrubFollowCamera : Component
 			return;
 		}
 
-		foreach ( var projectile in Scene.GetAllComponents<ProjectileComponent>().Where( p => p.Active ) )
+		foreach ( var projectile in Scene.GetAllComponents<Projectile>().Where( p => p.Active ) )
 		{
 			if ( projectile.Tags.Has( "notarget" ) )
 				continue;

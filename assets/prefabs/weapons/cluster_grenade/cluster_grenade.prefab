@@ -17,8 +17,8 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "208b26cc-8581-471e-85e6-79ba84988d5b",
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "cb8ddc05-02b7-44de-8f40-1520efc02f77",
         "Data": "resources/equipment/weapons/cluster_grenade.geq",
         "HoldPose": "Throwable",
         "Icon": "models/weapons/grenade/clustergrenade.vmdl_c.png",
@@ -32,41 +32,30 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Grubs.Equipment.Weapons.WeaponComponent",
-        "__guid": "a024eac2-7cbe-445a-8737-b672169915b4",
+        "__type": "Grubs.Equipment.Weapons.Weapon",
+        "__guid": "e06dd079-e564-4724-a14e-f3d64dc18ca2",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "208b26cc-8581-471e-85e6-79ba84988d5b",
+          "component_id": "cb8ddc05-02b7-44de-8f40-1520efc02f77",
           "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "b30df95c-bdf2-462c-9063-a2ff35439009",
+          "__guid": "fc7575fc-0fb3-42be-8860-f3c8d732c868",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.WeaponComponent"
+              "Grubs.Equipment.Weapons.Weapon"
             ]
           },
-          "Variables": [
-            {
-              "Name": "_this",
-              "Type": "Sandbox.Component",
-              "Default": {
-                "_type": "component",
-                "component_id": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
-                "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
-                "component_type": "SkinnedModelRenderer"
-              }
-            }
-          ],
+          "Variables": [],
           "Nodes": [
             {
               "Id": 0,
@@ -74,33 +63,39 @@
             },
             {
               "Id": 1,
-              "Type": "grubs.spawn_projectile",
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
               "UserData": {
-                "Position": "208,-128"
+                "Position": "-48,-96"
               }
             },
             {
-              "Id": 3,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
-              },
+              "Id": 2,
+              "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "-16,-192"
+                "Position": "224,-64"
               }
             }
           ],
           "Links": [
             {
               "SrcId": 0,
-              "SrcName": "_signal",
+              "SrcName": "_target",
               "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
               "DstName": "_signal"
             },
             {
               "SrcId": 0,
               "SrcName": "charge",
-              "DstId": 1,
+              "DstId": 2,
               "DstName": "charge"
             },
             {
@@ -108,18 +103,18 @@
                 "_type": "gameobject",
                 "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
               },
-              "DstId": 1,
+              "DstId": 2,
               "DstName": "projectile"
             },
             {
-              "SrcId": 3,
+              "SrcId": 1,
               "SrcName": "_result",
-              "DstId": 1,
+              "DstId": 2,
               "DstName": "source"
             }
           ],
           "Defaults": {
-            "$4._value": {
+            "$3._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
             }

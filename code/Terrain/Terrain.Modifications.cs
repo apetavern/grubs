@@ -2,7 +2,7 @@
 
 namespace Grubs.Terrain;
 
-public partial class GrubsTerrain : Component
+public partial class GrubsTerrain
 {
 	private int _lengthOffset;
 	private int _heightOffset;

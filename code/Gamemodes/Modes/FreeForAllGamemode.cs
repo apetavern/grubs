@@ -1,5 +1,6 @@
 ﻿using Grubs.Common;
 using Grubs.Drops;
+using Grubs.Equipment.Gadgets.Ground;
 using Grubs.Extensions;
 using Grubs.Pawn;
 using Grubs.Terrain;
@@ -68,6 +69,14 @@ public sealed class FreeForAllGamemode : Gamemode
 		var firstGrub = PlayerGrubOrder[firstPlayer].Dequeue();
 		PlayerGrubOrder[firstPlayer].Enqueue( firstGrub );
 		ActivePlayerId = firstPlayer.Id;
+
+		// Landmine Spawning
+		for ( var i = 0; i < GrubsConfig.LandmineSpawnCount; i++ )
+		{
+			var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: false );
+			LandmineUtility.Instance.Spawn( spawnPos );
+		}
+
 		Started = true;
 		State = GameState.Playing;
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
@@ -107,7 +116,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
-		
+
 		EndTurn();
 
 		await Resolution.UntilWorldResolved( 30 );
@@ -193,7 +202,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		var deadPlayers = 0;
 		Player lastPlayerAlive = null;
-		
+
 		var players = Scene.GetAllComponents<Player>();
 		foreach ( var player in players )
 		{

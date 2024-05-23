@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "e5cb849c-affc-4537-a0aa-ea0a625ea30c",
+    "__guid": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
     "Flags": 0,
     "Name": "ninja_rope",
     "Tags": "tool",
@@ -9,23 +9,8 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "52bda72b-2ccf-4a6b-9cdc-fcfa2047d9ce",
-        "Data": "resources/equipment/tools/ninja_rope.geq",
-        "HoldPose": "Uzi",
-        "Icon": "models/tools/ninjarope/ninjarope.vmdl.png",
-        "Model": {
-          "_type": "component",
-          "component_id": "f14a1d0c-b6fe-4e5e-9eb1-4e697c02e5a8",
-          "go": "e5cb849c-affc-4537-a0aa-ea0a625ea30c",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "Name": "Ninja Rope",
-        "SlotIndex": 0
-      },
-      {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "f14a1d0c-b6fe-4e5e-9eb1-4e697c02e5a8",
+        "__guid": "edaa701d-1232-4719-8c30-2f26d016ca3b",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/ninjarope/ninjarope.vmdl",
@@ -34,22 +19,22 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.NinjaRopeWeapon",
-        "__guid": "48669dfa-90ab-4f3a-8bef-24abaf5147ab",
+        "__guid": "ae1a0c81-8bd5-428e-8464-fb84e67ab157",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": true,
         "CanSwapDuringUse": true,
         "Cooldown": 1,
         "Equipment": {
           "_type": "component",
-          "component_id": "52bda72b-2ccf-4a6b-9cdc-fcfa2047d9ce",
-          "go": "e5cb849c-affc-4537-a0aa-ea0a625ea30c",
-          "component_type": "EquipmentComponent"
+          "component_id": "401a6f53-9dac-4e31-b629-e40180598ee5",
+          "go": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+          "component_type": "Equipment"
         },
         "FiringType": "Complex",
         "MaxUses": 3,
         "OnFire": {
           "__version": 7,
-          "__guid": "d2a82ff7-ebea-431b-845e-a3436731835f",
+          "__guid": "65a1c3ba-e569-49c1-887e-60e26c1da52a",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -121,6 +106,21 @@
             }
           }
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "401a6f53-9dac-4e31-b629-e40180598ee5",
+        "Data": "resources/equipment/tools/ninja_rope.geq",
+        "HoldPose": "Uzi",
+        "Icon": "models/tools/ninjarope/ninjarope.vmdl.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "edaa701d-1232-4719-8c30-2f26d016ca3b",
+          "go": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Ninja Rope",
+        "SlotIndex": 0
       }
     ],
     "Children": []

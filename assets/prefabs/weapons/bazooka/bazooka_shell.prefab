@@ -27,13 +27,22 @@
         "Width": 0.25
       },
       {
-        "__type": "Grubs.Equipment.Weapons.ArcProjectileComponent",
-        "__guid": "6696cb55-4d45-4dda-94c7-159d0c3d100b",
+        "__type": "Sandbox.CapsuleCollider",
+        "__guid": "b28e4cce-f97b-4b78-968d-bcdfc47f794c",
+        "End": "1.880003,0,0",
+        "IsTrigger": false,
+        "Radius": 4.6000004,
+        "Start": "-5.559999,0,0",
+        "Static": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ArcProjectile",
+        "__guid": "5aa40304-aace-451b-b37d-baecd2571852",
         "Explosive": {
           "_type": "component",
-          "component_id": "a397112f-5221-47bb-95d5-1e7191493d80",
+          "component_id": "efd8ec8e-f68d-42d8-9dab-9ff9edf6f99c",
           "go": "be07f4a5-bc0f-47da-b84b-70f6edb415f3",
-          "component_type": "ExplosiveProjectileComponent"
+          "component_type": "ExplosiveProjectile"
         },
         "MaxBounces": 0,
         "Model": {
@@ -46,8 +55,8 @@
         "ShouldBounce": false
       },
       {
-        "__type": "Grubs.Equipment.Weapons.ExplosiveProjectileComponent",
-        "__guid": "a397112f-5221-47bb-95d5-1e7191493d80",
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "efd8ec8e-f68d-42d8-9dab-9ff9edf6f99c",
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
@@ -58,18 +67,9 @@
         "Particles": "particles/explosion/grubs_explosion_base.vpcf"
       },
       {
-        "__type": "Grubs.Common.HealthComponent",
-        "__guid": "107a25ff-fe17-491f-84e1-37dcb360e36b",
+        "__type": "Grubs.Common.Health",
+        "__guid": "d823ff27-5568-4639-8715-9337a975d6d7",
         "MaxHealth": 15
-      },
-      {
-        "__type": "Sandbox.CapsuleCollider",
-        "__guid": "b28e4cce-f97b-4b78-968d-bcdfc47f794c",
-        "End": "1.880003,0,0",
-        "IsTrigger": false,
-        "Radius": 4.6000004,
-        "Start": "-5.559999,0,0",
-        "Static": false
       }
     ],
     "Children": []
@@ -78,6 +78,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

@@ -32,12 +32,12 @@
 {
     public PlayerInventory Inventory { get; set; }
 
-    private EquipmentComponent Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
-    private EquipmentComponent Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
-    private EquipmentComponent Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
-    private WeaponComponent CurrentWeapon => Current?.Components.Get<WeaponComponent>();
-    private WeaponComponent NextWeapon => Next?.Components.Get<WeaponComponent>();
-    private WeaponComponent PrevWeapon => Prev?.Components.Get<WeaponComponent>();
+    private Equipment Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
+    private Equipment Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
+    private Equipment Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
+    private Weapon CurrentWeapon => Current?.Components.Get<Weapon>();
+    private Weapon NextWeapon => Next?.Components.Get<Weapon>();
+    private Weapon PrevWeapon => Prev?.Components.Get<Weapon>();
 
     public override void Tick()
     {

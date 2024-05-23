@@ -4,7 +4,7 @@ using Grubs.Pawn;
 namespace Grubs.Equipment;
 
 [Title( "Grubs - Equipment" ), Category( "Equipment" )]
-public class EquipmentComponent : Component
+public class Equipment : Component
 {
 	[Property] public required string Name { get; set; } = "";
 	[Property] public required SkinnedModelRenderer Model { get; set; }
@@ -66,7 +66,7 @@ public class EquipmentComponent : Component
 		if ( Grub is not null )
 			GameObject.SetParent( Grub.Player.GameObject );
 
-		if ( Components.TryGet( out WeaponComponent weapon ) )
+		if ( Components.TryGet( out Weapon weapon ) )
 			weapon.TimesUsed = 0;
 
 		Grub = null;

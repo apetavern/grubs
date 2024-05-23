@@ -114,6 +114,12 @@ public static class GrubsConfig
 	public static float HealthCrateChancePerTurn { get; set; } = 0.05f;
 
 	/// <summary>
+	/// The number of landmines to attempt to spawn at the start
+	/// </summary>
+	[ConVar( "landmine_spawn_count" )]
+	public static int LandmineSpawnCount { get; set; } = 5;
+
+	/// <summary>
 	/// The percent chance that a barrel will spawn.
 	/// </summary>
 	[ConVar( "barrel_chance" )]
@@ -176,7 +182,8 @@ public static class GrubsConfig
 		Cavern = 3,
 		Bunkers = 4,
 		AICavern = 5,
-		Hightower = 6
+		Hightower = 6,
+		Underground = 7
 	}
 
 	/// <summary>

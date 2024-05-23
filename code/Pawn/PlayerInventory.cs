@@ -1,5 +1,4 @@
-﻿using Grubs.Equipment;
-using Grubs.Gamemodes;
+﻿using Grubs.Gamemodes;
 
 namespace Grubs.Pawn;
 
@@ -9,8 +8,8 @@ public sealed class PlayerInventory : Component
 	[Property] public required List<GameObject> EquipmentPrefabs { get; set; } = new();
 	[Property] public required Player Player { get; set; }
 
-	public List<EquipmentComponent> Equipment { get; set; } = new();
-	public EquipmentComponent ActiveEquipment => GetActiveEquipment();
+	public List<Equipment.Equipment> Equipment { get; set; } = new();
+	public Equipment.Equipment ActiveEquipment => GetActiveEquipment();
 	[Property, ReadOnly, Sync] public int ActiveSlot { get; set; }
 	[Property, ReadOnly, Sync] public bool EquipmentActive { get; set; }
 
@@ -36,7 +35,7 @@ public sealed class PlayerInventory : Component
 			var go = prefab.Clone();
 			go.NetworkSpawn();
 
-			var equipment = go.Components.Get<EquipmentComponent>();
+			var equipment = go.Components.Get<Equipment.Equipment>();
 
 			Equipment.Add( equipment );
 
@@ -61,7 +60,7 @@ public sealed class PlayerInventory : Component
 		}
 	}
 
-	public void EquipItem( EquipmentComponent equipment )
+	public void EquipItem( Equipment.Equipment equipment )
 	{
 		if ( Player.HasFiredThisTurn )
 			return;
@@ -103,7 +102,7 @@ public sealed class PlayerInventory : Component
 		equipment.Holster();
 	}
 
-	private EquipmentComponent GetActiveEquipment()
+	private Equipment.Equipment GetActiveEquipment()
 	{
 		return !EquipmentActive ? null : GetActiveEquipment( ActiveSlot );
 	}
@@ -122,17 +121,17 @@ public sealed class PlayerInventory : Component
 		return ActiveSlot - 1;
 	}
 
-	private EquipmentComponent GetHolsteredEquipment( int slot )
+	private Equipment.Equipment GetHolsteredEquipment( int slot )
 	{
 		return Player.GameObject.Components
-			.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
+			.GetAll<Equipment.Equipment>( FindMode.EverythingInSelfAndDescendants )
 			.FirstOrDefault( x => x.SlotIndex == slot );
 	}
 
-	private EquipmentComponent GetActiveEquipment( int slot )
+	private Equipment.Equipment GetActiveEquipment( int slot )
 	{
 		return Player.ActiveGrub.GameObject.Components
-			.GetAll<EquipmentComponent>( FindMode.EverythingInSelfAndDescendants )
+			.GetAll<Equipment.Equipment>( FindMode.EverythingInSelfAndDescendants )
 			.FirstOrDefault( x => x.SlotIndex == slot );
 	}
 

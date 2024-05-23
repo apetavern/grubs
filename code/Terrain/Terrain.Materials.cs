@@ -2,7 +2,7 @@
 
 namespace Grubs.Terrain;
 
-public partial class GrubsTerrain : Component
+public partial class GrubsTerrain
 {
 	public Sdf2DLayer DevMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf2d_default.sdflayer" );
 	public Sdf2DLayer SandMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );

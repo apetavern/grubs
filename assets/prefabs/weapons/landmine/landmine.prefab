@@ -1,0 +1,152 @@
+{
+  "RootObject": {
+    "__guid": "722759e6-58c0-418e-9cb3-5b259425b264",
+    "Flags": 0,
+    "Name": "landmine",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "ef479448-0ebe-41f5-8805-cac0d6cc40ed",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/landmine/landmine.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "fe7b31ab-b730-4ef7-ad06-76ba9ebe79ff",
+        "Data": "resources/equipment/weapons/landmine.geq",
+        "HoldPose": "Droppable",
+        "Icon": "models/weapons/landmine/landmine.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "ef479448-0ebe-41f5-8805-cac0d6cc40ed",
+          "go": "722759e6-58c0-418e-9cb3-5b259425b264",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Landmine",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.Weapon",
+        "__guid": "6dc0a299-d04e-40ca-9534-7209a8186465",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "fe7b31ab-b730-4ef7-ad06-76ba9ebe79ff",
+          "go": "722759e6-58c0-418e-9cb3-5b259425b264",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Instant",
+        "MaxUses": 1,
+        "OnFire": {
+          "__version": 7,
+          "__guid": "400a83d6-636b-4178-a74c-7326cf9a7827",
+          "UserData": {
+            "Title": "On Fire",
+            "ReferencedComponentTypes": [
+              "Grubs.Equipment.Weapons.Weapon"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
+              "UserData": {
+                "Position": "16,-128"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "272,0"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "grubs.fire_finished",
+              "UserData": {
+                "Position": "496,-96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "charge",
+              "DstId": 2,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
+              },
+              "DstId": 2,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "source"
+            }
+          ],
+          "Defaults": {
+            "$3._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
+            }
+          }
+        }
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

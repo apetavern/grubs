@@ -1,7 +1,7 @@
 ﻿namespace Grubs.Equipment.Weapons;
 
-[Title( "Ninja Rope Weapon" ), Category( "Equipment" )]
-public class NinjaRopeWeapon : WeaponComponent
+[Title( "Grubs - Ninja Rope Weapon" ), Category( "Equipment" )]
+public class NinjaRopeWeapon : Weapon
 {
 	protected override void HandleComplexFiringInput()
 	{

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "82514b02-ae93-4ab7-90c6-ce6eeed4566f",
+    "__guid": "76dba05b-9ab5-48ac-88cc-c429d3477e52",
     "Flags": 0,
     "Name": "cluster_grenade_shrapnel",
     "Tags": "projectile,shrapnel",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "a556f86b-aad1-4acb-9732-d74a4ac2cf13",
+        "__guid": "e62c757a-6d14-49ba-8c7b-bef6b61c4d8c",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/grenade/clustergrenade_shard.vmdl",
@@ -19,7 +19,7 @@
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "9f17e8ee-a573-4830-bc78-0b29e646a620",
+        "__guid": "04e04909-de60-4593-a997-e5375d95a283",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -27,39 +27,8 @@
         "Width": 0.25
       },
       {
-        "__type": "Grubs.Equipment.Weapons.ExplosiveProjectileComponent",
-        "__guid": "8d4e3097-7f21-4ac5-b329-803a0359c216",
-        "DeleteOnExplode": true,
-        "ExplodeAfter": 4,
-        "ExplodeOnCollision": true,
-        "ExplodeOnDeath": true,
-        "ExplosionDamage": 15,
-        "ExplosionRadius": 50,
-        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.PhysicsProjectileComponent",
-        "__guid": "2417290c-97dc-45c6-a1ff-09b60f9ff49b",
-        "Droppable": false,
-        "Model": {
-          "_type": "component",
-          "component_id": "a556f86b-aad1-4acb-9732-d74a4ac2cf13",
-          "go": "82514b02-ae93-4ab7-90c6-ce6eeed4566f",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "PhysicsBody": {
-          "_type": "component",
-          "component_id": "2f2500ac-b10a-45bd-b46d-66839d9e5460",
-          "go": "82514b02-ae93-4ab7-90c6-ce6eeed4566f",
-          "component_type": "Rigidbody"
-        },
-        "ProjectileSpeed": 500,
-        "SetPositionOnStart": false
-      },
-      {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "2f2500ac-b10a-45bd-b46d-66839d9e5460",
+        "__guid": "37a52e1a-9352-466d-b736-c5ac4d664594",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0.1,
@@ -75,7 +44,7 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "cc312534-9deb-4636-b612-71f5996137c1",
+        "__guid": "fc960cd8-58c5-4c98-8478-c895bddc75bf",
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 4,
@@ -83,9 +52,40 @@
         "Surface": "surfaces/zero_bounce.surface"
       },
       {
-        "__type": "Grubs.Common.HealthComponent",
-        "__guid": "379deb4e-98b1-4258-8680-bce0fa645cbe",
+        "__type": "Grubs.Common.Health",
+        "__guid": "f3c78321-bbf5-40d8-bd48-f4ebbb76ac3f",
         "MaxHealth": 40
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "c0e2f607-5fd8-4a96-b507-5093b1743e3b",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 4,
+        "ExplodeOnCollision": true,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 15,
+        "ExplosionRadius": 50,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "f7e8a620-8a9b-40ff-9a2a-47c538f4087e",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "e62c757a-6d14-49ba-8c7b-bef6b61c4d8c",
+          "go": "76dba05b-9ab5-48ac-88cc-c429d3477e52",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "37a52e1a-9352-466d-b736-c5ac4d664594",
+          "go": "76dba05b-9ab5-48ac-88cc-c429d3477e52",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 500,
+        "SetPositionOnStart": false
       }
     ],
     "Children": []

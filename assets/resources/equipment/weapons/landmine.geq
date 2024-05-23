@@ -1,0 +1,11 @@
+{
+  "Name": "Landmine",
+  "Description": "Places a landmine at your feet ",
+  "Icon": "models/weapons/landmine/landmine.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/landmine/landmine.prefab",
+  "DefaultAmmo": 1,
+  "DropChance": 4,
+  "__references": [],
+  "__version": 0
+}

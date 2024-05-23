@@ -1,28 +1,15 @@
 {
   "RootObject": {
-    "__guid": "07e427e9-7591-4fa8-b977-942d3edbe5d6",
+    "__guid": "b598c351-a05b-4fed-8582-2efa65dbac33",
+    "Flags": 0,
     "Name": "baseball_bat",
     "Enabled": true,
     "NetworkMode": 2,
+    "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "fe1c8fbd-7dd0-4d42-b330-4eaab9b472bf",
-        "Data": "resources/equipment/weapons/baseball_bat.geq",
-        "HoldPose": "Swing",
-        "Icon": "models/weapons/baseballbat/baseballbat.vmdl_c.png",
-        "Model": {
-          "_type": "component",
-          "component_id": "21689043-a155-4ce0-b09f-1800b55ee0f2",
-          "go": "07e427e9-7591-4fa8-b977-942d3edbe5d6",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "Name": "Baseball Bat",
-        "SlotIndex": 0
-      },
-      {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "21689043-a155-4ce0-b09f-1800b55ee0f2",
+        "__guid": "432ee687-b094-4dbc-966b-eb3237cbf7db",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/baseballbat/baseballbat.vmdl",
@@ -30,16 +17,33 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "Grubs.Equipment.Weapons.MeleeWeaponComponent",
-        "__guid": "b6518f16-6ba9-44ba-943a-274431c9dfee",
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "bac691d4-8fdd-4bcd-83f9-271e1c81d5f7",
+        "Data": "resources/equipment/weapons/baseball_bat.geq",
+        "HoldPose": "Swing",
+        "Icon": "models/weapons/baseballbat/baseballbat.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "432ee687-b094-4dbc-966b-eb3237cbf7db",
+          "go": "b598c351-a05b-4fed-8582-2efa65dbac33",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Baseball Bat",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.MeleeWeapon",
+        "__guid": "8b375957-7854-41db-aab7-d903679c27e0",
         "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Damage": 40,
         "Equipment": {
           "_type": "component",
-          "component_id": "fe1c8fbd-7dd0-4d42-b330-4eaab9b472bf",
-          "go": "07e427e9-7591-4fa8-b977-942d3edbe5d6",
-          "component_type": "EquipmentComponent"
+          "component_id": "bac691d4-8fdd-4bcd-83f9-271e1c81d5f7",
+          "go": "b598c351-a05b-4fed-8582-2efa65dbac33",
+          "component_type": "Equipment"
         },
         "FiringType": "Instant",
         "HitDelay": 0.1,
@@ -47,7 +51,8 @@
         "HitOffset": "0,0,-10",
         "HitSize": "56,0,0",
         "HitSound": "sounds/weapons/bat/bat_swing.sound",
-        "ImpactSound": "sounds/weapons/bat/bat_impact.sound"
+        "ImpactSound": "sounds/weapons/bat/bat_impact.sound",
+        "MaxUses": 1
       }
     ],
     "Children": []
@@ -56,6 +61,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

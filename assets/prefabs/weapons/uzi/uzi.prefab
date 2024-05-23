@@ -1,14 +1,24 @@
 {
   "RootObject": {
     "__guid": "bea1b19e-cb6c-446e-9a4d-033232ad7101",
+    "Flags": 0,
     "Name": "uzi",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "5327bdfc-004b-4665-859d-3eb9ea893e1c",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "cabb0ba0-abee-4933-8d6b-b3db62e496c6",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/uzi/uzi.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "58a5b21a-7254-4f7b-8f24-61ed23cd9cd0",
         "Data": "resources/equipment/weapons/uzi.geq",
         "HoldPose": "Uzi",
         "Icon": "models/weapons/uzi/uzi.vmdl_c.png",
@@ -22,30 +32,24 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "cabb0ba0-abee-4933-8d6b-b3db62e496c6",
-        "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/weapons/uzi/uzi.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.HitScanWeaponComponent",
-        "__guid": "e098fa49-a157-4b47-9896-922058341a9a",
+        "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
+        "__guid": "42c902b1-4a02-4406-9c3d-081a8f763381",
         "CanFireWhileMoving": false,
-        "Cooldown": 3,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
         "Damage": 3,
         "Equipment": {
           "_type": "component",
-          "component_id": "5327bdfc-004b-4665-859d-3eb9ea893e1c",
+          "component_id": "58a5b21a-7254-4f7b-8f24-61ed23cd9cd0",
           "go": "bea1b19e-cb6c-446e-9a4d-033232ad7101",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
-        "ExplosionDamage": 0,
-        "ExplosionRadius": 5,
+        "ExplosionDamage": 10,
+        "ExplosionRadius": 2,
         "FiringType": "Instant",
-        "HitForce": "250,0,0",
+        "HitForce": "100,0,1",
+        "MaxUses": 1,
         "MuzzleParticles": "particles/muzzleflash/grubs_muzzleflash.vpcf",
         "PenetrateTargets": false,
         "PenetrateWorld": false,
@@ -54,7 +58,7 @@
         "TraceDistance": 5000,
         "TraceParticles": "particles/guntrace/guntrace.vpcf",
         "TraceSound": "sounds/weapons/uzi/uzi_shot.sound",
-        "TraceSpread": 450
+        "TraceSpread": 400
       }
     ],
     "Children": []
@@ -63,6 +67,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }
