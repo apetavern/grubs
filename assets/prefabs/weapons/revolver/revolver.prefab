@@ -1,14 +1,24 @@
 {
   "RootObject": {
     "__guid": "d0b8234e-58c1-4ef8-8e23-18d4adae910b",
+    "Flags": 0,
     "Name": "revolver",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "22891457-6560-44ac-8536-a4ab301fdf77",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "13fc9c43-a908-4483-9cf3-dcd361847830",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/revolver/revolver.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "b2a8647c-319c-45d1-be33-d958040262ba",
         "Data": "resources/equipment/weapons/revolver.geq",
         "HoldPose": "Revolver",
         "Icon": "models/weapons/revolver/revolver.vmdl_c.png",
@@ -22,30 +32,24 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "13fc9c43-a908-4483-9cf3-dcd361847830",
-        "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/weapons/revolver/revolver.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.HitScanWeaponComponent",
-        "__guid": "47996c6e-263c-4e67-b90a-334dc8dd2847",
+        "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
+        "__guid": "110ac4ee-9e61-4183-bd4b-04e75350b520",
         "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Damage": 35,
         "Equipment": {
           "_type": "component",
-          "component_id": "22891457-6560-44ac-8536-a4ab301fdf77",
+          "component_id": "b2a8647c-319c-45d1-be33-d958040262ba",
           "go": "d0b8234e-58c1-4ef8-8e23-18d4adae910b",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
-        "ExplosionDamage": 0,
-        "ExplosionRadius": 10,
+        "ExplosionDamage": 2,
+        "ExplosionRadius": 15,
         "FiringType": "Instant",
         "HitForce": "250,0,100",
+        "MaxUses": 1,
         "MuzzleParticles": "particles/muzzleflash/grubs_muzzleflash.vpcf",
         "PenetrateTargets": true,
         "PenetrateWorld": false,
@@ -63,6 +67,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

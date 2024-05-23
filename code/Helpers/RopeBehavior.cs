@@ -1,10 +1,8 @@
 using Grubs.Common;
-using Sandbox;
-using System.IO.Pipes;
 
-namespace Grubs;
+namespace Grubs.Helpers;
 
-public sealed class RopeBehaviorComponent : Component
+public sealed class RopeBehavior : Component
 {
 	[Property] public GameObject HookObject { get; set; }
 

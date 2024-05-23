@@ -1,9 +1,10 @@
-﻿using Grubs.UI.Components;
+﻿using Grubs.Equipment.Weapons;
+using Grubs.UI.Components;
 
-namespace Grubs.Equipment.Weapons;
+namespace Grubs.Equipment.Tools;
 
 [Title( "Grubs - Teleport Tool" ), Category( "Equipment" )]
-public class TeleportToolComponent : WeaponComponent
+public class TeleportTool : Tool
 {
 	/*
 	 * Cursor Properties

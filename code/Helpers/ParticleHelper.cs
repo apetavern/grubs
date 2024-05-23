@@ -1,12 +1,12 @@
 ﻿namespace Grubs.Helpers;
 
 [Title( "Grubs - Particle Helper" ), Category( "World" )]
-public sealed class ParticleHelperComponent : Component
+public sealed class ParticleHelper : Component
 {
-	public static ParticleHelperComponent Instance { get; set; } = new();
+	public static ParticleHelper Instance { get; set; } = new();
 	private List<SceneParticles> _sceneObjects = new();
 
-	public ParticleHelperComponent()
+	public ParticleHelper()
 	{
 		Instance = this;
 	}

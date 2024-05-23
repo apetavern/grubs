@@ -1,11 +1,12 @@
-﻿using Grubs.Equipment.Weapons;
+﻿using Grubs.Equipment.Gadgets.Projectiles;
+using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
 using Grubs.Helpers;
 using Grubs.Pawn;
 
 namespace Grubs.Common;
 
-public partial class HealthComponent : Component
+public partial class Health : Component
 {
 	[Property] public float MaxHealth { get; set; }
 
@@ -84,7 +85,7 @@ public partial class HealthComponent : Component
 				// Same as above.
 				DeathEffects( position );
 
-				ExplosionHelperComponent.Instance.Explode( grub, position, 100f, 25f );
+				ExplosionHelper.Instance.Explode( grub, position, 100f, 25f );
 				plunger?.Destroy();
 			}
 
@@ -94,7 +95,7 @@ public partial class HealthComponent : Component
 
 		DeathInvoked = true;
 
-		if ( Components.TryGet( out ExplosiveProjectileComponent explosive ) && explosive.ExplodeOnDeath )
+		if ( Components.TryGet( out ExplosiveProjectile explosive ) && explosive.ExplodeOnDeath )
 		{
 			explosive.Explode();
 		}
@@ -103,7 +104,7 @@ public partial class HealthComponent : Component
 	[Broadcast]
 	private void DeathEffects( Vector3 position )
 	{
-		var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
+		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
 		sceneParticles.SetControlPoint( 1, new Vector3( 100f / 2f, 0, 0 ) );
 		Sound.Play( "explosion_short_tail", position );
 	}

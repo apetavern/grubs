@@ -8,8 +8,17 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "3469c65a-940f-407e-9218-b7b7b92d86eb",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "8ba58e3f-122a-454a-828d-6287cfff1486",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/railgun/railgun.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "a49c6be5-7f68-4a9d-860e-9da8d15e2633",
         "Data": "resources/equipment/weapons/gibgun.geq",
         "HoldPose": "Rifle",
         "Icon": "models/weapons/railgun/railgun.vmdl_c.png",
@@ -23,30 +32,24 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "8ba58e3f-122a-454a-828d-6287cfff1486",
-        "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/weapons/railgun/railgun.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.HitScanWeaponComponent",
-        "__guid": "c4cf2d7a-9521-480b-8ddf-c44037c3c70c",
+        "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
+        "__guid": "048233b4-d5f1-4571-8bab-0f49e3f6e1e3",
         "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
         "Cooldown": 2,
-        "Damage": 99,
+        "Damage": 95,
         "Equipment": {
           "_type": "component",
-          "component_id": "3469c65a-940f-407e-9218-b7b7b92d86eb",
+          "component_id": "a49c6be5-7f68-4a9d-860e-9da8d15e2633",
           "go": "54b65cf8-81f1-4e5c-87dc-7e41b04cc3a0",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
         "ExplosionDamage": 0,
         "ExplosionRadius": 24,
         "FiringType": "Instant",
         "HitForce": "50,0,350",
+        "MaxUses": 1,
         "PenetrateTargets": true,
         "PenetrateWorld": true,
         "TraceCount": 1,
@@ -54,7 +57,7 @@
         "TraceDistance": 5000,
         "TraceParticles": "particles/guntrace/railgun.vpcf",
         "TraceSound": "sounds/weapons/gibgun/gibgun_shot.sound",
-        "TraceSpread": 0
+        "TraceSpread": 1
       }
     ],
     "Children": []
@@ -63,6 +66,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

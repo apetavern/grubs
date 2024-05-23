@@ -27,51 +27,6 @@
         "Width": 0.25
       },
       {
-        "__type": "Grubs.Equipment.Weapons.ExplosiveProjectileComponent",
-        "__guid": "63707ecd-e3c7-42cd-a8af-45dc62db0b74",
-        "DeleteOnExplode": true,
-        "ExplodeAfter": 4,
-        "ExplodeOnCollision": false,
-        "ExplodeOnDeath": true,
-        "ExplosionDamage": 25,
-        "ExplosionRadius": 50,
-        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.PhysicsProjectileComponent",
-        "__guid": "b0c2c4fd-b453-4b92-bdda-6cf6ef469e83",
-        "Droppable": false,
-        "Model": {
-          "_type": "component",
-          "component_id": "3771677f-aa80-4b9e-8c60-b48c296d15af",
-          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "PhysicsBody": {
-          "_type": "component",
-          "component_id": "a47456aa-f85b-4b22-bade-f819f189ee82",
-          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
-          "component_type": "Rigidbody"
-        },
-        "ProjectileSpeed": 500
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.ShrapnelSpawnComponent",
-        "__guid": "cc4fafd9-c3b0-4b11-abc6-c998a1de610e",
-        "Projectile": {
-          "_type": "component",
-          "component_id": "63707ecd-e3c7-42cd-a8af-45dc62db0b74",
-          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
-          "component_type": "ExplosiveProjectileComponent"
-        },
-        "ShrapnelCount": 5,
-        "ShrapnelPrefab": {
-          "_type": "gameobject",
-          "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_shrapnel.prefab"
-        }
-      },
-      {
         "__type": "Sandbox.Rigidbody",
         "__guid": "a47456aa-f85b-4b22-bade-f819f189ee82",
         "AngularDamping": 0,
@@ -96,9 +51,56 @@
         "Static": false
       },
       {
-        "__type": "Grubs.Common.HealthComponent",
-        "__guid": "2c1810e7-d853-431f-89fa-b0318ed654c7",
+        "__type": "Grubs.Common.Health",
+        "__guid": "2e5699d2-b352-4760-b699-54d1c67edff4",
         "MaxHealth": 80
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "3b32f571-956a-47aa-9311-b6e5b66897fd",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 4,
+        "ExplodeOnCollision": false,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 25,
+        "ExplosionRadius": 100,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "679c2e66-3b88-4221-9e92-20b4aa05bbe0",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "3771677f-aa80-4b9e-8c60-b48c296d15af",
+          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "a47456aa-f85b-4b22-bade-f819f189ee82",
+          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 500
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
+        "__guid": "9bedb542-dbcd-45cc-8971-f19e379dc646",
+        "Projectile": {
+          "_type": "component",
+          "component_id": "3b32f571-956a-47aa-9311-b6e5b66897fd",
+          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
+          "component_type": "ExplosiveProjectile"
+        },
+        "ShrapnelCount": 0,
+        "ShrapnelPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_shrapnel.prefab"
+        },
+        "ShrapnelSpreadVelocity": 150,
+        "ShrapnelUpVelocity": 500
       }
     ],
     "Children": []

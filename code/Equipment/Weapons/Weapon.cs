@@ -4,11 +4,11 @@ using Grubs.Helpers;
 namespace Grubs.Equipment.Weapons;
 
 [Title( "Grubs - Weapon" ), Category( "Equipment" )]
-public partial class WeaponComponent : Component
+public partial class Weapon : Component
 {
 	public delegate void OnFireDelegate( int charge );
 
-	[Property] public required EquipmentComponent Equipment { get; set; }
+	[Property] public required Equipment Equipment { get; set; }
 
 	[Property] public float Cooldown { get; set; } = 2f;
 	[Property] public bool CanFireWhileMoving { get; set; } = false;
@@ -64,8 +64,8 @@ public partial class WeaponComponent : Component
 			{
 				IsFiring = true;
 				IsCharging = false;
-				ParticleHelperComponent.Instance.Dispose( _chargeParticles );
-				_chargeParticles = ParticleHelperComponent.Instance.PlayInstantaneous( ChargeParticleSystem );
+				ParticleHelper.Instance.Dispose( _chargeParticles );
+				_chargeParticles = ParticleHelper.Instance.PlayInstantaneous( ChargeParticleSystem );
 
 				if ( OnFire is not null )
 					OnFire.Invoke( _weaponCharge );
@@ -88,8 +88,8 @@ public partial class WeaponComponent : Component
 					OnFire.Invoke( 100 );
 				else
 					FireImmediate();
+				
 				TimeSinceLastUsed = 0;
-				FireFinished();
 			}
 		}
 		else if ( FiringType is FiringType.Cursor )
@@ -146,7 +146,7 @@ public partial class WeaponComponent : Component
 		IsCharging = true;
 
 		var muzzle = GetMuzzlePosition();
-		_chargeParticles ??= ParticleHelperComponent.Instance.PlayInstantaneous( ChargeParticleSystem, muzzle );
+		_chargeParticles ??= ParticleHelper.Instance.PlayInstantaneous( ChargeParticleSystem, muzzle );
 		_chargeParticles?.SetControlPoint( 0, muzzle.Position );
 		_chargeParticles?.SetControlPoint( 1, muzzle.Position + GetMuzzleForward() * 80f );
 		_chargeParticles?.SetNamedValue( "Alpha", 100f );

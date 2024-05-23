@@ -1,10 +1,10 @@
 ﻿using Grubs.Common;
 using Grubs.Helpers;
 
-namespace Grubs.Equipment.Weapons;
+namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Explosive Projectile" ), Category( "Equipment" )]
-public class ExplosiveProjectileComponent : Component, IResolvable, Component.ICollisionListener
+public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionListener
 {
 	[Property] private float ExplosionDamage { get; set; } = 50f;
 	[Property] private float ExplosionRadius { get; set; } = 100f;
@@ -76,13 +76,13 @@ public class ExplosiveProjectileComponent : Component, IResolvable, Component.IC
 	[Broadcast]
 	public void ExplodeEffects()
 	{
-		ExplosionHelperComponent.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage );
+		ExplosionHelper.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage );
 		Sound.Play( ExplosionSound );
 
 		if ( Particles is null )
 			return;
 
-		var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( Particles, Transform.World );
+		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World );
 		sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
 	}
 }

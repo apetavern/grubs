@@ -3,8 +3,8 @@ using Grubs.Pawn;
 
 namespace Grubs.Equipment.Weapons;
 
-[Title( "Grub - Melee Weapon" ), Category( "Equipment" )]
-public class MeleeWeaponComponent : WeaponComponent
+[Title( "Grubs - Melee Weapon" ), Category( "Equipment" )]
+public class MeleeWeapon : Weapon
 {
 	[Property] public float Damage { get; set; } = 25f;
 	[Property] public float HitForce { get; set; } = 512f;
@@ -62,7 +62,7 @@ public class MeleeWeaponComponent : WeaponComponent
 				body.ApplyImpulseAt( tr.HitPosition, tr.Direction * HitForce * body.PhysicsBody.Mass );
 			}
 
-			if ( tr.GameObject.Components.TryGet( out HealthComponent health, FindMode.EverythingInAncestors ) )
+			if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInAncestors ) )
 				health.TakeDamage( GrubsDamageInfo.FromMelee( Damage, Equipment.Grub.GameObject, GameObject ) );
 		}
 

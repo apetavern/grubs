@@ -8,8 +8,17 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "1be96d4e-33e2-42ce-935d-a59507aa4287",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/bazooka/bazooka.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "d37321e2-883b-4bd3-a36e-a9847974781e",
         "Data": "resources/equipment/weapons/bazooka.geq",
         "HoldPose": "Bazooka",
         "Icon": "models/weapons/bazooka/bazooka.vmdl_c.png",
@@ -23,48 +32,30 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
-        "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/weapons/bazooka/bazooka.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.WeaponComponent",
-        "__guid": "86f16eac-bde5-4175-89ec-baef0f63bbe0",
+        "__type": "Grubs.Equipment.Weapons.Weapon",
+        "__guid": "4ac2e5c7-f1ff-493a-93c1-9559aafd95cb",
         "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "1be96d4e-33e2-42ce-935d-a59507aa4287",
+          "component_id": "d37321e2-883b-4bd3-a36e-a9847974781e",
           "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "f1594c5a-08d0-4300-b61b-f1d0e841406a",
+          "__guid": "aeed475f-d176-4364-854c-1089651ed033",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
-              "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
+              "Grubs.Equipment.Weapons.Weapon"
             ]
           },
-          "Variables": [
-            {
-              "Name": "_this",
-              "Type": "Sandbox.Component",
-              "Default": {
-                "_type": "component",
-                "component_id": "1be96d4e-33e2-42ce-935d-a59507aa4287",
-                "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
-                "component_type": "EquipmentComponent"
-              }
-            }
-          ],
+          "Variables": [],
           "Nodes": [
             {
               "Id": 0,
@@ -72,33 +63,39 @@
             },
             {
               "Id": 1,
-              "Type": "grubs.spawn_projectile",
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
               "UserData": {
-                "Position": "224,-96"
+                "Position": "-64,-112"
               }
             },
             {
-              "Id": 2,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
-              },
+              "Id": 3,
+              "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "-16,-144"
+                "Position": "224,-80"
               }
             }
           ],
           "Links": [
             {
               "SrcId": 0,
-              "SrcName": "_signal",
+              "SrcName": "_target",
               "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
               "DstName": "_signal"
             },
             {
               "SrcId": 0,
               "SrcName": "charge",
-              "DstId": 1,
+              "DstId": 3,
               "DstName": "charge"
             },
             {
@@ -106,18 +103,18 @@
                 "_type": "gameobject",
                 "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
               },
-              "DstId": 1,
+              "DstId": 3,
               "DstName": "projectile"
             },
             {
-              "SrcId": 2,
+              "SrcId": 1,
               "SrcName": "_result",
-              "DstId": 1,
+              "DstId": 3,
               "DstName": "source"
             }
           ],
           "Defaults": {
-            "$3._value": {
+            "$4._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
             }

@@ -19,7 +19,7 @@
 
 @code
 {
-    public EquipmentComponent Equipment { get; set; }
+    public Equipment Equipment { get; set; }
     public string Ammo => Equipment?.Ammo == -1 ? "\u221e" : Equipment?.Ammo.ToString();
 
     protected override void OnClick(MousePanelEvent e)

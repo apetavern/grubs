@@ -1,7 +1,7 @@
-﻿namespace Grubs.Equipment.Ground;
+﻿namespace Grubs.Equipment.Gadgets.Ground;
 
 [Title( "Grubs - Landmine" ), Category( "Equipment" )]
-public class Landmine : ProximityExplosiveComponent
+public class Landmine : ProximityExplosive
 {
 	[Property] public SkinnedModelRenderer Model { get; set; }
 	[Property] public GameObject Mine { get; set; }

@@ -40,15 +40,9 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "Grubs.Equipment.Weapons.PhysicsProjectileComponent",
-        "__guid": "003bf418-86be-42eb-b4a3-0a85ab9fd11b",
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "bf11f691-ae28-4721-afc3-552b32c81077",
         "Droppable": true,
-        "Model": {
-          "_type": "component",
-          "component_id": "dc7e3298-2de1-41db-b0c7-7ebbc9e508a3",
-          "go": "e5b437d7-82f5-40b6-967c-67215586cf2d",
-          "component_type": "SkinnedModelRenderer"
-        },
         "PhysicsBody": {
           "_type": "component",
           "component_id": "ef1a47d3-2099-48c2-8665-a6e80c0384cc",
@@ -77,8 +71,8 @@
             "Static": false
           },
           {
-            "__type": "Grubs.Equipment.Ground.Landmine",
-            "__guid": "712f58a8-8fa7-468d-81f5-f9c3c0d034f4",
+            "__type": "Grubs.Equipment.Gadgets.Ground.Landmine",
+            "__guid": "75f212e3-0271-4cdc-948f-4297474e27db",
             "ArmTime": 3,
             "BeepSound": "sounds/weapons/mine/beep.sound",
             "Damage": 60,

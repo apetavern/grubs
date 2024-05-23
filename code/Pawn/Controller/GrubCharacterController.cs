@@ -231,7 +231,7 @@ public class GrubCharacterController : Component
 		var radius = MathX.Lerp( 0.1f, 2f, t );
 
 		var particles =
-			ParticleHelperComponent.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
+			ParticleHelper.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
 		particles.SetControlPoint( 1, new Vector3( radius, 0, 0 ) );
 	}
 

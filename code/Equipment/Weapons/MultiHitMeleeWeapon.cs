@@ -3,8 +3,8 @@ using Grubs.Pawn;
 
 namespace Grubs.Equipment.Weapons;
 
-[Title( "Grub - Multi Hit Melee Weapon" ), Category( "Equipment" )]
-public class MultiHitMeleeWeaponComponent : WeaponComponent
+[Title( "Grubs - Multi Hit Melee Weapon" ), Category( "Equipment" )]
+public class MultiHitMeleeWeapon : Weapon
 {
 	/**
 	 * Meta
@@ -142,7 +142,7 @@ public class MultiHitMeleeWeaponComponent : WeaponComponent
 
 	private void HandleBodyHit( Rigidbody body, float damage, Vector3 position, Vector3 force )
 	{
-		if ( body.Components.TryGet( out HealthComponent health, FindMode.EverythingInSelfAndAncestors ) )
+		if ( body.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 			health.TakeDamage( GrubsDamageInfo.FromMelee( damage, Equipment.Grub.GameObject, GameObject ) );
 
 		body.ApplyImpulseAt( position, force * body.PhysicsBody.Mass );

@@ -1,15 +1,17 @@
 ﻿using Grubs.Common;
+using Grubs.Equipment.Weapons;
+using Grubs.Helpers;
 
-namespace Grubs.Equipment.Weapons;
+namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Ninja Rope Hook Tip" ), Category( "Equipment" )]
 public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 {
 	[Property] public GameObject MountObject { get; set; }
 
-	[Property] public PhysicsProjectileComponent PhysicsProjectileComponent { get; set; }
+	[Property] public PhysicsProjectile PhysicsProjectileComponent { get; set; }
 
-	private RopeBehaviorComponent Rope { get; set; }
+	private RopeBehavior Rope { get; set; }
 
 	protected override void OnUpdate()
 	{
@@ -62,7 +64,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		MountObject.Parent = Scene;
 		MountObject.Transform.Position = PhysicsProjectileComponent.Grub.Transform.Position;
 		MountObject.Enabled = true;
-		Rope = MountObject.Components.Get<RopeBehaviorComponent>();
+		Rope = MountObject.Components.Get<RopeBehavior>();
 		MountObject.Components.Get<Mountable>().Mount( PhysicsProjectileComponent.Grub );
 	}
 

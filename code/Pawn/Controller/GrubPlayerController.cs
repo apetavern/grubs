@@ -84,7 +84,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateLookAngles()
 	{
-		if ( Grub.ActiveEquipment is not null && Grub.ActiveEquipment.Components.TryGet<WeaponComponent>(out var weapon) )
+		if ( Grub.ActiveEquipment is not null && Grub.ActiveEquipment.Components.TryGet<Weapon>(out var weapon) )
 			if ( weapon.IsCharging )
 				return;
 		
@@ -168,7 +168,7 @@ public sealed partial class GrubPlayerController : Component
 	{
 		var showWhileMoving = false;
 		if ( Grub.ActiveEquipment is { } equipment )
-			if ( equipment.Components.Get<WeaponComponent>() is { } weapon )
+			if ( equipment.Components.Get<Weapon>() is { } weapon )
 				if ( weapon.CanFireWhileMoving )
 					showWhileMoving = true;
 		return (Velocity.IsNearlyZero( 2.5f ) && IsGrounded || IsOnRope || showWhileMoving) && !IsChargingBackflip;
@@ -182,7 +182,7 @@ public sealed partial class GrubPlayerController : Component
 		var equipment = Grub.ActiveEquipment;
 		if ( equipment is null )
 			return ShouldAcceptInput();
-		if ( !equipment.Components.TryGet( out WeaponComponent weapon ) )
+		if ( !equipment.Components.TryGet( out Weapon weapon ) )
 			return ShouldAcceptInput();
 		return ShouldAcceptInput() && !weapon.IsFiring;
 	}

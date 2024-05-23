@@ -1,11 +1,9 @@
-using Sandbox;
-
-namespace Grubs.Equipment.Weapons;
+namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Shrapnel Spawner" ), Category( "Equipment" )]
-public sealed class ShrapnelSpawnComponent : Component
+public sealed class Shrapnel : Component
 {
-	[Property] public required ExplosiveProjectileComponent Projectile { get; set; }
+	[Property] public required ExplosiveProjectile Projectile { get; set; }
 
 	[Property] public GameObject ShrapnelPrefab { get; set; }
 
@@ -27,7 +25,7 @@ public sealed class ShrapnelSpawnComponent : Component
 			var go = ShrapnelPrefab.Clone();
 			go.Transform.Position = GameObject.Transform.Position + (Vector3.Random.WithY( 0 ) + Vector3.Up * 3f) * 2f;
 			go.NetworkSpawn();
-			if ( go.Components.TryGet( out ProjectileComponent pc ) && Components.TryGet( out ProjectileComponent pc2 ) )
+			if ( go.Components.TryGet( out Projectile pc ) && Components.TryGet( out Projectile pc2 ) )
 			{
 				pc.Source = pc2.Source;
 			}

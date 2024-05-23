@@ -1,5 +1,5 @@
 {
-  "__guid": "95565949-6f3d-4724-8c61-e9231314300e",
+  "__guid": "4150dd9f-3287-4d4d-afcb-1128e0ef7a84",
   "GameObjects": [
     {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
@@ -28,10 +28,6 @@
               "Model": "models/dev/plane.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Grubs.Common.KillZoneComponent",
-              "__guid": "464044f1-44bb-4477-90a7-afe44b2d7cca"
             },
             {
               "__type": "Sandbox.PlaneCollider",
@@ -86,14 +82,6 @@
       "NetworkInterpolation": true,
       "Components": [
         {
-          "__type": "Grubs.Helpers.ExplosionHelperComponent",
-          "__guid": "a28e7356-b54b-4a69-a8f9-58c6e1551164"
-        },
-        {
-          "__type": "Grubs.Helpers.ParticleHelperComponent",
-          "__guid": "0ab37c18-533c-42b0-853b-c82182be8171"
-        },
-        {
           "__type": "Grubs.Drops.CrateUtility",
           "__guid": "1acc6d58-541e-4e3b-b3c0-40d937dc3ad1",
           "HealthCratePrefab": {
@@ -106,8 +94,16 @@
           }
         },
         {
-          "__type": "Grubs.LandmineUtility",
-          "__guid": "68d79e0f-7927-48c5-8a65-cacb329a7218",
+          "__type": "Grubs.Helpers.ExplosionHelper",
+          "__guid": "c3056b0d-85ed-4205-94a2-8e042514744c"
+        },
+        {
+          "__type": "Grubs.Helpers.ParticleHelper",
+          "__guid": "bd48a7bb-ba28-4261-9110-83778667ebd1"
+        },
+        {
+          "__type": "Grubs.Equipment.Gadgets.Ground.LandmineUtility",
+          "__guid": "bc308eb0-0230-4afa-8a83-a109009196d1",
           "LandminePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
@@ -315,7 +311,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-22T22:40:07.2546297-04:00",
+  "LastSaved": "2024-05-23T15:15:34.5192539-03:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

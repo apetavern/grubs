@@ -1,4 +1,4 @@
-namespace Grubs;
+namespace Grubs.Equipment.Gadgets.Ground;
 
 [Title( "Grubs - Landmine Utility" ), Category( "Utility" )]
 public class LandmineUtility : Component

@@ -27,37 +27,6 @@
         "Width": 0.25
       },
       {
-        "__type": "Grubs.Equipment.Weapons.ExplosiveProjectileComponent",
-        "__guid": "8d4e3097-7f21-4ac5-b329-803a0359c216",
-        "DeleteOnExplode": true,
-        "ExplodeAfter": 4,
-        "ExplodeOnCollision": true,
-        "ExplodeOnDeath": true,
-        "ExplosionDamage": 15,
-        "ExplosionRadius": 50,
-        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.PhysicsProjectileComponent",
-        "__guid": "2417290c-97dc-45c6-a1ff-09b60f9ff49b",
-        "Droppable": false,
-        "Model": {
-          "_type": "component",
-          "component_id": "a556f86b-aad1-4acb-9732-d74a4ac2cf13",
-          "go": "82514b02-ae93-4ab7-90c6-ce6eeed4566f",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "PhysicsBody": {
-          "_type": "component",
-          "component_id": "2f2500ac-b10a-45bd-b46d-66839d9e5460",
-          "go": "82514b02-ae93-4ab7-90c6-ce6eeed4566f",
-          "component_type": "Rigidbody"
-        },
-        "ProjectileSpeed": 500,
-        "SetPositionOnStart": false
-      },
-      {
         "__type": "Sandbox.Rigidbody",
         "__guid": "2f2500ac-b10a-45bd-b46d-66839d9e5460",
         "AngularDamping": 0,
@@ -83,9 +52,39 @@
         "Surface": "surfaces/zero_bounce.surface"
       },
       {
-        "__type": "Grubs.Common.HealthComponent",
-        "__guid": "379deb4e-98b1-4258-8680-bce0fa645cbe",
+        "__type": "Grubs.Common.Health",
+        "__guid": "cb172f8b-2d18-4feb-83f3-1b878baa5228",
         "MaxHealth": 40
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "39531a34-f158-41f1-a08f-202c54dc0f18",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 4,
+        "ExplodeOnCollision": true,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 15,
+        "ExplosionRadius": 50,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "82cb7d38-8fba-452a-b7a0-a2e023a6b6ec",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "a556f86b-aad1-4acb-9732-d74a4ac2cf13",
+          "go": "82514b02-ae93-4ab7-90c6-ce6eeed4566f",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "2f2500ac-b10a-45bd-b46d-66839d9e5460",
+          "go": "82514b02-ae93-4ab7-90c6-ce6eeed4566f",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 500
       }
     ],
     "Children": []

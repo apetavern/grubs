@@ -2,11 +2,11 @@
 using Grubs.Helpers;
 using Grubs.Pawn;
 
-namespace Grubs.Equipment.Ground;
+namespace Grubs.Equipment.Gadgets.Ground;
 
 [Title( "Grubs - Proximity Explosive" ), Category( "Equipment" )]
 
-public partial class ProximityExplosiveComponent : Component, Component.ITriggerListener, IResolvable
+public partial class ProximityExplosive : Component, Component.ITriggerListener, IResolvable
 {
 	[Property] public bool IsDud { get; set; }
 	[Property] public bool IsArmed { get; set; }
@@ -116,13 +116,13 @@ public partial class ProximityExplosiveComponent : Component, Component.ITrigger
 	[Broadcast]
 	public void ExplodeEffects()
 	{
-		ExplosionHelperComponent.Instance.Explode( this, Transform.Position, Radius, Damage );
+		ExplosionHelper.Instance.Explode( this, Transform.Position, Radius, Damage );
 		Sound.Play( ExplosionSound );
 
 		if ( Particles is null )
 			return;
 
-		var sceneParticles = ParticleHelperComponent.Instance.PlayInstantaneous( Particles, Transform.World );
+		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World );
 		sceneParticles.SetControlPoint( 1, new Vector3( Radius / 2f, 0, 0 ) );
 	}
 }

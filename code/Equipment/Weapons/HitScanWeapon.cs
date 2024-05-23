@@ -6,7 +6,7 @@ using Grubs.Terrain;
 namespace Grubs.Equipment.Weapons;
 
 [Title( "Grubs - Hit Scan Weapon Component" ), Category( "Equipment" )]
-public class HitScanWeaponComponent : WeaponComponent
+public class HitScanWeapon : Weapon
 {
 	[Property] public float Damage { get; set; } = 20f;
 	[Property] public Vector3 HitForce { get; set; }
@@ -73,7 +73,7 @@ public class HitScanWeaponComponent : WeaponComponent
 		if ( MuzzleParticles is not null )
 		{
 			var muzzle = Equipment.Model.GetAttachment( "muzzle" );
-			ParticleHelperComponent.Instance.PlayInstantaneous( MuzzleParticles, muzzle ?? transform );
+			ParticleHelper.Instance.PlayInstantaneous( MuzzleParticles, muzzle ?? transform );
 		}
 
 		var tr = Scene.Trace.Ray( startPos, endPos )
@@ -111,7 +111,7 @@ public class HitScanWeaponComponent : WeaponComponent
 		if ( TraceParticles is not null )
 		{
 			var transform = new Transform( tr.StartPosition );
-			var traceParticles = ParticleHelperComponent.Instance.PlayInstantaneous( TraceParticles, transform );
+			var traceParticles = ParticleHelper.Instance.PlayInstantaneous( TraceParticles, transform );
 			traceParticles.SetControlPoint( 1, tr.EndPosition );
 		}
 
@@ -124,7 +124,7 @@ public class HitScanWeaponComponent : WeaponComponent
 			return false;
 		}
 
-		ExplosionHelperComponent.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage );
+		ExplosionHelper.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage );
 		return true;
 	}
 

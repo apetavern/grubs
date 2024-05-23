@@ -1,7 +1,9 @@
-﻿namespace Grubs.Equipment.Weapons;
+﻿using Grubs.Equipment.Weapons;
+
+namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Physics Projectile" ), Category( "Equipment" )]
-public class PhysicsProjectileComponent : ProjectileComponent
+public class PhysicsProjectile : Projectile
 {
 	[Property] public bool Droppable { get; set; } = false;
 	[Property] public required Rigidbody PhysicsBody { get; set; }

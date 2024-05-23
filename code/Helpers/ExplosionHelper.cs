@@ -5,11 +5,11 @@ using Grubs.Terrain;
 namespace Grubs.Helpers;
 
 [Title( "Grubs - Explosion Helper" ), Category( "World" )]
-public partial class ExplosionHelperComponent : Component
+public partial class ExplosionHelper : Component
 {
-	public static ExplosionHelperComponent Instance { get; set; } = new();
+	public static ExplosionHelper Instance { get; set; } = new();
 
-	public ExplosionHelperComponent()
+	public ExplosionHelper()
 	{
 		Instance = this;
 	}
@@ -22,7 +22,7 @@ public partial class ExplosionHelperComponent : Component
 			if ( source.GameObject == go )
 				continue;
 
-			if ( !go.Components.TryGet( out HealthComponent health, FindMode.EverythingInSelfAndAncestors ) )
+			if ( !go.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 				continue;
 
 			var dist = Vector3.DistanceBetween( position, go.Transform.Position );

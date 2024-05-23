@@ -1,13 +1,14 @@
-﻿using Grubs.Helpers;
+﻿using Grubs.Equipment.Weapons;
+using Grubs.Helpers;
 
-namespace Grubs.Equipment.Weapons;
+namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Arc Projectile" ), Category( "Equipment" )]
-public class ArcProjectileComponent : ProjectileComponent
+public class ArcProjectile : Projectile
 {
 	[Property] public bool ShouldBounce { get; set; }
 	[Property] public int MaxBounces { get; set; }
-	[Property] public ExplosiveProjectileComponent Explosive { get; set; }
+	[Property] public ExplosiveProjectile Explosive { get; set; }
 
 	public override bool Resolved => !Segments.Any();
 

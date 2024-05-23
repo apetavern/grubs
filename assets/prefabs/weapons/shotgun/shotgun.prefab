@@ -8,8 +8,17 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "13d5b09c-a831-42e2-a880-8460a981f232",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "02a3f2de-3147-468f-8c15-d99953512103",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/shotgun/shotgun.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "65dbcb25-a9c8-40ff-a6a1-9e2bb09e260c",
         "Data": "resources/equipment/weapons/shotgun.geq",
         "HoldPose": "Shotgun",
         "Icon": "models/weapons/shotgun/shotgun.vmdl_c.png",
@@ -23,27 +32,20 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "02a3f2de-3147-468f-8c15-d99953512103",
-        "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/weapons/shotgun/shotgun.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.HitScanWeaponComponent",
-        "__guid": "647fadaf-e025-443c-9be9-0b91f3d6b60d",
+        "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
+        "__guid": "8db8353e-8b43-4ddf-9598-fcf24dcdb50c",
         "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
         "Cooldown": 1.5,
         "Damage": 5,
         "Equipment": {
           "_type": "component",
-          "component_id": "13d5b09c-a831-42e2-a880-8460a981f232",
+          "component_id": "65dbcb25-a9c8-40ff-a6a1-9e2bb09e260c",
           "go": "2e8308a0-3f09-48e1-85d9-c1ce2737d2b0",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
-        "ExplosionDamage": 0,
+        "ExplosionDamage": 2,
         "ExplosionRadius": 15,
         "FiringType": "Instant",
         "HitForce": "100,0,1",
@@ -65,6 +67,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

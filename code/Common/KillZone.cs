@@ -3,7 +3,7 @@
 namespace Grubs.Common;
 
 [Title( "Grubs - Kill Zone" ), Category( "Grubs" )]
-public class KillZoneComponent : Component, Component.ITriggerListener
+public class KillZone : Component, Component.ITriggerListener
 {
 	public void OnTriggerEnter( Collider other )
 	{

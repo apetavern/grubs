@@ -8,8 +8,17 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "0a65a245-aeb8-437b-a1c1-a854fb4283bb",
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "73bdab43-c445-431c-98e1-e310c0d64446",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/teleporter/teleporter.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "ce97d1bb-776a-41cb-bb2d-30d7c3744948",
         "Data": "resources/equipment/weapons/teleporter.geq",
         "HoldPose": "Holdable",
         "Icon": "models/tools/teleporter/teleporter.vmdl_c.png",
@@ -23,18 +32,9 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "73bdab43-c445-431c-98e1-e310c0d64446",
-        "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/tools/teleporter/teleporter.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.TeleportToolComponent",
-        "__guid": "13a1080e-5276-4a6d-be6a-973c939fb561",
-        "CanFireWhileMoving": true,
+        "__type": "Grubs.Equipment.Tools.TeleportTool",
+        "__guid": "a4f250bb-922e-4437-945c-9bf6f96ec9d2",
+        "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
@@ -47,9 +47,9 @@
         "CursorRange": 100,
         "Equipment": {
           "_type": "component",
-          "component_id": "0a65a245-aeb8-437b-a1c1-a854fb4283bb",
+          "component_id": "ce97d1bb-776a-41cb-bb2d-30d7c3744948",
           "go": "6954b3c2-76b3-464f-bd03-b6bd8999f07a",
-          "component_type": "EquipmentComponent"
+          "component_type": "Equipment"
         },
         "FiringType": "Cursor",
         "MaxUses": 1,
