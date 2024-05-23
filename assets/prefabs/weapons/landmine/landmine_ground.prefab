@@ -69,9 +69,17 @@
         "NetworkInterpolation": true,
         "Components": [
           {
-            "__type": "Grubs.Equipment.Ground.LandmineComponent",
-            "__guid": "45801f63-1749-441e-8a24-3105fa29ba3c",
-            "ArmTime": 5,
+            "__type": "Sandbox.SphereCollider",
+            "__guid": "65e041d6-a8a7-4e25-ac91-8da5e7348c04",
+            "Center": "0,0,0",
+            "IsTrigger": true,
+            "Radius": 45,
+            "Static": false
+          },
+          {
+            "__type": "Grubs.Equipment.Ground.Landmine",
+            "__guid": "712f58a8-8fa7-468d-81f5-f9c3c0d034f4",
+            "ArmTime": 3,
             "BeepSound": "sounds/weapons/mine/beep.sound",
             "Damage": 60,
             "DetonateTime": 5,
@@ -79,7 +87,7 @@
             "IsArmed": false,
             "IsDetonating": false,
             "IsDud": false,
-            "Landmine": {
+            "Mine": {
               "_type": "gameobject",
               "go": "e5b437d7-82f5-40b6-967c-67215586cf2d"
             },
@@ -91,14 +99,6 @@
             },
             "Particles": "particles/explosion/grubs_explosion_base.vpcf",
             "Radius": 80
-          },
-          {
-            "__type": "Sandbox.SphereCollider",
-            "__guid": "65e041d6-a8a7-4e25-ac91-8da5e7348c04",
-            "Center": "0,0,0",
-            "IsTrigger": true,
-            "Radius": 45,
-            "Static": false
           }
         ]
       }

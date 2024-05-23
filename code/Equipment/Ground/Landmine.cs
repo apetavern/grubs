@@ -1,10 +1,10 @@
 ﻿namespace Grubs.Equipment.Ground;
 
 [Title( "Grubs - Landmine" ), Category( "Equipment" )]
-public class LandmineComponent : ProximityExplosiveComponent
+public class Landmine : ProximityExplosiveComponent
 {
 	[Property] public SkinnedModelRenderer Model { get; set; }
-	[Property] public GameObject Landmine { get; set; }
+	[Property] public GameObject Mine { get; set; }
 	[Property, ResourceType( "sound" )] private string BeepSound { get; set; } = "";
 
 	private const string _lightOnSkin = "default";
@@ -20,7 +20,7 @@ public class LandmineComponent : ProximityExplosiveComponent
 
 	public override void OnExplode()
 	{
-		Landmine.Destroy();
+		Mine.Destroy();
 
 		base.OnExplode();
 	}
