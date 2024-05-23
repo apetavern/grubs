@@ -33,7 +33,7 @@ public partial class GrubsTerrain : Component
 		var fallbackPosition = new Vector3();
 
 		var maxWidth = GrubsConfig.TerrainLength;
-		var maxHeight = GrubsConfig.TerrainHeight;
+		var maxHeight = GrubsConfig.TerrainHeight - 64;
 
 		while ( retries < 1000 )
 		{
