@@ -53,7 +53,8 @@
             "Title": "On Fire",
             "Description": "Fires a landmine",
             "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.WeaponComponent"
+              "Grubs.Equipment.Weapons.WeaponComponent",
+              "Grubs.Equipment.EquipmentComponent"
             ]
           },
           "Variables": [],
@@ -80,6 +81,35 @@
               },
               "UserData": {
                 "Position": "-16,32"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "call",
+              "Properties": {
+                "_type": "Grubs.Equipment.EquipmentComponent",
+                "_isStatic": false,
+                "_name": "Holster"
+              },
+              "UserData": {
+                "Position": "512,176"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "336,256"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.EquipmentComponent"
+              },
+              "UserData": {
+                "Position": "304,368"
               }
             }
           ],
@@ -114,6 +144,35 @@
               "SrcId": 0,
               "SrcName": "_target",
               "DstId": 6,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 12,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 14,
               "DstName": "_this"
             }
           ],
