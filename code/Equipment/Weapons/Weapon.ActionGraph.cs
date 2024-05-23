@@ -17,4 +17,10 @@ public partial class Weapon
 
 		source.TimeSinceLastUsed = 0f;
 	}
+
+	[ActionGraphNode( "grubs.fire_finished" ), Title( "Fire Finished" ), Group( "Grubs Actions" )]
+	public static void FireFinished( Weapon source )
+	{
+		source.FireFinished();
+	}
 }
