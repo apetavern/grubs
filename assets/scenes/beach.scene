@@ -104,6 +104,14 @@
             "_type": "gameobject",
             "prefab": "prefabs/world/drops/weapons_crate.prefab"
           }
+        },
+        {
+          "__type": "Grubs.LandmineUtility",
+          "__guid": "68d79e0f-7927-48c5-8a65-cacb329a7218",
+          "LandminePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
+          }
         }
       ]
     },
@@ -307,7 +315,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-21T21:58:46.7272233-03:00",
+  "LastSaved": "2024-05-22T22:40:07.2546297-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
