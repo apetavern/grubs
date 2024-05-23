@@ -13,25 +13,31 @@ public sealed class ShrapnelSpawnComponent : Component
 
 	[Property] public float ShrapnelUpVelocity { get; set; } = 500f;
 
-	[Property] public float ShrapnelSpeadVelocity { get; set; } = 150f;
+	[Property] public float ShrapnelSpreadVelocity { get; set; } = 150f;
 
-	protected override void OnAwake()
+	protected override void OnStart()
 	{
 		Projectile.ProjectileExploded += SpawnShrapnel;
 	}
 
 	void SpawnShrapnel()
 	{
-		for ( int i = 0; i < ShrapnelCount; i++ )
+		for ( var i = 0; i < ShrapnelCount; i++ )
 		{
 			var go = ShrapnelPrefab.Clone();
-			go.Transform.Position = GameObject.Transform.Position + (Vector3.Random.WithY(0) + Vector3.Up * 3f)*2f;
+			go.Transform.Position = GameObject.Transform.Position + (Vector3.Random.WithY(0) + Vector3.Up * 3f) * 2f;
 			go.NetworkSpawn();
 			if ( go.Components.TryGet( out ProjectileComponent pc ) && Components.TryGet( out ProjectileComponent pc2 ) )
 			{
 				pc.Source = pc2.Source;
 			}
-			go.Components.Get<Rigidbody>().Velocity = (Vector3.Up * ShrapnelUpVelocity).WithX(Game.Random.Float(-ShrapnelSpeadVelocity, ShrapnelSpeadVelocity ) );
+
+			var rb = go.Components.Get<Rigidbody>();
+			if ( rb is null )
+				return;
+			var startVelocity = (Vector3.Up * ShrapnelUpVelocity)
+				.WithX(Game.Random.Float(-ShrapnelSpreadVelocity, ShrapnelSpreadVelocity ) );
+			rb.Velocity = startVelocity;
 		}
 	}
 }
