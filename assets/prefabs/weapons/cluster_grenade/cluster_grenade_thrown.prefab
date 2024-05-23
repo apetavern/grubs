@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
+    "__guid": "42c77eb0-cc88-488a-a053-0fa6c017f3a1",
     "Flags": 0,
     "Name": "cluster_grenade_thrown",
     "Tags": "projectile",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "3771677f-aa80-4b9e-8c60-b48c296d15af",
+        "__guid": "1399b94b-093c-44e9-b10e-ba7174fec9e5",
         "BodyGroups": 2,
         "CreateBoneObjects": false,
         "Model": "models/weapons/grenade/clustergrenade.vmdl",
@@ -19,7 +19,7 @@
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "9879dbaf-38b5-4661-b7f1-a16b2a49f82f",
+        "__guid": "ae5bb724-5f07-49a6-8cb9-5de2264cb808",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -28,7 +28,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "a47456aa-f85b-4b22-bade-f819f189ee82",
+        "__guid": "ee15ae47-100e-4bfe-9629-76715a8d5802",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -44,7 +44,7 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "a3ddec62-14f4-4cfb-b9b7-aa5948d5d601",
+        "__guid": "874278b0-8297-450e-a312-36aa21905b78",
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 8,
@@ -52,12 +52,12 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "2e5699d2-b352-4760-b699-54d1c67edff4",
+        "__guid": "e87b468f-f077-4691-807c-20d0764ea515",
         "MaxHealth": 80
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "3b32f571-956a-47aa-9311-b6e5b66897fd",
+        "__guid": "dda53134-3220-4714-aca4-53ca1f47e8d8",
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
@@ -69,32 +69,32 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "679c2e66-3b88-4221-9e92-20b4aa05bbe0",
+        "__guid": "12534316-6793-4e95-b42f-2d98d9a7cda9",
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "3771677f-aa80-4b9e-8c60-b48c296d15af",
-          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
+          "component_id": "1399b94b-093c-44e9-b10e-ba7174fec9e5",
+          "go": "42c77eb0-cc88-488a-a053-0fa6c017f3a1",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "a47456aa-f85b-4b22-bade-f819f189ee82",
-          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
+          "component_id": "ee15ae47-100e-4bfe-9629-76715a8d5802",
+          "go": "42c77eb0-cc88-488a-a053-0fa6c017f3a1",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 500
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
-        "__guid": "9bedb542-dbcd-45cc-8971-f19e379dc646",
+        "__guid": "41a40117-3c14-45b7-bbe4-0911d8e97ed7",
         "Projectile": {
           "_type": "component",
-          "component_id": "3b32f571-956a-47aa-9311-b6e5b66897fd",
-          "go": "a651f1ea-4c0d-4fc4-bff9-b36cfeb9d4ca",
+          "component_id": "dda53134-3220-4714-aca4-53ca1f47e8d8",
+          "go": "42c77eb0-cc88-488a-a053-0fa6c017f3a1",
           "component_type": "ExplosiveProjectile"
         },
-        "ShrapnelCount": 0,
+        "ShrapnelCount": 5,
         "ShrapnelPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_shrapnel.prefab"

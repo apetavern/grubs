@@ -117,7 +117,7 @@ public sealed class RopeBehavior : Component
 			case > 1:
 				RopeRenderer.Points.Clear();
 				RopeRenderer.Points.Add( HookObject );
-				RopeRenderer.Points.AddRange(CornerObjects);
+				RopeRenderer.Points.AddRange( CornerObjects );
 				RopeRenderer.Points.Add( MuzzlePoint );
 				break;
 			case 1:
