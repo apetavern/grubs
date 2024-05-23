@@ -11,11 +11,15 @@
 <root class="@(!Player.IsActive ? "inactive" : "")">
     <img src="avatar:@Player.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
-        <label text=@Player.SteamName class="name"
-               style="font-color: linear-gradient(@Player.SelectedColor, adjust-hue(@Player.SelectedColor, 45));" />
+        <div 
+            class="name"
+            style="font-color: linear-gradient(@Player.SelectedColor, adjust-hue(@Player.SelectedColor, 45));">
+            @Player.SteamName
+        </div>
         <div class="health" style="background-color: darken(@Player.SelectedColor, 60%);">
-            <div class="fill"
-                 style="background: linear-gradient(to right, @Player.SelectedColor, darken(@Player.SelectedColor, 20%)); width: @(Player.GetHealthPercentage)%;" />
+            <div 
+                class="fill"
+                style="background: linear-gradient(to right, @Player.SelectedColor, darken(@Player.SelectedColor, 20%)); width: @(Player.GetHealthPercentage)%;" />
         </div>
     </div>
 </root>

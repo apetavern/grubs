@@ -1,6 +1,7 @@
 @namespace Grubs.UI
 
 @using Grubs.Pawn;
+@using Grubs.Extensions;
 @using Sandbox;
 @using Sandbox.UI;
 
@@ -10,7 +11,7 @@
 
 <root>
     <div class="players">
-        @foreach (var player in _players)
+        @foreach (var player in _players.OrderByDescending(p => p.GetHealthPercentage))
         {
             <PlayerListEntry Player=@player />
         }
@@ -22,6 +23,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Connection.All.Count);
+        return HashCode.Combine(Connection.All.Count, _players.HashCombine(p => p.GetHealthPercentage));
     }
 }
