@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "db8f73af-5066-42c4-8cbb-ca1b4459b3d7",
+    "__guid": "8758bfbc-1014-4f72-a5da-e3c0b0b1d06c",
     "Flags": 0,
     "Name": "brass_knuckles",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "12fe1f92-138b-4188-af48-eaad7226fc1c",
+        "__guid": "f1140606-e887-4917-8334-188ed6125476",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/brassknuckles/brassknuckles.vmdl",
@@ -18,14 +18,14 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "affcebd4-9877-498a-aba5-157ae20ed5fe",
+        "__guid": "546a5298-c5ad-4344-9fe5-788bca7728a5",
         "Data": "resources/equipment/weapons/brass_knuckles.geq",
         "HoldPose": "Knuckles",
         "Icon": "models/weapons/brassknuckles/brassknuckles.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "12fe1f92-138b-4188-af48-eaad7226fc1c",
-          "go": "db8f73af-5066-42c4-8cbb-ca1b4459b3d7",
+          "component_id": "f1140606-e887-4917-8334-188ed6125476",
+          "go": "8758bfbc-1014-4f72-a5da-e3c0b0b1d06c",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Brass Knuckles",
@@ -33,17 +33,17 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.MultiHitMeleeWeapon",
-        "__guid": "aee82564-ae5a-4e0b-88f9-a364769d9779",
+        "__guid": "6525bb89-f097-4123-9e5c-2824eb6c3061",
         "BaseHitDamage": 10,
         "BaseHitForce": "50,0,25",
-        "CanFireWhileMoving": false,
+        "CanFireWhileMoving": true,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 0.5,
         "Equipment": {
           "_type": "component",
-          "component_id": "affcebd4-9877-498a-aba5-157ae20ed5fe",
-          "go": "db8f73af-5066-42c4-8cbb-ca1b4459b3d7",
+          "component_id": "546a5298-c5ad-4344-9fe5-788bca7728a5",
+          "go": "8758bfbc-1014-4f72-a5da-e3c0b0b1d06c",
           "component_type": "Equipment"
         },
         "FinalHitForce": "250,0,200",
@@ -53,7 +53,7 @@
         "HitCooldown": 0.3,
         "HitDistance": 25,
         "HitOffset": "0,0,-8",
-        "MaxUses": 3,
+        "MaxUses": 1,
         "Strikes": 3
       }
     ],
