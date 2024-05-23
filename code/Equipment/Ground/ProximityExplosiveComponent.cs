@@ -1,11 +1,12 @@
 ﻿using Grubs.Common;
 using Grubs.Helpers;
+using Grubs.Pawn;
 
 namespace Grubs.Equipment.Ground;
 
 [Title( "Grubs - Proximity Explosive" ), Category( "Equipment" )]
 
-public partial class ProximityExplosiveComponent : Component, Component.ICollisionListener, IResolvable
+public partial class ProximityExplosiveComponent : Component, Component.ITriggerListener, IResolvable
 {
 	[Property] public bool IsDud { get; set; }
 	[Property] public bool IsArmed { get; set; }
@@ -17,10 +18,9 @@ public partial class ProximityExplosiveComponent : Component, Component.ICollisi
 	[Property, ResourceType( "sound" )] public string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] public ParticleSystem Particles { get; set; }
 
-	[Property] public ModelCollider Collider { get; set; }
-
 	private TimeSince _createdAt { get; set; }
 	private TimeSince _detonatedAt { get; set; }
+	private List<Grub> _grubs { get; set; } = new();
 
 	public bool Resolved => !IsDetonating;
 
@@ -35,6 +35,21 @@ public partial class ProximityExplosiveComponent : Component, Component.ICollisi
 		GameObject.Destroy();
 	}
 
+	protected override void OnFixedUpdate()
+	{
+		base.OnFixedUpdate();
+
+		if ( !IsArmed || IsDetonating )
+			return;
+
+		if ( !_grubs.Any( g => !g.CharacterController.Velocity.IsNearlyZero(.1f) ) )
+			return;
+
+		_detonatedAt = 0;
+		IsDetonating = true;
+		OnTrigger();
+	}
+
 	protected override void OnStart()
 	{
 		base.OnStart();
@@ -42,18 +57,36 @@ public partial class ProximityExplosiveComponent : Component, Component.ICollisi
 		_createdAt = 0f;
 	}
 
-	public void OnCollisionStart( Collision other )
+	public void OnTriggerEnter( Collider other )
 	{
-		// Check if the Collision other is a Grub
-		if ( !other.Other.GameObject.Tags.Has( "player" ) )
+		if ( !other.GameObject.Tags.Has( "player" ) )
 			return;
 
-		if ( IsDetonating || !IsArmed )
+		if ( IsDetonating )
 			return;
 
-		IsDetonating = true;
-		_detonatedAt = 0;
-		OnTrigger();
+		if ( !other.GameObject.Components.TryGet<Grub>( out var grub, FindMode.EverythingInSelfAndParent ) )
+			return;
+
+		_grubs.Add( grub );
+
+		if ( IsArmed )
+		{
+			_detonatedAt = 0;
+			IsDetonating = true;
+			OnTrigger();
+		}
+	}
+
+	public void OnTriggerExit( Collider other )
+	{
+		if ( !other.GameObject.Tags.Has( "player" ) )
+			return;
+
+		if ( !other.GameObject.Components.TryGet<Grub>( out var grub, FindMode.EverythingInSelfAndParent ) )
+			return;
+
+		_grubs.Remove( grub );
 	}
 
 	protected override void OnUpdate()
