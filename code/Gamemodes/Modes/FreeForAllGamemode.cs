@@ -68,6 +68,14 @@ public sealed class FreeForAllGamemode : Gamemode
 		var firstGrub = PlayerGrubOrder[firstPlayer].Dequeue();
 		PlayerGrubOrder[firstPlayer].Enqueue( firstGrub );
 		ActivePlayerId = firstPlayer.Id;
+
+		// Landmine Spawning
+		for( var i = 0; i < GrubsConfig.LandmineSpawnCount; i++ )
+		{
+			var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: false );
+			LandmineUtility.Instance.Spawn(spawnPos);
+		}
+
 		Started = true;
 		State = GameState.Playing;
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
