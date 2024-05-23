@@ -1,18 +1,17 @@
 ﻿using Grubs.UI.Components;
-using System.Diagnostics;
 
 namespace Grubs.Equipment.Weapons;
 
-[Title( "Grub - Teleport Tool" ), Category( "Equipment" )]
+[Title( "Grubs - Teleport Tool" ), Category( "Equipment" )]
 public class TeleportToolComponent : WeaponComponent
 {
 	/*
 	 * Cursor Properties
 	 */
-
 	[Property] public float CursorRange { get; set; } = 100f; // How far from the grub can the tool target
 	[Property] public required SkinnedModelRenderer CursorModel { get; set; } // The model of the grub
 	[Property, ResourceType( "sound" )] private string TeleportSound { get; set; } = "";
+
 	protected override void OnStart()
 	{
 		base.OnStart();

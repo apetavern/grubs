@@ -144,7 +144,7 @@ public partial class WeaponComponent : Component
 	{
 		IsCharging = true;
 
-		Transform muzzle = GetMuzzlePosition();
+		var muzzle = GetMuzzlePosition();
 		_chargeParticles ??= ParticleHelperComponent.Instance.PlayInstantaneous( ChargeParticleSystem, muzzle );
 		_chargeParticles?.SetControlPoint( 0, muzzle.Position );
 		_chargeParticles?.SetControlPoint( 1, muzzle.Position + GetMuzzleForward() * 80f );
@@ -166,12 +166,12 @@ public partial class WeaponComponent : Component
 		if ( Equipment.Grub is not { } grub )
 			return Vector3.Zero;
 
-		Transform? muzzle = Equipment.Model.GetAttachment( "muzzle" );
+		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( muzzle is null )
 			return grub.Transform.Position;
 
-		Pawn.Controller.GrubCharacterController controller = grub.CharacterController;
-		SceneTraceResult tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.Transform.Position, muzzle.Value.Position )
+		var controller = grub.CharacterController;
+		var tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.Transform.Position, muzzle.Value.Position )
 			.IgnoreGameObjectHierarchy( grub.GameObject )
 			.WithoutTags( "projectile" )
 			.Radius( 1f )
@@ -182,13 +182,13 @@ public partial class WeaponComponent : Component
 
 	protected Transform GetMuzzlePosition()
 	{
-		Transform? muzzle = Equipment.Model.GetAttachment( "muzzle" );
+		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		return muzzle ?? Equipment.Grub.EyePosition;
 	}
 
 	protected Vector3 GetMuzzleForward()
 	{
-		Transform? muzzle = Equipment.Model.GetAttachment( "muzzle" );
+		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( muzzle is null )
 			return Equipment.Grub.PlayerController.EyeRotation.Forward * Equipment.Grub.PlayerController.Facing;
 		return muzzle.Value.Rotation.Forward;
