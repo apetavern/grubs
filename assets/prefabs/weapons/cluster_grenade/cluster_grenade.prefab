@@ -1,0 +1,138 @@
+{
+  "RootObject": {
+    "__guid": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+    "Flags": 0,
+    "Name": "cluster_grenade",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
+        "BodyGroups": 1,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/grenade/clustergrenade.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.EquipmentComponent",
+        "__guid": "208b26cc-8581-471e-85e6-79ba84988d5b",
+        "Data": "resources/equipment/weapons/cluster_grenade.geq",
+        "HoldPose": "Throwable",
+        "Icon": "models/weapons/grenade/clustergrenade.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
+          "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Cluster Grenade",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.WeaponComponent",
+        "__guid": "a024eac2-7cbe-445a-8737-b672169915b4",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "208b26cc-8581-471e-85e6-79ba84988d5b",
+          "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+          "component_type": "EquipmentComponent"
+        },
+        "FiringType": "Charged",
+        "MaxUses": 1,
+        "OnFire": {
+          "__version": 7,
+          "__guid": "b30df95c-bdf2-462c-9063-a2ff35439009",
+          "UserData": {
+            "Title": "On Fire",
+            "ReferencedComponentTypes": [
+              "Grubs.Equipment.Weapons.WeaponComponent"
+            ]
+          },
+          "Variables": [
+            {
+              "Name": "_this",
+              "Type": "Sandbox.Component",
+              "Default": {
+                "_type": "component",
+                "component_id": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
+                "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+                "component_type": "SkinnedModelRenderer"
+              }
+            }
+          ],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "208,-128"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
+              },
+              "UserData": {
+                "Position": "-16,-192"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "charge",
+              "DstId": 1,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
+              },
+              "DstId": 1,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "source"
+            }
+          ],
+          "Defaults": {
+            "$4._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
+            }
+          }
+        }
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

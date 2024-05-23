@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "962566c0-e6e0-47a3-92bf-7a22b3ad5ae7",
+    "__guid": "39273163-5743-4c54-b7e8-13fd137621a5",
     "Flags": 0,
     "Name": "player",
     "Tags": "player",
@@ -72,6 +72,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/teleporter/teleporter.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade.prefab"
           }
         ],
         "Player": {
