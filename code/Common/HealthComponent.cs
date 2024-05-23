@@ -30,7 +30,7 @@ public partial class HealthComponent : Component
 			return;
 		}
 		
-		if ( grub.IsActive && immediate )
+		if (grub.IsValid() && grub.IsActive && immediate )
 			Gamemode.FFA.UseTurn();
 
 		CurrentHealth -= damageInfo.Damage;

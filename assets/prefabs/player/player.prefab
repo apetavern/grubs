@@ -20,7 +20,8 @@
           "component_id": "0e0de72b-165a-4e5d-a810-d1724fae88b0",
           "go": "5397ff67-f8f5-4719-8d0a-8fb37da4e267",
           "component_type": "PlayerInventory"
-        }
+        },
+        "MousePosition": "0,0,0"
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
@@ -71,6 +72,14 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/landmine/landmine.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/teleporter/teleporter.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade.prefab"
           }
         ],
         "Player": {

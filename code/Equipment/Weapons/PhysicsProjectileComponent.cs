@@ -5,6 +5,7 @@ public class PhysicsProjectileComponent : ProjectileComponent
 {
 	[Property] public bool Droppable { get; set; } = false;
 	[Property] public required Rigidbody PhysicsBody { get; set; }
+
 	public override bool Resolved => PhysicsBody.Velocity.IsNearlyZero( 0.1f );
 
 	protected override void OnStart()

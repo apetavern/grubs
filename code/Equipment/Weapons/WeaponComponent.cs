@@ -92,6 +92,20 @@ public partial class WeaponComponent : Component
 				FireFinished();
 			}
 		}
+		else if ( FiringType is FiringType.Cursor )
+		{
+			if ( Input.Pressed( "fire" ) )
+			{
+				IsFiring = true;
+
+				if ( OnFire is not null )
+					OnFire.Invoke( 100 );
+				else
+					FireImmediate();
+				TimeSinceLastUsed = 0;
+				FireFinished();
+			}
+		}
 		else if ( FiringType is FiringType.Complex )
 		{
 			HandleComplexFiringInput();

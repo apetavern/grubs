@@ -1,0 +1,88 @@
+{
+  "RootObject": {
+    "__guid": "6954b3c2-76b3-464f-bd03-b6bd8999f07a",
+    "Flags": 0,
+    "Name": "teleporter",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Equipment.EquipmentComponent",
+        "__guid": "0a65a245-aeb8-437b-a1c1-a854fb4283bb",
+        "Data": "resources/equipment/weapons/teleporter.geq",
+        "HoldPose": "Holdable",
+        "Icon": "models/tools/teleporter/teleporter.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "73bdab43-c445-431c-98e1-e310c0d64446",
+          "go": "6954b3c2-76b3-464f-bd03-b6bd8999f07a",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Teleporter",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "73bdab43-c445-431c-98e1-e310c0d64446",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/teleporter/teleporter.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.TeleportToolComponent",
+        "__guid": "13a1080e-5276-4a6d-be6a-973c939fb561",
+        "CanFireWhileMoving": true,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
+        "CursorModel": {
+          "_type": "component",
+          "component_id": "644fab25-5b25-420c-91b8-551f9278fbe7",
+          "go": "50797b24-fb82-40e3-a1e5-043eb956a77f",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "CursorRange": 100,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "0a65a245-aeb8-437b-a1c1-a854fb4283bb",
+          "go": "6954b3c2-76b3-464f-bd03-b6bd8999f07a",
+          "component_type": "EquipmentComponent"
+        },
+        "FiringType": "Cursor",
+        "MaxUses": 1,
+        "TeleportSound": "sounds/weapons/teleporter/teleport_use.sound"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "50797b24-fb82-40e3-a1e5-043eb956a77f",
+        "Flags": 0,
+        "Name": "GrubCursor",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "644fab25-5b25-420c-91b8-551f9278fbe7",
+            "BodyGroups": 5,
+            "CreateBoneObjects": false,
+            "MaterialGroup": "Teleport_Preview",
+            "Model": "models/citizenworm.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

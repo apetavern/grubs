@@ -3,8 +3,8 @@ using Grubs.Helpers;
 
 namespace Grubs.Equipment.Weapons;
 
-[Title( "Grub - Explosive Projectile" ), Category( "Equipment" )]
-public class ExplosiveProjectileComponent : Component, IResolvable
+[Title( "Grubs - Explosive Projectile" ), Category( "Equipment" )]
+public class ExplosiveProjectileComponent : Component, IResolvable, Component.ICollisionListener
 {
 	[Property] private float ExplosionDamage { get; set; } = 50f;
 	[Property] private float ExplosionRadius { get; set; } = 100f;
@@ -17,6 +17,10 @@ public class ExplosiveProjectileComponent : Component, IResolvable
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
 
+	public delegate void OnExplode();
+
+	public event OnExplode ProjectileExploded;
+
 	public virtual bool Resolved => TimeUntilExplosion;
 
 	protected override void OnStart()
@@ -26,6 +30,24 @@ public class ExplosiveProjectileComponent : Component, IResolvable
 			TimeUntilExplosion = ExplodeAfter;
 			ExplodeAfterSeconds( ExplodeAfter );
 		}
+	}
+
+	public void OnCollisionStart( Collision other )
+	{
+		if ( ExplodeOnCollision )
+		{
+			Explode();
+		}
+	}
+
+	public void OnCollisionUpdate( Collision other )
+	{
+
+	}
+
+	public void OnCollisionStop( CollisionStop other )
+	{
+
 	}
 
 	private async void ExplodeAfterSeconds( float seconds )
@@ -44,6 +66,8 @@ public class ExplosiveProjectileComponent : Component, IResolvable
 			return;
 
 		ExplodeEffects();
+
+		ProjectileExploded?.Invoke();
 
 		if ( DeleteOnExplode )
 			GameObject.Destroy();

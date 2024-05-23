@@ -1,56 +1,58 @@
 {
   "RootObject": {
-    "__guid": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+    "__guid": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
     "Flags": 0,
-    "Name": "bazooka",
+    "Name": "cluster_grenade",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Grubs.Equipment.EquipmentComponent",
-        "__guid": "1be96d4e-33e2-42ce-935d-a59507aa4287",
-        "Data": "resources/equipment/weapons/bazooka.geq",
-        "HoldPose": "Bazooka",
-        "Icon": "models/weapons/bazooka/bazooka.vmdl_c.png",
-        "Model": {
-          "_type": "component",
-          "component_id": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
-          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "Name": "Bazooka",
-        "SlotIndex": 0
-      },
-      {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
-        "BodyGroups": 18446744073709551615,
+        "__guid": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
+        "BodyGroups": 1,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/bazooka/bazooka.vmdl",
+        "Model": "models/weapons/grenade/clustergrenade.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
+        "__type": "Grubs.Equipment.EquipmentComponent",
+        "__guid": "208b26cc-8581-471e-85e6-79ba84988d5b",
+        "Data": "resources/equipment/weapons/cluster_grenade.geq",
+        "HoldPose": "Throwable",
+        "Icon": "models/weapons/grenade/clustergrenade.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
+          "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Cluster Grenade",
+        "SlotIndex": 0
+      },
+      {
         "__type": "Grubs.Equipment.Weapons.WeaponComponent",
-        "__guid": "86f16eac-bde5-4175-89ec-baef0f63bbe0",
+        "__guid": "a024eac2-7cbe-445a-8737-b672169915b4",
         "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "1be96d4e-33e2-42ce-935d-a59507aa4287",
-          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+          "component_id": "208b26cc-8581-471e-85e6-79ba84988d5b",
+          "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
           "component_type": "EquipmentComponent"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "f1594c5a-08d0-4300-b61b-f1d0e841406a",
+          "__guid": "b30df95c-bdf2-462c-9063-a2ff35439009",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
-              "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
+              "Grubs.Equipment.Weapons.WeaponComponent"
             ]
           },
           "Variables": [
@@ -59,9 +61,9 @@
               "Type": "Sandbox.Component",
               "Default": {
                 "_type": "component",
-                "component_id": "1be96d4e-33e2-42ce-935d-a59507aa4287",
-                "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
-                "component_type": "EquipmentComponent"
+                "component_id": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
+                "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+                "component_type": "SkinnedModelRenderer"
               }
             }
           ],
@@ -74,17 +76,17 @@
               "Id": 1,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "224,-96"
+                "Position": "208,-128"
               }
             },
             {
-              "Id": 2,
+              "Id": 3,
               "Type": "scene.get",
               "Properties": {
                 "T": "package.apetavern.grubs/Grubs.Equipment.Weapons.WeaponComponent"
               },
               "UserData": {
-                "Position": "-16,-144"
+                "Position": "-16,-192"
               }
             }
           ],
@@ -104,22 +106,22 @@
             {
               "Value": {
                 "_type": "gameobject",
-                "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
+                "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
               },
               "DstId": 1,
               "DstName": "projectile"
             },
             {
-              "SrcId": 2,
+              "SrcId": 3,
               "SrcName": "_result",
               "DstId": 1,
               "DstName": "source"
             }
           ],
           "Defaults": {
-            "$3._value": {
+            "$4._value": {
               "_type": "gameobject",
-              "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
+              "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
             }
           }
         }
