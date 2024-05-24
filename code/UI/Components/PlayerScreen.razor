@@ -9,10 +9,14 @@
 @inherits PanelComponent
 
 <root>
-    <Cursor/>
+    @if (IsProxy)
+        return;
 
-    <InventoryDisplay Inventory="@Inventory"/>
-    <TurnTimer/>
+    <Cursor />
+
+    <PlayerList />
+    <InventoryDisplay Inventory="@Inventory" />
+    <TurnTimer />
 </root>
 
 @code
