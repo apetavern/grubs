@@ -1,4 +1,5 @@
-﻿using Grubs.UI.Components;
+﻿using Grubs.Pawn;
+using Grubs.UI.Components;
 
 namespace Grubs.Equipment.Tools;
 
@@ -45,8 +46,9 @@ public class GirderTool : Tool
 		var player = Equipment.Grub.Player;
 		CursorVisual.Transform.Position = player.MousePosition;
 		CursorVisual.Transform.Rotation *= Rotation.FromPitch( Input.MouseWheel.y * 10f );
+		GrubFollowCamera.Local.Distance = 1024f;
 		var isValidPlacement = CheckValidPlacement();
-		CursorVisual.Tint = isValidPlacement ? Color.Green : Color.Red;
+		CursorVisual.Tint = (isValidPlacement ? Color.Green : Color.Red).WithAlpha(0.75f);
 	}
 
 	private bool CheckValidPlacement()
