@@ -1,0 +1,60 @@
+{
+  "RootObject": {
+    "__guid": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+    "Flags": 0,
+    "Name": "torch",
+    "Tags": "tool",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "edaa701d-1232-4719-8c30-2f26d016ca3b",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/blowtorch/blowtorch.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "401a6f53-9dac-4e31-b629-e40180598ee5",
+        "Data": "resources/equipment/tools/blowtorch.geq",
+        "HoldPose": "Uzi",
+        "Icon": "models/tools/blowtorch/blowtorch.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "edaa701d-1232-4719-8c30-2f26d016ca3b",
+          "go": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Blowtorch",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.TorchWeapon",
+        "__guid": "195e86d8-636b-42d4-973f-ca6a7c289d27",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 1,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "401a6f53-9dac-4e31-b629-e40180598ee5",
+          "go": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Complex",
+        "MaxUses": 1
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
