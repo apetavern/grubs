@@ -10,6 +10,7 @@ public class GrubFollowCamera : Component
 {
 	public static GrubFollowCamera Local { get; set; }
 	public float Distance { get; set; } = 1024f;
+	public bool AllowZooming { get; set; } = true;
 
 	[Property, ReadOnly] private GameObject Target { get; set; }
 
@@ -52,7 +53,10 @@ public class GrubFollowCamera : Component
 	{
 		base.OnFixedUpdate();
 
-		Distance -= Input.MouseWheel.y * 32f;
+		if ( AllowZooming )
+		{
+			Distance -= Input.MouseWheel.y * 32f;
+		}
 		Distance = Distance.Clamp( 128f, 2048f );
 
 		AdjustHighlightOutline();

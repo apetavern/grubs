@@ -1,0 +1,11 @@
+{
+  "Name": "Girder",
+  "Description": "Places a destructible girder",
+  "Icon": "models/tools/girders/girder_short.vmdl_c.png",
+  "Type": "Tool",
+  "EquipmentPrefab": "prefabs/tools/girder/girder.prefab",
+  "DefaultAmmo": 2,
+  "DropChance": 4,
+  "__references": [],
+  "__version": 0
+}

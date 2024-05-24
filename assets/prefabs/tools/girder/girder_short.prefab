@@ -1,0 +1,114 @@
+{
+  "RootObject": {
+    "__guid": "9caa0450-0095-4ca7-a4d1-492fe3e63030",
+    "Flags": 0,
+    "Name": "girder_short",
+    "Tags": "solid",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "0eda78cf-bcc5-426a-90b1-14dd052ece23",
+        "MaxHealth": 75
+      },
+      {
+        "__type": "Grubs.DestructibleObject",
+        "__guid": "bfaf69f9-ae48-43b0-97c2-ff3afee2cf11",
+        "HasDamageMeshes": true,
+        "health": {
+          "_type": "component",
+          "component_id": "0eda78cf-bcc5-426a-90b1-14dd052ece23",
+          "go": "9caa0450-0095-4ca7-a4d1-492fe3e63030",
+          "component_type": "Health"
+        },
+        "LeftSide": {
+          "_type": "gameobject",
+          "go": "39dccd41-824a-4e02-a04d-f3539c907ffa"
+        },
+        "RightSide": {
+          "_type": "gameobject",
+          "go": "273855b8-4d1a-49f9-93b0-02e0a0c7250c"
+        }
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "39dccd41-824a-4e02-a04d-f3539c907ffa",
+        "Flags": 0,
+        "Name": "Left",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "c33e4b97-82b7-492e-95d9-9c5810b629af",
+            "BodyGroups": 1,
+            "CreateBoneObjects": false,
+            "Model": "models/tools/girders/girder_short_left.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "724e7b47-5e8e-42a4-8a51-295f6ada7ec8",
+            "IsTrigger": false,
+            "Model": "models/tools/girders/girder_short_left.vmdl",
+            "Static": true
+          }
+        ]
+      },
+      {
+        "__guid": "64466bee-f348-4c71-ae71-d1cbaf6fa936",
+        "Flags": 0,
+        "Name": "Center",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "24cf0fe5-d55a-47cb-94f7-4114f8ccf3ae",
+            "IsTrigger": false,
+            "Model": "models/tools/girders/girder_center_only.vmdl",
+            "Static": true
+          }
+        ]
+      },
+      {
+        "__guid": "273855b8-4d1a-49f9-93b0-02e0a0c7250c",
+        "Flags": 0,
+        "Name": "Right",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "6d7a565b-bcd6-450a-98e6-d429ea364e6a",
+            "BodyGroups": 1,
+            "CreateBoneObjects": false,
+            "Model": "models/tools/girders/girder_short_right.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "6c47748d-963c-401b-87e8-324ce823a636",
+            "IsTrigger": false,
+            "Model": "models/tools/girders/girder_short_right.vmdl",
+            "Static": true
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

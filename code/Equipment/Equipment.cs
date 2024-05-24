@@ -10,7 +10,7 @@ public class Equipment : Component
 	[Property] public required SkinnedModelRenderer Model { get; set; }
 	[Property] public HoldPose HoldPose { get; set; } = HoldPose.None;
 	[Property, ResourceType( "jpg" )] public string Icon { get; set; } = "";
-
+	[Property] public bool CameraCanZoom { get; set; } = true;
 	/// <summary>
 	/// Data from the GameResource for this Equipment.
 	/// </summary>
@@ -59,6 +59,7 @@ public class Equipment : Component
 		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
 		Model.Enabled = true;
 		Deployed = true;
+		GrubFollowCamera.Local.AllowZooming = CameraCanZoom;
 	}
 
 	public void Holster()
@@ -74,6 +75,7 @@ public class Equipment : Component
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
 		Deployed = false;
+		GrubFollowCamera.Local.AllowZooming = true;
 	}
 
 	public void UseAmmo()

@@ -169,7 +169,7 @@ public sealed partial class GrubPlayerController : Component
 		var showWhileMoving = false;
 		if ( Grub.ActiveEquipment is { } equipment )
 		{
-			if ( equipment.Ammo < 1 )
+			if ( equipment.Ammo == 0 )
 				return false;
 
 			if ( equipment.Components.Get<Weapon>() is { } weapon )

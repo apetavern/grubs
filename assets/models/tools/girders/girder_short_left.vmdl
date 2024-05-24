@@ -108,6 +108,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "RS"
+						disabled = true
 						filename = "models/tools/girders/girder_short.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -134,6 +135,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "RU"
+						disabled = true
 						filename = "models/tools/girders/girder_short.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -160,6 +162,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "RD"
+						disabled = true
 						filename = "models/tools/girders/girder_short.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -212,6 +215,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "RB"
+						disabled = true
 						filename = "models/tools/girders/girder_short.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -268,6 +272,8 @@
 								"Right_Up",
 								"Right_Down",
 								"Left_Down",
+								"Left_Destroyed",
+								"Right_Straight",
 							]
 						}
 					},
@@ -355,6 +361,7 @@
 								]
 							},
 						]
+						disabled = true
 						hidden_in_tools = false
 					},
 				]

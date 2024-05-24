@@ -268,6 +268,8 @@
 								"Right_Up",
 								"Right_Down",
 								"Left_Down",
+								"Right_Straight",
+								"Left_Straight",
 							]
 						}
 					},
