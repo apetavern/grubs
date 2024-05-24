@@ -1,0 +1,116 @@
+{
+  "RootObject": {
+    "__guid": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+    "Flags": 0,
+    "Name": "bazooka_shell_homing",
+    "Tags": "projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "47a65e02-f328-4f65-9761-44b130436c99",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/shell/homingshell.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "66f5c16a-d2cf-47a1-bbd0-708877ebed32",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      },
+      {
+        "__type": "Sandbox.CapsuleCollider",
+        "__guid": "ec47ef16-a09b-465c-b074-c9fc7876a831",
+        "End": "1.880003,0,0",
+        "IsTrigger": false,
+        "Radius": 4.6000004,
+        "Start": "-5.559999,0,0",
+        "Static": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "473a1050-a995-494e-9de3-83db5a2b3f02",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 10,
+        "ExplodeOnCollision": true,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 30,
+        "ExplosionRadius": 100,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "cbad4e4f-ff9e-4398-b2ce-77a8e15e9bcf",
+        "MaxHealth": 15
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "58ebf0e3-5883-4c91-b67d-b31b1e0d5079",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "47a65e02-f328-4f65-9761-44b130436c99",
+          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "ec00ed42-2bbc-49d2-9a55-c000cd54e297",
+          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 350,
+        "SetPositionOnStart": true
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "ec00ed42-2bbc-49d2-9a55-c000cd54e297",
+        "AngularDamping": 0.1,
+        "Gravity": true,
+        "LinearDamping": 1,
+        "Locking": {
+          "Y": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.HomingProjectile",
+        "__guid": "37c9a8af-5097-457e-8468-16f97de87aa5",
+        "Model": {
+          "_type": "component",
+          "component_id": "47a65e02-f328-4f65-9761-44b130436c99",
+          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "ProjectileMovement": {
+          "_type": "component",
+          "component_id": "58ebf0e3-5883-4c91-b67d-b31b1e0d5079",
+          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_type": "PhysicsProjectile"
+        },
+        "ProjectileSpeed": 350
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

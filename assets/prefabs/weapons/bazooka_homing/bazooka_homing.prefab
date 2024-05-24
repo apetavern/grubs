@@ -1,0 +1,203 @@
+{
+  "RootObject": {
+    "__guid": "58930487-9962-4c2f-9a6d-1a41dc4a12c4",
+    "Flags": 0,
+    "Name": "bazooka_homing",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "0295eefb-ff5b-4d2a-a261-5323cd2163d0",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/homingmissile/homingmissile.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "d0f62919-c0d8-4c2f-a64d-c59bff9ce7b1",
+        "Data": "resources/equipment/weapons/bazooka _homing.geq",
+        "HoldPose": "Bazooka",
+        "Icon": "models/weapons/homingmissile/homingmissile.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "0295eefb-ff5b-4d2a-a261-5323cd2163d0",
+          "go": "58930487-9962-4c2f-9a6d-1a41dc4a12c4",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Homing Bazooka",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.HomingWeapon",
+        "__guid": "733b9572-40ee-48a7-a5f5-4cf192a0d8d2",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
+        "CursorModel": {
+          "_type": "component",
+          "component_id": "e826a9d2-8cef-4d2c-8cbb-96880558ef5f",
+          "go": "9d77fdfc-1fa8-4b2a-bc7b-2c35f869ef6e",
+          "component_type": "ModelRenderer"
+        },
+        "Equipment": {
+          "_type": "component",
+          "component_id": "d0f62919-c0d8-4c2f-a64d-c59bff9ce7b1",
+          "go": "58930487-9962-4c2f-9a6d-1a41dc4a12c4",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Complex",
+        "MaxUses": 1,
+        "OnFire": {
+          "__version": 7,
+          "__guid": "d8e7e067-47e1-40e1-86aa-2bc914429e6d",
+          "UserData": {
+            "Title": "On Fire",
+            "ReferencedComponentTypes": [
+              "Grubs.Equipment.Weapons.HomingWeapon"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 1,
+              "Type": "input",
+              "UserData": {
+                "Position": "80,-32"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "grubs.spawn_homing_projectile",
+              "UserData": {
+                "Position": "368,-32"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.HomingWeapon"
+              },
+              "UserData": {
+                "Position": "-32,-96"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.HomingWeapon"
+              },
+              "UserData": {
+                "Position": "320,112"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "call",
+              "Properties": {
+                "_type": "Grubs.Equipment.Weapons.HomingWeapon",
+                "_isStatic": false,
+                "_name": "ResetParameters"
+              },
+              "UserData": {
+                "Position": "656,-32"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "charge",
+              "DstId": 5,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/bazooka_homing/bazooka_shell_homing.prefab"
+              },
+              "DstId": 5,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_target",
+              "DstId": 7,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_target",
+              "DstId": 9,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            }
+          ],
+          "Defaults": {
+            "$11._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/bazooka_homing/bazooka_shell_homing.prefab"
+            }
+          }
+        },
+        "SecondaryFiringType": "Charged"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "9d77fdfc-1fa8-4b2a-bc7b-2c35f869ef6e",
+        "Flags": 0,
+        "Name": "HomingMissile - cursor",
+        "Scale": "0.5,0.5,0.5",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "e826a9d2-8cef-4d2c-8cbb-96880558ef5f",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/weapons/targetindicator/targetindicator.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
