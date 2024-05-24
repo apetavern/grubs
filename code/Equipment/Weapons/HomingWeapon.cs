@@ -45,7 +45,7 @@ public sealed class HomingWeapon : Weapon
 			ProjectileTarget = CursorModel.Transform.Position;
 		}
 
-		if( Input.Released( "fire" ) && ProjectileTarget != Vector3.Zero )
+		if ( Input.Released( "fire" ) && ProjectileTarget != Vector3.Zero )
 		{
 			FiringType = SecondaryFiringType;
 		}
