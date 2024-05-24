@@ -29,7 +29,7 @@ public sealed class TorchWeapon : Weapon
 		var pc = Equipment.Grub.PlayerController;
 		var startPos = GetStartPosition();
 
-		IsFiring = Input.Down("fire");
+		IsFiring = Input.Down( "fire" );
 
 		TorchFlame.Enabled = IsFiring && Equipment.Deployed;
 		TorchFlame.Transform.Position = GetStartPosition();
