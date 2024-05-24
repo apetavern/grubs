@@ -1,0 +1,11 @@
+{
+  "Name": "blowtorch",
+  "Description": "Blow for torching.",
+  "Icon": "models/tools/blowtorch/blowtorch.vmdl_c.png",
+  "Type": "Tool",
+  "EquipmentPrefab": "prefabs/tools/torch/torch.prefab",
+  "DefaultAmmo": 4,
+  "DropChance": 1,
+  "__references": [],
+  "__version": 0
+}
