@@ -19,6 +19,8 @@ public class GirderTool : Tool
 	protected override void OnStart()
 	{
 		base.OnStart();
+		CursorVisual.GameObject.SetParent( Scene );
+		CursorVisual.GameObject.Enabled = Equipment.Deployed;
 	}
 
 	protected override void OnUpdate()
@@ -31,6 +33,8 @@ public class GirderTool : Tool
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
 		CursorVisual.Enabled = Equipment.Deployed;
 		CursorCollider.Enabled = Equipment.Deployed;
+
+		CursorVisual.GameObject.Enabled = Equipment.Deployed;
 
 		if ( !Equipment.Deployed )
 			return;
