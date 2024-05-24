@@ -6,76 +6,50 @@ namespace Grubs;
 public sealed class DestructibleObject : Component
 {
 	[Property, ToggleGroup( "HasDamageMeshes" )]
-	bool HasDamageMeshes {  get; set; }
-
-	[Property, ToggleGroup( "HasDamageMeshes" )] 
-	GameObject LeftSide { get; set; }
+	private bool HasDamageMeshes {  get; set; }
 
 	[Property, ToggleGroup( "HasDamageMeshes" )]
-	GameObject RightSide { get; set; }
+	private GameObject LeftSide { get; set; }
 
-	[RequireComponent, Property] Health health { get; set; }
+	[Property, ToggleGroup( "HasDamageMeshes" )]
+	private GameObject RightSide { get; set; }
+
+	[Property, RequireComponent] 
+	private Health Health { get; set; }
 
 	protected override void OnStart()
 	{
-		health.ObjectDied += GameObject.Destroy;
-		health.ObjectDamaged += OnDamaged;
+		Health.ObjectDied += GameObject.Destroy;
+		Health.ObjectDamaged += OnDamaged;
 	}
 
 	protected override void OnDestroy()
 	{
-		health.ObjectDied -= GameObject.Destroy;
-		health.ObjectDamaged -= OnDamaged;
+		Health.ObjectDied -= GameObject.Destroy;
+		Health.ObjectDamaged -= OnDamaged;
 	}
 
 	public void OnDamaged( GrubsDamageInfo damageInfo )
 	{
-		if ( HasDamageMeshes )
+		if ( !HasDamageMeshes )
+			return;
+
+		var damageDirection = (Transform.Position - damageInfo.WorldPosition).Normal;
+		var dotForward = Vector3.Dot( Transform.Rotation.Forward, damageDirection );
+		var dotUp = Vector3.Dot( Transform.Rotation.Up, damageDirection );
+		var isLeftSide = dotForward < 0;
+
+		var side = isLeftSide ? LeftSide : RightSide;
+		var renderer = side.Components.Get<SkinnedModelRenderer>();
+
+		if ( damageInfo.Damage < 20f && Health.CurrentHealth > Health.MaxHealth / 3f )
 		{
-			var damageDirection = (Transform.Position - damageInfo.WorldPosition).Normal;
-
-			float dotForward = Vector3.Dot( Transform.Rotation.Forward, damageDirection );
-
-			float dotUp = Vector3.Dot( Transform.Rotation.Up, damageDirection );
-
-			if ( dotForward < 0 )
-			{
-				if ( damageInfo.Damage < 20f && health.CurrentHealth > health.MaxHealth/3f )
-				{
-					if ( dotUp > 0 )
-					{
-						LeftSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Left", 1 );
-					}
-					else
-					{
-						LeftSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Left", 2 );
-					}
-				}
-				else
-				{
-					LeftSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Left", 3 );
-					LeftSide.Components.Get<ModelCollider>(true).Enabled = false;
-				}
-			}
-			else
-			{
-				if ( damageInfo.Damage < 20f && health.CurrentHealth > health.MaxHealth / 3f )
-				{
-					if ( dotUp > 0 )
-					{
-						RightSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Right", 1 );
-					}
-					else
-					{
-						RightSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Right", 2 );
-					}
-				}
-				else
-				{
-					RightSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Right", 3 );
-					RightSide.Components.Get<ModelCollider>( true ).Enabled = false;
-				}
-			}
+			renderer.SetBodyGroup( isLeftSide ? "Left" : "Right", dotUp > 0 ? 1 : 2 );
+		}
+		else
+		{
+			renderer.SetBodyGroup( isLeftSide ? "Left" : "Right", 3 );
+			side.Components.Get<ModelCollider>( true ).Enabled = false;
 		}
 	}
 }
