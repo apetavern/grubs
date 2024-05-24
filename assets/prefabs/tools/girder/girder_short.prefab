@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "2766b7ac-4dba-4420-b55d-140180ae5492",
+    "__guid": "e956b28f-e5cd-4c6c-825b-77ba639c6dc0",
     "Flags": 0,
     "Name": "girder_short",
     "Tags": "solid",
@@ -9,45 +9,84 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "7af8f858-79c1-4f6f-ae48-c2b2260168af",
-        "BodyGroups": 9,
-        "CreateBoneObjects": false,
-        "Model": "models/tools/girders/girder_short.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "Sandbox.ModelCollider",
-        "__guid": "3f0ec851-75e5-4ee0-be21-ed5da9bfffe5",
-        "IsTrigger": false,
-        "Model": "models/tools/girders/girder_short.vmdl",
-        "Static": true
-      },
-      {
         "__type": "Grubs.Common.Health",
-        "__guid": "6c45b951-3ab4-478f-8d51-edd8a8aa0ffa",
-        "MaxHealth": 50
+        "__guid": "93242da8-82ff-49f7-a07b-ca177a35498e",
+        "MaxHealth": 75
       },
       {
         "__type": "Grubs.DestructibleObject",
-        "__guid": "3eeeb146-d499-4d44-8b5a-3ecdffd6c98a",
+        "__guid": "24b89169-e750-442f-a4fa-e1fbbc8e3677",
         "HasDamageMeshes": true,
         "health": {
           "_type": "component",
-          "component_id": "6c45b951-3ab4-478f-8d51-edd8a8aa0ffa",
-          "go": "2766b7ac-4dba-4420-b55d-140180ae5492",
+          "component_id": "93242da8-82ff-49f7-a07b-ca177a35498e",
+          "go": "e956b28f-e5cd-4c6c-825b-77ba639c6dc0",
           "component_type": "Health"
         },
-        "SkinnedModelRenderer": {
-          "_type": "component",
-          "component_id": "7af8f858-79c1-4f6f-ae48-c2b2260168af",
-          "go": "2766b7ac-4dba-4420-b55d-140180ae5492",
-          "component_type": "SkinnedModelRenderer"
+        "LeftSide": {
+          "_type": "gameobject",
+          "go": "54881692-6604-4436-a1e8-e4375413e6e4"
+        },
+        "RightSide": {
+          "_type": "gameobject",
+          "go": "6f99b5db-d979-4698-aba5-74121f0e8442"
         }
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "54881692-6604-4436-a1e8-e4375413e6e4",
+        "Flags": 0,
+        "Name": "Left",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "dc496b1b-39c1-4032-bbee-9d90b00d26e4",
+            "BodyGroups": 1,
+            "CreateBoneObjects": false,
+            "Model": "models/tools/girders/girder_short_left.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "8e89fed5-9159-46d0-9f92-d100fbee3984",
+            "IsTrigger": false,
+            "Model": "models/tools/girders/girder_short_left.vmdl",
+            "Static": true
+          }
+        ]
+      },
+      {
+        "__guid": "6f99b5db-d979-4698-aba5-74121f0e8442",
+        "Flags": 0,
+        "Name": "Right",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "e0684921-63f4-4d0f-b5de-58cf9928c6fa",
+            "BodyGroups": 1,
+            "CreateBoneObjects": false,
+            "Model": "models/tools/girders/girder_short_right.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "f77dec85-9e5f-4937-82bd-19feb8cd2e6f",
+            "IsTrigger": false,
+            "Model": "models/tools/girders/girder_short_right.vmdl",
+            "Static": true
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

@@ -9,7 +9,10 @@ public sealed class DestructibleObject : Component
 	bool HasDamageMeshes {  get; set; }
 
 	[Property, ToggleGroup( "HasDamageMeshes" )] 
-	SkinnedModelRenderer SkinnedModelRenderer { get; set; }
+	GameObject LeftSide { get; set; }
+
+	[Property, ToggleGroup( "HasDamageMeshes" )]
+	GameObject RightSide { get; set; }
 
 	[RequireComponent, Property] Health health { get; set; }
 
@@ -37,24 +40,40 @@ public sealed class DestructibleObject : Component
 
 			if ( dotForward < 0 )
 			{
-				if ( dotUp > 0 )
+				if ( damageInfo.Damage < 20f && health.CurrentHealth > health.MaxHealth/3f )
 				{
-					SkinnedModelRenderer.SetBodyGroup( "Left", 1 );
+					if ( dotUp > 0 )
+					{
+						LeftSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Left", 1 );
+					}
+					else
+					{
+						LeftSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Left", 2 );
+					}
 				}
 				else
 				{
-					SkinnedModelRenderer.SetBodyGroup( "Left", 2 );
+					LeftSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Left", 3 );
+					LeftSide.Components.Get<ModelCollider>(true).Enabled = false;
 				}
 			}
 			else
 			{
-				if ( dotUp > 0 )
+				if ( damageInfo.Damage < 20f && health.CurrentHealth > health.MaxHealth / 3f )
 				{
-					SkinnedModelRenderer.SetBodyGroup( "Right", 1 );
+					if ( dotUp > 0 )
+					{
+						RightSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Right", 1 );
+					}
+					else
+					{
+						RightSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Right", 2 );
+					}
 				}
 				else
 				{
-					SkinnedModelRenderer.SetBodyGroup( "Right", 2 );
+					RightSide.Components.Get<SkinnedModelRenderer>().SetBodyGroup( "Right", 3 );
+					RightSide.Components.Get<ModelCollider>( true ).Enabled = false;
 				}
 			}
 		}
