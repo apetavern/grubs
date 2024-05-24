@@ -47,6 +47,24 @@
 							exception_list = 
 							[
 								"shell",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						filename = "models/weapons/shell/shell.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
 								"flames",
 							]
 						}
@@ -80,6 +98,33 @@
 						relative_angles = [ 0.0, 180.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "flame"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "off"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "on"
+								meshes = 
+								[
+									"unnamed_2",
+								]
+							},
+						]
+						hidden_in_tools = false
 					},
 				]
 			},

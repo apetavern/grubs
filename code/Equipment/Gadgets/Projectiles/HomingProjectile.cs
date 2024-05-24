@@ -19,6 +19,7 @@ public class HomingProjectile : Projectile
 		{
 			pp.PhysicsBody.Gravity = false;
 			pp.PhysicsBody.AngularDamping = 5f;
+			pp.Model.SetBodyGroup( "flame", 1 );
 			while ( Vector3.DistanceBetween(Transform.Position, ProjectileTarget) > 10f )
 			{
 				await Task.FixedUpdate();

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+    "__guid": "c5798a31-e8d4-46f2-8a74-f4e9e4d355c8",
     "Flags": 0,
     "Name": "bazooka_shell_homing",
     "Tags": "projectile",
@@ -10,8 +10,8 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "47a65e02-f328-4f65-9761-44b130436c99",
-        "BodyGroups": 18446744073709551615,
+        "__guid": "a502f709-1d41-4b77-b05a-8dd84019c81f",
+        "BodyGroups": 18446744073709551613,
         "CreateBoneObjects": false,
         "Model": "models/weapons/shell/homingshell.vmdl",
         "RenderType": "On",
@@ -19,7 +19,7 @@
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "66f5c16a-d2cf-47a1-bbd0-708877ebed32",
+        "__guid": "ea21c1dc-770e-4302-aa78-36c0860db42d",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -28,7 +28,7 @@
       },
       {
         "__type": "Sandbox.CapsuleCollider",
-        "__guid": "ec47ef16-a09b-465c-b074-c9fc7876a831",
+        "__guid": "42a210ac-3c51-4ed6-9609-1e96b071ab3c",
         "End": "1.880003,0,0",
         "IsTrigger": false,
         "Radius": 4.6000004,
@@ -37,7 +37,7 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "473a1050-a995-494e-9de3-83db5a2b3f02",
+        "__guid": "2c84aa5a-1617-474f-b81b-7c1fee9b25eb",
         "DeleteOnExplode": true,
         "ExplodeAfter": 10,
         "ExplodeOnCollision": true,
@@ -49,23 +49,23 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "cbad4e4f-ff9e-4398-b2ce-77a8e15e9bcf",
+        "__guid": "060b2cc0-135b-4092-9e48-c15b96a3c0f5",
         "MaxHealth": 15
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "58ebf0e3-5883-4c91-b67d-b31b1e0d5079",
+        "__guid": "bbf5cb9c-5602-49ab-aef3-1249f47b5f12",
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "47a65e02-f328-4f65-9761-44b130436c99",
-          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_id": "a502f709-1d41-4b77-b05a-8dd84019c81f",
+          "go": "c5798a31-e8d4-46f2-8a74-f4e9e4d355c8",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "ec00ed42-2bbc-49d2-9a55-c000cd54e297",
-          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_id": "152e9a2b-8606-446d-b459-954b259de8f3",
+          "go": "c5798a31-e8d4-46f2-8a74-f4e9e4d355c8",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 350,
@@ -73,7 +73,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "ec00ed42-2bbc-49d2-9a55-c000cd54e297",
+        "__guid": "152e9a2b-8606-446d-b459-954b259de8f3",
         "AngularDamping": 0.1,
         "Gravity": true,
         "LinearDamping": 1,
@@ -89,17 +89,17 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.HomingProjectile",
-        "__guid": "37c9a8af-5097-457e-8468-16f97de87aa5",
+        "__guid": "27b3ad7b-ed2e-483f-bf5f-d245db60161d",
         "Model": {
           "_type": "component",
-          "component_id": "47a65e02-f328-4f65-9761-44b130436c99",
-          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_id": "a502f709-1d41-4b77-b05a-8dd84019c81f",
+          "go": "c5798a31-e8d4-46f2-8a74-f4e9e4d355c8",
           "component_type": "SkinnedModelRenderer"
         },
         "ProjectileMovement": {
           "_type": "component",
-          "component_id": "58ebf0e3-5883-4c91-b67d-b31b1e0d5079",
-          "go": "d90431f5-0712-43b1-a5c4-631bfa1c5938",
+          "component_id": "bbf5cb9c-5602-49ab-aef3-1249f47b5f12",
+          "go": "c5798a31-e8d4-46f2-8a74-f4e9e4d355c8",
           "component_type": "PhysicsProjectile"
         },
         "ProjectileSpeed": 350
