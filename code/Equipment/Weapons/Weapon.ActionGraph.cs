@@ -5,7 +5,7 @@ namespace Grubs.Equipment.Weapons;
 public partial class Weapon
 {
 	[ActionGraphNode( "grubs.spawn_projectile" ), Title( "Spawn Projectile" ), Group( "Grubs Actions" )]
-	public static void SpawnProjectile( Weapon source, GameObject projectile, int charge )
+	public static GameObject SpawnProjectile( Weapon source, GameObject projectile, int charge )
 	{
 		var go = projectile.Clone();
 		go.NetworkSpawn();
@@ -16,6 +16,7 @@ public partial class Weapon
 		}
 
 		source.TimeSinceLastUsed = 0f;
+		return go;
 	}
 
 	[ActionGraphNode( "grubs.fire_finished" ), Title( "Fire Finished" ), Group( "Grubs Actions" )]

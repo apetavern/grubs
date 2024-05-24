@@ -15,7 +15,7 @@
 						[
 							{
 								from = "phong1.vmat"
-								to = "materials/dev/primary_red_additive.vmat"
+								to = "materials/dev/primary_white_emissive.vmat"
 							},
 						]
 						use_global_default = false
@@ -32,6 +32,25 @@
 						filename = "models/weapons/targetindicator/targetindicator.fbx"
 						import_translation = [ 0.0, 41.0, 0.0 ]
 						import_rotation = [ 0.0, -90.0, 0.0 ]
+						import_scale = 0.75
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"pCylinder1",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						filename = "models/weapons/targetindicator/targetindicator.fbx"
+						import_translation = [ 0.0, -41.0, 0.0 ]
+						import_rotation = [ 0.0, 90.0, -54.0 ]
 						import_scale = 0.75
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
