@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "5a4e89b2-06d9-4e5e-b9a6-830c3833a31e",
+    "__guid": "c99fdb15-2a1f-4ed6-ab36-8d72c91f48f4",
     "Flags": 0,
     "Name": "girder",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "d21d112d-3797-4773-b731-b734d236533b",
+        "__guid": "2c907aa2-60ba-4939-af02-bf522fa44903",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/airstrikes/radio.vmdl",
@@ -18,14 +18,14 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "4d46615e-bafb-47ad-9459-383e64e3ec0b",
+        "__guid": "7032288f-2b90-4d4e-84e0-f153eb225908",
         "Data": "resources/equipment/tools/girder.geq",
         "HoldPose": "Holdable",
         "Icon": "models/tools/girders/girder_short.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "d21d112d-3797-4773-b731-b734d236533b",
-          "go": "5a4e89b2-06d9-4e5e-b9a6-830c3833a31e",
+          "component_id": "2c907aa2-60ba-4939-af02-bf522fa44903",
+          "go": "c99fdb15-2a1f-4ed6-ab36-8d72c91f48f4",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Girder",
@@ -33,28 +33,28 @@
       },
       {
         "__type": "Grubs.Equipment.Tools.GirderTool",
-        "__guid": "c8f47643-ce20-4769-bf3f-4fa17c1cc00a",
+        "__guid": "3e3fce7d-4f4a-4a44-a8c4-e4b7655cf862",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorCollider": {
           "_type": "component",
-          "component_id": "47086a55-9181-46c0-bb9e-d340f996b81b",
-          "go": "d1ce72fd-ff68-4c10-9928-8c4f3697bb8d",
+          "component_id": "68ea32a0-5ca5-4838-a5ee-0e1d78041bcd",
+          "go": "93645606-39ca-4d86-9cf0-b90c9134eab1",
           "component_type": "ModelCollider"
         },
         "CursorRange": 256,
         "CursorVisual": {
           "_type": "component",
-          "component_id": "382555d4-6e2c-47b6-87ac-a3f5686140b9",
-          "go": "d1ce72fd-ff68-4c10-9928-8c4f3697bb8d",
+          "component_id": "ea0545c0-a0b5-4226-8270-bf995a1a689f",
+          "go": "93645606-39ca-4d86-9cf0-b90c9134eab1",
           "component_type": "SkinnedModelRenderer"
         },
         "Equipment": {
           "_type": "component",
-          "component_id": "4d46615e-bafb-47ad-9459-383e64e3ec0b",
-          "go": "5a4e89b2-06d9-4e5e-b9a6-830c3833a31e",
+          "component_id": "7032288f-2b90-4d4e-84e0-f153eb225908",
+          "go": "c99fdb15-2a1f-4ed6-ab36-8d72c91f48f4",
           "component_type": "Equipment"
         },
         "FiringType": "Cursor",
@@ -68,7 +68,7 @@
     ],
     "Children": [
       {
-        "__guid": "d1ce72fd-ff68-4c10-9928-8c4f3697bb8d",
+        "__guid": "93645606-39ca-4d86-9cf0-b90c9134eab1",
         "Flags": 0,
         "Name": "GirderCursor",
         "Tags": "trigger",
@@ -78,7 +78,7 @@
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "382555d4-6e2c-47b6-87ac-a3f5686140b9",
+            "__guid": "ea0545c0-a0b5-4226-8270-bf995a1a689f",
             "BodyGroups": 25,
             "CreateBoneObjects": false,
             "Model": "models/tools/girders/girder_short.vmdl",
@@ -87,7 +87,8 @@
           },
           {
             "__type": "Sandbox.ModelCollider",
-            "__guid": "47086a55-9181-46c0-bb9e-d340f996b81b",
+            "__guid": "68ea32a0-5ca5-4838-a5ee-0e1d78041bcd",
+            "__enabled": false,
             "IsTrigger": true,
             "Model": "models/tools/girders/girder_short.vmdl",
             "Static": false
