@@ -5,17 +5,26 @@ namespace Grubs.Helpers;
 public sealed class RopeBehavior : Component
 {
 	[Property] public GameObject HookObject { get; set; }
-	[Property] public List<GameObject> CornerObjects { get; set; } = new();
-	[Property] public LineRenderer RopeRenderer { get; set; }
-	[Property] private float RopeLength {  get; set; }
+	[Property, Sync] public List<Vector3> CornerObjects { get; set; } = new();
+	[Property] public VecLineRenderer RopeRenderer { get; set; }
+	[Property] private float RopeLength { get; set; }
 
 	private GameObject MuzzlePoint { get; set; }
 	private Mountable MountComponent { get; set; }
 	private SpringJoint JointComponent { get; set; }
 	public Vector3 HookDirection { get; private set; }
 
+	private GameObject AttachPoint { get; set; }
+
+	private List<Vector3> LastUpdateSent;
+
 	protected override void OnAwake()
 	{
+		if ( IsProxy )
+			return;
+
+		AttachPoint = new GameObject();
+
 		JointComponent = Components.Get<SpringJoint>();
 		JointComponent.MaxLength = Vector3.DistanceBetween( Transform.Position, HookObject.Transform.Position );
 		JointComponent.Body = HookObject;
@@ -28,8 +37,10 @@ public sealed class RopeBehavior : Component
 
 	protected override void OnDestroy()
 	{
-		foreach ( var item in CornerObjects )
-			item.Destroy();
+		if ( AttachPoint != null )
+		{
+			AttachPoint.Destroy();
+		}
 		base.OnDestroy();
 	}
 
@@ -37,54 +48,48 @@ public sealed class RopeBehavior : Component
 	{
 		DrawRope();
 
-		if ( IsProxy ) 
+		if ( IsProxy )
 			return;
 
 		if ( MuzzlePoint is null || !MountComponent.IsValid() || !MountComponent.Grub.IsValid() )
 			return;
-		
+
 		MuzzlePoint.Transform.Position = Transform.Position + HookDirection * 15f + MountComponent.Grub.Transform.Rotation.Left * 10f;
 		HookDirection = (JointComponent.Body.Transform.Position - Transform.Position).Normal;
 
-		var tr = Scene.Trace.Ray( 
-				Transform.Position - HookDirection, 
-				JointComponent.Body.Transform.Position + HookDirection )
-			.WithoutTags("player", "tool", "projectile" )
+		var tr = Scene.Trace.Ray(
+				Transform.Position - HookDirection,
+				AttachPoint.Transform.Position + HookDirection )
+			.WithoutTags( "player", "tool", "projectile" )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();
 
 		if ( tr.Hit )
 		{
-			var newCorner = new GameObject(true, "Corner" )
-			{
-				Transform = { Position = tr.HitPosition + tr.Normal }
-			};
-			CornerObjects.Add( newCorner );
-			JointComponent.Body = newCorner;
+			AttachPoint.Transform.Position = tr.HitPosition + tr.Normal;
+			CornerObjects.Add( tr.HitPosition + tr.Normal );
 			JointComponent.MaxLength = RopeLength;
 		}
 
 		if ( CornerObjects.Count > 1 )
 		{
-			var tr2 = Scene.Trace.Ray( 
-					Transform.Position - HookDirection, 
-					CornerObjects[^2].Transform.Position + HookDirection * 2f )
+			var tr2 = Scene.Trace.Ray(
+					Transform.Position - HookDirection,
+					CornerObjects[^2] + HookDirection * 2f )
 				.WithoutTags( "player", "tool", "projectile" )
 				.IgnoreGameObjectHierarchy( GameObject )
 				.Run();
 
 			if ( !tr2.Hit )
 			{
-				var newCorner = CornerObjects[^2];
-				JointComponent.Body = newCorner;
-				CornerObjects[^1].Destroy();
+				AttachPoint.Transform.Position = CornerObjects[^2];
 				CornerObjects.RemoveAt( CornerObjects.Count - 1 );
 			}
 		}
 		else
 		{
-			var tr2 = Scene.Trace.Ray( 
-					Transform.Position - HookDirection, 
+			var tr2 = Scene.Trace.Ray(
+					Transform.Position - HookDirection,
 					HookObject.Transform.Position + HookDirection * 2f )
 				.WithoutTags( "player", "tool", "projectile" )
 				.IgnoreGameObjectHierarchy( GameObject )
@@ -92,15 +97,15 @@ public sealed class RopeBehavior : Component
 
 			if ( !tr2.Hit )
 			{
-				var newCorner = HookObject;
-				JointComponent.Body = newCorner;
+				AttachPoint.Transform.Position = HookObject.Transform.Position;
 				if ( CornerObjects.Count > 0 )
 				{
-					CornerObjects[^1].Destroy();
 					CornerObjects.RemoveAt( CornerObjects.Count - 1 );
 				}
 			}
 		}
+
+		JointComponent.Body = AttachPoint;
 
 		JointComponent.MaxLength = RopeLength;
 
@@ -112,24 +117,24 @@ public sealed class RopeBehavior : Component
 
 	public void DrawRope()
 	{
-		switch (CornerObjects.Count)
+		switch ( CornerObjects.Count )
 		{
 			case > 1:
 				RopeRenderer.Points.Clear();
-				RopeRenderer.Points.Add( HookObject );
+				RopeRenderer.Points.Add( HookObject.Transform.Position );
 				RopeRenderer.Points.AddRange( CornerObjects );
-				RopeRenderer.Points.Add( MuzzlePoint );
+				RopeRenderer.Points.Add( MuzzlePoint.Transform.Position );
 				break;
 			case 1:
 				RopeRenderer.Points.Clear();
-				RopeRenderer.Points.Add( HookObject );
+				RopeRenderer.Points.Add( HookObject.Transform.Position );
 				RopeRenderer.Points.Add( CornerObjects[0] );
-				RopeRenderer.Points.Add( MuzzlePoint );
+				RopeRenderer.Points.Add( MuzzlePoint.Transform.Position );
 				break;
 			default:
 				RopeRenderer.Points.Clear();
-				RopeRenderer.Points.Add( HookObject );
-				RopeRenderer.Points.Add( MuzzlePoint );
+				RopeRenderer.Points.Add( HookObject.Transform.Position );
+				RopeRenderer.Points.Add( MuzzlePoint.Transform.Position );
 				break;
 		}
 	}
