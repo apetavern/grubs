@@ -58,6 +58,16 @@ public sealed class PlayerInventory : Component
 		{
 			InventoryOpen = !InventoryOpen;
 		}
+
+		if ( Input.Pressed( "next_equipment" ) )
+		{
+			CycleSlot();
+		}
+
+		if ( Input.Pressed( "previous_equipment" ) )
+		{
+			CycleSlot( false );
+		}
 	}
 
 	public void EquipItem( Equipment.Equipment equipment )
@@ -137,7 +147,9 @@ public sealed class PlayerInventory : Component
 
 	private void CycleSlot( bool forwards = true )
 	{
+		Holster( ActiveSlot );
 		var slot = forwards ? GetNextSlot() : GetPrevSlot();
 		ActiveSlot = slot;
+		Equip( ActiveSlot );
 	}
 }
