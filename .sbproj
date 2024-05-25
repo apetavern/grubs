@@ -544,13 +544,13 @@
         {
           "Name": "camera_pan",
           "KeyboardCode": "mouse2",
-          "GamepadCode": "None",
+          "GamepadCode": "LeftTrigger",
           "GroupName": "Camera"
         },
         {
           "Name": "camera_reset",
           "KeyboardCode": "mouse3",
-          "GamepadCode": "None",
+          "GamepadCode": "LeftJoystickButton",
           "GroupName": "Camera"
         },
         {
@@ -568,7 +568,7 @@
         {
           "Name": "fire",
           "KeyboardCode": "mouse1",
-          "GamepadCode": "None",
+          "GamepadCode": "RightTrigger",
           "GroupName": "Weapon"
         },
         {
@@ -598,13 +598,13 @@
         {
           "Name": "jump",
           "KeyboardCode": "space",
-          "GamepadCode": "None",
+          "GamepadCode": "A",
           "GroupName": "Movement"
         },
         {
           "Name": "backflip",
           "KeyboardCode": "shift",
-          "GamepadCode": "None",
+          "GamepadCode": "B",
           "GroupName": "Movement"
         },
         {
@@ -616,19 +616,24 @@
         {
           "Name": "toggle_equipment",
           "KeyboardCode": "C",
-          "GamepadCode": "None",
+          "GamepadCode": "RightJoystickButton",
           "GroupName": "Other"
         },
         {
           "Name": "next_equipment",
           "KeyboardCode": "E",
-          "GamepadCode": "None",
+          "GamepadCode": "SwitchRightBumper",
           "GroupName": "Other"
         },
         {
           "Name": "toggle_inventory",
           "KeyboardCode": "Q",
           "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "previous_equipment",
+          "GamepadCode": "SwitchLeftBumper",
           "GroupName": "Other"
         }
       ],
