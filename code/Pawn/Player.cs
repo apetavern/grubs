@@ -40,7 +40,7 @@ public sealed class Player : Component
 
 	protected override void OnUpdate()
 	{
-		var cursorRay = Scene.Camera.ScreenPixelToRay( Mouse.Position );
+		var cursorRay = Scene.Camera.ScreenPixelToRay( Input.UsingController ? new Vector2( Screen.Width / 2, Screen.Height / 2 ) : Mouse.Position );
 		var endPos = _plane.Trace( cursorRay, twosided: true );
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 	}
