@@ -34,7 +34,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 	public void OnCollisionStart( Collision other )
 	{
-		if ( ExplodeOnCollision )
+		if ( ExplodeOnCollision && other.Other.GameObject.Root != Components.Get<Projectile>().Grub.GameObject )
 		{
 			Explode();
 		}
