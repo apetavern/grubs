@@ -30,7 +30,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 			{
 				var grub = PhysicsProjectileComponent.Grub;
 
-				grub.PlayerController.EyeRotation = Rotation.FromPitch( -MathF.Abs( Vector3.GetAngle( grub.Transform.Rotation.Forward, Rope.HookDirection ) - 15f ) );
+				grub.PlayerController.EyeRotation = Rotation.FromPitch( MathF.Abs( Vector3.GetAngle( grub.Transform.Rotation.Forward, Rope.HookDirection ) - 15f ) * -grub.PlayerController.Facing );
 				grub.PlayerController.IsOnRope = true;
 				grub.Transform.Rotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.Transform.Rotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch( 45f ), Time.Delta * 10f );
 				grub.CharacterController.IsOnGround = false;
