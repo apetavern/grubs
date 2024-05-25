@@ -55,7 +55,7 @@
 					{
 						_class = "PhysicsHullFromRender"
 						parent_bone = ""
-						surface_prop = "default"
+						surface_prop = "grass"
 						collision_tags = "solid"
 						faceMergeAngle = 20.0
 						maxHullVertices = 32

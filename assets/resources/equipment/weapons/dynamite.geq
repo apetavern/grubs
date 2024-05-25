@@ -1,0 +1,11 @@
+{
+  "Name": "Dynamite",
+  "Description": "Places a dynamite at your feet ",
+  "Icon": "models/weapons/dynamite/dynamite.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/dynamite/dynamite.prefab",
+  "DefaultAmmo": 1,
+  "DropChance": 4,
+  "__references": [],
+  "__version": 0
+}
