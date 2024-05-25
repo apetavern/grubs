@@ -16,7 +16,7 @@ public sealed partial class GrubPlayerController : Component
 	[Property] public float WishSpeed { get; set; } = 80f;
 
 	public float MoveInput => ShouldAcceptInput() ? Input.AnalogMove.y : 0f;
-	public float LookInput => ShouldAcceptInput() ? Input.AnalogMove.x : 0f;
+	public float LookInput => ShouldAcceptInput() ? Input.UsingController ? -Input.GetAnalog( InputAnalog.RightStickY ) : Input.AnalogMove.x : 0f;
 	[Sync] public Angles LookAngles { get; set; }
 	[Sync] public int Facing { get; set; } = 1;
 	public int LastFacing { get; set; } = 1;
