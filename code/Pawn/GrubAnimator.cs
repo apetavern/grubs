@@ -22,6 +22,7 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "grounded", Controller.IsGrounded );
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
 		GrubRenderer.Set( "bot_thinking", Thinking );
+		GrubRenderer.Set( "heightdiff", Controller.IsOnRope ? 15f : 0f );
 
 		var holdPose = HoldPose.None;
 		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() && Grub.IsActive )

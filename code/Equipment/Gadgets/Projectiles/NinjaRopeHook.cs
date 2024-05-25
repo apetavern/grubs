@@ -15,25 +15,24 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 
 	protected override void OnUpdate()
 	{
-		if ( IsProxy ) 
+		if ( IsProxy )
 			return;
 
-		if( !MountObject.IsValid() )
+		if ( !MountObject.IsValid() )
 		{
 			GameObject.Destroy();
 		}
-		else if ( MountObject.Enabled && Rope != null)
+		else if ( MountObject.Enabled && Rope != null )
 		{
-			
 			var mountable = MountObject.Components.Get<Mountable>();
-			
+
 			if ( PhysicsProjectileComponent.Grub.IsValid() && mountable.MountEnabled )
 			{
 				var grub = PhysicsProjectileComponent.Grub;
-				grub.Animator.GrubRenderer.Set( "heightdiff", 15f );
-				grub.Animator.GrubRenderer.Set( "aimangle", Vector3.GetAngle( grub.Transform.Rotation.Forward, Rope.HookDirection) - 15f );
+
+				grub.PlayerController.EyeRotation = Rotation.FromPitch( -MathF.Abs( Vector3.GetAngle( grub.Transform.Rotation.Forward, Rope.HookDirection ) - 15f ) );
 				grub.PlayerController.IsOnRope = true;
-				grub.Transform.Rotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.Transform.Rotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch(45f), Time.Delta * 10f);
+				grub.Transform.Rotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.Transform.Rotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch( 45f ), Time.Delta * 10f );
 				grub.CharacterController.IsOnGround = false;
 				grub.CharacterController.Velocity = Vector3.Zero;
 			}
@@ -44,7 +43,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 
 				if ( !mountable.IsValid() )
 					return;
-				
+
 				mountable.Dismount();
 			}
 		}
@@ -70,11 +69,11 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 
 	public void OnCollisionUpdate( Collision other )
 	{
-		
+
 	}
 
 	public void OnCollisionStop( CollisionStop other )
 	{
-		
+
 	}
 }
