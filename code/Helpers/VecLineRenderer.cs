@@ -71,7 +71,6 @@ public sealed class VecLineRenderer : Component, Component.ExecuteInEditor
 	protected override void OnEnabled()
 	{
 		_so = new SceneLineObject( base.Scene.SceneWorld );
-		//_so.Material = LineMaterial;
 		_so.Transform = base.Transform.World;
 	}
 
