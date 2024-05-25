@@ -1,4 +1,5 @@
-﻿using Grubs.UI.Components;
+﻿using Grubs.Pawn;
+using Grubs.UI.Components;
 
 namespace Grubs.Equipment.Tools;
 
@@ -37,6 +38,12 @@ public class TeleportTool : Tool
 		CursorModel.Transform.Position = player.MousePosition;
 		var isValidPlacement = CheckValidPlacement();
 		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
+
+		if ( Input.UsingController )
+		{
+			IsFiring = true;
+			GrubFollowCamera.Local.PanCamera();
+		}
 	}
 
 	private bool CheckValidPlacement()

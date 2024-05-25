@@ -45,10 +45,17 @@ public class GirderTool : Tool
 
 		var player = Equipment.Grub.Player;
 		CursorVisual.Transform.Position = player.MousePosition;
-		CursorVisual.Transform.Rotation *= Rotation.FromPitch( Input.MouseWheel.y * 10f );
+		CursorVisual.Transform.Rotation *= Rotation.FromPitch( (Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f) );
+
+		if ( Input.UsingController )
+		{
+			IsFiring = true;
+			GrubFollowCamera.Local.PanCamera();
+		}
+
 		GrubFollowCamera.Local.Distance = 1024f;
 		var isValidPlacement = CheckValidPlacement();
-		CursorVisual.Tint = (isValidPlacement ? Color.Green : Color.Red).WithAlpha(0.75f);
+		CursorVisual.Tint = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.75f );
 	}
 
 	private bool CheckValidPlacement()
@@ -83,6 +90,8 @@ public class GirderTool : Tool
 
 		var girder = GirderPrefab.Clone( CursorVisual.Transform.World );
 		girder.NetworkSpawn();
+
+		IsFiring = false;
 
 		Sound.Play( PlaceSound );
 	}
