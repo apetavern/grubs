@@ -1,0 +1,141 @@
+{
+  "RootObject": {
+    "__guid": "4b299fef-5510-4ae7-9eee-6f9f15a99a47",
+    "Flags": 0,
+    "Name": "petrol_bomb_thrown",
+    "Tags": "projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "70472bbf-1d15-4616-90d2-1628bdf0d2a2",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": true,
+        "Model": "models/weapons/petrolbomb/petrolbomb.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "ed9b7d0e-c615-43b2-a37e-f62356081a23",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "dfe96077-a82f-4e81-af78-c56e78816fa6",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "Y": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "bc9e345b-012e-422f-ad8c-7b90cd9166fa",
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Radius": 8,
+        "Static": false
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "88e332d6-8a5f-4bf4-ac8d-51445ff44eda",
+        "MaxHealth": 80
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "d913ec18-ffc3-440f-83bd-2d3c44eafe97",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 4,
+        "ExplodeOnCollision": true,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 50,
+        "ExplosionRadius": 100,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "b0130d9c-9c6e-43aa-9c2e-c4924606cabd",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "70472bbf-1d15-4616-90d2-1628bdf0d2a2",
+          "go": "4b299fef-5510-4ae7-9eee-6f9f15a99a47",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "dfe96077-a82f-4e81-af78-c56e78816fa6",
+          "go": "4b299fef-5510-4ae7-9eee-6f9f15a99a47",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 500,
+        "SetPositionOnStart": true
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "3ea9c60d-36b6-4236-95a3-32dd3856671a",
+        "Flags": 4,
+        "Name": "hold_L",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true
+      },
+      {
+        "__guid": "c9a5616f-4d81-4c60-bc7f-7a96532b730e",
+        "Flags": 4,
+        "Name": "rag_start",
+        "Position": "-0.04983139,0.000002974906,14.12584",
+        "Rotation": "0.3449284,0.6172718,0.6172717,-0.3449286",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Children": [
+          {
+            "__guid": "ab3d0cb8-5c6a-4a70-a860-08be2b33fe49",
+            "Flags": 4,
+            "Name": "rag_pivot",
+            "Position": "3.724562,-0.0000004768372,0.000004080904",
+            "Rotation": "-0.00000004756509,-0.0000000009977127,-0.7459484,0.6660037",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "Children": [
+              {
+                "__guid": "5a68e318-ed9b-42e0-a760-8933179cabcd",
+                "Flags": 4,
+                "Name": "rag_end",
+                "Position": "8.603102,-0.00001144409,-0.000002635079",
+                "Rotation": "0.2307292,-0.6684039,0.2307293,0.6684043",
+                "Enabled": true,
+                "NetworkMode": 2,
+                "NetworkInterpolation": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

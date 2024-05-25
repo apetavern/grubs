@@ -187,7 +187,7 @@ public partial class Weapon : Component
 
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( muzzle is null )
-			return grub.Transform.Position;
+			return grub.EyePosition.Position;
 
 		var tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.Transform.Position, muzzle.Value.Position )
 			.IgnoreGameObjectHierarchy( grub.GameObject )
