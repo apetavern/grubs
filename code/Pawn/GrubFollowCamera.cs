@@ -103,11 +103,15 @@ public class GrubFollowCamera : Component
 			SetTarget( player.ActiveGrub.GameObject );
 	}
 
-	private void PanCamera()
+	public void PanCamera()
 	{
 		_timeSinceMousePan = 0;
 
-		_panDelta = new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
+		_panDelta = Input.UsingController ?
+			new Vector3( Input.GetAnalog( InputAnalog.RightStickX ), 0, -Input.GetAnalog( InputAnalog.RightStickY ) ) * 4
+			: new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
+
+
 		if ( _isFocusingTarget )
 		{
 			_center = Target?.Transform.Position ?? _center;
