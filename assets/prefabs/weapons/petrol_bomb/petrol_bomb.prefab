@@ -1,0 +1,177 @@
+{
+  "RootObject": {
+    "__guid": "f42495bc-0760-4755-ae2c-13ab609d0b40",
+    "Flags": 0,
+    "Name": "petrol_bomb",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "25a3e0a0-b615-49af-8a82-532750e0ac41",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": true,
+        "Model": "models/weapons/petrolbomb/petrolbomb.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "aa2bb0de-5da5-498e-815d-52a0f206af2c",
+        "CameraCanZoom": true,
+        "Data": "resources/equipment/weapons/petrol_bomb.geq",
+        "HoldPose": "Throwable",
+        "Icon": "models/weapons/petrolbomb/petrolbomb.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "25a3e0a0-b615-49af-8a82-532750e0ac41",
+          "go": "f42495bc-0760-4755-ae2c-13ab609d0b40",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Petrol Bomb",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.Weapon",
+        "__guid": "daab6237-f582-42d3-b359-fec2ee5ed357",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "aa2bb0de-5da5-498e-815d-52a0f206af2c",
+          "go": "f42495bc-0760-4755-ae2c-13ab609d0b40",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Charged",
+        "MaxUses": 1,
+        "OnFire": {
+          "__version": 7,
+          "__guid": "a2b1736a-e4fd-404e-9bdb-1fc80c59008a",
+          "UserData": {
+            "Title": "On Fire",
+            "ReferencedComponentTypes": [
+              "Grubs.Equipment.Weapons.Weapon"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
+              "UserData": {
+                "Position": "-48,-96"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "192,-64"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "charge",
+              "DstId": 2,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb_thrown.prefab"
+              },
+              "DstId": 2,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "source"
+            }
+          ],
+          "Defaults": {
+            "$4._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb_thrown.prefab"
+            }
+          }
+        }
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "ed63f917-4734-43e1-857d-98b615e15818",
+        "Flags": 4,
+        "Name": "hold_L",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true
+      },
+      {
+        "__guid": "895f4750-b316-4bdc-bc7a-32926175af17",
+        "Flags": 4,
+        "Name": "rag_start",
+        "Position": "-0.04983139,0.000002974906,14.12584",
+        "Rotation": "0.3449284,0.6172718,0.6172717,-0.3449286",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Children": [
+          {
+            "__guid": "4d268dff-3715-46da-99d1-c7d74e434e08",
+            "Flags": 4,
+            "Name": "rag_pivot",
+            "Position": "3.724562,-0.0000004768372,0.000004080904",
+            "Rotation": "-0.00000004756509,-0.0000000009977127,-0.7459484,0.6660037",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "Children": [
+              {
+                "__guid": "edea5cde-fca3-4518-b6a6-328681616414",
+                "Flags": 4,
+                "Name": "rag_end",
+                "Position": "8.603102,-0.00001144409,-0.000002635079",
+                "Rotation": "0.2307292,-0.6684039,0.2307293,0.6684043",
+                "Enabled": true,
+                "NetworkMode": 2,
+                "NetworkInterpolation": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

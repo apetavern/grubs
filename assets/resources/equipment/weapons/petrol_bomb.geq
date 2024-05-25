@@ -1,0 +1,11 @@
+{
+  "Name": "Petrol Bomb",
+  "Description": "Explode in big fire!",
+  "Icon": "models/weapons/petrolbomb/petrolbomb.vmdl_c.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/petrol_bomb/petrol_bomb.prefab",
+  "DefaultAmmo": 5,
+  "DropChance": 0,
+  "__references": [],
+  "__version": 0
+}
