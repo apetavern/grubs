@@ -9,12 +9,7 @@
       "Ident": "gr_beach",
       "Tags": null,
       "Schema": 0,
-      "HasAssets": false,
-      "AssetsPath": null,
       "Resources": null,
-      "MenuResources": "*",
-      "HasCode": false,
-      "CodePath": null,
       "PackageReferences": [],
       "EditorReferences": [],
       "Metadata": {

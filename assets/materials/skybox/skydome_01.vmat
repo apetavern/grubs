@@ -7,7 +7,7 @@ Layer0
 	//---- Rendering ----
 	F_DO_NOT_CAST_SHADOWS 1
 
-	g_flFlowSpeed "0.500"
+	g_flFlowSpeed "0.750"
 	g_flFlowStrength "0.250"
 	g_vWind "[1.000 1.000 0.000]"
 	SkyTexture "textures/hdr/fs002_day_eqirect.exr"
