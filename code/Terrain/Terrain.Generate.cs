@@ -7,6 +7,15 @@ public partial class GrubsTerrain
 	[Sync] public int WorldTextureHeight { get; set; } = 0;
 	[Sync] public int WorldTextureLength { get; set; } = 0;
 
+	private void ResetTerrain()
+	{
+		WorldTextureLength = 0;
+		WorldTextureHeight = 0;
+
+		SdfWorld?.ClearAsync();
+		SetupGeneratedWorld();
+	}
+
 	private void SetupGeneratedWorld()
 	{
 		var cfg = new MaterialsConfig( true, true );
@@ -182,5 +191,14 @@ public partial class GrubsTerrain
 	private float GetNoise( int x, int y )
 	{
 		return amplitude * Noise.Perlin( x * frequency, y * frequency );
+	}
+
+	[ConCmd( "gr_regen_terrain" )]
+	public static void RegenerateTerrain()
+	{
+		if ( !Game.IsEditor && !Networking.IsHost )
+			return;
+
+		Instance.ResetTerrain();
 	}
 }
