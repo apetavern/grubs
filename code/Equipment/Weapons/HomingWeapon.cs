@@ -1,5 +1,6 @@
 using Sandbox;
 using Grubs.UI.Components;
+using Grubs.Pawn;
 
 namespace Grubs.Equipment.Weapons;
 
@@ -15,7 +16,18 @@ public sealed class HomingWeapon : Weapon
 		base.OnStart();
 
 		CursorModel.GameObject.SetParent( Scene );
-		CursorModel.Enabled = false;
+		CursorModel.GameObject.Enabled = Equipment.Deployed;
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		if ( IsProxy )
+			return;
+
+		Cursor.Enabled( "clicktool", Equipment.Deployed && ProjectileTarget == Vector3.Zero );
+		CursorModel.GameObject.Enabled = Equipment.Deployed;
 	}
 
 	protected override void HandleComplexFiringInput()
@@ -23,8 +35,6 @@ public sealed class HomingWeapon : Weapon
 		if ( IsProxy )
 			return;
 
-		Cursor.Enabled( "clicktool", Equipment.Deployed && ProjectileTarget == Vector3.Zero );
-		CursorModel.Enabled = Equipment.Deployed;
 
 		if ( !Equipment.Deployed )
 			return;
@@ -40,6 +50,12 @@ public sealed class HomingWeapon : Weapon
 		var isValidPlacement = CheckValidPlacement();
 		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
 
+		if ( Input.UsingController )
+		{
+			IsFiring = true;
+			GrubFollowCamera.Local.PanCamera();
+		}
+
 		if ( isValidPlacement && Input.Pressed( "fire" ) )
 		{
 			ProjectileTarget = CursorModel.Transform.Position;
@@ -47,6 +63,7 @@ public sealed class HomingWeapon : Weapon
 
 		if ( Input.Released( "fire" ) && ProjectileTarget != Vector3.Zero )
 		{
+			IsFiring = false;
 			FiringType = SecondaryFiringType;
 		}
 	}
@@ -54,7 +71,7 @@ public sealed class HomingWeapon : Weapon
 	public void ResetParameters()
 	{
 		ProjectileTarget = Vector3.Zero;
-		CursorModel.Enabled = false;
+		CursorModel.GameObject.Enabled = false;
 		FiringType = FiringType.Complex;
 	}
 

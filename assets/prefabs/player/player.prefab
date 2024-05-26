@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "84cebf38-fadf-4093-a2aa-3444ba6e76ef",
+    "__guid": "04b34d54-d835-49fd-a591-e55de5dcc3cc",
     "Flags": 0,
     "Name": "player",
     "Tags": "player",
@@ -10,22 +10,22 @@
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-        "__guid": "cdebe569-a416-4e53-9000-5bb6c8d45882",
+        "__guid": "d7e4b3eb-2934-462a-8eb4-5c406911efe6",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-          "component_id": "9248ad18-e88e-4267-a660-8b6946486f9b",
-          "go": "84cebf38-fadf-4093-a2aa-3444ba6e76ef",
+          "component_id": "874a44e1-fd29-46b7-a9fa-c56a52201ec2",
+          "go": "04b34d54-d835-49fd-a591-e55de5dcc3cc",
           "component_type": "PlayerInventory"
         },
         "MousePosition": "0,0,0"
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-        "__guid": "9248ad18-e88e-4267-a660-8b6946486f9b",
+        "__guid": "874a44e1-fd29-46b7-a9fa-c56a52201ec2",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -88,18 +88,22 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/dynamite/dynamite.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/bazooka_homing/bazooka_homing.prefab"
           }
         ],
         "Player": {
           "_type": "component",
-          "component_id": "cdebe569-a416-4e53-9000-5bb6c8d45882",
-          "go": "84cebf38-fadf-4093-a2aa-3444ba6e76ef",
+          "component_id": "d7e4b3eb-2934-462a-8eb4-5c406911efe6",
+          "go": "04b34d54-d835-49fd-a591-e55de5dcc3cc",
           "component_type": "Player"
         }
       },
       {
         "__type": "Sandbox.ScreenPanel",
-        "__guid": "5931a656-e9d9-4aed-af13-dc853c8a9cb3",
+        "__guid": "b243201d-2616-48b8-9aa7-dae635f2342d",
         "AutoScreenScale": true,
         "Opacity": 1,
         "Scale": 1,
@@ -107,18 +111,18 @@
       },
       {
         "__type": "Grubs.UI.Components.PlayerScreen",
-        "__guid": "41df5ada-a93a-43b0-b1d7-b10c6d52cc3b",
+        "__guid": "436b9559-f7e5-479a-b2d4-b520ee34a0be",
         "Inventory": {
           "_type": "component",
-          "component_id": "9248ad18-e88e-4267-a660-8b6946486f9b",
-          "go": "84cebf38-fadf-4093-a2aa-3444ba6e76ef",
+          "component_id": "874a44e1-fd29-46b7-a9fa-c56a52201ec2",
+          "go": "04b34d54-d835-49fd-a591-e55de5dcc3cc",
           "component_type": "PlayerInventory"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "a32a320f-a365-49e4-9cae-9ca7b4909302",
+        "__guid": "dbb2f4f5-7ce1-4ba2-a4d3-fc7b1984e36b",
         "Flags": 0,
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
@@ -127,7 +131,7 @@
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",
-            "__guid": "0b5ca345-f5ef-4e75-a9c0-e0364f0c623f",
+            "__guid": "1b3e3b19-f752-4b48-bfc7-e8a4e55c8a07",
             "AutoScreenScale": true,
             "Opacity": 1,
             "Scale": 1,
@@ -135,11 +139,11 @@
           },
           {
             "__type": "Grubs.UI.Components.PlayerScreen",
-            "__guid": "06e60b0d-fee5-4436-a369-d122a2c8586f",
+            "__guid": "6647fd0a-5584-4063-939f-1cf46f372b94",
             "Inventory": {
               "_type": "component",
-              "component_id": "9248ad18-e88e-4267-a660-8b6946486f9b",
-              "go": "84cebf38-fadf-4093-a2aa-3444ba6e76ef",
+              "component_id": "874a44e1-fd29-46b7-a9fa-c56a52201ec2",
+              "go": "04b34d54-d835-49fd-a591-e55de5dcc3cc",
               "component_type": "PlayerInventory"
             }
           }
