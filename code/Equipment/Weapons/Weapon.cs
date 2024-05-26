@@ -110,6 +110,21 @@ public partial class Weapon : Component
 		{
 			HandleComplexFiringInput();
 		}
+		else if ( FiringType is FiringType.Continuous )
+		{
+			if ( Input.Down( "fire" ) && TimesUsed < MaxUses && TimeSinceLastUsed > Cooldown )
+			{
+				IsFiring = true;
+
+				if ( OnFire is not null )
+					OnFire.Invoke( 100 );
+				else
+					FireImmediate();
+
+				TimeSinceLastUsed = 0;
+				FireFinished();
+			}
+		}
 	}
 
 	protected virtual void FireImmediate() { }

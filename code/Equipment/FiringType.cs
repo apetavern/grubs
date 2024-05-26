@@ -6,4 +6,5 @@ public enum FiringType
 	Charged,
 	Cursor,
 	Complex,
+	Continuous
 }
