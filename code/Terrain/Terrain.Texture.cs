@@ -12,6 +12,7 @@ public partial class GrubsTerrain
 
 	async void DoTextureLoad()
 	{
+		var LastTerrainGenerated = GrubsConfig.WorldTerrainTexture;
 		var mapSdfTexture = await Texture.LoadAsync( FileSystem.Mounted, "textures/texturelevels/" + GrubsConfig.WorldTerrainTexture + ".png" );
 		WorldTextureHeight = mapSdfTexture.Height * 2;
 		WorldTextureLength = mapSdfTexture.Width * 2;
@@ -33,5 +34,28 @@ public partial class GrubsTerrain
 
 		await SdfWorld.AddAsync( transformedSdf, materials.ElementAt( 1 ).Key );
 
+		while ( LastTerrainGenerated == GrubsConfig.WorldTerrainTexture )
+		{
+			await Task.DelaySeconds( 3f );
+		}
+
+		RegenerateTextureTerrain();
+	}
+
+	[ConCmd( "gr_reload_texture_terrain" )]
+	public static void RegenerateTextureTerrain()
+	{
+		if ( !Game.IsEditor && !Networking.IsHost )
+			return;
+
+		Instance.ResetTextureTerrain();
+	}
+
+	private async void ResetTextureTerrain()
+	{
+		await SdfWorld?.ClearAsync();
+		WorldTextureLength = 0;
+		WorldTextureHeight = 0;
+		SetupWorldFromTexture();
 	}
 }
