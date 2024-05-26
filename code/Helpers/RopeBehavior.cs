@@ -16,8 +16,6 @@ public sealed class RopeBehavior : Component
 
 	private GameObject AttachPoint { get; set; }
 
-	private List<Vector3> LastUpdateSent;
-
 	protected override void OnAwake()
 	{
 		if ( IsProxy )
