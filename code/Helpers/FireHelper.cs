@@ -1,5 +1,7 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Common;
+using Grubs.Pawn;
 using Grubs.Terrain;
+using Sandbox;
 using Sandbox.Utility;
 using System;
 using System.Collections.Generic;
@@ -26,6 +28,7 @@ public partial class FireHelper : Component
 	[Sync] public List<Vector3> fireParticlePositions { get; set; } = new List<Vector3>();
 	[Sync] public List<Vector3> fireParticleVelocities { get; set; } = new List<Vector3>();
 	[Sync] public List<float> fireParticleLifetimes { get; set; } = new List<float>();
+	[Sync] public List<float> lastDestructionTime { get; set; } = new List<float>();
 
 	[Property] private List<GameObject> fireObjects { get; set; } = new List<GameObject>();
 
@@ -64,6 +67,7 @@ public partial class FireHelper : Component
 				fireParticlePositions.RemoveAt( i );
 				fireParticleVelocities.RemoveAt( i );
 				fireParticleLifetimes.RemoveAt( i );
+				lastDestructionTime.RemoveAt( i );
 				fireObjects[i].Destroy();
 				fireObjects.RemoveAt( i );
 				break;
@@ -84,12 +88,7 @@ public partial class FireHelper : Component
 			fireParticleVelocities[particle] *= 0.95f;
 		}
 
-		var gos = Scene.FindInPhysics( new Sphere( fireParticlePositions[particle], 10f ) );
-		foreach ( var go in gos )
-		{
-			if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
-				HandleGrubExplosion( grub, fireParticlePositions[particle] );
-		}
+
 
 		fireParticleVelocities[particle] += Vector3.Down;
 
@@ -105,19 +104,36 @@ public partial class FireHelper : Component
 
 			fireParticleVelocities[particle] += new Vector3( Game.Random.Float( -10f, 10f ), 0, 0 );
 
-			var startPos = fireParticlePositions[particle];
-
-			var TorchSize = 6f;
-
-			var endPos = fireParticlePositions[particle] + fireParticleVelocities[particle].Normal * TorchSize;
-
-			using ( Rpc.FilterInclude( c => c.IsHost ) )
+			if ( (Time.Now - lastDestructionTime[particle]) > 0.25f )
 			{
-				GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
-					new Vector2( endPos.x, endPos.z ), TorchSize, 1 );
-				GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
-					new Vector2( endPos.x, endPos.z ),
-					TorchSize + 8f );
+				var gos = Scene.FindInPhysics( new Sphere( fireParticlePositions[particle], 10f ) );
+				foreach ( var go in gos )
+				{
+					if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
+						HandleGrubExplosion( grub, fireParticlePositions[particle] );
+
+					if ( !go.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
+						continue;
+
+					health.TakeDamage( GrubsDamageInfo.FromFire( 0.5f, worldPosition: fireParticlePositions[particle] ) );
+				}
+
+				var startPos = fireParticlePositions[particle];
+
+				var TorchSize = 6f;
+
+				var endPos = fireParticlePositions[particle] + fireParticleVelocities[particle].Normal * TorchSize;
+
+				using ( Rpc.FilterInclude( c => c.IsHost ) )
+				{
+					GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
+						new Vector2( endPos.x, endPos.z ), TorchSize, 1 );
+					GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
+						new Vector2( endPos.x, endPos.z ),
+						TorchSize + 8f );
+				}
+
+				lastDestructionTime[particle] = Time.Now;
 			}
 		}
 	}
@@ -139,6 +155,7 @@ public partial class FireHelper : Component
 		fireParticlePositions.Add( particle.Position );
 		fireParticleVelocities.Add( particle.Velocity );
 		fireParticleLifetimes.Add( 0f );
+		lastDestructionTime.Add( Time.Now - 1f );
 	}
 }
 
