@@ -50,7 +50,8 @@ public partial class FireHelper : Component
 
 		for ( int i = 0; i < fireObjects.Count; i++ )
 		{
-			fireObjects[i].Transform.Position = Vector3.Lerp( fireObjects[i].Transform.Position, fireParticlePositions[i], Time.Delta * Vector3.DistanceBetween( fireObjects[i].Transform.Position, fireParticlePositions[i] ) );
+			if ( fireParticlePositions.Count >= fireObjects.Count )
+				fireObjects[i].Transform.Position = Vector3.Lerp( fireObjects[i].Transform.Position, fireParticlePositions[i], Time.Delta * Vector3.DistanceBetween( fireObjects[i].Transform.Position, fireParticlePositions[i] ) );
 		}
 
 		if ( IsProxy ) return;
