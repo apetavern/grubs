@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "9be97861-a60c-4503-9480-417748d3d5d8",
+    "__guid": "ef074418-d097-499b-b232-69e98b0eb0fb",
     "Flags": 0,
     "Name": "player",
     "Tags": "player",
@@ -10,22 +10,22 @@
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
-        "__guid": "0f4c424e-b2e2-4257-999a-d632af98222d",
+        "__guid": "1b5a5ffe-0f67-4b23-a4b3-a33a9055c5c7",
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
         },
         "Inventory": {
           "_type": "component",
-          "component_id": "7d96f3e8-8675-4027-a7d5-c1a94310e07e",
-          "go": "9be97861-a60c-4503-9480-417748d3d5d8",
+          "component_id": "59f13fd5-042e-4f12-9510-62190f8b45b6",
+          "go": "ef074418-d097-499b-b232-69e98b0eb0fb",
           "component_type": "PlayerInventory"
         },
         "MousePosition": "0,0,0"
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
-        "__guid": "7d96f3e8-8675-4027-a7d5-c1a94310e07e",
+        "__guid": "59f13fd5-042e-4f12-9510-62190f8b45b6",
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -100,18 +100,22 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/flamethrower/flamethrower.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/torch/torch.prefab"
           }
         ],
         "Player": {
           "_type": "component",
-          "component_id": "0f4c424e-b2e2-4257-999a-d632af98222d",
-          "go": "9be97861-a60c-4503-9480-417748d3d5d8",
+          "component_id": "1b5a5ffe-0f67-4b23-a4b3-a33a9055c5c7",
+          "go": "ef074418-d097-499b-b232-69e98b0eb0fb",
           "component_type": "Player"
         }
       },
       {
         "__type": "Sandbox.ScreenPanel",
-        "__guid": "48e4982e-c24c-4697-83d4-5269721c31cb",
+        "__guid": "fc41fe9e-2859-4cd5-8bf2-060f9a91fbba",
         "AutoScreenScale": true,
         "Opacity": 1,
         "Scale": 1,
@@ -119,18 +123,18 @@
       },
       {
         "__type": "Grubs.UI.Components.PlayerScreen",
-        "__guid": "e1676c86-81f6-4c29-bb43-c1b3b12281ee",
+        "__guid": "88ac9340-c32b-4717-a381-7c2883692242",
         "Inventory": {
           "_type": "component",
-          "component_id": "7d96f3e8-8675-4027-a7d5-c1a94310e07e",
-          "go": "9be97861-a60c-4503-9480-417748d3d5d8",
+          "component_id": "59f13fd5-042e-4f12-9510-62190f8b45b6",
+          "go": "ef074418-d097-499b-b232-69e98b0eb0fb",
           "component_type": "PlayerInventory"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "dee1bbe9-658f-4a53-bb65-23449a84133d",
+        "__guid": "da2850bd-3887-49d0-a554-e235e753f481",
         "Flags": 0,
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
@@ -139,7 +143,7 @@
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",
-            "__guid": "6aedc535-a92d-47c4-aca2-2adcf1f7b25e",
+            "__guid": "ecf21f72-a672-4dfe-8c59-3a43c306b5df",
             "AutoScreenScale": true,
             "Opacity": 1,
             "Scale": 1,
@@ -147,11 +151,11 @@
           },
           {
             "__type": "Grubs.UI.Components.PlayerScreen",
-            "__guid": "1f869e20-bb36-4cdc-820d-80ee5311bb0f",
+            "__guid": "080cd1dd-89bf-4a96-a693-d0b9f8f38294",
             "Inventory": {
               "_type": "component",
-              "component_id": "7d96f3e8-8675-4027-a7d5-c1a94310e07e",
-              "go": "9be97861-a60c-4503-9480-417748d3d5d8",
+              "component_id": "59f13fd5-042e-4f12-9510-62190f8b45b6",
+              "go": "ef074418-d097-499b-b232-69e98b0eb0fb",
               "component_type": "PlayerInventory"
             }
           }
