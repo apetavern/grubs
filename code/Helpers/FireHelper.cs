@@ -134,6 +134,8 @@ public partial class FireHelper : Component
 	[Broadcast]
 	public void CreateFire( FireParticle particle )
 	{
+		if ( IsProxy ) return;
+
 		fireParticlePositions.Add( particle.Position );
 		fireParticleVelocities.Add( particle.Velocity );
 		fireParticleLifetimes.Add( 0f );
