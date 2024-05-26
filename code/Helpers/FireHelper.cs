@@ -115,7 +115,7 @@ public partial class FireHelper : Component
 					if ( !go.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 						continue;
 
-					health.TakeDamage( GrubsDamageInfo.FromFire( 0.5f, worldPosition: fireParticlePositions[particle] ) );
+					health.TakeDamage( GrubsDamageInfo.FromFire( 0.75f, worldPosition: fireParticlePositions[particle] ) );
 				}
 
 				var startPos = fireParticlePositions[particle];
