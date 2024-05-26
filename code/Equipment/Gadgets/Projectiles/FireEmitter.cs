@@ -58,7 +58,7 @@ internal class FireEmitter : Component
 			FireParticle particle = new FireParticle()
 			{
 				Position = Transform.Position,
-				Velocity = (new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0, InitialUpVelocity ) * Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity
+				Velocity = (new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0, InitialUpVelocity + (Game.Random.Float( -InitialUpVelocity, InitialUpVelocity ) / 3f) ) * Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity
 			};
 			FireHelper.Local.CreateFire( particle );
 		}
