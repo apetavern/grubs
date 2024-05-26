@@ -1,4 +1,5 @@
 ﻿using Grubs.Helpers;
+using Grubs.Equipment.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,18 @@ internal class FireEmitter : Component
 
 	[Property] private float LeftRightVelocityRandom { get; set; } = 200f;
 
+	[Property] public Weapon Weapon { get; set; }
+
 	protected override void OnStart()
 	{
-		Projectile.ProjectileExploded += SpawnFire;
+		if ( Projectile != null )
+			Projectile.ProjectileExploded += SpawnFire;
+
+		if ( Weapon != null )
+			Weapon.OnFire += SpawnFire;
 	}
+
+
 
 	public void SpawnFire()
 	{
@@ -50,6 +59,19 @@ internal class FireEmitter : Component
 			{
 				Position = Transform.Position,
 				Velocity = (new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0, InitialUpVelocity ) * Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity
+			};
+			FireHelper.Local.CreateFire( particle );
+		}
+	}
+
+	public void SpawnFire( int charge )
+	{
+		for ( int i = 0; i < FireParticleCount; i++ )
+		{
+			FireParticle particle = new FireParticle()
+			{
+				Position = Weapon.GetStartPosition(),
+				Velocity = new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0, InitialUpVelocity ) * Weapon.Equipment.Grub.PlayerController.LookAngles.ToRotation() * Rotation.FromPitch( 90 * Weapon.Equipment.Grub.PlayerController.Facing )
 			};
 			FireHelper.Local.CreateFire( particle );
 		}
