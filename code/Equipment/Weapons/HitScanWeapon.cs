@@ -123,6 +123,11 @@ public class HitScanWeapon : Weapon
 			HitGrub( grub, -tr.Normal, tr.HitPosition );
 			return false;
 		}
+		else if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
+		{
+			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.GameObject, GameObject, tr.HitPosition ) );
+			return false;
+		}
 
 		ExplosionHelper.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage );
 		return true;
