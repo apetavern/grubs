@@ -92,6 +92,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/bazooka_homing/bazooka_homing.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb.prefab"
           }
         ],
         "Player": {

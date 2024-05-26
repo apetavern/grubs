@@ -1,5 +1,5 @@
 {
-  "__guid": "4150dd9f-3287-4d4d-afcb-1128e0ef7a84",
+  "__guid": "95a1e213-ec09-4538-899a-2ed948d5b3ca",
   "GameObjects": [
     {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
@@ -290,6 +290,28 @@
           "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
         }
       ]
+    },
+    {
+      "__guid": "3e153c9f-09c3-4a47-94f8-8fe79eede41c",
+      "Flags": 0,
+      "Name": "FireHelper",
+      "Position": "-186.723,289.1578,410.2911",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Grubs.Helpers.FireHelper",
+          "__guid": "2ab9dd8e-df13-453f-96f9-563b3b82627c",
+          "fireLifetime": 5,
+          "FireObjectPrefab": {
+            "_type": "gameobject",
+            "prefab": "particles/fire/fireobject.prefab"
+          },
+          "fireObjects": [],
+          "minParticleSpeed": 100
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -315,7 +337,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-25T23:57:12.8983596\u002B01:00",
+  "LastSaved": "2024-05-26T12:28:00.9200628\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

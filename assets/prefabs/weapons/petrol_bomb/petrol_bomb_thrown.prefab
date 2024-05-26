@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "4b299fef-5510-4ae7-9eee-6f9f15a99a47",
+    "__guid": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
     "Flags": 0,
     "Name": "petrol_bomb_thrown",
     "Tags": "projectile",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "70472bbf-1d15-4616-90d2-1628bdf0d2a2",
+        "__guid": "49596533-8b12-460c-a5a3-e65e436be5ef",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": true,
         "Model": "models/weapons/petrolbomb/petrolbomb.vmdl",
@@ -19,7 +19,7 @@
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "ed9b7d0e-c615-43b2-a37e-f62356081a23",
+        "__guid": "149ca999-e74b-40c0-9bd5-e8b1992c42d3",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -28,7 +28,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "dfe96077-a82f-4e81-af78-c56e78816fa6",
+        "__guid": "810b1326-acbe-4645-a724-ee30ac270c1c",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -44,7 +44,7 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "bc9e345b-012e-422f-ad8c-7b90cd9166fa",
+        "__guid": "aad53fb2-db3f-401b-93f5-3724f3162678",
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 8,
@@ -52,44 +52,57 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "88e332d6-8a5f-4bf4-ac8d-51445ff44eda",
+        "__guid": "14d3fab3-5a11-4dbe-9332-1ba7ec4cbcae",
         "MaxHealth": 80
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "d913ec18-ffc3-440f-83bd-2d3c44eafe97",
+        "__guid": "4d988071-27de-429f-8cb8-32823c8b48d5",
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": true,
         "ExplodeOnDeath": true,
-        "ExplosionDamage": 50,
-        "ExplosionRadius": 100,
+        "ExplosionDamage": 10,
+        "ExplosionRadius": 40,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
         "Particles": "particles/explosion/grubs_explosion_base.vpcf"
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "b0130d9c-9c6e-43aa-9c2e-c4924606cabd",
+        "__guid": "8a5e3f38-5e6b-42f4-bc1c-2c81aa1c4be2",
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "70472bbf-1d15-4616-90d2-1628bdf0d2a2",
-          "go": "4b299fef-5510-4ae7-9eee-6f9f15a99a47",
+          "component_id": "49596533-8b12-460c-a5a3-e65e436be5ef",
+          "go": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "dfe96077-a82f-4e81-af78-c56e78816fa6",
-          "go": "4b299fef-5510-4ae7-9eee-6f9f15a99a47",
+          "component_id": "810b1326-acbe-4645-a724-ee30ac270c1c",
+          "go": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 500,
         "SetPositionOnStart": true
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
+        "__guid": "d52d601e-bc1f-4b8c-a244-e251a1d91bfe",
+        "FireParticleCount": 20,
+        "InitialUpVelocity": 25,
+        "LeftRightVelocityRandom": 25,
+        "Projectile": {
+          "_type": "component",
+          "component_id": "4d988071-27de-429f-8cb8-32823c8b48d5",
+          "go": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
+          "component_type": "ExplosiveProjectile"
+        }
       }
     ],
     "Children": [
       {
-        "__guid": "3ea9c60d-36b6-4236-95a3-32dd3856671a",
+        "__guid": "08a82cbe-31d2-4068-9378-04fd3fdcb5fc",
         "Flags": 4,
         "Name": "hold_L",
         "Enabled": true,
@@ -97,7 +110,7 @@
         "NetworkInterpolation": true
       },
       {
-        "__guid": "c9a5616f-4d81-4c60-bc7f-7a96532b730e",
+        "__guid": "2bd9421e-5a74-43b2-b8d1-726ecc9fdb21",
         "Flags": 4,
         "Name": "rag_start",
         "Position": "-0.04983139,0.000002974906,14.12584",
@@ -107,7 +120,7 @@
         "NetworkInterpolation": true,
         "Children": [
           {
-            "__guid": "ab3d0cb8-5c6a-4a70-a860-08be2b33fe49",
+            "__guid": "d7c650a0-a2c6-4068-bf15-08a02fe51ab2",
             "Flags": 4,
             "Name": "rag_pivot",
             "Position": "3.724562,-0.0000004768372,0.000004080904",
@@ -117,7 +130,7 @@
             "NetworkInterpolation": true,
             "Children": [
               {
-                "__guid": "5a68e318-ed9b-42e0-a760-8933179cabcd",
+                "__guid": "ae7c0bcd-0e4d-4cd7-8e79-074ae5a8b86a",
                 "Flags": 4,
                 "Name": "rag_end",
                 "Position": "8.603102,-0.00001144409,-0.000002635079",

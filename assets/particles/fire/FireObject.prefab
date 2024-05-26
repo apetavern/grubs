@@ -1,0 +1,49 @@
+{
+  "RootObject": {
+    "__guid": "2479844d-91df-4d30-8d9f-9b852d7212de",
+    "Flags": 0,
+    "Name": "fireobject",
+    "Tags": "particles",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.LegacyParticleSystem",
+        "__guid": "deb3af27-fc80-43ef-8166-0d378d239e67",
+        "ControlPoints": [],
+        "Looped": true,
+        "Particles": "particles/fire/fire_simple.vpcf",
+        "PlaybackSpeed": 1
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "5d17ecf8-0c5a-423b-8714-6fdf13cb0066",
+        "Flags": 0,
+        "Name": "flame_mesh",
+        "Position": "0,0,-5.835806",
+        "Scale": "0.6548494,0.6548494,0.6548494",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "6d3c5a9d-1fdf-44c7-8f2e-32f491048b41",
+            "BodyGroups": 18446744073709551615,
+            "Model": "particles/fire/flame_mesh.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

@@ -7,13 +7,14 @@ namespace Grubs.Equipment.Gadgets.Projectiles;
 public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionListener
 {
 	[Property] private float ExplosionDamage { get; set; } = 50f;
-	[Property] private float ExplosionRadius { get; set; } = 100f;
+	[Property] public float ExplosionRadius { get; set; } = 100f;
 	[Property] public bool ExplodeOnCollision { get; set; } = false;
 	[Property] public bool DeleteOnExplode { get; set; } = true;
 	[Property] public bool ExplodeOnDeath { get; set; } = true;
 	[Property, Sync] public float ExplodeAfter { get; set; } = 4.0f;
 	[Property, ResourceType( "sound" )] private string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] private ParticleSystem Particles { get; set; }
+
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
 

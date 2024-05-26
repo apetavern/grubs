@@ -115,7 +115,7 @@
             }
           ],
           "Defaults": {
-            "$4._value": {
+            "$3._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb_thrown.prefab"
             }
