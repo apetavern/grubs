@@ -49,6 +49,11 @@ public sealed class GrubsDamageInfo
 		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "explosion" );
 	}
 
+	public static GrubsDamageInfo FromFire( float damage, GameObject attacker = null, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
+	{
+		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "fire" );
+	}
+
 	public static GrubsDamageInfo FromKillZone( float damage )
 	{
 		return new GrubsDamageInfo( damage ).WithTag( "killzone" );
