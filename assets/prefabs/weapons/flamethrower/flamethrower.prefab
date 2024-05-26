@@ -1,0 +1,73 @@
+{
+  "RootObject": {
+    "__guid": "0fa26295-8d9e-49b7-8cf8-2bad04a4af25",
+    "Flags": 0,
+    "Name": "flamethrower",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "bc741a77-d56c-41c4-9c75-6d27a96b3c38",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/flamethrower/flamethrower.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "20e058a8-9149-4d99-bf31-961403883ec9",
+        "CameraCanZoom": true,
+        "Data": "resources/equipment/weapons/flamethrower.geq",
+        "HoldPose": "Uzi",
+        "Icon": "models/weapons/flamethrower/flamethrower.vmdl.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "bc741a77-d56c-41c4-9c75-6d27a96b3c38",
+          "go": "0fa26295-8d9e-49b7-8cf8-2bad04a4af25",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Flamethrower",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.Weapon",
+        "__guid": "6c98ce4a-6652-40cd-ad84-165bc1e83c97",
+        "CanFireWhileMoving": true,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 0.025,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "20e058a8-9149-4d99-bf31-961403883ec9",
+          "go": "0fa26295-8d9e-49b7-8cf8-2bad04a4af25",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Continuous",
+        "MaxUses": 75
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
+        "__guid": "26868f20-75cf-4ff8-ae09-1bae57ee6d3e",
+        "FireParticleCount": 1,
+        "InitialUpVelocity": 75,
+        "LeftRightVelocityRandom": 10,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "6c98ce4a-6652-40cd-ad84-165bc1e83c97",
+          "go": "0fa26295-8d9e-49b7-8cf8-2bad04a4af25",
+          "component_type": "Weapon"
+        }
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

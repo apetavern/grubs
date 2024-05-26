@@ -1,0 +1,11 @@
+{
+  "Name": "Flamethrower",
+  "Description": "Burn baby burn!",
+  "Icon": "models/weapons/flamethrower/flamethrower.vmdl.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/flamethrower/flamethrower.prefab",
+  "DefaultAmmo": 2,
+  "DropChance": 2,
+  "__references": [],
+  "__version": 0
+}
