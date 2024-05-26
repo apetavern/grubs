@@ -20,7 +20,6 @@
 					{
 						m_id = 109870928
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "in_hand"
@@ -42,7 +41,6 @@
 					{
 						m_id = 300264457
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "eyes_open"
 					m_nFrameIndex = 0
@@ -63,7 +61,6 @@
 					{
 						m_id = 438719140
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -92,7 +89,6 @@
 					{
 						m_id = 470823173
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -210,7 +206,6 @@
 					{
 						m_id = 493932122
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_weightListName = "eyes"
 					m_inputConnection1 = 
@@ -264,7 +259,6 @@
 					{
 						m_id = 796862351
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_children = 
 					[
@@ -325,7 +319,6 @@
 					{
 						m_id = 1080100682
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_sequenceName = "eyes_closed"
 					m_nFrameIndex = 0
@@ -346,7 +339,6 @@
 					{
 						m_id = 1113556770
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "land"
@@ -368,7 +360,6 @@
 					{
 						m_id = 1177482861
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "midair"
@@ -390,7 +381,6 @@
 					{
 						m_id = 1304134822
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "hop_start"
@@ -412,7 +402,6 @@
 					{
 						m_id = 1623912704
 					}
-					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_states = 
 					[
@@ -444,7 +433,7 @@
 											m_bIsFinished = true
 										},
 									]
-									m_blendDuration = 0.3
+									m_blendDuration = 0.1
 									m_destState = 
 									{
 										m_id = 729978123
@@ -511,7 +500,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.1
+									m_blendDuration = 0.01
 									m_destState = 
 									{
 										m_id = 1259833012
@@ -578,7 +567,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.25
+									m_blendDuration = 0.1
 									m_destState = 
 									{
 										m_id = 1762390241
@@ -643,10 +632,8 @@
 					m_id = 409466365
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = false
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
-				m_bPredicted = true
 				m_bDefaultValue = false
 			},
 			{
@@ -657,10 +644,8 @@
 					m_id = 1880019402
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
-				m_bNetwork = false
 				m_bUseMostRecentValue = false
-				m_bAutoReset = false
-				m_bPredicted = true
+				m_bAutoReset = true
 				m_bDefaultValue = false
 			},
 		]
@@ -695,8 +680,6 @@
 			},
 			{
 				_class = "CAnimGraphNetworkSettings"
-				m_bNetworkingEnabled = true
-				m_defaultNetworkMode = "ServerAuthoritative"
 			},
 		]
 	}
@@ -710,4 +693,11 @@
 		"models/weapons/goat/goat.vmdl",
 	]
 	m_boneMergeModels = [  ]
+	m_cameraSettings = 
+	{
+		m_flFov = 60.0
+		m_sLockBoneName = "hold_L"
+		m_bLockCamera = false
+		m_bViewModelCamera = false
+	}
 }

@@ -1,0 +1,85 @@
+{
+  "RootObject": {
+    "__guid": "c4f34839-afb2-43ac-92f7-299a384392c7",
+    "Flags": 0,
+    "Name": "goat_thrown",
+    "Tags": "notarget,projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "7c34cab1-2eff-4a94-a814-7607013dc0fd",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/goat/goat.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "61328174-d94b-4475-9a64-56e25636bdcf",
+        "AngularDamping": 0.1,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "Y": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 25,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "83b937dc-646c-493c-9569-04bece250f6e",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 10,
+        "ExplodeOnCollision": false,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 75,
+        "ExplosionRadius": 150,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.GoatProjectile",
+        "__guid": "8f7cdaac-bf59-4891-9066-7d20b8d50953",
+        "Droppable": true,
+        "Model": {
+          "_type": "component",
+          "component_id": "7c34cab1-2eff-4a94-a814-7607013dc0fd",
+          "go": "c4f34839-afb2-43ac-92f7-299a384392c7",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "61328174-d94b-4475-9a64-56e25636bdcf",
+          "go": "c4f34839-afb2-43ac-92f7-299a384392c7",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 500,
+        "SetPositionOnStart": true
+      },
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "d261dd7d-ce4b-4f7d-8341-da09cbf224dd",
+        "Center": "0,0,10",
+        "IsTrigger": false,
+        "Radius": 10,
+        "Static": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
