@@ -4,7 +4,7 @@ namespace Grubs.Equipment.Gadgets.Ground;
 public class LandmineUtility : Component
 {
 	[Property] public GameObject LandminePrefab { get; set; }
-
+	[Property] public GameObject OildrumPrefab { get; set; }
 	public static LandmineUtility Instance { get; set; }
 
 	public LandmineUtility()
@@ -14,7 +14,8 @@ public class LandmineUtility : Component
 
 	public GameObject Spawn( Vector3 position )
 	{
-		var go = LandminePrefab.Clone();
+
+		var go = Game.Random.Float() > 0.7f ? OildrumPrefab.Clone() : LandminePrefab.Clone();
 		go.Transform.Position = position.WithY( 512f );
 		go.NetworkSpawn();
 

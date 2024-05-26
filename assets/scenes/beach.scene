@@ -111,6 +111,10 @@
           "LandminePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
+          },
+          "OildrumPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/oildrum.prefab"
           }
         }
       ]
@@ -337,7 +341,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-26T12:28:00.9200628\u002B02:00",
+  "LastSaved": "2024-05-26T15:48:36.7724265\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
