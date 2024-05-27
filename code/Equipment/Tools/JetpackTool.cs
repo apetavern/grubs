@@ -5,11 +5,11 @@ namespace Grubs.Equipment.Tools;
 
 public sealed class JetpackTool : Tool
 {
-	private float _jetpackDir { get; set; }
+	private float _jetpackDir;
 
 	[Property] private float MaxJetFuel { get; set; } = 10f;
 
-	private float _currentJetFuel { get; set; }
+	private float _currentJetFuel;
 
 	public override void OnHolster()
 	{
@@ -42,9 +42,9 @@ public sealed class JetpackTool : Tool
 
 	[Property] public GameObject UDFlame2 { get; set; }
 
-	[Sync] private float _fbFlameScale { get; set; }
+	[Sync] private float ForwardBackFlameScale { get; set; }
 
-	[Sync] private float _udFlameScale { get; set; }
+	[Sync] private float UpDownFlameScale { get; set; }
 
 	public void AnimateFlames()
 	{
@@ -54,28 +54,28 @@ public sealed class JetpackTool : Tool
 		UDFlame1.Enabled = true;
 		UDFlame2.Enabled = true;
 
-		Transform Middle_Flame = Equipment.Model.GetAttachment( "jet_middle" ).Value;
-		Transform Left_Flame = Equipment.Model.GetAttachment( "jet_left" ).Value;
-		Transform Right_Flame = Equipment.Model.GetAttachment( "jet_right" ).Value;
+		var Middle_Flame = Equipment.Model.GetAttachment( "jet_middle" ).Value;
+		var Left_Flame = Equipment.Model.GetAttachment( "jet_left" ).Value;
+		var Right_Flame = Equipment.Model.GetAttachment( "jet_right" ).Value;
 
 		FBFlame.Transform.Position = Middle_Flame.Position + characterController.Velocity * Time.Delta;
 		FBFlame.Transform.Rotation = Middle_Flame.Rotation;
 
 		if ( !IsProxy )
 		{
-			_fbFlameScale = MathF.Abs( Equipment.Grub.PlayerController.MoveInput * 0.4f );
-			_udFlameScale = MathF.Abs( Equipment.Grub.PlayerController.LookInput * 0.4f );
+			ForwardBackFlameScale = MathF.Abs( Equipment.Grub.PlayerController.MoveInput * 0.4f );
+			UpDownFlameScale = MathF.Abs( Equipment.Grub.PlayerController.LookInput * 0.4f );
 		}
 
-		FBFlame.Transform.Scale = MathX.Lerp( FBFlame.Transform.Scale.x, _fbFlameScale, Time.Delta * 5f );
+		FBFlame.Transform.Scale = MathX.Lerp( FBFlame.Transform.Scale.x, ForwardBackFlameScale, Time.Delta * 5f );
 
 		UDFlame1.Transform.Position = Left_Flame.Position + characterController.Velocity / 100f;
 		UDFlame1.Transform.Rotation = Left_Flame.Rotation;
 		UDFlame2.Transform.Position = Right_Flame.Position + characterController.Velocity / 100f;
 		UDFlame2.Transform.Rotation = Right_Flame.Rotation;
 
-		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, _udFlameScale, Time.Delta * 5f );
-		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, _udFlameScale, Time.Delta * 5f );
+		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
+		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
 	}
 
 	protected override void OnUpdate()
