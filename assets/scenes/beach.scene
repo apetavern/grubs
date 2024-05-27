@@ -136,6 +136,28 @@
       ]
     },
     {
+      "__guid": "3e153c9f-09c3-4a47-94f8-8fe79eede41c",
+      "Flags": 0,
+      "Name": "Fire Helper",
+      "Position": "-186.723,289.1578,410.2911",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Grubs.Helpers.FireHelper",
+          "__guid": "2ab9dd8e-df13-453f-96f9-563b3b82627c",
+          "FireLifetime": 5,
+          "FireObjectPrefab": {
+            "_type": "gameobject",
+            "prefab": "particles/fire/fireobject.prefab"
+          },
+          "FireObjects": [],
+          "MinParticleSpeed": 100
+        }
+      ]
+    },
+    {
       "__guid": "08a72929-c2dd-4da0-b84d-fdca3b287389",
       "Flags": 0,
       "Name": "Terrain",
@@ -294,28 +316,6 @@
           "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
         }
       ]
-    },
-    {
-      "__guid": "3e153c9f-09c3-4a47-94f8-8fe79eede41c",
-      "Flags": 0,
-      "Name": "FireHelper",
-      "Position": "-186.723,289.1578,410.2911",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "NetworkInterpolation": true,
-      "Components": [
-        {
-          "__type": "Grubs.Helpers.FireHelper",
-          "__guid": "2ab9dd8e-df13-453f-96f9-563b3b82627c",
-          "fireLifetime": 5,
-          "FireObjectPrefab": {
-            "_type": "gameobject",
-            "prefab": "particles/fire/fireobject.prefab"
-          },
-          "fireObjects": [],
-          "minParticleSpeed": 100
-        }
-      ]
     }
   ],
   "SceneProperties": {
@@ -341,7 +341,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-26T15:48:36.7724265\u002B02:00",
+  "LastSaved": "2024-05-27T14:57:57.9934311-03:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
