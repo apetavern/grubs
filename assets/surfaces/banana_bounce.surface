@@ -1,0 +1,33 @@
+{
+  "BaseSurface": null,
+  "AudioSurface": "Generic",
+  "Description": null,
+  "Friction": 0.2,
+  "Elasticity": 1,
+  "Density": 1000,
+  "Thickness": -1,
+  "Dampening": 40,
+  "BounceThreshold": 0,
+  "ImpactEffects": {
+    "Regular": [],
+    "Bullet": [],
+    "BulletDecal": [],
+    "SoftParticles": [],
+    "SoftDecal": [],
+    "HardParticles": [],
+    "HardDecal": []
+  },
+  "ScrapeEffects": {
+    "RoughnessFactor": 0.25,
+    "RoughThreshold": 0.5
+  },
+  "Sounds": {
+    "FootLand": "sounds/weapons/banana/bounce.sound",
+    "ImpactHard": "sounds/weapons/banana/bounce.sound",
+    "ImpactSoft": "sounds/weapons/banana/bounce.sound"
+  },
+  "Breakables": {},
+  "Tags": null,
+  "__references": [],
+  "__version": 0
+}
