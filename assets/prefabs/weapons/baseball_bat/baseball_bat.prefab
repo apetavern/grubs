@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "b598c351-a05b-4fed-8582-2efa65dbac33",
+    "__guid": "93563e33-c6bf-49e5-a934-8e00eba8a455",
     "Flags": 0,
     "Name": "baseball_bat",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "432ee687-b094-4dbc-966b-eb3237cbf7db",
+        "__guid": "3cc193ce-6c13-4b85-ba16-4c85d6ab61c0",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/baseballbat/baseballbat.vmdl",
@@ -18,22 +18,24 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "bac691d4-8fdd-4bcd-83f9-271e1c81d5f7",
+        "__guid": "fe1f06cd-fb66-4eac-8b86-1727c533e2b7",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/baseball_bat.geq",
         "HoldPose": "Swing",
         "Icon": "models/weapons/baseballbat/baseballbat.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "432ee687-b094-4dbc-966b-eb3237cbf7db",
-          "go": "b598c351-a05b-4fed-8582-2efa65dbac33",
+          "component_id": "3cc193ce-6c13-4b85-ba16-4c85d6ab61c0",
+          "go": "93563e33-c6bf-49e5-a934-8e00eba8a455",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Baseball Bat",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.MeleeWeapon",
-        "__guid": "8b375957-7854-41db-aab7-d903679c27e0",
+        "__guid": "9ba29c19-9f1f-4e56-98da-589b72c1ad19",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -41,8 +43,8 @@
         "Damage": 40,
         "Equipment": {
           "_type": "component",
-          "component_id": "bac691d4-8fdd-4bcd-83f9-271e1c81d5f7",
-          "go": "b598c351-a05b-4fed-8582-2efa65dbac33",
+          "component_id": "fe1f06cd-fb66-4eac-8b86-1727c533e2b7",
+          "go": "93563e33-c6bf-49e5-a934-8e00eba8a455",
           "component_type": "Equipment"
         },
         "FiringType": "Instant",

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+    "__guid": "df97ce96-2fee-4166-954c-f25d2791039d",
     "Flags": 0,
     "Name": "ninja_rope",
     "Tags": "tool",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "edaa701d-1232-4719-8c30-2f26d016ca3b",
+        "__guid": "149075ff-76a3-4324-927e-9a945e243b3a",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/ninjarope/ninjarope.vmdl",
@@ -19,22 +19,22 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.NinjaRopeWeapon",
-        "__guid": "ae1a0c81-8bd5-428e-8464-fb84e67ab157",
+        "__guid": "f8b4345b-1255-4f92-9aa2-97127050c464",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": true,
         "CanSwapDuringUse": true,
         "Cooldown": 1,
         "Equipment": {
           "_type": "component",
-          "component_id": "401a6f53-9dac-4e31-b629-e40180598ee5",
-          "go": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+          "component_id": "324a34c5-e2f2-417a-bca9-7d1ab0e6df40",
+          "go": "df97ce96-2fee-4166-954c-f25d2791039d",
           "component_type": "Equipment"
         },
         "FiringType": "Complex",
         "MaxUses": 3,
         "OnFire": {
           "__version": 7,
-          "__guid": "65a1c3ba-e569-49c1-887e-60e26c1da52a",
+          "__guid": "500b46a9-12da-40d0-a36f-493abd75c6f6",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -109,17 +109,19 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "401a6f53-9dac-4e31-b629-e40180598ee5",
+        "__guid": "324a34c5-e2f2-417a-bca9-7d1ab0e6df40",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/tools/ninja_rope.geq",
         "HoldPose": "Uzi",
         "Icon": "models/tools/ninjarope/ninjarope.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "edaa701d-1232-4719-8c30-2f26d016ca3b",
-          "go": "e6ea7b0f-6682-4007-848d-0cc3c9a83976",
+          "component_id": "149075ff-76a3-4324-927e-9a945e243b3a",
+          "go": "df97ce96-2fee-4166-954c-f25d2791039d",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Ninja Rope",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       }
     ],

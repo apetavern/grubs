@@ -1,0 +1,66 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Equipment.Weapons
+@using Grubs.Pawn
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Utility
+
+@inherits PanelComponent
+
+<root>
+    <img src="materials/reticle/reticle.png"/>
+</root>
+
+@code
+{
+    [Property] public Grub Grub { get; set; }
+
+    protected override void OnStart()
+    {
+        Transform.Rotation = Transform.Rotation.RotateAroundAxis(Vector3.Up, 90f);
+    }
+
+    private bool IsShowing()
+    {
+        if (!GameObject.Root.Components.TryGet<Grub>(out var grub))
+            return false;
+
+        if (!grub.IsActive)
+            return false;
+
+        if (!grub.PlayerController.ShouldShowWeapon())
+            return false;
+
+        if (!grub.ActiveEquipment.IsValid())
+            return false;
+
+        if (!grub.ActiveEquipment.ShouldShowAimReticle)
+            return false;
+
+        return true;
+    }
+
+    protected override void OnUpdate()
+    {
+        var isShowing = IsShowing();
+        SetClass("hidden", !isShowing);
+
+        if (!isShowing)
+            return;
+
+        if (!Grub.ActiveEquipment.IsValid())
+            return;
+
+        if (!Grub.ActiveEquipment.Components.TryGet<Weapon>(out var weapon))
+            return;
+
+
+        var pos = weapon.GetMuzzlePosition().Position;
+        pos += weapon.GetMuzzleForward() * 40f;
+
+        Transform.Position = pos;
+        Transform.Position = Transform.Position.WithY(479f);
+        Transform.Rotation = Transform.Rotation.RotateAroundAxis(Vector3.Forward, 0.25f);
+    }
+}

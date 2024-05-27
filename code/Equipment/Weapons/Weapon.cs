@@ -189,7 +189,8 @@ public partial class Weapon : Component
 		if ( isDroppable )
 		{
 			// Perform a forward trace to find the position to drop the item
-			var dropTr = Scene.Trace.Ray( grub.EyePosition.Position, grub.EyePosition.Position + grub.Transform.Rotation.Forward * 25f )
+			var dropTr = Scene.Trace.Ray( grub.EyePosition.Position,
+					grub.EyePosition.Position + grub.Transform.Rotation.Forward * 25f )
 				.IgnoreGameObjectHierarchy( grub.GameObject )
 				.IgnoreGameObject( GameObject )
 				.Radius( 1f )
@@ -218,13 +219,13 @@ public partial class Weapon : Component
 		return tr.EndPosition.WithY( 512 );
 	}
 
-	protected Transform GetMuzzlePosition()
+	public Transform GetMuzzlePosition()
 	{
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		return muzzle ?? Equipment.Grub.EyePosition;
 	}
 
-	protected Vector3 GetMuzzleForward()
+	public Vector3 GetMuzzleForward()
 	{
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( muzzle is null )

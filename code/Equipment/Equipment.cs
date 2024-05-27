@@ -11,6 +11,8 @@ public class Equipment : Component
 	[Property] public HoldPose HoldPose { get; set; } = HoldPose.None;
 	[Property, ResourceType( "jpg" )] public string Icon { get; set; } = "";
 	[Property] public bool CameraCanZoom { get; set; } = true;
+	[Property] public bool ShouldShowAimReticle { get; set; } = false;
+
 	/// <summary>
 	/// Data from the GameResource for this Equipment.
 	/// </summary>

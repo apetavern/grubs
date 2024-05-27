@@ -83,7 +83,7 @@
           "go": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 500,
+        "ProjectileSpeed": 800,
         "SetPositionOnStart": true
       },
       {

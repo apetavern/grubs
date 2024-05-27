@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "f42495bc-0760-4755-ae2c-13ab609d0b40",
+    "__guid": "cc3eac01-c220-47e5-b3e4-4ac8e423a540",
     "Flags": 0,
     "Name": "petrol_bomb",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "25a3e0a0-b615-49af-8a82-532750e0ac41",
+        "__guid": "fbe58fbc-13a6-4def-95ed-7dc0caa3f608",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": true,
         "Model": "models/weapons/petrolbomb/petrolbomb.vmdl",
@@ -18,38 +18,39 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "aa2bb0de-5da5-498e-815d-52a0f206af2c",
+        "__guid": "5cc5c8ad-f426-420a-9c3a-fce6ae585300",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/petrol_bomb.geq",
         "HoldPose": "Throwable",
         "Icon": "models/weapons/petrolbomb/petrolbomb.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "25a3e0a0-b615-49af-8a82-532750e0ac41",
-          "go": "f42495bc-0760-4755-ae2c-13ab609d0b40",
+          "component_id": "fbe58fbc-13a6-4def-95ed-7dc0caa3f608",
+          "go": "cc3eac01-c220-47e5-b3e4-4ac8e423a540",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Petrol Bomb",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "daab6237-f582-42d3-b359-fec2ee5ed357",
+        "__guid": "3a059611-0329-4272-9810-cd42ebf75c2b",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "aa2bb0de-5da5-498e-815d-52a0f206af2c",
-          "go": "f42495bc-0760-4755-ae2c-13ab609d0b40",
+          "component_id": "5cc5c8ad-f426-420a-9c3a-fce6ae585300",
+          "go": "cc3eac01-c220-47e5-b3e4-4ac8e423a540",
           "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "a2b1736a-e4fd-404e-9bdb-1fc80c59008a",
+          "__guid": "b922f049-3427-435a-8f8b-1582f3d31a27",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -125,7 +126,7 @@
     ],
     "Children": [
       {
-        "__guid": "ed63f917-4734-43e1-857d-98b615e15818",
+        "__guid": "8900aa96-83ed-4fec-9c62-e3753ef8662b",
         "Flags": 4,
         "Name": "hold_L",
         "Enabled": true,
@@ -133,7 +134,7 @@
         "NetworkInterpolation": true
       },
       {
-        "__guid": "895f4750-b316-4bdc-bc7a-32926175af17",
+        "__guid": "0881bafa-a9f7-4571-81e2-3058f9e1d09f",
         "Flags": 4,
         "Name": "rag_start",
         "Position": "-0.04983139,0.000002974906,14.12584",
@@ -143,7 +144,7 @@
         "NetworkInterpolation": true,
         "Children": [
           {
-            "__guid": "4d268dff-3715-46da-99d1-c7d74e434e08",
+            "__guid": "8cb1efca-64ef-493a-ae32-8f6d94886f8d",
             "Flags": 4,
             "Name": "rag_pivot",
             "Position": "3.724562,-0.0000004768372,0.000004080904",
@@ -153,7 +154,7 @@
             "NetworkInterpolation": true,
             "Children": [
               {
-                "__guid": "edea5cde-fca3-4518-b6a6-328681616414",
+                "__guid": "62a53203-43b0-42ef-8dbd-eba368c6cc74",
                 "Flags": 4,
                 "Name": "rag_end",
                 "Position": "8.603102,-0.00001144409,-0.000002635079",
