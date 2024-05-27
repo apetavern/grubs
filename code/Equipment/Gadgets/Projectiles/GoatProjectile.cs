@@ -4,7 +4,7 @@
 public class GoatProjectile : Projectile, Component.ICollisionListener
 {
 	[Property] public bool Droppable { get; set; } = false;
-	[Property] public required Rigidbody PhysicsBody { get; set; }
+	[Property] public Rigidbody PhysicsBody { get; set; }
 	[Property] public bool SetPositionOnStart { get; set; } = true;
 
 	public override bool Resolved => PhysicsBody.Velocity.IsNearlyZero( 0.1f );
@@ -13,7 +13,6 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 	{
 		if ( Source is null )
 			return;
-
 
 		Transform.Position = Source.GetStartPosition( Droppable );
 

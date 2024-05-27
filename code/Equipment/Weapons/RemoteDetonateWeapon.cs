@@ -8,13 +8,13 @@ public sealed class RemoteDetonateWeapon : Weapon
 {
 	private ExplosiveProjectile Projectile { get; set; }
 
-	bool ProjectileExploded;
+	bool _projectileExploded;
 
 	protected override void HandleComplexFiringInput()
 	{
 		base.HandleComplexFiringInput();
 
-		if ( ProjectileExploded )
+		if ( _projectileExploded )
 		{
 			FireFinished();
 			return;
@@ -41,14 +41,14 @@ public sealed class RemoteDetonateWeapon : Weapon
 			else
 				FireImmediate();
 
-			Projectile.ProjectileExploded += () => ProjectileExploded = true;
+			Projectile.ProjectileExploded += () => _projectileExploded = true;
 		}
 	}
 
 	protected override void FireFinished()
 	{
 		base.FireFinished();
-		ProjectileExploded = false;
+		_projectileExploded = false;
 		Projectile = null;
 		ForceHideWeapon = false;
 	}
