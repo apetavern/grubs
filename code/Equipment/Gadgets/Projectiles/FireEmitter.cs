@@ -1,10 +1,5 @@
-﻿using Grubs.Helpers;
-using Grubs.Equipment.Weapons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Grubs.Equipment.Weapons;
+using Grubs.Helpers;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
 
@@ -54,9 +49,9 @@ internal class FireEmitter : Component
 			{
 				Position = Transform.Position,
 				Velocity = (new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0,
-					            InitialUpVelocity +
-					            (Game.Random.Float( -InitialUpVelocity, InitialUpVelocity ) / 3f) ) *
-				            Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity
+								InitialUpVelocity +
+								(Game.Random.Float( -InitialUpVelocity, InitialUpVelocity ) / 3f) ) *
+							Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity
 			};
 			FireHelper.Instance.CreateFire( particle );
 		}
