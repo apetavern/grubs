@@ -1,36 +1,28 @@
 ﻿using Grubs.Common;
 using Grubs.Pawn;
 using Grubs.Terrain;
-using Sandbox;
-using Sandbox.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Grubs.Helpers;
 
 [Title( "Grubs - Fire Helper" ), Category( "World" )]
-public partial class FireHelper : Component
+public sealed class FireHelper : Component
 {
-	public static FireHelper Local { get; set; }
+	public static FireHelper Instance { get; set; }
 
-	[Property] private float fireLifetime { get; set; } = 3f;
-
-	[Property] public float minParticleSpeed { get; set; } = 100f;
+	[Property] private float FireLifetime { get; set; } = 3f;
+	[Property] public float MinParticleSpeed { get; set; } = 100f;
 
 	public FireHelper()
 	{
-		Local = this;
+		Instance = this;
 	}
 
-	[Sync] public List<Vector3> fireParticlePositions { get; set; } = new List<Vector3>();
-	[Sync] public List<Vector3> fireParticleVelocities { get; set; } = new List<Vector3>();
-	[Sync] public List<float> fireParticleLifetimes { get; set; } = new List<float>();
-	[Sync] public List<float> lastDestructionTime { get; set; } = new List<float>();
+	[Sync] public List<Vector3> FireParticlePositions { get; set; } = new();
+	[Sync] public List<Vector3> FireParticleVelocities { get; set; } = new();
+	[Sync] public List<float> FireParticleLifetimes { get; set; } = new();
+	[Sync] public List<float> LastDestructionTime { get; set; } = new();
 
-	[Property] private List<GameObject> fireObjects { get; set; } = new List<GameObject>();
+	[Property] private List<GameObject> FireObjects { get; set; } = new();
 
 	[Property] private GameObject FireObjectPrefab { get; set; }
 
@@ -38,38 +30,40 @@ public partial class FireHelper : Component
 	{
 		base.OnUpdate();
 
-		if ( fireObjects.Count != fireParticlePositions.Count )
+		if ( FireObjects.Count != FireParticlePositions.Count )
 		{
-			if ( fireObjects.Count > fireParticlePositions.Count )
+			if ( FireObjects.Count > FireParticlePositions.Count )
 			{
-				fireObjects[0].Destroy();
-				fireObjects.RemoveAt( 0 );
+				FireObjects[0].Destroy();
+				FireObjects.RemoveAt( 0 );
 			}
 			else
 			{
-				fireObjects.Add( FireObjectPrefab.Clone() );
+				FireObjects.Add( FireObjectPrefab.Clone() );
 			}
 		}
 
-		for ( int i = 0; i < fireObjects.Count; i++ )
+		for ( var i = 0; i < FireObjects.Count; i++ )
 		{
-			if ( fireParticlePositions.Count >= fireObjects.Count )
-				fireObjects[i].Transform.Position = Vector3.Lerp( fireObjects[i].Transform.Position, fireParticlePositions[i], Time.Delta * Vector3.DistanceBetween( fireObjects[i].Transform.Position, fireParticlePositions[i] ) );
+			if ( FireParticlePositions.Count >= FireObjects.Count )
+				FireObjects[i].Transform.Position = Vector3.Lerp( FireObjects[i].Transform.Position,
+					FireParticlePositions[i],
+					Time.Delta *
+					Vector3.DistanceBetween( FireObjects[i].Transform.Position, FireParticlePositions[i] ) );
 		}
 
 		if ( IsProxy ) return;
 
-		for ( int i = 0; i < fireParticlePositions.Count; i++ )
+		for ( var i = 0; i < FireParticlePositions.Count; i++ )
 		{
-
-			if ( fireParticleLifetimes[i] > fireLifetime )
+			if ( FireParticleLifetimes[i] > FireLifetime )
 			{
-				fireParticlePositions.RemoveAt( i );
-				fireParticleVelocities.RemoveAt( i );
-				fireParticleLifetimes.RemoveAt( i );
-				lastDestructionTime.RemoveAt( i );
-				fireObjects[i].Destroy();
-				fireObjects.RemoveAt( i );
+				FireParticlePositions.RemoveAt( i );
+				FireParticleVelocities.RemoveAt( i );
+				FireParticleLifetimes.RemoveAt( i );
+				LastDestructionTime.RemoveAt( i );
+				FireObjects[i].Destroy();
+				FireObjects.RemoveAt( i );
 				break;
 			}
 
@@ -79,63 +73,55 @@ public partial class FireHelper : Component
 
 	public void ParticleTick( int particle )
 	{
-		fireParticleLifetimes[particle] += Time.Delta;
+		FireParticleLifetimes[particle] += Time.Delta;
+		FireParticlePositions[particle] += FireParticleVelocities[particle] * Time.Delta * 5f;
 
-		fireParticlePositions[particle] += fireParticleVelocities[particle] * Time.Delta * 5f;
+		if ( FireParticleVelocities[particle].Length > Instance.MinParticleSpeed )
+			FireParticleVelocities[particle] *= 0.95f;
 
-		if ( fireParticleVelocities[particle].Length > Local.minParticleSpeed )
+		FireParticleVelocities[particle] += Vector3.Down;
+
+		var tr = Scene.Trace.Ray( FireParticlePositions[particle],
+			FireParticlePositions[particle] + FireParticleVelocities[particle].Normal * 5f ).Run();
+
+		if ( !tr.Hit )
+			return;
+
+		FireParticleLifetimes[particle] += Time.Delta;
+		FireParticleVelocities[particle] = Vector3.Reflect( FireParticleVelocities[particle], tr.Normal );
+		FireParticleVelocities[particle] *= 0.1f;
+		FireParticleVelocities[particle] += new Vector3( Game.Random.Float( -10f, 10f ), 0, 0 );
+
+		if ( !(Time.Now - LastDestructionTime[particle] > 0.25f) )
+			return;
+
+		var gos = Scene.FindInPhysics( new Sphere( FireParticlePositions[particle], 10f ) );
+		foreach ( var go in gos )
 		{
-			fireParticleVelocities[particle] *= 0.95f;
+			if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
+				HandleGrubExplosion( grub, FireParticlePositions[particle] );
+
+			if ( !go.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
+				continue;
+
+			health.TakeDamage(
+				GrubsDamageInfo.FromFire( 0.75f, worldPosition: FireParticlePositions[particle] ) );
 		}
 
+		const float torchSize = 6f;
+		var startPos = FireParticlePositions[particle];
+		var endPos = FireParticlePositions[particle] + FireParticleVelocities[particle].Normal * torchSize;
 
-
-		fireParticleVelocities[particle] += Vector3.Down;
-
-		var tr = Scene.Trace.Ray( fireParticlePositions[particle], fireParticlePositions[particle] + fireParticleVelocities[particle].Normal * 5f ).Run();
-
-		if ( tr.Hit )
+		using ( Rpc.FilterInclude( c => c.IsHost ) )
 		{
-			fireParticleLifetimes[particle] += Time.Delta;
-
-			fireParticleVelocities[particle] = Vector3.Reflect( fireParticleVelocities[particle], tr.Normal );
-
-			fireParticleVelocities[particle] *= 0.1f;
-
-			fireParticleVelocities[particle] += new Vector3( Game.Random.Float( -10f, 10f ), 0, 0 );
-
-			if ( (Time.Now - lastDestructionTime[particle]) > 0.25f )
-			{
-				var gos = Scene.FindInPhysics( new Sphere( fireParticlePositions[particle], 10f ) );
-				foreach ( var go in gos )
-				{
-					if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
-						HandleGrubExplosion( grub, fireParticlePositions[particle] );
-
-					if ( !go.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
-						continue;
-
-					health.TakeDamage( GrubsDamageInfo.FromFire( 0.75f, worldPosition: fireParticlePositions[particle] ) );
-				}
-
-				var startPos = fireParticlePositions[particle];
-
-				var TorchSize = 6f;
-
-				var endPos = fireParticlePositions[particle] + fireParticleVelocities[particle].Normal * TorchSize;
-
-				using ( Rpc.FilterInclude( c => c.IsHost ) )
-				{
-					GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
-						new Vector2( endPos.x, endPos.z ), TorchSize, 1 );
-					GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
-						new Vector2( endPos.x, endPos.z ),
-						TorchSize + 8f );
-				}
-
-				lastDestructionTime[particle] = Time.Now;
-			}
+			GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
+				new Vector2( endPos.x, endPos.z ), torchSize, 1 );
+			GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
+				new Vector2( endPos.x, endPos.z ),
+				torchSize + 8f );
 		}
+
+		LastDestructionTime[particle] = Time.Now;
 	}
 
 	private void HandleGrubExplosion( Grub grub, Vector3 position )
@@ -152,10 +138,10 @@ public partial class FireHelper : Component
 	{
 		if ( IsProxy ) return;
 
-		fireParticlePositions.Add( particle.Position );
-		fireParticleVelocities.Add( particle.Velocity );
-		fireParticleLifetimes.Add( 0f );
-		lastDestructionTime.Add( Time.Now - 1f );
+		FireParticlePositions.Add( particle.Position );
+		FireParticleVelocities.Add( particle.Velocity );
+		FireParticleLifetimes.Add( 0f );
+		LastDestructionTime.Add( Time.Now - 1f );
 	}
 }
 

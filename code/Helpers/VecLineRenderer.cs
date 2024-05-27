@@ -1,5 +1,5 @@
-﻿
-namespace Grubs.Helpers;
+﻿namespace Grubs.Helpers;
+
 using System.Collections.Generic;
 using System.Linq;
 using global::Sandbox.Internal;
@@ -11,60 +11,42 @@ public sealed class VecLineRenderer : Component, Component.ExecuteInEditor
 {
 	private SceneLineObject _so;
 
-	[Group( "Points" )]
-	[Property]
-	[Sync]
+	[Group( "Points" ), Property, Sync]
 	public List<Vector3> Points { get; set; } = new List<Vector3>();
 
-	[Group( "Appearance" )]
-	[Property]
+	[Group( "Appearance" ), Property]
 	public Texture LineTexture { get; set; }
 
-	[Group( "Appearance" )]
-	[Property]
+	[Group( "Appearance" ), Property]
 	public Gradient Color { get; set; } = global::Color.Cyan;
 
 
-	[Group( "Appearance" )]
-	[Property]
+	[Group( "Appearance" ), Property]
 	public Curve Width { get; set; }
 
 
-	[Group( "Spline" )]
-	[Property]
-	[Range( 1f, 32f, 0.01f, true, true )]
+	[Group( "Spline" ), Property, Range( 1f, 32f )]
 	public int SplineInterpolation { get; set; }
 
-	[Group( "Spline" )]
-	[Property]
-	[Range( -1f, 1f, 0.01f, true, true )]
+	[Group( "Spline" ), Property, Range( -1f, 1f )]
 	public float SplineTension { get; set; }
 
-	[Group( "Spline" )]
-	[Property]
-	[Range( -1f, 1f, 0.01f, true, true )]
+	[Group( "Spline" ), Property, Range( -1f, 1f )]
 	public float SplineContinuity { get; set; }
 
-	[Group( "Spline" )]
-	[Property]
-	[Range( -1f, 1f, 0.01f, true, true )]
+	[Group( "Spline" ), Property, Range( -1f, 1f )]
 	public float SplineBias { get; set; }
 
-	[Group( "End Caps" )]
-	[Property]
+	[Group( "End Caps" ), Property]
 	public SceneLineObject.CapStyle StartCap { get; set; }
 
-	[Group( "End Caps" )]
-	[Property]
+	[Group( "End Caps" ), Property]
 	public SceneLineObject.CapStyle EndCap { get; set; }
 
-	[Group( "Rendering" )]
-	[Property]
+	[Group( "Rendering" ), Property]
 	public bool Wireframe { get; set; }
 
-	[Group( "Rendering" )]
-	[Property]
-	[DefaultValue( true )]
+	[Group( "Rendering" ), Property]
 	public bool Opaque { get; set; } = true;
 
 
