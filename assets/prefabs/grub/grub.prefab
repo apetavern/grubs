@@ -715,7 +715,7 @@
       {
         "__guid": "f00e7a1b-d845-4f7d-a7fc-e82f03500cb1",
         "Flags": 0,
-        "Name": "World UI",
+        "Name": "Grub Tag",
         "Enabled": true,
         "NetworkMode": 2,
         "NetworkInterpolation": true,
@@ -734,6 +734,37 @@
             "__type": "Grubs.UI.GrubTag",
             "__guid": "0be79712-4231-47d0-a805-2c943c8185c1",
             "Color": "0.51628,1,0.82264,1",
+            "Grub": {
+              "_type": "component",
+              "component_id": "6e406aea-99ec-4b52-93b0-744db969e120",
+              "go": "82c7df2e-f523-43e5-890c-6060650e6622",
+              "component_type": "Grub"
+            }
+          }
+        ]
+      },
+      {
+        "__guid": "ca12d54d-cb6d-447e-b5e5-346c075decbf",
+        "Flags": 0,
+        "Name": "Aim Reticle",
+        "Position": "111.0583,111.0583,-152.5602",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.WorldPanel",
+            "__guid": "222e9fe8-b5e0-419c-92f9-a43d2622ab6c",
+            "HorizontalAlign": "Center",
+            "InteractionRange": 1000,
+            "LookAtCamera": false,
+            "PanelSize": "512,512",
+            "RenderScale": 1,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "Grubs.UI.AimReticle",
+            "__guid": "4971daa5-afd4-433a-aeaf-695c5339a255",
             "Grub": {
               "_type": "component",
               "component_id": "6e406aea-99ec-4b52-93b0-744db969e120",

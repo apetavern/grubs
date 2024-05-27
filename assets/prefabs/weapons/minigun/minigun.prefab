@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "c419b745-35a8-4a7b-9d78-823d114a11fe",
+    "__guid": "246b5493-802f-44ef-9e7c-72ef2ba681aa",
     "Flags": 0,
     "Name": "minigun",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "cce66982-f457-41d0-bfa2-97e0ca9ce449",
+        "__guid": "37868ecc-0b06-44ee-af40-d5c05dc02afa",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/minigun/minigun.vmdl",
@@ -18,22 +18,24 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "c4660ecf-6cf8-4413-8219-fd0d70b03fdd",
+        "__guid": "745144b0-457f-45b1-b5af-853dc1b55b13",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/minigun.geq",
         "HoldPose": "Minigun",
         "Icon": "models/weapons/minigun/minigun.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "cce66982-f457-41d0-bfa2-97e0ca9ce449",
-          "go": "c419b745-35a8-4a7b-9d78-823d114a11fe",
+          "component_id": "37868ecc-0b06-44ee-af40-d5c05dc02afa",
+          "go": "246b5493-802f-44ef-9e7c-72ef2ba681aa",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Minigun",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
-        "__guid": "ed45ace8-4586-4a4a-9347-015cfbc932d8",
+        "__guid": "f58ffd81-acb1-4120-9014-0c932e4f930b",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -41,8 +43,8 @@
         "Damage": 3,
         "Equipment": {
           "_type": "component",
-          "component_id": "c4660ecf-6cf8-4413-8219-fd0d70b03fdd",
-          "go": "c419b745-35a8-4a7b-9d78-823d114a11fe",
+          "component_id": "745144b0-457f-45b1-b5af-853dc1b55b13",
+          "go": "246b5493-802f-44ef-9e7c-72ef2ba681aa",
           "component_type": "Equipment"
         },
         "ExplosionDamage": 2,

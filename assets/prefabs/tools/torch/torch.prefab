@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "2f34bcb2-69c5-4083-a6bb-36d7f8621285",
+    "__guid": "46056735-a7ef-4a79-9578-dc08172b41ab",
     "Flags": 0,
     "Name": "torch",
     "Tags": "tool",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "64e98805-dd86-4e4b-a531-21fb7fd85e5a",
+        "__guid": "c57d82bb-16a0-4955-ad3c-34e8df8f1e5a",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/blowtorch/blowtorch.vmdl",
@@ -19,37 +19,39 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "016a393b-9c04-4b0a-b2e2-a24f906209df",
+        "__guid": "595d1d52-688e-4d42-bfad-dfbf547817d3",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/tools/blowtorch.geq",
         "HoldPose": "Uzi",
         "Icon": "models/tools/blowtorch/blowtorch.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "64e98805-dd86-4e4b-a531-21fb7fd85e5a",
-          "go": "2f34bcb2-69c5-4083-a6bb-36d7f8621285",
+          "component_id": "c57d82bb-16a0-4955-ad3c-34e8df8f1e5a",
+          "go": "46056735-a7ef-4a79-9578-dc08172b41ab",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Blowtorch",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.TorchWeapon",
-        "__guid": "5b8ef87d-d6b1-4fda-a470-02feca5738a4",
+        "__guid": "1e24a32f-ccd4-4953-8718-4918178f06ab",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 1,
         "Equipment": {
           "_type": "component",
-          "component_id": "016a393b-9c04-4b0a-b2e2-a24f906209df",
-          "go": "2f34bcb2-69c5-4083-a6bb-36d7f8621285",
+          "component_id": "595d1d52-688e-4d42-bfad-dfbf547817d3",
+          "go": "46056735-a7ef-4a79-9578-dc08172b41ab",
           "component_type": "Equipment"
         },
         "FiringType": "Complex",
         "MaxUses": 1,
         "TorchFlame": {
           "_type": "gameobject",
-          "go": "a5fb3b40-a9c6-4b8c-a3ce-a64fe4b2608f"
+          "go": "73c0301c-02dc-4bd6-bdd3-fed144250b77"
         },
         "TorchSize": 20,
         "TorchTime": 5
@@ -57,7 +59,7 @@
     ],
     "Children": [
       {
-        "__guid": "a5fb3b40-a9c6-4b8c-a3ce-a64fe4b2608f",
+        "__guid": "73c0301c-02dc-4bd6-bdd3-fed144250b77",
         "Flags": 0,
         "Name": "Object",
         "Position": "21.42269,-0.7815454,4.673153",
@@ -67,7 +69,7 @@
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
-            "__guid": "112b8541-70a6-4268-9598-522164fa3013",
+            "__guid": "6d1b4654-243c-4d88-b00d-52e4dd77e610",
             "BodyGroups": 18446744073709551615,
             "Model": "particles/blueflame/blueflame.vmdl",
             "RenderType": "On",

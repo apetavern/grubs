@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+    "__guid": "375845df-0790-4bef-be4f-c6702363e947",
     "Flags": 0,
     "Name": "cluster_grenade",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
+        "__guid": "4260b057-b1e3-4b01-a326-1d94fa45d593",
         "BodyGroups": 1,
         "CreateBoneObjects": false,
         "Model": "models/weapons/grenade/clustergrenade.vmdl",
@@ -18,37 +18,39 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "cb8ddc05-02b7-44de-8f40-1520efc02f77",
+        "__guid": "0e6d5da0-1a28-4e98-a922-22d423a36fd3",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/cluster_grenade.geq",
         "HoldPose": "Throwable",
         "Icon": "models/weapons/grenade/clustergrenade.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "6ebbb1b3-2a74-4402-8872-95c0bfb41ce0",
-          "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+          "component_id": "4260b057-b1e3-4b01-a326-1d94fa45d593",
+          "go": "375845df-0790-4bef-be4f-c6702363e947",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Cluster Grenade",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "e06dd079-e564-4724-a14e-f3d64dc18ca2",
+        "__guid": "af3ddfa3-5a7e-416b-9d53-0bd093fe158e",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "cb8ddc05-02b7-44de-8f40-1520efc02f77",
-          "go": "53581cdd-e411-4a94-87f1-889dc1fe88f5",
+          "component_id": "0e6d5da0-1a28-4e98-a922-22d423a36fd3",
+          "go": "375845df-0790-4bef-be4f-c6702363e947",
           "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "fc7575fc-0fb3-42be-8860-f3c8d732c868",
+          "__guid": "175c4a02-da14-4b6b-b78b-9ca9158887f7",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [

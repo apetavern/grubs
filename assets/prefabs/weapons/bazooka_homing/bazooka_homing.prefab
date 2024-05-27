@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "1be8223d-8881-4cef-84e1-399235a98c7c",
+    "__guid": "a998e5c9-a419-46f3-86d8-19b0789b1b15",
     "Flags": 0,
     "Name": "bazooka_homing",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "2304aaa4-908c-4f4e-a119-6705898b4408",
+        "__guid": "a149e547-0e19-4668-b9fb-1302f93c71b1",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/homingmissile/homingmissile.vmdl",
@@ -18,43 +18,45 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "e8e56fc6-62b6-432d-a20c-cbac5dae9e75",
+        "__guid": "7f7fd7c9-3c0e-4758-bb82-d230f7987f7e",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/bazooka _homing.geq",
         "HoldPose": "Bazooka",
         "Icon": "models/weapons/homingmissile/homingmissile.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "2304aaa4-908c-4f4e-a119-6705898b4408",
-          "go": "1be8223d-8881-4cef-84e1-399235a98c7c",
+          "component_id": "a149e547-0e19-4668-b9fb-1302f93c71b1",
+          "go": "a998e5c9-a419-46f3-86d8-19b0789b1b15",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Homing Bazooka",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.HomingWeapon",
-        "__guid": "11a42051-43c8-4149-a01e-35656f77d19d",
+        "__guid": "18be3c14-faa7-4f0d-a08b-af1f85194426",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorModel": {
           "_type": "component",
-          "component_id": "5551446f-5213-4962-b3bc-8a39dfa95512",
-          "go": "cf24592f-597a-494e-94cc-20a15e4a58e7",
+          "component_id": "3c805679-d8e3-4ae6-be2c-a6adc0039bd3",
+          "go": "87be7ce0-b208-475c-8c44-e597f3bfaf0b",
           "component_type": "ModelRenderer"
         },
         "Equipment": {
           "_type": "component",
-          "component_id": "e8e56fc6-62b6-432d-a20c-cbac5dae9e75",
-          "go": "1be8223d-8881-4cef-84e1-399235a98c7c",
+          "component_id": "7f7fd7c9-3c0e-4758-bb82-d230f7987f7e",
+          "go": "a998e5c9-a419-46f3-86d8-19b0789b1b15",
           "component_type": "Equipment"
         },
         "FiringType": "Complex",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "9a351055-afa8-4308-a79f-9af5586f2990",
+          "__guid": "42307b3a-b2ba-4a62-8ff9-8775f4ea3d8a",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -204,7 +206,7 @@
             }
           ],
           "Defaults": {
-            "$28._value": {
+            "$30._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/bazooka_homing/bazooka_shell_homing.prefab"
             }
@@ -215,7 +217,7 @@
     ],
     "Children": [
       {
-        "__guid": "cf24592f-597a-494e-94cc-20a15e4a58e7",
+        "__guid": "87be7ce0-b208-475c-8c44-e597f3bfaf0b",
         "Flags": 0,
         "Name": "HomingMissile - cursor",
         "Scale": "0.5,0.5,0.5",
@@ -225,7 +227,7 @@
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
-            "__guid": "5551446f-5213-4962-b3bc-8a39dfa95512",
+            "__guid": "3c805679-d8e3-4ae6-be2c-a6adc0039bd3",
             "BodyGroups": 18446744073709551615,
             "Model": "models/weapons/targetindicator/targetindicator.vmdl",
             "RenderType": "On",

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "d0b8234e-58c1-4ef8-8e23-18d4adae910b",
+    "__guid": "23f0a550-27c9-4e0f-af0d-e5032e17a6e8",
     "Flags": 0,
     "Name": "revolver",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "13fc9c43-a908-4483-9cf3-dcd361847830",
+        "__guid": "02d9d309-39ab-4390-a196-729073ca6a40",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/revolver/revolver.vmdl",
@@ -18,22 +18,24 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "b2a8647c-319c-45d1-be33-d958040262ba",
+        "__guid": "93701511-70c2-4f47-9519-082accd06ec1",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/revolver.geq",
         "HoldPose": "Revolver",
         "Icon": "models/weapons/revolver/revolver.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "13fc9c43-a908-4483-9cf3-dcd361847830",
-          "go": "d0b8234e-58c1-4ef8-8e23-18d4adae910b",
+          "component_id": "02d9d309-39ab-4390-a196-729073ca6a40",
+          "go": "23f0a550-27c9-4e0f-af0d-e5032e17a6e8",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Revolver",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
-        "__guid": "110ac4ee-9e61-4183-bd4b-04e75350b520",
+        "__guid": "6af50479-7a91-4522-a412-7f261460771b",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -41,8 +43,8 @@
         "Damage": 35,
         "Equipment": {
           "_type": "component",
-          "component_id": "b2a8647c-319c-45d1-be33-d958040262ba",
-          "go": "d0b8234e-58c1-4ef8-8e23-18d4adae910b",
+          "component_id": "93701511-70c2-4f47-9519-082accd06ec1",
+          "go": "23f0a550-27c9-4e0f-af0d-e5032e17a6e8",
           "component_type": "Equipment"
         },
         "ExplosionDamage": 2,
