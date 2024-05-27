@@ -36,10 +36,19 @@ public sealed class JetpackTool : Tool
 		_currentJetFuel = MaxJetFuel;
 	}
 
+	/// <summary>
+	/// Forward/Back flame
+	/// </summary>
 	[Property] public GameObject FBFlame { get; set; }
 
+	/// <summary>
+	/// Up/Down flame 1
+	/// </summary>
 	[Property] public GameObject UDFlame1 { get; set; }
 
+	/// <summary>
+	/// Up/Down flame 2
+	/// </summary>
 	[Property] public GameObject UDFlame2 { get; set; }
 
 	[Sync] private float ForwardBackFlameScale { get; set; }
