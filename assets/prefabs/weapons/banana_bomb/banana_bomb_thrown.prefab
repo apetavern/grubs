@@ -1,0 +1,126 @@
+{
+  "RootObject": {
+    "__guid": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+    "Flags": 0,
+    "Name": "banana_bomb_thrown",
+    "Tags": "projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "fc4471d2-daf3-4a4b-a58f-0e156c0a9ce5",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/banana/banana_bunch.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "047d96b5-687d-4241-8150-7afe12b397fd",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "ff295a2d-efd3-4177-8cb9-fb449750c307",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "Y": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "32f5080f-c361-4d92-ba25-225eae9086e9",
+        "MaxHealth": 80
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "beab8404-d532-4c06-96bf-9517b5013cda",
+        "CollisionDelay": 0,
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 4,
+        "ExplodeOnCollision": false,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 50,
+        "ExplosionRadius": 150,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "6e9ac7fe-d6f0-4a5b-bf0e-927047d8a11f",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "fc4471d2-daf3-4a4b-a58f-0e156c0a9ce5",
+          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "ff295a2d-efd3-4177-8cb9-fb449750c307",
+          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 100,
+        "SetPositionOnStart": true
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
+        "__guid": "8bb3b63d-f21e-44a9-ab17-d0358ae9e86e",
+        "Projectile": {
+          "_type": "component",
+          "component_id": "beab8404-d532-4c06-96bf-9517b5013cda",
+          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_type": "ExplosiveProjectile"
+        },
+        "ShrapnelCount": 8,
+        "ShrapnelPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/banana_bomb/banana_bomb_shrapnel.prefab"
+        },
+        "ShrapnelSpreadVelocity": 300,
+        "ShrapnelUpVelocity": 700
+      },
+      {
+        "__type": "Grubs.Bouncy",
+        "__guid": "495c25bf-d706-4bf7-a322-c9bacfc0c344",
+        "Body": {
+          "_type": "component",
+          "component_id": "ff295a2d-efd3-4177-8cb9-fb449750c307",
+          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_type": "Rigidbody"
+        }
+      },
+      {
+        "__type": "Sandbox.ModelCollider",
+        "__guid": "6788a54e-5934-4b9d-89a6-f4d70cc676c1",
+        "IsTrigger": false,
+        "Model": "models/weapons/banana/banana_bunch.vmdl",
+        "Static": false,
+        "Surface": "surfaces/banana_bounce.surface"
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
