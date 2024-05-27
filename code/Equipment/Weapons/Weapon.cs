@@ -7,6 +7,7 @@ namespace Grubs.Equipment.Weapons;
 public partial class Weapon : Component
 {
 	public delegate void OnFireDelegate( int charge );
+	public delegate void OnFireFinishedDelegate();
 
 	[Property] public required Equipment Equipment { get; set; }
 
@@ -17,6 +18,7 @@ public partial class Weapon : Component
 	[Property] public int MaxUses { get; set; } = 1;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public OnFireDelegate OnFire { get; set; }
+	[Property] public OnFireFinishedDelegate OnFireFinished { get; set; }
 
 	public bool IsFiring { get; set; }
 	public bool IsCharging { get; set; }
@@ -154,6 +156,8 @@ public partial class Weapon : Component
 				grub.Player.Inventory.Holster( grub.Player.Inventory.ActiveSlot );
 			}
 		}
+
+		OnFireFinished?.Invoke();
 	}
 
 	protected void OnChargedHeld()
