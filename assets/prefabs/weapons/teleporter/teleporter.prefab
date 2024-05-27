@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "d023cf2a-9895-40db-8d3a-4fffaa2e1c8a",
+    "__guid": "18efe351-a5f7-44d0-b668-d0c721f3f5fa",
     "Flags": 0,
     "Name": "teleporter",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "13740bcb-3a1e-4b63-be32-ccd6bdff9e19",
+        "__guid": "8f127ce9-c308-4581-817a-fa5decb71f48",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/teleporter/teleporter.vmdl",
@@ -18,14 +18,15 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "fa2842e9-ea1e-4fff-b856-3c5abe7dcab0",
+        "__guid": "4be203d9-6045-424a-b864-ed29af388877",
+        "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/teleporter.geq",
         "HoldPose": "Holdable",
         "Icon": "models/tools/teleporter/teleporter.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "13740bcb-3a1e-4b63-be32-ccd6bdff9e19",
-          "go": "d023cf2a-9895-40db-8d3a-4fffaa2e1c8a",
+          "component_id": "8f127ce9-c308-4581-817a-fa5decb71f48",
+          "go": "18efe351-a5f7-44d0-b668-d0c721f3f5fa",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Teleporter",
@@ -33,32 +34,94 @@
       },
       {
         "__type": "Grubs.Equipment.Tools.TeleportTool",
-        "__guid": "2cdb2772-cc20-4d8c-97f0-5fb7b55ae306",
+        "__guid": "34b73689-648e-4fe9-ab92-a639effae744",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorModel": {
           "_type": "component",
-          "component_id": "37255771-efaf-417f-aabe-4a64a3dba66f",
-          "go": "24e54932-16c0-499f-8578-5d1bec958793",
+          "component_id": "c609b883-3b25-429b-9f0a-8d02869d83d9",
+          "go": "2d952156-e09b-4627-9c29-62d4021864e1",
           "component_type": "SkinnedModelRenderer"
         },
         "CursorRange": 2000,
         "Equipment": {
           "_type": "component",
-          "component_id": "fa2842e9-ea1e-4fff-b856-3c5abe7dcab0",
-          "go": "d023cf2a-9895-40db-8d3a-4fffaa2e1c8a",
+          "component_id": "4be203d9-6045-424a-b864-ed29af388877",
+          "go": "18efe351-a5f7-44d0-b668-d0c721f3f5fa",
           "component_type": "Equipment"
         },
         "FiringType": "Cursor",
         "MaxUses": 1,
+        "OnFireFinished": {
+          "__version": 7,
+          "__guid": "15ac762f-a00a-411d-bb64-c00a194691b0",
+          "UserData": {
+            "Title": "On Fire Finished",
+            "ReferencedComponentTypes": [
+              "Grubs.Equipment.Equipment"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-0,-0"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Equipment"
+              },
+              "UserData": {
+                "Position": "-48,64"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_name": "Holster",
+                "_type": "Grubs.Equipment.Equipment"
+              },
+              "UserData": {
+                "Position": "272,16"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            }
+          ]
+        },
         "TeleportSound": "sounds/weapons/teleporter/teleport_use.sound"
       }
     ],
     "Children": [
       {
-        "__guid": "24e54932-16c0-499f-8578-5d1bec958793",
+        "__guid": "2d952156-e09b-4627-9c29-62d4021864e1",
         "Flags": 0,
         "Name": "GrubCursor",
         "Enabled": true,
@@ -67,7 +130,7 @@
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "37255771-efaf-417f-aabe-4a64a3dba66f",
+            "__guid": "c609b883-3b25-429b-9f0a-8d02869d83d9",
             "BodyGroups": 5,
             "CreateBoneObjects": false,
             "MaterialGroup": "Teleport_Preview",
