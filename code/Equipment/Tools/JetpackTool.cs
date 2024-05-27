@@ -5,29 +5,35 @@ namespace Grubs.Equipment.Tools;
 
 public sealed class JetpackTool : Tool
 {
-	private float smoothedJetpackDir { get; set; }
+	private float _jetpackDir { get; set; }
+
+	[Property] private float MaxJetFuel { get; set; } = 10f;
+
+	private float _currentJetFuel { get; set; }
 
 	public override void OnHolster()
 	{
 		if ( Equipment.Grub != null )
-			Equipment.Grub.Animator.GrubRenderer.Set( "jetpack_active", false );
+			Equipment.Grub.Animator.IsOnJetpack = false;
 
 		FBFlame.Enabled = false;
 		UDFlame1.Enabled = false;
 		UDFlame2.Enabled = false;
 		IsFiring = false;
+		_currentJetFuel = MaxJetFuel;
 	}
 
 	protected override void FireFinished()
 	{
 		base.FireFinished();
 		if ( Equipment.Grub != null )
-			Equipment.Grub.Animator.GrubRenderer.Set( "jetpack_active", false );
+			Equipment.Grub.Animator.IsOnJetpack = false;
 
 		FBFlame.Enabled = false;
 		UDFlame1.Enabled = false;
 		UDFlame2.Enabled = false;
 		IsFiring = false;
+		_currentJetFuel = MaxJetFuel;
 	}
 
 	[Property] public GameObject FBFlame { get; set; }
@@ -35,6 +41,10 @@ public sealed class JetpackTool : Tool
 	[Property] public GameObject UDFlame1 { get; set; }
 
 	[Property] public GameObject UDFlame2 { get; set; }
+
+	[Sync] private float _fbFlameScale { get; set; }
+
+	[Sync] private float _udFlameScale { get; set; }
 
 	public void AnimateFlames()
 	{
@@ -48,18 +58,30 @@ public sealed class JetpackTool : Tool
 		Transform Left_Flame = Equipment.Model.GetAttachment( "jet_left" ).Value;
 		Transform Right_Flame = Equipment.Model.GetAttachment( "jet_right" ).Value;
 
-		FBFlame.Transform.Position = Middle_Flame.Position + characterController.Velocity / 100f;
+		FBFlame.Transform.Position = Middle_Flame.Position + characterController.Velocity * Time.Delta;
 		FBFlame.Transform.Rotation = Middle_Flame.Rotation;
 
-		FBFlame.Transform.Scale = MathX.Lerp( FBFlame.Transform.Scale.x, MathF.Abs( Input.AnalogMove.y * 0.4f ), Time.Delta * 5f );
+		if ( !IsProxy )
+		{
+			_fbFlameScale = MathF.Abs( Equipment.Grub.PlayerController.MoveInput * 0.4f );
+			_udFlameScale = MathF.Abs( Equipment.Grub.PlayerController.LookInput * 0.4f );
+		}
+
+		FBFlame.Transform.Scale = MathX.Lerp( FBFlame.Transform.Scale.x, _fbFlameScale, Time.Delta * 5f );
 
 		UDFlame1.Transform.Position = Left_Flame.Position + characterController.Velocity / 100f;
 		UDFlame1.Transform.Rotation = Left_Flame.Rotation;
 		UDFlame2.Transform.Position = Right_Flame.Position + characterController.Velocity / 100f;
 		UDFlame2.Transform.Rotation = Right_Flame.Rotation;
 
-		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, MathF.Abs( Input.AnalogMove.x * 0.4f ), Time.Delta * 5f );
-		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, MathF.Abs( Input.AnalogMove.x * 0.4f ), Time.Delta * 5f );
+		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, _udFlameScale, Time.Delta * 5f );
+		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, _udFlameScale, Time.Delta * 5f );
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+		if ( Equipment.Deployed ) AnimateFlames();
 	}
 
 	protected override void HandleComplexFiringInput()
@@ -70,20 +92,18 @@ public sealed class JetpackTool : Tool
 		{
 			IsFiring = true;
 		}
-		else if ( Input.Pressed( "fire" ) && IsFiring )
+		if ( _currentJetFuel <= 0 && IsFiring )
 		{
 			FireFinished();
 		}
 
 		if ( IsFiring )
 		{
-			AnimateFlames();
 			var characterController = Equipment.Grub.CharacterController;
 			var animator = Equipment.Grub.Animator;
-			animator.GrubRenderer.Set( "jetpack_active", Equipment.Deployed );
-			animator.GrubRenderer.SetBodyGroup( "hide_hands", 0 );
+			animator.IsOnJetpack = true;
 
-			smoothedJetpackDir = MathX.Lerp( smoothedJetpackDir, Vector3.Dot( new Vector3( -Input.AnalogMove.y, 0, 0 ), characterController.Velocity.Normal ), Time.Delta * 5f );
+			_jetpackDir = Vector3.Dot( new Vector3( -Input.AnalogMove.y, 0, 0 ), characterController.Velocity.Normal );
 
 			if ( Input.AnalogMove.x > 0 && characterController.IsOnGround )
 			{
@@ -92,14 +112,16 @@ public sealed class JetpackTool : Tool
 
 			if ( !characterController.IsOnGround )
 			{
-				animator.GrubRenderer.Set( "jetpack_dir", smoothedJetpackDir );
+				_currentJetFuel -= Time.Delta * Input.AnalogMove.Length;
 				UpdateRotation();
 				characterController.Velocity += new Vector3( -Input.AnalogMove.y, 0, 0.75f + Input.AnalogMove.x * 1.5f ) * 8f;
 			}
 			else
 			{
-				animator.GrubRenderer.Set( "jetpack_dir", 0 );
+				_jetpackDir = 0;
 			}
+
+			animator.JetpackDir = _jetpackDir;
 		}
 	}
 
