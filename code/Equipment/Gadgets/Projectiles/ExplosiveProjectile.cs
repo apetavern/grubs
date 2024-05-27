@@ -9,6 +9,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	[Property] private float ExplosionDamage { get; set; } = 50f;
 	[Property] public float ExplosionRadius { get; set; } = 100f;
 	[Property] public bool ExplodeOnCollision { get; set; } = false;
+	[Property] public float CollisionDelay { get; set; } = 0f; // Delay before collision effects are applied
 	[Property] public bool DeleteOnExplode { get; set; } = true;
 	[Property] public bool ExplodeOnDeath { get; set; } = true;
 	[Property, Sync] public float ExplodeAfter { get; set; } = 4.0f;
@@ -17,6 +18,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
+	private TimeSince _timeSinceCreated = 0; 
 
 	public delegate void OnExplode();
 
@@ -35,10 +37,17 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 	public void OnCollisionStart( Collision other )
 	{
-		if ( ExplodeOnCollision && other.Other.GameObject.Root != Components.Get<Projectile>().Grub.GameObject )
-		{
-			Explode();
-		}
+		if ( !ExplodeOnCollision )
+			return;
+
+		if ( _timeSinceCreated < CollisionDelay )
+			return;
+
+		var projectile = Components.Get<Projectile>();
+		if ( projectile.Grub is not null && projectile.Grub.GameObject == other.Other.GameObject.Root )
+			return;
+
+		Explode();
 	}
 
 	public void OnCollisionUpdate( Collision other )
