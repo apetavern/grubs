@@ -50,7 +50,7 @@ public class Equipment : Component
 	public void Deploy( Grub grub )
 	{
 		Grub = grub;
-		
+
 		if ( Ammo == 0 )
 			return;
 
@@ -68,7 +68,10 @@ public class Equipment : Component
 			GameObject.SetParent( Grub.Player.GameObject );
 
 		if ( Components.TryGet( out Weapon weapon ) )
+		{
 			weapon.TimesUsed = 0;
+			weapon.OnHolster();
+		}
 
 		Grub = null;
 

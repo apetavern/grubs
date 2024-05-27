@@ -132,6 +132,7 @@ public partial class Weapon : Component
 	protected virtual void FireImmediate() { }
 	protected virtual void FireCharged( int charge ) { }
 	protected virtual void HandleComplexFiringInput() { }
+	public virtual void OnHolster() { }
 
 	protected virtual void FireFinished()
 	{
