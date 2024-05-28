@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "c4f34839-afb2-43ac-92f7-299a384392c7",
+    "__guid": "fe802c38-c2b9-469a-a3a6-158d34b77219",
     "Flags": 0,
     "Name": "goat_thrown",
     "Tags": "notarget,projectile",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "7c34cab1-2eff-4a94-a814-7607013dc0fd",
+        "__guid": "be11255f-9fb4-4dd4-a448-ef5459a5b6c5",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/goat/goat.vmdl",
@@ -19,7 +19,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "61328174-d94b-4475-9a64-56e25636bdcf",
+        "__guid": "d09d4d24-bf5b-477e-8278-29eff8524d26",
         "AngularDamping": 0.1,
         "Gravity": true,
         "LinearDamping": 0,
@@ -36,7 +36,8 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "83b937dc-646c-493c-9569-04bece250f6e",
+        "__guid": "12f6ca12-5478-49a2-8638-355a7c9496e3",
+        "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 10,
         "ExplodeOnCollision": false,
@@ -48,18 +49,18 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.GoatProjectile",
-        "__guid": "8f7cdaac-bf59-4891-9066-7d20b8d50953",
+        "__guid": "10165e8d-e921-4783-9f31-e2a286078961",
         "Droppable": true,
         "Model": {
           "_type": "component",
-          "component_id": "7c34cab1-2eff-4a94-a814-7607013dc0fd",
-          "go": "c4f34839-afb2-43ac-92f7-299a384392c7",
+          "component_id": "be11255f-9fb4-4dd4-a448-ef5459a5b6c5",
+          "go": "fe802c38-c2b9-469a-a3a6-158d34b77219",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "61328174-d94b-4475-9a64-56e25636bdcf",
-          "go": "c4f34839-afb2-43ac-92f7-299a384392c7",
+          "component_id": "d09d4d24-bf5b-477e-8278-29eff8524d26",
+          "go": "fe802c38-c2b9-469a-a3a6-158d34b77219",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 500,
@@ -67,11 +68,20 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "d261dd7d-ce4b-4f7d-8341-da09cbf224dd",
+        "__guid": "569dfdc2-fb05-4850-ae87-4aee9c98f2a8",
         "Center": "0,0,10",
         "IsTrigger": false,
         "Radius": 10,
         "Static": false
+      },
+      {
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "162adf0e-1081-4877-931d-151022071d4e",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.35
       }
     ],
     "Children": []
