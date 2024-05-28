@@ -5,18 +5,19 @@ Layer0
 	shader "shaders/new_water.shader"
 
 	//---- Foam ----
-	g_flFoamDepth "25.000"
-	g_flFoamFade "0.200"
+	g_flFoamColor "[0.031373 0.058824 0.137255 1.000000]"
+	g_flFoamDepth "49.338"
+	g_flFoamFade "0.900"
 
 	//---- Material ----
-	TextureColor "materials/default/default_color.tga"
-	TextureTranslucency "materials/default/default_trans.tga"
+	TextureColor "[1.000000 1.000000 1.000000 0.000000]"
+	TextureTranslucency "[0.000000 0.000000 0.000000 0.000000]"
 
 	//---- Water ----
-	g_flDeepWaterColor "[0.003922 0.258824 0.556863 1.000000]"
-	g_flDepthMaxDistance "65.000"
-	g_flLightbias "[0.500 0.500]"
-	g_flShallowWaterColor "[0.501961 0.650980 0.800000 0.400000]"
+	g_flDeepWaterColor "[0.290196 0.631373 1.000000 1.000000]"
+	g_flDepthMaxDistance "63.576"
+	g_flLightbias "[0.344 1.000]"
+	g_flShallowWaterColor "[0.066667 0.462745 0.949020 0.400000]"
 	g_flWaveScale "14.000"
 	g_flWaveScrollSpeed "0.210"
 }

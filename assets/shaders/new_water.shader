@@ -89,13 +89,11 @@ PS
 	#include "vr_lighting.fxc"
 
 	#define BLEND_MODE_ALREADY_SET
-    RenderState( BlendEnable, true );
-    RenderState( BlendOp, ADD );
-    RenderState( SrcBlend, SRC_ALPHA );
-    RenderState( DstBlend, INV_SRC_ALPHA );
+	// Disable blend state settings for transparency
+    RenderState( BlendEnable, false );
 
 	#define DEPTH_STATE_ALREADY_SET
-	RenderState( DepthWriteEnable, false );
+	RenderState( DepthWriteEnable, true ); // Enable depth writing for proper depth testing
 
 	float2 g_flLightbias < Default2( 0.5, 0.5 ); Range2( 0, 0, 1, 1 ); UiGroup( "Water,0/,0/0" ); >;
 
@@ -103,7 +101,7 @@ PS
 
 	float4 g_flDeepWaterColor < UiType( Color ); UiGroup( "Water,0/,0/0" ); Default4( 0.17, 0.46, 0.81, 1 ); >;
 
-	float4 g_flShallowWaterColor < UiType( Color ); UiGroup( "Water,0/,0/0" ); Default4( 0.50, 0.65, 0.80, 0.40 ); >;
+	float4 g_flShallowWaterColor < UiType( Color ); UiGroup( "Water,0/,0/0" ); Default4( 0.50, 0.65, 0.80, 1.0 ); >;
 
 	float g_flDepthMaxDistance < UiGroup( "Water,0/,0/0" ); Range( 0, 200 ); Default( 65 ); >;
 
@@ -112,6 +110,9 @@ PS
 	float g_flFoamDepth < UiGroup( "Foam,0/,0/0" ); Range( 0, 100 ); Default( 25 ); >;
 	
 	float g_flFoamFade < UiGroup( "Foam,0/,0/0" ); Range( 0, 0.9 ); Default( 0.2 ); >;
+
+    // New foam color parameter
+    float4 g_flFoamColor < UiType( Color ); UiGroup( "Foam,0/,0/0" ); Default4( 1.0, 1.0, 1.0, 1.0 ); >;
 
 	float3 CalculateLighting( float3 normal )
 	{
@@ -140,11 +141,11 @@ PS
 		float differenceInHeight = positionInWorldSpace.z - depth;
 		float waterDepth = saturate( differenceInHeight / g_flDepthMaxDistance );
 
-		float4 deepWaterColor = float4( SrgbGammaToLinear( g_flDeepWaterColor.rgb ), g_flDeepWaterColor.a );
-		float4 shallowWaterColor = float4( SrgbGammaToLinear( g_flShallowWaterColor.rgb ), g_flShallowWaterColor.a );
+		float4 deepWaterColor = float4( SrgbGammaToLinear( g_flDeepWaterColor.rgb ), 1.0 ); // Set alpha to 1
+		float4 shallowWaterColor = float4( SrgbGammaToLinear( g_flShallowWaterColor.rgb ), 1.0 ); // Set alpha to 1
 		float4 lerpedColour = lerp( shallowWaterColor, deepWaterColor, waterDepth );
 
-		return float4( lerpedColour );
+		return float4( lerpedColour.rgb, 1.0 ); // Ensure alpha is 1
 	}
 
 	float4 CalculateIntersectionFoam( float4 vPositionSs, float3 positionInWorldSpace, float3 cameraRay ) 
@@ -158,8 +159,8 @@ PS
 		// Add a smoothsection to the depth fade mask so we can get a intersection mask that is smooth
 		float intersectionMask01 = smoothstep( 1 - g_flFoamFade, 1, depthFadeMask01 + 0.1 );
 		
-		// TODO Do we want some better form?
-		return intersectionMask01;
+		// Use foam color
+		return float4( g_flFoamColor.rgb * intersectionMask01, 1.0 );
 	}
 
 	float4 CalculateRandomSurfaceFoam( float3 positionInWorldSpace ) {
@@ -168,7 +169,7 @@ PS
 		float2 tileOffset = TileAndOffsetUv( positionInWorldSpace.xy, float2( 0.5, 0.5 ), offsetCoordinatesBy );
 		float noise = VoronoiNoise( tileOffset * 0.01, g_flTime * 1, 1 ) * 0.025;
 		// float noiseStepped = step( noise, 0.01 );
-		return float4( noise, noise, noise, 0.5 );
+		return float4( g_flFoamColor.rgb * noise, 1.0 ); // Use foam color
 	}
 
 	// https://ameye.dev/notes/stylized-water-shader/ and https://roystan.net/articles/toon-water/
@@ -188,7 +189,7 @@ PS
 		// Calculate the wave normal and apply a flat shading lighting effect to it
 		float3 calculatedNormal = normalize( cross( ddy( i.positionInWorldSpace ), ddx( i.positionInWorldSpace ) ) );
 		// float3 calculatedNormal = normalize( sin( ddy( i.positionInWorldSpace ) ) );
-		float4 waveColorLit = float4( waveColor.rgb * CalculateLighting( calculatedNormal ), waveColor.a );
+		float4 waveColorLit = float4( waveColor.rgb * CalculateLighting( calculatedNormal ), 1.0 ); // Ensure alpha is 1
 
 		return waveColorLit; 
 	}

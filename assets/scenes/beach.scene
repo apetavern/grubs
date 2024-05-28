@@ -22,10 +22,9 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
-              "__enabled": false,
               "BodyGroups": 18446744073709551615,
               "MaterialOverride": "materials/environment/new_water.vmat",
-              "Model": "models/dev/plane.vmdl",
+              "Model": "models/waterplane.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
@@ -40,6 +39,7 @@
             {
               "__type": "Grubs.Terrain.Water",
               "__guid": "83abee40-5ee1-418f-9bde-058e66e46939",
+              "__enabled": false,
               "EdgeLength": 50,
               "Material": "materials/environment/new_water.vmat",
               "Resolution": 100
@@ -341,7 +341,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-27T14:57:57.9934311-03:00",
+  "LastSaved": "2024-05-28T15:22:16.5719014\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
