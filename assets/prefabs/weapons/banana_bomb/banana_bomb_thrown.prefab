@@ -93,6 +93,7 @@
           "_type": "gameobject",
           "prefab": "prefabs/weapons/banana_bomb/banana_bomb_shrapnel.prefab"
         },
+        "ShrapnelSpawnRandomness": 100,
         "ShrapnelSpreadVelocity": 300,
         "ShrapnelUpVelocity": 700
       },
@@ -104,7 +105,8 @@
           "component_id": "ff295a2d-efd3-4177-8cb9-fb449750c307",
           "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
           "component_type": "Rigidbody"
-        }
+        },
+        "DampingFactor": 0.8
       },
       {
         "__type": "Sandbox.ModelCollider",

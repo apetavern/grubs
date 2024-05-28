@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Shrapnel Spawner" ), Category( "Equipment" )]
@@ -12,6 +14,7 @@ public sealed class Shrapnel : Component
 	[Property] public float ShrapnelUpVelocity { get; set; } = 500f;
 
 	[Property] public float ShrapnelSpreadVelocity { get; set; } = 150f;
+	[Property] public float ShrapnelSpawnRandomness { get; set; } = 0;
 
 	protected override void OnStart()
 	{
@@ -35,6 +38,12 @@ public sealed class Shrapnel : Component
 				return;
 			var startVelocity = (Vector3.Up * ShrapnelUpVelocity)
 				.WithX( Game.Random.Float( -ShrapnelSpreadVelocity, ShrapnelSpreadVelocity ) );
+
+			if (ShrapnelSpawnRandomness > 0)
+			{
+				startVelocity += Vector3.Random.Normal * ShrapnelSpawnRandomness;
+			}
+
 			rb.Velocity = startVelocity;
 		}
 	}
