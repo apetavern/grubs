@@ -1,0 +1,11 @@
+{
+  "Name": "Goat",
+  "Description": "Bahhh",
+  "Icon": "models/weapons/goat/goat.vmdl.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/goat/goat.prefab",
+  "DefaultAmmo": 10,
+  "DropChance": 4,
+  "__references": [],
+  "__version": 0
+}

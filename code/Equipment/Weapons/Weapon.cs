@@ -22,6 +22,7 @@ public partial class Weapon : Component
 
 	public bool IsFiring { get; set; }
 	public bool IsCharging { get; set; }
+	public bool ForceHideWeapon { get; set; }
 	public TimeSince TimeSinceLastUsed { get; set; }
 	public int TimesUsed { get; set; }
 
