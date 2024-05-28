@@ -15,6 +15,7 @@
           "Name": "Water",
           "Position": "316.0363,4234.852,0",
           "Scale": "200,200,0",
+          "Tags": "nopathing",
           "Enabled": true,
           "NetworkMode": 2,
           "NetworkInterpolation": true,
@@ -22,7 +23,6 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
-              "__enabled": false,
               "BodyGroups": 18446744073709551615,
               "MaterialOverride": "materials/environment/new_water.vmat",
               "Model": "models/waterplane.vmdl",
@@ -40,6 +40,7 @@
             {
               "__type": "Grubs.Terrain.Water",
               "__guid": "83abee40-5ee1-418f-9bde-058e66e46939",
+              "__enabled": false,
               "EdgeLength": 50,
               "Material": "materials/environment/new_water.vmat",
               "Resolution": 100
@@ -231,6 +232,7 @@
       "__guid": "96d84131-aa4c-4065-b484-68daad9a9384",
       "Flags": 0,
       "Name": "Map",
+      "Tags": "nopathing",
       "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
@@ -327,21 +329,21 @@
     "TimeScale": 1,
     "UseFixedUpdate": true,
     "NavMesh": {
-      "Enabled": false,
+      "Enabled": true,
       "IncludeStaticBodies": true,
       "IncludeKeyframedBodies": true,
       "EditorAutoUpdate": true,
-      "AgentHeight": 64,
-      "AgentRadius": 16,
-      "AgentStepSize": 18,
-      "AgentMaxSlope": 40,
-      "ExcludedBodies": "",
+      "AgentHeight": 32,
+      "AgentRadius": 8,
+      "AgentStepSize": 32,
+      "AgentMaxSlope": 80,
+      "ExcludedBodies": "nopathing",
       "IncludedBodies": ""
     }
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-28T15:58:57.935826\u002B02:00",
+  "LastSaved": "2024-05-29T00:34:51.4227335\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
