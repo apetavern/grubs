@@ -83,7 +83,8 @@ VS
 		float4 l_8 = g_tPosOffsetTexture.SampleLevel( g_sSampler0, l_7, 0 );
 		float l_9 = g_flWPOStrength;
 		float l_10 = l_8.r * l_9;
-		i.vPositionWs.xyz += float3( l_10, l_10, l_10 );
+		float3 l_11 = float3( l_10, l_10, l_10 ) * i.vNormalOs;
+		i.vPositionWs.xyz += l_11;
 		i.vPositionPs.xyzw = Position3WsToPs( i.vPositionWs.xyz );
 		
 		return FinalizeVertex( i );
@@ -116,22 +117,24 @@ PS
 		m.Transmission = 0;
 		
 		float4 l_0 = g_vColor;
-		float l_1 = g_flGlowStrength;
-		float4 l_2 = l_0 * float4( l_1, l_1, l_1, l_1 );
-		float2 l_3 = i.vTextureCoords.xy * float2( 1, 1 );
-		float2 l_4 = g_vUVTiling;
-		float l_5 = g_flScrollspeed;
-		float l_6 = g_flTime * l_5;
-		float l_7 = 1 - l_6;
-		float l_8 = l_7.x;
-		float4 l_9 = float4( l_8, 0, 0, 0 );
-		float2 l_10 = TileAndOffsetUv( l_3, l_4, l_9.xy );
-		float4 l_11 = Tex2DS( g_tPosOffsetTexture, g_sSampler0, l_10 );
-		float3 l_12 = i.vColor.rgb;
-		float3 l_13 = float3( l_11.r, l_11.r, l_11.r ) * l_12;
+		float4 l_1 = i.vTintColor;
+		float4 l_2 = l_0 * l_1;
+		float l_3 = g_flGlowStrength;
+		float4 l_4 = l_2 * float4( l_3, l_3, l_3, l_3 );
+		float2 l_5 = i.vTextureCoords.xy * float2( 1, 1 );
+		float2 l_6 = g_vUVTiling;
+		float l_7 = g_flScrollspeed;
+		float l_8 = g_flTime * l_7;
+		float l_9 = 1 - l_8;
+		float l_10 = l_9.x;
+		float4 l_11 = float4( l_10, 0, 0, 0 );
+		float2 l_12 = TileAndOffsetUv( l_5, l_6, l_11.xy );
+		float4 l_13 = Tex2DS( g_tPosOffsetTexture, g_sSampler0, l_12 );
+		float3 l_14 = i.vColor.rgb;
+		float3 l_15 = float3( l_13.r, l_13.r, l_13.r ) * l_14;
 		
-		m.Albedo = l_2.xyz;
-		m.Opacity = l_13.x;
+		m.Albedo = l_4.xyz;
+		m.Opacity = l_15.x;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;

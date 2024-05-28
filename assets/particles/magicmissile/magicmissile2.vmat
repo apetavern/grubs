@@ -11,12 +11,12 @@ Layer0
 	F_DO_NOT_CAST_SHADOWS 1
 	F_RENDER_BACKFACES 1
 
-	g_flGlowStrength "5.000"
-	g_flScrollspeed "1.600"
+	g_flGlowStrength "9.122"
+	g_flScrollspeed "1.300"
 	g_flWPOStrength "2.000"
 	g_vColor "[1.000000 0.129412 0.000000 1.000000]"
 	g_vUVTiling "[0.750 1.000]"
-	PosOffsetTexture "particles/magicmissile/textures/magicm_wpo.png"
+	PosOffsetTexture "particles/magicmissile/textures/magicm_wpo2.png"
 
 	//---- Fog ----
 	g_bFogEnabled "1"

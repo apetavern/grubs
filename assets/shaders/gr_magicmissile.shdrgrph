@@ -20,7 +20,7 @@
         "Output": "Result"
       },
       "PositionOffset": {
-        "Identifier": "7",
+        "Identifier": "21",
         "Output": "Result"
       }
     },
@@ -147,7 +147,7 @@
       "Identifier": "11",
       "Position": "-144,-560",
       "A": {
-        "Identifier": "9",
+        "Identifier": "20",
         "Output": "Result"
       },
       "B": {
@@ -241,6 +241,46 @@
       "UI": {},
       "Identifier": "18",
       "Position": "-1344,256"
+    },
+    {
+      "_class": "Tint",
+      "Identifier": "19",
+      "Position": "-624,-368"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "20",
+      "Position": "-368,-496",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "19",
+        "Output": "RGBA"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "21",
+      "Position": "64,176",
+      "A": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "22",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "ObjectSpaceNormal",
+      "Identifier": "22",
+      "Position": "-160,224"
     }
   ]
 }
