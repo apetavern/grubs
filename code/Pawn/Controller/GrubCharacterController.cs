@@ -27,7 +27,7 @@ public class GrubCharacterController : Component
 
 	[Property] public TagSet IgnoreLayers { get; set; } = new();
 
-	public BBox BoundingBox => new(new Vector3( -Radius, -Radius, 0 ), new Vector3( Radius, Radius, Height ));
+	public BBox BoundingBox => new( new Vector3( -Radius, -Radius, 0 ), new Vector3( Radius, Radius, Height ) );
 
 	[Sync] public Vector3 Velocity { get; set; }
 
@@ -333,17 +333,5 @@ public class GrubCharacterController : Component
 		_stuckTries++;
 
 		return true;
-	}
-
-	public void Write( ref ByteStream stream )
-	{
-		stream.Write( IsOnGround );
-		stream.Write( Velocity );
-	}
-
-	public void Read( ByteStream stream )
-	{
-		IsOnGround = stream.Read<bool>();
-		Velocity = stream.Read<Vector3>();
 	}
 }

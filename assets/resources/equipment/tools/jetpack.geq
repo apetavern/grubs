@@ -1,0 +1,11 @@
+{
+  "Name": "Jetpack",
+  "Description": "jetpack",
+  "Icon": "models/tools/jetpack/jetpack.vmdl_c.png",
+  "Type": "Tool",
+  "EquipmentPrefab": "prefabs/tools/jetpack/jetpack.prefab",
+  "DefaultAmmo": 4,
+  "DropChance": 1,
+  "__references": [],
+  "__version": 0
+}

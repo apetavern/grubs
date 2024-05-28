@@ -10,6 +10,9 @@ public sealed class GrubAnimator : Component
 	[Property] public required SkinnedModelRenderer GrubRenderer { get; set; }
 	[Property] public required GrubPlayerController Controller { get; set; }
 
+	[Sync] public bool IsOnJetpack { get; set; }
+	[Sync] public float JetpackDir { get; set; }
+
 	public bool Thinking { get; set; }
 
 	private float _incline;
@@ -23,6 +26,8 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
 		GrubRenderer.Set( "bot_thinking", Thinking );
 		GrubRenderer.Set( "heightdiff", Controller.IsOnRope ? 15f : 0f );
+		GrubRenderer.Set( "jetpack_active", IsOnJetpack );
+		GrubRenderer.Set( "jetpack_dir", MathX.Lerp( GrubRenderer.GetFloat( "jetpack_dir" ), JetpackDir, Time.Delta * 5f ) );
 
 		var holdPose = HoldPose.None;
 		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() && Grub.IsActive )
@@ -34,7 +39,7 @@ public sealed class GrubAnimator : Component
 												 && !GrubRenderer.GetBool( "lowhp" )
 												 && !Controller.IsChargingBackflip;
 
-		var shouldHideHands = Controller.Velocity.Length > 0 && !Controller.IsChargingBackflip;
+		var shouldHideHands = Controller.Velocity.Length > 0 && !Controller.IsChargingBackflip && !IsOnJetpack;
 
 		GrubRenderer.SetBodyGroup( "hide_hands", shouldHideHands ? 1 : 0 );
 

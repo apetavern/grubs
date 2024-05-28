@@ -1,0 +1,134 @@
+{
+  "RootObject": {
+    "__guid": "76d8c9a8-30bf-4283-a3ba-764e5c39f0fa",
+    "Flags": 0,
+    "Name": "jetpack",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "207fabff-2d5d-47f7-bfad-0381fac48871",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/jetpack/jetpack.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "32fe6c17-555b-4321-84f1-05bdeb6acafe",
+        "CameraCanZoom": true,
+        "Data": "resources/equipment/tools/jetpack.geq",
+        "HoldPose": "None",
+        "Icon": "models/tools/jetpack/jetpack.vmdl_c.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "207fabff-2d5d-47f7-bfad-0381fac48871",
+          "go": "76d8c9a8-30bf-4283-a3ba-764e5c39f0fa",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Jetpack",
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Tools.JetpackTool",
+        "__guid": "a52e06b8-8f5e-4473-8723-81f2fd863963",
+        "CanFireWhileMoving": true,
+        "CanSwapAfterUse": true,
+        "CanSwapDuringUse": true,
+        "Cooldown": 2,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "32fe6c17-555b-4321-84f1-05bdeb6acafe",
+          "go": "76d8c9a8-30bf-4283-a3ba-764e5c39f0fa",
+          "component_type": "Equipment"
+        },
+        "FBFlame": {
+          "_type": "gameobject",
+          "go": "9e500eda-1a21-4446-b842-b1889e964969"
+        },
+        "FiringType": "Complex",
+        "MaxJetFuel": 10,
+        "MaxUses": 1,
+        "UDFlame1": {
+          "_type": "gameobject",
+          "go": "8839ee30-814c-485b-9836-07a51d78e7c0"
+        },
+        "UDFlame2": {
+          "_type": "gameobject",
+          "go": "fba201a0-7c55-41f0-a9d1-4ed0d45ac68b"
+        }
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "fba201a0-7c55-41f0-a9d1-4ed0d45ac68b",
+        "Flags": 0,
+        "Name": "UHFlame",
+        "Position": "-6.617,-9.051998,5.577052",
+        "Rotation": "-0.00000002980232,0.7071068,-0.00000007450583,0.7071068",
+        "Scale": "0.2,0.4,0.4",
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "ef42fe72-6e82-414b-b7ac-a7bd8cbcd5de",
+            "BodyGroups": 18446744073709551615,
+            "Model": "particles/blueflame/blueflame.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "8839ee30-814c-485b-9836-07a51d78e7c0",
+        "Flags": 0,
+        "Name": "UDFlame",
+        "Position": "-6.616731,9.05203,5.577051",
+        "Rotation": "-0.00000002980232,0.7071068,-0.00000007450583,0.7071068",
+        "Scale": "0.2,0.4,0.4",
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "c1c6ad52-a47e-45fc-9560-3a956728584e",
+            "BodyGroups": 18446744073709551615,
+            "Model": "particles/blueflame/blueflame.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "9e500eda-1a21-4446-b842-b1889e964969",
+        "Flags": 0,
+        "Name": "FBFlame",
+        "Position": "-16.68206,-0.0000002594415,6.164645",
+        "Rotation": "0,0.9238795,-0.00000007450581,0.3826835",
+        "Scale": "0.2,0.4,0.4",
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "bf7d5ded-4634-4e8f-9458-9eacc6812244",
+            "BodyGroups": 18446744073709551615,
+            "Model": "particles/blueflame/blueflame.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
