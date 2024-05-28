@@ -11,7 +11,7 @@ public sealed class Shrapnel : Component
 
 	[Property] public float ShrapnelUpVelocity { get; set; } = 500f;
 	[Property] public float ShrapnelSpreadVelocity { get; set; } = 150f;
-	[Property] public float ShrapnelSpawnRandomness { get; set; } = 0;
+	[Property] public float ShrapnelSpawnRandomness { get; set; } = 0f;
 	[Property] public bool ShrapnelRandomizeRotation { get; set; } = false;
 
 	protected override void OnStart()

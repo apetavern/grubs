@@ -5,8 +5,8 @@ namespace Grubs;
 [Title( "Grubs - Bouncy" ), Category( "Equipment" )]
 public sealed class Bouncy : Component, ICollisionListener
 {
-	[Property] public required Rigidbody Body { get; set; }
-	[Property] public float DampingFactor { get; set; } = .8f;
+	[Property] public Rigidbody Body { get; set; }
+	[Property] public float DampingFactor { get; set; } = 0.8f;
 
 	public void OnCollisionStart( Collision other )
 	{

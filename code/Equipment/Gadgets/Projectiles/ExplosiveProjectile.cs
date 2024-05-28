@@ -18,7 +18,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
-	private TimeSince _timeSinceCreated = 0; 
+	private TimeSince _timeSinceCreated = 0f;
 
 	public delegate void OnExplode();
 
