@@ -47,11 +47,6 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 
 	}
 
-	public void OnCollisionUpdate( Collision other )
-	{
-
-	}
-
 	public void OnCollisionStop( CollisionStop other )
 	{
 		Model.Set( "grounded", false );

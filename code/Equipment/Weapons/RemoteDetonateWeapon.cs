@@ -8,7 +8,7 @@ public sealed class RemoteDetonateWeapon : Weapon
 {
 	private ExplosiveProjectile Projectile { get; set; }
 
-	bool _projectileExploded;
+	private bool _projectileExploded;
 
 	protected override void HandleComplexFiringInput()
 	{
@@ -21,8 +21,8 @@ public sealed class RemoteDetonateWeapon : Weapon
 		}
 
 		if ( Projectile is null || !Projectile.IsValid() )
-		        return;
-		
+			return;
+
 		GrubFollowCamera.Local.SetTarget( Projectile.GameObject );
 
 		if ( Input.Pressed( "fire" ) && IsFiring && Projectile != null )
