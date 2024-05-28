@@ -37,6 +37,7 @@ COMMON
 struct VertexInput
 {
 	#include "common/vertexinput.hlsl"
+	float3 normal : normal;
 };
 
 struct PixelInput
@@ -45,6 +46,7 @@ struct PixelInput
 	
 	float3 positionInWorldSpace : TEXCOORD15;
 	float3 CameraToPositionRay	: TEXCOORD16;
+	float3 normal : normal;  // Use NORMAL instead of TEXCOORD17 for automatic interpolation
 };
 
 VS
@@ -65,21 +67,27 @@ VS
 		return saturate( noiseValue ) * g_flWaveScale;
 	}
 
-	PixelInput MainVs( VertexInput i )
+
+	PixelInput MainVs(VertexInput i)
 	{
-		PixelInput o = ProcessVertex( i );
+		PixelInput o = ProcessVertex(i);
 
 		// Do wave height
-		o.vPositionWs.z += CalculateWaveHeight( o );	
-		o.vPositionPs.xyzw = Position3WsToPs( o.vPositionWs.xyz );
-		
+		o.vPositionWs.z += CalculateWaveHeight(o);
+		o.vPositionPs.xyzw = Position3WsToPs(o.vPositionWs.xyz);
+
 		// Copy the vertex position so the ps can access it
 		o.positionInWorldSpace = o.vPositionWs;
 
-		o.CameraToPositionRay.xyz = CalculateCameraToPositionRayWs( o.vPositionWs.xyz );
+		o.CameraToPositionRay.xyz = CalculateCameraToPositionRayWs(o.vPositionWs.xyz);
 
-		return FinalizeVertex( o );
+		// Pass the vertex normal to the pixel shader
+		o.normal = i.normal;
+
+		return FinalizeVertex(o);
 	}
+
+
 }
 
 PS
@@ -111,6 +119,10 @@ PS
 	
 	float g_flFoamFade < UiGroup( "Foam,0/,0/0" ); Range( 0, 0.9 ); Default( 0.2 ); >;
 
+	float3 g_flSpecularColor < Default3(1.0, 1.0, 1.0); UiType(Color); UiGroup("Specular,0/,0/0"); >;
+	float g_flSpecularIntensity < Default(0.5); Range(0, 1000); UiGroup("Specular,0/,0/0"); >;
+	float g_flSpecularPower < Default(32); Range(1, 128); UiGroup("Specular,0/,0/0"); >;
+
     // New foam color parameter
     float4 g_flFoamColor < UiType( Color ); UiGroup( "Foam,0/,0/0" ); Default4( 1.0, 1.0, 1.0, 1.0 ); >;
 
@@ -125,7 +137,7 @@ PS
 
 	float3 Polarize ( float3 color, int step ) 
 	{
-		return round( color * step ) / step;
+		return color;//round( color * step ) / step;
 	}
 
 	float3 CalculateWorldSpacePosition( float3 vCameraToPositionRayWs, float2 vPositionSs )
@@ -167,30 +179,40 @@ PS
 		
 		float2 offsetCoordinatesBy = float2( g_flTime * 2, g_flTime * 2 );
 		float2 tileOffset = TileAndOffsetUv( positionInWorldSpace.xy, float2( 0.5, 0.5 ), offsetCoordinatesBy );
-		float noise = VoronoiNoise( tileOffset * 0.01, g_flTime * 1, 1 ) * 0.025;
+		float noise = VoronoiNoise( tileOffset * 0.003, g_flTime * 1, 1 ) * 0.025;
 		// float noiseStepped = step( noise, 0.01 );
 		return float4( g_flFoamColor.rgb * noise, 1.0 ); // Use foam color
 	}
 
 	// https://ameye.dev/notes/stylized-water-shader/ and https://roystan.net/articles/toon-water/
-	float4 MainPs( PixelInput i ) : SV_Target0
-	{		
+	float4 MainPs(PixelInput i) : SV_Target0
+	{
 		// Lerp the colour from deep wave color to shallow wave color depending on how deep the water is		
-		float4 waveColor = CalculateWaveColor( i.vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay );
+		float4 waveColor = CalculateWaveColor(i.vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay);
 
 		// Do some foam where the water intersects with the terrain and add it to the current wave colour
-		float4 intersectionFoam = CalculateIntersectionFoam( i.vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay );
-		waveColor = saturate( waveColor + intersectionFoam );
+		float4 intersectionFoam = CalculateIntersectionFoam(i.vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay);
+		waveColor = saturate(waveColor + intersectionFoam);
 
 		// Add random surface foam
-		float4 randomFoam = CalculateRandomSurfaceFoam( i.positionInWorldSpace );
-		waveColor = saturate( waveColor + randomFoam );
+		float4 randomFoam = CalculateRandomSurfaceFoam(i.positionInWorldSpace);
+		waveColor = saturate(waveColor + randomFoam);
 
-		// Calculate the wave normal and apply a flat shading lighting effect to it
-		float3 calculatedNormal = normalize( cross( ddy( i.positionInWorldSpace ), ddx( i.positionInWorldSpace ) ) );
-		// float3 calculatedNormal = normalize( sin( ddy( i.positionInWorldSpace ) ) );
-		float4 waveColorLit = float4( waveColor.rgb * CalculateLighting( calculatedNormal ), 1.0 ); // Ensure alpha is 1
+		// Use the interpolated normal for smooth shading
+		float3 calculatedNormal = normalize(i.normal);
 
-		return waveColorLit; 
+		// Add specular reflection
+		float3 viewDir = normalize(-i.CameraToPositionRay);
+		float3 lightDir = normalize(BinnedLightBuffer[0].GetPosition());
+		float3 reflectDir = reflect(lightDir, calculatedNormal);
+		float spec = pow(max(dot(viewDir, reflectDir), 0.0), g_flSpecularPower * 2);
+		float3 specular = (g_flSpecularColor * spec * g_flSpecularIntensity * intersectionFoam * 10 * (randomFoam*waveColor) * intersectionFoam * 10) + intersectionFoam*2 ;
+
+		// Calculate lighting and add specular reflection
+		float4 waveColorLit = float4(waveColor.rgb * CalculateLighting(calculatedNormal) + specular, 1.0); // Ensure alpha is 1
+
+		return waveColorLit;
 	}
+
+
 }

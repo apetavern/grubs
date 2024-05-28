@@ -10,6 +10,24 @@
 				children = 
 				[
 					{
+						_class = "RenderMeshFile"
+						name = "waterplane"
+						disabled = true
+						filename = "models/water/waterplane.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.5
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
 						_class = "RenderPrimitivePlane"
 						name = "plane"
 						parent_bone = ""
