@@ -13,6 +13,8 @@ internal class FireEmitter : Component
 
 	[Property] private float LeftRightVelocityRandom { get; set; } = 200f;
 
+	[Property] private bool SphericalEmission { get; set; } = false;
+
 	[Property] public Weapon Weapon { get; set; }
 
 	protected override void OnStart()
@@ -48,10 +50,13 @@ internal class FireEmitter : Component
 			FireParticle particle = new FireParticle()
 			{
 				Position = Transform.Position,
-				Velocity = (new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0,
+				Velocity = !SphericalEmission ? (new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0,
 								InitialUpVelocity +
 								(Game.Random.Float( -InitialUpVelocity, InitialUpVelocity ) / 3f) ) *
-							Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity
+							Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity :
+							new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0,
+								InitialUpVelocity +
+								(Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ) / 3f) ) + addedPhysicsVelocity
 			};
 			FireHelper.Instance.CreateFire( particle );
 		}
