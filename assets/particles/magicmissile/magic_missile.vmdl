@@ -40,7 +40,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = false
@@ -56,7 +56,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -75,7 +75,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -94,7 +94,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -114,7 +114,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -134,7 +134,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -154,7 +154,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -174,7 +174,7 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_L"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -184,6 +184,19 @@
 								"pSphere1",
 							]
 						}
+					},
+				]
+			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "hold_L"
+						origin = [ 0.0, 0.0, 0.0 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						do_not_discard = true
 					},
 				]
 			},
