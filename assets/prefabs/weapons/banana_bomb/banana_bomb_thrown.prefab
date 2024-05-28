@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+    "__guid": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
     "Flags": 0,
     "Name": "banana_bomb_thrown",
     "Tags": "projectile",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "fc4471d2-daf3-4a4b-a58f-0e156c0a9ce5",
+        "__guid": "4260c093-b585-49e2-ad71-7bf6d820e684",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/banana/banana_bunch.vmdl",
@@ -19,7 +19,7 @@
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "047d96b5-687d-4241-8150-7afe12b397fd",
+        "__guid": "2f049158-b5e5-4fd3-a9f8-9c3b893a1ca3",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -28,7 +28,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "ff295a2d-efd3-4177-8cb9-fb449750c307",
+        "__guid": "868a47c7-7050-43bd-8cdf-a82ceb9bd3f6",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -44,12 +44,12 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "32f5080f-c361-4d92-ba25-225eae9086e9",
+        "__guid": "46ede679-36ed-4b55-beed-fa16de5163ce",
         "MaxHealth": 80
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "beab8404-d532-4c06-96bf-9517b5013cda",
+        "__guid": "9ea914a3-115f-4d5c-af57-7bda9083898a",
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
@@ -62,18 +62,18 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "6e9ac7fe-d6f0-4a5b-bf0e-927047d8a11f",
+        "__guid": "55fadc73-d947-4189-8344-61f486c8af3d",
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "fc4471d2-daf3-4a4b-a58f-0e156c0a9ce5",
-          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_id": "4260c093-b585-49e2-ad71-7bf6d820e684",
+          "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "ff295a2d-efd3-4177-8cb9-fb449750c307",
-          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_id": "868a47c7-7050-43bd-8cdf-a82ceb9bd3f6",
+          "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 100,
@@ -81,11 +81,11 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
-        "__guid": "8bb3b63d-f21e-44a9-ab17-d0358ae9e86e",
+        "__guid": "ad599cd5-1863-4bcc-bd6c-8dfc569bc00b",
         "Projectile": {
           "_type": "component",
-          "component_id": "beab8404-d532-4c06-96bf-9517b5013cda",
-          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_id": "9ea914a3-115f-4d5c-af57-7bda9083898a",
+          "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "ExplosiveProjectile"
         },
         "ShrapnelCount": 8,
@@ -93,24 +93,25 @@
           "_type": "gameobject",
           "prefab": "prefabs/weapons/banana_bomb/banana_bomb_shrapnel.prefab"
         },
+        "ShrapnelRandomizeRotation": true,
         "ShrapnelSpawnRandomness": 100,
         "ShrapnelSpreadVelocity": 300,
         "ShrapnelUpVelocity": 700
       },
       {
         "__type": "Grubs.Bouncy",
-        "__guid": "495c25bf-d706-4bf7-a322-c9bacfc0c344",
+        "__guid": "2015c54e-d029-46cb-8ceb-b89d946330b0",
         "Body": {
           "_type": "component",
-          "component_id": "ff295a2d-efd3-4177-8cb9-fb449750c307",
-          "go": "d135fec6-38c8-48c4-8960-d8193b7a6077",
+          "component_id": "868a47c7-7050-43bd-8cdf-a82ceb9bd3f6",
+          "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "Rigidbody"
         },
         "DampingFactor": 0.8
       },
       {
         "__type": "Sandbox.ModelCollider",
-        "__guid": "6788a54e-5934-4b9d-89a6-f4d70cc676c1",
+        "__guid": "d5a67057-0415-480c-97ef-e8560fa381d9",
         "IsTrigger": false,
         "Model": "models/weapons/banana/banana_bunch.vmdl",
         "Static": false,
