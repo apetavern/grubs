@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+    "__guid": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
     "Flags": 0,
     "Name": "elemental_missile_projectile",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
+        "__guid": "a9edafe0-1c34-4427-b21e-00f1640d5fea",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "particles/magicmissile/magic_missile.vmdl",
@@ -18,30 +18,36 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "f4d2259f-2bfd-41c0-8338-04324614ed72",
+        "__guid": "df9bfd5a-e47f-42ee-b0be-a70200151866",
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
-          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+          "component_id": "a9edafe0-1c34-4427-b21e-00f1640d5fea",
+          "go": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "b37d24ef-c573-4e9f-8b9a-ca071bc621ce",
-          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+          "component_id": "8588856a-f50b-493a-b3b1-5e7e5ad8630e",
+          "go": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 400,
-        "SetPositionOnStart": true
+        "ProjectileSpeed": 600,
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": true
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "b37d24ef-c573-4e9f-8b9a-ca071bc621ce",
+        "__guid": "8588856a-f50b-493a-b3b1-5e7e5ad8630e",
         "AngularDamping": 0,
         "Gravity": false,
         "LinearDamping": 0,
-        "Locking": {},
+        "Locking": {
+          "Y": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
         "MassOverride": 0,
         "MotionEnabled": true,
         "RigidbodyFlags": 0,
@@ -49,25 +55,60 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "c962a26d-c464-4599-9dd4-3f7f4c8c0878",
+        "__guid": "cea4917b-2d84-4729-838d-85a31d00ac09",
+        "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 0,
         "ExplodeOnCollision": true,
         "ExplodeOnDeath": true,
-        "ExplosionDamage": 50,
-        "ExplosionRadius": 100,
+        "ExplosionDamage": 5,
+        "ExplosionRadius": 30,
         "ExplosionSound": ""
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "6d632068-8292-4780-a86b-bb264964516f",
+        "__guid": "90259837-b307-4b0f-be53-d7b4229d4245",
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 10,
         "Static": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
+        "__guid": "c0f8d56e-a214-4435-bfd3-a7af66ba66a2",
+        "FireParticleCount": 10,
+        "InitialUpVelocity": 0,
+        "LeftRightVelocityRandom": 100,
+        "Projectile": {
+          "_type": "component",
+          "component_id": "cea4917b-2d84-4729-838d-85a31d00ac09",
+          "go": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
+          "component_type": "ExplosiveProjectile"
+        },
+        "SphericalEmission": true
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "f8fef2dd-afa0-42f2-9d88-56cd9505b9b6",
+        "Flags": 0,
+        "Name": "trail",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.LegacyParticleSystem",
+            "__guid": "563c376c-ffd3-4ffe-a1b8-4f0b8e09b1e0",
+            "ControlPoints": [],
+            "Looped": true,
+            "Particles": "particles/magicmissile/magicmissile_splash.vpcf",
+            "PlaybackSpeed": 1
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

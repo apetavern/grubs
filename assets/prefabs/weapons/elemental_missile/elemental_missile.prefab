@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+    "__guid": "2b30d2c8-cc55-40f9-af5b-3034d7257989",
     "Flags": 0,
     "Name": "elemental_missile",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
+        "__guid": "46950a82-5a13-49dc-bbba-78f0ba1dd8cc",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "particles/magicmissile/magic_missile.vmdl",
@@ -18,49 +18,58 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "d37321e2-883b-4bd3-a36e-a9847974781e",
+        "__guid": "5f0a60fc-1909-4065-8bc0-4fcb4b4c8bd7",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/elemental_missile.geq",
         "HoldPose": "Throwable",
         "Icon": "particles/magicmissile/magic_missile.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
-          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+          "component_id": "46950a82-5a13-49dc-bbba-78f0ba1dd8cc",
+          "go": "2b30d2c8-cc55-40f9-af5b-3034d7257989",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Elemental Missile",
+        "ShouldShowAimReticle": true,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "4ac2e5c7-f1ff-493a-93c1-9559aafd95cb",
+        "__guid": "bb91e998-61de-4e29-828e-5f3f302b9b68",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "d37321e2-883b-4bd3-a36e-a9847974781e",
-          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+          "component_id": "5f0a60fc-1909-4065-8bc0-4fcb4b4c8bd7",
+          "go": "2b30d2c8-cc55-40f9-af5b-3034d7257989",
           "component_type": "Equipment"
         },
         "FiringType": "Instant",
-        "MaxUses": 4,
+        "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "aeed475f-d176-4364-854c-1089651ed033",
+          "__guid": "92244607-8343-4c70-a4f0-dada187bfdd6",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
               "Grubs.Equipment.Weapons.Weapon"
             ]
           },
-          "Variables": [],
+          "Variables": [
+            {
+              "Name": "charge",
+              "Type": "System.Int32"
+            }
+          ],
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input"
+              "Type": "input",
+              "UserData": {
+                "Position": "-240,16"
+              }
             },
             {
               "Id": 1,
@@ -78,6 +87,91 @@
               "UserData": {
                 "Position": "224,-80"
               }
+            },
+            {
+              "Id": 5,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "416,-80"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "672,-80"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "1168,-80"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "var",
+              "Properties": {
+                "_var": "charge"
+              },
+              "UserData": {
+                "Position": "0,16"
+              }
+            },
+            {
+              "Id": 20,
+              "Type": "var",
+              "Properties": {
+                "_var": "charge"
+              },
+              "UserData": {
+                "Position": "688,464"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "896,-80"
+              }
+            },
+            {
+              "Id": 25,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
+              "UserData": {
+                "Position": "432,-176"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
+              "UserData": {
+                "Position": "864,-176"
+              }
+            },
+            {
+              "Id": 32,
+              "Type": "grubs.fire_finished",
+              "UserData": {
+                "Position": "1520,-80"
+              }
+            },
+            {
+              "Id": 33,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
+              "UserData": {
+                "Position": "1248,-192"
+              }
             }
           ],
           "Links": [
@@ -88,14 +182,14 @@
               "DstName": "_this"
             },
             {
-              "SrcId": 0,
+              "SrcId": 19,
               "SrcName": "_signal",
               "DstId": 3,
               "DstName": "_signal"
             },
             {
-              "SrcId": 0,
-              "SrcName": "charge",
+              "SrcId": 20,
+              "SrcName": "_result",
               "DstId": 3,
               "DstName": "charge"
             },
@@ -112,10 +206,134 @@
               "SrcName": "_result",
               "DstId": 3,
               "DstName": "source"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.15,
+              "DstId": 5,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 20,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
+              },
+              "DstId": 13,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 25,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_signal",
+              "DstId": 17,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 20,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
+              },
+              "DstId": 17,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 26,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 19,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "charge",
+              "DstId": 19,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_signal",
+              "DstId": 23,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.15,
+              "DstId": 23,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 25,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 26,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_signal",
+              "DstId": 32,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 33,
+              "SrcName": "_result",
+              "DstId": 32,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 33,
+              "DstName": "_this"
             }
           ],
           "Defaults": {
-            "$5._value": {
+            "$34._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
+            },
+            "$36._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
+            },
+            "$37._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             }
