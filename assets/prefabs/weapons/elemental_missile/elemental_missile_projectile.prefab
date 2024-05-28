@@ -1,0 +1,78 @@
+{
+  "RootObject": {
+    "__guid": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+    "Flags": 0,
+    "Name": "elemental_missile_projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "particles/magicmissile/magic_missile.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "f4d2259f-2bfd-41c0-8338-04324614ed72",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "3fa667f9-fe6e-4ea0-9f72-dd7317b6d34d",
+          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "b37d24ef-c573-4e9f-8b9a-ca071bc621ce",
+          "go": "29fb9d2f-1a69-404c-8360-eba57b5eb30c",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 400,
+        "SetPositionOnStart": true
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "b37d24ef-c573-4e9f-8b9a-ca071bc621ce",
+        "AngularDamping": 0,
+        "Gravity": false,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "c962a26d-c464-4599-9dd4-3f7f4c8c0878",
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 0,
+        "ExplodeOnCollision": true,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 50,
+        "ExplosionRadius": 100,
+        "ExplosionSound": ""
+      },
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "6d632068-8292-4780-a86b-bb264964516f",
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Radius": 10,
+        "Static": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

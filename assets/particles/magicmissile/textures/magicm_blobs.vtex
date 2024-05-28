@@ -1,0 +1,14 @@
+{
+  "Sequences": [
+    {
+      "Source": "particles/magicmissile/textures/magicm_blobs.png",
+      "IsLooping": true,
+      "FlipBook": true,
+      "Columns": 2,
+      "Rows": 2,
+      "Frames": 4
+    }
+  ],
+  "OutputMipAlgorithm": "Box",
+  "OutputTypeString": "2D"
+}

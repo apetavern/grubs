@@ -1,0 +1,286 @@
+{
+  "Model": "particles/magicmissile/magic_missile.vmdl",
+  "Description": "",
+  "BlendMode": "Translucent",
+  "nodes": [
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "368,-48",
+      "Albedo": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "PositionOffset": {
+        "Identifier": "21",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "particles/magicmissile/textures/magicm_wpo.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Pos Offset Texture",
+        "Default": "1,1,1,1",
+        "ColorSpace": "Linear",
+        "SecondaryGroup": {
+          "Name": ""
+        },
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "1",
+      "Position": "-544,-176",
+      "Coords": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "2",
+      "Position": "-1152,-240"
+    },
+    {
+      "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "3",
+      "Position": "-800,-176",
+      "Coords": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "Tile": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "17",
+        "Output": "Vector"
+      }
+    },
+    {
+      "_class": "Time",
+      "Identifier": "4",
+      "Position": "-1888,112"
+    },
+    {
+      "_class": "Float",
+      "Min": -50,
+      "Max": 50,
+      "Value": 2,
+      "Name": "Scroll speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "5",
+      "Position": "-1888,192"
+    },
+    {
+      "_class": "Float",
+      "Min": -50,
+      "Max": 50,
+      "Value": 6,
+      "Name": "WPO Strength",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "6",
+      "Position": "-352,144"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "7",
+      "Position": "-112,112",
+      "A": {
+        "Identifier": "1",
+        "Output": "R"
+      },
+      "B": {
+        "Identifier": "6",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float2",
+      "Min": "-10,-10",
+      "Max": "10,10",
+      "Value": "1,1",
+      "Name": "UV Tiling",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "8",
+      "Position": "-1152,-176"
+    },
+    {
+      "_class": "Float4",
+      "Value": "1,0.13333,0,1",
+      "Name": "Color",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
+      "Identifier": "9",
+      "Position": "-624,-528"
+    },
+    {
+      "_class": "VertexColor",
+      "Identifier": "10",
+      "Position": "-544,-304"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "11",
+      "Position": "-144,-560",
+      "A": {
+        "Identifier": "20",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "12",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 100,
+      "Value": 50,
+      "Name": "Glow Strength",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "12",
+      "Position": "-384,-592"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "13",
+      "Position": "32,-160",
+      "A": {
+        "Identifier": "1",
+        "Output": "R"
+      },
+      "B": {
+        "Identifier": "10",
+        "Output": "RGB"
+      }
+    },
+    {
+      "_class": "OneMinus",
+      "Identifier": "14",
+      "Position": "-1520,128",
+      "In": {
+        "Identifier": "15",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "15",
+      "Position": "-1648,128",
+      "A": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "16",
+      "Position": "-1328,80",
+      "Input": {
+        "Identifier": "14",
+        "Output": "Out"
+      }
+    },
+    {
+      "_class": "CombineVector",
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "17",
+      "Position": "-1120,80",
+      "X": {
+        "Identifier": "16",
+        "Output": "X"
+      },
+      "Y": {
+        "Identifier": "18",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "18",
+      "Position": "-1344,256"
+    },
+    {
+      "_class": "Tint",
+      "Identifier": "19",
+      "Position": "-624,-368"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "20",
+      "Position": "-368,-496",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "19",
+        "Output": "RGBA"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "21",
+      "Position": "64,176",
+      "A": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "22",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "ObjectSpaceNormal",
+      "Identifier": "22",
+      "Position": "-160,224"
+    }
+  ]
+}
