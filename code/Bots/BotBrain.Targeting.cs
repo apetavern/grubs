@@ -13,7 +13,7 @@ public partial class BotBrain
 		targetGrub = FindTargetWorm();
 		if ( targetGrub != null )
 		{
-			TimeInState = 0f;
+			timeInState = 0f;
 			currentState = BotState.Moving;
 		}
 	}

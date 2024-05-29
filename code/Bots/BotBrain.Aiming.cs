@@ -15,7 +15,7 @@ public partial class BotBrain
 
 		if ( IsAimedAtTarget() )
 		{
-			TimeInState = 0f;
+			timeInState = 0f;
 			currentState = BotState.Firing;
 		}
 	}

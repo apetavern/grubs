@@ -18,7 +18,7 @@ public partial class BotBrain : Component
 	private Grub targetGrub;
 	private Weapon selectedWeapon;
 	private Vector3 targetPosition;
-	TimeSince TimeInState;
+	private TimeSince timeInState;
 
 	protected override void OnStart()
 	{
@@ -54,7 +54,7 @@ public partial class BotBrain : Component
 				break;
 		}
 
-		if ( TimeInState > GrubsConfig.TurnDuration / 4f )
+		if ( timeInState > GrubsConfig.TurnDuration / 4f )
 		{
 			ForceNextState();
 		}
@@ -63,7 +63,7 @@ public partial class BotBrain : Component
 	private void ForceNextState()
 	{
 		currentState++;
-		TimeInState = 0f;
+		timeInState = 0f;
 	}
 }
 

@@ -9,7 +9,7 @@ public partial class BotBrain
 {
 	private void OnIdle()
 	{
-		TimeInState = 0f;
+		timeInState = 0f;
 		if ( ActiveGrub.Player.IsActive )
 		{
 			currentState = BotState.Targeting;

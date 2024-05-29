@@ -17,7 +17,7 @@ public partial class BotBrain
 
 		if ( selectedWeapon != null )
 		{
-			TimeInState = 0f;
+			timeInState = 0f;
 			currentState = BotState.Aiming;
 		}
 	}

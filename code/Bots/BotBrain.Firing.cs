@@ -14,7 +14,7 @@ public partial class BotBrain
 
 		if ( !ActiveGrub.Player.IsActive )
 		{
-			TimeInState = 0f;
+			timeInState = 0f;
 			currentState = BotState.Cooldown;
 		}
 	}

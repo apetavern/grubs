@@ -20,7 +20,7 @@ public partial class BotBrain
 
 		if ( HasReachedPosition( targetPosition ) )
 		{
-			TimeInState = 0f;
+			timeInState = 0f;
 			currentState = BotState.SelectingWeapon;
 		}
 	}
