@@ -93,6 +93,8 @@ public partial class Weapon : Component
 					FireImmediate();
 
 				TimeSinceLastUsed = 0;
+
+				if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
 			}
 		}
 		else if ( FiringType is FiringType.Cursor )
@@ -107,6 +109,8 @@ public partial class Weapon : Component
 					FireImmediate();
 				TimeSinceLastUsed = 0;
 				FireFinished();
+
+				if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
 			}
 		}
 		else if ( FiringType is FiringType.Complex )
@@ -123,6 +127,8 @@ public partial class Weapon : Component
 					OnFire.Invoke( 100 );
 				else
 					FireImmediate();
+
+				if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
 
 				TimeSinceLastUsed = 0;
 				FireFinished();
@@ -175,6 +181,8 @@ public partial class Weapon : Component
 
 		_weaponCharge++;
 		_weaponCharge.Clamp( 0, 100 );
+
+		if ( Input.UsingController ) Input.TriggerHaptics( 0, _weaponCharge / 100f, rightTrigger: _weaponCharge / 100f );
 	}
 
 	public Vector3 GetStartPosition( bool isDroppable = false )

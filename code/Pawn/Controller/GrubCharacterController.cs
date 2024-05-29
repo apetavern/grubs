@@ -242,6 +242,7 @@ public class GrubCharacterController : Component
 	{
 		IsOnGround = false;
 		Velocity += amount;
+		if ( Input.UsingController ) Input.TriggerHaptics( amount.Length / 1000f, amount.Length / 1000f );
 	}
 
 	/// <summary>

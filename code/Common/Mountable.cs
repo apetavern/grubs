@@ -26,7 +26,7 @@ public sealed class Mountable : Component
 	{
 		if ( Grub is null )
 			return;
-		
+
 		foreach ( var collider in Grub.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
 		{
 			collider.Enabled = true;
@@ -37,7 +37,7 @@ public sealed class Mountable : Component
 		Grub.Transform.Rotation = Rotation.LookAt( Grub.Transform.Rotation.Forward.WithZ( 0 ), Vector3.Up );
 		Grub.PlayerController.Enabled = true;
 		Grub.PlayerController.IsOnRope = false;
-		Grub.CharacterController.Punch(Components.Get<Rigidbody>().Velocity);
+		Grub.CharacterController.Velocity = Components.Get<Rigidbody>().Velocity;
 		MountEnabled = false;
 		Grub.ActiveMountable = null;
 		Grub = null;

@@ -574,25 +574,25 @@
         {
           "Name": "forward",
           "KeyboardCode": "w",
-          "GamepadCode": "None",
+          "GamepadCode": "DpadNorth",
           "GroupName": "Movement"
         },
         {
           "Name": "backward",
           "KeyboardCode": "s",
-          "GamepadCode": "None",
+          "GamepadCode": "DpadSouth",
           "GroupName": "Movement"
         },
         {
           "Name": "left",
           "KeyboardCode": "a",
-          "GamepadCode": "None",
+          "GamepadCode": "DpadWest",
           "GroupName": "Movement"
         },
         {
           "Name": "right",
           "KeyboardCode": "d",
-          "GamepadCode": "None",
+          "GamepadCode": "DpadEast",
           "GroupName": "Movement"
         },
         {
