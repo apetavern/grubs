@@ -77,7 +77,7 @@ public class HitScanWeapon : Weapon
 		}
 
 		var tr = Scene.Trace.Ray( startPos, endPos )
-			.WithAnyTags( "solid", "player" )
+			.WithAnyTags( "solid", "player", "pickup" )
 			.WithoutTags( "dead" )
 			.IgnoreGameObjectHierarchy( Equipment.Grub.GameObject );
 
