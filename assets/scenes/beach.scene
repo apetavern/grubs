@@ -14,7 +14,7 @@
           "Flags": 0,
           "Name": "Water",
           "Position": "316.0363,4234.852,0",
-          "Scale": "200,200,0",
+          "Scale": "200,200,200",
           "Tags": "nopathing",
           "Enabled": true,
           "NetworkMode": 2,
@@ -30,14 +30,6 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "Sandbox.PlaneCollider",
-              "__guid": "55c3a0e7-0f66-4241-9fd7-7786991714ad",
-              "Center": "0,0,0",
-              "IsTrigger": true,
-              "Scale": "50,50",
-              "Static": true
-            },
-            {
               "__type": "Grubs.Terrain.Water",
               "__guid": "83abee40-5ee1-418f-9bde-058e66e46939",
               "__enabled": false,
@@ -48,6 +40,14 @@
             {
               "__type": "Grubs.Common.KillZone",
               "__guid": "72d5d8e2-71b7-4213-8602-3fb4951760ae"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "c6f27e16-c3b9-4c78-aaef-a82924edea5c",
+              "Center": "0,0,-25",
+              "IsTrigger": true,
+              "Scale": "50,50,50",
+              "Static": true
             }
           ]
         },
@@ -343,7 +343,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-29T00:34:51.4227335\u002B02:00",
+  "LastSaved": "2024-05-29T14:52:45.8378443\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
