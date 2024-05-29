@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "4fbc35d5-8ab4-4f54-900f-615c0dd500d0",
+    "__guid": "24a88455-9ffa-41ae-b430-580315139238",
     "Flags": 0,
     "Name": "weapons_crate",
     "Tags": "drop,pickup",
@@ -10,12 +10,12 @@
     "Components": [
       {
         "__type": "Grubs.Drops.Crate",
-        "__guid": "b459245f-bc98-4c11-9411-96d31e87de5d",
+        "__guid": "6c823067-2204-48a7-bd89-d1c9ee97d90f",
         "DropType": "Weapon"
       },
       {
         "__type": "Sandbox.ModelRenderer",
-        "__guid": "6d735621-5f79-4171-b899-ed1d6ef4af3a",
+        "__guid": "67a6dacd-c19a-4986-80b3-2eea87af20f3",
         "BodyGroups": 18446744073709551615,
         "Model": "models/crates/weapons_crate/weapons_crate.vmdl",
         "RenderType": "On",
@@ -23,7 +23,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "7d729c9b-3068-49db-9bdf-6204a54ce118",
+        "__guid": "0e85ed74-2062-4a71-a528-597b42461d7a",
         "Center": "0,0,12.5",
         "IsTrigger": false,
         "Scale": "25,25,25",
@@ -31,7 +31,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "00853581-0d73-4388-a280-ec322756e044",
+        "__guid": "2ff48cfd-f097-405d-b662-f03771594956",
         "Center": "0,0,12.5",
         "IsTrigger": true,
         "Scale": "30,30,30",
@@ -39,7 +39,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "a20fcb67-041d-4318-a12b-b1b2067fdf66",
+        "__guid": "9b4cf91d-1caf-498d-8613-c8b15ebad03a",
         "AngularDamping": 0.5,
         "Gravity": true,
         "LinearDamping": 2,
@@ -51,6 +51,37 @@
         "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "5d2eab78-130d-4a2c-953f-84f6f55a4608",
+        "CollisionDelay": 0,
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 0,
+        "ExplodeOnCollision": false,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 25,
+        "ExplosionRadius": 100,
+        "ExplosionSound": ""
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "0fb21f05-2ca5-439c-ae96-b41fc7a4d3ad",
+        "MaxHealth": 1
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
+        "__guid": "9f48c7f5-d84f-454c-ad7b-c5d74c7ec7f9",
+        "FireParticleCount": 25,
+        "InitialUpVelocity": 100,
+        "LeftRightVelocityRandom": 100,
+        "Projectile": {
+          "_type": "component",
+          "component_id": "5d2eab78-130d-4a2c-953f-84f6f55a4608",
+          "go": "24a88455-9ffa-41ae-b430-580315139238",
+          "component_type": "ExplosiveProjectile"
+        },
+        "SphericalEmission": true
       }
     ],
     "Children": []
@@ -59,6 +90,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

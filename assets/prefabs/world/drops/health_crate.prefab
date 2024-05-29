@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "265fbafb-bf72-478f-9854-ac788b805fc0",
+    "__guid": "b6236a3c-e621-42f1-bace-988828a624b4",
     "Flags": 0,
     "Name": "health_crate",
     "Tags": "drop,pickup",
@@ -10,12 +10,12 @@
     "Components": [
       {
         "__type": "Grubs.Drops.Crate",
-        "__guid": "8d8c26f9-f4e5-401d-a79c-4961f09f95a7",
+        "__guid": "c5268976-749c-4655-90c1-6f11300aa8c2",
         "DropType": "Health"
       },
       {
         "__type": "Sandbox.ModelRenderer",
-        "__guid": "1ccdd533-0acc-4323-ab9d-64ffc8aa7d06",
+        "__guid": "834d79b1-d375-4f25-a0a7-8392762c33f5",
         "BodyGroups": 18446744073709551615,
         "Model": "models/crates/health_crate/health_crate.vmdl",
         "RenderType": "On",
@@ -23,7 +23,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "885556a9-8969-4480-80fe-0639d75f2d12",
+        "__guid": "27ce21d0-5d40-4527-8aa6-4566a35e4a7d",
         "Center": "0,0,12.5",
         "IsTrigger": false,
         "Scale": "25,25,25",
@@ -31,7 +31,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "efbc6560-2afe-4ac2-8d4f-88d4c8548098",
+        "__guid": "cafe6c72-6f9f-41a0-a742-a2461b8777f3",
         "Center": "0,0,12.5",
         "IsTrigger": true,
         "Scale": "30,30,30",
@@ -39,7 +39,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "a1958391-551c-4e74-941a-cecca7346d98",
+        "__guid": "3f667e95-e09d-412f-96c4-07e5af974296",
         "AngularDamping": 0.5,
         "Gravity": true,
         "LinearDamping": 2,
@@ -51,6 +51,37 @@
         "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "d2e10fbd-d1e0-4cc5-ab29-3334b02c93d3",
+        "CollisionDelay": 0,
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 0,
+        "ExplodeOnCollision": false,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 25,
+        "ExplosionRadius": 100,
+        "ExplosionSound": ""
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "b8736583-b0b3-400e-b922-ac82640dd961",
+        "MaxHealth": 1
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
+        "__guid": "76412ea9-b297-4aec-8575-d0f0f604b969",
+        "FireParticleCount": 25,
+        "InitialUpVelocity": 100,
+        "LeftRightVelocityRandom": 100,
+        "Projectile": {
+          "_type": "component",
+          "component_id": "d2e10fbd-d1e0-4cc5-ab29-3334b02c93d3",
+          "go": "b6236a3c-e621-42f1-bace-988828a624b4",
+          "component_type": "ExplosiveProjectile"
+        },
+        "SphericalEmission": true
       }
     ],
     "Children": []
@@ -59,6 +90,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }
