@@ -1,5 +1,6 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
+using Grubs.UI.Components;
 
 namespace Grubs.Pawn.Controller;
 
@@ -207,6 +208,9 @@ public sealed partial class GrubPlayerController : Component
 			return false;
 
 		if ( !Grub.IsActive )
+			return false;
+
+		if ( Input.UsingController && Cursor.IsEnabled() )
 			return false;
 
 		return true;

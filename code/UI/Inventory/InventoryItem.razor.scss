@@ -13,7 +13,11 @@ InventoryItem {
     &:hover:not(.disabled) {
         background-color: $hud-fg-hovered;
     }
-    
+
+    &.selected:not(.disabled) {
+        border: 4px solid orange;
+    }
+
     .ammo {
         bottom: 0;
         right: 0;
@@ -24,7 +28,7 @@ InventoryItem {
         font-size: 24px;
         padding: 2px 8px;
     }
-    
+
     &.disabled {
         opacity: 0.6;
     }

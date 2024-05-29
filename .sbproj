@@ -622,13 +622,13 @@
         {
           "Name": "next_equipment",
           "KeyboardCode": "E",
-          "GamepadCode": "SwitchRightBumper",
+          "GamepadCode": "None",
           "GroupName": "Other"
         },
         {
           "Name": "toggle_inventory",
           "KeyboardCode": "Q",
-          "GamepadCode": "None",
+          "GamepadCode": "SwitchRightBumper",
           "GroupName": "Other"
         },
         {
