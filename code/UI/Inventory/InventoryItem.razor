@@ -9,7 +9,7 @@
 @attribute [StyleSheet]
 
 
-<root class=@(Ammo == "0" ? "disabled" : PlayerInventory.Local.ActiveSlot == Equipment.SlotIndex && Input.UsingController ? "selected" : "")>
+<root class=@(Ammo == "0" ? "disabled" : PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex && Input.UsingController ? "selected" : "")>
     @if (Equipment is not null)
     {
         <img src="@Equipment.Icon"/>
@@ -31,6 +31,6 @@
 
     protected override int BuildHash()
     {
-		return HashCode.Combine(Equipment?.Ammo, Equipment.IsValid() && PlayerInventory.Local.ActiveSlot == Equipment.SlotIndex);
+		return HashCode.Combine(Equipment?.Ammo, PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex);
     }
 }
