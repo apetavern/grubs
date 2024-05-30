@@ -6,6 +6,6 @@
   "EquipmentPrefab": "prefabs/weapons/bazooka/bazooka.prefab",
   "DefaultAmmo": -1,
   "DropChance": 0,
-  "__version": 0,
-  "__references": []
+  "__references": [],
+  "__version": 0
 }

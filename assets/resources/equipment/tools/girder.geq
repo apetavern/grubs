@@ -5,7 +5,7 @@
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/girder/girder.prefab",
   "DefaultAmmo": 2,
-  "DropChance": 4,
+  "DropChance": 2,
   "__references": [],
   "__version": 0
 }
