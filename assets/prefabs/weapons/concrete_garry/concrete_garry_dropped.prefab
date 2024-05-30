@@ -1,0 +1,125 @@
+{
+  "RootObject": {
+    "__guid": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
+    "Flags": 0,
+    "Name": "concrete_garry_dropped",
+    "Tags": "projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "a16ecdf2-9806-4135-9fd9-ebdb7bd1e17e",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/concretegarry/concretegarry.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "4c9aec5a-f51a-4ed3-ad54-a183282e21f4",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "a828cb7f-5ac2-4833-a45c-92c2e909c5c3",
+        "CollisionDelay": 0,
+        "DeleteOnExplode": false,
+        "ExplodeAfter": 0,
+        "ExplodeOnCollision": true,
+        "ExplodeOnDeath": false,
+        "ExplosionDamage": 75,
+        "ExplosionRadius": 200,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "b5bdd59c-c716-4d41-ac02-c35ad177ebd9",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "a16ecdf2-9806-4135-9fd9-ebdb7bd1e17e",
+          "go": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "3209d1ec-aed8-449d-88e4-abb0ba6cd813",
+          "go": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 350,
+        "SetPositionOnStart": false,
+        "SetRotationOnStart": false
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "3209d1ec-aed8-449d-88e4-abb0ba6cd813",
+        "AngularDamping": 0.1,
+        "Gravity": true,
+        "LinearDamping": 1,
+        "Locking": {
+          "X": true,
+          "Y": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.DroppedProjectile",
+        "__guid": "09e2c12f-cafc-4725-afb8-cb069251e939",
+        "Model": {
+          "_type": "component",
+          "component_id": "a16ecdf2-9806-4135-9fd9-ebdb7bd1e17e",
+          "go": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "ProjectileMovement": {
+          "_type": "component",
+          "component_id": "b5bdd59c-c716-4d41-ac02-c35ad177ebd9",
+          "go": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
+          "component_type": "PhysicsProjectile"
+        },
+        "ProjectileSpeed": 4
+      },
+      {
+        "__type": "Sandbox.ModelCollider",
+        "__guid": "021eb0af-519d-478f-ad9d-cb2a65ce9a16",
+        "IsTrigger": false,
+        "Model": "models/weapons/concretegarry/concretegarry.vmdl",
+        "Static": false
+      },
+      {
+        "__type": "Grubs.Bouncy",
+        "__guid": "ff72a0d7-9eb1-46c0-8853-273b013c32f5",
+        "Body": {
+          "_type": "component",
+          "component_id": "3209d1ec-aed8-449d-88e4-abb0ba6cd813",
+          "go": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
+          "component_type": "Rigidbody"
+        },
+        "DampingFactor": 1,
+        "Reflect": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
