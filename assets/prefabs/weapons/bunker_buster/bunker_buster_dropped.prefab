@@ -1,0 +1,141 @@
+{
+  "RootObject": {
+    "__guid": "423051c2-de3f-48c6-b398-d7e369cb71c5",
+    "Flags": 0,
+    "Name": "bunker_buster_dropped",
+    "Tags": "projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "5f9b6541-79a4-4108-bee0-934b45b14e90",
+        "CollisionDelay": 0,
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 6,
+        "ExplodeOnCollision": false,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 30,
+        "ExplosionRadius": 100,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "8d0d9089-e9c9-426e-9cbe-1df9b321d026",
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "5769bb60-9dad-490f-b1db-40b41694f22e",
+          "go": "9fd94068-fc07-4f60-b6e5-61b62a5dc437",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "d5483b79-97d7-45e1-9baa-0afe3d78c1fa",
+          "go": "423051c2-de3f-48c6-b398-d7e369cb71c5",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 350,
+        "SetPositionOnStart": false,
+        "SetRotationOnStart": false
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "d5483b79-97d7-45e1-9baa-0afe3d78c1fa",
+        "AngularDamping": 0.1,
+        "Gravity": true,
+        "LinearDamping": 1,
+        "Locking": {
+          "X": true,
+          "Y": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Grubs.DiggingExplosiveProjectile",
+        "__guid": "839c539b-94a6-42dc-8962-caa536b6941a",
+        "DigLength": 5,
+        "DigWidth": 20,
+        "Model": {
+          "_type": "component",
+          "component_id": "5769bb60-9dad-490f-b1db-40b41694f22e",
+          "go": "9fd94068-fc07-4f60-b6e5-61b62a5dc437",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Projectile": {
+          "_type": "component",
+          "component_id": "5f9b6541-79a4-4108-bee0-934b45b14e90",
+          "go": "423051c2-de3f-48c6-b398-d7e369cb71c5",
+          "component_type": "ExplosiveProjectile"
+        },
+        "ProjectileMovement": {
+          "_type": "component",
+          "component_id": "8d0d9089-e9c9-426e-9cbe-1df9b321d026",
+          "go": "423051c2-de3f-48c6-b398-d7e369cb71c5",
+          "component_type": "PhysicsProjectile"
+        },
+        "ProjectileSpeed": 4
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "9fd94068-fc07-4f60-b6e5-61b62a5dc437",
+        "Flags": 0,
+        "Name": "bunker buster",
+        "Rotation": "0,0.7071068,0,0.7071068",
+        "Scale": "0.5,0.5,0.5",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "5769bb60-9dad-490f-b1db-40b41694f22e",
+            "BodyGroups": 18446744073709551615,
+            "CreateBoneObjects": false,
+            "Model": "models/weapons/airstrikes/bomb.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          },
+          {
+            "__type": "Sandbox.HighlightOutline",
+            "__guid": "1722a948-0256-4f77-97a8-7b954e3dd8fa",
+            "Color": "0,0,0,1",
+            "InsideColor": "0,0,0,0",
+            "InsideObscuredColor": "0,0,0,0",
+            "ObscuredColor": "0,0,0,0.4",
+            "Width": 0.25
+          },
+          {
+            "__type": "Sandbox.ModelCollider",
+            "__guid": "f9739c13-97ef-4806-8b42-3a17b613a79d",
+            "IsTrigger": false,
+            "Model": "models/weapons/airstrikes/bomb.vmdl",
+            "Static": false
+          },
+          {
+            "__type": "Grubs.Spinning",
+            "__guid": "a753ae3f-c714-41a0-b55d-76a373fde278",
+            "SpinAxis": "Roll",
+            "SpinSpeed": 500
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
