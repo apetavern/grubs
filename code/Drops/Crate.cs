@@ -9,19 +9,10 @@ public sealed class Crate : Component, Component.ITriggerListener
 {
 	[Property] public DropType DropType { get; set; } = DropType.Weapon;
 
-	private bool _pickedUp = false;
-
 	public void OnTriggerEnter( Collider other )
 	{
-		// kidd: s&box seems to be firing OnTriggerEnter for every collider on the GameObject,
-		// instead of specifically trigger colliders, causing players to pick up two items.
-		// Stupid workaround until this is fixed.
-		if ( _pickedUp )
-			return;
-
 		if ( other.GameObject.Tags.Has( "player" ) )
 		{
-			_pickedUp = true;
 			switch ( DropType )
 			{
 				case DropType.Weapon:
