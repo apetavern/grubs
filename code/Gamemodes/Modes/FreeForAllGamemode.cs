@@ -149,6 +149,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		await RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn );
 		await RollCrateSpawn( DropType.Health, GrubsConfig.HealthCrateChancePerTurn );
+		await RollCrateSpawn( DropType.Tool, GrubsConfig.ToolCrateChancePerTurn );
 	}
 
 	private async Task RollCrateSpawn( DropType dropType, float chance )

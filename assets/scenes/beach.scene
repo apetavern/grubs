@@ -93,6 +93,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/world/drops/health_crate.prefab"
           },
+          "ToolsCratePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/tools_crate.prefab"
+          },
           "WeaponsCratePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/drops/weapons_crate.prefab"
@@ -366,7 +370,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-29T22:25:37.427368-05:00",
+  "LastSaved": "2024-05-30T12:19:19.3512605\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

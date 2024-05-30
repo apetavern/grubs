@@ -5,7 +5,7 @@ namespace Grubs.Drops;
 
 public static class CrateDrops
 {
-	private static readonly Logger Log = new("CrateDrops");
+	private static readonly Logger Log = new( "CrateDrops" );
 
 	private static readonly Dictionary<string, float> _dropChancesWeapons = new();
 	private static readonly Dictionary<string, float> _dropChancesTools = new();
@@ -101,8 +101,11 @@ public static class CrateDrops
 	public static void ShowDropRates()
 	{
 		// Ensure the drop tables have been initialized.
-		// GetRandomToolFromCrate();
+		GetRandomToolFromCrate();
 		GetRandomWeaponFromCrate();
+
+		Log.Info( "Weapons Available: " + _cumulativeDropPercentagesWeapons.Count );
+		Log.Info( "Tools Available: " + _cumulativeDropPercentagesTools.Count );
 
 		// Print weapon drop table.
 		Log.Info( "=== WEAPONS DROP TABLE ===" );
@@ -117,18 +120,17 @@ public static class CrateDrops
 			Log.Info( $"{_dropMapWeapons[i]}: {dropChance * 100f}%" );
 		}
 
+		//Print tool drop table.
 		Log.Info( "=== TOOLS DROP TABLE ===" );
-		Log.Info( "No tools available yet." );
-		// Print tool drop table.
-		// for ( var i = 0; i < _cumulativeDropPercentagesTools.Count; i++ )
-		// {
-		// 	float dropChance;
-		// 	if ( i > 0 )
-		// 		dropChance = _cumulativeDropPercentagesTools[i] - _cumulativeDropPercentagesTools[i - 1];
-		// 	else
-		// 		dropChance = _cumulativeDropPercentagesTools[i];
-		//
-		// 	Log.Info( $"{_dropMapTools[i]}: {dropChance * 100f}%" );
-		// }
+		for ( var i = 0; i < _cumulativeDropPercentagesTools.Count; i++ )
+		{
+			float dropChance;
+			if ( i > 0 )
+				dropChance = _cumulativeDropPercentagesTools[i] - _cumulativeDropPercentagesTools[i - 1];
+			else
+				dropChance = _cumulativeDropPercentagesTools[i];
+
+			Log.Info( $"{_dropMapTools[i]}: {dropChance * 100f}%" );
+		}
 	}
 }
