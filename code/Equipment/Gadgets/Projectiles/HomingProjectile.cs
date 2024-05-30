@@ -8,17 +8,18 @@ namespace Grubs.Equipment.Gadgets.Projectiles;
 public class HomingProjectile : Projectile
 {
 	public Vector3 ProjectileTarget { get; set; }
-	[Property] private Projectile ProjectileMovement { get; set; }
+	[Property] public Projectile ProjectileMovement { get; set; }
 	[Property] private float TimeBeforeHoming { get; set; } = 1f;
 
-	public void ShareData()
+	public virtual void ShareData()
 	{
 		if ( Source != null )
 		{
 			ProjectileMovement.Source = Source;
 			ProjectileMovement.Charge = Charge;
 		}
-		else{
+		else
+		{
 			Source = ProjectileMovement.Source;
 			Charge = ProjectileMovement.Charge;
 		}
@@ -35,13 +36,13 @@ public class HomingProjectile : Projectile
 		pp.PhysicsBody.Gravity = false;
 		pp.PhysicsBody.AngularDamping = 5f;
 		pp.Model.SetBodyGroup( "flame", 1 );
-		while ( Vector3.DistanceBetween(Transform.Position, ProjectileTarget) > 10f )
+		while ( Vector3.DistanceBetween( Transform.Position, ProjectileTarget ) > 10f )
 		{
 			await Task.FixedUpdate();
 			pp.PhysicsBody.Velocity = Transform.Rotation.Forward * ProjectileSpeed;
-			Transform.Rotation = Rotation.Lerp(Transform.Rotation, Rotation.LookAt( ProjectileTarget - Transform.Position ), 2f * Time.Delta);
+			Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( ProjectileTarget - Transform.Position ), 2f * Time.Delta );
 		}
-		
+
 	}
 
 }
