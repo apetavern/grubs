@@ -63,8 +63,26 @@ public sealed class TargetingWeapon : Weapon
 
 		if ( Input.Released( "fire" ) && ProjectileTarget != Vector3.Zero )
 		{
-			IsFiring = false;
-			FiringType = SecondaryFiringType;
+			switch ( SecondaryFiringType )
+			{
+				case FiringType.Instant:
+					IsFiring = true;
+
+					if ( OnFire is not null )
+						OnFire.Invoke( 100 );
+					else
+						FireImmediate();
+
+					TimeSinceLastUsed = 0;
+
+					if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
+					break;
+				default:
+					IsFiring = false;
+					FiringType = SecondaryFiringType;
+					break;
+			}
+
 		}
 	}
 
