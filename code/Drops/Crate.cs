@@ -16,18 +16,25 @@ public sealed class Crate : Component, Component.ITriggerListener
 			switch ( DropType )
 			{
 				case DropType.Weapon:
-					HandleWeaponCrateTrigger( other );
+					HandleEquipmentCrateTrigger( other );
 					break;
 				case DropType.Health:
 					HandleHealthCrateTrigger( other );
+					break;
+				case DropType.Tool:
+					HandleEquipmentCrateTrigger( other, true );
 					break;
 			}
 		}
 	}
 
-	private void HandleWeaponCrateTrigger( Collider other )
+	private void HandleEquipmentCrateTrigger( Collider other, bool isTool = false )
 	{
-		var resPath = CrateDrops.GetRandomWeaponFromCrate();
+		string resPath = isTool switch
+		{
+			true => CrateDrops.GetRandomToolFromCrate(),
+			false => CrateDrops.GetRandomWeaponFromCrate()
+		};
 		var equipmentResource = ResourceLibrary.Get<EquipmentResource>( resPath );
 
 		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndChildren );
