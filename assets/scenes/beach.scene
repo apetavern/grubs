@@ -318,6 +318,25 @@
           "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
         }
       ]
+    },
+    {
+      "__guid": "0f45ad07-5d61-43eb-9f1e-3940781f7c82",
+      "Flags": 0,
+      "Name": "World Popup Helper",
+      "Position": "136.4629,-1421.282,280.9131",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Grubs.Helpers.WorldPopupHelper",
+          "__guid": "e0aa518f-efcd-4a30-9dd6-e9687d9fa766",
+          "DamageNumberPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/popups/damagenumber.prefab"
+          }
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -343,7 +362,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-29T19:01:59.8550611-05:00",
+  "LastSaved": "2024-05-29T20:31:22.8403953-05:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

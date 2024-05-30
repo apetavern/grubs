@@ -1,5 +1,4 @@
 ﻿using Grubs.Equipment.Gadgets.Projectiles;
-using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
 using Grubs.Helpers;
 using Grubs.Pawn;
@@ -39,8 +38,8 @@ public partial class Health : Component
 			DamageQueue.Enqueue( damageInfo );
 			return;
 		}
-		
-		if (grub.IsValid() && grub.IsActive && immediate )
+
+		if ( grub.IsValid() && grub.IsActive && immediate )
 			Gamemode.FFA.UseTurn();
 
 		CurrentHealth -= damageInfo.Damage;
@@ -57,7 +56,7 @@ public partial class Health : Component
 	/// Will dequeue DamageQueue until empty and apply any damage to CurrentHealth.
 	/// </summary>
 	/// <returns></returns>
-	[Broadcast]
+	[Authority]
 	public void ApplyDamage()
 	{
 		if ( !DamageQueue.Any() )
@@ -67,12 +66,14 @@ public partial class Health : Component
 		while ( DamageQueue.TryDequeue( out var info ) )
 			totalDamage += info.Damage;
 
+		WorldPopupHelper.Local.CreateDamagePopup( Id, totalDamage );
 		TakeDamage( new GrubsDamageInfo( totalDamage ), true );
 	}
 
 	public void Heal( float heal )
 	{
 		CurrentHealth += heal;
+		WorldPopupHelper.Local.CreateDamagePopup( Id, -heal );
 	}
 
 	private async Task OnDeath( bool deleteImmediately = false )

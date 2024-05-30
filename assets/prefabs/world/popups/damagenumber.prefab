@@ -1,0 +1,35 @@
+{
+  "RootObject": {
+    "__guid": "a4098784-ef37-49f5-80d9-602531705590",
+    "Flags": 0,
+    "Name": "damagenumber",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.WorldPanel",
+        "__guid": "7ccabf90-37b0-4ed6-8801-f392acb59c9f",
+        "HorizontalAlign": "Center",
+        "InteractionRange": 1000,
+        "LookAtCamera": true,
+        "PanelSize": "1024,350",
+        "RenderScale": 1,
+        "VerticalAlign": "Center"
+      },
+      {
+        "__type": "Grubs.UI.DamageNumber",
+        "__guid": "bc1c95b6-f51d-48e2-8ff5-f1a584dff8dd",
+        "DestroyDelay": 3,
+        "RiseSpeed": 7.5
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
