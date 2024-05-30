@@ -11,10 +11,11 @@ PlayerListEntry {
         height: 65px;
         border-radius: 4px;
         flex-shrink: 0;
+        margin-right: 8px;
     }
 
     .name {
-        font-family: Londrina Solid;
+        font-family: $font-family;
         font-size: 36px;
         text-shadow: 2px 2px 2px black;
         text-stroke: 3px black;
@@ -37,7 +38,7 @@ PlayerListEntry {
     }
 
     &.inactive {
-        opacity: 0.5;
+        opacity: 0.75;
         transform: translateX(-3%);
     }
 }
