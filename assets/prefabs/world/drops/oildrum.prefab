@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "8294c91d-c7b8-4fa1-84c6-ea0d1d1c83a2",
+    "__guid": "37ca8b3a-8b30-46b7-b17f-6aaa80122a73",
     "Flags": 0,
     "Name": "oildrum",
     "Tags": "projectile,notarget,solid",
@@ -10,43 +10,44 @@
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "0ac8a047-439f-4cbc-972e-dd090818c669",
-        "AngularDamping": 2,
+        "__guid": "582abdfe-8511-421d-a17a-f8daa1689039",
+        "AngularDamping": 4,
         "Gravity": true,
-        "LinearDamping": 1,
+        "LinearDamping": 2,
         "Locking": {
           "Y": true,
           "Yaw": true
         },
-        "MassOverride": 25,
+        "MassOverride": 100,
         "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "784df8fc-3433-4378-8d94-e8a8cb5b51c6",
+        "__guid": "492edec9-6cd1-4e2e-849a-f63e8f1f4dfb",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/oildrum/oildrum.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.ModelCollider",
-        "__guid": "7249b6b3-5b67-4813-baad-0311b453f226",
+        "__guid": "219fbb4a-7a74-4345-b31b-0480453cd3cf",
         "IsTrigger": false,
         "Model": "models/weapons/oildrum/oildrum.vmdl",
         "Static": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "1e2f39f4-77df-4106-8a58-b048af86fb1e",
+        "__guid": "f4802d97-a04c-4f00-886a-b31b851f7508",
         "Droppable": true,
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "0ac8a047-439f-4cbc-972e-dd090818c669",
-          "go": "8294c91d-c7b8-4fa1-84c6-ea0d1d1c83a2",
+          "component_id": "582abdfe-8511-421d-a17a-f8daa1689039",
+          "go": "37ca8b3a-8b30-46b7-b17f-6aaa80122a73",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 4,
@@ -55,26 +56,26 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "e50e5c5f-58bc-4f6b-a95f-d09ab3fd9d5f",
+        "__guid": "b8e1dda4-b66c-41df-b3d0-c5fbe3516114",
         "MaxHealth": 1
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
-        "__guid": "cb28cda2-3a51-4ce7-90f4-b8dfda4c011a",
+        "__guid": "f1e4f9b1-135b-40fa-961f-54fa9faafa59",
         "FireParticleCount": 25,
         "InitialUpVelocity": 50,
         "LeftRightVelocityRandom": 75,
         "Projectile": {
           "_type": "component",
-          "component_id": "c4acaee7-c363-457e-9d89-dc8a8d93294d",
-          "go": "8294c91d-c7b8-4fa1-84c6-ea0d1d1c83a2",
+          "component_id": "adcdc818-715e-4453-844e-f72c1caa6244",
+          "go": "37ca8b3a-8b30-46b7-b17f-6aaa80122a73",
           "component_type": "ExplosiveProjectile"
         },
         "SphericalEmission": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "c4acaee7-c363-457e-9d89-dc8a8d93294d",
+        "__guid": "adcdc818-715e-4453-844e-f72c1caa6244",
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 0,

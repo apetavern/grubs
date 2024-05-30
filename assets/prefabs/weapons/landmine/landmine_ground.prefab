@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "c521086d-081c-4963-a9a5-9c1d591787ff",
+    "__guid": "c74367bd-34f1-492e-84e1-0fa00636e7c8",
     "Flags": 0,
     "Name": "landmine_ground",
     "Tags": "projectile,notarget",
@@ -10,44 +10,47 @@
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "8b4f7721-30d8-464c-9514-2f072d625a8e",
-        "AngularDamping": 2,
+        "__guid": "a488bb9f-cca6-48c5-a944-1bda413b195f",
+        "AngularDamping": 4,
         "Gravity": true,
-        "LinearDamping": 1,
+        "LinearDamping": 2,
         "Locking": {
           "Y": true,
           "Yaw": true
         },
-        "MassOverride": 25,
+        "MassOverride": 75,
         "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "f29650bc-e4c3-4f66-b775-304b0761734c",
+        "__guid": "4ceed8bc-ee37-4760-a3c5-5fbdaa094cd3",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "MaterialGroup": "lightoff",
         "Model": "models/weapons/landmine/landmine_projectile.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "ba5322e6-76eb-4b9b-b7aa-955fbf1eae1b",
+        "__guid": "a6156071-33f0-457c-8432-a3e9721dfcab",
         "Droppable": true,
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "8b4f7721-30d8-464c-9514-2f072d625a8e",
-          "go": "c521086d-081c-4963-a9a5-9c1d591787ff",
+          "component_id": "a488bb9f-cca6-48c5-a944-1bda413b195f",
+          "go": "c74367bd-34f1-492e-84e1-0fa00636e7c8",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 4
+        "ProjectileSpeed": 4,
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": false
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "de1d0d32-3fc3-4760-9f38-628bab2c4137",
+        "__guid": "a4446550-6843-460c-b896-d5364bcd38cc",
         "Center": "0,0,5.1",
         "IsTrigger": false,
         "Scale": "20,20,10.8",
@@ -56,7 +59,7 @@
     ],
     "Children": [
       {
-        "__guid": "598dbf2b-7d1d-46bd-aa36-68e5ca21aa41",
+        "__guid": "743ca289-da3f-408c-93e1-d30f3005ce44",
         "Flags": 0,
         "Name": "Trigger",
         "Tags": "trigger,ignore_killzone",
@@ -66,7 +69,7 @@
         "Components": [
           {
             "__type": "Sandbox.SphereCollider",
-            "__guid": "f07d419a-8f35-4520-a1bd-58477e3cb401",
+            "__guid": "ebbdd6e4-44c3-45ca-afc3-cd957768786a",
             "Center": "0,0,0",
             "IsTrigger": true,
             "Radius": 45,
@@ -74,23 +77,20 @@
           },
           {
             "__type": "Grubs.Equipment.Gadgets.Ground.Landmine",
-            "__guid": "4445f48a-23a8-415d-b54c-692593e29dcf",
+            "__guid": "7a6b1206-39b9-4b97-93c6-185d35d1d66e",
             "ArmTime": 3,
             "BeepSound": "sounds/weapons/mine/beep.sound",
             "Damage": 60,
             "DetonateTime": 5,
             "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-            "IsArmed": false,
-            "IsDetonating": false,
-            "IsDud": false,
             "Mine": {
               "_type": "gameobject",
-              "go": "c521086d-081c-4963-a9a5-9c1d591787ff"
+              "go": "c74367bd-34f1-492e-84e1-0fa00636e7c8"
             },
             "Model": {
               "_type": "component",
-              "component_id": "f29650bc-e4c3-4f66-b775-304b0761734c",
-              "go": "c521086d-081c-4963-a9a5-9c1d591787ff",
+              "component_id": "4ceed8bc-ee37-4760-a3c5-5fbdaa094cd3",
+              "go": "c74367bd-34f1-492e-84e1-0fa00636e7c8",
               "component_type": "SkinnedModelRenderer"
             },
             "Particles": "particles/explosion/grubs_explosion_base.vpcf",
