@@ -1,5 +1,4 @@
-﻿using Grubs.Common;
-using Grubs.UI;
+﻿using Grubs.UI;
 
 namespace Grubs.Helpers;
 
@@ -9,6 +8,7 @@ public sealed class WorldPopupHelper : Component
 	public static WorldPopupHelper Local { get; private set; }
 
 	[Property] public GameObject DamageNumberPrefab { get; set; }
+	[Property] public GameObject CratePickupPrefab { get; set; }
 
 	public WorldPopupHelper()
 	{
@@ -16,18 +16,28 @@ public sealed class WorldPopupHelper : Component
 	}
 
 	[Broadcast]
-	public void CreateDamagePopup( Guid healthIdent, float damageTaken )
+	public void CreateDamagePopup( Guid targetIdent, float damageTaken )
 	{
-		var comp = Scene.Directory.FindComponentByGuid( healthIdent );
-		if ( comp is not Health health )
-			return;
-
+		var target = Scene.Directory.FindByGuid( targetIdent );
 		if ( damageTaken == 0 )
 			return;
 
 		var popupPrefab = DamageNumberPrefab.Clone();
 		var damageNumber = popupPrefab.Components.Get<DamageNumber>();
-		damageNumber.Target = health.GameObject;
+		damageNumber.Target = target;
 		damageNumber.Damage = damageTaken;
+	}
+
+	[Broadcast]
+	public void CreatePickupPopup( Guid targetIdent, string icon )
+	{
+		var target = Scene.Directory.FindByGuid( targetIdent );
+		if ( icon == null )
+			return;
+
+		var popupPrefab = CratePickupPrefab.Clone();
+		var cratePickup = popupPrefab.Components.Get<CratePickup>();
+		cratePickup.Target = target;
+		cratePickup.Icon = icon;
 	}
 }

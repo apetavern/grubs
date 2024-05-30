@@ -1,0 +1,35 @@
+{
+  "RootObject": {
+    "__guid": "6312a0ac-1d81-403d-b6b2-23bf86246aa6",
+    "Flags": 0,
+    "Name": "cratepickup",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.WorldPanel",
+        "__guid": "35300f62-86d4-49b9-b32c-bd557230568a",
+        "HorizontalAlign": "Center",
+        "InteractionRange": 1000,
+        "LookAtCamera": true,
+        "PanelSize": "512,512",
+        "RenderScale": 1,
+        "VerticalAlign": "Center"
+      },
+      {
+        "__type": "Grubs.UI.CratePickup",
+        "__guid": "e5eb0326-76e7-474d-beb6-937a832b3711",
+        "DestroyDelay": 3,
+        "RiseSpeed": 7.5
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

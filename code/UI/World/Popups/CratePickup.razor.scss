@@ -1,0 +1,17 @@
+CratePickup {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(black, 0.1);
+    border: 2px solid rgba(black, 0.1);
+    border-radius: 12px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: opacity 0.15s ease;
+
+    &:outro {
+        opacity: 0;
+    }
+}

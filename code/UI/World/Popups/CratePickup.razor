@@ -5,25 +5,20 @@
 @attribute [StyleSheet]
 
 <root>
-    <div class="@(_isHeal ? "heal" : "damage")">@FormatDamage()</div>
+    <img src=@Icon />
 </root>
 
 @code {
     public GameObject Target { get; set; }
-    public float Damage { get; set; }
+    public string Icon { get; set; }
 
     [Property] private float RiseSpeed { get; set; } = 7.5f;
     [Property] private float DestroyDelay { get; set; } = 3f;
 
-    private Vector3 _offset;
-    private bool _isHeal => Damage < 0;
+    private Vector3 _offset = Vector3.Up * 64f;
 
     protected override void OnStart()
     {
-        var random = Game.Random.NextSingle() * 2f - 1; // Between -1 and 1
-        _offset = (Vector3.Up * 64f) + (Vector3.Forward * random * 16f);
-        UpdatePosition();
-
         _ = DelayDestroy();
     }
 
@@ -33,15 +28,9 @@
         UpdatePosition();
     }
 
-    protected override int BuildHash() => HashCode.Combine(Damage);
+    protected override int BuildHash() => HashCode.Combine(Icon);
 
     private void UpdatePosition() => Transform.Position = Target.Transform.Position + _offset;
-
-    private string FormatDamage()
-    {
-        var damage = Math.Floor(Math.Min(Damage, 9999));
-        return _isHeal ? $"+{Math.Abs(damage)}" : $"-{damage}";
-    }
 
     private async Task DelayDestroy()
     {

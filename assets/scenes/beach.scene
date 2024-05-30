@@ -331,6 +331,10 @@
         {
           "__type": "Grubs.Helpers.WorldPopupHelper",
           "__guid": "e0aa518f-efcd-4a30-9dd6-e9687d9fa766",
+          "CratePickupPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/popups/cratepickup.prefab"
+          },
           "DamageNumberPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/popups/damagenumber.prefab"
@@ -362,7 +366,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-29T20:31:22.8403953-05:00",
+  "LastSaved": "2024-05-29T22:25:37.427368-05:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
