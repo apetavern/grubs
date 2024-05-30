@@ -34,7 +34,7 @@
         "SlotIndex": 0
       },
       {
-        "__type": "Grubs.Equipment.Weapons.HomingWeapon",
+        "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
         "__guid": "e097e462-78e7-4afa-9bba-53322a1d1f26",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
@@ -60,7 +60,7 @@
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.HomingWeapon",
+              "Grubs.Equipment.Weapons.TargetingWeapon",
               "Grubs.DroppedProjectile"
             ]
           },
@@ -86,7 +86,7 @@
               "Properties": {
                 "_isStatic": false,
                 "_name": "ResetParameters",
-                "_type": "Grubs.Equipment.Weapons.HomingWeapon"
+                "_type": "Grubs.Equipment.Weapons.TargetingWeapon"
               },
               "UserData": {
                 "Position": "1024,-48"
@@ -96,7 +96,7 @@
               "Id": 4,
               "Type": "scene.get",
               "Properties": {
-                "T": "Grubs.Equipment.Weapons.HomingWeapon"
+                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
               },
               "UserData": {
                 "Position": "736,16"
@@ -106,7 +106,7 @@
               "Id": 5,
               "Type": "scene.get",
               "Properties": {
-                "T": "Grubs.Equipment.Weapons.HomingWeapon"
+                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
               },
               "UserData": {
                 "Position": "-192,-112"
@@ -118,7 +118,7 @@
               "Properties": {
                 "_isStatic": false,
                 "_name": "ShareData",
-                "_type": "Grubs.Equipment.Gadgets.Projectiles.HomingProjectile"
+                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile"
               },
               "UserData": {
                 "Position": "688,-48"

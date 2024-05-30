@@ -4,8 +4,8 @@ using Grubs.Pawn;
 
 namespace Grubs.Equipment.Weapons;
 
-[Title( "Grubs - Homing Weapon" ), Category( "Equipment" )]
-public sealed class HomingWeapon : Weapon
+[Title( "Grubs - Targeting Weapon" ), Category( "Equipment" )]
+public sealed class TargetingWeapon : Weapon
 {
 	[Property] public ModelRenderer CursorModel { get; set; }
 	public Vector3 ProjectileTarget { get; set; }

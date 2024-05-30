@@ -5,25 +5,13 @@ using System.ComponentModel.Design;
 namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Homing Projectile" ), Category( "Equipment" )]
-public class HomingProjectile : Projectile
+public class HomingProjectile : TargetedProjectile
 {
-	public Vector3 ProjectileTarget { get; set; }
-	[Property] public Projectile ProjectileMovement { get; set; }
 	[Property] private float TimeBeforeHoming { get; set; } = 1f;
 
-	public virtual void ShareData()
+	public override void ShareData()
 	{
-		if ( Source != null )
-		{
-			ProjectileMovement.Source = Source;
-			ProjectileMovement.Charge = Charge;
-		}
-		else
-		{
-			Source = ProjectileMovement.Source;
-			Charge = ProjectileMovement.Charge;
-		}
-		ProjectileTarget = Source.Components.Get<HomingWeapon>().ProjectileTarget;
+		base.ShareData();
 		StartHoming();
 	}
 
