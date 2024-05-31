@@ -45,4 +45,23 @@ public sealed class ChatHelper : Component
 		Messages.Add( message );
 		OnMessageReceived?.Invoke( message );
 	}
+
+	[Broadcast( NetPermission.HostOnly )]
+	public void SendInfoMessage( string messageText )
+	{
+		if ( messageText.Contains( '\n' ) || messageText.Contains( '\r' ) )
+			return;
+
+		var message = new ChatMessage()
+		{
+			AuthorName = string.Empty,
+			AuthorSteamId = 0,
+			Message = messageText,
+			Color = Color.White.Hex,
+			Lifetime = 0f
+		};
+
+		Messages.Add( message );
+		OnMessageReceived?.Invoke( message );
+	}
 }

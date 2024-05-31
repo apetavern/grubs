@@ -2,6 +2,7 @@
 using Grubs.Drops;
 using Grubs.Equipment.Gadgets.Ground;
 using Grubs.Extensions;
+using Grubs.Helpers;
 using Grubs.Pawn;
 using Grubs.Terrain;
 using Grubs.UI.GameEnd;
@@ -147,12 +148,12 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	private async Task HandleCrateSpawns()
 	{
-		await RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn );
-		await RollCrateSpawn( DropType.Health, GrubsConfig.HealthCrateChancePerTurn );
-		await RollCrateSpawn( DropType.Tool, GrubsConfig.ToolCrateChancePerTurn );
+		await RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn, "A weapon crate has been spawned!" );
+		await RollCrateSpawn( DropType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
+		await RollCrateSpawn( DropType.Tool, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
 	}
 
-	private async Task RollCrateSpawn( DropType dropType, float chance )
+	private async Task RollCrateSpawn( DropType dropType, float chance, string message )
 	{
 		if ( Game.Random.Float( 1f ) >= chance )
 			return;
@@ -160,6 +161,8 @@ public sealed class FreeForAllGamemode : Gamemode
 		var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: true );
 		var crate = CrateUtility.Instance.SpawnCrate( dropType );
 		crate.Transform.Position = spawnPos;
+
+		ChatHelper.Instance.SendInfoMessage( message );
 	}
 
 	private void RotateActivePlayer()

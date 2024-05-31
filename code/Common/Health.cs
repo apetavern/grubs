@@ -23,6 +23,8 @@ public partial class Health : Component
 
 	private Queue<GrubsDamageInfo> DamageQueue { get; set; } = new();
 
+	private DeathReason _deathReason;
+
 	protected override void OnStart()
 	{
 		CurrentHealth = MaxHealth;
@@ -48,7 +50,11 @@ public partial class Health : Component
 
 		if ( CurrentHealth <= 0 && !DeathInvoked )
 		{
-			_ = OnDeath( damageInfo.Tags.Has( "killzone" ) );
+			bool killzone = damageInfo.Tags.Has( "killzone" );
+			if ( killzone )
+				_deathReason = new DeathReason( grub, null, DamageType.None, damageInfo, DamageType.KillZone );
+
+			_ = OnDeath( killzone );
 		}
 	}
 
@@ -63,8 +69,15 @@ public partial class Health : Component
 			return;
 
 		var totalDamage = 0f;
+		var damageInfos = new List<GrubsDamageInfo>();
 		while ( DamageQueue.TryDequeue( out var info ) )
+		{
 			totalDamage += info.Damage;
+			damageInfos.Add( info );
+		}
+
+		if ( totalDamage >= CurrentHealth && Components.TryGet( out Grub grub ) )
+			_deathReason = DeathReason.FindReason( grub, damageInfos );
 
 		WorldPopupHelper.Instance.CreateDamagePopup( GameObject.Id, totalDamage );
 		TakeDamage( new GrubsDamageInfo( totalDamage ), true );
@@ -101,6 +114,8 @@ public partial class Health : Component
 				ExplosionHelper.Instance.Explode( grub, position, 100f, 25f );
 				plunger?.Destroy();
 			}
+
+			ChatHelper.Instance.SendInfoMessage( _deathReason.ToString() );
 
 			grub.GameObject.Destroy();
 			return;
