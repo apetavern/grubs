@@ -1,0 +1,105 @@
+{
+  "RootObject": {
+    "__guid": "9b997fc9-dd6a-40c7-8901-88d4d2038b9f",
+    "Flags": 0,
+    "Name": "mrl_shell",
+    "Scale": "0.75,0.75,0.75",
+    "Tags": "projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "dbae14d3-2598-44ad-8263-e5c9529645fb",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/shell/shell.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "fef886ea-052b-4902-8239-b0987b65f818",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      },
+      {
+        "__type": "Sandbox.CapsuleCollider",
+        "__guid": "1cf0eb70-4c36-4e05-82ed-8a5ba18ea78a",
+        "End": "1.880003,0,0",
+        "IsTrigger": false,
+        "Radius": 4.6000004,
+        "Start": "-5.559999,0,0",
+        "Static": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
+        "__guid": "c42616fc-c953-41c2-8b8f-6e1b173bf674",
+        "CollisionDelay": 0,
+        "DeleteOnExplode": true,
+        "ExplodeAfter": 6,
+        "ExplodeOnCollision": true,
+        "ExplodeOnDeath": true,
+        "ExplosionDamage": 15,
+        "ExplosionRadius": 55,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "59281d0c-bb53-4d76-8f4e-13fab3f9ca37",
+        "MaxHealth": 15
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
+        "__guid": "5089e2df-02a7-4d2e-a95a-65cbff2bf01c",
+        "DirectionRandomizer": 10,
+        "Droppable": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "dbae14d3-2598-44ad-8263-e5c9529645fb",
+          "go": "9b997fc9-dd6a-40c7-8901-88d4d2038b9f",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "PhysicsBody": {
+          "_type": "component",
+          "component_id": "811852b0-344d-46ae-a12a-6ffc03632870",
+          "go": "9b997fc9-dd6a-40c7-8901-88d4d2038b9f",
+          "component_type": "Rigidbody"
+        },
+        "ProjectileSpeed": 150,
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": true
+      },
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "811852b0-344d-46ae-a12a-6ffc03632870",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "Y": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

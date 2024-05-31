@@ -7,6 +7,7 @@ public class PhysicsProjectile : Projectile
 	[Property] public required Rigidbody PhysicsBody { get; set; }
 	[Property] public bool SetPositionOnStart { get; set; } = true;
 	[Property] public bool SetRotationOnStart { get; set; } = false;
+	[Property] public float DirectionRandomizer { get; set; } = 0f;
 
 	public override bool Resolved => PhysicsBody.Velocity.IsNearlyZero( 0.1f );
 
@@ -26,6 +27,9 @@ public class PhysicsProjectile : Projectile
 				return;
 
 			var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
+
+			dir *= Rotation.FromPitch( Game.Random.Float( -DirectionRandomizer, DirectionRandomizer ) );
+
 			Transform.Position += dir * 16f;
 			PhysicsBody.ApplyImpulseAt( PhysicsBody.Transform.Position + Vector3.Up * 0.5f,
 				dir * Charge * ProjectileSpeed );

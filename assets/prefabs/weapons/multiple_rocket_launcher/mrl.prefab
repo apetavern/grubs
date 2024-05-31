@@ -1,0 +1,136 @@
+{
+  "RootObject": {
+    "__guid": "4a75bd10-f7a0-4a2a-acc7-e2ae7f6eb9fc",
+    "Flags": 0,
+    "Name": "mrl",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "bc7ea483-135f-4c00-b104-c43535fcee05",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/mrl/mrl.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "d5e74833-0965-4846-97d9-61ff7ed1018c",
+        "CameraCanZoom": true,
+        "Data": "resources/equipment/weapons/mrl.geq",
+        "HoldPose": "Minigun",
+        "Icon": "models/weapons/mrl/mrl.vmdl.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "bc7ea483-135f-4c00-b104-c43535fcee05",
+          "go": "4a75bd10-f7a0-4a2a-acc7-e2ae7f6eb9fc",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Multiple Rocket Launcher",
+        "ShouldShowAimReticle": true,
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.Weapon",
+        "__guid": "a5cb8040-3b85-4efa-b30b-19d03517ddc6",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 0.15,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "d5e74833-0965-4846-97d9-61ff7ed1018c",
+          "go": "4a75bd10-f7a0-4a2a-acc7-e2ae7f6eb9fc",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Continuous",
+        "MaxUses": 15,
+        "OnFire": {
+          "__version": 7,
+          "__guid": "dd418991-6bf1-4852-8045-8a57a3b14e00",
+          "UserData": {
+            "Title": "On Fire",
+            "ReferencedComponentTypes": [
+              "Grubs.Equipment.Weapons.Weapon"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "240,0"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.Weapon"
+              },
+              "UserData": {
+                "Position": "-48,96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "charge",
+              "DstId": 1,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl_shell.prefab"
+              },
+              "DstId": 1,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 3,
+              "DstName": "_this"
+            }
+          ],
+          "Defaults": {
+            "$4._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl_shell.prefab"
+            }
+          }
+        }
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
