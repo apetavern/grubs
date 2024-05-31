@@ -1,0 +1,20 @@
+@using Grubs.Helpers
+
+@namespace Grubs.UI
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    @if (ChatMessage.AuthorSteamId > 0)
+    {
+        <img src="avatar:@ChatMessage.AuthorSteamId" />
+    }
+    <div class="name" style="font-color: linear-gradient(@ChatMessage.Color, adjust-hue(@ChatMessage.Color, 45));">@ChatMessage.AuthorName</div>
+    <div class="msg">@ChatMessage.Message</div>
+</root>
+
+@code {
+    public ChatHelper.ChatMessage ChatMessage { get; set; }
+}

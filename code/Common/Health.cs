@@ -23,6 +23,8 @@ public partial class Health : Component
 
 	private Queue<GrubsDamageInfo> DamageQueue { get; set; } = new();
 
+	private DeathReason _deathReason;
+
 	protected override void OnStart()
 	{
 		CurrentHealth = MaxHealth;
@@ -30,17 +32,20 @@ public partial class Health : Component
 
 	public void TakeDamage( GrubsDamageInfo damageInfo, bool immediate = false )
 	{
-		if ( Components.TryGet( out Grub grub ) && !immediate )
+		if ( Components.TryGet( out Grub grub ) )
 		{
-			if ( Connection.Local.IsHost && !Gamemode.Current.DamageQueue.Contains( grub ) )
-				Gamemode.Current.DamageQueue.Enqueue( grub );
+			if ( grub.IsActive )
+				Gamemode.FFA.UseTurn();
 
-			DamageQueue.Enqueue( damageInfo );
-			return;
+			if ( !immediate )
+			{
+				if ( Connection.Local.IsHost && !Gamemode.Current.DamageQueue.Contains( grub ) )
+					Gamemode.Current.DamageQueue.Enqueue( grub );
+
+				DamageQueue.Enqueue( damageInfo );
+				return;
+			}
 		}
-
-		if ( grub.IsValid() && grub.IsActive && immediate )
-			Gamemode.FFA.UseTurn();
 
 		CurrentHealth -= damageInfo.Damage;
 
@@ -48,7 +53,11 @@ public partial class Health : Component
 
 		if ( CurrentHealth <= 0 && !DeathInvoked )
 		{
-			_ = OnDeath( damageInfo.Tags.Has( "killzone" ) );
+			bool killzone = damageInfo.Tags.Has( "killzone" );
+			if ( killzone )
+				_deathReason = new DeathReason( grub, null, DamageType.None, damageInfo, DamageType.KillZone );
+
+			_ = OnDeath( killzone );
 		}
 	}
 
@@ -63,17 +72,24 @@ public partial class Health : Component
 			return;
 
 		var totalDamage = 0f;
+		var damageInfos = new List<GrubsDamageInfo>();
 		while ( DamageQueue.TryDequeue( out var info ) )
+		{
 			totalDamage += info.Damage;
+			damageInfos.Add( info );
+		}
 
-		WorldPopupHelper.Local.CreateDamagePopup( GameObject.Id, totalDamage );
+		if ( totalDamage >= CurrentHealth && Components.TryGet( out Grub grub ) )
+			_deathReason = DeathReason.FindReason( grub, damageInfos );
+
+		WorldPopupHelper.Instance.CreateDamagePopup( GameObject.Id, totalDamage );
 		TakeDamage( new GrubsDamageInfo( totalDamage ), true );
 	}
 
 	public void Heal( float heal )
 	{
 		CurrentHealth += heal;
-		WorldPopupHelper.Local.CreateDamagePopup( GameObject.Id, -heal );
+		WorldPopupHelper.Instance.CreateDamagePopup( GameObject.Id, -heal );
 	}
 
 	private async Task OnDeath( bool deleteImmediately = false )
@@ -102,8 +118,9 @@ public partial class Health : Component
 				plunger?.Destroy();
 			}
 
+			ChatHelper.Instance.SendInfoMessage( _deathReason.ToString() );
+
 			grub.GameObject.Destroy();
-			return;
 		}
 
 		ObjectDied?.Invoke();

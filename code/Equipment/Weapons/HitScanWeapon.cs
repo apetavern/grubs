@@ -125,7 +125,7 @@ public class HitScanWeapon : Weapon
 		}
 		else if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 		{
-			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.GameObject, GameObject, tr.HitPosition ) );
+			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub, GameObject, tr.HitPosition ) );
 			return false;
 		}
 
@@ -136,6 +136,6 @@ public class HitScanWeapon : Weapon
 	private void HitGrub( Grub grub, Vector3 direction, Vector3 position )
 	{
 		grub.CharacterController.Punch( direction * HitForce );
-		grub.Health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.GameObject, GameObject, position ) );
+		grub.Health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub, GameObject, position ) );
 	}
 }

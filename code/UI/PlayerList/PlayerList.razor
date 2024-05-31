@@ -10,6 +10,7 @@
 @attribute [StyleSheet]
 
 <root>
+    <Chatbox />
     <div class="players">
         @foreach (var player in _players.OrderByDescending(p => p.GetTotalGrubHealth > 0))
         {

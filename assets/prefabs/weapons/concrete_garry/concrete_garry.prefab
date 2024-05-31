@@ -14,7 +14,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/airstrikes/radio.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
@@ -84,9 +85,9 @@
               "Id": 2,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
+                "_type": "Grubs.Equipment.Weapons.TargetingWeapon",
                 "_name": "ResetParameters",
-                "_type": "Grubs.Equipment.Weapons.TargetingWeapon"
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "1024,-48"
@@ -116,9 +117,9 @@
               "Id": 6,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
+                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile",
                 "_name": "ShareData",
-                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile"
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "688,-48"
@@ -132,6 +133,23 @@
               },
               "UserData": {
                 "Position": "384,32"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "grubs.fire_finished",
+              "UserData": {
+                "Position": "1440,-48"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
+              },
+              "UserData": {
+                "Position": "1120,16"
               }
             }
           ],
@@ -202,6 +220,24 @@
               "SrcId": 1,
               "SrcName": "_result",
               "DstId": 10,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 13,
               "DstName": "_this"
             }
           ],

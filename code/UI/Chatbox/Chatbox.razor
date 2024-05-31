@@ -1,0 +1,83 @@
+@using Grubs.Helpers
+
+@namespace Grubs.UI
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="canvas" @ref=Canvas />
+    <TextEntry @ref=Input onsubmit=@Submit onblur=@Close />
+</root>
+
+@code {
+    private const int MaxItems = 100;
+    private const float MessageLifetime = 10f;
+
+    private Panel Canvas { get; set; }
+    private TextEntry Input { get; set; }
+
+    private Queue<ChatboxEntry> _entries = new Queue<ChatboxEntry>();
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        ChatHelper.Instance.OnMessageReceived += OnMessageReceived;
+
+        Canvas.PreferScrollToBottom = true;
+        Input.AcceptsFocus = true;
+        Input.AllowEmojiReplace = true;
+    }
+
+    public override void Tick()
+    {
+        if (Sandbox.Input.Pressed("chat") && IsVisibleSelf)
+            Open();
+    }
+
+    private void OnMessageReceived(ChatHelper.ChatMessage message)
+    {
+        ChatboxEntry entry = new ChatboxEntry()
+        {
+            ChatMessage = message
+        };
+        entry.BindClass("stale", () => entry.ChatMessage.Lifetime > 10f);
+
+        Canvas.AddChild(entry);
+        Canvas.TryScrollToBottom();
+
+        _entries.Enqueue(entry);
+        if (_entries.Count > MaxItems)
+            _entries.Dequeue().Delete();
+    }
+
+    private void Submit()
+    {
+        var message = Input.Text.Trim();
+        Input.Text = string.Empty;
+
+        Close();
+
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
+        ChatHelper.Instance.SendMessage(message);
+    }
+
+    private void Open()
+    {
+        AddClass("open");
+        Input.Focus();
+        Canvas.TryScrollToBottom();
+    }
+
+    private void Close()
+    {
+        RemoveClass("open");
+        Input.Blur();
+        Input.Text = string.Empty;
+        Input.Label.SetCaretPosition(0);
+    }
+}

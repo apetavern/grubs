@@ -326,7 +326,7 @@
     {
       "__guid": "0f45ad07-5d61-43eb-9f1e-3940781f7c82",
       "Flags": 0,
-      "Name": "World Popup Helper",
+      "Name": "UI Helper",
       "Position": "136.4629,-1421.282,280.9131",
       "Enabled": true,
       "NetworkMode": 1,
@@ -343,6 +343,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/world/popups/damagenumber.prefab"
           }
+        },
+        {
+          "__type": "Grubs.Helpers.ChatHelper",
+          "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4"
         }
       ]
     }
@@ -370,7 +374,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-30T15:39:44.4661915-04:00",
+  "LastSaved": "2024-05-31T00:04:32.2843932-05:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
