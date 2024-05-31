@@ -46,7 +46,7 @@ public sealed class ChatHelper : Component
 		OnMessageReceived?.Invoke( message );
 	}
 
-	[Broadcast( NetPermission.HostOnly )]
+	[Broadcast]
 	public void SendInfoMessage( string messageText )
 	{
 		if ( messageText.Contains( '\n' ) || messageText.Contains( '\r' ) )
