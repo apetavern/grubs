@@ -17,12 +17,12 @@
 }
 
 <root>
-    @for (var i = 0; i < 6; i++)
+	@for (var i = 0; i < rows; i++)
     {
         <div class="inv-row">
-            @for (var j = 0; j < 4; j++)
+			@for (var j = 0; j < columns; j++)
             {
-                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * 4 + j)/>
+                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * columns + j)/>
             }
         </div>
     }
@@ -38,6 +38,10 @@
 	private Weapon CurrentWeapon => Current?.Components.Get<Weapon>();
 	private Weapon NextWeapon => Next?.Components.Get<Weapon>();
 	private Weapon PrevWeapon => Prev?.Components.Get<Weapon>();
+
+	private int totalItems => Inventory.Equipment.Count();
+	private int columns = 4;
+	private int rows => (int)Math.Ceiling((double)totalItems / columns);
 
 	public override void Tick()
 	{
@@ -69,10 +73,6 @@
 
 	int SelectNextItemGamepadInput()
 	{
-		const int columns = 4;
-		const int rows = 6;
-		const int totalItems = columns * rows;
-
 		float analogX = Input.AnalogMove.x;
 		float analogY = -Input.AnalogMove.y;
 
