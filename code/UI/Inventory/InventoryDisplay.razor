@@ -41,7 +41,7 @@
 
 	private int totalItems => Inventory.Equipment.Count();
 	private int columns = 4;
-	private int rows => (int)Math.Ceiling((double)totalItems / columns);
+	private int rows => (int)Math.Ceiling((float)totalItems / columns);
 
 	public override void Tick()
 	{
