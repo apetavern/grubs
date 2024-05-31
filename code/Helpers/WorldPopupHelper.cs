@@ -5,14 +5,14 @@ namespace Grubs.Helpers;
 [Title( "Grubs - World Popup Helper" ), Category( "World" )]
 public sealed class WorldPopupHelper : Component
 {
-	public static WorldPopupHelper Local { get; private set; }
+	public static WorldPopupHelper Instance { get; private set; }
 
 	[Property] public GameObject DamageNumberPrefab { get; set; }
 	[Property] public GameObject CratePickupPrefab { get; set; }
 
 	public WorldPopupHelper()
 	{
-		Local = this;
+		Instance = this;
 	}
 
 	[Broadcast]

@@ -66,14 +66,14 @@ public partial class Health : Component
 		while ( DamageQueue.TryDequeue( out var info ) )
 			totalDamage += info.Damage;
 
-		WorldPopupHelper.Local.CreateDamagePopup( GameObject.Id, totalDamage );
+		WorldPopupHelper.Instance.CreateDamagePopup( GameObject.Id, totalDamage );
 		TakeDamage( new GrubsDamageInfo( totalDamage ), true );
 	}
 
 	public void Heal( float heal )
 	{
 		CurrentHealth += heal;
-		WorldPopupHelper.Local.CreateDamagePopup( GameObject.Id, -heal );
+		WorldPopupHelper.Instance.CreateDamagePopup( GameObject.Id, -heal );
 	}
 
 	private async Task OnDeath( bool deleteImmediately = false )
