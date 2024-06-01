@@ -15,7 +15,7 @@
 						[
 							{
 								from = "svgmat.001.vmat"
-								to = "materials/dev/primary_red_additive.vmat"
+								to = "materials/dev/primary_white_emissive.vmat"
 							},
 						]
 						use_global_default = false

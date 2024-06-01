@@ -8,6 +8,7 @@ namespace Grubs.Equipment.Gadgets.Projectiles;
 public class TargetedProjectile : Projectile
 {
 	public Vector3 ProjectileTarget { get; set; }
+	public Vector3 Direction { get; set; }
 	[Property] public Projectile ProjectileMovement { get; set; }
 
 	public virtual void ShareData()
@@ -23,5 +24,6 @@ public class TargetedProjectile : Projectile
 			Charge = ProjectileMovement.Charge;
 		}
 		ProjectileTarget = Source.Components.Get<TargetingWeapon>().ProjectileTarget;
+		Direction = Source.Components.Get<TargetingWeapon>().Direction;
 	}
 }

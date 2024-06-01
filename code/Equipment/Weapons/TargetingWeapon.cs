@@ -9,7 +9,9 @@ public sealed class TargetingWeapon : Weapon
 {
 	[Property] public ModelRenderer CursorModel { get; set; }
 	public Vector3 ProjectileTarget { get; set; }
+	public Vector3 Direction { get; set; } = Vector3.Zero;
 	[Property] public FiringType SecondaryFiringType { get; set; }
+	[Property] public bool Directional { get; set; }
 
 	protected override void OnStart()
 	{
@@ -54,6 +56,28 @@ public sealed class TargetingWeapon : Weapon
 		{
 			IsFiring = true;
 			GrubFollowCamera.Local.PanCamera();
+		}
+
+		if ( Directional )
+		{
+			if ( Direction == Vector3.Zero )
+			{
+				Direction = Vector3.Forward;
+			}
+
+			IsFiring = true;
+
+			if ( Input.AnalogMove.y > 0.5f )
+			{
+				Direction = Vector3.Backward;
+			}
+
+			if ( Input.AnalogMove.y < -0.5f )
+			{
+				Direction = Vector3.Forward;
+			}
+
+			CursorModel.SetBodyGroup( "arrow_direction", Direction == Vector3.Forward ? 1 : 0 );
 		}
 
 		if ( isValidPlacement && Input.Pressed( "fire" ) )
