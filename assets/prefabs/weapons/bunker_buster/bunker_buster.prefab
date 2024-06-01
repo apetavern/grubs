@@ -1,0 +1,266 @@
+{
+  "RootObject": {
+    "__guid": "01858de6-ba69-4816-b73c-73d72f4c14c0",
+    "Flags": 0,
+    "Name": "bunker_buster",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "040bea2d-e0fc-42c6-b915-638ef78fa613",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/airstrikes/radio.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "42ad62a9-123a-42e7-9f2c-3e5f77ff5440",
+        "CameraCanZoom": true,
+        "Data": "resources/equipment/weapons/bunker_buster.geq",
+        "HoldPose": "Holdable",
+        "Icon": "models/weapons/airstrikes/bomb.vmdl.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "040bea2d-e0fc-42c6-b915-638ef78fa613",
+          "go": "01858de6-ba69-4816-b73c-73d72f4c14c0",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Bunker Buster",
+        "ShouldShowAimReticle": false,
+        "SlotIndex": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
+        "__guid": "45554921-9371-46cb-81e6-4d317dd3523c",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
+        "CursorModel": {
+          "_type": "component",
+          "component_id": "160855b3-22ac-4010-a713-80fee68d2e01",
+          "go": "136f101b-5ecf-4bbc-8889-6012fe774c56",
+          "component_type": "ModelRenderer"
+        },
+        "Equipment": {
+          "_type": "component",
+          "component_id": "42ad62a9-123a-42e7-9f2c-3e5f77ff5440",
+          "go": "01858de6-ba69-4816-b73c-73d72f4c14c0",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Complex",
+        "MaxUses": 1,
+        "OnFire": {
+          "__version": 7,
+          "__guid": "623c95ad-9915-4158-8956-da36f303bead",
+          "UserData": {
+            "Title": "On Fire",
+            "ReferencedComponentTypes": [
+              "Grubs.Equipment.Weapons.TargetingWeapon",
+              "Grubs.DiggingExplosiveProjectile"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-32,144"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "208,-16"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
+              },
+              "UserData": {
+                "Position": "-64,-64"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "call",
+              "Properties": {
+                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile",
+                "_name": "ShareData",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "688,-16"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.DiggingExplosiveProjectile"
+              },
+              "UserData": {
+                "Position": "384,80"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "call",
+              "Properties": {
+                "_type": "Grubs.Equipment.Weapons.TargetingWeapon",
+                "_name": "ResetParameters",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "1072,-16"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
+              },
+              "UserData": {
+                "Position": "768,48"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "grubs.fire_finished",
+              "UserData": {
+                "Position": "1472,-96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "charge",
+              "DstId": 1,
+              "DstName": "charge"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "prefab": "prefabs/weapons/bunker_buster/bunker_buster_dropped.prefab"
+              },
+              "DstId": 1,
+              "DstName": "projectile"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "source"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 3,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 10,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "source"
+            }
+          ],
+          "Defaults": {
+            "$11._value": {
+              "_type": "gameobject",
+              "prefab": "prefabs/weapons/bunker_buster/bunker_buster_dropped.prefab"
+            }
+          }
+        },
+        "SecondaryFiringType": "Instant"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "136f101b-5ecf-4bbc-8889-6012fe774c56",
+        "Flags": 0,
+        "Name": "Bunker - Cursor",
+        "Scale": "0.5,0.5,0.5",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "160855b3-22ac-4010-a713-80fee68d2e01",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/weapons/targetindicator/targetindicator.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

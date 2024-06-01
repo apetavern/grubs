@@ -120,6 +120,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/concrete_garry/concrete_garry.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/bunker_buster/bunker_buster.prefab"
           }
         ],
         "Player": {
