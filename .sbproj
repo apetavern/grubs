@@ -635,6 +635,12 @@
           "Name": "previous_equipment",
           "GamepadCode": "SwitchLeftBumper",
           "GroupName": "Other"
+        },
+        {
+          "Name": "mouse_aim",
+          "KeyboardCode": "ALT",
+          "GamepadCode": "None",
+          "GroupName": "Weapon"
         }
       ],
       "__guid": "462cd8dc-4078-4db6-9df8-21ff504a1afb"
