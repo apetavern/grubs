@@ -94,5 +94,7 @@ public class GirderTool : Tool
 		IsFiring = false;
 
 		Sound.Play( PlaceSound );
+
+		base.FireFinished();
 	}
 }
