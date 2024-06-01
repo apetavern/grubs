@@ -107,8 +107,8 @@ public partial class Weapon : Component
 					OnFire.Invoke( 100 );
 				else
 					FireImmediate();
+				
 				TimeSinceLastUsed = 0;
-				FireFinished();
 
 				if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
 			}
