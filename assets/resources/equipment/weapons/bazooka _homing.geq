@@ -4,8 +4,8 @@
   "Icon": "models/weapons/homingmissile/homingmissile.vmdl_c.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/bazooka_homing/bazooka_homing.prefab",
-  "DefaultAmmo": 3,
-  "DropChance": 1,
+  "DefaultAmmo": 2,
+  "DropChance": 4,
   "__references": [],
   "__version": 0
 }

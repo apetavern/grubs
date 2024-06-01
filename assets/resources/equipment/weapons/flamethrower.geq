@@ -5,7 +5,7 @@
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/flamethrower/flamethrower.prefab",
   "DefaultAmmo": 2,
-  "DropChance": 2,
+  "DropChance": 2.5,
   "__references": [],
   "__version": 0
 }
