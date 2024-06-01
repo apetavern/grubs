@@ -87,6 +87,8 @@ public sealed class JetpackTool : Tool
 		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
 	}
 
+	private SoundHandle _jetSound;
+
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
@@ -99,10 +101,12 @@ public sealed class JetpackTool : Tool
 
 		if ( Input.Pressed( "fire" ) && !IsFiring )
 		{
+			_jetSound = Sound.Play( "thrust" );
 			IsFiring = true;
 		}
 		if ( _currentJetFuel <= 0 && IsFiring )
 		{
+			_jetSound.Stop();
 			FireFinished();
 		}
 
@@ -113,6 +117,9 @@ public sealed class JetpackTool : Tool
 			animator.IsOnJetpack = true;
 
 			_jetpackDir = Vector3.Dot( new Vector3( -Input.AnalogMove.y, 0, 0 ), characterController.Velocity.Normal );
+
+			_jetSound.Volume = Input.AnalogMove.Length + 0.1f;
+			_jetSound.Position = Equipment.Grub.Transform.Position;
 
 			if ( Input.AnalogMove.x > 0 && characterController.IsOnGround )
 			{
