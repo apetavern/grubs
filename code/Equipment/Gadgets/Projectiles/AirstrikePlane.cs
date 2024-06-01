@@ -11,6 +11,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 	[Property] public float DropRange { get; set; } = 25f;
 	[Property] public GameObject DropPrefab { get; set; }
 	[Property] public int AmountToDrop { get; set; } = 3;
+	[Property] public bool ApplyVelocity { get; set; }
 
 	private bool _fired;
 
@@ -61,9 +62,14 @@ public sealed class AirstrikePlane : TargetedProjectile
 
 			bomb.Transform.Position = Model.GetAttachment( "droppoint" ).Value.Position;
 			bomb.Transform.Rotation = Transform.Rotation * Rotation.FromPitch( 25f );
-			if ( bomb.Components.TryGet( out Rigidbody body ) )
+			if ( ApplyVelocity && bomb.Components.TryGet( out Rigidbody body ) )
 			{
 				body.Velocity = Direction * ProjectileSpeed;
+			}
+
+			if ( bomb.Components.TryGet( out Projectile projectile ) )
+			{
+				projectile.Source = Source;
 			}
 			await Task.DelaySeconds( 0.25f );
 		}

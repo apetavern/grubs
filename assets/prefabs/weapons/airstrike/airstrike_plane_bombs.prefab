@@ -31,6 +31,7 @@
         "__type": "Grubs.AirstrikePlane",
         "__guid": "b7187a40-14ce-4d18-803b-8d532f3cdfc9",
         "AmountToDrop": 3,
+        "ApplyVelocity": true,
         "DropPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/weapons/airstrike/airstrike_bomb_dropped.prefab"
