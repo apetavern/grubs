@@ -1,16 +1,16 @@
 {
   "RootObject": {
-    "__guid": "c74367bd-34f1-492e-84e1-0fa00636e7c8",
+    "__guid": "be7278c3-a550-422c-a06d-aa7a50ebc8d1",
     "Flags": 0,
     "Name": "landmine_ground",
-    "Tags": "projectile,notarget",
+    "Tags": "projectile,notarget,solid",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "a488bb9f-cca6-48c5-a944-1bda413b195f",
+        "__guid": "5c8a90fb-0078-4607-a5bd-30c9993502c0",
         "AngularDamping": 4,
         "Gravity": true,
         "LinearDamping": 2,
@@ -25,7 +25,7 @@
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "4ceed8bc-ee37-4760-a3c5-5fbdaa094cd3",
+        "__guid": "0624eb3e-53c7-41f6-a558-5097f2e00a6d",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "MaterialGroup": "lightoff",
@@ -36,12 +36,13 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "a6156071-33f0-457c-8432-a3e9721dfcab",
+        "__guid": "aced43b2-4a41-49f8-86d3-b046fa73ac79",
+        "DirectionRandomizer": 0,
         "Droppable": true,
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "a488bb9f-cca6-48c5-a944-1bda413b195f",
-          "go": "c74367bd-34f1-492e-84e1-0fa00636e7c8",
+          "component_id": "5c8a90fb-0078-4607-a5bd-30c9993502c0",
+          "go": "be7278c3-a550-422c-a06d-aa7a50ebc8d1",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 4,
@@ -50,16 +51,21 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "a4446550-6843-460c-b896-d5364bcd38cc",
+        "__guid": "ca84f640-56cd-4708-a605-569c6844b0ce",
         "Center": "0,0,5.1",
         "IsTrigger": false,
         "Scale": "20,20,10.8",
         "Static": false
+      },
+      {
+        "__type": "Grubs.Common.Health",
+        "__guid": "4e000e12-c31a-4163-a61f-3ed74b6f3e53",
+        "MaxHealth": 1
       }
     ],
     "Children": [
       {
-        "__guid": "743ca289-da3f-408c-93e1-d30f3005ce44",
+        "__guid": "e1d5fb25-d7af-46c2-9fd2-505e659d711c",
         "Flags": 0,
         "Name": "Trigger",
         "Tags": "trigger,ignore_killzone",
@@ -69,7 +75,7 @@
         "Components": [
           {
             "__type": "Sandbox.SphereCollider",
-            "__guid": "ebbdd6e4-44c3-45ca-afc3-cd957768786a",
+            "__guid": "c6396db9-1695-45b6-b214-fb39276c179c",
             "Center": "0,0,0",
             "IsTrigger": true,
             "Radius": 45,
@@ -77,20 +83,21 @@
           },
           {
             "__type": "Grubs.Equipment.Gadgets.Ground.Landmine",
-            "__guid": "7a6b1206-39b9-4b97-93c6-185d35d1d66e",
+            "__guid": "69764a2e-cdf5-4e5a-a625-341419044f38",
             "ArmTime": 3,
             "BeepSound": "sounds/weapons/mine/beep.sound",
             "Damage": 60,
+            "DetonateOnDeath": true,
             "DetonateTime": 5,
             "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
             "Mine": {
               "_type": "gameobject",
-              "go": "c74367bd-34f1-492e-84e1-0fa00636e7c8"
+              "go": "be7278c3-a550-422c-a06d-aa7a50ebc8d1"
             },
             "Model": {
               "_type": "component",
-              "component_id": "4ceed8bc-ee37-4760-a3c5-5fbdaa094cd3",
-              "go": "c74367bd-34f1-492e-84e1-0fa00636e7c8",
+              "component_id": "0624eb3e-53c7-41f6-a558-5097f2e00a6d",
+              "go": "be7278c3-a550-422c-a06d-aa7a50ebc8d1",
               "component_type": "SkinnedModelRenderer"
             },
             "Particles": "particles/explosion/grubs_explosion_base.vpcf",

@@ -1,6 +1,5 @@
 using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Terrain;
-using static Sandbox.Component;
 
 namespace Grubs;
 
@@ -9,7 +8,13 @@ public sealed class DiggingExplosiveProjectile : TargetedProjectile
 {
 	[Property] public float DigWidth { get; set; } = 10f;
 	[Property] public float DigLength { get; set; } = 50f;
-	[Property] public ExplosiveProjectile Projectile { get; set; }
+	[Property] public ExplosiveProjectile Explosive { get; set; }
+	[Property] public PhysicsProjectile Physics { get; set; }
+	[Property, Description( "The seconds after making contact with terrain before exploding" )] public float TimeBeforeDetonation { get; set; } = 4f;
+
+	private bool _isArmed = false; // Whether the projectile has made contact with terrain
+	private TimeSince _timeSinceArmed = 0f;
+
 	public override void ShareData()
 	{
 		base.ShareData();
@@ -23,17 +28,33 @@ public sealed class DiggingExplosiveProjectile : TargetedProjectile
 		var startPos = Transform.Position;
 		var endPos = startPos + Vector3.Down * DigLength;
 
-		var tr = Scene.Trace.Ray( Transform.Position, endPos + Vector3.Down * 10f )
-				.WithAnyTags( "player", "solid" )
-				.WithoutTags( "dead" )
-				.IgnoreGameObjectHierarchy( GameObject.Root )
-				.Run();
+		var tr = Scene.Trace.Body( Physics.PhysicsBody.PhysicsBody, endPos )
+			.WithAnyTags( "player", "solid" )
+			.WithoutTags( "dead" )
+			.IgnoreGameObjectHierarchy( GameObject.Root )
+			.Run();
 
-		LastPosition = tr.EndPosition;
-
-		if ( tr.Hit || Vector3.DistanceBetween( Transform.Position, ProjectileTarget ) < 10f )
+		if ( tr.Hit )
 		{
-			Projectile.Explode();
+			var hit = tr.GameObject;
+			if ( hit.Tags.Has( "terrain" ) )
+			{
+				if ( !_isArmed )
+				{
+					_timeSinceArmed = 0f;
+					_isArmed = true;
+				}
+			}
+			else
+			{
+				Explosive.Explode();
+				return;
+			}
+		}
+
+		if ( (_isArmed && _timeSinceArmed > TimeBeforeDetonation) || Vector3.DistanceBetween( Transform.Position, ProjectileTarget ) < 10f )
+		{
+			Explosive.Explode();
 			return;
 		}
 
@@ -45,13 +66,5 @@ public sealed class DiggingExplosiveProjectile : TargetedProjectile
 				new Vector2( endPos.x, endPos.z ),
 				DigWidth + 8f );
 		}
-	}
-
-	private Vector3 LastPosition { get; set; }
-	protected override void DrawGizmos()
-	{
-		Gizmo.Transform = global::Transform.Zero;
-
-		Gizmo.Draw.LineSphere( LastPosition, 8f );
 	}
 }

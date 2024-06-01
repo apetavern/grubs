@@ -12,6 +12,7 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	[Property] public float Damage { get; set; } = 100.0f;
 	[Property] public float ArmTime { get; set; } = 5.0f;
 	[Property] public float DetonateTime { get; set; } = 5.0f;
+	[Property] public bool DetonateOnDeath { get; set; } = false;
 	[Property, ResourceType( "sound" )] public string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] public ParticleSystem Particles { get; set; }
 
@@ -35,6 +36,12 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 		GameObject.Destroy();
 	}
 
+	public void StartDetonating()
+	{
+		_detonatedAt = 0;
+		IsDetonating = true;
+	}
+
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
@@ -42,11 +49,10 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 		if ( !IsArmed || IsDetonating )
 			return;
 
-		if ( !_grubs.Any( g => !g.CharacterController.Velocity.IsNearlyZero(.1f) ) )
+		if ( !_grubs.Any( g => !g.CharacterController.Velocity.IsNearlyZero( .1f ) ) )
 			return;
 
-		_detonatedAt = 0;
-		IsDetonating = true;
+		StartDetonating();
 		OnTrigger();
 	}
 
