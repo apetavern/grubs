@@ -80,6 +80,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 
 	public async void DropBombs()
 	{
+		Sound.Play( "plane_bay_door_open" );
 		for ( int i = 0; i < AmountToDrop; i++ )
 		{
 			var bomb = DropPrefab.Clone();
