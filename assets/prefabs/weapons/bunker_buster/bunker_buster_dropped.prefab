@@ -124,8 +124,7 @@
           {
             "__type": "Grubs.Spinning",
             "__guid": "48b20154-5f89-4af8-a870-23023cd43586",
-            "SpinAxis": "Roll",
-            "SpinSpeed": 500
+            "RotationSpeed": "0,0,500"
           }
         ]
       }
