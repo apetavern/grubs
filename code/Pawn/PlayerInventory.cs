@@ -45,6 +45,17 @@ public sealed class PlayerInventory : Component
 			equipment.Deploy( Player.ActiveGrub );
 			equipment.Holster();
 		}
+
+		//Sort by drop chance (0 drop chance gets put to the front)
+		Equipment = Equipment.OrderBy( X => X.Data.DropChance != 0 ? -X.Data.DropChance : -100f ).ToList();
+		//Put the tools at the front of the line
+		Equipment = Equipment.OrderBy( X => X.Data.Type != Grubs.Equipment.EquipmentType.Tool ).ToList();
+
+		//Re-set equipment slot indexes
+		foreach ( var item in Equipment )
+		{
+			item.SlotIndex = Equipment.IndexOf( item );
+		}
 	}
 
 	protected override void OnUpdate()
