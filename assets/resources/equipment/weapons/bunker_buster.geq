@@ -1,7 +1,7 @@
 {
   "Name": "Bunker Buster",
   "Description": "For those pesky tunnelers",
-  "Icon": "models/weapons/airstrikes/bomb.vmdl.png",
+  "Icon": "models/weapons/bunker_buster/bunker_buster.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": null,
   "DefaultAmmo": 1,

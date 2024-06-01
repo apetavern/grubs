@@ -24,6 +24,7 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "9663d842-0975-4604-b8da-bcc9e4b05388",
+        "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
@@ -100,7 +101,7 @@
             "__guid": "cca65c07-12ab-4858-8c34-574681f46336",
             "BodyGroups": 18446744073709551615,
             "CreateBoneObjects": false,
-            "Model": "models/weapons/airstrikes/bomb.vmdl",
+            "Model": "models/weapons/bunker_buster/bunker_buster.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
