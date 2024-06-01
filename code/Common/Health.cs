@@ -1,4 +1,5 @@
-﻿using Grubs.Equipment.Gadgets.Projectiles;
+﻿using Grubs.Equipment.Gadgets.Ground;
+using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Gamemodes;
 using Grubs.Helpers;
 using Grubs.Pawn;
@@ -130,6 +131,11 @@ public partial class Health : Component
 		if ( Components.TryGet( out ExplosiveProjectile explosive ) && explosive.ExplodeOnDeath )
 		{
 			explosive.Explode();
+		}
+
+		if ( Components.TryGet( out ProximityExplosive proximity, FindMode.EverythingInSelfAndChildren ) && proximity.DetonateOnDeath )
+		{
+			proximity.StartDetonating();
 		}
 	}
 
