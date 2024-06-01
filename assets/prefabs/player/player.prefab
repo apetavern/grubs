@@ -124,6 +124,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/bunker_buster/bunker_buster.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl.prefab"
           }
         ],
         "Player": {
