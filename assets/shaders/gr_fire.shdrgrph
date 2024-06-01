@@ -22,6 +22,10 @@
       "Opacity": {
         "Identifier": "32",
         "Output": "Result"
+      },
+      "PositionOffset": {
+        "Identifier": "45",
+        "Output": "Result"
       }
     },
     {
@@ -617,6 +621,56 @@
       "Comment": "Flame Mask",
       "Identifier": "44",
       "Position": "1728,512"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "45",
+      "Position": "2560,512",
+      "A": {
+        "Identifier": "46",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "48",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "ObjectSpaceNormal",
+      "Identifier": "46",
+      "Position": "2320,512"
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Identifier": "47",
+      "Position": "320,720",
+      "Input": {
+        "Identifier": "22",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Identifier": "48",
+      "Position": "2352,576",
+      "Input": {
+        "Identifier": "49",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Reroute",
+      "Comment": "",
+      "Identifier": "49",
+      "Position": "2208,720",
+      "Input": {
+        "Identifier": "47",
+        "Output": "Result"
+      }
     }
   ]
 }

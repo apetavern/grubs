@@ -47,20 +47,53 @@ struct PixelInput
 	float3 vNormalOs : TEXCOORD15;
 	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
 	float4 vColor : COLOR0;
+	float4 vTintColor : COLOR1;
 };
 
 VS
 {
 	#include "common/vertex.hlsl"
-
+	
+	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
+	CreateInputTexture2D( NoiseOne, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	CreateInputTexture2D( NoiseTwo, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	Texture2D g_tNoiseOne < Channel( RGBA, Box( NoiseOne ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
+	Texture2D g_tNoiseTwo < Channel( RGBA, Box( NoiseTwo ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
+	float g_flNoiseOnePanSpeed < UiGroup( ",0/,0/0" ); Default1( 1 ); Range1( 0, 5 ); >;
+	float g_flNoiseTwoPanSpeed < UiGroup( ",0/,0/0" ); Default1( 0.5 ); Range1( 0, 5 ); >;
+	
 	PixelInput MainVs( VertexInput v )
 	{
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
 
-		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
+		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
+		i.vTintColor = extraShaderData.vTint;
 
+		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
+		
+		float2 l_0 = i.vTextureCoords.xy * float2( 1, 1 );
+		float l_1 = l_0.x;
+		float l_2 = g_flNoiseOnePanSpeed;
+		float l_3 = l_2 * g_flTime;
+		float l_4 = l_0.y;
+		float l_5 = l_3 + l_4;
+		float4 l_6 = float4( l_1, l_5, 0, 0 );
+		float4 l_7 = g_tNoiseOne.SampleLevel( g_sSampler0, l_6.xy, 0 );
+		float2 l_8 = i.vTextureCoords.xy * float2( 1, 1 );
+		float l_9 = l_8.x;
+		float l_10 = g_flNoiseTwoPanSpeed;
+		float l_11 = l_10 * g_flTime;
+		float l_12 = l_8.y;
+		float l_13 = l_11 + l_12;
+		float4 l_14 = float4( l_9, l_13, 0, 0 );
+		float4 l_15 = g_tNoiseTwo.SampleLevel( g_sSampler0, l_14.xy, 0 );
+		float4 l_16 = l_7 + l_15;
+		float4 l_17 = float4( i.vNormalOs, 0 ) * l_16;
+		i.vPositionWs.xyz += l_17.xyz;
+		i.vPositionPs.xyzw = Position3WsToPs( i.vPositionWs.xyz );
+		
 		return FinalizeVertex( i );
 	}
 }
