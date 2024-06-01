@@ -167,7 +167,7 @@
       "Flags": 0,
       "Name": "Terrain",
       "Position": "0,512,64",
-      "Tags": "solid",
+      "Tags": "solid,terrain",
       "Enabled": true,
       "NetworkMode": 1,
       "NetworkInterpolation": true,
@@ -374,7 +374,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-05-31T00:04:32.2843932-05:00",
+  "LastSaved": "2024-06-01T19:02:57.7502007-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
