@@ -1,0 +1,62 @@
+{
+  "RootObject": {
+    "__guid": "f9bbc1e6-7437-4c98-bd97-2c1a5a8a56b9",
+    "Flags": 0,
+    "Name": "airstrike_plane_bombs",
+    "Tags": "projectile",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "dc7c09ad-0140-42ab-9010-5a06111ebf63",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/airstrikes/plane.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Sandbox.HighlightOutline",
+        "__guid": "bec0a68a-ad79-4b0e-a8c8-8a6ac07cff98",
+        "Color": "0,0,0,1",
+        "InsideColor": "0,0,0,0",
+        "InsideObscuredColor": "0,0,0,0",
+        "ObscuredColor": "0,0,0,0.4",
+        "Width": 0.25
+      },
+      {
+        "__type": "Grubs.AirstrikePlane",
+        "__guid": "b7187a40-14ce-4d18-803b-8d532f3cdfc9",
+        "AmountToDrop": 3,
+        "DropPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/airstrike/airstrike_bomb_dropped.prefab"
+        },
+        "DropRange": 512,
+        "Model": {
+          "_type": "component",
+          "component_id": "dc7c09ad-0140-42ab-9010-5a06111ebf63",
+          "go": "f9bbc1e6-7437-4c98-bd97-2c1a5a8a56b9",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "ProjectileMovement": {
+          "_type": "component",
+          "component_id": "b7187a40-14ce-4d18-803b-8d532f3cdfc9",
+          "go": "f9bbc1e6-7437-4c98-bd97-2c1a5a8a56b9",
+          "component_type": "AirstrikePlane"
+        },
+        "ProjectileSpeed": 500
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
