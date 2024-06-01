@@ -58,17 +58,12 @@ public class TeleportTool : Tool
 			.IgnoreGameObject( GameObject )
 			.Run();
 
-		var trTerrain = Scene.Trace.Ray( trLocation.EndPosition, trLocation.EndPosition + Vector3.Right * 64f )
-			.WithoutTags( "solid" )
-			.Size( 1f )
-			.IgnoreGameObject( GameObject )
-			.Run();
-
 		var terrain = Terrain.GrubsTerrain.Instance;
+		var inTerrain = terrain.PointInside( trLocation.EndPosition );
 		var maxHeight = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture ? terrain.WorldTextureHeight : GrubsConfig.TerrainHeight;
 		var exceedsTerrainHeight = trLocation.EndPosition.z >= maxHeight - 64f;
 
-		return !trLocation.Hit && !trTerrain.Hit && !exceedsTerrainHeight;
+		return !trLocation.Hit && !inTerrain && !exceedsTerrainHeight;
 	}
 
 	protected override void FireImmediate()
@@ -79,11 +74,12 @@ public class TeleportTool : Tool
 		if ( Equipment.Grub is not { } grub )
 			return;
 
-		var valid = CheckValidPlacement();
-		if ( !valid )
+		if ( !CheckValidPlacement() )
 			return;
 
 		grub.Transform.Position = grub.Player.MousePosition;
 		Sound.Play( TeleportSound );
+
+		base.FireFinished();
 	}
 }
