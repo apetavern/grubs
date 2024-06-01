@@ -16,6 +16,8 @@ public sealed class TorchWeapon : Weapon
 
 	[Property] private GameObject TorchFlame { get; set; }
 
+	private TimeSince _timeSinceLastTorchSound { get; set; }
+
 	protected override void OnStart()
 	{
 		base.OnStart();
@@ -57,6 +59,11 @@ public sealed class TorchWeapon : Weapon
 
 			using ( Rpc.FilterInclude( c => c.IsHost ) )
 			{
+				if ( _timeSinceLastTorchSound > 0.2f )
+				{
+					Sound.Play( "torch_fire", Equipment.Grub.Transform.Position );
+					_timeSinceLastTorchSound = 0f;
+				}
 				GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
 					new Vector2( endPos.x, endPos.z ), TorchSize, 1 );
 				GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),

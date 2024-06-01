@@ -9,6 +9,11 @@
     "sounds/weapons/torch/torch_fire_2.vsnd",
     "sounds/weapons/torch/torch_fire_3.vsnd"
   ],
-  "MaximumDistance": 2533.85,
-  "MinimumDistance": 126.692505
+  "Occlusion": false,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": false,
+  "__references": [],
+  "__version": 0
 }
