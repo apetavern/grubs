@@ -17,12 +17,12 @@
 }
 
 <root>
-	@for (var i = 0; i < rows; i++)
+    @for (var i = 0; i < _rows; i++)
     {
         <div class="inv-row">
-			@for (var j = 0; j < columns; j++)
+            @for (var j = 0; j < _columns; j++)
             {
-                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * columns + j)/>
+                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * _columns + j) />
             }
         </div>
     }
@@ -30,74 +30,74 @@
 
 @code
 {
-	public PlayerInventory Inventory { get; set; }
+    public PlayerInventory Inventory { get; set; }
 
-	private Equipment Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
-	private Equipment Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
-	private Equipment Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
-	private Weapon CurrentWeapon => Current?.Components.Get<Weapon>();
-	private Weapon NextWeapon => Next?.Components.Get<Weapon>();
-	private Weapon PrevWeapon => Prev?.Components.Get<Weapon>();
+    private Equipment Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
+    private Equipment Next => Inventory.Equipment.ElementAtOrDefault(Inventory.GetNextSlot());
+    private Equipment Prev => Inventory.Equipment.ElementAtOrDefault(Inventory.GetPrevSlot());
+    private Weapon CurrentWeapon => Current?.Components.Get<Weapon>();
+    private Weapon NextWeapon => Next?.Components.Get<Weapon>();
+    private Weapon PrevWeapon => Prev?.Components.Get<Weapon>();
 
-	private int totalItems => Inventory.Equipment.Count();
-	private int columns = 4;
-	private int rows => (int)Math.Ceiling((float)totalItems / columns);
+    private const int _columns = 4;
+    private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
+    private int _totalItems => Inventory.Equipment.Count();
 
-	public override void Tick()
-	{
-		SetClass("hide", !Inventory.InventoryOpen);
-		Cursor.Enabled("inv", Inventory.InventoryOpen);
+    private int _currentGamepadIndex = 0;
+    private bool _usedJoystick;
 
-		if (!Input.UsingController) return;
+    public override void Tick()
+    {
+        SetClass("hide", !Inventory.InventoryOpen);
+        Cursor.Enabled("inv", Inventory.InventoryOpen);
 
-		if (Inventory.InventoryOpen && Math.Round(Input.AnalogMove.Length) != 0 && !usedJoystick)
-		{
-			usedJoystick = true;
-			PlayerInventory.Local.EquipItem(Inventory.Equipment.ElementAtOrDefault(SelectNextItemGamepadInput()));
-		}
+        if (!Input.UsingController) return;
 
-		if (Inventory.InventoryOpen && Math.Round(Input.AnalogMove.Length) == 0 && usedJoystick)
-		{
-			usedJoystick = false;
-		}
-	}
+        if (Inventory.InventoryOpen && Math.Round(Input.AnalogMove.Length) != 0 && !_usedJoystick)
+        {
+            _usedJoystick = true;
+            PlayerInventory.Local.EquipItem(Inventory.Equipment.ElementAtOrDefault(SelectNextItemGamepadInput()));
+        }
 
-	protected override int BuildHash()
-	{
-		var cd = CurrentWeapon?.TimeSinceLastUsed + PrevWeapon?.TimeSinceLastUsed + NextWeapon?.TimeSinceLastUsed;
-		return HashCode.Combine(Inventory.EquipmentActive, Inventory.ActiveSlot, cd);
-	}
+        if (Inventory.InventoryOpen && Math.Round(Input.AnalogMove.Length) == 0 && _usedJoystick)
+        {
+            _usedJoystick = false;
+        }
+    }
 
-	private int currentGamepadIndex = 0;
-	private bool usedJoystick;
+    protected override int BuildHash()
+    {
+        var cd = CurrentWeapon?.TimeSinceLastUsed + PrevWeapon?.TimeSinceLastUsed + NextWeapon?.TimeSinceLastUsed;
+        return HashCode.Combine(Inventory.EquipmentActive, Inventory.ActiveSlot, cd);
+    }
 
-	int SelectNextItemGamepadInput()
-	{
-		float analogX = Input.AnalogMove.x;
-		float analogY = -Input.AnalogMove.y;
+    private int SelectNextItemGamepadInput()
+    {
+        float analogX = Input.AnalogMove.x;
+        float analogY = -Input.AnalogMove.y;
 
-		int currentRow = currentGamepadIndex / columns;
-		int currentColumn = currentGamepadIndex % columns;
+        int currentRow = _currentGamepadIndex / _columns;
+        int currentColumn = _currentGamepadIndex % _columns;
 
-		if (analogX > 0)
-		{
-			currentRow = (currentRow - 1 + rows) % rows;
-		}
-		else if (analogX < 0)
-		{
-			currentRow = (currentRow + 1) % rows;
-		}
+        if (analogX > 0)
+        {
+            currentRow = (currentRow - 1 + _rows) % _rows;
+        }
+        else if (analogX < 0)
+        {
+            currentRow = (currentRow + 1) % _rows;
+        }
 
-		if (analogY < 0)
-		{
-			currentColumn = (currentColumn - 1 + columns) % columns;
-		}
-		else if (analogY > 0)
-		{
-			currentColumn = (currentColumn + 1) % columns;
-		}
-		currentGamepadIndex = currentRow * columns + currentColumn;
+        if (analogY < 0)
+        {
+            currentColumn = (currentColumn - 1 + _columns) % _columns;
+        }
+        else if (analogY > 0)
+        {
+            currentColumn = (currentColumn + 1) % _columns;
+        }
+        _currentGamepadIndex = currentRow * _columns + currentColumn;
 
-		return currentGamepadIndex;
-	}
+        return _currentGamepadIndex;
+    }
 }

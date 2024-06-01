@@ -27,9 +27,7 @@ public class PhysicsProjectile : Projectile
 				return;
 
 			var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
-
 			dir *= Rotation.FromPitch( Game.Random.Float( -DirectionRandomizer, DirectionRandomizer ) );
-
 			Transform.Position += dir * 16f;
 			PhysicsBody.ApplyImpulseAt( PhysicsBody.Transform.Position + Vector3.Up * 0.5f,
 				dir * Charge * ProjectileSpeed );
