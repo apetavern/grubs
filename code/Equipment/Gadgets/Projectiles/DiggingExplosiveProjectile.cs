@@ -31,7 +31,7 @@ public sealed class DiggingExplosiveProjectile : TargetedProjectile
 
 		LastPosition = tr.EndPosition;
 
-		if ( tr.Hit )
+		if ( tr.Hit || Vector3.DistanceBetween( Transform.Position, ProjectileTarget ) < 10f )
 		{
 			Projectile.Explode();
 			return;
