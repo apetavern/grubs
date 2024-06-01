@@ -7,6 +7,11 @@
   "Sounds": [
     "sounds/airstrike/plane_engine_loop.vsnd"
   ],
-  "MaximumDistance": 3299.7227,
-  "MinimumDistance": 164.98613
+  "Occlusion": false,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": false,
+  "__references": [],
+  "__version": 0
 }

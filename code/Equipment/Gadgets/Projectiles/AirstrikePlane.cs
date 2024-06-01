@@ -14,18 +14,25 @@ public sealed class AirstrikePlane : TargetedProjectile
 	[Property] public bool ApplyVelocity { get; set; }
 
 	private bool _fired;
+	private SoundHandle _engineSound;
+	private bool _fading;
 
 	public override void ShareData()
 	{
 		base.ShareData();
 		Transform.Position = ProjectileTarget.WithZ( GrubsConfig.TerrainHeight * 1.1f ).WithX( -Direction.x * GrubsConfig.TerrainLength * 1.05f );
 		Transform.Rotation = Rotation.LookAt( Direction );
+		_engineSound = Sound.Play( "plane_engine_loop" );
 	}
 
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
 
+		if ( _engineSound.IsValid )
+		{
+			_engineSound.Position = Transform.Position;
+		}
 
 		if ( MathF.Abs( Transform.Position.x - ProjectileTarget.x ) < DropRange * 1.25f && !_fired )
 		{
@@ -38,9 +45,10 @@ public sealed class AirstrikePlane : TargetedProjectile
 			DropBombs();
 		}
 
-		if ( MathF.Abs( Transform.Position.x ) > GrubsConfig.TerrainLength * 1.1f )
+		if ( MathF.Abs( Transform.Position.x ) > GrubsConfig.TerrainLength * 1.1f && !_fading )
 		{
-			GameObject.Destroy();
+			_fading = true;
+			FadeOut();
 		}
 		else
 		{
@@ -48,6 +56,26 @@ public sealed class AirstrikePlane : TargetedProjectile
 		}
 
 		Transform.Rotation = Transform.Rotation.Angles().WithRoll( MathF.Sin( Time.Now * 2f ) * 5f );
+	}
+
+	async void FadeOut()
+	{
+		while ( Model.Tint.a > 0 )
+		{
+			Model.Tint = Model.Tint.WithAlpha( Model.Tint.a - Time.Delta );
+			if ( _engineSound.IsValid && _engineSound.Volume > 0 )
+				_engineSound.Volume -= Time.Delta;
+			await Task.Frame();
+		}
+		GameObject.Destroy();
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		if ( _engineSound.IsValid )
+			_engineSound.Stop();
+
 	}
 
 	public async void DropBombs()
