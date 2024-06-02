@@ -56,6 +56,22 @@ GameLanding {
         }
     }
 
+    .players {
+        color: white;
+        flex-direction: column;
+        left: 50px;
+
+        .players-title {
+            font-size: 48px;
+            margin-bottom: 8px;
+            text-stroke: 12px black;
+        }
+
+        .player-name {
+            font-size: 24px;
+        }
+    }
+
     .column-right {
         position: absolute;
         flex-direction: column;
