@@ -16,6 +16,8 @@ public class TeleportTool : Tool
 	protected override void OnStart()
 	{
 		base.OnStart();
+		CursorModel.GameObject.SetParent( Scene );
+		CursorModel.GameObject.Enabled = Equipment.Deployed;
 	}
 
 	protected override void OnUpdate()
@@ -26,7 +28,7 @@ public class TeleportTool : Tool
 			return;
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
-		CursorModel.Enabled = Equipment.Deployed;
+		CursorModel.GameObject.Enabled = Equipment.Deployed;
 
 		if ( !Equipment.Deployed )
 			return;
