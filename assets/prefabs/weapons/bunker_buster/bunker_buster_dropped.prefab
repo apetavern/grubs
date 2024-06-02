@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "20db7423-527b-4c38-b9ea-a4df5dc3f132",
+    "__guid": "8e9fa997-cd3d-49a4-a802-1d2127eef013",
     "Flags": 0,
     "Name": "bunker_buster_dropped",
     "Tags": "projectile",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "8c0cff6e-20bd-4173-a59d-eb2ece81f75d",
+        "__guid": "e09d0133-b280-49b1-ad33-2baf76569487",
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 15,
@@ -22,31 +22,10 @@
         "Particles": "particles/explosion/grubs_explosion_base.vpcf"
       },
       {
-        "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "b5106441-8744-4093-8bd7-42f6e2122082",
-        "DirectionRandomizer": 0,
-        "Droppable": false,
-        "Model": {
-          "_type": "component",
-          "component_id": "4044de10-1e0c-4ff9-b050-9e5d9ed24f7a",
-          "go": "aea9b15b-4cc0-4eb1-a273-a87fd6b9543b",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "PhysicsBody": {
-          "_type": "component",
-          "component_id": "e5aaf8ee-98a2-434a-ac5b-de682ac43d84",
-          "go": "20db7423-527b-4c38-b9ea-a4df5dc3f132",
-          "component_type": "Rigidbody"
-        },
-        "ProjectileSpeed": 350,
-        "SetPositionOnStart": false,
-        "SetRotationOnStart": false
-      },
-      {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "e5aaf8ee-98a2-434a-ac5b-de682ac43d84",
+        "__guid": "1a9a5a14-82b4-4d07-aab3-28b78b347ae1",
         "AngularDamping": 0.1,
-        "Gravity": true,
+        "Gravity": false,
         "LinearDamping": 1,
         "Locking": {
           "X": true,
@@ -62,39 +41,58 @@
       },
       {
         "__type": "Grubs.DiggingExplosiveProjectile",
-        "__guid": "6b6bc0c4-0488-46c5-bc22-95491fc40442",
+        "__guid": "aeb856ae-377e-44bf-b9c3-9583f93c3c99",
         "DigLength": 5,
         "DigWidth": 20,
         "Explosive": {
           "_type": "component",
-          "component_id": "8c0cff6e-20bd-4173-a59d-eb2ece81f75d",
-          "go": "20db7423-527b-4c38-b9ea-a4df5dc3f132",
+          "component_id": "e09d0133-b280-49b1-ad33-2baf76569487",
+          "go": "8e9fa997-cd3d-49a4-a802-1d2127eef013",
           "component_type": "ExplosiveProjectile"
         },
         "Model": {
           "_type": "component",
-          "component_id": "4044de10-1e0c-4ff9-b050-9e5d9ed24f7a",
-          "go": "aea9b15b-4cc0-4eb1-a273-a87fd6b9543b",
+          "component_id": "28cccdf3-386f-481c-aeac-ed9793771034",
+          "go": "de73505f-eb59-48a2-ab95-a93db973f80e",
           "component_type": "SkinnedModelRenderer"
+        },
+        "Movement": {
+          "_type": "component",
+          "component_id": "297b3132-ca7c-41eb-ab22-4c0623b08eba",
+          "go": "8e9fa997-cd3d-49a4-a802-1d2127eef013",
+          "component_type": "ScriptedMovementProjectile"
         },
         "Physics": {
           "_type": "component",
-          "component_id": "b5106441-8744-4093-8bd7-42f6e2122082",
-          "go": "20db7423-527b-4c38-b9ea-a4df5dc3f132",
-          "component_type": "PhysicsProjectile"
+          "component_id": "1a9a5a14-82b4-4d07-aab3-28b78b347ae1",
+          "go": "8e9fa997-cd3d-49a4-a802-1d2127eef013",
+          "component_type": "Rigidbody"
         },
         "ProjectileMovement": {
           "_type": "component",
-          "component_id": "b5106441-8744-4093-8bd7-42f6e2122082",
-          "go": "20db7423-527b-4c38-b9ea-a4df5dc3f132",
-          "component_type": "PhysicsProjectile"
+          "component_id": "297b3132-ca7c-41eb-ab22-4c0623b08eba",
+          "go": "8e9fa997-cd3d-49a4-a802-1d2127eef013",
+          "component_type": "ScriptedMovementProjectile"
         },
+        "ProjectileSpeed": 4,
+        "TimeBeforeDetonation": 4
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.ScriptedMovementProjectile",
+        "__guid": "297b3132-ca7c-41eb-ab22-4c0623b08eba",
+        "Model": {
+          "_type": "component",
+          "component_id": "28cccdf3-386f-481c-aeac-ed9793771034",
+          "go": "de73505f-eb59-48a2-ab95-a93db973f80e",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Movement": "0,0,-400",
         "ProjectileSpeed": 4
       }
     ],
     "Children": [
       {
-        "__guid": "aea9b15b-4cc0-4eb1-a273-a87fd6b9543b",
+        "__guid": "de73505f-eb59-48a2-ab95-a93db973f80e",
         "Flags": 0,
         "Name": "bunker buster",
         "Rotation": "0,0.7071068,0,0.7071068",
@@ -104,7 +102,7 @@
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "4044de10-1e0c-4ff9-b050-9e5d9ed24f7a",
+            "__guid": "28cccdf3-386f-481c-aeac-ed9793771034",
             "BodyGroups": 18446744073709551615,
             "CreateBoneObjects": false,
             "Model": "models/weapons/bunker_buster/bunker_buster.vmdl",
@@ -114,7 +112,7 @@
           },
           {
             "__type": "Sandbox.HighlightOutline",
-            "__guid": "f7118411-c25e-4685-948d-31c2efa4ecd5",
+            "__guid": "84823460-8362-49e7-96b5-38a8871e0c8e",
             "Color": "0,0,0,1",
             "InsideColor": "0,0,0,0",
             "InsideObscuredColor": "0,0,0,0",
@@ -123,14 +121,14 @@
           },
           {
             "__type": "Sandbox.ModelCollider",
-            "__guid": "35e7f8e3-09ee-42bf-a258-238fb4bd8acf",
+            "__guid": "5f26a008-4f3e-497b-8743-ad4c42148d6e",
             "IsTrigger": false,
             "Model": "models/weapons/airstrikes/bomb.vmdl",
             "Static": false
           },
           {
             "__type": "Grubs.Spinning",
-            "__guid": "dcb15931-5ca8-4347-bc48-4ead7453818b",
+            "__guid": "9bd834a4-aa44-4e97-8402-7d51fc4ade03",
             "RotationSpeed": "0,0,500"
           }
         ]
