@@ -72,8 +72,8 @@
 
         var hide = Gamemode.Current?.Started ?? false;
         Cursor.Enabled("menu", !hide);
-        SceneBackground.SetClass("hide", hide);
-        MenuBody.SetClass("hide", hide);
+        SceneBackground?.SetClass("hide", hide);
+        MenuBody?.SetClass("hide", hide);
         SetClass("hide", hide);
     }
 
