@@ -4,7 +4,6 @@
 public class Landmine : ProximityExplosive
 {
 	[Property] public SkinnedModelRenderer Model { get; set; }
-	[Property] public GameObject Mine { get; set; }
 	[Property, ResourceType( "sound" )] private string BeepSound { get; set; } = "";
 
 	private const string _lightOnSkin = "default";

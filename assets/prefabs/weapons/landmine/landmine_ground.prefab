@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "be7278c3-a550-422c-a06d-aa7a50ebc8d1",
+    "__guid": "38903a98-061a-4fe8-9fe5-e1864a9d7e46",
     "Flags": 0,
     "Name": "landmine_ground",
     "Tags": "projectile,notarget,solid",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "5c8a90fb-0078-4607-a5bd-30c9993502c0",
+        "__guid": "c1f777f7-b63e-4420-9934-af1915e335fd",
         "AngularDamping": 4,
         "Gravity": true,
         "LinearDamping": 2,
@@ -25,7 +25,7 @@
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "0624eb3e-53c7-41f6-a558-5097f2e00a6d",
+        "__guid": "ed9dd134-ccd8-4332-be06-56c3dd77d4d7",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "MaterialGroup": "lightoff",
@@ -36,13 +36,13 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "aced43b2-4a41-49f8-86d3-b046fa73ac79",
+        "__guid": "48d4a391-6e9b-4330-8849-f37aecdcdbc2",
         "DirectionRandomizer": 0,
         "Droppable": true,
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "5c8a90fb-0078-4607-a5bd-30c9993502c0",
-          "go": "be7278c3-a550-422c-a06d-aa7a50ebc8d1",
+          "component_id": "c1f777f7-b63e-4420-9934-af1915e335fd",
+          "go": "38903a98-061a-4fe8-9fe5-e1864a9d7e46",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 4,
@@ -51,7 +51,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "ca84f640-56cd-4708-a605-569c6844b0ce",
+        "__guid": "20e65b51-7f8b-4bab-81de-afdfee87a108",
         "Center": "0,0,5.1",
         "IsTrigger": false,
         "Scale": "20,20,10.8",
@@ -59,53 +59,38 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "4e000e12-c31a-4163-a61f-3ed74b6f3e53",
+        "__guid": "08bc5aea-ba2e-4986-ba14-462169915062",
         "MaxHealth": 1
+      },
+      {
+        "__type": "Sandbox.SphereCollider",
+        "__guid": "a04e2a3b-df10-493c-bc1c-91d326548033",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Radius": 45,
+        "Static": false
+      },
+      {
+        "__type": "Grubs.Equipment.Gadgets.Ground.Landmine",
+        "__guid": "ac26c6c4-4b59-439c-914c-920727aed1e5",
+        "ArmTime": 3,
+        "BeepSound": "sounds/weapons/mine/beep.sound",
+        "Damage": 60,
+        "DetonateOnDeath": true,
+        "DetonateTime": 5,
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "IsDud": false,
+        "Model": {
+          "_type": "component",
+          "component_id": "ed9dd134-ccd8-4332-be06-56c3dd77d4d7",
+          "go": "38903a98-061a-4fe8-9fe5-e1864a9d7e46",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "Radius": 80
       }
     ],
-    "Children": [
-      {
-        "__guid": "e1d5fb25-d7af-46c2-9fd2-505e659d711c",
-        "Flags": 0,
-        "Name": "Trigger",
-        "Tags": "trigger,ignore_killzone",
-        "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
-        "Components": [
-          {
-            "__type": "Sandbox.SphereCollider",
-            "__guid": "c6396db9-1695-45b6-b214-fb39276c179c",
-            "Center": "0,0,0",
-            "IsTrigger": true,
-            "Radius": 45,
-            "Static": false
-          },
-          {
-            "__type": "Grubs.Equipment.Gadgets.Ground.Landmine",
-            "__guid": "69764a2e-cdf5-4e5a-a625-341419044f38",
-            "ArmTime": 3,
-            "BeepSound": "sounds/weapons/mine/beep.sound",
-            "Damage": 60,
-            "DetonateOnDeath": true,
-            "DetonateTime": 5,
-            "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-            "Mine": {
-              "_type": "gameobject",
-              "go": "be7278c3-a550-422c-a06d-aa7a50ebc8d1"
-            },
-            "Model": {
-              "_type": "component",
-              "component_id": "0624eb3e-53c7-41f6-a558-5097f2e00a6d",
-              "go": "be7278c3-a550-422c-a06d-aa7a50ebc8d1",
-              "component_type": "SkinnedModelRenderer"
-            },
-            "Particles": "particles/explosion/grubs_explosion_base.vpcf",
-            "Radius": 80
-          }
-        ]
-      }
-    ]
+    "Children": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

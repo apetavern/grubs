@@ -28,7 +28,7 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	public virtual void OnArm() { }
 	public virtual void OnTrigger() { }
 
-	public virtual void OnExplode()
+	public void OnExplode()
 	{
 		if ( !IsDud )
 		{
@@ -37,7 +37,7 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 
 			ExplodeEffects();
 			GameObject.Destroy();
-		} 
+		}
 		else
 		{
 			IsArmed = false;
@@ -130,6 +130,7 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	[Broadcast]
 	public void ExplodeEffects()
 	{
+		Log.Info( "EXPLODE" );
 		ExplosionHelper.Instance.Explode( this, Transform.Position, Radius, Damage );
 		Sound.Play( ExplosionSound );
 
