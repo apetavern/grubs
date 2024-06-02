@@ -1,15 +1,30 @@
-using Sandbox;
-using Sandbox.Utility;
-
 namespace Grubs.Equipment.Tools;
 
 public sealed class JetpackTool : Tool
 {
-	private float _jetpackDir;
+	/// <summary>
+	/// Forward/Back flame
+	/// </summary>
+	[Property] public GameObject FBFlame { get; set; }
+
+	/// <summary>
+	/// Up/Down flame 1
+	/// </summary>
+	[Property] public GameObject UDFlame1 { get; set; }
+
+	/// <summary>
+	/// Up/Down flame 2
+	/// </summary>
+	[Property] public GameObject UDFlame2 { get; set; }
 
 	[Property] private float MaxJetFuel { get; set; } = 10f;
 
+	[Sync] private float ForwardBackFlameScale { get; set; }
+	[Sync] private float UpDownFlameScale { get; set; }
+
 	private float _currentJetFuel;
+	private float _jetpackDir;
+	private SoundHandle _jetSound;
 
 	public override void OnHolster()
 	{
@@ -35,25 +50,6 @@ public sealed class JetpackTool : Tool
 		IsFiring = false;
 		_currentJetFuel = MaxJetFuel;
 	}
-
-	/// <summary>
-	/// Forward/Back flame
-	/// </summary>
-	[Property] public GameObject FBFlame { get; set; }
-
-	/// <summary>
-	/// Up/Down flame 1
-	/// </summary>
-	[Property] public GameObject UDFlame1 { get; set; }
-
-	/// <summary>
-	/// Up/Down flame 2
-	/// </summary>
-	[Property] public GameObject UDFlame2 { get; set; }
-
-	[Sync] private float ForwardBackFlameScale { get; set; }
-
-	[Sync] private float UpDownFlameScale { get; set; }
 
 	public void AnimateFlames()
 	{
@@ -86,8 +82,6 @@ public sealed class JetpackTool : Tool
 		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
 		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
 	}
-
-	private SoundHandle _jetSound;
 
 	protected override void OnUpdate()
 	{
@@ -130,7 +124,7 @@ public sealed class JetpackTool : Tool
 			{
 				_currentJetFuel -= Time.Delta * Input.AnalogMove.Length;
 				UpdateRotation();
-				characterController.Velocity += new Vector3( -Input.AnalogMove.y, 0, 0.75f + Input.AnalogMove.x * 1.5f ) * 8f;
+				characterController.Accelerate( new Vector3( -Input.AnalogMove.y, 0, 0.75f + Input.AnalogMove.x * 1.5f ) * 72f );
 			}
 			else
 			{
