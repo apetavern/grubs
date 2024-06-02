@@ -1,6 +1,4 @@
-﻿
-using Grubs.Equipment.Weapons;
-using System.ComponentModel.Design;
+﻿using Grubs.Equipment.Weapons;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
 
@@ -23,6 +21,7 @@ public class TargetedProjectile : Projectile
 			Source = ProjectileMovement.Source;
 			Charge = ProjectileMovement.Charge;
 		}
+
 		ProjectileTarget = Source.Components.Get<TargetingWeapon>().ProjectileTarget;
 		Direction = Source.Components.Get<TargetingWeapon>().Direction;
 	}
