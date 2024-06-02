@@ -18,18 +18,11 @@ public class Landmine : ProximityExplosive
 		Model.MaterialGroup = _lightOnSkin;
 	}
 
-	public override void OnExplode()
-	{
-		Mine.Destroy();
-
-		base.OnExplode();
-	}
-
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
 
-		if ( IsDetonating )
+		if ( IsDetonating && IsArmed )
 		{
 			if ( _skinToggle >= 0.5f )
 			{

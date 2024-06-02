@@ -16,14 +16,14 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	[Property, ResourceType( "sound" )] public string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] public ParticleSystem Particles { get; set; }
 
-	public bool IsDud { get; set; }
+	[Property] public bool IsDud { get; set; }
 	public bool IsArmed { get; set; }
 	public bool IsDetonating { get; set; }
 	private TimeSince _createdAt { get; set; }
 	private TimeSince _detonatedAt { get; set; }
 	private List<Grub> _grubs { get; set; } = new();
 
-	public bool Resolved => !IsDetonating;
+	public bool Resolved => !IsDetonating || !IsArmed;
 
 	public virtual void OnArm() { }
 	public virtual void OnTrigger() { }
@@ -31,9 +31,17 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	public virtual void OnExplode()
 	{
 		if ( !IsDud )
-			ExplodeEffects();
+		{
+			if ( IsProxy )
+				return;
 
-		GameObject.Destroy();
+			ExplodeEffects();
+			GameObject.Destroy();
+		} 
+		else
+		{
+			IsArmed = false;
+		}
 	}
 
 	public void StartDetonating()
@@ -101,7 +109,7 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 
 		if ( !IsArmed )
 		{
-			if ( _createdAt > ArmTime )
+			if ( _createdAt > ArmTime && !IsDetonating )
 			{
 				IsArmed = true;
 				OnArm();
