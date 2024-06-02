@@ -14,11 +14,13 @@
         "CreateBoneObjects": false,
         "Model": "particles/magicmissile/magic_missile.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "df9bfd5a-e47f-42ee-b0be-a70200151866",
+        "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
@@ -101,9 +103,34 @@
           {
             "__type": "Sandbox.LegacyParticleSystem",
             "__guid": "563c376c-ffd3-4ffe-a1b8-4f0b8e09b1e0",
-            "ControlPoints": [],
+            "ControlPoints": [
+              {
+                "Value": "Vector3",
+                "StringCP": "1",
+                "VectorValue": "1,0.35,0"
+              }
+            ],
             "Looped": true,
             "Particles": "particles/magicmissile/magicmissile_splash.vpcf",
+            "PlaybackSpeed": 1
+          }
+        ]
+      },
+      {
+        "__guid": "f3da8448-3abd-48a2-bef9-a1a5a7f1725a",
+        "Flags": 0,
+        "Name": "smoke",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.LegacyParticleSystem",
+            "__guid": "53f05ded-fa77-43b5-a80f-a13c073a962c",
+            "ControlPoints": [],
+            "Looped": true,
+            "Particles": "particles/magicmissile/magicmissile_smoke.vpcf",
             "PlaybackSpeed": 1
           }
         ]
