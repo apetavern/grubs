@@ -6,19 +6,41 @@
 
 @attribute [StyleSheet]
 
-<root/>
+<root />
 
 @code {
     private string _inputAction;
     private InputGlyphSize _inputGlyphSize;
-    private GlyphStyle _glyphStyle;
+    private bool _outline;
 
-    public void SetButton(string inputAction)
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        Update();
+    }
+
+    public void SetAction(string inputAction)
     {
         if (_inputAction == inputAction)
             return;
 
         _inputAction = inputAction;
+
+        // Silly hack so we can get joystick glyphs that also appear as pressed when we move them instead of pressing them in.
+        if (_inputAction == "analogmove")
+        {
+            BindClass("pressed", () => !Input.AnalogMove.IsNearlyZero());
+            _inputAction = "camera_reset";
+        }
+        else if (_inputAction == "analoglook")
+        {
+            BindClass("pressed", () => !Input.AnalogLook.IsNearlyZero());
+            _inputAction = "toggle_equipment";
+        }
+        else
+        {
+            BindClass("pressed", () => Input.Down(_inputAction));
+        }
+
         Update();
     }
 
@@ -26,35 +48,34 @@
     {
         switch (name)
         {
-            case "button":
-            {
-                SetButton(value);
-                Update();
+            case "action":
+                {
+                    SetAction(value);
+                    Update();
 
-                break;
-            }
+                    break;
+                }
 
             case "size":
-            {
-                Enum.TryParse(value, true, out _inputGlyphSize);
-                Update();
-
-                break;
-            }
-
-            case "style":
-            {
-                _glyphStyle = value switch
                 {
-                    "knockout" => GlyphStyle.Knockout,
-                    "light" => GlyphStyle.Light,
-                    "dark" => GlyphStyle.Dark,
-                    _ => _glyphStyle
-                };
+                    Enum.TryParse(value, true, out _inputGlyphSize);
+                    Update();
 
-                Update();
-                break;
-            }
+                    break;
+                }
+
+            case "outline":
+                {
+                    _outline = value switch
+                    {
+                        "true" => true,
+                        "false" => false,
+                        _ => _outline
+                    };
+
+                    Update();
+                    break;
+                }
         }
 
         base.SetProperty(name, value);
@@ -62,10 +83,12 @@
 
     private void Update()
     {
-        var texture = Input.GetGlyph(_inputAction, _inputGlyphSize, _glyphStyle);
+        var texture = Input.GetGlyph(_inputAction, _inputGlyphSize, _outline);
         Style.BackgroundImage = texture;
-        Style.Width = texture.Width;
-        Style.Height = texture.Height;
     }
 
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Input.UsingController);
+    }
 }

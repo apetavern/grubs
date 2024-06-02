@@ -1,0 +1,69 @@
+@namespace Grubs.UI
+
+@using Grubs.Gamemodes
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+@if (!IsPlaying())
+{
+    return;
+}
+
+<root>
+    <div>
+        <label>Move</label>
+        @if (Input.UsingController)
+        {
+            <InputGlyph action="analogmove" size="medium" />
+        }
+        else
+        {
+            <InputGlyph action="left" size="medium" />
+            <InputGlyph action="right" size="medium" />
+        }
+    </div>
+    <div>
+        <label>Aim</label>
+        @if (Input.UsingController)
+        {
+            <InputGlyph action="analoglook" size="medium" />
+        }
+        else
+        {
+            <InputGlyph action="forward" size="medium" />
+            <InputGlyph action="backward" size="medium" />
+        }
+    </div>
+    <div>
+        <label>Jump</label>
+        <InputGlyph action="jump" size="medium" />
+    </div>
+    <div>
+        <label>Backflip</label>
+        <InputGlyph action="backflip" size="medium" />
+    </div>
+    <div>
+        <label>Camera Pan</label>
+        <InputGlyph action="camera_pan" size="medium" />
+        @if (Input.UsingController)
+        {
+            <InputGlyph action="analoglook" size="medium" />
+        }
+    </div>
+    <div>
+        <label>Camera Reset</label>
+        <InputGlyph action="camera_reset" size="medium" />
+    </div>
+    <div>
+        <label>Inventory</label>
+        <InputGlyph action="toggle_inventory" size="medium" />
+    </div>
+</root>
+
+@code {
+    private bool IsPlaying() => Gamemode.Current.State == GameState.Playing;
+
+    protected override int BuildHash() => HashCode.Combine(IsPlaying(), Input.UsingController);
+}
