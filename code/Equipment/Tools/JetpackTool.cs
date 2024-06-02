@@ -36,6 +36,7 @@ public sealed class JetpackTool : Tool
 		UDFlame2.Enabled = false;
 		IsFiring = false;
 		_currentJetFuel = MaxJetFuel;
+		_jetSound?.Stop();
 	}
 
 	protected override void FireFinished()
@@ -49,6 +50,7 @@ public sealed class JetpackTool : Tool
 		UDFlame2.Enabled = false;
 		IsFiring = false;
 		_currentJetFuel = MaxJetFuel;
+		_jetSound?.Stop();
 	}
 
 	public void AnimateFlames()
@@ -98,11 +100,9 @@ public sealed class JetpackTool : Tool
 			_jetSound = Sound.Play( "thrust" );
 			IsFiring = true;
 		}
+
 		if ( _currentJetFuel <= 0 && IsFiring )
-		{
-			_jetSound.Stop();
 			FireFinished();
-		}
 
 		if ( IsFiring )
 		{
