@@ -129,6 +129,7 @@ public sealed class FreeForAllGamemode : Gamemode
 		{
 			GameEnd.Instance.ShouldShow = true;
 			State = GameState.GameOver;
+			await GrubsTerrain.Instance.Clear();
 			return;
 		}
 
@@ -148,8 +149,10 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	private async Task HandleCrateSpawns()
 	{
-		await RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn, "A weapon crate has been spawned!" );
-		await RollCrateSpawn( DropType.Health, GrubsConfig.HealthCrateChancePerTurn, "A health crate has been spawned!" );
+		await RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn,
+			"A weapon crate has been spawned!" );
+		await RollCrateSpawn( DropType.Health, GrubsConfig.HealthCrateChancePerTurn,
+			"A health crate has been spawned!" );
 		await RollCrateSpawn( DropType.Tool, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
 	}
 

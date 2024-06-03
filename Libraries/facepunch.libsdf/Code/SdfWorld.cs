@@ -359,12 +359,14 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 			++ClearCount;
 		}
 
+		Task clearTask;
+
 		lock ( this )
 		{
-			_lastModificationTask = ClearImpl();
+			clearTask = ClearImpl();
 		}
 
-		await _lastModificationTask;
+		await clearTask;
 	}
 
 	private async Task ClearImpl()
@@ -380,7 +382,11 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		await GameTask.WhenAll( Layers.Values.Select( x => x.UpdateMeshTask ) );
 		await GameTask.MainThread();
-		await GameTask.WhenAll( Layers.Values.SelectMany( x => x.Chunks.Values ).Select( x => x.ClearAsync( false ) ) );
+		await GameTask.WhenAll( Layers.Values.SelectMany( x => x.Chunks.Values ).Select( async x =>
+		{
+			await x.ClearAsync( false );
+			UpdatedChunkQueue.Enqueue( x );
+		} ) );
 	}
 
 	[Obsolete( $"Please use {nameof(ClearAsync)}" )]

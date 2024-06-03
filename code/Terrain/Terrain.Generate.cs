@@ -7,7 +7,7 @@ public partial class GrubsTerrain
 	[Sync] public int WorldTextureHeight { get; set; } = 0;
 	[Sync] public int WorldTextureLength { get; set; } = 0;
 
-	private void ResetTerrain()
+	public void ResetTerrain()
 	{
 		WorldTextureLength = 0;
 		WorldTextureHeight = 0;

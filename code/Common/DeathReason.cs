@@ -5,24 +5,28 @@ namespace Grubs.Common;
 /// <summary>
 /// Holds the data needed to find out how a grub has died.
 /// </summary>
-public struct DeathReason
+public readonly struct DeathReason
 {
 	/// <summary>
 	/// The grub that died.
 	/// </summary>
 	public readonly Grub Grub;
+
 	/// <summary>
 	/// The first damage info responsible for the death.
 	/// </summary>
 	public readonly GrubsDamageInfo? FirstInfo;
+
 	/// <summary>
 	/// The first reason for the death.
 	/// </summary>
 	public readonly DamageType FirstReason;
+
 	/// <summary>
 	/// The second damage info responsible for the death.
 	/// </summary>
-	public readonly GrubsDamageInfo? SecondInfo;
+	public readonly GrubsDamageInfo SecondInfo;
+
 	/// <summary>
 	/// The second reason for the death.
 	/// </summary>
@@ -81,6 +85,7 @@ public struct DeathReason
 					case DamageType.Melee:
 						return $"{Grub.Name} took a blunt object to the face.";
 				}
+
 				break;
 			// Assisted by an explosion.
 			case DamageType.Explosion:
@@ -114,6 +119,7 @@ public struct DeathReason
 					case DamageType.Melee:
 						return $"{Grub.Name} shouldn't have skipped gym class.";
 				}
+
 				break;
 			// Assisted by a fire.
 			case DamageType.Fire:
@@ -147,6 +153,7 @@ public struct DeathReason
 					case DamageType.Melee:
 						return $"{Grub.Name} was knocked into the sun.";
 				}
+
 				break;
 			// Assisted by a fall.
 			case DamageType.Fall:
@@ -170,6 +177,7 @@ public struct DeathReason
 					case DamageType.Melee:
 						return $"{Grub.Name} got kicked in the stomach.";
 				}
+
 				break;
 			// Shot by a HitScan weapon.
 			case DamageType.HitScan:
@@ -188,6 +196,7 @@ public struct DeathReason
 					case DamageType.Melee:
 						return $"{Grub.Name} was pulverized.";
 				}
+
 				break;
 			// Hit with a Melee weapon.
 			case DamageType.Melee:
@@ -206,6 +215,7 @@ public struct DeathReason
 					case DamageType.Melee:
 						return $"{Grub.Name} got fisted.";
 				}
+
 				break;
 		}
 
