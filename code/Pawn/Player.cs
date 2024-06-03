@@ -6,6 +6,8 @@ namespace Grubs.Pawn;
 [Title( "Grubs - Player" ), Category( "Grubs" )]
 public sealed class Player : Component
 {
+	public static IEnumerable<Player> All => Game.ActiveScene.GetAllComponents<Player>();
+
 	public bool IsActive => Gamemode.FFA?.ActivePlayerId == Id;
 	public bool ShouldHaveTurn => GameObject.IsValid() && !IsDead();
 	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.ToComponent<Grub>()?.Health.CurrentHealth );
@@ -29,7 +31,7 @@ public sealed class Player : Component
 
 	[Property, ReadOnly] public Vector3 MousePosition { get; set; }
 
-	private static readonly Plane _plane = new( new Vector3( 0f, 512f, 0f ), Vector3.Left );
+	private static readonly Plane _plane = new(new Vector3( 0f, 512f, 0f ), Vector3.Left);
 
 	protected override void OnStart()
 	{
@@ -40,7 +42,9 @@ public sealed class Player : Component
 
 	protected override void OnUpdate()
 	{
-		var cursorRay = Scene.Camera.ScreenPixelToRay( Input.UsingController ? new Vector2( Screen.Width / 2, Screen.Height / 2 ) : Mouse.Position );
+		var cursorRay = Scene.Camera.ScreenPixelToRay( Input.UsingController
+			? new Vector2( Screen.Width / 2, Screen.Height / 2 )
+			: Mouse.Position );
 		var endPos = _plane.Trace( cursorRay, twosided: true );
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 	}
@@ -60,5 +64,15 @@ public sealed class Player : Component
 	public bool IsDead()
 	{
 		return GetOwnedGrubs().All( g => g.IsDead );
+	}
+
+	public void Cleanup()
+	{
+		Inventory.Equipment.Clear();
+
+		foreach ( var grub in GetOwnedGrubs() )
+		{
+			grub.GameObject.Destroy();
+		}
 	}
 }

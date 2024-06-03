@@ -8,19 +8,20 @@
 <root class=@Show()>
     @if (Winner is not null)
     {
-        <div>@Winner.Network.OwnerConnection.DisplayName wins!</div>
+        <div>@Winner wins!</div>
     }
     else
     {
         <div>It's a draw!</div>
     }
-    <button onclick=@(() => ShouldShow = false)>Continue</button>
+    <button onclick=@(() => Continue())>Continue</button>
 </root>
 
 @code
 {
     public static GameEnd Instance { get; set; }
     private bool _shouldShow;
+
     public bool ShouldShow
     {
         get => _shouldShow;
@@ -28,21 +29,26 @@
         {
             _shouldShow = value;
             Cursor.Enabled("gameend", value);
-        } 
+        }
     }
-    
-    public Player Winner { get; set; }
+
+    private void Continue()
+    {
+        ShouldShow = false;
+    }
+
+    public string Winner { get; set; }
 
     public GameEnd()
     {
         Instance = this;
     }
-    
+
     string Show()
     {
         return ShouldShow ? "show" : "";
     }
-    
+
     protected override int BuildHash()
     {
         return HashCode.Combine(ShouldShow);

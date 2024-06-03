@@ -127,9 +127,9 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		if ( IsGameResolved() && GrubsConfig.KeepGameAlive != true )
 		{
-			GameEnd.Instance.ShouldShow = true;
+			// GameEnd.Instance.ShouldShow = true;
 			State = GameState.GameOver;
-			await GrubsTerrain.Instance.Clear();
+			await Cleanup();
 			return;
 		}
 
@@ -140,6 +140,24 @@ public sealed class FreeForAllGamemode : Gamemode
 		_nextTurnTask = null;
 
 		TurnIsChanging = false;
+	}
+
+	private async Task Cleanup()
+	{
+		foreach ( var player in Player.All )
+		{
+			player.Cleanup();
+		}
+
+		PlayerGrubOrder.Clear();
+		PlayerTurnQueue.Clear();
+		_nextTurnTask = null;
+		TurnIsChanging = false;
+		ActivePlayerId = Guid.Empty;
+
+		Started = false;
+
+		GrubsTerrain.Instance.Init();
 	}
 
 	private async Task HandleSpawns()
@@ -172,7 +190,7 @@ public sealed class FreeForAllGamemode : Gamemode
 	{
 		if ( !PlayerTurnQueue.Any() )
 		{
-			foreach ( var player in Scene.GetAllComponents<Player>() )
+			foreach ( var player in Player.All )
 			{
 				if ( !player.ShouldHaveTurn )
 					continue;
@@ -231,7 +249,7 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		if ( players.Count() - 1 == deadPlayers )
 		{
-			GameEnd.Instance.Winner = lastPlayerAlive;
+			GameEnd.Instance.Winner = lastPlayerAlive!.Network.OwnerConnection.DisplayName;
 			return true;
 		}
 

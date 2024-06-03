@@ -130,7 +130,6 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	[Broadcast]
 	public void ExplodeEffects()
 	{
-		Log.Info( "EXPLODE" );
 		ExplosionHelper.Instance.Explode( this, Transform.Position, Radius, Damage );
 		Sound.Play( ExplosionSound );
 
