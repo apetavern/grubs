@@ -1,4 +1,5 @@
-﻿using Grubs.Extensions;
+﻿using Grubs.Common;
+using Grubs.Extensions;
 using Grubs.Gamemodes;
 
 namespace Grubs.Pawn;
@@ -69,6 +70,7 @@ public sealed class Player : Component
 	public void Cleanup()
 	{
 		Inventory.Equipment.Clear();
+		Grubs.Clear();
 
 		foreach ( var grub in GetOwnedGrubs() )
 		{
