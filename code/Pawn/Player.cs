@@ -26,6 +26,8 @@ public sealed class Player : Component
 
 	[Sync] public NetList<Guid> Grubs { get; set; } = new();
 
+	[Sync] public float PlayTime { get; set; } = 0;
+
 	[Property] public required GameObject GrubPrefab { get; set; }
 
 	[Property] public required PlayerInventory Inventory { get; set; }
@@ -39,6 +41,17 @@ public sealed class Player : Component
 		SteamId = Network.OwnerConnection.SteamId;
 		SteamName = Network.OwnerConnection.DisplayName;
 		SelectedColor = Color.Random.Hex;
+
+		if ( IsProxy )
+			return;
+
+		_ = Fetch();
+	}
+
+	private async Task Fetch()
+	{
+		var pkg = await Package.FetchAsync( "apetavern.grubs", false );
+		PlayTime = pkg.Interaction.Seconds / 3600f;
 	}
 
 	protected override void OnUpdate()

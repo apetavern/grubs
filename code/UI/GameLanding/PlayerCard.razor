@@ -1,0 +1,69 @@
+﻿@namespace Grubs.UI.GameLanding
+
+@using Grubs.Pawn
+@using Sandbox.Services
+@inherits Panel
+
+@attribute [StyleSheet]
+
+@if (Player is null)
+{
+    return;
+}
+
+<root>
+    <img class="avatar" src="avatar:@Connection.SteamId"/>
+    <div class="info">
+        <div class="name">
+            <label class="name-text">@Connection.DisplayName</label>
+            <label class="hours-text">@($"{Player.PlayTime:0}h")</label>
+            <div class="line"/>
+        </div>
+        <div class="stats">
+            @foreach (var stat in GetStats(2))
+            {
+                <label>@stat.Title: @stat.Value</label>
+            }
+        </div>
+    </div>
+</root>
+
+@code
+{
+    public Player Player { get; set; }
+    public Connection Connection => Player.Network.OwnerConnection;
+
+    private int _statIndex = 0;
+    private TimeSince _timeSinceStatsChanged;
+
+    private readonly HashSet<string> StatIds = new()
+    {
+        "grubs-killed",
+        "own-grubs-killed",
+        "ffa-games-played",
+        "ffa-games-won",
+    };
+
+    private IEnumerable<Stats.PlayerStat> GetStats(int count)
+    {
+        var stats = Stats.GetPlayerStats("apetavern.grubs", (long)Connection.SteamId);
+        for (var i = _statIndex; i < _statIndex + count; i++)
+        {
+            yield return stats.Get(StatIds.ElementAt(i % StatIds.Count));
+        }
+    }
+
+    public override void Tick()
+    {
+        if (_timeSinceStatsChanged > 15f)
+        {
+            _statIndex += 2;
+            _timeSinceStatsChanged = 0f;
+        }
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player, _statIndex, Player.PlayTime);
+    }
+}

@@ -1,47 +1,35 @@
 ﻿@namespace Grubs.UI.GameLanding
 
 @using Grubs.Gamemodes
+@using Grubs.Pawn
 @using Grubs.UI.Components
 @inherits PanelComponent
 
 <root>
     <Cursor/>
     <SceneBackground @ref="SceneBackground"/>
-    <div class="header">
-        <div class="title">GRUBS</div>
-        <div class="header-text">
-            @if (CanStart())
-            {
-                <div>Waiting for host...</div>
-            }
-            else
-            {
-                <div>Waiting for players...</div>
-            }
-        </div>
-        <div class="header-text exit ui-btn"><i>logout</i> Exit</div>
-    </div>
     <div @ref="MenuBody" class="body">
-        <div class="players">
-            <label class="players-title">Players</label>
-            @foreach (var conn in Connection.All)
-            {
-                <label class="player-name">@conn.DisplayName</label>
-            }
-        </div>
-        <div class="column-right">
-            <div class="terrain-preview">
-
+        <div class="upper">
+            <div class="header">
+                <label>Lobby</label>
             </div>
-            @if (IsHost() && CanStart())
-            {
-                <div class="action-button ui-btn" @onclick=@Start>
-                    Start
-                </div>
-            }
+            <div class="gamemode-name">
+                <label>@Gamemode.Current.GamemodeName</label>
+            </div>
         </div>
+        <div class="middle">
+            <div class="player-cards">
+                @foreach (var player in Player.All)
+                {
+                    <PlayerCard Player=@player/>
+                }
+            </div>
+        </div>
+        @if (IsHost() && CanStart())
+        {
+            <button class="start-button" onclick=@Start>Start</button>
+        }
     </div>
-
 </root>
 
 @code
@@ -67,6 +55,7 @@
         Cursor.Enabled("menu", true);
     }
 
+
     private void Start()
     {
         if (IsHost())
@@ -86,6 +75,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Connection.All?.Count);
+        return HashCode.Combine(Connection.All?.Count, Player.All.Count());
     }
 }

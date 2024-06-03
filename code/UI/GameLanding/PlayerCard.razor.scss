@@ -1,0 +1,62 @@
+﻿@import '../common.scss';
+
+PlayerCard {
+    width: 500px;
+    height: 100px;
+    background-color: rgb(233, 239, 232);
+    border-radius: 4px;
+    flex-direction: row;
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+    }
+
+    .info {
+        flex-direction: column;
+        margin: 7px;
+        padding: 8px;
+
+        .name {
+            height: 50%;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-stroke: 4px black;
+
+            > .name-text {
+                font-size: 24px;
+                flex-shrink: 0;
+            }
+
+            > .hours-text {
+                text-stroke: 3px black;
+                font-size: 16px;
+                flex-shrink: 0;
+                margin-left: 8px;
+                margin-top: 4px;
+            }
+
+            > .line {
+                width: 100%;
+                margin-left: 12px;
+                border-radius: 1px;
+                height: 3px;
+                background-color: darken(rgb(233, 239, 232), 20%);
+            }
+        }
+    }
+
+    .stats {
+        justify-content: space-evenly;
+        align-items: center;
+        height: 50%;
+        margin-top: 16px;
+
+        > label {
+            font-size: 16px;
+            font-weight: light;
+        }
+    }
+}
