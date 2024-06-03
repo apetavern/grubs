@@ -1,4 +1,5 @@
-﻿using Grubs.Helpers;
+﻿using Grubs.Gamemodes;
+using Grubs.Helpers;
 using Sandbox.Utility;
 
 namespace Grubs.Pawn.Controller;
@@ -303,6 +304,14 @@ public class GrubCharacterController : Component
 			return false;
 		}
 
+		// Don't let active grub push this grub around
+		var activePlayer = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId ) as Player;
+		if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer.ActiveGrub.GameObject )
+		{
+			_stuckTries = 0;
+			return false;
+		}
+
 		//using ( Gizmo.Scope( "unstuck", Transform.World ) )
 		//{
 		//	Gizmo.Draw.Color = Gizmo.Colors.Red;
@@ -314,6 +323,7 @@ public class GrubCharacterController : Component
 		for ( var i = 0; i < AttemptsPerTick; i++ )
 		{
 			var pos = Transform.Position + Vector3.Random.Normal * (_stuckTries / 2.0f);
+			pos = pos.WithY( 512f );
 
 			// First try the up direction for moving platforms
 			if ( i == 0 )
