@@ -80,6 +80,7 @@ public sealed class Player : Component
 		return GetOwnedGrubs().All( g => g.IsDead );
 	}
 
+	[Broadcast]
 	public void Cleanup()
 	{
 		Inventory.Equipment.Clear();
