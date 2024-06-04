@@ -1,5 +1,4 @@
-﻿using Grubs.Common;
-using Grubs.Extensions;
+﻿using Grubs.Extensions;
 using Grubs.Gamemodes;
 
 namespace Grubs.Pawn;
@@ -20,7 +19,7 @@ public sealed class Player : Component
 	[Sync] public ulong SteamId { get; set; }
 	[Sync] public string SteamName { get; set; }
 
-	[Sync] public string SelectedColor { get; set; } = "";
+	[Sync] public string SelectedColor { get; set; } = string.Empty;
 
 	[Sync] public Guid ActiveGrubId { get; set; }
 
@@ -34,13 +33,22 @@ public sealed class Player : Component
 
 	[Property, ReadOnly] public Vector3 MousePosition { get; set; }
 
-	private static readonly Plane _plane = new(new Vector3( 0f, 512f, 0f ), Vector3.Left);
+	private static readonly Plane _plane = new( new Vector3( 0f, 512f, 0f ), Vector3.Left );
 
 	protected override void OnStart()
 	{
 		SteamId = Network.OwnerConnection.SteamId;
 		SteamName = Network.OwnerConnection.DisplayName;
-		SelectedColor = Color.Random.Hex;
+		SelectedColor = GrubsConfig.PresetTeamColors.Values
+			.OrderBy( _ => Guid.NewGuid() )
+			.FirstOrDefault( color => !All.Any( p => p.SelectedColor == color ) );
+
+		if ( string.IsNullOrEmpty( SelectedColor ) )
+		{
+			SelectedColor = Color.White.Hex;
+			Log.Warning( "We couldn't find an available team color. Please report this to an Ape!" );
+			Log.Warning( "(Failover) Your team color has been set to white." );
+		}
 
 		if ( IsProxy )
 			return;
