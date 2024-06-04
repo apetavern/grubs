@@ -1,6 +1,6 @@
 {
   "UI": false,
-  "Volume": "0.60,0.60,0",
+  "Volume": "0.30,0.60,0",
   "Pitch": "1.00,1.00,0",
   "Decibels": 120,
   "SelectionMode": "Random",
