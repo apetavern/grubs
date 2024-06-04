@@ -153,6 +153,7 @@ public sealed class FreeForAllGamemode : Gamemode
 		_nextTurnTask = null;
 		TurnIsChanging = false;
 		ActivePlayerId = Guid.Empty;
+		Scene.Children.OfType<GameObject>().Where( x => x.Tags.HasAny( "projectile", "cleanup" ) ).ToList().ForEach( x => x.Destroy() );
 
 		Started = false;
 
