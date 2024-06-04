@@ -181,6 +181,30 @@
             "go": "08a72929-c2dd-4da0-b84d-fdca3b287389",
             "component_type": "Sdf2DWorld"
           },
+          "TerrainCurve": [
+            {},
+            {
+              "x": 0.23511904,
+              "y": 1,
+              "mode": "Flat"
+            },
+            {
+              "x": 0.35416666,
+              "y": 0.80173004
+            },
+            {
+              "x": 0.55505955,
+              "y": 0.8484042
+            },
+            {
+              "x": 0.6755952,
+              "y": 1,
+              "mode": "Flat"
+            },
+            {
+              "x": 1
+            }
+          ],
           "Water": {
             "_type": "component",
             "component_id": "83abee40-5ee1-418f-9bde-058e66e46939",
@@ -374,7 +398,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-06-01T19:02:57.7502007-04:00",
+  "LastSaved": "2024-06-04T15:19:11.3074305\u002B02:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

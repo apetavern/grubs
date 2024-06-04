@@ -7,6 +7,8 @@ public partial class GrubsTerrain
 	[Sync] public int WorldTextureHeight { get; set; } = 0;
 	[Sync] public int WorldTextureLength { get; set; } = 0;
 
+	[Property] public Curve TerrainCurve { get; set; }
+
 	public void ResetTerrain()
 	{
 		WorldTextureLength = 0;
@@ -72,7 +74,7 @@ public partial class GrubsTerrain
 		maxY = 0;
 		for ( var x = 0; x < pointsX; x++ )
 		{
-			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 512f).FloorToInt();
+			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 512f * TerrainCurve.Evaluate( (float)x / pointsX )).FloorToInt();
 			if ( NoiseMap[x] >= pointsY )
 				NoiseMap[x] = pointsY - 1;
 			TerrainMap[x, NoiseMap[x]] = true;
@@ -190,7 +192,7 @@ public partial class GrubsTerrain
 
 	private float GetNoise( int x, int y )
 	{
-		return amplitude * Noise.Perlin( x * frequency, y * frequency );
+		return amplitude * Noise.Simplex( x * frequency, y * frequency );
 	}
 
 	[ConCmd( "gr_regen_terrain" )]
