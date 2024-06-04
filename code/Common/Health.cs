@@ -115,7 +115,7 @@ public partial class Health : Component
 				// Same as above.
 				DeathEffects( position );
 
-				ExplosionHelper.Instance.Explode( grub, position, 100f, 25f );
+				ExplosionHelper.Instance.Explode( this, grub, position, 100f, 25f );
 				plunger?.Destroy();
 			}
 

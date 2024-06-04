@@ -14,7 +14,7 @@ public partial class ExplosionHelper : Component
 		Instance = this;
 	}
 
-	public void Explode( Component source, Vector3 position, float radius, float damage, float force = 1024f )
+	public void Explode( Component source, Grub attacker, Vector3 position, float radius, float damage, float force = 1024f )
 	{
 		var gos = Scene.FindInPhysics( new Sphere( position, radius ) );
 		foreach ( var go in gos )
@@ -34,7 +34,7 @@ public partial class ExplosionHelper : Component
 			if ( go.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelf ) )
 				HandlePhysicsExplosion( body, position, force );
 
-			health.TakeDamage( GrubsDamageInfo.FromExplosion( damage * distFactor, null, source.GameObject, position ) );
+			health.TakeDamage( GrubsDamageInfo.FromExplosion( damage * distFactor, attacker, source.GameObject, position ) );
 		}
 
 		LastPosition = position;

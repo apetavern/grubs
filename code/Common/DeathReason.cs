@@ -15,7 +15,7 @@ public readonly struct DeathReason
 	/// <summary>
 	/// The first damage info responsible for the death.
 	/// </summary>
-	public readonly GrubsDamageInfo? FirstInfo;
+	public readonly GrubsDamageInfo FirstInfo;
 
 	/// <summary>
 	/// The first reason for the death.
@@ -39,7 +39,7 @@ public readonly struct DeathReason
 
 	public bool FromDisconnect => FirstReason == DamageType.Disconnect || SecondReason == DamageType.Disconnect;
 
-	public DeathReason( Grub grub, GrubsDamageInfo? firstInfo, DamageType firstReason, GrubsDamageInfo? secondInfo,
+	public DeathReason( Grub grub, GrubsDamageInfo firstInfo, DamageType firstReason, GrubsDamageInfo secondInfo,
 		DamageType secondReason )
 	{
 		Grub = grub;
@@ -231,9 +231,9 @@ public readonly struct DeathReason
 	/// <returns></returns>
 	public static DeathReason FindReason( Grub grub, List<GrubsDamageInfo> damageInfos )
 	{
-		GrubsDamageInfo? lastReasonInfo = null;
+		GrubsDamageInfo lastReasonInfo = null;
 		var lastReason = DamageType.None;
-		GrubsDamageInfo? reasonInfo = null;
+		GrubsDamageInfo reasonInfo = null;
 		var reason = DamageType.None;
 
 		foreach ( var damageInfo in damageInfos )

@@ -23,7 +23,7 @@ public sealed class Grub : Component, IResolvable
 	public bool Resolved => PlayerController.Velocity.IsNearlyZero( 0.1f ) || IsDead;
 
 	public Transform EyePosition => Transform.World.WithPosition( Transform.Position + Vector3.Up * 24f );
-	
+
 	public Mountable ActiveMountable { get; set; }
 
 	[Sync] public string Name { get; set; } = "Grubby";
@@ -65,6 +65,6 @@ public sealed class Grub : Component, IResolvable
 		if ( grub is null )
 			return;
 
-		grub.Health.TakeDamage( new GrubsDamageInfo( hp ) );
+		grub.Health.TakeDamage( new GrubsDamageInfo( hp, grub ) );
 	}
 }

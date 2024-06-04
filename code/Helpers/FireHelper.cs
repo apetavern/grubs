@@ -105,7 +105,7 @@ public sealed class FireHelper : Component
 				continue;
 
 			health.TakeDamage(
-				GrubsDamageInfo.FromFire( 0.75f, worldPosition: FireParticlePositions[particle] ) );
+				GrubsDamageInfo.FromFire( 0.75f, grub, worldPosition: FireParticlePositions[particle] ) );
 		}
 
 		const float torchSize = 6f;

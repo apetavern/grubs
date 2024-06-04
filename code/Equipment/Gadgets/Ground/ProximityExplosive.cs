@@ -1,4 +1,5 @@
 ﻿using Grubs.Common;
+using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Helpers;
 using Grubs.Pawn;
 
@@ -130,7 +131,8 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	[Broadcast]
 	public void ExplodeEffects()
 	{
-		ExplosionHelper.Instance.Explode( this, Transform.Position, Radius, Damage );
+		var projectile = Components.Get<Projectile>();
+		ExplosionHelper.Instance.Explode( this, projectile?.Grub, Transform.Position, Radius, Damage );
 		Sound.Play( ExplosionSound );
 
 		if ( Particles is null )
