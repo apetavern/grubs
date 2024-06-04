@@ -1,21 +1,21 @@
 {
   "RootObject": {
-    "__guid": "24a88455-9ffa-41ae-b430-580315139238",
+    "__guid": "59ae3379-9456-49d4-b6bf-882ca95a9445",
     "Flags": 0,
     "Name": "weapons_crate",
-    "Tags": "drop,pickup",
+    "Tags": "drop,pickup,cleanup",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Grubs.Drops.Crate",
-        "__guid": "6c823067-2204-48a7-bd89-d1c9ee97d90f",
+        "__guid": "c092f252-08ee-4781-86d2-a23a9f8dd492",
         "DropType": "Weapon"
       },
       {
         "__type": "Sandbox.ModelRenderer",
-        "__guid": "67a6dacd-c19a-4986-80b3-2eea87af20f3",
+        "__guid": "d8fdccf2-1bd2-457c-8989-eeac581c1176",
         "BodyGroups": 18446744073709551615,
         "Model": "models/crates/weapons_crate/weapons_crate.vmdl",
         "RenderType": "On",
@@ -23,7 +23,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "0e85ed74-2062-4a71-a528-597b42461d7a",
+        "__guid": "aecc4cab-b213-43a0-ada3-e67657780766",
         "Center": "0,0,12.5",
         "IsTrigger": false,
         "Scale": "25,25,25",
@@ -31,7 +31,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "2ff48cfd-f097-405d-b662-f03771594956",
+        "__guid": "1162a096-25b9-4b78-be9b-21e4b0541995",
         "Center": "0,0,12.5",
         "IsTrigger": true,
         "Scale": "30,30,30",
@@ -39,7 +39,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "9b4cf91d-1caf-498d-8613-c8b15ebad03a",
+        "__guid": "8722bf87-abf4-4c2d-90da-0c8c268969a8",
         "AngularDamping": 0.5,
         "Gravity": true,
         "LinearDamping": 2,
@@ -54,7 +54,7 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "5d2eab78-130d-4a2c-953f-84f6f55a4608",
+        "__guid": "ef528c1b-3d7d-42ae-9136-95c22ec8bed7",
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 0,
@@ -66,19 +66,19 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "0fb21f05-2ca5-439c-ae96-b41fc7a4d3ad",
+        "__guid": "9a6c2a82-07d6-4ab3-95c2-5312776cbdae",
         "MaxHealth": 1
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
-        "__guid": "9f48c7f5-d84f-454c-ad7b-c5d74c7ec7f9",
+        "__guid": "7049ff95-e6ee-442c-961d-0f227df90db5",
         "FireParticleCount": 25,
         "InitialUpVelocity": 100,
         "LeftRightVelocityRandom": 100,
         "Projectile": {
           "_type": "component",
-          "component_id": "5d2eab78-130d-4a2c-953f-84f6f55a4608",
-          "go": "24a88455-9ffa-41ae-b430-580315139238",
+          "component_id": "ef528c1b-3d7d-42ae-9136-95c22ec8bed7",
+          "go": "59ae3379-9456-49d4-b6bf-882ca95a9445",
           "component_type": "ExplosiveProjectile"
         },
         "SphericalEmission": true

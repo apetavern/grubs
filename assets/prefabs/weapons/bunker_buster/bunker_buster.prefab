@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "eae5ff94-8b8f-4abc-8fbe-d79443b190f3",
+    "__guid": "eed739f7-44de-48af-8931-9cf02f878197",
     "Flags": 0,
     "Name": "bunker_buster",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "3e2e30ec-2892-469f-92fb-b63abcc31e22",
+        "__guid": "e477d678-6cbf-4a67-bc61-f3ae56554aeb",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/airstrikes/radio.vmdl",
@@ -19,15 +19,15 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "cbbdcdeb-0582-4f90-b796-fee227b0666f",
+        "__guid": "e53c269b-e79a-4008-9b37-fa97a2d78ef0",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/bunker_buster.geq",
         "HoldPose": "Holdable",
         "Icon": "models/weapons/bunker_buster/bunker_buster.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "3e2e30ec-2892-469f-92fb-b63abcc31e22",
-          "go": "eae5ff94-8b8f-4abc-8fbe-d79443b190f3",
+          "component_id": "e477d678-6cbf-4a67-bc61-f3ae56554aeb",
+          "go": "eed739f7-44de-48af-8931-9cf02f878197",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Bunker Buster",
@@ -36,28 +36,29 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
-        "__guid": "9e50f689-e44f-4690-8bab-11f4d2090c4a",
+        "__guid": "1c4e8804-3d56-446f-a4eb-759698153985",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorModel": {
           "_type": "component",
-          "component_id": "c2c28e3a-3c92-4928-bfef-ce84ddaf8455",
-          "go": "bc2e01b0-5629-4d08-90fa-ff0d6c602e1d",
+          "component_id": "3d6a3212-2721-4160-bd1c-e069b0231f4e",
+          "go": "cc03c6db-28ee-4f90-be3e-fff075174c72",
           "component_type": "ModelRenderer"
         },
+        "Directional": false,
         "Equipment": {
           "_type": "component",
-          "component_id": "cbbdcdeb-0582-4f90-b796-fee227b0666f",
-          "go": "eae5ff94-8b8f-4abc-8fbe-d79443b190f3",
+          "component_id": "e53c269b-e79a-4008-9b37-fa97a2d78ef0",
+          "go": "eed739f7-44de-48af-8931-9cf02f878197",
           "component_type": "Equipment"
         },
         "FiringType": "Complex",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "732fee9a-4f39-4bd9-8fe5-860b0baf2ec0",
+          "__guid": "cca9013d-dbcd-4baa-8e81-46dae2675fb2",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -237,17 +238,18 @@
     ],
     "Children": [
       {
-        "__guid": "bc2e01b0-5629-4d08-90fa-ff0d6c602e1d",
+        "__guid": "cc03c6db-28ee-4f90-be3e-fff075174c72",
         "Flags": 0,
         "Name": "Bunker - Cursor",
         "Scale": "0.5,0.5,0.5",
+        "Tags": "cleanup",
         "Enabled": true,
         "NetworkMode": 2,
         "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
-            "__guid": "c2c28e3a-3c92-4928-bfef-ce84ddaf8455",
+            "__guid": "3d6a3212-2721-4160-bd1c-e069b0231f4e",
             "BodyGroups": 18446744073709551615,
             "Model": "models/weapons/targetindicator/targetindicator.vmdl",
             "RenderType": "On",

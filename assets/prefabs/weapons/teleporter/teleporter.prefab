@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "18efe351-a5f7-44d0-b668-d0c721f3f5fa",
+    "__guid": "2894cea8-250c-4cc0-9b55-791bbb3b5b28",
     "Flags": 0,
     "Name": "teleporter",
     "Enabled": true,
@@ -9,54 +9,56 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "8f127ce9-c308-4581-817a-fa5decb71f48",
+        "__guid": "9e062c87-d9df-40b2-be7d-bab67508170a",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/teleporter/teleporter.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "4be203d9-6045-424a-b864-ed29af388877",
+        "__guid": "c8cea960-a03f-458b-8383-59a172f10c46",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/teleporter.geq",
         "HoldPose": "Holdable",
         "Icon": "models/tools/teleporter/teleporter.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "8f127ce9-c308-4581-817a-fa5decb71f48",
-          "go": "18efe351-a5f7-44d0-b668-d0c721f3f5fa",
+          "component_id": "9e062c87-d9df-40b2-be7d-bab67508170a",
+          "go": "2894cea8-250c-4cc0-9b55-791bbb3b5b28",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Teleporter",
+        "ShouldShowAimReticle": false,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Tools.TeleportTool",
-        "__guid": "34b73689-648e-4fe9-ab92-a639effae744",
+        "__guid": "04a96d81-3df1-4618-ba43-d47bd357c249",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorModel": {
           "_type": "component",
-          "component_id": "c609b883-3b25-429b-9f0a-8d02869d83d9",
-          "go": "2d952156-e09b-4627-9c29-62d4021864e1",
+          "component_id": "a9470837-4379-484b-8e4f-23bfaf04d5e7",
+          "go": "1f300300-9bf7-4aa4-8c14-0fda9f333088",
           "component_type": "SkinnedModelRenderer"
         },
         "CursorRange": 2000,
         "Equipment": {
           "_type": "component",
-          "component_id": "4be203d9-6045-424a-b864-ed29af388877",
-          "go": "18efe351-a5f7-44d0-b668-d0c721f3f5fa",
+          "component_id": "c8cea960-a03f-458b-8383-59a172f10c46",
+          "go": "2894cea8-250c-4cc0-9b55-791bbb3b5b28",
           "component_type": "Equipment"
         },
         "FiringType": "Cursor",
         "MaxUses": 1,
         "OnFireFinished": {
           "__version": 7,
-          "__guid": "15ac762f-a00a-411d-bb64-c00a194691b0",
+          "__guid": "7e237f95-8894-4a3d-b9ac-76fb7bf842c4",
           "UserData": {
             "Title": "On Fire Finished",
             "ReferencedComponentTypes": [
@@ -121,22 +123,24 @@
     ],
     "Children": [
       {
-        "__guid": "2d952156-e09b-4627-9c29-62d4021864e1",
+        "__guid": "1f300300-9bf7-4aa4-8c14-0fda9f333088",
         "Flags": 0,
-        "Name": "GrubCursor",
+        "Name": "Teleporter - Cursor",
+        "Tags": "cleanup",
         "Enabled": true,
         "NetworkMode": 2,
         "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "c609b883-3b25-429b-9f0a-8d02869d83d9",
+            "__guid": "a9470837-4379-484b-8e4f-23bfaf04d5e7",
             "BodyGroups": 5,
             "CreateBoneObjects": false,
             "MaterialGroup": "Teleport_Preview",
             "Model": "models/citizenworm.vmdl",
             "RenderType": "On",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
           }
         ]
       }

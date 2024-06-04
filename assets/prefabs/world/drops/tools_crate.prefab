@@ -3,7 +3,7 @@
     "__guid": "24a88455-9ffa-41ae-b430-580315139238",
     "Flags": 0,
     "Name": "tools_crate",
-    "Tags": "drop,pickup",
+    "Tags": "drop,pickup,cleanup",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,

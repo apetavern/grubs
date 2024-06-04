@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "6438d927-4b21-463f-8df6-5a851b65b23e",
+    "__guid": "b1df33f8-81bf-487f-bb8a-ec80b263886b",
     "Flags": 0,
     "Name": "girder",
     "Tags": "ignore_killzone",
@@ -10,53 +10,55 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "f35a7a04-6703-4f24-96cf-304ac5f0fe7d",
+        "__guid": "840f3d61-c1ef-4a4d-baaa-41d94bc5227c",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/citizen_clothes/hat/hard_hat/models/hard_hat.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "15610edd-9b22-44d1-8a46-88afd0163cb9",
+        "__guid": "a0315727-bf99-4097-ae2e-66a740b16958",
         "CameraCanZoom": false,
         "Data": "resources/equipment/tools/girder.geq",
         "HoldPose": "Holdable",
         "Icon": "models/tools/girders/girder_short.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "f35a7a04-6703-4f24-96cf-304ac5f0fe7d",
-          "go": "6438d927-4b21-463f-8df6-5a851b65b23e",
+          "component_id": "840f3d61-c1ef-4a4d-baaa-41d94bc5227c",
+          "go": "b1df33f8-81bf-487f-bb8a-ec80b263886b",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Girder",
+        "ShouldShowAimReticle": false,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Tools.GirderTool",
-        "__guid": "f79c2821-0af4-4560-8472-590e32a3802c",
+        "__guid": "b786c39b-bcc0-4eb1-95ee-af2b9d5cf47e",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorCollider": {
           "_type": "component",
-          "component_id": "917bc2a9-971e-42ed-8979-46dd24939694",
-          "go": "f85e3865-db76-41a2-9a30-1c95ddc3e455",
+          "component_id": "bf7aba1a-04c3-4376-801b-5a92428028d4",
+          "go": "6173bd14-d258-43d8-a805-c66514c93d48",
           "component_type": "ModelCollider"
         },
         "CursorRange": 256,
         "CursorVisual": {
           "_type": "component",
-          "component_id": "4476ab90-b825-430d-9033-5d30465b0424",
-          "go": "f85e3865-db76-41a2-9a30-1c95ddc3e455",
+          "component_id": "387e1586-1e26-4f01-abec-d60a7a9d62c0",
+          "go": "6173bd14-d258-43d8-a805-c66514c93d48",
           "component_type": "SkinnedModelRenderer"
         },
         "Equipment": {
           "_type": "component",
-          "component_id": "15610edd-9b22-44d1-8a46-88afd0163cb9",
-          "go": "6438d927-4b21-463f-8df6-5a851b65b23e",
+          "component_id": "a0315727-bf99-4097-ae2e-66a740b16958",
+          "go": "b1df33f8-81bf-487f-bb8a-ec80b263886b",
           "component_type": "Equipment"
         },
         "FiringType": "Cursor",
@@ -70,26 +72,27 @@
     ],
     "Children": [
       {
-        "__guid": "f85e3865-db76-41a2-9a30-1c95ddc3e455",
+        "__guid": "6173bd14-d258-43d8-a805-c66514c93d48",
         "Flags": 0,
-        "Name": "GirderCursor",
-        "Tags": "trigger",
+        "Name": "Girder - Cursor",
+        "Tags": "trigger,cleanup",
         "Enabled": true,
         "NetworkMode": 2,
         "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "4476ab90-b825-430d-9033-5d30465b0424",
+            "__guid": "387e1586-1e26-4f01-abec-d60a7a9d62c0",
             "BodyGroups": 25,
             "CreateBoneObjects": false,
             "Model": "models/tools/girders/girder_short.vmdl",
             "RenderType": "On",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
           },
           {
             "__type": "Sandbox.ModelCollider",
-            "__guid": "917bc2a9-971e-42ed-8979-46dd24939694",
+            "__guid": "bf7aba1a-04c3-4376-801b-5a92428028d4",
             "IsTrigger": true,
             "Model": "models/tools/girders/girder_short.vmdl",
             "Static": false
