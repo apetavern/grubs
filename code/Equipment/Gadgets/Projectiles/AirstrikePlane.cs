@@ -1,7 +1,5 @@
 using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Pawn;
-using Grubs.Terrain;
-using static Grubs.Equipment.Weapons.Weapon;
 
 namespace Grubs;
 
@@ -67,6 +65,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 				_engineSound.Volume -= Time.Delta;
 			await Task.Frame();
 		}
+
 		GameObject.Destroy();
 	}
 
@@ -102,6 +101,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 			}
 			await Task.DelaySeconds( 0.25f );
 		}
+
 		Model.Set( "open", false );
 	}
 }
