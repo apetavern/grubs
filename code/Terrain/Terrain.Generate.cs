@@ -192,7 +192,7 @@ public partial class GrubsTerrain
 
 	private float GetNoise( int x, int y )
 	{
-		return amplitude * Noise.Simplex( x * frequency, y * frequency );
+		return amplitude * Noise.Perlin( x * frequency, y * frequency );
 	}
 
 	[ConCmd( "gr_regen_terrain" )]
