@@ -103,6 +103,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/airstrikes/plane.fbx"
 						start_frame = -1
 						end_frame = 30

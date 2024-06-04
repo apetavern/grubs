@@ -1,0 +1,11 @@
+{
+  "Name": "Airstrike",
+  "Description": "Bombs away!",
+  "Icon": "models/weapons/airstrikes/bomb.vmdl.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/airstrike/airstrike.prefab",
+  "DefaultAmmo": 1,
+  "DropChance": 0.5,
+  "__references": [],
+  "__version": 0
+}

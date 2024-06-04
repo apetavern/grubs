@@ -2,11 +2,16 @@
   "UI": false,
   "Volume": "1.00,1.00,0",
   "Pitch": "1.00,1.00,0",
-  "Decibels": 100,
+  "Decibels": 120,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/airstrike/plane_bay_door_open.vsnd"
   ],
-  "MaximumDistance": 2301.2522,
-  "MinimumDistance": 115.062614
+  "Occlusion": false,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": false,
+  "__references": [],
+  "__version": 0
 }
