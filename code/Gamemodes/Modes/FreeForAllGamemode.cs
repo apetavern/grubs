@@ -17,7 +17,6 @@ public sealed class FreeForAllGamemode : Gamemode
 	[Property, ReadOnly, HostSync] public Guid ActivePlayerId { get; set; }
 	[HostSync] public TimeUntil TimeUntilNextTurn { get; set; }
 
-	private Queue<Player> PlayerTurnQueue { get; set; } = new();
 	private Dictionary<Player, Queue<Grub>> PlayerGrubOrder { get; set; } = new();
 
 	private Task _nextTurnTask = null;

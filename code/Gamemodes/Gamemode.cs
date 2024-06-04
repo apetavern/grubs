@@ -17,6 +17,7 @@ public abstract class Gamemode : Component
 	[Sync] public bool TurnIsChanging { get; set; } = false;
 
 	public Queue<Grub> DamageQueue { get; set; } = new();
+	protected Queue<Player> PlayerTurnQueue { get; set; } = new();
 
 	public Gamemode()
 	{
@@ -50,6 +51,9 @@ public abstract class Gamemode : Component
 			await ShowDamagedGrub( grub );
 			await Resolution.UntilWorldResolved( 30 );
 		}
+
+		// Remove dead players from turn queue.
+		PlayerTurnQueue = new( PlayerTurnQueue.Where( p => p.ShouldHaveTurn ) );
 	}
 
 	private async Task ShowDamagedGrub( Grub grub )
