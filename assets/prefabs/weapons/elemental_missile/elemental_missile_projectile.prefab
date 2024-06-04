@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
+    "__guid": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
     "Flags": 0,
     "Name": "elemental_missile_projectile",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "a9edafe0-1c34-4427-b21e-00f1640d5fea",
+        "__guid": "79f2d56d-1d10-4135-a301-6aa1194e4a6a",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "particles/magicmissile/magic_missile.vmdl",
@@ -19,19 +19,19 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "df9bfd5a-e47f-42ee-b0be-a70200151866",
+        "__guid": "868b9533-d296-4fd7-aaa8-48cd4042c986",
         "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "a9edafe0-1c34-4427-b21e-00f1640d5fea",
-          "go": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
+          "component_id": "79f2d56d-1d10-4135-a301-6aa1194e4a6a",
+          "go": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "8588856a-f50b-493a-b3b1-5e7e5ad8630e",
-          "go": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
+          "component_id": "cb90e0b4-8e55-4f80-a33f-0ea0383b5df1",
+          "go": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 600,
@@ -40,7 +40,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "8588856a-f50b-493a-b3b1-5e7e5ad8630e",
+        "__guid": "cb90e0b4-8e55-4f80-a33f-0ea0383b5df1",
         "AngularDamping": 0,
         "Gravity": false,
         "LinearDamping": 0,
@@ -57,10 +57,10 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "cea4917b-2d84-4729-838d-85a31d00ac09",
+        "__guid": "e4edf5d0-c8e2-402a-8b7c-7745f48f7bd7",
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
-        "ExplodeAfter": 0,
+        "ExplodeAfter": 5,
         "ExplodeOnCollision": true,
         "ExplodeOnDeath": true,
         "ExplosionDamage": 5,
@@ -69,7 +69,7 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "90259837-b307-4b0f-be53-d7b4229d4245",
+        "__guid": "4077b858-e233-459e-82a7-ce7a2520ac90",
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 10,
@@ -77,14 +77,14 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
-        "__guid": "c0f8d56e-a214-4435-bfd3-a7af66ba66a2",
+        "__guid": "ae2f23bd-9c65-4a1c-bb7a-ac6bee85915b",
         "FireParticleCount": 10,
         "InitialUpVelocity": 0,
         "LeftRightVelocityRandom": 100,
         "Projectile": {
           "_type": "component",
-          "component_id": "cea4917b-2d84-4729-838d-85a31d00ac09",
-          "go": "988a917d-b0d7-4e36-8a99-d319da58bc0c",
+          "component_id": "e4edf5d0-c8e2-402a-8b7c-7745f48f7bd7",
+          "go": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
           "component_type": "ExplosiveProjectile"
         },
         "SphericalEmission": true
@@ -92,7 +92,7 @@
     ],
     "Children": [
       {
-        "__guid": "f8fef2dd-afa0-42f2-9d88-56cd9505b9b6",
+        "__guid": "840409e6-e547-48f7-9f22-a3faf124d66e",
         "Flags": 0,
         "Name": "trail",
         "Tags": "particles",
@@ -102,7 +102,7 @@
         "Components": [
           {
             "__type": "Sandbox.LegacyParticleSystem",
-            "__guid": "563c376c-ffd3-4ffe-a1b8-4f0b8e09b1e0",
+            "__guid": "a1e7cdfe-3e37-464f-9458-34934a4bf9f8",
             "ControlPoints": [
               {
                 "Value": "Vector3",
@@ -117,7 +117,7 @@
         ]
       },
       {
-        "__guid": "f3da8448-3abd-48a2-bef9-a1a5a7f1725a",
+        "__guid": "a839742f-15d1-4610-a450-3d8e326e4500",
         "Flags": 0,
         "Name": "smoke",
         "Tags": "particles",
@@ -127,7 +127,7 @@
         "Components": [
           {
             "__type": "Sandbox.LegacyParticleSystem",
-            "__guid": "53f05ded-fa77-43b5-a80f-a13c073a962c",
+            "__guid": "498437b7-2fed-4185-9d0f-83350ef88c68",
             "ControlPoints": [],
             "Looped": true,
             "Particles": "particles/magicmissile/magicmissile_smoke.vpcf",
