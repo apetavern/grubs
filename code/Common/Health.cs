@@ -133,7 +133,7 @@ public partial class Health : Component
 			explosive.Explode();
 		}
 
-		if ( Components.TryGet( out ProximityExplosive proximity, FindMode.EverythingInSelfAndChildren ) && proximity.DetonateOnDeath )
+		if ( Components.TryGet( out ProximityExplosive proximity, FindMode.EverythingInSelfAndChildren ) && proximity.DetonateOnDeath && !proximity.IsDetonating )
 		{
 			proximity.StartDetonating();
 		}
