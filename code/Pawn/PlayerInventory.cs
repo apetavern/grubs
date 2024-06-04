@@ -1,4 +1,5 @@
 ﻿using Grubs.Gamemodes;
+using Grubs.UI.Inventory;
 
 namespace Grubs.Pawn;
 
@@ -92,6 +93,8 @@ public sealed class PlayerInventory : Component
 			return;
 		ActiveSlot = index;
 		Equip( ActiveSlot );
+
+		InventoryOpen = false;
 	}
 
 	[Broadcast]

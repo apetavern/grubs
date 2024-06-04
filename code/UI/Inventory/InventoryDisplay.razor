@@ -17,29 +17,34 @@
 }
 
 <root>
-    @for (var i = 0; i < _rows; i++)
-    {
-        <div class="inv-row">
-            @for (var j = 0; j < _columns; j++)
-            {
-                <InventoryItem Equipment=@Inventory.Equipment.ElementAtOrDefault(i * _columns + j)/>
-            }
+    <div class="inv-panel">
+        <div class="inv-title">
+            <label>Inventory</label>
         </div>
-    }
+        <div class="inv-content">
+            <div class="inv-weapons">
+                @foreach (var eq in Inventory.Equipment)
+                {
+                    <InventoryItem Equipment=@eq/>
+                }
+            </div>
+            <div class="inv-tools">
+                @* TODO: Split inv into weapons vs tools *@
+            </div>
+        </div>
+    </div>
+
 </root>
 
 @code
 {
     public PlayerInventory Inventory { get; set; }
 
-    private Equipment Current => Inventory.Equipment.ElementAtOrDefault(Inventory.ActiveSlot);
-    private Weapon CurrentWeapon => Current?.Components.Get<Weapon>();
-
-    private const int _columns = 5;
+    private const int _columns = 7;
     private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
     private int _totalItems => Inventory.Equipment.Count();
 
-    private int _currentGamepadIndex = 0;
+    private int _currentGamepadIndex;
     private bool _usedJoystick;
 
     public override void Tick()
