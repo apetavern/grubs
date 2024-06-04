@@ -49,12 +49,12 @@ PlayerCard {
     }
 
     .stats {
-        justify-content: space-evenly;
         align-items: center;
         height: 50%;
         margin-top: 16px;
 
         > label {
+            width: 50%;
             font-size: 16px;
             font-weight: light;
         }
