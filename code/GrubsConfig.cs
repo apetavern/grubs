@@ -237,6 +237,8 @@ public static class GrubsConfig
 		"Slinky",
 		"Grubsy",
 		"Wormbert",
+		"Wormbert Mk2",
+		"Wormbert Jr",
 		"Noodle",
 		"Squiggly",
 		"Twisty",
@@ -245,6 +247,7 @@ public static class GrubsConfig
 		"Snappy",
 		"Slinky",
 		"Gurgle",
+		"Boopy",
 		"Whimsy",
 		"Squish",
 		"Twitch",
@@ -262,5 +265,28 @@ public static class GrubsConfig
 		"Dizzy",
 		"Peanut",
 		"Jelly"
+	};
+
+	/// <summary>
+	/// The preset list of colors that players can pick from (TODO)
+	/// For now, duplicate the list and random select from it
+	/// </summary>
+	public static readonly Dictionary<string, Color> PresetTeamColors = new()
+	{
+		{ "Green", Color.FromBytes(56, 229, 77) },
+		{ "Pastel Green", Color.FromBytes(192, 255, 169) },
+		{ "Orange", Color.FromBytes(255, 174, 109) },
+		{ "Bright Yellow", Color.FromBytes(255, 216, 89) },
+		{ "Yellow", Color.FromBytes(248, 249, 136) },
+		{ "Cyan", Color.FromBytes(103, 234, 202) },
+		{ "Pastel Brown", Color.FromBytes(118, 103, 87) },
+		{ "Eggshell", Color.FromBytes(240, 236, 211) },
+		{ "Red", Color.FromBytes(232, 59, 105) },
+		{ "Strong Pink", Color.FromBytes(255, 129, 172) },
+		{ "Pink", Color.FromBytes(251, 172, 204) },
+		{ "Strong Purple", Color.FromBytes(213, 69, 255) },
+		{ "Purple", Color.FromBytes(173, 162, 255) },
+		{ "Blue", Color.FromBytes(33, 146, 255) },
+		{ "Pastel Blue", Color.FromBytes(169, 213, 255) }
 	};
 }
