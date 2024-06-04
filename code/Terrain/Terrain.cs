@@ -36,7 +36,7 @@ public partial class GrubsTerrain : Component
 		WorldTextureHeight = 0;
 	}
 
-	public Vector3 FindSpawnLocation( bool inAir = false, float size = 16f )
+	public Vector3 FindSpawnLocation( bool inAir = false, float size = 16f, float maxAngle = 70f )
 	{
 		var retries = 0;
 		var fallbackPosition = new Vector3();
@@ -65,7 +65,7 @@ public partial class GrubsTerrain : Component
 				if ( PointInside( tr.EndPosition ) )
 					continue;
 
-				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) > 80f )
+				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) > maxAngle )
 					continue;
 
 				return inAir ? tr.StartPosition : tr.EndPosition;

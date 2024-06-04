@@ -74,7 +74,7 @@ public sealed class FreeForAllGamemode : Gamemode
 		// Landmine Spawning
 		for ( var i = 0; i < GrubsConfig.LandmineSpawnCount; i++ )
 		{
-			var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: false );
+			var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: false, maxAngle: 25f );
 			LandmineUtility.Instance.Spawn( spawnPos );
 		}
 
@@ -179,7 +179,7 @@ public sealed class FreeForAllGamemode : Gamemode
 		if ( Game.Random.Float( 1f ) >= chance )
 			return;
 
-		var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: true );
+		var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: true, maxAngle: 25f );
 		var crate = CrateUtility.Instance.SpawnCrate( dropType );
 		crate.Transform.Position = spawnPos;
 
