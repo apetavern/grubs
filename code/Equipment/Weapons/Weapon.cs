@@ -60,10 +60,11 @@ public partial class Weapon : Component
 			if ( Input.Down( "fire" ) )
 			{
 				OnChargedHeld();
-				return;
+				if ( _weaponCharge < 100 )
+					return;
 			}
 
-			if ( Input.Released( "fire" ) )
+			if ( Input.Released( "fire" ) || _weaponCharge >= 100 )
 			{
 				IsFiring = true;
 				IsCharging = false;
@@ -107,7 +108,7 @@ public partial class Weapon : Component
 					OnFire.Invoke( 100 );
 				else
 					FireImmediate();
-				
+
 				TimeSinceLastUsed = 0;
 
 				if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
@@ -168,8 +169,12 @@ public partial class Weapon : Component
 		OnFireFinished?.Invoke();
 	}
 
+	private TimeSince _startedCharging;
 	protected void OnChargedHeld()
 	{
+		if ( !IsCharging )
+			_startedCharging = 0f;
+
 		IsCharging = true;
 
 		var muzzle = GetMuzzlePosition();
@@ -179,8 +184,7 @@ public partial class Weapon : Component
 		_chargeParticles?.SetNamedValue( "Alpha", 100f );
 		_chargeParticles?.SetNamedValue( "Speed", 40f );
 
-		_weaponCharge++;
-		_weaponCharge.Clamp( 0, 100 );
+		_weaponCharge = (int)Math.Clamp( _startedCharging / 2f * 100f, 0f, 100f );
 
 		if ( Input.UsingController ) Input.TriggerHaptics( 0, _weaponCharge / 100f, rightTrigger: _weaponCharge / 100f );
 	}
