@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "841ddcf8-e4ef-451d-b298-a9cbbb1d9016",
+    "__guid": "c40e7ed6-185e-427d-992b-65fd905eba8f",
     "Flags": 0,
     "Name": "grenade_thrown",
     "Tags": "projectile",
@@ -10,16 +10,17 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "1561e925-1b4e-424f-8f56-30665d392845",
+        "__guid": "412f6ff3-d17d-4516-abe7-efbbbbe5488f",
         "BodyGroups": 1,
         "CreateBoneObjects": false,
         "Model": "models/weapons/grenade/grenade.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "443965fc-1845-4518-930f-47ca8ea62709",
+        "__guid": "393661be-3ff3-4d98-97e6-0de418cf4f46",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -28,7 +29,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "54ba1ffb-0c00-4ebe-b8e7-37d018baee07",
+        "__guid": "c0ad4b51-578b-4a49-a818-51c310531ccd",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -44,7 +45,7 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "dc5780bd-8c38-420d-89cf-94fc6620a87d",
+        "__guid": "e4cdb055-0d06-4329-a855-75d2edb0d741",
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 8,
@@ -52,12 +53,13 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "8060732d-bc03-463d-a8f4-0fb1bbdd746e",
+        "__guid": "f28168ee-67bb-48de-9393-887fcf5a1262",
         "MaxHealth": 80
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "bba5e780-b3bd-46f1-ba26-e69df444db19",
+        "__guid": "3450e3ee-fffa-447b-b8dd-1156bb86917e",
+        "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
@@ -69,21 +71,24 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "f8b8b981-cc78-470d-a43b-d8aa76107ea9",
+        "__guid": "ac457a93-9707-4792-9db7-a1135d1eaa88",
+        "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "1561e925-1b4e-424f-8f56-30665d392845",
-          "go": "841ddcf8-e4ef-451d-b298-a9cbbb1d9016",
+          "component_id": "412f6ff3-d17d-4516-abe7-efbbbbe5488f",
+          "go": "c40e7ed6-185e-427d-992b-65fd905eba8f",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "54ba1ffb-0c00-4ebe-b8e7-37d018baee07",
-          "go": "841ddcf8-e4ef-451d-b298-a9cbbb1d9016",
+          "component_id": "c0ad4b51-578b-4a49-a818-51c310531ccd",
+          "go": "c40e7ed6-185e-427d-992b-65fd905eba8f",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 500
+        "ProjectileSpeed": 1000,
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": false
       }
     ],
     "Children": []

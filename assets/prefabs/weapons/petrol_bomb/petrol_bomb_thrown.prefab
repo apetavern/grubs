@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
+    "__guid": "069f38e3-b742-4ed7-a8ce-75974cae38db",
     "Flags": 0,
     "Name": "petrol_bomb_thrown",
     "Tags": "projectile",
@@ -10,16 +10,17 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "49596533-8b12-460c-a5a3-e65e436be5ef",
+        "__guid": "2a30bba4-add3-4f4b-8016-218585dbc91f",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": true,
         "Model": "models/weapons/petrolbomb/petrolbomb.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.HighlightOutline",
-        "__guid": "149ca999-e74b-40c0-9bd5-e8b1992c42d3",
+        "__guid": "c2291d45-93f7-49bb-873c-6d8fb8a089f6",
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -28,7 +29,7 @@
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "810b1326-acbe-4645-a724-ee30ac270c1c",
+        "__guid": "48455a8b-7001-4666-a68d-2139733fec77",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -44,7 +45,7 @@
       },
       {
         "__type": "Sandbox.SphereCollider",
-        "__guid": "aad53fb2-db3f-401b-93f5-3724f3162678",
+        "__guid": "0b802d2c-3a4a-44a4-a8a1-bdaba67ce7ad",
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 8,
@@ -52,12 +53,13 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "14d3fab3-5a11-4dbe-9332-1ba7ec4cbcae",
+        "__guid": "03c8dd8f-e111-4759-a4af-a06b2d7740b5",
         "MaxHealth": 80
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "4d988071-27de-429f-8cb8-32823c8b48d5",
+        "__guid": "bc7e1ee4-0720-40b3-94dc-ecdb5cd473f7",
+        "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": true,
@@ -69,40 +71,43 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
-        "__guid": "8a5e3f38-5e6b-42f4-bc1c-2c81aa1c4be2",
+        "__guid": "212b3b31-410d-40f1-b0db-df38adeaa884",
+        "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
-          "component_id": "49596533-8b12-460c-a5a3-e65e436be5ef",
-          "go": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
+          "component_id": "2a30bba4-add3-4f4b-8016-218585dbc91f",
+          "go": "069f38e3-b742-4ed7-a8ce-75974cae38db",
           "component_type": "SkinnedModelRenderer"
         },
         "PhysicsBody": {
           "_type": "component",
-          "component_id": "810b1326-acbe-4645-a724-ee30ac270c1c",
-          "go": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
+          "component_id": "48455a8b-7001-4666-a68d-2139733fec77",
+          "go": "069f38e3-b742-4ed7-a8ce-75974cae38db",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 800,
-        "SetPositionOnStart": true
+        "ProjectileSpeed": 1500,
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
-        "__guid": "d52d601e-bc1f-4b8c-a244-e251a1d91bfe",
+        "__guid": "7e7e2f88-1ece-4043-afd5-c4b57f4098c7",
         "FireParticleCount": 20,
         "InitialUpVelocity": 25,
         "LeftRightVelocityRandom": 25,
         "Projectile": {
           "_type": "component",
-          "component_id": "4d988071-27de-429f-8cb8-32823c8b48d5",
-          "go": "8c425db6-00ce-4268-96ad-a6d3008ad61e",
+          "component_id": "bc7e1ee4-0720-40b3-94dc-ecdb5cd473f7",
+          "go": "069f38e3-b742-4ed7-a8ce-75974cae38db",
           "component_type": "ExplosiveProjectile"
-        }
+        },
+        "SphericalEmission": false
       }
     ],
     "Children": [
       {
-        "__guid": "08a82cbe-31d2-4068-9378-04fd3fdcb5fc",
+        "__guid": "5f6cf081-b27e-49f1-915f-00c4ed5a68f5",
         "Flags": 4,
         "Name": "hold_L",
         "Enabled": true,
@@ -110,7 +115,7 @@
         "NetworkInterpolation": true
       },
       {
-        "__guid": "2bd9421e-5a74-43b2-b8d1-726ecc9fdb21",
+        "__guid": "aa395a38-93e6-480c-9714-043ca1d7a5b3",
         "Flags": 4,
         "Name": "rag_start",
         "Position": "-0.04983139,0.000002974906,14.12584",
@@ -120,7 +125,7 @@
         "NetworkInterpolation": true,
         "Children": [
           {
-            "__guid": "d7c650a0-a2c6-4068-bf15-08a02fe51ab2",
+            "__guid": "298192fb-ec3b-4b7d-9b7b-edfe7474670c",
             "Flags": 4,
             "Name": "rag_pivot",
             "Position": "3.724562,-0.0000004768372,0.000004080904",
@@ -130,7 +135,7 @@
             "NetworkInterpolation": true,
             "Children": [
               {
-                "__guid": "ae7c0bcd-0e4d-4cd7-8e79-074ae5a8b86a",
+                "__guid": "0def0831-290f-49ff-a1f5-2d84a443dce1",
                 "Flags": 4,
                 "Name": "rag_end",
                 "Position": "8.603102,-0.00001144409,-0.000002635079",

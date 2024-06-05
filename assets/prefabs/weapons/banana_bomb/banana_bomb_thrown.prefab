@@ -15,7 +15,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/banana/banana_bunch.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.HighlightOutline",
@@ -63,6 +64,7 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "55fadc73-d947-4189-8344-61f486c8af3d",
+        "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
@@ -76,8 +78,9 @@
           "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 100,
-        "SetPositionOnStart": true
+        "ProjectileSpeed": 150,
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
@@ -107,7 +110,8 @@
           "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "Rigidbody"
         },
-        "DampingFactor": 0.8
+        "DampingFactor": 0.8,
+        "Reflect": true
       },
       {
         "__type": "Sandbox.ModelCollider",
