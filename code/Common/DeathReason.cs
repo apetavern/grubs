@@ -65,11 +65,11 @@ public readonly struct DeathReason
 						return $"{Grub.Name} had no reason left to live...";
 					// Died from an explosion.
 					case DamageType.Explosion:
-						return SecondInfo?.Attacker == Grub
+						return SecondInfo.Attacker == null || SecondInfo.Attacker == Grub
 							? $"{Grub.Name} blew themselves up like an idiot."
 							: $"{Grub.Name} was blown to bits by {SecondInfo.Attacker.Name}.";
 					case DamageType.Fire:
-						return SecondInfo?.Attacker == Grub
+						return SecondInfo.Attacker == null || SecondInfo.Attacker == Grub
 							? $"{Grub.Name} burned themselves to death."
 							: $"{Grub.Name} was cooked by {SecondInfo.Attacker.Name}.";
 					// Died from falling.
@@ -80,10 +80,10 @@ public readonly struct DeathReason
 						return $"{Grub.Name} escaped the simulation.";
 					// Died from a HitScan weapon.
 					case DamageType.HitScan:
-						return $"{Grub.Name} was shot in the head.";
+						return $"{Grub.Name} was shot in the head by {SecondInfo.Attacker.Name}.";
 					// Died from a Melee weapon.
 					case DamageType.Melee:
-						return $"{Grub.Name} took a blunt object to the face.";
+						return $"{Grub.Name} took a blunt object to the face from {SecondInfo.Attacker.Name}.";
 				}
 
 				break;
@@ -104,12 +104,12 @@ public readonly struct DeathReason
 						return $"{Grub.Name} perished in a firey explosion.";
 					// Killed by a fall from being displaced by an explosion.
 					case DamageType.Fall:
-						return FirstInfo?.Attacker == Grub
+						return FirstInfo.Attacker == null || FirstInfo.Attacker == Grub
 							? $"{Grub.Name} had their leg broken thanks to their own explosives."
-							: $"{Grub.Name} had their leg broken thanks to {FirstInfo.Attacker.Name}s explosive.";
+							: $"{Grub.Name} had their leg broken thanks to {FirstInfo.Attacker.Name}'s explosive.";
 					// Killed by hitting a kill zone from being displaced by an explosion.
 					case DamageType.KillZone:
-						return FirstInfo?.Attacker == Grub
+						return FirstInfo.Attacker == null || FirstInfo.Attacker == Grub
 							? $"{Grub.Name} sent themself to the shadow realm."
 							: $"{Grub.Name} got sent to the shadow realm by {FirstInfo.Attacker.Name}.";
 					// Killed from a HitScan weapon after an explosion (this shouldn't happen).
@@ -138,17 +138,13 @@ public readonly struct DeathReason
 						return $"{Grub.Name} burnt to a crisp.";
 					// Killed by a fall from being displaced by fire.
 					case DamageType.Fall:
-						return FirstInfo?.Attacker == Grub
-							? $"{Grub.Name} had their leg broken thanks to their own explosives."
-							: $"{Grub.Name} had their leg broken thanks to {FirstInfo.Attacker.Name}s explosive.";
+						return $"{Grub.Name} had their legs broken thanks to their burns.";
 					// Killed by hitting a kill zone from being displaced by fire.
 					case DamageType.KillZone:
-						return FirstInfo?.Attacker == Grub
-							? $"{Grub.Name} went from too hot to too cold."
-							: $"{Grub.Name} went through the temperature spectrum thanks to {FirstInfo.Attacker.Name}.";
-					// Killed from a HitScan weapon after fire (this shouldn't happen).
+						return $"{Grub.Name} went through the temperature spectrum.";
+					// Killed from a HitScan weapon after fire.
 					case DamageType.HitScan:
-						return $"{Grub.Name} was shot and then set on fire.";
+						return $"{Grub.Name} was set on fire and shot by {SecondInfo.Attacker.Name}.";
 					// Killed from a Melee weapon after fire (this shouldn't happen).
 					case DamageType.Melee:
 						return $"{Grub.Name} was knocked into the sun.";
@@ -164,10 +160,10 @@ public readonly struct DeathReason
 						return $"{Grub.Name} had an unlucky fall.";
 					case DamageType.Fire:
 						return $"{Grub.Name} fell into a pit of fire.";
-					// Fell into a fall (this shouldn't happen).
+					// Fell into a fall.
 					case DamageType.Fall:
 						return $"{Grub.Name} broke their... leg?";
-					// Fell into a kill zone (this shouldn't happen).
+					// Fell into a kill zone.
 					case DamageType.KillZone:
 						return $"{Grub.Name} escaped the simulation.";
 					// Fell into a HitScan weapon.
@@ -184,15 +180,15 @@ public readonly struct DeathReason
 				switch ( SecondReason )
 				{
 					case DamageType.Explosion:
-						return $"{Grub.Name} got shot so hard they blew up.";
+						return $"{Grub.Name} got shot by {FirstInfo.Attacker.Name} so hard they blew up.";
 					case DamageType.Fire:
-						return $"{Grub.Name} was shot and then set on fire.";
+						return $"{Grub.Name} was shot by {FirstInfo.Attacker.Name} and then set on fire.";
 					case DamageType.Fall:
-						return $"{Grub.Name} suffered an unfortunate fall.";
+						return $"{Grub.Name} suffered an unfortunate fall by the hands of {FirstInfo.Attacker.Name}.";
 					case DamageType.KillZone:
-						return $"{Grub.Name} was no-scoped into hell.";
+						return $"{Grub.Name} was no-scoped into hell by {FirstInfo.Attacker.Name}.";
 					case DamageType.HitScan:
-						return $"{Grub.Name} was made into swiss cheese.";
+						return $"{Grub.Name} was made into swiss cheese by {FirstInfo.Attacker.Name}.";
 					case DamageType.Melee:
 						return $"{Grub.Name} was pulverized.";
 				}
@@ -203,17 +199,17 @@ public readonly struct DeathReason
 				switch ( SecondReason )
 				{
 					case DamageType.Explosion:
-						return $"{Grub.Name} was punted into an explosive situation.";
+						return $"{Grub.Name} was punted into an explosive situation by {FirstInfo.Attacker.Name}.";
 					case DamageType.Fire:
-						return $"{Grub.Name} was knocked into the sun.";
+						return $"{Grub.Name} was knocked into the sun by {FirstInfo.Attacker.Name}.";
 					case DamageType.Fall:
-						return $"{Grub.Name} got Sparta kicked.";
+						return $"{Grub.Name} got Sparta kicked by {FirstInfo.Attacker.Name}.";
 					case DamageType.KillZone:
-						return $"{Grub.Name} was sent to the Nether.";
+						return $"{Grub.Name} was sent to the Nether by {FirstInfo.Attacker.Name}.";
 					case DamageType.HitScan:
 						return $"{Grub.Name} is definitely dead.";
 					case DamageType.Melee:
-						return $"{Grub.Name} got fisted.";
+						return $"{Grub.Name} got fisted by {FirstInfo.Attacker.Name}.";
 				}
 
 				break;

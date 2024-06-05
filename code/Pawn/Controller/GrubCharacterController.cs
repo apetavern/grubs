@@ -306,7 +306,7 @@ public class GrubCharacterController : Component
 
 		// Don't let active grub push this grub around
 		var activePlayer = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId ) as Player;
-		if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer.ActiveGrub.GameObject )
+		if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
 		{
 			_stuckTries = 0;
 			return false;

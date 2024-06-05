@@ -56,7 +56,15 @@ public partial class Health : Component
 		{
 			bool killzone = damageInfo.Tags.Has( "killzone" );
 			if ( killzone )
-				_deathReason = new DeathReason( grub, null, DamageType.None, damageInfo, DamageType.KillZone );
+			{
+				var damageInfos = new List<GrubsDamageInfo>();
+				var lastReason = DamageQueue.LastOrDefault();
+				if ( lastReason is not null )
+					damageInfos.Add( lastReason );
+				damageInfos.Add( damageInfo );
+
+				_deathReason = DeathReason.FindReason( grub, damageInfos );
+			}
 
 			_ = OnDeath( killzone );
 		}
