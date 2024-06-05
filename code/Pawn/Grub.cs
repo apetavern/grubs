@@ -61,7 +61,7 @@ public sealed class Grub : Component, IResolvable
 	[ConCmd( "gr_take_dmg" )]
 	public static void TakeDmgCmd( float hp )
 	{
-		var grub = Game.ActiveScene.GetAllComponents<Grub>().FirstOrDefault();
+		var grub = Game.ActiveScene.GetAllComponents<Grub>().FirstOrDefault( g => g.IsActive );
 		if ( grub is null )
 			return;
 
