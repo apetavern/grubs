@@ -84,7 +84,7 @@ public class ArcProjectile : Projectile
 		if ( Grub is null )
 			return Segments;
 
-		var force = charge * 0.25f;
+		var force = charge * 0.5f;
 		var arcTrace = new ArcTrace( Grub, Transform.Position );
 		return ShouldBounce
 			? arcTrace.RunTowardsWithBounces( Scene, direction, force, 0f, MaxBounces )
