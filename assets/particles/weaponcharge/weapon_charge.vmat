@@ -1,0 +1,21 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_weapon_charge.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+
+	g_flfadeamount "1.000"
+	g_vcolorend "[0.941177 0.121569 0.031373 1.000000]"
+	g_vcolorstart "[1.000000 0.800000 0.000000 1.000000]"
+	gradient "particles/weaponcharge/textures/gradient.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+}

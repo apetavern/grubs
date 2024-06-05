@@ -1,0 +1,148 @@
+{
+  "Model": "particles/weaponcharge/weapon_charge.vmdl",
+  "Description": "",
+  "BlendMode": "Masked",
+  "nodes": [
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "384,-208",
+      "Albedo": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "Emission": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "6",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "1",
+      "Position": "-864,-528"
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "2",
+      "Position": "-672,-544",
+      "Input": {
+        "Identifier": "1",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "fade amount",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "3",
+      "Position": "-512,112"
+    },
+    {
+      "_class": "Subtract",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "4",
+      "Position": "-16,-48",
+      "A": {
+        "Identifier": "7",
+        "Output": "R"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Out"
+      }
+    },
+    {
+      "_class": "OneMinus",
+      "Identifier": "5",
+      "Position": "-272,112",
+      "In": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Power",
+      "DefaultA": 1,
+      "DefaultB": 2,
+      "Identifier": "6",
+      "Position": "176,-48",
+      "A": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "5",
+        "Output": "Out"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "particles/weaponcharge/textures/gradient.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "gradient",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "ColorSpace": "Linear",
+        "CreateInput": "CreateInputTexture2D"
+      },
+      "Identifier": "7",
+      "Position": "-512,-96"
+    },
+    {
+      "_class": "Float4",
+      "Value": "1,0.8,0,1",
+      "Name": "color start",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
+      "Identifier": "8",
+      "Position": "-288,-304"
+    },
+    {
+      "_class": "Float4",
+      "Value": "0.94277,0.11983,0.0284,1",
+      "Name": "color end",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
+      "Identifier": "9",
+      "Position": "-288,-464"
+    },
+    {
+      "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "10",
+      "Position": "64,-288",
+      "A": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "7",
+        "Output": "R"
+      }
+    }
+  ]
+}
