@@ -6,15 +6,13 @@ public sealed class GrubsDamageInfo
 {
 	public Vector3 WorldPosition { get; set; }
 	public Grub Attacker { get; set; }
-	public GameObject Weapon { get; set; }
 	public float Damage { get; set; }
 	public TagSet Tags { get; set; }
 
-	public GrubsDamageInfo( float damage, Grub attacker = null, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
+	public GrubsDamageInfo( float damage, Grub attacker = null, Vector3 worldPosition = new Vector3() )
 	{
 		Damage = damage;
 		Attacker = attacker;
-		Weapon = weapon;
 		WorldPosition = worldPosition;
 		Tags = new TagSet();
 	}
@@ -36,24 +34,24 @@ public sealed class GrubsDamageInfo
 		return info;
 	}
 
-	public static GrubsDamageInfo FromHitscan( float damage, Grub attacker, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromHitscan( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
 	{
-		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "hitscan" );
+		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "hitscan" );
 	}
 
-	public static GrubsDamageInfo FromMelee( float damage, Grub attacker, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromMelee( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
 	{
-		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "melee" );
+		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "melee" );
 	}
 
-	public static GrubsDamageInfo FromExplosion( float damage, Grub attacker, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromExplosion( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
 	{
-		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "explosion" );
+		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "explosion" );
 	}
 
-	public static GrubsDamageInfo FromFire( float damage, Grub attacker, GameObject weapon = null, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromFire( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
 	{
-		return new GrubsDamageInfo( damage, attacker, weapon, worldPosition ).WithTag( "fire" );
+		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "fire" );
 	}
 
 	public static GrubsDamageInfo FromFall( float damage, Grub attacker )

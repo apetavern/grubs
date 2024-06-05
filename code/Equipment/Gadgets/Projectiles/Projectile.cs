@@ -11,12 +11,25 @@ public abstract class Projectile : Component, IResolvable
 	[Property] public float ProjectileSpeed { get; set; } = 4f;
 	[Property] public required SkinnedModelRenderer Model { get; set; }
 
-	public Weapon Source { get; set; }
-	public Grub Grub => Source?.Equipment.Grub;
+	public Weapon Source
+	{
+		get
+		{
+			return _source;
+		}
+		set
+		{
+			_source = value;
+			Grub = Source?.Equipment?.Grub;
+		}
+	}
+	public Grub Grub { get; private set; }
 	public GrubPlayerController PlayerController => Grub?.PlayerController;
 	public virtual bool Resolved => false;
 
 	public int Charge { get; set; }
+
+	private Weapon _source;
 
 	public void ViewReady()
 	{

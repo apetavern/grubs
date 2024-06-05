@@ -1,5 +1,6 @@
 ﻿using Grubs.Common;
 using Grubs.Helpers;
+using Grubs.Pawn;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
 
@@ -75,7 +76,8 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 		if ( IsProxy )
 			return;
 
-		ExplodeEffects();
+		var projectile = Components.Get<Projectile>();
+		ExplodeEffects( projectile?.Grub?.Id ?? Guid.Empty );
 
 		ProjectileExploded?.Invoke();
 
@@ -84,10 +86,13 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	}
 
 	[Broadcast]
-	public void ExplodeEffects()
+	public void ExplodeEffects( Guid attacker )
 	{
-		var projectile = Components.Get<Projectile>();
-		ExplosionHelper.Instance.Explode( this, projectile?.Grub, Transform.Position, ExplosionRadius, ExplosionDamage );
+		Grub grub = null;
+		if ( attacker != Guid.Empty )
+			grub = Scene.Directory.FindComponentByGuid( attacker ) as Grub;
+
+		ExplosionHelper.Instance.Explode( this, grub, Transform.Position, ExplosionRadius, ExplosionDamage );
 		Sound.Play( ExplosionSound );
 
 		if ( Particles is null )

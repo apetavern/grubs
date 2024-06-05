@@ -19,7 +19,7 @@ public partial class ExplosionHelper : Component
 		var gos = Scene.FindInPhysics( new Sphere( position, radius ) );
 		foreach ( var go in gos )
 		{
-			if ( source.GameObject == go )
+			if ( source?.GameObject == go )
 				continue;
 
 			if ( !go.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
@@ -34,7 +34,7 @@ public partial class ExplosionHelper : Component
 			if ( go.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelf ) )
 				HandlePhysicsExplosion( body, position, force );
 
-			health.TakeDamage( GrubsDamageInfo.FromExplosion( damage * distFactor, attacker, source.GameObject, position ) );
+			health.TakeDamage( GrubsDamageInfo.FromExplosion( damage * distFactor, attacker, position ) );
 		}
 
 		LastPosition = position;
