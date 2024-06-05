@@ -29,6 +29,7 @@ public partial class Weapon : Component
 	private int _weaponCharge;
 	private SceneParticles _chargeParticles;
 	private ParticleSystem ChargeParticleSystem { get; set; }
+	private SoundHandle ChargeSound { get; set; }
 
 	protected override void OnStart()
 	{
@@ -36,6 +37,7 @@ public partial class Weapon : Component
 
 		TimeSinceLastUsed = Cooldown;
 		ChargeParticleSystem = ParticleSystem.Load( "particles/weaponcharge/weaponcharge.vpcf" );
+		Sound.Preload( "charge" );
 	}
 
 	protected override void OnUpdate()
@@ -68,6 +70,8 @@ public partial class Weapon : Component
 			{
 				IsFiring = true;
 				IsCharging = false;
+				ChargeSound?.Stop();
+
 				ParticleHelper.Instance.Dispose( _chargeParticles );
 				_chargeParticles = ParticleHelper.Instance.PlayInstantaneous( ChargeParticleSystem );
 
@@ -174,6 +178,9 @@ public partial class Weapon : Component
 	{
 		if ( !IsCharging )
 			_startedCharging = 0f;
+
+		if ( ChargeSound == null || !ChargeSound.IsPlaying )
+			ChargeSound = Sound.Play( "charge" );
 
 		IsCharging = true;
 
