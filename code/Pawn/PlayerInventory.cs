@@ -105,7 +105,8 @@ public sealed class PlayerInventory : Component
 		ActiveSlot = index;
 		Equip( ActiveSlot );
 
-		InventoryOpen = false;
+		if ( !Input.UsingController )
+			InventoryOpen = false;
 	}
 
 	[Broadcast]

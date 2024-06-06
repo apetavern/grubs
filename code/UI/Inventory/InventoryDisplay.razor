@@ -40,7 +40,7 @@
 {
     public PlayerInventory Inventory { get; set; }
 
-    private const int _columns = 7;
+    private const int _columns = 5;
     private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
     private int _totalItems => Inventory.Equipment.Count();
 
