@@ -1,0 +1,11 @@
+{
+  "Sequences": [
+    {
+      "Source": "particles/weaponcharge/textures/flare_01.png",
+      "IsLooping": true,
+      "Frames": 64
+    }
+  ],
+  "OutputMipAlgorithm": "Box",
+  "OutputTypeString": "2D"
+}
