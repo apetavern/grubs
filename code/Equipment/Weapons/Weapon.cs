@@ -195,7 +195,7 @@ public partial class Weapon : Component
 		var muzzle = GetMuzzlePosition();
 
 		ChargeGuage.Transform.Position = muzzle.Position;
-		ChargeGuage.Transform.Rotation = muzzle.Rotation * Rotation.FromPitch( 90 );
+		ChargeGuage.Transform.Rotation = Rotation.LookAt( GetMuzzleForward() ) * Rotation.FromPitch( 90 );
 		ChargeGuage.SceneModel.Attributes.Set( "charge", _weaponCharge / 100f );
 
 		_weaponCharge = (int)Math.Clamp( _startedCharging / 2f * 100f, 0f, 100f );
