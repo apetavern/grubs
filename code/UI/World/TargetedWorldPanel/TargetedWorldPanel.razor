@@ -1,0 +1,37 @@
+@namespace Grubs.UI
+
+@inherits PanelComponent
+
+<root />
+
+@code {
+	public GameObject Target { get; set; }
+
+	[Property] protected Vector3 Offset { get; set; }
+	[Property] protected float RiseSpeed { get; set; } = 0f;
+	[Property] protected float DestroyDelay { get; set; } = 0f;
+
+	protected override void OnStart()
+	{
+		if (DestroyDelay > 0f)
+			_ = DelayDestroy();
+	}
+
+	protected override void OnUpdate()
+	{
+		if (RiseSpeed != 0f)
+			Offset += Vector3.Up * RiseSpeed * Time.Delta;
+
+		UpdatePosition();
+	}
+
+	protected void UpdatePosition() => Transform.Position = Target.Transform.Position + Offset;
+
+	protected async Task DelayDestroy()
+	{
+		int ms = (int)(DestroyDelay * 1000);
+		await GameTask.Delay(ms);
+
+		GameObject.Destroy();
+	}
+}
