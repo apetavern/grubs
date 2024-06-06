@@ -31,12 +31,14 @@ public partial class Weapon : Component
 	private ParticleSystem ChargeParticleSystem { get; set; }
 	private SoundHandle ChargeSound { get; set; }
 
+	private SkinnedModelRenderer ChargeGuage { get; set; }
+
 	protected override void OnStart()
 	{
 		base.OnStart();
 
 		TimeSinceLastUsed = Cooldown;
-		ChargeParticleSystem = ParticleSystem.Load( "particles/weaponcharge/weaponcharge.vpcf" );
+
 		Sound.Preload( "charge" );
 	}
 
@@ -72,8 +74,7 @@ public partial class Weapon : Component
 				IsCharging = false;
 				ChargeSound?.Stop();
 
-				ParticleHelper.Instance.Dispose( _chargeParticles );
-				_chargeParticles = ParticleHelper.Instance.PlayInstantaneous( ChargeParticleSystem );
+				ChargeGuage.GameObject.Enabled = false;
 
 				if ( OnFire is not null )
 					OnFire.Invoke( _weaponCharge );
@@ -182,14 +183,20 @@ public partial class Weapon : Component
 		if ( ChargeSound == null || !ChargeSound.IsPlaying )
 			ChargeSound = Sound.Play( "charge" );
 
+		if ( !ChargeGuage.IsValid() )
+		{
+			ChargeGuage = new GameObject().Components.Create<SkinnedModelRenderer>();
+			ChargeGuage.Model = Model.Load( "particles/weaponcharge/weapon_charge.vmdl" );
+		}
+		ChargeGuage.GameObject.Enabled = true;
+
 		IsCharging = true;
 
 		var muzzle = GetMuzzlePosition();
-		_chargeParticles ??= ParticleHelper.Instance.PlayInstantaneous( ChargeParticleSystem, muzzle );
-		_chargeParticles?.SetControlPoint( 0, muzzle.Position );
-		_chargeParticles?.SetControlPoint( 1, muzzle.Position + GetMuzzleForward() * 80f );
-		_chargeParticles?.SetNamedValue( "Alpha", 100f );
-		_chargeParticles?.SetNamedValue( "Speed", 40f );
+
+		ChargeGuage.Transform.Position = muzzle.Position;
+		ChargeGuage.Transform.Rotation = muzzle.Rotation * Rotation.FromPitch( 90 );
+		ChargeGuage.SceneModel.Attributes.Set( "charge", _weaponCharge / 100f );
 
 		_weaponCharge = (int)Math.Clamp( _startedCharging / 2f * 100f, 0f, 100f );
 

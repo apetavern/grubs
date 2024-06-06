@@ -18,4 +18,9 @@ Layer0
 	//---- Translucent ----
 	g_flAlphaTestReference "0.500"
 	g_flAntiAliasedEdgeStrength "1.000"
+
+	DynamicParams
+	{
+		g_flfadeamount "charge"
+	}
 }
