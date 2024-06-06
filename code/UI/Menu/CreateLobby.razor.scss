@@ -10,16 +10,16 @@ CreateLobby {
 
     .back-button {
         position: absolute;
-        margin-top: 80px;
-        margin-left: 110px;
+        margin-top: 40px;
+        margin-left: 40px;
         text-stroke: 8px black;
-        font-size: 64px;
+        font-size: 48px;
         gap: 12px;
         align-items: center;
         z-index: 100;
 
         > i {
-            font-size: 74px;
+            font-size: 64px;
         }
 
         &:hover:not(.hide) {
@@ -50,6 +50,12 @@ CreateLobby {
         border-radius: 4px;
         box-shadow: 4px 4px 4px black;
         align-items: center;
+        transform: skewX(-4px);
+        text-shadow: 2px 2px black;
+
+        > label {
+            transform: skewX(4px);
+        }
 
         &:hover {
             background-color: darken(rgb(66, 118, 62), 50%);
