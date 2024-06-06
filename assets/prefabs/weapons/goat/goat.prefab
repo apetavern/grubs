@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "722759e6-58c0-418e-9cb3-5b259425b264",
+    "__guid": "e3b566ec-41a7-40bd-b879-3235b32aaf0f",
     "Flags": 0,
     "Name": "goat",
     "Enabled": true,
@@ -9,47 +9,49 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "ef479448-0ebe-41f5-8805-cac0d6cc40ed",
+        "__guid": "13eb056a-0146-4f7a-b80a-8ab75c0a77c2",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/goat/goat_holdable.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "fe7b31ab-b730-4ef7-ad06-76ba9ebe79ff",
+        "__guid": "4d024b29-bc11-43b7-9d61-970d3a36b724",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/goat.geq",
         "HoldPose": "Droppable",
         "Icon": "models/weapons/goat/goat.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "ef479448-0ebe-41f5-8805-cac0d6cc40ed",
-          "go": "722759e6-58c0-418e-9cb3-5b259425b264",
+          "component_id": "13eb056a-0146-4f7a-b80a-8ab75c0a77c2",
+          "go": "e3b566ec-41a7-40bd-b879-3235b32aaf0f",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Goat",
+        "ShouldShowAimReticle": false,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.RemoteDetonateWeapon",
-        "__guid": "9bd4513e-5cf5-4d09-9046-b7f74f5c0268",
+        "__guid": "d2dffc35-f536-4f31-b145-fe66ccbecc83",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "fe7b31ab-b730-4ef7-ad06-76ba9ebe79ff",
-          "go": "722759e6-58c0-418e-9cb3-5b259425b264",
+          "component_id": "4d024b29-bc11-43b7-9d61-970d3a36b724",
+          "go": "e3b566ec-41a7-40bd-b879-3235b32aaf0f",
           "component_type": "Equipment"
         },
         "FiringType": "Complex",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "cbfd3a19-4c97-43a9-83b4-7d3d05bb43b6",
+          "__guid": "fbf78fe4-14a4-46d6-a009-9cd6029177dc",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -161,11 +163,18 @@
             }
           ],
           "Defaults": {
-            "$3._value": {
+            "$6._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/goat/goat_thrown.prefab"
             }
           }
+        }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "cbab83a0-5a76-4f7f-8041-a1507da2eb71",
+        "Inputs": {
+          "fire": "Release"
         }
       }
     ],

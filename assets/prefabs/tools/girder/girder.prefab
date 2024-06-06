@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "b1df33f8-81bf-487f-bb8a-ec80b263886b",
+    "__guid": "d2b2ee23-5045-4a08-8c53-ea040a053847",
     "Flags": 0,
     "Name": "girder",
     "Tags": "ignore_killzone",
@@ -10,7 +10,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "840f3d61-c1ef-4a4d-baaa-41d94bc5227c",
+        "__guid": "dbee5127-589d-41c6-a0eb-6fd4539779ae",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/citizen_clothes/hat/hard_hat/models/hard_hat.vmdl",
@@ -20,15 +20,15 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "a0315727-bf99-4097-ae2e-66a740b16958",
+        "__guid": "60cec54d-865c-4239-b083-a66296595cc5",
         "CameraCanZoom": false,
         "Data": "resources/equipment/tools/girder.geq",
         "HoldPose": "Holdable",
         "Icon": "models/tools/girders/girder_short.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "840f3d61-c1ef-4a4d-baaa-41d94bc5227c",
-          "go": "b1df33f8-81bf-487f-bb8a-ec80b263886b",
+          "component_id": "dbee5127-589d-41c6-a0eb-6fd4539779ae",
+          "go": "d2b2ee23-5045-4a08-8c53-ea040a053847",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Girder",
@@ -37,28 +37,28 @@
       },
       {
         "__type": "Grubs.Equipment.Tools.GirderTool",
-        "__guid": "b786c39b-bcc0-4eb1-95ee-af2b9d5cf47e",
+        "__guid": "a4dd2f3c-9d3c-41fb-aa28-3a84932a0c01",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorCollider": {
           "_type": "component",
-          "component_id": "bf7aba1a-04c3-4376-801b-5a92428028d4",
-          "go": "6173bd14-d258-43d8-a805-c66514c93d48",
+          "component_id": "e2afbf15-d049-402b-a25c-81fde1194fa4",
+          "go": "6c58be25-c7fa-4d58-ab65-3d6cfb3be384",
           "component_type": "ModelCollider"
         },
         "CursorRange": 256,
         "CursorVisual": {
           "_type": "component",
-          "component_id": "387e1586-1e26-4f01-abec-d60a7a9d62c0",
-          "go": "6173bd14-d258-43d8-a805-c66514c93d48",
+          "component_id": "84a9348b-b8c8-47f8-a0d0-1ccf41d2630e",
+          "go": "6c58be25-c7fa-4d58-ab65-3d6cfb3be384",
           "component_type": "SkinnedModelRenderer"
         },
         "Equipment": {
           "_type": "component",
-          "component_id": "a0315727-bf99-4097-ae2e-66a740b16958",
-          "go": "b1df33f8-81bf-487f-bb8a-ec80b263886b",
+          "component_id": "60cec54d-865c-4239-b083-a66296595cc5",
+          "go": "d2b2ee23-5045-4a08-8c53-ea040a053847",
           "component_type": "Equipment"
         },
         "FiringType": "Cursor",
@@ -68,11 +68,18 @@
         },
         "MaxUses": 1,
         "PlaceSound": "sounds/impacts/bullets/impact-bullet-metal.sound"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "1a3f6e6c-1287-4389-a875-4cbe26326244",
+        "Inputs": {
+          "fire": "Build"
+        }
       }
     ],
     "Children": [
       {
-        "__guid": "6173bd14-d258-43d8-a805-c66514c93d48",
+        "__guid": "6c58be25-c7fa-4d58-ab65-3d6cfb3be384",
         "Flags": 0,
         "Name": "Girder - Cursor",
         "Tags": "trigger,cleanup",
@@ -82,7 +89,7 @@
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "387e1586-1e26-4f01-abec-d60a7a9d62c0",
+            "__guid": "84a9348b-b8c8-47f8-a0d0-1ccf41d2630e",
             "BodyGroups": 25,
             "CreateBoneObjects": false,
             "Model": "models/tools/girders/girder_short.vmdl",
@@ -92,7 +99,7 @@
           },
           {
             "__type": "Sandbox.ModelCollider",
-            "__guid": "bf7aba1a-04c3-4376-801b-5a92428028d4",
+            "__guid": "e2afbf15-d049-402b-a25c-81fde1194fa4",
             "IsTrigger": true,
             "Model": "models/tools/girders/girder_short.vmdl",
             "Static": false

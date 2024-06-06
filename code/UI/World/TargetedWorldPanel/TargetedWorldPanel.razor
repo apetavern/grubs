@@ -25,7 +25,7 @@
 		UpdatePosition();
 	}
 
-	protected void UpdatePosition() => Transform.Position = Target?.Transform.Position ?? Vector3.Zero + Offset;
+	protected void UpdatePosition() => Transform.Position = (Target?.Transform.Position ?? Vector3.Zero) + Offset;
 
 	protected async Task DelayDestroy()
 	{

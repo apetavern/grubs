@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "fbdbe5a1-bda6-4f7c-9fad-b87315310531",
+    "__guid": "8b23b7ea-f7ff-44d7-8149-1852a2d9d5f3",
     "Flags": 0,
     "Name": "landmine",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "6847d579-9b4c-40ce-9d0b-540c7a145354",
+        "__guid": "4690f1df-b690-476c-87b7-4054f491c8af",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/landmine/landmine.vmdl",
@@ -19,15 +19,15 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "27e08781-b8b4-471c-a30f-23dae5de87ba",
+        "__guid": "a32451c0-d096-4d67-99da-ccd4798b9ef1",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/landmine.geq",
         "HoldPose": "Droppable",
         "Icon": "models/weapons/landmine/landmine.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "6847d579-9b4c-40ce-9d0b-540c7a145354",
-          "go": "fbdbe5a1-bda6-4f7c-9fad-b87315310531",
+          "component_id": "4690f1df-b690-476c-87b7-4054f491c8af",
+          "go": "8b23b7ea-f7ff-44d7-8149-1852a2d9d5f3",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Landmine",
@@ -36,22 +36,22 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "0d82834c-13a4-4551-9f59-d4d1f1cb025d",
+        "__guid": "5c3d257f-c979-4cae-b6ff-1e8c93b077e3",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "27e08781-b8b4-471c-a30f-23dae5de87ba",
-          "go": "fbdbe5a1-bda6-4f7c-9fad-b87315310531",
+          "component_id": "a32451c0-d096-4d67-99da-ccd4798b9ef1",
+          "go": "8b23b7ea-f7ff-44d7-8149-1852a2d9d5f3",
           "component_type": "Equipment"
         },
         "FiringType": "Instant",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "c3a8cb22-aec4-4d47-9fc4-7518f2a81106",
+          "__guid": "d3a649a5-11d8-42b5-beee-c74a33a5a521",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -141,6 +141,13 @@
               "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
             }
           }
+        }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "26c175fe-a274-4f50-97ba-72fa673de1ff",
+        "Inputs": {
+          "fire": "Drop"
         }
       }
     ],

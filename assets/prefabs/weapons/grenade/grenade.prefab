@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "40330520-ad6f-40e6-92b0-b6e8136cae61",
+    "__guid": "021f9a0a-df1e-4866-aed7-112743891b79",
     "Flags": 0,
     "Name": "grenade",
     "Enabled": true,
@@ -9,24 +9,25 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "493158fc-de57-456a-9405-c069f66a609f",
+        "__guid": "6313422d-80a5-497a-9150-407c62509474",
         "BodyGroups": 1,
         "CreateBoneObjects": false,
         "Model": "models/weapons/grenade/grenade.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "bb24feeb-3ae1-4b1b-888b-2188925637be",
+        "__guid": "8310c068-928f-491b-8cc9-04d02fe711eb",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/grenade.geq",
         "HoldPose": "Throwable",
         "Icon": "models/weapons/grenade/grenade.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "493158fc-de57-456a-9405-c069f66a609f",
-          "go": "40330520-ad6f-40e6-92b0-b6e8136cae61",
+          "component_id": "6313422d-80a5-497a-9150-407c62509474",
+          "go": "021f9a0a-df1e-4866-aed7-112743891b79",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Grenade",
@@ -35,22 +36,22 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "749693b5-a277-4566-bb19-73dc6fe95643",
+        "__guid": "35b632be-ad58-46a0-8dcd-723b5ed65f50",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "bb24feeb-3ae1-4b1b-888b-2188925637be",
-          "go": "40330520-ad6f-40e6-92b0-b6e8136cae61",
+          "component_id": "8310c068-928f-491b-8cc9-04d02fe711eb",
+          "go": "021f9a0a-df1e-4866-aed7-112743891b79",
           "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "031fa2fc-3c45-451b-93de-d1e243f46049",
+          "__guid": "d62ed425-3936-4767-9023-9236621a8c7a",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -121,6 +122,13 @@
               "prefab": "prefabs/weapons/grenade/grenade_thrown.prefab"
             }
           }
+        }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "46dc8698-47bd-4c1a-a168-97fab1a5cc31",
+        "Inputs": {
+          "fire": "Throw (Hold)"
         }
       }
     ],
