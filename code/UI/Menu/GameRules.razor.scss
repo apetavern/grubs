@@ -5,28 +5,34 @@ GameRules {
     height: 100%;
     align-items: center;
     justify-content: center;
-    
+
     .control-wrap {
-        background-color: $menu-highlight;
+        background-color: darken(rgb(233, 239, 232), 35%);
         padding: 12px;
-        border-radius: 16px;
+        border-radius: 4px;
         justify-content: center;
+        flex-shrink: 0;
     }
-    
+
     .rules-title {
         font-size: 48px;
         margin-bottom: 8px;
+        text-stroke: 6px black;
     }
-    
+
+    .scrollable {
+        overflow: scroll;
+        flex-direction: column;
+        gap: 12px;
+    }
+
     .rules-container {
         position: absolute;
         flex-direction: column;
         width: 1400px;
         height: 600px;
-        padding: 24px 32px;
-        border-radius: 16px;
-        background-color: $menu-bg;
-        box-shadow: -8px 8px $menu-highlight;
-        gap: 12px;
+        padding: 24px 32px 0 32px;
+        border-radius: 8px;
+        background-color: rgb(233, 239, 232);
     }
 }
