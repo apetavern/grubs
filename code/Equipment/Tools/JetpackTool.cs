@@ -28,6 +28,8 @@ public sealed class JetpackTool : Tool
 
 	public override void OnHolster()
 	{
+		base.OnHolster();
+
 		if ( Equipment.Grub != null )
 			Equipment.Grub.Animator.IsOnJetpack = false;
 

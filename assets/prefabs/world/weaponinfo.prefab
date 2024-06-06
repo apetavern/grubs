@@ -1,0 +1,36 @@
+{
+  "RootObject": {
+    "__guid": "64c08781-9f48-475f-8d57-a5095d572eba",
+    "Flags": 0,
+    "Name": "weaponinfo",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.WorldPanel",
+        "__guid": "1cf7612a-af94-40e6-9e8e-410a5d412a85",
+        "HorizontalAlign": "Center",
+        "InteractionRange": 1000,
+        "LookAtCamera": true,
+        "PanelSize": "1024,350",
+        "RenderScale": 1,
+        "VerticalAlign": "Center"
+      },
+      {
+        "__type": "Grubs.UI.WeaponInfo",
+        "__guid": "691517ae-8b84-4431-a90e-66ee00e1082c",
+        "DestroyDelay": 0,
+        "Offset": "8,-36,-16",
+        "RiseSpeed": 0
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
