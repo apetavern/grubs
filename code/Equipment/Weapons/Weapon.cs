@@ -1,5 +1,4 @@
 ﻿using Grubs.Gamemodes;
-using Grubs.Helpers;
 using Grubs.UI;
 
 namespace Grubs.Equipment.Weapons;
@@ -27,10 +26,9 @@ public partial class Weapon : Component
 	public TimeSince TimeSinceLastUsed { get; set; }
 	public int TimesUsed { get; set; }
 
-	private WeaponInfo _weaponInfoPanel;
+	protected WeaponInfo WeaponInfoPanel;
+
 	private int _weaponCharge;
-	private SceneParticles _chargeParticles;
-	private ParticleSystem ChargeParticleSystem { get; set; }
 	private SoundHandle ChargeSound { get; set; }
 
 	private SkinnedModelRenderer ChargeGuage { get; set; }
@@ -150,17 +148,20 @@ public partial class Weapon : Component
 
 	public virtual void OnDeploy()
 	{
+		if ( IsProxy )
+			return;
+
 		var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/weaponinfo.prefab" );
 		var panel = SceneUtility.GetPrefabScene( prefab ).Clone();
 
-		_weaponInfoPanel = panel.Components.Get<WeaponInfo>();
-		_weaponInfoPanel.Target = Equipment.Grub.GameObject;
-		_weaponInfoPanel.Weapon = this;
+		WeaponInfoPanel = panel.Components.Get<WeaponInfo>();
+		WeaponInfoPanel.Target = Equipment.Grub.GameObject;
+		WeaponInfoPanel.Weapon = this;
 	}
 
 	public virtual void OnHolster()
 	{
-		_weaponInfoPanel?.GameObject.Destroy();
+		WeaponInfoPanel?.GameObject.Destroy();
 	}
 
 	protected virtual void FireFinished()

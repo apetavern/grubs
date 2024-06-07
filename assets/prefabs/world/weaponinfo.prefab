@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "64c08781-9f48-475f-8d57-a5095d572eba",
+    "__guid": "793b7826-1d28-42d6-9200-fd72d35f3626",
     "Flags": 0,
     "Name": "weaponinfo",
     "Enabled": true,
@@ -9,19 +9,19 @@
     "Components": [
       {
         "__type": "Sandbox.WorldPanel",
-        "__guid": "1cf7612a-af94-40e6-9e8e-410a5d412a85",
+        "__guid": "cf19cee7-2ce2-4c13-b812-dbd4c6706255",
         "HorizontalAlign": "Center",
         "InteractionRange": 1000,
         "LookAtCamera": true,
-        "PanelSize": "1024,350",
+        "PanelSize": "1024,750",
         "RenderScale": 1,
         "VerticalAlign": "Center"
       },
       {
         "__type": "Grubs.UI.WeaponInfo",
-        "__guid": "691517ae-8b84-4431-a90e-66ee00e1082c",
+        "__guid": "a56e823b-d6a3-4784-aa0d-8d0a94f6db34",
         "DestroyDelay": 0,
-        "Offset": "8,-36,-16",
+        "Offset": "8,-50,-16",
         "RiseSpeed": 0
       }
     ],

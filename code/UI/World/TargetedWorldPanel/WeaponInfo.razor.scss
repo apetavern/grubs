@@ -17,19 +17,20 @@ WeaponInfo {
     .hint {
         margin-bottom: 5px;
         align-items: center;
+        justify-content: center;
 
         inputglyph {
             margin: 5px 0px 5px 2px;
-            width: 125px;
-            height: 125px;
+            width: 175px;
+            height: 175px;
         }
+    }
 
-        .text {
-            font-size: 80px;
-            font-family: $font-family;
-            text-shadow: 2px 2px 2px black;
-            text-stroke: 3px black;
-            color: white;
-        }
+    .text {
+        font-size: 96px;
+        font-family: $font-family;
+        text-shadow: 2px 2px 2px black;
+        text-stroke: 3px black;
+        color: white;
     }
 }

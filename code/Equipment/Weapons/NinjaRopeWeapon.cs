@@ -7,11 +7,19 @@ public class NinjaRopeWeapon : Weapon
 	{
 		if ( Equipment.Grub is not { } grub )
 			return;
-		
+
 		if ( Input.Pressed( "fire" ) && !IsFiring )
 		{
 			IsFiring = true;
 			OnFire.Invoke( 100 );
+
+			if ( WeaponInfoPanel is not null )
+			{
+				WeaponInfoPanel.Inputs = new Dictionary<string, string>()
+				{
+					{ "fire", "Release Hook" }
+				};
+			}
 		}
 		else if ( Input.Pressed( "fire" ) && IsFiring )
 		{
@@ -20,7 +28,15 @@ public class NinjaRopeWeapon : Weapon
 				Log.Warning( "Trying to unmount, but ActiveMountable is null?" );
 				return;
 			}
-			
+
+			if ( WeaponInfoPanel is not null )
+			{
+				WeaponInfoPanel.Inputs = new Dictionary<string, string>()
+				{
+					{ "fire", "Fire Hook" }
+				};
+			}
+
 			grub.ActiveMountable.Dismount();
 			FireFinished();
 		}
