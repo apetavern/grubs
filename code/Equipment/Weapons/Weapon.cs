@@ -162,8 +162,7 @@ public partial class Weapon : Component
 			if ( !CanSwapAfterUse )
 			{
 				grub.Player.HasFiredThisTurn = true;
-				using ( Rpc.FilterInclude( c => c.IsHost ) )
-					Gamemode.FFA.UseTurn( true );
+				Gamemode.FFA.UseTurn( true );
 			}
 			else
 			{
