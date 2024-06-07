@@ -97,7 +97,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 
 			if ( bomb.Components.TryGet( out Projectile projectile ) )
 			{
-				projectile.Source = Source;
+				projectile.SourceId = SourceId;
 			}
 			await Task.DelaySeconds( 0.25f );
 		}

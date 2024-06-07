@@ -11,7 +11,7 @@ public partial class Weapon
 		go.NetworkSpawn();
 		if ( go.Components.TryGet( out Projectile pc ) )
 		{
-			pc.Source = source;
+			pc.SourceId = source.Id;
 			pc.Charge = charge;
 		}
 

@@ -33,6 +33,9 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 
 	protected override void OnUpdate()
 	{
+		if ( PlayerController is null )
+			return;
+
 		base.OnUpdate();
 		Model.Set( "active", true );
 		TargetLookAt = (PlayerController.EyeRotation.Forward.Normal.WithZ( 0 ) * PlayerController.Facing) + Vector3.Up * PhysicsBody.Velocity.z / 750f;

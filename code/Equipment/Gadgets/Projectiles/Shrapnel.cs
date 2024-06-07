@@ -34,7 +34,7 @@ public sealed class Shrapnel : Component
 			go.NetworkSpawn();
 			if ( go.Components.TryGet( out Projectile pc ) && Components.TryGet( out Projectile pc2 ) )
 			{
-				pc.Source = pc2.Source;
+				pc.SourceId = pc2.SourceId;
 			}
 
 			var rb = go.Components.Get<Rigidbody>();
