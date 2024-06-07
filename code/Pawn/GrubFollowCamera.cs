@@ -27,6 +27,10 @@ public class GrubFollowCamera : Component
 
 	protected override void OnUpdate()
 	{
+		var listenerTransform = Transform.World;
+		listenerTransform.Position = Transform.Position.WithY( 480f );
+		Sound.Listener = listenerTransform;
+
 		if ( _timeUntilCameraUnlock )
 			FindTarget();
 
@@ -57,6 +61,7 @@ public class GrubFollowCamera : Component
 		{
 			Distance -= Input.MouseWheel.y * 32f;
 		}
+
 		Distance = Distance.Clamp( 128f, 2048f );
 
 		AdjustHighlightOutline();
@@ -107,8 +112,9 @@ public class GrubFollowCamera : Component
 	{
 		_timeSinceMousePan = 0;
 
-		_panDelta = Input.UsingController ?
-			new Vector3( Input.GetAnalog( InputAnalog.RightStickX ), 0, -Input.GetAnalog( InputAnalog.RightStickY ) ) * 4
+		_panDelta = Input.UsingController
+			? new Vector3( Input.GetAnalog( InputAnalog.RightStickX ), 0,
+				-Input.GetAnalog( InputAnalog.RightStickY ) ) * 4
 			: new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
 
 

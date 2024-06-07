@@ -10,7 +10,7 @@ InventoryDisplay {
     pointer-events: all;
 
     .inv-panel {
-        width: 600px;
+        width: 520px;
         border-radius: 8px;
         transform: skewX(-2px);
         background-color: rgb(233, 239, 232);
@@ -55,7 +55,6 @@ InventoryDisplay {
             height: 100px;
         }
     }
-
     //bottom: 50px;
     //right: 100px;
     //position: absolute;

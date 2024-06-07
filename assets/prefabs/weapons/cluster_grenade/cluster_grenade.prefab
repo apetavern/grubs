@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "dddc56d7-16d4-409e-b8f6-f15cc097f23e",
+    "__guid": "f6e1a741-1984-47ca-a428-df7908d9f5a8",
     "Flags": 0,
     "Name": "cluster_grenade",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "a1b9e328-8cb3-48a3-a229-aaab489fa5c9",
+        "__guid": "2cf71e33-7fde-4414-bc8b-67fa7ac1c8d4",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/cluster_grenade/mdl-cluster_grenade.vmdl",
@@ -19,15 +19,15 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "edbf4870-4141-49b6-bb11-9332d4fde364",
+        "__guid": "e6c1846a-0052-4b84-834d-2a17eda19d3b",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/cluster_grenade.geq",
         "HoldPose": "Throwable",
-        "Icon": "models/weapons/cluster_grenade/icon-cluster_grenade.png",
+        "Icon": "models/weapons/cluster_grenade/icon-cluster_grenade.vmdl.png",
         "Model": {
           "_type": "component",
-          "component_id": "a1b9e328-8cb3-48a3-a229-aaab489fa5c9",
-          "go": "dddc56d7-16d4-409e-b8f6-f15cc097f23e",
+          "component_id": "2cf71e33-7fde-4414-bc8b-67fa7ac1c8d4",
+          "go": "f6e1a741-1984-47ca-a428-df7908d9f5a8",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Cluster Grenade",
@@ -36,22 +36,22 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "f42b147e-aff3-44ff-8007-4c595c919fd2",
+        "__guid": "6eb1cf7f-6b92-4455-b6e0-5afd3429e2c1",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "edbf4870-4141-49b6-bb11-9332d4fde364",
-          "go": "dddc56d7-16d4-409e-b8f6-f15cc097f23e",
+          "component_id": "e6c1846a-0052-4b84-834d-2a17eda19d3b",
+          "go": "f6e1a741-1984-47ca-a428-df7908d9f5a8",
           "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "eb691da7-10aa-43c1-94d5-df4647d81a85",
+          "__guid": "8d035bb9-b3e5-4488-8408-baba78f85145",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -122,13 +122,6 @@
               "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
             }
           }
-        }
-      },
-      {
-        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
-        "__guid": "859b643d-1b17-4aa3-ae7e-d3c787fc7319",
-        "Inputs": {
-          "fire": "Throw (Hold)"
         }
       }
     ],

@@ -5,28 +5,95 @@ GameRules {
     height: 100%;
     align-items: center;
     justify-content: center;
-    
+
     .control-wrap {
-        background-color: $menu-highlight;
+        background-color: darken(rgb(233, 239, 232), 35%);
         padding: 12px;
-        border-radius: 16px;
+        border-radius: 4px;
         justify-content: center;
+        flex-shrink: 0;
+        flex-grow: 1;
+        box-shadow: 2px 2px 8px black;
     }
-    
+
+    .side {
+        flex-direction: row;
+        flex-shrink: 0;
+        width: 100%;
+        gap: 12px;
+        z-index: 100;
+
+        > div {
+            width: 50%;
+        }
+    }
+
+    .upper-bar {
+        position: absolute;
+        width: 100%;
+        padding-right: 32px;
+        align-items: center;
+        top: -32px;
+
+        .tabs {
+            margin-left: auto;
+            gap: 12px;
+
+            > button {
+                width: 50px;
+                height: 50px;
+                border-radius: 4px;
+                background-color: rgb(127, 79, 130);
+                box-shadow: 2px 2px 8px black;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    background-color: lighten(rgb(127, 79, 130), 35%);
+                    sound-in: ui_button_hover;
+                }
+
+                > i {
+                    font-size: 42px;
+                }
+            }
+        }
+
+    }
+
     .rules-title {
-        font-size: 48px;
+        left: -32px;
+        padding: 8px 16px;
+        background-color: rgb(66, 118, 62);
         margin-bottom: 8px;
+        transform: skewX(-4px);
+        box-shadow: 2px 2px 8px black;
+        z-index: 10;
+
+        > label {
+            font-size: 48px;
+            transform: skewX(4px);
+            text-shadow: 2px 2px black;
+        }
     }
-    
+
+    .scrollable {
+        overflow: scroll;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 64px;
+        padding-bottom: 32px;
+        width: 100%;
+        flex-grow: 1;
+    }
+
     .rules-container {
         position: absolute;
         flex-direction: column;
         width: 1400px;
         height: 600px;
-        padding: 24px 32px;
-        border-radius: 16px;
-        background-color: $menu-bg;
-        box-shadow: -8px 8px $menu-highlight;
-        gap: 12px;
+        padding: 0 32px;
+        border-radius: 8px;
+        background-color: rgb(233, 239, 232);
     }
 }

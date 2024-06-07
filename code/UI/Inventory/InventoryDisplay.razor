@@ -40,7 +40,7 @@
 {
     public PlayerInventory Inventory { get; set; }
 
-    private const int _columns = 7;
+    private const int _columns = 5;
     private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
     private int _totalItems => Inventory.Equipment.Count();
 
@@ -68,7 +68,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Inventory.EquipmentActive, Inventory.ActiveSlot);
+        return HashCode.Combine(Inventory.InventoryOpen, Inventory.EquipmentActive, Inventory.ActiveSlot);
     }
 
     private int SelectNextItemGamepadInput()

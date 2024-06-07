@@ -1,0 +1,68 @@
+﻿@inherits Panel
+
+@attribute [StyleSheet]
+
+@if (Options is null)
+{
+    return;
+}
+
+<root>
+    <button class="@(_showOptions ? "active" : "")" onclick=@(() => _showOptions = !_showOptions)>
+        <label class="selected">@Options[SelectedIndex]</label>
+        <i class="expand">@(_showOptions ? "expand_less" : "expand_more")</i>
+    </button>
+    @if (_showOptions)
+    {
+        <div class="options">
+            @foreach (var option in Options)
+            {
+                <label onclick=@(() => SelectOption(option))>@option</label>
+            }
+        </div>
+    }
+</root>
+
+@code
+{
+    public List<string> Options { get; set; }
+    public string EnumType { get; set; }
+    public int SelectedIndex { get; set; }
+
+    public Action<int> ValueChanged { get; set; }
+
+    private bool _showOptions;
+
+    private void SelectOption(string option)
+    {
+        var index = Options.IndexOf(option);
+        SelectedIndex = index;
+        ValueChanged(index);
+        _showOptions = false;
+    }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (!firstTime)
+            return;
+
+        if (EnumType == null)
+            return;
+
+        var type = TypeLibrary.GetType(EnumType);
+        if (!type.IsEnum)
+        {
+            Log.Error("EnumType is not an Enum");
+            return;
+        }
+
+        Options = type.Members.Skip(1).Select(x => x.Name).ToList();
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Options.Count);
+    }
+}

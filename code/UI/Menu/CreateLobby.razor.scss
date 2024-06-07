@@ -10,16 +10,16 @@ CreateLobby {
 
     .back-button {
         position: absolute;
-        margin-top: 80px;
-        margin-left: 110px;
+        margin-top: 40px;
+        margin-left: 40px;
         text-stroke: 8px black;
-        font-size: 64px;
+        font-size: 48px;
         gap: 12px;
         align-items: center;
         z-index: 100;
 
         > i {
-            font-size: 74px;
+            font-size: 64px;
         }
 
         &:hover:not(.hide) {
@@ -27,7 +27,7 @@ CreateLobby {
             sound-in: ui_button_hover;
         }
     }
-    
+
     .layout {
         width: 100%;
         height: 100%;
@@ -36,23 +36,29 @@ CreateLobby {
         align-items: center;
         flex-direction: column;
     }
-    
+
     .options {
         margin-top: auto;
         font-size: 32px;
     }
-    
+
     .create-lobby-button {
         font-size: 64px;
         margin-top: auto;
-        background-color: $menu-highlight;
+        background-color: rgb(66, 118, 62);
         padding: 16px 32px;
-        border-radius: 16px;
+        border-radius: 4px;
         box-shadow: 4px 4px 4px black;
         align-items: center;
+        transform: skewX(-4px);
+        text-shadow: 2px 2px black;
+
+        > label {
+            transform: skewX(4px);
+        }
 
         &:hover {
-            background-color: darken($menu-highlight, 50%);
+            background-color: darken(rgb(66, 118, 62), 50%);
             sound-in: ui_button_hover;
         }
     }

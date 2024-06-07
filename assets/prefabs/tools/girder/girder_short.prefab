@@ -1,41 +1,41 @@
 {
   "RootObject": {
-    "__guid": "9caa0450-0095-4ca7-a4d1-492fe3e63030",
+    "__guid": "fb2d0ff6-3879-499e-841e-d3fce463243e",
     "Flags": 0,
     "Name": "girder_short",
-    "Tags": "solid",
+    "Tags": "solid,cleanup",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "0eda78cf-bcc5-426a-90b1-14dd052ece23",
+        "__guid": "4d91817e-9748-4ea3-9933-faa4c7bf1634",
         "MaxHealth": 75
       },
       {
         "__type": "Grubs.DestructibleObject",
-        "__guid": "bfaf69f9-ae48-43b0-97c2-ff3afee2cf11",
+        "__guid": "ac78bf54-0c06-4cd2-bde1-831eb2e8a1bf",
         "HasDamageMeshes": true,
-        "health": {
+        "Health": {
           "_type": "component",
-          "component_id": "0eda78cf-bcc5-426a-90b1-14dd052ece23",
-          "go": "9caa0450-0095-4ca7-a4d1-492fe3e63030",
+          "component_id": "4d91817e-9748-4ea3-9933-faa4c7bf1634",
+          "go": "fb2d0ff6-3879-499e-841e-d3fce463243e",
           "component_type": "Health"
         },
         "LeftSide": {
           "_type": "gameobject",
-          "go": "39dccd41-824a-4e02-a04d-f3539c907ffa"
+          "go": "e17117d0-bdc6-44a2-a613-9d7aa5497fd6"
         },
         "RightSide": {
           "_type": "gameobject",
-          "go": "273855b8-4d1a-49f9-93b0-02e0a0c7250c"
+          "go": "37381087-0827-463a-81ae-16236c5f954d"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "39dccd41-824a-4e02-a04d-f3539c907ffa",
+        "__guid": "e17117d0-bdc6-44a2-a613-9d7aa5497fd6",
         "Flags": 0,
         "Name": "Left",
         "Enabled": true,
@@ -44,16 +44,17 @@
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "c33e4b97-82b7-492e-95d9-9c5810b629af",
+            "__guid": "2fc3e497-20b0-4164-838b-29ac15f0eb4d",
             "BodyGroups": 1,
             "CreateBoneObjects": false,
             "Model": "models/tools/girders/girder_short_left.vmdl",
             "RenderType": "On",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
           },
           {
             "__type": "Sandbox.ModelCollider",
-            "__guid": "724e7b47-5e8e-42a4-8a51-295f6ada7ec8",
+            "__guid": "6aec673d-dbbb-448a-92db-a3928944fa8d",
             "IsTrigger": false,
             "Model": "models/tools/girders/girder_short_left.vmdl",
             "Static": true
@@ -61,7 +62,7 @@
         ]
       },
       {
-        "__guid": "64466bee-f348-4c71-ae71-d1cbaf6fa936",
+        "__guid": "185d3bc3-89fd-48ce-87cd-ff4850a2489b",
         "Flags": 0,
         "Name": "Center",
         "Enabled": true,
@@ -70,7 +71,7 @@
         "Components": [
           {
             "__type": "Sandbox.ModelCollider",
-            "__guid": "24cf0fe5-d55a-47cb-94f7-4114f8ccf3ae",
+            "__guid": "2cecb37b-d3bc-47ce-b76a-20b0379207e6",
             "IsTrigger": false,
             "Model": "models/tools/girders/girder_center_only.vmdl",
             "Static": true
@@ -78,7 +79,7 @@
         ]
       },
       {
-        "__guid": "273855b8-4d1a-49f9-93b0-02e0a0c7250c",
+        "__guid": "37381087-0827-463a-81ae-16236c5f954d",
         "Flags": 0,
         "Name": "Right",
         "Enabled": true,
@@ -87,16 +88,17 @@
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "6d7a565b-bcd6-450a-98e6-d429ea364e6a",
+            "__guid": "109ed143-3475-4ffe-aa22-844f8791e959",
             "BodyGroups": 1,
             "CreateBoneObjects": false,
             "Model": "models/tools/girders/girder_short_right.vmdl",
             "RenderType": "On",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
           },
           {
             "__type": "Sandbox.ModelCollider",
-            "__guid": "6c47748d-963c-401b-87e8-324ce823a636",
+            "__guid": "5d91b2fe-bb60-4548-b4df-892f31c88183",
             "IsTrigger": false,
             "Model": "models/tools/girders/girder_short_right.vmdl",
             "Static": true

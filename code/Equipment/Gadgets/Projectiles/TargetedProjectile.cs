@@ -13,12 +13,12 @@ public class TargetedProjectile : Projectile
 	{
 		if ( Source != null )
 		{
-			ProjectileMovement.Source = Source;
+			ProjectileMovement.SourceId = SourceId;
 			ProjectileMovement.Charge = Charge;
 		}
 		else
 		{
-			Source = ProjectileMovement.Source;
+			SourceId = ProjectileMovement.SourceId;
 			Charge = ProjectileMovement.Charge;
 		}
 

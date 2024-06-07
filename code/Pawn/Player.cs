@@ -91,7 +91,7 @@ public sealed class Player : Component
 	[Broadcast]
 	public void Cleanup()
 	{
-		Inventory.Equipment.Clear();
+		Inventory.Cleanup();
 		Grubs.Clear();
 
 		foreach ( var grub in GetOwnedGrubs() )

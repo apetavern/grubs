@@ -23,6 +23,17 @@ public sealed class PlayerInventory : Component
 			Local = this;
 	}
 
+	public void Cleanup()
+	{
+		for ( int i = 0; i < Equipment.Count; i++ )
+		{
+			Log.Info( Equipment[i].Name );
+			Equipment[i].GameObject.Destroy();
+
+		}
+		Equipment.Clear();
+	}
+
 	[Broadcast( NetPermission.HostOnly )]
 	public void InitializeWeapons()
 	{
@@ -94,7 +105,8 @@ public sealed class PlayerInventory : Component
 		ActiveSlot = index;
 		Equip( ActiveSlot );
 
-		InventoryOpen = false;
+		if ( !Input.UsingController )
+			InventoryOpen = false;
 	}
 
 	[Broadcast]

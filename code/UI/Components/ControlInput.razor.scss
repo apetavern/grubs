@@ -1,8 +1,13 @@
 ﻿ControlInput {
     flex-direction: column;
-    
+    flex-shrink: 0;
+
+    .control {
+        flex-shrink: 0;
+        width: 100%;
+    }
+
     > .label {
-        margin-left: 12px;
         font-size: 24px;
         margin-top: 4px;
         font-weight: light;
