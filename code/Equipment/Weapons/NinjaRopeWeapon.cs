@@ -13,6 +13,14 @@ public class NinjaRopeWeapon : Weapon
 			IsFiring = true;
 			TimeSinceLastUsed = 0f;
 			OnFire.Invoke( 100 );
+
+			if ( WeaponInfoPanel is not null )
+			{
+				WeaponInfoPanel.Inputs = new Dictionary<string, string>()
+				{
+					{ "fire", "Release Hook" }
+				};
+			}
 		}
 		else if ( Input.Pressed( "fire" ) && IsFiring )
 		{
@@ -34,5 +42,18 @@ public class NinjaRopeWeapon : Weapon
 		// Use a shot if we missed and it's been a few seconds.
 		if ( IsFiring && Equipment.Grub.ActiveMountable is null && TimeSinceLastUsed > 5f )
 			FireFinished();
+	}
+
+	protected override void FireFinished()
+	{
+		if ( WeaponInfoPanel is not null )
+		{
+			WeaponInfoPanel.Inputs = new Dictionary<string, string>()
+				{
+					{ "fire", "Fire Hook" }
+				};
+		}
+
+		base.FireFinished();
 	}
 }

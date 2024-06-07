@@ -56,6 +56,9 @@ public class Equipment : Component
 		if ( Ammo == 0 )
 			return;
 
+		if ( Components.TryGet( out Weapon weapon ) )
+			weapon.OnDeploy();
+
 		var target = grub.GameObject.GetAllObjects( true ).First( c => c.Name == "hold_L" );
 		GameObject.SetParent( grub.GameObject, false );
 		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();

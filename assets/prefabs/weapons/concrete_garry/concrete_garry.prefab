@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "ac69653c-6166-4de1-82b1-b65c913b1285",
+    "__guid": "3d2a683e-e9c8-459b-b129-d4bdae325c11",
     "Flags": 0,
     "Name": "concrete_garry",
     "Enabled": true,
@@ -9,7 +9,7 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "27b2a0f3-1158-4cde-b72d-37a175ff6434",
+        "__guid": "2a139185-76b5-41cd-a8d2-b848fa8745d8",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/weapons/airstrikes/radio.vmdl",
@@ -19,15 +19,15 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "a12c631e-61ef-4461-849e-6d094128c042",
+        "__guid": "0ff1271b-5989-4be7-b55f-9c15f0e9922e",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/concrete_garry.geq",
         "HoldPose": "Holdable",
         "Icon": "models/weapons/concretegarry/concretegarry.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "27b2a0f3-1158-4cde-b72d-37a175ff6434",
-          "go": "ac69653c-6166-4de1-82b1-b65c913b1285",
+          "component_id": "2a139185-76b5-41cd-a8d2-b848fa8745d8",
+          "go": "3d2a683e-e9c8-459b-b129-d4bdae325c11",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Concrete Garry",
@@ -36,29 +36,29 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
-        "__guid": "d2ddf4cb-2df5-45a7-95c2-5043bf7d6f9a",
+        "__guid": "8c300e9f-025c-482a-9a3d-7cae16ba1b70",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "CursorModel": {
           "_type": "component",
-          "component_id": "5a2ba7e4-44a8-4c31-8007-b4ff5b1c1b37",
-          "go": "0305d1ef-1c1b-42ec-8fa5-e09a65f7d240",
+          "component_id": "7b06636e-3c11-4653-b358-4f0fa9e84a7f",
+          "go": "e257ac0c-df9c-4c8d-8e8a-6a052f7cee2e",
           "component_type": "ModelRenderer"
         },
         "Directional": false,
         "Equipment": {
           "_type": "component",
-          "component_id": "a12c631e-61ef-4461-849e-6d094128c042",
-          "go": "ac69653c-6166-4de1-82b1-b65c913b1285",
+          "component_id": "0ff1271b-5989-4be7-b55f-9c15f0e9922e",
+          "go": "3d2a683e-e9c8-459b-b129-d4bdae325c11",
           "component_type": "Equipment"
         },
         "FiringType": "Complex",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "a250f84f-877e-45cc-b263-838d28e6d976",
+          "__guid": "a45b2138-9b64-4d23-9861-d18ec15f5c8f",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -250,11 +250,18 @@
           }
         },
         "SecondaryFiringType": "Instant"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "2ce96ec6-abbe-4f09-930c-877e27c28ae2",
+        "Inputs": {
+          "fire": "Call Garry"
+        }
       }
     ],
     "Children": [
       {
-        "__guid": "0305d1ef-1c1b-42ec-8fa5-e09a65f7d240",
+        "__guid": "e257ac0c-df9c-4c8d-8e8a-6a052f7cee2e",
         "Flags": 0,
         "Name": "Garry - Cursor",
         "Scale": "0.5,0.5,0.5",
@@ -265,7 +272,7 @@
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
-            "__guid": "5a2ba7e4-44a8-4c31-8007-b4ff5b1c1b37",
+            "__guid": "7b06636e-3c11-4653-b358-4f0fa9e84a7f",
             "BodyGroups": 18446744073709551615,
             "Model": "models/weapons/targetindicator/targetindicator.vmdl",
             "RenderType": "On",

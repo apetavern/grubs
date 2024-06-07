@@ -1,0 +1,15 @@
+@namespace Grubs.UI
+
+@inherits TargetedWorldPanel
+
+@attribute [StyleSheet]
+
+<root>
+	<img src=@Icon />
+</root>
+
+@code {
+	public string Icon { get; set; }
+
+	protected override int BuildHash() => HashCode.Combine(Icon);
+}

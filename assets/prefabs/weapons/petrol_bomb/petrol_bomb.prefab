@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "cc3eac01-c220-47e5-b3e4-4ac8e423a540",
+    "__guid": "b467da93-57ec-4b74-aaf6-6b848e4109d7",
     "Flags": 0,
     "Name": "petrol_bomb",
     "Enabled": true,
@@ -9,24 +9,25 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "fbe58fbc-13a6-4def-95ed-7dc0caa3f608",
+        "__guid": "ec0d8124-e6dd-4098-ba22-782e6c2a7cee",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": true,
         "Model": "models/weapons/petrolbomb/petrolbomb.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "5cc5c8ad-f426-420a-9c3a-fce6ae585300",
+        "__guid": "2fe9c704-4260-4421-b623-85e191b9b7d2",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/petrol_bomb.geq",
         "HoldPose": "Throwable",
         "Icon": "models/weapons/petrolbomb/petrolbomb.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "fbe58fbc-13a6-4def-95ed-7dc0caa3f608",
-          "go": "cc3eac01-c220-47e5-b3e4-4ac8e423a540",
+          "component_id": "ec0d8124-e6dd-4098-ba22-782e6c2a7cee",
+          "go": "b467da93-57ec-4b74-aaf6-6b848e4109d7",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Petrol Bomb",
@@ -35,22 +36,22 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "3a059611-0329-4272-9810-cd42ebf75c2b",
+        "__guid": "b28b81cf-f9c1-404c-af97-b2d3f022b075",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "5cc5c8ad-f426-420a-9c3a-fce6ae585300",
-          "go": "cc3eac01-c220-47e5-b3e4-4ac8e423a540",
+          "component_id": "2fe9c704-4260-4421-b623-85e191b9b7d2",
+          "go": "b467da93-57ec-4b74-aaf6-6b848e4109d7",
           "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
           "__version": 7,
-          "__guid": "b922f049-3427-435a-8f8b-1582f3d31a27",
+          "__guid": "12bb7051-e2a6-4e0c-ba13-6f8622fb479b",
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -122,11 +123,18 @@
             }
           }
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "338a2051-72d6-4e8f-a9d4-a3d0a73c41ab",
+        "Inputs": {
+          "fire": "Throw (Hold)"
+        }
       }
     ],
     "Children": [
       {
-        "__guid": "8900aa96-83ed-4fec-9c62-e3753ef8662b",
+        "__guid": "e07ef293-d79a-4493-95e0-37e2a1a8ba49",
         "Flags": 4,
         "Name": "hold_L",
         "Enabled": true,
@@ -134,7 +142,7 @@
         "NetworkInterpolation": true
       },
       {
-        "__guid": "0881bafa-a9f7-4571-81e2-3058f9e1d09f",
+        "__guid": "f2c5d084-70b1-4209-94ec-69e6c71f9a2e",
         "Flags": 4,
         "Name": "rag_start",
         "Position": "-0.04983139,0.000002974906,14.12584",
@@ -144,7 +152,7 @@
         "NetworkInterpolation": true,
         "Children": [
           {
-            "__guid": "8cb1efca-64ef-493a-ae32-8f6d94886f8d",
+            "__guid": "965154ba-92b0-4b20-af59-eebf504f890c",
             "Flags": 4,
             "Name": "rag_pivot",
             "Position": "3.724562,-0.0000004768372,0.000004080904",
@@ -154,7 +162,7 @@
             "NetworkInterpolation": true,
             "Children": [
               {
-                "__guid": "62a53203-43b0-42ef-8dbd-eba368c6cc74",
+                "__guid": "5ff1c735-78fd-420a-8122-cf07bc3bfc1d",
                 "Flags": 4,
                 "Name": "rag_end",
                 "Position": "8.603102,-0.00001144409,-0.000002635079",

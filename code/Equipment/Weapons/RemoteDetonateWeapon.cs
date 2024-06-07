@@ -1,6 +1,6 @@
 using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Pawn;
-using Sandbox;
+using Grubs.UI;
 
 namespace Grubs.Equipment.Weapons;
 
@@ -39,7 +39,11 @@ public sealed class RemoteDetonateWeapon : Weapon
 			else
 				FireImmediate();
 
-			Projectile.ProjectileExploded += () => _projectileExploded = true;
+			Projectile.ProjectileExploded += () =>
+			{
+				_projectileExploded = true;
+				WeaponInfoPanel?.GameObject.Destroy();
+			};
 		}
 	}
 
@@ -54,5 +58,14 @@ public sealed class RemoteDetonateWeapon : Weapon
 	public void ReceiveProjectile( GameObject ProjectileObject )
 	{
 		Projectile = ProjectileObject.Components.Get<ExplosiveProjectile>();
+
+		if ( WeaponInfoPanel is null )
+			return;
+
+		WeaponInfoPanel.Target = ProjectileObject;
+		WeaponInfoPanel.Inputs = new Dictionary<string, string>()
+		{
+			{ "fire", "Detonate" }
+		};
 	}
 }

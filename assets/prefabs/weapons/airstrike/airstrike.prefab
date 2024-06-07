@@ -243,13 +243,20 @@
             }
           ],
           "Defaults": {
-            "$15._value": {
+            "$17._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/airstrike/airstrike_plane_bombs.prefab"
             }
           }
         },
         "SecondaryFiringType": "Instant"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "9bcb6e78-91ba-4975-ae97-0a9d16b155b2",
+        "Inputs": {
+          "fire": "Call Airstrike"
+        }
       }
     ],
     "Children": [

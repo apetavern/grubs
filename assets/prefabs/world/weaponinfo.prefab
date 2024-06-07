@@ -1,28 +1,28 @@
 {
   "RootObject": {
-    "__guid": "6312a0ac-1d81-403d-b6b2-23bf86246aa6",
+    "__guid": "793b7826-1d28-42d6-9200-fd72d35f3626",
     "Flags": 0,
-    "Name": "cratepickup",
+    "Name": "weaponinfo",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.WorldPanel",
-        "__guid": "35300f62-86d4-49b9-b32c-bd557230568a",
+        "__guid": "cf19cee7-2ce2-4c13-b812-dbd4c6706255",
         "HorizontalAlign": "Center",
         "InteractionRange": 1000,
         "LookAtCamera": true,
-        "PanelSize": "512,512",
+        "PanelSize": "1024,750",
         "RenderScale": 1,
         "VerticalAlign": "Center"
       },
       {
-        "__type": "Grubs.UI.CratePickup",
-        "__guid": "e5eb0326-76e7-474d-beb6-937a832b3711",
-        "DestroyDelay": 3,
-        "Offset": "0,0,64",
-        "RiseSpeed": 7.5
+        "__type": "Grubs.UI.WeaponInfo",
+        "__guid": "a56e823b-d6a3-4784-aa0d-8d0a94f6db34",
+        "DestroyDelay": 0,
+        "Offset": "8,-50,-16",
+        "RiseSpeed": 0
       }
     ],
     "Children": []

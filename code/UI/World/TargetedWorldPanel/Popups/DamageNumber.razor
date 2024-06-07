@@ -1,0 +1,32 @@
+@namespace Grubs.UI
+
+@inherits TargetedWorldPanel
+
+@attribute [StyleSheet]
+
+<root>
+	<div class="@(_isHeal ? "heal" : "damage")">@FormatDamage()</div>
+</root>
+
+@code {
+	public float Damage { get; set; }
+
+	private bool _isHeal => Damage < 0;
+
+	protected override void OnStart()
+	{
+		var random = Game.Random.NextSingle() * 2f - 1; // Between -1 and 1
+		Offset += (Vector3.Forward * random * 16f);
+		UpdatePosition();
+
+		base.OnStart();
+	}
+
+	protected override int BuildHash() => HashCode.Combine(Damage);
+
+	private string FormatDamage()
+	{
+		var damage = Math.Floor(Math.Min(Damage, 9999));
+		return _isHeal ? $"+{Math.Abs(damage)}" : $"-{damage}";
+	}
+}

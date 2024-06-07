@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "76d8c9a8-30bf-4283-a3ba-764e5c39f0fa",
+    "__guid": "2aa892e1-4f99-494d-8bb3-1c00643a7a5c",
     "Flags": 0,
     "Name": "jetpack",
     "Enabled": true,
@@ -9,62 +9,71 @@
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "207fabff-2d5d-47f7-bfad-0381fac48871",
+        "__guid": "939ca26b-634b-4edc-b01c-15dc0d479ff0",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/tools/jetpack/jetpack.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "32fe6c17-555b-4321-84f1-05bdeb6acafe",
+        "__guid": "6c3008c2-cc70-41f8-b1c5-3808e9ee9377",
         "CameraCanZoom": true,
         "Data": "resources/equipment/tools/jetpack.geq",
         "HoldPose": "None",
         "Icon": "models/tools/jetpack/jetpack.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "207fabff-2d5d-47f7-bfad-0381fac48871",
-          "go": "76d8c9a8-30bf-4283-a3ba-764e5c39f0fa",
+          "component_id": "939ca26b-634b-4edc-b01c-15dc0d479ff0",
+          "go": "2aa892e1-4f99-494d-8bb3-1c00643a7a5c",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Jetpack",
+        "ShouldShowAimReticle": false,
         "SlotIndex": 0
       },
       {
         "__type": "Grubs.Equipment.Tools.JetpackTool",
-        "__guid": "a52e06b8-8f5e-4473-8723-81f2fd863963",
+        "__guid": "64fbb975-2314-47cb-a253-e3d71f47d9e6",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": true,
         "CanSwapDuringUse": true,
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "32fe6c17-555b-4321-84f1-05bdeb6acafe",
-          "go": "76d8c9a8-30bf-4283-a3ba-764e5c39f0fa",
+          "component_id": "6c3008c2-cc70-41f8-b1c5-3808e9ee9377",
+          "go": "2aa892e1-4f99-494d-8bb3-1c00643a7a5c",
           "component_type": "Equipment"
         },
         "FBFlame": {
           "_type": "gameobject",
-          "go": "9e500eda-1a21-4446-b842-b1889e964969"
+          "go": "7406fd93-14c2-4776-8b78-e2131e8cdae7"
         },
         "FiringType": "Complex",
         "MaxJetFuel": 10,
         "MaxUses": 1,
         "UDFlame1": {
           "_type": "gameobject",
-          "go": "8839ee30-814c-485b-9836-07a51d78e7c0"
+          "go": "0720d0c8-dfa1-4b57-8fc2-64f8dd52a941"
         },
         "UDFlame2": {
           "_type": "gameobject",
-          "go": "fba201a0-7c55-41f0-a9d1-4ed0d45ac68b"
+          "go": "26a9cb62-e4cd-474c-b95a-271d2ded65b0"
+        }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "ec0f0d57-456e-4f6d-a8f6-63e7c7c38d06",
+        "Inputs": {
+          "fire": "Enable Flight"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "fba201a0-7c55-41f0-a9d1-4ed0d45ac68b",
+        "__guid": "26a9cb62-e4cd-474c-b95a-271d2ded65b0",
         "Flags": 0,
         "Name": "UHFlame",
         "Position": "-6.617,-9.051998,5.577052",
@@ -75,7 +84,7 @@
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
-            "__guid": "ef42fe72-6e82-414b-b7ac-a7bd8cbcd5de",
+            "__guid": "0dc2f7f8-1e27-4469-8929-9c3ee870114e",
             "BodyGroups": 18446744073709551615,
             "Model": "particles/blueflame/blueflame.vmdl",
             "RenderType": "On",
@@ -84,7 +93,7 @@
         ]
       },
       {
-        "__guid": "8839ee30-814c-485b-9836-07a51d78e7c0",
+        "__guid": "0720d0c8-dfa1-4b57-8fc2-64f8dd52a941",
         "Flags": 0,
         "Name": "UDFlame",
         "Position": "-6.616731,9.05203,5.577051",
@@ -95,7 +104,7 @@
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
-            "__guid": "c1c6ad52-a47e-45fc-9560-3a956728584e",
+            "__guid": "8fd7824b-12af-4aaf-a9d3-b50304a6f327",
             "BodyGroups": 18446744073709551615,
             "Model": "particles/blueflame/blueflame.vmdl",
             "RenderType": "On",
@@ -104,7 +113,7 @@
         ]
       },
       {
-        "__guid": "9e500eda-1a21-4446-b842-b1889e964969",
+        "__guid": "7406fd93-14c2-4776-8b78-e2131e8cdae7",
         "Flags": 0,
         "Name": "FBFlame",
         "Position": "-16.68206,-0.0000002594415,6.164645",
@@ -115,7 +124,7 @@
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
-            "__guid": "bf7d5ded-4634-4e8f-9458-9eacc6812244",
+            "__guid": "dbc5e941-bb73-46ff-957c-7b50a62214f5",
             "BodyGroups": 18446744073709551615,
             "Model": "particles/blueflame/blueflame.vmdl",
             "RenderType": "On",

@@ -1,0 +1,45 @@
+@using Grubs.Equipment.Weapons
+
+@namespace Grubs.UI
+
+@inherits TargetedWorldPanel
+
+@attribute [StyleSheet]
+
+<root>
+    @foreach (var input in Inputs)
+    {
+        <div class="hint">
+            <InputGlyph action=@input.Key size="medium" />
+            <div class="text">@input.Value</div>
+        </div>
+    }
+</root>
+
+@code {
+    public Weapon Weapon { get; set; }
+    public Dictionary<string, string> Inputs { get; set; }
+
+    protected override void OnStart()
+    {
+        if (Weapon == null)
+            return;
+
+        if (Weapon.Components.TryGet<InputHintOverride>(out var hint))
+        {
+            Inputs = hint.Inputs;
+        }
+        else
+        {
+            Inputs = new Dictionary<string, string>()
+            {
+                { "fire", Weapon.GetFireInputActionDescription() }
+            };
+        }
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Inputs.GetHashCode());
+    }
+}

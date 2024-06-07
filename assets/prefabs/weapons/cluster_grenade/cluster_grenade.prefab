@@ -123,6 +123,13 @@
             }
           }
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "18a875f6-e399-44e0-879a-e7a0baefca8d",
+        "Inputs": {
+          "fire": "Throw (Hold)"
+        }
       }
     ],
     "Children": []

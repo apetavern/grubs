@@ -1,6 +1,5 @@
-using Sandbox;
-using Grubs.UI.Components;
 using Grubs.Pawn;
+using Grubs.UI.Components;
 
 namespace Grubs.Equipment.Weapons;
 
@@ -104,6 +103,13 @@ public sealed class TargetingWeapon : Weapon
 				default:
 					IsFiring = false;
 					FiringType = SecondaryFiringType;
+					if ( WeaponInfoPanel is not null )
+					{
+						WeaponInfoPanel.Inputs = new Dictionary<string, string>()
+						{
+							{ "fire", "Fire (Hold)" }
+						};
+					}
 					break;
 			}
 
