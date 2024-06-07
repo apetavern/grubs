@@ -43,13 +43,14 @@ public partial class GrubsTerrain : Component
 
 		var maxWidth = GrubsConfig.TerrainLength;
 		var maxHeight = GrubsConfig.TerrainHeight - 64;
+		var minHeight = 60;
 
 		while ( retries < 1000 )
 		{
 			retries++;
 
 			var randX = Game.Random.Int( maxWidth ) - maxWidth / 2;
-			var randZ = Game.Random.Int( 20, maxHeight );
+			var randZ = Game.Random.Int( minHeight, maxHeight );
 			var startPos = new Vector3( randX, 512, randZ );
 
 			var tr = Scene.Trace.Ray( startPos, startPos + Vector3.Down * maxHeight )
@@ -59,16 +60,21 @@ public partial class GrubsTerrain : Component
 
 			if ( tr.Hit && !tr.StartedSolid )
 			{
+				var spawnPosition = inAir ? tr.StartPosition : tr.EndPosition;
+
 				if ( tr.GameObject.Components.TryGet( out Grub _, FindMode.EverythingInSelfAndAncestors ) )
 					continue;
 
-				if ( PointInside( tr.EndPosition ) )
+				if ( PointInside( spawnPosition ) )
 					continue;
 
 				if ( Vector3.GetAngle( Vector3.Up, tr.Normal ) > maxAngle )
 					continue;
 
-				return inAir ? tr.StartPosition : tr.EndPosition;
+				if ( spawnPosition.z < minHeight )
+					continue;
+
+				return spawnPosition;
 			}
 		}
 
