@@ -79,9 +79,16 @@ public class TeleportTool : Tool
 		if ( !CheckValidPlacement() )
 			return;
 
-		grub.Transform.Position = grub.Player.MousePosition;
-		Sound.Play( TeleportSound );
+		var grubPosition = grub.Player.MousePosition;
+		grub.Transform.Position = grubPosition;
+		TeleportEffects( grubPosition );
 
 		base.FireFinished();
+	}
+
+	[Broadcast]
+	public void TeleportEffects(Vector3 position)
+	{
+		Sound.Play( TeleportSound, position );
 	}
 }
