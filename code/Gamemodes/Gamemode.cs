@@ -45,7 +45,7 @@ public abstract class Gamemode : Component
 			if ( !grub.IsValid() )
 				continue;
 
-			while ( !grub.Resolved || _resolveTries++ >= 20 )
+			while ( !grub.Resolved && _resolveTries++ <= 20 )
 				await GameTask.Delay( 200 );
 
 			_resolveTries = 0;
