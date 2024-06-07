@@ -8,6 +8,7 @@ public partial class GrubsTerrain
 	[Sync] public int WorldTextureLength { get; set; } = 0;
 
 	[Property] public Curve TerrainCurve { get; set; }
+	public TimeSince LastChanged { get; set; } // Ugly fix for playtest. 5 second delay before the game can be started to allow terrain to load. 
 
 	public void ResetTerrain()
 	{
@@ -28,6 +29,7 @@ public partial class GrubsTerrain
 		WorldTextureHeight = GrubsConfig.TerrainHeight;
 
 		GenerateWorld();
+		LastChanged = 0f;
 	}
 
 	private bool[,] TerrainMap;

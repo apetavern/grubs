@@ -19,6 +19,8 @@ public abstract class Gamemode : Component
 	public Queue<Grub> DamageQueue { get; set; } = new();
 	protected Queue<Player> PlayerTurnQueue { get; set; } = new();
 
+	private int _resolveTries = 0;
+
 	public Gamemode()
 	{
 		Current = this;
@@ -43,9 +45,10 @@ public abstract class Gamemode : Component
 			if ( !grub.IsValid() )
 				continue;
 
-			while ( !grub.Resolved )
+			while ( !grub.Resolved || _resolveTries++ >= 20 )
 				await GameTask.Delay( 200 );
 
+			_resolveTries = 0;
 			grub.Health.ApplyDamage();
 
 			await ShowDamagedGrub( grub );

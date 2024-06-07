@@ -129,7 +129,7 @@ public class HitScanWeapon : Weapon
 			return false;
 		}
 
-		ExplosionHelper.Instance.Explode( this, Equipment.Grub, tr.EndPosition, ExplosionRadius, ExplosionDamage );
+		ExplosionHelper.Instance.Explode( this, Equipment.Grub, tr.EndPosition, ExplosionRadius, ExplosionDamage, HitForce.x );
 		return true;
 	}
 

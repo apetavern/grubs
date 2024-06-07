@@ -102,9 +102,12 @@ public sealed class FreeForAllGamemode : Gamemode
 		}
 	}
 
-	[Broadcast]
+	[Authority]
 	public void UseTurn( bool giveMovementGrace = false )
 	{
+		if ( TurnIsChanging )
+			return;
+
 		if ( giveMovementGrace )
 			TimeUntilNextTurn = GrubsConfig.MovementGracePeriod;
 		else

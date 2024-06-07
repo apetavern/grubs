@@ -49,7 +49,7 @@ public partial class GrubsTerrain : Component
 			retries++;
 
 			var randX = Game.Random.Int( maxWidth ) - maxWidth / 2;
-			var randZ = Game.Random.Int( maxHeight );
+			var randZ = Game.Random.Int( 20, maxHeight );
 			var startPos = new Vector3( randX, 512, randZ );
 
 			var tr = Scene.Trace.Ray( startPos, startPos + Vector3.Down * maxHeight )

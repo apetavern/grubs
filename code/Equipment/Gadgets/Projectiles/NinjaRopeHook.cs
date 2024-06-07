@@ -1,5 +1,4 @@
 ﻿using Grubs.Common;
-using Grubs.Equipment.Weapons;
 using Grubs.Helpers;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
@@ -12,13 +11,14 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 	[Property] public PhysicsProjectile PhysicsProjectileComponent { get; set; }
 
 	private RopeBehavior Rope { get; set; }
+	private TimeSince _timeSinceCreated = 0f;
 
 	protected override void OnUpdate()
 	{
 		if ( IsProxy )
 			return;
 
-		if ( !MountObject.IsValid() )
+		if ( !MountObject.IsValid() || Rope == null && _timeSinceCreated > 5f )
 		{
 			GameObject.Destroy();
 		}

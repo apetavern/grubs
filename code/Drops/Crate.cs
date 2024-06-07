@@ -30,6 +30,10 @@ public sealed class Crate : Component, Component.ITriggerListener
 
 	private void HandleEquipmentCrateTrigger( Collider other, bool isTool = false )
 	{
+		GameObject.Destroy();
+		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
+			return;
+
 		string resPath = isTool switch
 		{
 			true => CrateDrops.GetRandomToolFromCrate(),
@@ -42,17 +46,22 @@ public sealed class Crate : Component, Component.ITriggerListener
 			.FirstOrDefault( e => e.Data.Name == equipmentResource.Name );
 		equipment?.IncrementAmmo();
 
-		WorldPopupHelper.Instance.CreatePickupPopup( grub.GameObject.Id, equipmentResource.Icon );
-		GameObject.Destroy();
+		using ( Rpc.FilterInclude( grub.Network.OwnerConnection ) )
+		{
+			WorldPopupHelper.Instance.CreatePickupPopup( grub.GameObject.Id, equipmentResource.Icon );
+		}
 	}
 
 	private void HandleHealthCrateTrigger( Collider other )
 	{
+		GameObject.Destroy();
+		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
+			return;
+
 		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndChildren );
 		if ( grub is null )
 			return;
 
 		grub.Health.Heal( 25f );
-		GameObject.Destroy();
 	}
 }

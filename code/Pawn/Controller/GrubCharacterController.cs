@@ -1,5 +1,6 @@
 ﻿using Grubs.Gamemodes;
 using Grubs.Helpers;
+using Grubs.Terrain;
 using Sandbox.Utility;
 
 namespace Grubs.Pawn.Controller;
@@ -295,18 +296,25 @@ public class GrubCharacterController : Component
 
 	private bool TryUnstuck()
 	{
+		// Check for being stuck inside a non-terrain object (like a player)
 		var result = BuildTrace( Transform.Position, Transform.Position ).Run();
+		var terrainCheck = Scene.Trace.Ray( Transform.Position, Transform.Position + Vector3.Right * 64f )
+			.Size( BoundingBox )
+			.WithTag( "solid" )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.Run();
 
-		// Not stuck, we cool
-		if ( !result.StartedSolid )
+		if ( result.StartedSolid ) // Stuck inside of something
 		{
-			_stuckTries = 0;
-			return false;
+			// Don't let active grub push this grub around
+			var activePlayer = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId ) as Player;
+			if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
+			{
+				_stuckTries = 0;
+				return false;
+			}
 		}
-
-		// Don't let active grub push this grub around
-		var activePlayer = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId ) as Player;
-		if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
+		else if ( !terrainCheck.Hit || !terrainCheck.GameObject.Tags.Contains( "terrain" ) ) // TODO: Work this into the trace if it ever starts working
 		{
 			_stuckTries = 0;
 			return false;
@@ -332,6 +340,9 @@ public class GrubCharacterController : Component
 			}
 
 			result = BuildTrace( pos, pos ).Run();
+
+			if ( GrubsTerrain.Instance.PointInside( pos ) ) // Don't let them spawn inside the terrain
+				continue;
 
 			if ( !result.StartedSolid )
 			{

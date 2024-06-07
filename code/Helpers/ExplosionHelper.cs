@@ -14,7 +14,7 @@ public partial class ExplosionHelper : Component
 		Instance = this;
 	}
 
-	public void Explode( Component source, Grub attacker, Vector3 position, float radius, float damage, float force = 1024f )
+	public void Explode( Component source, Grub attacker, Vector3 position, float radius, float damage, float force = 128f )
 	{
 		var gos = Scene.FindInPhysics( new Sphere( position, radius ) );
 		foreach ( var go in gos )
@@ -29,7 +29,7 @@ public partial class ExplosionHelper : Component
 			var distFactor = 1.0f - MathF.Pow( dist / radius, 2 ).Clamp( 0, 1 );
 
 			if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
-				HandleGrubExplosion( grub, position );
+				HandleGrubExplosion( grub, position, force );
 
 			if ( go.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelf ) )
 				HandlePhysicsExplosion( body, position, force );
@@ -47,12 +47,12 @@ public partial class ExplosionHelper : Component
 		}
 	}
 
-	private void HandleGrubExplosion( Grub grub, Vector3 position )
+	private void HandleGrubExplosion( Grub grub, Vector3 position, float force )
 	{
 		var dir = (grub.Transform.Position - position).Normal;
 		dir = dir.WithY( 0f );
 
-		grub.CharacterController.Punch( (dir + Vector3.Up) * 256f );
+		grub.CharacterController.Punch( (dir + Vector3.Up) * force );
 		grub.CharacterController.ReleaseFromGround();
 	}
 

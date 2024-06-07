@@ -91,7 +91,12 @@ GameLanding {
         transform: skewX(-4px);
         border-radius: 4px;
 
-        &:hover {
+        &.disabled {
+            background-color: rgb(43, 74, 41);
+            color: #808080;
+        }
+
+        &:not(.disabled):hover {
             sound-in: ui_button_hover;
             right: 102px;
         }
