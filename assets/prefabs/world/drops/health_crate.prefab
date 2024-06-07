@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "b6236a3c-e621-42f1-bace-988828a624b4",
+    "__guid": "a7d05d87-bfed-491e-a53d-2d4c6c370ccc",
     "Flags": 0,
     "Name": "health_crate",
     "Tags": "drop,pickup",
@@ -10,12 +10,12 @@
     "Components": [
       {
         "__type": "Grubs.Drops.Crate",
-        "__guid": "c5268976-749c-4655-90c1-6f11300aa8c2",
+        "__guid": "6b91fe26-1ca7-4a52-b339-b3775bd706d4",
         "DropType": "Health"
       },
       {
         "__type": "Sandbox.ModelRenderer",
-        "__guid": "834d79b1-d375-4f25-a0a7-8392762c33f5",
+        "__guid": "3f75e922-20f2-464b-8a81-a71149b53993",
         "BodyGroups": 18446744073709551615,
         "Model": "models/crates/health_crate/health_crate.vmdl",
         "RenderType": "On",
@@ -23,7 +23,7 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "27ce21d0-5d40-4527-8aa6-4566a35e4a7d",
+        "__guid": "b0f0e24a-9783-4b78-9cea-393a0d0ac60e",
         "Center": "0,0,12.5",
         "IsTrigger": false,
         "Scale": "25,25,25",
@@ -31,15 +31,15 @@
       },
       {
         "__type": "Sandbox.BoxCollider",
-        "__guid": "cafe6c72-6f9f-41a0-a742-a2461b8777f3",
+        "__guid": "f74e7f85-2702-4a74-bb7f-f468537329bb",
         "Center": "0,0,12.5",
         "IsTrigger": true,
-        "Scale": "30,30,30",
+        "Scale": "40,40,40",
         "Static": false
       },
       {
         "__type": "Sandbox.Rigidbody",
-        "__guid": "3f667e95-e09d-412f-96c4-07e5af974296",
+        "__guid": "b8e78289-f0e6-4f27-9e2c-3fbc1236794c",
         "AngularDamping": 0.5,
         "Gravity": true,
         "LinearDamping": 2,
@@ -54,7 +54,7 @@
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
-        "__guid": "d2e10fbd-d1e0-4cc5-ab29-3334b02c93d3",
+        "__guid": "e9a429ab-56fb-45bc-8152-17f448fd7714",
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 0,
@@ -66,19 +66,19 @@
       },
       {
         "__type": "Grubs.Common.Health",
-        "__guid": "b8736583-b0b3-400e-b922-ac82640dd961",
+        "__guid": "399f4162-1ed8-4b2f-a0b8-ae767edd7728",
         "MaxHealth": 1
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
-        "__guid": "76412ea9-b297-4aec-8575-d0f0f604b969",
+        "__guid": "f6b9e42c-b2e0-4988-a55c-f5717b9e8e28",
         "FireParticleCount": 25,
         "InitialUpVelocity": 100,
         "LeftRightVelocityRandom": 100,
         "Projectile": {
           "_type": "component",
-          "component_id": "d2e10fbd-d1e0-4cc5-ab29-3334b02c93d3",
-          "go": "b6236a3c-e621-42f1-bace-988828a624b4",
+          "component_id": "e9a429ab-56fb-45bc-8152-17f448fd7714",
+          "go": "a7d05d87-bfed-491e-a53d-2d4c6c370ccc",
           "component_type": "ExplosiveProjectile"
         },
         "SphericalEmission": true
