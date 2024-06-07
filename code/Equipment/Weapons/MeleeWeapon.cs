@@ -24,6 +24,12 @@ public class MeleeWeapon : Weapon
 		var ray = new Ray( grub.Transform.Position + Vector3.Up * 24f + HitOffset, pc.Facing * pc.EyeRotation.Forward );
 		HitEffects( ray );
 
+		DelayFireFinished();
+	}
+
+	async void DelayFireFinished()
+	{
+		await Task.DelaySeconds( 0.1f );
 		FireFinished();
 	}
 
