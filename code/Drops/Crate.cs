@@ -42,7 +42,11 @@ public sealed class Crate : Component, Component.ITriggerListener
 			.FirstOrDefault( e => e.Data.Name == equipmentResource.Name );
 		equipment?.IncrementAmmo();
 
-		WorldPopupHelper.Instance.CreatePickupPopup( grub.GameObject.Id, equipmentResource.Icon );
+		using ( Rpc.FilterInclude( grub.Network.OwnerConnection ) )
+		{
+			WorldPopupHelper.Instance.CreatePickupPopup( grub.GameObject.Id, equipmentResource.Icon );
+		}
+
 		GameObject.Destroy();
 	}
 
