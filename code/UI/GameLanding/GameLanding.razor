@@ -25,7 +25,7 @@
                 }
             </div>
         </div>
-        @if (IsHost() && CanStart())
+        @if (IsHost() && CanStart() && !IsLoadingTerrain())
         {
             <button class="start-button" onclick=@Start>Start</button>
         }
@@ -47,6 +47,11 @@
     public bool CanStart()
     {
         return Connection.All.Count > 1 || Game.IsEditor;
+    }
+
+    public bool IsLoadingTerrain()
+    {
+        return Terrain.GrubsTerrain.Instance?.LastChanged < 4f;
     }
 
     public GameLanding()
@@ -75,6 +80,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Connection.All?.Count, Player.All.Count());
+        return HashCode.Combine(Connection.All?.Count, Player.All.Count(), IsLoadingTerrain());
     }
 }
