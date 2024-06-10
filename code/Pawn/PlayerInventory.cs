@@ -145,6 +145,7 @@ public sealed class PlayerInventory : Component
 			return;
 
 		EquipmentActive = false;
+		equipment.Grub.ActiveMountable?.Dismount();
 		equipment.Holster();
 	}
 
