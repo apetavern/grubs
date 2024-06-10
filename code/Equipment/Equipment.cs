@@ -69,7 +69,7 @@ public class Equipment : Component
 
 	public void Holster()
 	{
-		if ( Grub is not null )
+		if ( Grub is not null && Grub.Player is not null )
 			GameObject.SetParent( Grub.Player.GameObject );
 
 		if ( Components.TryGet( out Weapon weapon ) )
