@@ -60,7 +60,10 @@ public class GrubFollowCamera : Component
 
 		if ( AllowZooming )
 		{
-			Distance -= Input.MouseWheel.y * 32f;
+			if ( Input.UsingController && Input.Down( "camera_pan" ) )
+				Distance -= Input.GetAnalog( InputAnalog.LeftStickY ) * -24f;
+			else
+				Distance -= Input.MouseWheel.y * 32f;
 		}
 
 		Distance = Distance.Clamp( 128f, 2048f );
@@ -117,7 +120,6 @@ public class GrubFollowCamera : Component
 			? new Vector3( Input.GetAnalog( InputAnalog.RightStickX ), 0,
 				-Input.GetAnalog( InputAnalog.RightStickY ) ) * 4
 			: new Vector3( -Mouse.Delta.x, 0, Mouse.Delta.y ) * 2;
-
 
 		if ( _isFocusingTarget )
 		{
