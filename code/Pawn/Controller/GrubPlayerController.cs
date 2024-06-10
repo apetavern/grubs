@@ -219,6 +219,9 @@ public sealed partial class GrubPlayerController : Component
 		if ( Input.UsingController && Cursor.IsEnabled() )
 			return false;
 
+		if ( PlayerInventory.Local.IsClosing == true )
+			return false;
+
 		return true;
 	}
 }

@@ -15,6 +15,7 @@ public sealed class PlayerInventory : Component
 	[Property, ReadOnly, Sync] public bool EquipmentActive { get; set; }
 
 	public bool InventoryOpen { get; set; }
+	public bool IsClosing { get; set; }
 	public static PlayerInventory Local { get; set; }
 
 	protected override void OnStart()
@@ -82,6 +83,13 @@ public sealed class PlayerInventory : Component
 			InventoryOpen = !InventoryOpen;
 		}
 
+		if ( Input.UsingController && InventoryOpen && Input.Released( "backflip" ) )
+		{
+			InventoryOpen = false;
+			IsClosing = true;
+			return;
+		}
+
 		if ( Input.Pressed( "next_equipment" ) )
 		{
 			CycleSlot();
@@ -91,6 +99,8 @@ public sealed class PlayerInventory : Component
 		{
 			CycleSlot( false );
 		}
+
+		IsClosing = false;
 	}
 
 	public void EquipItem( Equipment.Equipment equipment )
