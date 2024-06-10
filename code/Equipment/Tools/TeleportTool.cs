@@ -48,6 +48,20 @@ public class TeleportTool : Tool
 		}
 	}
 
+	public override void OnDeploy()
+	{
+		base.OnDeploy();
+
+		GrubFollowCamera.Local.AutomaticRefocus = false;
+	}
+
+	public override void OnHolster()
+	{
+		base.OnHolster();
+
+		GrubFollowCamera.Local.AutomaticRefocus = true;
+	}
+
 	private bool CheckValidPlacement()
 	{
 		if ( Equipment.Grub is not { } grub )
@@ -87,7 +101,7 @@ public class TeleportTool : Tool
 	}
 
 	[Broadcast]
-	public void TeleportEffects(Vector3 position)
+	public void TeleportEffects( Vector3 position )
 	{
 		Sound.Play( TeleportSound, position );
 	}

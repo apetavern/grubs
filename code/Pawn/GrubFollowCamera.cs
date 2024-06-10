@@ -11,6 +11,7 @@ public class GrubFollowCamera : Component
 	public static GrubFollowCamera Local { get; set; }
 	public float Distance { get; set; } = 1024f;
 	public bool AllowZooming { get; set; } = true;
+	public bool AutomaticRefocus { get; set; } = true;
 
 	[Property, ReadOnly] private GameObject Target { get; set; }
 
@@ -48,7 +49,7 @@ public class GrubFollowCamera : Component
 		ClampCamera();
 
 		var requestRefocus = Input.Pressed( "camera_reset" );
-		var automaticRefocus = !Input.Down( "camera_pan" ) && _timeSinceMousePan > 3;
+		var automaticRefocus = !Input.Down( "camera_pan" ) && _timeSinceMousePan > 3 && AutomaticRefocus;
 		if ( Target.IsValid() && (requestRefocus || automaticRefocus) )
 			_isFocusingTarget = true;
 	}

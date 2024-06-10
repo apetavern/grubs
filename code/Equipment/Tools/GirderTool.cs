@@ -58,6 +58,20 @@ public class GirderTool : Tool
 		CursorVisual.Tint = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.75f );
 	}
 
+	public override void OnDeploy()
+	{
+		base.OnDeploy();
+
+		GrubFollowCamera.Local.AutomaticRefocus = false;
+	}
+
+	public override void OnHolster()
+	{
+		base.OnHolster();
+
+		GrubFollowCamera.Local.AutomaticRefocus = true;
+	}
+
 	private bool CheckValidPlacement()
 	{
 		if ( Equipment.Grub is not { } grub )

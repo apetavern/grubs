@@ -1,4 +1,5 @@
 ﻿using Grubs.Gamemodes;
+using Grubs.Pawn;
 using Grubs.UI;
 
 namespace Grubs.Equipment.Weapons;
@@ -168,6 +169,8 @@ public partial class Weapon : Component
 	{
 		IsFiring = false;
 		TimesUsed++;
+
+		GrubFollowCamera.Local.AutomaticRefocus = true;
 
 		if ( TimesUsed >= MaxUses )
 		{

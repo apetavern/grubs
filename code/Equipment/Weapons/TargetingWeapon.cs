@@ -31,11 +31,24 @@ public sealed class TargetingWeapon : Weapon
 		CursorModel.GameObject.Enabled = Equipment.Deployed;
 	}
 
+	public override void OnDeploy()
+	{
+		base.OnDeploy();
+
+		GrubFollowCamera.Local.AutomaticRefocus = false;
+	}
+
+	public override void OnHolster()
+	{
+		base.OnHolster();
+
+		GrubFollowCamera.Local.AutomaticRefocus = true;
+	}
+
 	protected override void HandleComplexFiringInput()
 	{
 		if ( IsProxy )
 			return;
-
 
 		if ( !Equipment.Deployed )
 			return;
@@ -86,6 +99,8 @@ public sealed class TargetingWeapon : Weapon
 
 		if ( Input.Released( "fire" ) && ProjectileTarget != Vector3.Zero )
 		{
+			GrubFollowCamera.Local.AutomaticRefocus = true;
+
 			switch ( SecondaryFiringType )
 			{
 				case FiringType.Instant:
@@ -112,7 +127,6 @@ public sealed class TargetingWeapon : Weapon
 					}
 					break;
 			}
-
 		}
 	}
 
