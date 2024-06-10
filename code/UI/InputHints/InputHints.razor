@@ -16,7 +16,7 @@
         <label>Move</label>
         @if (Input.UsingController)
         {
-            <InputGlyph action="analogmove" size="medium" />
+            <InputGlyph analog="LeftStickX" size="medium" />
         }
         else
         {
@@ -28,7 +28,7 @@
         <label>Aim</label>
         @if (Input.UsingController)
         {
-            <InputGlyph action="analoglook" size="medium" />
+            <InputGlyph analog="RightStickY" size="medium" />
         }
         else
         {
@@ -36,12 +36,20 @@
             <InputGlyph action="backward" size="medium" />
         }
     </div>
+    @if (!Input.UsingController)
+    {
+        <div>
+            <label>Precision Aim</label>
+            <InputGlyph action="precision_aim" size="medium" />
+            <InputGlyph action="mouse_look" size="medium" />
+        </div>
+    }
     <div>
         <label>Jump</label>
         <InputGlyph action="jump" size="medium" />
     </div>
     <div>
-        <label>Backflip</label>
+        <label>Backflip (Hold)</label>
         <InputGlyph action="backflip" size="medium" />
     </div>
     <div>
@@ -49,15 +57,30 @@
         <InputGlyph action="camera_pan" size="medium" />
         @if (Input.UsingController)
         {
-            <InputGlyph action="analoglook" size="medium" />
+            <InputGlyph analog="RightStickX" size="medium" />
         }
     </div>
+    @if (Input.UsingController)
+    {
+        <div>
+            <label>Camera Zoom</label>
+            <InputGlyph action="camera_pan" size="medium" />
+            <InputGlyph analog="LeftStickY" size="medium" />
+        </div>
+        <div>
+            <label>Camera Reset</label>
+            <InputGlyph action="camera_reset" size="medium" />
+        </div>
+    }
+    else
+    {
+        <div>
+            <label>Camera Zoom/Reset</label>
+            <InputGlyph action="camera_reset" size="medium" />
+        </div>
+    }
     <div>
-        <label>Camera Reset</label>
-        <InputGlyph action="camera_reset" size="medium" />
-    </div>
-    <div>
-        <label>Inventory</label>
+        <label>Toggle Inventory</label>
         <InputGlyph action="toggle_inventory" size="medium" />
     </div>
 </root>

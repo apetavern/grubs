@@ -10,6 +10,7 @@
 
 @code {
     private string _inputAction;
+    private InputAnalog _inputAnalog;
     private InputGlyphSize _inputGlyphSize;
     private bool _outline;
 
@@ -24,24 +25,21 @@
             return;
 
         _inputAction = inputAction;
-
-        // Silly hack so we can get joystick glyphs that also appear as pressed when we move them instead of pressing them in.
-        if (_inputAction == "analogmove")
-        {
-            BindClass("pressed", () => !Input.AnalogMove.IsNearlyZero());
-            _inputAction = "camera_reset";
-        }
-        else if (_inputAction == "analoglook")
-        {
-            BindClass("pressed", () => !Input.AnalogLook.IsNearlyZero());
-            _inputAction = "toggle_equipment";
-        }
-        else
-        {
-            BindClass("pressed", () => Input.Down(_inputAction));
-        }
-
+        BindClass("pressed", () => Input.Down(_inputAction));
         Update();
+    }
+
+    public void SetAnalog(string inputAnalog)
+    {
+        if (!Enum.TryParse<InputAnalog>(inputAnalog, true, out var analog))
+            return;
+
+        if (analog == InputAnalog.LeftStickX || analog == InputAnalog.LeftStickY)
+            BindClass("pressed", () => !Input.AnalogMove.IsNearlyZero());
+        else if (analog == InputAnalog.RightStickX || analog == InputAnalog.RightStickY)
+            BindClass("pressed", () => !Input.AnalogLook.IsNearlyZero());
+
+        _inputAnalog = analog;
     }
 
     public override void SetProperty(string name, string value)
@@ -51,6 +49,14 @@
             case "action":
                 {
                     SetAction(value);
+                    Update();
+
+                    break;
+                }
+
+            case "analog":
+                {
+                    SetAnalog(value);
                     Update();
 
                     break;
@@ -83,7 +89,7 @@
 
     private void Update()
     {
-        var texture = Input.GetGlyph(_inputAction, _inputGlyphSize, _outline);
+        var texture = _inputAction is null ? Input.GetGlyph(_inputAnalog, _inputGlyphSize, _outline) : Input.GetGlyph(_inputAction, _inputGlyphSize, _outline);
         Style.BackgroundImage = texture;
     }
 

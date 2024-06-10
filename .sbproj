@@ -637,8 +637,14 @@
           "GroupName": "Other"
         },
         {
-          "Name": "mouse_aim",
+          "Name": "precision_aim",
           "KeyboardCode": "ALT",
+          "GamepadCode": "None",
+          "GroupName": "Weapon"
+        },
+        {
+          "Name": "mouse_look",
+          "KeyboardCode": "look",
           "GamepadCode": "None",
           "GroupName": "Weapon"
         }

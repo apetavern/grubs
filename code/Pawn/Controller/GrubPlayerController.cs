@@ -14,10 +14,10 @@ public sealed partial class GrubPlayerController : Component
 	[Property] public required Grub Grub { get; set; }
 	[Property] public required GrubCharacterController CharacterController { get; set; }
 
-	[Property] public Vector3 Gravity { get; set; } = new(0, 0, 800);
+	[Property] public Vector3 Gravity { get; set; } = new( 0, 0, 800 );
 	[Property] public float WishSpeed { get; set; } = 80f;
 
-	public float MouseLookInput => Input.Down( "mouse_aim" ) ? Mouse.Delta.y * -0.25f : 0f;
+	public float MouseLookInput => Input.Down( "precision_aim" ) ? Mouse.Delta.y * -0.25f : 0f;
 	public float MoveInput => ShouldAcceptInput() ? Input.AnalogMove.y : 0f;
 
 	public float LookInput => ShouldAcceptInput()
