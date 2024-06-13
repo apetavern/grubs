@@ -35,10 +35,7 @@ public sealed class RopeBehavior : Component
 
 	protected override void OnDestroy()
 	{
-		if ( AttachPoint != null )
-		{
-			AttachPoint.Destroy();
-		}
+		AttachPoint?.Destroy();
 		base.OnDestroy();
 	}
 
