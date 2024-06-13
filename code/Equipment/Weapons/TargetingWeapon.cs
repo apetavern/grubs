@@ -7,6 +7,7 @@ namespace Grubs.Equipment.Weapons;
 public sealed class TargetingWeapon : Weapon
 {
 	[Property] public ModelRenderer CursorModel { get; set; }
+	[Property] public bool CanTargetTerrain { get; set; } = false;
 	public Vector3 ProjectileTarget { get; set; }
 	public Vector3 Direction { get; set; } = Vector3.Zero;
 	[Property] public FiringType SecondaryFiringType { get; set; }
@@ -27,7 +28,7 @@ public sealed class TargetingWeapon : Weapon
 		if ( IsProxy )
 			return;
 
-		Cursor.Enabled( "clicktool", Equipment.Deployed && ProjectileTarget == Vector3.Zero );
+		Cursor.Enabled( "clicktool", Equipment.Deployed && ProjectileTarget == Vector3.Zero && CursorModel is null );
 		CursorModel.GameObject.Enabled = Equipment.Deployed;
 	}
 
@@ -59,8 +60,9 @@ public sealed class TargetingWeapon : Weapon
 		var player = Equipment.Grub.Player;
 		if ( ProjectileTarget == Vector3.Zero )
 		{
-			CursorModel.Transform.Position = player.MousePosition;
+			CursorModel.Transform.Position = player.MousePosition.WithY( 480 );
 		}
+
 		var isValidPlacement = CheckValidPlacement();
 		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
 
@@ -142,7 +144,7 @@ public sealed class TargetingWeapon : Weapon
 		if ( Equipment.Grub is not { } grub )
 			return false;
 
-		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, grub.Player.MousePosition, grub.Player.MousePosition )
+		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, CursorModel.Transform.Position, CursorModel.Transform.Position )
 			.IgnoreGameObject( GameObject )
 			.Run();
 
@@ -156,6 +158,9 @@ public sealed class TargetingWeapon : Weapon
 		var maxHeight = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture ? terrain.WorldTextureHeight : GrubsConfig.TerrainHeight;
 		var exceedsTerrainHeight = trLocation.EndPosition.z >= maxHeight - 64f;
 
-		return !trLocation.Hit && !trTerrain.Hit && !exceedsTerrainHeight;
+		if ( !CanTargetTerrain && trTerrain.Hit )
+			return false;
+
+		return (CanTargetTerrain && trLocation.Hit && trLocation.GameObject.Tags.Contains( "terrain" )) || (!trLocation.Hit && !exceedsTerrainHeight);
 	}
 }

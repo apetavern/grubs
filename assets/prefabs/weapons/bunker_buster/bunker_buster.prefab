@@ -40,6 +40,7 @@
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
+        "CanTargetTerrain": true,
         "Cooldown": 2,
         "CursorModel": {
           "_type": "component",
@@ -248,6 +249,7 @@
         "__guid": "ad23b51a-686c-47ee-8d57-4f8b0653cb21",
         "Flags": 0,
         "Name": "Bunker - Cursor",
+        "Position": "0,-100,0",
         "Scale": "0.5,0.5,0.5",
         "Tags": "cleanup",
         "Enabled": true,
@@ -264,7 +266,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
