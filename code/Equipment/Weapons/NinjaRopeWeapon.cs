@@ -40,7 +40,7 @@ public class NinjaRopeWeapon : Weapon
 		base.OnUpdate();
 
 		// Use a shot if we missed and it's been a few seconds.
-		if ( IsFiring && Equipment.Grub.ActiveMountable is null && TimeSinceLastUsed > 5f )
+		if ( IsFiring && Equipment.Grub?.ActiveMountable is null && TimeSinceLastUsed > 5f )
 			FireFinished();
 	}
 
