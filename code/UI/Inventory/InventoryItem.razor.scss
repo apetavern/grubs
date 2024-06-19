@@ -1,6 +1,7 @@
 ﻿@import '../common.scss';
 
 InventoryItem {
+    position: relative;
     background-color: $hud-fg;
     border-radius: 16px;
     margin: 5px;
@@ -41,7 +42,7 @@ InventoryItem {
         opacity: 2;
         transition: opacity 0.25s ease-out;
         pointer-events: none;
-        padding: 3px 4px;
+        padding: 4px 6px;
 
         &.hidden {
             opacity: 0;
@@ -52,7 +53,7 @@ InventoryItem {
         position: absolute;
         width: 100%;
         bottom: 0;
-        background-color: rgba(10, 10, 10, .4);
+        background-color: rgba(10, 10, 10, .75);
         border-radius: 0px 0px 16px 16px;
         transition: height 0.25s ease-out;
         pointer-events: none;
