@@ -68,7 +68,9 @@ public class Equipment : Component
 		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
 		Model.Enabled = true;
 		Deployed = true;
-		GrubFollowCamera.Local.AllowZooming = CameraCanZoom;
+
+		if ( !IsProxy )
+			GrubFollowCamera.Local.AllowZooming = CameraCanZoom;
 	}
 
 	public void Holster()
