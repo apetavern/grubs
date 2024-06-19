@@ -39,6 +39,10 @@ public sealed class Player : Component
 	{
 		SteamId = Network.OwnerConnection.SteamId;
 		SteamName = Network.OwnerConnection.DisplayName;
+
+		if ( IsProxy )
+			return;
+
 		SelectedColor = GrubsConfig.PresetTeamColors.Values
 			.OrderBy( _ => Guid.NewGuid() )
 			.FirstOrDefault( color => !All.Any( p => p.SelectedColor == color ) );
@@ -49,9 +53,6 @@ public sealed class Player : Component
 			Log.Warning( "We couldn't find an available team color. Please report this to an Ape!" );
 			Log.Warning( "(Failover) Your team color has been set to white." );
 		}
-
-		if ( IsProxy )
-			return;
 
 		_ = Fetch();
 	}
