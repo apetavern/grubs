@@ -112,6 +112,9 @@ public sealed class RopeBehavior : Component
 
 	public void DrawRope()
 	{
+		if ( RopeRenderer is null )
+			return;
+
 		switch ( CornerObjects.Count )
 		{
 			case > 1:
