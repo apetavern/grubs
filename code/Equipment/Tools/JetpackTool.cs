@@ -57,6 +57,9 @@ public sealed class JetpackTool : Tool
 
 	public void AnimateFlames()
 	{
+		if ( !Equipment.Model.Active )
+			return;
+
 		var characterController = Equipment.Grub.CharacterController;
 
 		FBFlame.Enabled = true;
@@ -90,7 +93,8 @@ public sealed class JetpackTool : Tool
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
-		if ( Equipment.Deployed ) AnimateFlames();
+		if ( Equipment.Deployed && IsFiring )
+			AnimateFlames();
 	}
 
 	protected override void HandleComplexFiringInput()
