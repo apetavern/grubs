@@ -96,7 +96,7 @@ public sealed class TargetingWeapon : Weapon
 
 		if ( isValidPlacement && Input.Pressed( "fire" ) )
 		{
-			ProjectileTarget = CursorModel.Transform.Position;
+			ProjectileTarget = CursorModel.Transform.Position.WithY( 512f );
 		}
 
 		if ( Input.Released( "fire" ) && ProjectileTarget != Vector3.Zero )
