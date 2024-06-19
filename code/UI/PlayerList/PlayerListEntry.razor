@@ -11,15 +11,13 @@
 <root class="@(!Player.IsActive ? "inactive" : "")">
     <img src="avatar:@Player.SteamId" class="avatar" />
     <div style="flex-direction: column; margin-left: 5px;">
-        <div 
-            class="name"
-            style="font-color: linear-gradient(@Player.SelectedColor, adjust-hue(@Player.SelectedColor, 45));">
+        <div class="name"
+             style="font-color: linear-gradient(@_selectedColor, adjust-hue(@_selectedColor, 45));">
             @Player.SteamName
         </div>
-        <div class="health" style="background-color: darken(@Player.SelectedColor, 60%);">
-            <div 
-                class="fill"
-                style="background: linear-gradient(to right, @Player.SelectedColor, darken(@Player.SelectedColor, 20%)); width: @(Player.GetHealthPercentage)%;" />
+        <div class="health" style="background-color: darken(@_selectedColor, 60%);">
+            <div class="fill"
+                 style="background: linear-gradient(to right, @_selectedColor, darken(@_selectedColor, 20%)); width: @(Player.GetHealthPercentage)%;" />
         </div>
     </div>
 </root>
@@ -27,8 +25,10 @@
 @code {
     public Player Player { get; set; }
 
+    private string _selectedColor => Player.SelectedColor != String.Empty ? Player.SelectedColor : Color.White.Hex;
+
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player.GetHealthPercentage, Player.IsActive);
+        return HashCode.Combine(Player.GetHealthPercentage, Player.IsActive, _selectedColor);
     }
 }
