@@ -8,36 +8,35 @@
 @inherits PanelComponent
 
 <root>
-    <div
-        class="title"
-        style="color: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));">
+    <div class="title"
+         style="color: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));">
         @Grub.Name
     </div>
     <div class="health-container" style="background-color: darken(@Color.Hex, 60%)">
-        <div class="health-bar" style="width: @(Grub.Health.CurrentHealth / 150f * 100f)%; 
+        <div class="health-bar" style="width: @(Grub.Health.CurrentHealth / 150f * 100f)%;
         background-image: linear-gradient(@Color.Hex, darken(@Color.Hex, 20%))">
             <div class="health-bar-overflow" style="width: @((Grub.Health.CurrentHealth - 150f) / 150f * 100f)%;
-            background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))"/>
+            background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))" />
         </div>
     </div>
     @*<div class="avi">
-        <image
-            src="avatar:@(Grub.Network.OwnerConnection?.SteamId ?? Steam.SteamId)"
-            style="background-color: @Color.Hex; border-color: @Color.Hex"/>
+    <image
+    src="avatar:@(Grub.Network.OwnerConnection?.SteamId ?? Steam.SteamId)"
+    style="background-color: @Color.Hex; border-color: @Color.Hex"/>
     </div>
     <div class="top">
-        <div class="hp" style="background-color: @Color.Hex">
-            <label>
-                @_health.CeilToInt()
-            </label>
-            <i>favorite</i>
-        </div>
+    <div class="hp" style="background-color: @Color.Hex">
+    <label>
+    @_health.CeilToInt()
+    </label>
+    <i>favorite</i>
+    </div>
     </div>
     <div
-        class="title"
-        style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));
-               border-bottom-color: darken(adjust-hue(@Color.Hex, 45), 50%)">
-        @Grub.Name
+    class="title"
+    style="background-image: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));
+    border-bottom-color: darken(adjust-hue(@Color.Hex, 45), 50%)">
+    @Grub.Name
     </div>*@
 </root>
 
@@ -52,12 +51,12 @@
 
         Transform.Position = Grub.Transform.Position + Vector3.Up * 44f;
 
-        if (Color.TryParse(Grub.Player?.SelectedColor, out var color))
+        if (Grub.Player.IsValid() && Color.TryParse(Grub.Player?.SelectedColor, out var color))
             Color = color;
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, Color.Hex);
+        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, Color);
     }
 }
