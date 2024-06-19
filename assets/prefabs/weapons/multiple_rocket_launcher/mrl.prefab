@@ -32,7 +32,8 @@
         },
         "Name": "Multiple Rocket Launcher",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 3
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
@@ -125,7 +126,8 @@
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

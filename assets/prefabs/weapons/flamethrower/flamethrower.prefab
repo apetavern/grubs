@@ -14,7 +14,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/flamethrower/flamethrower.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
@@ -31,7 +32,8 @@
         },
         "Name": "Flamethrower",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 2
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
@@ -55,6 +57,7 @@
         "FireParticleCount": 1,
         "InitialUpVelocity": 75,
         "LeftRightVelocityRandom": 10,
+        "SphericalEmission": false,
         "Weapon": {
           "_type": "component",
           "component_id": "b06511ed-a400-4588-b5ff-d358aba7eb71",
@@ -63,7 +66,8 @@
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

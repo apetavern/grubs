@@ -32,7 +32,8 @@
         },
         "Name": "Petrol Bomb",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 1
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
@@ -175,7 +176,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

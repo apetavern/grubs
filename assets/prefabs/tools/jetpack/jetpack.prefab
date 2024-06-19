@@ -32,7 +32,8 @@
         },
         "Name": "Jetpack",
         "ShouldShowAimReticle": false,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 1
       },
       {
         "__type": "Grubs.Equipment.Tools.JetpackTool",
@@ -132,7 +133,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

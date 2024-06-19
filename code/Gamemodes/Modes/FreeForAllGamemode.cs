@@ -127,6 +127,9 @@ public sealed class FreeForAllGamemode : Gamemode
 		await GameTask.Delay( 1000 );
 		await ApplyDamageQueue();
 
+		if ( !PlayerTurnQueue.Any() )
+			await OnRoundPassed();
+
 		if ( IsGameResolved() && GrubsConfig.KeepGameAlive != true )
 		{
 			// GameEnd.Instance.ShouldShow = true;

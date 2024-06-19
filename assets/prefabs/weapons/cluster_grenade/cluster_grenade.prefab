@@ -32,7 +32,8 @@
         },
         "Name": "Cluster Grenade",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 2
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
@@ -132,7 +133,8 @@
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

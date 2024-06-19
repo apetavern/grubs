@@ -12,6 +12,7 @@ public class Equipment : Component
 	[Property, ResourceType( "jpg" )] public string Icon { get; set; } = "";
 	[Property] public bool CameraCanZoom { get; set; } = true;
 	[Property] public bool ShouldShowAimReticle { get; set; } = false;
+	[Property] public int UnlockDelay { get; set; } = 0;
 
 	/// <summary>
 	/// Data from the GameResource for this Equipment.
@@ -25,6 +26,9 @@ public class Equipment : Component
 	public bool Deployed { get; set; }
 
 	public Grub Grub { get; set; }
+
+	public bool Unlocked => Gamemodes.Gamemode.Current.RoundsPassed >= UnlockDelay || Ammo == -1;
+	public bool IsAvailable => Ammo != 0 && Unlocked;
 
 	protected override void OnStart()
 	{
@@ -53,7 +57,7 @@ public class Equipment : Component
 	{
 		Grub = grub;
 
-		if ( Ammo == 0 )
+		if ( !IsAvailable )
 			return;
 
 		if ( Components.TryGet( out Weapon weapon ) )

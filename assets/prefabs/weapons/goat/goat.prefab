@@ -32,7 +32,8 @@
         },
         "Name": "Goat",
         "ShouldShowAimReticle": false,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 2
       },
       {
         "__type": "Grubs.Equipment.Weapons.RemoteDetonateWeapon",
@@ -178,7 +179,8 @@
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

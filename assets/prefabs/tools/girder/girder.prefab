@@ -33,7 +33,8 @@
         },
         "Name": "Girder",
         "ShouldShowAimReticle": false,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 1
       },
       {
         "__type": "Grubs.Equipment.Tools.GirderTool",
@@ -106,7 +107,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

@@ -14,7 +14,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/railgun/railgun.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
@@ -31,7 +32,8 @@
         },
         "Name": "Gibgun",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 4
       },
       {
         "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
@@ -62,7 +64,8 @@
         "TraceSpread": 1
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

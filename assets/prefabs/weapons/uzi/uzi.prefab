@@ -14,7 +14,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/uzi/uzi.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
@@ -31,7 +32,8 @@
         },
         "Name": "Uzi",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 2
       },
       {
         "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
@@ -63,7 +65,8 @@
         "TraceSpread": 400
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

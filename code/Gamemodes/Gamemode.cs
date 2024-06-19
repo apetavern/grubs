@@ -15,6 +15,7 @@ public abstract class Gamemode : Component
 	[Sync] public bool Started { get; set; }
 	[Sync] public Guid CameraTarget { get; set; } = Guid.Empty;
 	[Sync] public bool TurnIsChanging { get; set; } = false;
+	[Sync] public int RoundsPassed { get; set; } = 0;
 
 	public Queue<Grub> DamageQueue { get; set; } = new();
 	protected Queue<Player> PlayerTurnQueue { get; set; } = new();
@@ -36,6 +37,13 @@ public abstract class Gamemode : Component
 	internal virtual void Initialize() { }
 
 	internal virtual void Start() { }
+
+	internal virtual Task OnRoundPassed()
+	{
+		RoundsPassed++;
+
+		return Task.CompletedTask;
+	}
 
 	protected async Task ApplyDamageQueue()
 	{

@@ -32,7 +32,8 @@
         },
         "Name": "Airstrike",
         "ShouldShowAimReticle": false,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 3
       },
       {
         "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
@@ -40,6 +41,7 @@
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
+        "CanTargetTerrain": false,
         "Cooldown": 2,
         "CursorModel": {
           "_type": "component",
@@ -279,7 +281,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
