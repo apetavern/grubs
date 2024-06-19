@@ -21,11 +21,12 @@
         "__type": "Grubs.UI.CratePickup",
         "__guid": "e5eb0326-76e7-474d-beb6-937a832b3711",
         "DestroyDelay": 3,
-        "Offset": "0,0,64",
+        "Offset": "0,-50,64",
         "RiseSpeed": 7.5
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

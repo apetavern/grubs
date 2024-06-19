@@ -21,11 +21,12 @@
         "__type": "Grubs.UI.DamageNumber",
         "__guid": "bc1c95b6-f51d-48e2-8ff5-f1a584dff8dd",
         "DestroyDelay": 3,
-        "Offset": "0,0,64",
+        "Offset": "0,-50,64",
         "RiseSpeed": 7.5
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
