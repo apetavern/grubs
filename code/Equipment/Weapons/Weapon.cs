@@ -163,7 +163,7 @@ public partial class Weapon : Component
 	public virtual void OnHolster()
 	{
 		IsFiring = false;
-		WeaponInfoPanel?.GameObject.Destroy();
+		WeaponInfoPanel?.GameObject?.Destroy();
 	}
 
 	protected virtual void FireFinished()

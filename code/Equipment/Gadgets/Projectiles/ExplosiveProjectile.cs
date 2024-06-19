@@ -65,7 +65,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	{
 		await GameTask.DelaySeconds( seconds );
 
-		if ( !GameObject.IsValid )
+		if ( !GameObject.IsValid() )
 			return;
 
 		Explode();
