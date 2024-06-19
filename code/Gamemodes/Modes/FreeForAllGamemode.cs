@@ -60,7 +60,7 @@ public sealed class FreeForAllGamemode : Gamemode
 
 			var inv = player.Components.Get<PlayerInventory>();
 			inv.Player = player;
-			inv.InitializeWeapons();
+			inv.InitializeWeapons( GrubsConfig.InfiniteAmmo );
 
 			PlayerTurnQueue.Enqueue( player );
 		}

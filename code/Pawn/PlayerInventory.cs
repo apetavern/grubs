@@ -36,7 +36,7 @@ public sealed class PlayerInventory : Component
 	}
 
 	[Broadcast( NetPermission.HostOnly )]
-	public void InitializeWeapons()
+	public void InitializeWeapons( bool infiniteAmmo )
 	{
 		if ( IsProxy )
 			return;
@@ -53,6 +53,9 @@ public sealed class PlayerInventory : Component
 			Equipment.Add( equipment );
 
 			var slotIndex = Equipment.Count - 1;
+
+			if ( infiniteAmmo )
+				equipment.Ammo = -1;
 
 			equipment.SlotIndex = slotIndex;
 			equipment.Deploy( Player.ActiveGrub );

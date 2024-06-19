@@ -78,6 +78,12 @@ public static class GrubsConfig
 	public static SuddenDeathAggressionAmount SuddenDeathAggression { get; set; } = SuddenDeathAggressionAmount.Medium;
 
 	/// <summary>
+	/// Should all weapons have infinite ammo and be immediately unlocked?
+	/// </summary>
+	[ConVar( "gr_infiniteammo" )]
+	public static bool InfiniteAmmo { get; set; } = false;
+
+	/// <summary>
 	/// Whether or not wind is enabled.
 	/// </summary>
 	[ConVar( "wind_enabled" )]

@@ -34,7 +34,9 @@ public class Equipment : Component
 	{
 		base.OnStart();
 
-		Ammo = Data.DefaultAmmo;
+		// If we've set ammo before OnStart (e.g. Infinite Ammo), don't overwrite it.
+		if ( Ammo != -1 )
+			Ammo = Data.DefaultAmmo;
 
 		Holster();
 	}
