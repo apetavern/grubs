@@ -12,7 +12,7 @@
 <root>
     <Chatbox />
     <div class="players">
-        @foreach (var player in _players.OrderByDescending(p => p.GetTotalGrubHealth > 0))
+        @foreach (var player in _players.Where(p => p.Grubs.Count > 0).OrderByDescending(p => p.GetTotalGrubHealth > 0))
         {
             <PlayerListEntry Player=@player />
         }
