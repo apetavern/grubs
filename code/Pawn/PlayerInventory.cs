@@ -177,6 +177,9 @@ public sealed class PlayerInventory : Component
 
 	private Equipment.Equipment GetActiveEquipment( int slot )
 	{
+		if ( !Player.ActiveGrub.IsValid() )
+			return null;
+
 		return Player.ActiveGrub.GameObject.Components
 			.GetAll<Equipment.Equipment>( FindMode.EverythingInSelfAndDescendants )
 			.FirstOrDefault( x => x.SlotIndex == slot );
