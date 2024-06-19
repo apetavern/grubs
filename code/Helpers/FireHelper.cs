@@ -73,13 +73,16 @@ public sealed class FireHelper : Component
 
 	public void ParticleTick( int particle )
 	{
-		FireParticleLifetimes[particle] += Time.Delta;
-		FireParticlePositions[particle] += FireParticleVelocities[particle] * Time.Delta * 5f;
+		if ( !IsProxy )
+		{
+			FireParticleLifetimes[particle] += Time.Delta;
+			FireParticlePositions[particle] += FireParticleVelocities[particle] * Time.Delta * 5f;
 
-		if ( FireParticleVelocities[particle].Length > Instance.MinParticleSpeed )
-			FireParticleVelocities[particle] *= 0.95f;
+			if ( FireParticleVelocities[particle].Length > Instance.MinParticleSpeed )
+				FireParticleVelocities[particle] *= 0.95f;
 
-		FireParticleVelocities[particle] += Vector3.Down;
+			FireParticleVelocities[particle] += Vector3.Down;
+		}
 
 		var tr = Scene.Trace.Ray( FireParticlePositions[particle],
 			FireParticlePositions[particle] + FireParticleVelocities[particle].Normal * 5f ).Run();
@@ -87,10 +90,14 @@ public sealed class FireHelper : Component
 		if ( !tr.Hit )
 			return;
 
-		FireParticleLifetimes[particle] += Time.Delta;
-		FireParticleVelocities[particle] = Vector3.Reflect( FireParticleVelocities[particle], tr.Normal );
-		FireParticleVelocities[particle] *= 0.1f;
-		FireParticleVelocities[particle] += new Vector3( Game.Random.Float( -10f, 10f ), 0, 0 );
+		if ( !IsProxy )
+		{
+
+			FireParticleLifetimes[particle] += Time.Delta;
+			FireParticleVelocities[particle] = Vector3.Reflect( FireParticleVelocities[particle], tr.Normal );
+			FireParticleVelocities[particle] *= 0.1f;
+			FireParticleVelocities[particle] += new Vector3( Game.Random.Float( -10f, 10f ), 0, 0 );
+		}
 
 		if ( !(Time.Now - LastDestructionTime[particle] > 0.25f) )
 			return;
@@ -107,6 +114,9 @@ public sealed class FireHelper : Component
 			health.TakeDamage(
 				GrubsDamageInfo.FromFire( 0.75f, grub, worldPosition: FireParticlePositions[particle] ) );
 		}
+
+		if ( IsProxy )
+			return;
 
 		const float torchSize = 6f;
 		var startPos = FireParticlePositions[particle];
