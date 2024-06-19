@@ -9,11 +9,16 @@
 @attribute [StyleSheet]
 
 
-<root class=@(Ammo == "0" ? "disabled" : PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex && Input.UsingController ? "selected" : "")>
+<root class=@(IsDisabled() ? "disabled" : PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex && Input.UsingController ? "selected" : "")>
     @if (Equipment is not null)
     {
-        <img src="@Equipment.Icon"/>
+        <img src="@Equipment.Icon" />
         <div class="ammo">@Ammo</div>
+        <div class="delay-progress" style="height: @(GetDelayHeight())%"></div>
+        <section class="delay @(Equipment.Unlocked ? "hidden" : "")">
+            <i>lock</i>
+            <label>@(Equipment.UnlockDelay - Gamemodes.Gamemode.Current.RoundsPassed)</label>
+        </section>
     }
 </root>
 
@@ -24,13 +29,24 @@
 
     protected override void OnClick(MousePanelEvent e)
     {
-        if (Equipment is { Ammo: 0 })
+        if (!Equipment?.IsAvailable ?? true)
             return;
+
         PlayerInventory.Local.EquipItem(Equipment);
+    }
+
+    private bool IsDisabled()
+    {
+        return Equipment is null || !Equipment.IsAvailable;
+    }
+
+    private float GetDelayHeight()
+    {
+        return Equipment.Unlocked ? 0 : (1 - ((float)Gamemodes.Gamemode.Current.RoundsPassed + 1) / (Equipment.UnlockDelay + 1)) * 100;
     }
 
     protected override int BuildHash()
     {
-		return HashCode.Combine(Equipment?.Ammo, PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex);
+        return HashCode.Combine(Equipment?.Ammo, PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex, Gamemodes.Gamemode.Current.RoundsPassed);
     }
 }

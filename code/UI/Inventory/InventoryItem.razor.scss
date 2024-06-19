@@ -30,6 +30,34 @@ InventoryItem {
         padding: 2px 8px;
     }
 
+    .delay {
+        position: absolute;
+        bottom: 0;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 20px;
+        opacity: 2;
+        transition: opacity 0.25s ease-out;
+        pointer-events: none;
+        padding: 3px 4px;
+
+        &.hidden {
+            opacity: 0;
+        }
+    }
+
+    .delay-progress {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        background-color: rgba(10, 10, 10, .4);
+        border-radius: 0px 0px 16px 16px;
+        transition: height 0.25s ease-out;
+        pointer-events: none;
+    }
+
     &.disabled {
         opacity: 0.6;
     }
