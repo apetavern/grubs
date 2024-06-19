@@ -8,6 +8,11 @@
     "sounds/world/water_splash1.vsnd",
     "sounds/world/water_splash2.vsnd"
   ],
-  "MaximumDistance": 2533.85,
-  "MinimumDistance": 126.692505
+  "Occlusion": true,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__references": [],
+  "__version": 0
 }

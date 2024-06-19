@@ -17,7 +17,7 @@
           "Scale": "200,200,200",
           "Tags": "nopathing",
           "Enabled": true,
-          "NetworkMode": 2,
+          "NetworkMode": 1,
           "NetworkInterpolation": true,
           "Components": [
             {
@@ -39,7 +39,9 @@
             },
             {
               "__type": "Grubs.Common.KillZone",
-              "__guid": "72d5d8e2-71b7-4213-8602-3fb4951760ae"
+              "__guid": "72d5d8e2-71b7-4213-8602-3fb4951760ae",
+              "KillParticles": "particles/watersplash/watersplash_base.vpcf",
+              "KillSound": "sounds/world/water_splash.sound"
             },
             {
               "__type": "Sandbox.BoxCollider",
@@ -398,7 +400,7 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-06-04T15:19:11.3074305\u002B02:00",
+  "LastSaved": "2024-06-19T17:38:33.4554214-05:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

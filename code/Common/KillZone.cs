@@ -1,10 +1,14 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Helpers;
+using Grubs.Pawn;
 
 namespace Grubs.Common;
 
 [Title( "Grubs - Kill Zone" ), Category( "Grubs" )]
 public class KillZone : Component, Component.ITriggerListener
 {
+	[Property] public ParticleSystem KillParticles { get; set; }
+	[Property] public SoundEvent KillSound { get; set; }
+
 	public void OnTriggerEnter( Collider other )
 	{
 		// kidd: Workaround for ArcProjectile being destroyed immediately for non-owner clients,
@@ -13,10 +17,19 @@ public class KillZone : Component, Component.ITriggerListener
 		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
 			return;
 
-		if ( other.GameObject.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
-			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( 9999 ), true );
+		if ( other.Transform.Position == 0f )
+			return;
 
-		DestroyObjectWithTags( other.GameObject, "projectile", "drop" );
+		CollisionEffects( other.Transform.World );
+
+		if ( other.GameObject.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
+		{
+			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( 9999 ), true );
+		}
+		else
+		{
+			DestroyObjectWithTags( other.GameObject, "projectile", "drop" );
+		}
 	}
 
 	private void DestroyObjectWithTags( GameObject go, params string[] args )
@@ -27,11 +40,24 @@ public class KillZone : Component, Component.ITriggerListener
 				continue;
 
 			if ( go.Tags.Has( tag ) && go.Transform.Position != 0f )
+			{
+				CollisionEffects( go.Transform.World );
 				go.Destroy();
+			}
 		}
 	}
 
 	public void OnTriggerExit( Collider other )
 	{
+	}
+
+	[Broadcast]
+	public void CollisionEffects( Transform transform )
+	{
+		if ( KillSound is not null )
+			Sound.Play( KillSound, transform.Position );
+
+		if ( KillParticles is not null )
+			ParticleHelper.Instance.PlayInstantaneous( KillParticles, transform );
 	}
 }
