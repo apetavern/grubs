@@ -44,10 +44,6 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 		if ( _timeSinceCreated < CollisionDelay )
 			return;
 
-		var projectile = Components.Get<Projectile>();
-		if ( projectile.Grub is not null && projectile.Grub.GameObject == other.Other.GameObject.Root )
-			return;
-
 		Explode();
 	}
 
