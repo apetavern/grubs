@@ -21,7 +21,13 @@
           "go": "b46c5e37-7963-4550-aeb3-671d4b5d9aa4",
           "component_type": "PlayerInventory"
         },
-        "MousePosition": "0,0,0"
+        "MousePosition": "0,0,0",
+        "Voice": {
+          "_type": "component",
+          "component_id": "de1952ee-5fdd-4fd7-9fb7-3f0bd52e4626",
+          "go": "b46c5e37-7963-4550-aeb3-671d4b5d9aa4",
+          "component_type": "PlayerVoice"
+        }
       },
       {
         "__type": "Grubs.Pawn.PlayerInventory",
@@ -158,6 +164,17 @@
           "go": "b46c5e37-7963-4550-aeb3-671d4b5d9aa4",
           "component_type": "PlayerInventory"
         }
+      },
+      {
+        "__type": "Grubs.Pawn.PlayerVoice",
+        "__guid": "de1952ee-5fdd-4fd7-9fb7-3f0bd52e4626",
+        "Loopback": false,
+        "Mode": "PushToTalk",
+        "MorphScale": 3,
+        "MorphSmoothTime": 0.1,
+        "PushToTalkInput": "voice",
+        "Volume": 1,
+        "WorldspacePlayback": false
       }
     ],
     "Children": [
@@ -189,7 +206,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

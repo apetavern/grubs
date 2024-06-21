@@ -20,15 +20,34 @@
                  style="background: linear-gradient(to right, @_selectedColor, darken(@_selectedColor, 20%)); width: @(Player.GetHealthPercentage)%;" />
         </div>
     </div>
+    <i class="icon" style="color: green; opacity: @(IsTalking() ? 1 : 0); transform: scale(@AmplitudeToScale())">record_voice_over</i>
+    <i class="icon" style="color: red; opacity: @(IsMuted() ? 1 : 0)">voice_over_off</i>
 </root>
 
 @code {
     public Player Player { get; set; }
 
+    private PlayerVoice _voice => Player.Voice;
     private string _selectedColor => Player.SelectedColor != String.Empty ? Player.SelectedColor : Color.White.Hex;
+
+    private bool IsMuted() => _voice.Volume == 0;
+    private bool IsTalking() => !IsMuted() && _voice.LastPlayed < 0.25f;
+
+    protected override void OnClick(MousePanelEvent e)
+    {
+        base.OnClick(e);
+
+        if (!Player.IsProxy)
+            return;
+
+        var localVoice = Scene.GetAllComponents<PlayerVoice>().FirstOrDefault(p => !p.IsProxy);
+        localVoice.ToggleBlock(Player);
+    }
+
+    private string AmplitudeToScale() => (1f + (_voice.Amplitude * 1.5f)).ToString("0.#");
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player.GetHealthPercentage, Player.IsActive, _selectedColor);
+        return HashCode.Combine(Player.GetHealthPercentage, Player.IsActive, _selectedColor, _voice.Amplitude, IsTalking());
     }
 }

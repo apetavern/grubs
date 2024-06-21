@@ -31,6 +31,8 @@ public sealed class Player : Component
 
 	[Property] public required PlayerInventory Inventory { get; set; }
 
+	[Property] public required PlayerVoice Voice { get; set; }
+
 	[Property, ReadOnly] public Vector3 MousePosition { get; set; }
 
 	private static readonly Plane _plane = new( new Vector3( 0f, 512f, 0f ), Vector3.Left );
