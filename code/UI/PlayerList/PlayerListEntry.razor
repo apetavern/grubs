@@ -1,6 +1,7 @@
 @namespace Grubs.UI
 
 @using Grubs.Pawn;
+@using Grubs.UI.Components;
 @using Sandbox;
 @using Sandbox.UI;
 
@@ -36,6 +37,9 @@
     protected override void OnClick(MousePanelEvent e)
     {
         base.OnClick(e);
+
+        if (!Cursor.IsEnabled())
+            return;
 
         if (!Player.IsProxy)
             return;
