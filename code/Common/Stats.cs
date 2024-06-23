@@ -38,7 +38,7 @@ public static class Stats
 	public static void IncrementGrubsKilled( Guid victimPlayerGuid )
 	{
 		var victim = Game.ActiveScene.Directory.FindComponentByGuid( victimPlayerGuid ) as Player;
-		string statIdent = victim.IsProxy ? GrubsKilled : OwnGrubsKilled;
+		string statIdent = (victim?.IsProxy ?? true) ? GrubsKilled : OwnGrubsKilled;
 
 		Sandbox.Services.Stats.Increment( statIdent, 1 );
 		Sandbox.Services.Stats.Flush();

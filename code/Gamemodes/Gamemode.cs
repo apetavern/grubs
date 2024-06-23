@@ -37,8 +37,9 @@ public abstract class Gamemode : Component
 
 	internal virtual void Initialize() { }
 
-	internal virtual void Start() 
+	internal virtual void Start()
 	{
+		RoundsPassed = 0;
 		Stats.IncrementGamesPlayed( GamemodeShortName );
 	}
 

@@ -134,7 +134,8 @@ public partial class Health : Component
 			if ( _deathReason.FromKillTrigger ) // If we've died to a kill trigger, check if we have additional damage to credit, otherwise we've attacked ourselves.
 				attackerGuid = _deathReason.FirstReason != DamageType.None ? _deathReason.FirstInfo.AttackerGuid : grub.Id;
 
-			var connection = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Grubs.Contains( attackerGuid ) ).Network.OwnerConnection;
+			var attacker = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Grubs.Contains( attackerGuid ) );
+			var connection = attacker?.Network.OwnerConnection;
 			using ( Rpc.FilterInclude( connection ) )
 			{
 				Stats.IncrementGrubsKilled( grub.Player.Id );
