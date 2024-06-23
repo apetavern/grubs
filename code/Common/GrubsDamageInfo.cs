@@ -1,20 +1,20 @@
-﻿using Grubs.Pawn;
+﻿namespace Grubs.Common;
 
-namespace Grubs.Common;
-
-public sealed class GrubsDamageInfo
+public readonly struct GrubsDamageInfo
 {
-	public Vector3 WorldPosition { get; set; }
-	public Grub Attacker { get; set; }
-	public float Damage { get; set; }
-	public TagSet Tags { get; set; }
+	public readonly Vector3 WorldPosition;
+	public readonly Guid AttackerGuid;
+	public readonly string AttackerName;
+	public readonly float Damage;
+	public readonly TagSet Tags = new();
 
-	public GrubsDamageInfo( float damage, Grub attacker = null, Vector3 worldPosition = new Vector3() )
+	public GrubsDamageInfo( float damage, Guid attackerGuid, string attackerName = "", Vector3 worldPosition = new() )
 	{
 		Damage = damage;
-		Attacker = attacker;
+		AttackerGuid = attackerGuid;
+		AttackerName = attackerName;
 		WorldPosition = worldPosition;
-		Tags = new TagSet();
+		Tags = new();
 	}
 
 	public GrubsDamageInfo WithTag( string tag )
@@ -34,33 +34,33 @@ public sealed class GrubsDamageInfo
 		return info;
 	}
 
-	public static GrubsDamageInfo FromHitscan( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromHitscan( float damage, Guid attackerGuid, string attackerName, Vector3 worldPosition = new() )
 	{
-		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "hitscan" );
+		return new GrubsDamageInfo( damage, attackerGuid, attackerName, worldPosition ).WithTag( "hitscan" );
 	}
 
-	public static GrubsDamageInfo FromMelee( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromMelee( float damage, Guid attackerGuid, string attackerName, Vector3 worldPosition = new() )
 	{
-		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "melee" );
+		return new GrubsDamageInfo( damage, attackerGuid, attackerName, worldPosition ).WithTag( "melee" );
 	}
 
-	public static GrubsDamageInfo FromExplosion( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromExplosion( float damage, Guid attackerGuid, string attackerName = "", Vector3 worldPosition = new() )
 	{
-		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "explosion" );
+		return new GrubsDamageInfo( damage, attackerGuid, attackerName, worldPosition ).WithTag( "explosion" );
 	}
 
-	public static GrubsDamageInfo FromFire( float damage, Grub attacker, Vector3 worldPosition = new Vector3() )
+	public static GrubsDamageInfo FromFire( float damage, Guid attackerGuid, string attackerName = "", Vector3 worldPosition = new() )
 	{
-		return new GrubsDamageInfo( damage, attacker, worldPosition ).WithTag( "fire" );
+		return new GrubsDamageInfo( damage, attackerGuid, attackerName, worldPosition ).WithTag( "fire" );
 	}
 
-	public static GrubsDamageInfo FromFall( float damage, Grub attacker )
+	public static GrubsDamageInfo FromFall( float damage, Guid attackerGuid, string attackerName )
 	{
-		return new GrubsDamageInfo( damage, attacker ).WithTag( "fall" );
+		return new GrubsDamageInfo( damage, attackerGuid, attackerName ).WithTag( "fall" );
 	}
 
 	public static GrubsDamageInfo FromKillZone( float damage )
 	{
-		return new GrubsDamageInfo( damage ).WithTag( "killzone" );
+		return new GrubsDamageInfo( damage, Guid.Empty ).WithTag( "killzone" );
 	}
 }

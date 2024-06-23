@@ -19,10 +19,14 @@ public abstract class Projectile : Component, IResolvable
 		{
 			_sourceId = value;
 			Grub = Source?.Equipment?.Grub;
+			GrubGuid = Grub?.Id ?? Guid.Empty;
+			GrubName = Grub?.Name ?? string.Empty;
 		}
 	}
 	public Weapon Source => Scene.Directory.FindComponentByGuid( SourceId ) as Weapon;
 	public Grub Grub { get; private set; }
+	public Guid GrubGuid { get; private set; }
+	public string GrubName { get; private set; }
 	public GrubPlayerController PlayerController => Grub?.PlayerController;
 	public virtual bool Resolved => false;
 

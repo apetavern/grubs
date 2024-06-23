@@ -73,7 +73,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 			return;
 
 		var projectile = Components.Get<Projectile>();
-		ExplodeEffects( projectile?.Grub?.Id ?? Guid.Empty );
+		ExplodeEffects( projectile?.GrubGuid ?? Guid.Empty, projectile?.GrubName ?? string.Empty );
 
 		ProjectileExploded?.Invoke();
 
@@ -82,13 +82,9 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	}
 
 	[Broadcast]
-	public void ExplodeEffects( Guid attacker )
+	public void ExplodeEffects( Guid attackerGuid, string attackerName )
 	{
-		Grub grub = null;
-		if ( attacker != Guid.Empty )
-			grub = Scene.Directory.FindComponentByGuid( attacker ) as Grub;
-
-		ExplosionHelper.Instance.Explode( this, grub, Transform.Position, ExplosionRadius, ExplosionDamage );
+		ExplosionHelper.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage, attackerGuid, attackerName );
 		Sound.Play( ExplosionSound );
 
 		if ( Particles is null )

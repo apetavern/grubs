@@ -59,10 +59,10 @@ public partial class Health : Component
 			{
 				var damageInfos = new List<GrubsDamageInfo>();
 				var lastReason = DamageQueue.LastOrDefault();
-				if ( lastReason is not null )
+				if ( !lastReason.Equals( default( GrubsDamageInfo ) ) ) // Get previous damage context if it exists.
 					damageInfos.Add( lastReason );
-				damageInfos.Add( damageInfo );
 
+				damageInfos.Add( damageInfo );
 				_deathReason = DeathReason.FindReason( grub, damageInfos );
 			}
 
@@ -92,7 +92,7 @@ public partial class Health : Component
 			_deathReason = DeathReason.FindReason( grub, damageInfos );
 
 		WorldPopupHelper.Instance.CreateDamagePopup( GameObject.Id, totalDamage );
-		TakeDamage( new GrubsDamageInfo( totalDamage ), true );
+		TakeDamage( new GrubsDamageInfo( totalDamage, Guid.Empty ), true );
 	}
 
 	public void Heal( float heal )
@@ -123,7 +123,7 @@ public partial class Health : Component
 				// Same as above.
 				DeathEffects( position );
 
-				ExplosionHelper.Instance.Explode( this, grub, position, 100f, 25f );
+				ExplosionHelper.Instance.Explode( this, position, 100f, 25f, grub.Id, grub.Name );
 				plunger?.Destroy();
 			}
 

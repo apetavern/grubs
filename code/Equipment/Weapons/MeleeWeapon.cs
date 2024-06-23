@@ -69,7 +69,7 @@ public class MeleeWeapon : Weapon
 			}
 
 			if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInAncestors ) )
-				health.TakeDamage( GrubsDamageInfo.FromMelee( Damage, Equipment.Grub, tr.HitPosition ) );
+				health.TakeDamage( GrubsDamageInfo.FromMelee( Damage, Equipment.Grub.Id, Equipment.Grub.Name, tr.HitPosition ) );
 		}
 
 		TimeSinceLastUsed = 0f;

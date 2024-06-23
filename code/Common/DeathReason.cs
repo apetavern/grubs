@@ -8,9 +8,14 @@ namespace Grubs.Common;
 public readonly struct DeathReason
 {
 	/// <summary>
-	/// The grub that died.
+	/// The GUID of the Grub that died.
 	/// </summary>
-	public readonly Grub Grub;
+	public readonly Guid GrubGuid;
+
+	/// <summary>
+	/// The name of the Grub that died.
+	/// </summary>
+	public readonly string GrubName;
 
 	/// <summary>
 	/// The first damage info responsible for the death.
@@ -33,16 +38,20 @@ public readonly struct DeathReason
 	public readonly DamageType SecondReason;
 
 	/// <summary>
-	/// Returns whether or not the grub was killed by hitting a kill trigger.
+	/// Whether or not the grub was killed by hitting a kill trigger.
 	/// </summary>
 	public bool FromKillTrigger => FirstReason == DamageType.KillZone || SecondReason == DamageType.KillZone;
 
+	/// <summary>
+	/// Whether or not the grub was killed from their player disconnecting.
+	/// </summary>
 	public bool FromDisconnect => FirstReason == DamageType.Disconnect || SecondReason == DamageType.Disconnect;
 
-	public DeathReason( Grub grub, GrubsDamageInfo firstInfo, DamageType firstReason, GrubsDamageInfo secondInfo,
+	public DeathReason( Guid grubGuid, string grubName, GrubsDamageInfo firstInfo, DamageType firstReason, GrubsDamageInfo secondInfo,
 		DamageType secondReason )
 	{
-		Grub = grub;
+		GrubGuid = grubGuid;
+		GrubName = grubName;
 		FirstInfo = firstInfo;
 		FirstReason = firstReason;
 		SecondInfo = secondInfo;
@@ -59,31 +68,31 @@ public readonly struct DeathReason
 				{
 					// Died from an admin.
 					case DamageType.Admin:
-						return $"{Grub.Name} was RDMed by an admin!";
+						return $"{GrubName} was RDMed by an admin!";
 					// Controlling player disconnected.
 					case DamageType.Disconnect:
-						return $"{Grub.Name} had no reason left to live...";
+						return $"{GrubName} had no reason left to live...";
 					// Died from an explosion.
 					case DamageType.Explosion:
-						return SecondInfo.Attacker == null || SecondInfo.Attacker == Grub
-							? $"{Grub.Name} blew themselves up like an idiot."
-							: $"{Grub.Name} was blown to bits by {SecondInfo.Attacker.Name}.";
+						return SecondInfo.AttackerGuid == Guid.Empty || SecondInfo.AttackerGuid == GrubGuid
+							? $"{GrubName} blew themselves up like an idiot."
+							: $"{GrubName} was blown to bits by {SecondInfo.AttackerName}.";
 					case DamageType.Fire:
-						return SecondInfo.Attacker == null || SecondInfo.Attacker == Grub
-							? $"{Grub.Name} burned themselves to death."
-							: $"{Grub.Name} was cooked by {SecondInfo.Attacker.Name}.";
+						return SecondInfo.AttackerGuid == Guid.Empty || SecondInfo.AttackerGuid == GrubGuid
+							? $"{GrubName} burned themselves to death."
+							: $"{GrubName} was cooked by {SecondInfo.AttackerName}.";
 					// Died from falling.
 					case DamageType.Fall:
-						return $"{Grub.Name} broke their... leg?";
+						return $"{GrubName} broke their... leg?";
 					// Died from hitting a kill zone.
 					case DamageType.KillZone:
-						return $"{Grub.Name} escaped the simulation.";
+						return $"{GrubName} escaped the simulation.";
 					// Died from a HitScan weapon.
 					case DamageType.HitScan:
-						return $"{Grub.Name} was shot in the head by {SecondInfo.Attacker.Name}.";
+						return $"{GrubName} was shot in the head by {SecondInfo.AttackerName}.";
 					// Died from a Melee weapon.
 					case DamageType.Melee:
-						return $"{Grub.Name} took a blunt object to the face from {SecondInfo.Attacker.Name}.";
+						return $"{GrubName} took a blunt object to the face from {SecondInfo.AttackerName}.";
 				}
 
 				break;
@@ -93,31 +102,31 @@ public readonly struct DeathReason
 				{
 					// Died from an admin.
 					case DamageType.Admin:
-						return $"{Grub.Name} was RDMed by an admin!";
+						return $"{GrubName} was RDMed by an admin!";
 					// Controlling player disconnected.
 					case DamageType.Disconnect:
-						return $"{Grub.Name} had no reason left to live...";
+						return $"{GrubName} had no reason left to live...";
 					// Killed by a different explosion.
 					case DamageType.Explosion:
-						return $"{Grub.Name} attracted too many explosives.";
+						return $"{GrubName} attracted too many explosives.";
 					case DamageType.Fire:
-						return $"{Grub.Name} perished in a firey explosion.";
+						return $"{GrubName} perished in a firey explosion.";
 					// Killed by a fall from being displaced by an explosion.
 					case DamageType.Fall:
-						return FirstInfo.Attacker == null || FirstInfo.Attacker == Grub
-							? $"{Grub.Name} had their leg broken thanks to their own explosives."
-							: $"{Grub.Name} had their leg broken thanks to {FirstInfo.Attacker.Name}'s explosive.";
+						return FirstInfo.AttackerGuid == Guid.Empty || FirstInfo.AttackerGuid == GrubGuid
+							? $"{GrubName} had their leg broken thanks to their own explosives."
+							: $"{GrubName} had their leg broken thanks to {FirstInfo.AttackerName}'s explosive.";
 					// Killed by hitting a kill zone from being displaced by an explosion.
 					case DamageType.KillZone:
-						return FirstInfo.Attacker == null || FirstInfo.Attacker == Grub
-							? $"{Grub.Name} sent themself to the shadow realm."
-							: $"{Grub.Name} got sent to the shadow realm by {FirstInfo.Attacker.Name}.";
+						return FirstInfo.AttackerGuid == Guid.Empty || FirstInfo.AttackerGuid == GrubGuid
+							? $"{GrubName} sent themself to the shadow realm."
+							: $"{GrubName} got sent to the shadow realm by {FirstInfo.AttackerName}.";
 					// Killed from a HitScan weapon after an explosion (this shouldn't happen).
 					case DamageType.HitScan:
-						return $"{Grub.Name} has experienced a series of unfortunate events.";
+						return $"{GrubName} has experienced a series of unfortunate events.";
 					// Killed from a Melee weapon after an explosion (this shouldn't happen).
 					case DamageType.Melee:
-						return $"{Grub.Name} shouldn't have skipped gym class.";
+						return $"{GrubName} shouldn't have skipped gym class.";
 				}
 
 				break;
@@ -127,27 +136,27 @@ public readonly struct DeathReason
 				{
 					// Died from an admin.
 					case DamageType.Admin:
-						return $"{Grub.Name} was RDMed by an admin!";
+						return $"{GrubName} was RDMed by an admin!";
 					// Controlling player disconnected.
 					case DamageType.Disconnect:
-						return $"{Grub.Name} burnt their will to play.";
+						return $"{GrubName} burnt their will to play.";
 					// Killed by an explosion.
 					case DamageType.Explosion:
-						return $"{Grub.Name} perished in a fiery explosion.";
+						return $"{GrubName} perished in a fiery explosion.";
 					case DamageType.Fire:
-						return $"{Grub.Name} burnt to a crisp.";
+						return $"{GrubName} burnt to a crisp.";
 					// Killed by a fall from being displaced by fire.
 					case DamageType.Fall:
-						return $"{Grub.Name} had their legs broken thanks to their burns.";
+						return $"{GrubName} had their legs broken thanks to their burns.";
 					// Killed by hitting a kill zone from being displaced by fire.
 					case DamageType.KillZone:
-						return $"{Grub.Name} went through the temperature spectrum.";
+						return $"{GrubName} went through the temperature spectrum.";
 					// Killed from a HitScan weapon after fire.
 					case DamageType.HitScan:
-						return $"{Grub.Name} was set on fire and shot by {SecondInfo.Attacker.Name}.";
+						return $"{GrubName} was set on fire and shot by {SecondInfo.AttackerName}.";
 					// Killed from a Melee weapon after fire (this shouldn't happen).
 					case DamageType.Melee:
-						return $"{Grub.Name} was knocked into the sun.";
+						return $"{GrubName} was knocked into the sun.";
 				}
 
 				break;
@@ -157,21 +166,21 @@ public readonly struct DeathReason
 				{
 					// Fell into an explosion.
 					case DamageType.Explosion:
-						return $"{Grub.Name} had an unlucky fall.";
+						return $"{GrubName} had an unlucky fall.";
 					case DamageType.Fire:
-						return $"{Grub.Name} fell into a pit of fire.";
+						return $"{GrubName} fell into a pit of fire.";
 					// Fell into a fall.
 					case DamageType.Fall:
-						return $"{Grub.Name} broke their... leg?";
+						return $"{GrubName} broke their... leg?";
 					// Fell into a kill zone.
 					case DamageType.KillZone:
-						return $"{Grub.Name} escaped the simulation.";
+						return $"{GrubName} escaped the simulation.";
 					// Fell into a HitScan weapon.
 					case DamageType.HitScan:
-						return $"{Grub.Name} was sniped in mid-air.";
+						return $"{GrubName} was sniped in mid-air.";
 					// Fell into a Melee weapon hit (this shouldn't happen).
 					case DamageType.Melee:
-						return $"{Grub.Name} got kicked in the stomach.";
+						return $"{GrubName} got kicked in the stomach.";
 				}
 
 				break;
@@ -180,17 +189,17 @@ public readonly struct DeathReason
 				switch ( SecondReason )
 				{
 					case DamageType.Explosion:
-						return $"{Grub.Name} got shot by {FirstInfo.Attacker.Name} so hard they blew up.";
+						return $"{GrubName} got shot by {FirstInfo.AttackerName} so hard they blew up.";
 					case DamageType.Fire:
-						return $"{Grub.Name} was shot by {FirstInfo.Attacker.Name} and then set on fire.";
+						return $"{GrubName} was shot by {FirstInfo.AttackerName} and then set on fire.";
 					case DamageType.Fall:
-						return $"{Grub.Name} suffered an unfortunate fall by the hands of {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} suffered an unfortunate fall by the hands of {FirstInfo.AttackerName}.";
 					case DamageType.KillZone:
-						return $"{Grub.Name} was no-scoped into hell by {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} was no-scoped into hell by {FirstInfo.AttackerName}.";
 					case DamageType.HitScan:
-						return $"{Grub.Name} was made into swiss cheese by {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} was made into swiss cheese by {FirstInfo.AttackerName}.";
 					case DamageType.Melee:
-						return $"{Grub.Name} was pulverized.";
+						return $"{GrubName} was pulverized.";
 				}
 
 				break;
@@ -199,24 +208,24 @@ public readonly struct DeathReason
 				switch ( SecondReason )
 				{
 					case DamageType.Explosion:
-						return $"{Grub.Name} was punted into an explosive situation by {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} was punted into an explosive situation by {FirstInfo.AttackerName}.";
 					case DamageType.Fire:
-						return $"{Grub.Name} was knocked into the sun by {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} was knocked into the sun by {FirstInfo.AttackerName}.";
 					case DamageType.Fall:
-						return $"{Grub.Name} got Sparta kicked by {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} got Sparta kicked by {FirstInfo.AttackerName}.";
 					case DamageType.KillZone:
-						return $"{Grub.Name} was sent to the Nether by {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} was sent to the Nether by {FirstInfo.AttackerName}.";
 					case DamageType.HitScan:
-						return $"{Grub.Name} is definitely dead.";
+						return $"{GrubName} is definitely dead.";
 					case DamageType.Melee:
-						return $"{Grub.Name} got fisted by {FirstInfo.Attacker.Name}.";
+						return $"{GrubName} got fisted by {FirstInfo.AttackerName}.";
 				}
 
 				break;
 		}
 
 		// Failed to find the right death reason.
-		return $"Who knows what the fuck happened to {Grub.Name}";
+		return $"Who knows what the fuck happened to {GrubName}";
 	}
 
 	/// <summary>
@@ -227,9 +236,9 @@ public readonly struct DeathReason
 	/// <returns></returns>
 	public static DeathReason FindReason( Grub grub, List<GrubsDamageInfo> damageInfos )
 	{
-		GrubsDamageInfo lastReasonInfo = null;
+		GrubsDamageInfo lastReasonInfo = new();
 		var lastReason = DamageType.None;
-		GrubsDamageInfo reasonInfo = null;
+		GrubsDamageInfo reasonInfo = new();
 		var reason = DamageType.None;
 
 		foreach ( var damageInfo in damageInfos )
@@ -307,6 +316,6 @@ public readonly struct DeathReason
 			}
 		}
 
-		return new DeathReason( grub, lastReasonInfo, lastReason, reasonInfo, reason );
+		return new DeathReason( grub.Id, grub.Name, lastReasonInfo, lastReason, reasonInfo, reason );
 	}
 }

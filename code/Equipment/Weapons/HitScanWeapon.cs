@@ -125,17 +125,17 @@ public class HitScanWeapon : Weapon
 		}
 		else if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 		{
-			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub, tr.HitPosition ) );
+			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, tr.HitPosition ) );
 			return false;
 		}
 
-		ExplosionHelper.Instance.Explode( this, Equipment.Grub, tr.EndPosition, ExplosionRadius, ExplosionDamage, HitForce.x );
+		ExplosionHelper.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage, Equipment.Grub.Id, Equipment.Grub.Name, HitForce.x );
 		return true;
 	}
 
 	private void HitGrub( Grub grub, Vector3 direction, Vector3 position )
 	{
 		grub.CharacterController.Punch( direction * HitForce );
-		grub.Health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub, position ) );
+		grub.Health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, position ) );
 	}
 }
