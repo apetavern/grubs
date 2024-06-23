@@ -10,6 +10,7 @@ public abstract class Gamemode : Component
 	public static FreeForAllGamemode FFA => Current as FreeForAllGamemode;
 
 	public virtual string GamemodeName => "";
+	public virtual string GamemodeShortName => "";
 
 	[Sync] public GameState State { get; set; }
 	[Sync] public bool Started { get; set; }
@@ -36,7 +37,10 @@ public abstract class Gamemode : Component
 
 	internal virtual void Initialize() { }
 
-	internal virtual void Start() { }
+	internal virtual void Start() 
+	{
+		Stats.IncrementGamesPlayed( GamemodeShortName );
+	}
 
 	internal virtual Task OnRoundPassed()
 	{

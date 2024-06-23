@@ -13,6 +13,7 @@ namespace Grubs.Gamemodes.Modes;
 public sealed class FreeForAllGamemode : Gamemode
 {
 	public override string GamemodeName => "Free For All";
+	public override string GamemodeShortName => "ffa";
 
 	[Property, ReadOnly, HostSync] public Guid ActivePlayerId { get; set; }
 	[HostSync] public TimeUntil TimeUntilNextTurn { get; set; }
@@ -33,6 +34,8 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	internal override void Start()
 	{
+		base.Start();
+
 		var players = Scene.GetAllComponents<Player>();
 		foreach ( var player in players )
 		{
@@ -132,6 +135,15 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		if ( IsGameResolved() && GrubsConfig.KeepGameAlive != true )
 		{
+			var winner = Scene.GetAllComponents<Player>().FirstOrDefault( p => !p.IsDead() );
+			if(winner is not null)
+			{
+				using (Rpc.FilterInclude(winner.Network.OwnerConnection))
+				{
+					Stats.IncrementGamesWon( GamemodeShortName );
+				}
+			}
+
 			// GameEnd.Instance.ShouldShow = true;
 			State = GameState.GameOver;
 			await Cleanup();
