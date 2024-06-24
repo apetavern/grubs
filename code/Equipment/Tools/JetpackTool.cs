@@ -131,6 +131,7 @@ public sealed class JetpackTool : Tool
 				_currentJetFuel -= Time.Delta * Input.AnalogMove.Length;
 				UpdateRotation();
 				characterController.Accelerate( new Vector3( -Input.AnalogMove.y, 0, 0.75f + Input.AnalogMove.x * 1.5f ) * 72f );
+				characterController.CurrentGroundAngle = 0;
 			}
 			else
 			{
