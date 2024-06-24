@@ -123,6 +123,7 @@ public sealed partial class GrubPlayerController : Component
 		{
 			CharacterController.Velocity = new Vector3( Facing * 175f, 0f, 220f );
 			CharacterController.ReleaseFromGround();
+			Animator.TriggerJump();
 		}
 	}
 
