@@ -1,0 +1,32 @@
+@namespace Grubs.UI
+
+@inherits TargetedWorldPanel
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="circle" style="background-image: @_gradient;" />
+    <div class="text">@_seconds</div>
+</root>
+
+@code {
+    public float ExplodeAfter { get; set; }
+
+    private TimeUntil _timeUntilExplosion;
+    private int _seconds => TimeSpan.FromSeconds(_timeUntilExplosion).Seconds;
+
+    private float _percentage => (_timeUntilExplosion / ExplodeAfter * 100).Clamp(0f, 100f);
+    private string _gradient => $"conic-gradient(rgba(#CCDAF7, 80%) 0%, rgba(#CCDAF7, 80%) {_percentage}%, rgba(0,0,0,0) {_percentage}%, rgba(0,0,0,0) 100%)";
+
+    protected override void OnStart() 
+    {
+        base.OnStart();
+
+        _timeUntilExplosion = ExplodeAfter;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(_percentage);
+    }
+}

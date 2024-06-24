@@ -1,6 +1,7 @@
 ﻿using Grubs.Common;
 using Grubs.Helpers;
 using Grubs.Pawn;
+using Grubs.UI;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
 
@@ -20,6 +21,8 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
 	private TimeSince _timeSinceCreated = 0f;
+
+	private ExplosiveTimer _explosiveTimerPanel;
 
 	public delegate void OnExplode();
 
@@ -59,6 +62,13 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 	private async void ExplodeAfterSeconds( float seconds )
 	{
+		var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/explosivetimer.prefab" );
+		var panel = SceneUtility.GetPrefabScene( prefab ).Clone();
+
+		_explosiveTimerPanel = panel.Components.Get<ExplosiveTimer>();
+		_explosiveTimerPanel.Target = GameObject;
+		_explosiveTimerPanel.ExplodeAfter = seconds;
+
 		await GameTask.DelaySeconds( seconds );
 
 		if ( !GameObject.IsValid() )
@@ -92,5 +102,13 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World );
 		sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		if ( _explosiveTimerPanel.IsValid() )
+			_explosiveTimerPanel.GameObject.Destroy();
 	}
 }

@@ -1,0 +1,37 @@
+{
+  "RootObject": {
+    "__guid": "9fcf1e8a-204e-4bd9-aeea-920484eb052a",
+    "Flags": 0,
+    "Name": "explosivetimer",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.WorldPanel",
+        "__guid": "cf19cee7-2ce2-4c13-b812-dbd4c6706255",
+        "HorizontalAlign": "Center",
+        "InteractionRange": 1000,
+        "LookAtCamera": true,
+        "PanelSize": "1000,1000",
+        "RenderScale": 1,
+        "VerticalAlign": "Center"
+      },
+      {
+        "__type": "Grubs.UI.ExplosiveTimer",
+        "__guid": "fc4b1481-0f42-4fd8-9ded-0fd44dd58420",
+        "DestroyDelay": 0,
+        "Offset": "0,-50,42",
+        "RiseSpeed": 0
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
