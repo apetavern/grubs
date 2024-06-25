@@ -17,6 +17,9 @@ public static class Stats
 	[Broadcast]
 	public static void IncrementGamesWon( string gamemode )
 	{
+		if ( Game.IsEditor )
+			return;
+
 		Sandbox.Services.Stats.Increment( GamesWon( gamemode ), 1 );
 		Sandbox.Services.Stats.Flush();
 	}
@@ -27,6 +30,9 @@ public static class Stats
 	[Broadcast]
 	public static void IncrementGamesPlayed( string gamemode )
 	{
+		if ( Game.IsEditor )
+			return;
+
 		Sandbox.Services.Stats.Increment( GamesPlayed( gamemode ), 1 );
 		Sandbox.Services.Stats.Flush();
 	}
@@ -37,6 +43,9 @@ public static class Stats
 	[Broadcast]
 	public static void IncrementGrubsKilled( Guid victimPlayerGuid )
 	{
+		if ( Game.IsEditor )
+			return;
+
 		var victim = Game.ActiveScene.Directory.FindComponentByGuid( victimPlayerGuid ) as Player;
 		string statIdent = (victim?.IsProxy ?? true) ? GrubsKilled : OwnGrubsKilled;
 
