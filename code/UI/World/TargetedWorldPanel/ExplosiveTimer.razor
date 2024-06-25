@@ -5,7 +5,6 @@
 @attribute [StyleSheet]
 
 <root>
-    <div class="circle" style="background-image: @_gradient;" />
     <div class="text">@_seconds</div>
 </root>
 
@@ -18,7 +17,7 @@
     private float _percentage => (_timeUntilExplosion / ExplodeAfter * 100).Clamp(0f, 100f);
     private string _gradient => $"conic-gradient(rgba(#CCDAF7, 80%) 0%, rgba(#CCDAF7, 80%) {_percentage}%, rgba(0,0,0,0) {_percentage}%, rgba(0,0,0,0) 100%)";
 
-    protected override void OnStart() 
+    protected override void OnStart()
     {
         base.OnStart();
 
@@ -27,6 +26,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(_percentage);
+        return HashCode.Combine(_seconds);
     }
 }
