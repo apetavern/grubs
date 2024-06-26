@@ -19,7 +19,7 @@
         <div class="health" style="background-color: darken(@_selectedColor, 60%);">
             <div class="fill" style="background: linear-gradient(to right, @_selectedColor, darken(@_selectedColor, 20%)); width: @(Player.GetHealthPercentage)%"></div>
         </div>
-        <div class="health-amount">@(Player.GetHealthPercentage)</div>
+        <div class="health-amount">@(Player.GetHealthPercentage)%</div>
     </div>
     <i class="icon" style="color: green; opacity: @(IsTalking() ? 1 : 0); transform: scale(@AmplitudeToScale())">record_voice_over</i>
     <i class="icon" style="color: red; opacity: @(IsMuted() ? 1 : 0)">voice_over_off</i>
