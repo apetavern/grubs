@@ -8,6 +8,7 @@ PlayerListEntry {
     width: 310px;
     pointer-events: all;
     cursor: none;
+    font-family: $font-family;
 
     .avatar {
         width: 65px;
@@ -18,7 +19,6 @@ PlayerListEntry {
     }
 
     .name {
-        font-family: $font-family;
         font-size: 36px;
         text-shadow: 2px 2px 2px black;
         text-stroke: 3px black;
@@ -28,7 +28,7 @@ PlayerListEntry {
 
     .health {
         width: 250px;
-        height: 20px;
+        height: 25px;
         border-radius: 4px;
         border: 2px black;
 
@@ -38,6 +38,15 @@ PlayerListEntry {
             width: 100%;
             border-radius: 4px;
         }
+    }
+
+    .health-amount {
+        position: absolute;
+        width: 110%;
+        font-size: 24px;
+        justify-content: center;
+        text-align: center;
+        top: 42px;
     }
 
     .icon {

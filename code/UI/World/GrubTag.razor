@@ -7,17 +7,18 @@
 
 @inherits PanelComponent
 
-<root>
-    <div class="title"
-         style="color: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));">
+<root style="transform: scale( @ScaleFactor )">
+    <div class="title" style="color: linear-gradient(@Color.Hex, adjust-hue(@Color.Hex, 45));">
         @Grub.Name
     </div>
     <div class="health-container" style="background-color: darken(@Color.Hex, 60%)">
         <div class="health-bar" style="width: @(Grub.Health.CurrentHealth / 150f * 100f)%;
         background-image: linear-gradient(@Color.Hex, darken(@Color.Hex, 20%))">
+            
             <div class="health-bar-overflow" style="width: @((Grub.Health.CurrentHealth - 150f) / 150f * 100f)%;
             background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))" />
         </div>
+        <div class="health-bar-text">@Grub.Health.CurrentHealth.Floor()</div>
     </div>
     @*<div class="avi">
     <image
@@ -45,6 +46,8 @@
     [Property] public required Grub Grub { get; set; }
     [Property] public Color Color { get; set; }
 
+    private float ScaleFactor { get; set; }
+
     protected override void OnStart()
     {
         base.OnStart();
@@ -55,8 +58,15 @@
             Color = color;
     }
 
+    protected override void OnUpdate() {
+        base.OnUpdate();
+
+        ScaleFactor = ScaleFactor.LerpTo( GrubFollowCamera.Local.Distance / 600, Time.Delta * 4f ).Clamp( 1, 3 );
+        Transform.Position = Grub.Transform.Position + Vector3.Up * 52f + Vector3.Right * 35;
+    }
+
     protected override int BuildHash()
     {
-        return HashCode.Combine(Grub.Name, Grub.Health.CurrentHealth, Color);
+        return HashCode.Combine( ScaleFactor, Grub.Name, Grub.Health.CurrentHealth, Color );
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Grubs.Equipment.Gadgets.Projectiles;
-using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
 using Grubs.Terrain;
 
