@@ -24,6 +24,7 @@ public sealed class CrateUtility : Component
 			_ => WeaponsCratePrefab.Clone()
 		};
 
+		go.Network.SetOrphanedMode( NetworkOrphaned.Host );
 		go.NetworkSpawn();
 
 		return go;
