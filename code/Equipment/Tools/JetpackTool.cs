@@ -21,6 +21,7 @@ public sealed class JetpackTool : Tool
 
 	[Sync] private float ForwardBackFlameScale { get; set; }
 	[Sync] private float UpDownFlameScale { get; set; }
+	[Sync] private bool ShouldAnimate { get; set; }
 
 	private float _currentJetFuel;
 	private float _jetpackDir;
@@ -88,13 +89,18 @@ public sealed class JetpackTool : Tool
 
 		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
 		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
+
+		if ( _jetSound is not null )
+			_jetSound.Position = Equipment.Grub.Transform.Position;
 	}
 
 	protected override void OnUpdate()
 	{
-		base.OnUpdate();
-		if ( Equipment.Deployed && IsFiring )
+		ShouldAnimate = Equipment.Deployed && IsFiring;
+		if ( ShouldAnimate )
 			AnimateFlames();
+
+		base.OnUpdate();
 	}
 
 	protected override void HandleComplexFiringInput()
@@ -103,7 +109,7 @@ public sealed class JetpackTool : Tool
 
 		if ( Input.Pressed( "fire" ) && !IsFiring )
 		{
-			_jetSound = Sound.Play( "thrust" );
+			FireEffects();
 			IsFiring = true;
 		}
 
@@ -119,7 +125,6 @@ public sealed class JetpackTool : Tool
 			_jetpackDir = Vector3.Dot( new Vector3( -Input.AnalogMove.y, 0, 0 ), characterController.Velocity.Normal );
 
 			_jetSound.Volume = Input.AnalogMove.Length + 0.1f;
-			_jetSound.Position = Equipment.Grub.Transform.Position;
 
 			if ( Input.AnalogMove.x > 0 && characterController.IsOnGround )
 			{
@@ -154,5 +159,12 @@ public sealed class JetpackTool : Tool
 
 		Equipment.Grub.Transform.Rotation = Rotation.Lerp( Equipment.Grub.Transform.Rotation, targetRotation, Time.Delta * 5f );
 		Equipment.Grub.PlayerController.Facing = targetRotation.y <= 0 ? 1 : -1;
+	}
+
+	[Broadcast]
+	private void FireEffects()
+	{
+		_jetSound = Sound.Play( "thrust" );
+		_jetSound.Volume = 0.25f;
 	}
 }
