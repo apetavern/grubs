@@ -212,11 +212,12 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 	private void RotateActivePlayer()
 	{
-		if ( !PlayerTurnQueue.Any() )
+		if ( !PlayerTurnQueue.Any( p => p.ToComponent<Player>()?.ShouldHaveTurn ?? false ) )
 		{
+			PlayerTurnQueue.Clear();
 			foreach ( var player in Player.All )
 			{
-				if ( !player.ShouldHaveTurn )
+				if ( player is null || !player.ShouldHaveTurn )
 					continue;
 				PlayerTurnQueue.Add( player.Id );
 			}
@@ -224,6 +225,13 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 		var nextPlayer = PlayerTurnQueue[0].ToComponent<Player>();
 		PlayerTurnQueue.RemoveAt( 0 );
+
+		while ( nextPlayer is null || !nextPlayer.ShouldHaveTurn )
+		{
+			nextPlayer = PlayerTurnQueue[0].ToComponent<Player>();
+			PlayerTurnQueue.RemoveAt( 0 );
+		}
+
 		ActivePlayerId = nextPlayer.Id;
 
 		var nextGrub = FindNextGrub( nextPlayer );
