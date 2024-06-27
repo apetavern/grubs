@@ -1,4 +1,5 @@
 ﻿using Grubs.Common;
+using Grubs.Extensions;
 using Grubs.Gamemodes.Modes;
 using Grubs.Pawn;
 
@@ -54,6 +55,11 @@ public abstract class Gamemode : Component
 
 	protected async Task ApplyDamageQueue()
 	{
+		foreach ( var grub in Scene.GetAllComponents<Grub>().Where( g => g.Player.GameObject is null ) )
+		{
+			grub.Health.TakeDamage( GrubsDamageInfo.FromDisconnect() );
+		}
+
 		while ( DamageQueue.Any() )
 		{
 			var grub = DamageQueue[0].ToComponent<Grub>();

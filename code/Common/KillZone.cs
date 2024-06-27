@@ -24,7 +24,7 @@ public class KillZone : Component, Component.ITriggerListener
 
 		if ( other.GameObject.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
 		{
-			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( 9999 ), true );
+			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone(), true );
 		}
 		else
 		{

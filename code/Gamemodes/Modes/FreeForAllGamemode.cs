@@ -10,7 +10,7 @@ using Grubs.UI.GameEnd;
 namespace Grubs.Gamemodes.Modes;
 
 [Title( "Grubs - FFA" ), Category( "Grubs" )]
-public sealed class FreeForAllGamemode : Gamemode
+public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 {
 	public override string GamemodeName => "Free For All";
 	public override string GamemodeShortName => "ffa";
@@ -173,6 +173,15 @@ public sealed class FreeForAllGamemode : Gamemode
 		Started = false;
 
 		GrubsTerrain.Instance.Init();
+	}
+
+	public void OnDisconnected( Connection connection )
+	{
+		var player = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Network.OwnerConnection == connection );
+		if ( player?.IsActive ?? false )
+		{
+			UseTurn();
+		}
 	}
 
 	private async Task HandleSpawns()

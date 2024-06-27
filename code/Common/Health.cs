@@ -123,13 +123,16 @@ public partial class Health : Component
 				// Same as above.
 				DeathEffects( position );
 
-				ExplosionHelper.Instance.Explode( this, position, 100f, 25f, grub.Id, grub.Name );
+				if ( _deathReason.FromDisconnect )
+					ExplosionHelper.Instance.Explode( this, position, 40f, 15f, grub.Id, grub.Name );
+				else
+					ExplosionHelper.Instance.Explode( this, position, 75f, 25f, grub.Id, grub.Name );
+
 				plunger?.Destroy();
 			}
 
 			ChatHelper.Instance.SendInfoMessage( _deathReason.ToString() );
 
-			// Assume attacker is last damage's source.
 			Guid attackerGuid = _deathReason.SecondInfo.AttackerGuid;
 			if ( _deathReason.FromKillTrigger ) // If we've died to a kill trigger, check if we have additional damage to credit, otherwise we've attacked ourselves.
 				attackerGuid = _deathReason.FirstReason != DamageType.None ? _deathReason.FirstInfo.AttackerGuid : grub.Id;
