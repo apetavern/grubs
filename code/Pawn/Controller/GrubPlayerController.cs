@@ -203,7 +203,7 @@ public sealed partial class GrubPlayerController : Component
 			return ShouldAcceptInput();
 		if ( !equipment.Components.TryGet( out Weapon weapon ) )
 			return ShouldAcceptInput();
-		return ShouldAcceptInput() && (!weapon.IsFiring || weapon.CanFireWhileMoving);
+		return ShouldAcceptInput() && ((!weapon.IsFiring && !weapon.IsCharging) || weapon.CanFireWhileMoving);
 	}
 
 	public bool ShouldAcceptInput()
