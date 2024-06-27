@@ -164,6 +164,8 @@ public readonly struct DeathReason
 			case DamageType.Fall:
 				switch ( SecondReason )
 				{
+					case DamageType.Disconnect:
+						return $"{GrubName} fell into a pit of despair...";
 					// Fell into an explosion.
 					case DamageType.Explosion:
 						return $"{GrubName} had an unlucky fall.";
@@ -188,6 +190,8 @@ public readonly struct DeathReason
 			case DamageType.HitScan:
 				switch ( SecondReason )
 				{
+					case DamageType.Disconnect:
+						return $"{GrubName} was shot in the heart.";
 					case DamageType.Explosion:
 						return $"{GrubName} got shot by {FirstInfo.AttackerName} so hard they blew up.";
 					case DamageType.Fire:
@@ -207,6 +211,8 @@ public readonly struct DeathReason
 			case DamageType.Melee:
 				switch ( SecondReason )
 				{
+					case DamageType.Disconnect:
+						return $"{GrubName} was punched into oblivion.";
 					case DamageType.Explosion:
 						return $"{GrubName} was punted into an explosive situation by {FirstInfo.AttackerName}.";
 					case DamageType.Fire:
