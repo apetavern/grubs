@@ -1,7 +1,6 @@
+using Grubs.Common;
 using Grubs.Equipment.Weapons;
-using Grubs.Pawn;
 using Grubs.Terrain;
-using Sandbox;
 
 namespace Grubs;
 
@@ -9,19 +8,36 @@ namespace Grubs;
 public sealed class TorchWeapon : Weapon
 {
 	[Property] private float TorchTime { get; set; } = 5f;
-
-	private float TorchTimeLeft { get; set; } = 5f;
-
 	[Property] private float TorchSize { get; set; } = 10f;
-
 	[Property] private GameObject TorchFlame { get; set; }
 
-	private TimeSince _timeSinceLastTorchSound { get; set; }
+	[Sync] private bool TorchFlameEnabled { get; set; }
+	private float TorchTimeLeft { get; set; } = 5f;
+
+	private TimeSince _timeSinceLastTorchSound;
 
 	protected override void OnStart()
 	{
 		base.OnStart();
 		TorchTimeLeft = TorchTime;
+	}
+
+	protected override void OnUpdate()
+	{
+		var pc = Equipment.Grub?.PlayerController;
+
+		if ( TorchFlame is not null )
+		{
+			TorchFlame.Enabled = TorchFlameEnabled;
+
+			if ( pc is not null )
+			{
+				TorchFlame.Transform.Position = GetStartPosition();
+				TorchFlame.Transform.Rotation = Rotation.LookAt( pc.Facing * pc.EyeRotation.Forward );
+			}
+		}
+
+		base.OnUpdate();
 	}
 
 	protected override void HandleComplexFiringInput()
@@ -33,9 +49,8 @@ public sealed class TorchWeapon : Weapon
 
 		IsFiring = Input.Down( "fire" );
 
-		TorchFlame.Enabled = IsFiring && Equipment.Deployed;
-		TorchFlame.Transform.Position = GetStartPosition();
-		TorchFlame.Transform.Rotation = Rotation.LookAt( pc.Facing * pc.EyeRotation.Forward );
+		if ( !IsProxy )
+			TorchFlameEnabled = IsFiring && Equipment.Deployed;
 
 		if ( IsFiring )
 		{
@@ -52,18 +67,14 @@ public sealed class TorchWeapon : Weapon
 
 			var endPos = startPos + pc.Facing * pc.EyeRotation.Forward * 2f;
 
-			var tr = Scene.Trace.Ray( startPos, endPos )
-					.WithAnyTags( "solid", "player" )
-					.WithoutTags( "dead" )
-					.IgnoreGameObjectHierarchy( Equipment.Grub.GameObject );
+			if ( _timeSinceLastTorchSound > 0.2f )
+			{
+				FireEffects( startPos, endPos );
+				_timeSinceLastTorchSound = 0f;
+			}
 
 			using ( Rpc.FilterInclude( c => c.IsHost ) )
 			{
-				if ( _timeSinceLastTorchSound > 0.2f )
-				{
-					Sound.Play( "torch_fire", Equipment.Grub.Transform.Position );
-					_timeSinceLastTorchSound = 0f;
-				}
 				GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
 					new Vector2( endPos.x, endPos.z ), TorchSize, 1 );
 				GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
@@ -71,5 +82,39 @@ public sealed class TorchWeapon : Weapon
 					TorchSize + 8f );
 			}
 		}
+	}
+
+	[Broadcast]
+	public void FireEffects( Vector3 startPos, Vector3 endPos )
+	{
+		Sound.Play( "torch_fire", Equipment.Grub.Transform.Position );
+
+		var tr = Scene.Trace.Ray( startPos, endPos )
+						.WithAnyTags( "solid", "player", "pickup" )
+						.WithoutTags( "dead" )
+						.IgnoreGameObjectHierarchy( Equipment.Grub.GameObject )
+						.Run();
+
+		if ( !tr.Hit )
+			return;
+
+		if ( tr.GameObject.Components.TryGet<Health>( out var health, FindMode.EverythingInSelfAndAncestors ) )
+		{
+			health.TakeDamage( GrubsDamageInfo.FromFire( 1, Equipment.Grub.Id, Equipment.Grub.Name, tr.HitPosition ) );
+		}
+	}
+
+	protected override void FireFinished()
+	{
+		TorchFlameEnabled = false;
+
+		base.FireFinished();
+	}
+
+	public override void OnHolster()
+	{
+		TorchFlameEnabled = false;
+
+		base.OnHolster();
 	}
 }
