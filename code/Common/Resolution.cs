@@ -19,7 +19,7 @@ public static class Resolution
 					Log.Warning( r );
 			}
 
-			await GameTask.Delay( 500 );
+			await GameTask.DelayRealtime( 500 );
 		}
 	}
 }

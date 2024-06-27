@@ -18,8 +18,10 @@ public abstract class Gamemode : Component
 	[Sync] public bool TurnIsChanging { get; set; } = false;
 	[Sync] public int RoundsPassed { get; set; } = 0;
 
-	public Queue<Grub> DamageQueue { get; set; } = new();
-	protected Queue<Player> PlayerTurnQueue { get; set; } = new();
+	// Queue<Grub>
+	[Sync] public NetList<Guid> DamageQueue { get; set; } = new();
+	// Queue<Player>
+	[Sync] protected NetList<Guid> PlayerTurnQueue { get; set; } = new();
 
 	private int _resolveTries = 0;
 
@@ -54,12 +56,13 @@ public abstract class Gamemode : Component
 	{
 		while ( DamageQueue.Any() )
 		{
-			var grub = DamageQueue.Dequeue();
+			var grub = DamageQueue[0].ToComponent<Grub>();
+			DamageQueue.RemoveAt( 0 );
 			if ( !grub.IsValid() )
 				continue;
 
 			while ( !grub.Resolved && _resolveTries++ <= 20 )
-				await GameTask.Delay( 200 );
+				await GameTask.DelayRealtime( 200 );
 
 			_resolveTries = 0;
 			grub.Health.ApplyDamage();
@@ -69,7 +72,9 @@ public abstract class Gamemode : Component
 		}
 
 		// Remove dead players from turn queue.
-		PlayerTurnQueue = new( PlayerTurnQueue.Where( p => p.ShouldHaveTurn ) );
+		foreach ( var player in PlayerTurnQueue )
+			if ( !player.ToComponent<Player>()?.ShouldHaveTurn ?? false )
+				PlayerTurnQueue.Remove( player );
 	}
 
 	private async Task ShowDamagedGrub( Grub grub )
@@ -78,7 +83,7 @@ public abstract class Gamemode : Component
 			return;
 
 		CameraTarget = grub.GameObject.Id;
-		await GameTask.Delay( 2000 );
+		await GameTask.DelayRealtime( 2000 );
 		CameraTarget = Guid.Empty;
 	}
 }

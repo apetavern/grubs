@@ -18,8 +18,6 @@ public sealed class FreeForAllGamemode : Gamemode
 	[Property, ReadOnly, HostSync] public Guid ActivePlayerId { get; set; }
 	[HostSync] public TimeUntil TimeUntilNextTurn { get; set; }
 
-	private Dictionary<Player, Queue<Grub>> PlayerGrubOrder { get; set; } = new();
-
 	private Task _nextTurnTask = null;
 
 	internal override async void Initialize()
@@ -39,7 +37,7 @@ public sealed class FreeForAllGamemode : Gamemode
 		var players = Scene.GetAllComponents<Player>();
 		foreach ( var player in players )
 		{
-			PlayerGrubOrder.Add( player, new Queue<Grub>() );
+			player.GrubQueue = new NetList<Guid>();
 
 			for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
 			{
@@ -50,8 +48,7 @@ public sealed class FreeForAllGamemode : Gamemode
 				var grub = go.Components.Get<Grub>();
 				SetGrubPlayer( player.Id, grub.Id );
 
-				var queue = PlayerGrubOrder[player];
-				queue.Enqueue( grub );
+				player.GrubQueue.Add( grub.Id );
 
 				go.Network.AssignOwnership( player.Network.OwnerConnection );
 
@@ -65,12 +62,14 @@ public sealed class FreeForAllGamemode : Gamemode
 			inv.Player = player;
 			inv.InitializeWeapons( GrubsConfig.InfiniteAmmo );
 
-			PlayerTurnQueue.Enqueue( player );
+			PlayerTurnQueue.Add( player.Id );
 		}
 
-		var firstPlayer = PlayerTurnQueue.Dequeue();
-		var firstGrub = PlayerGrubOrder[firstPlayer].Dequeue();
-		PlayerGrubOrder[firstPlayer].Enqueue( firstGrub );
+		var firstPlayer = PlayerTurnQueue[0].ToComponent<Player>();
+		PlayerTurnQueue.RemoveAt( 0 );
+		var firstGrubId = firstPlayer.GrubQueue[0];
+		firstPlayer.GrubQueue.RemoveAt( 0 );
+		firstPlayer.GrubQueue.Add( firstGrubId );
 		ActivePlayerId = firstPlayer.Id;
 
 		// Landmine Spawning
@@ -114,9 +113,7 @@ public sealed class FreeForAllGamemode : Gamemode
 		if ( giveMovementGrace )
 			TimeUntilNextTurn = GrubsConfig.MovementGracePeriod;
 		else
-		{
 			_nextTurnTask ??= NextTurn();
-		}
 	}
 
 	private async Task NextTurn()
@@ -127,7 +124,7 @@ public sealed class FreeForAllGamemode : Gamemode
 
 		await Resolution.UntilWorldResolved( 30 );
 
-		await GameTask.Delay( 1000 );
+		await GameTask.DelayRealtime( 1000 );
 		await ApplyDamageQueue();
 
 		if ( !PlayerTurnQueue.Any() )
@@ -136,9 +133,9 @@ public sealed class FreeForAllGamemode : Gamemode
 		if ( IsGameResolved() && GrubsConfig.KeepGameAlive != true )
 		{
 			var winner = Scene.GetAllComponents<Player>().FirstOrDefault( p => !p.IsDead() );
-			if(winner is not null)
+			if ( winner is not null )
 			{
-				using (Rpc.FilterInclude(winner.Network.OwnerConnection))
+				using ( Rpc.FilterInclude( winner.Network.OwnerConnection ) )
 				{
 					Stats.IncrementGamesWon( GamemodeShortName );
 				}
@@ -164,9 +161,9 @@ public sealed class FreeForAllGamemode : Gamemode
 		foreach ( var player in Player.All )
 		{
 			player.Cleanup();
+			player.GrubQueue.Clear();
 		}
 
-		PlayerGrubOrder.Clear();
 		PlayerTurnQueue.Clear();
 		_nextTurnTask = null;
 		TurnIsChanging = false;
@@ -212,11 +209,12 @@ public sealed class FreeForAllGamemode : Gamemode
 			{
 				if ( !player.ShouldHaveTurn )
 					continue;
-				PlayerTurnQueue.Enqueue( player );
+				PlayerTurnQueue.Add( player.Id );
 			}
 		}
 
-		var nextPlayer = PlayerTurnQueue.Dequeue();
+		var nextPlayer = PlayerTurnQueue[0].ToComponent<Player>();
+		PlayerTurnQueue.RemoveAt( 0 );
 		ActivePlayerId = nextPlayer.Id;
 
 		var nextGrub = FindNextGrub( nextPlayer );
@@ -228,13 +226,14 @@ public sealed class FreeForAllGamemode : Gamemode
 
 	private Grub FindNextGrub( Player player )
 	{
-		var queue = PlayerGrubOrder[player];
+		var queue = player.GrubQueue;
 		while ( queue.Any() )
 		{
-			var grub = queue.Dequeue();
+			var grub = queue[0].ToComponent<Grub>();
+			queue.RemoveAt( 0 );
 			if ( !grub.IsValid() || grub.IsDead )
 				continue;
-			queue.Enqueue( grub );
+			queue.Add( grub.Id );
 			return grub;
 		}
 

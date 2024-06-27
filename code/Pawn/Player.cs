@@ -25,6 +25,9 @@ public sealed class Player : Component
 
 	[Sync] public NetList<Guid> Grubs { get; set; } = new();
 
+	// Queue<Grub>
+	[HostSync] public NetList<Guid> GrubQueue { get; set; } = new();
+
 	[Sync] public float PlayTime { get; set; } = 0;
 
 	[Property] public required GameObject GrubPrefab { get; set; }

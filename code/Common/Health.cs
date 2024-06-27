@@ -40,8 +40,8 @@ public partial class Health : Component
 
 			if ( !immediate )
 			{
-				if ( Connection.Local.IsHost && !Gamemode.Current.DamageQueue.Contains( grub ) )
-					Gamemode.Current.DamageQueue.Enqueue( grub );
+				if ( Connection.Local.IsHost && !Gamemode.Current.DamageQueue.Contains( grub.Id ) )
+					Gamemode.Current.DamageQueue.Add( grub.Id );
 
 				DamageQueue.Enqueue( damageInfo );
 				return;
