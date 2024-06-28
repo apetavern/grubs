@@ -16,7 +16,7 @@
     return;
 }
 
-<root>
+<root class="@(Gamemode.Current.TurnIsChanging ? "hide" : "")">
     <div class="timer">
         <div class="title">@GetActiveGrubName()'s Turn</div>
         <p>@Timer</p>

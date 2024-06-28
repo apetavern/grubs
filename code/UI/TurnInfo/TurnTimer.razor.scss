@@ -6,6 +6,11 @@ TurnTimer {
     align-items: center;
     justify-content: center;
     bottom: 50px;
+    transition: opacity 150ms ease;
+
+    &.hide {
+        opacity: 0;
+    }
 
     .timer {
         width: 300px;
