@@ -16,7 +16,7 @@ GrubTag {
 
     .health-container {
         width: 80%;
-        height: 46px;
+        height: 52px;
         border: 6px black;
         border-radius: 12px;
         background-color: darken(lightgreen, 60%);
@@ -33,9 +33,11 @@ GrubTag {
         .health-bar-text {
             position: absolute;
             width: 100%;
+            top: -6px;
             justify-content: center;
-            top: -8px;
-            font-size: 40px;
+            color: white;
+            font-size: 44px;
+            text-stroke: 8px black;
         }
 
         .health-bar-overflow {

@@ -43,10 +43,12 @@ PlayerListEntry {
     .health-amount {
         position: absolute;
         width: 110%;
-        font-size: 24px;
         justify-content: center;
         text-align: center;
         top: 41px;
+        color: white;
+        font-size: 24px;
+        text-stroke: 4px black;
     }
 
     .icon {
