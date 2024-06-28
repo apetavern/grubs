@@ -1,6 +1,5 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
-using Grubs.UI.Inventory;
 
 namespace Grubs.Pawn;
 
@@ -199,6 +198,13 @@ public sealed class PlayerInventory : Component
 
 	private void CycleSlot( bool forwards = true )
 	{
+		var active = GetActiveEquipment();
+		if ( active?.Components.TryGet<Weapon>( out var weapon ) ?? false )
+		{
+			if ( weapon.IsFiring && !weapon.CanSwapDuringUse || weapon.TimesUsed > 0 && !weapon.CanSwapAfterUse )
+				return;
+		}
+
 		Holster( ActiveSlot );
 		var slot = forwards ? GetNextSlot() : GetPrevSlot();
 		ActiveSlot = slot;
