@@ -175,8 +175,6 @@ public partial class Weapon : Component
 
 		if ( TimesUsed >= MaxUses )
 		{
-			Equipment.UseAmmo();
-
 			if ( Equipment.Grub is not { } grub )
 				return;
 

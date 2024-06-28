@@ -82,8 +82,12 @@ public class Equipment : Component
 
 		if ( Components.TryGet( out Weapon weapon ) )
 		{
-			weapon.TimesUsed = 0;
 			weapon.OnHolster();
+
+			if ( weapon.TimesUsed > 0 )
+				UseAmmo();
+
+			weapon.TimesUsed = 0;
 		}
 
 		Grub = null;

@@ -35,6 +35,15 @@ public class NinjaRopeWeapon : Weapon
 		}
 	}
 
+	public override void OnHolster()
+	{
+		// Player has fired a hook, but not released it.
+		if ( IsFiring && TimesUsed == 0 )
+			Equipment.UseAmmo();
+
+		base.OnHolster();
+	}
+
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();

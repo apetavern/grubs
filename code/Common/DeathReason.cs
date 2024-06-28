@@ -119,7 +119,7 @@ public readonly struct DeathReason
 					// Killed by hitting a kill zone from being displaced by an explosion.
 					case DamageType.KillZone:
 						return FirstInfo.AttackerGuid == Guid.Empty || FirstInfo.AttackerGuid == GrubGuid
-							? $"{GrubName} sent themself to the shadow realm."
+							? $"{GrubName} sent themselves to the shadow realm."
 							: $"{GrubName} got sent to the shadow realm by {FirstInfo.AttackerName}.";
 					// Killed from a HitScan weapon after an explosion (this shouldn't happen).
 					case DamageType.HitScan:
