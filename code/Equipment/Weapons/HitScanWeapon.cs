@@ -47,7 +47,7 @@ public class HitScanWeapon : Weapon
 
 		_tracesFired++;
 		_timeSinceLastTrace = 0;
-		FireEffects( startPos, endPos );
+		FireEffects( startPos, endPos, _tracesFired );
 
 		if ( _tracesFired >= TraceCount )
 			FireFinished();
@@ -61,13 +61,15 @@ public class HitScanWeapon : Weapon
 	}
 
 	[Broadcast]
-	private void FireEffects( Vector3 startPos, Vector3 endPos )
+	private void FireEffects( Vector3 startPos, Vector3 endPos, int traceCount )
 	{
 		if ( Equipment.Grub is not { } grub )
 			return;
 
 		grub.Animator.Fire();
-		Sound.Play( TraceSound, startPos );
+
+		if ( TraceDelay > 0 || TraceDelay == 0 && traceCount == 1 )
+			Sound.Play( TraceSound, startPos );
 
 		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
 		if ( MuzzleParticles is not null )
