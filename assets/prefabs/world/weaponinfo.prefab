@@ -13,7 +13,7 @@
         "HorizontalAlign": "Center",
         "InteractionRange": 1000,
         "LookAtCamera": true,
-        "PanelSize": "1024,750",
+        "PanelSize": "1250,600",
         "RenderScale": 1,
         "VerticalAlign": "Center"
       },
@@ -21,11 +21,12 @@
         "__type": "Grubs.UI.WeaponInfo",
         "__guid": "a56e823b-d6a3-4784-aa0d-8d0a94f6db34",
         "DestroyDelay": 0,
-        "Offset": "8,-50,-16",
+        "Offset": "0,-50,-20",
         "RiseSpeed": 0
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

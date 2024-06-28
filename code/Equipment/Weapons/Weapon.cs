@@ -18,6 +18,7 @@ public partial class Weapon : Component
 	[Property] public bool CanSwapDuringUse { get; set; } = false;
 	[Property] public int MaxUses { get; set; } = 1;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
+	[Property] public AmmoType AmmoType { get; set; } = AmmoType.Numbered;
 	[Property] public OnFireDelegate OnFire { get; set; }
 	[Property] public OnFireFinishedDelegate OnFireFinished { get; set; }
 
@@ -25,7 +26,7 @@ public partial class Weapon : Component
 	public bool IsCharging { get; set; }
 	public bool ForceHideWeapon { get; set; }
 	public TimeSince TimeSinceLastUsed { get; set; }
-	public int TimesUsed { get; set; }
+	public float TimesUsed { get; set; }
 
 	protected WeaponInfo WeaponInfoPanel;
 

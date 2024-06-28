@@ -38,6 +38,7 @@
       {
         "__type": "Grubs.Equipment.Tools.JetpackTool",
         "__guid": "64fbb975-2314-47cb-a253-e3d71f47d9e6",
+        "AmmoType": "Fuel",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": true,
         "CanSwapDuringUse": true,
@@ -53,8 +54,7 @@
           "go": "7406fd93-14c2-4776-8b78-e2131e8cdae7"
         },
         "FiringType": "Complex",
-        "MaxJetFuel": 10,
-        "MaxUses": 1,
+        "MaxUses": 10,
         "UDFlame1": {
           "_type": "gameobject",
           "go": "0720d0c8-dfa1-4b57-8fc2-64f8dd52a941"

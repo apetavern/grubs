@@ -33,11 +33,13 @@
         },
         "Name": "Blowtorch",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 0
       },
       {
         "__type": "Grubs.TorchWeapon",
         "__guid": "e0a7f964-6a2d-4587-8f0f-695a0f60edbc",
+        "AmmoType": "Fuel",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -49,13 +51,12 @@
           "component_type": "Equipment"
         },
         "FiringType": "Complex",
-        "MaxUses": 1,
+        "MaxUses": 5,
         "TorchFlame": {
           "_type": "gameobject",
           "go": "54d1051e-daef-4a84-9022-45cc262dbc27"
         },
-        "TorchSize": 20,
-        "TorchTime": 5
+        "TorchSize": 20
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
@@ -85,7 +86,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

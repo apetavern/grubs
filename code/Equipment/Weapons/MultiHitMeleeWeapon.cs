@@ -6,11 +6,6 @@ namespace Grubs.Equipment.Weapons;
 [Title( "Grubs - Multi Hit Melee Weapon" ), Category( "Equipment" )]
 public class MultiHitMeleeWeapon : Weapon
 {
-	/**
-	 * Meta
-	 */
-	[Property] public int Strikes { get; set; } = 2;
-
 	[Property] public float HitCooldown { get; set; } = 0.25f;
 	[Property] public float HitDistance { get; set; } = 25f;
 	[Property] public Vector3 HitOffset { get; set; }
@@ -29,10 +24,8 @@ public class MultiHitMeleeWeapon : Weapon
 
 	[Property] public Vector3 FinalHitForce { get; set; }
 
-
 	private TimeSince _timeSinceLastHit = 0;
 	private int _currentStrikeCount = 1;
-	private int _numberOfSwings = 0;
 	private bool _finishAfterCooldown = false;
 
 	protected override void FireImmediate()
@@ -75,7 +68,7 @@ public class MultiHitMeleeWeapon : Weapon
 		if ( _timeSinceLastHit < HitCooldown )
 			return;
 
-		if ( _numberOfSwings >= Strikes || _finishAfterCooldown )
+		if ( TimesUsed >= MaxUses || _finishAfterCooldown )
 			return;
 
 		if ( Equipment.Grub is not { } grub )
@@ -89,7 +82,7 @@ public class MultiHitMeleeWeapon : Weapon
 		var trs = GetHitObjects();
 		var damage = BaseHitDamage;
 
-		if ( _currentStrikeCount == Strikes )
+		if ( _currentStrikeCount == MaxUses )
 		{
 			damage += FinalHitModifier * _currentStrikeCount;
 			foreach ( var tr in trs )
@@ -119,15 +112,11 @@ public class MultiHitMeleeWeapon : Weapon
 			_currentStrikeCount += 1;
 		}
 
-		_numberOfSwings += 1;
-
-		if ( _numberOfSwings >= Strikes )
-		{
-			_currentStrikeCount = 1;
-			_numberOfSwings = 0;
+		// Delay for last attack so we don't stomp animation.
+		if ( TimesUsed == MaxUses - 1 )
 			_finishAfterCooldown = true;
-			return;
-		}
+		else
+			FireFinished();
 	}
 
 	private IEnumerable<SceneTraceResult> GetHitObjects()

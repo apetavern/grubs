@@ -7,20 +7,12 @@ namespace Grubs;
 [Title( "Grubs - Torch Weapon" ), Category( "Equipment" )]
 public sealed class TorchWeapon : Weapon
 {
-	[Property] private float TorchTime { get; set; } = 5f;
 	[Property] private float TorchSize { get; set; } = 10f;
 	[Property] private GameObject TorchFlame { get; set; }
 
 	[Sync] private bool TorchFlameEnabled { get; set; }
-	private float TorchTimeLeft { get; set; } = 5f;
 
 	private TimeSince _timeSinceLastTorchSound;
-
-	protected override void OnStart()
-	{
-		base.OnStart();
-		TorchTimeLeft = TorchTime;
-	}
 
 	protected override void OnUpdate()
 	{
@@ -54,12 +46,10 @@ public sealed class TorchWeapon : Weapon
 
 		if ( IsFiring )
 		{
-			TorchTimeLeft -= Time.Delta;
+			TimesUsed += Time.Delta;
 
-			if ( TorchTimeLeft <= 0 )
+			if ( TimesUsed >= MaxUses )
 			{
-				TorchTimeLeft = TorchTime;
-				IsFiring = false;
 				TorchFlame.Enabled = false;
 				FireFinished();
 				return;

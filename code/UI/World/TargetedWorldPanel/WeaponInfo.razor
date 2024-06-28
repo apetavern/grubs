@@ -1,3 +1,4 @@
+@using Grubs.Equipment
 @using Grubs.Equipment.Weapons
 
 @namespace Grubs.UI
@@ -7,39 +8,59 @@
 @attribute [StyleSheet]
 
 <root>
-    @foreach (var input in Inputs)
-    {
-        <div class="hint">
-            <InputGlyph action=@input.Key size="medium" />
-            <div class="text">@input.Value</div>
-        </div>
-    }
+	@if (ShouldDisplayInfo())
+	{
+		@if (Weapon.AmmoType == AmmoType.Numbered)
+		{
+			<div class="text">@GetAmmoText() Uses</div>
+		}
+		else if (Weapon.AmmoType == AmmoType.Fuel)
+		{
+			<div class="fuel">
+				<div class="percentageText">@GetFuelRemaining().ToString("0")%</div>
+				<div class="fill" style="width: @GetFuelRemaining()%;" />
+			</div>
+		}
+	}
+	@foreach (var input in Inputs)
+	{
+		<div class="hint">
+			<InputGlyph action=@input.Key size="medium" />
+			<div class="text">@input.Value</div>
+		</div>
+	}
 </root>
 
 @code {
-    public Weapon Weapon { get; set; }
-    public Dictionary<string, string> Inputs { get; set; }
+	public Weapon Weapon { get; set; }
+	public Dictionary<string, string> Inputs { get; set; }
 
-    protected override void OnStart()
-    {
-        if (Weapon == null)
-            return;
+	private bool ShouldDisplayInfo() => Weapon != null && Weapon.MaxUses > 1;
+	private float GetAmmoRemaining() => (Weapon.MaxUses - Weapon.TimesUsed).Clamp(0, Weapon.MaxUses);
+	private float GetFuelRemaining() => GetAmmoRemaining() * 100 / Weapon.MaxUses;
 
-        if (Weapon.Components.TryGet<InputHintOverride>(out var hint))
-        {
-            Inputs = hint.Inputs;
-        }
-        else
-        {
-            Inputs = new Dictionary<string, string>()
-            {
-                { "fire", Weapon.GetFireInputActionDescription() }
-            };
-        }
-    }
+	private string GetAmmoText() => $"{GetAmmoRemaining().ToString("0")}/{Weapon.MaxUses}";
 
-    protected override int BuildHash()
-    {
-        return HashCode.Combine(Inputs.GetHashCode());
-    }
+	protected override void OnStart()
+	{
+		if (Weapon == null)
+			return;
+
+		if (Weapon.Components.TryGet<InputHintOverride>(out var hint))
+		{
+			Inputs = hint.Inputs;
+		}
+		else
+		{
+			Inputs = new Dictionary<string, string>()
+			{
+				{ "fire", Weapon.GetFireInputActionDescription() }
+			};
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Inputs.GetHashCode(), Weapon.TimesUsed);
+	}
 }

@@ -38,6 +38,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
         "__guid": "b06511ed-a400-4588-b5ff-d358aba7eb71",
+        "AmmoType": "Fuel",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,

@@ -17,13 +17,10 @@ public sealed class JetpackTool : Tool
 	/// </summary>
 	[Property] public GameObject UDFlame2 { get; set; }
 
-	[Property] private float MaxJetFuel { get; set; } = 10f;
-
 	[Sync] private float ForwardBackFlameScale { get; set; }
 	[Sync] private float UpDownFlameScale { get; set; }
 	[Sync] private bool ShouldAnimate { get; set; }
 
-	private float _currentJetFuel;
 	private float _jetpackDir;
 	private SoundHandle _jetSound;
 
@@ -37,8 +34,6 @@ public sealed class JetpackTool : Tool
 		FBFlame.Enabled = false;
 		UDFlame1.Enabled = false;
 		UDFlame2.Enabled = false;
-		IsFiring = false;
-		_currentJetFuel = MaxJetFuel;
 		_jetSound?.Stop();
 	}
 
@@ -51,8 +46,6 @@ public sealed class JetpackTool : Tool
 		FBFlame.Enabled = false;
 		UDFlame1.Enabled = false;
 		UDFlame2.Enabled = false;
-		IsFiring = false;
-		_currentJetFuel = MaxJetFuel;
 		_jetSound?.Stop();
 	}
 
@@ -100,6 +93,9 @@ public sealed class JetpackTool : Tool
 		if ( ShouldAnimate )
 			AnimateFlames();
 
+		if ( TimesUsed >= MaxUses && IsFiring )
+			FireFinished();
+
 		base.OnUpdate();
 	}
 
@@ -112,9 +108,6 @@ public sealed class JetpackTool : Tool
 			FireEffects();
 			IsFiring = true;
 		}
-
-		if ( _currentJetFuel <= 0 && IsFiring )
-			FireFinished();
 
 		if ( IsFiring )
 		{
@@ -133,7 +126,7 @@ public sealed class JetpackTool : Tool
 
 			if ( !characterController.IsOnGround )
 			{
-				_currentJetFuel -= Time.Delta * Input.AnalogMove.Length;
+				TimesUsed += Time.Delta * Input.AnalogMove.Length;
 				UpdateRotation();
 				characterController.Accelerate( new Vector3( -Input.AnalogMove.y, 0, 0.75f + Input.AnalogMove.x * 1.5f ) * 72f );
 				characterController.CurrentGroundAngle = 0;
@@ -165,6 +158,8 @@ public sealed class JetpackTool : Tool
 	private void FireEffects()
 	{
 		_jetSound = Sound.Play( "thrust" );
-		_jetSound.Volume = 0.25f;
+
+		if ( IsProxy )
+			_jetSound.Volume = 0.25f;
 	}
 }
