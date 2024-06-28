@@ -1,4 +1,5 @@
-﻿using Grubs.Gamemodes;
+﻿using Grubs.Equipment.Weapons;
+using Grubs.Gamemodes;
 using Grubs.UI.Inventory;
 
 namespace Grubs.Pawn;
@@ -106,10 +107,18 @@ public sealed class PlayerInventory : Component
 		IsClosing = false;
 	}
 
+	// kidd: Called by PlayerInventory.razor, VS references won't pop.
 	public void EquipItem( Equipment.Equipment equipment )
 	{
 		if ( Player.HasFiredThisTurn )
 			return;
+
+		var active = GetActiveEquipment();
+		if ( active?.Components.TryGet<Weapon>( out var weapon ) ?? false )
+		{
+			if ( weapon.IsFiring && !weapon.CanSwapDuringUse || weapon.TimesUsed > 0 && !weapon.CanSwapAfterUse )
+				return;
+		}
 
 		Holster( ActiveSlot );
 		var index = Equipment.IndexOf( equipment );
