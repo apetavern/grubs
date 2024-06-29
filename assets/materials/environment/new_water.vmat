@@ -11,7 +11,7 @@ Layer0
 
 	//---- Material ----
 	TextureColor "[1.000000 1.000000 1.000000 0.000000]"
-	TextureTranslucency "[0.000000 0.000000 0.000000 0.000000]"
+	TextureTranslucency "[1.000000 1.000000 1.000000 0.000000]"
 
 	//---- Specular ----
 	g_flSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
@@ -19,7 +19,7 @@ Layer0
 	g_flSpecularPower "25.000"
 
 	//---- Water ----
-	g_flDeepWaterColor "[0.666667 0.666667 0.666667 1.000000]"
+	g_flDeepWaterColor "[0.000000 0.356863 0.580392 1.000000]"
 	g_flDepthMaxDistance "200.000"
 	g_flLightbias "[0.500 1.000]"
 	g_flShallowWaterColor "[0.000000 0.000000 0.000000 0.400000]"

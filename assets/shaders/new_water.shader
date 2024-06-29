@@ -25,7 +25,7 @@ COMMON
 	#endif
 
 	#ifndef S_TRANSLUCENT
-	#define S_TRANSLUCENT 1
+	#define S_TRANSLUCENT 0
 	#endif
 
 	#include "common/shared.hlsl"
