@@ -12,6 +12,10 @@ InventoryItem {
         margin: 8px;
     }
 
+    &:hover {
+        sound-in: ui_button_hover;
+    }
+
     &:hover:not(.disabled) {
         background-color: $hud-fg-hovered;
     }

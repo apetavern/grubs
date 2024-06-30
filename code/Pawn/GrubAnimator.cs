@@ -79,6 +79,7 @@ public sealed class GrubAnimator : Component
 	[Broadcast]
 	public void TriggerBackflip()
 	{
+		Sound.Play( "grub_backflip", Transform.Position );
 		GrubRenderer.Set( "backflip", true );
 	}
 
