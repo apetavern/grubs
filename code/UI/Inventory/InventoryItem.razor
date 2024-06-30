@@ -25,6 +25,8 @@
 @code
 {
     public Equipment Equipment { get; set; }
+    public InventoryDisplay InventoryDisplay { get; set; }
+
     public string Ammo => Equipment?.Ammo == -1 ? "\u221e" : Equipment?.Ammo.ToString();
 
     protected override void OnClick(MousePanelEvent e)
@@ -34,6 +36,29 @@
 
         PlayerInventory.Local.EquipItem(Equipment);
     }
+
+    public override void Tick()
+    {
+        base.Tick();
+
+        if (InventoryDisplay is null)
+            return;
+
+        if (PanelOrChildrenHovered() || Equipment.Deployed)
+            InventoryDisplay.HoveredItemPanel = this;
+    }
+
+    protected override void OnMouseOut(MousePanelEvent e)
+    {
+        base.OnMouseOut(e);
+
+        if (InventoryDisplay is null)
+            return;
+
+        InventoryDisplay.HoveredItemPanel = null;
+    }
+
+    public bool PanelOrChildrenHovered() => HasHovered || Children.Any(child => child.HasHovered);
 
     private bool IsDisabled()
     {

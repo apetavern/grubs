@@ -9,7 +9,24 @@ InventoryDisplay {
     transition: opacity 0.15s;
     pointer-events: all;
 
+    .tooltip {
+        position: absolute;
+        min-width: 100px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: rgba($menu-bg .9);
+        font-size: 24px;
+        z-index: 10;
+
+        &.hide {
+            opacity: 0;
+        }
+    }
+
     .inv-panel {
+        position: relative;
         width: 520px;
         border-radius: 8px;
         transform: skewX(-2px);
@@ -73,6 +90,7 @@ InventoryDisplay {
     //    height: 100px;
     //}
     //
+
     &.hide {
         opacity: 0;
         pointer-events: none;

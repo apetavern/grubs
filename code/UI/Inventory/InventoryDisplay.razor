@@ -17,6 +17,9 @@
 }
 
 <root>
+    <div @ref=TooltipPanel class="tooltip @(HoveredItemPanel is null ? "hide" : "")">
+        @(HoveredItemPanel is null ? "" : HoveredItemPanel.Equipment.Name)
+    </div>
     <div class="inv-panel">
         <div class="inv-title">
             <label>Inventory</label>
@@ -25,7 +28,7 @@
             <div class="inv-weapons">
                 @foreach (var eq in Inventory.Equipment)
                 {
-                    <InventoryItem Equipment=@eq/>
+                    <InventoryItem Equipment=@eq InventoryDisplay=@this />
                 }
             </div>
             <div class="inv-tools">
@@ -33,34 +36,46 @@
             </div>
         </div>
     </div>
-
-</root>
+</root
 
 @code
 {
-    public PlayerInventory Inventory { get; set; }
+	public PlayerInventory Inventory { get; set; }
+	public InventoryItem HoveredItemPanel { get; set; }
 
-    private const int _columns = 5;
-    private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
-    private int _totalItems => Inventory.Equipment.Count();
+	private Panel TooltipPanel { get; set; }
 
-    private int _currentGamepadIndex;
-    private bool _usedJoystick;
+	private const int _columns = 5;
+	private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
+	private int _totalItems => Inventory.Equipment.Count();
 
-    public override void Tick()
-    {
-        SetClass("hide", !Inventory.InventoryOpen);
-        Cursor.Enabled("inv", Inventory.InventoryOpen);
+	private int _currentGamepadIndex;
+	private bool _usedJoystick;
+
+	public override void Tick()
+	{
+		SetClass("hide", !Inventory.InventoryOpen);
+		Cursor.Enabled("inv", Inventory.InventoryOpen);
+
+		if (!Inventory.InventoryOpen) return;
+
+		if(HoveredItemPanel is not null) 
+		{
+			Log.Info(HoveredItemPanel.ScaleFromScreen);
+			//Log.Info(Length.Pixels(HoveredItemPanel.Box.Rect.Left / ScaleToScreen));
+			TooltipPanel.Style.Left = (HoveredItemPanel.Box.Rect.Left - Box.Rect.Left) * ScaleFromScreen - 15;
+			TooltipPanel.Style.Top = (HoveredItemPanel.Box.Rect.Top - Box.Rect.Top ) * ScaleFromScreen - 60;
+		}
 
         if (!Input.UsingController) return;
 
-        if (Inventory.InventoryOpen && Math.Round(Input.AnalogMove.Length) != 0 && !_usedJoystick)
+        if (Math.Round(Input.AnalogMove.Length) != 0 && !_usedJoystick)
         {
             _usedJoystick = true;
             PlayerInventory.Local.EquipItem(Inventory.Equipment.ElementAtOrDefault(SelectNextItemGamepadInput()));
         }
 
-        if (Inventory.InventoryOpen && Math.Round(Input.AnalogMove.Length) == 0 && _usedJoystick)
+        if (Math.Round(Input.AnalogMove.Length) == 0 && _usedJoystick)
         {
             _usedJoystick = false;
         }
@@ -68,7 +83,7 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Inventory.InventoryOpen, Inventory.EquipmentActive, Inventory.ActiveSlot);
+        return HashCode.Combine(Inventory.InventoryOpen, Inventory.EquipmentActive, Inventory.ActiveSlot, HoveredItemPanel?.GetHashCode());
     }
 
     private int SelectNextItemGamepadInput()
