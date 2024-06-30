@@ -22,6 +22,10 @@
           "component_type": "PlayerInventory"
         },
         "MousePosition": "0,0,0",
+        "TurnIndicatorPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/world/turnindictator.prefab"
+        },
         "Voice": {
           "_type": "component",
           "component_id": "de1952ee-5fdd-4fd7-9fb7-3f0bd52e4626",

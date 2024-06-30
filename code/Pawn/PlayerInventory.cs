@@ -84,14 +84,12 @@ public sealed class PlayerInventory : Component
 		if ( Input.Pressed( "toggle_inventory" ) )
 		{
 			InventoryOpen = !InventoryOpen;
-			Player.HasInteractedThisTurn = true;
 		}
 
 		if ( Input.UsingController && InventoryOpen && Input.Released( "backflip" ) )
 		{
 			InventoryOpen = false;
 			IsClosing = true;
-			Player.HasInteractedThisTurn = true;
 			return;
 		}
 
@@ -200,7 +198,6 @@ public sealed class PlayerInventory : Component
 
 	private void CycleSlot( bool forwards = true )
 	{
-		Player.HasInteractedThisTurn = true;
 		var active = GetActiveEquipment();
 		if ( active?.Components.TryGet<Weapon>( out var weapon ) ?? false )
 		{

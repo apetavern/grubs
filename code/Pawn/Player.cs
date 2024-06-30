@@ -37,14 +37,11 @@ public sealed class Player : Component
 
 	[Property] public required PlayerVoice Voice { get; set; }
 
+	[Property] public required GameObject TurnIndicatorPrefab { get; set; }
+
 	[Property, ReadOnly] public Vector3 MousePosition { get; set; }
 
-	public bool HasInteractedThisTurn { get; set; }
-
-	private TimeSince _timeSinceStartTurn;
-
 	private static readonly Plane _plane = new( new Vector3( 0f, 512f, 0f ), Vector3.Left );
-
 
 	protected override void OnStart()
 	{
@@ -53,6 +50,9 @@ public sealed class Player : Component
 
 		if ( IsProxy )
 			return;
+
+		if ( TurnIndicatorPrefab is not null )
+			TurnIndicatorPrefab.Clone();
 
 		SelectedColor = GrubsConfig.PresetTeamColors.Values
 			.OrderBy( _ => Guid.NewGuid() )
@@ -81,23 +81,14 @@ public sealed class Player : Component
 			: Mouse.Position );
 		var endPos = _plane.Trace( cursorRay, twosided: true );
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
-
-		// Check for camera controls this turn on player so we don't have to fetch every frame on camera.
-		if ( Input.Pressed( "camera_pan" ) || Input.Pressed( "camera_reset" ) || Input.MouseWheel != Vector2.Zero )
-			HasInteractedThisTurn = true;
-
-		if ( IsActive && _timeSinceStartTurn > 5 && !HasInteractedThisTurn )
-		{
-			HasInteractedThisTurn = true;
-			ChatHelper.Instance.SendInfoMessage( $"{ActiveGrub.Name} was too busy playing with their other Grub..." );
-			Gamemode.FFA.UseTurn();
-		}
 	}
 
 	public void OnTurn()
 	{
-		_timeSinceStartTurn = 0;
-		HasInteractedThisTurn = false;
+		if ( IsProxy )
+			return;
+
+		Sound.Play( "ui_turn_indicator" );
 	}
 
 	public void EndTurn()

@@ -1,0 +1,37 @@
+{
+  "RootObject": {
+    "__guid": "add1006c-cf32-4c66-8567-16579d1eebbb",
+    "Flags": 0,
+    "Name": "turnindictator",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.WorldPanel",
+        "__guid": "3d0e21be-0f94-48ed-ad19-b05d727ac4bb",
+        "HorizontalAlign": "Center",
+        "InteractionRange": 1000,
+        "LookAtCamera": true,
+        "PanelSize": "1250,1250",
+        "RenderScale": 1,
+        "VerticalAlign": "Center"
+      },
+      {
+        "__type": "Grubs.UI.TurnIndicator",
+        "__guid": "dd1426f8-f771-4658-bf55-427b8a9fd3bf",
+        "DestroyDelay": 0,
+        "Offset": "0,-50,80",
+        "RiseSpeed": 0
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
