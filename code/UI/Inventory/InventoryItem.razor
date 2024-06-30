@@ -44,7 +44,7 @@
         if (InventoryDisplay is null)
             return;
 
-        if (PanelOrChildrenHovered() || Equipment.Deployed)
+        if (PanelOrChildrenHovered() || (Equipment.Deployed && Input.UsingController))
             InventoryDisplay.HoveredItemPanel = this;
     }
 

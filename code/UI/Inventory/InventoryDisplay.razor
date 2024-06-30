@@ -61,9 +61,11 @@
 
 		if(HoveredItemPanel is not null) 
 		{
-			Log.Info(HoveredItemPanel.ScaleFromScreen);
-			//Log.Info(Length.Pixels(HoveredItemPanel.Box.Rect.Left / ScaleToScreen));
-			TooltipPanel.Style.Left = (HoveredItemPanel.Box.Rect.Left - Box.Rect.Left) * ScaleFromScreen - 15;
+			var parentDiff = HoveredItemPanel.Box.Rect.Left - Box.Rect.Left;
+			var tooltipCenter = (TooltipPanel.Box.Rect.Right - TooltipPanel.Box.Rect.Left) / 2;
+			var itemCenter = (HoveredItemPanel.Box.Rect.Right - HoveredItemPanel.Box.Rect.Left) / 2;
+
+			TooltipPanel.Style.Left = (parentDiff - (tooltipCenter - itemCenter)) * ScaleFromScreen;
 			TooltipPanel.Style.Top = (HoveredItemPanel.Box.Rect.Top - Box.Rect.Top ) * ScaleFromScreen - 60;
 		}
 
