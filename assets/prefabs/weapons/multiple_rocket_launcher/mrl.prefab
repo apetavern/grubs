@@ -38,6 +38,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
         "__guid": "a5cb8040-3b85-4efa-b30b-19d03517ddc6",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -123,7 +124,8 @@
               "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl_shell.prefab"
             }
           }
-        }
+        },
+        "UseSound": "sounds/weapons/bazooka/bazooka_fire.sound"
       }
     ],
     "Children": [],

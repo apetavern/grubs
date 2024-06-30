@@ -32,11 +32,13 @@
         },
         "Name": "Grenade",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
         "__guid": "35b632be-ad58-46a0-8dcd-723b5ed65f50",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -122,7 +124,8 @@
               "prefab": "prefabs/weapons/grenade/grenade_thrown.prefab"
             }
           }
-        }
+        },
+        "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
@@ -132,7 +135,8 @@
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

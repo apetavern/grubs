@@ -38,6 +38,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
         "__guid": "b28b81cf-f9c1-404c-af97-b2d3f022b075",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -123,7 +124,8 @@
               "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb_thrown.prefab"
             }
           }
-        }
+        },
+        "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",

@@ -11,7 +11,6 @@ public class TeleportTool : Tool
 	 */
 	[Property] public float CursorRange { get; set; } = 100f; // How far from the grub can the tool target
 	[Property] public required SkinnedModelRenderer CursorModel { get; set; } // The model of the grub
-	[Property, ResourceType( "sound" )] private string TeleportSound { get; set; } = "";
 
 	protected override void OnStart()
 	{
@@ -100,6 +99,6 @@ public class TeleportTool : Tool
 	[Broadcast]
 	public void TeleportEffects( Vector3 position )
 	{
-		Sound.Play( TeleportSound, position );
+		Sound.Play( UseSound, position );
 	}
 }

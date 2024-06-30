@@ -14,7 +14,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/bazooka/bazooka.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
@@ -31,11 +32,13 @@
         },
         "Name": "Bazooka",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
         "__guid": "c23a2505-024e-4c1a-b85b-90ab66474edf",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -121,10 +124,12 @@
               "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
             }
           }
-        }
+        },
+        "UseSound": "sounds/weapons/bazooka/bazooka_fire.sound"
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

@@ -11,7 +11,6 @@ public class MeleeWeapon : Weapon
 	[Property] public Vector3 HitSize { get; set; }
 	[Property] public Vector3 HitOffset { get; set; }
 	[Property] public float HitDelay { get; set; }
-	[Property, ResourceType( "sound" )] public required string HitSound { get; set; }
 	[Property, ResourceType( "sound" )] public required string ImpactSound { get; set; }
 
 	protected override void FireImmediate()
@@ -41,7 +40,7 @@ public class MeleeWeapon : Weapon
 
 		grub.Animator.Fire();
 
-		Sound.Play( HitSound );
+		Sound.Play( UseSound, GetStartPosition() );
 
 		var trs = Scene.Trace.Ray( ray, HitSize.x )
 			.Size( 12f )
@@ -50,7 +49,7 @@ public class MeleeWeapon : Weapon
 			.RunAll();
 
 		if ( trs.Any( tr => tr.GameObject is not null ) )
-			Sound.Play( ImpactSound );
+			Sound.Play( ImpactSound, trs.First().HitPosition );
 
 		foreach ( var tr in trs )
 		{

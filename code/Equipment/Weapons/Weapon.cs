@@ -19,6 +19,7 @@ public partial class Weapon : Component
 	[Property] public int MaxUses { get; set; } = 1;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public AmmoType AmmoType { get; set; } = AmmoType.Numbered;
+	[Property] public SoundEvent UseSound { get; set; }
 	[Property] public OnFireDelegate OnFire { get; set; }
 	[Property] public OnFireFinishedDelegate OnFireFinished { get; set; }
 
@@ -76,6 +77,7 @@ public partial class Weapon : Component
 				IsCharging = false;
 				ChargeSound?.Stop();
 
+				FireEffects();
 				ChargeGuage.GameObject.Enabled = false;
 
 				if ( OnFire is not null )
@@ -94,6 +96,8 @@ public partial class Weapon : Component
 			if ( Input.Pressed( "fire" ) )
 			{
 				IsFiring = true;
+
+				FireEffects();
 
 				if ( OnFire is not null )
 					OnFire.Invoke( 100 );
@@ -130,6 +134,8 @@ public partial class Weapon : Component
 			if ( Input.Down( "fire" ) && TimesUsed < MaxUses && TimeSinceLastUsed > Cooldown )
 			{
 				IsFiring = true;
+
+				FireEffects();
 
 				if ( OnFire is not null )
 					OnFire.Invoke( 100 );
@@ -290,5 +296,11 @@ public partial class Weapon : Component
 			FiringType.Cursor => "Set Target",
 			_ => string.Empty
 		};
+	}
+
+	[Broadcast]
+	private void FireEffects()
+	{
+		Sound.Play( UseSound, GetStartPosition() );
 	}
 }

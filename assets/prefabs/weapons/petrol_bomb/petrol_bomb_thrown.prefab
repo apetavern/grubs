@@ -66,7 +66,7 @@
         "ExplodeOnDeath": true,
         "ExplosionDamage": 10,
         "ExplosionRadius": 40,
-        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "ExplosionSound": "sounds/weapons/petrolbomb/petrolbomb_explode.sound",
         "Particles": "particles/explosion/grubs_explosion_base.vpcf"
       },
       {
@@ -148,7 +148,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

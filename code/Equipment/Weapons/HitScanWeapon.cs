@@ -18,7 +18,6 @@ public class HitScanWeapon : Weapon
 	[Property, Category( "Trace" )] public float TraceDelay { get; set; } = 0f;
 	[Property, Category( "Explosion" )] public float ExplosionRadius { get; set; } = 0f;
 	[Property, Category( "Explosion" )] public float ExplosionDamage { get; set; } = 0f;
-	[Property, Category( "Effects" )] public SoundEvent TraceSound { get; set; }
 	[Property, Category( "Effects" )] public ParticleSystem TraceParticles { get; set; }
 	[Property, Category( "Effects" )] public ParticleSystem MuzzleParticles { get; set; }
 
@@ -69,7 +68,7 @@ public class HitScanWeapon : Weapon
 		grub.Animator.Fire();
 
 		if ( TraceDelay > 0 || TraceDelay == 0 && traceCount == 1 )
-			Sound.Play( TraceSound, startPos );
+			Sound.Play( UseSound, startPos );
 
 		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
 		if ( MuzzleParticles is not null )

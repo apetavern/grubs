@@ -39,6 +39,7 @@
       {
         "__type": "Grubs.Equipment.Tools.GirderTool",
         "__guid": "a4dd2f3c-9d3c-41fb-aa28-3a84932a0c01",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -68,7 +69,7 @@
           "prefab": "prefabs/tools/girder/girder_short.prefab"
         },
         "MaxUses": 1,
-        "PlaceSound": "sounds/impacts/bullets/impact-bullet-metal.sound"
+        "UseSound": "sounds/weapons/girder/girder_build.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",

@@ -38,6 +38,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
         "__guid": "3798a432-0d48-4ff6-97d7-235c4b38cfda",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -60,8 +61,8 @@
         "TraceDelay": 0,
         "TraceDistance": 5000,
         "TraceParticles": "particles/guntrace/railgun.vpcf",
-        "TraceSound": "sounds/weapons/gibgun/gibgun_shot.sound",
-        "TraceSpread": 1
+        "TraceSpread": 1,
+        "UseSound": "sounds/weapons/gibgun/gibgun_shot.sound"
       }
     ],
     "Children": [],

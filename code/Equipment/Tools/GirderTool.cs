@@ -13,7 +13,6 @@ public class GirderTool : Tool
 
 	[Property] public required ModelRenderer CursorVisual { get; set; } // The model of the grub
 	[Property] public required ModelCollider CursorCollider { get; set; } // The model of the grub
-	[Property, ResourceType( "sound" )] private string PlaceSound { get; set; } = "";
 
 	[Property] public GameObject GirderPrefab { get; set; }
 
@@ -104,7 +103,7 @@ public class GirderTool : Tool
 
 		IsFiring = false;
 
-		Sound.Play( PlaceSound );
+		Sound.Play( UseSound );
 
 		base.FireFinished();
 	}

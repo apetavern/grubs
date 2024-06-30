@@ -38,6 +38,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.RemoteDetonateWeapon",
         "__guid": "d2dffc35-f536-4f31-b145-fe66ccbecc83",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -169,7 +170,8 @@
               "prefab": "prefabs/weapons/goat/goat_thrown.prefab"
             }
           }
-        }
+        },
+        "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",

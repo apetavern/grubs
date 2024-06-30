@@ -1,12 +1,17 @@
 {
   "UI": false,
-  "Volume": "0.20,0.20,0",
+  "Volume": "0.10,0.20,0",
   "Pitch": "0.95,1.05,1",
   "Decibels": 110,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/bazooka/bazooka_fire.vsnd"
   ],
-  "MaximumDistance": 2777.795,
-  "MinimumDistance": 138.88976
+  "Occlusion": true,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__references": [],
+  "__version": 0
 }

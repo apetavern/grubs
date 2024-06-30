@@ -50,7 +50,8 @@
           "component_type": "Equipment"
         },
         "FiringType": "Continuous",
-        "MaxUses": 75
+        "MaxUses": 75,
+        "UseSound": "sounds/weapons/torch/torch_fire.sound"
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",

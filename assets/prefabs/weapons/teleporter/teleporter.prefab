@@ -32,11 +32,13 @@
         },
         "Name": "Teleporter",
         "ShouldShowAimReticle": false,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 0
       },
       {
         "__type": "Grubs.Equipment.Tools.TeleportTool",
         "__guid": "9e81569c-2d14-489b-ad20-6ec3e20f0eaa",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -88,9 +90,9 @@
               "Id": 3,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
+                "_type": "Grubs.Equipment.Equipment",
                 "_name": "Holster",
-                "_type": "Grubs.Equipment.Equipment"
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "272,16"
@@ -118,7 +120,7 @@
             }
           ]
         },
-        "TeleportSound": "sounds/weapons/teleporter/teleport_use.sound"
+        "UseSound": "sounds/weapons/teleporter/teleport_use.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
@@ -151,7 +153,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

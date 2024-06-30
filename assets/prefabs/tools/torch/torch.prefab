@@ -56,7 +56,8 @@
           "_type": "gameobject",
           "go": "54d1051e-daef-4a84-9022-45cc262dbc27"
         },
-        "TorchSize": 20
+        "TorchSize": 20,
+        "UseSound": "sounds/weapons/torch/torch_fire.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",

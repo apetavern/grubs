@@ -58,7 +58,8 @@
         "HitCooldown": 0.3,
         "HitDistance": 25,
         "HitOffset": "0,0,-8",
-        "MaxUses": 3
+        "MaxUses": 3,
+        "UseSound": "sounds/weapons/bat/bat_swing.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
