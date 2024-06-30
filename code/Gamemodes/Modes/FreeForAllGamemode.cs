@@ -315,6 +315,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		if ( player is null || grub is null )
 			return;
 
+		player.OnTurn();
 		player.ActiveGrub = grub;
 	}
 

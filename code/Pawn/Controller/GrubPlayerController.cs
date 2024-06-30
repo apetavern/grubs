@@ -1,7 +1,6 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
 using Grubs.UI.Components;
-using Grubs.UI.Inventory;
 
 namespace Grubs.Pawn.Controller;
 
@@ -98,9 +97,15 @@ public sealed partial class GrubPlayerController : Component
 		var nextFacing = Transform.Rotation.z <= 0 ? -1 : 1;
 
 		var look = (LookAngles + LookInput * nextFacing).Normal;
-		LookAngles = look.WithPitch( look.pitch.Clamp( -80f, 75f ) )
+		look = look.WithPitch( look.pitch.Clamp( -80f, 75f ) )
 			.WithRoll( 0f )
 			.WithYaw( 0f );
+
+		if ( LookAngles != look )
+		{
+			LookAngles = look;
+			Grub.Player.HasInteractedThisTurn = true;
+		}
 
 		if ( nextFacing != LastFacing )
 			LookAngles = LookAngles.WithPitch( LookAngles.pitch * -1 );
@@ -124,6 +129,7 @@ public sealed partial class GrubPlayerController : Component
 			CharacterController.Velocity = new Vector3( Facing * 175f, 0f, 220f );
 			CharacterController.ReleaseFromGround();
 			Animator.TriggerJump();
+			Grub.Player.HasInteractedThisTurn = true;
 		}
 	}
 
@@ -143,6 +149,7 @@ public sealed partial class GrubPlayerController : Component
 			IsChargingBackflip = true;
 			BackflipCharge += 0.02f;
 			BackflipCharge = BackflipCharge.Clamp( 0f, 1f );
+			Grub.Player.HasInteractedThisTurn = true;
 		}
 	}
 
@@ -168,6 +175,9 @@ public sealed partial class GrubPlayerController : Component
 
 		result = result.Normal * inSpeed;
 		result *= WishSpeed;
+
+		if ( result != Vector3.Zero )
+			Grub.Player.HasInteractedThisTurn = true;
 
 		return result;
 	}
