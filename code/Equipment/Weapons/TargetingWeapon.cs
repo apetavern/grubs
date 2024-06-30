@@ -67,10 +67,7 @@ public sealed class TargetingWeapon : Weapon
 		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
 
 		if ( Input.UsingController )
-		{
-			IsFiring = true;
 			GrubFollowCamera.Local.PanCamera();
-		}
 
 		if ( Directional )
 		{

@@ -42,10 +42,7 @@ public class TeleportTool : Tool
 		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
 
 		if ( Input.UsingController )
-		{
-			IsFiring = true;
 			GrubFollowCamera.Local.PanCamera();
-		}
 	}
 
 	public override void OnDeploy()

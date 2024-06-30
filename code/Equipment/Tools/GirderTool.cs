@@ -48,10 +48,7 @@ public class GirderTool : Tool
 		CursorVisual.Transform.Rotation *= Rotation.FromPitch( (Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f) );
 
 		if ( Input.UsingController )
-		{
-			IsFiring = true;
 			GrubFollowCamera.Local.PanCamera();
-		}
 
 		GrubFollowCamera.Local.Distance = 1024f;
 		var isValidPlacement = CheckValidPlacement();
