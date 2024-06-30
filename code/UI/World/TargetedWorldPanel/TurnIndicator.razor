@@ -35,10 +35,6 @@
 	private RealTimeUntil _timeUntilSkip = _afkTime;
 	private List<string> _actions = new List<string>()
 	{
-		"forward",
-		"backward",
-		"left",
-		"right",
 		"jump",
 		"backflip",
 		"camera_pan",
@@ -63,7 +59,7 @@
 
 		base.OnUpdate();
 
-		if (!_hasMoved && _actions.Any((input) => Input.Pressed(input)) || Input.MouseWheel != Vector2.Zero)
+		if (!_hasMoved && _actions.Any((input) => Input.Pressed(input)) || Input.MouseWheel != Vector2.Zero || Input.AnalogMove != Vector3.Zero)
 			_hasMoved = true;
 
 		if (!_hasMoved && _timeUntilSkip)
