@@ -4,7 +4,7 @@
     "Flags": 0,
     "Name": "turnindictator",
     "Enabled": true,
-    "NetworkMode": 2,
+    "NetworkMode": 0,
     "NetworkInterpolation": true,
     "Components": [
       {

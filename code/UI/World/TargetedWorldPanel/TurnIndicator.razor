@@ -73,6 +73,7 @@
 		if (!Player.IsActive || Gamemode.FFA.TurnIsChanging)
 			return;
 
+		_timeUntilSkip = _afkTime;
 		ChatHelper.Instance.SendInfoMessage($"{Player.ActiveGrub.Name} was AFK playing with their other Grub...");
 		Gamemode.FFA.UseTurn();
 	}

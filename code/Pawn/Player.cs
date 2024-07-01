@@ -83,11 +83,9 @@ public sealed class Player : Component
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 	}
 
+	[Authority]
 	public void OnTurn()
 	{
-		if ( IsProxy )
-			return;
-
 		Sound.Play( "ui_turn_indicator" );
 	}
 

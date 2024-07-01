@@ -70,6 +70,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		var firstGrubId = firstPlayer.GrubQueue[0];
 		firstPlayer.GrubQueue.RemoveAt( 0 );
 		firstPlayer.GrubQueue.Add( firstGrubId );
+		firstPlayer.OnTurn();
 		ActivePlayerId = firstPlayer.Id;
 
 		// Landmine Spawning
@@ -237,6 +238,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		var nextGrub = FindNextGrub( nextPlayer );
 		nextPlayer.ActiveGrubId = nextGrub.Id;
 		SetActiveGrub( nextPlayer.Id, nextGrub.Id );
+		nextPlayer.OnTurn();
 
 		TimeUntilNextTurn = GrubsConfig.TurnDuration;
 	}
@@ -315,7 +317,6 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		if ( player is null || grub is null )
 			return;
 
-		player.OnTurn();
 		player.ActiveGrub = grub;
 	}
 
