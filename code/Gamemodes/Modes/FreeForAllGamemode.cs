@@ -248,11 +248,12 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		var queue = player.GrubQueue;
 		while ( queue.Any() )
 		{
-			var grub = queue[0].ToComponent<Grub>();
+			var grubId = queue[0];
+			var grub = grubId.ToComponent<Grub>();
 			queue.RemoveAt( 0 );
+			queue.Add( grubId );
 			if ( !grub.IsValid() || grub.IsDead )
 				continue;
-			queue.Add( grub.Id );
 			return grub;
 		}
 
