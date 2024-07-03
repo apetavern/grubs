@@ -14,6 +14,8 @@ public class KillZone : Component, Component.ITriggerListener
 		// kidd: Workaround for ArcProjectile being destroyed immediately for non-owner clients,
 		// despite the Transform appearing to be fine. Probably an interp bug, but Transform.ClearInterpolation()
 		// in ArcProjectile.OnStart() didn't do SHIT.
+		// kidd 7/2/24: Added Transform.ClearInterpolation to ArcProjectile.OnStart() because this same bug started popping.
+		// It fixed it, but removing this code caused it to start happening on other clients again...
 		var otherOwner = other.GameObject.Root.Network.OwnerConnection;
 		if ( otherOwner != null && otherOwner != Connection.Local )
 			return;

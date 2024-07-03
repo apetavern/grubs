@@ -28,6 +28,7 @@ public class ArcProjectile : Projectile
 		var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
 		Segments = CalculateTrajectory( dir, Charge );
 		Transform.Position = Segments[0].StartPos.WithY( 512f );
+		Transform.ClearInterpolation();
 	}
 
 	private bool secondUpdate;
