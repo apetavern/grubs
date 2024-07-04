@@ -6,8 +6,8 @@
 @inherits PanelComponent
 
 <root>
-    <Cursor/>
-    <SceneBackground @ref="SceneBackground"/>
+    <Cursor />
+    <SceneBackground @ref="SceneBackground" />
     <div @ref="MenuBody" class="body">
         <div class="upper">
             <div class="header">
@@ -21,13 +21,21 @@
             <div class="player-cards">
                 @foreach (var player in Player.All)
                 {
-                    <PlayerCard Player=@player/>
+                    <PlayerCard Player=@player />
                 }
             </div>
         </div>
-        @if (IsHost() && CanStart() && !IsLoadingTerrain())
+        @if (CanStart() && !IsLoadingTerrain())
         {
-            <button class="start-button" onclick=@Start>Start</button>
+            @if (IsHost())
+            {
+                <button class="start-button" onclick=@Start>Start</button>
+            }
+            else
+            {
+                <button class="start-button disabled">Waiting for Host</button>
+            }
+
         }
     </div>
 </root>

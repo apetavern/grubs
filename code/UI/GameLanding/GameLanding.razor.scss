@@ -92,6 +92,7 @@ GameLanding {
         border-radius: 4px;
 
         &.disabled {
+            width: 450px;
             background-color: rgb(43, 74, 41);
             color: #808080;
         }
