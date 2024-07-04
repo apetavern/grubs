@@ -3,6 +3,8 @@
 [Title( "Grubs - Ninja Rope Weapon" ), Category( "Equipment" )]
 public class NinjaRopeWeapon : Weapon
 {
+	public static float Timeout = 3f;
+
 	protected override void HandleComplexFiringInput()
 	{
 		if ( Equipment.Grub is not { } grub )
@@ -49,7 +51,7 @@ public class NinjaRopeWeapon : Weapon
 		base.OnUpdate();
 
 		// Use a shot if we missed and it's been a few seconds.
-		if ( IsFiring && Equipment.Grub?.ActiveMountable is null && TimeSinceLastUsed > 5f )
+		if ( IsFiring && Equipment.Grub?.ActiveMountable is null && TimeSinceLastUsed > Timeout )
 			FireFinished();
 	}
 

@@ -31,7 +31,8 @@
         "CreateBoneObjects": false,
         "Model": "models/tools/ninjarope/ninjarope_hook.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.SphereCollider",
@@ -53,6 +54,7 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "3527010a-1414-4c8a-990f-b60976be3e53",
+        "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
@@ -66,8 +68,9 @@
           "go": "313ab67d-9770-457c-9725-adaa92a715e6",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 200,
-        "SetPositionOnStart": true
+        "ProjectileSpeed": 300,
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.NinjaRopeHook",
@@ -183,7 +186,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

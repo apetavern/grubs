@@ -1,4 +1,5 @@
 ﻿using Grubs.Common;
+using Grubs.Equipment.Weapons;
 using Grubs.Helpers;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
@@ -18,7 +19,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		if ( IsProxy )
 			return;
 
-		if ( !MountObject.IsValid() || Rope == null && _timeSinceCreated > 5f )
+		if ( !MountObject.IsValid() || Rope == null && _timeSinceCreated > NinjaRopeWeapon.Timeout )
 		{
 			GameObject.Destroy();
 		}
