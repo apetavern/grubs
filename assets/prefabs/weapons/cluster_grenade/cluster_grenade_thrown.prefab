@@ -67,7 +67,8 @@
         "ExplosionDamage": 25,
         "ExplosionRadius": 100,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
@@ -110,7 +111,8 @@
         "ShrapnelUpVelocity": 250
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

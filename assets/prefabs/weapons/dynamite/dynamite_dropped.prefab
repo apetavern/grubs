@@ -29,11 +29,13 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/dynamite/dynamite_projectile.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "3011110c-659e-44aa-a8f1-ec82d1c2ac5f",
+        "DirectionRandomizer": 0,
         "Droppable": true,
         "PhysicsBody": {
           "_type": "component",
@@ -42,7 +44,8 @@
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 4,
-        "SetPositionOnStart": true
+        "SetPositionOnStart": true,
+        "SetRotationOnStart": false
       },
       {
         "__type": "Sandbox.ModelCollider",
@@ -54,6 +57,7 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
         "__guid": "e1cdabbe-d05b-4f79-a7cc-4387222868b4",
+        "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
@@ -61,7 +65,8 @@
         "ExplosionDamage": 75,
         "ExplosionRadius": 150,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": true
       }
     ],
     "Children": [
@@ -239,7 +244,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

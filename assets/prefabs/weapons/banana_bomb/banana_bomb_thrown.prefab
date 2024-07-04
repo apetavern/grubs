@@ -59,7 +59,8 @@
         "ExplosionDamage": 50,
         "ExplosionRadius": 150,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
@@ -122,7 +123,8 @@
         "Surface": "surfaces/banana_bounce.surface"
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

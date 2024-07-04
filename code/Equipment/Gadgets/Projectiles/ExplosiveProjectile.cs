@@ -1,6 +1,5 @@
 ﻿using Grubs.Common;
 using Grubs.Helpers;
-using Grubs.Pawn;
 using Grubs.UI;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
@@ -15,6 +14,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	[Property] public bool DeleteOnExplode { get; set; } = true;
 	[Property] public bool ExplodeOnDeath { get; set; } = true;
 	[Property, Sync] public float ExplodeAfter { get; set; } = 4.0f;
+	[Property] public bool UseExplosionTimer { get; set; } = false;
 	[Property, ResourceType( "sound" )] private string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] private ParticleSystem Particles { get; set; }
 
@@ -62,12 +62,15 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 
 	private async void ExplodeAfterSeconds( float seconds )
 	{
-		var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/explosivetimer.prefab" );
-		var panel = SceneUtility.GetPrefabScene( prefab ).Clone();
+		if ( UseExplosionTimer )
+		{
+			var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/explosivetimer.prefab" );
+			var panel = SceneUtility.GetPrefabScene( prefab ).Clone();
 
-		_explosiveTimerPanel = panel.Components.Get<ExplosiveTimer>();
-		_explosiveTimerPanel.Target = GameObject;
-		_explosiveTimerPanel.ExplodeAfter = seconds;
+			_explosiveTimerPanel = panel.Components.Get<ExplosiveTimer>();
+			_explosiveTimerPanel.Target = GameObject;
+			_explosiveTimerPanel.ExplodeAfter = seconds;
+		}
 
 		await GameTask.DelaySeconds( seconds );
 
