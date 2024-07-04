@@ -14,7 +14,7 @@ public sealed class RemoteDetonateWeapon : Weapon
 	{
 		base.HandleComplexFiringInput();
 
-		if ( _projectileExploded )
+		if ( _projectileExploded || IsFiring && !Projectile.IsValid() )
 		{
 			FireFinished();
 			return;
