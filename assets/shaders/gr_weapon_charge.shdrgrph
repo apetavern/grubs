@@ -20,7 +20,7 @@
         "Output": "Result"
       },
       "Opacity": {
-        "Identifier": "6",
+        "Identifier": "11",
         "Output": "Result"
       }
     },
@@ -49,14 +49,14 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "3",
-      "Position": "-512,112"
+      "Position": "-656,112"
     },
     {
       "_class": "Subtract",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "4",
-      "Position": "-16,-48",
+      "Position": "-160,-48",
       "A": {
         "Identifier": "7",
         "Output": "R"
@@ -69,7 +69,7 @@
     {
       "_class": "OneMinus",
       "Identifier": "5",
-      "Position": "-272,112",
+      "Position": "-416,112",
       "In": {
         "Identifier": "3",
         "Output": "Result"
@@ -80,7 +80,7 @@
       "DefaultA": 1,
       "DefaultB": 2,
       "Identifier": "6",
-      "Position": "176,-48",
+      "Position": "32,-48",
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -98,11 +98,10 @@
         "Name": "gradient",
         "Default": "1,1,1,1",
         "Extension": "Mask",
-        "ColorSpace": "Linear",
-        "CreateInput": "CreateInputTexture2D"
+        "ColorSpace": "Linear"
       },
       "Identifier": "7",
-      "Position": "-512,-96"
+      "Position": "-656,-96"
     },
     {
       "_class": "Float4",
@@ -142,6 +141,21 @@
       "C": {
         "Identifier": "7",
         "Output": "R"
+      }
+    },
+    {
+      "_class": "RemapValue",
+      "In": 0.5,
+      "InMin": 0,
+      "InMax": 1,
+      "OutMin": 0.499,
+      "OutMax": 1,
+      "Clamp": true,
+      "Identifier": "11",
+      "Position": "160,-48",
+      "A": {
+        "Identifier": "6",
+        "Output": "Result"
       }
     }
   ]

@@ -34,7 +34,7 @@ public partial class Weapon : Component
 	private int _weaponCharge;
 	private SoundHandle ChargeSound { get; set; }
 
-	private SkinnedModelRenderer ChargeGuage { get; set; }
+	private SkinnedModelRenderer ChargeGauge { get; set; }
 
 	protected override void OnStart()
 	{
@@ -78,7 +78,7 @@ public partial class Weapon : Component
 				ChargeSound?.Stop();
 
 				FireEffects();
-				ChargeGuage.GameObject.Enabled = false;
+				ChargeGauge.GameObject.Enabled = false;
 
 				if ( OnFire is not null )
 					OnFire.Invoke( _weaponCharge );
@@ -208,20 +208,20 @@ public partial class Weapon : Component
 		if ( ChargeSound == null || !ChargeSound.IsPlaying )
 			ChargeSound = Sound.Play( "charge" );
 
-		if ( !ChargeGuage.IsValid() )
+		if ( !ChargeGauge.IsValid() )
 		{
-			ChargeGuage = new GameObject().Components.Create<SkinnedModelRenderer>();
-			ChargeGuage.Model = Model.Load( "particles/weaponcharge/weapon_charge.vmdl" );
+			ChargeGauge = new GameObject().Components.Create<SkinnedModelRenderer>();
+			ChargeGauge.Model = Model.Load( "particles/weaponcharge/weapon_charge.vmdl" );
 		}
-		ChargeGuage.GameObject.Enabled = true;
+		ChargeGauge.GameObject.Enabled = true;
 
 		IsCharging = true;
 
 		var muzzle = GetMuzzlePosition();
 
-		ChargeGuage.Transform.Position = muzzle.Position;
-		ChargeGuage.Transform.Rotation = Rotation.LookAt( GetMuzzleForward() ) * Rotation.FromPitch( 90 );
-		ChargeGuage.SceneModel.Attributes.Set( "charge", _weaponCharge / 100f );
+		ChargeGauge.Transform.Position = muzzle.Position;
+		ChargeGauge.Transform.Rotation = Rotation.LookAt( GetMuzzleForward() ) * Rotation.FromPitch( 90 );
+		ChargeGauge.SceneModel.Attributes.Set( "charge", _weaponCharge / 100f );
 
 		_weaponCharge = (int)Math.Clamp( _startedCharging / 2f * 100f, 0f, 100f );
 

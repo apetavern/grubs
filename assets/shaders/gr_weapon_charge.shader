@@ -101,10 +101,11 @@ PS
 		float l_5 = 1 - l_4;
 		float l_6 = l_2.r - l_5;
 		float l_7 = pow( l_6, l_5 );
+		float l_8 = saturate( ( l_7 - 0 ) / ( 1 - 0 ) ) * ( 1 - 0.499 ) + 0.499;
 		
 		m.Albedo = l_3.xyz;
 		m.Emission = l_3.xyz;
-		m.Opacity = l_7;
+		m.Opacity = l_8;
 		m.Roughness = 1;
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;
