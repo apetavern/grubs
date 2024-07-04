@@ -1,14 +1,19 @@
 {
   "UI": false,
-  "Volume": "0.60,0.60,0",
+  "Volume": "0.30,0.60,0",
   "Pitch": "0.96,1.04,1",
-  "Decibels": 100,
+  "Decibels": 200,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/explosions/explosion_short_tail_1.vsnd",
     "sounds/weapons/explosions/explosion_short_tail_2.vsnd",
     "sounds/weapons/explosions/explosion_short_tail_3.vsnd"
   ],
-  "MaximumDistance": 2301.2522,
-  "MinimumDistance": 115.062614
+  "Occlusion": false,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__references": [],
+  "__version": 0
 }
