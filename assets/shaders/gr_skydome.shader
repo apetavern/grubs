@@ -128,8 +128,10 @@ PS
 		float l_30 = l_29 - 1;
 		float l_31 = abs( l_30 );
 		float4 l_32 = lerp( l_23, l_28, l_31 );
+		float4 l_33 = saturate( l_32 );
 		
 		m.Albedo = l_32.xyz;
+		m.Emission = l_33.xyz;
 		m.Opacity = 1;
 		m.Roughness = 1;
 		m.Metalness = 0;

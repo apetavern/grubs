@@ -1,5 +1,5 @@
 {
-  "__guid": "95a1e213-ec09-4538-899a-2ed948d5b3ca",
+  "__guid": "5a9441ea-e670-4677-aa55-3f0e1aea3dbb",
   "GameObjects": [
     {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
@@ -60,6 +60,7 @@
           "Position": "288.8641,-765.1482,-163.5517",
           "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
           "Tags": "light_directional,light",
+          "Enabled": true,
           "NetworkMode": 2,
           "NetworkInterpolation": true,
           "Components": [
@@ -68,9 +69,64 @@
               "__guid": "e266174e-78ae-40c1-a65f-948e9b2123c4",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.91373,0.98039,1,1",
+              "LightColor": "1,1,1,1",
               "Shadows": true,
-              "SkyColor": "0.05882,0.07451,0.08235,1"
+              "SkyColor": "0.63256,0.68527,0.7907,1"
+            }
+          ]
+        },
+        {
+          "__guid": "55f3be19-5619-41cc-b2f6-bd942ed58511",
+          "Flags": 0,
+          "Name": "desert_01",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "b2bcddb4-5b0f-4bb3-8201-b7c421237274",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/desert_01.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "0b2358ad-b105-489e-a7a8-9ef6bd129c58",
+          "Flags": 0,
+          "Name": "volcano_01",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "deaec3ee-5032-44e5-888c-e3108af8697d",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/volcano_01.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "18077d33-611c-49cc-85cd-c91b45560358",
+          "Flags": 0,
+          "Name": "skydome",
+          "Position": "0,0,-256",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "ee1c4f2a-a2ff-4217-8301-1a6c63b13492",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/sky/skydome.vmdl",
+              "RenderType": "Off",
+              "Tint": "1,1,1,1"
             }
           ]
         }
@@ -254,28 +310,20 @@
         {
           "__type": "Grubs.Pawn.GrubFollowCamera",
           "__guid": "e17df8b5-301e-4295-9023-9375fbaab524"
+        },
+        {
+          "__type": "Sandbox.AmbientOcclusion",
+          "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
+          "Intensity": 8,
+          "Quality": "High",
+          "Radius": 32
+        },
+        {
+          "__type": "Sandbox.Sharpen",
+          "__guid": "c2a83157-c96a-4753-8a45-42ce730adf05",
+          "Scale": 0.1
         }
       ]
-    },
-    {
-      "__guid": "96d84131-aa4c-4065-b484-68daad9a9384",
-      "Flags": 0,
-      "Name": "Map",
-      "Tags": "nopathing",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "Components": [
-        {
-          "__type": "Sandbox.MapInstance",
-          "__guid": "9b45fbfb-4f36-41d5-8685-0635775e2b7b",
-          "__version": 1,
-          "MapName": "apetavern.gr_beach",
-          "NoOrigin": true,
-          "UseMapFromLaunch": false
-        }
-      ],
-      "Children": []
     },
     {
       "__guid": "18d67b0f-c777-48d1-ad2e-d002f58bd055",

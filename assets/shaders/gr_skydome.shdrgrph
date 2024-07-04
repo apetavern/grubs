@@ -14,6 +14,10 @@
       "Albedo": {
         "Identifier": "27",
         "Output": "Result"
+      },
+      "Emission": {
+        "Identifier": "43",
+        "Output": "Result"
       }
     },
     {
@@ -273,8 +277,7 @@
       "UI": {
         "Name": "SkyTexture2",
         "Default": "1,1,1,1",
-        "SrgbRead": true,
-        "CreateInput": "CreateInputTexture2D"
+        "SrgbRead": true
       },
       "Identifier": "22",
       "Position": "-1152,-32",
@@ -290,8 +293,7 @@
       "UI": {
         "Name": "SkyTexture1",
         "Default": "1,1,1,1",
-        "SrgbRead": true,
-        "CreateInput": "CreateInputTexture2D"
+        "SrgbRead": true
       },
       "Identifier": "23",
       "Position": "-1152,-272",
@@ -547,6 +549,15 @@
       "UI": {},
       "Identifier": "42",
       "Position": "-2704,48"
+    },
+    {
+      "_class": "Saturate",
+      "Identifier": "43",
+      "Position": "-560,-128",
+      "Input": {
+        "Identifier": "27",
+        "Output": "Result"
+      }
     }
   ]
 }
