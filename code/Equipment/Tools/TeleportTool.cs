@@ -9,7 +9,6 @@ public class TeleportTool : Tool
 	/*
 	 * Cursor Properties
 	 */
-	[Property] public float CursorRange { get; set; } = 100f; // How far from the grub can the tool target
 	[Property] public required SkinnedModelRenderer CursorModel { get; set; } // The model of the grub
 
 	protected override void OnStart()
@@ -61,9 +60,6 @@ public class TeleportTool : Tool
 	private bool CheckValidPlacement()
 	{
 		if ( Equipment.Grub is not { } grub )
-			return false;
-
-		if ( grub.Player.MousePosition.Distance( grub.Transform.Position ) > CursorRange )
 			return false;
 
 		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, grub.Player.MousePosition, grub.Player.MousePosition )
