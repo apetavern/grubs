@@ -1,13 +1,10 @@
-﻿
-using Grubs.Equipment.Weapons;
-using System.ComponentModel.Design;
-
-namespace Grubs.Equipment.Gadgets.Projectiles;
+﻿namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Homing Projectile" ), Category( "Equipment" )]
 public class HomingProjectile : TargetedProjectile
 {
 	[Property] private float TimeBeforeHoming { get; set; } = 1f;
+	[Property] private SoundEvent HomingLockSound { get; set; }
 
 	public override void ShareData()
 	{
@@ -21,6 +18,8 @@ public class HomingProjectile : TargetedProjectile
 		if ( ProjectileMovement is not PhysicsProjectile pp )
 			return;
 
+		HomingEffects();
+
 		pp.PhysicsBody.Gravity = false;
 		pp.PhysicsBody.AngularDamping = 5f;
 		pp.Model.SetBodyGroup( "flame", 1 );
@@ -30,7 +29,11 @@ public class HomingProjectile : TargetedProjectile
 			pp.PhysicsBody.Velocity = Transform.Rotation.Forward * ProjectileSpeed;
 			Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( ProjectileTarget - Transform.Position ), 2f * Time.Delta );
 		}
-
 	}
 
+	[Broadcast]
+	private void HomingEffects()
+	{
+		Sound.Play( HomingLockSound, Transform.Position );
+	}
 }

@@ -47,7 +47,8 @@
         "ExplosionDamage": 30,
         "ExplosionRadius": 100,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Common.Health",
@@ -94,6 +95,7 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.HomingProjectile",
         "__guid": "46b047af-a7ac-4d7a-ab81-5f27f6c0612e",
+        "HomingLockSound": "sounds/weapons/homingmissile/homingmissile_lock.sound",
         "Model": {
           "_type": "component",
           "component_id": "24fe243e-23bf-4fa4-88d5-22e2a602d417",
@@ -110,7 +112,8 @@
         "TimeBeforeHoming": 1
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
