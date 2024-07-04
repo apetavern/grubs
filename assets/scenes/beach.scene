@@ -129,6 +129,27 @@
               "Tint": "1,1,1,1"
             }
           ]
+        },
+        {
+          "__guid": "ce3220a0-dc53-429c-baed-2b4487fe86c0",
+          "Flags": 0,
+          "Name": "wetness_fog",
+          "Position": "0,0,6",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "Components": [
+            {
+              "__type": "Sandbox.GradientFog",
+              "__guid": "c1294e3c-d186-428a-815f-a92391905188",
+              "Color": "0,0,0,0.3",
+              "EndDistance": 1024,
+              "FalloffExponent": 1,
+              "Height": 256,
+              "StartDistance": 0,
+              "VerticalFalloffExponent": 75
+            }
+          ]
         }
       ]
     },
@@ -321,7 +342,7 @@
         {
           "__type": "Sandbox.Sharpen",
           "__guid": "c2a83157-c96a-4753-8a45-42ce730adf05",
-          "Scale": 0.1
+          "Scale": 0.05
         }
       ]
     },

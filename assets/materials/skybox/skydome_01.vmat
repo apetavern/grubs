@@ -14,5 +14,5 @@ Layer0
 	SkyTexture_0 "textures/hdr/fs002_day_eqirect.exr"
 
 	//---- Fog ----
-	g_bFogEnabled "1"
+	g_bFogEnabled "0"
 }
