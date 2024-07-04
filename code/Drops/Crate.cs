@@ -8,6 +8,7 @@ namespace Grubs.Drops;
 public sealed class Crate : Component, Component.ITriggerListener
 {
 	[Property] public DropType DropType { get; set; } = DropType.Weapon;
+	[Property] public SoundEvent PickupSound { get; set; }
 
 	public void OnTriggerEnter( Collider other )
 	{
@@ -34,6 +35,8 @@ public sealed class Crate : Component, Component.ITriggerListener
 		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
 			return;
 
+		PickupEffects();
+
 		string resPath = isTool switch
 		{
 			true => CrateDrops.GetRandomToolFromCrate(),
@@ -58,10 +61,18 @@ public sealed class Crate : Component, Component.ITriggerListener
 		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
 			return;
 
+		PickupEffects();
+
 		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndChildren );
 		if ( grub is null )
 			return;
 
 		grub.Health.Heal( 25f );
+	}
+
+	[Broadcast]
+	private void PickupEffects()
+	{
+		Sound.Play( PickupSound, Transform.Position );
 	}
 }

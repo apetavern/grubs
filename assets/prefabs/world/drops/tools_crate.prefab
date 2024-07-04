@@ -11,7 +11,8 @@
       {
         "__type": "Grubs.Drops.Crate",
         "__guid": "07eecf4f-1241-495b-ab52-1d17fbfb3804",
-        "DropType": "Tool"
+        "DropType": "Tool",
+        "PickupSound": "sounds/world/item_pickup.sound"
       },
       {
         "__type": "Sandbox.ModelRenderer",
@@ -62,7 +63,8 @@
         "ExplodeOnDeath": true,
         "ExplosionDamage": 25,
         "ExplosionRadius": 100,
-        "ExplosionSound": ""
+        "ExplosionSound": "",
+        "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Common.Health",
@@ -84,7 +86,8 @@
         "SphericalEmission": true
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
