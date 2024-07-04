@@ -14,7 +14,7 @@
     <div class="health-container" style="background-color: darken(@Color.Hex, 60%)">
         <div class="health-bar" style="width: @(Grub.Health.CurrentHealth / 150f * 100f)%;
         background-image: linear-gradient(@Color.Hex, darken(@Color.Hex, 20%))">
-            
+
             <div class="health-bar-overflow" style="width: @((Grub.Health.CurrentHealth - 150f) / 150f * 100f)%;
             background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))" />
         </div>
@@ -44,8 +44,8 @@
 @code
 {
     [Property] public required Grub Grub { get; set; }
-    [Property] public Color Color { get; set; }
 
+    private Color Color => Color.Parse(Grub?.Player.SelectedColor) ?? Color.White;
     private float ScaleFactor { get; set; }
 
     protected override void OnStart()
@@ -53,20 +53,18 @@
         base.OnStart();
 
         Transform.Position = Grub.Transform.Position + Vector3.Up * 44f;
-
-        if (Grub.Player.IsValid() && Color.TryParse(Grub.Player?.SelectedColor, out var color))
-            Color = color;
     }
 
-    protected override void OnUpdate() {
+    protected override void OnUpdate()
+    {
         base.OnUpdate();
 
-        ScaleFactor = ScaleFactor.LerpTo( GrubFollowCamera.Local.Distance / 600, Time.Delta * 4f ).Clamp( 1, 3 );
+        ScaleFactor = ScaleFactor.LerpTo(GrubFollowCamera.Local.Distance / 600, Time.Delta * 4f).Clamp(1, 3);
         Transform.Position = Grub.Transform.Position + Vector3.Up * 52f + Vector3.Right * 35;
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( ScaleFactor, Grub.Name, Grub.Health.CurrentHealth, Color );
+        return HashCode.Combine(ScaleFactor, Grub.Name, Grub.Health.CurrentHealth, Color);
     }
 }
