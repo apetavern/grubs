@@ -19,6 +19,12 @@
 <root>
     <div @ref=TooltipPanel class="tooltip @(HoveredItemPanel is null ? "hide" : "")">
         @(HoveredItemPanel is null ? "" : HoveredItemPanel.Equipment.Name)
+        @if(!HoveredItemPanel?.Equipment.Unlocked ?? false) 
+        {
+            <div class="unlock-delay-text">
+                @_unlockDelayText
+            </div>
+        }
     </div>
     <div class="inv-panel">
         <div class="inv-title">
@@ -40,34 +46,37 @@
 
 @code
 {
-	public PlayerInventory Inventory { get; set; }
-	public InventoryItem HoveredItemPanel { get; set; }
+    public PlayerInventory Inventory { get; set; }
+    public InventoryItem HoveredItemPanel { get; set; }
 
-	private Panel TooltipPanel { get; set; }
+    private Panel TooltipPanel { get; set; }
 
-	private const int _columns = 5;
-	private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
-	private int _totalItems => Inventory.Equipment.Count();
+    private const int _columns = 5;
+    private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
+    private int _totalItems => Inventory.Equipment.Count();
 
-	private int _currentGamepadIndex;
-	private bool _usedJoystick;
+    private int _currentGamepadIndex;
+    private bool _usedJoystick;
 
-	public override void Tick()
-	{
-		SetClass("hide", !Inventory.InventoryOpen);
-		Cursor.Enabled("inv", Inventory.InventoryOpen);
+    private string _unlockDelayText => $"Unlocked in {HoveredItemPanel.Equipment.RoundsUntilUnlock} {(HoveredItemPanel.Equipment.RoundsUntilUnlock == 1 ? "round" : "rounds")}";
 
-		if (!Inventory.InventoryOpen) return;
+    public override void Tick()
+    {
+        SetClass("hide", !Inventory.InventoryOpen);
+        Cursor.Enabled("inv", Inventory.InventoryOpen);
 
-		if(HoveredItemPanel is not null) 
-		{
-			var parentDiff = HoveredItemPanel.Box.Rect.Left - Box.Rect.Left;
-			var tooltipCenter = (TooltipPanel.Box.Rect.Right - TooltipPanel.Box.Rect.Left) / 2;
-			var itemCenter = (HoveredItemPanel.Box.Rect.Right - HoveredItemPanel.Box.Rect.Left) / 2;
+        if (!Inventory.InventoryOpen) return;
 
-			TooltipPanel.Style.Left = (parentDiff - (tooltipCenter - itemCenter)) * ScaleFromScreen;
-			TooltipPanel.Style.Top = (HoveredItemPanel.Box.Rect.Top - Box.Rect.Top ) * ScaleFromScreen - 60;
-		}
+        if(HoveredItemPanel is not null) 
+        {
+            var parentDiff = HoveredItemPanel.Box.Rect.Left - Box.Rect.Left;
+            var tooltipCenter = (TooltipPanel.Box.Rect.Right - TooltipPanel.Box.Rect.Left) / 2;
+            var itemCenter = (HoveredItemPanel.Box.Rect.Right - HoveredItemPanel.Box.Rect.Left) / 2;
+            TooltipPanel.Style.Left = (parentDiff - (tooltipCenter - itemCenter)) * ScaleFromScreen;
+
+            var offset = (HoveredItemPanel.Equipment.Unlocked ? 60 : 82);
+            TooltipPanel.Style.Top = (HoveredItemPanel.Box.Rect.Top - Box.Rect.Top ) * ScaleFromScreen - offset;
+        }
 
         if (!Input.UsingController) return;
 
