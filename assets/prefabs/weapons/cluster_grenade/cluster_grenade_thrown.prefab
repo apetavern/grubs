@@ -48,7 +48,7 @@
         "__guid": "a27f0845-63ca-4594-9fc5-9a828bed4623",
         "Center": "0,0,0",
         "IsTrigger": false,
-        "Radius": 7.000001,
+        "Radius": 7.5,
         "Static": false
       },
       {
@@ -87,7 +87,7 @@
           "go": "46268355-78ef-4f3d-80ac-e834e23863b7",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 1000,
+        "ProjectileSpeed": 650,
         "SetPositionOnStart": true,
         "SetRotationOnStart": false
       },

@@ -67,7 +67,8 @@
         "ExplosionDamage": 10,
         "ExplosionRadius": 40,
         "ExplosionSound": "sounds/weapons/petrolbomb/petrolbomb_explode.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
@@ -86,7 +87,7 @@
           "go": "069f38e3-b742-4ed7-a8ce-75974cae38db",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 1500,
+        "ProjectileSpeed": 1250,
         "SetPositionOnStart": true,
         "SetRotationOnStart": false
       },
