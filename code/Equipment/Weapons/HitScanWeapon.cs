@@ -87,6 +87,12 @@ public class HitScanWeapon : Weapon
 			tr = tr.WithoutTags( "solid" );
 			using ( Rpc.FilterInclude( c => c.IsHost ) )
 			{
+				if ( TraceParticles is not null )
+				{
+					var traceParticles = ParticleHelper.Instance.PlayInstantaneous( TraceParticles, new Transform( startPos ) );
+					traceParticles.SetControlPoint( 1, new Transform( endPos ) );
+				}
+
 				GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
 					new Vector2( endPos.x, endPos.z ), ExplosionRadius, 1 );
 				GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
@@ -109,7 +115,7 @@ public class HitScanWeapon : Weapon
 
 	private bool HandleTraceHit( SceneTraceResult tr )
 	{
-		if ( TraceParticles is not null )
+		if ( TraceParticles is not null && !PenetrateWorld )
 		{
 			var transform = new Transform( tr.StartPosition );
 			var traceParticles = ParticleHelper.Instance.PlayInstantaneous( TraceParticles, transform );
