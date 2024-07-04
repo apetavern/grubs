@@ -25,8 +25,14 @@ public sealed class RemoteDetonateWeapon : Weapon
 
 		if ( Input.Pressed( "fire" ) && IsFiring && Projectile != null )
 		{
-			Projectile.Explode();
 			FireFinished();
+
+			Projectile.Explode();
+
+			_projectileExploded = false;
+			Projectile = null;
+			ForceHideWeapon = false;
+
 			return;
 		}
 
@@ -45,14 +51,6 @@ public sealed class RemoteDetonateWeapon : Weapon
 				WeaponInfoPanel?.GameObject.Destroy();
 			};
 		}
-	}
-
-	protected override void FireFinished()
-	{
-		base.FireFinished();
-		_projectileExploded = false;
-		Projectile = null;
-		ForceHideWeapon = false;
 	}
 
 	public void ReceiveProjectile( GameObject ProjectileObject )

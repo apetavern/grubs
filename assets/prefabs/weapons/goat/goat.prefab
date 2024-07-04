@@ -42,7 +42,7 @@
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
-        "Cooldown": 2,
+        "Cooldown": 0,
         "Equipment": {
           "_type": "component",
           "component_id": "4d024b29-bc11-43b7-9d61-970d3a36b724",
