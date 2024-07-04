@@ -60,7 +60,6 @@
           "Position": "288.8641,-765.1482,-163.5517",
           "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
           "Tags": "light_directional,light",
-          "Enabled": true,
           "NetworkMode": 2,
           "NetworkInterpolation": true,
           "Components": [
@@ -270,7 +269,9 @@
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "9b45fbfb-4f36-41d5-8685-0635775e2b7b",
+          "__version": 1,
           "MapName": "apetavern.gr_beach",
+          "NoOrigin": true,
           "UseMapFromLaunch": false
         }
       ],
@@ -400,7 +401,6 @@
   },
   "Title": "beach",
   "Description": "",
-  "LastSaved": "2024-06-19T17:38:33.4554214-05:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
