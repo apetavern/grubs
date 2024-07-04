@@ -78,9 +78,15 @@ public abstract class Gamemode : Component
 		}
 
 		// Remove dead players from turn queue.
-		foreach ( var player in PlayerTurnQueue )
+		for ( int i = 0; i < PlayerTurnQueue.Count; i++ )
+		{
+			var player = PlayerTurnQueue[i];
 			if ( !player.ToComponent<Player>()?.ShouldHaveTurn ?? false )
+			{
 				PlayerTurnQueue.Remove( player );
+				i--;
+			}
+		}
 	}
 
 	private async Task ShowDamagedGrub( Grub grub )

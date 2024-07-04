@@ -87,6 +87,9 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 	protected override void OnUpdate()
 	{
+		if ( IsProxy )
+			return;
+
 		if ( State is GameState.Playing )
 		{
 			UpdatePlaying();

@@ -48,9 +48,9 @@ public sealed class Mountable : Component
 	{
 		base.OnUpdate();
 
-		if ( Grub is null )
-			return;
-
-		Grub.Transform.Position = Transform.Position;
+		// kidd: We really shouldn't have to check if the transforms are null, but we're getting NRE spammed somehow.
+		// Probably s&box issue, but don't know where to begin reproducing.
+		if ( Grub is not null && Grub.Transform is not null && Transform is not null )
+			Grub.Transform.Position = Transform.Position;
 	}
 }
