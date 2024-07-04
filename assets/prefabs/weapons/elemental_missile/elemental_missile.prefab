@@ -14,7 +14,8 @@
         "CreateBoneObjects": false,
         "Model": "particles/magicmissile/magic_missile.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
@@ -31,11 +32,13 @@
         },
         "Name": "Elemental Missile",
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
         "__guid": "bb91e998-61de-4e29-828e-5f3f302b9b68",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -54,7 +57,8 @@
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
+              "Grubs.Equipment.Weapons.Weapon",
+              "Grubs.Equipment.Equipment"
             ]
           },
           "Variables": [
@@ -99,14 +103,14 @@
               "Id": 13,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "672,-80"
+                "Position": "1008,-80"
               }
             },
             {
               "Id": 17,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "1168,-80"
+                "Position": "1872,-80"
               }
             },
             {
@@ -133,7 +137,7 @@
               "Id": 23,
               "Type": "time.delay",
               "UserData": {
-                "Position": "896,-80"
+                "Position": "1248,-80"
               }
             },
             {
@@ -143,7 +147,7 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "432,-176"
+                "Position": "752,-176"
               }
             },
             {
@@ -153,14 +157,14 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "864,-176"
+                "Position": "1568,-176"
               }
             },
             {
               "Id": 32,
               "Type": "grubs.fire_finished",
               "UserData": {
-                "Position": "1520,-80"
+                "Position": "2208,-80"
               }
             },
             {
@@ -170,7 +174,63 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "1248,-192"
+                "Position": "1952,-192"
+              }
+            },
+            {
+              "Id": 39,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Equipment"
+              },
+              "UserData": {
+                "Position": "576,80"
+              }
+            },
+            {
+              "Id": 42,
+              "Type": "property",
+              "Properties": {
+                "_name": "Deployed",
+                "_type": "Grubs.Equipment.Equipment"
+              },
+              "UserData": {
+                "Position": "576,16"
+              }
+            },
+            {
+              "Id": 43,
+              "Type": "if",
+              "UserData": {
+                "Position": "656,-80"
+              }
+            },
+            {
+              "Id": 54,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Grubs.Equipment.Equipment"
+              },
+              "UserData": {
+                "Position": "1392,80"
+              }
+            },
+            {
+              "Id": 55,
+              "Type": "property",
+              "Properties": {
+                "_name": "Deployed",
+                "_type": "Grubs.Equipment.Equipment"
+              },
+              "UserData": {
+                "Position": "1392,16"
+              }
+            },
+            {
+              "Id": 56,
+              "Type": "if",
+              "UserData": {
+                "Position": "1472,-80"
               }
             }
           ],
@@ -219,8 +279,8 @@
               "DstName": "seconds"
             },
             {
-              "SrcId": 5,
-              "SrcName": "_signal",
+              "SrcId": 43,
+              "SrcName": "true",
               "DstId": 13,
               "DstName": "_signal"
             },
@@ -245,8 +305,8 @@
               "DstName": "source"
             },
             {
-              "SrcId": 23,
-              "SrcName": "_signal",
+              "SrcId": 56,
+              "SrcName": "true",
               "DstId": 17,
               "DstName": "_signal"
             },
@@ -322,18 +382,66 @@
               "SrcName": "_target",
               "DstId": 33,
               "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 39,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 39,
+              "SrcName": "_result",
+              "DstId": 42,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_signal",
+              "DstId": 43,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 42,
+              "SrcName": "_result",
+              "DstId": 43,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 54,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 54,
+              "SrcName": "_result",
+              "DstId": 55,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_signal",
+              "DstId": 56,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 55,
+              "SrcName": "_result",
+              "DstId": 56,
+              "DstName": "condition"
             }
           ],
           "Defaults": {
-            "$34._value": {
+            "$52._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             },
-            "$36._value": {
+            "$51._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             },
-            "$37._value": {
+            "$49._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             }
@@ -341,7 +449,8 @@
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
