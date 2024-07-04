@@ -117,7 +117,7 @@ public sealed class JetpackTool : Tool
 
 			_jetpackDir = Vector3.Dot( new Vector3( -Input.AnalogMove.y, 0, 0 ), characterController.Velocity.Normal );
 
-			_jetSound.Volume = Input.AnalogMove.Length + 0.1f;
+			_jetSound.Volume = (Input.AnalogMove.Length + 0.1f) * 0.5f;
 
 			if ( Input.AnalogMove.x > 0 && characterController.IsOnGround )
 			{
@@ -160,6 +160,6 @@ public sealed class JetpackTool : Tool
 		_jetSound = Sound.Play( "thrust" );
 
 		if ( IsProxy )
-			_jetSound.Volume = 0.25f;
+			_jetSound.Volume = 0.15f;
 	}
 }
