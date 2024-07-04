@@ -1247,7 +1247,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 1632.0, -160.0 ]
+					m_vecPosition = [ 1776.0, 176.0 ]
 					m_nNodeID = 
 					{
 						m_id = 131630633
@@ -2232,7 +2232,7 @@
 						{
 							m_nodeID = 
 							{
-								m_id = 1313612676
+								m_id = 658166805
 							}
 							m_outputID = 
 							{
@@ -2494,7 +2494,7 @@
 				{
 					_class = "CHitReactAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 2448.0, -64.0 ]
+					m_vecPosition = [ 2544.0, -48.0 ]
 					m_nNodeID = 
 					{
 						m_id = 417048522
@@ -3913,7 +3913,7 @@
 				{
 					_class = "CBlendAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 1920.0, -160.0 ]
+					m_vecPosition = [ 2064.0, 176.0 ]
 					m_nNodeID = 
 					{
 						m_id = 701235812
@@ -5013,6 +5013,7 @@
 					m_bResetBase = true
 					m_bResetAdditive = true
 					m_bApplyChannelsSeparately = true
+					m_bModelSpace = false
 				}
 			},
 			{
@@ -5726,7 +5727,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -848.0, 272.0 ]
+					m_vecPosition = [ -848.0, 256.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1313612676
@@ -5882,7 +5883,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 2192.0, -64.0 ]
+					m_vecPosition = [ 2320.0, -48.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1364788982
@@ -5916,6 +5917,7 @@
 					m_bResetBase = true
 					m_bResetAdditive = true
 					m_bApplyChannelsSeparately = true
+					m_bModelSpace = false
 				}
 			},
 			{
@@ -7622,7 +7624,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 1648.0, -96.0 ]
+					m_vecPosition = [ 1792.0, 224.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2142216896
