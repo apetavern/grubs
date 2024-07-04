@@ -40,7 +40,11 @@ Menu {
             text-stroke: 4px black;
             text-shadow: 4px 4px black;
 
-            &:hover {
+            &.disabled {
+                color: grey;
+            }
+
+            &:hover:not(.disabled) {
                 transform: translateX(4px);
                 sound-in: ui_button_hover;
             }

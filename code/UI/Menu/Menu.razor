@@ -8,7 +8,7 @@
 @inherits PanelComponent
 
 <root>
-    <Cursor/>
+    <Cursor />
 
     <div @ref="Main" class="left">
         <div class="grubs-logo">
@@ -17,14 +17,14 @@
         <div class="menu-options">
             <button onclick=@(() => OnOptionSelected("Create Lobby"))>Create Lobby</button>
             <button onclick=@(() => OnOptionSelected("Join Lobby"))>Join Lobby</button>
-            <button onclick=@(() => OnOptionSelected("Customize"))>Customize</button>
+            <button class="disabled" onclick=@(() => OnOptionSelected("Customize"))>Customize</button>
             <button onclick=@(() => OnOptionSelected("Quit"))>Quit</button>
         </div>
     </div>
 
     @if (Current is not null)
     {
-        <div @ref="Current"/>
+        <div @ref="Current" />
     }
 </root>
 
