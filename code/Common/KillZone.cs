@@ -29,7 +29,7 @@ public class KillZone : Component, Component.ITriggerListener
 		{
 			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone(), true );
 		}
-		if ( other.GameObject.Components.TryGet( out Mountable mountable, FindMode.EverythingInSelfAndAncestors ) )
+		else if ( other.GameObject.Components.TryGet( out Mountable mountable, FindMode.EverythingInSelfAndAncestors ) )
 		{
 			var mountableGrub = mountable.Grub;
 			mountable.Dismount();
@@ -49,10 +49,7 @@ public class KillZone : Component, Component.ITriggerListener
 				continue;
 
 			if ( go.Tags.Has( tag ) && go.Transform.Position != 0f )
-			{
-				CollisionEffects( go.Transform.World );
 				go.Destroy();
-			}
 		}
 	}
 
