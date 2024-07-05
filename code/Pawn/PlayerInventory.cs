@@ -29,7 +29,7 @@ public sealed class PlayerInventory : Component
 		for ( int i = 0; i < Equipment.Count; i++ )
 		{
 			Log.Info( Equipment[i].Name );
-			Equipment[i].GameObject.Destroy();
+			Equipment[i]?.GameObject?.Destroy();
 
 		}
 		Equipment.Clear();
