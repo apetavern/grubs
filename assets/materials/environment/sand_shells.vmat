@@ -13,7 +13,7 @@ Layer0
 	ScorchBlendMask "textures/environment/lava_rocks_selfillum.png"
 	ScorchColour "textures/environment/rocks_a_color.png"
 	ScorchNormal "textures/environment/lava_rocks_normal.png"
-	ScorchRough "textures/environment/lava_rocks_rough.png"
+	ScorchRough "textures/environment/rocks_a_rough.png"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
