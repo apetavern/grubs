@@ -20,7 +20,7 @@ public sealed class FireHelper : Component
 	[Sync] public List<Vector3> FireParticlePositions { get; set; } = new();
 	[Sync] public List<Vector3> FireParticleVelocities { get; set; } = new();
 	[Sync] public List<float> FireParticleLifetimes { get; set; } = new();
-	[Sync] public List<float> LastDestructionTime { get; set; } = new();
+	public List<float> LastDestructionTime { get; set; } = new();
 
 	[Property] private List<GameObject> FireObjects { get; set; } = new();
 
@@ -51,8 +51,6 @@ public sealed class FireHelper : Component
 					Time.Delta *
 					Vector3.DistanceBetween( FireObjects[i].Transform.Position, FireParticlePositions[i] ) );
 		}
-
-		if ( IsProxy ) return;
 
 		for ( var i = 0; i < FireParticlePositions.Count; i++ )
 		{
@@ -102,6 +100,8 @@ public sealed class FireHelper : Component
 		if ( !(Time.Now - LastDestructionTime[particle] > 0.25f) )
 			return;
 
+		LastDestructionTime[particle] = Time.Now;
+
 		var gos = Scene.FindInPhysics( new Sphere( FireParticlePositions[particle], 10f ) );
 		foreach ( var go in gos )
 		{
@@ -130,8 +130,6 @@ public sealed class FireHelper : Component
 				new Vector2( endPos.x, endPos.z ),
 				torchSize + 8f );
 		}
-
-		LastDestructionTime[particle] = Time.Now;
 	}
 
 	private void HandleGrubExplosion( Grub grub, Vector3 position )
@@ -146,8 +144,6 @@ public sealed class FireHelper : Component
 	[Broadcast]
 	public void CreateFire( FireParticle particle )
 	{
-		if ( IsProxy ) return;
-
 		FireParticlePositions.Add( particle.Position );
 		FireParticleVelocities.Add( particle.Velocity );
 		FireParticleLifetimes.Add( 0f );
