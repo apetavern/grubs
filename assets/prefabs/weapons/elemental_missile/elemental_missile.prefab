@@ -12,7 +12,7 @@
         "__guid": "46950a82-5a13-49dc-bbba-78f0ba1dd8cc",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "particles/magicmissile/magic_missile.vmdl",
+        "Model": "models/weapons/spellbook/spellbook.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -22,7 +22,7 @@
         "__guid": "5f0a60fc-1909-4065-8bc0-4fcb4b4c8bd7",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/elemental_missile.geq",
-        "HoldPose": "Throwable",
+        "HoldPose": "Holdable",
         "Icon": "particles/magicmissile/magic_missile.vmdl.png",
         "Model": {
           "_type": "component",
@@ -433,15 +433,15 @@
             }
           ],
           "Defaults": {
-            "$52._value": {
+            "$57._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             },
-            "$51._value": {
+            "$59._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             },
-            "$49._value": {
+            "$60._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             }
