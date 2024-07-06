@@ -70,10 +70,12 @@ InventoryDisplay {
 
             .inv-weapons {
                 flex-wrap: wrap;
+                justify-content: space-between;
             }
 
             .inv-tools {
                 border: 1px yellow;
+                justify-content: space-between;
             }
         }
 
