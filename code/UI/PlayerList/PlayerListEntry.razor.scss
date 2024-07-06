@@ -31,6 +31,8 @@ PlayerListEntry {
         height: 25px;
         border-radius: 4px;
         border: 2px black;
+        justify-content: center;
+        align-items: center;
 
         .fill {
             transition: all 750ms ease-in-out;
@@ -38,17 +40,16 @@ PlayerListEntry {
             width: 100%;
             border-radius: 4px;
         }
-    }
 
-    .health-amount {
-        position: absolute;
-        width: 110%;
-        justify-content: center;
-        text-align: center;
-        top: 41px;
-        color: white;
-        font-size: 24px;
-        text-stroke: 4px black;
+        .health-amount {
+            position: absolute;
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            text-stroke: 4px black;
+        }
     }
 
     .icon {
