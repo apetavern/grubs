@@ -56,7 +56,9 @@ internal class FireEmitter : Component
 							Rotation.LookAt( closestSurfaceNormal, Vector3.Up )) + addedPhysicsVelocity :
 							new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0,
 								InitialUpVelocity +
-								(Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ) / 3f) ) + addedPhysicsVelocity
+								(Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ) / 3f) ) + addedPhysicsVelocity,
+				TimeSinceCreated = 0f,
+				TimeSinceLastDestruction = 0f
 			};
 			FireHelper.Instance.CreateFire( particle );
 		}
@@ -72,7 +74,9 @@ internal class FireEmitter : Component
 				Velocity =
 					new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0,
 						InitialUpVelocity ) * Weapon.Equipment.Grub.PlayerController.LookAngles.ToRotation() *
-					Rotation.FromPitch( 90 * Weapon.Equipment.Grub.PlayerController.Facing )
+					Rotation.FromPitch( 90 * Weapon.Equipment.Grub.PlayerController.Facing ),
+				TimeSinceCreated = 0f,
+				TimeSinceLastDestruction = 0f
 			};
 			FireHelper.Instance.CreateFire( particle );
 		}
