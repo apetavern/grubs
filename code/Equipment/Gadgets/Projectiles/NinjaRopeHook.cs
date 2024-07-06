@@ -1,5 +1,6 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment.Weapons;
+using Grubs.Gamemodes;
 using Grubs.Helpers;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
@@ -52,6 +53,12 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 
 	public void OnCollisionStart( Collision other )
 	{
+		if ( (!PhysicsProjectileComponent?.Grub?.IsActive ?? false) || Gamemode.Current.TurnIsChanging )
+		{
+			GameObject.Destroy();
+			return;
+		}
+
 		Components.Get<Rigidbody>().Enabled = false;
 
 		Transform.Position = other.Contact.Point - other.Contact.Normal * 5f;
