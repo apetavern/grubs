@@ -123,6 +123,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 	private async Task NextTurn()
 	{
 		TurnIsChanging = true;
+		Resolution.ClearForceResolved( false );
 
 		EndTurn();
 

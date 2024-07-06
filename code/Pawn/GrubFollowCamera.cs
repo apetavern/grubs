@@ -1,4 +1,5 @@
-﻿using Grubs.Equipment.Gadgets.Projectiles;
+﻿using Grubs.Common;
+using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Gamemodes;
 using Grubs.Terrain;
 
@@ -100,8 +101,9 @@ public class GrubFollowCamera : Component
 
 		foreach ( var projectile in Scene.GetAllComponents<Projectile>().Where( p => p.Active ) )
 		{
-			if ( projectile.Tags.Has( "notarget" ) )
+			if ( projectile.Tags.Has( "notarget" ) || Resolution.ForceResolved.Contains( projectile.GameObject.Id ) )
 				continue;
+
 			SetTarget( projectile.GameObject, 1.5f );
 			return;
 		}

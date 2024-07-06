@@ -44,6 +44,7 @@ public abstract class Gamemode : Component
 	{
 		RoundsPassed = 0;
 		Stats.IncrementGamesPlayed( GamemodeShortName );
+		Resolution.ClearForceResolved();
 	}
 
 	internal virtual Task OnRoundPassed()
