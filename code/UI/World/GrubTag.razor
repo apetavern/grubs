@@ -45,7 +45,7 @@
 {
     [Property] public required Grub Grub { get; set; }
 
-    private Color Color => Color.Parse(Grub?.Player.SelectedColor) ?? Color.White;
+    private Color Color => Color.Parse(Grub?.Player?.SelectedColor) ?? Color.White;
     private float ScaleFactor { get; set; }
 
     protected override void OnStart()
