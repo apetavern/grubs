@@ -171,6 +171,8 @@ public partial class Weapon : Component
 	{
 		IsFiring = false;
 		WeaponInfoPanel?.GameObject?.Destroy();
+		if ( ChargeGauge.IsValid() && ChargeGauge.GameObject.IsValid() )
+			ChargeGauge.GameObject.Enabled = false;
 	}
 
 	protected virtual void FireFinished()
