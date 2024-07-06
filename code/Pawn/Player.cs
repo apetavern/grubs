@@ -1,6 +1,5 @@
 ﻿using Grubs.Extensions;
 using Grubs.Gamemodes;
-using Grubs.Helpers;
 
 namespace Grubs.Pawn;
 
@@ -11,8 +10,8 @@ public sealed class Player : Component
 
 	public bool IsActive => Gamemode.FFA?.ActivePlayerId == Id;
 	public bool ShouldHaveTurn => GameObject.IsValid() && !IsDead();
-	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.ToComponent<Grub>()?.Health.CurrentHealth );
-	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * Grubs.Count)).FloorToInt();
+	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.ToComponent<Grub>()?.Health.CurrentHealth )?.Clamp( 0, float.MaxValue );
+	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * Grubs.Count)).CeilToInt();
 	public Grub ActiveGrub { get; set; }
 
 	public bool HasFiredThisTurn { get; set; }

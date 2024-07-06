@@ -18,7 +18,7 @@
             <div class="health-bar-overflow" style="width: @((Grub.Health.CurrentHealth - 150f) / 150f * 100f)%;
             background-image: linear-gradient(to right, @Color.Hex, adjust-hue(@Color.Hex, 45))" />
         </div>
-        <div class="health-bar-text">@Grub.Health.CurrentHealth.Floor()</div>
+        <div class="health-bar-text">@Grub.Health.CurrentHealth.Clamp(0, float.MaxValue).CeilToInt()</div>
     </div>
     @*<div class="avi">
     <image
