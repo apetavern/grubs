@@ -307,7 +307,6 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 			return;
 
 		grub.Player = player;
-		Log.Info( $"Adding grub {grub.Id} to player {player.Id} at index {player.Grubs.Count}" );
 		player.Grubs.Add( grub.Id );
 	}
 
@@ -316,8 +315,6 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 	{
 		var player = playerId.ToComponent<Player>();
 		var grub = grubId.ToComponent<Grub>();
-
-		Log.Info( $"Setting active grub to {grubId} for player {playerId}" );
 
 		if ( player is null || grub is null )
 			return;

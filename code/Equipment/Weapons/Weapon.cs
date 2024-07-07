@@ -17,6 +17,7 @@ public partial class Weapon : Component
 	[Property] public bool CanSwapAfterUse { get; set; } = false;
 	[Property] public bool CanSwapDuringUse { get; set; } = false;
 	[Property] public int MaxUses { get; set; } = 1;
+	[Property] public int StartMultiplier { get; set; } = 1;
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public AmmoType AmmoType { get; set; } = AmmoType.Numbered;
 	[Property] public SoundEvent UseSound { get; set; }
@@ -145,6 +146,9 @@ public partial class Weapon : Component
 				if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
 
 				TimeSinceLastUsed = 0;
+				if ( StartMultiplier > 1 && Input.Pressed( "fire" ) )
+					TimesUsed += StartMultiplier - 1;
+
 				FireFinished();
 			}
 		}

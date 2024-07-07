@@ -27,11 +27,8 @@ public sealed class PlayerInventory : Component
 	public void Cleanup()
 	{
 		for ( int i = 0; i < Equipment.Count; i++ )
-		{
-			Log.Info( Equipment[i].Name );
 			Equipment[i]?.GameObject?.Destroy();
 
-		}
 		Equipment.Clear();
 	}
 

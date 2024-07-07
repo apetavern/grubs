@@ -51,6 +51,7 @@
         },
         "FiringType": "Continuous",
         "MaxUses": 75,
+        "StartMultiplier": 4,
         "UseSound": "sounds/weapons/torch/torch_fire.sound"
       },
       {

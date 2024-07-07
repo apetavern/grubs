@@ -7,6 +7,7 @@ namespace Grubs;
 [Title( "Grubs - Torch Weapon" ), Category( "Equipment" )]
 public sealed class TorchWeapon : Weapon
 {
+	[Property] private float StartMultiplier { get; set; } = 40f;
 	[Property] private float TorchSize { get; set; } = 10f;
 	[Property] private GameObject TorchFlame { get; set; }
 
@@ -46,7 +47,7 @@ public sealed class TorchWeapon : Weapon
 
 		if ( IsFiring )
 		{
-			TimesUsed += Time.Delta;
+			TimesUsed += Time.Delta * (Input.Pressed( "fire" ) ? StartMultiplier : 1f);
 
 			if ( TimesUsed >= MaxUses )
 			{
