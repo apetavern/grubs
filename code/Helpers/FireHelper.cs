@@ -70,6 +70,7 @@ public sealed class FireHelper : Component
 
 		if ( !IsProxy )
 		{
+			fire.TimeSinceCreated += Time.Delta;
 			fire.TimeSinceLastDestruction += Time.Delta;
 
 			fire.Position += FireParticles[particle].Velocity * Time.Delta * 5f;
@@ -146,6 +147,6 @@ public struct FireParticle
 {
 	public Vector3 Position { get; set; }
 	public Vector3 Velocity { get; set; }
-	public TimeSince TimeSinceCreated { get; set; }
+	public float TimeSinceCreated { get; set; }
 	public float TimeSinceLastDestruction { get; set; }
 }

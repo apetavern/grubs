@@ -79,7 +79,9 @@ public partial class Weapon : Component
 				ChargeSound?.Stop();
 
 				FireEffects();
-				ChargeGauge.GameObject.Enabled = false;
+
+				if ( ChargeGauge.IsValid() && ChargeGauge.GameObject.IsValid() )
+					ChargeGauge.GameObject.Enabled = false;
 
 				if ( OnFire is not null )
 					OnFire.Invoke( _weaponCharge );
