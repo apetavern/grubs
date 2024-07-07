@@ -49,7 +49,6 @@
           "go": "8efe62f5-8107-401a-82be-57407e1ffd5e",
           "component_type": "SkinnedModelRenderer"
         },
-        "CursorRange": 2000,
         "Equipment": {
           "_type": "component",
           "component_id": "ac9b8b12-29b3-4b66-9fbe-5fd09a10089f",
@@ -58,68 +57,7 @@
         },
         "FiringType": "Cursor",
         "MaxUses": 1,
-        "OnFireFinished": {
-          "__version": 7,
-          "__guid": "bc89db0d-707d-46fb-97d7-bd1628244289",
-          "UserData": {
-            "Title": "On Fire Finished",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Equipment"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "-0,-0"
-              }
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Equipment"
-              },
-              "UserData": {
-                "Position": "-48,64"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "call",
-              "Properties": {
-                "_type": "Grubs.Equipment.Equipment",
-                "_name": "Holster",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "272,16"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 3,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 3,
-              "DstName": "_target"
-            }
-          ]
-        },
+        "StartMultiplier": 1,
         "UseSound": "sounds/weapons/teleporter/teleport_use.sound"
       },
       {

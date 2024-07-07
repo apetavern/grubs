@@ -152,7 +152,7 @@ public sealed class TargetingWeapon : Weapon
 			.Run();
 
 		var terrain = Terrain.GrubsTerrain.Instance;
-		var exceedsTerrainHeight = trLocation.EndPosition.z >= terrain.WorldTextureHeight - 64f;
+		var exceedsTerrainHeight = trLocation.EndPosition.z >= terrain.WorldTextureHeight + 64f;
 
 		if ( !CanTargetTerrain && trTerrain.Hit )
 			return false;

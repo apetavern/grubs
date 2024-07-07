@@ -81,7 +81,7 @@ public class GirderTool : Tool
 			.Run();
 
 		var terrain = Terrain.GrubsTerrain.Instance;
-		var exceedsTerrainHeight = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture && trLocation.EndPosition.z >= terrain.WorldTextureHeight - 64f;
+		var exceedsTerrainHeight = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture && trLocation.EndPosition.z >= terrain.WorldTextureHeight + 64f;
 
 		return !trLocation.Hit && !exceedsTerrainHeight;
 	}
