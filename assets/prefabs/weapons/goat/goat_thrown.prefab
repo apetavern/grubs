@@ -3,7 +3,7 @@
     "__guid": "fe802c38-c2b9-469a-a3a6-158d34b77219",
     "Flags": 0,
     "Name": "goat_thrown",
-    "Tags": "notarget,projectile",
+    "Tags": "projectile",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
@@ -15,7 +15,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/goat/goat.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.Rigidbody",
@@ -45,11 +46,13 @@
         "ExplosionDamage": 75,
         "ExplosionRadius": 150,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.GoatProjectile",
         "__guid": "10165e8d-e921-4783-9f31-e2a286078961",
+        "CollisionSound": "sounds/weapons/goat/goat_impact.sound",
         "Droppable": true,
         "Model": {
           "_type": "component",
@@ -84,7 +87,8 @@
         "Width": 0.35
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

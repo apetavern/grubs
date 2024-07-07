@@ -7,6 +7,9 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 	[Property] public Rigidbody PhysicsBody { get; set; }
 	[Property] public bool SetPositionOnStart { get; set; } = true;
 
+	[Property] private SoundEvent CollisionSound { get; set; }
+	private Vector3 TargetLookAt { get; set; }
+
 	public override bool Resolved => PhysicsBody.Velocity.IsNearlyZero( 0.1f );
 
 	protected override void OnStart()
@@ -29,8 +32,6 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 		Model.Set( "active", true );
 	}
 
-	Vector3 TargetLookAt { get; set; }
-
 	protected override void OnUpdate()
 	{
 		if ( PlayerController is null )
@@ -44,6 +45,7 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 
 	public void OnCollisionStart( Collision other )
 	{
+		Sound.Play( CollisionSound, Transform.Position );
 		Model.Set( "grounded", true );
 		if ( -other.Contact.Normal.z > 0.5f )
 			PhysicsBody.Velocity = (Vector3.Up + Transform.Rotation.Forward) * ProjectileSpeed;
