@@ -150,6 +150,42 @@
               "VerticalFalloffExponent": 75
             }
           ]
+        },
+        {
+          "__guid": "05a48067-5e32-462e-9a40-3f89067b11b4",
+          "Flags": 0,
+          "Name": "Ambience",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SoundBoxComponent",
+              "__guid": "ec1fbee2-f0fd-4f96-a37d-b1267fdb809a",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 999,
+              "MinRepeatTime": 999,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": true,
+              "Scale": "5120,3072,3072",
+              "SoundEvent": "sounds/ambience/beach_ambience.sound",
+              "SoundOverride": false,
+              "StopOnNew": true,
+              "TargetMixer": {
+                "Name": "ambience",
+                "Id": "735abd0a-8595-47ba-b596-61763332bf3e"
+              },
+              "Volume": 1
+            }
+          ]
         }
       ]
     },
@@ -235,7 +271,6 @@
             "_type": "gameobject",
             "prefab": "particles/fire/fireobject.prefab"
           },
-          "FireObjects": [],
           "MinParticleSpeed": 100
         }
       ]
