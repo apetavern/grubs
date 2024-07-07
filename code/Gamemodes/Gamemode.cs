@@ -2,6 +2,7 @@
 using Grubs.Extensions;
 using Grubs.Gamemodes.Modes;
 using Grubs.Pawn;
+using Grubs.Terrain;
 
 namespace Grubs.Gamemodes;
 
@@ -92,7 +93,7 @@ public abstract class Gamemode : Component
 
 	private async Task ShowDamagedGrub( Grub grub )
 	{
-		if ( grub.Transform.Position.z < -GrubsConfig.TerrainHeight )
+		if ( grub.Transform.Position.z < -GrubsTerrain.Instance.WorldTextureHeight )
 			return;
 
 		CameraTarget = grub.GameObject.Id;

@@ -1,5 +1,6 @@
 using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Pawn;
+using Grubs.Terrain;
 
 namespace Grubs;
 
@@ -18,7 +19,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 	public override void ShareData()
 	{
 		base.ShareData();
-		Transform.Position = ProjectileTarget.WithZ( GrubsConfig.TerrainHeight * 1.1f ).WithX( -Direction.x * GrubsConfig.TerrainLength * 1.05f );
+		Transform.Position = ProjectileTarget.WithZ( GrubsTerrain.Instance.WorldTextureHeight * 1.1f ).WithX( -Direction.x * GrubsTerrain.Instance.WorldTextureLength * 1.05f );
 		Transform.Rotation = Rotation.LookAt( Direction );
 		_engineSound = Sound.Play( "plane_engine_loop" );
 	}
@@ -43,7 +44,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 			DropBombs();
 		}
 
-		if ( MathF.Abs( Transform.Position.x ) > GrubsConfig.TerrainLength * 1.1f && !_fading )
+		if ( MathF.Abs( Transform.Position.x ) > GrubsTerrain.Instance.WorldTextureLength * 1.1f && !_fading )
 		{
 			_fading = true;
 			FadeOut();

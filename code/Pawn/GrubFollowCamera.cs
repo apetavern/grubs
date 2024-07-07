@@ -38,6 +38,8 @@ public class GrubFollowCamera : Component
 		if ( Target.IsValid() && _isFocusingTarget )
 			_center = Target.Transform.Position;
 
+		ClampCamera();
+
 		var cam = GameObject;
 		var targetPos = _center + Vector3.Right * Distance;
 		targetPos.z += 32f;
@@ -45,8 +47,6 @@ public class GrubFollowCamera : Component
 
 		if ( Input.Down( "camera_pan" ) )
 			PanCamera();
-
-		ClampCamera();
 
 		var requestRefocus = Input.Pressed( "camera_reset" );
 		var automaticRefocus = !Input.Down( "camera_pan" ) && _timeSinceMousePan > 3 && AutomaticRefocus;
@@ -135,13 +135,16 @@ public class GrubFollowCamera : Component
 
 	private void ClampCamera()
 	{
-		var water = GrubsTerrain.Instance?.Water;
-		if ( _panDelta.z > 0f || water is null )
-			return;
-
 		const float padding = 4;
-		var minZ = water.Transform.Position.z + padding;
-		if ( _center.z <= minZ )
-			_center.z = minZ;
+		var terrain = GrubsTerrain.Instance;
+
+		var minX = terrain.WorldTextureLength * -0.5f + padding;
+		var maxX = terrain.WorldTextureLength * 0.5f - padding;
+		_center.x = _center.x.Clamp( minX, maxX );
+
+		var water = terrain?.Water;
+		var minZ = (water?.Transform.Position.z ?? 0) + padding;
+		var maxZ = (terrain.WorldTextureHeight - padding) + 128;
+		_center.z = _center.z.Clamp( minZ, maxZ );
 	}
 }

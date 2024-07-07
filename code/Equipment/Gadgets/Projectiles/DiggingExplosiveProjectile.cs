@@ -21,7 +21,7 @@ public sealed class DiggingExplosiveProjectile : TargetedProjectile
 	public override void ShareData()
 	{
 		base.ShareData();
-		Transform.Position = ProjectileTarget.WithZ( GrubsConfig.TerrainHeight * 2f );
+		Transform.Position = ProjectileTarget.WithZ( GrubsTerrain.Instance.WorldTextureHeight + 256f );
 	}
 
 	protected override void OnFixedUpdate()

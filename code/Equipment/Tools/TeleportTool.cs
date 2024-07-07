@@ -68,8 +68,7 @@ public class TeleportTool : Tool
 
 		var terrain = Terrain.GrubsTerrain.Instance;
 		var inTerrain = terrain.PointInside( trLocation.EndPosition );
-		var maxHeight = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture ? terrain.WorldTextureHeight : GrubsConfig.TerrainHeight;
-		var exceedsTerrainHeight = trLocation.EndPosition.z >= maxHeight - 64f;
+		var exceedsTerrainHeight = trLocation.EndPosition.z >= terrain.WorldTextureHeight - 64f;
 
 		return !trLocation.Hit && !inTerrain && !exceedsTerrainHeight;
 	}
