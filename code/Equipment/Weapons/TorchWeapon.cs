@@ -7,7 +7,6 @@ namespace Grubs;
 [Title( "Grubs - Torch Weapon" ), Category( "Equipment" )]
 public sealed class TorchWeapon : Weapon
 {
-	[Property] private float StartMultiplier { get; set; } = 40f;
 	[Property] private float TorchSize { get; set; } = 10f;
 	[Property] private GameObject TorchFlame { get; set; }
 

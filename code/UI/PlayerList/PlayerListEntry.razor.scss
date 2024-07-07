@@ -33,6 +33,7 @@ PlayerListEntry {
         border: 2px black;
         flex-direction: column;
         justify-content: center;
+        overflow: hidden;
 
         .fill {
             transition: all 750ms ease-in-out;

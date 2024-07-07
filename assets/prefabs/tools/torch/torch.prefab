@@ -52,6 +52,7 @@
         },
         "FiringType": "Complex",
         "MaxUses": 5,
+        "StartMultiplier": 40,
         "TorchFlame": {
           "_type": "gameobject",
           "go": "54d1051e-daef-4a84-9022-45cc262dbc27"
