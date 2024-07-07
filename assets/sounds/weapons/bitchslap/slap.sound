@@ -1,12 +1,17 @@
 {
   "UI": false,
-  "Volume": "0.80,0.80,0",
+  "Volume": "1.00,0.80,0",
   "Pitch": "0.95,1.05,1",
-  "Decibels": 105,
+  "Decibels": 120,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/bitchslap/slap.vsnd"
   ],
-  "MaximumDistance": 2533.85,
-  "MinimumDistance": 126.692505
+  "Occlusion": true,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__references": [],
+  "__version": 0
 }

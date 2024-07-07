@@ -1,12 +1,17 @@
 {
   "UI": false,
-  "Volume": "0.65,0.65,0",
+  "Volume": "0.80,0.65,0",
   "Pitch": "1.00,1.00,0",
-  "Decibels": 90,
+  "Decibels": 135,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/weapons/dynamite/dynamite_fuse.vsnd"
   ],
-  "MaximumDistance": 1870.0942,
-  "MinimumDistance": 93.504715
+  "Occlusion": true,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__references": [],
+  "__version": 0
 }

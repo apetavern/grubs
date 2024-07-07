@@ -67,6 +67,31 @@
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
         "Particles": "particles/explosion/grubs_explosion_base.vpcf",
         "UseExplosionTimer": true
+      },
+      {
+        "__type": "Sandbox.SoundPointComponent",
+        "__guid": "e9f6fbbf-ce6d-407f-8d9c-4aaa06c10382",
+        "DistanceAttenuation": false,
+        "DistanceAttenuationOverride": false,
+        "Force2d": false,
+        "MaxRepeatTime": 1,
+        "MinRepeatTime": 1,
+        "Occlusion": false,
+        "OcclusionOverride": false,
+        "OcclusionRadius": 32,
+        "Pitch": 1,
+        "PlayOnStart": true,
+        "ReflectionOverride": false,
+        "Reflections": false,
+        "Repeat": false,
+        "SoundEvent": "sounds/weapons/dynamite/dynamite_fuse.sound",
+        "SoundOverride": false,
+        "StopOnNew": false,
+        "TargetMixer": {
+          "Name": "game",
+          "Id": "641e8d6c-6731-49b0-9d8c-27d7e81267c1"
+        },
+        "Volume": 1
       }
     ],
     "Children": [

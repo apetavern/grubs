@@ -21,8 +21,9 @@ public class MultiHitMeleeWeapon : Weapon
 	 * Force
 	 */
 	[Property] public Vector3 BaseHitForce { get; set; }
-
 	[Property] public Vector3 FinalHitForce { get; set; }
+
+	[Property] private SoundEvent ImpactSound { get; set; }
 
 	private TimeSince _timeSinceLastHit = 0;
 	private int _currentStrikeCount = 1;
@@ -81,12 +82,19 @@ public class MultiHitMeleeWeapon : Weapon
 
 		var trs = GetHitObjects();
 		var damage = BaseHitDamage;
+		var playedSound = false;
 
 		if ( _currentStrikeCount == MaxUses )
 		{
 			damage += FinalHitModifier * _currentStrikeCount;
 			foreach ( var tr in trs )
 			{
+				if ( !playedSound )
+				{
+					Sound.Play( ImpactSound );
+					playedSound = true;
+				}
+
 				if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
 					HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * FinalHitForce, true );
 
@@ -102,6 +110,12 @@ public class MultiHitMeleeWeapon : Weapon
 			damage += HitComboModifier * _currentStrikeCount;
 			foreach ( var tr in trs )
 			{
+				if ( !playedSound )
+				{
+					Sound.Play( ImpactSound );
+					playedSound = true;
+				}
+
 				if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
 					HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * BaseHitForce );
 
