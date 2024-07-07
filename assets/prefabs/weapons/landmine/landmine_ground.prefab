@@ -77,7 +77,7 @@
         "BeepSound": "sounds/weapons/mine/beep.sound",
         "Damage": 60,
         "DetonateOnDeath": true,
-        "DetonateTime": 5,
+        "DetonateTime": 3,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
         "IsDud": false,
         "Model": {
@@ -90,7 +90,8 @@
         "Radius": 80
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
