@@ -162,7 +162,7 @@
             "IsTrigger": false,
             "Radius": 10,
             "Static": false,
-            "Surface": "surfaces/zero_bounce.surface"
+            "Surface": "surfaces/ninjarope_bounce.surface"
           },
           {
             "__type": "Grubs.Common.Mountable",

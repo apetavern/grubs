@@ -1,0 +1,22 @@
+{
+  "BaseSurface": null,
+  "AudioSurface": "Generic",
+  "Description": null,
+  "Friction": 0.45,
+  "Elasticity": 1,
+  "Density": 500,
+  "Thickness": -1,
+  "Dampening": 35,
+  "BounceThreshold": 30,
+  "ImpactEffects": {},
+  "ScrapeEffects": {},
+  "Sounds": {
+    "FootLand": "sounds/grub/grub_jump.sound",
+    "ImpactHard": "sounds/grub/grub_jump.sound",
+    "ImpactSoft": "sounds/grub/grub_jump.sound"
+  },
+  "Breakables": {},
+  "Tags": null,
+  "__references": [],
+  "__version": 0
+}
