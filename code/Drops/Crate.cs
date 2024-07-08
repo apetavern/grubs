@@ -31,7 +31,6 @@ public sealed class Crate : Component, Component.ITriggerListener
 
 	private void HandleEquipmentCrateTrigger( Collider other, bool isTool = false )
 	{
-		GameObject.Destroy();
 		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
 			return;
 
@@ -44,7 +43,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 		};
 		var equipmentResource = ResourceLibrary.Get<EquipmentResource>( resPath );
 
-		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndChildren );
+		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndAncestors | FindMode.EverythingInChildren );
 		var equipment = grub.Player.Inventory.Equipment
 			.FirstOrDefault( e => e.Data.Name == equipmentResource.Name );
 		equipment?.IncrementAmmo();
@@ -53,22 +52,28 @@ public sealed class Crate : Component, Component.ITriggerListener
 		{
 			WorldPopupHelper.Instance.CreatePickupPopup( grub.GameObject.Id, equipmentResource.Icon );
 		}
+
+		DestroyCrate();
 	}
 
 	private void HandleHealthCrateTrigger( Collider other )
 	{
-		GameObject.Destroy();
 		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
 			return;
 
 		PickupEffects();
 
-		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndChildren );
+		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndAncestors | FindMode.EverythingInChildren );
 		if ( grub is null )
 			return;
 
 		grub.Health.Heal( 25f );
+
+		DestroyCrate();
 	}
+
+	[Authority]
+	public void DestroyCrate() => GameObject.Destroy();
 
 	[Broadcast]
 	private void PickupEffects()
