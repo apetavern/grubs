@@ -306,7 +306,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		if ( player is null || grub is null )
 			return;
 
-		grub.Player = player;
+		grub.PlayerId = playerId;
 		player.Grubs.Add( grub.Id );
 	}
 

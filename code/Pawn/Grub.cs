@@ -7,7 +7,8 @@ namespace Grubs.Pawn;
 [Title( "Grubs - Container" ), Category( "Grubs" )]
 public sealed class Grub : Component, IResolvable
 {
-	public Player Player { get; set; }
+	[Sync] public Guid PlayerId { get; set; }
+	public Player Player => Scene.Directory.FindComponentByGuid( PlayerId ) as Player;
 
 	[Property] public required Health Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
