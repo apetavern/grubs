@@ -12,7 +12,6 @@ public sealed class Player : Component
 	public bool ShouldHaveTurn => GameObject.IsValid() && !IsDead();
 	public int GetTotalGrubHealth => (int)Grubs.Sum( g => g.ToComponent<Grub>()?.Health.CurrentHealth )?.Clamp( 0, float.MaxValue );
 	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * Grubs.Count)).CeilToInt();
-	public Grub ActiveGrub { get; set; }
 
 	public bool HasFiredThisTurn { get; set; }
 
@@ -22,6 +21,7 @@ public sealed class Player : Component
 	[Sync] public string SelectedColor { get; set; } = string.Empty;
 
 	[Sync] public Guid ActiveGrubId { get; set; }
+	public Grub ActiveGrub => Scene.Directory.FindComponentByGuid( ActiveGrubId ) as Grub;
 
 	[Sync] public NetList<Guid> Grubs { get; set; } = new();
 

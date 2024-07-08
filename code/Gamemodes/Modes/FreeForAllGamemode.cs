@@ -240,7 +240,6 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		ActivePlayerId = nextPlayer.Id;
 
 		var nextGrub = FindNextGrub( nextPlayer );
-		nextPlayer.ActiveGrubId = nextGrub.Id;
 		SetActiveGrub( nextPlayer.Id, nextGrub.Id );
 		nextPlayer.OnTurn();
 
@@ -314,12 +313,10 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 	public void SetActiveGrub( Guid playerId, Guid grubId )
 	{
 		var player = playerId.ToComponent<Player>();
-		var grub = grubId.ToComponent<Grub>();
-
-		if ( player is null || grub is null )
+		if ( player is null )
 			return;
 
-		player.ActiveGrub = grub;
+		player.ActiveGrubId = grubId;
 	}
 
 	[Broadcast]
