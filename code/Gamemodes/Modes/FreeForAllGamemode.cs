@@ -16,7 +16,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 	public override string GamemodeShortName => "ffa";
 
 	[Property, ReadOnly, HostSync] public Guid ActivePlayerId { get; set; }
-	[HostSync] public TimeUntil TimeUntilNextTurn { get; set; }
+	public TimeUntil TimeUntilNextTurn { get; set; }
 
 	private Task _nextTurnTask = null;
 
@@ -82,7 +82,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 		Started = true;
 		State = GameState.Playing;
-		TimeUntilNextTurn = GrubsConfig.TurnDuration;
+		SetTimeUntilNextTurn( GrubsConfig.TurnDuration );
 	}
 
 	protected override void OnUpdate()
@@ -108,6 +108,9 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		}
 	}
 
+	[Broadcast( NetPermission.HostOnly )]
+	public void SetTimeUntilNextTurn( float time ) => TimeUntilNextTurn = time;
+
 	[Authority]
 	public void UseTurn( bool giveMovementGrace = false )
 	{
@@ -115,7 +118,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 			return;
 
 		if ( giveMovementGrace )
-			TimeUntilNextTurn = GrubsConfig.MovementGracePeriod;
+			SetTimeUntilNextTurn( GrubsConfig.MovementGracePeriod );
 		else
 			_nextTurnTask ??= NextTurn();
 	}
@@ -243,7 +246,8 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		SetActiveGrub( nextPlayer.Id, nextGrub.Id );
 		nextPlayer.OnTurn();
 
-		TimeUntilNextTurn = GrubsConfig.TurnDuration;
+
+		SetTimeUntilNextTurn( GrubsConfig.TurnDuration );
 	}
 
 	private Grub FindNextGrub( Player player )
