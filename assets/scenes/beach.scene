@@ -480,6 +480,36 @@
           "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4"
         }
       ]
+    },
+    {
+      "__guid": "7fc4b4ee-233e-442f-9ffa-2a00b4bf16df",
+      "Flags": 0,
+      "Name": "Envmap Probe",
+      "Position": "0,512,0",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.EnvmapProbe",
+          "__guid": "e0b96ad4-750b-422a-b085-02f769a1a09e",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "Bounds": {
+            "Mins": "-2000,-2000,-2000",
+            "Maxs": "2000,2000,2000"
+          },
+          "DelayBetweenUpdates": 0.1,
+          "Feathering": 0.02,
+          "FrameInterval": 5,
+          "MaxDistance": 512,
+          "Projection": "Box",
+          "RenderDynamically": false,
+          "TintColor": "1,1,1,1",
+          "UpdateStrategy": "OnEnabled",
+          "ZFar": 4096,
+          "ZNear": 16
+        }
+      ]
     }
   ],
   "SceneProperties": {
