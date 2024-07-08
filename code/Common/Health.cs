@@ -112,9 +112,9 @@ public partial class Health : Component
 
 				// This is shit, especially since we want a variety of death animations in the future.
 				// Just don't know where to put this right now.
-				var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/dynamite_plunger.prefab" );
+				var plungerPrefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/dynamite_plunger.prefab" );
 				var position = grub.Transform.Position;
-				var plunger = SceneUtility.GetPrefabScene( prefab ).Clone();
+				var plunger = SceneUtility.GetPrefabScene( plungerPrefab ).Clone();
 				plunger.NetworkSpawn();
 				plunger.Transform.Position = grub.PlayerController.Facing == -1 ? position - new Vector3( 30, 0, 0 ) : position;
 
@@ -129,6 +129,11 @@ public partial class Health : Component
 					ExplosionHelper.Instance.Explode( this, position, 75f, 25f, grub.Id, grub.Name );
 
 				plunger?.Destroy();
+
+				var gravePrefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/drops/gravestone.prefab" );
+				var grave = SceneUtility.GetPrefabScene( gravePrefab ).Clone();
+				grave.NetworkSpawn();
+				grave.Transform.Position = position;
 			}
 
 			ChatHelper.Instance.SendInfoMessage( _deathReason.ToString() );

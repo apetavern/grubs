@@ -1,0 +1,55 @@
+{
+  "RootObject": {
+    "__guid": "58bed8e7-168b-4c9d-8dfb-7b2c8a568396",
+    "Flags": 0,
+    "Name": "gravestone",
+    "Tags": "drop",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "d397e3e2-f782-4e55-bf38-cd770024d7b4",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "X": true,
+          "Y": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "31bb1f8c-4d01-42ca-a1be-8a0f7f76f7f7",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/gravestones/basic_gravestone/gravestone_basic.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "eb0b57ac-6161-4459-8d4b-d7acda98208f",
+        "Center": "0,-4,12.5",
+        "IsTrigger": false,
+        "Scale": "21,20,25",
+        "Static": false
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
