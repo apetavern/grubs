@@ -1,0 +1,33 @@
+@namespace Grubs.UI.Menu
+
+@using Grubs.UI.Components
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root onclick=@(() => OnBack())>
+    <div class="grubs-logo">
+        GRUBS
+    </div>
+    <div class="continue-text">
+        Press anything to continue
+    </div>
+</root>
+
+@code {
+    private TimeUntil TimeUntilShow { get; set; }
+    private bool TransitionOut { get; set; }
+
+    public override void Tick()
+    {
+        var shouldShow = !TransitionOut && TimeUntilShow < 0f;
+        SetClass("hide", !shouldShow);
+    }
+
+    private void OnBack()
+    {
+        TransitionOut = true;
+        Menu.Instance.Return();
+    }
+}

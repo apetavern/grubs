@@ -77,6 +77,12 @@
         Cursor.Enabled("menu", true);
     }
 
+    protected override void OnTreeFirstBuilt()
+    {
+        Current = Panel.AddChild<TitleScreen>();
+        Main?.SetClass("hide", true);
+    }
+
     protected override int BuildHash()
     {
         return HashCode.Combine(Cursor.IsEnabled());

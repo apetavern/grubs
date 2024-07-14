@@ -1,0 +1,60 @@
+TitleScreen {
+    cursor: none;
+    position: absolute;
+    opacity: 1;
+    transition: all 0.5s;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .grubs-logo {
+        font-size: 128px;
+        text-stroke: 24px black;
+        font-weight: bold;
+        margin-top: 80px;
+        opacity: 1;
+        transition: opacity 2s;
+
+        &:intro {
+            opacity: 0;
+        }
+    }
+
+    .continue-text {
+        font-size: 36px;
+        text-stroke: 8px black;
+        font-weight: bold;
+        margin-bottom: 120px;
+        animation: continue-blink 5s 1s infinite;
+        opacity: 0;
+    }
+
+    &.hide {
+        opacity: 0;
+        transform: translateX(-1350px);
+    }
+}
+
+@keyframes continue-blink {
+    0% {
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
