@@ -1,0 +1,129 @@
+@namespace Grubs.UI.Menu
+
+@using Sandbox.UI.GameMenu;
+@using Sandbox.Audio;
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <button class="back-button" @onclick=@(() => OnBack())><i>arrow_back</i>Back</button>
+    <div class="layout">
+        <div class="settings-container">
+            <div class="upper-bar">
+                <div class="title">Settings</div>
+                <div class="tabs">
+                    @*<button class="@(SelectedTab == "gameplay" ? "selected" : "")" onclick=@(() => SetTab("gameplay"))>
+                    <i style="font-size: 32px; margin-right: 4px;">sports_kabaddi</i>
+                    Gameplay
+                    </button>*@
+                    <button class="@(SelectedTab == "audio" ? "selected" : "")" onclick=@(() => SetTab("audio"))>
+                        <i>volume_up</i>
+                        Audio
+                    </button>
+                    @*<button class="@(SelectedTab == "video" ? "selected" : "")" onclick=@(() => SetTab("video"))>
+                    <i style="font-size: 32px; margin-right: 4px;">desktop_windows</i>
+                    Video
+                    </button>*@
+                    <button class="@(SelectedTab == "controls" ? "selected" : "")" onclick=@(() => SetTab("controls"))>
+                        <i>sports_esports</i>
+                        Controls
+                    </button>
+                </div>
+            </div>
+            <div class="scrollable">
+                @if (SelectedTab == "audio")
+                {
+                    @foreach (var mixer in _mixers)
+                    {
+                        <ControlInput class="control-wrap" Label="@(mixer.Name) Volume: @((mixer.Volume * 100).FloorToInt())%">
+                            <Control>
+                                <SliderControl Min=@(0) Max=@(1) Step=@(.01f) Value:bind=@mixer.Volume style="cursor: none" />
+                            </Control>
+                        </ControlInput>
+                    }
+                }
+                else if (SelectedTab == "controls")
+                {
+                    <div class="controls">
+                        @foreach (var group in _inputGroups)
+                        {
+                            <div class="input-group">
+                                <div class="group-name">
+                                    @group
+                                </div>
+                                @foreach (var action in Input.GetActions().Where(a => a.GroupName == group && a.Name != "mouse_look"))
+                                {
+                                    <div class="input-action">
+                                        <ControlInput class="control-wrap" Label="@GetActionFormatted(action.Name)">
+                                            <Control>
+                                                <KeyBind Game=@IGameInstance.Current Action=@action />
+                                            </Control>
+                                        </ControlInput>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</root>
+
+@code {
+    private string SelectedTab { get; set; } = "audio";
+    private TimeUntil TimeUntilShow { get; set; }
+    private bool TransitionOut { get; set; }
+
+    private List<Mixer> _mixers = new();
+    private List<string> _inputGroups = new()
+    {
+        "Movement",
+        "Camera",
+        "Weapon",
+        "UI"
+    };
+
+    private Dictionary<string, string> _actionRenames = new()
+    {
+        { "forward", "aim_up" },
+        { "backward", "aim_down" },
+        { "left", "move_left" },
+        { "right", "move_right" }
+    };
+    private string GetActionFormatted(string action)
+    {
+        if (_actionRenames.TryGetValue(action, out var renamed))
+            action = renamed;
+
+        return action.Replace("_", " ").ToTitleCase();
+    }
+
+    public Settings()
+    {
+        TransitionOut = false;
+        TimeUntilShow = 0.25f;
+
+        _mixers.Add(Mixer.Master);
+        _mixers.AddRange(Mixer.Master.GetChildren());
+    }
+
+    public override void Tick()
+    {
+        var shouldShow = !TransitionOut && TimeUntilShow < 0f;
+        SetClass("hide", !shouldShow);
+    }
+
+    private void SetTab(string tab)
+    {
+        SelectedTab = tab;
+    }
+
+    private void OnBack()
+    {
+        TransitionOut = true;
+        Menu.Instance.Return();
+    }
+}

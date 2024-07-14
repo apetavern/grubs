@@ -1,0 +1,217 @@
+@import '../common.scss';
+
+Settings {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: all 0.5s;
+    cursor: none;
+
+    .back-button {
+        position: absolute;
+        margin-top: 40px;
+        margin-left: 40px;
+        text-stroke: 8px black;
+        font-size: 48px;
+        gap: 12px;
+        align-items: center;
+        z-index: 100;
+
+        > i {
+            font-size: 64px;
+        }
+
+        &:hover:not(.hide) {
+            transform: translateX(4px);
+            sound-in: ui_button_hover;
+        }
+    }
+
+    &.hide {
+        opacity: 0;
+        transform: translateX(-1080px);
+    }
+
+    .layout {
+        width: 100%;
+        height: 100%;
+        padding: 100px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .settings-container {
+            position: absolute;
+            width: 1400px;
+            height: 720px;
+            flex-direction: column;
+            padding: 0 32px;
+            border-radius: 8px;
+            background-color: rgb(233, 239, 232);
+
+            .upper-bar {
+                position: absolute;
+                width: 100%;
+                top: -32px;
+                align-items: center;
+                padding-right: 32px;
+
+                .title {
+                    left: -32px;
+                    margin-bottom: 8px;
+                    transform: skewX(-4px);
+                    padding: 8px 16px;
+                    background-color: rgb(66, 118, 62);
+                    box-shadow: 2px 2px 8px black;
+                    z-index: 10;
+
+                    > label {
+                        font-size: 48px;
+                        transform: skewX(4px);
+                        text-shadow: 2px 2px black;
+                    }
+                }
+
+                .tabs {
+                    margin-left: 36px;
+                    margin-right: auto;
+                    gap: 24px;
+
+                    > button {
+                        width: 135px;
+                        height: 50px;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 4px;
+                        background-color: rgb(127, 79, 130);
+                        box-shadow: 2px 2px 8px black;
+                        font-size: 22px;
+
+                        &:hover {
+                            background-color: lighten(rgb(127, 79, 130), 35%);
+                            sound-in: ui_button_hover;
+                        }
+
+                        > i {
+                            font-size: 42px;
+                        }
+
+                        &.selected {
+                            background-color: darken(rgb(127, 79, 130), 35%);
+                        }
+                    }
+                }
+            }
+
+            .scrollable {
+                width: 100%;
+                flex-direction: column;
+                flex-grow: 1;
+                margin-top: 64px;
+                padding-bottom: 32px;
+                overflow: scroll;
+                gap: 12px;
+
+                .control-wrap {
+                    background-color: darken(rgb(233, 239, 232), 35%);
+                    padding: 12px;
+                    border-radius: 4px;
+                    flex-shrink: 0;
+                    flex-grow: 1;
+                    box-shadow: 2px 2px 8px black;
+                    overflow: hidden;
+
+                    > .label {
+                        width: 50%;
+                        align-items: center;
+                        text-shadow: 1px 1px 1px black;
+                        margin: 0px;
+                    }
+                }
+
+                .controls {
+                    position: absolute;
+                    flex-direction: column;
+
+                    .input-group {
+                        width: 100%;
+                        flex-direction: column;
+                        justify-content: center;
+
+                        .group-name {
+                            align-items: center;
+                            margin-bottom: 12px;
+                            font-size: 48px;
+                            text-stroke: 4px black;
+                            text-shadow: 2px 2px black;
+                        }
+
+                        .input-action {
+                            width: 65%;
+                            margin-left: 24px;
+                            margin-bottom: 16px;
+
+                            .control-wrap {
+                                flex-direction: row;
+                                padding: 0px;
+
+                                > .label {
+                                    padding-left: 12px;
+                                }
+
+                                .control {
+                                    width: 50%;
+                                }
+                            }
+
+                            keybind {
+                                width: 100%;
+                                height: 100%;
+                                align-items: center;
+                                padding: 12px;
+                                background-color: darken(rgb(233, 239, 232), 35%);
+                                font-size: 24px;
+                                color: lightgrey;
+                                text-stroke: 1px black;
+                                text-shadow: 1px 1px 1px black;
+                                text-align: right;
+                                border-radius: 0px 4px 4px 0px;
+
+                                &.with-highlight {
+                                    color: white;
+                                }
+
+                                &:hover {
+                                    background-color: rgba($hud-fg-hovered .5);
+                                }
+
+                                &.active {
+                                    background-color: rgba($hud-fg .8);
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .control-wrap {
+        background-color: darken(rgb(233, 239, 232), 35%);
+        padding: 12px;
+        border-radius: 4px;
+        flex-shrink: 0;
+        flex-grow: 1;
+        box-shadow: 2px 2px 8px black;
+        overflow: hidden;
+
+        > .label {
+            width: 50%;
+            align-items: center;
+            text-shadow: 1px 1px 1px black;
+            margin: 0px;
+        }
+    }
+}

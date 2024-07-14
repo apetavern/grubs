@@ -18,6 +18,7 @@
             <button onclick=@(() => OnOptionSelected("Create Lobby"))>Create Lobby</button>
             <button onclick=@(() => OnOptionSelected("Join Lobby"))>Join Lobby</button>
             <button class="disabled" onclick=@(() => OnOptionSelected("Customize"))>Customize</button>
+            <button onclick=@(() => OnOptionSelected("Settings"))>Settings</button>
             <button onclick=@(() => OnOptionSelected("Quit"))>Quit</button>
         </div>
     </div>
@@ -53,6 +54,9 @@
             case "Customize":
                 Log.Warning("Customize coming soon!");
                 break;
+            case "Settings":
+                Transition<Settings>();
+                break;
             case "Quit":
                 Game.Close();
                 break;
@@ -61,6 +65,7 @@
 
     private async void Transition<T>() where T : Panel, new()
     {
+        Current.Delete();
         Current = Panel.AddChild<T>("hide");
         Main?.SetClass("hide", true);
     }
