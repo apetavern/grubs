@@ -15,7 +15,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/shell/shell.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.HighlightOutline",
@@ -57,14 +58,16 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
         "__guid": "efd8ec8e-f68d-42d8-9dab-9ff9edf6f99c",
+        "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
         "ExplodeOnCollision": false,
         "ExplodeOnDeath": true,
-        "ExplosionDamage": 30,
+        "ExplosionDamage": 50,
         "ExplosionRadius": 100,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Common.Health",
@@ -72,7 +75,8 @@
         "MaxHealth": 15
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
