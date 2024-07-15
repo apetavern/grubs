@@ -22,6 +22,7 @@ public abstract class Gamemode : Component
 
 	// Queue<Grub>
 	[Sync] public NetList<Guid> DamageQueue { get; set; } = new();
+
 	// Queue<Player>
 	[Sync] protected NetList<Guid> PlayerTurnQueue { get; set; } = new();
 
@@ -52,7 +53,7 @@ public abstract class Gamemode : Component
 	{
 		RoundsPassed++;
 
-		return Task.CompletedTask;
+		return System.Threading.Tasks.Task.CompletedTask;
 	}
 
 	protected async Task ApplyDamageQueue()
