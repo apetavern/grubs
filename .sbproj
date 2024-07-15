@@ -3,7 +3,6 @@
   "Type": "game",
   "Org": "apetavern",
   "Ident": "grubs",
-  "Tags": "artillery turnbased pvp strategy multiplayer",
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*\nmaterials/reticle/*",

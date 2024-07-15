@@ -13,11 +13,11 @@
     public SceneBackground()
     {
         var world = new SceneWorld();
-        var map = new SceneMap(world, "maps/gr_menu");
+        var map = new SceneMap( world, "maps/gr_menu" );
 
         World = world;
         World.GradientFog.Enabled = true;
-        World.GradientFog.Color = new Color32(57, 48, 69);
+        World.GradientFog.Color = new Color32( 57, 48, 69 );
         World.GradientFog.MaximumOpacity = 0.6f;
         World.GradientFog.StartHeight = 10;
         World.GradientFog.EndHeight = 9000;
@@ -26,8 +26,8 @@
         World.GradientFog.StartDistance = 250;
         World.GradientFog.EndDistance = 600;
 
-        Camera.AmbientLightColor = new Color(.25f, .15f, .15f) * 0.5f;
-        Camera.Position = new Vector3(-85, -105, 25);
-        Camera.Rotation = Rotation.FromYaw(80f);
+        Camera.AmbientLightColor = new Color( .25f, .15f, .15f ) * 0.5f;
+        Camera.Position = new Vector3( -85, -105, 25 );
+        Camera.Rotation = Rotation.FromYaw( 80f );
     }
 }
