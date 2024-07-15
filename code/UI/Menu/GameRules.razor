@@ -10,11 +10,13 @@
         <div class="upper-bar">
             <div class="rules-title">Game Rules</div>
             <div class="tabs">
-                <button onclick=@(() => SetTab("rules"))>
+                <button class="@(SelectedTab == "rules" ? "selected" : "")" onclick=@(() => SetTab("rules"))>
                     <i>rule</i>
+                    Gameplay
                 </button>
-                <button onclick=@(() => SetTab("terrain"))>
+                <button class="@(SelectedTab == "terrain" ? "selected" : "")" onclick=@(() => SetTab("terrain"))>
                     <i>landscape</i>
+                    Terrain
                 </button>
             </div>
         </div>

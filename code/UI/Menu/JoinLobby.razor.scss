@@ -10,16 +10,16 @@ JoinLobby {
 
     .back-button {
         position: absolute;
-        margin-top: 80px;
-        margin-left: 110px;
+        margin-top: 40px;
+        margin-left: 40px;
         text-stroke: 8px black;
-        font-size: 64px;
+        font-size: 48px;
         gap: 12px;
         align-items: center;
         z-index: 100;
 
         > i {
-            font-size: 74px;
+            font-size: 64px;
         }
 
         &:hover:not(.hide) {

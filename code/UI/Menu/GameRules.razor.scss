@@ -36,17 +36,20 @@ GameRules {
         top: -32px;
 
         .tabs {
-            margin-left: auto;
-            gap: 12px;
+            margin-left: 36px;
+            margin-right: auto;
+            gap: 24px;
 
             > button {
-                width: 50px;
+                width: 135px;
                 height: 50px;
+                justify-content: center;
+                align-items: center;
                 border-radius: 4px;
                 background-color: rgb(127, 79, 130);
                 box-shadow: 2px 2px 8px black;
-                align-items: center;
-                justify-content: center;
+                text-shadow: 2px 2px black;
+                font-size: 22px;
 
                 &:hover {
                     background-color: lighten(rgb(127, 79, 130), 35%);
@@ -56,9 +59,12 @@ GameRules {
                 > i {
                     font-size: 42px;
                 }
+
+                &.selected {
+                    background-color: darken(rgb(127, 79, 130), 35%);
+                }
             }
         }
-
     }
 
     .rules-title {

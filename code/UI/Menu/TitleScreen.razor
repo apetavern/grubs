@@ -1,0 +1,68 @@
+@namespace Grubs.UI.Menu
+
+@using Grubs.UI.Components
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="grubs-logo">
+        GRUBS
+    </div>
+    <div class="continue-text">
+        Press anything to continue
+    </div>
+</root>
+
+@code {
+    private TimeUntil TimeUntilShow { get; set; }
+    private bool TransitionOut { get; set; }
+    private List<string> _actions = new List<string>()
+    {
+        "jump",
+        "backflip",
+        "camera_pan",
+        "camera_reset",
+        "toggle_inventory",
+        "chat",
+        "voice",
+        "fire"
+    };
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        if (firstTime)
+        {
+            ButtonInput = PanelInputType.UI;
+            Focus();
+            AcceptsFocus = true;
+        }
+    }
+
+    public override void Tick()
+    {
+        var shouldShow = !TransitionOut && TimeUntilShow < 0f;
+        SetClass("hide", !shouldShow);
+
+        if (!shouldShow)
+            return;
+
+        if (Input.UsingController && _actions.Any((input) => Input.Pressed(input)))
+            OnBack();
+    }
+
+    public override void OnButtonEvent(ButtonEvent e)
+    {
+        if (TransitionOut)
+            return;
+
+        OnBack();
+    }
+
+    private void OnBack()
+    {
+        TransitionOut = true;
+        Menu.Instance.Return();
+    }
+}

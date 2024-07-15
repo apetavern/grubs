@@ -3,14 +3,18 @@
   "GameObjects": [
     {
       "__guid": "2e35c746-223e-47ab-9608-440dd81bc057",
+      "Flags": 0,
       "Name": "Map",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "cb9273ba-e9ed-4379-91ac-d478f6bc05af",
+          "__version": 1,
           "MapName": "maps/gr_menu.vpk",
+          "NoOrigin": true,
           "UseMapFromLaunch": false
         }
       ],
@@ -18,12 +22,14 @@
     },
     {
       "__guid": "91464b46-2177-41fc-84e8-6a639bcabac9",
+      "Flags": 0,
       "Name": "Camera",
       "Position": "-85,-105,25",
       "Rotation": "0.028038,-0.03341439,0.6421758,0.7653154",
       "Tags": "maincamera",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -71,12 +77,14 @@
     },
     {
       "__guid": "2f773373-3d4a-4d90-a19f-f27ad74cc00d",
+      "Flags": 0,
       "Name": "Spot Light",
       "Position": "-70.78873,-153.7505,126.6426",
       "Rotation": "-0.157559,0.2053349,0.5880182,0.7663205",
       "Tags": "light_spot,light",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.SpotLight",
@@ -94,10 +102,12 @@
     },
     {
       "__guid": "5759e5a3-a78f-41d5-8043-c46cbcd9e79b",
+      "Flags": 0,
       "Name": "Fog",
       "Position": "-32,32,100",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.VolumetricFogVolume",
@@ -113,10 +123,12 @@
     },
     {
       "__guid": "65e690eb-fbed-404c-bd61-397ebe06f2c8",
+      "Flags": 0,
       "Name": "UI",
       "Position": "-33.10376,189.3181,51.14672",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.UI.Menu.Menu",
@@ -131,13 +143,48 @@
           "ZIndex": 100
         }
       ]
+    },
+    {
+      "__guid": "c39bcf65-a80a-4eb7-83c9-2eca44caed0e",
+      "Flags": 0,
+      "Name": "Music",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SoundPointComponent",
+          "__guid": "6be36c09-4210-4ff2-81ec-2aa25e54aabb",
+          "DistanceAttenuation": false,
+          "DistanceAttenuationOverride": false,
+          "Force2d": false,
+          "MaxRepeatTime": 0,
+          "MinRepeatTime": 0,
+          "Occlusion": false,
+          "OcclusionOverride": false,
+          "OcclusionRadius": 32,
+          "Pitch": 1,
+          "PlayOnStart": true,
+          "ReflectionOverride": false,
+          "Reflections": false,
+          "Repeat": true,
+          "SoundEvent": "sounds/music/menu_music.sound",
+          "SoundOverride": false,
+          "StopOnNew": false,
+          "TargetMixer": {
+            "Name": "music",
+            "Id": "dc54f060-343f-405c-b14d-510f387223f7"
+          },
+          "Volume": 1
+        }
+      ]
     }
   ],
   "SceneProperties": {
     "FixedUpdateFrequency": 50,
-    "Lerping": true,
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
@@ -156,8 +203,7 @@
   },
   "Title": "main_menu",
   "Description": "",
-  "LastSaved": "2024-04-09T16:01:16.9900253-03:00",
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

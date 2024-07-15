@@ -235,7 +235,8 @@
       }
     },
     "ControlModes": {
-      "Keyboard": true
+      "Keyboard": true,
+      "Gamepad": true
     },
     "ParentPackage": "",
     "PackageSettings": [
@@ -576,13 +577,13 @@
           "Name": "forward",
           "KeyboardCode": "w",
           "GamepadCode": "DpadNorth",
-          "GroupName": "Movement"
+          "GroupName": "Weapon"
         },
         {
           "Name": "backward",
           "KeyboardCode": "s",
           "GamepadCode": "DpadSouth",
-          "GroupName": "Movement"
+          "GroupName": "Weapon"
         },
         {
           "Name": "left",
@@ -612,7 +613,7 @@
           "Name": "voice",
           "KeyboardCode": "v",
           "GamepadCode": "None",
-          "GroupName": "Other"
+          "GroupName": "UI"
         },
         {
           "Name": "toggle_equipment",
