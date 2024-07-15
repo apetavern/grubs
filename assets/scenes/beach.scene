@@ -6,8 +6,6 @@
       "Flags": 0,
       "Name": "Static",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Children": [
         {
           "__guid": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
@@ -18,7 +16,6 @@
           "Tags": "nopathing",
           "Enabled": true,
           "NetworkMode": 1,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -61,8 +58,6 @@
           "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
           "Tags": "light_directional,light",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.DirectionalLight",
@@ -80,8 +75,6 @@
           "Flags": 0,
           "Name": "desert_01",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -98,8 +91,6 @@
           "Flags": 0,
           "Name": "volcano_01",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -117,8 +108,6 @@
           "Name": "skydome",
           "Position": "0,0,-256",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -136,8 +125,6 @@
           "Name": "wetness_fog",
           "Position": "0,0,6",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.GradientFog",
@@ -156,8 +143,6 @@
           "Flags": 0,
           "Name": "Ambience",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.SoundBoxComponent",
@@ -174,14 +159,14 @@
               "PlayOnStart": true,
               "ReflectionOverride": false,
               "Reflections": false,
-              "Repeat": true,
+              "Repeat": false,
               "Scale": "5120,3072,3072",
               "SoundEvent": "sounds/ambience/beach_ambience.sound",
               "SoundOverride": false,
               "StopOnNew": true,
               "TargetMixer": {
                 "Name": "ambience",
-                "Id": "735abd0a-8595-47ba-b596-61763332bf3e"
+                "Id": "f518d33c-dd1b-4d09-addb-9b39675f0acb"
               },
               "Volume": 1
             }
@@ -197,8 +182,6 @@
       "Rotation": "0,0,-0.7071068,-0.7071068",
       "Tags": "solid",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Drops.CrateUtility",
@@ -245,7 +228,6 @@
       "Position": "-129.7132,-113.9731,554.4797",
       "Enabled": true,
       "NetworkMode": 1,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Gamemodes.Modes.FreeForAllGamemode",
@@ -261,7 +243,6 @@
       "Position": "-186.723,289.1578,410.2911",
       "Enabled": true,
       "NetworkMode": 1,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Helpers.FireHelper",
@@ -283,7 +264,6 @@
       "Tags": "solid,terrain",
       "Enabled": true,
       "NetworkMode": 1,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Terrain.GrubsTerrain",
@@ -339,8 +319,6 @@
       "Rotation": "0.00000004112413,0.0000000009752696,0.7071068,0.7071068",
       "Tags": "maincamera",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -387,8 +365,6 @@
       "Name": "Network",
       "Position": "-1098.61,512,191.4738",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Children": [
         {
           "__guid": "17e17813-45ef-4835-8195-d968524b4ba7",
@@ -396,8 +372,6 @@
           "Name": "Network",
           "Position": "607.9057,-129.2016,57.7177",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Grubs.Helpers.NetHelper",
@@ -415,8 +389,6 @@
           "Name": "Spawn",
           "Position": "1034.61,0,57.7177",
           "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.SpawnPoint",
@@ -433,8 +405,6 @@
       "Name": "Screen",
       "Position": "-129.7132,-113.9731,554.4797",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.ScreenPanel",
@@ -461,7 +431,6 @@
       "Position": "136.4629,-1421.282,280.9131",
       "Enabled": true,
       "NetworkMode": 1,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.Helpers.WorldPopupHelper",
@@ -487,8 +456,6 @@
       "Name": "Envmap Probe",
       "Position": "0,512,0",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.EnvmapProbe",
