@@ -6,6 +6,10 @@ GameRules {
     align-items: center;
     justify-content: center;
 
+    &.hide {
+        opacity: 0;
+    }
+
     .control-wrap {
         background-color: darken(rgb(233, 239, 232), 35%);
         padding: 12px;
@@ -14,6 +18,13 @@ GameRules {
         flex-shrink: 0;
         flex-grow: 1;
         box-shadow: 2px 2px 8px black;
+
+        > .label {
+            width: 50%;
+            align-items: center;
+            text-shadow: 1px 1px 1px black;
+            margin: 0px;
+        }
     }
 
     .side {
@@ -35,29 +46,61 @@ GameRules {
         align-items: center;
         top: -32px;
 
+        button {
+            width: 135px;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 2px 2px 8px black;
+            text-shadow: 2px 2px black;
+            font-size: 22px;
+
+            &:hover {
+                sound-in: ui_button_hover;
+            }
+
+            > i {
+                font-size: 42px;
+            }
+
+            &.selected {
+                background-color: darken(rgb(127, 79, 130), 35%);
+            }
+        }
+
+        .close-button {
+            width: 125px;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            background-color: rgb(200, 25, 0);
+            box-shadow: 2px 2px 8px black;
+            text-shadow: 2px 2px black;
+            font-size: 22px;
+            margin-right: 36px;
+
+            &:hover {
+                background-color: lighten(rgb(200, 25, 0), 25%);
+                sound-in: ui_button_hover;
+            }
+
+            > i {
+                font-size: 42px;
+            }
+        }
+
         .tabs {
             margin-left: 36px;
             margin-right: auto;
             gap: 24px;
 
             > button {
-                width: 135px;
-                height: 50px;
-                justify-content: center;
-                align-items: center;
-                border-radius: 4px;
                 background-color: rgb(127, 79, 130);
-                box-shadow: 2px 2px 8px black;
-                text-shadow: 2px 2px black;
-                font-size: 22px;
 
                 &:hover {
                     background-color: lighten(rgb(127, 79, 130), 35%);
-                    sound-in: ui_button_hover;
-                }
-
-                > i {
-                    font-size: 42px;
                 }
 
                 &.selected {

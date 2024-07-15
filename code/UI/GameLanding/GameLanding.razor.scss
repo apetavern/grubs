@@ -10,6 +10,14 @@ GameLanding {
     cursor: none;
     flex-direction: column;
 
+    GameRules {
+        position: absolute;
+        z-index: 100;
+        color: white;
+        background-color: rgba(20, 20, 20, .75);
+        transition: opacity 0.15s ease;
+    }
+
     .body {
         width: 100%;
         height: 100%;
@@ -76,6 +84,42 @@ GameLanding {
         }
     }
 
+    .settings-button {
+        position: absolute;
+        bottom: 225px;
+        right: 100px;
+        width: 200px;
+        height: 50px;
+        transform: skewX(-4deg);
+        margin-left: 24px;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 4px;
+        background-color: rgb(66, 118, 62);
+        box-shadow: 2px 2px 8px black;
+        text-shadow: 2px 2px black;
+        font-size: 22px;
+
+        &:not(.disabled):hover {
+            right: 102px;
+            sound-in: ui_button_hover;
+        }
+
+        &.disabled {
+            background-color: darken(rgb(127, 79, 130), 35%);
+            color: rgb(150, 150, 150);
+
+            > i {
+                color: rgb(150, 150, 150);
+            }
+        }
+
+        > i {
+            font-size: 42px;
+        }
+    }
+
     .start-button {
         position: absolute;
         bottom: 100px;
@@ -93,6 +137,7 @@ GameLanding {
 
         &.disabled {
             width: 450px;
+            font-size: 56px;
             background-color: rgb(43, 74, 41);
             color: #808080;
         }

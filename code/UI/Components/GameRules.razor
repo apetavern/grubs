@@ -1,6 +1,7 @@
 ﻿@inherits Panel
 
 @using Grubs
+@using Grubs.Terrain;
 @using Grubs.UI.Components
 
 @attribute [StyleSheet]
@@ -19,33 +20,40 @@
                     Terrain
                 </button>
             </div>
+            @if (EnableCloseButton)
+            {
+                <button class="close-button" onclick=@HideGameRules>
+                    <i>close</i>
+                    Close
+                </button>
+            }
         </div>
         <div class="scrollable">
             @if (SelectedTab == "rules")
             {
                 <ControlInput class="control-wrap" Label="Grub Count: @(GrubsConfig.GrubCount)">
                     <Control>
-                        <SliderControl Min=@(1) Max=@(10) Value:bind=@GrubsConfig.GrubCount style="cursor: none"/>
+                        <SliderControl Min=@(1) Max=@(10) Value:bind=@GrubsConfig.GrubCount style="cursor: none" />
                     </Control>
                 </ControlInput>
                 <ControlInput class="control-wrap" Label="Turn Duration: @(GrubsConfig.TurnDuration)s">
                     <Control>
-                        <SliderControl Min=@(10) Max=@(120) Value:bind=@GrubsConfig.TurnDuration/>
+                        <SliderControl Min=@(10) Max=@(120) Value:bind=@GrubsConfig.TurnDuration />
                     </Control>
                 </ControlInput>
                 <ControlInput class="control-wrap" Label="Weapon Crate Spawn Chance: @($"{GrubsConfig.WeaponCrateChancePerTurn * 100:F0}")%">
                     <Control>
-                        <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.WeaponCrateChancePerTurn/>
+                        <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.WeaponCrateChancePerTurn />
                     </Control>
                 </ControlInput>
                 <ControlInput class="control-wrap" Label="Tool Crate Spawn Chance: @($"{GrubsConfig.ToolCrateChancePerTurn * 100:F0}")%">
                     <Control>
-                        <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.ToolCrateChancePerTurn/>
+                        <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.ToolCrateChancePerTurn />
                     </Control>
                 </ControlInput>
                 <ControlInput class="control-wrap" Label="Health Crate Spawn Chance: @($"{GrubsConfig.HealthCrateChancePerTurn * 100:F0}")%">
                     <Control>
-                        <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.HealthCrateChancePerTurn/>
+                        <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.HealthCrateChancePerTurn />
                     </Control>
                 </ControlInput>
             }
@@ -54,20 +62,18 @@
                 <div class="side">
                     <ControlInput class="control-wrap" Label="Terrain Type">
                         <Control>
-                            <SingleSelectInput
-                                EnumType="TerrainType"
-                                SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
-                                ValueChanged=@TerrainTypeChanged/>
+                            <SingleSelectInput EnumType="TerrainType"
+                                               SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
+                                               ValueChanged=@TerrainTypeChanged />
                         </Control>
                     </ControlInput>
                     @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture)
                     {
                         <ControlInput class="control-wrap" Label="Terrain Texture">
                             <Control>
-                                <SingleSelectInput
-                                    EnumType="TerrainTexture"
-                                    SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
-                                    ValueChanged=@TerrainTextureChanged/>
+                                <SingleSelectInput EnumType="TerrainTexture"
+                                                   SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
+                                                   ValueChanged=@TerrainTextureChanged />
                             </Control>
                         </ControlInput>
                     }
@@ -76,27 +82,27 @@
                 {
                     <ControlInput class="control-wrap" Label="Terrain Length: @($"{GrubsConfig.TerrainLength} units")">
                         <Control>
-                            <SliderControl Min=@(1024) Max=@(4096) Step=@(64f) Value:bind=@GrubsConfig.TerrainLength/>
+                            <SliderControl Min=@(1024) Max=@(4096) Step=@(64f) Value:bind=@GrubsConfig.TerrainLength />
                         </Control>
                     </ControlInput>
                     <ControlInput class="control-wrap" Label="Terrain Height: @($"{GrubsConfig.TerrainHeight} units")">
                         <Control>
-                            <SliderControl Min=@(512) Max=@(2048) Step=@(64f) Value:bind=@GrubsConfig.TerrainHeight/>
+                            <SliderControl Min=@(512) Max=@(2048) Step=@(64f) Value:bind=@GrubsConfig.TerrainHeight />
                         </Control>
                     </ControlInput>
                     <ControlInput class="control-wrap" Label="Terrain Amplitude: @($"{GrubsConfig.TerrainAmplitude}f")">
                         <Control>
-                            <SliderControl Min=@(16) Max=@(128) Step=@(1f) Value:bind=@GrubsConfig.TerrainAmplitude/>
+                            <SliderControl Min=@(16) Max=@(128) Step=@(1f) Value:bind=@GrubsConfig.TerrainAmplitude />
                         </Control>
                     </ControlInput>
                     <ControlInput class="control-wrap" Label="Terrain Frequency: @($"{GrubsConfig.TerrainFrequency}f")">
                         <Control>
-                            <SliderControl Min=@(0.1f) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.TerrainFrequency/>
+                            <SliderControl Min=@(0.1f) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.TerrainFrequency />
                         </Control>
                     </ControlInput>
                     <ControlInput class="control-wrap" Label="Terrain Noise Zoom: @($"{GrubsConfig.TerrainNoiseZoom}f")">
                         <Control>
-                            <SliderControl Min=@(1) Max=@(5) Step=@(0.1f) Value:bind=@GrubsConfig.TerrainNoiseZoom/>
+                            <SliderControl Min=@(1) Max=@(5) Step=@(0.1f) Value:bind=@GrubsConfig.TerrainNoiseZoom />
                         </Control>
                     </ControlInput>
                 }
@@ -107,6 +113,8 @@
 
 @code
 {
+    public bool EnableCloseButton { get; set; } = false;
+
     private string SelectedTab { get; set; } = "rules";
 
     private void SetTab(string tab)
@@ -122,6 +130,12 @@
     private void TerrainTextureChanged(int value)
     {
         GrubsConfig.WorldTerrainTexture = (GrubsConfig.TerrainTexture)value;
+    }
+
+    private void HideGameRules()
+    {
+        SetClass("hide", true);
+        GrubsTerrain.Instance?.Init();
     }
 
     protected override int BuildHash()

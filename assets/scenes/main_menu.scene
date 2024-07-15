@@ -6,8 +6,6 @@
       "Flags": 0,
       "Name": "Map",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
@@ -28,8 +26,6 @@
       "Rotation": "0.028038,-0.03341439,0.6421758,0.7653154",
       "Tags": "maincamera",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -83,8 +79,6 @@
       "Rotation": "-0.157559,0.2053349,0.5880182,0.7663205",
       "Tags": "light_spot,light",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.SpotLight",
@@ -106,8 +100,6 @@
       "Name": "Fog",
       "Position": "-32,32,100",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.VolumetricFogVolume",
@@ -127,8 +119,6 @@
       "Name": "UI",
       "Position": "-33.10376,189.3181,51.14672",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Grubs.UI.Menu.Menu",
@@ -149,8 +139,6 @@
       "Flags": 0,
       "Name": "Music",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.SoundPointComponent",

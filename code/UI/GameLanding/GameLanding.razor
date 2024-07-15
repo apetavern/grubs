@@ -8,6 +8,7 @@
 <root>
     <Cursor />
     <SceneBackground @ref="SceneBackground" />
+    <GameRules @ref=GameRulesPanel EnableCloseButton=@true class="hide" />
     <div @ref="MenuBody" class="body">
         <div class="upper">
             <div class="header">
@@ -25,18 +26,11 @@
                 }
             </div>
         </div>
-        @if (CanStart() && !IsLoadingTerrain())
-        {
-            @if (IsHost())
-            {
-                <button class="start-button" onclick=@Start>Start</button>
-            }
-            else
-            {
-                <button class="start-button disabled">Waiting for Host</button>
-            }
-
-        }
+        <button class="settings-button @(IsHost() ? "" : "disabled")" onclick=@OpenGameRules>
+            <i>settings</i>
+            Game Rules
+        </button>
+        <button class="start-button @(IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled")" onclick=@Start>@GetStartButtonText()</button>
     </div>
 </root>
 
@@ -46,6 +40,8 @@
 
     public SceneBackground SceneBackground { get; set; }
     public Panel MenuBody { get; set; }
+
+    private Panel GameRulesPanel { get; set; }
 
     public bool IsHost()
     {
@@ -68,6 +64,24 @@
         Cursor.Enabled("menu", true);
     }
 
+    private string GetStartButtonText()
+    {
+        if (!IsHost())
+            return "Waiting For Host";
+
+        if (!CanStart())
+            return "Waiting For Players";
+
+        if (IsLoadingTerrain())
+            return "Generating Terrain";
+
+        return "Start";
+    }
+
+    private void OpenGameRules()
+    {
+        GameRulesPanel.SetClass("hide", false);
+    }
 
     private void Start()
     {
