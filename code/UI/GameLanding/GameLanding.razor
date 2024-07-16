@@ -26,11 +26,11 @@
                 }
             </div>
         </div>
-        <button class="settings-button @(IsHost() ? "" : "disabled")" onclick=@OpenGameRules>
+        <button class="settings @(IsHost() ? "" : "disabled")" onclick=@OpenGameRules>
             <i>settings</i>
             Game Rules
         </button>
-        <button class="start-button @(IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled")" onclick=@Start>@GetStartButtonText()</button>
+        <button class="start @(IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled")" onclick=@Start>@GetStartButtonText()</button>
     </div>
 </root>
 
@@ -80,6 +80,9 @@
 
     private void OpenGameRules()
     {
+        if (!IsHost())
+            return;
+
         GameRulesPanel.SetClass("hide", false);
     }
 

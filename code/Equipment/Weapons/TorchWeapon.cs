@@ -77,7 +77,8 @@ public sealed class TorchWeapon : Weapon
 	[Broadcast]
 	public void FireEffects( Vector3 startPos, Vector3 endPos )
 	{
-		Sound.Play( UseSound, Equipment.Grub.Transform.Position );
+		if ( Equipment is not null && Equipment.Grub is not null )
+			Sound.Play( UseSound, Equipment.Grub.Transform.Position );
 
 		var tr = Scene.Trace.Ray( startPos, endPos )
 						.WithAnyTags( "solid", "player", "pickup" )

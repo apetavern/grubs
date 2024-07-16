@@ -17,6 +17,7 @@ public sealed class JetpackTool : Tool
 	/// </summary>
 	[Property] public GameObject UDFlame2 { get; set; }
 
+	[Sync] private float Volume { get; set; }
 	[Sync] private float ForwardBackFlameScale { get; set; }
 	[Sync] private float UpDownFlameScale { get; set; }
 	[Sync] private bool ShouldAnimate { get; set; }
@@ -34,25 +35,28 @@ public sealed class JetpackTool : Tool
 		FBFlame.Enabled = false;
 		UDFlame1.Enabled = false;
 		UDFlame2.Enabled = false;
-		_jetSound?.Stop();
+		StopEffects();
 	}
 
 	protected override void FireFinished()
 	{
 		base.FireFinished();
+
 		if ( Equipment.Grub != null )
 			Equipment.Grub.Animator.IsOnJetpack = false;
 
 		FBFlame.Enabled = false;
 		UDFlame1.Enabled = false;
 		UDFlame2.Enabled = false;
-		_jetSound?.Stop();
+		StopEffects();
 	}
 
 	public void AnimateFlames()
 	{
 		if ( !Equipment.Model.Active )
 			return;
+
+		_jetSound.Volume = Volume;
 
 		var characterController = Equipment.Grub.CharacterController;
 
@@ -116,8 +120,7 @@ public sealed class JetpackTool : Tool
 			animator.IsOnJetpack = true;
 
 			_jetpackDir = Vector3.Dot( new Vector3( -Input.AnalogMove.y, 0, 0 ), characterController.Velocity.Normal );
-
-			_jetSound.Volume = (Input.AnalogMove.Length + 0.1f) * 0.5f;
+			Volume = (Input.AnalogMove.Length + 0.1f) * 0.5f;
 
 			if ( Input.AnalogMove.x > 0 && characterController.IsOnGround )
 			{
@@ -155,11 +158,8 @@ public sealed class JetpackTool : Tool
 	}
 
 	[Broadcast]
-	private void FireEffects()
-	{
-		_jetSound = Sound.Play( "thrust" );
+	private void FireEffects() => _jetSound = Sound.Play( "thrust" );
 
-		if ( IsProxy )
-			_jetSound.Volume = 0.15f;
-	}
+	[Broadcast]
+	private void StopEffects() => _jetSound?.Stop();
 }
