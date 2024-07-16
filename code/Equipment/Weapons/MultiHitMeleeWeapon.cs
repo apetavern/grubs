@@ -42,7 +42,7 @@ public class MultiHitMeleeWeapon : Weapon
 			if ( _finishAfterCooldown )
 				FireFinished();
 
-		if ( _timeSinceLastHit > 2f )
+		if ( _timeSinceLastHit > 3f )
 			ResetCombo();
 	}
 

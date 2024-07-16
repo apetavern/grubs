@@ -32,6 +32,6 @@
 		int ms = (int)(DestroyDelay * 1000);
 		await GameTask.Delay(ms);
 
-		GameObject.Destroy();
+		GameObject?.Destroy();
 	}
 }
