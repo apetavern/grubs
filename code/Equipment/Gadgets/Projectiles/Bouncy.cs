@@ -12,7 +12,7 @@ public sealed class Bouncy : Component, ICollisionListener
 	public void OnCollisionStart( Collision other )
 	{
 		var speed = other.Contact.Speed.Length;
-		var direction = Reflect ? Vector3.Reflect( other.Contact.Speed.Normal, other.Contact.Normal ) : -Body.Velocity.Normal;
+		var direction = Reflect ? Vector3.Reflect( other.Contact.Speed.Normal, Vector3.Up ) : -Body.Velocity.Normal;
 		Body.Velocity = direction * speed * DampingFactor;
 	}
 }

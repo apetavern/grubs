@@ -5,8 +5,6 @@
     "Name": "concrete_garry_dropped",
     "Tags": "projectile",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
@@ -15,7 +13,8 @@
         "CreateBoneObjects": false,
         "Model": "models/weapons/concretegarry/concretegarry.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
       },
       {
         "__type": "Sandbox.HighlightOutline",
@@ -34,14 +33,16 @@
         "ExplodeAfter": 0,
         "ExplodeOnCollision": true,
         "ExplodeOnDeath": false,
-        "ExplosionDamage": 75,
+        "ExplosionDamage": 25,
         "ExplosionRadius": 200,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "b5bdd59c-c716-4d41-ac02-c35ad177ebd9",
+        "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
           "_type": "component",
@@ -114,7 +115,8 @@
         "Reflect": false
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
