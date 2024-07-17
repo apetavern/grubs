@@ -48,7 +48,7 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 		Sound.Play( CollisionSound, Transform.Position );
 		Model.Set( "grounded", true );
 		if ( -other.Contact.Normal.z > 0.5f )
-			PhysicsBody.Velocity = (Vector3.Up + Transform.Rotation.Forward) * ProjectileSpeed * 1.5f;
+			PhysicsBody.Velocity = (Vector3.Up + Transform.Rotation.Forward) * ProjectileSpeed;
 
 	}
 
