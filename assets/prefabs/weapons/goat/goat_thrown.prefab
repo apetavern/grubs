@@ -5,8 +5,6 @@
     "Name": "goat_thrown",
     "Tags": "projectile",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
@@ -66,7 +64,7 @@
           "go": "fe802c38-c2b9-469a-a3a6-158d34b77219",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 500,
+        "ProjectileSpeed": 650,
         "SetPositionOnStart": true
       },
       {
