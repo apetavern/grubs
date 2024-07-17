@@ -39,6 +39,10 @@
         "IsTrigger": false,
         "Scale": "21,20,25",
         "Static": false
+      },
+      {
+        "__type": "Grubs.AlignToTerrain",
+        "__guid": "05f64529-34b4-4baf-86f3-a0a9bb60fd01"
       }
     ],
     "Children": [],

@@ -133,7 +133,7 @@ public partial class Health : Component
 				var gravePrefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/drops/gravestone.prefab" );
 				var grave = SceneUtility.GetPrefabScene( gravePrefab ).Clone();
 				grave.NetworkSpawn();
-				grave.Transform.Position = position;
+				grave.Transform.Position = position.WithY( 536f ).WithZ( position.z + 24 );
 			}
 
 			ChatHelper.Instance.SendInfoMessage( _deathReason.ToString() );
