@@ -30,13 +30,13 @@
 					{
 						_class = "RenderMeshFile"
 						filename = "models/tools/cigar/cigar_low.fbx"
-						import_translation = [ -1.75, 4.0, -0.2 ]
+						import_translation = [ 1.75, 4.0, -0.2 ]
 						import_rotation = [ 0.0, 90.0, 90.0 ]
 						import_scale = 1.5
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "head"
 						import_filter = 
 						{
 							exclude_by_default = true
@@ -68,7 +68,7 @@
 					{
 						_class = "Attachment"
 						name = "muzzle"
-						parent_bone = ""
+						parent_bone = "head"
 						relative_origin = [ -2.601, 16.30526, -0.181077 ]
 						relative_angles = [ -0.0, 0.0, 0.0 ]
 						weight = 1.0

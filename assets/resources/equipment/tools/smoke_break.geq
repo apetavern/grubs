@@ -1,0 +1,11 @@
+{
+  "Name": "Smoke Break",
+  "Description": "A hefty Cuban cigar.",
+  "Icon": "models/tools/cigar/cigar.vmdl.png",
+  "Type": "Tool",
+  "EquipmentPrefab": "prefabs/tools/smoke_break/smoke_break.prefab",
+  "DefaultAmmo": -1,
+  "DropChance": 1,
+  "__references": [],
+  "__version": 0
+}

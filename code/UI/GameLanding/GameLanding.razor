@@ -88,7 +88,7 @@
 
     private void Start()
     {
-        if (IsHost())
+        if (IsHost() && CanStart() && !IsLoadingTerrain())
             Gamemode.Current.Start();
     }
 

@@ -5,8 +5,6 @@
     "Name": "player",
     "Tags": "player",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Grubs.Pawn.Player",
@@ -142,6 +140,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/tools/jetpack/jetpack.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/smoke_break/smoke_break.prefab"
           }
         ],
         "Player": {
@@ -188,7 +190,6 @@
         "Name": "Screen UI",
         "Position": "46.65069,40.65072,-50.19597",
         "NetworkMode": 0,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ScreenPanel",

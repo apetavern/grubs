@@ -1,0 +1,72 @@
+{
+  "RootObject": {
+    "__guid": "3aacf5c9-bada-47d3-9723-b24ac525971d",
+    "Flags": 0,
+    "Name": "smoke_break",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "4452c801-e3c0-4313-bbea-fd3e74b201e1",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/tools/cigar/cigar.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": false
+      },
+      {
+        "__type": "Grubs.Equipment.Equipment",
+        "__guid": "678b95be-4c25-48b3-9f2a-5ea8c5bf6306",
+        "CameraCanZoom": true,
+        "Data": "resources/equipment/tools/smoke_break.geq",
+        "HoldPose": "None",
+        "Icon": "models/tools/cigar/cigar.vmdl.png",
+        "Model": {
+          "_type": "component",
+          "component_id": "4452c801-e3c0-4313-bbea-fd3e74b201e1",
+          "go": "3aacf5c9-bada-47d3-9723-b24ac525971d",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Name": "Smoke Break",
+        "ShouldShowAimReticle": false,
+        "SlotIndex": 0,
+        "UnlockDelay": 0
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.SkipTurnWeapon",
+        "__guid": "00fdd90f-f693-4322-a2e0-889b584da9fb",
+        "AmmoType": "Numbered",
+        "CanFireWhileMoving": false,
+        "CanSwapAfterUse": false,
+        "CanSwapDuringUse": false,
+        "Cooldown": 2,
+        "Equipment": {
+          "_type": "component",
+          "component_id": "678b95be-4c25-48b3-9f2a-5ea8c5bf6306",
+          "go": "3aacf5c9-bada-47d3-9723-b24ac525971d",
+          "component_type": "Equipment"
+        },
+        "FiringType": "Instant",
+        "MaxUses": 1,
+        "StartMultiplier": 1,
+        "UseParticles": "particles/smoke/smoke.vpcf"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.InputHintOverride",
+        "__guid": "be8d1f9c-2a33-4a6c-9850-4e41490b9c4d",
+        "Inputs": {
+          "fire": "Skip Turn"
+        }
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
