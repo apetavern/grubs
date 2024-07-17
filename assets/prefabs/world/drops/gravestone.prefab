@@ -3,10 +3,8 @@
     "__guid": "58bed8e7-168b-4c9d-8dfb-7b2c8a568396",
     "Flags": 0,
     "Name": "gravestone",
-    "Tags": "drop",
+    "Tags": "drop,cleanup",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",

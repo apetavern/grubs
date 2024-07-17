@@ -3,10 +3,8 @@
     "__guid": "a7d05d87-bfed-491e-a53d-2d4c6c370ccc",
     "Flags": 0,
     "Name": "health_crate",
-    "Tags": "drop,pickup",
+    "Tags": "drop,pickup,cleanup",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Grubs.Drops.Crate",
