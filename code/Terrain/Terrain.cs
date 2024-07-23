@@ -11,6 +11,8 @@ public partial class GrubsTerrain : Component
 	[Property] public required Sdf2DWorld SdfWorld { get; set; }
 	[Property] public required Water Water { get; set; }
 
+	public int? SeedOverride { get; set; }
+
 	public GrubsTerrain()
 	{
 		Instance = this;
@@ -100,5 +102,12 @@ public partial class GrubsTerrain : Component
 			.Run();
 
 		return tr.Hit;
+	}
+
+	[ConCmd( "gr_set_seed" )]
+	public static void SetSeedOverride( int seed )
+	{
+		Instance.SeedOverride = seed;
+		Instance.Init();
 	}
 }

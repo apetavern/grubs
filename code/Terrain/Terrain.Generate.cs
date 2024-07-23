@@ -8,7 +8,13 @@ public partial class GrubsTerrain
 	[Sync] public int WorldTextureLength { get; set; } = 0;
 
 	[Property] public Curve TerrainCurve { get; set; }
-	public TimeSince LastChanged { get; set; } // Ugly fix for playtest. 5 second delay before the game can be started to allow terrain to load. 
+
+	public TimeSince
+		LastChanged
+	{
+		get;
+		set;
+	} // Ugly fix for playtest. 5 second delay before the game can be started to allow terrain to load. 
 
 	public void ResetTerrain()
 	{
@@ -62,6 +68,8 @@ public partial class GrubsTerrain
 		BackgroundMap = new bool[pointsX, pointsY];
 
 		var r = Game.Random.Int( 99999 );
+		if ( SeedOverride != null )
+			r = SeedOverride.Value;
 		Log.Info( $"Seed: {r}" );
 
 		for ( var x = 0; x < pointsX; x++ )
@@ -76,7 +84,8 @@ public partial class GrubsTerrain
 		maxY = 0;
 		for ( var x = 0; x < pointsX; x++ )
 		{
-			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 512f * TerrainCurve.Evaluate( (float)x / pointsX )).FloorToInt();
+			NoiseMap[x] = (GetNoise( x + r, 0 ) * wHeight / 512f * TerrainCurve.Evaluate( (float)x / pointsX ))
+				.FloorToInt();
 			if ( NoiseMap[x] >= pointsY )
 				NoiseMap[x] = pointsY - 1;
 			TerrainMap[x, NoiseMap[x]] = true;
