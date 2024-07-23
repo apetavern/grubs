@@ -6,9 +6,9 @@
 @inherits PanelComponent
 
 <root>
-    <Cursor />
-    <SceneBackground @ref="SceneBackground" />
-    <GameRules @ref=GameRulesPanel EnableCloseButton=@true class="hide" />
+    <Cursor/>
+    @* <SceneBackground @ref="SceneBackground"/> *@
+    <GameRules @ref=GameRulesPanel EnableCloseButton=@true class="hide"/>
     <div @ref="MenuBody" class="body">
         <div class="upper">
             <div class="header">
@@ -20,17 +20,17 @@
         </div>
         <div class="middle">
             <div class="player-cards">
-                @foreach (var player in Player.All)
+                @foreach ( var player in Player.All )
                 {
-                    <PlayerCard Player=@player />
+                    <PlayerCard Player=@player/>
                 }
             </div>
         </div>
-        <button class="settings @(IsHost() ? "" : "disabled")" onclick=@OpenGameRules>
+        <button class="settings @( IsHost() ? "" : "disabled" )" onclick=@OpenGameRules>
             <i>settings</i>
             Game Rules
         </button>
-        <button class="start @(IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled")" onclick=@Start>@GetStartButtonText()</button>
+        <button class="start @( IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled" )" onclick=@Start>@GetStartButtonText()</button>
     </div>
 </root>
 
@@ -55,24 +55,24 @@
 
     public bool IsLoadingTerrain()
     {
-        return Terrain.GrubsTerrain.Instance?.LastChanged < 4f;
+        return false;
     }
 
     public GameLanding()
     {
         Instance = this;
-        Cursor.Enabled("menu", true);
+        Cursor.Enabled( "menu", true );
     }
 
     private string GetStartButtonText()
     {
-        if (!IsHost())
+        if ( !IsHost() )
             return "Waiting For Host";
 
-        if (!CanStart())
+        if ( !CanStart() )
             return "Waiting For Players";
 
-        if (IsLoadingTerrain())
+        if ( IsLoadingTerrain() )
             return "Generating Terrain";
 
         return "Start";
@@ -80,16 +80,25 @@
 
     private void OpenGameRules()
     {
-        if (!IsHost())
+        if ( !IsHost() )
             return;
 
-        GameRulesPanel.SetClass("hide", false);
+        GameRulesPanel.SetClass( "hide", false );
     }
 
     private void Start()
     {
-        if (IsHost() && CanStart() && !IsLoadingTerrain())
+        if ( IsHost() && CanStart() && !IsLoadingTerrain() )
             Gamemode.Current.Start();
+    }
+
+    protected override async void OnStart()
+    {
+        base.OnStart();
+
+        await GameTask.DelaySeconds( 3 );
+        
+        Start();
     }
 
     protected override void OnUpdate()
@@ -97,14 +106,14 @@
         base.OnUpdate();
 
         var hide = Gamemode.Current?.Started ?? false;
-        Cursor.Enabled("menu", !hide);
-        SceneBackground?.SetClass("hide", hide);
-        MenuBody?.SetClass("hide", hide);
-        SetClass("hide", hide);
+        Cursor.Enabled( "menu", !hide );
+        SceneBackground?.SetClass( "hide", hide );
+        MenuBody?.SetClass( "hide", hide );
+        SetClass( "hide", hide );
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Connection.All?.Count, Player.All.Count(), IsLoadingTerrain());
+        return HashCode.Combine( Connection.All?.Count, Player.All.Count(), IsLoadingTerrain() );
     }
 }

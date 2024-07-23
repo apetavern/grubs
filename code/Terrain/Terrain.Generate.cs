@@ -70,6 +70,7 @@ public partial class GrubsTerrain
 		var r = Game.Random.Int( 99999 );
 		if ( SeedOverride != null )
 			r = SeedOverride.Value;
+		r = 19402;
 		Log.Info( $"Seed: {r}" );
 
 		for ( var x = 0; x < pointsX; x++ )

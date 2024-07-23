@@ -43,7 +43,7 @@ public sealed class Grub : Component, IResolvable
 	private void InitializeLocal()
 	{
 		var spawn = GrubsTerrain.Instance.FindSpawnLocation();
-		Transform.Position = spawn;
+		Transform.Position = new Vector3( -250, 512, 240 );
 	}
 
 	public void OnHardFall()

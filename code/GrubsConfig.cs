@@ -159,7 +159,7 @@ public static class GrubsConfig
 	/// If true, we do not end the game when only one player is remaining.
 	/// </summary>
 	[ConVar( "keep_game_alive" )]
-	public static bool KeepGameAlive { get; set; } = false;
+	public static bool KeepGameAlive { get; set; } = true;
 
 	public enum TerrainEnvironmentType
 	{
