@@ -10,7 +10,7 @@
 <root>
     <Cursor />
 
-    <div @ref="Main" class="left">
+    <div class="column left">
         <div class="grubs-logo">
             GRUBS
         </div>
@@ -20,6 +20,19 @@
             <button class="disabled" onclick=@(() => OnOptionSelected("Customize"))>Customize</button>
             <button onclick=@(() => OnOptionSelected("Settings"))>Settings</button>
             <button onclick=@(() => OnOptionSelected("Quit"))>Quit</button>
+        </div>
+    </div>
+    <div class="column right">
+        <div class="discord-info">
+            <div class="branding">
+                <div class="logo-container">
+                    <img src="textures/ui/discord-mark-white.png" />
+                </div>
+                <div class="server-link">discord.gg/apetavern</div>
+            </div>
+            <div class="feedback-text">
+                Leave feedback and bug reports on our Discord!
+            </div>
         </div>
     </div>
 
@@ -34,7 +47,6 @@
     public static Menu Instance { get; set; }
 
     public Panel Current { get; set; }
-    public Panel Main { get; set; }
 
     public Menu()
     {
@@ -67,12 +79,12 @@
     {
         Current.Delete();
         Current = Panel.AddChild<T>("hide");
-        Main?.SetClass("hide", true);
+        SetClass("hide", true);
     }
 
     public void Return()
     {
-        Main?.SetClass("hide", false);
+        SetClass("hide", false);
     }
 
     protected override void OnTreeBuilt()
@@ -85,7 +97,7 @@
     protected override void OnTreeFirstBuilt()
     {
         Current = Panel.AddChild<TitleScreen>();
-        Main?.SetClass("hide", true);
+        SetClass("hide", true);
     }
 
     protected override int BuildHash()

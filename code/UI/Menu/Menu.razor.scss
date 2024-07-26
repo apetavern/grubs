@@ -8,16 +8,32 @@ Menu {
     font-family: $font-family;
     pointer-events: all;
 
-    .left {
-        width: 100%;
+    &.hide {
+        .left {
+            transform: translateX(-1080px);
+        }
+
+        .right {
+            transform: translateX(1080px);
+        }
+    }
+
+    .column {
+        width: 50%;
         height: 100%;
-        margin-left: 110px;
         flex-direction: column;
         opacity: 1;
         transition: all 0.5s;
 
-        &.hide {
-            transform: translateX(-1080px);
+        &.left {
+            margin-left: 110px;
+        }
+
+        &.right {
+            margin-right: 110px;
+            justify-content: flex-start;
+            align-items: flex-end;
+            font-size: 36px;
         }
     }
 
@@ -47,6 +63,37 @@ Menu {
             &:hover:not(.disabled) {
                 transform: translateX(4px);
                 sound-in: ui_button_hover;
+            }
+        }
+    }
+
+    .discord-info {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 120px;
+        gap: 10px;
+
+        .feedback-text {
+            font-size: 20px;
+        }
+
+        .branding {
+            align-items: center;
+            gap: 10px;
+
+            .logo-container {
+                background-color: $menu-discord-blurple;
+                border-radius: 15px;
+
+                img {
+                    max-width: 50px;
+                    max-height: 50px;
+                    margin: 10px;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
             }
         }
     }
