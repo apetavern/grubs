@@ -8,7 +8,14 @@ namespace Grubs.Pawn;
 public sealed class Grub : Component, IResolvable
 {
 	[Sync] public Guid PlayerId { get; set; }
-	public Player Player => Scene.Directory.FindComponentByGuid( PlayerId ) as Player;
+	public Player Player
+	{
+		get
+		{
+			var player = Scene.Directory.FindComponentByGuid( PlayerId );
+			return player is not null ? player as Player : null;
+		}
+	}
 
 	[Property] public required Health Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
