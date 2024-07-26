@@ -58,7 +58,7 @@ public abstract class Gamemode : Component
 
 	protected async Task ApplyDamageQueue()
 	{
-		foreach ( var grub in Scene.GetAllComponents<Grub>().Where( g => g.Player.GameObject is null ) )
+		foreach ( var grub in Scene.GetAllComponents<Grub>().Where( g => g.Player?.GameObject is null ) )
 		{
 			grub.Health.TakeDamage( GrubsDamageInfo.FromDisconnect() );
 		}

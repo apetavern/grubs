@@ -146,7 +146,8 @@ public partial class Health : Component
 			var connection = attacker?.Network.OwnerConnection;
 			using ( Rpc.FilterInclude( connection ) )
 			{
-				Stats.IncrementGrubsKilled( grub.Player.Id );
+				if ( grub.Player is not null )
+					Stats.IncrementGrubsKilled( grub.Player.Id );
 			}
 
 			grub.GameObject.Destroy();
