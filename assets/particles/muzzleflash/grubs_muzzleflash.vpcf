@@ -670,6 +670,7 @@
 			}
 			m_flFalloffLinearity = 50.0
 			m_nLightType = 2
+			m_bDisableOperator = true
 		},
 	]
 	m_Children = 
