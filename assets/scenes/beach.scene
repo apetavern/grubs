@@ -1,5 +1,5 @@
 {
-  "__guid": "5a9441ea-e670-4677-aa55-3f0e1aea3dbb",
+  "__guid": "7f73e35d-da6f-40c9-a3c7-08065e481cd8",
   "GameObjects": [
     {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
@@ -87,22 +87,6 @@
           ]
         },
         {
-          "__guid": "0b2358ad-b105-489e-a7a8-9ef6bd129c58",
-          "Flags": 0,
-          "Name": "volcano_01",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "deaec3ee-5032-44e5-888c-e3108af8697d",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/environment/islands/volcano_01.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
           "__guid": "18077d33-611c-49cc-85cd-c91b45560358",
           "Flags": 0,
           "Name": "skydome",
@@ -169,6 +153,44 @@
                 "Id": "f518d33c-dd1b-4d09-addb-9b39675f0acb"
               },
               "Volume": 1
+            }
+          ]
+        },
+        {
+          "__guid": "cf07c918-0dac-4e61-9136-9e1a11fe26f8",
+          "Flags": 0,
+          "Name": "mountain_01",
+          "Position": "4444.763,8355.551,-7.999912",
+          "Rotation": "0,0,-0.258819,0.9659259",
+          "Scale": "1.081934,1.081934,1.081934",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "f06bb6bb-0b0b-4750-a0ac-d32fab9a2dd5",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "76f64726-0835-4726-8142-16e6fae06ec5",
+          "Flags": 0,
+          "Name": "mountain_01 (1)",
+          "Position": "5596.349,7500.156,-7.999912",
+          "Rotation": "0,0,-0.8660256,-0.4999999",
+          "Scale": "1.191934,0.9819336,0.8319336",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "1ea7cd2e-73b9-404c-92e7-4639ab065305",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
             }
           ]
         }
@@ -348,6 +370,7 @@
         {
           "__type": "Sandbox.AmbientOcclusion",
           "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
+          "FalloffDistance": 1,
           "Intensity": 8,
           "Quality": "High",
           "Radius": 32
