@@ -281,12 +281,18 @@ public partial class Weapon : Component
 
 	public Transform GetMuzzlePosition()
 	{
+		if ( Equipment is null )
+			return Transform.World;
+		
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		return muzzle ?? Equipment.Grub?.EyePosition ?? Transform.World;
 	}
 
 	public Vector3 GetMuzzleForward()
 	{
+		if ( Equipment is null )
+			return 0f;
+		
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( muzzle is null )
 			return Equipment.Grub.PlayerController.EyeRotation.Forward * Equipment.Grub.PlayerController.Facing;

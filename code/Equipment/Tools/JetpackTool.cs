@@ -53,6 +53,9 @@ public sealed class JetpackTool : Tool
 
 	public void AnimateFlames()
 	{
+		if ( !Equipment.IsValid() )
+			return;
+		
 		if ( !Equipment.Model.Active )
 			return;
 
@@ -64,12 +67,12 @@ public sealed class JetpackTool : Tool
 		UDFlame1.Enabled = true;
 		UDFlame2.Enabled = true;
 
-		var Middle_Flame = Equipment.Model.GetAttachment( "jet_middle" ).Value;
-		var Left_Flame = Equipment.Model.GetAttachment( "jet_left" ).Value;
-		var Right_Flame = Equipment.Model.GetAttachment( "jet_right" ).Value;
+		var middleFlame = GetAttachmentOrDefault( "jet_middle" );
+		var leftFlame = GetAttachmentOrDefault( "jet_left" );
+		var rightFlame = GetAttachmentOrDefault( "jet_right" );
 
-		FBFlame.Transform.Position = Middle_Flame.Position + characterController.Velocity * Time.Delta;
-		FBFlame.Transform.Rotation = Middle_Flame.Rotation;
+		FBFlame.Transform.Position = middleFlame.Position + characterController.Velocity * Time.Delta;
+		FBFlame.Transform.Rotation = middleFlame.Rotation;
 
 		if ( !IsProxy )
 		{
@@ -79,16 +82,25 @@ public sealed class JetpackTool : Tool
 
 		FBFlame.Transform.Scale = MathX.Lerp( FBFlame.Transform.Scale.x, ForwardBackFlameScale, Time.Delta * 5f );
 
-		UDFlame1.Transform.Position = Left_Flame.Position + characterController.Velocity / 100f;
-		UDFlame1.Transform.Rotation = Left_Flame.Rotation;
-		UDFlame2.Transform.Position = Right_Flame.Position + characterController.Velocity / 100f;
-		UDFlame2.Transform.Rotation = Right_Flame.Rotation;
+		UDFlame1.Transform.Position = leftFlame.Position + characterController.Velocity / 100f;
+		UDFlame1.Transform.Rotation = leftFlame.Rotation;
+		UDFlame2.Transform.Position = rightFlame.Position + characterController.Velocity / 100f;
+		UDFlame2.Transform.Rotation = rightFlame.Rotation;
 
 		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
 		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
 
 		if ( _jetSound is not null )
 			_jetSound.Position = Equipment.Grub.Transform.Position;
+	}
+
+	private Transform GetAttachmentOrDefault( string name )
+	{
+		if ( !Equipment.Model.IsValid() )
+			return Transform.World;
+		
+		var transformNullable = Equipment.Model.GetAttachment( name );
+		return transformNullable ?? Transform.World;
 	}
 
 	protected override void OnUpdate()
