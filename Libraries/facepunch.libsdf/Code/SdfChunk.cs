@@ -136,7 +136,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	public Task ClearAsync( bool solid )
 	{
 		Data.Clear( solid );
-		return System.Threading.Tasks.Task.CompletedTask;
+		return GameTask.CompletedTask;
 	}
 
 	/// <summary>
@@ -256,12 +256,20 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	protected async Task UpdateCollisionMeshAsync( List<Vector3> vertices, List<int> indices )
 	{
 		await GameTask.MainThread();
+
+		if ( !IsValid )
+			return;
+		
 		UpdateCollisionMesh( vertices, indices );
 	}
 
 	protected async Task UpdateRenderMeshesAsync( params MeshDescription[] meshes )
 	{
 		await GameTask.MainThread();
+
+		if ( !IsValid )
+			return;
+		
 		UpdateRenderMeshes( meshes );
 	}
 
@@ -372,5 +380,25 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		Renderer.Transform = World.Transform.World;
 		Renderer.Position = World.Transform.World.PointToWorld( LocalPosition );
+	}
+	
+	protected override void OnDestroy()
+	{
+		Data.Dispose();
+
+		Renderer?.Delete();
+		Renderer = null;
+
+		Shape?.Remove();
+		Shape = null;
+
+		foreach ( var usedMesh in _usedMeshes )
+		{
+			Static.ReturnMesh( usedMesh );
+		}
+
+		_usedMeshes.Clear();
+
+		base.OnDestroy();
 	}
 }

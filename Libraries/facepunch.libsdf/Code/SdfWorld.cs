@@ -157,8 +157,6 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	{
 		IsDestroying = true;
 
-		_ = ClearAsync();
-
 		base.OnDestroy();
 	}
 
