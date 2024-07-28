@@ -4,14 +4,13 @@
     "Flags": 0,
     "Name": "landmine",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "4690f1df-b690-476c-87b7-4054f491c8af",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
+        "MaterialOverride": "models/weapons/landmine/materials/mat-weapon-landmine-grubs@2.vmat",
         "Model": "models/weapons/landmine/landmine.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
@@ -144,6 +143,7 @@
             }
           }
         },
+        "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
