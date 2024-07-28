@@ -4,293 +4,289 @@
   "BlendMode": "Opaque",
   "nodes": [
     {
-      "_class": "Result",
-      "Albedo": {
-        "Identifier": "18",
+      "_class": "Time",
+      "Identifier": "0",
+      "Position": "-2176,400"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.2,
+      "Name": "Roughness",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "1",
+      "Position": "-768,240"
+    },
+    {
+      "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "2",
+      "Position": "-1776,160",
+      "Coords": {
+        "Identifier": "8",
         "Output": "Result"
       },
-      "Emission": {},
-      "Opacity": {},
-      "Normal": {
+      "Tile": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "3",
+      "Position": "-3200,48",
+      "A": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "10",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "4",
+      "Position": "-3056,-96",
+      "Tile": {
+        "Identifier": "11",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "5",
+      "Position": "-1968,416",
+      "A": {
+        "Identifier": "0",
+        "Output": "Result"
+      },
+      "B": {
         "Identifier": "19",
         "Output": "Result"
-      },
-      "Roughness": {
-        "Identifier": "20",
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.15,
+      "Name": "Distort Amount",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "6",
+      "Position": "-2736,304"
+    },
+    {
+      "_class": "Float2",
+      "Min": "0,0",
+      "Max": "1,1",
+      "Value": "2,2",
+      "Name": "Tiling",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "7",
+      "Position": "-2176,272"
+    },
+    {
+      "_class": "Lerp",
+      "Fraction": 0.036384385,
+      "Identifier": "8",
+      "Position": "-2384,16",
+      "A": {
+        "Identifier": "4",
         "Output": "Result"
       },
-      "Metalness": {},
-      "AmbientOcclusion": {},
+      "B": {
+        "Identifier": "20",
+        "Output": "R"
+      },
+      "C": {
+        "Identifier": "6",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "9",
+      "Position": "-1072,16",
+      "A": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "13",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.01,
+      "Name": "Scroll Speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "10",
+      "Position": "-3408,96"
+    },
+    {
+      "_class": "Float2",
+      "Min": "0,0",
+      "Max": "1,1",
+      "Value": "1,1",
+      "Name": "Distort Tiling",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "11",
+      "Position": "-3408,-96"
+    },
+    {
+      "_class": "Float4",
+      "Value": "0.64478,0.83064,0.93072,1",
+      "Name": "Foam Colour",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
+      "Identifier": "12",
+      "Position": "-1472,-16"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "13",
+      "Position": "-1184,192",
+      "A": {
+        "Identifier": "14",
+        "Output": "G"
+      },
+      "B": {
+        "Identifier": "16",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/effects/water/water_noise_01.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Water Noise",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "14",
+      "Position": "-1472,160",
+      "Coords": {
+        "Identifier": "2",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float4",
+      "Value": "0.02879,0.21057,0.50301,1",
+      "Name": "Water Colour",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
+      "Identifier": "15",
+      "Position": "-1472,-176"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0.2,
+      "Name": "Noise Strength",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "16",
+      "Position": "-1472,352"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "17",
+      "Position": "-3408,32"
+    },
+    {
+      "_class": "Result",
       "DefaultOpacity": 1,
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
-      "PositionOffset": {},
-      "Identifier": "0",
-      "Position": "-320,-272"
-    },
-    {
-      "_class": "VoronoiNoise",
-      "Coords": {},
-      "A": {},
-      "B": {},
-      "AngleOffset": 3.14,
-      "CellDensity": 10,
-      "Worley": false,
-      "Identifier": "1",
-      "Position": "-2512,-272"
-    },
-    {
-      "_class": "Float4",
-      "Value": "0.17771,0.74386,1,1",
-      "Name": "",
-      "IsAttribute": false,
-      "UI": {
-        "Type": "Color"
-      },
-      "Identifier": "2",
-      "Position": "-1952,-752"
-    },
-    {
-      "_class": "Lerp",
-      "A": {
-        "Identifier": "16",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "4",
-        "Output": "Result"
-      },
-      "C": {
-        "Identifier": "5",
-        "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "3",
-      "Position": "-1952,-576"
-    },
-    {
-      "_class": "Float4",
-      "Value": "1,1,1,1",
-      "Name": "",
-      "IsAttribute": false,
-      "UI": {
-        "Type": "Color"
-      },
-      "Identifier": "4",
-      "Position": "-2512,-448"
-    },
-    {
-      "_class": "Step",
-      "Input": {
-        "Identifier": "6",
-        "Output": "Result"
-      },
-      "Edge": {},
-      "DefaultInput": 0,
-      "DefaultEdge": 0.1,
-      "Identifier": "5",
-      "Position": "-2096,-256"
-    },
-    {
-      "_class": "RemapValue",
-      "A": {
-        "Identifier": "1",
-        "Output": "Result"
-      },
-      "B": {},
-      "C": {},
-      "D": {},
-      "E": {},
-      "In": 0.5,
-      "InMin": 0.7,
-      "InMax": 1,
-      "OutMin": 0,
-      "OutMax": 1,
-      "Clamp": true,
-      "Identifier": "6",
-      "Position": "-2288,-288"
-    },
-    {
-      "_class": "Time",
-      "Identifier": "7",
-      "Position": "-1472,16"
-    },
-    {
-      "_class": "TextureCoord",
-      "UseSecondaryCoord": false,
-      "Tiling": "0.75,0.75",
-      "Identifier": "8",
-      "Position": "-1472,128"
-    },
-    {
-      "_class": "Divide",
-      "A": {
-        "Identifier": "7",
-        "Output": "Result"
-      },
-      "B": {},
-      "DefaultA": 0,
-      "DefaultB": 10,
-      "Identifier": "9",
-      "Position": "-1248,16"
-    },
-    {
-      "_class": "Add",
-      "A": {
+      "Identifier": "18",
+      "Position": "-416,0",
+      "Albedo": {
         "Identifier": "9",
         "Output": "Result"
       },
-      "B": {
-        "Identifier": "8",
+      "Roughness": {
+        "Identifier": "1",
         "Output": "Result"
-      },
-      "Identifier": "10",
-      "Position": "-1040,64"
-    },
-    {
-      "_class": "ViewDirection",
-      "Identifier": "11",
-      "Position": "-2416,80"
-    },
-    {
-      "_class": "Lerp",
-      "A": {
-        "Identifier": "14",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "13",
-        "Output": "Result"
-      },
-      "C": {
-        "Identifier": "11",
-        "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "12",
-      "Position": "-2176,0"
+      }
     },
     {
       "_class": "Float",
-      "Ignore": 0,
       "Min": 0,
       "Max": 1,
-      "Value": 0,
-      "Name": "",
+      "Value": 0.1,
+      "Name": "Scroll Speed",
       "IsAttribute": false,
       "UI": {},
-      "Identifier": "13",
-      "Position": "-2416,16"
-    },
-    {
-      "_class": "Float",
-      "Ignore": 0,
-      "Min": 0,
-      "Max": 1,
-      "Value": 1,
-      "Name": "",
-      "IsAttribute": false,
-      "UI": {},
-      "Identifier": "14",
-      "Position": "-2416,-48"
-    },
-    {
-      "_class": "Blend",
-      "A": {
-        "Identifier": "12",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "5",
-        "Output": "Result"
-      },
-      "C": {},
-      "Fraction": 1,
-      "BlendMode": "Lighten",
-      "Clamp": true,
-      "Identifier": "15",
-      "Position": "-1824,-256"
-    },
-    {
-      "_class": "Float4",
-      "Value": "0,0.10628,0.46821,1",
-      "Name": "",
-      "IsAttribute": false,
-      "UI": {
-        "Type": "Color"
-      },
-      "Identifier": "16",
-      "Position": "-2512,-608"
-    },
-    {
-      "_class": "Lerp",
-      "A": {
-        "Identifier": "2",
-        "Output": "Result"
-      },
-      "B": {
-        "Identifier": "3",
-        "Output": "Result"
-      },
-      "C": {
-        "Identifier": "15",
-        "Output": "Result"
-      },
-      "Fraction": 0.5,
-      "Identifier": "17",
-      "Position": "-1616,-608"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "10",
-        "Output": "Result"
-      },
-      "Image": "materials/dev/white_color.tga",
-      "Sampler": {},
-      "UI": {
-        "Name": "Colour",
-        "SrgbRead": true,
-        "CreateInput": "CreateInputTexture2D"
-      },
-      "Identifier": "18",
-      "Position": "-672,-192"
-    },
-    {
-      "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "10",
-        "Output": "Result"
-      },
-      "Image": "materials/dev/white_color.tga",
-      "Sampler": {},
-      "UI": {
-        "Name": "Normal",
-        "Extension": "Normal",
-        "Processor": "NormalizeNormals",
-        "ColorSpace": "Linear",
-        "CreateInput": "CreateInputTexture2D"
-      },
       "Identifier": "19",
-      "Position": "-672,-32"
+      "Position": "-2176,464"
     },
     {
       "_class": "TextureSampler",
-      "Coords": {
-        "Identifier": "10",
-        "Output": "Result"
-      },
-      "Image": "materials/dev/white_color.tga",
+      "Image": "materials/effects/water/water_noise_01.png",
       "Sampler": {},
       "UI": {
-        "Name": "Rough",
-        "Extension": "Rough",
+        "Name": "Distort Noise",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "CustomExtension": "",
         "ColorSpace": "Linear",
-        "CreateInput": "CreateInputTexture2D"
+        "PrimaryGroup": {
+          "Name": ""
+        }
       },
       "Identifier": "20",
-      "Position": "-672,144"
+      "Position": "-2736,112",
+      "Coords": {
+        "Identifier": "4",
+        "Output": "Result"
+      }
     }
   ]
 }

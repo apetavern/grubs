@@ -1,0 +1,20 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_water.shader"
+
+	DistortNoise "materials/effects/water/water_noise_01.png"
+	g_flDistortAmount "0.150"
+	g_flNoiseStrength "0.200"
+	g_flRoughness "0.200"
+	g_flScrollSpeed "0.010"
+	g_vDistortTiling "[1.000 1.000]"
+	g_vFoamColour "[0.639216 0.831373 0.929412 1.000000]"
+	g_vTiling "[1.000 1.000]"
+	g_vWaterColour "[0.031373 0.211765 0.501961 1.000000]"
+	WaterNoise "materials/effects/water/water_noise_01.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+}
