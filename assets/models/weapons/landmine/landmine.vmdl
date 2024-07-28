@@ -6,19 +6,6 @@
 		children = 
 		[
 			{
-				_class = "Skeleton"
-				children = 
-				[
-					{
-						_class = "Bone"
-						name = "hold_L"
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						do_not_discard = true
-					},
-				]
-			},
-			{
 				_class = "MaterialGroupList"
 				children = 
 				[
@@ -27,8 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "phong1.vmat"
-								to = "models/weapons/landmine/materials/landmine_lightoff.vmat"
+								from = "mat-weapon-landmine-grubs.vmat"
+								to = "models/weapons/landmine/materials/mat-weapon-landmine-grubs@1.vmat"
 							},
 						]
 						use_global_default = false
@@ -40,8 +27,8 @@
 						remaps = 
 						[
 							{
-								from = "models/weapons/landmine/materials/landmine.vmat"
-								to = "models/weapons/landmine/materials/landmine_lightoff.vmat"
+								from = "models/weapons/landmine/materials/mat-weapon-landmine-grubs@1.vmat"
+								to = "models/weapons/landmine/materials/mat-weapon-landmine-grubs@2.vmat"
 							},
 						]
 					},
@@ -53,9 +40,21 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						children = 
+						[
+							{
+								_class = "RenderMeshMarkup"
+								material_search_path = ""
+								use_expensive_tangents = true
+								high_high_precision_texcoords = false
+								calc_per_vertex_curvature = false
+								prefer_high_density_tris_in_uv_density_calc = false
+								cpu_access = false
+							},
+						]
 						filename = "models/weapons/landmine/landmine.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, -90.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -67,8 +66,25 @@
 							exception_list = 
 							[
 								"pCylinder2",
+								"MESH_weapon_landmine_grubs@button",
+								"MESH_weapon_landmine_grubs@body",
 							]
 						}
+					},
+				]
+			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_ScaleAndMirror"
+						scale = 0.3937
+						mirror_x = false
+						mirror_y = false
+						mirror_z = false
+						flip_bone_forward = false
+						swap_left_and_right_bones = false
 					},
 				]
 			},
