@@ -5,8 +5,6 @@
     "Name": "landmine_ground",
     "Tags": "projectile,notarget,solid,cleanup",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
@@ -74,10 +72,10 @@
         "__type": "Grubs.Equipment.Gadgets.Ground.Landmine",
         "__guid": "2257e8d0-5da2-42d0-ab4f-608a4ecdecc8",
         "ArmTime": 3,
-        "BeepSound": "sounds/weapons/mine/beep.sound",
+        "BeepSound": "sounds/weapons/mine/mine.detonate.sound",
         "Damage": 60,
         "DetonateOnDeath": true,
-        "DetonateTime": 3,
+        "DetonateTime": 0.6,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
         "IsDud": false,
         "Model": {

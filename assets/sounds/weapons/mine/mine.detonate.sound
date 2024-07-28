@@ -1,11 +1,11 @@
 {
   "UI": false,
-  "Volume": "1.00,0.75,0",
-  "Pitch": "1.00,1.05,0",
-  "Decibels": 150,
+  "Volume": "1.00,1.00,0",
+  "Pitch": "1.00,1.00,0",
+  "Decibels": 70,
   "SelectionMode": "Random",
   "Sounds": [
-    "sounds/weapons/mine/beep1.vsnd"
+    "sounds/weapons/mine/sounds_mine.detonate.vsnd"
   ],
   "Occlusion": true,
   "AirAbsorption": true,

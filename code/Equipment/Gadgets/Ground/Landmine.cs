@@ -17,17 +17,23 @@ public class Landmine : ProximityExplosive
 		Model.MaterialGroup = _lightOnSkin;
 	}
 
+	public override void OnTrigger()
+	{
+		base.OnTrigger();
+
+		Sound.Play( BeepSound );
+	}
+
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
 
 		if ( IsDetonating && IsArmed )
 		{
-			if ( _skinToggle >= 0.5f )
+			if ( _skinToggle >= 0.1f )
 			{
 				Model.MaterialGroup = Model.MaterialGroup == _lightOnSkin ? _lightOffSkin : _lightOnSkin;
 				_skinToggle = 0f;
-				Sound.Play( BeepSound );
 			}
 		}
 	}
