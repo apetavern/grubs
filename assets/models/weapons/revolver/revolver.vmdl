@@ -6,19 +6,6 @@
 		children = 
 		[
 			{
-				_class = "Skeleton"
-				children = 
-				[
-					{
-						_class = "Bone"
-						name = "hold_L"
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						do_not_discard = true
-					},
-				]
-			},
-			{
 				_class = "MaterialGroupList"
 				children = 
 				[
@@ -27,12 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "phong1.vmat"
-								to = "models/weapons/revolver/materials/sixshooter.vmat"
-							},
-							{
-								from = "phong3.vmat"
-								to = "models/weapons/revolver/materials/sixshooter.vmat"
+								from = "mat-pistol-revolver-grubs.vmat"
+								to = "models/weapons/revolver/materials/mat-pistol-revolver-grubs.vmat"
 							},
 						]
 						use_global_default = false
@@ -47,8 +30,8 @@
 					{
 						_class = "Attachment"
 						name = "muzzle"
-						parent_bone = "hold_L"
-						relative_origin = [ 18.594616, 0.0, 6.449287 ]
+						parent_bone = "muzzle"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
 						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
@@ -68,15 +51,34 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = "hold_L"
+						parent_bone = ""
 						import_filter = 
 						{
 							exclude_by_default = true
 							exception_list = 
 							[
 								"cylinder1",
+								"MESH_pistol_revolver_grubs@trigger",
+								"MESH_pistol_revolver_grubs@hammer",
+								"MESH_pistol_revolver_grubs@cylinder",
+								"MESH_pistol_revolver_grubs@body",
 							]
 						}
+					},
+				]
+			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_ScaleAndMirror"
+						scale = 0.3937
+						mirror_x = false
+						mirror_y = false
+						mirror_z = false
+						flip_bone_forward = false
+						swap_left_and_right_bones = false
 					},
 				]
 			},
@@ -84,5 +86,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
