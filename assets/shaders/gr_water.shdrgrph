@@ -1,5 +1,5 @@
 {
-  "Model": "models/dev/box.vmdl",
+  "Model": null,
   "Description": "",
   "BlendMode": "Opaque",
   "nodes": [
@@ -17,7 +17,7 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "1",
-      "Position": "-768,240"
+      "Position": "128,-32"
     },
     {
       "_class": "TileAndOffset",
@@ -46,11 +46,11 @@
       "Identifier": "3",
       "Position": "-3200,48",
       "A": {
-        "Identifier": "17",
+        "Identifier": "16",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "10",
+        "Identifier": "18",
         "Output": "Result"
       }
     },
@@ -62,7 +62,7 @@
       "Identifier": "4",
       "Position": "-3056,-96",
       "Tile": {
-        "Identifier": "11",
+        "Identifier": "10",
         "Output": "Result"
       },
       "Offset": {
@@ -81,7 +81,7 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "19",
+        "Identifier": "30",
         "Output": "Result"
       }
     },
@@ -98,9 +98,9 @@
     },
     {
       "_class": "Float2",
-      "Min": "0,0",
-      "Max": "1,1",
-      "Value": "2,2",
+      "Min": "-100,-100",
+      "Max": "100,100",
+      "Value": "25,25",
       "Name": "Tiling",
       "IsAttribute": false,
       "UI": {},
@@ -117,7 +117,7 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "20",
+        "Identifier": "19",
         "Output": "R"
       },
       "C": {
@@ -129,40 +129,29 @@
       "_class": "Lerp",
       "Fraction": 0.5,
       "Identifier": "9",
-      "Position": "-1072,16",
+      "Position": "-784,-96",
       "A": {
-        "Identifier": "15",
+        "Identifier": "14",
         "Output": "Result"
       },
       "B": {
-        "Identifier": "12",
+        "Identifier": "11",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "13",
+        "Identifier": "12",
         "Output": "Result"
       }
     },
     {
-      "_class": "Float",
-      "Min": 0,
-      "Max": 1,
-      "Value": 0.01,
-      "Name": "Scroll Speed",
-      "IsAttribute": false,
-      "UI": {},
-      "Identifier": "10",
-      "Position": "-3408,96"
-    },
-    {
       "_class": "Float2",
-      "Min": "0,0",
-      "Max": "1,1",
-      "Value": "1,1",
+      "Min": "-100,-100",
+      "Max": "100,100",
+      "Value": "2,2",
       "Name": "Distort Tiling",
       "IsAttribute": false,
       "UI": {},
-      "Identifier": "11",
+      "Identifier": "10",
       "Position": "-3408,-96"
     },
     {
@@ -173,21 +162,21 @@
       "UI": {
         "Type": "Color"
       },
-      "Identifier": "12",
-      "Position": "-1472,-16"
+      "Identifier": "11",
+      "Position": "-1184,-128"
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "13",
-      "Position": "-1184,192",
+      "Identifier": "12",
+      "Position": "-1184,256",
       "A": {
-        "Identifier": "14",
+        "Identifier": "13",
         "Output": "G"
       },
       "B": {
-        "Identifier": "16",
+        "Identifier": "15",
         "Output": "Result"
       }
     },
@@ -201,11 +190,12 @@
         "Extension": "Mask",
         "CustomExtension": "",
         "ColorSpace": "Linear",
+        "ImageFormat": "BC7",
         "PrimaryGroup": {
           "Name": ""
         }
       },
-      "Identifier": "14",
+      "Identifier": "13",
       "Position": "-1472,160",
       "Coords": {
         "Identifier": "2",
@@ -214,14 +204,14 @@
     },
     {
       "_class": "Float4",
-      "Value": "0.02879,0.21057,0.50301,1",
+      "Value": "0.03137,0.21176,0.50196,1",
       "Name": "Water Colour",
       "IsAttribute": false,
       "UI": {
         "Type": "Color"
       },
-      "Identifier": "15",
-      "Position": "-1472,-176"
+      "Identifier": "14",
+      "Position": "-1184,-288"
     },
     {
       "_class": "Float",
@@ -231,12 +221,12 @@
       "Name": "Noise Strength",
       "IsAttribute": false,
       "UI": {},
-      "Identifier": "16",
+      "Identifier": "15",
       "Position": "-1472,352"
     },
     {
       "_class": "Time",
-      "Identifier": "17",
+      "Identifier": "16",
       "Position": "-3408,32"
     },
     {
@@ -245,27 +235,35 @@
       "DefaultRoughness": 1,
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
-      "Identifier": "18",
-      "Position": "-416,0",
+      "Identifier": "17",
+      "Position": "368,-128",
       "Albedo": {
-        "Identifier": "9",
+        "Identifier": "20",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "33",
         "Output": "Result"
       },
       "Roughness": {
         "Identifier": "1",
         "Output": "Result"
+      },
+      "PositionOffset": {
+        "Identifier": "45",
+        "Output": "Result"
       }
     },
     {
-      "_class": "Float",
-      "Min": 0,
-      "Max": 1,
-      "Value": 0.1,
-      "Name": "Scroll Speed",
+      "_class": "Float2",
+      "Min": "-10,-10",
+      "Max": "10,10",
+      "Value": "0.01,0.01",
+      "Name": "Distort Scroll Speed",
       "IsAttribute": false,
       "UI": {},
-      "Identifier": "19",
-      "Position": "-2176,464"
+      "Identifier": "18",
+      "Position": "-3408,96"
     },
     {
       "_class": "TextureSampler",
@@ -277,16 +275,388 @@
         "Extension": "Mask",
         "CustomExtension": "",
         "ColorSpace": "Linear",
+        "ImageFormat": "BC7",
         "PrimaryGroup": {
           "Name": ""
         }
       },
-      "Identifier": "20",
+      "Identifier": "19",
       "Position": "-2736,112",
       "Coords": {
         "Identifier": "4",
         "Output": "Result"
       }
+    },
+    {
+      "_class": "Lerp",
+      "Fraction": 0.5,
+      "Identifier": "20",
+      "Position": "80,-288",
+      "A": {
+        "Identifier": "31",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "9",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "26",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "21",
+      "Position": "-1360,-688",
+      "Tile": {
+        "Identifier": "25",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "23",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/effects/water/water_noise_01.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Mask Noise",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "ImageFormat": "BC7",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "22",
+      "Position": "-1040,-688",
+      "Coords": {
+        "Identifier": "21",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "23",
+      "Position": "-1632,-544",
+      "A": {
+        "Identifier": "24",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "29",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Time",
+      "Identifier": "24",
+      "Position": "-1840,-560"
+    },
+    {
+      "_class": "Float2",
+      "Min": "-100,-100",
+      "Max": "100,100",
+      "Value": "1,1",
+      "Name": "Mask Tiling",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "25",
+      "Position": "-1840,-688"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "26",
+      "Position": "-768,-656",
+      "A": {
+        "Identifier": "28",
+        "Output": "Out"
+      },
+      "B": {
+        "Identifier": "22",
+        "Output": "B"
+      }
+    },
+    {
+      "_class": "Fresnel",
+      "DefaultPower": 10,
+      "Identifier": "27",
+      "Position": "-1120,-832"
+    },
+    {
+      "_class": "OneMinus",
+      "Identifier": "28",
+      "Position": "-912,-832",
+      "In": {
+        "Identifier": "27",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float2",
+      "Min": "-10,-10",
+      "Max": "10,10",
+      "Value": "-0.1,-0.1",
+      "Name": "Mask Scroll Speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "29",
+      "Position": "-1840,-496"
+    },
+    {
+      "_class": "Float2",
+      "Min": "-10,-10",
+      "Max": "10,10",
+      "Value": "0.1,0.1",
+      "Name": "Scroll Speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "30",
+      "Position": "-2176,480"
+    },
+    {
+      "_class": "Blend",
+      "Fraction": 1,
+      "BlendMode": "Overlay",
+      "Clamp": true,
+      "Identifier": "31",
+      "Position": "-640,-288",
+      "A": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "11",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/effects/water/water_normal.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "Macro Normal",
+        "Default": "1,1,1,1",
+        "Extension": "Normal",
+        "CustomExtension": "",
+        "Processor": "NormalizeNormals",
+        "ColorSpace": "Linear",
+        "ImageFormat": "BC7"
+      },
+      "Identifier": "32",
+      "Position": "-816,864",
+      "Coords": {
+        "Identifier": "38",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TransformNormal",
+      "InputSpace": "Tangent",
+      "OutputSpace": "Tangent",
+      "DecodeNormal": true,
+      "Identifier": "33",
+      "Position": "-608,864",
+      "Input": {
+        "Identifier": "32",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Time",
+      "Identifier": "34",
+      "Position": "-1392,992"
+    },
+    {
+      "_class": "Float2",
+      "Min": "-100,-100",
+      "Max": "100,100",
+      "Value": "2,2",
+      "Name": "Normal Tiling",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "35",
+      "Position": "-1392,864"
+    },
+    {
+      "_class": "Float2",
+      "Min": "-10,-10",
+      "Max": "10,10",
+      "Value": "0.01,0.01",
+      "Name": "Normal Scroll Speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "36",
+      "Position": "-1392,1056"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "37",
+      "Position": "-1184,1008",
+      "A": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "36",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "38",
+      "Position": "-1040,864",
+      "Tile": {
+        "Identifier": "35",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "37",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "1008,402",
+      "Color": "Purple",
+      "Title": "Normal",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "39",
+      "Position": "-1424,800"
+    },
+    {
+      "_class": "Time",
+      "Identifier": "40",
+      "Position": "-1408,1440"
+    },
+    {
+      "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "41",
+      "Position": "-1056,1312",
+      "Tile": {
+        "Identifier": "46",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "47",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/effects/water/water_noise_01.png",
+      "Sampler": {},
+      "UI": {
+        "Name": "WPO Noise",
+        "Default": "1,1,1,1",
+        "Extension": "Mask",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "ImageFormat": "BC7",
+        "PrimaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "42",
+      "Position": "-768,1312",
+      "Coords": {
+        "Identifier": "41",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "CommentNode",
+      "Size": "1296,402",
+      "Color": "Yellow",
+      "Title": "World Position Offset",
+      "Description": "",
+      "Layer": 1,
+      "Identifier": "43",
+      "Position": "-1440,1248"
+    },
+    {
+      "_class": "Float2",
+      "Min": "-10,-10",
+      "Max": "10,10",
+      "Value": "0.1,0.1",
+      "Name": "WPO Scroll Speed",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "44",
+      "Position": "-1408,1504"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "45",
+      "Position": "-304,1328",
+      "A": {
+        "Identifier": "48",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "42",
+        "Output": "R"
+      }
+    },
+    {
+      "_class": "Float2",
+      "Min": "-100,-100",
+      "Max": "100,100",
+      "Value": "1,1",
+      "Name": "WPO Tiling",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "46",
+      "Position": "-1408,1312"
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "47",
+      "Position": "-1200,1456",
+      "A": {
+        "Identifier": "40",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "44",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": -100,
+      "Max": 100,
+      "Value": 1,
+      "Name": "WPO Strength",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "48",
+      "Position": "-768,1504"
     }
   ]
 }

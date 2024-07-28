@@ -21,7 +21,7 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
               "BodyGroups": 18446744073709551615,
-              "MaterialOverride": "materials/environment/new_water.vmat",
+              "MaterialOverride": "materials/effects/water/water_01a.vmat",
               "Model": "models/waterplane.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
@@ -477,7 +477,7 @@
       "__guid": "7fc4b4ee-233e-442f-9ffa-2a00b4bf16df",
       "Flags": 0,
       "Name": "Envmap Probe",
-      "Position": "0,512,0",
+      "Position": "0,2080,0",
       "Enabled": true,
       "Components": [
         {
@@ -485,11 +485,11 @@
           "__guid": "e0b96ad4-750b-422a-b085-02f769a1a09e",
           "Texture": "textures/cubemaps/default2.vtex",
           "Bounds": {
-            "Mins": "-2000,-2000,-2000",
-            "Maxs": "2000,2000,2000"
+            "Mins": "-5000,-2000,-2000",
+            "Maxs": "5000,2000,2000"
           },
           "DelayBetweenUpdates": 0.1,
-          "Feathering": 0.02,
+          "Feathering": 0.5,
           "FrameInterval": 5,
           "MaxDistance": 512,
           "Projection": "Box",
