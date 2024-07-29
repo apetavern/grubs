@@ -32,7 +32,6 @@ public abstract partial class SdfArray<TSdf> : IDisposable
 	/// 255 is +<see cref="WorldQuality.MaxDistance"/>, and 127.5 is on the surface.
 	/// </summary>
 	public byte[] BackBuffer { get; private set; }
-
 	public byte[] FrontBuffer { get; private set; }
 
 	/// <summary>
@@ -103,7 +102,7 @@ public abstract partial class SdfArray<TSdf> : IDisposable
 	/// +<see cref="WorldQuality.MaxDistance"/> encodes to 255, and therefore 0 becomes ~128.</returns>
 	protected byte Encode( float distance )
 	{
-		return (byte)((int)((distance * InvMaxDistance * 0.5f + 0.5f) * byte.MaxValue)).Clamp( 0, 255 );
+		return (byte) ((int) ((distance * InvMaxDistance * 0.5f + 0.5f) * byte.MaxValue)).Clamp( 0, 255 );
 	}
 
 	/// <summary>
@@ -192,7 +191,7 @@ public abstract partial class SdfArray<TSdf> : IDisposable
 	/// <param name="solid">Solidity to set each sample to.</param>
 	public void Clear( bool solid )
 	{
-		Array.Fill( BackBuffer, solid ? (byte)0 : (byte)255 );
+		Array.Fill( BackBuffer, solid ? (byte) 0 : (byte) 255 );
 		SwapBuffers();
 		MarkChanged();
 	}
@@ -205,8 +204,8 @@ public abstract partial class SdfArray<TSdf> : IDisposable
 	{
 		_textureInvalid = true;
 	}
-	
-	/// <inheritdoc />
+
+	/// <inhertidoc />
 	public void Dispose()
 	{
 		_texture?.Dispose();

@@ -16,7 +16,7 @@ partial class PolygonMeshBuilder
 	/// <summary>
 	/// Add faces starting at each active edge, traveling inwards and upwards to produce a bevel.
 	/// If the bevel distance is large enough the mesh will become closed. Otherwise, you can use
-	/// <see cref="Close"/> to add a flat face after the bevel.
+	/// <see cref="Fill"/> to add a flat face after the bevel.
 	/// </summary>
 	/// <param name="width">Total distance inwards.</param>
 	/// <param name="height">Total distance upwards, away from the plane of the polygon.</param>
@@ -33,7 +33,7 @@ partial class PolygonMeshBuilder
 	/// at the start and end of the bevel faces. Angles are in radians, with 0 pointing outwards along
 	/// the plane of the polygon, and PI/2 pointing upwards away from the plane.
 	/// If the bevel distance is large enough the mesh will become closed. Otherwise, you can use
-	/// <see cref="Close"/> to add a flat face after the bevel.
+	/// <see cref="Fill"/> to add a flat face after the bevel.
 	/// </summary>
 	/// <param name="width">Total distance inwards.</param>
 	/// <param name="height">Total distance upwards, away from the plane of the polygon.</param>
@@ -59,6 +59,8 @@ partial class PolygonMeshBuilder
 		{
 			var maxIterations = _activeEdges.Count * _activeEdges.Count;
 
+			// Find each event as we sweep inwards with all the active edges
+
 			int iterations;
 			for ( iterations = 0; iterations < maxIterations && _activeEdges.Count > 0; ++iterations )
 			{
@@ -70,6 +72,8 @@ partial class PolygonMeshBuilder
 
 				var bestDist = _nextDistance;
 				var bestMerge = false;
+
+				// Are any edges closing (reducing down to a point)?
 
 				foreach ( var index in _activeEdges )
 				{
@@ -86,6 +90,8 @@ partial class PolygonMeshBuilder
 
 				cutList.Clear();
 				cutList.AddRange( PossibleCuts );
+
+				// Are any edges being cut by a vertex?
 
 				foreach ( var (index, otherIndex) in cutList )
 				{
@@ -510,7 +516,7 @@ partial class PolygonMeshBuilder
 
 		var t = dx / dv;
 
-		if ( t <= -0.0001f )
+		if ( t < 0f )
 		{
 			return float.PositiveInfinity;
 		}

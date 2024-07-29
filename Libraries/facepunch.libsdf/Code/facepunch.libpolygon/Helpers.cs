@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sandbox.Sdf;
+using System;
 using System.Collections.Generic;
 
 namespace Sandbox.Polygons;
@@ -79,3 +80,10 @@ internal static class Helpers
 		mesh.SetIndexRange( 0, indices.Count );
 	}
 }
+
+internal record DebugDump(
+	string Exception,
+	string EdgeLoops,
+	EdgeStyle EdgeStyle,
+	float EdgeWidth,
+	int EdgeFaces );

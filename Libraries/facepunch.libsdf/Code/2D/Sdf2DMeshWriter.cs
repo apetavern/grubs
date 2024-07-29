@@ -461,6 +461,20 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 		index += count;
 
 		return count > 0;
+
+		offset = index;
+		count = 1;
+
+		Assert.True( EdgeLoops[offset].Area > 0f );
+
+		while ( offset + count < EdgeLoops.Count && EdgeLoops[offset + count].Area < 0f )
+		{
+			++count;
+		}
+
+		index += count;
+
+		return count > 0;
 	}
 
 	private void InitPolyMeshBuilder( PolygonMeshBuilder builder, int offset, int count )
@@ -474,12 +488,9 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 		}
 	}
 
-	private string PrintEdgeLoops( int offset, int count, out Vector2 pos )
+	private DebugDump GenerateDebugDump( int offset, int count )
 	{
 		var writer = new StringWriter();
-
-		pos = 0f;
-		var vertexCount = 0;
 
 		for ( var i = 0; i < count; ++i )
 		{
@@ -488,22 +499,13 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 			for ( var j = 0; j < edgeLoop.Count; ++j )
 			{
 				var vertex = SourceVertices[edgeLoop.FirstIndex + j];
-				writer.Write( $"({vertex.x:R}, {vertex.y:R})," );
-
-				pos += vertex;
+				writer.Write($"{vertex.x:R},{vertex.y:R};");
 			}
 
-			vertexCount += edgeLoop.Count;
-
-			writer.WriteLine();
+			writer.Write("\n");
 		}
 
-		if ( vertexCount > 0 )
-		{
-			pos /= vertexCount;
-		}
-
-		return writer.ToString();
+		return new DebugDump( null, writer.ToString(), EdgeStyle.Sharp, 0, 0 );
 	}
 
 	private void WriteRenderMesh( Sdf2DLayer layer )
@@ -536,54 +538,69 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 		{
 			InitPolyMeshBuilder( polyMeshBuilder, offset, count );
 
-			if ( allSameMaterial )
+			try
 			{
-				polyMeshBuilder.Extrude( (layer.Depth * 0.5f - edgeRadius) / scale );
+				if ( allSameMaterial )
+				{
+					polyMeshBuilder.Extrude( (layer.Depth * 0.5f - edgeRadius) / scale );
+				}
+
+				switch ( layer.EdgeStyle )
+				{
+					case EdgeStyle.Sharp:
+						polyMeshBuilder.Fill();
+						break;
+
+					case EdgeStyle.Bevel:
+						polyMeshBuilder.Bevel( bevelScale, bevelScale );
+						polyMeshBuilder.Fill();
+						break;
+
+					case EdgeStyle.Round:
+						polyMeshBuilder.Arc( bevelScale, bevelScale, layer.EdgeFaces );
+						polyMeshBuilder.Fill();
+						break;
+				}
+
+				if ( allSameMaterial )
+				{
+					polyMeshBuilder.Mirror();
+
+					_frontMeshWriter.AddFaces( polyMeshBuilder,
+						new Vector3( 0f, 0f, layer.Offset ),
+						new Vector3( scale, scale, scale ),
+						layer.TexCoordSize );
+
+					continue;
+				}
+
+				if ( layer.FrontFaceMaterial != null )
+				{
+					_frontMeshWriter.AddFaces( polyMeshBuilder,
+						new Vector3( 0f, 0f, layer.Depth * 0.5f + layer.Offset - edgeRadius ),
+						new Vector3( scale, scale, scale ),
+						layer.TexCoordSize );
+				}
+
+				if ( layer.BackFaceMaterial != null )
+				{
+					_backMeshWriter.AddFaces( polyMeshBuilder,
+						new Vector3( 0f, 0f, layer.Depth * -0.5f + layer.Offset + edgeRadius ),
+						new Vector3( scale, scale, -scale ),
+						layer.TexCoordSize );
+				}
 			}
-
-			switch ( layer.EdgeStyle )
+			catch ( Exception e )
 			{
-				case EdgeStyle.Sharp:
-					polyMeshBuilder.Fill();
-					break;
-
-				case EdgeStyle.Bevel:
-					polyMeshBuilder.Bevel( bevelScale, bevelScale );
-					polyMeshBuilder.Fill();
-					break;
-
-				case EdgeStyle.Round:
-					polyMeshBuilder.Arc( bevelScale, bevelScale, layer.EdgeFaces );
-					polyMeshBuilder.Fill();
-					break;
-			}
-
-			if ( allSameMaterial )
-			{
-				polyMeshBuilder.Mirror();
-
-				_frontMeshWriter.AddFaces( polyMeshBuilder,
-					new Vector3( 0f, 0f, layer.Offset ),
-					new Vector3( scale, scale, scale ),
-					layer.TexCoordSize );
-
-				continue;
-			}
-
-			if ( layer.FrontFaceMaterial != null )
-			{
-				_frontMeshWriter.AddFaces( polyMeshBuilder,
-					new Vector3( 0f, 0f, layer.Depth * 0.5f + layer.Offset - edgeRadius ),
-					new Vector3( scale, scale, scale ),
-					layer.TexCoordSize );
-			}
-
-			if ( layer.BackFaceMaterial != null )
-			{
-				_backMeshWriter.AddFaces( polyMeshBuilder,
-					new Vector3( 0f, 0f, layer.Depth * -0.5f + layer.Offset + edgeRadius ),
-					new Vector3( scale, scale, -scale ),
-					layer.TexCoordSize );
+				Log.Error( $"Internal error in PolygonMeshBuilder!\n\n" +
+					$"Please paste the info below in this thread:\nhttps://github.com/Facepunch/sbox-sdf/issues/17\n\n" +
+					$"{Json.Serialize( GenerateDebugDump( offset, count ) with
+				{
+					Exception = e.ToString(),
+					EdgeStyle = layer.EdgeStyle,
+					EdgeWidth = bevelScale,
+					EdgeFaces = layer.EdgeFaces
+				} )}" );
 			}
 		}
 

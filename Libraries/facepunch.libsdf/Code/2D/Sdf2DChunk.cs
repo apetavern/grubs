@@ -41,17 +41,13 @@ public partial class Sdf2DChunk : SdfChunk<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 
 	protected override Task<bool> OnRebuildAsync( IEnumerable<ChunkModification<ISdf2D>> modifications )
 	{
-		return Data.RebuildAsync( modifications.Select( x => x with
-		{
-			Sdf = ToLocal( x.Sdf )
-		} ) );
+		return Data.RebuildAsync( modifications.Select( x => x with { Sdf = ToLocal( x.Sdf ) } ) );
 	}
 
 	/// <inheritdoc />
 	protected override async Task OnUpdateMeshAsync()
 	{
-		var enableRenderMesh =
-			(Resource.FrontFaceMaterial ?? Resource.BackFaceMaterial ?? Resource.CutFaceMaterial) is not null;
+		var enableRenderMesh = (Resource.FrontFaceMaterial ?? Resource.BackFaceMaterial ?? Resource.CutFaceMaterial) is not null;
 		var enableCollisionMesh = Resource.HasCollision && World.HasPhysics;
 
 		if ( !IsValid || !enableRenderMesh && !enableCollisionMesh )
@@ -72,16 +68,15 @@ public partial class Sdf2DChunk : SdfChunk<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 		}
 		catch ( Exception e )
 		{
-			if ( !IsValid )
-				return;
-			
+			if ( !IsValid ) return;
+
 			Log.Error( e );
 
 			writer.Reset();
 		}
 
-		var renderTask = System.Threading.Tasks.Task.CompletedTask;
-		var collisionTask = System.Threading.Tasks.Task.CompletedTask;
+		var renderTask = Task.CompletedTask;
+		var collisionTask = Task.CompletedTask;
 
 		if ( enableRenderMesh )
 		{

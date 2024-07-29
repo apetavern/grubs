@@ -357,14 +357,14 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 			++ClearCount;
 		}
 
-		Task clearTask;
+		Task task;
 
 		lock ( this )
 		{
-			clearTask = ClearImpl();
+			task = _lastModificationTask = ClearImpl();
 		}
 
-		await clearTask;
+		await task;
 	}
 
 	private async Task ClearImpl()

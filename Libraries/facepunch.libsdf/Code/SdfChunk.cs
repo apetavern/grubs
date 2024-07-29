@@ -12,10 +12,7 @@ internal static class Static
 		.WithName( "White 3D" )
 		.WithSize( 1, 1, 1 )
 		.WithFormat( ImageFormat.I8 )
-		.WithData( new byte[]
-		{
-			255
-		} )
+		.WithData( new byte[] { 255 } )
 		.Finish();
 
 	private const int MaxPooledMeshes = 256;
@@ -127,6 +124,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	/// </summary>
 	protected virtual void OnInit()
 	{
+
 	}
 
 	/// <summary>
@@ -170,10 +168,8 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 
 	protected abstract Task<bool> OnAddAsync<T>( T sdf )
 		where T : TSdf;
-
 	protected abstract Task<bool> OnSubtractAsync<T>( T sdf )
 		where T : TSdf;
-
 	protected abstract Task<bool> OnRebuildAsync( IEnumerable<ChunkModification<TSdf>> modifications );
 
 	internal async Task UpdateMesh()
@@ -218,7 +214,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 			if ( resource.Quality.ChunkSize != Resource.Quality.ChunkSize )
 			{
 				Log.Warning( $"Layer {Resource.ResourceName} references {resource.ResourceName} " +
-				             $"as a texture source, but their chunk sizes don't match" );
+					$"as a texture source, but their chunk sizes don't match" );
 				return;
 			}
 
@@ -257,9 +253,8 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	{
 		await GameTask.MainThread();
 
-		if ( !IsValid )
-			return;
-		
+		if ( !IsValid ) return;
+
 		UpdateCollisionMesh( vertices, indices );
 	}
 
@@ -267,9 +262,8 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	{
 		await GameTask.MainThread();
 
-		if ( !IsValid )
-			return;
-		
+		if ( !IsValid ) return;
+
 		UpdateRenderMeshes( meshes );
 	}
 
@@ -381,7 +375,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 		Renderer.Transform = World.Transform.World;
 		Renderer.Position = World.Transform.World.PointToWorld( LocalPosition );
 	}
-	
+
 	protected override void OnDestroy()
 	{
 		Data.Dispose();
