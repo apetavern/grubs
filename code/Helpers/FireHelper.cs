@@ -83,7 +83,9 @@ public sealed class FireHelper : Component
 		}
 
 		var tr = Scene.Trace.Ray( FireParticles[particle].Position,
-			FireParticles[particle].Position + FireParticles[particle].Velocity.Normal * 5f ).Run();
+			FireParticles[particle].Position + FireParticles[particle].Velocity.Normal * 5f )
+			.WithoutTags("player")
+			.Run();
 
 		if ( !tr.Hit )
 			return;
