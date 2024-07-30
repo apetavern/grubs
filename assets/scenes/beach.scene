@@ -1,5 +1,5 @@
 {
-  "__guid": "7f73e35d-da6f-40c9-a3c7-08065e481cd8",
+  "__guid": "67b15fb7-ad1b-40bd-9930-4c97606439c7",
   "GameObjects": [
     {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
@@ -118,7 +118,7 @@
               "FalloffExponent": 1,
               "Height": 256,
               "StartDistance": 0,
-              "VerticalFalloffExponent": 75
+              "VerticalFalloffExponent": 16
             }
           ]
         },
@@ -189,6 +189,119 @@
               "__guid": "1ea7cd2e-73b9-404c-92e7-4639ab065305",
               "BodyGroups": 18446744073709551615,
               "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "d95300bd-e72a-4bcd-9c12-a259b5382f68",
+          "Flags": 0,
+          "Name": "land_03",
+          "Position": "4774.385,7308.655,6",
+          "Rotation": "0,0,-0.258819,0.9659259",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "5fd0171f-dcd5-411d-80e3-52c3b57e1d47",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/land_01/land_03.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "eba040e3-45a7-493b-a6b7-a31a0b60c30f",
+          "Flags": 0,
+          "Name": "land_04 (1)",
+          "Position": "-4081.64,9262.808,9.998764",
+          "Rotation": "0,0,-0.2588191,0.9659258",
+          "Scale": "1,1,0.9208903",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "a30f0cd3-a7d3-405a-beda-a328f3cb85bc",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/land_01/land_04.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "df14be62-bce4-499d-b441-c0a361d8297f",
+          "Flags": 0,
+          "Name": "land_02 (1)",
+          "Position": "-6055.446,8379.523,9.997959",
+          "Rotation": "0,0,0.2588192,-0.9659258",
+          "Scale": "1,1,0.7344988",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "4c248856-24f9-4161-88fb-213adc757c69",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/land_01/land_02.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "eb342f09-d5be-4595-86f2-393562c6c592",
+          "Flags": 0,
+          "Name": "land_02 (1)",
+          "Position": "7362.325,8065.311,9.998768",
+          "Rotation": "0,0,-0.6087613,-0.7933537",
+          "Scale": "1,1,0.7344988",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "ecdfced4-2d94-42b6-a4ea-a02e38c9b1a1",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/land_01/land_02.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "93abdcde-463b-4830-8b5d-5df90987007d",
+          "Flags": 0,
+          "Name": "land_01 (1)",
+          "Position": "5749.183,10213.89,7.999856",
+          "Rotation": "0,0,-0.5000002,-0.8660253",
+          "Scale": "1.857867,1.857867,0.887632",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "5663d226-1cdf-4c60-9e12-2f04d4812252",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/land_01/land_01.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "__guid": "948ad6f8-dc75-4046-a031-772f1c96fb57",
+          "Flags": 0,
+          "Name": "land_01",
+          "Position": "-4863.729,10899.03,3.999951",
+          "Rotation": "0,0,0.7443116,0.6678326",
+          "Scale": "1.857867,1.857867,0.9343094",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "904df15a-8a17-457c-8ad6-7372ffd365b7",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/environment/islands/land_01/land_01.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
