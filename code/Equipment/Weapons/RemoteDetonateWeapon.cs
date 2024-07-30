@@ -48,7 +48,7 @@ public sealed class RemoteDetonateWeapon : Weapon
 			Projectile.ProjectileExploded += () =>
 			{
 				_projectileExploded = true;
-				WeaponInfoPanel?.GameObject.Destroy();
+				WeaponInfoPanel?.GameObject?.Destroy();
 			};
 		}
 	}
