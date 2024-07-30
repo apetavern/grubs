@@ -4,15 +4,14 @@
     "Flags": 0,
     "Name": "uzi",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "edf5643c-bb13-4b64-9dd8-675975e96ddc",
+        "AnimationGraph": "models/weapons/smg/smg.vanmgrph",
         "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
-        "Model": "models/weapons/uzi/uzi.vmdl",
+        "CreateBoneObjects": true,
+        "Model": "models/weapons/smg/smg.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -30,7 +29,7 @@
           "go": "3e0cc105-2606-47b0-b314-5a5112593f0e",
           "component_type": "SkinnedModelRenderer"
         },
-        "Name": "Uzi",
+        "Name": "Smg",
         "ShouldShowAimReticle": true,
         "SlotIndex": 0,
         "UnlockDelay": 2
@@ -58,6 +57,7 @@
         "MuzzleParticles": "particles/muzzleflash/grubs_muzzleflash.vpcf",
         "PenetrateTargets": false,
         "PenetrateWorld": false,
+        "StartMultiplier": 1,
         "TraceCount": 25,
         "TraceDelay": 0.05,
         "TraceDistance": 5000,
@@ -66,7 +66,30 @@
         "UseSound": "sounds/weapons/uzi/uzi_shot.sound"
       }
     ],
-    "Children": [],
+    "Children": [
+      {
+        "__guid": "a134cd13-0691-42e9-95fb-7bfb8b7bbb94",
+        "Flags": 4,
+        "Name": "hold_L",
+        "Enabled": true,
+        "Children": [
+          {
+            "__guid": "a0861644-e9ee-4c26-9f1a-da44b877fb4f",
+            "Flags": 4,
+            "Name": "muzzle",
+            "Position": "20.55381,0,8.398417",
+            "Enabled": true
+          },
+          {
+            "__guid": "4998c54a-b619-4943-90b3-a3500517f90b",
+            "Flags": 4,
+            "Name": "stock",
+            "Position": "-10.27114,0,7.936545",
+            "Enabled": true
+          }
+        ]
+      }
+    ],
     "__variables": []
   },
   "ShowInMenu": false,
