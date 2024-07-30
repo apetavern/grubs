@@ -58,7 +58,10 @@ public class MeleeWeapon : Weapon
 
 			if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
 			{
-				hitGrub.CharacterController.Punch( (tr.Direction + Vector3.Up) * HitForce );
+				// Let's roll our own direction; tr.Direction will return Vector3.Zero if we're too close to hitGrub.
+				var direction = (grub.Transform.Position - hitGrub.Transform.Position).ClampLength( 1f ) * -1f;
+				hitGrub.Transform.Position += direction * 3f; // Prevent being stuck in Equipment.Grub
+				hitGrub.CharacterController.Punch( (direction + Vector3.Up) * HitForce );
 				hitGrub.CharacterController.ReleaseFromGround();
 			}
 

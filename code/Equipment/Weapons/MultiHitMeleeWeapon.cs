@@ -89,6 +89,14 @@ public class MultiHitMeleeWeapon : Weapon
 			damage += FinalHitModifier * _currentStrikeCount;
 			foreach ( var tr in trs )
 			{
+				// Same deal as MeleeWeapon.
+				var direction = tr.Direction;
+				if ( tr.Direction == Vector3.Zero )
+				{
+					direction = (grub.Transform.Position - tr.HitPosition).ClampLength( 1f );
+					direction = direction.WithX( direction.x * 2 ).WithZ( direction.z / 2 );
+				}
+
 				if ( !playedSound )
 				{
 					Sound.Play( ImpactSound );
@@ -96,10 +104,10 @@ public class MultiHitMeleeWeapon : Weapon
 				}
 
 				if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
-					HandleGrubHit( hitGrub, damage, (tr.Direction + Vector3.Up) * FinalHitForce, true );
+					HandleGrubHit( hitGrub, damage, (direction + Vector3.Up) * FinalHitForce, true );
 
 				if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
-					HandleBodyHit( body, damage, tr.HitPosition, (tr.Direction + Vector3.Up) * FinalHitForce );
+					HandleBodyHit( body, damage, tr.HitPosition, (direction + Vector3.Up) * FinalHitForce );
 			}
 
 			_currentStrikeCount = 1;
@@ -163,7 +171,10 @@ public class MultiHitMeleeWeapon : Weapon
 	private void HandleGrubHit( Grub grub, float damage, Vector3 force, bool releaseFromGround = false )
 	{
 		if ( releaseFromGround )
+		{
+			grub.Transform.Position += force.ClampLength( 1f ) * 5f;
 			grub.CharacterController.ReleaseFromGround();
+		}
 		grub.CharacterController.Punch( force );
 		grub.Health.TakeDamage( GrubsDamageInfo.FromMelee( damage, Equipment.Grub.Id, Equipment.Grub.Name ) );
 	}
