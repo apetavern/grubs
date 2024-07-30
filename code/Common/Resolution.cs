@@ -17,7 +17,7 @@ public static class Resolution
 		var remove = ForceResolved.ToList();
 		foreach ( var r in remove )
 		{
-			if ( !clearProjectiles && Game.ActiveScene.Directory.FindByGuid( r ).Tags.Has( "projectile" ) )
+			if ( !clearProjectiles && (Game.ActiveScene.Directory.FindByGuid( r ).Tags?.Has( "projectile" ) ?? false) )
 				continue;
 
 			ForceResolved.Remove( r );
