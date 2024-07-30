@@ -42,7 +42,7 @@ public class HitScanWeapon : Weapon
 
 		var startPos = GetStartPosition();
 		var pc = grub.PlayerController;
-		var endPos = startPos + pc.Facing * pc.EyeRotation.Forward * TraceDistance + Vector3.Random * TraceSpread;
+		var endPos = startPos + pc.Facing * pc.EyeRotation.Forward * TraceDistance + Vector3.Random.WithY( 0 ) * TraceSpread;
 
 		_tracesFired++;
 		_timeSinceLastTrace = 0;
@@ -84,7 +84,6 @@ public class HitScanWeapon : Weapon
 
 		if ( PenetrateWorld )
 		{
-			tr = tr.WithoutTags( "solid" );
 			using ( Rpc.FilterInclude( c => c.IsHost ) )
 			{
 				if ( TraceParticles is not null )
