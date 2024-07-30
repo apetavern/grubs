@@ -174,7 +174,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -64.0, 16.0 ]
+					m_vecPosition = [ -64.0, -48.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1687808583
