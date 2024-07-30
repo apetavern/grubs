@@ -63,6 +63,8 @@ public class MeleeWeapon : Weapon
 				hitGrub.Transform.Position += direction * 3f; // Prevent being stuck in Equipment.Grub
 				hitGrub.CharacterController.Punch( (direction + Vector3.Up) * HitForce );
 				hitGrub.CharacterController.ReleaseFromGround();
+
+				GrubFollowCamera.Local.SetTarget( hitGrub.GameObject, 2 );
 			}
 
 			if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )

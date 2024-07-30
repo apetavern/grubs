@@ -174,7 +174,10 @@ public class MultiHitMeleeWeapon : Weapon
 		{
 			grub.Transform.Position += force.ClampLength( 1f ) * 5f;
 			grub.CharacterController.ReleaseFromGround();
+
+			GrubFollowCamera.Local.SetTarget( grub.GameObject, 1 );
 		}
+
 		grub.CharacterController.Punch( force );
 		grub.Health.TakeDamage( GrubsDamageInfo.FromMelee( damage, Equipment.Grub.Id, Equipment.Grub.Name ) );
 	}
