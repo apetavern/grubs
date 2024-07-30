@@ -1,0 +1,180 @@
+{
+  "__guid": "666ccf15-1ee0-47e7-a815-fc5de68a53db",
+  "GameObjects": [
+    {
+      "__guid": "77f6a51d-ddf1-45cd-b7df-e81575820010",
+      "Flags": 0,
+      "Name": "Sun",
+      "Scale": "30,30,30",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.DirectionalLight",
+          "__guid": "8a5fa0f6-7d1e-4b81-a61b-79200374167a",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": true,
+          "SkyColor": "0,0,0,0"
+        }
+      ]
+    },
+    {
+      "__guid": "cc07a3ea-96bf-4c45-be24-0c85d73fb213",
+      "Flags": 0,
+      "Name": "Envmap Probe",
+      "Scale": "30,30,30",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.EnvmapProbe",
+          "__guid": "f2f6a6bb-dbdb-480d-b4ea-c2ea22a9f15f",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "Bounds": {
+            "Mins": "-1000,-1000,-1000",
+            "Maxs": "1000,1000,1000"
+          },
+          "DelayBetweenUpdates": 0.1,
+          "Feathering": 0.02,
+          "FrameInterval": 5,
+          "MaxDistance": 512,
+          "Projection": "Box",
+          "RenderDynamically": false,
+          "TintColor": "1,1,1,1",
+          "UpdateStrategy": "OnEnabled",
+          "ZFar": 4096,
+          "ZNear": 16
+        }
+      ]
+    },
+    {
+      "__guid": "176ee2a5-557b-4f2a-b876-37e9c29da8fe",
+      "Flags": 0,
+      "Name": "Plane",
+      "Scale": "30,30,30",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "8ac03b3b-7f53-423d-bbe4-1a39e473cbe9",
+          "BodyGroups": 18446744073709551615,
+          "MaterialOverride": "materials/default/white.vmat",
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "06628fb4-ae9a-4a29-9d2c-07cfd56ca700",
+      "Flags": 0,
+      "Name": "smg",
+      "Position": "0,0,50",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "6c4c7f22-1a30-4db4-8250-82db2c142220",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/weapons/smg/smg.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "405f507b-f1b0-464e-b4e3-716ef76c9d68",
+      "Flags": 0,
+      "Name": "2D Skybox",
+      "Tags": "skybox",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkyBox2D",
+          "__guid": "49044d69-42cb-4f16-a3db-6af6f32b307b",
+          "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "3ba4e830-df00-4b4a-a5cb-e502d00a3bd5",
+      "Flags": 0,
+      "Name": "revolver",
+      "Position": "0,50,50",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "cc0caf73-3839-42c5-a993-a4973c7792a4",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/weapons/revolver/revolver.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "302e3cd0-7d5a-4abf-bd1b-60e21eb2b799",
+      "Flags": 0,
+      "Name": "landmine",
+      "Position": "0,100,50",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "74b0241f-fb88-4246-bc4e-f6fec23be95b",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/weapons/landmine/landmine.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "53df8d92-1158-4a13-8d91-f16642ee4919",
+      "Flags": 0,
+      "Name": "mdl-cluster_grenade",
+      "Position": "0,150,50",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "7a261228-be90-4314-999c-264d742218b8",
+          "BodyGroups": 18446744073709551615,
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/weapons/cluster_grenade/mdl-cluster_grenade.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "remastered_assets",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
