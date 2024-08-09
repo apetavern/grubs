@@ -59,6 +59,9 @@ public class MultiHitMeleeWeapon : Weapon
 		if ( Equipment.Grub is not { } grub )
 			return;
 
+		if ( !grub.IsValid() )
+			return;
+
 		_currentStrikeCount = 1;
 		grub.Animator.Punch( _currentStrikeCount );
 	}

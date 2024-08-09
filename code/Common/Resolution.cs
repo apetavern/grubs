@@ -14,7 +14,10 @@ public static class Resolution
 	public static void ClearForceResolved( bool clearProjectiles = true )
 	{
 		// Deep copy to avoid InvalidOperationException.
-		var remove = ForceResolved.ToList();
+		var remove = ForceResolved?.ToList();
+		if ( remove is null )
+			return;
+		
 		foreach ( var r in remove )
 		{
 			if ( !clearProjectiles && (Game.ActiveScene.Directory.FindByGuid( r ).Tags?.Has( "projectile" ) ?? false) )
