@@ -716,7 +716,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		}
 		catch ( Exception e )
 		{
-			Log.Error( e );
+			Log.Warning( e );
 		}
 	}
 

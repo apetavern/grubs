@@ -54,7 +54,7 @@
         var type = TypeLibrary.GetType(EnumType);
         if (!type.IsEnum)
         {
-            Log.Error("EnumType is not an Enum");
+            Log.Warning("EnumType is not an Enum");
             return;
         }
 

@@ -51,7 +51,7 @@ partial class PolygonMeshBuilder
 
 		public override string ToString()
 		{
-			return $"{(char) ('A' + Index)}";
+			return $"[{Index}]";
 		}
 
 		public bool Equals( Edge other )

@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using Sandbox.Sdf;
 
 namespace Sandbox.Polygons;
@@ -496,76 +493,56 @@ public partial class PolygonMeshBuilder : Pooled<PolygonMeshBuilder>
 			var edge = _allEdges[index];
 			var next = _allEdges[edge.NextEdge];
 
-			var start = edge.Project( maxDist );
-			var end = next.Project( maxDist );
+			var start = edge.Project( minDist );
+			var end = next.Project( minDist );
 
 			Gizmo.Draw.Line( start, end );
 
-			Gizmo.Draw.Text( $"{index}", new Transform( (start + end) * 0.5f ) );
+			var dist = (Gizmo.LocalCameraTransform.Position - (Vector3)start).Length;
+			var textOffset = dist / 64f;
+			var textPos = start + (end - start).Normal * textOffset - edge.Normal * textOffset;
+
+			Gizmo.Draw.Text( edge.ToString(), new Transform( textPos ) );
 
 			if ( minDist < maxDist )
 			{
-				Gizmo.Draw.Line( edge.Origin, edge.Project( maxDist ) );
+				// Gizmo.Draw.Line( edge.Project( minDist ), edge.Project( Math.Min( edge.MaxDistance, maxDist ) ) );
 			}
 		}
 	}
 
-	public void FromDebugDump( string dump )
+	public static void RunDebugDump( string dump, float width, bool fromSdf, int maxIterations )
 	{
 		var parsed = Json.Deserialize<DebugDump>( dump );
-		var loops = ParseEdgeLoops( parsed.EdgeLoops );
 
-		foreach ( var loop in loops )
+		if ( fromSdf && parsed.SdfData is not null )
 		{
-			AddEdgeLoop( loop, 0, loop.Count );
+			var samples = Convert.FromBase64String( parsed.SdfData.Samples );
+			var data = new Sdf2DArrayData( samples, parsed.SdfData.BaseIndex, parsed.SdfData.Size,
+				parsed.SdfData.RowStride );
+
+			using var writer = Sdf2DMeshWriter.Rent();
+
+			writer.AddEdgeLoops( data, 0f );
+			writer.DrawGizmos();
+
+			return;
 		}
 
-		DrawGizmos( 0f, 0f );
+		using var builder = Rent();
 
-		switch ( parsed.EdgeStyle )
-		{
-			case EdgeStyle.Sharp:
-				//Fill();
-				break;
+		parsed.Init( builder );
 
-			case EdgeStyle.Bevel:
-				Bevel( parsed.EdgeWidth, parsed.EdgeWidth );
-				//Fill();
-				break;
+		Gizmo.Draw.Color = Color.White;
+		builder.DrawGizmos( 0f, width );
 
-			case EdgeStyle.Round:
-				Arc( parsed.EdgeWidth, parsed.EdgeWidth, parsed.EdgeFaces );
-				//Fill();
-				break;
-		}
-	}
+		if ( width <= 0f ) return;
 
-	private static Regex Pattern { get; } = new Regex( @"(?<x>[0-9]+(?:\.[0-9]+)?),(?<y>[0-9]+(?:\.[0-9]+)?);" );
+		parsed.Bevel( builder, width );
 
-	private static IReadOnlyList<IReadOnlyList<Vector2>> ParseEdgeLoops( string source )
-	{
-		var loops = new List<IReadOnlyList<Vector2>>();
+		Gizmo.Draw.Color = Color.Blue;
+		builder.DrawGizmos( width, width );
 
-		foreach ( var line in source.Split( "\n" ) )
-		{
-			var loop = new List<Vector2>();
-
-			foreach ( Match match in Pattern.Matches( line ) )
-			{
-				var x = float.Parse( match.Groups["x"].Value );
-				var y = float.Parse( match.Groups["y"].Value );
-
-				loop.Add( new Vector2( x, y ) );
-			}
-
-			if ( loop.Count == 0 )
-			{
-				break;
-			}
-
-			loops.Add( loop );
-		}
-
-		return loops;
+		// builder.Fill();
 	}
 }

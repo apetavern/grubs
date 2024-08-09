@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sandbox.Sdf;
+namespace Sandbox;
 
 public abstract class Pooled<T> : IDisposable
 	where T : Pooled<T>, new()
