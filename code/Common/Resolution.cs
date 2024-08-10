@@ -23,10 +23,14 @@ public static class Resolution
 		
 		foreach ( var r in remove )
 		{
-			if ( !clearProjectiles && (Game.ActiveScene.Directory.FindByGuid( r ).Tags?.Has( "projectile" ) ?? false) )
+			var go = Game.ActiveScene.Directory.FindByGuid( r );
+			if ( !go.IsValid() )
+				continue;
+			
+			if ( !clearProjectiles && (go.Tags?.Has( "projectile" ) ?? false) )
 				continue;
 
-			ForceResolved.Remove( r );
+			ForceResolved?.Remove( r );
 		}
 	}
 
