@@ -17,6 +17,9 @@ public static class Resolution
 		var remove = ForceResolved?.ToList();
 		if ( remove is null )
 			return;
+
+		if ( !Game.ActiveScene.IsValid() )
+			return;
 		
 		foreach ( var r in remove )
 		{
@@ -31,11 +34,14 @@ public static class Resolution
 	{
 		var retryCount = 0;
 
+		if ( !Game.ActiveScene.IsValid() )
+			return;
+
 		while ( !IsWorldResolved() && retryCount++ < maxRetries )
 		{
 			if ( retryCount == maxRetries - 1 )
 			{
-				var unresolved = Game.ActiveScene.GetAllComponents<IResolvable>().Where( r => !ForceResolved.Contains( (r as Component).GameObject.Id ) && !r.Resolved );
+				var unresolved = Game.ActiveScene.GetAllComponents<IResolvable>().Where( r => !ForceResolved.Contains( ((Component)r).GameObject.Id ) && !r.Resolved );
 				Log.Warning( $"{unresolved.Count()} COMPONENTS ARE NOT RESOLVED!" );
 				Log.Warning( "PLEASE REPORT THIS TO A DEVELOPER AT DISCORD.GG/APETAVERN!!!" );
 				foreach ( var r in unresolved )
@@ -43,7 +49,7 @@ public static class Resolution
 
 				// "Force Resolve" unresolved components so we don't wait 15 seconds each time we watch a Grub take damage.
 				foreach ( var u in unresolved )
-					ForceResolveObject( (u as Component).GameObject.Id );
+					ForceResolveObject( ((Component)u).GameObject.Id );
 			}
 
 			await GameTask.DelayRealtime( 500 );

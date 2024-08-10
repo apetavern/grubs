@@ -238,13 +238,17 @@ public partial class Weapon : Component
 
 	public Vector3 GetStartPosition( bool isDroppable = false )
 	{
+		if ( !Scene.IsValid() || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
+			return Vector3.Zero;
+		
 		if ( FiringType is FiringType.Cursor )
 			return Vector3.Zero;
 
-		if ( Equipment.Grub is not { } grub )
-			return Vector3.Zero;
-
+		var grub = Equipment.Grub;
 		var controller = grub.CharacterController;
+
+		if ( !controller.IsValid() )
+			return Vector3.Zero;
 
 		if ( isDroppable )
 		{

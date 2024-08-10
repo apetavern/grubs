@@ -21,9 +21,19 @@ public sealed class RopeBehavior : Component
 		if ( IsProxy )
 			return;
 
+		if ( !HookObject.IsValid() )
+			return;
+
 		AttachPoint = new GameObject();
 
+		if ( !AttachPoint.IsValid() )
+			return;
+
 		JointComponent = Components.Get<SpringJoint>();
+
+		if ( !JointComponent.IsValid() )
+			return;
+		
 		JointComponent.MaxLength = Vector3.DistanceBetween( Transform.Position, HookObject.Transform.Position );
 		JointComponent.Body = HookObject;
 		RopeLength = JointComponent.MaxLength;
@@ -36,7 +46,6 @@ public sealed class RopeBehavior : Component
 	protected override void OnDestroy()
 	{
 		AttachPoint?.Destroy();
-		base.OnDestroy();
 	}
 
 	protected override void OnUpdate()

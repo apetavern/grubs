@@ -12,6 +12,8 @@ public sealed class Grub : Component, IResolvable
 	{
 		get
 		{
+			if ( !Scene.IsValid() )
+				return null;
 			var player = Scene.Directory.FindComponentByGuid( PlayerId );
 			if ( !player.IsValid() )
 				return null;

@@ -173,6 +173,12 @@ public sealed partial class GrubPlayerController : Component
 
 	public bool ShouldShowWeapon()
 	{
+		if ( !Grub.IsValid() )
+			return false;
+
+		if ( !Grub.ActiveEquipment.IsValid() )
+			return false;
+		
 		var showWhileMoving = false;
 		if ( Grub.ActiveEquipment is { } equipment )
 		{
