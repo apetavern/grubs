@@ -15,7 +15,7 @@ public class NetHelper : Component, Component.INetworkListener
 
 	protected override async Task OnLoad()
 	{
-		if ( !GameNetworkSystem.IsActive )
+		if ( Game.IsPlaying && !GameNetworkSystem.IsActive )
 		{
 			LoadingScreen.Title = "Creating Lobby";
 			await Task.DelayRealtimeSeconds( 0.1f );
