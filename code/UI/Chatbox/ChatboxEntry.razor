@@ -17,4 +17,10 @@
 
 @code {
     public ChatHelper.ChatMessage ChatMessage { get; set; }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        if(firstTime)
+            BindClass("stale", () => ChatMessage.Lifetime > 10f);
+    }
 }

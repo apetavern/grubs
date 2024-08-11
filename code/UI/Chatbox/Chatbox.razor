@@ -7,7 +7,12 @@
 @attribute [StyleSheet]
 
 <root>
-    <div class="canvas" @ref=Canvas />
+    <div class="canvas" @ref=Canvas>
+        @foreach (var entry in _entries)
+        {
+            <ChatboxEntry ChatMessage=@entry />
+        }
+    </div>
     <TextEntry @ref=Input onsubmit=@Submit onblur=@Close />
 </root>
 
@@ -18,13 +23,13 @@
     private Panel Canvas { get; set; }
     private TextEntry Input { get; set; }
 
-    private Queue<ChatboxEntry> _entries = new Queue<ChatboxEntry>();
+    private Queue<ChatHelper.ChatMessage> _entries = new Queue<ChatHelper.ChatMessage>();
 
     protected override void OnAfterTreeRender(bool firstTime)
     {
         base.OnAfterTreeRender(firstTime);
-
-        ChatHelper.Instance.OnMessageReceived += OnMessageReceived;
+        if(firstTime)
+            ChatHelper.Instance.OnMessageReceived += OnMessageReceived;
 
         Canvas.PreferScrollToBottom = true;
         Input.AcceptsFocus = true;
@@ -39,18 +44,11 @@
 
     private void OnMessageReceived(ChatHelper.ChatMessage message)
     {
-        ChatboxEntry entry = new ChatboxEntry()
-        {
-            ChatMessage = message
-        };
-        entry.BindClass("stale", () => entry.ChatMessage.Lifetime > 10f);
-
-        Canvas.AddChild(entry);
-        Canvas.TryScrollToBottom();
-
-        _entries.Enqueue(entry);
+        _entries.Enqueue(message);
         if (_entries.Count > MaxItems)
-            _entries.Dequeue().Delete();
+            _entries.Dequeue();
+
+        Canvas?.TryScrollToBottom();
     }
 
     private void Submit()
@@ -79,5 +77,10 @@
         Input.Blur();
         Input.Text = string.Empty;
         Input.Label.SetCaretPosition(0);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(_entries.Count);
     }
 }
