@@ -73,7 +73,6 @@ public partial class Health : Component
 	/// <summary>
 	/// Will dequeue DamageQueue until empty and apply any damage to CurrentHealth.
 	/// </summary>
-	/// <returns></returns>
 	[Authority]
 	public void ApplyDamage()
 	{
@@ -105,10 +104,17 @@ public partial class Health : Component
 	{
 		if ( Components.TryGet( out Grub grub ) )
 		{
+			if ( !grub.IsValid() )
+				return;
+			
 			if ( !deleteImmediately )
 			{
 				await GameTask.Delay( 500 ); // Give clients some time to update GrubTag healthbar to 0 before we play death animation.
 				DeathInvoked = true;
+				
+				// Double check that grub is still valid, since we have waited 500ms since fetching the component.
+				if ( !grub.IsValid() )
+					return;
 
 				// This is shit, especially since we want a variety of death animations in the future.
 				// Just don't know where to put this right now.
@@ -119,6 +125,9 @@ public partial class Health : Component
 				plunger.Transform.Position = grub.PlayerController.Facing == -1 ? position - new Vector3( 30, 0, 0 ) : position;
 
 				await GameTask.Delay( 750 );
+
+				if ( !grub.IsValid() )
+					return;
 
 				// Same as above.
 				DeathEffects( position );
@@ -138,7 +147,7 @@ public partial class Health : Component
 
 			ChatHelper.Instance.SendInfoMessage( _deathReason.ToString() );
 
-			Guid attackerGuid = _deathReason.SecondInfo.AttackerGuid;
+			var attackerGuid = _deathReason.SecondInfo.AttackerGuid;
 			if ( _deathReason.FromKillTrigger ) // If we've died to a kill trigger, check if we have additional damage to credit, otherwise we've attacked ourselves.
 				attackerGuid = _deathReason.FirstReason != DamageType.None ? _deathReason.FirstInfo.AttackerGuid : grub.Id;
 
