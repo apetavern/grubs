@@ -34,14 +34,18 @@ public class HitScanWeapon : Weapon
 
 	protected override void FireImmediate()
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
 		if ( _timeSinceLastTrace < TraceDelay )
 			return;
 
+		var grub = Equipment.Grub;
+
 		var startPos = GetStartPosition();
 		var pc = grub.PlayerController;
+		if ( !pc.IsValid() )
+			return;
 		var endPos = startPos + pc.Facing * pc.EyeRotation.Forward * TraceDistance + Vector3.Random.WithY( 0 ) * TraceSpread;
 
 		_tracesFired++;
@@ -126,11 +130,16 @@ public class HitScanWeapon : Weapon
 
 		if ( tr.GameObject.Components.TryGet<Grub>( out var grub, FindMode.Enabled | FindMode.InAncestors ) )
 		{
+			if ( !grub.IsValid() )
+				return false;
 			HitGrub( grub, -tr.Normal, tr.HitPosition );
 			return false;
 		}
-		else if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
+		
+		if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 		{
+			if ( !health.IsValid() )
+				return false;
 			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, tr.HitPosition ) );
 			return false;
 		}
