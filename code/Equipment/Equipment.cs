@@ -64,15 +64,20 @@ public class Equipment : Component
 			return;
 
 		if ( Components.TryGet( out Weapon weapon ) )
-			weapon.OnDeploy();
+			weapon?.OnDeploy();
 
-		var target = grub.GameObject.GetAllObjects( true ).First( c => c.Name == "hold_L" );
+		if ( !GameObject.IsValid() || !grub.IsValid() || !Model.IsValid() )
+			return;
+		
 		GameObject.SetParent( grub.GameObject, false );
 		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
 		Model.Enabled = true;
 		Deployed = true;
 
-		if ( !IsProxy )
+		if ( IsProxy ) 
+			return;
+		
+		if ( GrubFollowCamera.Local.IsValid() )
 			GrubFollowCamera.Local.AllowZooming = CameraCanZoom;
 	}
 

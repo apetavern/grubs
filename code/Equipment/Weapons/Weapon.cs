@@ -168,8 +168,14 @@ public partial class Weapon : Component
 		var prefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/weaponinfo.prefab" );
 		var panel = SceneUtility.GetPrefabScene( prefab ).Clone();
 
+		if ( !panel.IsValid() )
+			return;
+
 		WeaponInfoPanel = panel.Components.Get<WeaponInfo>();
-		WeaponInfoPanel.Target = Equipment.Grub.GameObject;
+		if ( !WeaponInfoPanel.IsValid() )
+			return;
+		
+		WeaponInfoPanel.Target = Equipment?.Grub?.GameObject;
 		WeaponInfoPanel.Weapon = this;
 	}
 
