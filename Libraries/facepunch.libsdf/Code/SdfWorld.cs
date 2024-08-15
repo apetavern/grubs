@@ -483,10 +483,18 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	private void EnsureLayerExists( TResource resource )
 	{
 		ThreadSafe.AssertIsMainThread();
-
-		if ( !Layers.ContainsKey( resource ) )
+		
+		try
 		{
-			Layers.Add( resource, new Layer() );
+			if ( !Layers.ContainsKey( resource ) )
+			{
+				Layers.Add( resource, new Layer() );
+			}
+		}
+		catch ( Exception e )
+		{
+			Log.Warning( $"The resource is null! Please report this to a developer, especially if your game is broken: {e.Message}" );
+			Log.Warning( e.StackTrace ?? "No stacktrace available." );
 		}
 	}
 
