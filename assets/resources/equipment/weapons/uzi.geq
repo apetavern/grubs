@@ -1,7 +1,7 @@
 {
   "Name": "Smg",
   "Description": "200% accuracy if you hold it sideways.",
-  "Icon": "models/weapons/uzi/uzi.vmdl_c.png",
+  "Icon": "models/weapons/smg/smg.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/uzi/uzi.prefab",
   "DefaultAmmo": 1,

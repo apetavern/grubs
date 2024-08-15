@@ -22,7 +22,7 @@
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/uzi.geq",
         "HoldPose": "Uzi",
-        "Icon": "models/weapons/uzi/uzi.vmdl_c.png",
+        "Icon": "models/weapons/smg/smg.vmdl.png",
         "Model": {
           "_type": "component",
           "component_id": "edf5643c-bb13-4b64-9dd8-675975e96ddc",
