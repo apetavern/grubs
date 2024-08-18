@@ -21,8 +21,24 @@ public partial class GrubsTerrain : Component
 	public async void Init()
 	{
 		Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
+		
+		if ( !SdfWorld.IsValid() )
+		{
+			Log.Error( "SdfWorld was null, this should never happen. Please report this issue." );
+			Game.Close();
+			return;
+		}
 
 		await SdfWorld.ClearAsync();
+		
+		await GameTask.MainThread();
+
+		if ( SdfWorld.Transform is null )
+		{
+			Log.Error( "SdfWorld.Transform was null, this should never happen. Please report this issue." );
+			Game.Close();
+			return;
+		}
 		SdfWorld.Transform.Rotation = Rotation.FromRoll( 90f );
 
 		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture )
