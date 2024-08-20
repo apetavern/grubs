@@ -66,10 +66,11 @@ public class HitScanWeapon : Weapon
 	[Broadcast]
 	private void FireEffects( Vector3 startPos, Vector3 endPos, int traceCount )
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
-		grub.Animator.Fire();
+		var grub = Equipment.Grub;
+		grub.Animator?.Fire();
 
 		if ( TraceDelay > 0 || TraceDelay == 0 && traceCount == 1 )
 			Sound.Play( UseSound, startPos );
@@ -92,13 +93,13 @@ public class HitScanWeapon : Weapon
 			{
 				if ( TraceParticles is not null )
 				{
-					var traceParticles = ParticleHelper.Instance.PlayInstantaneous( TraceParticles, new Transform( startPos ) );
-					traceParticles.SetControlPoint( 1, new Transform( endPos ) );
+					var traceParticles = ParticleHelper.Instance?.PlayInstantaneous( TraceParticles, new Transform( startPos ) );
+					traceParticles?.SetControlPoint( 1, new Transform( endPos ) );
 				}
 
-				GrubsTerrain.Instance.SubtractLine( new Vector2( startPos.x, startPos.z ),
+				GrubsTerrain.Instance?.SubtractLine( new Vector2( startPos.x, startPos.z ),
 					new Vector2( endPos.x, endPos.z ), ExplosionRadius, 1 );
-				GrubsTerrain.Instance.ScorchLine( new Vector2( startPos.x, startPos.z ),
+				GrubsTerrain.Instance?.ScorchLine( new Vector2( startPos.x, startPos.z ),
 					new Vector2( endPos.x, endPos.z ),
 					ExplosionRadius + 8f );
 			}
@@ -128,6 +129,9 @@ public class HitScanWeapon : Weapon
 		if ( !tr.Hit )
 			return false;
 
+		if ( !tr.GameObject.IsValid() )
+			return false;
+
 		if ( tr.GameObject.Components.TryGet<Grub>( out var grub, FindMode.Enabled | FindMode.InAncestors ) )
 		{
 			if ( !grub.IsValid() )
@@ -143,6 +147,12 @@ public class HitScanWeapon : Weapon
 			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, tr.HitPosition ) );
 			return false;
 		}
+		
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
+			return false;
+
+		if ( !ExplosionHelper.Instance.IsValid() )
+			return false;
 
 		ExplosionHelper.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage, Equipment.Grub.Id, Equipment.Grub.Name, HitForce.x );
 		return true;
@@ -150,9 +160,12 @@ public class HitScanWeapon : Weapon
 
 	private void HitGrub( Grub grub, Vector3 direction, Vector3 position )
 	{
-		grub.CharacterController.Punch( direction * HitForce );
-		grub.Health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, position ) );
+		if ( !grub.IsValid() || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
+			return;
+		
+		grub.CharacterController?.Punch( direction * HitForce );
+		grub.Health?.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, position ) );
 
-		GrubFollowCamera.Local.SetTarget( grub.GameObject, 1 );
+		GrubFollowCamera.Local?.SetTarget( grub.GameObject, 1 );
 	}
 }
