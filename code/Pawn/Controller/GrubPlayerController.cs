@@ -152,7 +152,7 @@ public sealed partial class GrubPlayerController : Component
 	private void DoBackflip()
 	{
 		CharacterController.Velocity =
-			new Vector3( -Facing * (25f + 75f * BackflipCharge), 0f, 200f + 220f * BackflipCharge );
+			new Vector3( -Facing * (12.5f + 45f * BackflipCharge), 0f, 200f + 220f * BackflipCharge );
 		CharacterController.ReleaseFromGround();
 		Animator.TriggerBackflip();
 		IsChargingBackflip = false;

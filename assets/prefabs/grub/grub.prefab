@@ -86,7 +86,7 @@
           "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
           "component_type": "GrubPlayerController"
         },
-        "GroundAngle": 75,
+        "GroundAngle": 70,
         "Height": 30.99,
         "IgnoreLayers": "",
         "LandingParticles": "particles/landimpact/landimpact.vpcf",
