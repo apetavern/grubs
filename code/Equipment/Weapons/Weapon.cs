@@ -174,7 +174,7 @@ public partial class Weapon : Component
 		WeaponInfoPanel = panel.Components.Get<WeaponInfo>();
 		if ( !WeaponInfoPanel.IsValid() )
 			return;
-		
+
 		WeaponInfoPanel.Target = Equipment?.Grub?.GameObject;
 		WeaponInfoPanel.Weapon = this;
 	}
@@ -246,7 +246,7 @@ public partial class Weapon : Component
 	{
 		if ( !Scene.IsValid() || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return Vector3.Zero;
-		
+
 		if ( FiringType is FiringType.Cursor )
 			return Vector3.Zero;
 
@@ -291,18 +291,18 @@ public partial class Weapon : Component
 
 	public Transform GetMuzzlePosition()
 	{
-		if ( !Equipment.IsValid() )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return Transform.World;
-		
+
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		return muzzle ?? Equipment.Grub?.EyePosition ?? Transform.World;
 	}
 
 	public Vector3 GetMuzzleForward()
 	{
-		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() || !Equipment.Grub.PlayerController.IsValid() )
 			return 0f;
-		
+
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( !muzzle.HasValue )
 			return Equipment.Grub.PlayerController.EyeRotation.Forward * Equipment.Grub.PlayerController.Facing;

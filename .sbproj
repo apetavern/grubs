@@ -8,6 +8,7 @@
   "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*\nmaterials/reticle/*",
   "PackageReferences": [],
   "EditorReferences": null,
+  "IsWhitelistDisabled": false,
   "Metadata": {
     "MapList": [
       "apetavern.gr_beach"

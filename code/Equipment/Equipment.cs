@@ -1,4 +1,5 @@
-﻿using Grubs.Equipment.Weapons;
+﻿using Grubs.Common;
+using Grubs.Equipment.Weapons;
 using Grubs.Pawn;
 
 namespace Grubs.Equipment;
@@ -68,15 +69,15 @@ public class Equipment : Component
 
 		if ( !GameObject.IsValid() || !grub.IsValid() || !Model.IsValid() )
 			return;
-		
+
 		GameObject.SetParent( grub.GameObject, false );
 		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
 		Model.Enabled = true;
 		Deployed = true;
 
-		if ( IsProxy ) 
+		if ( IsProxy )
 			return;
-		
+
 		if ( GrubFollowCamera.Local.IsValid() )
 			GrubFollowCamera.Local.AllowZooming = CameraCanZoom;
 	}
