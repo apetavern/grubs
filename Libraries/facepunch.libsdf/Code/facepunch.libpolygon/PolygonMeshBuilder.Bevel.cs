@@ -560,7 +560,7 @@ partial class PolygonMeshBuilder
 
 		var epsilon = GetEpsilon( prevPos, nextPos );
 
-		if ( dPrev <= 0f || dNext >= 0f )
+		if ( dPrev <= -epsilon || dNext >= 0f )
 		{
 			return float.PositiveInfinity;
 		}

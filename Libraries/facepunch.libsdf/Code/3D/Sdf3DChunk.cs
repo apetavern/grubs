@@ -69,6 +69,7 @@ public partial class Sdf3DChunk : SdfChunk<Sdf3DWorld, Sdf3DChunk, Sdf3DVolume, 
 
 		if ( enableCollisionMesh )
 		{
+			var scale = Transform.Scale.x;
 			var offset = new Vector3( Key.X, Key.Y, Key.Z ) * Resource.Quality.ChunkSize;
 
 			collisionTask = GameTask.RunInThreadAsync( async () =>
@@ -79,6 +80,7 @@ public partial class Sdf3DChunk : SdfChunk<Sdf3DWorld, Sdf3DChunk, Sdf3DVolume, 
 				for ( var i = 0; i < vertices.Count; ++i )
 				{
 					vertices[i] += offset;
+					vertices[i] *= scale;
 				}
 
 				await UpdateCollisionMeshAsync( writer.VertexPositions, writer.Indices );

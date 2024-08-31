@@ -511,7 +511,7 @@ public partial class PolygonMeshBuilder : Pooled<PolygonMeshBuilder>
 		}
 	}
 
-	public static void RunDebugDump( string dump, float width, bool fromSdf, int maxIterations )
+	public static void RunDebugDump( string dump, float? width, bool fromSdf, int maxIterations )
 	{
 		var parsed = Json.Deserialize<DebugDump>( dump );
 
@@ -534,15 +534,15 @@ public partial class PolygonMeshBuilder : Pooled<PolygonMeshBuilder>
 		parsed.Init( builder );
 
 		Gizmo.Draw.Color = Color.White;
-		builder.DrawGizmos( 0f, width );
+		builder.DrawGizmos( 0f, width ?? parsed.EdgeWidth );
 
 		if ( width <= 0f ) return;
 
 		parsed.Bevel( builder, width );
 
 		Gizmo.Draw.Color = Color.Blue;
-		builder.DrawGizmos( width, width );
+		builder.DrawGizmos( width ?? parsed.EdgeWidth, width ?? parsed.EdgeWidth );
 
-		// builder.Fill();
+		builder.Fill();
 	}
 }

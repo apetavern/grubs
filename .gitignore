@@ -45,3 +45,4 @@ _bakeresourcecache/
 !models/citizen_clothes/*/*
 .idea
 grubs.sln
+Libraries/facepunch.libsdf/.bin

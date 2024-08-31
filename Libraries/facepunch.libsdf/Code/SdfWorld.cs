@@ -120,7 +120,7 @@ public record struct ChunkModification<TSdf>( TSdf Sdf, Operator Operator )
 /// <typeparam name="TChunkKey">Integer coordinates used to index a chunk</typeparam>
 /// <typeparam name="TArray">Type of <see cref="SdfArray{TSdf}"/> used to contain samples</typeparam>
 /// <typeparam name="TSdf">Interface for SDF shapes used to make modifications</typeparam>
-public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf> : Component, ISdfWorld
+public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf> : Component, Component.ExecuteInEditor, ISdfWorld
 	where TWorld : SdfWorld<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf>
 	where TChunk : SdfChunk<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf>, new()
 	where TResource : SdfResource<TResource>
@@ -133,6 +133,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	private ConcurrentQueue<TChunk> UpdatedChunkQueue { get; } = new();
 
 	private bool _receivingModifications;
+	private float _opacity = 1f;
 
 	/// <summary>
 	/// Spacial dimensions. 2 for <see cref="Sdf2DWorld"/>, 3 for <see cref="Sdf3DWorld"/>.
@@ -153,6 +154,24 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 	private PhysicsBody PhysicsBody { get; set; }
 
+	public float Opacity
+	{
+		get => _opacity;
+		set
+		{
+			value = Math.Clamp( value, 0f, 1f );
+
+			if ( _opacity == value ) return;
+
+			_opacity = value;
+
+			for ( var i = AllChunks.Count - 1; i >= 0; --i )
+			{
+				AllChunks[i].Opacity = value;
+			}
+		}
+	}
+
 	protected override void OnDestroy()
 	{
 		IsDestroying = true;
@@ -172,6 +191,8 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	private List<TChunk> AllChunks { get; } = new();
 
 	private Task _lastModificationTask = System.Threading.Tasks.Task.CompletedTask;
+
+	public bool NeedsMeshUpdate => Layers.Values.Any( x => x.NeedsMeshUpdate.Count > 0 || !x.UpdateMeshTask.IsCompleted );
 
 	protected override void OnUpdate()
 	{
@@ -200,7 +221,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 			}
 		}
 
-		if ( IsProxy )
+		if ( IsProxy || !Network.Active )
 			return;
 
 		foreach ( var conn in Connection.All.Where( c => c != Connection.Host && c.IsActive ) )
@@ -236,11 +257,6 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		msg.Write( ModificationCount );
 
 		WriteRange( ref msg, prevModifications, count, NetWrite_TypeIndices );
-
-		/*		msg.Write( writer.Length );
-				msg.Write( writer );
-
-				writer.Dispose();*/
 
 		return count;
 	}
@@ -352,7 +368,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		Modifications.Clear();
 
-		if ( !IsProxy )
+		if ( !IsProxy || !Network.Active )
 		{
 			++ClearCount;
 		}
@@ -630,16 +646,23 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		}
 	}
 
-	public bool HasPhysics => true;
+	/// <summary>
+	/// Disable to not generate any collision meshes.
+	/// </summary>
+	[Property]
+	public bool HasPhysics { get; set; } = true;
 
 	internal PhysicsShape AddMeshShape( List<Vector3> vertices, List<int> indices )
 	{
 		if ( PhysicsBody is null )
 		{
-			PhysicsBody = new PhysicsBody( Scene.PhysicsWorld );
-			PhysicsBody.BodyType = PhysicsBodyType.Static;
+			PhysicsBody = new PhysicsBody( Scene.PhysicsWorld )
+			{
+				BodyType = PhysicsBodyType.Static,
+				Transform = Transform.World
+			};
+
 			PhysicsBody.SetComponentSource( this );
-			PhysicsBody.Transform = Transform.World;
 		}
 
 		return PhysicsBody.AddMeshShape( vertices, indices );

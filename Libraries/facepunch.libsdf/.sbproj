@@ -8,6 +8,7 @@
   "Resources": "/shaders/*.hlsl\n",
   "PackageReferences": [],
   "EditorReferences": null,
+  "IsWhitelistDisabled": false,
   "Metadata": {
     "ProjectTemplate": null,
     "CsProjName": "",

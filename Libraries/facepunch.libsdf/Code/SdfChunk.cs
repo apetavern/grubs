@@ -63,7 +63,7 @@ public record struct MeshDescription( IMeshWriter Writer, Material Material );
 /// <typeparam name="TChunkKey">Integer coordinates used to index a chunk</typeparam>
 /// <typeparam name="TArray">Type of <see cref="SdfArray{TSdf}"/> used to contain samples</typeparam>
 /// <typeparam name="TSdf">Interface for SDF shapes used to make modifications</typeparam>
-public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf> : Component
+public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf> : Component, Component.ExecuteInEditor
 	where TWorld : SdfWorld<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf>
 	where TChunk : SdfChunk<TWorld, TChunk, TResource, TChunkKey, TArray, TSdf>, new()
 	where TResource : SdfResource<TResource>
@@ -101,6 +101,18 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	/// </summary>
 	public SceneObject Renderer { get; private set; }
 
+	private float _opacity = 1f;
+
+	public float Opacity
+	{
+		get => _opacity;
+		set
+		{
+			_opacity = value;
+			UpdateOpacity();
+		}
+	}
+
 	public abstract Vector3 LocalPosition { get; }
 
 	private readonly List<Mesh> _usedMeshes = new();
@@ -110,6 +122,8 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 		World = world;
 		Resource = resource;
 		Key = key;
+
+		Opacity = world.Opacity;
 
 		Flags |= ComponentFlags.Hidden | ComponentFlags.NotNetworked | ComponentFlags.NotSaved;
 
@@ -300,6 +314,8 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 			{
 				Shape.UpdateMesh( vertices, indices );
 			}
+
+			Shape.EnableSolidCollisions = Active;
 		}
 	}
 
@@ -360,11 +376,16 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		if ( !Renderer.IsValid() )
 		{
-			Renderer = new SceneObject( Scene.SceneWorld, model );
-			Renderer.Batchable = Resource.ReferencedTextures is not { Count: > 0 };
+			Renderer = new SceneObject( Scene.SceneWorld, model )
+			{
+				Batchable = Resource.ReferencedTextures is not { Count: > 0 }
+			};
 		}
 
 		Renderer.Model = model;
+
+		UpdateTransform();
+		UpdateOpacity();
 	}
 
 	internal void UpdateTransform()
@@ -374,6 +395,41 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		Renderer.Transform = World.Transform.World;
 		Renderer.Position = World.Transform.World.PointToWorld( LocalPosition );
+	}
+
+	private void UpdateOpacity()
+	{
+		if ( Renderer is not { } renderer ) return;
+
+		var value = Opacity;
+
+		renderer.ColorTint = Color.White.WithAlpha( value );
+		renderer.RenderingEnabled = value > 0f;
+		Renderer.Flags.CastShadows = value >= 1f;
+	}
+
+	protected override void OnEnabled()
+	{
+		if ( Shape is { } shape )
+		{
+			shape.EnableSolidCollisions = true;
+		}
+
+		UpdateTransform();
+		UpdateOpacity();
+	}
+
+	protected override void OnDisabled()
+	{
+		if ( Renderer is { } renderer )
+		{
+			renderer.RenderingEnabled = false;
+		}
+
+		if ( Shape is { } shape )
+		{
+			shape.EnableSolidCollisions = false;
+		}
 	}
 
 	protected override void OnDestroy()
