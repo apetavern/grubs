@@ -24,7 +24,7 @@ public static class GrubsConfig
 	// /// The amount of <see cref="Grub"/>s that will be spawned per team.
 	// /// </summary>
 	[ConVar( "grub_count" )]
-	public static int GrubCount { get; set; } = 1;
+	public static int GrubCount { get; set; } = 2;
 
 	// private static void OnGrubCountChange( int _, int _1 )
 	// {
@@ -135,7 +135,7 @@ public static class GrubsConfig
 	/// The time in seconds to give <see cref="Grub"/>s after using their turn.
 	/// </summary>
 	[ConVar( "movement_grace" )]
-	public static float MovementGracePeriod { get; set; } = 5;
+	public static float MovementGracePeriod { get; set; } = 4f;
 
 	/// <summary>
 	/// The length of the terrain grid.
