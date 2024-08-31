@@ -7,6 +7,8 @@ PlayerListEntry {
     transition: all 300ms ease-in;
     width: 310px;
     pointer-events: all;
+    align-items: center;
+    justify-content: center;
     cursor: none;
     font-family: $font-family;
 
@@ -16,12 +18,14 @@ PlayerListEntry {
         border-radius: 4px;
         flex-shrink: 0;
         margin-right: 8px;
+        margin-top: 4px;
+        border: 2px solid black;
     }
 
     .name {
         font-size: 36px;
         text-shadow: 2px 2px 2px black;
-        text-stroke: 3px black;
+        text-stroke: 4px black;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -48,7 +52,7 @@ PlayerListEntry {
             justify-content: center;
             text-align: center;
             color: white;
-            font-size: 24px;
+            font-size: 20px;
             text-stroke: 4px black;
             align-self: center;
         }
