@@ -37,6 +37,8 @@ public sealed class Grub : Component, IResolvable
 
 	public void OnHardFall()
 	{
+		if ( !Player.IsValid() || !Player.Inventory.IsValid() )
+			return;
 		Player?.Inventory.Holster( Player.Inventory.ActiveSlot );
 	}
 
@@ -44,7 +46,7 @@ public sealed class Grub : Component, IResolvable
 	public static void TakeDmgCmd( float hp )
 	{
 		var grub = Game.ActiveScene.GetAllComponents<Grub>().FirstOrDefault( g => g.IsActive );
-		if ( grub is null )
+		if ( !grub.IsValid() )
 			return;
 
 		grub.Health.TakeDamage( new GrubsDamageInfo( hp, grub.Id, grub.Name ) );

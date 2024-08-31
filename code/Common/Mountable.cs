@@ -24,7 +24,7 @@ public sealed class Mountable : Component
 
 	public void Dismount()
 	{
-		if ( Grub is null )
+		if ( !Grub.IsValid() || !Grub.Animator.IsValid() || !Grub.PlayerController.IsValid() || !Grub.CharacterController.IsValid() )
 			return;
 
 		foreach ( var collider in Grub.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
@@ -41,7 +41,7 @@ public sealed class Mountable : Component
 		MountEnabled = false;
 		Grub.ActiveMountable = null;
 		Grub = null;
-		GameObject.Destroy();
+		GameObject?.Destroy();
 	}
 
 	protected override void OnUpdate()

@@ -56,7 +56,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 				if ( i == 0 )
 				{
-					SetActiveGrub( player.Id, grub.Id );
+					SetActiveGrub( player, grub.Id );
 				}
 			}
 
@@ -227,7 +227,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 			PlayerTurnQueue.Clear();
 			foreach ( var player in Player.All )
 			{
-				if ( player is null || !player.ShouldHaveTurn )
+				if ( !player.IsValid() || !player.ShouldHaveTurn )
 					continue;
 				PlayerTurnQueue.Add( player.Id );
 			}
@@ -236,7 +236,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		var nextPlayer = PlayerTurnQueue[0].ToComponent<Player>();
 		PlayerTurnQueue.RemoveAt( 0 );
 
-		while ( nextPlayer is null || !nextPlayer.ShouldHaveTurn )
+		while ( !nextPlayer.IsValid() || !nextPlayer.ShouldHaveTurn )
 		{
 			nextPlayer = PlayerTurnQueue[0].ToComponent<Player>();
 			PlayerTurnQueue.RemoveAt( 0 );
@@ -245,7 +245,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		ActivePlayerId = nextPlayer.Id;
 
 		var nextGrub = FindNextGrub( nextPlayer );
-		SetActiveGrub( nextPlayer.Id, nextGrub.Id );
+		SetActiveGrub( nextPlayer, nextGrub.Id );
 		nextPlayer.OnTurn();
 
 
@@ -313,10 +313,9 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 	}
 
 	[Broadcast]
-	public void SetActiveGrub( Guid playerId, Guid grubId )
+	public void SetActiveGrub( Player player, Guid grubId )
 	{
-		var player = playerId.ToComponent<Player>();
-		if ( player is null )
+		if ( !player.IsValid() )
 			return;
 
 		player.ActiveGrubId = grubId;

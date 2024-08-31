@@ -35,9 +35,10 @@ public class MeleeWeapon : Weapon
 	[Broadcast]
 	public void HitEffects( Ray ray )
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.Grub.IsValid() )
 			return;
 
+		var grub = Equipment.Grub;
 		grub.Animator.Fire();
 
 		Sound.Play( UseSound, GetStartPosition() );
@@ -53,27 +54,36 @@ public class MeleeWeapon : Weapon
 
 		foreach ( var tr in trs )
 		{
-			if ( tr.GameObject is null )
+			if ( !tr.GameObject.IsValid() )
 				continue;
 
 			if ( tr.GameObject.Components.TryGet( out Grub hitGrub, FindMode.EverythingInSelfAndAncestors ) )
 			{
+				if ( !hitGrub.IsValid() || !hitGrub.CharacterController.IsValid() )
+					continue;
+
 				// Let's roll our own direction; tr.Direction will return Vector3.Zero if we're too close to hitGrub.
 				var direction = (grub.Transform.Position - hitGrub.Transform.Position).ClampLength( 1f ) * -1f;
 				hitGrub.Transform.Position += direction * 3f; // Prevent being stuck in Equipment.Grub
 				hitGrub.CharacterController.Punch( (direction + Vector3.Up) * HitForce );
 				hitGrub.CharacterController.ReleaseFromGround();
 
-				GrubFollowCamera.Local.SetTarget( hitGrub.GameObject, 2 );
+				GrubFollowCamera.Local?.SetTarget( hitGrub.GameObject, 2 );
 			}
 
 			if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
 			{
+				if ( !body.IsValid() )
+					continue;
 				body.ApplyImpulseAt( tr.HitPosition, tr.Direction * HitForce * body.PhysicsBody.Mass );
 			}
 
 			if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInAncestors ) )
-				health.TakeDamage( GrubsDamageInfo.FromMelee( Damage, Equipment.Grub.Id, Equipment.Grub.Name, tr.HitPosition ) );
+			{
+				if ( !health.IsValid() )
+					continue;
+				health.TakeDamage( GrubsDamageInfo.FromMelee( Damage, grub.Id, grub.Name, tr.HitPosition ) );
+			}
 		}
 
 		TimeSinceLastUsed = 0f;

@@ -1,6 +1,7 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment.Weapons;
 using Grubs.Pawn;
+using Grubs.Pawn.Controller;
 
 namespace Grubs.Equipment;
 
@@ -50,7 +51,7 @@ public class Equipment : Component
 
 	private void UpdateVisibility()
 	{
-		if ( Grub is null )
+		if ( !Grub.IsValid() || !Grub.PlayerController.IsValid() )
 			return;
 
 		var show = Grub.PlayerController.ShouldShowWeapon() && Deployed;

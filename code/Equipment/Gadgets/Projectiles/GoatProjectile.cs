@@ -14,7 +14,7 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 
 	protected override void OnStart()
 	{
-		if ( Source is null )
+		if ( !Source.IsValid )
 			return;
 
 		Transform.Position = Source.GetStartPosition( Droppable );
@@ -22,11 +22,14 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 		if ( Droppable )
 			return;
 
-		if ( PlayerController is null )
+		if ( !PlayerController.IsValid() )
 			return;
 
 		var dir = (PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing) + Vector3.Up;
 		Transform.Position += dir * 16f;
+
+		if ( !PhysicsBody.IsValid() )
+			return;
 		PhysicsBody.ApplyImpulse( dir * Charge * ProjectileSpeed );
 
 		Model.Set( "active", true );
@@ -34,7 +37,7 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 
 	protected override void OnUpdate()
 	{
-		if ( PlayerController is null )
+		if ( !PlayerController.IsValid() || !PhysicsBody.IsValid() )
 			return;
 
 		base.OnUpdate();
@@ -45,8 +48,13 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 
 	public void OnCollisionStart( Collision other )
 	{
-		Sound.Play( CollisionSound, Transform.Position );
+		if ( CollisionSound is not null )
+			Sound.Play( CollisionSound, Transform.Position );
 		Model.Set( "grounded", true );
+
+		if ( !PhysicsBody.IsValid() )
+			return;
+
 		if ( -other.Contact.Normal.z > 0.5f )
 			PhysicsBody.Velocity = (Vector3.Up + Transform.Rotation.Forward) * ProjectileSpeed;
 

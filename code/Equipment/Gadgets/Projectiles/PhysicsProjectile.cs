@@ -13,7 +13,7 @@ public class PhysicsProjectile : Projectile
 
 	protected override void OnStart()
 	{
-		if ( Source is null )
+		if ( !Source.IsValid() || !PlayerController.IsValid() )
 			return;
 
 		if ( SetPositionOnStart )
@@ -23,12 +23,12 @@ public class PhysicsProjectile : Projectile
 			if ( Droppable )
 				return;
 
-			if ( PlayerController is null )
-				return;
-
 			var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
 			dir *= Rotation.FromPitch( Game.Random.Float( -DirectionRandomizer, DirectionRandomizer ) );
 			Transform.Position += dir * 16f;
+
+			if ( !PhysicsBody.IsValid() )
+				return;
 			PhysicsBody.ApplyImpulseAt( PhysicsBody.Transform.Position + Vector3.Up * 0.5f,
 				dir * Charge * ProjectileSpeed );
 		}

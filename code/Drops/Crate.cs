@@ -64,7 +64,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 		PickupEffects();
 
 		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndAncestors | FindMode.EverythingInChildren );
-		if ( grub is null )
+		if ( !grub.IsValid() || !grub.Health.IsValid() )
 			return;
 
 		grub.Health.Heal( 25f );

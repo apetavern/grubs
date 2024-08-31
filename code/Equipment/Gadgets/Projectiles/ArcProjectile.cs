@@ -17,16 +17,18 @@ public class ArcProjectile : Projectile
 
 	protected override void OnStart()
 	{
-		if ( Source is null )
+		if ( !Source.IsValid() )
 			return;
 
 		Transform.Position = Source.GetStartPosition();
 
-		if ( PlayerController is null )
+		if ( !PlayerController.IsValid() )
 			return;
 
 		var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
 		Segments = CalculateTrajectory( dir, Charge );
+		if ( Segments.Count == 0 )
+			return;
 		Transform.Position = Segments[0].StartPos.WithY( 512f );
 		Transform.ClearInterpolation();
 	}
@@ -82,7 +84,7 @@ public class ArcProjectile : Projectile
 
 	private List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
 	{
-		if ( Grub is null )
+		if ( !Grub.IsValid() )
 			return Segments;
 
 		var force = charge * 0.5f;

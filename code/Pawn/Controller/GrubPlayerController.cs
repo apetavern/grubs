@@ -217,7 +217,7 @@ public sealed partial class GrubPlayerController : Component
 
 	public bool ShouldAcceptInput()
 	{
-		if ( IsProxy || Grub.Player is null )
+		if ( IsProxy || !Grub.IsValid() )
 			return false;
 
 		if ( Gamemode.Current.TurnIsChanging )

@@ -34,12 +34,14 @@ public sealed class Shrapnel : Component
 			go.NetworkSpawn();
 			if ( go.Components.TryGet( out Projectile pc ) && Components.TryGet( out Projectile pc2 ) )
 			{
-				pc.SourceId = pc2.SourceId;
+				if ( pc.Source.IsValid() && pc2.Source.IsValid() )
+					pc.SourceId = pc2.SourceId;
 			}
 
 			var rb = go.Components.Get<Rigidbody>();
-			if ( rb is null )
+			if ( !rb.IsValid() )
 				return;
+
 			var startVelocity = (Vector3.Up * ShrapnelUpVelocity)
 				.WithX( Game.Random.Float( -ShrapnelSpreadVelocity, ShrapnelSpreadVelocity ) );
 
