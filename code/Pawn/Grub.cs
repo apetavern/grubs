@@ -53,7 +53,7 @@ public sealed class Grub : Component, IResolvable
 
 	private void InitializeLocal()
 	{
-		var spawn = GrubsTerrain.Instance.FindSpawnLocation();
+		var spawn = GrubsTerrain.Instance.FindSpawnLocation( size: 8f );
 		Transform.Position = spawn;
 	}
 

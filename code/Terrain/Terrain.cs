@@ -21,7 +21,7 @@ public partial class GrubsTerrain : Component
 	public async void Init()
 	{
 		Game.SetRandomSeed( (int)(DateTime.Now - DateTime.UnixEpoch).TotalSeconds );
-		
+
 		if ( !SdfWorld.IsValid() )
 		{
 			Log.Error( "SdfWorld was null, this should never happen. Please report this issue." );
@@ -30,7 +30,7 @@ public partial class GrubsTerrain : Component
 		}
 
 		await SdfWorld.ClearAsync();
-		
+
 		await GameTask.MainThread();
 
 		if ( SdfWorld.Transform is null )
@@ -39,6 +39,7 @@ public partial class GrubsTerrain : Component
 			Game.Close();
 			return;
 		}
+
 		SdfWorld.Transform.Rotation = Rotation.FromRoll( 90f );
 
 		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture )
@@ -57,13 +58,19 @@ public partial class GrubsTerrain : Component
 	public Vector3 FindSpawnLocation( bool inAir = false, float size = 16f, float maxAngle = 70f )
 	{
 		var retries = 0;
+		var existingGrubs = Scene.GetAllComponents<Grub>().Select( g => g.GameObject );
+		var existingDrops = Scene.GetAllObjects( true ).Where( go => go.IsRoot && go.Tags.Has( "drop" ) );
+		var allAvoidances = existingGrubs.Concat( existingDrops ).ToList();
 		var fallbackPosition = new Vector3();
 
 		var maxWidth = GrubsConfig.TerrainLength;
 		var maxHeight = GrubsConfig.TerrainHeight - 64;
 		var minHeight = 60;
 
-		while ( retries < 1000 )
+		var dist = 128f;
+		const int maxRetries = 1000;
+
+		while ( retries < maxRetries )
 		{
 			retries++;
 
@@ -92,11 +99,36 @@ public partial class GrubsTerrain : Component
 				if ( spawnPosition.z < minHeight )
 					continue;
 
+				// If one object takes 200 tries to spawn, the rest of them should
+				// assume that calculated distance is a good spot to start.
+				dist = MathF.Min( dist, 128f - (128f * (retries / (float)maxRetries)) );
+				if ( !IsDistanceValid( allAvoidances, spawnPosition, dist ) )
+					continue;
+
 				return spawnPosition;
 			}
 		}
 
 		return fallbackPosition;
+	}
+
+	/// <summary>
+	/// Given a list of GameObjects to check against, determine if a position is valid to spawn at.
+	/// </summary>
+	private bool IsDistanceValid( List<GameObject> objects, Vector3 pos, float minDistance )
+	{
+		bool validSpawn = true;
+
+		foreach ( var go in objects )
+		{
+			if ( !go.IsValid() )
+				continue;
+
+			if ( pos.Distance( go.Transform.Position ) < minDistance )
+				validSpawn = false;
+		}
+
+		return validSpawn;
 	}
 
 	protected override void DrawGizmos()

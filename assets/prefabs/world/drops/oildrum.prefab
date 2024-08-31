@@ -3,10 +3,8 @@
     "__guid": "235944e3-ef5e-40fa-87eb-acb8e48d9ff0",
     "Flags": 0,
     "Name": "oildrum",
-    "Tags": "projectile,notarget,solid,cleanup",
+    "Tags": "cleanup,solid,notarget,projectile",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
@@ -18,8 +16,10 @@
           "Y": true,
           "Yaw": true
         },
-        "MassOverride": 100,
+        "MassCenterOverride": "0,0,0",
+        "MassOverride": 300,
         "MotionEnabled": true,
+        "OverrideMassCenter": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
@@ -85,10 +85,12 @@
         "ExplosionDamage": 0,
         "ExplosionRadius": 50,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": false
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
