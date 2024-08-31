@@ -9,10 +9,11 @@ public sealed class Grub : Component, IResolvable
 	[Sync] public Player Player { get; set; }
 
 	[Property] public required Health Health { get; set; }
-	[Property] public required GrubPlayerController PlayerController { get; set; }
-	[Property] public required GrubCharacterController CharacterController { get; set; }
-	[Property] public required GrubAnimator Animator { get; set; }
-	[Property, ReadOnly] public Equipment.Equipment ActiveEquipment => Player?.Inventory.ActiveEquipment;
+	[Property] public SkinnedModelRenderer GrubRenderer { get; set; }
+	[Property] public GrubPlayerController PlayerController { get; set; }
+	[Property] public GrubCharacterController CharacterController { get; set; }
+	[Property] public GrubAnimator Animator { get; set; }
+	[Property, ReadOnly] public Equipment.Equipment ActiveEquipment => Player.IsValid() ? Player?.Inventory.ActiveEquipment : null;
 
 	/// <summary>
 	/// Returns true if it is the owning player's turn and this is the player's active Grub.
@@ -28,11 +29,35 @@ public sealed class Grub : Component, IResolvable
 	[Sync] public string Name { get; set; } = "Grubby";
 	[Sync] public bool IsDead { get; set; }
 
+	private List<ModelRenderer> ClothingRenderers { get; set; } = new();
+
+	private List<Clothing.ClothingCategory> CategoryWhiteList { get; set; } = new()
+	{
+		Clothing.ClothingCategory.Hat,
+		Clothing.ClothingCategory.Facial,
+		Clothing.ClothingCategory.Hair,
+	};
+
 	protected override void OnStart()
 	{
 		base.OnStart();
 
 		Name = Random.Shared.FromList( GrubsConfig.PresetGrubNames );
+
+		var clothing = new ClothingContainer();
+		clothing.Deserialize( Network.OwnerConnection.GetUserData( "avatar" ) );
+		clothing.Clothing?.RemoveAll( c => !CategoryWhiteList.Contains( c.Clothing.Category ) );
+		clothing.Apply( GrubRenderer );
+
+		var renderers = Components.GetAll<ModelRenderer>().Where( r => r.Tags.Contains( "clothing" ) ).ToList();
+		foreach ( var renderer in renderers )
+		{
+			if ( !renderer.IsValid() )
+				continue;
+
+			if ( renderer.Tags.Contains( "clothing" ) )
+				renderer.GameObject.SetParent( GameObject );
+		}
 	}
 
 	public void OnHardFall()
