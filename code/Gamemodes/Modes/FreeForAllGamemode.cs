@@ -42,6 +42,8 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 			for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
 			{
 				var go = player.GrubPrefab.Clone();
+				var spawn = GrubsTerrain.Instance.FindSpawnLocation( size: 8f );
+				go.Transform.Position = spawn;
 				go.Network.SetOrphanedMode( NetworkOrphaned.Host );
 				go.NetworkSpawn();
 

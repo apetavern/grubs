@@ -46,15 +46,6 @@ public sealed class Grub : Component, IResolvable
 		base.OnStart();
 
 		Name = Random.Shared.FromList( GrubsConfig.PresetGrubNames );
-
-		if ( !IsProxy )
-			InitializeLocal();
-	}
-
-	private void InitializeLocal()
-	{
-		var spawn = GrubsTerrain.Instance.FindSpawnLocation( size: 8f );
-		Transform.Position = spawn;
 	}
 
 	public void OnHardFall()
