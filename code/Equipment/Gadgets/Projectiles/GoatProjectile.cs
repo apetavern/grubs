@@ -10,11 +10,11 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 	[Property] private SoundEvent CollisionSound { get; set; }
 	private Vector3 TargetLookAt { get; set; }
 
-	public override bool Resolved => PhysicsBody.Velocity.IsNearlyZero( 0.1f );
+	public override bool Resolved => PhysicsBody?.Velocity.IsNearlyZero( 0.1f ) ?? true;
 
 	protected override void OnStart()
 	{
-		if ( !Source.IsValid )
+		if ( !Source.IsValid() )
 			return;
 
 		Transform.Position = Source.GetStartPosition( Droppable );

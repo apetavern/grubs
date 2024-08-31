@@ -442,7 +442,8 @@
         },
         {
           "__type": "Sandbox.Sdf.Sdf2DWorld",
-          "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a"
+          "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a",
+          "HasPhysics": true
         }
       ]
     },
@@ -548,6 +549,7 @@
           "AutoScreenScale": true,
           "Opacity": 1,
           "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
           "ZIndex": 100
         },
         {

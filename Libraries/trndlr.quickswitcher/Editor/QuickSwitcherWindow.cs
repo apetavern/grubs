@@ -30,7 +30,7 @@ public class QuickSwitcherWindow : PopupWidget
 		SearchBar.SearchBlurred += SearchBarOnSearchBlurred;
 		SearchBar.TextChanged += _ => SetListItems();
 
-		Bind( nameof(Filter) ).ReadOnly().From( SearchBar, x => x.Text );
+		Bind( nameof( Filter ) ).ReadOnly().From( SearchBar, x => x.Text );
 
 		ToolBar = Layout.Add( new SegmentedControl( this ) );
 		ToolBar.AddOption( "All", "list" );
@@ -41,7 +41,7 @@ public class QuickSwitcherWindow : PopupWidget
 		Layout.Add( BuildOptions(), 1 );
 	}
 
-	private static Logger Log { get; } = new("QuickSwitcher");
+	private static Logger Log { get; } = new( "QuickSwitcher" );
 
 	public string Filter { get; set; }
 	private OptionType FilterType { get; set; } = OptionType.All;
@@ -215,6 +215,13 @@ public class QuickSwitcherWindow : PopupWidget
 		Position -= new Vector2( 0, 200 );
 	}
 
+	public override void Hide()
+	{
+		base.Hide();
+
+		WindowOpacity = 0;
+	}
+
 	protected override void OnKeyPress( KeyEvent e )
 	{
 		if ( e.KeyboardModifiers.HasFlag( KeyboardModifiers.Ctrl ) && e.Key is KeyCode.K )
@@ -242,15 +249,5 @@ public class QuickSwitcherWindow : PopupWidget
 		}
 
 		Close();
-	}
-
-	[Menu( "Editor", "Tools/Open Quick Switcher", "code", Shortcut = "Ctrl+K" )]
-	public static void ToggleQuickSwitcher()
-	{
-		Log.Trace( "ToggleQuickSwitcher" );
-		Instance?.Destroy();
-
-		Instance = new QuickSwitcherWindow();
-		Instance.Show();
 	}
 }
