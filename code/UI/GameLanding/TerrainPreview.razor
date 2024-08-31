@@ -1,0 +1,71 @@
+@namespace Grubs.UI.GameLanding
+
+@using Grubs.Terrain
+
+@inherits ScenePanel
+
+<style>
+    TerrainPreview {
+        width: 100%;
+        height: 100%;
+
+        >i {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 32px;
+            color: black;
+            background-color: rgb(233, 239, 232);
+            padding: 4px;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: darken(rgb(233, 239, 232), 15%);
+            }
+        }
+    }
+</style>
+
+<root>
+    @if (Networking.IsHost)
+    {
+        <i onclick=@RefreshTerrain>refresh</i>
+    }
+</root>
+
+@code
+{
+    private SceneWorld world;
+
+    public override void Tick()
+    {
+        if (world is null)
+        {
+            if (Scene is null)
+                return;
+
+            World = Scene.SceneWorld;
+
+            var center = new Vector3(0f, 512f, (GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f) / 2f);
+            var w = GrubsTerrain.Instance?.WorldTextureLength ?? 2048f;
+            var h = GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f;
+
+            var distX = w / (2 * MathF.Tan(Camera.FieldOfView / 2f * 0.017f));
+
+            // I think this is wrong but it works for most scenarios.
+            var distY = h * 2 / (2 * MathF.Tan(Camera.FieldOfView / 2f * 0.017f));
+
+            var distance = Math.Max(distX, distY);
+
+            Camera.Rotation = Rotation.FromYaw(90f);
+            Camera.Position = (GrubsTerrain.Instance?.Transform.Position ?? new Vector3(0, 512f, 0)) + Vector3.Up * h / 2f - Camera.Rotation.Forward * distance;
+            Camera.ZNear = 100f;
+            Camera.ZFar = 100000f;
+        }
+    }
+
+    private void RefreshTerrain()
+    {
+        GrubsTerrain.Instance?.Init();
+    }
+}

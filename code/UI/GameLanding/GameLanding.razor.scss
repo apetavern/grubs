@@ -53,16 +53,16 @@ GameLanding {
                 background-color: rgb(43, 74, 41);
                 color: #808080;
 
-                > i {
+                >i {
                     color: #808080;
                 }
             }
 
-            > label {
+            >label {
                 transform: skewX(4deg);
             }
 
-            > i {
+            >i {
                 font-size: 42px;
                 transform: skewX(4deg);
             }
@@ -114,7 +114,7 @@ GameLanding {
             transform: skewX(-4deg);
             z-index: 4;
 
-            > label {
+            >label {
                 font-size: 48px;
                 color: white;
                 margin-right: 32px;
@@ -134,7 +134,7 @@ GameLanding {
             justify-content: center;
             z-index: 2;
 
-            > label {
+            >label {
                 font-size: 24px;
                 font-weight: light;
             }
@@ -149,6 +149,16 @@ GameLanding {
             gap: 24px;
             flex-direction: column;
         }
+    }
+
+    .terrain-preview {
+        position: absolute;
+        top: 40%;
+        right: 100px;
+        width: 533px;
+        height: 300px;
+        border: 4px rgb(233, 239, 232);
+        border-radius: 4px;
     }
 
     &.hide {
