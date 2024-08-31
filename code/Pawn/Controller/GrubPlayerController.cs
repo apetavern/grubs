@@ -90,9 +90,13 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateLookAngles()
 	{
-		if ( Grub.ActiveEquipment is not null && Grub.ActiveEquipment.Components.TryGet<Weapon>( out var weapon ) )
+		if ( Grub.ActiveEquipment.IsValid() && Grub.ActiveEquipment.Components.TryGet<Weapon>( out var weapon ) )
+		{
+			if ( !weapon.IsValid() )
+				return;
 			if ( weapon.IsCharging )
 				return;
+		}
 
 		var nextFacing = Transform.Rotation.z <= 0 ? -1 : 1;
 
@@ -178,7 +182,7 @@ public sealed partial class GrubPlayerController : Component
 
 		if ( !Grub.ActiveEquipment.IsValid() )
 			return false;
-		
+
 		var showWhileMoving = false;
 		if ( Grub.ActiveEquipment is { } equipment )
 		{

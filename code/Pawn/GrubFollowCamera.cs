@@ -101,6 +101,8 @@ public class GrubFollowCamera : Component
 
 		foreach ( var projectile in Scene.GetAllComponents<Projectile>().Where( p => p.Active ) )
 		{
+			if ( !projectile.IsValid() )
+				continue;
 			if ( projectile.Tags.Has( "notarget" ) || Resolution.ForceResolved.Contains( projectile.GameObject.Id ) )
 				continue;
 
@@ -109,7 +111,7 @@ public class GrubFollowCamera : Component
 		}
 
 		var component = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId );
-		if ( component is Player player && player.ActiveGrub is not null )
+		if ( component is Player player && player.ActiveGrub.IsValid() )
 			SetTarget( player.ActiveGrub.GameObject );
 	}
 
@@ -144,7 +146,7 @@ public class GrubFollowCamera : Component
 
 		var water = terrain?.Water;
 		var minZ = (water?.Transform.Position.z ?? 0) + padding;
-		var maxZ = (terrain.WorldTextureHeight - padding) + 128;
+		var maxZ = terrain.WorldTextureHeight - padding + 128;
 		_center.z = _center.z.Clamp( minZ, maxZ );
 	}
 }

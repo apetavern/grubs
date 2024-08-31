@@ -21,6 +21,9 @@ public sealed class GrubAnimator : Component
 
 	protected override void OnUpdate()
 	{
+		if ( !Grub.IsValid() || !GrubRenderer.IsValid() || !Controller.IsValid() )
+			return;
+
 		GrubRenderer.Set( "aimangle", Controller.EyeRotation.Pitch() * -Controller.Facing );
 		GrubRenderer.Set( "grounded", Controller.IsGrounded );
 		GrubRenderer.Set( "velocity", Controller.Velocity.Length );
@@ -30,7 +33,7 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "jetpack_dir", MathX.Lerp( GrubRenderer.GetFloat( "jetpack_dir" ), JetpackDir, Time.Delta * 5f ) );
 
 		var holdPose = HoldPose.None;
-		if ( Grub.ActiveEquipment is not null && Controller.ShouldShowWeapon() && Grub.IsActive )
+		if ( Grub.ActiveEquipment.IsValid() && Controller.ShouldShowWeapon() && Grub.IsActive )
 			holdPose = Grub.ActiveEquipment.HoldPose;
 
 		GrubRenderer.Set( "holdpose", (int)holdPose );
@@ -66,8 +69,11 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "backflip_charge", Controller.BackflipCharge );
 		GrubRenderer.Set( "hardfall", Controller.IsHardFalling );
 
-		GrubRenderer.Set( "lowhp", Grub.Health.CurrentHealth <= Grub.Health.MaxHealth / 4f );
-		GrubRenderer.Set( "explode", Grub.Health.DeathInvoked );
+		if ( Grub.Health.IsValid() )
+		{
+			GrubRenderer.Set( "lowhp", Grub.Health.CurrentHealth <= Grub.Health.MaxHealth / 4f );
+			GrubRenderer.Set( "explode", Grub.Health.DeathInvoked );
+		}
 	}
 
 	[Broadcast]

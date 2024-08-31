@@ -106,12 +106,12 @@ public partial class Health : Component
 		{
 			if ( !grub.IsValid() )
 				return;
-			
+
 			if ( !deleteImmediately )
 			{
 				await GameTask.Delay( 500 ); // Give clients some time to update GrubTag healthbar to 0 before we play death animation.
 				DeathInvoked = true;
-				
+
 				// Double check that grub is still valid, since we have waited 500ms since fetching the component.
 				if ( !grub.IsValid() )
 					return;
@@ -155,7 +155,7 @@ public partial class Health : Component
 			var connection = attacker?.Network.OwnerConnection;
 			using ( Rpc.FilterInclude( connection ) )
 			{
-				if ( grub.Player is not null )
+				if ( grub.Player.IsValid() )
 					Stats.IncrementGrubsKilled( grub.Player.Id );
 			}
 

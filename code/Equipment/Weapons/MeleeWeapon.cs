@@ -48,7 +48,7 @@ public class MeleeWeapon : Weapon
 			.WithoutTags( "dead" )
 			.RunAll();
 
-		if ( trs.Any( tr => tr.GameObject is not null ) )
+		if ( trs.Any( tr => tr.GameObject.IsValid() ) )
 			Sound.Play( ImpactSound, trs.First().HitPosition );
 
 		foreach ( var tr in trs )

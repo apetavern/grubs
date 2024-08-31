@@ -16,13 +16,13 @@ public sealed class TorchWeapon : Weapon
 
 	protected override void OnUpdate()
 	{
-		var pc = Equipment.Grub?.PlayerController;
+		var pc = Equipment?.Grub?.PlayerController;
 
-		if ( TorchFlame is not null )
+		if ( TorchFlame.IsValid() )
 		{
 			TorchFlame.Enabled = TorchFlameEnabled;
 
-			if ( pc is not null )
+			if ( pc.IsValid() )
 			{
 				TorchFlame.Transform.Position = GetStartPosition();
 				TorchFlame.Transform.Rotation = Rotation.LookAt( pc.Facing * pc.EyeRotation.Forward );
@@ -79,7 +79,7 @@ public sealed class TorchWeapon : Weapon
 	{
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
-		
+
 		Sound.Play( UseSound, Equipment.Grub.Transform.Position );
 
 		var tr = Scene.Trace.Ray( startPos, endPos )

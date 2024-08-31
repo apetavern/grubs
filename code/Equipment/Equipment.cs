@@ -84,7 +84,7 @@ public class Equipment : Component
 
 	public void Holster()
 	{
-		if ( Grub is not null && Grub.Player is not null )
+		if ( Grub.IsValid() && Grub.Player.IsValid() )
 			GameObject.SetParent( Grub.Player.GameObject );
 
 		if ( Components.TryGet( out Weapon weapon ) )

@@ -48,7 +48,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 				go.NetworkSpawn();
 
 				var grub = go.Components.Get<Grub>();
-				SetGrubPlayer( player.Id, grub.Id );
+				SetGrubPlayer( player, grub );
 
 				player.GrubQueue.Add( grub.Id );
 
@@ -143,7 +143,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		if ( IsGameResolved() && GrubsConfig.KeepGameAlive != true )
 		{
 			var winner = Scene.GetAllComponents<Player>().FirstOrDefault( p => !p.IsDead() );
-			if ( winner is not null )
+			if ( winner is not null && winner.IsValid() )
 			{
 				using ( Rpc.FilterInclude( winner.Network.OwnerConnection ) )
 				{
@@ -303,15 +303,12 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 	}
 
 	[Broadcast]
-	public void SetGrubPlayer( Guid playerId, Guid grubId )
+	public void SetGrubPlayer( Player player, Grub grub )
 	{
-		var player = playerId.ToComponent<Player>();
-		var grub = grubId.ToComponent<Grub>();
-
-		if ( player is null || grub is null )
+		if ( !player.IsValid() || !grub.IsValid() )
 			return;
 
-		grub.PlayerId = playerId;
+		grub.Player = player;
 		player.Grubs.Add( grub.Id );
 	}
 
