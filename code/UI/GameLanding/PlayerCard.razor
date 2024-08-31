@@ -12,17 +12,24 @@
 }
 
 <root>
-    <img class="avatar" src="avatar:@Connection.SteamId"/>
+    <img class="avatar" src="avatar:@Connection.SteamId" />
     <div class="info">
         <div class="name">
             <label class="name-text">@Connection.DisplayName</label>
             <label class="hours-text">@($"{Player.PlayTime:0}h")</label>
-            <div class="line"/>
+            <div class="line" />
         </div>
         <div class="stats">
             @foreach (var stat in GetStats(2))
             {
-                <label>@stat.Title: @stat.Value</label>
+                @if (stat is null)
+                {
+                    <label>...</label>
+                }
+                else
+                {
+                    <label>@stat.Title: @stat.Value</label>
+                }
             }
         </div>
     </div>
