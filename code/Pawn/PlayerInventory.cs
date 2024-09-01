@@ -46,6 +46,8 @@ public sealed class PlayerInventory : Component
 			go.NetworkSpawn();
 
 			var equipment = go.Components.Get<Equipment.Equipment>();
+			if ( !equipment.IsValid() )
+				return;
 
 			Equipment.Add( equipment );
 
@@ -53,6 +55,12 @@ public sealed class PlayerInventory : Component
 
 			if ( infiniteAmmo )
 				equipment.Ammo = -1;
+
+			if ( !Player.IsValid() || !Player.ActiveGrub.IsValid() )
+			{
+				Log.Warning( "Player's active grub is invalid - this is probably a networking bug" );
+				return;
+			}
 
 			equipment.SlotIndex = slotIndex;
 			equipment.Deploy( Player.ActiveGrub );
@@ -185,7 +193,7 @@ public sealed class PlayerInventory : Component
 
 	private Equipment.Equipment GetActiveEquipment( int slot )
 	{
-		if ( !Player.ActiveGrub.IsValid() )
+		if ( !Player.IsValid() || !Player.ActiveGrub.IsValid() )
 			return null;
 
 		return Player.ActiveGrub.GameObject.Components

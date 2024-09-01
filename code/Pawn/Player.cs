@@ -20,8 +20,7 @@ public sealed class Player : Component
 
 	[Sync] public string SelectedColor { get; set; } = string.Empty;
 
-	[Sync] public Guid ActiveGrubId { get; set; }
-	public Grub ActiveGrub => Scene.Directory.FindComponentByGuid( ActiveGrubId ) as Grub;
+	[Sync] public Grub ActiveGrub { get; set; }
 
 	[Sync] public NetList<Guid> Grubs { get; set; } = new();
 
