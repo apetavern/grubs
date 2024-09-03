@@ -11,7 +11,7 @@
 
 @attribute [StyleSheet]
 
-@if (Inventory is null)
+@if (!Inventory.IsValid())
 {
     return;
 }
@@ -62,10 +62,17 @@
 
     public override void Tick()
     {
+        if (!Inventory.IsValid())
+            return;
+
         SetClass("hide", !Inventory.InventoryOpen);
         Cursor.Enabled("inv", Inventory.InventoryOpen);
 
-        if (!Inventory.InventoryOpen) return;
+        if (!Inventory.InventoryOpen) 
+            return;
+
+        if (Inventory.Equipment?.Count == 0)
+            return;
 
         if(HoveredItemPanel is not null) 
         {
