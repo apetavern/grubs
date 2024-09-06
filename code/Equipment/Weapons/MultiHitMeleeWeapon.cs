@@ -38,11 +38,14 @@ public class MultiHitMeleeWeapon : Weapon
 	{
 		base.OnUpdate();
 
+		if ( IsProxy )
+			return;
+
 		if ( _timeSinceLastHit > Cooldown )
 			if ( _finishAfterCooldown )
 				FireFinished();
 
-		if ( _timeSinceLastHit > 3f )
+		if ( _timeSinceLastHit > 3f && _currentStrikeCount != 1 )
 			ResetCombo();
 	}
 
@@ -56,14 +59,15 @@ public class MultiHitMeleeWeapon : Weapon
 	[Broadcast]
 	private void ResetCombo()
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
-		if ( !grub.IsValid() )
+		var anim = Equipment.Grub.Animator;
+		if ( !anim.IsValid() )
 			return;
 
 		_currentStrikeCount = 1;
-		grub.Animator.Punch( _currentStrikeCount );
+		anim.Punch( _currentStrikeCount );
 	}
 
 	[Broadcast]
@@ -75,11 +79,15 @@ public class MultiHitMeleeWeapon : Weapon
 		if ( TimesUsed >= MaxUses || _finishAfterCooldown )
 			return;
 
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
-		grub.Animator.Punch( _currentStrikeCount - 1 );
-		grub.Animator.Fire();
+		var anim = Equipment.Grub.Animator;
+		if ( !anim.IsValid() )
+			return;
+
+		anim.Punch( _currentStrikeCount - 1 );
+		anim.Fire();
 
 		_timeSinceLastHit = 0f;
 
@@ -96,7 +104,7 @@ public class MultiHitMeleeWeapon : Weapon
 				var direction = tr.Direction;
 				if ( tr.Direction == Vector3.Zero )
 				{
-					direction = (grub.Transform.Position - tr.HitPosition).ClampLength( 1f );
+					direction = (Equipment.Grub.Transform.Position - tr.HitPosition).ClampLength( 1f );
 					direction = direction.WithX( direction.x * 2 ).WithZ( direction.z / 2 );
 				}
 
