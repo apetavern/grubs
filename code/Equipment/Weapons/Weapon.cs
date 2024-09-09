@@ -192,21 +192,28 @@ public partial class Weapon : Component
 		IsFiring = false;
 		TimesUsed++;
 
-		GrubFollowCamera.Local.AutomaticRefocus = true;
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.AutomaticRefocus = true;
 
 		if ( TimesUsed >= MaxUses )
 		{
-			if ( Equipment.Grub is not { } grub )
+			if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 				return;
+
+			var grub = Equipment.Grub;
+
+			// re-write this nonsense next time you see this and have free time
 
 			if ( !CanSwapAfterUse )
 			{
-				grub.Player.HasFiredThisTurn = true;
+				if ( grub.Player.IsValid() )
+					grub.Player.HasFiredThisTurn = true;
 				Gamemode.FFA.UseTurn( true );
 			}
 			else
 			{
-				grub.Player.Inventory.Holster( grub.Player.Inventory.ActiveSlot );
+				if ( grub.Player.Inventory.IsValid() )
+					grub.Player.Inventory.Holster( grub.Player.Inventory.ActiveSlot );
 			}
 		}
 
