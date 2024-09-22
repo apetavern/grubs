@@ -29,7 +29,7 @@ public class Equipment : Component
 
 	public Grub Grub { get; set; }
 
-	public int RoundsUntilUnlock => (UnlockDelay - Gamemodes.Gamemode.Current.RoundsPassed).Clamp( 0, int.MaxValue );
+	public int RoundsUntilUnlock => (UnlockDelay - Gamemodes.Gamemode.GetCurrent().RoundsPassed).Clamp( 0, int.MaxValue );
 	public bool Unlocked => RoundsUntilUnlock == 0 || Ammo == -1;
 	public bool IsAvailable => Ammo != 0 && Unlocked;
 

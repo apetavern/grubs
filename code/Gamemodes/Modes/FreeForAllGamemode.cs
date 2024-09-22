@@ -145,7 +145,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 			var winner = Scene.GetAllComponents<Player>().FirstOrDefault( p => !p.IsDead() );
 			if ( winner is not null && winner.IsValid() )
 			{
-				using ( Rpc.FilterInclude( winner.Network.OwnerConnection ) )
+				using ( Rpc.FilterInclude( winner.Network.Owner ) )
 				{
 					Stats.IncrementGamesWon( GamemodeShortName );
 				}
@@ -178,7 +178,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 		_nextTurnTask = null;
 		TurnIsChanging = false;
 		ActivePlayerId = Guid.Empty;
-		Scene.Children.OfType<GameObject>().Where( x => x.Tags.HasAny( "projectile", "cleanup" ) ).ToList().ForEach( x => x.Destroy() );
+		Scene.Children.Where( x => x.Tags.HasAny( "projectile", "cleanup" ) ).ToList().ForEach( x => x.Destroy() );
 
 		Started = false;
 
@@ -187,7 +187,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 	public void OnDisconnected( Connection connection )
 	{
-		var player = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Network.OwnerConnection == connection );
+		var player = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Network.Owner == connection );
 		if ( player?.IsActive ?? false )
 		{
 			UseTurn();
@@ -295,7 +295,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 		if ( players.Count() - 1 == deadPlayers )
 		{
-			GameEnd.Instance.Winner = lastPlayerAlive!.Network.OwnerConnection.DisplayName;
+			GameEnd.Instance.Winner = lastPlayerAlive!.Network.Owner.DisplayName;
 			return true;
 		}
 

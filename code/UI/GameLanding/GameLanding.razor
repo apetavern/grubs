@@ -16,7 +16,7 @@
                 <label>Lobby</label>
             </div>
             <div class="gamemode-name">
-                <label>@Gamemode.Current.GamemodeName</label>
+                <label>@Gamemode.GetCurrent().GamemodeName</label>
             </div>
         </div>
         <div class="middle">
@@ -93,14 +93,14 @@
     private void Start()
     {
         if (IsHost() && CanStart() && !IsLoadingTerrain())
-            Gamemode.Current.Start();
+            Gamemode.GetCurrent().Start();
     }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
 
-        var hide = Gamemode.Current?.Started ?? false;
+        var hide = Gamemode.GetCurrent()?.Started ?? false;
         Cursor.Enabled("menu", !hide);
         SceneBackground?.SetClass("hide", hide);
         MenuBody?.SetClass("hide", hide);

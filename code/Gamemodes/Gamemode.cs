@@ -33,6 +33,17 @@ public abstract class Gamemode : Component
 		Current = this;
 	}
 
+	public static Gamemode GetCurrent()
+	{
+		if ( !Current.IsValid() )
+		{
+			Log.Error("Gamemode was not valid! Please send your log file to the developers in discord.gg/apetavern");
+			Game.Close();
+		}
+		
+		return Current;
+	}
+
 	protected override void OnStart()
 	{
 		base.OnStart();

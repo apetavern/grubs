@@ -86,7 +86,7 @@
 </root>
 
 @code {
-    private bool IsPlaying() => Gamemode.Current.State == GameState.Playing;
+    private bool IsPlaying() => Gamemode.GetCurrent().State == GameState.Playing;
 
     protected override int BuildHash() => HashCode.Combine(IsPlaying(), Input.UsingController);
 }

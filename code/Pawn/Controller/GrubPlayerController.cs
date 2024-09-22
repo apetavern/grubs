@@ -220,7 +220,7 @@ public sealed partial class GrubPlayerController : Component
 		if ( IsProxy || !Grub.IsValid() )
 			return false;
 
-		if ( Gamemode.Current.TurnIsChanging )
+		if ( Gamemode.GetCurrent().TurnIsChanging )
 			return false;
 
 		if ( !Grub.IsActive )

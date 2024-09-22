@@ -17,7 +17,7 @@
         <div class="delay-progress" style="height: @(GetDelayHeight())%"></div>
         <section class="delay @(Equipment.Unlocked ? "hidden" : "")">
             <i>lock</i>
-            <label>@(Equipment.UnlockDelay - Gamemodes.Gamemode.Current.RoundsPassed)</label>
+            <label>@(Equipment.UnlockDelay - Gamemodes.Gamemode.GetCurrent().RoundsPassed)</label>
         </section>
     }
 </root>
@@ -67,11 +67,11 @@
 
     private float GetDelayHeight()
     {
-        return Equipment.Unlocked ? 0 : (1 - ((float)Gamemodes.Gamemode.Current.RoundsPassed + 1) / (Equipment.UnlockDelay + 1)) * 100;
+        return Equipment.Unlocked ? 0 : (1 - ((float)Gamemodes.Gamemode.GetCurrent().RoundsPassed + 1) / (Equipment.UnlockDelay + 1)) * 100;
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Equipment?.Ammo, PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex, Gamemodes.Gamemode.Current.RoundsPassed);
+        return HashCode.Combine(Equipment?.Ammo, PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex, Gamemodes.Gamemode.GetCurrent().RoundsPassed);
     }
 }

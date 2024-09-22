@@ -67,7 +67,7 @@
 			SkipTurn();
 	}
 
-	private bool IsTurn() => Gamemode.Current.State == GameState.Playing && !Gamemode.FFA.TurnIsChanging && (Player?.IsActive ?? false) && (!Player.ActiveGrub?.IsDead ?? false);
+	private bool IsTurn() => Gamemode.GetCurrent().State == GameState.Playing && !Gamemode.FFA.TurnIsChanging && (Player?.IsActive ?? false) && (!Player.ActiveGrub?.IsDead ?? false);
 
 	private void SkipTurn()
 	{

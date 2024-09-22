@@ -92,7 +92,7 @@ public class GrubFollowCamera : Component
 
 	private void FindTarget()
 	{
-		var targetGuid = Gamemode.Current.CameraTarget;
+		var targetGuid = Gamemode.GetCurrent().CameraTarget;
 		if ( targetGuid != Guid.Empty )
 		{
 			SetTarget( Scene.Directory.FindByGuid( targetGuid ), .5f );

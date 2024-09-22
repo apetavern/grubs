@@ -53,13 +53,15 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 
 	public void OnCollisionStart( Collision other )
 	{
-		if ( (!PhysicsProjectileComponent?.Grub?.IsActive ?? false) || Gamemode.Current.TurnIsChanging )
+		if ( ShouldDestroySelf() )
 		{
 			GameObject.Destroy();
 			return;
 		}
 
-		Components.Get<Rigidbody>().Enabled = false;
+		var rb = Components.Get<Rigidbody>();
+		if ( rb.IsValid() )
+			rb.Enabled = false;
 
 		Transform.Position = other.Contact.Point - other.Contact.Normal * 5f;
 		Transform.Rotation = Rotation.LookAt( other.Contact.Normal );
@@ -83,5 +85,13 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 	public void OnCollisionStop( CollisionStop other )
 	{
 
+	}
+
+	private bool ShouldDestroySelf()
+	{
+		return !PhysicsProjectileComponent.IsValid() 
+		       || !PhysicsProjectileComponent.Grub.IsValid() 
+		       || !PhysicsProjectileComponent.Grub.IsActive 
+		       || Gamemode.GetCurrent().TurnIsChanging;
 	}
 }

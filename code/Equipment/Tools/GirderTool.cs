@@ -27,7 +27,7 @@ public class GirderTool : Tool
 	{
 		base.OnUpdate();
 
-		if ( IsProxy )
+		if ( IsProxy || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
@@ -70,8 +70,10 @@ public class GirderTool : Tool
 
 	private bool CheckValidPlacement()
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.Grub.IsValid() )
 			return false;
+
+		var grub = Equipment.Grub;
 
 		if ( grub.Player.MousePosition.Distance( grub.Transform.Position ) > CursorRange )
 			return false;
@@ -88,10 +90,10 @@ public class GirderTool : Tool
 
 	protected override void FireImmediate()
 	{
-		if ( !Equipment.Deployed )
+		if ( !Equipment.IsValid() )
 			return;
-
-		if ( Equipment.Grub is not { } grub )
+		
+		if ( !Equipment.Deployed )
 			return;
 
 		var valid = CheckValidPlacement();
