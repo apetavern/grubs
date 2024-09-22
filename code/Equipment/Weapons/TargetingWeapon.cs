@@ -25,11 +25,13 @@ public sealed class TargetingWeapon : Weapon
 	{
 		base.OnUpdate();
 
-		if ( IsProxy )
+		if ( IsProxy || !Equipment.IsValid() )
 			return;
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed && ProjectileTarget == Vector3.Zero && CursorModel is null );
-		CursorModel.GameObject.Enabled = Equipment.Deployed;
+		
+		if ( CursorModel.IsValid() )
+			CursorModel.GameObject.Enabled = Equipment.Deployed;
 	}
 
 	public override void OnDeploy()
@@ -50,14 +52,17 @@ public sealed class TargetingWeapon : Weapon
 	{
 		if ( IsProxy )
 			return;
+		
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() || !CursorModel.IsValid() )
+			return;
 
 		if ( !Equipment.Deployed )
 			return;
 
-		if ( Equipment.Grub == null )
-			return;
-
 		var player = Equipment.Grub.Player;
+		if ( !player.IsValid() )
+			return;
+		
 		if ( ProjectileTarget == Vector3.Zero )
 		{
 			CursorModel.Transform.Position = player.MousePosition.WithY( 480 );
@@ -138,8 +143,10 @@ public sealed class TargetingWeapon : Weapon
 
 	private bool CheckValidPlacement()
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return false;
+
+		var grub = Equipment.Grub;
 
 		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, CursorModel.Transform.Position, CursorModel.Transform.Position )
 			.IgnoreGameObject( GameObject )

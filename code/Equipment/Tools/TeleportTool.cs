@@ -22,7 +22,7 @@ public class TeleportTool : Tool
 	{
 		base.OnUpdate();
 
-		if ( IsProxy )
+		if ( IsProxy || !Equipment.IsValid() )
 			return;
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
@@ -35,12 +35,15 @@ public class TeleportTool : Tool
 			return;
 
 		var player = Equipment.Grub.Player;
+		if ( !player.IsValid() )
+			return;
+		
 		CursorModel.Transform.Position = player.MousePosition;
 		var isValidPlacement = CheckValidPlacement();
 		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
 
 		if ( Input.UsingController )
-			GrubFollowCamera.Local.PanCamera();
+			GrubFollowCamera.Local?.PanCamera();
 	}
 
 	public override void OnDeploy()
@@ -59,8 +62,10 @@ public class TeleportTool : Tool
 
 	private bool CheckValidPlacement()
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return false;
+
+		var grub = Equipment.Grub;
 
 		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, grub.Player.MousePosition, grub.Player.MousePosition )
 			.IgnoreGameObject( GameObject )
@@ -78,12 +83,13 @@ public class TeleportTool : Tool
 		if ( !Equipment.Deployed )
 			return;
 
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
 		if ( !CheckValidPlacement() )
 			return;
 
+		var grub = Equipment.Grub;
 		var grubPosition = grub.Player.MousePosition;
 		grub.Transform.Position = grubPosition;
 		TeleportEffects( grubPosition );

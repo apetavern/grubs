@@ -53,7 +53,10 @@ public sealed class JetpackTool : Tool
 
 	public void AnimateFlames()
 	{
-		if ( !Equipment.IsValid() )
+		if ( !Equipment.IsValid() 
+		     || !Equipment.Grub.IsValid() 
+		     || !Equipment.Grub.CharacterController.IsValid()
+		     || !Equipment.Grub.PlayerController.IsValid() )
 			return;
 		
 		if ( !Equipment.Model.Active )
@@ -105,6 +108,9 @@ public sealed class JetpackTool : Tool
 
 	protected override void OnUpdate()
 	{
+		if ( !Equipment.IsValid() )
+			return;
+		
 		ShouldAnimate = Equipment.Deployed && IsFiring;
 		if ( ShouldAnimate )
 			AnimateFlames();
