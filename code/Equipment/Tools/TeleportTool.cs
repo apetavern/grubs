@@ -14,6 +14,10 @@ public class TeleportTool : Tool
 	protected override void OnStart()
 	{
 		base.OnStart();
+
+		if ( !CursorModel.IsValid() )
+			return;
+		
 		CursorModel.GameObject.SetParent( Scene );
 		CursorModel.GameObject.Enabled = Equipment.Deployed;
 	}
@@ -26,21 +30,26 @@ public class TeleportTool : Tool
 			return;
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
-		CursorModel.GameObject.Enabled = Equipment.Deployed;
+		
+		if ( CursorModel.IsValid() )
+			CursorModel.GameObject.Enabled = Equipment.Deployed;
 
 		if ( !Equipment.Deployed )
 			return;
 
-		if ( Equipment.Grub == null )
+		if ( !Equipment.Grub.IsValid() )
 			return;
 
 		var player = Equipment.Grub.Player;
 		if ( !player.IsValid() )
 			return;
-		
-		CursorModel.Transform.Position = player.MousePosition;
-		var isValidPlacement = CheckValidPlacement();
-		CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
+
+		if ( CursorModel.IsValid() )
+		{
+			CursorModel.Transform.Position = player.MousePosition;
+			var isValidPlacement = CheckValidPlacement();
+			CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
+		}
 
 		if ( Input.UsingController )
 			GrubFollowCamera.Local?.PanCamera();

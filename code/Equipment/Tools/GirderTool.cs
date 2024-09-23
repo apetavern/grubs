@@ -19,6 +19,10 @@ public class GirderTool : Tool
 	protected override void OnStart()
 	{
 		base.OnStart();
+
+		if ( !CursorVisual.IsValid() )
+			return;
+		
 		CursorVisual.GameObject.SetParent( Scene );
 		CursorVisual.GameObject.Enabled = Equipment.Deployed;
 	}

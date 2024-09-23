@@ -16,6 +16,9 @@ public sealed class TargetingWeapon : Weapon
 	protected override void OnStart()
 	{
 		base.OnStart();
+		
+		if ( !CursorModel.IsValid() )
+			return;
 
 		CursorModel.GameObject.SetParent( Scene );
 		CursorModel.GameObject.Enabled = Equipment.Deployed;
