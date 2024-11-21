@@ -192,15 +192,11 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 	private Task _lastModificationTask = System.Threading.Tasks.Task.CompletedTask;
 
-	public bool NeedsMeshUpdate => Layers.Values.Any( x => x.NeedsMeshUpdate.Count > 0 || !x.UpdateMeshTask.IsCompleted );
+	public bool NeedsMeshUpdate => UpdatedChunkQueue.Count > 0 || Layers.Values.Any( x => x.NeedsMeshUpdate.Count > 0 || !x.UpdateMeshTask.IsCompleted );
 
 	protected override void OnUpdate()
 	{
-		for ( var i = AllChunks.Count - 1; i >= 0; --i )
-		{
-			AllChunks[i].UpdateTransform();
-		}
-
+		UpdateTransform();
 		ProcessUpdatedChunkQueue();
 
 		foreach ( var (resource, layer) in Layers )
@@ -226,6 +222,19 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		foreach ( var conn in Connection.All.Where( c => c != Connection.Host && c.IsActive ) )
 			SendModifications( conn );
+	}
+
+	public void UpdateTransform()
+	{
+		if ( PhysicsBody is { } body )
+		{
+			body.Transform = Transform.World;
+		}
+
+		for ( var i = AllChunks.Count - 1; i >= 0; --i )
+		{
+			AllChunks[i].UpdateTransform();
+		}
 	}
 
 	public void Write( Stream stream )

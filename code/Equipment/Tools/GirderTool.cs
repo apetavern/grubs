@@ -47,8 +47,8 @@ public class GirderTool : Tool
 			return;
 
 		var player = Equipment.Grub.Player;
-		CursorVisual.Transform.Position = player.MousePosition;
-		CursorVisual.Transform.Rotation *= Rotation.FromPitch( (Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f) );
+		CursorVisual.WorldPosition = player.MousePosition;
+		CursorVisual.WorldRotation *= Rotation.FromPitch( (Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f) );
 
 		if ( Input.UsingController )
 			GrubFollowCamera.Local.PanCamera();
@@ -79,7 +79,7 @@ public class GirderTool : Tool
 
 		var grub = Equipment.Grub;
 
-		if ( grub.Player.MousePosition.Distance( grub.Transform.Position ) > CursorRange )
+		if ( grub.Player.MousePosition.Distance( grub.WorldPosition ) > CursorRange )
 			return false;
 
 		var trLocation = Scene.Trace.Body( CursorCollider.KeyframeBody, grub.Player.MousePosition )

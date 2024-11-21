@@ -15,7 +15,7 @@ public class LandmineUtility : Component
 	public GameObject Spawn( Vector3 position )
 	{
 		var go = Game.Random.Float() > 0.7f ? OildrumPrefab.Clone() : LandminePrefab.Clone();
-		go.Transform.Position = position.WithY( 512f );
+		go.WorldPosition = position.WithY( 512f );
 		go.Tags.Add( "drop" );
 		go.Network.SetOrphanedMode( NetworkOrphaned.Host );
 		go.NetworkSpawn();

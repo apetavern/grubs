@@ -34,7 +34,7 @@ public sealed class RopeBehavior : Component
 		if ( !JointComponent.IsValid() )
 			return;
 		
-		JointComponent.MaxLength = Vector3.DistanceBetween( Transform.Position, HookObject.Transform.Position );
+		JointComponent.MaxLength = Vector3.DistanceBetween( WorldPosition, HookObject.WorldPosition );
 		JointComponent.Body = HookObject;
 		RopeLength = JointComponent.MaxLength;
 
@@ -58,19 +58,19 @@ public sealed class RopeBehavior : Component
 		if ( MuzzlePoint is null || !MountComponent.IsValid() || !MountComponent.Grub.IsValid() )
 			return;
 
-		MuzzlePoint.Transform.Position = Transform.Position + HookDirection * 15f + MountComponent.Grub.Transform.Rotation.Left * 10f;
-		HookDirection = (JointComponent.Body.Transform.Position - Transform.Position).Normal;
+		MuzzlePoint.WorldPosition = WorldPosition + HookDirection * 15f + MountComponent.Grub.WorldRotation.Left * 10f;
+		HookDirection = (JointComponent.Body.WorldPosition - WorldPosition).Normal;
 
 		var tr = Scene.Trace.Ray(
-				Transform.Position - HookDirection,
-				AttachPoint.Transform.Position + HookDirection )
+				WorldPosition - HookDirection,
+				AttachPoint.WorldPosition + HookDirection )
 			.WithoutTags( "player", "tool", "projectile" )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();
 
 		if ( tr.Hit )
 		{
-			AttachPoint.Transform.Position = tr.HitPosition + tr.Normal;
+			AttachPoint.WorldPosition = tr.HitPosition + tr.Normal;
 			CornerObjects.Add( tr.HitPosition + tr.Normal );
 			JointComponent.MaxLength = RopeLength;
 		}
@@ -78,7 +78,7 @@ public sealed class RopeBehavior : Component
 		if ( CornerObjects.Count > 1 )
 		{
 			var tr2 = Scene.Trace.Ray(
-					Transform.Position - HookDirection,
+					WorldPosition - HookDirection,
 					CornerObjects[^2] + HookDirection * 2f )
 				.WithoutTags( "player", "tool", "projectile" )
 				.IgnoreGameObjectHierarchy( GameObject )
@@ -86,22 +86,22 @@ public sealed class RopeBehavior : Component
 
 			if ( !tr2.Hit )
 			{
-				AttachPoint.Transform.Position = CornerObjects[^2];
+				AttachPoint.WorldPosition = CornerObjects[^2];
 				CornerObjects.RemoveAt( CornerObjects.Count - 1 );
 			}
 		}
 		else
 		{
 			var tr2 = Scene.Trace.Ray(
-					Transform.Position - HookDirection,
-					HookObject.Transform.Position + HookDirection * 2f )
+					WorldPosition - HookDirection,
+					HookObject.WorldPosition + HookDirection * 2f )
 				.WithoutTags( "player", "tool", "projectile" )
 				.IgnoreGameObjectHierarchy( GameObject )
 				.Run();
 
 			if ( !tr2.Hit )
 			{
-				AttachPoint.Transform.Position = HookObject.Transform.Position;
+				AttachPoint.WorldPosition = HookObject.WorldPosition;
 				if ( CornerObjects.Count > 0 )
 				{
 					CornerObjects.RemoveAt( CornerObjects.Count - 1 );
@@ -128,20 +128,20 @@ public sealed class RopeBehavior : Component
 		{
 			case > 1:
 				RopeRenderer.Points.Clear();
-				RopeRenderer.Points.Add( HookObject.Transform.Position );
+				RopeRenderer.Points.Add( HookObject.WorldPosition );
 				RopeRenderer.Points.AddRange( CornerObjects );
-				RopeRenderer.Points.Add( MuzzlePoint.Transform.Position );
+				RopeRenderer.Points.Add( MuzzlePoint.WorldPosition );
 				break;
 			case 1:
 				RopeRenderer.Points.Clear();
-				RopeRenderer.Points.Add( HookObject.Transform.Position );
+				RopeRenderer.Points.Add( HookObject.WorldPosition );
 				RopeRenderer.Points.Add( CornerObjects[0] );
-				RopeRenderer.Points.Add( MuzzlePoint.Transform.Position );
+				RopeRenderer.Points.Add( MuzzlePoint.WorldPosition );
 				break;
 			default:
 				RopeRenderer.Points.Clear();
-				RopeRenderer.Points.Add( HookObject.Transform.Position );
-				RopeRenderer.Points.Add( MuzzlePoint.Transform.Position );
+				RopeRenderer.Points.Add( HookObject.WorldPosition );
+				RopeRenderer.Points.Add( MuzzlePoint.WorldPosition );
 				break;
 		}
 	}

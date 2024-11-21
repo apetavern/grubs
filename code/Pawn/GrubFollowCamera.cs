@@ -29,21 +29,21 @@ public class GrubFollowCamera : Component
 	protected override void OnUpdate()
 	{
 		var listenerTransform = Transform.World;
-		listenerTransform.Position = Transform.Position.WithY( 480f );
+		listenerTransform.Position = WorldPosition.WithY( 480f );
 		Sound.Listener = listenerTransform;
 
 		if ( _timeUntilCameraUnlock )
 			FindTarget();
 
 		if ( Target.IsValid() && _isFocusingTarget )
-			_center = Target.Transform.Position;
+			_center = Target.WorldPosition;
 
 		ClampCamera();
 
 		var cam = GameObject;
 		var targetPos = _center + Vector3.Right * Distance;
 		targetPos.z += 32f;
-		cam.Transform.Position = cam.Transform.Position.LerpTo( targetPos, Time.Delta * 5f );
+		cam.WorldPosition = cam.WorldPosition.LerpTo( targetPos, Time.Delta * 5f );
 
 		if ( Input.Down( "camera_pan" ) )
 			PanCamera();
@@ -126,7 +126,7 @@ public class GrubFollowCamera : Component
 
 		if ( _isFocusingTarget )
 		{
-			_center = Target?.Transform.Position ?? _center;
+			_center = Target?.WorldPosition ?? _center;
 
 			if ( !_panDelta.LengthSquared.AlmostEqual( 0, 0.1f ) )
 				_isFocusingTarget = false;
@@ -145,7 +145,7 @@ public class GrubFollowCamera : Component
 		_center.x = _center.x.Clamp( minX, maxX );
 
 		var water = terrain?.Water;
-		var minZ = (water?.Transform.Position.z ?? 0) + padding;
+		var minZ = (water?.WorldPosition.z ?? 0) + padding;
 		var maxZ = terrain.WorldTextureHeight - padding + 128;
 		_center.z = _center.z.Clamp( minZ, maxZ );
 	}

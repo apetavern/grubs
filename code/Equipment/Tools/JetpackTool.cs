@@ -74,8 +74,8 @@ public sealed class JetpackTool : Tool
 		var leftFlame = GetAttachmentOrDefault( "jet_left" );
 		var rightFlame = GetAttachmentOrDefault( "jet_right" );
 
-		FBFlame.Transform.Position = middleFlame.Position + characterController.Velocity * Time.Delta;
-		FBFlame.Transform.Rotation = middleFlame.Rotation;
+		FBFlame.WorldPosition = middleFlame.Position + characterController.Velocity * Time.Delta;
+		FBFlame.WorldRotation = middleFlame.Rotation;
 
 		if ( !IsProxy )
 		{
@@ -83,18 +83,18 @@ public sealed class JetpackTool : Tool
 			UpDownFlameScale = MathF.Abs( Equipment.Grub.PlayerController.LookInput * 0.4f );
 		}
 
-		FBFlame.Transform.Scale = MathX.Lerp( FBFlame.Transform.Scale.x, ForwardBackFlameScale, Time.Delta * 5f );
+		FBFlame.WorldScale = MathX.Lerp( FBFlame.WorldScale.x, ForwardBackFlameScale, Time.Delta * 5f );
 
-		UDFlame1.Transform.Position = leftFlame.Position + characterController.Velocity / 100f;
-		UDFlame1.Transform.Rotation = leftFlame.Rotation;
-		UDFlame2.Transform.Position = rightFlame.Position + characterController.Velocity / 100f;
-		UDFlame2.Transform.Rotation = rightFlame.Rotation;
+		UDFlame1.WorldPosition = leftFlame.Position + characterController.Velocity / 100f;
+		UDFlame1.WorldRotation = leftFlame.Rotation;
+		UDFlame2.WorldPosition = rightFlame.Position + characterController.Velocity / 100f;
+		UDFlame2.WorldRotation = rightFlame.Rotation;
 
-		UDFlame1.Transform.Scale = MathX.Lerp( UDFlame1.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
-		UDFlame2.Transform.Scale = MathX.Lerp( UDFlame2.Transform.Scale.x, UpDownFlameScale, Time.Delta * 5f );
+		UDFlame1.WorldScale = MathX.Lerp( UDFlame1.WorldScale.x, UpDownFlameScale, Time.Delta * 5f );
+		UDFlame2.WorldScale = MathX.Lerp( UDFlame2.WorldScale.x, UpDownFlameScale, Time.Delta * 5f );
 
 		if ( _jetSound is not null )
-			_jetSound.Position = Equipment.Grub.Transform.Position;
+			_jetSound.Position = Equipment.Grub.WorldPosition;
 	}
 
 	private Transform GetAttachmentOrDefault( string name )
@@ -166,12 +166,12 @@ public sealed class JetpackTool : Tool
 		var characterController = Equipment.Grub.CharacterController;
 		Rotation targetRotation = -characterController.Velocity.x switch
 		{
-			<= -1 => Equipment.Grub.Transform.Rotation.Angles().WithYaw( 0 ),
-			>= 1 => Equipment.Grub.Transform.Rotation.Angles().WithYaw( 180 ),
-			_ => Equipment.Grub.Transform.Rotation
+			<= -1 => Equipment.Grub.WorldRotation.Angles().WithYaw( 0 ),
+			>= 1 => Equipment.Grub.WorldRotation.Angles().WithYaw( 180 ),
+			_ => Equipment.Grub.WorldRotation
 		};
 
-		Equipment.Grub.Transform.Rotation = Rotation.Lerp( Equipment.Grub.Transform.Rotation, targetRotation, Time.Delta * 5f );
+		Equipment.Grub.WorldRotation = Rotation.Lerp( Equipment.Grub.WorldRotation, targetRotation, Time.Delta * 5f );
 		Equipment.Grub.PlayerController.Facing = targetRotation.y <= 0 ? 1 : -1;
 	}
 

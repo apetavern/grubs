@@ -18,7 +18,7 @@
 
     protected override void OnStart()
     {
-        Transform.Rotation = Transform.Rotation.RotateAroundAxis(Vector3.Up, 90f);
+        WorldRotation = WorldRotation.RotateAroundAxis(Vector3.Up, 90f);
     }
 
     private bool IsShowing()
@@ -59,8 +59,8 @@
         var pos = weapon.GetMuzzlePosition().Position;
         pos += weapon.GetMuzzleForward() * 40f;
 
-        Transform.Position = pos;
-        Transform.Position = Transform.Position.WithY(479f);
-        Transform.Rotation = Transform.Rotation.RotateAroundAxis(Vector3.Forward, 0.25f);
+        WorldPosition = pos;
+        WorldPosition = WorldPosition.WithY(479f);
+        WorldRotation = WorldRotation.RotateAroundAxis(Vector3.Forward, 0.25f);
     }
 }

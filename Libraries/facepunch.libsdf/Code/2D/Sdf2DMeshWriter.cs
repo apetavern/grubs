@@ -482,20 +482,6 @@ partial class Sdf2DMeshWriter : Pooled<Sdf2DMeshWriter>
 		index += count;
 
 		return count > 0;
-
-		offset = index;
-		count = 1;
-
-		Assert.True( EdgeLoops[offset].Area > 0f );
-
-		while ( offset + count < EdgeLoops.Count && EdgeLoops[offset + count].Area < 0f )
-		{
-			++count;
-		}
-
-		index += count;
-
-		return count > 0;
 	}
 
 	private void InitPolyMeshBuilder( PolygonMeshBuilder builder, int offset, int count )

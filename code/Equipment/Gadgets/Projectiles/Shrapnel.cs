@@ -24,11 +24,11 @@ public sealed class Shrapnel : Component
 		for ( var i = 0; i < ShrapnelCount; i++ )
 		{
 			var go = ShrapnelPrefab.Clone();
-			go.Transform.Position = GameObject.Transform.Position + (Vector3.Random.WithY( 0 ) + Vector3.Up * 3f) * 2f;
+			go.WorldPosition = GameObject.WorldPosition + (Vector3.Random.WithY( 0 ) + Vector3.Up * 3f) * 2f;
 
 			if ( ShrapnelRandomizeRotation )
 			{
-				go.Transform.Rotation = Rotation.From( Game.Random.Float( -180, 180 ), 0, 0 );
+				go.WorldRotation = Rotation.From( Game.Random.Float( -180, 180 ), 0, 0 );
 			}
 
 			go.NetworkSpawn();

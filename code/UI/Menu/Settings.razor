@@ -1,6 +1,6 @@
 @namespace Grubs.UI.Menu
 
-@using Sandbox.UI.GameMenu;
+@using Sandbox.UI;
 @using Sandbox.Audio;
 
 @inherits Panel
@@ -57,9 +57,9 @@
                                 {
                                     <div class="input-action">
                                         <ControlInput class="control-wrap" Label="@GetActionFormatted(action.Name)">
-                                            <Control>
-                                                <KeyBind Game=@IGameInstance.Current Action=@action />
-                                            </Control>
+                                            @* <Control> *@
+                                            @*     <KeyBind Game=@IGameInstance.Current Action=@action /> *@
+                                            @* </Control> *@
                                         </ControlInput>
                                     </div>
                                 }

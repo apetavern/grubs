@@ -24,8 +24,8 @@ public sealed class TorchWeapon : Weapon
 
 			if ( pc.IsValid() )
 			{
-				TorchFlame.Transform.Position = GetStartPosition();
-				TorchFlame.Transform.Rotation = Rotation.LookAt( pc.Facing * pc.EyeRotation.Forward );
+				TorchFlame.WorldPosition = GetStartPosition();
+				TorchFlame.WorldRotation = Rotation.LookAt( pc.Facing * pc.EyeRotation.Forward );
 			}
 		}
 
@@ -80,7 +80,7 @@ public sealed class TorchWeapon : Weapon
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
-		Sound.Play( UseSound, Equipment.Grub.Transform.Position );
+		Sound.Play( UseSound, Equipment.Grub.WorldPosition );
 
 		var tr = Scene.Trace.Ray( startPos, endPos )
 						.WithAnyTags( "solid", "player", "pickup" )

@@ -18,7 +18,7 @@ public sealed class PlayerVoice : Voice
 
 	public void ToggleBlock( Player player )
 	{
-		var connection = player.Network.OwnerConnection;
+		var connection = player.Network.Owner;
 
 		// Unblocking.
 		if ( _blockedConnections.Contains( connection ) )

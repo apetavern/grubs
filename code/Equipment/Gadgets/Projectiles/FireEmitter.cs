@@ -34,7 +34,7 @@ internal class FireEmitter : Component
 		var dist = float.MaxValue;
 		foreach ( var dir in direction )
 		{
-			var tr = Scene.Trace.Ray( Transform.Position, Transform.Position + dir * Projectile.ExplosionRadius * 2f )
+			var tr = Scene.Trace.Ray( WorldPosition, WorldPosition + dir * Projectile.ExplosionRadius * 2f )
 				.Run();
 			if ( tr.Hit && tr.Distance < dist )
 			{
@@ -49,7 +49,7 @@ internal class FireEmitter : Component
 		{
 			FireParticle particle = new FireParticle()
 			{
-				Position = Transform.Position,
+				Position = WorldPosition,
 				Velocity = !SphericalEmission ? (new Vector3( Game.Random.Float( -LeftRightVelocityRandom, LeftRightVelocityRandom ), 0,
 								InitialUpVelocity +
 								(Game.Random.Float( -InitialUpVelocity, InitialUpVelocity ) / 3f) ) *

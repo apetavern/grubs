@@ -27,18 +27,18 @@ public partial class BotBrain
 
 	private void MoveTowardsTarget()
 	{
-		//ActiveGrub.PlayerController.MoveInput = (ActiveGrub.Transform.Position - targetPosition).Normal.x;
+		//ActiveGrub.PlayerController.MoveInput = (ActiveGrub.WorldPosition - targetPosition).Normal.x;
 		//Needs advanced pathing shit, some jumping, BACKFLIPS would be amazing but I doubt we can do that...
 	}
 
 	private Vector3 CalculateBestPosition()
 	{
 		// Gotta check for line of sight later
-		return Scene.NavMesh.GetClosestPoint( targetGrub.Transform.Position ).Value;
+		return Scene.NavMesh.GetClosestPoint( targetGrub.WorldPosition ).Value;
 	}
 
 	private bool HasReachedPosition( Vector3 position )
 	{
-		return Vector3.DistanceBetween( ActiveGrub.Transform.Position, position ) < 100f;
+		return Vector3.DistanceBetween( ActiveGrub.WorldPosition, position ) < 100f;
 	}
 }

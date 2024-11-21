@@ -9,6 +9,6 @@ public sealed class DroppedProjectile : TargetedProjectile
 	public override void ShareData()
 	{
 		base.ShareData();
-		Transform.Position = ProjectileTarget.WithZ( GrubsTerrain.Instance.WorldTextureHeight + 512f );
+		WorldPosition = ProjectileTarget.WithZ( GrubsTerrain.Instance.WorldTextureHeight + 512f );
 	}
 }

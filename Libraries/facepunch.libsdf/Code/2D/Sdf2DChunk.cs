@@ -12,7 +12,7 @@ namespace Sandbox.Sdf;
 [Hide]
 public partial class Sdf2DChunk : SdfChunk<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (int X, int Y), Sdf2DArray, ISdf2D>
 {
-	public override Vector3 LocalPosition
+	public override Vector3 ChunkPosition
 	{
 		get
 		{
@@ -59,7 +59,7 @@ public partial class Sdf2DChunk : SdfChunk<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 
 		await GameTask.WorkerThread();
 
-		writer.DebugOffset = LocalPosition;
+		writer.DebugOffset = ChunkPosition;
 		writer.DebugScale = Data.Quality.UnitSize;
 
 		try
@@ -88,7 +88,7 @@ public partial class Sdf2DChunk : SdfChunk<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 
 		if ( enableCollisionMesh )
 		{
-			var scale = Transform.Scale.x;
+			var scale = WorldScale.x;
 			var offset = new Vector3( Key.X, Key.Y ) * Resource.Quality.ChunkSize;
 
 			collisionTask = GameTask.RunInThreadAsync( async () =>

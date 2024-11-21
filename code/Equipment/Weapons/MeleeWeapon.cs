@@ -20,7 +20,7 @@ public class MeleeWeapon : Weapon
 
 		var pc = grub.PlayerController;
 
-		var ray = new Ray( grub.Transform.Position + Vector3.Up * 24f + HitOffset, pc.Facing * pc.EyeRotation.Forward );
+		var ray = new Ray( grub.WorldPosition + Vector3.Up * 24f + HitOffset, pc.Facing * pc.EyeRotation.Forward );
 		HitEffects( ray );
 
 		DelayFireFinished();
@@ -63,8 +63,8 @@ public class MeleeWeapon : Weapon
 					continue;
 
 				// Let's roll our own direction; tr.Direction will return Vector3.Zero if we're too close to hitGrub.
-				var direction = (grub.Transform.Position - hitGrub.Transform.Position).ClampLength( 1f ) * -1f;
-				hitGrub.Transform.Position += direction * 3f; // Prevent being stuck in Equipment.Grub
+				var direction = (grub.WorldPosition - hitGrub.WorldPosition).ClampLength( 1f ) * -1f;
+				hitGrub.WorldPosition += direction * 3f; // Prevent being stuck in Equipment.Grub
 				hitGrub.CharacterController.Punch( (direction + Vector3.Up) * HitForce );
 				hitGrub.CharacterController.ReleaseFromGround();
 
@@ -100,7 +100,7 @@ public class MeleeWeapon : Weapon
 
 		var pc = grub.PlayerController;
 		Gizmo.Draw.LineThickness = 2f;
-		var startPos = grub.Transform.Position + Vector3.Up * 24f + HitOffset;
+		var startPos = grub.WorldPosition + Vector3.Up * 24f + HitOffset;
 		Gizmo.Draw.Line( startPos, startPos + pc.Facing * pc.EyeRotation.Forward * HitSize.x );
 	}
 }

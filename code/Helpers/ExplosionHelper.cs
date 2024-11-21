@@ -25,7 +25,7 @@ public partial class ExplosionHelper : Component
 			if ( !go.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 				continue;
 
-			var dist = Vector3.DistanceBetween( position, go.Transform.Position );
+			var dist = Vector3.DistanceBetween( position, go.WorldPosition );
 			var distFactor = 1.0f - MathF.Pow( dist / radius, 2 ).Clamp( 0, 1 );
 
 			if ( go.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
@@ -49,7 +49,7 @@ public partial class ExplosionHelper : Component
 
 	private void HandleGrubExplosion( Grub grub, Vector3 position, float force )
 	{
-		var dir = (grub.Transform.Position - position).Normal;
+		var dir = (grub.WorldPosition - position).Normal;
 		dir = dir.WithY( 0f );
 
 		grub.CharacterController.Punch( (dir + Vector3.Up) * force );
@@ -58,11 +58,11 @@ public partial class ExplosionHelper : Component
 
 	private void HandlePhysicsExplosion( Rigidbody body, Vector3 position, float force )
 	{
-		var dir = (body.Transform.Position - position).Normal;
+		var dir = (body.WorldPosition - position).Normal;
 		dir = dir.WithY( 0f );
 
 		body.ApplyImpulseAt(
-			body.Transform.Position + Vector3.Down * 0.25f,
+			body.WorldPosition + Vector3.Down * 0.25f,
 			dir * force * body.PhysicsBody.Mass );
 	}
 

@@ -13,10 +13,10 @@ public class ScriptedMovementProjectile : Projectile
 
 		if ( OverrideMovement != Vector3.Zero )
 		{
-			Transform.Position += OverrideMovement * Time.Delta;
+			WorldPosition += OverrideMovement * Time.Delta;
 			return;
 		}
 
-		Transform.Position += Movement * Time.Delta;
+		WorldPosition += Movement * Time.Delta;
 	}
 }

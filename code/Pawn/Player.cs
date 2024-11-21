@@ -43,8 +43,8 @@ public sealed class Player : Component
 
 	protected override void OnStart()
 	{
-		SteamId = Network.OwnerConnection.SteamId;
-		SteamName = Network.OwnerConnection.DisplayName;
+		SteamId = Network.Owner.SteamId;
+		SteamName = Network.Owner.DisplayName;
 
 		if ( IsProxy )
 			return;
@@ -96,7 +96,7 @@ public sealed class Player : Component
 	public IEnumerable<Grub> GetOwnedGrubs()
 	{
 		return Scene.GetAllComponents<Grub>()
-			.Where( g => g.IsValid && g.Network.OwnerConnection == Network.OwnerConnection );
+			.Where( g => g.IsValid && g.Network.Owner == Network.Owner );
 	}
 
 	public bool IsDead()

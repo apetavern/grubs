@@ -32,7 +32,7 @@ public sealed class ChatHelper : Component
 		if ( messageText.Contains( '\n' ) || messageText.Contains( '\r' ) )
 			return;
 
-		var player = Scene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.OwnerConnection == Rpc.Caller );
+		var player = Scene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.Owner == Rpc.Caller );
 		var message = new ChatMessage()
 		{
 			AuthorName = Rpc.Caller.DisplayName,

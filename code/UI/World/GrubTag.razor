@@ -22,7 +22,7 @@
     </div>
     @*<div class="avi">
     <image
-    src="avatar:@(Grub.Network.OwnerConnection?.SteamId ?? Steam.SteamId)"
+    src="avatar:@(Grub.Network.Owner?.SteamId ?? Steam.SteamId)"
     style="background-color: @Color.Hex; border-color: @Color.Hex"/>
     </div>
     <div class="top">
@@ -62,7 +62,7 @@
     {
         base.OnStart();
 
-        Transform.Position = Grub.Transform.Position + Vector3.Up * 44f;
+        WorldPosition = Grub.WorldPosition + Vector3.Up * 44f;
     }
 
     protected override void OnUpdate()
@@ -70,7 +70,7 @@
         base.OnUpdate();
 
         ScaleFactor = ScaleFactor.LerpTo(GrubFollowCamera.Local.Distance / 600, Time.Delta * 4f).Clamp(1, 3);
-        Transform.Position = Grub.Transform.Position + Vector3.Up * 52f + Vector3.Right * 35;
+        WorldPosition = Grub.WorldPosition + Vector3.Up * 52f + Vector3.Right * 35;
     }
 
     protected override int BuildHash()

@@ -104,7 +104,7 @@ public class MultiHitMeleeWeapon : Weapon
 				var direction = tr.Direction;
 				if ( tr.Direction == Vector3.Zero )
 				{
-					direction = (Equipment.Grub.Transform.Position - tr.HitPosition).ClampLength( 1f );
+					direction = (Equipment.Grub.WorldPosition - tr.HitPosition).ClampLength( 1f );
 					direction = direction.WithX( direction.x * 2 ).WithZ( direction.z / 2 );
 				}
 
@@ -160,7 +160,7 @@ public class MultiHitMeleeWeapon : Weapon
 			return res;
 
 		var ctrl = grub.PlayerController;
-		var startPos = ctrl.Transform.Position + Vector3.Up * 24f + HitOffset;
+		var startPos = ctrl.WorldPosition + Vector3.Up * 24f + HitOffset;
 		var trs = Scene.Trace.Ray(
 				startPos, startPos + ctrl.EyeRotation.Forward * ctrl.Facing * HitDistance )
 			.Size( 12f )
@@ -183,7 +183,7 @@ public class MultiHitMeleeWeapon : Weapon
 	{
 		if ( releaseFromGround )
 		{
-			grub.Transform.Position += force.ClampLength( 1f ) * 5f;
+			grub.WorldPosition += force.ClampLength( 1f ) * 5f;
 			grub.CharacterController.ReleaseFromGround();
 
 			GrubFollowCamera.Local.SetTarget( grub.GameObject, 1 );

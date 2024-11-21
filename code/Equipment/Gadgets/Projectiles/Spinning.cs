@@ -10,6 +10,6 @@ public sealed class Spinning : Component
 	{
 		base.OnFixedUpdate();
 
-		Transform.Rotation *= RotationSpeed * Time.Delta;
+		WorldRotation *= RotationSpeed * Time.Delta;
 	}
 }

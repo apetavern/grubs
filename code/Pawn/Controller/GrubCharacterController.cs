@@ -124,7 +124,7 @@ public class GrubCharacterController : Component
 			return;
 		}
 
-		var pos = GameObject.Transform.Position;
+		var pos = GameObject.WorldPosition;
 
 		var mover = new CharacterControllerHelper( BuildTrace( pos, pos ), pos, Velocity );
 		mover.Bounce = 0.3f;
@@ -139,7 +139,7 @@ public class GrubCharacterController : Component
 			mover.TryMove( Time.Delta );
 		}
 
-		Transform.Position = mover.Position.WithY( 512f );
+		WorldPosition = mover.Position.WithY( 512f );
 
 		LastVelocity = Velocity;
 		Velocity = mover.Velocity;
@@ -148,13 +148,13 @@ public class GrubCharacterController : Component
 	public void ReleaseFromGround()
 	{
 		IsOnGround = false;
-		Controller.LastGroundHeight = Transform.Position.z;
+		Controller.LastGroundHeight = WorldPosition.z;
 		CurrentGroundAngle = 0;
 	}
 
 	private void CategorizePosition()
 	{
-		var pos = Transform.Position;
+		var pos = WorldPosition;
 		var point = pos + Vector3.Down * 2;
 		var vBumpOrigin = pos;
 		var wasOnGround = IsOnGround;
@@ -174,9 +174,9 @@ public class GrubCharacterController : Component
 
 		var pm = BuildTrace( vBumpOrigin, point ).Run();
 
-		var trForward = Scene.Trace.Ray( Transform.Position, Transform.Position + Transform.Rotation.Forward * 10f )
+		var trForward = Scene.Trace.Ray( WorldPosition, WorldPosition + WorldRotation.Forward * 10f )
 			.IgnoreGameObjectHierarchy( GameObject ).Run();
-		var trBackward = Scene.Trace.Ray( Transform.Position, Transform.Position + Transform.Rotation.Backward * 10f )
+		var trBackward = Scene.Trace.Ray( WorldPosition, WorldPosition + WorldRotation.Backward * 10f )
 			.IgnoreGameObjectHierarchy( GameObject ).Run();
 
 		var squished = trForward.Hit && trBackward.Hit;
@@ -200,7 +200,7 @@ public class GrubCharacterController : Component
 		// we are on ground
 		//
 		IsOnGround = true;
-		CurrentGroundAngle = Vector3.GetAngle( Transform.Rotation.Up, pm.Normal );
+		CurrentGroundAngle = Vector3.GetAngle( WorldRotation.Up, pm.Normal );
 		if ( pm.Normal.x < 0 )
 			CurrentGroundAngle *= -1;
 
@@ -209,7 +209,7 @@ public class GrubCharacterController : Component
 		//
 		if ( wasOnGround && !pm.StartedSolid && pm.Fraction > 0.002f && pm.Fraction < 1.0f )
 		{
-			Transform.Position = pm.EndPosition + pm.Normal * 0.01f;
+			WorldPosition = pm.EndPosition + pm.Normal * 0.01f;
 		}
 	}
 
@@ -217,7 +217,7 @@ public class GrubCharacterController : Component
 	{
 		Controller.CheckFallDamage();
 		Velocity /= 1.8f;
-		OnLandedEffects( Transform.Position );
+		OnLandedEffects( WorldPosition );
 
 		if ( Controller.IsHardFalling )
 			Controller.Grub.OnHardFall();
@@ -278,7 +278,7 @@ public class GrubCharacterController : Component
 		if ( TryUnstuck() )
 			return;
 
-		var pos = Transform.Position;
+		var pos = WorldPosition;
 		var delta = targetPosition - pos;
 
 		var mover = new CharacterControllerHelper( BuildTrace( pos, pos ), pos, delta );
@@ -293,14 +293,14 @@ public class GrubCharacterController : Component
 			mover.TryMove( 1.0f );
 		}
 
-		Transform.Position = mover.Position;
+		WorldPosition = mover.Position;
 	}
 
 	private bool TryUnstuck()
 	{
 		// Check for being stuck inside a non-terrain object (like a player)
-		var result = BuildTrace( Transform.Position, Transform.Position ).Run();
-		var terrainCheck = Scene.Trace.Ray( Transform.Position, Transform.Position + Vector3.Right * 64f )
+		var result = BuildTrace( WorldPosition, WorldPosition ).Run();
+		var terrainCheck = Scene.Trace.Ray( WorldPosition, WorldPosition + Vector3.Right * 64f )
 			.Size( BoundingBox )
 			.WithTag( "solid" )
 			.IgnoreGameObjectHierarchy( GameObject )
@@ -332,13 +332,13 @@ public class GrubCharacterController : Component
 
 		for ( var i = 0; i < AttemptsPerTick; i++ )
 		{
-			var pos = Transform.Position + Vector3.Random.Normal * (_stuckTries / 2.0f);
+			var pos = WorldPosition + Vector3.Random.Normal * (_stuckTries / 2.0f);
 			pos = pos.WithY( 512f );
 
 			// First try the up direction for moving platforms
 			if ( i == 0 )
 			{
-				pos = Transform.Position + Vector3.Up * 2;
+				pos = WorldPosition + Vector3.Up * 2;
 			}
 
 			result = BuildTrace( pos, pos ).Run();
@@ -349,7 +349,7 @@ public class GrubCharacterController : Component
 			if ( !result.StartedSolid )
 			{
 				//Log.Info( $"unstuck after {_stuckTries} tries ({_stuckTries * AttemptsPerTick} tests)" );
-				Transform.Position = pos;
+				WorldPosition = pos;
 				return false;
 			}
 		}

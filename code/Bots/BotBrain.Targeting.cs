@@ -27,7 +27,7 @@ public partial class BotBrain
 
 		foreach ( var grub in grubs )
 		{
-			float distance = Vector3.DistanceBetween( ActiveGrub.Transform.Position, grub.Transform.Position );
+			float distance = Vector3.DistanceBetween( ActiveGrub.WorldPosition, grub.WorldPosition );
 			if ( distance < minDistance )
 			{
 				minDistance = distance;

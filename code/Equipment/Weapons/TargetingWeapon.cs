@@ -68,7 +68,7 @@ public sealed class TargetingWeapon : Weapon
 		
 		if ( ProjectileTarget == Vector3.Zero )
 		{
-			CursorModel.Transform.Position = player.MousePosition.WithY( 480 );
+			CursorModel.WorldPosition = player.MousePosition.WithY( 480 );
 		}
 
 		var isValidPlacement = CheckValidPlacement();
@@ -101,7 +101,7 @@ public sealed class TargetingWeapon : Weapon
 
 		if ( isValidPlacement && Input.Pressed( "fire" ) )
 		{
-			ProjectileTarget = CursorModel.Transform.Position.WithY( 512f );
+			ProjectileTarget = CursorModel.WorldPosition.WithY( 512f );
 		}
 
 		if ( Input.Released( "fire" ) && ProjectileTarget != Vector3.Zero )
@@ -151,7 +151,7 @@ public sealed class TargetingWeapon : Weapon
 
 		var grub = Equipment.Grub;
 
-		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, CursorModel.Transform.Position, CursorModel.Transform.Position )
+		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, CursorModel.WorldPosition, CursorModel.WorldPosition )
 			.IgnoreGameObject( GameObject )
 			.Run();
 

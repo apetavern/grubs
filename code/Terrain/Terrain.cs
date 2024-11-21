@@ -40,7 +40,7 @@ public partial class GrubsTerrain : Component
 			return;
 		}
 
-		SdfWorld.Transform.Rotation = Rotation.FromRoll( 90f );
+		SdfWorld.WorldRotation = Rotation.FromRoll( 90f );
 
 		if ( GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture )
 			SetupWorldFromTexture();
@@ -124,7 +124,7 @@ public partial class GrubsTerrain : Component
 			if ( !go.IsValid() )
 				continue;
 
-			if ( pos.Distance( go.Transform.Position ) < minDistance )
+			if ( pos.Distance( go.WorldPosition ) < minDistance )
 				validSpawn = false;
 		}
 

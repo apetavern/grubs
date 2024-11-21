@@ -17,7 +17,7 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 		if ( !Source.IsValid() )
 			return;
 
-		Transform.Position = Source.GetStartPosition( Droppable );
+		WorldPosition = Source.GetStartPosition( Droppable );
 
 		if ( Droppable )
 			return;
@@ -26,7 +26,7 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 			return;
 
 		var dir = (PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing) + Vector3.Up;
-		Transform.Position += dir * 16f;
+		WorldPosition += dir * 16f;
 
 		if ( !PhysicsBody.IsValid() )
 			return;
@@ -43,20 +43,20 @@ public class GoatProjectile : Projectile, Component.ICollisionListener
 		base.OnUpdate();
 		Model.Set( "active", true );
 		TargetLookAt = (PlayerController.EyeRotation.Forward.Normal.WithZ( 0 ) * PlayerController.Facing) + Vector3.Up * PhysicsBody.Velocity.z / 750f;
-		Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( TargetLookAt, Vector3.Up ), Time.Delta * 10f );
+		WorldRotation = Rotation.Lerp( WorldRotation, Rotation.LookAt( TargetLookAt, Vector3.Up ), Time.Delta * 10f );
 	}
 
 	public void OnCollisionStart( Collision other )
 	{
 		if ( CollisionSound is not null )
-			Sound.Play( CollisionSound, Transform.Position );
+			Sound.Play( CollisionSound, WorldPosition );
 		Model.Set( "grounded", true );
 
 		if ( !PhysicsBody.IsValid() )
 			return;
 
 		if ( -other.Contact.Normal.z > 0.5f )
-			PhysicsBody.Velocity = (Vector3.Up + Transform.Rotation.Forward) * ProjectileSpeed;
+			PhysicsBody.Velocity = (Vector3.Up + WorldRotation.Forward) * ProjectileSpeed;
 
 	}
 

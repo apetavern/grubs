@@ -78,7 +78,24 @@ public record ActionOption(
 					if ( !fd.Execute() )
 						return;
 
-					CreateAsset.Create( entry, fd.SelectedFile );
+					var path = EditorUtility.SaveFileDialog( entry.Name, extension,
+						Project.Current.RootDirectory.FullName );
+					if ( path is null )
+						return;
+					
+					var sourceFile = Editor.FileSystem.Root.GetFullPath( $"/templates/{entry.Default}" );
+					if ( !File.Exists( sourceFile ) )
+						return;
+
+					var targetPath = Path.ChangeExtension( path, extension );
+					
+					File.Copy( sourceFile, targetPath );
+					var newAsset = AssetSystem.RegisterFile( targetPath );
+					
+					MainAssetBrowser.Instance?.UpdateAssetList();
+					MainAssetBrowser.Instance?.FocusOnAsset( newAsset );
+					
+					EditorUtility.InspectorObject = newAsset;
 				} ) );
 		}
 
@@ -93,6 +110,10 @@ public record ActionOption(
 			}
 
 			var asset = AssetType.FromType( gameResource.TargetType );
+			if ( asset is null )
+			{
+				continue;
+			}
 
 			options.Add( new ActionOption(
 				OptionType.Action,
@@ -109,10 +130,10 @@ public record ActionOption(
 					fd.SetFindFile();
 					fd.SetModeSave();
 					fd.SetNameFilter( $"{gameResource.Name} (*.{gameResource.Extension})" );
-
+			
 					if ( !fd.Execute() )
 						return;
-
+			
 					CreateResource( fd.SelectedFile );
 				}
 			) );

@@ -32,9 +32,9 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 			{
 				var grub = PhysicsProjectileComponent.Grub;
 
-				grub.PlayerController.EyeRotation = Rotation.FromPitch( MathF.Abs( Vector3.GetAngle( grub.Transform.Rotation.Forward, Rope.HookDirection ) - 15f ) * -grub.PlayerController.Facing );
+				grub.PlayerController.EyeRotation = Rotation.FromPitch( MathF.Abs( Vector3.GetAngle( grub.WorldRotation.Forward, Rope.HookDirection ) - 15f ) * -grub.PlayerController.Facing );
 				grub.PlayerController.IsOnRope = true;
-				grub.Transform.Rotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.Transform.Rotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch( 45f ), Time.Delta * 10f );
+				grub.WorldRotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.WorldRotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch( 45f ), Time.Delta * 10f );
 				grub.CharacterController.IsOnGround = false;
 				grub.CharacterController.Velocity = Vector3.Zero;
 			}
@@ -63,15 +63,15 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		if ( rb.IsValid() )
 			rb.Enabled = false;
 
-		Transform.Position = other.Contact.Point - other.Contact.Normal * 5f;
-		Transform.Rotation = Rotation.LookAt( other.Contact.Normal );
+		WorldPosition = other.Contact.Point - other.Contact.Normal * 5f;
+		WorldRotation = Rotation.LookAt( other.Contact.Normal );
 		CreateRopeSystem();
 	}
 
 	public void CreateRopeSystem()
 	{
 		MountObject.Parent = Scene;
-		MountObject.Transform.Position = PhysicsProjectileComponent.Grub.Transform.Position;
+		MountObject.WorldPosition = PhysicsProjectileComponent.Grub.WorldPosition;
 		MountObject.Enabled = true;
 		Rope = MountObject.Components.Get<RopeBehavior>();
 		MountObject.Components.Get<Mountable>().Mount( PhysicsProjectileComponent.Grub );

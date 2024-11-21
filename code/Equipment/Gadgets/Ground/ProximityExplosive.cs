@@ -132,7 +132,7 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	public void ExplodeEffects()
 	{
 		var projectile = Components.Get<Projectile>();
-		ExplosionHelper.Instance.Explode( this, Transform.Position, Radius, Damage, projectile?.GrubGuid ?? Guid.Empty, projectile?.GrubName ?? string.Empty );
+		ExplosionHelper.Instance.Explode( this, WorldPosition, Radius, Damage, projectile?.GrubGuid ?? Guid.Empty, projectile?.GrubName ?? string.Empty );
 		Sound.Play( ExplosionSound );
 
 		if ( Particles is null )

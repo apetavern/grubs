@@ -119,10 +119,10 @@ public partial class Health : Component
 				// This is shit, especially since we want a variety of death animations in the future.
 				// Just don't know where to put this right now.
 				var plungerPrefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/dynamite_plunger.prefab" );
-				var position = grub.Transform.Position;
+				var position = grub.WorldPosition;
 				var plunger = SceneUtility.GetPrefabScene( plungerPrefab ).Clone();
 				plunger.NetworkSpawn();
-				plunger.Transform.Position = grub.PlayerController.Facing == -1 ? position - new Vector3( 30, 0, 0 ) : position;
+				plunger.WorldPosition = grub.PlayerController.Facing == -1 ? position - new Vector3( 30, 0, 0 ) : position;
 
 				await GameTask.Delay( 750 );
 
@@ -142,7 +142,7 @@ public partial class Health : Component
 				var gravePrefab = ResourceLibrary.Get<PrefabFile>( "prefabs/world/drops/gravestone.prefab" );
 				var grave = SceneUtility.GetPrefabScene( gravePrefab ).Clone();
 				grave.NetworkSpawn();
-				grave.Transform.Position = position.WithY( 536f ).WithZ( position.z + 24 );
+				grave.WorldPosition = position.WithY( 536f ).WithZ( position.z + 24 );
 			}
 
 			ChatHelper.Instance.SendInfoMessage( _deathReason.ToString() );
@@ -152,7 +152,7 @@ public partial class Health : Component
 				attackerGuid = _deathReason.FirstReason != DamageType.None ? _deathReason.FirstInfo.AttackerGuid : grub.Id;
 
 			var attacker = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Grubs.Contains( attackerGuid ) );
-			var connection = attacker?.Network.OwnerConnection;
+			var connection = attacker?.Network.Owner;
 			using ( Rpc.FilterInclude( connection ) )
 			{
 				if ( grub.Player.IsValid() )

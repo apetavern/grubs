@@ -12,7 +12,7 @@ namespace Sandbox.Sdf;
 [Hide]
 public partial class Sdf3DChunk : SdfChunk<Sdf3DWorld, Sdf3DChunk, Sdf3DVolume, (int X, int Y, int Z), Sdf3DArray, ISdf3D>
 {
-	public override Vector3 LocalPosition
+	public override Vector3 ChunkPosition
 	{
 		get
 		{
@@ -59,6 +59,8 @@ public partial class Sdf3DChunk : SdfChunk<Sdf3DWorld, Sdf3DChunk, Sdf3DVolume, 
 
 		await Data.WriteToAsync( writer, Resource );
 
+		if ( !IsValid ) return;
+
 		var renderTask = Task.CompletedTask;
 		var collisionTask = Task.CompletedTask;
 
@@ -69,7 +71,7 @@ public partial class Sdf3DChunk : SdfChunk<Sdf3DWorld, Sdf3DChunk, Sdf3DVolume, 
 
 		if ( enableCollisionMesh )
 		{
-			var scale = Transform.Scale.x;
+			var scale = WorldScale.x;
 			var offset = new Vector3( Key.X, Key.Y, Key.Z ) * Resource.Quality.ChunkSize;
 
 			collisionTask = GameTask.RunInThreadAsync( async () =>

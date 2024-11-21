@@ -80,11 +80,11 @@ public sealed partial class GrubPlayerController : Component
 		if ( !IsGrounded )
 			return;
 
-		Transform.Rotation = MoveInput switch
+		WorldRotation = MoveInput switch
 		{
 			<= -1 => Rotation.Identity,
 			>= 1 => Rotation.From( 0, 180, 0 ),
-			_ => Transform.Rotation
+			_ => WorldRotation
 		};
 	}
 
@@ -98,7 +98,7 @@ public sealed partial class GrubPlayerController : Component
 				return;
 		}
 
-		var nextFacing = Transform.Rotation.z <= 0 ? -1 : 1;
+		var nextFacing = WorldRotation.z <= 0 ? -1 : 1;
 
 		var look = (LookAngles + LookInput * nextFacing).Normal;
 		LookAngles = look.WithPitch( look.pitch.Clamp( -80f, 75f ) )
@@ -113,7 +113,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateEyeRotation()
 	{
-		Facing = Transform.Rotation.z <= 0 ? 1 : -1;
+		Facing = WorldRotation.z <= 0 ? 1 : -1;
 		EyeRotation = LookAngles.ToRotation();
 	}
 

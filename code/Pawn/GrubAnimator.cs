@@ -58,13 +58,13 @@ public sealed class GrubAnimator : Component
 
 		var tr = Scene.Trace
 			.Ray(
-				Controller.Transform.Position
-				+ Controller.Transform.Rotation.Forward * 4f
-				+ Controller.Transform.Rotation.Up * 10f,
-				Controller.Transform.Position + Controller.Transform.Rotation.Down * 128 )
+				Controller.WorldPosition
+				+ Controller.WorldRotation.Forward * 4f
+				+ Controller.WorldRotation.Up * 10f,
+				Controller.WorldPosition + Controller.WorldRotation.Down * 128 )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();
-		_incline = MathX.Lerp( _incline, Controller.Transform.Rotation.Forward.Angle( tr.Normal ) - 90f, 0.2f );
+		_incline = MathX.Lerp( _incline, Controller.WorldRotation.Forward.Angle( tr.Normal ) - 90f, 0.2f );
 		GrubRenderer.Set( "incline", _incline );
 		GrubRenderer.Set( "backflip_charge", Controller.BackflipCharge );
 		GrubRenderer.Set( "hardfall", Controller.IsHardFalling );
@@ -79,13 +79,13 @@ public sealed class GrubAnimator : Component
 	[Broadcast]
 	public void TriggerJump()
 	{
-		Sound.Play( "grub_jump", Transform.Position );
+		Sound.Play( "grub_jump", WorldPosition );
 	}
 
 	[Broadcast]
 	public void TriggerBackflip()
 	{
-		Sound.Play( "grub_backflip", Transform.Position );
+		Sound.Play( "grub_backflip", WorldPosition );
 		GrubRenderer.Set( "backflip", true );
 	}
 

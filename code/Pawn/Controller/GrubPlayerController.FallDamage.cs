@@ -27,7 +27,7 @@ public partial class GrubPlayerController
 		if ( FallVelocity < FallPunchThreshold )
 			return;
 
-		if ( LastGroundHeight - Transform.Position.z < FallDistanceThreshold )
+		if ( LastGroundHeight - WorldPosition.z < FallDistanceThreshold )
 			return;
 
 		if ( FallVelocity > FallVelocityDamageThreshold )

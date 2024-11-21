@@ -23,17 +23,17 @@ public class HomingProjectile : TargetedProjectile
 		pp.PhysicsBody.Gravity = false;
 		pp.PhysicsBody.AngularDamping = 5f;
 		pp.Model.SetBodyGroup( "flame", 1 );
-		while ( Vector3.DistanceBetween( Transform.Position, ProjectileTarget ) > 10f )
+		while ( Vector3.DistanceBetween( WorldPosition, ProjectileTarget ) > 10f )
 		{
 			await Task.FixedUpdate();
-			pp.PhysicsBody.Velocity = Transform.Rotation.Forward * ProjectileSpeed;
-			Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( ProjectileTarget - Transform.Position ), 2f * Time.Delta );
+			pp.PhysicsBody.Velocity = WorldRotation.Forward * ProjectileSpeed;
+			WorldRotation = Rotation.Lerp( WorldRotation, Rotation.LookAt( ProjectileTarget - WorldPosition ), 2f * Time.Delta );
 		}
 	}
 
 	[Broadcast]
 	private void HomingEffects()
 	{
-		Sound.Play( HomingLockSound, Transform.Position );
+		Sound.Play( HomingLockSound, WorldPosition );
 	}
 }

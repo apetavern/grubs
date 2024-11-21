@@ -21,14 +21,14 @@ public sealed class DiggingExplosiveProjectile : TargetedProjectile
 	public override void ShareData()
 	{
 		base.ShareData();
-		Transform.Position = ProjectileTarget.WithZ( GrubsTerrain.Instance.WorldTextureHeight + 256f );
+		WorldPosition = ProjectileTarget.WithZ( GrubsTerrain.Instance.WorldTextureHeight + 256f );
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
 
-		var startPos = Transform.Position;
+		var startPos = WorldPosition;
 		var endPos = startPos + Vector3.Down * DigLength;
 
 		var tr = Scene.Trace.Body( Physics.PhysicsBody, endPos )
@@ -65,7 +65,7 @@ public sealed class DiggingExplosiveProjectile : TargetedProjectile
 			}
 		}
 
-		if ( (_isArmed && _timeSinceArmed > TimeBeforeDetonation) || Vector3.DistanceBetween( Transform.Position, ProjectileTarget ) < 10f )
+		if ( (_isArmed && _timeSinceArmed > TimeBeforeDetonation) || Vector3.DistanceBetween( WorldPosition, ProjectileTarget ) < 10f )
 		{
 			Explosive.Explode();
 			return;

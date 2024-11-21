@@ -16,11 +16,11 @@ public class KillZone : Component, Component.ITriggerListener
 		// in ArcProjectile.OnStart() didn't do SHIT.
 		// kidd 7/2/24: Added Transform.ClearInterpolation to ArcProjectile.OnStart() because this same bug started popping.
 		// It fixed it, but removing this code caused it to start happening on other clients again...
-		var otherOwner = other.GameObject.Root.Network.OwnerConnection;
+		var otherOwner = other.GameObject.Root.Network.Owner;
 		if ( otherOwner != null && otherOwner != Connection.Local )
 			return;
 
-		if ( other.Transform.Position == 0f )
+		if ( other.WorldPosition == 0f )
 			return;
 
 		CollisionEffects( other.Transform.World );
@@ -48,7 +48,7 @@ public class KillZone : Component, Component.ITriggerListener
 			if ( go.Tags.Has( "ignore_killzone" ) )
 				continue;
 
-			if ( go.Tags.Has( tag ) && go.Transform.Position != 0f )
+			if ( go.Tags.Has( tag ) && go.WorldPosition != 0f )
 				go.Destroy();
 		}
 	}
@@ -61,7 +61,7 @@ public class KillZone : Component, Component.ITriggerListener
 	public void CollisionEffects( Transform transform )
 	{
 		if ( KillSound is not null )
-			Sound.Play( KillSound, transform.Position );
+			Sound.Play( KillSound, WorldPosition );
 
 		if ( KillParticles is not null )
 			ParticleHelper.Instance.PlayInstantaneous( KillParticles, transform );

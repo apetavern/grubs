@@ -264,34 +264,7 @@ namespace Sandbox.Sdf
 
 			// TODO: The below wasn't working perfectly, so we just treat everything as one possibly disconnected polygon for now
 
-			return;
-
 			// Sort by area: largest negative first, largest positive last
-
-			EdgeLoops.Sort( ( a, b ) => a.Area.CompareTo( b.Area ) );
-
-			// Put negative loops after the positive loops that contain them
-
-			while ( EdgeLoops[0].Area < 0 )
-			{
-				var negLoop = EdgeLoops[0];
-				EdgeLoops.RemoveAt( 0 );
-
-				// Find containing positive loop
-
-				for ( var i = 0; i < EdgeLoops.Count; ++i )
-				{
-					var posLoop = EdgeLoops[i];
-
-					if ( !Contains( posLoop, negLoop ) )
-					{
-						continue;
-					}
-
-					EdgeLoops.Insert( i + 1, negLoop );
-					break;
-				}
-			}
 		}
 
 		private bool RemoveIfDegenerate( int firstIndex, int count )

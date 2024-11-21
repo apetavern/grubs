@@ -34,9 +34,9 @@ public sealed class DestructibleObject : Component
 		if ( !HasDamageMeshes )
 			return;
 
-		var damageDirection = (Transform.Position - damageInfo.WorldPosition).Normal;
-		var dotForward = Vector3.Dot( Transform.Rotation.Forward, damageDirection );
-		var dotUp = Vector3.Dot( Transform.Rotation.Up, damageDirection );
+		var damageDirection = (WorldPosition - damageInfo.WorldPosition).Normal;
+		var dotForward = Vector3.Dot( WorldRotation.Forward, damageDirection );
+		var dotUp = Vector3.Dot( WorldRotation.Up, damageDirection );
 		var isLeftSide = dotForward < 0;
 
 		var side = isLeftSide ? LeftSide : RightSide;

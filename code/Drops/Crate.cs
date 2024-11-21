@@ -31,7 +31,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 
 	private void HandleEquipmentCrateTrigger( Collider other, bool isTool = false )
 	{
-		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
+		if ( Connection.Local != other.GameObject.Root.Network.Owner )
 			return;
 
 		PickupEffects();
@@ -48,7 +48,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 			.FirstOrDefault( e => e.Data.Name == equipmentResource.Name );
 		equipment?.IncrementAmmo();
 
-		using ( Rpc.FilterInclude( grub.Network.OwnerConnection ) )
+		using ( Rpc.FilterInclude( grub.Network.Owner ) )
 		{
 			WorldPopupHelper.Instance.CreatePickupPopup( grub.GameObject.Id, equipmentResource.Icon );
 		}
@@ -58,7 +58,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 
 	private void HandleHealthCrateTrigger( Collider other )
 	{
-		if ( Connection.Local != other.GameObject.Root.Network.OwnerConnection )
+		if ( Connection.Local != other.GameObject.Root.Network.Owner )
 			return;
 
 		PickupEffects();
@@ -78,6 +78,6 @@ public sealed class Crate : Component, Component.ITriggerListener
 	[Broadcast]
 	private void PickupEffects()
 	{
-		Sound.Play( PickupSound, Transform.Position );
+		Sound.Play( PickupSound, WorldPosition );
 	}
 }

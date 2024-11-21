@@ -18,25 +18,25 @@ public class PhysicsProjectile : Projectile
 
 		if ( SetPositionOnStart )
 		{
-			Transform.Position = Source.GetStartPosition( Droppable );
+			WorldPosition = Source.GetStartPosition( Droppable );
 
 			if ( Droppable )
 				return;
 
 			var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
 			dir *= Rotation.FromPitch( Game.Random.Float( -DirectionRandomizer, DirectionRandomizer ) );
-			Transform.Position += dir * 16f;
+			WorldPosition += dir * 16f;
 
 			if ( !PhysicsBody.IsValid() )
 				return;
-			PhysicsBody.ApplyImpulseAt( PhysicsBody.Transform.Position + Vector3.Up * 0.5f,
+			PhysicsBody.ApplyImpulseAt( PhysicsBody.WorldPosition + Vector3.Up * 0.5f,
 				dir * Charge * ProjectileSpeed );
 		}
 
 		if ( SetRotationOnStart )
 		{
 			var dir = PlayerController.EyeRotation.Forward.Normal * PlayerController.Facing;
-			Transform.Rotation = Rotation.LookAt( dir, Vector3.Up );
+			WorldRotation = Rotation.LookAt( dir, Vector3.Up );
 		}
 	}
 }

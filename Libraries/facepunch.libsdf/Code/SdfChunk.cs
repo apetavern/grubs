@@ -113,7 +113,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 		}
 	}
 
-	public abstract Vector3 LocalPosition { get; }
+	public abstract Vector3 ChunkPosition { get; }
 
 	private readonly List<Mesh> _usedMeshes = new();
 
@@ -254,7 +254,6 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 	/// <summary>
 	/// Implements updating the render / collision meshes of this chunk.
 	/// </summary>
-	/// <param name="token">Token to cancel outdated mesh updates</param>
 	/// <returns>Task that completes when the meshes have finished updating.</returns>
 	protected abstract Task OnUpdateMeshAsync();
 
@@ -380,6 +379,11 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 			{
 				Batchable = Resource.ReferencedTextures is not { Count: > 0 }
 			};
+
+			foreach ( var tag in World.Tags )
+			{
+				Renderer.Tags.Add( tag );
+			}
 		}
 
 		Renderer.Model = model;
@@ -394,7 +398,7 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 			return;
 
 		Renderer.Transform = World.Transform.World;
-		Renderer.Position = World.Transform.World.PointToWorld( LocalPosition );
+		Renderer.Position = World.Transform.World.PointToWorld( ChunkPosition );
 	}
 
 	private void UpdateOpacity()

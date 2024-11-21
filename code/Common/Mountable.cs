@@ -34,7 +34,7 @@ public sealed class Mountable : Component
 		Grub.Animator.GrubRenderer.Set( "heightdiff", 0f );
 		Grub.Animator.GrubRenderer.Set( "aimangle", 0f );
 		Grub.Animator.GrubRenderer.Set( "onrope", false );
-		Grub.Transform.Rotation = Rotation.LookAt( Grub.Transform.Rotation.Forward.WithZ( 0 ), Vector3.Up );
+		Grub.WorldRotation = Rotation.LookAt( Grub.WorldRotation.Forward.WithZ( 0 ), Vector3.Up );
 		Grub.PlayerController.Enabled = true;
 		Grub.PlayerController.IsOnRope = false;
 		Grub.CharacterController.Velocity = Components.Get<Rigidbody>().Velocity;
@@ -51,6 +51,6 @@ public sealed class Mountable : Component
 		// kidd: We really shouldn't have to check if the transforms are null, but we're getting NRE spammed somehow.
 		// Probably s&box issue, but don't know where to begin reproducing.
 		if ( Grub.IsValid() && Grub.Transform is not null && Transform is not null )
-			Grub.Transform.Position = Transform.Position;
+			Grub.WorldPosition = WorldPosition;
 	}
 }

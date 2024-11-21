@@ -97,8 +97,8 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	[Broadcast]
 	public void ExplodeEffects( Guid attackerGuid, string attackerName )
 	{
-		ExplosionHelper.Instance.Explode( this, Transform.Position, ExplosionRadius, ExplosionDamage, attackerGuid, attackerName );
-		Sound.Play( ExplosionSound, Transform.Position );
+		ExplosionHelper.Instance.Explode( this, WorldPosition, ExplosionRadius, ExplosionDamage, attackerGuid, attackerName );
+		Sound.Play( ExplosionSound, WorldPosition );
 
 		if ( Particles is null )
 			return;

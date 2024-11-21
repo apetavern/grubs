@@ -46,7 +46,7 @@ public class TeleportTool : Tool
 
 		if ( CursorModel.IsValid() )
 		{
-			CursorModel.Transform.Position = player.MousePosition;
+			CursorModel.WorldPosition = player.MousePosition;
 			var isValidPlacement = CheckValidPlacement();
 			CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
 		}
@@ -100,7 +100,7 @@ public class TeleportTool : Tool
 
 		var grub = Equipment.Grub;
 		var grubPosition = grub.Player.MousePosition;
-		grub.Transform.Position = grubPosition;
+		grub.WorldPosition = grubPosition;
 		TeleportEffects( grubPosition );
 
 		base.FireFinished();

@@ -240,8 +240,8 @@ public partial class Weapon : Component
 
 		var muzzle = GetMuzzlePosition();
 
-		ChargeGauge.Transform.Position = muzzle.Position;
-		ChargeGauge.Transform.Rotation = Rotation.LookAt( GetMuzzleForward() ) * Rotation.FromPitch( 90 );
+		ChargeGauge.WorldPosition = muzzle.Position;
+		ChargeGauge.WorldRotation = Rotation.LookAt( GetMuzzleForward() ) * Rotation.FromPitch( 90 );
 		ChargeGauge.SceneModel.Attributes.Set( "charge", _weaponCharge / 100f );
 
 		_weaponCharge = (int)Math.Clamp( _startedCharging / 2f * 100f, 0f, 100f );
@@ -267,7 +267,7 @@ public partial class Weapon : Component
 		{
 			// Perform a forward trace to find the position to drop the item
 			var dropTr = Scene.Trace.Ray( grub.EyePosition.Position,
-					grub.EyePosition.Position + grub.Transform.Rotation.Forward * 25f )
+					grub.EyePosition.Position + grub.WorldRotation.Forward * 25f )
 				.IgnoreGameObjectHierarchy( grub.GameObject )
 				.IgnoreGameObject( GameObject )
 				.Radius( 1f )
@@ -277,7 +277,7 @@ public partial class Weapon : Component
 
 			if ( dropTr.Hit )
 			{
-				startPosition -= grub.Transform.Rotation.Forward * 10f;
+				startPosition -= grub.WorldRotation.Forward * 10f;
 			}
 
 			return startPosition.WithY( 512 );
@@ -285,9 +285,9 @@ public partial class Weapon : Component
 
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		if ( muzzle is null )
-			return grub.EyePosition.Position + grub.Transform.Rotation.Forward * 4f;
+			return grub.EyePosition.Position + grub.WorldRotation.Forward * 4f;
 
-		var tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.Transform.Position, muzzle.Value.Position )
+		var tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.WorldPosition, muzzle.Value.Position )
 			.IgnoreGameObjectHierarchy( grub.GameObject )
 			.WithoutTags( "projectile" )
 			.Radius( 1f )

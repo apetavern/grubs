@@ -177,7 +177,7 @@ public partial class GrubsTerrain
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material )
 	{
 		TimeSinceLastModification = 0f;
-		sdf = sdf.Translate( new Vector2( 0, -Transform.Position.z ) );
+		sdf = sdf.Translate( new Vector2( 0, -WorldPosition.z ) );
 		world.AddAsync( sdf, material );
 	}
 
@@ -191,7 +191,7 @@ public partial class GrubsTerrain
 	private void Subtract( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer material, bool offset = false )
 	{
 		TimeSinceLastModification = 0f;
-		sdf = sdf.Translate( new Vector2( 0, -Transform.Position.z ) );
+		sdf = sdf.Translate( new Vector2( 0, -WorldPosition.z ) );
 		if ( offset )
 			sdf = sdf.Translate( new Vector2( -_lengthOffset, _heightOffset ) );
 		world.SubtractAsync( sdf, material );

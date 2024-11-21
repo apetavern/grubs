@@ -44,10 +44,10 @@ public sealed class FireHelper : Component
 		for ( var i = 0; i < FireObjects.Count; i++ )
 		{
 			if ( FireParticles.Count >= FireObjects.Count )
-				FireObjects[i].Transform.Position = Vector3.Lerp( FireObjects[i].Transform.Position,
+				FireObjects[i].WorldPosition = Vector3.Lerp( FireObjects[i].WorldPosition,
 					FireParticles[i].Position,
 					Time.Delta *
-					Vector3.DistanceBetween( FireObjects[i].Transform.Position, FireParticles[i].Position ) );
+					Vector3.DistanceBetween( FireObjects[i].WorldPosition, FireParticles[i].Position ) );
 		}
 
 		for ( var i = 0; i < FireParticles.Count; i++ )
@@ -137,7 +137,7 @@ public sealed class FireHelper : Component
 
 	private void HandleGrubExplosion( Grub grub, Vector3 position )
 	{
-		var dir = (grub.Transform.Position - position).Normal;
+		var dir = (grub.WorldPosition - position).Normal;
 		dir = dir.WithY( 0f );
 
 		grub.CharacterController.Punch( dir * 16f );

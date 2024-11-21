@@ -43,7 +43,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 			{
 				var go = player.GrubPrefab.Clone();
 				var spawn = GrubsTerrain.Instance.FindSpawnLocation( size: 8f );
-				go.Transform.Position = spawn;
+				go.WorldPosition = spawn;
 				go.Network.SetOrphanedMode( NetworkOrphaned.Host );
 				go.NetworkSpawn();
 
@@ -52,7 +52,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 				player.GrubQueue.Add( grub.Id );
 
-				go.Network.AssignOwnership( player.Network.OwnerConnection );
+				go.Network.AssignOwnership( player.Network.Owner );
 
 				if ( i == 0 )
 				{
@@ -215,7 +215,7 @@ public sealed class FreeForAllGamemode : Gamemode, Component.INetworkListener
 
 		var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: true, maxAngle: 25f );
 		var crate = CrateUtility.Instance.SpawnCrate( dropType );
-		crate.Transform.Position = spawnPos;
+		crate.WorldPosition = spawnPos;
 
 		ChatHelper.Instance.SendInfoMessage( message );
 	}

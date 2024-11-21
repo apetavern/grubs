@@ -20,7 +20,7 @@ public class ArcProjectile : Projectile
 		if ( !Source.IsValid() )
 			return;
 
-		Transform.Position = Source.GetStartPosition();
+		WorldPosition = Source.GetStartPosition();
 
 		if ( !PlayerController.IsValid() )
 			return;
@@ -29,7 +29,7 @@ public class ArcProjectile : Projectile
 		Segments = CalculateTrajectory( dir, Charge );
 		if ( Segments.Count == 0 )
 			return;
-		Transform.Position = Segments[0].StartPos.WithY( 512f );
+		WorldPosition = Segments[0].StartPos.WithY( 512f );
 		Transform.ClearInterpolation();
 	}
 
@@ -77,9 +77,9 @@ public class ArcProjectile : Projectile
 
 	private void UpdateFromArcSegment( ArcSegment segment, float alpha )
 	{
-		Transform.Rotation = Rotation.Slerp( Transform.Rotation, Rotation.LookAt( segment.EndPos - segment.StartPos ),
+		WorldRotation = Rotation.Slerp( WorldRotation, Rotation.LookAt( segment.EndPos - segment.StartPos ),
 			alpha );
-		Transform.Position = Vector3.Lerp( segment.StartPos, segment.EndPos, alpha ).WithY( 512f );
+		WorldPosition = Vector3.Lerp( segment.StartPos, segment.EndPos, alpha ).WithY( 512f );
 	}
 
 	private List<ArcSegment> CalculateTrajectory( Vector3 direction, int charge )
@@ -88,7 +88,7 @@ public class ArcProjectile : Projectile
 			return Segments;
 
 		var force = charge * 0.5f;
-		var arcTrace = new ArcTrace( Grub, Transform.Position );
+		var arcTrace = new ArcTrace( Grub, WorldPosition );
 		return ShouldBounce
 			? arcTrace.RunTowardsWithBounces( Scene, direction, force, 0f, MaxBounces )
 			: arcTrace.RunTowards( Scene, direction, force, 0f );

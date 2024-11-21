@@ -105,7 +105,7 @@ public abstract class Gamemode : Component
 
 	private async Task ShowDamagedGrub( Grub grub )
 	{
-		if ( grub.Transform.Position.z < -GrubsTerrain.Instance.WorldTextureHeight )
+		if ( grub.WorldPosition.z < -GrubsTerrain.Instance.WorldTextureHeight )
 			return;
 
 		CameraTarget = grub.GameObject.Id;

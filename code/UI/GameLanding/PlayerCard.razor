@@ -31,7 +31,7 @@
 @code
 {
     public Player Player { get; set; }
-    public Connection Connection => Player.Network.OwnerConnection;
+    public Connection Connection => Player.Network.Owner;
 
     private int _statIndex = 0;
     private TimeSince _timeSinceStatsChanged;
