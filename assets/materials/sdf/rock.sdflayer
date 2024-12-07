@@ -1,13 +1,14 @@
 {
-  "Depth": 64,
-  "Offset": -64,
+  "Depth": 128,
+  "Offset": -128,
   "TexCoordSize": 256,
   "FrontFaceMaterial": "materials/environment/rocks_a.vmat",
   "BackFaceMaterial": "materials/environment/rocks_a.vmat",
   "CutFaceMaterial": "materials/environment/rocks_a.vmat",
-  "EdgeStyle": "Round",
+  "EdgeStyle": "Sharp",
+  "MaxSmoothAngle": 180,
   "EdgeRadius": 8,
-  "EdgeFaces": 3,
+  "EdgeFaces": 32,
   "IsTextureSourceOnly": false,
   "CollisionTags": "solid",
   "QualityLevel": "Medium",
@@ -19,5 +20,7 @@
       "TargetAttribute": "ScorchLayer",
       "Source": "materials/sdf/scorch.sdflayer"
     }
-  ]
+  ],
+  "__references": [],
+  "__version": 0
 }
