@@ -47,3 +47,4 @@ _bakeresourcecache/
 grubs.sln
 Libraries/facepunch.libsdf/.bin
 Libraries/trndlr.quickswitcher/.bin
+.sbox/project.json
