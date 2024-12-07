@@ -117,21 +117,19 @@ partial class PolygonMeshBuilder
 
 	private int FixUp( ref Edge v, in Edge e )
 	{
-		if ( !Fill_Helpers.TryGetValue( e.Index, out var helperInfo ) )
-			return v.Index;
+		var helperInfo = Fill_Helpers[e.Index];
 
 		if ( helperInfo.WasMerge )
+		{
 			return ConnectTwoWay( ref v, ref _allEdges[helperInfo.Index] );
+		}
 
 		return v.Index;
 	}
 
 	private void SetHelper( in Edge edge, in Edge helper, bool wasMerge )
 	{
-		if ( !Fill_Helpers.ContainsKey( edge.Index ) )
-			Fill_Helpers.Add( edge.Index, (helper.Index, wasMerge) );
-		else
-			Fill_Helpers[edge.Index] = (helper.Index, wasMerge);
+		Fill_Helpers[edge.Index] = (helper.Index, wasMerge);
 	}
 
 	private void AddSweepEdge( in Edge edge )
@@ -174,24 +172,22 @@ partial class PolygonMeshBuilder
 
 	private int FindAboveSweepEdge( in Edge edge )
 	{
-		var origin = edge.Origin;
-		var closest = -1;
-		var minDist = float.MaxValue;
+		// TODO: could binary search
 
 		foreach ( var other in Fill_SweepEdges )
 		{
 			if ( edge.PrevEdge == other.Index || edge.Index == other.Index )
-				continue;
-
-			var deltaY = other.GetEdgeY( origin.x ) - origin.y;
-			if ( deltaY >= -0.0001f && deltaY < minDist )
 			{
-				minDist = deltaY;
-				closest = other.Index;
+				continue;
+			}
+
+			if ( other.GetEdgeY( edge.Origin.x ) - edge.Origin.y >= 0f )
+			{
+				return other.Index;
 			}
 		}
 
-		return closest != -1 ? closest : edge.Index;
+		throw new Exception();
 	}
 
 	private void Fill_UpdateExistingVertices()
@@ -217,7 +213,9 @@ partial class PolygonMeshBuilder
 	{
 		Fill_SortedEdges ??= new List<int>();
 		Fill_SortedEdges.Clear();
+
 		Fill_SortedEdges.AddRange( _activeEdges );
+
 		Fill_SortedEdges.Sort( ( a, b ) => Compare( _allEdges[a].Origin, _allEdges[b].Origin ) );
 
 		Fill_Helpers ??= new Dictionary<int, (int Index, bool WasMerge)>();
@@ -225,6 +223,10 @@ partial class PolygonMeshBuilder
 
 		Fill_SweepEdges ??= new List<SweepEdge>();
 		Fill_SweepEdges.Clear();
+
+		// Based on https://www.cs.umd.edu/class/spring2020/cmsc754/Lects/lect05-triangulate.pdf
+
+		// Add pairs of edges to split into x-monotonic polygons
 
 		foreach ( var index in Fill_SortedEdges )
 		{
@@ -234,51 +236,52 @@ partial class PolygonMeshBuilder
 			ref var next = ref _allEdges[edge.NextEdge];
 			ref var prev = ref _allEdges[edge.PrevEdge];
 
-			var evt = CategorizeEvent( in prev, in edge, in next );
+			switch ( CategorizeEvent( in prev, in edge, in next ) )
+			{
+				case SweepEvent.Start:
+					AddSweepEdge( in edge );
+					SetHelper( in edge, in edge, false );
+					break;
 
-			if ( evt == SweepEvent.Start )
-			{
-				AddSweepEdge( in edge );
-				SetHelper( in edge, in edge, false );
-				continue;
-			}
+				case SweepEvent.End:
+					FixUp( ref edge, in prev );
+					RemoveSweepEdge( in prev );
+					break;
 
-			if ( evt == SweepEvent.End )
-			{
-				FixUp( ref edge, in prev );
-				RemoveSweepEdge( in prev );
-				continue;
-			}
+				case SweepEvent.Split:
+					{
+						ref var above = ref _allEdges[FindAboveSweepEdge( in edge )];
+						ref var helper = ref _allEdges[Fill_Helpers[above.Index].Index];
+						ref var fixedUp = ref _allEdges[ConnectTwoWay( ref edge, ref helper )];
+						AddSweepEdge( in edge );
+						SetHelper( in above, in fixedUp, false );
+						SetHelper( in edge, in edge, false );
+						break;
+					}
 
-			var aboveIndex = FindAboveSweepEdge( in edge );
-			if ( evt == SweepEvent.Split && aboveIndex != edge.Index )
-			{
-				ref var above = ref _allEdges[aboveIndex];
-				ref var helper = ref _allEdges[Fill_Helpers[above.Index].Index];
-				ref var fixedUp = ref _allEdges[ConnectTwoWay( ref edge, ref helper )];
-				AddSweepEdge( in edge );
-				SetHelper( in above, in fixedUp, false );
-				SetHelper( in edge, in edge, false );
-			}
-			else if ( evt == SweepEvent.Merge )
-			{
-				ref var above = ref _allEdges[aboveIndex];
-				RemoveSweepEdge( in prev );
-				ref var new1 = ref _allEdges[FixUp( ref edge, in above )];
-				FixUp( ref new1, in prev );
-				SetHelper( in above, in new1, true );
-			}
-			else if ( evt == SweepEvent.Upper )
-			{
-				FixUp( ref edge, in prev );
-				ReplaceSweepEdge( in prev, in edge );
-				SetHelper( in edge, in edge, false );
-			}
-			else if ( evt == SweepEvent.Lower && aboveIndex != edge.Index )
-			{
-				ref var above = ref _allEdges[aboveIndex];
-				ref var helper = ref _allEdges[FixUp( ref edge, in above )];
-				SetHelper( in above, in helper, false );
+				case SweepEvent.Merge:
+					{
+						ref var above = ref _allEdges[FindAboveSweepEdge( in edge )];
+						RemoveSweepEdge( in prev );
+						ref var new1 = ref _allEdges[FixUp( ref edge, in above )];
+						FixUp( ref new1, in prev );
+						SetHelper( in above, in new1, true );
+						break;
+					}
+
+				case SweepEvent.Upper:
+					FixUp( ref edge, in prev );
+					ReplaceSweepEdge( in prev, in edge );
+					SetHelper( in edge, in edge, false );
+					break;
+
+				case SweepEvent.Lower:
+					{
+						ref var above = ref _allEdges[FindAboveSweepEdge( in edge )];
+						ref var helper = ref _allEdges[FixUp( ref edge, in above )];
+						SetHelper( in above, in helper, false );
+						break;
+					}
 			}
 		}
 	}
