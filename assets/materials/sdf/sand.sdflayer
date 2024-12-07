@@ -6,8 +6,8 @@
   "BackFaceMaterial": "materials/environment/sand_shells.vmat",
   "CutFaceMaterial": "materials/environment/sand_shells.vmat",
   "EdgeStyle": "Round",
-  "MaxSmoothAngle": 180,
-  "EdgeRadius": 8,
+  "MaxSmoothAngle": 45,
+  "EdgeRadius": 0.25,
   "EdgeFaces": 3,
   "IsTextureSourceOnly": false,
   "CollisionTags": "solid",
@@ -20,5 +20,7 @@
       "TargetAttribute": "ScorchLayer",
       "Source": "materials/sdf/scorch.sdflayer"
     }
-  ]
+  ],
+  "__references": [],
+  "__version": 0
 }
