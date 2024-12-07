@@ -12,49 +12,70 @@ public partial class GrubsTerrain
 	public Sdf2DLayer CerealMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/cereal.sdflayer" );
 	public Sdf2DLayer GirderMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/girder.sdflayer" );
 
+	private void InitializeMaterialLayer(Sdf2DLayer layer)
+	{
+		layer.EdgeStyle = EdgeStyle.Bevel;
+		layer.EdgeRadius = 0.25f;
+		layer.EdgeFaces = 3;
+		layer.MaxSmoothAngle = 45;
+	}
+
 	public Dictionary<Sdf2DLayer, float> GetActiveMaterials( MaterialsConfig cfg )
 	{
 		var materials = new Dictionary<Sdf2DLayer, float>();
-
-		// var terrainType = GrubsConfig.WorldTerrainEnvironmentType;
-
 		var activeMaterials = GetSandMaterials();
 
-		// activeMaterials = terrainType switch
-		// {
-		// 	GrubsConfig.TerrainEnvironmentType.Sand => GetSandMaterials(),
-		// 	GrubsConfig.TerrainEnvironmentType.Dirt => GetDirtMaterials(),
-		// 	GrubsConfig.TerrainEnvironmentType.Cereal => GetCerealMaterials(),
-		// 	_ => GetSandMaterials(),
-		// };
+		if ( cfg.includeBackground )
+		{
+			var bgMaterial = activeMaterials.ElementAt( 1 );
+			InitializeMaterialLayer(bgMaterial);
+			materials.Add( bgMaterial, cfg.bgOffset );
+		}
 
 		if ( cfg.includeForeground )
-			materials.Add( activeMaterials.ElementAt( 0 ), cfg.fgOffset );
-		if ( cfg.includeBackground )
-			materials.Add( activeMaterials.ElementAt( 1 ), cfg.bgOffset );
+		{
+			var fgMaterial = activeMaterials.ElementAt( 0 );
+			InitializeMaterialLayer(fgMaterial);
+			materials.Add( fgMaterial, cfg.fgOffset );
+		}
+
 		if ( cfg.isDestruction )
-			materials.Add( GetAllMaterials().First(), 0f );
+		{
+			var destructionMaterial = GetAllMaterials().First();
+			InitializeMaterialLayer(destructionMaterial);
+			var offset = cfg.fgOffset;
+			if ( materials.Any() )
+				offset = materials.Max(x => x.Value) + 0.01f;
+			materials.Add( destructionMaterial, offset );
+		}
 
 		return materials;
 	}
 
 	public List<Sdf2DLayer> GetSandMaterials()
 	{
+		InitializeMaterialLayer(SandMaterial);
+		InitializeMaterialLayer(RockMaterial);
 		return new List<Sdf2DLayer>() { SandMaterial, RockMaterial };
 	}
 
 	public List<Sdf2DLayer> GetDirtMaterials()
 	{
+		InitializeMaterialLayer(DirtMaterial);
+		InitializeMaterialLayer(RockMaterial);
 		return new List<Sdf2DLayer>() { DirtMaterial, RockMaterial };
 	}
 
 	public List<Sdf2DLayer> GetCerealMaterials()
 	{
+		InitializeMaterialLayer(CerealMaterial);
+		InitializeMaterialLayer(RockMaterial);
 		return new List<Sdf2DLayer>() { CerealMaterial, RockMaterial };
 	}
 
 	public List<Sdf2DLayer> GetGirderMaterials()
 	{
+		InitializeMaterialLayer(GirderMaterial);
 		return new List<Sdf2DLayer>() { GirderMaterial };
 	}
 
