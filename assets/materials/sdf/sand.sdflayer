@@ -11,10 +11,10 @@
   "EdgeFaces": 32,
   "IsTextureSourceOnly": false,
   "CollisionTags": "solid",
-  "QualityLevel": "Medium",
+  "QualityLevel": "High",
   "ChunkResolution": 16,
-  "ChunkSize": 256,
-  "MaxDistance": 64,
+  "ChunkSize": 64,
+  "MaxDistance": 32,
   "ReferencedTextures": [
     {
       "TargetAttribute": "ScorchLayer",

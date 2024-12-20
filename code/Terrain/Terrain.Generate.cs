@@ -1,4 +1,6 @@
-﻿using Sandbox.Utility;
+﻿using Grubs.Extensions;
+using Sandbox.Sdf;
+using Sandbox.Utility;
 
 namespace Grubs.Terrain;
 
@@ -27,14 +29,15 @@ public partial class GrubsTerrain
 
 	private void SetupGeneratedWorld()
 	{
-		var cfg = new MaterialsConfig( true, true );
-		var materials = GetActiveMaterials( cfg );
-		AddWorldBox( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
+		// var cfg = new MaterialsConfig( true, true );
+		// var materials = GetActiveMaterials( cfg );
+		// AddWorldBox( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
 
 		WorldTextureLength = GrubsConfig.TerrainLength;
 		WorldTextureHeight = GrubsConfig.TerrainHeight;
 
-		GenerateWorld();
+		CreateNoiseMap();
+		// GenerateWorldTextureSdf();
 		LastChanged = 0f;
 	}
 
@@ -53,6 +56,15 @@ public partial class GrubsTerrain
 	private float resolution = 8f;
 
 	private int maxY;
+
+	private void GenerateWorldTextureSdf()
+	{
+		var worldLength = GrubsConfig.TerrainLength;
+		var worldHeight = GrubsConfig.TerrainHeight;
+		
+		var random = Game.Random.Int( 99999 );
+
+	}
 
 	private void GenerateWorld()
 	{
@@ -214,4 +226,102 @@ public partial class GrubsTerrain
 
 		Instance.ResetTerrain();
 	}
+	
+	// public static float[] GenerateHeights( float worldHeight )
+	// {
+	// 	var heights = new float[(int)worldHeight + 1];
+	// 	for (var i = 0; i < heights.Length; i++)
+	// 	{
+	// 		heights[i] = Noise.Perlin( Game.Random.Float() * worldHeight );
+	// 	}
+	//
+	// 	return heights;
+	// }
 }
+
+// file record HeightMap( Curve HeightCurve, float WorldLength, float WorldHeight, float Random ) : INoiseField
+// {
+// 	private readonly float[] _heights = GrubsTerrain.GenerateHeights( WorldHeight );
+// 	
+// 	public float Sample( float x, float y )
+// 	{
+// 		x = Math.Clamp( x, 0, WorldLength );
+// 		var index = x;
+// 		var leftIndex = (int)index;
+// 		var rightIndex = Math.Min( leftIndex + 1, _heights.Length - 1 );
+//
+// 		var fraction = index - leftIndex;
+// 		var height = MathX.Lerp( _heights[leftIndex], _heights[rightIndex], fraction );
+// 		return y <= height ? 1f : 0f;
+// 	}
+//
+// 	public float Sample( float x, float y, float z )
+// 	{
+// 		throw new NotImplementedException();
+// 	}
+// }
+
+// file record SimplexNoiseField( Curve Curve, float TerrainLength, float TerrainHeight, float Amplitude, float Frequency ) : INoiseField
+// {
+// 	public float Sample( float x, float y )
+// 	{
+// 		// var realX = (x + TerrainLength / 2f).Clamp( 0, TerrainLength);
+// 		// var eval = Curve.Evaluate( realX / TerrainLength );
+// 		// Log.Info( $"Curve Evaluate: {eval}" );
+// 		// var baseValue = (1f - eval) * baseNoise.Sample( x, y );
+// 		// return baseValue;
+// 		
+// 		var noise = Amplitude * Noise.Perlin( x * Frequency, y * Frequency );
+// 		Log.Info( noise );
+// 		return noise * TerrainLength / 512f;
+// 	}
+// 	
+// 	public float Sample( float x, float y, float z )
+// 	{
+// 		throw new NotImplementedException();
+// 	}
+// }
+		
+// var heightMap = new HeightMap( TerrainCurve, worldLength, worldHeight, random );
+// var terrainSdf = new NoiseSdf2D(
+// 	new Vector2( -worldLength / 2f, 0 ), 
+// 	new Vector2( worldLength / 2f, worldHeight ), 
+// 	heightMap
+// );
+// var cfg = new MaterialsConfig( true, true );
+// var materials = GetActiveMaterials( cfg );
+// Add( SdfWorld, terrainSdf, materials.ElementAt( 0 ).Key );
+
+// var simplexNoise = new SimplexNoiseField(
+// 	TerrainCurve,
+// 	wLength,
+// 	wHeight,
+// 	amplitude,
+// 	frequency
+// 	// Noise.SimplexField( new Noise.FractalParameters( Seed: r, Frequency: frequency ) )
+// );
+// Log.Info( simplexNoise );
+// var terrainSdf = new NoiseSdf2D(
+// 	new Vector2( -wLength / 2f, 0 ), 
+// 	new Vector2( wLength / 2f, wHeight ), 
+// 	simplexNoise );
+
+// for ( var x = 0; x < pointsX; x++ )
+// {
+// 	for ( var y = 0; y < pointsY; y++ )
+// 	{
+// 		var xRel = x / (float)pointsX;
+// 		var yRel = y / (float)pointsY;
+// 		var fade = TerrainCurve.Evaluate( xRel );
+// 		var noise = Noise.Simplex( xRel * freq + r, yRel * freq + r );
+// 		var value = fade * pointsY / y * noise;
+// 		
+// 		data.SetPixel( pointsX, x, y, value > 0.5f ? Color.Black : Color.White );
+// 	}
+// }
+//
+// var cfg = new MaterialsConfig( true, true );
+// var materials = GetActiveMaterials( cfg );
+//
+// var texSdf = new TextureSdf( tex, 10, pointsX );
+// SdfWorld.AddAsync( texSdf, materials.ElementAt( 0 ).Key );

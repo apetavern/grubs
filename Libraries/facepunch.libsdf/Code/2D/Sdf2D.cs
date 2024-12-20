@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using Sandbox.Utility;
 
 namespace Sandbox.Sdf;
 
@@ -485,5 +485,39 @@ public record struct ExpandedSdf2D<T>( T Sdf, float Margin ) : ISdf2D
 		return new ExpandedSdf2D<T>(
 			(T) ISdf2D.Read( ref reader, sdfTypes ),
 			reader.Read<float>() );
+	}
+}
+
+public record struct NoiseSdf2D( Vector2 Min, Vector2 Max, float[,] NoiseMap ) : ISdf2D
+{
+	/// <inheritdoc />
+	public Rect Bounds => new( Min, Max - Min );
+
+	/// <inheritdoc />
+	public float this[Vector2 pos]
+	{
+		get
+		{
+			var noisePos = pos.WithX( pos.x + Max.x );
+			
+			if ( noisePos.x < 0 
+			     || noisePos.y < 0 
+			     || noisePos.x >= NoiseMap.GetLength( 0 ) 
+			     || noisePos.y >= NoiseMap.GetLength( 1 ) )
+			{
+				return 0f;
+			}
+			return NoiseMap[(int)noisePos.x, (int)noisePos.y];
+		}
+	}
+
+	public void WriteRaw( ref ByteStream writer, Dictionary<TypeDescription, int> sdfTypes )
+	{
+		throw new NotImplementedException();
+	}
+
+	public static NoiseSdf2D ReadRaw( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
+	{
+		throw new NotImplementedException();
 	}
 }
