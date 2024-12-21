@@ -2,6 +2,21 @@
   "__guid": "67b15fb7-ad1b-40bd-9930-4c97606439c7",
   "GameObjects": [
     {
+      "__guid": "27ee65c0-3bb1-48b4-8573-4147034d45ab",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "9139f7ce-af77-484e-9b0f-2eacc74e7be3",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "beach"
+        }
+      ]
+    },
+    {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
       "Flags": 0,
       "Name": "Static",
@@ -21,8 +36,15 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "MaterialOverride": "materials/effects/water/water_01a.vmat",
               "Model": "models/waterplane.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             },
@@ -46,7 +68,8 @@
               "Center": "0,0,-25",
               "IsTrigger": true,
               "Scale": "50,50,50",
-              "Static": true
+              "Static": true,
+              "SurfaceVelocity": "0,0,0"
             }
           ]
         },
@@ -80,7 +103,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "b2bcddb4-5b0f-4bb3-8201-b7c421237274",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/desert_01.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -97,7 +127,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ee1c4f2a-a2ff-4217-8301-1a6c63b13492",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/sky/skydome.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "Off",
               "Tint": "1,1,1,1"
             }
@@ -131,8 +168,25 @@
             {
               "__type": "Sandbox.SoundBoxComponent",
               "__guid": "ec1fbee2-f0fd-4f96-a37d-b1267fdb809a",
+              "Distance": 512,
               "DistanceAttenuation": false,
               "DistanceAttenuationOverride": false,
+              "Falloff": [
+                {
+                  "x": 0,
+                  "y": 1,
+                  "in": 3.1415927,
+                  "out": -3.1415927,
+                  "mode": "Mirrored"
+                },
+                {
+                  "x": 1,
+                  "y": 0,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Force2d": false,
               "MaxRepeatTime": 0,
               "MinRepeatTime": 0,
@@ -169,7 +223,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "f06bb6bb-0b0b-4750-a0ac-d32fab9a2dd5",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -188,7 +249,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "1ea7cd2e-73b9-404c-92e7-4639ab065305",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -206,7 +274,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "5fd0171f-dcd5-411d-80e3-52c3b57e1d47",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/land_01/land_03.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -225,7 +300,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "a30f0cd3-a7d3-405a-beda-a328f3cb85bc",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/land_01/land_04.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -244,7 +326,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "4c248856-24f9-4161-88fb-213adc757c69",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/land_01/land_02.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -263,7 +352,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ecdfced4-2d94-42b6-a4ea-a02e38c9b1a1",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/land_01/land_02.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -282,7 +378,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "5663d226-1cdf-4c60-9e12-2f04d4812252",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/land_01/land_01.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -301,7 +404,14 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "904df15a-8a17-457c-8ad6-7372ffd365b7",
               "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
               "Model": "models/environment/islands/land_01/land_01.vmdl",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -410,27 +520,47 @@
             "component_type": "Sdf2DWorld"
           },
           "TerrainCurve": [
-            {},
+            {
+              "x": 0,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
             {
               "x": 0.23511904,
               "y": 1,
+              "in": 0,
+              "out": 0,
               "mode": "Flat"
             },
             {
               "x": 0.35416666,
-              "y": 0.80173004
+              "y": 0.80173004,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
             },
             {
               "x": 0.55505955,
-              "y": 0.8484042
+              "y": 0.8484042,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
             },
             {
               "x": 0.6755952,
               "y": 1,
+              "in": 0,
+              "out": 0,
               "mode": "Flat"
             },
             {
-              "x": 1
+              "x": 1,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
             }
           ],
           "Water": {
@@ -443,6 +573,50 @@
         {
           "__type": "Sandbox.Sdf.Sdf2DWorld",
           "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a",
+          "Curve": [
+            {
+              "x": 0,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.23511904,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Flat"
+            },
+            {
+              "x": 0.35416666,
+              "y": 0.80173004,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.55505955,
+              "y": 0.8484042,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.6755952,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Flat"
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
           "HasPhysics": true
         }
       ]
@@ -484,10 +658,13 @@
         {
           "__type": "Sandbox.AmbientOcclusion",
           "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
-          "FalloffDistance": 1,
-          "Intensity": 8,
+          "__version": 1,
+          "DenoiseMode": "Temporal",
+          "FalloffRange": 0.75,
+          "Intensity": 0.15,
           "Quality": "High",
-          "Radius": 32
+          "Radius": 128,
+          "ThinCompensation": 0
         },
         {
           "__type": "Sandbox.Sharpen",
@@ -598,7 +775,6 @@
         {
           "__type": "Sandbox.EnvmapProbe",
           "__guid": "e0b96ad4-750b-422a-b085-02f769a1a09e",
-          "Texture": "textures/cubemaps/default2.vtex",
           "Bounds": {
             "Mins": "-5000,-2000,-2000",
             "Maxs": "5000,2000,2000"
@@ -607,8 +783,10 @@
           "Feathering": 0.5,
           "FrameInterval": 5,
           "MaxDistance": 512,
+          "MultiBounce": false,
           "Projection": "Box",
           "RenderDynamically": false,
+          "Texture": "textures/cubemaps/default2.vtex",
           "TintColor": "1,1,1,1",
           "UpdateStrategy": "OnEnabled",
           "ZFar": 4096,
@@ -622,9 +800,13 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "beach"
+    },
     "NavMesh": {
       "Enabled": true,
       "IncludeStaticBodies": true,
@@ -638,9 +820,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "beach",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

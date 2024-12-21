@@ -10,6 +10,16 @@ namespace Sandbox.Sdf;
 [Title( "SDF 2D World" )]
 public partial class Sdf2DWorld : SdfWorld<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (int X, int Y), Sdf2DArray, ISdf2D>
 {
+	[Property] public Curve Curve { get; set; }
+	public static Curve TerrainCurve { get; set; }
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+
+		TerrainCurve = Curve;
+	}
+
 	/// <inheritdoc />
 	public override int Dimensions => 2;
 

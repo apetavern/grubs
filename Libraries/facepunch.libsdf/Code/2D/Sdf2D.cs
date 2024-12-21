@@ -35,9 +35,11 @@ public static class Sdf2DExtensions
 		ISdf2D.RegisterType( CircleSdf.ReadRaw );
 		ISdf2D.RegisterType( LineSdf.ReadRaw );
 		ISdf2D.RegisterType( TextureSdf.ReadRaw );
+		ISdf2D.RegisterType( HeightmapSdf2D.ReadRaw );
 		ISdf2D.RegisterType( TransformedSdf2D<ISdf2D>.ReadRaw );
 		ISdf2D.RegisterType( TranslatedSdf2D<ISdf2D>.ReadRaw );
 		ISdf2D.RegisterType( ExpandedSdf2D<ISdf2D>.ReadRaw );
+		ISdf2D.RegisterType( NoiseSdf2D.ReadRaw );
 	}
 
 	/// <summary>
@@ -385,6 +387,71 @@ public readonly struct TextureSdf : ISdf2D
 	}
 }
 
+public record struct HeightmapSdf2D : ISdf2D
+{
+	public float[] Heightmap { get; }
+	public Rect Bounds => new( Min, Max - Min );
+	
+	public Vector2 Min { get; }
+	public Vector2 Max { get; }
+	public float Frequency { get; set; }
+	public int Seed { get; }
+	
+	public HeightmapSdf2D( Vector2 min, Vector2 max, float freq, int seed )
+	{
+		Min = min;
+		Max = max;
+		Frequency = freq;
+		Seed = seed;
+
+		var curve = Sdf2DWorld.TerrainCurve;
+
+		Heightmap = new float[Bounds.Width.CeilToInt()];
+		
+		Game.SetRandomSeed( seed );
+		var random = Game.Random.Int( 99999 );
+		
+		for ( var x = 0; x < Heightmap.Length; x++ )
+		{
+			var noise = Utility.Noise.Perlin( (x + random) * freq );
+			Heightmap[x] = noise * max.y * curve.Evaluate( (float)x / Heightmap.Length );
+		}
+	}
+
+	public float this[ Vector2 pos ]
+	{
+		get
+		{
+			var noisePos = pos.WithX( pos.x + Max.x );
+
+			if ( noisePos.x < 0 || noisePos.y < 0 ||
+			     noisePos.x >= Heightmap.Length || noisePos.y >= Bounds.Height - 1 )
+			{
+				return int.MaxValue;
+			}
+			
+			var height = Heightmap[noisePos.x.FloorToInt()];
+			var dist = pos.y - height;
+			return dist;
+		}
+	}
+	
+	public void WriteRaw( ref ByteStream writer, Dictionary<TypeDescription, int> sdfTypes )
+	{
+		writer.Write( Min );
+		writer.Write( Max );
+		writer.Write( Frequency );
+		writer.Write( Seed );
+	}
+	
+	public static HeightmapSdf2D ReadRaw( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
+	{
+		return new HeightmapSdf2D(
+			reader.Read<Vector2>(), reader.Read<Vector2>(),
+			reader.Read<float>(), reader.Read<int>() );
+	}
+}
+
 /// <summary>
 /// Helper struct returned by <see cref="Sdf2DExtensions.Transform{T}(T,Transform2D)"/>
 /// </summary>
@@ -513,11 +580,29 @@ public record struct NoiseSdf2D( Vector2 Min, Vector2 Max, float[,] NoiseMap ) :
 
 	public void WriteRaw( ref ByteStream writer, Dictionary<TypeDescription, int> sdfTypes )
 	{
-		throw new NotImplementedException();
+		writer.Write( Min );
+		writer.Write( Max );
+		foreach ( var value in NoiseMap )
+		{
+			writer.Write( value );
+		}
 	}
 
 	public static NoiseSdf2D ReadRaw( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
 	{
-		throw new NotImplementedException();
+		var min = reader.Read<Vector2>();
+		var max = reader.Read<Vector2>();
+		var noiseMap = new float[(int)max.x * 2, (int)max.y * 2];
+		for ( var x = 0; x < noiseMap.GetLength( 0 ) - 1; x++ )
+		{
+			for ( var y = 0; y < noiseMap.GetLength( 1 ) - 1; y++ )
+			{
+				noiseMap[x, y] = reader.Read<float>();
+			}
+		}
+		return new NoiseSdf2D(
+			min,
+			max,
+			noiseMap );
 	}
 }
