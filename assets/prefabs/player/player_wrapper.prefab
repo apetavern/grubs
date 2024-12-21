@@ -1,0 +1,22 @@
+{
+  "RootObject": {
+    "__guid": "9a501176-452d-4433-8c4f-a98d44060cfb",
+    "Flags": 0,
+    "Name": "Player",
+    "Tags": "player",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Grubs.Systems.Pawn.Player",
+        "__guid": "2e4b2a05-4dec-42e8-9a75-609fe1d90a86"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

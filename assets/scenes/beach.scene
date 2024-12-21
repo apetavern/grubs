@@ -10,6 +10,7 @@
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "9139f7ce-af77-484e-9b0f-2eacc74e7be3",
+          "Changes": "",
           "Description": "",
           "SceneTags": "",
           "Title": "beach"
@@ -688,11 +689,11 @@
           "Enabled": true,
           "Components": [
             {
-              "__type": "Grubs.Helpers.NetHelper",
-              "__guid": "a42a14b9-a93d-46f5-a182-4716b80d6a7a",
-              "PlayerPrefab": {
+              "__type": "Grubs.Systems.Network.GrubsNetworkManager",
+              "__guid": "55821b2d-8a1a-4e94-bdb7-b2c9ff0d6123",
+              "ClientPrefab": {
                 "_type": "gameobject",
-                "prefab": "prefabs/player/player.prefab"
+                "prefab": "prefabs/player/client_wrapper.prefab"
               }
             }
           ]
@@ -808,7 +809,7 @@
       "Title": "beach"
     },
     "NavMesh": {
-      "Enabled": true,
+      "Enabled": false,
       "IncludeStaticBodies": true,
       "IncludeKeyframedBodies": true,
       "EditorAutoUpdate": true,

@@ -215,7 +215,7 @@ public static class GrubsConfig
 	/// The frequency of the curves in the terrain's heightmap.
 	/// </summary>
 	[ConVar( "terrain_frequency" )]
-	public static float TerrainFrequency { get; set; } = 0.5f;
+	public static float TerrainFrequency { get; set; } = 0.1f;
 
 	public static readonly List<string> PresetGrubNames = new()
 	{
