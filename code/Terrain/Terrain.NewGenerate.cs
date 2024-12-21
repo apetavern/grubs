@@ -29,6 +29,13 @@ public partial class GrubsTerrain
 			freq,
 			random );
 		
+		var noiseSdf = new NoiseSdf2D(
+			new Vector2( -worldLength / 2f, 0 ),
+			new Vector2( worldLength / 2f, worldHeight ),
+			GrubsConfig.TerrainFrequency / 4f,
+			GrubsConfig.TerrainNoiseZoom * 2f,
+			random );
+		
 		// // Generate heightMap, which determines base terrain curve.
 		// for ( var x = 0; x < pointsX; x++ )
 		// {
@@ -56,5 +63,6 @@ public partial class GrubsTerrain
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
 		Add( SdfWorld, heightMapSdf, materials.ElementAt( 0 ).Key );
+		Subtract( SdfWorld, noiseSdf, materials.ElementAt( 0 ).Key );
 	}
 }

@@ -36,10 +36,10 @@ public static class Sdf2DExtensions
 		ISdf2D.RegisterType( LineSdf.ReadRaw );
 		ISdf2D.RegisterType( TextureSdf.ReadRaw );
 		ISdf2D.RegisterType( HeightmapSdf2D.ReadRaw );
+		ISdf2D.RegisterType( NoiseSdf2D.ReadRaw );
 		ISdf2D.RegisterType( TransformedSdf2D<ISdf2D>.ReadRaw );
 		ISdf2D.RegisterType( TranslatedSdf2D<ISdf2D>.ReadRaw );
 		ISdf2D.RegisterType( ExpandedSdf2D<ISdf2D>.ReadRaw );
-		ISdf2D.RegisterType( NoiseSdf2D.ReadRaw );
 	}
 
 	/// <summary>
@@ -389,13 +389,18 @@ public readonly struct TextureSdf : ISdf2D
 
 public record struct HeightmapSdf2D : ISdf2D
 {
-	public float[] Heightmap { get; }
 	public Rect Bounds => new( Min, Max - Min );
 	
-	public Vector2 Min { get; }
-	public Vector2 Max { get; }
-	public float Frequency { get; set; }
-	public int Seed { get; }
+	/// <summary>
+	/// A heightmap of values representing the positions of the
+	/// top surface of the terrain, between 0f and World Height.
+	/// </summary>
+	private float[] Heightmap { get; }
+	
+	private Vector2 Min { get; }
+	private Vector2 Max { get; }
+	private float Frequency { get; set; }
+	private int Seed { get; }
 	
 	public HeightmapSdf2D( Vector2 min, Vector2 max, float freq, int seed )
 	{
@@ -449,6 +454,53 @@ public record struct HeightmapSdf2D : ISdf2D
 		return new HeightmapSdf2D(
 			reader.Read<Vector2>(), reader.Read<Vector2>(),
 			reader.Read<float>(), reader.Read<int>() );
+	}
+}
+
+public record struct NoiseSdf2D : ISdf2D
+{
+	public Rect Bounds => new( Min, Max - Min );
+	
+	private Vector2 Min { get; }
+	private Vector2 Max { get; }
+	private float Frequency { get; }
+	private float NoiseZoom { get; }
+	private int Seed { get; }
+	
+	public NoiseSdf2D( Vector2 min, Vector2 max, float frequency, float noiseZoom, int seed )
+	{
+		Min = min;
+		Max = max;
+		Frequency = frequency;
+		NoiseZoom = noiseZoom;
+		Seed = seed;
+	}
+
+	public float this[ Vector2 pos ]
+	{
+		get
+		{
+			var noisePos = pos.WithX( pos.x + Max.x ) + Seed;
+			var noise = Utility.Noise.Simplex( noisePos.x / NoiseZoom, noisePos.y / NoiseZoom );
+			return (noise * 2f - 1f) * NoiseZoom;
+		}
+	}
+	
+	public void WriteRaw( ref ByteStream writer, Dictionary<TypeDescription, int> sdfTypes )
+	{
+		writer.Write( Min );
+		writer.Write( Max );
+		writer.Write( Frequency );
+		writer.Write( NoiseZoom );
+		writer.Write( Seed );
+	}
+	
+	public static NoiseSdf2D ReadRaw( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
+	{
+		return new NoiseSdf2D(
+			reader.Read<Vector2>(), reader.Read<Vector2>(), 
+			reader.Read<float>(), reader.Read<float>(), 
+			reader.Read<int>() );
 	}
 }
 
@@ -555,54 +607,54 @@ public record struct ExpandedSdf2D<T>( T Sdf, float Margin ) : ISdf2D
 	}
 }
 
-public record struct NoiseSdf2D( Vector2 Min, Vector2 Max, float[,] NoiseMap ) : ISdf2D
-{
-	/// <inheritdoc />
-	public Rect Bounds => new( Min, Max - Min );
-
-	/// <inheritdoc />
-	public float this[Vector2 pos]
-	{
-		get
-		{
-			var noisePos = pos.WithX( pos.x + Max.x );
-			
-			if ( noisePos.x < 0 
-			     || noisePos.y < 0 
-			     || noisePos.x >= NoiseMap.GetLength( 0 ) 
-			     || noisePos.y >= NoiseMap.GetLength( 1 ) )
-			{
-				return 0f;
-			}
-			return NoiseMap[(int)noisePos.x, (int)noisePos.y];
-		}
-	}
-
-	public void WriteRaw( ref ByteStream writer, Dictionary<TypeDescription, int> sdfTypes )
-	{
-		writer.Write( Min );
-		writer.Write( Max );
-		foreach ( var value in NoiseMap )
-		{
-			writer.Write( value );
-		}
-	}
-
-	public static NoiseSdf2D ReadRaw( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
-	{
-		var min = reader.Read<Vector2>();
-		var max = reader.Read<Vector2>();
-		var noiseMap = new float[(int)max.x * 2, (int)max.y * 2];
-		for ( var x = 0; x < noiseMap.GetLength( 0 ) - 1; x++ )
-		{
-			for ( var y = 0; y < noiseMap.GetLength( 1 ) - 1; y++ )
-			{
-				noiseMap[x, y] = reader.Read<float>();
-			}
-		}
-		return new NoiseSdf2D(
-			min,
-			max,
-			noiseMap );
-	}
-}
+// public record struct NoiseSdf2D( Vector2 Min, Vector2 Max, float[,] NoiseMap ) : ISdf2D
+// {
+// 	/// <inheritdoc />
+// 	public Rect Bounds => new( Min, Max - Min );
+//
+// 	/// <inheritdoc />
+// 	public float this[Vector2 pos]
+// 	{
+// 		get
+// 		{
+// 			var noisePos = pos.WithX( pos.x + Max.x );
+// 			
+// 			if ( noisePos.x < 0 
+// 			     || noisePos.y < 0 
+// 			     || noisePos.x >= NoiseMap.GetLength( 0 ) 
+// 			     || noisePos.y >= NoiseMap.GetLength( 1 ) )
+// 			{
+// 				return 0f;
+// 			}
+// 			return NoiseMap[(int)noisePos.x, (int)noisePos.y];
+// 		}
+// 	}
+//
+// 	public void WriteRaw( ref ByteStream writer, Dictionary<TypeDescription, int> sdfTypes )
+// 	{
+// 		writer.Write( Min );
+// 		writer.Write( Max );
+// 		foreach ( var value in NoiseMap )
+// 		{
+// 			writer.Write( value );
+// 		}
+// 	}
+//
+// 	public static NoiseSdf2D ReadRaw( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
+// 	{
+// 		var min = reader.Read<Vector2>();
+// 		var max = reader.Read<Vector2>();
+// 		var noiseMap = new float[(int)max.x * 2, (int)max.y * 2];
+// 		for ( var x = 0; x < noiseMap.GetLength( 0 ) - 1; x++ )
+// 		{
+// 			for ( var y = 0; y < noiseMap.GetLength( 1 ) - 1; y++ )
+// 			{
+// 				noiseMap[x, y] = reader.Read<float>();
+// 			}
+// 		}
+// 		return new NoiseSdf2D(
+// 			min,
+// 			max,
+// 			noiseMap );
+// 	}
+// }
