@@ -482,7 +482,7 @@ public record struct NoiseSdf2D : ISdf2D
 		{
 			var noisePos = pos.WithX( pos.x + Max.x ) + Seed;
 			var noise = Utility.Noise.Simplex( noisePos.x / NoiseZoom, noisePos.y / NoiseZoom );
-			return (noise * 2f - 1f) * NoiseZoom;
+			return (noise * 2f - 1f) * 128f;
 		}
 	}
 	

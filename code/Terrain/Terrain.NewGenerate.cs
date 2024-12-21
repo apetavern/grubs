@@ -12,16 +12,9 @@ public partial class GrubsTerrain
 		var worldLength = GrubsConfig.TerrainLength;
 		var worldHeight = GrubsConfig.TerrainHeight;
 
-		var pointsX = worldLength;
-		var pointsY = worldHeight;
-
 		var random = Game.Random.Int( RandomMax );
-		// var heightMap = new float[pointsX];
-		var noiseMap = new float[pointsX, pointsY];
 
 		var freq = GrubsConfig.TerrainFrequency;
-
-		Log.Info( $"NM L0: {noiseMap.GetLength( 0 )}, NM L1: {noiseMap.GetLength( 1 )}" );
 
 		var heightMapSdf = new HeightmapSdf2D( 
 			new Vector2( -worldLength / 2f, 0 ),
@@ -33,36 +26,13 @@ public partial class GrubsTerrain
 			new Vector2( -worldLength / 2f, 0 ),
 			new Vector2( worldLength / 2f, worldHeight ),
 			GrubsConfig.TerrainFrequency / 4f,
-			GrubsConfig.TerrainNoiseZoom * 2f,
+			GrubsConfig.TerrainNoiseZoom * 4f,
 			random );
-		
-		// // Generate heightMap, which determines base terrain curve.
-		// for ( var x = 0; x < pointsX; x++ )
-		// {
-		// 	var noise = Noise.Perlin( (x + random) * freq );
-		// 	heightMap[x] = noise * worldHeight * TerrainCurve.Evaluate( (float)x / pointsX );
-		// }
-		//
-		// // After generating heightMap...
-		// for (var x = 0; x < pointsX; x++)
-		// {
-		// 	for (var y = 0; y < pointsY; y++)
-		// 	{
-		// 		// If current y position is below the height at this x, 
-		// 		// set to 0 (empty space), otherwise 1 (solid terrain)
-		// 		var dist = y - heightMap[x];
-		// 		noiseMap[x, y] = dist;
-		// 	}
-		// }
-		
-		// var terrainSdf = new NoiseSdf2D(
-		// 	new Vector2( -worldLength / 2f, 0 ), 
-		// 	new Vector2( worldLength / 2f, worldHeight ), 
-		// 	noiseMap );
 		
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
 		Add( SdfWorld, heightMapSdf, materials.ElementAt( 0 ).Key );
+		Add( SdfWorld, heightMapSdf, RockMaterial );
 		Subtract( SdfWorld, noiseSdf, materials.ElementAt( 0 ).Key );
 	}
 }
