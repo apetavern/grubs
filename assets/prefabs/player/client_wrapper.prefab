@@ -1,0 +1,26 @@
+{
+  "RootObject": {
+    "__guid": "7d8daf80-7db6-44a6-88ff-5f7e1ea8e943",
+    "Flags": 0,
+    "Name": "Client",
+    "Tags": "client",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Grubs.Systems.Pawn.Client",
+        "__guid": "45008036-6451-4a13-b0a8-c1430f7b047f",
+        "PlayerPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/player/player_wrapper.prefab"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
