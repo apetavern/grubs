@@ -5,6 +5,8 @@ namespace Grubs.Systems.Pawn;
 [Title( "Player" ), Category( "Grubs/Pawn" )]
 public sealed class Player : LocalComponent<Player>
 {
+	public static IEnumerable<Player> All => Game.ActiveScene.GetAllComponents<Player>();
+	
 	[Sync( SyncFlags.FromHost )]
 	public Client Client { get; private set; }
 

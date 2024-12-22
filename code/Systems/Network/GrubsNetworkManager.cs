@@ -1,4 +1,5 @@
-﻿using Grubs.Systems.Pawn;
+﻿using Grubs.Systems.GameMode;
+using Grubs.Systems.Pawn;
 
 namespace Grubs.Systems.Network;
 
@@ -27,17 +28,13 @@ public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 	{
 		Log.Info( $"Spawning client prefab for connection {connection.DisplayName} ({connection.Id})." );
 		var clientObj = ClientPrefab.Clone();
+		clientObj.Name = $"Client ({connection.DisplayName})";
 		clientObj.NetworkSpawn( connection );
 		
 		Log.Info( $"Assigning connection {connection.Id} to Client component." );
 		var client = clientObj.GetComponent<Client>();
 		client.OnNetworkActive( connection );
-	}
-
-	protected override void OnUpdate()
-	{
-		base.OnUpdate();
 		
-		Log.Info( Client.GetLocal() );
+		BaseGameMode.Current.HandlePlayerJoined( client.Player );
 	}
 }

@@ -1,7 +1,8 @@
 ﻿@namespace Grubs.UI.GameLanding
 
 @using Grubs.Gamemodes
-@using Grubs.Pawn
+@using Grubs.Systems.GameMode
+@using Grubs.Systems.Pawn
 @using Grubs.UI.Components
 @inherits PanelComponent
 
@@ -93,7 +94,7 @@
     private void Start()
     {
         if (IsHost() && CanStart() && !IsLoadingTerrain())
-            Gamemode.GetCurrent().Start();
+            BaseGameMode.Current.Start();
     }
 
     protected override void OnUpdate()
