@@ -470,15 +470,19 @@
     {
       "__guid": "9a1c6253-0abb-4443-85b2-378108afb7b2",
       "Flags": 0,
-      "Name": "Gamemode",
-      "Position": "-129.7132,-113.9731,554.4797",
+      "Name": "Game Mode",
       "Enabled": true,
       "NetworkMode": 1,
       "Components": [
         {
           "__type": "Grubs.Gamemodes.Modes.FreeForAllGamemode",
           "__guid": "1b128073-d9c4-4060-a11e-9bf14e46f73d",
+          "__enabled": false,
           "ActivePlayerId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "__type": "Grubs.Systems.GameMode.FreeForAll",
+          "__guid": "6eb0fa7d-6d3e-4b58-94c7-0c3e56178083"
         }
       ]
     },

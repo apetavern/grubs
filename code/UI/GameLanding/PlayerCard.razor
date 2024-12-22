@@ -1,6 +1,6 @@
 ﻿@namespace Grubs.UI.GameLanding
 
-@using Grubs.Pawn
+@using Grubs.Systems.Pawn
 @using Sandbox.Services
 @inherits Panel
 
@@ -16,7 +16,7 @@
     <div class="info">
         <div class="name">
             <label class="name-text">@Connection.DisplayName</label>
-            <label class="hours-text">@($"{Player.PlayTime:0}h")</label>
+            @* <label class="hours-text">@($"{Player.PlayTime:0}h")</label> *@
             <div class="line"/>
         </div>
         <div class="stats">
@@ -31,7 +31,7 @@
 @code
 {
     public Player Player { get; set; }
-    public Connection Connection => Player.Network.Owner;
+    private Connection Connection => Player.Client.Connection;
 
     private int _statIndex = 0;
     private TimeSince _timeSinceStatsChanged;
@@ -64,6 +64,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player, _statIndex, Player.PlayTime);
+        return HashCode.Combine(Player, _statIndex);
     }
 }
