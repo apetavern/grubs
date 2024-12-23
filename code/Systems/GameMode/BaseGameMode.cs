@@ -8,6 +8,7 @@ public abstract class BaseGameMode : Component
 	public virtual string Name => "Game Mode";
 	
 	[Sync( SyncFlags.FromHost )] public NetList<Player> Players { get; set; } = new();
+	public bool GameStarted => IsGameStarted();
 
 	protected override void OnStart()
 	{
@@ -52,4 +53,9 @@ public abstract class BaseGameMode : Component
 	/// Called after the player is added to the Players list.
 	/// </summary>
 	protected virtual void OnPlayerJoined( Player player ) { }
+
+	protected virtual bool IsGameStarted()
+	{
+		return false;
+	}
 }

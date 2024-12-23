@@ -1,4 +1,5 @@
-﻿using Grubs.Systems.Pawn;
+﻿using Grubs.Gamemodes.Modes;
+using Grubs.Systems.Pawn;
 using Grubs.Terrain;
 
 namespace Grubs.Systems.GameMode;
@@ -65,6 +66,11 @@ public sealed class FreeForAll : BaseGameMode
 		}
 	}
 
+	protected override bool IsGameStarted()
+	{
+		return State is FreeForAllState.Playing;
+	}
+
 	private void InitializePlayer( Player player )
 	{
 		const float grubSize = 8f;
@@ -79,6 +85,27 @@ public sealed class FreeForAll : BaseGameMode
 		}
 			
 		PlayerQueue.Add( player );
+	}
+
+	[ConCmd( "gr_ffa_next_state" )]
+	public static void NextStateCmd()
+	{
+		if ( Current is not FreeForAll ffa )
+			return;
+
+		switch ( ffa.State )
+		{
+			case FreeForAllState.Lobby:
+				ffa.Start();
+				break;
+			case FreeForAllState.Playing:
+				ffa.State = FreeForAllState.GameOver;
+				break;
+			case FreeForAllState.GameOver:
+				ffa.State = FreeForAllState.Lobby;
+				break;
+		}
+		Log.Info( $"Set state to {ffa.State}." );
 	}
 }
 
