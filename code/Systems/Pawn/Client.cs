@@ -29,7 +29,7 @@ public sealed class Client : LocalComponent<Client>
 		
 		var playerObj = PlayerPrefab.Clone();
 		playerObj.Name = $"Player ({connection.DisplayName})";
-		playerObj.NetworkSpawn();
+		playerObj.NetworkSpawn( connection );
 		
 		var player = playerObj.GetComponent<Player>();
 		player.SetClient( this );

@@ -11,6 +11,12 @@ public sealed class FreeForAll : BaseGameMode
 	[Sync( SyncFlags.FromHost )]
 	public FreeForAllState State { get; set; } = FreeForAllState.Lobby;
 
+	[Sync( SyncFlags.FromHost )]
+	public NetList<Player> PlayerQueue { get; private set; } = new();
+	
+	[Sync( SyncFlags.FromHost )]
+	public Player ActivePlayer { get; private set; }
+
 	protected override void OnModeInit()
 	{
 		Log.Info( $"{Name} mode initializing." );
@@ -30,17 +36,14 @@ public sealed class FreeForAll : BaseGameMode
 		
 		Log.Info( $"{Name} mode starting." );
 
-		const float grubSize = 8f;
 
 		// For each player, spawn Grubs and initialize their inventory.
 		foreach ( var player in Players )
 		{
-			for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
-			{
-				var spawnLocation = GrubsTerrain.Instance.FindSpawnLocation( size: grubSize );
-				player.AddGrub( spawnLocation );
-			}
+			InitializePlayer( player );
 		}
+
+		ActivePlayer = PlayerQueue.First();
 
 		State = FreeForAllState.Playing;
 	}
@@ -48,6 +51,34 @@ public sealed class FreeForAll : BaseGameMode
 	protected override void OnPlayerJoined( Player player )
 	{
 		Log.Info( $"Adding {player.GameObject.Name} to Free For All game mode." );
+
+		if ( State is not FreeForAllState.Playing )
+			return;
+
+		if ( GrubsConfig.SpawnLateJoiners )
+		{
+			InitializePlayer( player );
+		}
+		else
+		{
+			Log.Warning( "Player joined late. What do we do here?" );
+		}
+	}
+
+	private void InitializePlayer( Player player )
+	{
+		const float grubSize = 8f;
+		
+		if ( !player.IsValid() )
+			return;
+		
+		for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
+		{
+			var spawnLocation = GrubsTerrain.Instance.FindSpawnLocation( size: grubSize );
+			player.AddGrub( spawnLocation );
+		}
+			
+		PlayerQueue.Add( player );
 	}
 }
 

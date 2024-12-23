@@ -37,6 +37,12 @@ public sealed class Player : LocalComponent<Player>
 		grubObj.NetworkSpawn( Client.Connection );
 		
 		var grub = grubObj.GetComponent<Grub>();
+		grub.SetOwner( this );
 		Log.Info( $"Created {grub}." );
+	}
+
+	public override string ToString()
+	{
+		return $"Player ({Client.Connection.DisplayName})";
 	}
 }
