@@ -10,15 +10,34 @@
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "927151c8-81e0-47f8-8381-8ed56596ff97",
         "BodyGroups": 5,
+        "CreateAttachments": false,
         "CreateBoneObjects": true,
         "Model": "models/citizenworm.vmdl",
+        "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Pawn.Grub",
         "__guid": "e0ce3ffc-2961-4045-84d2-9d0db8d9832b",
+        "__enabled": false,
         "Animator": {
           "_type": "component",
           "component_id": "17e02fee-495b-4c44-8ca9-6201f0ba74f2",
@@ -47,6 +66,7 @@
       {
         "__type": "Grubs.Pawn.Controller.GrubPlayerController",
         "__guid": "d1c8cafb-c25a-4c68-9342-8ab0d6bbb7cf",
+        "__enabled": false,
         "Animator": {
           "_type": "component",
           "component_id": "17e02fee-495b-4c44-8ca9-6201f0ba74f2",
@@ -79,6 +99,7 @@
       {
         "__type": "Grubs.Pawn.Controller.GrubCharacterController",
         "__guid": "828050a6-380a-43f6-bf54-34f972c31f4b",
+        "__enabled": false,
         "Acceleration": 10,
         "Controller": {
           "_type": "component",
@@ -96,6 +117,7 @@
       {
         "__type": "Grubs.Pawn.GrubAnimator",
         "__guid": "17e02fee-495b-4c44-8ca9-6201f0ba74f2",
+        "__enabled": false,
         "Controller": {
           "_type": "component",
           "component_id": "d1c8cafb-c25a-4c68-9342-8ab0d6bbb7cf",
@@ -118,6 +140,7 @@
       {
         "__type": "Sandbox.HighlightOutline",
         "__guid": "3f1dbecc-0919-46f0-b1f3-b35e81087d77",
+        "__enabled": false,
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -127,7 +150,12 @@
       {
         "__type": "Grubs.Common.Health",
         "__guid": "b3f38c78-6e43-4413-9c4c-24d02c2e6c1f",
+        "__enabled": false,
         "MaxHealth": 150
+      },
+      {
+        "__type": "Grubs.Systems.Pawn.Grubs.Grub",
+        "__guid": "109e94f5-d6ca-462d-b855-7b3e9ba32d76"
       }
     ],
     "Children": [
@@ -143,8 +171,8 @@
             "__guid": "8241e938-3118-4480-bd71-12d3cbf331a9",
             "Flags": 4,
             "Name": "head",
-            "Position": "4.510858,-0.0007762761,0.000001554049",
-            "Rotation": "0.00000004470348,0.0000001639128,0.01963353,0.9998072",
+            "Position": "4.510859,-0.0007776022,-0.000001069857",
+            "Rotation": "0.000002354517,0.0000001118616,0.0196337,0.9998073",
             "Enabled": true,
             "Children": [
               {
@@ -587,7 +615,8 @@
             "IsTrigger": false,
             "Radius": 7,
             "Start": "0,0,-5",
-            "Static": false
+            "Static": false,
+            "SurfaceVelocity": "0,0,0"
           }
         ]
       },
@@ -595,27 +624,28 @@
         "__guid": "03d23a6b-6b56-41de-a66b-8e3199b30e20",
         "Flags": 0,
         "Name": "Grub Tag",
-        "Enabled": true,
         "Components": [
           {
             "__type": "Sandbox.WorldPanel",
             "__guid": "13f24ac3-2f41-4915-b2ed-440fd7e7862c",
+            "__enabled": false,
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": true,
             "PanelSize": "1024,350",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderScale": 1,
             "VerticalAlign": "Center"
           },
           {
             "__type": "Grubs.UI.GrubTag",
             "__guid": "7be164ff-06ad-4a71-879b-257be93f69c9",
-            "Grub": {
-              "_type": "component",
-              "component_id": "e0ce3ffc-2961-4045-84d2-9d0db8d9832b",
-              "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
-              "component_type": "Grub"
-            }
+            "__enabled": false
           }
         ]
       },
@@ -624,21 +654,28 @@
         "Flags": 0,
         "Name": "Aim Reticle",
         "Position": "111.0583,111.0583,-152.5602",
-        "Enabled": true,
         "Components": [
           {
             "__type": "Sandbox.WorldPanel",
             "__guid": "d6220d7a-c847-445d-a526-d5fe52acac5a",
+            "__enabled": false,
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": false,
             "PanelSize": "512,512",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderScale": 1,
             "VerticalAlign": "Center"
           },
           {
             "__type": "Grubs.UI.AimReticle",
             "__guid": "24d14bf5-2322-4227-8730-57afd705194e",
+            "__enabled": false,
             "Grub": {
               "_type": "component",
               "component_id": "e0ce3ffc-2961-4045-84d2-9d0db8d9832b",
@@ -649,11 +686,35 @@
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
