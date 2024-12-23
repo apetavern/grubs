@@ -2,15 +2,44 @@
   "RootObject": {
     "__guid": "9a501176-452d-4433-8c4f-a98d44060cfb",
     "Flags": 0,
-    "Name": "Player",
+    "Name": "player_wrapper",
     "Tags": "player",
     "Enabled": true,
     "Components": [
       {
         "__type": "Grubs.Systems.Pawn.Player",
-        "__guid": "2e4b2a05-4dec-42e8-9a75-609fe1d90a86"
+        "__guid": "2e4b2a05-4dec-42e8-9a75-609fe1d90a86",
+        "GrubPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/grub/grub.prefab"
+        }
       }
-    ]
+    ],
+    "Children": [],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
