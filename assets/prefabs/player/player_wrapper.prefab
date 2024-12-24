@@ -34,7 +34,29 @@
         }
       }
     ],
-    "Children": [],
+    "Children": [
+      {
+        "__guid": "91633c68-eb38-44b6-a8d5-7685bccfb9af",
+        "Flags": 0,
+        "Name": "Screen UI",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Grubs.UI.FreeForAllDisplay",
+            "__guid": "4d4e7623-0803-4e17-aa48-789d870dfb2f"
+          },
+          {
+            "__type": "Sandbox.ScreenPanel",
+            "__guid": "741e0132-931a-4353-bcf9-5b7cb11c9abe",
+            "AutoScreenScale": true,
+            "Opacity": 1,
+            "Scale": 1,
+            "ScaleStrategy": "ConsistentHeight",
+            "ZIndex": 100
+          }
+        ]
+      }
+    ],
     "__variables": [],
     "__properties": {
       "FixedUpdateFrequency": 50,

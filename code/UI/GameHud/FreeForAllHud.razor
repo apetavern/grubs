@@ -1,0 +1,32 @@
+﻿@namespace Grubs.UI.GameHud
+
+@using Grubs.Systems.GameMode
+
+@inherits Panel
+
+@if (!GameMode.IsValid())
+{
+    return;
+}
+
+<root>
+    <div class="header">
+        <div class="turn-indicator">@(GameMode.ActivePlayer.Client.Connection.DisplayName)'s turn!</div>
+        <div class="turn-timer">@TurnTimer</div>
+    </div>
+</root>
+
+@code
+{
+    public FreeForAll GameMode { get; set; }
+
+    private string TurnTimer => GameMode?.TimeUntilTurnOver.Relative.CeilToInt().Clamp(0, int.MaxValue).ToString("0");
+
+    protected override int BuildHash()
+    {
+        if ( !GameMode.IsValid() || !GameMode.ActivePlayer.IsValid() )
+            return 0;
+        
+        return HashCode.Combine(GameMode.ActivePlayer, TurnTimer);
+    }
+}

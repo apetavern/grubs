@@ -20,7 +20,7 @@ ChatboxEntry {
         flex-shrink: 0;
         font-weight: 700;
         font-size: 20px;
-        font-family: $font-family;
+        font-family: $font-primary;
         text-shadow: 2px 2px 2px black;
         text-stroke: 3px black;
         font-weight: bold;
@@ -29,7 +29,7 @@ ChatboxEntry {
     .msg {
         margin-top: 3px;
         font-size: 20px;
-        font-family: $font-family;
+        font-family: $font-primary;
         color: #ffffffec;
         text-shadow: 2px 2px 2px black;
         text-stroke: 3px black;
