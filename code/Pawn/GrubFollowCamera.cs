@@ -15,8 +15,7 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 	public bool AutomaticRefocus { get; set; } = true;
 
 	private Queue<CameraTarget> TargetQueue { get; } = new();
-
-	[Property, ReadOnly] private CameraTarget Target { get; set; }
+	private CameraTarget Target { get; set; }
 
 	private bool _isFocusingTarget;
 	private Vector3 _center;
@@ -39,7 +38,7 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 		Sound.Listener = listenerTransform;
 
 		FindTarget();
-
+		
 		if ( Target.Object.IsValid() && _isFocusingTarget )
 			_center = Target.Object.WorldPosition;
 
@@ -100,9 +99,20 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 			
 		if ( TargetQueue.Count == 0 )
 		{
+			GameObject targetObj = null;
+			
+			if ( BaseGameMode.Current is FreeForAll freeForAllMode )
+			{
+				targetObj = freeForAllMode.ActivePlayer.ActiveGrub.GameObject;
+			}
+			else
+			{
+				targetObj = Player.Local?.ActiveGrub?.GameObject;	
+			}
+			
 			Target = new CameraTarget
 			{
-				Object = Player.Local?.ActiveGrub?.GameObject, 
+				Object = targetObj, 
 				Duration = 0f,
 			};
 			return;

@@ -16,6 +16,21 @@ public sealed class FreeForAll : BaseGameMode
 	
 	[Sync( SyncFlags.FromHost )]
 	public Player ActivePlayer { get; private set; }
+	
+	[Sync( SyncFlags.FromHost )]
+	public RealTimeUntil TimeUntilTurnOver { get; private set; }
+	
+	[Sync( SyncFlags.FromHost )]
+	public bool TurnIsChanging { get; private set; }
+	
+	/// <summary>
+	/// The amount of time elapsed since we started changing turns.
+	/// Used to check for the minimum and maximum turn change wait.
+	/// </summary>
+	private TimeSince TimeSinceTurnChangeStarted { get; set; }
+
+	private const float MinimumTurnChangeDuration = 0.5f;
+	private const float MaximumTurnChangeDuration = 20f;
 
 	protected override void OnModeInit()
 	{
@@ -44,8 +59,24 @@ public sealed class FreeForAll : BaseGameMode
 		}
 
 		ActivePlayer = PlayerQueue.First();
-
+		TimeUntilTurnOver = GrubsConfig.TurnDuration;
 		State = FreeForAllState.Playing;
+	}
+
+	protected override void OnModeUpdate()
+	{
+		if ( State is FreeForAllState.Playing )
+		{
+			if ( TimeUntilTurnOver && !TurnIsChanging )
+			{
+				StartTurnChange();
+			}
+
+			if ( TurnIsChanging )
+			{
+				UpdateTurnChange();
+			}
+		}
 	}
 
 	protected override void OnPlayerJoined( Player player )
@@ -84,6 +115,40 @@ public sealed class FreeForAll : BaseGameMode
 		}
 			
 		PlayerQueue.Add( player );
+	}
+
+	private void StartTurnChange()
+	{
+		Log.Info( $"Starting turn change (finished: {ActivePlayer})." );
+		TimeSinceTurnChangeStarted = 0;
+		TurnIsChanging = true;
+	}
+
+	private void UpdateTurnChange()
+	{
+		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
+			return;
+		
+		TurnIsChanging = false;
+		TimeUntilTurnOver = GrubsConfig.TurnDuration;
+		RotateActivePlayer();
+	}
+
+	private void RotateActivePlayer()
+	{
+		Log.Info( $"Rotating active player (current: {ActivePlayer})." );
+		if ( PlayerQueue.Count == 0 )
+		{
+			foreach ( var player in Player.All )
+				PlayerQueue.Add( player );
+		}
+		
+		var nextPlayer = PlayerQueue.First();
+		PlayerQueue.Remove( nextPlayer );
+		
+		Log.Info( $"New active player: {nextPlayer}." );
+		ActivePlayer = nextPlayer;
+		ActivePlayer?.RotateActiveGrub();
 	}
 
 	[ConCmd( "gr_ffa_next_state" )]
