@@ -18,7 +18,7 @@ public sealed class FreeForAll : BaseGameMode
 	public Player ActivePlayer { get; private set; }
 	
 	[Sync( SyncFlags.FromHost )]
-	public RealTimeUntil TimeUntilTurnOver { get; private set; }
+	public TimeUntil TimeUntilTurnOver { get; private set; }
 	
 	[Sync( SyncFlags.FromHost )]
 	public bool TurnIsChanging { get; private set; }

@@ -4,7 +4,7 @@ InventoryDisplay {
     bottom: 50px;
     right: 100px;
     position: absolute;
-    font-family: $font-family;
+    font-family: $font-primary;
     opacity: 1;
     transition: opacity 0.15s;
     pointer-events: all;
@@ -87,7 +87,7 @@ InventoryDisplay {
     //bottom: 50px;
     //right: 100px;
     //position: absolute;
-    //font-family: $font-family;
+    //font-family: $font-primary;
     //font-size: 128px;
     //transition: transform 0.3s;
     //background-color: $hud-bg;
