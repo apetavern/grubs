@@ -41,7 +41,14 @@ public abstract class BaseGameMode : Component
 	}
 	
 	protected virtual void OnModeStarted() { }
+
+	protected override void OnUpdate()
+	{
+		OnModeUpdate();
+	}
 	
+	protected virtual void OnModeUpdate() { }
+
 	public void HandlePlayerJoined( Player player )
 	{
 		if ( !Networking.IsHost )

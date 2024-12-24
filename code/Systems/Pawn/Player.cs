@@ -67,10 +67,25 @@ public sealed class Player : LocalComponent<Player>
 		var grub = grubObj.GetComponent<Grub>();
 		grub.SetOwner( this );
 		
-		Grubs.Add( grub );
+		Grubs.Insert( 0, grub );
 
-		ActiveGrub ??= grub;
+		if ( ActiveGrub is null )
+		{
+			RotateActiveGrub();
+		}
 		
 		Log.Info( $"Created {grub}." );
+	}
+
+	public void RotateActiveGrub()
+	{
+		Log.Info( $"Rotating active grub {ActiveGrub}" );
+		
+		var nextGrub = Grubs.First();
+		Grubs.Remove( nextGrub );
+		Grubs.Add( nextGrub );
+		Log.Info( $"New active grub: {nextGrub}." );
+
+		ActiveGrub = nextGrub;
 	}
 }
