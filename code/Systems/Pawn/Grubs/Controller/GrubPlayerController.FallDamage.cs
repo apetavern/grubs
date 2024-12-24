@@ -1,6 +1,6 @@
 ﻿using Grubs.Common;
 
-namespace Grubs.Pawn.Controller;
+namespace Grubs.Systems.Pawn.Grubs.Controller;
 
 public partial class GrubPlayerController
 {
@@ -31,13 +31,14 @@ public partial class GrubPlayerController
 			return;
 
 		if ( FallVelocity > FallVelocityDamageThreshold )
-			ApplyFallDamage();
+			return;
+		// ApplyFallDamage();
 	}
 
-	private void ApplyFallDamage()
-	{
-		var fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
-		var health = GameObject.Components.Get<Health>();
-		health?.TakeDamage( GrubsDamageInfo.FromFall( fallDamage, Grub.Id, Grub.Name ) );
-	}
+	// private void ApplyFallDamage()
+	// {
+	// 	var fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
+	// 	var health = Sandbox.GameObject.Components.Get<Health>();
+	// 	health?.TakeDamage( GrubsDamageInfo.FromFall( fallDamage, global::Grubs.Pawn.Grub.Id, global::Grubs.Pawn.Grub.Name ) );
+	// }
 }

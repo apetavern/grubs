@@ -1,136 +1,136 @@
-@namespace Grubs.UI.Inventory
-
-@using Grubs.Equipment
-@using Grubs.Equipment.Weapons
-@using Grubs.Pawn
-@using Grubs.UI.Components
-@using Sandbox;
-@using Sandbox.UI
-
-@inherits Panel
-
-@attribute [StyleSheet]
-
-@if (!Inventory.IsValid())
-{
-    return;
-}
-
-<root>
-    <div @ref=TooltipPanel class="tooltip @(HoveredItemPanel is null ? "hide" : "")">
-        @(HoveredItemPanel is null ? "" : HoveredItemPanel.Equipment.Name)
-        @if(!HoveredItemPanel?.Equipment.Unlocked ?? false) 
-        {
-            <div class="unlock-delay-text">
-                @_unlockDelayText
-            </div>
-        }
-    </div>
-    <div class="inv-panel">
-        <div class="inv-title">
-            <label>Inventory</label>
-        </div>
-        <div class="inv-content">
-            <div class="inv-weapons">
-                @foreach (var eq in Inventory.Equipment)
-                {
-                    <InventoryItem Equipment=@eq InventoryDisplay=@this />
-                }
-            </div>
-            @*<div class="inv-tools">
-                 TODO: Split inv into weapons vs tools 
-            </div>*@
-        </div>
-    </div>
-</root
-
-@code
-{
-    public PlayerInventory Inventory { get; set; }
-    public InventoryItem HoveredItemPanel { get; set; }
-
-    private Panel TooltipPanel { get; set; }
-
-    private const int _columns = 5;
-    private int _rows => (int)Math.Ceiling((float)_totalItems / _columns);
-    private int _totalItems => Inventory.Equipment.Count();
-
-    private int _currentGamepadIndex;
-    private bool _usedJoystick;
-
-    private string _unlockDelayText => $"Unlocked in {HoveredItemPanel.Equipment.RoundsUntilUnlock} {(HoveredItemPanel.Equipment.RoundsUntilUnlock == 1 ? "round" : "rounds")}";
-
-    public override void Tick()
-    {
-        if (!Inventory.IsValid())
-            return;
-
-        SetClass("hide", !Inventory.InventoryOpen);
-        Cursor.Enabled("inv", Inventory.InventoryOpen);
-
-        if (!Inventory.InventoryOpen) 
-            return;
-
-        if (Inventory.Equipment?.Count == 0)
-            return;
-
-        if(HoveredItemPanel is not null) 
-        {
-            var parentDiff = HoveredItemPanel.Box.Rect.Left - Box.Rect.Left;
-            var tooltipCenter = (TooltipPanel.Box.Rect.Right - TooltipPanel.Box.Rect.Left) / 2;
-            var itemCenter = (HoveredItemPanel.Box.Rect.Right - HoveredItemPanel.Box.Rect.Left) / 2;
-            TooltipPanel.Style.Left = (parentDiff - (tooltipCenter - itemCenter)) * ScaleFromScreen;
-
-            var offset = (HoveredItemPanel.Equipment.Unlocked ? 60 : 82);
-            TooltipPanel.Style.Top = (HoveredItemPanel.Box.Rect.Top - Box.Rect.Top ) * ScaleFromScreen - offset;
-        }
-
-        if (!Input.UsingController) return;
-
-        if (Math.Round(Input.AnalogMove.Length) != 0 && !_usedJoystick)
-        {
-            _usedJoystick = true;
-            PlayerInventory.Local.EquipItem(Inventory.Equipment.ElementAtOrDefault(SelectNextItemGamepadInput()));
-        }
-
-        if (Math.Round(Input.AnalogMove.Length) == 0 && _usedJoystick)
-        {
-            _usedJoystick = false;
-        }
-    }
-
-    protected override int BuildHash()
-    {
-        return HashCode.Combine(Inventory.InventoryOpen, Inventory.EquipmentActive, Inventory.ActiveSlot, HoveredItemPanel?.GetHashCode());
-    }
-
-    private int SelectNextItemGamepadInput()
-    {
-        var analogX = Input.AnalogMove.x;
-        var analogY = -Input.AnalogMove.y;
-
-        var currentRow = _currentGamepadIndex / _columns;
-        var currentColumn = _currentGamepadIndex % _columns;
-
-        currentRow = analogX switch
-        {
-            > 0 => (currentRow - 1 + _rows) % _rows,
-            < 0 => (currentRow + 1) % _rows,
-            _ => currentRow
-        };
-
-        switch (analogY)
-        {
-            case < 0:
-                currentColumn = (currentColumn - 1 + _columns) % _columns;
-                break;
-            case > 0:
-                currentColumn = (currentColumn + 1) % _columns;
-                break;
-        }
-
-        _currentGamepadIndex = currentRow * _columns + currentColumn;
-
-        return _currentGamepadIndex;
-    }
-}
+@* @namespace Grubs.UI.Inventory *@
+@* *@
+@* @using Grubs.Equipment *@
+@* @using Grubs.Equipment.Weapons *@
+@* @using Grubs.Pawn *@
+@* @using Grubs.Systems.Pawn *@
+@* @using Grubs.UI.Components *@
+@* @using Sandbox; *@
+@* @using Sandbox.UI *@
+@* *@
+@* @inherits Panel *@
+@* *@
+@* @attribute [StyleSheet] *@
+@* *@
+@* @if (!Inventory.IsValid()) *@
+@* { *@
+@*     return; *@
+@* } *@
+@* *@
+@* <root> *@
+@*     <div @ref=TooltipPanel class="tooltip @(HoveredItemPanel is null ? "hide" : "")"> *@
+@*         @(HoveredItemPanel is null ? "" : HoveredItemPanel.Equipment.Name) *@
+@*         @if(!HoveredItemPanel?.Equipment.Unlocked ?? false)  *@
+@*         { *@
+@*             <div class="unlock-delay-text"> *@
+@*                 @_unlockDelayText *@
+@*             </div> *@
+@*         } *@
+@*     </div> *@
+@*     <div class="inv-panel"> *@
+@*         <div class="inv-title"> *@
+@*             <label>Inventory</label> *@
+@*         </div> *@
+@*         <div class="inv-content"> *@
+@*             <div class="inv-weapons"> *@
+@*                 @foreach (var eq in Inventory.Equipment) *@
+@*                 { *@
+@*                     <InventoryItem Equipment=@eq InventoryDisplay=@this /> *@
+@*                 } *@
+@*             </div> *@
+@*             @*<div class="inv-tools"> *@
+@*             </div>*@
+@*         </div> *@
+@*     </div> *@
+@* </root *@
+@* *@
+@* @code *@
+@* { *@
+@*     public Inventory Inventory { get; set; } *@
+@*     public InventoryItem HoveredItemPanel { get; set; } *@
+@* *@
+@*     private Panel TooltipPanel { get; set; } *@
+@* *@
+@*     private const int _columns = 5; *@
+@*     private int _rows => (int)Math.Ceiling((float)_totalItems / _columns); *@
+@*     private int _totalItems => Inventory.Equipment.Count(); *@
+@* *@
+@*     private int _currentGamepadIndex; *@
+@*     private bool _usedJoystick; *@
+@* *@
+@*     private string _unlockDelayText => $"Unlocked in {HoveredItemPanel.Equipment.RoundsUntilUnlock} {(HoveredItemPanel.Equipment.RoundsUntilUnlock == 1 ? "round" : "rounds")}"; *@
+@* *@
+@*     public override void Tick() *@
+@*     { *@
+@*         if (!Inventory.IsValid()) *@
+@*             return; *@
+@* *@
+@*         SetClass("hide", !Inventory.InventoryOpen); *@
+@*         Cursor.Enabled("inv", Inventory.InventoryOpen); *@
+@* *@
+@*         if (!Inventory.InventoryOpen)  *@
+@*             return; *@
+@* *@
+@*         if (Inventory.Equipment?.Count == 0) *@
+@*             return; *@
+@* *@
+@*         if(HoveredItemPanel is not null)  *@
+@*         { *@
+@*             var parentDiff = HoveredItemPanel.Box.Rect.Left - Box.Rect.Left; *@
+@*             var tooltipCenter = (TooltipPanel.Box.Rect.Right - TooltipPanel.Box.Rect.Left) / 2; *@
+@*             var itemCenter = (HoveredItemPanel.Box.Rect.Right - HoveredItemPanel.Box.Rect.Left) / 2; *@
+@*             TooltipPanel.Style.Left = (parentDiff - (tooltipCenter - itemCenter)) * ScaleFromScreen; *@
+@* *@
+@*             var offset = (HoveredItemPanel.Equipment.Unlocked ? 60 : 82); *@
+@*             TooltipPanel.Style.Top = (HoveredItemPanel.Box.Rect.Top - Box.Rect.Top ) * ScaleFromScreen - offset; *@
+@*         } *@
+@* *@
+@*         if (!Input.UsingController) return; *@
+@* *@
+@*         if (Math.Round(Input.AnalogMove.Length) != 0 && !_usedJoystick) *@
+@*         { *@
+@*             _usedJoystick = true; *@
+@*             Inventory.Local.EquipItem(Inventory.Equipment.ElementAtOrDefault(SelectNextItemGamepadInput())); *@
+@*         } *@
+@* *@
+@*         if (Math.Round(Input.AnalogMove.Length) == 0 && _usedJoystick) *@
+@*         { *@
+@*             _usedJoystick = false; *@
+@*         } *@
+@*     } *@
+@* *@
+@*     protected override int BuildHash() *@
+@*     { *@
+@*         return HashCode.Combine(Inventory.InventoryOpen, Inventory.EquipmentActive, Inventory.ActiveSlot, HoveredItemPanel?.GetHashCode()); *@
+@*     } *@
+@* *@
+@*     private int SelectNextItemGamepadInput() *@
+@*     { *@
+@*         var analogX = Input.AnalogMove.x; *@
+@*         var analogY = -Input.AnalogMove.y; *@
+@* *@
+@*         var currentRow = _currentGamepadIndex / _columns; *@
+@*         var currentColumn = _currentGamepadIndex % _columns; *@
+@* *@
+@*         currentRow = analogX switch *@
+@*         { *@
+@*             > 0 => (currentRow - 1 + _rows) % _rows, *@
+@*             < 0 => (currentRow + 1) % _rows, *@
+@*             _ => currentRow *@
+@*         }; *@
+@* *@
+@*         switch (analogY) *@
+@*         { *@
+@*             case < 0: *@
+@*                 currentColumn = (currentColumn - 1 + _columns) % _columns; *@
+@*                 break; *@
+@*             case > 0: *@
+@*                 currentColumn = (currentColumn + 1) % _columns; *@
+@*                 break; *@
+@*         } *@
+@* *@
+@*         _currentGamepadIndex = currentRow * _columns + currentColumn; *@
+@* *@
+@*         return _currentGamepadIndex; *@
+@*     } *@
+@* } *@

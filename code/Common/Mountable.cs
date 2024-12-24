@@ -1,5 +1,6 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Common;
 

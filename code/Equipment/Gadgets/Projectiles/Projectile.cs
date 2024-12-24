@@ -1,7 +1,7 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment.Weapons;
-using Grubs.Pawn;
-using Grubs.Pawn.Controller;
+using Grubs.Systems.Pawn.Grubs;
+using Grubs.Systems.Pawn.Grubs.Controller;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
 

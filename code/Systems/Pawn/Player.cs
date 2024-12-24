@@ -10,9 +10,28 @@ public sealed class Player : LocalComponent<Player>
 	
 	[Sync( SyncFlags.FromHost )]
 	public Client Client { get; private set; }
+
+	[Sync( SyncFlags.FromHost )] 
+	public NetList<Grub> Grubs { get; } = new();
+	
+	[Sync( SyncFlags.FromHost )]
+	public Grub ActiveGrub { get; private set; }
 	
 	[Property]
 	public GameObject GrubPrefab { get; private set; }
+	
+	[Property]
+	public Inventory Inventory { get; private set; }
+	
+	[Sync]
+	public bool HasFiredThisTurn { get; set; }
+	
+	public bool IsActive { get; set; }
+
+	public Vector3 MousePosition { get; private set; }
+	private static readonly Plane Plane = 
+		new( new Vector3( 0f, 512f, 0f ), Vector3.Left );
+
 
 	protected override void OnStart()
 	{
@@ -20,6 +39,15 @@ public sealed class Player : LocalComponent<Player>
 			return;
 
 		Local = this;
+	}
+
+	protected override void OnUpdate()
+	{
+		var cursorRay = Scene.Camera.ScreenPixelToRay( Input.UsingController
+			? new Vector2( Screen.Width / 2, Screen.Height / 2 )
+			: Mouse.Position );
+		var endPos = Plane.Trace( cursorRay, twosided: true );
+		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 	}
 
 	public void SetClient( Client client )
@@ -38,11 +66,9 @@ public sealed class Player : LocalComponent<Player>
 		
 		var grub = grubObj.GetComponent<Grub>();
 		grub.SetOwner( this );
+		
+		Grubs.Add( grub );
+		
 		Log.Info( $"Created {grub}." );
-	}
-
-	public override string ToString()
-	{
-		return $"Player ({Client.Connection.DisplayName})";
 	}
 }

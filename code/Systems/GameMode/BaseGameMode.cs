@@ -7,7 +7,9 @@ public abstract class BaseGameMode : Component
 	public static BaseGameMode Current { get; private set; }
 	public virtual string Name => "Game Mode";
 	
-	[Sync( SyncFlags.FromHost )] public NetList<Player> Players { get; set; } = new();
+	[Sync( SyncFlags.FromHost )] 
+	protected NetList<Player> Players { get; private set; } = new();
+	
 	public bool GameStarted => IsGameStarted();
 
 	protected override void OnStart()

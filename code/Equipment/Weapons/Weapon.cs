@@ -206,14 +206,14 @@ public partial class Weapon : Component
 
 			if ( !CanSwapAfterUse )
 			{
-				if ( grub.Player.IsValid() )
-					grub.Player.HasFiredThisTurn = true;
-				Gamemode.FFA.UseTurn( true );
+				if ( grub.Owner.IsValid() )
+					grub.Owner.HasFiredThisTurn = true;
+				// Gamemode.FFA.UseTurn( true );
 			}
 			else
 			{
-				if ( grub.Player.Inventory.IsValid() )
-					grub.Player.Inventory.Holster( grub.Player.Inventory.ActiveSlot );
+				if ( grub.Owner.Inventory.IsValid() )
+					grub.Owner.Inventory.Holster( grub.Owner.Inventory.ActiveSlot );
 			}
 		}
 

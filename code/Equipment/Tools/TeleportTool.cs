@@ -40,7 +40,7 @@ public class TeleportTool : Tool
 		if ( !Equipment.Grub.IsValid() )
 			return;
 
-		var player = Equipment.Grub.Player;
+		var player = Equipment.Grub.Owner;
 		if ( !player.IsValid() )
 			return;
 
@@ -76,7 +76,7 @@ public class TeleportTool : Tool
 
 		var grub = Equipment.Grub;
 
-		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, grub.Player.MousePosition, grub.Player.MousePosition )
+		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, grub.Owner.MousePosition, grub.Owner.MousePosition )
 			.IgnoreGameObject( GameObject )
 			.Run();
 
@@ -99,7 +99,7 @@ public class TeleportTool : Tool
 			return;
 
 		var grub = Equipment.Grub;
-		var grubPosition = grub.Player.MousePosition;
+		var grubPosition = grub.Owner.MousePosition;
 		grub.WorldPosition = grubPosition;
 		TeleportEffects( grubPosition );
 

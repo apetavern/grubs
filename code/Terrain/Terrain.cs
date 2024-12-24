@@ -1,4 +1,5 @@
 ﻿using Grubs.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 using Sandbox.Sdf;
 
 namespace Grubs.Terrain;

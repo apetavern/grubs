@@ -1,8 +1,9 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
+using Grubs.Pawn;
 using Grubs.UI.Components;
 
-namespace Grubs.Pawn.Controller;
+namespace Grubs.Systems.Pawn.Grubs.Controller;
 
 [Title( "Grubs - Player Controller" ), Category( "Grubs" )]
 public sealed partial class GrubPlayerController : Component
@@ -220,8 +221,8 @@ public sealed partial class GrubPlayerController : Component
 		if ( IsProxy || !Grub.IsValid() )
 			return false;
 
-		if ( Gamemode.GetCurrent().TurnIsChanging )
-			return false;
+		// if ( Gamemode.GetCurrent().TurnIsChanging )
+		// 	return false;
 
 		if ( !Grub.IsActive )
 			return false;
@@ -229,8 +230,8 @@ public sealed partial class GrubPlayerController : Component
 		if ( Input.UsingController && Cursor.IsEnabled() )
 			return false;
 
-		if ( PlayerInventory.Local.IsClosing == true )
-			return false;
+		// if ( PlayerInventory.Local.IsClosing == true )
+		// 	return false;
 
 		return true;
 	}
