@@ -2,20 +2,20 @@
   "publish": {
     "Enabled": false,
     "ProjectConfig": {
-      "Title": null,
-      "Type": null,
-      "Org": null,
-      "Ident": null,
-      "Tags": null,
+      "Title": "Gr Menu",
+      "Type": "map",
+      "Org": "local",
+      "Ident": "grmenu",
       "Schema": 0,
-      "HasAssets": false,
-      "AssetsPath": null,
-      "ResourcePaths": null,
-      "HasCode": false,
-      "CodePath": null,
+      "IncludeSourceFiles": false,
+      "Resources": null,
       "PackageReferences": [],
       "EditorReferences": [],
-      "Metadata": {}
+      "IsWhitelistDisabled": false,
+      "Metadata": {
+        "SingleAssetSource": "maps/gr_menu.vmap",
+        "ParentPackage": "apetavern.grubs"
+      }
     }
   }
 }
