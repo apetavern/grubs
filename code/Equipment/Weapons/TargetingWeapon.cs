@@ -62,7 +62,7 @@ public sealed class TargetingWeapon : Weapon
 		if ( !Equipment.Deployed )
 			return;
 
-		var player = Equipment.Grub.Player;
+		var player = Equipment.Grub.Owner;
 		if ( !player.IsValid() )
 			return;
 		

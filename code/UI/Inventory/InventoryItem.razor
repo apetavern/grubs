@@ -1,77 +1,77 @@
-﻿@namespace Grubs.UI.Inventory
-
-@using Grubs.Equipment
-@using Grubs.Pawn
-@using Sandbox.UI
-
-@inherits Panel
-
-@attribute [StyleSheet]
-
-
-<root class=@(IsDisabled() ? "disabled" : PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex && Input.UsingController ? "selected" : "")>
-    @if (Equipment is not null)
-    {
-        <img src="@Equipment.Icon" />
-        <div class="ammo">@Ammo</div>
-        <div class="delay-progress" style="height: @(GetDelayHeight())%"></div>
-        <section class="delay @(Equipment.Unlocked ? "hidden" : "")">
-            <i>lock</i>
-            <label>@(Equipment.UnlockDelay - Gamemodes.Gamemode.GetCurrent().RoundsPassed)</label>
-        </section>
-    }
-</root>
-
-@code
-{
-    public Equipment Equipment { get; set; }
-    public InventoryDisplay InventoryDisplay { get; set; }
-
-    public string Ammo => Equipment?.Ammo == -1 ? "\u221e" : Equipment?.Ammo.ToString();
-
-    protected override void OnClick(MousePanelEvent e)
-    {
-        if (!Equipment?.IsAvailable ?? true)
-            return;
-
-        PlayerInventory.Local.EquipItem(Equipment);
-    }
-
-    public override void Tick()
-    {
-        base.Tick();
-
-        if (InventoryDisplay is null)
-            return;
-
-        if (PanelOrChildrenHovered() || (Equipment.Deployed && Input.UsingController))
-            InventoryDisplay.HoveredItemPanel = this;
-    }
-
-    protected override void OnMouseOut(MousePanelEvent e)
-    {
-        base.OnMouseOut(e);
-
-        if (InventoryDisplay is null)
-            return;
-
-        InventoryDisplay.HoveredItemPanel = null;
-    }
-
-    public bool PanelOrChildrenHovered() => HasHovered || Children.Any(child => child.HasHovered);
-
-    private bool IsDisabled()
-    {
-        return Equipment is null || !Equipment.IsAvailable;
-    }
-
-    private float GetDelayHeight()
-    {
-        return Equipment.Unlocked ? 0 : (1 - ((float)Gamemodes.Gamemode.GetCurrent().RoundsPassed + 1) / (Equipment.UnlockDelay + 1)) * 100;
-    }
-
-    protected override int BuildHash()
-    {
-        return HashCode.Combine(Equipment?.Ammo, PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex, Gamemodes.Gamemode.GetCurrent().RoundsPassed);
-    }
-}
+﻿@* @namespace Grubs.UI.Inventory *@
+@* *@
+@* @using Grubs.Equipment *@
+@* @using Grubs.Pawn *@
+@* @using Sandbox.UI *@
+@* *@
+@* @inherits Panel *@
+@* *@
+@* @attribute [StyleSheet] *@
+@* *@
+@* *@
+@* <root class=@(IsDisabled() ? "disabled" : PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex && Input.UsingController ? "selected" : "")> *@
+@*     @if (Equipment is not null) *@
+@*     { *@
+@*         <img src="@Equipment.Icon" /> *@
+@*         <div class="ammo">@Ammo</div> *@
+@*         <div class="delay-progress" style="height: @(GetDelayHeight())%"></div> *@
+@*         <section class="delay @(Equipment.Unlocked ? "hidden" : "")"> *@
+@*             <i>lock</i> *@
+@*             <label>@(Equipment.UnlockDelay - Gamemodes.Gamemode.GetCurrent().RoundsPassed)</label> *@
+@*         </section> *@
+@*     } *@
+@* </root> *@
+@* *@
+@* @code *@
+@* { *@
+@*     public Equipment Equipment { get; set; } *@
+@*     public InventoryDisplay InventoryDisplay { get; set; } *@
+@* *@
+@*     public string Ammo => Equipment?.Ammo == -1 ? "\u221e" : Equipment?.Ammo.ToString(); *@
+@* *@
+@*     protected override void OnClick(MousePanelEvent e) *@
+@*     { *@
+@*         if (!Equipment?.IsAvailable ?? true) *@
+@*             return; *@
+@* *@
+@*         PlayerInventory.Local.EquipItem(Equipment); *@
+@*     } *@
+@* *@
+@*     public override void Tick() *@
+@*     { *@
+@*         base.Tick(); *@
+@* *@
+@*         if (InventoryDisplay is null) *@
+@*             return; *@
+@* *@
+@*         if (PanelOrChildrenHovered() || (Equipment.Deployed && Input.UsingController)) *@
+@*             InventoryDisplay.HoveredItemPanel = this; *@
+@*     } *@
+@* *@
+@*     protected override void OnMouseOut(MousePanelEvent e) *@
+@*     { *@
+@*         base.OnMouseOut(e); *@
+@* *@
+@*         if (InventoryDisplay is null) *@
+@*             return; *@
+@* *@
+@*         InventoryDisplay.HoveredItemPanel = null; *@
+@*     } *@
+@* *@
+@*     public bool PanelOrChildrenHovered() => HasHovered || Children.Any(child => child.HasHovered); *@
+@* *@
+@*     private bool IsDisabled() *@
+@*     { *@
+@*         return Equipment is null || !Equipment.IsAvailable; *@
+@*     } *@
+@* *@
+@*     private float GetDelayHeight() *@
+@*     { *@
+@*         return Equipment.Unlocked ? 0 : (1 - ((float)Gamemodes.Gamemode.GetCurrent().RoundsPassed + 1) / (Equipment.UnlockDelay + 1)) * 100; *@
+@*     } *@
+@* *@
+@*     protected override int BuildHash() *@
+@*     { *@
+@*         return HashCode.Combine(Equipment?.Ammo, PlayerInventory.Local.ActiveSlot == Equipment?.SlotIndex, Gamemodes.Gamemode.GetCurrent().RoundsPassed); *@
+@*     } *@
+@* } *@

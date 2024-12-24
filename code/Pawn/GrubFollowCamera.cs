@@ -92,27 +92,27 @@ public class GrubFollowCamera : Component
 
 	private void FindTarget()
 	{
-		var targetGuid = Gamemode.GetCurrent().CameraTarget;
-		if ( targetGuid != Guid.Empty )
-		{
-			SetTarget( Scene.Directory.FindByGuid( targetGuid ), .5f );
-			return;
-		}
-
-		foreach ( var projectile in Scene.GetAllComponents<Projectile>().Where( p => p.Active ) )
-		{
-			if ( !projectile.IsValid() )
-				continue;
-			if ( projectile.Tags.Has( "notarget" ) || Resolution.ForceResolved.Contains( projectile.GameObject.Id ) )
-				continue;
-
-			SetTarget( projectile.GameObject, 1.5f );
-			return;
-		}
-
-		var component = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId );
-		if ( component is Player player && player.ActiveGrub.IsValid() )
-			SetTarget( player.ActiveGrub.GameObject );
+		// var targetGuid = Gamemode.GetCurrent().CameraTarget;
+		// if ( targetGuid != Guid.Empty )
+		// {
+		// 	SetTarget( Scene.Directory.FindByGuid( targetGuid ), .5f );
+		// 	return;
+		// }
+		//
+		// foreach ( var projectile in Scene.GetAllComponents<Projectile>().Where( p => p.Active ) )
+		// {
+		// 	if ( !projectile.IsValid() )
+		// 		continue;
+		// 	if ( projectile.Tags.Has( "notarget" ) || Resolution.ForceResolved.Contains( projectile.GameObject.Id ) )
+		// 		continue;
+		//
+		// 	SetTarget( projectile.GameObject, 1.5f );
+		// 	return;
+		// }
+		//
+		// var component = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId );
+		// if ( component is Player player && player.ActiveGrub.IsValid() )
+		// 	SetTarget( player.ActiveGrub.GameObject );
 	}
 
 	public void PanCamera()

@@ -1,10 +1,9 @@
 ﻿@namespace Grubs.UI.Components
 
 @using Grubs.Gamemodes
-@using Grubs.Gamemodes.Modes
-@using Grubs.UI.Inventory
-@using Grubs.UI.TurnInfo
 @using Grubs.Pawn
+@using Grubs.Systems.GameMode
+@using Grubs.Systems.Pawn
 
 @inherits PanelComponent
 
@@ -17,18 +16,18 @@
 
     <InputHints />
     <PlayerList />
-    <InventoryDisplay Inventory="@Inventory" />
+    @* <InventoryDisplay Inventory=@Inventory /> *@
     <TurnTimer />
 </root>
 
 @code
 {
-    [Property] public required PlayerInventory Inventory { get; set; }
+    [Property] public required Inventory Inventory { get; set; }
 
     protected override void OnUpdate()
     {
         base.OnUpdate();
 
-        SetClass("hide", !Gamemode.FFA.Started);
+        SetClass("hide", !BaseGameMode.Current.GameStarted);
     }
 }

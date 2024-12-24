@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Bots;
 public partial class BotBrain
@@ -21,7 +22,7 @@ public partial class BotBrain
 	private Grub FindTargetWorm()
 	{
 		// Example implementation: find the closest enemy worm
-		var grubs = Scene.GetAllComponents<Grub>().Where( X => X.Player != ActiveGrub.Player );
+		var grubs = Scene.GetAllComponents<Grub>().Where( x => x.Owner != ActiveGrub.Owner );
 		Grub closestWorm = null;
 		float minDistance = float.MaxValue;
 

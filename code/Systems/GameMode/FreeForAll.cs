@@ -1,10 +1,9 @@
-﻿using Grubs.Gamemodes.Modes;
-using Grubs.Systems.Pawn;
+﻿using Grubs.Systems.Pawn;
 using Grubs.Terrain;
 
 namespace Grubs.Systems.GameMode;
 
-[Title( "Free For All" ), Category( "Grubs/Game Mode" )]
+[Title( "Grubs - Free For All" ), Category( "Grubs/Game Mode" )]
 public sealed class FreeForAll : BaseGameMode
 {
 	public override string Name => "Free For All";
@@ -13,7 +12,7 @@ public sealed class FreeForAll : BaseGameMode
 	public FreeForAllState State { get; set; } = FreeForAllState.Lobby;
 
 	[Sync( SyncFlags.FromHost )]
-	public NetList<Player> PlayerQueue { get; private set; } = new();
+	private NetList<Player> PlayerQueue { get; set; } = new();
 	
 	[Sync( SyncFlags.FromHost )]
 	public Player ActivePlayer { get; private set; }

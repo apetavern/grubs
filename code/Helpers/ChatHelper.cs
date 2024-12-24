@@ -1,4 +1,5 @@
 using Grubs.Pawn;
+using Grubs.Systems.Pawn;
 
 namespace Grubs.Helpers;
 
@@ -38,7 +39,7 @@ public sealed class ChatHelper : Component
 			AuthorName = Rpc.Caller.DisplayName,
 			AuthorSteamId = Rpc.Caller.SteamId,
 			Message = messageText,
-			Color = player?.SelectedColor ?? Color.White.Hex,
+			Color = Color.White.Hex,
 			Lifetime = 0f
 		};
 

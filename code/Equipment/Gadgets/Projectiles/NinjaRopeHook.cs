@@ -89,9 +89,9 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 
 	private bool ShouldDestroySelf()
 	{
-		return !PhysicsProjectileComponent.IsValid() 
-		       || !PhysicsProjectileComponent.Grub.IsValid() 
-		       || !PhysicsProjectileComponent.Grub.IsActive 
-		       || Gamemode.GetCurrent().TurnIsChanging;
+		return !PhysicsProjectileComponent.IsValid()
+		       || !PhysicsProjectileComponent.Grub.IsValid()
+		       || !PhysicsProjectileComponent.Grub.IsActive;
+		// || Gamemode.GetCurrent().TurnIsChanging;
 	}
 }

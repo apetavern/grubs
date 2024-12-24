@@ -12,7 +12,7 @@ public partial class BotBrain
 	{
 		FireWeapon();
 
-		if ( !ActiveGrub.Player.IsActive )
+		if ( !ActiveGrub.Owner.IsActive )
 		{
 			timeInState = 0f;
 			currentState = BotState.Cooldown;

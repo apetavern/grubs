@@ -46,7 +46,7 @@ public class GirderTool : Tool
 		if ( Equipment.Grub == null )
 			return;
 
-		var player = Equipment.Grub.Player;
+		var player = Equipment.Grub.Owner;
 		CursorVisual.WorldPosition = player.MousePosition;
 		CursorVisual.WorldRotation *= Rotation.FromPitch( (Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f) );
 
@@ -79,10 +79,10 @@ public class GirderTool : Tool
 
 		var grub = Equipment.Grub;
 
-		if ( grub.Player.MousePosition.Distance( grub.WorldPosition ) > CursorRange )
+		if ( grub.Owner.MousePosition.Distance( grub.WorldPosition ) > CursorRange )
 			return false;
 
-		var trLocation = Scene.Trace.Body( CursorCollider.KeyframeBody, grub.Player.MousePosition )
+		var trLocation = Scene.Trace.Body( CursorCollider.KeyframeBody, grub.Owner.MousePosition )
 			.IgnoreGameObject( GameObject )
 			.Run();
 

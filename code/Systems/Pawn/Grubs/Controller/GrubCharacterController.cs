@@ -3,7 +3,7 @@ using Grubs.Helpers;
 using Grubs.Terrain;
 using Sandbox.Utility;
 
-namespace Grubs.Pawn.Controller;
+namespace Grubs.Systems.Pawn.Grubs.Controller;
 
 [Title( "Grubs - Character Controller" ), Category( "Grubs" ), Icon( "directions_walk", "red", "white" ),
  EditorHandle( "materials/gizmo/charactercontroller.png" )]
@@ -309,12 +309,12 @@ public class GrubCharacterController : Component
 		if ( result.StartedSolid ) // Stuck inside of something
 		{
 			// Don't let active grub push this grub around
-			var activePlayer = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId ) as Player;
-			if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
-			{
-				_stuckTries = 0;
-				return false;
-			}
+			// var activePlayer = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId ) as global::Grubs.Pawn.Player;
+			// if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
+			// {
+			// 	_stuckTries = 0;
+			// 	return false;
+			// }
 		}
 		else if ( !terrainCheck.Hit || !terrainCheck.GameObject.Tags.Contains( "terrain" ) ) // TODO: Work this into the trace if it ever starts working
 		{

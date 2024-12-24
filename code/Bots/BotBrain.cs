@@ -7,6 +7,7 @@ using System.Numerics;
 using System;
 using System.Threading.Tasks;
 using Grubs.Equipment.Weapons;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Bots;
 

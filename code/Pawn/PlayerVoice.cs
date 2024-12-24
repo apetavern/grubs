@@ -1,4 +1,5 @@
-﻿using Sandbox.Audio;
+﻿using Grubs.Systems.Pawn;
+using Sandbox.Audio;
 
 namespace Grubs.Pawn;
 
@@ -24,12 +25,12 @@ public sealed class PlayerVoice : Voice
 		if ( _blockedConnections.Contains( connection ) )
 		{
 			_blockedConnections.Remove( connection );
-			player.Voice.Volume = 1f;
+			// player.Voice.Volume = 1f;
 			return;
 		}
 
 		// Blocking.
 		_blockedConnections.Add( connection );
-		player.Voice.Volume = 0f;
+		// player.Voice.Volume = 0f;
 	}
 }

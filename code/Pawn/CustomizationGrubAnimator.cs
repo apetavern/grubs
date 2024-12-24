@@ -1,5 +1,4 @@
 ﻿using Grubs.Equipment;
-using Grubs.Pawn.Controller;
 
 namespace Grubs.Pawn;
 

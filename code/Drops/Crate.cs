@@ -1,6 +1,7 @@
 ﻿using Grubs.Equipment;
 using Grubs.Helpers;
 using Grubs.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Drops;
 
@@ -44,7 +45,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 		var equipmentResource = ResourceLibrary.Get<EquipmentResource>( resPath );
 
 		var grub = other.GameObject.Root.Components.Get<Grub>( FindMode.EverythingInSelfAndAncestors | FindMode.EverythingInChildren );
-		var equipment = grub.Player.Inventory.Equipment
+		var equipment = grub.Owner.Inventory.Equipment
 			.FirstOrDefault( e => e.Data.Name == equipmentResource.Name );
 		equipment?.IncrementAmmo();
 

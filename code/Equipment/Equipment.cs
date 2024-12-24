@@ -1,7 +1,7 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment.Weapons;
 using Grubs.Pawn;
-using Grubs.Pawn.Controller;
+using Grub = Grubs.Systems.Pawn.Grubs.Grub;
 
 namespace Grubs.Equipment;
 
@@ -29,9 +29,9 @@ public class Equipment : Component
 
 	public Grub Grub { get; set; }
 
-	public int RoundsUntilUnlock => (UnlockDelay - Gamemodes.Gamemode.GetCurrent().RoundsPassed).Clamp( 0, int.MaxValue );
-	public bool Unlocked => RoundsUntilUnlock == 0 || Ammo == -1;
-	public bool IsAvailable => Ammo != 0 && Unlocked;
+	// public int RoundsUntilUnlock => (UnlockDelay - Gamemodes.Gamemode.GetCurrent().RoundsPassed).Clamp( 0, int.MaxValue );
+	// public bool Unlocked => RoundsUntilUnlock == 0 || Ammo == -1;
+	public bool IsAvailable => Ammo != 0;
 
 	protected override void OnStart()
 	{
@@ -85,8 +85,8 @@ public class Equipment : Component
 
 	public void Holster()
 	{
-		if ( Grub.IsValid() && Grub.Player.IsValid() )
-			GameObject.SetParent( Grub.Player.GameObject );
+		if ( Grub.IsValid() && Grub.Owner.IsValid() )
+			GameObject.SetParent( Grub.Owner.GameObject );
 
 		if ( Components.TryGet( out Weapon weapon ) )
 		{

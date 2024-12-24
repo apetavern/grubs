@@ -24,6 +24,6 @@ public partial class BotBrain
 
 	private Weapon SelectBestWeapon()
 	{
-		return ActiveGrub.Player.Inventory.ActiveEquipment.Components.Get<Weapon>();
+		return ActiveGrub.Owner.Inventory.ActiveEquipment.Components.Get<Weapon>();
 	}
 }

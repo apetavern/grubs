@@ -1,5 +1,6 @@
 ﻿using Grubs.Equipment;
-using Grubs.Pawn.Controller;
+using Grubs.Systems.Pawn.Grubs;
+using GrubPlayerController = Grubs.Systems.Pawn.Grubs.Controller.GrubPlayerController;
 
 namespace Grubs.Pawn;
 

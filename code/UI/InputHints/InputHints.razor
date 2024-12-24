@@ -1,6 +1,7 @@
 @namespace Grubs.UI
 
 @using Grubs.Gamemodes
+@using Grubs.Systems.GameMode
 
 @inherits Panel
 
@@ -86,7 +87,7 @@
 </root>
 
 @code {
-    private bool IsPlaying() => Gamemode.GetCurrent().State == GameState.Playing;
+    private bool IsPlaying() => BaseGameMode.Current.GameStarted;
 
     protected override int BuildHash() => HashCode.Combine(IsPlaying(), Input.UsingController);
 }

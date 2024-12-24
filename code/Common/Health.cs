@@ -3,6 +3,8 @@ using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Gamemodes;
 using Grubs.Helpers;
 using Grubs.Pawn;
+using Grubs.Systems.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Common;
 
@@ -35,13 +37,13 @@ public partial class Health : Component
 	{
 		if ( Components.TryGet( out Grub grub ) )
 		{
-			if ( grub.IsActive )
-				Gamemode.FFA.UseTurn();
+			// if ( grub.IsActive )
+			// 	Gamemode.FFA.UseTurn();
 
 			if ( !immediate )
 			{
-				if ( Connection.Local.IsHost && !Gamemode.GetCurrent().DamageQueue.Contains( grub.Id ) )
-					Gamemode.GetCurrent().DamageQueue.Add( grub.Id );
+				// if ( Connection.Local.IsHost && !Gamemode.GetCurrent().DamageQueue.Contains( grub.Id ) )
+				// 	Gamemode.GetCurrent().DamageQueue.Add( grub.Id );
 
 				DamageQueue.Enqueue( damageInfo );
 				return;
@@ -151,15 +153,15 @@ public partial class Health : Component
 			if ( _deathReason.FromKillTrigger ) // If we've died to a kill trigger, check if we have additional damage to credit, otherwise we've attacked ourselves.
 				attackerGuid = _deathReason.FirstReason != DamageType.None ? _deathReason.FirstInfo.AttackerGuid : grub.Id;
 
-			var attacker = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Grubs.Contains( attackerGuid ) );
-			var connection = attacker?.Network.Owner;
-			using ( Rpc.FilterInclude( connection ) )
-			{
-				if ( grub.Player.IsValid() )
-					Stats.IncrementGrubsKilled( grub.Player.Id );
-			}
-
-			grub.GameObject.Destroy();
+			// var attacker = Scene.GetAllComponents<Player>().FirstOrDefault( p => p.Grubs.Contains( attackerGuid ) );
+			// var connection = attacker?.Network.Owner;
+			// using ( Rpc.FilterInclude( connection ) )
+			// {
+			// 	if ( grub.Owner.IsValid() )
+			// 		Stats.IncrementGrubsKilled( grub.Owner.Id );
+			// }
+			//
+			// grub.GameObject.Destroy();
 		}
 
 		ObjectDied?.Invoke();

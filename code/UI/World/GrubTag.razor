@@ -1,6 +1,7 @@
 @namespace Grubs.UI
 
 @using Grubs.Pawn
+@using Grubs.Systems.Pawn.Grubs
 @using Sandbox;
 @using Sandbox.UI;
 @using Sandbox.Utility
@@ -50,10 +51,11 @@
     {
         get
         {
-            if (_color == Color.White && Color.TryParse(Grub?.Player?.SelectedColor, out var color))
-                _color = color;
-
             return _color;
+            // if (_color == Color.White && Color.TryParse(Grub?.Owner?.SelectedColor, out var color))
+            //     _color = color;
+            //
+            // return _color;
         }
     }
     private Color _color = Color.White;
