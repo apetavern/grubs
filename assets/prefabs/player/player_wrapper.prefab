@@ -12,6 +12,12 @@
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
+        },
+        "Inventory": {
+          "_type": "component",
+          "component_id": "536dfbe2-68ea-42e6-9c3a-80e7f483a63e",
+          "go": "9a501176-452d-4433-8c4f-a98d44060cfb",
+          "component_type": "Inventory"
         }
       },
       {

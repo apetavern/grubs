@@ -35,29 +35,17 @@
         "UseAnimGraph": true
       },
       {
-        "__type": "Grubs.Pawn.Grub",
-        "__guid": "e0ce3ffc-2961-4045-84d2-9d0db8d9832b",
-        "__enabled": false,
-        "Animator": {
-          "_type": "component",
-          "component_id": "17e02fee-495b-4c44-8ca9-6201f0ba74f2",
-          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
-          "component_type": "GrubAnimator"
-        },
-        "Health": {
-          "_type": "component",
-          "component_id": "b3f38c78-6e43-4413-9c4c-24d02c2e6c1f",
-          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
-          "component_type": "Health"
-        }
-      },
-      {
         "__type": "Grubs.Pawn.GrubAnimator",
         "__guid": "17e02fee-495b-4c44-8ca9-6201f0ba74f2",
-        "__enabled": false,
+        "Controller": {
+          "_type": "component",
+          "component_id": "897993e4-af5b-4ff9-94f0-ef74d24a99f4",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "GrubPlayerController"
+        },
         "Grub": {
           "_type": "component",
-          "component_id": "e0ce3ffc-2961-4045-84d2-9d0db8d9832b",
+          "component_id": "109e94f5-d6ca-462d-b855-7b3e9ba32d76",
           "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
           "component_type": "Grub"
         },
@@ -81,28 +69,82 @@
       {
         "__type": "Grubs.Common.Health",
         "__guid": "b3f38c78-6e43-4413-9c4c-24d02c2e6c1f",
-        "__enabled": false,
         "MaxHealth": 150
       },
       {
         "__type": "Grubs.Systems.Pawn.Grubs.Grub",
-        "__guid": "109e94f5-d6ca-462d-b855-7b3e9ba32d76"
+        "__guid": "109e94f5-d6ca-462d-b855-7b3e9ba32d76",
+        "Animator": {
+          "_type": "component",
+          "component_id": "17e02fee-495b-4c44-8ca9-6201f0ba74f2",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "GrubAnimator"
+        },
+        "CharacterController": {
+          "_type": "component",
+          "component_id": "2cd7250f-48e3-40a7-94ec-92e90e5892b8",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "GrubCharacterController"
+        },
+        "Health": {
+          "_type": "component",
+          "component_id": "b3f38c78-6e43-4413-9c4c-24d02c2e6c1f",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "Health"
+        },
+        "PlayerController": {
+          "_type": "component",
+          "component_id": "897993e4-af5b-4ff9-94f0-ef74d24a99f4",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "GrubPlayerController"
+        }
       },
       {
         "__type": "Grubs.Systems.Pawn.Grubs.Controller.GrubPlayerController",
         "__guid": "897993e4-af5b-4ff9-94f0-ef74d24a99f4",
-        "__enabled": false,
+        "Animator": {
+          "_type": "component",
+          "component_id": "17e02fee-495b-4c44-8ca9-6201f0ba74f2",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "GrubAnimator"
+        },
+        "Body": {
+          "_type": "gameobject",
+          "go": "73ee06af-bb34-4446-8e0b-5b831cf01db6"
+        },
+        "CharacterController": {
+          "_type": "component",
+          "component_id": "2cd7250f-48e3-40a7-94ec-92e90e5892b8",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "GrubCharacterController"
+        },
         "Gravity": "0,0,800",
+        "Grub": {
+          "_type": "component",
+          "component_id": "109e94f5-d6ca-462d-b855-7b3e9ba32d76",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "Grub"
+        },
+        "Head": {
+          "_type": "gameobject",
+          "go": "8241e938-3118-4480-bd71-12d3cbf331a9"
+        },
         "WishSpeed": 80
       },
       {
         "__type": "Grubs.Systems.Pawn.Grubs.Controller.GrubCharacterController",
         "__guid": "2cd7250f-48e3-40a7-94ec-92e90e5892b8",
-        "__enabled": false,
         "Acceleration": 10,
+        "Controller": {
+          "_type": "component",
+          "component_id": "897993e4-af5b-4ff9-94f0-ef74d24a99f4",
+          "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+          "component_type": "GrubPlayerController"
+        },
         "GroundAngle": 45,
         "Height": 64,
         "IgnoreLayers": "",
+        "LandingParticles": "particles/landimpact/landimpact.vpcf",
         "Radius": 16,
         "StepHeight": 18
       }
@@ -627,7 +669,7 @@
             "__enabled": false,
             "Grub": {
               "_type": "component",
-              "component_id": "e0ce3ffc-2961-4045-84d2-9d0db8d9832b",
+              "component_id": "109e94f5-d6ca-462d-b855-7b3e9ba32d76",
               "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
               "component_type": "Grub"
             }
