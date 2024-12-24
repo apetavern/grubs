@@ -1,4 +1,5 @@
 ﻿using Grubs.Systems.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Systems.GameMode;
 
@@ -66,5 +67,10 @@ public abstract class BaseGameMode : Component
 	protected virtual bool IsGameStarted()
 	{
 		return false;
+	}
+
+	public virtual bool IsGrubActive( Grub grub )
+	{
+		return true;
 	}
 }

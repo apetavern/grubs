@@ -1,4 +1,5 @@
 ﻿using Grubs.Systems.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 using Grubs.Terrain;
 
 namespace Grubs.Systems.GameMode;
@@ -99,6 +100,11 @@ public sealed class FreeForAll : BaseGameMode
 	protected override bool IsGameStarted()
 	{
 		return State is FreeForAllState.Playing;
+	}
+
+	public override bool IsGrubActive( Grub grub )
+	{
+		return ActivePlayer.ActiveGrub == grub && !TurnIsChanging;
 	}
 
 	private void InitializePlayer( Player player )

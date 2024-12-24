@@ -1,5 +1,6 @@
 using Grubs.Common;
 using Grubs.Pawn;
+using Grubs.Systems.GameMode;
 using Grubs.Systems.Pawn.Grubs.Controller;
 
 namespace Grubs.Systems.Pawn.Grubs;
@@ -16,7 +17,7 @@ public sealed class Grub : Component
 	[Sync]
 	public Mountable ActiveMountable { get; set; }
 
-	public bool IsActive { get; set; } = false;
+	public bool IsActive => BaseGameMode.Current.IsGrubActive( this );
 	
 	[Property] public Health Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }
