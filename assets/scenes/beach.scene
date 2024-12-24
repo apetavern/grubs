@@ -475,12 +475,6 @@
       "NetworkMode": 1,
       "Components": [
         {
-          "__type": "Grubs.Gamemodes.Modes.FreeForAllGamemode",
-          "__guid": "1b128073-d9c4-4060-a11e-9bf14e46f73d",
-          "__enabled": false,
-          "ActivePlayerId": "00000000-0000-0000-0000-000000000000"
-        },
-        {
           "__type": "Grubs.Systems.GameMode.FreeForAll",
           "__guid": "6eb0fa7d-6d3e-4b58-94c7-0c3e56178083"
         }
@@ -657,10 +651,6 @@
           "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c"
         },
         {
-          "__type": "Grubs.Pawn.GrubFollowCamera",
-          "__guid": "e17df8b5-301e-4295-9023-9375fbaab524"
-        },
-        {
           "__type": "Sandbox.AmbientOcclusion",
           "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
           "__version": 1,
@@ -675,6 +665,14 @@
           "__type": "Sandbox.Sharpen",
           "__guid": "c2a83157-c96a-4753-8a45-42ce730adf05",
           "Scale": 0.05
+        },
+        {
+          "__type": "Grubs.Pawn.GrubFollowCamera",
+          "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7",
+          "Target": {
+            "Object": null,
+            "Duration": 0
+          }
         }
       ]
     },
@@ -699,20 +697,6 @@
                 "_type": "gameobject",
                 "prefab": "prefabs/player/client_wrapper.prefab"
               }
-            }
-          ]
-        },
-        {
-          "__guid": "504b9b94-a176-4ef2-8d95-d6a747a75503",
-          "Flags": 0,
-          "Name": "Spawn",
-          "Position": "1034.61,0,57.7177",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "9c094540-c6d2-4962-900c-b3cec155f074",
-              "Color": "0.8902,0.31765,0.05098,1"
             }
           ]
         }

@@ -21,7 +21,7 @@ public sealed class RemoteDetonateWeapon : Weapon
 		}
 
 		if ( Projectile.IsValid() )
-			GrubFollowCamera.Local.SetTarget( Projectile.GameObject );
+			GrubFollowCamera.Local.QueueTarget( Projectile.GameObject );
 
 		if ( Input.Pressed( "fire" ) && IsFiring && Projectile != null )
 		{

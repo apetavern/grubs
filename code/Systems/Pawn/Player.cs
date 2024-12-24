@@ -68,6 +68,8 @@ public sealed class Player : LocalComponent<Player>
 		grub.SetOwner( this );
 		
 		Grubs.Add( grub );
+
+		ActiveGrub ??= grub;
 		
 		Log.Info( $"Created {grub}." );
 	}
