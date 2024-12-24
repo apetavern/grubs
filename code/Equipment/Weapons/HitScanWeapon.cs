@@ -167,6 +167,6 @@ public class HitScanWeapon : Weapon
 		grub.CharacterController?.Punch( direction * HitForce );
 		grub.Health?.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, position ) );
 
-		GrubFollowCamera.Local?.SetTarget( grub.GameObject, 1 );
+		GrubFollowCamera.Local?.QueueTarget( grub.GameObject, 1 );
 	}
 }

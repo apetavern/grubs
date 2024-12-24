@@ -1,28 +1,34 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Gamemodes;
+using Grubs.Systems.GameMode;
+using Grubs.Systems.Pawn;
 using Grubs.Terrain;
 
 namespace Grubs.Pawn;
 
 [Title( "Grubs - Follow Camera" ), Category( "Grubs" )]
-public class GrubFollowCamera : Component
+public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 {
-	public static GrubFollowCamera Local { get; set; }
 	public float Distance { get; set; } = 1024f;
 	public bool AllowZooming { get; set; } = true;
 	public bool AutomaticRefocus { get; set; } = true;
 
-	[Property, ReadOnly] private GameObject Target { get; set; }
+	private Queue<CameraTarget> TargetQueue { get; } = new();
+
+	[Property, ReadOnly] private CameraTarget Target { get; set; }
 
 	private bool _isFocusingTarget;
 	private Vector3 _center;
 	private Vector3 _panDelta;
-	private RealTimeUntil _timeUntilCameraUnlock;
+	private RealTimeUntil _timeSinceTargeted;
 	private RealTimeSince _timeSinceMousePan;
 
-	public GrubFollowCamera()
+	protected override void OnStart()
 	{
+		if ( IsProxy )
+			return;
+
 		Local = this;
 	}
 
@@ -32,11 +38,10 @@ public class GrubFollowCamera : Component
 		listenerTransform.Position = WorldPosition.WithY( 480f );
 		Sound.Listener = listenerTransform;
 
-		if ( _timeUntilCameraUnlock )
-			FindTarget();
+		FindTarget();
 
-		if ( Target.IsValid() && _isFocusingTarget )
-			_center = Target.WorldPosition;
+		if ( Target.Object.IsValid() && _isFocusingTarget )
+			_center = Target.Object.WorldPosition;
 
 		ClampCamera();
 
@@ -50,7 +55,7 @@ public class GrubFollowCamera : Component
 
 		var requestRefocus = Input.Pressed( "camera_reset" );
 		var automaticRefocus = !Input.Down( "camera_pan" ) && _timeSinceMousePan > 3 && AutomaticRefocus;
-		if ( Target.IsValid() && (requestRefocus || automaticRefocus) )
+		if ( Target.Object.IsValid() && (requestRefocus || automaticRefocus) )
 			_isFocusingTarget = true;
 	}
 
@@ -71,12 +76,10 @@ public class GrubFollowCamera : Component
 		AdjustHighlightOutline();
 	}
 
-	public void SetTarget( GameObject target, float duration = 0 )
+	public void QueueTarget( GameObject targetObject, float duration = 0 )
 	{
-		if ( duration > 0 )
-			_timeUntilCameraUnlock = duration;
-
-		Target = target;
+		var cameraTarget = new CameraTarget() { Object = targetObject, Duration = duration };
+		TargetQueue.Enqueue( cameraTarget );
 	}
 
 	private void AdjustHighlightOutline()
@@ -92,6 +95,26 @@ public class GrubFollowCamera : Component
 
 	private void FindTarget()
 	{
+		if ( !BaseGameMode.Current.GameStarted )
+			return;
+			
+		if ( TargetQueue.Count == 0 )
+		{
+			Target = new CameraTarget
+			{
+				Object = Player.Local?.ActiveGrub?.GameObject, 
+				Duration = 0f,
+			};
+			return;
+		}
+
+		if ( _timeSinceTargeted > Target.Duration )
+		{
+			var newTarget = TargetQueue.Dequeue();
+			Log.Info( $"Switching camera target to {newTarget.Object.Name}" );
+			Target = newTarget;
+			_timeSinceTargeted = 0f;
+		}
 		// var targetGuid = Gamemode.GetCurrent().CameraTarget;
 		// if ( targetGuid != Guid.Empty )
 		// {
@@ -126,7 +149,7 @@ public class GrubFollowCamera : Component
 
 		if ( _isFocusingTarget )
 		{
-			_center = Target?.WorldPosition ?? _center;
+			_center = Target.Object?.WorldPosition ?? _center;
 
 			if ( !_panDelta.LengthSquared.AlmostEqual( 0, 0.1f ) )
 				_isFocusingTarget = false;

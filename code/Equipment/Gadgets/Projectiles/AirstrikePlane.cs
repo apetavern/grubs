@@ -87,7 +87,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 			bomb.NetworkSpawn();
 
 			if ( i == AmountToDrop / 2 )
-				GrubFollowCamera.Local.SetTarget( bomb, 5f );
+				GrubFollowCamera.Local.QueueTarget( bomb, 5f );
 
 			bomb.WorldPosition = Model.GetAttachment( "droppoint" ).Value.Position;
 			bomb.WorldRotation = WorldRotation * Rotation.FromPitch( 25f );

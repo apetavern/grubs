@@ -69,7 +69,7 @@ public class MeleeWeapon : Weapon
 				hitGrub.CharacterController.Punch( (direction + Vector3.Up) * HitForce );
 				hitGrub.CharacterController.ReleaseFromGround();
 
-				GrubFollowCamera.Local?.SetTarget( hitGrub.GameObject, 2 );
+				GrubFollowCamera.Local?.QueueTarget( hitGrub.GameObject, 2 );
 			}
 
 			if ( tr.GameObject.Components.TryGet( out Rigidbody body, FindMode.EverythingInSelfAndAncestors ) )
