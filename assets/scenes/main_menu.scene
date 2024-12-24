@@ -2,6 +2,22 @@
   "__guid": "1aef78f6-e507-47ac-8724-74f92c9ec5db",
   "GameObjects": [
     {
+      "__guid": "2b43679f-f950-4552-8ff6-05090e4fb479",
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "8279005d-c5d7-4371-8434-4fa3039952ad",
+          "Changes": "",
+          "Description": "",
+          "SceneTags": "",
+          "Title": "main_menu"
+        }
+      ]
+    },
+    {
       "__guid": "2e35c746-223e-47ab-9608-440dd81bc057",
       "Flags": 0,
       "Name": "Map",
@@ -11,8 +27,11 @@
           "__type": "Sandbox.MapInstance",
           "__guid": "cb9273ba-e9ed-4379-91ac-d478f6bc05af",
           "__version": 1,
-          "MapName": "maps/gr_menu.vpk",
+          "EnableCollision": true,
+          "MapName": "maps/gr_menu.vmap",
           "NoOrigin": true,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
@@ -67,7 +86,9 @@
           "BackBlur": true,
           "BlurSize": 25,
           "FocalDistance": 135,
-          "FrontBlur": false
+          "FocusRange": 500,
+          "FrontBlur": false,
+          "QualityLevel": "High"
         }
       ]
     },
@@ -130,6 +151,7 @@
           "AutoScreenScale": true,
           "Opacity": 1,
           "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
           "ZIndex": 100
         }
       ]
@@ -143,8 +165,25 @@
         {
           "__type": "Sandbox.SoundPointComponent",
           "__guid": "6be36c09-4210-4ff2-81ec-2aa25e54aabb",
+          "Distance": 512,
           "DistanceAttenuation": false,
           "DistanceAttenuationOverride": false,
+          "Falloff": [
+            {
+              "x": 0,
+              "y": 1,
+              "in": 3.1415927,
+              "out": -3.1415927,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
           "Force2d": false,
           "MaxRepeatTime": 0,
           "MinRepeatTime": 0,
@@ -173,9 +212,13 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
     "NetworkInterpolation": true,
+    "PhysicsSubSteps": 1,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
+    "Metadata": {
+      "Title": "main_menu"
+    },
     "NavMesh": {
       "Enabled": false,
       "IncludeStaticBodies": true,
@@ -189,9 +232,9 @@
       "IncludedBodies": ""
     }
   },
+  "ResourceVersion": 2,
   "Title": "main_menu",
-  "Description": "",
-  "ResourceVersion": 1,
+  "Description": null,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
