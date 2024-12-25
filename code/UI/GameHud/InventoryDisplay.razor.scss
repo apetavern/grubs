@@ -6,6 +6,13 @@ InventoryDisplay {
     bottom: 0;
     color: $camo-light;
     flex-direction: column;
+    transition: opacity 0.1s;
+    opacity: 0;
+    pointer-events: all;
+    
+    &.show {
+        opacity: 1;
+    }
     
     .title {
         height: 48px;
@@ -26,7 +33,6 @@ InventoryDisplay {
     .body {
         background-color: $camo-dark;
         width: 520px;
-        //height: 660px;
         padding: 36px;
         flex-direction: column;
         gap: 12px;
@@ -38,6 +44,15 @@ InventoryDisplay {
                 width: 80px;
                 height: 80px;
                 background-color: $camo-darker;
+                
+                &.disabled {
+                    opacity: 0.55;
+                }
+                
+                &:hover:not(.disabled) {
+                    background-color: darken($camo-darker, 15%);
+                    transform: scale(1.03);
+                }
                 
                 .equipment-ammo {
                     position: absolute;

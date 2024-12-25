@@ -1,6 +1,7 @@
 ﻿@namespace Grubs.UI
 
 @using Grubs.Systems.GameMode
+@using Grubs.UI.Components
 @using Grubs.UI.GameHud
 
 @inherits PanelComponent
@@ -11,9 +12,11 @@
 }
 
 <root>
+    <Cursor />
+    
     @if (GameMode.State is FreeForAllState.Playing)
     {
-        <FreeForAllHud GameMode=@GameMode />
+        <FreeForAllHud GameMode=@GameMode/>
     }
 </root>
 
