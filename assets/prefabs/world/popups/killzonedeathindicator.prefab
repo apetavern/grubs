@@ -1,0 +1,65 @@
+{
+  "RootObject": {
+    "__guid": "b92b2d1e-a91c-4248-819b-a36841466ce6",
+    "Flags": 0,
+    "Name": "killzonedeathindicator",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.WorldPanel",
+        "__guid": "a29f1e68-32f1-4576-84fe-4a27700c891b",
+        "HorizontalAlign": "Center",
+        "InteractionRange": 1000,
+        "LookAtCamera": true,
+        "PanelSize": "512,512",
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": true,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderScale": 1,
+        "VerticalAlign": "Center"
+      },
+      {
+        "__type": "Grubs.UI.KillZoneDeathIndicator",
+        "__guid": "3bc5ed9a-41a0-436c-97c6-e2aa9f06cf08",
+        "DestroyDelay": 12,
+        "Offset": "0,0,0",
+        "RiseSpeed": 0
+      }
+    ],
+    "Children": [],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

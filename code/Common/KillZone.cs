@@ -28,13 +28,14 @@ public class KillZone : Component, Component.ITriggerListener
 
 		if ( other.GameObject.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
 		{
-			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone(), true );
+			Log.Info( other.WorldPosition );
+			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( other.WorldPosition ), true );
 		}
 		else if ( other.GameObject.Components.TryGet( out Mountable mountable, FindMode.EverythingInSelfAndAncestors ) )
 		{
 			var mountableGrub = mountable.Grub;
 			mountable.Dismount();
-			mountableGrub.Health.TakeDamage( GrubsDamageInfo.FromKillZone(), true );
+			mountableGrub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( other.WorldPosition ), true );
 		}
 		else
 		{

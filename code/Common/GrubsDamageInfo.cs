@@ -59,9 +59,9 @@ public readonly struct GrubsDamageInfo
 		return new GrubsDamageInfo( damage, attackerGuid, attackerName ).WithTag( "fall" );
 	}
 
-	public static GrubsDamageInfo FromKillZone()
+	public static GrubsDamageInfo FromKillZone( Vector3 position )
 	{
-		return new GrubsDamageInfo( float.MaxValue, Guid.Empty ).WithTag( "killzone" );
+		return new GrubsDamageInfo( float.MaxValue, Guid.Empty, worldPosition: position ).WithTag( "killzone" );
 	}
 
 	public static GrubsDamageInfo FromDisconnect()

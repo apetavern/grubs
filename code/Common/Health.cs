@@ -3,6 +3,7 @@ using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Gamemodes;
 using Grubs.Helpers;
 using Grubs.Pawn;
+using Grubs.Systems.GameMode;
 using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 
@@ -37,9 +38,6 @@ public partial class Health : Component
 	{
 		if ( Components.TryGet( out Grub grub ) )
 		{
-			// if ( grub.IsActive )
-			// 	Gamemode.FFA.UseTurn();
-
 			if ( !immediate )
 			{
 				// if ( Connection.Local.IsHost && !Gamemode.GetCurrent().DamageQueue.Contains( grub.Id ) )
@@ -67,7 +65,9 @@ public partial class Health : Component
 				damageInfos.Add( damageInfo );
 				_deathReason = DeathReason.FindReason( grub, damageInfos );
 			}
-
+			
+			BaseGameMode.Current.GrubDied( grub );
+			WorldPopupHelper.Instance.CreateKillZoneDeathIndicator( damageInfo.WorldPosition );
 			_ = OnDeath( killzone );
 		}
 	}
@@ -161,7 +161,7 @@ public partial class Health : Component
 			// 		Stats.IncrementGrubsKilled( grub.Owner.Id );
 			// }
 			//
-			// grub.GameObject.Destroy();
+			grub.GameObject.Destroy();
 		}
 
 		ObjectDied?.Invoke();

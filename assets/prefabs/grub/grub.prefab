@@ -3,6 +3,7 @@
     "__guid": "b922f141-a7b8-43b6-980c-20b64cb0180f",
     "Flags": 0,
     "Name": "grub",
+    "Position": "0,0,-0.5795868",
     "Tags": "player",
     "Enabled": true,
     "Components": [
@@ -141,7 +142,7 @@
           "component_type": "GrubPlayerController"
         },
         "GroundAngle": 80,
-        "Height": 32,
+        "Height": 28,
         "IgnoreLayers": "",
         "LandingParticles": "particles/landimpact/landimpact.vpcf",
         "Radius": 8,

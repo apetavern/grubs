@@ -9,13 +9,14 @@ public sealed class WorldPopupHelper : Component
 
 	[Property] public GameObject DamageNumberPrefab { get; set; }
 	[Property] public GameObject CratePickupPrefab { get; set; }
+	[Property] public GameObject KillZoneDeathIndicatorPrefab { get; set; }
 
 	public WorldPopupHelper()
 	{
 		Instance = this;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void CreateDamagePopup( Guid targetIdent, float damageTaken )
 	{
 		var target = Scene.Directory.FindByGuid( targetIdent );
@@ -28,7 +29,7 @@ public sealed class WorldPopupHelper : Component
 		damageNumber.Damage = damageTaken;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void CreatePickupPopup( Guid targetIdent, string icon )
 	{
 		var target = Scene.Directory.FindByGuid( targetIdent );
@@ -39,5 +40,18 @@ public sealed class WorldPopupHelper : Component
 		var cratePickup = popupPrefab.Components.Get<CratePickup>();
 		cratePickup.Target = target;
 		cratePickup.Icon = icon;
+	}
+
+	[Rpc.Broadcast]
+	public void CreateKillZoneDeathIndicator( Vector3 worldPosition )
+	{
+		Log.Info( $"Creating kill zone death indicator at {worldPosition}." );
+
+		var safePosition = worldPosition.WithZ( 20f );
+		var target = new GameObject { WorldPosition = safePosition };
+		
+		var go = KillZoneDeathIndicatorPrefab.Clone();
+		var indicator = go.Components.Get<KillZoneDeathIndicator>();
+		indicator.Target = target;
 	}
 }

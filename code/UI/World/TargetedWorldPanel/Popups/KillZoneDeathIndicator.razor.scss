@@ -1,0 +1,9 @@
+﻿@import '../../../common.scss';
+
+KillZoneDeathIndicator {
+    font-size: 176px;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.15s ease;
+    filter: drop-shadow(0px 30px 70px rgba(0, 0, 0, 0.8));
+}

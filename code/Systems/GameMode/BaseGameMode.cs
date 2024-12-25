@@ -64,6 +64,17 @@ public abstract class BaseGameMode : Component
 	/// </summary>
 	protected virtual void OnPlayerJoined( Player player ) { }
 
+	/// <summary>
+	/// Called when a Grub dies.
+	/// </summary>
+	/// <param name="grub">The dead grub :sob:</param>
+	public void GrubDied( Grub grub )
+	{
+		OnGrubDied( grub );
+	}
+	
+	protected virtual void OnGrubDied( Grub grub ) { }
+
 	protected virtual bool IsGameStarted()
 	{
 		return false;
