@@ -97,6 +97,17 @@ public sealed class FreeForAll : BaseGameMode
 		}
 	}
 
+	protected override void OnGrubDied( Grub grub )
+	{
+		const float grubDeathTurnRemainder = 3f;
+		
+		// If the grub is the active grub, end the turn.
+		if ( grub == ActivePlayer.ActiveGrub )
+		{
+			TimeUntilTurnOver = Math.Min( TimeUntilTurnOver, grubDeathTurnRemainder );
+		}
+	}
+
 	protected override bool IsGameStarted()
 	{
 		return State is FreeForAllState.Playing;

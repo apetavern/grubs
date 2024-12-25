@@ -668,11 +668,7 @@
         },
         {
           "__type": "Grubs.Pawn.GrubFollowCamera",
-          "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7",
-          "Target": {
-            "Object": null,
-            "Duration": 0
-          }
+          "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7"
         }
       ]
     },
@@ -746,6 +742,10 @@
           "DamageNumberPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/popups/damagenumber.prefab"
+          },
+          "KillZoneDeathIndicatorPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/popups/killzonedeathindicator.prefab"
           }
         },
         {
