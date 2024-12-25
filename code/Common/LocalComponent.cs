@@ -7,8 +7,23 @@
 /// <typeparam name="T">The component type to keep a local instance of.</typeparam>
 public abstract class LocalComponent<T> : Component where T : LocalComponent<T>
 {
-	public static T Local { get; protected set; }
-	public static T GetLocal() => Local.IsValid() ? Local : null;
+	private static T _local;
+	
+	public static T Local
+	{
+		get
+		{
+			if ( Game.IsEditor && _local is null )
+			{
+				return Game.ActiveScene.GetAllComponents<T>().FirstOrDefault();
+			}
+			return _local.IsValid() ? _local : null;
+		}
+		protected set
+		{
+			_local = value;
+		}
+	}
 
 	protected override void OnDestroy()
 	{
