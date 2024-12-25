@@ -15,7 +15,7 @@ public abstract class LocalComponent<T> : Component where T : LocalComponent<T>
 		{
 			if ( Game.IsEditor && _local is null )
 			{
-				return Game.ActiveScene.GetAllComponents<T>().FirstOrDefault();
+				return Game.ActiveScene.GetAllComponents<T>().FirstOrDefault( c => c.Network.IsOwner );
 			}
 			return _local.IsValid() ? _local : null;
 		}
