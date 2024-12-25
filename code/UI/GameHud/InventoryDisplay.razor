@@ -1,7 +1,9 @@
 ﻿@namespace Grubs.UI.GameHud
 
 @using Grubs.Equipment
+@using Grubs.Equipment.Weapons
 @using Grubs.Systems.Pawn
+@using Grubs.UI.Components
 
 @inherits Panel
 
@@ -18,9 +20,12 @@
             <div class="inventory-row">
                 @foreach (var equipment in Inventory.Equipment.Skip(i).Take(5))
                 {
-                    <div class="inventory-square">
-                        <div class="equipment-ammo">@GetAmmoDisplay( equipment )</div>
-                        <img src=@equipment.Icon class="equipment-preview" />
+                    <div 
+                        class="inventory-square @(equipment.Ammo == 0 ? "disabled" : "")"
+                        onclick=@(() => OnInventoryItemClicked(equipment))
+                        >
+                        <div class="equipment-ammo">@GetAmmoDisplay(equipment)</div>
+                        <img src=@equipment.Icon class="equipment-preview"/>
                     </div>
                 }
             </div>
@@ -31,13 +36,27 @@
 
 @code
 {
-    private Player Player => Player.Local;
-    private Inventory Inventory => Player?.Inventory;
+    private Inventory Inventory => Inventory.Local;
 
     public string GetAmmoDisplay(Equipment equipment) => equipment?.Ammo == -1 ? "\u221e" : equipment?.Ammo.ToString();
 
+    public override void Tick()
+    {
+        var showInventory = Inventory?.InventoryOpen ?? false;
+        Cursor.Enabled( "inventory", showInventory );
+        SetClass( "show", showInventory );
+    }
+
+    private void OnInventoryItemClicked(Equipment equipment)
+    {
+        if (equipment.Ammo == 0)
+            return;
+        
+        Inventory?.EquipItem( equipment );
+    }
+
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player, Inventory);
+        return HashCode.Combine(Inventory, Inventory?.InventoryOpen);
     }
 }
