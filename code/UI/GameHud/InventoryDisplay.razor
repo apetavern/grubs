@@ -1,0 +1,43 @@
+﻿@namespace Grubs.UI.GameHud
+
+@using Grubs.Equipment
+@using Grubs.Systems.Pawn
+
+@inherits Panel
+
+@if (Inventory is null)
+{
+    return;
+}
+
+<root>
+    <div class="title">INVENTORY</div>
+    <div class="body">
+        @for (var i = 0; i < Inventory.Equipment.Count; i += 5)
+        {
+            <div class="inventory-row">
+                @foreach (var equipment in Inventory.Equipment.Skip(i).Take(5))
+                {
+                    <div class="inventory-square">
+                        <div class="equipment-ammo">@GetAmmoDisplay( equipment )</div>
+                        <img src=@equipment.Icon class="equipment-preview" />
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</root>
+
+@code
+{
+    private Player Player => Player.Local;
+    private Inventory Inventory => Player?.Inventory;
+
+    public string GetAmmoDisplay(Equipment equipment) => equipment?.Ammo == -1 ? "\u221e" : equipment?.Ammo.ToString();
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player, Inventory);
+    }
+}

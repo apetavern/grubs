@@ -130,6 +130,10 @@ public sealed class FreeForAll : BaseGameMode
 			var spawnLocation = GrubsTerrain.Instance.FindSpawnLocation( size: grubSize );
 			player.AddGrub( spawnLocation );
 		}
+		
+		var inv = player.Components.Get<Inventory>();
+		inv.Player = player;
+		inv.InitializeWeapons( GrubsConfig.InfiniteAmmo );
 			
 		PlayerQueue.Add( player );
 	}

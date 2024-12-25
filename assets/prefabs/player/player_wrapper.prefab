@@ -25,7 +25,80 @@
         "__guid": "536dfbe2-68ea-42e6-9c3a-80e7f483a63e",
         "ActiveSlot": 0,
         "EquipmentActive": false,
-        "EquipmentPrefabs": [],
+        "EquipmentPrefabs": [
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/banana_bomb/banana_bomb.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/bazooka/bazooka.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/dynamite/dynamite.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/flamethrower/flamethrower.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/gibgun/gibgun.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/grenade/grenade.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/landmine/landmine.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/minigun/minigun.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/revolver/revolver.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/shotgun/shotgun.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/uzi/uzi.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/girder/girder.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/jetpack/jetpack.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/ninja_rope/ninja_rope.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/smoke_break/smoke_break.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/torch/torch.prefab"
+          }
+        ],
         "Player": {
           "_type": "component",
           "component_id": "2e4b2a05-4dec-42e8-9a75-609fe1d90a86",
