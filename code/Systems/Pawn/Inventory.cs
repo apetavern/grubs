@@ -36,7 +36,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 		Equipment.Clear();
 	}
 
-	[Broadcast( NetPermission.HostOnly )]
+	[Rpc.Owner( NetFlags.HostOnly )]
 	public void InitializeWeapons( bool infiniteAmmo )
 	{
 		if ( IsProxy )
@@ -139,7 +139,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 			InventoryOpen = false;
 	}
 	
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Equip( int slot )
 	{
 		if ( !Player.IsActive )
@@ -156,7 +156,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 		equipment.Deploy( Player.ActiveGrub );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Holster( int slot )
 	{
 		var equipment = GetActiveEquipment( slot );

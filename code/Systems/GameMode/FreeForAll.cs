@@ -113,6 +113,11 @@ public sealed class FreeForAll : BaseGameMode
 		return State is FreeForAllState.Playing;
 	}
 
+	public override bool IsPlayerActive( Player player )
+	{
+		return ActivePlayer == player && !TurnIsChanging;
+	}
+
 	public override bool IsGrubActive( Grub grub )
 	{
 		return ActivePlayer.ActiveGrub == grub && !TurnIsChanging;

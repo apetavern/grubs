@@ -1,4 +1,5 @@
 ﻿using Grubs.Common;
+using Grubs.Systems.GameMode;
 using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Systems.Pawn;
@@ -25,8 +26,8 @@ public sealed class Player : LocalComponent<Player>
 	
 	[Sync]
 	public bool HasFiredThisTurn { get; set; }
-	
-	public bool IsActive { get; set; }
+
+	public bool IsActive => BaseGameMode.Current.IsPlayerActive( this );
 
 	public Vector3 MousePosition { get; private set; }
 	private static readonly Plane Plane = 

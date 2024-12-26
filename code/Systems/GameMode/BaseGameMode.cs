@@ -80,8 +80,13 @@ public abstract class BaseGameMode : Component
 		return false;
 	}
 
+	public virtual bool IsPlayerActive( Player player )
+	{
+		return false;
+	}
+
 	public virtual bool IsGrubActive( Grub grub )
 	{
-		return true;
+		return false;
 	}
 }
