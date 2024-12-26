@@ -108,6 +108,11 @@ public sealed class FreeForAll : BaseGameMode
 		}
 	}
 
+	protected override void OnEquipmentUsed( Equipment.Equipment _ )
+	{
+		TimeUntilTurnOver = Math.Min( TimeUntilTurnOver, GrubsConfig.MovementGracePeriod );
+	}
+
 	protected override bool IsGameStarted()
 	{
 		return State is FreeForAllState.Playing;
@@ -152,6 +157,8 @@ public sealed class FreeForAll : BaseGameMode
 
 	private void UpdateTurnChange()
 	{
+		ActivePlayer.OnTurnEnd();
+		
 		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
 			return;
 		

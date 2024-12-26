@@ -1,4 +1,5 @@
 global using Sandbox;
+global using Sandbox.Diagnostics;
 global using Sandbox.Network;
 global using Sandbox.UI;
 global using System;
