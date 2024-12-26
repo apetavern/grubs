@@ -21,6 +21,7 @@ public partial class Weapon : Component
 	[Property] public FiringType FiringType { get; set; } = FiringType.Instant;
 	[Property] public AmmoType AmmoType { get; set; } = AmmoType.Numbered;
 	[Property] public SoundEvent UseSound { get; set; }
+	[Property] public GameObject Muzzle { get; set; }
 	[Property] public OnFireDelegate OnFire { get; set; }
 	[Property] public OnFireFinishedDelegate OnFireFinished { get; set; }
 
@@ -238,7 +239,7 @@ public partial class Weapon : Component
 
 		IsCharging = true;
 
-		var muzzle = GetMuzzlePosition();
+		var muzzle = GetMuzzleTransform();
 
 		ChargeGauge.WorldPosition = muzzle.Position;
 		ChargeGauge.WorldRotation = Rotation.LookAt( GetMuzzleForward() ) * Rotation.FromPitch( 90 );
@@ -283,11 +284,10 @@ public partial class Weapon : Component
 			return startPosition.WithY( 512 );
 		}
 
-		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
-		if ( muzzle is null )
-			return grub.EyePosition.Position + grub.WorldRotation.Forward * 4f;
+		var muzzle = GetMuzzleTransform();
 
-		var tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.WorldPosition, muzzle.Value.Position )
+		var position = muzzle.Position + grub.WorldRotation.Forward * 4f;
+		var tr = Scene.Trace.Ray( controller.BoundingBox.Center + grub.WorldPosition, position )
 			.IgnoreGameObjectHierarchy( grub.GameObject )
 			.WithoutTags( "projectile" )
 			.Radius( 1f )
@@ -296,13 +296,17 @@ public partial class Weapon : Component
 		return tr.EndPosition.WithY( 512 );
 	}
 
-	public Transform GetMuzzlePosition()
+	public Transform GetMuzzleTransform()
 	{
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return Transform.World;
 
-		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
-		return muzzle ?? Equipment.Grub?.EyePosition ?? Transform.World;
+		if ( Equipment.Model.TryGetBoneTransform( "muzzle", out var tx ) )
+		{
+			return tx;
+		}
+
+		return Equipment.Grub.EyePosition;
 	}
 
 	public Vector3 GetMuzzleForward()
@@ -310,10 +314,12 @@ public partial class Weapon : Component
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() || !Equipment.Grub.PlayerController.IsValid() )
 			return 0f;
 
-		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
-		if ( !muzzle.HasValue )
-			return Equipment.Grub.PlayerController.EyeRotation.Forward * Equipment.Grub.PlayerController.Facing;
-		return muzzle.Value.Rotation.Forward;
+		if ( Equipment.Model.TryGetBoneTransform( "muzzle", out var tx ) )
+		{
+			return tx.Rotation.Forward;
+		}
+
+		return Equipment.Grub.PlayerController.EyeRotation.Forward * Equipment.Grub.PlayerController.Facing;
 	}
 
 	public string GetFireInputActionDescription()

@@ -19,7 +19,7 @@ namespace Grubs.Equipment.Weapons
 		[Broadcast]
 		private void FireEffects()
 		{
-			var muzzle = GetMuzzlePosition();
+			var muzzle = GetMuzzleTransform();
 
 			if ( UseParticles is not null )
 			{

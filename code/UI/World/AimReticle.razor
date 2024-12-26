@@ -1,6 +1,7 @@
 ﻿@namespace Grubs.UI
 
 @using Grubs.Equipment.Weapons
+@using Grubs.Extensions
 @using Grubs.Pawn
 @using Grubs.Systems.Pawn.Grubs
 @using Sandbox;
@@ -10,12 +11,14 @@
 @inherits PanelComponent
 
 <root>
-    <img src="materials/reticle/reticle.png"/>
+    <div class="reticle bg-@Grub.Owner.PlayerColor.ToString()-light" />
 </root>
 
 @code
 {
     [Property] public Grub Grub { get; set; }
+
+    private Color Color => Color.Parse("#FFFFFF") ?? Color.Black;
 
     protected override void OnStart()
     {
@@ -55,13 +58,11 @@
 
         if (!Grub.ActiveEquipment.Components.TryGet<Weapon>(out var weapon))
             return;
-
-
-        var pos = weapon.GetMuzzlePosition().Position;
-        pos += weapon.GetMuzzleForward() * 40f;
+        
+        var pos = weapon.GetMuzzleTransform().Position;
+        pos += weapon.GetMuzzleForward() * 48f;
 
         WorldPosition = pos;
-        WorldPosition = WorldPosition.WithY(479f);
         WorldRotation = WorldRotation.RotateAroundAxis(Vector3.Forward, 0.25f);
     }
 }
