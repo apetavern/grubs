@@ -1,4 +1,5 @@
 ﻿using Grubs.Common;
+using Grubs.Equipment.Weapons;
 using Grubs.Systems.GameMode;
 using Grubs.Systems.Pawn.Grubs;
 
@@ -27,9 +28,11 @@ public sealed class Player : LocalComponent<Player>
 	public PlayerColor PlayerColor { get; private set; } = PlayerColor.Khaki;
 	
 	[Sync]
-	public bool HasFiredThisTurn { get; set; }
+	public bool HasFiredThisTurn { get; private set; }
 
 	public bool IsActive => BaseGameMode.Current.IsPlayerActive( this );
+	
+	private TimeUntil TimeUntilWeaponHolstered { get; set; }
 
 	public Vector3 MousePosition { get; private set; }
 	private static readonly Plane Plane = 
@@ -90,5 +93,16 @@ public sealed class Player : LocalComponent<Player>
 		Log.Info( $"New active grub: {nextGrub}." );
 
 		ActiveGrub = nextGrub;
+	}
+
+	public void OnFired()
+	{
+		HasFiredThisTurn = true;
+	}
+
+	public void OnTurnEnd()
+	{
+		HasFiredThisTurn = false;
+		Inventory.HolsterActive();
 	}
 }

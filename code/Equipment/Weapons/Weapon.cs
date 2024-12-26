@@ -1,5 +1,6 @@
 ﻿using Grubs.Gamemodes;
 using Grubs.Pawn;
+using Grubs.Systems.GameMode;
 using Grubs.UI;
 
 namespace Grubs.Equipment.Weapons;
@@ -79,7 +80,7 @@ public partial class Weapon : Component
 				IsCharging = false;
 				ChargeSound?.Stop();
 
-				FireEffects();
+				FireEffects( GetStartPosition() );
 
 				if ( ChargeGauge.IsValid() && ChargeGauge.GameObject.IsValid() )
 					ChargeGauge.GameObject.Enabled = false;
@@ -101,7 +102,7 @@ public partial class Weapon : Component
 			{
 				IsFiring = true;
 
-				FireEffects();
+				FireEffects( GetStartPosition() );
 
 				if ( OnFire is not null )
 					OnFire.Invoke( 100 );
@@ -139,7 +140,7 @@ public partial class Weapon : Component
 			{
 				IsFiring = true;
 
-				FireEffects();
+				FireEffects( GetStartPosition() );
 
 				if ( OnFire is not null )
 					OnFire.Invoke( 100 );
@@ -208,13 +209,13 @@ public partial class Weapon : Component
 			if ( !CanSwapAfterUse )
 			{
 				if ( grub.Owner.IsValid() )
-					grub.Owner.HasFiredThisTurn = true;
-				// Gamemode.FFA.UseTurn( true );
+					grub.Owner.OnFired();
+				BaseGameMode.Current.EquipmentUsed( Equipment );
 			}
 			else
 			{
 				if ( grub.Owner.Inventory.IsValid() )
-					grub.Owner.Inventory.Holster( grub.Owner.Inventory.ActiveSlot );
+					grub.Owner.Inventory.HolsterActive();
 			}
 		}
 
@@ -335,9 +336,9 @@ public partial class Weapon : Component
 		};
 	}
 
-	[Broadcast]
-	private void FireEffects()
+	[Rpc.Broadcast]
+	private void FireEffects( Vector3 position )
 	{
-		Sound.Play( UseSound, GetStartPosition() );
+		Sound.Play( UseSound, position );
 	}
 }

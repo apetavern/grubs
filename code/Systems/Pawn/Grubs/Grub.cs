@@ -45,12 +45,12 @@ public sealed class Grub : Component
 	{
 		if ( !Owner.IsValid() || !Owner.Inventory.IsValid() )
 			return;
-		Owner?.Inventory.Holster( Owner.Inventory.ActiveSlot );
+		Owner?.Inventory.HolsterActive();
 	}
 
 	public override string ToString()
 	{
-		return $"Grub (Owner: {Owner})";
+		return $"{Name} (Owner: {Owner})";
 	}
 
 	[ConCmd( "gr_set_active_grub_health" )]

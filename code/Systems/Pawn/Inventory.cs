@@ -9,6 +9,8 @@ namespace Grubs.Systems.Pawn;
 [Title( "Grubs - Player Inventory" ), Category( "Grubs/Pawn" )]
 public sealed class Inventory : LocalComponent<Inventory>
 {
+	private static readonly Logger Log = new("Inventory");
+	
 	[Property] public required List<GameObject> EquipmentPrefabs { get; set; } = new();
 	[Property] public required Player Player { get; set; }
 
@@ -30,7 +32,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 	
 	public void Cleanup()
 	{
-		for ( int i = 0; i < Equipment.Count; i++ )
+		for ( var i = 0; i < Equipment.Count; i++ )
 			Equipment[i]?.GameObject?.Destroy();
 
 		Equipment.Clear();
@@ -127,8 +129,8 @@ public sealed class Inventory : LocalComponent<Inventory>
 			if ( weapon.IsFiring && !weapon.CanSwapDuringUse || weapon.TimesUsed > 0 && !weapon.CanSwapAfterUse )
 				return;
 		}
-	
-		Holster( ActiveSlot );
+
+		HolsterActive();
 		var index = Equipment.IndexOf( equipment );
 		if ( index == -1 )
 			return;
@@ -137,6 +139,11 @@ public sealed class Inventory : LocalComponent<Inventory>
 	
 		if ( !Input.UsingController )
 			InventoryOpen = false;
+	}
+
+	public void HolsterActive()
+	{
+		Holster( ActiveSlot );
 	}
 	
 	[Rpc.Broadcast]
@@ -159,6 +166,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 	[Rpc.Broadcast]
 	public void Holster( int slot )
 	{
+		Log.Info( $"Holstering {slot} for {Player}." );
 		var equipment = GetActiveEquipment( slot );
 
 		if ( equipment is null || !equipment.IsValid() )
@@ -214,7 +222,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 				return;
 		}
 	
-		Holster( ActiveSlot );
+		HolsterActive();
 		var slot = forwards ? GetNextSlot() : GetPrevSlot();
 		ActiveSlot = slot;
 		Equip( ActiveSlot );

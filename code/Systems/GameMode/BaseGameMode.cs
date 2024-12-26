@@ -72,8 +72,15 @@ public abstract class BaseGameMode : Component
 	{
 		OnGrubDied( grub );
 	}
+
+	public void EquipmentUsed( Equipment.Equipment equipment )
+	{
+		OnEquipmentUsed( equipment );
+	}
 	
 	protected virtual void OnGrubDied( Grub grub ) { }
+
+	protected virtual void OnEquipmentUsed( Equipment.Equipment equipment ) { }
 
 	protected virtual bool IsGameStarted()
 	{

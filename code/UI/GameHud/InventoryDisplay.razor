@@ -4,6 +4,7 @@
 @using Grubs.Equipment.Weapons
 @using Grubs.Systems.Pawn
 @using Grubs.UI.Components
+@using Sandbox.Diagnostics
 
 @inherits Panel
 
@@ -36,6 +37,8 @@
 
 @code
 {
+    private static readonly Logger Log = new("InventoryDisplay");
+    
     private Inventory Inventory => Inventory.Local;
 
     public string GetAmmoDisplay(Equipment equipment) => equipment?.Ammo == -1 ? "\u221e" : equipment?.Ammo.ToString();
@@ -52,6 +55,7 @@
         if (equipment.Ammo == 0)
             return;
         
+        Log.Info( $"Attempting to equip {equipment.Name}." );
         Inventory?.EquipItem( equipment );
     }
 
