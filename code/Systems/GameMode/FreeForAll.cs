@@ -157,10 +157,10 @@ public sealed class FreeForAll : BaseGameMode
 
 	private void UpdateTurnChange()
 	{
-		ActivePlayer.OnTurnEnd();
-		
 		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
 			return;
+		
+		ActivePlayer.OnTurnEnd();
 		
 		TurnIsChanging = false;
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;

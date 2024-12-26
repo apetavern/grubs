@@ -7,6 +7,8 @@ public abstract class BaseGameMode : Component
 {
 	public static BaseGameMode Current { get; private set; }
 	public virtual string Name => "Game Mode";
+
+	protected virtual int MaxPlayers => 8;
 	
 	[Sync( SyncFlags.FromHost )] 
 	protected NetList<Player> Players { get; private set; } = new();
@@ -54,9 +56,24 @@ public abstract class BaseGameMode : Component
 	{
 		if ( !Networking.IsHost )
 			return;
-		
+
+		if ( Players.Count >= MaxPlayers )
+		{
+			Log.Warning( "Max players exceeded!" );
+			return;
+		}
+
+		AssignPlayerColor( player );
 		Players.Add( player );
 		OnPlayerJoined( player );
+	}
+
+	private void AssignPlayerColor( Player player )
+	{
+		var takenColors = Players.Select( p => p.PlayerColor );
+		var allColors = Enum.GetValues<PlayerColor>().ToList();
+		
+		player.PlayerColor = allColors.First( a => !takenColors.Contains( a ) );
 	}
 	
 	/// <summary>
