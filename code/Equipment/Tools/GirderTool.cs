@@ -33,6 +33,8 @@ public class GirderTool : Tool
 
 		if ( IsProxy || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
+		
+		Log.Info( Equipment.Deployed ? "Deployed" : "Not Deployed" );
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
 		CursorVisual.Enabled = Equipment.Deployed;
@@ -94,10 +96,7 @@ public class GirderTool : Tool
 
 	protected override void FireImmediate()
 	{
-		if ( !Equipment.IsValid() )
-			return;
-		
-		if ( !Equipment.Deployed )
+		if ( !Equipment.IsValid() || !Equipment.Deployed )
 			return;
 
 		var valid = CheckValidPlacement();
@@ -107,6 +106,7 @@ public class GirderTool : Tool
 		var girder = GirderPrefab.Clone( CursorVisual.Transform.World );
 		girder.NetworkSpawn();
 
+		Equipment.Deployed = false;
 		IsFiring = false;
 
 		Sound.Play( UseSound );
