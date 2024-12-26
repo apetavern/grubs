@@ -22,3 +22,131 @@ $menu-bg: rgb(0, 16, 32);
 $menu-bg-tint: rgb(64,72,89);
 $menu-highlight: rgb(61, 83, 119);
 $menu-discord-blurple: rgb(88, 101, 242);
+
+// Lavender
+$lavender-light: #F3ABFF;
+$lavender-med: #714197;
+$lavender-dark: #3F2454;
+
+// Cerulean
+$cerulean-light: #8FCDE0;
+$cerulean-med: #4B89C4;
+$cerulean-dark: #213967;
+
+// Sage
+$sage-light: #8FE097;
+$sage-med: #2F795F;
+$sage-dark: #28554D;
+
+// Khaki
+$khaki-light: #EEF38E;
+$khaki-med: #818449;
+$khaki-dark: #4B593F;
+
+// Copper
+$copper-light: #FFA96A;
+$copper-med: #A86244;
+$copper-dark: #67483E;
+
+// Coral
+$coral-light: #F8DDD6;
+$coral-med: #D88470;
+$coral-dark: #8B4D4D;
+
+// Teal  
+$teal-light: #D3E0DE;
+$teal-med: #62928C;
+$teal-dark: #2D5753;
+
+// Mauve
+$mauve-light: #e3dbe1;
+$mauve-med: #9B8195;
+$mauve-dark: #614A58;
+
+// Lavender
+.bg-lavender-light { background-color: $lavender-light; }
+.bg-lavender-med { background-color: $lavender-med; }
+.bg-lavender-dark { background-color: $lavender-dark; }
+.text-lavender-light { color: $lavender-light; }
+.text-lavender-med { color: $lavender-med; }
+.text-lavender-dark { color: $lavender-dark; }
+.text-stroke-lavender-light { text-stroke-color: $lavender-light; }
+.text-stroke-lavender-med { text-stroke-color: $lavender-med; }
+.text-stroke-lavender-dark { text-stroke-color: $lavender-dark; }
+
+// Cerulean
+.bg-cerulean-light { background-color: $cerulean-light; }
+.bg-cerulean-med { background-color: $cerulean-med; }
+.bg-cerulean-dark { background-color: $cerulean-dark; }
+.text-cerulean-light { color: $cerulean-light; }
+.text-cerulean-med { color: $cerulean-med; }
+.text-cerulean-dark { color: $cerulean-dark; }
+.text-stroke-cerulean-light { text-stroke-color: $cerulean-light; }
+.text-stroke-cerulean-med { text-stroke-color: $cerulean-med; }
+.text-stroke-cerulean-dark { text-stroke-color: $cerulean-dark; }
+
+// Sage
+.bg-sage-light { background-color: $sage-light; }
+.bg-sage-med { background-color: $sage-med; }
+.bg-sage-dark { background-color: $sage-dark; }
+.text-sage-light { color: $sage-light; }
+.text-sage-med { color: $sage-med; }
+.text-sage-dark { color: $sage-dark; }
+.text-stroke-sage-light { text-stroke-color: $sage-light; }
+.text-stroke-sage-med { text-stroke-color: $sage-med; }
+.text-stroke-sage-dark { text-stroke-color: $sage-dark; }
+
+// Khaki
+.bg-khaki-light { background-color: $khaki-light; }
+.bg-khaki-med { background-color: $khaki-med; }
+.bg-khaki-dark { background-color: $khaki-dark; }
+.text-khaki-light { color: $khaki-light; }
+.text-khaki-med { color: $khaki-med; }
+.text-khaki-dark { color: $khaki-dark; }
+.text-stroke-khaki-light { text-stroke-color: $khaki-light; }
+.text-stroke-khaki-med { text-stroke-color: $khaki-med; }
+.text-stroke-khaki-dark { text-stroke-color: $khaki-dark; }
+
+// Copper
+.bg-copper-light { background-color: $copper-light; }
+.bg-copper-med { background-color: $copper-med; }
+.bg-copper-dark { background-color: $copper-dark; }
+.text-copper-light { color: $copper-light; }
+.text-copper-med { color: $copper-med; }
+.text-copper-dark { color: $copper-dark; }
+.text-stroke-copper-light { text-stroke-color: $copper-light; }
+.text-stroke-copper-med { text-stroke-color: $copper-med; }
+.text-stroke-copper-dark { text-stroke-color: $copper-dark; }
+
+// Coral
+.bg-coral-light { background-color: $coral-light; }
+.bg-coral-med { background-color: $coral-med; }
+.bg-coral-dark { background-color: $coral-dark; }
+.text-coral-light { color: $coral-light; }
+.text-coral-med { color: $coral-med; }
+.text-coral-dark { color: $coral-dark; }
+.text-stroke-coral-light { text-stroke-color: $coral-light; }
+.text-stroke-coral-med { text-stroke-color: $coral-med; }
+.text-stroke-coral-dark { text-stroke-color: $coral-dark; }
+
+// Teal
+.bg-teal-light { background-color: $teal-light; }
+.bg-teal-med { background-color: $teal-med; }
+.bg-teal-dark { background-color: $teal-dark; }
+.text-teal-light { color: $teal-light; }
+.text-teal-med { color: $teal-med; }
+.text-teal-dark { color: $teal-dark; }
+.text-stroke-teal-light { text-stroke-color: $teal-light; }
+.text-stroke-teal-med { text-stroke-color: $teal-med; }
+.text-stroke-teal-dark { text-stroke-color: $teal-dark; }
+
+// Mauve
+.bg-mauve-light { background-color: $mauve-light; }
+.bg-mauve-med { background-color: $mauve-med; }
+.bg-mauve-dark { background-color: $mauve-dark; }
+.text-mauve-light { color: $mauve-light; }
+.text-mauve-med { color: $mauve-med; }
+.text-mauve-dark { color: $mauve-dark; }
+.text-stroke-mauve-light { text-stroke-color: $mauve-light; }
+.text-stroke-mauve-med { text-stroke-color: $mauve-med; }
+.text-stroke-mauve-dark { text-stroke-color: $mauve-dark; }

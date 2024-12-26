@@ -23,6 +23,8 @@ public sealed class Player : LocalComponent<Player>
 	
 	[Property]
 	public Inventory Inventory { get; private set; }
+
+	public PlayerColor PlayerColor { get; private set; } = PlayerColor.Khaki;
 	
 	[Sync]
 	public bool HasFiredThisTurn { get; set; }

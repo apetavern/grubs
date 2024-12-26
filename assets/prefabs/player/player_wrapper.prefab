@@ -18,7 +18,8 @@
           "component_id": "536dfbe2-68ea-42e6-9c3a-80e7f483a63e",
           "go": "9a501176-452d-4433-8c4f-a98d44060cfb",
           "component_type": "Inventory"
-        }
+        },
+        "PlayerColor": "0.18431,0.47451,0.37255,1"
       },
       {
         "__type": "Grubs.Systems.Pawn.Inventory",

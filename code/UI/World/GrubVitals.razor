@@ -1,0 +1,50 @@
+﻿@namespace Grubs.UI.World
+
+@using Grubs.Systems.Pawn
+@using Grubs.Systems.Pawn.Grubs
+@inherits PanelComponent
+
+@if (!Grub.IsValid())
+{
+    return;
+}
+
+<root>
+    <div class="vitals-parent">
+        <div class="vitals-shape bg-@ColorString-med"/>
+    </div>
+    <label class="grub-name text-@ColorString-light text-stroke-@ColorString-med">@Grub.Name</label>
+    <div class="grub-health-bar bg-@ColorString-dark">
+        <div class="grub-health-bar-inner bg-@ColorString-light" style="width: @(Grub.HealthPercentage * 100)%" />
+    </div>
+    <label class="grub-health-percentage text-@ColorString-light text-stroke-@ColorString-med">@GetHealthPercentageString()</label>
+</root>
+
+@code
+{
+    [Property] private Grub Grub { get; set; }
+
+    private PlayerColor PlayerColor => Grub.Owner?.PlayerColor ?? PlayerColor.Sage;
+    private string ColorString => PlayerColor.ToString();
+
+    private string GetHealthPercentageString()
+    {
+        if (!Grub.IsValid()) return "0";
+        return $"{(Grub.HealthPercentage * 100).Clamp(0, Grub.Health.MaxHealth).CeilToInt()}%";
+    }
+
+    protected override void OnStart()
+    {
+        WorldRotation = Scene.Camera.WorldRotation;
+    }
+
+    protected override void OnUpdate()
+    {
+        WorldPosition = Grub.PlayerController.Head.WorldPosition + Vector3.Up * 24f;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Grub, GetHealthPercentageString());
+    }
+}

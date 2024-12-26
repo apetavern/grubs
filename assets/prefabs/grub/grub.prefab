@@ -3,7 +3,6 @@
     "__guid": "b922f141-a7b8-43b6-980c-20b64cb0180f",
     "Flags": 0,
     "Name": "grub",
-    "Position": "0,0,-0.5795868",
     "Tags": "player",
     "Enabled": true,
     "Components": [
@@ -615,18 +614,18 @@
         "__guid": "03d23a6b-6b56-41de-a66b-8e3199b30e20",
         "Flags": 0,
         "Name": "Grub Tag",
+        "Enabled": true,
         "Components": [
           {
             "__type": "Sandbox.WorldPanel",
             "__guid": "13f24ac3-2f41-4915-b2ed-440fd7e7862c",
-            "__enabled": false,
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": true,
-            "PanelSize": "1024,350",
+            "PanelSize": "1024,512",
             "RenderOptions": {
-              "GameLayer": true,
-              "OverlayLayer": false,
+              "GameLayer": false,
+              "OverlayLayer": true,
               "BloomLayer": false,
               "AfterUILayer": false
             },
@@ -634,9 +633,14 @@
             "VerticalAlign": "Center"
           },
           {
-            "__type": "Grubs.UI.GrubTag",
-            "__guid": "7be164ff-06ad-4a71-879b-257be93f69c9",
-            "__enabled": false
+            "__type": "Grubs.UI.World.GrubVitals",
+            "__guid": "0f4c986a-de7e-43bd-9f95-ea9ef84497ca",
+            "Grub": {
+              "_type": "component",
+              "component_id": "109e94f5-d6ca-462d-b855-7b3e9ba32d76",
+              "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
+              "component_type": "Grub"
+            }
           }
         ]
       },
