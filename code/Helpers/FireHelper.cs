@@ -22,7 +22,7 @@ public sealed class FireHelper : Component
 		Instance = this;
 	}
 
-	[Authority]
+	[Rpc.Owner]
 	public void CreateFire( FireParticle particle ) => FireParticles.Add( particle );
 
 	protected override void OnUpdate()

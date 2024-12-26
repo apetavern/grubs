@@ -4,17 +4,17 @@ using Grubs.UI.Components;
 namespace Grubs.Equipment.Tools;
 
 [Title( "Grubs - Girder Tool" ), Category( "Equipment" )]
-public class GirderTool : Tool
+public sealed class GirderTool : Tool
 {
 	/*
 	 * Cursor Properties
 	 */
-	[Property] public float CursorRange { get; set; } = 100f; // How far from the grub can the tool target
+	[Property] private float CursorRange { get; set; } = 100f;
 
-	[Property] public required ModelRenderer CursorVisual { get; set; } // The model of the grub
-	[Property] public required ModelCollider CursorCollider { get; set; } // The model of the grub
+	[Property] public required ModelRenderer CursorVisual { get; set; }
+	[Property] public required ModelCollider CursorCollider { get; set; }
 
-	[Property] public GameObject GirderPrefab { get; set; }
+	[Property] private GameObject GirderPrefab { get; set; }
 
 	protected override void OnStart()
 	{

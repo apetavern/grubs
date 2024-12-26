@@ -1,4 +1,5 @@
-﻿using Grubs.Systems.Pawn;
+﻿using Grubs.Common;
+using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 using Grubs.Terrain;
 
@@ -23,6 +24,10 @@ public sealed class FreeForAll : BaseGameMode
 	
 	[Sync( SyncFlags.FromHost )]
 	public bool TurnIsChanging { get; private set; }
+
+	private Queue<Grub> DamageQueue { get; } = new();
+	private Grub ActiveDamagedGrub { get; set; }
+	private TimeUntil TimeUntilNextDamagedGrub { get; set; }
 	
 	/// <summary>
 	/// The amount of time elapsed since we started changing turns.
@@ -97,6 +102,12 @@ public sealed class FreeForAll : BaseGameMode
 		}
 	}
 
+	protected override void OnGrubDamaged( Grub grub )
+	{
+		if ( !DamageQueue.Contains( grub ) )
+			DamageQueue.Enqueue( grub );
+	}
+
 	protected override void OnGrubDied( Grub grub )
 	{
 		const float grubDeathTurnRemainder = 3f;
@@ -157,6 +168,17 @@ public sealed class FreeForAll : BaseGameMode
 
 	private void UpdateTurnChange()
 	{
+		Log.Info( $"Damage Queue Count: {DamageQueue.Count}" );
+		
+		if ( DamageQueue.Count != 0 || !TimeUntilNextDamagedGrub )
+		{
+			Log.Info( $"Let's process the damage queue: {DamageQueue.Count != 0} || {!TimeUntilNextDamagedGrub}" );
+			ProcessDamageQueue();
+			return;
+		}
+		
+		Log.Info( $"No more damage queue. Moving on." );
+		
 		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
 			return;
 		
@@ -165,6 +187,20 @@ public sealed class FreeForAll : BaseGameMode
 		TurnIsChanging = false;
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;
 		RotateActivePlayer();
+	}
+
+	private void ProcessDamageQueue()
+	{
+		const float timeBetweenDamagedGrubs = 0.4f;
+
+		if ( !TimeUntilNextDamagedGrub ) 
+			return;
+		
+		ActiveDamagedGrub = DamageQueue.Dequeue();
+		Log.Info( $"Set ActiveDamagedGrub to {ActiveDamagedGrub}" );
+		TimeUntilNextDamagedGrub = timeBetweenDamagedGrubs;
+		Log.Info( $"TimeUntilNextDamagedGrub: {TimeUntilNextDamagedGrub}" );
+		ActiveDamagedGrub.Health.ApplyDamage();
 	}
 
 	private void RotateActivePlayer()

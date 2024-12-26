@@ -73,10 +73,10 @@ public sealed class Crate : Component, Component.ITriggerListener
 		DestroyCrate();
 	}
 
-	[Authority]
+	[Rpc.Owner]
 	public void DestroyCrate() => GameObject.Destroy();
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void PickupEffects()
 	{
 		Sound.Play( PickupSound, WorldPosition );

@@ -175,9 +175,9 @@ public sealed class JetpackTool : Tool
 		Equipment.Grub.PlayerController.Facing = targetRotation.y <= 0 ? 1 : -1;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void FireEffects() => _jetSound = Sound.Play( "thrust" );
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void StopEffects() => _jetSound?.Stop();
 }

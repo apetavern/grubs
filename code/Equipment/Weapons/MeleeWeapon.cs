@@ -33,7 +33,7 @@ public class MeleeWeapon : Weapon
 		FireFinished();
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void HitEffects( Ray ray )
 	{
 		if ( !Equipment.Grub.IsValid() )

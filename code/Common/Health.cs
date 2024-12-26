@@ -42,6 +42,8 @@ public partial class Health : Component
 			{
 				// if ( Connection.Local.IsHost && !Gamemode.GetCurrent().DamageQueue.Contains( grub.Id ) )
 				// 	Gamemode.GetCurrent().DamageQueue.Add( grub.Id );
+				if ( Networking.IsHost )
+					BaseGameMode.Current.GrubDamaged( grub );
 
 				DamageQueue.Enqueue( damageInfo );
 				return;
@@ -75,7 +77,7 @@ public partial class Health : Component
 	/// <summary>
 	/// Will dequeue DamageQueue until empty and apply any damage to CurrentHealth.
 	/// </summary>
-	[Authority]
+	[Rpc.Owner]
 	public void ApplyDamage()
 	{
 		if ( !DamageQueue.Any() )
@@ -160,7 +162,7 @@ public partial class Health : Component
 			// 	if ( grub.Owner.IsValid() )
 			// 		Stats.IncrementGrubsKilled( grub.Owner.Id );
 			// }
-			//
+			
 			grub.GameObject.Destroy();
 		}
 
@@ -179,7 +181,7 @@ public partial class Health : Component
 		}
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void DeathEffects( Vector3 position )
 	{
 		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );

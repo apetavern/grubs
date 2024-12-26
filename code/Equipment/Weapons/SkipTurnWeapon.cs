@@ -16,7 +16,7 @@ namespace Grubs.Equipment.Weapons
 			FireFinished();
 		}
 
-		[Broadcast]
+		[Rpc.Broadcast]
 		private void FireEffects()
 		{
 			var muzzle = GetMuzzleTransform();

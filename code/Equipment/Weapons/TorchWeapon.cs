@@ -74,7 +74,7 @@ public sealed class TorchWeapon : Weapon
 		}
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void FireEffects( Vector3 startPos, Vector3 endPos )
 	{
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )

@@ -94,7 +94,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 			GameObject.Destroy();
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void ExplodeEffects( Guid attackerGuid, string attackerName )
 	{
 		ExplosionHelper.Instance.Explode( this, WorldPosition, ExplosionRadius, ExplosionDamage, attackerGuid, attackerName );

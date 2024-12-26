@@ -129,7 +129,7 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 		}
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void ExplodeEffects()
 	{
 		var projectile = Components.Get<Projectile>();

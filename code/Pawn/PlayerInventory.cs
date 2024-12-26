@@ -32,7 +32,7 @@
 // 		Equipment.Clear();
 // 	}
 //
-// 	[Broadcast( NetPermission.HostOnly )]
+// 	[Rpc.Broadcast( NetPermission.HostOnly )]
 // 	public void InitializeWeapons( bool infiniteAmmo )
 // 	{
 // 		if ( IsProxy )
@@ -135,7 +135,7 @@
 // 			InventoryOpen = false;
 // 	}
 //
-// 	[Broadcast]
+// 	[Rpc.Broadcast]
 // 	public void Equip( int slot )
 // 	{
 // 		if ( Gamemode.FFA.TurnIsChanging || !Player.IsActive )
@@ -152,7 +152,7 @@
 // 		equipment.Deploy( Player.ActiveGrub );
 // 	}
 //
-// 	[Broadcast]
+// 	[Rpc.Broadcast]
 // 	public void Holster( int slot )
 // 	{
 // 		var equipment = GetActiveEquipment( slot );
