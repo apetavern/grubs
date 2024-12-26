@@ -7,7 +7,7 @@ WeaponInfo {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    top: 0px;
+    top: 0;
     transition: all 0.2s ease;
 
     &:intro {
@@ -16,10 +16,10 @@ WeaponInfo {
     }
 
     .text {
-        font-size: 96px;
+        font-size: 124px;
         font-family: $font-primary;
-        text-shadow: 2px 2px 2px black;
-        text-stroke: 6px black;
+        text-shadow: 2px 24px 16px black;
+        text-stroke: 24px black;
         color: white;
         justify-content: center;
         align-items: center;
@@ -27,31 +27,28 @@ WeaponInfo {
 
     .fuel {
         position: relative;
-        height: 25%;
-        width: 90%;
+        height: 100px;
+        width: 100%;
         align-items: center;
-        background-color: rgba(black, 0.8);
-        border: 2px solid rgba(black, 0.8);
-        border-radius: 4px;
+        background-color: black;
+        border: 12px solid black;
         margin-left: 35px;
 
         .percentageText {
             position: absolute;
             width: 100%;
             justify-content: center;
-            font-size: 56px;
+            font-size: 102px;
             font-family: $font-primary;
             text-shadow: 2px 2px 2px black;
-            text-stroke: 4px black;
             color: white;
             z-index: 2;
         }
 
         .fill {
-            background-image: linear-gradient(0deg, #e01a00dc 0%, #00a108dc 70%);
+            background-image: linear-gradient(to right, red, green);
             height: 100%;
             transition: height 150ms ease-in;
-            border-radius: 4px;
         }
     }
 
@@ -62,11 +59,13 @@ WeaponInfo {
         align-items: center;
         justify-content: center;
         white-space: nowrap;
+        gap: 8px;
 
         inputglyph {
             flex-shrink: 0;
             width: 175px;
             height: 175px;
+            filter: border-wrap(6px black) drop-shadow(0 8px 24px black);
         }
     }
 }

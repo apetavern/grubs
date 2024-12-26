@@ -103,7 +103,8 @@ public class Equipment : Component
 		Model.BoneMergeTarget = null;
 		Model.Enabled = false;
 		Deployed = false;
-		GrubFollowCamera.Local.AllowZooming = true;
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.AllowZooming = true;
 	}
 
 	public void UseAmmo()
