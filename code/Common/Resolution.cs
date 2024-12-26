@@ -7,10 +7,10 @@ public static class Resolution
 	// List<GameObject>
 	public static List<Guid> ForceResolved { get; } = new();
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public static void ForceResolveObject( Guid objectId ) => ForceResolved.Add( objectId );
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public static void ClearForceResolved( bool clearProjectiles = true )
 	{
 		// Deep copy to avoid InvalidOperationException.

@@ -110,7 +110,7 @@
 // 		}
 // 	}
 //
-// 	[Broadcast( NetPermission.HostOnly )]
+// 	[Rpc.Broadcast( NetPermission.HostOnly )]
 // 	public void SetTimeUntilNextTurn( float time ) => TimeUntilNextTurn = time;
 //
 // 	[Authority]
@@ -302,7 +302,7 @@
 // 		return false;
 // 	}
 //
-// 	[Broadcast]
+// 	[Rpc.Broadcast]
 // 	public void SetGrubPlayer( Player player, Grub grub )
 // 	{
 // 		if ( !player.IsValid() || !grub.IsValid() )
@@ -312,7 +312,7 @@
 // 		player.Grubs.Add( grub.Id );
 // 	}
 //
-// 	[Broadcast]
+// 	[Rpc.Broadcast]
 // 	public void SetActiveGrub( Player player, Grub grub )
 // 	{
 // 		if ( !player.IsValid() || !grub.IsValid() )
@@ -321,7 +321,7 @@
 // 		player.ActiveGrub = grub;
 // 	}
 //
-// 	[Broadcast]
+// 	[Rpc.Broadcast]
 // 	public void EndTurn()
 // 	{
 // 		var player = ActivePlayerId.ToComponent<Player>();

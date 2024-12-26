@@ -57,7 +57,7 @@ public class MultiHitMeleeWeapon : Weapon
 		_finishAfterCooldown = false;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void ResetCombo()
 	{
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
@@ -71,7 +71,7 @@ public class MultiHitMeleeWeapon : Weapon
 		anim.Punch( _currentStrikeCount );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void HitEffects()
 	{
 		if ( _timeSinceLastHit < HitCooldown )

@@ -24,9 +24,12 @@
     "Compiler": {
       "RootNamespace": "Grubs",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
-      "NoWarn": "1701;1702;1591;1998",
+      "NoWarn": "1701;1702;1591;1998;SB3000",
       "WarningsAsErrors": "",
+      "TreatWarningsAsErrors": false,
+      "Nullables": false,
       "Whitelist": true,
+      "ReleaseMode": "Debug",
       "AssemblyReferences": [],
       "IgnoreFolders": [
         "editor",

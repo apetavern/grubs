@@ -31,7 +31,7 @@ public class HomingProjectile : TargetedProjectile
 		}
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void HomingEffects()
 	{
 		Sound.Play( HomingLockSound, WorldPosition );

@@ -15,7 +15,7 @@ public static class Stats
 	/// <summary>
 	/// Increment "gamemode-games-won" stat.
 	/// </summary>
-	[Broadcast]
+	[Rpc.Broadcast]
 	public static void IncrementGamesWon( string gamemode )
 	{
 		if ( Game.IsEditor )
@@ -28,7 +28,7 @@ public static class Stats
 	/// <summary>
 	/// Increment "gamemode-games-played" stat.
 	/// </summary>
-	[Broadcast]
+	[Rpc.Broadcast]
 	public static void IncrementGamesPlayed( string gamemode )
 	{
 		if ( Game.IsEditor )
@@ -41,7 +41,7 @@ public static class Stats
 	/// <summary>
 	/// Increment "x-grubs-killed" stat.
 	/// </summary>
-	[Broadcast]
+	[Rpc.Broadcast]
 	public static void IncrementGrubsKilled( Guid victimPlayerGuid )
 	{
 		if ( Game.IsEditor )

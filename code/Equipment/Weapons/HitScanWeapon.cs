@@ -64,7 +64,7 @@ public class HitScanWeapon : Weapon
 		_tracesFired = 0;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void FireEffects( Vector3 startPos, Vector3 endPos, int traceCount )
 	{
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )

@@ -223,7 +223,7 @@ public class GrubCharacterController : Component
 			Controller.Grub.OnHardFall();
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	private void OnLandedEffects( Vector3 position )
 	{
 		var fallVelocity =

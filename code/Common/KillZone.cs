@@ -28,7 +28,6 @@ public class KillZone : Component, Component.ITriggerListener
 
 		if ( other.GameObject.Components.TryGet( out Grub grub, FindMode.EverythingInSelfAndAncestors ) )
 		{
-			Log.Info( other.WorldPosition );
 			grub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( other.WorldPosition ), true );
 		}
 		else if ( other.GameObject.Components.TryGet( out Mountable mountable, FindMode.EverythingInSelfAndAncestors ) )
@@ -59,7 +58,7 @@ public class KillZone : Component, Component.ITriggerListener
 	{
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void CollisionEffects( Transform transform )
 	{
 		if ( KillSound is not null )

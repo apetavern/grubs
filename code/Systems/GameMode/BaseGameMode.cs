@@ -1,4 +1,5 @@
-﻿using Grubs.Systems.Pawn;
+﻿using Grubs.Common;
+using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Systems.GameMode;
@@ -82,7 +83,15 @@ public abstract class BaseGameMode : Component
 	protected virtual void OnPlayerJoined( Player player ) { }
 
 	/// <summary>
-	/// Called when a Grub dies.
+	/// Call for when a Grub is damaged.
+	/// </summary>
+	public void GrubDamaged( Grub grub )
+	{
+		OnGrubDamaged( grub );
+	}
+
+	/// <summary>
+	/// Call for when a Grub dies.
 	/// </summary>
 	/// <param name="grub">The dead grub :sob:</param>
 	public void GrubDied( Grub grub )
@@ -90,10 +99,15 @@ public abstract class BaseGameMode : Component
 		OnGrubDied( grub );
 	}
 
+	/// <summary>
+	/// Call when Equipment is used.
+	/// </summary>
 	public void EquipmentUsed( Equipment.Equipment equipment )
 	{
 		OnEquipmentUsed( equipment );
 	}
+
+	protected virtual void OnGrubDamaged( Grub grub ) { }
 	
 	protected virtual void OnGrubDied( Grub grub ) { }
 

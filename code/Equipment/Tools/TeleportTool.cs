@@ -106,7 +106,7 @@ public class TeleportTool : Tool
 		base.FireFinished();
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void TeleportEffects( Vector3 position )
 	{
 		Sound.Play( UseSound, position );

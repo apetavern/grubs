@@ -27,7 +27,7 @@ public sealed class ChatHelper : Component
 		Instance = this;
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void SendMessage( string messageText )
 	{
 		if ( messageText.Contains( '\n' ) || messageText.Contains( '\r' ) )
@@ -47,7 +47,7 @@ public sealed class ChatHelper : Component
 		OnMessageReceived?.Invoke( message );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void SendInfoMessage( string messageText )
 	{
 		if ( messageText.Contains( '\n' ) || messageText.Contains( '\r' ) )

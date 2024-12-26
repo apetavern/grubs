@@ -104,7 +104,7 @@
 // 		return GetOwnedGrubs().All( g => g.IsDead );
 // 	}
 //
-// 	[Broadcast]
+// 	[Rpc.Broadcast]
 // 	public void Cleanup()
 // 	{
 // 		Inventory.Cleanup();

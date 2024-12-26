@@ -77,26 +77,26 @@ public sealed class GrubAnimator : Component
 		}
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void TriggerJump()
 	{
 		Sound.Play( "grub_jump", WorldPosition );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void TriggerBackflip()
 	{
 		Sound.Play( "grub_backflip", WorldPosition );
 		GrubRenderer.Set( "backflip", true );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Fire()
 	{
 		GrubRenderer.Set( "fire", true );
 	}
 
-	[Broadcast]
+	[Rpc.Broadcast]
 	public void Punch( int value )
 	{
 		GrubRenderer.Set( "punch_combo", value );
