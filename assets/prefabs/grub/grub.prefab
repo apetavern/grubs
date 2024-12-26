@@ -649,18 +649,18 @@
         "Flags": 0,
         "Name": "Aim Reticle",
         "Position": "111.0583,111.0583,-152.5602",
+        "Enabled": true,
         "Components": [
           {
             "__type": "Sandbox.WorldPanel",
             "__guid": "d6220d7a-c847-445d-a526-d5fe52acac5a",
-            "__enabled": false,
             "HorizontalAlign": "Center",
             "InteractionRange": 1000,
             "LookAtCamera": false,
             "PanelSize": "512,512",
             "RenderOptions": {
-              "GameLayer": true,
-              "OverlayLayer": false,
+              "GameLayer": false,
+              "OverlayLayer": true,
               "BloomLayer": false,
               "AfterUILayer": false
             },
@@ -670,7 +670,6 @@
           {
             "__type": "Grubs.UI.AimReticle",
             "__guid": "24d14bf5-2322-4227-8730-57afd705194e",
-            "__enabled": false,
             "Grub": {
               "_type": "component",
               "component_id": "109e94f5-d6ca-462d-b855-7b3e9ba32d76",

@@ -4,16 +4,32 @@
     "Flags": 0,
     "Name": "bazooka",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "aed4a248-db1d-4095-be25-8ddc9d0f39e9",
         "BodyGroups": 18446744073709551615,
-        "CreateBoneObjects": false,
+        "CreateAttachments": true,
+        "CreateBoneObjects": true,
         "Model": "models/weapons/bazooka/bazooka.vmdl",
+        "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -51,9 +67,14 @@
         },
         "FiringType": "Charged",
         "MaxUses": 1,
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "fdb61952-513d-41fe-b810-61afd4f35b29"
+        },
         "OnFire": {
-          "__version": 7,
+          "__version": 8,
           "__guid": "e799fa0e-ad43-4423-9508-1c0e933037a8",
+          "__changeId": 0,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -104,10 +125,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
-              },
+              "Id": 5,
+              "Value": null,
               "DstId": 3,
               "DstName": "projectile"
             },
@@ -119,21 +138,60 @@
             }
           ],
           "Defaults": {
-            "$4._value": {
+            "$5._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
             }
           }
         },
+        "StartMultiplier": 1,
         "UseSound": "sounds/weapons/bazooka/bazooka_fire.sound"
       }
     ],
-    "Children": [],
-    "__variables": []
+    "Children": [
+      {
+        "__guid": "fdb61952-513d-41fe-b810-61afd4f35b29",
+        "Flags": 8,
+        "Name": "muzzle",
+        "Position": "19.4487,0.485087,9.937422",
+        "Enabled": true
+      },
+      {
+        "__guid": "b9623d22-e536-45df-987a-ea84601d80c9",
+        "Flags": 4,
+        "Name": "hold_L",
+        "Enabled": true
+      }
+    ],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

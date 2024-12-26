@@ -23,6 +23,13 @@
 						angles = [ 0.0, 0.0, 0.0 ]
 						do_not_discard = true
 					},
+					{
+						_class = "Bone"
+						name = "muzzle"
+						origin = [ 22.0, -1.0, 5.0 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						do_not_discard = true
+					},
 				]
 			},
 			{
