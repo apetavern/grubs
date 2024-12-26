@@ -25,7 +25,8 @@ public sealed class Player : LocalComponent<Player>
 	[Property]
 	public Inventory Inventory { get; private set; }
 
-	public PlayerColor PlayerColor { get; private set; } = PlayerColor.Khaki;
+	[Sync( SyncFlags.FromHost )]
+	public PlayerColor PlayerColor { get; set; } = PlayerColor.Khaki;
 	
 	[Sync]
 	public bool HasFiredThisTurn { get; private set; }
@@ -103,6 +104,6 @@ public sealed class Player : LocalComponent<Player>
 	public void OnTurnEnd()
 	{
 		HasFiredThisTurn = false;
-		Inventory.HolsterActive();
+		Inventory?.HolsterActive();
 	}
 }

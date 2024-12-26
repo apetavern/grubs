@@ -10,6 +10,11 @@
 
 @inherits PanelComponent
 
+@if (!Grub.IsValid() || !Grub.Owner.IsValid())
+{
+    return;
+}
+
 <root>
     <div class="reticle bg-@Grub.Owner.PlayerColor.ToString()-light" />
 </root>
