@@ -24,9 +24,16 @@ public sealed class Grub : Component
 	[Property] public required GrubCharacterController CharacterController { get; set; }
 	[Property] public required GrubAnimator Animator { get; set; }
 	[Property, ReadOnly] public Equipment.Equipment ActiveEquipment => Owner?.Inventory.ActiveEquipment;
+	
+	public float HealthPercentage => Health.CurrentHealth / Health.MaxHealth;
 
 	public Transform EyePosition => WorldTransform.WithPosition( WorldPosition + Vector3.Up * 24f );
-	
+
+	protected override void OnStart()
+	{
+		Name = "Grubby";
+	}
+
 	[Rpc.Owner( NetFlags.HostOnly )]
 	public void SetOwner( Player player )
 	{
@@ -44,5 +51,14 @@ public sealed class Grub : Component
 	public override string ToString()
 	{
 		return $"Grub (Owner: {Owner})";
+	}
+
+	[ConCmd( "gr_set_active_grub_health" )]
+	public static void SetActiveGrubHealth( float health )
+	{
+		if ( BaseGameMode.Current is FreeForAll freeForAll )
+		{
+			freeForAll.ActivePlayer.ActiveGrub.Health.CurrentHealth = health;
+		}
 	}
 }
