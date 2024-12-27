@@ -7,12 +7,12 @@
 
 <root>
     <div class="avatar-container bg-@Color-med" style="transform: rotate(@(Game.Random.Int(-2, 2))deg);)">
-        <img class="avatar" src="avatar:@Player.Client.Connection.SteamId" />
+        <img class="avatar" src="avatar:@Player.Client.Owner.SteamId" />
         <div class="health-percentage text-stroke-@Color-med text-@Color-light">@Player.GetHealthPercentage%</div>
     </div>
     <div class="name-bar bg-@Color-dark">
         <div class="percentage-bar bg-@Color-med" style="width: @Player.GetHealthPercentage%" />
-        <label class="text-@Color-light">@Player.Client.Connection.DisplayName</label>
+        <label class="text-@Color-light">@Player.Client.Owner.DisplayName</label>
     </div>
     @* <i class="icon" style="color: green; opacity: @(IsTalking() ? 1 : 0); transform: scale(@AmplitudeToScale())">record_voice_over</i> *@
     @* <i class="icon" style="color: red; opacity: @(IsMuted() ? 1 : 0)">voice_over_off</i> *@

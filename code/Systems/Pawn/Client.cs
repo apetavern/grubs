@@ -5,12 +5,12 @@ namespace Grubs.Systems.Pawn;
 [Title( "Client" ), Category( "Grubs/Pawn" )]
 public sealed class Client : LocalComponent<Client>
 {
-	[Sync( SyncFlags.FromHost )] 
-	public Guid ConnectionId { get; set; }
+	private static readonly Logger Log = new( "Client" );
+
+	public Connection Owner => Network.Owner;
 	
-	public Connection Connection => Connection.Find( ConnectionId );
-	
-	public Player Player { get; private set; }
+	[Sync( SyncFlags.FromHost )]
+	public Player Player { get; set; }
 	
 	[Property]
 	private GameObject PlayerPrefab { get; set; }
@@ -25,7 +25,7 @@ public sealed class Client : LocalComponent<Client>
 	
 	public void OnNetworkActive( Connection connection )
 	{
-		ConnectionId = connection.Id;
+		Log.Info( $"Network active for {connection.DisplayName}." );
 		
 		var playerObj = PlayerPrefab.Clone();
 		playerObj.Name = $"Player ({connection.DisplayName})";
@@ -35,10 +35,5 @@ public sealed class Client : LocalComponent<Client>
 		player.SetClient( this );
 
 		Player = player;
-	}
-	
-	public override string ToString()
-	{
-		return $"Client ({Connection.DisplayName}) on {GameObject.Name}";
 	}
 }
