@@ -7,6 +7,7 @@
 
 @if (!Player.IsValid() || Connection is null)
 {
+    Log.Info( $"{Connection} is null?" );
     return;
 }
 
@@ -30,7 +31,7 @@
 @code
 {
     public Player Player { get; set; }
-    private Connection Connection => Player.Client?.Connection;
+    private Connection Connection => Player.Client?.Network.Owner;
 
     private int _statIndex = 0;
     private TimeSince _timeSinceStatsChanged;
@@ -54,6 +55,9 @@
 
     public override void Tick()
     {
+        // if ( Player.IsProxy )
+        //     Log.Info( Player.Client.ConnectionId );
+        
         if (_timeSinceStatsChanged > 15f)
         {
             _statIndex += 2;
@@ -63,6 +67,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player, Connection, _statIndex);
+        return HashCode.Combine(Player, Connection?.Id, _statIndex);
     }
 }

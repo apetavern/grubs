@@ -12,8 +12,8 @@ public sealed class Player : LocalComponent<Player>
 	
 	public static IEnumerable<Player> All => Game.ActiveScene.GetAllComponents<Player>();
 	
-	[Sync( SyncFlags.FromHost )]
-	public Client Client { get; private set; }
+	[Sync( SyncFlags.FromHost ), Property, ReadOnly]
+	public Client Client { get; set; }
 
 	[Sync( SyncFlags.FromHost )] 
 	public NetList<Grub> Grubs { get; } = new();
@@ -68,6 +68,7 @@ public sealed class Player : LocalComponent<Player>
 
 	public void SetClient( Client client )
 	{
+		Log.Info( $"Setting Client on {GameObject.Name} to {client}." );
 		Client = client;
 	}
 
@@ -78,7 +79,7 @@ public sealed class Player : LocalComponent<Player>
 		var grubObj = GrubPrefab.Clone();
 		grubObj.WorldPosition = spawnPosition;
 		grubObj.Network.SetOrphanedMode( NetworkOrphaned.Host );
-		grubObj.NetworkSpawn( Client.Connection );
+		grubObj.NetworkSpawn( Client.Owner );
 		
 		var grub = grubObj.GetComponent<Grub>();
 		grub.SetOwner( this );
