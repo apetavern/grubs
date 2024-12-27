@@ -40,8 +40,6 @@ public partial class Health : Component
 		{
 			if ( !immediate )
 			{
-				// if ( Connection.Local.IsHost && !Gamemode.GetCurrent().DamageQueue.Contains( grub.Id ) )
-				// 	Gamemode.GetCurrent().DamageQueue.Add( grub.Id );
 				if ( Networking.IsHost )
 					BaseGameMode.Current.GrubDamaged( grub );
 
@@ -56,8 +54,8 @@ public partial class Health : Component
 
 		if ( CurrentHealth <= 0 && !DeathInvoked )
 		{
-			bool killzone = damageInfo.Tags.Has( "killzone" );
-			if ( killzone )
+			var isKillZoneDeath = damageInfo.Tags.Has( "killzone" );
+			if ( isKillZoneDeath )
 			{
 				var damageInfos = new List<GrubsDamageInfo>();
 				var lastReason = DamageQueue.LastOrDefault();
@@ -70,7 +68,7 @@ public partial class Health : Component
 			
 			BaseGameMode.Current.GrubDied( grub );
 			WorldPopupHelper.Instance.CreateKillZoneDeathIndicator( damageInfo.WorldPosition );
-			_ = OnDeath( killzone );
+			_ = OnDeath( isKillZoneDeath );
 		}
 	}
 
