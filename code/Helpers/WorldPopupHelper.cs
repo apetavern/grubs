@@ -51,6 +51,7 @@ public sealed class WorldPopupHelper : Component
 		var target = new GameObject { WorldPosition = safePosition };
 		
 		var go = KillZoneDeathIndicatorPrefab.Clone();
+		target.SetParent( go );
 		var indicator = go.Components.Get<KillZoneDeathIndicator>();
 		indicator.Target = target;
 	}

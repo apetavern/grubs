@@ -61,6 +61,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Inventory, Inventory?.InventoryOpen);
+        return HashCode.Combine(Inventory, Inventory?.GetHashCode());
     }
 }

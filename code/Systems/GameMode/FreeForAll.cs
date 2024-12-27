@@ -35,6 +35,11 @@ public sealed class FreeForAll : BaseGameMode
 	/// Used to check for the minimum and maximum turn change wait.
 	/// </summary>
 	private TimeSince TimeSinceTurnChangeStarted { get; set; }
+	
+	/// <summary>
+	/// The amount of time elapsed since moving to GameOver state.
+	/// </summary>
+	private TimeSince TimeSinceGameOverStateStarted { get; set; }
 
 	private const float MinimumTurnChangeDuration = 0.5f;
 	private const float MaximumTurnChangeDuration = 20f;
@@ -58,7 +63,6 @@ public sealed class FreeForAll : BaseGameMode
 		
 		Log.Info( $"{Name} mode starting." );
 
-
 		// For each player, spawn Grubs and initialize their inventory.
 		foreach ( var player in Players )
 		{
@@ -66,7 +70,6 @@ public sealed class FreeForAll : BaseGameMode
 		}
 
 		RotateActivePlayer();
-		// ActivePlayer = PlayerQueue.First();
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;
 		State = FreeForAllState.Playing;
 	}
@@ -83,6 +86,16 @@ public sealed class FreeForAll : BaseGameMode
 			if ( TurnIsChanging )
 			{
 				UpdateTurnChange();
+			}
+		}
+
+		if ( State is FreeForAllState.GameOver )
+		{
+			const float gameOverStateDuration = 12f;
+			if ( TimeSinceGameOverStateStarted > gameOverStateDuration )
+			{
+				Log.Info( "GameOver state time elapsed. Moving to Lobby state." );
+				State = FreeForAllState.Lobby;
 			}
 		}
 	}
@@ -151,6 +164,8 @@ public sealed class FreeForAll : BaseGameMode
 		
 		if ( !player.IsValid() )
 			return;
+
+		player.IsPlaying = true;
 		
 		for ( var i = 0; i < GrubsConfig.GrubCount; i++ )
 		{
@@ -189,10 +204,33 @@ public sealed class FreeForAll : BaseGameMode
 		
 		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
 			return;
+
+		foreach ( var player in Player.All )
+		{
+			Log.Info( $"player {player} IsPlaying: {player.IsPlaying}, IsDead: {player.IsDead}" );
+		}
+		var livingPlayersCount = Player.All.Count( p => p.IsPlaying && !p.IsDead );
+		
+		
+		// If only one player or less is alive, the game is over.
+		if ( livingPlayersCount <= 1 )
+		{
+			Log.Info( "All players are dead. Moving to GameOver state." );
+			State = FreeForAllState.GameOver;
+			TimeSinceGameOverStateStarted = 0f;
+			ResetGameMode();
+			return;
+		}
 		
 		TurnIsChanging = false;
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;
+		
 		RotateActivePlayer();
+		
+		while ( ActivePlayer.IsDead && _rotateCount < Player.All.Count() )
+			RotateActivePlayer();
+
+		_rotateCount = 0;
 	}
 
 	private void ProcessDamageQueue()
@@ -209,9 +247,11 @@ public sealed class FreeForAll : BaseGameMode
 		ActiveDamagedGrub.Health.ApplyDamage();
 	}
 
+	private int _rotateCount = 0;
+
 	private void RotateActivePlayer()
 	{
-		Log.Info( $"Rotating active player (current: {ActivePlayer})." );
+		Log.Info( $"Rotating active player (current: {ActivePlayer}) (count: {_rotateCount})." );
 		if ( PlayerQueue.Count == 0 )
 		{
 			foreach ( var player in Player.All )
@@ -224,6 +264,36 @@ public sealed class FreeForAll : BaseGameMode
 		Log.Info( $"New active player: {nextPlayer}." );
 		ActivePlayer = nextPlayer;
 		ActivePlayer?.RotateActiveGrub();
+		
+		_rotateCount++;
+	}
+
+	private void ResetGameMode()
+	{
+		Log.Info( "Resetting FFA mode to defaults." );
+		
+		PlayerQueue.Clear();
+		ActivePlayer = null;
+		TurnIsChanging = false;
+		
+		DamageQueue.Clear();
+		ActiveDamagedGrub = null;
+
+		foreach ( var player in Player.All )
+		{
+			player.Cleanup();
+		}
+		
+		Scene.Children
+			.Where( x => x.Tags.HasAny( "projectile", "cleanup" ) )
+			.ToList()
+			.ForEach( x =>
+			{
+				Log.Info( $"Destroying {x}." );
+				x.Root.Destroy();
+			} );
+		
+		_rotateCount = 0;
 	}
 
 	[ConCmd( "gr_ffa_next_state" )]
