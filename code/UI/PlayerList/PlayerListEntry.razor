@@ -1,58 +1,52 @@
-﻿@* @namespace Grubs.UI *@
-@* *@
-@* @using Grubs.Pawn; *@
-@* @using Grubs.Systems.Pawn *@
-@* @using Grubs.UI.Components; *@
-@* @using Sandbox; *@
-@* @using Sandbox.UI; *@
-@* *@
-@* @inherits Panel *@
-@* *@
-@* @attribute [StyleSheet] *@
-@* *@
-@* <root class="@(!Player.IsActive ? "inactive" : "")"> *@
-@*     <img src="avatar:@Player.SteamId" class="avatar" /> *@
-@*     <div style="flex-direction: column; margin-left: 5px; position: relative;"> *@
-@*         <div class="name" *@
-@*              style="font-color: linear-gradient(@_selectedColor, adjust-hue(@_selectedColor, 45));"> *@
-@*             @Player.SteamName *@
-@*         </div> *@
-@*         <div class="health" style="background-color: darken(@_selectedColor, 60%);"> *@
-@*             <div class="fill" style="background: linear-gradient(to right, @_selectedColor, darken(@_selectedColor, 20%)); width: @(Player.GetHealthPercentage)%"></div> *@
-@*             <div class="health-amount">@(Player.GetHealthPercentage)%</div> *@
-@*         </div> *@
-@*     </div> *@
-@*     <i class="icon" style="color: green; opacity: @(IsTalking() ? 1 : 0); transform: scale(@AmplitudeToScale())">record_voice_over</i> *@
-@*     <i class="icon" style="color: red; opacity: @(IsMuted() ? 1 : 0)">voice_over_off</i> *@
-@* </root> *@
-@* *@
-@* @code { *@
-@*     public Player Player { get; set; } *@
-@* *@
-@*     private PlayerVoice _voice => Player.Voice; *@
-@*     private string _selectedColor => Player.SelectedColor != String.Empty ? Player.SelectedColor : Color.White.Hex; *@
-@* *@
-@*     private bool IsMuted() => _voice.Volume == 0; *@
-@*     private bool IsTalking() => !IsMuted() && _voice.LastPlayed < 0.25f; *@
-@* *@
-@*     protected override void OnClick(MousePanelEvent e) *@
-@*     { *@
-@*         base.OnClick(e); *@
-@* *@
-@*         if (!Cursor.IsEnabled()) *@
-@*             return; *@
-@* *@
-@*         if (!Player.IsProxy) *@
-@*             return; *@
-@* *@
-@*         var localVoice = Scene.GetAllComponents<PlayerVoice>().FirstOrDefault(p => !p.IsProxy); *@
-@*         localVoice.ToggleBlock(Player); *@
-@*     } *@
-@* *@
-@*     private string AmplitudeToScale() => (1f + (_voice.Amplitude * 1.5f)).ToString("0.#"); *@
-@* *@
-@*     protected override int BuildHash() *@
-@*     { *@
-@*         return HashCode.Combine(Player.GetHealthPercentage, Player.IsActive, _selectedColor, _voice.Amplitude, IsTalking()); *@
-@*     } *@
-@* } *@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.Pawn
+@using Grubs.UI.Components
+
+@inherits Panel
+
+<root>
+    <div class="avatar-container bg-@Color-med" style="transform: rotate(@(Game.Random.Int(-2, 2))deg);)">
+        <img class="avatar" src="avatar:@Player.Client.Connection.SteamId" />
+        <div class="health-percentage text-stroke-@Color-med text-@Color-light">@Player.GetHealthPercentage%</div>
+    </div>
+    <div class="name-bar bg-@Color-dark">
+        <div class="percentage-bar bg-@Color-med" style="width: @Player.GetHealthPercentage%" />
+        <label class="text-@Color-light">@Player.Client.Connection.DisplayName</label>
+    </div>
+    @* <i class="icon" style="color: green; opacity: @(IsTalking() ? 1 : 0); transform: scale(@AmplitudeToScale())">record_voice_over</i> *@
+    @* <i class="icon" style="color: red; opacity: @(IsMuted() ? 1 : 0)">voice_over_off</i> *@
+</root>
+
+@code {
+    public Player Player { get; set; }
+    private string Color => Player.PlayerColor.ToString();
+
+    // private PlayerVoice _voice => Player.Voice;
+    // private string _selectedColor => Player.SelectedColor != String.Empty ? Player.SelectedColor : Color.White.Hex;
+
+    // private bool IsMuted() => _voice.Volume == 0;
+    // private bool IsTalking() => !IsMuted() && _voice.LastPlayed < 0.25f;
+
+    protected override void OnClick(MousePanelEvent e)
+    {
+        base.OnClick(e);
+
+        if (!Cursor.IsEnabled())
+            return;
+
+        if (!Player.IsProxy)
+            return;
+
+        // var localVoice = Scene.GetAllComponents<PlayerrVoice>().FirstOrDefault(p => !p.IsProxy);
+        // localVoice.ToggleBlock(Player);
+    }
+
+    // private string AmplitudeToScale() => (1f + (_voice.Amplitude * 1.5f)).ToString("0.#");
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Player.GetHealthPercentage );
+        // return HashCode.Combine(Player.GetHealthPercentage, Player.IsActive, _selectedColor, _voice.Amplitude, IsTalking());
+    }
+}

@@ -1,30 +1,26 @@
-@* @namespace Grubs.UI *@
-@* *@
-@* @using Grubs.Pawn; *@
-@* @using Grubs.Extensions; *@
-@* @using Grubs.Systems.Pawn *@
-@* @using Sandbox; *@
-@* @using Sandbox.UI; *@
-@* *@
-@* @inherits Panel *@
-@* *@
-@* @attribute [StyleSheet] *@
-@* *@
-@* <root> *@
-@*     <Chatbox /> *@
-@*     <div class="players"> *@
-@*         @foreach (var player in _players.Where(p => p.Grubs.Count > 0).OrderByDescending(p => p.GetTotalGrubHealth > 0)) *@
-@*         { *@
-@*             <PlayerListEntry Player=@player /> *@
-@*         } *@
-@*     </div> *@
-@* </root> *@
-@* *@
-@* @code { *@
-@*     private List<Player> _players => Scene.GetAllComponents<Player>().ToList(); *@
-@* *@
-@*     protected override int BuildHash() *@
-@*     { *@
-@*         return HashCode.Combine(Connection.All.Count, _players.HashCombine(p => p.GetHealthPercentage)); *@
-@*     } *@
-@* } *@
+@namespace Grubs.UI
+
+@using Grubs.Systems.Pawn
+@using Sandbox.UI;
+
+@inherits Panel
+
+<root>
+    <Chatbox />
+    <div class="players">
+        @foreach (var player in Players)
+        {
+            <PlayerListEntry Player=@player />
+        }
+    </div>
+</root>
+
+@code {
+    private List<Player> Players => Player.All.Where( p => p.Grubs.Count != 0 ).ToList();
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Players.Count );
+        // return HashCode.Combine(Connection.All.Count, _players.HashCombine(p => p.GetHealthPercentage));
+    }
+}
