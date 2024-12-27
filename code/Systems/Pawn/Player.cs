@@ -32,6 +32,13 @@ public sealed class Player : LocalComponent<Player>
 	public bool HasFiredThisTurn { get; private set; }
 
 	public bool IsActive => BaseGameMode.Current.IsPlayerActive( this );
+	private int GetTotalGrubHealth => (int)Grubs.Sum( g =>
+	{
+		if ( g?.Health?.CurrentHealth != null ) 
+			return g.Health.CurrentHealth;
+		return 0;
+	} ).Clamp( 0, float.MaxValue );
+	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * Grubs.Count)).CeilToInt();
 	
 	private TimeUntil TimeUntilWeaponHolstered { get; set; }
 
