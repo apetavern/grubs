@@ -8,6 +8,8 @@ namespace Grubs.Systems.Pawn;
 [Title( "Player" ), Category( "Grubs/Pawn" )]
 public sealed class Player : LocalComponent<Player>
 {
+	private static readonly Logger Log = new( "Player" );
+	
 	public static IEnumerable<Player> All => Game.ActiveScene.GetAllComponents<Player>();
 	
 	[Sync( SyncFlags.FromHost )]
@@ -91,9 +93,23 @@ public sealed class Player : LocalComponent<Player>
 		Log.Info( $"Created {grub}." );
 	}
 
+	public void OnGrubDied( Grub grub )
+	{
+		if ( Grubs.Remove( grub ) )
+		{
+			Log.Info( $"Removed {grub} from {this}." );
+		}
+	}
+
 	public void RotateActiveGrub()
 	{
 		Log.Info( $"Rotating active grub {ActiveGrub}" );
+
+		if ( Grubs.Count == 0 )
+		{
+			Log.Warning( "Trying to rotate grubs on a player with no grubs!" );
+			return;
+		}
 		
 		var nextGrub = Grubs.First();
 		Grubs.Remove( nextGrub );

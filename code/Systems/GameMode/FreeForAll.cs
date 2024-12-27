@@ -1,5 +1,4 @@
-﻿using Grubs.Common;
-using Grubs.Systems.Pawn;
+﻿using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 using Grubs.Terrain;
 
@@ -8,6 +7,8 @@ namespace Grubs.Systems.GameMode;
 [Title( "Grubs - Free For All" ), Category( "Grubs/Game Mode" )]
 public sealed class FreeForAll : BaseGameMode
 {
+	private static readonly Logger Log = new( "FreeForAll" );
+	
 	public override string Name => "Free For All";
 	
 	[Sync( SyncFlags.FromHost )]
@@ -112,6 +113,8 @@ public sealed class FreeForAll : BaseGameMode
 	{
 		const float grubDeathTurnRemainder = 3f;
 		
+		grub.Owner.OnGrubDied( grub );
+		
 		// If the grub is the active grub, end the turn.
 		if ( grub == ActivePlayer.ActiveGrub )
 		{
@@ -162,27 +165,27 @@ public sealed class FreeForAll : BaseGameMode
 	private void StartTurnChange()
 	{
 		Log.Info( $"Starting turn change (finished: {ActivePlayer})." );
+		
+		ActivePlayer.OnTurnEnd();
 		TimeSinceTurnChangeStarted = 0;
 		TurnIsChanging = true;
 	}
 
 	private void UpdateTurnChange()
 	{
-		Log.Info( $"Damage Queue Count: {DamageQueue.Count}" );
+		Log.Trace( $"Damage Queue Count: {DamageQueue.Count}" );
 		
 		if ( DamageQueue.Count != 0 || !TimeUntilNextDamagedGrub )
 		{
-			Log.Info( $"Let's process the damage queue: {DamageQueue.Count != 0} || {!TimeUntilNextDamagedGrub}" );
+			Log.Trace( $"Let's process the damage queue: {DamageQueue.Count != 0} || {!TimeUntilNextDamagedGrub}" );
 			ProcessDamageQueue();
 			return;
 		}
 		
-		Log.Info( $"No more damage queue. Moving on." );
+		Log.Trace( $"No more damage queue. Moving on." );
 		
 		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
 			return;
-		
-		ActivePlayer.OnTurnEnd();
 		
 		TurnIsChanging = false;
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;

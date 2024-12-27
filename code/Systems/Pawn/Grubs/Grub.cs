@@ -8,6 +8,8 @@ namespace Grubs.Systems.Pawn.Grubs;
 [Title("Grub"), Category("Grubs/Pawn")]
 public sealed class Grub : Component
 {
+	private static readonly Logger Log = new( "Grub" );
+	
 	[Sync]
 	public Player Owner { get; private set; }
 	
