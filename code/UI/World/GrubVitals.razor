@@ -1,5 +1,6 @@
 ﻿@namespace Grubs.UI.World
 
+@using Grubs.Pawn
 @using Grubs.Systems.Pawn
 @using Grubs.Systems.Pawn.Grubs
 @inherits PanelComponent
@@ -27,6 +28,8 @@
     private PlayerColor PlayerColor => Grub.Owner?.PlayerColor ?? PlayerColor.Sage;
     private string ColorString => PlayerColor.ToString();
 
+    private float Scale { get; set; } = 1f;
+
     private string GetHealthPercentageString()
     {
         if (!Grub.IsValid()) return "0";
@@ -41,6 +44,8 @@
     protected override void OnUpdate()
     {
         WorldPosition = Grub.PlayerController.Head.WorldPosition + Vector3.Up * 24f;
+        Scale = Scale.LerpTo(GrubFollowCamera.Local.Distance / 600, Time.Delta * 4f).Clamp( 1f, 4f );
+        WorldScale = Scale;
     }
 
     protected override int BuildHash()
