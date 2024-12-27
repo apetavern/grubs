@@ -31,7 +31,7 @@ public sealed class Grub : Component
 
 	protected override void OnStart()
 	{
-		Name = "Grubby";
+		Name = Game.Random.FromList( GrubsConfig.PresetGrubNames );
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]

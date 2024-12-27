@@ -33,8 +33,6 @@ public sealed class GirderTool : Tool
 
 		if ( IsProxy || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
-		
-		Log.Info( Equipment.Deployed ? "Deployed" : "Not Deployed" );
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
 		CursorVisual.Enabled = Equipment.Deployed;
@@ -111,6 +109,6 @@ public sealed class GirderTool : Tool
 
 		Sound.Play( UseSound );
 
-		base.FireFinished();
+		FireFinished();
 	}
 }

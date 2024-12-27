@@ -20,7 +20,7 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 	private bool _isFocusingTarget;
 	private Vector3 _center;
 	private Vector3 _panDelta;
-	private RealTimeUntil _timeSinceTargeted;
+	private RealTimeSince _timeSinceTargeted;
 	private RealTimeSince _timeSinceMousePan;
 
 	protected override void OnStart()
@@ -75,9 +75,18 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 		AdjustHighlightOutline();
 	}
 
-	public void QueueTarget( GameObject targetObject, float duration = 0 )
+	public void QueueTarget( GameObject targetObject, float duration = 1f )
 	{
-		var cameraTarget = new CameraTarget() { Object = targetObject, Duration = duration };
+		if ( TargetQueue.Select( target => target.Object ).Contains( targetObject ) )
+		{
+			var existingTarget = TargetQueue.First( target => target.Object == targetObject );
+			Log.Info( $"Found existing target while queueing: {existingTarget.Object.Name}." );
+			existingTarget.Duration = duration;
+			return;
+		}
+		
+		var cameraTarget = new CameraTarget { Object = targetObject, Duration = duration };
+		Log.Info( $"Target not found, queueing new object: {cameraTarget.Object}." );
 		TargetQueue.Enqueue( cameraTarget );
 	}
 
@@ -96,56 +105,32 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 	{
 		if ( !BaseGameMode.Current.GameStarted )
 			return;
-			
-		if ( TargetQueue.Count == 0 )
-		{
-			GameObject targetObj = null;
-			
-			if ( BaseGameMode.Current is FreeForAll freeForAllMode )
-			{
-				targetObj = freeForAllMode.ActivePlayer.ActiveGrub.GameObject;
-			}
-			else
-			{
-				targetObj = Player.Local?.ActiveGrub?.GameObject;	
-			}
-			
-			Target = new CameraTarget
-			{
-				Object = targetObj, 
-				Duration = 0f,
-			};
-			return;
-		}
 
-		if ( _timeSinceTargeted > Target.Duration )
+		if ( TargetQueue.Count != 0 && (Target.Duration == 0f || _timeSinceTargeted > Target.Duration ) )
 		{
-			var newTarget = TargetQueue.Dequeue();
-			Log.Info( $"Switching camera target to {newTarget.Object.Name}" );
-			Target = newTarget;
+			Target = TargetQueue.Dequeue();
 			_timeSinceTargeted = 0f;
 		}
-		// var targetGuid = Gamemode.GetCurrent().CameraTarget;
-		// if ( targetGuid != Guid.Empty )
-		// {
-		// 	SetTarget( Scene.Directory.FindByGuid( targetGuid ), .5f );
-		// 	return;
-		// }
-		//
-		// foreach ( var projectile in Scene.GetAllComponents<Projectile>().Where( p => p.Active ) )
-		// {
-		// 	if ( !projectile.IsValid() )
-		// 		continue;
-		// 	if ( projectile.Tags.Has( "notarget" ) || Resolution.ForceResolved.Contains( projectile.GameObject.Id ) )
-		// 		continue;
-		//
-		// 	SetTarget( projectile.GameObject, 1.5f );
-		// 	return;
-		// }
-		//
-		// var component = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId );
-		// if ( component is Player player && player.ActiveGrub.IsValid() )
-		// 	SetTarget( player.ActiveGrub.GameObject );
+
+		if ( TargetQueue.Count != 0 || _timeSinceTargeted <= Target.Duration ) 
+			return;
+		
+		
+		GameObject targetObj = null;
+		if ( BaseGameMode.Current is FreeForAll freeForAllMode )
+		{
+			targetObj = freeForAllMode.ActivePlayer.ActiveGrub.GameObject;
+		}
+		else
+		{
+			targetObj = Player.Local?.ActiveGrub?.GameObject;	
+		}
+			
+		Target = new CameraTarget
+		{
+			Object = targetObj, 
+			Duration = 0f,
+		};
 	}
 
 	public void PanCamera()
