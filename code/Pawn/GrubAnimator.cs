@@ -34,7 +34,7 @@ public sealed class GrubAnimator : Component
 		GrubRenderer.Set( "jetpack_dir", MathX.Lerp( GrubRenderer.GetFloat( "jetpack_dir" ), JetpackDir, Time.Delta * 5f ) );
 
 		var holdPose = HoldPose.None;
-		if ( Grub.ActiveEquipment.IsValid() && Controller.ShouldShowWeapon() && Grub.IsActive )
+		if ( Grub.ActiveEquipment.IsValid() && Controller.ShouldShowWeapon() && Grub.IsActive() )
 			holdPose = Grub.ActiveEquipment.HoldPose;
 
 		GrubRenderer.Set( "holdpose", (int)holdPose );

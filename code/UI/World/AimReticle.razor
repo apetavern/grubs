@@ -23,8 +23,6 @@
 {
     [Property] public Grub Grub { get; set; }
 
-    private Color Color => Color.Parse("#FFFFFF") ?? Color.Black;
-
     protected override void OnStart()
     {
         WorldRotation = WorldRotation.RotateAroundAxis(Vector3.Up, 90f);
@@ -32,33 +30,26 @@
 
     private bool IsShowing()
     {
-        if (!GameObject.Root.Components.TryGet<Grub>(out var grub))
+        if (!Grub.IsActive() 
+            || !Grub.PlayerController.ShouldShowWeapon() 
+            || !Grub.ActiveEquipment.IsValid() 
+            || !Grub.ActiveEquipment.ShouldShowAimReticle)
             return false;
-
-        if (!grub.IsActive)
-            return false;
-
-        if (!grub.PlayerController.ShouldShowWeapon())
-            return false;
-
-        if (!grub.ActiveEquipment.IsValid())
-            return false;
-
-        if (!grub.ActiveEquipment.ShouldShowAimReticle)
-            return false;
-
         return true;
     }
 
     protected override void OnUpdate()
     {
+        if (!Grub.IsValid())
+        {
+            AddClass("hidden");
+            return;
+        }
+        
         var isShowing = IsShowing();
         SetClass("hidden", !isShowing);
 
         if (!isShowing)
-            return;
-
-        if (!Grub.ActiveEquipment.IsValid())
             return;
 
         if (!Grub.ActiveEquipment.Components.TryGet<Weapon>(out var weapon))

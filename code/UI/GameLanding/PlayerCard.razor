@@ -2,11 +2,10 @@
 
 @using Grubs.Systems.Pawn
 @using Sandbox.Services
+
 @inherits Panel
 
-@attribute [StyleSheet]
-
-@if (Player is null || Connection is null)
+@if (!Player.IsValid() || Connection is null)
 {
     return;
 }
@@ -31,7 +30,7 @@
 @code
 {
     public Player Player { get; set; }
-    private Connection Connection => Player.Client.Connection;
+    private Connection Connection => Player.Client?.Connection;
 
     private int _statIndex = 0;
     private TimeSince _timeSinceStatsChanged;
@@ -64,6 +63,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player, _statIndex);
+        return HashCode.Combine(Player, Connection, _statIndex);
     }
 }

@@ -91,7 +91,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 	{
 		return !PhysicsProjectileComponent.IsValid()
 		       || !PhysicsProjectileComponent.Grub.IsValid()
-		       || !PhysicsProjectileComponent.Grub.IsActive;
+		       || !PhysicsProjectileComponent.Grub.IsActive();
 		// || Gamemode.GetCurrent().TurnIsChanging;
 	}
 }

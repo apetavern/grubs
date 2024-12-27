@@ -124,6 +124,7 @@ public sealed class Player : LocalComponent<Player>
 		HasFiredThisTurn = true;
 	}
 
+	[Rpc.Owner( NetFlags.HostOnly )]
 	public void OnTurnEnd()
 	{
 		HasFiredThisTurn = false;

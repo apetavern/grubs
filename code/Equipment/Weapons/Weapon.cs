@@ -210,7 +210,7 @@ public partial class Weapon : Component
 			{
 				if ( grub.Owner.IsValid() )
 					grub.Owner.OnFired();
-				BaseGameMode.Current.EquipmentUsed( Equipment );
+				EquipmentUsedRpc( Equipment );
 			}
 			else
 			{
@@ -331,6 +331,12 @@ public partial class Weapon : Component
 			FiringType.Cursor => "Set Target",
 			_ => string.Empty
 		};
+	}
+
+	[Rpc.Host( NetFlags.OwnerOnly )]
+	private void EquipmentUsedRpc( Equipment equipment )
+	{
+		BaseGameMode.Current.EquipmentUsed( equipment );
 	}
 
 	[Rpc.Broadcast]

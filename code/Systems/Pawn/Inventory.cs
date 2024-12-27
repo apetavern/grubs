@@ -3,6 +3,7 @@ using Grubs.Equipment;
 using Grubs.Equipment.Weapons;
 using Grubs.Gamemodes;
 using Grubs.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Systems.Pawn;
 
@@ -39,7 +40,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]
-	public void InitializeWeapons( bool infiniteAmmo )
+	public void InitializeWeapons( Grub grub, bool infiniteAmmo )
 	{
 		if ( IsProxy )
 			return;
@@ -62,14 +63,14 @@ public sealed class Inventory : LocalComponent<Inventory>
 			if ( infiniteAmmo )
 				equipment.Ammo = -1;
 	
-			if ( !Player.IsValid() || !Player.ActiveGrub.IsValid() )
+			if ( !Player.IsValid() || !grub.IsValid() )
 			{
-				Log.Warning( "Player's active grub is invalid - this is probably a networking bug" );
+				Log.Warning( "Player's active grub is invalid - this is probably a networking bug." );
 				return;
 			}
 	
 			equipment.SlotIndex = slotIndex;
-			equipment.Deploy( Player.ActiveGrub );
+			equipment.Deploy( grub );
 			equipment.Holster();
 		}
 	

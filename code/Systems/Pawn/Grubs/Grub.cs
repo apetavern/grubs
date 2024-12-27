@@ -19,7 +19,10 @@ public sealed class Grub : Component
 	[Sync]
 	public Mountable ActiveMountable { get; set; }
 
-	public bool IsActive => BaseGameMode.Current.IsGrubActive( this );
+	public bool IsActive()
+	{
+		return BaseGameMode.Current.IsValid() && BaseGameMode.Current.IsGrubActive( this );
+	} 
 	
 	[Property] public Health Health { get; set; }
 	[Property] public required GrubPlayerController PlayerController { get; set; }

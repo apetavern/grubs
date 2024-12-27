@@ -43,6 +43,9 @@
 
     protected override void OnUpdate()
     {
+        if ( !GrubFollowCamera.Local.IsValid() )
+            return;
+        
         WorldPosition = Grub.PlayerController.Head.WorldPosition + Vector3.Up * 24f;
         Scale = Scale.LerpTo(GrubFollowCamera.Local.Distance / 600, Time.Delta * 4f).Clamp( 1f, 4f );
         WorldScale = Scale;

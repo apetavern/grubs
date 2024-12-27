@@ -1,5 +1,4 @@
-﻿using Grubs.Common;
-using Grubs.Systems.Pawn;
+﻿using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Systems.GameMode;
@@ -48,6 +47,9 @@ public abstract class BaseGameMode : Component
 
 	protected override void OnUpdate()
 	{
+		if ( !Networking.IsHost )
+			return;
+		
 		OnModeUpdate();
 	}
 	

@@ -6,6 +6,11 @@
 @using Grubs.UI.Components
 @inherits PanelComponent
 
+@if (!BaseGameMode.Current.IsValid())
+{
+    return;
+}
+
 <root>
     <Cursor />
     <SceneBackground @ref="SceneBackground" />
