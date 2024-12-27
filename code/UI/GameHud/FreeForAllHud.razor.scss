@@ -13,8 +13,6 @@ FreeForAllHud {
         flex-direction: column;
         
         .turn-indicator {
-            background-color: $camo-med;
-            color: $camo-light;
             font-size: 42px;
             padding: 20px 56px 12px;
             z-index: 4;
@@ -27,8 +25,6 @@ FreeForAllHud {
         }
         
         .turn-timer {
-            background-color: $camo-dark;
-            color: $camo-light;
             font-size: 56px;
             width: 90px;
             padding: 4px 16px;

@@ -1,6 +1,7 @@
 ﻿@namespace Grubs.UI.GameHud
 
 @using Grubs.Systems.GameMode
+@using Grubs.Systems.Pawn
 
 @inherits Panel
 
@@ -11,8 +12,8 @@
 
 <root>
     <div class="header">
-        <div class="turn-indicator">@(GameMode.ActivePlayer.Client.Connection.DisplayName)'s turn!</div>
-        <div class="turn-timer">@TurnTimer</div>
+        <div class="turn-indicator bg-@Color-med text-@Color-light">@(GameMode.ActivePlayer.Client.Connection.DisplayName)'s turn!</div>
+        <div class="turn-timer bg-@Color-dark text-@Color-light">@TurnTimer</div>
     </div>
     <InventoryDisplay />
     <PlayerList />
@@ -21,6 +22,9 @@
 @code
 {
     public FreeForAll GameMode { get; set; }
+
+    private Player ActivePlayer => GameMode.ActivePlayer;
+    private string Color => ActivePlayer.PlayerColor.ToString();
 
     private string TurnTimer => GameMode?.TimeUntilTurnOver.Relative.CeilToInt().Clamp(0, int.MaxValue).ToString("0");
 
