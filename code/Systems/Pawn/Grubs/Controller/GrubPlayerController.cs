@@ -224,7 +224,7 @@ public sealed partial class GrubPlayerController : Component
 		// if ( Gamemode.GetCurrent().TurnIsChanging )
 		// 	return false;
 
-		if ( !Grub.IsActive )
+		if ( !Grub.IsActive() )
 			return false;
 
 		if ( Input.UsingController && Cursor.IsEnabled() )

@@ -65,7 +65,8 @@ public sealed class FreeForAll : BaseGameMode
 			InitializePlayer( player );
 		}
 
-		ActivePlayer = PlayerQueue.First();
+		RotateActivePlayer();
+		// ActivePlayer = PlayerQueue.First();
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;
 		State = FreeForAllState.Playing;
 	}
@@ -139,6 +140,8 @@ public sealed class FreeForAll : BaseGameMode
 
 	public override bool IsGrubActive( Grub grub )
 	{
+		if ( !ActivePlayer.IsValid() )
+			return false;
 		return ActivePlayer.ActiveGrub == grub && !TurnIsChanging;
 	}
 
@@ -157,7 +160,7 @@ public sealed class FreeForAll : BaseGameMode
 		
 		var inv = player.Components.Get<Inventory>();
 		inv.Player = player;
-		inv.InitializeWeapons( GrubsConfig.InfiniteAmmo );
+		inv.InitializeWeapons( player.ActiveGrub, GrubsConfig.InfiniteAmmo );
 			
 		PlayerQueue.Add( player );
 	}
