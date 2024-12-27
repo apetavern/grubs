@@ -74,7 +74,7 @@
         "OnFire": {
           "__version": 8,
           "__guid": "e799fa0e-ad43-4423-9508-1c0e933037a8",
-          "__changeId": 0,
+          "__changeId": 3,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -94,14 +94,14 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "-64,-112"
+                "Position": "-60,-108"
               }
             },
             {
               "Id": 3,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "224,-80"
+                "Position": "228,-84"
               }
             }
           ],
@@ -151,15 +151,36 @@
     "Children": [
       {
         "__guid": "fdb61952-513d-41fe-b810-61afd4f35b29",
-        "Flags": 8,
+        "Flags": 4,
         "Name": "muzzle",
-        "Position": "19.4487,0.485087,9.937422",
+        "Position": "19,0,10",
         "Enabled": true
       },
       {
         "__guid": "b9623d22-e536-45df-987a-ea84601d80c9",
         "Flags": 4,
         "Name": "hold_L",
+        "Enabled": true
+      },
+      {
+        "__guid": "0ff878b9-f756-4375-aece-23b9952a40e9",
+        "Flags": 8,
+        "Name": "muzzle",
+        "Position": "19.4487,0.485087,9.937422",
+        "Enabled": true
+      },
+      {
+        "__guid": "663419d8-80ad-4ba6-a003-11f0c4006940",
+        "Flags": 8,
+        "Name": "muzzle",
+        "Position": "19.4487,0.485087,9.937422",
+        "Enabled": true
+      },
+      {
+        "__guid": "31ba1018-fb2f-4928-bbbb-8ad9da9ac39a",
+        "Flags": 8,
+        "Name": "muzzle",
+        "Position": "19.4487,0.485087,9.937422",
         "Enabled": true
       }
     ],
