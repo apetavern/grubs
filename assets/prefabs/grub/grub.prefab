@@ -3,7 +3,7 @@
     "__guid": "b922f141-a7b8-43b6-980c-20b64cb0180f",
     "Flags": 0,
     "Name": "grub",
-    "Tags": "player",
+    "Tags": "player,cleanup",
     "Enabled": true,
     "Components": [
       {

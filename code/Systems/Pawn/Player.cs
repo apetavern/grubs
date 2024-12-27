@@ -30,19 +30,22 @@ public sealed class Player : LocalComponent<Player>
 	[Sync( SyncFlags.FromHost )]
 	public PlayerColor PlayerColor { get; set; } = PlayerColor.Khaki;
 	
+	[Sync( SyncFlags.FromHost )]
+	public bool IsPlaying { get; set; }
+	
 	[Sync]
 	public bool HasFiredThisTurn { get; private set; }
 
 	public bool IsActive => BaseGameMode.Current.IsPlayerActive( this );
+	public bool IsDead => Grubs.Count == 0;
+	
 	private int GetTotalGrubHealth => (int)Grubs.Sum( g =>
 	{
 		if ( g?.Health?.CurrentHealth != null ) 
 			return g.Health.CurrentHealth;
 		return 0;
 	} ).Clamp( 0, float.MaxValue );
-	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * Grubs.Count)).CeilToInt();
-	
-	private TimeUntil TimeUntilWeaponHolstered { get; set; }
+	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * GrubsConfig.GrubCount)).CeilToInt();
 
 	public Vector3 MousePosition { get; private set; }
 	private static readonly Plane Plane = 
@@ -123,6 +126,22 @@ public sealed class Player : LocalComponent<Player>
 	public void OnFired()
 	{
 		HasFiredThisTurn = true;
+	}
+
+	public void Cleanup()
+	{
+		Grubs.Clear();
+		ActiveGrub = null;
+		IsPlaying = false;
+		
+		CleanupRpc();
+	}
+
+	[Rpc.Owner( NetFlags.HostOnly )]
+	private void CleanupRpc()
+	{
+		HasFiredThisTurn = false;
+		Inventory.Cleanup();
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]

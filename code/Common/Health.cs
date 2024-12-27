@@ -173,6 +173,7 @@ public partial class Health : Component
 			// 		Stats.IncrementGrubsKilled( grub.Owner.Id );
 			// }
 			
+			grub.Owner.Inventory.HolsterActive();
 			grub.GameObject.Destroy();
 		}
 

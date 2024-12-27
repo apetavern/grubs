@@ -33,8 +33,8 @@ public sealed class Inventory : LocalComponent<Inventory>
 	
 	public void Cleanup()
 	{
-		for ( var i = 0; i < Equipment.Count; i++ )
-			Equipment[i]?.GameObject?.Destroy();
+		foreach (var t in Equipment)
+			t?.GameObject?.Destroy();
 
 		Equipment.Clear();
 	}
@@ -227,5 +227,10 @@ public sealed class Inventory : LocalComponent<Inventory>
 		var slot = forwards ? GetNextSlot() : GetPrevSlot();
 		ActiveSlot = slot;
 		Equip( ActiveSlot );
+	}
+
+	public override int GetHashCode()
+	{
+		return HashCode.Combine( Equipment.Sum( e => e.Ammo ), InventoryOpen );
 	}
 }
