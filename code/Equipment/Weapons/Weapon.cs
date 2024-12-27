@@ -303,12 +303,8 @@ public partial class Weapon : Component
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return Transform.World;
 
-		if ( Equipment.Model.TryGetBoneTransform( "muzzle", out var tx ) )
-		{
-			return tx;
-		}
-
-		return Equipment.Grub.EyePosition;
+		var muzzleTransform = Equipment.Model.GetAttachment( "muzzle" );
+		return muzzleTransform ?? Equipment.Grub.EyePosition;
 	}
 
 	public Vector3 GetMuzzleForward()
