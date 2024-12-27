@@ -417,6 +417,53 @@
               "Tint": "1,1,1,1"
             }
           ]
+        },
+        {
+          "__guid": "7fc4b4ee-233e-442f-9ffa-2a00b4bf16df",
+          "Flags": 0,
+          "Name": "Envmap Probe",
+          "Position": "0,2080,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.EnvmapProbe",
+              "__guid": "e0b96ad4-750b-422a-b085-02f769a1a09e",
+              "Bounds": {
+                "Mins": "-5000,-3380.525,-2000",
+                "Maxs": "5000,7216.525,2000"
+              },
+              "DelayBetweenUpdates": 0.1,
+              "Feathering": 0.5,
+              "FrameInterval": 5,
+              "MaxDistance": 512,
+              "MultiBounce": false,
+              "Projection": "Box",
+              "RenderDynamically": false,
+              "Texture": "textures/cubemaps/default2.vtex",
+              "TintColor": "1,1,1,1",
+              "UpdateStrategy": "OnEnabled",
+              "ZFar": 4096,
+              "ZNear": 16
+            }
+          ]
+        },
+        {
+          "__guid": "c45ce3a8-3227-44db-af75-0adc810a1e70",
+          "Flags": 0,
+          "Name": "Fog",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.GradientFog",
+              "__guid": "0dc246aa-a10b-4f3b-a483-a595bf9d8f1e",
+              "Color": "0.34527,0.53373,0.88372,1",
+              "EndDistance": 10000,
+              "FalloffExponent": 1,
+              "Height": 1152,
+              "StartDistance": 2000,
+              "VerticalFalloffExponent": 2.5
+            }
+          ]
         }
       ]
     },
@@ -669,6 +716,16 @@
         {
           "__type": "Grubs.Pawn.GrubFollowCamera",
           "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7"
+        },
+        {
+          "__type": "Sandbox.DepthOfField",
+          "__guid": "ea71f785-835e-40f8-a884-f0006e695e44",
+          "BackBlur": true,
+          "BlurSize": 5,
+          "FocalDistance": 200,
+          "FocusRange": 800000,
+          "FrontBlur": false,
+          "QualityLevel": "High"
         }
       ]
     },
@@ -751,35 +808,6 @@
         {
           "__type": "Grubs.Helpers.ChatHelper",
           "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4"
-        }
-      ]
-    },
-    {
-      "__guid": "7fc4b4ee-233e-442f-9ffa-2a00b4bf16df",
-      "Flags": 0,
-      "Name": "Envmap Probe",
-      "Position": "0,2080,0",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.EnvmapProbe",
-          "__guid": "e0b96ad4-750b-422a-b085-02f769a1a09e",
-          "Bounds": {
-            "Mins": "-5000,-2000,-2000",
-            "Maxs": "5000,2000,2000"
-          },
-          "DelayBetweenUpdates": 0.1,
-          "Feathering": 0.5,
-          "FrameInterval": 5,
-          "MaxDistance": 512,
-          "MultiBounce": false,
-          "Projection": "Box",
-          "RenderDynamically": false,
-          "Texture": "textures/cubemaps/default2.vtex",
-          "TintColor": "1,1,1,1",
-          "UpdateStrategy": "OnEnabled",
-          "ZFar": 4096,
-          "ZNear": 16
         }
       ]
     }
