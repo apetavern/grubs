@@ -30,7 +30,7 @@ public partial class GrubsTerrain : Component
 			return;
 		}
 
-		await SdfWorld.ClearAsync();
+		await Clear();
 
 		await GameTask.MainThread();
 
