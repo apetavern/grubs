@@ -5,7 +5,7 @@
 
 @inherits Panel
 
-@if (!GameMode.IsValid())
+@if (!GameMode.IsValid() || !ActivePlayer.IsValid())
 {
     return;
 }
