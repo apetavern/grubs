@@ -1,4 +1,5 @@
-﻿using Grubs.Systems.Pawn;
+﻿using Grubs.Helpers;
+using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 using Grubs.Terrain;
 
@@ -205,19 +206,21 @@ public sealed class FreeForAll : BaseGameMode
 		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
 			return;
 
-		foreach ( var player in Player.All )
-		{
-			Log.Info( $"player {player} IsPlaying: {player.IsPlaying}, IsDead: {player.IsDead}" );
-		}
-		var livingPlayersCount = Player.All.Count( p => p.IsPlaying && !p.IsDead );
-		
+		var livingPlayers = Player.AllLiving.ToList();
 		
 		// If only one player or less is alive, the game is over.
-		if ( livingPlayersCount <= 1 )
+		if ( livingPlayers.Count <= 1 && !GrubsConfig.KeepGameAlive )
 		{
 			Log.Info( "All players are dead. Moving to GameOver state." );
 			State = FreeForAllState.GameOver;
 			TimeSinceGameOverStateStarted = 0f;
+
+			var winner = livingPlayers.FirstOrDefault();
+			if ( winner != null )
+			{
+				ChatHelper.Instance.SendInfoMessage( $"{winner.Client.Owner.DisplayName} won the match!" );
+			}
+			
 			ResetGameMode();
 			return;
 		}
@@ -229,7 +232,7 @@ public sealed class FreeForAll : BaseGameMode
 		
 		while ( ActivePlayer.IsDead && _rotateCount < Player.All.Count() )
 			RotateActivePlayer();
-
+		
 		_rotateCount = 0;
 	}
 
@@ -247,14 +250,14 @@ public sealed class FreeForAll : BaseGameMode
 		ActiveDamagedGrub.Health.ApplyDamage();
 	}
 
-	private int _rotateCount = 0;
+	private int _rotateCount;
 
 	private void RotateActivePlayer()
 	{
 		Log.Info( $"Rotating active player (current: {ActivePlayer}) (count: {_rotateCount})." );
 		if ( PlayerQueue.Count == 0 )
 		{
-			foreach ( var player in Player.All )
+			foreach ( var player in Player.AllLiving )
 				PlayerQueue.Add( player );
 		}
 		
