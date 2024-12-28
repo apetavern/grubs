@@ -157,13 +157,18 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 	{
 		const float padding = 4;
 		var terrain = GrubsTerrain.Instance;
+		if ( !terrain.IsValid() )
+			return;
 
 		var minX = terrain.WorldTextureLength * -0.5f + padding;
 		var maxX = terrain.WorldTextureLength * 0.5f - padding;
 		_center.x = _center.x.Clamp( minX, maxX );
 
-		var water = terrain?.Water;
-		var minZ = (water?.WorldPosition.z ?? 0) + padding;
+		var water = terrain.Water;
+		if ( !water.IsValid() )
+			return;
+		
+		var minZ = water.WorldPosition.z + padding;
 		var maxZ = terrain.WorldTextureHeight - padding + 128;
 		_center.z = _center.z.Clamp( minZ, maxZ );
 	}
