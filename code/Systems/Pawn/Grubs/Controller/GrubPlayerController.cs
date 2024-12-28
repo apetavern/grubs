@@ -75,16 +75,13 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateRotation()
 	{
-		if ( CharacterController.Velocity.Normal.IsNearZeroLength )
-			return;
-
-		if ( !IsGrounded )
+		if ( CharacterController.Velocity.Normal.IsNearZeroLength || !IsGrounded )
 			return;
 
 		WorldRotation = MoveInput switch
 		{
-			<= -1 => Rotation.Identity,
-			>= 1 => Rotation.From( 0, 180, 0 ),
+			< 0 => Rotation.Identity,
+			> 0 => Rotation.From( 0, 180, 0 ),
 			_ => WorldRotation
 		};
 	}
@@ -93,9 +90,7 @@ public sealed partial class GrubPlayerController : Component
 	{
 		if ( Grub.ActiveEquipment.IsValid() && Grub.ActiveEquipment.Components.TryGet<Weapon>( out var weapon ) )
 		{
-			if ( !weapon.IsValid() )
-				return;
-			if ( weapon.IsCharging )
+			if ( !weapon.IsValid() || weapon.IsCharging )
 				return;
 		}
 
@@ -203,9 +198,6 @@ public sealed partial class GrubPlayerController : Component
 		return (Velocity.IsNearlyZero( 2.5f ) && IsGrounded || IsOnRope || showWhileMoving) && !IsChargingBackflip;
 	}
 
-	/// <summary>
-	/// Return
-	/// </summary>
 	public bool ShouldAcceptMoveInput()
 	{
 		var equipment = Grub.ActiveEquipment;
@@ -221,18 +213,12 @@ public sealed partial class GrubPlayerController : Component
 		if ( IsProxy || !Grub.IsValid() )
 			return false;
 
-		// if ( Gamemode.GetCurrent().TurnIsChanging )
-		// 	return false;
-
 		if ( !Grub.IsActive() )
 			return false;
 
 		if ( Input.UsingController && Cursor.IsEnabled() )
 			return false;
-
-		// if ( PlayerInventory.Local.IsClosing == true )
-		// 	return false;
-
+		
 		return true;
 	}
 }

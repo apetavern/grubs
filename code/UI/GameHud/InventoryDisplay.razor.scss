@@ -45,6 +45,7 @@ InventoryDisplay {
                 height: 80px;
                 background-color: $camo-darker;
                 transition: opacity 0.25s;
+                pointer-events: all;
                 
                 &.disabled {
                     opacity: 0.55;
