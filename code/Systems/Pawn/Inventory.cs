@@ -128,7 +128,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 		var active = GetActiveEquipment();
 		if ( active?.Components.TryGet<Weapon>( out var weapon ) ?? false )
 		{
-			if ( weapon.IsFiring && !weapon.CanSwapDuringUse || weapon.TimesUsed > 0 && !weapon.CanSwapAfterUse )
+			if ( (weapon.IsFiring && !weapon.CanSwapDuringUse) || (weapon.TimesUsed > 0 && !weapon.CanSwapAfterUse) )
 				return;
 		}
 
@@ -139,8 +139,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 		ActiveSlot = index;
 		Equip( ActiveSlot );
 	
-		if ( !Input.UsingController )
-			InventoryOpen = false;
+		InventoryOpen = false;
 	}
 
 	public void HolsterActive()
