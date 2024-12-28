@@ -1,4 +1,5 @@
-﻿using Grubs.Helpers;
+﻿using Grubs.Common;
+using Grubs.Helpers;
 using Grubs.Pawn;
 using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
@@ -29,8 +30,9 @@ public sealed class FreeForAll : BaseGameMode
 	public bool TurnIsChanging { get; private set; }
 
 	private Queue<Grub> DamageQueue { get; } = new();
+	private Queue<Grub> DeathQueue { get; } = new();
 	private Grub ActiveDamagedGrub { get; set; }
-	private TimeUntil TimeUntilNextDamagedGrub { get; set; }
+	private TimeUntil TimeUntilNextDequeue { get; set; }
 	
 	/// <summary>
 	/// The amount of time elapsed since we started changing turns.
@@ -44,6 +46,7 @@ public sealed class FreeForAll : BaseGameMode
 	private TimeSince TimeSinceGameOverStateStarted { get; set; }
 
 	private const float MinimumTurnChangeDuration = 0.5f;
+	private const float MaximumWorldResolveDuration = 20f;
 
 	protected override void OnModeInit()
 	{
@@ -128,6 +131,7 @@ public sealed class FreeForAll : BaseGameMode
 	{
 		const float grubDeathTurnRemainder = 3f;
 
+
 		if ( !grub.IsValid() || !grub.Owner.IsValid() )
 		{
 			Log.Warning( "Tried to call OnGrubDied but Grub or Grub.Owner was invalid." );
@@ -140,6 +144,13 @@ public sealed class FreeForAll : BaseGameMode
 		if ( grub == ActivePlayer.ActiveGrub )
 		{
 			TimeUntilTurnOver = Math.Min( TimeUntilTurnOver, grubDeathTurnRemainder );
+		}
+		
+		// If a grub died while the turn is changing, let's process their death immediately.
+		if ( TurnIsChanging )
+		{
+			Log.Info( $"Grub died while turn is changing: {grub}." );
+			DeathQueue.Enqueue( grub );
 		}
 	}
 
@@ -199,11 +210,24 @@ public sealed class FreeForAll : BaseGameMode
 
 	private void UpdateTurnChange()
 	{
-		Log.Trace( $"Damage Queue Count: {DamageQueue.Count}" );
+		if ( !Resolution.IsWorldResolved() && TimeSinceTurnChangeStarted < MaximumWorldResolveDuration )
+			return;
 		
-		if ( DamageQueue.Count != 0 || !TimeUntilNextDamagedGrub )
+		Log.Trace( $"Damage Queue Count: {DamageQueue.Count}" );
+
+		if ( !TimeUntilNextDequeue )
+			return;
+
+		if ( DeathQueue.Count != 0 )
 		{
-			Log.Trace( $"Let's process the damage queue: {DamageQueue.Count != 0} || {!TimeUntilNextDamagedGrub}" );
+			Log.Trace( $"Let's process the death queue (count: {DeathQueue.Count}" );
+			ProcessDeathQueue();
+			return;
+		}
+		
+		if ( DamageQueue.Count != 0 )
+		{
+			Log.Trace( $"Let's process the damage queue: {DamageQueue.Count != 0} || {!TimeUntilNextDequeue}" );
 			ProcessDamageQueue();
 			return;
 		}
@@ -243,11 +267,33 @@ public sealed class FreeForAll : BaseGameMode
 		_rotateCount = 0;
 	}
 
+	private void ProcessDeathQueue()
+	{
+		const float timeBetweenDeaths = 2f;
+
+		if ( !TimeUntilNextDequeue )
+			return;
+		
+		var dyingGrub = DeathQueue.Dequeue();
+		if ( !dyingGrub.IsValid() )
+		{
+			Log.Warning( $"Grub in death queue is invalid, skipping." );
+			return;
+		}
+
+		ActiveDamagedGrub = dyingGrub;
+		
+		Log.Info( $"Set ActiveDamagedGrub to {ActiveDamagedGrub} from death queue." );
+		
+		QueueCameraTarget( ActiveDamagedGrub.GameObject, timeBetweenDeaths );
+		TimeUntilNextDequeue = timeBetweenDeaths;
+	}
+
 	private void ProcessDamageQueue()
 	{
 		const float timeBetweenDamagedGrubs = 2f;
 
-		if ( !TimeUntilNextDamagedGrub ) 
+		if ( !TimeUntilNextDequeue ) 
 			return;
 		
 		var damagedGrub = DamageQueue.Dequeue();
@@ -259,10 +305,10 @@ public sealed class FreeForAll : BaseGameMode
 
 		ActiveDamagedGrub = damagedGrub;
 		
-		Log.Info( $"Set ActiveDamagedGrub to {ActiveDamagedGrub}" );
+		Log.Info( $"Set ActiveDamagedGrub to {ActiveDamagedGrub} from damage queue." );
 		
 		QueueCameraTarget( ActiveDamagedGrub.GameObject, timeBetweenDamagedGrubs );
-		TimeUntilNextDamagedGrub = timeBetweenDamagedGrubs;
+		TimeUntilNextDequeue = timeBetweenDamagedGrubs;
 		ActiveDamagedGrub.Health.ApplyDamage();
 	}
 

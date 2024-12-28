@@ -6,7 +6,7 @@ using Grubs.Systems.Pawn.Grubs.Controller;
 namespace Grubs.Systems.Pawn.Grubs;
 
 [Title("Grub"), Category("Grubs/Pawn")]
-public sealed class Grub : Component
+public sealed class Grub : Component, IResolvable
 {
 	private static readonly Logger Log = new( "Grub" );
 	
@@ -65,5 +65,15 @@ public sealed class Grub : Component
 		{
 			freeForAll.ActivePlayer.ActiveGrub.Health.CurrentHealth = health;
 		}
+	}
+
+	public bool Resolved => IsResolved();
+
+	private bool IsResolved()
+	{
+		if ( !PlayerController.IsValid() )
+			return true;
+		
+		return PlayerController.Velocity.IsNearlyZero( 0.1f ) || HealthPercentage <= 0f;
 	}
 }
