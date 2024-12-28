@@ -89,12 +89,13 @@ public sealed class Inventory : LocalComponent<Inventory>
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
-	
+
 		if ( IsProxy )
 			return;
 	
 		if ( Input.Pressed( "toggle_inventory" ) )
 		{
+			Log.Info( $"Toggle inventory to: {!InventoryOpen}" );
 			InventoryOpen = !InventoryOpen;
 		}
 	

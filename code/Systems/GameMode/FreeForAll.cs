@@ -1,4 +1,5 @@
 ﻿using Grubs.Helpers;
+using Grubs.Pawn;
 using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 using Grubs.Terrain;
@@ -43,7 +44,6 @@ public sealed class FreeForAll : BaseGameMode
 	private TimeSince TimeSinceGameOverStateStarted { get; set; }
 
 	private const float MinimumTurnChangeDuration = 0.5f;
-	private const float MaximumTurnChangeDuration = 20f;
 
 	protected override void OnModeInit()
 	{
@@ -127,6 +127,12 @@ public sealed class FreeForAll : BaseGameMode
 	protected override void OnGrubDied( Grub grub )
 	{
 		const float grubDeathTurnRemainder = 3f;
+
+		if ( !grub.IsValid() || !grub.Owner.IsValid() )
+		{
+			Log.Warning( "Tried to call OnGrubDied but Grub or Grub.Owner was invalid." );
+			return;
+		}
 		
 		grub.Owner.OnGrubDied( grub );
 		
@@ -185,7 +191,8 @@ public sealed class FreeForAll : BaseGameMode
 	{
 		Log.Info( $"Starting turn change (finished: {ActivePlayer})." );
 		
-		ActivePlayer.OnTurnEnd();
+		if ( ActivePlayer.IsValid() )
+			ActivePlayer.OnTurnEnd();
 		TimeSinceTurnChangeStarted = 0;
 		TurnIsChanging = true;
 	}
@@ -238,15 +245,24 @@ public sealed class FreeForAll : BaseGameMode
 
 	private void ProcessDamageQueue()
 	{
-		const float timeBetweenDamagedGrubs = 0.4f;
+		const float timeBetweenDamagedGrubs = 2f;
 
 		if ( !TimeUntilNextDamagedGrub ) 
 			return;
 		
-		ActiveDamagedGrub = DamageQueue.Dequeue();
+		var damagedGrub = DamageQueue.Dequeue();
+		if ( !damagedGrub.IsValid() )
+		{
+			Log.Warning( "Grub in queue is invalid, skipping." );
+			return;
+		}
+
+		ActiveDamagedGrub = damagedGrub;
+		
 		Log.Info( $"Set ActiveDamagedGrub to {ActiveDamagedGrub}" );
+		
+		QueueCameraTarget( ActiveDamagedGrub.GameObject, timeBetweenDamagedGrubs );
 		TimeUntilNextDamagedGrub = timeBetweenDamagedGrubs;
-		Log.Info( $"TimeUntilNextDamagedGrub: {TimeUntilNextDamagedGrub}" );
 		ActiveDamagedGrub.Health.ApplyDamage();
 	}
 
@@ -297,6 +313,17 @@ public sealed class FreeForAll : BaseGameMode
 			} );
 		
 		_rotateCount = 0;
+		
+		GrubsTerrain.Instance.Init();
+	}
+
+	[Rpc.Broadcast( NetFlags.HostOnly )]
+	private void QueueCameraTarget( GameObject target, float duration )
+	{
+		if ( !target.IsValid() )
+			return;
+
+		GrubFollowCamera.Local?.QueueTarget( target, duration );
 	}
 
 	[ConCmd( "gr_ffa_next_state" )]
