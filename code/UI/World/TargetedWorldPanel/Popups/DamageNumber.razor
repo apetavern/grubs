@@ -5,7 +5,7 @@
 @attribute [StyleSheet]
 
 <root>
-	<div class="@(_isHeal ? "heal" : "damage")">@FormatDamage()</div>
+	<div class="@(_isHeal ? "heal" : "damage")" style="transform: rotate(@Game.Random.Int(-4, 4)deg)">@FormatDamage()</div>
 </root>
 
 @code {
