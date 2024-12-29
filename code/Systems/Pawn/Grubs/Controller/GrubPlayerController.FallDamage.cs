@@ -29,16 +29,23 @@ public partial class GrubPlayerController
 
 		if ( LastGroundHeight - WorldPosition.z < FallDistanceThreshold )
 			return;
+		
+		Log.Info( $"Fall Velocity: {FallVelocity}, Threshold: {FallVelocityDamageThreshold}" );
 
-		if ( FallVelocity > FallVelocityDamageThreshold )
+		if ( FallVelocity < FallVelocityDamageThreshold )
 			return;
-		// ApplyFallDamage();
+		
+		ApplyFallDamage();
 	}
 
-	// private void ApplyFallDamage()
-	// {
-	// 	var fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
-	// 	var health = Sandbox.GameObject.Components.Get<Health>();
-	// 	health?.TakeDamage( GrubsDamageInfo.FromFall( fallDamage, global::Grubs.Pawn.Grub.Id, global::Grubs.Pawn.Grub.Name ) );
-	// }
+	private void ApplyFallDamage()
+	{
+		var fallDamage = (FallVelocity - FallVelocityDamageThreshold) * FallDamage * FallDamageModifier;
+		var health = GameObject.Components.Get<Health>();
+		
+		Log.Info( fallDamage );
+		
+		if ( health.IsValid() )
+			health.TakeDamage( GrubsDamageInfo.FromFall( fallDamage, Grub.Id, Grub.Name ) );
+	}
 }
