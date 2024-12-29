@@ -38,7 +38,7 @@ public sealed class Mountable : Component
 		Grub.WorldRotation = Rotation.LookAt( Grub.WorldRotation.Forward.WithZ( 0 ), Vector3.Up );
 		Grub.PlayerController.Enabled = true;
 		Grub.PlayerController.IsOnRope = false;
-		Grub.CharacterController.Velocity = Components.Get<Rigidbody>().Velocity;
+		Grub.CharacterController.SetVelocity( Components.Get<Rigidbody>().Velocity );
 		MountEnabled = false;
 		Grub.ActiveMountable = null;
 		Grub = null;

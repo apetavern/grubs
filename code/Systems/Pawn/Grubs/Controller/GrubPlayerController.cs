@@ -57,20 +57,20 @@ public sealed partial class GrubPlayerController : Component
 		{
 			var wishVel = GetWishVelocity();
 
-			CharacterController.Velocity = CharacterController.Velocity.WithZ( 0f );
+			CharacterController.SetVelocity( CharacterController.Velocity.WithZ( 0f ) );
 			CharacterController.Accelerate( wishVel );
 			CharacterController.ApplyFriction( 4f, 100f );
 		}
 		else
 		{
-			CharacterController.Velocity -= Gravity * Time.Delta * 0.5f;
+			CharacterController.SetVelocity( Velocity - Gravity * Time.Delta * 0.5f );
 			CharacterController.ApplyFriction( 0.1f );
 		}
 
 		CharacterController.Move();
 
 		if ( !IsGrounded )
-			CharacterController.Velocity -= Gravity * Time.Delta * 0.5f;
+			CharacterController.SetVelocity( Velocity - Gravity * Time.Delta * 0.5f );
 	}
 
 	private void UpdateRotation()
@@ -120,7 +120,7 @@ public sealed partial class GrubPlayerController : Component
 
 		if ( Input.Pressed( "jump" ) )
 		{
-			CharacterController.Velocity = new Vector3( Facing * 175f, 0f, 220f );
+			CharacterController.SetVelocity( new Vector3( Facing * 175f, 0f, 220f ) );
 			CharacterController.ReleaseFromGround();
 			Animator.TriggerJump();
 		}
@@ -147,8 +147,8 @@ public sealed partial class GrubPlayerController : Component
 
 	private void DoBackflip()
 	{
-		CharacterController.Velocity =
-			new Vector3( -Facing * (12.5f + 45f * BackflipCharge), 0f, 200f + 220f * BackflipCharge );
+		CharacterController.SetVelocity(
+			new Vector3( -Facing * (12.5f + 45f * BackflipCharge), 0f, 200f + 220f * BackflipCharge ) );
 		CharacterController.ReleaseFromGround();
 		Animator.TriggerBackflip();
 		IsChargingBackflip = false;

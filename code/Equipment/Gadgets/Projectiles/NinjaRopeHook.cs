@@ -36,7 +36,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 				grub.PlayerController.IsOnRope = true;
 				grub.WorldRotation = Rotation.Lerp( PhysicsProjectileComponent.Grub.WorldRotation, Rotation.LookAt( Rope.HookDirection ) * Rotation.FromPitch( 45f ), Time.Delta * 10f );
 				grub.CharacterController.IsOnGround = false;
-				grub.CharacterController.Velocity = Vector3.Zero;
+				grub.CharacterController.SetVelocity( Vector3.Zero );
 			}
 			else
 			{
