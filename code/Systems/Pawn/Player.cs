@@ -146,6 +146,13 @@ public sealed class Player : LocalComponent<Player>
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]
+	public void OnTurnStart()
+	{
+		Sound.Play( "ui_turn_indicator" );
+		ActiveGrub.OnTurnStart();
+	}
+
+	[Rpc.Owner( NetFlags.HostOnly )]
 	public void OnTurnEnd()
 	{
 		HasFiredThisTurn = false;
