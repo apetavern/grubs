@@ -3,7 +3,7 @@
     "__guid": "b922f141-a7b8-43b6-980c-20b64cb0180f",
     "Flags": 0,
     "Name": "grub",
-    "Tags": "player,cleanup",
+    "Tags": "cleanup,player",
     "Enabled": true,
     "Components": [
       {
@@ -59,6 +59,7 @@
       {
         "__type": "Sandbox.HighlightOutline",
         "__guid": "3f1dbecc-0919-46f0-b1f3-b35e81087d77",
+        "__enabled": false,
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",

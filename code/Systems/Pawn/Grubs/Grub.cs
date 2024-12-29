@@ -37,9 +37,46 @@ public sealed class Grub : Component, IResolvable
 
 	public Transform EyePosition => WorldTransform.WithPosition( WorldPosition + Vector3.Up * 24f );
 
+	private static readonly List<Clothing.ClothingCategory> ValidClothingCategories = new()
+	{
+		Clothing.ClothingCategory.Hat,
+		Clothing.ClothingCategory.Facial,
+		Clothing.ClothingCategory.Hair
+	};
+
 	protected override void OnStart()
 	{
-		Name = Game.Random.FromList( GrubsConfig.PresetGrubNames );
+		if ( !IsProxy )
+			Name = Game.Random.FromList( GrubsConfig.PresetGrubNames );
+
+		if ( Networking.IsHost )
+		{
+			var avatarData = Network.Owner.GetUserData( "avatar" );
+			Log.Info( $"Avatar Data for {Network.Owner.DisplayName}: {avatarData}" );
+			DressGrub( avatarData );
+		}
+	}
+
+	[Rpc.Owner( NetFlags.HostOnly )]
+	private void DressGrub( string avatarData )
+	{
+		var clothingContainer = ClothingContainer.CreateFromJson( avatarData );
+		
+		foreach ( var clothingEntry in clothingContainer.Clothing )
+		{
+			if ( !ValidClothingCategories.Contains( clothingEntry.Clothing.Category ) )
+				continue;
+
+			var go = new GameObject();
+			go.SetParent( GameObject );
+			go.Tags.Add( "clothing" );
+			go.Name = $"Clothing - {clothingEntry.Clothing.ResourceName}";
+			var clothingModel = go.Components.Create<SkinnedModelRenderer>();
+			clothingModel.Model = Model.Load( clothingEntry.Clothing.Model );
+			clothingModel.BoneMergeTarget = Animator.GrubRenderer;
+		}
+		
+		Network.Refresh();
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]
