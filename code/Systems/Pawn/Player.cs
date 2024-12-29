@@ -146,10 +146,12 @@ public sealed class Player : LocalComponent<Player>
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]
-	public void OnTurnStart()
+	public void OnTurnStart( Grub grub )
 	{
 		Sound.Play( "ui_turn_indicator" );
-		ActiveGrub.OnTurnStart();
+		
+		if ( grub.IsValid() )
+			grub.OnTurnStart();
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]

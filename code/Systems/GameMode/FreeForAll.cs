@@ -210,6 +210,10 @@ public sealed class FreeForAll : BaseGameMode
 
 	private void UpdateTurnChange()
 	{
+		// Wait one second before trying to process the turn change, in case of any race conditions.
+		if ( TimeSinceTurnChangeStarted > 1f )
+			return;
+		
 		if ( !Resolution.IsWorldResolved() && TimeSinceTurnChangeStarted < MaximumWorldResolveDuration )
 			return;
 		
@@ -264,7 +268,8 @@ public sealed class FreeForAll : BaseGameMode
 		while ( ActivePlayer.IsDead && _rotateCount < Player.All.Count() )
 			RotateActivePlayer();
 		
-		ActivePlayer.OnTurnStart();
+		// Send the ActivePlayer's ActiveGrub in case the synced ActiveGrub hasn't been processed yet.
+		ActivePlayer.OnTurnStart( ActivePlayer.ActiveGrub );
 		_rotateCount = 0;
 	}
 

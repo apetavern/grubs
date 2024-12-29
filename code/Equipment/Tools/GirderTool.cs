@@ -51,9 +51,10 @@ public sealed class GirderTool : Tool
 		CursorVisual.WorldRotation *= Rotation.FromPitch( (Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f) );
 
 		if ( Input.UsingController )
-			GrubFollowCamera.Local.PanCamera();
+			GrubFollowCamera.Local?.PanCamera();
 
-		GrubFollowCamera.Local.Distance = 1024f;
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.Distance = 1024f;
 		var isValidPlacement = CheckValidPlacement();
 		CursorVisual.Tint = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.75f );
 	}
@@ -62,14 +63,16 @@ public sealed class GirderTool : Tool
 	{
 		base.OnDeploy();
 
-		GrubFollowCamera.Local.AutomaticRefocus = false;
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.AutomaticRefocus = false;
 	}
 
 	public override void OnHolster()
 	{
 		base.OnHolster();
 
-		GrubFollowCamera.Local.AutomaticRefocus = true;
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.AutomaticRefocus = true;
 	}
 
 	private bool CheckValidPlacement()
