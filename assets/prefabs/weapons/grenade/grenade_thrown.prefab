@@ -5,16 +5,32 @@
     "Name": "grenade_thrown",
     "Tags": "projectile",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "412f6ff3-d17d-4516-abe7-efbbbbe5488f",
         "BodyGroups": 1,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
         "Model": "models/weapons/grenade/grenade.vmdl",
+        "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -34,12 +50,17 @@
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {
+          "X": false,
           "Y": true,
+          "Z": false,
+          "Pitch": false,
           "Yaw": true,
           "Roll": true
         },
+        "MassCenterOverride": "0,0,0",
         "MassOverride": 0,
         "MotionEnabled": true,
+        "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
@@ -49,7 +70,8 @@
         "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 7.5,
-        "Static": false
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
       },
       {
         "__type": "Grubs.Common.Health",
@@ -87,17 +109,41 @@
           "go": "c40e7ed6-185e-427d-992b-65fd905eba8f",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 650,
+        "ProjectileSpeed": 800,
         "SetPositionOnStart": true,
         "SetRotationOnStart": false
       }
     ],
     "Children": [],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
