@@ -90,8 +90,11 @@ public partial class Health : Component
 	[Rpc.Owner]
 	public void ApplyDamage()
 	{
-		if ( !DamageQueue.Any() )
+		if ( DamageQueue.Count == 0 )
+		{
+			Log.Info( "Nothing in DamageQueue." );
 			return;
+		}
 
 		var totalDamage = 0f;
 		var damageInfos = new List<GrubsDamageInfo>();
