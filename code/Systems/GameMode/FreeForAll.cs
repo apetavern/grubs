@@ -53,7 +53,6 @@ public sealed class FreeForAll : BaseGameMode
 		Log.Info( $"{Name} mode initializing." );
 
 		State = FreeForAllState.Lobby;
-		GrubCount = GrubsConfig.GrubCount;
 
 		GrubsTerrain.Instance.Init();
 	}
@@ -67,6 +66,8 @@ public sealed class FreeForAll : BaseGameMode
 		}
 		
 		Log.Info( $"{Name} mode starting." );
+		
+		GrubCount = GrubsConfig.GrubCount;
 
 		// For each player, spawn Grubs and initialize their inventory.
 		foreach ( var player in Players )
