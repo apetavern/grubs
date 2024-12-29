@@ -659,7 +659,7 @@
         "__guid": "fded0d25-fa42-4b85-a157-98363792876b",
         "Flags": 0,
         "Name": "Aim Reticle",
-        "Position": "111.0583,111.0583,-152.5602",
+        "Rotation": "0,0,0.7071068,0.7071068",
         "Enabled": true,
         "Components": [
           {

@@ -23,11 +23,6 @@
 {
     [Property] public Grub Grub { get; set; }
 
-    protected override void OnStart()
-    {
-        WorldRotation = WorldRotation.RotateAroundAxis(Vector3.Up, 90f);
-    }
-
     private bool IsShowing()
     {
         if (!Grub.IsActive() 
