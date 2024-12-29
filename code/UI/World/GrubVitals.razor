@@ -1,6 +1,7 @@
 ﻿@namespace Grubs.UI.World
 
 @using Grubs.Pawn
+@using Grubs.Systems.GameMode
 @using Grubs.Systems.Pawn
 @using Grubs.Systems.Pawn.Grubs
 @inherits PanelComponent
@@ -45,8 +46,12 @@
     {
         if ( !GrubFollowCamera.Local.IsValid() )
             return;
-        
+
         WorldPosition = Grub.PlayerController.Head.WorldPosition + Vector3.Up * 24f;
+        if (BaseGameMode.Current.IsValid() && BaseGameMode.Current.IsGrubActive(Grub))
+        {
+            WorldPosition = WorldPosition.WithY( 505f );
+        }
         Scale = Scale.LerpTo(GrubFollowCamera.Local.Distance / 600, Time.Delta * 4f).Clamp( 1f, 4f );
         WorldScale = Scale;
     }

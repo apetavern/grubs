@@ -58,7 +58,7 @@
         var pos = weapon.GetMuzzleTransform().Position;
         pos += weapon.GetMuzzleForward() * 48f;
 
-        WorldPosition = pos;
+        WorldPosition = pos.WithY( 500f );
         WorldRotation = WorldRotation.RotateAroundAxis(Vector3.Forward, 0.25f);
     }
 }
