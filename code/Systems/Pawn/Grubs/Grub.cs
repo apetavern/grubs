@@ -100,7 +100,7 @@ public sealed class Grub : Component, IResolvable
 
 	public override string ToString()
 	{
-		return $"{Name} (Owner: {Owner})";
+		return $"Grub {Name} on {GameObject.Name}";
 	}
 
 	[ConCmd( "gr_set_active_grub_health" )]
