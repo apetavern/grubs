@@ -26,6 +26,8 @@ public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 
 	public void OnActive( Connection connection )
 	{
+		connection.CanRefreshObjects = true;
+		
 		Log.Info( $"Spawning client prefab for connection {connection.DisplayName} ({connection.Id})." );
 		var clientObj = ClientPrefab.Clone();
 		clientObj.Name = $"Client ({connection.DisplayName})";
