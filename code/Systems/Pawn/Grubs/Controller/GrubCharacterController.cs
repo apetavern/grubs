@@ -31,7 +31,8 @@ public class GrubCharacterController : Component
 
 	public BBox BoundingBox => new( new Vector3( -Radius, -Radius, 0 ), new Vector3( Radius, Radius, Height ) );
 
-	[Sync] public Vector3 Velocity { get; set; }
+	// Set to query since there has been some unreliability during spawning.
+	[Sync( SyncFlags.Query )] public Vector3 Velocity { get; set; }
 
 	[Sync] public bool IsOnGround { get; set; }
 
@@ -328,9 +329,9 @@ public class GrubCharacterController : Component
 		//	Gizmo.Draw.LineBBox( BoundingBox );
 		//}
 
-		var AttemptsPerTick = 20;
+		var attemptsPerTick = 20;
 
-		for ( var i = 0; i < AttemptsPerTick; i++ )
+		for ( var i = 0; i < attemptsPerTick; i++ )
 		{
 			var pos = WorldPosition + Vector3.Random.Normal * (_stuckTries / 2.0f);
 			pos = pos.WithY( 512f );

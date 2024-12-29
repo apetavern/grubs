@@ -59,14 +59,16 @@ public class TeleportTool : Tool
 	{
 		base.OnDeploy();
 
-		GrubFollowCamera.Local.AutomaticRefocus = false;
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.AutomaticRefocus = false;
 	}
 
 	public override void OnHolster()
 	{
 		base.OnHolster();
 
-		GrubFollowCamera.Local.AutomaticRefocus = true;
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.AutomaticRefocus = true;
 	}
 
 	private bool CheckValidPlacement()
