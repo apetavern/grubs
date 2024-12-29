@@ -125,12 +125,14 @@ public sealed class FreeForAll : BaseGameMode
 	{
 		if ( !DamageQueue.Contains( grub ) )
 			DamageQueue.Enqueue( grub );
+
+		if ( IsGrubActive( grub ) )
+			TimeUntilTurnOver = 0;
 	}
 
 	protected override void OnGrubDied( Grub grub )
 	{
 		const float grubDeathTurnRemainder = 3f;
-
 
 		if ( !grub.IsValid() || !grub.Owner.IsValid() )
 		{
@@ -211,7 +213,7 @@ public sealed class FreeForAll : BaseGameMode
 	private void UpdateTurnChange()
 	{
 		// Wait one second before trying to process the turn change, in case of any race conditions.
-		if ( TimeSinceTurnChangeStarted > 1f )
+		if ( TimeSinceTurnChangeStarted < 1f )
 			return;
 		
 		if ( !Resolution.IsWorldResolved() && TimeSinceTurnChangeStarted < MaximumWorldResolveDuration )

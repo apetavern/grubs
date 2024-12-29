@@ -38,6 +38,9 @@ public partial class Health : Component
 	{
 		if ( Components.TryGet( out Grub grub ) )
 		{
+			if ( BaseGameMode.Current.IsGrubActive( grub ) )
+				BaseGameMode.Current.GrubDamaged( grub );
+			
 			if ( !immediate )
 			{
 				if ( Networking.IsHost )
