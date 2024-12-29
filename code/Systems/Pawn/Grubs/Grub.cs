@@ -2,6 +2,7 @@ using Grubs.Common;
 using Grubs.Pawn;
 using Grubs.Systems.GameMode;
 using Grubs.Systems.Pawn.Grubs.Controller;
+using Grubs.UI.World;
 
 namespace Grubs.Systems.Pawn.Grubs;
 
@@ -25,10 +26,12 @@ public sealed class Grub : Component, IResolvable
 	} 
 	
 	[Property] public Health Health { get; set; }
-	[Property] public required GrubPlayerController PlayerController { get; set; }
-	[Property] public required GrubCharacterController CharacterController { get; set; }
-	[Property] public required GrubAnimator Animator { get; set; }
-	[Property, ReadOnly] public Equipment.Equipment ActiveEquipment => Owner?.Inventory.ActiveEquipment;
+	[Property] public GrubPlayerController PlayerController { get; set; }
+	[Property] public GrubCharacterController CharacterController { get; set; }
+	[Property] public GrubAnimator Animator { get; set; }
+	[Property] private TurnIndicator TurnIndicator { get; set; }
+	
+	public Equipment.Equipment ActiveEquipment => Owner?.Inventory.ActiveEquipment;
 	
 	public float HealthPercentage => Health.CurrentHealth / Health.MaxHealth;
 
@@ -51,6 +54,11 @@ public sealed class Grub : Component, IResolvable
 		if ( !Owner.IsValid() || !Owner.Inventory.IsValid() )
 			return;
 		Owner?.Inventory.HolsterActive();
+	}
+
+	public void OnTurnStart()
+	{
+		TurnIndicator.Show( this );
 	}
 
 	public override string ToString()

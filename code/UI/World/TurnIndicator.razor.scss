@@ -1,0 +1,30 @@
+﻿@import '../common.scss';
+
+TurnIndicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -200px;
+    justify-content: center;
+    opacity: 0;
+    font-size: 200px;
+    z-index: 10;
+    animation: bouncing 1s ease-in-out infinite;
+    transition: opacity 1s ease-out;
+    
+    &.show {
+        opacity: 1;
+    }
+}
+
+@keyframes bouncing {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

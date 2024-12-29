@@ -96,6 +96,12 @@
           "component_id": "897993e4-af5b-4ff9-94f0-ef74d24a99f4",
           "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
           "component_type": "GrubPlayerController"
+        },
+        "TurnIndicator": {
+          "_type": "component",
+          "component_id": "fbb4f4f2-0946-46ec-9777-8a6264279318",
+          "go": "03d23a6b-6b56-41de-a66b-8e3199b30e20",
+          "component_type": "TurnIndicator"
         }
       },
       {
@@ -641,6 +647,10 @@
               "go": "b922f141-a7b8-43b6-980c-20b64cb0180f",
               "component_type": "Grub"
             }
+          },
+          {
+            "__type": "Grubs.UI.World.TurnIndicator",
+            "__guid": "fbb4f4f2-0946-46ec-9777-8a6264279318"
           }
         ]
       },

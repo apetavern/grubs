@@ -1,0 +1,47 @@
+﻿@namespace Grubs.UI.World
+
+@using Grubs.Systems.Pawn.Grubs
+
+@inherits PanelComponent
+
+@if (!Grub.IsValid())
+{
+    return;
+}
+
+<root>
+    <i class="text-@Grub.Owner.PlayerColor.ToString()-med">arrow_drop_down</i>
+</root>
+
+@code
+{
+    private Grub Grub { get; set; }
+    private TimeUntil TimeUntilHidden { get; set; }
+    
+    public void Show( Grub grub )
+    {
+        Log.Info( $"Showing turn indicator for {grub}." );
+        Grub = grub;
+        AddClass( "show" );
+        TimeUntilHidden = 3.5f;
+    }
+
+    private void Hide()
+    {
+        Log.Info( $"Hiding turn indicator." );
+        RemoveClass( "show" );
+    }
+    
+    protected override void OnUpdate()
+    {
+        if (TimeUntilHidden && HasClass("show"))
+        {
+            Hide();
+        }
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Grub);
+    }
+}

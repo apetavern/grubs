@@ -264,6 +264,7 @@ public sealed class FreeForAll : BaseGameMode
 		while ( ActivePlayer.IsDead && _rotateCount < Player.All.Count() )
 			RotateActivePlayer();
 		
+		ActivePlayer.OnTurnStart();
 		_rotateCount = 0;
 	}
 
