@@ -86,7 +86,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 			return;
 
 		var projectile = Components.Get<Projectile>();
-		ExplodeEffects( projectile?.GrubGuid ?? Guid.Empty, projectile?.GrubName ?? string.Empty );
+		ExplodeEffects( WorldPosition, projectile?.GrubGuid ?? Guid.Empty, projectile?.GrubName ?? string.Empty );
 
 		ProjectileExploded?.Invoke();
 
@@ -95,15 +95,15 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	}
 
 	[Rpc.Broadcast]
-	public void ExplodeEffects( Guid attackerGuid, string attackerName )
+	public void ExplodeEffects( Vector3 position, Guid attackerGuid, string attackerName )
 	{
-		ExplosionHelper.Instance.Explode( this, WorldPosition, ExplosionRadius, ExplosionDamage, attackerGuid, attackerName );
-		Sound.Play( ExplosionSound, WorldPosition );
+		ExplosionHelper.Instance.Explode( this, position, ExplosionRadius, ExplosionDamage, attackerGuid, attackerName );
+		Sound.Play( ExplosionSound, position );
 
 		if ( Particles is null )
 			return;
 
-		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World );
+		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World.WithPosition( position ) );
 		sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
 	}
 
