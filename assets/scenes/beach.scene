@@ -555,6 +555,8 @@
       "Tags": "solid,terrain",
       "Enabled": true,
       "NetworkMode": 1,
+      "NetworkInterpolation": false,
+      "NetworkOrphaned": 1,
       "Components": [
         {
           "__type": "Grubs.Terrain.GrubsTerrain",
