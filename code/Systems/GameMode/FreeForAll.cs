@@ -53,6 +53,7 @@ public sealed class FreeForAll : BaseGameMode
 		Log.Info( $"{Name} mode initializing." );
 
 		State = FreeForAllState.Lobby;
+		GrubCount = GrubsConfig.GrubCount;
 
 		GrubsTerrain.Instance.Init();
 	}

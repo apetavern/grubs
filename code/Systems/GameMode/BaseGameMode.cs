@@ -13,6 +13,9 @@ public abstract class BaseGameMode : Component
 	[Sync( SyncFlags.FromHost )] 
 	protected NetList<Player> Players { get; private set; } = new();
 	
+	[Sync( SyncFlags.FromHost )]
+	public int GrubCount { get; set; }
+	
 	public bool GameStarted => IsGameStarted();
 
 	protected override void OnStart()

@@ -46,7 +46,7 @@ public sealed class Player : LocalComponent<Player>
 			return g.Health.CurrentHealth;
 		return 0;
 	} ).Clamp( 0, float.MaxValue );
-	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * GrubsConfig.GrubCount)).CeilToInt();
+	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * BaseGameMode.Current.GrubCount)).CeilToInt();
 
 	public Vector3 MousePosition { get; private set; }
 	private static readonly Plane Plane = 
