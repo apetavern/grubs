@@ -26,7 +26,7 @@
         {
           "__type": "Grubs.Systems.Network.GrubsNetworkManager",
           "__guid": "55821b2d-8a1a-4e94-bdb7-b2c9ff0d6123",
-          "ClientPrefab": {
+          "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player/player_wrapper.prefab"
           }
