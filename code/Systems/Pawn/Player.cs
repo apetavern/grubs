@@ -70,12 +70,6 @@ public sealed class Player : LocalComponent<Player>
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 	}
 
-	// public void SetClient( Client client )
-	// {
-	// 	Log.Info( $"Setting Client on {GameObject.Name} to {client}." );
-	// 	Client = client;
-	// }
-
 	public void AddGrub( Vector3 spawnPosition )
 	{
 		Log.Info( $"Adding new grub for player {Network.Owner.DisplayName} at {spawnPosition}." );

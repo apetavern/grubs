@@ -78,8 +78,10 @@ public abstract class BaseGameMode : Component
 	{
 		var takenColors = Players.Select( p => p.PlayerColor );
 		var allColors = Enum.GetValues<PlayerColor>().ToList();
-		
-		player.PlayerColor = allColors.First( a => !takenColors.Contains( a ) );
+
+		var selectedColor = allColors.First( a => !takenColors.Contains( a ) );
+		Log.Info( $"Assigning player color {selectedColor.ToString()} to player {player.Network.Owner.DisplayName}." );
+		player.PlayerColor = selectedColor;
 	}
 	
 	/// <summary>

@@ -266,6 +266,12 @@ public sealed class FreeForAll : BaseGameMode
 		
 		TurnIsChanging = false;
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;
+
+		var playersToRemove = PlayerQueue.Where( player => !player.IsValid() ).ToList();
+		foreach ( var player in playersToRemove )
+		{
+			PlayerQueue.Remove( player );
+		}
 		
 		RotateActivePlayer();
 		

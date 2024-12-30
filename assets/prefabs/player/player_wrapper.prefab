@@ -5,6 +5,7 @@
     "Name": "player_wrapper",
     "Tags": "player",
     "Enabled": true,
+    "NetworkOrphaned": 1,
     "Components": [
       {
         "__type": "Grubs.Systems.Pawn.Player",

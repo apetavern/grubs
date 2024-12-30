@@ -6,7 +6,7 @@ namespace Grubs.Systems.Network;
 [Title( "Grubs - Network Manager" ), Category("Grubs/Network")]
 public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 {
-	[Property] public required GameObject ClientPrefab { get; set; }
+	[Property] public required GameObject PlayerPrefab { get; set; }
 	
 	protected override void OnStart()
 	{
@@ -16,7 +16,7 @@ public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 		var lobbyConfig = new LobbyConfig
 		{
 			DestroyWhenHostLeaves = false,
-			AutoSwitchToBestHost = true,
+			AutoSwitchToBestHost = false,
 			MaxPlayers = 8,
 			Privacy = LobbyPrivacy.Public,
 		};
@@ -29,14 +29,25 @@ public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 		connection.CanRefreshObjects = true;
 		
 		Log.Info( $"Spawning client prefab for connection {connection.DisplayName} ({connection.Id})." );
-		var clientObj = ClientPrefab.Clone();
-		clientObj.Name = $"Client ({connection.DisplayName})";
-		clientObj.NetworkSpawn( connection );
+		var playerObj = PlayerPrefab.Clone();
+		playerObj.Name = $"Client ({connection.DisplayName})";
+		playerObj.Network.SetOwnerTransfer( OwnerTransfer.Fixed );
+		playerObj.Network.SetOrphanedMode( NetworkOrphaned.Host );
+		playerObj.NetworkSpawn( connection );
 		
 		Log.Info( $"Assigning connection {connection.Id} to Client component." );
-		var player = clientObj.GetComponent<Player>();
-		// player.OnNetworkActive( connection );
+		var player = playerObj.GetComponent<Player>();
 		
 		BaseGameMode.Current.HandlePlayerJoined( player );
+	}
+
+	public void OnDisconnected( Connection connection )
+	{
+		var player = Player.All.FirstOrDefault( player => player.Network.Owner == connection );
+		Log.Info( $"Found player: {player}." );
+		if ( !player.IsValid() )
+			return;
+		
+		Log.Info( $"Handling disconnect for connection {connection.DisplayName}." );
 	}
 }
