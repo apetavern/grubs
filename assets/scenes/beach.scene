@@ -28,7 +28,7 @@
           "__guid": "55821b2d-8a1a-4e94-bdb7-b2c9ff0d6123",
           "ClientPrefab": {
             "_type": "gameobject",
-            "prefab": "prefabs/player/client_wrapper.prefab"
+            "prefab": "prefabs/player/player_wrapper.prefab"
           }
         }
       ]

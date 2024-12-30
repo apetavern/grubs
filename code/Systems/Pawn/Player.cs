@@ -13,8 +13,8 @@ public sealed class Player : LocalComponent<Player>
 	public static IEnumerable<Player> All => Game.ActiveScene.GetAllComponents<Player>();
 	public static IEnumerable<Player> AllLiving => All.Where( p => p.IsPlaying && !p.IsDead );
 	
-	[Sync( SyncFlags.FromHost ), Property, ReadOnly]
-	public Client Client { get; set; }
+	// [Sync( SyncFlags.FromHost ), Property, ReadOnly]
+	// public Client Client { get; set; }
 
 	[Sync( SyncFlags.FromHost )] 
 	public NetList<Grub> Grubs { get; } = new();
@@ -70,20 +70,20 @@ public sealed class Player : LocalComponent<Player>
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 	}
 
-	public void SetClient( Client client )
-	{
-		Log.Info( $"Setting Client on {GameObject.Name} to {client}." );
-		Client = client;
-	}
+	// public void SetClient( Client client )
+	// {
+	// 	Log.Info( $"Setting Client on {GameObject.Name} to {client}." );
+	// 	Client = client;
+	// }
 
 	public void AddGrub( Vector3 spawnPosition )
 	{
-		Log.Info( $"Adding new grub for player {Client} at {spawnPosition}." );
+		Log.Info( $"Adding new grub for player {Network.Owner.DisplayName} at {spawnPosition}." );
 		
 		var grubObj = GrubPrefab.Clone();
 		grubObj.WorldPosition = spawnPosition;
 		grubObj.Network.SetOrphanedMode( NetworkOrphaned.Host );
-		grubObj.NetworkSpawn( Client.Owner );
+		grubObj.NetworkSpawn( Network.Owner );
 		
 		var grub = grubObj.GetComponent<Grub>();
 		grub.SetOwner( this );

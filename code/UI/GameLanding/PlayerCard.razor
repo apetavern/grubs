@@ -7,34 +7,37 @@
 
 @if (!Player.IsValid() || Connection is null)
 {
-    Log.Info( $"{Connection} is null?" );
+    Log.Info( $"{Connection} (Connection) is null?" );
     return;
 }
 
 <root>
-    <img class="avatar" src="avatar:@Connection.SteamId"/>
-    <div class="info">
+    <div class="avatar bg-@Color-med" style="transform: rotate(@(AvatarRotationDegrees)deg)">
+        <img src="avatar:@Connection.SteamId"/>
+    </div>
+    <div class="info bg-@Color-med text-@Color-light">
         <div class="name">
             <label class="name-text">@Connection.DisplayName</label>
-            @* <label class="hours-text">@($"{Player.PlayTime:0}h")</label> *@
-            <div class="line"/>
         </div>
-        <div class="stats">
-            @foreach (var stat in GetStats(2))
-            {
-                <label>@stat.Title: @stat.Value</label>
-            }
-        </div>
+        @* <div class="stats"> *@
+        @*     @foreach (var stat in GetStats(2)) *@
+        @*     { *@
+        @*         <label>@stat.Title: @stat.Value</label> *@
+        @*     } *@
+        @* </div> *@
     </div>
 </root>
 
 @code
 {
     public Player Player { get; set; }
-    private Connection Connection => Player.Client?.Network.Owner;
+    private Connection Connection => Player.Network.Owner;
+    private string Color => Player?.PlayerColor.ToString();
 
     private int _statIndex = 0;
     private TimeSince _timeSinceStatsChanged;
+    
+    private int AvatarRotationDegrees { get; set; }
 
     private readonly HashSet<string> StatIds = new()
     {
@@ -53,11 +56,18 @@
         }
     }
 
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (firstTime)
+        {
+            AvatarRotationDegrees = Game.Random.Int(-2, 2);
+        }
+    }
+
     public override void Tick()
     {
-        // if ( Player.IsProxy )
-        //     Log.Info( Player.Client.ConnectionId );
-        
         if (_timeSinceStatsChanged > 15f)
         {
             _statIndex += 2;
@@ -67,6 +77,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player, Connection?.Id, _statIndex);
+        return HashCode.Combine(Player, Player?.PlayerColor, Connection?.Id, _statIndex);
     }
 }

@@ -34,9 +34,9 @@ public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 		clientObj.NetworkSpawn( connection );
 		
 		Log.Info( $"Assigning connection {connection.Id} to Client component." );
-		var client = clientObj.GetComponent<Client>();
-		client.OnNetworkActive( connection );
+		var player = clientObj.GetComponent<Player>();
+		// player.OnNetworkActive( connection );
 		
-		BaseGameMode.Current.HandlePlayerJoined( client.Player );
+		BaseGameMode.Current.HandlePlayerJoined( player );
 	}
 }

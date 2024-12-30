@@ -3,27 +3,34 @@
 PlayerCard {
     width: 500px;
     height: 100px;
-    background-color: rgb(233, 239, 232);
     border-radius: 4px;
     flex-direction: row;
+    align-items: center;
 
     .avatar {
         width: 100px;
         height: 100px;
+        padding: 12px;
         flex-shrink: 0;
+        
+        > img {
+            width: 80px;
+            height: 80px;
+        }
     }
 
     .info {
         flex-direction: column;
-        margin: 7px;
-        padding: 8px;
+        height: 65%;
+        width: 200px;
+        transform: translateX(-8px);
 
         .name {
-            height: 50%;
+            height: 100%;
+            margin: 16px 16px 16px 32px;
+            overflow: hidden;
+            text-overflow: ellipsis;
             align-items: center;
-            justify-content: center;
-            color: white;
-            text-stroke: 4px black;
 
             > .name-text {
                 font-size: 24px;

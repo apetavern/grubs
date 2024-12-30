@@ -36,11 +36,14 @@
         <div class="terrain-preview">
             <TerrainPreview />
         </div>
-        <button class="settings @(IsHost() ? "" : "disabled")" onclick=@OpenGameRules>
-            <i>settings</i>
-            Game Rules
-        </button>
-        <button class="start @(IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled")" onclick=@Start>@GetStartButtonText()</button>
+        @if (IsHost())
+        {
+            <button class="settings @(IsHost() ? "" : "disabled")" onclick=@OpenGameRules>
+                <i>settings</i>
+                Game Rules
+            </button>
+            <button class="start @(IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled")" onclick=@Start>@GetStartButtonText()</button>
+        }
     </div>
 </root>
 
