@@ -257,7 +257,7 @@ public sealed class FreeForAll : BaseGameMode
 			var winner = livingPlayers.FirstOrDefault();
 			if ( winner != null )
 			{
-				ChatHelper.Instance.SendInfoMessage( $"{winner.Client.Owner.DisplayName} won the match!" );
+				ChatHelper.Instance.SendInfoMessage( $"{winner.Network.Owner.DisplayName} won the match!" );
 			}
 			
 			ResetGameMode();

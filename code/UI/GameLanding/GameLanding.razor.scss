@@ -59,12 +59,12 @@ GameLanding {
             }
 
             >label {
-                transform: skewX(4deg);
+                transform: skewX(1deg);
             }
 
             >i {
                 font-size: 42px;
-                transform: skewX(4deg);
+                transform: skewX(1deg);
             }
 
             &:not(.disabled):hover {
@@ -118,7 +118,7 @@ GameLanding {
                 font-size: 48px;
                 color: white;
                 margin-right: 32px;
-                transform: skewX(4deg);
+                transform: skewX(1deg);
                 text-shadow: 2px 2px black;
             }
         }
