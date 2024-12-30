@@ -18,6 +18,343 @@
       ]
     },
     {
+      "__guid": "17e17813-45ef-4835-8195-d968524b4ba7",
+      "Flags": 0,
+      "Name": "Network Manager",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Grubs.Systems.Network.GrubsNetworkManager",
+          "__guid": "55821b2d-8a1a-4e94-bdb7-b2c9ff0d6123",
+          "ClientPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player/client_wrapper.prefab"
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "5a67629e-9c73-4752-be7a-91dfd0b40e8d",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-322.7331,181.9972,221.4703",
+      "Rotation": "0.00000004112413,0.0000000009752696,0.7071068,0.7071068",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "2b162f48-7432-4445-8f15-7a87a3bcf4a8",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 17500,
+          "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.Highlight",
+          "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c"
+        },
+        {
+          "__type": "Sandbox.AmbientOcclusion",
+          "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
+          "__version": 1,
+          "DenoiseMode": "Temporal",
+          "FalloffRange": 0.75,
+          "Intensity": 0.15,
+          "Quality": "High",
+          "Radius": 128,
+          "ThinCompensation": 0
+        },
+        {
+          "__type": "Sandbox.Sharpen",
+          "__guid": "c2a83157-c96a-4753-8a45-42ce730adf05",
+          "Scale": 0.05
+        },
+        {
+          "__type": "Grubs.Pawn.GrubFollowCamera",
+          "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7"
+        },
+        {
+          "__type": "Sandbox.DepthOfField",
+          "__guid": "ea71f785-835e-40f8-a884-f0006e695e44",
+          "__enabled": false,
+          "BackBlur": true,
+          "BlurSize": 5,
+          "FocalDistance": 200,
+          "FocusRange": 800000,
+          "FrontBlur": false,
+          "QualityLevel": "High"
+        }
+      ]
+    },
+    {
+      "__guid": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
+      "Flags": 0,
+      "Name": "World Utility",
+      "Position": "-0.00009155273,512,149.2906",
+      "Rotation": "0,0,-0.7071068,-0.7071068",
+      "Tags": "solid",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Grubs.Drops.CrateUtility",
+          "__guid": "1acc6d58-541e-4e3b-b3c0-40d937dc3ad1",
+          "HealthCratePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/health_crate.prefab"
+          },
+          "ToolsCratePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/tools_crate.prefab"
+          },
+          "WeaponsCratePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/weapons_crate.prefab"
+          }
+        },
+        {
+          "__type": "Grubs.Helpers.ExplosionHelper",
+          "__guid": "c3056b0d-85ed-4205-94a2-8e042514744c"
+        },
+        {
+          "__type": "Grubs.Helpers.ParticleHelper",
+          "__guid": "bd48a7bb-ba28-4261-9110-83778667ebd1"
+        },
+        {
+          "__type": "Grubs.Equipment.Gadgets.Ground.LandmineUtility",
+          "__guid": "bc308eb0-0230-4afa-8a83-a109009196d1",
+          "LandminePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
+          },
+          "OildrumPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/drops/oildrum.prefab"
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "7d39675e-085e-40cc-8a1e-e09c2113f9ee",
+      "Flags": 0,
+      "Name": "Screen UI",
+      "Position": "-129.7132,-113.9731,554.4797",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "cdddaeaa-764d-4d73-b87d-31756e69734a",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "ZIndex": 100
+        },
+        {
+          "__type": "Grubs.UI.GameLanding.GameLanding",
+          "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a"
+        },
+        {
+          "__type": "Grubs.UI.GameEnd.GameEnd",
+          "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
+        }
+      ]
+    },
+    {
+      "__guid": "9a1c6253-0abb-4443-85b2-378108afb7b2",
+      "Flags": 0,
+      "Name": "Game Mode (Free For All)",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
+        {
+          "__type": "Grubs.Systems.GameMode.FreeForAll",
+          "__guid": "6eb0fa7d-6d3e-4b58-94c7-0c3e56178083"
+        }
+      ]
+    },
+    {
+      "__guid": "3e153c9f-09c3-4a47-94f8-8fe79eede41c",
+      "Flags": 0,
+      "Name": "Fire Helper",
+      "Position": "-186.723,289.1578,410.2911",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
+        {
+          "__type": "Grubs.Helpers.FireHelper",
+          "__guid": "2ab9dd8e-df13-453f-96f9-563b3b82627c",
+          "FireLifetime": 5,
+          "FireObjectPrefab": {
+            "_type": "gameobject",
+            "prefab": "particles/fire/fireobject.prefab"
+          },
+          "MinParticleSpeed": 100
+        }
+      ]
+    },
+    {
+      "__guid": "08a72929-c2dd-4da0-b84d-fdca3b287389",
+      "Flags": 0,
+      "Name": "Terrain",
+      "Position": "0,512,64",
+      "Tags": "solid,terrain",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkInterpolation": false,
+      "NetworkOrphaned": 1,
+      "Components": [
+        {
+          "__type": "Grubs.Terrain.GrubsTerrain",
+          "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
+          "SdfWorld": {
+            "_type": "component",
+            "component_id": "18fcdcfa-5aa8-440a-b806-592601ed927a",
+            "go": "08a72929-c2dd-4da0-b84d-fdca3b287389",
+            "component_type": "Sdf2DWorld"
+          },
+          "TerrainCurve": [
+            {
+              "x": 0,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.23511904,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Flat"
+            },
+            {
+              "x": 0.35416666,
+              "y": 0.80173004,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.55505955,
+              "y": 0.8484042,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.6755952,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Flat"
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
+          "Water": {
+            "_type": "component",
+            "component_id": "83abee40-5ee1-418f-9bde-058e66e46939",
+            "go": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
+            "component_type": "Water"
+          }
+        },
+        {
+          "__type": "Sandbox.Sdf.Sdf2DWorld",
+          "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a",
+          "Curve": [
+            {
+              "x": 0,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.23511904,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Flat"
+            },
+            {
+              "x": 0.35416666,
+              "y": 0.80173004,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.55505955,
+              "y": 0.8484042,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 0.6755952,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Flat"
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
+          "HasPhysics": true
+        }
+      ]
+    },
+    {
+      "__guid": "0f45ad07-5d61-43eb-9f1e-3940781f7c82",
+      "Flags": 0,
+      "Name": "UI Helper",
+      "Position": "136.4629,-1421.282,280.9131",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "Components": [
+        {
+          "__type": "Grubs.Helpers.WorldPopupHelper",
+          "__guid": "e0aa518f-efcd-4a30-9dd6-e9687d9fa766",
+          "CratePickupPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/popups/cratepickup.prefab"
+          },
+          "DamageNumberPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/popups/damagenumber.prefab"
+          },
+          "KillZoneDeathIndicatorPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/world/popups/killzonedeathindicator.prefab"
+          }
+        },
+        {
+          "__type": "Grubs.Helpers.ChatHelper",
+          "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4"
+        }
+      ]
+    },
+    {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
       "Flags": 0,
       "Name": "Static",
@@ -464,353 +801,6 @@
               "VerticalFalloffExponent": 2.5
             }
           ]
-        }
-      ]
-    },
-    {
-      "__guid": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
-      "Flags": 0,
-      "Name": "World",
-      "Position": "-0.00009155273,512,149.2906",
-      "Rotation": "0,0,-0.7071068,-0.7071068",
-      "Tags": "solid",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Grubs.Drops.CrateUtility",
-          "__guid": "1acc6d58-541e-4e3b-b3c0-40d937dc3ad1",
-          "HealthCratePrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/world/drops/health_crate.prefab"
-          },
-          "ToolsCratePrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/world/drops/tools_crate.prefab"
-          },
-          "WeaponsCratePrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/world/drops/weapons_crate.prefab"
-          }
-        },
-        {
-          "__type": "Grubs.Helpers.ExplosionHelper",
-          "__guid": "c3056b0d-85ed-4205-94a2-8e042514744c"
-        },
-        {
-          "__type": "Grubs.Helpers.ParticleHelper",
-          "__guid": "bd48a7bb-ba28-4261-9110-83778667ebd1"
-        },
-        {
-          "__type": "Grubs.Equipment.Gadgets.Ground.LandmineUtility",
-          "__guid": "bc308eb0-0230-4afa-8a83-a109009196d1",
-          "LandminePrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
-          },
-          "OildrumPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/world/drops/oildrum.prefab"
-          }
-        }
-      ]
-    },
-    {
-      "__guid": "9a1c6253-0abb-4443-85b2-378108afb7b2",
-      "Flags": 0,
-      "Name": "Game Mode",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "Grubs.Systems.GameMode.FreeForAll",
-          "__guid": "6eb0fa7d-6d3e-4b58-94c7-0c3e56178083"
-        }
-      ]
-    },
-    {
-      "__guid": "3e153c9f-09c3-4a47-94f8-8fe79eede41c",
-      "Flags": 0,
-      "Name": "Fire Helper",
-      "Position": "-186.723,289.1578,410.2911",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "Grubs.Helpers.FireHelper",
-          "__guid": "2ab9dd8e-df13-453f-96f9-563b3b82627c",
-          "FireLifetime": 5,
-          "FireObjectPrefab": {
-            "_type": "gameobject",
-            "prefab": "particles/fire/fireobject.prefab"
-          },
-          "MinParticleSpeed": 100
-        }
-      ]
-    },
-    {
-      "__guid": "08a72929-c2dd-4da0-b84d-fdca3b287389",
-      "Flags": 0,
-      "Name": "Terrain",
-      "Position": "0,512,64",
-      "Tags": "solid,terrain",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "NetworkInterpolation": false,
-      "NetworkOrphaned": 1,
-      "Components": [
-        {
-          "__type": "Grubs.Terrain.GrubsTerrain",
-          "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
-          "SdfWorld": {
-            "_type": "component",
-            "component_id": "18fcdcfa-5aa8-440a-b806-592601ed927a",
-            "go": "08a72929-c2dd-4da0-b84d-fdca3b287389",
-            "component_type": "Sdf2DWorld"
-          },
-          "TerrainCurve": [
-            {
-              "x": 0,
-              "y": 0,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.23511904,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Flat"
-            },
-            {
-              "x": 0.35416666,
-              "y": 0.80173004,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.55505955,
-              "y": 0.8484042,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.6755952,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Flat"
-            },
-            {
-              "x": 1,
-              "y": 0,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "Water": {
-            "_type": "component",
-            "component_id": "83abee40-5ee1-418f-9bde-058e66e46939",
-            "go": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
-            "component_type": "Water"
-          }
-        },
-        {
-          "__type": "Sandbox.Sdf.Sdf2DWorld",
-          "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a",
-          "Curve": [
-            {
-              "x": 0,
-              "y": 0,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.23511904,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Flat"
-            },
-            {
-              "x": 0.35416666,
-              "y": 0.80173004,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.55505955,
-              "y": 0.8484042,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.6755952,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Flat"
-            },
-            {
-              "x": 1,
-              "y": 0,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "HasPhysics": true
-        }
-      ]
-    },
-    {
-      "__guid": "5a67629e-9c73-4752-be7a-91dfd0b40e8d",
-      "Flags": 0,
-      "Name": "Camera",
-      "Position": "-322.7331,181.9972,221.4703",
-      "Rotation": "0.00000004112413,0.0000000009752696,0.7071068,0.7071068",
-      "Tags": "maincamera",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.CameraComponent",
-          "__guid": "2b162f48-7432-4445-8f15-7a87a3bcf4a8",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 60,
-          "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 17500,
-          "ZNear": 10
-        },
-        {
-          "__type": "Sandbox.Highlight",
-          "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c"
-        },
-        {
-          "__type": "Sandbox.AmbientOcclusion",
-          "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
-          "__version": 1,
-          "DenoiseMode": "Temporal",
-          "FalloffRange": 0.75,
-          "Intensity": 0.15,
-          "Quality": "High",
-          "Radius": 128,
-          "ThinCompensation": 0
-        },
-        {
-          "__type": "Sandbox.Sharpen",
-          "__guid": "c2a83157-c96a-4753-8a45-42ce730adf05",
-          "Scale": 0.05
-        },
-        {
-          "__type": "Grubs.Pawn.GrubFollowCamera",
-          "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7"
-        },
-        {
-          "__type": "Sandbox.DepthOfField",
-          "__guid": "ea71f785-835e-40f8-a884-f0006e695e44",
-          "__enabled": false,
-          "BackBlur": true,
-          "BlurSize": 5,
-          "FocalDistance": 200,
-          "FocusRange": 800000,
-          "FrontBlur": false,
-          "QualityLevel": "High"
-        }
-      ]
-    },
-    {
-      "__guid": "18d67b0f-c777-48d1-ad2e-d002f58bd055",
-      "Flags": 0,
-      "Name": "Network",
-      "Position": "-1098.61,512,191.4738",
-      "Enabled": true,
-      "Children": [
-        {
-          "__guid": "17e17813-45ef-4835-8195-d968524b4ba7",
-          "Flags": 0,
-          "Name": "Network",
-          "Position": "607.9057,-129.2016,57.7177",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Grubs.Systems.Network.GrubsNetworkManager",
-              "__guid": "55821b2d-8a1a-4e94-bdb7-b2c9ff0d6123",
-              "ClientPrefab": {
-                "_type": "gameobject",
-                "prefab": "prefabs/player/client_wrapper.prefab"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "__guid": "7d39675e-085e-40cc-8a1e-e09c2113f9ee",
-      "Flags": 0,
-      "Name": "Screen",
-      "Position": "-129.7132,-113.9731,554.4797",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ScreenPanel",
-          "__guid": "cdddaeaa-764d-4d73-b87d-31756e69734a",
-          "AutoScreenScale": true,
-          "Opacity": 1,
-          "Scale": 1,
-          "ScaleStrategy": "ConsistentHeight",
-          "ZIndex": 100
-        },
-        {
-          "__type": "Grubs.UI.GameLanding.GameLanding",
-          "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a"
-        },
-        {
-          "__type": "Grubs.UI.GameEnd.GameEnd",
-          "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
-        }
-      ]
-    },
-    {
-      "__guid": "0f45ad07-5d61-43eb-9f1e-3940781f7c82",
-      "Flags": 0,
-      "Name": "UI Helper",
-      "Position": "136.4629,-1421.282,280.9131",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "Grubs.Helpers.WorldPopupHelper",
-          "__guid": "e0aa518f-efcd-4a30-9dd6-e9687d9fa766",
-          "CratePickupPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/world/popups/cratepickup.prefab"
-          },
-          "DamageNumberPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/world/popups/damagenumber.prefab"
-          },
-          "KillZoneDeathIndicatorPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/world/popups/killzonedeathindicator.prefab"
-          }
-        },
-        {
-          "__type": "Grubs.Helpers.ChatHelper",
-          "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4"
         }
       ]
     }
