@@ -11,13 +11,7 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "uv_1k.vmat"
-								to = "models/weapons/banana/materials/banana.vmat"
-							},
-						]
+						remaps = [  ]
 						use_global_default = false
 						global_default_material = "materials/default.vmat"
 					},
