@@ -12,7 +12,7 @@
         "BodyGroups": 18446744073709551615,
         "CreateAttachments": false,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/cluster_grenade/mdl-cluster_grenade.vmdl",
+        "Model": "models/weapons/cluster_grenade/cluster_grenade.vmdl",
         "Morphs": {},
         "Parameters": {
           "bools": {},

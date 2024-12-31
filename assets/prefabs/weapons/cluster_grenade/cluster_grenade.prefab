@@ -4,16 +4,32 @@
     "Flags": 0,
     "Name": "cluster_grenade",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "2cf71e33-7fde-4414-bc8b-67fa7ac1c8d4",
         "BodyGroups": 18446744073709551615,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/cluster_grenade/mdl-cluster_grenade.vmdl",
+        "Model": "models/weapons/cluster_grenade/cluster_grenade.vmdl",
+        "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -23,7 +39,7 @@
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/cluster_grenade.geq",
         "HoldPose": "Throwable",
-        "Icon": "models/weapons/cluster_grenade/icon-cluster_grenade.vmdl.png",
+        "Icon": "models/weapons/cluster_grenade/cluster_grenade.png",
         "Model": {
           "_type": "component",
           "component_id": "2cf71e33-7fde-4414-bc8b-67fa7ac1c8d4",
@@ -52,8 +68,9 @@
         "FiringType": "Charged",
         "MaxUses": 1,
         "OnFire": {
-          "__version": 7,
+          "__version": 8,
           "__guid": "8d035bb9-b3e5-4488-8408-baba78f85145",
+          "__changeId": 0,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -104,10 +121,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
-              },
+              "Id": 4,
+              "Value": null,
               "DstId": 2,
               "DstName": "projectile"
             },
@@ -119,12 +134,13 @@
             }
           ],
           "Defaults": {
-            "$3._value": {
+            "$4._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
             }
           }
         },
+        "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
@@ -136,11 +152,35 @@
       }
     ],
     "Children": [],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
