@@ -123,6 +123,21 @@ public sealed class FreeForAll : BaseGameMode
 		}
 	}
 
+	protected override void OnPlayerLeft( Player player )
+	{
+		if ( player == ActivePlayer )
+		{
+			Log.Info( "Active player has left, skipping turn!" );
+			TimeUntilTurnOver = 0f;
+		}
+
+		Log.Info( "Giving all disconnected player's grubs disconnect damage." );
+		foreach ( var grub in player.Grubs )
+		{
+			grub.Health.TakeDamage( GrubsDamageInfo.FromDisconnect() );
+		}
+	}
+
 	protected override void OnGrubDamaged( Grub grub )
 	{
 		if ( !DamageQueue.Contains( grub ) )
@@ -267,7 +282,7 @@ public sealed class FreeForAll : BaseGameMode
 		TurnIsChanging = false;
 		TimeUntilTurnOver = GrubsConfig.TurnDuration;
 
-		var playersToRemove = PlayerQueue.Where( player => !player.IsValid() ).ToList();
+		var playersToRemove = PlayerQueue.Where( player => !player.IsValid() || player.IsDisconnected ).ToList();
 		foreach ( var player in playersToRemove )
 		{
 			PlayerQueue.Remove( player );
@@ -277,6 +292,14 @@ public sealed class FreeForAll : BaseGameMode
 		
 		while ( ActivePlayer.IsDead && _rotateCount < Player.All.Count() )
 			RotateActivePlayer();
+
+		foreach ( var player in Player.All )
+		{
+			if ( player.IsDead && player.IsDisconnected )
+			{
+				player.GameObject.Destroy();
+			}
+		}
 		
 		// Send the ActivePlayer's ActiveGrub in case the synced ActiveGrub hasn't been processed yet.
 		ActivePlayer.OnTurnStart( ActivePlayer.ActiveGrub );

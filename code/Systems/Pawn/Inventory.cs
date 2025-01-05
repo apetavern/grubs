@@ -168,6 +168,9 @@ public sealed class Inventory : LocalComponent<Inventory>
 	public void Holster( int slot )
 	{
 		Log.Info( $"Holstering {slot} for {Player}." );
+		if ( !Player.IsValid() )
+			return;
+		
 		var equipment = GetActiveEquipment( slot );
 
 		if ( equipment is null || !equipment.IsValid() )

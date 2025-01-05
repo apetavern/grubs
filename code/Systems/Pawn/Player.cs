@@ -11,10 +11,7 @@ public sealed class Player : LocalComponent<Player>
 	private static readonly Logger Log = new( "Player" );
 	
 	public static IEnumerable<Player> All => Game.ActiveScene.GetAllComponents<Player>();
-	public static IEnumerable<Player> AllLiving => All.Where( p => p.IsPlaying && !p.IsDead );
-	
-	// [Sync( SyncFlags.FromHost ), Property, ReadOnly]
-	// public Client Client { get; set; }
+	public static IEnumerable<Player> AllLiving => All.Where( p => p.IsPlaying && !p.IsDisconnected && !p.IsDead );
 
 	[Sync( SyncFlags.FromHost )] 
 	public NetList<Grub> Grubs { get; } = new();
@@ -33,6 +30,9 @@ public sealed class Player : LocalComponent<Player>
 	
 	[Sync( SyncFlags.FromHost )]
 	public bool IsPlaying { get; set; }
+	
+	[Sync( SyncFlags.FromHost )]
+	public bool IsDisconnected { get; set; }
 	
 	[Sync]
 	public bool HasFiredThisTurn { get; private set; }
