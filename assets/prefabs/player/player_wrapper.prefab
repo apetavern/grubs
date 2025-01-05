@@ -89,6 +89,10 @@
           },
           {
             "_type": "gameobject",
+            "prefab": "prefabs/tools/ninja_rope/ninja_rope.prefab"
+          },
+          {
+            "_type": "gameobject",
             "prefab": "prefabs/tools/smoke_break/smoke_break.prefab"
           },
           {
