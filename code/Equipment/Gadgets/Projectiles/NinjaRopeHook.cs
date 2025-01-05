@@ -74,6 +74,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		MountObject.WorldPosition = PhysicsProjectileComponent.Grub.WorldPosition;
 		MountObject.Enabled = true;
 		Rope = MountObject.Components.Get<RopeBehavior>();
+		Rope.RopeLength = 500;
 		MountObject.Components.Get<Mountable>().Mount( PhysicsProjectileComponent.Grub );
 	}
 

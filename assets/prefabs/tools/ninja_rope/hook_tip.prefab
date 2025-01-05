@@ -182,8 +182,8 @@
             },
             "BreakForce": 0,
             "BreakTorque": 0,
-            "Damping": 100,
-            "EnableCollision": true,
+            "Damping": 2000,
+            "EnableCollision": false,
             "Frequency": 5000,
             "LocalFrame1": {
               "Position": "0,0,0",
@@ -195,8 +195,8 @@
               "Scale": "0,0,0",
               "Rotation": "0,0,0,0"
             },
-            "MaxLength": 1000,
-            "MinLength": 0,
+            "MaxLength": 500,
+            "MinLength": 500,
             "StartBroken": false
           },
           {

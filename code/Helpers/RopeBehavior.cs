@@ -7,7 +7,7 @@ public sealed class RopeBehavior : Component
 	[Property] public GameObject HookObject { get; set; }
 	[Property, Sync] public List<Vector3> CornerObjects { get; set; } = new();
 	[Property] public VecLineRenderer RopeRenderer { get; set; }
-	[Property] private float RopeLength { get; set; }
+	[Property] public float RopeLength { get; set; } 
 
 	private GameObject MuzzlePoint { get; set; }
 	private Mountable MountComponent { get; set; }
@@ -113,9 +113,12 @@ public sealed class RopeBehavior : Component
 		//JointComponent.Body = AttachPoint;
 
 		JointComponent.MaxLength = RopeLength;
+		JointComponent.MinLength = RopeLength;
 
-		RopeLength -= Input.AnalogMove.x * Time.Delta * 100f;
-		RopeLength = RopeLength.Clamp( 20f, 10000f );
+		Log.Info( JointComponent.MaxLength );
+
+		RopeLength -= Input.AnalogMove.x * Time.Delta * 500f;
+		RopeLength = RopeLength.Clamp( 0, 10000f );
 
 		Components.Get<Rigidbody>().Velocity += Vector3.Forward * Input.AnalogMove.y * -6.5f;
 	}
