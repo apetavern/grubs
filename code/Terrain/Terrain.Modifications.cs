@@ -25,7 +25,7 @@ public partial class GrubsTerrain
 	/// <param name="radius">The radius of the subtraction.</param>
 	/// <param name="matCode">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	public void SubtractCircle( Vector2 center, float radius, int matCode, bool worldOffset = false )
 	{
 		if ( !AssertIsHost() )
@@ -44,7 +44,7 @@ public partial class GrubsTerrain
 	/// </summary>
 	/// <param name="center">The Vector2 center of the scorch.</param>
 	/// <param name="radius">The radius of the scorch.</param>
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	public void ScorchCircle( Vector2 center, float radius )
 	{
 		if ( !AssertIsHost() )
@@ -62,7 +62,7 @@ public partial class GrubsTerrain
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="cornerRadius">The corner radius of the box.</param>
 	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	public void SubtractBox( Vector2 mins, Vector2 maxs, int matCode,
 		float cornerRadius = 0, bool worldOffset = false )
 	{
@@ -85,7 +85,7 @@ public partial class GrubsTerrain
 	/// <param name="radius">The radius of the line.</param>
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
 	/// <param name="worldOffset">Whether or not to use an offset from the Sdf to the world (for terrain generation).</param>
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	public void SubtractLine( Vector2 start, Vector2 end, float radius, int matCode,
 		bool worldOffset = false )
 	{
@@ -100,7 +100,7 @@ public partial class GrubsTerrain
 			Subtract( SdfWorld, lineSdf.Expand( offset ), material, worldOffset );
 	}
 
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	public void ScorchLine( Vector2 start, Vector2 end, float radius )
 	{
 		if ( !AssertIsHost() )
@@ -119,7 +119,7 @@ public partial class GrubsTerrain
 	/// <param name="position">The position of the Sdf.</param>
 	/// <param name="rotation">The rotation of the Sdf.</param>
 	/// <param name="materials">The Sdf2dMaterials and offsets of the subtraction.</param>
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	public void AddTexture( Texture texture, int gradientWidth, float worldWidth, Vector2 position, Rotation2D rotation,
 		int matCode )
 	{
@@ -143,7 +143,7 @@ public partial class GrubsTerrain
 	/// <param name="height">The height of the world.</param>
 	/// <param name="fgMaterial">The material for the foreground of the world.</param>
 	/// <param name="bgMaterial">The material for the background of the world.</param>
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	private void AddWorldBox( int length, int height )
 	{
 		if ( !AssertIsHost() )
