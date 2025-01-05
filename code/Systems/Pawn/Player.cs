@@ -43,7 +43,7 @@ public sealed class Player : LocalComponent<Player>
 	private int GetTotalGrubHealth => (int)Grubs.Sum( g =>
 	{
 		if ( g?.Health?.CurrentHealth != null ) 
-			return g.Health.CurrentHealth;
+			return g.Health.CurrentHealth.Clamp( 1, float.MaxValue );
 		return 0;
 	} ).Clamp( 0, float.MaxValue );
 	public int GetHealthPercentage => (GetTotalGrubHealth / (1.5f * BaseGameMode.Current.GrubCount)).CeilToInt();
