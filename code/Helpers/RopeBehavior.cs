@@ -36,6 +36,7 @@ public sealed class RopeBehavior : Component
 		
 		JointComponent.MaxLength = Vector3.DistanceBetween( WorldPosition, HookObject.WorldPosition );
 		JointComponent.Body = HookObject;
+		JointComponent.EnableCollision = false;
 		RopeLength = JointComponent.MaxLength;
 
 		MountComponent = Components.Get<Mountable>();
@@ -109,7 +110,7 @@ public sealed class RopeBehavior : Component
 			}
 		}
 
-		JointComponent.Body = AttachPoint;
+		//JointComponent.Body = AttachPoint;
 
 		JointComponent.MaxLength = RopeLength;
 

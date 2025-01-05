@@ -3,10 +3,8 @@
     "__guid": "313ab67d-9770-457c-9725-adaa92a715e6",
     "Flags": 0,
     "Name": "hook_tip",
-    "Tags": "notarget,projectile,tool",
+    "Tags": "tool,projectile,notarget",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
@@ -15,12 +13,17 @@
         "Gravity": false,
         "LinearDamping": 1,
         "Locking": {
+          "X": false,
           "Y": true,
+          "Z": false,
+          "Pitch": true,
           "Yaw": true,
           "Roll": true
         },
+        "MassCenterOverride": "0,0,0",
         "MassOverride": 0,
         "MotionEnabled": true,
+        "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
@@ -28,9 +31,27 @@
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "ccf90729-f42f-4b64-9661-83f3a2bd3bb0",
         "BodyGroups": 18446744073709551615,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
         "Model": "models/tools/ninjarope/ninjarope_hook.vmdl",
+        "Morphs": {},
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -40,7 +61,8 @@
         "Center": "6.239998,0,0",
         "IsTrigger": false,
         "Radius": 4.2400055,
-        "Static": false
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
       },
       {
         "__type": "Sandbox.HighlightOutline",
@@ -90,6 +112,7 @@
         "__type": "Grubs.Helpers.VecLineRenderer",
         "__guid": "a36572c7-42f9-4dfc-b6ad-6adf9ac68cac",
         "Color": {
+          "blend": "Linear",
           "color": [
             {
               "t": 0.5,
@@ -111,7 +134,11 @@
           "rangey": "0,3",
           "frames": [
             {
-              "y": 1
+              "x": 0,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
             }
           ]
         },
@@ -123,8 +150,6 @@
         "__guid": "0a010ce8-7bc5-4696-9f64-3517424e1d29",
         "Flags": 0,
         "Name": "MountablePoint",
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.Rigidbody",
@@ -133,16 +158,24 @@
             "Gravity": true,
             "LinearDamping": 1,
             "Locking": {
-              "Y": true
+              "X": false,
+              "Y": true,
+              "Z": false,
+              "Pitch": true,
+              "Yaw": true,
+              "Roll": true
             },
+            "MassCenterOverride": "0,0,0",
             "MassOverride": 0,
             "MotionEnabled": true,
+            "OverrideMassCenter": false,
             "RigidbodyFlags": 0,
             "StartAsleep": false
           },
           {
             "__type": "Sandbox.SpringJoint",
             "__guid": "a7bd20a0-d092-495f-a596-8b0b558cf85a",
+            "Attachment": "Auto",
             "Body": {
               "_type": "gameobject",
               "go": "313ab67d-9770-457c-9725-adaa92a715e6"
@@ -152,8 +185,19 @@
             "Damping": 100,
             "EnableCollision": true,
             "Frequency": 5000,
+            "LocalFrame1": {
+              "Position": "0,0,0",
+              "Scale": "0,0,0",
+              "Rotation": "0,0,0,0"
+            },
+            "LocalFrame2": {
+              "Position": "0,0,0",
+              "Scale": "0,0,0",
+              "Rotation": "0,0,0,0"
+            },
             "MaxLength": 1000,
-            "MinLength": 0
+            "MinLength": 0,
+            "StartBroken": false
           },
           {
             "__type": "Sandbox.SphereCollider",
@@ -162,7 +206,8 @@
             "IsTrigger": false,
             "Radius": 10,
             "Static": false,
-            "Surface": "surfaces/ninjarope_bounce.surface"
+            "Surface": "surfaces/ninjarope_bounce.surface",
+            "SurfaceVelocity": "0,0,0"
           },
           {
             "__type": "Grubs.Common.Mountable",
@@ -187,11 +232,35 @@
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [
     "orus.8hu_kultiras_smallhouse_2#33965"

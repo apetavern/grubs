@@ -28,7 +28,7 @@ public sealed class NinjaRopeHook : Component, Component.ICollisionListener
 		{
 			var mountable = MountObject.Components.Get<Mountable>();
 
-			if ( PhysicsProjectileComponent.Grub.IsValid() && mountable.MountEnabled )
+			if ( PhysicsProjectileComponent.Grub.IsValid() && mountable.IsValid() && mountable.MountEnabled )
 			{
 				var grub = PhysicsProjectileComponent.Grub;
 
