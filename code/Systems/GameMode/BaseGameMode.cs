@@ -74,6 +74,14 @@ public abstract class BaseGameMode : Component
 		OnPlayerJoined( player );
 	}
 
+	public void HandlePlayerLeft( Player player )
+	{
+		if ( !Networking.IsHost )
+			return;
+		
+		OnPlayerLeft( player );
+	}
+
 	private void AssignPlayerColor( Player player )
 	{
 		var takenColors = Players.Select( p => p.PlayerColor );
@@ -88,6 +96,11 @@ public abstract class BaseGameMode : Component
 	/// Called after the player is added to the Players list.
 	/// </summary>
 	protected virtual void OnPlayerJoined( Player player ) { }
+	
+	/// <summary>
+	/// Called after the player disconnects from the lobby.
+	/// </summary>
+	protected virtual void OnPlayerLeft( Player player ) { }
 
 	/// <summary>
 	/// Call for when a Grub is damaged.

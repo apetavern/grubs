@@ -49,5 +49,7 @@ public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 			return;
 		
 		Log.Info( $"Handling disconnect for connection {connection.DisplayName}." );
+		player.IsDisconnected = true;
+		BaseGameMode.Current.HandlePlayerLeft( player );
 	}
 }
