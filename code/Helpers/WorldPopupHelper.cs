@@ -5,6 +5,7 @@ namespace Grubs.Helpers;
 [Title( "Grubs - World Popup Helper" ), Category( "World" )]
 public sealed class WorldPopupHelper : Component
 {
+	private static readonly Logger Log = new("WorldPopupHelper");
 	public static WorldPopupHelper Instance { get; private set; }
 
 	[Property] public GameObject DamageNumberPrefab { get; set; }
