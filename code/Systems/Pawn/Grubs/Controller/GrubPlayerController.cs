@@ -75,7 +75,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateRotation()
 	{
-		if ( CharacterController.Velocity.Normal.IsNearZeroLength || !IsGrounded )
+		if ( !IsGrounded )
 			return;
 
 		WorldRotation = MoveInput switch
