@@ -151,7 +151,7 @@
         "Height": 28,
         "IgnoreLayers": "",
         "LandingParticles": "particles/landimpact/landimpact.vpcf",
-        "Radius": 8,
+        "Radius": 4,
         "StepHeight": 18
       }
     ],

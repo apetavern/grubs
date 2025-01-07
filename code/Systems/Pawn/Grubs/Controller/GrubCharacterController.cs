@@ -1,5 +1,6 @@
 ﻿using Grubs.Gamemodes;
 using Grubs.Helpers;
+using Grubs.Systems.GameMode;
 using Grubs.Terrain;
 using Sandbox.Utility;
 
@@ -65,7 +66,7 @@ public class GrubCharacterController : Component
 		// See if we are changing direction a bit
 		var currentspeed = Velocity.Dot( wishdir );
 
-		// Reduce wishspeed by the amount of veer.
+		// Reduce wish speed by the amount of veer.
 		var addspeed = wishspeed - currentspeed;
 
 		// If not going to add any speed, done.
@@ -75,7 +76,7 @@ public class GrubCharacterController : Component
 		// Determine amount of acceleration.
 		var accelspeed = Acceleration * Time.Delta * wishspeed;
 
-		// Cap at addspeed
+		// Cap at add speed
 		if ( accelspeed > addspeed )
 			accelspeed = addspeed;
 
@@ -91,7 +92,8 @@ public class GrubCharacterController : Component
 	public void ApplyFriction( float frictionAmount, float stopSpeed = 140.0f )
 	{
 		var speed = Velocity.Length;
-		if ( speed < 0.01f ) return;
+		if ( speed < 0.01f ) 
+			return;
 
 		// Bleed off some speed, but if we have less than the bleed
 		//  threshold, bleed the threshold amount.
@@ -101,12 +103,13 @@ public class GrubCharacterController : Component
 		var drop = control * Time.Delta * frictionAmount;
 
 		// scale the velocity
-		var newspeed = speed - drop;
-		if ( newspeed < 0 ) newspeed = 0;
-		if ( newspeed == speed ) return;
+		var newSpeed = speed - drop;
+		if ( newSpeed < 0 ) newSpeed = 0;
+		if ( newSpeed == speed ) 
+			return;
 
-		newspeed /= speed;
-		Velocity *= newspeed;
+		newSpeed /= speed;
+		Velocity *= newSpeed;
 	}
 
 	private SceneTrace BuildTrace( Vector3 from, Vector3 to )
@@ -313,28 +316,23 @@ public class GrubCharacterController : Component
 			.WithTag( "solid" )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();
-
-		if ( result.StartedSolid ) // Stuck inside of something
+		
+		// Stuck inside of something
+		if ( result.StartedSolid )
 		{
 			// Don't let active grub push this grub around
-			// var activePlayer = Scene.Directory.FindComponentByGuid( Gamemode.FFA.ActivePlayerId ) as global::Grubs.Pawn.Player;
-			// if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
-			// {
-			// 	_stuckTries = 0;
-			// 	return false;
-			// }
+			var activePlayer = Player.All.First( p => p.IsActive );
+			if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
+			{
+				_stuckTries = 0;
+				return false;
+			}
 		}
 		else if ( !terrainCheck.Hit || !terrainCheck.GameObject.Tags.Contains( "terrain" ) ) // TODO: Work this into the trace if it ever starts working
 		{
 			_stuckTries = 0;
 			return false;
 		}
-
-		//using ( Gizmo.Scope( "unstuck", Transform.World ) )
-		//{
-		//	Gizmo.Draw.Color = Gizmo.Colors.Red;
-		//	Gizmo.Draw.LineBBox( BoundingBox );
-		//}
 
 		var attemptsPerTick = 20;
 
@@ -350,13 +348,13 @@ public class GrubCharacterController : Component
 			}
 
 			result = BuildTrace( pos, pos ).Run();
-
-			if ( GrubsTerrain.Instance.PointInside( pos ) ) // Don't let them spawn inside the terrain
+			
+			// Don't let them spawn inside the terrain
+			if ( GrubsTerrain.Instance.PointInside( pos ) )
 				continue;
 
 			if ( !result.StartedSolid )
 			{
-				//Log.Info( $"unstuck after {_stuckTries} tries ({_stuckTries * AttemptsPerTick} tests)" );
 				WorldPosition = pos;
 				return false;
 			}
