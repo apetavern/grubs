@@ -31,11 +31,14 @@ public class GrubCharacterController : Component
 	public BBox BoundingBox => new( new Vector3( -Radius, -Radius, 0 ), new Vector3( Radius, Radius, Height ) );
 
 	// Set to query since there has been some unreliability during spawning.
-	[Sync( SyncFlags.Query )] public Vector3 Velocity { get; private set; }
+	[Sync] public Vector3 Velocity { get; private set; }
 
 	[Sync] public bool IsOnGround { get; set; }
 
 	[Sync] public float CurrentGroundAngle { get; set; }
+	
+	private TimeSince TimeSinceStarted { get; set; }
+	private bool HasSetVelocityHack { get; set; }
 
 	protected override void DrawGizmos()
 	{
@@ -47,6 +50,19 @@ public class GrubCharacterController : Component
 		if ( IsProxy )
 			Log.Error( $"Setting velocity from non-owner?! WTF?!" );
 		Velocity = velocity;
+	}
+
+	protected override void OnStart()
+	{
+		if ( IsProxy )
+			return;
+
+		if ( TimeSinceStarted <= 2f || HasSetVelocityHack ) 
+			return;
+		
+		Log.Info( "Setting velocity hack." );
+		Velocity = new Vector3( 0f );
+		HasSetVelocityHack = true;
 	}
 
 	/// <summary>
@@ -316,11 +332,11 @@ public class GrubCharacterController : Component
 			.Run();
 		
 		// Stuck inside of something
-		if ( result.StartedSolid )
+		if ( result.StartedSolid && result.GameObject.IsValid() )
 		{
 			// Don't let active grub push this grub around
 			var activePlayer = Player.All.First( p => p.IsActive );
-			if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer?.ActiveGrub?.GameObject )
+			if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer.ActiveGrub?.GameObject )
 			{
 				_stuckTries = 0;
 				return false;
