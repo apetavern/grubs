@@ -1,3 +1,4 @@
+using Grubs.Extensions;
 using Grubs.Pawn;
 using Grubs.Systems.Pawn;
 
@@ -34,12 +35,12 @@ public sealed class ChatHelper : Component
 			return;
 
 		var player = Scene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.Owner == Rpc.Caller );
-		var message = new ChatMessage()
+		var message = new ChatMessage
 		{
 			AuthorName = Rpc.Caller.DisplayName,
 			AuthorSteamId = Rpc.Caller.SteamId,
 			Message = messageText,
-			Color = Color.White.Hex,
+			Color = player?.PlayerColor.Color().Hex ?? Color.White.Hex,
 			Lifetime = 0f
 		};
 
