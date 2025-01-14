@@ -81,6 +81,7 @@ GrubVitals {
             
             .min-grub-health-bar-inner {
                 border-radius: 16px;
+                transition: width 1s ease-out;
             }
         }
     }

@@ -3,6 +3,7 @@ PlayerList {
     bottom: 55px;
     left: 55px;
     flex-direction: column;
+    gap: 24px;
 
     .players {
         flex-direction: column;

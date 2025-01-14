@@ -53,7 +53,7 @@ public partial class ExplosionHelper : Component
 		var dir = (grub.WorldPosition - position).Normal;
 		dir = dir.WithY( 0f );
 
-		grub.CharacterController.Punch( (dir + Vector3.Up) * force );
+		grub.CharacterController.Punch( (dir + Vector3.Up * 2f) * force );
 		grub.CharacterController.ReleaseFromGround();
 	}
 
