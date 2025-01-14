@@ -68,10 +68,14 @@ public partial class Health : Component
 				damageInfos.Add( damageInfo );
 				_deathReason = DeathReason.FindReason( grub, damageInfos );
 			}
+
+			if ( grub.IsValid() )
+			{
+				Log.Info( $"{grub.Name} died, handling death." );
+				GrubDiedRpc( grub );
+				WorldPopupHelper.Instance.CreateKillZoneDeathIndicator( damageInfo.WorldPosition );
+			}
 			
-			Log.Info( $"{grub.Name} died, handling death." );
-			GrubDiedRpc( grub );
-			WorldPopupHelper.Instance.CreateKillZoneDeathIndicator( damageInfo.WorldPosition );
 			_ = OnDeath( isKillZoneDeath );
 		}
 	}

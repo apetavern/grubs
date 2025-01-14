@@ -5,16 +5,42 @@
     "Name": "bazooka_shell",
     "Tags": "projectile",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "86e5e92b-9219-4643-ad6f-9c8597aa7b65",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/shell/shell.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -24,17 +50,37 @@
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
+        "Material": null,
         "ObscuredColor": "0,0,0,0.4",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Width": 0.25
       },
       {
         "__type": "Sandbox.CapsuleCollider",
         "__guid": "b28e4cce-f97b-4b78-968d-bcdfc47f794c",
         "End": "1.880003,0,0",
+        "Friction": null,
         "IsTrigger": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
         "Radius": 4.6000004,
         "Start": "-5.559999,0,0",
-        "Static": false
+        "Static": false,
+        "Surface": null,
+        "SurfaceVelocity": "0,0,0"
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ArcProjectile",
@@ -52,6 +98,12 @@
           "go": "be07f4a5-bc0f-47da-b84b-70f6edb415f3",
           "component_type": "SkinnedModelRenderer"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ProjectileSpeed": 35,
         "ShouldBounce": false
       },
@@ -66,21 +118,57 @@
         "ExplosionDamage": 50,
         "ExplosionRadius": 100,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Particles": "particles/explosion/grubs_explosion_base.vpcf",
         "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Common.Health",
         "__guid": "d823ff27-5568-4639-8715-9337a975d6d7",
-        "MaxHealth": 15
+        "MaxHealth": 15,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

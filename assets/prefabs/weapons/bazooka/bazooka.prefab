@@ -8,11 +8,21 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "aed4a248-db1d-4095-be25-8ddc9d0f39e9",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
         "CreateAttachments": true,
         "CreateBoneObjects": true,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/bazooka/bazooka.vmdl",
         "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Parameters": {
           "bools": {},
           "ints": {},
@@ -47,6 +57,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Bazooka",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": true,
         "SlotIndex": 0,
         "UnlockDelay": 0
@@ -69,12 +85,19 @@
         "MaxUses": 1,
         "Muzzle": {
           "_type": "gameobject",
-          "go": "fdb61952-513d-41fe-b810-61afd4f35b29"
+          "go": "fdb61952-513d-41fe-b810-61afd4f35b29",
+          "prefab": null
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OnFire": {
-          "__version": 8,
+          "__version": 9,
           "__guid": "e799fa0e-ad43-4423-9508-1c0e933037a8",
-          "__changeId": 3,
+          "__changeId": 17,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -85,7 +108,10 @@
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input"
+              "Type": "input",
+              "UserData": {
+                "Position": "12,48"
+              }
             },
             {
               "Id": 1,
@@ -102,6 +128,13 @@
               "Type": "grubs.spawn_projectile",
               "UserData": {
                 "Position": "228,-84"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.ref",
+              "UserData": {
+                "Position": "24,-72"
               }
             }
           ],
@@ -125,8 +158,8 @@
               "DstName": "charge"
             },
             {
-              "Id": 5,
-              "Value": null,
+              "SrcId": 10,
+              "SrcName": "_result",
               "DstId": 3,
               "DstName": "projectile"
             },
@@ -138,12 +171,13 @@
             }
           ],
           "Defaults": {
-            "$5._value": {
+            "$10.gameobject": {
               "_type": "gameobject",
-              "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
+              "go": "be07f4a5-bc0f-47da-b84b-70f6edb415f3"
             }
           }
         },
+        "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/bazooka/bazooka_fire.sound"
       }
@@ -164,20 +198,41 @@
       },
       {
         "__guid": "0ff878b9-f756-4375-aece-23b9952a40e9",
-        "Flags": 8,
+        "Flags": 0,
         "Name": "muzzle",
         "Position": "19.4487,0.485087,9.937422",
         "Enabled": true
       },
       {
         "__guid": "663419d8-80ad-4ba6-a003-11f0c4006940",
-        "Flags": 8,
+        "Flags": 0,
         "Name": "muzzle",
         "Position": "19.4487,0.485087,9.937422",
         "Enabled": true
       },
       {
         "__guid": "31ba1018-fb2f-4928-bbbb-8ad9da9ac39a",
+        "Flags": 0,
+        "Name": "muzzle",
+        "Position": "19.4487,0.485087,9.937422",
+        "Enabled": true
+      },
+      {
+        "__guid": "4811a036-9a9b-4f34-8f31-15c348aa9258",
+        "Flags": 8,
+        "Name": "muzzle",
+        "Position": "19.4487,0.485087,9.937422",
+        "Enabled": true
+      },
+      {
+        "__guid": "46c989ca-81aa-445f-b96e-62ce48758ce5",
+        "Flags": 8,
+        "Name": "muzzle",
+        "Position": "19.4487,0.485087,9.937422",
+        "Enabled": true
+      },
+      {
+        "__guid": "0860f507-3476-4e4a-9251-e3e79eccc89c",
         "Flags": 8,
         "Name": "muzzle",
         "Position": "19.4487,0.485087,9.937422",

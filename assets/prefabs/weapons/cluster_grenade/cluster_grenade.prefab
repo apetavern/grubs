@@ -8,11 +8,21 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "2cf71e33-7fde-4414-bc8b-67fa7ac1c8d4",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
         "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/cluster_grenade/cluster_grenade.vmdl",
         "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Parameters": {
           "bools": {},
           "ints": {},
@@ -47,6 +57,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Cluster Grenade",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": true,
         "SlotIndex": 0,
         "UnlockDelay": 2
@@ -67,10 +83,17 @@
         },
         "FiringType": "Charged",
         "MaxUses": 1,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OnFire": {
-          "__version": 8,
+          "__version": 9,
           "__guid": "8d035bb9-b3e5-4488-8408-baba78f85145",
-          "__changeId": 0,
+          "__changeId": 6,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -81,7 +104,10 @@
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input"
+              "Type": "input",
+              "UserData": {
+                "Position": "48,72"
+              }
             },
             {
               "Id": 1,
@@ -97,7 +123,14 @@
               "Id": 2,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "224,-64"
+                "Position": "228,-60"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.ref",
+              "UserData": {
+                "Position": "48,-48"
               }
             }
           ],
@@ -121,8 +154,8 @@
               "DstName": "charge"
             },
             {
-              "Id": 4,
-              "Value": null,
+              "SrcId": 6,
+              "SrcName": "_result",
               "DstId": 2,
               "DstName": "projectile"
             },
@@ -134,12 +167,13 @@
             }
           ],
           "Defaults": {
-            "$4._value": {
+            "$6.gameobject": {
               "_type": "gameobject",
-              "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
+              "go": "46268355-78ef-4f3d-80ac-e834e23863b7"
             }
           }
         },
+        "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
@@ -148,7 +182,13 @@
         "__guid": "18a875f6-e399-44e0-879a-e7a0baefca8d",
         "Inputs": {
           "fire": "Throw (Hold)"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],
