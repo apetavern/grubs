@@ -57,4 +57,31 @@ GrubVitals {
             mask-mode: alpha;
         }
     }
+    
+    .minimal-vitals {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+        filter: drop-shadow(3px 3px 1px black);
+        padding-bottom: 48px;
+        
+        > label {
+            font-size: 56px;
+            text-stroke-width: 8px;
+        }
+        
+        .min-grub-health-bar {
+            border-radius: 16px;
+            width: 240px;
+            height: 28px;
+            padding: 4px;
+            
+            .min-grub-health-bar-inner {
+                border-radius: 16px;
+            }
+        }
+    }
 }

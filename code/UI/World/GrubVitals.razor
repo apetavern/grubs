@@ -12,14 +12,26 @@
 }
 
 <root>
-    <div class="vitals-parent">
-        <div class="vitals-shape bg-@ColorString-med"/>
-    </div>
-    <label class="grub-name text-@ColorString-light text-stroke-@ColorString-med">@Grub.Name</label>
-    <div class="grub-health-bar bg-@ColorString-dark">
-        <div class="grub-health-bar-inner bg-@ColorString-light" style="width: @(Grub.HealthPercentage * 100)%" />
-    </div>
-    <label class="grub-health-percentage text-@ColorString-light text-stroke-@ColorString-med">@GetHealthPercentageString()</label>
+    @if (Grub.IsActive())
+    {
+        <div class="vitals-parent">
+            <div class="vitals-shape bg-@ColorString-med"/>
+        </div>
+        <label class="grub-name text-@ColorString-light text-stroke-@ColorString-med">@Grub.Name</label>
+        <div class="grub-health-bar bg-@ColorString-dark">
+            <div class="grub-health-bar-inner bg-@ColorString-light" style="width: @(Grub.HealthPercentage * 100)%"/>
+        </div>
+        <label class="grub-health-percentage text-@ColorString-light text-stroke-@ColorString-med">@GetHealthPercentageString()</label>
+    }
+    else
+    {
+        <div class="minimal-vitals">
+            <label class="text-@ColorString-light text-stroke-@ColorString-med">@Grub.Name</label>
+            <div class="min-grub-health-bar bg-@ColorString-dark">
+                <div class="min-grub-health-bar-inner bg-@ColorString-light" style="width: @(Grub.HealthPercentage * 100)%"/>
+            </div>
+        </div>
+    }
 </root>
 
 @code
@@ -33,7 +45,8 @@
 
     private string GetHealthPercentageString()
     {
-        if (!Grub.IsValid()) return "0";
+        if (!Grub.IsValid()) 
+            return "0";
         return $"{(Grub.HealthPercentage * 100).Clamp(0, Grub.Health.MaxHealth).CeilToInt()}%";
     }
 
@@ -58,6 +71,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Grub, Grub?.Owner?.PlayerColor, GetHealthPercentageString());
+        return HashCode.Combine(Grub, Grub?.IsActive(), Grub?.Owner?.PlayerColor, GetHealthPercentageString());
     }
 }
