@@ -10,10 +10,19 @@
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "9139f7ce-af77-484e-9b0f-2eacc74e7be3",
+          "Author": null,
           "Changes": "",
           "Description": "",
+          "Group": null,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "SceneTags": "",
-          "Title": "beach"
+          "Title": "beach",
+          "Version": null
         }
       ]
     },
@@ -26,6 +35,12 @@
         {
           "__type": "Grubs.Systems.Network.GrubsNetworkManager",
           "__guid": "55821b2d-8a1a-4e94-bdb7-b2c9ff0d6123",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player/player_wrapper.prefab"
@@ -49,6 +64,12 @@
           "ClearFlags": "All",
           "FieldOfView": 60,
           "IsMainCamera": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Orthographic": false,
           "OrthographicHeight": 1204,
           "Priority": 1,
@@ -61,7 +82,13 @@
         },
         {
           "__type": "Sandbox.Highlight",
-          "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c"
+          "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         },
         {
           "__type": "Sandbox.AmbientOcclusion",
@@ -70,6 +97,12 @@
           "DenoiseMode": "Temporal",
           "FalloffRange": 0.75,
           "Intensity": 0.15,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Quality": "High",
           "Radius": 128,
           "ThinCompensation": 0
@@ -77,11 +110,23 @@
         {
           "__type": "Sandbox.Sharpen",
           "__guid": "c2a83157-c96a-4753-8a45-42ce730adf05",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Scale": 0.05
         },
         {
           "__type": "Grubs.Pawn.GrubFollowCamera",
-          "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7"
+          "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         },
         {
           "__type": "Sandbox.DepthOfField",
@@ -92,6 +137,12 @@
           "FocalDistance": 200,
           "FocusRange": 800000,
           "FrontBlur": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "QualityLevel": "High"
         }
       ]
@@ -112,6 +163,12 @@
             "_type": "gameobject",
             "prefab": "prefabs/world/drops/health_crate.prefab"
           },
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "ToolsCratePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/drops/tools_crate.prefab"
@@ -123,11 +180,23 @@
         },
         {
           "__type": "Grubs.Helpers.ExplosionHelper",
-          "__guid": "c3056b0d-85ed-4205-94a2-8e042514744c"
+          "__guid": "c3056b0d-85ed-4205-94a2-8e042514744c",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         },
         {
           "__type": "Grubs.Helpers.ParticleHelper",
-          "__guid": "bd48a7bb-ba28-4261-9110-83778667ebd1"
+          "__guid": "bd48a7bb-ba28-4261-9110-83778667ebd1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         },
         {
           "__type": "Grubs.Equipment.Gadgets.Ground.LandmineUtility",
@@ -139,7 +208,13 @@
           "OildrumPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/drops/oildrum.prefab"
-          }
+          },
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ]
     },
@@ -154,6 +229,12 @@
           "__type": "Sandbox.ScreenPanel",
           "__guid": "cdddaeaa-764d-4d73-b87d-31756e69734a",
           "AutoScreenScale": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Opacity": 1,
           "Scale": 1,
           "ScaleStrategy": "ConsistentHeight",
@@ -161,11 +242,23 @@
         },
         {
           "__type": "Grubs.UI.GameLanding.GameLanding",
-          "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a"
+          "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         },
         {
           "__type": "Grubs.UI.GameEnd.GameEnd",
-          "__guid": "9c96bf74-495e-4599-b919-398493a3e660"
+          "__guid": "9c96bf74-495e-4599-b919-398493a3e660",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ]
     },
@@ -178,7 +271,13 @@
       "Components": [
         {
           "__type": "Grubs.Systems.GameMode.FreeForAll",
-          "__guid": "6eb0fa7d-6d3e-4b58-94c7-0c3e56178083"
+          "__guid": "6eb0fa7d-6d3e-4b58-94c7-0c3e56178083",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ]
     },
@@ -198,7 +297,13 @@
             "_type": "gameobject",
             "prefab": "particles/fire/fireobject.prefab"
           },
-          "MinParticleSpeed": 100
+          "MinParticleSpeed": 100,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ]
     },
@@ -216,6 +321,12 @@
         {
           "__type": "Grubs.Terrain.GrubsTerrain",
           "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "SdfWorld": {
             "_type": "component",
             "component_id": "18fcdcfa-5aa8-440a-b806-592601ed927a",
@@ -320,7 +431,13 @@
               "mode": "Mirrored"
             }
           ],
-          "HasPhysics": true
+          "HasPhysics": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ]
     },
@@ -346,11 +463,23 @@
           "KillZoneDeathIndicatorPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/popups/killzonedeathindicator.prefab"
-          }
+          },
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         },
         {
           "__type": "Grubs.Helpers.ChatHelper",
-          "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4"
+          "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         }
       ]
     },
@@ -375,8 +504,15 @@
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
-              "MaterialOverride": "materials/effects/water/water_01a.vmat",
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/environment/new_water.vmat",
               "Model": "models/waterplane.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -392,21 +528,45 @@
               "__enabled": false,
               "EdgeLength": 50,
               "Material": "materials/environment/new_water.vmat",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "Resolution": 100
             },
             {
               "__type": "Grubs.Common.KillZone",
               "__guid": "72d5d8e2-71b7-4213-8602-3fb4951760ae",
               "KillParticles": "particles/watersplash/watersplash_base.vpcf",
-              "KillSound": "sounds/world/water_splash.sound"
+              "KillSound": "sounds/world/water_splash.sound",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
             },
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "c6f27e16-c3b9-4c78-aaef-a82924edea5c",
               "Center": "0,0,-25",
+              "Friction": null,
               "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
               "Scale": "50,50,50",
               "Static": true,
+              "Surface": null,
               "SurfaceVelocity": "0,0,0"
             }
           ]
@@ -426,6 +586,12 @@
               "FogMode": "Enabled",
               "FogStrength": 1,
               "LightColor": "1,1,1,1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "Shadows": true,
               "SkyColor": "0.63256,0.68527,0.7907,1"
             }
@@ -442,7 +608,15 @@
               "__guid": "b2bcddb4-5b0f-4bb3-8201-b7c421237274",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/desert_01.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -466,7 +640,15 @@
               "__guid": "ee1c4f2a-a2ff-4217-8301-1a6c63b13492",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/sky/skydome.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -492,6 +674,12 @@
               "EndDistance": 1024,
               "FalloffExponent": 1,
               "Height": 256,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "StartDistance": 0,
               "VerticalFalloffExponent": 16
             }
@@ -531,6 +719,12 @@
               "Occlusion": false,
               "OcclusionOverride": false,
               "OcclusionRadius": 32,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "Pitch": 1,
               "PlayOnStart": true,
               "ReflectionOverride": false,
@@ -562,7 +756,15 @@
               "__guid": "f06bb6bb-0b0b-4750-a0ac-d32fab9a2dd5",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -588,7 +790,15 @@
               "__guid": "1ea7cd2e-73b9-404c-92e7-4639ab065305",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -613,7 +823,15 @@
               "__guid": "5fd0171f-dcd5-411d-80e3-52c3b57e1d47",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/land_01/land_03.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -639,7 +857,15 @@
               "__guid": "a30f0cd3-a7d3-405a-beda-a328f3cb85bc",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/land_01/land_04.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -665,7 +891,15 @@
               "__guid": "4c248856-24f9-4161-88fb-213adc757c69",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/land_01/land_02.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -691,7 +925,15 @@
               "__guid": "ecdfced4-2d94-42b6-a4ea-a02e38c9b1a1",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/land_01/land_02.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -717,7 +959,15 @@
               "__guid": "5663d226-1cdf-4c60-9e12-2f04d4812252",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/land_01/land_01.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -743,7 +993,15 @@
               "__guid": "904df15a-8a17-457c-8ad6-7372ffd365b7",
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
               "Model": "models/environment/islands/land_01/land_01.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "RenderOptions": {
                 "GameLayer": true,
                 "OverlayLayer": false,
@@ -774,6 +1032,12 @@
               "FrameInterval": 5,
               "MaxDistance": 512,
               "MultiBounce": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "Projection": "Box",
               "RenderDynamically": false,
               "Texture": "textures/cubemaps/default2.vtex",
@@ -797,6 +1061,12 @@
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 1152,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
               "StartDistance": 2000,
               "VerticalFalloffExponent": 2.5
             }
