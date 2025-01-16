@@ -16,7 +16,7 @@ Layer0
 	g_flDeepWaterColor "[0.176471 0.658824 0.850980 1.000000]"
 	g_flDepthMaxDistance "101.235"
 	g_flLightbias "[0.754 0.624]"
-	g_flShallowWaterColor "[0.000000 0.000000 0.000000 0.400000]"
+	g_flShallowWaterColor "[0.529412 0.678431 0.607843 0.400000]"
 	g_flWaveScale "9.877"
 	g_flWaveScrollSpeed "0.210"
 }
