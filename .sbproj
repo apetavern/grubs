@@ -5,7 +5,7 @@
   "Ident": "grubs",
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*\nmaterials/reticle/*",
+  "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*\nmaterials/reticle/*\nweapons/*.png",
   "PackageReferences": [],
   "EditorReferences": null,
   "IsWhitelistDisabled": false,
