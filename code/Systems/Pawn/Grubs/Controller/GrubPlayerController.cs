@@ -75,7 +75,7 @@ public sealed partial class GrubPlayerController : Component
 
 	private void UpdateRotation()
 	{
-		if ( !IsGrounded )
+		if ( !IsGrounded || IsChargingBackflip )
 			return;
 
 		WorldRotation = MoveInput switch
