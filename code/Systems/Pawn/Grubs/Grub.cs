@@ -52,7 +52,6 @@ public sealed class Grub : Component, IResolvable
 		if ( Networking.IsHost )
 		{
 			var avatarData = Network.Owner.GetUserData( "avatar" );
-			Log.Info( $"Avatar Data for {Network.Owner.DisplayName}: {avatarData}" );
 			DressGrub( avatarData );
 		}
 	}

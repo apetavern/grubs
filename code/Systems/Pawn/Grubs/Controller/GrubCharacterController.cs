@@ -335,14 +335,18 @@ public class GrubCharacterController : Component
 		if ( result.StartedSolid && result.GameObject.IsValid() )
 		{
 			// Don't let active grub push this grub around
-			var activePlayer = Player.All.First( p => p.IsActive );
-			if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer.ActiveGrub?.GameObject )
+			var activePlayer = Player.All.FirstOrDefault( p => p.IsActive );
+			if ( activePlayer.IsValid() )
 			{
-				_stuckTries = 0;
-				return false;
+				if ( result.GameObject.Tags.Has( "player" ) && result.GameObject.Parent == activePlayer.ActiveGrub?.GameObject )
+				{
+					_stuckTries = 0;
+					return false;
+				}
 			}
-		}
-		else if ( !terrainCheck.Hit || !terrainCheck.GameObject.Tags.Contains( "terrain" ) ) // TODO: Work this into the trace if it ever starts working
+		} 
+		// TODO: Work this into the trace if it ever starts working
+		else if ( !terrainCheck.Hit || !terrainCheck.GameObject.Tags.Contains( "terrain" ) )
 		{
 			_stuckTries = 0;
 			return false;
