@@ -1,0 +1,15 @@
+﻿CustomInputHint {
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    
+    .glyphs {
+        gap: 10px;
+    }
+    
+    .input-hint-text {
+        color: #EFE8E8;
+        font-size: 20px;
+        transform: rotate(-0.5deg);
+    }
+}

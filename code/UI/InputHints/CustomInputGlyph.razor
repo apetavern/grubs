@@ -1,0 +1,18 @@
+﻿@namespace Grubs.UI.InputHints
+
+@inherits Panel
+
+<root style="transform: rotate(@(Roll)deg); width: @(40f * Width)">
+    @InputDisplayString
+</root>
+
+@code
+{
+    public string InputAction { get; set; }
+    public bool ForceUpperCase { get; set; } = true;
+    public float Roll { get; set; } = 0f;
+    public float Width { get; set; } = 1f;
+
+    private string InputOriginString => Input.GetButtonOrigin( InputAction );
+    private string InputDisplayString => ForceUpperCase ? InputOriginString.ToUpper() : InputOriginString;
+}

@@ -1,0 +1,17 @@
+﻿@namespace Grubs.UI.InputHints
+
+@inherits Panel
+
+<root>
+    <div class="glyphs">
+        @ChildContent
+    </div>
+    <div class="input-hint-text">
+        @InputHintText.ToUpper()
+    </div>
+</root>
+
+@code
+{
+    public string InputHintText { get; set; }
+}

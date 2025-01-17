@@ -1,0 +1,152 @@
+@namespace Grubs.UI.InputHints
+
+@using Grubs.Gamemodes
+@using Grubs.Systems.GameMode
+
+@inherits Panel
+
+@if (!IsPlaying())
+{
+    return;
+}
+
+<root>
+    <CustomInputHint InputHintText="Move">
+        <ChildContent>
+            <CustomInputGlyph InputAction="left" Roll=@(-1f)/>
+            <CustomInputGlyph InputAction="right" Roll=@(1f)/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Aim">
+        <ChildContent>
+            <CustomInputGlyph InputAction="forward" Roll=@(1f)/>
+            <CustomInputGlyph InputAction="backward" Roll=@(-1f)/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Jump">
+        <ChildContent>
+            <CustomInputGlyph InputAction="jump" Roll=@(1f) Width=@(2.25f)/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Backflip">
+        <ChildContent>
+            <CustomInputGlyph InputAction="backflip" Roll=@(-1f) Width=@(2.25f)/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Precision Aim">
+        <ChildContent>
+            <CustomInputGlyph InputAction="precision_aim" Roll=@(1f) Width=@(1.75f)/>
+            <MouseIcon Roll=@(-3f) ShowArrows ShowMiddleMouse/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Toggle Inventory">
+        <ChildContent>
+            <CustomInputGlyph InputAction="toggle_inventory" Roll=@(-1f)/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Hide Input Hints">
+        <ChildContent>
+            <CustomInputGlyph InputAction="hide_input_hints" Roll=@(1f)/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Camera Pan">
+        <ChildContent>
+            <MouseIcon Roll=@(2f) HighlightRightClick/>
+        </ChildContent>
+    </CustomInputHint>
+    <CustomInputHint InputHintText="Camera Zoom">
+        <ChildContent>
+            <MouseIcon Roll=@(2f) ShowMiddleMouse HighlightMiddleMouse/>
+        </ChildContent>
+    </CustomInputHint>
+    @* <CustomInputHint InputOriginStrings=@GetButtonOriginsForActions("forward", "backward") InputHintText="Aim" /> *@
+    @* <div> *@
+    @*     @if (Input.UsingController) *@
+    @*     { *@
+    @*         <InputGlyph analog="LeftStickX" size="medium" /> *@
+    @*     } *@
+    @*     else *@
+    @*     { *@
+    @*         <InputGlyph action="left" size="medium" /> *@
+    @*         <InputGlyph action="right" size="medium" /> *@
+    @*     } *@
+    @*     <label>Move</label> *@
+    @* </div> *@
+    @* <div> *@
+    @*     @if (Input.UsingController) *@
+    @*     { *@
+    @*         <InputGlyph analog="RightStickY" size="medium" /> *@
+    @*     } *@
+    @*     else *@
+    @*     { *@
+    @*         <InputGlyph action="forward" size="medium" /> *@
+    @*         <InputGlyph action="backward" size="medium" /> *@
+    @*     } *@
+    @*     <label>Aim</label> *@
+    @* </div> *@
+    @* @if (!Input.UsingController) *@
+    @* { *@
+    @*     <div> *@
+    @*         <InputGlyph action="precision_aim" size="medium" /> *@
+    @*         <InputGlyph action="mouse_look" size="medium" /> *@
+    @*         <label>Precision Aim</label> *@
+    @*     </div> *@
+    @* } *@
+    @* <div> *@
+    @*     <InputGlyph action="jump" size="medium" /> *@
+    @*     <label>Jump</label> *@
+    @* </div> *@
+    @* <div> *@
+    @*     <InputGlyph action="backflip" size="medium" /> *@
+    @*     <label>Backflip (Hold)</label> *@
+    @* </div> *@
+    @* <div> *@
+    @*     <InputGlyph action="camera_pan" size="medium" /> *@
+    @*     @if (Input.UsingController) *@
+    @*     { *@
+    @*         <InputGlyph analog="RightStickX" size="medium" /> *@
+    @*     } *@
+    @*     <label>Camera Pan</label> *@
+    @* </div> *@
+    @* @if (Input.UsingController) *@
+    @* { *@
+    @*     <div> *@
+    @*         <InputGlyph action="camera_pan" size="medium" /> *@
+    @*         <InputGlyph analog="LeftStickY" size="medium" /> *@
+    @*         <label>Camera Zoom</label> *@
+    @*     </div> *@
+    @*     <div> *@
+    @*         <InputGlyph action="camera_reset" size="medium" /> *@
+    @*         <label>Camera Reset</label> *@
+    @*     </div> *@
+    @* } *@
+    @* else *@
+    @* { *@
+    @*     <div> *@
+    @*         <InputGlyph action="camera_reset" size="medium" /> *@
+    @*         <label>Camera Zoom/Reset</label> *@
+    @*     </div> *@
+    @* } *@
+    @* <div> *@
+    @*     <InputGlyph action="toggle_inventory" size="medium" /> *@
+    @*     <label>Toggle Inventory</label> *@
+    @* </div> *@
+</root>
+
+@code 
+{
+    private bool IsPlaying() => BaseGameMode.Current.GameStarted;
+    private bool ShouldHide { get; set; } = true;
+
+    public override void Tick()
+    {
+        if (Input.Pressed("hide_input_hints"))
+        {
+            ShouldHide = !ShouldHide;
+        }
+        
+        SetClass("hide", !ShouldHide);
+    }
+
+    protected override int BuildHash() => HashCode.Combine(IsPlaying(), ShouldHide, Input.UsingController);
+}

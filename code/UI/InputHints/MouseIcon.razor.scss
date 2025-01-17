@@ -1,0 +1,83 @@
+﻿MouseIcon {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    &.arrows {
+        padding: 4px 8px;
+    }
+    
+    .mouse {
+        position: relative;
+        width: 24px;
+        height: 36px;
+        background-color: #EFE8E8;
+        justify-content: center;
+        
+        .middle-mouse {
+            position: absolute;
+            background-color: #474747;
+            width: 4px;
+            height: 8px;
+            top: 4px;
+            z-index: 4;
+            
+            &.highlight {
+                background-color: #BF2626;
+                width: 6px;
+                height: 10px;
+            }
+        }
+        
+        .right-click {
+            position: absolute;
+            background-color: #BF2626;
+            width: 55%;
+            height: 55%;
+            right: -3px;
+            top: -3px;
+            z-index: 2;
+        }
+        .left-click {
+            position: absolute;
+            background-color: #BF2626;
+            width: 55%;
+            height: 55%;
+            left: -3px;
+            top: -3px;
+            z-index: 2;
+        }
+    }
+    
+    .upper {
+        position: absolute;
+        z-index: 2;
+        top: -16px;
+    }
+    
+    .left {
+        position: absolute;
+        z-index: 2;
+        left: -12px;
+        top: 8px;
+    }
+    
+    .right {
+        position: absolute;
+        z-index: 2;
+        right: -12px;
+        top: 8px;
+    }
+    
+    .bottom {
+        position: absolute;
+        z-index: 2;
+        bottom: -16px;
+    }
+    
+    i {
+        color: #EFE8E8;
+        font-size: 24px;
+    }
+}

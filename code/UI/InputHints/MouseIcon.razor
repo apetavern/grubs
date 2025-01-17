@@ -1,0 +1,53 @@
+﻿@namespace Grubs.UI.InputHints
+
+@inherits Panel
+
+<root class="@(ShowArrows ? "arrows" : "")">
+    @if (ShowArrows)
+    {
+        <div class="upper">
+            <i>arrow_drop_up</i>
+        </div>
+    }
+    <div>
+        @if (ShowArrows)
+        {
+            <div class="left">
+                <i>arrow_left</i>
+            </div>
+        }
+        <div class="mouse" style="transform: rotate(@(Roll)deg)">
+            @if (ShowMiddleMouse)
+            {
+                <div class="middle-mouse @(HighlightMiddleMouse ? "highlight" : "")"/>
+            }
+            @if (HighlightRightClick)
+            {
+                <div class="right-click"/>
+            }
+        </div>
+        @if (ShowArrows)
+        {
+            <div class="right">
+                <i>arrow_right</i>
+            </div>
+        }
+    </div>
+    @if (ShowArrows)
+    {
+        <div class="bottom">
+            <i>arrow_drop_down</i>
+        </div>
+    }
+</root>
+
+@code
+{
+    public bool ShowArrows { get; set; }
+    public bool ShowMiddleMouse { get; set; }
+    public bool HighlightLeftClick { get; set; }
+    public bool HighlightRightClick { get; set; }
+    public bool HighlightMiddleMouse { get; set; }
+
+    public float Roll { get; set; } = 0f;
+}

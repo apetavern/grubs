@@ -2,6 +2,7 @@
 
 @using Grubs.Systems.GameMode
 @using Grubs.Systems.Pawn
+@using Grubs.UI.InputHints
 
 @inherits Panel
 
@@ -15,6 +16,7 @@
         <div class="turn-indicator bg-@Color-med text-@Color-light">@(GameMode.ActivePlayer.Network.Owner.DisplayName)'s turn!</div>
         <div class="turn-timer bg-@Color-dark text-@Color-light">@TurnTimer</div>
     </div>
+    <InputHintsPanel />
     <InventoryDisplay />
     <PlayerList />
 </root>
