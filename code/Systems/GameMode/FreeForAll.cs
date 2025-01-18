@@ -136,6 +136,11 @@ public sealed class FreeForAll : BaseGameMode
 		{
 			grub.Health.TakeDamage( GrubsDamageInfo.FromDisconnect() );
 		}
+
+		if ( State is not FreeForAllState.Playing )
+		{
+			player.GameObject.Destroy();
+		}
 	}
 
 	protected override void OnGrubDamaged( Grub grub )

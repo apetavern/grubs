@@ -28,7 +28,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 	{
 		base.OnUpdate();
 
-		if ( _engineSound.IsValid )
+		if ( _engineSound.IsValid() )
 		{
 			_engineSound.Position = WorldPosition;
 		}
@@ -41,7 +41,9 @@ public sealed class AirstrikePlane : TargetedProjectile
 		if ( MathF.Abs( WorldPosition.x - ProjectileTarget.x ) < DropRange && !_fired )
 		{
 			_fired = true;
-			DropBombs();
+			
+			if ( !IsProxy )
+				DropBombs();
 		}
 
 		if ( MathF.Abs( WorldPosition.x ) > GrubsTerrain.Instance.WorldTextureLength * 1.1f && !_fading )
@@ -62,7 +64,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 		while ( Model.Tint.a > 0 )
 		{
 			Model.Tint = Model.Tint.WithAlpha( Model.Tint.a - Time.Delta );
-			if ( _engineSound.IsValid && _engineSound.Volume > 0 )
+			if ( _engineSound.IsValid() && _engineSound.Volume > 0 )
 				_engineSound.Volume -= Time.Delta;
 			await Task.Frame();
 		}
@@ -73,13 +75,13 @@ public sealed class AirstrikePlane : TargetedProjectile
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-		if ( _engineSound.IsValid )
+		if ( _engineSound.IsValid() )
 			_engineSound.Stop();
 
 	}
 
 	public async void DropBombs()
-	{
+	{`
 		Sound.Play( "plane_bay_door_open" );
 		for ( int i = 0; i < AmountToDrop; i++ )
 		{

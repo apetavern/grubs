@@ -167,9 +167,10 @@ public sealed class Inventory : LocalComponent<Inventory>
 	[Rpc.Broadcast]
 	public void Holster( int slot )
 	{
-		Log.Info( $"Holstering {slot} for {Player}." );
 		if ( !Player.IsValid() )
 			return;
+		
+		Log.Info( $"Holstering {slot} for {Player}." );
 		
 		var equipment = GetActiveEquipment( slot );
 
