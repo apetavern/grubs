@@ -122,21 +122,29 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 			return;
 		}
 		
-		GameObject targetObj = null;
 		if ( BaseGameMode.Current is FreeForAll freeForAllMode )
 		{
-			targetObj = freeForAllMode.ActivePlayer.ActiveGrub.GameObject;
-		}
-		else
-		{
-			targetObj = Player.Local?.ActiveGrub?.GameObject;	
+			SetFreeForAllDefaultTarget( freeForAllMode );
+			return;
 		}
 			
 		Target = new CameraTarget
 		{
-			Object = targetObj, 
+			Object = Player.Local?.ActiveGrub?.GameObject, 
 			Duration = 0f,
 		};
+	}
+
+	private void SetFreeForAllDefaultTarget( FreeForAll freeForAll )
+	{
+		if ( !freeForAll.IsValid() )
+			return;
+
+		if ( !freeForAll.ActivePlayer.IsValid() || !freeForAll.ActivePlayer.ActiveGrub.IsValid() )
+			return;
+		
+		var targetObj = freeForAll.ActivePlayer.ActiveGrub.GameObject;
+		Target = new CameraTarget { Object = targetObj, Duration = 0f, };
 	}
 
 	public void PanCamera()
