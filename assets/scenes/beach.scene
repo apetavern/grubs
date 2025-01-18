@@ -77,7 +77,7 @@
           "RenderTags": "",
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
-          "ZFar": 17500,
+          "ZFar": 20000,
           "ZNear": 10
         },
         {
@@ -508,7 +508,7 @@
           "__guid": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
           "Flags": 0,
           "Name": "Water",
-          "Position": "316.0363,4234.852,0",
+          "Position": "0,4032,0",
           "Scale": "200,200,200",
           "Tags": "nopathing",
           "Enabled": true,
@@ -647,7 +647,7 @@
           "__guid": "18077d33-611c-49cc-85cd-c91b45560358",
           "Flags": 0,
           "Name": "skydome",
-          "Position": "0,0,-256",
+          "Position": "0,4224,-256",
           "Enabled": true,
           "Components": [
             {
