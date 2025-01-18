@@ -9,8 +9,6 @@ InputHintsPanel {
     gap: 12px;
     padding: 16px;
     transition: all 0.15s ease-out;
-    // temp: hints are too hard to see against sky
-    background-color: rgba(0, 0, 0, 0.7);
     transform: translateX(0) rotate(0.5deg);
     
     &.hide {

@@ -144,6 +144,21 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "QualityLevel": "High"
+        },
+        {
+          "__type": "Sandbox.Vignette",
+          "__guid": "6ec415ab-8a87-4be2-838c-06eb4386d1c6",
+          "Center": "0.5,0.5",
+          "Color": "0,0,0,0.74",
+          "Intensity": 0.52,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Roundness": 0.24,
+          "Smoothness": 0.98
         }
       ]
     },
