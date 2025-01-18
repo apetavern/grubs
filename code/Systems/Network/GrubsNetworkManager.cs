@@ -17,7 +17,7 @@ public sealed class GrubsNetworkManager : Component, Component.INetworkListener
 		{
 			DestroyWhenHostLeaves = false,
 			AutoSwitchToBestHost = false,
-			MaxPlayers = 8,
+			MaxPlayers = 4,
 			Privacy = LobbyPrivacy.Public,
 		};
 		Log.Info( "Creating new Grubs lobby." );

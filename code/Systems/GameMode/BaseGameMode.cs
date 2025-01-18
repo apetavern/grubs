@@ -8,7 +8,7 @@ public abstract class BaseGameMode : Component
 	public static BaseGameMode Current { get; private set; }
 	public virtual string Name => "Game Mode";
 
-	protected virtual int MaxPlayers => 8;
+	protected virtual int MaxPlayers => 4;
 	
 	[Sync( SyncFlags.FromHost )] 
 	protected NetList<Player> Players { get; private set; } = new();
