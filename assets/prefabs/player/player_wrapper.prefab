@@ -19,7 +19,13 @@
           "component_id": "536dfbe2-68ea-42e6-9c3a-80e7f483a63e",
           "go": "9a501176-452d-4433-8c4f-a98d44060cfb",
           "component_type": "Inventory"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       },
       {
         "__type": "Grubs.Systems.Pawn.Inventory",
@@ -102,8 +108,18 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/teleporter/teleporter.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/airstrike/airstrike.prefab"
           }
         ],
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Player": {
           "_type": "component",
           "component_id": "2e4b2a05-4dec-42e8-9a75-609fe1d90a86",
@@ -121,12 +137,24 @@
         "Components": [
           {
             "__type": "Grubs.UI.FreeForAllDisplay",
-            "__guid": "4d4e7623-0803-4e17-aa48-789d870dfb2f"
+            "__guid": "4d4e7623-0803-4e17-aa48-789d870dfb2f",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null
           },
           {
             "__type": "Sandbox.ScreenPanel",
             "__guid": "741e0132-931a-4353-bcf9-5b7cb11c9abe",
             "AutoScreenScale": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "Opacity": 1,
             "Scale": 1,
             "ScaleStrategy": "ConsistentHeight",

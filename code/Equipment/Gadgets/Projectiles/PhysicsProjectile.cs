@@ -39,4 +39,23 @@ public class PhysicsProjectile : Projectile
 			WorldRotation = Rotation.LookAt( dir, Vector3.Up );
 		}
 	}
+
+	protected override void OnFixedUpdate()
+	{
+		if ( !PhysicsBody.IsValid() )
+			return;
+		
+		var velocity = PhysicsBody.Velocity;
+		if ( velocity.Length <= 0.1f )
+			return;
+
+		var targetRotation = Rotation.LookAt( velocity.Normal, Vector3.Up );
+		const float smoothTime = 0.5f;
+
+		var rotationVelocity = new Vector3();
+		var newRotation = Rotation.SmoothDamp(
+			PhysicsBody.WorldRotation, targetRotation, ref rotationVelocity, smoothTime, Time.Delta );
+		
+		PhysicsBody.GameObject.WorldRotation = newRotation;
+	}
 }

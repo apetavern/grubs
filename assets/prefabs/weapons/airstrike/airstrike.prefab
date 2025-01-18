@@ -4,16 +4,42 @@
     "Flags": 0,
     "Name": "airstrike",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "a149e547-0e19-4668-b9fb-1302f93c71b1",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/airstrikes/radio.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -21,7 +47,7 @@
         "__type": "Grubs.Equipment.Equipment",
         "__guid": "7f7fd7c9-3c0e-4758-bb82-d230f7987f7e",
         "CameraCanZoom": true,
-        "Data": "resources/equipment/weapons/concrete_garry.geq",
+        "Data": "resources/equipment/weapons/airstrike.geq",
         "HoldPose": "Holdable",
         "Icon": "models/weapons/airstrikes/bomb.vmdl.png",
         "Model": {
@@ -31,6 +57,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Airstrike",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": false,
         "SlotIndex": 0,
         "UnlockDelay": 3
@@ -38,6 +70,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
         "__guid": "e097e462-78e7-4afa-9bba-53322a1d1f26",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
@@ -58,9 +91,17 @@
         },
         "FiringType": "Complex",
         "MaxUses": 1,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OnFire": {
-          "__version": 7,
+          "__version": 9,
           "__guid": "0de7a252-49db-4bbe-8bc1-2019299578dd",
+          "__changeId": 0,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -170,10 +211,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/airstrike/airstrike_plane_bombs.prefab"
-              },
+              "Id": 18,
+              "Value": null,
               "DstId": 1,
               "DstName": "projectile"
             },
@@ -245,20 +284,29 @@
             }
           ],
           "Defaults": {
-            "$17._value": {
+            "$18._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/airstrike/airstrike_plane_bombs.prefab"
             }
           }
         },
-        "SecondaryFiringType": "Instant"
+        "OnFireFinished": null,
+        "SecondaryFiringType": "Instant",
+        "StartMultiplier": 1,
+        "UseSound": null
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
         "__guid": "9bcb6e78-91ba-4975-ae97-0a9d16b155b2",
         "Inputs": {
           "fire": "Call Airstrike"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
@@ -268,25 +316,62 @@
         "Name": "Airstrike - cursor",
         "Scale": "0.5,0.5,0.5",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "3c805679-d8e3-4ae6-be2c-a6adc0039bd3",
             "BodyGroups": 1,
+            "CreateAttachments": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
             "Model": "models/weapons/targetindicator/arrowindicator.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

@@ -100,7 +100,7 @@ public sealed class AirstrikePlane : TargetedProjectile
 			{
 				projectile.SourceId = SourceId;
 			}
-			await Task.DelaySeconds( 0.25f );
+			await Task.DelaySeconds( 0.1f );
 		}
 
 		Model.Set( "open", false );

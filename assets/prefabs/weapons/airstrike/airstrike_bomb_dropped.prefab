@@ -3,18 +3,45 @@
     "__guid": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
     "Flags": 0,
     "Name": "airstrike_bomb_dropped",
-    "Tags": "projectile",
+    "Scale": "0.75,0.5,0.5",
+    "Tags": "projectile,airstrike",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "a16ecdf2-9806-4135-9fd9-ebdb7bd1e17e",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/airstrikes/bomb.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -24,7 +51,14 @@
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
+        "Material": null,
         "ObscuredColor": "0,0,0,0.4",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Width": 0.25
       },
       {
@@ -35,10 +69,17 @@
         "ExplodeAfter": 0,
         "ExplodeOnCollision": true,
         "ExplodeOnDeath": false,
-        "ExplosionDamage": 75,
-        "ExplosionRadius": 200,
+        "ExplosionDamage": 35,
+        "ExplosionRadius": 125,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf"
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
@@ -51,6 +92,12 @@
           "go": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
           "component_type": "SkinnedModelRenderer"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "PhysicsBody": {
           "_type": "component",
           "component_id": "3209d1ec-aed8-449d-88e4-abb0ba6cd813",
@@ -68,12 +115,23 @@
         "Gravity": true,
         "LinearDamping": 1,
         "Locking": {
-          "Y": true,
-          "Yaw": true,
-          "Roll": true
+          "X": false,
+          "Y": false,
+          "Z": false,
+          "Pitch": false,
+          "Yaw": false,
+          "Roll": false
         },
-        "MassOverride": 0,
+        "MassCenterOverride": "12,0,0",
+        "MassOverride": 100,
         "MotionEnabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OverrideMassCenter": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
@@ -86,6 +144,12 @@
           "go": "b723cfa1-8917-429e-9a12-2be9953ee6f0",
           "component_type": "SkinnedModelRenderer"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ProjectileMovement": {
           "_type": "component",
           "component_id": "b5bdd59c-c716-4d41-ac02-c35ad177ebd9",
@@ -104,23 +168,67 @@
           "component_type": "Rigidbody"
         },
         "DampingFactor": 1,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Reflect": false
       },
       {
         "__type": "Sandbox.CapsuleCollider",
-        "__guid": "d30e7044-4711-4ec8-942e-835994b0da0e",
-        "End": "-14.49996,0,0",
+        "__guid": "2f7f7caf-da84-4a19-b41d-9fd41e38a062",
+        "End": "-14.5,0,0",
+        "Friction": null,
         "IsTrigger": false,
-        "Radius": 14.000001,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
+        "Radius": 14,
         "Start": "2,0,0",
-        "Static": false
+        "Static": false,
+        "Surface": null,
+        "SurfaceVelocity": "0,0,0"
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
