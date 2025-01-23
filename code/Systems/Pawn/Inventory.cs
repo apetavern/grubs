@@ -54,7 +54,10 @@ public sealed class Inventory : LocalComponent<Inventory>
 	
 			var equipment = go.Components.Get<Equipment.Equipment>();
 			if ( !equipment.IsValid() )
+			{
+				Log.Error( "Newly spawned equipment component is invalid." );
 				return;
+			}
 	
 			Equipment.Add( equipment );
 	
@@ -65,7 +68,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 	
 			if ( !Player.IsValid() || !grub.IsValid() )
 			{
-				Log.Warning( "Player's active grub is invalid - this is probably a networking bug." );
+				Log.Error( "Player's active grub is invalid - this is probably a networking bug." );
 				return;
 			}
 	
@@ -74,12 +77,12 @@ public sealed class Inventory : LocalComponent<Inventory>
 			equipment.Holster();
 		}
 	
-		//Sort by drop chance (0 drop chance gets put to the front)
+		// Sort by drop chance (0 drop chance gets put to the front)
 		Equipment = Equipment.OrderBy( x => x.Data.DropChance != 0 ? -x.Data.DropChance : -100f ).ToList();
-		//Put the tools at the front of the line
+		// Put the tools at the front of the line
 		Equipment = Equipment.OrderBy( x => x.Data.Type != EquipmentType.Tool ).ToList();
 	
-		//Re-set equipment slot indexes
+		// Re-set equipment slot indexes
 		foreach ( var item in Equipment )
 		{
 			item.SlotIndex = Equipment.IndexOf( item );
