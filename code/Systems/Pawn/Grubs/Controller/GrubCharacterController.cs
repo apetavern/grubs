@@ -30,15 +30,11 @@ public class GrubCharacterController : Component
 
 	public BBox BoundingBox => new( new Vector3( -Radius, -Radius, 0 ), new Vector3( Radius, Radius, Height ) );
 
-	// Set to query since there has been some unreliability during spawning.
 	[Sync] public Vector3 Velocity { get; private set; }
 
 	[Sync] public bool IsOnGround { get; set; }
 
 	[Sync] public float CurrentGroundAngle { get; set; }
-	
-	private TimeSince TimeSinceStarted { get; set; }
-	private bool HasSetVelocityHack { get; set; }
 
 	protected override void DrawGizmos()
 	{
@@ -50,19 +46,6 @@ public class GrubCharacterController : Component
 		if ( IsProxy )
 			Log.Error( $"Setting velocity from non-owner?! WTF?!" );
 		Velocity = velocity;
-	}
-
-	protected override void OnStart()
-	{
-		if ( IsProxy )
-			return;
-
-		if ( TimeSinceStarted <= 2f || HasSetVelocityHack ) 
-			return;
-		
-		Log.Info( "Setting velocity hack." );
-		Velocity = new Vector3( 0f );
-		HasSetVelocityHack = true;
 	}
 
 	/// <summary>
