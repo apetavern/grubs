@@ -73,6 +73,13 @@ public sealed class Grub : Component, IResolvable
 			var clothingModel = go.Components.Create<SkinnedModelRenderer>();
 			clothingModel.Model = Model.Load( clothingEntry.Clothing.Model );
 			clothingModel.BoneMergeTarget = Animator.GrubRenderer;
+
+			if ( clothingEntry.Clothing.AllowTintSelect )
+            {
+                var tintValue = clothingEntry.Tint?.Clamp( 0, 1 ) ?? clothingEntry.Clothing.TintDefault;
+                var tintColor = clothingEntry.Clothing.TintSelection.Evaluate( tintValue );
+                clothingModel.Tint = tintColor;
+            }
 		}
 		
 		Network.Refresh();
