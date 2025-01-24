@@ -84,8 +84,6 @@ public sealed class TargetingWeapon : Weapon
 				Direction = Vector3.Forward;
 			}
 
-			IsFiring = true;
-
 			if ( Input.AnalogMove.y > 0.5f )
 			{
 				Direction = Vector3.Backward;
@@ -120,7 +118,9 @@ public sealed class TargetingWeapon : Weapon
 
 					TimeSinceLastUsed = 0;
 
-					if ( Input.UsingController ) Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
+					if ( Input.UsingController ) 
+						Input.TriggerHaptics( 0, 0.25f, rightTrigger: 0.25f );
+					
 					break;
 				default:
 					IsFiring = false;

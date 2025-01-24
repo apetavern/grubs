@@ -147,6 +147,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 
 	public void HolsterActive()
 	{
+		Log.Info( $"Attempting to holster active weapon." );
 		Holster( ActiveSlot );
 	}
 	
