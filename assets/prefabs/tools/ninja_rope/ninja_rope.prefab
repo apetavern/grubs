@@ -5,22 +5,49 @@
     "Name": "ninja_rope",
     "Tags": "tool",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "6f7b90fb-7c35-4194-b8d0-772fd06bf7ac",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/tools/ninjarope/ninjarope.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Weapons.NinjaRopeWeapon",
         "__guid": "3cf1be69-0e64-4c63-a6a7-02ab81641b3a",
+        "AmmoType": "Numbered",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": true,
         "CanSwapDuringUse": true,
@@ -33,80 +60,21 @@
         },
         "FiringType": "Complex",
         "MaxUses": 3,
-        "OnFire": {
-          "__version": 7,
-          "__guid": "7e0b6cfc-d4b4-4662-b0fe-091b523a3431",
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.NinjaRopeWeapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.NinjaRopeWeapon"
-              },
-              "UserData": {
-                "Position": "-80,-96"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "192,-64"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 2,
-              "DstName": "charge"
-            },
-            {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/tools/ninja_rope/hook_tip.prefab"
-              },
-              "DstId": 2,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$3._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/tools/ninja_rope/hook_tip.prefab"
-            }
-          }
-        }
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnFire": null,
+        "OnFireFinished": null,
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/tools/ninja_rope/hook_tip.prefab"
+        },
+        "StartMultiplier": 1,
+        "UseSound": null
       },
       {
         "__type": "Grubs.Equipment.Equipment",
@@ -122,22 +90,60 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Ninja Rope",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": true,
-        "SlotIndex": 0
+        "SlotIndex": 0,
+        "UnlockDelay": 0
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
         "__guid": "98c8855b-1e12-46ab-800e-1a3ff2577d62",
         "Inputs": {
           "fire": "Fire Hook"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

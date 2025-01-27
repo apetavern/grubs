@@ -13,10 +13,12 @@ public sealed class Mountable : Component
 	public void Mount( Grub grub )
 	{
 		Grub = grub;
+		
 		foreach ( var collider in Grub.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
 		{
 			collider.Enabled = false;
 		}
+		
 		Grub.PlayerController.IsOnRope = true;
 		Grub.PlayerController.Enabled = false;
 		Grub.ActiveMountable = this;
@@ -32,6 +34,7 @@ public sealed class Mountable : Component
 		{
 			collider.Enabled = true;
 		}
+		
 		Grub.Animator.GrubRenderer.Set( "heightdiff", 0f );
 		Grub.Animator.GrubRenderer.Set( "aimangle", 0f );
 		Grub.Animator.GrubRenderer.Set( "onrope", false );
@@ -51,7 +54,7 @@ public sealed class Mountable : Component
 
 		// kidd: We really shouldn't have to check if the transforms are null, but we're getting NRE spammed somehow.
 		// Probably s&box issue, but don't know where to begin reproducing.
-		if ( Grub.IsValid() && Grub.Transform is not null && Transform is not null )
-			Grub.WorldPosition = WorldPosition;
+		// if ( Grub.IsValid() && Grub.Transform is not null && Transform is not null )
+		// 	Grub.WorldPosition = WorldPosition;
 	}
 }

@@ -12,7 +12,7 @@ public sealed class VecLineRenderer : Component, Component.ExecuteInEditor
 	private SceneLineObject _so;
 
 	[Group( "Points" ), Property, Sync]
-	public List<Vector3> Points { get; set; } = new List<Vector3>();
+	public List<Vector3> Points { get; set; } = new();
 
 	[Group( "Appearance" ), Property]
 	public Texture LineTexture { get; set; }

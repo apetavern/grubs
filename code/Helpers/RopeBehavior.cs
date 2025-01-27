@@ -1,127 +1,169 @@
 using Grubs.Common;
+using Grubs.Systems.Pawn.Grubs;
 
 namespace Grubs.Helpers;
 
+[Title("Grubs - Rope Behaviour"), Category("Grubs/Helpers")]
 public sealed class RopeBehavior : Component
 {
+	[Sync] private List<Vector3> CornerObjects { get; set; } = new();
+	
+	// The LineRenderer for the rope.
+	[Property] private VecLineRenderer RopeRenderer { get; set; }
+	
+	// The spring joint, between the hook tip and the mountable.
+	[Property] private SpringJoint SpringJoint { get; set; }
+	
+	// The hook tip object.
 	[Property] public GameObject HookObject { get; set; }
-	[Property, Sync] public List<Vector3> CornerObjects { get; set; } = new();
-	[Property] public VecLineRenderer RopeRenderer { get; set; }
+	
+	// The mountable component.
+	[Property] private Mountable Mountable { get; set; }
+	
+	// The rigidbody for the mountable object.
+	[Property] private Rigidbody Rigidbody { get; set; }
+	
+	// The grub who fired this rope.
+	public Grub Grub { get; set; }
+	
+	// The direction between the grub and the hook tip.
+	public Vector3 HookDirection { get; private set; }
+	
 	[Property] private float RopeLength { get; set; }
 
 	private GameObject MuzzlePoint { get; set; }
-	private Mountable MountComponent { get; set; }
-	private SpringJoint JointComponent { get; set; }
-	public Vector3 HookDirection { get; private set; }
-
 	private GameObject AttachPoint { get; set; }
 
-	protected override void OnAwake()
+	private const float RopeClimbSpeed = 256f;
+	private const float RopeSwingSpeed = 6.5f;
+	private const float GrubMountPositionOffsetY = 15f;
+	private const float GrubMountPositionOffsetX = 10f;
+
+	protected override void OnEnabled()
 	{
 		if ( IsProxy )
 			return;
-
-		if ( !HookObject.IsValid() )
-			return;
-
-		AttachPoint = new GameObject();
-
-		if ( !AttachPoint.IsValid() )
-			return;
-
-		JointComponent = Components.Get<SpringJoint>();
-
-		if ( !JointComponent.IsValid() )
-			return;
 		
-		JointComponent.MaxLength = Vector3.DistanceBetween( WorldPosition, HookObject.WorldPosition );
-		JointComponent.Body = HookObject;
-		RopeLength = JointComponent.MaxLength;
+		Log.Info( "Starting RopeBehavior." );
+		
+		Log.Info( $"HookObject: {HookObject.Name}" );
+		Log.Info( $"SpringJoint: {SpringJoint}" );
+		Log.Info( $"Mountable: {Mountable}" );
+		
+		// Setup the initial length of the spring joint - the distance between the hook and the grub.
+		var initialLength = Vector3.DistanceBetween( HookObject.WorldPosition, Grub.WorldPosition );
+		RopeLength = initialLength;
+		
+		SpringJoint.MaxLength = initialLength;
+		
+		// Set the mountable to the Grub's location, and mount the grub on it.
+		
+		// Note to self: this is what breaks everything.
+		// Mountable.WorldPosition = Grub.WorldPosition;
+		Mountable.Mount( Grub );
 
-		MountComponent = Components.Get<Mountable>();
-
-		MuzzlePoint = new GameObject( true, "MuzzlePoint" );
+		// Enable the rigidbody.
+		var body = GetComponent<Rigidbody>( true );
+		if ( body.IsValid() )
+			body.Enabled = true;
+		
+		AttachPoint = new GameObject();
+		MuzzlePoint = new GameObject( true, "Muzzle Point" );
 	}
 
 	protected override void OnDestroy()
 	{
 		AttachPoint?.Destroy();
+		MuzzlePoint?.Destroy();
 	}
 
 	protected override void OnUpdate()
 	{
-		DrawRope();
-
 		if ( IsProxy )
 			return;
+		
+		DrawRope();
+		
+		HookDirection = (SpringJoint.Body.WorldPosition - WorldPosition).Normal;
+		RopeLength -= Input.AnalogMove.x * Time.Delta * RopeClimbSpeed;
+		RopeLength = RopeLength.Clamp( SpringJoint.MinLength, 10000 );
+		
+		if ( Rigidbody.IsValid() )
+			Rigidbody.Velocity += Vector3.Forward * Input.AnalogMove.y * -RopeSwingSpeed;
+		
+		SpringJoint.MaxLength = RopeLength;
 
-		if ( MuzzlePoint is null || !MountComponent.IsValid() || !MountComponent.Grub.IsValid() )
+		Grub.WorldPosition = Mountable.WorldPosition;
+				
+		if ( MuzzlePoint is null || !Grub.IsValid() )
 			return;
-
-		MuzzlePoint.WorldPosition = WorldPosition + HookDirection * 15f + MountComponent.Grub.WorldRotation.Left * 10f;
-		HookDirection = (JointComponent.Body.WorldPosition - WorldPosition).Normal;
-
-		var tr = Scene.Trace.Ray(
-				WorldPosition - HookDirection,
-				AttachPoint.WorldPosition + HookDirection )
-			.WithoutTags( "player", "tool", "projectile" )
-			.IgnoreGameObjectHierarchy( GameObject )
-			.Run();
-
-		if ( tr.Hit )
-		{
-			AttachPoint.WorldPosition = tr.HitPosition + tr.Normal;
-			CornerObjects.Add( tr.HitPosition + tr.Normal );
-			JointComponent.MaxLength = RopeLength;
-		}
-
-		if ( CornerObjects.Count > 1 )
-		{
-			var tr2 = Scene.Trace.Ray(
-					WorldPosition - HookDirection,
-					CornerObjects[^2] + HookDirection * 2f )
-				.WithoutTags( "player", "tool", "projectile" )
-				.IgnoreGameObjectHierarchy( GameObject )
-				.Run();
-
-			if ( !tr2.Hit )
-			{
-				AttachPoint.WorldPosition = CornerObjects[^2];
-				CornerObjects.RemoveAt( CornerObjects.Count - 1 );
-			}
-		}
-		else
-		{
-			var tr2 = Scene.Trace.Ray(
-					WorldPosition - HookDirection,
-					HookObject.WorldPosition + HookDirection * 2f )
-				.WithoutTags( "player", "tool", "projectile" )
-				.IgnoreGameObjectHierarchy( GameObject )
-				.Run();
-
-			if ( !tr2.Hit )
-			{
-				AttachPoint.WorldPosition = HookObject.WorldPosition;
-				if ( CornerObjects.Count > 0 )
-				{
-					CornerObjects.RemoveAt( CornerObjects.Count - 1 );
-				}
-			}
-		}
-
-		JointComponent.Body = AttachPoint;
-
-		JointComponent.MaxLength = RopeLength;
-
-		RopeLength -= Input.AnalogMove.x * Time.Delta * 100f;
-		RopeLength = RopeLength.Clamp( 20f, 10000f );
-
-		Components.Get<Rigidbody>().Velocity += Vector3.Forward * Input.AnalogMove.y * -6.5f;
+		
+		MuzzlePoint.WorldPosition = WorldPosition + HookDirection * GrubMountPositionOffsetY 
+		                                          + Grub.WorldRotation.Left * GrubMountPositionOffsetX;
+		
+		// HookDirection = (JointComponent.Body.WorldPosition - WorldPosition).Normal;
+		//
+		// var tr = Scene.Trace.Ray(
+		// 		WorldPosition - HookDirection,
+		// 		AttachPoint.WorldPosition + HookDirection )
+		// 	.WithoutTags( "player", "tool", "projectile" )
+		// 	.IgnoreGameObjectHierarchy( GameObject )
+		// 	.Run();
+		//
+		// if ( tr.Hit )
+		// {
+		// 	AttachPoint.WorldPosition = tr.HitPosition + tr.Normal;
+		// 	CornerObjects.Add( tr.HitPosition + tr.Normal );
+		// 	JointComponent.MaxLength = RopeLength;
+		// }
+		//
+		// if ( CornerObjects.Count > 1 )
+		// {
+		// 	var tr2 = Scene.Trace.Ray(
+		// 			WorldPosition - HookDirection,
+		// 			CornerObjects[^2] + HookDirection * 2f )
+		// 		.WithoutTags( "player", "tool", "projectile" )
+		// 		.IgnoreGameObjectHierarchy( GameObject )
+		// 		.Run();
+		//
+		// 	if ( !tr2.Hit )
+		// 	{
+		// 		AttachPoint.WorldPosition = CornerObjects[^2];
+		// 		CornerObjects.RemoveAt( CornerObjects.Count - 1 );
+		// 	}
+		// }
+		// else
+		// {
+		// 	var tr2 = Scene.Trace.Ray(
+		// 			WorldPosition - HookDirection,
+		// 			HookObject.WorldPosition + HookDirection * 2f )
+		// 		.WithoutTags( "player", "tool", "projectile" )
+		// 		.IgnoreGameObjectHierarchy( GameObject )
+		// 		.Run();
+		//
+		// 	if ( !tr2.Hit )
+		// 	{
+		// 		AttachPoint.WorldPosition = HookObject.WorldPosition;
+		// 		if ( CornerObjects.Count > 0 )
+		// 		{
+		// 			CornerObjects.RemoveAt( CornerObjects.Count - 1 );
+		// 		}
+		// 	}
+		// }
+		//
+		// JointComponent.Body = AttachPoint;
+		//
+		// JointComponent.MaxLength = RopeLength;
+		//
+		// RopeLength -= Input.AnalogMove.x * Time.Delta * 100f;
+		// RopeLength = RopeLength.Clamp( 20f, 10000f );
+		//
+		// Components.Get<Rigidbody>().Velocity += Vector3.Forward * Input.AnalogMove.y * -6.5f;
 	}
 
-	public void DrawRope()
+	private void DrawRope()
 	{
-		if ( RopeRenderer is null )
+		if ( !RopeRenderer.IsValid() )
 			return;
 
 		switch ( CornerObjects.Count )
@@ -130,19 +172,18 @@ public sealed class RopeBehavior : Component
 				RopeRenderer.Points.Clear();
 				RopeRenderer.Points.Add( HookObject.WorldPosition );
 				RopeRenderer.Points.AddRange( CornerObjects );
-				RopeRenderer.Points.Add( MuzzlePoint.WorldPosition );
 				break;
 			case 1:
 				RopeRenderer.Points.Clear();
 				RopeRenderer.Points.Add( HookObject.WorldPosition );
 				RopeRenderer.Points.Add( CornerObjects[0] );
-				RopeRenderer.Points.Add( MuzzlePoint.WorldPosition );
 				break;
 			default:
 				RopeRenderer.Points.Clear();
 				RopeRenderer.Points.Add( HookObject.WorldPosition );
-				RopeRenderer.Points.Add( MuzzlePoint.WorldPosition );
 				break;
 		}
+
+		RopeRenderer.Points.Add( MuzzlePoint.WorldPosition );
 	}
 }

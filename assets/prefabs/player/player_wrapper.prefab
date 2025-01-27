@@ -112,6 +112,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/airstrike/airstrike.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/tools/ninja_rope/ninja_rope.prefab"
           }
         ],
         "OnComponentDestroy": null,

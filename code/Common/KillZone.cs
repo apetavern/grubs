@@ -33,8 +33,10 @@ public class KillZone : Component, Component.ITriggerListener
 		else if ( other.GameObject.Components.TryGet( out Mountable mountable, FindMode.EverythingInSelfAndAncestors ) )
 		{
 			var mountableGrub = mountable.Grub;
+			if ( mountableGrub.IsValid() )
+				mountableGrub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( other.WorldPosition ), true );
+			
 			mountable.Dismount();
-			mountableGrub.Health.TakeDamage( GrubsDamageInfo.FromKillZone( other.WorldPosition ), true );
 		}
 		else
 		{

@@ -3,18 +3,22 @@
 [Title( "Grubs - Ninja Rope Weapon" ), Category( "Equipment" )]
 public class NinjaRopeWeapon : Weapon
 {
-	public static float Timeout = 3f;
+	[Property] private GameObject ProjectilePrefab { get; set; }
+	
+	public const float TimeOut = 3f;
 
 	protected override void HandleComplexFiringInput()
 	{
-		if ( Equipment.Grub is not { } grub )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
+		var grub = Equipment.Grub;
 		if ( Input.Pressed( "fire" ) && !IsFiring )
 		{
 			IsFiring = true;
 			TimeSinceLastUsed = 0f;
-			OnFire.Invoke( 100 );
+			
+			FireHookTip();
 
 			if ( WeaponInfoPanel is not null )
 			{
@@ -28,13 +32,21 @@ public class NinjaRopeWeapon : Weapon
 		{
 			if ( grub.ActiveMountable is null )
 			{
-				Log.Warning( "Trying to unmount, but ActiveMountable is null?" );
+				Log.Warning( "Trying to unmount, but ActiveMountable is null" );
 				return;
 			}
-
+			
 			grub.ActiveMountable.Dismount();
 			FireFinished();
 		}
+	}
+
+	private void FireHookTip()
+	{
+		if ( !ProjectilePrefab.IsValid() )
+			return;
+
+		SpawnProjectile( this, ProjectilePrefab, 75 );
 	}
 
 	public override void OnHolster()
@@ -51,7 +63,7 @@ public class NinjaRopeWeapon : Weapon
 		base.OnUpdate();
 
 		// Use a shot if we missed and it's been a few seconds.
-		if ( IsFiring && Equipment.Grub?.ActiveMountable is null && TimeSinceLastUsed > Timeout )
+		if ( IsFiring && Equipment.Grub?.ActiveMountable is null && TimeSinceLastUsed > TimeOut )
 			FireFinished();
 	}
 
@@ -59,10 +71,10 @@ public class NinjaRopeWeapon : Weapon
 	{
 		if ( WeaponInfoPanel is not null )
 		{
-			WeaponInfoPanel.Inputs = new Dictionary<string, string>()
-				{
-					{ "fire", "Fire Hook" }
-				};
+			WeaponInfoPanel.Inputs = new Dictionary<string, string>
+			{
+				{ "fire", "Fire Hook" }
+			};
 		}
 
 		base.FireFinished();
