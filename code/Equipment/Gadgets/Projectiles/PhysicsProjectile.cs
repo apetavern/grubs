@@ -3,11 +3,16 @@
 [Title( "Grubs - Physics Projectile" ), Category( "Equipment" )]
 public class PhysicsProjectile : Projectile
 {
-	[Property] public bool Droppable { get; set; } = false;
-	[Property] public required Rigidbody PhysicsBody { get; set; }
-	[Property] public bool SetPositionOnStart { get; set; } = true;
-	[Property] public bool SetRotationOnStart { get; set; } = false;
-	[Property] public float DirectionRandomizer { get; set; } = 0f;
+	[Property] public Rigidbody PhysicsBody { get; set; }
+	[Property] private  bool Droppable { get; set; } = false;
+	[Property] private bool SetPositionOnStart { get; set; } = true;
+	[Property] private bool SetRotationOnStart { get; set; } = false;
+	[Property] private float DirectionRandomizer { get; set; } = 0f;
+	
+	/// <summary>
+	/// Whether this projectile should rotate towards the velocity over time.
+	/// </summary>
+	[Property] private bool RotateTowardsVelocity { get; set; } = false;
 
 	public override bool Resolved => PhysicsBody.Velocity.IsNearlyZero( 0.1f );
 
@@ -43,6 +48,9 @@ public class PhysicsProjectile : Projectile
 	protected override void OnFixedUpdate()
 	{
 		if ( !PhysicsBody.IsValid() )
+			return;
+
+		if ( !RotateTowardsVelocity )
 			return;
 		
 		var velocity = PhysicsBody.Velocity;
