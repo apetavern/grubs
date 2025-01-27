@@ -217,7 +217,7 @@ public sealed class FreeForAll : BaseGameMode
 		
 		var inv = player.Components.Get<Inventory>();
 		inv.Player = player;
-		inv.InitializeWeapons( player.ActiveGrub, GrubsConfig.InfiniteAmmo );
+		inv.InitializeWeapons();
 			
 		PlayerQueue.Add( player );
 	}

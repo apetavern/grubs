@@ -40,10 +40,12 @@ public sealed class Inventory : LocalComponent<Inventory>
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]
-	public void InitializeWeapons( Grub grub, bool infiniteAmmo )
+	public void InitializeWeapons()
 	{
 		if ( IsProxy )
 			return;
+
+		var infiniteAmmo = GrubsConfig.InfiniteAmmo;
 	
 		EquipmentActive = false;
 	
@@ -66,14 +68,14 @@ public sealed class Inventory : LocalComponent<Inventory>
 			if ( infiniteAmmo )
 				equipment.Ammo = -1;
 	
-			if ( !Player.IsValid() || !grub.IsValid() )
+			if ( !Player.IsValid() )
 			{
 				Log.Error( "Player's active grub is invalid - this is probably a networking bug." );
 				return;
 			}
 	
 			equipment.SlotIndex = slotIndex;
-			equipment.Deploy( grub );
+			equipment.Initialize( Player );
 			equipment.Holster();
 		}
 	

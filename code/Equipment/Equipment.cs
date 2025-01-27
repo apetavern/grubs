@@ -1,6 +1,7 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment.Weapons;
 using Grubs.Pawn;
+using Grubs.Systems.Pawn;
 using Grub = Grubs.Systems.Pawn.Grubs.Grub;
 
 namespace Grubs.Equipment;
@@ -27,6 +28,7 @@ public class Equipment : Component
 
 	public bool Deployed { get; set; }
 
+	public Player Player { get; set; }
 	public Grub Grub { get; set; }
 
 	// public int RoundsUntilUnlock => (UnlockDelay - Gamemodes.Gamemode.GetCurrent().RoundsPassed).Clamp( 0, int.MaxValue );
@@ -56,6 +58,17 @@ public class Equipment : Component
 
 		var show = Grub.PlayerController.ShouldShowWeapon() && Deployed;
 		Model.Enabled = show;
+	}
+
+	public void Initialize( Player player )
+	{
+		if ( !player.IsValid() )
+			return;
+		
+		Player = player;
+		GameObject.SetParent( player.GameObject );
+		Model.Enabled = false;
+		Deployed = false;
 	}
 
 	public void Deploy( Grub grub )
