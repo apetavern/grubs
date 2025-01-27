@@ -55,6 +55,8 @@ public partial class ExplosionHelper : Component
 
 		grub.CharacterController.Punch( (dir + Vector3.Up * 2f) * force );
 		grub.CharacterController.ReleaseFromGround();
+		
+		GrubFollowCamera.Local?.QueueTarget( grub.GameObject );
 	}
 
 	private void HandlePhysicsExplosion( Rigidbody body, Vector3 position, float force )

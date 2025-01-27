@@ -1,110 +1,176 @@
-using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Pawn;
 using Grubs.Terrain;
 
-namespace Grubs;
+namespace Grubs.Equipment.Gadgets.Projectiles;
 
 [Title( "Grubs - Airstrike Plane" ), Category( "Equipment" )]
 public sealed class AirstrikePlane : TargetedProjectile
 {
-	[Property] public float DropRange { get; set; } = 25f;
 	[Property] public GameObject DropPrefab { get; set; }
-	[Property] public int AmountToDrop { get; set; } = 3;
 	[Property] public bool ApplyVelocity { get; set; }
+	
+	[Property] private float DropRange { get; set; } = 25f;
+	[Property] private int AmountToDrop { get; set; } = 3;
 
-	private bool _fired;
-	private SoundHandle _engineSound;
-	private bool _fading;
+	private SoundHandle EngineSoundHandle { get; set; }
+	private bool Fired { get; set; }
+	private bool IsFadingOut { get; set; }
+	private bool HasClosedHatch { get; set; }
+	
+	private TimeSince TimeSinceBombDropped { get; set; }
+	private int BombsDropped { get; set; } = 0;
+
+	protected override void OnStart()
+	{
+		EngineSoundHandle = Sound.Play( "plane_engine_loop" );
+	}
 
 	public override void ShareData()
 	{
 		base.ShareData();
-		WorldPosition = ProjectileTarget.WithZ( GrubsTerrain.Instance.WorldTextureHeight * 1.1f ).WithX( -Direction.x * GrubsTerrain.Instance.WorldTextureLength * 1.05f );
+		
+		WorldPosition = ProjectileTarget
+			.WithX( -Direction.x * GrubsTerrain.Instance.WorldTextureLength * 1.05f )
+			.WithZ( GrubsTerrain.Instance.WorldTextureHeight * 1.1f );
 		WorldRotation = Rotation.LookAt( Direction );
-		_engineSound = Sound.Play( "plane_engine_loop" );
 	}
 
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
 
-		if ( _engineSound.IsValid() )
+		UpdateEngineSound();
+		UpdateHatchAnimation();
+		
+		if ( !IsProxy )
+			UpdateBombDropping();
+
+
+		if ( MathF.Abs( WorldPosition.x ) > GrubsTerrain.Instance.WorldTextureLength * 1.1f && !IsFadingOut )
 		{
-			_engineSound.Position = WorldPosition;
+			IsFadingOut = true;
+			_ = FadeOut();
 		}
 
-		if ( MathF.Abs( WorldPosition.x - ProjectileTarget.x ) < DropRange * 1.25f && !_fired )
-		{
-			Model.Set( "open", true );
-		}
+		WorldPosition += Direction * ProjectileSpeed * Time.Delta;
 
-		if ( MathF.Abs( WorldPosition.x - ProjectileTarget.x ) < DropRange && !_fired )
-		{
-			_fired = true;
-			
-			if ( !IsProxy )
-				DropBombs();
-		}
-
-		if ( MathF.Abs( WorldPosition.x ) > GrubsTerrain.Instance.WorldTextureLength * 1.1f && !_fading )
-		{
-			_fading = true;
-			FadeOut();
-		}
-		else
-		{
-			WorldPosition += Direction * ProjectileSpeed * Time.Delta;
-		}
-
-		WorldRotation = WorldRotation.Angles().WithRoll( MathF.Sin( Time.Now * 2f ) * 5f );
+		const float speed = 2f;
+		const float swivel = 5f;
+		var roll = MathF.Sin( Time.Now * speed ) * swivel;
+		WorldRotation = WorldRotation.Angles().WithRoll( roll );
 	}
 
-	async void FadeOut()
+	private void UpdateEngineSound()
+	{
+		if ( !EngineSoundHandle.IsValid() )
+			return;
+		
+		EngineSoundHandle.Position = WorldPosition;
+	}
+
+	private void UpdateHatchAnimation()
+	{
+		if ( !Model.IsValid() || Fired )
+			return;
+
+		var dropBreadth = DropRange * 1.25f;
+
+		if ( MathF.Abs( WorldPosition.x - ProjectileTarget.x ) >= dropBreadth )
+			return;
+	
+		Model.Set( "open", true );
+	}
+
+	private async Task FadeOut()
 	{
 		while ( Model.Tint.a > 0 )
 		{
 			Model.Tint = Model.Tint.WithAlpha( Model.Tint.a - Time.Delta );
-			if ( _engineSound.IsValid() && _engineSound.Volume > 0 )
-				_engineSound.Volume -= Time.Delta;
+			if ( EngineSoundHandle.IsValid() && EngineSoundHandle.Volume > 0 )
+				EngineSoundHandle.Volume -= Time.Delta;
 			await Task.Frame();
 		}
 
+		await Task.MainThread();
 		GameObject.Destroy();
+	}
+
+	private void DropBomb()
+	{
+		if ( !DropPrefab.IsValid() )
+			return;
+		
+		var bomb = DropPrefab.Clone();
+		bomb.NetworkSpawn();
+		
+		GrubFollowCamera.Local?.QueueTarget( bomb, 5f );
+
+		var dropPoint = Model.GetAttachment( "droppoint" ).GetValueOrDefault();
+		bomb.WorldPosition = dropPoint.Position;
+		bomb.WorldRotation = dropPoint.Rotation;
+
+		var body = bomb.GetComponent<Rigidbody>();
+		if ( body.IsValid() && ApplyVelocity )
+			body.Velocity = Direction * ProjectileSpeed;
+		
+		var projectile = bomb.GetComponent<Projectile>();
+		if ( projectile.IsValid() )
+			projectile.SourceId = SourceId;
+	}
+
+	[Rpc.Broadcast]
+	private void HatchOpenEffects()
+	{
+		Sound.Play( "plane_bay_door_open" );
+		Tags.Add( "notarget" );
+	}
+
+	[Rpc.Broadcast]
+	private void HatchCloseEffects()
+	{
+		if ( !Model.IsValid() )
+			return;
+		
+		HasClosedHatch = true;
+		Model.Set( "open", false );
+	}
+
+	private void UpdateBombDropping()
+	{
+		const float timeBetweenBombDrops = 0.1f;
+
+		if ( MathF.Abs( WorldPosition.x - ProjectileTarget.x ) < DropRange && !Fired )
+		{
+			HatchOpenEffects();
+			Fired = true;
+		}
+
+		if ( !Fired )
+			return;
+
+		if ( TimeSinceBombDropped > timeBetweenBombDrops && BombsDropped < AmountToDrop )
+		{
+			BombsDropped += 1;
+
+			Log.Info( $"Dropping a bomb ({BombsDropped}): {TimeSinceBombDropped}" );
+
+			DropBomb();
+			TimeSinceBombDropped = 0f;
+			return;
+		}
+
+		if ( HasClosedHatch ) 
+			return;
+		
+		HasClosedHatch = true;
+		HatchCloseEffects();
 	}
 
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-		if ( _engineSound.IsValid() )
-			_engineSound.Stop();
-
-	}
-
-	public async void DropBombs()
-	{
-		Sound.Play( "plane_bay_door_open" );
-		for ( int i = 0; i < AmountToDrop; i++ )
-		{
-			var bomb = DropPrefab.Clone();
-			bomb.NetworkSpawn();
-
-			if ( i == AmountToDrop / 2 )
-				GrubFollowCamera.Local.QueueTarget( bomb, 5f );
-
-			bomb.WorldPosition = Model.GetAttachment( "droppoint" ).Value.Position;
-			bomb.WorldRotation = WorldRotation * Rotation.FromPitch( 25f );
-			if ( ApplyVelocity && bomb.Components.TryGet( out Rigidbody body ) )
-			{
-				body.Velocity = Direction * ProjectileSpeed;
-			}
-
-			if ( bomb.Components.TryGet( out Projectile projectile ) )
-			{
-				projectile.SourceId = SourceId;
-			}
-			await Task.DelaySeconds( 0.1f );
-		}
-
-		Model.Set( "open", false );
+		
+		if ( EngineSoundHandle.IsValid() )
+			EngineSoundHandle.Stop();
 	}
 }

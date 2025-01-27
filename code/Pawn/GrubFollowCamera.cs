@@ -106,13 +106,17 @@ public sealed class GrubFollowCamera : LocalComponent<GrubFollowCamera>
 		if ( !BaseGameMode.Current.GameStarted )
 			return;
 
-		if ( TargetQueue.Count != 0 && (Target.Duration == 0f || _timeSinceTargeted > Target.Duration ) )
+		if ( TargetQueue.Count != 0 && (Target.Duration == 0f || _timeSinceTargeted > Target.Duration || !Target.Object.IsValid() ) )
 		{
-			Target = TargetQueue.Dequeue();
+			var newTarget = TargetQueue.Dequeue();
+			if ( !newTarget.Object.IsValid() )
+				return;
+
+			Target = newTarget;
 			_timeSinceTargeted = 0f;
 		}
 
-		if ( TargetQueue.Count != 0 || _timeSinceTargeted <= Target.Duration ) 
+		if ( TargetQueue.Count != 0 || (_timeSinceTargeted <= Target.Duration && Target.Object.IsValid()) ) 
 			return;
 
 		var activeProjectile = Scene.GetAllComponents<Projectile>().FirstOrDefault( p => p.Active && !p.Tags.Has( "notarget" ) );

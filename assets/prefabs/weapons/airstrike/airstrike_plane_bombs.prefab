@@ -61,8 +61,8 @@
         "Width": 0.25
       },
       {
-        "__type": "Grubs.AirstrikePlane",
-        "__guid": "b7187a40-14ce-4d18-803b-8d532f3cdfc9",
+        "__type": "Grubs.Equipment.Gadgets.Projectiles.AirstrikePlane",
+        "__guid": "d312874d-43f5-4d71-826f-4e4b7d6ff27a",
         "AmountToDrop": 5,
         "ApplyVelocity": true,
         "DropPrefab": {
@@ -84,7 +84,7 @@
         "OnComponentUpdate": null,
         "ProjectileMovement": {
           "_type": "component",
-          "component_id": "b7187a40-14ce-4d18-803b-8d532f3cdfc9",
+          "component_id": "d312874d-43f5-4d71-826f-4e4b7d6ff27a",
           "go": "f9bbc1e6-7437-4c98-bd97-2c1a5a8a56b9",
           "component_type": "AirstrikePlane"
         },
@@ -130,10 +130,15 @@
                   "mode": "Mirrored"
                 }
               ],
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "1,0,0,0"
             },
             "ApplyAlpha": true,
@@ -182,14 +187,24 @@
             "Lifetime": {
               "Type": "Range",
               "Evaluation": "Particle",
-              "CurveA": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveA": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "2,5,0,0"
             },
             "MaxParticles": 5000,
@@ -214,14 +229,24 @@
             "Roll": {
               "Type": "Range",
               "Evaluation": "Particle",
-              "CurveA": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveA": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "0,360,0,0"
             },
             "Scale": {
@@ -236,10 +261,15 @@
                   "mode": "Mirrored"
                 }
               ],
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "25,30,0,0"
             },
             "SequenceId": 0,
@@ -251,14 +281,24 @@
             "StartVelocity": {
               "Type": "Range",
               "Evaluation": "Particle",
-              "CurveA": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveA": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "10,70,0,0"
             },
             "Stretch": 0,
@@ -360,10 +400,15 @@
                   "mode": "Mirrored"
                 }
               ],
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "1,0,0,0"
             },
             "ApplyAlpha": true,
@@ -412,14 +457,24 @@
             "Lifetime": {
               "Type": "Range",
               "Evaluation": "Particle",
-              "CurveA": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveA": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "2,5,0,0"
             },
             "MaxParticles": 5000,
@@ -444,14 +499,24 @@
             "Roll": {
               "Type": "Range",
               "Evaluation": "Particle",
-              "CurveA": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveA": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "0,360,0,0"
             },
             "Scale": {
@@ -466,10 +531,15 @@
                   "mode": "Mirrored"
                 }
               ],
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "25,30,0,0"
             },
             "SequenceId": 0,
@@ -481,14 +551,24 @@
             "StartVelocity": {
               "Type": "Range",
               "Evaluation": "Particle",
-              "CurveA": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
-              "CurveB": {
-                "rangex": "0,0",
-                "rangey": "0,0"
-              },
+              "CurveA": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
+              "CurveB": [
+                {
+                  "x": 0.5,
+                  "y": 0.5,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
+                }
+              ],
               "Constants": "10,70,0,0"
             },
             "Stretch": 0,
