@@ -1,18 +1,18 @@
 {
   "RootObject": {
-    "__guid": "769b66b4-7e45-4da1-b1f9-8c8bd1e0fc96",
+    "__guid": "8cca64aa-4412-437a-9318-35bfa23712e1",
     "Flags": 0,
     "Name": "bazooka",
     "Enabled": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "aed4a248-db1d-4095-be25-8ddc9d0f39e9",
+        "__guid": "6095c3b6-41a3-4aab-b515-f049d018a1a8",
         "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
-        "CreateAttachments": true,
-        "CreateBoneObjects": true,
+        "CreateAttachments": false,
+        "CreateBoneObjects": false,
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/weapons/bazooka/bazooka.vmdl",
@@ -45,15 +45,15 @@
       },
       {
         "__type": "Grubs.Equipment.Equipment",
-        "__guid": "244b90b8-a5e2-4823-b1f2-538ee077acf7",
+        "__guid": "d6af91ba-d3d5-45f2-a7a2-827acaf006d1",
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/bazooka.geq",
         "HoldPose": "Bazooka",
         "Icon": "models/weapons/bazooka/bazooka.vmdl_c.png",
         "Model": {
           "_type": "component",
-          "component_id": "aed4a248-db1d-4095-be25-8ddc9d0f39e9",
-          "go": "769b66b4-7e45-4da1-b1f9-8c8bd1e0fc96",
+          "component_id": "6095c3b6-41a3-4aab-b515-f049d018a1a8",
+          "go": "8cca64aa-4412-437a-9318-35bfa23712e1",
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Bazooka",
@@ -69,7 +69,7 @@
       },
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
-        "__guid": "c23a2505-024e-4c1a-b85b-90ab66474edf",
+        "__guid": "d11379da-8a10-45c9-a8c0-cfc8e35605c1",
         "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
@@ -77,16 +77,15 @@
         "Cooldown": 2,
         "Equipment": {
           "_type": "component",
-          "component_id": "244b90b8-a5e2-4823-b1f2-538ee077acf7",
-          "go": "769b66b4-7e45-4da1-b1f9-8c8bd1e0fc96",
+          "component_id": "d6af91ba-d3d5-45f2-a7a2-827acaf006d1",
+          "go": "8cca64aa-4412-437a-9318-35bfa23712e1",
           "component_type": "Equipment"
         },
         "FiringType": "Charged",
         "MaxUses": 1,
         "Muzzle": {
           "_type": "gameobject",
-          "go": "fdb61952-513d-41fe-b810-61afd4f35b29",
-          "prefab": null
+          "go": "65c15e70-7e0a-4c46-9980-cc4153ed19ad"
         },
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -96,8 +95,8 @@
         "OnComponentUpdate": null,
         "OnFire": {
           "__version": 9,
-          "__guid": "e799fa0e-ad43-4423-9508-1c0e933037a8",
-          "__changeId": 17,
+          "__guid": "1cf78456-2c6a-4399-a3ef-013c8cb7a4a7",
+          "__changeId": 15,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -108,72 +107,69 @@
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "12,48"
-              }
+              "Type": "input"
             },
             {
               "Id": 1,
+              "Type": "grubs.spawn_projectile",
+              "UserData": {
+                "Position": "204,-0"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "UserData": {
+                "Position": "0,-108"
+              }
+            },
+            {
+              "Id": 4,
               "Type": "scene.get",
               "Properties": {
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "-60,-108"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "228,-84"
-              }
-            },
-            {
-              "Id": 10,
-              "Type": "scene.ref",
-              "UserData": {
-                "Position": "24,-72"
+                "Position": "-96,-144"
               }
             }
           ],
           "Links": [
             {
               "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
               "SrcName": "_signal",
-              "DstId": 3,
+              "DstId": 1,
               "DstName": "_signal"
             },
             {
               "SrcId": 0,
               "SrcName": "charge",
-              "DstId": 3,
+              "DstId": 1,
               "DstName": "charge"
             },
             {
-              "SrcId": 10,
+              "SrcId": 3,
               "SrcName": "_result",
-              "DstId": 3,
+              "DstId": 1,
               "DstName": "projectile"
             },
             {
-              "SrcId": 1,
+              "SrcId": 4,
               "SrcName": "_result",
-              "DstId": 3,
+              "DstId": 1,
               "DstName": "source"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 4,
+              "DstName": "_this"
             }
           ],
           "Defaults": {
-            "$10.gameobject": {
+            "$3.gameobject": {
               "_type": "gameobject",
-              "go": "be07f4a5-bc0f-47da-b84b-70f6edb415f3"
+              "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
             }
           }
         },
@@ -184,58 +180,16 @@
     ],
     "Children": [
       {
-        "__guid": "fdb61952-513d-41fe-b810-61afd4f35b29",
-        "Flags": 4,
-        "Name": "muzzle",
-        "Position": "19,0,10",
-        "Enabled": true
-      },
-      {
-        "__guid": "b9623d22-e536-45df-987a-ea84601d80c9",
-        "Flags": 4,
+        "__guid": "6dac65e6-f32c-4d87-acb8-887e0f2d212d",
+        "Flags": 0,
         "Name": "hold_L",
         "Enabled": true
       },
       {
-        "__guid": "0ff878b9-f756-4375-aece-23b9952a40e9",
+        "__guid": "65c15e70-7e0a-4c46-9980-cc4153ed19ad",
         "Flags": 0,
         "Name": "muzzle",
-        "Position": "19.4487,0.485087,9.937422",
-        "Enabled": true
-      },
-      {
-        "__guid": "663419d8-80ad-4ba6-a003-11f0c4006940",
-        "Flags": 0,
-        "Name": "muzzle",
-        "Position": "19.4487,0.485087,9.937422",
-        "Enabled": true
-      },
-      {
-        "__guid": "31ba1018-fb2f-4928-bbbb-8ad9da9ac39a",
-        "Flags": 0,
-        "Name": "muzzle",
-        "Position": "19.4487,0.485087,9.937422",
-        "Enabled": true
-      },
-      {
-        "__guid": "4811a036-9a9b-4f34-8f31-15c348aa9258",
-        "Flags": 8,
-        "Name": "muzzle",
-        "Position": "19.4487,0.485087,9.937422",
-        "Enabled": true
-      },
-      {
-        "__guid": "46c989ca-81aa-445f-b96e-62ce48758ce5",
-        "Flags": 8,
-        "Name": "muzzle",
-        "Position": "19.4487,0.485087,9.937422",
-        "Enabled": true
-      },
-      {
-        "__guid": "0860f507-3476-4e4a-9251-e3e79eccc89c",
-        "Flags": 8,
-        "Name": "muzzle",
-        "Position": "19.4487,0.485087,9.937422",
+        "Position": "19,0,10",
         "Enabled": true
       }
     ],
