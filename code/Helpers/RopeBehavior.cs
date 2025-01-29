@@ -46,20 +46,20 @@ public sealed class RopeBehavior : Component
 		
 		Log.Info( "Starting RopeBehavior." );
 		
-		Log.Info( $"HookObject: {HookObject.Name}" );
-		Log.Info( $"SpringJoint: {SpringJoint}" );
-		Log.Info( $"Mountable: {Mountable}" );
-		
 		// Setup the initial length of the spring joint - the distance between the hook and the grub.
 		var initialLength = Vector3.DistanceBetween( HookObject.WorldPosition, Grub.WorldPosition );
 		RopeLength = initialLength;
 		
 		SpringJoint.MaxLength = initialLength;
+
+		// Use manual local frames for the spring joint so that the spring starts "expanded" to some degree
+		// between the hook tip and the mountable.
+		SpringJoint.Attachment = Joint.AttachmentMode.LocalFrames;
+		SpringJoint.LocalFrame1 = Mountable.GetComponent<SphereCollider>().LocalTransform;
+		SpringJoint.LocalFrame2 = GetComponent<SphereCollider>().LocalTransform;
 		
 		// Set the mountable to the Grub's location, and mount the grub on it.
-		
-		// Note to self: this is what breaks everything.
-		// Mountable.WorldPosition = Grub.WorldPosition;
+		Mountable.WorldPosition = Grub.WorldPosition;
 		Mountable.Mount( Grub );
 
 		// Enable the rigidbody.
@@ -101,64 +101,54 @@ public sealed class RopeBehavior : Component
 		MuzzlePoint.WorldPosition = WorldPosition + HookDirection * GrubMountPositionOffsetY 
 		                                          + Grub.WorldRotation.Left * GrubMountPositionOffsetX;
 		
-		// HookDirection = (JointComponent.Body.WorldPosition - WorldPosition).Normal;
-		//
-		// var tr = Scene.Trace.Ray(
-		// 		WorldPosition - HookDirection,
-		// 		AttachPoint.WorldPosition + HookDirection )
-		// 	.WithoutTags( "player", "tool", "projectile" )
-		// 	.IgnoreGameObjectHierarchy( GameObject )
-		// 	.Run();
-		//
-		// if ( tr.Hit )
-		// {
-		// 	AttachPoint.WorldPosition = tr.HitPosition + tr.Normal;
-		// 	CornerObjects.Add( tr.HitPosition + tr.Normal );
-		// 	JointComponent.MaxLength = RopeLength;
-		// }
-		//
-		// if ( CornerObjects.Count > 1 )
-		// {
-		// 	var tr2 = Scene.Trace.Ray(
-		// 			WorldPosition - HookDirection,
-		// 			CornerObjects[^2] + HookDirection * 2f )
-		// 		.WithoutTags( "player", "tool", "projectile" )
-		// 		.IgnoreGameObjectHierarchy( GameObject )
-		// 		.Run();
-		//
-		// 	if ( !tr2.Hit )
-		// 	{
-		// 		AttachPoint.WorldPosition = CornerObjects[^2];
-		// 		CornerObjects.RemoveAt( CornerObjects.Count - 1 );
-		// 	}
-		// }
-		// else
-		// {
-		// 	var tr2 = Scene.Trace.Ray(
-		// 			WorldPosition - HookDirection,
-		// 			HookObject.WorldPosition + HookDirection * 2f )
-		// 		.WithoutTags( "player", "tool", "projectile" )
-		// 		.IgnoreGameObjectHierarchy( GameObject )
-		// 		.Run();
-		//
-		// 	if ( !tr2.Hit )
-		// 	{
-		// 		AttachPoint.WorldPosition = HookObject.WorldPosition;
-		// 		if ( CornerObjects.Count > 0 )
-		// 		{
-		// 			CornerObjects.RemoveAt( CornerObjects.Count - 1 );
-		// 		}
-		// 	}
-		// }
-		//
-		// JointComponent.Body = AttachPoint;
-		//
-		// JointComponent.MaxLength = RopeLength;
-		//
-		// RopeLength -= Input.AnalogMove.x * Time.Delta * 100f;
-		// RopeLength = RopeLength.Clamp( 20f, 10000f );
-		//
-		// Components.Get<Rigidbody>().Velocity += Vector3.Forward * Input.AnalogMove.y * -6.5f;
+		var tr = Scene.Trace.Ray(
+				WorldPosition - HookDirection,
+				AttachPoint.WorldPosition + HookDirection )
+			.WithoutTags( "player", "tool", "projectile" )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.Run();
+		
+		if ( tr.Hit )
+		{
+			AttachPoint.WorldPosition = tr.HitPosition + tr.Normal;
+			CornerObjects.Add( tr.HitPosition + tr.Normal );
+			SpringJoint.MaxLength = RopeLength;
+		}
+		
+		if ( CornerObjects.Count > 1 )
+		{
+			var tr2 = Scene.Trace.Ray(
+					WorldPosition - HookDirection,
+					CornerObjects[^2] + HookDirection * 2f )
+				.WithoutTags( "player", "tool", "projectile" )
+				.IgnoreGameObjectHierarchy( GameObject )
+				.Run();
+
+			if ( tr2.Hit ) 
+				return;
+			
+			AttachPoint.WorldPosition = CornerObjects[^2];
+			CornerObjects.RemoveAt( CornerObjects.Count - 1 );
+		}
+		else
+		{
+			var tr2 = Scene.Trace.Ray(
+					WorldPosition - HookDirection,
+					HookObject.WorldPosition + HookDirection * 2f )
+				.WithoutTags( "player", "tool", "projectile" )
+				.IgnoreGameObjectHierarchy( GameObject )
+				.Run();
+
+			if ( tr2.Hit ) 
+				return;
+			
+			AttachPoint.WorldPosition = HookObject.WorldPosition;
+			
+			if ( CornerObjects.Count > 0 )
+			{
+				CornerObjects.RemoveAt( CornerObjects.Count - 1 );
+			}
+		}
 	}
 
 	private void DrawRope()

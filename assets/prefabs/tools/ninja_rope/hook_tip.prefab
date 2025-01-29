@@ -223,13 +223,13 @@
             "__enabled": false,
             "AngularDamping": 1,
             "Gravity": true,
-            "LinearDamping": 1,
+            "LinearDamping": 2,
             "Locking": {
               "X": false,
               "Y": true,
               "Z": false,
               "Pitch": false,
-              "Yaw": false,
+              "Yaw": true,
               "Roll": false
             },
             "MassCenterOverride": "0,0,0",
@@ -329,7 +329,7 @@
             "BreakTorque": 0,
             "Damping": 0.5,
             "EnableCollision": false,
-            "Frequency": 2,
+            "Frequency": 4,
             "LocalFrame1": {
               "Position": "0,0,0",
               "Scale": "0,0,0",
