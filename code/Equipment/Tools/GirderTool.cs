@@ -34,6 +34,9 @@ public sealed class GirderTool : Tool
 		if ( IsProxy || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
 
+		if ( !CursorVisual.IsValid() || !CursorCollider.IsValid() )
+			return;
+
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
 		CursorVisual.Enabled = Equipment.Deployed;
 		CursorCollider.Enabled = Equipment.Deployed;
@@ -43,12 +46,12 @@ public sealed class GirderTool : Tool
 		if ( !Equipment.Deployed )
 			return;
 
-		if ( Equipment.Grub == null )
-			return;
-
 		var player = Equipment.Grub.Owner;
+		if ( !player.IsValid() )
+			return;
+		
 		CursorVisual.WorldPosition = player.MousePosition;
-		CursorVisual.WorldRotation *= Rotation.FromPitch( (Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f) );
+		CursorVisual.WorldRotation *= Rotation.FromPitch( Input.UsingController ? Input.GetAnalog( InputAnalog.LeftStickY ) : Input.MouseWheel.y * 10f );
 
 		if ( Input.UsingController )
 			GrubFollowCamera.Local?.PanCamera();
@@ -77,12 +80,18 @@ public sealed class GirderTool : Tool
 
 	private bool CheckValidPlacement()
 	{
-		if ( !Equipment.Grub.IsValid() )
+		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return false;
 
 		var grub = Equipment.Grub;
 
+		if ( !grub.Owner.IsValid() )
+			return false;
+		
 		if ( grub.Owner.MousePosition.Distance( grub.WorldPosition ) > CursorRange )
+			return false;
+
+		if ( !CursorCollider.IsValid() || !GameObject.IsValid() )
 			return false;
 
 		var trLocation = Scene.Trace.Body( CursorCollider.KeyframeBody, grub.Owner.MousePosition )
@@ -90,6 +99,8 @@ public sealed class GirderTool : Tool
 			.Run();
 
 		var terrain = Terrain.GrubsTerrain.Instance;
+		if ( !terrain.IsValid() )
+			return false;
 		var exceedsTerrainHeight = GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture && trLocation.EndPosition.z >= terrain.WorldTextureHeight + 64f;
 
 		return !trLocation.Hit && !exceedsTerrainHeight;

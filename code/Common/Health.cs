@@ -38,13 +38,13 @@ public partial class Health : Component
 	{
 		if ( Components.TryGet( out Grub grub ) )
 		{
-			if ( BaseGameMode.Current.IsGrubActive( grub ) )
+			if ( BaseGameMode.Current?.IsGrubActive( grub ) ?? false )
 				BaseGameMode.Current.GrubDamaged( grub );
 			
 			if ( !immediate )
 			{
 				if ( Networking.IsHost )
-					BaseGameMode.Current.GrubDamaged( grub );
+					BaseGameMode.Current?.GrubDamaged( grub );
 
 				DamageQueue.Enqueue( damageInfo );
 				return;

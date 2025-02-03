@@ -93,6 +93,10 @@ public sealed class RopeBehavior : Component
 		
 		SpringJoint.MaxLength = RopeLength;
 
+		// It's possible the mountable was destroyed before this has been cleaned up.
+		if ( !Mountable.IsValid() )
+			return;
+		
 		Grub.WorldPosition = Mountable.WorldPosition;
 				
 		if ( MuzzlePoint is null || !Grub.IsValid() )

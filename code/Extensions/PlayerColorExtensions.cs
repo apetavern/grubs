@@ -20,6 +20,22 @@ public static class PlayerColorExtensions
 		};
 	}
 
+	public static Color DarkColor( this PlayerColor color )
+	{
+		return color switch
+		{
+			PlayerColor.Lavender => Parse( "#3F2454" ),
+			PlayerColor.Cerulean => Parse( "#213967" ),
+			PlayerColor.Sage => Parse( "#28554D" ),
+			PlayerColor.Khaki => Parse( "#4B593F" ),
+			PlayerColor.Copper => Parse( "#67483E" ),
+			PlayerColor.Coral => Parse( "#8B4D4D" ),
+			PlayerColor.Teal => Parse( "#2D5753" ),
+			PlayerColor.Mauve => Parse( "#614A58" ),
+			_ => throw new ArgumentOutOfRangeException( nameof(color), color, null )
+		};
+	}
+
 	private static Color Parse( string hex )
 	{
 		return global::Color.Parse( hex ) ?? global::Color.White;

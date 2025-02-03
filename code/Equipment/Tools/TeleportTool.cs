@@ -78,11 +78,17 @@ public class TeleportTool : Tool
 
 		var grub = Equipment.Grub;
 
+		if ( !grub.CharacterController.IsValid() || !grub.Owner.IsValid() || !GameObject.IsValid() )
+			return false;
+
 		var trLocation = Scene.Trace.Box( grub.CharacterController.BoundingBox, grub.Owner.MousePosition, grub.Owner.MousePosition )
 			.IgnoreGameObject( GameObject )
 			.Run();
 
 		var terrain = Terrain.GrubsTerrain.Instance;
+		if ( !terrain.IsValid() )
+			return false;
+		
 		var inTerrain = terrain.PointInside( trLocation.EndPosition );
 		var exceedsTerrainHeight = trLocation.EndPosition.z >= terrain.WorldTextureHeight + 64f;
 
