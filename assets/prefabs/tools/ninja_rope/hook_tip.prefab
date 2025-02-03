@@ -350,44 +350,6 @@
             "OnComponentStart": null,
             "OnComponentUpdate": null,
             "StartBroken": false
-          },
-          {
-            "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "6f4ee78f-d3c9-43bc-98bc-73f3038333dd",
-            "AnimationGraph": null,
-            "BodyGroups": 1,
-            "BoneMergeTarget": null,
-            "CreateAttachments": false,
-            "CreateBoneObjects": false,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
-            "Model": "models/weapons/grenade/grenade.vmdl",
-            "Morphs": {},
-            "OnComponentDestroy": null,
-            "OnComponentDisabled": null,
-            "OnComponentEnabled": null,
-            "OnComponentFixedUpdate": null,
-            "OnComponentStart": null,
-            "OnComponentUpdate": null,
-            "Parameters": {
-              "bools": {},
-              "ints": {},
-              "floats": {},
-              "vectors": {},
-              "rotations": {}
-            },
-            "RenderOptions": {
-              "GameLayer": true,
-              "OverlayLayer": false,
-              "BloomLayer": false,
-              "AfterUILayer": false
-            },
-            "RenderType": "On",
-            "Sequence": {
-              "Name": null
-            },
-            "Tint": "1,1,1,1",
-            "UseAnimGraph": true
           }
         ]
       }
