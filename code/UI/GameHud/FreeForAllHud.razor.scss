@@ -1,41 +1,58 @@
 ﻿@import '../common.scss';
 
 FreeForAllHud {
-    position: relative;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  .header {
+    position: absolute;
     width: 100%;
-    height: 100%;
-    
-    .header {
-        position: absolute;
-        width: 100%;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: column;
-        
-        .turn-indicator {
-            font-size: 42px;
-            padding: 20px 56px 12px;
-            z-index: 4;
-            transform: rotate(1deg) translateY(-8px);
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+      
+    .turn-indicator {
+      font-size: 42px;
+      padding: 20px 56px 12px;
+      z-index: 4;
+      transform: rotate(1deg) translateY(-8px);
 
-            label {
-                transform: rotate(-0.1deg) translateY(-8px);
-                text-overflow: ellipsis;
-            }
-        }
-        
-        .turn-timer {
-            font-size: 56px;
-            width: 90px;
-            padding: 4px 16px;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            transform: rotate(-1deg) translateY(-10px);
-            
-            > label {
-                transform: rotate(1deg) translateY(-10px);
-            }
-        }
+      label {
+        transform: rotate(-0.1deg) translateY(-8px);
+        text-overflow: ellipsis;
+      }
     }
+      
+    .turn-timer {
+      font-size: 56px;
+      width: 90px;
+      padding: 4px 16px;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transform: rotate(-1deg) translateY(-10px);
+      
+      > label {
+        transform: rotate(1deg) translateY(-10px);
+      }
+    }
+  }
+  
+  .sandbox-mode-hint {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    flex-direction: column;
+    background-color: $camo-dark;
+    color: $camo-light;
+    padding: 12px 24px;
+    gap: 8px;
+    align-items: center;
+    
+    > label {
+      font-size: 42px;
+      font-weight: bold;
+    }
+  }
 }

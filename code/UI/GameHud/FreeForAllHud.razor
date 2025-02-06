@@ -19,6 +19,17 @@
     <InputHintsPanel />
     <InventoryDisplay />
     <PlayerList />
+    @if (GameMode.IsSandboxMode)
+    {
+        <div class="sandbox-mode-hint">
+            <label>Sandbox Mode</label>
+            <CustomInputHint InputHintText="Return to Menu">
+                <ChildContent>
+                    <CustomInputGlyph InputAction="exit_sandbox"/>
+                </ChildContent>
+            </CustomInputHint>
+        </div>
+    }
 </root>
 
 @code
@@ -29,6 +40,22 @@
     private string Color => ActivePlayer.PlayerColor.ToString();
 
     private string TurnTimer => GameMode?.TimeUntilTurnOver.Relative.CeilToInt().Clamp(0, int.MaxValue).ToString("0");
+
+    public override void Tick()
+    {
+        base.Tick();
+
+        if (!Networking.IsHost)
+            return;
+
+        if (Input.Pressed("exit_sandbox"))
+        {
+            if (BaseGameMode.Current.IsValid() && BaseGameMode.Current is FreeForAll ffa)
+            {
+                ffa.ResetGameMode();
+            }
+        }
+    }
 
     protected override int BuildHash()
     {

@@ -377,9 +377,11 @@ public sealed class FreeForAll : BaseGameMode
 		_rotateCount++;
 	}
 
-	private void ResetGameMode()
+	public void ResetGameMode()
 	{
 		Log.Info( "Resetting FFA mode to defaults." );
+
+		State = FreeForAllState.GameOver;
 		
 		PlayerQueue.Clear();
 		ActivePlayer = null;
@@ -403,6 +405,10 @@ public sealed class FreeForAll : BaseGameMode
 			} );
 		
 		_rotateCount = 0;
+
+		GrubsConfig.InfiniteAmmo = false;
+		GrubsConfig.KeepGameAlive = false;
+		IsSandboxMode = false;
 		
 		GrubsTerrain.Instance.Init();
 	}
