@@ -44,13 +44,13 @@ FreeForAllHud {
     top: 32px;
     right: 32px;
     flex-direction: column;
-    background-color: $camo-dark;
     color: $camo-light;
-    padding: 12px 24px;
-    gap: 8px;
+    gap: 16px;
     align-items: center;
     
     > label {
+      background-color: $camo-dark;
+      padding: 12px 24px;
       font-size: 42px;
       font-weight: bold;
     }

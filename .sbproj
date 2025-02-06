@@ -559,7 +559,7 @@
       }
     ],
     "TickRate": 120,
-    "StartupScene": "scenes/main_menu.scene",
+    "StartupScene": "scenes/beach.scene",
     "LaunchMode": "Normal"
   }
 }
