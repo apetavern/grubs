@@ -11,13 +11,6 @@ public partial class GrubsTerrain
 
 	[Property] public Curve TerrainCurve { get; set; }
 
-	public TimeSince
-		LastChanged
-	{
-		get;
-		set;
-	} // Ugly fix for playtest. 5 second delay before the game can be started to allow terrain to load. 
-
 	public void ResetTerrain()
 	{
 		WorldTextureLength = 0;
@@ -38,7 +31,6 @@ public partial class GrubsTerrain
 
 		CreateNoiseMap();
 		// GenerateWorldTextureSdf();
-		LastChanged = 0f;
 	}
 
 	private bool[,] TerrainMap;

@@ -1,167 +1,338 @@
 ﻿@import '../common.scss';
 
 GameLanding {
+  position: absolute;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  font-family: $font-primary;
+  pointer-events: all;
+  cursor: none;
+  flex-direction: column;
+
+  Chatbox {
     position: absolute;
-    opacity: 1;
-    width: 100%;
-    height: 100%;
-    font-family: $font-primary;
-    pointer-events: all;
-    cursor: none;
+    right: 64px;
+    top: 112px;
+    width: 800px;
+    height: 445px;
+    z-index: 1;
+    
+    > .canvas {
+      height: 400px;
+    }
+  }
+
+  GameRules {
+    position: absolute;
+    z-index: 100;
+    color: white;
+    background-color: rgba(20, 20, 20, .75);
+    transition: opacity 0.15s ease;
+  }
+    
+  .game-info {
+    color: $camo-light;
+    align-items: center;
     flex-direction: column;
+    margin: 64px;
+    gap: 6px;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.8));
+    
+    > .lobby {
+      background-color: $camo-darker;
+      width: 300px;
+      padding: 6px 12px;
+      font-size: 47px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    > .gamemode-name {
+      background-color: $camo-dark;
+      width: 300px;
+      padding: 4px 8px;
+      font-size: 32px;
+      text-align: center;
+    }
+  }
 
-    Chatbox {
+  .player-cards {
+    position: absolute;
+    margin-left: 64px;
+    gap: 24px;
+    flex-direction: column;
+    top: 248px;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.8));
+  }
+
+  .terrain-preview {
+    position: absolute;
+    top: 64px;
+    left: 480px;
+    width: 800px;
+    height: 492px;
+    flex-direction: column;
+    align-items: flex-start;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.8));
+    
+    > label {
+      font-size: 36px;
+      background-color: $camo-darker;
+      color: $camo-light;
+      padding: 6px 12px;
+    }
+    
+    > TerrainPreview {
+      border: 8px $camo-darker;
+      
+      > i {
         position: absolute;
-        right: 100;
-        top: 150;
-        z-index: 1;
-    }
+        top: 4px;
+        right: 0;
+        transform: rotateZ(1deg);
+        padding: 4px;
+        font-size: 32px;
+        color: $camo-light;
+        background-color: $camo-darker;
+        filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.8));
 
-    GameRules {
-        position: absolute;
-        z-index: 100;
-        color: white;
-        background-color: rgba(20, 20, 20, .75);
-        transition: opacity 0.15s ease;
-    }
-
-    .body {
-        width: 100%;
-        height: 100%;
-        opacity: 1;
-        transition: all 0.15s;
-        border-radius: 16px;
-        padding-top: 24px;
-        flex-direction: column;
-
-        &.hide {
-            opacity: 0;
+        &:hover {
+          background-color: darken($camo-dark, 15%);
+          sound-in: ui_button_hover;
         }
+      }
+    }
+  }
+  
+  .rules-button {
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.8));
+    position: absolute;
+    bottom: 64px;
+    left: 480px;
+    background-color: $camo-dark;
+    color: $camo-light;
+    font-size: 64px;
+    padding: 8px 24px;
+    gap: 16px;
 
-        button {
-            position: absolute;
-            width: 200px;
-            justify-content: center;
-            align-items: center;
-            transform: skewX(-4deg);
-            color: white;
-            border-radius: 4px;
-            background-color: rgb(66, 118, 62);
-            box-shadow: 2px 2px 8px black;
-
-            &.disabled {
-                background-color: rgb(43, 74, 41);
-                color: #808080;
-
-                >i {
-                    color: #808080;
-                }
-            }
-
-            >label {
-                transform: skewX(1deg);
-            }
-
-            >i {
-                font-size: 42px;
-                transform: skewX(1deg);
-            }
-
-            &:not(.disabled):hover {
-                sound-in: ui_button_hover;
-                right: 102px;
-            }
-
-            &.settings {
-                bottom: 225px;
-                right: 100px;
-                width: 200px;
-                height: 50px;
-                text-shadow: 2px 2px black;
-                font-size: 22px;
-            }
-
-            &.start {
-                bottom: 100px;
-                right: 100px;
-                width: 200px;
-                height: 100px;
-                text-shadow: 4px 4px black;
-                font-size: 64px;
-
-                &.disabled {
-                    width: 450px;
-                    font-size: 56px;
-                }
-            }
-        }
+    &:hover {
+      sound-in: ui_button_hover;
+      transform: scale(1.02);
     }
 
-    .upper {
-        flex-direction: row;
+    > i {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  
+  .controls {
+    position: absolute;
+    left: 64px;
+    bottom: 64px;
+    flex-direction: column;
+    gap: 12px;
+    
+    .start-button {
+      filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.8));
+      background-color: $camo-dark;
+      color: $camo-light;
+      font-weight: bold;
+      width: 300px;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      padding: 8px 16px;
+      gap: 8px;
+      
+      > label {
+        padding-right: 8px;
+      }
+      
+      &:hover {
+        sound-in: ui_button_hover;
+        transform: scale(1.02);
+      }
+      
+      > i {
         align-items: center;
-        width: 100%;
-        height: 72px;
-
-        .header {
-            position: relative;
-            left: -50px;
-            width: 220px;
-            height: 72px;
-            background-color: rgb(66, 118, 62);
-            align-items: center;
-            justify-content: flex-end;
-            transform: skewX(-4deg);
-            z-index: 4;
-
-            >label {
-                font-size: 48px;
-                color: white;
-                margin-right: 32px;
-                transform: skewX(1deg);
-                text-shadow: 2px 2px black;
-            }
-        }
-
-        .gamemode-name {
-            position: relative;
-            background-color: rgb(233, 239, 232);
-            left: -55px;
-            height: 42px;
-            width: 150px;
-            transform: skewX(-4deg);
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-
-            >label {
-                font-size: 24px;
-                font-weight: light;
-            }
-        }
+        justify-content: center;
+      }
     }
+    
+    .playground-button {
+      color: $camo-light;
+      width: 300px;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      gap: 8px;
+      padding: 4px 16px;
+      border: 4px solid $camo-light;
 
-    .middle {
-        margin: 48px 0;
+      > label {
+        padding-right: 8px;
+      }
 
-        .player-cards {
-            margin-left: 32px;
-            gap: 24px;
-            flex-direction: column;
-        }
+      &:hover {
+        sound-in: ui_button_hover;
+        transform: scale(1.02);
+      }
+
+      > i {
+        align-items: center;
+        justify-content: center;
+      }
     }
+  }
 
-    .terrain-preview {
-        position: absolute;
-        top: 40%;
-        right: 100px;
-        width: 533px;
-        height: 300px;
-        border: 4px rgb(233, 239, 232);
-        border-radius: 4px;
-    }
-
-    &.hide {
-        opacity: 0;
-    }
+  &.hide {
+    opacity: 0;
+  }
 }
+//    .bottom-buttons {
+//        position: absolute;
+//        bottom: 100px;
+//        right: 100px;
+//        gap: 16px;
+//    }
+//
+//    .body {
+//        width: 100%;
+//        height: 100%;
+//        opacity: 1;
+//        transition: all 0.15s;
+//        border-radius: 16px;
+//        padding-top: 24px;
+//        flex-direction: column;
+//
+//        &.hide {
+//            opacity: 0;
+//        }
+//
+//        button {
+//            justify-content: center;
+//            align-items: center;
+//            transform: skewX(-4deg);
+//            color: white;
+//            border-radius: 4px;
+//            background-color: rgb(66, 118, 62);
+//            box-shadow: 2px 2px 8px black;
+//            padding: 8px 16px;
+//
+//            &.disabled {
+//                background-color: rgb(43, 74, 41);
+//                color: #808080;
+//
+//                >i {
+//                    color: #808080;
+//                }
+//            }
+//
+//            >label {
+//                transform: skewX(1deg);
+//            }
+//
+//            >i {
+//                font-size: 36px;
+//                transform: skewX(1deg);
+//            }
+//
+//            &:not(.disabled):hover {
+//                sound-in: ui_button_hover;
+//                right: 102px;
+//            }
+//
+//            &.settings {
+//                position: absolute;
+//                bottom: 225px;
+//                right: 100px;
+//                width: 200px;
+//                height: 50px;
+//                text-shadow: 2px 2px black;
+//                font-size: 28px;
+//                gap: 4px;
+//            }
+//
+//            &.start {
+//                height: 100px;
+//                text-shadow: 4px 4px black;
+//                font-size: 64px;
+//                
+//                &.alt {
+//                    background-color: transparent;
+//                    border: 2px solid rgb(66, 118, 62);
+//                }
+//
+//                &.disabled {
+//                    width: 450px;
+//                    font-size: 56px;
+//                }
+//            }
+//        }
+//    }
+//
+//    .upper {
+//        flex-direction: row;
+//        align-items: center;
+//        width: 100%;
+//        height: 72px;
+//
+//        .header {
+//            position: relative;
+//            left: -50px;
+//            width: 220px;
+//            height: 72px;
+//            background-color: rgb(66, 118, 62);
+//            align-items: center;
+//            justify-content: flex-end;
+//            transform: skewX(-4deg);
+//            z-index: 4;
+//
+//            >label {
+//                font-size: 48px;
+//                color: white;
+//                margin-right: 32px;
+//                transform: skewX(1deg);
+//                text-shadow: 2px 2px black;
+//            }
+//        }
+//
+//        .gamemode-name {
+//            position: relative;
+//            background-color: rgb(233, 239, 232);
+//            left: -55px;
+//            height: 42px;
+//            width: 150px;
+//            transform: skewX(-4deg);
+//            align-items: center;
+//            justify-content: center;
+//            z-index: 2;
+//
+//            >label {
+//                font-size: 24px;
+//                font-weight: light;
+//            }
+//        }
+//    }
+//
+//    .middle {
+//        margin: 48px 0;
+//
+//    }
+//
+//    .terrain-preview {
+//        position: absolute;
+//        top: 40%;
+//        right: 100px;
+//        width: 533px;
+//        height: 300px;
+//        border: 4px rgb(233, 239, 232);
+//        border-radius: 4px;
+//    }
+//
+//    &.hide {
+//        opacity: 0;
+//    }
+//}

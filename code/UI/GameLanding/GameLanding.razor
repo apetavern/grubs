@@ -17,32 +17,36 @@
     <GameRules @ref=GameRulesPanel EnableCloseButton=@true class="hide" />
     <Chatbox />
     <div @ref="MenuBody" class="body">
-        <div class="upper">
-            <div class="header">
-                <label>Lobby</label>
-            </div>
-            <div class="gamemode-name">
-                <label>@BaseGameMode.Current.Name</label>
-            </div>
+        <div class="game-info">
+            <label class="lobby">Lobby</label>
+            <label class="gamemode-name">@BaseGameMode.Current.Name</label>
         </div>
-        <div class="middle">
-            <div class="player-cards">
-                @foreach (var player in Player.All)
-                {
-                    <PlayerCard Player=@player />
-                }
-            </div>
+        <div class="player-cards">
+            @foreach (var player in Player.All)
+            {
+                <PlayerCard Player=@player />
+            }
         </div>
         <div class="terrain-preview">
-            <TerrainPreview />
+            <label>Terrain Preview</label>
+            <TerrainPreview/>
+        </div>
+        <div class="controls">
+            @if (IsHost() && Player.All.Count() == 1)
+            {
+                <button class="playground-button" onclick=@StartSandbox><i>gamepad</i>SANDBOX</button>
+            }
+            @if (IsHost() && CanStart())
+            {
+                <button class="start-button" onclick=@Start><i>play_arrow</i>START!</button>
+            }
         </div>
         @if (IsHost())
         {
-            <button class="settings @(IsHost() ? "" : "disabled")" onclick=@OpenGameRules>
-                <i>settings</i>
-                Game Rules
+            <button class="rules-button" onclick=@OpenGameRules>
+                <i>rule</i>
+                Edit Game Rules
             </button>
-            <button class="start @(IsHost() && CanStart() && !IsLoadingTerrain() ? "" : "disabled")" onclick=@Start>@GetStartButtonText()</button>
         }
     </div>
 </root>
@@ -66,29 +70,10 @@
         return Connection.All.Count > 1 || Game.IsEditor;
     }
 
-    public bool IsLoadingTerrain()
-    {
-        return Terrain.GrubsTerrain.Instance?.LastChanged < 0.2f;
-    }
-
     public GameLanding()
     {
         Instance = this;
         Cursor.Enabled("menu", true);
-    }
-
-    private string GetStartButtonText()
-    {
-        if (!IsHost())
-            return "Waiting For Host";
-
-        if (!CanStart())
-            return "Waiting For Players";
-
-        if (IsLoadingTerrain())
-            return "Generating Terrain";
-
-        return "Start";
     }
 
     private void OpenGameRules()
@@ -101,8 +86,19 @@
 
     private void Start()
     {
-        if (IsHost() && CanStart() && !IsLoadingTerrain())
+        if (IsHost() && CanStart())
             BaseGameMode.Current.Start();
+    }
+
+    private void StartSandbox()
+    {
+        if (IsHost() && Player.All.Count() == 1)
+        {
+            GrubsConfig.KeepGameAlive = true;
+            GrubsConfig.InfiniteAmmo = true;
+            BaseGameMode.Current.IsSandboxMode = true;
+            BaseGameMode.Current.Start();
+        }
     }
 
     protected override void OnUpdate()
@@ -118,6 +114,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Connection.All?.Count, Player.All.Count(), IsLoadingTerrain());
+        return HashCode.Combine(Connection.All?.Count, Player.All.Count());
     }
 }

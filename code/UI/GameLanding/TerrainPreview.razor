@@ -8,22 +8,6 @@
     TerrainPreview {
         width: 100%;
         height: 100%;
-
-        >i {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            font-size: 32px;
-            color: black;
-            background-color: rgb(233, 239, 232);
-            padding: 4px;
-            border-radius: 4px;
-
-            &:hover {
-                background-color: darken(rgb(233, 239, 232), 15%);
-                sound-in: ui_button_hover;
-            }
-        }
     }
 </style>
 
@@ -36,11 +20,8 @@
 
 @code
 {
-    // private SceneWorld world;
-
     public override void Tick()
     {
-        // if (world is null)
         {
             if (Scene is null)
                 return;

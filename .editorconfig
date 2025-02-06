@@ -4,7 +4,7 @@ root = true
 # scss files
 [*.scss]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 # Razor files
 [*.razor]

@@ -16,6 +16,9 @@ public abstract class BaseGameMode : Component
 	[Sync( SyncFlags.FromHost )]
 	public int GrubCount { get; set; }
 	
+	[Sync( SyncFlags.FromHost )]
+	public bool IsSandboxMode { get; set; }
+	
 	public bool GameStarted => IsGameStarted();
 
 	protected override void OnStart()
