@@ -268,7 +268,7 @@ public sealed class FreeForAll : BaseGameMode
 		var livingPlayers = Player.AllLiving.ToList();
 		
 		// If only one player or less is alive, the game is over.
-		if ( livingPlayers.Count <= 1 && !GrubsConfig.KeepGameAlive )
+		if ( livingPlayers.Count <= 1 && (!GrubsConfig.KeepGameAlive || Player.All.Sum( p => p.Grubs.Count ) < 1 ) )
 		{
 			Log.Info( "All players are dead. Moving to GameOver state." );
 			State = FreeForAllState.GameOver;
