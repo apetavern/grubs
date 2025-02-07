@@ -1,76 +1,109 @@
 ﻿@import '../common.scss';
 
 InventoryDisplay {
-    position: absolute;
-    right: 64px;
-    bottom: 0;
-    color: $camo-light;
+  position: absolute;
+  right: 64px;
+  bottom: 0;
+  color: $camo-light;
+  flex-direction: column;
+  transition: opacity 0.1s;
+  opacity: 0;
+  pointer-events: all;
+  
+  &.show {
+    opacity: 1;
+  }
+  
+  .title {
+    height: 48px;
+    width: 192px;
+    left: 22px;
+    font-size: 32px;
+    padding-bottom: 2px;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: $camo-dark;
+    transform: rotate(-0.75deg) translate(24px, 8px);
+    
+    > label {
+      transform: rotate(0.75deg) translate(24px, 8px);
+    }
+  }
+  
+  .weapon-tooltip {
+    //transform: translateX(-105%);
+    margin-top: 24px;
+    background-color: $camo-dark;
+    width: 445px;
     flex-direction: column;
-    transition: opacity 0.1s;
-    opacity: 0;
-    pointer-events: all;
     
-    &.show {
-        opacity: 1;
+    .weapon-header {
+      background-color: $camo-darker;
+      color: $camo-light;
+      font-size: 26px;
+      padding: 8px 84px;
+      align-items: center;
+      position: relative;
+      
+      > img {
+        position: absolute;
+        width: 102px;
+        height: 102px;
+        z-index: 2;
+        top: -36px;
+        left: -20px;
+      }
     }
     
-    .title {
-        height: 48px;
-        width: 192px;
-        left: 22px;
-        font-size: 32px;
-        padding-bottom: 2px;
-        align-items: flex-end;
-        justify-content: center;
-        background-color: $camo-dark;
-        transform: rotate(-0.75deg) translate(24px, 8px);
+    .weapon-info {
+      color: #D0CBB1;
+      font-size: 20px;
+      padding: 12px 20px;
+      flex-wrap: wrap;
+    }
+  }
+  
+  .body {
+    background-color: $camo-dark;
+    width: 520px;
+    padding: 36px;
+    flex-direction: column;
+    gap: 12px;
+    
+    .inventory-row {
+      column-gap: 12px;
         
-        > label {
-            transform: rotate(0.75deg) translate(24px, 8px);
-        }
-    }
-    
-    .body {
-        background-color: $camo-dark;
-        width: 520px;
-        padding: 36px;
-        flex-direction: column;
-        gap: 12px;
+      .inventory-square {
+        width: 80px;
+        height: 80px;
+        background-color: $camo-darker;
+        transition: opacity 0.25s;
+        pointer-events: all;
         
-        .inventory-row {
-            column-gap: 12px;
-            
-            .inventory-square {
-                width: 80px;
-                height: 80px;
-                background-color: $camo-darker;
-                transition: opacity 0.25s;
-                pointer-events: all;
-                
-                &.disabled {
-                    opacity: 0.55;
-                }
-                
-                &:hover:not(.disabled) {
-                    background-color: darken($camo-darker, 15%);
-                    transform: scale(1.03);
-                }
-                
-                .equipment-ammo {
-                    position: absolute;
-                    font-size: 22px;
-                    margin: 6px;
-                    z-index: 4;
-                }
-                
-                .equipment-preview {
-                    position: absolute;
-                    width: 92px;
-                    height: 92px;
-                    transform: rotate(6deg);
-                    z-index: 2;
-                }
-            }
+        &.disabled {
+          opacity: 0.55;
         }
+        
+        &:hover:not(.disabled) {
+          background-color: darken($camo-darker, 15%);
+          transform: scale(1.03);
+        }
+        
+        .equipment-ammo {
+          position: absolute;
+          font-size: 22px;
+          margin: 6px;
+          z-index: 4;
+        }
+        
+        .equipment-preview {
+          position: absolute;
+          width: 92px;
+          height: 92px;
+          transform: rotate(6deg);
+          z-index: 2;
+        }
+      }
     }
+  }
 }

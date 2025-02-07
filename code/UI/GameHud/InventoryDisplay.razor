@@ -24,14 +24,26 @@
                     <div 
                         class="inventory-square @(equipment.Ammo == 0 ? "disabled" : "")"
                         onclick=@(() => OnInventoryItemClicked(equipment))
-                        >
+                        onmouseover=@(() => HoveredEquipment = equipment)
+                    >
                         <div class="equipment-ammo">@GetAmmoDisplay(equipment)</div>
                         <img src=@equipment.Icon class="equipment-preview"/>
                     </div>
                 }
             </div>
         }
-
+        @if (HoveredEquipment is not null)
+        {
+            <div class="weapon-tooltip">
+                <div class="weapon-header">
+                    <img src=@HoveredEquipment.Icon />
+                    <label>@HoveredEquipment.Name.ToUpper()</label>
+                </div>
+                <div class="weapon-info">
+                    @HoveredEquipment.Data.Description
+                </div>
+            </div>
+        }
     </div>
 </root>
 
@@ -40,6 +52,8 @@
     private static readonly Logger Log = new("InventoryDisplay");
     
     private Inventory Inventory => Inventory.Local;
+    
+    private Equipment HoveredEquipment { get; set; }
 
     public string GetAmmoDisplay(Equipment equipment) => equipment?.Ammo == -1 ? "\u221e" : equipment?.Ammo.ToString();
 
