@@ -509,7 +509,7 @@
           "Flags": 0,
           "Name": "Water",
           "Position": "0,4032,0",
-          "Scale": "200,200,200",
+          "Scale": "300,300,200",
           "Tags": "nopathing",
           "Enabled": true,
           "NetworkMode": 1,
@@ -647,7 +647,7 @@
           "__guid": "18077d33-611c-49cc-85cd-c91b45560358",
           "Flags": 0,
           "Name": "skydome",
-          "Position": "0,4224,-256",
+          "Position": "0,4224,0",
           "Enabled": true,
           "Components": [
             {
@@ -672,31 +672,6 @@
               },
               "RenderType": "Off",
               "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "__guid": "ce3220a0-dc53-429c-baed-2b4487fe86c0",
-          "Flags": 0,
-          "Name": "wetness_fog",
-          "Position": "0,0,6",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.GradientFog",
-              "__guid": "c1294e3c-d186-428a-815f-a92391905188",
-              "Color": "0,0,0,0.3",
-              "EndDistance": 1024,
-              "FalloffExponent": 1,
-              "Height": 256,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "StartDistance": 0,
-              "VerticalFalloffExponent": 16
             }
           ]
         },
@@ -761,7 +736,7 @@
           "__guid": "cf07c918-0dac-4e61-9136-9e1a11fe26f8",
           "Flags": 0,
           "Name": "mountain_01",
-          "Position": "4444.763,8355.551,-7.999912",
+          "Position": "4444.763,8355.551,-45.37468",
           "Rotation": "0,0,-0.258819,0.9659259",
           "Scale": "1.081934,1.081934,1.081934",
           "Enabled": true,
@@ -773,7 +748,7 @@
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": null,
-              "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "Model": "models/environment/islands/mountain_02/mountain_02.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
@@ -795,7 +770,7 @@
           "__guid": "76f64726-0835-4726-8142-16e6fae06ec5",
           "Flags": 0,
           "Name": "mountain_01 (1)",
-          "Position": "5596.349,7500.156,-7.999912",
+          "Position": "5596.349,7500.156,-42.557",
           "Rotation": "0,0,-0.8660256,-0.4999999",
           "Scale": "1.191934,0.9819336,0.8319336",
           "Enabled": true,
@@ -807,7 +782,7 @@
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": null,
-              "Model": "models/environment/islands/mountain_01/mountain_01.vmdl",
+              "Model": "models/environment/islands/mountain_02/mountain_02.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
               "OnComponentEnabled": null,
@@ -829,8 +804,9 @@
           "__guid": "d95300bd-e72a-4bcd-9c12-a259b5382f68",
           "Flags": 0,
           "Name": "land_03",
-          "Position": "4774.385,7308.655,6",
-          "Rotation": "0,0,-0.258819,0.9659259",
+          "Position": "4776.582,7312.46,-41.29673",
+          "Rotation": "0.04473256,-0.01198605,-0.2585413,0.9648895",
+          "Scale": "1,1,1.607373",
           "Enabled": true,
           "Components": [
             {
@@ -862,7 +838,7 @@
           "__guid": "eba040e3-45a7-493b-a6b7-a31a0b60c30f",
           "Flags": 0,
           "Name": "land_04 (1)",
-          "Position": "-4081.64,9262.808,9.998764",
+          "Position": "-4081.64,9262.808,-27.76259",
           "Rotation": "0,0,-0.2588191,0.9659258",
           "Scale": "1,1,0.9208903",
           "Enabled": true,
@@ -896,7 +872,7 @@
           "__guid": "df14be62-bce4-499d-b441-c0a361d8297f",
           "Flags": 0,
           "Name": "land_02 (1)",
-          "Position": "-6055.446,8379.523,9.997959",
+          "Position": "-6055.446,8379.523,-60.83165",
           "Rotation": "0,0,0.2588192,-0.9659258",
           "Scale": "1,1,0.7344988",
           "Enabled": true,
@@ -930,7 +906,7 @@
           "__guid": "eb342f09-d5be-4595-86f2-393562c6c592",
           "Flags": 0,
           "Name": "land_02 (1)",
-          "Position": "7362.325,8065.311,9.998768",
+          "Position": "7362.327,8065.311,-32.30618",
           "Rotation": "0,0,-0.6087613,-0.7933537",
           "Scale": "1,1,0.7344988",
           "Enabled": true,
@@ -964,7 +940,7 @@
           "__guid": "93abdcde-463b-4830-8b5d-5df90987007d",
           "Flags": 0,
           "Name": "land_01 (1)",
-          "Position": "5749.183,10213.89,7.999856",
+          "Position": "5041.146,8987.528,-64.67992",
           "Rotation": "0,0,-0.5000002,-0.8660253",
           "Scale": "1.857867,1.857867,0.887632",
           "Enabled": true,
@@ -998,7 +974,7 @@
           "__guid": "948ad6f8-dc75-4046-a031-772f1c96fb57",
           "Flags": 0,
           "Name": "land_01",
-          "Position": "-4863.729,10899.03,3.999951",
+          "Position": "-4863.729,10899.03,-66.82965",
           "Rotation": "0,0,0.7443116,0.6678326",
           "Scale": "1.857867,1.857867,0.9343094",
           "Enabled": true,
@@ -1054,36 +1030,12 @@
               "OnComponentStart": null,
               "OnComponentUpdate": null,
               "Projection": "Box",
-              "RenderDynamically": false,
+              "RenderDynamically": true,
               "Texture": "textures/cubemaps/default2.vtex",
               "TintColor": "1,1,1,1",
               "UpdateStrategy": "OnEnabled",
               "ZFar": 4096,
               "ZNear": 16
-            }
-          ]
-        },
-        {
-          "__guid": "c45ce3a8-3227-44db-af75-0adc810a1e70",
-          "Flags": 0,
-          "Name": "Fog",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.GradientFog",
-              "__guid": "0dc246aa-a10b-4f3b-a483-a595bf9d8f1e",
-              "Color": "0.34527,0.53373,0.88372,1",
-              "EndDistance": 10000,
-              "FalloffExponent": 1,
-              "Height": 1152,
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "StartDistance": 2000,
-              "VerticalFalloffExponent": 2.5
             }
           ]
         }
