@@ -21,6 +21,8 @@ public class HitScanWeapon : Weapon
 	[Property, Category( "Explosion" )] public float ExplosionDamage { get; set; } = 0f;
 	[Property, Category( "Effects" )] public ParticleSystem TraceParticles { get; set; }
 	[Property, Category( "Effects" )] public ParticleSystem MuzzleParticles { get; set; }
+	[Property, Category( "Effects" )] public ParticleSystem ExplosionParticles { get; set; }
+	[Property, Category( "Effects" )] public ParticleSystem SmokeParticles { get; set; }
 
 	private int _tracesFired = 0;
 	private TimeSince _timeSinceLastTrace = 0;
@@ -156,6 +158,11 @@ public class HitScanWeapon : Weapon
 			return false;
 
 		ExplosionHelper.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage, Equipment.Grub.Id, Equipment.Grub.Name, HitForce.x );
+		var explosionParticles = ParticleHelper.Instance.PlayInstantaneous( ExplosionParticles, Transform.World.WithPosition( tr.EndPosition ) );
+		explosionParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
+		
+		var smokeParticles = ParticleHelper.Instance.PlayInstantaneous( SmokeParticles, Transform.World.WithPosition( tr.EndPosition ) );
+		smokeParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
 		return true;
 	}
 

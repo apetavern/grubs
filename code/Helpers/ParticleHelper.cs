@@ -18,6 +18,9 @@ public sealed class ParticleHelper : Component
 
 	public SceneParticles PlayInstantaneous( ParticleSystem particles, Transform transform )
 	{
+		if ( !particles.IsValid() )
+			return null;
+		
 		var sceneObject = new SceneParticles( Scene.SceneWorld, particles );
 		sceneObject.SetControlPoint( 0, transform );
 		sceneObject.Transform = transform;
