@@ -7,18 +7,16 @@ namespace Grubs.Pawn;
 [Title( "Grubs - Animator" ), Category( "Grubs" )]
 public sealed class GrubAnimator : Component
 {
-	[Property] public required Grub Grub { get; set; }
-	[Property] public required SkinnedModelRenderer GrubRenderer { get; set; }
-	[Property] public required GrubPlayerController Controller { get; set; }
+	[Property] public Grub Grub { get; set; }
+	[Property] public SkinnedModelRenderer GrubRenderer { get; set; }
+	[Property] public GrubPlayerController Controller { get; set; }
 
 	[Sync] public bool IsOnJetpack { get; set; }
 	[Sync] public float JetpackDir { get; set; }
 
 	public bool Thinking { get; set; }
-
-	private float _incline;
-
-	private Vector3 _looktarget;
+	private float Incline { get; set; }
+	private Vector3 LookTarget { get; set; }
 
 	protected override void OnUpdate()
 	{
@@ -53,9 +51,9 @@ public sealed class GrubAnimator : Component
 			MathX.Lerp( GrubRenderer.GetFloat( "lookatweight" ), shouldLookAt ? 1f : 0f,
 				0.2f ) );
 
-		_looktarget = Vector3.Lerp( _looktarget, new Vector3( 3f, 4f * -Controller.Facing, 0f ), Time.Delta * 5f );
+		LookTarget = Vector3.Lerp( LookTarget, new Vector3( 3f, 4f * -Controller.Facing, 0f ), Time.Delta * 5f );
 
-		GrubRenderer.Set( "looktarget", _looktarget );
+		GrubRenderer.Set( "looktarget", LookTarget );
 
 		var tr = Scene.Trace
 			.Ray(
@@ -65,8 +63,8 @@ public sealed class GrubAnimator : Component
 				Controller.WorldPosition + Controller.WorldRotation.Down * 128 )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.Run();
-		_incline = MathX.Lerp( _incline, Controller.WorldRotation.Forward.Angle( tr.Normal ) - 90f, 0.2f );
-		GrubRenderer.Set( "incline", _incline );
+		Incline = MathX.Lerp( Incline, Controller.WorldRotation.Forward.Angle( tr.Normal ) - 90f, 0.2f );
+		GrubRenderer.Set( "incline", Incline );
 		GrubRenderer.Set( "backflip_charge", Controller.BackflipCharge );
 		GrubRenderer.Set( "hardfall", Controller.IsHardFalling );
 
@@ -74,6 +72,7 @@ public sealed class GrubAnimator : Component
 		{
 			GrubRenderer.Set( "lowhp", Grub.Health.CurrentHealth <= Grub.Health.MaxHealth / 4f );
 			GrubRenderer.Set( "explode", Grub.Health.DeathInvoked );
+			GrubRenderer.Set( "sliding", Grub.Health.HasBeenDamaged && !Controller.Velocity.IsNearlyZero( 2.5f ) );
 		}
 	}
 

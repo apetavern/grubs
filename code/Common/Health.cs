@@ -16,6 +16,8 @@ public partial class Health : Component
 	[Sync] public float CurrentHealth { get; set; }
 
 	[Sync] public bool DeathInvoked { get; set; } = false;
+	
+	[Sync] public bool HasBeenDamaged { get; set; }
 
 	public delegate void Death();
 
@@ -46,6 +48,7 @@ public partial class Health : Component
 				if ( Networking.IsHost )
 					BaseGameMode.Current?.GrubDamaged( grub );
 
+				HasBeenDamaged = true;
 				DamageQueue.Enqueue( damageInfo );
 				return;
 			}
@@ -105,6 +108,8 @@ public partial class Health : Component
 			Log.Info( "Nothing in DamageQueue." );
 			return;
 		}
+		
+		HasBeenDamaged = false;
 
 		var totalDamage = 0f;
 		var damageInfos = new List<GrubsDamageInfo>();
