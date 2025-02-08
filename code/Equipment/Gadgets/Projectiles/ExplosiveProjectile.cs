@@ -17,6 +17,7 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	[Property] public bool UseExplosionTimer { get; set; } = false;
 	[Property, ResourceType( "sound" )] private string ExplosionSound { get; set; } = "";
 	[Property, ResourceType( "vpcf" )] private ParticleSystem Particles { get; set; }
+	[Property, ResourceType( "vpcf" )] private ParticleSystem SmokeParticles { get; set; }
 
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
@@ -103,8 +104,11 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 		if ( Particles is null )
 			return;
 
-		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World.WithPosition( position ) );
-		sceneParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
+		var explosionParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World.WithPosition( position ) );
+		explosionParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
+
+		var smokeParticles = ParticleHelper.Instance.PlayInstantaneous( SmokeParticles, Transform.World.WithPosition( position ) );
+		smokeParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 3f, 0, 0 ) );
 	}
 
 	protected override void OnDestroy()

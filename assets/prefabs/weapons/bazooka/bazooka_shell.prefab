@@ -125,6 +125,7 @@
         "OnComponentStart": null,
         "OnComponentUpdate": null,
         "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "SmokeParticles": "particles/explosion/grubs_explosion_smoke.vpcf",
         "UseExplosionTimer": false
       },
       {

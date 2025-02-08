@@ -38,9 +38,6 @@ public partial class ExplosionHelper : Component
 			health.TakeDamage( GrubsDamageInfo.FromExplosion( damage * distFactor, attackerGuid, attackerName, position ) );
 		}
 
-		LastPosition = position;
-		LastRadius = radius;
-
 		using ( Rpc.FilterInclude( c => c.IsHost ) )
 		{
 			GrubsTerrain.Instance.SubtractCircle( new Vector2( position.x, position.z ), radius / 2f, 1 );
@@ -67,17 +64,5 @@ public partial class ExplosionHelper : Component
 		body.ApplyImpulseAt(
 			body.WorldPosition + Vector3.Down * 0.25f,
 			dir * force * body.PhysicsBody.Mass );
-	}
-
-	private Vector3 LastPosition { get; set; }
-	private float LastRadius { get; set; }
-
-	protected override void DrawGizmos()
-	{
-		base.DrawGizmos();
-
-		Gizmo.Transform = global::Transform.Zero;
-
-		Gizmo.Draw.LineSphere( LastPosition, LastRadius );
 	}
 }

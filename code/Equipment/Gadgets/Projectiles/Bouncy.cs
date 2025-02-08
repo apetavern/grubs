@@ -11,8 +11,12 @@ public sealed class Bouncy : Component, ICollisionListener
 
 	public void OnCollisionStart( Collision other )
 	{
+		if ( !Body.IsValid() )
+			return;
+
 		var speed = other.Contact.Speed.Length;
 		var direction = Reflect ? Vector3.Reflect( other.Contact.Speed.Normal, Vector3.Up ) : -Body.Velocity.Normal;
-		Body.Velocity = direction * speed * DampingFactor;
+		Log.Info( Body.Velocity );
+		Body.Velocity += direction * speed * DampingFactor;
 	}
 }

@@ -9,11 +9,21 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "08488271-b10d-402c-b13a-f52c0c68025a",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
         "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/cluster_grenade/cluster_grenade_shrapnel.vmdl",
         "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Parameters": {
           "bools": {},
           "ints": {},
@@ -40,7 +50,14 @@
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
+        "Material": null,
         "ObscuredColor": "0,0,0,0.4",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Width": 0.25
       },
       {
@@ -60,6 +77,12 @@
         "MassCenterOverride": "0,0,0",
         "MassOverride": 100,
         "MotionEnabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
@@ -68,7 +91,18 @@
         "__type": "Sandbox.SphereCollider",
         "__guid": "3d9c05b1-4160-40e6-904c-822bf8457248",
         "Center": "0,0,0",
+        "Friction": null,
         "IsTrigger": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
         "Radius": 2.46063,
         "Static": false,
         "Surface": "surfaces/zero_bounce.surface",
@@ -77,7 +111,13 @@
       {
         "__type": "Grubs.Common.Health",
         "__guid": "4f9f6187-a115-48cd-962f-d104b81f8db1",
-        "MaxHealth": 40
+        "MaxHealth": 40,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
@@ -90,7 +130,14 @@
         "ExplosionDamage": 15,
         "ExplosionRadius": 50,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "SmokeParticles": "particles/explosion/grubs_explosion_smoke.vpcf",
         "UseExplosionTimer": false
       },
       {
@@ -104,6 +151,12 @@
           "go": "50286640-6390-4df4-a76d-bb8eebc69e25",
           "component_type": "SkinnedModelRenderer"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "PhysicsBody": {
           "_type": "component",
           "component_id": "d825992e-65aa-4726-a553-e390151541d8",
@@ -111,6 +164,7 @@
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 500,
+        "RotateTowardsVelocity": false,
         "SetPositionOnStart": false,
         "SetRotationOnStart": false
       }

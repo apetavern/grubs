@@ -5,8 +5,6 @@
     "Name": "dynamite_dropped",
     "Tags": "notarget,projectile",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.Rigidbody",
@@ -15,20 +13,61 @@
         "Gravity": true,
         "LinearDamping": 1,
         "Locking": {
-          "Y": true
+          "X": false,
+          "Y": true,
+          "Z": false,
+          "Pitch": false,
+          "Yaw": false,
+          "Roll": false
         },
+        "MassCenterOverride": "0,0,0",
         "MassOverride": 25,
         "MotionEnabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "00fa5fc3-4249-4e69-be74-1d945898d6e5",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/dynamite/dynamite_projectile.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -37,6 +76,13 @@
         "__guid": "3011110c-659e-44aa-a8f1-ec82d1c2ac5f",
         "DirectionRandomizer": 0,
         "Droppable": true,
+        "Model": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "PhysicsBody": {
           "_type": "component",
           "component_id": "5ddee023-2a5b-4559-9218-132041ff6e2e",
@@ -44,15 +90,29 @@
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 4,
+        "RotateTowardsVelocity": false,
         "SetPositionOnStart": true,
         "SetRotationOnStart": false
       },
       {
         "__type": "Sandbox.ModelCollider",
         "__guid": "318e41cf-ea34-44ae-a9f0-81f5088fea96",
+        "Friction": null,
         "IsTrigger": false,
         "Model": "models/weapons/dynamite/dynamite_projectile.vmdl",
-        "Static": false
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
+        "Static": false,
+        "Surface": null,
+        "SurfaceVelocity": "0,0,0"
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
@@ -65,20 +125,50 @@
         "ExplosionDamage": 75,
         "ExplosionRadius": 150,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "SmokeParticles": "particles/explosion/grubs_explosion_smoke.vpcf",
         "UseExplosionTimer": true
       },
       {
         "__type": "Sandbox.SoundPointComponent",
         "__guid": "e9f6fbbf-ce6d-407f-8d9c-4aaa06c10382",
+        "Distance": 512,
         "DistanceAttenuation": false,
         "DistanceAttenuationOverride": false,
+        "Falloff": [
+          {
+            "x": 0,
+            "y": 1,
+            "in": 3.1415927,
+            "out": -3.1415927,
+            "mode": "Mirrored"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "in": 0,
+            "out": 0,
+            "mode": "Mirrored"
+          }
+        ],
         "Force2d": false,
         "MaxRepeatTime": 1,
         "MinRepeatTime": 1,
         "Occlusion": false,
         "OcclusionOverride": false,
         "OcclusionRadius": 32,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Pitch": 1,
         "PlayOnStart": true,
         "ReflectionOverride": false,
@@ -103,58 +193,65 @@
         "Rotation": "0,-0.7071067,0,0.7071068",
         "Tags": "particles",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ParticleEffect",
             "__guid": "21ea1182-8344-4709-bedd-cac52b4ac63c",
+            "__version": 1,
             "Alpha": {
               "Type": "Curve",
+              "Evaluation": "Life",
               "CurveA": [
                 {
-                  "y": 1
+                  "x": 0,
+                  "y": 1,
+                  "in": 0,
+                  "out": 0,
+                  "mode": "Mirrored"
                 },
                 {
                   "x": 0.48029557,
                   "y": 1,
                   "in": 1.5365853,
-                  "out": -1.5365853
+                  "out": -1.5365853,
+                  "mode": "Mirrored"
                 },
                 {
                   "x": 1,
+                  "y": 0,
                   "in": 1.312303,
-                  "out": -1.312303
+                  "out": -1.312303,
+                  "mode": "Mirrored"
                 }
               ],
+              "CurveB": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
               "Constants": "1,0,0,0"
             },
+            "ApplyAlpha": true,
             "ApplyColor": true,
             "ApplyRotation": false,
             "ApplyShape": true,
-            "Bounce": {
-              "Constants": "1,0,0,0"
-            },
-            "Brightness": {
-              "Constants": "1,0,0,0"
-            },
-            "Bumpiness": {},
+            "Bounce": 1,
+            "Brightness": 1,
+            "Bumpiness": 0,
             "Collision": false,
+            "CollisionIgnore": null,
             "CollisionRadius": 1,
-            "Damping": {},
-            "DieOnCollisionChance": {},
+            "Damping": 0,
+            "DieOnCollisionChance": 0,
             "Force": true,
             "ForceDirection": "0,0,-200",
-            "ForceScale": {
-              "Constants": "1,0,0,0"
-            },
-            "Friction": {
-              "Constants": "1,0,0,0"
-            },
+            "ForceScale": 1,
+            "ForceSpace": "World",
+            "Friction": 1,
             "Gradient": {
               "Type": "Range",
               "Evaluation": "Particle",
               "GradientA": {
+                "blend": "Linear",
                 "color": [
                   {
                     "t": 0.5,
@@ -164,6 +261,7 @@
                 "alpha": []
               },
               "GradientB": {
+                "blend": "Linear",
                 "color": [
                   {
                     "t": 0.5,
@@ -178,65 +276,112 @@
             "Lifetime": {
               "Type": "Range",
               "Evaluation": "Particle",
+              "CurveA": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
+              "CurveB": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
               "Constants": "0.1,0.5,0,0"
             },
             "MaxParticles": 5000,
-            "PerParticleTimeScale": {
-              "Constants": "1,0.4,0,0"
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "OnParticleCreated": null,
+            "OnParticleDestroyed": null,
+            "OrbitalForce": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
             },
+            "OrbitalPull": 0,
+            "PerParticleTimeScale": 1,
+            "Pitch": 0,
             "PreWarm": 0,
-            "PushStrength": {},
+            "PushStrength": 0,
             "Roll": {
               "Type": "Range",
               "Evaluation": "Particle",
+              "CurveA": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
+              "CurveB": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
               "Constants": "0,360,0,0"
             },
             "Scale": {
               "Type": "Curve",
+              "Evaluation": "Life",
               "CurveA": {
                 "rangey": "0,3",
                 "frames": [
                   {
+                    "x": 0,
+                    "y": 0,
                     "in": -9.333329,
-                    "out": 9.333329
+                    "out": 9.333329,
+                    "mode": "Mirrored"
                   },
                   {
                     "x": 0.03325123,
                     "y": 1,
                     "in": -0.056075174,
-                    "out": 0.056075174
+                    "out": 0.056075174,
+                    "mode": "Mirrored"
                   },
                   {
                     "x": 1,
+                    "y": 0,
                     "in": 2.9152544,
-                    "out": -2.9152544
+                    "out": -2.9152544,
+                    "mode": "Mirrored"
                   }
                 ]
               },
+              "CurveB": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
               "Constants": "1,0,0,0"
             },
-            "SequenceId": {},
-            "SequenceSpeed": {
-              "Constants": "1,0,0,0"
-            },
-            "SequenceTime": {
-              "Constants": "1,0,0,0"
-            },
+            "SequenceId": 0,
+            "SequenceSpeed": 1,
+            "SequenceTime": 1,
             "SheetSequence": false,
             "Space": "World",
+            "StartDelay": 0,
             "StartVelocity": {
               "Type": "Range",
               "Evaluation": "Particle",
+              "CurveA": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
+              "CurveB": {
+                "rangex": "0,0",
+                "rangey": "0,0"
+              },
               "Constants": "50,100,0,0"
             },
-            "Stretch": {},
+            "Stretch": 0,
             "TimeScale": 1,
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "Yaw": 0
           },
           {
             "__type": "Sandbox.ParticleSpriteRenderer",
             "__guid": "0417d894-83cd-403b-95b2-e5e5e9243715",
             "Additive": false,
+            "Alignment": "LookAtCamera",
             "BlurAmount": 0.5,
             "BlurOpacity": 0.91,
             "BlurSpacing": 0.73,
@@ -244,8 +389,22 @@
             "FaceVelocity": true,
             "FogStrength": 1,
             "LeadingTrail": true,
+            "Lighting": false,
             "MotionBlur": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "Opaque": false,
+            "Pivot": "0.5,0.5",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RotationOffset": 0,
             "Scale": 1,
             "Shadows": false,
@@ -256,6 +415,8 @@
             "__type": "Sandbox.ParticleConeEmitter",
             "__guid": "6a5aa515-8fec-4cd3-b090-ce80149162bd",
             "Burst": 0,
+            "CenterBias": 0,
+            "CenterBiasVelocity": 0,
             "ConeAngle": 31.4,
             "ConeFar": 50,
             "ConeNear": 1,
@@ -264,17 +425,50 @@
             "Duration": 3,
             "InVolume": false,
             "Loop": true,
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
             "OnEdge": false,
-            "Rate": 113.14
+            "Rate": 113.14,
+            "RateOverDistance": 0,
+            "VelocityMultiplier": 1,
+            "VelocityRandom": 0
           }
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

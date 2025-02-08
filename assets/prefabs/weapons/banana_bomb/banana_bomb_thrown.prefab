@@ -3,18 +3,45 @@
     "__guid": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
     "Flags": 0,
     "Name": "banana_bomb_thrown",
+    "Position": "0,0,12.84634",
     "Tags": "projectile",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "4260c093-b585-49e2-ad71-7bf6d820e684",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/weapons/banana/banana_bunch.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -24,7 +51,14 @@
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
+        "Material": null,
         "ObscuredColor": "0,0,0,0.4",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Width": 0.25
       },
       {
@@ -34,19 +68,36 @@
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {
+          "X": false,
           "Y": true,
+          "Z": false,
+          "Pitch": false,
           "Yaw": true,
           "Roll": true
         },
+        "MassCenterOverride": "0,0,0",
         "MassOverride": 0,
         "MotionEnabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
       {
         "__type": "Grubs.Common.Health",
         "__guid": "46ede679-36ed-4b55-beed-fa16de5163ce",
-        "MaxHealth": 80
+        "MaxHealth": 80,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
@@ -59,7 +110,14 @@
         "ExplosionDamage": 50,
         "ExplosionRadius": 150,
         "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+        "SmokeParticles": "particles/explosion/grubs_explosion_smoke.vpcf",
         "UseExplosionTimer": true
       },
       {
@@ -73,6 +131,12 @@
           "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "SkinnedModelRenderer"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "PhysicsBody": {
           "_type": "component",
           "component_id": "868a47c7-7050-43bd-8cdf-a82ceb9bd3f6",
@@ -80,12 +144,19 @@
           "component_type": "Rigidbody"
         },
         "ProjectileSpeed": 125,
+        "RotateTowardsVelocity": false,
         "SetPositionOnStart": true,
         "SetRotationOnStart": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
         "__guid": "ad599cd5-1863-4bcc-bd6c-8dfc569bc00b",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Projectile": {
           "_type": "component",
           "component_id": "9ea914a3-115f-4d5c-af57-7bda9083898a",
@@ -111,24 +182,66 @@
           "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "Rigidbody"
         },
-        "DampingFactor": 0.8,
+        "DampingFactor": 0.92,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Reflect": true
       },
       {
         "__type": "Sandbox.ModelCollider",
         "__guid": "d5a67057-0415-480c-97ef-e8560fa381d9",
+        "Friction": null,
         "IsTrigger": false,
         "Model": "models/weapons/banana/banana_bunch.vmdl",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
         "Static": false,
-        "Surface": "surfaces/banana_bounce.surface"
+        "Surface": "surfaces/banana_bounce.surface",
+        "SurfaceVelocity": "0,0,0"
       }
     ],
     "Children": [],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
