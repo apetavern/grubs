@@ -1,4 +1,6 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Drops;
+using Grubs.Equipment.Gadgets.Projectiles;
+using Grubs.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 using Sandbox.Sdf;
 
@@ -143,9 +145,20 @@ public partial class GrubsTerrain : Component
 			var currentPosition = SdfWorld.WorldPosition;
 			SdfWorld.WorldPosition = Vector3.Lerp( SdfWorld.WorldPosition, targetPosition, Time.Delta * 3f );
 
+			var positionOffset = Vector3.Up * (SdfWorld.WorldPosition.z - currentPosition.z);
 			foreach ( var grub in Scene.GetAllComponents<Grub>() )
 			{
-				grub.WorldPosition += Vector3.Up * (SdfWorld.WorldPosition.z - currentPosition.z);
+				grub.WorldPosition += positionOffset;
+			}
+
+			foreach ( var crate in Scene.GetAllComponents<Crate>() )
+			{
+				crate.WorldPosition += positionOffset;
+			}
+
+			foreach ( var projectile in Scene.GetAllComponents<PhysicsProjectile>() )
+			{
+				projectile.WorldPosition += positionOffset;
 			}
 			
 			await GameTask.DelaySeconds( Time.Delta / 2f );
