@@ -5,7 +5,7 @@
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/multiple_rocket_launcher/mrl.prefab",
   "DefaultAmmo": 0,
-  "DropChance": 5,
+  "DropChance": 0,
   "__references": [],
   "__version": 0
 }

@@ -1,4 +1,5 @@
 ﻿using Grubs.Common;
+using Grubs.Drops;
 using Grubs.Helpers;
 using Grubs.Pawn;
 using Grubs.Systems.Pawn;
@@ -44,6 +45,11 @@ public sealed class FreeForAll : BaseGameMode
 	/// The amount of time elapsed since moving to GameOver state.
 	/// </summary>
 	private TimeSince TimeSinceGameOverStateStarted { get; set; }
+	
+	/// <summary>
+	/// The amount of time elapsed since we tried resolving in turn change.
+	/// </summary>
+	private TimeSince TimeSinceResolveAttempted { get; set; }
 
 	private const float MinimumTurnChangeDuration = 0.5f;
 	private const float MaximumWorldResolveDuration = 20f;
@@ -232,13 +238,23 @@ public sealed class FreeForAll : BaseGameMode
 		TurnIsChanging = true;
 	}
 
+	private bool CratesResolved { get; set; } = false;
+	private bool CratesSpawnStarted { get; set; } = false;
+
 	private void UpdateTurnChange()
 	{
 		// Wait one second before trying to process the turn change, in case of any race conditions.
 		if ( TimeSinceTurnChangeStarted < 1f )
 			return;
-		
+
 		if ( !Resolution.IsWorldResolved() && TimeSinceTurnChangeStarted < MaximumWorldResolveDuration )
+		{
+			TimeSinceResolveAttempted = 0f;
+			return;
+		}
+		
+		// Wait 1s after resolving to avoid whiplash.
+		if ( TimeSinceResolveAttempted < 1f )
 			return;
 		
 		Log.Trace( $"Damage Queue Count: {DamageQueue.Count}" );
@@ -261,8 +277,19 @@ public sealed class FreeForAll : BaseGameMode
 		}
 		
 		Log.Trace( $"No more damage queue. Moving on." );
-		
-		if ( TimeSinceTurnChangeStarted < MinimumTurnChangeDuration )
+
+		// if ( !WeaponCrateSpawned )
+		// {
+		// 	if ( RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn, "A weapon crate has spawned!" ) )
+		// 	{
+		// 		WeaponCrateSpawned = true;
+		// 	}
+		// }
+
+		if ( !CratesSpawnStarted )
+			_ = ResolveCrates();
+
+		if ( !CratesResolved )
 			return;
 
 		var livingPlayers = Player.AllLiving.ToList();
@@ -309,6 +336,43 @@ public sealed class FreeForAll : BaseGameMode
 		// Send the ActivePlayer's ActiveGrub in case the synced ActiveGrub hasn't been processed yet.
 		ActivePlayer.OnTurnStart( ActivePlayer.ActiveGrub );
 		_rotateCount = 0;
+
+		CratesSpawnStarted = false;
+		CratesResolved = false;
+	}
+
+	private async Task ResolveCrates()
+	{
+		CratesSpawnStarted = true;
+		
+		await RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn,
+			"A weapon crate has been spawned!" );
+		await RollCrateSpawn( DropType.Health, GrubsConfig.HealthCrateChancePerTurn,
+			"A health crate has been spawned!" );
+		await RollCrateSpawn( DropType.Tool, GrubsConfig.ToolCrateChancePerTurn, "A tool crate has been spawned!" );
+
+		CratesResolved = true;
+	}
+
+	private async Task RollCrateSpawn( DropType dropType, float chance, string message )
+	{
+		const float crateSpawnDelay = 2f;
+		
+		if ( Game.Random.Float( 1f ) <= chance )
+			return;
+
+		await Task.MainThread();
+
+		var spawnPos = GrubsTerrain.Instance.FindSpawnLocation( inAir: true, maxAngle: 25f );
+		var crate = CrateUtility.Instance.SpawnCrate( dropType );
+		crate.WorldPosition = spawnPos;
+		
+		ChatHelper.Instance.SendInfoMessage( message );
+		
+		if ( GrubFollowCamera.Local.IsValid() )
+			GrubFollowCamera.Local.QueueTarget( crate, crateSpawnDelay );
+
+		await Task.DelaySeconds( crateSpawnDelay );
 	}
 
 	private void ProcessDeathQueue()

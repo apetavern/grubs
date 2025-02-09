@@ -5,7 +5,7 @@
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/goat/goat.prefab",
   "DefaultAmmo": 1,
-  "DropChance": 2,
+  "DropChance": 0,
   "__references": [],
   "__version": 0
 }

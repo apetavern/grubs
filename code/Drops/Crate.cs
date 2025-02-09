@@ -37,7 +37,7 @@ public sealed class Crate : Component, Component.ITriggerListener
 
 		PickupEffects();
 
-		string resPath = isTool switch
+		var resPath = isTool switch
 		{
 			true => CrateDrops.GetRandomToolFromCrate(),
 			false => CrateDrops.GetRandomWeaponFromCrate()

@@ -5,7 +5,7 @@
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/smoke_break/smoke_break.prefab",
   "DefaultAmmo": -1,
-  "DropChance": 1,
+  "DropChance": 0,
   "__references": [],
   "__version": 0
 }

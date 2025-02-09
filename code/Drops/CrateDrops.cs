@@ -7,14 +7,14 @@ public static class CrateDrops
 {
 	private static readonly Logger Log = new( "CrateDrops" );
 
-	private static readonly Dictionary<string, float> _dropChancesWeapons = new();
-	private static readonly Dictionary<string, float> _dropChancesTools = new();
+	private static readonly Dictionary<string, float> WeaponDropChances = new();
+	private static readonly Dictionary<string, float> ToolDropChances = new();
 
-	private static readonly List<string> _dropMapWeapons = new();
-	private static readonly List<float> _cumulativeDropPercentagesWeapons = new();
+	private static readonly List<string> WeaponDropMap = new();
+	private static readonly List<float> CumulativeWeaponDropPercentages = new();
 
-	private static readonly List<string> _dropMapTools = new();
-	private static readonly List<float> _cumulativeDropPercentagesTools = new();
+	private static readonly List<string> ToolDropMap = new();
+	private static readonly List<float> CumulativeToolDropPercentages = new();
 	private static bool _init = false;
 
 	private static void Initialize()
@@ -28,13 +28,13 @@ public static class CrateDrops
 			var dropChance = res.DropChance;
 
 			if ( equipmentType is EquipmentType.Weapon )
-				_dropChancesWeapons.TryAdd( res.ResourcePath, dropChance );
+				WeaponDropChances.TryAdd( res.ResourcePath, dropChance );
 			else if ( equipmentType is EquipmentType.Tool )
-				_dropChancesTools.TryAdd( res.ResourcePath, dropChance );
+				ToolDropChances.TryAdd( res.ResourcePath, dropChance );
 		}
 
-		InitDropMap( _dropChancesWeapons, _cumulativeDropPercentagesWeapons, _dropMapWeapons );
-		InitDropMap( _dropChancesTools, _cumulativeDropPercentagesTools, _dropMapTools );
+		InitDropMap( WeaponDropChances, CumulativeWeaponDropPercentages, WeaponDropMap );
+		InitDropMap( ToolDropChances, CumulativeToolDropPercentages, ToolDropMap );
 
 		_init = true;
 	}
@@ -43,14 +43,12 @@ public static class CrateDrops
 		List<string> dropMap )
 	{
 		var sumTotalOfDropRates = 0f;
-		var numEntries = 0;
 
 		foreach ( var (_, dropChance) in dropChances )
 		{
 			if ( dropChance <= 0 )
 				continue;
 
-			numEntries++;
 			sumTotalOfDropRates += dropChance;
 		}
 
@@ -73,7 +71,7 @@ public static class CrateDrops
 		if ( !_init )
 			Initialize();
 
-		return RollForItem( _cumulativeDropPercentagesWeapons, _dropMapWeapons );
+		return RollForItem( CumulativeWeaponDropPercentages, WeaponDropMap );
 	}
 
 	public static string GetRandomToolFromCrate()
@@ -81,7 +79,7 @@ public static class CrateDrops
 		if ( !_init )
 			Initialize();
 
-		return RollForItem( _cumulativeDropPercentagesTools, _dropMapTools );
+		return RollForItem( CumulativeToolDropPercentages, ToolDropMap );
 	}
 
 	private static string RollForItem( List<float> dropPercentages, List<string> dropMap )
@@ -104,33 +102,33 @@ public static class CrateDrops
 		GetRandomToolFromCrate();
 		GetRandomWeaponFromCrate();
 
-		Log.Info( "Weapons Available: " + _cumulativeDropPercentagesWeapons.Count );
-		Log.Info( "Tools Available: " + _cumulativeDropPercentagesTools.Count );
+		Log.Info( "Weapons Available: " + CumulativeWeaponDropPercentages.Count );
+		Log.Info( "Tools Available: " + CumulativeToolDropPercentages.Count );
 
 		// Print weapon drop table.
 		Log.Info( "=== WEAPONS DROP TABLE ===" );
-		for ( var i = 0; i < _cumulativeDropPercentagesWeapons.Count; i++ )
+		for ( var i = 0; i < CumulativeWeaponDropPercentages.Count; i++ )
 		{
 			float dropChance;
 			if ( i > 0 )
-				dropChance = _cumulativeDropPercentagesWeapons[i] - _cumulativeDropPercentagesWeapons[i - 1];
+				dropChance = CumulativeWeaponDropPercentages[i] - CumulativeWeaponDropPercentages[i - 1];
 			else
-				dropChance = _cumulativeDropPercentagesWeapons[i];
+				dropChance = CumulativeWeaponDropPercentages[i];
 
-			Log.Info( $"{_dropMapWeapons[i]}: {dropChance * 100f}%" );
+			Log.Info( $"{WeaponDropMap[i]}: {dropChance * 100f}%" );
 		}
 
 		//Print tool drop table.
 		Log.Info( "=== TOOLS DROP TABLE ===" );
-		for ( var i = 0; i < _cumulativeDropPercentagesTools.Count; i++ )
+		for ( var i = 0; i < CumulativeToolDropPercentages.Count; i++ )
 		{
 			float dropChance;
 			if ( i > 0 )
-				dropChance = _cumulativeDropPercentagesTools[i] - _cumulativeDropPercentagesTools[i - 1];
+				dropChance = CumulativeToolDropPercentages[i] - CumulativeToolDropPercentages[i - 1];
 			else
-				dropChance = _cumulativeDropPercentagesTools[i];
+				dropChance = CumulativeToolDropPercentages[i];
 
-			Log.Info( $"{_dropMapTools[i]}: {dropChance * 100f}%" );
+			Log.Info( $"{ToolDropMap[i]}: {dropChance * 100f}%" );
 		}
 	}
 }
