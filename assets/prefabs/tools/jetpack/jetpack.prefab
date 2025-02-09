@@ -4,16 +4,42 @@
     "Flags": 0,
     "Name": "jetpack",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "939ca26b-634b-4edc-b01c-15dc0d479ff0",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/tools/jetpack/jetpack.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -31,6 +57,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Jetpack",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": false,
         "SlotIndex": 0,
         "UnlockDelay": 1
@@ -54,7 +86,17 @@
           "go": "7406fd93-14c2-4776-8b78-e2131e8cdae7"
         },
         "FiringType": "Complex",
-        "MaxUses": 10,
+        "MaxUses": 5,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnFire": null,
+        "OnFireFinished": null,
+        "StartMultiplier": 1,
         "UDFlame1": {
           "_type": "gameobject",
           "go": "0720d0c8-dfa1-4b57-8fc2-64f8dd52a941"
@@ -62,14 +104,21 @@
         "UDFlame2": {
           "_type": "gameobject",
           "go": "26a9cb62-e4cd-474c-b95a-271d2ded65b0"
-        }
+        },
+        "UseSound": null
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
         "__guid": "ec0f0d57-456e-4f6d-a8f6-63e7c7c38d06",
         "Inputs": {
           "fire": "Enable Flight"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
@@ -80,14 +129,27 @@
         "Position": "-6.617,-9.051998,5.577052",
         "Rotation": "-0.00000002980232,0.7071068,-0.00000007450583,0.7071068",
         "Scale": "0.2,0.4,0.4",
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "0dc2f7f8-1e27-4469-8929-9c3ee870114e",
             "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
             "Model": "particles/blueflame/blueflame.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
@@ -100,14 +162,27 @@
         "Position": "-6.616731,9.05203,5.577051",
         "Rotation": "-0.00000002980232,0.7071068,-0.00000007450583,0.7071068",
         "Scale": "0.2,0.4,0.4",
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "8fd7824b-12af-4aaf-a9d3-b50304a6f327",
             "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
             "Model": "particles/blueflame/blueflame.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
@@ -120,25 +195,62 @@
         "Position": "-16.68206,-0.0000002594415,6.164645",
         "Rotation": "0,0.9238795,-0.00000007450581,0.3826835",
         "Scale": "0.2,0.4,0.4",
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "dbc5e941-bb73-46ff-957c-7b50a62214f5",
             "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
             "Model": "particles/blueflame/blueflame.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
