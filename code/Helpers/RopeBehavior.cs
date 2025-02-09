@@ -91,15 +91,16 @@ public sealed class RopeBehavior : Component
 		if ( Rigidbody.IsValid() )
 			Rigidbody.Velocity += Vector3.Forward * Input.AnalogMove.y * -RopeSwingSpeed;
 		
-		SpringJoint.MaxLength = RopeLength;
+		if ( SpringJoint.IsValid() )
+			SpringJoint.MaxLength = RopeLength;
 
 		// It's possible the mountable was destroyed before this has been cleaned up.
-		if ( !Mountable.IsValid() )
+		if ( !Mountable.IsValid() || !Grub.IsValid() )
 			return;
 		
 		Grub.WorldPosition = Mountable.WorldPosition;
 				
-		if ( MuzzlePoint is null || !Grub.IsValid() )
+		if ( MuzzlePoint is null )
 			return;
 		
 		MuzzlePoint.WorldPosition = WorldPosition + HookDirection * GrubMountPositionOffsetY 
