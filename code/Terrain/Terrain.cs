@@ -134,15 +134,12 @@ public partial class GrubsTerrain : Component
 
 	public async Task LowerTerrain( float amount )
 	{
+		LowerTerrainEffects();
+		
 		var targetPosition = SdfWorld.WorldPosition - Vector3.Up * amount;
-
-		Sound.Play( "suddendeath_rumble" );
 
 		while ( Vector3.DistanceBetween( SdfWorld.WorldPosition, targetPosition ) > Time.Delta * 5f )
 		{
-			if ( Scene.Camera.IsValid() )
-				Scene.Camera.WorldPosition += Vector3.Random * 6f;
-			
 			var currentPosition = SdfWorld.WorldPosition;
 			SdfWorld.WorldPosition = Vector3.Lerp( SdfWorld.WorldPosition, targetPosition, Time.Delta * 3f );
 
@@ -151,6 +148,32 @@ public partial class GrubsTerrain : Component
 				grub.WorldPosition += Vector3.Up * (SdfWorld.WorldPosition.z - currentPosition.z);
 			}
 			
+			await GameTask.DelaySeconds( Time.Delta / 2f );
+		}
+	}
+
+	[Rpc.Broadcast( NetFlags.HostOnly )]
+	private void LowerTerrainEffects()
+	{
+		Log.Info( "Playing sudden death terrain lowering effects." );
+		
+		Sound.Play( "suddendeath_rumble" );
+
+		_ = ScreenShake();
+	}
+
+	private async Task ScreenShake()
+	{
+		await GameTask.MainThread();
+			
+		if ( !Scene.Camera.IsValid() )
+			return;
+
+		var progress = 0f;
+		while ( progress < 1f )
+		{
+			progress += Time.Delta / 2f;
+			Scene.Camera.WorldPosition += Vector3.Random * 6f;
 			await GameTask.DelaySeconds( Time.Delta / 2f );
 		}
 	}
