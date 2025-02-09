@@ -34,7 +34,7 @@ public partial class GrubsTerrain : Component
 
 		await Clear();
 
-		await GameTask.MainThread();
+		await Task.MainThread();
 
 		if ( SdfWorld.Transform is null )
 		{
@@ -161,7 +161,7 @@ public partial class GrubsTerrain : Component
 				projectile.WorldPosition += positionOffset;
 			}
 			
-			await GameTask.DelaySeconds( Time.Delta / 2f );
+			await Task.DelaySeconds( Time.Delta / 2f );
 		}
 	}
 
@@ -177,7 +177,7 @@ public partial class GrubsTerrain : Component
 
 	private async Task ScreenShake()
 	{
-		await GameTask.MainThread();
+		await Task.MainThread();
 			
 		if ( !Scene.Camera.IsValid() )
 			return;
@@ -187,7 +187,7 @@ public partial class GrubsTerrain : Component
 		{
 			progress += Time.Delta / 2f;
 			Scene.Camera.WorldPosition += Vector3.Random * 6f;
-			await GameTask.DelaySeconds( Time.Delta / 2f );
+			await Task.DelaySeconds( Time.Delta / 2f );
 		}
 	}
 
