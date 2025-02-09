@@ -14,7 +14,7 @@
 						remaps = 
 						[
 							{
-								from = "cube.006.vmat"
+								from = "cigar_low.vmat"
 								to = "models/tools/cigar/textures/cigar.vmat"
 							},
 						]
@@ -43,6 +43,7 @@
 							exception_list = 
 							[
 								"Cube_006",
+								"Cigar_low",
 							]
 						}
 					},
