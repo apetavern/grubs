@@ -12,7 +12,7 @@
 </style>
 
 <root>
-    @if (Networking.IsHost)
+    @if (Networking.IsHost && GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated)
     {
         <i onclick=@RefreshTerrain>refresh</i>
     }
@@ -49,5 +49,10 @@
     private void RefreshTerrain()
     {
         GrubsTerrain.Instance?.Init();
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(GrubsConfig.WorldTerrainType);
     }
 }
