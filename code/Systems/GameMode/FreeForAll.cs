@@ -358,7 +358,7 @@ public sealed class FreeForAll : BaseGameMode
 	{
 		const float crateSpawnDelay = 2f;
 		
-		if ( Game.Random.Float( 1f ) <= chance )
+		if ( Game.Random.Float( 1f ) >= chance )
 			return;
 
 		await Task.MainThread();
