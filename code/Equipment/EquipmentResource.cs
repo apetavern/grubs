@@ -9,6 +9,11 @@ public class EquipmentResource : GameResource
 	public EquipmentType Type { get; set; } = EquipmentType.Weapon;
 
 	public required PrefabFile EquipmentPrefab { get; set; }
+	
+	/// <summary>
+	/// Whether the player's hat should be hidden while this equipment is deployed.
+	/// </summary>
+	public bool HideHatWhenDeployed { get; set; } = false;
 
 	/// <summary>
 	/// The default amount of ammo a piece of equipment has.

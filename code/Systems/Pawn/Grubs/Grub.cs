@@ -6,43 +6,36 @@ using Grubs.UI.World;
 
 namespace Grubs.Systems.Pawn.Grubs;
 
-[Title("Grub"), Category("Grubs/Pawn")]
+[Title( "Grub" ), Category( "Grubs/Pawn" )]
 public sealed class Grub : Component, IResolvable
 {
-	private static readonly Logger Log = new( "Grub" );
-	
-	[Sync]
-	public Player Owner { get; private set; }
-	
-	[Sync]
-	public string Name { get; private set; }
-	
-	[Sync]
-	public Mountable ActiveMountable { get; set; }
+	private static readonly Logger Log = new("Grub");
+
+	[Sync] public Player Owner { get; private set; }
+
+	[Sync] public string Name { get; private set; }
+
+	[Sync] public Mountable ActiveMountable { get; set; }
 
 	public bool IsActive()
 	{
 		return BaseGameMode.Current.IsValid() && BaseGameMode.Current.IsGrubActive( this );
-	} 
-	
+	}
+
 	[Property] public Health Health { get; set; }
 	[Property] public GrubPlayerController PlayerController { get; set; }
 	[Property] public GrubCharacterController CharacterController { get; set; }
 	[Property] public GrubAnimator Animator { get; set; }
 	[Property] private TurnIndicator TurnIndicator { get; set; }
-	
+
 	public Equipment.Equipment ActiveEquipment => Owner?.Inventory.ActiveEquipment;
-	
+
 	public float HealthPercentage => Health.CurrentHealth / Health.MaxHealth;
 
 	public Transform EyePosition => WorldTransform.WithPosition( WorldPosition + Vector3.Up * 24f );
 
-	private static readonly List<Clothing.ClothingCategory> ValidClothingCategories = new()
-	{
-		Clothing.ClothingCategory.Hat,
-		Clothing.ClothingCategory.Facial,
-		Clothing.ClothingCategory.Hair
-	};
+	private static readonly List<Clothing.ClothingCategory> ValidClothingCategories = new() 
+		{ Clothing.ClothingCategory.Hat, Clothing.ClothingCategory.Facial, Clothing.ClothingCategory.Hair };
 
 	protected override void OnStart()
 	{
@@ -60,7 +53,7 @@ public sealed class Grub : Component, IResolvable
 	private void DressGrub( string avatarData )
 	{
 		var clothingContainer = ClothingContainer.CreateFromJson( avatarData );
-		
+
 		foreach ( var clothingEntry in clothingContainer.Clothing )
 		{
 			if ( !ValidClothingCategories.Contains( clothingEntry.Clothing.Category ) )
@@ -69,23 +62,36 @@ public sealed class Grub : Component, IResolvable
 			var go = new GameObject();
 			go.SetParent( GameObject );
 			go.Tags.Add( "clothing" );
+			go.Tags.Add( clothingEntry.Clothing.Category.ToString() );
 			go.Name = $"Clothing - {clothingEntry.Clothing.ResourceName}";
 			var clothingModel = go.Components.Create<SkinnedModelRenderer>();
 			clothingModel.Model = Model.Load( clothingEntry.Clothing.Model );
 			clothingModel.BoneMergeTarget = Animator.GrubRenderer;
 
 			if ( clothingEntry.Clothing.AllowTintSelect )
-            {
-                var tintValue = clothingEntry.Tint?.Clamp( 0, 1 ) ?? clothingEntry.Clothing.TintDefault;
-                var tintColor = clothingEntry.Clothing.TintSelection.Evaluate( tintValue );
-                clothingModel.Tint = tintColor;
-            }
+			{
+				var tintValue = clothingEntry.Tint?.Clamp( 0, 1 ) ?? clothingEntry.Clothing.TintDefault;
+				var tintColor = clothingEntry.Clothing.TintSelection.Evaluate( tintValue );
+				clothingModel.Tint = tintColor;
+			}
 		}
-		
+
 		Network.Refresh();
 	}
 
-	[Rpc.Owner( NetFlags.HostOnly )]
+	public void SetHatVisible( bool visible )
+	{
+		foreach (var go in GameObject.Children.Where(go => go.Tags.Has( Clothing.ClothingCategory.Hat.ToString() ) ||
+		                                                   go.Tags.Has( Clothing.ClothingCategory.Hair.ToString() )))
+		{
+			if ( go.Components.TryGet<SkinnedModelRenderer>( out var renderer, FindMode.EverythingInSelf ) )
+			{
+				renderer.Enabled = visible;
+			}
+		}
+	}
+
+[Rpc.Owner( NetFlags.HostOnly )]
 	public void SetOwner( Player player )
 	{
 		Owner = player;

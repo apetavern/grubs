@@ -58,6 +58,8 @@ public class Equipment : Component
 
 		var show = Grub.PlayerController.ShouldShowWeapon() && Deployed;
 		Model.Enabled = show;
+		
+		Grub.SetHatVisible( !show || !Data.HideHatWhenDeployed );
 	}
 
 	public void Initialize( Player player )
@@ -88,6 +90,8 @@ public class Equipment : Component
 		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
 		Model.Enabled = true;
 		Deployed = true;
+		
+		grub.SetHatVisible( !Data.HideHatWhenDeployed );
 
 		if ( IsProxy )
 			return;
@@ -99,7 +103,10 @@ public class Equipment : Component
 	public void Holster()
 	{
 		if ( Grub.IsValid() && Grub.Owner.IsValid() )
+		{
+			Grub.SetHatVisible( true );
 			GameObject.SetParent( Grub.Owner.GameObject );
+		}
 
 		if ( Components.TryGet( out Weapon weapon ) )
 		{

@@ -4,6 +4,7 @@
   "Icon": "models/tools/jetpack/jetpack.vmdl_c.png",
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/jetpack/jetpack.prefab",
+  "HideHatWhenDeployed": true,
   "DefaultAmmo": 1,
   "DropChance": 1,
   "__references": [],

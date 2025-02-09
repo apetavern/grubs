@@ -4,6 +4,7 @@
   "Icon": "models/tools/girders/girder_short.vmdl_c.png",
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/girder/girder.prefab",
+  "HideHatWhenDeployed": true,
   "DefaultAmmo": 2,
   "DropChance": 2,
   "__references": [],
