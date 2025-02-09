@@ -58,6 +58,7 @@ public sealed class GirderTool : Tool
 
 		if ( GrubFollowCamera.Local.IsValid() )
 			GrubFollowCamera.Local.Distance = 1024f;
+		
 		var isValidPlacement = CheckValidPlacement();
 		CursorVisual.Tint = (isValidPlacement ? Color.Green : Color.Red).WithAlpha( 0.75f );
 	}

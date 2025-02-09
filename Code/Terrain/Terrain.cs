@@ -160,6 +160,16 @@ public partial class GrubsTerrain : Component
 			{
 				projectile.WorldPosition += positionOffset;
 			}
+
+			foreach ( var destructibleObject in Scene.GetAllComponents<DestructibleObject>() )
+			{
+				destructibleObject.WorldPosition += positionOffset;
+			}
+
+			foreach ( var grave in Scene.GetAllObjects( true ).Where( go => go.Tags.Has( "grave" ) ) )
+			{
+				grave.WorldPosition += positionOffset;
+			}
 			
 			await Task.DelaySeconds( Time.Delta / 2f );
 		}
