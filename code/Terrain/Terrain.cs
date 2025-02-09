@@ -132,6 +132,29 @@ public partial class GrubsTerrain : Component
 		return validSpawn;
 	}
 
+	public async Task LowerTerrain( float amount )
+	{
+		var targetPosition = SdfWorld.WorldPosition - Vector3.Up * amount;
+
+		Sound.Play( "suddendeath_rumble" );
+
+		while ( Vector3.DistanceBetween( SdfWorld.WorldPosition, targetPosition ) > Time.Delta * 5f )
+		{
+			if ( Scene.Camera.IsValid() )
+				Scene.Camera.WorldPosition += Vector3.Random * 6f;
+			
+			var currentPosition = SdfWorld.WorldPosition;
+			SdfWorld.WorldPosition = Vector3.Lerp( SdfWorld.WorldPosition, targetPosition, Time.Delta * 3f );
+
+			foreach ( var grub in Scene.GetAllComponents<Grub>() )
+			{
+				grub.WorldPosition += Vector3.Up * (SdfWorld.WorldPosition.z - currentPosition.z);
+			}
+			
+			await GameTask.DelaySeconds( Time.Delta / 2f );
+		}
+	}
+
 	protected override void DrawGizmos()
 	{
 		base.DrawGizmos();

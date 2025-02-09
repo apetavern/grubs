@@ -29,11 +29,16 @@ public sealed class FreeForAll : BaseGameMode
 	
 	[Sync( SyncFlags.FromHost )]
 	public bool TurnIsChanging { get; private set; }
+	
+	[Sync( SyncFlags.FromHost )]
+	public bool SuddenDeathEnabled { get; private set; }
 
 	private Queue<Grub> DamageQueue { get; } = new();
 	private Queue<Grub> DeathQueue { get; } = new();
 	private Grub ActiveDamagedGrub { get; set; }
 	private TimeUntil TimeUntilNextDequeue { get; set; }
+	
+	private int RoundsUntilSuddenDeath { get; set; }
 	
 	/// <summary>
 	/// The amount of time elapsed since we started changing turns.
@@ -51,7 +56,6 @@ public sealed class FreeForAll : BaseGameMode
 	/// </summary>
 	private TimeSince TimeSinceResolveAttempted { get; set; }
 
-	private const float MinimumTurnChangeDuration = 0.5f;
 	private const float MaximumWorldResolveDuration = 20f;
 
 	protected override void OnModeInit()
@@ -74,6 +78,7 @@ public sealed class FreeForAll : BaseGameMode
 		Log.Info( $"{Name} mode starting." );
 		
 		GrubCount = GrubsConfig.GrubCount;
+		RoundsUntilSuddenDeath = GrubsConfig.SuddenDeathDelay;
 
 		// For each player, spawn Grubs and initialize their inventory.
 		foreach ( var player in Players )
@@ -240,6 +245,9 @@ public sealed class FreeForAll : BaseGameMode
 
 	private bool CratesResolved { get; set; } = false;
 	private bool CratesSpawnStarted { get; set; } = false;
+	
+	private bool SuddenDeathEffectStarted { get; set; } = false;
+	private bool SuddenDeathEffectEnded { get; set; } = false;
 
 	private void UpdateTurnChange()
 	{
@@ -277,20 +285,23 @@ public sealed class FreeForAll : BaseGameMode
 		}
 		
 		Log.Trace( $"No more damage queue. Moving on." );
-
-		// if ( !WeaponCrateSpawned )
-		// {
-		// 	if ( RollCrateSpawn( DropType.Weapon, GrubsConfig.WeaponCrateChancePerTurn, "A weapon crate has spawned!" ) )
-		// 	{
-		// 		WeaponCrateSpawned = true;
-		// 	}
-		// }
-
+		
 		if ( !CratesSpawnStarted )
 			_ = ResolveCrates();
 
 		if ( !CratesResolved )
 			return;
+
+		if ( GrubsConfig.SuddenDeathEnabled )
+		{
+			SuddenDeathEnabled = RoundsUntilSuddenDeath <= 0;
+
+			if ( !SuddenDeathEffectStarted && SuddenDeathEnabled )
+				_ = HandleSuddenDeath();
+
+			if ( !SuddenDeathEffectEnded && SuddenDeathEnabled )
+				return;
+		}
 
 		var livingPlayers = Player.AllLiving.ToList();
 		
@@ -339,6 +350,9 @@ public sealed class FreeForAll : BaseGameMode
 
 		CratesSpawnStarted = false;
 		CratesResolved = false;
+		
+		SuddenDeathEffectStarted = false;
+		SuddenDeathEffectEnded = false;
 	}
 
 	private async Task ResolveCrates()
@@ -373,6 +387,19 @@ public sealed class FreeForAll : BaseGameMode
 			GrubFollowCamera.Local.QueueTarget( crate, crateSpawnDelay );
 
 		await Task.DelaySeconds( crateSpawnDelay );
+	}
+
+	private async Task HandleSuddenDeath()
+	{
+		SuddenDeathEffectStarted = true;
+		
+		const float suddenDeathDelay = 1f;
+
+		await GrubsTerrain.Instance.LowerTerrain( (float)GrubsConfig.SuddenDeathAggression );
+		
+		await Task.DelaySeconds( suddenDeathDelay );
+		
+		SuddenDeathEffectEnded = true;
 	}
 
 	private void ProcessDeathQueue()
@@ -427,6 +454,9 @@ public sealed class FreeForAll : BaseGameMode
 		Log.Info( $"Rotating active player (current: {ActivePlayer}) (count: {_rotateCount})." );
 		if ( PlayerQueue.Count == 0 )
 		{
+			Log.Info( $"Lowering rounds until sudden death to {RoundsUntilSuddenDeath - 1}" );
+			RoundsUntilSuddenDeath -= 1;
+			
 			foreach ( var player in Player.AllLiving )
 				PlayerQueue.Add( player );
 		}
@@ -450,6 +480,7 @@ public sealed class FreeForAll : BaseGameMode
 		PlayerQueue.Clear();
 		ActivePlayer = null;
 		TurnIsChanging = false;
+		SuddenDeathEnabled = false;
 		
 		DamageQueue.Clear();
 		ActiveDamagedGrub = null;

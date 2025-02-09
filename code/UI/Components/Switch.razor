@@ -1,0 +1,38 @@
+﻿@namespace Grubs.UI.Components
+@inherits Panel
+
+<root>
+    <button class="switch-button @(Value ? "checked" : "")">
+        <div class="switch-knob @(Value ? "checked" : "")" />
+    </button>
+</root>
+
+@code
+{
+    private bool _value;
+    
+    public Action<bool> OnValueChanged { get; set; }
+
+    public bool Value
+    {
+        get => _value;
+
+        set
+        {
+            if (_value == value)
+                return;
+
+            _value = value;
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnMouseDown(MousePanelEvent e)
+    {
+        base.OnMouseDown(e);
+
+        Value = !Value;
+        OnValueChanged?.Invoke( Value );
+        e.StopPropagation();
+    }
+}

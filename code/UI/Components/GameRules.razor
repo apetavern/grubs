@@ -56,6 +56,16 @@
                         <SliderControl Min=@(0) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.HealthCrateChancePerTurn />
                     </Control>
                 </ControlInput>
+                <ControlInput class="control-wrap" Label="Sudden Death Enabled">
+                    <Control>
+                        <Switch Value:bind=@GrubsConfig.SuddenDeathEnabled />
+                    </Control>
+                </ControlInput>
+                <ControlInput class="control-wrap" Label="Sudden Death Delay: @($"{GrubsConfig.SuddenDeathDelay} Rounds")">
+                    <Control>
+                        <SliderControl Min=@(1) Max=@(10) Step=@(1f) Value:bind=@GrubsConfig.SuddenDeathDelay />
+                    </Control>
+                </ControlInput>
             }
             else if (SelectedTab == "terrain")
             {
@@ -143,6 +153,7 @@
         var crateOdds = GrubsConfig.WeaponCrateChancePerTurn + GrubsConfig.ToolCrateChancePerTurn + GrubsConfig.HealthCrateChancePerTurn;
         var terrainGen = GrubsConfig.TerrainLength + GrubsConfig.TerrainHeight + GrubsConfig.TerrainAmplitude + GrubsConfig.TerrainFrequency + GrubsConfig.TerrainNoiseZoom;
         var terrainOpts = (int)GrubsConfig.WorldTerrainType + (int)GrubsConfig.WorldTerrainTexture;
-        return HashCode.Combine(GrubsConfig.GrubCount, GrubsConfig.TurnDuration, crateOdds, terrainGen, terrainOpts);
+        var suddenDeath = GrubsConfig.SuddenDeathDelay;
+        return HashCode.Combine(GrubsConfig.GrubCount, GrubsConfig.TurnDuration, crateOdds, terrainGen, terrainOpts, suddenDeath);
     }
 }
