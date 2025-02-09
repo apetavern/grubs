@@ -5,16 +5,42 @@
     "Name": "torch",
     "Tags": "tool",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "8977b4a7-78c3-4861-b2e6-54aeece712b9",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
         "Model": "models/tools/blowtorch/blowtorch.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -32,6 +58,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Blowtorch",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": true,
         "SlotIndex": 0,
         "UnlockDelay": 0
@@ -52,6 +84,15 @@
         },
         "FiringType": "Complex",
         "MaxUses": 5,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnFire": null,
+        "OnFireFinished": null,
         "StartMultiplier": 40,
         "TorchFlame": {
           "_type": "gameobject",
@@ -65,7 +106,13 @@
         "__guid": "b4194bd2-27b4-44dc-ac73-5aa0e582f5d8",
         "Inputs": {
           "fire": "Fire (Hold)"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
@@ -75,25 +122,62 @@
         "Name": "Object",
         "Position": "21.42269,-0.7815454,4.673153",
         "Scale": "0.4872095,0.4872095,0.4872095",
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "0d45f6ed-5d44-4304-96d4-9d267d562eb1",
             "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
             "Model": "particles/blueflame/blueflame.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
         ]
       }
     ],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
