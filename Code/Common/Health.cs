@@ -40,16 +40,15 @@ public partial class Health : Component
 	{
 		if ( Components.TryGet( out Grub grub ) )
 		{
+			if ( !grub.IsValid() )
+				return;
+			
 			if ( BaseGameMode.Current.IsValid() && BaseGameMode.Current.IsGrubActive( grub ) )
 				BaseGameMode.Current.GrubDamaged( grub );
 			
 			if ( !immediate )
 			{
-				if ( Networking.IsHost && BaseGameMode.Current.IsValid() )
-					BaseGameMode.Current?.GrubDamaged( grub );
-
-				HasBeenDamaged = true;
-				DamageQueue.Enqueue( damageInfo );
+				QueueDamage( damageInfo, grub );
 				return;
 			}
 		}
@@ -83,6 +82,15 @@ public partial class Health : Component
 			
 			_ = OnDeath( isKillZoneDeath );
 		}
+	}
+
+	private void QueueDamage( GrubsDamageInfo damageInfo, Grub grub )
+	{
+		if ( Networking.IsHost && BaseGameMode.Current.IsValid() )
+			BaseGameMode.Current?.GrubDamaged( grub );
+
+		HasBeenDamaged = true;
+		DamageQueue.Enqueue( damageInfo );
 	}
 
 	[Rpc.Host]

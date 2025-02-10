@@ -62,10 +62,14 @@ public sealed class JetpackTool : Tool
 		if ( !Equipment.Model.Active )
 			return;
 
-		_jetSound.Volume = Volume;
+		if ( !_jetSound.IsValid() )
+			_jetSound.Volume = Volume;
 
 		var characterController = Equipment.Grub.CharacterController;
 
+		if ( !FBFlame.IsValid() || UDFlame1.IsValid() || UDFlame2.IsValid() )
+			return;
+		
 		FBFlame.Enabled = true;
 		UDFlame1.Enabled = true;
 		UDFlame2.Enabled = true;
