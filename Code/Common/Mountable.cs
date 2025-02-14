@@ -32,13 +32,16 @@ public sealed class Mountable : Component
 
 		foreach ( var collider in Grub.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
 		{
-			collider.Enabled = true;
+			if ( collider.IsValid() )
+				collider.Enabled = true;
 		}
 		
 		Grub.Animator.GrubRenderer.Set( "heightdiff", 0f );
 		Grub.Animator.GrubRenderer.Set( "aimangle", 0f );
 		Grub.Animator.GrubRenderer.Set( "onrope", false );
+		
 		Grub.WorldRotation = Rotation.LookAt( Grub.WorldRotation.Forward.WithZ( 0 ), Vector3.Up );
+		
 		Grub.PlayerController.Enabled = true;
 		Grub.PlayerController.IsOnRope = false;
 
@@ -49,7 +52,9 @@ public sealed class Mountable : Component
 		MountEnabled = false;
 		Grub.ActiveMountable = null;
 		Grub = null;
-		GameObject?.Destroy();
+		
+		if ( GameObject.IsValid() )
+			GameObject.Destroy();
 	}
 
 	protected override void OnUpdate()

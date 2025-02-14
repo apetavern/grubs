@@ -38,6 +38,9 @@ public partial class Health : Component
 
 	public void TakeDamage( GrubsDamageInfo damageInfo, bool immediate = false )
 	{
+		if ( !this.IsValid() || Components is null )
+			return;
+		
 		if ( Components.TryGet( out Grub grub ) )
 		{
 			if ( !grub.IsValid() )
