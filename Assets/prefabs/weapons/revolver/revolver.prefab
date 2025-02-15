@@ -38,7 +38,8 @@
         },
         "RenderType": "On",
         "Sequence": {
-          "Name": null
+          "Name": null,
+          "PlaybackRate": 1
         },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -49,7 +50,7 @@
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/revolver.geq",
         "HoldPose": "Revolver",
-        "Icon": "models/weapons/revolver/revolver.vmdl_c.png",
+        "Icon": "models/weapons/revolver/revolver.vmdl.png",
         "Model": {
           "_type": "component",
           "component_id": "02d9d309-39ab-4390-a196-729073ca6a40",

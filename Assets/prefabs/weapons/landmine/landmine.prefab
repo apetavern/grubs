@@ -8,11 +8,39 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "4690f1df-b690-476c-87b7-4054f491c8af",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "MaterialGroup": null,
         "MaterialOverride": "models/weapons/landmine/materials/mat-weapon-landmine-grubs@2.vmat",
         "Model": "models/weapons/landmine/landmine.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null,
+          "PlaybackRate": 1
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -22,7 +50,7 @@
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/landmine.geq",
         "HoldPose": "Droppable",
-        "Icon": "models/weapons/landmine/landmine.vmdl_c.png",
+        "Icon": "models/weapons/landmine/landmine.vmdl.png",
         "Model": {
           "_type": "component",
           "component_id": "4690f1df-b690-476c-87b7-4054f491c8af",
@@ -30,6 +58,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Landmine",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": false,
         "SlotIndex": 0,
         "UnlockDelay": 1
@@ -50,9 +84,17 @@
         },
         "FiringType": "Instant",
         "MaxUses": 1,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OnFire": {
-          "__version": 7,
+          "__version": 9,
           "__guid": "d3a649a5-11d8-42b5-beee-c74a33a5a521",
+          "__changeId": 0,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -110,10 +152,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
-              },
+              "Id": 6,
+              "Value": null,
               "DstId": 2,
               "DstName": "projectile"
             },
@@ -137,12 +177,13 @@
             }
           ],
           "Defaults": {
-            "$5._value": {
+            "$6._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
             }
           }
         },
+        "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
@@ -151,15 +192,45 @@
         "__guid": "26c175fe-a274-4f50-97ba-72fa673de1ff",
         "Inputs": {
           "fire": "Drop"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],
-    "__variables": []
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "DontBreakAsTemplate": false,
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
