@@ -10,10 +10,19 @@
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "8279005d-c5d7-4371-8434-4fa3039952ad",
+          "Author": null,
           "Changes": "",
           "Description": "",
+          "Group": null,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "SceneTags": "",
-          "Title": "main_menu"
+          "Title": "main_menu",
+          "Version": null
         }
       ]
     },
@@ -30,6 +39,12 @@
           "EnableCollision": true,
           "MapName": "maps/gr_menu.vmap",
           "NoOrigin": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "OnMapLoaded": null,
           "OnMapUnloaded": null,
           "UseMapFromLaunch": false
@@ -52,7 +67,14 @@
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
+          "FovAxis": "Horizontal",
           "IsMainCamera": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Orthographic": false,
           "OrthographicHeight": 1204,
           "Priority": 1,
@@ -69,6 +91,12 @@
           "Brightness": 1,
           "Contrast": 1.01,
           "HueRotate": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Saturation": 1.05
         },
         {
@@ -77,6 +105,12 @@
           "Center": "0.5,0.5",
           "Color": "0,0,0,1",
           "Intensity": 0.3,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Roundness": 0.35,
           "Smoothness": 1
         },
@@ -88,7 +122,31 @@
           "FocalDistance": 135,
           "FocusRange": 500,
           "FrontBlur": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "QualityLevel": "High"
+        },
+        {
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "88fc415d-92f5-4bf8-aac6-f5b49ec44dea",
+          "__version": 3,
+          "AutoExposureEnabled": false,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 3,
+          "MinimumExposure": 1,
+          "Mode": "ReinhardJodie",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Rate": 1
         }
       ]
     },
@@ -107,9 +165,16 @@
           "Attenuation": 1,
           "ConeInner": 35,
           "ConeOuter": 45,
+          "Cookie": null,
           "FogMode": "Enabled",
           "FogStrength": 1,
           "LightColor": "1,0.96262,0.91373,1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Radius": 500,
           "Shadows": true
         }
@@ -130,6 +195,12 @@
             "Maxs": "150,150,100"
           },
           "FalloffExponent": 1,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Strength": 5
         }
       ]
@@ -143,15 +214,28 @@
       "Components": [
         {
           "__type": "Grubs.UI.Menu.Menu",
-          "__guid": "1e66b6ef-f6ee-465f-ac85-03d40d540f2b"
+          "__guid": "1e66b6ef-f6ee-465f-ac85-03d40d540f2b",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
         },
         {
           "__type": "Sandbox.ScreenPanel",
           "__guid": "5947718e-cc50-4245-82a7-b1abd81261d3",
           "AutoScreenScale": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Opacity": 1,
           "Scale": 1,
           "ScaleStrategy": "ConsistentHeight",
+          "TargetCamera": null,
           "ZIndex": 100
         }
       ]
@@ -190,6 +274,12 @@
           "Occlusion": false,
           "OcclusionOverride": false,
           "OcclusionRadius": 32,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "Pitch": 1,
           "PlayOnStart": true,
           "ReflectionOverride": false,

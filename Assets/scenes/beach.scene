@@ -63,6 +63,7 @@
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
+          "FovAxis": "Horizontal",
           "IsMainCamera": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -159,6 +160,24 @@
           "OnComponentUpdate": null,
           "Roundness": 0.24,
           "Smoothness": 0.98
+        },
+        {
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "47d54fa6-1b09-4e64-a57f-7c6889d92213",
+          "__version": 3,
+          "AutoExposureEnabled": true,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 3,
+          "MinimumExposure": 1,
+          "Mode": "ReinhardJodie",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Rate": 1
         }
       ]
     },
@@ -253,6 +272,7 @@
           "Opacity": 1,
           "Scale": 1,
           "ScaleStrategy": "ConsistentHeight",
+          "TargetCamera": null,
           "ZIndex": 100
         },
         {
@@ -1031,6 +1051,7 @@
               "OnComponentUpdate": null,
               "Projection": "Box",
               "RenderDynamically": true,
+              "Resolution": "Small",
               "Texture": "textures/cubemaps/default2.vtex",
               "TintColor": "1,1,1,1",
               "UpdateStrategy": "OnEnabled",

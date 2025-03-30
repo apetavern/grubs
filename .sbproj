@@ -8,7 +8,7 @@
   "Resources": "*.vmdl_c.png\n*.vmdl.png\n*.sdflayer\nfonts/*\ntextures/*\nmaterials/reticle/*\nweapons/*.png",
   "PackageReferences": [],
   "EditorReferences": null,
-  "IsWhitelistDisabled": false,
+  "IsStandaloneOnly": false,
   "Metadata": {
     "MapList": [
       "apetavern.gr_beach"
