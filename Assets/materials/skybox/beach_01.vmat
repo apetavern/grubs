@@ -2,10 +2,8 @@
 
 Layer0
 {
-	shader "shaders/sky.shader_c"
+	shader "shaders/sky.shader"
 
 	//---- Texture ----
-	g_flBrightnessExposureBias "0.000"
-	g_flRenderOnlyExposureBias "0.000"
 	SkyTexture "textures/hdr/fs002_day.exr"
 }

@@ -1,12 +1,27 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_water.shdrgrph",
   "Model": null,
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Opaque",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Time",
       "Identifier": "0",
-      "Position": "-2176,400"
+      "Position": "-2172,396",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -17,7 +32,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "1",
-      "Position": "128,-32"
+      "Position": "132,-36",
+      "HandleOffsets": {}
     },
     {
       "_class": "TileAndOffset",
@@ -25,7 +41,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "2",
-      "Position": "-1776,160",
+      "Position": "-1776,156",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "8",
         "Output": "Result"
@@ -44,7 +61,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "3",
-      "Position": "-3200,48",
+      "Position": "-3204,48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "16",
         "Output": "Result"
@@ -60,7 +78,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "4",
-      "Position": "-3056,-96",
+      "Position": "-3060,-96",
+      "HandleOffsets": {},
       "Tile": {
         "Identifier": "10",
         "Output": "Result"
@@ -75,7 +94,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "5",
-      "Position": "-1968,416",
+      "Position": "-1968,420",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "0",
         "Output": "Result"
@@ -94,7 +114,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "6",
-      "Position": "-2736,304"
+      "Position": "-2736,300",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float2",
@@ -105,13 +126,17 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "7",
-      "Position": "-2176,272"
+      "Position": "-2172,276",
+      "HandleOffsets": {}
     },
     {
       "_class": "Lerp",
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Fraction": 0.036384385,
       "Identifier": "8",
-      "Position": "-2384,16",
+      "Position": "-2388,12",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -127,9 +152,12 @@
     },
     {
       "_class": "Lerp",
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Fraction": 0.5,
       "Identifier": "9",
-      "Position": "-784,-96",
+      "Position": "-780,-96",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "14",
         "Output": "Result"
@@ -152,7 +180,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "10",
-      "Position": "-3408,-96"
+      "Position": "-3408,-96",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float4",
@@ -163,14 +192,16 @@
         "Type": "Color"
       },
       "Identifier": "11",
-      "Position": "-1184,-128"
+      "Position": "-1188,-132",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "12",
-      "Position": "-1184,256",
+      "Position": "-1188,252",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "13",
         "Output": "G"
@@ -189,6 +220,7 @@
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
         "PrimaryGroup": {
@@ -196,7 +228,8 @@
         }
       },
       "Identifier": "13",
-      "Position": "-1472,160",
+      "Position": "-1476,156",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "2",
         "Output": "Result"
@@ -211,7 +244,8 @@
         "Type": "Color"
       },
       "Identifier": "14",
-      "Position": "-1184,-288"
+      "Position": "-1188,-288",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -222,12 +256,14 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "15",
-      "Position": "-1472,352"
+      "Position": "-1476,348",
+      "HandleOffsets": {}
     },
     {
       "_class": "Time",
       "Identifier": "16",
-      "Position": "-3408,32"
+      "Position": "-3408,36",
+      "HandleOffsets": {}
     },
     {
       "_class": "Result",
@@ -236,7 +272,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "17",
-      "Position": "368,-128",
+      "Position": "372,-132",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "20",
         "Output": "Result"
@@ -263,7 +300,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "18",
-      "Position": "-3408,96"
+      "Position": "-3408,96",
+      "HandleOffsets": {}
     },
     {
       "_class": "TextureSampler",
@@ -274,6 +312,7 @@
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
         "PrimaryGroup": {
@@ -281,7 +320,8 @@
         }
       },
       "Identifier": "19",
-      "Position": "-2736,112",
+      "Position": "-2736,108",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "4",
         "Output": "Result"
@@ -289,9 +329,12 @@
     },
     {
       "_class": "Lerp",
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Fraction": 0.5,
       "Identifier": "20",
-      "Position": "80,-288",
+      "Position": "84,-288",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "31",
         "Output": "Result"
@@ -311,7 +354,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "21",
-      "Position": "-1360,-688",
+      "Position": "-1356,-684",
+      "HandleOffsets": {},
       "Tile": {
         "Identifier": "25",
         "Output": "Result"
@@ -330,6 +374,7 @@
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
         "PrimaryGroup": {
@@ -337,7 +382,8 @@
         }
       },
       "Identifier": "22",
-      "Position": "-1040,-688",
+      "Position": "-1044,-684",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "21",
         "Output": "Result"
@@ -348,7 +394,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "23",
-      "Position": "-1632,-544",
+      "Position": "-1632,-540",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "24",
         "Output": "Result"
@@ -361,7 +408,8 @@
     {
       "_class": "Time",
       "Identifier": "24",
-      "Position": "-1840,-560"
+      "Position": "-1836,-564",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float2",
@@ -372,14 +420,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "25",
-      "Position": "-1840,-688"
+      "Position": "-1836,-684",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "26",
-      "Position": "-768,-656",
+      "Position": "-768,-660",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "28",
         "Output": "Out"
@@ -393,12 +443,14 @@
       "_class": "Fresnel",
       "DefaultPower": 10,
       "Identifier": "27",
-      "Position": "-1120,-832"
+      "Position": "-1116,-828",
+      "HandleOffsets": {}
     },
     {
       "_class": "OneMinus",
       "Identifier": "28",
-      "Position": "-912,-832",
+      "Position": "-912,-828",
+      "HandleOffsets": {},
       "In": {
         "Identifier": "27",
         "Output": "Result"
@@ -413,7 +465,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "29",
-      "Position": "-1840,-496"
+      "Position": "-1836,-492",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float2",
@@ -424,15 +477,19 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "30",
-      "Position": "-2176,480"
+      "Position": "-2172,480",
+      "HandleOffsets": {}
     },
     {
       "_class": "Blend",
+      "DefaultA": "0,0,0,1",
+      "DefaultB": "1,1,1,1",
       "Fraction": 1,
       "BlendMode": "Overlay",
       "Clamp": true,
       "Identifier": "31",
-      "Position": "-640,-288",
+      "Position": "-636,-288",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "14",
         "Output": "Result"
@@ -451,12 +508,14 @@
         "Default": "1,1,1,1",
         "Extension": "Normal",
         "CustomExtension": "",
+        "ShowExtension": true,
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
         "ImageFormat": "BC7"
       },
       "Identifier": "32",
       "Position": "-816,864",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "38",
         "Output": "Result"
@@ -468,7 +527,8 @@
       "OutputSpace": "Tangent",
       "DecodeNormal": true,
       "Identifier": "33",
-      "Position": "-608,864",
+      "Position": "-612,864",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "32",
         "Output": "Result"
@@ -477,7 +537,8 @@
     {
       "_class": "Time",
       "Identifier": "34",
-      "Position": "-1392,992"
+      "Position": "-1392,996",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float2",
@@ -488,7 +549,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "35",
-      "Position": "-1392,864"
+      "Position": "-1392,864",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float2",
@@ -499,14 +561,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "36",
-      "Position": "-1392,1056"
+      "Position": "-1392,1056",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "37",
-      "Position": "-1184,1008",
+      "Position": "-1188,1008",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "34",
         "Output": "Result"
@@ -522,7 +586,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "38",
-      "Position": "-1040,864",
+      "Position": "-1044,864",
+      "HandleOffsets": {},
       "Tile": {
         "Identifier": "35",
         "Output": "Result"
@@ -540,12 +605,14 @@
       "Description": "",
       "Layer": 1,
       "Identifier": "39",
-      "Position": "-1424,800"
+      "Position": "-1428,804",
+      "HandleOffsets": {}
     },
     {
       "_class": "Time",
       "Identifier": "40",
-      "Position": "-1408,1440"
+      "Position": "-1404,1440",
+      "HandleOffsets": {}
     },
     {
       "_class": "TileAndOffset",
@@ -553,7 +620,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "41",
-      "Position": "-1056,1312",
+      "Position": "-1056,1308",
+      "HandleOffsets": {},
       "Tile": {
         "Identifier": "46",
         "Output": "Result"
@@ -572,6 +640,7 @@
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
         "PrimaryGroup": {
@@ -579,7 +648,8 @@
         }
       },
       "Identifier": "42",
-      "Position": "-768,1312",
+      "Position": "-768,1308",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "41",
         "Output": "Result"
@@ -593,7 +663,8 @@
       "Description": "",
       "Layer": 1,
       "Identifier": "43",
-      "Position": "-1440,1248"
+      "Position": "-1440,1248",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float2",
@@ -604,14 +675,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "44",
-      "Position": "-1408,1504"
+      "Position": "-1404,1500",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "45",
-      "Position": "-304,1328",
+      "Position": "-300,1332",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "48",
         "Output": "Result"
@@ -630,14 +703,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "46",
-      "Position": "-1408,1312"
+      "Position": "-1404,1308",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "47",
-      "Position": "-1200,1456",
+      "Position": "-1200,1452",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "40",
         "Output": "Result"
@@ -656,7 +731,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "48",
-      "Position": "-768,1504"
+      "Position": "-768,1500",
+      "HandleOffsets": {}
     }
   ]
 }

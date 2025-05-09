@@ -1,7 +1,21 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_water_ring.shdrgrph",
   "Model": "particles/watersplash/splash_ring.vmdl",
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Masked",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Result",
@@ -10,7 +24,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "800,64",
+      "Position": "804,60",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "17",
         "Output": "Result"
@@ -30,7 +45,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "1",
-      "Position": "-336,160",
+      "Position": "-336,156",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "20",
         "Output": "Result"
@@ -51,14 +67,15 @@
       "UI": {
         "Name": "Texture1",
         "Default": "1,1,1,1",
+        "ShowExtension": true,
         "SrgbRead": true,
         "PrimaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "2",
-      "Position": "-64,128",
+      "Position": "-60,132",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "1",
         "Output": "Result"
@@ -66,6 +83,8 @@
     },
     {
       "_class": "Float2",
+      "Min": "0,0",
+      "Max": "1,1",
       "Value": "10,1",
       "Name": "UV Tiling One",
       "IsAttribute": false,
@@ -75,12 +94,14 @@
         }
       },
       "Identifier": "3",
-      "Position": "-1216,272"
+      "Position": "-1212,276",
+      "HandleOffsets": {}
     },
     {
       "_class": "Time",
       "Identifier": "4",
-      "Position": "-976,128"
+      "Position": "-972,132",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -98,14 +119,16 @@
         }
       },
       "Identifier": "5",
-      "Position": "-976,48"
+      "Position": "-972,48",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": -0.3,
       "DefaultB": 0,
       "Identifier": "6",
-      "Position": "-752,64",
+      "Position": "-756,60",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "5",
         "Output": "Result"
@@ -120,7 +143,8 @@
       "DefaultA": 1,
       "DefaultB": 0,
       "Identifier": "7",
-      "Position": "-640,64",
+      "Position": "-636,60",
+      "HandleOffsets": {},
       "B": {
         "Identifier": "6",
         "Output": "Result"
@@ -133,14 +157,15 @@
       "UI": {
         "Name": "Texture2",
         "Default": "1,1,1,1",
+        "ShowExtension": true,
         "SrgbRead": true,
         "PrimaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "8",
-      "Position": "-64,320",
+      "Position": "-60,324",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "21",
         "Output": "Result"
@@ -149,7 +174,8 @@
     {
       "_class": "Time",
       "Identifier": "9",
-      "Position": "-864,496"
+      "Position": "-864,492",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -167,14 +193,16 @@
         }
       },
       "Identifier": "10",
-      "Position": "-864,416"
+      "Position": "-864,420",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": -0.3,
       "DefaultB": 0,
       "Identifier": "11",
-      "Position": "-624,448",
+      "Position": "-624,444",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "10",
         "Output": "Result"
@@ -189,7 +217,8 @@
       "DefaultA": 1,
       "DefaultB": 0,
       "Identifier": "12",
-      "Position": "-512,448",
+      "Position": "-516,444",
+      "HandleOffsets": {},
       "B": {
         "Identifier": "11",
         "Output": "Result"
@@ -197,9 +226,12 @@
     },
     {
       "_class": "Lerp",
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Fraction": 0.5,
       "Identifier": "13",
-      "Position": "272,64",
+      "Position": "276,60",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "2",
         "Output": "Result"
@@ -211,8 +243,12 @@
     },
     {
       "_class": "SmoothStep",
+      "DefaultInput": 0,
+      "DefaultEdge1": 0,
+      "DefaultEdge2": 0,
       "Identifier": "14",
-      "Position": "560,176",
+      "Position": "564,180",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "13",
         "Output": "Result"
@@ -242,7 +278,8 @@
         }
       },
       "Identifier": "15",
-      "Position": "320,224"
+      "Position": "324,228",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -261,7 +298,8 @@
         }
       },
       "Identifier": "16",
-      "Position": "320,304"
+      "Position": "324,300",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float4",
@@ -278,14 +316,16 @@
         }
       },
       "Identifier": "17",
-      "Position": "320,-240"
+      "Position": "324,-240",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 2,
       "Identifier": "18",
-      "Position": "560,16",
+      "Position": "564,12",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "17",
         "Output": "Result"
@@ -308,14 +348,16 @@
         }
       },
       "Identifier": "19",
-      "Position": "320,-80"
+      "Position": "324,-84",
+      "HandleOffsets": {}
     },
     {
       "_class": "TextureCoord",
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "20",
-      "Position": "-1280,176"
+      "Position": "-1284,180",
+      "HandleOffsets": {}
     },
     {
       "_class": "TileAndOffset",
@@ -324,6 +366,7 @@
       "WrapTo01": false,
       "Identifier": "21",
       "Position": "-336,288",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "20",
         "Output": "Result"
@@ -339,6 +382,8 @@
     },
     {
       "_class": "Float2",
+      "Min": "0,0",
+      "Max": "1,1",
       "Value": "16,1",
       "Name": "UV Tiling Two",
       "IsAttribute": false,
@@ -348,7 +393,8 @@
         }
       },
       "Identifier": "22",
-      "Position": "-1216,384"
+      "Position": "-1212,384",
+      "HandleOffsets": {}
     }
   ]
 }

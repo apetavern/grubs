@@ -1,7 +1,21 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_fire.shdrgrph",
   "Model": "models/dev/box.vmdl",
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Translucent",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Result",
@@ -10,7 +24,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "2864,320",
+      "Position": "2868,324",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "35",
         "Output": "Result"
@@ -36,30 +51,33 @@
         "Name": "Noise One",
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "1",
-      "Position": "-320,-80",
+      "Position": "-324,-84",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "6",
-        "Output": "Vector"
+        "Output": "XYZW"
       }
     },
     {
       "_class": "Time",
       "Identifier": "2",
-      "Position": "-1088,96"
+      "Position": "-1092,96",
+      "HandleOffsets": {}
     },
     {
       "_class": "Add",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "3",
-      "Position": "-640,48",
+      "Position": "-636,48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "8",
         "Output": "Result"
@@ -74,12 +92,14 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "4",
-      "Position": "-1104,-96"
+      "Position": "-1104,-96",
+      "HandleOffsets": {}
     },
     {
       "_class": "SplitVector",
       "Identifier": "5",
       "Position": "-864,-96",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "4",
         "Output": "Result"
@@ -92,7 +112,8 @@
       "DefaultZ": 0,
       "DefaultW": 0,
       "Identifier": "6",
-      "Position": "-512,-80",
+      "Position": "-516,-84",
+      "HandleOffsets": {},
       "X": {
         "Identifier": "5",
         "Output": "X"
@@ -118,14 +139,16 @@
         }
       },
       "Identifier": "7",
-      "Position": "-1088,32"
+      "Position": "-1092,36",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "8",
-      "Position": "-848,48",
+      "Position": "-852,48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "7",
         "Output": "Result"
@@ -140,7 +163,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "9",
-      "Position": "992,304",
+      "Position": "996,300",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "10",
         "Output": "Result"
@@ -155,7 +179,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "10",
-      "Position": "880,192",
+      "Position": "876,192",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "25",
         "Output": "Result"
@@ -181,14 +206,16 @@
         }
       },
       "Identifier": "11",
-      "Position": "656,240"
+      "Position": "660,240",
+      "HandleOffsets": {}
     },
     {
       "_class": "TextureCoord",
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "12",
-      "Position": "656,336"
+      "Position": "660,336",
+      "HandleOffsets": {}
     },
     {
       "_class": "TextureSampler",
@@ -201,14 +228,15 @@
         "Name": "Gradient",
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "13",
-      "Position": "1184,304",
+      "Position": "1188,300",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "9",
         "Output": "Result"
@@ -219,7 +247,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "14",
-      "Position": "-912,640",
+      "Position": "-912,636",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "20",
         "Output": "Result"
@@ -234,7 +263,8 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "15",
-      "Position": "-1168,496"
+      "Position": "-1164,492",
+      "HandleOffsets": {}
     },
     {
       "_class": "CombineVector",
@@ -243,7 +273,8 @@
       "DefaultZ": 0,
       "DefaultW": 0,
       "Identifier": "16",
-      "Position": "-576,512",
+      "Position": "-576,516",
+      "HandleOffsets": {},
       "X": {
         "Identifier": "19",
         "Output": "X"
@@ -258,7 +289,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "17",
-      "Position": "-704,640",
+      "Position": "-708,636",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "14",
         "Output": "Result"
@@ -271,12 +303,14 @@
     {
       "_class": "Time",
       "Identifier": "18",
-      "Position": "-1152,688"
+      "Position": "-1152,684",
+      "HandleOffsets": {}
     },
     {
       "_class": "SplitVector",
       "Identifier": "19",
-      "Position": "-928,496",
+      "Position": "-924,492",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "15",
         "Output": "Result"
@@ -298,7 +332,8 @@
         }
       },
       "Identifier": "20",
-      "Position": "-1152,624"
+      "Position": "-1152,624",
+      "HandleOffsets": {}
     },
     {
       "_class": "TextureSampler",
@@ -308,17 +343,18 @@
         "Name": "Noise Two",
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "21",
-      "Position": "-384,512",
+      "Position": "-384,516",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "16",
-        "Output": "Vector"
+        "Output": "XYZW"
       }
     },
     {
@@ -327,6 +363,7 @@
       "DefaultB": 1,
       "Identifier": "22",
       "Position": "0,192",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "1",
         "Output": "Result"
@@ -340,13 +377,15 @@
       "_class": "Reroute",
       "Comment": " Noise 02",
       "Identifier": "23",
-      "Position": "-672,608"
+      "Position": "-672,612",
+      "HandleOffsets": {}
     },
     {
       "_class": "Reroute",
       "Comment": " Noise 01",
       "Identifier": "24",
-      "Position": "-608,16"
+      "Position": "-612,12",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
@@ -354,6 +393,7 @@
       "DefaultB": 1,
       "Identifier": "25",
       "Position": "528,192",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "22",
         "Output": "Result"
@@ -367,7 +407,8 @@
       "_class": "Reroute",
       "Comment": "Gradient",
       "Identifier": "26",
-      "Position": "1264,272"
+      "Position": "1260,276",
+      "HandleOffsets": {}
     },
     {
       "_class": "TextureSampler",
@@ -377,21 +418,23 @@
         "Name": "Distortion Mask",
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "27",
-      "Position": "288,288"
+      "Position": "288,288",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "28",
-      "Position": "1712,368",
+      "Position": "1716,372",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "13",
         "Output": "Result"
@@ -405,7 +448,8 @@
       "_class": "Reroute",
       "Comment": "UV Distort",
       "Identifier": "29",
-      "Position": "768,192"
+      "Position": "768,192",
+      "HandleOffsets": {}
     },
     {
       "_class": "TextureSampler",
@@ -415,14 +459,15 @@
         "Name": "Flame Mask",
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "PrimaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "30",
-      "Position": "1472,496",
+      "Position": "1476,492",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "41",
         "Output": "Result"
@@ -430,8 +475,12 @@
     },
     {
       "_class": "SmoothStep",
+      "DefaultInput": 0,
+      "DefaultEdge1": 0,
+      "DefaultEdge2": 0,
       "Identifier": "31",
-      "Position": "2064,368",
+      "Position": "2064,372",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "28",
         "Output": "Result"
@@ -448,7 +497,8 @@
     {
       "_class": "Saturate",
       "Identifier": "32",
-      "Position": "2320,368",
+      "Position": "2316,372",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "31",
         "Output": "Result"
@@ -470,7 +520,8 @@
         }
       },
       "Identifier": "33",
-      "Position": "1808,496"
+      "Position": "1812,492",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -488,14 +539,16 @@
         }
       },
       "Identifier": "34",
-      "Position": "1808,560"
+      "Position": "1812,564",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "35",
-      "Position": "2048,-96",
+      "Position": "2052,-96",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "28",
         "Output": "Result"
@@ -520,14 +573,16 @@
         }
       },
       "Identifier": "36",
-      "Position": "1712,-240"
+      "Position": "1716,-240",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "37",
-      "Position": "2384,-96",
+      "Position": "2388,-96",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "35",
         "Output": "Result"
@@ -553,7 +608,8 @@
         }
       },
       "Identifier": "38",
-      "Position": "2160,0"
+      "Position": "2160,0",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -571,14 +627,16 @@
         }
       },
       "Identifier": "39",
-      "Position": "-16,864"
+      "Position": "-12,864",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "40",
-      "Position": "224,848",
+      "Position": "228,852",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "22",
         "Output": "Result"
@@ -593,7 +651,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "41",
-      "Position": "720,848",
+      "Position": "720,852",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "40",
         "Output": "Result"
@@ -608,26 +667,30 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "42",
-      "Position": "464,896"
+      "Position": "468,900",
+      "HandleOffsets": {}
     },
     {
       "_class": "Reroute",
       "Comment": "Colour",
       "Identifier": "43",
-      "Position": "2240,-96"
+      "Position": "2244,-96",
+      "HandleOffsets": {}
     },
     {
       "_class": "Reroute",
       "Comment": "Flame Mask",
       "Identifier": "44",
-      "Position": "1728,512"
+      "Position": "1728,516",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "45",
-      "Position": "2560,512",
+      "Position": "2556,516",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "46",
         "Output": "Result"
@@ -640,13 +703,15 @@
     {
       "_class": "ObjectSpaceNormal",
       "Identifier": "46",
-      "Position": "2320,512"
+      "Position": "2316,516",
+      "HandleOffsets": {}
     },
     {
       "_class": "Reroute",
       "Comment": "",
       "Identifier": "47",
-      "Position": "320,720",
+      "Position": "324,720",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "22",
         "Output": "Result"
@@ -657,6 +722,7 @@
       "Comment": "",
       "Identifier": "48",
       "Position": "2352,576",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "49",
         "Output": "Result"
@@ -667,6 +733,7 @@
       "Comment": "",
       "Identifier": "49",
       "Position": "2208,720",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "47",
         "Output": "Result"

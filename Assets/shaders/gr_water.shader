@@ -11,10 +11,8 @@ FEATURES
 
 MODES
 {
-	VrForward();
-	Depth(); 
-	ToolsVis( S_MODE_TOOLS_VIS );
-	ToolsWireframe( "vr_tools_wireframe.shader" );
+	Forward();
+	Depth( S_MODE_DEPTH );
 	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
@@ -63,13 +61,14 @@ VS
 	
 	PixelInput MainVs( VertexInput v )
 	{
+		
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
-
+		
 		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
 		i.vTintColor = extraShaderData.vTint;
-
+		
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
 		
 		float l_0 = g_flWPOStrength;
@@ -81,8 +80,8 @@ VS
 		float l_6 = l_0 * l_5.r;
 		i.vPositionWs.xyz += float3( l_6, l_6, l_6 );
 		i.vPositionPs.xyzw = Position3WsToPs( i.vPositionWs.xyz );
-		
 		return FinalizeVertex( i );
+		
 	}
 }
 
@@ -90,6 +89,9 @@ PS
 {
 	#include "common/pixel.hlsl"
 	
+	DynamicCombo( D_RENDER_BACKFACES, 0..1, Sys( ALL ) );
+	RenderState( CullMode, D_RENDER_BACKFACES ? NONE : BACK );
+		
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
 	CreateInputTexture2D( WaterNoise, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	CreateInputTexture2D( DistortNoise, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
@@ -99,6 +101,8 @@ PS
 	Texture2D g_tDistortNoise < Channel( RGBA, Box( DistortNoise ), Linear ); OutputFormat( BC7 ); SrgbRead( False ); >;
 	Texture2D g_tMaskNoise < Channel( RGBA, Box( MaskNoise ), Linear ); OutputFormat( BC7 ); SrgbRead( False ); >;
 	Texture2D g_tMacroNormal < Channel( RGBA, Box( MacroNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( False ); >;
+	TextureAttribute( LightSim_DiffuseAlbedoTexture, g_tMaskNoise )
+	TextureAttribute( RepresentativeTexture, g_tMaskNoise )
 	float4 g_vWaterColour < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 0.03, 0.21, 0.50, 1.00 ); >;
 	float4 g_vFoamColour < UiType( Color ); UiGroup( ",0/,0/0" ); Default4( 0.64, 0.83, 0.93, 1.00 ); >;
 	float2 g_vDistortTiling < UiGroup( ",0/,0/0" ); Default2( 2,2 ); Range2( -100,-100, 100,100 ); >;
@@ -140,6 +144,7 @@ PS
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
+		
 		Material m = Material::Init();
 		m.Albedo = float3( 1, 1, 1 );
 		m.Normal = float3( 0, 0, 1 );
@@ -193,19 +198,20 @@ PS
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;
 		
+		
 		m.AmbientOcclusion = saturate( m.AmbientOcclusion );
 		m.Roughness = saturate( m.Roughness );
 		m.Metalness = saturate( m.Metalness );
 		m.Opacity = saturate( m.Opacity );
-
+		
 		// Result node takes normal as tangent space, convert it to world space now
 		m.Normal = TransformNormal( m.Normal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
-
+		
 		// for some toolvis shit
 		m.WorldTangentU = i.vTangentUWs;
 		m.WorldTangentV = i.vTangentVWs;
-        m.TextureCoords = i.vTextureCoords.xy;
-		
+		m.TextureCoords = i.vTextureCoords.xy;
+				
 		return ShadingModelStandard::Shade( i, m );
 	}
 }

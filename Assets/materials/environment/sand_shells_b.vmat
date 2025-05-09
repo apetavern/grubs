@@ -29,8 +29,6 @@ Layer0
 	g_flTiling "2.000"
 
 	//---- Tint ----
-	g_bGradientTint "0"
-	g_bTintDirectionToggle "0"
 	g_vScorchTint_Colour "[0.749020 0.266667 0.043137 1.000000]"
 	g_vTint_Colour "[0.278431 0.109804 0.058824 1.000000]"
 }

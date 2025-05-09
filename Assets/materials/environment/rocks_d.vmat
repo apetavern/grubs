@@ -23,6 +23,5 @@ Layer0
 	Rough "textures/environment/rocks_a_rough.png"
 
 	//---- Tint ----
-	g_bTintDirectionToggle "0"
 	g_vTint_Colour "[0.741176 0.662745 0.623529 1.000000]"
 }

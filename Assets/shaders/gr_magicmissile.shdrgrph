@@ -1,7 +1,21 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_magicmissile.shdrgrph",
   "Model": "particles/magicmissile/magic_missile.vmdl",
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Translucent",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Result",
@@ -10,7 +24,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "368,-48",
+      "Position": "372,-48",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "11",
         "Output": "Result"
@@ -31,14 +46,15 @@
       "UI": {
         "Name": "Pos Offset Texture",
         "Default": "1,1,1,1",
+        "ShowExtension": true,
         "ColorSpace": "Linear",
         "SecondaryGroup": {
           "Name": ""
-        },
-        "CreateInput": "CreateInputTexture2D"
+        }
       },
       "Identifier": "1",
-      "Position": "-544,-176",
+      "Position": "-540,-180",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "3",
         "Output": "Result"
@@ -49,7 +65,8 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "2",
-      "Position": "-1152,-240"
+      "Position": "-1152,-240",
+      "HandleOffsets": {}
     },
     {
       "_class": "TileAndOffset",
@@ -57,7 +74,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "3",
-      "Position": "-800,-176",
+      "Position": "-804,-180",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "2",
         "Output": "Result"
@@ -68,13 +86,14 @@
       },
       "Offset": {
         "Identifier": "17",
-        "Output": "Vector"
+        "Output": "XYZW"
       }
     },
     {
       "_class": "Time",
       "Identifier": "4",
-      "Position": "-1888,112"
+      "Position": "-1884,108",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -85,7 +104,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "5",
-      "Position": "-1888,192"
+      "Position": "-1884,192",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -96,14 +116,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "6",
-      "Position": "-352,144"
+      "Position": "-348,144",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "7",
-      "Position": "-112,112",
+      "Position": "-108,108",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "1",
         "Output": "R"
@@ -122,7 +144,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "8",
-      "Position": "-1152,-176"
+      "Position": "-1152,-180",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float4",
@@ -133,19 +156,22 @@
         "Type": "Color"
       },
       "Identifier": "9",
-      "Position": "-624,-528"
+      "Position": "-624,-528",
+      "HandleOffsets": {}
     },
     {
       "_class": "VertexColor",
       "Identifier": "10",
-      "Position": "-544,-304"
+      "Position": "-540,-300",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "11",
-      "Position": "-144,-560",
+      "Position": "-144,-564",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "20",
         "Output": "Result"
@@ -164,14 +190,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "12",
-      "Position": "-384,-592"
+      "Position": "-384,-588",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "13",
-      "Position": "32,-160",
+      "Position": "36,-156",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "1",
         "Output": "R"
@@ -184,7 +212,8 @@
     {
       "_class": "OneMinus",
       "Identifier": "14",
-      "Position": "-1520,128",
+      "Position": "-1524,132",
+      "HandleOffsets": {},
       "In": {
         "Identifier": "15",
         "Output": "Result"
@@ -195,7 +224,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "15",
-      "Position": "-1648,128",
+      "Position": "-1644,132",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -208,7 +238,8 @@
     {
       "_class": "SplitVector",
       "Identifier": "16",
-      "Position": "-1328,80",
+      "Position": "-1332,84",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "14",
         "Output": "Out"
@@ -221,7 +252,8 @@
       "DefaultZ": 0,
       "DefaultW": 0,
       "Identifier": "17",
-      "Position": "-1120,80",
+      "Position": "-1116,84",
+      "HandleOffsets": {},
       "X": {
         "Identifier": "16",
         "Output": "X"
@@ -240,19 +272,22 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "18",
-      "Position": "-1344,256"
+      "Position": "-1344,252",
+      "HandleOffsets": {}
     },
     {
       "_class": "Tint",
       "Identifier": "19",
-      "Position": "-624,-368"
+      "Position": "-624,-372",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "20",
-      "Position": "-368,-496",
+      "Position": "-372,-492",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -267,7 +302,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "21",
-      "Position": "64,176",
+      "Position": "60,180",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "7",
         "Output": "Result"
@@ -280,7 +316,8 @@
     {
       "_class": "ObjectSpaceNormal",
       "Identifier": "22",
-      "Position": "-160,224"
+      "Position": "-156,228",
+      "HandleOffsets": {}
     }
   ]
 }

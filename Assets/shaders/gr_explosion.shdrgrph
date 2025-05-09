@@ -1,7 +1,21 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_explosion.shdrgrph",
   "Model": "particles/explosion/explosionmodel.vmdl",
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Masked",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Result",
@@ -10,7 +24,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "384,-16",
+      "Position": "384,-12",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "7",
         "Output": "Result"
@@ -27,6 +42,7 @@
       "Worley": false,
       "Identifier": "1",
       "Position": "-192,48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -49,12 +65,14 @@
         }
       },
       "Identifier": "2",
-      "Position": "-848,192"
+      "Position": "-852,192",
+      "HandleOffsets": {}
     },
     {
       "_class": "Time",
       "Identifier": "3",
-      "Position": "-848,16"
+      "Position": "-852,12",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
@@ -62,6 +80,7 @@
       "DefaultB": 1,
       "Identifier": "4",
       "Position": "-576,48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "3",
         "Output": "Result"
@@ -84,12 +103,14 @@
         }
       },
       "Identifier": "5",
-      "Position": "-848,96"
+      "Position": "-852,96",
+      "HandleOffsets": {}
     },
     {
       "_class": "Saturate",
       "Identifier": "6",
       "Position": "48,48",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "1",
         "Output": "Result"
@@ -107,12 +128,14 @@
         }
       },
       "Identifier": "7",
-      "Position": "-112,-352"
+      "Position": "-108,-348",
+      "HandleOffsets": {}
     },
     {
       "_class": "Saturate",
       "Identifier": "8",
-      "Position": "-464,-48",
+      "Position": "-468,-48",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "9",
         "Output": "Result"
@@ -121,7 +144,8 @@
     {
       "_class": "Sine",
       "Identifier": "9",
-      "Position": "-608,-48",
+      "Position": "-612,-48",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "3",
         "Output": "Result"

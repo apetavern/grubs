@@ -1,12 +1,27 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_teleport.shdrgrph",
   "Model": "models/crates/weapons_crate/weapons_crate.vmdl",
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Translucent",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "WorldPosition",
       "Identifier": "0",
-      "Position": "-992,-272"
+      "Position": "-996,-276",
+      "HandleOffsets": {}
     },
     {
       "_class": "SwizzleVector",
@@ -15,7 +30,8 @@
       "BlueOut": "Blue",
       "AlphaOut": "Alpha",
       "Identifier": "1",
-      "Position": "-704,-272",
+      "Position": "-708,-276",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "0",
         "Output": "Result"
@@ -24,7 +40,8 @@
     {
       "_class": "Time",
       "Identifier": "2",
-      "Position": "-992,-128"
+      "Position": "-996,-132",
+      "HandleOffsets": {}
     },
     {
       "_class": "TileAndOffset",
@@ -32,7 +49,8 @@
       "DefaultOffset": "0,0",
       "WrapTo01": false,
       "Identifier": "3",
-      "Position": "-400,-224",
+      "Position": "-396,-228",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "1",
         "Output": "Output"
@@ -63,14 +81,16 @@
         }
       },
       "Identifier": "4",
-      "Position": "-704,-192"
+      "Position": "-708,-192",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 2.5,
       "Identifier": "5",
-      "Position": "-704,-112",
+      "Position": "-708,-108",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "2",
         "Output": "Result"
@@ -97,14 +117,16 @@
         }
       },
       "Identifier": "6",
-      "Position": "-992,-64"
+      "Position": "-996,-60",
+      "HandleOffsets": {}
     },
     {
       "_class": "Step",
       "DefaultInput": 0,
       "DefaultEdge": 0.005,
       "Identifier": "7",
-      "Position": "144,-224",
+      "Position": "144,-228",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "10",
         "Output": "Result"
@@ -126,7 +148,8 @@
         }
       },
       "Identifier": "8",
-      "Position": "144,-128"
+      "Position": "144,-132",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -144,12 +167,14 @@
         }
       },
       "Identifier": "9",
-      "Position": "144,-304"
+      "Position": "144,-300",
+      "HandleOffsets": {}
     },
     {
       "_class": "SimplexNoise",
       "Identifier": "10",
-      "Position": "-160,-224",
+      "Position": "-156,-228",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "3",
         "Output": "Result"
@@ -168,7 +193,8 @@
         }
       },
       "Identifier": "11",
-      "Position": "352,-416"
+      "Position": "348,-420",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float4",
@@ -187,13 +213,17 @@
         }
       },
       "Identifier": "12",
-      "Position": "352,-576"
+      "Position": "348,-576",
+      "HandleOffsets": {}
     },
     {
       "_class": "Lerp",
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Fraction": 0.5,
       "Identifier": "13",
-      "Position": "464,-240",
+      "Position": "468,-240",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -212,7 +242,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "14",
-      "Position": "720,-448",
+      "Position": "720,-444",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "12",
         "Output": "Result"
@@ -229,7 +260,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "15",
-      "Position": "896,-288",
+      "Position": "900,-288",
+      "HandleOffsets": {},
       "Emission": {
         "Identifier": "14",
         "Output": "Result"

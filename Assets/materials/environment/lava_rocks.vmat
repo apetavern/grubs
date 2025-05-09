@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/gr_foreground.shader_c"
+	shader "shaders/gr_foreground.shader"
 
 	BlendMask "materials/default/default_mask.tga"
 
@@ -23,6 +23,5 @@ Layer0
 	Rough "textures/environment/lava_rocks_rough.png"
 
 	//---- Tint ----
-	g_bTintDirectionToggle "0"
-	g_vTintColour "[1.000000 1.000000 1.000000 1.000000]"
+	g_vTint_Colour "[0.411765 0.219608 0.109804 1.000000]"
 }

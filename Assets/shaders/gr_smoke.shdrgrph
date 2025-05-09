@@ -1,7 +1,21 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_smoke.shdrgrph",
   "Model": null,
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Masked",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Result",
@@ -10,7 +24,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "384,-16",
+      "Position": "384,-12",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "6",
         "Output": "Result"
@@ -26,7 +41,8 @@
       "CellDensity": 6,
       "Worley": false,
       "Identifier": "1",
-      "Position": "-272,48",
+      "Position": "-276,48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -49,19 +65,22 @@
         }
       },
       "Identifier": "2",
-      "Position": "-544,144"
+      "Position": "-540,144",
+      "HandleOffsets": {}
     },
     {
       "_class": "Time",
       "Identifier": "3",
-      "Position": "-736,-16"
+      "Position": "-732,-12",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "4",
-      "Position": "-464,16",
+      "Position": "-468,12",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "3",
         "Output": "Result"
@@ -84,7 +103,8 @@
         }
       },
       "Identifier": "5",
-      "Position": "-736,64"
+      "Position": "-732,60",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float4",
@@ -98,12 +118,14 @@
         }
       },
       "Identifier": "6",
-      "Position": "-96,-192"
+      "Position": "-96,-192",
+      "HandleOffsets": {}
     },
     {
       "_class": "Saturate",
       "Identifier": "7",
       "Position": "48,48",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "1",
         "Output": "Result"

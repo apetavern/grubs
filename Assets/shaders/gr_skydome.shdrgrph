@@ -1,7 +1,21 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_skydome.shdrgrph",
   "Model": null,
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Opaque",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Result",
@@ -10,7 +24,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "-176,-192",
+      "Position": "-180,-192",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "27",
         "Output": "Result"
@@ -27,6 +42,7 @@
       "DecodeNormal": false,
       "Identifier": "1",
       "Position": "-2736,-336",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "40",
         "Output": "Result"
@@ -37,7 +53,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "2",
-      "Position": "-1808,-272",
+      "Position": "-1812,-276",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "10",
         "Output": "Result"
@@ -55,12 +72,14 @@
       "Description": "",
       "Layer": 1,
       "Identifier": "3",
-      "Position": "-1184,-336"
+      "Position": "-1188,-336",
+      "HandleOffsets": {}
     },
     {
       "_class": "SplitVector",
       "Identifier": "4",
-      "Position": "-2528,-336",
+      "Position": "-2532,-336",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "1",
         "Output": "Result"
@@ -69,7 +88,8 @@
     {
       "_class": "Frac",
       "Identifier": "5",
-      "Position": "-2272,-16",
+      "Position": "-2268,-12",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "41",
         "Output": "Result"
@@ -84,14 +104,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "6",
-      "Position": "-2320,-176"
+      "Position": "-2316,-180",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "7",
-      "Position": "-1792,-32",
+      "Position": "-1788,-36",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "10",
         "Output": "Result"
@@ -109,22 +131,25 @@
       "Description": "",
       "Layer": 1,
       "Identifier": "8",
-      "Position": "-2720,-80"
+      "Position": "-2724,-84",
+      "HandleOffsets": {}
     },
     {
       "_class": "Time",
       "Identifier": "9",
-      "Position": "-2704,-16"
+      "Position": "-2700,-12",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "10",
-      "Position": "-2080,-272",
+      "Position": "-2076,-276",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "11",
-        "Output": "Vector"
+        "Output": "XYZW"
       },
       "B": {
         "Identifier": "6",
@@ -138,7 +163,8 @@
       "DefaultZ": 0,
       "DefaultW": 0,
       "Identifier": "11",
-      "Position": "-2320,-336",
+      "Position": "-2316,-336",
+      "HandleOffsets": {},
       "X": {
         "Identifier": "4",
         "Output": "X"
@@ -153,7 +179,8 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "12",
-      "Position": "-1664,-144"
+      "Position": "-1668,-144",
+      "HandleOffsets": {}
     },
     {
       "_class": "CommentNode",
@@ -163,12 +190,14 @@
       "Description": "",
       "Layer": 1,
       "Identifier": "13",
-      "Position": "-2480,144"
+      "Position": "-2484,144",
+      "HandleOffsets": {}
     },
     {
       "_class": "Frac",
       "Identifier": "14",
-      "Position": "-2048,208",
+      "Position": "-2052,204",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "15",
         "Output": "Result"
@@ -179,7 +208,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "15",
-      "Position": "-2208,208",
+      "Position": "-2208,204",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "41",
         "Output": "Result"
@@ -194,7 +224,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "16",
-      "Position": "-1376,-32",
+      "Position": "-1380,-36",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "7",
         "Output": "Result"
@@ -209,7 +240,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "17",
-      "Position": "-1376,-272",
+      "Position": "-1380,-276",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "2",
         "Output": "Result"
@@ -227,7 +259,8 @@
       "Description": "",
       "Layer": 1,
       "Identifier": "18",
-      "Position": "-1712,224"
+      "Position": "-1716,228",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -238,14 +271,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "19",
-      "Position": "-2448,272"
+      "Position": "-2448,276",
+      "HandleOffsets": {}
     },
     {
       "_class": "Subtract",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "20",
-      "Position": "-1248,304",
+      "Position": "-1248,300",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "21",
         "Output": "Result"
@@ -260,7 +295,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "21",
-      "Position": "-1456,304",
+      "Position": "-1452,300",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "5",
         "Output": "Result"
@@ -277,10 +313,12 @@
       "UI": {
         "Name": "SkyTexture2",
         "Default": "1,1,1,1",
+        "ShowExtension": true,
         "SrgbRead": true
       },
       "Identifier": "22",
-      "Position": "-1152,-32",
+      "Position": "-1152,-36",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "16",
         "Output": "Result"
@@ -293,10 +331,12 @@
       "UI": {
         "Name": "SkyTexture1",
         "Default": "1,1,1,1",
+        "ShowExtension": true,
         "SrgbRead": true
       },
       "Identifier": "23",
-      "Position": "-1152,-272",
+      "Position": "-1152,-276",
+      "HandleOffsets": {},
       "Coords": {
         "Identifier": "17",
         "Output": "Result"
@@ -305,7 +345,8 @@
     {
       "_class": "Abs",
       "Identifier": "24",
-      "Position": "-1120,304",
+      "Position": "-1116,300",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "20",
         "Output": "Result"
@@ -320,7 +361,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "25",
-      "Position": "-1680,400"
+      "Position": "-1680,396",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -331,13 +373,17 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "26",
-      "Position": "-1440,432"
+      "Position": "-1440,432",
+      "HandleOffsets": {}
     },
     {
       "_class": "Lerp",
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Fraction": 0.5,
       "Identifier": "27",
-      "Position": "-848,-192",
+      "Position": "-852,-192",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "23",
         "Output": "Result"
@@ -359,7 +405,8 @@
       "Description": "",
       "Layer": 2,
       "Identifier": "28",
-      "Position": "-2752,-416"
+      "Position": "-2748,-420",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float3",
@@ -370,7 +417,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "29",
-      "Position": "-4896,-352"
+      "Position": "-4896,-348",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float",
@@ -381,7 +429,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "30",
-      "Position": "-4896,-208"
+      "Position": "-4896,-204",
+      "HandleOffsets": {}
     },
     {
       "_class": "CombineVector",
@@ -390,7 +439,8 @@
       "DefaultZ": 0,
       "DefaultW": 0,
       "Identifier": "31",
-      "Position": "-4640,-336",
+      "Position": "-4644,-336",
+      "HandleOffsets": {},
       "X": {
         "Identifier": "29",
         "Output": "X"
@@ -417,7 +467,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "32",
-      "Position": "-4640,-192"
+      "Position": "-4644,-192",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
@@ -425,9 +476,10 @@
       "DefaultB": 1,
       "Identifier": "33",
       "Position": "-4416,-336",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "31",
-        "Output": "Vector"
+        "Output": "XYZW"
       },
       "B": {
         "Identifier": "32",
@@ -440,7 +492,8 @@
       "OutputSpace": "Tangent",
       "DecodeNormal": true,
       "Identifier": "34",
-      "Position": "-4304,-336",
+      "Position": "-4308,-336",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "33",
         "Output": "Result"
@@ -449,7 +502,8 @@
     {
       "_class": "SplitVector",
       "Identifier": "35",
-      "Position": "-4064,-336",
+      "Position": "-4068,-336",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "34",
         "Output": "Result"
@@ -462,7 +516,8 @@
       "DefaultZ": 0,
       "DefaultW": 0,
       "Identifier": "36",
-      "Position": "-3872,-336",
+      "Position": "-3876,-336",
+      "HandleOffsets": {},
       "X": {
         "Identifier": "35",
         "Output": "X"
@@ -481,7 +536,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "37",
-      "Position": "-3872,-192"
+      "Position": "-3876,-192",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
@@ -489,9 +545,10 @@
       "DefaultB": 1,
       "Identifier": "38",
       "Position": "-3600,-336",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "36",
-        "Output": "Vector"
+        "Output": "XYZW"
       },
       "B": {
         "Identifier": "37",
@@ -507,7 +564,8 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "39",
-      "Position": "-3472,-224"
+      "Position": "-3468,-228",
+      "HandleOffsets": {}
     },
     {
       "_class": "Multiply",
@@ -515,6 +573,7 @@
       "DefaultB": 1,
       "Identifier": "40",
       "Position": "-3264,-336",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "38",
         "Output": "Result"
@@ -529,7 +588,8 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "41",
-      "Position": "-2448,-16",
+      "Position": "-2448,-12",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -548,12 +608,14 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "42",
-      "Position": "-2704,48"
+      "Position": "-2700,48",
+      "HandleOffsets": {}
     },
     {
       "_class": "Saturate",
       "Identifier": "43",
-      "Position": "-560,-128",
+      "Position": "-564,-132",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "27",
         "Output": "Result"

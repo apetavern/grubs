@@ -3,9 +3,18 @@
   "GameObjects": [
     {
       "__guid": "27ee65c0-3bb1-48b4-8573-4147034d45ab",
+      "__version": 1,
       "Flags": 0,
       "Name": "Scene Information",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.SceneInformation",
@@ -24,13 +33,23 @@
           "Title": "beach",
           "Version": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "17e17813-45ef-4835-8195-d968524b4ba7",
+      "__version": 1,
       "Flags": 0,
       "Name": "Network Manager",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Grubs.Systems.Network.GrubsNetworkManager",
@@ -46,16 +65,23 @@
             "prefab": "prefabs/player/player_wrapper.prefab"
           }
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "5a67629e-9c73-4752-be7a-91dfd0b40e8d",
+      "__version": 1,
       "Flags": 0,
       "Name": "Camera",
       "Position": "-322.7331,181.9972,221.4703",
       "Rotation": "0.00000004112413,0.0000000009752696,0.7071068,0.7071068",
+      "Scale": "1,1,1",
       "Tags": "maincamera",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -179,16 +205,23 @@
           "OnComponentUpdate": null,
           "Rate": 1
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "14e3e6d3-89d4-4634-9d1f-f9d7ecf48aea",
+      "__version": 1,
       "Flags": 0,
       "Name": "World Utility",
       "Position": "-0.00009155273,512,149.2906",
       "Rotation": "0,0,-0.7071068,-0.7071068",
+      "Scale": "1,1,1",
       "Tags": "solid",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Grubs.Drops.CrateUtility",
@@ -250,14 +283,23 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "7d39675e-085e-40cc-8a1e-e09c2113f9ee",
+      "__version": 1,
       "Flags": 0,
       "Name": "Screen UI",
       "Position": "-129.7132,-113.9731,554.4797",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.ScreenPanel",
@@ -295,14 +337,23 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "9a1c6253-0abb-4443-85b2-378108afb7b2",
+      "__version": 1,
       "Flags": 0,
       "Name": "Game Mode (Free For All)",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
       "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Grubs.Systems.GameMode.FreeForAll",
@@ -314,15 +365,23 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "3e153c9f-09c3-4a47-94f8-8fe79eede41c",
+      "__version": 1,
       "Flags": 0,
       "Name": "Fire Helper",
       "Position": "-186.723,289.1578,410.2911",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
       "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Grubs.Helpers.FireHelper",
@@ -340,18 +399,23 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "08a72929-c2dd-4da0-b84d-fdca3b287389",
+      "__version": 1,
       "Flags": 0,
       "Name": "Terrain",
       "Position": "0,512,64",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
       "Tags": "solid,terrain",
       "Enabled": true,
       "NetworkMode": 1,
       "NetworkInterpolation": false,
       "NetworkOrphaned": 1,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Grubs.Terrain.GrubsTerrain",
@@ -474,15 +538,23 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "0f45ad07-5d61-43eb-9f1e-3940781f7c82",
+      "__version": 1,
       "Flags": 0,
       "Name": "UI Helper",
       "Position": "136.4629,-1421.282,280.9131",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
       "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Grubs.Helpers.WorldPopupHelper",
@@ -516,23 +588,39 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "450d7fe2-988e-48a6-adc2-53055588418b",
+      "__version": 1,
       "Flags": 0,
       "Name": "Static",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [],
       "Children": [
         {
           "__guid": "31fe625e-81b9-48d3-8b90-4ae1bb333fa0",
+          "__version": 1,
           "Flags": 0,
           "Name": "Water",
           "Position": "0,4032,0",
+          "Rotation": "0,0,0,1",
           "Scale": "300,300,200",
           "Tags": "nopathing",
           "Enabled": true,
           "NetworkMode": 1,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -604,16 +692,23 @@
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "b817c40d-8437-4a22-acec-35f71c7f7ae3",
+          "__version": 1,
           "Flags": 0,
           "Name": "Sun",
           "Position": "288.8641,-765.1482,-163.5517",
           "Rotation": "-0.0682734,0.5179981,0.6238812,0.5811964",
+          "Scale": "1,1,1",
           "Tags": "light_directional,light",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.DirectionalLight",
@@ -630,13 +725,23 @@
               "Shadows": true,
               "SkyColor": "0.63256,0.68527,0.7907,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "55f3be19-5619-41cc-b2f6-bd942ed58511",
+          "__version": 1,
           "Flags": 0,
           "Name": "desert_01",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -661,14 +766,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "18077d33-611c-49cc-85cd-c91b45560358",
+          "__version": 1,
           "Flags": 0,
           "Name": "skydome",
           "Position": "0,4224,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -693,13 +807,23 @@
               "RenderType": "Off",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "05a48067-5e32-462e-9a40-3f89067b11b4",
+          "__version": 1,
           "Flags": 0,
           "Name": "Ambience",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.SoundBoxComponent",
@@ -750,16 +874,23 @@
               },
               "Volume": 1
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "cf07c918-0dac-4e61-9136-9e1a11fe26f8",
+          "__version": 1,
           "Flags": 0,
           "Name": "mountain_01",
           "Position": "4444.763,8355.551,-45.37468",
           "Rotation": "0,0,-0.258819,0.9659259",
           "Scale": "1.081934,1.081934,1.081934",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -784,16 +915,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "76f64726-0835-4726-8142-16e6fae06ec5",
+          "__version": 1,
           "Flags": 0,
           "Name": "mountain_01 (1)",
           "Position": "5596.349,7500.156,-42.557",
           "Rotation": "0,0,-0.8660256,-0.4999999",
           "Scale": "1.191934,0.9819336,0.8319336",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -818,16 +956,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "d95300bd-e72a-4bcd-9c12-a259b5382f68",
+          "__version": 1,
           "Flags": 0,
           "Name": "land_03",
           "Position": "4776.582,7312.46,-41.29673",
           "Rotation": "0.04473256,-0.01198605,-0.2585413,0.9648895",
           "Scale": "1,1,1.607373",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -852,16 +997,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "eba040e3-45a7-493b-a6b7-a31a0b60c30f",
+          "__version": 1,
           "Flags": 0,
           "Name": "land_04 (1)",
           "Position": "-4081.64,9262.808,-27.76259",
           "Rotation": "0,0,-0.2588191,0.9659258",
           "Scale": "1,1,0.9208903",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -886,16 +1038,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "df14be62-bce4-499d-b441-c0a361d8297f",
+          "__version": 1,
           "Flags": 0,
           "Name": "land_02 (1)",
           "Position": "-6055.446,8379.523,-60.83165",
           "Rotation": "0,0,0.2588192,-0.9659258",
           "Scale": "1,1,0.7344988",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -920,16 +1079,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "eb342f09-d5be-4595-86f2-393562c6c592",
+          "__version": 1,
           "Flags": 0,
           "Name": "land_02 (1)",
           "Position": "7362.327,8065.311,-32.30618",
           "Rotation": "0,0,-0.6087613,-0.7933537",
           "Scale": "1,1,0.7344988",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -954,16 +1120,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "93abdcde-463b-4830-8b5d-5df90987007d",
+          "__version": 1,
           "Flags": 0,
           "Name": "land_01 (1)",
           "Position": "5041.146,8987.528,-64.67992",
           "Rotation": "0,0,-0.5000002,-0.8660253",
           "Scale": "1.857867,1.857867,0.887632",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -988,16 +1161,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "948ad6f8-dc75-4046-a031-772f1c96fb57",
+          "__version": 1,
           "Flags": 0,
           "Name": "land_01",
           "Position": "-4863.729,10899.03,-66.82965",
           "Rotation": "0,0,0.7443116,0.6678326",
           "Scale": "1.857867,1.857867,0.9343094",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -1022,14 +1202,23 @@
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
-          ]
+          ],
+          "Children": []
         },
         {
           "__guid": "7fc4b4ee-233e-442f-9ffa-2a00b4bf16df",
+          "__version": 1,
           "Flags": 0,
           "Name": "Envmap Probe",
           "Position": "0,2080,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
           "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
           "Components": [
             {
               "__type": "Sandbox.EnvmapProbe",
@@ -1058,20 +1247,16 @@
               "ZFar": 4096,
               "ZNear": 16
             }
-          ]
+          ],
+          "Children": []
         }
       ]
     }
   ],
   "SceneProperties": {
-    "FixedUpdateFrequency": 50,
-    "MaxFixedUpdates": 5,
-    "NetworkFrequency": 30,
     "NetworkInterpolation": true,
-    "PhysicsSubSteps": 1,
-    "ThreadedAnimation": true,
     "TimeScale": 1,
-    "UseFixedUpdate": true,
+    "WantsSystemScene": true,
     "Metadata": {
       "Title": "beach"
     },
@@ -1088,9 +1273,9 @@
       "IncludedBodies": ""
     }
   },
-  "ResourceVersion": 2,
+  "ResourceVersion": 3,
   "Title": "beach",
   "Description": null,
   "__references": [],
-  "__version": 2
+  "__version": 3
 }

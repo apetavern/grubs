@@ -1,7 +1,21 @@
 {
+  "IsSubgraph": false,
+  "Path": "shaders/gr_weapon_charge.shdrgrph",
   "Model": "particles/weaponcharge/weapon_charge.vmdl",
+  "Title": null,
   "Description": "",
+  "Category": null,
+  "Icon": null,
+  "AddToNodeLibrary": false,
   "BlendMode": "Masked",
+  "ShadingModel": "Lit",
+  "Domain": "Surface",
+  "PreviewSettings": {
+    "EnableShadows": true,
+    "ShowSkybox": true,
+    "BackgroundColor": "0,0,0,1",
+    "Tint": "1,1,1,1"
+  },
   "nodes": [
     {
       "_class": "Result",
@@ -10,7 +24,8 @@
       "DefaultMetalness": 0,
       "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
-      "Position": "384,-208",
+      "Position": "384,-204",
+      "HandleOffsets": {},
       "Albedo": {
         "Identifier": "10",
         "Output": "Result"
@@ -29,12 +44,14 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "1",
-      "Position": "-864,-528"
+      "Position": "-864,-528",
+      "HandleOffsets": {}
     },
     {
       "_class": "SplitVector",
       "Identifier": "2",
-      "Position": "-672,-544",
+      "Position": "-672,-540",
+      "HandleOffsets": {},
       "Input": {
         "Identifier": "1",
         "Output": "Result"
@@ -49,14 +66,16 @@
       "IsAttribute": false,
       "UI": {},
       "Identifier": "3",
-      "Position": "-656,112"
+      "Position": "-660,108",
+      "HandleOffsets": {}
     },
     {
       "_class": "Subtract",
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "4",
-      "Position": "-160,-48",
+      "Position": "-156,-48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "7",
         "Output": "R"
@@ -69,7 +88,8 @@
     {
       "_class": "OneMinus",
       "Identifier": "5",
-      "Position": "-416,112",
+      "Position": "-420,108",
+      "HandleOffsets": {},
       "In": {
         "Identifier": "3",
         "Output": "Result"
@@ -80,7 +100,8 @@
       "DefaultA": 1,
       "DefaultB": 2,
       "Identifier": "6",
-      "Position": "32,-48",
+      "Position": "36,-48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "4",
         "Output": "Result"
@@ -98,10 +119,12 @@
         "Name": "gradient",
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "ShowExtension": true,
         "ColorSpace": "Linear"
       },
       "Identifier": "7",
-      "Position": "-656,-96"
+      "Position": "-660,-96",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float4",
@@ -112,7 +135,8 @@
         "Type": "Color"
       },
       "Identifier": "8",
-      "Position": "-288,-304"
+      "Position": "-288,-300",
+      "HandleOffsets": {}
     },
     {
       "_class": "Float4",
@@ -123,13 +147,17 @@
         "Type": "Color"
       },
       "Identifier": "9",
-      "Position": "-288,-464"
+      "Position": "-288,-468",
+      "HandleOffsets": {}
     },
     {
       "_class": "Lerp",
+      "DefaultA": 0,
+      "DefaultB": 1,
       "Fraction": 0.5,
       "Identifier": "10",
-      "Position": "64,-288",
+      "Position": "60,-288",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "9",
         "Output": "Result"
@@ -152,7 +180,8 @@
       "OutMax": 1,
       "Clamp": true,
       "Identifier": "11",
-      "Position": "160,-48",
+      "Position": "156,-48",
+      "HandleOffsets": {},
       "A": {
         "Identifier": "6",
         "Output": "Result"

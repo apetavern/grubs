@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/complex.shader_c"
+	shader "shaders/complex.shader"
 
 	//---- PBR ----
 	F_SPECULAR 1

@@ -11,10 +11,8 @@ FEATURES
 
 MODES
 {
-	VrForward();
-	Depth(); 
-	ToolsVis( S_MODE_TOOLS_VIS );
-	ToolsWireframe( "vr_tools_wireframe.shader" );
+	Forward();
+	Depth( S_MODE_DEPTH );
 	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
@@ -56,16 +54,17 @@ VS
 
 	PixelInput MainVs( VertexInput v )
 	{
+		
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
-
+		
 		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
 		i.vTintColor = extraShaderData.vTint;
-
+		
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
-
 		return FinalizeVertex( i );
+		
 	}
 }
 
@@ -73,17 +72,23 @@ PS
 {
 	#include "common/pixel.hlsl"
 	
+	DynamicCombo( D_RENDER_BACKFACES, 0..1, Sys( ALL ) );
+	RenderState( CullMode, D_RENDER_BACKFACES ? NONE : BACK );
+		
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
 	CreateInputTexture2D( SkyTexture, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	CreateInputTexture2D( SkyTexture_0, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	Texture2D g_tSkyTexture < Channel( RGBA, Box( SkyTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	Texture2D g_tSkyTexture_0 < Channel( RGBA, Box( SkyTexture_0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	TextureAttribute( LightSim_DiffuseAlbedoTexture, g_tSkyTexture_0 )
+	TextureAttribute( RepresentativeTexture, g_tSkyTexture_0 )
 	float3 g_vWind < UiGroup( ",0/,0/0" ); Default3( 1,1,0 ); Range3( 0,0,0, 1,1,1 ); >;
 	float g_flFlowSpeed < UiGroup( ",0/,0/0" ); Default1( 0.5 ); Range1( 0, 1 ); >;
 	float g_flFlowStrength < UiGroup( ",0/,0/0" ); Default1( 0.25 ); Range1( 0, 1 ); >;
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
+		
 		Material m = Material::Init();
 		m.Albedo = float3( 1, 1, 1 );
 		m.Normal = float3( 0, 0, 1 );
@@ -137,19 +142,20 @@ PS
 		m.Metalness = 0;
 		m.AmbientOcclusion = 1;
 		
+		
 		m.AmbientOcclusion = saturate( m.AmbientOcclusion );
 		m.Roughness = saturate( m.Roughness );
 		m.Metalness = saturate( m.Metalness );
 		m.Opacity = saturate( m.Opacity );
-
+		
 		// Result node takes normal as tangent space, convert it to world space now
 		m.Normal = TransformNormal( m.Normal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
-
+		
 		// for some toolvis shit
 		m.WorldTangentU = i.vTangentUWs;
 		m.WorldTangentV = i.vTangentVWs;
-        m.TextureCoords = i.vTextureCoords.xy;
-		
+		m.TextureCoords = i.vTextureCoords.xy;
+				
 		return ShadingModelStandard::Shade( i, m );
 	}
 }

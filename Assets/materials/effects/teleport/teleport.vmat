@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/gr_teleport.shader_c"
+	shader "shaders/gr_teleport.shader"
 
 	//---- Adjustments ----
 	g_flGapOpacity "0.250"

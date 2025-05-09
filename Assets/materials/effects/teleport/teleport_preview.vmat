@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/complex.shader_c"
+	shader "shaders/complex.shader"
 
 	//---- PBR ----
 	F_SELF_ILLUM 1
@@ -30,6 +30,7 @@ Layer0
 	TextureNormal "materials/default/default_normal.tga"
 
 	//---- Roughness ----
+	g_flRoughnessScaleFactor "1.000"
 	TextureRoughness "materials/default/default_rough.tga"
 
 	//---- Self Illum ----

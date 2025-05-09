@@ -2,8 +2,9 @@
 
 Layer0
 {
-	shader "shaders/blendable.shader_c"
+	shader "shaders/blendable.shader"
 
+	//---- Number Of Blendable Layers ----
 	F_MULTIBLEND 1 // 2 Layers
 
 	//---- Fog ----
