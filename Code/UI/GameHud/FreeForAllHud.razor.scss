@@ -19,7 +19,6 @@ FreeForAllHud {
       transform: rotate(1deg) translateY(-8px);
 
       label {
-        transform: rotate(-0.1deg) translateY(-8px);
         text-overflow: ellipsis;
       }
     }
@@ -32,10 +31,6 @@ FreeForAllHud {
       justify-content: center;
       z-index: 2;
       transform: rotate(-1deg) translateY(-10px);
-      
-      > label {
-        transform: rotate(1deg) translateY(-10px);
-      }
     }
   }
   

@@ -176,7 +176,7 @@ public sealed class FreeForAll : BaseGameMode
 		grub.Owner.OnGrubDied( grub );
 		
 		// If the grub is the active grub, end the turn.
-		if ( grub == ActivePlayer.ActiveGrub )
+		if ( ActivePlayer.IsValid() && grub == ActivePlayer.ActiveGrub )
 		{
 			TimeUntilTurnOver = Math.Min( TimeUntilTurnOver, grubDeathTurnRemainder );
 		}

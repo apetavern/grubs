@@ -117,7 +117,7 @@ public sealed class GirderTool : Tool
 			return;
 
 		var girder = GirderPrefab.Clone( CursorVisual.Transform.World );
-		girder.NetworkSpawn();
+		girder.NetworkSpawn( Connection.Host );
 
 		Equipment.Deployed = false;
 		IsFiring = false;
