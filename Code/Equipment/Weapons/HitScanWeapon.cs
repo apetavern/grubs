@@ -79,11 +79,11 @@ public class HitScanWeapon : Weapon
 			Sound.Play( UseSound, startPos );
 
 		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
-		if ( MuzzleParticles is not null )
-		{
-			var muzzle = Equipment.Model.GetAttachment( "muzzle" );
-			ParticleHelper.Instance.PlayInstantaneous( MuzzleParticles, muzzle ?? transform );
-		}
+		// if ( MuzzleParticles is not null )
+		// {
+		// 	var muzzle = Equipment.Model.GetAttachment( "muzzle" );
+		// 	ParticleHelper.Instance.PlayInstantaneous( MuzzleParticles, muzzle ?? transform );
+		// }
 
 		var tr = Scene.Trace.Ray( startPos, endPos )
 			.WithAnyTags( "solid", "player", "pickup" )
@@ -94,11 +94,11 @@ public class HitScanWeapon : Weapon
 		{
 			using ( Rpc.FilterInclude( c => c.IsHost ) )
 			{
-				if ( TraceParticles is not null )
-				{
-					var traceParticles = ParticleHelper.Instance?.PlayInstantaneous( TraceParticles, new Transform( startPos ) );
-					traceParticles?.SetControlPoint( 1, new Transform( endPos ) );
-				}
+				// if ( TraceParticles is not null )
+				// {
+				// 	var traceParticles = ParticleHelper.Instance?.PlayInstantaneous( TraceParticles, new Transform( startPos ) );
+				// 	traceParticles?.SetControlPoint( 1, new Transform( endPos ) );
+				// }
 
 				GrubsTerrain.Instance?.SubtractLine( new Vector2( startPos.x, startPos.z ),
 					new Vector2( endPos.x, endPos.z ), ExplosionRadius, 1 );
@@ -122,12 +122,12 @@ public class HitScanWeapon : Weapon
 
 	private bool HandleTraceHit( SceneTraceResult tr )
 	{
-		if ( TraceParticles is not null && !PenetrateWorld )
-		{
-			var transform = new Transform( tr.StartPosition );
-			var traceParticles = ParticleHelper.Instance.PlayInstantaneous( TraceParticles, transform );
-			traceParticles.SetControlPoint( 1, tr.EndPosition );
-		}
+		// if ( TraceParticles is not null && !PenetrateWorld )
+		// {
+		// 	var transform = new Transform( tr.StartPosition );
+		// 	var traceParticles = ParticleHelper.Instance.PlayInstantaneous( TraceParticles, transform );
+		// 	traceParticles.SetControlPoint( 1, tr.EndPosition );
+		// }
 
 		if ( !tr.Hit )
 			return false;
@@ -158,11 +158,11 @@ public class HitScanWeapon : Weapon
 			return false;
 
 		ExplosionHelper.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage, Equipment.Grub.Id, Equipment.Grub.Name, HitForce.x );
-		var explosionParticles = ParticleHelper.Instance.PlayInstantaneous( ExplosionParticles, Transform.World.WithPosition( tr.EndPosition ) );
-		explosionParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
-		
-		var smokeParticles = ParticleHelper.Instance.PlayInstantaneous( SmokeParticles, Transform.World.WithPosition( tr.EndPosition ) );
-		smokeParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
+		// var explosionParticles = ParticleHelper.Instance.PlayInstantaneous( ExplosionParticles, Transform.World.WithPosition( tr.EndPosition ) );
+		// explosionParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
+		//
+		// var smokeParticles = ParticleHelper.Instance.PlayInstantaneous( SmokeParticles, Transform.World.WithPosition( tr.EndPosition ) );
+		// smokeParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
 		return true;
 	}
 

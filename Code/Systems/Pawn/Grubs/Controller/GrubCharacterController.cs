@@ -241,9 +241,9 @@ public class GrubCharacterController : Component
 		var t = fallVelocity / 1200f;
 		var radius = MathX.Lerp( 0.1f, 2f, t );
 
-		var particles =
-			ParticleHelper.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
-		particles.SetControlPoint( 1, new Vector3( radius, 0, 0 ) );
+		// var particles =
+		// 	ParticleHelper.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
+		// particles.SetControlPoint( 1, new Vector3( radius, 0, 0 ) );
 	}
 
 	/// <summary>

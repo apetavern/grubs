@@ -21,11 +21,11 @@ namespace Grubs.Equipment.Weapons
 		{
 			var muzzle = GetMuzzleTransform();
 
-			if ( UseParticles is not null )
-			{
-				var smoke = ParticleHelper.Instance.PlayInstantaneous( UseParticles, muzzle );
-				smoke.SetControlPoint( 1, 2f ); // Rise distance
-			}
+			// if ( UseParticles is not null )
+			// {
+			// 	var smoke = ParticleHelper.Instance.PlayInstantaneous( UseParticles, muzzle );
+			// 	smoke.SetControlPoint( 1, 2f ); // Rise distance
+			// }
 		}
 	}
 }

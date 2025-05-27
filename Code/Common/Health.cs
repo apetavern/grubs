@@ -225,8 +225,8 @@ public partial class Health : Component
 	[Rpc.Broadcast]
 	private void DeathEffects( Vector3 position )
 	{
-		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
-		sceneParticles.SetControlPoint( 1, new Vector3( 100f / 2f, 0, 0 ) );
+		// var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
+		// sceneParticles.SetControlPoint( 1, new Vector3( 100f / 2f, 0, 0 ) );
 		Sound.Play( "explosion_short_tail", position );
 	}
 }

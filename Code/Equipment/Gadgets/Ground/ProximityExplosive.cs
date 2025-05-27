@@ -136,10 +136,10 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 		ExplosionHelper.Instance.Explode( this, WorldPosition, Radius, Damage, projectile?.GrubGuid ?? Guid.Empty, projectile?.GrubName ?? string.Empty );
 		Sound.Play( ExplosionSound );
 
-		if ( Particles is null )
-			return;
+		// if ( Particles is null )
+		// 	return;
 
-		var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World );
-		sceneParticles.SetControlPoint( 1, new Vector3( Radius / 2f, 0, 0 ) );
+		// var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World );
+		// sceneParticles.SetControlPoint( 1, new Vector3( Radius / 2f, 0, 0 ) );
 	}
 }

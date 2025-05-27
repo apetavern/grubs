@@ -104,14 +104,14 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 		if ( ExplosionSound is not null )
 			Sound.Play( ExplosionSound, position );
 
-		if ( Particles is null || SmokeParticles is null )
-			return;
-
-		var explosionParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World.WithPosition( position ) );
-		explosionParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
-
-		var smokeParticles = ParticleHelper.Instance.PlayInstantaneous( SmokeParticles, Transform.World.WithPosition( position ) );
-		smokeParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 3f, 0, 0 ) );
+		// if ( Particles is null || SmokeParticles is null )
+		// 	return;
+		//
+		// var explosionParticles = ParticleHelper.Instance.PlayInstantaneous( Particles, Transform.World.WithPosition( position ) );
+		// explosionParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f, 0, 0 ) );
+		//
+		// var smokeParticles = ParticleHelper.Instance.PlayInstantaneous( SmokeParticles, Transform.World.WithPosition( position ) );
+		// smokeParticles.SetControlPoint( 1, new Vector3( ExplosionRadius / 3f, 0, 0 ) );
 	}
 
 	protected override void OnDestroy()

@@ -66,7 +66,7 @@ public class KillZone : Component, Component.ITriggerListener
 		if ( KillSound is not null )
 			Sound.Play( KillSound, WorldPosition );
 
-		if ( KillParticles is not null )
-			ParticleHelper.Instance.PlayInstantaneous( KillParticles, transform );
+		// if ( KillParticles is not null )
+		// 	ParticleHelper.Instance.PlayInstantaneous( KillParticles, transform );
 	}
 }
