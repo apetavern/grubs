@@ -14,10 +14,6 @@
 						remaps = 
 						[
 							{
-								from = "inner.vmat"
-								to = "particles/muzzleflash/grubs_muzzleflash_flash.vmat"
-							},
-							{
 								from = "outer.vmat"
 								to = "particles/blueflame/blueflame_gradient.vmat"
 							},
