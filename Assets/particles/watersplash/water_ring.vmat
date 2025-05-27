@@ -7,9 +7,6 @@ Layer0
 	//---- Blending ----
 	F_ADDITIVE_BLEND 1
 
-	//---- Z-Buffering ----
-	F_DISABLE_Z_PREPASS 1
-
 	g_flEmissionStrength "0.500"
 	g_flSmoothStepMax "0.350"
 	g_flSmoothStepMin "0.250"

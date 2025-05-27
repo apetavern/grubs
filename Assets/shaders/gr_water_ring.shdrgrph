@@ -84,7 +84,7 @@
     {
       "_class": "Float2",
       "Min": "0,0",
-      "Max": "1,1",
+      "Max": "20,20",
       "Value": "10,1",
       "Name": "UV Tiling One",
       "IsAttribute": false,
@@ -383,7 +383,7 @@
     {
       "_class": "Float2",
       "Min": "0,0",
-      "Max": "1,1",
+      "Max": "20,20",
       "Value": "16,1",
       "Name": "UV Tiling Two",
       "IsAttribute": false,

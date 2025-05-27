@@ -1,0 +1,686 @@
+{
+  "__guid": "d6bdd15d-9b9a-4b8c-85df-3e4e1af409ba",
+  "GameObjects": [
+    {
+      "__guid": "bdb77916-ab41-49bb-b245-f9e53618eb30",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "blueflame_base",
+      "Position": "256,192,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "200f34c2-73c7-4aa9-a0a6-43fdf22c1951",
+          "__enabled": true,
+          "ControlPoints": [],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/blueflame/blueflame_base.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "8e833dde-92ea-4548-9c42-da968d13fbb0",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "grubs_explosion_base",
+      "Position": "256,96,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "6b99fb21-54d4-431f-9ae2-7451458faec9",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "50,0,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/explosion/grubs_explosion_base.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "c17bdb5b-ace2-440b-a025-4fd19508edbb",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "fire_base",
+      "Position": "256,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "730ada77-25d1-406a-afe1-8a6cc9d04288",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "128,0,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/fire/fire_base.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "143ece00-11e1-4a45-acd9-6a28cbeea601",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "fuse_base",
+      "Position": "256,-64,10",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "387e5e05-5bc8-4074-adcc-920b69b17df1",
+          "__enabled": true,
+          "ControlPoints": [],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/fuse/fuse_base.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "05a2258f-786d-492d-861e-cd3fda2958d4",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "guntrace",
+      "Position": "0,192,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "a8f0f484-4684-4e54-a19a-ac9d8f7b59bb",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "110,192,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/guntrace/guntrace.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "8fe6191f-1190-42ac-ab64-13db832df946",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "railgun",
+      "Position": "0,128,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "600907f5-8d68-4956-947f-28f4725a954d",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "128,128,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/guntrace/railgun.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "aa82488c-c3ae-4dd9-9c5c-f87de8266b1f",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "landimpact",
+      "Position": "64,32,0.00001972914",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "d06892fd-84a1-422f-a97b-41d8df5d0ac7",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "0.5,0,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/landimpact/landimpact.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "786f63f9-471a-472b-8960-412b0fc37568",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "grubs_muzzleflash",
+      "Position": "32,-64,9.999946",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "55bcdaf9-23c0-431a-9b55-02ebdd32e9cc",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "48,0,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/muzzleflash/grubs_muzzleflash.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "4f2b3e55-5bad-4fe1-a705-4d141cb1cac6",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "smoke",
+      "Position": "160,-32,-0.00006542052",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "5c420b59-5588-46a5-b8f1-20c3f9d54662",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "256,0,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/smoke/smoke.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "f088aef2-fecf-4244-9b1a-f08cfa651d0e",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "smoke_cloud",
+      "Position": "160,-128,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "0a50e23d-739c-4832-9673-55822aa63eb1",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "64,0,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/smoke/smoke_cloud.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "62f15eaf-cf34-446d-8350-52c4267e8a44",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "watersplash_base",
+      "Position": "32,-96,0.00002857624",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "particles",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LegacyParticleSystem",
+          "__guid": "e219f02a-50a9-4e0a-a450-634d83662629",
+          "__enabled": true,
+          "ControlPoints": [
+            {
+              "Value": "Vector3",
+              "StringCP": "1",
+              "VectorValue": "0,0,0",
+              "FloatValue": 0,
+              "ColorValue": "0,0,0,0",
+              "GameObjectValue": null
+            }
+          ],
+          "Looped": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Particles": "particles/watersplash/watersplash_base.vpcf",
+          "PlaybackSpeed": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "a5be68d4-ed70-4d98-ae2c-dbf5c5294b4a",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Environment",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [],
+      "Children": [
+        {
+          "__guid": "88beb854-e760-41f4-8d05-69bbdc7a9d6e",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Envmap Probe",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.EnvmapProbe",
+              "__guid": "3b43cca8-ac1c-4c32-a0d9-30d7bc19f4f1",
+              "__enabled": true,
+              "Bounds": {
+                "Mins": "-2000,-2000,-500",
+                "Maxs": "2000,2000,500"
+              },
+              "DelayBetweenUpdates": 0.1,
+              "Feathering": 1024,
+              "FrameInterval": 5,
+              "MaxDistance": 512,
+              "MultiBounce": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Projection": "Box",
+              "RenderDynamically": true,
+              "Resolution": "Small",
+              "Texture": "textures/cubemaps/default2.vtex",
+              "TintColor": "0,0,0,1",
+              "UpdateStrategy": "OnEnabled",
+              "ZFar": 4096,
+              "ZNear": 16
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "2c5ca89a-0dac-4ddc-a8f8-0fab9287dcf9",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Camera",
+          "Position": "-256,0,256",
+          "Rotation": "0,0.3007058,0,0.9537169",
+          "Scale": "1,1,1",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.CameraComponent",
+              "__guid": "05d8b42c-0da3-44d1-8451-79c12189031c",
+              "__enabled": true,
+              "BackgroundColor": "0,0,0,1",
+              "ClearFlags": "All",
+              "FieldOfView": 60,
+              "FovAxis": "Horizontal",
+              "IsMainCamera": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 10000,
+              "ZNear": 10
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "56e30e89-be98-42b5-853a-8eca3f360526",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "2D Skybox",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "skybox",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.SkyBox2D",
+              "__guid": "94e7cd17-88a8-40e5-8e1c-f1cb77bbfb8d",
+              "__enabled": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "SkyIndirectLighting": true,
+              "SkyMaterial": "materials/skybox/skybox_workshop.vmat",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "141fd99d-e0a3-46a7-860b-e8aaec9ced36",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "plane_64",
+          "Position": "0,0,-64",
+          "Rotation": "0,0,0,1",
+          "Scale": "50,50,50",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.Prop",
+              "__guid": "f5877e03-0f08-49ec-a2ef-40cdd70b3493",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "Health": 0,
+              "IsStatic": true,
+              "MaterialGroup": null,
+              "Model": "models/plane_64.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnPropBreak": null,
+              "OnPropTakeDamage": null,
+              "StartAsleep": false,
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "59570934-6b30-48a5-869f-af7de65b31e3",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Point Light",
+          "Position": "160,0,63.99999",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "light_point,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.PointLight",
+              "__guid": "ff872dee-86c0-4a3c-978b-89100906fb78",
+              "__enabled": true,
+              "Attenuation": 1,
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "1.82746,1.96078,2,1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "Radius": 600,
+              "Shadows": false
+            }
+          ],
+          "Children": []
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "NetworkInterpolation": true,
+    "TimeScale": 1,
+    "WantsSystemScene": true,
+    "Metadata": {},
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "ResourceVersion": 3,
+  "Title": null,
+  "Description": null,
+  "__references": [
+    "jammie.plane_64_tp#103411"
+  ],
+  "__version": 3
+}

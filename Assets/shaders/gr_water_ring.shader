@@ -84,9 +84,9 @@ PS
 	float g_flEmissionStrength < UiGroup( ",0/,0/0" ); Default1( 0.5 ); Range1( 0, 10 ); >;
 	float g_flSmoothStepMin < UiGroup( ",0/,0/0" ); Default1( 0.25 ); Range1( 0, 1 ); >;
 	float g_flSmoothStepMax < UiGroup( ",0/,0/1" ); Default1( 0.35 ); Range1( 0, 1 ); >;
-	float2 g_vUVTilingOne < UiGroup( ",0/,0/0" ); Default2( 10,1 ); Range2( 0,0, 1,1 ); >;
+	float2 g_vUVTilingOne < UiGroup( ",0/,0/0" ); Default2( 10,1 ); Range2( 0,0, 20,20 ); >;
 	float g_flSpeedOne < UiGroup( ",0/,0/0" ); Default1( 0.1 ); Range1( 0, 1 ); >;
-	float2 g_vUVTilingTwo < UiGroup( ",0/,0/0" ); Default2( 16,1 ); Range2( 0,0, 1,1 ); >;
+	float2 g_vUVTilingTwo < UiGroup( ",0/,0/0" ); Default2( 16,1 ); Range2( 0,0, 20,20 ); >;
 	float g_flSpeedTwo < UiGroup( ",0/,0/0" ); Default1( 0.2 ); Range1( 0, 1 ); >;
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
