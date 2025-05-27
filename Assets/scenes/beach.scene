@@ -19,6 +19,7 @@
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "9139f7ce-af77-484e-9b0f-2eacc74e7be3",
+          "__enabled": true,
           "Author": null,
           "Changes": "",
           "Description": "",
@@ -54,6 +55,7 @@
         {
           "__type": "Grubs.Systems.Network.GrubsNetworkManager",
           "__guid": "55821b2d-8a1a-4e94-bdb7-b2c9ff0d6123",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -86,6 +88,7 @@
         {
           "__type": "Sandbox.CameraComponent",
           "__guid": "2b162f48-7432-4445-8f15-7a87a3bcf4a8",
+          "__enabled": true,
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
@@ -110,6 +113,7 @@
         {
           "__type": "Sandbox.Highlight",
           "__guid": "4fa22fb2-25e4-4720-895f-88d4eeabf80c",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -120,6 +124,7 @@
         {
           "__type": "Sandbox.AmbientOcclusion",
           "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
+          "__enabled": true,
           "__version": 1,
           "DenoiseMode": "Temporal",
           "FalloffRange": 0.75,
@@ -137,6 +142,7 @@
         {
           "__type": "Sandbox.Sharpen",
           "__guid": "c2a83157-c96a-4753-8a45-42ce730adf05",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -148,6 +154,7 @@
         {
           "__type": "Grubs.Pawn.GrubFollowCamera",
           "__guid": "f37770a0-2320-4422-bffa-20d7c33fe1e7",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -175,6 +182,7 @@
         {
           "__type": "Sandbox.Vignette",
           "__guid": "6ec415ab-8a87-4be2-838c-06eb4386d1c6",
+          "__enabled": true,
           "Center": "0.5,0.5",
           "Color": "0,0,0,0.74",
           "Intensity": 0.52,
@@ -190,6 +198,7 @@
         {
           "__type": "Sandbox.Tonemapping",
           "__guid": "47d54fa6-1b09-4e64-a57f-7c6889d92213",
+          "__enabled": true,
           "__version": 3,
           "AutoExposureEnabled": true,
           "ExposureCompensation": 0,
@@ -226,6 +235,7 @@
         {
           "__type": "Grubs.Drops.CrateUtility",
           "__guid": "1acc6d58-541e-4e3b-b3c0-40d937dc3ad1",
+          "__enabled": true,
           "HealthCratePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/drops/health_crate.prefab"
@@ -248,16 +258,7 @@
         {
           "__type": "Grubs.Helpers.ExplosionHelper",
           "__guid": "c3056b0d-85ed-4205-94a2-8e042514744c",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null
-        },
-        {
-          "__type": "Grubs.Helpers.ParticleHelper",
-          "__guid": "bd48a7bb-ba28-4261-9110-83778667ebd1",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -268,6 +269,7 @@
         {
           "__type": "Grubs.Equipment.Gadgets.Ground.LandmineUtility",
           "__guid": "bc308eb0-0230-4afa-8a83-a109009196d1",
+          "__enabled": true,
           "LandminePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
@@ -304,6 +306,7 @@
         {
           "__type": "Sandbox.ScreenPanel",
           "__guid": "cdddaeaa-764d-4d73-b87d-31756e69734a",
+          "__enabled": true,
           "AutoScreenScale": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -320,6 +323,7 @@
         {
           "__type": "Grubs.UI.GameLanding.GameLanding",
           "__guid": "ac4f426c-09ce-4151-8ff1-c1dc4b1f767a",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -330,6 +334,7 @@
         {
           "__type": "Grubs.UI.GameEnd.GameEnd",
           "__guid": "9c96bf74-495e-4599-b919-398493a3e660",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -358,6 +363,7 @@
         {
           "__type": "Grubs.Systems.GameMode.FreeForAll",
           "__guid": "6eb0fa7d-6d3e-4b58-94c7-0c3e56178083",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -386,6 +392,7 @@
         {
           "__type": "Grubs.Helpers.FireHelper",
           "__guid": "2ab9dd8e-df13-453f-96f9-563b3b82627c",
+          "__enabled": true,
           "FireLifetime": 5,
           "FireObjectPrefab": {
             "_type": "gameobject",
@@ -420,6 +427,7 @@
         {
           "__type": "Grubs.Terrain.GrubsTerrain",
           "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -486,6 +494,7 @@
         {
           "__type": "Sandbox.Sdf.Sdf2DWorld",
           "__guid": "18fcdcfa-5aa8-440a-b806-592601ed927a",
+          "__enabled": true,
           "Curve": [
             {
               "x": 0,
@@ -559,6 +568,7 @@
         {
           "__type": "Grubs.Helpers.WorldPopupHelper",
           "__guid": "e0aa518f-efcd-4a30-9dd6-e9687d9fa766",
+          "__enabled": true,
           "CratePickupPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/world/popups/cratepickup.prefab"
@@ -581,6 +591,7 @@
         {
           "__type": "Grubs.Helpers.ChatHelper",
           "__guid": "030eb602-e479-42a0-9173-3ee4ff94cfa4",
+          "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -625,6 +636,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ea8c90cb-fa84-46fe-b4f2-0bd4fbb8ae4e",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -662,7 +674,8 @@
             {
               "__type": "Grubs.Common.KillZone",
               "__guid": "72d5d8e2-71b7-4213-8602-3fb4951760ae",
-              "KillParticles": "particles/watersplash/watersplash_base.vpcf",
+              "__enabled": true,
+              "KillParticles": null,
               "KillSound": "sounds/world/water_splash.sound",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -674,6 +687,7 @@
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "c6f27e16-c3b9-4c78-aaef-a82924edea5c",
+              "__enabled": true,
               "Center": "0,0,-25",
               "Friction": null,
               "IsTrigger": true,
@@ -713,6 +727,7 @@
             {
               "__type": "Sandbox.DirectionalLight",
               "__guid": "e266174e-78ae-40c1-a65f-948e9b2123c4",
+              "__enabled": true,
               "FogMode": "Enabled",
               "FogStrength": 1,
               "LightColor": "1,1,1,1",
@@ -746,6 +761,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "b2bcddb4-5b0f-4bb3-8201-b7c421237274",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -787,6 +803,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ee1c4f2a-a2ff-4217-8301-1a6c63b13492",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -828,6 +845,7 @@
             {
               "__type": "Sandbox.SoundBoxComponent",
               "__guid": "ec1fbee2-f0fd-4f96-a37d-b1267fdb809a",
+              "__enabled": true,
               "Distance": 512,
               "DistanceAttenuation": false,
               "DistanceAttenuationOverride": false,
@@ -895,6 +913,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "f06bb6bb-0b0b-4750-a0ac-d32fab9a2dd5",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -936,6 +955,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "1ea7cd2e-73b9-404c-92e7-4639ab065305",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -977,6 +997,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "5fd0171f-dcd5-411d-80e3-52c3b57e1d47",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -1018,6 +1039,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "a30f0cd3-a7d3-405a-beda-a328f3cb85bc",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -1059,6 +1081,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "4c248856-24f9-4161-88fb-213adc757c69",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -1100,6 +1123,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "ecdfced4-2d94-42b6-a4ea-a02e38c9b1a1",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -1141,6 +1165,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "5663d226-1cdf-4c60-9e12-2f04d4812252",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -1182,6 +1207,7 @@
             {
               "__type": "Sandbox.ModelRenderer",
               "__guid": "904df15a-8a17-457c-8ad6-7372ffd365b7",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -1223,6 +1249,7 @@
             {
               "__type": "Sandbox.EnvmapProbe",
               "__guid": "e0b96ad4-750b-422a-b085-02f769a1a09e",
+              "__enabled": true,
               "Bounds": {
                 "Mins": "-5000,-3380.525,-2000",
                 "Maxs": "5000,7216.525,2000"
