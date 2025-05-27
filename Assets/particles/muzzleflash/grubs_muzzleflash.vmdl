@@ -17,10 +17,6 @@
 								from = "gradient.vmat"
 								to = "particles/muzzleflash/grubs_muzzleflash_gradient.vmat"
 							},
-							{
-								from = "flash.vmat"
-								to = "particles/muzzleflash/grubs_muzzleflash_flash.vmat"
-							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -36,8 +32,8 @@
 						name = "toon_muzzleflash"
 						filename = "particles/muzzleflash/grubs_muzzleflash.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 90.0, 90.0 ]
-						import_scale = 0.05
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -54,5 +50,6 @@
 		model_archetype = "generic_actor_model"
 		primary_associated_entity = "generic_actor"
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
