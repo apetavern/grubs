@@ -45,7 +45,7 @@ Layer0
 	g_vTexCoordScrollSpeed "[-0.150 -0.150]"
 
 	//---- Translucent ----
-	g_flAlphaTestReference "0.250"
+	g_flAlphaTestReference "0.100"
 	g_flAntiAliasedEdgeStrength "1.000"
 	TextureTranslucency "particles/explosion/fireball_selfillum.png"
 }
