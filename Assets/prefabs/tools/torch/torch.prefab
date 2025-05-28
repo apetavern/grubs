@@ -1,14 +1,23 @@
 {
   "RootObject": {
     "__guid": "07ffaf5f-f930-4b51-ba7d-8540aba28018",
+    "__version": 1,
     "Flags": 0,
     "Name": "torch",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
     "Tags": "tool",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "NetworkOrphaned": 0,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "8977b4a7-78c3-4861-b2e6-54aeece712b9",
+        "__enabled": true,
         "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
@@ -31,6 +40,7 @@
           "vectors": {},
           "rotations": {}
         },
+        "PlaybackRate": 1,
         "RenderOptions": {
           "GameLayer": true,
           "OverlayLayer": false,
@@ -39,7 +49,9 @@
         },
         "RenderType": "On",
         "Sequence": {
-          "Name": null
+          "Name": null,
+          "Looping": true,
+          "Blending": false
         },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -47,6 +59,7 @@
       {
         "__type": "Grubs.Equipment.Equipment",
         "__guid": "ace702d9-07b3-42a8-b0c0-4325492170e4",
+        "__enabled": true,
         "CameraCanZoom": true,
         "Data": "resources/equipment/tools/blowtorch.geq",
         "HoldPose": "Uzi",
@@ -71,6 +84,7 @@
       {
         "__type": "Grubs.TorchWeapon",
         "__guid": "e0a7f964-6a2d-4587-8f0f-695a0f60edbc",
+        "__enabled": true,
         "AmmoType": "Fuel",
         "CanFireWhileMoving": true,
         "CanSwapAfterUse": false,
@@ -96,7 +110,7 @@
         "StartMultiplier": 40,
         "TorchFlame": {
           "_type": "gameobject",
-          "go": "54d1051e-daef-4a84-9022-45cc262dbc27"
+          "go": "6ea5bad9-f688-454d-a07a-8c7bdb826b2e"
         },
         "TorchSize": 20,
         "UseSound": "sounds/weapons/torch/torch_fire.sound"
@@ -104,6 +118,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
         "__guid": "b4194bd2-27b4-44dc-ac73-5aa0e582f5d8",
+        "__enabled": true,
         "Inputs": {
           "fire": "Fire (Hold)"
         },
@@ -118,14 +133,23 @@
     "Children": [
       {
         "__guid": "54d1051e-daef-4a84-9022-45cc262dbc27",
+        "__version": 1,
         "Flags": 0,
         "Name": "Object",
         "Position": "21.42269,-0.7815454,4.673153",
+        "Rotation": "0,0,0,1",
         "Scale": "0.4872095,0.4872095,0.4872095",
+        "Tags": "",
+        "Enabled": false,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "NetworkOrphaned": 0,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "0d45f6ed-5d44-4304-96d4-9d267d562eb1",
+            "__enabled": false,
             "BodyGroups": 18446744073709551615,
             "CreateAttachments": false,
             "MaterialGroup": null,
@@ -146,19 +170,49 @@
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
-        ]
+        ],
+        "Children": []
+      },
+      {
+        "__guid": "6ea5bad9-f688-454d-a07a-8c7bdb826b2e",
+        "__version": 1,
+        "__Prefab": "particles/blueflame/blueflame.prefab",
+        "__PrefabInstancePatch": {
+          "AddedObjects": [],
+          "RemovedObjects": [],
+          "PropertyOverrides": [
+            {
+              "Target": {
+                "Type": "GameObject",
+                "IdValue": "c38a9058-9036-48f5-bab3-63bafde716e6"
+              },
+              "Property": "Position",
+              "Value": "21.42269,-0.7815454,4.673153"
+            },
+            {
+              "Target": {
+                "Type": "GameObject",
+                "IdValue": "c38a9058-9036-48f5-bab3-63bafde716e6"
+              },
+              "Property": "Enabled",
+              "Value": false
+            }
+          ],
+          "MovedObjects": []
+        },
+        "__PrefabIdToInstanceId": {
+          "c38a9058-9036-48f5-bab3-63bafde716e6": "6ea5bad9-f688-454d-a07a-8c7bdb826b2e",
+          "513b8223-e762-4aad-8369-6ba30a7bd8a2": "045d7e10-8132-47fa-bde7-f35ce562925e",
+          "e309a7f3-6d91-4630-b2a3-fe5a0ac59735": "f88e8242-c20d-458d-a9a9-7cc375a46208",
+          "7e9144f0-9cee-4ba0-9692-91c69f7298a7": "9f0e06a6-6cd1-4fd3-bfa2-32223ebc4d19",
+          "f919678d-a5e0-4b5a-98d2-e67e316ab3fd": "0a16a3bc-c94d-458c-9343-42437648e35a"
+        }
       }
     ],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -172,13 +226,14 @@
         "ExcludedBodies": "",
         "IncludedBodies": ""
       }
-    }
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
