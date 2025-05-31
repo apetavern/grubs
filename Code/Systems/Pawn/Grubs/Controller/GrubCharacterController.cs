@@ -231,6 +231,8 @@ public class GrubCharacterController : Component
 			Controller.Grub.OnHardFall();
 	}
 
+	private const string LandingParticlesPath = "particles/landimpact/landing_impact.prefab";
+
 	[Rpc.Broadcast]
 	private void OnLandedEffects( Vector3 position )
 	{
@@ -240,10 +242,17 @@ public class GrubCharacterController : Component
 
 		var t = fallVelocity / 1200f;
 		var radius = MathX.Lerp( 0.1f, 2f, t );
+		
+		var landingParticles = GameObject.Clone( LandingParticlesPath );
+		landingParticles.WorldPosition = position;
+		
+		Log.Info( radius );
 
-		// var particles =
-		// 	ParticleHelper.Instance.PlayInstantaneous( LandingParticles, new Transform( position ) );
-		// particles.SetControlPoint( 1, new Vector3( radius, 0, 0 ) );
+		var emitter = landingParticles.GetComponent<ParticleRingEmitter>();
+		emitter.Radius = radius / 10f;
+		
+		var particleRenderer = landingParticles.GetComponent<ParticleModelRenderer>();
+		particleRenderer.Scale = (radius * 0.35f).Clamp( 0.25f, 0.35f );
 	}
 
 	/// <summary>

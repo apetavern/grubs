@@ -4,6 +4,7 @@ using Grubs.Gamemodes;
 using Grubs.Helpers;
 using Grubs.Pawn;
 using Grubs.Systems.GameMode;
+using Grubs.Systems.Particles;
 using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 
@@ -225,8 +226,9 @@ public partial class Health : Component
 	[Rpc.Broadcast]
 	private void DeathEffects( Vector3 position )
 	{
-		// var sceneParticles = ParticleHelper.Instance.PlayInstantaneous( ParticleSystem.Load( "particles/explosion/grubs_explosion_base.vpcf" ), Transform.World );
-		// sceneParticles.SetControlPoint( 1, new Vector3( 100f / 2f, 0, 0 ) );
+		ExplosionParticles.Spawn()
+			.SetWorldPosition( WorldPosition )
+			.SetScale( 100f );
 		Sound.Play( "explosion_short_tail", position );
 	}
 }

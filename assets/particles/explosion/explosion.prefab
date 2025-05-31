@@ -15,6 +15,20 @@
     "OwnerTransfer": 1,
     "Components": [
       {
+        "__type": "Grubs.Systems.Particles.ExplosionParticles",
+        "__guid": "258f117e-b117-4f81-a428-98fb5e9e3c04",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "ParticleRenderers": [
+          null
+        ]
+      },
+      {
         "__type": "Sandbox.ParticleEffect",
         "__guid": "aea3d4df-379b-4a50-9c59-7930fec6a4eb",
         "__enabled": true,
@@ -342,7 +356,7 @@
         "Delay": 0,
         "DestroyOnEnd": true,
         "Duration": 1.5,
-        "Loop": true,
+        "Loop": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -655,7 +669,7 @@
             "Delay": 0,
             "DestroyOnEnd": false,
             "Duration": 1.5,
-            "Loop": true,
+            "Loop": false,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
             "OnComponentEnabled": null,
@@ -1256,7 +1270,7 @@
             "Delay": 0,
             "DestroyOnEnd": true,
             "Duration": 1.5,
-            "Loop": true,
+            "Loop": false,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
             "OnComponentEnabled": null,

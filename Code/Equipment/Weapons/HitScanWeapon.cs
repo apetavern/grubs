@@ -1,6 +1,7 @@
 ﻿using Grubs.Common;
 using Grubs.Helpers;
 using Grubs.Pawn;
+using Grubs.Systems.Particles;
 using Grubs.Systems.Pawn.Grubs;
 using Grubs.Terrain;
 
@@ -19,10 +20,6 @@ public class HitScanWeapon : Weapon
 	[Property, Category( "Trace" )] public float TraceDelay { get; set; } = 0f;
 	[Property, Category( "Explosion" )] public float ExplosionRadius { get; set; } = 0f;
 	[Property, Category( "Explosion" )] public float ExplosionDamage { get; set; } = 0f;
-	[Property, Category( "Effects" )] public ParticleSystem TraceParticles { get; set; }
-	[Property, Category( "Effects" )] public ParticleSystem MuzzleParticles { get; set; }
-	[Property, Category( "Effects" )] public ParticleSystem ExplosionParticles { get; set; }
-	[Property, Category( "Effects" )] public ParticleSystem SmokeParticles { get; set; }
 
 	private int _tracesFired = 0;
 	private TimeSince _timeSinceLastTrace = 0;
@@ -79,11 +76,12 @@ public class HitScanWeapon : Weapon
 			Sound.Play( UseSound, startPos );
 
 		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
-		// if ( MuzzleParticles is not null )
-		// {
-		// 	var muzzle = Equipment.Model.GetAttachment( "muzzle" );
-		// 	ParticleHelper.Instance.PlayInstantaneous( MuzzleParticles, muzzle ?? transform );
-		// }
+		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
+		
+		// Rotation not working correctly
+		// MuzzleParticles.Spawn()
+		// 	.SetWorldPosition( muzzle?.Position ?? transform.Position )
+		// 	.SetWorldRotation( muzzle?.Rotation ?? transform.Rotation );
 
 		var tr = Scene.Trace.Ray( startPos, endPos )
 			.WithAnyTags( "solid", "player", "pickup" )
@@ -158,11 +156,7 @@ public class HitScanWeapon : Weapon
 			return false;
 
 		ExplosionHelper.Instance.Explode( this, tr.EndPosition, ExplosionRadius, ExplosionDamage, Equipment.Grub.Id, Equipment.Grub.Name, HitForce.x );
-		// var explosionParticles = ParticleHelper.Instance.PlayInstantaneous( ExplosionParticles, Transform.World.WithPosition( tr.EndPosition ) );
-		// explosionParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
-		//
-		// var smokeParticles = ParticleHelper.Instance.PlayInstantaneous( SmokeParticles, Transform.World.WithPosition( tr.EndPosition ) );
-		// smokeParticles?.SetControlPoint( 1, new Vector3( ExplosionRadius / 2f , 0, 0 ) );
+		ExplosionParticles.Spawn().SetWorldPosition( tr.EndPosition ).SetScale( ExplosionRadius * 2f );
 		return true;
 	}
 

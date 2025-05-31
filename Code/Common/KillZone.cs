@@ -7,7 +7,7 @@ namespace Grubs.Common;
 [Title( "Grubs - Kill Zone" ), Category( "Grubs" )]
 public class KillZone : Component, Component.ITriggerListener
 {
-	[Property] public ParticleSystem KillParticles { get; set; }
+
 	[Property] public SoundEvent KillSound { get; set; }
 
 	public void OnTriggerEnter( Collider other )
@@ -60,13 +60,15 @@ public class KillZone : Component, Component.ITriggerListener
 	{
 	}
 
+	private const string WaterSplashParticlesPath = "particles/watersplash/water_splash.prefab";
+	
 	[Rpc.Broadcast]
 	public void CollisionEffects( Transform transform )
 	{
 		if ( KillSound is not null )
 			Sound.Play( KillSound, WorldPosition );
 
-		// if ( KillParticles is not null )
-		// 	ParticleHelper.Instance.PlayInstantaneous( KillParticles, transform );
+		var go = GameObject.Clone( WaterSplashParticlesPath );
+		go.WorldPosition = transform.Position;
 	}
 }

@@ -15,6 +15,17 @@
     "OwnerTransfer": 1,
     "Components": [
       {
+        "__type": "Grubs.Systems.Particles.MuzzleParticles",
+        "__guid": "54f1b208-a1e2-45ec-b0fa-7340db9adf65",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
         "__type": "Sandbox.ParticleEffect",
         "__guid": "178a4769-0a90-4534-9f52-e79c0f79d5a0",
         "__enabled": true,
@@ -258,7 +269,7 @@
           "BloomLayer": false,
           "AfterUILayer": false
         },
-        "Scale": 1
+        "Scale": 0.5
       },
       {
         "__type": "Sandbox.ParticleConeEmitter",
@@ -271,10 +282,10 @@
         "ConeFar": 50,
         "ConeNear": 1,
         "Delay": 0,
-        "DestroyOnEnd": false,
-        "Duration": 1,
+        "DestroyOnEnd": true,
+        "Duration": 0.05,
         "InVolume": false,
-        "Loop": true,
+        "Loop": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,

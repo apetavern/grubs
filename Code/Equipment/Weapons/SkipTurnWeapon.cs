@@ -1,12 +1,11 @@
 ﻿using Grubs.Helpers;
+using Grubs.Systems.Particles;
 
 namespace Grubs.Equipment.Weapons
 {
 	[Title( "Grubs - Skip Turn Weapon" ), Category( "Equipment" )]
 	public class SkipTurnWeapon : Weapon
 	{
-		[Property] public ParticleSystem UseParticles { get; set; }
-
 		protected override void FireImmediate()
 		{
 			if ( Equipment.Grub is not { } grub )
@@ -21,11 +20,8 @@ namespace Grubs.Equipment.Weapons
 		{
 			var muzzle = GetMuzzleTransform();
 
-			// if ( UseParticles is not null )
-			// {
-			// 	var smoke = ParticleHelper.Instance.PlayInstantaneous( UseParticles, muzzle );
-			// 	smoke.SetControlPoint( 1, 2f ); // Rise distance
-			// }
+			SmokeStackParticles.Spawn()
+				.SetWorldPosition( muzzle.Position );
 		}
 	}
 }

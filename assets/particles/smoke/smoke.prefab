@@ -15,6 +15,17 @@
     "OwnerTransfer": 1,
     "Components": [
       {
+        "__type": "Grubs.Systems.Particles.SmokeStackParticles",
+        "__guid": "957730a1-8170-4a6a-9e13-c070168650e0",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
         "__type": "Sandbox.ParticleEffect",
         "__guid": "d3a31ed3-643b-490b-8f54-c48e5cadef30",
         "__enabled": true,
@@ -327,7 +338,7 @@
         "Delay": 0,
         "DestroyOnEnd": true,
         "Duration": 1,
-        "Loop": true,
+        "Loop": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
