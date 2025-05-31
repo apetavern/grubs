@@ -110,30 +110,8 @@
           "ConstantA": "1,1,1,1",
           "ConstantB": "1,1,1,1"
         },
-        "Lifetime": {
-          "Type": "Range",
-          "Evaluation": "Particle",
-          "CurveA": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "Constants": "0.15,0.35,0,0"
-        },
-        "MaxParticles": 3,
+        "Lifetime": 0.1,
+        "MaxParticles": 1,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -173,13 +151,13 @@
               "mode": "Mirrored"
             }
           ],
-          "Constants": "-360,360,0,0"
+          "Constants": "0,360,0,0"
         },
         "Scale": {
-          "Type": "Curve",
-          "Evaluation": "Life",
+          "Type": "Range",
+          "Evaluation": "Particle",
           "CurveA": {
-            "rangey": "0.5,1",
+            "rangey": "0.75,1",
             "frames": [
               {
                 "x": 0,
@@ -227,7 +205,7 @@
               "mode": "Mirrored"
             }
           ],
-          "Constants": "1,0,0,0"
+          "Constants": "0.8,1.2,0,0"
         },
         "SequenceId": 0,
         "SequenceSpeed": 1,
@@ -272,20 +250,14 @@
         "Scale": 0.5
       },
       {
-        "__type": "Sandbox.ParticleConeEmitter",
+        "__type": "Sandbox.ParticleSphereEmitter",
         "__guid": "4910ba45-dacf-4adf-927b-f98b4c561517",
         "__enabled": true,
         "Burst": 1000,
-        "CenterBias": 0,
-        "CenterBiasVelocity": 0,
-        "ConeAngle": 30,
-        "ConeFar": 50,
-        "ConeNear": 1,
         "Delay": 0,
-        "DestroyOnEnd": true,
-        "Duration": 0.05,
-        "InVolume": false,
-        "Loop": false,
+        "DestroyOnEnd": false,
+        "Duration": 1,
+        "Loop": true,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -293,10 +265,66 @@
         "OnComponentStart": null,
         "OnComponentUpdate": null,
         "OnEdge": false,
-        "Rate": 8,
+        "Radius": 0,
+        "Rate": 12,
         "RateOverDistance": 0,
-        "VelocityMultiplier": 1,
-        "VelocityRandom": 0
+        "Velocity": 0
+      },
+      {
+        "__type": "Sandbox.ParticleLightRenderer",
+        "__guid": "d235d5bf-e66d-42e8-b630-aac2dd0e6972",
+        "__enabled": true,
+        "Attenuation": 0.1,
+        "Brightness": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "CurveA": {
+            "rangex": "0,0",
+            "rangey": "0,0"
+          },
+          "CurveB": {
+            "rangex": "0,0",
+            "rangey": "0,0"
+          },
+          "Constants": "2,5,0,0"
+        },
+        "CastShadows": false,
+        "LightColor": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "GradientA": {
+            "blend": "Linear",
+            "color": [
+              {
+                "t": 0.5,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "GradientB": {
+            "blend": "Linear",
+            "color": [
+              {
+                "t": 0.5,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "ConstantA": "1,0.78333,0,1",
+          "ConstantB": "1,0.26667,0,1"
+        },
+        "MaximumLights": 1,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Ratio": 1,
+        "Scale": 40,
+        "UseParticleColor": false
       }
     ],
     "Children": [],

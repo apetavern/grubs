@@ -256,48 +256,6 @@
       "Children": []
     },
     {
-      "__guid": "8fe6191f-1190-42ac-ab64-13db832df946",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "railgun",
-      "Position": "0,128,0",
-      "Rotation": "0,0,0,1",
-      "Scale": "1,1,1",
-      "Tags": "particles",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.LegacyParticleSystem",
-          "__guid": "600907f5-8d68-4956-947f-28f4725a954d",
-          "__enabled": true,
-          "ControlPoints": [
-            {
-              "Value": "Vector3",
-              "StringCP": "1",
-              "VectorValue": "128,128,0",
-              "FloatValue": 0,
-              "ColorValue": "0,0,0,0",
-              "GameObjectValue": null
-            }
-          ],
-          "Looped": false,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Particles": null,
-          "PlaybackSpeed": 1
-        }
-      ],
-      "Children": []
-    },
-    {
       "__guid": "81a3449f-a5c5-4881-8073-d8c7431b687e",
       "__version": 1,
       "__Prefab": "particles/blueflame/blueflame.prefab",
@@ -367,7 +325,8 @@
         "5f4d0f0c-1e5c-4929-b512-cdce23741dd3": "b3177d0d-a43f-4c3f-aab5-8f3824a49b59",
         "6b937a08-2a9a-4863-b2c6-af3e13fe516f": "7541a237-51f7-4c49-81a3-62cbc761b8d4",
         "19ece23c-bfcd-427c-9e04-98860cc7f6c5": "4fda458f-e662-4234-a9ce-cde08c0c0664",
-        "447c4616-eec5-40a2-9606-3caf06100b5b": "5f5831ca-5430-4727-8f91-0819b5b4b2ef"
+        "447c4616-eec5-40a2-9606-3caf06100b5b": "5f5831ca-5430-4727-8f91-0819b5b4b2ef",
+        "258f117e-b117-4f81-a428-98fb5e9e3c04": "1ec431a2-ec33-451d-9c3f-aa85e6d2984d"
       }
     },
     {
@@ -461,7 +420,7 @@
       }
     },
     {
-      "__guid": "e0baafc0-403f-4abe-b269-3614a3ead347",
+      "__guid": "d35800b5-c325-43ba-a84e-07df8ac6db70",
       "__version": 1,
       "__Prefab": "particles/muzzleflash/muzzleflash.prefab",
       "__PrefabInstancePatch": {
@@ -474,24 +433,18 @@
               "IdValue": "851cc5fe-d5ab-4b8e-bb2f-2a8ecbb7e5d7"
             },
             "Property": "Position",
-            "Value": "88,-56,9.999946"
-          },
-          {
-            "Target": {
-              "Type": "Component",
-              "IdValue": "d10f6525-9fb5-4393-b6fe-8f6521092420"
-            },
-            "Property": "Scale",
-            "Value": 0.5
+            "Value": "88,-56,0"
           }
         ],
         "MovedObjects": []
       },
       "__PrefabIdToInstanceId": {
-        "851cc5fe-d5ab-4b8e-bb2f-2a8ecbb7e5d7": "e0baafc0-403f-4abe-b269-3614a3ead347",
-        "178a4769-0a90-4534-9f52-e79c0f79d5a0": "d4f39232-464a-46b6-8461-1667306cf8b2",
-        "d10f6525-9fb5-4393-b6fe-8f6521092420": "9bf112b5-b615-4e00-9fb7-3f850276dd0c",
-        "4910ba45-dacf-4adf-927b-f98b4c561517": "bf144810-4176-4bb3-8fab-7cb23cda95f9"
+        "851cc5fe-d5ab-4b8e-bb2f-2a8ecbb7e5d7": "d35800b5-c325-43ba-a84e-07df8ac6db70",
+        "54f1b208-a1e2-45ec-b0fa-7340db9adf65": "4038f772-44e5-4388-bc95-beac55ac524c",
+        "178a4769-0a90-4534-9f52-e79c0f79d5a0": "1d25c0d3-a911-4925-8470-0caac1d24dd9",
+        "d10f6525-9fb5-4393-b6fe-8f6521092420": "a057f23a-aeeb-4fa5-b85d-52cc88495651",
+        "4910ba45-dacf-4adf-927b-f98b4c561517": "6e14b36f-fa5f-4758-bb56-20d82db52390",
+        "d235d5bf-e66d-42e8-b630-aac2dd0e6972": "c7e92e30-b67e-4921-9e5c-3ab0d062286f"
       }
     },
     {
@@ -517,7 +470,8 @@
         "e831e898-9ebc-4dd1-a8bb-c3740cfa15c6": "cc0c5b86-6ef7-4c50-a479-87ea2ab10383",
         "d3a31ed3-643b-490b-8f54-c48e5cadef30": "38abedbc-e427-428a-abf9-7581879dc566",
         "a72c224d-5eab-4a8e-88e6-413bfaf7daae": "e13d438c-ff54-4da5-a0be-0ece1c358dad",
-        "d657f065-d11c-40d1-85bd-5b18147f0624": "d00533fc-8a87-4a95-adcf-4d8c6307e965"
+        "d657f065-d11c-40d1-85bd-5b18147f0624": "d00533fc-8a87-4a95-adcf-4d8c6307e965",
+        "957730a1-8170-4a6a-9e13-c070168650e0": "c35d8b74-bbdf-4ab6-9080-088ffebad829"
       }
     },
     {
@@ -575,6 +529,142 @@
         "d1b21a3b-1193-4086-b790-959520fef8f5": "37e5b86b-843e-4d9a-a30e-8c321d33d949",
         "a767318c-cf92-4307-8311-83b9d5e391aa": "300835c3-0c75-4116-8fa8-7963987aee7d"
       }
+    },
+    {
+      "__guid": "f7de807f-c991-4777-8c18-d3a2c394ad02",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Line",
+      "Position": "0,128,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.LineRenderer",
+          "__guid": "e586d2a4-bc13-4846-8fc2-1ae80d9a1570",
+          "__enabled": true,
+          "Additive": true,
+          "CastShadows": true,
+          "Color": {
+            "blend": "Linear",
+            "color": [
+              {
+                "t": 0,
+                "c": "0,1.36667,2,1"
+              },
+              {
+                "t": 1,
+                "c": "0,5,4.16667,1"
+              }
+            ],
+            "alpha": [
+              {
+                "t": 0,
+                "a": 1
+              },
+              {
+                "t": 1,
+                "a": 1
+              }
+            ]
+          },
+          "DepthFeather": 0,
+          "EndCap": "None",
+          "Face": "Camera",
+          "FogStrength": 1,
+          "Lighting": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Opaque": false,
+          "Points": [
+            {
+              "_type": "gameobject",
+              "go": "3441b248-adae-46ab-bfee-0ee5c7cf46a4"
+            },
+            {
+              "_type": "gameobject",
+              "go": "c45692f5-322d-49fa-9066-c99bcd909475"
+            }
+          ],
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "SplineBias": 0,
+          "SplineContinuity": 0,
+          "SplineInterpolation": 8,
+          "SplineTension": 0,
+          "StartCap": "None",
+          "Texturing": {
+            "Texture": "materials/particles/beam_plasma_05.vtex",
+            "WorldSpace": true,
+            "UnitsPerTexture": 50,
+            "Scale": 2,
+            "Offset": 0,
+            "Scroll": -1
+          },
+          "UseVectorPoints": false,
+          "VectorPoints": [],
+          "Width": [
+            {
+              "x": 0,
+              "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
+          "Wireframe": false
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "3441b248-adae-46ab-bfee-0ee5c7cf46a4",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Point 1",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [],
+          "Children": []
+        },
+        {
+          "__guid": "c45692f5-322d-49fa-9066-c99bcd909475",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Point 4",
+          "Position": "100,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [],
+          "Children": []
+        }
+      ]
     }
   ],
   "SceneProperties": {
