@@ -78,10 +78,17 @@ public class HitScanWeapon : Weapon
 		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
 		
-		// Rotation not working correctly
-		// MuzzleParticles.Spawn()
-		// 	.SetWorldPosition( muzzle?.Position ?? transform.Position )
-		// 	.SetWorldRotation( muzzle?.Rotation ?? transform.Rotation );
+		var pitch = muzzle?.Rotation.Pitch() ?? transform.Rotation.Pitch();
+		Log.Info( pitch );
+		var facing = grub.PlayerController.Facing;
+		if ( facing < 0 )
+		{
+			pitch -= 180f;
+		}
+		
+		MuzzleParticles.Spawn()
+			.SetWorldPosition( muzzle?.Position ?? transform.Position )
+			.SetPitch( pitch * facing );
 
 		var tr = Scene.Trace.Ray( startPos, endPos )
 			.WithAnyTags( "solid", "player", "pickup" )

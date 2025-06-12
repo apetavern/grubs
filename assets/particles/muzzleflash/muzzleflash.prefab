@@ -247,7 +247,7 @@
           "BloomLayer": false,
           "AfterUILayer": false
         },
-        "Scale": 0.5
+        "Scale": 0.25
       },
       {
         "__type": "Sandbox.ParticleSphereEmitter",
@@ -255,9 +255,9 @@
         "__enabled": true,
         "Burst": 1000,
         "Delay": 0,
-        "DestroyOnEnd": false,
-        "Duration": 1,
-        "Loop": true,
+        "DestroyOnEnd": true,
+        "Duration": 0.25,
+        "Loop": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -266,7 +266,7 @@
         "OnComponentUpdate": null,
         "OnEdge": false,
         "Radius": 0,
-        "Rate": 12,
+        "Rate": 1,
         "RateOverDistance": 0,
         "Velocity": 0
       },
@@ -278,14 +278,24 @@
         "Brightness": {
           "Type": "Range",
           "Evaluation": "Particle",
-          "CurveA": {
-            "rangex": "0,0",
-            "rangey": "0,0"
-          },
-          "CurveB": {
-            "rangex": "0,0",
-            "rangey": "0,0"
-          },
+          "CurveA": [
+            {
+              "x": 0.5,
+              "y": 0.5,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
+          "CurveB": [
+            {
+              "x": 0.5,
+              "y": 0.5,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
           "Constants": "2,5,0,0"
         },
         "CastShadows": false,

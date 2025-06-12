@@ -18,9 +18,10 @@ public sealed class MuzzleParticles : Component
 		return this;
 	}
 
-	public MuzzleParticles SetWorldRotation( Rotation rotation )
+	public MuzzleParticles SetPitch( float pitch )
 	{
-		WorldRotation = rotation;
+		var particle = Components.Get<ParticleEffect>();
+		particle.Pitch = pitch;
 		return this;
 	}
 }
