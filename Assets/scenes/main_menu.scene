@@ -3,13 +3,23 @@
   "GameObjects": [
     {
       "__guid": "2b43679f-f950-4552-8ff6-05090e4fb479",
+      "__version": 1,
       "Flags": 0,
       "Name": "Scene Information",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "8279005d-c5d7-4371-8434-4fa3039952ad",
+          "__enabled": true,
           "Author": null,
           "Changes": "",
           "Description": "",
@@ -24,17 +34,28 @@
           "Title": "main_menu",
           "Version": null
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "2e35c746-223e-47ab-9608-440dd81bc057",
+      "__version": 1,
       "Flags": 0,
       "Name": "Map",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "cb9273ba-e9ed-4379-91ac-d478f6bc05af",
+          "__enabled": true,
           "__version": 1,
           "EnableCollision": true,
           "MapName": "maps/gr_menu.vmap",
@@ -54,16 +75,23 @@
     },
     {
       "__guid": "91464b46-2177-41fc-84e8-6a639bcabac9",
+      "__version": 1,
       "Flags": 0,
       "Name": "Camera",
       "Position": "-85,-105,25",
       "Rotation": "0.028038,-0.03341439,0.6421758,0.7653154",
+      "Scale": "1,1,1",
       "Tags": "maincamera",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
           "__guid": "0c699ae0-d851-40b1-b00b-3690ea15b03c",
+          "__enabled": true,
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
@@ -88,6 +116,7 @@
         {
           "__type": "Sandbox.ColorAdjustments",
           "__guid": "15d59149-6457-4a59-b71e-5f4d860249b5",
+          "__enabled": true,
           "Brightness": 1,
           "Contrast": 1.01,
           "HueRotate": 0,
@@ -102,6 +131,7 @@
         {
           "__type": "Sandbox.Vignette",
           "__guid": "cbfd62cb-6427-4a22-a9cd-ed9722d9ab27",
+          "__enabled": true,
           "Center": "0.5,0.5",
           "Color": "0,0,0,1",
           "Intensity": 0.3,
@@ -117,6 +147,7 @@
         {
           "__type": "Sandbox.DepthOfField",
           "__guid": "590ae120-c6eb-461d-830a-4af6d20304c9",
+          "__enabled": true,
           "BackBlur": true,
           "BlurSize": 25,
           "FocalDistance": 135,
@@ -133,6 +164,7 @@
         {
           "__type": "Sandbox.Tonemapping",
           "__guid": "88fc415d-92f5-4bf8-aac6-f5b49ec44dea",
+          "__enabled": true,
           "__version": 3,
           "AutoExposureEnabled": false,
           "ExposureCompensation": 0,
@@ -148,20 +180,28 @@
           "OnComponentUpdate": null,
           "Rate": 1
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "2f773373-3d4a-4d90-a19f-f27ad74cc00d",
+      "__version": 1,
       "Flags": 0,
       "Name": "Spot Light",
       "Position": "-70.78873,-153.7505,126.6426",
       "Rotation": "-0.157559,0.2053349,0.5880182,0.7663205",
+      "Scale": "1,1,1",
       "Tags": "light_spot,light",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.SpotLight",
           "__guid": "c4612ac7-5c38-4531-bcf7-4e5131fd879b",
+          "__enabled": true,
           "Attenuation": 1,
           "ConeInner": 35,
           "ConeOuter": 45,
@@ -178,18 +218,28 @@
           "Radius": 500,
           "Shadows": true
         }
-      ]
+      ],
+      "Children": []
     },
     {
       "__guid": "5759e5a3-a78f-41d5-8043-c46cbcd9e79b",
+      "__version": 1,
       "Flags": 0,
       "Name": "Fog",
       "Position": "-32,32,100",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
       "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.VolumetricFogVolume",
           "__guid": "d00fe9b7-2047-46db-87ae-aa860c1ca92e",
+          "__enabled": true,
           "Bounds": {
             "Mins": "-150,-150,-100",
             "Maxs": "150,150,100"
@@ -203,109 +253,14 @@
           "OnComponentUpdate": null,
           "Strength": 5
         }
-      ]
-    },
-    {
-      "__guid": "65e690eb-fbed-404c-bd61-397ebe06f2c8",
-      "Flags": 0,
-      "Name": "UI",
-      "Position": "-33.10376,189.3181,51.14672",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Grubs.UI.Menu.Menu",
-          "__guid": "1e66b6ef-f6ee-465f-ac85-03d40d540f2b",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null
-        },
-        {
-          "__type": "Sandbox.ScreenPanel",
-          "__guid": "5947718e-cc50-4245-82a7-b1abd81261d3",
-          "AutoScreenScale": true,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Opacity": 1,
-          "Scale": 1,
-          "ScaleStrategy": "ConsistentHeight",
-          "TargetCamera": null,
-          "ZIndex": 100
-        }
-      ]
-    },
-    {
-      "__guid": "c39bcf65-a80a-4eb7-83c9-2eca44caed0e",
-      "Flags": 0,
-      "Name": "Music",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.SoundPointComponent",
-          "__guid": "6be36c09-4210-4ff2-81ec-2aa25e54aabb",
-          "Distance": 512,
-          "DistanceAttenuation": false,
-          "DistanceAttenuationOverride": false,
-          "Falloff": [
-            {
-              "x": 0,
-              "y": 1,
-              "in": 3.1415927,
-              "out": -3.1415927,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 1,
-              "y": 0,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "Force2d": false,
-          "MaxRepeatTime": 0,
-          "MinRepeatTime": 0,
-          "Occlusion": false,
-          "OcclusionOverride": false,
-          "OcclusionRadius": 32,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Pitch": 1,
-          "PlayOnStart": true,
-          "ReflectionOverride": false,
-          "Reflections": false,
-          "Repeat": true,
-          "SoundEvent": "sounds/music/menu_music.sound",
-          "SoundOverride": false,
-          "StopOnNew": false,
-          "TargetMixer": {
-            "Name": "music",
-            "Id": "dc54f060-343f-405c-b14d-510f387223f7"
-          },
-          "Volume": 1
-        }
-      ]
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
-    "FixedUpdateFrequency": 50,
-    "MaxFixedUpdates": 5,
-    "NetworkFrequency": 30,
     "NetworkInterpolation": true,
-    "PhysicsSubSteps": 1,
-    "ThreadedAnimation": true,
     "TimeScale": 1,
-    "UseFixedUpdate": true,
+    "WantsSystemScene": true,
     "Metadata": {
       "Title": "main_menu"
     },
@@ -322,9 +277,9 @@
       "IncludedBodies": ""
     }
   },
-  "ResourceVersion": 2,
+  "ResourceVersion": 3,
   "Title": "main_menu",
   "Description": null,
   "__references": [],
-  "__version": 2
+  "__version": 3
 }
