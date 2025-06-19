@@ -235,7 +235,7 @@ public partial class Weapon : Component
 		{
 			ChargeGauge = new GameObject().Components.Create<SkinnedModelRenderer>();
 			ChargeGauge.Model = Model.Load( "particles/weaponcharge/weapon_charge.vmdl" );
-			ChargeGauge.RenderOptions.Overlay = true;
+			ChargeGauge.RenderOptions.Bloom = true;
 		}
 		ChargeGauge.GameObject.Enabled = true;
 
