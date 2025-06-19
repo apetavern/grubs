@@ -3,7 +3,7 @@
 InventoryDisplay {
   position: absolute;
   right: 64px;
-  bottom: 0;
+  bottom: -1;
   color: $camo-light;
   flex-direction: column;
   transition: opacity 0.1s;
@@ -32,7 +32,9 @@ InventoryDisplay {
   }
   
   .weapon-tooltip {
-    margin-top: 24px;
+    position: absolute;
+    right: 140%;
+    bottom: 24px;
     background-color: $camo-dark;
     width: 445px;
     flex-direction: column;

@@ -32,19 +32,19 @@
                 }
             </div>
         }
-        @if (HoveredEquipment is not null)
-        {
-            <div class="weapon-tooltip">
-                <div class="weapon-header">
-                    <img src=@HoveredEquipment.Icon />
-                    <label>@HoveredEquipment.Name.ToUpper()</label>
-                </div>
-                <div class="weapon-info">
-                    @HoveredEquipment.Data.Description
-                </div>
-            </div>
-        }
     </div>
+    @if (HoveredEquipment is not null)
+    {
+        <div class="weapon-tooltip">
+            <div class="weapon-header">
+                <img src=@HoveredEquipment.Icon />
+                <label>@HoveredEquipment.Name.ToUpper()</label>
+            </div>
+            <div class="weapon-info">
+                @HoveredEquipment.Data.Description
+            </div>
+        </div>
+    }
 </root>
 
 @code
