@@ -1,9 +1,10 @@
 {
   "Name": "Bunker Buster",
-  "Description": "For those pesky tunnelers",
+  "Description": "For those pesky tunnelers.",
   "Icon": "models/weapons/bunker_buster/bunker_buster.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": null,
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 1,
   "DropChance": 0,
   "__references": [],

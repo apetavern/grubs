@@ -1,9 +1,10 @@
 {
   "Name": "Teleporter",
-  "Description": "Teleports your grub to another location",
+  "Description": "Teleports your Grub to another location.",
   "Icon": "models/tools/teleporter/teleporter.vmdl_c.png",
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/weapons/teleporter/teleporter.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 2,
   "DropChance": 2,
   "__references": [],

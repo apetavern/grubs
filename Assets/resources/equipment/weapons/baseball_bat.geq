@@ -1,6 +1,6 @@
 {
   "Name": "Baseball Bat",
-  "Description": "Violent and deadly!",
+  "Description": "Violent and deadly! Knocks back your opponent with great force.",
   "Icon": "models/weapons/baseballbat/baseballbat.vmdl_c.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/baseball_bat/baseball_bat.prefab",

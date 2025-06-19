@@ -1,6 +1,6 @@
 {
   "Name": "Landmine",
-  "Description": "Places a landmine at your feet ",
+  "Description": "Explodes when nearby Grubs walk by.",
   "Icon": "models/weapons/landmine/landmine.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/landmine/landmine.prefab",

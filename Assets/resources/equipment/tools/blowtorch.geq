@@ -1,9 +1,10 @@
 {
   "Name": "blowtorch",
-  "Description": "Blow for torching.",
+  "Description": "For torching through terrain. Or burrowing in the terrain like a Grub.",
   "Icon": "models/tools/blowtorch/blowtorch.vmdl_c.png",
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/torch/torch.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 4,
   "DropChance": 1,
   "__references": [],

@@ -1,6 +1,6 @@
 {
   "Name": "Revolver",
-  "Description": "Ten paces and turn.",
+  "Description": "Ten paces and turn. Can penetrate through enemies but not the terrain.",
   "Icon": "models/weapons/revolver/revolver.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/revolver/revolver.prefab",

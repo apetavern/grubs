@@ -1,9 +1,10 @@
 {
   "Name": "Mountable",
-  "Description": "A mountable tool",
+  "Description": "Warning: This is janky. Use at your own risk.",
   "Icon": "models/tools/ninjarope/ninjarope.vmdl.png",
   "Type": "Tool",
   "EquipmentPrefab": "resources/equipment/tools/mountable.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 4,
   "DropChance": 1,
   "__references": [],

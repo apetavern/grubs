@@ -1,9 +1,10 @@
 {
   "Name": "Homing Bazooka",
-  "Description": "Hold the Joe.",
+  "Description": "Hold the Joe. Homes in on the target location.",
   "Icon": "models/weapons/homingmissile/homingmissile.vmdl_c.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/bazooka_homing/bazooka_homing.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 2,
   "DropChance": 4,
   "__references": [],

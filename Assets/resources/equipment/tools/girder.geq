@@ -1,6 +1,6 @@
 {
   "Name": "Girder",
-  "Description": "Places a destructible girder",
+  "Description": "Temporary cover to avoid those 'zooks.",
   "Icon": "models/tools/girders/girder_short.vmdl_c.png",
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/girder/girder.prefab",

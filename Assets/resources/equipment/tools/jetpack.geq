@@ -1,6 +1,6 @@
 {
   "Name": "Jetpack",
-  "Description": "jetpack",
+  "Description": "Fly wherever you need! Rated Best Tool by GrubHub customers in 1997.",
   "Icon": "models/tools/jetpack/jetpack.vmdl_c.png",
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/jetpack/jetpack.prefab",

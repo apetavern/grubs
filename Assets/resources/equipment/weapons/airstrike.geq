@@ -1,9 +1,10 @@
 {
   "Name": "Airstrike",
-  "Description": "Bombs away!",
+  "Description": "Drops a series of missiles at the target location. Great for neutralizing people you hate.",
   "Icon": "models/weapons/airstrikes/bomb.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/airstrike/airstrike.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 1,
   "DropChance": 0.5,
   "__references": [],

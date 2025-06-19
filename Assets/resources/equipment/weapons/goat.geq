@@ -1,9 +1,10 @@
 {
   "Name": "Goat",
-  "Description": "Bahhh",
+  "Description": "Bahhh! You can control a goat and it explodes on people. Definitely not endorsed by PETA.",
   "Icon": "models/weapons/goat/goat.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/goat/goat.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 1,
   "DropChance": 0,
   "__references": [],

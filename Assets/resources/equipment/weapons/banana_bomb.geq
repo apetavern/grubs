@@ -1,9 +1,10 @@
 {
   "Name": "Banana Bomb",
-  "Description": "Oh banana!",
+  "Description": "Bounces around and explodes into even more bananas.",
   "Icon": "models/weapons/banana/banana_bunch.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/banana_bomb/banana_bomb.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 0,
   "DropChance": 5,
   "__references": [],

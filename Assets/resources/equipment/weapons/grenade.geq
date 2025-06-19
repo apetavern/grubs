@@ -1,11 +1,12 @@
 {
   "Name": "Grenade",
-  "Description": "Not gonna catch this for ya.",
+  "Description": "Lob a grenade at your friend to show your appreciation that they would play this game with you.",
   "Icon": "models/weapons/grenade/grenade.vmdl_c.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/grenade/grenade.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": -1,
   "DropChance": 0,
-  "__version": 0,
-  "__references": []
+  "__references": [],
+  "__version": 0
 }
