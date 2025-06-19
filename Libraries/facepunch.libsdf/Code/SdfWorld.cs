@@ -128,7 +128,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	where TArray : SdfArray<TSdf>, new()
 	where TSdf : ISdf<TSdf>
 {
-	private List<Modification<TResource, TSdf>> Modifications { get; } = new();
+	protected List<Modification<TResource, TSdf>> Modifications { get; } = new();
 
 	private ConcurrentQueue<TChunk> UpdatedChunkQueue { get; } = new();
 
@@ -143,7 +143,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	/// <summary>
 	/// How many times this world has been cleared.
 	/// </summary>
-	public int ClearCount { get; private set; }
+	public int ClearCount { get; protected set; }
 
 	/// <summary>
 	/// How many modifications have been applied since the last time this world was cleared.
@@ -251,8 +251,8 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 
 	// ReSharper disable StaticMemberInGenericType
 #pragma warning disable SB3000
-	private static readonly Dictionary<TypeDescription, int> NetWrite_TypeIndices = new();
-	private static readonly Dictionary<int, SdfReader<TSdf>> NetRead_TypeReaders = new();
+	protected static readonly Dictionary<TypeDescription, int> NetWrite_TypeIndices = new();
+	protected static readonly Dictionary<int, SdfReader<TSdf>> NetRead_TypeReaders = new();
 	// ReSharper enable StaticMemberInGenericType
 #pragma warning restore SB3000
 
@@ -325,7 +325,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		return true;
 	}
 
-	private void ReadRange( ref ByteStream reader, int count, IReadOnlyDictionary<int, SdfReader<TSdf>> sdfTypes )
+	protected void ReadRange( ref ByteStream reader, int count, IReadOnlyDictionary<int, SdfReader<TSdf>> sdfTypes )
 	{
 		for ( var i = 0; i < count; ++i )
 		{
@@ -350,7 +350,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		}
 	}
 
-	private IDisposable AllowClientModifications()
+	protected IDisposable AllowClientModifications()
 	{
 		_receivingModifications = true;
 

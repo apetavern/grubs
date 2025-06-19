@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sandbox.Diagnostics;
 
 namespace Sandbox.Sdf;
 
@@ -57,5 +58,48 @@ public partial class Sdf2DWorld : SdfWorld<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 
 		return chunkKey.X >= minX && chunkKey.X < maxX
 			&& chunkKey.Y >= minY && chunkKey.Y < maxY;
+	}
+
+	public void ClearAndReadData( ref ByteStream msg )
+	{
+		ClearCount = 0;
+		
+		var clearCount = msg.Read<int>();
+		var prevCount = msg.Read<int>();
+		var msgCount = msg.Read<int>();
+		// totalCount: unused
+		msg.Read<int>();
+
+		using var clientMods = AllowClientModifications();
+
+		if ( clearCount < ClearCount )
+		{
+			return;
+		}
+
+		if ( clearCount > ClearCount )
+		{
+			ClearCount = clearCount;
+			_ = ClearAsync();
+
+			Assert.AreEqual( 0, Modifications.Count );
+		}
+
+		if ( prevCount != Modifications.Count )
+		{
+			return;
+		}
+
+		ISdf<ISdf2D>.EnsureTypesRegistered();
+
+		NetRead_TypeReaders.Clear();
+
+		var index = 0;
+		foreach ( var (_, reader) in ISdf<ISdf2D>.RegisteredTypes )
+		{
+			NetRead_TypeReaders[index++] = reader;
+		}
+
+		ReadRange( ref msg, msgCount, NetRead_TypeReaders );
 	}
 }
