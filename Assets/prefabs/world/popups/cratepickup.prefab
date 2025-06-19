@@ -1,37 +1,83 @@
 {
   "RootObject": {
     "__guid": "6312a0ac-1d81-403d-b6b2-23bf86246aa6",
+    "__version": 1,
     "Flags": 0,
     "Name": "cratepickup",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
+    "NetworkOrphaned": 0,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.WorldPanel",
         "__guid": "35300f62-86d4-49b9-b32c-bd557230568a",
+        "__enabled": true,
         "HorizontalAlign": "Center",
         "InteractionRange": 1000,
         "LookAtCamera": true,
-        "PanelSize": "512,512",
-        "RenderScale": 1,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "PanelSize": "1000,1250",
+        "RenderOptions": {
+          "GameLayer": false,
+          "OverlayLayer": true,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderScale": 1.5,
         "VerticalAlign": "Center"
       },
       {
         "__type": "Grubs.UI.CratePickup",
         "__guid": "e5eb0326-76e7-474d-beb6-937a832b3711",
+        "__enabled": true,
         "DestroyDelay": 3,
         "Offset": "0,-50,64",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "RiseSpeed": 7.5
       }
     ],
     "Children": [],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
     "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "ResourceVersion": 1,
+  "DontBreakAsTemplate": false,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

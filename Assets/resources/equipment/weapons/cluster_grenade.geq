@@ -1,9 +1,10 @@
 {
   "Name": "Cluster Grenade",
   "Description": "Big boom... little booms.",
-  "Icon": "models/weapons/cluster_grenade/cluster_grenade.png",
+  "Icon": "models/weapons/cluster_grenade/cluster_grenade.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/cluster_grenade/cluster_grenade.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 2,
   "DropChance": 3,
   "__references": [],

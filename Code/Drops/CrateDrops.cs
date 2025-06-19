@@ -19,7 +19,7 @@ public static class CrateDrops
 
 	private static void Initialize()
 	{
-		if ( _init )
+		if ( _init && !Game.IsEditor )
 			return;
 
 		foreach ( var res in EquipmentResource.All )
@@ -68,16 +68,14 @@ public static class CrateDrops
 
 	public static string GetRandomWeaponFromCrate()
 	{
-		if ( !_init )
-			Initialize();
+		Initialize();
 
 		return RollForItem( CumulativeWeaponDropPercentages, WeaponDropMap );
 	}
 
 	public static string GetRandomToolFromCrate()
 	{
-		if ( !_init )
-			Initialize();
+		Initialize();
 
 		return RollForItem( CumulativeToolDropPercentages, ToolDropMap );
 	}

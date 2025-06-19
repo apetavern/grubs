@@ -245,8 +245,6 @@ public class GrubCharacterController : Component
 		
 		var landingParticles = GameObject.Clone( LandingParticlesPath );
 		landingParticles.WorldPosition = position;
-		
-		Log.Info( radius );
 
 		var emitter = landingParticles.GetComponent<ParticleRingEmitter>();
 		emitter.Radius = radius / 10f;

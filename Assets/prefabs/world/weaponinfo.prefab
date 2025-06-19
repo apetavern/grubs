@@ -1,17 +1,33 @@
 {
   "RootObject": {
     "__guid": "793b7826-1d28-42d6-9200-fd72d35f3626",
+    "__version": 1,
     "Flags": 0,
     "Name": "weaponinfo",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "NetworkOrphaned": 0,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.WorldPanel",
         "__guid": "cf19cee7-2ce2-4c13-b812-dbd4c6706255",
+        "__enabled": true,
         "HorizontalAlign": "Center",
         "InteractionRange": 1000,
         "LookAtCamera": true,
-        "PanelSize": "1250,600",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "PanelSize": "4000,600",
         "RenderOptions": {
           "GameLayer": false,
           "OverlayLayer": true,
@@ -24,22 +40,23 @@
       {
         "__type": "Grubs.UI.WeaponInfo",
         "__guid": "a56e823b-d6a3-4784-aa0d-8d0a94f6db34",
+        "__enabled": true,
         "DestroyDelay": 0,
         "Offset": "0,-50,-20",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "RiseSpeed": 0
       }
     ],
     "Children": [],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -53,13 +70,14 @@
         "ExcludedBodies": "",
         "IncludedBodies": ""
       }
-    }
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

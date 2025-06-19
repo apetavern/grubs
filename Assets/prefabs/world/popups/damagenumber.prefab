@@ -1,16 +1,32 @@
 {
   "RootObject": {
     "__guid": "a4098784-ef37-49f5-80d9-602531705590",
+    "__version": 1,
     "Flags": 0,
     "Name": "damagenumber",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "NetworkOrphaned": 0,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.WorldPanel",
         "__guid": "7ccabf90-37b0-4ed6-8801-f392acb59c9f",
+        "__enabled": true,
         "HorizontalAlign": "Center",
         "InteractionRange": 1000,
         "LookAtCamera": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "PanelSize": "1024,350",
         "RenderOptions": {
           "GameLayer": false,
@@ -24,22 +40,23 @@
       {
         "__type": "Grubs.UI.DamageNumber",
         "__guid": "bc1c95b6-f51d-48e2-8ff5-f1a584dff8dd",
+        "__enabled": true,
         "DestroyDelay": 3,
         "Offset": "0,-50,64",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "RiseSpeed": 7.5
       }
     ],
     "Children": [],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -53,13 +70,14 @@
         "ExcludedBodies": "",
         "IncludedBodies": ""
       }
-    }
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
