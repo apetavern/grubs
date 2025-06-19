@@ -1,8 +1,10 @@
-﻿using Grubs.Drops;
+﻿using System.Text;
+using Grubs.Drops;
 using Grubs.Equipment.Gadgets.Projectiles;
 using Grubs.Pawn;
 using Grubs.Systems.Pawn.Grubs;
 using Sandbox.Sdf;
+using Sandbox.Utility;
 
 namespace Grubs.Terrain;
 
@@ -58,6 +60,73 @@ public partial class GrubsTerrain : Component
 		WorldTextureHeight = 0;
 	}
 
+	[ConCmd( "gr_save_terrain" )]
+	public static void SaveTerrainCmd( string name )
+	{
+		Instance.SerializeTerrain( name );
+	}
+
+	public void SerializeTerrain( string name )
+	{
+		Log.Info( $"Attempting to serialize terrain from {SdfWorld.GameObject.Name}..." );
+		Log.Info( $"Gathering facts..." );
+		Log.Info( $"SdfWorld has {SdfWorld.ModificationCount} modifications." );
+
+		try
+		{
+			var byteStream = ByteStream.Create( 512 );
+			var mods = SdfWorld.Write( ref byteStream, 0 );
+			Log.Info( $"Writing {mods} modifications to stream..." );
+			var stream = FileSystem.Data.OpenWrite( $"terrain_{name}.json" );
+			stream.Write( byteStream.ToArray() );
+			stream.Close();
+			
+			Log.Info( $"Done writing to terrain_{name}.json" );
+		}
+		catch ( Exception e )
+		{
+			Log.Error( e );
+		}
+	}
+
+	[ConCmd( "gr_load_terrain" )]
+	public static void LoadTerrainCmd( string name )
+	{
+		Instance.DeserializeTerrain( name );
+	}
+
+	public void DeserializeTerrain( string name )
+	{
+		Log.Info( $"Attempting to load terrain for {SdfWorld.GameObject.Name}..." );
+		var file = $"terrain_{name}.json";
+		
+		_ = SdfWorld.ClearAsync();
+		
+		if ( !FileSystem.Data.FileExists( file ) )
+		{
+			Log.Warning( $"Failed to load terrain. File does not exist." );
+		}
+
+		_ = ReadExistingTerrain( name );
+	}
+
+	private async Task ReadExistingTerrain( string name )
+	{
+		await SdfWorld.ClearAsync();
+		
+		try
+		{
+			var contents = FileSystem.Data.ReadAllBytes( $"terrain_{name}.json" );
+			var byteStream = ByteStream.CreateReader( contents );
+
+			SdfWorld.ClearAndReadData( ref byteStream );
+		}
+		catch ( Exception e )
+		{
+			Log.Error( e );
+		}
+	}
+	
 	public Vector3 FindSpawnLocation( bool inAir = false, float size = 16f, float maxAngle = 70f )
 	{
 		var retries = 0;
