@@ -1,13 +1,23 @@
 {
   "RootObject": {
     "__guid": "a998e5c9-a419-46f3-86d8-19b0789b1b15",
+    "__version": 1,
     "Flags": 0,
     "Name": "airstrike",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "NetworkOrphaned": 0,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "a149e547-0e19-4668-b9fb-1302f93c71b1",
+        "__enabled": true,
         "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
@@ -30,6 +40,7 @@
           "vectors": {},
           "rotations": {}
         },
+        "PlaybackRate": 1,
         "RenderOptions": {
           "GameLayer": true,
           "OverlayLayer": false,
@@ -38,7 +49,9 @@
         },
         "RenderType": "On",
         "Sequence": {
-          "Name": null
+          "Name": null,
+          "Looping": true,
+          "Blending": false
         },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -46,6 +59,7 @@
       {
         "__type": "Grubs.Equipment.Equipment",
         "__guid": "7f7fd7c9-3c0e-4758-bb82-d230f7987f7e",
+        "__enabled": true,
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/airstrike.geq",
         "HoldPose": "Holdable",
@@ -70,8 +84,9 @@
       {
         "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
         "__guid": "e097e462-78e7-4afa-9bba-53322a1d1f26",
+        "__enabled": true,
         "AmmoType": "Numbered",
-        "CanFireWhileMoving": false,
+        "CanFireWhileMoving": true,
         "CanSwapAfterUse": false,
         "CanSwapDuringUse": false,
         "CanTargetTerrain": false,
@@ -298,8 +313,10 @@
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
         "__guid": "9bcb6e78-91ba-4975-ae97-0a9d16b155b2",
+        "__enabled": true,
         "Inputs": {
-          "fire": "Call Airstrike"
+          "fire": "Call Airstrike",
+          "fire_option": "Switch Direction"
         },
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -312,14 +329,23 @@
     "Children": [
       {
         "__guid": "87be7ce0-b208-475c-8c44-e597f3bfaf0b",
+        "__version": 1,
         "Flags": 0,
         "Name": "Airstrike - cursor",
+        "Position": "0,0,0",
+        "Rotation": "0,0,0,1",
         "Scale": "0.5,0.5,0.5",
+        "Tags": "",
         "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "NetworkOrphaned": 0,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "3c805679-d8e3-4ae6-be2c-a6adc0039bd3",
+            "__enabled": true,
             "BodyGroups": 1,
             "CreateAttachments": false,
             "MaterialGroup": null,
@@ -340,19 +366,14 @@
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
-        ]
+        ],
+        "Children": []
       }
     ],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -366,13 +387,14 @@
         "ExcludedBodies": "",
         "IncludedBodies": ""
       }
-    }
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

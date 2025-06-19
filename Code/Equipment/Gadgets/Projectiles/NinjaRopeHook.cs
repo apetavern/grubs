@@ -1,6 +1,5 @@
 ﻿using Grubs.Common;
 using Grubs.Equipment.Weapons;
-using Grubs.Gamemodes;
 using Grubs.Helpers;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;

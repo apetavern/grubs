@@ -60,7 +60,9 @@ public sealed class TargetingWeapon : Weapon
 			return;
 
 		if ( !Equipment.Deployed )
+		{
 			return;
+		}
 
 		var player = Equipment.Grub.Owner;
 		if ( !player.IsValid() )
@@ -83,16 +85,25 @@ public sealed class TargetingWeapon : Weapon
 			{
 				Direction = Vector3.Forward;
 			}
-
-			if ( Input.AnalogMove.y > 0.5f )
+			
+			if ( Input.Pressed( "fire_option" ) )
 			{
-				Direction = Vector3.Backward;
+				Direction = Direction == Vector3.Forward ? Vector3.Backward : Vector3.Forward;
 			}
-
-			if ( Input.AnalogMove.y < -0.5f )
-			{
-				Direction = Vector3.Forward;
-			}
+			// if ( Direction == Vector3.Zero )
+			// {
+			// 	Direction = Vector3.Forward;
+			// }
+			//
+			// if ( Input.AnalogMove.y > 0.5f )
+			// {
+			// 	Direction = Vector3.Backward;
+			// }
+			//
+			// if ( Input.AnalogMove.y < -0.5f )
+			// {
+			// 	Direction = Vector3.Forward;
+			// }
 
 			CursorModel.SetBodyGroup( "arrow_direction", Direction == Vector3.Forward ? 1 : 0 );
 		}
