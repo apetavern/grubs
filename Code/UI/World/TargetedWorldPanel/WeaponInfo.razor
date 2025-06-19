@@ -12,7 +12,9 @@
 	{
 		@if (Weapon.AmmoType == AmmoType.Numbered)
 		{
-			<div class="text">@GetAmmoText() Uses</div>
+            <div class="uses">
+                <div class="text">@GetAmmoText() USES</div>
+            </div>
 		}
 		else if (Weapon.AmmoType == AmmoType.Fuel)
 		{
@@ -26,7 +28,7 @@
 	{
 		<div class="hint">
 			<InputGlyph action=@input.Key size="medium" />
-			<div class="text">@input.Value</div>
+			<div class="text">@input.Value.ToUpper()</div>
 		</div>
 	}
 </root>

@@ -30,9 +30,9 @@
         "PanelSize": "4000,600",
         "RenderOptions": {
           "GameLayer": false,
-          "OverlayLayer": true,
+          "OverlayLayer": false,
           "BloomLayer": false,
-          "AfterUILayer": false
+          "AfterUILayer": true
         },
         "RenderScale": 1,
         "VerticalAlign": "Center"

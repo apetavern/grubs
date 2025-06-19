@@ -1,71 +1,78 @@
 @import "../../common.scss";
 
 WeaponInfo {
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  top: 0;
+  transition: all 0.2s ease;
+
+  &:intro {
+    opacity: 0;
+    top: -25px;
+  }
+
+  .text {
+    font-size: 124px;
+    font-family: $font-primary;
+    color: white;
     justify-content: center;
     align-items: center;
-    padding: 15px;
-    top: 0;
-    transition: all 0.2s ease;
+  }
 
-    &:intro {
-        opacity: 0;
-        top: -25px;
+  .fuel {
+    position: relative;
+    height: 140px;
+    width: 1000px;
+    align-items: center;
+    background-color: black;
+    border: 6px solid black;
+    margin-left: 35px;
+
+    .percentageText {
+      position: absolute;
+      width: 100%;
+      justify-content: center;
+      font-size: 102px;
+      font-family: $font-primary;
+      text-shadow: 2px 2px 2px black;
+      color: white;
+      z-index: 2;
     }
 
-    .text {
-        font-size: 124px;
-        font-family: $font-primary;
-        text-shadow: 2px 24px 16px black;
-        text-stroke: 24px black;
-        color: white;
-        justify-content: center;
-        align-items: center;
+    .fill {
+      background-image: linear-gradient(to right, $camo-darker, $camo-med);
+      height: 100%;
+      transition: height 150ms ease-in;
     }
+  }
+  
+  .uses {
+    transform: rotate(1deg);
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 32px 32px;
+  }
 
-    .fuel {
-        position: relative;
-        height: 100px;
-        width: 100%;
-        align-items: center;
-        background-color: black;
-        border: 12px solid black;
-        margin-left: 35px;
+  .hint {
+    position: relative;
+    max-height: 70%;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, 0.75);
+    transform: rotate(1deg);
+    margin-top: 16px;
+    padding: 16px 32px 16px 0;
+    gap: 8px;
 
-        .percentageText {
-            position: absolute;
-            width: 100%;
-            justify-content: center;
-            font-size: 102px;
-            font-family: $font-primary;
-            text-shadow: 2px 2px 2px black;
-            color: white;
-            z-index: 2;
-        }
-
-        .fill {
-            background-image: linear-gradient(to right, red, green);
-            height: 100%;
-            transition: height 150ms ease-in;
-        }
+    inputglyph {
+      flex-shrink: 0;
+      width: 150px;
+      height: 150px;
+      filter: border-wrap(6px black) drop-shadow(0 8px 24px black);
     }
-
-    .hint {
-        position: relative;
-        width: 100%;
-        height: 70%;
-        align-items: center;
-        justify-content: center;
-        white-space: nowrap;
-        gap: 8px;
-
-        inputglyph {
-            flex-shrink: 0;
-            width: 175px;
-            height: 175px;
-            filter: border-wrap(6px black) drop-shadow(0 8px 24px black);
-        }
-    }
+  }
 }
