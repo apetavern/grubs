@@ -1,0 +1,118 @@
+﻿@import '../../../common.scss';
+
+FormButton {
+  font-family: $font-primary;
+  pointer-events: all;
+  border-radius: 4px;
+  filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.87));
+  
+  .form-bg {
+    background-color: #2a2a2a;
+    border-radius: 4px;
+  }
+  
+  .button-content {
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 4px 8px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.87);
+    gap: 2px;
+    
+    &.disabled {
+      opacity: 0.6;
+    }
+    
+    &:not(.border) {
+      margin: 2px;
+    }
+    
+    &.bg-transparent {
+      margin: 0;
+    }
+  }
+  
+  .border {
+    border-width: 2px;
+  }
+  
+  label {
+    padding-top: 2px;
+  }
+}
+
+.size-sm {
+  font-size: 16px;
+}
+
+.size-md {
+  font-size: 32px;
+}
+
+.size-lg {
+  font-size: 48px;
+}
+
+.size-xl {
+  font-size: 64px;
+}
+
+.bg-color-blue {
+  background-color: $editor-blue;
+  
+  &:hover:not(.disabled) {
+    background-color: darken($editor-blue, 15%);
+  }
+}
+
+.bg-color-yellow {
+  background-color: $editor-yellow;
+  
+  &:hover:not(.disabled) {
+    background-color: darken($editor-yellow, 15%);
+  }
+}
+
+.bg-color-white {
+  background-color: white;
+
+  &:hover:not(.disabled) {
+    background-color: darken(white, 15%);
+  }
+}
+
+.bg-transparent {
+  background-color: transparent;
+  
+  &:hover:not(.disabled) {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.border-blue {
+  border-color: $editor-blue;
+}
+
+.border-yellow {
+  border-color: $editor-yellow;
+}
+
+.border-white {
+  border-color: white;
+}
+
+.color-blue {
+  color: $editor-blue;
+}
+
+.color-yellow {
+  color: $editor-yellow;
+}
+
+.color-white {
+  color: white;
+}
+
+.transparent {
+  color: transparent;
+}

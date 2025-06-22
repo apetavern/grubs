@@ -1,13 +1,49 @@
 ﻿@namespace Grubs.UI
 
+@using Grubs.Systems.GameMode
 @inherits Panel
 
 <root>
-    Create Terrain
+    <div class="create-form">
+        <div class="form-title">CREATE LEVEL</div>
+        <div class="form-body">
+            <img class="grid-bg" src="textures/ui/grid.png" />
+            <div class="form-content">
+                <div class="form-label">
+                    <label class="name-label">LEVEL NAME</label>
+                    <label class="name-label-subtitle">Enter a clear name for your level..</label>
+                </div>
+                <FormTextField Value:bind=@LevelName />
+                <div class="form-label">
+                    <label class="name-label">DESCRIPTION</label>
+                    <label class="name-label-subtitle">Enter a description for your level..</label>
+                </div>
+                <FormTextField Value:bind=@LevelDescription />
+            </div>
+        </div>
+        <div class="form-footer">
+            <FormButton
+                Label="CANCEL"
+                IconLeft="clear"
+                Color=@ButtonColor.White
+                Variant=@ButtonVariant.Text
+                OnPressed=@OnCancel />
+            <FormButton
+                Label="CREATE"
+                IconLeft="add_photo_alternate"
+                Variant=@ButtonVariant.Solid
+                HasFormOutline=@true
+                Disabled=@string.IsNullOrEmpty(LevelName.Trim())
+                OnPressed=@OnSubmit/>
+        </div>
+    </div>
 </root>
 
 @code
 {
+    private string LevelName { get; set; } = "";
+    private string LevelDescription { get; set; } = "";
+    
     protected override void OnAfterTreeRender(bool firstTime)
     {
         base.OnAfterTreeRender(firstTime);
@@ -15,6 +51,19 @@
         if (firstTime)
         {
             AddClass("hide");
+        }
+    }
+
+    private void OnCancel()
+    {
+        LevelEditingMenu.Instance.SetMode( LevelEditingMenu.Mode.CreateOrLoadLevel );
+    }
+
+    private void OnSubmit()
+    {
+        if ( BaseGameMode.Current is LevelEditor editor && editor.IsValid() )
+        {
+            editor.CreateNewLevelDefinition( LevelName, LevelDescription );
         }
     }
 }

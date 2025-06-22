@@ -1,0 +1,14 @@
+﻿FormTextField {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.67);
+  border-radius: 4px;
+  pointer-events: all;
+  cursor: none;
+  caret-color: black;
+  
+  label {
+    font-size: 24px;
+    color: black;
+    cursor: none;
+  }
+}

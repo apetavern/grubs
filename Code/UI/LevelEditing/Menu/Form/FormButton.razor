@@ -1,0 +1,61 @@
+﻿@namespace Grubs.UI
+
+@inherits Panel
+
+<root>
+    <button 
+        @onclick=@(() => InvokeAction()) 
+        class="@(HasFormOutline && Variant is ButtonVariant.Solid ? "form-bg" : "") @Size.GetClassName()">
+        <div class="button-content @GetColorClassNames() @(Disabled ? "disabled" : "")">
+            @if (IconLeft is not null)
+            {
+                <i>@IconLeft</i>
+            }
+            <label>@Label</label>
+            @if (IconRight is not null)
+            {
+                <i>@IconRight</i>
+            }
+        </div>
+    </button>
+</root>
+
+@code
+{
+    public string Label { get; set; }
+    public string IconLeft { get; set; }
+    public string IconRight { get; set; }
+
+    public ButtonSize Size { get; set; } = ButtonSize.Medium;
+    public ButtonVariant Variant { get; set; } = ButtonVariant.Solid;
+    public ButtonColor Color { get; set; } = ButtonColor.Blue;
+    
+    public bool HasFormOutline { get; set; }
+    public bool Disabled { get; set; }
+    
+    public Action OnPressed { get; set; }
+
+    private void InvokeAction()
+    {
+        if (!Disabled && OnPressed is not null)
+        {
+            OnPressed.Invoke();
+        }
+    }
+
+    private string GetColorClassNames()
+    {
+        if (Variant == ButtonVariant.Text)
+        {
+            return $"{Color.GetColorClassName()} bg-transparent";
+        }
+        else if (Variant == ButtonVariant.Outline)
+        {
+            return $"border {Color.GetBorderColorClassName()} bg-transparent color-white";
+        }
+        else
+        {
+            return $"{Color.GetBackgroundColorClassName()} color-white";
+        }
+    }
+}
