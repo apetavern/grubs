@@ -16,6 +16,8 @@ public sealed class LevelEditor : BaseGameMode
 	[Property]
 	public GameObject LevelEditorPawnPrefab { get; set; }
 
+	public LevelEditorState State { get; set; } = LevelEditorState.Menu;
+
 	protected override void OnModeInit()
 	{
 		base.OnModeInit();
@@ -50,6 +52,24 @@ public sealed class LevelEditor : BaseGameMode
 			TerrainSize = TerrainSize.Medium
 		};
 
-		_ = GameTerrain.Local.LoadDefinition( definition );
+		_ = CreateNewLevelDefinitionAsync( definition );
 	}
+
+	private async Task CreateNewLevelDefinitionAsync( LevelDefinition definition )
+	{
+		await GameTerrain.Local.CreateDefinition( definition );
+		
+		SetLevelEditorState( LevelEditorState.Editing );
+	}
+
+	public void SetLevelEditorState( LevelEditorState state )
+	{
+		State = state;
+	}
+}
+
+public enum LevelEditorState
+{
+	Menu,
+	Editing
 }

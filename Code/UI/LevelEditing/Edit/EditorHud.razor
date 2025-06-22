@@ -1,0 +1,25 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.LevelEditing
+@using Grubs.Terrain
+
+@inherits Panel
+
+@if ( Definition is null )
+{
+    return;
+}
+
+<root>
+    @Definition.DisplayName
+</root>
+
+@code
+{
+    private static LevelDefinition Definition => GameTerrain.Local.LevelDefinition;
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Definition );
+    }
+}
