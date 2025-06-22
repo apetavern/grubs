@@ -34,11 +34,11 @@
 {
     private void CreateNewLevel()
     {
-        
+        LevelEditingMenu.Instance.SetMode( LevelEditingMenu.Mode.CreateTerrainForm );
     }
 
     private void LoadLevel()
     {
-        
+        LevelEditingMenu.Instance.SetMode( LevelEditingMenu.Mode.LoadTerrainMenu );
     }
 }

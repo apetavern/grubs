@@ -1,0 +1,8 @@
+﻿LoadTerrainMenu {
+  position: absolute;
+  transition: transform 350ms;
+
+  &.hide {
+    transform: translateX(1920px);
+  }
+}
