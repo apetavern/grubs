@@ -1,19 +1,26 @@
 ﻿@import '../../common.scss';
 
 CreateOrLoadLevel {
-  width: 1200px;
-  
-  flex-direction: column;
-  font-family: $font-primary;
-  
-  align-items: center;
-  
-  gap: 32px;
-  
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
   transition: transform 350ms;
-  
+
   &.hide {
     transform: translateX(-1920px);
+  }
+  
+  .load-level-dialog {
+    width: 1200px;
+    margin: auto;
+
+    flex-direction: column;
+    font-family: $font-primary;
+
+    align-items: center;
+
+    gap: 32px;
   }
   
   .title {
@@ -23,6 +30,7 @@ CreateOrLoadLevel {
     background-color: #2a2a2a;
     filter: drop-shadow(2px 2px 6px black);
     transform: skewX(-3deg);
+    border-radius: 4px;
     width: 70%;
     
     > label {
@@ -64,11 +72,8 @@ CreateOrLoadLevel {
       
       .grid-bg {
         position: absolute;
-        background-image-tint: rgba(255, 255, 255, 0.25);
-      }
-
-      .rot-1 {
         transform: rotate(1deg);
+        background-image-tint: rgba(255, 255, 255, 0.25);
       }
     }
     
@@ -87,11 +92,11 @@ CreateOrLoadLevel {
     }
     
     .card-create {
-      background-image: linear-gradient(to bottom, #5DB2F0, #3C7299);
+      background-image: linear-gradient(to bottom, $editor-blue, $editor-blue-dark);
     }
     
     .card-load {
-      background-image: linear-gradient(to bottom, #F0C75D, #9C813C);
+      background-image: linear-gradient(to bottom, $editor-yellow, $editor-yellow-dark);
     }
   }
 }

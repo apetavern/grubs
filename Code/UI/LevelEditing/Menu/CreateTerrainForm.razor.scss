@@ -1,8 +1,87 @@
-﻿CreateTerrainForm {
+﻿@import '../../common.scss';
+
+CreateTerrainForm {
   position: absolute;
+  width: 100%;
+  height: 100%;
+
   transition: transform 350ms;
 
   &.hide {
     transform: translateX(1920px);
+  }
+  
+  .create-form {
+    margin: auto;
+    width: 600px;
+    flex-direction: column;
+    
+    border-radius: 4px;
+    padding: 8px;
+    
+    background-color: #2a2a2a;
+    
+    font-family: $font-primary;
+    
+    .form-title {
+      color: white;
+      width: 100%;
+      padding: 4px 16px;
+      text-shadow: 3px 3px 3px black;
+      font-size: 64px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      background-image: linear-gradient(to bottom, $editor-blue, $editor-blue-dark);
+    }
+    
+    .form-body {
+      overflow: hidden;
+      background-image: linear-gradient(to bottom, $editor-blue-dark, $editor-blue, $editor-blue-dark);
+      border-top: 2px #e1e1e1;
+      border-bottom: 2px #e1e1e1;
+      
+      .form-content {
+        padding: 4px 16px;
+        margin: 8px;
+        color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 8px;
+        
+        .form-label {
+          flex-direction: column;
+
+          label {
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.87);
+          }
+        }
+        
+        .name-label {
+          font-size: 32px;
+        }
+        
+        .name-label-subtitle {
+          font-size: 20px;
+        }
+      }
+    }
+    
+    .form-footer {
+      gap: 8px;
+      justify-content: flex-end;
+      width: 100%;
+      
+      padding: 16px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      background-image: linear-gradient(to top, $editor-blue, $editor-blue-dark);
+    }
+    
+    .grid-bg {
+      position: absolute;
+      background-image-tint: rgba(255, 255, 255, 0.15);
+      background-position: -100px;
+    }
   }
 }

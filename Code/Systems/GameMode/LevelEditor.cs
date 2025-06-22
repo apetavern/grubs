@@ -1,5 +1,7 @@
 ﻿using Grubs.Systems.LevelEditing;
 using Grubs.Systems.Pawn;
+using Grubs.Terrain;
+using Sandbox.Utility;
 
 namespace Grubs.Systems.GameMode;
 
@@ -13,8 +15,6 @@ public sealed class LevelEditor : BaseGameMode
 	
 	[Property]
 	public GameObject LevelEditorPawnPrefab { get; set; }
-	
-	public LevelDefinition LevelDefinition { get; private set; }
 
 	protected override void OnModeInit()
 	{
@@ -36,17 +36,20 @@ public sealed class LevelEditor : BaseGameMode
 		Log.Info( $"Editor pawn has spawned: {editor.Name}" );
 	}
 
-	public void CreateNewLevelDefinition( string name )
+	public void CreateNewLevelDefinition( string name, string description )
 	{
-		LevelDefinition = new LevelDefinition
+		var definition = new LevelDefinition
 		{
 			Id = Guid.NewGuid(),
-			DisplayName = name
+			DisplayName = name,
+			Description = description,
+			Tags = [],
+			CreatedBy = new Friend( Steam.SteamId ),
+			CreatedOn = DateTime.UtcNow,
+			LastUpdated = DateTime.UtcNow,
+			TerrainSize = TerrainSize.Medium
 		};
-	}
 
-	public void LoadLevelDefinition( LevelDefinition definition )
-	{
-		LevelDefinition = definition;
+		_ = GameTerrain.Local.LoadDefinition( definition );
 	}
 }
