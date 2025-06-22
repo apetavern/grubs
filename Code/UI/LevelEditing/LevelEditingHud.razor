@@ -1,0 +1,25 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.GameMode
+@using Grubs.UI.Components
+
+@inherits PanelComponent
+
+@if ( !LevelEditorMode.IsValid() )
+{
+    return;
+}
+
+<root>
+    <Cursor />
+</root>
+
+@code
+{
+    private static LevelEditor LevelEditorMode => BaseGameMode.Current as LevelEditor;
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( LevelEditorMode );
+    }
+}

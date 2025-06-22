@@ -428,6 +428,7 @@
           "__type": "Grubs.Terrain.GrubsTerrain",
           "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
           "__enabled": true,
+          "CloudMaterial": "materials/natural/lava/lava.vmat",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -1315,6 +1316,8 @@
   "ResourceVersion": 3,
   "Title": "beach",
   "Description": null,
-  "__references": [],
+  "__references": [
+    "droppod.lava#37772"
+  ],
   "__version": 3
 }
