@@ -1,0 +1,20 @@
+﻿@namespace Grubs.UI
+
+@inherits Panel
+
+<root>
+    Load Terrain
+</root>
+
+@code
+{
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (firstTime)
+        {
+            AddClass("hide");
+        }
+    }
+}

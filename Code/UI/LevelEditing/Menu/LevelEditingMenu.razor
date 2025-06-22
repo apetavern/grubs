@@ -1,0 +1,52 @@
+﻿@namespace Grubs.UI
+
+@inherits Panel
+
+<root>
+    <CreateOrLoadLevel @ref=CreateOrLoadLevel />
+    <CreateTerrainForm @ref=CreateTerrainForm />
+    <LoadTerrainMenu @ref=LoadTerrainMenu />
+</root>
+
+@code
+{
+    public static LevelEditingMenu Instance { get; private set; }
+    
+    private CreateOrLoadLevel CreateOrLoadLevel { get; set; }
+    private CreateTerrainForm CreateTerrainForm { get; set; }
+    private LoadTerrainMenu LoadTerrainMenu { get; set; }
+
+    public LevelEditingMenu()
+    {
+        Instance = this;
+    }
+
+    public void SetMode( Mode mode )
+    {
+        switch (mode)
+        {
+            case Mode.CreateOrLoadLevel:
+                CreateOrLoadLevel.RemoveClass( "hide" );
+                CreateTerrainForm.AddClass( "hide" );
+                LoadTerrainMenu.AddClass( "hide" );
+                break;
+            case Mode.CreateTerrainForm:
+                CreateOrLoadLevel.AddClass( "hide" );
+                CreateTerrainForm.RemoveClass( "hide" );
+                LoadTerrainMenu.AddClass( "hide" );
+                break;
+            case Mode.LoadTerrainMenu:
+                CreateOrLoadLevel.AddClass( "hide" );
+                CreateTerrainForm.AddClass( "hide" );
+                LoadTerrainMenu.RemoveClass( "hide" );
+                break;
+        }
+    }
+
+    public enum Mode
+    {
+        CreateOrLoadLevel,
+        CreateTerrainForm,
+        LoadTerrainMenu,
+    }
+}

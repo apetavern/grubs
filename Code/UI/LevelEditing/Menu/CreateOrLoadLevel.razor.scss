@@ -10,6 +10,12 @@ CreateOrLoadLevel {
   
   gap: 32px;
   
+  transition: transform 350ms;
+  
+  &.hide {
+    transform: translateX(-1920px);
+  }
+  
   .title {
     justify-content: center;
     align-self: center;
