@@ -1,7 +1,30 @@
-﻿namespace Grubs.Terrain;
+﻿using Grubs.Systems.LevelEditing;
+
+namespace Grubs.Terrain;
 
 public partial class GameTerrain
 {
+	private async Task WriteDefinitionToFile( LevelDefinition definition )
+	{
+		var serializedDefinition = JsonSerializer.Serialize( definition.ToDataSchema() );
+
+		try
+		{
+			var fileName = $"{definition.Id.ToString()}_level.json";
+			if ( FileSystem.Data.FileExists( fileName ) )
+			{
+				Log.Error( "This file already exists, not overwriting." );
+				return;
+			}
+			
+			FileSystem.Data.WriteAllText( fileName, serializedDefinition );
+		}
+		catch ( Exception e )
+		{
+			Log.Error( e.Message );
+		}
+	}
+	
 	public void SerializeTerrain()
 	{
 		Log.Info( $"Attempting to serialize terrain from {SdfWorld.GameObject.Name}..." );

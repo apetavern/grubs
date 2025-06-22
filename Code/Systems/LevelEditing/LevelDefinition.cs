@@ -51,4 +51,31 @@ public class LevelDefinition
 	public TerrainSize TerrainSize { get; set; }
 	
 	#endregion
+
+	public LevelDefinitionData ToDataSchema()
+	{
+		return new LevelDefinitionData
+		{
+			Id = Id,
+			DisplayName = DisplayName,
+			Description = Description,
+			Tags = Tags,
+			CreatedBy = CreatedBy.Id,
+			CreatedOn = CreatedOn,
+			LastUpdated = LastUpdated,
+			TerrainSize = TerrainSize
+		};
+	}
+}
+
+public struct LevelDefinitionData
+{
+	public Guid Id { get; set; }
+	public string DisplayName { get; set; }
+	public string Description { get; set; }
+	public List<string> Tags { get; set; }
+	public ulong CreatedBy { get; set; }
+	public DateTime CreatedOn { get; set; }
+	public DateTime LastUpdated { get; set; }
+	public TerrainSize TerrainSize { get; set; }
 }

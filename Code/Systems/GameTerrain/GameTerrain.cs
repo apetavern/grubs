@@ -12,8 +12,11 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 	[Property]
 	public Sdf2DWorld SdfWorld { get; private set; }
 
-	public async Task LoadDefinition( LevelDefinition definition )
+	public async Task CreateDefinition( LevelDefinition definition )
 	{
 		LevelDefinition = definition;
+		
+		await WriteDefinitionToFile( definition );
+		await SdfWorld.ClearAsync();
 	}
 }

@@ -13,15 +13,28 @@
 <root>
     <Cursor />
     
-    <LevelEditingMenu />
+    @if ( LevelEditorMode.State is LevelEditorState.Menu )
+    {
+        <LevelEditingMenu />
+    }
+    else if ( LevelEditorMode.State is LevelEditorState.Editing )
+    {
+        <EditorHud />
+    }
 </root>
 
 @code
 {
     private static LevelEditor LevelEditorMode => BaseGameMode.Current as LevelEditor;
 
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        Log.Info( LevelEditorMode.State );
+    }
+
     protected override int BuildHash()
     {
-        return HashCode.Combine( LevelEditorMode );
+        return HashCode.Combine( LevelEditorMode, LevelEditorMode?.State );
     }
 }
