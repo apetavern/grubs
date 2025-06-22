@@ -9,10 +9,10 @@
 
     img {
         position: absolute;
-        height: 64px;
+        height: 48px;
         background-repeat: no-repeat;
         background-size: contain;
-        filter: border-wrap(4px, black);
+        filter: border-wrap(2px, black);
     }
 
     &.hide {

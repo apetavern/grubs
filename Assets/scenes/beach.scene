@@ -428,6 +428,7 @@
           "__type": "Grubs.Terrain.GrubsTerrain",
           "__guid": "70c06e70-8587-48e6-ad92-4be8ee4066dc",
           "__enabled": true,
+          "CloudMaterial": "materials/natural/lava/lava.vmat",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -675,7 +676,6 @@
               "__type": "Grubs.Common.KillZone",
               "__guid": "72d5d8e2-71b7-4213-8602-3fb4951760ae",
               "__enabled": true,
-              "KillParticles": null,
               "KillSound": "sounds/world/water_splash.sound",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -1303,6 +1303,8 @@
   "ResourceVersion": 3,
   "Title": "beach",
   "Description": null,
-  "__references": [],
+  "__references": [
+    "droppod.lava#37772"
+  ],
   "__version": 3
 }

@@ -12,6 +12,8 @@ namespace Grubs.Terrain;
 public partial class GrubsTerrain : Component
 {
 	public static GrubsTerrain Instance { get; set; }
+	
+	[Property] public Material CloudMaterial { get; set; }
 
 	[Property] public required Sdf2DWorld SdfWorld { get; set; }
 	[Property] public required Water Water { get; set; }
@@ -21,6 +23,37 @@ public partial class GrubsTerrain : Component
 	public GrubsTerrain()
 	{
 		Instance = this;
+	}
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		// var textureColor = CloudMaterial.GetTexture( "g_tColor" );
+		// var textureNormal = CloudMaterial.GetTexture( "g_tNormal" );
+		// var textureRoughness = CloudMaterial.GetTexture( "TextureRoughness" );
+		// var textureAO = CloudMaterial.GetTexture( "g_tAmbientOcclusion" );
+		//
+		// ApplyTextureToMaterials( "g_tColour", textureColor );
+		// ApplyTextureToMaterials( "g_tNormal", textureNormal );
+		// ApplyTextureToMaterials( "g_tRough", textureRoughness );
+		// ApplyTextureToMaterials( "g_tAO", textureAO );
+		//
+		// ApplyScorchColor( Color.Black.Lighten( 0.2f ) );
+	}
+
+	private void ApplyTextureToMaterials( string attributeName, Texture texture )
+	{
+		SandMaterial.FrontFaceMaterial.Set( attributeName, texture );
+		SandMaterial.BackFaceMaterial.Attributes.Set( attributeName, texture );
+		SandMaterial.CutFaceMaterial.Attributes.Set( attributeName, texture );
+	}
+
+	private void ApplyScorchColor( Color color )
+	{
+		SandMaterial.FrontFaceMaterial.Set( "g_vScorchTint_Colour", color );
+		SandMaterial.BackFaceMaterial.Attributes.Set( "g_vScorchTint_Colour", color );
+		SandMaterial.CutFaceMaterial.Attributes.Set( "g_vScorchTint_Colour", color );
 	}
 
 	public async void Init()
@@ -69,7 +102,6 @@ public partial class GrubsTerrain : Component
 	public void SerializeTerrain( string name )
 	{
 		Log.Info( $"Attempting to serialize terrain from {SdfWorld.GameObject.Name}..." );
-		Log.Info( $"Gathering facts..." );
 		Log.Info( $"SdfWorld has {SdfWorld.ModificationCount} modifications." );
 
 		try
