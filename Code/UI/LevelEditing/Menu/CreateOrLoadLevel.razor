@@ -1,0 +1,44 @@
+﻿@namespace Grubs.UI
+
+@inherits Panel
+
+<root>
+    <div class="title">LEVEL EDITOR</div>
+    <div class="option-cards">
+        <div class="card" @onclick=@(() => CreateNewLevel())>
+            <div class="card-create card-fg">
+                <img class="grid-bg rot-1" src="textures/ui/grid.png"/>
+                <div class="card-title">
+                    CREATE NEW
+                </div>
+                <div class="card-icon">
+                    <i>add_photo_alternate</i>
+                </div>
+            </div>
+        </div>
+        <div class="card" @onclick=@(() => LoadLevel())>
+            <div class="card-load card-fg">
+                <img class="grid-bg rot-1" src="textures/ui/grid.png"/>
+                <div class="card-title">
+                    LOAD EXISTING
+                </div>
+                <div class="card-icon">
+                    <i>save</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    private void CreateNewLevel()
+    {
+        
+    }
+
+    private void LoadLevel()
+    {
+        
+    }
+}

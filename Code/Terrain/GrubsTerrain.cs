@@ -8,7 +8,7 @@ using Sandbox.Utility;
 
 namespace Grubs.Terrain;
 
-[Title( "Grubs - Terrain" )]
+[Title( "Grubs - Legacy Terrain" )]
 public partial class GrubsTerrain : Component
 {
 	public static GrubsTerrain Instance { get; set; }

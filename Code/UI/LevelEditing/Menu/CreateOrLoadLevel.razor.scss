@@ -1,0 +1,106 @@
+﻿@import '../../common.scss';
+
+CreateOrLoadLevel {
+  width: 1200px;
+  
+  flex-direction: column;
+  font-family: $font-primary;
+  
+  align-items: center;
+  
+  gap: 32px;
+  
+  .title {
+    justify-content: center;
+    align-self: center;
+    color: white;
+    background-color: #2a2a2a;
+    filter: drop-shadow(2px 2px 6px black);
+    transform: skewX(-3deg);
+    width: 70%;
+    
+    > label {
+      transform: skewX(3deg);
+      text-shadow: 3px 3px 3px black;
+      font-size: 72px;
+    }
+  }
+  
+  .option-cards {
+    gap: 32px;
+  }
+  
+  .card {
+    width: 350px;
+    background-color: #2a2a2a;
+    filter: drop-shadow(2px 2px 6px black);
+    border-radius: 4px;
+    pointer-events: all;
+    
+    &:hover {
+      animation: swivel;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-out;
+    }
+    
+    .card-fg {
+      padding: 32px;
+      width: 100%;
+      margin: 12px;
+      border-radius: 3px;
+      gap: 16px;
+      overflow: hidden;
+      
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      
+      .grid-bg {
+        position: absolute;
+        background-image-tint: rgba(255, 255, 255, 0.25);
+      }
+
+      .rot-1 {
+        transform: rotate(1deg);
+      }
+    }
+    
+    .card-title {
+      font-size: 64px;
+      text-align: center;
+      line-height: 48px;
+      text-shadow: 0 2px 2px black;
+      color: white;
+    }
+    
+    .card-icon {
+      font-size: 108px;
+      color: white;
+      text-shadow: 0 2px 2px black;
+    }
+    
+    .card-create {
+      background-image: linear-gradient(to bottom, #5DB2F0, #3C7299);
+    }
+    
+    .card-load {
+      background-image: linear-gradient(to bottom, #F0C75D, #9C813C);
+    }
+  }
+}
+
+@keyframes swivel {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-1deg);
+  }
+  75% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

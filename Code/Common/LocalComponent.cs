@@ -24,7 +24,14 @@ public abstract class LocalComponent<T> : Component, IHotloadManaged where T : L
 			_local = value;
 		}
 	}
-	
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		Local = (T)this;
+	}
+
 	void IHotloadManaged.Destroyed( Dictionary<string, object> state )
 	{
 		state["IsActive"] = _local == this;
