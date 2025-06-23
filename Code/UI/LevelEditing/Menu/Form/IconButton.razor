@@ -1,0 +1,27 @@
+﻿@namespace Grubs.UI
+
+@inherits Panel
+
+<root>
+    <FormButton
+        IconLeft=@Icon
+        Size=@Size
+        Variant=@Variant
+        Color=@Color
+        HasFormOutline=@HasFormOutline
+        Disabled=@Disabled
+        OnPressed=@OnPressed />
+</root>
+
+@code
+{
+    public string Icon { get; set; }
+    public ButtonSize Size { get; set; } = ButtonSize.Medium;
+    public ButtonVariant Variant { get; set; } = ButtonVariant.Solid;
+    public ButtonColor Color { get; set; } = ButtonColor.White;
+    
+    public bool HasFormOutline { get; set; }
+    public bool Disabled { get; set; }
+    
+    public Action OnPressed { get; set; }
+}

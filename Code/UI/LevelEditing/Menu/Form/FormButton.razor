@@ -4,14 +4,17 @@
 
 <root>
     <button 
-        @onclick=@(() => InvokeAction()) 
+        onClick=@InvokeAction 
         class="@(HasFormOutline && Variant is ButtonVariant.Solid ? "form-bg" : "") @Size.GetClassName()">
         <div class="button-content @GetColorClassNames() @(Disabled ? "disabled" : "")">
             @if (IconLeft is not null)
             {
                 <i>@IconLeft</i>
             }
-            <label>@Label</label>
+            @if (Label is not null)
+            {
+                <label>@Label</label>
+            }
             @if (IconRight is not null)
             {
                 <i>@IconRight</i>
@@ -35,8 +38,10 @@
     
     public Action OnPressed { get; set; }
 
-    private void InvokeAction()
+    private void InvokeAction( PanelEvent e )
     {
+        e.StopPropagation();
+        
         if (!Disabled && OnPressed is not null)
         {
             OnPressed.Invoke();

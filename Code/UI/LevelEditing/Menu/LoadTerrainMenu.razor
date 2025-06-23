@@ -6,21 +6,55 @@
 @inherits Panel
 
 <root>
-    Load Terrain
-    
-    <div>
-        @foreach (var definition in LevelEditorMode.LevelDefinitions)
-        {
-            <button @onclick=@(() => OpenLevel( definition )) style="pointer-events: all">
-                @definition.DisplayName
-            </button>
-        }
+    <div class="load-list">
+        <div class="load-title">LOAD LEVEL</div>
+        <div class="load-body">
+            <img class="grid-bg" src="textures/ui/grid.png" />
+            <div class="load-content">
+                @foreach (var definition in LevelEditorMode.LevelDefinitions)
+                {
+                    <LoadLevelCard
+                        Definition=@definition
+                        IsSelected=@(definition == SelectedDefinition)
+                        OnCardPressed=@(() => SelectLevelDefinition(definition))
+                    />
+                }
+            </div>
+        </div>
+        <div class="load-footer">
+            <FormButton 
+                Label="BACK"
+                IconLeft="arrow_left"
+                Color=@ButtonColor.White
+                Variant=@ButtonVariant.Text
+                OnPressed=@OnBackPressed />
+            <FormButton
+                Label="OPEN"
+                IconLeft="file_open"
+                Color=@ButtonColor.Yellow
+                Variant=@ButtonVariant.Solid
+                HasFormOutline=@true
+                Disabled=@(SelectedDefinition is null)
+                OnPressed=@OpenSelectedLevel />
+        </div>
     </div>
+    @* Load Terrain *@
+    @* *@
+    @* <div> *@
+    @*     @foreach (var definition in LevelEditorMode.LevelDefinitions) *@
+    @*     { *@
+    @*         <button @onclick=@(() => OpenLevel( definition )) style="pointer-events: all"> *@
+    @*             @definition.DisplayName *@
+    @*         </button> *@
+    @*     } *@
+    @* </div> *@
 </root>
 
 @code
 {
     private static LevelEditor LevelEditorMode => BaseGameMode.Current as LevelEditor;
+    
+    private LevelDefinition SelectedDefinition { get; set; }
     
     protected override void OnAfterTreeRender(bool firstTime)
     {
@@ -32,9 +66,19 @@
         }
     }
     
-    private void OpenLevel( LevelDefinition definition )
+    private void OpenSelectedLevel()
     {
-        LevelEditorMode.LoadExistingLevelDefinition( definition );
+        LevelEditorMode.LoadExistingLevelDefinition( SelectedDefinition );
+    }
+
+    private void SelectLevelDefinition(LevelDefinition definition)
+    {
+        SelectedDefinition = definition;
+    }
+
+    private void OnBackPressed()
+    {
+        LevelEditingMenu.Instance.SetMode( LevelEditingMenu.Mode.CreateOrLoadLevel );
     }
 
     protected override int BuildHash()
