@@ -237,9 +237,16 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		}
 	}
 
-	public void Write( Stream stream )
+	public int Write( ref ByteStream stream )
 	{
-		throw new NotImplementedException();
+		var count = ModificationCount;
+		
+		stream.Write( ClearCount );
+		stream.Write( ModificationCount );
+		
+		WriteRange( ref stream, 0, ModificationCount, NetWrite_TypeIndices );
+
+		return count;
 	}
 
 	public void Read( Stream stream )
