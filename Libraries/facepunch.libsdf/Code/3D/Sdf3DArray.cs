@@ -239,7 +239,7 @@ public partial class Sdf3DArray : SdfArray<ISdf3D>
 
 	public override async Task<bool> RebuildAsync( IEnumerable<ChunkModification<ISdf3D>> modifications )
 	{
-		Array.Fill( BackBuffer, (byte) 255 );
+		Array.Fill( BackBuffer, (byte)255 );
 
 		var samples = ArrayPool<float>.Shared.Rent( ArraySize * ArraySize * ArraySize );
 

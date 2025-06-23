@@ -65,10 +65,7 @@ public partial class Sdf2DWorld : SdfWorld<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 		ClearCount = 0;
 		
 		var clearCount = msg.Read<int>();
-		var prevCount = msg.Read<int>();
 		var msgCount = msg.Read<int>();
-		// totalCount: unused
-		msg.Read<int>();
 
 		using var clientMods = AllowClientModifications();
 
@@ -85,11 +82,6 @@ public partial class Sdf2DWorld : SdfWorld<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 			Assert.AreEqual( 0, Modifications.Count );
 		}
 
-		if ( prevCount != Modifications.Count )
-		{
-			return;
-		}
-
 		ISdf<ISdf2D>.EnsureTypesRegistered();
 
 		NetRead_TypeReaders.Clear();
@@ -100,6 +92,27 @@ public partial class Sdf2DWorld : SdfWorld<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 			NetRead_TypeReaders[index++] = reader;
 		}
 
-		ReadRange( ref msg, msgCount, NetRead_TypeReaders );
+		ReadModifications( ref msg, msgCount, NetRead_TypeReaders );
+		// ReadRange( ref msg, msgCount, NetRead_TypeReaders );
+	}
+
+	private void ReadModifications( ref ByteStream reader, int count,
+		IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
+	{
+		List<Modification<Sdf2DLayer, ISdf2D>> mods = [];
+		
+		for ( var i = 0; i < count; ++i )
+		{
+			var op = (Operator)reader.Read<byte>();
+			var resId = reader.Read<int>();
+			var res = ResourceLibrary.Get<Sdf2DLayer>( resId );
+
+			var sdf = ISdf<ISdf2D>.Read( ref reader, sdfTypes );
+
+			var modification = new Modification<Sdf2DLayer, ISdf2D>( sdf, res, op );
+			mods.Add( modification );
+		}
+
+		_ = SetModificationsAsync( mods );
 	}
 }
