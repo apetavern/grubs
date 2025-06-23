@@ -93,11 +93,11 @@ public partial class GrubsTerrain : Component
 		WorldTextureHeight = 0;
 	}
 
-	[ConCmd( "gr_save_terrain" )]
-	public static void SaveTerrainCmd( string name )
-	{
-		Instance.SerializeTerrain( name );
-	}
+	// [ConCmd( "gr_save_terrain" )]
+	// public static void SaveTerrainCmd( string name )
+	// {
+	// 	Instance.SerializeTerrain( name );
+	// }
 
 	public void SerializeTerrain( string name )
 	{

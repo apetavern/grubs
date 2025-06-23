@@ -4,6 +4,25 @@ namespace Grubs.Terrain;
 
 public partial class GameTerrain
 {
+	[ConCmd( "gr_save_terrain" )]
+	public static void SaveModificationsCmd()
+	{
+		Local.SaveModifications();
+	}
+
+	public void SaveModifications()
+	{
+		Log.Info( $"Attempting to serialize terrain from {SdfWorld.GameObject.Name}..." );
+		Log.Info( $"SdfWorld has {SdfWorld.ModificationCount} modifications." );
+		
+		var byteStream = ByteStream.Create( 512 );
+		var mods = SdfWorld.Write( ref byteStream, 0 );
+		Log.Info( $"Writing {mods} modifications to level definition..." );
+		LevelDefinition.Modifications = byteStream.ToArray();
+		
+		_ = WriteDefinitionToFile( LevelDefinition );
+	}
+	
 	private async Task WriteDefinitionToFile( LevelDefinition definition )
 	{
 		var serializedDefinition = JsonSerializer.Serialize( definition.ToDataSchema() );
@@ -11,12 +30,6 @@ public partial class GameTerrain
 		try
 		{
 			var fileName = $"levels/{definition.Id.ToString()}_level.json";
-			if ( FileSystem.Data.FileExists( fileName ) )
-			{
-				Log.Error( "This file already exists, not overwriting." );
-				return;
-			}
-			
 			FileSystem.Data.CreateDirectory( "levels" );
 			FileSystem.Data.WriteAllText( fileName, serializedDefinition );
 		}

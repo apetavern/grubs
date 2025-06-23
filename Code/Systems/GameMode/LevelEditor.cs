@@ -15,6 +15,9 @@ public sealed class LevelEditor : BaseGameMode
 	
 	[Property]
 	public GameObject LevelEditorPawnPrefab { get; set; }
+	
+	[Property]
+	public Material DefaultLevelForegroundMaterial { get; set; }
 
 	public LevelEditorState State { get; set; } = LevelEditorState.Menu;
 
@@ -73,7 +76,9 @@ public sealed class LevelEditor : BaseGameMode
 			CreatedBy = new Friend( Steam.SteamId ),
 			CreatedOn = DateTime.UtcNow,
 			LastUpdated = DateTime.UtcNow,
-			TerrainSize = TerrainSize.Medium
+			TerrainSize = TerrainSize.Medium,
+			TerrainForegroundMaterial = DefaultLevelForegroundMaterial,
+			TerrainScorchOverride = Color.Transparent
 		};
 
 		_ = CreateNewLevelDefinitionAsync( definition );
