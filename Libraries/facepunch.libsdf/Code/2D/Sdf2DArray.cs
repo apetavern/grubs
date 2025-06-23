@@ -213,9 +213,12 @@ public partial class Sdf2DArray : SdfArray<ISdf2D>
 			{
 				var (min, max, transform) = GetSampleRange( modification.Sdf.Bounds );
 				var size = (X: max.X - min.X, Y: max.Y - min.Y);
-
+				
 				await modification.Sdf.SampleRangeAsync( transform, samples, size );
-				await GameTask.WorkerThread();
+				
+				// Having a WorkerThread here occasionally crashes s&box in some context.
+				// Seems to run fine without it.
+				// await GameTask.WorkerThread();
 
 				switch ( modification.Operator )
 				{

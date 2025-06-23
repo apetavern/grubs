@@ -15,7 +15,7 @@ public partial class GameTerrain
 		Log.Info( $"Attempting to serialize terrain from {SdfWorld.GameObject.Name}..." );
 		Log.Info( $"SdfWorld has {SdfWorld.ModificationCount} modifications." );
 		
-		var byteStream = ByteStream.Create( 1024 );
+		var byteStream = ByteStream.Create( 512 );
 		var mods = SdfWorld.Write( ref byteStream );
 		Log.Info( $"Writing {mods} modifications to level definition..." );
 		LevelDefinition.Modifications = byteStream.ToArray();
