@@ -31,11 +31,11 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 	{
 		LevelDefinition = definition;
 
-		OverrideLayerMaterial( GenericMaterial, definition.TerrainForegroundMaterial );
+		// OverrideLayerMaterial( GenericMaterial, definition.TerrainForegroundMaterial );
 
 		if ( definition.TerrainScorchOverride != Color.Transparent )
 		{
-			OverrideLayerScorchColor( GenericMaterial, definition.TerrainScorchOverride );
+			// OverrideLayerScorchColor( GenericMaterial, definition.TerrainScorchOverride );
 		}
 
 		if ( !LevelDefinition.Modifications.Any() )
@@ -45,5 +45,6 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 		
 		var byteStream = ByteStream.CreateReader( LevelDefinition.Modifications );
 		SdfWorld.ClearAndReadData( ref byteStream );
+		byteStream.Dispose();
 	}
 }

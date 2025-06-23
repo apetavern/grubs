@@ -4,7 +4,7 @@ namespace Grubs.Terrain;
 
 public partial class GameTerrain
 {
-	private Sdf2DLayer GenericMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/generic.sdflayer" );
+	private Sdf2DLayer GenericMaterial { get; } = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/sand.sdflayer" );
 
 	private const string ComplexColor = "g_tColor";
 	private const string ComplexNormal = "g_tNormal";
