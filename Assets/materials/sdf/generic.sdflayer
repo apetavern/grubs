@@ -15,7 +15,12 @@
   "ChunkResolution": 16,
   "ChunkSize": 256,
   "MaxDistance": 64,
-  "ReferencedTextures": [],
+  "ReferencedTextures": [
+    {
+      "TargetAttribute": "ScorchLayer",
+      "Source": "materials/sdf/scorch.sdflayer"
+    }
+  ],
   "__references": [],
   "__version": 0
 }
