@@ -25,7 +25,16 @@ public class EditorPlayer : LocalComponent<EditorPlayer>
 		
 		if ( Input.Down( "fire" ) )
 		{
-			GameTerrain.Local.AddCircle( new Vector2( MousePosition.x, MousePosition.z ), 64f );
+			var center = new Vector2( MousePosition.x, MousePosition.z );
+
+			if ( Input.Down( "backflip" ) )
+			{
+				GameTerrain.Local.SubtractCircle( center, 64f );
+			}
+			else
+			{
+				GameTerrain.Local.AddCircle( center, 64f );
+			}
 		}
 	}
 }
