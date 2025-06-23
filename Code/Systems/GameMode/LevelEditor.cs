@@ -18,11 +18,33 @@ public sealed class LevelEditor : BaseGameMode
 
 	public LevelEditorState State { get; set; } = LevelEditorState.Menu;
 
+	public List<LevelDefinition> LevelDefinitions { get; set; } = [];
+
 	protected override void OnModeInit()
 	{
 		base.OnModeInit();
 		
 		Log.Info( "Initializing level editor game mode..." );
+
+		_ = LoadLevelDefinitions();
+	}
+
+	private async Task LoadLevelDefinitions()
+	{
+		const string levelDataDirectory = "levels";
+
+		if ( !FileSystem.Data.DirectoryExists( levelDataDirectory ) )
+			return;
+
+		var files = FileSystem.Data.FindFile( levelDataDirectory ).ToList();
+		Log.Info( $"Loaded {files.Count} level definitions" );
+		
+		foreach ( var file in files )
+		{
+			var data = await FileSystem.Data.ReadAllTextAsync( $"levels/{file}" );
+			var levelData = JsonSerializer.Deserialize<LevelDefinitionData>( data );
+			LevelDefinitions.Add( levelData.ToDefinition() );
+		}
 	}
 
 	public void SpawnLevelEditorPawn()
@@ -40,6 +62,8 @@ public sealed class LevelEditor : BaseGameMode
 
 	public void CreateNewLevelDefinition( string name, string description )
 	{
+		Log.Info( $"Creating new level definition with name {name}" );
+		
 		var definition = new LevelDefinition
 		{
 			Id = Guid.NewGuid(),
@@ -62,9 +86,38 @@ public sealed class LevelEditor : BaseGameMode
 		SetLevelEditorState( LevelEditorState.Editing );
 	}
 
+	public void LoadExistingLevelDefinition( LevelDefinition definition )
+	{
+		Log.Info( $"Loading existing level definition {definition.DisplayName}" );
+		
+		_ = LoadExistingLevelDefinitionAsync( definition );
+	}
+
+	private async Task LoadExistingLevelDefinitionAsync( LevelDefinition definition )
+	{
+		await GameTerrain.Local.LoadDefinition( definition );
+		
+		SetLevelEditorState( LevelEditorState.Editing );
+	}
+	
 	public void SetLevelEditorState( LevelEditorState state )
 	{
+		Log.Info( $"Setting level editor state to {state}" );
 		State = state;
+
+		if ( State is LevelEditorState.Editing )
+		{
+			SpawnLevelEditorPawn();
+		}
+		else
+		{
+			Log.Info( "Going back to menu. Cleaning up!" );
+			var editor = Scene.GetAllComponents<EditorPlayer>().FirstOrDefault();
+			if ( editor.IsValid() )
+			{
+				editor.GameObject.Destroy();
+			}
+		}
 	}
 }
 

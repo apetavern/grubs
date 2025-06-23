@@ -1,13 +1,27 @@
 ﻿@namespace Grubs.UI
 
+@using Grubs.Systems.GameMode
+@using Grubs.Systems.LevelEditing
+
 @inherits Panel
 
 <root>
     Load Terrain
+    
+    <div>
+        @foreach (var definition in LevelEditorMode.LevelDefinitions)
+        {
+            <button @onclick=@(() => OpenLevel( definition )) style="pointer-events: all">
+                @definition.DisplayName
+            </button>
+        }
+    </div>
 </root>
 
 @code
 {
+    private static LevelEditor LevelEditorMode => BaseGameMode.Current as LevelEditor;
+    
     protected override void OnAfterTreeRender(bool firstTime)
     {
         base.OnAfterTreeRender(firstTime);
@@ -16,5 +30,10 @@
         {
             AddClass("hide");
         }
+    }
+    
+    private void OpenLevel( LevelDefinition definition )
+    {
+        LevelEditorMode.LoadExistingLevelDefinition( definition );
     }
 }

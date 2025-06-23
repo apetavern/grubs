@@ -78,4 +78,19 @@ public struct LevelDefinitionData
 	public DateTime CreatedOn { get; set; }
 	public DateTime LastUpdated { get; set; }
 	public TerrainSize TerrainSize { get; set; }
+
+	public LevelDefinition ToDefinition()
+	{
+		return new LevelDefinition
+		{
+			Id = Id,
+			DisplayName = DisplayName,
+			Description = Description,
+			Tags = Tags,
+			CreatedBy = new Friend( CreatedBy ),
+			CreatedOn = CreatedOn,
+			LastUpdated = LastUpdated,
+			TerrainSize = TerrainSize
+		};
+	}
 }

@@ -10,13 +10,14 @@ public partial class GameTerrain
 
 		try
 		{
-			var fileName = $"{definition.Id.ToString()}_level.json";
+			var fileName = $"levels/{definition.Id.ToString()}_level.json";
 			if ( FileSystem.Data.FileExists( fileName ) )
 			{
 				Log.Error( "This file already exists, not overwriting." );
 				return;
 			}
 			
+			FileSystem.Data.CreateDirectory( "levels" );
 			FileSystem.Data.WriteAllText( fileName, serializedDefinition );
 		}
 		catch ( Exception e )
