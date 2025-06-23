@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -50,44 +51,113 @@ public partial class Sdf2DArray : SdfArray<ISdf2D>
 		texture.Update( FrontBuffer );
 	}
 
-	private (int MinX, int MinY, int MaxX, int MaxY) GetSampleRange( Rect bounds )
+	private ((int X, int Y) Min, (int X, int Y) Max, Transform transform) GetSampleRange( Rect bounds )
 	{
-		var (minX, maxX, _, _) = GetSampleRange( bounds.Left, bounds.Right );
-		var (minY, maxY, _, _) = GetSampleRange( bounds.Top, bounds.Bottom );
+		var (minX, maxX, minLocalX, _) = GetSampleRange( bounds.Left, bounds.Right );
+		var (minY, maxY, minLocalY, _) = GetSampleRange( bounds.Top, bounds.Bottom );
 
-		return (minX, minY, maxX, maxY);
+		var min = new Vector3( minLocalX, minLocalY, 0f );
+		
+		return ((minX, minY), (maxX, maxY), new Transform( min, Rotation.Identity, UnitSize ) );
 	}
 
-	/// <inheritdoc />
-	public override async Task<bool> AddAsync<T>( T sdf )
+	/// <summary>
+	/// Implements the logic for adding pre-sampled SDF data to the back buffer.
+	/// </summary>
+	/// <param name="samples">The array of pre-sampled distance values.</param>
+	/// <param name="min">The minimum grid coordinate of the sampled area.</param>
+	/// <param name="size">The dimensions of the sampled area.</param>
+	/// <returns>True if any value in the buffer was changed.</returns>
+	private bool AddImpl( float[] samples, (int X, int Y) min, (int X, int Y) size )
 	{
-		var (minX, minY, maxX, maxY) = GetSampleRange( sdf.Bounds );
+		var max = (X: min.X + size.X, Y: min.Y + size.Y);
 		var maxDist = Quality.MaxDistance;
-
-		await GameTask.WorkerThread();
-
 		var changed = false;
 
-		for ( var y = minY; y < maxY; ++y )
+		for ( var y = min.Y; y < max.Y; ++y )
 		{
-			var worldY = (y - Margin) * UnitSize;
+			var srcIndex = (y - min.Y) * size.X;
+			var dstIndex = min.X + y * ArraySize;
 
-			for ( int x = minX, index = minX + y * ArraySize; x < maxX; ++x, ++index )
+			for ( var x = min.X; x < max.X; ++x, ++srcIndex, ++dstIndex )
 			{
-				var worldX = (x - Margin) * UnitSize;
-				var sampled = sdf[new Vector2( worldX, worldY )];
+				var sampled = samples[srcIndex];
 
 				if ( sampled >= maxDist ) continue;
 
 				var encoded = Encode( sampled );
 
-				var oldValue = BackBuffer[index];
+				var oldValue = BackBuffer[dstIndex];
 				var newValue = Math.Min( encoded, oldValue );
-
-				BackBuffer[index] = newValue;
+				BackBuffer[dstIndex] = newValue;
 
 				changed |= oldValue != newValue;
 			}
+		}
+
+		return changed;
+	}
+	
+	/// <summary>
+	/// Implements the logic for subtracting pre-sampled SDF data from the back buffer.
+	/// </summary>
+	/// <param name="samples">The array of pre-sampled distance values.</param>
+	/// <param name="min">The minimum grid coordinate of the sampled area.</param>
+	/// <param name="size">The dimensions of the sampled area.</param>
+	/// <returns>True if any value in the buffer was changed.</returns>
+	private bool SubtractImpl( float[] samples, (int X, int Y) min, (int X, int Y) size )
+	{
+		var max = (X: min.X + size.X, Y: min.Y + size.Y);
+		var maxDist = Quality.MaxDistance;
+		var changed = false;
+
+		for ( var y = min.Y; y < max.Y; ++y )
+		{
+			var srcIndex = (y - min.Y) * size.X;
+			var dstIndex = min.X + y * ArraySize;
+
+			for ( var x = min.X; x < max.X; ++x, ++srcIndex, ++dstIndex )
+			{
+				var sampled = samples[srcIndex];
+
+				if ( sampled >= maxDist ) continue;
+
+				var encoded = Encode( sampled );
+				
+				var oldValue = BackBuffer[dstIndex];
+				var newValue = Math.Max( (byte)(byte.MaxValue - encoded), oldValue );
+
+				BackBuffer[dstIndex] = newValue;
+
+				changed |= oldValue != newValue;
+			}
+		}
+
+		return changed;
+	}
+
+	/// <inheritdoc />
+	public override async Task<bool> AddAsync<T>( T sdf )
+	{
+		var (min, max, transform) = GetSampleRange( sdf.Bounds );
+		var maxDist = Quality.MaxDistance;
+		var size = (X: max.X - min.X, Y: max.Y - min.Y);
+		
+		var samples = ArrayPool<float>.Shared.Rent( size.X * size.Y );
+		
+		var changed = false;
+
+		try
+		{
+			await sdf.SampleRangeAsync( transform, samples, size );
+       
+			await GameTask.WorkerThread();
+
+			changed |= AddImpl( samples, min, size );
+		}
+		finally
+		{
+			ArrayPool<float>.Shared.Return( samples );
 		}
 
 		if ( changed )
@@ -102,33 +172,24 @@ public partial class Sdf2DArray : SdfArray<ISdf2D>
 	/// <inheritdoc />
 	public override async Task<bool> SubtractAsync<T>( T sdf )
 	{
-		var (minX, minY, maxX, maxY) = GetSampleRange( sdf.Bounds );
-		var maxDist = Quality.MaxDistance;
+		var (min, max, transform) = GetSampleRange( sdf.Bounds );
+		var size = (X: max.X - min.X, Y: max.Y - min.Y);
 
-		await GameTask.WorkerThread();
+		var samples = ArrayPool<float>.Shared.Rent( size.X * size.Y );
 
 		var changed = false;
 
-		for ( var y = minY; y < maxY; ++y )
+		try
 		{
-			var worldY = (y - Margin) * UnitSize;
+			await sdf.SampleRangeAsync( transform, samples, size );
+       
+			await GameTask.WorkerThread();
 
-			for ( int x = minX, index = minX + y * ArraySize; x < maxX; ++x, ++index )
-			{
-				var worldX = (x - Margin) * UnitSize;
-				var sampled = sdf[new Vector2( worldX, worldY )];
-
-				if ( sampled >= maxDist ) continue;
-
-				var encoded = Encode( sampled );
-
-				var oldValue = BackBuffer[index];
-				var newValue = Math.Max( (byte)(byte.MaxValue - encoded), oldValue );
-
-				BackBuffer[index] = newValue;
-
-				changed |= oldValue != newValue;
-			}
+			changed |= SubtractImpl( samples, min, size );
+		}
+		finally
+		{
+			ArrayPool<float>.Shared.Return( samples );
 		}
 
 		if ( changed )
@@ -140,9 +201,42 @@ public partial class Sdf2DArray : SdfArray<ISdf2D>
 		return changed;
 	}
 
-	public override Task<bool> RebuildAsync( IEnumerable<ChunkModification<ISdf2D>> modifications )
+	public override async Task<bool> RebuildAsync( IEnumerable<ChunkModification<ISdf2D>> modifications )
 	{
-		throw new NotImplementedException();
+		Array.Fill( BackBuffer, (byte)255 );
+
+		var samples = ArrayPool<float>.Shared.Rent( ArraySize * ArraySize * ArraySize );
+
+		try
+		{
+			foreach ( var modification in modifications )
+			{
+				var (min, max, transform) = GetSampleRange( modification.Sdf.Bounds );
+				var size = (X: max.X - min.X, Y: max.Y - min.Y);
+
+				await modification.Sdf.SampleRangeAsync( transform, samples, size );
+				await GameTask.WorkerThread();
+
+				switch ( modification.Operator )
+				{
+					case Operator.Add:
+						AddImpl( samples, min, size );
+						break;
+					case Operator.Subtract:
+						SubtractImpl( samples, min, size );
+						break;
+				}
+			}
+		}
+		finally
+		{
+			ArrayPool<float>.Shared.Return( samples );
+		}
+
+		SwapBuffers();
+		MarkChanged();
+
+		return true;
 	}
 
 	internal void WriteTo( Sdf2DMeshWriter writer, Sdf2DLayer layer, bool renderMesh, bool collisionMesh )
