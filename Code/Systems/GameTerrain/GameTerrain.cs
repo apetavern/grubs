@@ -38,7 +38,7 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 			// OverrideLayerScorchColor( GenericMaterial, definition.TerrainScorchOverride );
 		}
 
-		if ( !LevelDefinition.Modifications.Any() )
+		if ( LevelDefinition.Modifications is null || LevelDefinition.Modifications.Length == 0 )
 		{
 			return;
 		}

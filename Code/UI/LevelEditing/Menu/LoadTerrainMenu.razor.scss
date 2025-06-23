@@ -1,8 +1,122 @@
-﻿LoadTerrainMenu {
+﻿@import '../../common.scss';
+
+LoadTerrainMenu {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  
   transition: transform 350ms;
 
   &.hide {
     transform: translateX(1920px);
+  }
+  
+  .load-list {
+    margin: auto;
+    width: 600px;
+    flex-direction: column;    
+    
+    border-radius: 4px;
+    padding: 8px;
+
+    background-color: #2a2a2a;
+
+    font-family: $font-primary;
+    
+    .load-title {
+      color: white;
+      width: 100%;
+      padding: 4px 16px;
+      text-shadow: 3px 3px 3px black;
+      font-size: 64px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      background-image: linear-gradient(to bottom, $editor-yellow, $editor-yellow-dark);
+    }
+    
+    .load-body {
+      overflow: hidden;
+      background-image: linear-gradient(to bottom, $editor-yellow-dark, $editor-yellow, $editor-yellow-dark);
+      border-top: 2px #e1e1e1;
+      border-bottom: 2px #e1e1e1;
+      
+      .load-content {
+        padding: 4px 16px;
+        margin: 8px;
+        color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 8px;
+        max-height: 500px;
+        overflow: scroll;
+      }
+    }
+    
+    .load-footer {
+      gap: 8px;
+      justify-content: flex-end;
+      width: 100%;
+
+      padding: 16px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      background-image: linear-gradient(to top, $editor-yellow, $editor-yellow-dark);
+    }
+
+    .grid-bg {
+      position: absolute;
+      background-image-tint: rgba(255, 255, 255, 0.15);
+      background-position: -100px;
+    }
+    
+    .level-list-entry {
+      width: 100%;
+      flex-shrink: 0;
+      font-size: 24px;
+      pointer-events: all;
+      border-radius: 3px;
+      background-color: #2a2a2a;
+      padding: 4px;
+      transition: height 250ms;
+      
+      .level-list-entry-content {
+        background-color: $editor-yellow-dark;
+        width: 100%;
+        padding: 4px 8px;
+        border-radius: 2px;
+        flex-direction: column;
+        
+        .level-list-header {
+          justify-content: space-between;
+        }
+        
+        .level-full-details {
+          font-size: 24px;
+          margin-top: 8px;
+        }
+        
+        &:hover {
+          background-color: darken($editor-yellow-dark, 15%);
+        }
+        
+        &.selected {
+          background-color: darken($editor-yellow-dark, 25%);;
+        }
+      }
+      
+      .level-info {
+        flex-direction: column;
+        
+        .level-name {
+          font-size: 24px;
+        }
+        
+        .level-description {
+          font-size: 20px;
+          color: rgba(222, 222, 222, 1);
+        }
+      }
+    }
   }
 }

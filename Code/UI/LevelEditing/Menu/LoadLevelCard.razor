@@ -1,0 +1,45 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.LevelEditing
+
+@inherits Panel
+
+<root>
+    <div class="level-list-entry" @onclick=@(() => OnCardPressed())>
+        <div class="level-list-entry-content @(IsSelected ? "selected" : "")">
+            <div class="level-list-header">
+                <div class="level-info">
+                    <label class="level-name">@Definition.DisplayName</label>
+                    <label class="level-description">@Definition.Description</label>
+                </div>
+                <IconButton
+                    Icon=@(Open ? "expand_less" : "expand_more")
+                    Size=@ButtonSize.Medium
+                    Variant=@ButtonVariant.Text
+                    Color=@ButtonColor.White
+                    HasFormOutline=@true
+                    OnPressed=@(() => { Open = !Open; })/>
+            </div>
+            @if (Open)
+            {
+                <div class="level-full-details">
+                    additional content
+                </div>
+            }
+        </div>
+    </div>
+</root>
+
+@code
+{
+    public LevelDefinition Definition { get; set; }
+    public bool IsSelected { get; set; }
+    public Action OnCardPressed { get; set; }
+    
+    private bool Open { get; set; }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Open);
+    }
+}
