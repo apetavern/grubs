@@ -19,4 +19,9 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 		await WriteDefinitionToFile( definition );
 		await SdfWorld.ClearAsync();
 	}
+
+	public async Task LoadDefinition( LevelDefinition definition )
+	{
+		LevelDefinition = definition;
+	}
 }
