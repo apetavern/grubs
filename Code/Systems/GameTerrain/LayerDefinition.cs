@@ -1,31 +1,49 @@
-﻿using Sandbox.Sdf;
+﻿using System.Text.Json.Serialization;
+using Sandbox.Sdf;
 
 namespace Grubs.Terrain;
 
 public class LayerDefinition
 {	
+	[JsonIgnore]
 	private static readonly Sdf2DLayer ScorchLayer = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/scorch.sdflayer" );
 
+	[JsonIgnore]
 	private static readonly TextureReference<Sdf2DLayer> ScorchTextureReference = new()
 	{
 		TargetAttribute = "ScorchLayer", Source = ScorchLayer,
 	};
 	
+	[JsonIgnore]
 	private static readonly List<TextureReference<Sdf2DLayer>> StableTextureReference =
 	[
 		ScorchTextureReference,
 	];
 
-	// todo: will this need to be created on the fly to prevent overriding?
-	private Material DefaultReplaceableMaterial = Material.Load( "materials/environment/sand_shells.vmat" );
+	[JsonIgnore]
+	// todo: set default/fallback textures on this?
+	private Material DefaultReplaceableMaterial = 
+		Material.Create( "GenericMaterial", "shaders/gr_foreground_scorch.shader" );
 	
+	public string LayerId { get; set; }
 	public string MaterialPath { get; set; }
 	public LayerShaderStrategy ShaderStrategy { get; set; }
+
+	[JsonConstructor]
+	public LayerDefinition( string layerId, string materialPath, LayerShaderStrategy shaderStrategy )
+	{
+		LayerId = layerId;
+		MaterialPath = materialPath;
+		ShaderStrategy = shaderStrategy;
+
+		_layer = CreateLayer();
+	}
 
 	public LayerDefinition( string materialPath, string shaderName )
 	{
 		Log.Info( $"Creating new LayerDefinition for {materialPath} with {shaderName}" );
 		
+		LayerId = Guid.NewGuid().ToString();
 		MaterialPath = materialPath;
 
 		ShaderStrategy = shaderName == "shaders/complex.shader" 
@@ -34,6 +52,7 @@ public class LayerDefinition
 		_layer = CreateLayer();
 	}
 
+	[JsonIgnore]
 	private Sdf2DLayer _layer;
 
 	public Sdf2DLayer GetLayer()
@@ -50,6 +69,7 @@ public class LayerDefinition
 	{
 		var layer = new Sdf2DLayer
 		{
+			DynamicId = LayerId,
 			Depth = 128f,
 			Offset = 0f,
 			TexCoordSize = 2,
@@ -79,6 +99,9 @@ public class LayerDefinition
 		var ao = ShaderStrategy.GetAmbientOcclusionTexture( material );
 
 		layer.FrontFaceMaterial.Set( MaterialConstants.GrubsColor, color );
+		layer.FrontFaceMaterial.Set( MaterialConstants.GrubsNormal, normal );
+		layer.FrontFaceMaterial.Set( MaterialConstants.GrubsRoughness, roughness );
+		layer.FrontFaceMaterial.Set( MaterialConstants.GrubsAmbientOcclusion, ao );
 	}
 }
 

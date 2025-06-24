@@ -196,6 +196,9 @@ public abstract partial class SdfChunk<TWorld, TChunk, TResource, TChunkKey, TAr
 
 		foreach ( var reference in Resource.ReferencedTextures )
 		{
+			if ( reference.Source is null )
+				continue;
+			
 			var matching = World.GetChunk( reference.Source, Key );
 			UpdateLayerTexture( reference.TargetAttribute, reference.Source, matching );
 		}

@@ -30,10 +30,15 @@ public class TextureReference<T>
 public abstract class SdfResource<T> : GameResource
 	where T : SdfResource<T>
 {
-#pragma warning disable SB3000
+	#pragma warning disable SB3000
 	// ReSharper disable once StaticMemberInGenericType
 	private static char[] SplitChars { get; } = { ' ' };
-#pragma warning restore SB3000
+	#pragma warning restore SB3000
+	
+	/// <summary>
+	/// An ID to keep track of dynamically created layers.
+	/// </summary>
+	public string DynamicId { get; set; }
 
 	/// <summary>
 	/// If true, this layer or volume is only used as a texture source by other layers or volumes.
