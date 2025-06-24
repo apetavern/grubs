@@ -7,13 +7,13 @@ public partial class GameTerrain
 	public void AddCircle( Vector2 center, float radius )
 	{
 		var circleSdf = new CircleSdf( center, radius );
-		Add( SdfWorld, circleSdf, GenericMaterial );
+		Add( SdfWorld, circleSdf, _activeLayer );
 	}
 
 	public void SubtractCircle( Vector2 center, float radius )
 	{
 		var circleSdf = new CircleSdf( center, radius );
-		Subtract( SdfWorld, circleSdf, GenericMaterial );
+		Subtract( SdfWorld, circleSdf, _activeLayer );
 	}
 	
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer layer )

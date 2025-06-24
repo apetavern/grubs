@@ -67,6 +67,11 @@ public sealed class LevelEditor : BaseGameMode
 	{
 		Log.Info( $"Creating new level definition with name {name}" );
 		
+		var layerDefinition = new LayerDefinition( 
+			DefaultLevelForegroundMaterial.ResourcePath, DefaultLevelForegroundMaterial.ShaderName );
+		Log.Info( layerDefinition );
+		Log.Info( layerDefinition.GetLayer() );
+		
 		var definition = new LevelDefinition
 		{
 			Id = Guid.NewGuid(),
@@ -77,7 +82,7 @@ public sealed class LevelEditor : BaseGameMode
 			CreatedOn = DateTime.UtcNow,
 			LastUpdated = DateTime.UtcNow,
 			TerrainSize = TerrainSize.Medium,
-			TerrainForegroundMaterial = DefaultLevelForegroundMaterial,
+			LayerDefinition = layerDefinition,
 			TerrainScorchOverride = Color.Transparent
 		};
 

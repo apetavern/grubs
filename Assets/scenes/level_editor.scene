@@ -63,7 +63,7 @@
           "__type": "Grubs.Systems.GameMode.LevelEditor",
           "__guid": "cdb9a0aa-6c5e-4c4e-bc08-9aa7e7dcddbb",
           "__enabled": true,
-          "DefaultLevelForegroundMaterial": "materials/environment/sand_shells.vmat",
+          "DefaultLevelForegroundMaterial": "materials/environment/rocks_c.vmat",
           "LevelEditorPawnPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player/level_editor_wrapper.prefab"
@@ -143,6 +143,7 @@
           "__type": "Grubs.Terrain.GameTerrain",
           "__guid": "5a335658-7ea4-47e4-af51-3846146073e6",
           "__enabled": true,
+          "ActiveLayerDefinition": null,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
