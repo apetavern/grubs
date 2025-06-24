@@ -11,6 +11,11 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 
 	[Property]
 	public Sdf2DWorld SdfWorld { get; private set; }
+	
+	[Property, ReadOnly]
+	public LayerDefinition ActiveLayerDefinition { get; private set; }
+
+	private Sdf2DLayer _activeLayer => ActiveLayerDefinition.GetLayer();
 
 	protected override void OnStart()
 	{
@@ -22,6 +27,8 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 	public async Task CreateDefinition( LevelDefinition definition )
 	{
 		LevelDefinition = definition;
+
+		ActiveLayerDefinition = definition.LayerDefinition;
 		
 		await WriteDefinitionToFile( definition );
 		await SdfWorld.ClearAsync();
@@ -30,6 +37,8 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 	public async Task LoadDefinition( LevelDefinition definition )
 	{
 		LevelDefinition = definition;
+		
+		ActiveLayerDefinition = definition.LayerDefinition;
 
 		// OverrideLayerMaterial( GenericMaterial, definition.TerrainForegroundMaterial );
 
