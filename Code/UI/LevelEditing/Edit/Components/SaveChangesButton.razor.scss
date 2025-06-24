@@ -1,0 +1,33 @@
+﻿@import '../../../common.scss';
+
+SaveChangesButton {
+  position: absolute;
+  bottom: 12px;
+  right: 24px;
+  
+  .save-changes-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: $camo-darker;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 1));
+    
+    > i {
+      font-size: 64px;
+      color: $camo-light;
+      filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 1));
+
+      &.disabled {
+        opacity: 0.8;
+      }
+      
+      &:hover:not(.disabled) {
+        color: darken($camo-light, 15%);
+      }
+    }
+  }
+}

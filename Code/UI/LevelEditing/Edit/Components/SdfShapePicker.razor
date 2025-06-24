@@ -1,0 +1,57 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.LevelEditing
+
+@inherits Panel
+
+<root>
+    <div class="sdf-shape-container" @onclick=@ToggleSdfMenu>
+        <i class="sdf-shape-icon">@SdfShapeIcons[Editor.SdfShape]</i>
+        <div class="sdf-shape-select">
+            <label class="selected-shape-option">@Editor.SdfShape.ToString()</label>
+            @if (SdfMenuOpen)
+            {
+                @foreach (var editorShape in Enum.GetValues<EditorSdfShape>()
+                              .Where( s => s != Editor.SdfShape ))
+                {
+                    <button class="sdf-select-option" onclick=@((PanelEvent e) =>
+                    {
+                        SelectSdfShape(e, editorShape);
+                    })>
+                        @editorShape
+                    </button>
+                }
+            }
+        </div>
+    </div>
+</root>
+
+@code
+{
+    private static EditorPlayer Editor => EditorPlayer.Local;
+
+    private bool SdfMenuOpen { get; set; } = false;
+
+    private void ToggleSdfMenu()
+    {
+        SdfMenuOpen = !SdfMenuOpen;
+    }
+
+    private void SelectSdfShape(PanelEvent e, EditorSdfShape shape)
+    {
+        e.StopPropagation();
+        Editor.SdfShape = shape;
+        SdfMenuOpen = false;
+    }
+
+    private Dictionary<EditorSdfShape, string> SdfShapeIcons = new()
+    {
+        { EditorSdfShape.Circle, "fiber_manual_record" },
+        { EditorSdfShape.Box, "check_box_outline_blank" }
+    };
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Editor.SdfShape );
+    }
+}

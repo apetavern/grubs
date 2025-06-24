@@ -7,6 +7,14 @@ namespace Grubs.Systems.LevelEditing;
 public class EditorPlayer : LocalComponent<EditorPlayer>
 {
 	public EditMode EditMode { get; private set; } = EditMode.None;
+	public EditorSdfShape SdfShape { get; set; } = EditorSdfShape.Circle;
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		EditMode = EditMode.Addition;
+	}
 
 	public Vector3 MousePosition { get; private set; }
 	private static readonly Plane Plane = 
@@ -21,7 +29,7 @@ public class EditorPlayer : LocalComponent<EditorPlayer>
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
 
 		Gizmo.Transform = global::Transform.Zero;
-		Gizmo.Draw.LineSphere( MousePosition, 16f );
+		// Gizmo.Draw.LineSphere( MousePosition, 16f );
 		
 		if ( Input.Down( "fire" ) )
 		{
@@ -44,4 +52,10 @@ public enum EditMode
 	None,
 	Addition,
 	Subtraction,
+}
+
+public enum EditorSdfShape
+{
+	Circle,
+	Box,
 }

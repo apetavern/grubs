@@ -1,0 +1,55 @@
+﻿@import '../../../common.scss';
+
+SdfShapePicker {
+  position: absolute;
+  bottom: 12px;
+  left: 24px;
+  font-family: $font-primary;
+  
+  .sdf-shape-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: $camo-darker;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    color: $camo-light;
+    
+    .sdf-shape-icon {
+      font-size: 64px;
+      filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 1));
+      
+      transition: color 250ms;
+      
+      &:hover {
+        color: darken($camo-light, 15%);
+      }
+    }
+    
+    .sdf-shape-select {
+      position: absolute;
+      bottom: 15%;
+      left: 85%;
+      font-size: 42px;
+      background-color: $camo-darker;
+      padding: 4px 8px 4px 4px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+      flex-direction: column-reverse;
+      
+      .selected-shape-option {
+        &:hover {
+          color: darken($camo-light, 15%);
+        }
+      }
+      
+      .sdf-select-option {
+        pointer-events: all;
+      }
+    }
+  }
+}
