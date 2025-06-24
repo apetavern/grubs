@@ -93,7 +93,6 @@ public partial class Sdf2DWorld : SdfWorld<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 		}
 
 		ReadModifications( ref msg, msgCount, NetRead_TypeReaders );
-		// ReadRange( ref msg, msgCount, NetRead_TypeReaders );
 	}
 
 	private void ReadModifications( ref ByteStream reader, int count,
@@ -104,12 +103,17 @@ public partial class Sdf2DWorld : SdfWorld<Sdf2DWorld, Sdf2DChunk, Sdf2DLayer, (
 		for ( var i = 0; i < count; ++i )
 		{
 			var op = (Operator)reader.Read<byte>();
-			var resId = reader.Read<int>();
-			var res = ResourceLibrary.Get<Sdf2DLayer>( resId );
+			var layerId = reader.Read<string>();
+			// Use LayerUtility since dynamic GameResources cannot be fetched with ResourceLibrary...
+			var res = LayerUtility.Get( layerId );
+			if ( res is not Sdf2DLayer layer )
+			{
+				continue;
+			}
 
 			var sdf = ISdf<ISdf2D>.Read( ref reader, sdfTypes );
 
-			var modification = new Modification<Sdf2DLayer, ISdf2D>( sdf, res, op );
+			var modification = new Modification<Sdf2DLayer, ISdf2D>( sdf, layer, op );
 			mods.Add( modification );
 		}
 

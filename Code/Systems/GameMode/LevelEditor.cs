@@ -1,6 +1,7 @@
 ﻿using Grubs.Systems.LevelEditing;
 using Grubs.Systems.Pawn;
 using Grubs.Terrain;
+using Sandbox.Sdf;
 using Sandbox.Utility;
 
 namespace Grubs.Systems.GameMode;
@@ -46,6 +47,15 @@ public sealed class LevelEditor : BaseGameMode
 		{
 			var data = await FileSystem.Data.ReadAllTextAsync( $"levels/{file}" );
 			var levelData = JsonSerializer.Deserialize<LevelDefinitionData>( data );
+			
+			// hack ?!??!?!
+			levelData.LayerDefinition.GetLayer().ReferencedTextures
+				.First().Source = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/scorch.sdflayer" );
+
+			// todo: use a list of layers in LayerDefinition and iterate through to initalize all of them
+			var layer = levelData.LayerDefinition.GetLayer();
+			Log.Info( $"Adding {layer.DynamicId} to LayerUtility for resource {levelData.LayerDefinition.GetLayer()}" );
+			LayerUtility.AddLayer( layer.DynamicId, layer );
 			LevelDefinitions.Add( levelData.ToDefinition() );
 		}
 	}
@@ -69,6 +79,7 @@ public sealed class LevelEditor : BaseGameMode
 		
 		var layerDefinition = new LayerDefinition( 
 			DefaultLevelForegroundMaterial.ResourcePath, DefaultLevelForegroundMaterial.ShaderName );
+		
 		Log.Info( layerDefinition );
 		Log.Info( layerDefinition.GetLayer() );
 		

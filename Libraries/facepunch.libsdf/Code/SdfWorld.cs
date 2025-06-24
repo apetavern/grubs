@@ -284,7 +284,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 			var modification = Modifications[from + i];
 
 			writer.Write( (byte)modification.Operator );
-			writer.Write( modification.Resource.ResourceId );
+			writer.Write( modification.Resource.DynamicId );
 			modification.Sdf.Write( ref writer, sdfTypes );
 		}
 	}
@@ -337,12 +337,16 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 		for ( var i = 0; i < count; ++i )
 		{
 			var op = (Operator)reader.Read<byte>();
-			var resId = reader.Read<int>();
-			var res = ResourceLibrary.Get<TResource>( resId );
+			var dynamicId = reader.Read<string>();
+			var res = LayerUtility.Get( dynamicId );
+			if ( res is not TResource tres )
+			{
+				continue;
+			}
 
 			var sdf = ISdf<TSdf>.Read( ref reader, sdfTypes );
 
-			var modification = new Modification<TResource, TSdf>( sdf, res, op );
+			var modification = new Modification<TResource, TSdf>( sdf, tres, op );
 
 			switch ( modification.Operator )
 			{
