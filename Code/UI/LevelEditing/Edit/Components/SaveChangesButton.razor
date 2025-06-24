@@ -1,0 +1,29 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.LevelEditing
+@using Grubs.Terrain
+
+@inherits Panel
+
+<root>
+    <div class="save-changes-container" @onclick=@Save>
+        <i class="@(!IsDirty ? "disabled" : "")">save</i>
+    </div>
+</root>
+
+@code
+{
+    private static bool IsDirty => GameTerrain.Local.IsDirty;
+    
+    private void Save()
+    {
+        if (!IsDirty)
+            return;
+        GameTerrain.Local.SaveModifications();
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(IsDirty);
+    }
+}

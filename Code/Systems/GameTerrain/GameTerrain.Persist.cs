@@ -9,6 +9,9 @@ public partial class GameTerrain
 	{
 		Local.SaveModifications();
 	}
+	
+	private int LastSavedModifications { get; set; }
+	public bool IsDirty => SdfWorld.ModificationCount != LastSavedModifications;
 
 	public void SaveModifications()
 	{
@@ -17,6 +20,7 @@ public partial class GameTerrain
 		
 		var byteStream = ByteStream.Create( 512 );
 		var mods = SdfWorld.Write( ref byteStream );
+		LastSavedModifications = mods;
 		Log.Info( $"Writing {mods} modifications to level definition..." );
 		LevelDefinition.Modifications = byteStream.ToArray();
 		
