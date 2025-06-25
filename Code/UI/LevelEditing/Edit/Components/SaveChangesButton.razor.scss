@@ -1,12 +1,8 @@
 ﻿@import '../../../common.scss';
 
 SaveChangesButton {
-  position: absolute;
-  bottom: 12px;
-  right: 24px;
   
   .save-changes-container {
-    position: relative;
     width: 100px;
     height: 100px;
     background-color: $camo-darker;

@@ -8,6 +8,7 @@ public class EditorPlayer : LocalComponent<EditorPlayer>
 {
 	public EditMode EditMode { get; private set; } = EditMode.None;
 	public EditorSdfShape SdfShape { get; set; } = EditorSdfShape.Circle;
+	public float BrushSize { get; set; } = 0.5f;
 
 	protected override void OnStart()
 	{
@@ -27,9 +28,12 @@ public class EditorPlayer : LocalComponent<EditorPlayer>
 			: Mouse.Position );
 		var endPos = Plane.Trace( cursorRay, twosided: true );
 		MousePosition = endPos ?? new Vector3( 0f, 512f, 0f );
+		
+		var brushSize = 256f * BrushSize;
 
-		Gizmo.Transform = global::Transform.Zero;
-		// Gizmo.Draw.LineSphere( MousePosition, 16f );
+		var t = new Transform( MousePosition, Rotation.FromYaw( 90f ), 1f );
+		Gizmo.Transform = t;
+		Gizmo.Draw.LineCircle( Vector3.Zero + Vector3.Backward * 64f, Vector3.Zero + Vector3.Backward * 48f, 256f * BrushSize, sections: 32 );
 		
 		if ( Input.Down( "fire" ) )
 		{
@@ -37,11 +41,11 @@ public class EditorPlayer : LocalComponent<EditorPlayer>
 
 			if ( Input.Down( "backflip" ) )
 			{
-				GameTerrain.Local.SubtractCircle( center, 64f );
+				GameTerrain.Local.SubtractCircle( center, brushSize );
 			}
 			else
 			{
-				GameTerrain.Local.AddCircle( center, 64f );
+				GameTerrain.Local.AddCircle( center, brushSize );
 			}
 		}
 	}

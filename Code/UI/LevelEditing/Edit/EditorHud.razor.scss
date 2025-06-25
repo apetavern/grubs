@@ -8,7 +8,7 @@ EditorHud {
   
   .level-name {
     background-color: $camo-dark;
-    padding: 8px 16px;
+    padding: 8px 32px 8px 16px;
     margin: 48px 48px 48px -12px;
     transform: rotate(-0.45px);
     
@@ -17,6 +17,22 @@ EditorHud {
       font-family: $font-primary;
       font-size: 64px;
       color: $camo-light;
+    }
+  }
+  
+  .toolbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0 24px 12px 24px;
+    gap: 24px;
+    
+    SdfShapePicker {
+      margin-right: 96px;
+    }
+    
+    SaveChangesButton {
+      margin-left: auto;
     }
   }
 }
