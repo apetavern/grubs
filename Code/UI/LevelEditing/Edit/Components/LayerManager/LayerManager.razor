@@ -1,6 +1,13 @@
 ﻿@namespace Grubs.UI
 
+@using Grubs.Systems.LevelEditing
+@using Grubs.Terrain
 @inherits Panel
+
+@if (Level is null)
+{
+    return;
+}
 
 <root>
     
@@ -8,5 +15,10 @@
 
 @code
 {
-    
+    private static LevelDefinition Level => GameTerrain.Local?.LevelDefinition;
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Level);
+    }
 }

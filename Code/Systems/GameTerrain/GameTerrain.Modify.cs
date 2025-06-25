@@ -10,10 +10,22 @@ public partial class GameTerrain
 		Add( SdfWorld, circleSdf, _activeLayer );
 	}
 
+	public void AddBox( Vector2 center, Vector2 size )
+	{
+		var boxSdf = new RectSdf( center - size / 2f, center + size / 2f );
+		Add( SdfWorld, boxSdf, _activeLayer );
+	}
+
 	public void SubtractCircle( Vector2 center, float radius )
 	{
 		var circleSdf = new CircleSdf( center, radius );
 		Subtract( SdfWorld, circleSdf, _activeLayer );
+	}
+
+	public void SubtractBox( Vector2 center, Vector2 size )
+	{
+		var boxSdf = new RectSdf( center - size / 2f, center + size / 2f );
+		Subtract( SdfWorld, boxSdf, _activeLayer );
 	}
 	
 	private void Add( Sdf2DWorld world, ISdf2D sdf, Sdf2DLayer layer )
