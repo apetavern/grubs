@@ -1,0 +1,30 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.LevelEditing
+@inherits Panel
+
+<root>
+    <div class="control-title">BRUSH SIZE</div>
+    <div class="tri-bar" onclick=@((PanelEvent e) => { OnClick(e); })>
+        <div class="tri-bar-fg" style="width: @BrushSizePercentage%"/>
+    </div>
+</root>
+
+@code
+{
+    private static EditorPlayer Editor => EditorPlayer.Local;
+
+    private float BrushSizePercentage => Editor.BrushSize * 100f;
+
+    private void OnClick(PanelEvent e)
+    {
+        var brushPos = e.Target.MousePosition.x * ScaleFromScreen;
+        var newBrushSize = (brushPos / 150f).Clamp(0.01f, 1f);
+        Editor.BrushSize = newBrushSize;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(BrushSizePercentage);
+    }
+}

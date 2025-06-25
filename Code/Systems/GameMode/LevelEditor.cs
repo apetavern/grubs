@@ -52,7 +52,7 @@ public sealed class LevelEditor : BaseGameMode
 			levelData.LayerDefinition.GetLayer().ReferencedTextures
 				.First().Source = ResourceLibrary.Get<Sdf2DLayer>( "materials/sdf/scorch.sdflayer" );
 
-			// todo: use a list of layers in LayerDefinition and iterate through to initalize all of them
+			// todo: use a list of layers in LayerDefinition and iterate through to initialize all of them
 			var layer = levelData.LayerDefinition.GetLayer();
 			Log.Info( $"Adding {layer.DynamicId} to LayerUtility for resource {levelData.LayerDefinition.GetLayer()}" );
 			LayerUtility.AddLayer( layer.DynamicId, layer );
