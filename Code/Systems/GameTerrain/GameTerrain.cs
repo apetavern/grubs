@@ -13,7 +13,7 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 	public Sdf2DWorld SdfWorld { get; private set; }
 	
 	[Property, ReadOnly]
-	public LayerDefinition ActiveLayerDefinition { get; private set; }
+	public LayerDefinition ActiveLayerDefinition { get; set; }
 
 	private Sdf2DLayer _activeLayer => ActiveLayerDefinition.GetLayer();
 

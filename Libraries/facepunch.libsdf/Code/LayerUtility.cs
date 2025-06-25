@@ -17,7 +17,6 @@ public static class LayerUtility
 
 	public static Resource Get( string layerId )
 	{
-		Log.Info( $"Getting layer {layerId}... {LayerCache.Count}" );
 		return LayerCache.GetValueOrDefault( layerId );
 	}
 }

@@ -1,0 +1,22 @@
+﻿@import '../../../common.scss';
+
+LayerPicker {
+  height: 100px;
+  
+  .material-preview-container {
+    border-radius: 50%;
+    background-color: $camo-darker;
+    overflow: hidden;
+    padding: 20px;
+  }
+  
+  .mat-preview {
+    border-radius: 50%;
+    filter: drop-shadow(0px 1px 4px black);
+    pointer-events: all;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

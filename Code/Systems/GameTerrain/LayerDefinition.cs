@@ -26,24 +26,29 @@ public class LayerDefinition
 		Material.Create( "GenericMaterial", "shaders/gr_foreground_scorch.shader" );
 	
 	public string LayerId { get; set; }
+	public string Name { get; set; }
 	public string MaterialPath { get; set; }
 	public LayerShaderStrategy ShaderStrategy { get; set; }
 
 	[JsonConstructor]
-	public LayerDefinition( string layerId, string materialPath, LayerShaderStrategy shaderStrategy )
+	public LayerDefinition( string layerId, string name, string materialPath, LayerShaderStrategy shaderStrategy )
 	{
 		LayerId = layerId;
+		Name = name;
 		MaterialPath = materialPath;
 		ShaderStrategy = shaderStrategy;
 
 		_layer = CreateLayer();
 	}
 
-	public LayerDefinition( string materialPath, string shaderName )
+	public LayerDefinition( string name, string materialPath, string shaderName )
 	{
 		Log.Info( $"Creating new LayerDefinition for {materialPath} with {shaderName}" );
 		
 		LayerId = Guid.NewGuid().ToString();
+
+		Name = string.IsNullOrEmpty( name ) ? "Default" : name;
+		
 		MaterialPath = materialPath;
 
 		ShaderStrategy = shaderName == "shaders/complex.shader" 

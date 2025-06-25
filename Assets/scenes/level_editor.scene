@@ -144,6 +144,13 @@
           "__guid": "5a335658-7ea4-47e4-af51-3846146073e6",
           "__enabled": true,
           "ActiveLayerDefinition": null,
+          "AvailableMaterials": [
+            "materials/environment/rocks_c.vmat",
+            "materials/environment/sand_shells.vmat",
+            "materials/environment/rocks_d.vmat",
+            "materials/environment/lava_rocks.vmat",
+            "materials/environment/dirt_rocks.vmat"
+          ],
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,

@@ -80,7 +80,7 @@ public sealed class LevelEditor : BaseGameMode
 	{
 		Log.Info( $"Creating new level definition with name {name}" );
 		
-		var layerDefinition = new LayerDefinition( 
+		var layerDefinition = new LayerDefinition( "",
 			DefaultLevelForegroundMaterial.ResourcePath, DefaultLevelForegroundMaterial.ShaderName );
 		
 		var definition = new LevelDefinition
