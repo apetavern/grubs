@@ -50,7 +50,7 @@ public class LevelDefinition
 	
 	public TerrainSize TerrainSize { get; set; }
 	
-	public LayerDefinition LayerDefinition { get; set; }
+	public List<LayerDefinition> Layers { get; set; }
 	
 	public Color TerrainScorchOverride { get; set; }
 	
@@ -70,7 +70,7 @@ public class LevelDefinition
 			CreatedOn = CreatedOn,
 			LastUpdated = LastUpdated,
 			TerrainSize = TerrainSize,
-			LayerDefinition = LayerDefinition,
+			Layers = Layers,
 			TerrainScorchOverride = TerrainScorchOverride,
 			Modifications = Modifications
 		};
@@ -87,7 +87,7 @@ public struct LevelDefinitionData
 	public DateTime CreatedOn { get; set; }
 	public DateTime LastUpdated { get; set; }
 	public TerrainSize TerrainSize { get; set; }
-	public LayerDefinition LayerDefinition { get; set; }
+	public List<LayerDefinition> Layers { get; set; }
 	public Color TerrainScorchOverride { get; set; }
 	public byte[] Modifications { get; set; }
 
@@ -103,7 +103,7 @@ public struct LevelDefinitionData
 			CreatedOn = CreatedOn,
 			LastUpdated = LastUpdated,
 			TerrainSize = TerrainSize,
-			LayerDefinition = LayerDefinition,
+			Layers = Layers,
 			TerrainScorchOverride = TerrainScorchOverride,
 			Modifications = Modifications
 		};

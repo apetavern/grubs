@@ -63,7 +63,7 @@
           "__type": "Grubs.Systems.GameMode.LevelEditor",
           "__guid": "cdb9a0aa-6c5e-4c4e-bc08-9aa7e7dcddbb",
           "__enabled": true,
-          "DefaultLevelForegroundMaterial": "materials/environment/lava_rocks.vmat",
+          "DefaultLevelForegroundMaterial": "materials/environment/rocks_c.vmat",
           "LevelEditorPawnPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player/level_editor_wrapper.prefab"

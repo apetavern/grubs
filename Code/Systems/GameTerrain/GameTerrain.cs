@@ -28,7 +28,7 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 	{
 		LevelDefinition = definition;
 
-		ActiveLayerDefinition = definition.LayerDefinition;
+		ActiveLayerDefinition = definition.Layers.First();
 		
 		await WriteDefinitionToFile( definition );
 		await SdfWorld.ClearAsync();
@@ -38,7 +38,7 @@ public partial class GameTerrain : LocalComponent<GameTerrain>
 	{
 		LevelDefinition = definition;
 		
-		ActiveLayerDefinition = definition.LayerDefinition;
+		ActiveLayerDefinition = definition.Layers.First();
 
 		// OverrideLayerMaterial( GenericMaterial, definition.TerrainForegroundMaterial );
 
