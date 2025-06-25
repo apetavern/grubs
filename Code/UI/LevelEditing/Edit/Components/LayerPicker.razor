@@ -1,0 +1,62 @@
+﻿@namespace Grubs.UI
+
+@using Grubs.Systems.LevelEditing
+@using Grubs.Terrain
+
+@inherits Panel
+
+@if (Definition is null || Layers is null)
+{
+    return;
+}
+
+<root>
+    <div class="material-preview-container" @onclick=@ToggleLayerSelectMenu>
+        <img class="mat-preview" src=@GetMaterialPreviewPathForLayer( SelectedLayerDefinition ) />
+    </div>
+    <div class="layer-select">
+        <label class="selected-layer-option">@SelectedLayerDefinition.Name</label>
+        @if (LayerSelectMenuOpen)
+        {
+            @foreach (var layer in Layers)
+            {
+                <button class="layer-select-option" onclick=@((PanelEvent e) => SelectLayer(e, layer))>
+                    <img class="mat-preview" src=@GetMaterialPreviewPathForLayer( layer ) />
+                    <label class="layer-name">@layer.Name</label>
+                </button>
+            }
+        }
+    </div>
+</root>
+
+@code
+{
+    private static LevelDefinition Definition => GameTerrain.Local.LevelDefinition;
+    private static List<LayerDefinition> Layers => Definition?.Layers;
+    private static LayerDefinition SelectedLayerDefinition => GameTerrain.Local.ActiveLayerDefinition;
+
+    private bool LayerSelectMenuOpen { get; set; } = false;
+
+    private void ToggleLayerSelectMenu()
+    {
+        LayerSelectMenuOpen = !LayerSelectMenuOpen;
+    }
+
+    private void SelectLayer(PanelEvent e, LayerDefinition layerDefinition)
+    {
+        e.StopPropagation();
+        GameTerrain.Local.ActiveLayerDefinition = layerDefinition;
+    }
+
+    private string GetMaterialPreviewPathForLayer(LayerDefinition layerDefinition)
+    {
+        return GameTerrain.Local.AvailableMaterials.FirstOrDefault(
+                m => m.ResourcePath == layerDefinition.MaterialPath)?
+            .ResourcePath + ".png";
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Definition, Layers?.Count, SelectedLayerDefinition, LayerSelectMenuOpen);
+    }
+}
