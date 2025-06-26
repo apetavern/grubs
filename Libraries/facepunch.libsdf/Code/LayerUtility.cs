@@ -9,10 +9,12 @@ public static class LayerUtility
 
 	public static void AddLayer( string layerId, Sdf2DLayer layer )
 	{
-		if ( layerId is null || !LayerCache.TryAdd(layerId, layer) )
+		if ( layerId is null )
 		{
-			Log.Warning( $"Failed to add a layer to the cache: {layerId}" );
+			Log.Warning( $"Failed to add a layer to the cache: layerId was null" );
 		}
+
+		LayerCache.TryAdd( layerId, layer );
 	}
 
 	public static Resource Get( string layerId )

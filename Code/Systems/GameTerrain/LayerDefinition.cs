@@ -67,7 +67,7 @@ public class LayerDefinition
 			_layer = CreateLayer();
 		}
 		
-		return _layer;
+		return LayerUtility.Get( LayerId ) as Sdf2DLayer;
 	}
 
 	private Sdf2DLayer CreateLayer()
@@ -87,8 +87,11 @@ public class LayerDefinition
 			EdgeFaces = 8,
 			ReferencedTextures = StableTextureReference
 		};
+
+		_layer = layer;
 		
-		SetupMaterialOverrides( ref layer );
+		SetupMaterialOverrides( ref layer ); 
+		LayerUtility.AddLayer( LayerId, layer );
 
 		return layer;
 	}

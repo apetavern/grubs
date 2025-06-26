@@ -257,11 +257,11 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 	private const int MaxModificationsPerMessage = 256;
 
 	// ReSharper disable StaticMemberInGenericType
-#pragma warning disable SB3000
+	#pragma warning disable SB3000
 	protected static readonly Dictionary<TypeDescription, int> NetWrite_TypeIndices = new();
 	protected static readonly Dictionary<int, SdfReader<TSdf>> NetRead_TypeReaders = new();
 	// ReSharper enable StaticMemberInGenericType
-#pragma warning restore SB3000
+	#pragma warning restore SB3000
 
 	public int Write( ref ByteStream msg, int prevModifications )
 	{
