@@ -1,6 +1,7 @@
 ﻿@import '../../../common.scss';
 
 SdfShapePicker {
+  position: relative;
   font-family: $font-primary;
   
   .sdf-shape-container {

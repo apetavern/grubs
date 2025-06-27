@@ -13,19 +13,19 @@
 <root>
     <div class="material-preview-container" @onclick=@ToggleLayerSelectMenu>
         <img class="mat-preview" src=@GetMaterialPreviewPathForLayer( SelectedLayerDefinition ) />
-    </div>
-    <div class="layer-select">
-        <label class="selected-layer-option">@SelectedLayerDefinition.Name</label>
-        @if (LayerSelectMenuOpen)
-        {
-            @foreach (var layer in Layers)
+        <div class="layer-select">
+            <label class="selected-layer-option">@SelectedLayerDefinition.Name</label>
+            @if (LayerSelectMenuOpen)
             {
-                <button class="layer-select-option" onclick=@((PanelEvent e) => SelectLayer(e, layer))>
-                    <img class="mat-preview" src=@GetMaterialPreviewPathForLayer( layer ) />
-                    <label class="layer-name">@layer.Name</label>
-                </button>
+                @foreach (var layer in Layers.Where( l => l != SelectedLayerDefinition ))
+                {
+                    <button class="layer-select-option" onclick=@((PanelEvent e) => SelectLayer(e, layer))>
+                        <label class="layer-name">@layer.Name</label>
+                        <img class="mat-preview option" src=@GetMaterialPreviewPathForLayer( layer ) />
+                    </button>
+                }
             }
-        }
+        </div>
     </div>
 </root>
 
@@ -46,6 +46,7 @@
     {
         e.StopPropagation();
         GameTerrain.Local.ActiveLayerDefinition = layerDefinition;
+        ToggleLayerSelectMenu();
     }
 
     private string GetMaterialPreviewPathForLayer(LayerDefinition layerDefinition)
