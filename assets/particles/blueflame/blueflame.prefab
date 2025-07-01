@@ -18,7 +18,7 @@
         "__type": "Sandbox.ParticleEffect",
         "__guid": "513b8223-e762-4aad-8369-6ba30a7bd8a2",
         "__enabled": true,
-        "__version": 1,
+        "__version": 2,
         "Alpha": {
           "Type": "Curve",
           "Evaluation": "Life",
@@ -46,8 +46,7 @@
               "out": 0,
               "mode": "Mirrored"
             }
-          ],
-          "Constants": "1,0,0,0"
+          ]
         },
         "ApplyAlpha": false,
         "ApplyColor": false,
@@ -63,6 +62,11 @@
         "CollisionPrefabChance": 1,
         "CollisionPrefabRotation": 0,
         "CollisionRadius": 1,
+        "ConstantMovement": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
         "Damping": 0,
         "DieOnCollisionChance": 0,
         "FollowerPrefab": null,
@@ -99,7 +103,13 @@
           "ConstantA": "1,1,1,1",
           "ConstantB": "1,1,1,1"
         },
+        "InitialVelocity": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
         "Lifetime": 0.1,
+        "LocalSpace": 0,
         "MaxParticles": 1,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -121,181 +131,18 @@
         "PushStrength": 0,
         "Roll": {
           "Type": "Range",
-          "Evaluation": "Particle",
-          "CurveA": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
+          "Evaluation": "Seed",
           "Constants": "0,360,0,0"
         },
         "Scale": {
           "Type": "Range",
-          "Evaluation": "Particle",
-          "CurveA": [
-            {
-              "x": 0,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.055214725,
-              "y": 0.35638297,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.0797546,
-              "y": 0.8470399,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.15030675,
-              "y": 0.64754796,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.20000002,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.21012272,
-              "y": 0.71137774,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.29601228,
-              "y": 0.9667901,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.32055214,
-              "y": 0.5744681,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.3527607,
-              "y": 0.95612353,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.446319,
-              "y": 0.32473567,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.5276074,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.57515335,
-              "y": 0.6837613,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.65030676,
-              "y": 0.9792247,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.69325155,
-              "y": 0.5319149,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.8000001,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Linear"
-            },
-            {
-              "x": 0.8558282,
-              "y": 0.6892736,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.9141104,
-              "y": 0.9373943,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 0.96779144,
-              "y": 0.7034284,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            },
-            {
-              "x": 1,
-              "y": 1,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
+          "Evaluation": "Seed",
           "Constants": "0.8,1.2,0,0"
         },
         "SequenceId": 0,
         "SequenceSpeed": 1,
         "SequenceTime": 1,
         "SheetSequence": false,
-        "Space": "World",
         "StartDelay": 0,
         "StartVelocity": 0,
         "Stretch": 0,
@@ -331,6 +178,7 @@
           "BloomLayer": false,
           "AfterUILayer": false
         },
+        "RotateWithGameObject": true,
         "Scale": 0.5
       },
       {
@@ -362,24 +210,6 @@
         "Brightness": {
           "Type": "Range",
           "Evaluation": "Life",
-          "CurveA": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
           "Constants": "2,5,0,0"
         },
         "CastShadows": false,

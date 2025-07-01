@@ -29,7 +29,7 @@
         "__type": "Sandbox.ParticleEffect",
         "__guid": "178a4769-0a90-4534-9f52-e79c0f79d5a0",
         "__enabled": true,
-        "__version": 1,
+        "__version": 2,
         "Alpha": {
           "Type": "Curve",
           "Evaluation": "Life",
@@ -57,8 +57,7 @@
               "out": 0,
               "mode": "Mirrored"
             }
-          ],
-          "Constants": "1,0,0,0"
+          ]
         },
         "ApplyAlpha": false,
         "ApplyColor": false,
@@ -74,6 +73,11 @@
         "CollisionPrefabChance": 1,
         "CollisionPrefabRotation": 0,
         "CollisionRadius": 1,
+        "ConstantMovement": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
         "Damping": 0,
         "DieOnCollisionChance": 0,
         "FollowerPrefab": null,
@@ -110,7 +114,13 @@
           "ConstantA": "1,1,1,1",
           "ConstantB": "1,1,1,1"
         },
+        "InitialVelocity": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
         "Lifetime": 0.1,
+        "LocalSpace": 0,
         "MaxParticles": 1,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -132,86 +142,18 @@
         "PushStrength": 0,
         "Roll": {
           "Type": "Range",
-          "Evaluation": "Particle",
-          "CurveA": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
+          "Evaluation": "Seed",
           "Constants": "0,360,0,0"
         },
         "Scale": {
           "Type": "Range",
-          "Evaluation": "Particle",
-          "CurveA": {
-            "rangey": "0.75,1",
-            "frames": [
-              {
-                "x": 0,
-                "y": 0,
-                "in": 0,
-                "out": 0,
-                "mode": "Mirrored"
-              },
-              {
-                "x": 0.25,
-                "y": 1,
-                "in": 0,
-                "out": 0,
-                "mode": "Mirrored"
-              },
-              {
-                "x": 0.35,
-                "y": 0.9,
-                "in": 0,
-                "out": 0,
-                "mode": "Mirrored"
-              },
-              {
-                "x": 0.5,
-                "y": 1,
-                "in": 0,
-                "out": 0,
-                "mode": "Mirrored"
-              },
-              {
-                "x": 1,
-                "y": 0,
-                "in": 0,
-                "out": 0,
-                "mode": "Mirrored"
-              }
-            ]
-          },
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
+          "Evaluation": "Seed",
           "Constants": "0.8,1.2,0,0"
         },
         "SequenceId": 0,
         "SequenceSpeed": 1,
         "SequenceTime": 1,
         "SheetSequence": false,
-        "Space": "World",
         "StartDelay": 0,
         "StartVelocity": 0,
         "Stretch": 0,
@@ -247,6 +189,7 @@
           "BloomLayer": false,
           "AfterUILayer": false
         },
+        "RotateWithGameObject": true,
         "Scale": 0.25
       },
       {
@@ -277,25 +220,7 @@
         "Attenuation": 0.1,
         "Brightness": {
           "Type": "Range",
-          "Evaluation": "Particle",
-          "CurveA": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
+          "Evaluation": "Seed",
           "Constants": "2,5,0,0"
         },
         "CastShadows": false,
