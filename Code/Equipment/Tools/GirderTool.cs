@@ -95,7 +95,8 @@ public sealed class GirderTool : Tool
 		if ( !CursorCollider.IsValid() || !GameObject.IsValid() )
 			return false;
 
-		var trLocation = Scene.Trace.Body( CursorCollider.KeyframeBody, grub.Owner.MousePosition )
+		var trLocation = Scene.Trace.Box( CursorCollider.Model.Bounds.Grow( -2f ), grub.Owner.MousePosition, grub.Owner.MousePosition )
+			.Rotated( CursorVisual.WorldRotation )
 			.IgnoreGameObject( GameObject )
 			.Run();
 

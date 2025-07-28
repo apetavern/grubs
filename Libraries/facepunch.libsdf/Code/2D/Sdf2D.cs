@@ -379,7 +379,7 @@ public readonly struct TextureSdf : ISdf2D
 	public static TextureSdf ReadRaw( ref ByteStream reader, IReadOnlyDictionary<int, SdfReader<ISdf2D>> sdfTypes )
 	{
 		return new TextureSdf(
-			Texture.Load( FileSystem.Mounted, reader.Read<string>() ),
+			Texture.Load( reader.Read<string>() ),
 			reader.Read<int>(),
 			(ColorChannel) reader.Read<byte>(),
 			reader.Read<Vector2>(),

@@ -26,23 +26,23 @@
             if (Scene is null)
                 return;
 
-            World = Scene.SceneWorld;
+            RenderScene = Scene;
 
             var center = new Vector3(0f, 512f, (GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f) / 2f);
             var w = GrubsTerrain.Instance?.WorldTextureLength ?? 2048f;
             var h = GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f;
 
-            var distX = w / (2 * MathF.Tan(Camera.FieldOfView / 2f * 0.017f));
+            var distX = w / (2 * MathF.Tan(RenderScene.Camera.FieldOfView / 2f * 0.017f));
 
             // I think this is wrong but it works for most scenarios.
-            var distY = h * 2 / (2 * MathF.Tan(Camera.FieldOfView / 2f * 0.017f));
+            var distY = h * 2 / (2 * MathF.Tan(RenderScene.Camera.FieldOfView / 2f * 0.017f));
 
             var distance = Math.Max(distX, distY);
 
-            Camera.Rotation = Rotation.FromYaw(90f);
-            Camera.Position = (GrubsTerrain.Instance?.WorldPosition ?? new Vector3(0, 512f, 0)) + Vector3.Up * h / 2f - Camera.Rotation.Forward * distance;
-            Camera.ZNear = 100f;
-            Camera.ZFar = 100000f;
+            RenderScene.Camera.WorldRotation = Rotation.FromYaw(90f);
+            RenderScene.Camera.WorldPosition = (GrubsTerrain.Instance?.WorldPosition ?? new Vector3(0, 512f, 0)) + Vector3.Up * h / 2f - RenderScene.Camera.WorldRotation.Forward * distance;
+            RenderScene.Camera.ZNear = 100f;
+            RenderScene.Camera.ZFar = 100000f;
         }
     }
 

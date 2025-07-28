@@ -671,7 +671,7 @@ public abstract partial class SdfWorld<TWorld, TChunk, TResource, TChunkKey, TAr
 				Transform = Transform.World
 			};
 
-			PhysicsBody.SetComponentSource( this );
+			PhysicsBody.Component = this;
 		}
 
 		return PhysicsBody.AddMeshShape( vertices, indices );
