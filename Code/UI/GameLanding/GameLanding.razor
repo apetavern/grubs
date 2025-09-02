@@ -28,7 +28,7 @@
         </div>
         <div class="terrain-preview">
             <label>Terrain Preview</label>
-            <TerrainPreview/>
+            <TerrainPreview RenderCamera=@PreviewCamera />
         </div>
         <div class="controls">
             @if (IsHost() && Player.All.Count() == 1)
@@ -58,6 +58,8 @@
     public Panel MenuBody { get; set; }
 
     private Panel GameRulesPanel { get; set; }
+
+	[Property] public CameraComponent PreviewCamera { get; set; }
 
     public bool IsHost()
     {

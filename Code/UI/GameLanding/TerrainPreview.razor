@@ -1,13 +1,18 @@
 @namespace Grubs.UI.GameLanding
 
+@using Grubs.Systems.GameMode
 @using Grubs.Terrain
 
-@inherits ScenePanel
+@inherits Panel
 
 <style>
     TerrainPreview {
         width: 100%;
         height: 100%;
+
+		> image {
+			width: 100%;
+		}
     }
 </style>
 
@@ -16,34 +21,45 @@
     {
         <i onclick=@RefreshTerrain>refresh</i>
     }
+	@if ( !BaseGameMode.Current?.GameStarted ?? false )
+	{
+		<Image Texture=@Texture />
+	}
 </root>
 
 @code
 {
-    public override void Tick()
-    {
-        {
-            if (Scene is null)
-                return;
+	public CameraComponent RenderCamera { get; set; }
 
-            RenderScene = Scene;
+	private Texture Texture;
 
-            var center = new Vector3(0f, 512f, (GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f) / 2f);
-            var w = GrubsTerrain.Instance?.WorldTextureLength ?? 2048f;
-            var h = GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f;
+	public override void Tick()
+	{
+		if ( !Game.ActiveScene.IsValid() || !RenderCamera.IsValid() )
+		{
+			return;	
+		}
 
-            var distX = w / (2 * MathF.Tan(RenderScene.Camera.FieldOfView / 2f * 0.017f));
+		var textureSize = Box.Rect.Size == 0 ? new Vector2(500, 300) : Box.Rect.Size;
+		RenderCamera.RenderTarget = Texture.CreateRenderTarget( "terrain-preview", ImageFormat.RGBA8888, textureSize );
 
-            // I think this is wrong but it works for most scenarios.
-            var distY = h * 2 / (2 * MathF.Tan(RenderScene.Camera.FieldOfView / 2f * 0.017f));
+		Texture = RenderCamera.RenderTarget;
 
-            var distance = Math.Max(distX, distY);
+        var center = new Vector3(0f, 512f, (GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f) / 2f);
+        var w = GrubsTerrain.Instance?.WorldTextureLength ?? 2048f;
+        var h = GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f;
 
-            RenderScene.Camera.WorldRotation = Rotation.FromYaw(90f);
-            RenderScene.Camera.WorldPosition = (GrubsTerrain.Instance?.WorldPosition ?? new Vector3(0, 512f, 0)) + Vector3.Up * h / 2f - RenderScene.Camera.WorldRotation.Forward * distance;
-            RenderScene.Camera.ZNear = 100f;
-            RenderScene.Camera.ZFar = 100000f;
-        }
+        var distX = w / (2 * MathF.Tan(RenderCamera.FieldOfView / 2f * 0.017f));
+
+        // I think this is wrong but it works for most scenarios.
+        var distY = h * 2 / (2 * MathF.Tan(RenderCamera.FieldOfView / 2f * 0.017f));
+
+        var distance = Math.Max(distX, distY);
+
+        RenderCamera.WorldRotation = Rotation.FromYaw(90f);
+        RenderCamera.WorldPosition = (GrubsTerrain.Instance?.WorldPosition ?? new Vector3(0, 512f, 0)) + Vector3.Up * h / 2f - RenderCamera.WorldRotation.Forward * distance;
+        RenderCamera.ZNear = 100f;
+        RenderCamera.ZFar = 100000f;
     }
 
     private void RefreshTerrain()
@@ -53,6 +69,6 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(GrubsConfig.WorldTerrainType);
+        return HashCode.Combine(Time.Now);
     }
 }
