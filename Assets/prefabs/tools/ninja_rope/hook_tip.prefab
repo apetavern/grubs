@@ -192,21 +192,37 @@
         }
       },
       {
-        "__type": "Grubs.Helpers.VecLineRenderer",
-        "__guid": "a36572c7-42f9-4dfc-b6ad-6adf9ac68cac",
+        "__type": "Sandbox.LineRenderer",
+        "__guid": "68567660-7bb0-42ea-90bf-db2429f0211d",
         "__enabled": true,
+        "Additive": false,
+        "AutoCalculateNormals": true,
+        "CastShadows": true,
         "Color": {
           "blend": "Linear",
           "color": [
             {
-              "t": 0.5,
+              "t": 0,
+              "c": "1,1,1,1"
+            },
+            {
+              "t": 1,
               "c": "1,1,1,1"
             }
           ],
-          "alpha": []
+          "alpha": [
+            {
+              "t": 1,
+              "a": 1
+            }
+          ]
         },
+        "CylinderSegments": 12,
+        "DepthFeather": 0,
         "EndCap": "None",
-        "LineTexture": null,
+        "Face": "Camera",
+        "FogStrength": 1,
+        "Lighting": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -215,11 +231,29 @@
         "OnComponentUpdate": null,
         "Opaque": true,
         "Points": [],
-        "SplineBias": 0,
-        "SplineContinuity": 0,
-        "SplineInterpolation": 0,
-        "SplineTension": 0,
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "SplineBias": 1,
+        "SplineContinuity": 1,
+        "SplineInterpolation": 10,
+        "SplineTension": 1,
         "StartCap": "None",
+        "Texturing": {
+          "Texture": null,
+          "Material": "materials/effects/rope/rope_a.vmat",
+          "WorldSpace": true,
+          "UnitsPerTexture": 10,
+          "Scale": 1,
+          "Offset": 0,
+          "Scroll": 0,
+          "Clamp": false
+        },
+        "UseVectorPoints": true,
+        "VectorPoints": [],
         "Width": {
           "rangey": "0,3",
           "frames": [
@@ -343,9 +377,9 @@
             "RopeLength": 0,
             "RopeRenderer": {
               "_type": "component",
-              "component_id": "a36572c7-42f9-4dfc-b6ad-6adf9ac68cac",
+              "component_id": "68567660-7bb0-42ea-90bf-db2429f0211d",
               "go": "313ab67d-9770-457c-9725-adaa92a715e6",
-              "component_type": "VecLineRenderer"
+              "component_type": "LineRenderer"
             },
             "SpringJoint": {
               "_type": "component",
