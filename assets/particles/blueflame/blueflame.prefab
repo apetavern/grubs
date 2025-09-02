@@ -18,7 +18,7 @@
         "__type": "Sandbox.ParticleEffect",
         "__guid": "513b8223-e762-4aad-8369-6ba30a7bd8a2",
         "__enabled": true,
-        "__version": 2,
+        "__version": 3,
         "Alpha": {
           "Type": "Curve",
           "Evaluation": "Life",

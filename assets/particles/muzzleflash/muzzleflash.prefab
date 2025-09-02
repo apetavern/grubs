@@ -29,7 +29,7 @@
         "__type": "Sandbox.ParticleEffect",
         "__guid": "178a4769-0a90-4534-9f52-e79c0f79d5a0",
         "__enabled": true,
-        "__version": 2,
+        "__version": 3,
         "Alpha": {
           "Type": "Curve",
           "Evaluation": "Life",
@@ -161,7 +161,11 @@
         "Timing": "GameTime",
         "Tint": "1,1,1,1",
         "UsePrefabFeature": false,
-        "Yaw": 0
+        "Yaw": {
+          "Type": "Range",
+          "Evaluation": "Seed",
+          "Constants": "0,0,0,0"
+        }
       },
       {
         "__type": "Sandbox.ParticleModelRenderer",
