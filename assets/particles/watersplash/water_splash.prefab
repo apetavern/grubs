@@ -18,7 +18,7 @@
         "__type": "Sandbox.ParticleEffect",
         "__guid": "bf207005-3137-4fb5-b9e6-25f0817496bf",
         "__enabled": true,
-        "__version": 1,
+        "__version": 3,
         "Alpha": {
           "Type": "Curve",
           "Evaluation": "Life",
@@ -60,8 +60,7 @@
               "out": 0,
               "mode": "Mirrored"
             }
-          ],
-          "Constants": "1,0,0,0"
+          ]
         },
         "ApplyAlpha": false,
         "ApplyColor": true,
@@ -77,6 +76,11 @@
         "CollisionPrefabChance": 1,
         "CollisionPrefabRotation": 0,
         "CollisionRadius": 1,
+        "ConstantMovement": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
         "Damping": 0,
         "DieOnCollisionChance": 0,
         "FollowerPrefab": null,
@@ -113,7 +117,13 @@
           "ConstantA": "1,1,1,1",
           "ConstantB": "1,1,1,1"
         },
+        "InitialVelocity": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        },
         "Lifetime": 1,
+        "LocalSpace": 0,
         "MaxParticles": 1,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -133,29 +143,7 @@
         "Pitch": 0,
         "PreWarm": 0,
         "PushStrength": 0,
-        "Roll": {
-          "Type": "Range",
-          "Evaluation": "Particle",
-          "CurveA": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "CurveB": [
-            {
-              "x": 0.5,
-              "y": 0.5,
-              "in": 0,
-              "out": 0,
-              "mode": "Mirrored"
-            }
-          ],
-          "Constants": "0,360,0,0"
-        },
+        "Roll": 0,
         "Scale": {
           "Type": "Curve",
           "Evaluation": "Life",
@@ -190,14 +178,12 @@
               "out": 0,
               "mode": "Mirrored"
             }
-          ],
-          "Constants": "1,0,0,0"
+          ]
         },
         "SequenceId": 0,
         "SequenceSpeed": 1,
         "SequenceTime": 1,
         "SheetSequence": false,
-        "Space": "World",
         "StartDelay": 0,
         "StartVelocity": 0,
         "Stretch": 0,
@@ -205,7 +191,11 @@
         "Timing": "GameTime",
         "Tint": "1,1,1,1",
         "UsePrefabFeature": false,
-        "Yaw": 0
+        "Yaw": {
+          "Type": "Range",
+          "Evaluation": "Seed",
+          "Constants": "0,360,0,0"
+        }
       },
       {
         "__type": "Sandbox.ParticleModelRenderer",
@@ -233,6 +223,7 @@
           "BloomLayer": false,
           "AfterUILayer": false
         },
+        "RotateWithGameObject": false,
         "Scale": 0.5
       },
       {
@@ -277,7 +268,7 @@
             "__type": "Sandbox.ParticleEffect",
             "__guid": "55827179-04d8-4676-adb8-c2716faa228b",
             "__enabled": true,
-            "__version": 1,
+            "__version": 3,
             "Alpha": {
               "Type": "Curve",
               "Evaluation": "Life",
@@ -305,8 +296,7 @@
                   "out": 0,
                   "mode": "Mirrored"
                 }
-              ],
-              "Constants": "1,0,0,0"
+              ]
             },
             "ApplyAlpha": false,
             "ApplyColor": false,
@@ -322,6 +312,11 @@
             "CollisionPrefabChance": 1,
             "CollisionPrefabRotation": 0,
             "CollisionRadius": 1,
+            "ConstantMovement": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            },
             "Damping": 1,
             "DieOnCollisionChance": 0,
             "FollowerPrefab": null,
@@ -358,7 +353,13 @@
               "ConstantA": "1,1,1,1",
               "ConstantB": "1,1,1,1"
             },
+            "InitialVelocity": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            },
             "Lifetime": 1,
+            "LocalSpace": 0,
             "MaxParticles": 15,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
@@ -375,32 +376,14 @@
             },
             "OrbitalPull": 0,
             "PerParticleTimeScale": 1,
-            "Pitch": 0,
-            "PreWarm": 0,
-            "PushStrength": 0,
-            "Roll": {
+            "Pitch": {
               "Type": "Range",
-              "Evaluation": "Particle",
-              "CurveA": [
-                {
-                  "x": 0.5,
-                  "y": 0.5,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                }
-              ],
-              "CurveB": [
-                {
-                  "x": 0.5,
-                  "y": 0.5,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                }
-              ],
+              "Evaluation": "Seed",
               "Constants": "0,0,0,0"
             },
+            "PreWarm": 0,
+            "PushStrength": 0,
+            "Roll": 0,
             "Scale": {
               "Type": "Curve",
               "Evaluation": "Life",
@@ -435,36 +418,16 @@
                   "out": 0,
                   "mode": "Mirrored"
                 }
-              ],
-              "Constants": "1,0,0,0"
+              ]
             },
             "SequenceId": 0,
             "SequenceSpeed": 1,
             "SequenceTime": 1,
             "SheetSequence": false,
-            "Space": "World",
             "StartDelay": 0,
             "StartVelocity": {
               "Type": "Range",
-              "Evaluation": "Particle",
-              "CurveA": [
-                {
-                  "x": 0.5,
-                  "y": 0.5,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                }
-              ],
-              "CurveB": [
-                {
-                  "x": 0.5,
-                  "y": 0.5,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                }
-              ],
+              "Evaluation": "Seed",
               "Constants": "50,100,0,0"
             },
             "Stretch": 0,
@@ -474,25 +437,7 @@
             "UsePrefabFeature": false,
             "Yaw": {
               "Type": "Range",
-              "Evaluation": "Particle",
-              "CurveA": [
-                {
-                  "x": 0.5,
-                  "y": 0.5,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                }
-              ],
-              "CurveB": [
-                {
-                  "x": 0.5,
-                  "y": 0.5,
-                  "in": 0,
-                  "out": 0,
-                  "mode": "Mirrored"
-                }
-              ],
+              "Evaluation": "Seed",
               "Constants": "0,0,0,0"
             }
           },
@@ -529,7 +474,8 @@
             "Scale": 1.2,
             "Shadows": false,
             "SortMode": "Unsorted",
-            "Texture": "materials/particles/shapes/circle1.vtex"
+            "Texture": "textures/shapes/circle1.vtex",
+            "TextureFilter": "Bilinear"
           },
           {
             "__type": "Sandbox.ParticleConeEmitter",
