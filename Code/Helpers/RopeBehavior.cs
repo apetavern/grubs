@@ -50,7 +50,7 @@ public sealed class RopeBehavior : Component
 		var initialLength = Vector3.DistanceBetween( HookObject.WorldPosition, Grub.WorldPosition );
 		RopeLength = initialLength;
 		
-		SpringJoint.MaxLength = initialLength;
+		SpringJoint.RestLength = initialLength;
 
 		// Use manual local frames for the spring joint so that the spring starts "expanded" to some degree
 		// between the hook tip and the mountable.
@@ -92,7 +92,7 @@ public sealed class RopeBehavior : Component
 			Rigidbody.Velocity += Vector3.Forward * Input.AnalogMove.y * -RopeSwingSpeed;
 		
 		if ( SpringJoint.IsValid() )
-			SpringJoint.MaxLength = RopeLength;
+			SpringJoint.RestLength = RopeLength;
 
 		// It's possible the mountable was destroyed before this has been cleaned up.
 		if ( !Mountable.IsValid() || !Grub.IsValid() )
@@ -117,7 +117,7 @@ public sealed class RopeBehavior : Component
 		{
 			AttachPoint.WorldPosition = tr.HitPosition + tr.Normal;
 			CornerObjects.Add( tr.HitPosition + tr.Normal );
-			SpringJoint.MaxLength = RopeLength;
+			SpringJoint.RestLength = RopeLength;
 		}
 		
 		if ( CornerObjects.Count > 1 )
