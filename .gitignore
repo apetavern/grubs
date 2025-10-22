@@ -43,8 +43,10 @@ _bakeresourcecache/
 # Allowlist
 !*_dev.vpk
 !models/citizen_clothes/*/*
+
 .idea
 grubs.sln
+*.slnx
 Libraries/facepunch.libsdf/.bin
 Libraries/trndlr.quickswitcher/.bin
 .sbox/project.json
