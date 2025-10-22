@@ -45,10 +45,15 @@
               "mode": "Mirrored"
             }
           ],
-          "CurveB": {
-            "rangex": "0,0",
-            "rangey": "0,0"
-          }
+          "CurveB": [
+            {
+              "x": 0.5,
+              "y": 0.5,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ]
         },
         "BeamColor": {
           "Type": "Gradient",
@@ -105,11 +110,7 @@
           "ConstantA": "1,0.8162,0.42326,1",
           "ConstantB": "1,1,1,0"
         },
-        "BeamLifetime": {
-          "Type": "Range",
-          "Evaluation": "Frame",
-          "Constants": "0.01,0.05,0,0"
-        },
+        "BeamLifetime": 0.2,
         "BeamsPerSecond": 1,
         "Brightness": {
           "Type": "Range",
@@ -118,7 +119,7 @@
         },
         "DepthFeather": 0,
         "FollowPoints": true,
-        "InitialBurst": 0,
+        "InitialBurst": 1,
         "Lighting": false,
         "Looped": false,
         "Material": null,
@@ -149,6 +150,31 @@
           "Evaluation": "Life",
           "Constants": "0,1,0,0"
         }
+      },
+      {
+        "__type": "Grubs.Systems.Particles.TracerParticles",
+        "__guid": "53875d90-a439-438b-b33e-e65dba880c4f",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "TemporaryEffect",
+        "__guid": "c9182b07-b2b7-4dd5-8cf0-3340a1364298",
+        "__enabled": true,
+        "BecomeOrphan": false,
+        "DestroyAfterSeconds": 0.2,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "WaitForChildEffects": true
       }
     ],
     "Children": [

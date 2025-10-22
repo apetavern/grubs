@@ -24,6 +24,8 @@ public class HitScanWeapon : Weapon
 	private int _tracesFired = 0;
 	private TimeSince _timeSinceLastTrace = 0;
 
+	private TracerParticles _tracerParticles { get; set; }
+
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
@@ -77,7 +79,7 @@ public class HitScanWeapon : Weapon
 
 		var transform = new Transform( startPos, grub.PlayerController.EyeRotation );
 		var muzzle = Equipment.Model.GetAttachment( "muzzle" );
-		
+
 		var pitch = muzzle?.Rotation.Pitch() ?? transform.Rotation.Pitch();
 		Log.Info( pitch );
 		var facing = grub.PlayerController.Facing;
@@ -85,7 +87,7 @@ public class HitScanWeapon : Weapon
 		{
 			pitch -= 180f;
 		}
-		
+
 		MuzzleParticles.Spawn()
 			.SetWorldPosition( muzzle?.Position ?? transform.Position )
 			.SetPitch( pitch * facing );
@@ -94,6 +96,11 @@ public class HitScanWeapon : Weapon
 			.WithAnyTags( "solid", "player", "pickup" )
 			.WithoutTags( "dead" )
 			.IgnoreGameObjectHierarchy( Equipment.Grub.GameObject );
+
+		if ( traceCount > 0 )
+		{
+			_tracerParticles = TracerParticles.Spawn( PenetrateWorld ).SetWorldPosition( startPos ).SetEndPoint( endPos );
+		}
 
 		if ( PenetrateWorld )
 		{
@@ -134,6 +141,11 @@ public class HitScanWeapon : Weapon
 		// 	traceParticles.SetControlPoint( 1, tr.EndPosition );
 		// }
 
+		if ( _tracerParticles.IsValid() && !PenetrateWorld )
+		{
+			_tracerParticles.SetEndPoint( tr.Hit ? tr.HitPosition : tr.EndPosition );
+		}
+
 		if ( !tr.Hit )
 			return false;
 
@@ -147,7 +159,7 @@ public class HitScanWeapon : Weapon
 			HitGrub( grub, -tr.Normal, tr.HitPosition );
 			return false;
 		}
-		
+
 		if ( tr.GameObject.Components.TryGet( out Health health, FindMode.EverythingInSelfAndAncestors ) )
 		{
 			if ( !health.IsValid() )
@@ -155,7 +167,7 @@ public class HitScanWeapon : Weapon
 			health.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, tr.HitPosition ) );
 			return false;
 		}
-		
+
 		if ( !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return false;
 
@@ -171,7 +183,7 @@ public class HitScanWeapon : Weapon
 	{
 		if ( !grub.IsValid() || !Equipment.IsValid() || !Equipment.Grub.IsValid() )
 			return;
-		
+
 		grub.CharacterController?.Punch( direction * HitForce );
 		grub.Health?.TakeDamage( GrubsDamageInfo.FromHitscan( Damage, Equipment.Grub.Id, Equipment.Grub.Name, position ) );
 

@@ -67,11 +67,7 @@
           "ConstantA": "0,0.98333,1,1",
           "ConstantB": "0,0.26667,1,1"
         },
-        "BeamLifetime": {
-          "Type": "Range",
-          "Evaluation": "Frame",
-          "Constants": "0.1,0.2,0,0"
-        },
+        "BeamLifetime": 0.1,
         "BeamsPerSecond": 1,
         "Brightness": {
           "Type": "Curve",
@@ -210,11 +206,7 @@
           "ConstantA": "1,0.98829,0.29767,1",
           "ConstantB": "1,0.45,0,1"
         },
-        "BeamLifetime": {
-          "Type": "Range",
-          "Evaluation": "Frame",
-          "Constants": "0.1,0.2,0,0"
-        },
+        "BeamLifetime": 0.1,
         "BeamsPerSecond": 1,
         "Brightness": 2,
         "DepthFeather": 32,
@@ -283,11 +275,7 @@
           "ConstantA": "1,1,1,1",
           "ConstantB": "1,1,1,1"
         },
-        "BeamLifetime": {
-          "Type": "Range",
-          "Evaluation": "Frame",
-          "Constants": "0,0.2,0,0"
-        },
+        "BeamLifetime": 0.2,
         "BeamsPerSecond": 1,
         "Brightness": {
           "Type": "Range",
@@ -327,6 +315,31 @@
           "Evaluation": "Life",
           "Constants": "0,1,0,0"
         }
+      },
+      {
+        "__type": "Grubs.Systems.Particles.TracerParticles",
+        "__guid": "5b6f04d1-41cb-4c35-b376-fad3c97a1c7e",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "TemporaryEffect",
+        "__guid": "07a1cf9c-b1b9-42b8-8354-bf1bd014ac9c",
+        "__enabled": true,
+        "BecomeOrphan": false,
+        "DestroyAfterSeconds": 0.2,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "WaitForChildEffects": true
       }
     ],
     "Children": [
