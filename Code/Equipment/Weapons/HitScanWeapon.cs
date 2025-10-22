@@ -18,6 +18,7 @@ public class HitScanWeapon : Weapon
 	[Property, Category( "Trace" )] public float TraceDistance { get; set; } = 0f;
 	[Property, Category( "Trace" )] public float TraceSpread { get; set; } = 1f;
 	[Property, Category( "Trace" )] public float TraceDelay { get; set; } = 0f;
+	[Property, Category( "Trace" )] public TracerParticles.TracerEffectType TracerEffect { get; set; } = TracerParticles.TracerEffectType.Normal;
 	[Property, Category( "Explosion" )] public float ExplosionRadius { get; set; } = 0f;
 	[Property, Category( "Explosion" )] public float ExplosionDamage { get; set; } = 0f;
 
@@ -99,7 +100,7 @@ public class HitScanWeapon : Weapon
 
 		if ( traceCount > 0 )
 		{
-			_tracerParticles = TracerParticles.Spawn( PenetrateWorld ).SetWorldPosition( startPos ).SetEndPoint( endPos );
+			_tracerParticles = TracerParticles.Spawn( TracerEffect ).SetWorldPosition( startPos ).SetEndPoint( endPos );
 		}
 
 		if ( PenetrateWorld )

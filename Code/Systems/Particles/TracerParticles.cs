@@ -6,9 +6,21 @@ public sealed class TracerParticles : Component
 	private const string TracerParticlesPath = "particles/guntrace/guntrace.prefab";
 	private const string RailgunParticlesPath = "particles/guntrace/railgun.prefab";
 
-	public static TracerParticles Spawn( bool railgun = false )
+	public enum TracerEffectType
 	{
-		var go = GameObject.Clone( railgun ? RailgunParticlesPath : TracerParticlesPath );
+		Normal,
+		Railgun
+	}
+
+	public static TracerParticles Spawn( TracerEffectType type = TracerEffectType.Normal )
+	{
+		var path = type switch
+		{
+			TracerEffectType.Railgun => RailgunParticlesPath,
+			_ => TracerParticlesPath
+		};
+
+		var go = GameObject.Clone( path );
 		var particles = go.Components.Get<TracerParticles>();
 		return particles;
 	}

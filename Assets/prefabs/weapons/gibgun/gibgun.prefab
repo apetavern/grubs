@@ -1,25 +1,67 @@
 {
   "RootObject": {
     "__guid": "1513b0fb-85e4-445f-a35c-04809c58db59",
+    "__version": 1,
     "Flags": 0,
     "Name": "gibgun",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
+    "NetworkOrphaned": 0,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "c30592dc-97b6-4ec8-b82e-b01dd0a86a05",
+        "__enabled": true,
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Materials": null,
         "Model": "models/weapons/railgun/railgun.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "PlaybackRate": 1,
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null,
+          "Looping": true,
+          "Blending": false
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
         "__guid": "5eddc0d1-e53e-46eb-9ea8-d582b85aec8c",
+        "__enabled": true,
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/gibgun.geq",
         "HoldPose": "Rifle",
@@ -31,6 +73,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Gibgun",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": true,
         "SlotIndex": 0,
         "UnlockDelay": 4
@@ -38,6 +86,7 @@
       {
         "__type": "Grubs.Equipment.Weapons.HitScanWeapon",
         "__guid": "3798a432-0d48-4ff6-97d7-235c4b38cfda",
+        "__enabled": true,
         "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
@@ -55,23 +104,52 @@
         "FiringType": "Instant",
         "HitForce": "50,0,350",
         "MaxUses": 1,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnFire": null,
+        "OnFireFinished": null,
         "PenetrateTargets": true,
         "PenetrateWorld": true,
+        "StartMultiplier": 1,
         "TraceCount": 1,
         "TraceDelay": 0,
         "TraceDistance": 5000,
-        "TraceParticles": "particles/guntrace/railgun.vpcf",
+        "TracerEffect": "Railgun",
         "TraceSpread": 1,
         "UseSound": "sounds/weapons/gibgun/gibgun_shot.sound"
       }
     ],
     "Children": [],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
     "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "ResourceVersion": 1,
+  "DontBreakAsTemplate": false,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
