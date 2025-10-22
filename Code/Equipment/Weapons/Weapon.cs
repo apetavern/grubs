@@ -244,7 +244,7 @@ public partial class Weapon : Component
 
 		ChargeGauge.WorldPosition = muzzle.Position;
 		ChargeGauge.WorldRotation = Rotation.LookAt( GetMuzzleForward() ) * Rotation.FromPitch( 90 );
-		ChargeGauge.SceneModel.Attributes.Set( "charge", _weaponCharge / 100f );
+		ChargeGauge.Materials.GetOriginal( 0 ).Set( "g_flfadeamount", _weaponCharge / 100f );
 
 		_weaponCharge = (int)Math.Clamp( _startedCharging / 2f * 100f, 0f, 100f );
 
