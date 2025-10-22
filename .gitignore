@@ -1,4 +1,4 @@
-﻿# Sandbox
+# Sandbox
 code/accesslist.txt
 code/code.sln
 Properties
@@ -49,3 +49,4 @@ Libraries/facepunch.libsdf/.bin
 Libraries/trndlr.quickswitcher/.bin
 .sbox/project.json
 .sbox
+*.slnx
