@@ -31,8 +31,50 @@
               "mode": "Linear"
             },
             {
+              "x": 0.14375,
+              "y": 0.20535713,
+              "in": 0,
+              "out": 0,
+              "mode": "Linear"
+            },
+            {
+              "x": 0.2140625,
+              "y": 0.7853174,
+              "in": 0,
+              "out": 0,
+              "mode": "Linear"
+            },
+            {
+              "x": 0.30625,
+              "y": 0.4375,
+              "in": 0,
+              "out": 0,
+              "mode": "Linear"
+            },
+            {
               "x": 0.7,
               "y": 1,
+              "in": 0,
+              "out": 0,
+              "mode": "Linear"
+            },
+            {
+              "x": 0.7984375,
+              "y": 0.6770833,
+              "in": 0,
+              "out": 0,
+              "mode": "Linear"
+            },
+            {
+              "x": 0.828125,
+              "y": 0.15655172,
+              "in": 0,
+              "out": 0,
+              "mode": "Linear"
+            },
+            {
+              "x": 0.9140625,
+              "y": 0.26103306,
               "in": 0,
               "out": 0,
               "mode": "Linear"
@@ -74,6 +116,10 @@
                 "c": "0,0,0,1"
               },
               {
+                "t": 0.35,
+                "c": "1,0.8902,0.49412,1"
+              },
+              {
                 "t": 0.75,
                 "c": "1,0.89016,0.49302,1"
               },
@@ -86,6 +132,10 @@
               {
                 "t": 0,
                 "a": 0
+              },
+              {
+                "t": 0.35,
+                "a": 1
               },
               {
                 "t": 0.75,
@@ -110,12 +160,12 @@
           "ConstantA": "1,0.8162,0.42326,1",
           "ConstantB": "1,1,1,0"
         },
-        "BeamLifetime": 0.2,
+        "BeamLifetime": 0.02,
         "BeamsPerSecond": 1,
         "Brightness": {
           "Type": "Range",
           "Evaluation": "Frame",
-          "Constants": "0.5,1.5,0,0"
+          "Constants": "1,2,0,0"
         },
         "DepthFeather": 0,
         "FollowPoints": true,
@@ -130,8 +180,8 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "Opaque": false,
-        "Scale": 1,
+        "Opaque": true,
+        "Scale": 1.25,
         "Shadows": false,
         "TargetGameObject": {
           "_type": "gameobject",
