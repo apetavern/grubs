@@ -12,7 +12,7 @@ FEATURES
 MODES
 {
 	Forward();
-	Depth( S_MODE_DEPTH );
+	Depth();
 	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
@@ -29,7 +29,6 @@ COMMON
 	#include "procedural.hlsl"
 
 	#define S_UV2 1
-	#define CUSTOM_MATERIAL_INPUTS
 }
 
 struct VertexInput
@@ -46,6 +45,9 @@ struct PixelInput
 	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
 	float4 vColor : COLOR0;
 	float4 vTintColor : COLOR1;
+	#if ( PROGRAM == VFX_PROGRAM_PS )
+		bool vFrontFacing : SV_IsFrontFace;
+	#endif
 };
 
 VS
@@ -53,7 +55,7 @@ VS
 	#include "common/vertex.hlsl"
 	
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
-	CreateInputTexture2D( WPONoise, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	CreateInputTexture2D( WPONoise, Linear, 8, "None", "_mask", ",0/,0/0", DefaultFile( "materials/effects/water/water_noise_01.png" ) );
 	Texture2D g_tWPONoise < Channel( RGBA, Box( WPONoise ), Linear ); OutputFormat( BC7 ); SrgbRead( False ); >;
 	float g_flWPOStrength < UiGroup( ",0/,0/0" ); Default1( 1 ); Range1( -100, 100 ); >;
 	float2 g_vWPOTiling < UiGroup( ",0/,0/0" ); Default2( 1,1 ); Range2( -100,-100, 100,100 ); >;
@@ -66,7 +68,7 @@ VS
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
 		
-		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
+		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v.nInstanceTransformID );
 		i.vTintColor = extraShaderData.vTint;
 		
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
@@ -88,15 +90,13 @@ VS
 PS
 {
 	#include "common/pixel.hlsl"
-	
-	DynamicCombo( D_RENDER_BACKFACES, 0..1, Sys( ALL ) );
-	RenderState( CullMode, D_RENDER_BACKFACES ? NONE : BACK );
+	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 		
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
-	CreateInputTexture2D( WaterNoise, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	CreateInputTexture2D( DistortNoise, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	CreateInputTexture2D( MaskNoise, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	CreateInputTexture2D( MacroNormal, Linear, 8, "NormalizeNormals", "_normal", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	CreateInputTexture2D( WaterNoise, Linear, 8, "None", "_mask", ",0/,0/0", DefaultFile( "materials/effects/water/water_noise_01.png" ) );
+	CreateInputTexture2D( DistortNoise, Linear, 8, "None", "_mask", ",0/,0/0", DefaultFile( "materials/effects/water/water_noise_01.png" ) );
+	CreateInputTexture2D( MaskNoise, Linear, 8, "None", "_mask", ",0/,0/0", DefaultFile( "materials/effects/water/water_noise_01.png" ) );
+	CreateInputTexture2D( MacroNormal, Linear, 8, "NormalizeNormals", "_normal", ",0/,0/0", DefaultFile( "materials/effects/water/water_normal.png" ) );
 	Texture2D g_tWaterNoise < Channel( RGBA, Box( WaterNoise ), Linear ); OutputFormat( BC7 ); SrgbRead( False ); >;
 	Texture2D g_tDistortNoise < Channel( RGBA, Box( DistortNoise ), Linear ); OutputFormat( BC7 ); SrgbRead( False ); >;
 	Texture2D g_tMaskNoise < Channel( RGBA, Box( MaskNoise ), Linear ); OutputFormat( BC7 ); SrgbRead( False ); >;
@@ -145,7 +145,7 @@ PS
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		
-		Material m = Material::Init();
+		Material m = Material::Init( i );
 		m.Albedo = float3( 1, 1, 1 );
 		m.Normal = float3( 0, 0, 1 );
 		m.Roughness = 1;
@@ -212,6 +212,6 @@ PS
 		m.WorldTangentV = i.vTangentVWs;
 		m.TextureCoords = i.vTextureCoords.xy;
 				
-		return ShadingModelStandard::Shade( i, m );
+		return ShadingModelStandard::Shade( m );
 	}
 }

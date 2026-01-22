@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Result",
@@ -102,7 +105,19 @@
       "Value": 0.25,
       "Name": "Flow Strength",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "6",
       "Position": "-2316,-180",
       "HandleOffsets": {}
@@ -269,7 +284,19 @@
       "Value": 0.5,
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "19",
       "Position": "-2448,276",
       "HandleOffsets": {}
@@ -309,12 +336,31 @@
     {
       "_class": "TextureSampler",
       "Image": "materials/dev/simple/simple_tile_color.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "SkyTexture2",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
+        "Extension": "Color",
+        "CustomExtension": null,
         "ShowExtension": true,
-        "SrgbRead": true
+        "Processor": "None",
+        "ColorSpace": "Srgb",
+        "ImageFormat": "DXT5",
+        "SrgbRead": true,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "22",
       "Position": "-1152,-36",
@@ -327,12 +373,31 @@
     {
       "_class": "TextureSampler",
       "Image": "materials/dev/simple/simple_tile_color.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "SkyTexture1",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
+        "Extension": "Color",
+        "CustomExtension": null,
         "ShowExtension": true,
-        "SrgbRead": true
+        "Processor": "None",
+        "ColorSpace": "Srgb",
+        "ImageFormat": "DXT5",
+        "SrgbRead": true,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "23",
       "Position": "-1152,-276",
@@ -359,7 +424,19 @@
       "Value": 2,
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "25",
       "Position": "-1680,396",
       "HandleOffsets": {}
@@ -371,7 +448,19 @@
       "Value": 1,
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "26",
       "Position": "-1440,432",
       "HandleOffsets": {}
@@ -415,7 +504,19 @@
       "Value": "0,0,-1",
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "29",
       "Position": "-4356,-360",
       "HandleOffsets": {}
@@ -427,7 +528,19 @@
       "Value": 0,
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "30",
       "Position": "-4356,-204",
       "HandleOffsets": {}
@@ -465,7 +578,19 @@
       "Value": "1,1,0",
       "Name": "Wind",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "32",
       "Position": "-4128,-192",
       "HandleOffsets": {}
@@ -534,7 +659,19 @@
       "Value": "1,-1",
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "37",
       "Position": "-3384,-192",
       "HandleOffsets": {}
@@ -562,7 +699,19 @@
       "Value": 0.5,
       "Name": "Flow Speed",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "39",
       "Position": "-3144,-228",
       "HandleOffsets": {}
@@ -606,7 +755,19 @@
       "Value": 0.1,
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "42",
       "Position": "-2700,48",
       "HandleOffsets": {}
@@ -614,7 +775,7 @@
     {
       "_class": "Saturate",
       "Identifier": "43",
-      "Position": "-564,-132",
+      "Position": "-540,-132",
       "HandleOffsets": {},
       "Input": {
         "Identifier": "27",

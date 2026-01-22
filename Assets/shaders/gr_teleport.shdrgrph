@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "WorldPosition",
@@ -72,8 +75,12 @@
       "Name": "Tiling",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Adjustments"
+          "Name": "Adjustments",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "Tiling",
@@ -108,8 +115,12 @@
       "Name": "Speed",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Adjustments"
+          "Name": "Adjustments",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "Speed",
@@ -140,11 +151,16 @@
       "Name": "Solid Opacity",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Adjustments"
+          "Name": "Adjustments",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "8",
@@ -159,11 +175,16 @@
       "Name": "Gap Opacity",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Adjustments"
+          "Name": "Adjustments",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "9",
@@ -188,8 +209,16 @@
       "Name": "Colour Strength",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Colour"
+          "Name": "Colour",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "11",
@@ -203,6 +232,8 @@
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Colour",
           "Priority": 1
@@ -222,7 +253,7 @@
       "DefaultB": 1,
       "Fraction": 0.5,
       "Identifier": "13",
-      "Position": "468,-240",
+      "Position": "480,-240",
       "HandleOffsets": {},
       "A": {
         "Identifier": "9",

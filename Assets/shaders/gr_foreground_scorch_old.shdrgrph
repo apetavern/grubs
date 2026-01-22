@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Result",
@@ -46,14 +49,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/sand_shells_color.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Colour",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
+        "Extension": "Color",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
+        "ColorSpace": "Srgb",
+        "ImageFormat": "DXT5",
         "SrgbRead": true,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "1",
@@ -67,17 +86,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/sand_shells_normal.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Normal",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "Normal",
+        "CustomExtension": null,
         "ShowExtension": true,
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
         "Priority": 1,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "2",
@@ -91,16 +123,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/sand_a_rough.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Rough",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "Rough",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
         "Priority": 2,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "3",
@@ -174,13 +220,15 @@
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
+        "Step": 0,
         "Priority": 2,
         "PrimaryGroup": {
           "Name": "Tint",
           "Priority": 2
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "9",
@@ -221,8 +269,12 @@
       "Name": "Tiling",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Textures"
+          "Name": "Textures",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "",
@@ -257,9 +309,12 @@
       "Name": "Z Position",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 1,
         "PrimaryGroup": {
-          "Name": "Position"
+          "Name": "Position",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "Z",
@@ -278,9 +333,12 @@
       "Name": "Z Smoothing",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 2,
         "PrimaryGroup": {
-          "Name": "Position"
+          "Name": "Position",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "Z",
@@ -294,16 +352,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/sand_a_rough.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "AO",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "AO",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
         "Priority": 3,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "16",
@@ -317,15 +389,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/sand_shells_blend.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Blend Mask",
+        "IsAttribute": false,
         "Default": "0,0,0,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "17",
@@ -366,10 +453,16 @@
       "Operator": "Equal",
       "Enabled": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 1,
         "PrimaryGroup": {
           "Name": "Tint",
           "Priority": 1
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "20",
@@ -428,6 +521,7 @@
       "_class": "TextureSampler",
       "Image": "materials/dev/white_color.tga",
       "Sampler": {
+        "Filter": "Aniso",
         "AddressU": "Clamp",
         "AddressV": "Clamp"
       },
@@ -435,14 +529,21 @@
         "Name": "ScorchLayer",
         "IsAttribute": true,
         "Default": "1,1,1,1",
+        "Extension": "Color",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "24",
@@ -480,12 +581,16 @@
       "Name": "ScorchLayer_Params",
       "IsAttribute": true,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 20
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "26",
@@ -576,7 +681,7 @@
       "OutputSpace": "Tangent",
       "DecodeNormal": true,
       "Identifier": "32",
-      "Position": "2340,672",
+      "Position": "2352,672",
       "HandleOffsets": {},
       "Input": {
         "Identifier": "43",
@@ -597,15 +702,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/rocks_a_color.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Scorch Colour",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
+        "Extension": "Color",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
+        "ColorSpace": "Srgb",
+        "ImageFormat": "DXT5",
         "SrgbRead": true,
         "Priority": 1,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "34",
@@ -619,16 +739,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/lava_rocks_ao.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Scorch AO",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "AO",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
         "Priority": 5,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "35",
@@ -642,17 +776,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/lava_rocks_selfillum.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Scorch Blend Mask",
+        "IsAttribute": false,
         "Default": "0,0,0,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
         "Priority": 6,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "36",
@@ -703,13 +850,15 @@
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
+        "Step": 0,
         "Priority": 2,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "40",
@@ -719,16 +868,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/lava_rocks_rough.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Scorch Rough",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "Rough",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
         "Priority": 4,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "41",
@@ -742,17 +905,30 @@
     {
       "_class": "TextureSampler",
       "Image": "textures/environment/lava_rocks_normal.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Scorch Normal",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "Normal",
+        "CustomExtension": null,
         "ShowExtension": true,
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
         "Priority": 3,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "42",
@@ -1063,13 +1239,16 @@
       "Name": "Scorch Blend Distance",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 10,
         "PrimaryGroup": {
           "Name": "Scorch",
           "Priority": 10
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "66",
@@ -1127,8 +1306,16 @@
       "Operator": "Equal",
       "Enabled": true,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Tint"
+          "Name": "Tint",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "70",

@@ -12,7 +12,7 @@ FEATURES
 MODES
 {
 	Forward();
-	Depth( S_MODE_DEPTH );
+	Depth();
 	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
@@ -29,7 +29,6 @@ COMMON
 	#include "procedural.hlsl"
 
 	#define S_UV2 1
-	#define CUSTOM_MATERIAL_INPUTS
 }
 
 struct VertexInput
@@ -46,6 +45,9 @@ struct PixelInput
 	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
 	float4 vColor : COLOR0;
 	float4 vTintColor : COLOR1;
+	#if ( PROGRAM == VFX_PROGRAM_PS )
+		bool vFrontFacing : SV_IsFrontFace;
+	#endif
 };
 
 VS
@@ -59,7 +61,7 @@ VS
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
 		
-		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
+		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v.nInstanceTransformID );
 		i.vTintColor = extraShaderData.vTint;
 		
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
@@ -71,9 +73,7 @@ VS
 PS
 {
 	#include "common/pixel.hlsl"
-	
-	DynamicCombo( D_RENDER_BACKFACES, 0..1, Sys( ALL ) );
-	RenderState( CullMode, D_RENDER_BACKFACES ? NONE : BACK );
+	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 		
 	float4 g_vColour < UiType( Color ); UiGroup( "Colour,1/Emission,1/0" ); Default4( 0.00, 448.08, 500.00, 1.00 ); >;
 	float g_flColourStrength < UiGroup( "Colour,0/,0/0" ); Default1( 2 ); Range1( 0, 25 ); >;
@@ -85,7 +85,7 @@ PS
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		
-		Material m = Material::Init();
+		Material m = Material::Init( i );
 		m.Albedo = float3( 1, 1, 1 );
 		m.Normal = float3( 0, 0, 1 );
 		m.Roughness = 1;
@@ -131,6 +131,6 @@ PS
 		m.WorldTangentV = i.vTangentVWs;
 		m.TextureCoords = i.vTextureCoords.xy;
 				
-		return ShadingModelStandard::Shade( i, m );
+		return ShadingModelStandard::Shade( m );
 	}
 }

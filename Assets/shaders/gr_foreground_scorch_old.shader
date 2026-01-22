@@ -12,7 +12,7 @@ FEATURES
 MODES
 {
 	Forward();
-	Depth( S_MODE_DEPTH );
+	Depth();
 	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
@@ -29,7 +29,6 @@ COMMON
 	#include "procedural.hlsl"
 
 	#define S_UV2 1
-	#define CUSTOM_MATERIAL_INPUTS
 }
 
 struct VertexInput
@@ -46,6 +45,9 @@ struct PixelInput
 	float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
 	float4 vColor : COLOR0;
 	float4 vTintColor : COLOR1;
+	#if ( PROGRAM == VFX_PROGRAM_PS )
+		bool vFrontFacing : SV_IsFrontFace;
+	#endif
 };
 
 VS
@@ -59,7 +61,7 @@ VS
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
 		
-		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
+		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v.nInstanceTransformID );
 		i.vTintColor = extraShaderData.vTint;
 		
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
@@ -71,22 +73,20 @@ VS
 PS
 {
 	#include "common/pixel.hlsl"
-	
-	DynamicCombo( D_RENDER_BACKFACES, 0..1, Sys( ALL ) );
-	RenderState( CullMode, D_RENDER_BACKFACES ? NONE : BACK );
+	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 		
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
 	SamplerState g_sSampler1 < Filter( ANISO ); AddressU( CLAMP ); AddressV( CLAMP ); >;
-	CreateInputTexture2D( Colour, Srgb, 8, "None", "_color", "Textures,3/,0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( BlendMask, Linear, 8, "None", "_mask", ",0/,0/0", Default4( 0.00, 0.00, 0.00, 1.00 ) );
-	CreateInputTexture2D( ScorchColour, Srgb, 8, "None", "_color", "Scorch,10/,0/1", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( ScorchBlendMask, Linear, 8, "None", "_mask", "Scorch,10/,0/6", Default4( 0.00, 0.00, 0.00, 1.00 ) );
-	CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Textures,3/,0/1", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( ScorchNormal, Linear, 8, "NormalizeNormals", "_normal", "Scorch,10/,0/3", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( Rough, Linear, 8, "None", "_rough", "Textures,3/,0/2", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( ScorchRough, Linear, 8, "None", "_rough", "Scorch,10/,0/4", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( AO, Linear, 8, "None", "_ao", "Textures,3/,0/3", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( ScorchAO, Linear, 8, "None", "_ao", "Scorch,10/,0/5", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( Colour, Srgb, 8, "None", "_color", "Textures,3/,0/0", DefaultFile( "textures/environment/sand_shells_color.png" ) );
+	CreateInputTexture2D( BlendMask, Linear, 8, "None", "_mask", ",0/,0/0", DefaultFile( "textures/environment/sand_shells_blend.png" ) );
+	CreateInputTexture2D( ScorchColour, Srgb, 8, "None", "_color", "Scorch,10/,0/1", DefaultFile( "textures/environment/rocks_a_color.png" ) );
+	CreateInputTexture2D( ScorchBlendMask, Linear, 8, "None", "_mask", "Scorch,10/,0/6", DefaultFile( "textures/environment/lava_rocks_selfillum.png" ) );
+	CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Textures,3/,0/1", DefaultFile( "textures/environment/sand_shells_normal.png" ) );
+	CreateInputTexture2D( ScorchNormal, Linear, 8, "NormalizeNormals", "_normal", "Scorch,10/,0/3", DefaultFile( "textures/environment/lava_rocks_normal.png" ) );
+	CreateInputTexture2D( Rough, Linear, 8, "None", "_rough", "Textures,3/,0/2", DefaultFile( "textures/environment/sand_a_rough.png" ) );
+	CreateInputTexture2D( ScorchRough, Linear, 8, "None", "_rough", "Scorch,10/,0/4", DefaultFile( "textures/environment/lava_rocks_rough.png" ) );
+	CreateInputTexture2D( AO, Linear, 8, "None", "_ao", "Textures,3/,0/3", DefaultFile( "textures/environment/sand_a_rough.png" ) );
+	CreateInputTexture2D( ScorchAO, Linear, 8, "None", "_ao", "Scorch,10/,0/5", DefaultFile( "textures/environment/lava_rocks_ao.png" ) );
 	Texture2D g_tColour < Channel( RGBA, Box( Colour ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	Texture2D g_tBlendMask < Channel( RGBA, Box( BlendMask ), Linear ); OutputFormat( DXT5 ); SrgbRead( False ); >;
 	Texture2D g_tScorchColour < Channel( RGBA, Box( ScorchColour ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
@@ -104,8 +104,8 @@ PS
 	float4 g_vTint_Colour < UiType( Color ); UiGroup( "Tint,2/,0/2" ); Default4( 0.41, 0.22, 0.11, 1.00 ); >;
 	float g_flZPosition < UiGroup( "Position,0/Z,1/1" ); Default1( 0 ); Range1( 0, 2048 ); >;
 	float g_flZSmoothing < UiGroup( "Position,0/Z,1/2" ); Default1( 512 ); Range1( 0, 2048 ); >;
-	bool g_bTintDirectionToggle < Attribute( "TintDirectionToggle" ); Default( 0 ); >;
-	bool g_bGradientTint < Attribute( "GradientTint" ); Default( 1 ); >;
+	bool g_bTintDirectionToggle < Attribute( "Tint Direction Toggle" ); Default( 0 ); >;
+	bool g_bGradientTint < Attribute( "Gradient Tint" ); Default( 1 ); >;
 	float4 g_vScorchTint_Colour < UiType( Color ); UiGroup( "Scorch,10/,0/2" ); Default4( 0.13, 0.13, 0.12, 1.00 ); >;
 	float4 g_vScorchLayer_Params < Attribute( "ScorchLayer_Params" ); Default4( 0.00, 0.00, 1.00, 128.00 ); >;
 	float g_flScorchBlendDistance < UiGroup( "Scorch,10/,0/10" ); Default1( 32 ); Range1( 0, 256 ); >;
@@ -163,7 +163,7 @@ PS
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		
-		Material m = Material::Init();
+		Material m = Material::Init( i );
 		m.Albedo = float3( 1, 1, 1 );
 		m.Normal = float3( 0, 0, 1 );
 		m.Roughness = 1;
@@ -247,6 +247,6 @@ PS
 		m.WorldTangentV = i.vTangentVWs;
 		m.TextureCoords = i.vTextureCoords.xy;
 				
-		return ShadingModelStandard::Shade( i, m );
+		return ShadingModelStandard::Shade( m );
 	}
 }

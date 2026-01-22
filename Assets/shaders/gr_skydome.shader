@@ -12,7 +12,7 @@ FEATURES
 MODES
 {
 	Forward();
-	Depth( S_MODE_DEPTH );
+	Depth();
 	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
@@ -29,7 +29,6 @@ COMMON
 	#include "procedural.hlsl"
 
 	#define S_UV2 1
-	#define CUSTOM_MATERIAL_INPUTS
 }
 
 struct VertexInput
@@ -62,7 +61,7 @@ VS
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
 		
-		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
+		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v.nInstanceTransformID );
 		i.vTintColor = extraShaderData.vTint;
 		
 		VS_DecodeObjectSpaceNormalAndTangent( v, i.vNormalOs, i.vTangentUOs_flTangentVSign );
@@ -74,14 +73,15 @@ VS
 PS
 {
 	#include "common/pixel.hlsl"
-	
+	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
+		
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
-	CreateInputTexture2D( SkyTexture, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	CreateInputTexture2D( SkyTexture_0, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
-	Texture2D g_tSkyTexture < Channel( RGBA, Box( SkyTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	Texture2D g_tSkyTexture_0 < Channel( RGBA, Box( SkyTexture_0 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	TextureAttribute( LightSim_DiffuseAlbedoTexture, g_tSkyTexture_0 )
-	TextureAttribute( RepresentativeTexture, g_tSkyTexture_0 )
+	CreateInputTexture2D( SkyTexture1, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	CreateInputTexture2D( SkyTexture2, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
+	Texture2D g_tSkyTexture1 < Channel( RGBA, Box( SkyTexture1 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	Texture2D g_tSkyTexture2 < Channel( RGBA, Box( SkyTexture2 ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+	TextureAttribute( LightSim_DiffuseAlbedoTexture, g_tSkyTexture2 )
+	TextureAttribute( RepresentativeTexture, g_tSkyTexture2 )
 	float3 g_vWind < UiGroup( ",0/,0/0" ); Default3( 1,1,0 ); Range3( 0,0,0, 1,1,1 ); >;
 	float g_flFlowSpeed < UiGroup( ",0/,0/0" ); Default1( 0.5 ); Range1( 0, 1 ); >;
 	float g_flFlowStrength < UiGroup( ",0/,0/0" ); Default1( 0.25 ); Range1( 0, 1 ); >;
@@ -89,7 +89,7 @@ PS
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		
-		Material m = Material::Init();
+		Material m = Material::Init( i );
 		m.Albedo = float3( 1, 1, 1 );
 		m.Normal = float3( 0, 0, 1 );
 		m.Roughness = 1;
@@ -123,12 +123,12 @@ PS
 		float4 l_20 = l_17 * float4( l_19, l_19, l_19, l_19 );
 		float2 l_21 = i.vTextureCoords.xy * float2( 1, 1 );
 		float4 l_22 = l_20 + float4( l_21, 0, 0 );
-		float4 l_23 = Tex2DS( g_tSkyTexture, g_sSampler0, l_22.xy );
+		float4 l_23 = Tex2DS( g_tSkyTexture1, g_sSampler0, l_22.xy );
 		float l_24 = l_18 + 0.5;
 		float l_25 = frac( l_24 );
 		float4 l_26 = l_17 * float4( l_25, l_25, l_25, l_25 );
 		float4 l_27 = l_26 + float4( l_21, 0, 0 );
-		float4 l_28 = Tex2DS( g_tSkyTexture_0, g_sSampler0, l_27.xy );
+		float4 l_28 = Tex2DS( g_tSkyTexture2, g_sSampler0, l_27.xy );
 		float l_29 = l_19 * 2;
 		float l_30 = l_29 - 1;
 		float l_31 = abs( l_30 );
@@ -156,6 +156,6 @@ PS
 		m.WorldTangentV = i.vTangentVWs;
 		m.TextureCoords = i.vTextureCoords.xy;
 				
-		return ShadingModelStandard::Shade( i, m );
+		return ShadingModelStandard::Shade( m );
 	}
 }

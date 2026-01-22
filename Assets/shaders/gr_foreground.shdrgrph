@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Result",
@@ -46,14 +49,30 @@
     {
       "_class": "TextureTriplanar",
       "Image": "materials/dev/white_color.tga",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Colour",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
+        "Extension": "Color",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
+        "ColorSpace": "Srgb",
+        "ImageFormat": "DXT5",
         "SrgbRead": true,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "1",
@@ -71,16 +90,30 @@
     {
       "_class": "NormapMapTriplanar",
       "Image": "materials/dev/white_color.tga",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Normal",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "Normal",
+        "CustomExtension": null,
         "ShowExtension": true,
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "2",
@@ -98,15 +131,30 @@
     {
       "_class": "TextureTriplanar",
       "Image": "materials/dev/white_color.tga",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Rough",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "Rough",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "3",
@@ -209,11 +257,15 @@
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Tint"
+          "Name": "Tint",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "10",
@@ -307,8 +359,12 @@
       "Name": "Tiling",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": "Textures"
+          "Name": "Textures",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "",
@@ -343,12 +399,16 @@
       "Name": "Y Position",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 3,
         "PrimaryGroup": {
-          "Name": "Position"
+          "Name": "Position",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": "Y"
+          "Name": "Y",
+          "Priority": 0
         }
       },
       "Identifier": "19",
@@ -363,9 +423,12 @@
       "Name": "Z Position",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 1,
         "PrimaryGroup": {
-          "Name": "Position"
+          "Name": "Position",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "Z",
@@ -384,12 +447,16 @@
       "Name": "Y Smoothing",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 4,
         "PrimaryGroup": {
-          "Name": "Position"
+          "Name": "Position",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": "Y"
+          "Name": "Y",
+          "Priority": 0
         }
       },
       "Identifier": "21",
@@ -404,9 +471,12 @@
       "Name": "Z Smoothing",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
         "Priority": 2,
         "PrimaryGroup": {
-          "Name": "Position"
+          "Name": "Position",
+          "Priority": 0
         },
         "SecondaryGroup": {
           "Name": "Z",
@@ -420,15 +490,30 @@
     {
       "_class": "TextureTriplanar",
       "Image": "materials/dev/white_color.tga",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "AO",
+        "IsAttribute": false,
+        "Default": "0,0,0,0",
         "Extension": "AO",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Textures",
           "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "23",
@@ -462,13 +547,31 @@
     {
       "_class": "TextureTriplanar",
       "Image": "materials/dev/white_color.tga",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Blend Mask",
+        "IsAttribute": false,
         "Default": "0,0,0,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
-        "ColorSpace": "Linear"
+        "Processor": "None",
+        "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "25",
       "Position": "-276,-684",
@@ -512,9 +615,16 @@
       "Operator": "Equal",
       "Enabled": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
           "Name": "Tint",
           "Priority": 1
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "28",
@@ -581,7 +691,7 @@
       "OutputSpace": "Tangent",
       "DecodeNormal": false,
       "Identifier": "31",
-      "Position": "1380,-132",
+      "Position": "1404,-132",
       "HandleOffsets": {},
       "Input": {
         "Identifier": "2",

@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Result",
@@ -60,8 +63,16 @@
       "Name": "Cell Density",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "2",
@@ -98,8 +109,16 @@
       "Name": "Voronoi Speed",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "5",
@@ -109,7 +128,7 @@
     {
       "_class": "Saturate",
       "Identifier": "6",
-      "Position": "48,48",
+      "Position": "60,48",
       "HandleOffsets": {},
       "Input": {
         "Identifier": "1",
@@ -123,8 +142,15 @@
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "7",

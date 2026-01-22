@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Time",
@@ -30,9 +33,21 @@
       "Value": 0.2,
       "Name": "Roughness",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "1",
-      "Position": "132,-36",
+      "Position": "120,-36",
       "HandleOffsets": {}
     },
     {
@@ -112,7 +127,19 @@
       "Value": 0.15,
       "Name": "Distort Amount",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "6",
       "Position": "-2736,300",
       "HandleOffsets": {}
@@ -124,7 +151,19 @@
       "Value": "25,25",
       "Name": "Tiling",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "7",
       "Position": "-2172,276",
       "HandleOffsets": {}
@@ -178,7 +217,19 @@
       "Value": "2,2",
       "Name": "Distort Tiling",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "10",
       "Position": "-3408,-96",
       "HandleOffsets": {}
@@ -189,7 +240,17 @@
       "Name": "Foam Colour",
       "IsAttribute": false,
       "UI": {
-        "Type": "Color"
+        "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "11",
       "Position": "-1188,-132",
@@ -214,17 +275,30 @@
     {
       "_class": "TextureSampler",
       "Image": "materials/effects/water/water_noise_01.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Water Noise",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "13",
@@ -241,7 +315,17 @@
       "Name": "Water Colour",
       "IsAttribute": false,
       "UI": {
-        "Type": "Color"
+        "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "14",
       "Position": "-1188,-288",
@@ -254,7 +338,19 @@
       "Value": 0.2,
       "Name": "Noise Strength",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "15",
       "Position": "-1476,348",
       "HandleOffsets": {}
@@ -298,7 +394,19 @@
       "Value": "0.01,0.01",
       "Name": "Distort Scroll Speed",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "18",
       "Position": "-3408,96",
       "HandleOffsets": {}
@@ -306,17 +414,30 @@
     {
       "_class": "TextureSampler",
       "Image": "materials/effects/water/water_noise_01.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Distort Noise",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "19",
@@ -368,17 +489,30 @@
     {
       "_class": "TextureSampler",
       "Image": "materials/effects/water/water_noise_01.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Mask Noise",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "22",
@@ -418,7 +552,19 @@
       "Value": "1,1",
       "Name": "Mask Tiling",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "25",
       "Position": "-1836,-684",
       "HandleOffsets": {}
@@ -463,7 +609,19 @@
       "Value": "-0.1,-0.1",
       "Name": "Mask Scroll Speed",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "29",
       "Position": "-1836,-492",
       "HandleOffsets": {}
@@ -475,7 +633,19 @@
       "Value": "0.1,0.1",
       "Name": "Scroll Speed",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "30",
       "Position": "-2172,480",
       "HandleOffsets": {}
@@ -502,16 +672,31 @@
     {
       "_class": "TextureSampler",
       "Image": "materials/effects/water/water_normal.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Macro Normal",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Normal",
         "CustomExtension": "",
         "ShowExtension": true,
         "Processor": "NormalizeNormals",
         "ColorSpace": "Linear",
-        "ImageFormat": "BC7"
+        "ImageFormat": "BC7",
+        "SrgbRead": false,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "32",
       "Position": "-816,864",
@@ -547,7 +732,19 @@
       "Value": "2,2",
       "Name": "Normal Tiling",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "35",
       "Position": "-1392,864",
       "HandleOffsets": {}
@@ -559,7 +756,19 @@
       "Value": "0.01,0.01",
       "Name": "Normal Scroll Speed",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "36",
       "Position": "-1392,1056",
       "HandleOffsets": {}
@@ -634,17 +843,30 @@
     {
       "_class": "TextureSampler",
       "Image": "materials/effects/water/water_noise_01.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "WPO Noise",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
         "CustomExtension": "",
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
         "ImageFormat": "BC7",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "42",
@@ -673,7 +895,19 @@
       "Value": "0.1,0.1",
       "Name": "WPO Scroll Speed",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "44",
       "Position": "-1404,1500",
       "HandleOffsets": {}
@@ -701,7 +935,19 @@
       "Value": "1,1",
       "Name": "WPO Tiling",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "46",
       "Position": "-1404,1308",
       "HandleOffsets": {}
@@ -729,7 +975,19 @@
       "Value": 1,
       "Name": "WPO Strength",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "48",
       "Position": "-768,1500",
       "HandleOffsets": {}

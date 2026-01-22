@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Result",
@@ -64,7 +67,19 @@
       "Value": 1,
       "Name": "fade amount",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "3",
       "Position": "-660,108",
       "HandleOffsets": {}
@@ -114,13 +129,31 @@
     {
       "_class": "TextureSampler",
       "Image": "particles/weaponcharge/textures/gradient.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "gradient",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
-        "ColorSpace": "Linear"
+        "Processor": "None",
+        "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "7",
       "Position": "-660,-96",
@@ -132,7 +165,17 @@
       "Name": "color start",
       "IsAttribute": false,
       "UI": {
-        "Type": "Color"
+        "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "8",
       "Position": "-288,-300",
@@ -144,7 +187,17 @@
       "Name": "color end",
       "IsAttribute": false,
       "UI": {
-        "Type": "Color"
+        "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "9",
       "Position": "-288,-468",
@@ -180,7 +233,7 @@
       "OutMax": 1,
       "Clamp": true,
       "Identifier": "11",
-      "Position": "156,-48",
+      "Position": "168,-48",
       "HandleOffsets": {},
       "A": {
         "Identifier": "6",

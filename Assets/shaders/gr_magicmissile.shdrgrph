@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Result",
@@ -42,14 +45,30 @@
     {
       "_class": "TextureSampler",
       "Image": "particles/magicmissile/textures/magicm_wpo.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Pos Offset Texture",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
+        "Extension": "Color",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "1",
@@ -102,7 +121,19 @@
       "Value": 2,
       "Name": "Scroll speed",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "5",
       "Position": "-1884,192",
       "HandleOffsets": {}
@@ -114,7 +145,19 @@
       "Value": 6,
       "Name": "WPO Strength",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "6",
       "Position": "-348,144",
       "HandleOffsets": {}
@@ -142,7 +185,19 @@
       "Value": "1,1",
       "Name": "UV Tiling",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "8",
       "Position": "-1152,-180",
       "HandleOffsets": {}
@@ -153,7 +208,17 @@
       "Name": "Color",
       "IsAttribute": false,
       "UI": {
-        "Type": "Color"
+        "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
       },
       "Identifier": "9",
       "Position": "-624,-528",
@@ -188,7 +253,19 @@
       "Value": 50,
       "Name": "Glow Strength",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "12",
       "Position": "-384,-588",
       "HandleOffsets": {}
@@ -198,7 +275,7 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "13",
-      "Position": "36,-156",
+      "Position": "48,-156",
       "HandleOffsets": {},
       "A": {
         "Identifier": "1",
@@ -270,7 +347,19 @@
       "Value": 0,
       "Name": "",
       "IsAttribute": false,
-      "UI": {},
+      "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
+        "PrimaryGroup": {
+          "Name": null,
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
+        }
+      },
       "Identifier": "18",
       "Position": "-1344,252",
       "HandleOffsets": {}

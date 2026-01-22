@@ -11,11 +11,14 @@
   "ShadingModel": "Lit",
   "Domain": "Surface",
   "PreviewSettings": {
+    "RenderBackfaces": false,
     "EnableShadows": true,
+    "ShowGround": false,
     "ShowSkybox": true,
     "BackgroundColor": "0,0,0,1",
     "Tint": "1,1,1,1"
   },
+  "Version": 1,
   "nodes": [
     {
       "_class": "Result",
@@ -46,15 +49,30 @@
     {
       "_class": "TextureSampler",
       "Image": "particles/fire/textures/fire_noise_01.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Noise One",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "1",
@@ -131,11 +149,16 @@
       "Name": "Noise One Pan Speed",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "7",
@@ -198,11 +221,16 @@
       "Name": "UV Distortion Intensity",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "11",
@@ -221,17 +249,29 @@
       "_class": "TextureSampler",
       "Image": "particles/fire/textures/fire_gradient.png",
       "Sampler": {
+        "Filter": "Aniso",
         "AddressU": "Clamp",
         "AddressV": "Clamp"
       },
       "UI": {
         "Name": "Gradient",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "13",
@@ -324,11 +364,16 @@
       "Name": "Noise Two Pan Speed",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "20",
@@ -338,15 +383,30 @@
     {
       "_class": "TextureSampler",
       "Image": "particles/fire/textures/fire_noise_02.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Noise Two",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "21",
@@ -413,15 +473,30 @@
     {
       "_class": "TextureSampler",
       "Image": "particles/fire/textures/fire_bellmask.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Distortion Mask",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "27",
@@ -454,15 +529,30 @@
     {
       "_class": "TextureSampler",
       "Image": "particles/fire/textures/fire_diamondmask.png",
-      "Sampler": {},
+      "Sampler": {
+        "Filter": "Aniso",
+        "AddressU": "Wrap",
+        "AddressV": "Wrap"
+      },
       "UI": {
         "Name": "Flame Mask",
+        "IsAttribute": false,
         "Default": "1,1,1,1",
         "Extension": "Mask",
+        "CustomExtension": null,
         "ShowExtension": true,
+        "Processor": "None",
         "ColorSpace": "Linear",
+        "ImageFormat": "DXT5",
+        "SrgbRead": false,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
+        },
+        "SecondaryGroup": {
+          "Name": null,
+          "Priority": 0
         }
       },
       "Identifier": "30",
@@ -512,11 +602,16 @@
       "Name": "SmoothStep In",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "33",
@@ -531,11 +626,16 @@
       "Name": "SmoothStep Out",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "34",
@@ -565,11 +665,15 @@
       "IsAttribute": false,
       "UI": {
         "Type": "Color",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "36",
@@ -600,11 +704,16 @@
       "Name": "Emission Strength",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "38",
@@ -619,11 +728,16 @@
       "Name": "Flame Mask Distortion",
       "IsAttribute": false,
       "UI": {
+        "Type": "Default",
+        "Step": 0,
+        "Priority": 0,
         "PrimaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         },
         "SecondaryGroup": {
-          "Name": ""
+          "Name": "",
+          "Priority": 0
         }
       },
       "Identifier": "39",
@@ -689,7 +803,7 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "45",
-      "Position": "2556,516",
+      "Position": "2568,516",
       "HandleOffsets": {},
       "A": {
         "Identifier": "46",
