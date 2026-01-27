@@ -1,0 +1,26 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_fire.shader"
+
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+
+	DistortionMask "materials/default/default_mask.tga"
+	FlameMask "materials/default/default_mask.tga"
+	g_flEmissionStrength "0.660"
+	g_flFlameMaskDistortion "0.000"
+	g_flNoiseOnePanSpeed "1.500"
+	g_flNoiseTwoPanSpeed "0.800"
+	g_flSmoothStepIn "0.100"
+	g_flSmoothStepOut "0.500"
+	g_flUVDistortionIntensity "0.300"
+	g_vColour "[0.054902 1.000000 0.074510 1.000000]"
+	Gradient "particles/fire/textures/fire_gradient.png"
+	NoiseOne "particles/fire/textures/fire_noise_01.png"
+	NoiseTwo "particles/fire/textures/fire_noise_02.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+}
