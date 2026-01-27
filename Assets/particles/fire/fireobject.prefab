@@ -1,0 +1,120 @@
+{
+  "RootObject": {
+    "__guid": "2479844d-91df-4d30-8d9f-9b852d7212de",
+    "__version": 2,
+    "Flags": 0,
+    "Name": "fireobject",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "particles",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
+    "Components": [
+      {
+        "__type": "Sandbox.LegacyParticleSystem",
+        "__guid": "deb3af27-fc80-43ef-8166-0d378d239e67",
+        "__enabled": true,
+        "Flags": 0,
+        "ControlPoints": [
+          {
+            "Value": "Vector3",
+            "StringCP": "1",
+            "VectorValue": "8,0,0",
+            "FloatValue": 50,
+            "ColorValue": "0,0,0,0",
+            "GameObjectValue": null
+          }
+        ],
+        "Looped": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Particles": null,
+        "PlaybackSpeed": 2
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "5d17ecf8-0c5a-423b-8714-6fdf13cb0066",
+        "__version": 2,
+        "Flags": 0,
+        "Name": "flame_mesh",
+        "Position": "0,0,-5.835806",
+        "Rotation": "0,0,0,1",
+        "Scale": "0.6548494,0.6548494,0.6548494",
+        "Tags": "",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkFlags": 0,
+        "NetworkOrphaned": 0,
+        "NetworkTransmit": true,
+        "OwnerTransfer": 1,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "6d3c5a9d-1fdf-44c7-8f2e-32f491048b41",
+            "__enabled": true,
+            "Flags": 0,
+            "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "LodOverride": null,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Materials": null,
+            "Model": "particles/fire/flame_mesh.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": true,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "Off",
+            "Tint": "1,1,1,1"
+          }
+        ],
+        "Children": []
+      }
+    ],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      },
+      "GameObjectSystems": []
+    },
+    "__variables": []
+  },
+  "ResourceVersion": 2,
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "__references": [],
+  "__version": 2
+}
