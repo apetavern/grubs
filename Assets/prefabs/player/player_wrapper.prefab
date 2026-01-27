@@ -1,15 +1,25 @@
 {
   "RootObject": {
     "__guid": "9a501176-452d-4433-8c4f-a98d44060cfb",
+    "__version": 2,
     "Flags": 0,
     "Name": "player_wrapper",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
     "Tags": "player",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkFlags": 0,
     "NetworkOrphaned": 1,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Grubs.Systems.Pawn.Player",
         "__guid": "2e4b2a05-4dec-42e8-9a75-609fe1d90a86",
+        "__enabled": true,
+        "Flags": 0,
         "GrubPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/grub/grub.prefab"
@@ -30,6 +40,8 @@
       {
         "__type": "Grubs.Systems.Pawn.Inventory",
         "__guid": "536dfbe2-68ea-42e6-9c3a-80e7f483a63e",
+        "__enabled": true,
+        "Flags": 0,
         "ActiveSlot": 0,
         "EquipmentActive": false,
         "EquipmentPrefabs": [
@@ -135,13 +147,25 @@
     "Children": [
       {
         "__guid": "91633c68-eb38-44b6-a8d5-7685bccfb9af",
+        "__version": 2,
         "Flags": 0,
         "Name": "Screen UI",
+        "Position": "0,0,0",
+        "Rotation": "0,0,0,1",
+        "Scale": "1,1,1",
+        "Tags": "",
         "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkFlags": 0,
+        "NetworkOrphaned": 0,
+        "NetworkTransmit": true,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Grubs.UI.FreeForAllDisplay",
             "__guid": "4d4e7623-0803-4e17-aa48-789d870dfb2f",
+            "__enabled": true,
+            "Flags": 0,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
             "OnComponentEnabled": null,
@@ -152,6 +176,8 @@
           {
             "__type": "Sandbox.ScreenPanel",
             "__guid": "741e0132-931a-4353-bcf9-5b7cb11c9abe",
+            "__enabled": true,
+            "Flags": 0,
             "AutoScreenScale": true,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
@@ -162,21 +188,17 @@
             "Opacity": 1,
             "Scale": 1,
             "ScaleStrategy": "ConsistentHeight",
+            "TargetCamera": null,
             "ZIndex": 100
           }
-        ]
+        ],
+        "Children": []
       }
     ],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -189,14 +211,16 @@
         "AgentMaxSlope": 40,
         "ExcludedBodies": "",
         "IncludedBodies": ""
-      }
-    }
+      },
+      "GameObjectSystems": []
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
