@@ -1,0 +1,12 @@
+{
+  "Name": "Poison bomb",
+  "Description": "Explode in big poison!",
+  "Icon": "models/weapons/petrolbomb/poisonbomb.vmdl.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/poison_bomb/poison_bomb.prefab",
+  "HideHatWhenDeployed": false,
+  "DefaultAmmo": 5,
+  "DropChance": 2,
+  "__references": [],
+  "__version": 0
+}

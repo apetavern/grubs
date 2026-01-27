@@ -1,0 +1,12 @@
+{
+  "Name": "Gas spray",
+  "Description": "Poison your enemies!",
+  "Icon": "models/weapons/flamethrower/flamethrower.vmdl.png",
+  "Type": "Weapon",
+  "EquipmentPrefab": "prefabs/weapons/flamethrower/flamethrower.prefab",
+  "HideHatWhenDeployed": true,
+  "DefaultAmmo": 2,
+  "DropChance": 2.5,
+  "__references": [],
+  "__version": 0
+}
