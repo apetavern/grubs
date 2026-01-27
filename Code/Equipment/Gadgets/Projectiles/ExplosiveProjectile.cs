@@ -17,8 +17,6 @@ public class ExplosiveProjectile : Component, IResolvable, Component.ICollisionL
 	[Property, Sync] public float ExplodeAfter { get; set; } = 4.0f;
 	[Property] public bool UseExplosionTimer { get; set; } = false;
 	[Property, ResourceType( "sound" )] private string ExplosionSound { get; set; } = "";
-	[Property, ResourceType( "vpcf" )] private ParticleSystem Particles { get; set; }
-	[Property, ResourceType( "vpcf" )] private ParticleSystem SmokeParticles { get; set; }
 
 
 	[Sync] private TimeUntil TimeUntilExplosion { get; set; }
