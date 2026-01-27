@@ -126,6 +126,7 @@ public static class GrubsClothingExtensions
 				Parent = body.GameObject
 			};
 			clothingObject.Tags.Add( "clothing" );
+			clothingObject.Tags.Add( clothingItem.Category.ToString().ToLowerInvariant() );
 
 			var renderer = clothingObject.Components.Create<SkinnedModelRenderer>();
 			renderer.Model = model;
