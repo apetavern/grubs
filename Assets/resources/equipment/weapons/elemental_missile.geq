@@ -1,11 +1,12 @@
 {
-  "Name": "Bazooka",
-  "Description": "Hold the Joe.",
-  "Icon": "models/weapons/bazooka/bazooka.vmdl_c.png",
+  "Name": "Elemental Missile",
+  "Description": "You're a wizard!",
+  "Icon": "models/weapons/spellbook/spellbook.vmdl.png",
   "Type": "Weapon",
-  "EquipmentPrefab": "prefabs/weapons/bazooka/bazooka.prefab",
+  "EquipmentPrefab": "prefabs/weapons/elemental_missile/elemental_missile.prefab",
+  "HideHatWhenDeployed": true,
   "DefaultAmmo": -1,
   "DropChance": 0,
-  "__version": 0,
-  "__references": []
+  "__references": [],
+  "__version": 0
 }

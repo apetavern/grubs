@@ -1,26 +1,71 @@
 {
   "RootObject": {
     "__guid": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
+    "__version": 2,
     "Flags": 0,
     "Name": "elemental_missile_projectile",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
     "NetworkMode": 2,
-    "NetworkInterpolation": true,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "79f2d56d-1d10-4135-a301-6aa1194e4a6a",
+        "__enabled": true,
+        "Flags": 0,
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Materials": null,
         "Model": "particles/magicmissile/magic_missile.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "PlaybackRate": 1,
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": true,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null,
+          "Looping": true,
+          "Blending": false
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "868b9533-d296-4fd7-aaa8-48cd4042c986",
-        "DirectionRandomizer": 0,
+        "__enabled": true,
+        "Flags": 0,
+        "DirectionRandomizer": 5,
         "Droppable": false,
         "Model": {
           "_type": "component",
@@ -28,36 +73,62 @@
           "go": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
           "component_type": "SkinnedModelRenderer"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "PhysicsBody": {
           "_type": "component",
           "component_id": "cb90e0b4-8e55-4f80-a33f-0ea0383b5df1",
           "go": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 600,
+        "ProjectileSpeed": 200,
+        "RotateTowardsVelocity": true,
         "SetPositionOnStart": true,
         "SetRotationOnStart": true
       },
       {
         "__type": "Sandbox.Rigidbody",
         "__guid": "cb90e0b4-8e55-4f80-a33f-0ea0383b5df1",
+        "__enabled": true,
+        "Flags": 0,
         "AngularDamping": 0,
-        "Gravity": false,
+        "EnableImpactDamage": true,
+        "EnhancedCcd": false,
+        "Gravity": true,
+        "GravityScale": 0.2,
+        "ImpactDamage": 0,
         "LinearDamping": 0,
         "Locking": {
+          "X": false,
           "Y": true,
+          "Z": false,
           "Pitch": true,
           "Yaw": true,
           "Roll": true
         },
+        "MassCenterOverride": "0,0,0",
         "MassOverride": 0,
+        "MinImpactDamageSpeed": 500,
         "MotionEnabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
         "__guid": "e4edf5d0-c8e2-402a-8b7c-7745f48f7bd7",
+        "__enabled": true,
+        "Flags": 0,
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 5,
@@ -65,82 +136,174 @@
         "ExplodeOnDeath": true,
         "ExplosionDamage": 5,
         "ExplosionRadius": 30,
-        "ExplosionSound": ""
+        "ExplosionSound": "sounds/weapons/explosions/explosion_short_tail.sound",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Particles": null,
+        "SmokeParticles": null,
+        "UseExplosionTimer": false
       },
       {
         "__type": "Sandbox.SphereCollider",
         "__guid": "4077b858-e233-459e-82a7-ce7a2520ac90",
+        "__enabled": true,
+        "Flags": 0,
         "Center": "0,0,0",
+        "ColliderFlags": 0,
+        "Elasticity": null,
+        "Friction": null,
         "IsTrigger": false,
-        "Radius": 10,
-        "Static": false
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "OnObjectTriggerEnter": null,
+        "OnObjectTriggerExit": null,
+        "OnTriggerEnter": null,
+        "OnTriggerExit": null,
+        "Radius": 5,
+        "RollingResistance": null,
+        "Static": false,
+        "Surface": null,
+        "SurfaceVelocity": "0,0,0"
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.FireEmitter",
         "__guid": "ae2f23bd-9c65-4a1c-bb7a-ac6bee85915b",
+        "__enabled": true,
+        "Flags": 0,
         "FireParticleCount": 10,
         "InitialUpVelocity": 0,
         "LeftRightVelocityRandom": 100,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "Projectile": {
           "_type": "component",
           "component_id": "e4edf5d0-c8e2-402a-8b7c-7745f48f7bd7",
           "go": "0bdc7d85-0e0e-4c92-882e-ff9fc36308ca",
           "component_type": "ExplosiveProjectile"
         },
-        "SphericalEmission": true
+        "SphericalEmission": true,
+        "Weapon": null
       }
     ],
     "Children": [
       {
         "__guid": "840409e6-e547-48f7-9f22-a3faf124d66e",
+        "__version": 2,
         "Flags": 0,
         "Name": "trail",
+        "Position": "0,0,0",
+        "Rotation": "0,0,0,1",
+        "Scale": "1,1,1",
         "Tags": "particles",
         "Enabled": true,
         "NetworkMode": 2,
-        "NetworkInterpolation": true,
+        "NetworkFlags": 0,
+        "NetworkOrphaned": 0,
+        "NetworkTransmit": true,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.LegacyParticleSystem",
             "__guid": "a1e7cdfe-3e37-464f-9458-34934a4bf9f8",
+            "__enabled": true,
+            "Flags": 0,
             "ControlPoints": [
               {
                 "Value": "Vector3",
                 "StringCP": "1",
-                "VectorValue": "1,0.35,0"
+                "VectorValue": "1,0.35,0",
+                "FloatValue": 0,
+                "ColorValue": "0,0,0,0",
+                "GameObjectValue": null
               }
             ],
             "Looped": true,
-            "Particles": "particles/magicmissile/magicmissile_splash.vpcf",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "Particles": null,
             "PlaybackSpeed": 1
           }
-        ]
+        ],
+        "Children": []
       },
       {
         "__guid": "a839742f-15d1-4610-a450-3d8e326e4500",
+        "__version": 2,
         "Flags": 0,
         "Name": "smoke",
+        "Position": "0,0,0",
+        "Rotation": "0,0,0,1",
+        "Scale": "1,1,1",
         "Tags": "particles",
         "Enabled": true,
         "NetworkMode": 2,
-        "NetworkInterpolation": true,
+        "NetworkFlags": 0,
+        "NetworkOrphaned": 0,
+        "NetworkTransmit": true,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.LegacyParticleSystem",
             "__guid": "498437b7-2fed-4185-9d0f-83350ef88c68",
+            "__enabled": true,
+            "Flags": 0,
             "ControlPoints": [],
             "Looped": true,
-            "Particles": "particles/magicmissile/magicmissile_smoke.vpcf",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "Particles": null,
             "PlaybackSpeed": 1
           }
-        ]
+        ],
+        "Children": []
       }
-    ]
+    ],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      },
+      "GameObjectSystems": []
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "ResourceVersion": 1,
+  "DontBreakAsTemplate": false,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

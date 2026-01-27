@@ -1,25 +1,70 @@
 {
   "RootObject": {
     "__guid": "2b30d2c8-cc55-40f9-af5b-3034d7257989",
+    "__version": 2,
     "Flags": 0,
     "Name": "elemental_missile",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
     "NetworkMode": 2,
-    "NetworkInterpolation": true,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "46950a82-5a13-49dc-bbba-78f0ba1dd8cc",
+        "__enabled": true,
+        "Flags": 0,
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Materials": null,
         "Model": "models/weapons/spellbook/spellbook.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "PlaybackRate": 1,
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null,
+          "Looping": true,
+          "Blending": false
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
         "__guid": "5f0a60fc-1909-4065-8bc0-4fcb4b4c8bd7",
+        "__enabled": true,
+        "Flags": 0,
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/elemental_missile.geq",
         "HoldPose": "Holdable",
@@ -31,6 +76,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Elemental Missile",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": true,
         "SlotIndex": 0,
         "UnlockDelay": 0
@@ -38,6 +89,8 @@
       {
         "__type": "Grubs.Equipment.Weapons.Weapon",
         "__guid": "bb91e998-61de-4e29-828e-5f3f302b9b68",
+        "__enabled": true,
+        "Flags": 0,
         "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
@@ -51,9 +104,17 @@
         },
         "FiringType": "Instant",
         "MaxUses": 1,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OnFire": {
-          "__version": 7,
+          "__version": 9,
           "__guid": "92244607-8343-4c70-a4f0-dada187bfdd6",
+          "__changeId": 1,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -72,7 +133,7 @@
               "Id": 0,
               "Type": "input",
               "UserData": {
-                "Position": "-240,16"
+                "Position": "-240,12"
               }
             },
             {
@@ -82,35 +143,35 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "-64,-112"
+                "Position": "-60,-108"
               }
             },
             {
               "Id": 3,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "224,-80"
+                "Position": "228,-84"
               }
             },
             {
               "Id": 5,
               "Type": "time.delay",
               "UserData": {
-                "Position": "416,-80"
+                "Position": "420,-84"
               }
             },
             {
               "Id": 13,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "1008,-80"
+                "Position": "1008,-84"
               }
             },
             {
               "Id": 17,
               "Type": "grubs.spawn_projectile",
               "UserData": {
-                "Position": "1872,-80"
+                "Position": "1872,-84"
               }
             },
             {
@@ -120,7 +181,7 @@
                 "_var": "charge"
               },
               "UserData": {
-                "Position": "0,16"
+                "Position": "0,12"
               }
             },
             {
@@ -130,14 +191,14 @@
                 "_var": "charge"
               },
               "UserData": {
-                "Position": "688,464"
+                "Position": "684,468"
               }
             },
             {
               "Id": 23,
               "Type": "time.delay",
               "UserData": {
-                "Position": "1248,-80"
+                "Position": "1248,-84"
               }
             },
             {
@@ -147,7 +208,7 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "752,-176"
+                "Position": "756,-180"
               }
             },
             {
@@ -157,14 +218,14 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "1568,-176"
+                "Position": "1572,-180"
               }
             },
             {
               "Id": 32,
               "Type": "grubs.fire_finished",
               "UserData": {
-                "Position": "2208,-80"
+                "Position": "2208,-84"
               }
             },
             {
@@ -174,7 +235,7 @@
                 "T": "Grubs.Equipment.Weapons.Weapon"
               },
               "UserData": {
-                "Position": "1952,-192"
+                "Position": "1956,-192"
               }
             },
             {
@@ -184,7 +245,7 @@
                 "T": "Grubs.Equipment.Equipment"
               },
               "UserData": {
-                "Position": "576,80"
+                "Position": "576,84"
               }
             },
             {
@@ -195,14 +256,14 @@
                 "_type": "Grubs.Equipment.Equipment"
               },
               "UserData": {
-                "Position": "576,16"
+                "Position": "576,12"
               }
             },
             {
               "Id": 43,
               "Type": "if",
               "UserData": {
-                "Position": "656,-80"
+                "Position": "660,-84"
               }
             },
             {
@@ -212,7 +273,7 @@
                 "T": "Grubs.Equipment.Equipment"
               },
               "UserData": {
-                "Position": "1392,80"
+                "Position": "1392,84"
               }
             },
             {
@@ -223,14 +284,14 @@
                 "_type": "Grubs.Equipment.Equipment"
               },
               "UserData": {
-                "Position": "1392,16"
+                "Position": "1392,12"
               }
             },
             {
               "Id": 56,
               "Type": "if",
               "UserData": {
-                "Position": "1472,-80"
+                "Position": "1476,-84"
               }
             }
           ],
@@ -254,10 +315,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
-              },
+              "Id": 62,
+              "Value": null,
               "DstId": 3,
               "DstName": "projectile"
             },
@@ -274,6 +333,7 @@
               "DstName": "_signal"
             },
             {
+              "Id": 67,
               "Value": 0.15,
               "DstId": 5,
               "DstName": "seconds"
@@ -291,10 +351,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
-              },
+              "Id": 64,
+              "Value": null,
               "DstId": 13,
               "DstName": "projectile"
             },
@@ -317,10 +375,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
-              },
+              "Id": 65,
+              "Value": null,
               "DstId": 17,
               "DstName": "projectile"
             },
@@ -349,6 +405,7 @@
               "DstName": "_signal"
             },
             {
+              "Id": 68,
               "Value": 0.15,
               "DstId": 23,
               "DstName": "seconds"
@@ -433,29 +490,117 @@
             }
           ],
           "Defaults": {
-            "$57._value": {
+            "$65._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             },
-            "$59._value": {
+            "$64._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             },
-            "$60._value": {
+            "$62._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/elemental_missile/elemental_missile_projectile.prefab"
             }
           }
-        }
+        },
+        "OnFireFinished": null,
+        "StartMultiplier": 1,
+        "UseSound": null
       }
     ],
-    "Children": [],
+    "Children": [
+      {
+        "__guid": "e457a027-bab2-4cb3-b052-0255f5fdcd4d",
+        "__version": 2,
+        "Flags": 0,
+        "Name": "hat",
+        "Position": "0,0,0",
+        "Rotation": "0,0,0,1",
+        "Scale": "1,1,1",
+        "Tags": "",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkFlags": 0,
+        "NetworkOrphaned": 0,
+        "NetworkTransmit": true,
+        "OwnerTransfer": 1,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "05462ad0-7b5f-4cd9-b536-26bb0ac06f80",
+            "__enabled": true,
+            "Flags": 0,
+            "AnimationGraph": null,
+            "BodyGroups": 18446744073709551615,
+            "BoneMergeTarget": null,
+            "CreateAttachments": false,
+            "CreateBoneObjects": false,
+            "LodOverride": null,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Materials": null,
+            "Model": "models/citizen_clothes/seasonal/2025/wizard_outfit/wizard_hat/models/wizard_hat.vmdl",
+            "Morphs": {},
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
+            "PlaybackRate": 1,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Sequence": {
+              "Name": null,
+              "Looping": true,
+              "Blending": false
+            },
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ],
+        "Children": []
+      }
+    ],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      },
+      "GameObjectSystems": []
+    },
     "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "ResourceVersion": 1,
+  "DontBreakAsTemplate": false,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
