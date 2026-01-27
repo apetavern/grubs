@@ -1,4 +1,5 @@
 ﻿using Grubs.Equipment;
+using Grubs.Equipment.Weapons;
 using Grubs.Systems.Pawn.Grubs;
 using GrubPlayerController = Grubs.Systems.Pawn.Grubs.Controller.GrubPlayerController;
 
@@ -41,7 +42,7 @@ public sealed class GrubAnimator : Component
 												 && !GrubRenderer.GetBool( "lowhp" )
 												 && !Controller.IsChargingBackflip;
 
-		var shouldHideHands = Controller.Velocity.Length > 0 && !Controller.IsChargingBackflip && !IsOnJetpack;
+		var shouldHideHands = Controller.Velocity.Length > 0 && !Controller.IsChargingBackflip && !IsOnJetpack && (Grub.ActiveEquipment.IsValid() && !Grub.ActiveEquipment.GetComponent<Weapon>().CanFireWhileMoving);
 
 		GrubRenderer.SetBodyGroup( "hide_hands", shouldHideHands ? 1 : 0 );
 
@@ -70,7 +71,7 @@ public sealed class GrubAnimator : Component
 
 		if ( Grub.Health.IsValid() )
 		{
-			GrubRenderer.Set( "lowhp", Grub.Health.CurrentHealth <= Grub.Health.MaxHealth / 4f );
+			GrubRenderer.Set( "lowhp", (Grub.Health.CurrentHealth <= Grub.Health.MaxHealth / 4f) || Grub.IsPoisoned );
 			GrubRenderer.Set( "explode", Grub.Health.DeathInvoked );
 			GrubRenderer.Set( "sliding", Grub.Health.HasBeenDamaged && !Controller.Velocity.IsNearlyZero( 2.5f ) );
 		}
