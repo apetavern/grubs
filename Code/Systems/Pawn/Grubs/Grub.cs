@@ -1,8 +1,11 @@
 using Grubs.Common;
+using Grubs.Extensions;
 using Grubs.Pawn;
 using Grubs.Systems.GameMode;
 using Grubs.Systems.Pawn.Grubs.Controller;
 using Grubs.UI.World;
+using System.Threading;
+using static Sandbox.ClothingContainer;
 
 namespace Grubs.Systems.Pawn.Grubs;
 
@@ -10,6 +13,7 @@ namespace Grubs.Systems.Pawn.Grubs;
 public sealed class Grub : Component, IResolvable
 {
 	private static readonly Logger Log = new("Grub");
+	private CancellationToken token;
 
 	[Sync] public Player Owner { get; private set; }
 
@@ -34,9 +38,6 @@ public sealed class Grub : Component, IResolvable
 
 	public Transform EyePosition => WorldTransform.WithPosition( WorldPosition + Vector3.Up * 24f );
 
-	private static readonly List<Clothing.ClothingCategory> ValidClothingCategories = new() 
-		{ Clothing.ClothingCategory.Hat, Clothing.ClothingCategory.Facial, Clothing.ClothingCategory.Hair };
-
 	protected override void OnStart()
 	{
 		if ( !IsProxy )
@@ -54,27 +55,21 @@ public sealed class Grub : Component, IResolvable
 	{
 		var clothingContainer = ClothingContainer.CreateFromJson( avatarData );
 
-		foreach ( var clothingEntry in clothingContainer.Clothing )
-		{
-			if ( clothingEntry == null || clothingEntry.Clothing == null || !ValidClothingCategories.Contains( clothingEntry.Clothing.Category ) )
-				continue;
+		var ValidClothing = new List<Clothing.ClothingCategory>()
+		{ Clothing.ClothingCategory.Hat,
+		Clothing.ClothingCategory.Facial,
+		Clothing.ClothingCategory.Hair,
+		Clothing.ClothingCategory.HatCap,
+		Clothing.ClothingCategory.FacialHairBeard,
+		Clothing.ClothingCategory.Eyes,
+		Clothing.ClothingCategory.Eyewear,
+		Clothing.ClothingCategory.GlassesEye,
+		Clothing.ClothingCategory.GlassesSun,
+		Clothing.ClothingCategory.Headwear };
 
-			var go = new GameObject();
-			go.SetParent( GameObject );
-			go.Tags.Add( "clothing" );
-			go.Tags.Add( clothingEntry.Clothing.Category.ToString() );
-			go.Name = $"Clothing - {clothingEntry.Clothing.ResourceName}";
-			var clothingModel = go.Components.Create<SkinnedModelRenderer>();
-			clothingModel.Model = Model.Load( clothingEntry.Clothing.Model );
-			clothingModel.BoneMergeTarget = Animator.GrubRenderer;
+		clothingContainer.Clothing.RemoveAll( entry => (entry.Clothing != null && !ValidClothing.Contains( entry.Clothing.Category )) );
 
-			if ( clothingEntry.Clothing.AllowTintSelect )
-			{
-				var tintValue = clothingEntry.Tint?.Clamp( 0, 1 ) ?? clothingEntry.Clothing.TintDefault;
-				var tintColor = clothingEntry.Clothing.TintSelection.Evaluate( tintValue );
-				clothingModel.Tint = tintColor;
-			}
-		}
+		_ = GrubsClothingExtensions.ApplyAsync( clothingContainer, Animator.GrubRenderer, token, ValidClothing );
 
 		Network.Refresh();
 	}
