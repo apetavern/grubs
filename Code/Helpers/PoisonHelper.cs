@@ -85,7 +85,6 @@ public sealed class PoisonHelper : Component
 
 		var tr = Scene.Trace.Ray( PoisonParticles[particle].Position,
 			PoisonParticles[particle].Position + PoisonParticles[particle].Velocity.Normal * 5f )
-			.WithoutTags("player")
 			.Run();
 
 		if ( !tr.Hit )
