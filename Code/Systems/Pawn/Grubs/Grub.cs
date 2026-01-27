@@ -56,7 +56,7 @@ public sealed class Grub : Component, IResolvable
 
 		foreach ( var clothingEntry in clothingContainer.Clothing )
 		{
-			if ( !ValidClothingCategories.Contains( clothingEntry.Clothing.Category ) )
+			if ( clothingEntry == null || clothingEntry.Clothing == null || !ValidClothingCategories.Contains( clothingEntry.Clothing.Category ) )
 				continue;
 
 			var go = new GameObject();
