@@ -2,6 +2,7 @@
 using Grubs.Equipment.Weapons;
 using Grubs.Pawn;
 using Grubs.Systems.Pawn;
+using Grubs.Systems.Pawn.Grubs;
 using Grub = Grubs.Systems.Pawn.Grubs.Grub;
 
 namespace Grubs.Equipment;
@@ -58,7 +59,12 @@ public class Equipment : Component
 
 		var show = Grub.PlayerController.ShouldShowWeapon() && Deployed;
 		Model.Enabled = show;
-		
+
+		foreach ( var item in GetComponentsInChildren<SkinnedModelRenderer>( true ) )
+		{
+			item.Enabled = show;
+		}
+
 		Grub.SetHatVisible( !show || !Data.HideHatWhenDeployed );
 	}
 
@@ -88,6 +94,13 @@ public class Equipment : Component
 
 		GameObject.SetParent( grub.GameObject, false );
 		Model.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
+
+		foreach ( var item in GetComponentsInChildren<SkinnedModelRenderer>(true) )
+		{
+			item.BoneMergeTarget = grub.Components.Get<SkinnedModelRenderer>();
+			item.Enabled = true;
+		}
+
 		Model.Enabled = true;
 		Deployed = true;
 		
@@ -121,6 +134,13 @@ public class Equipment : Component
 		Grub = null;
 
 		Model.BoneMergeTarget = null;
+
+		foreach ( var item in GetComponentsInChildren<SkinnedModelRenderer>(true) )
+		{
+			item.BoneMergeTarget = null;
+			item.Enabled = false;
+		}
+
 		Model.Enabled = false;
 		Deployed = false;
 		
