@@ -4,7 +4,7 @@
   "Icon": "models/tools/blowtorch/blowtorch.vmdl_c.png",
   "Type": "Tool",
   "EquipmentPrefab": "prefabs/tools/torch/torch.prefab",
-  "HideHatWhenDeployed": false,
+  "HideHatWhenDeployed": true,
   "DefaultAmmo": 4,
   "DropChance": 1,
   "__references": [],
