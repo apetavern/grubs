@@ -21,6 +21,8 @@ public sealed class Grub : Component, IResolvable
 
 	[Sync] public Mountable ActiveMountable { get; set; }
 
+	[Sync,Property] public bool IsPoisoned { get; set; }
+
 	public bool IsActive()
 	{
 		return BaseGameMode.Current.IsValid() && BaseGameMode.Current.IsGrubActive( this );
@@ -86,11 +88,17 @@ public sealed class Grub : Component, IResolvable
 		}
 	}
 
-[Rpc.Owner( NetFlags.HostOnly )]
+	[Rpc.Owner( NetFlags.HostOnly )]
 	public void SetOwner( Player player )
 	{
 		Owner = player;
 		Log.Info( $"Set owner of {this} to {player}." );
+	}
+
+	[Rpc.Owner]
+	public void SetPoisoned( bool value )
+	{
+		IsPoisoned = value;
 	}
 
 	public void OnHardFall()
@@ -103,6 +111,28 @@ public sealed class Grub : Component, IResolvable
 	public void OnTurnStart()
 	{
 		TurnIndicator.Show( this );
+	}
+
+	public void OnOwnerTurnEnd()
+	{
+		if ( IsPoisoned )
+		{
+			var dmg = new GrubsDamageInfo( 10, new Guid(), "poison", WorldPosition );
+			Health.TakeDamage( dmg );
+		}
+	}
+
+	public void OnGrubTurnEnd()
+	{
+
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( IsPoisoned )
+		{
+			Animator.GrubRenderer.Tint = Color.Green;
+		}
 	}
 
 	public override string ToString()

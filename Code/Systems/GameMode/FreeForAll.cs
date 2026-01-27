@@ -238,7 +238,7 @@ public sealed class FreeForAll : BaseGameMode
 		Log.Info( $"Starting turn change (finished: {ActivePlayer})." );
 		
 		if ( ActivePlayer.IsValid() )
-			ActivePlayer.OnTurnEnd();
+			ActivePlayer.OnTurnEnd(ActivePlayer.ActiveGrub);
 		TimeSinceTurnChangeStarted = 0;
 		TurnIsChanging = true;
 	}

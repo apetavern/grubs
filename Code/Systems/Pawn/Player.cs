@@ -149,9 +149,17 @@ public sealed class Player : LocalComponent<Player>
 	}
 
 	[Rpc.Owner( NetFlags.HostOnly )]
-	public void OnTurnEnd()
+	public void OnTurnEnd( Grub grub )
 	{
 		HasFiredThisTurn = false;
 		Inventory?.HolsterActive();
+
+		if ( grub.IsValid() )
+			grub.OnGrubTurnEnd();
+
+		foreach ( var singleGrub in Grubs )
+		{
+			singleGrub?.OnOwnerTurnEnd();
+		}	
 	}
 }
