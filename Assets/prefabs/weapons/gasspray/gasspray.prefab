@@ -29,7 +29,7 @@
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Materials": null,
-        "Model": "models/weapons/flamethrower/flamethrower.vmdl",
+        "Model": "models/weapons/gasspray/gasspray.vmdl",
         "Morphs": {},
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -67,8 +67,8 @@
         "Flags": 0,
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/gasthrower.geq",
-        "HoldPose": "Uzi",
-        "Icon": "models/weapons/flamethrower/flamethrower.vmdl.png",
+        "HoldPose": "Revolver",
+        "Icon": "models/weapons/gasspray/gasspray.vmdl.png",
         "Model": {
           "_type": "component",
           "component_id": "d08f97c8-b344-4538-ab5a-0a92b28ca657",
@@ -103,7 +103,7 @@
           "component_type": "Equipment"
         },
         "FiringType": "Continuous",
-        "MaxUses": 50,
+        "MaxUses": 25,
         "Muzzle": null,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -122,7 +122,7 @@
         "__enabled": true,
         "Flags": 0,
         "FireParticleCount": 1,
-        "InitialUpVelocity": 75,
+        "InitialUpVelocity": 25,
         "LeftRightVelocityRandom": 10,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -171,7 +171,7 @@
             "MaterialGroup": null,
             "MaterialOverride": null,
             "Materials": null,
-            "Model": "models/citizen_clothes/hat/gasmask/models/gasmask.vmdl",
+            "Model": "models/weapons/gasspray/gasmask.vmdl",
             "Morphs": {},
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
@@ -222,8 +222,7 @@
         "AgentMaxSlope": 40,
         "ExcludedBodies": "",
         "IncludedBodies": ""
-      },
-      "GameObjectSystems": []
+      }
     },
     "__variables": []
   },
