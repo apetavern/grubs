@@ -3,6 +3,7 @@ using Grubs.Equipment.Weapons;
 using Grubs.Pawn;
 using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
+using Sandbox;
 using Grub = Grubs.Systems.Pawn.Grubs.Grub;
 
 namespace Grubs.Equipment;
@@ -160,5 +161,31 @@ public class Equipment : Component
 		if ( Ammo == -1 )
 			return;
 		Ammo += 1;
+	}
+
+	protected override void DrawGizmos()
+	{
+		var isPrefab = Scene.Source is PrefabFile;
+
+		if ( !isPrefab ) return;
+		var editorOffset = new Vector3( -50, -50, 0 );
+
+		Gizmo.Transform = new Transform( editorOffset, Rotation.Identity, Vector3.One );
+		Gizmo.Draw.Color = Color.White.WithAlpha( 1f);
+
+		var citizen = Gizmo.Draw.Model( "models/citizenworm.vmdl" );
+		citizen.SetAnimParameter( "holdpose", (int)HoldPose );
+		citizen.SetAnimParameter( "grounded", true );
+		citizen.Update( Time.Delta );
+
+		var modelRenderer = GetComponentsInChildren<SkinnedModelRenderer>();
+
+		if ( modelRenderer.Count() == 0 )
+			return;
+
+		foreach ( var model in modelRenderer ) { 
+			var item = Gizmo.Draw.Model( model.Model );
+			item.MergeBones( citizen );
+		}
 	}
 }
