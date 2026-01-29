@@ -1467,8 +1467,7 @@
       "AgentMaxSlope": 80,
       "ExcludedBodies": "nopathing",
       "IncludedBodies": ""
-    },
-    "GameObjectSystems": []
+    }
   },
   "ResourceVersion": 3,
   "Title": "beach",

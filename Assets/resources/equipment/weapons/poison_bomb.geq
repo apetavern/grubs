@@ -1,11 +1,11 @@
 {
-  "Name": "Poison bomb",
-  "Description": "Explode in big poison!",
-  "Icon": "models/weapons/petrolbomb/poisonbomb.vmdl.png",
+  "Name": "Gas Grenade",
+  "Description": "Poison a group of enemies!",
+  "Icon": "models/weapons/gasgrenade/gasgrenade_holdable.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/poison_bomb/poison_bomb.prefab",
   "HideHatWhenDeployed": false,
-  "DefaultAmmo": 5,
+  "DefaultAmmo": 3,
   "DropChance": 2,
   "__references": [],
   "__version": 0

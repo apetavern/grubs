@@ -29,7 +29,7 @@
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Materials": null,
-        "Model": "models/weapons/petrolbomb/poisonbomb.vmdl",
+        "Model": "models/weapons/gasgrenade/gasgrenade_holdable.vmdl",
         "Morphs": {},
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -66,16 +66,16 @@
         "__enabled": true,
         "Flags": 0,
         "CameraCanZoom": true,
-        "Data": "resources/equipment/weapons/petrol_bomb.geq",
+        "Data": "resources/equipment/weapons/poison_bomb.geq",
         "HoldPose": "Throwable",
-        "Icon": "models/weapons/petrolbomb/poisonbomb.vmdl.png",
+        "Icon": "models/weapons/gasgrenade/gasgrenade_holdable.vmdl.png",
         "Model": {
           "_type": "component",
           "component_id": "ec0d8124-e6dd-4098-ba22-782e6c2a7cee",
           "go": "b467da93-57ec-4b74-aaf6-6b848e4109d7",
           "component_type": "SkinnedModelRenderer"
         },
-        "Name": "Petrol Bomb",
+        "Name": "Gas Grenade",
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -240,8 +240,7 @@
         "AgentMaxSlope": 40,
         "ExcludedBodies": "",
         "IncludedBodies": ""
-      },
-      "GameObjectSystems": []
+      }
     },
     "__variables": []
   },

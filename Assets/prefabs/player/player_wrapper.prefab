@@ -127,15 +127,15 @@
           },
           {
             "_type": "gameobject",
-            "prefab": "prefabs/tools/ninja_rope/ninja_rope.prefab"
-          },
-          {
-            "_type": "gameobject",
-            "prefab": "prefabs/weapons/poison_bomb/poison_bomb.prefab"
+            "prefab": "prefabs/weapons/brass_knuckles/brass_knuckles.prefab"
           },
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/gasspray/gasspray.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/poison_bomb/poison_bomb.prefab"
           }
         ],
         "OnComponentDestroy": null,
@@ -219,8 +219,7 @@
         "AgentMaxSlope": 40,
         "ExcludedBodies": "",
         "IncludedBodies": ""
-      },
-      "GameObjectSystems": []
+      }
     },
     "__variables": []
   },
