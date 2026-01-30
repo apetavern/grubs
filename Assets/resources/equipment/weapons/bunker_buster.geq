@@ -6,7 +6,7 @@
   "EquipmentPrefab": null,
   "HideHatWhenDeployed": false,
   "DefaultAmmo": 1,
-  "DropChance": 0,
+  "DropChance": 0.2,
   "__references": [],
   "__version": 0
 }

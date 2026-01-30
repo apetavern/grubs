@@ -4,8 +4,9 @@
   "Icon": "models/weapons/mrl/mrl.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": "prefabs/weapons/multiple_rocket_launcher/mrl.prefab",
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 0,
-  "DropChance": 0,
+  "DropChance": 0.2,
   "__references": [],
   "__version": 0
 }

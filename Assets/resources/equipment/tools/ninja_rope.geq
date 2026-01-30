@@ -6,7 +6,7 @@
   "EquipmentPrefab": "resources/equipment/tools/mountable.prefab",
   "HideHatWhenDeployed": false,
   "DefaultAmmo": 4,
-  "DropChance": 1,
+  "DropChance": 0,
   "__references": [],
   "__version": 0
 }

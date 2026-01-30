@@ -4,8 +4,9 @@
   "Icon": "models/weapons/brassknuckles/brassknuckles.vmdl.png",
   "Type": "Weapon",
   "EquipmentPrefab": null,
+  "HideHatWhenDeployed": false,
   "DefaultAmmo": 1,
-  "DropChance": 0,
+  "DropChance": 1,
   "__references": [],
   "__version": 0
 }

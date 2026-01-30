@@ -22,6 +22,14 @@ public static class CrateDrops
 		if ( _init && !Game.IsEditor )
 			return;
 
+		// Clear collections before re-initializing (important for hot reload in editor)
+		WeaponDropChances.Clear();
+		ToolDropChances.Clear();
+		WeaponDropMap.Clear();
+		CumulativeWeaponDropPercentages.Clear();
+		ToolDropMap.Clear();
+		CumulativeToolDropPercentages.Clear();
+
 		foreach ( var res in EquipmentResource.All )
 		{
 			var equipmentType = res.Type;
