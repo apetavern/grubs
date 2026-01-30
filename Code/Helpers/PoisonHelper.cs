@@ -99,6 +99,8 @@ public sealed class PoisonHelper : Component
 			PoisonParticles[particle] = fire;
 		}
 
+		if ( fire.TimeSinceLastDestruction < 0.05f ) return;
+
 		fire.TimeSinceLastDestruction = 0f;
 		PoisonParticles[particle] = fire;
 
