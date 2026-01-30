@@ -1,22 +1,34 @@
 {
   "RootObject": {
     "__guid": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
+    "__version": 2,
     "Flags": 0,
     "Name": "banana_bomb_thrown",
     "Position": "0,0,12.84634",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
     "Tags": "projectile",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "4260c093-b585-49e2-ad71-7bf6d820e684",
+        "__enabled": true,
+        "Flags": 0,
         "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
         "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
         "MaterialGroup": null,
         "MaterialOverride": null,
+        "Materials": null,
         "Model": "models/weapons/banana/banana_bunch.vmdl",
         "Morphs": {},
         "OnComponentDestroy": null,
@@ -32,6 +44,7 @@
           "vectors": {},
           "rotations": {}
         },
+        "PlaybackRate": 1,
         "RenderOptions": {
           "GameLayer": true,
           "OverlayLayer": false,
@@ -40,7 +53,9 @@
         },
         "RenderType": "On",
         "Sequence": {
-          "Name": null
+          "Name": null,
+          "Looping": true,
+          "Blending": false
         },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -48,6 +63,8 @@
       {
         "__type": "Sandbox.HighlightOutline",
         "__guid": "2f049158-b5e5-4fd3-a9f8-9c3b893a1ca3",
+        "__enabled": true,
+        "Flags": 0,
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -59,13 +76,21 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
+        "OverrideTargets": false,
+        "Targets": null,
         "Width": 0.25
       },
       {
         "__type": "Sandbox.Rigidbody",
         "__guid": "868a47c7-7050-43bd-8cdf-a82ceb9bd3f6",
+        "__enabled": true,
+        "Flags": 0,
         "AngularDamping": 0,
+        "EnableImpactDamage": true,
+        "EnhancedCcd": false,
         "Gravity": true,
+        "GravityScale": 1,
+        "ImpactDamage": 0,
         "LinearDamping": 0,
         "Locking": {
           "X": false,
@@ -76,7 +101,8 @@
           "Roll": true
         },
         "MassCenterOverride": "0,0,0",
-        "MassOverride": 0,
+        "MassOverride": 57,
+        "MinImpactDamageSpeed": 500,
         "MotionEnabled": true,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -91,6 +117,8 @@
       {
         "__type": "Grubs.Common.Health",
         "__guid": "46ede679-36ed-4b55-beed-fa16de5163ce",
+        "__enabled": true,
+        "Flags": 0,
         "MaxHealth": 80,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -102,6 +130,8 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
         "__guid": "9ea914a3-115f-4d5c-af57-7bda9083898a",
+        "__enabled": true,
+        "Flags": 0,
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
@@ -116,13 +146,13 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
-        "SmokeParticles": "particles/explosion/grubs_explosion_smoke.vpcf",
         "UseExplosionTimer": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "55fadc73-d947-4189-8344-61f486c8af3d",
+        "__enabled": true,
+        "Flags": 0,
         "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
@@ -143,7 +173,7 @@
           "go": "935a98c0-9f3a-4389-b97e-c94a4c2d6ad8",
           "component_type": "Rigidbody"
         },
-        "ProjectileSpeed": 125,
+        "ProjectileSpeed": 800,
         "RotateTowardsVelocity": false,
         "SetPositionOnStart": true,
         "SetRotationOnStart": false
@@ -151,6 +181,8 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
         "__guid": "ad599cd5-1863-4bcc-bd6c-8dfc569bc00b",
+        "__enabled": true,
+        "Flags": 0,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -176,6 +208,8 @@
       {
         "__type": "Grubs.Bouncy",
         "__guid": "2015c54e-d029-46cb-8ceb-b89d946330b0",
+        "__enabled": true,
+        "Flags": 0,
         "Body": {
           "_type": "component",
           "component_id": "868a47c7-7050-43bd-8cdf-a82ceb9bd3f6",
@@ -192,11 +226,15 @@
         "Reflect": true
       },
       {
-        "__type": "Sandbox.ModelCollider",
-        "__guid": "d5a67057-0415-480c-97ef-e8560fa381d9",
-        "Friction": null,
+        "__type": "Sandbox.CapsuleCollider",
+        "__guid": "999b6e28-1a12-409b-9025-0b0fd5a39317",
+        "__enabled": true,
+        "Flags": 0,
+        "ColliderFlags": 0,
+        "Elasticity": 0.5,
+        "End": "-2.509999,0,5.470003",
+        "Friction": 0,
         "IsTrigger": false,
-        "Model": "models/weapons/banana/banana_bunch.vmdl",
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -207,22 +245,19 @@
         "OnObjectTriggerExit": null,
         "OnTriggerEnter": null,
         "OnTriggerExit": null,
+        "Radius": 3.569995,
+        "RollingResistance": 0.75,
+        "Start": "3.12,0,-2.159997",
         "Static": false,
         "Surface": "surfaces/banana_bounce.surface",
         "SurfaceVelocity": "0,0,0"
       }
     ],
     "Children": [],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -236,13 +271,14 @@
         "ExcludedBodies": "",
         "IncludedBodies": ""
       }
-    }
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

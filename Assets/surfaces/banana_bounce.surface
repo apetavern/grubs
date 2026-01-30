@@ -3,11 +3,11 @@
   "AudioSurface": "Generic",
   "Description": null,
   "Friction": 0.2,
-  "Elasticity": 1,
+  "Elasticity": 0.7,
   "Density": 1000,
-  "Thickness": -1,
-  "Dampening": 40,
+  "RollingResistance": 0,
   "BounceThreshold": 0,
+  "Dampening": 40,
   "ImpactEffects": {
     "Regular": [],
     "Bullet": [],
@@ -19,14 +19,39 @@
   },
   "ScrapeEffects": {
     "RoughnessFactor": 0.25,
-    "RoughThreshold": 0.5
+    "RoughThreshold": 0.5,
+    "SmoothParticles": null,
+    "RoughParticles": null,
+    "SmoothDecal": null,
+    "RoughDecal": null
   },
   "Sounds": {
+    "FootLeft": null,
+    "FootRight": null,
+    "FootLaunch": null,
     "FootLand": "sounds/weapons/banana/bounce.sound",
+    "Bullet": null,
     "ImpactHard": "sounds/weapons/banana/bounce.sound",
-    "ImpactSoft": "sounds/weapons/banana/bounce.sound"
+    "ImpactSoft": "sounds/weapons/banana/bounce.sound",
+    "ScrapeRough": null,
+    "ScrapeSmooth": null
   },
-  "Breakables": {},
+  "PrefabCollection": {
+    "BulletImpact": null,
+    "BluntImpact": null
+  },
+  "SoundCollection": {
+    "FootLeft": null,
+    "FootRight": null,
+    "FootLaunch": null,
+    "FootLand": null,
+    "Bullet": null,
+    "ImpactHard": null,
+    "ImpactSoft": null,
+    "ScrapeRough": null,
+    "ScrapeSmooth": null,
+    "Break": null
+  },
   "Tags": null,
   "__references": [],
   "__version": 0

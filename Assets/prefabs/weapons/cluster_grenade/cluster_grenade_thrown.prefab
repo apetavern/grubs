@@ -1,21 +1,34 @@
 {
   "RootObject": {
     "__guid": "46268355-78ef-4f3d-80ac-e834e23863b7",
+    "__version": 2,
     "Flags": 0,
     "Name": "cluster_grenade_thrown",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
     "Tags": "projectile",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "0b735714-423c-4368-94aa-5a00a86a0255",
+        "__enabled": true,
+        "Flags": 0,
         "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
         "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
         "MaterialGroup": null,
         "MaterialOverride": null,
+        "Materials": null,
         "Model": "models/weapons/cluster_grenade/cluster_grenade.vmdl",
         "Morphs": {},
         "OnComponentDestroy": null,
@@ -31,6 +44,7 @@
           "vectors": {},
           "rotations": {}
         },
+        "PlaybackRate": 1,
         "RenderOptions": {
           "GameLayer": true,
           "OverlayLayer": false,
@@ -39,7 +53,9 @@
         },
         "RenderType": "On",
         "Sequence": {
-          "Name": null
+          "Name": null,
+          "Looping": true,
+          "Blending": false
         },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -47,6 +63,8 @@
       {
         "__type": "Sandbox.HighlightOutline",
         "__guid": "0727d201-9c50-40a5-a14e-0b2f7fd4fdae",
+        "__enabled": true,
+        "Flags": 0,
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -58,13 +76,21 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
+        "OverrideTargets": false,
+        "Targets": null,
         "Width": 0.25
       },
       {
         "__type": "Sandbox.Rigidbody",
         "__guid": "085992c5-90d0-4645-9e8b-4358906a11c4",
+        "__enabled": true,
+        "Flags": 0,
         "AngularDamping": 0,
+        "EnableImpactDamage": true,
+        "EnhancedCcd": false,
         "Gravity": true,
+        "GravityScale": 1,
+        "ImpactDamage": 0,
         "LinearDamping": 0,
         "Locking": {
           "X": false,
@@ -75,7 +101,8 @@
           "Roll": true
         },
         "MassCenterOverride": "0,0,0",
-        "MassOverride": 0,
+        "MassOverride": 57,
+        "MinImpactDamageSpeed": 500,
         "MotionEnabled": true,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -90,7 +117,11 @@
       {
         "__type": "Sandbox.SphereCollider",
         "__guid": "a27f0845-63ca-4594-9fc5-9a828bed4623",
+        "__enabled": true,
+        "Flags": 0,
         "Center": "0,0,0",
+        "ColliderFlags": 0,
+        "Elasticity": null,
         "Friction": null,
         "IsTrigger": false,
         "OnComponentDestroy": null,
@@ -104,6 +135,7 @@
         "OnTriggerEnter": null,
         "OnTriggerExit": null,
         "Radius": 7.5,
+        "RollingResistance": null,
         "Static": false,
         "Surface": null,
         "SurfaceVelocity": "0,0,0"
@@ -111,6 +143,8 @@
       {
         "__type": "Grubs.Common.Health",
         "__guid": "ae347a6b-793e-4c4a-979f-d0aadc6d3455",
+        "__enabled": true,
+        "Flags": 0,
         "MaxHealth": 80,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -122,6 +156,8 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
         "__guid": "10a39bd9-b546-4e13-90f8-f1bae893e327",
+        "__enabled": true,
+        "Flags": 0,
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 4,
@@ -136,13 +172,13 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
-        "SmokeParticles": "particles/explosion/grubs_explosion_smoke.vpcf",
         "UseExplosionTimer": true
       },
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "174fbd63-d12f-418a-b219-7c916c71a5b1",
+        "__enabled": true,
+        "Flags": 0,
         "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
@@ -171,6 +207,8 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.Shrapnel",
         "__guid": "4ac0f3e5-66b3-48e6-b4b7-72978ece48dc",
+        "__enabled": true,
+        "Flags": 0,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -195,16 +233,10 @@
       }
     ],
     "Children": [],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -218,13 +250,14 @@
         "ExcludedBodies": "",
         "IncludedBodies": ""
       }
-    }
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
