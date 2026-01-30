@@ -156,6 +156,24 @@ public static class GrubsConfig
 	public static float TerrainNoiseZoom { get; set; } = 2f;
 
 	/// <summary>
+	/// The zoom amount for the Perlin noise.
+	/// </summary>
+	[ConVar( "terrain_cavern_pockets" )]
+	public static int TerrainCavernPockets { get; set; } = 8;
+
+	/// <summary>
+	/// The zoom amount for the Perlin noise.
+	/// </summary>
+	[ConVar( "terrain_cavern_pockets_min_size" )]
+	public static float TerrainCavernPocketMinSize { get; set; } = 80f;
+
+	/// <summary>
+	/// The zoom amount for the Perlin noise.
+	/// </summary>
+	[ConVar( "terrain_cavern_pockets_max_size" )]
+	public static float TerrainCavernPocketMaxSize { get; set; } = 200f;
+
+	/// <summary>
 	/// If true, we do not end the game when only one player is remaining.
 	/// </summary>
 	[ConVar( "keep_game_alive" )]
@@ -177,7 +195,8 @@ public static class GrubsConfig
 	public enum TerrainType
 	{
 		Generated = 0,
-		Texture = 1
+		Texture = 1,
+		Cavern = 2
 	}
 
 	public enum TerrainTexture

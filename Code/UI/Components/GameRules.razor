@@ -3,6 +3,7 @@
 @using Grubs
 @using Grubs.Terrain;
 @using Grubs.UI.Components
+@using Grubs.UI.GameLanding
 
 @attribute [StyleSheet]
 
@@ -88,6 +89,12 @@
                         </ControlInput>
                     }
                 </div>
+                @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture)
+                {
+                    <div style="justify-content:center; padding-top: 5%;">
+                        <TerrainPreview class="settings-terrain-preview" style="width:800px; height:492px" RenderCamera=@GameLanding.Instance.PreviewCamera />
+                    </div>
+                }
                 @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated)
                 {
                     <ControlInput class="control-wrap" Label="Terrain Length: @($"{GrubsConfig.TerrainLength} units")">
@@ -113,6 +120,34 @@
                     <ControlInput class="control-wrap" Label="Terrain Noise Zoom: @($"{GrubsConfig.TerrainNoiseZoom}f")">
                         <Control>
                             <SliderControl Min=@(1) Max=@(5) Step=@(0.1f) Value:bind=@GrubsConfig.TerrainNoiseZoom />
+                        </Control>
+                    </ControlInput>
+                }
+                @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Cavern)
+                {
+                    <ControlInput class="control-wrap" Label="Terrain Length: @($"{GrubsConfig.TerrainLength} units")">
+                        <Control>
+                            <SliderControl Min=@(1024) Max=@(4096) Step=@(64f) Value:bind=@GrubsConfig.TerrainLength />
+                        </Control>
+                    </ControlInput>
+                    <ControlInput class="control-wrap" Label="Terrain Height: @($"{GrubsConfig.TerrainHeight} units")">
+                        <Control>
+                            <SliderControl Min=@(512) Max=@(2048) Step=@(64f) Value:bind=@GrubsConfig.TerrainHeight />
+                        </Control>
+                    </ControlInput>
+                    <ControlInput class="control-wrap" Label="Terrain Pocket Count: @($"{GrubsConfig.TerrainCavernPockets}")">
+                        <Control>
+                            <SliderControl Min=@(4) Max=@(16) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPockets />
+                        </Control>
+                    </ControlInput>
+                    <ControlInput class="control-wrap" Label="Terrain Pocket Minimum Radius: @($"{GrubsConfig.TerrainCavernPocketMinSize}f")">
+                        <Control>
+                            <SliderControl Min=@(20) Max=@(200) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPocketMinSize />
+                        </Control>
+                    </ControlInput>
+                    <ControlInput class="control-wrap" Label="Terrain Pocket Maximum Radius: @($"{GrubsConfig.TerrainCavernPocketMaxSize}f")">
+                        <Control>
+                            <SliderControl Min=@(200) Max=@(512) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPocketMaxSize />
                         </Control>
                     </ControlInput>
                 }

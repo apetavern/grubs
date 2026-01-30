@@ -22,15 +22,14 @@ public partial class GrubsTerrain
 
 	private void SetupGeneratedWorld()
 	{
-		// var cfg = new MaterialsConfig( true, true );
-		// var materials = GetActiveMaterials( cfg );
-		// AddWorldBox( GrubsConfig.TerrainLength, GrubsConfig.TerrainHeight );
-
 		WorldTextureLength = GrubsConfig.TerrainLength;
 		WorldTextureHeight = GrubsConfig.TerrainHeight;
 
-		CreateNoiseMap();
-		// GenerateWorldTextureSdf();
+		// Choose between hillside terrain or cavern terrain
+		if ( GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Cavern ) // You'll need to add this config option
+			CreateCavernTerrain();
+		else
+			CreateNoiseMap();
 	}
 
 	private bool[,] TerrainMap;
