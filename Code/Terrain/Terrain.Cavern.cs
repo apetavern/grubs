@@ -34,27 +34,30 @@ public partial class GrubsTerrain
 		var cfg = new MaterialsConfig( true, true );
 		var materials = GetActiveMaterials( cfg );
 		
-		// Create main rectangular base
+		// Create main rectangular base with SMOOTHING via Expand
 		var boxSdf = new RectSdf( 
 			new Vector2( -worldLength / 2f, 0 ), 
 			new Vector2( worldLength / 2f, worldHeight*0.5f )
-		);
+		).Expand( 2f ); // This smooths the corners!
 		
 		Add( SdfWorld, boxSdf, materials.ElementAt( 0 ).Key );
 		Add( SdfWorld, boxSdf, RockMaterial );
 		
 		// Add VERY wavy top surface using heightmap with increased amplitude
-		var freq = 0.01f; // Use full frequency for waviness
+		var freq = 0.01f;
 		var heightMapSdf = new HeightmapSdf2D( 
-			new Vector2( -worldLength / 2f, 0f ), // Start lower for bigger waves
+			new Vector2( -worldLength / 2f, 0f ),
 			new Vector2( worldLength / 2f, worldHeight ),
 			freq,
 			seed );
 
 		var transformedHeightMapSdf = heightMapSdf.Transform( new Vector2( 0, worldHeight * 0.5f ) );
 		
-		Add( SdfWorld, transformedHeightMapSdf, materials.ElementAt( 0 ).Key );
-		Add( SdfWorld, transformedHeightMapSdf, RockMaterial );
+		// Apply expand to smooth the heightmap too
+		var smoothedHeightMap = transformedHeightMapSdf.Expand( 3f );
+		
+		Add( SdfWorld, smoothedHeightMap, materials.ElementAt( 0 ).Key );
+		Add( SdfWorld, smoothedHeightMap, RockMaterial );
 	}
 
 	private List<CavernPocket> GenerateCavernPockets( int worldLength, int worldHeight, int seed )
@@ -64,7 +67,7 @@ public partial class GrubsTerrain
 
 		var minRadius = GrubsConfig.TerrainCavernPocketMinSize;
 		var maxRadius = GrubsConfig.TerrainCavernPocketMaxSize;
-		var edgeMargin = 200f; // Increased margin to account for wavy edges
+		var edgeMargin = 200f;
 		var minPocketDistance = 100f;
 
 		var pocketCount = GrubsConfig.TerrainCavernPockets;
@@ -124,20 +127,18 @@ public partial class GrubsTerrain
 		if ( pockets.Count < 2 )
 			return tunnels;
 
-		// Maximum distance for connections (avoid cross-screen tunnels)
 		var maxConnectionDistance = GrubsConfig.TerrainLength/2f;
 
 		for ( int i = 0; i < pockets.Count; i++ )
 		{
 			var pocket = pockets[i];
-			var connectionCount = random.Next( 1, 3 ); // 1-2 connections per pocket
+			var connectionCount = random.Next( 1, 3 );
 			
-			// Find ONLY the closest pockets within max distance
 			var nearbyPockets = pockets
 				.Where( p => p.Position != pocket.Position )
 				.Where( p => Vector2.DistanceBetween( pocket.Position, p.Position ) <= maxConnectionDistance )
 				.OrderBy( p => Vector2.DistanceBetween( pocket.Position, p.Position ) )
-				.Take( 2 ) // Only consider the 2 closest
+				.Take( 2 )
 				.ToList();
 
 			if ( nearbyPockets.Count == 0 )
@@ -156,12 +157,12 @@ public partial class GrubsTerrain
 
 				if ( !tunnelExists )
 				{
-					var tunnelRadius = (float)random.NextDouble() * 30f + 40f;
 					tunnels.Add( new CavernTunnel
 					{
 						Start = pocket.Position,
 						End = target.Position,
-						Radius = tunnelRadius
+						StartRadius = pocket.Radius, // Store the source pocket radius
+						EndRadius = target.Radius    // Store the target pocket radius
 					} );
 					connectionsAdded++;
 				}
@@ -178,17 +179,16 @@ public partial class GrubsTerrain
 		// Subtract all pockets with organic, irregular shapes
 		foreach ( var pocket in pockets )
 		{
-			// Create highly organic pockets using many overlapping circles with noise-based variation
-			var blobCount = random.Next( 8, 15 ); // More circles for smoother shapes
+			// Increase blob count for smoother blending
+			var blobCount = random.Next( 12, 20 ); // More circles = smoother
 			
 			for ( int i = 0; i < blobCount; i++ )
 			{
 				var angle = (i / (float)blobCount) * MathF.PI * 2f;
 				
-				// Use noise to vary the distance and size
 				var noiseValue = Noise.Perlin( pocket.Position.x * 0.01f + angle, pocket.Position.y * 0.01f );
-				var radiusVariation = 0.3f + noiseValue * 0.4f; // 0.3 to 0.7
-				var distanceVariation = 0.2f + noiseValue * 0.3f; // 0.2 to 0.5
+				var radiusVariation = 0.5f + noiseValue * 0.4f;
+				var distanceVariation = 0.2f + noiseValue * 0.3f;
 				
 				var offset = new Vector2(
 					MathF.Cos( angle ) * pocket.Radius * distanceVariation,
@@ -196,12 +196,13 @@ public partial class GrubsTerrain
 				);
 				
 				var blobRadius = pocket.Radius * radiusVariation;
-				var blobCircle = new CircleSdf( pocket.Position + offset, blobRadius );
+				// Apply Expand to each circle for smoothing
+				var blobCircle = new CircleSdf( pocket.Position + offset, blobRadius ).Expand( 2f );
 				Subtract( SdfWorld, blobCircle, material );
 			}
 			
-			// Add the main circle
-			var mainCircle = new CircleSdf( pocket.Position, pocket.Radius * 0.6f );
+			// Main circle also expanded for smoothing
+			var mainCircle = new CircleSdf( pocket.Position, pocket.Radius * 0.6f ).Expand( 3f );
 			Subtract( SdfWorld, mainCircle, material );
 		}
 
@@ -214,27 +215,25 @@ public partial class GrubsTerrain
 
 	private void SubtractOrganicTunnel( CavernTunnel tunnel, Sdf2DLayer material, Random random )
 	{
-		// Create a metaball-like connection using dual opposing bezier curves
 		var start = tunnel.Start;
 		var end = tunnel.End;
-		var baseRadius = tunnel.Radius * 2f;
 		
-		// Calculate perpendicular direction for control points
+		// Use the pocket radii for start and end sizes
+		var startRadius = tunnel.StartRadius;
+		var endRadius = tunnel.EndRadius;
+		
 		var direction = (end - start).Normal;
 		var perpendicular = new Vector2( -direction.y, direction.x );
 		
-		// Random curve intensity (scale based on distance for natural proportions)
 		var distance = Vector2.DistanceBetween( start, end );
 		var curveIntensity = distance * 0.3f + (float)random.NextDouble() * 50f;
 		
 		var midpoint = (start + end) * 0.5f;
 		
-		// Create TWO control points on opposite sides for metaball-like pinch
 		var controlPoint1 = midpoint + perpendicular * curveIntensity;
 		var controlPoint2 = midpoint - perpendicular * curveIntensity;
 		
-		// Generate BOTH curves
-		var segments = 30;
+		var segments = 40; // More segments for smoother transitions
 		var curve1Points = new List<Vector2>();
 		var curve2Points = new List<Vector2>();
 		
@@ -242,18 +241,14 @@ public partial class GrubsTerrain
 		{
 			var t = i / (float)segments;
 			
-			// First curve (top/right)
 			var point1 = QuadraticBezier( start, controlPoint1, end, t );
-			// Add slight noise variation
 			var noiseOffset1 = new Vector2(
 				Noise.Perlin( point1.x * 0.05f, point1.y * 0.05f ) * 15f,
 				Noise.Perlin( point1.x * 0.05f + 100f, point1.y * 0.05f + 100f ) * 15f
 			);
 			curve1Points.Add( point1 + noiseOffset1 );
 			
-			// Second curve (bottom/left)
 			var point2 = QuadraticBezier( start, controlPoint2, end, t );
-			// Add slight noise variation (different offset for variation)
 			var noiseOffset2 = new Vector2(
 				Noise.Perlin( point2.x * 0.05f + 200f, point2.y * 0.05f + 200f ) * 15f,
 				Noise.Perlin( point2.x * 0.05f + 300f, point2.y * 0.05f + 300f ) * 15f
@@ -261,54 +256,60 @@ public partial class GrubsTerrain
 			curve2Points.Add( point2 + noiseOffset2 );
 		}
 		
-		// Draw the first curve
-		DrawCurvePath( curve1Points, baseRadius, material );
+		// Draw both curves with interpolated radii
+		DrawCurvePath( curve1Points, startRadius, endRadius, material );
+		DrawCurvePath( curve2Points, startRadius, endRadius, material );
 		
-		// Draw the second curve
-		DrawCurvePath( curve2Points, baseRadius, material );
-		
-		// Fill the space between the curves with additional circles for smooth metaball blending
-		for ( int i = 0; i < segments; i += 2 ) // Every other segment to avoid overdoing it
+		// Fill between curves with interpolated radius
+		for ( int i = 0; i <= segments; i += 2 )
 		{
 			var t = i / (float)segments;
-			
-			// Interpolate between the two curves
 			var point = (curve1Points[i] + curve2Points[i]) * 0.5f;
 			
-			// Radius varies - SMALLER in the middle for the "pinch" effect (FLIPPED!)
-			var radiusVariation = 0.8f + MathF.Abs( t - 0.5f ) * 0.8f; // Smaller at t=0.5, larger at ends
-			var radius = baseRadius * radiusVariation;
+			// Interpolate between start and end radius
+			var baseRadius = MathX.Lerp( startRadius, endRadius, t );
 			
-			var fillCircle = new CircleSdf( point, radius );
+			// Apply squeeze in the middle (stronger squeeze)
+			var squeezeAmount = MathF.Sin( t * MathF.PI ); // 0 at ends, 1 in middle
+			var squeezeFactor = 1f - squeezeAmount * 0.5f; // Squeeze to 50% at midpoint
+			
+			var radius = baseRadius * squeezeFactor;
+			
+			var fillCircle = new CircleSdf( point, radius ).Expand( 3f );
 			Subtract( SdfWorld, fillCircle, material );
 		}
 		
-		// Add connecting circles at start and end for smooth transition
-		var startCircle = new CircleSdf( start, baseRadius * 1.2f );
+		// Smooth connection circles at full pocket sizes
+		var startCircle = new CircleSdf( start, startRadius ).Expand( 4f );
 		Subtract( SdfWorld, startCircle, material );
 		
-		var endCircle = new CircleSdf( end, baseRadius * 1.2f );
+		var endCircle = new CircleSdf( end, endRadius ).Expand( 4f );
 		Subtract( SdfWorld, endCircle, material );
 	}
 
-	private void DrawCurvePath( List<Vector2> points, float baseRadius, Sdf2DLayer material )
+	private void DrawCurvePath( List<Vector2> points, float startRadius, float endRadius, Sdf2DLayer material )
 	{
 		for ( int i = 0; i < points.Count - 1; i++ )
 		{
 			var currentPoint = points[i];
 			var nextPoint = points[i + 1];
 			
-			// Vary radius along the path - PINCH in the middle (FLIPPED!)
+			// Interpolate between start and end radius
 			var t = i / (float)(points.Count - 1);
-			var radiusVariation =  -MathF.Sin( t * MathF.PI ) * 2f; // Smaller in middle, larger at ends
-			var currentRadius = baseRadius * radiusVariation;
+			var baseRadius = MathX.Lerp( startRadius, endRadius, t );
 			
-			// Draw line segment
-			var lineSdf = new LineSdf( currentPoint, nextPoint, currentRadius );
+			// Apply squeeze in the middle
+			var squeezeAmount = MathF.Sin( t * MathF.PI ); // Peak at t=0.5
+			var squeezeFactor = - squeezeAmount * 0.5f; // Squeeze to 50%
+			
+			var currentRadius = baseRadius * squeezeFactor;
+			
+			// Apply Expand to line segments for smoothing
+			var lineSdf = new LineSdf( currentPoint, nextPoint, currentRadius ).Expand( 3f );
 			Subtract( SdfWorld, lineSdf, material );
 			
-			// Add overlapping circles for smoother connections
-			var circleSdf = new CircleSdf( currentPoint, currentRadius * 1.15f );
+			// Smooth overlapping circles
+			var circleSdf = new CircleSdf( currentPoint, currentRadius * 1.1f ).Expand( 3f );
 			Subtract( SdfWorld, circleSdf, material );
 		}
 	}
@@ -319,29 +320,24 @@ public partial class GrubsTerrain
 		var tt = t * t;
 		var uu = u * u;
 		
-		var point = uu * p0; // (1-t)^2 * P0
-		point += 2f * u * t * p1; // 2(1-t)t * P1
-		point += tt * p2; // t^2 * P2
+		var point = uu * p0;
+		point += 2f * u * t * p1;
+		point += tt * p2;
 		
 		return point;
 	}
 }
 
-/// <summary>
-/// Represents a pocket/cavity in the cavern.
-/// </summary>
 public struct CavernPocket
 {
 	public Vector2 Position { get; set; }
 	public float Radius { get; set; }
 }
 
-/// <summary>
-/// Represents a tunnel connecting two pockets.
-/// </summary>
 public struct CavernTunnel
 {
 	public Vector2 Start { get; set; }
 	public Vector2 End { get; set; }
-	public float Radius { get; set; }
+	public float StartRadius { get; set; } // Radius of the starting pocket
+	public float EndRadius { get; set; }   // Radius of the ending pocket
 }
