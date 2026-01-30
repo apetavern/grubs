@@ -131,7 +131,7 @@ public sealed class Grub : Component, IResolvable
 
 	protected override void OnUpdate()
 	{
-		if ( IsPoisoned )
+		if ( IsPoisoned && Health.CurrentHealth > 0)
 		{
 			Animator.GrubRenderer.Tint = Color.Green;
 			if( PoisonEffects.IsValid() )
