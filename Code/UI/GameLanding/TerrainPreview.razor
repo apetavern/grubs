@@ -17,7 +17,7 @@
 </style>
 
 <root>
-    @if (Networking.IsHost && GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated)
+    @if (Networking.IsHost && (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated || GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Cavern))
     {
         <i onclick=@RefreshTerrain>refresh</i>
     }
