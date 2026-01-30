@@ -37,32 +37,24 @@ public partial class GrubsTerrain
 		// Create main rectangular base
 		var boxSdf = new RectSdf( 
 			new Vector2( -worldLength / 2f, 0 ), 
-			new Vector2( worldLength / 2f, worldHeight )
+			new Vector2( worldLength / 2f, worldHeight*0.5f )
 		);
 		
 		Add( SdfWorld, boxSdf, materials.ElementAt( 0 ).Key );
 		Add( SdfWorld, boxSdf, RockMaterial );
 		
 		// Add VERY wavy top surface using heightmap with increased amplitude
-		var freq = GrubsConfig.TerrainFrequency; // Use full frequency for waviness
+		var freq = 0.01f; // Use full frequency for waviness
 		var heightMapSdf = new HeightmapSdf2D( 
-			new Vector2( -worldLength / 2f, worldHeight * 0.5f ), // Start lower for bigger waves
+			new Vector2( -worldLength / 2f, 0f ), // Start lower for bigger waves
 			new Vector2( worldLength / 2f, worldHeight ),
 			freq,
 			seed );
+
+		var transformedHeightMapSdf = heightMapSdf.Transform( new Vector2( 0, worldHeight * 0.5f ) );
 		
-		Add( SdfWorld, heightMapSdf, materials.ElementAt( 0 ).Key );
-		Add( SdfWorld, heightMapSdf, RockMaterial );
-		
-		// Add another heightmap layer for extra variation
-		var heightMapSdf2 = new HeightmapSdf2D( 
-			new Vector2( -worldLength / 2f, worldHeight * 0.6f ), 
-			new Vector2( worldLength / 2f, worldHeight ),
-			freq * 1.5f, // Different frequency for complexity
-			seed + 500 );
-		
-		Add( SdfWorld, heightMapSdf2, materials.ElementAt( 0 ).Key );
-		Add( SdfWorld, heightMapSdf2, RockMaterial );
+		Add( SdfWorld, transformedHeightMapSdf, materials.ElementAt( 0 ).Key );
+		Add( SdfWorld, transformedHeightMapSdf, RockMaterial );
 	}
 
 	private List<CavernPocket> GenerateCavernPockets( int worldLength, int worldHeight, int seed )
