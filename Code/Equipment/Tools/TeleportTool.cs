@@ -30,9 +30,11 @@ public class TeleportTool : Tool
 			return;
 
 		Cursor.Enabled( "clicktool", Equipment.Deployed );
-		
+
 		if ( CursorModel.IsValid() )
+		{
 			CursorModel.GameObject.Enabled = Equipment.Deployed;
+		}
 
 		if ( !Equipment.Deployed )
 			return;
@@ -46,6 +48,7 @@ public class TeleportTool : Tool
 
 		if ( CursorModel.IsValid() )
 		{
+			CursorModel.Enabled = Equipment.Deployed;
 			CursorModel.WorldPosition = player.MousePosition;
 			var isValidPlacement = CheckValidPlacement();
 			CursorModel.Tint = isValidPlacement ? Color.Green : Color.Red;
