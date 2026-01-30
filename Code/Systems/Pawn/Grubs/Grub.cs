@@ -40,6 +40,8 @@ public sealed class Grub : Component, IResolvable
 
 	public Transform EyePosition => WorldTransform.WithPosition( WorldPosition + Vector3.Up * 24f );
 
+	GameObject PoisonEffects;
+
 	protected override void OnStart()
 	{
 		if ( !IsProxy )
@@ -132,6 +134,22 @@ public sealed class Grub : Component, IResolvable
 		if ( IsPoisoned )
 		{
 			Animator.GrubRenderer.Tint = Color.Green;
+			if( PoisonEffects.IsValid() )
+			{
+				PoisonEffects.WorldPosition = WorldPosition + Vector3.Up * 24f;
+			}
+			else
+			{
+				PoisonEffects = GameObject.Clone( "particles/poison/poison_bubbles.prefab" );
+				PoisonEffects.Enabled = true;
+			}
+		}
+		else
+		{
+			if ( PoisonEffects.IsValid() )
+			{
+				PoisonEffects.Enabled = false;
+			}
 		}
 	}
 
