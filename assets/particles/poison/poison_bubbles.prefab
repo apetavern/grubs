@@ -21,7 +21,7 @@
         "__version": 2,
         "Flags": 0,
         "Name": "Burst",
-        "Position": "0,0,0",
+        "Position": "0,0,12",
         "Rotation": "0,0,0,1",
         "Scale": "1,1,1",
         "Tags": "particles",
@@ -69,7 +69,7 @@
             },
             "ApplyAlpha": false,
             "ApplyColor": false,
-            "ApplyRotation": true,
+            "ApplyRotation": false,
             "ApplyShape": true,
             "Bounce": 1,
             "Brightness": 1,
@@ -86,7 +86,7 @@
               "Y": 0,
               "Z": 0
             },
-            "Damping": 1.35,
+            "Damping": 1.5,
             "DieOnCollisionChance": 0,
             "FollowerPrefab": null,
             "FollowerPrefabChance": 1,
@@ -96,7 +96,7 @@
             "ForceScale": {
               "Type": "Range",
               "Evaluation": "Seed",
-              "Constants": "0.75,1,0,0"
+              "Constants": "0.5,1,0,0"
             },
             "ForceSpace": "Local",
             "Friction": 1,
@@ -142,7 +142,7 @@
             "Lifetime": {
               "Type": "Range",
               "Evaluation": "Seed",
-              "Constants": "0.5,1,0,0"
+              "Constants": "0.5,0.75,0,0"
             },
             "LocalSpace": 0,
             "MaxParticles": 2,
@@ -233,7 +233,7 @@
             "__enabled": true,
             "Flags": 0,
             "__version": 1,
-            "CastShadows": true,
+            "CastShadows": false,
             "Choices": [
               {
                 "Model": "models/dev/sphere.vmdl",
@@ -269,7 +269,7 @@
             "Burst": 1,
             "Delay": 0,
             "DestroyOnEnd": false,
-            "Duration": 1.5,
+            "Duration": 2,
             "Loop": true,
             "OnComponentDestroy": null,
             "OnComponentDisabled": null,
