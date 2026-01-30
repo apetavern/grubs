@@ -136,6 +136,18 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/poison_bomb/poison_bomb.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/bunker_buster/bunker_buster.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/concrete_garry/concrete_garry.prefab"
           }
         ],
         "OnComponentDestroy": null,
