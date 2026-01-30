@@ -1,0 +1,13 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/gr_bubble.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+
+	g_flFrenelPower "0.350"
+	g_vColorA "[0.909804 1.000000 0.349020 1.000000]"
+	g_vColorB "[0.000000 0.129412 0.031373 1.000000]"
+}
