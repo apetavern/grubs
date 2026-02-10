@@ -1,21 +1,34 @@
 {
   "RootObject": {
     "__guid": "8e08053c-2d50-464a-8e12-a6e68e7d4342",
+    "__version": 2,
     "Flags": 0,
     "Name": "bazooka_shell_homing",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
     "Tags": "projectile",
     "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "24fe243e-23bf-4fa4-88d5-22e2a602d417",
+        "__enabled": true,
+        "Flags": 0,
         "AnimationGraph": null,
         "BodyGroups": 18446744073709551613,
         "BoneMergeTarget": null,
         "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
         "MaterialGroup": null,
         "MaterialOverride": null,
+        "Materials": null,
         "Model": "models/weapons/shell/homingshell.vmdl",
         "Morphs": {},
         "OnComponentDestroy": null,
@@ -31,6 +44,7 @@
           "vectors": {},
           "rotations": {}
         },
+        "PlaybackRate": 1,
         "RenderOptions": {
           "GameLayer": true,
           "OverlayLayer": false,
@@ -39,7 +53,9 @@
         },
         "RenderType": "On",
         "Sequence": {
-          "Name": null
+          "Name": null,
+          "Looping": true,
+          "Blending": false
         },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -47,6 +63,8 @@
       {
         "__type": "Sandbox.HighlightOutline",
         "__guid": "d7a233e1-6056-4acb-a453-b4af39941c9d",
+        "__enabled": true,
+        "Flags": 0,
         "Color": "0,0,0,1",
         "InsideColor": "0,0,0,0",
         "InsideObscuredColor": "0,0,0,0",
@@ -58,11 +76,17 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
+        "OverrideTargets": false,
+        "Targets": null,
         "Width": 0.25
       },
       {
         "__type": "Sandbox.CapsuleCollider",
         "__guid": "a8b60c5c-fde4-4225-8118-a8ff31904829",
+        "__enabled": true,
+        "Flags": 0,
+        "ColliderFlags": 0,
+        "Elasticity": null,
         "End": "1.880003,0,0",
         "Friction": null,
         "IsTrigger": false,
@@ -77,6 +101,7 @@
         "OnTriggerEnter": null,
         "OnTriggerExit": null,
         "Radius": 4.6000004,
+        "RollingResistance": null,
         "Start": "-5.559999,0,0",
         "Static": false,
         "Surface": null,
@@ -85,6 +110,8 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.ExplosiveProjectile",
         "__guid": "b7815d35-7438-4d89-922c-95676a502771",
+        "__enabled": true,
+        "Flags": 0,
         "CollisionDelay": 0,
         "DeleteOnExplode": true,
         "ExplodeAfter": 10,
@@ -99,13 +126,13 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "Particles": "particles/explosion/grubs_explosion_base.vpcf",
-        "SmokeParticles": "particles/explosion/grubs_explosion_smoke.vpcf",
         "UseExplosionTimer": false
       },
       {
         "__type": "Grubs.Common.Health",
         "__guid": "a8c72a17-9756-4cc6-80a2-b06f5cba87cd",
+        "__enabled": true,
+        "Flags": 0,
         "MaxHealth": 15,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -117,6 +144,8 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.PhysicsProjectile",
         "__guid": "7c413c2a-f2e8-4fba-adfd-6695f269f6df",
+        "__enabled": true,
+        "Flags": 0,
         "DirectionRandomizer": 0,
         "Droppable": false,
         "Model": {
@@ -145,8 +174,14 @@
       {
         "__type": "Sandbox.Rigidbody",
         "__guid": "0fb313a8-7a21-4aa7-bb97-12d970edaf12",
+        "__enabled": true,
+        "Flags": 0,
         "AngularDamping": 0.1,
+        "EnableImpactDamage": true,
+        "EnhancedCcd": false,
         "Gravity": true,
+        "GravityScale": 1,
+        "ImpactDamage": 0,
         "LinearDamping": 1,
         "Locking": {
           "X": false,
@@ -158,6 +193,7 @@
         },
         "MassCenterOverride": "0,0,0",
         "MassOverride": 0,
+        "MinImpactDamageSpeed": 500,
         "MotionEnabled": true,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
@@ -172,6 +208,8 @@
       {
         "__type": "Grubs.Equipment.Gadgets.Projectiles.HomingProjectile",
         "__guid": "46b047af-a7ac-4d7a-ab81-5f27f6c0612e",
+        "__enabled": true,
+        "Flags": 0,
         "HomingLockSound": "sounds/weapons/homingmissile/homingmissile_lock.sound",
         "Model": {
           "_type": "component",
@@ -191,21 +229,15 @@
           "go": "8e08053c-2d50-464a-8e12-a6e68e7d4342",
           "component_type": "PhysicsProjectile"
         },
-        "ProjectileSpeed": 350,
+        "ProjectileSpeed": 700,
         "TimeBeforeHoming": 1
       }
     ],
     "Children": [],
-    "__variables": [],
     "__properties": {
-      "FixedUpdateFrequency": 50,
-      "MaxFixedUpdates": 5,
-      "NetworkFrequency": 30,
       "NetworkInterpolation": true,
-      "PhysicsSubSteps": 1,
-      "ThreadedAnimation": true,
       "TimeScale": 1,
-      "UseFixedUpdate": true,
+      "WantsSystemScene": true,
       "Metadata": {},
       "NavMesh": {
         "Enabled": false,
@@ -219,13 +251,14 @@
         "ExcludedBodies": "",
         "IncludedBodies": ""
       }
-    }
+    },
+    "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "DontBreakAsTemplate": false,
-  "ResourceVersion": 1,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }
