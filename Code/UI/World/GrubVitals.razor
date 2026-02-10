@@ -21,7 +21,7 @@
         <div class="grub-health-bar bg-@ColorString-dark">
             <div class="grub-health-bar-inner bg-@ColorString-light" style="width: @(Grub.HealthPercentage * 100)%"/>
         </div>
-        <label class="grub-health-percentage text-@ColorString-light text-stroke-@ColorString-med">@GetHealthPercentageString()</label>
+        <label class="grub-health-percentage text-@ColorString-light text-stroke-@ColorString-med">@(Math.Ceiling(Grub.Health.CurrentHealth))</label>
     }
     else
     {
@@ -30,6 +30,7 @@
             <div class="min-grub-health-bar bg-@ColorString-dark">
                 <div class="min-grub-health-bar-inner bg-@ColorString-light" style="width: @(Grub.HealthPercentage * 100)%"/>
             </div>
+            <label class="min-grub-health-percentage text-@ColorString-light text-stroke-@ColorString-med" style="font-size:36px">@(Math.Ceiling(Grub.Health.CurrentHealth))</label>
         </div>
     }
 </root>
