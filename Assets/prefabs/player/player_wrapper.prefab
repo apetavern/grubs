@@ -148,6 +148,14 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/concrete_garry/concrete_garry.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/goat/goat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/bazooka_homing/bazooka_homing.prefab"
           }
         ],
         "OnComponentDestroy": null,
