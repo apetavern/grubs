@@ -6,7 +6,7 @@
   "EquipmentPrefab": "prefabs/weapons/goat/goat.prefab",
   "HideHatWhenDeployed": false,
   "DefaultAmmo": 1,
-  "DropChance": 0,
+  "DropChance": 0.5,
   "__references": [],
   "__version": 0
 }
