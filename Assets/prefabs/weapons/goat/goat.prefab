@@ -1,28 +1,73 @@
 {
   "RootObject": {
     "__guid": "e3b566ec-41a7-40bd-b879-3235b32aaf0f",
+    "__version": 2,
     "Flags": 0,
     "Name": "goat",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
     "NetworkMode": 2,
-    "NetworkInterpolation": true,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "13eb056a-0146-4f7a-b80a-8ab75c0a77c2",
+        "__enabled": true,
+        "Flags": 0,
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Materials": null,
         "Model": "models/weapons/goat/goat_holdable.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "PlaybackRate": 1,
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null,
+          "Looping": true,
+          "Blending": false
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
         "__guid": "4d024b29-bc11-43b7-9d61-970d3a36b724",
+        "__enabled": true,
+        "Flags": 0,
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/goat.geq",
-        "HoldPose": "Droppable",
+        "HoldPose": "Bazooka",
         "Icon": "models/weapons/goat/goat.vmdl.png",
         "Model": {
           "_type": "component",
@@ -31,6 +76,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Goat",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": false,
         "SlotIndex": 0,
         "UnlockDelay": 2
@@ -38,6 +89,8 @@
       {
         "__type": "Grubs.Equipment.Weapons.RemoteDetonateWeapon",
         "__guid": "d2dffc35-f536-4f31-b145-fe66ccbecc83",
+        "__enabled": true,
+        "Flags": 0,
         "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
@@ -51,9 +104,17 @@
         },
         "FiringType": "Complex",
         "MaxUses": 1,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OnFire": {
-          "__version": 7,
+          "__version": 9,
           "__guid": "fbf78fe4-14a4-46d6-a009-9cd6029177dc",
+          "__changeId": 0,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -120,10 +181,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/goat/goat_thrown.prefab"
-              },
+              "Id": 9,
+              "Value": null,
               "DstId": 1,
               "DstName": "projectile"
             },
@@ -165,29 +224,58 @@
             }
           ],
           "Defaults": {
-            "$6._value": {
+            "$9._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/goat/goat_thrown.prefab"
             }
           }
         },
+        "OnFireFinished": null,
+        "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
         "__guid": "cbab83a0-5a76-4f7f-8041-a1507da2eb71",
+        "__enabled": true,
+        "Flags": 0,
         "Inputs": {
           "fire": "Release"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
     "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "ResourceVersion": 1,
+  "DontBreakAsTemplate": false,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

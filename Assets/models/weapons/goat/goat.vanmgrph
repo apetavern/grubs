@@ -9,27 +9,6 @@
 			{
 				key = 
 				{
-					m_id = 109870928
-				}
-				value = 
-				{
-					_class = "CSequenceAnimNode"
-					m_sName = "Unnamed"
-					m_vecPosition = [ -624.0, -160.0 ]
-					m_nNodeID = 
-					{
-						m_id = 109870928
-					}
-					m_sNote = ""
-					m_tagSpans = [  ]
-					m_sequenceName = "in_hand"
-					m_playbackSpeed = 1.0
-					m_bLoop = true
-				}
-			},
-			{
-				key = 
-				{
 					m_id = 300264457
 				}
 				value = 
@@ -122,6 +101,7 @@
 									m_bReset = true
 									m_resetCycleOption = "Beginning"
 									m_flFixedCycleValue = 0.0
+									m_bBlendCycle = false
 									m_blendCurve = 
 									{
 										m_vControlPoint1 = [ 0.5, 0.0 ]
@@ -141,7 +121,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 109870928
+									m_id = 764172725
 								}
 								m_outputID = 
 								{
@@ -243,6 +223,27 @@
 					m_footMotionTiming = "Child1"
 					m_bResetChild1 = true
 					m_bResetChild2 = true
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 764172725
+				}
+				value = 
+				{
+					_class = "CSequenceAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ -544.0, -176.0 ]
+					m_nNodeID = 
+					{
+						m_id = 764172725
+					}
+					m_sNote = ""
+					m_tagSpans = [  ]
+					m_sequenceName = "in_hand"
+					m_playbackSpeed = 1.0
+					m_bLoop = true
 				}
 			},
 			{
@@ -441,6 +442,7 @@
 									m_bReset = true
 									m_resetCycleOption = "Beginning"
 									m_flFixedCycleValue = 0.0
+									m_bBlendCycle = false
 									m_blendCurve = 
 									{
 										m_vControlPoint1 = [ 0.5, 0.0 ]
@@ -508,6 +510,7 @@
 									m_bReset = true
 									m_resetCycleOption = "Beginning"
 									m_flFixedCycleValue = 0.0
+									m_bBlendCycle = false
 									m_blendCurve = 
 									{
 										m_vControlPoint1 = [ 0.5, 0.0 ]
@@ -575,6 +578,7 @@
 									m_bReset = true
 									m_resetCycleOption = "Beginning"
 									m_flFixedCycleValue = 0.0
+									m_bBlendCycle = false
 									m_blendCurve = 
 									{
 										m_vControlPoint1 = [ 0.5, 0.0 ]
