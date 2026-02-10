@@ -27,7 +27,7 @@ public class HomingProjectile : TargetedProjectile
 		{
 			await Task.FixedUpdate();
 			pp.PhysicsBody.Velocity = WorldRotation.Forward * ProjectileSpeed;
-			WorldRotation = Rotation.Lerp( WorldRotation, Rotation.LookAt( ProjectileTarget - WorldPosition ), 2f * Time.Delta );
+			WorldRotation = Rotation.Lerp( WorldRotation, Rotation.LookAt( ProjectileTarget - WorldPosition ), 4f * Time.Delta );
 		}
 	}
 
