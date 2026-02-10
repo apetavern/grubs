@@ -1,29 +1,74 @@
 {
   "RootObject": {
     "__guid": "8cf41e86-4dbc-4eb2-a89a-ab51abf83e4b",
+    "__version": 2,
     "Flags": 0,
     "Name": "bazooka_homing",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
     "Enabled": true,
     "NetworkMode": 2,
-    "NetworkInterpolation": true,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
     "Components": [
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "455b3061-e85b-4bc7-9497-15f4559fe3b0",
+        "__enabled": true,
+        "Flags": 0,
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateAttachments": false,
         "CreateBoneObjects": false,
+        "LodOverride": null,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Materials": null,
         "Model": "models/weapons/homingmissile/homingmissile.vmdl",
+        "Morphs": {},
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Parameters": {
+          "bools": {},
+          "ints": {},
+          "floats": {},
+          "vectors": {},
+          "rotations": {}
+        },
+        "PlaybackRate": 1,
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
         "RenderType": "On",
+        "Sequence": {
+          "Name": null,
+          "Looping": true,
+          "Blending": false
+        },
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
       {
         "__type": "Grubs.Equipment.Equipment",
         "__guid": "010f0bbe-9712-4f14-b021-e181708460c7",
+        "__enabled": true,
+        "Flags": 0,
         "CameraCanZoom": true,
         "Data": "resources/equipment/weapons/bazooka _homing.geq",
         "HoldPose": "Bazooka",
-        "Icon": "models/weapons/homingmissile/homingmissile.vmdl_c.png",
+        "Icon": "models/weapons/homingmissile/homingmissile.vmdl.png",
         "Model": {
           "_type": "component",
           "component_id": "455b3061-e85b-4bc7-9497-15f4559fe3b0",
@@ -31,6 +76,12 @@
           "component_type": "SkinnedModelRenderer"
         },
         "Name": "Homing Bazooka",
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "ShouldShowAimReticle": true,
         "SlotIndex": 0,
         "UnlockDelay": 2
@@ -38,6 +89,8 @@
       {
         "__type": "Grubs.Equipment.Weapons.TargetingWeapon",
         "__guid": "dc55ec63-a7c0-448d-bf07-f2161bc33c7c",
+        "__enabled": true,
+        "Flags": 0,
         "AmmoType": "Numbered",
         "CanFireWhileMoving": false,
         "CanSwapAfterUse": false,
@@ -59,9 +112,17 @@
         },
         "FiringType": "Complex",
         "MaxUses": 1,
+        "Muzzle": null,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
         "OnFire": {
-          "__version": 7,
+          "__version": 9,
           "__guid": "2ea83a4f-e52a-4337-8b23-f6f98b9b2edc",
+          "__changeId": 0,
           "UserData": {
             "Title": "On Fire",
             "ReferencedComponentTypes": [
@@ -154,10 +215,8 @@
               "DstName": "charge"
             },
             {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/bazooka_homing/bazooka_shell_homing.prefab"
-              },
+              "Id": 34,
+              "Value": null,
               "DstId": 17,
               "DstName": "projectile"
             },
@@ -211,51 +270,106 @@
             }
           ],
           "Defaults": {
-            "$33._value": {
+            "$34._value": {
               "_type": "gameobject",
               "prefab": "prefabs/weapons/bazooka_homing/bazooka_shell_homing.prefab"
             }
           }
         },
+        "OnFireFinished": null,
         "SecondaryFiringType": "Charged",
+        "StartMultiplier": 1,
         "UseSound": "sounds/weapons/bazooka/bazooka_fire.sound"
       },
       {
         "__type": "Grubs.Equipment.Weapons.InputHintOverride",
         "__guid": "b24d239c-e81f-4a51-a354-10b5cac96373",
+        "__enabled": true,
+        "Flags": 0,
         "Inputs": {
           "fire": "Set Target"
-        }
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
       {
         "__guid": "d6379837-4162-4e3f-a040-1542769c36c5",
+        "__version": 2,
         "Flags": 0,
         "Name": "HomingMissile - Cursor",
+        "Position": "0,0,0",
+        "Rotation": "0,0,0,1",
         "Scale": "0.5,0.5,0.5",
         "Tags": "cleanup",
         "Enabled": true,
         "NetworkMode": 2,
-        "NetworkInterpolation": true,
+        "NetworkFlags": 0,
+        "NetworkOrphaned": 0,
+        "NetworkTransmit": true,
+        "OwnerTransfer": 1,
         "Components": [
           {
             "__type": "Sandbox.ModelRenderer",
             "__guid": "bd471cbd-cc4e-4f80-9230-9408d3ace642",
+            "__enabled": true,
+            "Flags": 0,
             "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "LodOverride": null,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Materials": null,
             "Model": "models/weapons/targetindicator/targetindicator.vmdl",
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
-        ]
+        ],
+        "Children": []
       }
     ],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": false,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
     "__variables": []
   },
+  "ResourceVersion": 2,
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "ResourceVersion": 1,
+  "DontBreakAsTemplate": false,
   "__references": [],
-  "__version": 1
+  "__version": 2
 }

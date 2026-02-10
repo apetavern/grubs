@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc30:version{8c2d7a91-9c42-4bf0-883a-5a3b1762d4f1} -->
 {
 	rootNode = 
 	{
@@ -28,11 +28,7 @@
 						[
 							{
 								from = "phong2.vmat"
-								to = "models/weapons/homingmissile/materials/bazooka_homing.vmat"
-							},
-							{
-								from = "phong1.vmat"
-								to = "models/weapons/bazooka/materials/bazooka_translucency.vmat"
+								to = "models/weapons/homing_bazooka/materials/homing_bazooka.vmat"
 							},
 						]
 						use_global_default = false
@@ -61,7 +57,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/weapons/bazooka/bazooka.fbx"
+						filename = "models/weapons/homing_bazooka/homing_bazooka.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
