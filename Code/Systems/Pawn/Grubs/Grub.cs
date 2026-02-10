@@ -115,12 +115,14 @@ public sealed class Grub : Component, IResolvable
 		TurnIndicator.Show( this );
 	}
 
+	[Rpc.Owner]
 	public void OnOwnerTurnEnd()
 	{
 		if ( IsPoisoned )
 		{
 			var dmg = new GrubsDamageInfo( 10, new Guid(), "poison", WorldPosition );
 			Health.TakeDamage( dmg );
+			Health.ApplyDamage();
 		}
 	}
 
