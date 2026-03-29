@@ -35,8 +35,6 @@ Layer0
 	TextureRoughness "models/weapons/landmine/materials/tex-weapon-landmine-grubs@roughness.png"
 
 	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
 	g_vTexCoordOffset "[0.000 0.000]"
 	g_vTexCoordScale "[1.000 1.000]"
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
