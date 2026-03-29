@@ -182,12 +182,12 @@
         {
           "__type": "Sandbox.AmbientOcclusion",
           "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
-          "__enabled": false,
+          "__enabled": true,
           "Flags": 0,
           "__version": 1,
           "DenoiseMode": "Temporal",
-          "FalloffRange": 0.75,
-          "Intensity": 0.15,
+          "FalloffRange": 1,
+          "Intensity": 1,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -195,7 +195,7 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "Radius": 128,
-          "ThinCompensation": 0
+          "ThinCompensation": 5
         },
         {
           "__type": "Sandbox.Sharpen",
@@ -1475,13 +1475,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "26019376-b21c-4161-ad31-689bbbd8cbd3"
-        }
-      },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "7e8b5c72-5511-4a71-999d-b125121c0222"
+        }
       }
     }
   },
