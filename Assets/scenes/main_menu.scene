@@ -3,7 +3,7 @@
   "GameObjects": [
     {
       "__guid": "2b43679f-f950-4552-8ff6-05090e4fb479",
-      "__version": 1,
+      "__version": 2,
       "Flags": 0,
       "Name": "Scene Information",
       "Position": "0,0,0",
@@ -12,14 +12,16 @@
       "Tags": "",
       "Enabled": true,
       "NetworkMode": 2,
-      "NetworkInterpolation": true,
+      "NetworkFlags": 0,
       "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
       "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.SceneInformation",
           "__guid": "8279005d-c5d7-4371-8434-4fa3039952ad",
           "__enabled": true,
+          "Flags": 0,
           "Author": null,
           "Changes": "",
           "Description": "",
@@ -39,7 +41,7 @@
     },
     {
       "__guid": "2e35c746-223e-47ab-9608-440dd81bc057",
-      "__version": 1,
+      "__version": 2,
       "Flags": 0,
       "Name": "Map",
       "Position": "0,0,0",
@@ -48,14 +50,16 @@
       "Tags": "",
       "Enabled": true,
       "NetworkMode": 2,
-      "NetworkInterpolation": true,
+      "NetworkFlags": 0,
       "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
       "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "cb9273ba-e9ed-4379-91ac-d478f6bc05af",
           "__enabled": true,
+          "Flags": 0,
           "__version": 1,
           "EnableCollision": true,
           "MapName": "maps/gr_menu.vmap",
@@ -75,7 +79,7 @@
     },
     {
       "__guid": "91464b46-2177-41fc-84e8-6a639bcabac9",
-      "__version": 1,
+      "__version": 2,
       "Flags": 0,
       "Name": "Camera",
       "Position": "-85,-105,25",
@@ -84,16 +88,19 @@
       "Tags": "maincamera",
       "Enabled": true,
       "NetworkMode": 2,
-      "NetworkInterpolation": true,
+      "NetworkFlags": 0,
       "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
       "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
           "__guid": "0c699ae0-d851-40b1-b00b-3690ea15b03c",
           "__enabled": true,
+          "Flags": 0,
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
+          "EnablePostProcessing": true,
           "FieldOfView": 60,
           "FovAxis": "Horizontal",
           "IsMainCamera": true,
@@ -105,9 +112,11 @@
           "OnComponentUpdate": null,
           "Orthographic": false,
           "OrthographicHeight": 1204,
+          "PostProcessAnchor": null,
           "Priority": 1,
           "RenderExcludeTags": "",
           "RenderTags": "",
+          "RenderTexture": null,
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
           "ZFar": 2000,
@@ -117,6 +126,8 @@
           "__type": "Sandbox.ColorAdjustments",
           "__guid": "15d59149-6457-4a59-b71e-5f4d860249b5",
           "__enabled": true,
+          "Flags": 0,
+          "Blend": 1,
           "Brightness": 1,
           "Contrast": 1.01,
           "HueRotate": 0,
@@ -132,6 +143,7 @@
           "__type": "Sandbox.Vignette",
           "__guid": "cbfd62cb-6427-4a22-a9cd-ed9722d9ab27",
           "__enabled": true,
+          "Flags": 0,
           "Center": "0.5,0.5",
           "Color": "0,0,0,1",
           "Intensity": 0.3,
@@ -148,6 +160,7 @@
           "__type": "Sandbox.DepthOfField",
           "__guid": "590ae120-c6eb-461d-830a-4af6d20304c9",
           "__enabled": true,
+          "Flags": 0,
           "BackBlur": true,
           "BlurSize": 25,
           "FocalDistance": 135,
@@ -158,13 +171,13 @@
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "QualityLevel": "High"
+          "OnComponentUpdate": null
         },
         {
           "__type": "Sandbox.Tonemapping",
           "__guid": "88fc415d-92f5-4bf8-aac6-f5b49ec44dea",
           "__enabled": true,
+          "Flags": 0,
           "__version": 3,
           "AutoExposureEnabled": false,
           "ExposureCompensation": 0,
@@ -185,7 +198,7 @@
     },
     {
       "__guid": "2f773373-3d4a-4d90-a19f-f27ad74cc00d",
-      "__version": 1,
+      "__version": 2,
       "Flags": 0,
       "Name": "Spot Light",
       "Position": "-70.78873,-153.7505,126.6426",
@@ -194,14 +207,16 @@
       "Tags": "light_spot,light",
       "Enabled": true,
       "NetworkMode": 2,
-      "NetworkInterpolation": true,
+      "NetworkFlags": 0,
       "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
       "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.SpotLight",
           "__guid": "c4612ac7-5c38-4531-bcf7-4e5131fd879b",
           "__enabled": true,
+          "Flags": 0,
           "Attenuation": 1,
           "ConeInner": 35,
           "ConeOuter": 45,
@@ -216,6 +231,8 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "Radius": 500,
+          "ShadowBias": 0.0005,
+          "ShadowHardness": 0,
           "Shadows": true
         }
       ],
@@ -223,7 +240,7 @@
     },
     {
       "__guid": "5759e5a3-a78f-41d5-8043-c46cbcd9e79b",
-      "__version": 1,
+      "__version": 2,
       "Flags": 0,
       "Name": "Fog",
       "Position": "-32,32,100",
@@ -232,14 +249,16 @@
       "Tags": "",
       "Enabled": true,
       "NetworkMode": 2,
-      "NetworkInterpolation": true,
+      "NetworkFlags": 0,
       "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
       "OwnerTransfer": 1,
       "Components": [
         {
           "__type": "Sandbox.VolumetricFogVolume",
           "__guid": "d00fe9b7-2047-46db-87ae-aa860c1ca92e",
           "__enabled": true,
+          "Flags": 0,
           "Bounds": {
             "Mins": "-150,-150,-100",
             "Maxs": "150,150,100"
@@ -274,7 +293,18 @@
       "AgentStepSize": 18,
       "AgentMaxSlope": 40,
       "ExcludedBodies": "",
-      "IncludedBodies": ""
+      "IncludedBodies": "",
+      "CustomBounds": false
+    },
+    "GameObjectSystems": {
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "3b577520-9f03-4e6a-827a-f8b801e3e6e2"
+        }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      }
     }
   },
   "ResourceVersion": 3,

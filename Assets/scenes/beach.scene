@@ -182,7 +182,7 @@
         {
           "__type": "Sandbox.AmbientOcclusion",
           "__guid": "f073e646-fee7-4dbe-b3c9-0b0e8bbf3542",
-          "__enabled": true,
+          "__enabled": false,
           "Flags": 0,
           "__version": 1,
           "DenoiseMode": "Temporal",
@@ -1475,13 +1475,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
-      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
-          "$blob": "3a5640c8-7f5b-4716-b2eb-a292cd45d5d2"
+          "$blob": "26019376-b21c-4161-ad31-689bbbd8cbd3"
         }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },
