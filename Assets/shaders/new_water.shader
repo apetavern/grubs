@@ -114,16 +114,20 @@ PS
 
 	float3 CalculateLighting( float3 normal )
 	{
-		float3 lightDirection = normalize( BinnedLightBuffer[0].GetPosition() );
-		float3 lightColour = BinnedLightBuffer[0].GetColor();
-
-		float brightness = max( dot( lightDirection, normal ), 0.0f );
-		return ( lightColour * g_flLightbias.x ) + ( brightness * lightColour * g_flLightbias.y );
+		return float3( 1.0f, 1.0f, 1.0f );
 	}
 
 	float3 Polarize ( float3 color, int step ) 
 	{
 		return round( color * step ) / step;
+	}
+
+	float3 SrgbGammaToLinear( float3 color )
+	{
+		float3 low  = color / 12.92;
+		float3 high = pow( ( color + 0.055 ) / 1.055, 2.4 );
+		float3 mask = step( 0.04045, color );
+		return lerp( low, high, mask );
 	}
 
 	float3 CalculateWorldSpacePosition( float3 vCameraToPositionRayWs, float2 vPositionSs )
@@ -132,9 +136,9 @@ PS
 		return RecoverWorldPosFromProjectedDepthAndRay( depth, vCameraToPositionRayWs );
 	}
 
-	float4 CalculateWaveColor( float4 vPositionSs, float3 positionInWorldSpace, float3 cameraRay ) 
+	float4 CalculateWaveColor( float2 vPositionSs, float3 positionInWorldSpace, float3 cameraRay ) 
 	{
-		float depth = CalculateWorldSpacePosition( cameraRay, vPositionSs.xy ).z;
+		float depth = CalculateWorldSpacePosition( cameraRay, vPositionSs ).z;
 		
 		float differenceInHeight = positionInWorldSpace.z - depth;
 		float waterDepth = saturate( differenceInHeight / g_flDepthMaxDistance );
@@ -146,7 +150,7 @@ PS
 		return float4( lerpedColour );
 	}
 
-	float4 CalculateIntersectionFoam( float4 vPositionSs, float3 positionInWorldSpace, float3 cameraRay ) 
+	float4 CalculateIntersectionFoam( float2 vPositionSs, float3 positionInWorldSpace, float3 cameraRay ) 
 	{
 		float depth = CalculateWorldSpacePosition( cameraRay, vPositionSs.xy ).z;
 		float differenceInHeight = positionInWorldSpace.z - depth;
@@ -158,7 +162,7 @@ PS
 		float intersectionMask01 = smoothstep( 1 - g_flFoamFade, 1, depthFadeMask01 + 0.1 );
 		
 		// TODO Do we want some better form?
-		return intersectionMask01;
+		return float4( intersectionMask01, intersectionMask01, intersectionMask01, intersectionMask01 );
 	}
 
 	float4 CalculateRandomSurfaceFoam( float3 positionInWorldSpace ) {
@@ -173,11 +177,13 @@ PS
 	// https://ameye.dev/notes/stylized-water-shader/ and https://roystan.net/articles/toon-water/
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{		
-		// Lerp the colour from deep wave color to shallow wave color depending on how deep the water is		
-		float4 waveColor = CalculateWaveColor( i.vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay );
+		float2 vPositionSs = i.vPositionPs.xy / i.vPositionPs.w;
+		vPositionSs = vPositionSs * 0.5 + 0.5;
+		vPositionSs.y = 1.0 - vPositionSs.y;
 
-		// Do some foam where the water intersects with the terrain and add it to the current wave colour
-		float4 intersectionFoam = CalculateIntersectionFoam( i.vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay );
+		// Lerp the colour from deep wave color to shallow wave color depending on how deep the water is		
+		float4 waveColor = CalculateWaveColor( vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay );
+		float4 intersectionFoam = CalculateIntersectionFoam( vPositionSs, i.positionInWorldSpace, i.CameraToPositionRay );
 		waveColor = saturate( waveColor + intersectionFoam );
 
 		// Add random surface foam

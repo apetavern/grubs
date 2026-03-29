@@ -859,8 +859,13 @@
               "OnComponentFixedUpdate": null,
               "OnComponentStart": null,
               "OnComponentUpdate": null,
+              "ShadowBias": 0.0005,
+              "ShadowCascadeCount": 4,
+              "ShadowCascadeSplitRatio": 0.91,
+              "ShadowHardness": 0,
               "Shadows": true,
-              "SkyColor": "0.63256,0.68527,0.7907,1"
+              "SkyColor": "0.63256,0.68527,0.7907,1",
+              "Visualizer": {}
             }
           ],
           "Children": []
@@ -1466,7 +1471,18 @@
       "AgentStepSize": 32,
       "AgentMaxSlope": 80,
       "ExcludedBodies": "nopathing",
-      "IncludedBodies": ""
+      "IncludedBodies": "",
+      "CustomBounds": false
+    },
+    "GameObjectSystems": {
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "3a5640c8-7f5b-4716-b2eb-a292cd45d5d2"
+        }
+      }
     }
   },
   "ResourceVersion": 3,
