@@ -8,20 +8,20 @@ GrubVitals {
   font-family: $font-primary;
 
   .grub-name {
-    top: -24px;
+    top: 0px;
     left: 64px;
     max-width: 400px;
     position: absolute;
     font-size: 56px;
     text-stroke-width: 16px;
     transform: rotate(-0.5deg);
-    overflow: hidden;
+    overflow: visible;
     text-overflow: ellipsis;
   }
 
   .grub-health-bar {
     position: absolute;
-    top: 50px;
+    top: 65px;
     height: 22px;
     width: 360px;
     border-radius: 4px;
