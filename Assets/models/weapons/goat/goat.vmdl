@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc30:version{8c2d7a91-9c42-4bf0-883a-5a3b1762d4f1} -->
 {
 	rootNode = 
 	{
@@ -66,6 +66,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = 19
 						end_frame = 48
@@ -87,6 +89,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = -1
 						end_frame = 0
@@ -108,6 +112,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = 1
 						end_frame = 1
@@ -129,6 +135,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = 59
 						end_frame = 99
@@ -150,6 +158,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = 59
 						end_frame = 79
@@ -171,6 +181,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = 79
 						end_frame = 89
@@ -192,6 +204,8 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						disable_interpolation = false
+						enable_scale = false
 						source_filename = "models/weapons/goat/goat.fbx"
 						start_frame = 89
 						end_frame = 99
@@ -437,6 +451,76 @@
 					},
 				]
 				bone_cull_type = "Aggressive"
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						auto_simplify_mode = 0
+						auto_reduction = 0.5
+						auto_max_error = 0.0
+						auto_lock_border_vertices = true
+						auto_permissive_simplification = false
+						auto_protect_uv_seams = true
+						auto_regularize = 1
+						auto_prune_isolated_components = false
+						meshes = 
+						[
+							"unnamed_1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 10.0
+						auto_simplify_mode = 1
+						auto_reduction = 0.7
+						auto_max_error = 0.0
+						auto_lock_border_vertices = true
+						auto_permissive_simplification = false
+						auto_protect_uv_seams = true
+						auto_regularize = 1
+						auto_prune_isolated_components = false
+						meshes = 
+						[
+							"unnamed_1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 20.0
+						auto_simplify_mode = 1
+						auto_reduction = 0.6
+						auto_max_error = 0.0
+						auto_lock_border_vertices = true
+						auto_permissive_simplification = false
+						auto_protect_uv_seams = true
+						auto_regularize = 1
+						auto_prune_isolated_components = false
+						meshes = 
+						[
+							"unnamed_1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 40.0
+						auto_simplify_mode = 2
+						auto_reduction = 0.1
+						auto_max_error = 0.0
+						auto_lock_border_vertices = true
+						auto_permissive_simplification = true
+						auto_protect_uv_seams = true
+						auto_regularize = 1
+						auto_prune_isolated_components = false
+						meshes = 
+						[
+							"unnamed_1",
+						]
+					},
+				]
 			},
 		]
 		model_archetype = ""
