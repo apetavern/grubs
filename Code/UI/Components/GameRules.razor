@@ -29,7 +29,7 @@
                 </button>
             }
         </div>
-        <div class="scrollable">
+        <div class="scrollable @(SelectedTab == "terrain" ? "terrain-tab" : "")">
             @if (SelectedTab == "rules")
             {
                 <ControlInput class="control-wrap" Label="Grub Count: @(GrubsConfig.GrubCount)">
@@ -70,87 +70,93 @@
             }
             else if (SelectedTab == "terrain")
             {
-                <div class="side">
-                    <ControlInput class="control-wrap" Label="Terrain Type">
-                        <Control>
-                            <SingleSelectInput EnumType="TerrainType"
-                                               SelectedIndex=@((int)GrubsConfig.WorldTerrainType)
-                                               ValueChanged=@TerrainTypeChanged />
-                        </Control>
-                    </ControlInput>
-                    @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture)
-                    {
-                        <ControlInput class="control-wrap" Label="Terrain Texture">
-                            <Control>
-                                <SingleSelectInput EnumType="TerrainTexture"
-                                                   SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
-                                                   ValueChanged=@TerrainTextureChanged />
-                            </Control>
-                        </ControlInput>
-                    }
-                </div>
-                @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture)
-                {
-                    <div style="justify-content:center; padding-top: 5%;">
-                        <TerrainPreview class="settings-terrain-preview" style="width:800px; height:492px" RenderCamera=@GameLanding.Instance.PreviewCamera />
+                <div class="terrain-layout">
+                    <div class="terrain-sliders">
+                        <div class="terrain-type-picker">
+                            <button class="terrain-type-btn @(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Generated ? "selected" : "")"
+                                    onclick=@(() => TerrainTypeChanged((int)GrubsConfig.TerrainType.Generated))>
+                                <i>landscape</i>Generated
+                            </button>
+                            <button class="terrain-type-btn @(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Texture ? "selected" : "")"
+                                    onclick=@(() => TerrainTypeChanged((int)GrubsConfig.TerrainType.Texture))>
+                                <i>image</i>Texture
+                            </button>
+                            <button class="terrain-type-btn @(GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Cavern ? "selected" : "")"
+                                    onclick=@(() => TerrainTypeChanged((int)GrubsConfig.TerrainType.Cavern))>
+                                <i>brightness_low</i>Cavern
+                            </button>
+                        </div>
+                        @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Texture)
+                        {
+                            <ControlInput class="control-wrap" Label="Terrain Texture">
+                                <Control>
+                                    <SingleSelectInput EnumType="TerrainTexture"
+                                                       SelectedIndex=@((int)GrubsConfig.WorldTerrainTexture)
+                                                       ValueChanged=@TerrainTextureChanged />
+                                </Control>
+                            </ControlInput>
+                        }
+                        @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated)
+                        {
+                            <ControlInput class="control-wrap" Label="Terrain Length: @($"{GrubsConfig.TerrainLength} units")">
+                                <Control>
+                                    <SliderControl Min=@(1024) Max=@(4096) Step=@(64f) Value:bind=@GrubsConfig.TerrainLength />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Height: @($"{GrubsConfig.TerrainHeight} units")">
+                                <Control>
+                                    <SliderControl Min=@(512) Max=@(2048) Step=@(64f) Value:bind=@GrubsConfig.TerrainHeight />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Amplitude: @($"{GrubsConfig.TerrainAmplitude}f")">
+                                <Control>
+                                    <SliderControl Min=@(16) Max=@(128) Step=@(1f) Value:bind=@GrubsConfig.TerrainAmplitude />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Frequency: @($"{GrubsConfig.TerrainFrequency}f")">
+                                <Control>
+                                    <SliderControl Min=@(0.1f) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.TerrainFrequency />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Noise Zoom: @($"{GrubsConfig.TerrainNoiseZoom}f")">
+                                <Control>
+                                    <SliderControl Min=@(1) Max=@(5) Step=@(0.1f) Value:bind=@GrubsConfig.TerrainNoiseZoom />
+                                </Control>
+                            </ControlInput>
+                        }
+                        @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Cavern)
+                        {
+                            <ControlInput class="control-wrap" Label="Terrain Length: @($"{GrubsConfig.TerrainLength} units")">
+                                <Control>
+                                    <SliderControl Min=@(1024) Max=@(4096) Step=@(64f) Value:bind=@GrubsConfig.TerrainLength />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Height: @($"{GrubsConfig.TerrainHeight} units")">
+                                <Control>
+                                    <SliderControl Min=@(512) Max=@(2048) Step=@(64f) Value:bind=@GrubsConfig.TerrainHeight />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Pocket Count: @($"{GrubsConfig.TerrainCavernPockets}")">
+                                <Control>
+                                    <SliderControl Min=@(4) Max=@(16) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPockets />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Pocket Minimum Radius: @($"{GrubsConfig.TerrainCavernPocketMinSize}f")">
+                                <Control>
+                                    <SliderControl Min=@(20) Max=@(200) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPocketMinSize />
+                                </Control>
+                            </ControlInput>
+                            <ControlInput class="control-wrap" Label="Terrain Pocket Maximum Radius: @($"{GrubsConfig.TerrainCavernPocketMaxSize}f")">
+                                <Control>
+                                    <SliderControl Min=@(200) Max=@(512) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPocketMaxSize />
+                                </Control>
+                            </ControlInput>
+                        }
                     </div>
-                }
-                @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated)
-                {
-                    <ControlInput class="control-wrap" Label="Terrain Length: @($"{GrubsConfig.TerrainLength} units")">
-                        <Control>
-                            <SliderControl Min=@(1024) Max=@(4096) Step=@(64f) Value:bind=@GrubsConfig.TerrainLength />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Height: @($"{GrubsConfig.TerrainHeight} units")">
-                        <Control>
-                            <SliderControl Min=@(512) Max=@(2048) Step=@(64f) Value:bind=@GrubsConfig.TerrainHeight />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Amplitude: @($"{GrubsConfig.TerrainAmplitude}f")">
-                        <Control>
-                            <SliderControl Min=@(16) Max=@(128) Step=@(1f) Value:bind=@GrubsConfig.TerrainAmplitude />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Frequency: @($"{GrubsConfig.TerrainFrequency}f")">
-                        <Control>
-                            <SliderControl Min=@(0.1f) Max=@(1) Step=@(0.01f) Value:bind=@GrubsConfig.TerrainFrequency />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Noise Zoom: @($"{GrubsConfig.TerrainNoiseZoom}f")">
-                        <Control>
-                            <SliderControl Min=@(1) Max=@(5) Step=@(0.1f) Value:bind=@GrubsConfig.TerrainNoiseZoom />
-                        </Control>
-                    </ControlInput>
-                }
-                @if (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Cavern)
-                {
-                    <ControlInput class="control-wrap" Label="Terrain Length: @($"{GrubsConfig.TerrainLength} units")">
-                        <Control>
-                            <SliderControl Min=@(1024) Max=@(4096) Step=@(64f) Value:bind=@GrubsConfig.TerrainLength />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Height: @($"{GrubsConfig.TerrainHeight} units")">
-                        <Control>
-                            <SliderControl Min=@(512) Max=@(2048) Step=@(64f) Value:bind=@GrubsConfig.TerrainHeight />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Pocket Count: @($"{GrubsConfig.TerrainCavernPockets}")">
-                        <Control>
-                            <SliderControl Min=@(4) Max=@(16) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPockets />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Pocket Minimum Radius: @($"{GrubsConfig.TerrainCavernPocketMinSize}f")">
-                        <Control>
-                            <SliderControl Min=@(20) Max=@(200) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPocketMinSize />
-                        </Control>
-                    </ControlInput>
-                    <ControlInput class="control-wrap" Label="Terrain Pocket Maximum Radius: @($"{GrubsConfig.TerrainCavernPocketMaxSize}f")">
-                        <Control>
-                            <SliderControl Min=@(200) Max=@(512) Step=@(1f) Value:bind=@GrubsConfig.TerrainCavernPocketMaxSize />
-                        </Control>
-                    </ControlInput>
-                }
+                    <div class="terrain-preview-column">
+                        <TerrainPreview class="settings-terrain-preview" RenderCamera=@GameLanding.Instance.PreviewCamera />
+                    </div>
+                </div>
             }
         </div>
     </div>
@@ -161,6 +167,10 @@
     public bool EnableCloseButton { get; set; } = false;
 
     private string SelectedTab { get; set; } = "rules";
+
+    private int _lastTerrainHash = 0;
+    private RealTimeSince _timeSinceTerrainChange = 0;
+    private bool _pendingTerrainRebuild = false;
 
     private void SetTab(string tab)
     {
@@ -180,7 +190,40 @@
     private void HideGameRules()
     {
         SetClass("hide", true);
-        GrubsTerrain.Instance?.Init();
+    }
+
+    public override void Tick()
+    {
+        var terrainHash = GetTerrainHash();
+        if ( _lastTerrainHash != 0 && terrainHash != _lastTerrainHash )
+        {
+            _pendingTerrainRebuild = true;
+            _timeSinceTerrainChange = 0;
+        }
+        _lastTerrainHash = terrainHash;
+
+        if ( _pendingTerrainRebuild && _timeSinceTerrainChange > 0.5f )
+        {
+            _pendingTerrainRebuild = false;
+            GrubsTerrain.Instance?.Init();
+        }
+    }
+
+    private int GetTerrainHash()
+    {
+        if ( GrubsConfig.WorldTerrainType == GrubsConfig.TerrainType.Texture )
+        {
+            return HashCode.Combine( GrubsConfig.WorldTerrainType, GrubsConfig.WorldTerrainTexture );
+        }
+        return HashCode.Combine(
+            GrubsConfig.WorldTerrainType,
+            GrubsConfig.WorldTerrainTexture,
+            GrubsConfig.TerrainLength,
+            GrubsConfig.TerrainHeight,
+            GrubsConfig.TerrainAmplitude,
+            GrubsConfig.TerrainFrequency,
+            HashCode.Combine( GrubsConfig.TerrainNoiseZoom, GrubsConfig.TerrainCavernPockets, GrubsConfig.TerrainCavernPocketMinSize, GrubsConfig.TerrainCavernPocketMaxSize )
+        );
     }
 
     protected override int BuildHash()

@@ -33,13 +33,6 @@ public partial class GrubsTerrain
 		transformedSdf = mapSdf.Transform( new Vector2( -GrubsConfig.TerrainLength / 2f, -64f ) );
 
 		await SdfWorld.AddAsync( transformedSdf, materials.ElementAt( 1 ).Key );
-
-		while ( LastTerrainGenerated == GrubsConfig.WorldTerrainTexture )
-		{
-			await Task.DelaySeconds( 3f );
-		}
-
-		RegenerateTextureTerrain();
 	}
 
 	[ConCmd( "gr_reload_texture_terrain" )]

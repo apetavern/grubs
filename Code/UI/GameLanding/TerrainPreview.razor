@@ -5,25 +5,14 @@
 
 @inherits Panel
 
-<style>
-    TerrainPreview {
-        width: 100%;
-        height: 100%;
-
-		> image {
-			width: 100%;
-		}
-    }
-</style>
-
 <root>
-    @if (Networking.IsHost && (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated || GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Cavern))
-    {
-        <i onclick=@RefreshTerrain>refresh</i>
-    }
+	@if (Networking.IsHost && (GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Generated || GrubsConfig.WorldTerrainType is GrubsConfig.TerrainType.Cavern))
+	{
+		<i onclick=@RefreshTerrain>refresh</i>
+	}
 	@if ( !BaseGameMode.Current?.GameStarted ?? false )
 	{
-		<Image Texture=@Texture />
+		<div @ref="_previewDiv" class="preview-image" />
 	}
 </root>
 
@@ -31,7 +20,10 @@
 {
 	public CameraComponent RenderCamera { get; set; }
 
-	private Texture Texture;
+	private static Texture SharedTexture;
+	private static Vector2 LastTextureSize;
+
+	private Panel _previewDiv;
 
 	public override void Tick()
 	{
@@ -41,9 +33,23 @@
 		}
 
 		var textureSize = Box.Rect.Size == 0 ? new Vector2(500, 300) : Box.Rect.Size;
-		RenderCamera.RenderTarget = Texture.CreateRenderTarget( "terrain-preview", ImageFormat.RGBA8888, textureSize );
+		if ( SharedTexture == null || LastTextureSize != textureSize )
+		{
+			LastTextureSize = textureSize;
+			SharedTexture = Texture.CreateRenderTarget( "terrain-preview", ImageFormat.RGBA8888, textureSize );
+			RenderCamera.RenderTarget = SharedTexture;
+		}
+		else if ( RenderCamera.RenderTarget != SharedTexture )
+		{
+			RenderCamera.RenderTarget = SharedTexture;
+		}
 
-		Texture = RenderCamera.RenderTarget;
+		if ( _previewDiv != null && SharedTexture != null )
+		{
+			_previewDiv.Style.BackgroundImage = SharedTexture;
+			_previewDiv.Style.BackgroundSizeX = Length.Fraction( 1f );
+			_previewDiv.Style.BackgroundSizeY = Length.Fraction( 1f );
+		}
 
         var center = new Vector3(0f, 512f, (GrubsTerrain.Instance?.WorldTextureHeight ?? 1024f) / 2f);
         var w = GrubsTerrain.Instance?.WorldTextureLength ?? 2048f;

@@ -16,8 +16,9 @@ GameRules {
     border-radius: 4px;
     justify-content: center;
     flex-shrink: 0;
-    flex-grow: 1;
+    flex-grow: 0;
     box-shadow: 2px 2px 8px black;
+    overflow: visible;
 
     > .label {
       width: 50%;
@@ -110,8 +111,76 @@ GameRules {
     }
   }
 
+  .terrain-type-picker {
+    flex-direction: row;
+    width: 100%;
+    gap: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 2px 2px 8px black;
+
+    .terrain-type-btn {
+      flex-grow: 1;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 0;
+      background-color: darken(rgb(233, 239, 232), 45%);
+      font-size: 20px;
+      text-shadow: 1px 1px black;
+      border-radius: 0;
+      transition: background-color 0.1s ease;
+
+      > i {
+        font-size: 28px;
+      }
+
+      &:hover {
+        background-color: darken(rgb(233, 239, 232), 35%);
+        sound-in: ui_button_hover;
+      }
+
+      &.selected {
+        background-color: rgb(66, 118, 62);
+      }
+    }
+  }
+
+  .terrain-layout {
+    flex-direction: row;
+    width: 100%;
+    gap: 16px;
+    flex-grow: 1;
+    overflow: visible;
+  }
+
+  .terrain-sliders {
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 8px;
+    width: 45%;
+    overflow: visible;
+
+    > *:nth-child(1)  { z-index: 20; }
+    > *:nth-child(2)  { z-index: 19; }
+    > *:nth-child(3)  { z-index: 18; }
+    > *:nth-child(4)  { z-index: 17; }
+    > *:nth-child(5)  { z-index: 16; }
+    > *:nth-child(6)  { z-index: 15; }
+    > *:nth-child(7)  { z-index: 14; }
+  }
+
+  .terrain-preview-column {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+  }
+
   .settings-terrain-preview {
-      border: 8px $camo-darker;
+    width: 100%;
+    aspect-ratio: 1.777;
+    border: 8px $camo-darker;
   }
 
   .rules-title {
@@ -138,6 +207,10 @@ GameRules {
     padding-bottom: 32px;
     width: 100%;
     flex-grow: 1;
+
+    &.terrain-tab {
+      overflow: visible;
+    }
   }
 
   .rules-container {
