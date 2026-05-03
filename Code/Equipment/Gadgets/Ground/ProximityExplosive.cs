@@ -17,8 +17,6 @@ public partial class ProximityExplosive : Component, Component.ITriggerListener,
 	[Property] public float DetonateTime { get; set; } = 5.0f;
 	[Property] public bool DetonateOnDeath { get; set; } = false;
 	[Property, ResourceType( "sound" )] public string ExplosionSound { get; set; } = "";
-	[Property, ResourceType( "vpcf" )] public ParticleSystem Particles { get; set; }
-
 	[Property] public bool IsDud { get; set; }
 	public bool IsArmed { get; set; }
 	public bool IsDetonating { get; set; }

@@ -15,7 +15,7 @@ public static class GrubsClothingExtensions
 		ApplyToGrub( container, body );
 		bool hasChanges = false;
 
-		var entriesToLoad = container.Clothing.Where( x => x.Clothing == null || x.Clothing.ResourceId == 0 ).ToArray();
+		var entriesToLoad = container.Clothing.Where( x => x.Clothing == null ).ToArray();
 
 		foreach ( var entry in entriesToLoad )
 		{

@@ -24,8 +24,6 @@ public class GrubCharacterController : Component
 
 	[Property] public required GrubPlayerController Controller { get; set; }
 
-	[Property] public required ParticleSystem LandingParticles { get; set; }
-
 	[Property] public TagSet IgnoreLayers { get; set; } = new();
 
 	public BBox BoundingBox => new( new Vector3( -Radius, -Radius, 0 ), new Vector3( Radius, Radius, Height ) );
