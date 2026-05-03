@@ -27,7 +27,7 @@
 	@foreach (var input in Inputs)
 	{
 		<div class="hint">
-			<InputGlyph action=@input.Key size="medium" />
+			<div style="width: 128px; height: 128qpx; background-image: url( @GetGlyphPath( input.Key ) ); background-repeat: no-repeat; background-size: contain;"></div>
 			<div class="text">@input.Value.ToUpper()</div>
 		</div>
 	}
@@ -61,8 +61,11 @@
 		}
 	}
 
+	private string GetGlyphPath( string action ) =>
+		Input.GetGlyph( action, InputGlyphSize.Medium, false )?.ResourcePath ?? "";
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Inputs.GetHashCode(), Weapon.TimesUsed);
+		return HashCode.Combine( Inputs.GetHashCode(), Weapon.TimesUsed, Input.UsingController );
 	}
 }

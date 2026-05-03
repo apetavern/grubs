@@ -1,11 +1,9 @@
 ﻿InputGlyph {
-    background-size: contain;
-    background-repeat: no-repeat;
     transition: all 0.1s ease;
     transform: scale(1);
 
     &.pressed {
         transform: scale(1.15);
-        background-tint: gray;
+        opacity: 0.6;
     }
 }

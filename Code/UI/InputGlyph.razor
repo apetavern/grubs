@@ -6,7 +6,9 @@
 
 @attribute [StyleSheet]
 
-<root />
+<root>
+    <div style="width: 100%; height: 100%; background-image: url( @GetGlyphPath() ); background-repeat: no-repeat; background-size: contain;"></div>
+</root>
 
 @code {
     private string _inputAction;
@@ -14,87 +16,56 @@
     private InputGlyphSize _inputGlyphSize;
     private bool _outline;
 
-    protected override void OnAfterTreeRender(bool firstTime)
+    public void SetAction( string inputAction )
     {
-        Update();
-    }
-
-    public void SetAction(string inputAction)
-    {
-        if (_inputAction == inputAction)
+        if ( _inputAction == inputAction )
             return;
 
         _inputAction = inputAction;
-        BindClass("pressed", () => Input.Down(_inputAction));
-        Update();
+        BindClass( "pressed", () => Input.Down( _inputAction ) );
     }
 
-    public void SetAnalog(string inputAnalog)
+    public void SetAnalog( string inputAnalog )
     {
-        if (!Enum.TryParse<InputAnalog>(inputAnalog, true, out var analog))
+        if ( !Enum.TryParse<InputAnalog>( inputAnalog, true, out var analog ) )
             return;
 
-        if (analog == InputAnalog.LeftStickX || analog == InputAnalog.LeftStickY)
-            BindClass("pressed", () => !Input.AnalogMove.IsNearlyZero());
-        else if (analog == InputAnalog.RightStickX || analog == InputAnalog.RightStickY)
-            BindClass("pressed", () => !Input.AnalogLook.IsNearlyZero());
+        if ( analog == InputAnalog.LeftStickX || analog == InputAnalog.LeftStickY )
+            BindClass( "pressed", () => !Input.AnalogMove.IsNearlyZero() );
+        else if ( analog == InputAnalog.RightStickX || analog == InputAnalog.RightStickY )
+            BindClass( "pressed", () => !Input.AnalogLook.IsNearlyZero() );
 
         _inputAnalog = analog;
     }
 
-    public override void SetProperty(string name, string value)
+    public override void SetProperty( string name, string value )
     {
-        switch (name)
+        switch ( name )
         {
             case "action":
-                {
-                    SetAction(value);
-                    Update();
-
-                    break;
-                }
-
+                SetAction( value );
+                break;
             case "analog":
-                {
-                    SetAnalog(value);
-                    Update();
-
-                    break;
-                }
-
+                SetAnalog( value );
+                break;
             case "size":
-                {
-                    Enum.TryParse(value, true, out _inputGlyphSize);
-                    Update();
-
-                    break;
-                }
-
+                Enum.TryParse( value, true, out _inputGlyphSize );
+                break;
             case "outline":
-                {
-                    _outline = value switch
-                    {
-                        "true" => true,
-                        "false" => false,
-                        _ => _outline
-                    };
-
-                    Update();
-                    break;
-                }
+                _outline = value == "true";
+                break;
         }
 
-        base.SetProperty(name, value);
+        base.SetProperty( name, value );
     }
 
-    private void Update()
-    {
-        var texture = _inputAction is null ? Input.GetGlyph(_inputAnalog, _inputGlyphSize, _outline) : Input.GetGlyph(_inputAction, _inputGlyphSize, _outline);
-        Style.BackgroundImage = texture;
-    }
+    private string GetGlyphPath() =>
+        ( _inputAction is null
+            ? Input.GetGlyph( _inputAnalog, _inputGlyphSize, _outline )
+            : Input.GetGlyph( _inputAction, _inputGlyphSize, _outline ) )?.ResourcePath ?? "";
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Input.UsingController);
+        return HashCode.Combine( Input.UsingController );
     }
 }
