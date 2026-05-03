@@ -29,17 +29,16 @@ public sealed class PoisonHelper : Component
 	{
 		base.OnUpdate();
 
-		if ( PoisonObjects.Count != PoisonParticles.Count )
+		while ( PoisonObjects.Count > PoisonParticles.Count )
 		{
-			if ( PoisonObjects.Count > PoisonParticles.Count )
-			{
-				PoisonObjects[0].Destroy();
-				PoisonObjects.RemoveAt( 0 );
-			}
-			else
-			{
-				PoisonObjects.Add( FireObjectPrefab.Clone() );
-			}
+			var last = PoisonObjects.Count - 1;
+			if ( PoisonObjects[last].IsValid() )
+				PoisonObjects[last].Destroy();
+			PoisonObjects.RemoveAt( last );
+		}
+		while ( PoisonObjects.Count < PoisonParticles.Count )
+		{
+			PoisonObjects.Add( FireObjectPrefab.Clone() );
 		}
 
 		for ( var i = 0; i < PoisonObjects.Count; i++ )

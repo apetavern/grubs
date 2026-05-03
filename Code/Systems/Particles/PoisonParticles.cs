@@ -5,6 +5,20 @@ public sealed class PoisonParticles : Component
 {
 	private const string PoisonParticlesPath = "particles/explosion/poison.prefab";
 
+	[Property] public float Lifetime { get; set; } = 4f;
+
+	protected override void OnStart()
+	{
+		_ = DestroyAfterLifetime();
+	}
+
+	private async Task DestroyAfterLifetime()
+	{
+		await Task.DelaySeconds( Lifetime );
+		if ( GameObject.IsValid() )
+			GameObject.Destroy();
+	}
+
 	public static PoisonParticles Spawn()
 	{
 		var go = GameObject.Clone( PoisonParticlesPath );

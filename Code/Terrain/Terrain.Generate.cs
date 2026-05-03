@@ -141,6 +141,11 @@ public partial class GrubsTerrain
 		}
 
 		SubtractBackground( pointsX );
+
+		TerrainMap = null;
+		NoiseMap = null;
+		DensityMap = null;
+		BackgroundMap = null;
 	}
 
 	private void SubtractBackgroundBox( int wLength, int pointsY )

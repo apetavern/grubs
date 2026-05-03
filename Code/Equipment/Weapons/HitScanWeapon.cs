@@ -100,6 +100,8 @@ public class HitScanWeapon : Weapon
 
 		if ( traceCount > 0 )
 		{
+			if ( _tracerParticles.IsValid() )
+				_tracerParticles.GameObject.Destroy();
 			_tracerParticles = TracerParticles.Spawn( TracerEffect ).SetWorldPosition( startPos ).SetEndPoint( endPos );
 		}
 

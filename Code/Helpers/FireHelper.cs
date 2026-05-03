@@ -29,17 +29,16 @@ public sealed class FireHelper : Component
 	{
 		base.OnUpdate();
 
-		if ( FireObjects.Count != FireParticles.Count )
+		while ( FireObjects.Count > FireParticles.Count )
 		{
-			if ( FireObjects.Count > FireParticles.Count )
-			{
-				FireObjects[0].Destroy();
-				FireObjects.RemoveAt( 0 );
-			}
-			else
-			{
-				FireObjects.Add( FireObjectPrefab.Clone() );
-			}
+			var last = FireObjects.Count - 1;
+			if ( FireObjects[last].IsValid() )
+				FireObjects[last].Destroy();
+			FireObjects.RemoveAt( last );
+		}
+		while ( FireObjects.Count < FireParticles.Count )
+		{
+			FireObjects.Add( FireObjectPrefab.Clone() );
 		}
 
 		for ( var i = 0; i < FireObjects.Count; i++ )
