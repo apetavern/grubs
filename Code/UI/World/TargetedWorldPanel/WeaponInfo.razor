@@ -27,7 +27,7 @@
 	@foreach (var input in Inputs)
 	{
 		<div class="hint">
-			<div style="width: 128px; height: 128qpx; background-image: url( @GetGlyphPath( input.Key ) ); background-repeat: no-repeat; background-size: contain;"></div>
+			<div style="width: 128px; height: 128px; background-image: url( @GetGlyphPath( input.Key ) ); background-repeat: no-repeat; background-size: contain;"></div>
 			<div class="text">@input.Value.ToUpper()</div>
 		</div>
 	}
