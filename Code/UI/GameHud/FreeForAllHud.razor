@@ -2,6 +2,7 @@
 
 @using Grubs.Systems.GameMode
 @using Grubs.Systems.Pawn
+@using Grubs.Systems.Wind
 @using Grubs.UI.InputHints
 
 @inherits Panel
@@ -19,6 +20,7 @@
     <InputHintsPanel />
     <InventoryDisplay />
     <PlayerList />
+    @if (WindEnabled) { <WindIndicator /> }
     @if (GameMode.IsSandboxMode)
     {
         <div class="sandbox-mode-hint">
@@ -38,8 +40,8 @@
 
     private Player ActivePlayer => GameMode.ActivePlayer;
     private string Color => ActivePlayer.PlayerColor.ToString();
-
     private string TurnTimer => GameMode?.TimeUntilTurnOver.Relative.CeilToInt().Clamp(0, int.MaxValue).ToString("0");
+    private bool WindEnabled => GrubsConfig.WindEnabled;
 
     public override void Tick()
     {
@@ -62,6 +64,6 @@
         if ( !GameMode.IsValid() || !GameMode.ActivePlayer.IsValid() )
             return 0;
         
-        return HashCode.Combine(GameMode.ActivePlayer, TurnTimer);
+        return HashCode.Combine(GameMode.ActivePlayer, TurnTimer, GrubsConfig.WindEnabled);
     }
 }

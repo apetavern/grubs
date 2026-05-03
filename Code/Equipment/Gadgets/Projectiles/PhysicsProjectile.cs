@@ -1,5 +1,7 @@
 ﻿namespace Grubs.Equipment.Gadgets.Projectiles;
 
+using Grubs.Systems.Wind;
+
 [Title( "Grubs - Physics Projectile" ), Category( "Equipment" )]
 public class PhysicsProjectile : Projectile
 {
@@ -49,6 +51,12 @@ public class PhysicsProjectile : Projectile
 	{
 		if ( !PhysicsBody.IsValid() )
 			return;
+
+		if ( !IsProxy && WindSystem.Instance.IsValid() && GrubsConfig.WindEnabled )
+		{
+			var wind = new Vector3( WindSystem.Instance.WindForce * 7500f, 0f, 0f );
+			PhysicsBody.ApplyForce( wind );
+		}
 
 		if ( !RotateTowardsVelocity )
 			return;

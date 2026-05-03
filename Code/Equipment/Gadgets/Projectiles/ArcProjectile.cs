@@ -1,5 +1,6 @@
 ﻿using Grubs.Equipment.Weapons;
 using Grubs.Helpers;
+using Grubs.Systems.Wind;
 
 namespace Grubs.Equipment.Gadgets.Projectiles;
 
@@ -88,10 +89,11 @@ public class ArcProjectile : Projectile
 			return Segments;
 
 		var force = charge * 0.5f;
+		var windForce = WindSystem.Instance.IsValid() && GrubsConfig.WindEnabled ? WindSystem.Instance.WindForce : 0f;
 		var arcTrace = new ArcTrace( Grub, WorldPosition );
 		return ShouldBounce
-			? arcTrace.RunTowardsWithBounces( Scene, direction, force, 0f, MaxBounces )
-			: arcTrace.RunTowards( Scene, direction, force, 0f );
+			? arcTrace.RunTowardsWithBounces( Scene, direction, force, windForce, MaxBounces )
+			: arcTrace.RunTowards( Scene, direction, force, windForce );
 	}
 
 	protected override void DrawGizmos()

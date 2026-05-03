@@ -99,7 +99,7 @@ public sealed class Inventory : LocalComponent<Inventory>
 	
 		if ( Input.Pressed( "toggle_inventory" ) )
 		{
-			Log.Info( $"Toggle inventory to: {!InventoryOpen}" );
+			//Log.Info( $"Toggle inventory to: {!InventoryOpen}" );
 			InventoryOpen = !InventoryOpen;
 		}
 	

@@ -4,6 +4,7 @@ using Grubs.Helpers;
 using Grubs.Pawn;
 using Grubs.Systems.Pawn;
 using Grubs.Systems.Pawn.Grubs;
+using Grubs.Systems.Wind;
 using Grubs.Terrain;
 
 namespace Grubs.Systems.GameMode;
@@ -346,6 +347,9 @@ public sealed class FreeForAll : BaseGameMode
 		
 		// Send the ActivePlayer's ActiveGrub in case the synced ActiveGrub hasn't been processed yet.
 		ActivePlayer.OnTurnStart( ActivePlayer.ActiveGrub );
+
+		if ( WindSystem.Instance.IsValid() && GrubsConfig.WindEnabled )
+			WindSystem.Instance.Randomize();
 		_rotateCount = 0;
 
 		CratesSpawnStarted = false;

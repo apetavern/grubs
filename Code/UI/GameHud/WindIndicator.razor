@@ -1,0 +1,39 @@
+@namespace Grubs.UI.GameHud
+
+@using Grubs.Systems.Wind
+
+@inherits Panel
+
+@attribute [StyleSheet]
+
+<root>
+    <div class="wind-label">WIND</div>
+    <div class="wind-bar">
+        <div class="wind-half left @(IsLeft ? "active" : "inactive")">
+            <div class="arrows">@LeftArrows</div>
+        </div>
+        <div class="wind-center" />
+        <div class="wind-half right @(IsRight ? "active" : "inactive")">
+            <div class="arrows">@RightArrows</div>
+        </div>
+    </div>
+</root>
+
+@code {
+    private WindSystem Wind => WindSystem.Instance;
+
+    private float WindForce => Wind?.WindForce ?? 0f;
+    private float MaxWind => Wind?.MaxWindForce ?? 3f;
+    private bool IsLeft => WindForce < -0.01f;
+    private bool IsRight => WindForce > 0.01f;
+
+    /// <summary>
+    /// Number of arrows shown, 1 at minimum wind up to 8 at max.
+    /// </summary>
+    private int ArrowCount => Math.Max( 1, (int)MathF.Round( MathF.Abs( WindForce ) / MaxWind * 8f ) );
+
+    private string LeftArrows => new string('‹', ArrowCount);
+    private string RightArrows => new string('›', ArrowCount);
+
+    protected override int BuildHash() => Wind.IsValid() ? HashCode.Combine( Wind.WindForce ) : 0;
+}

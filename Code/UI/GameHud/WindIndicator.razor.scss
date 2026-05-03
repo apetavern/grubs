@@ -1,0 +1,90 @@
+@import '../common.scss';
+
+@keyframes scroll-left {
+  from { transform: translateX(0px); }
+  to   { transform: translateX(-12px); }
+}
+
+@keyframes scroll-right {
+  from { transform: translateX(0px); }
+  to   { transform: translateX(12px); }
+}
+
+WindIndicator {
+  position: absolute;
+  bottom: 128px;
+  left: 50%;
+  margin-left: -130px;
+  width: 260px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  .wind-label {
+    font-family: $font-primary;
+    font-size: 22px;
+    color: $camo-light;
+    background-color: $camo-darker;
+    padding: 4px 16px;
+    letter-spacing: 4px;
+  }
+
+  .wind-bar {
+    width: 240px;
+    height: 28px;
+    background-color: $camo-darker;
+    border-radius: 4px;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+
+    .wind-half {
+      width: 50%;
+      overflow: hidden;
+      align-items: center;
+      transition: opacity 0.4s ease;
+
+      &.left {
+        justify-content: flex-end;
+      }
+
+      &.right {
+        justify-content: flex-start;
+      }
+
+      &.inactive {
+        opacity: 0.15;
+        animation-name: none;
+      }
+
+      &.active {
+        opacity: 1.0;
+        animation-duration: 0.6s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+
+      .arrows {
+        font-family: $font-primary;
+        font-size: 20px;
+        color: $camo-light;
+        white-space: nowrap;
+      }
+
+      &.left .arrows {
+        animation-name: scroll-left;
+      }
+
+      &.right .arrows {
+        animation-name: scroll-right;
+      }
+    }
+
+    .wind-center {
+      width: 2px;
+      background-color: $camo-light;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+  }
+}

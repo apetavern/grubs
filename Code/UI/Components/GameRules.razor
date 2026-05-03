@@ -67,6 +67,11 @@
                         <SliderControl Min=@(1) Max=@(10) Step=@(1f) Value:bind=@GrubsConfig.SuddenDeathDelay />
                     </Control>
                 </ControlInput>
+                <ControlInput class="control-wrap" Label="Wind Enabled">
+                    <Control>
+                        <Switch Value:bind=@GrubsConfig.WindEnabled />
+                    </Control>
+                </ControlInput>
             }
             else if (SelectedTab == "terrain")
             {
@@ -232,6 +237,6 @@
         var terrainGen = GrubsConfig.TerrainLength + GrubsConfig.TerrainHeight + GrubsConfig.TerrainAmplitude + GrubsConfig.TerrainFrequency + GrubsConfig.TerrainNoiseZoom;
         var terrainOpts = (int)GrubsConfig.WorldTerrainType + (int)GrubsConfig.WorldTerrainTexture;
         var suddenDeath = GrubsConfig.SuddenDeathDelay;
-        return HashCode.Combine(GrubsConfig.GrubCount, GrubsConfig.TurnDuration, crateOdds, terrainGen, terrainOpts, suddenDeath);
+        return HashCode.Combine(GrubsConfig.GrubCount, GrubsConfig.TurnDuration, crateOdds, terrainGen, terrainOpts, suddenDeath, GrubsConfig.WindEnabled);
     }
 }
