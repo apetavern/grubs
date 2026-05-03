@@ -50,7 +50,7 @@ public class MultiHitMeleeWeapon : Weapon
 			ResetCombo();
 	}
 
-	protected override void FireFinished()
+	public override void FireFinished()
 	{
 		base.FireFinished();
 

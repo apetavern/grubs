@@ -156,6 +156,10 @@
           {
             "_type": "gameobject",
             "prefab": "prefabs/weapons/bazooka_homing/bazooka_homing.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/weapons/elemental_missile/elemental_missile.prefab"
           }
         ],
         "OnComponentDestroy": null,
@@ -232,13 +236,15 @@
         "Enabled": false,
         "IncludeStaticBodies": true,
         "IncludeKeyframedBodies": true,
-        "EditorAutoUpdate": true,
+        "EditorAutoUpdate": false,
         "AgentHeight": 64,
         "AgentRadius": 16,
         "AgentStepSize": 18,
         "AgentMaxSlope": 40,
         "ExcludedBodies": "",
-        "IncludedBodies": ""
+        "IncludedBodies": "",
+        "DeferGeneration": false,
+        "CustomBounds": false
       }
     },
     "__variables": []

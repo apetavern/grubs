@@ -111,125 +111,7 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "OnFire": {
-          "__version": 9,
-          "__guid": "fbf78fe4-14a4-46d6-a009-9cd6029177dc",
-          "__changeId": 0,
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.RemoteDetonateWeapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "272,0"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.RemoteDetonateWeapon"
-              },
-              "UserData": {
-                "Position": "-48,80"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.RemoteDetonateWeapon"
-              },
-              "UserData": {
-                "Position": "256,112"
-              }
-            },
-            {
-              "Id": 5,
-              "Type": "call",
-              "Properties": {
-                "_type": "Grubs.Equipment.Weapons.RemoteDetonateWeapon",
-                "_name": "ReceiveProjectile",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "544,0"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 1,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 1,
-              "DstName": "charge"
-            },
-            {
-              "Id": 9,
-              "Value": null,
-              "DstId": 1,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 2,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 4,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 5,
-              "DstName": "ProjectileObject"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_signal",
-              "DstId": 5,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 4,
-              "SrcName": "_result",
-              "DstId": 5,
-              "DstName": "_target"
-            }
-          ],
-          "Defaults": {
-            "$9._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/goat/goat_thrown.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
@@ -242,6 +124,32 @@
         "Inputs": {
           "fire": "Release"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "f7b2064b-984c-478c-90c9-d29ddf9da112",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "d2dffc35-f536-4f31-b145-fe66ccbecc83",
+          "go": "e3b566ec-41a7-40bd-b879-3235b32aaf0f",
+          "component_type": "RemoteDetonateWeapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/goat/goat_thrown.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "WhenProjectileResolved",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": true,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,

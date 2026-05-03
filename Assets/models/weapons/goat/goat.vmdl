@@ -506,7 +506,7 @@
 					},
 					{
 						_class = "LODGroup"
-						switch_threshold = 40.0
+						switch_threshold = 80.0
 						auto_simplify_mode = 2
 						auto_reduction = 0.1
 						auto_max_error = 0.0

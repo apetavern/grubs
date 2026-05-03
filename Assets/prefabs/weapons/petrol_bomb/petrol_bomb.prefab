@@ -105,79 +105,7 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "OnFire": {
-          "__version": 9,
-          "__guid": "12bb7051-e2a6-4e0c-ba13-6f8622fb479b",
-          "__changeId": 1,
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "-48,-96"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "192,-84"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 2,
-              "DstName": "charge"
-            },
-            {
-              "Id": 4,
-              "Value": null,
-              "DstId": 2,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$4._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb_thrown.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
@@ -189,6 +117,32 @@
         "Inputs": {
           "fire": "Throw (Hold)"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "fff8c923-b5b2-4605-abb3-f4b2a12e8935",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "b28b81cf-f9c1-404c-af97-b2d3f022b075",
+          "go": "b467da93-57ec-4b74-aaf6-6b848e4109d7",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/petrol_bomb/petrol_bomb_thrown.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "WhenProjectileResolved",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,

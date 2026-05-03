@@ -91,98 +91,7 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "OnFire": {
-          "__version": 9,
-          "__guid": "d3a649a5-11d8-42b5-beee-c74a33a5a521",
-          "__changeId": 0,
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "16,-128"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "272,0"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "grubs.fire_finished",
-              "UserData": {
-                "Position": "496,-96"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 2,
-              "DstName": "charge"
-            },
-            {
-              "Id": 6,
-              "Value": null,
-              "DstId": 2,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_signal",
-              "DstId": 4,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 4,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$6._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
@@ -193,6 +102,32 @@
         "Inputs": {
           "fire": "Drop"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "3106b2f7-3670-4914-bd39-af8b6598d2cd",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "5c3d257f-c979-4cae-b6ff-1e8c93b077e3",
+          "go": "8b23b7ea-f7ff-44d7-8149-1852a2d9d5f3",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/landmine/landmine_ground.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "Immediately",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,

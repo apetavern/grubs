@@ -38,7 +38,7 @@ public sealed class JetpackTool : Tool
 		StopEffects();
 	}
 
-	protected override void FireFinished()
+	public override void FireFinished()
 	{
 		base.FireFinished();
 

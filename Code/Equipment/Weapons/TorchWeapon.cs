@@ -97,7 +97,7 @@ public sealed class TorchWeapon : Weapon
 		}
 	}
 
-	protected override void FireFinished()
+	public override void FireFinished()
 	{
 		TorchFlameEnabled = false;
 

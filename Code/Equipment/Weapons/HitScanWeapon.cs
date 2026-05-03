@@ -59,7 +59,7 @@ public class HitScanWeapon : Weapon
 			FireFinished();
 	}
 
-	protected override void FireFinished()
+	public override void FireFinished()
 	{
 		base.FireFinished();
 

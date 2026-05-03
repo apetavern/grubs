@@ -67,7 +67,7 @@ public class NinjaRopeWeapon : Weapon
 			FireFinished();
 	}
 
-	protected override void FireFinished()
+	public override void FireFinished()
 	{
 		if ( WeaponInfoPanel is not null )
 		{

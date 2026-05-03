@@ -93,89 +93,36 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "OnFire": {
-          "__version": 9,
-          "__guid": "1cf78456-2c6a-4399-a3ef-013c8cb7a4a7",
-          "__changeId": 15,
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "204,-0"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "scene.ref",
-              "UserData": {
-                "Position": "0,-108"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "-96,-144"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 1,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 1,
-              "DstName": "charge"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 4,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 4,
-              "DstName": "_this"
-            }
-          ],
-          "Defaults": {
-            "$3.gameobject": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/bazooka/bazooka_fire.sound"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "2ab666ac-e372-4fac-8522-d058a4f42c12",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "d11379da-8a10-45c9-a8c0-cfc8e35605c1",
+          "go": "8cca64aa-4412-437a-9318-35bfa23712e1",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/bazooka/bazooka_shell.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "WhenProjectileResolved",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [

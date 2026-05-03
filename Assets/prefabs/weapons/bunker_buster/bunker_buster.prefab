@@ -58,183 +58,7 @@
         },
         "FiringType": "Complex",
         "MaxUses": 1,
-        "OnFire": {
-          "__version": 7,
-          "__guid": "fb6b50a3-d2f0-48e0-9f0b-a42607a9d86e",
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.TargetingWeapon",
-              "Grubs.DiggingExplosiveProjectile"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "-32,144"
-              }
-            },
-            {
-              "Id": 1,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "208,-16"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "-64,-64"
-              }
-            },
-            {
-              "Id": 5,
-              "Type": "call",
-              "Properties": {
-                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile",
-                "_name": "ShareData",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "688,-16"
-              }
-            },
-            {
-              "Id": 8,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.DiggingExplosiveProjectile"
-              },
-              "UserData": {
-                "Position": "384,80"
-              }
-            },
-            {
-              "Id": 9,
-              "Type": "call",
-              "Properties": {
-                "_type": "Grubs.Equipment.Weapons.TargetingWeapon",
-                "_name": "ResetParameters",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "1072,-16"
-              }
-            },
-            {
-              "Id": 10,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "768,48"
-              }
-            },
-            {
-              "Id": 13,
-              "Type": "grubs.fire_finished",
-              "UserData": {
-                "Position": "1472,-96"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 1,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 1,
-              "DstName": "charge"
-            },
-            {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/bunker_buster/bunker_buster_dropped.prefab"
-              },
-              "DstId": 1,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 3,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_signal",
-              "DstId": 5,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 8,
-              "SrcName": "_result",
-              "DstId": 5,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 8,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 5,
-              "SrcName": "_signal",
-              "DstId": 9,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 10,
-              "SrcName": "_result",
-              "DstId": 9,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 10,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 9,
-              "SrcName": "_signal",
-              "DstId": 13,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_result",
-              "DstId": 13,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$14._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/bunker_buster/bunker_buster_dropped.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "SecondaryFiringType": "Instant"
       },
       {
@@ -243,6 +67,32 @@
         "Inputs": {
           "fire": "Set Target"
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "2a98ba22-632e-4dd6-b66c-b4702629d20c",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "64143a54-d488-4cd9-a62f-7731e1f97ad7",
+          "go": "35065be2-a245-4507-b809-b479f86ebe3c",
+          "component_type": "TargetingWeapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/bunker_buster/bunker_buster_dropped.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "Immediately",
+        "ShareTargetData": true,
+        "SendToRemoteDetonate": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [

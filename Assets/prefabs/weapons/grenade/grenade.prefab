@@ -51,80 +51,7 @@
         },
         "FiringType": "Charged",
         "MaxUses": 1,
-        "OnFire": {
-          "__version": 7,
-          "__guid": "d62ed425-3936-4767-9023-9236621a8c7a",
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "-48,-96"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "192,-64"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 2,
-              "DstName": "charge"
-            },
-            {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/grenade/grenade_thrown.prefab"
-              },
-              "DstId": 2,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$3._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/grenade/grenade_thrown.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
@@ -133,6 +60,32 @@
         "Inputs": {
           "fire": "Throw (Hold)"
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "6f3aab76-4dcc-4a8a-ac9c-eb77ae94a195",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "35b632be-ad58-46a0-8dcd-723b5ed65f50",
+          "go": "021f9a0a-df1e-4866-aed7-112743891b79",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/grenade/grenade_thrown.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "WhenProjectileResolved",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],

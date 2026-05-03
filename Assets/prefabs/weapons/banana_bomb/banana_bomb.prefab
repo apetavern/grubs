@@ -51,83 +51,7 @@
         },
         "FiringType": "Charged",
         "MaxUses": 1,
-        "OnFire": {
-          "__version": 7,
-          "__guid": "552b4e16-650e-4b2d-a135-cc2ad2d8eaf9",
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "32,64"
-              }
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "-48,-96"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "224,-64"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 2,
-              "DstName": "charge"
-            },
-            {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/banana_bomb/banana_bomb_thrown.prefab"
-              },
-              "DstId": 2,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$3._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/banana_bomb/banana_bomb_thrown.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
@@ -136,6 +60,32 @@
         "Inputs": {
           "fire": "Throw (Hold)"
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "38782eae-6411-4881-bac5-53c69ae976ff",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "a7125d8a-c93c-468d-8c47-693b250f4dfe",
+          "go": "e9e26d8a-31d8-4ee3-9ba0-9a9f78985f38",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/banana_bomb/banana_bomb_thrown.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "WhenProjectileResolved",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],

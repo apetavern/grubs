@@ -10,11 +10,11 @@
 <root>
 	@if (ShouldDisplayInfo())
 	{
-		@if (Weapon.AmmoType == AmmoType.Numbered)
+		@if (Weapon!.AmmoType == AmmoType.Numbered)
 		{
-            <div class="uses">
-                <div class="text">@GetAmmoText() USES</div>
-            </div>
+			<div class="uses">
+				<div class="text">@GetAmmoText() USES</div>
+			</div>
 		}
 		else if (Weapon.AmmoType == AmmoType.Fuel)
 		{
@@ -24,7 +24,7 @@
 			</div>
 		}
 	}
-	@foreach (var input in Inputs)
+	@foreach (var input in Inputs ?? Enumerable.Empty<KeyValuePair<string, string>>())
 	{
 		<div class="hint">
 			<div style="width: 128px; height: 128px; background-image: url( @GetGlyphPath( input.Key ) ); background-repeat: no-repeat; background-size: contain;"></div>
@@ -37,7 +37,7 @@
 	public Weapon Weapon { get; set; }
 	public Dictionary<string, string> Inputs { get; set; }
 
-	private bool ShouldDisplayInfo() => Weapon != null && Weapon.MaxUses > 1;
+	private bool ShouldDisplayInfo() => Weapon is not null && Weapon.MaxUses > 1;
 	private float GetAmmoRemaining() => (Weapon.MaxUses - Weapon.TimesUsed).Clamp(0, Weapon.MaxUses);
 	private float GetFuelRemaining() => GetAmmoRemaining() * 100 / Weapon.MaxUses;
 

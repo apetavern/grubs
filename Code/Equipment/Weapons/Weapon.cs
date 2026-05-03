@@ -1,4 +1,5 @@
-﻿using Grubs.Pawn;
+﻿using Grubs.Equipment.Gadgets.Projectiles;
+using Grubs.Pawn;
 using Grubs.Systems.GameMode;
 using Grubs.UI;
 
@@ -161,6 +162,20 @@ public partial class Weapon : Component
 	protected virtual void FireCharged( int charge ) { }
 	protected virtual void HandleComplexFiringInput() { }
 
+	public static GameObject SpawnProjectile( Weapon source, GameObject projectile, int charge )
+	{
+		var go = projectile.Clone();
+		go.NetworkSpawn();
+		if ( go.Components.TryGet( out Projectile pc ) )
+		{
+			pc.SourceId = source.Id;
+			pc.Charge = charge;
+		}
+
+		source.TimeSinceLastUsed = 0f;
+		return go;
+	}
+
 	public virtual void OnDeploy()
 	{
 		if ( IsProxy )
@@ -188,7 +203,7 @@ public partial class Weapon : Component
 			ChargeGauge.GameObject.Enabled = false;
 	}
 
-	protected virtual void FireFinished()
+	public virtual void FireFinished()
 	{
 		IsFiring = false;
 		TimesUsed++;

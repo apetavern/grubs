@@ -51,81 +51,34 @@
         },
         "FiringType": "Continuous",
         "MaxUses": 15,
-        "OnFire": {
-          "__version": 7,
-          "__guid": "dd418991-6bf1-4852-8045-8a57a3b14e00",
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "240,0"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "-48,96"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 1,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 1,
-              "DstName": "charge"
-            },
-            {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl_shell.prefab"
-              },
-              "DstId": 1,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 3,
-              "DstName": "_this"
-            }
-          ],
-          "Defaults": {
-            "$4._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl_shell.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "UseSound": "sounds/weapons/bazooka/bazooka_fire.sound"
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "ecee8811-ec6d-4ac2-8090-621cf990e5e0",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "a5cb8040-3b85-4efa-b30b-19d03517ddc6",
+          "go": "4a75bd10-f7a0-4a2a-acc7-e2ae7f6eb9fc",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/multiple_rocket_launcher/mrl_shell.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "WhenProjectileResolved",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],

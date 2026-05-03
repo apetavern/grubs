@@ -119,163 +119,7 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "OnFire": {
-          "__version": 9,
-          "__guid": "2ea83a4f-e52a-4337-8b23-f6f98b9b2edc",
-          "__changeId": 0,
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile",
-              "Grubs.Equipment.Weapons.TargetingWeapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 1,
-              "Type": "input",
-              "UserData": {
-                "Position": "-16,-192"
-              }
-            },
-            {
-              "Id": 17,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "256,-208"
-              }
-            },
-            {
-              "Id": 21,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile"
-              },
-              "UserData": {
-                "Position": "432,-160"
-              }
-            },
-            {
-              "Id": 25,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "800,-144"
-              }
-            },
-            {
-              "Id": 27,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "-128,-272"
-              }
-            },
-            {
-              "Id": 31,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": false,
-                "_name": "ResetParameters",
-                "_type": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "1216,-208"
-              }
-            },
-            {
-              "Id": 32,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": false,
-                "_name": "ShareData",
-                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile"
-              },
-              "UserData": {
-                "Position": "800,-208"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 1,
-              "SrcName": "_signal",
-              "DstId": 17,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "charge",
-              "DstId": 17,
-              "DstName": "charge"
-            },
-            {
-              "Id": 34,
-              "Value": null,
-              "DstId": 17,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 27,
-              "SrcName": "_result",
-              "DstId": 17,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 17,
-              "SrcName": "_result",
-              "DstId": 21,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_target",
-              "DstId": 25,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_target",
-              "DstId": 27,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 32,
-              "SrcName": "_signal",
-              "DstId": 31,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 25,
-              "SrcName": "_result",
-              "DstId": 31,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 17,
-              "SrcName": "_signal",
-              "DstId": 32,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 21,
-              "SrcName": "_result",
-              "DstId": 32,
-              "DstName": "_target"
-            }
-          ],
-          "Defaults": {
-            "$34._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/bazooka_homing/bazooka_shell_homing.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "OnFireFinished": null,
         "SecondaryFiringType": "Charged",
         "StartMultiplier": 1,
@@ -289,6 +133,32 @@
         "Inputs": {
           "fire": "Set Target"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "5da043b5-969d-4b01-b34d-4cb5d4e99bc9",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "dc55ec63-a7c0-448d-bf07-f2161bc33c7c",
+          "go": "8cf41e86-4dbc-4eb2-a89a-ab51abf83e4b",
+          "component_type": "TargetingWeapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/bazooka_homing/bazooka_shell_homing.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "Immediately",
+        "ShareTargetData": true,
+        "SendToRemoteDetonate": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,

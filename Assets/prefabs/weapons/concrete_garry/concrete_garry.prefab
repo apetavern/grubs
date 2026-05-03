@@ -58,199 +58,7 @@
         },
         "FiringType": "Complex",
         "MaxUses": 1,
-        "OnFire": {
-          "__version": 7,
-          "__guid": "a45b2138-9b64-4d23-9861-d18ec15f5c8f",
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.TargetingWeapon",
-              "Grubs.DroppedProjectile"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "-0,64"
-              }
-            },
-            {
-              "Id": 1,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "192,-48"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "call",
-              "Properties": {
-                "_type": "Grubs.Equipment.Weapons.TargetingWeapon",
-                "_name": "ResetParameters",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "1024,-48"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "736,16"
-              }
-            },
-            {
-              "Id": 5,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "-192,-112"
-              }
-            },
-            {
-              "Id": 6,
-              "Type": "call",
-              "Properties": {
-                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile",
-                "_name": "ShareData",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "688,-48"
-              }
-            },
-            {
-              "Id": 10,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.DroppedProjectile"
-              },
-              "UserData": {
-                "Position": "384,32"
-              }
-            },
-            {
-              "Id": 12,
-              "Type": "grubs.fire_finished",
-              "UserData": {
-                "Position": "1440,-48"
-              }
-            },
-            {
-              "Id": 13,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "1120,16"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 1,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 1,
-              "DstName": "charge"
-            },
-            {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/concrete_garry/concrete_garry_dropped.prefab"
-              },
-              "DstId": 1,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 5,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 6,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 4,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 4,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 5,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_signal",
-              "DstId": 6,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 10,
-              "SrcName": "_result",
-              "DstId": 6,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 10,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_signal",
-              "DstId": 12,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 13,
-              "SrcName": "_result",
-              "DstId": 12,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 13,
-              "DstName": "_this"
-            }
-          ],
-          "Defaults": {
-            "$14._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/concrete_garry/concrete_garry_dropped.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "SecondaryFiringType": "Instant"
       },
       {
@@ -259,6 +67,32 @@
         "Inputs": {
           "fire": "Call Garry"
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "4b459114-712f-46a7-a94f-721956073dd5",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "8c300e9f-025c-482a-9a3d-7cae16ba1b70",
+          "go": "3d2a683e-e9c8-459b-b129-d4bdae325c11",
+          "component_type": "TargetingWeapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/concrete_garry/concrete_garry_dropped.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "Immediately",
+        "ShareTargetData": true,
+        "SendToRemoteDetonate": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [

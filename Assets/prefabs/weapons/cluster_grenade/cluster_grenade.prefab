@@ -90,89 +90,7 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "OnFire": {
-          "__version": 9,
-          "__guid": "8d035bb9-b3e5-4488-8408-baba78f85145",
-          "__changeId": 6,
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "48,72"
-              }
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "-48,-96"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "228,-60"
-              }
-            },
-            {
-              "Id": 6,
-              "Type": "scene.ref",
-              "UserData": {
-                "Position": "48,-48"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 2,
-              "DstName": "charge"
-            },
-            {
-              "SrcId": 6,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$6.gameobject": {
-              "_type": "gameobject",
-              "go": "46268355-78ef-4f3d-80ac-e834e23863b7"
-            }
-          }
-        },
+        "OnFire": null,
         "OnFireFinished": null,
         "StartMultiplier": 1,
         "UseSound": "sounds/weapons/generic_throw.sound"
@@ -183,6 +101,32 @@
         "Inputs": {
           "fire": "Throw (Hold)"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "b4fabfe6-2617-4396-9043-4995cb9d9ec8",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "6eb1cf7f-6b92-4455-b6e0-5afd3429e2c1",
+          "go": "f6e1a741-1984-47ca-a428-df7908d9f5a8",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/cluster_grenade/cluster_grenade_thrown.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "WhenProjectileResolved",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,

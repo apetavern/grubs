@@ -51,99 +51,7 @@
         },
         "FiringType": "Instant",
         "MaxUses": 1,
-        "OnFire": {
-          "__version": 7,
-          "__guid": "81b31874-76f1-48c0-99dc-9a75787f6686",
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.Weapon"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 1,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.Weapon"
-              },
-              "UserData": {
-                "Position": "16,-128"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "272,0"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "grubs.fire_finished",
-              "UserData": {
-                "Position": "496,-96"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 1,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 2,
-              "DstName": "charge"
-            },
-            {
-              "Value": {
-                "_type": "gameobject",
-                "prefab": "prefabs/weapons/dynamite/dynamite_dropped.prefab"
-              },
-              "DstId": 2,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_signal",
-              "DstId": 4,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 4,
-              "DstName": "source"
-            }
-          ],
-          "Defaults": {
-            "$5._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/dynamite/dynamite_dropped.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "UseSound": "sounds/weapons/generic_throw.sound"
       },
       {
@@ -152,6 +60,32 @@
         "Inputs": {
           "fire": "Drop"
         }
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "e3ad8029-e978-46fd-a573-ed51f3accf87",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "7de3a051-c493-4f8f-8b0c-c7ad76811036",
+          "go": "9c8f115c-c5b1-453a-abdf-851dd98e89c7",
+          "component_type": "Weapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/dynamite/dynamite_dropped.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "Immediately",
+        "ShareTargetData": false,
+        "SendToRemoteDetonate": false,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
       }
     ],
     "Children": [],

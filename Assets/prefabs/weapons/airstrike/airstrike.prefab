@@ -113,198 +113,7 @@
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
         "OnComponentUpdate": null,
-        "OnFire": {
-          "__version": 9,
-          "__guid": "0de7a252-49db-4bbe-8bc1-2019299578dd",
-          "__changeId": 0,
-          "UserData": {
-            "Title": "On Fire",
-            "ReferencedComponentTypes": [
-              "Grubs.Equipment.Weapons.TargetingWeapon",
-              "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile"
-            ]
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "-0,64"
-              }
-            },
-            {
-              "Id": 1,
-              "Type": "grubs.spawn_projectile",
-              "UserData": {
-                "Position": "192,-48"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "call",
-              "Properties": {
-                "_name": "ResetParameters",
-                "_type": "Grubs.Equipment.Weapons.TargetingWeapon",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "1024,-48"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "736,16"
-              }
-            },
-            {
-              "Id": 5,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "-192,-112"
-              }
-            },
-            {
-              "Id": 6,
-              "Type": "call",
-              "Properties": {
-                "_name": "ShareData",
-                "_type": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "688,-48"
-              }
-            },
-            {
-              "Id": 12,
-              "Type": "grubs.fire_finished",
-              "UserData": {
-                "Position": "1440,-48"
-              }
-            },
-            {
-              "Id": 13,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Weapons.TargetingWeapon"
-              },
-              "UserData": {
-                "Position": "1120,16"
-              }
-            },
-            {
-              "Id": 16,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Grubs.Equipment.Gadgets.Projectiles.TargetedProjectile"
-              },
-              "UserData": {
-                "Position": "352,48"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 1,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "charge",
-              "DstId": 1,
-              "DstName": "charge"
-            },
-            {
-              "Id": 18,
-              "Value": null,
-              "DstId": 1,
-              "DstName": "projectile"
-            },
-            {
-              "SrcId": 5,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 6,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 4,
-              "SrcName": "_result",
-              "DstId": 2,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 4,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 5,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_signal",
-              "DstId": 6,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 16,
-              "SrcName": "_result",
-              "DstId": 6,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_signal",
-              "DstId": 12,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 13,
-              "SrcName": "_result",
-              "DstId": 12,
-              "DstName": "source"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 13,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_result",
-              "DstId": 16,
-              "DstName": "_this"
-            }
-          ],
-          "Defaults": {
-            "$18._value": {
-              "_type": "gameobject",
-              "prefab": "prefabs/weapons/airstrike/airstrike_plane_bombs.prefab"
-            }
-          }
-        },
+        "OnFire": null,
         "OnFireFinished": null,
         "SecondaryFiringType": "Instant",
         "StartMultiplier": 1,
@@ -318,6 +127,32 @@
           "fire": "Call Airstrike",
           "fire_option": "Switch Direction"
         },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "Grubs.Equipment.Weapons.ProjectileLauncher",
+        "__guid": "51ca333a-4019-4bbd-a9f8-dbcec1ca80a8",
+        "__enabled": true,
+        "Weapon": {
+          "_type": "component",
+          "component_id": "e097e462-78e7-4afa-9bba-53322a1d1f26",
+          "go": "a998e5c9-a419-46f3-86d8-19b0789b1b15",
+          "component_type": "TargetingWeapon"
+        },
+        "ProjectilePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/airstrike/airstrike_plane_bombs.prefab"
+        },
+        "ProjectileCount": 1,
+        "SpawnDelay": 0.0,
+        "FinishedMode": "Immediately",
+        "ShareTargetData": true,
+        "SendToRemoteDetonate": false,
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
